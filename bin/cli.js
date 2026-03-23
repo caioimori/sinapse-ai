@@ -130,8 +130,9 @@ function cmdInstallGlobal() {
   header();
   console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
 
-  // Validate package
-  const squads = getSquads(ROOT);
+  // Validate package — squads live in squads/ subdirectory
+  const squadsDir = path.join(ROOT, 'squads');
+  const squads = getSquads(fs.existsSync(squadsDir) ? squadsDir : ROOT);
   if (squads.length === 0) {
     console.error(`${RED}ERROR: No squad directories found in package.${NC}`);
     process.exit(1);
@@ -141,9 +142,10 @@ function cmdInstallGlobal() {
   console.log(`${CYAN}Phase 1:${NC} Copying squads to ~/.sinapse/`);
   fs.mkdirSync(SINAPSE_HOME, { recursive: true });
 
+  const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
   let totalAgents = 0;
   for (const squad of squads) {
-    const src = path.join(ROOT, squad.name);
+    const src = path.join(squadsSrcBase, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
     rmDirSync(dest);
     copyDirSync(src, dest);
@@ -375,9 +377,16 @@ See \`.claude/rules/squad-awareness.md\` for the full delegation map.
   const agentsDir = path.join(claudeDir, 'agents');
   fs.mkdirSync(agentsDir, { recursive: true });
 
-  const routingTable = squads.map(s =>
-    `| ${s.name} | @${s.name.replace('squad-', '')}-orchestrator | ${s.agents} agents, ${s.tasks} tasks |`
-  ).join('\n');
+  const routingTable = squads.map(s => {
+    // Find actual orqx agent name from squad's agents dir
+    const sAgentsDir = path.join(SINAPSE_HOME, s.name, 'agents');
+    let orqxName = `${s.name.replace('squad-', '')}-orqx`;
+    try {
+      const orqxFile = fs.readdirSync(sAgentsDir).find(f => f.endsWith('-orqx.md'));
+      if (orqxFile) orqxName = orqxFile.replace('.md', '');
+    } catch {}
+    return `| ${s.name} | @${orqxName} | ${s.agents} agents, ${s.tasks} tasks |`;
+  }).join('\n');
 
   fs.writeFileSync(path.join(agentsDir, 'sinapse-master.md'), `---
 name: sinapse-master
@@ -413,8 +422,8 @@ Then HALT and await user input.
 ## INTELLIGENT ROUTING
 
 - **Simple request** → route DIRECTLY to @specialist
-- **Complex request** → route to @{domain}-orchestrator
-- **Cross-domain** → coordinate multiple orchestrators
+- **Complex request** → route to @{domain}-orqx
+- **Cross-domain** → coordinate multiple orqx agents
 - **Dev/code** → use @dev, @qa, @architect
 - NEVER execute domain work yourself — ALWAYS delegate
 
