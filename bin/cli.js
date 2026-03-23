@@ -10,7 +10,6 @@ const os = require('os');
 // ══════════════════════════════════════════════════════════════════════════════
 
 const ROOT = path.resolve(__dirname, '..');
-const SQUADS_DIR = path.join(ROOT, 'squads');
 const VERSION = '1.0.0';
 const HOME = os.homedir();
 const SINAPSE_HOME = path.join(HOME, '.sinapse');
@@ -45,7 +44,7 @@ function header() {
 }
 
 function getSquads(baseDir) {
-  baseDir = baseDir || SQUADS_DIR;
+  baseDir = baseDir || ROOT;
   const squads = [];
   let entries;
   try {
@@ -132,7 +131,7 @@ function cmdInstallGlobal() {
   console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
 
   // Validate package
-  const squads = getSquads(SQUADS_DIR);
+  const squads = getSquads(ROOT);
   if (squads.length === 0) {
     console.error(`${RED}ERROR: No squad directories found in package.${NC}`);
     process.exit(1);
@@ -144,7 +143,7 @@ function cmdInstallGlobal() {
 
   let totalAgents = 0;
   for (const squad of squads) {
-    const src = path.join(SQUADS_DIR, squad.name);
+    const src = path.join(ROOT, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
     rmDirSync(dest);
     copyDirSync(src, dest);
@@ -183,7 +182,7 @@ function cmdInstallGlobal() {
     for (const f of fs.readdirSync(frameworkCmdsDir).filter(f => f.endsWith('.md'))) {
       let content = fs.readFileSync(path.join(frameworkCmdsDir, f), 'utf8');
       // Update paths to point to ~/.sinapse/
-      content = content.replace(/\.sinapse-ai\//g, `${sinapseBase}/.sinapse-ai/`);
+      content = content.replace(/\.sinapse-core\//g, `${sinapseBase}/.sinapse-core/`);
       fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, f), content);
       cmdCount++;
     }
@@ -382,7 +381,7 @@ function createLauncher() {
   // Bash launcher (macOS/Linux/Git Bash)
   const bashLauncher = `#!/bin/bash
 # Sinapse — Claude Code launcher (auto-generated)
-exec claude --add-dir "${sinapsePathForBash}" "$@"
+exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-master "$@"
 `;
   const bashPath = path.join(BIN_DIR, 'sinapse');
   fs.writeFileSync(bashPath, bashLauncher);
@@ -391,7 +390,7 @@ exec claude --add-dir "${sinapsePathForBash}" "$@"
 
   // Windows CMD launcher
   if (IS_WIN) {
-    const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" %*\r\n`;
+    const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-master %*\r\n`;
     fs.writeFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
     console.log(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
   }
@@ -490,12 +489,12 @@ function cmdUpdateGlobal() {
 
   console.log(`${BOLD}Updating Sinapse...${NC}\n`);
 
-  const squads = getSquads(SQUADS_DIR);
+  const squads = getSquads(ROOT);
 
   // Phase 1: Re-copy squads
   console.log(`${CYAN}Phase 1:${NC} Updating squads`);
   for (const squad of squads) {
-    const src = path.join(SQUADS_DIR, squad.name);
+    const src = path.join(ROOT, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
     rmDirSync(dest);
     copyDirSync(src, dest);
@@ -522,7 +521,7 @@ function cmdUpdateGlobal() {
   if (fs.existsSync(frameworkCmdsDir)) {
     for (const f of fs.readdirSync(frameworkCmdsDir).filter(f => f.endsWith('.md'))) {
       let content = fs.readFileSync(path.join(frameworkCmdsDir, f), 'utf8');
-      content = content.replace(/\.sinapse-ai\//g, `${sinapseBase}/.sinapse-ai/`);
+      content = content.replace(/\.sinapse-core\//g, `${sinapseBase}/.sinapse-core/`);
       fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, f), content);
       cmdCount++;
     }
@@ -649,7 +648,7 @@ function cmdUpdateLocal() {
 
 function cmdList() {
   header();
-  const baseDir = fs.existsSync(SINAPSE_HOME) ? SINAPSE_HOME : SQUADS_DIR;
+  const baseDir = fs.existsSync(SINAPSE_HOME) ? SINAPSE_HOME : ROOT;
   const squads = getSquads(baseDir);
   let totalAgents = 0, totalTasks = 0;
 
