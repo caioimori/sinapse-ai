@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "SINAPSE: AI-Orchestrated System for Full Stack Development — 17 squads, 161 agents",
   "bin": {
     "sinapse": "bin/sinapse.js",
