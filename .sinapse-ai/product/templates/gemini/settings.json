@@ -1,0 +1,79 @@
+{
+  "$schema": "https://geminicli.com/schemas/settings.json",
+  "previewFeatures": true,
+  "folderTrust": {
+    "enabled": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "sinapse-session-init",
+            "type": "command",
+            "command": "node .sinapse-ai/hooks/gemini/session-start.js",
+            "timeout": 5000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "sinapse-context-inject",
+            "type": "command",
+            "command": "node .sinapse-ai/hooks/gemini/before-agent.js",
+            "timeout": 3000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace|shell",
+        "hooks": [
+          {
+            "name": "sinapse-security-check",
+            "type": "command",
+            "command": "node .sinapse-ai/hooks/gemini/before-tool.js",
+            "timeout": 2000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "sinapse-audit-log",
+            "type": "command",
+            "command": "node .sinapse-ai/hooks/gemini/after-tool.js",
+            "timeout": 2000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "sinapse-session-persist",
+            "type": "command",
+            "command": "node .sinapse-ai/hooks/gemini/session-end.js",
+            "timeout": 5000,
+            "enabled": false
+          }
+        ]
+      }
+    ]
+  }
+}

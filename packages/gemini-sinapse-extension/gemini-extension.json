@@ -1,0 +1,147 @@
+{
+  "$schema": "https://geminicli.com/schemas/extension.json",
+  "name": "sinapse",
+  "displayName": "SINAPSE",
+  "version": "1.0.0",
+  "description": "Multi-agent orchestration system for CLI-first development. Brings SINAPSE agents, hooks, and workflows to Gemini CLI.",
+  "author": "SINAPSE",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synkra/sinapse-ai"
+  },
+  "engines": {
+    "gemini-cli": ">=0.26.0"
+  },
+  "capabilities": {
+    "hooks": true,
+    "skills": true,
+    "commands": true,
+    "mcp": false
+  },
+  "activation": {
+    "onStartup": true,
+    "conditions": [
+      {
+        "type": "fileExists",
+        "path": ".sinapse-ai"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "name": "sinapse-status",
+      "description": "Show SINAPSE system status and provider info",
+      "script": "commands/sinapse-status.js"
+    },
+    {
+      "name": "sinapse-agents",
+      "description": "List available SINAPSE agents",
+      "script": "commands/sinapse-agents.js"
+    },
+    {
+      "name": "sinapse-validate",
+      "description": "Validate SINAPSE installation and skills",
+      "script": "commands/sinapse-validate.js"
+    },
+    {
+      "name": "sinapse-menu",
+      "description": "Show SINAPSE quick agent menu for Gemini",
+      "script": "commands/sinapse-menu.js"
+    },
+    {
+      "name": "sinapse-agent",
+      "description": "Prepare activation prompt for a specific SINAPSE agent (/sinapse-agent <id>)",
+      "script": "commands/sinapse-agent.js"
+    },
+    {
+      "name": "sinapse-master",
+      "description": "Quick launch sinapse-master agent",
+      "script": "commands/sinapse-master.js"
+    },
+    {
+      "name": "sinapse-analyst",
+      "description": "Quick launch analyst agent",
+      "script": "commands/sinapse-analyst.js"
+    },
+    {
+      "name": "sinapse-architect",
+      "description": "Quick launch architect agent",
+      "script": "commands/sinapse-architect.js"
+    },
+    {
+      "name": "sinapse-data-engineer",
+      "description": "Quick launch data-engineer agent",
+      "script": "commands/sinapse-data-engineer.js"
+    },
+    {
+      "name": "sinapse-dev",
+      "description": "Quick launch dev agent",
+      "script": "commands/sinapse-dev.js"
+    },
+    {
+      "name": "sinapse-devops",
+      "description": "Quick launch devops agent",
+      "script": "commands/sinapse-devops.js"
+    },
+    {
+      "name": "sinapse-pm",
+      "description": "Quick launch pm agent",
+      "script": "commands/sinapse-pm.js"
+    },
+    {
+      "name": "sinapse-po",
+      "description": "Quick launch po agent",
+      "script": "commands/sinapse-po.js"
+    },
+    {
+      "name": "sinapse-qa",
+      "description": "Quick launch qa agent",
+      "script": "commands/sinapse-qa.js"
+    },
+    {
+      "name": "sinapse-sm",
+      "description": "Quick launch sm agent",
+      "script": "commands/sinapse-sm.js"
+    },
+    {
+      "name": "sinapse-squad-creator",
+      "description": "Quick launch squad-creator agent",
+      "script": "commands/sinapse-squad-creator.js"
+    },
+    {
+      "name": "sinapse-ux-design-expert",
+      "description": "Quick launch ux-design-expert agent",
+      "script": "commands/sinapse-ux-design-expert.js"
+    }
+  ],
+  "skills": [
+    {
+      "name": "dev",
+      "path": "skills/dev.md",
+      "description": "Developer agent - code implementation"
+    },
+    {
+      "name": "architect",
+      "path": "skills/architect.md",
+      "description": "Architect agent - system design"
+    },
+    {
+      "name": "qa",
+      "path": "skills/qa.md",
+      "description": "QA agent - testing and quality"
+    }
+  ],
+  "hooks": {
+    "configPath": "hooks/hooks.json"
+  },
+  "keywords": [
+    "sinapse",
+    "agents",
+    "orchestration",
+    "development",
+    "ai",
+    "claude",
+    "multi-agent"
+  ]
+}

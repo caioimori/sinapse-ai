@@ -1,0 +1,108 @@
+# SINAPSE Code Owners
+# Issue: #99 (Governance)
+# Last Updated: 2026-02-21
+#
+# Format: <pattern> <owners>
+# Later patterns take precedence over earlier ones
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Owners:
+#   @Pedrovaleriolopez (lead maintainer)
+#   @oalanicolas (maintainer)
+#
+# All PRs require approval from a maintainer before merge.
+# Note: Org handles (e.g. @SynkraAI) cannot approve PRs — only user accounts can.
+
+# ============================================
+# Default Owner (fallback)
+# ============================================
+* @Pedrovaleriolopez @oalanicolas
+
+# ============================================
+# Critical Paths (requires lead maintainer review)
+# ============================================
+# Orchestration layer (MasterOrchestrator, BobOrchestrator, GateEvaluator)
+.sinapse-ai/core/orchestration/ @Pedrovaleriolopez @oalanicolas
+
+# Execution engine (WaveExecutor, ParallelExecutor)
+.sinapse-ai/core/execution/ @Pedrovaleriolopez @oalanicolas
+
+# Packages (installer, CLI, shared libraries)
+packages/ @Pedrovaleriolopez @oalanicolas
+
+# CI/CD configurations
+.github/ @Pedrovaleriolopez @oalanicolas
+
+# ============================================
+# Framework Core (requires senior review)
+# ============================================
+# Agent definitions
+.sinapse-ai/development/agents/ @Pedrovaleriolopez @oalanicolas
+
+# Task definitions
+.sinapse-ai/development/tasks/ @Pedrovaleriolopez @oalanicolas
+
+# Workflow definitions
+.sinapse-ai/development/workflows/ @Pedrovaleriolopez @oalanicolas
+
+# Templates
+.sinapse-ai/product/templates/ @Pedrovaleriolopez @oalanicolas
+templates/ @Pedrovaleriolopez @oalanicolas
+
+# CLI utilities
+.sinapse-ai/cli/ @Pedrovaleriolopez @oalanicolas
+
+# ============================================
+# Infrastructure
+# ============================================
+# Docker configurations
+.docker/ @Pedrovaleriolopez @oalanicolas
+
+# Framework configuration
+.sinapse-ai/core-config.yaml @Pedrovaleriolopez @oalanicolas
+
+# Package management
+package.json @Pedrovaleriolopez @oalanicolas
+package-lock.json @Pedrovaleriolopez @oalanicolas
+
+# ============================================
+# Documentation (more permissive)
+# ============================================
+# General docs
+docs/ @Pedrovaleriolopez @oalanicolas
+
+# Architecture decisions
+docs/architecture/ @Pedrovaleriolopez @oalanicolas
+
+# Framework standards
+docs/framework/ @Pedrovaleriolopez @oalanicolas
+
+# User guides
+docs/guides/ @Pedrovaleriolopez @oalanicolas
+
+# ============================================
+# Security-Sensitive Files
+# ============================================
+# This file
+.github/CODEOWNERS @Pedrovaleriolopez @oalanicolas
+
+# Release workflows
+.github/workflows/semantic-release.yml @Pedrovaleriolopez @oalanicolas
+.github/workflows/npm-publish.yml @Pedrovaleriolopez @oalanicolas
+.github/workflows/release.yml @Pedrovaleriolopez @oalanicolas
+
+# Pro submodule workflows
+.github/workflows/pro-integration.yml @Pedrovaleriolopez @oalanicolas
+.github/workflows/publish-pro.yml @Pedrovaleriolopez @oalanicolas
+
+# Security configurations
+security/ @Pedrovaleriolopez @oalanicolas
+
+# Environment files (should not be committed, but protect pattern)
+.env* @Pedrovaleriolopez @oalanicolas
+
+# Configuration files
+*.config.js @Pedrovaleriolopez @oalanicolas
+*.config.ts @Pedrovaleriolopez @oalanicolas
+tsconfig.json @Pedrovaleriolopez @oalanicolas
+eslint.config.* @Pedrovaleriolopez @oalanicolas

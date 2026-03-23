@@ -1,0 +1,36 @@
+{
+  "name": "sinapse-pro",
+  "version": "0.1.0",
+  "description": "CLI for SINAPSE Pro — install, activate and manage your license",
+  "bin": {
+    "sinapse-pro": "bin/sinapse-pro.js"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "dependencies": {
+    "open": "^10.0.0"
+  },
+  "keywords": [
+    "sinapse",
+    "pro",
+    "license",
+    "cli",
+    "synkra"
+  ],
+  "author": "SynkraAI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SynkraAI/sinapse-ai.git",
+    "directory": "packages/sinapse-pro-cli"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
