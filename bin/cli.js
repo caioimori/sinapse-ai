@@ -10,7 +10,7 @@ const os = require('os');
 // ══════════════════════════════════════════════════════════════════════════════
 
 const ROOT = path.resolve(__dirname, '..');
-const VERSION = '1.0.0';
+const VERSION = require(path.join(__dirname, '..', 'package.json')).version;
 const HOME = os.homedir();
 const SINAPSE_HOME = path.join(HOME, '.sinapse');
 const CLAUDE_COMMANDS_DIR = path.join(HOME, '.claude', 'commands', 'SINAPSE', 'agents');
