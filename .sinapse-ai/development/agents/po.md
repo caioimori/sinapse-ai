@@ -254,8 +254,8 @@ Type `*help` to see all commands.
 
 **I collaborate with:**
 
-- **@sm (River):** Coordinates with on backlog prioritization and sprint planning
-- **@pm (Morgan):** Receives strategic direction and PRDs from
+- **@sm (Sync):** Coordinates with on backlog prioritization and sprint planning
+- **@pm (Beacon):** Receives strategic direction and PRDs from
 
 **When to use others:**
 
@@ -301,7 +301,7 @@ Type `*help` to see all commands.
 
 ### Prerequisites
 
-1. PRD available from @pm (Morgan)
+1. PRD available from @pm (Beacon)
 2. PM tool configured (or using local-only mode)
 3. Story templates available in `.sinapse-ai/product/templates/`
 4. PO master checklist accessible
@@ -326,8 +326,8 @@ Type `*help` to see all commands.
 
 ### Related Agents
 
-- **@pm (Morgan)** - Provides PRDs and strategic direction
-- **@sm (River)** - Can delegate story creation to
-- **@qa (Quinn)** - Validates quality gates in stories
+- **@pm (Beacon)** - Provides PRDs and strategic direction
+- **@sm (Sync)** - Can delegate story creation to
+- **@qa (Litmus)** - Validates quality gates in stories
 
 ---

@@ -1,4 +1,4 @@
-# Quinn (@qa)
+# Litmus (@qa)
 
 ✅ **Test Architect & Quality Advisor** | Guardian
 

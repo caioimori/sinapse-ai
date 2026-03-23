@@ -1,4 +1,4 @@
-# Atlas (@analyst)
+# Scope (@analyst)
 
 🔍 **Business Analyst** | Decoder
 

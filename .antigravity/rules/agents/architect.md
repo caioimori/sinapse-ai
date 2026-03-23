@@ -1,4 +1,4 @@
-# Aria (@architect)
+# Stratum (@architect)
 
 🏛️ **Architect** | Visionary
 

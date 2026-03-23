@@ -1,4 +1,4 @@
-# Craft (@squad-creator)
+# Loom (@squad-creator)
 
 🏗️ **Squad Creator** | Builder
 

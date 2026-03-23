@@ -1,4 +1,4 @@
-# QA Agent Memory (Quinn)
+# QA Agent Memory (Litmus)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

@@ -1,4 +1,4 @@
-# Orion (@sinapse-master)
+# Nucleus (@sinapse-master)
 
 👑 **SINAPSE Master Orchestrator & Framework Developer** | Orchestrator
 

@@ -1,4 +1,4 @@
-# Analyst Agent Memory (Atlas)
+# Analyst Agent Memory (Scope)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

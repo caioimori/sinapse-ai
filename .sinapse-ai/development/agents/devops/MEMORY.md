@@ -1,4 +1,4 @@
-# DevOps Agent Memory (Gage)
+# DevOps Agent Memory (Pipeline)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

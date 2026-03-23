@@ -1,4 +1,4 @@
-# Dev Agent Memory (Dex)
+# Dev Agent Memory (Pixel)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

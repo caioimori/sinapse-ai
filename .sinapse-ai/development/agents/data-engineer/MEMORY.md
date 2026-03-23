@@ -1,4 +1,4 @@
-# Data Engineer Agent Memory (Dara)
+# Data Engineer Agent Memory (Tensor)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

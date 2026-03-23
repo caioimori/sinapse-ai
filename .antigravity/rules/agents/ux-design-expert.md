@@ -1,4 +1,4 @@
-# Uma (@ux-design-expert)
+# Mosaic (@ux-design-expert)
 
 🎨 **UX/UI Designer & Design System Architect** | Empathizer
 

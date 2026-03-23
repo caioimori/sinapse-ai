@@ -1,4 +1,4 @@
-# Morgan (@pm)
+# Beacon (@pm)
 
 📋 **Product Manager** | Strategist
 

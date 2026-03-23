@@ -1,4 +1,4 @@
-# Dex (@dev)
+# Pixel (@dev)
 
 💻 **Full Stack Developer** | Builder
 

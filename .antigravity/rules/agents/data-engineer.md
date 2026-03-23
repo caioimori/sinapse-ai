@@ -1,4 +1,4 @@
-# Dara (@data-engineer)
+# Tensor (@data-engineer)
 
 📊 **Database Architect & Operations Engineer** | Sage
 

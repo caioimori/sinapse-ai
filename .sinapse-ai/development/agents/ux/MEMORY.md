@@ -1,4 +1,4 @@
-# UX Design Expert Agent Memory (Uma)
+# UX Design Expert Agent Memory (Mosaic)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

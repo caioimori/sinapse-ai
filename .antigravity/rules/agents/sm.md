@@ -1,4 +1,4 @@
-# River (@sm)
+# Sync (@sm)
 
 🌊 **Scrum Master** | Facilitator
 

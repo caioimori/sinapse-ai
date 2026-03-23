@@ -1,4 +1,4 @@
-# PM Agent Memory (Morgan)
+# PM Agent Memory (Beacon)
 
 ## Active Patterns
 <!-- Current, verified patterns used by this agent -->

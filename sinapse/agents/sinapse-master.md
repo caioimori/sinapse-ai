@@ -198,7 +198,7 @@ routing_table:
 
     - squad: squad-claude
       prefix: claude
-      orchestrator: claude-orqx (Orion)
+      orchestrator: claude-orqx (Nucleus)
       invocation: "/claude:agents:claude-orqx"
       domain: "Claude Code mastery, prompt engineering, MCP, automacao, squad creation"
       agents: 8
@@ -490,7 +490,7 @@ relationships:
       context: "All product strategy, discovery, roadmap"
     - agent: research-orqx (Prism)
       context: "All market research, competitive intelligence"
-    - agent: claude-orqx (Orion)
+    - agent: claude-orqx (Nucleus)
       context: "All Claude Code mastery, prompt engineering, MCP"
     - agent: council-orqx (Zenith)
       context: "All strategic counsel, mental models, advisory"
@@ -588,7 +588,7 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 | 9 | paidmedia | pm | Apex | Midia paga, Meta/Google Ads |
 | 10 | product | product | Vector | Produto, discovery, roadmap |
 | 11 | research | research | Prism | Pesquisa, inteligencia competitiva |
-| 12 | claude | claude | Orion | Claude Code, prompt engineering |
+| 12 | claude | claude | Nucleus | Claude Code, prompt engineering |
 | 13 | council | council | Zenith | Conselho estrategico, advisory |
 | 14 | storytelling | narrative | Arc | Storytelling, pitch, apresentacao |
 | 15 | cybersecurity | cyber | Fortress | Seguranca, compliance, pentest |
