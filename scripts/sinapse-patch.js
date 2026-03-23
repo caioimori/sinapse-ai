@@ -172,7 +172,7 @@ const LOGO_LINES = [
   "╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝",
 ];
 
-const newLogo = `function HV6(){let q=z6(2),P;if(q[0]===Symbol.for("react.memo_cache_sentinel")){let lines=[${LOGO_LINES.map(l => JSON.stringify(l)).join(",")}];P=i9.createElement(B,{flexDirection:"column",alignItems:"center"},lines.map((l,i)=>i9.createElement(T,{key:i,color:"claude"},l))),q[0]=P}else P=q[0];return P}`;
+const newLogo = `function HV6(){let q=z6(2),P;if(q[0]===Symbol.for("react.memo_cache_sentinel")){let lines=[${LOGO_LINES.map(l => JSON.stringify(l)).join(",")}];P=i9.createElement(B,{flexDirection:"column",flexShrink:0},lines.map((l,i)=>i9.createElement(T,{key:i,color:"claude",wrap:"truncate"},l))),q[0]=P}else P=q[0];return P}`;
 
 // Substitui HV6 (componente principal do mascot)
 const hv6Start = content.indexOf("function HV6(A){");
