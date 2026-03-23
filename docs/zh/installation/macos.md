@@ -70,7 +70,7 @@ sudo port install gh
 
 3. 运行安装程序：
    ```bash
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### 安装程序的作用
@@ -155,7 +155,7 @@ macOS 文件系统默认可能不区分大小写。如果遇到问题：
 要更新现有安装：
 
 ```bash
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 ```
 
 更新程序将：

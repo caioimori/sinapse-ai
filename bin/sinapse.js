@@ -112,7 +112,7 @@ EXAMPLES:
   # Search for workers
   sinapse workers search "json csv"
 
-For more information, visit: https://github.com/SynkraAI/sinapse-ai
+For more information, visit: https://github.com/SinapseAI/sinapse-ai
 `);
 }
 

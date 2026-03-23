@@ -45,13 +45,13 @@ const mockRegistry = {
         name: 'etl-squad',
         version: '1.0.0',
         description: 'ETL pipeline automation',
-        author: 'SynkraAI',
+        author: 'SinapseAI',
       },
       {
         name: 'api-squad',
         version: '1.2.0',
         description: 'REST API development',
-        author: 'SynkraAI',
+        author: 'SinapseAI',
       },
     ],
     community: [
@@ -273,7 +273,7 @@ describe('SquadDownloader', () => {
       const squads = await downloader.listAvailable();
       const etlSquad = squads.find((s) => s.name === 'etl-squad');
 
-      expect(etlSquad.author).toBe('SynkraAI');
+      expect(etlSquad.author).toBe('SinapseAI');
     });
 
     it('should throw REGISTRY_FETCH_ERROR on network failure', async () => {

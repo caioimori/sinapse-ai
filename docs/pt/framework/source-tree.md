@@ -13,7 +13,7 @@
 **Versão:** 2.0
 **Última Atualização:** 2025-12-15
 **Status:** Padrão Oficial do Framework
-**Repositório:** SynkraAI/sinapse-ai
+**Repositório:** SinapseAI/sinapse-ai
 
 ---
 
@@ -429,7 +429,7 @@ dependencies:
 
 **Decision 005 define 5 repositórios separados:**
 
-### REPO 1: SynkraAI/sinapse-ai (MIT)
+### REPO 1: SinapseAI/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -479,7 +479,7 @@ sinapse-ai/
     └── multi-agent-workflow/
 ```
 
-### REPO 2: SynkraAI/squads (MIT)
+### REPO 2: SinapseAI/squads (MIT)
 
 ```
 squads/
@@ -501,7 +501,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
+### REPO 3: SinapseAI/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -521,7 +521,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### REPO 4: SynkraAI/certified-partners (Privado)
+### REPO 4: SinapseAI/certified-partners (Privado)
 
 ```
 certified-partners/
@@ -538,7 +538,7 @@ certified-partners/
     └── web/
 ```
 
-### REPO 5: SynkraAI/mmos (Privado + NDA)
+### REPO 5: SinapseAI/mmos (Privado + NDA)
 
 ```
 mmos/
@@ -719,7 +719,7 @@ outputs/                               # Runtime outputs (gitignored)
 | Versão | Data       | Alterações                                                                                                              | Autor            |
 | ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial de source tree                                                                                     | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado org para SynkraAI, substituído Squads pelo sistema Squads [Story 6.10]                                       | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado org para SinapseAI, substituído Squads pelo sistema Squads [Story 6.10]                                       | Dex (dev)        |
 | 2.0    | 2025-12-15 | Atualização maior para refletir arquitetura modular (cli/, core/, development/, infrastructure/, product/) [Story 6.13] | Pax (PO)         |
 
 ---

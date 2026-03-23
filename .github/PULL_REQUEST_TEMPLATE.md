@@ -93,7 +93,7 @@ Add screenshots to help explain your changes.
 
 ## 👥 Reviewers
 Tag relevant reviewers:
-- @SynkraAI (PO - required for squad changes)
+- @SinapseAI (PO - required for squad changes)
 
 ## 🚀 Deployment Notes
 Any special deployment considerations or migration steps needed?

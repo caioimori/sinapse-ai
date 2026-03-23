@@ -992,5 +992,5 @@ strategy:
 
 **Dúvidas? Problemas?**
 
-- [Abra uma Issue](https://github.com/SynkraAI/sinapse-ai/issues)
+- [Abra uma Issue](https://github.com/SinapseAI/sinapse-ai/issues)
 - [Entre no Discord](https://discord.gg/gk8jAdXWmj)

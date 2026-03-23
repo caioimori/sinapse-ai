@@ -19,7 +19,7 @@
 **版本**: 1.1
 **最后更新**: 2025-12-14
 **状态**: 已弃用 - 请查看 docs/framework/source-tree.md
-**迁移通知**: 此文档将在 Q2 2026 迁移到 `SynkraAI/sinapse-ai` 存储库（参见决策 005）
+**迁移通知**: 此文档将在 Q2 2026 迁移到 `SinapseAI/sinapse-ai` 存储库（参见决策 005）
 
 ---
 
@@ -440,7 +440,7 @@ dependencies:
 
 **决策 005 定义 5 个单独存储库**:
 
-### 存储库 1: SynkraAI/sinapse-ai (MIT)
+### 存储库 1: SinapseAI/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -477,7 +477,7 @@ sinapse-ai/
     └── e2e/
 ```
 
-### 存储库 2: SynkraAI/squads (MIT)
+### 存储库 2: SinapseAI/squads (MIT)
 
 ```
 squads/
@@ -499,7 +499,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### 存储库 3: SynkraAI/mcp-ecosystem (Apache 2.0)
+### 存储库 3: SinapseAI/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -519,7 +519,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### 存储库 4: SynkraAI/certified-partners (私有)
+### 存储库 4: SinapseAI/certified-partners (私有)
 
 ```
 certified-partners/
@@ -536,7 +536,7 @@ certified-partners/
     └── web/
 ```
 
-### 存储库 5: SynkraAI/mmos (私有 + NDA)
+### 存储库 5: SinapseAI/mmos (私有 + NDA)
 
 ```
 mmos/
@@ -705,7 +705,7 @@ outputs/                               # 运行时输出 (gitignored)
 | 版本 | 日期       | 变更                                                            | 作者            |
 | ---- | ---------- | -------------------------------------------------------------- | --------------- |
 | 1.0  | 2025-01-15 | 代码树初始文档化                                               | Aria (architect)|
-| 1.1  | 2025-12-14 | 更新 org 为 SynkraAI，用 Squad 系统替换 Squads [Story 6.10]    | Dex (dev)       |
+| 1.1  | 2025-12-14 | 更新 org 为 SinapseAI，用 Squad 系统替换 Squads [Story 6.10]    | Dex (dev)       |
 
 ---
 

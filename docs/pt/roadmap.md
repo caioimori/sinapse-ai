@@ -4,7 +4,7 @@
 
 Este documento descreve a direção de desenvolvimento planejada para o SINAPSE.
 
-> Para rastreamento detalhado, veja nosso [Projeto GitHub](https://github.com/orgs/SynkraAI/projects/1)
+> Para rastreamento detalhado, veja nosso [Projeto GitHub](https://github.com/orgs/SinapseAI/projects/1)
 
 ## Visão
 
@@ -63,11 +63,11 @@ Aceitamos contribuição da comunidade sobre nossa direção! Veja como particip
 
 ### 1. Vote em Ideias
 
-Reaja com :+1: em [Ideias nas Discussões](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) existentes para mostrar apoio.
+Reaja com :+1: em [Ideias nas Discussões](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) existentes para mostrar apoio.
 
 ### 2. Proponha Features
 
-Tem uma nova ideia? Abra uma [Discussão de Ideia](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=ideas) para compartilhar com a comunidade.
+Tem uma nova ideia? Abra uma [Discussão de Ideia](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas) para compartilhar com a comunidade.
 
 ### 3. Escreva um RFC
 
@@ -90,7 +90,7 @@ Este roadmap é revisado e atualizado mensalmente pelos mantenedores do projeto.
 2. Atualizar status de itens concluídos/em progresso
 3. Adicionar features recém-aprovadas das discussões da comunidade
 4. Remover itens cancelados ou despriorizados
-5. Comunicar mudanças significativas via [Anúncios](https://github.com/SynkraAI/sinapse-ai/discussions/categories/announcements)
+5. Comunicar mudanças significativas via [Anúncios](https://github.com/SinapseAI/sinapse-ai/discussions/categories/announcements)
 
 **Responsáveis:** Agentes @pm (Morgan) ou @po (Pax), com supervisão dos mantenedores.
 
@@ -100,7 +100,7 @@ Este roadmap público é sincronizado com nosso planejamento interno de sprints:
 
 | Roadmap Público | Rastreamento Interno |
 |-----------------|---------------------|
-| [Projeto GitHub](https://github.com/orgs/SynkraAI/projects/1) | `docs/stories/backlog.md` |
+| [Projeto GitHub](https://github.com/orgs/SinapseAI/projects/1) | `docs/stories/backlog.md` |
 | Features de alto nível | Stories detalhadas por sprint |
 | Timeline trimestral | Execução baseada em sprints |
 

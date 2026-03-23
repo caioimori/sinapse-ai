@@ -71,7 +71,7 @@ Community:
 *download-squad etl-squad
 
 Downloading: etl-squad@1.0.0
-  Source: github.com/SynkraAI/sinapse-squads/packages/etl-squad
+  Source: github.com/SinapseAI/sinapse-squads/packages/etl-squad
   Target: ./squads/etl-squad/
 
 ✓ Downloaded 12 files
@@ -127,7 +127,7 @@ The registry.json in sinapse-squads contains:
         "name": "etl-squad",
         "version": "1.0.0",
         "description": "ETL pipeline automation",
-        "author": "SynkraAI"
+        "author": "SinapseAI"
       }
     ],
     "community": [

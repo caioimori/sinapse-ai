@@ -148,7 +148,7 @@ winget install Microsoft.WindowsTerminal
 3. 运行安装程序：
 
    ```powershell
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### 安装程序的作用
@@ -401,7 +401,7 @@ npm config set @company:registry https://npm.company.com/
 
 ```powershell
 # 使用 npx（推荐）
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 
 # 更新程序将：
 # - 检测现有安装
@@ -472,4 +472,4 @@ npm uninstall -g @sinapse/sinapse
 - [故障排除指南](troubleshooting.md)
 - [常见问题](faq.md)
 - [Discord 社区](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)

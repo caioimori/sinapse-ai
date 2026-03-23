@@ -51,7 +51,7 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 │                    DISTRIBUCION DE SQUAD                      │
 ├─────────────────────────────────────────────────────────────┤
 │  Nivel 1: LOCAL        → ./squads/           (Privado)       │
-│  Nivel 2: SINAPSE-SQUADS  → github.com/SynkraAI (Publico/Gratis)│
+│  Nivel 2: SINAPSE-SQUADS  → github.com/SinapseAI (Publico/Gratis)│
 │  Nivel 3: SINAPSE API   → api.sinapse.ai      (Marketplace)   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -60,8 +60,8 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 
 | Squad                                                                      | Version | Descripcion                           |
 | -------------------------------------------------------------------------- | ------- | ------------------------------------- |
-| [etl-squad](https://github.com/SynkraAI/sinapse-squads/tree/main/etl)         | 2.0.0   | Recoleccion y transformacion de datos |
-| [creator-squad](https://github.com/SynkraAI/sinapse-squads/tree/main/creator) | 1.0.0   | Utilidades de generacion de contenido |
+| [etl-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/etl)         | 2.0.0   | Recoleccion y transformacion de datos |
+| [creator-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/creator) | 1.0.0   | Utilidades de generacion de contenido |
 
 ---
 
@@ -551,7 +551,7 @@ Los Squads en `./squads/` estan automaticamente disponibles para tu proyecto.
 *publish-squad ./squads/my-squad
 ```
 
-Esto crea un PR a [SynkraAI/sinapse-squads](https://github.com/SynkraAI/sinapse-squads).
+Esto crea un PR a [SinapseAI/sinapse-squads](https://github.com/SinapseAI/sinapse-squads).
 
 ### Nivel 3: Marketplace de SINAPSE
 
@@ -820,14 +820,14 @@ npm test -- tests/squads/my-squad/
 - [Guia de Migracion de Squad](./squad-migration.md)
 - [Referencia de API de Squads](../api/squads-api.md)
 - [Agente @squad-creator](../../../.sinapse-ai/development/agents/squad-creator.md)
-- [Repositorio sinapse-squads](https://github.com/SynkraAI/sinapse-squads)
+- [Repositorio sinapse-squads](https://github.com/SinapseAI/sinapse-squads)
 
 ---
 
 ## Obteniendo Ayuda
 
-- [Discusiones de GitHub](https://github.com/SynkraAI/sinapse-ai/discussions)
-- [Rastreador de Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- [Discusiones de GitHub](https://github.com/SinapseAI/sinapse-ai/discussions)
+- [Rastreador de Issues](https://github.com/SinapseAI/sinapse-ai/issues)
 
 ---
 

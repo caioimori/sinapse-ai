@@ -6,7 +6,7 @@
 **Status:** Living Document
 **Última Atualização:** 2025-12-09
 **Mantido Por:** SINAPSE Framework Team + Community
-**Repositório Principal:** `SynkraAI/sinapse-ai`
+**Repositório Principal:** `SinapseAI/sinapse-ai`
 
 ---
 
@@ -59,7 +59,7 @@ Este documento é a **versão consolidada v4.2** que incorpora todas as mudança
 │   ═══════════════════════                                               │
 │                                                                         │
 │   ┌────────────────────────────────────────────────────────────────┐   │
-│   │  SynkraAI/sinapse-ai (Commons Clause)                         │   │
+│   │  SinapseAI/sinapse-ai (Commons Clause)                         │   │
 │   │  ─────────────────────────────────────                         │   │
 │   │  • Core Framework & Orchestration Engine                       │   │
 │   │  • 11 Base Agents (Dex, Luna, Aria, Quinn, etc.)              │   │
@@ -75,7 +75,7 @@ Este documento é a **versão consolidada v4.2** que incorpora todas as mudança
 │   │                          │                          │              │
 │   ▼                          │                          ▼              │
 │   ┌─────────────────────┐    │    ┌─────────────────────────────┐     │
-│   │ SynkraAI/         │    │    │ SynkraAI/mcp-ecosystem    │     │
+│   │ SinapseAI/         │    │    │ SinapseAI/mcp-ecosystem    │     │
 │   │ sinapse-squads (MIT)   │    │    │ (Apache 2.0)                │     │
 │   │ ─────────────────   │    │    │ ──────────────────────────  │     │
 │   │ • ETL Squad         │    │    │ • Docker MCP Toolkit        │     │
@@ -88,7 +88,7 @@ Este documento é a **versão consolidada v4.2** que incorpora todas as mudança
 │   ════════════════════════   │                                         │
 │                              │                                         │
 │   ┌─────────────────────┐    │    ┌─────────────────────────────┐     │
-│   │ SynkraAI/mmos     │    │    │ SynkraAI/certified-       │     │
+│   │ SinapseAI/mmos     │    │    │ SinapseAI/certified-       │     │
 │   │ (Proprietary + NDA) │    │    │ partners (Proprietary)      │     │
 │   │ ─────────────────   │    │    │ ──────────────────────────  │     │
 │   │ • MMOS Minds        │    │    │ • Premium Squads            │     │
@@ -606,10 +606,10 @@ npm install @sinapse/mcp-presets
 
 ```bash
 # New project (Greenfield)
-$ npx @SynkraAI/sinapse@latest init
+$ npx @SinapseAI/sinapse@latest init
 
 # Existing project (Brownfield)
-$ npx @SynkraAI/sinapse migrate v2.0-to-v4.0.4
+$ npx @SinapseAI/sinapse migrate v2.0-to-v4.0.4
 ```
 
 ### First Steps
@@ -633,9 +633,9 @@ $ sinapse task develop-story --story=1.1
 ```bash
 # Clone all repos
 mkdir -p ~/Workspaces/SINAPSE && cd ~/Workspaces/SINAPSE
-gh repo clone SynkraAI/sinapse-ai
-gh repo clone SynkraAI/sinapse-squads
-gh repo clone SynkraAI/mcp-ecosystem
+gh repo clone SinapseAI/sinapse-ai
+gh repo clone SinapseAI/sinapse-squads
+gh repo clone SinapseAI/mcp-ecosystem
 
 # Link for local development
 cd sinapse-ai && npm install && npm link

@@ -55,7 +55,7 @@ npx sinapse-ai@latest --help
 ### Método 2: Desde GitHub
 
 ```bash
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 ```
 
 ### Método 3: Instalación Global
@@ -73,17 +73,17 @@ Si tienes problemas de instalación, ejecuta nuestra herramienta de diagnóstico
 
 ### Windows (CMD)
 ```cmd
-curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/quick-diagnose.cmd && diagnose.cmd
+curl -o diagnose.cmd https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/quick-diagnose.cmd && diagnose.cmd
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/quick-diagnose.ps1 | iex
+irm https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/quick-diagnose.ps1 | iex
 ```
 
 ### macOS/Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/diagnose-installation.js | node
+curl -fsSL https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/diagnose-installation.js | node
 ```
 
 ---
@@ -297,7 +297,7 @@ v22.x.x (or v18+/v20+)
 
 Si sigues teniendo problemas:
 
-1. **GitHub Issues**: https://github.com/SynkraAI/sinapse-ai/issues
+1. **GitHub Issues**: https://github.com/SinapseAI/sinapse-ai/issues
 2. **Ejecutar diagnósticos**: `npx sinapse-ai@latest doctor`
 3. **Verificar información del sistema**: `npx sinapse-ai@latest info`
 

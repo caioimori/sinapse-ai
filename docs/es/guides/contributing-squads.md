@@ -159,7 +159,7 @@ Informacion de licencia.
 ```
 
 Esto:
-1. Hara fork de `SynkraAI/sinapse-squads` (si es necesario)
+1. Hara fork de `SinapseAI/sinapse-squads` (si es necesario)
 2. Creara branch con tu squad
 3. Abrira PR para revision
 
@@ -241,15 +241,15 @@ Seguir versionado semantico:
 
 ## Obteniendo Ayuda
 
-- **Preguntas**: [Discusiones de GitHub](https://github.com/SynkraAI/sinapse-ai/discussions)
-- **Issues**: [Rastreador de Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **Preguntas**: [Discusiones de GitHub](https://github.com/SinapseAI/sinapse-ai/discussions)
+- **Issues**: [Rastreador de Issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Guias**: Este documento
 
 ## Recursos Relacionados
 
 - [Guia de Desarrollo de Squad](./squads-guide.md)
 - [Guia de Migracion de Squad](./squad-migration.md)
-- [Repositorio sinapse-squads](https://github.com/SynkraAI/sinapse-squads)
+- [Repositorio sinapse-squads](https://github.com/SinapseAI/sinapse-squads)
 
 ---
 

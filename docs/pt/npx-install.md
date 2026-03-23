@@ -182,7 +182,7 @@ const patterns = [
 ## Suporte
 
 Para ajuda adicional:
-- GitHub Issues: https://github.com/SynkraAIinc/sinapse-ai/issues
+- GitHub Issues: https://github.com/SinapseAIinc/sinapse-ai/issues
 - Documentação: https://sinapse-ai.dev/docs
 - Referência da Story: 2.3 - NPX Installation Context Detection
 

@@ -18,7 +18,7 @@ updates:
       - "dependencies"
       - "automated"
     reviewers:
-      - "SynkraAI/maintainers"
+      - "SinapseAI/maintainers"
     groups:
       # Group minor and patch updates together
       minor-and-patch:
@@ -53,4 +53,4 @@ updates:
       - "ci/cd"
       - "automated"
     reviewers:
-      - "SynkraAI/maintainers"
+      - "SinapseAI/maintainers"

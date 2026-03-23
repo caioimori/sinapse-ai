@@ -689,7 +689,7 @@ ls -la .sinapse-ai/
 
 1. Execute `npx sinapse-ai status` e anote a saída
 2. Consulte este guia de solução de problemas
-3. Pesquise [Issues existentes no GitHub](https://github.com/SynkraAI/sinapse-ai/issues)
+3. Pesquise [Issues existentes no GitHub](https://github.com/SinapseAI/sinapse-ai/issues)
 
 ### Informações para Incluir em Relatórios de Bug
 
@@ -724,7 +724,7 @@ ls -la .sinapse-ai/
 
 ### Canais de Suporte
 
-- **Issues no GitHub**: [sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **Issues no GitHub**: [sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Documentação**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

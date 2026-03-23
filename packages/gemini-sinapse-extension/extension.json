@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SynkraAI/sinapse-ai"
+    "url": "https://github.com/SinapseAI/sinapse-ai"
   },
   "engines": {
     "gemini-cli": ">=0.26.0"

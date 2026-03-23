@@ -69,7 +69,7 @@ branch_protection:
 **Comando de Implementacion:**
 
 ```bash
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test","validation-summary"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -208,76 +208,76 @@ abort_on_close: true
 # ============================================
 # Propietario por Defecto (fallback)
 # ============================================
-* @SynkraAI/maintainers
+* @SinapseAI/maintainers
 
 # ============================================
 # Framework Core
 # ============================================
 # Definiciones de agentes - requiere revision del equipo core
-.sinapse-ai/development/agents/ @SynkraAI/core-team
+.sinapse-ai/development/agents/ @SinapseAI/core-team
 
 # Definiciones de tareas - requiere revision del equipo core
-.sinapse-ai/development/tasks/ @SynkraAI/core-team
+.sinapse-ai/development/tasks/ @SinapseAI/core-team
 
 # Definiciones de workflows - requiere revision del equipo core
-.sinapse-ai/development/workflows/ @SynkraAI/core-team
+.sinapse-ai/development/workflows/ @SinapseAI/core-team
 
 # Plantillas - requiere revision de arquitecto/equipo core
-.sinapse-ai/product/templates/ @SynkraAI/core-team
-templates/ @SynkraAI/core-team
+.sinapse-ai/product/templates/ @SinapseAI/core-team
+templates/ @SinapseAI/core-team
 
 # Utilidades core - requiere revision senior
-.sinapse-ai/core/ @SynkraAI/core-team
-.sinapse-ai/cli/ @SynkraAI/core-team
+.sinapse-ai/core/ @SinapseAI/core-team
+.sinapse-ai/cli/ @SinapseAI/core-team
 
 # ============================================
 # Infraestructura
 # ============================================
 # CI/CD - requiere aprobacion de devops
-.github/ @SynkraAI/devops
+.github/ @SinapseAI/devops
 
 # Configuraciones de Docker
-.docker/ @SynkraAI/devops
+.docker/ @SinapseAI/devops
 
 # Archivos de configuracion
-.sinapse-ai/core-config.yaml @SynkraAI/core-team
-package.json @SynkraAI/maintainers
-package-lock.json @SynkraAI/maintainers
+.sinapse-ai/core-config.yaml @SinapseAI/core-team
+package.json @SinapseAI/maintainers
+package-lock.json @SinapseAI/maintainers
 
 # ============================================
 # Documentacion (Mas Permisiva)
 # ============================================
 # Documentacion general - mantenedores pueden aprobar
-docs/ @SynkraAI/maintainers
+docs/ @SinapseAI/maintainers
 
 # Decisiones de arquitectura - requiere equipo core
-docs/architecture/ @SynkraAI/core-team
-docs/framework/ @SynkraAI/core-team
+docs/architecture/ @SinapseAI/core-team
+docs/framework/ @SinapseAI/core-team
 
 # Historias - mantenedores (documentacion de desarrollo interno)
-docs/stories/ @SynkraAI/maintainers
+docs/stories/ @SinapseAI/maintainers
 
 # Guias - mantenedores (amigable para contribuidores)
-docs/guides/ @SynkraAI/maintainers
+docs/guides/ @SinapseAI/maintainers
 
 # ============================================
 # Archivos Sensibles de Seguridad
 # ============================================
 # Configuraciones de seguridad
-.github/CODEOWNERS @SynkraAI/core-team
-.github/workflows/semantic-release.yml @SynkraAI/devops
-.github/workflows/npm-publish.yml @SynkraAI/devops
+.github/CODEOWNERS @SinapseAI/core-team
+.github/workflows/semantic-release.yml @SinapseAI/devops
+.github/workflows/npm-publish.yml @SinapseAI/devops
 
 # Archivos de configuracion raiz
-.env* @SynkraAI/core-team
-*.config.js @SynkraAI/maintainers
+.env* @SinapseAI/core-team
+*.config.js @SinapseAI/maintainers
 ```
 
 **Equipos de GitHub Requeridos:**
 
-- `@SynkraAI/maintainers` - Mantenedores generales (acceso de escritura)
-- `@SynkraAI/core-team` - Desarrolladores core del framework
-- `@SynkraAI/devops` - CI/CD e infraestructura
+- `@SinapseAI/maintainers` - Mantenedores generales (acceso de escritura)
+- `@SinapseAI/core-team` - Desarrolladores core del framework
+- `@SinapseAI/devops` - CI/CD e infraestructura
 
 ---
 
@@ -444,10 +444,10 @@ _Al enviar este PR, confirmo que he leido las [Guias de Contribucion](../../../.
 
 ```bash
 # Remover toda proteccion de rama (solo emergencia)
-gh api -X DELETE repos/SynkraAI/sinapse-ai/branches/main/protection
+gh api -X DELETE repos/SinapseAI/sinapse-ai/branches/main/protection
 
 # Restaurar proteccion minima
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \
@@ -467,7 +467,7 @@ git push
 
 ```bash
 # Restaurar propiedad simple
-echo "* @SynkraAI" > .github/CODEOWNERS
+echo "* @SinapseAI" > .github/CODEOWNERS
 git add -A && git commit -m "chore: rollback CODEOWNERS"
 git push
 ```

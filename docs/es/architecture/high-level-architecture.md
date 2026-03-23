@@ -150,7 +150,7 @@
 │   ═════════════════════                                                 │
 │                                                                         │
 │   ┌────────────────────┐     ┌────────────────────┐                    │
-│   │  SynkraAI/         │     │  SynkraAI/         │                    │
+│   │  SinapseAI/         │     │  SinapseAI/         │                    │
 │   │  sinapse-ai         │     │  sinapse-squads       │                    │
 │   │  (MIT)  │◄────│  (MIT)             │                    │
 │   │                    │     │                    │                    │
@@ -163,7 +163,7 @@
 │            │ dependencia opcional                                       │
 │            ▼                                                            │
 │   ┌────────────────────┐                                               │
-│   │  SynkraAI/         │                                               │
+│   │  SinapseAI/         │                                               │
 │   │  mcp-ecosystem     │                                               │
 │   │  (Apache 2.0)      │                                               │
 │   │                    │                                               │
@@ -176,7 +176,7 @@
 │   ═════════════════════                                                 │
 │                                                                         │
 │   ┌────────────────────┐     ┌────────────────────┐                    │
-│   │  SynkraAI/mmos     │     │  SynkraAI/         │                    │
+│   │  SinapseAI/mmos     │     │  SinapseAI/         │                    │
 │   │  (Proprietary+NDA) │     │  certified-partners│                    │
 │   │                    │     │  (Proprietary)     │                    │
 │   │  • MMOS Minds      │     │  • Premium Squads  │                    │

@@ -210,7 +210,7 @@ This RFC is open for comments until: **YYYY-MM-DD**
 1. Comment on this Discussion
 2. React with :+1: or :-1: on specific proposals
 3. Suggest alternatives with detailed reasoning
-4. Tag relevant stakeholders: @SynkraAI/core-team
+4. Tag relevant stakeholders: @SinapseAI/core-team
 
 ### Stakeholders to Review
 

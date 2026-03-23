@@ -176,23 +176,23 @@ Dockerfile @org/devops-team
 
 ```codeowners
 # 默认 - 需要维护者审查
-* @SynkraAI/maintainers
+* @SinapseAI/maintainers
 
 # 代理定义 - 需要核心团队审查
-.sinapse-ai/development/agents/ @SynkraAI/core-team
+.sinapse-ai/development/agents/ @SinapseAI/core-team
 
 # 任务定义 - 需要核心团队审查
-.sinapse-ai/development/tasks/ @SynkraAI/core-team
+.sinapse-ai/development/tasks/ @SinapseAI/core-team
 
 # CI/CD - 需要 devops 批准
-.github/ @SynkraAI/devops
+.github/ @SinapseAI/devops
 
 # 文档 - 对贡献者更宽容
-docs/ @SynkraAI/maintainers
+docs/ @SinapseAI/maintainers
 
 # 模板 - 需要架构师审查
-templates/ @SynkraAI/core-team
-.sinapse-ai/product/templates/ @SynkraAI/core-team
+templates/ @SinapseAI/core-team
+.sinapse-ai/product/templates/ @SinapseAI/core-team
 ```
 
 ---

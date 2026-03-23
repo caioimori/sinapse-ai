@@ -23,11 +23,11 @@ This document clarifies which features apply to which context.
 
 | Repository | License | Type | Contains |
 |------------|---------|------|----------|
-| `SynkraAI/sinapse-ai` | Commons Clause | Public | Core framework, 11 agents, Quality Gates |
-| `SynkraAI/sinapse-squads` | MIT | Public | ETL, Creator, MMOS-Mapper squads |
-| `SynkraAI/mcp-ecosystem` | Apache 2.0 | Public | Docker MCP, IDE configs, MCP presets |
-| `SynkraAI/mmos` | Proprietary + NDA | Private | MMOS Minds, DNA Mental |
-| `SynkraAI/certified-partners` | Proprietary | Private | Premium squads, partner portal |
+| `SinapseAI/sinapse-ai` | Commons Clause | Public | Core framework, 11 agents, Quality Gates |
+| `SinapseAI/sinapse-squads` | MIT | Public | ETL, Creator, MMOS-Mapper squads |
+| `SinapseAI/mcp-ecosystem` | Apache 2.0 | Public | Docker MCP, IDE configs, MCP presets |
+| `SinapseAI/mmos` | Proprietary + NDA | Private | MMOS Minds, DNA Mental |
+| `SinapseAI/certified-partners` | Proprietary | Private | Premium squads, partner portal |
 
 ### npm Package Scoping
 
@@ -45,7 +45,7 @@ This document clarifies which features apply to which context.
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    OPEN-SOURCE (Public Repos)                           │
 │                                                                         │
-│   SynkraAI/sinapse-ai        SynkraAI/sinapse-squads                   │
+│   SinapseAI/sinapse-ai        SinapseAI/sinapse-squads                   │
 │   ┌─────────────────────┐     ┌─────────────────────┐                  │
 │   │ • Core Framework    │     │ • ETL Squad         │                  │
 │   │ • 11 Base Agents    │     │ • Creator Squad     │                  │
@@ -53,7 +53,7 @@ This document clarifies which features apply to which context.
 │   │ • Standards Docs    │     │ • squad.yaml format │                  │
 │   └─────────────────────┘     └─────────────────────┘                  │
 │                                                                         │
-│   SynkraAI/mcp-ecosystem                                             │
+│   SinapseAI/mcp-ecosystem                                             │
 │   ┌─────────────────────┐                                              │
 │   │ • Docker MCP        │                                              │
 │   │ • IDE Configurations│                                              │
@@ -65,7 +65,7 @@ This document clarifies which features apply to which context.
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    SERVICE (Private Repos)                              │
 │                                                                         │
-│   SynkraAI/mmos             SynkraAI/certified-partners            │
+│   SinapseAI/mmos             SinapseAI/certified-partners            │
 │   ┌─────────────────────┐     ┌─────────────────────┐                  │
 │   │ • MMOS Minds        │     │ • Premium Squads    │                  │
 │   │ • DNA Mental™       │     │ • Partner Portal    │                  │

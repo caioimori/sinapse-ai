@@ -5,7 +5,7 @@ Brings SINAPSE multi-agent orchestration to Gemini CLI.
 ## Installation
 
 ```bash
-gemini extensions install github.com/SynkraAI/sinapse-ai/packages/gemini-sinapse-extension
+gemini extensions install github.com/SinapseAI/sinapse-ai/packages/gemini-sinapse-extension
 ```
 
 Or manually copy to `~/.gemini/extensions/sinapse/`

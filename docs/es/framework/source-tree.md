@@ -13,7 +13,7 @@
 **Versión:** 2.0
 **Última Actualización:** 2025-12-15
 **Estado:** Estándar Oficial del Framework
-**Repositorio:** SynkraAI/sinapse-ai
+**Repositorio:** SinapseAI/sinapse-ai
 
 ---
 
@@ -429,7 +429,7 @@ dependencies:
 
 **Decision 005 define 5 repositorios separados:**
 
-### REPO 1: SynkraAI/sinapse-ai (MIT)
+### REPO 1: SinapseAI/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -479,7 +479,7 @@ sinapse-ai/
     └── multi-agent-workflow/
 ```
 
-### REPO 2: SynkraAI/squads (MIT)
+### REPO 2: SinapseAI/squads (MIT)
 
 ```
 squads/
@@ -501,7 +501,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
+### REPO 3: SinapseAI/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -521,7 +521,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### REPO 4: SynkraAI/certified-partners (Privado)
+### REPO 4: SinapseAI/certified-partners (Privado)
 
 ```
 certified-partners/
@@ -538,7 +538,7 @@ certified-partners/
     └── web/
 ```
 
-### REPO 5: SynkraAI/mmos (Privado + NDA)
+### REPO 5: SinapseAI/mmos (Privado + NDA)
 
 ```
 mmos/
@@ -719,7 +719,7 @@ outputs/                               # Salidas de runtime (gitignored)
 | Versión | Fecha      | Cambios                                                                                                                    | Autor            |
 | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | 1.0     | 2025-01-15 | Documentación inicial del árbol de código fuente                                                                           | Aria (architect) |
-| 1.1     | 2025-12-14 | Actualizada org a SynkraAI, reemplazado Squads con sistema de Squads [Story 6.10]                                          | Dex (dev)        |
+| 1.1     | 2025-12-14 | Actualizada org a SinapseAI, reemplazado Squads con sistema de Squads [Story 6.10]                                          | Dex (dev)        |
 | 2.0     | 2025-12-15 | Actualización mayor para reflejar arquitectura modular (cli/, core/, development/, infrastructure/, product/) [Story 6.13] | Pax (PO)         |
 
 ---

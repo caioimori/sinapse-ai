@@ -1288,7 +1288,7 @@ Se você descobrir uma vulnerabilidade de segurança no SINAPSE, por favor siga 
 ### Processo de Relatório
 
 1. **NÃO** crie uma issue pública no GitHub para vulnerabilidades de segurança
-2. Reporte preocupações de segurança via [GitHub Security Advisories](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+2. Reporte preocupações de segurança via [GitHub Security Advisories](https://github.com/SinapseAI/sinapse-ai/security/advisories)
 3. Inclua o seguinte no seu relatório:
    - Descrição da vulnerabilidade
    - Passos para reproduzir

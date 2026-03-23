@@ -6,7 +6,7 @@
  *   node diagnose-installation.js
  *
  * Or directly from URL:
- *   npx https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/diagnose-installation.js
+ *   npx https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/diagnose-installation.js
  */
 
 const { execSync, spawnSync: _spawnSync } = require('child_process');

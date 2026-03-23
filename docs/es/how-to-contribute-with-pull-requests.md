@@ -18,17 +18,17 @@ Un pull request (PR) es como propones cambios a un proyecto en GitHub. Piensalo 
 
 **Obligatorio antes de enviar PRs:**
 
-- **Para correcciones de bugs**: Crea un issue usando la [plantilla de reporte de bugs](https://github.com/SynkraAIinc/sinapse-ai/issues/new?template=bug_report.md)
+- **Para correcciones de bugs**: Crea un issue usando la [plantilla de reporte de bugs](https://github.com/SinapseAIinc/sinapse-ai/issues/new?template=bug_report.md)
 - **Para nuevas features**:
   1. Discute en Discord en el [canal #general-dev](https://discord.gg/gk8jAdXWmj)
-  2. Crea un issue usando la [plantilla de solicitud de feature](https://github.com/SynkraAIinc/sinapse-ai/issues/new?template=feature_request.md)
+  2. Crea un issue usando la [plantilla de solicitud de feature](https://github.com/SinapseAIinc/sinapse-ai/issues/new?template=feature_request.md)
 - **Para cambios grandes**: Siempre abre un issue primero para discutir la alineacion
 
 ## Guia Paso a Paso
 
 ### 1. Hacer Fork del Repositorio
 
-1. Ve al [repositorio SINAPSE](https://github.com/SynkraAIinc/sinapse-ai)
+1. Ve al [repositorio SINAPSE](https://github.com/SinapseAIinc/sinapse-ai)
 2. Haz clic en el boton "Fork" en la esquina superior derecha
 3. Esto crea tu propia copia del proyecto
 
@@ -137,8 +137,8 @@ git push origin fix/typo-in-readme
 
 ## Necesitas Ayuda?
 
-- Reporta bugs usando la [plantilla de reporte de bugs](https://github.com/SynkraAIinc/sinapse-ai/issues/new?template=bug_report.md)
-- Sugiere features usando la [plantilla de solicitud de feature](https://github.com/SynkraAIinc/sinapse-ai/issues/new?template=feature_request.md)
+- Reporta bugs usando la [plantilla de reporte de bugs](https://github.com/SinapseAIinc/sinapse-ai/issues/new?template=bug_report.md)
+- Sugiere features usando la [plantilla de solicitud de feature](https://github.com/SinapseAIinc/sinapse-ai/issues/new?template=feature_request.md)
 - Lee las [Directrices de Contribucion](../../CONTRIBUTING.md) completas
 
 ## Ejemplo: Buenos PRs vs Malos

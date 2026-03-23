@@ -38,7 +38,7 @@ Este Código de Conduta se aplica a todos os espaços da comunidade e também se
 
 ## Aplicação
 
-Instâncias de comportamento abusivo, de assédio ou de outra forma inaceitável podem ser reportadas aos líderes da comunidade responsáveis pela aplicação em conduct@SynkraAI.com. Todas as reclamações serão revisadas e investigadas prontamente e de forma justa.
+Instâncias de comportamento abusivo, de assédio ou de outra forma inaceitável podem ser reportadas aos líderes da comunidade responsáveis pela aplicação em conduct@SinapseAI.com. Todas as reclamações serão revisadas e investigadas prontamente e de forma justa.
 
 Todos os líderes da comunidade são obrigados a respeitar a privacidade e a segurança do denunciante de qualquer incidente.
 
@@ -85,4 +85,4 @@ Para respostas a perguntas comuns sobre este código de conduta, consulte [https
 
 ---
 
-**Copyright (c) 2025 SynkraAI Inc.**
+**Copyright (c) 2025 SinapseAI Inc.**

@@ -49,7 +49,7 @@ npx sinapse-ai@latest --help
 ### 方法 2: 从 GitHub
 
 ```bash
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 ```
 
 ### 方法 3: 全局安装
@@ -67,17 +67,17 @@ sinapse-ai
 
 ### Windows (CMD)
 ```cmd
-curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/quick-diagnose.cmd && diagnose.cmd
+curl -o diagnose.cmd https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/quick-diagnose.cmd && diagnose.cmd
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/quick-diagnose.ps1 | iex
+irm https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/quick-diagnose.ps1 | iex
 ```
 
 ### macOS/Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SynkraAI/sinapse-ai/main/tools/diagnose-installation.js | node
+curl -fsSL https://raw.githubusercontent.com/SinapseAI/sinapse-ai/main/tools/diagnose-installation.js | node
 ```
 
 ---
@@ -291,7 +291,7 @@ v22.x.x (或 v18+/v20+)
 
 如果您仍然遇到问题:
 
-1. **GitHub Issues**: https://github.com/SynkraAI/sinapse-ai/issues
+1. **GitHub Issues**: https://github.com/SinapseAI/sinapse-ai/issues
 2. **运行诊断**: `npx sinapse-ai@latest doctor`
 3. **检查系统信息**: `npx sinapse-ai@latest info`
 

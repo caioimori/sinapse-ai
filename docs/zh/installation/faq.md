@@ -557,7 +557,7 @@ projectStatus:
 
 **答案:**
 
-1. **Fork 仓库:** https://github.com/SynkraAI/sinapse-ai
+1. **Fork 仓库:** https://github.com/SinapseAI/sinapse-ai
 
 2. **创建功能分支：**
 
@@ -593,8 +593,8 @@ projectStatus:
 | --------------- | ------------------------------------------------------ |
 | **文档**        | `docs/` 在您的项目中                                   |
 | **故障排除**    | [troubleshooting.md](./troubleshooting.md)             |
-| **GitHub Issues** | https://github.com/SynkraAI/sinapse-ai/issues |
-| **源代码**      | https://github.com/SynkraAI/sinapse-ai        |
+| **GitHub Issues** | https://github.com/SinapseAI/sinapse-ai/issues |
+| **源代码**      | https://github.com/SinapseAI/sinapse-ai        |
 
 **在寻求帮助之前：**
 

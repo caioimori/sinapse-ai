@@ -21,11 +21,11 @@ const TROUBLESHOOTING_DATABASE = {
       '.env accidentally deleted',
     ],
     solutions: [
-      'Re-run wizard: npx @SynkraAI/sinapse@latest init',
+      'Re-run wizard: npx @SinapseAI/sinapse@latest init',
       'Manually create .env from template: cp .env.example .env',
       'Check file permissions in project directory',
     ],
-    docs: 'https://docs.SynkraAI.com/installation/environment',
+    docs: 'https://docs.SinapseAI.com/installation/environment',
     priority: 'critical',
   },
 
@@ -37,11 +37,11 @@ const TROUBLESHOOTING_DATABASE = {
       'File creation failed',
     ],
     solutions: [
-      'Re-run wizard: npx @SynkraAI/sinapse@latest init',
+      'Re-run wizard: npx @SinapseAI/sinapse@latest init',
       'Check .sinapse-ai directory exists',
       'Manually create from template',
     ],
-    docs: 'https://docs.SynkraAI.com/configuration/core-config',
+    docs: 'https://docs.SinapseAI.com/configuration/core-config',
     priority: 'high',
   },
 
@@ -60,7 +60,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Check MCP service status',
       'Verify npx can access package: npx -y [package-name] --version',
     ],
-    docs: 'https://docs.SynkraAI.com/mcps/troubleshooting',
+    docs: 'https://docs.SinapseAI.com/mcps/troubleshooting',
     priority: 'medium',
   },
 
@@ -79,7 +79,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Configure API keys in .env',
       'Delete .mcp.json and reinstall',
     ],
-    docs: 'https://docs.SynkraAI.com/mcps/troubleshooting',
+    docs: 'https://docs.SinapseAI.com/mcps/troubleshooting',
     priority: 'high',
   },
 
@@ -95,7 +95,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Copy from template: .env, node_modules, *.key, *.pem',
       'Initialize git if needed: git init',
     ],
-    docs: 'https://docs.SynkraAI.com/security/gitignore',
+    docs: 'https://docs.SinapseAI.com/security/gitignore',
     priority: 'high',
   },
 
@@ -114,7 +114,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Try different package manager: yarn or pnpm',
       'Check disk space: df -h (Unix) or dir (Windows)',
     ],
-    docs: 'https://docs.SynkraAI.com/installation/dependencies',
+    docs: 'https://docs.SinapseAI.com/installation/dependencies',
     priority: 'critical',
   },
 
@@ -131,7 +131,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Reinstall: npm install',
       'Try clean install: npm ci',
     ],
-    docs: 'https://docs.SynkraAI.com/installation/dependencies',
+    docs: 'https://docs.SinapseAI.com/installation/dependencies',
     priority: 'high',
   },
 
@@ -161,7 +161,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Run: chmod 600 .env',
       'Verify: ls -la .env',
     ],
-    docs: 'https://docs.SynkraAI.com/security/file-permissions',
+    docs: 'https://docs.SinapseAI.com/security/file-permissions',
     priority: 'medium',
   },
 };
@@ -244,15 +244,15 @@ async function offerTroubleshooting(errors) {
   if (openDocs) {
     console.log('');
     console.log(chalk.green('📚 Documentation:'));
-    console.log(chalk.green('  https://docs.SynkraAI.com/troubleshooting'));
+    console.log(chalk.green('  https://docs.SinapseAI.com/troubleshooting'));
     console.log('');
   }
 
   // Offer support contact
   console.log('');
   console.log(chalk.bold('💬 Need Help?'));
-  console.log(chalk.dim('  - GitHub Issues: https://github.com/SynkraAI/sinapse/issues'));
-  console.log(chalk.dim('  - Documentation: https://docs.SynkraAI.com'));
+  console.log(chalk.dim('  - GitHub Issues: https://github.com/SinapseAI/sinapse/issues'));
+  console.log(chalk.dim('  - Documentation: https://docs.SinapseAI.com'));
   console.log('');
 }
 

@@ -31,7 +31,7 @@ git clone https://github.com/SEU_USUARIO/sinapse-ai.git
 cd sinapse-ai
 
 # Adicione o remote upstream
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 ```
 
 ### 2. Configure o Ambiente de Desenvolvimento
@@ -319,7 +319,7 @@ tasks:
 
 - [Guia de Squads](docs/guides/squads-guide.md) - Documentacao completa
 - [Template de Squad](templates/squad/) - Comece de um template funcional
-- [Discussoes de Squads](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) - Compartilhe ideias
+- [Discussoes de Squads](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) - Compartilhe ideias
 
 ---
 
@@ -523,8 +523,8 @@ Correcoes comuns:
 
 ## Obtendo Ajuda
 
-- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/sinapse-ai/issues)
-- **Discussoes:** [Inicie uma discussao](https://github.com/SynkraAI/sinapse-ai/discussions)
+- **GitHub Issues:** [Abra uma issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Discussoes:** [Inicie uma discussao](https://github.com/SinapseAI/sinapse-ai/discussions)
 - **Comunidade:** [COMMUNITY-PT.md](COMMUNITY-PT.md)
 
 ---

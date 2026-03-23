@@ -69,7 +69,7 @@ branch_protection:
 **Comando de Implementação:**
 
 ```bash
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test","validation-summary"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -208,76 +208,76 @@ abort_on_close: true
 # ============================================
 # Owner Padrão (fallback)
 # ============================================
-* @SynkraAI/maintainers
+* @SinapseAI/maintainers
 
 # ============================================
 # Framework Core
 # ============================================
 # Definições de agentes - requer revisão do core team
-.sinapse-ai/development/agents/ @SynkraAI/core-team
+.sinapse-ai/development/agents/ @SinapseAI/core-team
 
 # Definições de tarefas - requer revisão do core team
-.sinapse-ai/development/tasks/ @SynkraAI/core-team
+.sinapse-ai/development/tasks/ @SinapseAI/core-team
 
 # Definições de workflows - requer revisão do core team
-.sinapse-ai/development/workflows/ @SynkraAI/core-team
+.sinapse-ai/development/workflows/ @SinapseAI/core-team
 
 # Templates - requer revisão de architect/core team
-.sinapse-ai/product/templates/ @SynkraAI/core-team
-templates/ @SynkraAI/core-team
+.sinapse-ai/product/templates/ @SinapseAI/core-team
+templates/ @SinapseAI/core-team
 
 # Utilitários core - requer revisão sênior
-.sinapse-ai/core/ @SynkraAI/core-team
-.sinapse-ai/cli/ @SynkraAI/core-team
+.sinapse-ai/core/ @SinapseAI/core-team
+.sinapse-ai/cli/ @SinapseAI/core-team
 
 # ============================================
 # Infraestrutura
 # ============================================
 # CI/CD - requer aprovação de devops
-.github/ @SynkraAI/devops
+.github/ @SinapseAI/devops
 
 # Configurações Docker
-.docker/ @SynkraAI/devops
+.docker/ @SinapseAI/devops
 
 # Arquivos de configuração
-.sinapse-ai/core-config.yaml @SynkraAI/core-team
-package.json @SynkraAI/maintainers
-package-lock.json @SynkraAI/maintainers
+.sinapse-ai/core-config.yaml @SinapseAI/core-team
+package.json @SinapseAI/maintainers
+package-lock.json @SinapseAI/maintainers
 
 # ============================================
 # Documentação (Mais Permissivo)
 # ============================================
 # Docs gerais - maintainers podem aprovar
-docs/ @SynkraAI/maintainers
+docs/ @SinapseAI/maintainers
 
 # Decisões de arquitetura - requer core team
-docs/architecture/ @SynkraAI/core-team
-docs/framework/ @SynkraAI/core-team
+docs/architecture/ @SinapseAI/core-team
+docs/framework/ @SinapseAI/core-team
 
 # Stories - maintainers (docs de desenvolvimento interno)
-docs/stories/ @SynkraAI/maintainers
+docs/stories/ @SinapseAI/maintainers
 
 # Guias - maintainers (amigável para contribuidores)
-docs/guides/ @SynkraAI/maintainers
+docs/guides/ @SinapseAI/maintainers
 
 # ============================================
 # Arquivos Sensíveis de Segurança
 # ============================================
 # Configurações de segurança
-.github/CODEOWNERS @SynkraAI/core-team
-.github/workflows/semantic-release.yml @SynkraAI/devops
-.github/workflows/npm-publish.yml @SynkraAI/devops
+.github/CODEOWNERS @SinapseAI/core-team
+.github/workflows/semantic-release.yml @SinapseAI/devops
+.github/workflows/npm-publish.yml @SinapseAI/devops
 
 # Arquivos de configuração raiz
-.env* @SynkraAI/core-team
-*.config.js @SynkraAI/maintainers
+.env* @SinapseAI/core-team
+*.config.js @SinapseAI/maintainers
 ```
 
 **Teams GitHub Necessários:**
 
-- `@SynkraAI/maintainers` - Maintainers gerais (acesso de escrita)
-- `@SynkraAI/core-team` - Desenvolvedores core do framework
-- `@SynkraAI/devops` - CI/CD e infraestrutura
+- `@SinapseAI/maintainers` - Maintainers gerais (acesso de escrita)
+- `@SinapseAI/core-team` - Desenvolvedores core do framework
+- `@SinapseAI/devops` - CI/CD e infraestrutura
 
 ---
 
@@ -444,10 +444,10 @@ _Ao submeter este PR, confirmo que li as [Diretrizes de Contribuição](../../..
 
 ```bash
 # Remover toda proteção de branch (apenas emergência)
-gh api -X DELETE repos/SynkraAI/sinapse-ai/branches/main/protection
+gh api -X DELETE repos/SinapseAI/sinapse-ai/branches/main/protection
 
 # Restaurar proteção mínima
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \
@@ -467,7 +467,7 @@ git push
 
 ```bash
 # Restaurar ownership simples
-echo "* @SynkraAI" > .github/CODEOWNERS
+echo "* @SinapseAI" > .github/CODEOWNERS
 git add -A && git commit -m "chore: rollback CODEOWNERS"
 git push
 ```

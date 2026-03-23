@@ -336,8 +336,8 @@ taskkill /F /IM @sinapse/sinapse-ai.exe
 如果您在卸载期间遇到问题：
 
 1. **检查文档**
-   - [FAQ](https://github.com/SynkraAI/sinapse-ai/wiki/faq#uninstall)
-   - [故障排除](https://github.com/SynkraAI/sinapse-ai/wiki/troubleshooting)
+   - [FAQ](https://github.com/SinapseAI/sinapse-ai/wiki/faq#uninstall)
+   - [故障排除](https://github.com/SinapseAI/sinapse-ai/wiki/troubleshooting)
 
 2. **社区支持**
    - Discord：#uninstall-help

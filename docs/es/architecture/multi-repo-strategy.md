@@ -43,7 +43,7 @@ SINAPSE v4 adopta una **estrategia multi-repositorio** para permitir el desarrol
 ## Estructura de Repositorios
 
 ```
-Organización SynkraAI
+Organización SinapseAI
 ├── REPOSITORIOS PÚBLICOS
 │   ├── sinapse-ai          # Marco fundamental (MIT)
 │   ├── sinapse-squads        # Squads comunitarios (MIT)
@@ -64,7 +64,7 @@ Organización SynkraAI
 │   ═══════════════════════                                                │
 │                                                                          │
 │   ┌────────────────────┐     ┌────────────────────┐                     │
-│   │  SynkraAI/         │     │  SynkraAI/         │                     │
+│   │  SinapseAI/         │     │  SinapseAI/         │                     │
 │   │  sinapse-ai         │     │  sinapse-squads       │                     │
 │   │  (MIT)  │◄────│  (MIT)             │                     │
 │   │                    │     │                    │                     │
@@ -80,7 +80,7 @@ Organización SynkraAI
 │            │ dependencia opcional                                        │
 │            ▼                                                             │
 │   ┌────────────────────┐                                                │
-│   │  SynkraAI/         │                                                │
+│   │  SinapseAI/         │                                                │
 │   │  mcp-ecosystem     │                                                │
 │   │  (Apache 2.0)      │                                                │
 │   │                    │                                                │
@@ -94,7 +94,7 @@ Organización SynkraAI
 │   ════════════════════════                                               │
 │                                                                          │
 │   ┌────────────────────┐     ┌────────────────────┐                     │
-│   │  SynkraAI/mmos     │     │  SynkraAI/         │                     │
+│   │  SinapseAI/mmos     │     │  SinapseAI/         │                     │
 │   │  (Propietario+NDA) │     │  certified-partners│                     │
 │   │                    │     │  (Propietario)     │                     │
 │   │  - Mentes MMOS     │     │  - Squads Premium  │                     │
@@ -242,7 +242,7 @@ npm install @sinapse/mcp-presets
 
 ## Repositorios Privados
 
-### SynkraAI/mmos (Propietario + NDA)
+### SinapseAI/mmos (Propietario + NDA)
 
 Contiene componentes MMOS (Mental Model Operating System) propietarios:
 
@@ -253,7 +253,7 @@ Contiene componentes MMOS (Mental Model Operating System) propietarios:
 
 **Acceso:** Requiere acuerdo NDA y de licencia.
 
-### SynkraAI/certified-partners (Propietario)
+### SinapseAI/certified-partners (Propietario)
 
 Recursos para socios certificados de SINAPSE:
 
@@ -297,10 +297,10 @@ Para proyectos que necesitan múltiples repositorios:
 
 ```bash
 # Agregar squads como submodule
-git submodule add https://github.com/SynkraAI/sinapse-squads.git squads
+git submodule add https://github.com/SinapseAI/sinapse-squads.git squads
 
 # Agregar ecosistema MCP como submodule
-git submodule add https://github.com/SynkraAI/mcp-ecosystem.git mcp
+git submodule add https://github.com/SinapseAI/mcp-ecosystem.git mcp
 ```
 
 ### Dependencias npm (Recomendado)

@@ -30,7 +30,7 @@ Auditar el estado actual de:
 
 ### 1. Configuracion de Proteccion de Ramas
 
-**Fuente:** `gh api repos/SynkraAI/sinapse-ai/branches/main/protection`
+**Fuente:** `gh api repos/SinapseAI/sinapse-ai/branches/main/protection`
 
 ```json
 {
@@ -67,7 +67,7 @@ Auditar el estado actual de:
 
 ### 2. Configuracion del Repositorio
 
-**Fuente:** `gh api repos/SynkraAI/sinapse-ai`
+**Fuente:** `gh api repos/SinapseAI/sinapse-ai`
 
 ```json
 {
@@ -84,7 +84,7 @@ Auditar el estado actual de:
 
 ### 3. Workflows de GitHub Actions
 
-**Fuente:** `gh api repos/SynkraAI/sinapse-ai/actions/workflows`
+**Fuente:** `gh api repos/SinapseAI/sinapse-ai/actions/workflows`
 
 | Workflow                 | Estado | Ruta                                      |
 | ------------------------ | ------ | ----------------------------------------- |
@@ -105,7 +105,7 @@ Auditar el estado actual de:
 **Fuente:** `.github/CODEOWNERS`
 
 ```codeowners
-* @SynkraAI
+* @SinapseAI
 ```
 
 **Analisis:** Propiedad unica a nivel de organizacion - sin propiedad granular basada en rutas.
@@ -201,7 +201,7 @@ Esto es aceptable para desarrollo interno pero **no recomendado para contribucio
 **Comando:**
 
 ```bash
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \

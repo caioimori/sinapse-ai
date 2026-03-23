@@ -19,7 +19,7 @@
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** DESCONTINUADO - Veja docs/framework/tech-stack.md
-**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/sinapse-ai` no Q2 2026 (veja Decisão 005)
+**Aviso de Migração:** Este documento será migrado para o repositório `SinapseAI/sinapse-ai` no Q2 2026 (veja Decisão 005)
 
 ---
 
@@ -801,7 +801,7 @@ SUPABASE_ACCESS_TOKEN=xxx         # Auth Supabase CLI
 | Versão | Data       | Alterações                                                                                       | Autor            |
 | ------ | ---------- | ------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial do tech stack                                                               | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/sinapse-ai, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado aviso de migração para SinapseAI/sinapse-ai, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
 
 ---
 

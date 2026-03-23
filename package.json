@@ -135,12 +135,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SynkraAI/sinapse-ai.git"
+    "url": "git+https://github.com/SinapseAI/sinapse-ai.git"
   },
   "bugs": {
-    "url": "https://github.com/SynkraAI/sinapse-ai/issues"
+    "url": "https://github.com/SinapseAI/sinapse-ai/issues"
   },
-  "homepage": "https://github.com/SynkraAI/sinapse-ai#readme",
+  "homepage": "https://github.com/SinapseAI/sinapse-ai#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"

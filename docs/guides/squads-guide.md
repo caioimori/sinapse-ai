@@ -45,7 +45,7 @@ Squads are modular teams of AI agents that extend SINAPSE functionality. Each sq
 │                    SQUAD DISTRIBUTION                        │
 ├─────────────────────────────────────────────────────────────┤
 │  Level 1: LOCAL        → ./squads/           (Private)      │
-│  Level 2: SINAPSE-SQUADS  → github.com/SynkraAI (Public/Free)  │
+│  Level 2: SINAPSE-SQUADS  → github.com/SinapseAI (Public/Free)  │
 │  Level 3: SINAPSE API   → api.sinapse.ai      (Marketplace)  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -54,8 +54,8 @@ Squads are modular teams of AI agents that extend SINAPSE functionality. Each sq
 
 | Squad | Version | Description |
 |-------|---------|-------------|
-| [etl-squad](https://github.com/SynkraAI/sinapse-squads/tree/main/etl) | 2.0.0 | Data collection and transformation |
-| [creator-squad](https://github.com/SynkraAI/sinapse-squads/tree/main/creator) | 1.0.0 | Content generation utilities |
+| [etl-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/etl) | 2.0.0 | Data collection and transformation |
+| [creator-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/creator) | 1.0.0 | Content generation utilities |
 
 ---
 
@@ -545,7 +545,7 @@ Squads in `./squads/` are automatically available to your project.
 *publish-squad ./squads/my-squad
 ```
 
-This creates a PR to [SynkraAI/sinapse-squads](https://github.com/SynkraAI/sinapse-squads).
+This creates a PR to [SinapseAI/sinapse-squads](https://github.com/SinapseAI/sinapse-squads).
 
 ### Level 3: SINAPSE Marketplace
 
@@ -811,14 +811,14 @@ npm test -- tests/squads/my-squad/
 - [Squad Migration Guide](./squad-migration.md)
 - [Squads API Reference](../api/squads-api.md)
 - [@squad-creator Agent](../../.sinapse-ai/development/agents/squad-creator.md)
-- [sinapse-squads Repository](https://github.com/SynkraAI/sinapse-squads)
+- [sinapse-squads Repository](https://github.com/SinapseAI/sinapse-squads)
 
 ---
 
 ## Getting Help
 
-- [GitHub Discussions](https://github.com/SynkraAI/sinapse-ai/discussions)
-- [Issue Tracker](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
+- [Issue Tracker](https://github.com/SinapseAI/sinapse-ai/issues)
 
 ---
 

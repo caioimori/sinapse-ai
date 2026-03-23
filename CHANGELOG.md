@@ -139,7 +139,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 
 - **Rebranding to SINAPSE** (OSR-9)
   - Brand investigation complete
-  - Namespace updated to SynkraAI
+  - Namespace updated to SinapseAI
 
 - **Release Checklist** (OSR-10)
   - GitHub configuration validated
@@ -236,19 +236,19 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
   - Removed `squads/mmos-mapper/`
   - Removed `squads/sinapse-infrastructure-devops/`
   - Removed `squads/meeting-notes/`
-  - Repository: https://github.com/SynkraAI/sinapse-squads (PRIVATE)
+  - Repository: https://github.com/SinapseAI/sinapse-squads (PRIVATE)
 - **Internal development tools** - Moved to separate private repository (`sinapse-dev-tools`)
   - Removed analysis scripts: `analyze-batches.js`, `analyze-decision-patterns.js`, `analyze-epic3.js`, etc.
   - Removed consolidation scripts: `consolidate-entities.js`, `consolidate-results.js`, etc.
   - Removed extraction scripts: `extract-all-claude-backups.js`, `extract-claude-history.js`
   - Removed generation scripts: `generate-entity-summary.js`, `generate-entity-table.js`
-  - Repository: https://github.com/SynkraAI/sinapse-dev-tools (PRIVATE)
+  - Repository: https://github.com/SinapseAI/sinapse-dev-tools (PRIVATE)
 - **hybrid-ops squad** - Moved to separate repository for independent maintenance
   - Removed `squads/hybrid-ops/` directory
   - Removed `.hybrid-ops/` directory
   - Updated `core-config.yaml` to reference external repository
   - Updated `install-manifest.yaml` (removed 47 file entries)
-  - Repository: https://github.com/SynkraAI/sinapse-hybrid-ops-pedro-valerio
+  - Repository: https://github.com/SinapseAI/sinapse-hybrid-ops-pedro-valerio
 
 ### Changed
 - README.md - hybrid-ops now listed under "Squads Externos"

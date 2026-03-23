@@ -12,7 +12,7 @@
 
 **Status:** Padrões Oficiais do Framework
 **Criado:** 2025-01-16 (Story 6.1.2.6)
-**Destino de Migração:** Q2 2026 → repositório `SynkraAI/sinapse-ai`
+**Destino de Migração:** Q2 2026 → repositório `SinapseAI/sinapse-ai`
 
 ---
 
@@ -36,12 +36,12 @@ Este diretório contém **documentação oficial do framework SINAPSE** que defi
 
 ## Aviso de Migração
 
-**IMPORTANTE**: Estes documentos agora estão no repositório `SynkraAI/sinapse-ai`. A migração do antigo org `sinapse/sinapse-ai` foi concluída em dezembro de 2024 como parte do OSR-9 (Rebranding).
+**IMPORTANTE**: Estes documentos agora estão no repositório `SinapseAI/sinapse-ai`. A migração do antigo org `sinapse/sinapse-ai` foi concluída em dezembro de 2024 como parte do OSR-9 (Rebranding).
 
 ### Cronograma de Migração
 
 - **Fase 1 (Q1 2026 - Story 6.1.2.6):** Docs do framework separados em `docs/framework/`
-- **Fase 2 (Q4 2024):** Repositório migrado para `SynkraAI/sinapse-ai` (OSR-9)
+- **Fase 2 (Q4 2024):** Repositório migrado para `SinapseAI/sinapse-ai` (OSR-9)
 - **Fase 3 (Q3 2026):** Cópias antigas em `docs/architecture/` removidas do projeto brownfield
 
 ### Compatibilidade Retroativa
@@ -61,7 +61,7 @@ Para compatibilidade retroativa, os docs do framework permanecem acessíveis em 
 
 - **Escopo**: Portável entre todos os projetos SINAPSE
 - **Exemplos**: Padrões de código, tech stack, estrutura de source tree
-- **Ciclo de vida**: Vive no repositório `SynkraAI/sinapse-ai`
+- **Ciclo de vida**: Vive no repositório `SinapseAI/sinapse-ai`
 - **Alterações**: Requerem aprovação em nível de framework
 
 ### Documentação do Projeto (`docs/architecture/project-decisions/`)

@@ -94,7 +94,7 @@ gh auth login
 
 ### Step 1: Fork the Repository
 
-1. Navigate to [github.com/SynkraAI/sinapse-ai](https://github.com/SynkraAI/sinapse-ai)
+1. Navigate to [github.com/SinapseAI/sinapse-ai](https://github.com/SinapseAI/sinapse-ai)
 2. Click the **Fork** button in the top-right corner
 3. Select your GitHub account as the destination
 
@@ -106,14 +106,14 @@ git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
 cd sinapse-ai
 
 # Add upstream remote
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 
 # Verify remotes
 git remote -v
 # origin    https://github.com/YOUR_USERNAME/sinapse-ai.git (fetch)
 # origin    https://github.com/YOUR_USERNAME/sinapse-ai.git (push)
-# upstream  https://github.com/SynkraAI/sinapse-ai.git (fetch)
-# upstream  https://github.com/SynkraAI/sinapse-ai.git (push)
+# upstream  https://github.com/SinapseAI/sinapse-ai.git (fetch)
+# upstream  https://github.com/SinapseAI/sinapse-ai.git (push)
 ```
 
 ### Step 3: Stay Updated
@@ -1079,8 +1079,8 @@ node --inspect node_modules/.bin/jest
 
 ### Resources
 
-- **GitHub Discussions:** [github.com/SynkraAI/sinapse-ai/discussions](https://github.com/SynkraAI/sinapse-ai/discussions)
-- **Issue Tracker:** [github.com/SynkraAI/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Discussions:** [github.com/SinapseAI/sinapse-ai/discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
+- **Issue Tracker:** [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Discord:** [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 
 ### Issue Labels
@@ -1096,7 +1096,7 @@ node --inspect node_modules/.bin/jest
 ### Contact Maintainers
 
 - See `CODEOWNERS` file for module ownership
-- Tag `@SynkraAI/core-team` for urgent issues
+- Tag `@SinapseAI/core-team` for urgent issues
 
 ---
 

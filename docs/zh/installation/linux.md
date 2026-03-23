@@ -155,7 +155,7 @@ sudo pacman -S base-devel
 3. 运行安装程序：
 
    ```bash
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### 手动安装
@@ -164,7 +164,7 @@ sudo pacman -S base-devel
 
 ```bash
 # 克隆仓库
-git clone https://github.com/SynkraAI/sinapse-ai.git ~/.sinapse-ai-source
+git clone https://github.com/SinapseAI/sinapse-ai.git ~/.sinapse-ai-source
 
 # 导航到源目录
 cd ~/.sinapse-ai-source
@@ -357,7 +357,7 @@ SINAPSE 遵守 XDG 目录：
 
 ```bash
 # 使用 npx（推荐）
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 
 # 手动更新
 cd ~/.sinapse-ai-source
@@ -444,4 +444,4 @@ rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@sinapse
 - [故障排除指南](troubleshooting.md)
 - [常见问题](faq.md)
 - [Discord 社区](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)

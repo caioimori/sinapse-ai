@@ -131,7 +131,7 @@ winget install Microsoft.WindowsTerminal
 3. Ejecute el instalador:
 
    ```powershell
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### Qué Hace el Instalador
@@ -299,7 +299,7 @@ Para actualizar una instalación existente:
 
 ```powershell
 # Usando npx (recomendado)
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 
 # El actualizador:
 # - Detectará instalación existente
@@ -339,4 +339,4 @@ npx github:SynkraAI/sinapse-ai install
 - [Guía de Solución de Problemas](troubleshooting.md)
 - [FAQ](faq.md)
 - [Comunidad Discord](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)

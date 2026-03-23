@@ -5,7 +5,7 @@
 **Version:** 4.0.0
 **Last Updated:** 2026-02-11
 **Status:** Official Framework Standard
-**Repository:** SynkraAI/sinapse-ai
+**Repository:** SinapseAI/sinapse-ai
 
 ---
 
@@ -463,7 +463,7 @@ dependencies:
 
 **Decision 005 defines 5 separate repositories:**
 
-### REPO 1: SynkraAI/sinapse-ai (MIT)
+### REPO 1: SinapseAI/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -513,7 +513,7 @@ sinapse-ai/
     └── multi-agent-workflow/
 ```
 
-### REPO 2: SynkraAI/squads (MIT)
+### REPO 2: SinapseAI/squads (MIT)
 
 ```
 squads/
@@ -535,7 +535,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
+### REPO 3: SinapseAI/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -555,7 +555,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### REPO 4: SynkraAI/certified-partners (Private)
+### REPO 4: SinapseAI/certified-partners (Private)
 
 ```
 certified-partners/
@@ -572,7 +572,7 @@ certified-partners/
     └── web/
 ```
 
-### REPO 5: SynkraAI/mmos (Private + NDA)
+### REPO 5: SinapseAI/mmos (Private + NDA)
 
 ```
 mmos/
@@ -878,7 +878,7 @@ Runtime state is persisted in `.sinapse/`:
 | Version | Date       | Changes                                                                                                                                                            | Author           |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0     | 2025-01-15 | Initial source tree documentation                                                                                                                                  | Aria (architect) |
-| 1.1     | 2025-12-14 | Updated org to SynkraAI, replaced Squads with Squads system [Story 6.10]                                                                                           | Dex (dev)        |
+| 1.1     | 2025-12-14 | Updated org to SinapseAI, replaced Squads with Squads system [Story 6.10]                                                                                           | Dex (dev)        |
 | 2.0     | 2025-12-15 | Major update to reflect modular architecture (cli/, core/, development/, infrastructure/, product/) [Story 6.13]                                                   | Pax (PO)         |
 | 3.0     | 2026-01-29 | Added ADE (Autonomous Development Engine) section documenting Epics 1-7: workflow-intelligence, ADE scripts, workflows, tasks, and runtime state [ADE Integration] | Aria (architect) |
 | 3.1     | 2026-02-06 | Added Data File Governance section: documented 7 missing data files with owner, fill rule, and update trigger. Expanded .sinapse-ai/data/ and product/data/ tree listings. [Story ACT-8] | Dex (dev) |

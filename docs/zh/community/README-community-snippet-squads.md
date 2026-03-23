@@ -2,7 +2,7 @@
 
 > 🌐 [EN](../../en/community/README-community-snippet-squads.md) | [PT](../../pt/community/README-community-snippet-squads.md) | [ES](../../es/community/README-community-snippet-squads.md) | **ZH**
 
-> **用途:** 将此代码段复制到 `SynkraAI/sinapse-squads` 仓库的 README.md 中。
+> **用途:** 将此代码段复制到 `SinapseAI/sinapse-squads` 仓库的 README.md 中。
 
 ---
 
@@ -10,15 +10,15 @@
 
 如需讨论、问题和社区互动，请访问我们的中央枢纽：
 
-👉 **[SINAPSE 社区讨论](https://github.com/SynkraAI/sinapse-ai/discussions)**
+👉 **[SINAPSE 社区讨论](https://github.com/SinapseAI/sinapse-ai/discussions)**
 
 | 需要 | 前往位置 |
 |------|-------------|
-| 📦 **Squad 问题?** | 使用 ["Squad" 类别](https://github.com/SynkraAI/sinapse-ai/discussions/categories/squads) |
-| 💡 **功能创意?** | 在 ["创意" 中启动讨论](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) |
-| 🐛 **发现错误?** | [在此仓库中打开 issue](https://github.com/SynkraAI/sinapse-squads/issues/new/choose) |
-| 🙏 **需要帮助?** | 在 ["问答" 中提问](https://github.com/SynkraAI/sinapse-ai/discussions/categories/q-a) |
-| 🙌 **创建了什么酷的东西?** | 在 ["展示和讲述" 中分享](https://github.com/SynkraAI/sinapse-ai/discussions/categories/show-and-tell) |
+| 📦 **Squad 问题?** | 使用 ["Squad" 类别](https://github.com/SinapseAI/sinapse-ai/discussions/categories/squads) |
+| 💡 **功能创意?** | 在 ["创意" 中启动讨论](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) |
+| 🐛 **发现错误?** | [在此仓库中打开 issue](https://github.com/SinapseAI/sinapse-squads/issues/new/choose) |
+| 🙏 **需要帮助?** | 在 ["问答" 中提问](https://github.com/SinapseAI/sinapse-ai/discussions/categories/q-a) |
+| 🙌 **创建了什么酷的东西?** | 在 ["展示和讲述" 中分享](https://github.com/SinapseAI/sinapse-ai/discussions/categories/show-and-tell) |
 
 ### 可用的 Squad
 
@@ -31,8 +31,8 @@
 
 有新的 SINAPSE Squad 想法？我们很乐意听到！
 
-1. 检查现有的 [Squad 提案](https://github.com/SynkraAI/sinapse-squads/labels/new-squad)
-2. 打开 [Squad 提案 issue](https://github.com/SynkraAI/sinapse-squads/issues/new?template=squad-proposal.md)
+1. 检查现有的 [Squad 提案](https://github.com/SinapseAI/sinapse-squads/labels/new-squad)
+2. 打开 [Squad 提案 issue](https://github.com/SinapseAI/sinapse-squads/issues/new?template=squad-proposal.md)
 3. 在社区中讨论
 
 ---

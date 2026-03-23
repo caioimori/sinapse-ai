@@ -94,7 +94,7 @@ gh auth login
 
 ### 第 1 步：Fork 仓库
 
-1. 导航至 [github.com/SynkraAI/sinapse-ai](https://github.com/SynkraAI/sinapse-ai)
+1. 导航至 [github.com/SinapseAI/sinapse-ai](https://github.com/SinapseAI/sinapse-ai)
 2. 点击右上角的 **Fork** 按钮
 3. 选择您的 GitHub 账户作为目标
 
@@ -106,7 +106,7 @@ git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
 cd sinapse-ai
 
 # 添加上游远程
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 
 # 验证远程
 git remote -v

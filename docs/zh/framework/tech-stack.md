@@ -7,7 +7,7 @@
 **版本:** 1.1
 **最后更新:** 2025-12-14
 **状态:** 官方框架标准
-**迁移通知:** 本文档将于2026年第二季度迁移到 `SynkraAI/sinapse-ai` 仓库（参见 Decision 005）
+**迁移通知:** 本文档将于2026年第二季度迁移到 `SinapseAI/sinapse-ai` 仓库（参见 Decision 005）
 
 ---
 
@@ -789,7 +789,7 @@ SUPABASE_ACCESS_TOKEN=xxx         # Supabase CLI 认证
 | 版本 | 日期 | 变更 | 作者 |
 | ---- | ---- | ---- | ---- |
 | 1.0 | 2025-01-15 | 初始技术栈文档 | Aria (architect) |
-| 1.1 | 2025-12-14 | 更新迁移通知至 SynkraAI/sinapse-ai，semantic-release 至 v25.0.2 [Story 6.10] | Dex (dev) |
+| 1.1 | 2025-12-14 | 更新迁移通知至 SinapseAI/sinapse-ai，semantic-release 至 v25.0.2 [Story 6.10] | Dex (dev) |
 
 ---
 

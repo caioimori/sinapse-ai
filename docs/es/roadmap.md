@@ -4,7 +4,7 @@
 
 Este documento describe la dirección de desarrollo planificada para SINAPSE.
 
-> Para seguimiento detallado, consulta nuestro [Proyecto de GitHub](https://github.com/orgs/SynkraAI/projects/1)
+> Para seguimiento detallado, consulta nuestro [Proyecto de GitHub](https://github.com/orgs/SinapseAI/projects/1)
 
 ## Visión
 
@@ -63,11 +63,11 @@ Estos elementos están siendo explorados pero aún no están comprometidos:
 
 ### 1. Vota por Ideas
 
-Reacciona con :+1: en [Ideas en Discussions](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) existentes para mostrar apoyo.
+Reacciona con :+1: en [Ideas en Discussions](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) existentes para mostrar apoyo.
 
 ### 2. Propón Características
 
-¿Tienes una nueva idea? Abre una [Discusión de Idea](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=ideas) para compartirla con la comunidad.
+¿Tienes una nueva idea? Abre una [Discusión de Idea](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas) para compartirla con la comunidad.
 
 ### 3. Escribe un RFC
 
@@ -90,7 +90,7 @@ Esta hoja de ruta es revisada y actualizada mensualmente por los mantenedores de
 2. Actualizar estado de elementos completados/en progreso
 3. Agregar características recién aprobadas de las discusiones comunitarias
 4. Eliminar elementos cancelados o despriorizados
-5. Comunicar cambios significativos vía [Anuncios](https://github.com/SynkraAI/sinapse-ai/discussions/categories/announcements)
+5. Comunicar cambios significativos vía [Anuncios](https://github.com/SinapseAI/sinapse-ai/discussions/categories/announcements)
 
 **Responsable:** agentes @pm (Morgan) o @po (Pax), con supervisión de mantenedores.
 
@@ -100,7 +100,7 @@ Esta hoja de ruta pública está sincronizada con nuestra planificación interna
 
 | Hoja de Ruta Pública | Seguimiento Interno |
 |----------------|-------------------|
-| [Proyecto de GitHub](https://github.com/orgs/SynkraAI/projects/1) | `docs/stories/backlog.md` |
+| [Proyecto de GitHub](https://github.com/orgs/SinapseAI/projects/1) | `docs/stories/backlog.md` |
 | Características de alto nivel | Stories detalladas por sprint |
 | Cronograma trimestral | Ejecución basada en sprints |
 

@@ -38,7 +38,7 @@ cd mi-proyecto
 ### Opción B: Clonar Repositorio (Desarrollo)
 
 ```bash
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 cd sinapse-ai
 npm install
 ```
@@ -253,15 +253,15 @@ sudo chown -R $(whoami) ~/.npm
 npx sinapse-ai@latest install
 
 # O clonar de nuevo
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 ```
 
 ---
 
 ## Obtener Ayuda
 
-- **Documentación:** [Repositorio GitHub](https://github.com/SynkraAI/sinapse-ai)
-- **GitHub Issues:** [github.com/SynkraAI/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **Documentación:** [Repositorio GitHub](https://github.com/SinapseAI/sinapse-ai)
+- **GitHub Issues:** [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Comunidad Discord:** [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 
 ---

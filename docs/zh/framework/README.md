@@ -6,7 +6,7 @@
 
 **状态:** 官方框架标准
 **创建日期:** 2025-01-16 (Story 6.1.2.6)
-**迁移目标:** 2026年第二季度 -> `SynkraAI/sinapse-ai` 仓库
+**迁移目标:** 2026年第二季度 -> `SinapseAI/sinapse-ai` 仓库
 
 ---
 
@@ -30,12 +30,12 @@
 
 ## 迁移通知
 
-**重要**: 这些文档现在位于 `SynkraAI/sinapse-ai` 仓库中。从旧的 `sinapse/sinapse-ai` 组织的迁移已于2024年12月完成，作为 OSR-9（品牌重塑）的一部分。
+**重要**: 这些文档现在位于 `SinapseAI/sinapse-ai` 仓库中。从旧的 `sinapse/sinapse-ai` 组织的迁移已于2024年12月完成，作为 OSR-9（品牌重塑）的一部分。
 
 ### 迁移时间线
 
 - **第一阶段 (2026年第一季度 - Story 6.1.2.6):** 框架文档已分离到 `docs/framework/`
-- **第二阶段 (2024年第四季度):** 仓库已迁移到 `SynkraAI/sinapse-ai` (OSR-9)
+- **第二阶段 (2024年第四季度):** 仓库已迁移到 `SinapseAI/sinapse-ai` (OSR-9)
 - **第三阶段 (2026年第三季度):** 旧的 `docs/architecture/` 副本将从遗留项目中移除
 
 ### 向后兼容性
@@ -53,7 +53,7 @@
 ### 框架文档 (`docs/framework/`)
 - **范围**: 可在所有 SINAPSE 项目间移植
 - **示例**: 编码标准、技术栈、源代码树结构
-- **生命周期**: 存放在 `SynkraAI/sinapse-ai` 仓库中
+- **生命周期**: 存放在 `SinapseAI/sinapse-ai` 仓库中
 - **变更**: 需要框架级别的审批
 
 ### 项目文档 (`docs/architecture/project-decisions/`)

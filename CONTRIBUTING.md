@@ -33,7 +33,7 @@ git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
 cd sinapse-ai
 
 # Add upstream remote
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 ```
 
 ### 2. Set Up Development Environment
@@ -321,7 +321,7 @@ tasks:
 
 - [Squads Guide](docs/guides/squads-guide.md) - Complete documentation
 - [Squad Template](templates/squad/) - Start from a working template
-- [Squad Discussions](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) - Share ideas
+- [Squad Discussions](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) - Share ideas
 
 ---
 
@@ -573,8 +573,8 @@ Common fixes:
 
 ## Getting Help
 
-- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/sinapse-ai/issues)
-- **Discussions:** [Start a discussion](https://github.com/SynkraAI/sinapse-ai/discussions)
+- **GitHub Issues:** [Open an issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Discussions:** [Start a discussion](https://github.com/SinapseAI/sinapse-ai/discussions)
 - **Community:** [COMMUNITY.md](COMMUNITY.md)
 
 ---
@@ -588,7 +588,7 @@ SINAPSE uses an Open Core model with a private `pro/` git submodule (see [ADR-PR
 **You do NOT need the pro/ submodule.** The standard clone works perfectly:
 
 ```bash
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 cd sinapse-ai
 npm install && npm test  # All tests pass without pro/
 ```
@@ -605,7 +605,7 @@ git clone https://github.com/<your-fork>/sinapse-ai.git
 cd sinapse-ai
 
 # Add upstream and sync
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 git fetch upstream
 git rebase upstream/main
 
@@ -640,7 +640,7 @@ git config submodule.pro.active false
 
 ```bash
 # Clone with submodule
-git clone --recurse-submodules https://github.com/SynkraAI/sinapse-ai.git
+git clone --recurse-submodules https://github.com/SinapseAI/sinapse-ai.git
 
 # Or add to existing clone
 git submodule update --init pro

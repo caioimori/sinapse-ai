@@ -10,7 +10,7 @@ version: 1.0.0
 Entrada: |
   - squad_path: Caminho do squad para sincronizar (obrigatório)
   - visibility: public | private (default: private)
-  - official: Flag para marcar como oficial (--official, apenas SynkraAI)
+  - official: Flag para marcar como oficial (--official, apenas SinapseAI)
   - dry_run: Preview sem sincronizar (--dry-run)
 Saida: |
   - sync_result: Resultado do sync (created | updated | skipped)
@@ -110,7 +110,7 @@ Next steps:
 | `--private` | Mantém squad privado (apenas workspace) | true |
 | `--dry-run` | Preview sem enviar para API | false |
 | `--verbose` | Output detalhado | false |
-| `--official` | Marca como squad oficial (apenas SynkraAI team) | false |
+| `--official` | Marca como squad oficial (apenas SinapseAI team) | false |
 | `--force` | Ignora warnings e força sync | false |
 
 ## Workflow

@@ -2,7 +2,7 @@
 
 # Seccion de Comunidad del README - mcp-ecosystem
 
-> **Proposito:** Copia este fragmento en el README.md del repositorio `SynkraAI/mcp-ecosystem`.
+> **Proposito:** Copia este fragmento en el README.md del repositorio `SinapseAI/mcp-ecosystem`.
 
 ---
 
@@ -10,15 +10,15 @@
 
 Para discusiones, preguntas e interaccion con la comunidad, visita nuestro hub central:
 
-**[Discusiones de la Comunidad SINAPSE](https://github.com/SynkraAI/sinapse-ai/discussions)**
+**[Discusiones de la Comunidad SINAPSE](https://github.com/SinapseAI/sinapse-ai/discussions)**
 
 | Necesidad                     | Donde Ir                                                                                                        |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Preguntas sobre MCP?**      | Usa la [categoria "Ecosistema MCP"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/mcp-ecosystem) |
-| **Ideas de funcionalidades?** | Inicia una [Discusion en "Ideas"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas)           |
-| **Encontraste un bug?**       | [Abre un issue](https://github.com/SynkraAI/mcp-ecosystem/issues/new/choose) en **este repositorio**            |
-| **Necesitas ayuda?**          | Pregunta en ["Preguntas y Respuestas"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/q-a)        |
-| **Construiste algo genial?**  | Comparte en ["Mostrar y Contar"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/show-and-tell)    |
+| **Preguntas sobre MCP?**      | Usa la [categoria "Ecosistema MCP"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/mcp-ecosystem) |
+| **Ideas de funcionalidades?** | Inicia una [Discusion en "Ideas"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas)           |
+| **Encontraste un bug?**       | [Abre un issue](https://github.com/SinapseAI/mcp-ecosystem/issues/new/choose) en **este repositorio**            |
+| **Necesitas ayuda?**          | Pregunta en ["Preguntas y Respuestas"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/q-a)        |
+| **Construiste algo genial?**  | Comparte en ["Mostrar y Contar"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/show-and-tell)    |
 
 ### Que Hay en Este Repositorio?
 
@@ -40,9 +40,9 @@ Para discusiones, preguntas e interaccion con la comunidad, visita nuestro hub c
 
 Tienes una idea para una nueva configuracion de servidor MCP?
 
-1. Revisa las [propuestas MCP existentes](https://github.com/SynkraAI/mcp-ecosystem/labels/mcp-server)
+1. Revisa las [propuestas MCP existentes](https://github.com/SinapseAI/mcp-ecosystem/labels/mcp-server)
 2. Abre un issue con la etiqueta `mcp-server`
-3. Discute en la [categoria Ecosistema MCP](https://github.com/SynkraAI/sinapse-ai/discussions/categories/mcp-ecosystem)
+3. Discute en la [categoria Ecosistema MCP](https://github.com/SinapseAI/sinapse-ai/discussions/categories/mcp-ecosystem)
 
 ---
 

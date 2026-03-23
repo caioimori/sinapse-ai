@@ -13,7 +13,7 @@
 
 ## 报告漏洞
 
-我们在 SynkraAI 非常重视安全。如果您在 SINAPSE 中发现安全漏洞，请负责任地报告。
+我们在 SinapseAI 非常重视安全。如果您在 SINAPSE 中发现安全漏洞，请负责任地报告。
 
 ### 如何报告
 
@@ -22,7 +22,7 @@
 而是请通过以下其中一个渠道报告安全漏洞：
 
 1. **GitHub 安全公告**（首选）
-   - 前往 [安全公告](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+   - 前往 [安全公告](https://github.com/SinapseAI/sinapse-ai/security/advisories)
    - 点击"报告漏洞"
    - 填写详细信息表单
 
@@ -108,7 +108,7 @@ SINAPSE 框架执行 AI 生成的代码和命令。用户应该：
 
 安全更新通过以下方式宣布：
 
-- [GitHub 安全公告](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+- [GitHub 安全公告](https://github.com/SinapseAI/sinapse-ai/security/advisories)
 - [CHANGELOG.md](../CHANGELOG.md)
 - GitHub 发布
 

@@ -162,7 +162,7 @@ flowchart TB
 
     subgraph DISTRIBUTE["分发"]
         LOCAL["本地<br/>./squads/"]
-        PUBLIC["公共<br/>github.com/SynkraAI/sinapse-squads"]
+        PUBLIC["公共<br/>github.com/SinapseAI/sinapse-squads"]
         MARKET["市场<br/>api.sinapse.ai/squads"]
     end
 
@@ -570,7 +570,7 @@ flowchart LR
     end
 
     subgraph PUBLIC["级别 2：公共"]
-        P_REPO["github.com/SynkraAI/sinapse-squads"]
+        P_REPO["github.com/SinapseAI/sinapse-squads"]
         P_DESC["社区小队（免费）"]
         P_CMD["*publish-squad"]
     end

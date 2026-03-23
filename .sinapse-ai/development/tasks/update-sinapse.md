@@ -31,7 +31,7 @@ git checkout -- .sinapse-ai/                                         # Cancel ch
 
 The script uses sparse clone + file comparison:
 
-1. **Clone upstream** - Sparse shallow clone of SynkraAI/sinapse-ai (only `.sinapse-ai/`)
+1. **Clone upstream** - Sparse shallow clone of SinapseAI/sinapse-ai (only `.sinapse-ai/`)
 2. **Compare files** - Uses `comm` for O(n) file list comparison
 3. **Backup local-only** - Files that exist only locally are backed up
 4. **Sync** - Copy upstream files, restore local-only files

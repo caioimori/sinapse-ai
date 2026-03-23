@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/SynkraAI/sinapse-ai/schemas/squad-schema.json",
+  "$id": "https://github.com/SinapseAI/sinapse-ai/schemas/squad-schema.json",
   "title": "SINAPSE Squad Manifest",
   "description": "Schema for squad.yaml manifest files (Task-First Architecture)",
   "type": "object",

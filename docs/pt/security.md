@@ -13,7 +13,7 @@ Lançamos patches para vulnerabilidades de segurança nas seguintes versões:
 
 ## Reportando uma Vulnerabilidade
 
-Levamos a segurança a sério na SynkraAI. Se você descobrir uma vulnerabilidade de segurança no SINAPSE, por favor reporte de forma responsável.
+Levamos a segurança a sério na SinapseAI. Se você descobrir uma vulnerabilidade de segurança no SINAPSE, por favor reporte de forma responsável.
 
 ### Como Reportar
 
@@ -22,12 +22,12 @@ Levamos a segurança a sério na SynkraAI. Se você descobrir uma vulnerabilidad
 Em vez disso, reporte vulnerabilidades de segurança através de um destes canais:
 
 1. **GitHub Security Advisories** (Preferido)
-   - Vá para [Security Advisories](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+   - Vá para [Security Advisories](https://github.com/SinapseAI/sinapse-ai/security/advisories)
    - Clique em "Report a vulnerability"
    - Preencha o formulário com detalhes
 
 2. **GitHub Issues (Privado)**
-   - Abra um [security advisory privado](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+   - Abra um [security advisory privado](https://github.com/SinapseAI/sinapse-ai/security/advisories)
    - Use a linha de assunto: `[SECURITY] Breve descrição`
 
 ### O Que Incluir
@@ -108,7 +108,7 @@ O SINAPSE Framework executa código e comandos gerados por IA. Usuários devem:
 
 Atualizações de segurança são anunciadas através de:
 
-- [GitHub Security Advisories](https://github.com/SynkraAI/sinapse-ai/security/advisories)
+- [GitHub Security Advisories](https://github.com/SinapseAI/sinapse-ai/security/advisories)
 - [CHANGELOG.md](./CHANGELOG.md)
 - GitHub Releases
 

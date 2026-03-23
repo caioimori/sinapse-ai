@@ -117,7 +117,7 @@ docs/architecture/
 │   ┌─────────────────────────────────────────────────────────────────┐   │
 │   │                    MULTI-REPO STRUCTURE                          │   │
 │   │                                                                  │   │
-│   │   SynkraAI/sinapse-ai ◄───── Central Hub                       │   │
+│   │   SinapseAI/sinapse-ai ◄───── Central Hub                       │   │
 │   │          │                    - Framework core                   │   │
 │   │          │                    - 11 base agents                   │   │
 │   │          │                    - Discussions hub                  │   │

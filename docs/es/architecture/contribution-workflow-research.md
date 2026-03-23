@@ -176,23 +176,23 @@ Dockerfile @org/devops-team
 
 ```codeowners
 # Por defecto - requiere revisión de maintainer
-* @SynkraAI/maintainers
+* @SinapseAI/maintainers
 
 # Definiciones de agentes - requiere equipo core
-.sinapse-ai/development/agents/ @SynkraAI/core-team
+.sinapse-ai/development/agents/ @SinapseAI/core-team
 
 # Definiciones de tareas - requiere equipo core
-.sinapse-ai/development/tasks/ @SynkraAI/core-team
+.sinapse-ai/development/tasks/ @SinapseAI/core-team
 
 # CI/CD - requiere aprobación devops
-.github/ @SynkraAI/devops
+.github/ @SinapseAI/devops
 
 # Documentación - más permisivo para contribuidores
-docs/ @SynkraAI/maintainers
+docs/ @SinapseAI/maintainers
 
 # Plantillas - requiere revisión de arquitecto
-templates/ @SynkraAI/core-team
-.sinapse-ai/product/templates/ @SynkraAI/core-team
+templates/ @SinapseAI/core-team
+.sinapse-ai/product/templates/ @SinapseAI/core-team
 ```
 
 ---

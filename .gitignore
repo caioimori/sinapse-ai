@@ -271,7 +271,7 @@ npm-recovery-codes.txt
 # ============================================
 # PRO SUBMODULE (ADR-PRO-001 — git submodule, NOT ignored)
 # ============================================
-# pro/ is a git submodule pointing to SynkraAI/sinapse-pro (private)
+# pro/ is a git submodule pointing to SinapseAI/sinapse-pro (private)
 # It is tracked by git via .gitmodules — do NOT add pro/ to gitignore
 # Pro submodule contents excluded from npm publish (not in package.json files array)
 

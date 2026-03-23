@@ -30,7 +30,7 @@
 
 ### 1. 分支保护设置
 
-**来源:** `gh api repos/SynkraAI/sinapse-ai/branches/main/protection`
+**来源:** `gh api repos/SinapseAI/sinapse-ai/branches/main/protection`
 
 ```json
 {
@@ -67,7 +67,7 @@
 
 ### 2. 仓库设置
 
-**来源:** `gh api repos/SynkraAI/sinapse-ai`
+**来源:** `gh api repos/SinapseAI/sinapse-ai`
 
 ```json
 {
@@ -84,7 +84,7 @@
 
 ### 3. GitHub Actions 工作流
 
-**来源:** `gh api repos/SynkraAI/sinapse-ai/actions/workflows`
+**来源:** `gh api repos/SinapseAI/sinapse-ai/actions/workflows`
 
 | 工作流 | 状态 | 路径 |
 | --- | --- | --- |
@@ -105,7 +105,7 @@
 **来源:** `.github/CODEOWNERS`
 
 ```codeowners
-* @SynkraAI
+* @SinapseAI
 ```
 
 **分析:** 仅在组织级别单一所有权 - 无按路径的细粒度所有权。
@@ -201,7 +201,7 @@
 **命令:**
 
 ```bash
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \

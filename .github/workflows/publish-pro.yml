@@ -127,7 +127,7 @@ jobs:
             - Machine-specific encrypted cache
             - Graceful degradation to core features
 
-            See [Install Guide](https://github.com/SynkraAI/sinapse-ai/blob/main/docs/guides/pro/install-gate-setup.md) for detailed setup instructions.
+            See [Install Guide](https://github.com/SinapseAI/sinapse-ai/blob/main/docs/guides/pro/install-gate-setup.md) for detailed setup instructions.
             `;
 
             await github.rest.repos.createRelease({

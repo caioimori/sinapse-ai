@@ -43,7 +43,7 @@ SINAPSE v4 采用**多仓库策略**以实现模块化开发、社区贡献和�
 ## 仓库结构
 
 ```
-SynkraAI 组织
+SinapseAI 组织
 ├── 公共仓库
 │   ├── sinapse-ai          # 主框架 (MIT)
 │   ├── sinapse-squads        # 社区 Squad (MIT)
@@ -134,7 +134,7 @@ npm install @sinapse/mcp-presets
 
 ## 私有仓库
 
-### SynkraAI/mmos(专有+NDA)
+### SinapseAI/mmos(专有+NDA)
 
 包含专有 MMOS(心智操作系统)组件:
 
@@ -145,7 +145,7 @@ npm install @sinapse/mcp-presets
 
 **访问:** 需要 NDA 和许可协议。
 
-### SynkraAI/certified-partners(专有)
+### SinapseAI/certified-partners(专有)
 
 SINAPSE 认证合作伙伴的资源:
 

@@ -153,7 +153,7 @@ dependencies:
 ```
 
 这将：
-1. Fork `SynkraAI/sinapse-squads` （如需要）
+1. Fork `SinapseAI/sinapse-squads` （如需要）
 2. 用你的Squad创建分支
 3. 开启审查PR
 
@@ -235,15 +235,15 @@ export SINAPSE_API_TOKEN="your-token"
 
 ## 获得帮助
 
-- **问题**: [GitHub讨论](https://github.com/SynkraAI/sinapse-ai/discussions)
-- **问题**: [问题跟踪器](https://github.com/SynkraAI/sinapse-ai/issues)
+- **问题**: [GitHub讨论](https://github.com/SinapseAI/sinapse-ai/discussions)
+- **问题**: [问题跟踪器](https://github.com/SinapseAI/sinapse-ai/issues)
 - **指南**: 本文档
 
 ## 相关资源
 
 - [Squad开发指南](./squads-guide.md)
 - [Squad迁移指南](./squad-migration.md)
-- [sinapse-squads Repository](https://github.com/SynkraAI/sinapse-squads)
+- [sinapse-squads Repository](https://github.com/SinapseAI/sinapse-squads)
 
 ---
 

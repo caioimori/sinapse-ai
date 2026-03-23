@@ -19,7 +19,7 @@
 **版本:** 1.1
 **最后更新:** 2025-12-14
 **状态:** 已弃用 - 参见 docs/framework/tech-stack.md
-**迁移通知:** 本文档将在 2026 Q2 迁移到 `SynkraAI/sinapse-ai` 仓库 (参见决策 005)
+**迁移通知:** 本文档将在 2026 Q2 迁移到 `SinapseAI/sinapse-ai` 仓库 (参见决策 005)
 
 ---
 
@@ -801,7 +801,7 @@ SUPABASE_ACCESS_TOKEN=xxx         # Supabase CLI 身份验证
 | 版本 | 日期       | 更改                                                                          | 作者             |
 | ---- | ---------- | ----------------------------------------------------------------------------- | ---------------- |
 | 1.0  | 2025-01-15 | 初始技术栈文档                                                                | Aria (architect) |
-| 1.1  | 2025-12-14 | 更新对 SynkraAI/sinapse-ai 的迁移通知、semantic-release 到 v25.0.2 [故事 6.10] | Dex (dev)        |
+| 1.1  | 2025-12-14 | 更新对 SinapseAI/sinapse-ai 的迁移通知、semantic-release 到 v25.0.2 [故事 6.10] | Dex (dev)        |
 
 ---
 

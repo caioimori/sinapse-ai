@@ -153,7 +153,7 @@ sudo pacman -S base-devel
 3. Run the installer:
 
    ```bash
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### Manual Installation
@@ -162,7 +162,7 @@ If the quick install fails, try manual installation:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SynkraAI/sinapse-ai.git ~/.sinapse-ai-source
+git clone https://github.com/SinapseAI/sinapse-ai.git ~/.sinapse-ai-source
 
 # Navigate to the source
 cd ~/.sinapse-ai-source
@@ -358,7 +358,7 @@ To update an existing installation:
 
 ```bash
 # Using npx (recommended)
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 
 # Manual update
 cd ~/.sinapse-ai-source
@@ -445,4 +445,4 @@ rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@sinapse
 - [Troubleshooting Guide](troubleshooting.md)
 - [FAQ](faq.md)
 - [Discord Community](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)

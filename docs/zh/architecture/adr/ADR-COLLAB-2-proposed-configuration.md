@@ -69,7 +69,7 @@ branch_protection:
 **实施命令:**
 
 ```bash
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test","validation-summary"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -208,76 +208,76 @@ abort_on_close: true
 # ============================================
 # 默认所有者（后备）
 # ============================================
-* @SynkraAI/maintainers
+* @SinapseAI/maintainers
 
 # ============================================
 # 框架核心
 # ============================================
 # 代理定义 - 需要核心团队审查
-.sinapse-ai/development/agents/ @SynkraAI/core-team
+.sinapse-ai/development/agents/ @SinapseAI/core-team
 
 # 任务定义 - 需要核心团队审查
-.sinapse-ai/development/tasks/ @SynkraAI/core-team
+.sinapse-ai/development/tasks/ @SinapseAI/core-team
 
 # 工作流定义 - 需要核心团队审查
-.sinapse-ai/development/workflows/ @SynkraAI/core-team
+.sinapse-ai/development/workflows/ @SinapseAI/core-team
 
 # 模板 - 需要架构师/核心团队审查
-.sinapse-ai/product/templates/ @SynkraAI/core-team
-templates/ @SynkraAI/core-team
+.sinapse-ai/product/templates/ @SinapseAI/core-team
+templates/ @SinapseAI/core-team
 
 # 核心工具 - 需要高级审查
-.sinapse-ai/core/ @SynkraAI/core-team
-.sinapse-ai/cli/ @SynkraAI/core-team
+.sinapse-ai/core/ @SinapseAI/core-team
+.sinapse-ai/cli/ @SinapseAI/core-team
 
 # ============================================
 # 基础设施
 # ============================================
 # CI/CD - 需要 devops 批准
-.github/ @SynkraAI/devops
+.github/ @SinapseAI/devops
 
 # Docker 配置
-.docker/ @SynkraAI/devops
+.docker/ @SinapseAI/devops
 
 # 配置文件
-.sinapse-ai/core-config.yaml @SynkraAI/core-team
-package.json @SynkraAI/maintainers
-package-lock.json @SynkraAI/maintainers
+.sinapse-ai/core-config.yaml @SinapseAI/core-team
+package.json @SinapseAI/maintainers
+package-lock.json @SinapseAI/maintainers
 
 # ============================================
 # 文档（更宽松）
 # ============================================
 # 通用文档 - 维护者可批准
-docs/ @SynkraAI/maintainers
+docs/ @SinapseAI/maintainers
 
 # 架构决策 - 需要核心团队
-docs/architecture/ @SynkraAI/core-team
-docs/framework/ @SynkraAI/core-team
+docs/architecture/ @SinapseAI/core-team
+docs/framework/ @SinapseAI/core-team
 
 # Stories - 维护者（内部开发文档）
-docs/stories/ @SynkraAI/maintainers
+docs/stories/ @SinapseAI/maintainers
 
 # 指南 - 维护者（对贡献者友好）
-docs/guides/ @SynkraAI/maintainers
+docs/guides/ @SinapseAI/maintainers
 
 # ============================================
 # 安全敏感文件
 # ============================================
 # 安全配置
-.github/CODEOWNERS @SynkraAI/core-team
-.github/workflows/semantic-release.yml @SynkraAI/devops
-.github/workflows/npm-publish.yml @SynkraAI/devops
+.github/CODEOWNERS @SinapseAI/core-team
+.github/workflows/semantic-release.yml @SinapseAI/devops
+.github/workflows/npm-publish.yml @SinapseAI/devops
 
 # 根配置文件
-.env* @SynkraAI/core-team
-*.config.js @SynkraAI/maintainers
+.env* @SinapseAI/core-team
+*.config.js @SinapseAI/maintainers
 ```
 
 **需要的 GitHub 团队:**
 
-- `@SynkraAI/maintainers` - 通用维护者（写入权限）
-- `@SynkraAI/core-team` - 框架核心开发者
-- `@SynkraAI/devops` - CI/CD 和基础设施
+- `@SinapseAI/maintainers` - 通用维护者（写入权限）
+- `@SinapseAI/core-team` - 框架核心开发者
+- `@SinapseAI/devops` - CI/CD 和基础设施
 
 ---
 
@@ -444,10 +444,10 @@ _提交此 PR，即表示我确认已阅读[贡献指南](../../../../CONTRIBUTI
 
 ```bash
 # 移除所有分支保护（仅紧急情况）
-gh api -X DELETE repos/SynkraAI/sinapse-ai/branches/main/protection
+gh api -X DELETE repos/SinapseAI/sinapse-ai/branches/main/protection
 
 # 恢复最小保护
-gh api repos/SynkraAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \
@@ -467,7 +467,7 @@ git push
 
 ```bash
 # 恢复简单所有权
-echo "* @SynkraAI" > .github/CODEOWNERS
+echo "* @SinapseAI" > .github/CODEOWNERS
 git add -A && git commit -m "chore: rollback CODEOWNERS"
 git push
 ```

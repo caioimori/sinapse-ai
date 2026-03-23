@@ -2,7 +2,7 @@
 
 > 🌐 **EN** | [PT](../pt/community/README-community-snippet-mcp.md) | [ES](../es/community/README-community-snippet-mcp.md)
 
-> **Purpose:** Copy this snippet into the README.md of `SynkraAI/mcp-ecosystem` repository.
+> **Purpose:** Copy this snippet into the README.md of `SinapseAI/mcp-ecosystem` repository.
 
 ---
 
@@ -10,15 +10,15 @@
 
 For discussions, questions, and community interaction, visit our central hub:
 
-👉 **[SINAPSE Community Discussions](https://github.com/SynkraAI/sinapse-ai/discussions)**
+👉 **[SINAPSE Community Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)**
 
 | Need                         | Where to Go                                                                                                    |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 🔧 **MCP questions?**        | Use the ["MCP Ecosystem" category](https://github.com/SynkraAI/sinapse-ai/discussions/categories/mcp-ecosystem) |
-| 💡 **Feature ideas?**        | Start a [Discussion in "Ideas"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas)            |
-| 🐛 **Found a bug?**          | [Open an issue](https://github.com/SynkraAI/mcp-ecosystem/issues/new/choose) in **this repository**            |
-| 🙏 **Need help?**            | Ask in ["Q&A"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/q-a)                               |
-| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/show-and-tell)         |
+| 🔧 **MCP questions?**        | Use the ["MCP Ecosystem" category](https://github.com/SinapseAI/sinapse-ai/discussions/categories/mcp-ecosystem) |
+| 💡 **Feature ideas?**        | Start a [Discussion in "Ideas"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas)            |
+| 🐛 **Found a bug?**          | [Open an issue](https://github.com/SinapseAI/mcp-ecosystem/issues/new/choose) in **this repository**            |
+| 🙏 **Need help?**            | Ask in ["Q&A"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/q-a)                               |
+| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/show-and-tell)         |
 
 ### What's in this Repository?
 
@@ -40,9 +40,9 @@ For discussions, questions, and community interaction, visit our central hub:
 
 Have an idea for a new MCP server configuration?
 
-1. Check existing [MCP proposals](https://github.com/SynkraAI/mcp-ecosystem/labels/mcp-server)
+1. Check existing [MCP proposals](https://github.com/SinapseAI/mcp-ecosystem/labels/mcp-server)
 2. Open an issue with the `mcp-server` label
-3. Discuss in the [MCP Ecosystem category](https://github.com/SynkraAI/sinapse-ai/discussions/categories/mcp-ecosystem)
+3. Discuss in the [MCP Ecosystem category](https://github.com/SinapseAI/sinapse-ai/discussions/categories/mcp-ecosystem)
 
 ---
 

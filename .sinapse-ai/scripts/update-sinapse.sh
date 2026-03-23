@@ -43,7 +43,7 @@ touch "$REPORT_CREATED" "$REPORT_UPDATED" "$REPORT_DELETED" "$REPORT_PRESERVED"
 # Clone upstream (shallow)
 echo "📥 Cloning upstream..."
 git clone --depth 1 --filter=blob:none --sparse \
-  https://github.com/SynkraAI/sinapse-ai.git \
+  https://github.com/SinapseAI/sinapse-ai.git \
   "$TEMP_DIR/upstream" 2>/dev/null || {
   echo "❌ Failed to clone. Check network."
   exit 1

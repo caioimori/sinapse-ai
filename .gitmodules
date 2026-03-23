@@ -1,5 +1,5 @@
 [submodule "pro"]
 	path = pro
-	url = https://github.com/SynkraAI/sinapse-pro.git
+	url = https://github.com/SinapseAI/sinapse-pro.git
 	branch = main
 	ignore = dirty

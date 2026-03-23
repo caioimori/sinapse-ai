@@ -72,7 +72,7 @@ Descargue desde [cli.github.com](https://cli.github.com/)
 
 3. Ejecute el instalador:
    ```bash
-   npx github:SynkraAI/sinapse-ai install
+   npx github:SinapseAI/sinapse-ai install
    ```
 
 ### Qué Hace el Instalador
@@ -157,7 +157,7 @@ Los sistemas de archivos de macOS pueden ser insensibles a mayúsculas por defec
 Para actualizar una instalación existente:
 
 ```bash
-npx github:SynkraAI/sinapse-ai install
+npx github:SinapseAI/sinapse-ai install
 ```
 
 El actualizador:

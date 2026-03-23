@@ -240,7 +240,7 @@ A squad is a self-contained package containing:
 
 ```
 Level 1: LOCAL        --> ./squads/           (Private)
-Level 2: SINAPSE-SQUADS  --> github.com/SynkraAI (Public/Free)
+Level 2: SINAPSE-SQUADS  --> github.com/SinapseAI (Public/Free)
 Level 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)
 ```
 
@@ -401,8 +401,8 @@ sinapse rebuild
 
 ### Getting Help
 
-- **GitHub Discussions**: [github.com/SynkraAI/sinapse-ai/discussions](https://github.com/SynkraAI/sinapse-ai/discussions)
-- **Issue Tracker**: [github.com/SynkraAI/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Discussions**: [github.com/SinapseAI/sinapse-ai/discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
+- **Issue Tracker**: [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Discord**: [Join our server](https://discord.gg/gk8jAdXWmj)
 
 ---

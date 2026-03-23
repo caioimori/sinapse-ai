@@ -11,7 +11,7 @@
 #   @oalanicolas (maintainer)
 #
 # All PRs require approval from a maintainer before merge.
-# Note: Org handles (e.g. @SynkraAI) cannot approve PRs — only user accounts can.
+# Note: Org handles (e.g. @SinapseAI) cannot approve PRs — only user accounts can.
 
 # ============================================
 # Default Owner (fallback)

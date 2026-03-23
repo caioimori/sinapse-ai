@@ -2,7 +2,7 @@
 
 # Seccion de Comunidad del README - sinapse-ai
 
-> **Proposito:** Copia este fragmento en el README.md del repositorio `SynkraAI/sinapse-ai`.
+> **Proposito:** Copia este fragmento en el README.md del repositorio `SinapseAI/sinapse-ai`.
 
 ---
 
@@ -10,7 +10,7 @@
 
 Este repositorio aloja el **hub central de comunidad** para todos los proyectos SINAPSE.
 
-**[Unete a la Discusion](https://github.com/SynkraAI/sinapse-ai/discussions)**
+**[Unete a la Discusion](https://github.com/SinapseAI/sinapse-ai/discussions)**
 
 ### Categorias de Discusion
 
@@ -22,26 +22,26 @@ Este repositorio aloja el **hub central de comunidad** para todos los proyectos 
 | **Preguntas y Respuestas** | Hacer preguntas y obtener ayuda                                                 |
 | **Mostrar y Contar**       | Comparte tus proyectos construidos con SINAPSE                                     |
 | **Solucion de Problemas**  | Obtener ayuda con problemas y errores                                           |
-| **Squads**                 | Discusiones sobre [SINAPSE Squads](https://github.com/SynkraAI/sinapse-squads)        |
-| **Ecosistema MCP**         | Discusiones sobre [herramientas MCP](https://github.com/SynkraAI/mcp-ecosystem) |
+| **Squads**                 | Discusiones sobre [SINAPSE Squads](https://github.com/SinapseAI/sinapse-squads)        |
+| **Ecosistema MCP**         | Discusiones sobre [herramientas MCP](https://github.com/SinapseAI/mcp-ecosystem) |
 
 ### Enlaces Rapidos
 
 | Accion                      | Enlace                                                                                                 |
 | --------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Reportar un bug             | [Abrir Issue](https://github.com/SynkraAI/sinapse-ai/issues/new?template=bug_report.md)                 |
-| Solicitar una funcionalidad | [Iniciar Discusion](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=ideas)              |
-| Hacer una pregunta          | [Preguntas y Respuestas](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=q-a)           |
-| Proponer un Squad           | [Issues de sinapse-squads](https://github.com/SynkraAI/sinapse-squads/issues/new?template=squad-proposal.md) |
-| Pregunta sobre MCP          | [Ecosistema MCP](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=mcp-ecosystem)         |
+| Reportar un bug             | [Abrir Issue](https://github.com/SinapseAI/sinapse-ai/issues/new?template=bug_report.md)                 |
+| Solicitar una funcionalidad | [Iniciar Discusion](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas)              |
+| Hacer una pregunta          | [Preguntas y Respuestas](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=q-a)           |
+| Proponer un Squad           | [Issues de sinapse-squads](https://github.com/SinapseAI/sinapse-squads/issues/new?template=squad-proposal.md) |
+| Pregunta sobre MCP          | [Ecosistema MCP](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=mcp-ecosystem)         |
 
 ### Repositorios Relacionados
 
 | Repositorio                                                | Descripcion                         | Licencia       |
 | ---------------------------------------------------------- | ----------------------------------- | -------------- |
-| [sinapse-ai](https://github.com/SynkraAI/sinapse-ai)         | Framework central (estas aqui)      | MIT            |
-| [sinapse-squads](https://github.com/SynkraAI/sinapse-squads)     | SINAPSE Squads (ETL, Creator, MMOS)    | MIT            |
-| [mcp-ecosystem](https://github.com/SynkraAI/mcp-ecosystem) | Docker MCP Toolkit y configs de IDE | Apache 2.0     |
+| [sinapse-ai](https://github.com/SinapseAI/sinapse-ai)         | Framework central (estas aqui)      | MIT            |
+| [sinapse-squads](https://github.com/SinapseAI/sinapse-squads)     | SINAPSE Squads (ETL, Creator, MMOS)    | MIT            |
+| [mcp-ecosystem](https://github.com/SinapseAI/mcp-ecosystem) | Docker MCP Toolkit y configs de IDE | Apache 2.0     |
 
 ### Contribuir
 
@@ -50,7 +50,7 @@ Damos la bienvenida a contribuciones! Consulta nuestros:
 - [Guia de Contribucion](../../../CONTRIBUTING.md)
 - [Codigo de Conducta](../../../CODE_OF_CONDUCT.md)
 - [Estandares de Codigo](../../architecture/coding-standards.md)
-- [Buenos Primeros Issues](https://github.com/SynkraAI/sinapse-ai/labels/good-first-issue)
+- [Buenos Primeros Issues](https://github.com/SinapseAI/sinapse-ai/labels/good-first-issue)
 
 ---
 

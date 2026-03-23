@@ -57,7 +57,7 @@ npx @sinapse/sinapse-ai install --force-upgrade
 
 1. 查看[故障排除指南](./troubleshooting.md)
 2. 搜索[常见问题](./faq.md)
-3. 提交 [GitHub Issue](https://github.com/SynkraAI/sinapse-ai/issues)
+3. 提交 [GitHub Issue](https://github.com/SinapseAI/sinapse-ai/issues)
 
 ---
 
@@ -102,5 +102,5 @@ npx @sinapse/sinapse-ai install --force-upgrade
 
 ## 支持
 
-- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **文档**: [docs/](../)

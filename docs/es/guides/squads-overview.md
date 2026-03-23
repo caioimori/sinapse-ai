@@ -172,8 +172,8 @@ tags:
 
 | Squad             | Version | Descripcion                           | Repositorio                                                                      |
 | ----------------- | ------- | ------------------------------------- | -------------------------------------------------------------------------------- |
-| **etl-squad**     | 2.0.0   | Recoleccion y transformacion de datos | [sinapse-squads/etl](https://github.com/SynkraAI/sinapse-squads/tree/main/etl)         |
-| **creator-squad** | 1.0.0   | Utilidades de generacion de contenido | [sinapse-squads/creator](https://github.com/SynkraAI/sinapse-squads/tree/main/creator) |
+| **etl-squad**     | 2.0.0   | Recoleccion y transformacion de datos | [sinapse-squads/etl](https://github.com/SinapseAI/sinapse-squads/tree/main/etl)         |
+| **creator-squad** | 1.0.0   | Utilidades de generacion de contenido | [sinapse-squads/creator](https://github.com/SinapseAI/sinapse-squads/tree/main/creator) |
 
 ### Niveles de Distribucion
 
@@ -182,7 +182,7 @@ tags:
 │                    DISTRIBUCION DE SQUADS                    │
 ├─────────────────────────────────────────────────────────────┤
 │  Nivel 1: LOCAL        --> ./squads/           (Privado)    │
-│  Nivel 2: SINAPSE-SQUADS  --> github.com/SynkraAI (Publico)    │
+│  Nivel 2: SINAPSE-SQUADS  --> github.com/SinapseAI (Publico)    │
 │  Nivel 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)│
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -276,7 +276,7 @@ Usar versionado semantico:
 ## Proximos Pasos
 
 - **Crear Tu Primer Squad:** Seguir la [Guia de Squads](./squads-guide.md) para instrucciones detalladas
-- **Explorar Squads Oficiales:** Revisar [repositorio sinapse-squads](https://github.com/SynkraAI/sinapse-squads)
+- **Explorar Squads Oficiales:** Revisar [repositorio sinapse-squads](https://github.com/SinapseAI/sinapse-squads)
 - **Contribuir:** Ver [Guia de Contribucion de Squads](./contributing-squads.md)
 - **Aprender Formato de Tasks:** Leer [TASK-FORMAT-SPECIFICATION-V1](../../../.sinapse-ai/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
 

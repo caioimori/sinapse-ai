@@ -36,9 +36,9 @@ You **MUST**:
 You may **NOT**:
 
 - ❌ Remove or alter copyright notices from the Software
-- ❌ Use SynkraAI Inc. trademarks without written permission
+- ❌ Use SinapseAI Inc. trademarks without written permission
 - ❌ Hold the authors or copyright holders liable for any damages
-- ❌ Claim authorship or endorsement by SynkraAI Inc.
+- ❌ Claim authorship or endorsement by SinapseAI Inc.
 - ❌ Use the project name in a way that implies official endorsement
 
 ## Disclaimer of Warranties
@@ -54,7 +54,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Limitation of Liability
 
-IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS, OR SynkraAI INC. BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS, OR SinapseAI INC. BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Scope of Limitation
 
@@ -78,7 +78,7 @@ For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Trademarks
 
-The following are trademarks or registered trademarks of SynkraAI Inc.:
+The following are trademarks or registered trademarks of SinapseAI Inc.:
 
 - "SINAPSE"
 - "SINAPSE"
@@ -100,7 +100,7 @@ You may **NOT**:
 - Use trademarks in a way suggesting endorsement
 - Register similar trademarks
 
-For trademark licensing inquiries, contact: legal@SynkraAI.com
+For trademark licensing inquiries, contact: legal@SinapseAI.com
 
 ## Third-Party Dependencies
 
@@ -148,16 +148,16 @@ If any provision of these terms is found to be unenforceable, the remaining prov
 
 ## Entire Agreement
 
-These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and SynkraAI Inc. regarding use of SINAPSE.
+These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and SinapseAI Inc. regarding use of SINAPSE.
 
 ## Contact
 
 For questions about these terms:
 
-- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/sinapse-ai/issues)
-- **Email:** legal@SynkraAI.com
+- **GitHub Issues:** [Open an issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Email:** legal@SinapseAI.com
 - **Discord:** [Community Server](https://discord.gg/gk8jAdXWmj)
 
 ---
 
-**Copyright (c) 2025 SynkraAI Inc. All rights reserved.**
+**Copyright (c) 2025 SinapseAI Inc. All rights reserved.**

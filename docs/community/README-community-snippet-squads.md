@@ -2,7 +2,7 @@
 
 > 🌐 **EN** | [PT](../pt/community/README-community-snippet-squads.md) | [ES](../es/community/README-community-snippet-squads.md)
 
-> **Purpose:** Copy this snippet into the README.md of `SynkraAI/sinapse-squads` repository.
+> **Purpose:** Copy this snippet into the README.md of `SinapseAI/sinapse-squads` repository.
 
 ---
 
@@ -10,15 +10,15 @@
 
 For discussions, questions, and community interaction, visit our central hub:
 
-👉 **[SINAPSE Community Discussions](https://github.com/SynkraAI/sinapse-ai/discussions)**
+👉 **[SINAPSE Community Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)**
 
 | Need | Where to Go |
 |------|-------------|
-| 📦 **Squad questions?** | Use the ["Squads" category](https://github.com/SynkraAI/sinapse-ai/discussions/categories/squads) |
-| 💡 **Feature ideas?** | Start a [Discussion in "Ideas"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) |
-| 🐛 **Found a bug?** | [Open an issue](https://github.com/SynkraAI/sinapse-squads/issues/new/choose) in **this repository** |
-| 🙏 **Need help?** | Ask in ["Q&A"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/q-a) |
-| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SynkraAI/sinapse-ai/discussions/categories/show-and-tell) |
+| 📦 **Squad questions?** | Use the ["Squads" category](https://github.com/SinapseAI/sinapse-ai/discussions/categories/squads) |
+| 💡 **Feature ideas?** | Start a [Discussion in "Ideas"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) |
+| 🐛 **Found a bug?** | [Open an issue](https://github.com/SinapseAI/sinapse-squads/issues/new/choose) in **this repository** |
+| 🙏 **Need help?** | Ask in ["Q&A"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/q-a) |
+| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/show-and-tell) |
 
 ### Available Squads
 
@@ -31,8 +31,8 @@ For discussions, questions, and community interaction, visit our central hub:
 
 Have an idea for a new SINAPSE Squad? We'd love to hear it!
 
-1. Check existing [Squad proposals](https://github.com/SynkraAI/sinapse-squads/labels/new-squad)
-2. Open a [Squad Proposal issue](https://github.com/SynkraAI/sinapse-squads/issues/new?template=squad-proposal.md)
+1. Check existing [Squad proposals](https://github.com/SinapseAI/sinapse-squads/labels/new-squad)
+2. Open a [Squad Proposal issue](https://github.com/SinapseAI/sinapse-squads/issues/new?template=squad-proposal.md)
 3. Discuss in the community
 
 ---

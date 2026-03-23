@@ -398,9 +398,9 @@ jobs:
 
           ## 🔗 Links
 
-          * [GitHub Repository](https://github.com/SynkraAI/sinapse-ai)
-          * [Documentation](https://github.com/SynkraAI/sinapse-ai#readme)
-          * [Issues](https://github.com/SynkraAI/sinapse-ai/issues)
+          * [GitHub Repository](https://github.com/SinapseAI/sinapse-ai)
+          * [Documentation](https://github.com/SinapseAI/sinapse-ai#readme)
+          * [Issues](https://github.com/SinapseAI/sinapse-ai/issues)
           EOF
 
       - name: Update release with notes

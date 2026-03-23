@@ -205,7 +205,7 @@ Un squad es un paquete autocontenido que contiene:
 
 ```
 Nivel 1: LOCAL        --> ./squads/           (Privado)
-Nivel 2: SINAPSE-SQUADS  --> github.com/SynkraAI (Publico/Gratis)
+Nivel 2: SINAPSE-SQUADS  --> github.com/SinapseAI (Publico/Gratis)
 Nivel 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)
 ```
 
@@ -366,8 +366,8 @@ sinapse rebuild
 
 ### Obteniendo Ayuda
 
-- **GitHub Discussions**: [github.com/SynkraAI/sinapse-ai/discussions](https://github.com/SynkraAI/sinapse-ai/discussions)
-- **Issue Tracker**: [github.com/SynkraAI/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Discussions**: [github.com/SinapseAI/sinapse-ai/discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
+- **Issue Tracker**: [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **Discord**: [Unete a nuestro servidor](https://discord.gg/gk8jAdXWmj)
 
 ---

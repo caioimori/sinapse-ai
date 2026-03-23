@@ -176,7 +176,7 @@ const patterns = [
 ## Support
 
 For additional help:
-- GitHub Issues: https://github.com/SynkraAIinc/sinapse-ai/issues
+- GitHub Issues: https://github.com/SinapseAIinc/sinapse-ai/issues
 - Documentation: https://sinapse-ai.dev/docs
 - Story Reference: 2.3 - NPX Installation Context Detection
 

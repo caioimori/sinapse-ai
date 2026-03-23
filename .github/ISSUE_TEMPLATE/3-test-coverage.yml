@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Use this template to propose test coverage for sinapse-ai modules.
-        Related to [Issue #52](https://github.com/SynkraAI/sinapse-ai/issues/52) (global test coverage improvement).
+        Related to [Issue #52](https://github.com/SinapseAI/sinapse-ai/issues/52) (global test coverage improvement).
 
   - type: textarea
     id: modules

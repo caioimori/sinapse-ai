@@ -984,5 +984,5 @@ strategy:
 
 **有疑问？有问题吗？**
 
-- [打开问题](https://github.com/SynkraAI/sinapse-ai/issues)
+- [打开问题](https://github.com/SinapseAI/sinapse-ai/issues)
 - [加入 Discord](https://discord.gg/gk8jAdXWmj)

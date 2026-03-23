@@ -187,5 +187,5 @@ npx @sinapse/sinapse-ai install --force-upgrade
 
 - [故障排除](./installation/troubleshooting.md)
 - [FAQ](./installation/faq.md)
-- [GitHub 仓库](https://github.com/SynkraAI/sinapse-ai)
-- [Issue 追踪器](https://github.com/SynkraAI/sinapse-ai/issues)
+- [GitHub 仓库](https://github.com/SinapseAI/sinapse-ai)
+- [Issue 追踪器](https://github.com/SinapseAI/sinapse-ai/issues)

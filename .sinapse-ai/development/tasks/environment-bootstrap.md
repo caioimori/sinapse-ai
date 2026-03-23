@@ -728,7 +728,7 @@ Visibility:
   2. Private (recommended)
 
 GitHub Organization/Username:
-  Found organizations: SynkraAI
+  Found organizations: SinapseAI
   Or use personal account: your-username
 
 Select owner: _

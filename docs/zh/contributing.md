@@ -32,7 +32,7 @@ git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
 cd sinapse-ai
 
 # 添加 upstream 远程
-git remote add upstream https://github.com/SynkraAI/sinapse-ai.git
+git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
 ```
 
 ### 2. 设置开发环境
@@ -320,7 +320,7 @@ tasks:
 
 - [Squads 指南](../docs/guides/squads-guide.md) - 完整文档
 - [Squad 模板](../templates/squad/) - 从工作模板开始
-- [Squad 讨论](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) - 分享想法
+- [Squad 讨论](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) - 分享想法
 
 ---
 
@@ -524,8 +524,8 @@ gh pr checks  # 查看 PR 检查状态
 
 ## 获得帮助
 
-- **GitHub Issues：** [打开一个 issue](https://github.com/SynkraAI/sinapse-ai/issues)
-- **讨论：** [开始讨论](https://github.com/SynkraAI/sinapse-ai/discussions)
+- **GitHub Issues：** [打开一个 issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- **讨论：** [开始讨论](https://github.com/SinapseAI/sinapse-ai/discussions)
 - **社区：** [COMMUNITY.md](../COMMUNITY.md)
 
 ---
@@ -539,7 +539,7 @@ SINAPSE 使用 Open Core 模型，带有私人 `pro/` git 子模块（见 [ADR-P
 **您不需要 pro/ 子模块。** 标准克隆完美运行：
 
 ```bash
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 cd sinapse-ai
 npm install && npm test  # 所有测试都通过了，没有 pro/
 ```
@@ -550,7 +550,7 @@ npm install && npm test  # 所有测试都通过了，没有 pro/
 
 ```bash
 # 使用子模块克隆
-git clone --recurse-submodules https://github.com/SynkraAI/sinapse-ai.git
+git clone --recurse-submodules https://github.com/SinapseAI/sinapse-ai.git
 
 # 或添加到现有克隆
 git submodule update --init pro

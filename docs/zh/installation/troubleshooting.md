@@ -683,7 +683,7 @@ ls -la .sinapse-ai/
 
 1. 运行 `npx @sinapse/sinapse-ai status` 并记录输出
 2. 查看此故障排除指南
-3. 搜索现有 [GitHub 问题](https://github.com/SynkraAI/sinapse-ai/issues)
+3. 搜索现有 [GitHub 问题](https://github.com/SinapseAI/sinapse-ai/issues)
 
 ### 错误报告中包含的信息
 
@@ -718,7 +718,7 @@ ls -la .sinapse-ai/
 
 ### 支持渠道
 
-- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 - **文档**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

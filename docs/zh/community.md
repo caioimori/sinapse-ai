@@ -20,13 +20,13 @@
 1. 给仓库加星标
 2. 阅读 [README](../README.md)
 3. 设置您的 [开发环境](../CONTRIBUTING.md#getting-started)
-4. 在 [讨论](https://github.com/SynkraAI/sinapse-ai/discussions) 中介绍自己
+4. 在 [讨论](https://github.com/SinapseAI/sinapse-ai/discussions) 中介绍自己
 
 ### 寻找您的第一个贡献
 
-- 查找标记为 [`good-first-issue`](https://github.com/SynkraAI/sinapse-ai/labels/good-first-issue) 的 issue
-- 检查 [`help-wanted`](https://github.com/SynkraAI/sinapse-ai/labels/help-wanted) 以获得更复杂的任务
-- 浏览 [开放讨论](https://github.com/SynkraAI/sinapse-ai/discussions) 以帮助他人
+- 查找标记为 [`good-first-issue`](https://github.com/SinapseAI/sinapse-ai/labels/good-first-issue) 的 issue
+- 检查 [`help-wanted`](https://github.com/SinapseAI/sinapse-ai/labels/help-wanted) 以获得更复杂的任务
+- 浏览 [开放讨论](https://github.com/SinapseAI/sinapse-ai/discussions) 以帮助他人
 
 ## 沟通渠道
 
@@ -43,15 +43,15 @@
 - **小队** - 关于 SINAPSE Squads（模块化代理团队）的讨论
 - **MCP 生态系统** - 关于 MCP 工具和集成的讨论
 
-[加入讨论](https://github.com/SynkraAI/sinapse-ai/discussions)
+[加入讨论](https://github.com/SinapseAI/sinapse-ai/discussions)
 
 ### Issue 跟踪器
 
 用于错误报告和功能请求：
 
-- [sinapse-ai Issues](https://github.com/SynkraAI/sinapse-ai/issues) - 核心框架
-- [sinapse-squads Issues](https://github.com/SynkraAI/sinapse-squads/issues) - SINAPSE Squads
-- [mcp-ecosystem Issues](https://github.com/SynkraAI/mcp-ecosystem/issues) - MCP 工具
+- [sinapse-ai Issues](https://github.com/SinapseAI/sinapse-ai/issues) - 核心框架
+- [sinapse-squads Issues](https://github.com/SinapseAI/sinapse-squads/issues) - SINAPSE Squads
+- [mcp-ecosystem Issues](https://github.com/SinapseAI/mcp-ecosystem/issues) - MCP 工具
 
 ## 如何贡献
 
@@ -91,14 +91,14 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 ### 贡献者
 
 任何以任何方式对 SINAPSE 做出贡献的人。
-- 在我们的 [贡献者页面](https://github.com/SynkraAI/sinapse-ai/graphs/contributors) 上列出
+- 在我们的 [贡献者页面](https://github.com/SinapseAI/sinapse-ai/graphs/contributors) 上列出
 - 在发布说明中提及重大贡献
 
 ### 维护者
 
 审查 PR 并指导项目的核心团队成员：
 
-- [@SynkraAI](https://github.com/SynkraAI) - 项目负责人
+- [@SinapseAI](https://github.com/SinapseAI) - 项目负责人
 
 ### 成为维护者
 
@@ -111,7 +111,7 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 
 ### 贡献者墙
 
-所有贡献者都在我们的 [贡献者页面](https://github.com/SynkraAI/sinapse-ai/graphs/contributors) 上被认可。
+所有贡献者都在我们的 [贡献者页面](https://github.com/SinapseAI/sinapse-ai/graphs/contributors) 上被认可。
 
 ### 发布致谢
 
@@ -138,26 +138,26 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 
 我们遵循 [贡献者契约](../CODE_OF_CONDUCT.md)。请阅读并尊重它。
 
-报告违反行为至：conduct@SynkraAI.com
+报告违反行为至：conduct@SinapseAI.com
 
 ## 获得帮助
 
 ### 被某件事卡住了？
 
 1. 查看 [文档](../)
-2. 搜索 [现有讨论](https://github.com/SynkraAI/sinapse-ai/discussions)
+2. 搜索 [现有讨论](https://github.com/SinapseAI/sinapse-ai/discussions)
 3. 在问答讨论中提问
 4. 打开故障排除讨论
 
 ### 发现了一个 bug？
 
-1. 搜索 [现有 issue](https://github.com/SynkraAI/sinapse-ai/issues)
-2. 如果是新的，[打开错误报告](https://github.com/SynkraAI/sinapse-ai/issues/new?template=bug_report.md)
+1. 搜索 [现有 issue](https://github.com/SinapseAI/sinapse-ai/issues)
+2. 如果是新的，[打开错误报告](https://github.com/SinapseAI/sinapse-ai/issues/new?template=bug_report.md)
 
 ### 有想法吗？
 
-1. 在 [想法](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) 中检查是否存在
-2. 如果是新的，[分享您的想法](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=ideas)
+1. 在 [想法](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) 中检查是否存在
+2. 如果是新的，[分享您的想法](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas)
 3. 阅读我们的 [功能请求流程](../docs/FEATURE_PROCESS.md) 了解详细指南
 
 ## 项目路线图
@@ -165,11 +165,11 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 想知道 SINAPSE 的发展方向吗？查看我们的公开路线图：
 
 - [ROADMAP.md](../ROADMAP.md) - 高层愿景和计划功能
-- [GitHub 项目](https://github.com/orgs/SynkraAI/projects/1) - 详细跟踪板
+- [GitHub 项目](https://github.com/orgs/SinapseAI/projects/1) - 详细跟踪板
 
 路线图每月更新并反映社区意见。您可以通过以下方式影响我们的方向：
 
-1. **投票**支持 [讨论](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas) 中的想法
+1. **投票**支持 [讨论](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) 中的想法
 2. **通过 [RFC 流程](/../.github/RFC_TEMPLATE.md) 提议新功能**
 3. **直接贡献**到计划功能
 
@@ -196,7 +196,7 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 
 ### 外部资源
 
-- [SINAPSE GitHub 组织](https://github.com/SynkraAI)
+- [SINAPSE GitHub 组织](https://github.com/SinapseAI)
 - [变更日志](../CHANGELOG.md)
 
 ## 国际化
@@ -209,7 +209,7 @@ Squads 是在特定领域协作工作的专业 AI 代理团队：
 
 ## 项目状态
 
-- 当前版本：见 [发布](https://github.com/SynkraAI/sinapse-ai/releases)
+- 当前版本：见 [发布](https://github.com/SinapseAI/sinapse-ai/releases)
 - 变更日志：[CHANGELOG.md](../CHANGELOG.md)
 
 ---

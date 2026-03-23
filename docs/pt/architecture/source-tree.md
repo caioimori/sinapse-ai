@@ -19,7 +19,7 @@
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** DESCONTINUADO - Veja docs/framework/source-tree.md
-**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/sinapse-ai` no Q2 2026 (veja Decisão 005)
+**Aviso de Migração:** Este documento será migrado para o repositório `SinapseAI/sinapse-ai` no Q2 2026 (veja Decisão 005)
 
 ---
 
@@ -440,7 +440,7 @@ dependencies:
 
 **Decisão 005 define 5 repositórios separados:**
 
-### REPO 1: SynkraAI/sinapse-ai (MIT)
+### REPO 1: SinapseAI/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -477,7 +477,7 @@ sinapse-ai/
     └── e2e/
 ```
 
-### REPO 2: SynkraAI/squads (MIT)
+### REPO 2: SinapseAI/squads (MIT)
 
 ```
 squads/
@@ -499,7 +499,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
+### REPO 3: SinapseAI/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -519,7 +519,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### REPO 4: SynkraAI/certified-partners (Privado)
+### REPO 4: SinapseAI/certified-partners (Privado)
 
 ```
 certified-partners/
@@ -536,7 +536,7 @@ certified-partners/
     └── web/
 ```
 
-### REPO 5: SynkraAI/mmos (Privado + NDA)
+### REPO 5: SinapseAI/mmos (Privado + NDA)
 
 ```
 mmos/
@@ -705,7 +705,7 @@ outputs/                               # Saídas em runtime (gitignored)
 | Versão | Data       | Alterações                                                                        | Autor            |
 | ------ | ---------- | --------------------------------------------------------------------------------- | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial da árvore de código                                          | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado org para SynkraAI, substituído Squads pelo sistema Squads [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado org para SinapseAI, substituído Squads pelo sistema Squads [Story 6.10] | Dex (dev)        |
 
 ---
 

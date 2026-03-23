@@ -19,11 +19,11 @@
     "cli",
     "sinapse"
   ],
-  "author": "SynkraAI",
+  "author": "SinapseAI",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SynkraAI/sinapse-ai.git",
+    "url": "git+https://github.com/SinapseAI/sinapse-ai.git",
     "directory": "packages/sinapse-pro-cli"
   },
   "engines": {

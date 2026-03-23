@@ -5,8 +5,8 @@
 [![NPM Version](https://img.shields.io/npm/v/sinapse-ai.svg)](https://www.npmjs.com/package/sinapse-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
-[![CI](https://github.com/SynkraAI/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/SynkraAI/sinapse-ai/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/SynkraAI/sinapse-ai/branch/main/graph/badge.svg)](https://codecov.io/gh/SynkraAI/sinapse-ai)
+[![CI](https://github.com/SinapseAI/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/SinapseAI/sinapse-ai/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/SinapseAI/sinapse-ai/branch/main/graph/badge.svg)](https://codecov.io/gh/SinapseAI/sinapse-ai)
 [![Documentation](https://img.shields.io/badge/docs-available-orange.svg)](https://sinapsesquad.ai)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg)](LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -124,7 +124,7 @@ This two-phase approach eliminates both **planning inconsistency** and **context
 - **[Create my own AI agents](#creating-your-own-squad)** → Build agents for your domain
 - **[Browse ready-made Squads](docs/guides/squads-overview.md)** → See how to create and use AI agent teams
 - **[Understand the architecture](docs/architecture/ARCHITECTURE-INDEX.md)** → Deep technical dive
-- **[Report issues](https://github.com/SynkraAI/sinapse-ai/issues)** → Bug reports and feature requests
+- **[Report issues](https://github.com/SinapseAI/sinapse-ai/issues)** → Bug reports and feature requests
 
 ## Important: Keep Your SINAPSE Installation Updated
 
@@ -415,7 +415,7 @@ For contributors or advanced users who want to modify the source code:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 cd sinapse-ai
 
 # Install dependencies
@@ -598,7 +598,7 @@ Squads are modular AI agent teams. See the [Squads Overview](docs/guides/squads-
 
 ### External Squads
 
-- **[hybrid-ops](https://github.com/SynkraAI/sinapse-hybrid-ops-pedro-valerio)** - Human-agent hybrid operations (separate repository)
+- **[hybrid-ops](https://github.com/SinapseAI/sinapse-hybrid-ops-pedro-valerio)** - Human-agent hybrid operations (separate repository)
 
 ## SINAPSE Pro
 
@@ -625,7 +625,7 @@ For more information, run `npx sinapse-ai pro --help` after installation.
 
 ## Support
 
-- 🐛 [Issue Tracker](https://github.com/SynkraAI/sinapse-ai/issues) - Bug reports and feature requests
+- 🐛 [Issue Tracker](https://github.com/SinapseAI/sinapse-ai/issues) - Bug reports and feature requests
 - 💡 [Feature Process](docs/FEATURE_PROCESS.md) - How to propose new features
 - 📋 [How to Contribute](CONTRIBUTING.md)
 - 🗺️ [Roadmap](docs/roadmap.md) - See what we're building
@@ -724,7 +724,7 @@ See also:
 
 ## Contributors
 
-[![Contributors](https://contrib.rocks/image?repo=SynkraAI/sinapse-ai)](https://github.com/SynkraAI/sinapse-ai/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=SinapseAI/sinapse-ai)](https://github.com/SinapseAI/sinapse-ai/graphs/contributors)
 
 <sub>Built with ❤️ for the AI-assisted development community</sub>
 

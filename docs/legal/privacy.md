@@ -6,7 +6,7 @@
 
 ## Overview
 
-SINAPSE (AI-Orchestrated System) is an open-source project maintained by SynkraAI Inc. This privacy policy explains how we handle any data that may be collected when you use SINAPSE.
+SINAPSE (AI-Orchestrated System) is an open-source project maintained by SinapseAI Inc. This privacy policy explains how we handle any data that may be collected when you use SINAPSE.
 
 ## Data Collection
 
@@ -83,7 +83,7 @@ You have the right to:
 
 As an open-source project, all code is publicly available for inspection:
 
-- Repository: [github.com/SynkraAI/sinapse-ai](https://github.com/SynkraAI/sinapse-ai)
+- Repository: [github.com/SinapseAI/sinapse-ai](https://github.com/SinapseAI/sinapse-ai)
 - No hidden data collection mechanisms
 - All configuration options are documented
 
@@ -100,14 +100,14 @@ We take security seriously:
 - API keys and credentials are never stored by SINAPSE (users manage their own)
 - Regular security audits of the codebase
 
-For security vulnerabilities, please [open an issue](https://github.com/SynkraAI/sinapse-ai/issues) or email security@SynkraAI.com.
+For security vulnerabilities, please [open an issue](https://github.com/SinapseAI/sinapse-ai/issues) or email security@SinapseAI.com.
 
 ## Contact
 
 For privacy concerns or questions:
 
-- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/sinapse-ai/issues)
-- **Email:** privacy@SynkraAI.com
+- **GitHub Issues:** [Open an issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Email:** privacy@SinapseAI.com
 - **Discord:** [Community Server](https://discord.gg/gk8jAdXWmj)
 
 ## Changes to This Policy
@@ -124,4 +124,4 @@ This privacy policy is adapted from open-source privacy policy templates and fol
 
 ---
 
-**Copyright (c) 2025 SynkraAI Inc.**
+**Copyright (c) 2025 SinapseAI Inc.**

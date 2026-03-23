@@ -454,7 +454,7 @@ No scripts are truly orphaned -- all have at least one reference in the `install
 
 All scripts are located under:
 ```
-C:\Users\AllFluence-User\Workspaces\SINAPSE\SynkraAI\sinapse-ai\.sinapse-ai\development\scripts\
+C:\Users\AllFluence-User\Workspaces\SINAPSE\SinapseAI\sinapse-ai\.sinapse-ai\development\scripts\
 ```
 
 Full absolute paths for top-level scripts:

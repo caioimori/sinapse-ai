@@ -35,7 +35,7 @@ node .sinapse-ai/infrastructure/scripts/llm-routing/install-llm-routing.js
 **选项 2: 全新安装**
 ```bash
 # 克隆仓库
-git clone https://github.com/SynkraAI/sinapse-ai.git
+git clone https://github.com/SinapseAI/sinapse-ai.git
 cd sinapse-ai
 
 # 运行安装程序

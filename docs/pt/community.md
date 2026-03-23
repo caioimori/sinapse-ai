@@ -20,13 +20,13 @@ Estamos construindo o futuro do desenvolvimento orquestrado por IA juntos.
 1. Dê uma estrela no repositório
 2. Leia o [README](README.md)
 3. Configure seu [ambiente de desenvolvimento](CONTRIBUTING-PT.md#começando)
-4. Apresente-se nas [Discussões](https://github.com/SynkraAI/sinapse-ai/discussions)
+4. Apresente-se nas [Discussões](https://github.com/SinapseAI/sinapse-ai/discussions)
 
 ### Encontre Sua Primeira Contribuição
 
-- Procure issues marcadas com [`good-first-issue`](https://github.com/SynkraAI/sinapse-ai/labels/good-first-issue)
-- Verifique [`help-wanted`](https://github.com/SynkraAI/sinapse-ai/labels/help-wanted) para tarefas mais complexas
-- Navegue pelas [Discussões abertas](https://github.com/SynkraAI/sinapse-ai/discussions) para ajudar outros
+- Procure issues marcadas com [`good-first-issue`](https://github.com/SinapseAI/sinapse-ai/labels/good-first-issue)
+- Verifique [`help-wanted`](https://github.com/SinapseAI/sinapse-ai/labels/help-wanted) para tarefas mais complexas
+- Navegue pelas [Discussões abertas](https://github.com/SinapseAI/sinapse-ai/discussions) para ajudar outros
 
 ## Canais de Comunicação
 
@@ -43,15 +43,15 @@ Nosso hub principal de comunicação para todos os repositórios SINAPSE:
 - **Squads** - Discussões sobre Squads SINAPSE (equipes modulares de agentes)
 - **Ecossistema MCP** - Discussões sobre ferramentas e integrações MCP
 
-[Participe da Discussão](https://github.com/SynkraAI/sinapse-ai/discussions)
+[Participe da Discussão](https://github.com/SinapseAI/sinapse-ai/discussions)
 
 ### Rastreador de Issues
 
 Para relatórios de bugs e solicitações de funcionalidades:
 
-- [Issues do sinapse-ai](https://github.com/SynkraAI/sinapse-ai/issues) - Framework principal
-- [Issues do sinapse-squads](https://github.com/SynkraAI/sinapse-squads/issues) - Squads SINAPSE
-- [Issues do mcp-ecosystem](https://github.com/SynkraAI/mcp-ecosystem/issues) - Ferramentas MCP
+- [Issues do sinapse-ai](https://github.com/SinapseAI/sinapse-ai/issues) - Framework principal
+- [Issues do sinapse-squads](https://github.com/SinapseAI/sinapse-squads/issues) - Squads SINAPSE
+- [Issues do mcp-ecosystem](https://github.com/SinapseAI/mcp-ecosystem/issues) - Ferramentas MCP
 
 ## Como Contribuir
 
@@ -91,14 +91,14 @@ Veja [docs/Squads.md](docs/Squads.md) para detalhes sobre como criar seu própri
 ### Contribuidores
 
 Qualquer pessoa que contribuiu para o SINAPSE de qualquer forma.
-- Listados em nossa [página de Contribuidores](https://github.com/SynkraAI/sinapse-ai/graphs/contributors)
+- Listados em nossa [página de Contribuidores](https://github.com/SinapseAI/sinapse-ai/graphs/contributors)
 - Mencionados nas notas de release para contribuições significativas
 
 ### Mantenedores
 
 Membros da equipe principal que revisam PRs e guiam o projeto:
 
-- [@SynkraAI](https://github.com/SynkraAI) - Líder do Projeto
+- [@SinapseAI](https://github.com/SinapseAI) - Líder do Projeto
 
 ### Tornando-se um Mantenedor
 
@@ -111,7 +111,7 @@ Contribuidores ativos podem ser convidados a se tornarem mantenedores. Procuramo
 
 ### Mural de Contribuidores
 
-Todos os contribuidores são reconhecidos em nossa [página de Contribuidores](https://github.com/SynkraAI/sinapse-ai/graphs/contributors).
+Todos os contribuidores são reconhecidos em nossa [página de Contribuidores](https://github.com/SinapseAI/sinapse-ai/graphs/contributors).
 
 ### Créditos em Releases
 
@@ -138,26 +138,26 @@ Para mudanças significativas:
 
 Seguimos o [Contributor Covenant](CODE_OF_CONDUCT-PT.md). Por favor, leia e respeite-o.
 
-Reporte violações para: conduct@SynkraAI.com
+Reporte violações para: conduct@SinapseAI.com
 
 ## Obtendo Ajuda
 
 ### Travado em algo?
 
 1. Verifique a [Documentação](docs/)
-2. Pesquise [Discussões existentes](https://github.com/SynkraAI/sinapse-ai/discussions)
+2. Pesquise [Discussões existentes](https://github.com/SinapseAI/sinapse-ai/discussions)
 3. Pergunte nas Discussões de Q&A
 4. Abra uma discussão de Troubleshooting
 
 ### Encontrou um bug?
 
-1. Pesquise [issues existentes](https://github.com/SynkraAI/sinapse-ai/issues)
-2. Se for novo, [abra um relatório de bug](https://github.com/SynkraAI/sinapse-ai/issues/new?template=bug_report.md)
+1. Pesquise [issues existentes](https://github.com/SinapseAI/sinapse-ai/issues)
+2. Se for novo, [abra um relatório de bug](https://github.com/SinapseAI/sinapse-ai/issues/new?template=bug_report.md)
 
 ### Tem uma ideia?
 
-1. Verifique se existe em [Ideias](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas)
-2. Se for nova, [compartilhe sua ideia](https://github.com/SynkraAI/sinapse-ai/discussions/new?category=ideas)
+1. Verifique se existe em [Ideias](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas)
+2. Se for nova, [compartilhe sua ideia](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas)
 3. Leia nosso [Processo de Solicitação de Features](docs/FEATURE_PROCESS.md) para diretrizes detalhadas
 
 ## Roadmap do Projeto
@@ -165,11 +165,11 @@ Reporte violações para: conduct@SynkraAI.com
 Quer saber para onde o SINAPSE está indo? Confira nosso roadmap público:
 
 - [ROADMAP-PT.md](ROADMAP-PT.md) - Visão de alto nível e funcionalidades planejadas
-- [Projeto GitHub](https://github.com/orgs/SynkraAI/projects/1) - Quadro de rastreamento detalhado
+- [Projeto GitHub](https://github.com/orgs/SinapseAI/projects/1) - Quadro de rastreamento detalhado
 
 O roadmap é atualizado mensalmente e reflete a contribuição da comunidade. Você pode influenciar nossa direção por:
 
-1. **Votando** em ideias nas [Discussões](https://github.com/SynkraAI/sinapse-ai/discussions/categories/ideas)
+1. **Votando** em ideias nas [Discussões](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas)
 2. **Propondo** novas features via o [processo de RFC](/.github/RFC_TEMPLATE.md)
 3. **Contribuindo** diretamente para features planejadas
 
@@ -196,7 +196,7 @@ Veja [Processo de Solicitação de Features](docs/FEATURE_PROCESS.md) para detal
 
 ### Recursos Externos
 
-- [Organização SINAPSE no GitHub](https://github.com/SynkraAI)
+- [Organização SINAPSE no GitHub](https://github.com/SinapseAI)
 - [Changelog](CHANGELOG.md)
 
 ## Internacionalização
@@ -209,7 +209,7 @@ Aceitamos contribuições em todos os idiomas!
 
 ## Status do Projeto
 
-- Versão Atual: Veja [releases](https://github.com/SynkraAI/sinapse-ai/releases)
+- Versão Atual: Veja [releases](https://github.com/SinapseAI/sinapse-ai/releases)
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
 
 ---

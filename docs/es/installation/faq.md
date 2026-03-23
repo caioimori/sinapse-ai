@@ -562,7 +562,7 @@ projectStatus:
 
 **Respuesta:**
 
-1. **Haga fork del repositorio:** https://github.com/SynkraAI/sinapse-ai
+1. **Haga fork del repositorio:** https://github.com/SinapseAI/sinapse-ai
 
 2. **Cree una rama de feature:**
 
@@ -598,8 +598,8 @@ projectStatus:
 | ------------------- | ---------------------------------------------------------- |
 | **Documentación**   | `docs/` en su proyecto                                    |
 | **Solución de Problemas** | [troubleshooting.md](./troubleshooting.md)                 |
-| **Issues de GitHub**   | https://github.com/SynkraAI/sinapse-ai/issues |
-| **Código Fuente**     | https://github.com/SynkraAI/sinapse-ai        |
+| **Issues de GitHub**   | https://github.com/SinapseAI/sinapse-ai/issues |
+| **Código Fuente**     | https://github.com/SinapseAI/sinapse-ai        |
 
 **Antes de pedir ayuda:**
 

@@ -279,7 +279,7 @@ sinapse memory reset
 Si encuentras problemas no cubiertos aqui:
 
 1. **Verificar Logs**: Revisar `.sinapse-ai/logs/upgrade.log`
-2. **GitHub Issues**: [github.com/SynkraAI/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+2. **GitHub Issues**: [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
 3. **Comunidad Discord**: [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 4. **Documentacion**: [directorio docs](./getting-started.md)
 
