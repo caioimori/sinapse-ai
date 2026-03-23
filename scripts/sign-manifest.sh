@@ -25,7 +25,7 @@ MANIFEST_PATH="$PROJECT_ROOT/.sinapse-ai/install-manifest.yaml"
 SIGNATURE_PATH="$MANIFEST_PATH.minisig"
 
 echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
-echo -e "${YELLOW}  SINAPSE-Core Manifest Signing Tool${NC}"
+echo -e "${YELLOW}  SINAPSE Manifest Signing Tool${NC}"
 echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
 echo ""
 

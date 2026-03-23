@@ -158,7 +158,7 @@ NODE_ENV=development
 SINAPSE_DEBUG=false
 
 # Opcional: Configuracion MCP
-SYNKRA_API_TOKEN=your-synkra-token
+SINAPSE_API_TOKEN=your-sinapse-token
 ```
 
 ### Paso 3: Verificar Instalacion

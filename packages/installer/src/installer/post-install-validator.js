@@ -319,7 +319,7 @@ function validateManifestEntry(entry, index) {
 
 /**
  * Post-Installation Validator Class
- * Comprehensive validation of SINAPSE-Core installation with security hardening
+ * Comprehensive validation of SINAPSE installation with security hardening
  */
 class PostInstallValidator {
   /**
@@ -992,7 +992,7 @@ class PostInstallValidator {
       this.issues.push({
         type: IssueType.MISSING_FILE,
         severity: Severity.CRITICAL,
-        message: 'SINAPSE-Core directory not found',
+        message: 'SINAPSE directory not found',
         details: `Expected at: ${this.sinapseCoreTarget}`,
         remediation: 'Run `npx sinapse-ai install`',
         relativePath: null,
@@ -1413,7 +1413,7 @@ function formatReport(report, options = {}) {
   const lines = [];
 
   lines.push('');
-  lines.push(`${c.bold}SINAPSE-Core Installation Validation Report${c.reset}`);
+  lines.push(`${c.bold}SINAPSE Installation Validation Report${c.reset}`);
   lines.push(`${c.gray}${'─'.repeat(50)}${c.reset}`);
 
   // Signature status

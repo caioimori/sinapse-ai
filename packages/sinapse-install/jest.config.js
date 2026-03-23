@@ -1,5 +1,5 @@
 /**
- * Jest configuration for @synkra/sinapse-install package
+ * Jest configuration for @sinapse/sinapse-install package
  */
 
 module.exports = {

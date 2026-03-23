@@ -43,7 +43,7 @@
 
 ```bash
 # 创建完整备份
-npx @synkra/sinapse-ai backup --complete
+npx @sinapse/sinapse-ai backup --complete
 
 # 或手动备份重要目录
 tar -czf sinapse-backup-$(date +%Y%m%d).tar.gz \
@@ -63,13 +63,13 @@ tar -czf sinapse-backup-$(date +%Y%m%d).tar.gz \
 
 ```bash
 # 基本卸载（保留用户数据）
-npx @synkra/sinapse-ai uninstall
+npx @sinapse/sinapse-ai uninstall
 
 # 完全卸载（删除所有内容）
-npx @synkra/sinapse-ai uninstall --complete
+npx @sinapse/sinapse-ai uninstall --complete
 
 # 卸载并保留数据
-npx @synkra/sinapse-ai uninstall --keep-data
+npx @sinapse/sinapse-ai uninstall --keep-data
 ```
 
 ### 交互式卸载
@@ -77,7 +77,7 @@ npx @synkra/sinapse-ai uninstall --keep-data
 对于引导式卸载：
 
 ```bash
-npx @synkra/sinapse-ai uninstall --interactive
+npx @sinapse/sinapse-ai uninstall --interactive
 ```
 
 这会提示您：
@@ -121,14 +121,14 @@ npx @synkra/sinapse-ai uninstall --interactive
 
 ```bash
 # 完全移除
-npx @synkra/sinapse-ai uninstall --complete --no-backup
+npx @sinapse/sinapse-ai uninstall --complete --no-backup
 ```
 
 ### 步骤 4：删除全局安装
 
 ```bash
 # 删除全局 npm 包
-npm uninstall -g @synkra/sinapse-ai
+npm uninstall -g @sinapse/sinapse-ai
 
 # 删除 npx 缓存
 npm cache clean --force
@@ -140,7 +140,7 @@ npm cache clean --force
 
 ```powershell
 # 删除 AppData 文件
-Remove-Item -Recurse -Force "$env:APPDATA\@synkra/sinapse-ai"
+Remove-Item -Recurse -Force "$env:APPDATA\@sinapse/sinapse-ai"
 
 # 删除临时文件
 Remove-Item -Recurse -Force "$env:TEMP\sinapse-*"
@@ -154,10 +154,10 @@ Remove-Item -Path "HKCU:\Software\SINAPSE" -Recurse
 ```bash
 # 删除配置文件
 rm -rf ~/.sinapse
-rm -rf ~/.config/@synkra/sinapse-ai
+rm -rf ~/.config/@sinapse/sinapse-ai
 
 # 删除缓存
-rm -rf ~/.cache/@synkra/sinapse-ai
+rm -rf ~/.cache/@sinapse/sinapse-ai
 
 # 删除临时文件
 rm -rf /tmp/sinapse-*
@@ -169,13 +169,13 @@ rm -rf /tmp/sinapse-*
 
 ```bash
 # 仅删除代理
-npx @synkra/sinapse-ai uninstall agents
+npx @sinapse/sinapse-ai uninstall agents
 
 # 仅删除工作流
-npx @synkra/sinapse-ai uninstall workflows
+npx @sinapse/sinapse-ai uninstall workflows
 
 # 删除内存层
-npx @synkra/sinapse-ai uninstall memory-layer
+npx @sinapse/sinapse-ai uninstall memory-layer
 
 # 删除特定代理
 *uninstall agent-name
@@ -255,7 +255,7 @@ fi
 
 # 停止所有进程
 echo "停止所有进程..."
-pkill -f "@synkra/sinapse-ai" || true
+pkill -f "@sinapse/sinapse-ai" || true
 pkill -f "sinapse-developer" || true
 
 # 删除项目文件
@@ -266,17 +266,17 @@ rm -rf workflows/
 rm -rf tasks/
 rm -rf templates/
 rm -rf Squads/
-rm -rf node_modules/@synkra/sinapse-ai/
+rm -rf node_modules/@sinapse/sinapse-ai/
 
 # 删除全局文件
 echo "删除全局文件..."
-npm uninstall -g @synkra/sinapse-ai
+npm uninstall -g @sinapse/sinapse-ai
 
 # 删除用户数据
 echo "删除用户数据..."
 rm -rf ~/.sinapse
-rm -rf ~/.config/@synkra/sinapse-ai
-rm -rf ~/.cache/@synkra/sinapse-ai
+rm -rf ~/.config/@sinapse/sinapse-ai
+rm -rf ~/.cache/@sinapse/sinapse-ai
 
 # 清理 npm 缓存
 echo "清理 npm 缓存..."
@@ -284,9 +284,9 @@ npm cache clean --force
 
 # 从 package.json 中删除
 echo "更新 package.json..."
-npm uninstall @synkra/sinapse-ai/core
-npm uninstall @synkra/sinapse-ai/memory
-npm uninstall @synkra/sinapse-ai/meta-agent
+npm uninstall @sinapse/sinapse-ai/core
+npm uninstall @sinapse/sinapse-ai/memory
+npm uninstall @sinapse/sinapse-ai/meta-agent
 
 echo "卸载完成！"
 ```
@@ -299,10 +299,10 @@ echo "卸载完成！"
 
 ```bash
 # Linux/macOS
-sudo npx @synkra/sinapse-ai uninstall --complete
+sudo npx @sinapse/sinapse-ai uninstall --complete
 
 # Windows（以管理员身份运行）
-npx @synkra/sinapse-ai uninstall --complete
+npx @sinapse/sinapse-ai uninstall --complete
 ```
 
 #### 2. 进程仍在运行
@@ -311,11 +311,11 @@ npx @synkra/sinapse-ai uninstall --complete
 # 强制停止所有进程
 # Linux/macOS
 killall -9 node
-killall -9 @synkra/sinapse-ai
+killall -9 @sinapse/sinapse-ai
 
 # Windows
 taskkill /F /IM node.exe
-taskkill /F /IM @synkra/sinapse-ai.exe
+taskkill /F /IM @sinapse/sinapse-ai.exe
 ```
 
 ## 卸载验证检查清单

@@ -52,7 +52,7 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 ├─────────────────────────────────────────────────────────────┤
 │  Nivel 1: LOCAL        → ./squads/           (Privado)       │
 │  Nivel 2: SINAPSE-SQUADS  → github.com/SynkraAI (Publico/Gratis)│
-│  Nivel 3: SYNKRA API   → api.synkra.dev      (Marketplace)   │
+│  Nivel 3: SINAPSE API   → api.sinapse.ai      (Marketplace)   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -557,10 +557,10 @@ Esto crea un PR a [SynkraAI/sinapse-squads](https://github.com/SynkraAI/sinapse-
 
 ```bash
 # Configurar autenticacion
-export SYNKRA_API_TOKEN="your-token"
+export SINAPSE_API_TOKEN="your-token"
 
 # Sincronizar al marketplace
-*sync-squad-synkra ./squads/my-squad --public
+*sync-squad-sinapse ./squads/my-squad --public
 ```
 
 ### Descargando Squads
@@ -634,7 +634,7 @@ El Cargador de Squad resuelve squads en este orden:
 1. Local     → ./squads/{name}/
 2. npm       → node_modules/@sinapse-squads/{name}/
 3. Workspace → ../{name}/ (monorepo)
-4. Registry  → api.synkra.dev/squads/{name}
+4. Registry  → api.sinapse.ai/squads/{name}
 ```
 
 ### Uso Programatico
@@ -771,7 +771,7 @@ Si. El Cargador de Squad resuelve desde multiples fuentes. Los squads locales ti
 
 1. Actualizar version en `squad.yaml` (semver)
 2. Ejecutar `*validate-squad --strict`
-3. Re-publicar: `*publish-squad` o `*sync-squad-synkra`
+3. Re-publicar: `*publish-squad` o `*sync-squad-sinapse`
 
 ### Pueden los Squads depender de otros Squads?
 
@@ -786,7 +786,7 @@ dependencies:
 ### Como hago un Squad privado?
 
 - **Nivel 1**: Mantener en `./squads/` (sin commit) - agregar a `.gitignore`
-- **Nivel 3**: Sincronizar con bandera `--private`: `*sync-squad-synkra my-squad --private`
+- **Nivel 3**: Sincronizar con bandera `--private`: `*sync-squad-sinapse my-squad --private`
 
 ### Cual es la version minima de SINAPSE para Squads?
 

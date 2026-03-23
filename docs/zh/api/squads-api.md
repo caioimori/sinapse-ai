@@ -12,7 +12,7 @@ Squads API允许：
 - **Marketplace**: 发现和浏览公共squads
 - **管理**: 更新可见性、删除squads
 
-**基础URL**: `https://api.synkra.ai`
+**基础URL**: `https://api.sinapse.ai`
 
 ## 认证
 
@@ -30,7 +30,7 @@ Authorization: Bearer sk_your_api_key
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
-获取您的API密钥：https://synkra.ai/settings/api-keys
+获取您的API密钥：https://sinapse.ai/settings/api-keys
 
 ## 端点
 
@@ -60,7 +60,7 @@ POST /api/squads/sync
 **请求示例**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/sync \
+curl -X POST https://api.sinapse.ai/api/squads/sync \
   -H "Authorization: Bearer sk_your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -127,7 +127,7 @@ POST /api/squads/sync/batch
 **请求示例**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/sync/batch \
+curl -X POST https://api.sinapse.ai/api/squads/sync/batch \
   -H "Authorization: Bearer sk_your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -214,10 +214,10 @@ GET /api/squads
 
 ```bash
 # 列出所有公共squads
-curl https://api.synkra.ai/api/squads
+curl https://api.sinapse.ai/api/squads
 
 # 带过滤器搜索
-curl "https://api.synkra.ai/api/squads?tags=devops,automation&search=deploy&official=true&limit=10"
+curl "https://api.sinapse.ai/api/squads?tags=devops,automation&search=deploy&official=true&limit=10"
 ```
 
 **成功响应** (200):
@@ -272,7 +272,7 @@ GET /api/squads/mine
 **请求示例**:
 
 ```bash
-curl https://api.synkra.ai/api/squads/mine \
+curl https://api.sinapse.ai/api/squads/mine \
   -H "Authorization: Bearer sk_your_api_key"
 ```
 
@@ -326,10 +326,10 @@ GET /api/squads/:id
 
 ```bash
 # 通过squad_id
-curl https://api.synkra.ai/api/squads/devops-squad
+curl https://api.sinapse.ai/api/squads/devops-squad
 
 # 通过UUID
-curl https://api.synkra.ai/api/squads/550e8400-e29b-41d4-a716-446655440000
+curl https://api.sinapse.ai/api/squads/550e8400-e29b-41d4-a716-446655440000
 ```
 
 **成功响应** (200):
@@ -403,7 +403,7 @@ PATCH /api/squads/:id
 **请求示例**:
 
 ```bash
-curl -X PATCH https://api.synkra.ai/api/squads/my-squad \
+curl -X PATCH https://api.sinapse.ai/api/squads/my-squad \
   -H "Authorization: Bearer sk_your_api_key" \
   -H "Content-Type: application/json" \
   -d '{"isPublic": true}'
@@ -445,7 +445,7 @@ DELETE /api/squads/:id
 **请求示例**:
 
 ```bash
-curl -X DELETE https://api.synkra.ai/api/squads/my-old-squad \
+curl -X DELETE https://api.sinapse.ai/api/squads/my-old-squad \
   -H "Authorization: Bearer sk_your_api_key"
 ```
 
@@ -479,7 +479,7 @@ POST /api/squads/validate
 **请求示例**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/validate \
+curl -X POST https://api.sinapse.ai/api/squads/validate \
   -H "Content-Type: application/json" \
   -d '{
     "squadData": {
@@ -559,21 +559,21 @@ X-RateLimit-Reset: 1703577600
 
 ## CLI集成
 
-`*sync-squad-synkra`命令使用此API：
+`*sync-squad-sinapse`命令使用此API：
 
 ```bash
 # 同步单个squad
 @squad-creator
-*sync-squad-synkra ./squads/my-squad --public
+*sync-squad-sinapse ./squads/my-squad --public
 
 # 批量同步所有squads
-*sync-squad-synkra ./squads/* --public
+*sync-squad-sinapse ./squads/* --public
 ```
 
 配置API密钥：
 
 ```bash
-export SYNKRA_API_TOKEN="sk_your_api_key"
+export SINAPSE_API_TOKEN="sk_your_api_key"
 ```
 
 ---
@@ -592,7 +592,7 @@ export SYNKRA_API_TOKEN="sk_your_api_key"
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://api.synkra.ai"
+      "value": "https://api.sinapse.ai"
     },
     {
       "key": "apiKey",
@@ -738,7 +738,7 @@ export SYNKRA_API_TOKEN="sk_your_api_key"
 }
 ```
 
-将上述JSON保存为 `synkra-squads-api.postman_collection.json` 并导入Postman。
+将上述JSON保存为 `sinapse-squads-api.postman_collection.json` 并导入Postman。
 
 ---
 

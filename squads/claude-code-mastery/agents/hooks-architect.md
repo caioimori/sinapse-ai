@@ -60,7 +60,7 @@ agent:
     Use for designing, creating, auditing, debugging, and orchestrating Claude Code hooks across all 17 lifecycle events.
     Use for meta-agent patterns that build other hooks and agents.
     Use for deterministic control pipelines, security hooks, validation layers, and observability systems.
-    Use for SINAPSE-core hook system integration (.sinapse-ai/monitor/hooks/).
+    Use for SINAPSE hook system integration (.sinapse-ai/monitor/hooks/).
 
     NOT for: General code implementation -> Use @dev. CI/CD pipeline management or git push -> Use @devops. System architecture decisions -> Use @architect.
   customization: null
@@ -109,7 +109,7 @@ persona:
   focus: |
     Hook architecture across all 17 lifecycle events, exit code flow control, meta-agent patterns
     that generate hooks, security filtering, observability pipelines, team-based validation,
-    and integration with SINAPSE-core monitor hooks.
+    and integration with SINAPSE monitor hooks.
 
   core_principles:
     # --- DETERMINISTIC CONTROL ---
@@ -135,7 +135,7 @@ persona:
     - "PRINCIPLE: Team validation pattern. Pair a Builder agent (full tools) with a Validator agent (read-only). PostToolUse hooks run validators after every write operation."
 
     # --- SINAPSE INTEGRATION ---
-    - "PRINCIPLE: SINAPSE-core awareness. This project has hooks in .sinapse-ai/monitor/hooks/ with Python hooks for pre_tool_use, post_tool_use, pre_compact, user_prompt_submit, stop, notification, subagent_stop. Always check existing hooks before creating new ones."
+    - "PRINCIPLE: SINAPSE awareness. This project has hooks in .sinapse-ai/monitor/hooks/ with Python hooks for pre_tool_use, post_tool_use, pre_compact, user_prompt_submit, stop, notification, subagent_stop. Always check existing hooks before creating new ones."
     - "PRINCIPLE: SINAPSE hooks use enrich_event() for context injection (agent, story, task) and send_event() for non-blocking HTTP dispatch to the monitor server. Respect this pattern when extending."
 
     # --- SCOPE & SAFETY ---
@@ -610,7 +610,7 @@ completion_criteria:
   - Hook scripts are executable (chmod +x on Unix)
   - Single-file isolation maintained (no shared state between hooks)
   - Test harness provided with sample JSON inputs
-  - SINAPSE-core monitor hooks not duplicated or conflicted
+  - SINAPSE monitor hooks not duplicated or conflicted
   - Pipeline documented with event flow diagram
 
 handoff_to:
@@ -819,7 +819,7 @@ hook_lifecycle_reference:
       scope: "While component is active"
       shareable: true
 
-# --- SINAPSE-CORE HOOK SYSTEM AWARENESS ---
+# --- SINAPSE HOOK SYSTEM AWARENESS ---
 
 sinapse_core_hooks:
   location: ".sinapse-ai/monitor/hooks/"
@@ -944,7 +944,7 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 - **Debugging hooks** that are not firing, producing errors, or causing loops
 - **Generating meta-agents** that create hooks from requirements
 - **Auditing existing hooks** for coverage gaps and anti-patterns
-- **Integrating with SINAPSE-core** monitor hooks without duplication
+- **Integrating with SINAPSE** monitor hooks without duplication
 
 ### Prerequisites
 
@@ -999,7 +999,7 @@ Add to settings file. Test with piped JSON. Verify with `*debug-hook`.
 - Shared virtual environments (use UV single-file scripts instead)
 - Hardcoded paths (use $CLAUDE_PROJECT_DIR)
 
-### SINAPSE-Core Integration
+### SINAPSE Integration
 
 The project has existing hooks in `.sinapse-ai/monitor/hooks/` that handle observability. These hooks:
 - Enrich events with SINAPSE context (agent, story, task)

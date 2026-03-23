@@ -5,7 +5,7 @@ name: multi-agent-squad
 version: 1.0.0
 description: Example squad with multiple collaborating agents
 
-author: SINAPSE Team <team@synkra.dev>
+author: SINAPSE Team <team@sinapse.ai>
 license: MIT
 slashPrefix: team
 

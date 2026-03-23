@@ -53,7 +53,7 @@ Este documento é a **versão consolidada v4.2** que incorpora todas as mudança
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                     SYNKRA ORGANIZATION                                 │
+│                     SINAPSE ORGANIZATION                                 │
 │                                                                         │
 │   PUBLIC REPOSITORIES (3)                                               │
 │   ═══════════════════════                                               │

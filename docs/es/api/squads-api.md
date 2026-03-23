@@ -12,7 +12,7 @@ La API de Squads permite:
 - **Marketplace**: Descubrir y explorar squads publicos
 - **Gestion**: Actualizar visibilidad, eliminar squads
 
-**URL Base**: `https://api.synkra.ai`
+**URL Base**: `https://api.sinapse.ai`
 
 ## Autenticacion
 
@@ -30,7 +30,7 @@ Authorization: Bearer sk_tu_clave_api
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
-Obtiene tu clave API de: https://synkra.ai/settings/api-keys
+Obtiene tu clave API de: https://sinapse.ai/settings/api-keys
 
 ## Endpoints
 
@@ -60,7 +60,7 @@ POST /api/squads/sync
 **Ejemplo de Solicitud**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/sync \
+curl -X POST https://api.sinapse.ai/api/squads/sync \
   -H "Authorization: Bearer sk_tu_clave_api" \
   -H "Content-Type: application/json" \
   -d '{
@@ -127,7 +127,7 @@ POST /api/squads/sync/batch
 **Ejemplo de Solicitud**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/sync/batch \
+curl -X POST https://api.sinapse.ai/api/squads/sync/batch \
   -H "Authorization: Bearer sk_tu_clave_api" \
   -H "Content-Type: application/json" \
   -d '{
@@ -214,10 +214,10 @@ GET /api/squads
 
 ```bash
 # Listar todos los squads publicos
-curl https://api.synkra.ai/api/squads
+curl https://api.sinapse.ai/api/squads
 
 # Buscar con filtros
-curl "https://api.synkra.ai/api/squads?tags=devops,automation&search=deploy&official=true&limit=10"
+curl "https://api.sinapse.ai/api/squads?tags=devops,automation&search=deploy&official=true&limit=10"
 ```
 
 **Respuesta Exitosa** (200):
@@ -272,7 +272,7 @@ GET /api/squads/mine
 **Ejemplo de Solicitud**:
 
 ```bash
-curl https://api.synkra.ai/api/squads/mine \
+curl https://api.sinapse.ai/api/squads/mine \
   -H "Authorization: Bearer sk_tu_clave_api"
 ```
 
@@ -326,10 +326,10 @@ GET /api/squads/:id
 
 ```bash
 # Por squad_id
-curl https://api.synkra.ai/api/squads/devops-squad
+curl https://api.sinapse.ai/api/squads/devops-squad
 
 # Por UUID
-curl https://api.synkra.ai/api/squads/550e8400-e29b-41d4-a716-446655440000
+curl https://api.sinapse.ai/api/squads/550e8400-e29b-41d4-a716-446655440000
 ```
 
 **Respuesta Exitosa** (200):
@@ -403,7 +403,7 @@ PATCH /api/squads/:id
 **Ejemplo de Solicitud**:
 
 ```bash
-curl -X PATCH https://api.synkra.ai/api/squads/mi-squad \
+curl -X PATCH https://api.sinapse.ai/api/squads/mi-squad \
   -H "Authorization: Bearer sk_tu_clave_api" \
   -H "Content-Type: application/json" \
   -d '{"isPublic": true}'
@@ -445,7 +445,7 @@ DELETE /api/squads/:id
 **Ejemplo de Solicitud**:
 
 ```bash
-curl -X DELETE https://api.synkra.ai/api/squads/mi-squad-antiguo \
+curl -X DELETE https://api.sinapse.ai/api/squads/mi-squad-antiguo \
   -H "Authorization: Bearer sk_tu_clave_api"
 ```
 
@@ -479,7 +479,7 @@ POST /api/squads/validate
 **Ejemplo de Solicitud**:
 
 ```bash
-curl -X POST https://api.synkra.ai/api/squads/validate \
+curl -X POST https://api.sinapse.ai/api/squads/validate \
   -H "Content-Type: application/json" \
   -d '{
     "squadData": {
@@ -559,21 +559,21 @@ X-RateLimit-Reset: 1703577600
 
 ## Integracion CLI
 
-El comando `*sync-squad-synkra` usa esta API:
+El comando `*sync-squad-sinapse` usa esta API:
 
 ```bash
 # Sincronizar squad individual
 @squad-creator
-*sync-squad-synkra ./squads/mi-squad --public
+*sync-squad-sinapse ./squads/mi-squad --public
 
 # Sincronizacion por lotes de todos los squads
-*sync-squad-synkra ./squads/* --public
+*sync-squad-sinapse ./squads/* --public
 ```
 
 Configurar clave API:
 
 ```bash
-export SYNKRA_API_TOKEN="sk_tu_clave_api"
+export SINAPSE_API_TOKEN="sk_tu_clave_api"
 ```
 
 ---
@@ -592,7 +592,7 @@ Importa esta coleccion en Postman o Insomnia:
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://api.synkra.ai"
+      "value": "https://api.sinapse.ai"
     },
     {
       "key": "apiKey",
@@ -738,7 +738,7 @@ Importa esta coleccion en Postman o Insomnia:
 }
 ```
 
-Guarda el JSON anterior como `synkra-squads-api.postman_collection.json` e importa en Postman.
+Guarda el JSON anterior como `sinapse-squads-api.postman_collection.json` e importa en Postman.
 
 ---
 

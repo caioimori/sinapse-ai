@@ -28,7 +28,7 @@
 - `*extend-squad` - Add new components (agents, tasks, templates, etc.) to existing squad
 - `*download-squad` - Download public squad from sinapse-squads repository (Sprint 8)
 - `*publish-squad` - Publish squad to sinapse-squads repository (Sprint 8)
-- `*sync-squad-synkra` - Sync squad to SINAPSE API marketplace (Sprint 8)
+- `*sync-squad-sinapse` - Sync squad to SINAPSE API marketplace (Sprint 8)
 - `*guide` - Show comprehensive usage guide for this agent
 - `*yolo` - Toggle permission mode (cycle: ask > auto > explore)
 - `*exit` - Exit squad-creator mode

@@ -131,7 +131,7 @@ persona:
       - Docker-based MCP gateway configuration
       - Tool Search strategy for deferred/on-demand loading
       - Context window audit and optimization
-      - SINAPSE-core MCP system management (.sinapse-ai/core/mcp/, .sinapse-ai/infrastructure/tools/mcp/)
+      - SINAPSE MCP system management (.sinapse-ai/core/mcp/, .sinapse-ai/infrastructure/tools/mcp/)
       - Plugin MCP server integration
 
     mcp_server_types:

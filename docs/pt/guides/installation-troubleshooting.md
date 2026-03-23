@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia de Instalação e Solução de Problemas do SINAPSE-Core
+# Guia de Instalação e Solução de Problemas do SINAPSE
 
 > 🌐 [EN](../../guides/installation-troubleshooting.md) | **PT** | [ES](../../es/guides/installation-troubleshooting.md)
 
@@ -16,7 +16,7 @@
 npx sinapse-ai@latest
 ```
 
-Este comando baixa e executa a versão mais recente do instalador do SINAPSE-Core.
+Este comando baixa e executa a versão mais recente do instalador do SINAPSE.
 
 ## Requisitos do Sistema
 
@@ -324,4 +324,4 @@ Ao reportar problemas, por favor inclua:
 
 ---
 
-*Última atualização: Dezembro 2025 | SINAPSE-Core v2.2.0*
+*Última atualização: Dezembro 2025 | SINAPSE v2.2.0*

@@ -48,7 +48,7 @@
 | `*migrate-squad` | squad-creator-migrate.md | ✅ Hecho | Migrar formato legacy |
 | `*download-squad` | squad-creator-download.md | ⏳ Placeholder | Descargar desde registro |
 | `*publish-squad` | squad-creator-publish.md | ⏳ Placeholder | Publicar a sinapse-squads |
-| `*sync-squad-synkra` | squad-creator-sync-synkra.md | ⏳ Placeholder | Sincronizar al marketplace |
+| `*sync-squad-sinapse` | squad-creator-sync-sinapse.md | ⏳ Placeholder | Sincronizar al marketplace |
 
 ### Scripts Existentes
 

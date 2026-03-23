@@ -276,7 +276,7 @@ function validateBinScripts() {
 
 function main() {
   log('='.repeat(60));
-  log('SINAPSE-Core Package Completeness Validation');
+  log('SINAPSE Package Completeness Validation');
   log('='.repeat(60));
 
   const pkg = loadPackageJson();

@@ -1,5 +1,5 @@
 {
-  "name": "@synkra/sinapse-install",
+  "name": "@sinapse/sinapse-install",
   "version": "1.0.0",
   "description": "NPX installer for SINAPSE - AI-Orchestrated System for Full Stack Development",
   "main": "src/installer.js",
@@ -33,7 +33,7 @@
     "orchestration",
     "development"
   ],
-  "author": "SINAPSE AI <team@synkra.ai>",
+  "author": "SINAPSE AI <team@sinapse.ai>",
   "license": "MIT",
   "repository": {
     "type": "git",

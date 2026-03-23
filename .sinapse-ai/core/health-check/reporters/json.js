@@ -53,7 +53,7 @@ class JSONReporter {
 
     // Build report object
     const report = {
-      $schema: 'https://sinapse.synkra.ai/schemas/health-check-report.json',
+      $schema: 'https://sinapse.sinapse.ai/schemas/health-check-report.json',
       version: '1.0.0',
       timestamp,
       mode: config?.mode || 'quick',

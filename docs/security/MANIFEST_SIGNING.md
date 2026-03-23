@@ -1,10 +1,10 @@
 # Manifest Signing Guide
 
-This document explains how to set up and use the cryptographic signing system for SINAPSE-Core install manifests.
+This document explains how to set up and use the cryptographic signing system for SINAPSE install manifests.
 
 ## Overview
 
-SINAPSE-Core uses **Ed25519 digital signatures** (via minisign format) to verify the integrity and authenticity of the `install-manifest.yaml` file. This ensures that:
+SINAPSE uses **Ed25519 digital signatures** (via minisign format) to verify the integrity and authenticity of the `install-manifest.yaml` file. This ensures that:
 
 1. The manifest has not been tampered with after signing
 2. The manifest was signed by a party in possession of the authorized signing key

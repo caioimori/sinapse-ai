@@ -88,9 +88,9 @@ This squad was created through iterative research with devil's advocate validati
 | **Daniel Miessler** | Personal AI Infrastructure (PAI), Unix philosophy for AI | [Blog](https://danielmiessler.com/), [GitHub](https://github.com/danielmiessler/Personal_AI_Infrastructure) |
 | **Boris Cherny** | Claude Code creator, plan-first methodology, parallel instances | [Blog](https://boristane.com/), [Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built) |
 
-## SINAPSE-Core Integration
+## SINAPSE Integration
 
-This squad understands both Claude Code native capabilities AND the SINAPSE-core framework:
+This squad understands both Claude Code native capabilities AND the SINAPSE framework:
 
 | SINAPSE Concept | Claude Code Equivalent | Bridge Agent |
 |-------------|----------------------|-------------|

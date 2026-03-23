@@ -32,7 +32,7 @@
 
 ```mermaid
 flowchart TB
-    subgraph SINAPSE["SYNKRA SINAPSE"]
+    subgraph SINAPSE["SINAPSE"]
         direction TB
 
         subgraph CORE["核心: Task-First 引擎"]

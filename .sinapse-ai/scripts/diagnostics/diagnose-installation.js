@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * SINAPSE-Core Installation Diagnostic Tool
+ * SINAPSE Installation Diagnostic Tool
  *
  * Run this script to diagnose installation issues:
  *   node diagnose-installation.js
@@ -19,7 +19,7 @@ const REQUIRED_NPM = '9.0.0';
 
 console.log('');
 console.log('╔══════════════════════════════════════════════════════════════════╗');
-console.log('║          SINAPSE-Core Installation Diagnostic Tool                  ║');
+console.log('║          SINAPSE Installation Diagnostic Tool                  ║');
 console.log('╚══════════════════════════════════════════════════════════════════╝');
 console.log('');
 
@@ -246,7 +246,7 @@ if (hasErrors) {
 } else {
   console.log('✅ RESULT: All requirements met!');
   console.log('');
-  console.log('You can install SINAPSE-Core with:');
+  console.log('You can install SINAPSE with:');
   console.log('  npx sinapse-ai@latest');
   console.log('');
 }

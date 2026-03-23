@@ -565,7 +565,7 @@ mmos/
 Directorios: kebab-case (minúsculas, separados por guion)
   ✅ .sinapse-ai/
   ✅ Squads/
-  ❌ .SINAPSE-Core/
+  ❌ .sinapse-ai/
   ❌ legacy-packs/
 
 Archivos (Código): kebab-case con extensión

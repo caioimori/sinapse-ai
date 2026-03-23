@@ -62,7 +62,7 @@
 | `.sinapse-ai/development/tasks/squad-generate-workflow.md` | `*generate-workflow` | 生成 YAML 编排工作流 | 活跃 |
 | `.sinapse-ai/development/tasks/squad-creator-download.md` | `*download-squad` | 从公共仓库下载小队 | 占位符（Sprint 8） |
 | `.sinapse-ai/development/tasks/squad-creator-publish.md` | `*publish-squad` | 发布小队到 sinapse-squads | 占位符（Sprint 8） |
-| `.sinapse-ai/development/tasks/squad-creator-sync-synkra.md` | `*sync-squad-synkra` | 同步小队到 SINAPSE API | 占位符（Sprint 8） |
+| `.sinapse-ai/development/tasks/squad-creator-sync-sinapse.md` | `*sync-squad-sinapse` | 同步小队到 SINAPSE API | 占位符（Sprint 8） |
 
 ### 相关任务文件
 
@@ -163,12 +163,12 @@ flowchart TB
     subgraph DISTRIBUTE["分发"]
         LOCAL["本地<br/>./squads/"]
         PUBLIC["公共<br/>github.com/SynkraAI/sinapse-squads"]
-        MARKET["市场<br/>api.synkra.dev/squads"]
+        MARKET["市场<br/>api.sinapse.ai/squads"]
     end
 
     VALID --> LOCAL
     VALID -->|"*publish-squad"| PUBLIC
-    VALID -->|"*sync-squad-synkra"| MARKET
+    VALID -->|"*sync-squad-sinapse"| MARKET
 
     style INPUTS fill:#e1f5fe
     style DESIGN fill:#fff3e0
@@ -356,7 +356,7 @@ flowchart TB
 |---------|-----------|----------|
 | `*download-squad` | `squad-creator-download.md` | 从 sinapse-squads 下载小队 |
 | `*publish-squad` | `squad-creator-publish.md` | 发布小队到 sinapse-squads |
-| `*sync-squad-synkra` | `squad-creator-sync-synkra.md` | 同步小队到 SINAPSE API |
+| `*sync-squad-sinapse` | `squad-creator-sync-sinapse.md` | 同步小队到 SINAPSE API |
 
 ### 单个组件命令
 
@@ -462,13 +462,13 @@ flowchart LR
 
     SQUADS[("./squads/")]
     SINAPSE_SQUADS[("sinapse-squads")]
-    SYNKRA[("SINAPSE API")]
+    SINAPSE_MKT[("SINAPSE API")]
 
     SC_CREATE --> SQUADS
     SC_VALIDATE --> SQUADS
     SC_LIST --> SQUADS
     DEVOPS_PUB --> SINAPSE_SQUADS
-    DEVOPS_PUB --> SYNKRA
+    DEVOPS_PUB --> SINAPSE_MKT
 
     style SQUAD_CREATOR fill:#e3f2fd
     style DEV fill:#e8f5e9
@@ -576,9 +576,9 @@ flowchart LR
     end
 
     subgraph MARKET["级别 3：市场"]
-        M_API["api.synkra.dev/squads"]
+        M_API["api.sinapse.ai/squads"]
         M_DESC["通过 SINAPSE API 的高级小队"]
-        M_CMD["*sync-squad-synkra"]
+        M_CMD["*sync-squad-sinapse"]
     end
 
     LOCAL --> PUBLIC
@@ -684,7 +684,7 @@ flowchart LR
 |---------|----------|
 | **核心任务总数** | 12 个任务文件 |
 | **活跃任务** | 9 个（create、design、validate、list、analyze、extend、migrate、generate-skills、generate-workflow） |
-| **占位符任务** | 3 个（download、publish、sync-synkra） |
+| **占位符任务** | 3 个（download、publish、sync-sinapse） |
 | **支持脚本** | 9 个脚本在 squad/ |
 | **Schemas** | 2 个（squad-schema、squad-design-schema） |
 | **模板** | 3 个（basic、etl、agent-only） |

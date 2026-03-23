@@ -56,7 +56,7 @@ Este sistema implementa a **arquitetura task-first** do SINAPSE, onde tasks sao 
 | `.sinapse-ai/development/tasks/squad-generate-workflow.md` | `*generate-workflow` | Gera workflow de orquestracao YAML | Ativo |
 | `.sinapse-ai/development/tasks/squad-creator-download.md` | `*download-squad` | Baixa squad do repositorio publico | Placeholder (Sprint 8) |
 | `.sinapse-ai/development/tasks/squad-creator-publish.md` | `*publish-squad` | Publica squad no sinapse-squads | Placeholder (Sprint 8) |
-| `.sinapse-ai/development/tasks/squad-creator-sync-synkra.md` | `*sync-squad-synkra` | Sincroniza squad com SINAPSE API | Placeholder (Sprint 8) |
+| `.sinapse-ai/development/tasks/squad-creator-sync-sinapse.md` | `*sync-squad-sinapse` | Sincroniza squad com SINAPSE API | Placeholder (Sprint 8) |
 
 ### Arquivos de Tasks Relacionadas
 
@@ -157,12 +157,12 @@ flowchart TB
     subgraph DISTRIBUTE["🚀 DISTRIBUTION"]
         LOCAL["📂 Local<br/>./squads/"]
         PUBLIC["🌐 Public<br/>github.com/SynkraAI/sinapse-squads"]
-        MARKET["💰 Marketplace<br/>api.synkra.dev/squads"]
+        MARKET["💰 Marketplace<br/>api.sinapse.ai/squads"]
     end
 
     VALID --> LOCAL
     VALID -->|"*publish-squad"| PUBLIC
-    VALID -->|"*sync-squad-synkra"| MARKET
+    VALID -->|"*sync-squad-sinapse"| MARKET
 
     style INPUTS fill:#e1f5fe
     style DESIGN fill:#fff3e0
@@ -350,7 +350,7 @@ flowchart TB
 |---------|-----------|----------|
 | `*download-squad` | `squad-creator-download.md` | DOWNLOAD squad do sinapse-squads |
 | `*publish-squad` | `squad-creator-publish.md` | PUBLISH squad para sinapse-squads |
-| `*sync-squad-synkra` | `squad-creator-sync-synkra.md` | SYNC squad para SINAPSE API |
+| `*sync-squad-sinapse` | `squad-creator-sync-sinapse.md` | SYNC squad para SINAPSE API |
 
 ### Comandos de Componentes Individuais
 
@@ -456,13 +456,13 @@ flowchart LR
 
     SQUADS[("📦 ./squads/")]
     SINAPSE_SQUADS[("🌐 sinapse-squads")]
-    SYNKRA[("💰 SINAPSE API")]
+    SINAPSE_MKT[("💰 SINAPSE API")]
 
     SC_CREATE --> SQUADS
     SC_VALIDATE --> SQUADS
     SC_LIST --> SQUADS
     DEVOPS_PUB --> SINAPSE_SQUADS
-    DEVOPS_PUB --> SYNKRA
+    DEVOPS_PUB --> SINAPSE_MKT
 
     style SQUAD_CREATOR fill:#e3f2fd
     style DEV fill:#e8f5e9
@@ -570,9 +570,9 @@ flowchart LR
     end
 
     subgraph MARKET["💰 Nivel 3: Marketplace"]
-        M_API["api.synkra.dev/squads"]
+        M_API["api.sinapse.ai/squads"]
         M_DESC["Squads premium via SINAPSE API"]
-        M_CMD["*sync-squad-synkra"]
+        M_CMD["*sync-squad-sinapse"]
     end
 
     LOCAL --> PUBLIC
@@ -678,7 +678,7 @@ flowchart LR
 |---------|----------|
 | **Total de Tasks Core** | 12 task files |
 | **Tasks Ativas** | 9 (create, design, validate, list, analyze, extend, migrate, generate-skills, generate-workflow) |
-| **Tasks Placeholder** | 3 (download, publish, sync-synkra) |
+| **Tasks Placeholder** | 3 (download, publish, sync-sinapse) |
 | **Scripts de Suporte** | 9 scripts em squad/ |
 | **Schemas** | 2 (squad-schema, squad-design-schema) |
 | **Templates** | 3 (basic, etl, agent-only) |

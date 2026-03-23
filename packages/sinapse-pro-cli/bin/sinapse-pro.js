@@ -153,7 +153,7 @@ Examples:
   npx sinapse-pro status
   npx sinapse-pro recover
 
-Documentation: https://synkra.ai/pro/docs
+Documentation: https://sinapse.ai/pro/docs
 `);
 }
 

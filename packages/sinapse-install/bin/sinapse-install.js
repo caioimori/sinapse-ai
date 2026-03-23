@@ -4,11 +4,11 @@
  * SINAPSE NPX Installer - Entry Point
  *
  * Usage:
- *   npx @synkra/sinapse-install          # Interactive installation
- *   npx @synkra/sinapse-install --dry-run # Preview what would be done
- *   npx @synkra/sinapse-install --version # Show version
+ *   npx @sinapse/sinapse-install          # Interactive installation
+ *   npx @sinapse/sinapse-install --dry-run # Preview what would be done
+ *   npx @sinapse/sinapse-install --version # Show version
  *
- * @package @synkra/sinapse-install
+ * @package @sinapse/sinapse-install
  */
 
 'use strict';

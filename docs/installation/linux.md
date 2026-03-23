@@ -387,7 +387,7 @@ Quick uninstall:
 rm -rf .sinapse-ai .claude/commands/SINAPSE
 
 # Remove global installation
-rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@synkra
+rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@sinapse
 ```
 
 ---

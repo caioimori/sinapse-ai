@@ -27,7 +27,7 @@
    - 填写详细信息表单
 
 2. **电子邮件**
-   - 发送电子邮件至：security@synkra.ai
+   - 发送电子邮件至：security@sinapse.ai
    - 主题行：`[SECURITY] 简要描述`
 
 ### 包含的内容

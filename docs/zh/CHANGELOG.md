@@ -126,7 +126,7 @@ SINAPSE 的所有重要变更都将记录在此文件中。
 
 ### 废弃
 
-- 手动安装流程（改用 `npx @synkra/sinapse-ai install`）
+- 手动安装流程（改用 `npx @sinapse/sinapse-ai install`）
 - `.legacy-core/` 目录名称（自动迁移）
 
 ### 安全
@@ -172,7 +172,7 @@ SINAPSE 的所有重要变更都将记录在此文件中。
 **快速升级：**
 
 ```bash
-npx @synkra/sinapse-ai install --force-upgrade
+npx @sinapse/sinapse-ai install --force-upgrade
 ```
 
 **主要变更：**

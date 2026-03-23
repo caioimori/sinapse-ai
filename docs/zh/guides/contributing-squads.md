@@ -177,11 +177,11 @@ dependencies:
 
 ```bash
 # 1. 配置令牌
-export SYNKRA_API_TOKEN="your-token"
+export SINAPSE_API_TOKEN="your-token"
 
 # 2. 同步到marketplace
 @squad-creator
-*sync-squad-synkra ./squads/my-squad --public
+*sync-squad-sinapse ./squads/my-squad --public
 ```
 
 ### 可见性选项
@@ -212,7 +212,7 @@ export SYNKRA_API_TOKEN="your-token"
 # 4. 重新发布
 *publish-squad ./squads/my-squad
 # 或
-*sync-squad-synkra ./squads/my-squad
+*sync-squad-sinapse ./squads/my-squad
 ```
 
 ## 行为准则

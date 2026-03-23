@@ -58,7 +58,7 @@ Organización SynkraAI
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    ORGANIZACIÓN SYNKRA                                   │
+│                    ORGANIZACIÓN SINAPSE                                   │
 │                                                                          │
 │   REPOSITORIOS PÚBLICOS                                                  │
 │   ═══════════════════════                                                │

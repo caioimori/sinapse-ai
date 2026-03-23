@@ -984,7 +984,7 @@ security:
 ### 报告流程
 
 1. **不要**为安全漏洞创建公共GitHub问题
-2. 将安全问题发送至: **security@synkra.ai**
+2. 将安全问题发送至: **security@sinapse.ai**
 3. 在报告中包括以下内容:
    - 漏洞描述
    - 复现步骤

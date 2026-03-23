@@ -28,7 +28,7 @@ describe('errors', () => {
 
       expect(error.message).toContain('Premium Squads requires an active SINAPSE Pro license');
       expect(error.message).toContain('sinapse pro activate --key <KEY>');
-      expect(error.message).toContain('https://synkra.ai/pro');
+      expect(error.message).toContain('https://sinapse.ai/pro');
     });
 
     it('should mention data preservation (AC-8)', () => {

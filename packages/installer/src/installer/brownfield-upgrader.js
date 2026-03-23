@@ -1,6 +1,6 @@
 /**
  * Brownfield Upgrader
- * Handles incremental upgrades for existing SINAPSE-Core installations
+ * Handles incremental upgrades for existing SINAPSE installations
  *
  * @module src/installer/brownfield-upgrader
  * @story 6.18 - Dynamic Manifest & Brownfield Upgrade System
@@ -371,7 +371,7 @@ function updateInstalledManifest(targetDir, sourceManifest, sourcePackage) {
     noRefs: true,
   });
 
-  const header = `# SINAPSE-Core Installed Manifest
+  const header = `# SINAPSE Installed Manifest
 # This file tracks what was installed from the npm package
 # Used for brownfield upgrades to detect changes
 # DO NOT EDIT MANUALLY
@@ -426,7 +426,7 @@ function formatUpgradeReport(report) {
   const lines = [];
 
   lines.push('═'.repeat(60));
-  lines.push('SINAPSE-Core Upgrade Report');
+  lines.push('SINAPSE Upgrade Report');
   lines.push('═'.repeat(60));
   lines.push('');
   lines.push(`Current Version: ${report.installedVersion}`);

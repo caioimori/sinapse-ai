@@ -1,10 +1,10 @@
 {
   "name": "sinapse-ai",
   "version": "5.0.3",
-  "description": "SINAPSE: AI-Orchestrated System for Full Stack Development - Core Framework",
+  "description": "SINAPSE: AI-Orchestrated System for Full Stack Development — 17 squads, 161 agents",
   "bin": {
     "sinapse": "bin/sinapse.js",
-    "sinapse-ai": "bin/sinapse.js",
+    "sinapse-ai": "bin/cli.js",
     "sinapse-minimal": "bin/sinapse-minimal.js",
     "sinapse-graph": "bin/sinapse-graph.js"
   },
@@ -20,6 +20,11 @@
     ".claude/CLAUDE.md",
     ".claude/rules/",
     ".claude/hooks/",
+    "squads/squad-*/**",
+    "squads/sinapse/**",
+    "sinapse/**",
+    "install-squads.sh",
+    "update-squads.sh",
     "pro/license/",
     "pro/squads/",
     "pro/pro-config.yaml",

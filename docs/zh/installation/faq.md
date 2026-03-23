@@ -25,7 +25,7 @@
 
 ### 问题 1：为什么使用 npx 而不是 npm install -g？
 
-**答案:** 我们推荐使用 `npx @synkra/sinapse-ai install` 而不是全局安装，原因如下：
+**答案:** 我们推荐使用 `npx @sinapse/sinapse-ai install` 而不是全局安装，原因如下：
 
 1. **始终最新版本**: npx 自动获取最新版本
 2. **无全局污染**: 不会添加到全局 npm 包
@@ -36,8 +36,8 @@
 **如果您更喜欢全局安装：**
 
 ```bash
-npm install -g @synkra/sinapse-ai
-@synkra/sinapse-ai install
+npm install -g @sinapse/sinapse-ai
+@sinapse/sinapse-ai install
 ```
 
 ---
@@ -71,7 +71,7 @@ npm --version   # 应为 9+
 
 ```bash
 cd /path/to/existing-project
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 安装程序将：
@@ -143,13 +143,13 @@ your-project/
 
 ```bash
 # 通过 npx 更新（推荐）
-npx @synkra/sinapse-ai update
+npx @sinapse/sinapse-ai update
 
 # 或重新安装最新版本
-npx @synkra/sinapse-ai install --force-upgrade
+npx @sinapse/sinapse-ai install --force-upgrade
 
 # 检查当前版本
-npx @synkra/sinapse-ai status
+npx @sinapse/sinapse-ai status
 ```
 
 **更新的内容：**
@@ -172,15 +172,15 @@ npx @synkra/sinapse-ai status
 
 | 更新类型        | 频率       | 命令                           |
 | --------------- | ---------- | ------------------------------ |
-| **安全补丁**    | 立即       | `npx @synkra/sinapse-ai update` |
-| **次要更新**    | 每月       | `npx @synkra/sinapse-ai update` |
+| **安全补丁**    | 立即       | `npx @sinapse/sinapse-ai update` |
+| **次要更新**    | 每月       | `npx @sinapse/sinapse-ai update` |
 | **主要版本**    | 每季度     | 先查看变更日志                 |
 
 **检查更新：**
 
 ```bash
-npm show @synkra/sinapse-ai version
-npx @synkra/sinapse-ai status
+npm show @sinapse/sinapse-ai version
+npx @sinapse/sinapse-ai status
 ```
 
 ---
@@ -192,7 +192,7 @@ npx @synkra/sinapse-ai status
 **选项 1：重新安装特定版本**
 
 ```bash
-npx @synkra/sinapse-ai@1.1.0 install --force-upgrade
+npx @sinapse/sinapse-ai@1.1.0 install --force-upgrade
 ```
 
 **选项 2：使用 Git 恢复**
@@ -222,7 +222,7 @@ mv .sinapse-ai.backup .sinapse-ai
 
 ```bash
 # 联网时安装一次
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 
 # 打包以供离线使用
 tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/ .cursor/
@@ -254,7 +254,7 @@ tar -xzvf sinapse-offline.tar.gz
 
    ```bash
    # 安装并打包
-   npx @synkra/sinapse-ai install
+   npx @sinapse/sinapse-ai install
    cd your-project
    tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ .cursor/ docs/
    ```
@@ -304,7 +304,7 @@ tar -xzvf sinapse-offline.tar.gz
 **命令行：**
 
 ```bash
-npx @synkra/sinapse-ai install --ide cursor,claude-code
+npx @sinapse/sinapse-ai install --ide cursor,claude-code
 ```
 
 每个 IDE 获得其自己的配置目录：
@@ -326,7 +326,7 @@ git clone your-repo
 cd your-repo
 
 # 可选择配置他们喜欢的 IDE
-npx @synkra/sinapse-ai install --ide cursor
+npx @sinapse/sinapse-ai install --ide cursor
 ```
 
 如果 `.sinapse-ai/` 未提交：
@@ -334,7 +334,7 @@ npx @synkra/sinapse-ai install --ide cursor
 ```bash
 git clone your-repo
 cd your-repo
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 **最佳实践:** 将 `.sinapse-ai/` 提交到您的仓库以共享一致的代理配置。
@@ -390,7 +390,7 @@ npx @synkra/sinapse-ai install
 3. **添加到 IDE 配置：**
 
    ```bash
-   npx @synkra/sinapse-ai install --ide claude-code
+   npx @sinapse/sinapse-ai install --ide claude-code
    ```
 
 4. **激活:** `/my-agent` 或 `@my-agent`
@@ -440,13 +440,13 @@ npx @synkra/sinapse-ai install
 **安装 Squad：**
 
 ```bash
-npx @synkra/sinapse-ai install --Squads hybrid-ops
+npx @sinapse/sinapse-ai install --Squads hybrid-ops
 ```
 
 **列出可用的 Squad：**
 
 ```bash
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -504,7 +504,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npx @synkra/sinapse-ai install --full --ide claude-code
+      - run: npx @sinapse/sinapse-ai install --full --ide claude-code
       - run: npm test
 ```
 
@@ -514,7 +514,7 @@ jobs:
 test:
   image: node:18
   script:
-    - npx @synkra/sinapse-ai install --full
+    - npx @sinapse/sinapse-ai install --full
     - npm test
 ```
 

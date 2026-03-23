@@ -10,7 +10,7 @@
  *   edmcp add <name/url>    # Add MCP from repository
  *   edmcp remove <name>     # Remove MCP
  *
- * @package @synkra/sinapse-install
+ * @package @sinapse/sinapse-install
  */
 
 'use strict';

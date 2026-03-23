@@ -607,4 +607,4 @@ const emergencyConfig = {
 
 **记住**：安全不是一次性的实现，而是一个持续的过程。定期审查、更新和改进对于维护安全系统至关重要。
 
-如有问题或安全问题，请联系：security@synkra/sinapse-ai.dev
+如有问题或安全问题，请联系：security@sinapse/sinapse-ai.dev

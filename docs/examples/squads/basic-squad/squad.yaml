@@ -5,7 +5,7 @@ name: basic-squad
 version: 1.0.0
 description: A simple example squad demonstrating the minimum required structure
 
-author: SINAPSE Team <team@synkra.dev>
+author: SINAPSE Team <team@sinapse.ai>
 license: MIT
 slashPrefix: basic
 

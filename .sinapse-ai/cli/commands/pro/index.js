@@ -311,7 +311,7 @@ function statusAction() {
   if (!cache) {
     console.log('\n  No license activated.');
     console.log('  Activate: sinapse pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
-    console.log('  Purchase: https://synkra.ai/pro');
+    console.log('  Purchase: https://sinapse.ai/pro');
     console.log('');
     return;
   }
@@ -640,7 +640,7 @@ async function setupAction(options) {
   console.log('To check license status:');
   console.log('  sinapse pro status');
   console.log('');
-  console.log('Documentation: https://synkra.ai/pro/docs');
+  console.log('Documentation: https://sinapse.ai/pro/docs');
   console.log('');
 }
 

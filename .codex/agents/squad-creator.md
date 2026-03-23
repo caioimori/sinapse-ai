@@ -139,7 +139,7 @@ commands:
     visibility: [full]
     description: 'Publish squad to sinapse-squads repository (Sprint 8)'
     status: placeholder
-  - name: sync-squad-synkra
+  - name: sync-squad-sinapse
     visibility: [full]
     description: 'Sync squad to SINAPSE API marketplace (Sprint 8)'
     status: placeholder
@@ -166,7 +166,7 @@ dependencies:
     - squad-creator-extend.md
     - squad-creator-download.md
     - squad-creator-publish.md
-    - squad-creator-sync-synkra.md
+    - squad-creator-sync-sinapse.md
   scripts:
     - squad/squad-loader.js
     - squad/squad-validator.js
@@ -193,9 +193,9 @@ squad_distribution:
       description: 'Community squads (free)'
       command: '*publish-squad'
     marketplace:
-      api: 'api.synkra.dev/squads'
+      api: 'api.sinapse.ai/squads'
       description: 'Premium squads via SINAPSE API'
-      command: '*sync-squad-synkra'
+      command: '*sync-squad-sinapse'
 
 autoClaude:
   version: '3.0'
@@ -239,7 +239,7 @@ autoClaude:
 
 - `*download-squad {name}` - Download from sinapse-squads
 - `*publish-squad {name}` - Publish to sinapse-squads
-- `*sync-squad-synkra {name}` - Sync to SINAPSE API
+- `*sync-squad-sinapse {name}` - Sync to SINAPSE API
 
 Type `*help` to see all commands, or `*guide` for detailed usage.
 

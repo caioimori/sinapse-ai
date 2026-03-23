@@ -424,7 +424,7 @@ Remove-Item -Recurse -Force .sinapse-ai
 Remove-Item -Recurse -Force .claude\commands\SINAPSE
 
 # 删除全局 npm 包
-npm uninstall -g @synkra/sinapse
+npm uninstall -g @sinapse/sinapse
 ```
 
 ---

@@ -1,4 +1,4 @@
-# SINAPSE-Core Installation & Troubleshooting Guide
+# SINAPSE Installation & Troubleshooting Guide
 
 > **EN** | [PT](../pt/guides/installation-troubleshooting.md) | [ES](../es/guides/installation-troubleshooting.md)
 
@@ -10,7 +10,7 @@
 npx sinapse-ai@latest
 ```
 
-This command downloads and runs the latest version of SINAPSE-Core installer.
+This command downloads and runs the latest version of SINAPSE installer.
 
 ## System Requirements
 
@@ -318,4 +318,4 @@ When reporting issues, please include:
 
 ---
 
-*Last updated: December 2025 | SINAPSE-Core v2.2.0*
+*Last updated: December 2025 | SINAPSE v2.2.0*

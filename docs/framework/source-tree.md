@@ -599,7 +599,7 @@ mmos/
 Directories: kebab-case (lowercase, hyphen-separated)
   ✅ .sinapse-ai/
   ✅ Squads/
-  ❌ .SINAPSE-Core/
+  ❌ .sinapse-ai/
   ❌ legacy-packs/
 
 Files (Code): kebab-case with extension

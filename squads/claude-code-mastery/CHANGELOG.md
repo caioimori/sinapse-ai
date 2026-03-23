@@ -14,9 +14,9 @@ All notable changes to the Claude Code Mastery squad.
 - 1 validation script (validate-setup.js)
 - Tier architecture: Tier 0 (Diagnosis), Tier 1 (Core Mastery), Tier 2 (Strategic & Context)
 - Handoff matrix with full routing between all agents
-- SINAPSE-core integration bridge (agents, tasks, hooks, config mapping)
+- SINAPSE integration bridge (agents, tasks, hooks, config mapping)
 
 ### Architecture
 - Entry agent: claude-mastery-chief (Orion) with 7-domain routing matrix
-- Cross-cutting concern: all agents understand SINAPSE-core architecture
+- Cross-cutting concern: all agents understand SINAPSE architecture
 - Knowledge sources: Claude Code changelog, official docs, community resources

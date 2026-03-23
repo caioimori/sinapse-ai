@@ -16,7 +16,7 @@ describeOnWindows('Windows 11 Installation', () => {
     async () => {
       const startTime = Date.now();
 
-      // Note: This test requires running npx @synkraai/sinapse@latest init
+      // Note: This test requires running npx @sinapse/sinapse@latest init
       // in a fresh directory. Run manually for end-to-end validation.
 
       // For CI/CD, verify installer exists and is executable

@@ -114,9 +114,9 @@ test_clean_installation() {
     fi
 
     # Run installer
-    log_info "Running: npx @synkraai/sinapse@latest init"
+    log_info "Running: npx @sinapse/sinapse@latest init"
 
-    if npx @synkraai/sinapse@latest init; then
+    if npx @sinapse/sinapse@latest init; then
         pass_test "Installation completed without errors"
     else
         fail_test "Installation failed with exit code $?"

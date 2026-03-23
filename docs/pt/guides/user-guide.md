@@ -206,7 +206,7 @@ Um squad é um pacote autocontido contendo:
 ```
 Nível 1: LOCAL        --> ./squads/           (Privado)
 Nível 2: SINAPSE-SQUADS  --> github.com/SynkraAI (Público/Gratuito)
-Nível 3: SYNKRA API   --> api.synkra.dev      (Marketplace)
+Nível 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)
 ```
 
 ### Usando Squads

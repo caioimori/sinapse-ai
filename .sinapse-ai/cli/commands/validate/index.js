@@ -1,7 +1,7 @@
 /**
  * Validate Command Module
  *
- * CLI command for validating SINAPSE-Core installation integrity.
+ * CLI command for validating SINAPSE installation integrity.
  * Compares installed files against the install manifest.
  *
  * @module cli/commands/validate
@@ -57,7 +57,7 @@ function createValidateCommand() {
   const validate = new Command('validate');
 
   validate
-    .description('Validate SINAPSE-Core installation integrity')
+    .description('Validate SINAPSE installation integrity')
     .option('-r, --repair', 'Repair missing or corrupted files')
     .option('-d, --dry-run', 'Preview repairs without applying (use with --repair)')
     .option('--detailed', 'Show detailed file list')
@@ -109,14 +109,14 @@ async function runValidation(options) {
   const projectRoot = process.cwd();
   const sinapseCoreDir = path.join(projectRoot, '.sinapse-ai');
 
-  // Check if SINAPSE-Core is installed
+  // Check if SINAPSE is installed
   if (!fs.existsSync(sinapseCoreDir)) {
     if (options.json) {
       console.log(
         JSON.stringify(
           {
             status: 'failed',
-            error: 'SINAPSE-Core not found in current directory',
+            error: 'SINAPSE not found in current directory',
             // SECURITY: Sanitize path - only show relative indicator
             location: '.sinapse-ai',
           },
@@ -125,9 +125,9 @@ async function runValidation(options) {
         )
       );
     } else {
-      console.error(chalk.red('\nError: SINAPSE-Core not found in current directory'));
+      console.error(chalk.red('\nError: SINAPSE not found in current directory'));
       console.error(chalk.dim(`Expected at: ${sinapseCoreDir}`));
-      console.error(chalk.dim('\nRun `npx sinapse-ai install` to install SINAPSE-Core'));
+      console.error(chalk.dim('\nRun `npx sinapse-ai install` to install SINAPSE'));
     }
     process.exit(ExitCode.ERROR);
   }

@@ -28,10 +28,10 @@ test_full_installation_time() {
 
     # Note: Actual installation would happen here
     # For testing purposes, we'll simulate timing
-    log_info "Simulating installation... (in real test, run: npx @synkraai/sinapse@latest init)"
+    log_info "Simulating installation... (in real test, run: npx @sinapse/sinapse@latest init)"
 
     # In actual test, measure real installation:
-    # if npx @synkraai/sinapse@latest init; then
+    # if npx @sinapse/sinapse@latest init; then
     #     END_TIME=$(date +%s)
     #     DURATION=$((END_TIME - START_TIME))
     #     ...
@@ -94,7 +94,7 @@ test_network_operations() {
     # Test npm registry connectivity
     START_TIME=$(date +%s)
 
-    if npm view @synkraai/sinapse version &> /dev/null; then
+    if npm view @sinapse/sinapse version &> /dev/null; then
         END_TIME=$(date +%s)
         DURATION=$((END_TIME - START_TIME))
 

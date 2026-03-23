@@ -670,7 +670,7 @@ graph LR
    - Git configurado
    - Gerenciador de pacotes (npm/yarn/pnpm)
 
-2. **SINAPSE-Core Disponivel**
+2. **SINAPSE Disponivel**
    - Templates em `.sinapse-ai/development/templates/`
    - Tasks em `.sinapse-ai/development/tasks/`
    - Checklists em `.sinapse-ai/development/checklists/`

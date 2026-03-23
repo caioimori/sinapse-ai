@@ -97,7 +97,7 @@ uname -m
 #### 2. Run Installer
 
 ```bash
-npx @synkraai/sinapse@latest init
+npx @sinapse/sinapse@latest init
 ```
 
 **Follow the wizard prompts:**
@@ -167,7 +167,7 @@ sysctl -n machdep.cpu.brand_string
 #### 2. Run Installer
 
 ```bash
-npx @synkraai/sinapse@latest init
+npx @sinapse/sinapse@latest init
 ```
 
 #### 3. Verify Native ARM Execution
@@ -451,7 +451,7 @@ pnpm --version
 
 ```bash
 # Time the full installation
-time npx @synkraai/sinapse@latest init
+time npx @sinapse/sinapse@latest init
 # Target: < 5 minutes (300 seconds)
 ```
 
@@ -572,11 +572,11 @@ sinapse health
 
 ```bash
 # Interrupt installation (Ctrl+C mid-install)
-npx @synkraai/sinapse@latest init
+npx @sinapse/sinapse@latest init
 # Press Ctrl+C after a few seconds
 
 # Re-run installation
-npx @synkraai/sinapse@latest init
+npx @sinapse/sinapse@latest init
 # Should detect partial state and resume/cleanup
 ```
 
@@ -621,7 +621,7 @@ node --version  # Should be 18+
 npm ping
 
 # Try with verbose logging
-npx @synkraai/sinapse@latest init --verbose
+npx @sinapse/sinapse@latest init --verbose
 ```
 
 #### Command Not Found

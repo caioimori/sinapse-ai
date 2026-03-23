@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://sinapse.synkra.dev/schemas/build-state.json",
+  "$id": "https://sinapse.sinapse.ai/schemas/build-state.json",
   "title": "Build State",
   "description": "Schema for autonomous build state tracking (Story 8.4)",
   "type": "object",

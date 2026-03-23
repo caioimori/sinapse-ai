@@ -386,7 +386,7 @@ node bin/sinapse-init.js ~/projects/my-project --update
 rm -rf .sinapse-ai .claude/commands/SINAPSE
 
 # 删除全局安装
-rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@synkra
+rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@sinapse
 ```
 
 ---

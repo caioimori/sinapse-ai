@@ -131,7 +131,7 @@ Estos documentos son **obsoletos o redundantes** y NO deben ser creados:
 | `tools-system-schema-refinement.md`                  | Refinamiento completado                                 |
 | `analysis/scripts-consolidation-analysis.md`         | Scripts ya consolidados                                 |
 | `analysis/repository-strategy-analysis.md`           | Estrategia definida en ARCHITECTURE-INDEX               |
-| `SYNKRA-REBRANDING-SPECIFICATION.md`                 | Rebranding completado                                   |
+| `SINAPSE-REBRANDING-SPECIFICATION.md`                 | Rebranding completado                                   |
 | `multi-repo-strategy-pt.md`                          | Usar estructura `docs/pt-BR/` en su lugar               |
 
 ---

@@ -88,7 +88,7 @@ sinapse-ai/                             # 根目录 (brownfield 项目)
 │   └── squad/                         # Squad 模板用于扩展 (见 docs/guides/squads-guide.md)
 │
 ├── bin/                               # CLI 可执行文件
-│   ├── @synkra/sinapse-ai.js              # 主 CLI 入口点
+│   ├── @sinapse/sinapse-ai.js              # 主 CLI 入口点
 │   └── sinapse-minimal.js                # 最小 CLI
 │
 ├── tools/                             # 构建和实用工具
@@ -563,7 +563,7 @@ mmos/
 目录: kebab-case (小写，用连字符分隔)
   ✅ .sinapse-ai/
   ✅ Squads/
-  ❌ .SINAPSE-Core/
+  ❌ .sinapse-ai/
   ❌ legacy-packs/
 
 文件 (代码): kebab-case + 扩展名

@@ -1,0 +1,283 @@
+#!/bin/bash
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse — CLI unificado do Sinapse
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Comandos:
+#   sinapse install     Instala squads em um projeto (primeira vez)
+#   sinapse update      Atualiza squads em projeto existente
+#   sinapse list        Lista todas as squads e agentes disponíveis
+#   sinapse status      Mostra status das squads no projeto atual
+#   sinapse pull        Puxa atualizações do repo e atualiza projeto atual
+#   sinapse help        Mostra esta ajuda
+#
+# Setup (rodar uma vez):
+#   echo 'export PATH="$HOME/Workspace/caio-imori/sinapse:$PATH"' >> ~/.bashrc
+#   source ~/.bashrc
+#
+# ══════════════════════════════════════════════════════════════════════════════
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Cores
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+VERSION="1.0.0"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Helpers
+# ══════════════════════════════════════════════════════════════════════════════
+
+header() {
+  echo ""
+  echo -e "${CYAN}${BOLD}  ╔═╗╦╔╗╔╔═╗╔═╗╔═╗╔═╗${NC}"
+  echo -e "${CYAN}${BOLD}  ╚═╗║║║║╠═╣╠═╝╚═╗║╣ ${NC}"
+  echo -e "${CYAN}${BOLD}  ╚═╝╩╝╚╝╩ ╩╩  ╚═╝╚═╝${NC}"
+  echo -e "  ${BOLD}v${VERSION}${NC} — 17 squads | 149 agents | 1196 tasks"
+  echo ""
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse install
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_install() {
+  header
+  echo -e "${BLUE}▸ Instalando squads no projeto...${NC}"
+  echo ""
+  bash "$SCRIPT_DIR/install-squads.sh"
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse update
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_update() {
+  header
+  echo -e "${BLUE}▸ Atualizando squads no projeto...${NC}"
+  echo ""
+  bash "$SCRIPT_DIR/update-squads.sh"
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse list
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_list() {
+  header
+  echo -e "${BOLD}Squads disponíveis:${NC}"
+  echo ""
+
+  total_agents=0
+  total_tasks=0
+
+  for squad_dir in "$SCRIPT_DIR"/squad-*/; do
+    [ ! -d "$squad_dir" ] && continue
+    squad_name=$(basename "$squad_dir")
+    manifest="$squad_dir/squad.yaml"
+    [ ! -f "$manifest" ] && continue
+
+    # Skip deprecated
+    [[ "$squad_name" == *".deprecated"* ]] && continue
+
+    sp=$(grep "^slashPrefix:" "$manifest" | head -1 | sed 's/^slashPrefix: *//' | tr -d '"' | tr -d "'" | tr -d ' ')
+    [ -z "$sp" ] && sp="--"
+
+    agent_count=$(ls "$squad_dir/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
+    task_count=$(ls "$squad_dir/tasks/"*.md 2>/dev/null | wc -l | tr -d ' ')
+    total_agents=$((total_agents + agent_count))
+    total_tasks=$((total_tasks + task_count))
+
+    # Short description
+    desc=$(grep "^description:" "$manifest" | head -1 | sed 's/^description: *//' | tr -d '"' | cut -c1-60)
+
+    printf "  ${CYAN}%-12s${NC} ${GREEN}%3s agents${NC} ${YELLOW}%3s tasks${NC}  %s\n" "/$sp" "$agent_count" "$task_count" "$desc"
+  done
+
+  echo ""
+  echo -e "  ${BOLD}Total: ${GREEN}${total_agents} agents${NC} | ${YELLOW}${total_tasks} tasks${NC}"
+  echo ""
+  echo -e "  ${YELLOW}Uso:${NC} sinapse list agents ${CYAN}<squad>${NC}  — ver agentes de uma squad"
+  echo ""
+
+  # If second arg is "agents" and third is a squad prefix
+  if [ "$1" = "agents" ] && [ -n "$2" ]; then
+    cmd_list_agents "$2"
+  fi
+}
+
+cmd_list_agents() {
+  local prefix="$1"
+  echo -e "${BOLD}Agentes da squad /$prefix:${NC}"
+  echo ""
+
+  for squad_dir in "$SCRIPT_DIR"/squad-*/; do
+    [ ! -d "$squad_dir" ] && continue
+    manifest="$squad_dir/squad.yaml"
+    [ ! -f "$manifest" ] && continue
+
+    sp=$(grep "^slashPrefix:" "$manifest" | head -1 | sed 's/^slashPrefix: *//' | tr -d '"' | tr -d "'" | tr -d ' ')
+    [ "$sp" != "$prefix" ] && continue
+
+    for agent_file in "$squad_dir/agents/"*.md; do
+      [ ! -f "$agent_file" ] && continue
+      agent_id=$(basename "$agent_file" .md)
+      # Try to get agent title from first # heading
+      title=$(head -5 "$agent_file" | grep "^# " | head -1 | sed 's/^# //')
+      printf "  ${CYAN}/%s:agents:%-30s${NC} %s\n" "$sp" "$agent_id" "$title"
+    done
+    break
+  done
+  echo ""
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse status
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_status() {
+  header
+
+  if [ ! -d "./squads" ]; then
+    echo -e "  ${RED}✗${NC} Squads não instaladas neste projeto"
+    echo -e "  ${YELLOW}Rode:${NC} sinapse install"
+    echo ""
+    return
+  fi
+
+  echo -e "${BOLD}Status das squads neste projeto:${NC}"
+  echo ""
+
+  installed=0
+  missing=0
+
+  for squad_dir in "$SCRIPT_DIR"/squad-*/; do
+    [ ! -d "$squad_dir" ] && continue
+    squad_name=$(basename "$squad_dir")
+    [[ "$squad_name" == *".deprecated"* ]] && continue
+    manifest="$squad_dir/squad.yaml"
+    [ ! -f "$manifest" ] && continue
+
+    target="./squads/$squad_name"
+    if [ -L "$target" ] || [ -d "$target" ]; then
+      echo -e "  ${GREEN}✓${NC} $squad_name"
+      installed=$((installed + 1))
+    else
+      echo -e "  ${RED}✗${NC} $squad_name ${YELLOW}(não instalada)${NC}"
+      missing=$((missing + 1))
+    fi
+  done
+
+  echo ""
+  echo -e "  ${GREEN}${installed} instaladas${NC} | ${RED}${missing} faltando${NC}"
+
+  if [ $missing -gt 0 ]; then
+    echo -e "  ${YELLOW}Rode:${NC} sinapse update"
+  fi
+
+  # Check awareness
+  if [ -f ".claude/rules/squad-awareness.md" ]; then
+    echo -e "  ${GREEN}✓${NC} squad-awareness.md presente"
+  else
+    echo -e "  ${RED}✗${NC} squad-awareness.md ausente"
+  fi
+
+  # Check commands
+  cmd_count=$(find .claude/commands/ -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$cmd_count" -gt 0 ]; then
+    echo -e "  ${GREEN}✓${NC} $cmd_count command files"
+  else
+    echo -e "  ${RED}✗${NC} Nenhum command file"
+  fi
+
+  echo ""
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse pull
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_pull() {
+  header
+  echo -e "${BLUE}▸ Puxando atualizações do sinapse...${NC}"
+  echo ""
+
+  cd "$SCRIPT_DIR"
+  git pull
+  echo ""
+
+  # Se estamos num projeto com squads, atualizar
+  cd - > /dev/null
+  if [ -d "./squads" ]; then
+    echo -e "${BLUE}▸ Atualizando projeto atual...${NC}"
+    echo ""
+    bash "$SCRIPT_DIR/update-squads.sh"
+  else
+    echo -e "${YELLOW}Não estamos em um projeto com squads. Só o repo foi atualizado.${NC}"
+    echo ""
+  fi
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# sinapse help
+# ══════════════════════════════════════════════════════════════════════════════
+
+cmd_help() {
+  header
+  echo -e "${BOLD}Comandos:${NC}"
+  echo ""
+  echo -e "  ${CYAN}sinapse install${NC}              Instala squads em projeto (primeira vez)"
+  echo -e "  ${CYAN}sinapse update${NC}               Atualiza squads (novas squads + awareness + commands)"
+  echo -e "  ${CYAN}sinapse list${NC}                 Lista todas as squads disponíveis"
+  echo -e "  ${CYAN}sinapse list agents <prefix>${NC} Lista agentes de uma squad (ex: sinapse list agents brand)"
+  echo -e "  ${CYAN}sinapse status${NC}               Status das squads no projeto atual"
+  echo -e "  ${CYAN}sinapse pull${NC}                 Git pull + atualiza projeto atual"
+  echo -e "  ${CYAN}sinapse help${NC}                 Mostra esta ajuda"
+  echo ""
+  echo -e "${BOLD}Setup (rodar uma vez):${NC}"
+  echo ""
+  echo -e "  ${YELLOW}# Adicionar ao PATH:${NC}"
+  echo -e "  echo 'export PATH=\"\$HOME/Workspace/caio-imori/sinapse:\$PATH\"' >> ~/.bashrc"
+  echo -e "  source ~/.bashrc"
+  echo ""
+  echo -e "${BOLD}Uso típico:${NC}"
+  echo ""
+  echo -e "  ${GREEN}# Projeto novo:${NC}"
+  echo -e "  cd meu-projeto"
+  echo -e "  sinapse install"
+  echo ""
+  echo -e "  ${GREEN}# Projeto existente (após git pull no sinapse):${NC}"
+  echo -e "  cd meu-projeto"
+  echo -e "  sinapse update"
+  echo ""
+  echo -e "  ${GREEN}# Tudo de uma vez (pull + update):${NC}"
+  echo -e "  cd meu-projeto"
+  echo -e "  sinapse pull"
+  echo ""
+}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Router
+# ══════════════════════════════════════════════════════════════════════════════
+
+case "${1:-help}" in
+  install)  cmd_install ;;
+  update)   cmd_update ;;
+  list)     shift; cmd_list "$@" ;;
+  status)   cmd_status ;;
+  pull)     cmd_pull ;;
+  help|--help|-h) cmd_help ;;
+  *)
+    echo -e "${RED}Comando desconhecido:${NC} $1"
+    echo -e "Rode ${CYAN}sinapse help${NC} para ver comandos disponíveis"
+    exit 1
+    ;;
+esac

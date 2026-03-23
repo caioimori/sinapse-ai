@@ -1,4 +1,4 @@
-# SINAPSE-Core 安装和故障排除指南
+# SINAPSE 安装和故障排除指南
 
 > [EN](../../guides/installation-troubleshooting.md) | [PT](../../pt/guides/installation-troubleshooting.md) | [ES](../../es/guides/installation-troubleshooting.md) | **ZH**
 
@@ -10,7 +10,7 @@
 npx sinapse-ai@latest
 ```
 
-此命令下载并运行最新版本的 SINAPSE-Core 安装程序。
+此命令下载并运行最新版本的 SINAPSE 安装程序。
 
 ## 系统要求
 
@@ -318,4 +318,4 @@ v22.x.x (或 v18+/v20+)
 
 ---
 
-*最后更新: 2025年12月 | SINAPSE-Core v2.2.0*
+*最后更新: 2025年12月 | SINAPSE v2.2.0*

@@ -194,8 +194,8 @@ License activation failed: ECONNREFUSED
 
 ## Suporte
 
-- **Documentacao:** https://synkra.ai/pro/docs
-- **Comprar:** https://synkra.ai/pro
+- **Documentacao:** https://sinapse.ai/pro/docs
+- **Comprar:** https://sinapse.ai/pro
 - **Suporte:** https://github.com/SynkraAI/sinapse-ai/issues
 - **Issues:** https://github.com/SynkraAI/sinapse-ai/issues
 

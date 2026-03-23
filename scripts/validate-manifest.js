@@ -170,7 +170,7 @@ function validateManifest() {
  */
 function printReport(result) {
   console.log('='.repeat(60));
-  console.log('SINAPSE-Core Manifest Validation Report');
+  console.log('SINAPSE Manifest Validation Report');
   console.log('='.repeat(60));
   console.log('');
 

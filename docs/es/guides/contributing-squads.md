@@ -183,11 +183,11 @@ Tiempo estimado: Usualmente 2-5 dias habiles.
 
 ```bash
 # 1. Configurar token
-export SYNKRA_API_TOKEN="your-token"
+export SINAPSE_API_TOKEN="your-token"
 
 # 2. Sincronizar al marketplace
 @squad-creator
-*sync-squad-synkra ./squads/my-squad --public
+*sync-squad-sinapse ./squads/my-squad --public
 ```
 
 ### Opciones de Visibilidad
@@ -218,7 +218,7 @@ Seguir versionado semantico:
 # 4. Re-publicar
 *publish-squad ./squads/my-squad
 # o
-*sync-squad-synkra ./squads/my-squad
+*sync-squad-sinapse ./squads/my-squad
 ```
 
 ## Codigo de Conducta

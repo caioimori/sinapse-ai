@@ -48,7 +48,7 @@
 | `*migrate-squad`   | squad-creator-migrate.md     | ✅ 就绪     | 迁移旧格式       |
 | `*download-squad`  | squad-creator-download.md    | ⏳ 占位符   | 从注册表下载     |
 | `*publish-squad`   | squad-creator-publish.md     | ⏳ 占位符   | 发布到 sinapse-squads |
-| `*sync-squad-synkra` | squad-creator-sync-synkra.md | ⏳ 占位符  | 同步到市场       |
+| `*sync-squad-sinapse` | squad-creator-sync-sinapse.md | ⏳ 占位符  | 同步到市场       |
 
 ### 现有脚本
 

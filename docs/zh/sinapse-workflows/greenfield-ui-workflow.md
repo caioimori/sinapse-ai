@@ -670,7 +670,7 @@ graph LR
    - 配置了 Git
    - 包管理器 (npm/yarn/pnpm)
 
-2. **SINAPSE-Core 可用**
+2. **SINAPSE 可用**
    - `.sinapse-ai/development/templates/` 中的模板
    - `.sinapse-ai/development/tasks/` 中的任务
    - `.sinapse-ai/development/checklists/` 中的检查列表

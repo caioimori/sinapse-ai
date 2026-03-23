@@ -25,7 +25,7 @@ Checklist:
   - "[x] Exibir URL do marketplace"
 ---
 
-# *sync-squad-synkra
+# *sync-squad-sinapse
 
 Sincroniza um squad local para o SINAPSE API marketplace.
 
@@ -35,16 +35,16 @@ Sincroniza um squad local para o SINAPSE API marketplace.
 @squad-creator
 
 # Sync privado (apenas workspace)
-*sync-squad-synkra ./squads/meu-squad
+*sync-squad-sinapse ./squads/meu-squad
 
 # Sync público (visível para todos)
-*sync-squad-synkra ./squads/meu-squad --public
+*sync-squad-sinapse ./squads/meu-squad --public
 
 # Preview sem sincronizar
-*sync-squad-synkra ./squads/meu-squad --dry-run
+*sync-squad-sinapse ./squads/meu-squad --dry-run
 
 # Sync com verbosidade
-*sync-squad-synkra ./squads/meu-squad --verbose
+*sync-squad-sinapse ./squads/meu-squad --verbose
 ```
 
 ## Autenticação
@@ -52,18 +52,18 @@ Sincroniza um squad local para o SINAPSE API marketplace.
 Requer autenticação com SINAPSE API:
 
 ```bash
-export SYNKRA_API_TOKEN="seu-token"
+export SINAPSE_API_TOKEN="seu-token"
 ```
 
 Ou configure em `.env`:
 
 ```env
-SYNKRA_API_URL=https://api.synkra.dev/api
-SYNKRA_API_TOKEN=seu-token
+SINAPSE_API_URL=https://api.sinapse.ai/api
+SINAPSE_API_TOKEN=seu-token
 ```
 
 Para obter um token:
-1. Acesse https://synkra.dev/settings/api-keys
+1. Acesse https://sinapse.ai/settings/api-keys
 2. Crie uma nova API key com permissões de sync
 3. Configure a variável de ambiente
 
@@ -71,7 +71,7 @@ Para obter um token:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *sync-squad-synkra
+ *sync-squad-sinapse
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📦 Squad: ./squads/meu-squad/
@@ -87,7 +87,7 @@ Step 2: Calculate Checksum
 
 Step 3: Sync to SINAPSE API
   ✓ Visibility: private
-  ✓ API URL: https://api.synkra.dev/api
+  ✓ API URL: https://api.sinapse.ai/api
 
 Syncing to SINAPSE API...
 
@@ -99,7 +99,7 @@ Syncing to SINAPSE API...
 
 Next steps:
   - View squad: *describe-squad meu-squad
-  - Make public: *sync-squad-synkra ./squads/meu-squad --public
+  - Make public: *sync-squad-sinapse ./squads/meu-squad --public
 ```
 
 ## Flags
@@ -117,7 +117,7 @@ Next steps:
 
 ```
 ┌──────────────────────────────────────────────────┐
-│              *sync-squad-synkra                   │
+│              *sync-squad-sinapse                   │
 ├──────────────────────────────────────────────────┤
 │                                                   │
 │  1. Parse Arguments                               │
@@ -128,7 +128,7 @@ Next steps:
 │     ↓ (fail → abort)                              │
 │  4. Calculate SHA-256 checksum                    │
 │     ↓                                             │
-│  5. Check SYNKRA_API_TOKEN                        │
+│  5. Check SINAPSE_API_TOKEN                        │
 │     ↓ (missing → abort)                           │
 │  6. If --dry-run: show preview and exit           │
 │     ↓                                             │
@@ -144,8 +144,8 @@ Next steps:
 ### Request
 
 ```javascript
-POST ${SYNKRA_API_URL}/squads/sync
-Authorization: Bearer ${SYNKRA_API_TOKEN}
+POST ${SINAPSE_API_URL}/squads/sync
+Authorization: Bearer ${SINAPSE_API_TOKEN}
 Content-Type: application/json
 
 {
@@ -227,11 +227,11 @@ const checksum = crypto.createHash('sha256')
   .digest('hex');
 
 // 6. Check authentication
-const apiToken = process.env.SYNKRA_API_TOKEN;
-const apiUrl = process.env.SYNKRA_API_URL || 'https://api.synkra.dev/api';
+const apiToken = process.env.SINAPSE_API_TOKEN;
+const apiUrl = process.env.SINAPSE_API_URL || 'https://api.sinapse.ai/api';
 
 if (!apiToken) {
-  error('SYNKRA_API_TOKEN not set. See task docs for authentication.');
+  error('SINAPSE_API_TOKEN not set. See task docs for authentication.');
   return;
 }
 
@@ -278,7 +278,7 @@ if (result.success) {
   `);
 
   if (flags.public) {
-    output(`  URL: https://synkra.dev/squads/${result.data.squad_id}`);
+    output(`  URL: https://sinapse.ai/squads/${result.data.squad_id}`);
   }
 } else {
   error(`Sync failed: ${result.error}`);
@@ -291,8 +291,8 @@ if (result.success) {
 |-------|-------|---------|
 | `squad.yaml not found` | Caminho inválido | Verifique o path do squad |
 | `Validation failed` | Squad não passa na validação | Execute `*validate-squad` primeiro |
-| `SYNKRA_API_TOKEN not set` | Token não configurado | Configure a variável de ambiente |
-| `401 Unauthorized` | Token inválido ou expirado | Gere novo token em synkra.dev |
+| `SINAPSE_API_TOKEN not set` | Token não configurado | Configure a variável de ambiente |
+| `401 Unauthorized` | Token inválido ou expirado | Gere novo token em sinapse.ai |
 | `403 Forbidden` | Sem permissão para operação | Verifique permissões da API key |
 | `Squad not found or not owned` | Tentando atualizar squad de outro workspace | Verifique ownership |
 

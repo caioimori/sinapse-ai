@@ -104,7 +104,7 @@ squad-creator:
 | `*extend-squad` | squad-creator-extend.md | full, quick, key | Yes |
 | `*download-squad` | squad-creator-download.md | full | No |
 | `*publish-squad` | squad-creator-publish.md | full | No |
-| `*sync-squad-synkra` | squad-creator-sync-synkra.md | full | No |
+| `*sync-squad-sinapse` | squad-creator-sync-sinapse.md | full | No |
 | `*guide` | (built-in, rendered from agent .md) | full | No |
 | `*exit` | (built-in) | full, quick, key | No |
 
@@ -452,27 +452,27 @@ flowchart TD
 
 ---
 
-### `*sync-squad-synkra`
+### `*sync-squad-sinapse`
 
-**Task file:** `.sinapse-ai/development/tasks/squad-creator-sync-synkra.md`
+**Task file:** `.sinapse-ai/development/tasks/squad-creator-sync-sinapse.md`
 **Status:** Active (Sprint 8)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
-| `squad-creator-sync-synkra.md` | Task | EXISTS |
+| `squad-creator-sync-sinapse.md` | Task | EXISTS |
 | `squad-validator.js` | Script | EXISTS |
 
 **Execution flow:**
 
 ```mermaid
 flowchart TD
-    A["*sync-squad-synkra {path}"] --> B[Load squad-creator-sync-synkra.md task]
+    A["*sync-squad-sinapse {path}"] --> B[Load squad-creator-sync-sinapse.md task]
     B --> C[Find and validate squad.yaml]
     C --> D{Validation passed?}
     D -->|no| E[Abort: validation failed]
     D -->|yes| F[Calculate SHA-256 checksum]
-    F --> G{SYNKRA_API_TOKEN set?}
+    F --> G{SINAPSE_API_TOKEN set?}
     G -->|no| H[Abort: token not configured]
     G -->|yes| I{--dry-run?}
     I -->|yes| J[Preview sync details and exit]
@@ -482,7 +482,7 @@ flowchart TD
     L -->|no| N[Display error details]
 ```
 
-**API endpoint:** `https://api.synkra.dev/api/squads/sync`
+**API endpoint:** `https://api.sinapse.ai/api/squads/sync`
 
 ---
 
@@ -533,7 +533,7 @@ graph TD
         T7[squad-creator-extend.md]
         T8[squad-creator-download.md]
         T9[squad-creator-publish.md]
-        T10[squad-creator-sync-synkra.md]
+        T10[squad-creator-sync-sinapse.md]
         T11[squad-creator-sync-ide-command.md]
     end
 
@@ -690,7 +690,7 @@ graph TD
 - `.sinapse-ai/development/tasks/squad-creator-extend.md`
 - `.sinapse-ai/development/tasks/squad-creator-download.md`
 - `.sinapse-ai/development/tasks/squad-creator-publish.md`
-- `.sinapse-ai/development/tasks/squad-creator-sync-synkra.md`
+- `.sinapse-ai/development/tasks/squad-creator-sync-sinapse.md`
 - `.sinapse-ai/development/tasks/squad-creator-sync-ide-command.md`
 
 **Scripts (11 files in squad/ dir, all EXISTS):**

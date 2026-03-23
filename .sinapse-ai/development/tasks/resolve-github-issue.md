@@ -265,7 +265,7 @@ steps:
   3_handle_edge_cases:
     action: Watch for common pitfalls from past sessions
     known_pitfalls:
-      - Email addresses inside strings may match rename patterns (Issue #159: security@synkra/sinapse-ai.dev)
+      - Email addresses inside strings may match rename patterns (Issue #159: security@sinapse/sinapse-ai.dev)
       - YAML parser converts "KEY: value" to objects, not strings (Issue #138: core_principles)
       - Windows bash escapes `!` in inline scripts (use temp .js files instead of node -e)
       - Replace_all may match unintended occurrences (always verify with Grep after bulk changes)
@@ -582,7 +582,7 @@ These patterns were identified from real issue resolution sessions and should gu
 
 ### Issue #159 (Bulk Rename) — Parallel + Edge Cases
 - **Pattern:** 5 parallel agents for 136 files, split by directory
-- **Pitfall:** `@synkra/sinapse-ai` inside email `security@synkra/sinapse-ai.dev` was corrupted
+- **Pitfall:** `@sinapse/sinapse-ai` inside email `security@sinapse/sinapse-ai.dev` was corrupted
 - **Lesson:** Always Grep for edge cases AFTER bulk replacements
 
 ### Issue #138 (Copilot Format) — Research-First

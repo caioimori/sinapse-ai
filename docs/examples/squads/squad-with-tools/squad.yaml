@@ -5,7 +5,7 @@ name: squad-with-tools
 version: 1.0.0
 description: Example squad showing how to integrate custom tools
 
-author: SINAPSE Team <team@synkra.dev>
+author: SINAPSE Team <team@sinapse.ai>
 license: MIT
 slashPrefix: analyze
 

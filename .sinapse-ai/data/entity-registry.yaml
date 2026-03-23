@@ -4820,17 +4820,17 @@ entities:
         extensionPoints: []
       checksum: sha256:4221574f07adb5fb53c7c0c9f85656222a97e623b5e4072cee37e34b82f3f379
       lastVerified: '2026-03-11T00:48:55.846Z'
-    squad-creator-sync-synkra:
-      path: .sinapse-ai/development/tasks/squad-creator-sync-synkra.md
+    squad-creator-sync-sinapse:
+      path: .sinapse-ai/development/tasks/squad-creator-sync-sinapse.md
       layer: L2
       type: task
-      purpose: '*sync-squad-synkra'
+      purpose: '*sync-squad-sinapse'
       keywords:
         - squad
         - creator
         - sync
-        - synkra
-        - '*sync-squad-synkra'
+        - sinapse
+        - '*sync-squad-sinapse'
       usedBy:
         - squad-creator
       dependencies: []
@@ -5565,7 +5565,7 @@ entities:
       keywords:
         - agent
         - template
-        - synkra
+        - sinapse
         - sinapse
       usedBy:
         - squad-creator-extend
@@ -6193,7 +6193,7 @@ entities:
         - template
         - file
         - structure
-        - synkra
+        - sinapse
         - sinapse
       usedBy: []
       dependencies: []
@@ -6215,7 +6215,7 @@ entities:
         - personalized
         - workflow
         - template
-        - synkra
+        - sinapse
         - sinapse
         - agent
       usedBy: []
@@ -6527,7 +6527,7 @@ entities:
       keywords:
         - antigravity
         - rules
-        - synkra
+        - sinapse
         - sinapse
         - development
       usedBy: []
@@ -6556,7 +6556,7 @@ entities:
       keywords:
         - claude
         - rules
-        - synkra
+        - sinapse
         - sinapse
         - development
       usedBy: []
@@ -6590,7 +6590,7 @@ entities:
         - codex
         - rules
         - agents.md
-        - synkra
+        - sinapse
         - sinapse
         - (codex
         - cli)
@@ -6624,7 +6624,7 @@ entities:
       keywords:
         - copilot
         - rules
-        - synkra
+        - sinapse
         - sinapse
         - agent
         - github
@@ -6647,7 +6647,7 @@ entities:
       keywords:
         - cursor
         - rules
-        - synkra
+        - sinapse
         - sinapse
         - development
       usedBy: []
@@ -6676,7 +6676,7 @@ entities:
       keywords:
         - gemini
         - rules
-        - synkra
+        - sinapse
         - sinapse
       usedBy: []
       dependencies: []
@@ -13510,7 +13510,7 @@ entities:
         - squad-creator-extend
         - squad-creator-download
         - squad-creator-publish
-        - squad-creator-sync-synkra
+        - squad-creator-sync-sinapse
         - context7
       externalDeps:
         - git

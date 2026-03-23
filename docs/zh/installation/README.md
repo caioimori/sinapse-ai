@@ -44,13 +44,13 @@
 ### 新安装
 
 ```bash
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ### 升级
 
 ```bash
-npx @synkra/sinapse-ai install --force-upgrade
+npx @sinapse/sinapse-ai install --force-upgrade
 ```
 
 ### 遇到问题？
@@ -102,5 +102,5 @@ npx @synkra/sinapse-ai install --force-upgrade
 
 ## 支持
 
-- **GitHub Issues**: [@synkra/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
 - **文档**: [docs/](../)

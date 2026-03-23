@@ -153,7 +153,7 @@ NODE_ENV=development
 SINAPSE_DEBUG=false
 
 # 可选：MCP 配置
-SYNKRA_API_TOKEN=your-synkra-token
+SINAPSE_API_TOKEN=your-sinapse-token
 ```
 
 ### 第 3 步：验证安装

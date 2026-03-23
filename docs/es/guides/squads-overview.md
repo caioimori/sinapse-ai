@@ -183,7 +183,7 @@ tags:
 ├─────────────────────────────────────────────────────────────┤
 │  Nivel 1: LOCAL        --> ./squads/           (Privado)    │
 │  Nivel 2: SINAPSE-SQUADS  --> github.com/SynkraAI (Publico)    │
-│  Nivel 3: SYNKRA API   --> api.synkra.dev      (Marketplace)│
+│  Nivel 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)│
 └─────────────────────────────────────────────────────────────┘
 ```
 

@@ -24,7 +24,7 @@ describe('Integration - Task 8.3: Local NPX Execution', () => {
       const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
 
       // Then
-      expect(pkgJson.name).toBe('@synkra/sinapse-install');
+      expect(pkgJson.name).toBe('@sinapse/sinapse-install');
       expect(pkgJson.bin).toBeDefined();
       expect(pkgJson.bin['sinapse-install']).toBe('./bin/sinapse-install.js');
       expect(pkgJson.bin['edmcp']).toBe('./bin/edmcp.js');

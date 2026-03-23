@@ -1,0 +1,125 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — sinapse v1.1
+# ══════════════════════════════════════════════════════════════════════════════
+# The central orchestrator of Sinapse. The Sinapse Master (Imperator)
+# orchestrates all 15 squads, routes requests, coordinates cross-squad
+# workflows, and provides unified strategic vision.
+# 1 agent | 7 tasks | 2 KBs | Full ecosystem orchestration
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: sinapse
+version: "1.1.0"
+short-title: "Sinapse Master"
+description: >
+  Orquestrador central do Sinapse. O Sinapse Master (Imperator)
+  orquestra todas as 15 squads, roteia pedidos, coordena workflows cross-squad
+  e fornece visao estrategica unificada. Funciona de forma autonoma como
+  orquestrador principal do ecossistema, e tambem pode complementar
+  frameworks externos quando integrado.
+author: "Sinapse"
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-03-16"
+  created_by: "Sinapse"
+  quality_target: "Unified orchestration across all 15 squads"
+  agents_count: 1
+  tasks_count: 7
+  knowledge_bases_count: 2
+  workflows_count: 0
+  total_files: 10
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENT
+# ══════════════════════════════════════════════════════════════════════════════
+
+components:
+  agents:
+    - sinapse-master.md              # Imperator — Supreme Orchestrator
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASKS — 7 CORE
+# ══════════════════════════════════════════════════════════════════════════════
+
+  tasks:
+    - diagnose-and-route.md        # Analyze request, route to correct squad
+    - coordinate-cross-squad.md    # Orchestrate multi-squad workflows
+    - squad-status-report.md       # Report on all squads and capabilities
+    - strategic-brief.md           # Strategic overview leveraging all squads
+    - onboard-user.md             # Guide new users through available squads
+    - resolve-conflict.md         # Resolve cross-squad conflicts and overlaps
+    - compose-multi-squad-plan.md  # Design execution plans spanning multiple squads
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 2
+# ══════════════════════════════════════════════════════════════════════════════
+
+  knowledge_bases:
+    - routing-catalog.md           # Complete routing table for all 15 squads
+    - cross-squad-patterns.md      # Common cross-squad workflow patterns
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+
+dependencies:
+  node: []
+  python: []
+  squads:
+    - squad-brand
+    - squad-claude
+    - squad-commercial
+    - squad-content
+    - squad-copy
+    - squad-animations
+    - squad-cybersecurity
+    - squad-design
+    - squad-finance
+    - squad-growth
+    - squad-storytelling
+    - squad-paidmedia
+    - squad-product
+    - squad-research
+    - squad-council
+
+tags:
+  - orchestration
+  - command
+  - routing
+  - cross-squad
+  - meta-agent
+  - coordination
+  - strategic-oversight
+  - ecosystem
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS — ALL 15 SQUADS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  description: >
+    sinapse is the hub that connects to ALL squads. It does not produce
+    domain-specific work — it routes, coordinates, and synthesizes across
+    the entire ecosystem.
+  bidirectional:
+    - squad-brand
+    - squad-claude
+    - squad-commercial
+    - squad-content
+    - squad-copy
+    - squad-animations
+    - squad-cybersecurity
+    - squad-design
+    - squad-finance
+    - squad-growth
+    - squad-storytelling
+    - squad-paidmedia
+    - squad-product
+    - squad-research
+    - squad-council

@@ -10,7 +10,7 @@
 
 ## Descripción General
 
-SINAPSE-Core utiliza GitHub Actions para integración continua y despliegue. Este documento describe la arquitectura de flujos de trabajo optimizada implementada en la Historia 6.1.
+SINAPSE utiliza GitHub Actions para integración continua y despliegue. Este documento describe la arquitectura de flujos de trabajo optimizada implementada en la Historia 6.1.
 
 ## Jerarquía de Flujos de Trabajo
 

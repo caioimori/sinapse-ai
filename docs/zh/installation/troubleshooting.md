@@ -28,7 +28,7 @@
 首先运行此诊断命令来确定常见问题：
 
 ```bash
-npx @synkra/sinapse-ai status
+npx @sinapse/sinapse-ai status
 ```
 
 如果状态命令失败，请根据您的错误消息浏览以下部分。
@@ -37,7 +37,7 @@ npx @synkra/sinapse-ai status
 
 ## 安装问题
 
-### 问题 1："npx @synkra/sinapse-ai is not recognized"
+### 问题 1："npx @sinapse/sinapse-ai is not recognized"
 
 **症状:**
 
@@ -88,7 +88,7 @@ not in your home directory or temporary locations.
 cd /path/to/your/project
 
 # 然后运行安装程序
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -113,7 +113,7 @@ mkdir -p /path/to/your/project
 cd /path/to/your/project
 
 # 运行安装程序
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -150,7 +150,7 @@ nvm use 18
 
 ```
 npm ERR! code E404
-npm ERR! 404 Not Found - GET https://registry.npmjs.org/@synkra/sinapse-ai
+npm ERR! 404 Not Found - GET https://registry.npmjs.org/@sinapse/sinapse-ai
 ```
 
 **原因:** npm 注册表上找不到包（网络问题或拼写错误）。
@@ -169,7 +169,7 @@ npm config get registry
 npm config set registry https://registry.npmjs.org/
 
 # 重试安装
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -194,7 +194,7 @@ export PATH=~/.npm-global/bin:$PATH
 # 将 export 行添加到 ~/.bashrc 或 ~/.zshrc
 
 # 选项 2：使用 npx 而不是全局安装（推荐）
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 
 # 选项 3：使用 nvm 管理 Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -212,7 +212,7 @@ nvm install 18
 ```
 npm ERR! code ETIMEDOUT
 npm ERR! errno ETIMEDOUT
-npm ERR! network request to https://registry.npmjs.org/@synkra/sinapse-ai failed
+npm ERR! network request to https://registry.npmjs.org/@sinapse/sinapse-ai failed
 ```
 
 **原因:** 网络连接问题、防火墙或代理阻止 npm。
@@ -231,7 +231,7 @@ npm config set https-proxy http://proxy.company.com:8080
 npm config set strict-ssl false
 
 # 以详细日志重试
-npm install @synkra/sinapse-ai --verbose
+npm install @sinapse/sinapse-ai --verbose
 ```
 
 ---
@@ -258,7 +258,7 @@ npm config set strict-ssl false
 
 # 验证并重试
 npm config get strict-ssl
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -288,7 +288,7 @@ npm ERR! network This is a problem related to network connectivity.
 
 # 使用更长的超时重试
 npm config set fetch-timeout 60000
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -318,7 +318,7 @@ lsof +D /path/to/project
 kill -9 <PID>
 
 # 尝试再次安装
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -345,7 +345,7 @@ mount | grep /path/to/project
 
 # 改为安装到可写目录
 cd ~/projects/my-project
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -367,7 +367,7 @@ Error: ENOTEMPTY: directory not empty, rmdir '.sinapse-ai'
 mv .sinapse-ai .sinapse-ai.backup
 
 # 使用强制标志运行安装程序
-npx @synkra/sinapse-ai install --force-upgrade
+npx @sinapse/sinapse-ai install --force-upgrade
 
 # 如果需要，从备份恢复自定义文件
 cp .sinapse-ai.backup/custom-files/* .sinapse-ai/
@@ -398,7 +398,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # 或改用 CMD
 cmd
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 #### 问题 14："Path too long"
@@ -418,7 +418,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /
 
 # 或使用更短的项目路径
 cd C:\dev\proj
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 #### 问题 15："npm not found in Git Bash"
@@ -459,7 +459,7 @@ xcode-select --install
 
 # 按照安装对话框进行操作
 # 然后重试
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 #### 问题 17："Apple Silicon (M1/M2) compatibility"
@@ -481,7 +481,7 @@ softwareupdate --install-rosetta
 # 使用 Node.js 的 x86 版本（如果需要）
 arch -x86_64 /bin/bash
 nvm install 18
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 ---
@@ -508,7 +508,7 @@ sudo dnf install vips-devel
 
 # 清除 npm 缓存并重新安装
 npm cache clean --force
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 ```
 
 #### 问题 19："GLIBC version too old"
@@ -557,7 +557,7 @@ nvm use 16
 3. 检查 IDE 设置允许自定义命令
 4. 为特定 IDE 重新运行安装：
    ```bash
-   npx @synkra/sinapse-ai install --ide claude-code
+   npx @sinapse/sinapse-ai install --ide claude-code
    ```
 
 ---
@@ -592,7 +592,7 @@ Error: Agent 'dev' not found in .sinapse-ai/agents/
 ls .sinapse-ai/agents/
 
 # 如果缺失，重新安装核心
-npx @synkra/sinapse-ai install --full
+npx @sinapse/sinapse-ai install --full
 
 # 检查 core-config.yaml 有效
 cat .sinapse-ai/core-config.yaml
@@ -621,7 +621,7 @@ npx yaml-lint .sinapse-ai/agents/dev.md
 
 # 重新安装以获取干净的代理文件
 mv .sinapse-ai/agents/dev.md .sinapse-ai/agents/dev.md.backup
-npx @synkra/sinapse-ai install --full
+npx @sinapse/sinapse-ai install --full
 ```
 
 ---
@@ -632,16 +632,16 @@ npx @synkra/sinapse-ai install --full
 
 ```bash
 # 检查 SINAPSE 安装状态
-npx @synkra/sinapse-ai status
+npx @sinapse/sinapse-ai status
 
 # 列出可用的 Squad
-npx @synkra/sinapse-ai install
+npx @sinapse/sinapse-ai install
 
 # 更新现有安装
-npx @synkra/sinapse-ai update
+npx @sinapse/sinapse-ai update
 
 # 显示详细日志
-npx @synkra/sinapse-ai install --verbose
+npx @sinapse/sinapse-ai install --verbose
 ```
 
 ### 系统信息
@@ -681,7 +681,7 @@ ls -la .sinapse-ai/
 
 ### 请求帮助前
 
-1. 运行 `npx @synkra/sinapse-ai status` 并记录输出
+1. 运行 `npx @sinapse/sinapse-ai status` 并记录输出
 2. 查看此故障排除指南
 3. 搜索现有 [GitHub 问题](https://github.com/SynkraAI/sinapse-ai/issues)
 
@@ -718,7 +718,7 @@ ls -la .sinapse-ai/
 
 ### 支持渠道
 
-- **GitHub Issues**: [@synkra/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
+- **GitHub Issues**: [@sinapse/sinapse-ai/issues](https://github.com/SynkraAI/sinapse-ai/issues)
 - **文档**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

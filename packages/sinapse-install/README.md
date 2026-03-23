@@ -1,11 +1,11 @@
-# @synkra/sinapse-install
+# @sinapse/sinapse-install
 
 NPX installer for SINAPSE - AI-Orchestrated System for Full Stack Development.
 
 ## Quick Start
 
 ```bash
-npx @synkra/sinapse-install
+npx @sinapse/sinapse-install
 ```
 
 That's it! The installer will guide you through setting up SINAPSE in less than 5 minutes.
@@ -23,13 +23,13 @@ That's it! The installer will guide you through setting up SINAPSE in less than 
 ### Interactive Installation
 
 ```bash
-npx @synkra/sinapse-install
+npx @sinapse/sinapse-install
 ```
 
 ### Options
 
 ```bash
-npx @synkra/sinapse-install --help
+npx @sinapse/sinapse-install --help
 
 Options:
   -v, --version         Output the current version
@@ -46,7 +46,7 @@ Options:
 Preview the installation without making any changes:
 
 ```bash
-npx @synkra/sinapse-install --dry-run
+npx @sinapse/sinapse-install --dry-run
 ```
 
 ### Direct Profile Selection
@@ -54,8 +54,8 @@ npx @synkra/sinapse-install --dry-run
 Skip the profile question by specifying it directly:
 
 ```bash
-npx @synkra/sinapse-install --profile bob
-npx @synkra/sinapse-install --profile advanced
+npx @sinapse/sinapse-install --profile bob
+npx @sinapse/sinapse-install --profile advanced
 ```
 
 ## edmcp - Docker MCP Manager

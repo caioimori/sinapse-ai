@@ -1,6 +1,6 @@
 /**
  * SINAPSE Updater
- * Intelligent update system for SINAPSE-Core installations
+ * Intelligent update system for SINAPSE installations
  *
  * @module packages/installer/src/updater
  * @story Epic 7 - CLI Update Command
@@ -180,7 +180,7 @@ class SINAPSEUpdater {
     if (fs.existsSync(localPackageJsonPath)) {
       try {
         const pkg = await fs.readJson(localPackageJsonPath);
-        if (pkg.name === '@synkra/sinapse-ai' || pkg.name === 'sinapse-ai') {
+        if (pkg.name === '@sinapse/sinapse-ai' || pkg.name === 'sinapse-ai') {
           return { version: pkg.version, installedAt: null, mode: 'framework-development' };
         }
       } catch (error) {
