@@ -82,7 +82,7 @@ Apply keyword matching against the 7 specialist domains:
 |--------|----------|----------|---------|
 | hooks | hook, pre_tool_use, post_tool_use, lifecycle, intercept, block, exit code, automation pipeline, pre_compact, notification, damage control | hooks-architect | Latch |
 | mcp | mcp, server, tool search, stdio, sse, http streamable, mcp__, context7, exa, docker gateway, add server | mcp-integrator | Piper |
-| subagents | subagent, agent team, swarm, teammate, worktree, parallel, background agent, spawn, multi-agent, TeammateTool | swarm-orchestrator | Nexus |
+| subagents | subagent, agent team, swarm, teammate, worktree, parallel, background agent, spawn, multi-agent, TeammateTool | swarm-orqx | Nexus |
 | config | settings, permission, CLAUDE.md, rules, sandbox, managed, enterprise, allow, deny, keybinding, context window, compaction | config-engineer | Sigil |
 | skills | skill, command, plugin, SKILL.md, slash command, context engineering, spec-driven, .claude/commands, .claude/skills, marketplace | skill-craftsman | Anvil |
 | integration | integrate, repository, project setup, CI/CD, headless, brownfield, monorepo, SINAPSE, git workflow | project-integrator | Conduit |

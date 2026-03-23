@@ -18,7 +18,7 @@
 
 ## Visão Geral
 
-Este guia fornece uma referência abrangente para todos os 9 agentes aprimorados com PV no workflow do HybridOps. Cada agente é projetado para lidar com uma fase específica do workflow de 9 fases, com integração da mente Pedro Valério (PV) para tomada de decisão aprimorada, validação e garantia de qualidade.
+Este guia fornece uma referência abrangente para todos os 9 agentes aprimorados com PV no workflow do HybridOps. Cada agente é projetado para lidar com uma fase específica do workflow de 9 fases, com integração da mente PV para tomada de decisão aprimorada, validação e garantia de qualidade.
 
 ---
 
@@ -479,7 +479,7 @@ const workflowContext = pvMind.getPhaseContext(<phase-number>);
 
 ## Integração PV Mind
 
-Todos os agentes usam integração da mente Pedro Valério com:
+Todos os agentes usam integração da mente PV com:
 
 ### Framework META_AXIOMAS
 

@@ -235,7 +235,7 @@ squads:
   autoLoad: false
 pvMindContext:
   enabled: true
-  location: outputs/minds/pedro_valerio
+  location: outputs/minds/process_validator
   features:
     persona_voice: true
     technical_depth: advanced

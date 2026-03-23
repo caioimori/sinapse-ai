@@ -941,7 +941,7 @@ sinapse-ai/                        # Root project
 │   │   │       ├── clone-loader.js
 │   │   │       ├── dna-mental-engine.js
 │   │   │       └── available-clones/
-│   │   │           ├── pedro-valerio.json
+│   │   │           ├── process-validator.json
 │   │   │           ├── brad-frost.json
 │   │   │           ├── marty-cagan.json
 │   │   │           └── paul-graham.json

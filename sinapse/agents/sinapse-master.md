@@ -87,9 +87,9 @@ intelligent_routing:
   via_orchestrator:
     when: "Multi-agent workflow or broad domain request"
     examples:
-      - "Construa minha marca" → @brand-orchestrator
+      - "Construa minha marca" → @brand-orqx
       - "Campanha de lancamento" → @paidmedia-orchestrator + @copy-strategist
-      - "Assessment de seguranca" → @cyber-orchestrator
+      - "Assessment de seguranca" → @cyber-orqx
 
 # ══════════════════════════════════════════════════════════════════════════════
 # COMPLETE ROUTING TABLE — ALL 15 SQUADS
@@ -99,8 +99,8 @@ routing_table:
   squads:
     - squad: squad-brand
       prefix: brand
-      orchestrator: brand-orchestrator (Meridian)
-      invocation: "/brand:agents:brand-orchestrator"
+      orchestrator: brand-orqx (Meridian)
+      invocation: "/brand:agents:brand-orqx"
       domain: "Branding, identidade visual, brand strategy, design system, motion, sonic branding, brandbook"
       agents: 15
       tasks: 97
@@ -108,8 +108,8 @@ routing_table:
 
     - squad: squad-commercial
       prefix: commercial
-      orchestrator: cs-orchestrator (Pipeline)
-      invocation: "/commercial:agents:cs-orchestrator"
+      orchestrator: commercial-orqx (Pipeline)
+      invocation: "/commercial:agents:commercial-orqx"
       domain: "Vendas, CRM, pipeline, funnel, ofertas, pricing, revenue operations, client success"
       agents: 10
       tasks: 85
@@ -117,8 +117,8 @@ routing_table:
 
     - squad: squad-content
       prefix: content
-      orchestrator: content-orchestrator
-      invocation: "/content:agents:content-orchestrator"
+      orchestrator: content-orqx
+      invocation: "/content:agents:content-orqx"
       domain: "Conteudo, editorial, blog, social media, content strategy, SEO content"
       agents: 7
       tasks: 90
@@ -135,8 +135,8 @@ routing_table:
 
     - squad: squad-animations
       prefix: ca
-      orchestrator: ca-orchestrator (Kinetic)
-      invocation: "/ca:agents:ca-orchestrator"
+      orchestrator: animations-orqx (Kinetic)
+      invocation: "/ca:agents:animations-orqx"
       domain: "Animacoes web, Three.js, shaders, motion design, WebGL, GSAP, Framer Motion"
       agents: 9
       tasks: 73
@@ -144,8 +144,8 @@ routing_table:
 
     - squad: squad-design
       prefix: design
-      orchestrator: dx-orchestrator (Nexus)
-      invocation: "/design:agents:dx-orchestrator"
+      orchestrator: design-orqx (Nexus)
+      invocation: "/design:agents:design-orqx"
       domain: "UX/UI, experiencia digital, wireframes, prototipos, design system, acessibilidade"
       agents: 8
       tasks: 101
@@ -153,8 +153,8 @@ routing_table:
 
     - squad: squad-finance
       prefix: finance
-      orchestrator: fi-orchestrator (Ledger)
-      invocation: "/finance:agents:fi-orchestrator"
+      orchestrator: finance-orqx (Ledger)
+      invocation: "/finance:agents:finance-orqx"
       domain: "Inteligencia financeira, pricing, P&L, budget, unit economics, financial modeling"
       agents: 5
       tasks: 45
@@ -162,8 +162,8 @@ routing_table:
 
     - squad: squad-growth
       prefix: growth
-      orchestrator: ga-orchestrator (Catalyst)
-      invocation: "/growth:agents:ga-orchestrator"
+      orchestrator: growth-orqx (Catalyst)
+      invocation: "/growth:agents:growth-orqx"
       domain: "Growth organico, SEO, analytics, metricas, A/B testing, CRO organico"
       agents: 7
       tasks: 77
@@ -171,8 +171,8 @@ routing_table:
 
     - squad: squad-paidmedia
       prefix: pm
-      orchestrator: pm-orchestrator (Apex)
-      invocation: "/pm:agents:pm-orchestrator"
+      orchestrator: paidmedia-orqx (Apex)
+      invocation: "/pm:agents:paidmedia-orqx"
       domain: "Midia paga, Meta Ads, Google Ads, TikTok Ads, LinkedIn Ads, CRO pago"
       agents: 9
       tasks: 82
@@ -180,8 +180,8 @@ routing_table:
 
     - squad: squad-product
       prefix: product
-      orchestrator: ps-orchestrator (Vector)
-      invocation: "/product:agents:ps-orchestrator"
+      orchestrator: product-orqx (Vector)
+      invocation: "/product:agents:product-orqx"
       domain: "Produto, discovery, roadmap, user stories, product strategy, OKR"
       agents: 7
       tasks: 75
@@ -189,8 +189,8 @@ routing_table:
 
     - squad: squad-research
       prefix: research
-      orchestrator: research-orchestrator (Prism)
-      invocation: "/research:agents:research-orchestrator"
+      orchestrator: research-orqx (Prism)
+      invocation: "/research:agents:research-orqx"
       domain: "Pesquisa, inteligencia competitiva, benchmarking, analise de mercado"
       agents: 7
       tasks: 72
@@ -198,8 +198,8 @@ routing_table:
 
     - squad: squad-claude
       prefix: claude
-      orchestrator: cm-orchestrator (Orion)
-      invocation: "/claude:agents:cm-orchestrator"
+      orchestrator: claude-orqx (Orion)
+      invocation: "/claude:agents:claude-orqx"
       domain: "Claude Code mastery, prompt engineering, MCP, automacao, squad creation"
       agents: 8
       tasks: 26
@@ -207,8 +207,8 @@ routing_table:
 
     - squad: squad-council
       prefix: council
-      orchestrator: council-orchestrator (Zenith)
-      invocation: "/council:agents:council-orchestrator"
+      orchestrator: council-orqx (Zenith)
+      invocation: "/council:agents:council-orqx"
       domain: "Conselho estrategico, modelos mentais, decisao estrategica, advisory"
       agents: 11
       tasks: 23
@@ -216,8 +216,8 @@ routing_table:
 
     - squad: squad-storytelling
       prefix: narrative
-      orchestrator: narrative-orchestrator (Arc)
-      invocation: "/narrative:agents:narrative-orchestrator"
+      orchestrator: storytelling-orqx (Arc)
+      invocation: "/narrative:agents:storytelling-orqx"
       domain: "Narrativa, storytelling, pitch, apresentacao, script"
       agents: 10
       tasks: 17
@@ -225,8 +225,8 @@ routing_table:
 
     - squad: squad-cybersecurity
       prefix: cyber
-      orchestrator: cyber-orchestrator (Fortress)
-      invocation: "/cyber:agents:cyber-orchestrator"
+      orchestrator: cyber-orqx (Fortress)
+      invocation: "/cyber:agents:cyber-orqx"
       domain: "Seguranca cibernetica, compliance, pentest, incident response, LGPD"
       agents: 8
       tasks: 22
@@ -234,8 +234,8 @@ routing_table:
 
     - squad: squad-cloning
       prefix: cloning
-      orchestrator: clone-orchestrator (Helix)
-      invocation: "/cloning:agents:clone-orchestrator"
+      orchestrator: cloning-orqx (Helix)
+      invocation: "/cloning:agents:cloning-orqx"
       domain: "Clonagem cognitiva, extracao de DNA mental, geracao de agentes a partir de mentes reais"
       agents: 8
       tasks: 54
@@ -243,8 +243,8 @@ routing_table:
 
     - squad: squad-courses
       prefix: courses
-      orchestrator: course-orchestrator (Syllabus)
-      invocation: "/courses:agents:course-orchestrator"
+      orchestrator: courses-orqx (Syllabus)
+      invocation: "/courses:agents:courses-orqx"
       domain: "Criacao de cursos, apresentacoes didaticas, workshops, ebooks educacionais, workbooks, video production planning"
       agents: 8
       tasks: 59
@@ -468,35 +468,35 @@ commands:
 
 relationships:
   delegates_to:
-    - agent: brand-orchestrator (Meridian)
+    - agent: brand-orqx (Meridian)
       context: "All branding, identity, and brand system work"
-    - agent: cs-orchestrator (Pipeline)
+    - agent: commercial-orqx (Pipeline)
       context: "All commercial, sales, CRM, and revenue operations"
-    - agent: content-orchestrator
+    - agent: content-orqx
       context: "All content strategy, editorial, and social media"
     - agent: copy-strategist (Quill)
       context: "All copywriting, persuasion, and conversion copy"
-    - agent: ca-orchestrator (Kinetic)
+    - agent: animations-orqx (Kinetic)
       context: "All web animations, Three.js, shaders, motion"
-    - agent: dx-orchestrator (Nexus)
+    - agent: design-orqx (Nexus)
       context: "All UX/UI, digital experience, and interaction design"
-    - agent: fi-orchestrator (Ledger)
+    - agent: finance-orqx (Ledger)
       context: "All financial intelligence, pricing models, P&L"
-    - agent: ga-orchestrator (Catalyst)
+    - agent: growth-orqx (Catalyst)
       context: "All organic growth, SEO, analytics, metrics"
-    - agent: pm-orchestrator (Apex)
+    - agent: paidmedia-orqx (Apex)
       context: "All paid media, Meta/Google/TikTok/LinkedIn Ads"
-    - agent: ps-orchestrator (Vector)
+    - agent: product-orqx (Vector)
       context: "All product strategy, discovery, roadmap"
-    - agent: research-orchestrator (Prism)
+    - agent: research-orqx (Prism)
       context: "All market research, competitive intelligence"
-    - agent: cm-orchestrator (Orion)
+    - agent: claude-orqx (Orion)
       context: "All Claude Code mastery, prompt engineering, MCP"
-    - agent: council-orchestrator (Zenith)
+    - agent: council-orqx (Zenith)
       context: "All strategic counsel, mental models, advisory"
-    - agent: narrative-orchestrator (Arc)
+    - agent: storytelling-orqx (Arc)
       context: "All storytelling, pitch, presentation, narrative"
-    - agent: cyber-orchestrator (Fortress)
+    - agent: cyber-orqx (Fortress)
       context: "All cybersecurity, compliance, incident response"
   receives_from:
     - agent: "User (direct)"
@@ -579,7 +579,7 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 |---|-------|--------|-------------|--------|
 | 1 | brand | brand | Meridian | Branding, identidade visual, design system |
 | 2 | commercial | commercial | Pipeline | Vendas, CRM, pipeline, revenue |
-| 3 | content | content | content-orchestrator | Conteudo, editorial, social media |
+| 3 | content | content | content-orqx | Conteudo, editorial, social media |
 | 4 | copy | copywriting | Quill | Copy, persuasao, headlines |
 | 5 | animations | ca | Kinetic | Animacoes, Three.js, shaders, motion |
 | 6 | design | design | Nexus | UX/UI, wireframes, prototipos |

@@ -23,7 +23,7 @@ const workflowElicitationSteps = [
       {
         type: 'input',
         name: 'squadName',
-        message: 'Which squad? (kebab-case name, e.g., "pedro-valerio"):',
+        message: 'Which squad? (kebab-case name, e.g., "my-squad"):',
         when: (answers) => answers.targetContext === 'squad' || answers.targetContext === 'hybrid',
         validate: (input) => {
           if (!input) return 'Squad name is required';

@@ -30,7 +30,7 @@
 - **PRE-SPRINT 2:** Configurar Whisper dentro do Claude Code (MCP server, skill, ou API) para transcrever diretamente sem depender de OpenClaw externo
 - **Sprint 2:** Primeiro clone cognitivo real usando o pipeline squad-cloning
 - Target do primeiro clone ainda não definido — Caio vai escolher quando retornar
-- Extrações existentes em `extracted-intelligence/` (Alan Nicolas, Marcelo Kimura, Matheus Soier) podem servir como base
+- Extrações existentes em `extracted-intelligence/` (Marcelo Kimura, Matheus Soier) podem servir como base
 
 ### Decisão pendente do Caio (ao retornar)
 1. Investigar melhor opção de Whisper para Claude Code: MCP server? Skill? API direta? Plugin local?
@@ -257,7 +257,7 @@ squad-cloning/
 ### Agentes
 | ID | Persona | Função |
 |----|---------|--------|
-| clone-orchestrator | Helix | Coordenador do pipeline |
+| cloning-orqx | Helix | Coordenador do pipeline |
 | source-hunter | Scout | Descobre e cataloga fontes de conteúdo |
 | content-capturer | Capture | Transcrição em massa via OpenClaw |
 | cognitive-extractor | Cortex | Extrai 5 camadas DNA cognitivo |
@@ -319,7 +319,7 @@ O plano detalhado dos Sprints 2-6 está em:
 
 - `SQUAD-CREATION-STANDARDS.md` — padrão obrigatório para squads
 - `.sinapse-ai/product/templates/personalized-agent-template.md` — template de agente
-- `extracted-intelligence/` — extrações existentes (Alan, Marcelo, Matheus)
+- `extracted-intelligence/` — extrações existentes (Marcelo, Matheus)
 - Mega Brain: `github.com/thiagofinch/mega-brain` — JARVIS pipeline reference
 - OpenClaw setup: `Second-Brain/notas/openclaw-setup-reconstrucao.md`
 

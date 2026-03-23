@@ -1,7 +1,7 @@
 # Multi-Agent Review Checklist
 
 **Checklist ID:** CCM-CL-004
-**Referenced by:** swarm-orchestrator
+**Referenced by:** swarm-orqx
 **Purpose:** Post-completion validation after an agent team finishes work. Ensures all outputs are present, merged without conflict, meet quality standards, and all temporary resources are cleaned up.
 
 [[LLM: INITIALIZATION INSTRUCTIONS - MULTI-AGENT REVIEW

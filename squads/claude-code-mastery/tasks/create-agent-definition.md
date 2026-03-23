@@ -3,7 +3,7 @@
 **Task ID:** create-agent-definition
 **Version:** 1.0
 **Purpose:** Create a purpose-built subagent definition file for use with the Agent tool
-**Orchestrator:** @swarm-orchestrator (Nexus)
+**Orchestrator:** @swarm-orqx (Nexus)
 **Mode:** Interactive (elicit: true)
 **Quality Standard:** Agent file passes lint, loads correctly, and executes test prompt
 

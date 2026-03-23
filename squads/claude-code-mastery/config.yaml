@@ -55,7 +55,7 @@ tiers:
     agents:
       - hooks-architect
       - mcp-integrator
-      - swarm-orchestrator
+      - swarm-orqx
       - config-engineer
     purpose: "Deep expertise in Claude Code feature domains"
 
@@ -93,8 +93,8 @@ agents:
     icon: "🔌"
     focus: "MCP servers, tool discovery, agent-as-MCP, integration patterns"
 
-  swarm-orchestrator:
-    file: agents/swarm-orchestrator.md
+  swarm-orqx:
+    file: agents/swarm-orqx.md
     tier: 1
     based_on: "Kieran Klaassen + Reuven Cohen"
     icon: "🐝"
@@ -134,7 +134,7 @@ agents:
 
 handoffs:
   claude-mastery-chief:
-    routes_to: [hooks-architect, mcp-integrator, swarm-orchestrator, config-engineer, skill-craftsman, project-integrator, roadmap-sentinel]
+    routes_to: [hooks-architect, mcp-integrator, swarm-orqx, config-engineer, skill-craftsman, project-integrator, roadmap-sentinel]
 
   hooks-architect:
     collaborates_with: [config-engineer, skill-craftsman]
@@ -144,7 +144,7 @@ handoffs:
     collaborates_with: [hooks-architect, project-integrator]
     escalates_to: [claude-mastery-chief]
 
-  swarm-orchestrator:
+  swarm-orqx:
     collaborates_with: [hooks-architect, config-engineer]
     escalates_to: [claude-mastery-chief]
 

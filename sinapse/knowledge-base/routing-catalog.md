@@ -6,21 +6,21 @@
 
 | # | Squad | Prefix | Orchestrator (Codename) | Invocation |
 |---|-------|--------|------------------------|-----------|
-| 1 | squad-brand | brand | brand-orchestrator (Meridian) | `/brand:agents:brand-orchestrator` |
-| 2 | squad-commercial | commercial | cs-orchestrator (Pipeline) | `/commercial:agents:cs-orchestrator` |
-| 3 | squad-content | content | content-orchestrator | `/content:agents:content-orchestrator` |
+| 1 | squad-brand | brand | brand-orqx (Meridian) | `/brand:agents:brand-orqx` |
+| 2 | squad-commercial | commercial | commercial-orqx (Pipeline) | `/commercial:agents:commercial-orqx` |
+| 3 | squad-content | content | content-orqx | `/content:agents:content-orqx` |
 | 4 | squad-copy | copywriting | copy-strategist (Quill) | `/copywriting:agents:copy-strategist` |
-| 5 | squad-animations | ca | ca-orchestrator (Kinetic) | `/ca:agents:ca-orchestrator` |
-| 6 | squad-design | digital-experience | dx-orchestrator (Nexus) | `/digital-experience:agents:dx-orchestrator` |
-| 7 | squad-finance | finance | fi-orchestrator (Ledger) | `/finance:agents:fi-orchestrator` |
-| 8 | squad-growth | growth | ga-orchestrator (Catalyst) | `/growth:agents:ga-orchestrator` |
-| 9 | squad-paidmedia | pm | pm-orchestrator (Apex) | `/pm:agents:pm-orchestrator` |
-| 10 | squad-product | product | ps-orchestrator (Vector) | `/product:agents:ps-orchestrator` |
-| 11 | squad-research | research | research-orchestrator (Prism) | `/research:agents:research-orchestrator` |
-| 12 | squad-claude | claude | cm-orchestrator (Orion) | `/claude:agents:cm-orchestrator` |
-| 13 | squad-council | council | council-orchestrator (Zenith) | `/council:agents:council-orchestrator` |
-| 14 | squad-storytelling | narrative | narrative-orchestrator (Arc) | `/narrative:agents:narrative-orchestrator` |
-| 15 | squad-cybersecurity | cyber | cyber-orchestrator (Fortress) | `/cyber:agents:cyber-orchestrator` |
+| 5 | squad-animations | ca | animations-orqx (Kinetic) | `/ca:agents:animations-orqx` |
+| 6 | squad-design | digital-experience | design-orqx (Nexus) | `/digital-experience:agents:design-orqx` |
+| 7 | squad-finance | finance | finance-orqx (Ledger) | `/finance:agents:finance-orqx` |
+| 8 | squad-growth | growth | growth-orqx (Catalyst) | `/growth:agents:growth-orqx` |
+| 9 | squad-paidmedia | pm | paidmedia-orqx (Apex) | `/pm:agents:paidmedia-orqx` |
+| 10 | squad-product | product | product-orqx (Vector) | `/product:agents:product-orqx` |
+| 11 | squad-research | research | research-orqx (Prism) | `/research:agents:research-orqx` |
+| 12 | squad-claude | claude | claude-orqx (Orion) | `/claude:agents:claude-orqx` |
+| 13 | squad-council | council | council-orqx (Zenith) | `/council:agents:council-orqx` |
+| 14 | squad-storytelling | narrative | storytelling-orqx (Arc) | `/narrative:agents:storytelling-orqx` |
+| 15 | squad-cybersecurity | cyber | cyber-orqx (Fortress) | `/cyber:agents:cyber-orqx` |
 
 ---
 
@@ -53,7 +53,7 @@
   - Revenue analytics and forecasting
 - **Keywords:** vendas, sales, CRM, pipeline, funnel, oferta, pricing, proposta, deal, churn, upsell, cliente, revenue, comercial, forecast
 
-### 3. squad-content (content-orchestrator)
+### 3. squad-content (content-orqx)
 - **Domain:** Content strategy, editorial calendar, blog, social media, newsletter, content distribution
 - **Agents:** 7 | **Tasks:** 90 | **KBs:** 16 | **Workflows:** 6
 - **Key Capabilities:**

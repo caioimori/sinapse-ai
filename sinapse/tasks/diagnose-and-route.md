@@ -52,21 +52,21 @@ Mapear contra a routing table:
 
 | Dominio | Squad | Prefix | Orchestrator | Invocacao |
 |---------|-------|--------|-------------|-----------|
-| Branding/identidade | brand-system | brand | Meridian | `/brand:agents:brand-orchestrator` |
-| Vendas/CRM/pipeline | commercial-systems | commercial | Pipeline | `/commercial:agents:cs-orchestrator` |
-| Conteudo/editorial | content-intelligence | content | content-orchestrator | `/content:agents:content-orchestrator` |
+| Branding/identidade | brand-system | brand | Meridian | `/brand:agents:brand-orqx` |
+| Vendas/CRM/pipeline | commercial-systems | commercial | Pipeline | `/commercial:agents:commercial-orqx` |
+| Conteudo/editorial | content-intelligence | content | content-orqx | `/content:agents:content-orqx` |
 | Copywriting/persuasao | copywriting-persuasion | copywriting | Quill | `/copywriting:agents:copy-strategist` |
-| Animacoes/Three.js | creative-animations | ca | Kinetic | `/ca:agents:ca-orchestrator` |
-| UX/UI/experiencia | digital-experience | digital-experience | Nexus | `/digital-experience:agents:dx-orchestrator` |
-| Financeiro/pricing | financial-intelligence | finance | Ledger | `/finance:agents:fi-orchestrator` |
-| Growth/SEO/analytics | growth-analytics | growth | Catalyst | `/growth:agents:ga-orchestrator` |
-| Midia paga/ads | paid-media | pm | Apex | `/pm:agents:pm-orchestrator` |
-| Produto/discovery | product-systems | product | Vector | `/product:agents:ps-orchestrator` |
-| Pesquisa/competitivo | research-intelligence | research | Prism | `/research:agents:research-orchestrator` |
-| Claude Code/prompts | claude-mastery | claude | Orion | `/claude:agents:cm-orchestrator` |
-| Estrategia/advisory | strategic-council | council | Zenith | `/council:agents:council-orchestrator` |
-| Narrativa/pitch | narrative-masters | narrative | Arc | `/narrative:agents:narrative-orchestrator` |
-| Seguranca/compliance | cyber-defense | cyber | Fortress | `/cyber:agents:cyber-orchestrator` |
+| Animacoes/Three.js | creative-animations | ca | Kinetic | `/ca:agents:animations-orqx` |
+| UX/UI/experiencia | digital-experience | digital-experience | Nexus | `/digital-experience:agents:design-orqx` |
+| Financeiro/pricing | financial-intelligence | finance | Ledger | `/finance:agents:finance-orqx` |
+| Growth/SEO/analytics | growth-analytics | growth | Catalyst | `/growth:agents:growth-orqx` |
+| Midia paga/ads | paid-media | pm | Apex | `/pm:agents:paidmedia-orqx` |
+| Produto/discovery | product-systems | product | Vector | `/product:agents:product-orqx` |
+| Pesquisa/competitivo | research-intelligence | research | Prism | `/research:agents:research-orqx` |
+| Claude Code/prompts | claude-mastery | claude | Orion | `/claude:agents:claude-orqx` |
+| Estrategia/advisory | strategic-council | council | Zenith | `/council:agents:council-orqx` |
+| Narrativa/pitch | narrative-masters | narrative | Arc | `/narrative:agents:storytelling-orqx` |
+| Seguranca/compliance | cyber-defense | cyber | Fortress | `/cyber:agents:cyber-orqx` |
 
 ### 3. Ambiguity Resolution
 

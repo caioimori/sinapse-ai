@@ -3,7 +3,7 @@
 **Task ID:** worktree-strategy
 **Version:** 1.0
 **Purpose:** Plan and configure git worktree isolation for multi-agent development scenarios
-**Orchestrator:** @swarm-orchestrator (Nexus)
+**Orchestrator:** @swarm-orqx (Nexus)
 **Mode:** Interactive (elicit: true)
 **Quality Standard:** Worktree lifecycle tested end-to-end, cleanup verified
 

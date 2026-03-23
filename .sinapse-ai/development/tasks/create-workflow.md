@@ -261,7 +261,7 @@ To create a new workflow definition that orchestrates multiple agents and tasks 
 ```
 ELICIT: Target Context
 1. Where should this workflow be created? (core / squad / hybrid)
-2. If squad or hybrid: Which squad? (kebab-case name, e.g., "pedro-valerio")
+2. If squad or hybrid: Which squad? (kebab-case name, e.g., "my-squad")
 ```
 
 ### Step 1: Workflow Overview

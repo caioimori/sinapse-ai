@@ -439,7 +439,7 @@ All of these must pass before a PR can be merged:
 
 ### CODEOWNERS
 
-Critical paths require approval from `@Pedrovaleriolopez` or `@oalanicolas` (maintainers):
+Critical paths require approval from `@Pedrovaleriolopez` (maintainer):
 
 | Path | Why |
 |------|-----|
@@ -449,7 +449,7 @@ Critical paths require approval from `@Pedrovaleriolopez` or `@oalanicolas` (mai
 | `.github/` | CI/CD workflows, branch protection |
 | `.sinapse-ai/core-config.yaml` | Framework configuration |
 
-All other paths require review from any maintainer (`@Pedrovaleriolopez` or `@oalanicolas`).
+All other paths require review from `@Pedrovaleriolopez`.
 
 See [`.github/CODEOWNERS`](.github/CODEOWNERS) for the full ownership map.
 

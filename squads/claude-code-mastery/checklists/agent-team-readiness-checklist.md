@@ -1,7 +1,7 @@
 # Agent Team Readiness Checklist
 
 **Checklist ID:** CCM-CL-003
-**Referenced by:** swarm-orchestrator
+**Referenced by:** swarm-orqx
 **Purpose:** Pre-spawn validation before launching parallel or sequential agent teams. Ensures task decomposition is sound, agents are configured, isolation is planned, and failure recovery is defined.
 
 [[LLM: INITIALIZATION INSTRUCTIONS - AGENT TEAM READINESS

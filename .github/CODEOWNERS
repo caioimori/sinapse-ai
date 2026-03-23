@@ -8,7 +8,6 @@
 #
 # Owners:
 #   @Pedrovaleriolopez (lead maintainer)
-#   @oalanicolas (maintainer)
 #
 # All PRs require approval from a maintainer before merge.
 # Note: Org handles (e.g. @SinapseAI) cannot approve PRs — only user accounts can.
@@ -16,93 +15,93 @@
 # ============================================
 # Default Owner (fallback)
 # ============================================
-* @Pedrovaleriolopez @oalanicolas
+* @Pedrovaleriolopez
 
 # ============================================
 # Critical Paths (requires lead maintainer review)
 # ============================================
 # Orchestration layer (MasterOrchestrator, BobOrchestrator, GateEvaluator)
-.sinapse-ai/core/orchestration/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/core/orchestration/ @Pedrovaleriolopez
 
 # Execution engine (WaveExecutor, ParallelExecutor)
-.sinapse-ai/core/execution/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/core/execution/ @Pedrovaleriolopez
 
 # Packages (installer, CLI, shared libraries)
-packages/ @Pedrovaleriolopez @oalanicolas
+packages/ @Pedrovaleriolopez
 
 # CI/CD configurations
-.github/ @Pedrovaleriolopez @oalanicolas
+.github/ @Pedrovaleriolopez
 
 # ============================================
 # Framework Core (requires senior review)
 # ============================================
 # Agent definitions
-.sinapse-ai/development/agents/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/development/agents/ @Pedrovaleriolopez
 
 # Task definitions
-.sinapse-ai/development/tasks/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/development/tasks/ @Pedrovaleriolopez
 
 # Workflow definitions
-.sinapse-ai/development/workflows/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/development/workflows/ @Pedrovaleriolopez
 
 # Templates
-.sinapse-ai/product/templates/ @Pedrovaleriolopez @oalanicolas
-templates/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/product/templates/ @Pedrovaleriolopez
+templates/ @Pedrovaleriolopez
 
 # CLI utilities
-.sinapse-ai/cli/ @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/cli/ @Pedrovaleriolopez
 
 # ============================================
 # Infrastructure
 # ============================================
 # Docker configurations
-.docker/ @Pedrovaleriolopez @oalanicolas
+.docker/ @Pedrovaleriolopez
 
 # Framework configuration
-.sinapse-ai/core-config.yaml @Pedrovaleriolopez @oalanicolas
+.sinapse-ai/core-config.yaml @Pedrovaleriolopez
 
 # Package management
-package.json @Pedrovaleriolopez @oalanicolas
-package-lock.json @Pedrovaleriolopez @oalanicolas
+package.json @Pedrovaleriolopez
+package-lock.json @Pedrovaleriolopez
 
 # ============================================
 # Documentation (more permissive)
 # ============================================
 # General docs
-docs/ @Pedrovaleriolopez @oalanicolas
+docs/ @Pedrovaleriolopez
 
 # Architecture decisions
-docs/architecture/ @Pedrovaleriolopez @oalanicolas
+docs/architecture/ @Pedrovaleriolopez
 
 # Framework standards
-docs/framework/ @Pedrovaleriolopez @oalanicolas
+docs/framework/ @Pedrovaleriolopez
 
 # User guides
-docs/guides/ @Pedrovaleriolopez @oalanicolas
+docs/guides/ @Pedrovaleriolopez
 
 # ============================================
 # Security-Sensitive Files
 # ============================================
 # This file
-.github/CODEOWNERS @Pedrovaleriolopez @oalanicolas
+.github/CODEOWNERS @Pedrovaleriolopez
 
 # Release workflows
-.github/workflows/semantic-release.yml @Pedrovaleriolopez @oalanicolas
-.github/workflows/npm-publish.yml @Pedrovaleriolopez @oalanicolas
-.github/workflows/release.yml @Pedrovaleriolopez @oalanicolas
+.github/workflows/semantic-release.yml @Pedrovaleriolopez
+.github/workflows/npm-publish.yml @Pedrovaleriolopez
+.github/workflows/release.yml @Pedrovaleriolopez
 
 # Pro submodule workflows
-.github/workflows/pro-integration.yml @Pedrovaleriolopez @oalanicolas
-.github/workflows/publish-pro.yml @Pedrovaleriolopez @oalanicolas
+.github/workflows/pro-integration.yml @Pedrovaleriolopez
+.github/workflows/publish-pro.yml @Pedrovaleriolopez
 
 # Security configurations
-security/ @Pedrovaleriolopez @oalanicolas
+security/ @Pedrovaleriolopez
 
 # Environment files (should not be committed, but protect pattern)
-.env* @Pedrovaleriolopez @oalanicolas
+.env* @Pedrovaleriolopez
 
 # Configuration files
-*.config.js @Pedrovaleriolopez @oalanicolas
-*.config.ts @Pedrovaleriolopez @oalanicolas
-tsconfig.json @Pedrovaleriolopez @oalanicolas
-eslint.config.* @Pedrovaleriolopez @oalanicolas
+*.config.js @Pedrovaleriolopez
+*.config.ts @Pedrovaleriolopez
+tsconfig.json @Pedrovaleriolopez
+eslint.config.* @Pedrovaleriolopez

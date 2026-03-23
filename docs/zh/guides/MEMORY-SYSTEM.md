@@ -235,9 +235,7 @@ flowchart LR
     subgraph AGENT_MEM[".claude/agent-memory/"]
         AM1["sinapse-architect/MEMORY.md"]
         AM2["sinapse-dev/MEMORY.md"]
-        AM3["oalanicolas/MEMORY.md"]
-        AM4["pedro-valerio/MEMORY.md"]
-        AM5["sop-extractor/MEMORY.md"]
+        AM4["sop-extractor/MEMORY.md"]
         AM6["squad/MEMORY.md"]
     end
 
@@ -924,8 +922,6 @@ docs/stories/
 .claude/agent-memory/                         # [Claude Code Agents] 每代理记忆
 ├── sinapse-architect/MEMORY.md
 ├── sinapse-dev/MEMORY.md
-├── oalanicolas/MEMORY.md
-├── pedro-valerio/MEMORY.md
 ├── sop-extractor/MEMORY.md
 └── squad/MEMORY.md
 ```

@@ -579,7 +579,6 @@ certified-partners/
 ```
 mmos/
 ├── minds/                             # 34个认知克隆
-│   ├── pedro-valerio/
 │   ├── paul-graham/
 │   └── ...
 │
@@ -729,7 +728,6 @@ Example: squads/devops-automation/ (customize from template)
 ```
 outputs/                               # 运行时输出（gitignored）
 ├── minds/                             # MMOS 认知克隆
-│   └── pedro_valerio/
 │       ├── system-prompt.md
 │       ├── kb/
 │       └── artifacts/

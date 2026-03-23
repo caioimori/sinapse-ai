@@ -6,13 +6,13 @@
 **Orchestrator:** @squad-architect
 **Mode:** Automatic (triggered by creation tasks)
 
-**Process Specialist:** @pedro-valerio
+**Process Specialist:** @qa
 **Specialist Guidance:**
 
 - Use Process Absolutism principles for validation
 - Define VETO conditions that BLOCK, not just warn
-- For workflow/process validation, invoke: `@pedro-valerio *audit`
-- For designing quality gates, invoke: `@pedro-valerio *design-heuristic`
+- For workflow/process validation, invoke: `@qa *audit`
+- For designing quality gates, invoke: `@qa *design-heuristic`
 
 **Core Philosophy:**
 

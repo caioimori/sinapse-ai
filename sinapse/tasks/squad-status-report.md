@@ -56,7 +56,7 @@ SQUAD ROSTER:
 |---|-------|--------|-------|-----|-----|-------------|
 | 1 | brand-system | 15 | 97 | 19 | 4 | Meridian |
 | 2 | commercial-systems | 10 | 85 | 12 | 6 | Pipeline |
-| 3 | content-intelligence | 7 | 90 | 16 | 6 | content-orchestrator |
+| 3 | content-intelligence | 7 | 90 | 16 | 6 | content-orqx |
 | 4 | copywriting-persuasion | 12 | 81 | 14 | 6 | Quill |
 | 5 | creative-animations | 9 | 73 | 13 | 5 | Kinetic |
 | 6 | digital-experience | 8 | 101 | 13 | 6 | Nexus |
@@ -100,21 +100,21 @@ Para cada squad solicitada:
 
 ```
 QUICK ACCESS — HOW TO INVOKE:
-/brand:agents:brand-orchestrator         → Branding
-/commercial:agents:cs-orchestrator       → Vendas
-/content:agents:content-orchestrator     → Conteudo
+/brand:agents:brand-orqx         → Branding
+/commercial:agents:commercial-orqx       → Vendas
+/content:agents:content-orqx     → Conteudo
 /copywriting:agents:copy-strategist      → Copy
-/ca:agents:ca-orchestrator               → Animacoes
-/digital-experience:agents:dx-orchestrator → UX/UI
-/finance:agents:fi-orchestrator          → Financeiro
-/growth:agents:ga-orchestrator           → Growth
-/pm:agents:pm-orchestrator               → Midia Paga
-/product:agents:ps-orchestrator          → Produto
-/research:agents:research-orchestrator   → Pesquisa
-/claude:agents:cm-orchestrator           → Claude Mastery
-/council:agents:council-orchestrator     → Conselho
-/narrative:agents:narrative-orchestrator  → Narrativa
-/cyber:agents:cyber-orchestrator         → Seguranca
+/ca:agents:animations-orqx               → Animacoes
+/digital-experience:agents:design-orqx → UX/UI
+/finance:agents:finance-orqx          → Financeiro
+/growth:agents:growth-orqx           → Growth
+/pm:agents:paidmedia-orqx               → Midia Paga
+/product:agents:product-orqx          → Produto
+/research:agents:research-orqx   → Pesquisa
+/claude:agents:claude-orqx           → Claude Mastery
+/council:agents:council-orqx     → Conselho
+/narrative:agents:storytelling-orqx  → Narrativa
+/cyber:agents:cyber-orqx         → Seguranca
 ```
 
 ## Saida

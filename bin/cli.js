@@ -264,7 +264,7 @@ function cmdInstallGlobal() {
   console.log('');
   console.log(`  ${BOLD}Try an agent:${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:sinapse-master${NC}`);
-  console.log(`    ${CYAN}/SINAPSE:agents:brand-orchestrator${NC}`);
+  console.log(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:dev${NC}`);
   console.log('');
 }
@@ -347,9 +347,9 @@ All agents use a single prefix: \`/SINAPSE:agents:{agent-id}\`
 
 Examples:
 - \`/SINAPSE:agents:sinapse-master\` — Master orchestrator
-- \`/SINAPSE:agents:brand-orchestrator\` — Brand strategy
+- \`/SINAPSE:agents:brand-orqx\` — Brand strategy
 - \`/SINAPSE:agents:dev\` — Development
-- \`/SINAPSE:agents:research-orchestrator\` — Research & analysis
+- \`/SINAPSE:agents:research-orqx\` — Research & analysis
 
 ## Handoff Protocol
 
@@ -769,7 +769,7 @@ function cmdHelp() {
   console.log('');
   console.log(`${BOLD}Agents:${NC}\n`);
   console.log(`  All agents use: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  console.log(`  Example: ${CYAN}/SINAPSE:agents:brand-orchestrator${NC}`);
+  console.log(`  Example: ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   console.log('');
 }
 

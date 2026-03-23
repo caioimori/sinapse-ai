@@ -14,7 +14,7 @@
 
 ## 概述
 
-本指南为 HybridOps 工作流中所有 9 个用 PV 增强的代理提供了全面的参考。每个代理都设计为处理 9 阶段工作流的特定阶段，整合了 Pedro Valério（PV）思维来增强决策制定、验证和质量保证。
+本指南为 HybridOps 工作流中所有 9 个用 PV 增强的代理提供了全面的参考。每个代理都设计为处理 9 阶段工作流的特定阶段，整合了 PV 思维来增强决策制定、验证和质量保证。
 
 ---
 
@@ -475,7 +475,7 @@ const workflowContext = pvMind.getPhaseContext(<phase-number>);
 
 ## PV Mind 集成
 
-所有代理都使用带以下内容的 Pedro Valério 思维集成：
+所有代理都使用带以下内容的 PV 思维集成：
 
 ### META_AXIOMAS 框架
 

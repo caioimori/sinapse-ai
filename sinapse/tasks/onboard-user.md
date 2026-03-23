@@ -97,7 +97,7 @@ TOP 3 SQUADS PARA VOCE:
 
 QUICK START:
 - Para comecar imediatamente: invoke a squad #1 acima
-- Para uma visao estrategica: /council:agents:council-orchestrator
+- Para uma visao estrategica: /council:agents:council-orqx
 - Para ver tudo disponivel: *status
 - Para qualquer duvida: fale comigo (Imperator)
 ```

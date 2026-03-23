@@ -541,7 +541,6 @@ certified-partners/
 ```
 mmos/
 ├── minds/                             # 34 个认知克隆
-│   ├── pedro-valerio/
 │   ├── paul-graham/
 │   └── ...
 │
@@ -679,7 +678,6 @@ Epic:
 ```
 outputs/                               # 运行时输出 (gitignored)
 ├── minds/                             # MMOS 认知克隆
-│   └── pedro_valerio/
 │       ├── system-prompt.md
 │       ├── kb/
 │       └── artifacts/

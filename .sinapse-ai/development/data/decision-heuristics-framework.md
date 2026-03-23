@@ -495,8 +495,7 @@ examples:
 
 | Specialist         | Domain                                        | Activation                      |
 | ------------------ | --------------------------------------------- | ------------------------------- |
-| `@oalanicolas`     | Mind cloning, DNA extraction, source curation | `/squad-creator @oalanicolas`   |
-| `@pedro-valerio`   | Processes, tasks, checklists, automation      | `/squad-creator @pedro-valerio` |
+| `@qa`   | Processes, tasks, checklists, automation      | `/squad-creator @qa` |
 | `@squad-architect` | General squad creation, orchestration         | `/squad-creator` (default)      |
 
 ### 10.2 Decision Matrix
@@ -508,25 +507,17 @@ specialist_selection:
   phase: "early (before starting work)"
 
   decision_tree: |
-    PRIMARY - Mind Cloning Tasks:
-      IF (task involves extracting DNA, voice, thinking patterns)
-        THEN invoke @oalanicolas
-      IF (task involves source curation or quality assessment)
-        THEN invoke @oalanicolas
-      IF (task involves validating clone fidelity)
-        THEN invoke @oalanicolas
-
-    SECONDARY - Process Tasks:
+    PRIMARY - Process Tasks:
       IF (task involves creating/auditing workflows)
-        THEN invoke @pedro-valerio
+        THEN invoke @qa
       IF (task involves defining veto conditions or guardrails)
-        THEN invoke @pedro-valerio
+        THEN invoke @qa
       IF (task involves checklist creation or validation)
-        THEN invoke @pedro-valerio
+        THEN invoke @qa
       IF (task involves automation decisions)
-        THEN invoke @pedro-valerio
+        THEN invoke @qa
 
-    TERTIARY - General Tasks:
+    SECONDARY - General Tasks:
       IF (task is general squad creation)
         THEN use @squad-architect
       IF (unclear which specialist)
@@ -536,14 +527,7 @@ specialist_selection:
       When in doubt → @squad-architect orchestrates
 
   keywords:
-    oalanicolas:
-      - "DNA", "voice", "thinking", "clone", "mind"
-      - "source", "curadoria", "material"
-      - "personality", "communication style"
-      - "8 layers", "DNA Mental"
-      - "fidelity", "authenticity"
-
-    pedro_valerio:
+    qa_agent:
       - "process", "workflow", "task"
       - "checklist", "validation", "audit"
       - "automation", "guardrail", "veto"
@@ -555,18 +539,7 @@ specialist_selection:
 
 ```yaml
 handoff_rules:
-  squad_architect_to_oalanicolas:
-    trigger: 'Mind cloning phase reached'
-    context_passed:
-      - mind_name
-      - domain
-      - sources_path (if exists)
-    expected_output:
-      - voice_dna (YAML block)
-      - thinking_dna (YAML block)
-      - source_quality_report
-
-  squad_architect_to_pedro_valerio:
+  squad_architect_to_qa_agent:
     trigger: 'Process/workflow design phase reached'
     context_passed:
       - workflow_files
@@ -577,33 +550,12 @@ handoff_rules:
       - veto_conditions
       - automation_recommendations
 
-  oalanicolas_to_pedro_valerio:
-    trigger: 'DNA extracted, need process validation'
-    context_passed:
-      - extracted_dna
-      - agent_file
-    expected_output:
-      - process_validation
-      - quality_gates
-
-  pedro_valerio_to_oalanicolas:
-    trigger: 'Process ready, need mind integration'
-    context_passed:
-      - validated_process
-      - integration_points
-    expected_output:
-      - mind_integration_plan
 ```
 
 ### 10.4 Anti-Patterns
 
 ```yaml
 anti_patterns:
-  - name: 'Wrong Specialist'
-    trigger: 'Using @pedro-valerio for voice extraction'
-    why_bad: 'Process expert, not mind cloning expert'
-    correction: 'Use @oalanicolas for DNA extraction'
-
   - name: 'Skipping Specialists'
     trigger: 'Trying to do everything with @squad-architect'
     why_bad: 'Loses depth of specialized expertise'

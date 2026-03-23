@@ -541,7 +541,6 @@ certified-partners/
 ```
 mmos/
 ├── minds/                             # 34 clones cognitivos
-│   ├── pedro-valerio/
 │   ├── paul-graham/
 │   └── ...
 │
@@ -679,7 +678,6 @@ Exemplo: squads/devops-automation/ (customize a partir do template)
 ```
 outputs/                               # Saídas em runtime (gitignored)
 ├── minds/                             # Clones cognitivos MMOS
-│   └── pedro_valerio/
 │       ├── system-prompt.md
 │       ├── kb/
 │       └── artifacts/

@@ -32,7 +32,7 @@
 | 0 | claude-mastery-chief | Orion | Original | 554 | Triage, routing, cross-cutting knowledge |
 | 1 | hooks-architect | Latch | disler (IndyDevDan) | 1,013 | 17 hook events, automation, damage control |
 | 1 | mcp-integrator | Piper | Peter Steinberger (@steipete) | 791 | MCP servers, tool discovery, context budget |
-| 1 | swarm-orchestrator | Nexus | Kieran Klaassen + Reuven Cohen | 1,008 | Agent teams, subagents, parallel execution |
+| 1 | swarm-orqx | Nexus | Kieran Klaassen + Reuven Cohen | 1,008 | Agent teams, subagents, parallel execution |
 | 1 | config-engineer | Sigil | SuperClaude-Org | 663 | Settings, permissions, CLAUDE.md, sandbox |
 | 2 | skill-craftsman | Anvil | BMAD-CODE-ORG | 1,046 | Skills, plugins, commands, context engineering |
 | 2 | project-integrator | Conduit | Daniel Miessler (PAI) | 959 | Project integration, CI/CD, SINAPSE bridge |
@@ -53,7 +53,7 @@ Or use the SINAPSE activation:
 ```
 /SINAPSE:agents:hooks-architect        # Hook automation
 /SINAPSE:agents:mcp-integrator         # MCP servers
-/SINAPSE:agents:swarm-orchestrator     # Multi-agent orchestration
+/SINAPSE:agents:swarm-orqx     # Multi-agent orchestration
 /SINAPSE:agents:config-engineer        # Settings & permissions
 /SINAPSE:agents:skill-craftsman        # Skills & plugins
 /SINAPSE:agents:project-integrator     # Project integration
@@ -112,7 +112,7 @@ squads/claude-code-mastery/
 │   ├── claude-mastery-chief.md    # Tier 0: Orchestrator (Orion)
 │   ├── hooks-architect.md         # Tier 1: Hooks (Latch)
 │   ├── mcp-integrator.md          # Tier 1: MCP (Piper)
-│   ├── swarm-orchestrator.md      # Tier 1: Subagents/Teams (Nexus)
+│   ├── swarm-orqx.md      # Tier 1: Subagents/Teams (Nexus)
 │   ├── config-engineer.md         # Tier 1: Settings/Config (Sigil)
 │   ├── skill-craftsman.md         # Tier 2: Skills/Plugins (Anvil)
 │   ├── project-integrator.md      # Tier 2: Integration (Conduit)

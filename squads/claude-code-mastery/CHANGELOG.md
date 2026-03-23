@@ -5,7 +5,7 @@ All notable changes to the Claude Code Mastery squad.
 ## [1.0.0] - 2026-03-02
 
 ### Added
-- 8 specialist agents: claude-mastery-chief (Orion), hooks-architect (Latch), mcp-integrator (Piper), swarm-orchestrator (Nexus), config-engineer (Sigil), skill-craftsman (Anvil), project-integrator (Conduit), roadmap-sentinel (Vigil)
+- 8 specialist agents: claude-mastery-chief (Orion), hooks-architect (Latch), mcp-integrator (Piper), swarm-orqx (Nexus), config-engineer (Sigil), skill-craftsman (Anvil), project-integrator (Conduit), roadmap-sentinel (Vigil)
 - 26 executable tasks across all agents
 - 3 multi-phase workflows (wf-project-setup, wf-knowledge-update, wf-audit-complete)
 - 5 knowledge base files (quick-ref, project-type-signatures, hook-patterns, ci-cd-patterns, mcp-catalog)

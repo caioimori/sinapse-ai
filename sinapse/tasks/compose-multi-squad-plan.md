@@ -102,9 +102,9 @@ PHASE 1 — FOUNDATION
   Timeline: {estimado}
   Parallel Execution:
     - WP-1: squad-brand / Meridian
-      → /brand:agents:brand-orchestrator
-    - WP-4: squad-content / content-orchestrator
-      → /content:agents:content-orchestrator
+      → /brand:agents:brand-orqx
+    - WP-4: squad-content / content-orqx
+      → /content:agents:content-orqx
   Gate: Both WPs complete → proceed to Phase 2
 
 PHASE 2 — BUILD
@@ -114,7 +114,7 @@ PHASE 2 — BUILD
       → /copywriting:agents:copy-strategist
       Inputs from: WP-1 (brand voice, tone)
     - WP-3: squad-design / Nexus
-      → /digital-experience:agents:dx-orchestrator
+      → /digital-experience:agents:design-orqx
       Inputs from: WP-1 (design tokens, visual identity)
   Gate: Both WPs complete → proceed to Phase 3
 
@@ -122,7 +122,7 @@ PHASE 3 — LAUNCH
   Timeline: {estimado}
   Sequential:
     - WP-5: squad-growth / Catalyst
-      → /growth:agents:ga-orchestrator
+      → /growth:agents:growth-orqx
       Inputs from: WP-2 (content), WP-3 (pages), WP-4 (editorial)
   Gate: Launch metrics defined → GO
 

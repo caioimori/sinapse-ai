@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to SINAPSE will be documented in this file.
 
@@ -248,7 +248,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
   - Removed `.hybrid-ops/` directory
   - Updated `core-config.yaml` to reference external repository
   - Updated `install-manifest.yaml` (removed 47 file entries)
-  - Repository: https://github.com/SinapseAI/sinapse-hybrid-ops-pedro-valerio
+  - Repository: https://github.com/SinapseAI/sinapse-hybrid-ops
 
 ### Changed
 - README.md - hybrid-ops now listed under "Squads Externos"

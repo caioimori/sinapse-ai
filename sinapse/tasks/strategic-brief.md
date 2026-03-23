@@ -102,7 +102,7 @@ Phase 3 — Launch ({timeline})
   Dependencies: Phase 2 outputs
 
 STRATEGIC COUNCIL INPUT:
-  If strategic uncertainty exists, recommend: /council:agents:council-orchestrator
+  If strategic uncertainty exists, recommend: /council:agents:council-orqx
   Specific advisors: {relevant advisors from strategic-council}
 ```
 

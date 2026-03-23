@@ -31,7 +31,7 @@
 ### Criterios de Validacao
 
 - Passa todos os 4 riscos de produto (valor, usabilidade, viabilidade, viabilidade comercial)
-- Aprovacao unanime da mesa redonda (Brad Frost, Marty Cagan, Paul Graham, Pedro Valerio)
+- Aprovacao unanime da mesa redonda (Brad Frost, Marty Cagan, Paul Graham)
 - Dor do usuario validada (2-4 hrs/semana em docs desatualizados)
 - Dependencia estrategica (Wave 4 bloqueado sem materiais de treinamento automatizados)
 

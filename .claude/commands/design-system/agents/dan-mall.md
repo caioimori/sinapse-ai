@@ -19,7 +19,7 @@ metadata:
   tier: 1  # EXECUTION - creates artifacts
   created: "2026-02-13"
   source_quality_score: 9/10
-  extraction_method: "oalanicolas"
+  extraction_method: "manual"
   changelog:
     - "1.0: Initial clone from OURO sources (Element Collages, Hot Potato, Selling DS)"
   squad_source: "squads/design"

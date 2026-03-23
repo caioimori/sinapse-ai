@@ -8,7 +8,7 @@ Este hook intercepta comandos SQL que inserem/atualizam slugs e valida
 o formato antes de permitir a operação.
 
 Pattern válido: ^[a-z0-9]+(_[a-z0-9]+)*$
-Exemplos válidos: jose_carlos_amorim, alan_nicolas, elon_musk
+Exemplos válidos: jose_carlos_amorim, elon_musk
 Exemplos inválidos: jose-carlos-amorim, JoseAmorim, ELON_MUSK
 
 Exit Codes:
@@ -158,7 +158,6 @@ def main():
 ║                                                                              ║
 ║    Pattern válido: ^[a-z0-9]+(_[a-z0-9]+)*$                                  ║
 ║    ✅ jose_carlos_amorim                                                     ║
-║    ✅ alan_nicolas                                                           ║
 ║    ❌ jose-carlos-amorim (hyphen)                                            ║
 ║    ❌ JoseAmorim (camelCase)                                                 ║
 ║                                                                              ║

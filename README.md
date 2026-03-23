@@ -1,4 +1,4 @@
-# SINAPSE Squad: Artificial Intelligence Orchestration eXperience
+﻿# SINAPSE Squad: Artificial Intelligence Orchestration eXperience
 
 > 🌍 [English](README.en.md) | **[Português](README.md)**
 
@@ -600,7 +600,7 @@ Squads são equipes modulares de agentes IA. Veja a [Visão Geral de Squads](doc
 
 ### Squads Externos
 
-- **[hybrid-ops](https://github.com/SinapseAI/sinapse-hybrid-ops-pedro-valerio)** - Operações híbridas humano-agente (repositório separado)
+- **[hybrid-ops](https://github.com/SinapseAI/sinapse-hybrid-ops)** - Operações híbridas humano-agente (repositório separado)
 
 ## SINAPSE Pro
 

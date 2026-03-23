@@ -96,7 +96,7 @@ CLI 优先  >  可观测性次之  >  UI 第三
 
 ## 2. Task-First 理念
 
-Pedro Valerio 的 **Task-First** 方法论颠覆了传统范式:
+SINAPSE 的 **Task-First** 方法论颠覆了传统范式:
 
 | 传统范式 | Task-First (SINAPSE) |
 |-----------------------|-------------------|
@@ -351,7 +351,7 @@ flowchart TB
         end
 
         subgraph MINDS["认知克隆"]
-            M1["Pedro Valerio<br/>流程 & 系统"]
+            M1["SINAPSE<br/>流程 & 系统"]
             M2["Brad Frost<br/>原子设计"]
             M3["Alex Hormozi<br/>文案写作"]
             M4["自定义克隆<br/>公司专家"]
@@ -394,7 +394,7 @@ flowchart LR
     WIZARD --> CHOOSE_IDE["选择 IDE<br/>(Claude Code, Cursor...)"]
     WIZARD --> CHOOSE_CONFIG["配置<br/>偏好"]
 
-    CHOOSE_SQUADS --> SQ_OPS["HybridOps<br/>(Pedro Valerio)"]
+    CHOOSE_SQUADS --> SQ_OPS["HybridOps<br/>(SINAPSE)"]
     CHOOSE_SQUADS --> SQ_CUSTOM["自定义小队<br/>(公司领域)"]
     CHOOSE_SQUADS --> SQ_MARKET["市场<br/>(现成小队)"]
 

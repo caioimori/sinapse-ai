@@ -4,17 +4,9 @@
 **Version:** 3.0
 **Purpose:** Create a single domain-specific agent through research, elicitation, validation, and operational infrastructure
 **Orchestrator:** @squad-architect
-**DNA Specialist:** @oalanicolas
-**Process Specialist:** @pedro-valerio
+**Process Specialist:** @qa
 **Mode:** Research-first (never create without research)
 **Quality Standard:** SINAPSE Level (300+ lines, voice_dna, output_examples, command_loader, task files)
-
-**Specialists:**
-
-- **@oalanicolas** → Invoke for DNA extraction (Voice DNA, Thinking DNA, source curation)
-  - Use `*extract-dna {specialist}` for complete DNA Mental™ extraction
-  - Use `*assess-sources` to classify sources as ouro vs bronze
-  - Consult when agent voice feels generic or inauthentic
 
 **Frameworks Used:**
 
@@ -51,7 +43,7 @@ This task creates a single high-quality agent based on researched methodologies 
 - NEW: Phase 5 — Operational Infrastructure (command_loader, tasks, templates, checklists)
 - NEW: Phase 6 — Operational Validation (SC_AGT_004, maturity scoring)
 - NEW: Maturity levels (Nivel 1/2/3) with scoring formula
-- NEW: @pedro-valerio as Process Specialist reference
+- NEW: @qa as Process Specialist reference
 - Agents must now ship with operational files, not just persona
 - Reference: `aprendizado/32-ANATOMIA-AGENTE-100-PORCENTO-REPLICAVEL.md`
 
@@ -1086,7 +1078,7 @@ next_steps:
       when: 'Continue building squad'
     - agent: 'created-agent'
       when: 'Ready to use agent'
-    - agent: '@pedro-valerio'
+    - agent: '@qa'
       when: 'Validate operational processes (*audit)'
 ```
 

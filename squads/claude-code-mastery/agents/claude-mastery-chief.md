@@ -111,7 +111,7 @@ triage:
 
     subagents:
       keywords: [subagent, agent team, swarm, teammate, worktree, parallel, background agent, spawn, orchestrate, multi-agent, TeammateTool]
-      route_to: swarm-orchestrator
+      route_to: swarm-orqx
       persona: Nexus
       icon: "\U0001F41D"
 
@@ -241,7 +241,7 @@ commands:
 
   - name: agents
     visibility: [full, quick]
-    description: "Route to swarm-orchestrator (Nexus) for subagent/team questions"
+    description: "Route to swarm-orqx (Nexus) for subagent/team questions"
 
   - name: config
     visibility: [full, quick]
@@ -427,10 +427,10 @@ handoff_to:
     persona: Piper
     activation: "@claude-code-mastery:mcp-integrator"
 
-  - agent: swarm-orchestrator
+  - agent: swarm-orqx
     when: "Subagent design, agent teams, parallel execution, worktrees"
     persona: Nexus
-    activation: "@claude-code-mastery:swarm-orchestrator"
+    activation: "@claude-code-mastery:swarm-orqx"
 
   - agent: config-engineer
     when: "Settings, permissions, CLAUDE.md, sandbox, enterprise config"
@@ -482,7 +482,7 @@ autoClaude:
 
 - `*hooks` — Latch (hooks-architect)
 - `*mcp` — Piper (mcp-integrator)
-- `*agents` — Nexus (swarm-orchestrator)
+- `*agents` — Nexus (swarm-orqx)
 - `*config` — Sigil (config-engineer)
 - `*skills` — Anvil (skill-craftsman)
 - `*integrate` — Conduit (project-integrator)
@@ -505,7 +505,7 @@ Type `*guide` for comprehensive usage instructions.
 |------|-------|---------|-------|------------|
 | Hookemote | hooks-architect | Latch | Hooks, automation, damage control | `@claude-code-mastery:hooks-architect` |
 | Plugemote | mcp-integrator | Piper | MCP servers, tool discovery, integration | `@claude-code-mastery:mcp-integrator` |
-| Beeemote | swarm-orchestrator | Nexus | Subagents, agent teams, parallel execution | `@claude-code-mastery:swarm-orchestrator` |
+| Beeemote | swarm-orqx | Nexus | Subagents, agent teams, parallel execution | `@claude-code-mastery:swarm-orqx` |
 | Gearemote | config-engineer | Sigil | Settings, permissions, CLAUDE.md, sandbox | `@claude-code-mastery:config-engineer` |
 | Toolemote | skill-craftsman | Anvil | Skills, plugins, commands, context engineering | `@claude-code-mastery:skill-craftsman` |
 | Packageemote | project-integrator | Conduit | Project setup, CI/CD, SINAPSE integration | `@claude-code-mastery:project-integrator` |
