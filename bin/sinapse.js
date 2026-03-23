@@ -8,6 +8,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const { execSync } = require('child_process');
 
 // Read package.json for version
@@ -59,16 +60,17 @@ SINAPSE-FullStack v${packageJson.version}
 AI-Orchestrated System for Full Stack Development
 
 USAGE:
-  npx sinapse-ai@latest              # Run installation wizard
-  npx sinapse-ai@latest install      # Install in current project
-  npx sinapse-ai@latest init <name>  # Create new project
-  npx sinapse-ai@latest update       # Update to latest version
-  npx sinapse-ai@latest validate     # Validate installation integrity
-  npx sinapse-ai@latest info         # Show system info
-  npx sinapse-ai@latest doctor       # Run diagnostics
-  npx sinapse-ai@latest --version    # Show version
-  npx sinapse-ai@latest --version -d # Show detailed version info
-  npx sinapse-ai@latest --help       # Show this help
+  sinapse                             # Launch Claude Code with SINAPSE branding
+  sinapse <any claude args>           # Pass arguments to Claude Code
+  sinapse install                     # Install SINAPSE in current project
+  sinapse init <name>                 # Create new project
+  sinapse update                      # Update to latest version
+  sinapse brand                       # Re-apply SINAPSE branding (after Claude update)
+  sinapse validate                    # Validate installation integrity
+  sinapse info                        # Show system info
+  sinapse doctor                      # Run diagnostics
+  sinapse --version                   # Show version
+  sinapse --help                      # Show this help
 
 UPDATE:
   sinapse update                    # Update to latest version
@@ -453,6 +455,113 @@ Examples:
   # Uninstall but keep project data
   npx sinapse-ai uninstall --keep-data
 `);
+}
+
+// Helper: Find Claude Code CLI path (reuses logic from sinapse-patch.js)
+function findClaudeCliPath() {
+  const HOME = os.homedir();
+  const candidates = [
+    path.join(HOME, '.npm-global/lib/node_modules/@anthropic-ai/claude-code/cli.js'),
+    path.join(HOME, '.nvm/versions/node', process.version, 'lib/node_modules/@anthropic-ai/claude-code/cli.js'),
+    '/usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js',
+    '/usr/lib/node_modules/@anthropic-ai/claude-code/cli.js',
+  ];
+  try {
+    const npmRoot = execSync('npm root -g', { encoding: 'utf8' }).trim();
+    candidates.unshift(path.join(npmRoot, '@anthropic-ai/claude-code/cli.js'));
+  } catch {}
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+}
+
+// Helper: Check if SINAPSE branding is already applied
+function isBrandingApplied() {
+  const cliPath = findClaudeCliPath();
+  if (!cliPath) return false;
+  try {
+    const content = fs.readFileSync(cliPath, 'utf8');
+    return content.includes('SINAPSE CODE');
+  } catch {
+    return false;
+  }
+}
+
+// Helper: Apply SINAPSE branding to Claude Code CLI
+function runBrand() {
+  const patchPath = path.join(__dirname, '..', 'scripts', 'sinapse-patch.js');
+
+  if (!fs.existsSync(patchPath)) {
+    console.error('❌ Patch script not found at:', patchPath);
+    console.error('Please ensure SINAPSE-FullStack is installed correctly.');
+    process.exit(1);
+  }
+
+  console.log('◆ Applying SINAPSE branding to Claude Code...\n');
+
+  try {
+    execSync(`node "${patchPath}"`, { stdio: 'inherit' });
+  } catch (error) {
+    console.error('❌ Branding patch failed:', error.message);
+    process.exit(1);
+  }
+}
+
+// Helper: Ensure branding is applied then launch Claude Code
+function launchSinapse(extraArgs) {
+  // 1. Check if Claude Code is installed
+  const cliPath = findClaudeCliPath();
+  if (!cliPath) {
+    console.error('❌ Claude Code not found. Install it first:');
+    console.error('   npm install -g @anthropic-ai/claude-code');
+    process.exit(1);
+  }
+
+  // 2. Auto-apply branding if not yet applied
+  if (!isBrandingApplied()) {
+    const patchPath = path.join(__dirname, '..', 'scripts', 'sinapse-patch.js');
+    if (fs.existsSync(patchPath)) {
+      console.log('◆ First run — applying SINAPSE branding...\n');
+      try {
+        execSync(`node "${patchPath}"`, { stdio: 'inherit' });
+        console.log('');
+      } catch {
+        console.error('⚠️  Branding patch failed, launching without branding...\n');
+      }
+    }
+  }
+
+  // 3. Find the claude executable
+  let claudeBin;
+  try {
+    const npmPrefix = execSync('npm prefix -g', { encoding: 'utf8' }).trim();
+    // On Windows (Git Bash / cmd), binaries are directly in the prefix
+    const winPath = path.join(npmPrefix, 'claude.cmd');
+    const unixPath = path.join(npmPrefix, 'bin', 'claude');
+    const directPath = path.join(npmPrefix, 'claude');
+
+    if (process.platform === 'win32' && fs.existsSync(winPath)) {
+      claudeBin = winPath;
+    } else if (fs.existsSync(unixPath)) {
+      claudeBin = unixPath;
+    } else if (fs.existsSync(directPath)) {
+      claudeBin = directPath;
+    } else {
+      claudeBin = 'claude'; // fallback to PATH
+    }
+  } catch {
+    claudeBin = 'claude'; // fallback to PATH
+  }
+
+  // 4. Launch Claude Code with all extra args, replacing this process
+  const { spawnSync } = require('child_process');
+  const result = spawnSync(`"${claudeBin}"`, extraArgs, {
+    stdio: 'inherit',
+    shell: true,
+    windowsVerbatimArguments: false,
+  });
+  process.exit(result.status || 0);
 }
 
 // Helper: Show doctor help
@@ -904,6 +1013,11 @@ async function main() {
       await runValidate();
       break;
 
+    case 'brand':
+      // Apply SINAPSE branding to Claude Code CLI
+      runBrand();
+      break;
+
     case 'update':
       // Update to latest version - Epic 7
       await runUpdate();
@@ -921,15 +1035,14 @@ async function main() {
       break;
 
     case undefined:
-      // No arguments - run wizard directly (npx default behavior)
-      console.log('SINAPSE-FullStack Installation\n');
-      await runWizard();
+      // No arguments - launch Claude Code with SINAPSE branding
+      launchSinapse([]);
       break;
 
     default:
-      console.error(`❌ Unknown command: ${command}`);
-      console.log('\nRun with --help to see available commands');
-      process.exit(1);
+      // Any unknown command is passed through to Claude Code as arguments
+      // e.g. `sinapse --model sonnet` → `claude --model sonnet`
+      launchSinapse(args);
   }
 }
 

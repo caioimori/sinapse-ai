@@ -87,6 +87,7 @@
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "sync:ide:cursor": "node .sinapse-ai/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
     "validate:publish": "node bin/utils/validate-publish.js",
+    "brand": "node scripts/sinapse-patch.js",
     "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
     "prepare": "husky"
   },
