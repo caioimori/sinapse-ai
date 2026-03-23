@@ -9,7 +9,7 @@
 | 1 | squad-brand | brand | brand-orqx (Meridian) | `/brand:agents:brand-orqx` |
 | 2 | squad-commercial | commercial | commercial-orqx (Pipeline) | `/commercial:agents:commercial-orqx` |
 | 3 | squad-content | content | content-orqx | `/content:agents:content-orqx` |
-| 4 | squad-copy | copywriting | copy-strategist (Quill) | `/copywriting:agents:copy-strategist` |
+| 4 | squad-copy | copywriting | copy-orqx (Quill) | `/copywriting:agents:copy-orqx` |
 | 5 | squad-animations | ca | animations-orqx (Kinetic) | `/ca:agents:animations-orqx` |
 | 6 | squad-design | digital-experience | design-orqx (Nexus) | `/digital-experience:agents:design-orqx` |
 | 7 | squad-finance | finance | finance-orqx (Ledger) | `/finance:agents:finance-orqx` |
