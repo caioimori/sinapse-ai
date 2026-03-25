@@ -552,7 +552,7 @@ function verifyInstall() {
 
 // ── Global Update ────────────────────────────────────────────────────────────
 
-function cmdUpdateGlobal() {
+async function cmdUpdateGlobal() {
   header();
 
   if (!fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
@@ -560,7 +560,31 @@ function cmdUpdateGlobal() {
     process.exit(1);
   }
 
-  console.log(`${BOLD}Updating Sinapse...${NC}\n`);
+  // Welcome back screen
+  console.log(`${BOLD}  Que bom que voce voltou!${NC}`);
+  console.log(`${DIM}  Vamos atualizar seu SINAPSE AI para a v${VERSION}.${NC}`);
+  console.log('');
+
+  // LLM selection (re-choose on every update)
+  const readline = require('readline');
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const llmChoice = await new Promise((resolve) => {
+    console.log(`${CYAN}  Escolha sua LLM:${NC}`);
+    console.log(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
+    console.log(`    ${GREEN}2${NC}) Codex CLI`);
+    console.log(`    ${GREEN}3${NC}) Ambos`);
+    console.log('');
+    rl.question(`  ${BOLD}Opcao [1/2/3]:${NC} `, (answer) => {
+      rl.close();
+      const choice = (answer || '1').trim();
+      if (choice === '2') resolve('codex');
+      else if (choice === '3') resolve('both');
+      else resolve('claude-code');
+    });
+  });
+
+  console.log('');
+  console.log(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
 
   const squadsDir = path.join(ROOT, 'squads');
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
@@ -627,6 +651,27 @@ function cmdUpdateGlobal() {
   }
   console.log(`  ${GREEN}OK${NC} ${cmdCount} command files (${totalAgents} agents total)`);
 
+  // Phase 2b: Install global agents based on LLM choice
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
+    fs.mkdirSync(globalAgentsDir, { recursive: true });
+    // Copy orqx commands as global agents
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
+    }
+    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${cmdCount})`);
+  }
+
+  if (llmChoice === 'codex' || llmChoice === 'both') {
+    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
+    fs.mkdirSync(codexAgentsDir, { recursive: true });
+    // Generate orqx agents for Codex
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
+    }
+    console.log(`  ${GREEN}OK${NC} Codex global agents (${cmdCount})`);
+  }
+
   // Phase 3: Regenerate awareness
   console.log(`\n${CYAN}Phase 3:${NC} Updating squad-awareness`);
   generateSquadAwareness(SINAPSE_HOME, squads);
@@ -640,7 +685,19 @@ function cmdUpdateGlobal() {
   meta.commands = cmdCount;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
 
-  console.log(`\n${GREEN}Update complete!${NC} ${squads.length} squads | ${totalAgents} agents | ${cmdCount} orqx commands\n`);
+  let startCmd;
+  if (llmChoice === 'codex') startCmd = `Digite ${CYAN}codex${NC} para comecar`;
+  else if (llmChoice === 'both') startCmd = `Digite ${CYAN}sinapse${NC} ou ${CYAN}codex${NC} para comecar`;
+  else startCmd = `Digite ${CYAN}sinapse${NC} para comecar`;
+
+  console.log('');
+  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  console.log(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
+  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  console.log('');
+  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${cmdCount} orqx commands${NC}`);
+  console.log(`  ${startCmd}`);
+  console.log('');
 }
 
 // ── Uninstall ────────────────────────────────────────────────────────────────
@@ -802,7 +859,7 @@ const isLocal = args.includes('--local');
 
 switch (command) {
   case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal(); break;
-  case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal();  break;
+  case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
   case 'uninstall': cmdUninstall(); break;
   case 'list':     cmdList(); break;
   case 'status':   cmdStatus(); break;
