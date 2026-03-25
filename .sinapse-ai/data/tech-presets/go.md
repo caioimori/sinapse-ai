@@ -479,8 +479,8 @@ func (h *Handler) PlaceOrder(w http.ResponseWriter, r *http.Request) {
 ### Recommended Workflow
 
 1. `@architect *create-doc architecture` com referencia ao preset `go`
-2. `@dev` implementa features por pacote (`domain/app/infra/http`)
-3. `@qa` valida regras de dominio e testes de integracao
+2. `@developer` implementa features por pacote (`domain/app/infra/http`)
+3. `@quality-gate` valida regras de dominio e testes de integracao
 
 ### SINAPSE Commands
 

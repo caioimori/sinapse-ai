@@ -159,8 +159,8 @@ CodeRabbit integration ensures automated code review and quality gates. Verify:
 **Self-Healing Configuration (Story 6.3.3):**
 - [ ] Self-healing configuration section is present
 - [ ] Mode matches primary agent:
-  - @dev: light mode (2 iterations, 15 min, CRITICAL only)
-  - @qa: full mode (3 iterations, 30 min, CRITICAL+HIGH)
+  - @developer: light mode (2 iterations, 15 min, CRITICAL only)
+  - @quality-gate: full mode (3 iterations, 30 min, CRITICAL+HIGH)
   - @github-devops: check mode (report only)
 - [ ] Severity behavior is documented
 

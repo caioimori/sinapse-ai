@@ -1,6 +1,6 @@
 # Dev Task: Register Technical Debt
 
-**Agent:** @dev
+**Agent:** @developer
 **Command:** `*backlog-debt`
 **Purpose:** Register technical debt item to backlog
 **Created:** 2025-01-16 (Story 6.1.2.6)
@@ -310,7 +310,7 @@ const item = await manager.addItem({
   description: description,
   priority: priority,
   relatedStory: relatedStory || null,
-  createdBy: '@dev',
+  createdBy: '@developer',
   tags: tags,
   estimatedEffort: estimatedEffort
 });

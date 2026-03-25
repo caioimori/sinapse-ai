@@ -51,11 +51,11 @@ Preferencia de ativacao no Codex CLI:
 Interprete os atalhos abaixo carregando o arquivo correspondente em `.sinapse-ai/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate `*exit`:
 
 - `@architect`, `/architect`, `/architect.md` -> `.sinapse-ai/development/agents/architect.md`
-- `@dev`, `/dev`, `/dev.md` -> `.sinapse-ai/development/agents/developer.md`
-- `@qa`, `/qa`, `/qa.md` -> `.sinapse-ai/development/agents/quality-gate.md`
-- `@pm`, `/pm`, `/pm.md` -> `.sinapse-ai/development/agents/project-lead.md`
-- `@po`, `/po`, `/po.md` -> `.sinapse-ai/development/agents/product-lead.md`
-- `@sm`, `/sm`, `/sm.md` -> `.sinapse-ai/development/agents/sprint-lead.md`
+- `@developer`, `/dev`, `/dev.md` -> `.sinapse-ai/development/agents/developer.md`
+- `@quality-gate`, `/qa`, `/qa.md` -> `.sinapse-ai/development/agents/quality-gate.md`
+- `@project-lead`, `/pm`, `/pm.md` -> `.sinapse-ai/development/agents/project-lead.md`
+- `@product-lead`, `/po`, `/po.md` -> `.sinapse-ai/development/agents/product-lead.md`
+- `@sprint-lead`, `/sm`, `/sm.md` -> `.sinapse-ai/development/agents/sprint-lead.md`
 - `@analyst`, `/analyst`, `/analyst.md` -> `.sinapse-ai/development/agents/analyst.md`
 - `@devops`, `/devops`, `/devops.md` -> `.sinapse-ai/development/agents/devops.md`
 - `@data-engineer`, `/data-engineer`, `/data-engineer.md` -> `.sinapse-ai/development/agents/data-engineer.md`

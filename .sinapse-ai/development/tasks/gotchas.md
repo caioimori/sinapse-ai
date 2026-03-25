@@ -1,7 +1,7 @@
 # Task: List Gotchas
 
 > **Command:** `*gotchas [options]`
-> **Agent:** @dev
+> **Agent:** @developer
 > **Story:** 9.4 - Gotchas Memory
 > **AC:** AC6
 

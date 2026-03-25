@@ -704,7 +704,7 @@ After review:
 - **No Action Required**: The sync happens transparently when using story-manager utilities. If sync fails, story file is still saved locally with a warning message.
 
 ## Handoff
-next_agent: @dev
+next_agent: @developer
 next_command: *apply-qa-fixes
 condition: QA verdict is REJECT
 alternatives:

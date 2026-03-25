@@ -1,7 +1,7 @@
 # QA Issue Fixer Task
 
 > **Phase:** QA Fix Loop
-> **Owner Agent:** @dev
+> **Owner Agent:** @developer
 > **Pipeline:** qa-loop
 > **Command:** `*fix-qa-issues {story-id}`
 
@@ -478,7 +478,7 @@ phase_7:
         # Ready for QA Re-Review
 
         **Story:** {storyId}
-        **Fixed By:** @dev
+        **Fixed By:** @developer
         **Timestamp:** {timestamp}
         **Commit:** {commitHash}
 
@@ -587,10 +587,10 @@ qa_loop_integration:
   triggered_by:
     - QA review identifies issues
     - QA_FIX_REQUEST.md created
-    - @quality-gate signals @dev
+    - @quality-gate signals @developer
 
   triggers_next:
-    - READY_FOR_REREVIEW.md signals @qa
+    - READY_FOR_REREVIEW.md signals @quality-gate
     - @quality-gate runs re-review
     - Loop continues until PASS or WAIVED
 
@@ -662,7 +662,7 @@ MAJ-2 requires refactoring the data layer. This exceeds minimal fix scope.
 Recommend creating separate story for performance optimization.
 
 ### Next Steps
-1. Discuss MAJ-2 with @quality-gate and @po
+1. Discuss MAJ-2 with @quality-gate and @product-lead
 2. Either expand scope or create follow-up story
 ```
 
@@ -685,7 +685,7 @@ metadata:
 ```
 
 ## Handoff
-next_agent: @qa
+next_agent: @quality-gate
 next_command: *review {story-id}
 condition: All QA_FIX_REQUEST issues resolved
 alternatives:

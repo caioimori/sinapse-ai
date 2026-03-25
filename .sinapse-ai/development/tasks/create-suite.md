@@ -283,7 +283,7 @@ Creates multiple related components in a single batch operation with dependency 
 - Dependency resolution ensures correct creation order
 
 ## Handoff
-next_agent: @dev
+next_agent: @developer
 next_command: *run-tests
 condition: Test suite created, ready for execution
 alternatives:

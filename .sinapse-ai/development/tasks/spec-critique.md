@@ -1,7 +1,7 @@
 # Spec Pipeline: Critique Specification
 
 > **Phase:** 5 - Critique
-> **Owner Agent:** @qa
+> **Owner Agent:** @quality-gate
 > **Pipeline:** spec-pipeline
 
 ---

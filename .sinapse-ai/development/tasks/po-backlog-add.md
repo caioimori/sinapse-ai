@@ -1,6 +1,6 @@
 # PO Task: Add Backlog Item
 
-**Agent:** @po
+**Agent:** @product-lead
 **Command:** `*backlog-add`
 **Purpose:** Add item to story backlog (follow-up, technical debt, or enhancement)
 **Created:** 2025-01-16 (Story 6.1.2.6)
@@ -286,7 +286,7 @@ const item = await manager.addItem({
   description: description || '',
   priority: priority,
   relatedStory: relatedStory || null,
-  createdBy: '@po',
+  createdBy: '@product-lead',
   tags: tags,
   estimatedEffort: estimatedEffort
 });

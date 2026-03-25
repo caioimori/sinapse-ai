@@ -37,12 +37,12 @@ Use `@agent-name` ou `/SINAPSE:agents:agent-name`:
 
 | Agente | Persona | Escopo Principal |
 |--------|---------|------------------|
-| `@dev` | Dex | Implementação de código |
-| `@qa` | Quinn | Testes e qualidade |
+| `@developer` | Dex | Implementação de código |
+| `@quality-gate` | Quinn | Testes e qualidade |
 | `@architect` | Aria | Arquitetura e design técnico |
-| `@pm` | Morgan | Product Management |
-| `@po` | Pax | Product Owner, stories/epics |
-| `@sm` | River | Scrum Master |
+| `@project-lead` | Morgan | Product Management |
+| `@product-lead` | Pax | Product Owner, stories/epics |
+| `@sprint-lead` | River | Scrum Master |
 | `@analyst` | Alex | Pesquisa e análise |
 | `@data-engineer` | Dara | Database design |
 | `@ux-design-expert` | Uma | UX/UI design |

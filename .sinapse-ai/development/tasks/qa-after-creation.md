@@ -6,7 +6,7 @@
 **Orchestrator:** @squad-architect
 **Mode:** Automatic (triggered by creation tasks)
 
-**Process Specialist:** @qa
+**Process Specialist:** @quality-gate
 **Specialist Guidance:**
 
 - Use Process Absolutism principles for validation

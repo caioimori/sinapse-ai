@@ -432,8 +432,8 @@ app.MapPost("/orders", async (PlaceOrderRequest request, PlaceOrderHandler handl
 ### Recommended Workflow
 
 1. `@architect` define fronteiras por camada usando preset `csharp`
-2. `@dev` implementa handlers e adapters por feature
-3. `@qa` valida integridade async e cobertura de regras de negocio
+2. `@developer` implementa handlers e adapters por feature
+3. `@quality-gate` valida integridade async e cobertura de regras de negocio
 
 ### SINAPSE Commands
 

@@ -825,12 +825,12 @@ The executor loads state, reads `current_wave` and story statuses, and picks up 
 
 ### development-cycle.yaml (inner loop)
 Each story spawns the full development-cycle:
-1. `@po` validates story draft
+1. `@product-lead` validates story draft
 2. `${story.executor}` develops (spawned in terminal)
-3. `@dev` self-healing (CodeRabbit, conditional)
+3. `@developer` self-healing (CodeRabbit, conditional)
 4. `${story.quality_gate}` reviews (agent != executor)
 5. `@devops` pushes branch + PR
-6. `@po` checkpoint (auto-GO in wave mode)
+6. `@product-lead` checkpoint (auto-GO in wave mode)
 
 ### epic-orchestration.yaml (template)
 Provides the generic wave pattern that this task instantiates with project-specific data from the EXECUTION.yaml.
@@ -867,14 +867,14 @@ All actions produce structured output:
 ## Agent Integration
 
 This task is owned by:
-- `@pm` (Morgan/Bob) - Primary orchestrator
+- `@project-lead` (Morgan/Bob) - Primary orchestrator
 
 This task spawns:
-- `@po` (Pax) - Story validation, checkpoints
-- `@dev` (Dex) - Story implementation (via development-cycle)
+- `@product-lead` (Pax) - Story validation, checkpoints
+- `@developer` (Dex) - Story implementation (via development-cycle)
 - `@architect` (Aria) - Wave gates, final gate
 - `@devops` (Gage) - Branch merge, push
-- `@qa` (Quinn) - Quality gates (via development-cycle)
+- `@quality-gate` (Quinn) - Quality gates (via development-cycle)
 
 ---
 

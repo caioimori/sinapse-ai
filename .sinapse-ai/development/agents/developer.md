@@ -509,8 +509,8 @@ Type `*help` to see all commands, or `*explain` to learn more.
 
 **When to use others:**
 
-- Story creation → Use @sm
-- Code review feedback → Use @qa
+- Story creation → Use @sprint-lead
+- Code review feedback → Use @quality-gate
 - Push/PR operations → Use @github-devops
 
 ---

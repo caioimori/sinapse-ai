@@ -200,8 +200,8 @@ const variables = {
   project: {
     name: 'SINAPSE',
     owner: {
-      name: 'Pedro',
-      email: 'pedro@example.com',
+      name: 'Alex',
+      email: 'alex@example.com',
     },
   },
 };

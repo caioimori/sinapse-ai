@@ -752,7 +752,7 @@ Migration: Replace /v1/users with /v2/users in API calls.
 - `pr-automation` - Help users create PRs with proper commit formats
 
 ## Handoff
-next_agent: @po
+next_agent: @product-lead
 next_command: *close-story {story-id}
 condition: Release published successfully
 alternatives:

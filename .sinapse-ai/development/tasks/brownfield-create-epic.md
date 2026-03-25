@@ -156,8 +156,8 @@ const assignment = assignExecutorFromContent(storyContent);
 
 // Returns:
 // {
-//   executor: '@dev' | '@data-engineer' | '@devops' | '@ux-design-expert' | '@analyst' | '@architect',
-//   quality_gate: '@architect' | '@dev' | '@pm',
+//   executor: '@developer' | '@data-engineer' | '@devops' | '@ux-design-expert' | '@analyst' | '@architect',
+//   quality_gate: '@architect' | '@developer' | '@project-lead',
 //   quality_gate_tools: ['code_review', 'pattern_validation', ...]
 // }
 ```
@@ -200,7 +200,7 @@ quality_gate_tools: [schema_validation, migration_review, rls_test]
 
 1. **Story 1: {{Database Migration Story}}**
    - Description: {{Add new table for feature X with RLS policies}}
-   - **Executor Assignment**: `executor: @data-engineer`, `quality_gate: @dev`
+   - **Executor Assignment**: `executor: @data-engineer`, `quality_gate: @developer`
    - **Quality Gate Tools**: `[schema_validation, migration_review, rls_test]`
    - **Quality Gates**:
      - Pre-Commit: Schema validation, service filter verification

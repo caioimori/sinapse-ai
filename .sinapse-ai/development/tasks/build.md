@@ -1,7 +1,7 @@
 # Task: Build (Autonomous)
 
 > **Command:** `*build {story-id}`
-> **Agent:** @dev
+> **Agent:** @developer
 > **Story:** 8.5 - Build Orchestrator
 > **AC:** AC2
 

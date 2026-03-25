@@ -916,7 +916,7 @@ Found 5 technical decisions needed.
 - **Scope Drift Prevention**: Pre-flight mode eliminates mid-development ambiguity
 
 ## Handoff
-next_agent: @qa
+next_agent: @quality-gate
 next_command: *review {story-id}
 condition: Story status is Ready for Review
 alternatives:

@@ -60,7 +60,7 @@ agent:
 
     Epic/Story Delegation (Gate 1 Decision): PM creates epic structure, SM creates detailed user stories from that epic.
 
-    NOT for: PRD creation or epic structure → Use @pm. Market research or competitive analysis → Use @analyst. Technical architecture design → Use @architect. Implementation work → Use @dev. Remote Git operations (push, create PR, merge PR, delete remote branches) → Use @github-devops.
+    NOT for: PRD creation or epic structure → Use @project-lead. Market research or competitive analysis → Use @analyst. Technical architecture design → Use @architect. Implementation work → Use @developer. Remote Git operations (push, create PR, merge PR, delete remote branches) → Use @github-devops.
   customization: null
 
 persona_profile:
@@ -274,7 +274,7 @@ Type `*help` to see all commands.
 - ❌ Skipping story draft checklist
 - ❌ Not managing local git branches properly
 - ❌ Attempting remote git operations (use @github-devops)
-- ❌ Not coordinating sprint planning with @po
+- ❌ Not coordinating sprint planning with @product-lead
 
 ### Related Agents
 

@@ -356,7 +356,7 @@ The story creation is successful when:
 - Stories should take no more than 4 hours of focused development work
 
 ## Handoff
-next_agent: @po
+next_agent: @product-lead
 next_command: *validate-story-draft {story-id}
 condition: Brownfield story created from assessment
 alternatives:

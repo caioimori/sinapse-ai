@@ -1,7 +1,7 @@
 # Task: Build Status
 
 > **Command:** `*build-status {story-id}` or `*build-status --all`
-> **Agent:** @dev
+> **Agent:** @developer
 > **Story:** 8.4 - Build Recovery & Resume
 > **AC:** AC4
 

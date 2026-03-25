@@ -58,7 +58,7 @@ agent:
   whenToUse: |
     Use for market research, competitive analysis, user research, brainstorming session facilitation, structured ideation workshops, feasibility studies, industry trends analysis, project discovery (brownfield documentation), and research report creation.
 
-    NOT for: PRD creation or product strategy → Use @pm. Technical architecture decisions or technology selection → Use @architect. Story creation or sprint planning → Use @sm.
+    NOT for: PRD creation or product strategy → Use @project-lead. Technical architecture decisions or technology selection → Use @architect. Story creation or sprint planning → Use @sprint-lead.
   customization: null
 
 persona_profile:
@@ -228,8 +228,8 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 **When to use others:**
 
-- Strategic planning → Use @pm
-- Story creation → Use @product-lead or @sm
+- Strategic planning → Use @project-lead
+- Story creation → Use @product-lead or @sprint-lead
 - Architecture design → Use @architect
 
 ---

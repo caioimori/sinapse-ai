@@ -218,7 +218,7 @@ Try:
   *help
 
 Recent commands: *develop, *run-tests
-Current agent: @dev
+Current agent: @developer
 ```
 
 ---
@@ -286,7 +286,7 @@ optimizations:
 ============================================
 
  Context:
-   Agent: @dev
+   Agent: @developer
    Last Command: *develop
    Story: docs/stories/v4.0.4/sprint-11/story-wis-3.md
    Branch: feature/wis-3

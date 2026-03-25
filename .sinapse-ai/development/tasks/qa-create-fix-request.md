@@ -343,7 +343,7 @@ const dev_story_location = config.devStoryLocation;
 1. Output success message with:
    - File path created
    - Issue count by severity
-   - Next steps for @dev
+   - Next steps for @developer
 
 ---
 
@@ -358,7 +358,7 @@ const dev_story_location = config.devStoryLocation;
 
 ---
 
-## Instructions for @dev
+## Instructions for @developer
 
 Fix ONLY the issues listed below. Do not add features or refactor unrelated code.
 
@@ -468,7 +468,7 @@ For story 6.3 with 2 issues:
 
 ---
 
-## Instructions for @dev
+## Instructions for @developer
 
 Fix ONLY the issues listed below. Do not add features or refactor unrelated code.
 
@@ -623,7 +623,7 @@ This task is complete when:
 ```
 
 ## Handoff
-next_agent: @dev
+next_agent: @developer
 next_command: *fix-qa-issues
 condition: QA_FIX_REQUEST.md generated
 alternatives:

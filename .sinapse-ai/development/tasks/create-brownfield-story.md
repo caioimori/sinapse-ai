@@ -434,7 +434,7 @@ Analyze the story's integration risks based on:
 **Brownfield-Specific Agent Assignment Rules:**
 
 **If modifying existing database:**
-- **Assign**: @db-sage, @dev
+- **Assign**: @db-sage, @developer
 - **Rationale**: Database changes in brownfield require expert review for:
   - Existing data migration impacts
   - RLS policy compatibility
@@ -443,7 +443,7 @@ Analyze the story's integration risks based on:
 - **Quality Gates**: Pre-Commit (schema validation), Pre-PR (SQL review), Pre-Deployment (migration testing)
 
 **If changing existing APIs:**
-- **Assign**: @architect, @dev
+- **Assign**: @architect, @developer
 - **Rationale**: API changes risk breaking existing clients:
   - Backward compatibility validation
   - Contract versioning requirements
@@ -452,7 +452,7 @@ Analyze the story's integration risks based on:
 - **Quality Gates**: Pre-Commit (contract validation), Pre-PR (backward compat check)
 
 **If touching deployment/infrastructure:**
-- **Assign**: @github-devops, @dev
+- **Assign**: @github-devops, @developer
 - **Rationale**: Infrastructure changes need rollback safety:
   - Environment-specific configuration validation
   - Rollback procedure verification
@@ -461,7 +461,7 @@ Analyze the story's integration risks based on:
 - **Quality Gates**: Pre-Commit (config validation), Pre-Deployment (deep scan with rollback plan)
 
 **If affecting existing UI/UX:**
-- **Assign**: @ux-expert, @dev
+- **Assign**: @ux-expert, @developer
 - **Rationale**: UI changes must maintain user experience consistency:
   - Design system compliance
   - Accessibility standards maintained

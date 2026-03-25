@@ -51,7 +51,7 @@ If you have just completed an MVP with SINAPSE, and you want to continue with po
 **In Gemini Web (with your codebase uploaded):**
 
 ```bash
-@pm
+@project-lead
 *create-doc brownfield-prd
 ```
 
@@ -118,7 +118,7 @@ The analyst will generate comprehensive documentation of everything.
 **1. Create Brownfield PRD**:
 
 ```bash
-@pm
+@project-lead
 *create-doc brownfield-prd
 ```
 
@@ -162,7 +162,7 @@ The architect will:
 **For Single Epic Without Full PRD**:
 
 ```bash
-@pm
+@project-lead
 *brownfield-create-epic
 ```
 
@@ -176,7 +176,7 @@ Use when:
 **For Single Story**:
 
 ```bash
-@pm
+@project-lead
 *brownfield-create-story
 ```
 
@@ -190,7 +190,7 @@ Use when:
 ### Phase 3: Validate Planning Artifacts
 
 ```bash
-@po
+@product-lead
 *execute-checklist po-master-checklist
 ```
 
@@ -213,7 +213,7 @@ Follow the enhanced IDE Development Workflow:
 2. **Shard documents**:
 
    ```bash
-   @po
+   @product-lead
    # Ask to shard docs/prd.md
    ```
 

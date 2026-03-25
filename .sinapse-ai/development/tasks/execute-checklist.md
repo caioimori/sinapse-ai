@@ -301,7 +301,7 @@ The LLM will:
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
 
 ## Handoff
-next_agent: @qa
+next_agent: @quality-gate
 next_command: *review {story-id}
 condition: Checklist completed with all items passing
 alternatives:

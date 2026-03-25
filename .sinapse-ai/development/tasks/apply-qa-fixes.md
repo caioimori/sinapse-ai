@@ -340,7 +340,7 @@ This task is complete when:
 - ✅ Code is ready for QA re-review
 
 ## Handoff
-next_agent: @qa
+next_agent: @quality-gate
 next_command: *review {story-id}
 condition: Fixes applied, ready for re-review
 alternatives:

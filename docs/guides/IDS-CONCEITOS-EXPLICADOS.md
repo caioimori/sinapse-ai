@@ -1,7 +1,7 @@
 # IDS - Incremental Development System: Conceitos Explicados
 
 **Documento de Referência Conceitual**
-**Autor:** Pedro Valério Lopez (via Mind Clone)
+**Autor:** SINAPSE AI Team
 **Data:** 2026-02-05
 **Versão:** 1.0
 
@@ -706,6 +706,6 @@ sinapse ids:sync
 
 ---
 
-*Documento criado por Pedro Valério Lopez (via Mind Clone)*
+*Documento consolidado pelo SINAPSE AI Team*
 *Consolidando: Epic IDS, 6 Stories, 6 Roundtable Adjustments*
 *"Se não está documentado, não existe."*

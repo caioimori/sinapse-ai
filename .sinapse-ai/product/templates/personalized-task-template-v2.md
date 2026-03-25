@@ -636,7 +636,7 @@ function generateErrorMessage(agent, errorType, errorDetails) {
 - breaking_changes:
     - Output format changed: added persona_profile section
     - Removed generic status messages
-- author: Roundtable (Pedro, Brad, Seth, Dan)
+- author: SINAPSE AI Roundtable (Brad, Seth, Dan)
 - created_at: 2025-01-14
 - updated_at: 2025-01-14
 ```

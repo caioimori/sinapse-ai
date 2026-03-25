@@ -255,8 +255,8 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **When to use others:**
 
-- Code implementation → Use @dev
-- Code review → Use @qa
+- Code implementation → Use @developer
+- Code review → Use @quality-gate
 - Publishing/deployment → Use @devops
 
 ---

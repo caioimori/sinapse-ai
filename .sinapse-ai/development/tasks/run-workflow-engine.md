@@ -702,7 +702,7 @@ For each step with `meta: routing`:
    - `based_on_score_9p` → look for `score_9p` in recent step outputs
    - `based_on_compliance_score` → look for `compliance_score` in recent step outputs
    - `based_on_validation_status` → look for `resultado_validado` or `status` in recent step outputs
-   - `based_on_pedro_approval` → look for `aprovacao_final` in recent step outputs
+   - `based_on_final_approval` → look for `aprovacao_final` in recent step outputs
 3. **Evaluate each route:**
    - Read the route's name to determine the threshold (e.g., `score_below_70`, `score_90_plus`)
    - Compare the extracted value against the threshold

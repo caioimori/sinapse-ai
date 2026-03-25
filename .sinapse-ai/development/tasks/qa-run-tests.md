@@ -256,7 +256,7 @@ If all pass:
 If failures:
 - [ ] Document failures in story
 - [ ] Create tech debt issues for MEDIUM
-- [ ] Request fixes from @dev
+- [ ] Request fixes from @developer
 
 ## Integration with CodeRabbit
 

@@ -194,7 +194,7 @@ async function executeWaves(args, options) {
 ## Agent Integration
 
 This task is available for:
-- `@dev` - Developer Agent
+- `@developer` - Developer Agent
 
 ---
 

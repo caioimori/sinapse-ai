@@ -870,11 +870,11 @@ export { [feature]Service } from './services/[feature].service'
    - Reference this preset for patterns and structure
 
 2. **Development Phase:**
-   - Use `@dev` following the 5 Essential Patterns
+   - Use `@developer` following the 5 Essential Patterns
    - Create features using the Reference Feature strategy
 
 3. **QA Phase:**
-   - Use `@qa` with the testing strategy defined
+   - Use `@quality-gate` with the testing strategy defined
    - Ensure coverage goals are met
 
 ### Related SINAPSE Templates

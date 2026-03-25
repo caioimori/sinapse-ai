@@ -1,6 +1,6 @@
 # QA Task: Add Follow-up to Backlog
 
-**Agent:** @qa
+**Agent:** @quality-gate
 **Command:** `*backlog-add` (when used by @quality-gate, defaults to type F)
 **Purpose:** Add follow-up item from QA review to backlog
 **Created:** 2025-01-16 (Story 6.1.2.6)
@@ -288,7 +288,7 @@ const item = await manager.addItem({
   description: description,
   priority: priority,
   relatedStory: relatedStory,
-  createdBy: '@qa',
+  createdBy: '@quality-gate',
   tags: tags,
   estimatedEffort: estimatedEffort
 });
@@ -412,7 +412,7 @@ Update story? yes
 # Fill in test data
 # Verify:
 # - Item added to backlog with type=F
-# - createdBy = @qa
+# - createdBy = @quality-gate
 # - Story file updated (if QA Results section exists)
 # - Priority reflected in backlog ordering
 ```

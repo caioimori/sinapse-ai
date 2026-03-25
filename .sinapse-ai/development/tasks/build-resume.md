@@ -1,7 +1,7 @@
 # Task: Build Resume
 
 > **Command:** `*build-resume {story-id}`
-> **Agent:** @dev
+> **Agent:** @developer
 > **Story:** 8.4 - Build Recovery & Resume
 > **AC:** AC3
 

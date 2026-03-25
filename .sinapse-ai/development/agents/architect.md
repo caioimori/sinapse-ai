@@ -59,7 +59,7 @@ agent:
   whenToUse: |
     Use for system architecture (fullstack, backend, frontend, infrastructure), technology stack selection (technical evaluation), API design (REST/GraphQL/tRPC/WebSocket), security architecture, performance optimization, deployment strategy, and cross-cutting concerns (logging, monitoring, error handling).
 
-    NOT for: Market research or competitive analysis → Use @analyst. PRD creation or product strategy → Use @pm. Database schema design or query optimization → Use @data-engineer.
+    NOT for: Market research or competitive analysis → Use @analyst. PRD creation or product strategy → Use @project-lead. Database schema design or query optimization → Use @data-engineer.
   customization: null
 
 persona_profile:
@@ -426,7 +426,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 - Database design → Use @data-engineer
 - UX/UI design → Use @ux-design-expert
-- Code implementation → Use @dev
+- Code implementation → Use @developer
 - Push operations → Use @github-devops
 
 ---

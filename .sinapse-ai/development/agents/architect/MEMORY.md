@@ -23,7 +23,7 @@
 ### Delegation Rules
 - Database schema design → @data-engineer
 - Git push/PR → @devops
-- Implementation → @dev
+- Implementation → @developer
 
 ### Project Structure
 - `.sinapse-ai/core/` — Engine modules

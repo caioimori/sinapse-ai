@@ -23,7 +23,7 @@ Location: `.sinapse-ai/data/tech-presets/`
    - Load the preset file to get detailed patterns, standards, and templates
 
 2. **During Development:**
-   - Reference the preset when asking `@dev` to implement features
+   - Reference the preset when asking `@developer` to implement features
    - Example: "Follow the go preset patterns for this service"
 
 3. **Creating New Presets:**

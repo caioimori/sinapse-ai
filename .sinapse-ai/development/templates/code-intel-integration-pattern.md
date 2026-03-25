@@ -190,7 +190,7 @@ function createMockClient(overrides = {}) {
 | `dev-helper.js` | @developer | checkBeforeWriting, suggestReuse, getConventionsForPath, assessRefactoringImpact | NOG-3 |
 | `qa-helper.js` | @quality-gate | validateTestCoverage, detectRegressionRisk | NOG-4 |
 | `planning-helper.js` | @architect | analyzeComplexity, suggestArchitecture | NOG-5 |
-| `story-helper.js` | @sm/@product-lead | detectDuplicateStory, suggestRelevantFiles, validateNoDuplicates | NOG-6 |
+| `story-helper.js` | @sprint-lead/@product-lead | detectDuplicateStory, suggestRelevantFiles, validateNoDuplicates | NOG-6 |
 | `devops-helper.js` | @devops | assessDeploymentRisk, validatePipelineImpact | NOG-7 |
 | `creation-helper.js` | squad-creator | getCodebaseContext, checkDuplicateArtefact, enrichRegistryEntry | NOG-8 |
 

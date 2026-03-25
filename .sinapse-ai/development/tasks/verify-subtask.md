@@ -1,7 +1,7 @@
 # Verify Subtask
 
 > **Phase:** Execution - Verification
-> **Owner Agent:** @dev
+> **Owner Agent:** @developer
 > **Pipeline:** execution-pipeline
 
 ---

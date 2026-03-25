@@ -249,7 +249,7 @@ Retrieval em 3 camadas para minimizar tokens:
 - **Context:** Chunks relevantes (~200 tokens)
 - **Detail:** Memoria completa (~1000+ tokens)
 
-### 3. Tiered Storage (openclaw pattern)
+### 3. Tiered Storage
 
 Memorias classificadas por durabilidade:
 - **Session:** Efemera, morre ao final da sessao
@@ -1052,7 +1052,7 @@ gantt
 |------|-----------|-------------------|
 | **basic-memory** | 9/10 | File-first storage (Markdown + frontmatter, git-friendly) |
 | **claude-cognitive** | 9/10 | HOT/WARM/COLD attention tiers, multi-instance memory pool |
-| **openclaw** | 9/10 | Three-tier model, PreCompact session digest |
+| **tiered-storage** | 9/10 | Three-tier model, PreCompact session digest |
 
 ### Documentacao Relacionada
 

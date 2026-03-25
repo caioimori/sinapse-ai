@@ -441,8 +441,8 @@ pub async fn create_order(
 ### Recommended Workflow
 
 1. `@architect` define modules e boundaries pelo preset `rust`
-2. `@dev` implementa use cases com traits e erros tipados
-3. `@qa` valida cobertura de invariantes e resiliencia async
+2. `@developer` implementa use cases com traits e erros tipados
+3. `@quality-gate` valida cobertura de invariantes e resiliencia async
 
 ### SINAPSE Commands
 

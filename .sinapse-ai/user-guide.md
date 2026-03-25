@@ -49,7 +49,7 @@ npx @sinapse/fullstack install
   Current state: Clean installation
 
 📦 Select Squads to Install:
-  ◉ hybrid-ops (Pedro Valério methodology)
+  ◉ hybrid-ops (Human-AI Operations)
   ◯ expansion-creator (Create new squads)
   ◯ sinapse-infrastructure-devops (DevOps utilities)
   ◯ meeting-notes (Meeting assistant)
@@ -121,7 +121,7 @@ your-project/
 │       └── ... (30+ rules)
 │
 └── Squads/               # ✅ Se squads selecionados
-    ├── hybrid-ops/                # Metodologia Pedro Valério
+    ├── hybrid-ops/                # Operações híbridas humano-agente
     └── expansion-creator/         # Criador de squads
 ```
 
@@ -552,13 +552,13 @@ O agente **qa** monitora:
 
 2. **Ativar agentes**:
    ```
-   @dev
+   @developer
    *help
    ```
 
 3. **Trabalhar com stories**:
    ```
-   @sm
+   @sprint-lead
    *create-story "Implementar autenticação"
    ```
 
@@ -668,7 +668,7 @@ Dia 7 (opcional): ux-expert
 **Início da Semana 2**: Setup e fragmentação
 
 ```
-@sm
+@sprint-lead
 *fragment-prd
 
 [sm cria stories numeradas baseadas no PRD]
@@ -689,7 +689,7 @@ Stories criadas:
 Para cada story:
 
 ```
-@dev
+@developer
 *read-story 1.1
 
 [dev implementa seguindo a story]
@@ -697,7 +697,7 @@ Para cada story:
 [adiciona arquivos criados]
 [documenta decisões nas Notas]
 
-@qa
+@quality-gate
 *validate-story 1.1
 
 [qa revisa código]
@@ -709,7 +709,7 @@ Para cada story:
 ### 4. Gestão de Backlog (Contínua)
 
 ```
-@po
+@product-lead
 *prioritize-backlog
 
 [po reorganiza stories baseado em:]
@@ -724,7 +724,7 @@ Para cada story:
 Quando todas as stories estão completas:
 
 ```
-@qa
+@quality-gate
 *final-validation
 
 [qa executa:]
@@ -733,7 +733,7 @@ Quando todas as stories estão completas:
 - Validação de performance
 - Security audit
 
-@dev
+@developer
 *prepare-release
 
 [dev prepara:]
@@ -896,7 +896,7 @@ O SINAPSE-FullStack oferece três modos de desenvolvimento para acomodar diferen
 
 **Como usar**:
 ```
-@dev
+@developer
 *develop-yolo "Story 2.5"
 ```
 
@@ -933,7 +933,7 @@ O SINAPSE-FullStack oferece três modos de desenvolvimento para acomodar diferen
 
 **Como usar**:
 ```
-@dev
+@developer
 *develop-story "Story 2.5"
 # ou
 *develop-interactive "Story 2.5"
@@ -975,7 +975,7 @@ Sua escolha [1/2/3]: _
 
 **Como usar**:
 ```
-@dev
+@developer
 *develop-preflight "Story 2.5"
 ```
 
@@ -1163,7 +1163,7 @@ Ao integrar SINAPSE em projetos existentes:
 ### 3. Planejamento Incremental
 
 ```
-@pm
+@project-lead
 *create-migration-plan
 
 [pm desenvolverá:]
@@ -1191,7 +1191,7 @@ Ao integrar SINAPSE em projetos existentes:
 
 **Solução**:
 ```
-@sm
+@sprint-lead
 *split-story 3.1
 
 [sm dividirá em:]
@@ -1215,16 +1215,16 @@ Ao integrar SINAPSE em projetos existentes:
 
 **Solução**:
 ```
-1. @po
+1. @product-lead
    *update-prd "Nova feature X necessária"
 
 2. @architect
    *assess-impact "Nova feature X"
 
-3. @sm
+3. @sprint-lead
    *create-change-stories
 
-4. @po
+4. @product-lead
    *reprioritize-backlog
 ```
 
@@ -1281,7 +1281,7 @@ O **sinapse-developer** é o meta-agente para o próprio SINAPSE:
 O SINAPSE suporta squads para domínios específicos:
 
 **Disponíveis durante instalação**:
-- **hybrid-ops** - Metodologia Pedro Valério (operações híbridas humano-agente)
+- **hybrid-ops** - Operações híbridas humano-agente
 - **expansion-creator** - Ferramentas para criar novos squads
 - **sinapse-infrastructure-devops** - Utilities de DevOps e infraestrutura
 - **meeting-notes** - Assistente de notas e atas de reuniões

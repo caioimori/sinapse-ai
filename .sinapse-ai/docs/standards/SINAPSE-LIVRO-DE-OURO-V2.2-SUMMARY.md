@@ -515,13 +515,13 @@ Quality Trends:
 
 ### Available Clones (v2.2 Launch)
 
-**1. Pedro Valério (Systems Architect)**
+**1. Systems Architect (SINAPSE Built-in)**
 ```yaml
 Specialty: Process systematization, automation strategy
 Use Cases:
   - Designing workflow automation
   - Optimizing team processes
-  - ClickUp integration strategy
+  - Integration strategy
   - Efficiency analysis
 
 Price: $299/month
@@ -1176,7 +1176,7 @@ NEW: .sinapse-ai/infrastructure/cli/commands/clones.js
   - sinapse clone activate <name>
 
 Available Clones:
-  - Pedro Valério (Systems Architecture)
+  - Systems Architect (SINAPSE Built-in)
   - Brad Frost (Atomic Design)
   - Marty Cagan (Product Discovery)
   - Paul Graham (First Principles)

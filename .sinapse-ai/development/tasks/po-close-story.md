@@ -1,6 +1,6 @@
 # PO Task: Close Story
 
-**Agent:** @po
+**Agent:** @product-lead
 **Command:** `*close-story`
 **Purpose:** Close a completed story, update epic/backlog, and suggest next story
 **Created:** 2026-02-05 (Story PRO-5 retrospective)
@@ -282,7 +282,7 @@ if (epicId) {
     }
 
     // Update review checkboxes if applicable
-    updatedEpic = updateReviewStatus(updatedEpic, '@po', 'checked');
+    updatedEpic = updateReviewStatus(updatedEpic, '@product-lead', 'checked');
 
     fs.writeFileSync(epicIndexPath, updatedEpic);
     console.log(`✅ Epic index updated: ${completedStories}/${totalStories} complete`);
@@ -427,7 +427,7 @@ updated_at: 2026-02-05
 - `po-backlog-review.md` - Review backlog for sprint planning
 
 ## Handoff
-next_agent: @sm
+next_agent: @sprint-lead
 next_command: *draft
 condition: Story closed, next story in epic available
 alternatives:

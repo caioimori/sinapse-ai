@@ -1,7 +1,7 @@
 # QA Review Build: 10-Phase Quality Assurance Review
 
 > **Phase:** QA Review
-> **Owner Agent:** @qa
+> **Owner Agent:** @quality-gate
 > **Epic:** Epic 6 - QA Evolution
 > **Command:** `*review-build {story-id}`
 

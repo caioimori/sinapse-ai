@@ -114,13 +114,13 @@ Use `@agent-name` ou `/SINAPSE:agents:agent-name`:
 
 | Agente | Persona | Escopo Principal |
 |--------|---------|------------------|
-| `@dev` | Dex | Implementação de código |
-| `@qa` | Quinn | Testes e qualidade |
-| `@architect` | Aria | Arquitetura e design técnico |
-| `@pm` | Morgan | Product Management |
-| `@po` | Pax | Product Owner, stories/epics |
-| `@sm` | River | Scrum Master |
-| `@analyst` | Alex | Pesquisa e análise |
+| `@developer` | Dex | Implementacao de codigo |
+| `@quality-gate` | Quinn | Testes e qualidade |
+| `@architect` | Aria | Arquitetura e design tecnico |
+| `@project-lead` | Morgan | Product Management |
+| `@product-lead` | Pax | Product Owner, stories/epics |
+| `@sprint-lead` | River | Scrum Master |
+| `@analyst` | Alex | Pesquisa e analise |
 | `@data-engineer` | Dara | Database design |
 | `@ux-design-expert` | Uma | UX/UI design |
 | `@devops` | Gage | CI/CD, git push (EXCLUSIVO) |
@@ -136,11 +136,11 @@ Use prefixo `*` para comandos:
 
 | Agente | Diretórios Principais |
 |--------|----------------------|
-| `@dev` | `packages/`, `.sinapse-ai/core/`, `bin/` |
+| `@developer` | `packages/`, `.sinapse-ai/core/`, `bin/` |
 | `@architect` | `docs/architecture/`, system design |
 | `@data-engineer` | `packages/db/`, migrations, schema |
-| `@qa` | `tests/`, `*.test.js`, quality gates |
-| `@po` | Stories, epics, requirements |
+| `@quality-gate` | `tests/`, `*.test.js`, quality gates |
+| `@product-lead` | Stories, epics, requirements |
 | `@devops` | `.github/`, CI/CD, git operations |
 
 ---

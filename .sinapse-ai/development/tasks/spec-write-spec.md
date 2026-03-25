@@ -1,7 +1,7 @@
 # Spec Pipeline: Write Specification
 
 > **Phase:** 4 - Write
-> **Owner Agent:** @pm
+> **Owner Agent:** @project-lead
 > **Pipeline:** spec-pipeline
 
 ---
@@ -531,6 +531,6 @@ metadata:
 ```
 
 ## Handoff
-next_agent: @qa
+next_agent: @quality-gate
 next_command: *critique-spec {story-id}
 condition: Spec written (spec.md created)

@@ -70,7 +70,7 @@ Execute the task now. Do NOT greet. Do NOT show commands. Do NOT ask questions (
 
 | Variable | Source | Description |
 |----------|--------|-------------|
-| `{{AGENT_NAME}}` | Agent file → `agent.name` | Agent's display name (e.g., "Orion", "Pedro") |
+| `{{AGENT_NAME}}` | Agent file → `agent.name` | Agent's display name (e.g., "Orion", "Nova") |
 | `{{AGENT_TITLE}}` | Agent file → `agent.title` | Agent's role title |
 | `{{AGENT_YAML}}` | Agent file → full YAML block | Complete agent persona definition |
 | `{{TASK_CONTENT}}` | Task file via `uses` field | Complete task file content |

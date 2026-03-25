@@ -713,7 +713,7 @@ github:
 - Repository context from detector
 
 ## Handoff
-next_agent: @po
+next_agent: @product-lead
 next_command: *close-story {story-id}
 condition: PR merged successfully
 alternatives:

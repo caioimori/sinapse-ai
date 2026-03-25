@@ -488,8 +488,8 @@ Type `*help` to see all commands.
 
 **When to use others:**
 
-- Code development → Use @dev
-- Story management → Use @sm
+- Code development → Use @developer
+- Story management → Use @sprint-lead
 - Architecture design → Use @architect
 
 **Note:** This agent is the ONLY one authorized for remote git operations (push, PR creation, merge).

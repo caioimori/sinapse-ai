@@ -495,7 +495,7 @@ examples:
 
 | Specialist         | Domain                                        | Activation                      |
 | ------------------ | --------------------------------------------- | ------------------------------- |
-| `@qa`   | Processes, tasks, checklists, automation      | `/squad-creator @qa` |
+| `@quality-gate`   | Processes, tasks, checklists, automation      | `/squad-creator @qa` |
 | `@squad-architect` | General squad creation, orchestration         | `/squad-creator` (default)      |
 
 ### 10.2 Decision Matrix
@@ -509,13 +509,13 @@ specialist_selection:
   decision_tree: |
     PRIMARY - Process Tasks:
       IF (task involves creating/auditing workflows)
-        THEN invoke @qa
+        THEN invoke @quality-gate
       IF (task involves defining veto conditions or guardrails)
-        THEN invoke @qa
+        THEN invoke @quality-gate
       IF (task involves checklist creation or validation)
-        THEN invoke @qa
+        THEN invoke @quality-gate
       IF (task involves automation decisions)
-        THEN invoke @qa
+        THEN invoke @quality-gate
 
     SECONDARY - General Tasks:
       IF (task is general squad creation)

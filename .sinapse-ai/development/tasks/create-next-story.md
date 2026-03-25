@@ -519,7 +519,7 @@ Analyze the story's technical characteristics based on:
 - File locations include `supabase/migrations/` or database-related paths
 
 **Assignment:**
-- **Primary Agents**: @db-sage, @dev
+- **Primary Agents**: @db-sage, @developer
 - **Quality Gates**: Pre-Commit (schema validation), Pre-PR (SQL review)
 - **Focus Areas**:
   - Service filters: `.eq('service', 'ttcx')` on ALL queries
@@ -551,7 +551,7 @@ Analyze the story's technical characteristics based on:
 - File locations include `src/components/` or frontend paths
 
 **Assignment:**
-- **Primary Agents**: @ux-expert, @dev
+- **Primary Agents**: @ux-expert, @developer
 - **Quality Gates**: Pre-Commit (a11y validation), Pre-PR (UX consistency check)
 - **Focus Areas**:
   - Accessibility: WCAG 2.1 AA compliance (semantic HTML, ARIA labels, keyboard navigation)
@@ -567,7 +567,7 @@ Analyze the story's technical characteristics based on:
 - File locations include `.github/workflows/`, `docker/`, or config files
 
 **Assignment:**
-- **Primary Agents**: @github-devops, @dev
+- **Primary Agents**: @github-devops, @developer
 - **Quality Gates**: Pre-Commit (config validation), Pre-Deployment (deep scan)
 - **Focus Areas**:
   - CI/CD: Pipeline configuration, test coverage enforcement
@@ -599,7 +599,7 @@ Analyze the story's technical characteristics based on:
 - References to `backend-architecture.md` or system design
 
 **Assignment:**
-- **Primary Agents**: @architect, @dev
+- **Primary Agents**: @architect, @developer
 - **Quality Gates**: Pre-Commit (pattern validation), Pre-PR (architecture review)
 - **Focus Areas**:
   - Patterns: Follows established architectural patterns
@@ -784,7 +784,7 @@ Use the primary agent from "Specialized Agent Assignment" to determine which sel
 **ClickUp Integration Note:** This task now includes Epic verification (Section 5.1), ClickUp story task creation (Section 5.3), and automatic frontmatter updates (Section 5.4). Stories are created as subtasks of their parent Epic in ClickUp's Backlog list. If Epic verification or ClickUp sync fails, the story file will still be created locally with a warning message.
 
 ## Handoff
-next_agent: @po
+next_agent: @product-lead
 next_command: *validate-story-draft {story-id}
 condition: Story status is Draft
 alternatives:

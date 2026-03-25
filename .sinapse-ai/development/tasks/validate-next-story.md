@@ -247,7 +247,7 @@ To comprehensively validate a story draft before implementation begins, ensuring
 **Constraint Validation:**
 - [ ] **executor != quality_gate** (CRITICAL - must be different)
 - [ ] **executor** is a known agent: @developer, @data-engineer, @devops, @ux-design-expert, @analyst, @architect
-- [ ] **quality_gate** is a known agent: @architect, @developer, @pm
+- [ ] **quality_gate** is a known agent: @architect, @developer, @project-lead
 
 **Type-to-Executor Consistency:**
 | Work Type | Expected Executor | Expected Quality Gate |
@@ -356,8 +356,8 @@ To comprehensively validate a story draft before implementation begins, ensuring
 **Self-Healing Configuration (Story 6.3.3):**
 - Is the self-healing configuration present?
 - Does the mode match the primary agent?
-  - @dev: light mode (2 iterations, 15 min, CRITICAL only)
-  - @qa: full mode (3 iterations, 30 min, CRITICAL+HIGH)
+  - @developer: light mode (2 iterations, 15 min, CRITICAL only)
+  - @quality-gate: full mode (3 iterations, 30 min, CRITICAL+HIGH)
   - @github-devops: check mode (report only)
 - Is the severity behavior documented?
 
@@ -464,7 +464,7 @@ Provide a structured validation report including:
 - **Confidence Level**: High/Medium/Low for successful implementation
 
 ## Handoff
-next_agent: @dev
+next_agent: @developer
 next_command: *develop {story-id}
 condition: Story status is Approved (GO decision)
 alternatives:

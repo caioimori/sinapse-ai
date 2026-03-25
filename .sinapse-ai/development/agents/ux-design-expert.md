@@ -448,7 +448,7 @@ Type `*help` to see commands by phase, or `*status` to see workflow state.
 **When to use others:**
 
 - System architecture → Use @architect
-- Component implementation → Use @dev
+- Component implementation → Use @developer
 - User research planning → Can use @analyst
 
 ---

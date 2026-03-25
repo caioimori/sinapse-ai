@@ -1,7 +1,7 @@
 # Task: Project Status — Full Panorama
 
 > **Command:** `*status`
-> **Agent:** @sinapse-orqx, @product-lead, @sm
+> **Agent:** @sinapse-orqx, @product-lead, @sprint-lead
 > **Purpose:** Display accurate, real-time panorama of all epics and stories
 > **Created:** 2026-03-05
 

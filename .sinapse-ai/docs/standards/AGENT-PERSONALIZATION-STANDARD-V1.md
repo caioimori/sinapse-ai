@@ -2,7 +2,7 @@
 
 **Status:** Draft (Story 6.1.2 Implementation)
 **Created:** 2025-01-14
-**Authors:** Roundtable (Pedro Valério, Brad Frost, Seth Godin, Dan Kennedy)
+**Authors:** SINAPSE AI Roundtable (Brad Frost, Seth Godin, Dan Kennedy)
 **Principle:** **Familiaridade + Personalização = Produtividade**
 
 ---
@@ -546,7 +546,6 @@ quinn: loadVocabulary('Guardian') → "validar"
 - **Epic 6.1:** Agent Identity System
 - **DECISION-1:** PT-BR Localization Priority
 - **Brad Frost:** Atomic Design principles
-- **Pedro Valério:** Automation-first philosophy
 - **Seth Godin:** Brand personality frameworks
 - **Dan Kennedy:** ROI-driven implementation
 

@@ -261,8 +261,8 @@ Type `*help` to see all commands.
 
 - Story creation → Delegate to @sprint-lead using `*draft`
 - Epic creation → Delegate to @project-lead using `*create-epic`
-- PRD creation → Use @pm
-- Strategic planning → Use @pm
+- PRD creation → Use @project-lead
+- Strategic planning → Use @project-lead
 - Course corrections → Escalate to @sinapse-orqx using `*correct-course`
 
 ---

@@ -73,3 +73,41 @@ Resposta esperada ao ativar atalho:
 1. Confirmar agente ativado
 2. Mostrar 3-6 comandos principais (`*help`, etc.)
 3. Seguir na persona do agente
+
+## Orquestradores de Squads (19 orqx)
+
+Cada orqx coordena um squad completo de agentes especializados. Ative via `/skills` > `sinapse-<orqx>` ou `@<orqx>`:
+
+| Orqx | Squad | Foco |
+|------|-------|------|
+| `sinapse-orqx` | Core | Orquestrador principal de todos os squads |
+| `brand-orqx` | Brand | Estrategia de marca, arquetipos, auditoria |
+| `copy-orqx` | Copy | Copywriting persuasivo, headlines, conversao |
+| `content-orqx` | Content | Governanca editorial, estrategia de conteudo |
+| `storytelling-orqx` | Storytelling | Narrativa, roteiros, frameworks de historia |
+| `commercial-orqx` | Commercial | Vendas, funil, revenue, pipeline |
+| `paidmedia-orqx` | Paid Media | Meta Ads, Google Ads, campanhas |
+| `growth-orqx` | Growth | Analytics, CRO, SEO, growth hacking |
+| `research-orqx` | Research | Market analysis, inteligencia competitiva |
+| `product-orqx` | Product | Product discovery, estrategia, operacoes |
+| `design-orqx` | Design | Design systems, componentes, tokens |
+| `animations-orqx` | Animations | Motion design, CSS, particulas, 3D |
+| `cyber-orqx` | Cybersecurity | Seguranca, threat intel, pentest |
+| `finance-orqx` | Finance | Budget, pricing, profitability |
+| `courses-orqx` | Courses | Curriculos, assessments, launch |
+| `cloning-orqx` | Cloning | Clonagem cognitiva, mind synthesis |
+| `council-orqx` | Council | Advisors estrategicos (Munger, Dalio, Thiel) |
+| `claude-orqx` | Claude | Claude Code, MCP, integracao avancada |
+| `swarm-orqx` | Mastery | Dominio avancado do Claude Code |
+
+Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
+
+## Agentes Especializados (151+)
+
+Alem dos core e orqx, existem 151+ agentes especializados organizados por squad. Eles sao acessiveis via:
+- `.codex/agents/<agent-name>.md` — arquivo direto
+- Chamada interna pelo orqx do squad
+
+Exemplos: `brand-strategist`, `ad-copywriter`, `penetration-tester`, `content-writer`, `ga-analytics-engineer`, etc.
+
+Use `*help` dentro de qualquer orqx para ver os especialistas disponiveis no squad.

@@ -1,7 +1,7 @@
 # Spec Pipeline: Gather Requirements
 
 > **Phase:** 1 - Gather
-> **Owner Agent:** @pm
+> **Owner Agent:** @project-lead
 > **Pipeline:** spec-pipeline
 
 ---

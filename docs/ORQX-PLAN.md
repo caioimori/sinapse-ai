@@ -211,25 +211,27 @@ Pente fino em cada arquivo do framework. Zero assinaturas escondidas, zero easte
 ## TIMELINE DE EXECUCAO
 
 ```
-Semana 1 (Atual):
+Semana 1 (2026-03-24):
   Fase 1 [DONE] ████████████████████████████████████ 100%
-  Fase 2 [TODO] ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0%
 
-Semana 2:
-  Fase 2         ████████████████████░░░░░░░░░░░░░░░  55%
-  Fase 3 [start] ██████████░░░░░░░░░░░░░░░░░░░░░░░░░  25%
+Semana 2 (2026-03-25):
+  Fase 2 [PARC] ████████████████████░░░░░░░░░░░░░░░  55%
+  Fase 4 [DONE] ████████████████████████████████████ 100%
+    - README.md + README.en.md reescritos (voz autoral SINAPSE)
+    - CAIO-VOICE.md + CONTINUITY-PLAN.md removidos
+    - Refs Pedro Valerio/OpenClaw/Mega Brain/nomes antigos limpas (55+ arquivos)
+    - AGENTS.md reescrito para Codex (19 orqx + 12 core + 151 specialists)
+    - Paridade Codex 100% (178 = 178 agents)
+    - Global ~/.claude/CLAUDE.md + 9 rules globais limpos de AIOX
+    - claude-code-mastery padronizado (config.yaml → squad.yaml)
+    - _example movido para docs/examples/squads/
+    - 16 agents reorganizados em squads naturais (chiefs + design + utils)
+    - 18 wrappers autonomos YOLO criados para todos os orqx
+    - Mission Routers ricos construidos (7 via chiefs + 11 novos)
+    - Comandos * diferenciados por squad (docs/SQUAD-COMMANDS-REFERENCE.md)
+  Fase 5 [PEND] ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0%
 
-Semana 3:
-  Fase 2         ████████████████████████████████████ 100%
-  Fase 3         ██████████████████████████░░░░░░░░░░  75%
-  Fase 4 [start] ██████████░░░░░░░░░░░░░░░░░░░░░░░░░  25%
-
-Semana 4:
-  Fase 3         ████████████████████████████████████ 100%
-  Fase 4         ████████████████████████████████████ 100%
-  Fase 5 [start] ████████████████████████████████████ 100%
-
-  >>> RELEASE: SINAPSE v6.0.0 — Refined Edition
+  >>> RELEASE: SINAPSE v7.0.0 — Autonomous Squad Edition
 ```
 
 ---
@@ -245,6 +247,10 @@ Semana 4:
 | 5 | Claude Code + Codex como IDEs primarias | Maior base de usuarios |
 | 6 | Zero refs externas em qualquer lugar visivel | Produto 100% autoral |
 | 7 | `sinapse` no terminal = Claude + SINAPSE framework | UX unificada |
+| 8 | Arquitetura de 3 camadas: Orqx (persona) + Wrapper YOLO + Chief (premium) | Flexibilidade: interativo, autonomo, ou premium |
+| 9 | Chiefs dentro de squads naturais, nao soltos | Acesso a KB do squad aumenta qualidade |
+| 10 | Mission Routers com task mappings reais para todos os 18 squads | Routing preciso em vez de "adivinha a task" |
+| 11 | Comandos * autoexplicativos e dominio-especificos | Diferenciacao do AIOX, UX clara |
 
 ---
 

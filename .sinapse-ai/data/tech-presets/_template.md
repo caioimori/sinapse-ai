@@ -236,8 +236,8 @@ describe('[Component/Service]', () => {
 ### Recommended Workflow
 
 1. **Planning Phase:** Use `@architect` with this preset
-2. **Development Phase:** Use `@dev` following these patterns
-3. **QA Phase:** Use `@qa` with the testing strategy defined
+2. **Development Phase:** Use `@developer` following these patterns
+3. **QA Phase:** Use `@quality-gate` with the testing strategy defined
 
 ### Related SINAPSE Templates
 

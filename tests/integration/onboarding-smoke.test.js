@@ -69,7 +69,7 @@ describe('Onboarding smoke flow (SINAPSE-DIFF-4.0.5)', () => {
     const readme = await fs.readFile(path.join(repoRoot, 'README.md'), 'utf8');
     const gettingStarted = await fs.readFile(path.join(repoRoot, 'docs', 'getting-started.md'), 'utf8');
 
-    expect(readme).toContain('Comece Aqui (10 Min)');
+    expect(readme).toContain('Instalacao (2 minutos)');
     expect(readme).toContain('npx sinapse-ai init');
     expect(readme).toContain('npx sinapse-ai install');
 

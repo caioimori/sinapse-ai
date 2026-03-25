@@ -463,8 +463,8 @@ public class OrdersController {
 ### Recommended Workflow
 
 1. `@architect` define boundaries hexagonais pelo preset `java`
-2. `@dev` implementa por camadas (`domain`, `application`, `infrastructure`)
-3. `@qa` valida transacoes, contratos e regressao
+2. `@developer` implementa por camadas (`domain`, `application`, `infrastructure`)
+3. `@quality-gate` valida transacoes, contratos e regressao
 
 ### SINAPSE Commands
 

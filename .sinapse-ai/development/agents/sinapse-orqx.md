@@ -301,11 +301,11 @@ dependencies:
     - ids-governor.md
     - sync-registry-intel.md
   # Delegated tasks (Story 6.1.2.3):
-  #   brownfield-create-epic.md → @pm
-  #   brownfield-create-story.md → @pm
+  #   brownfield-create-epic.md → @project-lead
+  #   brownfield-create-story.md → @project-lead
   #   facilitate-brainstorming-session.md → @analyst
   #   generate-ai-frontend-prompt.md → @architect
-  #   create-suite.md → @qa
+  #   create-suite.md → @quality-gate
   #   learn-patterns.md → merged into analyze-framework.md
   templates:
     - agent-template.yaml
@@ -409,9 +409,9 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 **When to use specialized agents:**
 
-- Story implementation → Use @dev
-- Code review → Use @qa
-- PRD creation → Use @pm
+- Story implementation → Use @developer
+- Code review → Use @quality-gate
+- PRD creation → Use @project-lead
 - Story creation → Use @sprint-lead (or @project-lead for epics)
 - Architecture → Use @architect
 - Database → Use @data-engineer

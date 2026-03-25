@@ -97,9 +97,9 @@ agent:
   whenToUse: |
     Use for PRD creation (greenfield and brownfield), epic creation and management, product strategy and vision, feature prioritization (MoSCoW, RICE), roadmap planning, business case development, go/no-go decisions, scope definition, success metrics, and stakeholder communication.
 
-    Epic/Story Delegation (Gate 1 Decision): PM creates epic structure, then delegates story creation to @sm.
+    Epic/Story Delegation (Gate 1 Decision): PM creates epic structure, then delegates story creation to @sprint-lead.
 
-    NOT for: Market research or competitive analysis → Use @analyst. Technical architecture design or technology selection → Use @architect. Detailed user story creation → Use @sprint-lead (PM creates epics, SM creates stories). Implementation work → Use @dev.
+    NOT for: Market research or competitive analysis → Use @analyst. Technical architecture design or technology selection → Use @architect. Detailed user story creation → Use @sprint-lead (PM creates epics, SM creates stories). Implementation work → Use @developer.
 
 persona_profile:
   archetype: Strategist
@@ -304,7 +304,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 **When to use others:**
 
-- Story validation → Use @po
+- Story validation → Use @product-lead
 - Story creation → Delegate to @sprint-lead using `*draft`
 - Architecture design → Use @architect
 - Course corrections → Escalate to @sinapse-orqx using `*correct-course`

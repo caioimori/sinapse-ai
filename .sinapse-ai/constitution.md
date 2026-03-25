@@ -62,7 +62,7 @@ Todo desenvolvimento começa e termina com uma story.
 - MUST: Stories DEVEM ter acceptance criteria claros antes de implementação
 - MUST: Progresso DEVE ser rastreado via checkboxes na story
 - MUST: File List DEVE ser mantida atualizada na story
-- SHOULD: Stories seguem o workflow: @po/@sprint-lead cria → @developer implementa → @quality-gate valida → @devops push
+- SHOULD: Stories seguem o workflow: @product-lead/@sprint-lead cria → @developer implementa → @quality-gate valida → @devops push
 
 **Gate:** `dev-develop-story.md` - BLOCK se não houver story válida
 
@@ -130,7 +130,7 @@ import { useStore } from '../../../stores/feature/store'
 ### Amendment Process
 
 1. Proposta de mudança documentada com justificativa
-2. Review por @architect e @po
+2. Review por @architect e @product-lead
 3. Aprovação requer consenso
 4. Mudança implementada com atualização de versão
 5. Propagação para templates e tasks dependentes

@@ -472,7 +472,7 @@ that can handle [specific requirements]."
    - Documents created by PM/Architect (in Web or IDE) MUST be sharded for development
    - Two methods to shard:
      a) **Manual**: Drag `shard-doc` task + document file into chat
-     b) **Agent**: Ask `@sinapse-orqx` or `@po` to shard documents
+     b) **Agent**: Ask `@sinapse-orqx` or `@product-lead` to shard documents
    - Shards `docs/prd.md` → `docs/prd/` folder
    - Shards `docs/architecture.md` → `docs/architecture/` folder
    - **WARNING**: Do NOT shard in Web UI - copying many small files is painful!
@@ -496,13 +496,13 @@ Resulting Folder Structure:
    - **ALWAYS start new chat between SM, Dev, and QA work**
 
    **Step 1 - Story Creation**:
-   - **NEW CLEAN CHAT** → Select powerful model → `@sm` → `*create`
+   - **NEW CLEAN CHAT** → Select powerful model → `@sprint-lead` → `*create`
    - SM executes create-next-story task
    - Review generated story in `docs/stories/`
    - Update status from "Draft" to "Approved"
 
    **Step 2 - Story Implementation**:
-   - **NEW CLEAN CHAT** → `@dev`
+   - **NEW CLEAN CHAT** → `@developer`
    - Agent asks which story to implement
    - Include story file content to save dev agent lookup time
    - Dev follows tasks/subtasks, marking completion
@@ -510,7 +510,7 @@ Resulting Folder Structure:
    - Dev marks story as "Review" when complete with all tests passing
 
    **Step 3 - Senior QA Review**:
-   - **NEW CLEAN CHAT** → `@qa` → execute review-story task
+   - **NEW CLEAN CHAT** → `@quality-gate` → execute review-story task
    - QA performs senior developer code review
    - QA can refactor and improve code directly
    - QA appends results to story's QA Results section
@@ -548,7 +548,7 @@ Each status change requires user verification and approval before proceeding.
 **Option 1: PRD-First (Recommended for Large Codebases/Monorepos)**:
 
 1. **Upload project to Gemini Web** (GitHub URL, files, or zip)
-2. **Create PRD first**: `@pm` → `*create-doc brownfield-prd`
+2. **Create PRD first**: `@project-lead` → `*create-doc brownfield-prd`
 3. **Focused documentation**: `@analyst` → `*document-project`
    - Analyst asks for focus if no PRD provided
    - Choose "single document" format for Web UI
@@ -560,7 +560,7 @@ Each status change requires user verification and approval before proceeding.
 
 1. **Upload project to Gemini Web**
 2. **Document everything**: `@analyst` → `*document-project`
-3. **Then create PRD**: `@pm` → `*create-doc brownfield-prd`
+3. **Then create PRD**: `@project-lead` → `*create-doc brownfield-prd`
    - More thorough but can create excessive documentation
 
 4. **Requirements Gathering**:

@@ -399,8 +399,8 @@ Type `*help` to see all commands.
 
 **When to use others:**
 
-- Code implementation → Use @dev
-- Story drafting → Use @sprint-lead or @po
+- Code implementation → Use @developer
+- Story drafting → Use @sprint-lead or @product-lead
 - Automated reviews → CodeRabbit integration
 
 ---
@@ -416,7 +416,7 @@ Type `*help` to see all commands.
 
 ### Prerequisites
 
-1. Story must be marked "Ready for Review" by @dev
+1. Story must be marked "Ready for Review" by @developer
 2. Code must be committed (not pushed yet)
 3. CodeRabbit integration configured
 4. QA gate templates available in `docs/qa/gates/`

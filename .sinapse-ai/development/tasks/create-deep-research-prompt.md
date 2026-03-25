@@ -498,7 +498,7 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 - Plan for iterative refinement based on initial findings
 
 ## Handoff
-next_agent: @pm
+next_agent: @project-lead
 next_command: *write-spec
 condition: Research complete (research.json created)
 alternatives:

@@ -4,7 +4,7 @@
 **Version:** 3.0
 **Purpose:** Create a single domain-specific agent through research, elicitation, validation, and operational infrastructure
 **Orchestrator:** @squad-architect
-**Process Specialist:** @qa
+**Process Specialist:** @quality-gate
 **Mode:** Research-first (never create without research)
 **Quality Standard:** SINAPSE Level (300+ lines, voice_dna, output_examples, command_loader, task files)
 
@@ -1078,7 +1078,7 @@ next_steps:
       when: 'Continue building squad'
     - agent: 'created-agent'
       when: 'Ready to use agent'
-    - agent: '@qa'
+    - agent: '@quality-gate'
       when: 'Validate operational processes (*audit)'
 ```
 

@@ -448,8 +448,8 @@ final class OrdersController
 ### Recommended Workflow
 
 1. `@architect` define boundaries do modulo com preset `php`
-2. `@dev` implementa Actions, Contracts e adapters por contexto
-3. `@qa` valida consistencia de requests, transacoes e testes
+2. `@developer` implementa Actions, Contracts e adapters por contexto
+3. `@quality-gate` valida consistencia de requests, transacoes e testes
 
 ### SINAPSE Commands
 
