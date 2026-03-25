@@ -55,19 +55,19 @@ Preferencia de ativacao no Codex CLI:
 
 Quando a mensagem do usuario for um atalho de agente, carregue o arquivo correspondente em `.sinapse-ai/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate receber `*exit`.
 
-Atalhos aceitos por agente:
-- `@sinapse-orqx`, `/sinapse-orqx`, `/sinapse-orqx.md` -> `.sinapse-ai/development/agents/sinapse-orqx.md`
-- `@analyst`, `/analyst`, `/analyst.md` -> `.sinapse-ai/development/agents/analyst.md`
-- `@architect`, `/architect`, `/architect.md` -> `.sinapse-ai/development/agents/architect.md`
-- `@data-engineer`, `/data-engineer`, `/data-engineer.md` -> `.sinapse-ai/development/agents/data-engineer.md`
-- `@dev`, `/dev`, `/dev.md` -> `.sinapse-ai/development/agents/developer.md`
-- `@devops`, `/devops`, `/devops.md` -> `.sinapse-ai/development/agents/devops.md`
-- `@pm`, `/pm`, `/pm.md` -> `.sinapse-ai/development/agents/project-lead.md`
-- `@po`, `/po`, `/po.md` -> `.sinapse-ai/development/agents/product-lead.md`
-- `@qa`, `/qa`, `/qa.md` -> `.sinapse-ai/development/agents/quality-gate.md`
-- `@sm`, `/sm`, `/sm.md` -> `.sinapse-ai/development/agents/sprint-lead.md`
-- `@squad-creator`, `/squad-creator`, `/squad-creator.md` -> `.sinapse-ai/development/agents/squad-creator.md`
-- `@ux-design-expert`, `/ux-design-expert`, `/ux-design-expert.md` -> `.sinapse-ai/development/agents/ux-design-expert.md`
+Atalhos aceitos por agente (nome completo + alias):
+- `@sinapse-orqx` -> `.sinapse-ai/development/agents/sinapse-orqx.md`
+- `@developer` ou `@dev` -> `.sinapse-ai/development/agents/developer.md`
+- `@quality-gate` ou `@qa` -> `.sinapse-ai/development/agents/quality-gate.md`
+- `@project-lead` ou `@pm` -> `.sinapse-ai/development/agents/project-lead.md`
+- `@product-lead` ou `@po` -> `.sinapse-ai/development/agents/product-lead.md`
+- `@sprint-lead` ou `@sm` -> `.sinapse-ai/development/agents/sprint-lead.md`
+- `@analyst` -> `.sinapse-ai/development/agents/analyst.md`
+- `@architect` -> `.sinapse-ai/development/agents/architect.md`
+- `@data-engineer` -> `.sinapse-ai/development/agents/data-engineer.md`
+- `@devops` -> `.sinapse-ai/development/agents/devops.md`
+- `@squad-creator` -> `.sinapse-ai/development/agents/squad-creator.md`
+- `@ux-design-expert` -> `.sinapse-ai/development/agents/ux-design-expert.md`
 
 Resposta esperada ao ativar atalho:
 1. Confirmar agente ativado

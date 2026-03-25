@@ -240,7 +240,7 @@ Pre-commit and pre-push hooks validate automatically.
 | Resource | Link |
 |----------|------|
 | User Guide | [docs/guides/user-guide.md](docs/guides/user-guide.md) |
-| Architecture | [docs/architecture/](docs/architecture/) |
+| Architecture | [docs/pt/architecture/](docs/pt/architecture/) |
 | Squads Guide | [docs/guides/squads-guide.md](docs/guides/squads-guide.md) |
 | Getting Started | [docs/getting-started.md](docs/getting-started.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |
