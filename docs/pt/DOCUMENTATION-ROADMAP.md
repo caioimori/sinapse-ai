@@ -107,7 +107,7 @@ Estes documentos devem ser **mesclados na documentação existente**:
 | `migration-migration-guide.md`                       | `migration-guide.md`                         | Mesmo que acima                     |
 | `coderabbit-integration-decisions.md`             | `architecture/adr/`                          | Criar novo ADR                      |
 | `technical-review-greeting-system-unification.md` | `guides/contextual-greeting-system-guide.md` | Adicionar seção técnica             |
-| `hybrid-ops-pv-mind-integration.md`               | `architecture/high-level-architecture.md`    | Adicionar seção de integração       |
+| `brand-workflow-mind-integration.md`               | `architecture/high-level-architecture.md`    | Adicionar seção de integração       |
 | `repository-migration-plan.md`                    | `migration-guide.md`                         | Adicionar seção de migração de repo |
 | `internal-tools-analysis.md`                      | `.sinapse-ai/infrastructure/tools/README.md`  | Referenciar existente               |
 | `.sinapse-ai/core/registry/README.md`              | **JÁ EXISTE**                                | Nenhuma ação necessária             |

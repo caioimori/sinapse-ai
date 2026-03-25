@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 6.0.4
-generated_at: "2026-03-25T14:57:52.773Z"
+version: 7.0.0
+generated_at: "2026-03-25T18:09:13.999Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1090
 files:
@@ -1217,9 +1217,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:0170cbc06ba50f07f35d39d8b729385042648c4bab17cca5a8a9733e6aaaa33b
+    hash: sha256:9ae3ff6132be501372a55f175f636495efb887da6b7102e197135f395a76564c
     type: data
-    size: 519046
+    size: 519038
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1465,9 +1465,9 @@ files:
     type: script
     size: 21559
   - path: development/scripts/audit-agent-config.js
-    hash: sha256:2b162de43b2ceee26a515d95c49a12637afc513194746263183e66543fc22c42
+    hash: sha256:fde7fba12b7b451109911d75ac7719c0c5f586bf81341fb0d79d4110be3750af
     type: script
-    size: 9829
+    size: 9830
   - path: development/scripts/backlog-manager.js
     hash: sha256:ac83ad8a5d32a119add54bad55cb5f84a32d093702ae4f75b0a6d2388ff1fc0a
     type: script
@@ -4289,9 +4289,9 @@ files:
     type: script
     size: 1711
   - path: user-guide.md
-    hash: sha256:095d05801d8165a706af94b4eb3082a0ea1d4a440745e16b8b0d3c4b15630f35
+    hash: sha256:5e99c3bf1c80b40ce1d0c0925d051e601d2a18e7f26d531424cf96046a8a4ea4
     type: documentation
-    size: 38458
+    size: 38455
   - path: workflow-intelligence/__tests__/confidence-scorer.test.js
     hash: sha256:237216842d3eb710ae33f3aba6c7b2a6a353cccc1dea6d4b927d8d063d9cb635
     type: workflow-intelligence

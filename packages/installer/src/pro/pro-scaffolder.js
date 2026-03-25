@@ -132,7 +132,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
     if (commandsResult.installed > 0) {
       result.copiedFiles.push(...commandsResult.files);
       if (onProgress) {
-        onProgress({ item: 'squad-commands', status: 'done',
+        onProgress({ item: 'squad-setup', status: 'done',
           message: `${commandsResult.installed} squad agent commands installed` });
       }
     }

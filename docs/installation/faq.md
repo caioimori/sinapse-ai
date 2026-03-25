@@ -128,7 +128,7 @@ your-project/
 │   └── prd/                    # Product requirements
 │
 └── Squads/            # (if installed)
-    └── hybrid-ops/             # HybridOps pack
+    └── squad-brand/             # HybridOps pack
 ```
 
 ---
@@ -432,12 +432,12 @@ npx sinapse-ai install
 
 | Pack           | Features                                                       |
 | -------------- | -------------------------------------------------------------- |
-| **hybrid-ops** | ClickUp integration, process automation, specialized workflows |
+| **squad-brand** | ClickUp integration, process automation, specialized workflows |
 
 **Install an Squad:**
 
 ```bash
-npx sinapse-ai install --Squads hybrid-ops
+npx sinapse-ai install --Squads squad-brand
 ```
 
 **List available packs:**

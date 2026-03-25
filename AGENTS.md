@@ -102,9 +102,9 @@ Cada orqx coordena um squad completo de agentes especializados. Ative via `/skil
 
 Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
 
-## Agentes Especializados (151+)
+## Agentes Especializados (174)
 
-Alem dos core e orqx, existem 151+ agentes especializados organizados por squad. Eles sao acessiveis via:
+Alem dos core e orqx, existem 174 agentes especializados organizados por squad. Eles sao acessiveis via:
 - `.codex/agents/<agent-name>.md` — arquivo direto
 - Chamada interna pelo orqx do squad
 

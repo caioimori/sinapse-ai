@@ -323,7 +323,7 @@ cross_squad_handoffs:
 | 06 | squad-growth | 7 | 72 | 6 | 9 | 105 |
 | 07 | squad-commercial | 7 | 66 | 6 | 9 | 99 |
 | 08 | squad-product | 7 | 75 | 6 | 9 | 107 |
-| 09 | squad-operations-hub | 7 | 70 | 6 | 9 | 102 |
+| 09 | (deprecated) | - | - | - | - | - |
 | **TOTAL** | **9 squads** | **69** | **705** | **52** | **102** | **~1,029** |
 
 ---

@@ -49,7 +49,7 @@ npx @sinapse/fullstack install
   Current state: Clean installation
 
 📦 Select Squads to Install:
-  ◉ hybrid-ops (Human-AI Operations)
+  ◉ squad-brand (Brand Strategy)
   ◯ expansion-creator (Create new squads)
   ◯ sinapse-infrastructure-devops (DevOps utilities)
   ◯ meeting-notes (Meeting assistant)
@@ -121,7 +121,7 @@ your-project/
 │       └── ... (30+ rules)
 │
 └── Squads/               # ✅ Se squads selecionados
-    ├── hybrid-ops/                # Operações híbridas humano-agente
+    ├── squad-brand/                # Estrategia de marca
     └── expansion-creator/         # Criador de squads
 ```
 
@@ -1281,7 +1281,7 @@ O **sinapse-developer** é o meta-agente para o próprio SINAPSE:
 O SINAPSE suporta squads para domínios específicos:
 
 **Disponíveis durante instalação**:
-- **hybrid-ops** - Operações híbridas humano-agente
+- **squad-brand** - Estrategia de marca, identidade visual, brandbook
 - **expansion-creator** - Ferramentas para criar novos squads
 - **sinapse-infrastructure-devops** - Utilities de DevOps e infraestrutura
 - **meeting-notes** - Assistente de notas e atas de reuniões
@@ -1293,7 +1293,7 @@ npx sinapse-ai@latest install
 
 # O wizard mostra:
 # 📦 Select Squads to Install:
-#   ◉ hybrid-ops
+#   ◉ squad-brand
 #   ◯ expansion-creator
 #   ◯ sinapse-infrastructure-devops
 #   ◯ meeting-notes

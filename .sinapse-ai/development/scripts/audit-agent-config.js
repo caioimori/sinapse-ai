@@ -99,7 +99,7 @@ function analyzeConfigNeeds(agentData) {
   if (agentData.dependencies.tools) {
     const tools = agentData.dependencies.tools;
 
-    // pvMindContext needed for hybrid-ops agents
+    // pvMindContext needed for specialized agents
     if (tools.includes('supabase') || tools.includes('n8n')) {
       needs.lazy.push('pvMindContext');
       needs.lazy.push('hybridOpsConfig');

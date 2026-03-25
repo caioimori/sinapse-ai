@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg)](LICENSE)
 
-> **151 agentes de IA. 19 squads especializados. Uma CLI.**
+> **174 agentes de IA. 19 squads especializados. Uma CLI.**
 >
 > O SINAPSE AI e um framework open source que organiza agentes de IA em squads especializados para resolver problemas reais de negocios, marketing, desenvolvimento, copy, design e mais. Funciona direto no seu terminal com Claude Code, Codex CLI ou qualquer IDE compativel.
 
@@ -20,7 +20,7 @@ O SINAPSE AI nao e mais um chatbot. E um sistema de orquestracao onde cada agent
 **O que voce ganha ao instalar:**
 
 - **19 orquestradores (orqx)** prontos para ativar direto no terminal
-- **151 agentes especializados** com knowledge bases proprias
+- **174 agentes especializados** com knowledge bases proprias
 - **Workflows completos** de planejamento, desenvolvimento, QA e deploy
 - **Story-Driven Development** com rastreamento automatico de progresso
 - **Compatibilidade multi-IDE**: Claude Code, Codex CLI, Cursor, Gemini CLI
@@ -69,25 +69,25 @@ Cada squad e uma equipe de agentes especializados com knowledge base, workflows 
 | Squad | Foco | Agentes |
 |-------|------|---------|
 | **squad-brand** | Estrategia de marca, arquetipos, auditoria | 15 |
-| **squad-copy** | Copywriting persuasivo, headlines, conversao | 13 |
+| **squad-copy** | Copywriting persuasivo, headlines, conversao | 14 |
 | **squad-council** | Advisors estrategicos (Munger, Dalio, Thiel) | 11 |
-| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 10 |
-| **squad-commercial** | Vendas, funil, revenue, pipeline | 10 |
+| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 11 |
+| **squad-commercial** | Vendas, funil, revenue, pipeline | 11 |
 | **squad-animations** | Motion design, CSS, particulas, 3D | 9 |
-| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 9 |
-| **squad-claude** | Claude Code, MCP, integracao avancada | 8 |
-| **squad-cloning** | Clonagem cognitiva, mind synthesis | 8 |
+| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 10 |
+| **squad-claude** | Claude Code, MCP, integracao avancada | 10 |
+| **squad-cloning** | Clonagem cognitiva, mind synthesis | 9 |
 | **squad-courses** | Cursos, curriculos, assessments, launch | 8 |
-| **squad-cybersecurity** | Seguranca, threat intel, pentest | 8 |
-| **squad-design** | Design systems, componentes, tokens | 8 |
+| **squad-cybersecurity** | Seguranca, threat intel, pentest | 9 |
+| **squad-design** | Design systems, componentes, tokens | 15 |
 | **squad-content** | Governanca editorial, estrategia de conteudo | 7 |
 | **squad-product** | Product discovery, estrategia, operacoes | 7 |
-| **squad-research** | Market analysis, inteligencia competitiva | 7 |
+| **squad-research** | Market analysis, inteligencia competitiva | 8 |
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 | **claude-code-mastery** | Dominio avancado do Claude Code | 8 |
 
-**Total: 19 squads, 151+ agentes especializados**
+**Total: 19 squads, 174 agentes especializados**
 
 ---
 

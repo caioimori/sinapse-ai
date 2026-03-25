@@ -456,7 +456,7 @@ Use *help para lista completa de comandos.
 *validate-phase 4
 
 # Exemplo: Gerar runbook
-*generate-runbook hybrid-ops-workflow
+*generate-runbook squad-brand-workflow
 ```
 
 ### Acesso ao Contexto do Workflow
@@ -541,7 +541,7 @@ Todos os agentes aplicam:
 │   ├── validation-reviewer-pv.md      (Fase 8)
 │   └── documentation-writer-pv.md     (Fase 9)
 ├── workflows/
-│   └── hybrid-ops-pv.yaml             (Orquestração de workflow)
+│   └── brand-workflow.yaml             (Orquestração de workflow)
 └── docs/
     ├── workflow-diagram.md             (Workflow visual)
     └── agent-reference-guide.md        (Este documento)
@@ -552,7 +552,7 @@ Todos os agentes aplicam:
 ## Documentação Relacionada
 
 - [Diagrama de Workflow](../guides/hybridOps/workflow-diagram.md) - Representação visual do workflow de 9 fases
-- [Workflow YAML](../guides/hybridOps/hybrid-ops-pv.yaml) - Configuração de orquestração de workflow
+- [Workflow YAML](../guides/hybridOps/brand-workflow.yaml) - Configuração de orquestração de workflow
 
 ---
 
