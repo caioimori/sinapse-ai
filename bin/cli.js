@@ -31,14 +31,14 @@ const NC = '\x1b[0m';
 function header() {
   const W = `${WHITE}${BOLD}`;
   console.log('');
-  console.log(`${W} ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗${NC}`);
-  console.log(`${W} ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝${NC}`);
-  console.log(`${W} ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗  ${NC}`);
-  console.log(`${W} ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝  ${NC}`);
-  console.log(`${W} ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗${NC}`);
-  console.log(`${W} ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝${NC}`);
+  console.log(`${W} ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗     █████╗ ██╗${NC}`);
+  console.log(`${W} ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║${NC}`);
+  console.log(`${W} ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗      ███████║██║${NC}`);
+  console.log(`${W} ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝      ██╔══██║██║${NC}`);
+  console.log(`${W} ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗    ██║  ██║██║${NC}`);
+  console.log(`${W} ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝${NC}`);
   console.log('');
-  console.log(`${DIM} AI Agent Squads for Claude Code${NC}`);
+  console.log(`${DIM} Seu copiloto de inteligencia artificial${NC}`);
   console.log(`${DIM} v${VERSION}${NC}`);
   console.log('');
 }
@@ -153,7 +153,7 @@ function cmdInstallGlobal() {
     console.log(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
   }
 
-  // Copy sinapse/ master squad
+  // Copy sinapse/ orqx squad
   const sinapseMasterSrc = path.join(ROOT, 'sinapse');
   const sinapseMasterDest = path.join(SINAPSE_HOME, 'sinapse');
   if (fs.existsSync(sinapseMasterSrc)) {
@@ -191,13 +191,14 @@ function cmdInstallGlobal() {
     console.log(`  ${GREEN}OK${NC} Framework agents — ${cmdCount} agents`);
   }
 
-  // Generate commands for each squad
+  // Generate commands only for orqx agents (user-facing orchestrators)
   for (const squad of squads) {
     const squadPath = `${sinapseBase}/${squad.name}`;
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
     if (!fs.existsSync(agentsDir)) continue;
 
-    for (const file of fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'))) {
+    const orqxAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md') && f.includes('-orqx'));
+    for (const file of orqxAgents) {
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
@@ -206,7 +207,7 @@ function cmdInstallGlobal() {
     }
   }
 
-  // Generate commands for sinapse/ master squad agents
+  // Generate commands for sinapse/ orqx squad agents
   if (fs.existsSync(sinapseMasterDest)) {
     const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
     if (fs.existsSync(masterAgentsDir)) {
@@ -579,7 +580,7 @@ function cmdUpdateGlobal() {
   if (fs.existsSync(sinapseMasterSrc)) {
     rmDirSync(path.join(SINAPSE_HOME, 'sinapse'));
     copyDirSync(sinapseMasterSrc, path.join(SINAPSE_HOME, 'sinapse'));
-    console.log(`  ${GREEN}OK${NC} sinapse (master)`);
+    console.log(`  ${GREEN}OK${NC} sinapse (orqx)`);
   }
 
   // Phase 2: Regenerate commands (reuse install logic)
@@ -601,10 +602,15 @@ function cmdUpdateGlobal() {
     }
   }
 
+  // Only generate commands for orqx agents (user-facing orchestrators)
+  let totalAgents = 0;
   for (const squad of squads) {
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
     if (!fs.existsSync(agentsDir)) continue;
-    for (const file of fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'))) {
+    const allAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'));
+    totalAgents += allAgents.length;
+    const orqxAgents = allAgents.filter(f => f.includes('-orqx'));
+    for (const file of orqxAgents) {
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const squadPath = `${sinapseBase}/${squad.name}`;
@@ -615,7 +621,7 @@ function cmdUpdateGlobal() {
       cmdCount++;
     }
   }
-  console.log(`  ${GREEN}OK${NC} ${cmdCount} command files`);
+  console.log(`  ${GREEN}OK${NC} ${cmdCount} command files (${totalAgents} agents total)`);
 
   // Phase 3: Regenerate awareness
   console.log(`\n${CYAN}Phase 3:${NC} Updating squad-awareness`);
@@ -630,7 +636,7 @@ function cmdUpdateGlobal() {
   meta.commands = cmdCount;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
 
-  console.log(`\n${GREEN}Update complete!${NC} ${squads.length} squads | ${cmdCount} agents\n`);
+  console.log(`\n${GREEN}Update complete!${NC} ${squads.length} squads | ${totalAgents} agents | ${cmdCount} orqx commands\n`);
 }
 
 // ── Uninstall ────────────────────────────────────────────────────────────────
