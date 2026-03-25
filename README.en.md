@@ -194,17 +194,12 @@ Use `@squad-creator` or see the [Squads Guide](docs/guides/squads-guide.md).
 
 ---
 
-## IDE Configuration
+## Supported IDEs
 
-| IDE | Status | Activation |
-|-----|--------|------------|
-| **Claude Code** | Reference | `@agent-name` or `/sinapse` |
-| **Codex CLI** | First-class | `/skills` > `sinapse-<agent>` |
-| **Gemini CLI** | Supported | `/sinapse-menu` > `/sinapse-<agent>` |
-| **Cursor** | Partial | Rules + MCP |
-| **GitHub Copilot** | Partial | Repository instructions + MCP |
-
-Details: `docs/ide-integration.md`
+| IDE | How to activate |
+|-----|----------------|
+| **Claude Code** | `@agent-name` or `/sinapse` |
+| **Codex CLI** | `/skills` > `sinapse-<agent>` or `@agent-name` |
 
 ---
 
