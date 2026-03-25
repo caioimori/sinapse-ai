@@ -561,12 +561,14 @@ function cmdUpdateGlobal() {
 
   console.log(`${BOLD}Updating Sinapse...${NC}\n`);
 
-  const squads = getSquads(ROOT);
+  const squadsDir = path.join(ROOT, 'squads');
+  const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
+  const squads = getSquads(squadsSrcBase);
 
   // Phase 1: Re-copy squads
   console.log(`${CYAN}Phase 1:${NC} Updating squads`);
   for (const squad of squads) {
-    const src = path.join(ROOT, squad.name);
+    const src = path.join(squadsSrcBase, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
     rmDirSync(dest);
     copyDirSync(src, dest);
