@@ -139,7 +139,7 @@ function showWelcome() {
   console.log(colors.secondary('  Bem-vindo ao SINAPSE AI.'));
   console.log(colors.secondary('  Seu copiloto de inteligencia artificial.'));
   console.log('');
-  console.log(colors.tertiary('  17 squads · 179 agentes · 1400+ tasks'));
+  console.log(colors.tertiary('  17 squads · 151 agentes · 1400+ tasks'));
   console.log(colors.tertiary('  Tudo que voce precisa para construir,'));
   console.log(colors.tertiary('  empacotar e distribuir com IA.'));
   console.log('');
@@ -172,7 +172,7 @@ function showCompletion(context = {}) {
   console.log('');
   console.log(status.success('SINAPSE AI instalado'));
   console.log(status.success(`${llmLabel} configurado`));
-  console.log(status.success('179 agentes disponiveis'));
+  console.log(status.success('151 agentes disponiveis'));
   console.log(status.success(`Pronto! ${startCommand}`));
   console.log('');
   console.log(headings.divider() + '\n');
