@@ -602,7 +602,7 @@ function cmdUpdateGlobal() {
     }
   }
 
-  // Only generate commands for orqx agents (user-facing orchestrators)
+  // Count total agents and generate orqx commands (skip if already copied from framework)
   let totalAgents = 0;
   for (const squad of squads) {
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
@@ -611,15 +611,19 @@ function cmdUpdateGlobal() {
     totalAgents += allAgents.length;
     const orqxAgents = allAgents.filter(f => f.includes('-orqx'));
     for (const file of orqxAgents) {
+      const destPath = path.join(CLAUDE_COMMANDS_DIR, file);
+      if (fs.existsSync(destPath)) continue; // skip if already from framework
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const squadPath = `${sinapseBase}/${squad.name}`;
-      fs.writeFileSync(
-        path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`),
-        generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file)
-      );
+      fs.writeFileSync(destPath, generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file));
       cmdCount++;
     }
+  }
+  // Also count sinapse/ orqx agents
+  const sinapseAgentsDir = path.join(SINAPSE_HOME, 'sinapse', 'agents');
+  if (fs.existsSync(sinapseAgentsDir)) {
+    totalAgents += fs.readdirSync(sinapseAgentsDir).filter(f => f.endsWith('.md')).length;
   }
   console.log(`  ${GREEN}OK${NC} ${cmdCount} command files (${totalAgents} agents total)`);
 
