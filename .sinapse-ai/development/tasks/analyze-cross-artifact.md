@@ -1,7 +1,7 @@
 # Cross-Artifact Analysis Task
 
 > **Command:** `*analyze`
-> **Owner Agent:** @qa (can be invoked by any agent)
+> **Owner Agent:** @quality-gate (can be invoked by any agent)
 > **Mode:** Read-only (no file modifications)
 
 ---

@@ -273,26 +273,26 @@ managing wave quality gates, and persisting state for resume across sessions.
 ## Command
 
 ```
-@pm *execute-epic {path-to-EXECUTION.yaml} [action] [--mode=interactive]
+@project-lead *execute-epic {path-to-EXECUTION.yaml} [action] [--mode=interactive]
 ```
 
 ### Examples
 
 ```bash
 # Start a new epic execution
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml
 
 # Resume from where you left off
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml continue
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml continue
 
 # Check current progress
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml status
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml status
 
 # Start in YOLO mode (autonomous)
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml start --mode=yolo
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml start --mode=yolo
 
 # Abort execution
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml abort
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml abort
 ```
 
 ---
@@ -457,7 +457,7 @@ Progress: Wave {current}/{total}
   [ ] Bug 2: {description} — Pending ({story})
   ...
 
-Next: @pm *execute-epic {path} continue
+Next: @project-lead *execute-epic {path} continue
 ```
 
 ---
@@ -499,7 +499,7 @@ Branches created:
   - ...
 
 State preserved at: .sinapse/epic-{epicId}-state.yaml
-To resume later: @pm *execute-epic {path} continue
+To resume later: @project-lead *execute-epic {path} continue
 ```
 
 **4. Save state.**
@@ -550,7 +550,7 @@ PROCEDURE execute_wave(wave, stories, state):
 
           ## Development Cycle
           Follow the development-cycle workflow:
-          1. @po validates the story draft (read the story, verify acceptance criteria)
+          1. @product-lead validates the story draft (read the story, verify acceptance criteria)
           2. @{story.executor} implements the code changes
           3. Self-healing: fix any lint/test/typecheck errors
           4. @{story.quality_gate} reviews the implementation
@@ -814,7 +814,7 @@ epic_state:
 The state file persists on disk. To resume in a new Claude Code session:
 
 ```
-@pm *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml continue
+@project-lead *execute-epic docs/stories/epics/epic-activation-pipeline/EPIC-ACT-EXECUTION.yaml continue
 ```
 
 The executor loads state, reads `current_wave` and story statuses, and picks up exactly where it left off.
@@ -836,7 +836,7 @@ Each story spawns the full development-cycle:
 Provides the generic wave pattern that this task instantiates with project-specific data from the EXECUTION.yaml.
 
 ### po-epic-context.md
-Used by @po during story validation to understand accumulated changes across the epic.
+Used by @product-lead during story validation to understand accumulated changes across the epic.
 
 ### Wave Executor (wave-executor.js)
 The JS engine can be used for programmatic wave execution if available. This task provides the AI-driven alternative that works without code changes.

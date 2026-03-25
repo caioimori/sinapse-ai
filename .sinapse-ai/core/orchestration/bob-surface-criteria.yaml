@@ -8,7 +8,7 @@
 # consistent behavior regardless of LLM reasoning.
 #
 # @version 1.0.0
-# @author @dev (Dex) for Story 11.4
+# @author @developer (Dex) for Story 11.4
 # ============================================
 
 version: "1.0.0"
@@ -259,7 +259,7 @@ evaluation_order:
 # ============================================
 
 metadata:
-  author: "@dev (Dex)"
+  author: "@developer (Dex)"
   story: "11.4"
   epic: "11 - Projeto Bob"
   created_date: "2026-02-05"

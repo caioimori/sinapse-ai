@@ -21,15 +21,15 @@ This directory contains comprehensive runtime execution trace documentation for 
 | Agent | Persona | Commands | Activation Path | Trace Document |
 |-------|---------|----------|-----------------|----------------|
 | @architect | Aria (Visionary) | 21 | Direct | [architect-execution-trace.md](./architect-execution-trace.md) |
-| @dev | Dex (Builder) | 36 | Direct | [dev-execution-trace.md](./dev-execution-trace.md) |
-| @qa | Quinn (Guardian) | 25 | Direct | [qa-execution-trace.md](./qa-execution-trace.md) |
-| @sinapse-master | Nova (Orchestrator) | 33 | Direct | [sinapse-master-execution-trace.md](./sinapse-master-execution-trace.md) |
+| @developer | Dex (Builder) | 36 | Direct | [dev-execution-trace.md](./dev-execution-trace.md) |
+| @quality-gate | Quinn (Guardian) | 25 | Direct | [qa-execution-trace.md](./qa-execution-trace.md) |
+| @sinapse-orqx | Nova (Orchestrator) | 33 | Direct | [sinapse-orqx-execution-trace.md](./sinapse-orqx-execution-trace.md) |
 | @devops | Gage (Pipeline) | 30 | CLI Wrapper | [devops-execution-trace.md](./devops-execution-trace.md) |
 | @data-engineer | Dara (Architect) | 27 | CLI Wrapper | [data-engineer-execution-trace.md](./data-engineer-execution-trace.md) |
 | @ux-design-expert | Uma (Harmonizer) | 24 | CLI Wrapper | [ux-design-expert-execution-trace.md](./ux-design-expert-execution-trace.md) |
-| @po | Pax (Balancer) | 17 | Direct | [po-execution-trace.md](./po-execution-trace.md) |
-| @pm | Morgan (Strategist) | 13 | Direct | [pm-execution-trace.md](./pm-execution-trace.md) |
-| @sm | River (Flow) | 6 | Direct | [sm-execution-trace.md](./sm-execution-trace.md) |
+| @product-lead | Pax (Balancer) | 17 | Direct | [po-execution-trace.md](./po-execution-trace.md) |
+| @project-lead | Morgan (Strategist) | 13 | Direct | [pm-execution-trace.md](./pm-execution-trace.md) |
+| @sprint-lead | River (Flow) | 6 | Direct | [sm-execution-trace.md](./sm-execution-trace.md) |
 | @analyst | Alex (Explorer) | 14 | Direct | [analyst-execution-trace.md](./analyst-execution-trace.md) |
 | @squad-creator | Forge (Creator) | 13 | Direct | [squad-creation-execution-trace.md](./squad-creation-execution-trace.md) |
 
@@ -43,7 +43,7 @@ graph LR
         A1[@architect] --> GB[GreetingBuilder.buildGreeting]
         A2[@dev] --> GB
         A3[@qa] --> GB
-        A4[@sinapse-master] --> GB
+        A4[@sinapse-orqx] --> GB
         A5[@po] --> GB
         A6[@pm] --> GB
         A7[@sm] --> GB
@@ -71,7 +71,7 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Orchestration Layer"
-        MASTER[@sinapse-master<br/>Nova]
+        MASTER[@sinapse-orqx<br/>Nova]
     end
 
     subgraph "Management Layer"
@@ -135,15 +135,15 @@ graph TD
 
 | Agent | Priority | Config Sections | Files Loaded | Perf Target |
 |-------|----------|-----------------|--------------|-------------|
-| @sinapse-master | Critical | dataLocation, registry | sinapse-kb.md (lazy) | <30ms |
-| @dev | High | devLoadAlwaysFiles, devStoryLocation, dataLocation | coding-standards.md, tech-stack.md, source-tree.md, technical-preferences.md | <50ms |
-| @qa | High | qaLocation, dataLocation, storyBacklog | technical-preferences.md, test-levels-framework.md, test-priorities-matrix.md | <50ms |
+| @sinapse-orqx | Critical | dataLocation, registry | sinapse-kb.md (lazy) | <30ms |
+| @developer | High | devLoadAlwaysFiles, devStoryLocation, dataLocation | coding-standards.md, tech-stack.md, source-tree.md, technical-preferences.md | <50ms |
+| @quality-gate | High | qaLocation, dataLocation, storyBacklog | technical-preferences.md, test-levels-framework.md, test-priorities-matrix.md | <50ms |
 | @devops | High | dataLocation, cicdLocation | technical-preferences.md | <50ms |
 | @architect | Medium | architecture, dataLocation, templatesLocation | technical-preferences.md | <75ms |
-| @po | Medium | devStoryLocation, prd, storyBacklog, templatesLocation | elicitation-methods.md | <75ms |
-| @sm | Medium | devStoryLocation, storyBacklog, dataLocation | mode-selection-best-practices.md, workflow-patterns.yaml | <75ms |
+| @product-lead | Medium | devStoryLocation, prd, storyBacklog, templatesLocation | elicitation-methods.md | <75ms |
+| @sprint-lead | Medium | devStoryLocation, storyBacklog, dataLocation | mode-selection-best-practices.md, workflow-patterns.yaml | <75ms |
 | @data-engineer | Medium | dataLocation, etlLocation | technical-preferences.md | <75ms |
-| @pm | Low | devStoryLocation, storyBacklog | (none) | <100ms |
+| @project-lead | Low | devStoryLocation, storyBacklog | (none) | <100ms |
 | @analyst | Low | dataLocation, analyticsLocation | brainstorming-techniques.md | <100ms |
 | @ux-design-expert | Low | dataLocation, uxLocation | (none) | <100ms |
 | @squad-creator | Default | dataLocation | (none) | <150ms |
@@ -219,12 +219,12 @@ Multiple agents reference dependencies using `development/{templates,checklists}
 
 | Agent | Affected Dependencies |
 |-------|-----------------------|
-| @qa | Templates in `product/templates/` |
+| @quality-gate | Templates in `product/templates/` |
 | @devops | github-actions-ci.yml, github-actions-cd.yml, github-pr-template.md, changelog-template.md, pre-push-checklist.md, release-checklist.md |
 | @ux-design-expert | 9 templates, 4 checklists, 7 data files all in `product/` |
-| @po | story-tmpl.yaml, po-master-checklist.md, change-checklist.md |
-| @pm | prd-tmpl.yaml, brownfield-prd-tmpl.yaml, pm-checklist.md, change-checklist.md |
-| @sm | story-draft-checklist.md in `product/checklists/` |
+| @product-lead | story-tmpl.yaml, po-master-checklist.md, change-checklist.md |
+| @project-lead | prd-tmpl.yaml, brownfield-prd-tmpl.yaml, pm-checklist.md, change-checklist.md |
+| @sprint-lead | story-draft-checklist.md in `product/checklists/` |
 | @analyst | 4 templates in `product/templates/` |
 
 **Resolution:** The `AgentConfigLoader` resolves dependencies by searching multiple paths: `development/`, `product/`, and root `.sinapse-ai/` directories. The path mismatch does not cause runtime failures but is documented for accuracy.
@@ -235,8 +235,8 @@ Each trace documents files referenced but not found on disk:
 
 | Agent | Missing File | Impact |
 |-------|--------------|--------|
-| @dev | 9 scripts (recovery-tracker.js, stuck-detector.js, etc.), 1 checklist | Non-functional commands |
-| @sinapse-master | add-tech-doc.md | `*add-tech-doc` command non-functional |
+| @developer | 9 scripts (recovery-tracker.js, stuck-detector.js, etc.), 1 checklist | Non-functional commands |
+| @sinapse-orqx | add-tech-doc.md | `*add-tech-doc` command non-functional |
 | @ux-design-expert | integrate-Squad.md | Only `integrate-squad.md` exists |
 | @devops | gitignore-manager, version-tracker | Referenced tools not found |
 

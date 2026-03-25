@@ -469,8 +469,8 @@ public class OrdersController {
 ### SINAPSE Commands
 
 ```bash
-@dev "Follow the java preset patterns for this service"
-@qa "Validate transactional integrity and adapter boundaries"
+@developer "Follow the java preset patterns for this service"
+@quality-gate "Validate transactional integrity and adapter boundaries"
 ```
 
 ---

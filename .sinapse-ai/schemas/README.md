@@ -73,18 +73,18 @@ autoClaude:
 
   # Spec Pipeline capabilities
   specPipeline:
-    canGather: boolean # @pm - gather requirements
+    canGather: boolean # @project-lead - gather requirements
     canAssess: boolean # @architect - assess complexity
     canResearch: boolean # @analyst - research dependencies
-    canWrite: boolean # @pm - write specifications
-    canCritique: boolean # @qa - critique specs
+    canWrite: boolean # @project-lead - write specifications
+    canCritique: boolean # @quality-gate - critique specs
 
   # Execution capabilities
   execution:
     canCreatePlan: boolean # @architect - create implementation.yaml
     canCreateContext: boolean # @architect - generate context files
-    canExecute: boolean # @dev - execute subtasks
-    canVerify: boolean # @dev, @qa - verify completion
+    canExecute: boolean # @developer - execute subtasks
+    canVerify: boolean # @developer, @quality-gate - verify completion
     selfCritique:
       enabled: boolean
       checklistRef: string # Reference to checklist
@@ -98,8 +98,8 @@ autoClaude:
 
   # QA capabilities
   qa:
-    canReview: boolean # @qa - perform reviews
-    canFixRequest: boolean # @qa - create fix requests
+    canReview: boolean # @quality-gate - perform reviews
+    canFixRequest: boolean # @quality-gate - create fix requests
     reviewPhases: integer # Default: 10
     maxIterations: integer # Default: 5
 
@@ -120,11 +120,11 @@ autoClaude:
 
 | Agent      | specPipeline  | execution                 | recovery        | qa                 | memory          | worktree               |
 | ---------- | ------------- | ------------------------- | --------------- | ------------------ | --------------- | ---------------------- |
-| @pm        | gather, write | -                         | -               | -                  | -               | -                      |
+| @project-lead        | gather, write | -                         | -               | -                  | -               | -                      |
 | @architect | assess        | createPlan, createContext | -               | -                  | -               | -                      |
 | @analyst   | research      | -                         | -               | -                  | extractPatterns | -                      |
-| @dev       | -             | execute, verify           | track, rollback | -                  | captureInsights | -                      |
-| @qa        | critique      | verify                    | -               | review, fixRequest | -               | -                      |
+| @developer       | -             | execute, verify           | track, rollback | -                  | captureInsights | -                      |
+| @quality-gate        | critique      | verify                    | -               | review, fixRequest | -               | -                      |
 | @devops    | -             | -                         | -               | -                  | -               | create, merge, cleanup |
 
 ---
@@ -249,7 +249,7 @@ autoClaude:
 ### Validate Single File
 
 ```bash
-node validate-v3-schema.js .sinapse-ai/development/agents/dev.md
+node validate-v3-schema.js .sinapse-ai/development/agents/developer.md
 ```
 
 ### Validate All Files
@@ -269,7 +269,7 @@ node validate-v3-schema.js --all --strict
 ### Show V2 vs V3 Diff
 
 ```bash
-node validate-v3-schema.js --diff .sinapse-ai/development/agents/dev.md
+node validate-v3-schema.js --diff .sinapse-ai/development/agents/developer.md
 ```
 
 ### JSON Output
@@ -285,7 +285,7 @@ node validate-v3-schema.js --all --json
 ### Step 1: Check Current Status
 
 ```bash
-node validate-v3-schema.js --diff .sinapse-ai/development/agents/dev.md
+node validate-v3-schema.js --diff .sinapse-ai/development/agents/developer.md
 ```
 
 ### Step 2: Add autoClaude Section
@@ -293,7 +293,7 @@ node validate-v3-schema.js --diff .sinapse-ai/development/agents/dev.md
 Add the appropriate `autoClaude` section based on agent role:
 
 ```yaml
-# Example for @dev agent
+# Example for @developer agent
 autoClaude:
   version: '3.0'
   migratedAt: '2026-01-28T10:00:00Z'
@@ -318,7 +318,7 @@ autoClaude:
 ### Step 3: Validate
 
 ```bash
-node validate-v3-schema.js .sinapse-ai/development/agents/dev.md --strict
+node validate-v3-schema.js .sinapse-ai/development/agents/developer.md --strict
 ```
 
 ---

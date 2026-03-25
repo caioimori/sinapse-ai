@@ -186,7 +186,7 @@ entities:
       type: "task"
       purpose: "Gera stories de desenvolvimento a partir de requisitos"
       keywords: ["story", "create", "development", "agile"]
-      usedBy: ["@sm", "@po", "workflow-story-creation"]
+      usedBy: ["@sprint-lead", "@product-lead", "workflow-story-creation"]
       dependencies: ["template-story", "checklist-story"]
       adaptability:
         score: 0.7  # Fácil de adaptar
@@ -281,7 +281,7 @@ Combinado:
     evaluated_patterns: ['task-A', 'task-B', 'script-C'],
     rejection_reasons: {
       'task-A': 'Não suporta webhooks que eu preciso',
-      'task-B': 'Específico para @pm, preciso genérico',
+      'task-B': 'Específico para @project-lead, preciso genérico',
       'script-C': 'Performance >500ms, preciso <100ms'
     },
     new_capability: 'Task genérica com webhooks e <100ms',
@@ -318,27 +318,27 @@ Os Gates são **pontos de verificação** ao longo do fluxo de desenvolvimento.
 │     │                                                           │
 │     ▼                                                           │
 │   ┌─────┐  "Já existe epic similar?"                           │
-│   │ G1  │  @pm - ADVISORY (pode passar, mas avisa)             │
+│   │ G1  │  @project-lead - ADVISORY (pode passar, mas avisa)             │
 │   └──┬──┘                                                       │
 │      │                                                          │
 │      ▼                                                          │
 │   ┌─────┐  "Existem tasks que cobrem isso?"                    │
-│   │ G2  │  @sm - ADVISORY                                       │
+│   │ G2  │  @sprint-lead - ADVISORY                                       │
 │   └──┬──┘                                                       │
 │      │                                                          │
 │      ▼                                                          │
 │   ┌─────┐  "Referências da story são válidas?"                 │
-│   │ G3  │  @po - SOFT BLOCK (pode override com justificativa)  │
+│   │ G3  │  @product-lead - SOFT BLOCK (pode override com justificativa)  │
 │   └──┬──┘                                                       │
 │      │                                                          │
 │      ▼                                                          │
 │   ┌─────┐  "Lembrete: consulte o registry!"                    │
-│   │ G4  │  @dev - INFORMATIONAL (só loga, não bloqueia)        │
+│   │ G4  │  @developer - INFORMATIONAL (só loga, não bloqueia)        │
 │   └──┬──┘  ⚡ <2s - AUTOMÁTICO                                  │
 │      │                                                          │
 │      ▼                                                          │
 │   ┌─────┐  "Código novo poderia ter reusado existente?"        │
-│   │ G5  │  @qa - BLOCKS MERGE (se violação detectada)          │
+│   │ G5  │  @quality-gate - BLOCKS MERGE (se violação detectada)          │
 │   └──┬──┘  ⚡ <30s - AUTOMÁTICO                                 │
 │      │                                                          │
 │      ▼                                                          │
@@ -356,11 +356,11 @@ Os Gates são **pontos de verificação** ao longo do fluxo de desenvolvimento.
 
 | Gate | Agente | Tipo | Latência | Comportamento |
 |------|--------|------|----------|---------------|
-| G1 | @pm | Human-in-loop | < 24h | Advisory only |
-| G2 | @sm | Human-in-loop | < 24h | Advisory only |
-| G3 | @po | Human-in-loop | < 4h | Soft block |
-| G4 | @dev | **AUTOMÁTICO** | **< 2s** | Informational |
-| G5 | @qa | **AUTOMÁTICO** | **< 30s** | Blocks merge |
+| G1 | @project-lead | Human-in-loop | < 24h | Advisory only |
+| G2 | @sprint-lead | Human-in-loop | < 24h | Advisory only |
+| G3 | @product-lead | Human-in-loop | < 4h | Soft block |
+| G4 | @developer | **AUTOMÁTICO** | **< 2s** | Informational |
+| G5 | @quality-gate | **AUTOMÁTICO** | **< 30s** | Blocks merge |
 | G6 | @devops | **AUTOMÁTICO** | **< 60s** | Blocks critical |
 
 > **Roundtable #3:** Gates G4-G6 DEVEM ser automáticos. Verificação manual em runtime cria fricção inaceitável.
@@ -583,11 +583,11 @@ CREATE mínimo - só coisas realmente novas
 
 | Gate | Emoji | Quem | Tipo | Analogia |
 |------|-------|------|------|----------|
-| G1 | 📋 | @pm | Advisory | Recepcionista que sugere |
-| G2 | 📝 | @sm | Advisory | Consultor que aconselha |
-| G3 | ✅ | @po | Soft Block | Gerente que pode vetar |
-| G4 | ⚡ | @dev | Info | Sensor automático |
-| G5 | 🔍 | @qa | Block | Inspetor de qualidade |
+| G1 | 📋 | @project-lead | Advisory | Recepcionista que sugere |
+| G2 | 📝 | @sprint-lead | Advisory | Consultor que aconselha |
+| G3 | ✅ | @product-lead | Soft Block | Gerente que pode vetar |
+| G4 | ⚡ | @developer | Info | Sensor automático |
+| G5 | 🔍 | @quality-gate | Block | Inspetor de qualidade |
 | G6 | 🚀 | @devops | Critical | Controle final de embarque |
 
 ### Thresholds Importantes

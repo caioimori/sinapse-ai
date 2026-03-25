@@ -6,7 +6,7 @@
  *
  * Tests for recovery handler that manages automatic error recovery.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

@@ -19,7 +19,7 @@ Use slash commands for fast activation flow (Codex `$`-like UX):
 - `/sinapse-architect`
 - `/sinapse-qa`
 - `/sinapse-devops`
-- `/sinapse-master`
+- `/sinapse-orqx`
 - and other `/sinapse-<agent-id>` commands
 
 Each launcher returns a ready-to-send activation prompt plus greeting preview.

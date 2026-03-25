@@ -52,7 +52,7 @@ const PRIMARY_AGENTS = new Set([
   'analyst',
   'ux-design-expert',
   'devops',
-  'sinapse-master',
+  'sinapse-orqx',
 ]);
 
 /**
@@ -89,7 +89,7 @@ class SkillDispatcher {
       'github-devops': 'SINAPSE:agents:devops', // Alias
 
       // Master agent
-      'sinapse-master': 'SINAPSE:agents:sinapse-master',
+      'sinapse-orqx': 'SINAPSE:agents:sinapse-orqx',
     };
 
     /**
@@ -107,7 +107,7 @@ class SkillDispatcher {
       'ux-design-expert': { name: 'Brad', title: 'UX Design Expert' },
       'ux-expert': { name: 'Brad', title: 'UX Design Expert' },
       devops: { name: 'Gage', title: 'DevOps Engineer' },
-      'sinapse-master': { name: 'Orion', title: 'Master Orchestrator' },
+      'sinapse-orqx': { name: 'Orion', title: 'Master Orchestrator' },
     };
   }
 

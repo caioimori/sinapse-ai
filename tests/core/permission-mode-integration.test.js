@@ -7,7 +7,7 @@
  * Tests that PermissionMode and OperationGuard are properly wired
  * and enforce permission checks during agent operations.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

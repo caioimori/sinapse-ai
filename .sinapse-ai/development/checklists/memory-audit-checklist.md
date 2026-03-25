@@ -3,7 +3,7 @@
 Periodic checklist for maintaining agent MEMORY.md hygiene across all 10 agents.
 
 **Frequency:** Once per sprint or after completing an epic.
-**Executor:** Any agent (`@po *execute-checklist memory-audit-checklist`)
+**Executor:** Any agent (`@product-lead *execute-checklist memory-audit-checklist`)
 
 ---
 

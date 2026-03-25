@@ -481,7 +481,7 @@ Each agent has specific config requirements defined in `.sinapse-ai/data/agent-c
 
 | Agent | Config Sections | Files Loaded | Performance Target |
 |-------|----------------|--------------|-------------------|
-| `sinapse-master` | dataLocation, registry | sinapse-kb.md (lazy) | <30ms |
+| `sinapse-orqx` | dataLocation, registry | sinapse-kb.md (lazy) | <30ms |
 | `dev` | devLoadAlwaysFiles, devStoryLocation, dataLocation | coding-standards.md, tech-stack.md, source-tree.md, technical-preferences.md | <50ms |
 | `qa` | qaLocation, dataLocation, storyBacklog | technical-preferences.md, test-levels-framework.md, test-priorities-matrix.md | <50ms |
 | `devops` | dataLocation, cicdLocation | technical-preferences.md | <50ms |
@@ -622,7 +622,7 @@ Activation → loadUserProfile() → validateUserProfile() → resolveConfig(L5 
 | 7 | `.sinapse-ai/core/config/migrate-config.js` | Config | Categorizes `user_profile` as USER_FIELD during migration | Same categorization |
 | 8 | `.sinapse-ai/core/config/schemas/user-config.schema.json` | Schema | `enum: ["bob", "advanced"]` validation | Same validation |
 | 9 | `.sinapse-ai/core/config/templates/user-config.yaml` | Template | Default template value: `bob` | N/A (template default is bob) |
-| 10 | `.sinapse-ai/development/agents/pm.md` | Agent | PM becomes sole orchestrator; bob mode session detection; orchestrates other agents internally | PM operates as normal PM with standard workflow |
+| 10 | `.sinapse-ai/development/agents/project-lead.md` | Agent | PM becomes sole orchestrator; bob mode session detection; orchestrates other agents internally | PM operates as normal PM with standard workflow |
 | 11 | `packages/installer/src/wizard/questions.js` | Install | Presents bob/advanced choice during setup | Same prompt |
 | 12 | `packages/installer/src/wizard/index.js` | Install | Writes `user_profile: bob`; idempotent on re-install | Writes `user_profile: advanced` |
 | 13 | `packages/installer/src/wizard/i18n.js` | Install | Translated "Assisted Mode" text (en/pt/es) | Translated "Advanced Mode" text |
@@ -634,24 +634,24 @@ Activation → loadUserProfile() → validateUserProfile() → resolveConfig(L5 
 
 ### 13.3 Impact Matrix: Agent Command Visibility
 
-In `bob` mode, non-PM agents return **empty command lists** (redirect to @pm shown instead). PM agent shows all commands normally.
+In `bob` mode, non-PM agents return **empty command lists** (redirect to @project-lead shown instead). PM agent shows all commands normally.
 
 | Agent | `key` Commands Count | Bob Mode Result | Advanced Mode (`new` session) |
 |-------|---------------------|-----------------|-------------------------------|
 | `@pm` | 4 (`help`, `status`, `run`, `exit`) | All commands shown (PM is primary interface) | Full visibility commands |
-| `@dev` | 4 (`help`, `apply-qa-fixes`, `run-tests`, `exit`) | Empty (redirect to @pm) | Full visibility commands |
-| `@qa` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
-| `@architect` | 3 (`help`, `create-doc`, `exit`) | Empty (redirect to @pm) | Full visibility commands |
-| `@po` | 4 (`help`, `validate`, `gotcha`, `gotchas`) | Empty (redirect to @pm) | Full visibility commands |
-| `@sm` | 2 (`help`, `draft`) | Empty (redirect to @pm) | Full visibility commands |
-| `@analyst` | 2 (`help`, `exit`) | Empty (redirect to @pm) | Full visibility commands |
-| `@data-engineer` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
-| `@devops` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
-| `@ux-design-expert` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
-| `@squad-creator` | 7 (most have `key`) | Empty (redirect to @pm) | Full visibility commands |
-| `@sinapse-master` | 0 (uses string visibility) | Empty (redirect to @pm) | Fallback: first 12 commands |
+| `@dev` | 4 (`help`, `apply-qa-fixes`, `run-tests`, `exit`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@qa` | 0 (no visibility metadata) | Empty (redirect to @project-lead) | Fallback: first 12 commands |
+| `@architect` | 3 (`help`, `create-doc`, `exit`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@po` | 4 (`help`, `validate`, `gotcha`, `gotchas`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@sm` | 2 (`help`, `draft`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@analyst` | 2 (`help`, `exit`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@data-engineer` | 0 (no visibility metadata) | Empty (redirect to @project-lead) | Fallback: first 12 commands |
+| `@devops` | 0 (no visibility metadata) | Empty (redirect to @project-lead) | Fallback: first 12 commands |
+| `@ux-design-expert` | 0 (no visibility metadata) | Empty (redirect to @project-lead) | Fallback: first 12 commands |
+| `@squad-creator` | 7 (most have `key`) | Empty (redirect to @project-lead) | Full visibility commands |
+| `@sinapse-orqx` | 0 (uses string visibility) | Empty (redirect to @project-lead) | Fallback: first 12 commands |
 
-**Note:** Agents with 0 `key` commands (`qa`, `data-engineer`, `devops`, `ux-design-expert`, `sinapse-master`) lack `visibility` array metadata on their commands. In `advanced` mode `workflow` sessions, they fall back to showing first 12 commands. This is a known gap tracked for future improvement.
+**Note:** Agents with 0 `key` commands (`qa`, `data-engineer`, `devops`, `ux-design-expert`, `sinapse-orqx`) lack `visibility` array metadata on their commands. In `advanced` mode `workflow` sessions, they fall back to showing first 12 commands. This is a known gap tracked for future improvement.
 
 ### 13.4 Validation Pipeline Integration
 

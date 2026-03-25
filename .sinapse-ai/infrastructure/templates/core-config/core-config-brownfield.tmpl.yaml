@@ -33,7 +33,7 @@ project:
 
 # =============================================================================
 # DEV CONTEXT LOADING
-# Files loaded automatically when @dev agent activates
+# Files loaded automatically when @developer agent activates
 # =============================================================================
 devLoadAlwaysFiles:
   - docs/architecture/coding-standards.md

@@ -1,6 +1,6 @@
 # Cross-Squad Workflow Patterns
 
-> Reference document for Imperator (sinapse-master). Contains common patterns for multi-squad coordination, including proven sequences, handoff specifications, and anti-patterns to avoid.
+> Reference document for Imperator (sinapse-orqx). Contains common patterns for multi-squad coordination, including proven sequences, handoff specifications, and anti-patterns to avoid.
 
 ## Pattern Catalog
 

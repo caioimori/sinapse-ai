@@ -99,20 +99,11 @@ describe('CLI Entry Point', () => {
       });
     });
 
-    it('should error on unknown command', (done) => {
-      const child = spawn('node', [cliPath, 'unknown-command']);
-      let errors = '';
-
-      child.stderr.on('data', (data) => {
-        errors += data.toString();
-      });
-
-      child.on('close', (code) => {
-        expect(code).toBe(1);
-        expect(errors).toContain('Unknown command');
-        expect(errors).toContain('unknown-command');
-        done();
-      });
+    // Unknown commands now pass through to Claude Code as arguments
+    // (e.g., `sinapse --model sonnet` -> `claude --model sonnet`)
+    // so they no longer produce an "Unknown command" error.
+    it.skip('should error on unknown command — skipped: unknown commands now pass through to Claude Code', (done) => {
+      done();
     });
   });
 
@@ -126,26 +117,11 @@ describe('CLI Entry Point', () => {
   });
 
   describe('Error Handling', () => {
-    it('should show usage info when unknown command provided', (done) => {
-      const child = spawn('node', [cliPath, 'invalid']);
-      let errors = '';
-      let output = '';
-
-      child.stderr.on('data', (data) => {
-        errors += data.toString();
-      });
-
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
-
-      child.on('close', (code) => {
-        expect(code).toBe(1);
-        const combined = errors + output;
-        expect(combined).toContain('Unknown command');
-        expect(combined).toContain('--help');
-        done();
-      });
-    }, 15000); // Increase timeout to 15s
+    // Unknown commands now pass through to Claude Code as arguments
+    // (e.g., `sinapse invalid` -> `claude invalid`), so they no longer
+    // produce an "Unknown command" error from the CLI itself.
+    it.skip('should show usage info when unknown command provided — skipped: unknown commands now pass through to Claude Code', (done) => {
+      done();
+    }, 15000);
   });
 });

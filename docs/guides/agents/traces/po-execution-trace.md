@@ -1,7 +1,7 @@
-# @po (Pax) - Execution Trace
+# @product-lead (Pax) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.sinapse-ai/development/agents/po.md`
+> Agent definition: `.sinapse-ai/development/agents/product-lead.md`
 
 ## 1. Activation Trace
 
@@ -9,7 +9,7 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.sinapse-ai/development/agents/po.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 1 | `.sinapse-ai/development/agents/product-lead.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
 | 2 | `.sinapse-ai/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
 | 3 | `.sinapse-ai/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, prd, storyBacklog, templatesLocation |
 | 4 | `.sinapse-ai/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
@@ -116,7 +116,7 @@ po:
 | `*yolo` | (built-in) | full | No |
 | `*exit` | (built-in) | full | No |
 
-**NOTE:** `create-epic` and `create-story` have been REMOVED from @po. Epic creation is delegated to @pm, story creation is delegated to @sm.
+**NOTE:** `create-epic` and `create-story` have been REMOVED from @po. Epic creation is delegated to @project-lead, story creation is delegated to @sm.
 
 ---
 
@@ -535,28 +535,28 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @sm -> @po | Coordinates | Backlog prioritization and sprint planning |
-| @pm -> @po | Provides | Strategic direction, PRDs, requirements |
-| @po -> @sm | Delegate | Story creation via `*draft` |
-| @po -> @pm | Delegate | Epic creation via `*create-epic` |
-| @po -> @sinapse-master | Escalate | Course corrections via `*correct-course` |
-| @po -> @analyst | Delegate | Research via `*research` |
-| @po -> @devops | Delegate | Git push operations, PR creation |
-| @pm -> @po | Receives | Story validation requests via `*validate-story-draft` |
-| @sm -> @po | Receives | Backlog prioritization via `*backlog-prioritize` |
-| @qa -> @po | Receives | Quality gate review via `*backlog-review` |
+| @sprint-lead -> @product-lead | Coordinates | Backlog prioritization and sprint planning |
+| @project-lead -> @product-lead | Provides | Strategic direction, PRDs, requirements |
+| @product-lead -> @sprint-lead | Delegate | Story creation via `*draft` |
+| @product-lead -> @project-lead | Delegate | Epic creation via `*create-epic` |
+| @product-lead -> @sinapse-orqx | Escalate | Course corrections via `*correct-course` |
+| @product-lead -> @analyst | Delegate | Research via `*research` |
+| @product-lead -> @devops | Delegate | Git push operations, PR creation |
+| @project-lead -> @product-lead | Receives | Story validation requests via `*validate-story-draft` |
+| @sprint-lead -> @product-lead | Receives | Backlog prioritization via `*backlog-prioritize` |
+| @quality-gate -> @product-lead | Receives | Quality gate review via `*backlog-review` |
 
 ### Delegation Rules (from agent definition)
 
-**Delegates to @sm when:**
+**Delegates to @sprint-lead when:**
 - Story creation is needed (uses `*draft` command)
 - Sprint coordination requires SM facilitation
 
-**Delegates to @pm when:**
+**Delegates to @project-lead when:**
 - Epic creation is needed (uses `*create-epic` command)
 - Strategic direction or PRD creation is required
 
-**Delegates to @sinapse-master when:**
+**Delegates to @sinapse-orqx when:**
 - Course corrections are needed (uses `*correct-course` command)
 - Systemic issues require orchestrator-level intervention
 

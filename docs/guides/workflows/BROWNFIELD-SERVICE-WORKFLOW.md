@@ -95,12 +95,12 @@ sequenceDiagram
     autonumber
     participant User
     participant Architect as @architect (Aria)
-    participant PM as @pm (Morgan)
-    participant PO as @po (Pax)
-    participant SM as @sm (River)
+    participant PM as @project-lead (Morgan)
+    participant PO as @product-lead (Pax)
+    participant SM as @sprint-lead (River)
     participant Analyst as @analyst (Atlas)
-    participant Dev as @dev (Dex)
-    participant QA as @qa (Quinn)
+    participant Dev as @developer (Dex)
+    participant QA as @quality-gate (Quinn)
 
     rect rgb(232, 245, 233)
         Note over User,QA: Fase 1: Planejamento
@@ -184,7 +184,7 @@ sequenceDiagram
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Task** | `create-doc` com `brownfield-prd-tmpl` |
 | **Input** | Analise do servico existente |
 | **Output** | `docs/prd.md` |
@@ -226,7 +226,7 @@ sequenceDiagram
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Task** | `execute-checklist` com `po-master-checklist` |
 | **Input** | Todos os artefatos (PRD, Arquitetura) |
 | **Output** | Relatorio de validacao |
@@ -257,7 +257,7 @@ sequenceDiagram
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Task** | `shard-doc` |
 | **Input** | Todos os artefatos validados em `docs/` |
 | **Output** | Pastas `docs/prd/` e `docs/architecture/` com conteudo fragmentado |
@@ -281,7 +281,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @sm (River) |
+| **Agente** | @sprint-lead (River) |
 | **Task** | `create-next-story` |
 | **Input** | Documentos fragmentados |
 | **Output** | `story.md` |
@@ -301,7 +301,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @analyst (Atlas) ou @pm (Morgan) |
+| **Agente** | @analyst (Atlas) ou @project-lead (Morgan) |
 | **Task** | `review-draft-story` (em desenvolvimento) |
 | **Input** | Story em Draft |
 | **Output** | Story atualizada |
@@ -316,7 +316,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Task** | `develop-story` |
 | **Input** | Story aprovada |
 | **Output** | Arquivos de implementacao |
@@ -335,7 +335,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @qa (Quinn) |
+| **Agente** | @quality-gate (Quinn) |
 | **Task** | `review-story` |
 | **Input** | Arquivos de implementacao |
 | **Output** | Implementacao atualizada + Checklist QA |
@@ -354,7 +354,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Task** | `apply-qa-fixes` |
 | **Input** | Feedback do QA com itens pendentes |
 | **Output** | Implementacao corrigida |
@@ -382,7 +382,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Task** | `epic-retrospective` (em desenvolvimento) |
 | **Input** | Epic completo |
 | **Output** | `epic-retrospective.md` |
@@ -446,12 +446,12 @@ graph LR
 | Agente | Nome | Papel | Responsabilidades no Workflow |
 |--------|------|-------|------------------------------|
 | @architect | Aria | Holistic System Architect | Analise de servico existente, criacao de arquitetura |
-| @pm | Morgan | Product Manager | Criacao de PRD para brownfield |
-| @po | Pax | Product Owner | Validacao de artefatos, fragmentacao de docs, retrospectiva |
-| @sm | River | Scrum Master | Criacao de stories |
+| @project-lead | Morgan | Product Manager | Criacao de PRD para brownfield |
+| @product-lead | Pax | Product Owner | Validacao de artefatos, fragmentacao de docs, retrospectiva |
+| @sprint-lead | River | Scrum Master | Criacao de stories |
 | @analyst | Atlas | Business Analyst | Revisao opcional de story drafts |
-| @dev | Dex | Full Stack Developer | Implementacao de stories, correcao de feedback |
-| @qa | Quinn | Test Architect | Revisao de implementacao, quality gates |
+| @developer | Dex | Full Stack Developer | Implementacao de stories, correcao de feedback |
+| @quality-gate | Quinn | Test Architect | Revisao de implementacao, quality gates |
 
 ---
 
@@ -462,21 +462,21 @@ graph LR
 | Task | Template/Checklist | Agente | Fase |
 |------|-------------------|--------|------|
 | `document-project` | document-project template | @architect | Planejamento |
-| `create-doc` | `brownfield-prd-tmpl.yaml` | @pm | Planejamento |
+| `create-doc` | `brownfield-prd-tmpl.yaml` | @project-lead | Planejamento |
 | `create-doc` | `brownfield-architecture-tmpl.yaml` | @architect | Planejamento |
-| `execute-checklist` | `po-master-checklist.md` | @po | Validacao |
-| `shard-doc` | - | @po | Validacao |
-| `create-next-story` | `story-tmpl.yaml` | @sm | Desenvolvimento |
-| `develop-story` | - | @dev | Desenvolvimento |
-| `review-story` | - | @qa | Desenvolvimento |
-| `apply-qa-fixes` | - | @dev | Desenvolvimento |
+| `execute-checklist` | `po-master-checklist.md` | @product-lead | Validacao |
+| `shard-doc` | - | @product-lead | Validacao |
+| `create-next-story` | `story-tmpl.yaml` | @sprint-lead | Desenvolvimento |
+| `develop-story` | - | @developer | Desenvolvimento |
+| `review-story` | - | @quality-gate | Desenvolvimento |
+| `apply-qa-fixes` | - | @developer | Desenvolvimento |
 
 ### Tasks Futuras (Em Desenvolvimento)
 
 | Task | Agente | Status |
 |------|--------|--------|
-| `story-review` | @analyst/@pm | Em desenvolvimento |
-| `epic-retrospective` | @po | Em desenvolvimento |
+| `story-review` | @analyst/@project-lead | Em desenvolvimento |
+| `epic-retrospective` | @product-lead | Em desenvolvimento |
 
 ---
 
@@ -744,11 +744,11 @@ graph TD
 
 | Problema | Primeiro Contato | Escalar Para |
 |----------|-----------------|--------------|
-| PRD incompleto | @pm (Morgan) | @po (Pax) |
-| Arquitetura inconsistente | @architect (Aria) | @pm (Morgan) |
-| Story ambigua | @sm (River) | @po (Pax) |
-| Implementacao com bugs | @dev (Dex) | @qa (Quinn) |
-| Quality gate falha | @qa (Quinn) | @po (Pax) |
+| PRD incompleto | @project-lead (Morgan) | @product-lead (Pax) |
+| Arquitetura inconsistente | @architect (Aria) | @project-lead (Morgan) |
+| Story ambigua | @sprint-lead (River) | @product-lead (Pax) |
+| Implementacao com bugs | @developer (Dex) | @quality-gate (Quinn) |
+| Quality gate falha | @quality-gate (Quinn) | @product-lead (Pax) |
 | Integracao quebrada | @architect (Aria) | @devops (Gage) |
 
 ---
@@ -786,12 +786,12 @@ Os handoff prompts facilitam a transicao entre agentes:
 | Agente | Arquivo | Caminho |
 |--------|---------|---------|
 | @architect | Aria | `.sinapse-ai/development/agents/architect.md` |
-| @pm | Morgan | `.sinapse-ai/development/agents/pm.md` |
-| @po | Pax | `.sinapse-ai/development/agents/po.md` |
-| @sm | River | `.sinapse-ai/development/agents/sm.md` |
+| @project-lead | Morgan | `.sinapse-ai/development/agents/project-lead.md` |
+| @product-lead | Pax | `.sinapse-ai/development/agents/product-lead.md` |
+| @sprint-lead | River | `.sinapse-ai/development/agents/sprint-lead.md` |
 | @analyst | Atlas | `.sinapse-ai/development/agents/analyst.md` |
-| @dev | Dex | `.sinapse-ai/development/agents/dev.md` |
-| @qa | Quinn | `.sinapse-ai/development/agents/qa.md` |
+| @developer | Dex | `.sinapse-ai/development/agents/developer.md` |
+| @quality-gate | Quinn | `.sinapse-ai/development/agents/quality-gate.md` |
 
 ### Documentacao Relacionada
 

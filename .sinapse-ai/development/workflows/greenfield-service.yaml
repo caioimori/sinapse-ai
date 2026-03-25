@@ -98,7 +98,7 @@ workflow:
         - architecture.md
       notes: |
         Shard documents for IDE development:
-        - Option A: Use PO agent to shard: @po then ask to shard docs/prd.md
+        - Option A: Use PO agent to shard: @product-lead then ask to shard docs/prd.md
         - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
         - Creates docs/prd/ and docs/architecture/ folders with sharded content
 
@@ -118,7 +118,7 @@ workflow:
       repeats: for_each_epic
       notes: |
         Story creation cycle:
-        - SM Agent (New Chat): @sm → *create
+        - SM Agent (New Chat): @sprint-lead → *create
         - Creates next story from sharded docs
         - Story starts in "Draft" status
 
@@ -138,7 +138,7 @@ workflow:
         - Update story status: Draft → Approved
 
     - id: dev-implement-story
-      agent: dev
+      agent: developer
       action: implement_story
       creates: implementation_files
       duration_estimate: "1-4 hours"
@@ -157,14 +157,14 @@ workflow:
       requires: implementation_files
       optional: true
       notes: |
-        OPTIONAL: QA Agent (New Chat): @qa → review-story
+        OPTIONAL: QA Agent (New Chat): @quality-gate → review-story
         - Senior dev review with refactoring ability
         - Fixes small issues directly
         - Leaves checklist for remaining items
         - Updates story status (Review → Done or stays Review)
 
     - id: dev-address-qa-feedback
-      agent: dev
+      agent: developer
       action: address_qa_feedback
       updates: implementation_files
       requires: implementation_files

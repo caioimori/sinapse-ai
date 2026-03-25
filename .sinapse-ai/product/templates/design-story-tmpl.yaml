@@ -176,7 +176,7 @@ sections:
         template: |
           - [ ] Pre-Completion Review (@{{primary_agent}}): Validate deliverables before marking complete
           - [ ] Documentation Review (@architect or @analyst): Ensure technical accuracy
-          - [ ] Handoff Validation (@po): Verify downstream story readiness
+          - [ ] Handoff Validation (@product-lead): Verify downstream story readiness
         elicit: true
         owner: po
         editors: [po, sm]
@@ -394,7 +394,7 @@ sections:
       **Format:**
       ```yaml
       agents:
-        - id: dev
+        - id: developer
           name: Dex
           role: Builder
           archetype: Aquarius
@@ -544,7 +544,7 @@ sections:
     editors: [qa]
     template: |
       ### Quality Review Summary
-      **Reviewer:** @qa ({{qa_agent_name}})
+      **Reviewer:** @quality-gate ({{qa_agent_name}})
       **Review Date:** {{review_date}}
       **Overall Score:** {{score}}/10
 
@@ -583,5 +583,5 @@ metadata:
   version_history:
     - version: 1.0
       date: 2025-01-14
-      author: "@po (Pax)"
+      author: "@product-lead (Pax)"
       changes: "Initial design story template based on Story 6.1.1 hybrid approach"

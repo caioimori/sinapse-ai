@@ -101,10 +101,10 @@ stateDiagram-v2
 ```mermaid
 sequenceDiagram
     participant U as Usuario
-    participant SM as @sm (River)
-    participant PO as @po (Pax)
-    participant DEV as @dev (Dex)
-    participant QA as @qa (Quinn)
+    participant SM as @sprint-lead (River)
+    participant PO as @product-lead (Pax)
+    participant DEV as @developer (Dex)
+    participant QA as @quality-gate (Quinn)
     participant CR as CodeRabbit
 
     U->>SM: *workflow story-development-cycle
@@ -164,7 +164,7 @@ sequenceDiagram
 | Campo | Valor |
 |-------|-------|
 | **ID** | `create` |
-| **Agente** | @sm (River - Scrum Master) |
+| **Agente** | @sprint-lead (River - Scrum Master) |
 | **Acao** | Criar proxima story |
 | **Task** | `create-next-story.md` |
 
@@ -209,7 +209,7 @@ O Scrum Master (River) identifica e cria a proxima story do backlog utilizando o
 | Campo | Valor |
 |-------|-------|
 | **ID** | `validate` |
-| **Agente** | @po (Pax - Product Owner) |
+| **Agente** | @product-lead (Pax - Product Owner) |
 | **Acao** | Validar story (10 checks) |
 | **Task** | `validate-next-story.md` |
 | **Requer** | `create` |
@@ -271,7 +271,7 @@ O Product Owner (Pax) valida a story criada usando um checklist rigoroso de 10 p
 | Campo | Valor |
 |-------|-------|
 | **ID** | `implement` |
-| **Agente** | @dev (Dex - Full Stack Developer) |
+| **Agente** | @developer (Dex - Full Stack Developer) |
 | **Acao** | Implementar story |
 | **Task** | `dev-develop-story.md` |
 | **Requer** | `validate` |
@@ -364,7 +364,7 @@ flowchart TD
 | Campo | Valor |
 |-------|-------|
 | **ID** | `review` |
-| **Agente** | @qa (Quinn - Test Architect) |
+| **Agente** | @quality-gate (Quinn - Test Architect) |
 | **Acao** | Review final + Quality Gate |
 | **Task** | `qa-gate.md` |
 | **Requer** | `implement` |
@@ -438,7 +438,7 @@ O QA Agent (Quinn) executa o review final com quality gate, validando codigo, te
 
 ## Agentes Participantes
 
-### @sm - River (Scrum Master)
+### @sprint-lead - River (Scrum Master)
 
 | Aspecto | Descricao |
 |---------|-----------|
@@ -454,7 +454,7 @@ O QA Agent (Quinn) executa o review final com quality gate, validando codigo, te
 
 ---
 
-### @po - Pax (Product Owner)
+### @product-lead - Pax (Product Owner)
 
 | Aspecto | Descricao |
 |---------|-----------|
@@ -470,7 +470,7 @@ O QA Agent (Quinn) executa o review final com quality gate, validando codigo, te
 
 ---
 
-### @dev - Dex (Full Stack Developer)
+### @developer - Dex (Full Stack Developer)
 
 | Aspecto | Descricao |
 |---------|-----------|
@@ -487,7 +487,7 @@ O QA Agent (Quinn) executa o review final com quality gate, validando codigo, te
 
 ---
 
-### @qa - Quinn (Test Architect)
+### @quality-gate - Quinn (Test Architect)
 
 | Aspecto | Descricao |
 |---------|-----------|
@@ -537,11 +537,11 @@ graph TD
 
 | Task | Arquivo | Agente | Proposito |
 |------|---------|--------|-----------|
-| Create Next Story | `create-next-story.md` | @sm | Criar story a partir do PRD/epic |
-| Validate Next Story | `validate-next-story.md` | @po | Validar completude e qualidade |
-| Develop Story | `dev-develop-story.md` | @dev | Implementar codigo e testes |
-| Story DOD Checklist | `story-dod-checklist.md` | @dev | Verificar Definition of Done |
-| QA Gate | `qa-gate.md` | @qa | Criar decisao de quality gate |
+| Create Next Story | `create-next-story.md` | @sprint-lead | Criar story a partir do PRD/epic |
+| Validate Next Story | `validate-next-story.md` | @product-lead | Validar completude e qualidade |
+| Develop Story | `dev-develop-story.md` | @developer | Implementar codigo e testes |
+| Story DOD Checklist | `story-dod-checklist.md` | @developer | Verificar Definition of Done |
+| QA Gate | `qa-gate.md` | @quality-gate | Criar decisao de quality gate |
 
 ---
 
@@ -574,11 +574,11 @@ graph TD
 
 | Ferramenta | Proposito | Agentes |
 |------------|-----------|---------|
-| `git` | Controle de versao | @sm, @dev, @qa |
-| `coderabbit` | Review automatizado | @dev, @qa |
-| `clickup` | Tracking de stories | @sm, @po |
+| `git` | Controle de versao | @sprint-lead, @developer, @quality-gate |
+| `coderabbit` | Review automatizado | @developer, @quality-gate |
+| `clickup` | Tracking de stories | @sprint-lead, @product-lead |
 | `context7` | Documentacao de libs | Todos |
-| `github-cli` | Operacoes GitHub | @po, @qa |
+| `github-cli` | Operacoes GitHub | @product-lead, @quality-gate |
 
 ---
 
@@ -630,9 +630,9 @@ graph TD
 
 | Ponto | Fase | Decisor | Criterio | Resultado Positivo | Resultado Negativo |
 |-------|------|---------|----------|-------------------|-------------------|
-| Validacao PO | 2 | @po | 10 checks passam | Status: Ready | Retorna para SM |
+| Validacao PO | 2 | @product-lead | 10 checks passam | Status: Ready | Retorna para SM |
 | Self-Healing | 3 | Sistema | Sem CRITICAL issues | Prossegue para DOD | Halt ou auto-fix |
-| Quality Gate | 4 | @qa | Sem HIGH/CRITICAL | Status: Done | Retorna para Dev |
+| Quality Gate | 4 | @quality-gate | Sem HIGH/CRITICAL | Status: Done | Retorna para Dev |
 
 ### Condicoes de Bloqueio
 
@@ -803,7 +803,7 @@ cat docs/stories/{story-file}.md | grep "status:"
 |----------|-------------|
 | Hotfixes urgentes | Fluxo simplificado sem QA gate |
 | Spikes/POCs exploratorios | Desenvolvimento ad-hoc |
-| Tasks puramente tecnicas sem story | Tarefas diretas com @dev |
+| Tasks puramente tecnicas sem story | Tarefas diretas com @developer |
 
 ---
 
@@ -814,10 +814,10 @@ cat docs/stories/{story-file}.md | grep "status:"
 | Arquivo | Caminho |
 |---------|---------|
 | Workflow Definition | `.sinapse-ai/development/workflows/story-development-cycle.yaml` |
-| SM Agent | `.sinapse-ai/development/agents/sm.md` |
-| PO Agent | `.sinapse-ai/development/agents/po.md` |
-| Dev Agent | `.sinapse-ai/development/agents/dev.md` |
-| QA Agent | `.sinapse-ai/development/agents/qa.md` |
+| SM Agent | `.sinapse-ai/development/agents/sprint-lead.md` |
+| PO Agent | `.sinapse-ai/development/agents/product-lead.md` |
+| Dev Agent | `.sinapse-ai/development/agents/developer.md` |
+| QA Agent | `.sinapse-ai/development/agents/quality-gate.md` |
 | Create Story Task | `.sinapse-ai/development/tasks/create-next-story.md` |
 | Validate Story Task | `.sinapse-ai/development/tasks/validate-next-story.md` |
 | Develop Story Task | `.sinapse-ai/development/tasks/dev-develop-story.md` |

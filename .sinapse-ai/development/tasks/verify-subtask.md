@@ -59,13 +59,13 @@ autoClaude:
 
 ---
 
-## Command Integration (@dev)
+## Command Integration (@developer)
 
 ```yaml
 command:
   name: '*verify-subtask'
   syntax: '*verify-subtask {subtask-id}'
-  agent: dev
+  agent: developer
 
   examples:
     - '*verify-subtask 1.1'

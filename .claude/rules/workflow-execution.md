@@ -14,24 +14,24 @@ Uma task validada é lei: deve ser executada conforme configurada, com todas as 
 
 **Full 4-phase workflow for all development work.**
 
-#### Phase 1: Create (@sm)
+#### Phase 1: Create (@sprint-lead)
 - **Task:** `create-next-story.md`
 - **Inputs:** PRD sharded, epic context
 - **Output:** `{epicNum}.{storyNum}.story.md`
 - **Status:** Draft
 
-#### Phase 2: Validate (@po)
+#### Phase 2: Validate (@product-lead)
 - **Task:** `validate-next-story.md`
 - **10-point checklist** (see `story-lifecycle.md`)
 - **Decision:** GO (>=7) or NO-GO (required fixes listed)
 
-#### Phase 3: Implement (@dev)
+#### Phase 3: Implement (@developer)
 - **Task:** `dev-develop-story.md`
 - **Modes:** Interactive / YOLO / Pre-Flight
 - **CodeRabbit:** Self-healing max 2 iterations
 - **Status:** Ready → InProgress
 
-#### Phase 4: QA Gate (@qa)
+#### Phase 4: QA Gate (@quality-gate)
 - **Task:** `qa-gate.md`
 - **7 quality checks** (see `story-lifecycle.md`)
 - **Decision:** PASS / CONCERNS / FAIL / WAIVED
@@ -44,7 +44,7 @@ Uma task validada é lei: deve ser executada conforme configurada, com todas as 
 **Automated review-fix cycle after initial QA gate.**
 
 ```
-@qa review → verdict → @dev fixes → re-review (max 5)
+@quality-gate review → verdict → @developer fixes → re-review (max 5)
 ```
 
 **Commands:**
@@ -61,7 +61,7 @@ Uma task validada é lei: deve ser executada conforme configurada, com todas as 
 
 **Verdicts:**
 - APPROVE → Complete, mark Done
-- REJECT → @dev fixes, re-review
+- REJECT → @developer fixes, re-review
 - BLOCKED → Escalate immediately
 
 **Escalation triggers:**
@@ -78,11 +78,11 @@ Uma task validada é lei: deve ser executada conforme configurada, com todas as 
 
 | Phase | Agent | Output | Skip If |
 |-------|-------|--------|---------|
-| 1. Gather | @pm | `requirements.json` | Never |
+| 1. Gather | @project-lead | `requirements.json` | Never |
 | 2. Assess | @architect | `complexity.json` | source=simple |
 | 3. Research | @analyst | `research.json` | SIMPLE class |
-| 4. Write Spec | @pm | `spec.md` | Never |
-| 5. Critique | @qa | `critique.json` | Never |
+| 4. Write Spec | @project-lead | `spec.md` | Never |
+| 5. Critique | @quality-gate | `critique.json` | Never |
 | 6. Plan | @architect | `implementation.yaml` | If APPROVED |
 
 **Complexity Classes:**
@@ -126,12 +126,12 @@ Every statement in spec.md MUST trace to FR-*, NFR-*, CON-*, or research finding
 - Phase 4: @architect → `technical-debt-DRAFT.md`
 - Phase 5: @data-engineer → `db-specialist-review.md`
 - Phase 6: @ux-design-expert → `ux-specialist-review.md`
-- Phase 7: @qa → `qa-review.md` (QA Gate: APPROVED | NEEDS WORK)
+- Phase 7: @quality-gate → `qa-review.md` (QA Gate: APPROVED | NEEDS WORK)
 
 **Finalization (Phases 8-10):**
 - Phase 8: @architect → `technical-debt-assessment.md` (final)
 - Phase 9: @analyst → `TECHNICAL-DEBT-REPORT.md` (executive)
-- Phase 10: @pm → Epic + stories ready for development
+- Phase 10: @project-lead → Epic + stories ready for development
 
 **QA Gate (Phase 7):**
 - **APPROVED:** All debits validated, no critical gaps, dependencies mapped

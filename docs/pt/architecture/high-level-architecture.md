@@ -290,7 +290,7 @@ sinapse-ai/
 | Dara   | `data-engineer` | Architect    | Engenharia de dados       |
 | Felix  | `devops`        | Optimizer    | CI/CD e operações         |
 | Uma    | `ux-expert`     | Creator      | Experiência do usuário    |
-| Pax    | `sinapse-master`   | Orchestrator | Orquestração do framework |
+| Pax    | `sinapse-orqx`   | Orchestrator | Orquestração do framework |
 
 ---
 

@@ -30,7 +30,7 @@ This document is the result of a comprehensive cross-reference analysis of every
 
 | Finding | Severity | Details |
 |---------|----------|---------|
-| **@qa agent has 9 broken task references** | CRITICAL | Task dependency names in `agents/qa.md` don't match actual filenames (missing `qa-` prefix) |
+| **@quality-gate agent has 9 broken task references** | CRITICAL | Task dependency names in `agents/quality-gate.md` don't match actual filenames (missing `qa-` prefix) |
 | **3 duplicate task file pairs** | MEDIUM | `create-next-story`/`sm-create-next-story`, `apply-qa-fixes`/`dev-apply-qa-fixes`, `validate-next-story`/`dev-validate-next-story` |
 | **3 elicitation file duplicates** | MEDIUM | Identical files in `core/elicitation/` and `elicitation/` |
 | **3 phantom/missing core modules** | MEDIUM | `memory-query.js`, `session-memory.js`, `security-checker` referenced but don't exist (try/catch guarded) |
@@ -45,7 +45,7 @@ This document is the result of a comprehensive cross-reference analysis of every
 | Domain | Score | Notes |
 |--------|-------|-------|
 | Workflows (12) | **95%** | All workflows well-structured with clear agent assignments |
-| Tasks (191) | **90%** | 36 in workflows + 155 on-demand. @qa refs broken. |
+| Tasks (191) | **90%** | 36 in workflows + 155 on-demand. @quality-gate refs broken. |
 | Templates (92) | **92%** | 7 SQL orphans, 27 weak refs (most are runtime-loaded) |
 | Checklists (16) | **100%** | All connected to consuming agents/tasks |
 | Scripts (37) | **86%** | 5 dead migration scripts, all others active |
@@ -97,14 +97,14 @@ This document is the result of a comprehensive cross-reference analysis of every
 | Agent-to-task connections | 280+ |
 | Template-to-task connections | 127 |
 | Most-connected file | `po-master-checklist.md` (12+ task refs, 6 workflow refs) |
-| Most-connected agent | @dev (10 scripts, 25+ tasks) |
+| Most-connected agent | @developer (10 scripts, 25+ tasks) |
 | Largest subsystem | health-check (35 files) |
 
 ---
 
 ## 3. Per-Agent Ecosystem Diagrams
 
-### 3.1 @dev (Dex) - Full Stack Developer
+### 3.1 @developer (Dex) - Full Stack Developer
 
 ```
 TASKS (25+ total):
@@ -128,7 +128,7 @@ WORKFLOWS (8):
   Brownfield (Fullstack/UI/Service)
 ```
 
-### 3.2 @qa (Quinn) - Test Architect
+### 3.2 @quality-gate (Quinn) - Test Architect
 
 ```
 TASKS (16 total):
@@ -160,7 +160,7 @@ WORKFLOWS (5):
 ⚠️ CRITICAL: 9 broken task references in agent definition
 ```
 
-### 3.3 @po (Pax) - Product Owner
+### 3.3 @product-lead (Pax) - Product Owner
 
 ```
 TASKS (8):
@@ -182,7 +182,7 @@ WORKFLOWS (8):
   Story Dev Cycle (Phase 2), All Greenfield, All Brownfield
 ```
 
-### 3.4 @pm (Morgan) - Product Manager
+### 3.4 @project-lead (Morgan) - Product Manager
 
 ```
 TASKS (6):
@@ -206,7 +206,7 @@ WORKFLOWS (8):
   Brownfield Discovery (Phase 10), Spec Pipeline (Phases 1, 4)
 ```
 
-### 3.5 @sm (River) - Scrum Master
+### 3.5 @sprint-lead (River) - Scrum Master
 
 ```
 TASKS (3):
@@ -365,7 +365,7 @@ WORKFLOWS (4):
   Brownfield UI (Step 3), Brownfield Discovery (Phases 3, 6)
 ```
 
-### 3.11 @sinapse-master (Orion) - Meta Orchestrator
+### 3.11 @sinapse-orqx (Orion) - Meta Orchestrator
 
 ```
 TASKS (8):
@@ -424,7 +424,7 @@ WORKFLOWS (0): Standalone expansion system, no workflow integration
 - **12 workflows** mapped with agent participation matrix
 - **61 tasks** cross-referenced to agents and workflows (36 workflow-integrated, 25 on-demand)
 - **~180 agent commands** registered
-- **9 CRITICAL broken references** in @qa agent definition
+- **9 CRITICAL broken references** in @quality-gate agent definition
 - **3 duplicate task pairs** identified
 - **5 naming inconsistencies** documented
 
@@ -514,7 +514,7 @@ Files with **no active consumers** anywhere in the runtime codebase.
 | `pr-review-ai.js` | `infrastructure/scripts/` |
 | `test-discovery.js` | `infrastructure/scripts/` |
 
-**Recommendation:** Archive or integrate into @devops/@qa agent workflows.
+**Recommendation:** Archive or integrate into @devops/@quality-gate agent workflows.
 
 #### Core Modules (2 files) -- Phase 5
 
@@ -598,9 +598,9 @@ Files referenced only in passive registries (install-manifest, service-registry,
 
 ## 6. Complete Broken Reference Report
 
-### 6.1 CRITICAL: @qa Agent -- 9 Broken Task References
+### 6.1 CRITICAL: @quality-gate Agent -- 9 Broken Task References
 
-The `@qa` agent definition (`agents/qa.md`) references 9 task files using non-prefixed names that do NOT exist on the filesystem.
+The `@qa` agent definition (`agents/quality-gate.md`) references 9 task files using non-prefixed names that do NOT exist on the filesystem.
 
 | Agent Reference | Actual File on Disk | Status |
 |----------------|---------------------|--------|
@@ -614,17 +614,17 @@ The `@qa` agent definition (`agents/qa.md`) references 9 task files using non-pr
 | `test-design.md` | `qa-test-design.md` | BROKEN |
 | `trace-requirements.md` | `qa-trace-requirements.md` | BROKEN |
 
-**Impact:** If dependency resolution does NOT apply automatic prefix fallback, @qa commands will fail to find task files.
+**Impact:** If dependency resolution does NOT apply automatic prefix fallback, @quality-gate commands will fail to find task files.
 
-**Fix:** Update `agents/qa.md` to use the full prefixed names matching actual files.
+**Fix:** Update `agents/quality-gate.md` to use the full prefixed names matching actual files.
 
 ### 6.2 Duplicate Task Files (3 pairs)
 
 | Generic | Agent-Prefixed | Used in Agent Def | Used in YAML Workflow | Issue |
 |---------|----------------|--------------------|-----------------------|-------|
-| `create-next-story.md` | `sm-create-next-story.md` | @sm uses generic | YAML uses generic | Keep generic, deprecate `sm-` |
-| `apply-qa-fixes.md` | `dev-apply-qa-fixes.md` | @dev uses generic | YAML uses `dev-` prefix | **Mismatch!** Standardize. |
-| `validate-next-story.md` | `dev-validate-next-story.md` | @po/@dev uses generic | indirect | Different tasks, both valid |
+| `create-next-story.md` | `sm-create-next-story.md` | @sprint-lead uses generic | YAML uses generic | Keep generic, deprecate `sm-` |
+| `apply-qa-fixes.md` | `dev-apply-qa-fixes.md` | @developer uses generic | YAML uses `dev-` prefix | **Mismatch!** Standardize. |
+| `validate-next-story.md` | `dev-validate-next-story.md` | @po/@developer uses generic | indirect | Different tasks, both valid |
 
 ### 6.3 Naming Inconsistencies (5)
 
@@ -720,7 +720,7 @@ The squad system is well-isolated:
 
 ### Priority 1: Fix Broken References (CRITICAL)
 
-1. **Fix @qa agent task references** -- Update `agents/qa.md` to use full prefixed names (`qa-generate-tests.md` instead of `generate-tests.md`).
+1. **Fix @quality-gate agent task references** -- Update `agents/quality-gate.md` to use full prefixed names (`qa-generate-tests.md` instead of `generate-tests.md`).
 2. **Standardize duplicate tasks** -- Resolve the `apply-qa-fixes.md` vs `dev-apply-qa-fixes.md` mismatch between agent definition and workflow YAML.
 
 ### Priority 2: Clean Up Orphans (MEDIUM)

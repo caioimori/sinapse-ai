@@ -73,7 +73,7 @@ Release (credited in CHANGELOG.md)
 
 ### Who Can Add to Backlog?
 
-The Product Owner (@po) is the sole authority for adding items to the internal backlog.
+The Product Owner (@product-lead) is the sole authority for adding items to the internal backlog.
 This ensures proper prioritization and alignment with project goals.
 
 ### Contributor Credit

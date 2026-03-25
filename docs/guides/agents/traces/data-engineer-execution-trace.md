@@ -963,11 +963,11 @@ graph TD
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
 | @architect -> @data-engineer | Receives | Database schema design, query optimization, RLS policies |
-| @data-engineer -> @dev | Handoff | Migrations, schema definitions, database access patterns |
-| @dev -> @data-engineer | Feedback | Data layer issues, query performance problems |
+| @data-engineer -> @developer | Handoff | Migrations, schema definitions, database access patterns |
+| @developer -> @data-engineer | Feedback | Data layer issues, query performance problems |
 | @data-engineer -> @devops | Delegate | Git push operations, PR creation for migration files |
-| @qa -> @data-engineer | Validate | Database checklists (execute-checklist) |
-| @pm -> @data-engineer | Receives | Data requirements from stories |
+| @quality-gate -> @data-engineer | Validate | Database checklists (execute-checklist) |
+| @project-lead -> @data-engineer | Receives | Data requirements from stories |
 
 ### Delegation Rules (from agent definition)
 

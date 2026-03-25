@@ -38,7 +38,7 @@ describe('SessionContextLoader', () => {
     });
 
     test('detects existing session after agent activation', () => {
-      // Simulate @po activation
+      // Simulate @product-lead activation
       loader.updateSession('po', 'Pax', 'validate-story-draft');
 
       // Load context for @dev
@@ -53,7 +53,7 @@ describe('SessionContextLoader', () => {
 
   describe('loadContext() - Agent Transition Tracking', () => {
     test('tracks agent transitions correctly', () => {
-      // Simulate agent sequence: @po → @dev
+      // Simulate agent sequence: @product-lead → @dev
       loader.updateSession('po', 'Pax', 'validate-story-draft');
       loader.updateSession('dev', 'Dex', 'develop');
 
@@ -66,7 +66,7 @@ describe('SessionContextLoader', () => {
     });
 
     test('skips same agent in previous agent detection', () => {
-      // Simulate: @po → @dev → @dev again
+      // Simulate: @product-lead → @developer → @developer again
       loader.updateSession('po', 'Pax', 'create-story');
       loader.updateSession('dev', 'Dex', 'develop');
       loader.updateSession('dev', 'Dex', 'run-tests');
@@ -74,7 +74,7 @@ describe('SessionContextLoader', () => {
       // Load context for @dev
       const context = loader.loadContext('dev');
 
-      // Previous agent should be @po, not @dev
+      // Previous agent should be @product-lead, not @dev
       expect(context.previousAgent.agentId).toBe('po');
     });
 

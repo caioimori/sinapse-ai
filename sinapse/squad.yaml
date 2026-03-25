@@ -37,7 +37,7 @@ metadata:
 
 components:
   agents:
-    - sinapse-master.md              # Imperator — Supreme Orchestrator
+    - sinapse-orqx.md              # Imperator — Supreme Orchestrator
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TASKS — 7 CORE

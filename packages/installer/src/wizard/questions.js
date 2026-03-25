@@ -27,9 +27,7 @@ function getLanguageQuestion() {
 
 /**
  * Get user profile question (Story 10.2 - Epic 10: User Profile System)
- * Asks user about their ability to detect AI-generated code errors
- * PRD: SINAPSE v2.0 "Projeto Bob" - Seção 2.4
- *
+ * @deprecated No longer asked interactively. Kept for backward compatibility.
  * @returns {Object} Inquirer question object
  */
 function getUserProfileQuestion() {
@@ -40,16 +38,45 @@ function getUserProfileQuestion() {
     choices: [
       {
         name:
-          colors.highlight(`🟢 ${t('modoAssistido')}`) +
+          colors.highlight(`🚀 ${t('modoAssistido')}`) +
           colors.dim(` (${t('recommended')})`),
         value: 'bob',
       },
       {
-        name: `🔵 ${t('modoAvancado')}`,
+        name: `⚙️  ${t('modoAvancado')}`,
         value: 'advanced',
       },
     ],
-    default: 1, // Default to 'advanced' for backward compatibility
+    default: 0,
+  };
+}
+
+/**
+ * Get LLM selection question (simplified wizard)
+ * Single interactive question for the 2-step wizard flow.
+ *
+ * @returns {Object} Inquirer question object
+ */
+function getLLMQuestion() {
+  return {
+    type: 'list',
+    name: 'selectedLLM',
+    message: colors.primary('Escolha sua LLM:'),
+    choices: [
+      {
+        name: colors.highlight('Claude Code') + colors.dim(' (Recomendado)'),
+        value: 'claude-code',
+      },
+      {
+        name: 'Codex CLI',
+        value: 'codex',
+      },
+      {
+        name: 'Ambos',
+        value: 'both',
+      },
+    ],
+    default: 0,
   };
 }
 
@@ -161,7 +188,7 @@ function getMCPQuestions() {
         return true;
       },
     },
-    // Note: API keys are configured later via sinapse-master or directly in .env
+    // Note: API keys are configured later via sinapse-orqx or directly in .env
   ];
 }
 
@@ -341,6 +368,7 @@ function getQuestionById(questionId) {
 module.exports = {
   getLanguageQuestion,
   getUserProfileQuestion,
+  getLLMQuestion,
   getProjectTypeQuestion,
   getIDEQuestions,
   getMCPQuestions,

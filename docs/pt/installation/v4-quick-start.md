@@ -87,7 +87,7 @@ Estrutura esperada:
 SINAPSE usa agentes especializados para diferentes tarefas. Na sua IDE com IA ou Claude Code CLI, digite:
 
 ```
-@sinapse-master
+@sinapse-orqx
 ```
 
 O agente irá cumprimentá-lo e mostrar comandos disponíveis:
@@ -139,7 +139,7 @@ O agente desenvolvedor (Dex) será ativado com uma saudação mostrando:
 Stories direcionam o desenvolvimento no SINAPSE. Ative o Product Owner e crie uma:
 
 ```
-@po *create-story
+@product-lead *create-story
 ```
 
 Siga os prompts para definir:

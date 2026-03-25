@@ -110,7 +110,7 @@ This roadmap is reviewed and updated monthly by the project maintainers.
 4. Remove cancelled or deprioritized items
 5. Communicate significant changes via [Announcements](https://github.com/SinapseAI/sinapse-ai/discussions/categories/announcements)
 
-**Responsible:** @pm (Morgan) or @po (Pax) agents, with maintainer oversight.
+**Responsible:** @project-lead (Morgan) or @product-lead (Pax) agents, with maintainer oversight.
 
 ### Sync with Internal Backlog
 

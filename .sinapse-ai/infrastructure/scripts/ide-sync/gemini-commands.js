@@ -7,7 +7,7 @@ const FALLBACK_DESCRIPTION = 'Agente especializado SINAPSE';
 const MAX_DESCRIPTION_CONTEXT = 120;
 
 const MENU_ORDER = [
-  'sinapse-master',
+  'sinapse-orqx',
   'analyst',
   'architect',
   'data-engineer',

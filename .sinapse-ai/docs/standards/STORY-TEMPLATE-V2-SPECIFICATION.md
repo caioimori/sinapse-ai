@@ -40,7 +40,7 @@ The Story Template v2.0 standardizes story documentation across the SINAPSE proj
 2. **Traceability** - Link to decisions, dependencies, and related stories
 3. **Automation Ready** - Machine-parseable sections for CI/CD integration
 4. **Progress Visibility** - Clear status indicators and checkboxes
-5. **Agent Compatibility** - Works with @dev, @qa, @po agents
+5. **Agent Compatibility** - Works with @developer, @quality-gate, @product-lead agents
 
 ---
 
@@ -212,7 +212,7 @@ path/to/relevant/files
 
 ## 🧑‍💻 Dev Agent Record
 
-> This section is populated when @dev executes the story.
+> This section is populated when @developer executes the story.
 
 ### Execution Log
 
@@ -232,7 +232,7 @@ _None yet - story not started._
 
 ## 🧪 QA Results
 
-> This section is populated after @qa reviews the implementation.
+> This section is populated after @quality-gate reviews the implementation.
 
 ### Test Execution Summary
 
@@ -343,14 +343,14 @@ AND [additional result]
 
 ### Dev Agent Record (NEW in v2.0)
 
-Tracks execution by @dev agent:
+Tracks execution by @developer agent:
 - Execution Log: Timestamped actions
 - Implementation Notes: Technical details
 - Issues Encountered: Problems and solutions
 
 ### QA Results (NEW in v2.0)
 
-Tracks validation by @qa agent:
+Tracks validation by @quality-gate agent:
 - Test Execution Summary: Test metrics
 - Validation Checklist: Manual checks
 - QA Sign-off: Final approval
@@ -547,4 +547,4 @@ Use this checklist when creating or reviewing stories:
 
 **Last Updated:** 2025-12-09
 **Version:** 2.0.0
-**Maintainer:** @po (Pax)
+**Maintainer:** @product-lead (Pax)

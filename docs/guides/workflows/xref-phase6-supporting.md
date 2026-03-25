@@ -152,7 +152,7 @@ All layers extend `base-layer.js` and are managed by `quality-gate-manager.js`. 
 
 ### External References (30+ files reference this system)
 
-- **Agent definitions:** `development/agents/devops.md`, `development/agents/dev.md` (via quality gate tasks)
+- **Agent definitions:** `development/agents/devops.md`, `development/agents/developer.md` (via quality gate tasks)
 - **Tasks:** `github-devops-pre-push-quality-gate.md`, `qa-gate.md`, `dev-develop-story.md`
 - **Workflows:** `story-development-cycle.yaml`, `brownfield-*.yaml`
 - **CLI commands:** `cli/commands/metrics/*` (show, record, cleanup, seed)

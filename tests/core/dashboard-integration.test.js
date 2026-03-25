@@ -6,7 +6,7 @@
  *
  * Tests for dashboard integration with orchestrator.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

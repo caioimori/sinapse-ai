@@ -12,7 +12,7 @@
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-Contributor%20Covenant-blue.svg)](CODE_OF_CONDUCT.md)
 
-> 🌐 README por idioma: [EN](docs/README.md) | [PT](docs/pt/README.md) | [ES](docs/es/README.md) | [ZH](docs/zh/README.md)
+> 🌐 README por idioma: [EN](docs/README.md) | [PT](docs/pt/README.md)
 >
 > **Devolvendo às pessoas o poder de criar** — Framework open source de orquestração de IA que devolve o controle a quem tem coragem de construir. Agentes especializados, workflows e experiência CLI First para qualquer domínio.
 
@@ -104,7 +104,7 @@ Esta abordagem de duas fases elimina tanto a **inconsistência de planejamento**
 - 📖 [Guia de Instalação para Windows](docs/installation/windows.md)
 - 📖 [Guia de Instalação para Linux](docs/installation/linux.md)
 
-**Documentação multilíngue disponível:** [English](docs/README.md) | [Português](docs/pt/README.md) | [Español](docs/es/README.md) | [中文](docs/zh/README.md)
+**Documentacao disponivel:** [English](docs/README.md) | [Portugues](docs/pt/README.md)
 
 ## Navegação Rápida
 
@@ -451,7 +451,7 @@ O SINAPSE vem com 12 agentes especializados:
 
 ### Agentes Meta
 
-- **sinapse-master** - Agente mestre de orquestração (inclui capacidades de desenvolvimento de framework)
+- **sinapse-orqx** - Agente mestre de orquestração (inclui capacidades de desenvolvimento de framework)
 - **sinapse-orchestrator** - Orquestrador de fluxo de trabalho e coordenação de equipe
 
 ### Agentes de Planejamento (Interface Web)
@@ -522,19 +522,19 @@ User Request → Spec Pipeline → Execution Engine → QA Review → Working Co
 
 ```bash
 # 1. Criar spec a partir de requisito
-@pm *gather-requirements
+@project-lead *gather-requirements
 @architect *assess-complexity
 @analyst *research-deps
-@pm *write-spec
-@qa *critique-spec
+@project-lead *write-spec
+@quality-gate *critique-spec
 
 # 2. Executar spec aprovada
 @architect *create-plan
 @architect *create-context
-@dev *execute-subtask 1.1
+@developer *execute-subtask 1.1
 
 # 3. QA Review
-@qa *review-build STORY-42
+@quality-gate *review-build STORY-42
 ```
 
 ### 📖 Documentação ADE

@@ -18,7 +18,7 @@
  * - AC6: Log of rollbacks in `recovery/rollback-log.json`
  * - AC7: Option `--hard` to force without confirmation
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

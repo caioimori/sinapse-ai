@@ -1,12 +1,12 @@
 MIT License
 
 Copyright (c) 2025 BMad Code, LLC (BMad Method - original work)
+Copyright (c) 2025 Synkra AIOX Inc. (AIOX Framework - intermediate work)
 Copyright (c) 2025 SinapseAI Inc. (SINAPSE Framework - derivative work)
 
-This project was originally derived from the BMad Method
-(https://github.com/bmad-code-org/BMAD-METHOD), created by Brian Madison.
-SINAPSE is NOT affiliated with, endorsed by, or sanctioned by the
-BMad Method or BMad Code, LLC.
+Portions of this software were derived from works distributed under the
+MIT License by the copyright holders listed above. SINAPSE is NOT
+affiliated with, endorsed by, or sanctioned by any of the above parties.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -14,21 +14,21 @@ Draft → Ready → InProgress → InReview → Done
 
 | Status | Trigger | Agent | Action |
 |--------|---------|-------|--------|
-| Draft | @sm creates story | @sm | Story file created |
-| Ready | @po validates (GO) | @po | **MUST update status field in story file from Draft → Ready** |
-| InProgress | @dev starts implementation | @dev | Update status field |
-| InReview | @dev completes, @qa reviews | @qa | Update status field |
-| Done | @qa PASS, @devops pushes | @devops | Update status field |
+| Draft | @sprint-lead creates story | @sprint-lead | Story file created |
+| Ready | @product-lead validates (GO) | @product-lead | **MUST update status field in story file from Draft → Ready** |
+| InProgress | @developer starts implementation | @developer | Update status field |
+| InReview | @developer completes, @quality-gate reviews | @quality-gate | Update status field |
+| Done | @quality-gate PASS, @devops pushes | @devops | Update status field |
 
-**CRITICAL:** The `Draft → Ready` transition is the responsibility of @po during `*validate-story-draft`. When verdict is GO (including conditional GO after fixes are applied), @po MUST update the story's Status field to `Ready` and log the transition in the Change Log. A story left in `Draft` after a GO verdict is a process violation.
+**CRITICAL:** The `Draft → Ready` transition is the responsibility of @product-lead during `*validate-story-draft`. When verdict is GO (including conditional GO after fixes are applied), @product-lead MUST update the story's Status field to `Ready` and log the transition in the Change Log. A story left in `Draft` after a GO verdict is a process violation.
 
-## Phase 1: Create (@sm)
+## Phase 1: Create (@sprint-lead)
 
 **Task:** `create-next-story.md`
 **Inputs:** PRD sharded, epic context
 **Output:** `{epicNum}.{storyNum}.story.md`
 
-## Phase 2: Validate (@po)
+## Phase 2: Validate (@product-lead)
 
 **Task:** `validate-next-story.md`
 
@@ -47,7 +47,7 @@ Draft → Ready → InProgress → InReview → Done
 
 **Decision:** GO (≥7/10) or NO-GO (<7/10 with required fixes)
 
-## Phase 3: Implement (@dev)
+## Phase 3: Implement (@developer)
 
 **Task:** `dev-develop-story.md`
 
@@ -80,7 +80,7 @@ if CRITICAL persist after 2 iterations:
   HALT — manual intervention required
 ```
 
-## Phase 4: QA Gate (@qa)
+## Phase 4: QA Gate (@quality-gate)
 
 **Task:** `qa-gate.md`
 
@@ -100,7 +100,7 @@ if CRITICAL persist after 2 iterations:
 |----------|-------|--------|
 | PASS | All checks OK | Approve, proceed to @devops push |
 | CONCERNS | Minor issues | Approve with observations documented |
-| FAIL | HIGH/CRITICAL issues | Return to @dev with feedback |
+| FAIL | HIGH/CRITICAL issues | Return to @developer with feedback |
 | WAIVED | Issues accepted | Approve with waiver documented (rare) |
 
 ### Gate File Structure
@@ -118,7 +118,7 @@ issues:
 ## QA Loop (Iterative Review-Fix)
 
 ```
-@qa review → verdict → @dev fixes → re-review (max 5 iterations)
+@quality-gate review → verdict → @developer fixes → re-review (max 5 iterations)
 ```
 
 **Commands:**
@@ -139,7 +139,7 @@ issues:
 
 | Section | Who Can Edit |
 |---------|-------------|
-| Title, Description, AC, Scope | @po only |
-| File List, Dev Notes, checkboxes | @dev |
-| QA Results | @qa only |
+| Title, Description, AC, Scope | @product-lead only |
+| File List, Dev Notes, checkboxes | @developer |
+| QA Results | @quality-gate only |
 | Change Log | Any agent (append only) |

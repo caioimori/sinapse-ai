@@ -10,12 +10,12 @@
 
 ### O que foi feito (2026-03-20)
 1. Análise completa de todas as 16 squads (maturidade, gaps, qualidade)
-2. Comparação com SINAPSE Squad Calculator (11 squads do Thiago Finch)
+2. Benchmark de squad architecture contra referências de mercado
 3. Deletado `squad-operations-hub.deprecated`
 4. Definido plano completo de evolução
 5. Análise do Mega Brain (JARVIS pipeline) e OpenClaw setup
 6. Plano aprovado e documentado
-7. **Sprint 0 executado:** 15 squads renomeadas, squad-command eliminado, sinapse-master migrado para `sinapse/`, todas as referências atualizadas
+7. **Sprint 0 executado:** 15 squads renomeadas, squad-command eliminado, sinapse-orqx migrado para `sinapse/`, todas as referências atualizadas
 
 ### O que foi feito (2026-03-20 — Sprint 1)
 8. **Squad-cloning criada:** 8 agentes, 54 tasks, 9 KBs, 6 workflows, 3 checklists, 5 templates (86 arquivos)
@@ -42,12 +42,12 @@
 ## Arquitetura Definida
 
 ### Dual-Mode
-- **Standalone:** sinapse-master (Imperator) orquestra todas as squads sozinho
-- **Com SINAPSE:** sinapse-master (Orion) + sinapse-master co-orquestram
+- **Standalone:** sinapse-orqx (Imperator) orquestra todas as squads sozinho
+- **Com SINAPSE:** sinapse-orqx (Orion) + sinapse-orqx co-orquestram
 
-### sinapse-master como agente standalone
+### sinapse-orqx como agente standalone
 - Não existe mais squad-sinapse
-- sinapse-master vive em `sinapse/agents/sinapse-master.md`
+- sinapse-orqx vive em `sinapse/agents/sinapse-orqx.md`
 - Seus KBs vivem em `sinapse/knowledge-base/`
 
 ---
@@ -226,11 +226,11 @@ Hipótese:           Extraído de 1 fonte ou inferido de contexto
 ### Checklist Sprint 0
 - [x] Renomear 15 diretórios de squads
 - [x] Atualizar `name:` e `slashPrefix:` em cada `squad.yaml`
-- [x] Mover `squad-command/agents/sinapse-master.md` → `sinapse/agents/sinapse-master.md`
+- [x] Mover `squad-command/agents/sinapse-orqx.md` → `sinapse/agents/sinapse-orqx.md`
 - [x] Mover KBs do squad-command → `sinapse/knowledge-base/`
 - [x] Mover tasks do squad-command → `sinapse/tasks/`
 - [x] Deletar `squad-command/`
-- [x] Atualizar routing table do sinapse-master com novos nomes
+- [x] Atualizar routing table do sinapse-orqx com novos nomes
 - [x] Atualizar `SQUAD-CREATION-STANDARDS.md`
 - [x] Atualizar `install-squads.sh` e `install-squads.ps1`
 - [x] Atualizar `.claude/rules/squad-awareness.md`
@@ -320,7 +320,7 @@ O plano detalhado dos Sprints 2-6 está em:
 - `SQUAD-CREATION-STANDARDS.md` — padrão obrigatório para squads
 - `.sinapse-ai/product/templates/personalized-agent-template.md` — template de agente
 - `extracted-intelligence/` — extrações existentes (Marcelo, Matheus)
-- Mega Brain: `github.com/thiagofinch/mega-brain` — JARVIS pipeline reference
+- Mega Brain architecture — JARVIS pipeline reference (internal)
 - OpenClaw setup: `Second-Brain/notas/openclaw-setup-reconstrucao.md`
 
 ---
@@ -329,7 +329,7 @@ O plano detalhado dos Sprints 2-6 está em:
 
 1. `git pull` no repo sinapse
 2. Ler este arquivo (`CONTINUITY-PLAN.md`) para entender estado atual
-3. Ativar `@sinapse-master` ou pedir ao Claude Code para ler o plano
+3. Ativar `@sinapse-orqx` ou pedir ao Claude Code para ler o plano
 4. Dizer: "Continue o plano de evolução do Sinapse, estou no Sprint X"
 5. O Claude vai ler este arquivo + memórias e saber exatamente onde parou
 6. Continuar de onde parou
@@ -342,6 +342,6 @@ O Sinapse será o **melhor time de squads de IA do mundo**:
 - **Open-source** no GitHub para qualquer pessoa usar
 - **16 squads** cobrindo todas as disciplinas de negócio digital
 - **Clones cognitivos** de mentes reais com padrão de qualidade documentado
-- **Dual-mode:** funciona standalone (sinapse-master) ou com SINAPSE
+- **Dual-mode:** funciona standalone (sinapse-orqx) ou com SINAPSE
 - **Para qualquer um:** construção de projetos, automação, marketing/sales/growth
 - **Zero custo extra:** tudo roda no plano Max + ferramentas gratuitas (OpenClaw, Codex)

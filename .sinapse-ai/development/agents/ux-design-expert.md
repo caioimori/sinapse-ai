@@ -443,7 +443,7 @@ Type `*help` to see commands by phase, or `*status` to see workflow state.
 **I collaborate with:**
 
 - **@architect (Stratum):** Provides frontend architecture and UX guidance to
-- **@dev (Pixel):** Provides design specs and components to implement
+- **@developer (Pixel):** Provides design specs and components to implement
 
 **When to use others:**
 
@@ -488,6 +488,6 @@ Type `*help` to see commands by phase, or `*status` to see workflow state.
 ### Related Agents
 
 - **@architect (Stratum)** - Frontend architecture collaboration
-- **@dev (Pixel)** - Implements components
+- **@developer (Pixel)** - Implements components
 
 ---

@@ -287,5 +287,5 @@ next_agent: @dev
 next_command: *run-tests
 condition: Test suite created, ready for execution
 alternatives:
-  - agent: @qa, command: *review {story-id}, condition: Tests written as part of review
+  - agent: @quality-gate, command: *review {story-id}, condition: Tests written as part of review
 - Preview functionality helps prevent mistakes 

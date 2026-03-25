@@ -190,7 +190,7 @@ quick_reference:
 sinapse_awareness:
   architecture: |
     SINAPSE is a meta-framework for AI-orchestrated development with:
-    - 11 core agents (@dev, @qa, @architect, @pm, @po, @sm, @analyst, @data-engineer, @ux-design-expert, @devops, @sinapse-master)
+    - 11 core agents (@developer, @quality-gate, @architect, @project-lead, @product-lead, @sprint-lead, @analyst, @data-engineer, @ux-design-expert, @devops, @sinapse-orqx)
     - 115+ executable tasks in .sinapse-ai/development/tasks/
     - 14 workflow definitions in .sinapse-ai/development/workflows/
     - L1-L4 boundary protection model
@@ -386,7 +386,7 @@ output_examples:
 
       | SINAPSE Concept | Claude Code Equivalent |
       |-------------|----------------------|
-      | Agents (@dev, @qa...) | Subagents (.claude/agents/) |
+      | Agents (@developer, @qa...) | Subagents (.claude/agents/) |
       | Tasks (.sinapse-ai/tasks/) | Skills (.claude/skills/) |
       | Workflows | Multi-step sessions |
       | core-config.yaml | .claude/settings.json |

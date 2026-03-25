@@ -56,9 +56,9 @@ describe('Codex Skills Validator', () => {
 
   it('fails when greeting command is removed from a skill', () => {
     syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
-    const target = path.join(skillsDir, 'sinapse-dev', 'SKILL.md');
+    const target = path.join(skillsDir, 'sinapse-developer', 'SKILL.md');
     const original = fs.readFileSync(target, 'utf8');
-    fs.writeFileSync(target, original.replace('generate-greeting.js dev', 'generate-greeting.js'), 'utf8');
+    fs.writeFileSync(target, original.replace('generate-greeting.js developer', 'generate-greeting.js'), 'utf8');
 
     const result = validateCodexSkills({
       projectRoot: tmpRoot,

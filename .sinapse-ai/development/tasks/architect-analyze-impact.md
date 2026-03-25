@@ -831,4 +831,4 @@ next_agent: @analyst
 next_command: *research {topic}
 condition: Complexity class is STANDARD or COMPLEX (research needed)
 alternatives:
-  - agent: @pm, command: *write-spec, condition: Complexity class is SIMPLE (skip research) 
+  - agent: @project-lead, command: *write-spec, condition: Complexity class is SIMPLE (skip research) 

@@ -21,7 +21,7 @@ Rules are evaluated in order. **First match wins.**
 | 2 | L1 | `bin/**` | sinapse.js, sinapse-init.js |
 | 3 | L1 | `.sinapse-ai/constitution.md` | (exact match) |
 | 4 | L3 | `.sinapse-ai/data/**` | entity-registry.yaml |
-| 5 | L3 | `**/MEMORY.md` | agents/dev/MEMORY.md |
+| 5 | L3 | `**/MEMORY.md` | agents/developer/MEMORY.md |
 | 6 | L3 | `.claude/**` | CLAUDE.md, settings.json |
 | 7 | L3 | `core-config.yaml`, `project-config.yaml` | (exact match) |
 | 8 | L3 | `*-config.yaml` (root only) | custom-config.yaml |
@@ -30,7 +30,7 @@ Rules are evaluated in order. **First match wins.**
 | 11 | L2 | `.sinapse-ai/product/**` | templates/, checklists/ |
 | 12 | L4 | Everything else | docs/, tests/, packages/ |
 
-**Important:** Rule 5 (MEMORY.md) must come before Rule 9 (development/) so that `agents/dev/MEMORY.md` classifies as L3 instead of L2.
+**Important:** Rule 5 (MEMORY.md) must come before Rule 9 (development/) so that `agents/developer/MEMORY.md` classifies as L3 instead of L2.
 
 ## SCAN_CONFIG to Layer Mapping
 

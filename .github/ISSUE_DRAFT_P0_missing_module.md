@@ -5,9 +5,9 @@
 **Severity:** CRITICAL - Blocks all installation testing on Linux
 **Platform:** Linux (Ubuntu 24.04 WSL)
 **Story:** [Story 1.10c - Linux Testing](../docs/stories/v2.1/sprint-1/story-1.10c-linux-testing.md)
-**Discovered By:** @qa (Quinn) - QA Test Architect
+**Discovered By:** @quality-gate (Quinn) - QA Test Architect
 **Date Discovered:** 2025-01-23
-**Assigned To:** @dev (Dex) - Development Lead
+**Assigned To:** @developer (Dex) - Development Lead
 
 ---
 
@@ -267,10 +267,10 @@ Fix is DONE when:
 
 ### Notifications Sent
 
-- ✅ QA (@qa - Quinn): Test report created
-- 🔄 Dev Lead (@dev - Dex): GitHub Issue created (this)
-- ⏳ Product Owner (@po - Pax): Story blocked notification pending
-- ⏳ Scrum Master (@sm - River): Sprint timeline impact pending
+- ✅ QA (@quality-gate - Quinn): Test report created
+- 🔄 Dev Lead (@developer - Dex): GitHub Issue created (this)
+- ⏳ Product Owner (@product-lead - Pax): Story blocked notification pending
+- ⏳ Scrum Master (@sprint-lead - River): Sprint timeline impact pending
 
 ### Expected Response Time
 
@@ -301,17 +301,17 @@ Fix is DONE when:
 
 ## 👥 Assignees & Watchers
 
-**Assigned To:** @dev (Dex) - Development Lead
+**Assigned To:** @developer (Dex) - Development Lead
 **Watchers:**
 
-- @qa (Quinn) - QA Test Architect (reporter)
-- @po (Pax) - Product Owner
-- @sm (River) - Scrum Master
+- @quality-gate (Quinn) - QA Test Architect (reporter)
+- @product-lead (Pax) - Product Owner
+- @sprint-lead (River) - Scrum Master
 
 ---
 
 **Created:** 2025-01-23
-**Reporter:** @qa (Quinn)
+**Reporter:** @quality-gate (Quinn)
 **Priority:** P0 (CRITICAL)
 **Status:** 🔴 Open - Awaiting Dev Fix
 

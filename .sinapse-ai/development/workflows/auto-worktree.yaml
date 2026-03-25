@@ -4,7 +4,7 @@ workflow:
   version: "1.0"
   description: >-
     Automatically creates and manages isolated worktrees for story development.
-    Triggered when @dev starts working on a story, ensuring parallel development
+    Triggered when @developer starts working on a story, ensuring parallel development
     capability and clean isolation between different development tasks.
 
     Part of the Auto-Claude ADE (Autonomous Development Engine) infrastructure.
@@ -20,13 +20,13 @@ workflow:
   # ═══════════════════════════════════════════════════════════════════════════════════
 
   triggers:
-    # Primary trigger: When @dev starts a story
+    # Primary trigger: When @developer starts a story
     - event: story_started
-      agent: dev
+      agent: developer
       condition: projectConfig.autoWorktree.enabled === true
       action: create_worktree
 
-    # Secondary trigger: When @po assigns a story
+    # Secondary trigger: When @product-lead assigns a story
     - event: story_assigned
       agent: po
       condition: projectConfig.autoWorktree.createOnAssign === true
@@ -386,7 +386,7 @@ workflow:
   # ═══════════════════════════════════════════════════════════════════════════════════
 
   integration:
-    # Integration with @dev agent
+    # Integration with @developer agent
     dev_agent:
       hook: on_story_start
       action: trigger_workflow

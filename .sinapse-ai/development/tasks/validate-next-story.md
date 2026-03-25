@@ -246,18 +246,18 @@ To comprehensively validate a story draft before implementation begins, ensuring
 
 **Constraint Validation:**
 - [ ] **executor != quality_gate** (CRITICAL - must be different)
-- [ ] **executor** is a known agent: @dev, @data-engineer, @devops, @ux-design-expert, @analyst, @architect
-- [ ] **quality_gate** is a known agent: @architect, @dev, @pm
+- [ ] **executor** is a known agent: @developer, @data-engineer, @devops, @ux-design-expert, @analyst, @architect
+- [ ] **quality_gate** is a known agent: @architect, @developer, @pm
 
 **Type-to-Executor Consistency:**
 | Work Type | Expected Executor | Expected Quality Gate |
 |-----------|-------------------|----------------------|
-| Code/Features/Logic | @dev | @architect |
-| Schema/DB/RLS/Migrations | @data-engineer | @dev |
+| Code/Features/Logic | @developer | @architect |
+| Schema/DB/RLS/Migrations | @data-engineer | @developer |
 | Infra/CI/CD/Deploy | @devops | @architect |
-| Design/UI Components | @ux-design-expert | @dev |
-| Research/Investigation | @analyst | @pm |
-| Architecture Decisions | @architect | @pm |
+| Design/UI Components | @ux-design-expert | @developer |
+| Research/Investigation | @analyst | @project-lead |
+| Architecture Decisions | @architect | @project-lead |
 
 - [ ] Story content keywords match assigned executor type
 - [ ] Quality gate tools are appropriate for the executor type
@@ -340,7 +340,7 @@ To comprehensively validate a story draft before implementation begins, ensuring
 - Are secondary types listed if applicable?
 
 **Specialized Agent Assignment:**
-- Is @dev listed as primary agent (required for all stories)?
+- Is @developer listed as primary agent (required for all stories)?
 - Are type-specific agents assigned appropriately?
   - Database stories → @db-sage
   - Frontend stories → @ux-expert
@@ -349,7 +349,7 @@ To comprehensively validate a story draft before implementation begins, ensuring
 
 **Quality Gate Tasks:**
 - Are all applicable quality gates defined as checkboxes?
-- Pre-Commit (@dev) - REQUIRED for all stories
+- Pre-Commit (@developer) - REQUIRED for all stories
 - Pre-PR (@github-devops) - Required if PR will be created
 - Pre-Deployment (@github-devops) - Required for production stories
 
@@ -468,5 +468,5 @@ next_agent: @dev
 next_command: *develop {story-id}
 condition: Story status is Approved (GO decision)
 alternatives:
-  - agent: @sm, command: *draft, condition: Story rejected (NO-GO), needs rework
+  - agent: @sprint-lead, command: *draft, condition: Story rejected (NO-GO), needs rework
  

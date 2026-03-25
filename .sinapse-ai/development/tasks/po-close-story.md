@@ -239,7 +239,7 @@ const prInfo = pr_number ? `PR #${pr_number}` : '';
 const commitInfo = commit_sha ? `(commit ${commit_sha})` : '';
 const notes = userInput.notes || '';
 
-const changelogEntry = `| ${today} | ${version} | ${prInfo} merged ${commitInfo}. ${notes} Story closed. | Pax (@po) |`;
+const changelogEntry = `| ${today} | ${version} | ${prInfo} merged ${commitInfo}. ${notes} Story closed. | Pax (@product-lead) |`;
 
 // Insert before last row of changelog table
 const finalStory = insertChangelogEntry(updatedStory, changelogEntry);
@@ -311,7 +311,7 @@ if (epicId) {
     console.log(`All stories in Epic ${epicId} are done.`);
     console.log('\n**Quick Actions:**');
     console.log('- Review backlog: `*backlog-review`');
-    console.log('- Start new epic: `@pm *create-epic`');
+    console.log('- Start new epic: `@project-lead *create-epic`');
   }
 }
 ```
@@ -431,4 +431,4 @@ next_agent: @sm
 next_command: *draft
 condition: Story closed, next story in epic available
 alternatives:
-  - agent: @po, command: *backlog-review, condition: Sprint review needed before next story
+  - agent: @product-lead, command: *backlog-review, condition: Sprint review needed before next story

@@ -101,7 +101,7 @@ workflow:
     - step: implement_story
       id: implement
       phase: 3
-      agent: dev
+      agent: developer
       action: Implementar story
       requires: validate
       notes: |

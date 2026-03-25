@@ -15,9 +15,9 @@ const AGENTS_DIR = path.join(
 const FIXTURES_DIR = path.join(__dirname, '..', '..', 'fixtures', 'handoffs');
 
 const KNOWN_AGENTS = [
-  '@sm', '@po', '@dev', '@qa', '@devops', '@pm',
+  '@sprint-lead', '@product-lead', '@developer', '@quality-gate', '@devops', '@project-lead',
   '@architect', '@analyst', '@data-engineer', '@ux-design-expert',
-  '@squad-creator', '@sinapse-master',
+  '@squad-creator', '@sinapse-orqx',
 ];
 
 describe('Workflow Chains (Story WIS-16)', () => {
@@ -102,36 +102,36 @@ describe('Workflow Chains (Story WIS-16)', () => {
   });
 
   describe('4 workflows mapped correctly (AC2)', () => {
-    test('SDC workflow: sm → po → dev → qa → devops', () => {
+    test('SDC workflow: sprint-lead → product-lead → developer → quality-gate → devops', () => {
       const sdc = chainsData.workflows.find((w) => w.id === 'sdc');
       expect(sdc).toBeDefined();
       expect(sdc.chain.map((s) => s.agent)).toEqual([
-        '@sm', '@po', '@dev', '@qa', '@devops',
+        '@sprint-lead', '@product-lead', '@developer', '@quality-gate', '@devops',
       ]);
     });
 
-    test('QA Loop workflow: qa → dev → qa', () => {
+    test('QA Loop workflow: quality-gate → developer → quality-gate', () => {
       const qaLoop = chainsData.workflows.find((w) => w.id === 'qa-loop');
       expect(qaLoop).toBeDefined();
       expect(qaLoop.chain.map((s) => s.agent)).toEqual([
-        '@qa', '@dev', '@qa',
+        '@quality-gate', '@developer', '@quality-gate',
       ]);
       expect(qaLoop.max_iterations).toBe(5);
     });
 
-    test('Spec Pipeline workflow: pm → architect → analyst → pm → qa → architect', () => {
+    test('Spec Pipeline workflow: project-lead → architect → analyst → project-lead → quality-gate → architect', () => {
       const spec = chainsData.workflows.find((w) => w.id === 'spec-pipeline');
       expect(spec).toBeDefined();
       expect(spec.chain.map((s) => s.agent)).toEqual([
-        '@pm', '@architect', '@analyst', '@pm', '@qa', '@architect',
+        '@project-lead', '@architect', '@analyst', '@project-lead', '@quality-gate', '@architect',
       ]);
     });
 
-    test('Brownfield workflow: architect → data-engineer → ux → qa → pm', () => {
+    test('Brownfield workflow: architect → data-engineer → ux → quality-gate → project-lead', () => {
       const bf = chainsData.workflows.find((w) => w.id === 'brownfield');
       expect(bf).toBeDefined();
       expect(bf.chain.map((s) => s.agent)).toEqual([
-        '@architect', '@data-engineer', '@ux-design-expert', '@qa', '@pm',
+        '@architect', '@data-engineer', '@ux-design-expert', '@quality-gate', '@project-lead',
       ]);
     });
   });
@@ -160,30 +160,30 @@ describe('Workflow Chains (Story WIS-16)', () => {
       return null;
     }
 
-    test('SDC: after @sm *draft → suggests @po *validate-story-draft', () => {
-      const result = resolveNextStep('@sm', '*draft', chainsData);
+    test('SDC: after @sprint-lead *draft → suggests @product-lead *validate-story-draft', () => {
+      const result = resolveNextStep('@sprint-lead', '*draft', chainsData);
       expect(result).not.toBeNull();
-      expect(result.agent).toBe('@po');
+      expect(result.agent).toBe('@product-lead');
       expect(result.command).toContain('*validate-story-draft');
     });
 
-    test('SDC: after @po *validate-story-draft → suggests @dev *develop', () => {
-      const result = resolveNextStep('@po', '*validate-story-draft', chainsData);
+    test('SDC: after @product-lead *validate-story-draft → suggests @developer *develop', () => {
+      const result = resolveNextStep('@product-lead', '*validate-story-draft', chainsData);
       expect(result).not.toBeNull();
-      expect(result.agent).toBe('@dev');
+      expect(result.agent).toBe('@developer');
       expect(result.command).toContain('*develop');
     });
 
-    test('SDC: after @dev *develop → suggests @qa *review with alternatives (AC6)', () => {
-      const result = resolveNextStep('@dev', '*develop', chainsData);
+    test('SDC: after @developer *develop → suggests @quality-gate *review with alternatives (AC6)', () => {
+      const result = resolveNextStep('@developer', '*develop', chainsData);
       expect(result).not.toBeNull();
-      expect(result.agent).toBe('@qa');
+      expect(result.agent).toBe('@quality-gate');
       expect(result.command).toContain('*review');
       expect(result.alternatives.length).toBeGreaterThanOrEqual(1);
     });
 
-    test('SDC: after @qa *review → suggests @devops *push', () => {
-      const result = resolveNextStep('@qa', '*review', chainsData);
+    test('SDC: after @quality-gate *review → suggests @devops *push', () => {
+      const result = resolveNextStep('@quality-gate', '*review', chainsData);
       expect(result).not.toBeNull();
       expect(result.agent).toBe('@devops');
       expect(result.command).toBe('*push');
@@ -199,38 +199,38 @@ describe('Workflow Chains (Story WIS-16)', () => {
       expect(result).toBeNull();
     });
 
-    test('QA Loop: after @qa *review → suggests @dev *apply-qa-fixes', () => {
-      const result = resolveNextStep('@qa', '*review', chainsData);
+    test('QA Loop: after @quality-gate *review → suggests @developer *apply-qa-fixes', () => {
+      const result = resolveNextStep('@quality-gate', '*review', chainsData);
       expect(result).not.toBeNull();
     });
 
-    test('Spec Pipeline: after @pm *gather-requirements → suggests @architect', () => {
-      const result = resolveNextStep('@pm', '*gather-requirements', chainsData);
+    test('Spec Pipeline: after @project-lead *gather-requirements → suggests @architect', () => {
+      const result = resolveNextStep('@project-lead', '*gather-requirements', chainsData);
       expect(result).not.toBeNull();
       expect(result.agent).toBe('@architect');
     });
 
-    test('disambiguation: @qa *review resolves differently in SDC vs QA Loop', () => {
+    test('disambiguation: @quality-gate *review resolves differently in SDC vs QA Loop', () => {
       // resolveNextStep returns first match (SDC), but QA Loop has a different next step
       const sdc = chainsData.workflows.find((w) => w.id === 'sdc');
       const qaLoop = chainsData.workflows.find((w) => w.id === 'qa-loop');
 
-      // In SDC, @qa *review (step 4) → @devops *push (step 5)
+      // In SDC, @quality-gate *review (step 4) → @devops *push (step 5)
       const sdcQaStep = sdc.chain.find(
-        (s) => s.agent === '@qa' && s.command.startsWith('*review'),
+        (s) => s.agent === '@quality-gate' && s.command.startsWith('*review'),
       );
       const sdcQaIdx = sdc.chain.indexOf(sdcQaStep);
       const sdcNext = sdc.chain[sdcQaIdx + 1];
       expect(sdcNext.agent).toBe('@devops');
       expect(sdcNext.command).toBe('*push');
 
-      // In QA Loop, @qa *review (step 1) → @dev *apply-qa-fixes (step 2)
+      // In QA Loop, @quality-gate *review (step 1) → @developer *apply-qa-fixes (step 2)
       const qaLoopQaStep = qaLoop.chain.find(
-        (s) => s.agent === '@qa' && s.command.startsWith('*review'),
+        (s) => s.agent === '@quality-gate' && s.command.startsWith('*review'),
       );
       const qaLoopQaIdx = qaLoop.chain.indexOf(qaLoopQaStep);
       const qaLoopNext = qaLoop.chain[qaLoopQaIdx + 1];
-      expect(qaLoopNext.agent).toBe('@dev');
+      expect(qaLoopNext.agent).toBe('@developer');
       expect(qaLoopNext.command).toBe('*apply-qa-fixes');
 
       // Confirm they resolve to different agents
@@ -313,9 +313,9 @@ describe('Workflow Chains (Story WIS-16)', () => {
 
   describe('agent greeting step 5.5 presence (AC1)', () => {
     const agentFiles = [
-      'dev.md', 'qa.md', 'devops.md', 'architect.md', 'pm.md', 'po.md',
-      'sm.md', 'analyst.md', 'data-engineer.md', 'ux-design-expert.md',
-      'squad-creator.md', 'sinapse-master.md',
+      'developer.md', 'quality-gate.md', 'devops.md', 'architect.md', 'project-lead.md', 'product-lead.md',
+      'sprint-lead.md', 'analyst.md', 'data-engineer.md', 'ux-design-expert.md',
+      'squad-creator.md', 'sinapse-orqx.md',
     ];
 
     test.each(agentFiles)('%s contains step 5.5 handoff suggestion', (file) => {

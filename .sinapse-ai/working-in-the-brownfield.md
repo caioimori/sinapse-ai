@@ -325,16 +325,16 @@ Document:
 @analyst → *document-project
 
 # Create enhancement PRD
-@pm → *create-doc brownfield-prd
+@project-lead → *create-doc brownfield-prd
 
 # Create architecture with integration focus
 @architect → *create-doc brownfield-architecture
 
 # Quick epic creation
-@pm → *brownfield-create-epic
+@project-lead → *brownfield-create-epic
 
 # Single story creation
-@pm → *brownfield-create-story
+@project-lead → *brownfield-create-story
 ```
 
 ### Decision Tree

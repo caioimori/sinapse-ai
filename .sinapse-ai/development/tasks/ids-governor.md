@@ -3,8 +3,8 @@
 **Task ID:** ids-governor
 **Version:** 1.0
 **Purpose:** Execute IDS Framework Governor commands (*ids query, *ids health, *ids stats, *ids impact)
-**Agent:** @sinapse-master
-**Story:** IDS-7 (sinapse-master IDS Governor Integration)
+**Agent:** @sinapse-orqx
+**Story:** IDS-7 (sinapse-orqx IDS Governor Integration)
 
 ---
 
@@ -91,4 +91,4 @@ All commands apply graceful degradation:
 
 ---
 
-*IDS-7 | Created 2026-02-10 by @dev (Dex)*
+*IDS-7 | Created 2026-02-10 by @developer (Dex)*

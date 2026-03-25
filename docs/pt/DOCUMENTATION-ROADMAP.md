@@ -168,7 +168,7 @@ Todos os novos documentos devem ser criados em **3 idiomas**:
 **Fluxo de tradução:**
 
 1. Criar versão em inglês primeiro
-2. Usar @dev ou agente de tradução para PT-BR e ES
+2. Usar @developer ou agente de tradução para PT-BR e ES
 3. Revisar traduções para precisão técnica
 
 ---

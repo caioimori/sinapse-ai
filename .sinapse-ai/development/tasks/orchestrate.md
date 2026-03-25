@@ -1,7 +1,7 @@
 ---
 title: Orchestrate Pipeline
 description: Start full ADE pipeline for a story
-agent: sinapse-master
+agent: sinapse-orqx
 version: 1.0.0
 story: '0.9'
 epic: '0'

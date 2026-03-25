@@ -69,11 +69,11 @@ The `sinapse-ai` directory contains all the definitions and resources that give 
 
 ### 3.1. Agents (`sinapse-ai/agents/`)
 
-- **Purpose**: These are the foundational building blocks of the system. Each markdown file (e.g., `sinapse-master.md`, `pm.md`, `dev.md`) defines the persona, capabilities, and dependencies of a single AI agent.
+- **Purpose**: These are the foundational building blocks of the system. Each markdown file (e.g., `sinapse-orqx.md`, `pm.md`, `dev.md`) defines the persona, capabilities, and dependencies of a single AI agent.
 - **Structure**: An agent file contains a YAML header that specifies its role, persona, dependencies, and startup instructions. These dependencies are lists of tasks, templates, checklists, and data files that the agent is allowed to use.
 - **Startup Instructions**: Agents can include startup sequences that load project-specific documentation from the `docs/` folder, such as coding standards, API specifications, or project structure documents. This provides immediate project context upon activation.
 - **Document Integration**: Agents can reference and load documents from the project's `docs/` folder as part of tasks, workflows, or startup sequences. Users can also drag documents directly into chat interfaces to provide additional context.
-- **Example**: The `sinapse-master` agent lists its dependencies, which tells the build tool which files to include in a web bundle and informs the agent of its own capabilities.
+- **Example**: The `sinapse-orqx` agent lists its dependencies, which tells the build tool which files to include in a web bundle and informs the agent of its own capabilities.
 
 ### 3.2. Agent Teams (`sinapse-ai/agent-teams/`)
 

@@ -164,8 +164,9 @@ describe('feedback', () => {
     test('showCancellation displays cancellation message', () => {
       showCancellation();
       expect(console.log).toHaveBeenCalled();
-      expect(console.log.mock.calls.some(call => 
-        call[0].includes('cancelled'),
+      // i18n default is PT-BR; cancellation text is 'cancelada' in Portuguese
+      expect(console.log.mock.calls.some(call =>
+        call[0].includes('cancelada') || call[0].includes('cancelled'),
       )).toBe(true);
     });
   });

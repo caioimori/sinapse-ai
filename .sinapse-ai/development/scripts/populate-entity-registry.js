@@ -132,7 +132,7 @@ const YAML_DEP_FIELDS = {
 
 const KNOWN_AGENTS = [
   'dev', 'qa', 'pm', 'po', 'sm', 'architect', 'devops',
-  'analyst', 'data-engineer', 'ux-design-expert', 'sinapse-master'
+  'analyst', 'data-engineer', 'ux-design-expert', 'sinapse-orqx'
 ];
 
 // Pattern A: YAML dependency block items (- name.md)
@@ -259,7 +259,7 @@ function extractMarkdownCrossReferences(content, entityId, verbose = false) {
     addDep(basename);
   }
 
-  // Pattern D: Agent references (@dev, @qa, etc.)
+  // Pattern D: Agent references (@developer, @quality-gate, etc.)
   while ((match = AGENT_REF_RE.exec(content)) !== null) {
     deps.add(match[1]);
   }

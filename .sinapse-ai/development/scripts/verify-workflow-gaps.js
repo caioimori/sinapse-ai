@@ -341,16 +341,16 @@ async function verifyGap2() {
     'File not found',
   );
 
-  // 2.13 sinapse-master has validate-workflow command
-  const masterMd = fs.readFileSync(path.join(ROOT, '.sinapse-ai/development/agents/sinapse-master.md'), 'utf-8');
+  // 2.13 sinapse-orqx has validate-workflow command
+  const masterMd = fs.readFileSync(path.join(ROOT, '.sinapse-ai/development/agents/sinapse-orqx.md'), 'utf-8');
   assert(
     masterMd.includes('name: validate-workflow'),
-    '2.13a sinapse-master has validate-workflow command',
-    'Command not found in sinapse-master.md',
+    '2.13a sinapse-orqx has validate-workflow command',
+    'Command not found in sinapse-orqx.md',
   );
   assert(
     masterMd.includes('validate-workflow.md'),
-    '2.13b sinapse-master has validate-workflow.md in dependencies',
+    '2.13b sinapse-orqx has validate-workflow.md in dependencies',
     'Dependency not found',
   );
 }
@@ -668,16 +668,16 @@ async function verifyGap3() {
       'File not found',
     );
 
-    // 3.22 sinapse-master has run-workflow command
-    const masterMd = fs.readFileSync(path.join(ROOT, '.sinapse-ai/development/agents/sinapse-master.md'), 'utf-8');
+    // 3.22 sinapse-orqx has run-workflow command
+    const masterMd = fs.readFileSync(path.join(ROOT, '.sinapse-ai/development/agents/sinapse-orqx.md'), 'utf-8');
     assert(
       masterMd.includes('name: run-workflow'),
-      '3.22a sinapse-master has run-workflow command',
+      '3.22a sinapse-orqx has run-workflow command',
       'Command not found',
     );
     assert(
       masterMd.includes('run-workflow.md'),
-      '3.22b sinapse-master has run-workflow.md in dependencies',
+      '3.22b sinapse-orqx has run-workflow.md in dependencies',
       'Dependency not found',
     );
 

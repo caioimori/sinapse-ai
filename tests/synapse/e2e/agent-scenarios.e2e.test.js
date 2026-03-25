@@ -62,9 +62,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   });
 
   // -----------------------------------------------------------------------
-  // 1. @dev activation
+  // 1. @developer activation
   // -----------------------------------------------------------------------
-  it('activates @dev and includes agent section in output XML', async () => {
+  it('activates @developer and includes agent section in output XML', async () => {
     const session = makeSession('dev');
     const { xml } = await engine.process('implement the feature', session);
 
@@ -73,9 +73,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   });
 
   // -----------------------------------------------------------------------
-  // 2. @qa activation
+  // 2. @quality-gate activation
   // -----------------------------------------------------------------------
-  it('activates @qa and includes agent section in output XML', async () => {
+  it('activates @quality-gate and includes agent section in output XML', async () => {
     const session = makeSession('qa');
     const { xml } = await engine.process('run quality checks', session);
 

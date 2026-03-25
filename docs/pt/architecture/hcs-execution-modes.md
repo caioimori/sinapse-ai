@@ -10,7 +10,7 @@
 **Status:** Proposto
 **Criado:** 2025-12-30
 **Story:** Investigação HCS-1
-**Autor:** @architect (Aria) via @dev (Dex)
+**Autor:** @architect (Aria) via @developer (Dex)
 
 ---
 

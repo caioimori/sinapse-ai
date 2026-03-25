@@ -9,7 +9,7 @@
  * - Performance targets documented for all agents
  * - source-tree.md governance section contains all required files
  * - update-source-tree.md task file exists
- * - sinapse-master has *update-source-tree command
+ * - sinapse-orqx has *update-source-tree command
  */
 
 const fs = require('fs');
@@ -59,7 +59,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
 
     test('all expected agents have entries', () => {
       const expectedAgents = [
-        'sinapse-master', 'dev', 'qa', 'devops', 'github-devops',
+        'sinapse-orqx', 'dev', 'qa', 'devops', 'github-devops',
         'architect', 'po', 'sm', 'data-engineer', 'db-sage',
         'pm', 'analyst', 'ux-design-expert', 'squad-creator',
         'sinapse-developer', 'sinapse-orchestrator', 'default',
@@ -242,7 +242,7 @@ describe('Story ACT-8: Document Governance', () => {
 
     test('source-tree.md documents coding-standards.md', () => {
       expect(sourceTreeContent).toContain('coding-standards.md');
-      expect(sourceTreeContent).toContain('@dev');
+      expect(sourceTreeContent).toContain('@developer');
     });
 
     test('source-tree.md documents tech-stack.md', () => {
@@ -256,7 +256,7 @@ describe('Story ACT-8: Document Governance', () => {
 
     test('source-tree.md documents test-levels-framework.md', () => {
       expect(sourceTreeContent).toContain('test-levels-framework.md');
-      expect(sourceTreeContent).toContain('@qa');
+      expect(sourceTreeContent).toContain('@quality-gate');
     });
 
     test('source-tree.md documents test-priorities-matrix.md', () => {
@@ -270,7 +270,7 @@ describe('Story ACT-8: Document Governance', () => {
 
     test('source-tree.md documents elicitation-methods.md', () => {
       expect(sourceTreeContent).toContain('elicitation-methods.md');
-      expect(sourceTreeContent).toContain('@po');
+      expect(sourceTreeContent).toContain('@product-lead');
     });
   });
 
@@ -288,15 +288,15 @@ describe('Story ACT-8: Document Governance', () => {
     });
   });
 
-  describe('sinapse-master Command', () => {
-    test('sinapse-master.md contains *update-source-tree command', () => {
-      const content = readFile('.sinapse-ai/development/agents/sinapse-master.md');
+  describe('sinapse-orqx Command', () => {
+    test('sinapse-orqx.md contains *update-source-tree command', () => {
+      const content = readFile('.sinapse-ai/development/agents/sinapse-orqx.md');
       expect(content).toContain('update-source-tree');
       expect(content).toContain('Validate data file governance');
     });
 
-    test('sinapse-master dependencies include update-source-tree.md', () => {
-      const content = readFile('.sinapse-ai/development/agents/sinapse-master.md');
+    test('sinapse-orqx dependencies include update-source-tree.md', () => {
+      const content = readFile('.sinapse-ai/development/agents/sinapse-orqx.md');
       expect(content).toContain('update-source-tree.md');
     });
   });

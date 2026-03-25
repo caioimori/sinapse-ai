@@ -3,7 +3,7 @@
  *
  * Runs automated PR reviews:
  * - CodeRabbit integration
- * - Quinn (@qa agent) automated review
+ * - Quinn (@quality-gate agent) automated review
  *
  * @module core/quality-gates/layer2-pr-automation
  * @version 1.0.0
@@ -196,7 +196,7 @@ class Layer2PRAutomation extends BaseLayer {
   }
 
   /**
-   * Run Quinn (@qa) automated review
+   * Run Quinn (@quality-gate) automated review
    * @param {Object} context - Execution context
    * @returns {Promise<Object>} Quinn review result
    */
@@ -204,7 +204,7 @@ class Layer2PRAutomation extends BaseLayer {
     const { verbose = false } = context;
 
     if (verbose) {
-      console.log('  🧪 Running Quinn (@qa) review...');
+      console.log('  🧪 Running Quinn (@quality-gate) review...');
     }
 
     try {

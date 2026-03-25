@@ -12,7 +12,7 @@
 | CI/CD pipeline management | YES | BLOCKED |
 | Release management | YES | BLOCKED |
 
-### @pm (Morgan) — Epic Orchestration
+### @project-lead (Morgan) — Epic Orchestration
 
 | Operation | Exclusive? | Delegated From |
 |-----------|-----------|---------------|
@@ -22,7 +22,7 @@
 | Requirements gathering | YES | — |
 | Spec writing (spec pipeline) | YES | — |
 
-### @po (Pax) — Story Validation
+### @product-lead (Pax) — Story Validation
 
 | Operation | Exclusive? | Details |
 |-----------|-----------|---------|
@@ -31,14 +31,14 @@
 | Epic context management | YES | — |
 | Backlog prioritization | YES | — |
 
-### @sm (River) — Story Creation
+### @sprint-lead (River) — Story Creation
 
 | Operation | Exclusive? | Details |
 |-----------|-----------|---------|
 | `*draft` / `*create-story` | YES | From epic/PRD |
 | Story template selection | YES | — |
 
-### @dev (Dex) — Implementation
+### @developer (Dex) — Implementation
 
 | Allowed | Blocked |
 |---------|---------|
@@ -67,7 +67,7 @@
 | Index strategy execution | Frontend/UI |
 | Migration planning & execution | — |
 
-### @sinapse-master — Framework Governance
+### @sinapse-orqx — Framework Governance
 
 | Capability | Details |
 |-----------|---------|
@@ -89,17 +89,17 @@ ANY agent → @devops *push
 
 ### Story Flow
 ```
-@sm *draft → @po *validate → @dev *develop → @qa *qa-gate → @devops *push
+@sprint-lead *draft → @product-lead *validate → @developer *develop → @quality-gate *qa-gate → @devops *push
 ```
 
 ### Epic Flow
 ```
-@pm *create-epic → @pm *execute-epic → @sm *draft (per story)
+@project-lead *create-epic → @project-lead *execute-epic → @sprint-lead *draft (per story)
 ```
 
 ## Escalation Rules
 
-1. Agent cannot complete task → Escalate to @sinapse-master
-2. Quality gate fails → Return to @dev with specific feedback
+1. Agent cannot complete task → Escalate to @sinapse-orqx
+2. Quality gate fails → Return to @developer with specific feedback
 3. Constitutional violation detected → BLOCK, require fix before proceed
-4. Agent boundary conflict → @sinapse-master mediates
+4. Agent boundary conflict → @sinapse-orqx mediates

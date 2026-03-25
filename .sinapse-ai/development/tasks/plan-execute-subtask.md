@@ -91,13 +91,13 @@ autoClaude:
 
 ---
 
-## Command Integration (@dev)
+## Command Integration (@developer)
 
 ```yaml
 command:
   name: '*execute-subtask'
   syntax: '*execute-subtask {subtask-id}'
-  agent: dev
+  agent: developer
 
   examples:
     - '*execute-subtask ST-1.1'
@@ -949,7 +949,7 @@ metadata:
   story: '4.3'
   epic: 'Epic 4 - Execution Pipeline'
   created: '2026-01-28'
-  author: '@dev (Dex)'
+  author: '@developer (Dex)'
   version: '1.0.0'
   tags:
     - execution-pipeline

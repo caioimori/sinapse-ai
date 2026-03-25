@@ -15,7 +15,7 @@ const AGENTS_TO_UPDATE = [
   'analyst.md',
   'data-engineer.md',
   'devops.md',
-  'sinapse-master.md',
+  'sinapse-orqx.md',
   'ux-design-expert.md',
 ];
 

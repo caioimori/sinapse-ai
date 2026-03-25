@@ -55,9 +55,9 @@
       "script": "commands/sinapse-agent.js"
     },
     {
-      "name": "sinapse-master",
-      "description": "Quick launch sinapse-master agent",
-      "script": "commands/sinapse-master.js"
+      "name": "sinapse-orqx",
+      "description": "Quick launch sinapse-orqx agent",
+      "script": "commands/sinapse-orqx.js"
     },
     {
       "name": "sinapse-analyst",

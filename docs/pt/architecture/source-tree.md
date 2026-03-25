@@ -134,7 +134,7 @@ sinapse-ai/                             # Raiz (projeto brownfield)
 ```
 .sinapse-ai/
 ├── agents/                            # 145 definições de agentes
-│   ├── sinapse-master.md                 # Orquestrador master
+│   ├── sinapse-orqx.md                 # Orquestrador master
 │   ├── dev.md                         # Agente desenvolvedor
 │   ├── qa.md                          # Agente engenheiro de QA
 │   ├── architect.md                   # Agente arquiteto de sistema

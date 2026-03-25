@@ -1,7 +1,7 @@
 # QA Task: Add Follow-up to Backlog
 
 **Agent:** @qa
-**Command:** `*backlog-add` (when used by @qa, defaults to type F)
+**Command:** `*backlog-add` (when used by @quality-gate, defaults to type F)
 **Purpose:** Add follow-up item from QA review to backlog
 **Created:** 2025-01-16 (Story 6.1.2.6)
 
@@ -348,8 +348,8 @@ console.log('✅ Backlog updated: docs/stories/backlog.md');
 
 **Next Steps:**
 - Review in backlog: docs/stories/backlog.md
-- @po will prioritize with `*backlog-prioritize ${item.id}`
-- @dev will address before story completion (if Critical/High)
+- @product-lead will prioritize with `*backlog-prioritize ${item.id}`
+- @developer will address before story completion (if Critical/High)
 
 ${priority === 'Critical' || priority === 'High'
   ? '⚠️ **HIGH PRIORITY** - Should be addressed before story completion'

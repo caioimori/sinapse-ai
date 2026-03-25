@@ -1,4 +1,4 @@
-# @dev (Dex) - System Documentation
+# @developer (Dex) - System Documentation
 
 > **EN** | [PT](../../sinapse-agent-flows/dev-system.md) | [ES](../../es/sinapse-agent-flows/dev-system.md)
 
@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*SINAPSE Agent Flows - @dev System v1.0*
+*SINAPSE Agent Flows - @developer System v1.0*

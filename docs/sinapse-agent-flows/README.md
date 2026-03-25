@@ -27,7 +27,7 @@ Esta pasta contém a documentação detalhada de todos os agentes do SINAPSE, in
 
 | Agente | Persona | Arquétipo | Documento |
 |--------|---------|-----------|-----------|
-| **@sinapse-master** | Orion | Orchestrator | [sinapse-master-system.md](./sinapse-master-system.md) |
+| **@sinapse-orqx** | Orion | Orchestrator | [sinapse-orqx-system.md](./sinapse-orqx-system.md) |
 | **@analyst** | Atlas | Researcher | [analyst-system.md](./analyst-system.md) |
 | **@architect** | Aria | Visionary | [architect-system.md](./architect-system.md) |
 | **@data-engineer** | Dara | Data Sage | [data-engineer-system.md](./data-engineer-system.md) |
@@ -98,7 +98,7 @@ Cada documento de agente segue esta estrutura padrão:
 ```mermaid
 flowchart TB
     subgraph ORCHESTRATION["Orquestração"]
-        MASTER["@sinapse-master\n(Orion)"]
+        MASTER["@sinapse-orqx\n(Orion)"]
     end
 
     subgraph DISCOVERY["Descoberta & Planejamento"]

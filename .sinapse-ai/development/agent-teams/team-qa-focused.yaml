@@ -20,12 +20,12 @@ tasks:
 purpose: |
   This team ensures code quality throughout the development lifecycle:
 
-  1. **Development Phase** (@dev):
+  1. **Development Phase** (@developer):
      - Pre-commit CodeRabbit reviews catch issues early
      - Fix CRITICAL issues before commit
      - Document HIGH issues in story notes
 
-  2. **QA Phase** (@qa):
+  2. **QA Phase** (@quality-gate):
      - Automated code review before human QA
      - Run comprehensive test suites
      - Validate story acceptance criteria
@@ -55,7 +55,7 @@ when_to_use:
 quality_gates:
   pre_commit:
     trigger: Developer marks story complete
-    agent: dev
+    agent: developer
     checks:
       - coderabbit --prompt-only -t uncommitted
       - Fix all CRITICAL issues
@@ -119,16 +119,16 @@ coderabbit_integration:
 usage_example: |
   # Typical workflow with this team:
 
-  ## 1. Development (by @dev)
+  ## 1. Development (by @developer)
   "Mark this story as ready for review"
-  → @dev runs pre-commit CodeRabbit check
+  → @developer runs pre-commit CodeRabbit check
   → Fixes CRITICAL issues
   → Documents HIGH issues in story
   → Story marked complete
 
-  ## 2. QA Validation (by @qa)
+  ## 2. QA Validation (by @quality-gate)
   "*code-review uncommitted"
-  → @qa runs automated review
+  → @quality-gate runs automated review
   → Executes test suites
   → Validates acceptance criteria
   → Reports any quality gate failures

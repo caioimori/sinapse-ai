@@ -30,7 +30,7 @@ describe('generate-greeting.js', () => {
   describe('generateGreeting()', () => {
     it('should generate greeting for valid agent', async () => {
       // This is a smoke test - actual implementation would need mocking
-      const agentId = 'qa';
+      const agentId = 'quality-gate';
       
       // Verify agent file exists
       const fs = require('fs').promises;
@@ -86,7 +86,7 @@ describe('generate-greeting.js', () => {
         ...mockSessionContext, 
         sessionType: 'workflow',
         lastCommands: ['review', 'gate', 'apply-fixes'],
-        previousAgent: 'qa',
+        previousAgent: 'quality-gate',
       };
       assert.strictEqual(context.sessionType, 'workflow');
       assert.ok(context.lastCommands.length >= 3);
@@ -147,7 +147,7 @@ if (require.main === module) {
       name: 'Agent file exists',
       fn: async () => {
         const fs = require('fs').promises;
-        const agentPath = path.join(process.cwd(), '.sinapse-ai', 'agents', 'qa.md');
+        const agentPath = path.join(process.cwd(), '.sinapse-ai', 'agents', 'quality-gate.md');
         await fs.access(agentPath);
         return true;
       },

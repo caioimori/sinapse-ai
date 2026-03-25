@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Task ID:** sync-registry-intel
-- **Agent:** @sinapse-master
+- **Agent:** @sinapse-orqx
 - **Story:** NOG-2
 - **Type:** Command Task
 - **Elicit:** false

@@ -92,7 +92,7 @@ Este roadmap é revisado e atualizado mensalmente pelos mantenedores do projeto.
 4. Remover itens cancelados ou despriorizados
 5. Comunicar mudanças significativas via [Anúncios](https://github.com/SinapseAI/sinapse-ai/discussions/categories/announcements)
 
-**Responsáveis:** Agentes @pm (Morgan) ou @po (Pax), com supervisão dos mantenedores.
+**Responsáveis:** Agentes @project-lead (Morgan) ou @product-lead (Pax), com supervisão dos mantenedores.
 
 ### Sincronização com Backlog Interno
 

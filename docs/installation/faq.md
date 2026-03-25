@@ -367,7 +367,7 @@ npx sinapse-ai install
 1. **Copy an existing agent:**
 
    ```bash
-   cp .sinapse-ai/agents/dev.md .sinapse-ai/agents/my-agent.md
+   cp .sinapse-ai/agents/developer.md .sinapse-ai/agents/my-agent.md
    ```
 
 2. **Edit the YAML frontmatter:**

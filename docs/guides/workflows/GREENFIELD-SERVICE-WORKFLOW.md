@@ -735,12 +735,12 @@ export SINAPSE_DEBUG=true
 | Arquivo | Agente |
 |---------|--------|
 | `.sinapse-ai/development/agents/analyst.md` | Atlas (Analyst) |
-| `.sinapse-ai/development/agents/pm.md` | Morgan (PM) |
+| `.sinapse-ai/development/agents/project-lead.md` | Morgan (PM) |
 | `.sinapse-ai/development/agents/architect.md` | Aria (Architect) |
-| `.sinapse-ai/development/agents/po.md` | Pax (PO) |
-| `.sinapse-ai/development/agents/sm.md` | River (SM) |
-| `.sinapse-ai/development/agents/dev.md` | Dex (Dev) |
-| `.sinapse-ai/development/agents/qa.md` | Quinn (QA) |
+| `.sinapse-ai/development/agents/product-lead.md` | Pax (PO) |
+| `.sinapse-ai/development/agents/sprint-lead.md` | River (SM) |
+| `.sinapse-ai/development/agents/developer.md` | Dex (Dev) |
+| `.sinapse-ai/development/agents/quality-gate.md` | Quinn (QA) |
 
 ### Tasks Principais
 

@@ -18,7 +18,7 @@
  * - AC6: Updated automatically after session insights
  * - AC7: Command `*list-gotchas` for quick lookup
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

@@ -26,7 +26,7 @@ Story ACT-6: Framework integrity checking via `*validate-agents` command.
 ### Step 1: Discover Agent Files
 
 Scan `.sinapse-ai/development/agents/` for all `.md` files.
-Expected agents: dev, qa, architect, pm, po, sm, analyst, data-engineer, ux-design-expert, devops, sinapse-master, squad-creator
+Expected agents: dev, qa, architect, pm, po, sm, analyst, data-engineer, ux-design-expert, devops, sinapse-orqx, squad-creator
 
 ### Step 2: Parse YAML Block
 

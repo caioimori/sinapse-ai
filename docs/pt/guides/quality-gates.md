@@ -145,7 +145,7 @@ Code review assistido por IA que executa em pull requests. Captura problemas mai
 | Ferramenta      | Propósito                  | Severidade Bloqueadora |
 | --------------- | -------------------------- | ---------------------- |
 | **CodeRabbit**  | Code review por IA         | CRITICAL               |
-| **Quinn (@qa)** | Revisão automatizada de QA | CRITICAL               |
+| **Quinn (@quality-gate)** | Revisão automatizada de QA | CRITICAL               |
 
 ### Configuração
 
@@ -168,7 +168,7 @@ layer2:
   quinn:
     enabled: true
     autoReview: true
-    agentPath: '.claude/commands/SINAPSE/agents/qa.md'
+    agentPath: '.claude/commands/SINAPSE/agents/quality-gate.md'
     severity:
       block: ['CRITICAL']
       warn: ['HIGH', 'MEDIUM']
@@ -183,7 +183,7 @@ sinapse qa run --layer=2
 # Executar apenas CodeRabbit
 sinapse qa run --layer=2 --tool=coderabbit
 
-# Executar revisão do Quinn (@qa)
+# Executar revisão do Quinn (@quality-gate)
 sinapse qa run --layer=2 --tool=quinn
 ```
 
@@ -214,7 +214,7 @@ coderabbit --prompt-only -t uncommitted
 coderabbit --files "src/**/*.js" --prompt-only
 ```
 
-### Integração Quinn (@qa)
+### Integração Quinn (@quality-gate)
 
 O agente QA realiza revisão automatizada focando em:
 
@@ -534,7 +534,7 @@ layer2:
   quinn:
     enabled: true
     autoReview: true
-    agentPath: '.claude/commands/SINAPSE/agents/qa.md'
+    agentPath: '.claude/commands/SINAPSE/agents/quality-gate.md'
     severity:
       block: [CRITICAL]
       warn: [HIGH, MEDIUM]
@@ -592,7 +592,7 @@ verbose:
 | --------------------- | ---------------------------------------------------- |
 | CodeRabbit crítico    | Endereçar problemas de segurança/mudanças com quebra |
 | Timeout do CodeRabbit | Verifique a rede, tente execução manual              |
-| Quinn bloqueado       | Revise feedback do @qa, atualize o código            |
+| Quinn bloqueado       | Revise feedback do @quality-gate, atualize o código            |
 
 ### Problemas na Camada 3
 

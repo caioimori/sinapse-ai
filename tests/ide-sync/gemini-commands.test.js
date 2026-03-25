@@ -26,9 +26,9 @@ describe('gemini command sync', () => {
   });
 
   it('normalizes command slugs and menu names', () => {
-    expect(commandSlugForAgent('sinapse-master')).toBe('master');
+    expect(commandSlugForAgent('sinapse-orqx')).toBe('orqx');
     expect(commandSlugForAgent('dev')).toBe('dev');
-    expect(menuCommandName('sinapse-master')).toBe('/sinapse-master');
+    expect(menuCommandName('sinapse-orqx')).toBe('/sinapse-orqx');
     expect(menuCommandName('dev')).toBe('/sinapse-dev');
   });
 

@@ -223,13 +223,13 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 **I collaborate with:**
 
-- **@pm (Beacon):** Provides research and analysis to support PRD creation
-- **@po (Pax):** Provides market insights and competitive analysis
+- **@project-lead (Beacon):** Provides research and analysis to support PRD creation
+- **@product-lead (Pax):** Provides market insights and competitive analysis
 
 **When to use others:**
 
 - Strategic planning → Use @pm
-- Story creation → Use @po or @sm
+- Story creation → Use @product-lead or @sm
 - Architecture design → Use @architect
 
 ---
@@ -254,7 +254,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 1. **Research** → `*perform-market-research` or `*create-competitor-analysis`
 2. **Brainstorming** → `*brainstorm {topic}` for structured ideation
 3. **Synthesis** → Create project brief or research summary
-4. **Handoff** → Provide insights to @pm for PRD creation
+4. **Handoff** → Provide insights to @project-lead for PRD creation
 
 ### Common Pitfalls
 
@@ -265,8 +265,8 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 ### Related Agents
 
-- **@pm (Beacon)** - Primary consumer of research
-- **@po (Pax)** - May request market insights
+- **@project-lead (Beacon)** - Primary consumer of research
+- **@product-lead (Pax)** - May request market insights
 
 ---
 ---

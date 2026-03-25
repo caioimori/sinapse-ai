@@ -528,10 +528,10 @@ graph TD
 |-------------|-----------|---------|
 | @architect -> @data-engineer | Delegate | Database schema design, query optimization |
 | @architect -> @ux-design-expert | Collaborate | Frontend architecture, user flows |
-| @pm -> @architect | Receives | Requirements and strategic direction |
+| @project-lead -> @architect | Receives | Requirements and strategic direction |
 | @architect -> @devops | Delegate | Git push operations, PR creation |
-| @architect -> @dev | Handoff | Architecture documents for implementation |
-| @qa -> @architect | Validate | Architecture checklists (execute-checklist) |
+| @architect -> @developer | Handoff | Architecture documents for implementation |
+| @quality-gate -> @architect | Validate | Architecture checklists (execute-checklist) |
 
 ### Delegation Rules (from agent definition)
 

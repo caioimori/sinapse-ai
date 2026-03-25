@@ -115,7 +115,7 @@ constitutional_gate:
 
       Issue: {violation_details}
 
-      Resolution: Create or update story via @sm *draft or @po *create-story
+      Resolution: Create or update story via @sprint-lead *draft or @product-lead *create-story
 ```
 
 ### Gate 2: CLI First (Article I)
@@ -550,7 +550,7 @@ Execute **AFTER** all tasks are complete but **BEFORE** running the DOD checklis
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │                  CODERABBIT SELF-HEALING                     │
-│                   (Light Mode - @dev)                        │
+│                   (Light Mode - @developer)                        │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
 │  iteration = 0                                               │
@@ -648,7 +648,7 @@ async function runCodeRabbitSelfHealing(storyPath) {
 |----------|----------|-------|
 | **CRITICAL** | Auto-fix (max 2 attempts) | Security vulnerabilities, breaking bugs |
 | **HIGH** | Document in story Dev Notes | Recommend fix before QA |
-| **MEDIUM** | Ignore | @qa will handle |
+| **MEDIUM** | Ignore | @quality-gate will handle |
 | **LOW** | Ignore | Nits, not blocking |
 
 ### Timeout
@@ -920,5 +920,5 @@ next_agent: @qa
 next_command: *review {story-id}
 condition: Story status is Ready for Review
 alternatives:
-  - agent: @qa, command: *gate {story-id}, condition: Quick gate decision needed
-  - agent: @dev, command: *apply-qa-fixes, condition: Self-identified issues during dev
+  - agent: @quality-gate, command: *gate {story-id}, condition: Quick gate decision needed
+  - agent: @developer, command: *apply-qa-fixes, condition: Self-identified issues during dev

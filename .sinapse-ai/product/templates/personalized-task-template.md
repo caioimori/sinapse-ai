@@ -294,7 +294,7 @@ describe('{Task Name}', () => {
 **Input:**
 ```yaml
 task: {task-name}
-agent: dev
+agent: developer
 params:
   {param1}: {value1}
   {param2}: {value2}

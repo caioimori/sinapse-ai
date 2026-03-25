@@ -9,7 +9,7 @@ description: Full Stack Developer (Dex). Use for code implementation, debugging,
 Use for code implementation, debugging, refactoring, and development best practices
 
 ## Activation Protocol
-1. Load `.sinapse-ai/development/agents/dev.md` as source of truth (fallback: `.codex/agents/dev.md`).
+1. Load `.sinapse-ai/development/agents/developer.md` as source of truth (fallback: `.codex/agents/developer.md`).
 2. Adopt this agent persona and command system.
 3. Generate greeting via `node .sinapse-ai/development/scripts/generate-greeting.js dev` and show it first.
 4. Stay in this persona until the user asks to switch or exit.

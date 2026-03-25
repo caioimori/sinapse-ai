@@ -497,14 +497,14 @@ Add entry to Epic 3 changelog (or Story 3.18 change_log):
 - date: '2025-10-31'
   version: 2.0.0
   description: Utilities cleanup complete - 30 deprecated files archived
-  author: James (@dev)
+  author: James (@developer)
   changes:
     - 'Archived 30 deprecated utilities (37% of total 81)'
     - 'Created utils-archive/ with restoration documentation'
     - 'Moved 1 test file to proper location'
     - 'Updated core-config.yaml utility count: 81 → 51'
     - 'Framework validation passed post-cleanup'
-    - 'All agents (@dev, @po, @qa) activate successfully'
+    - 'All agents (@developer, @product-lead, @quality-gate) activate successfully'
 ```
 
 **5.3 Update Developer Guides**
@@ -532,9 +532,9 @@ Test that all core agents still activate:
 
 ```bash
 # Test each agent manually or via script
-# @dev agent
-# @po agent
-# @qa agent
+# @developer agent
+# @product-lead agent
+# @quality-gate agent
 ```
 
 Expected: All agents load without errors
@@ -615,7 +615,7 @@ node .sinapse-ai/scripts/sinapse-validator.js
 - ✅ All 30 deprecated utilities archived without deletion
 - ✅ Zero broken references (grep validation passes)
 - ✅ Framework validation (sinapse-validator.js) passes
-- ✅ All agents (@dev, @po, @qa) activate successfully
+- ✅ All agents (@developer, @product-lead, @quality-gate) activate successfully
 - ✅ Backup created before changes
 - ✅ Archive README created with restoration instructions
 - ✅ core-config.yaml updated accurately

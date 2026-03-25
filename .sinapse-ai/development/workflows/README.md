@@ -27,9 +27,9 @@ The `setup-environment` workflow helps developers configure their IDE for optima
 
 ### Usage
 
-From the sinapse-master agent:
+From the sinapse-orqx agent:
 ```
-@sinapse-master
+@sinapse-orqx
 *setup-environment
 ```
 

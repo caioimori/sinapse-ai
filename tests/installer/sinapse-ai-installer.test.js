@@ -35,15 +35,15 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
       await fs.writeFile(path.join(sinapseCoreDir, 'test1.md'), '# Test File 1');
       await fs.writeFile(path.join(sinapseCoreDir, 'test2.md'), '# Test File 2');
       await fs.ensureDir(path.join(sinapseCoreDir, 'agents'));
-      await fs.writeFile(path.join(sinapseCoreDir, 'agents', 'dev.md'), '# Dev Agent');
+      await fs.writeFile(path.join(sinapseCoreDir, 'agents', 'developer.md'), '# Dev Agent');
 
-      const installedFiles = ['test1.md', 'test2.md', 'agents/dev.md'];
+      const installedFiles = ['test1.md', 'test2.md', 'agents/developer.md'];
       const hashes = await generateFileHashes(sinapseCoreDir, installedFiles);
 
       expect(Object.keys(hashes)).toHaveLength(3);
       expect(hashes['test1.md']).toMatch(/^sha256:[a-f0-9]{64}$/);
       expect(hashes['test2.md']).toMatch(/^sha256:[a-f0-9]{64}$/);
-      expect(hashes['agents/dev.md']).toMatch(/^sha256:[a-f0-9]{64}$/);
+      expect(hashes['agents/developer.md']).toMatch(/^sha256:[a-f0-9]{64}$/);
     });
 
     it('should skip non-existent files', async () => {
@@ -157,17 +157,17 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
       const sinapseCoreDir = path.join(tempDir, '.sinapse-ai');
 
       await fs.ensureDir(path.join(sinapseCoreDir, 'agents'));
-      await fs.writeFile(path.join(sinapseCoreDir, 'agents', 'dev.md'), '# Dev');
+      await fs.writeFile(path.join(sinapseCoreDir, 'agents', 'developer.md'), '# Dev');
       await fs.writeFile(path.join(sinapseCoreDir, 'config.yaml'), 'key: value');
 
       const result = await generateVersionJson({
         targetSinapseCore: sinapseCoreDir,
         version: '1.0.0',
-        installedFiles: ['agents/dev.md', 'config.yaml'],
+        installedFiles: ['agents/developer.md', 'config.yaml'],
       });
 
       expect(Object.keys(result.fileHashes)).toHaveLength(2);
-      expect(result.fileHashes['agents/dev.md']).toBeDefined();
+      expect(result.fileHashes['agents/developer.md']).toBeDefined();
       expect(result.fileHashes['config.yaml']).toBeDefined();
     });
   });

@@ -40,8 +40,8 @@ describe('generate-install-manifest', () => {
 
   describe('getFileType', () => {
     it('should identify agent files', () => {
-      expect(getFileType('development/agents/dev.md')).toBe('agent');
-      expect(getFileType('agents/pm.md')).toBe('agent');
+      expect(getFileType('development/agents/developer.md')).toBe('agent');
+      expect(getFileType('agents/project-lead.md')).toBe('agent');
     });
 
     it('should identify task files', () => {

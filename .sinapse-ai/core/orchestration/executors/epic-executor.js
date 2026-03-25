@@ -9,7 +9,7 @@
  *
  * @module core/orchestration/executors/epic-executor
  * @version 1.0.0
- * @author @dev (Dex)
+ * @author @developer (Dex)
  */
 
 /**

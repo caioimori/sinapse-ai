@@ -1,7 +1,7 @@
-# @pm (Morgan) - Execution Trace
+# @project-lead (Morgan) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.sinapse-ai/development/agents/pm.md`
+> Agent definition: `.sinapse-ai/development/agents/project-lead.md`
 
 ## 1. Activation Trace
 
@@ -9,7 +9,7 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.sinapse-ai/development/agents/pm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 1 | `.sinapse-ai/development/agents/project-lead.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
 | 2 | `.sinapse-ai/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
 | 3 | `.sinapse-ai/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog |
 | 4 | `.sinapse-ai/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
@@ -119,7 +119,7 @@ pm:
 
 | Task File | Used By | Status |
 |-----------|---------|--------|
-| `correct-course.md` | Delegated to @sinapse-master | EXISTS |
+| `correct-course.md` | Delegated to @sinapse-orqx | EXISTS |
 | `execute-checklist.md` | Checklist execution | EXISTS |
 
 ---
@@ -455,14 +455,14 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @pm -> @po | Provides | PRDs and strategic direction |
-| @pm -> @sm | Delegate | Story creation via `*draft` |
-| @pm -> @analyst | Delegate | Deep research via `*research` |
-| @pm -> @architect | Collaborate | Technical architecture decisions |
-| @pm -> @sinapse-master | Escalate | Course corrections via `*correct-course` |
-| @pm -> @devops | Delegate | Git push operations, PR creation |
-| @analyst -> @pm | Receives | Project brief for PRD creation |
-| @sinapse-master -> @pm | Receives | Framework modification requests |
+| @project-lead -> @product-lead | Provides | PRDs and strategic direction |
+| @project-lead -> @sprint-lead | Delegate | Story creation via `*draft` |
+| @project-lead -> @analyst | Delegate | Deep research via `*research` |
+| @project-lead -> @architect | Collaborate | Technical architecture decisions |
+| @project-lead -> @sinapse-orqx | Escalate | Course corrections via `*correct-course` |
+| @project-lead -> @devops | Delegate | Git push operations, PR creation |
+| @analyst -> @project-lead | Receives | Project brief for PRD creation |
+| @sinapse-orqx -> @project-lead | Receives | Framework modification requests |
 
 ### Delegation Rules (from agent definition)
 
@@ -485,7 +485,7 @@ PM must NEVER emulate other agents within its context window. When a task requir
 | ExecutorAssignment | `.sinapse-ai/core/orchestration/executor-assignment.js` | EXISTS |
 | PM Script | `.sinapse-ai/scripts/pm.sh` | EXISTS |
 
-**Delegates to @sm when:**
+**Delegates to @sprint-lead when:**
 - Story creation from epics
 - Sprint planning and story breakdown
 
@@ -498,7 +498,7 @@ PM must NEVER emulate other agents within its context window. When a task requir
 - Technical architecture decisions
 - Technology selection
 
-**Escalates to @sinapse-master when:**
+**Escalates to @sinapse-orqx when:**
 - Course corrections detected
 - Framework modifications needed
 

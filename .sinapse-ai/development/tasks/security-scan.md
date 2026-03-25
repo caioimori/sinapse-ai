@@ -719,12 +719,12 @@ Cria arquivo em: `qa.qaLocation/security/{epic}.{story}-sast-{YYYYMMDD}.md`
 - semgrep: v{version} (if used)
 
 **Report Generated**: {timestamp}
-**Report Generator**: @qa (Quinn - Test Architect)
+**Report Generator**: @quality-gate (Quinn - Test Architect)
 ```
 
 ## Integration with review-story.md
 
-Quando `@qa *review {story}` é executado, **automaticamente** chama `security-scan`:
+Quando `@quality-gate *review {story}` é executado, **automaticamente** chama `security-scan`:
 
 ```markdown
 # review-story.md (atualizar)

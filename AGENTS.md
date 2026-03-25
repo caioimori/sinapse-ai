@@ -56,16 +56,16 @@ Preferencia de ativacao no Codex CLI:
 Quando a mensagem do usuario for um atalho de agente, carregue o arquivo correspondente em `.sinapse-ai/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate receber `*exit`.
 
 Atalhos aceitos por agente:
-- `@sinapse-master`, `/sinapse-master`, `/sinapse-master.md` -> `.sinapse-ai/development/agents/sinapse-master.md`
+- `@sinapse-orqx`, `/sinapse-orqx`, `/sinapse-orqx.md` -> `.sinapse-ai/development/agents/sinapse-orqx.md`
 - `@analyst`, `/analyst`, `/analyst.md` -> `.sinapse-ai/development/agents/analyst.md`
 - `@architect`, `/architect`, `/architect.md` -> `.sinapse-ai/development/agents/architect.md`
 - `@data-engineer`, `/data-engineer`, `/data-engineer.md` -> `.sinapse-ai/development/agents/data-engineer.md`
-- `@dev`, `/dev`, `/dev.md` -> `.sinapse-ai/development/agents/dev.md`
+- `@dev`, `/dev`, `/dev.md` -> `.sinapse-ai/development/agents/developer.md`
 - `@devops`, `/devops`, `/devops.md` -> `.sinapse-ai/development/agents/devops.md`
-- `@pm`, `/pm`, `/pm.md` -> `.sinapse-ai/development/agents/pm.md`
-- `@po`, `/po`, `/po.md` -> `.sinapse-ai/development/agents/po.md`
-- `@qa`, `/qa`, `/qa.md` -> `.sinapse-ai/development/agents/qa.md`
-- `@sm`, `/sm`, `/sm.md` -> `.sinapse-ai/development/agents/sm.md`
+- `@pm`, `/pm`, `/pm.md` -> `.sinapse-ai/development/agents/project-lead.md`
+- `@po`, `/po`, `/po.md` -> `.sinapse-ai/development/agents/product-lead.md`
+- `@qa`, `/qa`, `/qa.md` -> `.sinapse-ai/development/agents/quality-gate.md`
+- `@sm`, `/sm`, `/sm.md` -> `.sinapse-ai/development/agents/sprint-lead.md`
 - `@squad-creator`, `/squad-creator`, `/squad-creator.md` -> `.sinapse-ai/development/agents/squad-creator.md`
 - `@ux-design-expert`, `/ux-design-expert`, `/ux-design-expert.md` -> `.sinapse-ai/development/agents/ux-design-expert.md`
 

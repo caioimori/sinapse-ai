@@ -1,4 +1,4 @@
-# @sm (River) - System Documentation
+# @sprint-lead (River) - System Documentation
 
 > **EN** | [PT](../../sinapse-agent-flows/sm-system.md) | [ES](../../es/sinapse-agent-flows/sm-system.md)
 
@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*SINAPSE Agent Flows - @sm System v1.0*
+*SINAPSE Agent Flows - @sprint-lead System v1.0*

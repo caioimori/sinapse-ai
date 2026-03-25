@@ -37,7 +37,7 @@ describe('classifyLayer', () => {
     });
 
     test('classifies .sinapse-ai/development/agents/ (non-MEMORY) as L2', () => {
-      expect(classifyLayer('.sinapse-ai/development/agents/dev.md')).toBe('L2');
+      expect(classifyLayer('.sinapse-ai/development/agents/developer.md')).toBe('L2');
     });
 
     test('classifies .sinapse-ai/infrastructure/ as L2', () => {
@@ -56,8 +56,8 @@ describe('classifyLayer', () => {
     });
 
     test('classifies MEMORY.md inside agents as L3 (not L2)', () => {
-      expect(classifyLayer('.sinapse-ai/development/agents/dev/MEMORY.md')).toBe('L3');
-      expect(classifyLayer('.sinapse-ai/development/agents/qa/MEMORY.md')).toBe('L3');
+      expect(classifyLayer('.sinapse-ai/development/agents/developer/MEMORY.md')).toBe('L3');
+      expect(classifyLayer('.sinapse-ai/development/agents/quality-gate/MEMORY.md')).toBe('L3');
     });
 
     test('classifies .claude/ config files as L3', () => {
@@ -117,7 +117,7 @@ describe('classifyLayer', () => {
     });
 
     test('non-MEMORY agent file inside agents/ classifies as L2', () => {
-      expect(classifyLayer('.sinapse-ai/development/agents/dev/skills.yaml')).toBe('L2');
+      expect(classifyLayer('.sinapse-ai/development/agents/developer/skills.yaml')).toBe('L2');
     });
 
     test('nested config.yaml inside subdirectory is NOT L3', () => {

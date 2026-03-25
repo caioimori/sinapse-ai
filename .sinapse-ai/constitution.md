@@ -45,9 +45,9 @@ Cada agente tem autoridades exclusivas que não podem ser violadas.
 | git push | @devops |
 | PR creation | @devops |
 | Release/Tag | @devops |
-| Story creation | @sm, @po |
+| Story creation | @sprint-lead, @product-lead |
 | Architecture decisions | @architect |
-| Quality verdicts | @qa |
+| Quality verdicts | @quality-gate |
 
 **Gate:** Implementado via definição de agentes (não requer gate adicional)
 
@@ -62,7 +62,7 @@ Todo desenvolvimento começa e termina com uma story.
 - MUST: Stories DEVEM ter acceptance criteria claros antes de implementação
 - MUST: Progresso DEVE ser rastreado via checkboxes na story
 - MUST: File List DEVE ser mantida atualizada na story
-- SHOULD: Stories seguem o workflow: @po/@sm cria → @dev implementa → @qa valida → @devops push
+- SHOULD: Stories seguem o workflow: @po/@sprint-lead cria → @developer implementa → @quality-gate valida → @devops push
 
 **Gate:** `dev-develop-story.md` - BLOCK se não houver story válida
 

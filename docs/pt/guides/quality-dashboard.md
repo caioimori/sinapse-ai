@@ -124,7 +124,7 @@ Cada camada de quality gate tem seu próprio card de métricas:
 | ------------------------------ | ------------------------------------------------------ |
 | **Taxa de Aprovação**          | % de PRs passando na revisão automatizada              |
 | **Achados do CodeRabbit**      | Problemas encontrados pelo CodeRabbit (por severidade) |
-| **Achados do Quinn**           | Problemas encontrados pelo agente @qa                  |
+| **Achados do Quinn**           | Problemas encontrados pelo agente @quality-gate                  |
 | **Taxa de Captura Automática** | % de problemas capturados antes da revisão humana      |
 
 **Visualização Expandida (clique para expandir):**
@@ -142,7 +142,7 @@ Cada camada de quality gate tem seu próprio card de métricas:
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │ Achados do Quinn (@qa)                          │   │
+│  │ Achados do Quinn (@quality-gate)                          │   │
 │  │ Bloqueadores: 2  │  Alertas: 8  │  Info: 15    │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │

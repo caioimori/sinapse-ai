@@ -179,11 +179,11 @@ Componentes:
 
 | Fase       | Agente     | Saída             |
 | ---------- | ---------- | ----------------- |
-| 1. Coletar | @pm        | requirements.json |
+| 1. Coletar | @project-lead        | requirements.json |
 | 2. Avaliar | @architect | complexity.json   |
 | 3. Pesquisar | @analyst | research.json     |
-| 4. Escrever | @pm        | spec.md           |
-| 5. Criticar | @qa        | critique.json     |
+| 4. Escrever | @project-lead        | spec.md           |
+| 5. Criticar | @quality-gate        | critique.json     |
 
 **Adaptação de Complexidade:**
 
@@ -284,7 +284,7 @@ Componentes:
 │          │  APROVADA   │ → Concluído                        │
 │          └─────────────┘                                    │
 │          ┌──────▼──────┐                                    │
-│          │PRECISA_REVISAR│ → Criar Requisição Correção → @dev Corrigir │
+│          │PRECISA_REVISAR│ → Criar Requisição Correção → @developer Corrigir │
 │          └─────────────┘    └────────────────────────┘     │
 │                                      │                      │
 │                 ┌────────────────────┘                      │

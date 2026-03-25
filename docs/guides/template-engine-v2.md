@@ -48,7 +48,7 @@ Date: {{DATE}}
 
 const variables = {
   TITLE: 'My Document',
-  AUTHOR: 'Dex (@dev)',
+  AUTHOR: 'Dex (@developer)',
   DATE: '2025-12-05',
   SUMMARY: 'This is a generated document.',
 };
@@ -62,7 +62,7 @@ console.log(output);
 ```markdown
 # My Document
 
-Created by: Dex (@dev)
+Created by: Dex (@developer)
 Date: 2025-12-05
 
 ## Summary

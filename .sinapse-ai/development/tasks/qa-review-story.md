@@ -243,7 +243,7 @@ Execute CodeRabbit self-healing **FIRST** before manual review:
 ```
 ┌───────────────────────────────────────────────────────────────────┐
 │                   CODERABBIT SELF-HEALING                         │
-│                    (Full Mode - @qa)                              │
+│                    (Full Mode - @quality-gate)                              │
 ├───────────────────────────────────────────────────────────────────┤
 │                                                                   │
 │  iteration = 0                                                    │
@@ -709,6 +709,6 @@ next_command: *apply-qa-fixes
 condition: QA verdict is REJECT
 alternatives:
   - agent: @devops, command: *push, condition: QA verdict is APPROVE
-  - agent: @dev, command: *fix-qa-issues, condition: Structured fix from QA_FIX_REQUEST.md
+  - agent: @developer, command: *fix-qa-issues, condition: Structured fix from QA_FIX_REQUEST.md
 
 - **Manual Sync**: If needed, use: `npm run sync-story -- --story {epic}.{story}` 

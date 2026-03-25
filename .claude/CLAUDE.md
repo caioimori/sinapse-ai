@@ -155,7 +155,7 @@ Use prefixo `*` para comandos:
 
 ### Workflow de Story
 ```
-@po *create-story → @dev implementa → @qa testa → @devops push
+@product-lead *create-story → @developer implementa → @quality-gate testa → @devops push
 ```
 
 ---

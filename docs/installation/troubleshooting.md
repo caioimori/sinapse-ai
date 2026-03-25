@@ -610,7 +610,7 @@ YAMLException: bad indentation of a mapping entry
 
 ```bash
 # Validate YAML syntax
-npx yaml-lint .sinapse-ai/agents/dev.md
+npx yaml-lint .sinapse-ai/agents/developer.md
 
 # Common fixes:
 # - Use spaces, not tabs
@@ -618,7 +618,7 @@ npx yaml-lint .sinapse-ai/agents/dev.md
 # - Check for special characters in strings (use quotes)
 
 # Reinstall to get clean agent files
-mv .sinapse-ai/agents/dev.md .sinapse-ai/agents/dev.md.backup
+mv .sinapse-ai/agents/developer.md .sinapse-ai/agents/developer.md.backup
 npx sinapse-ai install --full
 ```
 

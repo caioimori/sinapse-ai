@@ -248,7 +248,7 @@ flowchart TB
 
     subgraph PLANNING["Fase de Planning"]
         direction TB
-        PM_WORK["@pm (Morgan)<br/>Estrategia de Produto"]
+        PM_WORK["@project-lead (Morgan)<br/>Estrategia de Produto"]
         PRD["prd.md"]
 
         PROJECT_BRIEF --> PM_WORK
@@ -278,7 +278,7 @@ flowchart TB
 
     subgraph VALIDATION["Fase de Validacao"]
         direction TB
-        PO_WORK["@po (Pax)<br/>Validacao de Artefatos"]
+        PO_WORK["@product-lead (Pax)<br/>Validacao de Artefatos"]
 
         PROJECT_BRIEF --> PO_WORK
         PRD --> PO_WORK
@@ -512,8 +512,8 @@ template:
 
 | Agente | Tipo de Colaboracao |
 |--------|---------------------|
-| **@pm (Morgan)** | Analyst fornece pesquisa e analise para criacao de PRD |
-| **@po (Pax)** | Analyst fornece insights de mercado e analise competitiva |
+| **@project-lead (Morgan)** | Analyst fornece pesquisa e analise para criacao de PRD |
+| **@product-lead (Pax)** | Analyst fornece insights de mercado e analise competitiva |
 | **@architect** | Analyst pode fornecer research de tecnologias |
 | **@ux-design-expert** | Analyst fornece user research para decisoes de UX |
 
@@ -656,7 +656,7 @@ template:
 | **Comandos de Research** | 3 (`*perform-market-research`, `*create-competitor-analysis`, `*research-prompt`) |
 | **Comandos de Ideation** | 3 (`*brainstorm`, `*create-project-brief`, `*elicit`) |
 | **Workflows que Usam** | 2 (greenfield-fullstack, brownfield-discovery) |
-| **Agentes Consumidores** | @pm, @po, @architect, @ux-design-expert |
+| **Agentes Consumidores** | @project-lead, @product-lead, @architect, @ux-design-expert |
 | **Tools Integrados** | exa, context7, google-workspace, clickup |
 | **Modos de Execucao** | 3 (YOLO, Interactive, Pre-Flight) |
 

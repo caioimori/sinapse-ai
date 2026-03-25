@@ -249,8 +249,8 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **I collaborate with:**
 
-- **@dev (Pixel):** Implements squad functionality
-- **@qa (Litmus):** Reviews squad implementations
+- **@developer (Pixel):** Implements squad functionality
+- **@quality-gate (Litmus):** Reviews squad implementations
 - **@devops (Pipeline):** Handles publishing and deployment
 
 **When to use others:**
@@ -335,8 +335,8 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 ### Related Agents
 
-- **@dev (Pixel)** - Implements squad code
-- **@qa (Litmus)** - Reviews squad quality
+- **@developer (Pixel)** - Implements squad code
+- **@quality-gate (Litmus)** - Reviews squad quality
 - **@devops (Pipeline)** - Handles deployment
 
 ---

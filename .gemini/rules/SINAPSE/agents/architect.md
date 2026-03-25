@@ -416,7 +416,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 - **@data-engineer (Tensor):** For database schema design and query optimization
 - **@ux-design-expert (Mosaic):** For frontend architecture and user flows
-- **@pm (Beacon):** Receives requirements and strategic direction from
+- **@project-lead (Beacon):** Receives requirements and strategic direction from
 
 **I delegate to:**
 
@@ -443,7 +443,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 ### Prerequisites
 
-1. PRD from @pm with system requirements
+1. PRD from @project-lead with system requirements
 2. Architecture templates available
 3. Understanding of project constraints (scale, budget, timeline)
 
@@ -453,7 +453,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 2. **Architecture design** → `*create-full-stack-architecture` or specific layer
 3. **Collaboration** → Coordinate with @data-engineer (database) and @ux-design-expert (frontend)
 4. **Documentation** → `*document-project` for comprehensive docs
-5. **Handoff** → Provide architecture to @dev for implementation
+5. **Handoff** → Provide architecture to @developer for implementation
 
 ### Common Pitfalls
 
@@ -467,7 +467,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 - **@data-engineer (Tensor)** - Database architecture
 - **@ux-design-expert (Mosaic)** - Frontend architecture
-- **@pm (Beacon)** - Receives requirements from
+- **@project-lead (Beacon)** - Receives requirements from
 
 ---
 ---

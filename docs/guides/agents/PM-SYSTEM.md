@@ -2,7 +2,7 @@
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
-> **Owner:** @pm (Morgan)
+> **Owner:** @project-lead (Morgan)
 > **Status:** Documentacao Oficial
 
 ---
@@ -40,8 +40,8 @@ O agente PM e projetado para:
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.sinapse-ai/development/agents/pm.md` | Definicao core do agente PM |
-| `.claude/commands/SINAPSE/agents/pm.md` | Comando Claude Code para ativar @pm |
+| `.sinapse-ai/development/agents/project-lead.md` | Definicao core do agente PM |
+| `.claude/commands/SINAPSE/agents/project-lead.md` | Comando Claude Code para ativar @project-lead |
 
 ### Tasks do @pm
 
@@ -88,7 +88,7 @@ flowchart TB
         EXISTING["🏗️ Projeto Existente<br/>(Brownfield)"]
     end
 
-    subgraph PM_CORE["📋 @pm (Morgan) - CORE"]
+    subgraph PM_CORE["📋 @project-lead (Morgan) - CORE"]
         CREATE_PRD["*create-prd<br/>Criar PRD Greenfield"]
         CREATE_BF_PRD["*create-brownfield-prd<br/>Criar PRD Brownfield"]
         CREATE_EPIC["*create-epic<br/>Criar Epic"]
@@ -342,7 +342,7 @@ flowchart LR
 ### Stories (com Quality Planning)
 1. **Story 1: {{Title}}**
    - Description
-   - **Predicted Agents**: @dev, @db-sage, etc.
+   - **Predicted Agents**: @developer, @db-sage, etc.
    - **Quality Gates**: Pre-Commit, Pre-PR, Pre-Deployment
 
 ### Risk Mitigation
@@ -355,11 +355,11 @@ flowchart LR
 
 | Tipo de Mudanca | Agentes Preditos |
 |-----------------|------------------|
-| Database Changes | @dev, @db-sage |
-| API/Backend Changes | @dev, @architect |
-| Frontend/UI Changes | @dev, @ux-expert |
-| Deployment/Infrastructure | @dev, @github-devops |
-| Security Features | @dev (foco OWASP) |
+| Database Changes | @developer, @db-sage |
+| API/Backend Changes | @developer, @architect |
+| Frontend/UI Changes | @developer, @ux-expert |
+| Deployment/Infrastructure | @developer, @github-devops |
+| Security Features | @developer (foco OWASP) |
 
 ---
 
@@ -458,17 +458,17 @@ flowchart TD
 
 ```mermaid
 flowchart TB
-    subgraph PM_BOX["📋 @pm (Morgan) - Product Manager"]
+    subgraph PM_BOX["📋 @project-lead (Morgan) - Product Manager"]
         PM_DESC["Cria PRDs, epics, pesquisa estrategica<br/>Corrige desvios de curso"]
         PM_CMDS["Comandos:<br/>*create-prd, *create-epic<br/>*research, *correct-course"]
     end
 
-    subgraph PO_BOX["🎯 @po (Pax) - Product Owner"]
+    subgraph PO_BOX["🎯 @product-lead (Pax) - Product Owner"]
         PO_DESC["Gerencia backlog, valida stories<br/>Prioriza trabalho"]
         PO_CMDS["Comandos:<br/>*backlog-*, *sync-story<br/>*validate-story-draft"]
     end
 
-    subgraph SM_BOX["🌊 @sm (River) - Scrum Master"]
+    subgraph SM_BOX["🌊 @sprint-lead (River) - Scrum Master"]
         SM_DESC["Cria stories detalhadas<br/>Coordena sprints"]
         SM_CMDS["Comandos:<br/>*create-next-story<br/>Sprint planning"]
     end
@@ -502,12 +502,12 @@ flowchart TB
 
 | De | Para | Gatilho | Artefato |
 |----|------|---------|----------|
-| @pm | @architect | PRD aprovado | `docs/prd.md` + Architect Prompt |
-| @pm | @ux-expert | PRD com UI | `docs/prd.md` + UX Expert Prompt |
-| @pm | @sm | Epic criado | Epic doc + Story Manager Handoff |
-| @pm | @po | PRD para validacao | PRD Draft |
-| @analyst | @pm | Pesquisa completa | Research findings |
-| @pm | @pm (self) | Desvio detectado | Sprint Change Proposal |
+| @project-lead | @architect | PRD aprovado | `docs/prd.md` + Architect Prompt |
+| @project-lead | @ux-expert | PRD com UI | `docs/prd.md` + UX Expert Prompt |
+| @project-lead | @sprint-lead | Epic criado | Epic doc + Story Manager Handoff |
+| @project-lead | @product-lead | PRD para validacao | PRD Draft |
+| @analyst | @project-lead | Pesquisa completa | Research findings |
+| @project-lead | @project-lead (self) | Desvio detectado | Sprint Change Proposal |
 
 ### Fluxo de Workflow Brownfield Discovery
 
@@ -517,12 +517,12 @@ flowchart LR
         ARCH["@architect"]
         DATA["@data-engineer"]
         UX["@ux-design-expert"]
-        QA["@qa"]
+        QA["@quality-gate"]
         ANALYST["@analyst"]
     end
 
     subgraph PHASE_10["FASE 10: Planning"]
-        PM["@pm"]
+        PM["@project-lead"]
         EPIC["*brownfield-create-epic"]
         STORY["*brownfield-create-story"]
     end
@@ -530,7 +530,7 @@ flowchart LR
     PHASE_1_9 -->|"Assessment completo<br/>docs/prd/technical-debt-assessment.md"| PM
     PM --> EPIC
     EPIC --> STORY
-    STORY -->|"Stories prontas<br/>docs/stories/story-*.md"| DEV["@dev"]
+    STORY -->|"Stories prontas<br/>docs/stories/story-*.md"| DEV["@developer"]
 
     style PM fill:#e3f2fd
     style EPIC fill:#fff9c4
@@ -689,7 +689,7 @@ flowchart LR
 
 ## Referencias
 
-- [Agent Definition: pm.md](.sinapse-ai/development/agents/pm.md)
+- [Agent Definition: pm.md](.sinapse-ai/development/agents/project-lead.md)
 - [Task: create-doc.md](.sinapse-ai/development/tasks/create-doc.md)
 - [Task: brownfield-create-epic.md](.sinapse-ai/development/tasks/brownfield-create-epic.md)
 - [Task: correct-course.md](.sinapse-ai/development/tasks/correct-course.md)
@@ -710,7 +710,7 @@ flowchart LR
 | **Checklists** | 2 (PM validation + Change navigation) |
 | **Workflows** | 1 (Brownfield Discovery - Fase 10) |
 | **Comandos Principais** | 7 (`*create-prd`, `*create-epic`, `*research`, etc.) |
-| **Agentes Colaboradores** | @po, @sm, @architect, @analyst, @ux-expert |
+| **Agentes Colaboradores** | @product-lead, @sprint-lead, @architect, @analyst, @ux-expert |
 | **Handoff Principal** | PM -> Architect (PRD aprovado) |
 
 ---

@@ -615,8 +615,8 @@ completion_criteria:
 
 handoff_to:
   "@devops": "When hooks need to be committed, pushed, or integrated into CI/CD pipelines"
-  "@dev": "When hook logic requires complex application code or integration with project codebase"
-  "@qa": "When hook test coverage needs review or quality gate integration"
+  "@developer": "When hook logic requires complex application code or integration with project codebase"
+  "@quality-gate": "When hook test coverage needs review or quality gate integration"
   "@architect": "When hook architecture decisions affect overall system design"
 
 # --- COMPLETE REFERENCE: 17 HOOK LIFECYCLE EVENTS ---
@@ -921,8 +921,8 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 **I collaborate with:**
 
 - **@devops (Gage):** Handles hook deployment, git push, CI/CD integration
-- **@dev (Dex):** Implements complex hook logic or application integrations
-- **@qa (Quinn):** Reviews hook test coverage and quality gate integration
+- **@developer (Dex):** Implements complex hook logic or application integrations
+- **@quality-gate (Quinn):** Reviews hook test coverage and quality gate integration
 - **@architect (Aria):** Consults on hook architecture affecting system design
 
 **When to use others:**

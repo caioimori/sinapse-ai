@@ -85,7 +85,7 @@ describe('Migration Analyze Module', () => {
 
   describe('categorizeFile', () => {
     it('should categorize agents to development', () => {
-      expect(categorizeFile('agents/dev.md')).toBe('development');
+      expect(categorizeFile('agents/developer.md')).toBe('development');
     });
 
     it('should categorize registry to core', () => {

@@ -37,7 +37,7 @@ describe('CodeIntelSource', () => {
           'task-b': { path: 'tasks/b.md', type: 'task', purpose: 'B', dependencies: [], usedBy: ['task-a'] },
         },
         agents: {
-          dev: { path: 'agents/dev.md', type: 'agent', purpose: 'Dev', dependencies: ['task-a'], usedBy: [] },
+          dev: { path: 'agents/developer.md', type: 'agent', purpose: 'Dev', dependencies: ['task-a'], usedBy: [] },
         },
       },
     };
@@ -241,7 +241,7 @@ describe('CodeIntelSource', () => {
     });
 
     it('should return base category when no path match', () => {
-      expect(_detectCategory('agents', '.sinapse-ai/development/agents/dev.md')).toBe('agents');
+      expect(_detectCategory('agents', '.sinapse-ai/development/agents/developer.md')).toBe('agents');
       expect(_detectCategory('tasks', '.sinapse-ai/development/tasks/build.md')).toBe('tasks');
     });
 
@@ -283,7 +283,7 @@ describe('CodeIntelSource', () => {
         metadata: { entityCount: 3 },
         entities: {
           agents: {
-            'dev-agent': { path: '.sinapse-ai/agents/dev.md', type: 'agent', lifecycle: 'production', dependencies: [], usedBy: [] },
+            'dev-agent': { path: '.sinapse-ai/agents/developer.md', type: 'agent', lifecycle: 'production', dependencies: [], usedBy: [] },
             'old-agent': { path: '.sinapse-ai/agents/old.md', type: 'agent', lifecycle: 'deprecated', dependencies: [], usedBy: [] },
           },
           tasks: {

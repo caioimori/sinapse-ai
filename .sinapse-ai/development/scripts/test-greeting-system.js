@@ -12,7 +12,7 @@ const _fs = require('fs');
 const _path = require('path');
 const _yaml = require('js-yaml');
 
-// Mock agent definition (simulates @dev)
+// Mock agent definition (simulates @developer)
 const mockDevAgent = {
   name: 'Dex',
   id: 'dev',
@@ -82,7 +82,7 @@ async function testGreetings() {
   const builder = new GreetingBuilder();
 
   // Test 1: New Session Greeting (Dev)
-  console.log('\n📝 TEST 1: New Session (@dev activation)\n');
+  console.log('\n📝 TEST 1: New Session (@developer activation)\n');
   console.log('─'.repeat(80));
   try {
     const newSessionGreeting = await builder.buildGreeting(mockDevAgent, {
@@ -94,7 +94,7 @@ async function testGreetings() {
   }
 
   // Test 2: Existing Session Greeting (Dev)
-  console.log('\n\n📝 TEST 2: Existing Session (@dev with history)\n');
+  console.log('\n\n📝 TEST 2: Existing Session (@developer with history)\n');
   console.log('─'.repeat(80));
   try {
     const existingSessionGreeting = await builder.buildGreeting(mockDevAgent, {
@@ -111,7 +111,7 @@ async function testGreetings() {
   }
 
   // Test 3: Workflow Session Greeting (PO)
-  console.log('\n\n📝 TEST 3: Workflow Session (@po after validate-story-draft)\n');
+  console.log('\n\n📝 TEST 3: Workflow Session (@product-lead after validate-story-draft)\n');
   console.log('─'.repeat(80));
   try {
     const workflowSessionGreeting = await builder.buildGreeting(mockPoAgent, {

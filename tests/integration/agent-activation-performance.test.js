@@ -25,12 +25,12 @@ describeIntegration('Agent Activation Performance (Integration)', () => {
     sessionLoader.clearSession();
   });
 
-  describeIntegration('@dev Activation with Session Context', () => {
+  describeIntegration('@developer Activation with Session Context', () => {
     test('activates with session context after @po', async () => {
-      // Simulate @po activation and command
+      // Simulate @product-lead activation and command
       sessionLoader.updateSession('po', 'Pax', 'validate-story-draft');
 
-      // Simulate @dev activation
+      // Simulate @developer activation
       const start = Date.now();
       const devContext = await devLoader.load({ fullLoad: false });
       const sessionContext = sessionLoader.loadContext('dev');
@@ -65,7 +65,7 @@ describeIntegration('Agent Activation Performance (Integration)', () => {
   });
 
   describeIntegration('Multi-Agent Transition Flow', () => {
-    test('tracks agent sequence: @po → @dev → @qa → @sm', () => {
+    test('tracks agent sequence: @product-lead → @developer → @quality-gate → @sm', () => {
       // Simulate agent transitions
       sessionLoader.updateSession('po', 'Pax', 'validate-story-draft');
       const context1 = sessionLoader.loadContext('dev');
@@ -87,7 +87,7 @@ describeIntegration('Agent Activation Performance (Integration)', () => {
   });
 
   describeIntegration('Performance Targets', () => {
-    test('@dev activation loads efficiently', async () => {
+    test('@developer activation loads efficiently', async () => {
       sessionLoader.clearSession();
 
       const start = Date.now();
@@ -100,7 +100,7 @@ describeIntegration('Agent Activation Performance (Integration)', () => {
       expect(sessionContext.sessionType).toBe('new');
     }, 60000);
 
-    test('@dev cached activation is significantly faster', async () => {
+    test('@developer cached activation is significantly faster', async () => {
       // Warm up cache
       const start1 = Date.now();
       await devLoader.load({ fullLoad: false });

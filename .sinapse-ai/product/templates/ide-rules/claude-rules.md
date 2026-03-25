@@ -60,8 +60,8 @@ Use prefixo `*` para comandos:
 ## Agent System
 
 ### Agent Activation
-- Agents are activated with @agent-name syntax: @dev, @qa, @architect, @pm, @po, @sm, @analyst
-- The master agent is activated with @sinapse-master
+- Agents are activated with @agent-name syntax: @developer, @quality-gate, @architect, @project-lead, @product-lead, @sprint-lead, @analyst
+- The master agent is activated with @sinapse-orqx
 - Agent commands use the * prefix: *help, *create-story, *task, *exit
 
 ### Agent Context

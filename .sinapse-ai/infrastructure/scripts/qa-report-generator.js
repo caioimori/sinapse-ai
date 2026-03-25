@@ -18,7 +18,7 @@
  * - AC6: Schema JSON for parsing automatizado
  * - AC7: Integrates with dashboard status.json
  *
- * @author @qa (Quinn)
+ * @author @quality-gate (Quinn)
  * @version 1.0.0
  */
 

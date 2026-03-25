@@ -50,8 +50,8 @@ function createStory(overrides = {}) {
   return {
     id: 'story-1',
     title: 'Test Story',
-    executor: '@dev',
-    quality_gate: '@qa',
+    executor: '@developer',
+    quality_gate: '@quality-gate',
     status: 'completed',
     acceptance_criteria: 'AC1: Do something',
     files_modified: ['src/index.js'],
@@ -263,8 +263,8 @@ describe('EpicContextAccumulator', () => {
       const entry = formatStoryEntry(story, CompressionLevel.FULL_DETAIL);
       expect(entry).toContain('id: story-1');
       expect(entry).toContain('title: Test Story');
-      expect(entry).toContain('executor: @dev');
-      expect(entry).toContain('quality_gate: @qa');
+      expect(entry).toContain('executor: @developer');
+      expect(entry).toContain('quality_gate: @quality-gate');
       expect(entry).toContain('status: completed');
       expect(entry).toContain('acceptance_criteria: AC1: Do something');
       expect(entry).toContain('files_modified: [src/index.js]');
@@ -275,7 +275,7 @@ describe('EpicContextAccumulator', () => {
       const entry = formatStoryEntry(story, CompressionLevel.METADATA_PLUS_FILES);
       expect(entry).toContain('id: story-1');
       expect(entry).toContain('title: Test Story');
-      expect(entry).toContain('executor: @dev');
+      expect(entry).toContain('executor: @developer');
       expect(entry).toContain('status: completed');
       expect(entry).toContain('files_modified: [src/index.js]');
       expect(entry).not.toContain('quality_gate');
@@ -285,7 +285,7 @@ describe('EpicContextAccumulator', () => {
     it('should format metadata_only with 3 fields', () => {
       const entry = formatStoryEntry(story, CompressionLevel.METADATA_ONLY);
       expect(entry).toContain('id: story-1');
-      expect(entry).toContain('executor: @dev');
+      expect(entry).toContain('executor: @developer');
       expect(entry).toContain('status: completed');
       expect(entry).not.toContain('title');
       expect(entry).not.toContain('files_modified');
@@ -302,9 +302,9 @@ describe('EpicContextAccumulator', () => {
     });
 
     it('should skip undefined/null fields', () => {
-      const minimal = { id: 's1', executor: '@dev', status: 'done' };
+      const minimal = { id: 's1', executor: '@developer', status: 'done' };
       const entry = formatStoryEntry(minimal, CompressionLevel.FULL_DETAIL);
-      expect(entry).toBe('id: s1 | executor: @dev | status: done');
+      expect(entry).toBe('id: s1 | executor: @developer | status: done');
     });
   });
 
@@ -353,13 +353,13 @@ describe('EpicContextAccumulator', () => {
       it('should include executor distribution in context', () => {
         const stories = [createStory()];
         const mockState = createMockSessionState(stories, {
-          executor_distribution: { '@dev': 3, '@qa': 1 },
+          executor_distribution: { '@developer': 3, '@quality-gate': 1 },
         });
         const acc = new EpicContextAccumulator(mockState);
 
         const result = acc.buildAccumulatedContext('12', 1);
-        expect(result).toContain('@dev: 3');
-        expect(result).toContain('@qa: 1');
+        expect(result).toContain('@developer: 3');
+        expect(result).toContain('@quality-gate: 1');
       });
 
       it('should apply correct compression levels based on distance', () => {
@@ -435,13 +435,13 @@ describe('EpicContextAccumulator', () => {
     describe('Exception: executor match', () => {
       it('should upgrade metadata_only to metadata_plus_files on executor match', () => {
         const stories = [
-          createStory({ id: 'old-story', executor: '@dev' }),
+          createStory({ id: 'old-story', executor: '@developer' }),
         ];
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
         const result = acc.buildAccumulatedContext('12', 10, {
-          executor: '@dev',
+          executor: '@developer',
         });
 
         const lines = result.split('\n');
@@ -451,13 +451,13 @@ describe('EpicContextAccumulator', () => {
 
       it('should NOT upgrade if executor does not match', () => {
         const stories = [
-          createStory({ id: 'old-story', executor: '@qa' }),
+          createStory({ id: 'old-story', executor: '@quality-gate' }),
         ];
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
         const result = acc.buildAccumulatedContext('12', 10, {
-          executor: '@dev',
+          executor: '@developer',
         });
 
         const lines = result.split('\n');
@@ -469,12 +469,12 @@ describe('EpicContextAccumulator', () => {
       it('should NOT upgrade full_detail stories (no downgrade from exceptions)', () => {
         // Story at index 9, storyN = 10 → distance 1 → full_detail
         const stories = Array.from({ length: 10 }, (_, i) =>
-          createStory({ id: `story-${i}`, executor: '@dev' }),
+          createStory({ id: `story-${i}`, executor: '@developer' }),
         );
         const mockState = createMockSessionState(stories);
         const acc = new EpicContextAccumulator(mockState);
 
-        const result = acc.buildAccumulatedContext('12', 10, { executor: '@dev' });
+        const result = acc.buildAccumulatedContext('12', 10, { executor: '@developer' });
 
         // Recent story should still be full_detail
         const lines = result.split('\n');
@@ -575,7 +575,7 @@ describe('EpicContextAccumulator', () => {
         const stories = [
           createStory({
             id: 'old-story',
-            executor: '@dev',
+            executor: '@developer',
             files_modified: ['src/shared.js'],
           }),
         ];
@@ -584,7 +584,7 @@ describe('EpicContextAccumulator', () => {
 
         const result = acc.buildAccumulatedContext('12', 10, {
           filesToModify: ['src/shared.js'],
-          executor: '@dev',
+          executor: '@developer',
         });
 
         // Should be metadata_plus_files (upgraded), not full_detail

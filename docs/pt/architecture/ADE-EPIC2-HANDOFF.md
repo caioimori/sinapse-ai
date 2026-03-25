@@ -1,6 +1,6 @@
 # ADE Epic 2 Handoff - Migração V2→V3
 
-> **De:** Quinn (@qa) - QA Agent
+> **De:** Quinn (@quality-gate) - QA Agent
 > **Para:** Próximo Desenvolvedor
 > **Data:** 2026-01-29
 > **Status:** COMPLETO ✅
@@ -103,4 +103,4 @@ autoClaude:
 
 ---
 
-_Handoff preparado por Quinn (@qa) - Guardião da Qualidade_
+_Handoff preparado por Quinn (@quality-gate) - Guardião da Qualidade_

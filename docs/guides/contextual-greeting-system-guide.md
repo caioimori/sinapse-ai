@@ -277,9 +277,9 @@ builder.buildGreeting(mockAgent, { conversationHistory: [] })
 Quando a integração com o processo de ativação estiver implementada (Story 6.1.4/6.1.6), o sistema funcionará automaticamente ao ativar qualquer agente:
 
 ```
-@dev              → Greeting contextual automático
-@po               → Greeting contextual automático
-@qa               → Greeting contextual automático
+@developer              → Greeting contextual automático
+@product-lead               → Greeting contextual automático
+@quality-gate               → Greeting contextual automático
 ```
 
 ## 📁 Arquivos Relacionados
@@ -304,8 +304,8 @@ Quando a integração com o processo de ativação estiver implementada (Story 6
 - `.sinapse-ai/core-config.yaml` - Configuração global (git + agentIdentity sections)
 
 ### Agents (Updated)
-- `.sinapse-ai/agents/dev.md` - ✅ Command visibility metadata
-- `.sinapse-ai/agents/po.md` - ✅ Command visibility metadata
+- `.sinapse-ai/agents/developer.md` - ✅ Command visibility metadata
+- `.sinapse-ai/agents/product-lead.md` - ✅ Command visibility metadata
 - `.sinapse-ai/agents/*.md` - ⏳ Remaining 9 agents (pending update)
 
 ## 🎯 Próximos Passos

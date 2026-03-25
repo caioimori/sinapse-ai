@@ -343,7 +343,7 @@ ${description}
 
 **Next Steps:**
 - Review in backlog: docs/stories/backlog.md
-- @po will prioritize with `*backlog-prioritize ${item.id}`
+- @product-lead will prioritize with `*backlog-prioritize ${item.id}`
 - Can be addressed in dedicated refactoring story or alongside related work
 
 ${priority === 'Critical'
@@ -442,7 +442,7 @@ cat docs/stories/backlog.md
 
 cat docs/stories/backlog.json
 # - Item has type: "T"
-# - createdBy: "@dev"
+# - createdBy: "@developer"
 # - All fields populated correctly
 ```
 
@@ -455,7 +455,7 @@ Add to `package.json`:
 ```json
 {
   "scripts": {
-    "debt:add": "echo 'Use *backlog-debt command from @dev agent'",
+    "debt:add": "echo 'Use *backlog-debt command from @developer agent'",
     "debt:review": "node .sinapse-ai/scripts/backlog-manager.js stats"
   }
 }

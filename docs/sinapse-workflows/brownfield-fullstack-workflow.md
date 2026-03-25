@@ -192,8 +192,8 @@ O analista determina a complexidade do enhancement para rotear ao caminho apropr
 
 | Rota | Agente | Task | Proxima Ação |
 |------|--------|------|--------------|
-| `single_story` | @pm | `brownfield-create-story` | Sair do workflow apos criacao da story |
-| `small_feature` | @pm | `brownfield-create-epic` | Sair do workflow apos criacao do epic |
+| `single_story` | @project-lead | `brownfield-create-story` | Sair do workflow apos criacao da story |
+| `small_feature` | @project-lead | `brownfield-create-epic` | Sair do workflow apos criacao do epic |
 | `major_enhancement` | - | - | Continuar para o proximo step |
 
 ---
@@ -244,7 +244,7 @@ Capturar o estado atual do sistema, divida técnica e restrições. Os achados s
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Template** | `brownfield-prd-tmpl` |
 | **Requisito** | Documentação existente ou análise do Step 4 |
 | **Output** | `docs/prd.md` |
@@ -261,7 +261,7 @@ Capturar o estado atual do sistema, divida técnica e restrições. Os achados s
 
 | Atributo | Valor |
 |----------|-------|
-| **Agentes** | @pm (Morgan) / @architect (Aria) |
+| **Agentes** | @project-lead (Morgan) / @architect (Aria) |
 | **Ação** | Determinar se documento de arquitetura e necessario |
 | **Condição** | Apos criacao do PRD |
 
@@ -296,7 +296,7 @@ Crie documento de arquitetura APENAS para mudanças arquiteturais significativas
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Checklist** | `po-master-checklist` |
 | **Input** | Todos os artefatos criados |
 | **Output** | Validação ou lista de issues |
@@ -334,7 +334,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Task** | `shard-doc` |
 | **Input** | Documentos validados no projeto |
 | **Output** | `docs/prd/` e `docs/architecture/` com conteúdo fragmentado |
@@ -352,7 +352,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @sm (River) |
+| **Agente** | @sprint-lead (River) |
 | **Repete** | Para cada epic ou enhancement |
 | **Input** | Documentos fragmentados ou docs brownfield |
 | **Output** | `story.md` em status "Draft" |
@@ -374,7 +374,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agentes** | @analyst / @pm |
+| **Agentes** | @analyst / @project-lead |
 | **Condição** | Usuario deseja revisao da story |
 | **Input** | `story.md` em Draft |
 | **Output** | Story atualizada: Draft -> Approved |
@@ -387,7 +387,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Requisito** | Story aprovada |
 | **Output** | Arquivos de implementacao |
 
@@ -404,7 +404,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @qa (Quinn) |
+| **Agente** | @quality-gate (Quinn) |
 | **Task** | `review-story` |
 | **Requisito** | Arquivos implementados |
 | **Output** | Implementação revisada |
@@ -423,7 +423,7 @@ Valida todos os documentos quanto a:
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Condição** | QA deixou itens não verificados |
 | **Ação** | Endereca itens restantes |
 
@@ -446,7 +446,7 @@ Continua ate que todas as stories no PRD estejam completas.
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Condição** | Epic completo |
 | **Output** | `epic-retrospective.md` |
 
@@ -473,11 +473,11 @@ Continua ate que todas as stories no PRD estejam completas.
 |--------|------|-------------------|-------|
 | @analyst | Atlas | Classificação de escopo, verificacao de documentação | 1, 3 |
 | @architect | Aria | Documentação de projeto, design de arquitetura | 4, 6, 7 |
-| @pm | Morgan | Criação de PRD, epics e stories simples | 2, 5, 6 |
-| @po | Pax | Validação de artefatos, sharding, retrospectiva | 8, 10, 17 |
-| @sm | River | Criação detalhada de stories | 11 |
-| @dev | Dex | Implementação de stories | 13, 15 |
-| @qa | Quinn | Review de implementacao | 14 |
+| @project-lead | Morgan | Criação de PRD, epics e stories simples | 2, 5, 6 |
+| @product-lead | Pax | Validação de artefatos, sharding, retrospectiva | 8, 10, 17 |
+| @sprint-lead | River | Criação detalhada de stories | 11 |
+| @developer | Dex | Implementação de stories | 13, 15 |
+| @quality-gate | Quinn | Review de implementacao | 14 |
 
 ---
 
@@ -485,16 +485,16 @@ Continua ate que todas as stories no PRD estejam completas.
 
 | Task | Step | Agente | Propósito |
 |------|------|--------|-----------|
-| `brownfield-create-story` | 2 | @pm | Criar story única para enhancements simples |
-| `brownfield-create-epic` | 2 | @pm | Criar epic focado com 1-3 stories |
+| `brownfield-create-story` | 2 | @project-lead | Criar story única para enhancements simples |
+| `brownfield-create-epic` | 2 | @project-lead | Criar epic focado com 1-3 stories |
 | `document-project` | 4 | @architect | Documentar estado atual do sistema brownfield |
-| `brownfield-prd-tmpl` | 5 | @pm | Template para PRD de projeto brownfield |
+| `brownfield-prd-tmpl` | 5 | @project-lead | Template para PRD de projeto brownfield |
 | `brownfield-architecture-tmpl` | 7 | @architect | Template para arquitetura brownfield |
-| `po-master-checklist` | 8 | @po | Validação abrangente de artefatos |
-| `shard-doc` | 10 | @po | Fragmentar documentos em arquivos menores |
-| `create-next-story` | 11 | @sm | Criar story de PRD sharded |
-| `create-brownfield-story` | 11 | @sm | Criar story de docs brownfield |
-| `review-story` | 14 | @qa | Review de implementacao |
+| `po-master-checklist` | 8 | @product-lead | Validação abrangente de artefatos |
+| `shard-doc` | 10 | @product-lead | Fragmentar documentos em arquivos menores |
+| `create-next-story` | 11 | @sprint-lead | Criar story de PRD sharded |
+| `create-brownfield-story` | 11 | @sprint-lead | Criar story de docs brownfield |
+| `review-story` | 14 | @quality-gate | Review de implementacao |
 
 ---
 
@@ -811,11 +811,11 @@ stateDiagram-v2
 |---------|--------|
 | `.sinapse-ai/development/agents/analyst.md` | @analyst (Atlas) |
 | `.sinapse-ai/development/agents/architect.md` | @architect (Aria) |
-| `.sinapse-ai/development/agents/pm.md` | @pm (Morgan) |
-| `.sinapse-ai/development/agents/po.md` | @po (Pax) |
-| `.sinapse-ai/development/agents/sm.md` | @sm (River) |
-| `.sinapse-ai/development/agents/dev.md` | @dev (Dex) |
-| `.sinapse-ai/development/agents/qa.md` | @qa (Quinn) |
+| `.sinapse-ai/development/agents/project-lead.md` | @project-lead (Morgan) |
+| `.sinapse-ai/development/agents/product-lead.md` | @product-lead (Pax) |
+| `.sinapse-ai/development/agents/sprint-lead.md` | @sprint-lead (River) |
+| `.sinapse-ai/development/agents/developer.md` | @developer (Dex) |
+| `.sinapse-ai/development/agents/quality-gate.md` | @quality-gate (Quinn) |
 
 ### Documentação Relacionada
 

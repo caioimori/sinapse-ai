@@ -453,10 +453,10 @@ flowchart TB
 | Pesquisa de usuario, personas | @ux-design-expert |
 | Wireframes e prototipos | @ux-design-expert |
 | Auditoria de design system | @ux-design-expert |
-| Construcao de componentes | @ux-design-expert ou @dev |
+| Construcao de componentes | @ux-design-expert ou @developer |
 | Arquitetura frontend | @architect |
-| Implementacao de codigo | @dev |
-| Review de acessibilidade | @ux-design-expert ou @qa |
+| Implementacao de codigo | @developer |
+| Review de acessibilidade | @ux-design-expert ou @quality-gate |
 | Analise de ROI | @ux-design-expert ou @analyst |
 
 ### Handoffs Tipicos
@@ -465,9 +465,9 @@ flowchart TB
 |----|------|----------|-----------|
 | @ux-design-expert | @architect | front-end-spec.md | Especificacao para arquitetura |
 | @architect | @ux-design-expert | architecture.md | Constrains tecnicas |
-| @ux-design-expert | @dev | Component specs + tokens | Implementacao |
-| @dev | @ux-design-expert | Feedback de implementacao | Ajustes de design |
-| @qa | @ux-design-expert | A11y report | Remediacoes |
+| @ux-design-expert | @developer | Component specs + tokens | Implementacao |
+| @developer | @ux-design-expert | Feedback de implementacao | Ajustes de design |
+| @quality-gate | @ux-design-expert | A11y report | Remediacoes |
 
 ---
 
@@ -611,11 +611,11 @@ graph TD
 
 Workflow completo para projetos UI existentes:
 1. **Analyze** - @architect analisa projeto
-2. **PRD** - @pm cria PRD
+2. **PRD** - @project-lead cria PRD
 3. **Spec** - @ux-design-expert cria front-end-spec
 4. **Architecture** - @architect cria arquitetura
-5. **Validate** - @po valida artefatos
-6. **Development Cycle** - @sm, @dev, @qa
+5. **Validate** - @product-lead valida artefatos
+6. **Development Cycle** - @sprint-lead, @developer, @qa
 
 ---
 
@@ -817,7 +817,7 @@ flowchart BT
 | **Total de Comandos** | 19 comandos + 4 universais |
 | **Fases do Workflow** | 5 (Research, Audit, Tokens, Build, Quality) |
 | **Workflows Relacionados** | 4 (design-system-build-quality, brownfield-ui, brownfield-discovery, greenfield-ui) |
-| **Agentes Colaboradores** | 4 (@architect, @dev, @qa, @analyst) |
+| **Agentes Colaboradores** | 4 (@architect, @developer, @quality-gate, @analyst) |
 | **Metodologia Central** | Atomic Design (Brad Frost) |
 | **Nivel de Acessibilidade** | WCAG AA minimo, AAA ideal |
 

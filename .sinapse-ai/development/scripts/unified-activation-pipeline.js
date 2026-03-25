@@ -104,7 +104,7 @@ const DEFAULT_PIPELINE_TIMEOUT_MS = 500;
 const ALL_AGENT_IDS = [
   'dev', 'qa', 'architect', 'pm', 'po', 'sm',
   'analyst', 'data-engineer', 'ux-design-expert',
-  'devops', 'sinapse-master', 'squad-creator',
+  'devops', 'sinapse-orqx', 'squad-creator',
 ];
 
 /**
@@ -627,7 +627,7 @@ class UnifiedActivationPipeline {
       'data-engineer': '\uD83D\uDDC4\uFE0F',
       'ux-design-expert': '\uD83C\uDFA8',
       'devops': '\u2699\uFE0F',
-      'sinapse-master': '\uD83D\uDC51',
+      'sinapse-orqx': '\uD83D\uDC51',
       'squad-creator': '\uD83D\uDC65',
     };
     return icons[agentId] || '\uD83E\uDD16';

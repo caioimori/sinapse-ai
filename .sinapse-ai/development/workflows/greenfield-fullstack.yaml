@@ -163,7 +163,7 @@ workflow:
         - fullstack-architecture.md
       notes: |
         Shard documents for IDE development:
-        - Option A: Use PO agent to shard: @po then ask to shard docs/prd.md
+        - Option A: Use PO agent to shard: @product-lead then ask to shard docs/prd.md
         - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
         - Creates docs/prd/ and docs/architecture/ folders with sharded content
         - Generates: source-tree.md, tech-stack.md, coding-standards.md
@@ -184,7 +184,7 @@ workflow:
       repeats: for_each_epic
       notes: |
         Story creation cycle:
-        - SM Agent (New Chat): @sm → *create
+        - SM Agent (New Chat): @sprint-lead → *create
         - Creates next story from sharded docs
         - Story starts in "Draft" status
 
@@ -204,7 +204,7 @@ workflow:
         - Update story status: Draft → Approved
 
     - id: dev-implement-story
-      agent: dev
+      agent: developer
       action: implement_story
       creates: implementation_files
       duration_estimate: "1-4 hours"
@@ -223,14 +223,14 @@ workflow:
       requires: implementation_files
       optional: true
       notes: |
-        OPTIONAL: QA Agent (New Chat): @qa → review-story
+        OPTIONAL: QA Agent (New Chat): @quality-gate → review-story
         - Senior dev review with refactoring ability
         - Fixes small issues directly
         - Leaves checklist for remaining items
         - Updates story status (Review → Done or stays Review)
 
     - id: dev-address-qa-feedback
-      agent: dev
+      agent: developer
       action: address_qa_feedback
       updates: implementation_files
       requires: implementation_files
@@ -375,10 +375,10 @@ workflow:
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
 
     # Phase 1 → Phase 2
-    phase1_to_phase2: "All planning artifacts validated. Now shard documents for development: @po → *shard-doc docs/prd.md"
+    phase1_to_phase2: "All planning artifacts validated. Now shard documents for development: @product-lead → *shard-doc docs/prd.md"
 
     # Phase 2 → Phase 3
-    phase2_to_phase3: "Documents sharded! source-tree.md, tech-stack.md, coding-standards.md created. Start development: @sm → *create-story"
+    phase2_to_phase3: "Documents sharded! source-tree.md, tech-stack.md, coding-standards.md created. Start development: @sprint-lead → *create-story"
 
     # Completion
     complete: "All stories implemented and reviewed. Project development phase complete!"

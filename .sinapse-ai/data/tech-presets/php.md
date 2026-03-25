@@ -454,8 +454,8 @@ final class OrdersController
 ### SINAPSE Commands
 
 ```bash
-@dev "Follow the php preset patterns for this feature"
-@qa "Validate form-request boundaries, action orchestration, and test coverage"
+@developer "Follow the php preset patterns for this feature"
+@quality-gate "Validate form-request boundaries, action orchestration, and test coverage"
 ```
 
 ---

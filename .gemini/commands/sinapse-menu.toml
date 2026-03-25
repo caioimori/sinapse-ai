@@ -3,7 +3,7 @@ prompt = """
 Você está no launcher SINAPSE para Gemini.
 
 Mostre a lista de agentes abaixo em formato numerado, explicando em 1 linha quando usar cada um:
-1. /sinapse-master - SINAPSE Master Orchestrator & Framework Developer (Use when you need comprehensive expertise across all domains, framework component creation/modification, workflow orche…)
+1. /sinapse-orqx - SINAPSE Master Orchestrator & Framework Developer (Use when you need comprehensive expertise across all domains, framework component creation/modification, workflow orche…)
 2. /sinapse-analyst - Business Analyst (Use for market research, competitive analysis, user research, brainstorming session facilitation, structured ideation w…)
 3. /sinapse-architect - Architect (Use for system architecture (fullstack, backend, frontend, infrastructure), technology stack selection (technical evalu…)
 4. /sinapse-data-engineer - Database Architect & Operations Engineer (Use for database design, schema architecture, Supabase configuration, RLS policies, migrations, query optimization, dat…)

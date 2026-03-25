@@ -438,8 +438,8 @@ app.MapPost("/orders", async (PlaceOrderRequest request, PlaceOrderHandler handl
 ### SINAPSE Commands
 
 ```bash
-@dev "Follow the csharp preset patterns for this service"
-@qa "Validate async boundaries, validation, and persistence behavior"
+@developer "Follow the csharp preset patterns for this service"
+@quality-gate "Validate async boundaries, validation, and persistence behavior"
 ```
 
 ---

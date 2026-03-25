@@ -3,20 +3,20 @@
 const { getEnricher, getClient, isCodeIntelAvailable } = require('../index');
 
 /**
- * StoryHelper — Code intelligence helper for @sm/@po agent tasks.
+ * StoryHelper — Code intelligence helper for @sm/@product-lead agent tasks.
  *
  * All functions return null gracefully when no provider is available.
  * Never throws — safe to call unconditionally in task workflows.
  *
  * Functions:
- *   - detectDuplicateStory(description) — for @sm story creation (advisory warning)
- *   - suggestRelevantFiles(description) — for @sm story creation (file suggestions)
- *   - validateNoDuplicates(description) — for @po story validation (checklist boolean)
+ *   - detectDuplicateStory(description) — for @sprint-lead story creation (advisory warning)
+ *   - suggestRelevantFiles(description) — for @sprint-lead story creation (file suggestions)
+ *   - validateNoDuplicates(description) — for @product-lead story validation (checklist boolean)
  */
 
 /**
  * Detect duplicate stories/functionality in the codebase.
- * Used by @sm during story creation — returns advisory warning only, never blocks.
+ * Used by @sprint-lead during story creation — returns advisory warning only, never blocks.
  *
  * @param {string} description - Story description to check for duplicates
  * @returns {Promise<{matches: Array, warning: string}|null>} Duplicate info or null
@@ -43,7 +43,7 @@ async function detectDuplicateStory(description) {
 /**
  * Suggest relevant files for a new story based on description.
  * Composes findReferences + analyzeCodebase for comprehensive file suggestions.
- * Used by @sm during story creation to pre-populate "Suggested Files" section.
+ * Used by @sprint-lead during story creation to pre-populate "Suggested Files" section.
  *
  * @param {string} description - Story description to find relevant files for
  * @returns {Promise<{files: Array, codebaseContext: Object|null}|null>} File suggestions or null
@@ -87,7 +87,7 @@ async function suggestRelevantFiles(description) {
 
 /**
  * Validate that a story description does not duplicate existing functionality.
- * Used by @po during story validation — returns boolean for checklist item.
+ * Used by @product-lead during story validation — returns boolean for checklist item.
  *
  * @param {string} description - Story description to validate
  * @returns {Promise<{hasDuplicates: boolean, matches: Array, suggestion: string|null}|null>} Validation result or null

@@ -195,22 +195,22 @@ describe('WorkflowExecutor', () => {
   describe('Agent Resolution', () => {
     test('should resolve static agent reference', async () => {
       const executor = new WorkflowExecutor(projectRoot);
-      executor.state = { executor: '@dev', qualityGate: '@architect' };
+      executor.state = { executor: '@developer', qualityGate: '@architect' };
 
-      expect(executor.resolveAgent('@po')).toBe('@po');
+      expect(executor.resolveAgent('@product-lead')).toBe('@product-lead');
       expect(executor.resolveAgent('@devops')).toBe('@devops');
     });
 
     test('should resolve dynamic executor reference', async () => {
       const executor = new WorkflowExecutor(projectRoot);
-      executor.state = { executor: '@dev', qualityGate: '@architect' };
+      executor.state = { executor: '@developer', qualityGate: '@architect' };
 
-      expect(executor.resolveAgent('${story.executor}')).toBe('@dev');
+      expect(executor.resolveAgent('${story.executor}')).toBe('@developer');
     });
 
     test('should resolve dynamic quality_gate reference', async () => {
       const executor = new WorkflowExecutor(projectRoot);
-      executor.state = { executor: '@dev', qualityGate: '@architect' };
+      executor.state = { executor: '@developer', qualityGate: '@architect' };
 
       expect(executor.resolveAgent('${story.quality_gate}')).toBe('@architect');
     });
@@ -254,7 +254,7 @@ describe('WorkflowExecutor', () => {
       await executor.loadWorkflow();
       executor.config = { coderabbit_integration: { enabled: false } };
       executor.state = {
-        executor: '@dev',
+        executor: '@developer',
         qualityGate: '@architect',
         phaseResults: {},
         accumulatedContext: {},
@@ -312,15 +312,15 @@ status: "Approved"
 \`\`\`yaml
 story_id: "test"
 status: "Approved"
-executor: "@dev"
-quality_gate: "@dev"
+executor: "@developer"
+quality_gate: "@developer"
 \`\`\`
       `,
       );
 
       executor.state = {
-        executor: '@dev',
-        qualityGate: '@dev',
+        executor: '@developer',
+        qualityGate: '@developer',
         accumulatedContext: {},
       };
 
@@ -338,6 +338,7 @@ quality_gate: "@dev"
       await executor.loadConfig();
 
       // Create a mock story file
+      // Note: executor-assignment table still uses short IDs (@dev, not @developer)
       const mockStoryPath = path.join(tmpDir, 'test-story3.story.md');
       await fs.writeFile(
         mockStoryPath,
@@ -374,7 +375,7 @@ quality_gate: "@architect"
       const executor = new WorkflowExecutor(projectRoot, { saveState: false });
       await executor.loadWorkflow();
       executor.state = {
-        executor: '@dev',
+        executor: '@developer',
         qualityGate: '@architect',
         phaseResults: {},
       };
@@ -472,7 +473,7 @@ quality_gate: "@architect"
       await executor.loadWorkflow();
       executor.config = { coderabbit_integration: { enabled: false } };
       executor.state = {
-        executor: '@dev',
+        executor: '@developer',
         qualityGate: '@architect',
         phaseResults: {},
       };
@@ -658,7 +659,7 @@ describe('development-cycle.yaml', () => {
 
     expect(workflow.workflow.id).toBe('development-cycle');
     expect(workflow.workflow.name).toContain('Development Cycle');
-    expect(workflow.workflow.orchestrator).toBe('@po');
+    expect(workflow.workflow.orchestrator).toBe('@product-lead');
     expect(workflow.workflow.phases).toBeDefined();
     expect(workflow.workflow.error_handlers).toBeDefined();
   });

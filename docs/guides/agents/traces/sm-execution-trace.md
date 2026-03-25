@@ -1,7 +1,7 @@
-# @sm (River) - Execution Trace
+# @sprint-lead (River) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.sinapse-ai/development/agents/sm.md`
+> Agent definition: `.sinapse-ai/development/agents/sprint-lead.md`
 
 ## 1. Activation Trace
 
@@ -9,7 +9,7 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.sinapse-ai/development/agents/sm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 1 | `.sinapse-ai/development/agents/sprint-lead.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
 | 2 | `.sinapse-ai/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
 | 3 | `.sinapse-ai/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog, dataLocation |
 | 4 | `.sinapse-ai/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
@@ -304,34 +304,34 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @po -> @sm | Receives | Backlog prioritization, story validation requests |
-| @pm -> @sm | Receives | Epic structure for story breakdown |
-| @sm -> @dev | Handoff | Completed stories for implementation |
-| @sm -> @devops | Delegate | Git push operations, PR creation after story completion |
-| @sm <-> @po | Collaborate | Sprint planning, backlog grooming |
+| @product-lead -> @sprint-lead | Receives | Backlog prioritization, story validation requests |
+| @project-lead -> @sprint-lead | Receives | Epic structure for story breakdown |
+| @sprint-lead -> @developer | Handoff | Completed stories for implementation |
+| @sprint-lead -> @devops | Delegate | Git push operations, PR creation after story completion |
+| @sprint-lead <-> @product-lead | Collaborate | Sprint planning, backlog grooming |
 
 ### Delegation Rules (from agent definition)
 
-**Coordinates with @po when:**
+**Coordinates with @product-lead when:**
 - Backlog prioritization and grooming
 - Sprint planning
-- Story validation (`@po *validate-story-draft`)
+- Story validation (`@product-lead *validate-story-draft`)
 
-**Receives from @pm when:**
+**Receives from @project-lead when:**
 - Epic structure is ready for story breakdown
 - Strategic direction for sprint goals
 
-**Hands off to @dev when:**
+**Hands off to @developer when:**
 - Story is drafted, validated, and ready for implementation
-- Developer receives story via `@dev *develop`
+- Developer receives story via `@developer *develop`
 
 **Delegates to @devops when:**
 - Git push operations to remote repository
 - Pull request creation and management
 - Remote branch operations
 
-**Escalates to @sinapse-master when:**
-- Course corrections needed (`@sinapse-master *correct-course`)
+**Escalates to @sinapse-orqx when:**
+- Course corrections needed (`@sinapse-orqx *correct-course`)
 
 **Git restrictions:**
 - ALLOWED: `git status`, `git log`, `git diff`, `git branch`, `git branch -d`, `git checkout -b`, `git checkout`, `git merge`

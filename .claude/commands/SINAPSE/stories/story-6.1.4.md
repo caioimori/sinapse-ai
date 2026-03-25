@@ -671,7 +671,7 @@ module.exports = { generateGreeting };
 
 **Manual Update Steps:**
 
-1. Open `.sinapse-ai/agents/qa.md`
+1. Open `.sinapse-ai/agents/quality-gate.md`
 2. Find STEP 3 section (starts with `- STEP 3: |`)
 3. Replace entire STEP 3 block with new format above
 4. Save file
@@ -781,7 +781,7 @@ module.exports = { generateGreeting };
 6. `analyst.md`
 7. `data-engineer.md`
 8. `devops.md`
-9. `sinapse-master.md`
+9. `sinapse-orqx.md`
 10. `ux-design-expert.md`
 
 **Implementation Script:**
@@ -795,7 +795,7 @@ const path = require('path');
 const AGENTS_DIR = path.join(process.cwd(), '.sinapse-ai', 'agents');
 const REMAINING_AGENTS = [
   'dev', 'po', 'sm', 'pm', 'architect', 'analyst',
-  'data-engineer', 'devops', 'sinapse-master', 'ux-design-expert'
+  'data-engineer', 'devops', 'sinapse-orqx', 'ux-design-expert'
 ];
 
 const NEW_STEP_3_TEMPLATE = `  - STEP 3: |
@@ -870,7 +870,7 @@ console.log(`📊 Total: ${updated + 1} agents (including QA pilot)`);
 **Quick Validation Test:**
 ```bash
 # Test each agent activation
-for agent in dev po sm pm architect analyst data-engineer devops sinapse-master ux-design-expert; do
+for agent in dev po sm pm architect analyst data-engineer devops sinapse-orqx ux-design-expert; do
   echo "Testing $agent..."
   node .sinapse-ai/scripts/generate-greeting.js $agent
   echo "---"
@@ -1109,12 +1109,12 @@ describe('Greeting System Integration', () => {
 
 ### Quality Gate Tasks
 
-- [ ] **Pre-Commit (@dev):** Run before marking story complete
+- [ ] **Pre-Commit (@developer):** Run before marking story complete
   - Focus: Code quality, error handling, fallback mechanisms
   - Validate: All error paths have fallbacks
   - Check: Performance targets met (<50ms cache, <150ms no cache)
   
-- [ ] **Pre-PR (@dev):** Run before creating pull request
+- [ ] **Pre-PR (@developer):** Run before creating pull request
   - Focus: Integration safety, backward compatibility
   - Validate: No breaking changes to existing agent activation
   - Check: All 11 agents still activate correctly
@@ -1181,7 +1181,7 @@ describe('Greeting System Integration', () => {
 - `.sinapse-ai/scripts/agent-config-loader.js` (Expanded with `loadAgentDefinition()` and `loadComplete()`)
 - `.sinapse-ai/scripts/greeting-builder.js` (Modified to accept pre-loaded context)
 - `.sinapse-ai/scripts/config-loader.js` (Deprecated warning added)
-- `.sinapse-ai/agents/qa.md` (Pilot - STEP 3 updated first)
+- `.sinapse-ai/agents/quality-gate.md` (Pilot - STEP 3 updated first)
 - `.sinapse-ai/agents/*.md` (Remaining 10 agents - STEP 3 updated after QA validation)
 
 ### Files Deleted

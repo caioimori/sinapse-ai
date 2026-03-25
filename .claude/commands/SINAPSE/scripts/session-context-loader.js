@@ -2,7 +2,7 @@
  * Session Context Loader - Multi-Agent Session Continuity
  *
  * Provides session context when transitioning between agents.
- * Solves the problem: "@po approved story, @dev doesn't know about it"
+ * Solves the problem: "@product-lead approved story, @developer doesn't know about it"
  *
  * Features:
  * - Detects previous agent in session

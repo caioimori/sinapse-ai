@@ -193,12 +193,12 @@ Cada agente tem um arquivo dedicado:
 Agentes são ativados usando @mentions no chat:
 
 ```
-@dev         # Agente desenvolvedor
-@qa          # Agente engenheiro de QA
+@developer         # Agente desenvolvedor
+@quality-gate          # Agente engenheiro de QA
 @architect   # Agente arquiteto de software
-@pm          # Agente gerente de projeto
-@po          # Agente product owner
-@sm          # Agente scrum master
+@project-lead          # Agente gerente de projeto
+@product-lead          # Agente product owner
+@sprint-lead          # Agente scrum master
 @analyst     # Agente analista de negócios
 @devops      # Agente engenheiro DevOps
 ```
@@ -206,13 +206,13 @@ Agentes são ativados usando @mentions no chat:
 ### Exemplos de Ativação de Agentes
 
 ```
-@dev implemente a feature de autenticação seguindo a story
+@developer implemente a feature de autenticação seguindo a story
 
-@qa revise este código para vulnerabilidades de segurança
+@quality-gate revise este código para vulnerabilidades de segurança
 
 @architect projete a arquitetura de microserviços para o sistema de pagamento
 
-@pm crie um plano de sprint para as próximas duas semanas
+@project-lead crie um plano de sprint para as próximas duas semanas
 ```
 
 ### Usando o Composer
@@ -226,7 +226,7 @@ O Composer do Cursor permite edição multi-arquivo:
 
 ```
 # Exemplo de prompt do Composer
-@dev Crie um novo endpoint REST API para registro de usuário.
+@developer Crie um novo endpoint REST API para registro de usuário.
 Inclua:
 - Handler de rota em src/routes/
 - Middleware de validação
@@ -241,7 +241,7 @@ Referencie o contexto completo do seu projeto:
 ```
 @codebase Como a autenticação está atualmente implementada?
 
-@codebase @dev Refatore as queries do banco de dados para usar o padrão repository
+@codebase @developer Refatore as queries do banco de dados para usar o padrão repository
 ```
 
 ---
@@ -264,7 +264,7 @@ Refatore o módulo de usuário para seguir clean architecture:
 #### Implementação de Feature
 
 ```
-@dev @codebase
+@developer @codebase
 Implemente a feature de carrinho de compras:
 - Modelo e migrations do carrinho
 - Operações CRUD
@@ -289,8 +289,8 @@ Selecione código e use `Cmd/Ctrl + K`:
 
 ```
 # Selecione código, então:
-@dev otimize esta função para performance
-@qa adicione tratamento de erros a este bloco
+@developer otimize esta função para performance
+@quality-gate adicione tratamento de erros a este bloco
 ```
 
 ### Organização de Regras
@@ -390,7 +390,7 @@ npm run sync:ide
 Agentes no Cursor usam formato markdown condensado:
 
 ```markdown
-# Agente Desenvolvedor (@dev)
+# Agente Desenvolvedor (@developer)
 
 ## Papel
 
@@ -503,7 +503,7 @@ Problema: Cursor está lento com projetos grandes
 #### Agente Não Reconhecido
 
 ```
-Problema: @dev não ativa agente
+Problema: @developer não ativa agente
 ```
 
 **Solução:**

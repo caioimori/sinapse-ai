@@ -1,7 +1,7 @@
 # Subagent Step Prompt Template
 
 > **Purpose:** Reusable template for constructing subagent prompts in the Workflow Runtime Engine.
-> Each variable is replaced at runtime by the orchestrator (sinapse-master) before spawning the subagent via the Task tool.
+> Each variable is replaced at runtime by the orchestrator (sinapse-orqx) before spawning the subagent via the Task tool.
 
 ---
 
@@ -114,7 +114,7 @@ The `{{TASK_CONTENT}}` variable should contain the full task file content, from 
 ## Notes
 
 - This template is referenced by `run-workflow-engine.md` task
-- The orchestrator (sinapse-master) builds the prompt by reading files and replacing variables
+- The orchestrator (sinapse-orqx) builds the prompt by reading files and replacing variables
 - Subagents receive the complete prompt and execute autonomously
 - The orchestrator parses the `step_output` YAML block from the subagent's response
 - If the subagent fails to produce a valid YAML block, the orchestrator retries or requests manual intervention

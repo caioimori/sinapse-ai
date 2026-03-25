@@ -10,35 +10,35 @@ workflows:
     description: Full 4-phase workflow for all development work
     chain:
       - step: 1
-        agent: "@sm"
+        agent: "@sprint-lead"
         command: "*draft"
         task: create-next-story.md
         output: Story file (Draft)
         condition: Epic context available
       - step: 2
-        agent: "@po"
+        agent: "@product-lead"
         command: "*validate-story-draft {story-id}"
         task: validate-next-story.md
         output: GO/NO-GO decision
         condition: Story status is Draft
       - step: 3
-        agent: "@dev"
+        agent: "@developer"
         command: "*develop {story-id}"
         task: dev-develop-story.md
         output: Implementation complete
         condition: Story status is Approved
         alternatives:
-          - agent: "@dev"
+          - agent: "@developer"
             command: "*develop-yolo {story-id}"
             condition: Simple story, autonomous mode preferred
       - step: 4
-        agent: "@qa"
+        agent: "@quality-gate"
         command: "*review {story-id}"
         task: qa-gate.md
         output: PASS/CONCERNS/FAIL/WAIVED
         condition: Story status is Ready for Review
         alternatives:
-          - agent: "@qa"
+          - agent: "@quality-gate"
             command: "*gate {story-id}"
             condition: Quick gate decision needed
       - step: 5
@@ -55,23 +55,23 @@ workflows:
     max_iterations: 5
     chain:
       - step: 1
-        agent: "@qa"
+        agent: "@quality-gate"
         command: "*review {story-id}"
         task: qa-review-story.md
         output: APPROVE/REJECT/BLOCKED verdict
         condition: Story has code changes to review
       - step: 2
-        agent: "@dev"
+        agent: "@developer"
         command: "*apply-qa-fixes"
         task: apply-qa-fixes.md
         output: Fixes applied
         condition: QA verdict is REJECT
         alternatives:
-          - agent: "@dev"
+          - agent: "@developer"
             command: "*fix-qa-issues"
             condition: Structured fix from QA_FIX_REQUEST.md
       - step: 3
-        agent: "@qa"
+        agent: "@quality-gate"
         command: "*review {story-id}"
         task: qa-review-story.md
         output: Re-review verdict
@@ -83,7 +83,7 @@ workflows:
     description: Transform informal requirements into executable spec
     chain:
       - step: 1
-        agent: "@pm"
+        agent: "@project-lead"
         command: "*gather-requirements"
         task: spec-gather-requirements.md
         output: requirements.json
@@ -101,13 +101,13 @@ workflows:
         output: research.json
         condition: STANDARD or COMPLEX class (skip if SIMPLE)
       - step: 4
-        agent: "@pm"
+        agent: "@project-lead"
         command: "*write-spec"
         task: spec-write-spec.md
         output: spec.md
         condition: Requirements gathered
       - step: 5
-        agent: "@qa"
+        agent: "@quality-gate"
         command: "*critique-spec {story-id}"
         task: spec-critique.md
         output: APPROVED/NEEDS_REVISION/BLOCKED
@@ -143,13 +143,13 @@ workflows:
         output: frontend-spec.md
         condition: Frontend exists in project
       - step: 4
-        agent: "@qa"
+        agent: "@quality-gate"
         command: "*review"
         task: qa-review-story.md
         output: APPROVED/NEEDS WORK
         condition: All specialist reviews complete
       - step: 5
-        agent: "@pm"
+        agent: "@project-lead"
         command: "*create-epic"
         task: brownfield-create-epic.md
         output: Epic + stories ready for development

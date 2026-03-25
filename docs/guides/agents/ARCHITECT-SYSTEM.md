@@ -77,9 +77,9 @@ O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Tech
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.sinapse-ai/development/tasks/spec-gather-requirements.md` | @pm | Coleta requisitos que alimentam arquitetura |
+| `.sinapse-ai/development/tasks/spec-gather-requirements.md` | @project-lead | Coleta requisitos que alimentam arquitetura |
 | `.sinapse-ai/development/tasks/spec-research-dependencies.md` | @analyst | Pesquisa dependencias para arquitetura |
-| `.sinapse-ai/development/tasks/spec-critique.md` | @qa | Valida specs que impactam arquitetura |
+| `.sinapse-ai/development/tasks/spec-critique.md` | @quality-gate | Valida specs que impactam arquitetura |
 | `.sinapse-ai/development/tasks/plan-create-implementation.md` | @architect | Cria plano de implementacao pos-spec |
 | `.sinapse-ai/development/agents/db-sage.md` | @db-sage | Colabora em arquitetura de dados |
 | `.sinapse-ai/development/agents/ux-design-expert.md` | @ux-design-expert | Colabora em arquitetura frontend |
@@ -92,7 +92,7 @@ O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Tech
 ```mermaid
 flowchart TB
     subgraph INPUTS["ENTRADAS"]
-        PRD["PRD\n(do @pm)"]
+        PRD["PRD\n(do @project-lead)"]
         FRONTEND_SPEC["Front-end Spec\n(do @ux-design-expert)"]
         REQUIREMENTS["Requirements\n(do usuario/stakeholder)"]
         EXISTING_PROJECT["Projeto Existente\n(brownfield)"]
@@ -336,7 +336,7 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph RECEIVES_FROM["RECEBE INPUTS DE"]
-        PM["@pm (Morgan)\n- PRD\n- Requisitos de negocio"]
+        PM["@project-lead (Morgan)\n- PRD\n- Requisitos de negocio"]
         UX["@ux-design-expert (Uma)\n- Front-end Spec\n- UI Patterns"]
         ANALYST["@analyst (Atlas)\n- Research Results\n- Technical Findings"]
     end
@@ -350,8 +350,8 @@ flowchart TB
 
     subgraph DELIVERS_TO["ENTREGA PARA"]
         DEV["@dev\n- Arquitetura para implementar"]
-        PO["@po (Pax)\n- Validacao de artifacts"]
-        SM["@sm (River)\n- Stories para sprint"]
+        PO["@product-lead (Pax)\n- Validacao de artifacts"]
+        SM["@sprint-lead (River)\n- Stories para sprint"]
     end
 
     PM --> ARCHITECT
@@ -378,7 +378,7 @@ flowchart TB
 | **Database** | Selecao de tecnologia, integracao | Schema design, query optimization -> @db-sage |
 | **Git Operations** | `git status`, `git log`, `git diff` | `git push`, `gh pr create` -> @devops |
 | **Frontend** | Arquitetura de estado, routing | UX/UI design -> @ux-design-expert |
-| **Code** | Patterns, estrutura | Implementacao -> @dev |
+| **Code** | Patterns, estrutura | Implementacao -> @developer |
 | **Research** | Decisoes tecnologicas | Market research -> @analyst |
 
 ### Padrao de Colaboracao com @db-sage
@@ -701,7 +701,7 @@ Ative @github-devops para operacoes de push:
 
 - [@db-sage](.sinapse-ai/development/agents/db-sage.md) - Arquitetura de dados
 - [@ux-design-expert](.sinapse-ai/development/agents/ux-design-expert.md) - Arquitetura frontend
-- [@pm](.sinapse-ai/development/agents/pm.md) - Requisitos e PRD
+- [@pm](.sinapse-ai/development/agents/project-lead.md) - Requisitos e PRD
 - [@devops](.sinapse-ai/development/agents/devops.md) - Git push e infraestrutura
 
 ---
@@ -718,7 +718,7 @@ Ative @github-devops para operacoes de push:
 | **Comandos de Analise** | 3 (`*analyze-impact`, `*assess-complexity`, `*research`) |
 | **Comandos de Docs** | 3 (`*document-project`, `*execute-checklist`, `*create-doc`) |
 | **Workflows Envolvidos** | 4 (greenfield-fullstack, brownfield-fullstack, spec-pipeline, qa-loop) |
-| **Agentes que Colaboram** | 5 (@pm, @ux-design-expert, @db-sage, @devops, @analyst) |
+| **Agentes que Colaboram** | 5 (@project-lead, @ux-design-expert, @db-sage, @devops, @analyst) |
 | **Restricoes de Git** | Read-only (push -> @devops) |
 | **Tools Externos** | 6 (exa, context7, git, supabase-cli, railway-cli, coderabbit) |
 

@@ -35,35 +35,35 @@ Required justification:
 
 ## Verification Gates G1-G6
 
-### G1: Epic Creation (@pm)
+### G1: Epic Creation (@project-lead)
 - **Type:** Human-in-loop, Advisory
 - **Trigger:** `*create-epic` workflow
 - **Action:** Query registry for related entities, display potentially reusable artifacts
 - **Latency:** < 24h (async)
 - **Blocking:** No
 
-### G2: Story Creation (@sm)
+### G2: Story Creation (@sprint-lead)
 - **Type:** Human-in-loop, Advisory
 - **Trigger:** `*draft` workflow
 - **Action:** Check existing tasks/templates matching story work
 - **Latency:** < 24h (async)
 - **Blocking:** No
 
-### G3: Story Validation (@po)
+### G3: Story Validation (@product-lead)
 - **Type:** Human-in-loop, Soft Block
 - **Trigger:** `*validate-story-draft` workflow
 - **Action:** Verify referenced artifacts exist, detect potential duplication
 - **Latency:** < 4h (async)
 - **Blocking:** Soft (can override with reason)
 
-### G4: Dev Context (@dev)
+### G4: Dev Context (@developer)
 - **Type:** Automated, Informational
 - **Trigger:** Story assignment / `*develop` start
 - **Action:** Display matching patterns as reminder
 - **Latency:** < 2s
 - **Blocking:** NO (logged only for metrics)
 
-### G5: QA Review (@qa)
+### G5: QA Review (@quality-gate)
 - **Type:** Automated, Blocks Merge
 - **Trigger:** PR/merge request
 - **Action:** Check if new artifacts could have reused existing

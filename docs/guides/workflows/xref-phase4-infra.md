@@ -51,7 +51,7 @@ These scripts are imported in `.sinapse-ai/infrastructure/index.js` and exposed 
 | 19 | `scripts/dependency-impact-analyzer.js` | Analysis | Analyzes impact of dependency changes | -- | tasks (propose-modification, architect-analyze-impact, qa-review) | No |
 | 20 | `scripts/framework-analyzer.js` | Analysis | Discovers and catalogs framework components | `fs`, `yaml`, `chalk` | verify-workflow-gaps, tasks/analyze-framework, core-config | No |
 | 21 | `scripts/capability-analyzer.js` | Analysis | Analyzes agent/component capabilities | security-checker | improvement-validator, tasks/improve-self, elicitation-engine | No |
-| 22 | `scripts/security-checker.js` | Analysis | Security validation for components | -- | component-generator, elicitation-engine, sinapse-master agent | No |
+| 22 | `scripts/security-checker.js` | Analysis | Security validation for components | -- | component-generator, elicitation-engine, sinapse-orqx agent | No |
 | 23 | `scripts/modification-risk-assessment.js` | Analysis | Assesses risk of modifications | -- | tasks/architect-analyze-impact | No |
 | 24 | `scripts/coverage-analyzer.js` | Testing | Test coverage analysis | -- | tasks/qa-generate-tests | No |
 | 25 | `scripts/test-generator.js` | Testing | Test file generation | -- | tasks/qa-generate-tests, getting-started docs | No |
@@ -82,7 +82,7 @@ These scripts are imported in `.sinapse-ai/infrastructure/index.js` and exposed 
 | 50 | `scripts/config-cache.js` | Config | Configuration caching layer | -- | config-resolver, agent-config-loader, core modules | No |
 | 51 | `scripts/config-loader.js` | Config | Configuration file loading | -- | index.js internal reference | No |
 | 52 | `scripts/output-formatter.js` | Config | Output formatting utilities | -- | core index, workflow-intelligence, CLI search, many tests | No |
-| 53 | `scripts/yaml-validator.js` | Config | YAML file validation | -- | component-generator, modification-validator, sinapse-master agent | No |
+| 53 | `scripts/yaml-validator.js` | Config | YAML file validation | -- | component-generator, modification-validator, sinapse-orqx agent | No |
 
 ### 1.2 Scripts NOT Exported via `index.js` (28 scripts)
 

@@ -50,7 +50,7 @@ describe('gemini agent launcher', () => {
   });
 
   it('maps command name correctly for master agent', () => {
-    expect(commandNameForAgent('sinapse-master')).toBe('/sinapse-master');
+    expect(commandNameForAgent('sinapse-orqx')).toBe('/sinapse-orqx');
     expect(commandNameForAgent('dev')).toBe('/sinapse-dev');
   });
 });

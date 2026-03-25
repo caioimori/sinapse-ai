@@ -344,4 +344,4 @@ next_agent: @qa
 next_command: *review {story-id}
 condition: Fixes applied, ready for re-review
 alternatives:
-  - agent: @dev, command: *run-tests, condition: Need to verify fixes pass tests first
+  - agent: @developer, command: *run-tests, condition: Need to verify fixes pass tests first

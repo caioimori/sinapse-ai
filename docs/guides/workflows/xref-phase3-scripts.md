@@ -33,21 +33,21 @@
 | 9 | `agent-assignment-resolver.js` | Resolves `{TODO: Agent Name}` placeholders in task files based on prefix mapping | `fs`, `path` | `install-manifest.yaml` | One-time migration tool | Low-use |
 | 10 | `agent-exit-hooks.js` | Defines hook system for workflow context persistence on command completion | `context-detector` | `install-manifest.yaml`, docs | Framework integration (Story 6.1.6) | Low-use |
 | 11 | `batch-update-agents-session-context.js` | Batch updates 8 agents with session context loader integration (Story 6.1.2.6.2) | `fs.promises`, `path` | `install-manifest.yaml` | One-time migration tool | Low-use |
-| 12 | `backlog-manager.js` | Manages technical debt, follow-ups, and enhancements backlog with prioritization | `fs.promises` | 28 files: `po-backlog-add.md`, `dev-backlog-debt.md`, `qa-backlog-add-followup.md`, story tasks, docs | @po, @dev, @qa | No |
-| 13 | `decision-context.js` | DecisionContext class tracking decisions, files, tests during yolo mode execution | `child_process`, `path` | 17 files: `decision-recorder.js`, `decision-log-generator.js`, `dev-develop-story.md`, agent dev.md, tests | @dev (yolo mode) | No |
-| 14 | `decision-log-generator.js` | Generates markdown decision logs from DecisionContext data | `fs.promises`, `path` | 17 files: `decision-recorder.js`, dev tasks, tests | @dev (yolo mode) | No |
-| 15 | `decision-log-indexer.js` | Maintains index file of all decision logs for discovery | `fs.promises`, `path`, `js-yaml` | `decision-recorder.js`, tests | @dev (yolo mode) | No |
-| 16 | `decision-recorder.js` | Singleton API for recording decisions during yolo mode -- manages global context | `decision-context`, `decision-log-generator`, `js-yaml` | `dev-develop-story.md`, tests | @dev (yolo mode) | No |
-| 17 | `dev-context-loader.js` | Optimized file loading for @dev agent with smart caching and summarization | `fs.promises`, `path`, `js-yaml` | 9 files: tests, docs, `install-manifest.yaml` | @dev | No |
-| 18 | `story-manager.js` | Handles story file operations and ClickUp synchronization | `fs.promises`, `path`, `js-yaml`, `story-update-hook`, `tool-resolver` | 28 files: `po-sync-story.md`, `po-pull-story.md`, `po-stories-index.md`, various tasks | @po, @pm | No |
-| 19 | `story-update-hook.js` | Detects changes between story versions and syncs to ClickUp | `clickup-helpers`, `js-yaml` | `story-manager.js`, `po-sync-story.md`, tests | @po, @pm | No |
-| 20 | `story-index-generator.js` | Scans `docs/stories/` and generates comprehensive story index with metadata | `fs.promises`, `path` | `po-stories-index.md`, `jest.config.js`, docs | @po | No |
+| 12 | `backlog-manager.js` | Manages technical debt, follow-ups, and enhancements backlog with prioritization | `fs.promises` | 28 files: `po-backlog-add.md`, `dev-backlog-debt.md`, `qa-backlog-add-followup.md`, story tasks, docs | @product-lead, @developer, @quality-gate | No |
+| 13 | `decision-context.js` | DecisionContext class tracking decisions, files, tests during yolo mode execution | `child_process`, `path` | 17 files: `decision-recorder.js`, `decision-log-generator.js`, `dev-develop-story.md`, agent dev.md, tests | @developer (yolo mode) | No |
+| 14 | `decision-log-generator.js` | Generates markdown decision logs from DecisionContext data | `fs.promises`, `path` | 17 files: `decision-recorder.js`, dev tasks, tests | @developer (yolo mode) | No |
+| 15 | `decision-log-indexer.js` | Maintains index file of all decision logs for discovery | `fs.promises`, `path`, `js-yaml` | `decision-recorder.js`, tests | @developer (yolo mode) | No |
+| 16 | `decision-recorder.js` | Singleton API for recording decisions during yolo mode -- manages global context | `decision-context`, `decision-log-generator`, `js-yaml` | `dev-develop-story.md`, tests | @developer (yolo mode) | No |
+| 17 | `dev-context-loader.js` | Optimized file loading for @developer agent with smart caching and summarization | `fs.promises`, `path`, `js-yaml` | 9 files: tests, docs, `install-manifest.yaml` | @developer | No |
+| 18 | `story-manager.js` | Handles story file operations and ClickUp synchronization | `fs.promises`, `path`, `js-yaml`, `story-update-hook`, `tool-resolver` | 28 files: `po-sync-story.md`, `po-pull-story.md`, `po-stories-index.md`, various tasks | @product-lead, @project-lead | No |
+| 19 | `story-update-hook.js` | Detects changes between story versions and syncs to ClickUp | `clickup-helpers`, `js-yaml` | `story-manager.js`, `po-sync-story.md`, tests | @product-lead, @project-lead | No |
+| 20 | `story-index-generator.js` | Scans `docs/stories/` and generates comprehensive story index with metadata | `fs.promises`, `path` | `po-stories-index.md`, `jest.config.js`, docs | @product-lead | No |
 | 21 | `task-identifier-resolver.js` | Resolves `{TODO: task identifier}` placeholders in 114 task files | `fs`, `path` | `install-manifest.yaml` | One-time migration tool | Low-use |
-| 22 | `validate-task-v2.js` | Validates task files against V2.0 specification (11 compliance rules) | `fs`, `path` | 9 files: `migrate-task-to-v2.js`, docs | @qa, @dev | No |
-| 23 | `migrate-task-to-v2.js` | Semi-automated V1.0 to V2.0 task migration helper | `fs`, `path` | 9 files: `validate-task-v2.js`, docs | @dev migration | Low-use |
+| 22 | `validate-task-v2.js` | Validates task files against V2.0 specification (11 compliance rules) | `fs`, `path` | 9 files: `migrate-task-to-v2.js`, docs | @quality-gate, @developer | No |
+| 23 | `migrate-task-to-v2.js` | Semi-automated V1.0 to V2.0 task migration helper | `fs`, `path` | 9 files: `validate-task-v2.js`, docs | @developer migration | Low-use |
 | 24 | `workflow-navigator.js` | Provides intelligent next-step command suggestions from workflow patterns | `fs`, `path`, `js-yaml` | 18 files: `greeting-builder.js`, tasks, docs | All (via greeting-builder) | No |
-| 25 | `workflow-state-manager.js` | File-based state persistence for guided workflow automation across sessions | `fs.promises`, `path`, `js-yaml` | 18 files: `run-workflow.md`, `run-workflow-engine.md`, tasks | @sm, @pm | No |
-| 26 | `workflow-validator.js` | Validates workflow YAML files against SINAPSE conventions (9 checks) | `fs.promises`, `path`, `js-yaml` | 18 files: `validate-workflow.md`, `squad-validator.js`, tasks | @qa, @architect | No |
+| 25 | `workflow-state-manager.js` | File-based state persistence for guided workflow automation across sessions | `fs.promises`, `path`, `js-yaml` | 18 files: `run-workflow.md`, `run-workflow-engine.md`, tasks | @sprint-lead, @project-lead | No |
+| 26 | `workflow-validator.js` | Validates workflow YAML files against SINAPSE conventions (9 checks) | `fs.promises`, `path`, `js-yaml` | 18 files: `validate-workflow.md`, `squad-validator.js`, tasks | @quality-gate, @architect | No |
 | 27 | `verify-workflow-gaps.js` | Verification script for workflow gap fixes (GAP 1, 2, 3) | `fs`, `path`, `js-yaml` | 18 files: docs, `install-manifest.yaml` | Verification tool | Low-use |
 | 28 | `decision-context.js` | (See #13 above -- same file) | -- | -- | -- | -- |
 
@@ -57,7 +57,7 @@
 |---|------|---------|-------------|---------------------|----------|---------|
 | S1 | `index.js` | Central exports aggregator for all squad utilities | All squad modules below | 43 files: `squad-creator.md`, all squad tasks, tests | @squad-creator | No |
 | S2 | `squad-loader.js` | Loads and resolves squad manifests from local directories (SQS-2) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-list.md`, tests | @squad-creator | No |
-| S3 | `squad-validator.js` | Validates squad structure against JSON schema, task format, agent defs (SQS-3) | `ajv`, `fs.promises`, `path`, `js-yaml`, squad-schema.json | `index.js`, `squad-creator-validate.md`, tests, `workflow-validator.js` | @squad-creator, @qa | No |
+| S3 | `squad-validator.js` | Validates squad structure against JSON schema, task format, agent defs (SQS-3) | `ajv`, `fs.promises`, `path`, `js-yaml`, squad-schema.json | `index.js`, `squad-creator-validate.md`, tests, `workflow-validator.js` | @squad-creator, @quality-gate | No |
 | S4 | `squad-generator.js` | Generates squad structure following task-first architecture (SQS-4) | `fs.promises`, `path`, `child_process`, `js-yaml` | `index.js`, `squad-creator-create.md`, tests | @squad-creator | No |
 | S5 | `squad-designer.js` | Analyzes documentation and generates squad blueprints with recommendations (SQS-9) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-design.md`, tests | @squad-creator | No |
 | S6 | `squad-migrator.js` | Migrates legacy squad formats to SINAPSE 2.1 standard (SQS-7) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-migrate.md`, tests | @squad-creator | No |
@@ -123,7 +123,7 @@ The preference is stored in `.sinapse-ai/core-config.yaml` under `agentIdentity.
 All 12 agents reference the greeting system in their `activation-instructions` STEP 3:
 
 **Pattern A: Direct Class Invocation (9 agents)**
-Used by: @dev, @qa, @architect, @pm, @po, @sm, @analyst, @sinapse-master, @squad-creator
+Used by: @developer, @quality-gate, @architect, @project-lead, @product-lead, @sprint-lead, @analyst, @sinapse-orqx, @squad-creator
 
 ```yaml
 activation-instructions:
@@ -201,17 +201,17 @@ All agents share the same GreetingBuilder logic but differ in:
 
 | Agent | Icon | Archetype | Zodiac | Custom Greeting Example |
 |-------|------|-----------|--------|------------------------|
-| @dev (Dex) | `\U0001f4bb` | Builder | Aquarius | "Dex the Builder ready to construct excellence!" |
-| @qa (Quinn) | `\U0001f6e1\ufe0f` | Guardian | Virgo | "Quinn the Guardian ready!" |
-| @po (Pax) | `\u2696\ufe0f` | Balancer | Libra | "Pax the Balancer ready!" |
-| @pm (Morgan) | `\U0001f4cb` | Strategist | Capricorn | "Morgan the Strategist ready!" |
-| @sm (River) | `\U0001f30a` | Facilitator | Sagittarius | "River the Facilitator ready!" |
+| @developer (Dex) | `\U0001f4bb` | Builder | Aquarius | "Dex the Builder ready to construct excellence!" |
+| @quality-gate (Quinn) | `\U0001f6e1\ufe0f` | Guardian | Virgo | "Quinn the Guardian ready!" |
+| @product-lead (Pax) | `\u2696\ufe0f` | Balancer | Libra | "Pax the Balancer ready!" |
+| @project-lead (Morgan) | `\U0001f4cb` | Strategist | Capricorn | "Morgan the Strategist ready!" |
+| @sprint-lead (River) | `\U0001f30a` | Facilitator | Sagittarius | "River the Facilitator ready!" |
 | @architect (Aria) | `\U0001f3d7\ufe0f` | Visionary | Gemini | "Aria the Visionary ready!" |
 | @analyst (Alex) | `\U0001f50d` | Decoder | Scorpio | "Alex the Decoder ready!" |
 | @devops (Gage) | `\u2699\ufe0f` | Automator | Aries | "Gage the Automator ready!" |
 | @data-engineer (Dara) | `\U0001f4ca` | Sage | Taurus | "Dara the Sage ready!" |
 | @ux-design-expert (Uma) | `\U0001f3a8` | Empathizer | Pisces | "Uma the Empathizer ready!" |
-| @sinapse-master | `\U0001f9e0` | Orchestrator | Leo | "SINAPSE Master Orchestrator ready!" |
+| @sinapse-orqx | `\U0001f9e0` | Orchestrator | Leo | "SINAPSE Master Orchestrator ready!" |
 | @squad-creator | `\U0001f4e6` | Assembler | -- | "Squad Creator ready!" |
 
 Each agent's greeting levels are defined in its `.md` persona file under `persona_profile.greeting_levels` (or `persona_profile.communication.greeting_levels`).
@@ -422,12 +422,12 @@ No scripts are truly orphaned -- all have at least one reference in the `install
 | Category | Scripts | Primary Agents |
 |----------|---------|---------------|
 | **Greeting System** (6) | greeting-builder, generate-greeting, greeting-preference-manager, greeting-config-cli, test-greeting-system, apply-inline-greeting-all-agents | All 12 agents |
-| **Decision Logging** (4) | decision-context, decision-log-generator, decision-log-indexer, decision-recorder | @dev (yolo mode) |
-| **Story Management** (3) | story-manager, story-update-hook, story-index-generator | @po, @pm |
-| **Workflow Engine** (4) | workflow-navigator, workflow-state-manager, workflow-validator, verify-workflow-gaps | @sm, @pm, @qa, @architect |
-| **Agent Configuration** (4) | agent-config-loader, audit-agent-config, agent-exit-hooks, dev-context-loader | All (via config pipeline), @dev |
-| **Task Migration** (4) | validate-task-v2, migrate-task-to-v2, task-identifier-resolver, agent-assignment-resolver | @dev, @qa |
-| **Backlog** (1) | backlog-manager | @po, @dev, @qa |
+| **Decision Logging** (4) | decision-context, decision-log-generator, decision-log-indexer, decision-recorder | @developer (yolo mode) |
+| **Story Management** (3) | story-manager, story-update-hook, story-index-generator | @product-lead, @project-lead |
+| **Workflow Engine** (4) | workflow-navigator, workflow-state-manager, workflow-validator, verify-workflow-gaps | @sprint-lead, @project-lead, @quality-gate, @architect |
+| **Agent Configuration** (4) | agent-config-loader, audit-agent-config, agent-exit-hooks, dev-context-loader | All (via config pipeline), @developer |
+| **Task Migration** (4) | validate-task-v2, migrate-task-to-v2, task-identifier-resolver, agent-assignment-resolver | @developer, @quality-gate |
+| **Backlog** (1) | backlog-manager | @product-lead, @developer, @quality-gate |
 | **Batch Updates** (1) | batch-update-agents-session-context | One-time |
 | **Squad Module** (10) | squad/index, squad-loader, squad-validator, squad-generator, squad-designer, squad-migrator, squad-downloader, squad-publisher, squad-analyzer, squad-extender | @squad-creator |
 
@@ -435,17 +435,17 @@ No scripts are truly orphaned -- all have at least one reference in the `install
 
 | Agent | Scripts Used | Count |
 |-------|-------------|-------|
-| @dev | greeting-builder, agent-config-loader, dev-context-loader, decision-context, decision-recorder, decision-log-generator, decision-log-indexer, validate-task-v2, backlog-manager, workflow-navigator | 10 |
-| @qa | greeting-builder, agent-config-loader, validate-task-v2, workflow-validator, backlog-manager | 5 |
-| @po | greeting-builder, agent-config-loader, story-manager, story-update-hook, story-index-generator, backlog-manager | 6 |
-| @pm | greeting-builder, agent-config-loader, story-manager, workflow-state-manager | 4 |
-| @sm | greeting-builder, agent-config-loader, workflow-state-manager | 3 |
+| @developer | greeting-builder, agent-config-loader, dev-context-loader, decision-context, decision-recorder, decision-log-generator, decision-log-indexer, validate-task-v2, backlog-manager, workflow-navigator | 10 |
+| @quality-gate | greeting-builder, agent-config-loader, validate-task-v2, workflow-validator, backlog-manager | 5 |
+| @product-lead | greeting-builder, agent-config-loader, story-manager, story-update-hook, story-index-generator, backlog-manager | 6 |
+| @project-lead | greeting-builder, agent-config-loader, story-manager, workflow-state-manager | 4 |
+| @sprint-lead | greeting-builder, agent-config-loader, workflow-state-manager | 3 |
 | @architect | greeting-builder, agent-config-loader, workflow-validator | 3 |
 | @analyst | greeting-builder, agent-config-loader | 2 |
 | @devops | greeting-builder, generate-greeting, agent-config-loader | 3 |
 | @data-engineer | greeting-builder, generate-greeting, agent-config-loader | 3 |
 | @ux-design-expert | greeting-builder, generate-greeting, agent-config-loader | 3 |
-| @sinapse-master | greeting-builder, agent-config-loader | 2 |
+| @sinapse-orqx | greeting-builder, agent-config-loader | 2 |
 | @squad-creator | greeting-builder, agent-config-loader, squad/* (10 scripts) | 12 |
 
 ---

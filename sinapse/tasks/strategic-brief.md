@@ -1,6 +1,6 @@
 ---
 task: strategic-brief
-responsavel: "@sinapse-master"
+responsavel: "@sinapse-orqx"
 responsavel_type: Agent
 atomic_layer: Task
 elicit: true
@@ -31,7 +31,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-sinapse
-- **Agent:** Imperator (sinapse-master)
+- **Agent:** Imperator (sinapse-orqx)
 - **Complexity:** Advanced
 
 ## Objetivo
@@ -64,7 +64,7 @@ STRATEGIC BRIEF
 Initiative: {nome}
 Objective: {objetivo}
 Date: {data}
-Author: Imperator (sinapse-master)
+Author: Imperator (sinapse-orqx)
 
 SITUATION ANALYSIS:
 - Current State: {onde o usuario esta}

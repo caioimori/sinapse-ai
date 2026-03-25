@@ -11,8 +11,8 @@
 
 - Use Process Absolutism principles for validation
 - Define VETO conditions that BLOCK, not just warn
-- For workflow/process validation, invoke: `@qa *audit`
-- For designing quality gates, invoke: `@qa *design-heuristic`
+- For workflow/process validation, invoke: `@quality-gate *audit`
+- For designing quality gates, invoke: `@quality-gate *design-heuristic`
 
 **Core Philosophy:**
 

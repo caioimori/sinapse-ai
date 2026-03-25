@@ -122,51 +122,59 @@ function completeProgress(progressBar) {
  * ASCII Art Banner for SINAPSE
  */
 const BANNER = `
-  █████╗ ██╗ ██████╗ ██╗  ██╗     ███████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗
- ██╔══██╗██║██╔═══██╗╚██╗██╔╝     ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗
- ███████║██║██║   ██║ ╚███╔╝█████╗███████╗██║   ██║██║   ██║███████║██║  ██║
- ██╔══██║██║██║   ██║ ██╔██╗╚════╝╚════██║██║▄▄ ██║██║   ██║██╔══██║██║  ██║
- ██║  ██║██║╚██████╔╝██╔╝ ██╗     ███████║╚██████╔╝╚██████╔╝██║  ██║██████╔╝
- ╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝     ╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝
+ ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗     █████╗ ██╗
+ ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║
+ ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗      ███████║██║
+ ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝      ██╔══██║██║
+ ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗    ██║  ██║██║
+ ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝
 `;
 
 /**
- * Show welcome banner
+ * Show immersive welcome banner
  */
 function showWelcome() {
-  // Get version from package.json
-  const path = require('path');
-  const fs = require('fs');
-  let version = '2.1.0';
-  try {
-    const pkgPath = path.join(__dirname, '..', '..', '..', '..', 'package.json');
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    version = pkg.version || version;
-  } catch (_e) {
-    // Use default version
-  }
-
   console.log(colors.primary(BANNER));
-  console.log(colors.secondary('Universal AI Agent Framework for Any Domain'));
-  console.log(colors.tertiary(`Installer v${version}`));
+  console.log('');
+  console.log(colors.secondary('  Bem-vindo ao SINAPSE AI.'));
+  console.log(colors.secondary('  Seu copiloto de inteligencia artificial.'));
+  console.log('');
+  console.log(colors.tertiary('  17 squads · 179 agentes · 1400+ tasks'));
+  console.log(colors.tertiary('  Tudo que voce precisa para construir,'));
+  console.log(colors.tertiary('  empacotar e distribuir com IA.'));
+  console.log('');
+  console.log(colors.dim('  Preparando sua imersao...'));
   console.log('');
   console.log(colors.dim('═'.repeat(80)));
   console.log('');
 }
 
 /**
- * Show completion message with excitement
+ * Show completion message with summary
+ *
+ * @param {Object} [context={}] - Installation context for dynamic summary
+ * @param {string} [context.llmLabel] - LLM label (e.g., 'Claude Code', 'Codex CLI', 'Ambos')
  */
-function showCompletion() {
+function showCompletion(context = {}) {
+  const llmLabel = context.llmLabel || 'Claude Code';
+  const llmValue = context.llmValue || 'claude-code';
+
+  let startCommand;
+  if (llmValue === 'codex') {
+    startCommand = "Digite 'codex' no terminal para comecar.";
+  } else if (llmValue === 'both') {
+    startCommand = "Digite 'sinapse' (Claude) ou 'codex' (Codex) no terminal para comecar.";
+  } else {
+    startCommand = "Digite 'sinapse' no terminal para comecar.";
+  }
+
   console.log('\n' + headings.divider());
-  console.log(status.celebrate(t('installComplete')));
   console.log('');
-  console.log(colors.success(t('readyToUse')));
+  console.log(status.success('SINAPSE AI instalado'));
+  console.log(status.success(`${llmLabel} configurado`));
+  console.log(status.success('179 agentes disponiveis'));
+  console.log(status.success(`Pronto! ${startCommand}`));
   console.log('');
-  console.log(colors.info(t('quickStart')));
-  console.log(colors.dim('  • ' + t('quickStartAgents')));
-  console.log(colors.dim('  • ' + t('quickStartStory')));
-  console.log(colors.dim('  • ' + t('quickStartHelp')));
   console.log(headings.divider() + '\n');
 }
 

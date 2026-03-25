@@ -15,7 +15,7 @@ const {
 
 const MOCK_GRAPH_DATA = {
   nodes: [
-    { id: 'dev', label: 'dev', group: 'agents', path: '.sinapse-ai/agents/dev.md', lifecycle: 'production' },
+    { id: 'dev', label: 'dev', group: 'agents', path: '.sinapse-ai/agents/developer.md', lifecycle: 'production' },
     { id: 'task-a', label: 'task-a', group: 'tasks', path: '.sinapse-ai/tasks/task-a.md', lifecycle: 'production' },
     { id: 'tmpl-story', label: 'story-tmpl', group: 'templates', path: '.sinapse-ai/templates/story-tmpl.yaml', lifecycle: 'experimental' },
     { id: 'script-1', label: 'build.js', group: 'scripts', path: '.sinapse-ai/scripts/build.js', lifecycle: 'orphan' },
@@ -185,7 +185,7 @@ describe('html-formatter', () => {
     it('should include path property on nodes', () => {
       const nodes = _buildVisNodes(MOCK_GRAPH_DATA.nodes);
       const devNode = nodes.find((n) => n.id === 'dev');
-      expect(devNode.path).toBe('.sinapse-ai/agents/dev.md');
+      expect(devNode.path).toBe('.sinapse-ai/agents/developer.md');
     });
 
     it('should use default color for unknown category', () => {

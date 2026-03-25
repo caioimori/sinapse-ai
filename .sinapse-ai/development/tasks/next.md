@@ -11,7 +11,7 @@ execution signals (story/qa/ci/diff) via `workflow-state-manager`.
 
 ```yaml
 task: next()
-agent: "@dev"
+agent: "@developer"
 responsável: Dex (Developer)
 responsavel_type: Agente
 atomic_layer: Workflow
@@ -311,7 +311,7 @@ optimizations:
 story: WIS-3
 version: 1.0.0
 created: 2025-12-25
-author: "@dev (Dex)"
+author: "@developer (Dex)"
 dependencies:
   modules:
     - workflow-intelligence (from WIS-2)

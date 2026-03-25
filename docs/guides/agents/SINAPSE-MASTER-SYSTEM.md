@@ -1,15 +1,15 @@
-# Sistema do Agente @sinapse-master
+# Sistema do Agente @sinapse-orqx
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
-> **Owner:** @sinapse-master (Orion)
+> **Owner:** @sinapse-orqx (Orion)
 > **Status:** Documentacao Oficial
 
 ---
 
 ## Visao Geral
 
-O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do framework SINAPSE-FULLSTACK. Ele atua como orquestrador universal, desenvolvedor de framework e especialista no metodo SINAPSE. Suas principais responsabilidades incluem:
+O **@sinapse-orqx** (Orion - The Orchestrator) e o meta-agente principal do framework SINAPSE-FULLSTACK. Ele atua como orquestrador universal, desenvolvedor de framework e especialista no metodo SINAPSE. Suas principais responsabilidades incluem:
 
 - **Orquestracao Universal**: Executa qualquer task de qualquer agente diretamente
 - **Desenvolvimento de Framework**: Cria e modifica agentes, tasks, workflows e templates
@@ -29,7 +29,7 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 
 ## Lista Completa de Arquivos
 
-### Arquivos Core de Tasks do @sinapse-master
+### Arquivos Core de Tasks do @sinapse-orqx
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
@@ -59,10 +59,10 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.sinapse-ai/development/agents/sinapse-master.md` | Definicao completa do agente (persona, comandos, dependencias) |
-| `.claude/commands/SINAPSE/agents/sinapse-master.md` | Comando Claude Code para ativar @sinapse-master |
+| `.sinapse-ai/development/agents/sinapse-orqx.md` | Definicao completa do agente (persona, comandos, dependencias) |
+| `.claude/commands/SINAPSE/agents/sinapse-orqx.md` | Comando Claude Code para ativar @sinapse-orqx |
 
-### Arquivos de Templates do @sinapse-master
+### Arquivos de Templates do @sinapse-orqx
 
 | Arquivo | Proposito |
 |---------|-----------|
@@ -93,7 +93,7 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 | `.sinapse-ai/development/utils/yaml-validator.js` | Validador de YAML |
 | `.sinapse-ai/development/utils/workflow-management.md` | Gestao de workflows |
 
-### Arquivos de Workflows do @sinapse-master
+### Arquivos de Workflows do @sinapse-orqx
 
 | Arquivo | Proposito |
 |---------|-----------|
@@ -104,7 +104,7 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 | `.sinapse-ai/development/workflows/greenfield-service.md` | Workflow servico greenfield |
 | `.sinapse-ai/development/workflows/greenfield-ui.md` | Workflow UI greenfield |
 
-### Arquivos de Checklists do @sinapse-master
+### Arquivos de Checklists do @sinapse-orqx
 
 | Arquivo | Proposito |
 |---------|-----------|
@@ -119,11 +119,11 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.sinapse-ai/development/tasks/brownfield-create-epic.md` | @pm | Criacao de epics (delegada) |
-| `.sinapse-ai/development/tasks/brownfield-create-story.md` | @pm | Criacao de stories (delegada) |
+| `.sinapse-ai/development/tasks/brownfield-create-epic.md` | @project-lead | Criacao de epics (delegada) |
+| `.sinapse-ai/development/tasks/brownfield-create-story.md` | @project-lead | Criacao de stories (delegada) |
 | `.sinapse-ai/development/tasks/analyst-facilitate-brainstorming.md` | @analyst | Brainstorming (delegado) |
 | `.sinapse-ai/development/tasks/generate-ai-frontend-prompt.md` | @architect | Geracao de prompts AI (delegada) |
-| `.sinapse-ai/development/tasks/create-suite.md` | @qa | Criacao de suites de teste (delegada) |
+| `.sinapse-ai/development/tasks/create-suite.md` | @quality-gate | Criacao de suites de teste (delegada) |
 
 ---
 
@@ -133,11 +133,11 @@ O **@sinapse-master** (Orion - The Orchestrator) e o meta-agente principal do fr
 flowchart TB
     subgraph ACTIVATION["🚀 ATIVACAO"]
         USER["👤 Usuario"]
-        ACTIVATE["@sinapse-master"]
+        ACTIVATE["@sinapse-orqx"]
         GREETING["greeting-builder.js<br/>Saudacao Inteligente"]
     end
 
-    USER -->|"@sinapse-master"| ACTIVATE
+    USER -->|"@sinapse-orqx"| ACTIVATE
     ACTIVATE --> GREETING
 
     subgraph COMMANDS["👑 COMANDOS PRINCIPAIS"]
@@ -322,7 +322,7 @@ stateDiagram-v2
 
 ```mermaid
 flowchart LR
-    subgraph MASTER["👑 @sinapse-master (Orion)"]
+    subgraph MASTER["👑 @sinapse-orqx (Orion)"]
         MASTER_DESC["Orquestra todos os agentes<br/>Cria/modifica componentes<br/>Executa qualquer task"]
     end
 
@@ -352,9 +352,9 @@ flowchart LR
     MASTER -->|"Test suite creation"| QA_BOX
 
     subgraph SPECIALIZED["🎯 AGENTES ESPECIALIZADOS"]
-        DEV["@dev - Implementacao"]
-        SM["@sm - Story Management"]
-        PO["@po - Product Ownership"]
+        DEV["@developer - Implementacao"]
+        SM["@sprint-lead - Story Management"]
+        PO["@product-lead - Product Ownership"]
         DATA["@data-engineer - Database"]
         UX["@ux-design-expert - UX/UI"]
         DEVOPS["@devops - Infrastructure"]
@@ -371,10 +371,10 @@ flowchart LR
 
 | Cenario | Agente Recomendado | Razao |
 |---------|-------------------|-------|
-| Implementacao de story | @dev | Expertise em codigo |
-| Code review | @qa | Foco em qualidade |
-| Criacao de PRD | @pm | Expertise em produto |
-| Criacao de stories | @sm ou @pm | Especializacao Agile |
+| Implementacao de story | @developer | Expertise em codigo |
+| Code review | @quality-gate | Foco em qualidade |
+| Criacao de PRD | @project-lead | Expertise em produto |
+| Criacao de stories | @sprint-lead ou @project-lead | Especializacao Agile |
 | Decisoes de arquitetura | @architect | Expertise tecnica |
 | Operacoes de database | @data-engineer | Expertise em dados |
 | Design de UX/UI | @ux-design-expert | Expertise em design |
@@ -525,7 +525,7 @@ agent:
 
 ### Arquivos Core
 
-- [Agente sinapse-master](.sinapse-ai/development/agents/sinapse-master.md)
+- [Agente sinapse-orqx](.sinapse-ai/development/agents/sinapse-orqx.md)
 - [Knowledge Base](.sinapse-ai/development/data/sinapse-kb.md)
 - [Guia do Usuario](.sinapse-ai/user-guide.md)
 
@@ -547,14 +547,14 @@ agent:
 
 | Aspecto | Detalhes |
 |---------|----------|
-| **Nome do Agente** | Orion (sinapse-master) |
+| **Nome do Agente** | Orion (sinapse-orqx) |
 | **Arquetipo** | Orchestrator |
 | **Icone** | 👑 |
 | **Total de Tasks Diretas** | 21 tasks |
 | **Total de Templates** | 14 templates |
 | **Total de Workflows** | 6 workflows |
 | **Total de Checklists** | 6 checklists |
-| **Agentes que Delega** | 4 (@pm, @analyst, @architect, @qa) |
+| **Agentes que Delega** | 4 (@project-lead, @analyst, @architect, @quality-gate) |
 | **Comandos de Criacao** | 5 (`*create *`) |
 | **Comandos de Modificacao** | 5 (`*modify *`, `*update-*`, `*propose-*`) |
 | **Comandos de Analise** | 4 (`*analyze-*`, `*deprecate-*`, `*validate-*`, `*correct-*`) |
@@ -568,7 +568,7 @@ agent:
 
 | Data | Autor | Descricao |
 |------|-------|-----------|
-| 2026-02-04 | @sinapse-master | Documento inicial criado com mapeamento completo |
+| 2026-02-04 | @sinapse-orqx | Documento inicial criado com mapeamento completo |
 
 ---
 

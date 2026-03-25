@@ -166,12 +166,12 @@ const assignment = assignExecutorFromContent(storyContent);
 
 | Work Type | Keywords | Executor | Quality Gate |
 |-----------|----------|----------|--------------|
-| Code/Features/Logic | feature, logic, handler, service, api | @dev | @architect |
-| Schema/DB/RLS/Migrations | schema, table, migration, rls, query, database | @data-engineer | @dev |
+| Code/Features/Logic | feature, logic, handler, service, api | @developer | @architect |
+| Schema/DB/RLS/Migrations | schema, table, migration, rls, query, database | @data-engineer | @developer |
 | Infra/CI/CD/Deploy | ci/cd, deploy, docker, kubernetes, pipeline | @devops | @architect |
-| Design/UI Components | component, ui, design, interface, accessibility | @ux-design-expert | @dev |
-| Research/Investigation | research, investigate, analyze, poc | @analyst | @pm |
-| Architecture Decisions | architecture, design_decision, pattern, scalability | @architect | @pm |
+| Design/UI Components | component, ui, design, interface, accessibility | @ux-design-expert | @developer |
+| Research/Investigation | research, investigate, analyze, poc | @analyst | @project-lead |
+| Architecture Decisions | architecture, design_decision, pattern, scalability | @architect | @project-lead |
 
 **CRITICAL RULES:**
 - [ ] **executor != quality_gate** (ALWAYS different)
@@ -192,7 +192,7 @@ Each story should include:
 ```yaml
 # Every story MUST include these fields in YAML frontmatter
 executor: "@data-engineer"           # Assigned via assignExecutorFromContent()
-quality_gate: "@dev"                  # MUST be different from executor
+quality_gate: "@developer"                  # MUST be different from executor
 quality_gate_tools: [schema_validation, migration_review, rls_test]
 ```
 
@@ -209,7 +209,7 @@ quality_gate_tools: [schema_validation, migration_review, rls_test]
 
 2. **Story 2: {{API Integration Story}}**
    - Description: {{Create REST endpoint for feature X}}
-   - **Predicted Agents**: @dev, @architect (if new patterns)
+   - **Predicted Agents**: @developer, @architect (if new patterns)
    - **Quality Gates**:
      - Pre-Commit: Security scan, error handling validation
      - Pre-PR: API contract validation, backward compatibility check
@@ -217,7 +217,7 @@ quality_gate_tools: [schema_validation, migration_review, rls_test]
 
 3. **Story 3: {{Deployment Story}}**
    - Description: {{Deploy feature X to production with configuration}}
-   - **Predicted Agents**: @dev, @github-devops (deployment coordination)
+   - **Predicted Agents**: @developer, @github-devops (deployment coordination)
    - **Quality Gates**:
      - Pre-Commit: Configuration validation
      - Pre-PR: Environment consistency check
@@ -232,11 +232,11 @@ When breaking down epic into stories, predict agents based on:
 - **API/Backend Changes** → Include @architect for contract review
 - **Frontend/UI Changes** → Include @ux-expert for accessibility
 - **Deployment/Infrastructure** → Include @github-devops for coordination
-- **Security Features** → Ensure @dev focuses on OWASP validation
+- **Security Features** → Ensure @developer focuses on OWASP validation
 
 **Quality Gate Prediction Guidance:**
 
-- **All Stories**: Must include Pre-Commit review (@dev)
+- **All Stories**: Must include Pre-Commit review (@developer)
 - **Stories Creating PRs**: Include Pre-PR validation (@github-devops)
 - **Production Deployments**: Include Pre-Deployment scan (@github-devops)
 - **HIGH RISK Stories**: Consider feature flags and phased rollout

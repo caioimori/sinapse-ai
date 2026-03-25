@@ -447,8 +447,8 @@ pub async fn create_order(
 ### SINAPSE Commands
 
 ```bash
-@dev "Follow the rust preset patterns for this service"
-@qa "Validate clippy discipline, error mapping, and integration boundaries"
+@developer "Follow the rust preset patterns for this service"
+@quality-gate "Validate clippy discipline, error mapping, and integration boundaries"
 ```
 
 ---

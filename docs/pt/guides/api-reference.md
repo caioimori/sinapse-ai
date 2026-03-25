@@ -87,7 +87,7 @@ O SINAPSE fornece uma API unificada para interagir com agentes de IA especializa
 | `@data-engineer` | Dara   | Architect    | Schema de banco, migrations, queries            |
 | `@devops`        | Gage   | Optimizer    | CI/CD, deployment, operações git                |
 | `@ux-expert`     | Uma    | Creator      | Design UI/UX, wireframes                        |
-| `@sinapse-master`   | Orion  | Orchestrator | Orquestração do framework, meta-operações       |
+| `@sinapse-orqx`   | Orion  | Orchestrator | Orquestração do framework, meta-operações       |
 
 ### Comportamento de Ativação
 
@@ -116,8 +116,8 @@ Quando um agente é ativado:
 Você pode ativar um agente e executar um comando em um único passo:
 
 ```bash
-@dev *develop story-1.2.3
-@qa *review story-1.2.3
+@developer *develop story-1.2.3
+@quality-gate *review story-1.2.3
 @architect *create-full-stack-architecture
 ```
 
@@ -165,7 +165,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ## Comandos Específicos de Agentes
 
-### @dev (Developer)
+### @developer (Developer)
 
 **Desenvolvimento de Story:**
 
@@ -228,7 +228,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ---
 
-### @qa (Quality Assurance)
+### @quality-gate (Quality Assurance)
 
 **Code Review:**
 
@@ -260,7 +260,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 | Comando               | Argumentos   | Descrição                                |
 | --------------------- | ------------ | ---------------------------------------- |
-| `*create-fix-request` | `{story-id}` | Gerar QA_FIX_REQUEST.md para @dev        |
+| `*create-fix-request` | `{story-id}` | Gerar QA_FIX_REQUEST.md para @developer        |
 
 **Estratégia de Testes:**
 
@@ -303,7 +303,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ---
 
-### @pm (Product Manager)
+### @project-lead (Product Manager)
 
 **Criação de Documentos:**
 
@@ -330,7 +330,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ---
 
-### @sm (Scrum Master)
+### @sprint-lead (Scrum Master)
 
 **Gestão de Stories:**
 
@@ -391,7 +391,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ---
 
-### @sinapse-master (Orchestrator)
+### @sinapse-orqx (Orchestrator)
 
 **Desenvolvimento do Framework:**
 
@@ -445,7 +445,7 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 
 ```bash
 # Iniciar workflow
-@sinapse-master *workflow greenfield-fullstack
+@sinapse-orqx *workflow greenfield-fullstack
 
 # Com parâmetros
 *workflow brownfield-service --target=./services/auth
@@ -471,7 +471,7 @@ phases:
     tasks:
       - create-full-stack-architecture
   - name: implementation
-    agent: dev
+    agent: developer
     tasks:
       - develop
 ```
@@ -551,7 +551,7 @@ phases:
     "currentStatus": "Draft",
     "requiredStatus": "Ready for Dev"
   },
-  "suggestions": ["Update story status to 'Ready for Dev'", "Contact @pm to approve story"]
+  "suggestions": ["Update story status to 'Ready for Dev'", "Contact @project-lead to approve story"]
 }
 ```
 
@@ -624,7 +624,7 @@ Claude Code é a IDE principal suportada com integração completa:
 /dev          → Ativa agente @dev
 /qa           → Ativa agente @qa
 /architect    → Ativa agente @architect
-/sinapse-master  → Ativa agente @sinapse-master
+/sinapse-orqx  → Ativa agente @sinapse-orqx
 ```
 
 **Estrutura de Diretórios:**
@@ -710,7 +710,7 @@ alwaysApply: false
 
 ```bash
 # 1. Levantar requisitos
-@pm *gather-requirements
+@project-lead *gather-requirements
 
 # 2. Avaliar complexidade
 @architect *assess-complexity story-1.2.3
@@ -719,10 +719,10 @@ alwaysApply: false
 @analyst *research-deps "authentication libraries"
 
 # 4. Escrever especificação
-@pm *write-spec
+@project-lead *write-spec
 
 # 5. Criticar especificação
-@qa *critique-spec story-1.2.3
+@quality-gate *critique-spec story-1.2.3
 
 # 6. Criar plano de implementação
 @architect *create-plan story-1.2.3
@@ -731,10 +731,10 @@ alwaysApply: false
 @architect *create-context story-1.2.3
 
 # 8. Executar subtasks
-@dev *execute-subtask 1.1
+@developer *execute-subtask 1.1
 
 # 9. Revisar build
-@qa *review-build story-1.2.3
+@quality-gate *review-build story-1.2.3
 ```
 
 ### Exemplo 3: Fluxo de Recuperação
@@ -766,10 +766,10 @@ alwaysApply: false
 @devops *create-worktree STORY-42
 
 # 2. Desenvolver em isolamento
-@dev *develop STORY-42
+@developer *develop STORY-42
 
 # 3. Review de QA
-@qa *review STORY-42
+@quality-gate *review STORY-42
 
 # 4. Fazer merge de volta
 @devops *merge-worktree STORY-42
@@ -782,7 +782,7 @@ alwaysApply: false
 
 ```bash
 # 1. Ativar orquestrador master
-@sinapse-master
+@sinapse-orqx
 
 # 2. Habilitar base de conhecimento
 *kb
@@ -833,7 +833,7 @@ O que você precisa?
 │  └─ @ux-expert
 │
 └─ Framework/Orquestração?
-   └─ @sinapse-master
+   └─ @sinapse-orqx
 ```
 
 ---
@@ -852,11 +852,11 @@ Cada agente tem um limite de responsabilidade específico. Usar o agente correto
 
 Para features complexas, siga o pipeline de especificação ADE:
 
-1. `@pm *gather-requirements` - Coletar requisitos
+1. `@project-lead *gather-requirements` - Coletar requisitos
 2. `@architect *assess-complexity` - Estimar esforço
 3. `@analyst *research-deps` - Pesquisar restrições
-4. `@pm *write-spec` - Escrever especificação
-5. `@qa *critique-spec` - Validar qualidade
+4. `@project-lead *write-spec` - Escrever especificação
+5. `@quality-gate *critique-spec` - Validar qualidade
 
 ### 3. Rastreie Tudo
 

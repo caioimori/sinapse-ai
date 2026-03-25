@@ -85,7 +85,7 @@ const { G2StoryCreationGate } = require('./gates/g2-story-creation');
 const { G3StoryValidationGate } = require('./gates/g3-story-validation');
 const { G4DevContextGate, G4_DEFAULT_TIMEOUT_MS } = require('./gates/g4-dev-context');
 
-// IDS-7: Framework Governor (sinapse-master integration)
+// IDS-7: Framework Governor (sinapse-orqx integration)
 const {
   FrameworkGovernor,
   TIMEOUT_MS,

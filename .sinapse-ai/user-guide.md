@@ -71,7 +71,7 @@ npx @sinapse/fullstack install
 ✅ Installation complete!
 
 Next steps:
-  1. Activate an agent: @dev, @po, @qa, @architect
+  1. Activate an agent: @developer, @product-lead, @quality-gate, @architect
   2. Run agent command: *help
 ```
 
@@ -1058,7 +1058,7 @@ Implementação prosseguiu com zero ambiguidade.
 | Qualidade de Decisão | Automatizada | Colaborativa | Abrangente |
 | Risco de Scope Drift | Médio | Baixo | Mais Baixo |
 
-**Nota**: Esta funcionalidade está planejada para Story 3.13. O agente @dev atual usa modo interativo padrão.
+**Nota**: Esta funcionalidade está planejada para Story 3.13. O agente @developer atual usa modo interativo padrão.
 
 ## Boas Práticas e Dicas
 
@@ -1232,9 +1232,9 @@ Ao integrar SINAPSE em projetos existentes:
 
 O SINAPSE inclui meta-agentes para orquestração:
 
-### sinapse-master
+### sinapse-orqx
 
-O **sinapse-master** é o agente de orquestração principal:
+O **sinapse-orqx** é o agente de orquestração principal:
 
 **Capacidades**:
 - Coordenar múltiplos agentes

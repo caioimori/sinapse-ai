@@ -1,14 +1,14 @@
 ---
 id: facilitate-brainstorming-session
 name: Facilitate Brainstorming Session
-agent: sinapse-master
+agent: sinapse-orqx
 category: collaboration
 complexity: medium
 tools:
   - clickup        # Capture ideas and organize them
   - mcp            # Call specialized agents for domain expertise
 checklists:
-  - sinapse-master-checklist.md
+  - sinapse-orqx-checklist.md
 ---
 
 # Facilitate Brainstorming Session

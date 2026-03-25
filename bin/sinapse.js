@@ -723,6 +723,23 @@ async function runUninstall(options = {}) {
     }
   }
 
+  // Clean global agents from ~/.claude/agents/
+  const homedir = require('os').homedir();
+  const globalAgentsDir = path.join(homedir, '.claude', 'agents');
+  const orqxSuffix = '-orqx.md';
+  if (fs.existsSync(globalAgentsDir)) {
+    try {
+      const globalFiles = fs.readdirSync(globalAgentsDir);
+      const sinapseAgents = globalFiles.filter((f) => f.endsWith(orqxSuffix));
+      for (const file of sinapseAgents) {
+        fs.rmSync(path.join(globalAgentsDir, file), { force: true });
+        if (!quiet) console.log(`  ✓ Removed global agent: ~/.claude/agents/${file}`);
+      }
+    } catch (error) {
+      if (!quiet) console.warn(`  ⚠ Could not clean global agents: ${error.message}`);
+    }
+  }
+
   // Clean .gitignore
   const gitignorePath = path.join(cwd, '.gitignore');
   const gitignoreResult = cleanGitignore(gitignorePath);

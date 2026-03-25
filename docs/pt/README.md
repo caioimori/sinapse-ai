@@ -101,12 +101,12 @@ docs/
 Seguimos práticas i18n padrão da indústria:
 
 1. Conteúdo em inglês fica na raiz (`docs/`)
-2. Traduções vão nas pastas de idioma (`docs/pt/`, `docs/es/`, `docs/zh/`)
+2. Traduções vão nas pastas de idioma (`docs/pt/`)
 3. Estrutura de arquivos espelha a versão em inglês
 4. Adicione cabeçalho de tradução em cada arquivo:
    ```markdown
    <!--
-     Translation: PT | ES | ZH
+     Translation: PT
      Original: /docs/[filename].md
      Last sync: YYYY-MM-DD
    -->

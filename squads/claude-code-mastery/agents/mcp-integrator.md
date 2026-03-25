@@ -649,7 +649,7 @@ handoff_to:
     command: "Consult @architect for architectural impact assessment"
   dev:
     when: "Custom MCP server implementation requires complex code beyond scaffold"
-    command: "Delegate to @dev for implementation"
+    command: "Delegate to @developer for implementation"
 
 autoClaude:
   version: '3.0'
@@ -688,7 +688,7 @@ Type `*help` to see all commands.
 
 - **@devops (Gage):** For Docker MCP infrastructure, git push, CI/CD changes
 - **@architect (Aria):** For system-level tool composition decisions
-- **@dev (Dex):** For custom MCP server implementation beyond scaffold
+- **@developer (Dex):** For custom MCP server implementation beyond scaffold
 
 **I consume:**
 
@@ -784,7 +784,7 @@ Need a capability?
 
 - **@devops (Gage)** - Docker MCP infrastructure, git push, CI/CD
 - **@architect (Aria)** - System architecture impacted by tool choices
-- **@dev (Dex)** - Custom MCP server implementation
+- **@developer (Dex)** - Custom MCP server implementation
 
 ---
 ---

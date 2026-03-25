@@ -35,25 +35,25 @@ These are YAML-based document generation templates used by the `create-doc` task
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `architecture-tmpl.yaml` | create-doc | architect, sinapse-master | greenfield-service (architecture step) | No |
-| 2 | `brainstorming-output-tmpl.yaml` | analyst-facilitate-brainstorming | analyst, sinapse-master | -- | No |
-| 3 | `brownfield-architecture-tmpl.yaml` | create-doc | architect, sinapse-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 4 | `brownfield-prd-tmpl.yaml` | create-doc | pm, sinapse-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 5 | `competitor-analysis-tmpl.yaml` | create-doc | analyst, sinapse-master | -- | No |
+| 1 | `architecture-tmpl.yaml` | create-doc | architect, sinapse-orqx | greenfield-service (architecture step) | No |
+| 2 | `brainstorming-output-tmpl.yaml` | analyst-facilitate-brainstorming | analyst, sinapse-orqx | -- | No |
+| 3 | `brownfield-architecture-tmpl.yaml` | create-doc | architect, sinapse-orqx | brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 4 | `brownfield-prd-tmpl.yaml` | create-doc | pm, sinapse-orqx | brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 5 | `competitor-analysis-tmpl.yaml` | create-doc | analyst, sinapse-orqx | -- | No |
 | 6 | `design-story-tmpl.yaml` | create-doc (implicit) | -- | -- | **WEAK** |
-| 7 | `front-end-architecture-tmpl.yaml` | create-doc | architect, sinapse-master, ux-design-expert | greenfield-ui, greenfield-fullstack | No |
-| 8 | `front-end-spec-tmpl.yaml` | create-doc | ux-design-expert, sinapse-master | greenfield-ui, greenfield-fullstack, brownfield-ui | No |
-| 9 | `fullstack-architecture-tmpl.yaml` | create-doc | architect, sinapse-master | greenfield-fullstack | No |
+| 7 | `front-end-architecture-tmpl.yaml` | create-doc | architect, sinapse-orqx, ux-design-expert | greenfield-ui, greenfield-fullstack | No |
+| 8 | `front-end-spec-tmpl.yaml` | create-doc | ux-design-expert, sinapse-orqx | greenfield-ui, greenfield-fullstack, brownfield-ui | No |
+| 9 | `fullstack-architecture-tmpl.yaml` | create-doc | architect, sinapse-orqx | greenfield-fullstack | No |
 | 10 | `index-strategy-tmpl.yaml` | create-doc | data-engineer | -- | No |
-| 11 | `market-research-tmpl.yaml` | create-doc | analyst, sinapse-master | -- | No |
+| 11 | `market-research-tmpl.yaml` | create-doc | analyst, sinapse-orqx | -- | No |
 | 12 | `migration-plan-tmpl.yaml` | create-doc | data-engineer | -- | No |
-| 13 | `prd-tmpl.yaml` | create-doc | pm, sinapse-master | greenfield-ui, greenfield-service, greenfield-fullstack (implicit) | No |
-| 14 | `project-brief-tmpl.yaml` | create-doc | analyst, sinapse-master | -- | No |
+| 13 | `prd-tmpl.yaml` | create-doc | pm, sinapse-orqx | greenfield-ui, greenfield-service, greenfield-fullstack (implicit) | No |
+| 14 | `project-brief-tmpl.yaml` | create-doc | analyst, sinapse-orqx | -- | No |
 | 15 | `qa-gate-tmpl.yaml` | qa-run-tests, qa-review-story | qa | qa-loop | No |
 | 16 | `rls-policies-tmpl.yaml` | create-doc | data-engineer | -- | No |
 | 17 | `schema-design-tmpl.yaml` | db-domain-modeling, create-doc | data-engineer | -- | No |
 | 18 | `state-persistence-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
-| 19 | `story-tmpl.yaml` | create-doc, create-next-story, sm-create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, sinapse-master | story-development-cycle (implicit) | No |
+| 19 | `story-tmpl.yaml` | create-doc, create-next-story, sm-create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, sinapse-orqx | story-development-cycle (implicit) | No |
 | 20 | `tokens-schema-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
 
 ---
@@ -73,7 +73,7 @@ These are Handlebars templates rendered by the template engine for structured do
 | 5 | `prd.hbs` | create-doc (via template engine) | pm (implicit) | -- | **WEAK** |
 | 6 | `prd-v2.0.hbs` | create-doc (via template engine/loader) | pm (implicit) | -- | **WEAK** |
 | 7 | `story.hbs` | create-doc (via template engine) | po, sm (implicit) | -- | **WEAK** |
-| 8 | `task.hbs` | create-doc (via template engine) | sinapse-master (implicit) | -- | **WEAK** |
+| 8 | `task.hbs` | create-doc (via template engine) | sinapse-orqx (implicit) | -- | **WEAK** |
 
 **Note:** HBS templates are loaded dynamically by the template engine (`loader.js`). They are paired with schemas in `engine/schemas/`. References are implicit through the `create-doc` task which selects templates at runtime based on user input. The engine handles versioned templates (e.g., `prd-v2` resolves to `prd-v2.0.hbs`).
 
@@ -132,7 +132,7 @@ Meta-templates used for creating personalized framework components.
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `personalized-agent-template.md` | create-doc (implicit), modify-agent | sinapse-master (implicit) | -- | No |
+| 1 | `personalized-agent-template.md` | create-doc (implicit), modify-agent | sinapse-orqx (implicit) | -- | No |
 | 2 | `personalized-checklist-template.md` | create-doc (implicit) | -- | -- | **WEAK** |
 | 3 | `personalized-task-template.md` | create-doc (implicit), create-task | -- | -- | **WEAK** |
 | 4 | `personalized-task-template-v2.md` | create-doc (implicit) | -- | -- | **WEAK** |
@@ -151,9 +151,9 @@ Templates that define the structure of framework components (agents, tasks, work
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `agent-template.yaml` | modify-agent, create-doc | sinapse-master | -- | No |
-| 2 | `task-template.md` | create-task (implicit), squad-creator-extend | sinapse-master | -- | No |
-| 3 | `workflow-template.yaml` | squad-creator-extend, verify-workflow-gaps (script) | sinapse-master | -- | No |
+| 1 | `agent-template.yaml` | modify-agent, create-doc | sinapse-orqx | -- | No |
+| 2 | `task-template.md` | create-task (implicit), squad-creator-extend | sinapse-orqx | -- | No |
+| 3 | `workflow-template.yaml` | squad-creator-extend, verify-workflow-gaps (script) | sinapse-orqx | -- | No |
 | 4 | `activation-instructions-template.md` | -- (service-registry) | -- | -- | **WEAK** |
 | 5 | `activation-instructions-inline-greeting.yaml` | -- | -- | -- | **WEAK** |
 | 6 | `task-execution-report.md` | validate-task-v2 (script), personalized-workflow-template | -- | -- | **WEAK** |
@@ -279,7 +279,7 @@ Location: `.sinapse-ai/development/templates/`
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
 | 1 | `sinapse-doc-template.md` | create-doc (implicit) | -- | -- | **WEAK** |
-| 2 | `subagent-step-prompt.md` | run-workflow-engine | sinapse-master | -- | No |
+| 2 | `subagent-step-prompt.md` | run-workflow-engine | sinapse-orqx | -- | No |
 
 ---
 
@@ -289,12 +289,12 @@ Location: `.sinapse-ai/product/checklists/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `architect-checklist.md` | execute-checklist, analyze-cross-artifact | architect, sinapse-master | -- | No |
-| 2 | `change-checklist.md` | correct-course, modify-agent, modify-task, modify-workflow, update-manifest, qa-review-proposal, propose-modification, brownfield-create-epic | pm, po, sinapse-master | -- | No |
-| 3 | `pm-checklist.md` | execute-checklist (via prd-tmpl.yaml), analyze-cross-artifact | pm, sinapse-master | -- | No |
-| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, sm-create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, sinapse-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 5 | `story-dod-checklist.md` | execute-checklist, dev-develop-story, analyze-cross-artifact, build-autonomous | dev, sinapse-master | story-development-cycle (implicit) | No |
-| 6 | `story-draft-checklist.md` | create-next-story, sm-create-next-story, analyze-cross-artifact | sm, sinapse-master | -- | No |
+| 1 | `architect-checklist.md` | execute-checklist, analyze-cross-artifact | architect, sinapse-orqx | -- | No |
+| 2 | `change-checklist.md` | correct-course, modify-agent, modify-task, modify-workflow, update-manifest, qa-review-proposal, propose-modification, brownfield-create-epic | pm, po, sinapse-orqx | -- | No |
+| 3 | `pm-checklist.md` | execute-checklist (via prd-tmpl.yaml), analyze-cross-artifact | pm, sinapse-orqx | -- | No |
+| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, sm-create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, sinapse-orqx | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 5 | `story-dod-checklist.md` | execute-checklist, dev-develop-story, analyze-cross-artifact, build-autonomous | dev, sinapse-orqx | story-development-cycle (implicit) | No |
+| 6 | `story-draft-checklist.md` | create-next-story, sm-create-next-story, analyze-cross-artifact | sm, sinapse-orqx | -- | No |
 | 7 | `self-critique-checklist.md` | plan-execute-subtask, build-autonomous, document-gotchas | dev | -- | No |
 | 8 | `release-checklist.md` | execute-checklist (implicit) | devops | -- | No |
 | 9 | `pre-push-checklist.md` | execute-checklist (implicit) | devops | -- | No |
@@ -314,8 +314,8 @@ Location: `.sinapse-ai/product/data/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `brainstorming-techniques.md` | analyst-facilitate-brainstorming | analyst, sinapse-master | -- | No |
-| 2 | `elicitation-methods.md` | advanced-elicitation, create-doc | sinapse-master | -- | No |
+| 1 | `brainstorming-techniques.md` | analyst-facilitate-brainstorming | analyst, sinapse-orqx | -- | No |
+| 2 | `elicitation-methods.md` | advanced-elicitation, create-doc | sinapse-orqx | -- | No |
 | 3 | `mode-selection-best-practices.md` | -- (agent-config-requirements) | -- | -- | **WEAK** |
 | 4 | `atomic-design-principles.md` | -- | ux-design-expert | -- | No |
 | 5 | `consolidation-algorithms.md` | -- | ux-design-expert | -- | No |
@@ -339,12 +339,12 @@ Location: `.sinapse-ai/data/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `sinapse-kb.md` | -- (knowledge base) | analyst, sinapse-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 1 | `sinapse-kb.md` | -- (knowledge base) | analyst, sinapse-orqx | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
 | 2 | `agent-config-requirements.yaml` | -- (config-loader, agent-config-loader scripts) | All agents (configuration) | -- | No |
 | 3 | `learned-patterns.yaml` | patterns (learn-patterns) | -- | -- | No |
 | 4 | `workflow-patterns.yaml` | -- (workflow-registry, workflow-navigator scripts) | sm (via agent-config-requirements) | All workflows (runtime) | No |
 | 5 | `workflow-state-schema.yaml` | -- (referenced by workflow-patterns.yaml, verify-workflow-gaps script) | -- | All workflows (schema) | No |
-| 6 | `technical-preferences.md` | qa-nfr-assess, qa-review-story, spec-research-dependencies | architect, pm, qa, ux-design-expert, sinapse-master | -- | No |
+| 6 | `technical-preferences.md` | qa-nfr-assess, qa-review-story, spec-research-dependencies | architect, pm, qa, ux-design-expert, sinapse-orqx | -- | No |
 | 7 | `tech-presets/_template.md` | validate-tech-preset | -- | -- | No |
 | 8 | `tech-presets/nextjs-react.md` | validate-tech-preset | -- | -- | No |
 
@@ -400,7 +400,7 @@ Location: `.sinapse-ai/data/`
 
 | Agent | Templates Used | Checklists Used | Data Files Used |
 |-------|----------------|-----------------|-----------------|
-| sinapse-master | 14 | 5 | 4 |
+| sinapse-orqx | 14 | 5 | 4 |
 | ux-design-expert | 8 | 4 | 6 |
 | data-engineer | 7 | 3 | 5 |
 | architect | 4 | 1 | 1 |

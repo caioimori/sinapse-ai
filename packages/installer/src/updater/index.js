@@ -18,10 +18,12 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const os = require('os');
 const https = require('https');
 const { execSync } = require('child_process');
 const { hashFile, hashesMatch } = require('../installer/file-hasher');
 const { PostInstallValidator, formatReport: formatValidationReport } = require('../installer/post-install-validator');
+const { _testing: { installGlobalAgents } } = require('../wizard/index');
 
 /**
  * Update status types
@@ -469,6 +471,18 @@ class SINAPSEUpdater {
       result.filesUpdated = updateApplied.filesUpdated;
       result.filesPreserved = customizations.customized.length;
 
+      // Run version migrations
+      const needsV6Migration = (result.previousVersion && result.previousVersion.startsWith('5.'))
+        || fs.existsSync(path.join(os.homedir(), '.claude', 'agents', 'sinapse-master.md'));
+
+      if (needsV6Migration) {
+        onProgress('migrating', 'Running v6 migration...');
+        const migrationResult = await this.runV6Migration();
+        if (migrationResult.migrated) {
+          result.migrationApplied = true;
+        }
+      }
+
       // Update version.json
       onProgress('finalizing', 'Updating version info...');
       await this.updateVersionInfo(checkResult.latest);
@@ -670,6 +684,97 @@ class SINAPSEUpdater {
       this.log(`Validation failed: ${error.message}`);
       return result;
     }
+  }
+
+  /**
+   * Run v5 → v6 migration
+   * Removes legacy agent files and installs new global orqx agents.
+   *
+   * @returns {Promise<Object>} Migration result
+   */
+  async runV6Migration() {
+    const result = { migrated: false, removed: 0, installed: 0 };
+
+    try {
+      const homedir = os.homedir();
+      const globalAgentsDir = path.join(homedir, '.claude', 'agents');
+      const commandsDir = path.join(this.projectRoot, '.claude', 'commands', 'SINAPSE', 'agents');
+
+      // 1. Remove legacy global agent (sinapse-master.md → renamed to sinapse-orqx.md)
+      const legacyGlobalAgents = ['sinapse-master.md'];
+
+      for (const file of legacyGlobalAgents) {
+        const filePath = path.join(globalAgentsDir, file);
+        if (fs.existsSync(filePath)) {
+          await fs.remove(filePath);
+          console.log(`  Removed legacy global agent: ${file}`);
+          result.removed++;
+        }
+      }
+
+      // 2. Remove legacy project command agents (v5 individual agent commands)
+      const legacyCommandAgents = [
+        'dev.md',
+        'qa.md',
+        'pm.md',
+        'po.md',
+        'sm.md',
+        'analyst.md',
+        'architect.md',
+        'data-engineer.md',
+        'devops.md',
+        'ux-design-expert.md',
+        'squad-creator.md',
+        'sinapse-master.md',
+      ];
+
+      for (const file of legacyCommandAgents) {
+        const filePath = path.join(commandsDir, file);
+        if (fs.existsSync(filePath)) {
+          await fs.remove(filePath);
+          console.log(`  Removed legacy command agent: ${file}`);
+          result.removed++;
+        }
+      }
+
+      // 2b. Remove legacy Codex agent files (v5 individual agents)
+      const codexAgentsDir = path.join(this.projectRoot, '.codex', 'agents');
+      if (fs.existsSync(codexAgentsDir)) {
+        for (const file of legacyCommandAgents) {
+          const filePath = path.join(codexAgentsDir, file);
+          if (fs.existsSync(filePath)) {
+            await fs.remove(filePath);
+            console.log(`  Removed legacy Codex agent: ${file}`);
+            result.removed++;
+          }
+        }
+        // Also remove renamed variants that might exist
+        const renamedLegacy = ['developer.md', 'quality-gate.md', 'project-lead.md', 'product-lead.md', 'sprint-lead.md'];
+        for (const file of renamedLegacy) {
+          const filePath = path.join(codexAgentsDir, file);
+          if (fs.existsSync(filePath)) {
+            await fs.remove(filePath);
+            console.log(`  Removed legacy Codex agent: ${file}`);
+            result.removed++;
+          }
+        }
+      }
+
+      // 3. Install new global orqx agents via wizard's installGlobalAgents
+      const installResult = await installGlobalAgents();
+      result.installed = installResult.count;
+      if (installResult.errors.length > 0) {
+        console.log(`  Agent install warnings: ${installResult.errors.join(', ')}`);
+      }
+
+      result.migrated = true;
+      console.log(`  v6 migration complete: ${result.removed} removed, ${result.installed} installed`);
+    } catch (error) {
+      // Migration errors should not block the update
+      console.log(`  v6 migration warning: ${error.message}`);
+    }
+
+    return result;
   }
 
   /**

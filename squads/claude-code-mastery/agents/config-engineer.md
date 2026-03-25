@@ -667,7 +667,7 @@ handoff_to:
     command: "Consult @architect"
   dev:
     when: "Configuration is ready and developer needs to use optimized settings"
-    command: "Hand off to @dev with configuration guide"
+    command: "Hand off to @developer with configuration guide"
 
 autoClaude:
   version: '3.0'
@@ -707,7 +707,7 @@ Type `*help` to see all commands, or `*guide` for comprehensive usage instructio
 
 - **@devops (Gage):** For MCP server management and CI/CD pipeline configuration
 - **@architect (Aria):** For system architecture decisions that inform configuration boundaries
-- **@dev (Dex):** Receives optimized settings for development workflow efficiency
+- **@developer (Dex):** Receives optimized settings for development workflow efficiency
 
 **I delegate to:**
 
@@ -858,7 +858,7 @@ Path-scoped rules load when Claude reads matching files.
 
 - **@devops (Gage)** - Applies infrastructure configuration and manages MCP servers
 - **@architect (Aria)** - Defines architecture boundaries that inform settings design
-- **@dev (Dex)** - Primary consumer of optimized configuration
+- **@developer (Dex)** - Primary consumer of optimized configuration
 
 ---
 ---

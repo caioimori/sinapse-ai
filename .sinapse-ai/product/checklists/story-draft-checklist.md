@@ -129,7 +129,7 @@ CodeRabbit integration ensures automated code review and quality gates. Verify:
 
 1. The 🤖 CodeRabbit Integration section is present
 2. Story type is correctly identified (Database, API, Frontend, Deployment, Security, Architecture, Integration)
-3. Specialized agents are assigned appropriately (@dev required, type-specific agents as needed)
+3. Specialized agents are assigned appropriately (@developer required, type-specific agents as needed)
 4. Quality gates are defined (Pre-Commit required, Pre-PR/Pre-Deployment as applicable)
 5. Self-Healing Configuration (Story 6.3.3) is present with correct mode
 6. Focus areas match the story type]]
@@ -144,7 +144,7 @@ CodeRabbit integration ensures automated code review and quality gates. Verify:
 - [ ] Secondary types listed if applicable
 
 **Specialized Agent Assignment:**
-- [ ] @dev listed as primary agent (required for all stories)
+- [ ] @developer listed as primary agent (required for all stories)
 - [ ] Type-specific agents assigned appropriately:
   - Database stories → @db-sage
   - Frontend stories → @ux-expert
@@ -152,7 +152,7 @@ CodeRabbit integration ensures automated code review and quality gates. Verify:
   - Security stories → @architect
 
 **Quality Gate Tasks:**
-- [ ] Pre-Commit (@dev) defined - REQUIRED for all stories
+- [ ] Pre-Commit (@developer) defined - REQUIRED for all stories
 - [ ] Pre-PR (@github-devops) defined if PR will be created
 - [ ] Pre-Deployment (@github-devops) defined for production stories
 

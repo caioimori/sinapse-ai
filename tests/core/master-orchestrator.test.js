@@ -6,7 +6,7 @@
  *
  * Tests the core functionality of the MasterOrchestrator class.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

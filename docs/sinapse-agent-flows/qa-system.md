@@ -2,14 +2,14 @@
 
 > **Versão:** 1.0.0
 > **Criado:** 2026-02-04
-> **Owner:** @qa (Quinn - Guardian)
+> **Owner:** @quality-gate (Quinn - Guardian)
 > **Status:** Documentação Oficial
 
 ---
 
 ## Visão Geral
 
-O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu papel e fornecer analise abrangente de qualidade, decisoes de quality gates e recomendacoes acionaveis para equipes de desenvolvimento.
+O agente **@quality-gate (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu papel e fornecer analise abrangente de qualidade, decisoes de quality gates e recomendacoes acionaveis para equipes de desenvolvimento.
 
 **Arquetipo:** Guardian (Virgem)
 **Tom de Comunicacao:** Analitico, sistematico, educacional, pragmatico
@@ -43,7 +43,7 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu pa
 | `.sinapse-ai/development/tasks/qa-generate-tests.md` | `*generate-tests` | Gerar suites de teste automaticamente |
 | `.sinapse-ai/development/tasks/qa-run-tests.md` | `*run-tests` | Executar suite de testes com gate de qualidade |
 | `.sinapse-ai/development/tasks/qa-backlog-add-followup.md` | `*backlog-add` | Adicionar follow-ups ao backlog |
-| `.sinapse-ai/development/tasks/qa-create-fix-request.md` | `*create-fix-request {story}` | Gerar documento de fix request para @dev |
+| `.sinapse-ai/development/tasks/qa-create-fix-request.md` | `*create-fix-request {story}` | Gerar documento de fix request para @developer |
 
 ### Arquivos de Tasks Secundarias do @qa
 
@@ -52,7 +52,7 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu pa
 | `.sinapse-ai/development/tasks/qa-browser-console-check.md` | Verificar erros no console do browser |
 | `.sinapse-ai/development/tasks/qa-evidence-requirements.md` | Requisitos de evidencia para QA |
 | `.sinapse-ai/development/tasks/qa-false-positive-detection.md` | Deteccao de falsos positivos |
-| `.sinapse-ai/development/tasks/qa-fix-issues.md` | Task para @dev aplicar fixes de QA |
+| `.sinapse-ai/development/tasks/qa-fix-issues.md` | Task para @developer aplicar fixes de QA |
 | `.sinapse-ai/development/tasks/qa-library-validation.md` | Validacao de bibliotecas |
 | `.sinapse-ai/development/tasks/qa-migration-validation.md` | Validacao de migracoes |
 | `.sinapse-ai/development/tasks/qa-review-build.md` | Revisao de builds |
@@ -63,8 +63,8 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu pa
 
 | Arquivo | Propósito |
 |---------|-----------|
-| `.sinapse-ai/development/agents/qa.md` | Definição completa do agente QA |
-| `.claude/commands/SINAPSE/agents/qa.md` | Comando Claude Code para ativar @qa |
+| `.sinapse-ai/development/agents/quality-gate.md` | Definição completa do agente QA |
+| `.claude/commands/SINAPSE/agents/quality-gate.md` | Comando Claude Code para ativar @quality-gate |
 
 ### Arquivos de Workflow
 
@@ -76,7 +76,7 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu pa
 
 | Arquivo | Propósito |
 |---------|-----------|
-| `.sinapse-ai/development/agent-teams/team-qa-focused.yaml` | Configuracao do time focado em QA (@dev, @qa, @github-devops) |
+| `.sinapse-ai/development/agent-teams/team-qa-focused.yaml` | Configuracao do time focado em QA (@developer, @quality-gate, @github-devops) |
 
 ### Arquivos de Dados (Outputs)
 
@@ -101,7 +101,7 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do SINAPSE. Seu pa
 ```mermaid
 flowchart TB
     subgraph TRIGGERS["Gatilhos de QA"]
-        DEV_DONE["@dev marca story<br/>Ready for Review"]
+        DEV_DONE["@developer marca story<br/>Ready for Review"]
         MANUAL["Usuario executa<br/>*review {story}"]
         LOOP["QA Loop<br/>*qa-loop {story}"]
     end
@@ -173,7 +173,7 @@ flowchart TB
     WAIVED --> GATE_FILE
 
     GATE_FILE --> STORY_UPDATE
-    FIX_REQUEST --> DEV_FIX["@dev aplica fixes"]
+    FIX_REQUEST --> DEV_FIX["@developer aplica fixes"]
     DEV_FIX --> LOOP
 
     style TRIGGERS fill:#e1f5fe
@@ -198,7 +198,7 @@ flowchart LR
         REVIEW["Phase 1<br/>QA Review"]
         CHECK{{"Verdict?"}}
         FIX_REQ["Phase 3<br/>Create Fix Request"]
-        DEV_FIX["Phase 4<br/>@dev Apply Fixes"]
+        DEV_FIX["Phase 4<br/>@developer Apply Fixes"]
         INCREMENT{{"iter < max?"}}
 
         REVIEW --> CHECK
@@ -304,7 +304,7 @@ stateDiagram-v2
     GateFail --> FixRequest: Create fix request
     GateWaived --> [*]: Proceed with waiver
 
-    FixRequest --> DevFix: @dev applies fixes
+    FixRequest --> DevFix: @developer applies fixes
     DevFix --> [*]: Re-review
 ```
 
@@ -429,22 +429,22 @@ flowchart TB
     subgraph AGENTS["Integracoes do @qa"]
         direction TB
 
-        subgraph QA_BOX["@qa (Quinn) - Test Architect"]
+        subgraph QA_BOX["@quality-gate (Quinn) - Test Architect"]
             QA_DESC["Revisa stories, cria gates,<br/>design de testes, rastreabilidade"]
             QA_CMDS["Comandos principais:<br/>*review, *gate, *test-design<br/>*risk-profile, *nfr-assess, *trace"]
         end
 
-        subgraph DEV_BOX["@dev (Dex) - Developer"]
+        subgraph DEV_BOX["@developer (Dex) - Developer"]
             DEV_DESC["Recebe feedback de QA,<br/>aplica fixes"]
             DEV_CMDS["Recebe: QA_FIX_REQUEST.md<br/>Executa: *fix-qa-issues"]
         end
 
-        subgraph PO_BOX["@po (Pax) - Product Owner"]
+        subgraph PO_BOX["@product-lead (Pax) - Product Owner"]
             PO_DESC["Gerencia backlog de follow-ups"]
             PO_CMDS["Recebe: Backlog items<br/>Executa: *backlog-review"]
         end
 
-        subgraph SM_BOX["@sm (River) - Scrum Master"]
+        subgraph SM_BOX["@sprint-lead (River) - Scrum Master"]
             SM_DESC["Pode solicitar risk profiling"]
             SM_CMDS["Colabora em: Sprint planning"]
         end
@@ -474,20 +474,20 @@ flowchart TB
 
 ### Fluxo de Handoff QA -> Dev
 
-1. @qa executa `*review {story}`
+1. @quality-gate executa `*review {story}`
 2. Identifica issues criticos
 3. Cria `*create-fix-request {story}`
-4. @dev recebe `QA_FIX_REQUEST.md`
-5. @dev executa `*fix-qa-issues {story}`
-6. @dev cria `READY_FOR_REREVIEW.md`
-7. @qa re-revisa com `*review {story}`
+4. @developer recebe `QA_FIX_REQUEST.md`
+5. @developer executa `*fix-qa-issues {story}`
+6. @developer cria `READY_FOR_REREVIEW.md`
+7. @quality-gate re-revisa com `*review {story}`
 
 ### Fluxo de Backlog
 
-1. @qa durante review identifica follow-ups
+1. @quality-gate durante review identifica follow-ups
 2. Adiciona item com `*backlog-add`
 3. Item rastreado com source: "QA Review"
-4. @po prioriza com `*backlog-prioritize`
+4. @product-lead prioriza com `*backlog-prioritize`
 
 ---
 
@@ -617,7 +617,7 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 
 ### Agente
 
-- [qa.md](/.sinapse-ai/development/agents/qa.md)
+- [qa.md](/.sinapse-ai/development/agents/quality-gate.md)
 
 ### Documentos Relacionados
 
@@ -647,7 +647,7 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 
 | Data | Autor | Descrição |
 |------|-------|-----------|
-| 2026-02-04 | @qa | Documento inicial criado com diagramas Mermaid completos |
+| 2026-02-04 | @quality-gate | Documento inicial criado com diagramas Mermaid completos |
 
 ---
 

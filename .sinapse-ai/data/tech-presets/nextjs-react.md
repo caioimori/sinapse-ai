@@ -890,7 +890,7 @@ export { [feature]Service } from './services/[feature].service'
 @architect *create-doc fullstack-architecture
 
 # Reference this preset
-@dev "Follow the nextjs-react preset patterns"
+@developer "Follow the nextjs-react preset patterns"
 ```
 
 ---

@@ -1040,7 +1040,7 @@ class WorkflowExecutor {
   /**
    * Executes Phase 6: Checkpoint (Human Decision)
    * @param {Object} phase - Phase configuration
-   * @param {string} agent - Agent ID (@po)
+   * @param {string} agent - Agent ID (@product-lead)
    * @param {string} storyPath - Path to story file
    * @returns {Promise<Object>} Phase result
    */

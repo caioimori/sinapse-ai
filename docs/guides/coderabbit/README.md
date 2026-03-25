@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0
 **Last Updated:** 2026-01-28
-**Applicable Agents:** @qa (Quinn), @devops (Gage)
+**Applicable Agents:** @quality-gate (Quinn), @devops (Gage)
 
 ---
 
@@ -48,7 +48,7 @@ Layer 3: HUMAN REVIEW
 
 ## Agents Using CodeRabbit
 
-### @qa (Quinn) - Quality Assurance Agent
+### @quality-gate (Quinn) - Quality Assurance Agent
 
 Quinn uses CodeRabbit for comprehensive story reviews with self-healing capabilities.
 
@@ -113,7 +113,7 @@ wsl bash -c '~/.local/bin/coderabbit auth status'
 
 CodeRabbit is configured in agent definition files:
 
-**Location:** `.sinapse-ai/development/agents/qa.md` and `devops.md`
+**Location:** `.sinapse-ai/development/agents/quality-gate.md` and `devops.md`
 
 ```yaml
 coderabbit_integration:
@@ -185,7 +185,7 @@ CodeRabbit categorizes issues by severity:
 
 ## Self-Healing Workflow
 
-The @qa agent implements automatic issue resolution:
+The @quality-gate agent implements automatic issue resolution:
 
 ```
 iteration = 0
@@ -323,13 +323,13 @@ wsl bash -c 'cd /path/to/repo && ~/.local/bin/coderabbit --prompt-only --base ma
 
 ```
 1. Developer works on story
-   └── @dev implements changes
+   └── @developer implements changes
 
 2. Pre-commit quality (Layer 1)
    └── Husky runs lint, tests
 
 3. Ready for review
-   └── @qa *review {story}
+   └── @quality-gate *review {story}
        └── CodeRabbit scans (Layer 2)
        └── Self-healing if needed
        └── QA gate decision
@@ -367,8 +367,8 @@ CodeRabbit results are recorded in story files:
 
 | Role      | Agent | Responsibility              |
 | --------- | ----- | --------------------------- |
-| Primary   | @dev  | Implementation              |
-| Secondary | @qa   | CodeRabbit review + QA gate |
+| Primary   | @developer  | Implementation              |
+| Secondary | @quality-gate   | CodeRabbit review + QA gate |
 ```
 
 ---
@@ -389,7 +389,7 @@ docs/qa/coderabbit-reports/
 ## Related Documentation
 
 - [Quality Gates Specification](../../../.sinapse-ai/docs/standards/QUALITY-GATES-SPECIFICATION.md)
-- [@qa Agent Definition](../../../.sinapse-ai/development/agents/qa.md)
+- [@quality-gate Agent Definition](../../../.sinapse-ai/development/agents/quality-gate.md)
 - [@devops Agent Definition](../../../.sinapse-ai/development/agents/devops.md)
 - [Pre-Push Quality Gate Task](../../../.sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md)
 

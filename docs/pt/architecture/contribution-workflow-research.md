@@ -8,7 +8,7 @@
 
 **Story:** COLLAB-1
 **Data:** 2025-12-30
-**Autor:** @dev (Dex) + @devops (Gage)
+**Autor:** @developer (Dex) + @devops (Gage)
 **Status:** Completo
 
 ---

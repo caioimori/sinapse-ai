@@ -17,7 +17,7 @@ const yaml = require('js-yaml');
  * List of all SINAPSE agents
  */
 const AGENTS = [
-  'sinapse-master',
+  'sinapse-orqx',
   'dev',
   'qa',
   'architect',
@@ -117,7 +117,7 @@ function analyzeConfigNeeds(agentData) {
   }
 
   // Registry needed for meta operations
-  if (agentData.agentId === 'sinapse-master' ||
+  if (agentData.agentId === 'sinapse-orqx' ||
       agentData.customization?.includes('registry')) {
     needs.lazy.push('registry');
   }

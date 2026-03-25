@@ -349,7 +349,7 @@ workflow:
       elicit: true
       duration_estimate: "30-45 min"
       notes: |
-        @qa faz review geral de qualidade do assessment:
+        @quality-gate faz review geral de qualidade do assessment:
 
         RESPONSABILIDADES:
         1. IDENTIFICAR GAPS
@@ -376,7 +376,7 @@ workflow:
            - O assessment está completo?
            - Pode seguir para planning?
 
-        COMANDO: @qa (prompt manual)
+        COMANDO: @quality-gate (prompt manual)
 
         PROMPT:
         ```
@@ -659,7 +659,7 @@ workflow:
       elicit: true
       duration_estimate: "20-30 min"
       notes: |
-        @pm cria epic baseado no assessment validado:
+        @project-lead cria epic baseado no assessment validado:
 
         EPIC: "Resolução de Débitos Técnicos - [Nome do Projeto]"
 
@@ -671,7 +671,7 @@ workflow:
         - Budget aprovado
         - Lista de stories
 
-        COMANDO: @pm → *create-epic
+        COMANDO: @project-lead → *create-epic
 
         OUTPUT: docs/stories/epic-technical-debt.md
 
@@ -686,7 +686,7 @@ workflow:
       elicit: true
       duration_estimate: "15-20 min por story"
       notes: |
-        @pm cria stories para cada débito/grupo de débitos:
+        @project-lead cria stories para cada débito/grupo de débitos:
 
         Para cada item priorizado:
         - Story com tasks claras
@@ -695,7 +695,7 @@ workflow:
         - Estimativa validada pelos especialistas
         - Definition of Done
 
-        COMANDO: @pm → *create-story (repetir)
+        COMANDO: @project-lead → *create-story (repetir)
 
         OUTPUT:
         - docs/stories/story-1.1-fix-security-rls.md
@@ -742,7 +742,7 @@ workflow:
         PRÓXIMOS PASSOS:
         1. Apresentar TECHNICAL-DEBT-REPORT.md para stakeholders
         2. Obter aprovação de budget
-        3. Iniciar desenvolvimento: @dev → story-1.1
+        3. Iniciar desenvolvimento: @developer → story-1.1
 
         TEMPO TOTAL ESTIMADO: 4-6 horas
 
@@ -842,7 +842,7 @@ workflow:
       duration: "20-30 min"
     fase_7:
       name: "QA Review"
-      agent: "@qa"
+      agent: "@quality-gate"
       command: "(manual review)"
       output: "docs/reviews/qa-review.md"
       duration: "30-45 min"
@@ -860,7 +860,7 @@ workflow:
       duration: "30-45 min"
     fase_10:
       name: "Planning"
-      agent: "@pm"
+      agent: "@project-lead"
       command: "*brownfield-create-epic + *brownfield-create-story"
       output: "docs/stories/epic-*.md, story-*.md"
       duration: "30-60 min"
@@ -917,7 +917,7 @@ workflow:
     report_complete: |
       Relatório executivo: docs/reports/TECHNICAL-DEBT-REPORT.md
 
-      Próximo: @pm para criar epic e stories (FASE 10)
+      Próximo: @project-lead para criar epic e stories (FASE 10)
 
     workflow_complete: |
       ✅ DISCOVERY COMPLETO!
@@ -929,4 +929,4 @@ workflow:
       - docs/stories/epic-technical-debt.md
       - docs/stories/story-*.md
 
-      Pronto para: @dev implementar stories
+      Pronto para: @developer implementar stories

@@ -1,5 +1,5 @@
 /**
- * Dev Context Loader - Optimized File Loading for @dev Agent
+ * Dev Context Loader - Optimized File Loading for @developer Agent
  *
  * Loads devLoadAlwaysFiles with smart caching and summarization.
  * Reduces ~2,300 lines to ~500 lines summary on initial load.

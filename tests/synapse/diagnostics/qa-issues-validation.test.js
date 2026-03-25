@@ -5,7 +5,7 @@
  * Each describe block maps to one issue. The test SHOULD FAIL with current
  * code to confirm the problem, then PASS after the fix.
  *
- * @created 2026-02-14 by Quinn (@qa)
+ * @created 2026-02-14 by Quinn (@quality-gate)
  */
 
 'use strict';
@@ -243,7 +243,7 @@ describe('Issue #5: Skipped layers should NOT count as gaps', () => {
   afterEach(() => { cleanupDir(project.dir); });
 
   test('layers skipped by bracket (no data) should not be gaps', () => {
-    // Agent @po in FRESH bracket: only L0, L1, L2, L7 active
+    // Agent @product-lead in FRESH bracket: only L0, L1, L2, L7 active
     // L3-L6 are skipped by design — they have no workflow/task/squad
     writeMetrics(project.metricsDir, 'uap-metrics.json', {
       agentId: 'po',
@@ -275,7 +275,7 @@ describe('Issue #5: Skipped layers should NOT count as gaps', () => {
     const result = collectRelevanceMatrix(project.dir);
 
     // BUG: Currently counts skipped layers as gaps
-    // For @po with no workflow/task, skipped L3-L6 is NORMAL
+    // For @product-lead with no workflow/task, skipped L3-L6 is NORMAL
     const skippedGaps = result.gaps.filter(g =>
       ['workflow', 'task', 'keyword', 'star-command'].includes(g.component),
     );

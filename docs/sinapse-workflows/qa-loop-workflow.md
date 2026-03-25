@@ -72,7 +72,7 @@ flowchart TD
     end
 
     subgraph REVIEW["Fase 1: QA Review"]
-        R1["@qa executa qa-review-story.md"]
+        R1["@quality-gate executa qa-review-story.md"]
         R2["Gera gate-file.yaml"]
         R3["Retorna verdict + issuesFound"]
     end
@@ -85,13 +85,13 @@ flowchart TD
     end
 
     subgraph FIX_REQ["Fase 3: Criar Fix Request"]
-        F1["@qa executa qa-create-fix-request.md"]
+        F1["@quality-gate executa qa-create-fix-request.md"]
         F2["Gera fix-request.md"]
         F3["Prioriza issues"]
     end
 
     subgraph FIX["Fase 4: Aplicar Fixes"]
-        X1["@dev executa dev-apply-qa-fixes.md"]
+        X1["@developer executa dev-apply-qa-fixes.md"]
         X2["Aplica correções"]
         X3["Valida com testes"]
         X4["Gera fixes-applied.json"]
@@ -180,8 +180,8 @@ stateDiagram-v2
 sequenceDiagram
     participant U as Usuario
     participant S as System
-    participant QA as @qa (Quinn)
-    participant DEV as @dev (Dex)
+    participant QA as @quality-gate (Quinn)
+    participant DEV as @developer (Dex)
 
     U->>S: *qa-loop STORY-42
     S->>S: Inicializar loop-status.json
@@ -392,7 +392,7 @@ flowchart TD
 
 ## Agentes Participantes
 
-### @qa - Quinn (Test Architect)
+### @quality-gate - Quinn (Test Architect)
 
 ```yaml
 Nome: Quinn
@@ -437,7 +437,7 @@ self_healing:
 
 ---
 
-### @dev - Dex (Full Stack Developer)
+### @developer - Dex (Full Stack Developer)
 
 ```yaml
 Nome: Dex
@@ -538,7 +538,7 @@ flowchart TD
 
 **Localização:** `.sinapse-ai/development/tasks/qa-create-fix-request.md`
 
-**Propósito:** Gerar documento estruturado `QA_FIX_REQUEST.md` para @dev baseado nos findings de QA.
+**Propósito:** Gerar documento estruturado `QA_FIX_REQUEST.md` para @developer baseado nos findings de QA.
 
 **Workflow:**
 
@@ -769,7 +769,7 @@ flowchart TD
 |---------|-------|------|
 | `max_iterations_reached` | Loop atingiu max sem APPROVE | Escalar com contexto completo |
 | `verdict_blocked` | QA retornou BLOCKED | Escalar imediatamente |
-| `fix_failure` | @dev nao conseguiu aplicar fixes apos retries | Escalar com log de erros |
+| `fix_failure` | @developer nao conseguiu aplicar fixes apos retries | Escalar com log de erros |
 | `manual_escalate` | Usuario executou `*escalate-qa-loop` | Escalar sob demanda |
 
 ---
@@ -993,7 +993,7 @@ ls -la qa/gates/
 ### Problema: Fix Não Aplicado
 
 **Sintomas:**
-- @dev reporta sucesso mas issues persistem
+- @developer reporta sucesso mas issues persistem
 - Re-review encontra mesmos problemas
 
 **Diagnóstico:**
@@ -1007,7 +1007,7 @@ cat qa/fixes-applied.json
 
 **Solução:**
 1. Revisar manualmente o fix-request.md
-2. Verificar se @dev atualizou os arquivos corretos
+2. Verificar se @developer atualizou os arquivos corretos
 3. Rodar testes localmente antes de re-review
 
 ---
@@ -1079,8 +1079,8 @@ mv qa/loop-status.json qa/loop-status.json.bak
 | QA Review Task | `.sinapse-ai/development/tasks/qa-review-story.md` |
 | Create Fix Request Task | `.sinapse-ai/development/tasks/qa-create-fix-request.md` |
 | Apply QA Fixes Task | `.sinapse-ai/development/tasks/dev-apply-qa-fixes.md` |
-| QA Agent | `.sinapse-ai/development/agents/qa.md` |
-| Dev Agent | `.sinapse-ai/development/agents/dev.md` |
+| QA Agent | `.sinapse-ai/development/agents/quality-gate.md` |
+| Dev Agent | `.sinapse-ai/development/agents/developer.md` |
 
 ### Documentação Relacionada
 

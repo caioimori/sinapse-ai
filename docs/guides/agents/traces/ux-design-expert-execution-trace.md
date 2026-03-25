@@ -893,11 +893,11 @@ graph TD
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
 | @architect -> @ux-design-expert | Collaborate | Frontend architecture, user flows, component hierarchy |
-| @ux-design-expert -> @dev | Handoff | Design specs, component blueprints for implementation |
+| @ux-design-expert -> @developer | Handoff | Design specs, component blueprints for implementation |
 | @ux-design-expert -> @analyst | Collaborate | User research planning, data analysis |
 | @ux-design-expert -> @devops | Delegate | Git push operations, PR creation |
-| @po -> @ux-design-expert | Receives | Design stories, UX requirements |
-| @qa -> @ux-design-expert | Validate | Component quality checklists, accessibility audits |
+| @product-lead -> @ux-design-expert | Receives | Design stories, UX requirements |
+| @quality-gate -> @ux-design-expert | Validate | Component quality checklists, accessibility audits |
 
 ### Collaboration Rules (from agent definition)
 
@@ -906,7 +906,7 @@ graph TD
 - Component hierarchy and integration patterns
 - Technology stack decisions affecting UX
 
-**Hands off to @dev (Dex):**
+**Hands off to @developer (Dex):**
 - Design specifications and component blueprints
 - Token definitions and design system configurations
 - Component implementations with TypeScript + tests

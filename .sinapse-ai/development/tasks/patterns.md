@@ -8,7 +8,7 @@ View, manage, and review learned workflow patterns captured by the Workflow Inte
 
 ```yaml
 task: patterns()
-agent: "@dev"
+agent: "@developer"
 responsável: Dex (Developer)
 responsavel_type: Agente
 atomic_layer: Workflow
@@ -321,7 +321,7 @@ optimizations:
 story: WIS-5
 version: 1.0.0
 created: 2025-12-26
-author: "@dev (Dex)"
+author: "@developer (Dex)"
 dependencies:
   modules:
     - workflow-intelligence/learning

@@ -75,11 +75,11 @@ O diretório `sinapse-ai` contém todas as definições e recursos que dão aos 
 
 ### 3.1. Agentes (`sinapse-ai/agents/`)
 
-- **Propósito**: Estes são os blocos fundamentais do sistema. Cada arquivo markdown (ex: `sinapse-master.md`, `pm.md`, `dev.md`) define a persona, capacidades e dependências de um único agente de IA.
+- **Propósito**: Estes são os blocos fundamentais do sistema. Cada arquivo markdown (ex: `sinapse-orqx.md`, `pm.md`, `dev.md`) define a persona, capacidades e dependências de um único agente de IA.
 - **Estrutura**: Um arquivo de agente contém um cabeçalho YAML que especifica seu papel, persona, dependências e instruções de inicialização. Estas dependências são listas de tasks, templates, checklists e arquivos de dados que o agente tem permissão para usar.
 - **Instruções de Inicialização**: Agentes podem incluir sequências de inicialização que carregam documentação específica do projeto da pasta `docs/`, como padrões de codificação, especificações de API ou documentos de estrutura do projeto. Isso fornece contexto imediato do projeto na ativação.
 - **Integração de Documentos**: Agentes podem referenciar e carregar documentos da pasta `docs/` do projeto como parte de tasks, workflows ou sequências de inicialização. Os usuários também podem arrastar documentos diretamente para interfaces de chat para fornecer contexto adicional.
-- **Exemplo**: O agente `sinapse-master` lista suas dependências, o que informa à ferramenta de build quais arquivos incluir em um bundle web e informa ao agente sobre suas próprias capacidades.
+- **Exemplo**: O agente `sinapse-orqx` lista suas dependências, o que informa à ferramenta de build quais arquivos incluir em um bundle web e informa ao agente sobre suas próprias capacidades.
 
 ### 3.2. Times de Agentes (`sinapse-ai/agent-teams/`)
 

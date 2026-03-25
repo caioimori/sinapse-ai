@@ -604,8 +604,8 @@ mindmap
 | `db-schema-audit` | @data-engineer | 2 | Auditoria de schema de banco |
 | `security-audit` | @data-engineer | 2 | Auditoria de seguranca (RLS, PII) |
 | `create-front-end-spec` | @ux-design-expert | 3 | Especificacao de frontend |
-| `brownfield-create-epic` | @pm | 10 | Criacao de epic de debito tecnico |
-| `brownfield-create-story` | @pm | 10 | Criacao de stories (repetivel) |
+| `brownfield-create-epic` | @project-lead | 10 | Criacao de epic de debito tecnico |
+| `brownfield-create-story` | @project-lead | 10 | Criacao de stories (repetivel) |
 
 ### Acoes Manuais (workflow-action)
 
@@ -614,7 +614,7 @@ mindmap
 | `consolidate_findings_draft` | @architect | 4 | Consolidar DRAFT inicial |
 | `review_and_validate` | @data-engineer | 5 | Validar debitos de DB |
 | `review_and_validate` | @ux-design-expert | 6 | Validar debitos de UX |
-| `review_assessment` | @qa | 7 | Quality Gate review |
+| `review_assessment` | @quality-gate | 7 | Quality Gate review |
 | `finalize_assessment` | @architect | 8 | Assessment final |
 | `create_awareness_report` | @analyst | 9 | Relatorio executivo |
 
@@ -641,7 +641,7 @@ mindmap
 | `git` | @architect | Analise de repositorio |
 | `supabase-cli` | @data-engineer | Auditoria de database |
 | `psql` | @data-engineer | Queries de auditoria |
-| `coderabbit` | @qa | Review automatizado de codigo |
+| `coderabbit` | @quality-gate | Review automatizado de codigo |
 | `exa` | @analyst | Pesquisa de mercado/benchmark |
 
 ---
@@ -877,9 +877,9 @@ flowchart TD
 | @architect | `.sinapse-ai/development/agents/architect.md` |
 | @data-engineer | `.sinapse-ai/development/agents/data-engineer.md` |
 | @ux-design-expert | `.sinapse-ai/development/agents/ux-design-expert.md` |
-| @qa | `.sinapse-ai/development/agents/qa.md` |
+| @quality-gate | `.sinapse-ai/development/agents/quality-gate.md` |
 | @analyst | `.sinapse-ai/development/agents/analyst.md` |
-| @pm | `.sinapse-ai/development/agents/pm.md` |
+| @project-lead | `.sinapse-ai/development/agents/project-lead.md` |
 
 ### Documentacao Relacionada
 

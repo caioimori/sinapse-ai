@@ -476,16 +476,16 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @pm -> @analyst | Delegates | Market research, competitive analysis, feasibility studies |
+| @project-lead -> @analyst | Delegates | Market research, competitive analysis, feasibility studies |
 | @architect -> @analyst | Delegates | Technical research, dependency analysis |
-| @po -> @analyst | Delegates | Market insights, user research, competitive intelligence |
-| @analyst -> @pm | Handoff | Research findings for PRD creation |
-| @analyst -> @po | Handoff | Market insights for story prioritization |
+| @product-lead -> @analyst | Delegates | Market insights, user research, competitive intelligence |
+| @analyst -> @project-lead | Handoff | Research findings for PRD creation |
+| @analyst -> @product-lead | Handoff | Market insights for story prioritization |
 | @analyst -> @devops | Delegate | Git push operations, PR creation |
 
 ### Delegation Rules (from agent definition)
 
-**Receives from @pm when:**
+**Receives from @project-lead when:**
 - Market research required for PRD creation
 - Competitive landscape analysis needed
 - Feasibility studies for new features
@@ -496,7 +496,7 @@ graph TD
 - Library/framework evaluation required
 - Technology comparison analysis
 
-**Receives from @po when:**
+**Receives from @product-lead when:**
 - Market insights needed for epic/story prioritization
 - User research for feature validation
 - Competitive analysis for backlog grooming

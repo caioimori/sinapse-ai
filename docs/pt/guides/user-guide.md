@@ -95,16 +95,16 @@ O SINAPSE inclui 11 agentes especializados, cada um com papel e personalidade di
 | **Dara**  | `@data-engineer` | Arquiteto    | Engenharia de dados       |
 | **Felix** | `@devops`        | Otimizador   | CI/CD e operações         |
 | **Uma**   | `@ux-expert`     | Criador      | Experiência do usuário    |
-| **Pax**   | `@sinapse-master`   | Orquestrador | Orquestração do framework |
+| **Pax**   | `@sinapse-orqx`   | Orquestrador | Orquestração do framework |
 
 ### Ativação de Agentes
 
 ```bash
 # Ative um agente usando sintaxe @
-@dev                # Ativar Dex (Desenvolvedor)
-@qa                 # Ativar Quinn (QA)
+@developer                # Ativar Dex (Desenvolvedor)
+@quality-gate                 # Ativar Quinn (QA)
 @architect          # Ativar Aria (Arquiteto)
-@sinapse-master        # Ativar Pax (Orquestrador)
+@sinapse-orqx        # Ativar Pax (Orquestrador)
 
 # Comandos de agente usam prefixo *
 *help               # Mostrar comandos disponíveis
@@ -397,7 +397,7 @@ sinapse rebuild
 Sempre crie uma story antes de implementar funcionalidades:
 
 ```bash
-@sinapse-master
+@sinapse-orqx
 *create-story
 ```
 
@@ -407,10 +407,10 @@ Escolha o agente apropriado para cada task:
 
 | Task               | Agente     |
 | ------------------ | ---------- |
-| Escrever código    | @dev       |
-| Revisar código     | @qa        |
+| Escrever código    | @developer       |
+| Revisar código     | @quality-gate        |
 | Projetar sistema   | @architect |
-| Definir requisitos | @po        |
+| Definir requisitos | @product-lead        |
 
 ### 3. Siga Quality Gates
 

@@ -11,8 +11,8 @@ const path = require('path');
  * Maps deprecated agent IDs to their new target IDs
  */
 const DEFAULT_REDIRECTS = {
-  'sinapse-developer': 'sinapse-master',
-  'sinapse-orchestrator': 'sinapse-master',
+  'sinapse-developer': 'sinapse-orqx',
+  'sinapse-orchestrator': 'sinapse-orqx',
   'db-sage': 'data-engineer',
   'github-devops': 'devops',
 };

@@ -520,7 +520,7 @@ Regardless of story type, ALL brownfield stories must include these focus areas:
 
   Specialized Agent Assignment:
     Primary Agents:
-      - @dev (always required)
+      - @developer (always required)
       - @[integration-specific-agent] (based on affected systems)
 
     Supporting Agents:
@@ -528,7 +528,7 @@ Regardless of story type, ALL brownfield stories must include these focus areas:
       - @[supporting-agent-2] (if cross-cutting concerns)
 
   Quality Gate Tasks:
-    - [ ] Pre-Commit (@dev): Run `coderabbit --prompt-only -t uncommitted` before story complete
+    - [ ] Pre-Commit (@developer): Run `coderabbit --prompt-only -t uncommitted` before story complete
     - [ ] Pre-PR (@github-devops): Run `coderabbit --prompt-only --base main` before PR creation
     - [ ] Pre-Deployment (@github-devops): Run `coderabbit --prompt-only -t committed --base HEAD~10` before production deploy (HIGH RISK stories only)
 
@@ -563,7 +563,7 @@ Regardless of story type, ALL brownfield stories must include these focus areas:
 
   Specialized Agent Assignment:
     Primary Agents:
-      - @dev (pre-commit reviews)
+      - @developer (pre-commit reviews)
       - @db-sage (schema changes, RLS policies, existing data migration)
       - @architect (API contract changes, backward compatibility)
 
@@ -571,7 +571,7 @@ Regardless of story type, ALL brownfield stories must include these focus areas:
       - @github-devops (phased rollout, rollback procedure)
 
   Quality Gate Tasks:
-    - [ ] Pre-Commit (@dev): Run before story complete
+    - [ ] Pre-Commit (@developer): Run before story complete
     - [ ] Pre-PR (@github-devops): Run before PR creation
     - [ ] Pre-Deployment (@github-devops): Run before production deploy with rollback plan validation
 

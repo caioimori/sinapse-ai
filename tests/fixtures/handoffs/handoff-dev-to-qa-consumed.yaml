@@ -1,6 +1,6 @@
 handoff:
-  from_agent: "@dev"
-  to_agent: "@qa"
+  from_agent: "@developer"
+  to_agent: "@quality-gate"
   last_command: "*develop story-WIS-16"
   story_context:
     story_id: WIS-16

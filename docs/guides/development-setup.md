@@ -703,7 +703,7 @@ stages:
   - id: stage-3-implement
     name: Implementation Phase
     description: Code implementation
-    agent: dev
+    agent: developer
     tasks:
       - develop-story
     outputs:

@@ -12,7 +12,7 @@ Requer decisão humana para continuar, pausar, revisar ou abortar.
 ```yaml
 task_id: story-checkpoint
 version: "1.0.0"
-agent: "@po"
+agent: "@product-lead"
 elicit: true  # REQUIRES human interaction
 epic: "11 - Projeto Bob"
 story: "11.3"
@@ -207,7 +207,7 @@ steps:
       To resume later, run:
         *workflow resume development-cycle
 
-      Or activate @po and run:
+      Or activate @product-lead and run:
         *validate-story-draft ${next_story}
 
   3_exit:
@@ -357,4 +357,4 @@ output:
 
 ---
 
-*Task created by @dev (Dex) for Story 11.3*
+*Task created by @developer (Dex) for Story 11.3*

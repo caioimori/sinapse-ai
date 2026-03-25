@@ -52,13 +52,14 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
       expect(content.language).toBe('english');
     });
 
-    test('should map es to spanish', async () => {
+    test('should pass through unmapped language codes as-is', async () => {
+      // 'es' is no longer in LANGUAGE_MAP (only en/pt); it falls through raw
       await writeClaudeSettings('es', tempDir);
 
       const settingsPath = path.join(tempDir, '.claude', 'settings.json');
       const content = JSON.parse(await fse.readFile(settingsPath, 'utf8'));
 
-      expect(content.language).toBe('spanish');
+      expect(content.language).toBe('es');
     });
 
     test('should merge into existing settings.json', async () => {
@@ -92,13 +93,13 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
         'utf8',
       );
 
-      await writeClaudeSettings('es', tempDir);
+      await writeClaudeSettings('pt', tempDir);
 
       const content = JSON.parse(
         await fse.readFile(path.join(claudeDir, 'settings.json'), 'utf8'),
       );
 
-      expect(content.language).toBe('spanish');
+      expect(content.language).toBe('portuguese');
     });
 
     test('should create .claude directory if it does not exist', async () => {
@@ -171,10 +172,10 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
     });
 
     test('should roundtrip with writeClaudeSettings', async () => {
-      await writeClaudeSettings('es', tempDir);
+      await writeClaudeSettings('pt', tempDir);
 
       const result = await getExistingLanguage(tempDir);
-      expect(result).toBe('es');
+      expect(result).toBe('pt');
     });
   });
 });

@@ -45,7 +45,7 @@ Each preset includes:
 
 > **Current:** `nextjs-react` (Next.js 16+, React, TypeScript, Tailwind, Zustand)
 
-The active preset is automatically loaded when @dev is activated. To change:
+The active preset is automatically loaded when @developer is activated. To change:
 
 ```yaml
 # .sinapse-ai/core-config.yaml

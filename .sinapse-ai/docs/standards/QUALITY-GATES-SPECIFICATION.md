@@ -553,4 +553,4 @@ reviews:
 
 **Last Updated:** 2025-12-09
 **Version:** 2.1.0
-**Maintainer:** @qa (Quinn)
+**Maintainer:** @quality-gate (Quinn)

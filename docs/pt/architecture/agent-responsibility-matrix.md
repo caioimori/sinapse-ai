@@ -8,7 +8,7 @@
 
 **Versão do Documento**: 1.0
 **Última Atualização**: 2025-10-25
-**Autor**: Winston (@architect) + Sarah (@po)
+**Autor**: Winston (@architect) + Sarah (@product-lead)
 **Contexto**: Epic 3 Fase 2 - Melhorias Estratégicas (Stories 3.13-3.19)
 
 ---
@@ -18,7 +18,7 @@
 Este documento define limites claros de responsabilidade para todos os agentes SINAPSE, com foco particular em:
 1. **Centralização do GitHub DevOps** - Apenas @github-devops pode fazer push para repositório remoto
 2. **Especialização em Arquitetura de Dados** - @data-architect gerencia banco de dados/ciência de dados
-3. **Divisão de Gerenciamento de Branches** - @sm (local) vs @github-devops (remoto)
+3. **Divisão de Gerenciamento de Branches** - @sprint-lead (local) vs @github-devops (remoto)
 4. **Restrições de Operações Git** - Quais agentes podem fazer o quê com git/GitHub
 
 **Regra Crítica**: SOMENTE o agente @github-devops pode executar `git push` para o repositório remoto.
@@ -29,7 +29,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ### Autoridade Total de Operações
 
-| Operação | @github-devops | @dev | @sm | @qa | @architect | @po |
+| Operação | @github-devops | @developer | @sprint-lead | @quality-gate | @architect | @product-lead |
 |----------|:--------------:|:----:|:---:|:---:|:----------:|:---:|
 | **git push** | ✅ ÚNICO | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **git push --force** | ✅ ÚNICO | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -126,7 +126,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ---
 
-### @dev (James) 💻
+### @developer (James) 💻
 **Papel**: Engenheiro de Software Sênior Expert e Especialista em Implementação
 
 **Escopo Principal**:
@@ -147,7 +147,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ---
 
-### @sm (Bob) 🏃
+### @sprint-lead (Bob) 🏃
 **Papel**: Scrum Master Técnico - Especialista em Preparação de Stories
 
 **Escopo Principal**:
@@ -166,7 +166,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 2. Desenvolvedor faz commits localmente
 3. Story completa → Notificar @github-devops para fazer push e criar PR
 
-**Nota**: @sm gerencia branches LOCAIS durante desenvolvimento, @github-devops gerencia operações REMOTAS
+**Nota**: @sprint-lead gerencia branches LOCAIS durante desenvolvimento, @github-devops gerencia operações REMOTAS
 
 ---
 
@@ -207,7 +207,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ---
 
-### @qa (Quinn) 🧪
+### @quality-gate (Quinn) 🧪
 **Papel**: Arquiteto de Testes e Consultor de Qualidade
 
 **Escopo Principal**:
@@ -219,11 +219,11 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 **Operações Git**: Somente leitura (status, log, diff para revisão) - SEM COMMIT, SEM PUSH
 
-**Nota**: QA revisa código mas não commita. @dev commita, @github-devops faz push.
+**Nota**: QA revisa código mas não commita. @developer commita, @github-devops faz push.
 
 ---
 
-### @po (Sarah) 📝
+### @product-lead (Sarah) 📝
 **Papel**: Product Owner Técnica e Guardiã de Processos
 
 **Escopo Principal**:
@@ -235,7 +235,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 **Operações Git**: Nenhuma (papel de PO é não-técnico em relação ao git)
 
-**Nota**: @po valida requisitos e prioriza trabalho, não interage com git.
+**Nota**: @product-lead valida requisitos e prioriza trabalho, não interage com git.
 
 ---
 
@@ -246,11 +246,11 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 ```
 1. Usuário: "Iniciar Story 3.14: Agente GitHub DevOps"
 
-2. @sm ativa:
+2. @sprint-lead ativa:
    - Cria feature branch: `git checkout -b feature/3.14-github-devops-agent`
    - Passa para @dev
 
-3. @dev ativa:
+3. @developer ativa:
    - Implementa tarefas da story
    - Commita localmente: `git add . && git commit -m "feat: implement pre-push quality gate"`
    - Marca story: "Pronta para Revisão"
@@ -340,7 +340,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ## Responsabilidades de Gerenciamento de Branch
 
-### Branches Locais (@sm durante desenvolvimento)
+### Branches Locais (@sprint-lead durante desenvolvimento)
 
 **Responsabilidades**:
 - Criar feature branches quando story inicia
@@ -349,7 +349,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 **Comandos**:
 ```bash
-# @sm pode executar:
+# @sprint-lead pode executar:
 git checkout -b feature/3.14-github-devops
 git branch -d feature/old-branch
 git merge feature/branch-to-integrate
@@ -383,9 +383,9 @@ gh pr merge
 
 - [ ] **Atualizar Todas as Definições de Agentes** (DONE ✅)
   - [x] @architect - Adicionado `git_restrictions` e limites de colaboração
-  - [x] @dev - Removido git push, adicionado redirecionamento de workflow
-  - [x] @sm - Clarificado gerenciamento apenas de branch local
-  - [x] @qa - Operações git somente leitura
+  - [x] @developer - Removido git push, adicionado redirecionamento de workflow
+  - [x] @sprint-lead - Clarificado gerenciamento apenas de branch local
+  - [x] @quality-gate - Operações git somente leitura
   - [x] @github-devops - Criado com autoridade exclusiva de push
   - [x] @data-architect - Criado com especialização em dados
 
@@ -403,7 +403,7 @@ gh pr merge
   - [ ] Atualizar docs de onboarding de desenvolvedor
 
 - [ ] **Testes**
-  - Testar @dev tentando git push (deve ser bloqueado)
+  - Testar @developer tentando git push (deve ser bloqueado)
   - Testar @github-devops git push (deve funcionar)
   - Testar quality gates antes do push
   - Testar workflow de criação de PR
@@ -430,7 +430,7 @@ Se novos agentes forem adicionados via Squads:
 **Pontos-Chave**:
 1. ✅ Apenas @github-devops pode fazer push para repositório remoto (aplicado via git hooks)
 2. ✅ @architect gerencia arquitetura de sistema, @data-architect gerencia camada de dados
-3. ✅ @sm gerencia branches locais, @github-devops gerencia operações remotas
+3. ✅ @sprint-lead gerencia branches locais, @github-devops gerencia operações remotas
 4. ✅ Quality gates são obrigatórios antes de qualquer push
 5. ✅ Todos os agentes têm limites claros e documentados
 
@@ -440,5 +440,5 @@ Se novos agentes forem adicionados via Squads:
 
 ---
 
-*Documento mantido por @architect (Winston) e @po (Sarah)*
+*Documento mantido por @architect (Winston) e @product-lead (Sarah)*
 *Última revisão: 2025-10-25*

@@ -226,7 +226,7 @@ Tasks sao workflows executaveis que agents podem rodar.
 # Nome da Task
 
 **Descricao:** O que esta task faz
-**Agent(s):** @dev, @qa, etc.
+**Agent(s):** @developer, @quality-gate, etc.
 **Elicit:** true | false
 
 ---

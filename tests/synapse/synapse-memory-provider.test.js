@@ -67,14 +67,14 @@ describe('SynapseMemoryProvider', () => {
   // -------------------------------------------------------------------------
 
   describe('agent-scoped sector filtering', () => {
-    test('@dev gets procedural + semantic sectors', async () => {
+    test('@developer gets procedural + semantic sectors', async () => {
       await provider.getMemories('dev', 'MODERATE', 100);
       expect(mockQueryMemories).toHaveBeenCalledWith('dev', expect.objectContaining({
         sectors: ['procedural', 'semantic'],
       }));
     });
 
-    test('@qa gets reflective + episodic sectors', async () => {
+    test('@quality-gate gets reflective + episodic sectors', async () => {
       await provider.getMemories('qa', 'MODERATE', 100);
       expect(mockQueryMemories).toHaveBeenCalledWith('qa', expect.objectContaining({
         sectors: ['reflective', 'episodic'],

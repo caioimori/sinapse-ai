@@ -712,7 +712,7 @@ handoff_to:
     command: "Consult @architect for impact analysis"
   dev:
     when: "Plan is approved and ready for implementation"
-    command: "Hand off plan to @dev for execution"
+    command: "Hand off plan to @developer for execution"
 
 autoClaude:
   version: '3.0'
@@ -756,7 +756,7 @@ Type `*help` to see all commands, or `*guide` for comprehensive usage instructio
 - **@devops (Gage):** For applying version upgrades, managing MCP infrastructure, and deploying configuration changes
 - **@architect (Aria):** For evaluating architectural impact of new Claude Code features
 - **@config-engineer (Sigil):** For settings.json, CLAUDE.md, and .claude/rules/ optimization when adopting new features
-- **@dev (Dex):** Receives adoption strategies and plan-first workflows for implementation
+- **@developer (Dex):** Receives adoption strategies and plan-first workflows for implementation
 
 **I delegate to:**
 
@@ -924,7 +924,7 @@ Run `*sdk-guide` for comprehensive SDK documentation.
 - **@devops (Gage)** - Executes version upgrades and infrastructure changes
 - **@architect (Aria)** - Evaluates architectural impact of new features
 - **@config-engineer (Sigil)** - Implements configuration changes for feature adoption
-- **@dev (Dex)** - Primary consumer of plan-first workflows and adoption strategies
+- **@developer (Dex)** - Primary consumer of plan-first workflows and adoption strategies
 
 ---
 ---

@@ -1,6 +1,6 @@
 # ADE Architect Handoff
 
-> **De:** Quinn (@qa) - QA Agent
+> **De:** Quinn (@quality-gate) - QA Agent
 > **Para:** Sage (@architect) - Solution Architect
 > **Data:** 2026-01-28
 > **Projeto:** SINAPSE Autonomous Development Engine (ADE)
@@ -11,7 +11,7 @@
 
 O ADE é um projeto de **Prompt Engineering + Infraestrutura** para habilitar execução autônoma de desenvolvimento no SINAPSE. Aproximadamente **60% do trabalho é criação de tasks .md, workflows .yaml e templates** - não código tradicional.
 
-**Você é o líder técnico deste projeto.** @dev será acionado apenas para scripts JS específicos.
+**Você é o líder técnico deste projeto.** @developer será acionado apenas para scripts JS específicos.
 
 ---
 
@@ -92,7 +92,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 1.4   | Auto-create trigger                   | Workflow    |
 | 1.5   | status.json integration               | JS + Schema |
 
-**@dev necessário:** Stories 1.1, 1.2, 1.5 (scripts)
+**@developer necessário:** Stories 1.1, 1.2, 1.5 (scripts)
 **@architect lidera:** Stories 1.3, 1.4 (prompts/workflows)
 
 ---
@@ -107,10 +107,10 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 2.2   | path-analyzer.js            | JS Script           |
 | 2.3   | V3 Schemas (agent, task)    | JSON Schema         |
 | 2.4   | migrate-agent.js            | JS Script           |
-| 2.5   | Pilot migration (@dev, @qa) | Manual + Validação  |
+| 2.5   | Pilot migration (@developer, @quality-gate) | Manual + Validação  |
 | 2.6   | Batch migration             | Orquestração        |
 
-**@dev necessário:** Stories 2.1, 2.2, 2.4 (scripts)
+**@developer necessário:** Stories 2.1, 2.2, 2.4 (scripts)
 **@architect lidera:** Stories 2.3, 2.5, 2.6 (schemas/orquestração)
 
 ---
@@ -128,7 +128,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 3.5   | spec-critique.md              | Task .md       |
 | 3.6   | spec-pipeline.yaml            | Workflow .yaml |
 
-**@dev necessário:** Nenhum
+**@developer necessário:** Nenhum
 **@architect lidera:** TODAS as stories (100% prompt engineering)
 
 ---
@@ -146,7 +146,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 4.5   | subtask-verifier.js                | JS Script     |
 | 4.6   | plan-tracker.js                    | JS Script     |
 
-**@dev necessário:** Stories 4.5, 4.6 (scripts)
+**@developer necessário:** Stories 4.5, 4.6 (scripts)
 **@architect lidera:** Stories 4.1, 4.2, 4.3, 4.4 (prompts)
 
 ---
@@ -162,7 +162,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 5.3   | Escalation triggers  | Workflow       |
 | 5.4   | Retry policies       | Config + Logic |
 
-**@dev necessário:** Story 5.1 (script)
+**@developer necessário:** Story 5.1 (script)
 **@architect lidera:** Stories 5.2, 5.3, 5.4
 
 ---
@@ -179,7 +179,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 6.4   | review-qa.md (Dev→QA→Dev) | Task .md             |
 | 6.5   | Quality metrics           | Schema + Aggregation |
 
-**@dev necessário:** Story 6.5 (metrics script, opcional)
+**@developer necessário:** Story 6.5 (metrics script, opcional)
 **@architect lidera:** Stories 6.1, 6.2, 6.3, 6.4
 
 ---
@@ -195,7 +195,7 @@ Embora os épicos tenham dependências de **implementação**, você pode **prep
 | 7.3   | Pattern learning                 | Task .md     |
 | 7.4   | Cross-project insights           | Task .md     |
 
-**@dev necessário:** Stories 7.1, 7.2 (Supabase)
+**@developer necessário:** Stories 7.1, 7.2 (Supabase)
 **@architect lidera:** Stories 7.3, 7.4
 
 ---
@@ -275,10 +275,10 @@ Semanas 9-10: Epic 7 (Memory Layer)
 
 ## Protocolo de Quality Gate
 
-Após completar cada epic, acione @qa para executar o quality gate:
+Após completar cada epic, acione @quality-gate para executar o quality gate:
 
 ```
-@qa *gate epic-{N}-{name}
+@quality-gate *gate epic-{N}-{name}
 ```
 
 **Decisões possíveis:**
@@ -321,18 +321,18 @@ Não há dependência do Dashboard para o ADE funcionar.
 
 1. **Ler o PRD completo** - `docs/prd/sinapse-autonomous-development-engine.md`
 2. **Ler o Auto-Claude Analysis** - `docs/architecture/AUTO-CLAUDE-ANALYSIS-COMPLETE.md`
-3. **Iniciar Epic 1.1** - worktree-manager.js (delegar para @dev)
+3. **Iniciar Epic 1.1** - worktree-manager.js (delegar para @developer)
 4. **Em paralelo, desenhar os schemas V3** (Epic 2.3)
 
 ---
 
 ## Perguntas para @architect Antes de Começar
 
-1. Prefere começar pelo código (Epic 1.1 com @dev) ou pelo design (V3 schemas)?
+1. Prefere começar pelo código (Epic 1.1 com @developer) ou pelo design (V3 schemas)?
 2. Quer criar um agente @prompt-engineer especializado ou assumir esse papel?
 3. Alguma dúvida sobre o escopo ou dependências?
 
 ---
 
-_Handoff preparado por Quinn (@qa) - Guardian of Quality_
+_Handoff preparado por Quinn (@quality-gate) - Guardian of Quality_
 _Data: 2026-01-28_

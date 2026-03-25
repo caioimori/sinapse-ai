@@ -18,7 +18,7 @@
  * - AC6: Historico mantido por subtask (nao por story)
  * - AC7: Auto-increment de attempt_number
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

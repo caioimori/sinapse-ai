@@ -1,7 +1,7 @@
-# @dev (Dex) - Execution Trace
+# @developer (Dex) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.sinapse-ai/development/agents/dev.md`
+> Agent definition: `.sinapse-ai/development/agents/developer.md`
 
 ## 1. Activation Trace
 
@@ -9,7 +9,7 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.sinapse-ai/development/agents/dev.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 1 | `.sinapse-ai/development/agents/developer.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
 | 2 | `.sinapse-ai/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration + devLoadAlwaysFiles list |
 | 3 | `.sinapse-ai/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devLoadAlwaysFiles, devStoryLocation, dataLocation |
 | 4 | `.sinapse-ai/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
@@ -365,7 +365,7 @@ flowchart TD
 | File | Type | Status |
 |------|------|--------|
 | `qa-fix-issues.md` | Task | EXISTS |
-| `QA_FIX_REQUEST.md` | Input | Dynamic (from @qa) |
+| `QA_FIX_REQUEST.md` | Input | Dynamic (from @quality-gate) |
 
 **Execution flow:**
 
@@ -444,7 +444,7 @@ flowchart TD
 
 | Command | Task File | Behavior |
 |---------|-----------|----------|
-| `*apply-qa-fixes` | apply-qa-fixes.md | Apply QA feedback from @qa review |
+| `*apply-qa-fixes` | apply-qa-fixes.md | Apply QA feedback from @quality-gate review |
 | `*run-tests` | (built-in) | Execute `npm run lint` + `npm test` |
 | `*backlog-debt` | po-manage-story-backlog.md | Elicit debt details, register in backlog |
 
@@ -620,20 +620,20 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @sm -> @dev | Receives | Story assignment for implementation |
-| @dev -> @qa | Handoff | Story "Ready for Review" triggers QA review |
-| @qa -> @dev | Receives | QA feedback via `*apply-qa-fixes` or `QA_FIX_REQUEST.md` |
-| @dev -> @github-devops | Delegate | Git push, PR creation, remote operations |
-| @pm -> @dev | Receives | Requirements and strategic direction via stories |
+| @sprint-lead -> @developer | Receives | Story assignment for implementation |
+| @developer -> @quality-gate | Handoff | Story "Ready for Review" triggers QA review |
+| @quality-gate -> @developer | Receives | QA feedback via `*apply-qa-fixes` or `QA_FIX_REQUEST.md` |
+| @developer -> @github-devops | Delegate | Git push, PR creation, remote operations |
+| @project-lead -> @developer | Receives | Requirements and strategic direction via stories |
 
 ### Delegation Rules (from agent definition)
 
-**Collaborates with @qa when:**
+**Collaborates with @quality-gate when:**
 - Code review feedback received via `*apply-qa-fixes`
 - QA fix requests arrive via `QA_FIX_REQUEST.md`
 - Quality validation during story completion
 
-**Collaborates with @sm when:**
+**Collaborates with @sprint-lead when:**
 - Receiving story assignments
 - Reporting story completion
 

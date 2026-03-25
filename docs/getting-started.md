@@ -133,10 +133,10 @@ SINAPSE agents are activated through your IDE. Once activated, agents respond to
 *exit                    # Exit agent mode
 
 # Agent-specific examples
-@dev *help               # Developer agent commands
-@qa *review STORY-42     # QA agent reviews a story
-@pm *create-epic         # PM agent creates an epic
-@sm *draft               # Scrum Master drafts a story
+@developer *help               # Developer agent commands
+@quality-gate *review STORY-42     # QA agent reviews a story
+@project-lead *create-epic         # PM agent creates an epic
+@sprint-lead *draft               # Scrum Master drafts a story
 ```
 
 ### Available Agents
@@ -157,13 +157,13 @@ SINAPSE agents are activated through your IDE. Once activated, agents respond to
 ### Typical Workflow
 
 ```
-1. @pm creates a PRD          → *create-epic
-2. @sm drafts stories          → *draft
-3. @po validates stories       → *validate-story-draft
-4. @dev implements             → (works from story file)
-5. @qa reviews                 → *review STORY-ID
+1. @project-lead creates a PRD          → *create-epic
+2. @sprint-lead drafts stories          → *draft
+3. @product-lead validates stories       → *validate-story-draft
+4. @developer implements             → (works from story file)
+5. @quality-gate reviews                 → *review STORY-ID
 6. @devops pushes              → *push (only agent with push authority)
-7. @po closes story            → *close-story STORY-ID
+7. @product-lead closes story            → *close-story STORY-ID
 ```
 
 ## IDE Compatibility
@@ -214,10 +214,10 @@ When you first activate an SINAPSE agent in an existing project:
 
 | Your Situation | Recommended Workflow |
 |----------------|---------------------|
-| Add major feature to existing project | `@pm → *create-doc brownfield-prd` |
+| Add major feature to existing project | `@project-lead → *create-doc brownfield-prd` |
 | Audit legacy codebase | `brownfield-discovery.yaml` (full workflow) |
-| Quick enhancement | `@pm → *brownfield-create-epic` |
-| Single bug fix | `@pm → *brownfield-create-story` |
+| Quick enhancement | `@project-lead → *brownfield-create-epic` |
+| Single bug fix | `@project-lead → *brownfield-create-story` |
 
 ### Safety Guarantees
 

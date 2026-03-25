@@ -461,7 +461,7 @@ workflow:
 
       📌 Next Steps:
          • Review spec.md
-         • Run @dev *develop {storyId}
+         • Run @developer *develop {storyId}
 
     outputs:
       - storyId
@@ -473,7 +473,7 @@ workflow:
 
     next_steps:
       - "Review specification: docs/stories/{storyId}/spec/spec.md"
-      - "Start development: @dev *develop {storyId}"
+      - "Start development: @developer *develop {storyId}"
       - "View critique: docs/stories/{storyId}/spec/critique.json"
 
   # ═══════════════════════════════════════════════════════════════════════════════════

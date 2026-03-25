@@ -434,12 +434,12 @@ flowchart LR
         SC_MIGRATE["*migrate-to-v2"]
     end
 
-    subgraph DEV["💻 @dev (Dex)"]
+    subgraph DEV["💻 @developer (Dex)"]
         DEV_IMPL["Implementa funcionalidade"]
         DEV_CODE["Escreve codigo de squad"]
     end
 
-    subgraph QA["🔍 @qa (Quinn)"]
+    subgraph QA["🔍 @quality-gate (Quinn)"]
         QA_REVIEW["Review de codigo"]
         QA_TEST["Testa squad"]
     end

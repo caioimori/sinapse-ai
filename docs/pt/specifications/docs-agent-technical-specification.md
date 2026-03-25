@@ -101,8 +101,8 @@ whenNotToUse: |
   NAO use @docs para:
   - Documentacao tecnica de API (use JSDoc/Typedoc)
   - Revisao de codigo (use CodeRabbit)
-  - Geracao de codigo (use @dev)
-  - Correcao de bugs (use @qa + @dev)
+  - Geracao de codigo (use @developer)
+  - Correcao de bugs (use @quality-gate + @developer)
   - Design de arquitetura (use @architect)
 
 collaboration:
@@ -349,13 +349,13 @@ Entrada:
     tipo: string
     origem: user_input
     obrigatorio: true
-    example: "@dev", "@qa", "@docs"
+    example: "@developer", "@quality-gate", "@docs"
 
   - campo: agent_definition_path
     tipo: string
     origem: user_input | auto-detect
     obrigatorio: false
-    example: "squads/sinapse/agents/dev/agent.yaml"
+    example: "squads/sinapse/agents/developer/agent.yaml"
 
   - campo: include_task_examples
     tipo: boolean
@@ -1590,7 +1590,7 @@ jobs:
         run: npm install -g @sinapse/core
 
       - name: Executar QA de Documentacao
-        id: qa
+        id: quality-gate
         run: |
           sinapse agent invoke @docs --task qa-documentation \
             --paths "docs/**/*.md" \
@@ -2085,11 +2085,11 @@ Com a adicao do @docs (Ajax), SINAPSE agora tem **13 agentes nomeados**:
 
 | # | Agente | Nome | Funcao | Arquetipo | Cor |
 |---|--------|------|--------|-----------|-----|
-| 1 | @dev | Dex | Builder | Aquarius | Cyan |
-| 2 | @qa | Quinn | Guardian | Virgo | Green |
-| 3 | @po | Pax | Balancer | Libra | Yellow |
-| 4 | @pm | Morgan | Strategist | Capricorn | Gray |
-| 5 | @sm | River | Facilitator | Pisces | Cyan |
+| 1 | @developer | Dex | Builder | Aquarius | Cyan |
+| 2 | @quality-gate | Quinn | Guardian | Virgo | Green |
+| 3 | @product-lead | Pax | Balancer | Libra | Yellow |
+| 4 | @project-lead | Morgan | Strategist | Capricorn | Gray |
+| 5 | @sprint-lead | River | Facilitator | Pisces | Cyan |
 | 6 | @architect | Aria | Visionary | Sagittarius | Magenta |
 | 7 | @analyst | Atlas | Decoder | Scorpio | Red |
 | 8 | @ux-design-expert | Uma | Empathizer | Cancer | Green |
@@ -2097,7 +2097,7 @@ Com a adicao do @docs (Ajax), SINAPSE agora tem **13 agentes nomeados**:
 | 10 | @devops | Gage | Automator | Taurus | Green |
 | 11 | **@docs** | **Ajax** | **Estrategista de Conteudo** | **Aries** | **Blue** |
 | 12 | ~~@security~~ | ~~Apex~~ | ~~Conductor~~ | ~~Leo~~ | ~~Red~~ (CANCELADO) |
-| 13 | @sinapse-master | Orion | Commander | Aries | Cyan |
+| 13 | @sinapse-orqx | Orion | Commander | Aries | Cyan |
 
 **Status:** 13/13 agentes definidos (100% completo para Wave 1)
 

@@ -5,7 +5,7 @@ You are working with SINAPSE, an AI-Orchestrated System for Full Stack Developme
 ## Core Development Rules
 
 ### Agent Integration
-- Recognize SINAPSE agent activations: @dev, @qa, @architect, @pm, @po, @sm, @analyst
+- Recognize SINAPSE agent activations: @developer, @quality-gate, @architect, @project-lead, @product-lead, @sprint-lead, @analyst
 - Agent commands use * prefix: *help, *create-story, *task, *exit
 - Follow agent-specific workflows and patterns
 

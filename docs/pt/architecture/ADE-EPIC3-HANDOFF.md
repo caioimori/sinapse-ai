@@ -1,6 +1,6 @@
 # ADE Epic 3 Handoff - Spec Pipeline
 
-> **De:** Quinn (@qa) - QA Agent
+> **De:** Quinn (@quality-gate) - QA Agent
 > **Para:** Aria (@architect) - Solution Architect
 > **Data:** 2026-01-28
 > **Status:** Epic 1+2 COMPLETOS → Epic 3 DESBLOQUEADO
@@ -49,7 +49,7 @@ Solicitação Usuário → Gather → Assess → Research → Write → Critique
 | 3.5   | `spec-critique.md`              | Task .md       | @architect |
 | 3.6   | `spec-pipeline.yaml`            | Workflow .yaml | @architect |
 
-**@dev necessário:** Nenhum
+**@developer necessário:** Nenhum
 **@architect lidera:** TODAS as stories
 
 ---
@@ -199,7 +199,7 @@ autoClaude:
 - Decisão PASS/NEEDS_REVISION
 - Spec revisada (se auto-corrigida)
 
-**Agent:** Capacidades do @qa (canCritique: true)
+**Agent:** Capacidades do @quality-gate (canCritique: true)
 
 **Pattern:**
 
@@ -270,11 +270,11 @@ autoClaude:
 ### Enum de Fases do Pipeline
 
 ```
-spec-gather    # @pm - coletar requisitos
+spec-gather    # @project-lead - coletar requisitos
 spec-assess    # @architect - avaliar complexidade
 spec-research  # @analyst - pesquisar dependências
-spec-write     # @pm - escrever especificação
-spec-critique  # @qa - validar qualidade
+spec-write     # @project-lead - escrever especificação
+spec-critique  # @quality-gate - validar qualidade
 ```
 
 ---
@@ -311,7 +311,7 @@ spec-critique  # @qa - validar qualidade
 Após completar o Epic 3, execute:
 
 ```
-@qa *gate epic-3-spec-pipeline
+@quality-gate *gate epic-3-spec-pipeline
 ```
 
 **Validação:**
@@ -322,6 +322,6 @@ Após completar o Epic 3, execute:
 
 ---
 
-_Handoff preparado por Quinn (@qa) - Guardião da Qualidade_
+_Handoff preparado por Quinn (@quality-gate) - Guardião da Qualidade_
 _Commit: 3fea6ca - feat(ade): complete Epic 1+2_
 _Data: 2026-01-28_

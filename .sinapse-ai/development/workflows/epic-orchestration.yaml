@@ -11,7 +11,7 @@
 # and live in docs/stories/epics/{epic-name}/
 #
 # @version 1.0.0
-# @author @pm (Bob) + @architect (Aria)
+# @author @project-lead (Bob) + @architect (Aria)
 # ============================================
 
 workflow:
@@ -81,12 +81,12 @@ workflow:
   #
   # Each story within a wave executes the full development-cycle:
   #
-  #   Phase 1: @po validates story (validate-story-draft)
+  #   Phase 1: @product-lead validates story (validate-story-draft)
   #   Phase 2: ${story.executor} develops (dynamic executor)
-  #   Phase 3: @dev self-healing (CodeRabbit, conditional)
+  #   Phase 3: @developer self-healing (CodeRabbit, conditional)
   #   Phase 4: ${story.quality_gate} reviews (agent != executor)
   #   Phase 5: @devops push & PR
-  #   Phase 6: @po checkpoint (AUTO-GO in wave mode, human in interactive)
+  #   Phase 6: @product-lead checkpoint (AUTO-GO in wave mode, human in interactive)
   #
   # Reference: .sinapse-ai/development/workflows/development-cycle.yaml
 
@@ -263,7 +263,7 @@ workflow:
     ┌─────────────────────────────────────────────────────────────┐
     │  CHECKPOINT (between waves)                                  │
     │                                                             │
-    │  @po asks: [ GO ] [ PAUSE ] [ REVIEW ] [ ABORT ]            │
+    │  @product-lead asks: [ GO ] [ PAUSE ] [ REVIEW ] [ ABORT ]            │
     └───────────────────────┬─────────────────────────────────────┘
                             │
                             ▼
@@ -314,7 +314,7 @@ workflow:
       file: story-development-cycle.yaml
 
 metadata:
-  author: "@pm (Bob) + @architect (Aria)"
+  author: "@project-lead (Bob) + @architect (Aria)"
   created: "2026-02-06"
   version: 1.0.0
   tags:

@@ -388,10 +388,10 @@ Based on existing service patterns, suggest structure:
 
 | Service Type | Primary Agent | Support Agent |
 |--------------|---------------|---------------|
-| API Integration | @dev | @qa |
-| Utility Service | @dev | @architect |
-| Agent Tool | @dev | @devops |
-| Database-heavy | @data-engineer | @dev |
+| API Integration | @developer | @quality-gate |
+| Utility Service | @developer | @architect |
+| Agent Tool | @developer | @devops |
+| Database-heavy | @data-engineer | @developer |
 
 ---
 

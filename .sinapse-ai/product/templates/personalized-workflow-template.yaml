@@ -394,12 +394,12 @@ workflow:
   id: brownfield-feature-dev
 
   agents:
-    - id: dev
+    - id: developer
       name: Dex
       archetype: Builder
       personality_mode: named
 
-    - id: qa
+    - id: quality-gate
       name: Quinn
       archetype: Guardian
       personality_mode: named
@@ -412,7 +412,7 @@ workflow:
   steps:
     - step: 1
       name: "Implement Feature"
-      agent: dev
+      agent: developer
       task: develop-story
       output:
         personality_injection: true

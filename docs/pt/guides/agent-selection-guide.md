@@ -52,7 +52,7 @@ Precisa de deploy? → @devops
 | **@po** (Pax)                | 🎯    | Gerenciamento de backlog, critérios de aceitação, priorização                                                      | Criação de epic, arquitetura                    |
 | **@ux-design-expert** (Nova) | 🎨    | Design UI/UX, wireframes, design systems                                                                           | Implementação                                   |
 | **@devops** (Gage)           | ⚙️    | Git ops, criação de PR, deploy, CI/CD, gerenciamento de worktrees, migrações                                       | Git local, implementação                        |
-| **@sinapse-master** (Orion)     | 👑    | Desenvolvimento do framework, orquestração multi-agente                                                            | Tarefas rotineiras (use agentes especializados) |
+| **@sinapse-orqx** (Orion)     | 👑    | Desenvolvimento do framework, orquestração multi-agente                                                            | Tarefas rotineiras (use agentes especializados) |
 
 ---
 
@@ -78,7 +78,7 @@ Precisa de deploy? → @devops
 
 ---
 
-### @pm (Morgan) - Gestão de Produto
+### @project-lead (Morgan) - Gestão de Produto
 
 **Spec Pipeline:**
 | Comando | Descrição |
@@ -122,7 +122,7 @@ Precisa de deploy? → @devops
 
 ---
 
-### @qa (Quinn) - Garantia de Qualidade
+### @quality-gate (Quinn) - Garantia de Qualidade
 
 **Spec Pipeline:**
 | Comando | Descrição |
@@ -133,12 +133,12 @@ Precisa de deploy? → @devops
 | Comando | Descrição |
 |---------|-----------|
 | `*review-build {story}` | Revisão QA estruturada em 10 fases - gera qa_report.md |
-| `*request-fix {issue}` | Solicitar correção específica do @dev com contexto |
+| `*request-fix {issue}` | Solicitar correção específica do @developer com contexto |
 | `*verify-fix {issue}` | Verificar se a correção foi implementada corretamente |
 
 ---
 
-### @dev (Dex) - Desenvolvimento
+### @developer (Dex) - Desenvolvimento
 
 **Execution Engine:**
 | Comando | Descrição |
@@ -170,45 +170,45 @@ Precisa de deploy? → @devops
 
 ```
 1. @analyst *brainstorm - Ideação
-2. @pm *create-prd - Requisitos de produto
+2. @project-lead *create-prd - Requisitos de produto
 3. @architect *create-architecture - Design técnico
 4. @data-engineer *create-schema - Design de banco de dados
-5. @sm *create-next-story - User stories
-6. @dev *develop - Implementação
-7. @qa *review - Verificação de qualidade
+5. @sprint-lead *create-next-story - User stories
+6. @developer *develop - Implementação
+7. @quality-gate *review - Verificação de qualidade
 8. @devops *create-pr - Deploy
 ```
 
 ### "Quero construir usando ADE Spec Pipeline" (Autônomo)
 
 ```
-1. @pm *gather-requirements - Coletar e estruturar requisitos
+1. @project-lead *gather-requirements - Coletar e estruturar requisitos
 2. @architect *assess-complexity - Avaliar complexidade
 3. @analyst *research-deps - Pesquisar bibliotecas/APIs
-4. @pm *write-spec - Gerar especificação
-5. @qa *critique-spec - Validar qualidade da spec
+4. @project-lead *write-spec - Gerar especificação
+5. @quality-gate *critique-spec - Validar qualidade da spec
    ↓
 [Spec Aprovada]
    ↓
 6. @architect *create-plan - Criar plano de implementação
 7. @architect *create-context - Gerar arquivos de contexto
-8. @dev *execute-subtask 1.1 - Executar com 13 passos + auto-crítica
-9. @qa *review-build - Revisão QA em 10 fases
+8. @developer *execute-subtask 1.1 - Executar com 13 passos + auto-crítica
+9. @quality-gate *review-build - Revisão QA em 10 fases
    ↓
 [Se encontrar problemas]
    ↓
-10. @qa *request-fix - Solicitar correção
-11. @dev *apply-qa-fix - Aplicar correção
-12. @qa *verify-fix - Verificar
+10. @quality-gate *request-fix - Solicitar correção
+11. @developer *apply-qa-fix - Aplicar correção
+12. @quality-gate *verify-fix - Verificar
 ```
 
 ### "Estou travado na implementação"
 
 ```
-1. @dev *track-attempt - Registrar a tentativa falha
-2. @dev *rollback - Reverter para último estado bom
-3. @dev *list-gotchas - Verificar armadilhas conhecidas
-4. @dev *execute-subtask --approach alternative - Tentar abordagem diferente
+1. @developer *track-attempt - Registrar a tentativa falha
+2. @developer *rollback - Reverter para último estado bom
+3. @developer *list-gotchas - Verificar armadilhas conhecidas
+4. @developer *execute-subtask --approach alternative - Tentar abordagem diferente
 ```
 
 ### "Preciso entender o codebase existente"
@@ -216,14 +216,14 @@ Precisa de deploy? → @devops
 ```
 1. @architect *map-codebase - Gerar mapa de estrutura/serviços/padrões
 2. @analyst *extract-patterns - Documentar padrões de código
-3. @dev *capture-insights - Registrar descobertas
+3. @developer *capture-insights - Registrar descobertas
 ```
 
 ### "Preciso de desenvolvimento paralelo de stories"
 
 ```
 1. @devops *create-worktree STORY-42 - Isolar branch
-2. @dev *execute-subtask - Trabalhar em isolamento
+2. @developer *execute-subtask - Trabalhar em isolamento
 3. @devops *merge-worktree STORY-42 - Fazer merge quando concluído
 4. @devops *cleanup-worktrees - Limpar branches obsoletas
 ```
@@ -235,15 +235,15 @@ Precisa de deploy? → @devops
 ### Fluxo do Spec Pipeline
 
 ```
-@pm *gather-requirements
+@project-lead *gather-requirements
     ↓
 @architect *assess-complexity
     ↓
 @analyst *research-deps
     ↓
-@pm *write-spec
+@project-lead *write-spec
     ↓
-@qa *critique-spec
+@quality-gate *critique-spec
 ```
 
 ### Fluxo de Execução
@@ -253,34 +253,34 @@ Precisa de deploy? → @devops
     ↓
 @architect *create-context
     ↓
-@dev *execute-subtask (loops)
+@developer *execute-subtask (loops)
     ↓
-@qa *review-build
+@quality-gate *review-build
 ```
 
 ### QA Loop
 
 ```
-@qa *review-build
+@quality-gate *review-build
     ↓ (problemas encontrados)
-@qa *request-fix
+@quality-gate *request-fix
     ↓
-@dev *apply-qa-fix
+@developer *apply-qa-fix
     ↓
-@qa *verify-fix
+@quality-gate *verify-fix
     ↓ (loop até limpo)
 ```
 
 ### Fluxo de Recuperação
 
 ```
-@dev falha subtask
+@developer falha subtask
     ↓
-@dev *track-attempt
+@developer *track-attempt
     ↓
-Retries < 3? → @dev tenta com variação
+Retries < 3? → @developer tenta com variação
     ↓
-@dev *rollback → tenta abordagem diferente
+@developer *rollback → tenta abordagem diferente
 ```
 
 ---

@@ -123,13 +123,13 @@ sequenceDiagram
     autonumber
     participant U as Usuario
     participant AN as @analyst (Atlas)
-    participant PM as @pm (Morgan)
+    participant PM as @project-lead (Morgan)
     participant UX as @ux-expert (Uma)
     participant AR as @architect (Aria)
-    participant PO as @po (Pax)
-    participant SM as @sm (River)
-    participant DEV as @dev (Dex)
-    participant QA as @qa (Quinn)
+    participant PO as @product-lead (Pax)
+    participant SM as @sprint-lead (River)
+    participant DEV as @developer (Dex)
+    participant QA as @quality-gate (Quinn)
 
     rect rgb(255, 228, 181)
         Note over U,AR: Fase 1: Planejamento
@@ -636,7 +636,7 @@ graph LR
 | `create-doc.md` | @analyst | `project-brief-tmpl.yaml` | Criar brief do projeto |
 | `create-deep-research-prompt.md` | @analyst | - | Pesquisa de mercado |
 | `facilitate-brainstorming-session.md` | @analyst | `brainstorming-output-tmpl.yaml` | Sessao de brainstorming |
-| `create-doc.md` | @pm | `prd-tmpl.yaml` | Criar PRD |
+| `create-doc.md` | @project-lead | `prd-tmpl.yaml` | Criar PRD |
 | `create-doc.md` | @ux-expert | `front-end-spec-tmpl.yaml` | Especificacao frontend |
 | `generate-ai-frontend-prompt.md` | @ux-expert | - | Prompt para v0/Lovable |
 | `create-doc.md` | @architect | `front-end-architecture-tmpl.yaml` | Arquitetura frontend |
@@ -645,19 +645,19 @@ graph LR
 
 | Task | Agente | Checklist | Descricao |
 |------|--------|-----------|-----------|
-| `execute-checklist.md` | @po | `po-master-checklist.md` | Validar artefatos |
-| `shard-doc.md` | @po | - | Fragmentar documentos |
+| `execute-checklist.md` | @product-lead | `po-master-checklist.md` | Validar artefatos |
+| `shard-doc.md` | @product-lead | - | Fragmentar documentos |
 
 #### Fase 3: Desenvolvimento
 
 | Task | Agente | Descricao |
 |------|--------|-----------|
-| `create-next-story.md` | @sm | Criar proxima story |
-| `execute-checklist.md` | @sm | Checklist de story draft |
-| `dev-develop-story.md` | @dev | Implementar story |
-| `dev-apply-qa-fixes.md` | @dev | Aplicar correcoes QA |
-| `qa-review-story.md` | @qa | Revisar implementacao |
-| `qa-gate.md` | @qa | Decisao de quality gate |
+| `create-next-story.md` | @sprint-lead | Criar proxima story |
+| `execute-checklist.md` | @sprint-lead | Checklist de story draft |
+| `dev-develop-story.md` | @developer | Implementar story |
+| `dev-apply-qa-fixes.md` | @developer | Aplicar correcoes QA |
+| `qa-review-story.md` | @quality-gate | Revisar implementacao |
+| `qa-gate.md` | @quality-gate | Decisao de quality gate |
 
 ---
 
@@ -878,13 +878,13 @@ flowchart TD
 | Agente | Caminho |
 |--------|---------|
 | @analyst | `.sinapse-ai/development/agents/analyst.md` |
-| @pm | `.sinapse-ai/development/agents/pm.md` |
+| @project-lead | `.sinapse-ai/development/agents/project-lead.md` |
 | @ux-expert | `.sinapse-ai/development/agents/ux-design-expert.md` |
 | @architect | `.sinapse-ai/development/agents/architect.md` |
-| @po | `.sinapse-ai/development/agents/po.md` |
-| @sm | `.sinapse-ai/development/agents/sm.md` |
-| @dev | `.sinapse-ai/development/agents/dev.md` |
-| @qa | `.sinapse-ai/development/agents/qa.md` |
+| @product-lead | `.sinapse-ai/development/agents/product-lead.md` |
+| @sprint-lead | `.sinapse-ai/development/agents/sprint-lead.md` |
+| @developer | `.sinapse-ai/development/agents/developer.md` |
+| @quality-gate | `.sinapse-ai/development/agents/quality-gate.md` |
 
 ### Templates Principais
 

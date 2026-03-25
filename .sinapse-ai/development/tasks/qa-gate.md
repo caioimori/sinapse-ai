@@ -331,7 +331,7 @@ If blast radius returned HIGH risk:
 
 1. The `suggestGateInfluence('HIGH')` advisory is **informational only**
 2. It suggests CONCERNS but does NOT automatically change the gate verdict
-3. @qa makes the final decision — the advisory is logged in the gate file under `code_intel_advisory`
+3. @quality-gate makes the final decision — the advisory is logged in the gate file under `code_intel_advisory`
 
 > **Fallback guarantee:** If code intelligence is unavailable or any call returns null, the gate process continues exactly as before — no sections are added, no errors are raised.
 
@@ -425,6 +425,6 @@ next_agent: @devops
 next_command: *push
 condition: QA gate verdict is PASS
 alternatives:
-  - agent: @dev, command: *apply-qa-fixes, condition: QA gate verdict is FAIL or CONCERNS
-  - agent: @po, command: *close-story {story-id}, condition: QA gate verdict is WAIVED
+  - agent: @developer, command: *apply-qa-fixes, condition: QA gate verdict is FAIL or CONCERNS
+  - agent: @product-lead, command: *close-story {story-id}, condition: QA gate verdict is WAIVED
  

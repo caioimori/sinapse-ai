@@ -226,16 +226,16 @@ SINAPSE fornece **orquestração estruturada**:
 | **Dara**  | `data-engineer` | Architect    | Data engineering        |
 | **Felix** | `devops`        | Optimizer    | CI/CD and operations    |
 | **Uma**   | `ux-expert`     | Creator      | User experience         |
-| **Pax**   | `sinapse-master`   | Orchestrator | Framework orchestration |
+| **Pax**   | `sinapse-orqx`   | Orchestrator | Framework orchestration |
 
 ### Agent Activation
 
 ```bash
 # Ativar agent
-@dev             # Ativa Dex (Developer)
-@qa              # Ativa Quinn (QA)
+@developer             # Ativa Dex (Developer)
+@quality-gate              # Ativa Quinn (QA)
 @architect       # Ativa Aria (Architect)
-@sinapse-master     # Ativa Pax (Orchestrator)
+@sinapse-orqx     # Ativa Pax (Orchestrator)
 
 # Comandos de agent (prefix *)
 *help            # Mostra comandos disponíveis
@@ -546,8 +546,8 @@ THEN [expected result]
 
 | Role      | Agent | Responsibility |
 | --------- | ----- | -------------- |
-| Primary   | @dev  | [Task]         |
-| Secondary | @qa   | [Task]         |
+| Primary   | @developer  | [Task]         |
+| Secondary | @quality-gate   | [Task]         |
 
 ---
 

@@ -4,7 +4,7 @@
 # Part of Story 6.1.2.6: Framework Configuration System
 #
 # Performance Targets:
-# - critical: <30ms (sinapse-master)
+# - critical: <30ms (sinapse-orqx)
 # - high: <50ms (dev, qa, devops, security, github-devops)
 # - medium: <75ms (po, sm, architect, data-engineer, db-sage)
 # - low: <100ms (pm, analyst, ux-design-expert, sinapse-developer, sinapse-orchestrator)
@@ -14,7 +14,7 @@ agents:
   # CRITICAL PRIORITY AGENTS (<30ms target)
   # ======================================================================
 
-  sinapse-master:
+  sinapse-orqx:
     config_sections:
       - dataLocation
       - registry
@@ -286,7 +286,7 @@ lazy_loading_strategy:
     registry:
       size: 15KB
       load_only_for:
-        - sinapse-master
+        - sinapse-orqx
         - sinapse-developer
         - sinapse-orchestrator
       description: Full registry of framework components

@@ -168,7 +168,7 @@ const QualityGateManager = require('./.sinapse-ai/core/quality-gates/quality-gat
 
 | Agente          | ID                 | Responsabilidade          |
 | --------------- | ------------------ | ------------------------- |
-| SINAPSE Master     | `sinapse-master`      | Orquestração do framework |
+| SINAPSE Master     | `sinapse-orqx`      | Orquestração do framework |
 | Developer       | `dev`              | Implementação de código   |
 | QA              | `qa`               | Garantia de qualidade     |
 | Architect       | `architect`        | Arquitetura técnica       |

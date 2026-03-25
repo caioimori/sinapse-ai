@@ -8,6 +8,7 @@
  */
 
 const inquirer = require('inquirer');
+const os = require('os');
 const path = require('path');
 const fse = require('fs-extra');
 const { execSync } = require('child_process');
@@ -15,6 +16,7 @@ const { colors } = require('../utils/sinapse-colors');
 const {
   getLanguageQuestion,
   getUserProfileQuestion,
+  getLLMQuestion,
   getProjectTypeQuestion,
   getIDEQuestions,
   getTechPresetQuestion,
@@ -115,7 +117,6 @@ async function getExistingUserProfile(targetDir = process.cwd()) {
 const LANGUAGE_MAP = {
   en: 'english',
   pt: 'portuguese',
-  es: 'spanish',
 };
 
 /**
@@ -233,14 +234,203 @@ function setupCancellationHandler() {
 }
 
 /**
+ * Auto-detect project type based on filesystem markers
+ *
+ * @param {string} [cwd] - Working directory to inspect
+ * @returns {string} 'upgrade' | 'brownfield' | 'greenfield'
+ */
+function detectProjectType(cwd = process.cwd()) {
+  if (fse.existsSync(path.join(cwd, '.sinapse-ai'))) {
+    return 'upgrade';
+  }
+  if (fse.existsSync(path.join(cwd, 'package.json'))) {
+    return 'brownfield';
+  }
+  return 'greenfield';
+}
+
+/**
+ * Auto-detect tech preset based on project files
+ *
+ * @param {string} [cwd] - Working directory to inspect
+ * @returns {string} Detected preset name or 'none'
+ */
+function detectTechPreset(cwd = process.cwd()) {
+  // Check package.json for Next.js
+  const pkgPath = path.join(cwd, 'package.json');
+  if (fse.existsSync(pkgPath)) {
+    try {
+      const pkg = JSON.parse(fse.readFileSync(pkgPath, 'utf8'));
+      const allDeps = {
+        ...(pkg.dependencies || {}),
+        ...(pkg.devDependencies || {}),
+      };
+      if (allDeps['next']) return 'nextjs-react';
+    } catch {
+      // Ignore parse errors
+    }
+  }
+
+  if (fse.existsSync(path.join(cwd, 'go.mod'))) return 'go';
+  if (fse.existsSync(path.join(cwd, 'Cargo.toml'))) return 'rust';
+  if (fse.existsSync(path.join(cwd, 'pom.xml'))) return 'java';
+  if (fse.existsSync(path.join(cwd, 'composer.json'))) return 'php';
+
+  // Check for .csproj files
+  try {
+    const entries = fse.readdirSync(cwd);
+    if (entries.some((f) => f.endsWith('.csproj'))) return 'csharp';
+  } catch {
+    // Ignore
+  }
+
+  return 'none';
+}
+
+/**
+ * Map LLM selection to IDE list for generateIDEConfigs
+ *
+ * @param {string} selectedLLM - 'claude-code' | 'codex' | 'both'
+ * @returns {string[]} IDE identifiers
+ */
+function llmToIDEs(selectedLLM) {
+  switch (selectedLLM) {
+    case 'claude-code':
+      return ['claude-code'];
+    case 'codex':
+      return ['codex'];
+    case 'both':
+      return ['claude-code', 'codex'];
+    default:
+      return ['claude-code'];
+  }
+}
+
+/**
+ * Map LLM selection to a display label for the completion screen
+ *
+ * @param {string} selectedLLM - 'claude-code' | 'codex' | 'both'
+ * @returns {string} Human-readable label
+ */
+function llmLabel(selectedLLM) {
+  switch (selectedLLM) {
+    case 'claude-code':
+      return 'Claude Code';
+    case 'codex':
+      return 'Codex CLI';
+    case 'both':
+      return 'Claude Code + Codex CLI';
+    default:
+      return 'Claude Code';
+  }
+}
+
+/**
+ * 19 orqx agent definitions to install globally.
+ * Each entry maps agent-id to its squad directory name.
+ */
+const GLOBAL_AGENTS = [
+  { id: 'sinapse-orqx', squad: 'sinapse' },
+  { id: 'animations-orqx', squad: 'squad-animations' },
+  { id: 'brand-orqx', squad: 'squad-brand' },
+  { id: 'claude-orqx', squad: 'squad-claude' },
+  { id: 'cloning-orqx', squad: 'squad-cloning' },
+  { id: 'commercial-orqx', squad: 'squad-commercial' },
+  { id: 'content-orqx', squad: 'squad-content' },
+  { id: 'copy-orqx', squad: 'squad-copy' },
+  { id: 'council-orqx', squad: 'squad-council' },
+  { id: 'courses-orqx', squad: 'squad-courses' },
+  { id: 'cyber-orqx', squad: 'squad-cybersecurity' },
+  { id: 'design-orqx', squad: 'squad-design' },
+  { id: 'finance-orqx', squad: 'squad-finance' },
+  { id: 'growth-orqx', squad: 'squad-growth' },
+  { id: 'paidmedia-orqx', squad: 'squad-paidmedia' },
+  { id: 'product-orqx', squad: 'squad-product' },
+  { id: 'research-orqx', squad: 'squad-research' },
+  { id: 'storytelling-orqx', squad: 'squad-storytelling' },
+  { id: 'swarm-orqx', squad: 'squad-claude' },
+];
+
+/**
+ * Generate the markdown template for a global orqx agent definition.
+ *
+ * @param {string} agentId - Agent identifier (e.g. 'brand-orqx')
+ * @param {string} squadName - Squad directory name (e.g. 'squad-brand')
+ * @param {string} homedir - Absolute path to user home directory
+ * @returns {string} Markdown content for the agent file
+ */
+function buildAgentTemplate(agentId, squadName, homedir) {
+  // Normalise to forward slashes for the template paths (cross-platform readability)
+  const agentDefPath = path.join(homedir, '.sinapse', squadName, 'agents', `${agentId}.md`).replace(/\\/g, '/');
+  const squadManifestPath = path.join(homedir, '.sinapse', squadName, 'squad.yaml').replace(/\\/g, '/');
+
+  return [
+    '---',
+    `name: ${agentId}`,
+    `description: "${squadName} orchestrator — routes to specialized agents within the squad"`,
+    'tools: [Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch]',
+    '---',
+    '',
+    `# ${agentId}`,
+    '',
+    'ACTIVATION-NOTICE: This command activates an agent from sinapse.',
+    '',
+    `CRITICAL: Read the agent definition file at \`${agentDefPath}\` to understand your full operating parameters. Then:`,
+    `1. Adopt the persona defined in that file`,
+    `2. Load the squad manifest at \`${squadManifestPath}\` for context`,
+    '3. Display a greeting showing your agent name, role, and available commands',
+    '4. HALT and await user input',
+    '',
+  ].join('\n');
+}
+
+/**
+ * Install 19 global orqx agent definitions to ~/.claude/agents/
+ * Each file is a small markdown that points to the full agent definition
+ * inside the user's ~/.sinapse/{squad}/ directory.
+ *
+ * @returns {Promise<{success: boolean, count: number, errors: string[]}>}
+ */
+async function installGlobalAgents() {
+  const homedir = os.homedir();
+  const agentsDir = path.join(homedir, '.claude', 'agents');
+  const errors = [];
+  let count = 0;
+
+  try {
+    await fse.ensureDir(agentsDir);
+  } catch (err) {
+    return { success: false, count: 0, errors: [`Failed to create ${agentsDir}: ${err.message}`] };
+  }
+
+  for (const agent of GLOBAL_AGENTS) {
+    try {
+      const content = buildAgentTemplate(agent.id, agent.squad, homedir);
+      const filePath = path.join(agentsDir, `${agent.id}.md`);
+      await fse.writeFile(filePath, content, 'utf8');
+      count++;
+    } catch (err) {
+      errors.push(`${agent.id}: ${err.message}`);
+    }
+  }
+
+  return { success: errors.length === 0, count, errors };
+}
+
+/**
  * Main wizard execution function
+ *
+ * Simplified 2-step flow:
+ *   Step 1: Welcome screen (immersive)
+ *   Step 2: LLM selection (single question)
+ *   Everything else is auto-detected.
  *
  * @returns {Promise<Object>} Wizard answers object
  *
  * @example
  * const { runWizard } = require('./src/wizard');
  * const answers = await runWizard();
- * console.log(answers.projectType); // 'greenfield' or 'brownfield'
+ * console.log(answers.projectType); // 'greenfield', 'brownfield', or 'upgrade'
  */
 async function runWizard(options = {}) {
   try {
@@ -252,81 +442,45 @@ async function runWizard(options = {}) {
       showWelcome();
     }
 
-    // Start i18n with default or detected language
-    setLanguage(options.language || 'en');
+    // Hardcode PT-BR as default language
+    const language = options.language || 'pt';
+    setLanguage(language);
 
     let answers = {};
 
+    // Auto-detect project type and tech preset (always)
+    const detectedProjectType = detectProjectType();
+    const detectedTechPreset = detectTechPreset();
+
     if (options.quiet) {
       // Quiet mode: Skip all prompts, use defaults
-      // Story 10.2: Check for existing user_profile (idempotency)
-      // Story ACT-12: Language delegated to Claude Code settings.json
-      const existingProfile = await getExistingUserProfile();
-      const existingLang = await getExistingLanguage();
       answers = {
-        language: options.language || existingLang || 'en',
-        userProfile: options.userProfile || existingProfile || 'advanced', // Story 10.2
-        projectType: options.projectType || 'brownfield', // Default to brownfield for safety
-        selectedIDEs: options.ide ? [options.ide] : [],   // Support single IDE flag if added later
-        selectedTechPreset: 'none',
+        language,
+        userProfile: 'bob',
+        projectType: options.projectType || detectedProjectType,
+        selectedLLM: options.selectedLLM || 'claude-code',
+        selectedIDEs: options.ide ? [options.ide] : llmToIDEs(options.selectedLLM || 'claude-code'),
+        selectedTechPreset: detectedTechPreset,
         ...options, // Merge any other options
       };
     } else {
-      // Interactive mode
-      // Phase 1: Language selection (must be first to apply i18n)
-      // Story ACT-12: Check idempotency via Claude Code settings.json
-      let languageAnswer;
-      const existingLanguage = await getExistingLanguage();
+      // Interactive mode — simplified 2-step flow
+      // Step 1: Welcome screen already shown above
 
-      if (existingLanguage) {
-        // Idempotent: Use existing language, don't re-ask
-        console.log(`\n✓ ${t('languageSkipped') || 'Language already configured'}: ${existingLanguage}\n`);
-        languageAnswer = { language: existingLanguage };
-      } else {
-        languageAnswer = await inquirer.prompt([getLanguageQuestion()]);
-      }
-      setLanguage(languageAnswer.language);
+      // Step 2: Single question — LLM selection
+      const llmAnswer = await inquirer.prompt([getLLMQuestion()]);
 
-      // Phase 1.5: User Profile selection (Story 10.2 - Epic 10)
-      // Check for idempotency - if user_profile already exists, skip question
-      let userProfileAnswer = {};
-      const existingProfile = await getExistingUserProfile();
+      // Derive IDEs from LLM choice
+      const selectedIDEs = llmToIDEs(llmAnswer.selectedLLM);
 
-      if (existingProfile) {
-        // Idempotent: Use existing profile, don't re-ask
-        console.log(`\n✓ ${t('userProfileSkipped')}: ${existingProfile}\n`);
-        userProfileAnswer = { userProfile: existingProfile };
-      } else {
-        // New installation: Ask for user profile
-        userProfileAnswer = await inquirer.prompt([getUserProfileQuestion()]);
-      }
-
-      // Phase 2: Build remaining questions with i18n applied
-      const remainingQuestions = [
-        getProjectTypeQuestion(),
-        ...getIDEQuestions(),
-        ...getTechPresetQuestion(),
-      ];
-
-      // Performance tracking (AC: < 100ms per question)
-      const startTime = Date.now();
-
-      // Run wizard with remaining questions
-      const remainingAnswers = await inquirer.prompt(remainingQuestions);
-
-      // Merge all answers (including user profile from Story 10.2)
-      answers = { ...languageAnswer, ...userProfileAnswer, ...remainingAnswers };
-
-      // Log performance metrics
-      const duration = Date.now() - startTime;
-      const totalQuestions = remainingQuestions.length + 2; // +1 for language, +1 for user profile
-      const avgTimePerQuestion = totalQuestions > 0 ? duration / totalQuestions : 0;
-
-      if (avgTimePerQuestion > 100) {
-        console.warn(
-          `Warning: Average question response time (${avgTimePerQuestion.toFixed(0)}ms) exceeds 100ms target`,
-        );
-      }
+      answers = {
+        language,
+        userProfile: 'bob',
+        projectType: detectedProjectType,
+        selectedLLM: llmAnswer.selectedLLM,
+        selectedIDEs,
+        selectedTechPreset: detectedTechPreset,
+      };
     }
 
     // Story 1.4: Install SINAPSE core framework (agents, tasks, workflows, templates)
@@ -358,6 +512,29 @@ async function runWizard(options = {}) {
     } catch (error) {
       console.error('\n⚠️  SINAPSE core installation failed:', error.message);
       answers.sinapseCoreInstalled = false;
+    }
+
+    // Install global orqx agent definitions to ~/.claude/agents/ (only for Claude Code)
+    const selectedLLM = answers.selectedLLM || 'claude-code';
+    if (selectedLLM === 'claude-code' || selectedLLM === 'both') {
+      console.log('\n🤖 Installing global agent definitions...');
+      try {
+        const globalAgentsResult = await installGlobalAgents();
+        if (globalAgentsResult.success) {
+          console.log(`✅ Global agents: ${globalAgentsResult.count} installed to ~/.claude/agents/`);
+        } else {
+          console.log(`⚠️  Global agents: ${globalAgentsResult.count} installed, ${globalAgentsResult.errors.length} errors`);
+          globalAgentsResult.errors.forEach((err) => console.warn(`   - ${err}`));
+        }
+        answers.globalAgentsInstalled = globalAgentsResult.count;
+        answers.globalAgentsResult = globalAgentsResult;
+      } catch (error) {
+        console.warn(`⚠️  Global agents installation failed: ${error.message}`);
+        answers.globalAgentsInstalled = 0;
+      }
+    } else {
+      console.log('\n🤖 Skipping global Claude agents (Codex-only install)');
+      answers.globalAgentsInstalled = 0;
     }
 
     // Install Tech Preset if selected
@@ -426,7 +603,7 @@ async function runWizard(options = {}) {
                   let techPrefsContent = await fse.readFile(baseFile, 'utf8');
 
                   // Add active preset marker only if not already present
-                  const activePresetSection = `\n## Active Preset\n\n**Selected:** \`${answers.selectedTechPreset}\`\n\nThis preset was selected during installation. The @architect and @dev agents will use these patterns by default.\n`;
+                  const activePresetSection = `\n## Active Preset\n\n**Selected:** \`${answers.selectedTechPreset}\`\n\nThis preset was selected during installation. The @architect and @developer agents will use these patterns by default.\n`;
 
                   if (!techPrefsContent.includes('## Active Preset')) {
                     // Insert after the first heading
@@ -946,8 +1123,8 @@ async function runWizard(options = {}) {
       console.log('Installation may be incomplete. Check logs in .sinapse/ directory.');
     }
 
-    // Show completion
-    showCompletion();
+    // Show completion with LLM label
+    showCompletion({ llmLabel: llmLabel(answers.selectedLLM), llmValue: answers.selectedLLM });
 
     return answers;
   } catch (error) {
@@ -985,10 +1162,17 @@ async function runWizard(options = {}) {
 
 module.exports = {
   runWizard,
-  // ACT-12: Exported for testing
+  // Exported for testing
   _testing: {
     writeClaudeSettings,
     getExistingLanguage,
     LANGUAGE_MAP,
+    detectProjectType,
+    detectTechPreset,
+    llmToIDEs,
+    llmLabel,
+    installGlobalAgents,
+    buildAgentTemplate,
+    GLOBAL_AGENTS,
   },
 };

@@ -22,7 +22,7 @@
 
 ## Análise de Agentes
 
-### Morgan (@pm)
+### Morgan (@project-lead)
 
 **Título:** Product Manager
 
@@ -64,7 +64,7 @@
 
 ---
 
-### Pax (@po)
+### Pax (@product-lead)
 
 **Título:** Product Owner
 
@@ -85,7 +85,7 @@
 
 ---
 
-### River (@sm)
+### River (@sprint-lead)
 
 **Título:** Scrum Master
 
@@ -171,7 +171,7 @@
 
 ---
 
-### Dex (@dev)
+### Dex (@developer)
 
 **Título:** Desenvolvedor Full Stack
 

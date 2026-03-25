@@ -468,7 +468,7 @@ async function runInstaller(options = {}) {
     console.log('');
     console.log(chalk.dim('Next steps:'));
     console.log(chalk.dim('  1. Run `npx sinapse-ai info` to see your configuration'));
-    console.log(chalk.dim('  2. Activate an agent with @agent-name (e.g., @dev)'));
+    console.log(chalk.dim('  2. Activate an agent with @agent-name (e.g., @developer)'));
     if (profile === 'bob') {
       console.log(chalk.dim('  3. Just talk to Bob - he\'ll orchestrate everything!'));
     }

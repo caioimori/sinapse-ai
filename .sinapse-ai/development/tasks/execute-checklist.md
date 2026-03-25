@@ -305,4 +305,4 @@ next_agent: @qa
 next_command: *review {story-id}
 condition: Checklist completed with all items passing
 alternatives:
-  - agent: @dev, command: *develop {story-id}, condition: Checklist found blocking issues
+  - agent: @developer, command: *develop {story-id}, condition: Checklist found blocking issues

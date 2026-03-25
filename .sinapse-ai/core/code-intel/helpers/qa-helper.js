@@ -18,7 +18,7 @@ const COVERAGE_THRESHOLDS = {
 };
 
 /**
- * QaHelper — Code intelligence helper for @qa agent tasks.
+ * QaHelper — Code intelligence helper for @quality-gate agent tasks.
  *
  * All functions return null gracefully when no provider is available.
  * Never throws — safe to call unconditionally in task workflows.

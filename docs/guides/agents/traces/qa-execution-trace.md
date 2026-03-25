@@ -1,7 +1,7 @@
-# @qa (Quinn) - Execution Trace
+# @quality-gate (Quinn) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.sinapse-ai/development/agents/qa.md`
+> Agent definition: `.sinapse-ai/development/agents/quality-gate.md`
 
 ## 1. Activation Trace
 
@@ -9,7 +9,7 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.sinapse-ai/development/agents/qa.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 1 | `.sinapse-ai/development/agents/quality-gate.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
 | 2 | `.sinapse-ai/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
 | 3 | `.sinapse-ai/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: qaLocation, dataLocation, storyBacklog |
 | 4 | `.sinapse-ai/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
@@ -337,10 +337,10 @@ flowchart TD
     D --> E[Generate actionable fix descriptions]
     E --> F[Map fixes to specific files/lines]
     F --> G["Output: QA_FIX_REQUEST.md for @dev"]
-    G --> H[Handoff to @dev for resolution]
+    G --> H[Handoff to @developer for resolution]
 ```
 
-**Cross-agent:** Generates `QA_FIX_REQUEST.md` consumed by @dev (Epic 6 - QA Loop).
+**Cross-agent:** Generates `QA_FIX_REQUEST.md` consumed by @developer (Epic 6 - QA Loop).
 
 ---
 
@@ -772,21 +772,21 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @dev -> @qa | Receives | Story marked "Ready for Review" triggers QA review |
-| @qa -> @dev | Handoff | `*create-fix-request` generates `QA_FIX_REQUEST.md` for @dev |
-| @coderabbit -> @qa | Receives | Automated code review findings consumed by QA analysis |
-| @qa -> @github-devops | Delegate | Git push operations, PR creation after QA approval |
-| @sm -> @qa | Receives | Sprint risk profiling requests |
-| @po -> @qa | Receives | Spec critique requests via `*critique-spec` |
+| @developer -> @quality-gate | Receives | Story marked "Ready for Review" triggers QA review |
+| @quality-gate -> @developer | Handoff | `*create-fix-request` generates `QA_FIX_REQUEST.md` for @developer |
+| @coderabbit -> @quality-gate | Receives | Automated code review findings consumed by QA analysis |
+| @quality-gate -> @github-devops | Delegate | Git push operations, PR creation after QA approval |
+| @sprint-lead -> @quality-gate | Receives | Sprint risk profiling requests |
+| @product-lead -> @quality-gate | Receives | Spec critique requests via `*critique-spec` |
 
 ### Delegation Rules (from agent definition)
 
-**Receives from @dev when:**
+**Receives from @developer when:**
 - Story is marked "Ready for Review"
 - Code is committed (not pushed yet)
-- @dev requests code quality feedback
+- @developer requests code quality feedback
 
-**Delegates to @dev when:**
+**Delegates to @developer when:**
 - QA findings require code fixes (`*create-fix-request`)
 - Self-healing loop identifies CRITICAL/HIGH issues needing fix
 
@@ -822,7 +822,7 @@ self_healing:
 **Git restrictions:**
 - ALLOWED: `git status`, `git log`, `git diff`, `git branch -a`
 - BLOCKED: `git push`, `git commit`, `gh pr create`
-- Redirect: QA reviews, doesn't commit. Use @dev for commits, @github-devops for push.
+- Redirect: QA reviews, doesn't commit. Use @developer for commits, @github-devops for push.
 
 **Story file permissions:**
 - ONLY authorized to update "QA Results" section of story files

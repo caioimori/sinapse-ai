@@ -31,7 +31,7 @@ describe('Path Validator', () => {
       path.join(skillsDir, 'sinapse-dev', 'SKILL.md'),
       [
         '# Skill',
-        'Load .sinapse-ai/development/agents/dev.md',
+        'Load .sinapse-ai/development/agents/developer.md',
         'Run node .sinapse-ai/development/scripts/generate-greeting.js dev',
       ].join('\n'),
     );
@@ -56,7 +56,7 @@ describe('Path Validator', () => {
       path.join(skillsDir, 'sinapse-dev', 'SKILL.md'),
       [
         '# Skill',
-        'Load .sinapse-ai/development/agents/dev.md',
+        'Load .sinapse-ai/development/agents/developer.md',
         'Run node .sinapse-ai/development/scripts/generate-greeting.js dev',
       ].join('\n'),
     );

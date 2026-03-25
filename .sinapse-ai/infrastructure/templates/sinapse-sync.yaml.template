@@ -7,7 +7,7 @@
 #   3. Add squad_aliases for your squads
 #   4. Run *command to sync components
 #
-# Documentation: https://synkra.dev/docs/ide-sync
+# Documentation: https://sinapse.ai/docs/ide-sync
 
 version: "1.0.0"
 

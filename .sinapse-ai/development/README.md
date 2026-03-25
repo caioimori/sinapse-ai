@@ -17,7 +17,7 @@ development/
 
 | Agent | ID | Description |
 |-------|-----|------------|
-| SINAPSE Master | `sinapse-master` | Framework orchestrator |
+| SINAPSE Master | `sinapse-orqx` | Framework orchestrator |
 | Analyst | `analyst` | Business analyst |
 | Architect | `architect` | Technical architect |
 | Data Engineer | `data-engineer` | Data engineering |

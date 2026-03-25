@@ -203,7 +203,7 @@ gemini "Como agente SINAPSE architect, projete o schema do banco de dados"
 gemini --context .gemini/rules.md "Implemente feature de auth"
 
 # Incluir agente específico
-gemini --context .gemini/agents/dev.md "Crie modelo de usuário"
+gemini --context .gemini/agents/developer.md "Crie modelo de usuário"
 ```
 
 ### Integração Shell
@@ -262,8 +262,8 @@ Crie aliases no shell:
 
 ```bash
 # ~/.bashrc ou ~/.zshrc
-alias gdev='gemini --context .gemini/agents/dev.md'
-alias gqa='gemini --context .gemini/agents/qa.md'
+alias gdev='gemini --context .gemini/agents/developer.md'
+alias gqa='gemini --context .gemini/agents/quality-gate.md'
 alias garch='gemini --context .gemini/agents/architect.md'
 ```
 

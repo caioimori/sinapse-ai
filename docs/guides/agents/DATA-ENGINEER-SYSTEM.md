@@ -459,11 +459,11 @@ flowchart TB
     end
 
     subgraph DOWNSTREAM["DOWNSTREAM - Recebe Schema"]
-        DEV["@dev (Dex)<br/>Developer"]
+        DEV["@developer (Dex)<br/>Developer"]
     end
 
     subgraph COLLABORATION["COLABORACAO EM DISCOVERY"]
-        QA["@qa (Quinn)<br/>Quality Gate"]
+        QA["@quality-gate (Quinn)<br/>Quality Gate"]
     end
 
     ARCH -->|"Requisitos de Arquitetura<br/>Gate 2 Decision"| DATA
@@ -483,9 +483,9 @@ flowchart TB
 | De | Para | Trigger | Acao |
 |----|------|---------|------|
 | @architect | @data-engineer | Gate 2 Decision | @data-engineer recebe requisitos de schema |
-| @data-engineer | @dev | Schema pronto | @dev implementa data layer |
-| @data-engineer | @qa | brownfield-discovery Fase 2 | @data-engineer documenta schema e debitos |
-| @qa | @data-engineer | Fase 5 validation | @qa valida e @data-engineer ajusta |
+| @data-engineer | @developer | Schema pronto | @developer implementa data layer |
+| @data-engineer | @quality-gate | brownfield-discovery Fase 2 | @data-engineer documenta schema e debitos |
+| @quality-gate | @data-engineer | Fase 5 validation | @quality-gate valida e @data-engineer ajusta |
 
 ### Delegacao do @architect (Gate 2 Decision)
 
@@ -501,7 +501,7 @@ O @architect delega para @data-engineer:
 | Tarefa | Agente | Motivo |
 |--------|--------|--------|
 | System architecture | @architect | Padroes de app-level, design de API |
-| Application code | @dev | Implementacao de repository pattern, DAL |
+| Application code | @developer | Implementacao de repository pattern, DAL |
 | Frontend design | @ux-design-expert | Design de UI/UX |
 | Git operations | @github-devops | Push, PR, deploy |
 
@@ -638,7 +638,7 @@ coderabbit_integration:
 
 **NAO USE @data-engineer para:**
 - System architecture (use @architect)
-- Codigo de aplicacao (use @dev)
+- Codigo de aplicacao (use @developer)
 - Git operations (use @github-devops)
 - Frontend/UI (use @ux-design-expert)
 
@@ -785,7 +785,7 @@ Erro: Another migration is running
 | **Checklists DBA** | 3 checklists |
 | **Data Files** | 5 arquivos de conhecimento |
 | **Workflows Integrados** | 1 (brownfield-discovery) |
-| **Agentes Colaboradores** | 3 (@architect, @dev, @qa) |
+| **Agentes Colaboradores** | 3 (@architect, @developer, @quality-gate) |
 | **Fases no brownfield-discovery** | 2 (Fase 2: Coleta, Fase 5: Validacao) |
 
 ---

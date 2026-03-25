@@ -206,7 +206,7 @@ workflow:
     - step: fix_issues
       phase: 4
       phase_name: "Apply Fixes"
-      agent: dev
+      agent: developer
 
       description: >-
         Developer agent applies fixes based on the fix request.

@@ -134,7 +134,7 @@ sinapse-ai/                             # Root project
 │
 ├── development/                       # Assets de Desenvolvimento
 │   ├── agents/                        # Definições de agentes (11 agentes core)
-│   │   ├── sinapse-master.md             # Orquestrador master
+│   │   ├── sinapse-orqx.md             # Orquestrador master
 │   │   ├── dev.md                     # Agente desenvolvedor
 │   │   ├── qa.md                      # Agente engenheiro QA
 │   │   ├── architect.md               # Agente arquiteto de sistemas

@@ -640,20 +640,20 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @squad-creator -> @dev | Handoff | Squad created, needs code implementation |
-| @squad-creator -> @qa | Handoff | Squad created, needs quality review |
+| @squad-creator -> @developer | Handoff | Squad created, needs code implementation |
+| @squad-creator -> @quality-gate | Handoff | Squad created, needs quality review |
 | @squad-creator -> @devops | Delegate | Publishing, deployment, git push operations |
-| @sinapse-master -> @squad-creator | Invokes | Component creation (agents, tasks, workflows) |
-| @pm -> @squad-creator | Receives | Requirements for new squads |
+| @sinapse-orqx -> @squad-creator | Invokes | Component creation (agents, tasks, workflows) |
+| @project-lead -> @squad-creator | Receives | Requirements for new squads |
 | @architect -> @squad-creator | Receives | Architecture decisions affecting squad structure |
 
 ### Collaboration Rules (from agent definition)
 
-**Delegates to @dev when:**
+**Delegates to @developer when:**
 - Squad code needs implementation
 - Custom scripts/tools within squad need development
 
-**Delegates to @qa when:**
+**Delegates to @quality-gate when:**
 - Squad implementation needs review
 - Quality validation beyond structural checks
 
@@ -663,10 +663,10 @@ graph TD
 - CI/CD pipeline configuration for squad testing
 
 **Cross-agent component creation:**
-- Creates agent definitions that @dev implements
-- Creates task workflows that @dev follows
+- Creates agent definitions that @developer implements
+- Creates task workflows that @developer follows
 - Creates templates that other agents consume
-- Creates checklists that @qa executes
+- Creates checklists that @quality-gate executes
 
 ---
 

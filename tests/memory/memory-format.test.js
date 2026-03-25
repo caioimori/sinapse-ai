@@ -6,8 +6,8 @@ const path = require('path');
 const AGENTS_DIR = path.join(__dirname, '..', '..', '.sinapse-ai', 'development', 'agents');
 
 const AGENT_IDS = [
-  'dev', 'qa', 'devops', 'architect', 'po', 'pm',
-  'analyst', 'sm', 'data-engineer', 'ux'
+  'developer', 'quality-gate', 'devops', 'architect', 'product-lead', 'project-lead',
+  'analyst', 'sprint-lead', 'data-engineer', 'ux'
 ];
 
 describe('MEMORY.md Structured Format', () => {

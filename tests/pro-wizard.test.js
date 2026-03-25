@@ -165,7 +165,8 @@ describe('stepLicenseGate', () => {
     const result = await proSetup.stepLicenseGate({ key: 'INVALID-KEY' });
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('Invalid key format');
+    // i18n default is PT-BR: 'Formato de chave inválido'
+    expect(result.error).toMatch(/Invalid key format|Formato de chave inv/i);
   });
 
   test('CI mode with valid format key: attempts API validation', async () => {
@@ -408,7 +409,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('unreachable');
+    // i18n default is PT-BR: 'inacessível' instead of 'unreachable'
+    expect(result.error).toMatch(/unreachable|inacess/i);
   });
 
   test('validateKeyWithApi handles network error', async () => {
@@ -430,7 +432,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('unreachable');
+    // i18n default is PT-BR: 'inacessível' instead of 'unreachable'
+    expect(result.error).toMatch(/unreachable|inacess/i);
   });
 
   test('validateKeyWithApi handles invalid key error', async () => {
@@ -452,7 +455,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('Invalid license key');
+    // i18n default is PT-BR: 'Chave de licença inválida'
+    expect(result.error).toMatch(/Invalid license key|inv.lida/i);
   });
 
   test('validateKeyWithApi handles expired key error', async () => {
@@ -474,7 +478,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('expired');
+    // i18n default is PT-BR: 'expirada' instead of 'expired'
+    expect(result.error).toMatch(/expired|expirada/i);
   });
 
   test('validateKeyWithApi handles rate limiting', async () => {
@@ -496,7 +501,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('Too many requests');
+    // i18n default is PT-BR: 'Muitas requisições'
+    expect(result.error).toMatch(/Too many requests|Muitas requis/i);
   });
 
   test('validateKeyWithApi handles seat limit exceeded', async () => {
@@ -518,7 +524,8 @@ describe('API Error Handling', () => {
     proSetup._testing.loadLicenseApi = originalLoad;
 
     expect(result.success).toBe(false);
-    expect(result.error).toContain('Maximum activations');
+    // i18n default is PT-BR: 'Número máximo de ativações'
+    expect(result.error).toMatch(/Maximum activations|m.ximo de ativa/i);
   });
 
   test('validateKeyWithApi handles successful activation', async () => {

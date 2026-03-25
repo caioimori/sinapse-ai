@@ -6,7 +6,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const AGENT_INFO = {
-  'sinapse-master': { icon: '🧠', role: 'Master Orchestrator' },
+  'sinapse-orqx': { icon: '🧠', role: 'Master Orchestrator' },
   analyst: { icon: '📊', role: 'Business Analyst' },
   architect: { icon: '🏛️', role: 'System Architect' },
   'data-engineer': { icon: '🗄️', role: 'Data Engineer' },

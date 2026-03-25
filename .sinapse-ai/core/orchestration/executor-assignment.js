@@ -342,7 +342,7 @@ function validateExecutorAssignment(story) {
   const knownQualityGates = new Set(
     Object.values(EXECUTOR_ASSIGNMENT_TABLE).map((c) => c.quality_gate),
   );
-  // Add @pm as it can be a quality gate
+  // Add @project-lead as it can be a quality gate
   knownQualityGates.add('@pm');
 
   if (story.quality_gate && !knownQualityGates.has(story.quality_gate)) {

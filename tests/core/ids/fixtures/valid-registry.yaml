@@ -48,7 +48,7 @@ entities:
       lastVerified: "2026-02-08T00:00:00Z"
   agents:
     po:
-      path: ".sinapse-ai/development/agents/po.md"
+      path: ".sinapse-ai/development/agents/product-lead.md"
       type: "agent"
       purpose: "Product Owner agent - backlog management and story validation"
       keywords: ["product", "owner", "backlog", "stories", "validation"]
@@ -61,7 +61,7 @@ entities:
       checksum: "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210"
       lastVerified: "2026-02-08T00:00:00Z"
     sm:
-      path: ".sinapse-ai/development/agents/sm.md"
+      path: ".sinapse-ai/development/agents/sprint-lead.md"
       type: "agent"
       purpose: "Scrum Master agent - story creation and sprint management"
       keywords: ["scrum", "master", "sprint", "story", "creation"]

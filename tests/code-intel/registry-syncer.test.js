@@ -468,7 +468,7 @@ describe('RegistrySyncer', () => {
   describe('inferRole', () => {
     it('should infer role from path patterns', () => {
       expect(inferRole('.sinapse-ai/development/tasks/dev.md')).toBe('task');
-      expect(inferRole('.sinapse-ai/development/agents/dev.md')).toBe('agent');
+      expect(inferRole('.sinapse-ai/development/agents/developer.md')).toBe('agent');
       expect(inferRole('.sinapse-ai/development/workflows/sdc.yaml')).toBe('workflow');
       expect(inferRole('.sinapse-ai/development/scripts/build.js')).toBe('script');
       expect(inferRole('.sinapse-ai/core/utils/helper.js')).toBe('module');

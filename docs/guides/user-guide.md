@@ -89,16 +89,16 @@ SINAPSE includes 11 specialized agents, each with a distinct role and personalit
 | **Dara**  | `@data-engineer` | Architect    | Data engineering        |
 | **Felix** | `@devops`        | Optimizer    | CI/CD and operations    |
 | **Uma**   | `@ux-expert`     | Creator      | User experience         |
-| **Pax**   | `@sinapse-master`   | Orchestrator | Framework orchestration |
+| **Pax**   | `@sinapse-orqx`   | Orchestrator | Framework orchestration |
 
 ### Agent Activation
 
 ```bash
 # Activate an agent using @ syntax
-@dev                # Activate Dex (Developer)
-@qa                 # Activate Quinn (QA)
+@developer                # Activate Dex (Developer)
+@quality-gate                 # Activate Quinn (QA)
 @architect          # Activate Aria (Architect)
-@sinapse-master        # Activate Pax (Orchestrator)
+@sinapse-orqx        # Activate Pax (Orchestrator)
 
 # Agent commands use * prefix
 *help               # Show available commands
@@ -147,11 +147,11 @@ Each command has exactly one authoritative agent owner. When multiple agents mig
 
 | Command        | Owner      | Others Should...                |
 |----------------|------------|---------------------------------|
-| `*create-prd`  | @pm        | Delegate to @pm                 |
-| `*create-epic` | @pm        | Delegate to @pm                 |
-| `*draft`       | @sm        | Use @sm for story creation      |
-| `*develop`     | @dev       | Use @dev for implementation     |
-| `*review`      | @qa        | Use @qa for code review         |
+| `*create-prd`  | @project-lead        | Delegate to @project-lead                 |
+| `*create-epic` | @project-lead        | Delegate to @project-lead                 |
+| `*draft`       | @sprint-lead        | Use @sprint-lead for story creation      |
+| `*develop`     | @developer       | Use @developer for implementation     |
+| `*review`      | @quality-gate        | Use @quality-gate for code review         |
 
 See the [Command Authority Matrix](../architecture/command-authority-matrix.md) for the complete mapping.
 
@@ -432,7 +432,7 @@ sinapse rebuild
 Always create a story before implementing features:
 
 ```bash
-@sinapse-master
+@sinapse-orqx
 *create-story
 ```
 
@@ -442,10 +442,10 @@ Choose the appropriate agent for each task:
 
 | Task                | Agent      |
 | ------------------- | ---------- |
-| Write code          | @dev       |
-| Review code         | @qa        |
+| Write code          | @developer       |
+| Review code         | @quality-gate        |
 | Design system       | @architect |
-| Define requirements | @po        |
+| Define requirements | @product-lead        |
 
 ### 3. Follow Quality Gates
 

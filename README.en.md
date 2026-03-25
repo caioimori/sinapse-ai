@@ -449,7 +449,7 @@ SINAPSE comes with 12 specialized agents:
 
 ### Meta Agents
 
-- **sinapse-master** - Master orchestration agent (includes framework development capabilities)
+- **sinapse-orqx** - Master orchestration agent (includes framework development capabilities)
 - **sinapse-orchestrator** - Workflow orchestrator and team coordination
 
 ### Planning Agents (Web Interface)
@@ -520,19 +520,19 @@ User Request → Spec Pipeline → Execution Engine → QA Review → Working Co
 
 ```bash
 # 1. Create spec from requirement
-@pm *gather-requirements
+@project-lead *gather-requirements
 @architect *assess-complexity
 @analyst *research-deps
-@pm *write-spec
-@qa *critique-spec
+@project-lead *write-spec
+@quality-gate *critique-spec
 
 # 2. Execute approved spec
 @architect *create-plan
 @architect *create-context
-@dev *execute-subtask 1.1
+@developer *execute-subtask 1.1
 
 # 3. QA Review
-@qa *review-build STORY-42
+@quality-gate *review-build STORY-42
 ```
 
 ### 📖 ADE Documentation

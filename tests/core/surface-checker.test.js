@@ -444,7 +444,7 @@ describe('SurfaceChecker', () => {
       const metadata = checker.getMetadata();
       expect(metadata).not.toBeNull();
       expect(metadata.story).toBe('11.4');
-      expect(metadata.author).toBe('@dev (Dex)');
+      expect(metadata.author).toBe('@developer (Dex)');
     });
   });
 

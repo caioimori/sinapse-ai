@@ -1,6 +1,6 @@
 # Routing Catalog — Complete Squad Directory
 
-> Reference document for Imperator (sinapse-master). Contains the complete routing table for all 15 Sinapse with domains, keywords, orchestrators, invocation commands, and detailed capability descriptions.
+> Reference document for Imperator (sinapse-orqx). Contains the complete routing table for all 15 Sinapse with domains, keywords, orchestrators, invocation commands, and detailed capability descriptions.
 
 ## Quick Reference Table
 

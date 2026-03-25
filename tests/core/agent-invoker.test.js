@@ -6,7 +6,7 @@
  *
  * Tests for agent invocation interface.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

@@ -26,7 +26,7 @@ const performanceData = {
  * Performance targets (from agent-config-requirements.yaml)
  */
 const PERFORMANCE_TARGETS = {
-  critical: 30,   // sinapse-master
+  critical: 30,   // sinapse-orqx
   high: 50,       // dev, qa, devops, security
   medium: 75,     // po, sm, architect, data-engineer, db-sage
   low: 100,        // pm, analyst, ux-expert
@@ -36,7 +36,7 @@ const PERFORMANCE_TARGETS = {
  * Agent priority mapping
  */
 const AGENT_PRIORITIES = {
-  'sinapse-master': 'critical',
+  'sinapse-orqx': 'critical',
   'dev': 'high',
   'qa': 'high',
   'devops': 'high',

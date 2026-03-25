@@ -376,7 +376,7 @@ metadata:
   story: '4.3'
   epic: 'Epic 4 - Execution Pipeline'
   created: '2026-01-28'
-  author: '@dev (Dex)'
+  author: '@developer (Dex)'
   version: '1.0.0'
   tags:
     - self-critique

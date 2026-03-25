@@ -10,7 +10,7 @@ paths:
 
 ## Self-Healing Configuration
 
-### Dev Phase (@dev — Story Development Cycle Phase 3)
+### Dev Phase (@developer — Story Development Cycle Phase 3)
 
 ```yaml
 mode: light
@@ -32,7 +32,7 @@ RUN CodeRabbit → CRITICAL found?
 After 2 iterations with CRITICAL → HALT, manual intervention
 ```
 
-### QA Phase (@qa — QA Loop Pre-Review)
+### QA Phase (@quality-gate — QA Loop Pre-Review)
 
 ```yaml
 mode: full
@@ -78,8 +78,8 @@ wsl bash -c 'cd /mnt/c/.../sinapse-ai && ~/.local/bin/coderabbit --prompt-only -
 
 | Workflow | Phase | Trigger | Agent |
 |----------|-------|---------|-------|
-| Story Development Cycle | 3 (Implement) | After task completion | @dev |
-| QA Loop | 1 (Review) | At review start | @qa |
+| Story Development Cycle | 3 (Implement) | After task completion | @developer |
+| QA Loop | 1 (Review) | At review start | @quality-gate |
 | Standalone | Any | `*coderabbit-review` command | Any |
 
 ## Focus Areas by Story Type

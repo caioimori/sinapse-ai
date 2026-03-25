@@ -126,7 +126,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         fs.mkdirSync(tasksDir, { recursive: true });
         fs.writeFileSync(path.join(tasksDir, 'add-rule.md'), '# Add Rule', 'utf8');
 
-        // Create SINAPSE/agents/dev.md (should be EXCLUDED)
+        // Create SINAPSE/agents/developer.md (should be EXCLUDED)
         const agentsDir = path.join(cmdDir, 'SINAPSE', 'agents');
         fs.mkdirSync(agentsDir, { recursive: true });
         fs.writeFileSync(path.join(agentsDir, 'dev.md'), '# Dev Agent', 'utf8');

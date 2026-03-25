@@ -700,21 +700,21 @@ graph TD
 
 | Interaction | Direction | Trigger |
 |-------------|-----------|---------|
-| @dev -> @devops | Delegate | Git push and PR creation after story completion |
-| @sm -> @devops | Delegate | Push operations during sprint workflow |
+| @developer -> @devops | Delegate | Git push and PR creation after story completion |
+| @sprint-lead -> @devops | Delegate | Push operations during sprint workflow |
 | @architect -> @devops | Delegate | Repository operations, PR creation |
-| @devops -> @dev | Redirect | Code development tasks (not in scope) |
-| @devops -> @sm | Redirect | Story management tasks (not in scope) |
+| @devops -> @developer | Redirect | Code development tasks (not in scope) |
+| @devops -> @sprint-lead | Redirect | Story management tasks (not in scope) |
 | @devops -> @architect | Redirect | Architecture design tasks (not in scope) |
 
 ### Delegation Rules (from agent definition)
 
-**Receives delegation from @dev (Dex) when:**
+**Receives delegation from @developer (Dex) when:**
 - Story implementation is complete and needs pushing
 - Pull request creation is required
 - Release tagging is needed after merge
 
-**Receives delegation from @sm (River) when:**
+**Receives delegation from @sprint-lead (River) when:**
 - Sprint push workflow is triggered
 - Coordinated multi-story push is needed
 

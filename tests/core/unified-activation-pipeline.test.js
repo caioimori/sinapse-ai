@@ -659,14 +659,14 @@ describe('UnifiedActivationPipeline', () => {
       expect(ids).toContain('data-engineer');
       expect(ids).toContain('ux-design-expert');
       expect(ids).toContain('devops');
-      expect(ids).toContain('sinapse-master');
+      expect(ids).toContain('sinapse-orqx');
       expect(ids).toContain('squad-creator');
     });
 
     it('isValidAgentId() should return true for valid IDs', () => {
       expect(UnifiedActivationPipeline.isValidAgentId('dev')).toBe(true);
       expect(UnifiedActivationPipeline.isValidAgentId('qa')).toBe(true);
-      expect(UnifiedActivationPipeline.isValidAgentId('sinapse-master')).toBe(true);
+      expect(UnifiedActivationPipeline.isValidAgentId('sinapse-orqx')).toBe(true);
     });
 
     it('isValidAgentId() should return false for invalid IDs', () => {
@@ -682,7 +682,7 @@ describe('UnifiedActivationPipeline', () => {
   describe('default icon mapping', () => {
     it('should return correct icons for known agents', () => {
       expect(pipeline._getDefaultIcon('dev')).toBe('\uD83D\uDCBB');
-      expect(pipeline._getDefaultIcon('sinapse-master')).toBe('\uD83D\uDC51');
+      expect(pipeline._getDefaultIcon('sinapse-orqx')).toBe('\uD83D\uDC51');
     });
 
     it('should return default robot icon for unknown agents', () => {

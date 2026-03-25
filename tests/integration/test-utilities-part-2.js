@@ -58,7 +58,7 @@ const UTILITIES_TO_TEST = [
 
 // Agents to test
 const AGENTS_TO_TEST = [
-  'sinapse-master',
+  'sinapse-orqx',
   'architect',
   'dev',
   'qa',

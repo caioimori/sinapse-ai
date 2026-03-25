@@ -435,7 +435,7 @@ Type `*help` to see all commands.
 **I collaborate with:**
 
 - **@architect (Stratum):** Receives system architecture requirements from, provides database design to
-- **@dev (Pixel):** Provides migrations and schema to, receives data layer feedback from
+- **@developer (Pixel):** Provides migrations and schema to, receives data layer feedback from
 
 **Delegation from @architect (Gate 2 Decision):**
 
@@ -446,7 +446,7 @@ Type `*help` to see all commands.
 **When to use others:**
 
 - System architecture → Use @architect (app-level data patterns, API design)
-- Application code → Use @dev (repository pattern, DAL implementation)
+- Application code → Use @developer (repository pattern, DAL implementation)
 - Frontend design → Use @ux-design-expert
 
 **Note:** @architect owns application-level data architecture, @data-engineer owns database implementation.

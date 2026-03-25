@@ -324,7 +324,7 @@ class GreenfieldHandler extends EventEmitter {
   /**
    * Phase 1: Spawn agents sequentially for Discovery & Planning (AC3)
    *
-   * Sequence: @analyst → @pm → @ux-design-expert → @architect → @po
+   * Sequence: @analyst → @project-lead → @ux-design-expert → @architect → @po
    *
    * @param {Object} context - Execution context
    * @returns {Promise<Object>} Phase result with surface prompt for Phase 2
@@ -396,7 +396,7 @@ class GreenfieldHandler extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Phase 2: Spawn @po for document sharding (AC4)
+   * Phase 2: Spawn @product-lead for document sharding (AC4)
    *
    * @param {Object} context - Execution context
    * @returns {Promise<Object>} Phase result with surface prompt for Phase 3
@@ -408,7 +408,7 @@ class GreenfieldHandler extends EventEmitter {
 
     this.emit('phaseStart', { phase: GreenfieldPhase.SHARDING, context });
 
-    // AC4: Spawn @po for document sharding
+    // AC4: Spawn @product-lead for document sharding
     const spawnResult = await this._spawnAgent('@po', 'shard-documents', {
       instructions: 'Shard docs/prd.md and docs/fullstack-architecture.md into development-ready chunks',
       creates: ['docs/prd/', 'docs/architecture/'],
@@ -472,7 +472,7 @@ class GreenfieldHandler extends EventEmitter {
         message: 'Greenfield workflow completo! Entrando no ciclo de desenvolvimento.',
         nextStep: 'development_cycle',
         workflowExecutorAvailable: !!workflowExecutor,
-        handoff: 'Use @sm → *create-story para iniciar o ciclo de stories',
+        handoff: 'Use @sprint-lead → *create-story para iniciar o ciclo de stories',
         context,
       },
     };

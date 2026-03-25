@@ -58,7 +58,7 @@ O workflow mais comum para desenvolvimento iterativo:
 ┌─────────────────────────────────────────────────────────────┐
 │                   Story Development Cycle                    │
 │                                                              │
-│  @sm: Create Story → @po: Validate → @dev: Implement → @qa  │
+│  @sm: Create Story → @po: Validate → @dev: Implement → @quality-gate  │
 │         │                  │               │            │    │
 │         ▼                  ▼               ▼            ▼    │
 │     Draft Story       10 Checks       Code + Tests    Gate   │
@@ -284,7 +284,7 @@ steps:
 Workflows persistem entre sessoes do Claude Code:
 
 1. Usuario inicia nova sessao
-2. Ativa @sinapse-master
+2. Ativa @sinapse-orqx
 3. Executa `*run-workflow {name} continue`
 4. Sistema carrega state, mostra step atual
 5. Usuario executa step

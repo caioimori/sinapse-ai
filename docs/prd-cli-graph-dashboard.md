@@ -20,7 +20,7 @@ Este PRD define um CLI Graph Dashboard que expõe essa riqueza de dados de forma
 
 | Date | Version | Description | Author |
 |------|---------|-------------|--------|
-| 2026-02-21 | 1.0 | Initial PRD draft baseado em deep research | Morgan (@pm) |
+| 2026-02-21 | 1.0 | Initial PRD draft baseado em deep research | Morgan (@project-lead) |
 
 ---
 

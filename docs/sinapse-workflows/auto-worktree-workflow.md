@@ -407,14 +407,14 @@ Alterações aqui não afetam a branch principal até o merge.
 - `*merge-worktree {storyId}` - Fazer merge da worktree
 - `*cleanup-worktrees` - Limpar worktrees obsoletas
 
-### @dev (Desenvolvedor)
+### @developer (Desenvolvedor)
 
 | Responsabilidade | Descrição |
 |------------------|-----------|
 | **Trigger Primário** | Inicia o workflow ao começar uma story |
 | **Desenvolvimento** | Trabalha dentro da worktree isolada |
 
-### @po (Product Owner)
+### @product-lead (Product Owner)
 
 | Responsabilidade | Descrição |
 |------------------|-----------|
@@ -574,7 +574,7 @@ flowchart TD
 | Configuração | Default | Impacto |
 |--------------|---------|---------|
 | `enabled` | true | Habilita/desabilita o workflow |
-| `createOnAssign` | false | Cria worktree quando @po atribui story |
+| `createOnAssign` | false | Cria worktree quando @product-lead atribui story |
 | `autoSwitch` | true | Muda automaticamente para a worktree |
 | `verbose` | true | Exibe resumo ao final |
 | `autoCleanup` | false | Limpa worktrees obsoletas automaticamente |

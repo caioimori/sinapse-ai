@@ -19,7 +19,7 @@
  * - AC7: Injects relevant gotchas before related tasks
  * - AC8: Severity levels: info, warning, critical
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

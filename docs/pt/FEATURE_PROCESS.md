@@ -79,7 +79,7 @@ Release (creditado no CHANGELOG.md)
 
 ### Quem Pode Adicionar ao Backlog?
 
-O Product Owner (@po) é a única autoridade para adicionar itens ao backlog interno.
+O Product Owner (@product-lead) é a única autoridade para adicionar itens ao backlog interno.
 Isso garante priorização adequada e alinhamento com os objetivos do projeto.
 
 ### Crédito aos Contribuidores

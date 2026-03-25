@@ -199,7 +199,7 @@ class Epic6Executor extends EpicExecutor {
   async _applyFixes(issues, _context) {
     this._log(`Applying fixes for ${issues.length} issues`);
 
-    // In full implementation, this would invoke @dev agent
+    // In full implementation, this would invoke @developer agent
     // to fix each issue. For now, just log.
     for (const issue of issues) {
       this._log(`Would fix: ${issue.type} - ${issue.message}`);

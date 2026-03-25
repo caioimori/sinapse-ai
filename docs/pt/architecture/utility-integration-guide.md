@@ -8,7 +8,7 @@
 
 **Versão:** 1.0.0
 **Criado em:** 2025-10-29
-**Autores:** Sarah (@po), Winston (@architect)
+**Autores:** Sarah (@product-lead), Winston (@architect)
 **Propósito:** Definir padrões para integração de scripts utilitários no framework SINAPSE
 
 ---
@@ -42,7 +42,7 @@ Um utilitário é considerado **totalmente integrado** quando:
 
 ```yaml
 # .sinapse-ai/agents/dev.yaml
-id: dev
+id: developer
 name: Agente de Desenvolvimento
 dependencies:
   utils:

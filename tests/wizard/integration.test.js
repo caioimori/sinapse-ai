@@ -3,6 +3,9 @@
  *
  * Story 1.7: Dependency Installation Integration
  * Tests the full wizard flow including dependency installation
+ *
+ * Updated for simplified wizard: hardcoded PT-BR, 1 question (LLM selection),
+ * auto-detect project type/tech preset, userProfile always 'bob'.
  */
 
 const inquirer = require('inquirer');
@@ -47,24 +50,34 @@ jest.mock('../../packages/installer/src/wizard/feedback', () => ({
   showCompletion: jest.fn(),
   showCancellation: jest.fn(),
 }));
+// Mock IDE sync pipeline (new wizard steps)
+jest.mock('../../.sinapse-ai/infrastructure/scripts/ide-sync/index', () => ({
+  commandSync: jest.fn().mockResolvedValue(),
+  commandValidate: jest.fn().mockResolvedValue(),
+}));
+// Mock LLM routing installer
+jest.mock('../../.sinapse-ai/infrastructure/scripts/llm-routing/install-llm-routing', () => ({
+  installLLMRouting: jest.fn().mockReturnValue({ success: true, errors: [] }),
+  isLLMRoutingInstalled: jest.fn().mockReturnValue(true),
+}));
 
 describe('Wizard Integration - Story 1.7', () => {
-  let consoleLogSpy, consoleErrorSpy;
+  let consoleLogSpy, consoleErrorSpy, consoleWarnSpy;
 
   beforeEach(() => {
     jest.clearAllMocks();
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
 
-    // Default mocks for successful flow
+    // Default mock: single LLM selection prompt (simplified wizard)
     inquirer.prompt.mockResolvedValue({
-      projectType: 'greenfield',
-      selectedIDEs: ['vscode'],
+      selectedLLM: 'claude-code',
     });
 
     generateIDEConfigs.mockResolvedValue({
       success: true,
-      configs: [{ ide: 'vscode', path: '.vscode/settings.json' }],
+      configs: [{ ide: 'claude-code', path: '.claude/settings.json' }],
     });
 
     configureEnvironment.mockResolvedValue({
@@ -78,7 +91,7 @@ describe('Wizard Integration - Story 1.7', () => {
     // Mock SINAPSE core installer
     installSinapseCore.mockResolvedValue({
       success: true,
-      installedFiles: ['agents/dev.md', 'tasks/create-story.yaml'],
+      installedFiles: ['agents/developer.md', 'tasks/create-story.yaml'],
       installedFolders: ['agents', 'tasks', 'workflows', 'templates'],
       errors: [],
     });
@@ -94,24 +107,28 @@ describe('Wizard Integration - Story 1.7', () => {
       packageManager: 'npm',
     });
 
-    // Mock fs-extra for getExistingUserProfile() - Story 10.2
-    // Default: no existing core-config.yaml (forces user profile prompt)
+    // Mock fs-extra methods used by the wizard
     fse.pathExists.mockResolvedValue(false);
     fse.existsSync.mockReturnValue(false);
     fse.ensureDir.mockResolvedValue();
+    fse.readFile.mockResolvedValue('{}');
+    fse.writeFile.mockResolvedValue();
   });
 
   afterEach(() => {
     consoleLogSpy.mockRestore();
     consoleErrorSpy.mockRestore();
+    consoleWarnSpy.mockRestore();
   });
 
   describe('Full Wizard Flow (AC Integration)', () => {
     it('should complete full wizard with dependency installation', async () => {
       const answers = await runWizard();
 
+      // projectType is auto-detected (fse.existsSync returns false -> greenfield)
       expect(answers.projectType).toBe('greenfield');
-      expect(answers.selectedIDEs).toContain('vscode');
+      // selectedIDEs derived from LLM choice (claude-code -> ['claude-code'])
+      expect(answers.selectedIDEs).toContain('claude-code');
       expect(answers.packageManager).toBe('npm'); // Auto-detected
       expect(answers.envConfigured).toBe(true);
       expect(answers.depsInstalled).toBe(true);
@@ -205,33 +222,14 @@ describe('Wizard Integration - Story 1.7', () => {
     });
   });
 
-  describe('User Profile Selection (Story 10.2)', () => {
-    it('should include userProfile in wizard answers', async () => {
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
-
+  describe('User Profile (simplified wizard)', () => {
+    it('should always set userProfile to bob in simplified wizard', async () => {
       const answers = await runWizard();
 
-      expect(answers.userProfile).toBeDefined();
-      expect(['bob', 'advanced']).toContain(answers.userProfile);
+      expect(answers.userProfile).toBe('bob');
     });
 
     it('should pass userProfile to configureEnvironment', async () => {
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'bob' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
-
       await runWizard();
 
       expect(configureEnvironment).toHaveBeenCalledWith(
@@ -239,69 +237,6 @@ describe('Wizard Integration - Story 1.7', () => {
           userProfile: 'bob',
         }),
       );
-    });
-
-    it('should use existing profile when core-config.yaml exists (idempotency)', async () => {
-      // Mock existing core-config.yaml with user_profile
-      fse.pathExists.mockResolvedValue(true);
-      fse.readFile.mockResolvedValue('user_profile: bob\nmarkdownExploder: true');
-
-      // Only 2 prompts needed: language + remaining questions (no user profile prompt)
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
-
-      const answers = await runWizard();
-
-      // Should use existing profile without prompting
-      expect(answers.userProfile).toBe('bob');
-      // Console should show skipped message
-      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('bob'));
-    });
-
-    it('should default to advanced when user_profile is missing from existing config', async () => {
-      // Mock existing core-config.yaml WITHOUT user_profile
-      fse.pathExists.mockResolvedValue(true);
-      fse.readFile.mockResolvedValue('markdownExploder: true\nproject:\n  type: GREENFIELD');
-
-      // Need all 3 prompts since user_profile doesn't exist
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
-
-      const answers = await runWizard();
-
-      expect(answers.userProfile).toBe('advanced');
-    });
-
-    it('should handle invalid user_profile in existing config gracefully', async () => {
-      // Mock existing core-config.yaml with INVALID user_profile
-      fse.pathExists.mockResolvedValue(true);
-      fse.readFile.mockResolvedValue('user_profile: invalid_value\nmarkdownExploder: true');
-
-      // Need all 3 prompts since user_profile is invalid
-      inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' })
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: ['vscode'],
-          selectedTechPreset: 'none',
-        });
-
-      const answers = await runWizard();
-
-      // Should prompt for new profile since existing is invalid
-      expect(answers.userProfile).toBe('advanced');
     });
   });
 
@@ -335,18 +270,10 @@ describe('Wizard Integration - Story 1.7', () => {
           packageManager: 'npm',
         });
 
-      // Mock prompt sequence: 1) language, 2) user profile (Story 10.2), 3) project type + IDEs + tech preset, 4) retryDeps
+      // Prompt sequence: 1) LLM selection, 2) retryDeps
       inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' }) // Story 10.2: User Profile
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: [],
-          selectedTechPreset: 'none',
-        })
-        .mockResolvedValueOnce({
-          retryDeps: true,
-        });
+        .mockResolvedValueOnce({ selectedLLM: 'claude-code' })
+        .mockResolvedValueOnce({ retryDeps: true });
 
       const answers = await runWizard();
 
@@ -361,18 +288,10 @@ describe('Wizard Integration - Story 1.7', () => {
         solution: 'Check your internet connection',
       });
 
-      // Mock prompt sequence: 1) language, 2) user profile (Story 10.2), 3) project type + IDEs + tech preset, 4) retryDeps
+      // Prompt sequence: 1) LLM selection, 2) retryDeps=false
       inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' }) // Story 10.2: User Profile
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: [],
-          selectedTechPreset: 'none',
-        })
-        .mockResolvedValueOnce({
-          retryDeps: false,
-        });
+        .mockResolvedValueOnce({ selectedLLM: 'claude-code' })
+        .mockResolvedValueOnce({ retryDeps: false });
 
       const answers = await runWizard();
 
@@ -388,13 +307,10 @@ describe('Wizard Integration - Story 1.7', () => {
         errorCategory: 'permission',
       });
 
+      // Prompt sequence: 1) LLM selection, 2) retryDeps=false
       inquirer.prompt
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-        })
-        .mockResolvedValueOnce({
-          retryDeps: false,
-        });
+        .mockResolvedValueOnce({ selectedLLM: 'claude-code' })
+        .mockResolvedValueOnce({ retryDeps: false });
 
       await runWizard();
 
@@ -419,8 +335,8 @@ describe('Wizard Integration - Story 1.7', () => {
       const answers = await runWizard();
 
       // Verify all story steps completed
-      expect(answers.projectType).toBeDefined(); // Story 1.3
-      expect(answers.selectedIDEs).toBeDefined(); // Story 1.4
+      expect(answers.projectType).toBeDefined(); // Auto-detected
+      expect(answers.selectedIDEs).toBeDefined(); // Derived from LLM
       expect(answers.envConfigured).toBeDefined(); // Story 1.6
       expect(answers.packageManager).toBeDefined(); // Story 1.7 (auto-detected)
       expect(answers.depsInstalled).toBeDefined(); // Story 1.7
@@ -430,18 +346,10 @@ describe('Wizard Integration - Story 1.7', () => {
     it('should handle environment config failure gracefully', async () => {
       configureEnvironment.mockRejectedValue(new Error('Env config failed'));
 
-      // Mock prompt sequence: 1) language, 2) user profile (Story 10.2), 3) project type + IDEs + tech preset, 4) continueWithoutEnv
+      // Prompt sequence: 1) LLM selection, 2) continueWithoutEnv
       inquirer.prompt
-        .mockResolvedValueOnce({ language: 'en' })
-        .mockResolvedValueOnce({ userProfile: 'advanced' }) // Story 10.2: User Profile
-        .mockResolvedValueOnce({
-          projectType: 'greenfield',
-          selectedIDEs: [],
-          selectedTechPreset: 'none',
-        })
-        .mockResolvedValueOnce({
-          continueWithoutEnv: true,
-        });
+        .mockResolvedValueOnce({ selectedLLM: 'claude-code' })
+        .mockResolvedValueOnce({ continueWithoutEnv: true });
 
       const answers = await runWizard();
 

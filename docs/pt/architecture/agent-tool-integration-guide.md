@@ -59,7 +59,7 @@ Agentes declaram suas dependências no bloco YAML dentro de seu arquivo de defin
 ### Exemplo de Declaração
 
 ```yaml
-# Do arquivo .sinapse-ai/development/agents/dev.md
+# Do arquivo .sinapse-ai/development/agents/developer.md
 dependencies:
   checklists:
     - story-dod-checklist.md
@@ -82,7 +82,7 @@ dependencies:
 
 ## Categorias de Ferramentas por Agente
 
-### @dev (Dex - Agente Desenvolvedor)
+### @developer (Dex - Agente Desenvolvedor)
 
 | Ferramenta   | Tipo     | Propósito                                    |
 | ------------ | -------- | -------------------------------------------- |
@@ -115,7 +115,7 @@ dependencies:
 - Único agente autorizado para criar/fazer merge de PRs
 - Gerenciamento de infraestrutura MCP
 
-### @qa (Quinn - Agente QA)
+### @quality-gate (Quinn - Agente QA)
 
 | Ferramenta   | Tipo | Propósito                          |
 | ------------ | ---- | ---------------------------------- |
@@ -141,8 +141,8 @@ Servidores MCP (Model Context Protocol) fornecem APIs estruturadas para uso de a
 | Servidor MCP | Ferramentas Fornecidas                                               | Usado Por        |
 | ------------ | -------------------------------------------------------------------- | ---------------- |
 | EXA          | `web_search_exa`, `company_research_exa`, `get_code_context_exa`    | @architect       |
-| Context7     | `resolve-library-id`, `query-docs`                                  | @dev, @architect |
-| Playwright   | `browser_navigate`, `browser_screenshot`, `browser_click`           | @qa              |
+| Context7     | `resolve-library-id`, `query-docs`                                  | @developer, @architect |
+| Playwright   | `browser_navigate`, `browser_screenshot`, `browser_click`           | @quality-gate              |
 | Apify        | `search-actors`, `call-actor`, `get-actor-output`                   | @devops          |
 
 ### Configuração de MCP
@@ -163,7 +163,7 @@ Servidores MCP são configurados via Docker MCP Toolkit. Veja [Gerenciamento de 
 
 ## Integração CodeRabbit
 
-O agente @dev inclui CodeRabbit para verificações de qualidade pré-commit.
+O agente @developer inclui CodeRabbit para verificações de qualidade pré-commit.
 
 ### Configuração
 
@@ -237,9 +237,9 @@ git_permissions:
 ### Workflow de Handoff
 
 ```
-@dev completa a story
+@developer completa a story
     ↓
-@dev marca status: "Pronto para Revisão"
+@developer marca status: "Pronto para Revisão"
     ↓
 Usuário ativa @devops
     ↓

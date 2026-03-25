@@ -485,8 +485,8 @@ func (h *Handler) PlaceOrder(w http.ResponseWriter, r *http.Request) {
 ### SINAPSE Commands
 
 ```bash
-@dev "Follow the go preset patterns for this service"
-@qa "Validate coverage and integration boundaries using go preset"
+@developer "Follow the go preset patterns for this service"
+@quality-gate "Validate coverage and integration boundaries using go preset"
 ```
 
 ---

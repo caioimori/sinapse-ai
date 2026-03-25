@@ -124,7 +124,7 @@ ideSync:
       format: condensed-rules
     # ... other IDEs
   redirects:
-    sinapse-developer: sinapse-master
+    sinapse-developer: sinapse-orqx
     db-sage: data-engineer
 ```
 
@@ -159,9 +159,9 @@ Deprecated or renamed agents are handled via redirects. When an old agent name i
 Example redirect file:
 
 ```markdown
-# Agent Redirect: sinapse-developer -> sinapse-master
+# Agent Redirect: sinapse-developer -> sinapse-orqx
 
-This agent has been renamed. Use `sinapse-master` instead.
+This agent has been renamed. Use `sinapse-orqx` instead.
 ```
 
 ## File Structure

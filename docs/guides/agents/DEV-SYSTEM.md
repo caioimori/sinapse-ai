@@ -2,14 +2,14 @@
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
-> **Owner:** @dev (Dex - The Builder)
+> **Owner:** @developer (Dex - The Builder)
 > **Status:** Documentacao Oficial
 
 ---
 
 ## Visao Geral
 
-O agente **@dev (Dex)** e o Full Stack Developer do SINAPSE, responsavel pela implementacao de stories, debugging, refactoring e aplicacao das melhores praticas de desenvolvimento. Este agente atua como um **Builder** que implementa stories de forma precisa, atualiza somente as secoes autorizadas dos arquivos de story e mantem testes abrangentes.
+O agente **@developer (Dex)** e o Full Stack Developer do SINAPSE, responsavel pela implementacao de stories, debugging, refactoring e aplicacao das melhores praticas de desenvolvimento. Este agente atua como um **Builder** que implementa stories de forma precisa, atualiza somente as secoes autorizadas dos arquivos de story e mantem testes abrangentes.
 
 ### Caracteristicas Principais
 
@@ -54,8 +54,8 @@ O agente **@dev (Dex)** e o Full Stack Developer do SINAPSE, responsavel pela im
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.sinapse-ai/development/agents/dev.md` | Definicao core do agente @dev (persona, comandos, workflows) |
-| `.claude/commands/SINAPSE/agents/dev.md` | Comando Claude Code para ativar @dev |
+| `.sinapse-ai/development/agents/developer.md` | Definicao core do agente @developer (persona, comandos, workflows) |
+| `.claude/commands/SINAPSE/agents/developer.md` | Comando Claude Code para ativar @developer |
 
 ### Arquivos de Checklists Usados pelo @dev
 
@@ -69,10 +69,10 @@ O agente **@dev (Dex)** e o Full Stack Developer do SINAPSE, responsavel pela im
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.sinapse-ai/development/tasks/qa-backlog-add-followup.md` | @qa | QA adiciona follow-ups ao backlog |
-| `.sinapse-ai/development/tasks/qa-review-story.md` | @qa | QA revisa implementacao do @dev |
+| `.sinapse-ai/development/tasks/qa-backlog-add-followup.md` | @quality-gate | QA adiciona follow-ups ao backlog |
+| `.sinapse-ai/development/tasks/qa-review-story.md` | @quality-gate | QA revisa implementacao do @developer |
 | `.sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md` | @github-devops | Quality gate antes de push |
-| `.sinapse-ai/development/tasks/sm-create-next-story.md` | @sm | Scrum Master cria stories para @dev |
+| `.sinapse-ai/development/tasks/sm-create-next-story.md` | @sprint-lead | Scrum Master cria stories para @developer |
 
 ### Arquivos de Workflows que Usam @dev
 
@@ -92,7 +92,7 @@ O agente **@dev (Dex)** e o Full Stack Developer do SINAPSE, responsavel pela im
 ```mermaid
 flowchart TB
     subgraph ACTIVATION["ATIVACAO DO AGENTE"]
-        A["@dev"] --> B["Greeting Builder<br/>(greeting-builder.js)"]
+        A["@developer"] --> B["Greeting Builder<br/>(greeting-builder.js)"]
         B --> C["Carrega devLoadAlwaysFiles"]
         C --> D["Exibe Quick Commands"]
         D --> E["HALT - Aguarda Usuario"]
@@ -304,16 +304,16 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph DEV_ECOSYSTEM["ECOSSISTEMA DO @dev"]
-        DEV["@dev (Dex)"]
+        DEV["@developer (Dex)"]
     end
 
     subgraph UPSTREAM["UPSTREAM - Fornece Stories"]
-        SM["@sm (River)<br/>Scrum Master"]
-        PO["@po (Pax)<br/>Product Owner"]
+        SM["@sprint-lead (River)<br/>Scrum Master"]
+        PO["@product-lead (Pax)<br/>Product Owner"]
     end
 
     subgraph PEER["PEER - Colaboracao"]
-        QA["@qa (Quinn)<br/>Quality Assurance"]
+        QA["@quality-gate (Quinn)<br/>Quality Assurance"]
     end
 
     subgraph DOWNSTREAM["DOWNSTREAM - Recebe Output"]
@@ -340,15 +340,15 @@ flowchart TB
 
 | De | Para | Trigger | Acao |
 |----|------|---------|------|
-| @sm | @dev | Story criada | @dev implementa story |
-| @po | @dev | Story validada | @dev pode comecar implementacao |
-| @dev | @qa | Story "Ready for Review" | @qa revisa implementacao |
-| @qa | @dev | Feedback com issues | @dev aplica correcoes (*apply-qa-fixes) |
-| @dev | @github-devops | Codigo completo | @github-devops faz push/PR |
+| @sprint-lead | @developer | Story criada | @developer implementa story |
+| @product-lead | @developer | Story validada | @developer pode comecar implementacao |
+| @developer | @quality-gate | Story "Ready for Review" | @quality-gate revisa implementacao |
+| @quality-gate | @developer | Feedback com issues | @developer aplica correcoes (*apply-qa-fixes) |
+| @developer | @github-devops | Codigo completo | @github-devops faz push/PR |
 
 ### Restricoes de Git
 
-O @dev tem operacoes Git limitadas:
+O @developer tem operacoes Git limitadas:
 
 **Operacoes PERMITIDAS:**
 - `git add` - Stage files
@@ -380,7 +380,7 @@ O @dev tem operacoes Git limitadas:
 
 ### devLoadAlwaysFiles
 
-Arquivos carregados automaticamente na ativacao do @dev (definidos em core-config.yaml):
+Arquivos carregados automaticamente na ativacao do @developer (definidos em core-config.yaml):
 - Padroes de codigo do projeto
 - Estrutura de diretorios
 - Convencoes de nomenclatura
@@ -426,7 +426,7 @@ decision_logging:
 
 ### Quando Usar o @dev
 
-**USE @dev para:**
+**USE @developer para:**
 - Implementar stories aprovadas
 - Aplicar correcoes de QA
 - Refatorar codigo existente
@@ -434,11 +434,11 @@ decision_logging:
 - Registrar divida tecnica
 - Executar e validar testes
 
-**NAO USE @dev para:**
-- Criar stories (use @sm)
+**NAO USE @developer para:**
+- Criar stories (use @sprint-lead)
 - Push para remote (use @github-devops)
 - Validar arquitetura (use @architect)
-- Gerenciar backlog (use @po)
+- Gerenciar backlog (use @product-lead)
 
 ### Modos de Execucao
 
@@ -517,7 +517,7 @@ Erro: Tests failed - cannot mark task as complete
 
 ### Blocking conditions
 
-O @dev deve **HALT** e perguntar ao usuario quando:
+O @developer deve **HALT** e perguntar ao usuario quando:
 - Dependencias nao aprovadas sao necessarias
 - Requisitos ambiguos apos checar story
 - 3 falhas consecutivas tentando implementar/corrigir
@@ -541,7 +541,7 @@ O @dev deve **HALT** e perguntar ao usuario quando:
 - [pre-push-checklist.md](.sinapse-ai/product/checklists/pre-push-checklist.md)
 
 ### Agente
-- [dev.md](.sinapse-ai/development/agents/dev.md)
+- [dev.md](.sinapse-ai/development/agents/developer.md)
 
 ### Workflows
 - [brownfield-fullstack.yaml](.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
@@ -561,7 +561,7 @@ O @dev deve **HALT** e perguntar ao usuario quando:
 | **Modos de Execucao** | 3 (YOLO, Interactive, Pre-flight) |
 | **Checklists Usados** | 3 (story-dod, pre-push, change) |
 | **Workflows Integrados** | 6 (brownfield + greenfield variants) |
-| **Agentes Colaboradores** | 4 (@sm, @po, @qa, @github-devops) |
+| **Agentes Colaboradores** | 4 (@sprint-lead, @product-lead, @quality-gate, @github-devops) |
 | **Operacoes Git Permitidas** | 8 (add, commit, status, diff, log, branch, checkout, merge) |
 | **Operacoes Git Bloqueadas** | 4 (push, push --force, gh pr create, gh pr merge) |
 | **CodeRabbit Self-Healing** | Light mode (max 2 iteracoes, CRITICAL only) |
@@ -572,7 +572,7 @@ O @dev deve **HALT** e perguntar ao usuario quando:
 
 | Data | Autor | Descricao |
 |------|-------|-----------|
-| 2026-02-04 | @dev | Documento inicial criado |
+| 2026-02-04 | @developer | Documento inicial criado |
 
 ---
 

@@ -7,7 +7,7 @@
  *
  * Features:
  * - AC1: invokeAgent(agentName, taskPath, inputs) method
- * - AC2: Supports agents: @pm, @architect, @analyst, @dev, @qa
+ * - AC2: Supports agents: @project-lead, @architect, @analyst, @developer, @qa
  * - AC3: Passes structured context to task
  * - AC4: Awaits completion or timeout
  * - AC5: Parses and validates task output

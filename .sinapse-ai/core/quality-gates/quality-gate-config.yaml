@@ -47,7 +47,7 @@ layer2:
   quinn:
     enabled: true
     autoReview: true
-    agentPath: ".claude/commands/SINAPSE/agents/qa.md"
+    agentPath: ".claude/commands/SINAPSE/agents/quality-gate.md"
     severity:
       block: ["CRITICAL"]
       warn: ["HIGH", "MEDIUM"]

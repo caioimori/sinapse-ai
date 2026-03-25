@@ -52,7 +52,7 @@ def detect_project(cwd: str) -> str:
 def detect_agent_from_prompt(prompt: str) -> str | None:
     """Detect SINAPSE agent activation from prompt."""
     # Look for @agent patterns
-    match = re.search(r'@(dev|architect|qa|pm|po|sm|analyst|devops|sinapse-master)', prompt.lower())
+    match = re.search(r'@(dev|architect|qa|pm|po|sm|analyst|devops|sinapse-orqx)', prompt.lower())
     if match:
         return match.group(1)
     return None

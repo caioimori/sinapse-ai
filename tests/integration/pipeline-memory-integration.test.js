@@ -68,7 +68,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should activate successfully with empty memories array', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       expect(result).toBeDefined();
       expect(result.greeting).toBeDefined();
@@ -78,11 +78,11 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should not throw errors when pro is unavailable', async () => {
-      await expect(pipeline.activate('qa')).resolves.toBeDefined();
+      await expect(pipeline.activate('quality-gate')).resolves.toBeDefined();
     });
 
     it('should work for all agent IDs', async () => {
-      const agentIds = ['dev', 'qa', 'architect', 'pm', 'po'];
+      const agentIds = ['developer', 'quality-gate', 'architect', 'project-lead', 'product-lead'];
 
       for (const agentId of agentIds) {
         const result = await pipeline.activate(agentId);
@@ -126,7 +126,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should activate successfully with empty memories array', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       expect(result).toBeDefined();
       expect(result.context.memories).toEqual([]);
@@ -151,7 +151,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         sector: 'procedural',
         tier: 'hot',
         attention_score: 0.8,
-        agent: 'dev',
+        agent: 'developer',
       },
       {
         id: 'mem-002',
@@ -160,7 +160,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         sector: 'semantic',
         tier: 'warm',
         attention_score: 0.5,
-        agent: 'dev',
+        agent: 'developer',
       },
     ];
 
@@ -205,7 +205,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should inject memories into enrichedContext', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       expect(result.context.memories).toHaveLength(2);
       expect(result.context.memories[0]).toMatchObject({
@@ -216,7 +216,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should include memory metadata in metrics', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       expect(result.metrics.loaders.memories).toBeDefined();
       expect(result.metrics.loaders.memories.status).toBe('ok');
@@ -224,7 +224,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should maintain activation quality as non-fallback', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       // Under heavy load (full test suite), pipeline may report 'partial' instead of 'full'
       // The key assertion is that memories were injected (not a fallback)
@@ -289,7 +289,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should never exceed configured budget', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       // With 2000 budget and 200 tokens per memory, max should be 10 memories
       // (2000 / 200 = 10)
@@ -303,7 +303,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should stop adding memories when budget is reached', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       // With default 2000 budget and 200 tokens per memory, max is 10 memories
       expect(result.context.memories.length).toBeLessThanOrEqual(10);
@@ -322,8 +322,8 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         async loadForAgent(agentId, options) {
           // Simulate proper agent scoping
           const allMemories = [
-            { id: 'mem-dev-1', agent: 'dev', title: 'Dev Memory' },
-            { id: 'mem-qa-1', agent: 'qa', title: 'QA Memory' },
+            { id: 'mem-dev-1', agent: 'developer', title: 'Dev Memory' },
+            { id: 'mem-qa-1', agent: 'quality-gate', title: 'QA Memory' },
             { id: 'mem-shared-1', agent: 'shared', title: 'Shared Memory' },
           ];
 
@@ -351,26 +351,26 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     });
 
     it('should only return dev + shared memories for dev agent', async () => {
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       const agents = result.context.memories.map(m => m.agent);
-      expect(agents).toContain('dev');
+      expect(agents).toContain('developer');
       expect(agents).toContain('shared');
-      expect(agents).not.toContain('qa');
+      expect(agents).not.toContain('quality-gate');
     });
 
     it('should only return qa + shared memories for qa agent', async () => {
-      const result = await pipeline.activate('qa');
+      const result = await pipeline.activate('quality-gate');
 
       const agents = result.context.memories.map(m => m.agent);
-      expect(agents).toContain('qa');
+      expect(agents).toContain('quality-gate');
       expect(agents).toContain('shared');
-      expect(agents).not.toContain('dev');
+      expect(agents).not.toContain('developer');
     });
 
     it('should never leak private memories between agents', async () => {
-      const devResult = await pipeline.activate('dev');
-      const qaResult = await pipeline.activate('qa');
+      const devResult = await pipeline.activate('developer');
+      const qaResult = await pipeline.activate('quality-gate');
 
       const devAgents = devResult.context.memories.map(m => m.agent);
       const qaAgents = qaResult.context.memories.map(m => m.agent);
@@ -401,7 +401,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         return null;
       });
 
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
       expect(result.context.memories).toEqual([]);
     });
 
@@ -426,7 +426,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       });
 
       // Should not throw, should gracefully degrade
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
       expect(result.context.memories).toEqual([]);
       expect(result.metrics.loaders.memories).toBeDefined();
     });
@@ -460,7 +460,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         return null;
       });
 
-      const result = await pipeline.activate('dev');
+      const result = await pipeline.activate('developer');
 
       // Should timeout and return empty memories (null from _profileLoader → || [])
       expect(result.context.memories).toEqual([]);

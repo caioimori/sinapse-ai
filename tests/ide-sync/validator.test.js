@@ -135,7 +135,7 @@ describe('validator', () => {
       fs.writeFileSync(path.join(targetDir, 'sinapse-developer.md'), 'redirect');
 
       const expected = [{ filename: 'agent.md', content: 'content' }];
-      const redirects = { 'sinapse-developer': 'sinapse-master' };
+      const redirects = { 'sinapse-developer': 'sinapse-orqx' };
       const result = validateIdeSync(expected, targetDir, redirects);
 
       expect(result.orphaned).toHaveLength(0);

@@ -1,7 +1,7 @@
 # Task: Project Status — Full Panorama
 
 > **Command:** `*status`
-> **Agent:** @sinapse-master, @po, @sm
+> **Agent:** @sinapse-orqx, @product-lead, @sm
 > **Purpose:** Display accurate, real-time panorama of all epics and stories
 > **Created:** 2026-03-05
 
@@ -257,7 +257,7 @@ tags:
   - status
   - panorama
 updated_at: 2026-03-05
-agents: [sinapse-master, po, sm]
+agents: [sinapse-orqx, po, sm]
 ```
 
 ---

@@ -82,13 +82,13 @@ autoClaude:
 
 ---
 
-## Command Integration (@dev)
+## Command Integration (@developer)
 
 ```yaml
 command:
   name: '*fix-qa-issues'
   syntax: '*fix-qa-issues {story-id}'
-  agent: dev
+  agent: developer
 
   examples:
     - '*fix-qa-issues 6.4'
@@ -496,7 +496,7 @@ phase_7:
 
         ---
 
-        **Next Step:** @qa re-review with `*review-story {storyId}`
+        **Next Step:** @quality-gate re-review with `*review-story {storyId}`
 
   validation:
     check: 'All updates completed, signal file created'
@@ -534,7 +534,7 @@ summary:
       {end for}
 
       ### Next Steps
-      1. QA agent should re-review: `@qa *review-story {storyId}`
+      1. QA agent should re-review: `@quality-gate *review-story {storyId}`
       2. If all issues verified, story moves to "Ready for Review"
 
       ---
@@ -587,11 +587,11 @@ qa_loop_integration:
   triggered_by:
     - QA review identifies issues
     - QA_FIX_REQUEST.md created
-    - @qa signals @dev
+    - @quality-gate signals @dev
 
   triggers_next:
     - READY_FOR_REREVIEW.md signals @qa
-    - @qa runs re-review
+    - @quality-gate runs re-review
     - Loop continues until PASS or WAIVED
 
   handoff_format:
@@ -633,7 +633,7 @@ qa_loop_integration:
 - ✅ Check null input returns proper error
 
 ### Next Steps
-1. QA agent should re-review: `@qa *review-story 6.4`
+1. QA agent should re-review: `@quality-gate *review-story 6.4`
 2. If all issues verified, story moves to "Ready for Review"
 ```
 
@@ -662,7 +662,7 @@ MAJ-2 requires refactoring the data layer. This exceeds minimal fix scope.
 Recommend creating separate story for performance optimization.
 
 ### Next Steps
-1. Discuss MAJ-2 with @qa and @po
+1. Discuss MAJ-2 with @quality-gate and @po
 2. Either expand scope or create follow-up story
 ```
 
@@ -675,7 +675,7 @@ metadata:
   story: '6.4'
   epic: 'Epic 6 - QA Evolution'
   created: '2026-01-29'
-  author: '@dev (Dex)'
+  author: '@developer (Dex)'
   version: '1.0.0'
   tags:
     - qa-loop
@@ -689,4 +689,4 @@ next_agent: @qa
 next_command: *review {story-id}
 condition: All QA_FIX_REQUEST issues resolved
 alternatives:
-  - agent: @dev, command: *run-tests, condition: Verify fixes pass before re-review
+  - agent: @developer, command: *run-tests, condition: Verify fixes pass before re-review

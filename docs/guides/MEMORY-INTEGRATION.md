@@ -40,7 +40,7 @@ UnifiedActivationPipeline (Tier 2 Enrich)
 
 1. **Agent Activation:**
    ```javascript
-   @dev  // User activates dev agent
+   @developer  // User activates dev agent
    ```
 
 2. **Pipeline Tier 2 (Enrich):**
@@ -224,9 +224,9 @@ const defaultBudget = 2000;
 Configure per-agent budgets in agent config:
 
 ```yaml
-# .sinapse-ai/development/agents/dev.md
+# .sinapse-ai/development/agents/developer.md
 agent:
-  id: dev
+  id: developer
   config:
     memoryBudget: 3000  # Custom budget for dev agent
 ```

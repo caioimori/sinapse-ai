@@ -55,7 +55,7 @@ graph TD
 
 ### Workflow-Agent Participation Matrix
 
-| Workflow | @sinapse-master | @analyst | @architect | @data-eng | @dev | @devops | @pm | @po | @qa | @sm | @ux-expert | @squad-creator |
+| Workflow | @sinapse-orqx | @analyst | @architect | @data-eng | @developer | @devops | @project-lead | @product-lead | @quality-gate | @sprint-lead | @ux-expert | @squad-creator |
 |----------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Story Dev Cycle | - | - | - | - | X | - | - | X | X | X | - | - |
 | Spec Pipeline | - | X | X | - | - | - | X | - | X | - | - | - |
@@ -82,32 +82,32 @@ Every task file referenced across all workflows and agents:
 
 | # | Task File | Agents | Workflows Used In | Agent Command |
 |---|-----------|--------|-------------------|---------------|
-| 1 | `create-next-story.md` | @sm | SDC, GF, GU, GS, BF, BU, BS | `*draft` |
-| 2 | `sm-create-next-story.md` | @sm | GF, GU, GS | `*draft` |
-| 3 | `create-brownfield-story.md` | @sm, @pm | BF | `*draft` (SM), `*create-story` (PM) |
-| 4 | `validate-next-story.md` | @po, @dev | SDC | `*validate-story-draft` |
-| 5 | `dev-develop-story.md` | @dev | SDC, GF, GU, GS, BF, BU, BS | `*develop {story-id}` |
-| 6 | `apply-qa-fixes.md` | @dev | QAL, GF, GU, GS, BU, BS | `*apply-qa-fixes` |
-| 7 | `qa-gate.md` | @qa | SDC | `*gate {story}` |
-| 8 | `qa-review-story.md` | @qa | QAL, GF, GU, GS, BU, BS | `*review {story}` |
-| 9 | `qa-create-fix-request.md` | @qa | QAL | `*create-fix-request {story}` |
-| 10 | `create-doc.md` | @pm, @architect, @ux-expert, @analyst, @sinapse-master | GF, GU, GS, BU, BS, SP | `*create-prd`, `*create-*-architecture`, etc. |
-| 11 | `shard-doc.md` | @po, @pm, @sinapse-master | GF, GU, GS, BF, BU, BS | `*shard-doc` |
-| 12 | `execute-checklist.md` | @po, @architect, @data-eng, @sinapse-master | GF, GU, GS, BF, BU, BS | `*execute-checklist-po`, `*execute-checklist` |
-| 13 | `document-project.md` | @architect, @analyst, @sinapse-master | BD, BF, BU, BS | `*document-project` |
-| 14 | `correct-course.md` | @pm, @sm, @sinapse-master | (any - course correction) | `*correct-course` |
+| 1 | `create-next-story.md` | @sprint-lead | SDC, GF, GU, GS, BF, BU, BS | `*draft` |
+| 2 | `sm-create-next-story.md` | @sprint-lead | GF, GU, GS | `*draft` |
+| 3 | `create-brownfield-story.md` | @sprint-lead, @project-lead | BF | `*draft` (SM), `*create-story` (PM) |
+| 4 | `validate-next-story.md` | @product-lead, @developer | SDC | `*validate-story-draft` |
+| 5 | `dev-develop-story.md` | @developer | SDC, GF, GU, GS, BF, BU, BS | `*develop {story-id}` |
+| 6 | `apply-qa-fixes.md` | @developer | QAL, GF, GU, GS, BU, BS | `*apply-qa-fixes` |
+| 7 | `qa-gate.md` | @quality-gate | SDC | `*gate {story}` |
+| 8 | `qa-review-story.md` | @quality-gate | QAL, GF, GU, GS, BU, BS | `*review {story}` |
+| 9 | `qa-create-fix-request.md` | @quality-gate | QAL | `*create-fix-request {story}` |
+| 10 | `create-doc.md` | @project-lead, @architect, @ux-expert, @analyst, @sinapse-orqx | GF, GU, GS, BU, BS, SP | `*create-prd`, `*create-*-architecture`, etc. |
+| 11 | `shard-doc.md` | @product-lead, @project-lead, @sinapse-orqx | GF, GU, GS, BF, BU, BS | `*shard-doc` |
+| 12 | `execute-checklist.md` | @product-lead, @architect, @data-eng, @sinapse-orqx | GF, GU, GS, BF, BU, BS | `*execute-checklist-po`, `*execute-checklist` |
+| 13 | `document-project.md` | @architect, @analyst, @sinapse-orqx | BD, BF, BU, BS | `*document-project` |
+| 14 | `correct-course.md` | @project-lead, @sprint-lead, @sinapse-orqx | (any - course correction) | `*correct-course` |
 | 15 | `environment-bootstrap.md` | @devops | GF, GU, GS | `*environment-bootstrap` |
 | 16 | `facilitate-brainstorming-session.md` | @analyst | GF, GU, GS | `*brainstorm {topic}` |
-| 17 | `create-deep-research-prompt.md` | @analyst, @architect, @data-eng, @sinapse-master | GF, GU, GS | `*research {topic}` |
+| 17 | `create-deep-research-prompt.md` | @analyst, @architect, @data-eng, @sinapse-orqx | GF, GU, GS | `*research {topic}` |
 | 18 | `generate-ai-frontend-prompt.md` | @ux-expert | GF, GU | `*generate-ui-prompt` |
-| 19 | `spec-gather-requirements.md` | @pm | SP | (Phase 1) |
+| 19 | `spec-gather-requirements.md` | @project-lead | SP | (Phase 1) |
 | 20 | `spec-assess-complexity.md` | @architect | SP | `*assess-complexity` |
 | 21 | `spec-research-dependencies.md` | @analyst | SP | (Phase 3) |
-| 22 | `spec-write-spec.md` | @pm | SP | (Phase 4) |
-| 23 | `spec-critique.md` | @qa | SP | (Phase 5) |
+| 22 | `spec-write-spec.md` | @project-lead | SP | (Phase 4) |
+| 23 | `spec-critique.md` | @quality-gate | SP | (Phase 5) |
 | 24 | `plan-create-implementation.md` | @architect | SP | (Phase 6) |
-| 25 | `brownfield-create-epic.md` | @pm | BF, BD | `*create-epic` |
-| 26 | `brownfield-create-story.md` | @pm | BF, BD | `*create-story` |
+| 25 | `brownfield-create-epic.md` | @project-lead | BF, BD | `*create-epic` |
+| 26 | `brownfield-create-story.md` | @project-lead | BF, BD | `*create-story` |
 | 27 | `db-schema-audit.md` | @data-eng | BD | `*db-schema-audit` (implied) |
 | 28 | `security-audit.md` | @data-eng, @devops | BD | `*security-audit` |
 | 29 | `create-worktree.md` | @devops | AW | `*create-worktree` |
@@ -128,21 +128,21 @@ Every task file referenced across all workflows and agents:
 | 44 | `setup-mcp-docker.md` | @devops | (MCP mgmt) | `*setup-mcp-docker` |
 | 45 | `setup-github.md` | @devops | (setup) | `*setup-github` |
 | 46 | `architect-analyze-impact.md` | @architect | (on-demand) | `*analyze-impact` |
-| 47 | `collaborative-edit.md` | @architect, @sm | (on-demand) | (internal) |
-| 48 | `qa-test-design.md` | @qa | (on-demand) | `*test-design {story}` |
-| 49 | `qa-risk-profile.md` | @qa | (on-demand) | `*risk-profile {story}` |
-| 50 | `qa-nfr-assess.md` | @qa | (on-demand) | `*nfr-assess {story}` |
-| 51 | `qa-trace-requirements.md` | @qa | (on-demand) | `*trace {story}` |
-| 52 | `qa-generate-tests.md` | @qa | (on-demand) | `*generate-tests` |
-| 53 | `qa-run-tests.md` | @qa | (on-demand) | `*run-tests` |
-| 54 | `qa-backlog-add-followup.md` | @qa | (on-demand) | `*backlog-add` |
-| 55 | `dev-improve-code-quality.md` | @dev | (on-demand) | `*improve-code-quality` |
-| 56 | `dev-optimize-performance.md` | @dev | (on-demand) | `*optimize-performance` |
-| 57 | `dev-suggest-refactoring.md` | @dev | (on-demand) | `*suggest-refactoring` |
-| 58 | `dev-backlog-debt.md` | @dev | (on-demand) | `*backlog-debt` |
-| 59 | `sync-documentation.md` | @dev | (on-demand) | `*sync-documentation` |
-| 60 | `po-manage-story-backlog.md` | @po, @qa | (backlog mgmt) | `*backlog-*` |
-| 61 | `init-project-status.md` | @sm | (init) | (internal) |
+| 47 | `collaborative-edit.md` | @architect, @sprint-lead | (on-demand) | (internal) |
+| 48 | `qa-test-design.md` | @quality-gate | (on-demand) | `*test-design {story}` |
+| 49 | `qa-risk-profile.md` | @quality-gate | (on-demand) | `*risk-profile {story}` |
+| 50 | `qa-nfr-assess.md` | @quality-gate | (on-demand) | `*nfr-assess {story}` |
+| 51 | `qa-trace-requirements.md` | @quality-gate | (on-demand) | `*trace {story}` |
+| 52 | `qa-generate-tests.md` | @quality-gate | (on-demand) | `*generate-tests` |
+| 53 | `qa-run-tests.md` | @quality-gate | (on-demand) | `*run-tests` |
+| 54 | `qa-backlog-add-followup.md` | @quality-gate | (on-demand) | `*backlog-add` |
+| 55 | `dev-improve-code-quality.md` | @developer | (on-demand) | `*improve-code-quality` |
+| 56 | `dev-optimize-performance.md` | @developer | (on-demand) | `*optimize-performance` |
+| 57 | `dev-suggest-refactoring.md` | @developer | (on-demand) | `*suggest-refactoring` |
+| 58 | `dev-backlog-debt.md` | @developer | (on-demand) | `*backlog-debt` |
+| 59 | `sync-documentation.md` | @developer | (on-demand) | `*sync-documentation` |
+| 60 | `po-manage-story-backlog.md` | @product-lead, @quality-gate | (backlog mgmt) | `*backlog-*` |
+| 61 | `init-project-status.md` | @sprint-lead | (init) | (internal) |
 
 ### Tasks in Agent Dependencies but NOT in Any Workflow
 
@@ -151,19 +151,19 @@ These tasks are available as on-demand commands but are not called by any workfl
 | Task | Agent | Command | Status |
 |------|-------|---------|--------|
 | `architect-analyze-impact.md` | @architect | `*analyze-impact` | On-demand only |
-| `qa-test-design.md` | @qa | `*test-design` | On-demand only |
-| `qa-risk-profile.md` | @qa | `*risk-profile` | On-demand only |
-| `qa-nfr-assess.md` | @qa | `*nfr-assess` | On-demand only |
-| `qa-trace-requirements.md` | @qa | `*trace` | On-demand only |
-| `qa-generate-tests.md` | @qa | `*generate-tests` | On-demand only |
-| `qa-run-tests.md` | @qa | `*run-tests` | On-demand only |
-| `qa-backlog-add-followup.md` | @qa | `*backlog-add` | On-demand only |
-| `dev-improve-code-quality.md` | @dev | `*improve-code-quality` | On-demand only |
-| `dev-optimize-performance.md` | @dev | `*optimize-performance` | On-demand only |
-| `dev-suggest-refactoring.md` | @dev | `*suggest-refactoring` | On-demand only |
-| `dev-backlog-debt.md` | @dev | `*backlog-debt` | On-demand only |
-| `sync-documentation.md` | @dev | `*sync-documentation` | On-demand only |
-| `po-manage-story-backlog.md` | @po | `*backlog-*` | On-demand only |
+| `qa-test-design.md` | @quality-gate | `*test-design` | On-demand only |
+| `qa-risk-profile.md` | @quality-gate | `*risk-profile` | On-demand only |
+| `qa-nfr-assess.md` | @quality-gate | `*nfr-assess` | On-demand only |
+| `qa-trace-requirements.md` | @quality-gate | `*trace` | On-demand only |
+| `qa-generate-tests.md` | @quality-gate | `*generate-tests` | On-demand only |
+| `qa-run-tests.md` | @quality-gate | `*run-tests` | On-demand only |
+| `qa-backlog-add-followup.md` | @quality-gate | `*backlog-add` | On-demand only |
+| `dev-improve-code-quality.md` | @developer | `*improve-code-quality` | On-demand only |
+| `dev-optimize-performance.md` | @developer | `*optimize-performance` | On-demand only |
+| `dev-suggest-refactoring.md` | @developer | `*suggest-refactoring` | On-demand only |
+| `dev-backlog-debt.md` | @developer | `*backlog-debt` | On-demand only |
+| `sync-documentation.md` | @developer | `*sync-documentation` | On-demand only |
+| `po-manage-story-backlog.md` | @product-lead | `*backlog-*` | On-demand only |
 | `db-domain-modeling.md` | @data-eng | `*model-domain` | On-demand only |
 | `setup-database.md` | @data-eng | `*setup-database` | On-demand only |
 | `db-bootstrap.md` | @data-eng | `*bootstrap` | On-demand only |
@@ -191,7 +191,7 @@ These tasks are available as on-demand commands but are not called by any workfl
 
 ### Complete Command-to-Task-to-Workflow Map
 
-#### @sm (River) - Scrum Master
+#### @sprint-lead (River) - Scrum Master
 
 ```mermaid
 graph LR
@@ -225,14 +225,14 @@ graph LR
 
 **Sequence: Before/After `*draft`**
 ```
-BEFORE: @po validates artifacts + shard-doc completes → docs/prd/ and docs/architecture/ ready
-DURING: @sm *draft → reads sharded docs → creates story.md (status: Draft)
-AFTER:  @dev *develop {story-id} OR @analyst/@pm review story (optional)
+BEFORE: @product-lead validates artifacts + shard-doc completes → docs/prd/ and docs/architecture/ ready
+DURING: @sprint-lead *draft → reads sharded docs → creates story.md (status: Draft)
+AFTER:  @developer *develop {story-id} OR @analyst/@project-lead review story (optional)
 ```
 
 ---
 
-#### @po (Pax) - Product Owner
+#### @product-lead (Pax) - Product Owner
 
 ```mermaid
 graph LR
@@ -267,15 +267,15 @@ graph LR
 
 **Sequence: Before/After `*execute-checklist-po`**
 ```
-BEFORE: @pm creates prd.md + @architect creates architecture.md → both in docs/
-DURING: @po *execute-checklist-po → validates all artifacts against po-master-checklist
+BEFORE: @project-lead creates prd.md + @architect creates architecture.md → both in docs/
+DURING: @product-lead *execute-checklist-po → validates all artifacts against po-master-checklist
 AFTER:  If issues: return to relevant agent for fixes → re-validate
-        If OK: @po *shard-doc → fragment documents for development
+        If OK: @product-lead *shard-doc → fragment documents for development
 ```
 
 ---
 
-#### @dev (Dex) - Full Stack Developer
+#### @developer (Dex) - Full Stack Developer
 
 ```mermaid
 graph LR
@@ -313,9 +313,9 @@ graph LR
 
 **Sequence: Before/After `*develop {story-id}`**
 ```
-BEFORE: Story exists with status Approved/Ready (created by @sm, validated by @po)
-DURING: @dev *develop {story-id} → reads story → implements tasks → updates File List → marks "Review"
-AFTER:  @qa *review {story-id} OR story goes directly to Done (if QA skipped)
+BEFORE: Story exists with status Approved/Ready (created by @sprint-lead, validated by @product-lead)
+DURING: @developer *develop {story-id} → reads story → implements tasks → updates File List → marks "Review"
+AFTER:  @quality-gate *review {story-id} OR story goes directly to Done (if QA skipped)
 ```
 
 **Execution modes for `*develop`:**
@@ -327,7 +327,7 @@ AFTER:  @qa *review {story-id} OR story goes directly to Done (if QA skipped)
 
 ---
 
-#### @qa (Quinn) - Test Architect
+#### @quality-gate (Quinn) - Test Architect
 
 ```mermaid
 graph LR
@@ -365,16 +365,16 @@ graph LR
 
 **Sequence: Before/After `*review {story}`**
 ```
-BEFORE: @dev completes implementation → story status = "Review"
-DURING: @qa *review {story} → reads code + story → identifies issues → may fix minor items
+BEFORE: @developer completes implementation → story status = "Review"
+DURING: @quality-gate *review {story} → reads code + story → identifies issues → may fix minor items
 AFTER:  If PASS: story status → Done
-        If FAIL: @qa *create-fix-request → @dev *apply-qa-fixes → back to @qa *review
+        If FAIL: @quality-gate *create-fix-request → @developer *apply-qa-fixes → back to @quality-gate *review
         (Max 5 iterations in QA Loop, then escalation)
 ```
 
 ---
 
-#### @pm (Morgan) - Product Manager
+#### @project-lead (Morgan) - Product Manager
 
 ```mermaid
 graph LR
@@ -677,10 +677,10 @@ graph LR
 ```mermaid
 sequenceDiagram
     autonumber
-    participant SM as @sm (River)
-    participant PO as @po (Pax)
-    participant DEV as @dev (Dex)
-    participant QA as @qa (Quinn)
+    participant SM as @sprint-lead (River)
+    participant PO as @product-lead (Pax)
+    participant DEV as @developer (Dex)
+    participant QA as @quality-gate (Quinn)
 
     Note over SM,QA: Phase 1: Create Story
     SM->>SM: *draft<br/>Task: create-next-story.md<br/>Template: story-tmpl.yaml
@@ -714,10 +714,10 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     autonumber
-    participant PM as @pm (Morgan)
+    participant PM as @project-lead (Morgan)
     participant ARCH as @architect (Aria)
     participant AN as @analyst (Atlas)
-    participant QA as @qa (Quinn)
+    participant QA as @quality-gate (Quinn)
 
     Note over PM,QA: Phase 1: Gather Requirements
     PM->>PM: Task: spec-gather-requirements.md
@@ -751,8 +751,8 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     autonumber
-    participant QA as @qa (Quinn)
-    participant DEV as @dev (Dex)
+    participant QA as @quality-gate (Quinn)
+    participant DEV as @developer (Dex)
 
     loop Max 5 Iterations
         Note over QA,DEV: Review Phase
@@ -886,9 +886,9 @@ sequenceDiagram
     participant ARCH as @architect (Aria)
     participant DE as @data-engineer (Dara)
     participant UX as @ux-expert (Uma)
-    participant QA as @qa (Quinn)
+    participant QA as @quality-gate (Quinn)
     participant AN as @analyst (Atlas)
-    participant PM as @pm (Morgan)
+    participant PM as @project-lead (Morgan)
 
     rect rgb(255, 248, 220)
         Note over ARCH,PM: Phases 1-3: Data Collection
@@ -933,9 +933,9 @@ sequenceDiagram
 
     Note over TRIGGER,DEVOPS: Triggers
     alt story_started
-        TRIGGER->>SYS: @dev starts story
+        TRIGGER->>SYS: @developer starts story
     else story_assigned
-        TRIGGER->>SYS: @po assigns story
+        TRIGGER->>SYS: @product-lead assigns story
     else manual
         TRIGGER->>SYS: *auto-worktree
     end
@@ -1013,16 +1013,16 @@ These are valid "utility" tasks, but have no formal workflow integration:
 | Agent | Status | Notes |
 |-------|--------|-------|
 | `@squad-creator` (Craft) | NO WORKFLOW | Creates and manages squads. Standalone by design. |
-| `@sinapse-master` (Orion) | META-AGENT | Orchestrates other agents. Not a workflow participant but a workflow creator/executor. |
+| `@sinapse-orqx` (Orion) | META-AGENT | Orchestrates other agents. Not a workflow participant but a workflow creator/executor. |
 | `@devops` (Gage) | SERVICE ROLE | Provides infrastructure (bootstrap, push, worktrees) but doesn't follow workflow sequences. |
 
 ---
 
 ## 6. Issues & Broken References
 
-### 6.1 CRITICAL: @qa Agent Definition - Broken Task References
+### 6.1 CRITICAL: @quality-gate Agent Definition - Broken Task References
 
-**Verified 2026-02-05:** The `@qa` agent definition (`agents/qa.md`) references 9 task files using **non-prefixed names that DO NOT EXIST** on the filesystem. Only `qa-gate.md` is correctly referenced.
+**Verified 2026-02-05:** The `@qa` agent definition (`agents/quality-gate.md`) references 9 task files using **non-prefixed names that DO NOT EXIST** on the filesystem. Only `qa-gate.md` is correctly referenced.
 
 | Agent Reference | Actual File on Disk | Status |
 |----------------|---------------------|--------|
@@ -1037,9 +1037,9 @@ These are valid "utility" tasks, but have no formal workflow integration:
 | `trace-requirements.md` | `qa-trace-requirements.md` | **BROKEN** |
 | `qa-gate.md` | `qa-gate.md` | OK |
 
-**Impact:** If the dependency resolution does NOT apply automatic prefix fallback, @qa commands referencing these tasks will fail to find the task files.
+**Impact:** If the dependency resolution does NOT apply automatic prefix fallback, @quality-gate commands referencing these tasks will fail to find the task files.
 
-**Fix:** Update `agents/qa.md` to use the full prefixed names matching actual files.
+**Fix:** Update `agents/quality-gate.md` to use the full prefixed names matching actual files.
 
 ### 6.2 Duplicate Task Files (Both Exist on Disk)
 
@@ -1047,9 +1047,9 @@ Three task pairs exist with both a generic and agent-prefixed version:
 
 | Generic (non-prefixed) | Agent-Prefixed | Used in Agent Def | Used in YAML Workflow | Recommendation |
 |------------------------|----------------|--------------------|-----------------------|----------------|
-| `create-next-story.md` (`createNextStory()` by River) | `sm-create-next-story.md` (`smCreateNextStory()` by River) | @sm → `create-next-story.md` | `story-development-cycle.yaml` → `create-next-story` | **Keep generic**, deprecate `sm-` prefix |
-| `apply-qa-fixes.md` (`applyQaFixes()` by Dex) | `dev-apply-qa-fixes.md` (`devApplyQaFixes()` by Dex) | @dev → `apply-qa-fixes.md` | `qa-loop.yaml` → `dev-apply-qa-fixes.md` | **Mismatch!** Agent def ≠ YAML. Standardize. |
-| `validate-next-story.md` (`validateNextStory()` by Quinn) | `dev-validate-next-story.md` (`devValidateNextStory()` by Dex) | @po/@dev → `validate-next-story.md` | (indirect) | Different tasks for different agents. Both valid. |
+| `create-next-story.md` (`createNextStory()` by River) | `sm-create-next-story.md` (`smCreateNextStory()` by River) | @sprint-lead → `create-next-story.md` | `story-development-cycle.yaml` → `create-next-story` | **Keep generic**, deprecate `sm-` prefix |
+| `apply-qa-fixes.md` (`applyQaFixes()` by Dex) | `dev-apply-qa-fixes.md` (`devApplyQaFixes()` by Dex) | @developer → `apply-qa-fixes.md` | `qa-loop.yaml` → `dev-apply-qa-fixes.md` | **Mismatch!** Agent def ≠ YAML. Standardize. |
+| `validate-next-story.md` (`validateNextStory()` by Quinn) | `dev-validate-next-story.md` (`devValidateNextStory()` by Dex) | @po/@developer → `validate-next-story.md` | (indirect) | Different tasks for different agents. Both valid. |
 
 ### 6.3 Naming Inconsistencies in Documentation
 
@@ -1058,7 +1058,7 @@ Three task pairs exist with both a generic and agent-prefixed version:
 | `sm-create-next-story.md` vs `create-next-story.md` | SM agent def uses `create-next-story.md`. Some workflow DOCS reference `sm-` prefix. YAML uses generic. | MEDIUM |
 | `dev-develop-story.md` vs `develop-story` | Workflow docs sometimes omit `dev-` prefix. Actual task file is `dev-develop-story.md`. | LOW |
 | `qa-review-story.md` vs `review-story.md` | Brownfield docs reference `review-story.md` but actual file is `qa-review-story.md`. YAML uses `qa-review-story.md`. | MEDIUM |
-| `dev-apply-qa-fixes.md` vs `apply-qa-fixes.md` | QA Loop YAML uses `dev-apply-qa-fixes.md`, @dev agent uses `apply-qa-fixes.md`. Both files exist. | MEDIUM |
+| `dev-apply-qa-fixes.md` vs `apply-qa-fixes.md` | QA Loop YAML uses `dev-apply-qa-fixes.md`, @developer agent uses `apply-qa-fixes.md`. Both files exist. | MEDIUM |
 | `story-dod-checklist.md` path | Referenced in `@dev` checklist dependency but checklists/ dir does not exist. | MEDIUM |
 
 ### 6.4 Tasks Referenced in "Em Desenvolvimento" (Future/Planned)
@@ -1100,14 +1100,14 @@ The `checklists/` directory does NOT exist at `.sinapse-ai/development/checklist
 
 Cross-reference of every agent's task dependencies against actual files on disk:
 
-### @sm (River)
+### @sprint-lead (River)
 | Dependency | File Exists? |
 |-----------|:---:|
 | `create-next-story.md` | ✅ |
 | `execute-checklist.md` | ✅ |
 | `correct-course.md` | ✅ |
 
-### @dev (Dex)
+### @developer (Dex)
 | Dependency | File Exists? |
 |-----------|:---:|
 | `apply-qa-fixes.md` | ✅ |
@@ -1121,7 +1121,7 @@ Cross-reference of every agent's task dependencies against actual files on disk:
 | `validate-next-story.md` | ✅ |
 | Checklist: `story-dod-checklist.md` | ⚠️ Dir missing |
 
-### @qa (Quinn) - 9 BROKEN
+### @quality-gate (Quinn) - 9 BROKEN
 | Dependency | File Exists? | Correct Name |
 |-----------|:---:|-------------|
 | `generate-tests.md` | ❌ | `qa-generate-tests.md` |
@@ -1135,7 +1135,7 @@ Cross-reference of every agent's task dependencies against actual files on disk:
 | `test-design.md` | ❌ | `qa-test-design.md` |
 | `trace-requirements.md` | ❌ | `qa-trace-requirements.md` |
 
-### @po (Pax)
+### @product-lead (Pax)
 | Dependency | File Exists? |
 |-----------|:---:|
 | `correct-course.md` | ✅ |
@@ -1164,13 +1164,13 @@ Cross-reference of every agent's task dependencies against actual files on disk:
 | Tasks in "Em Desenvolvimento" | 3 |
 | Duplicate Task Pairs | 3 |
 | Naming Inconsistencies | 5 |
-| @qa Broken References | 9 |
+| @quality-gate Broken References | 9 |
 | Checklists Dir Missing | 1 |
 | Missing Workflow Connections | 4 (by design) |
-| Critical Issues | 1 (@qa broken refs) |
+| Critical Issues | 1 (@quality-gate broken refs) |
 
 ---
 
 *Analysis generated by SINAPSE Cross-Reference Audit*
 *Updated 2026-02-05: Verified agent definitions against actual file system.*
-*1 critical issue found: @qa agent has 9 broken task references.*
+*1 critical issue found: @quality-gate agent has 9 broken task references.*

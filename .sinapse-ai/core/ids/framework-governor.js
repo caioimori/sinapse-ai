@@ -3,7 +3,7 @@
 /**
  * FrameworkGovernor — IDS Story IDS-7
  *
- * Facade class that integrates sinapse-master with the IDS Entity Registry for
+ * Facade class that integrates sinapse-orqx with the IDS Entity Registry for
  * framework governance. Wraps DecisionEngine, RegistryLoader, and RegistryUpdater
  * to provide pre-check, impact analysis, post-registration, health, and stats.
  *
@@ -23,7 +23,7 @@
  *
  *   const result = await governor.preCheck('validate yaml schema', 'task');
  *
- * Story: IDS-7 (sinapse-master IDS Governor Integration)
+ * Story: IDS-7 (sinapse-orqx IDS Governor Integration)
  */
 
 const path = require('path');
@@ -230,7 +230,7 @@ class FrameworkGovernor {
 
   /**
    * Post-operation auto-registration. Wraps RegistryUpdater.onAgentTaskComplete()
-   * for automatic audit logging (per @po SF-1).
+   * for automatic audit logging (per @product-lead SF-1).
    *
    * @param {string} filePath — Path to the newly created file
    * @param {object} [metadata={}] — Optional metadata (type, purpose, keywords, agent)
@@ -243,7 +243,7 @@ class FrameworkGovernor {
     return this._withTimeout(async () => {
       const task = {
         id: metadata.taskId || 'framework-governor-register',
-        agent: metadata.agent || 'sinapse-master',
+        agent: metadata.agent || 'sinapse-orqx',
         type: metadata.type || 'create',
       };
 

@@ -56,7 +56,7 @@ describe('Codex Skills Sync', () => {
 
     expect(result.generated).toBe(expectedAgentCount);
     expect(result.globalSkillsDir).toBe(globalSkillsDir);
-    expect(fs.existsSync(path.join(globalSkillsDir, 'sinapse-dev', 'SKILL.md'))).toBe(true);
+    expect(fs.existsSync(path.join(globalSkillsDir, 'sinapse-developer', 'SKILL.md'))).toBe(true);
   });
 
   it('treats globalOnly as global output and skips local writes', () => {
@@ -73,20 +73,20 @@ describe('Codex Skills Sync', () => {
 
     expect(result.generated).toBe(expectedAgentCount);
     expect(result.globalSkillsDir).toBe(globalSkillsDir);
-    expect(fs.existsSync(path.join(localSkillsDir, 'sinapse-dev', 'SKILL.md'))).toBe(false);
-    expect(fs.existsSync(path.join(globalSkillsDir, 'sinapse-dev', 'SKILL.md'))).toBe(true);
+    expect(fs.existsSync(path.join(localSkillsDir, 'sinapse-developer', 'SKILL.md'))).toBe(false);
+    expect(fs.existsSync(path.join(globalSkillsDir, 'sinapse-developer', 'SKILL.md'))).toBe(true);
   });
 
   it('buildSkillContent emits valid frontmatter and starter commands', () => {
     const sample = {
-      id: 'dev',
-      filename: 'dev.md',
+      id: 'developer',
+      filename: 'developer.md',
       agent: { name: 'Dex', title: 'Developer', whenToUse: 'Build features safely.' },
       commands: [{ name: 'help', description: 'Show commands', visibility: ['quick', 'key', 'full'] }],
     };
     const content = buildSkillContent(sample);
     expect(content.startsWith('---')).toBe(true);
-    expect(content).toContain('name: sinapse-dev');
+    expect(content).toContain('name: sinapse-developer');
     expect(content).toContain('`*help` - Show commands');
   });
 });

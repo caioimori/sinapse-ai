@@ -34,11 +34,11 @@ function buildFullData(overrides = {}) {
     session: {
       fields: [
         { field: 'session_id', expected: 'UUID', actual: 'abc-123', status: 'PASS' },
-        { field: 'active_agent', expected: 'string', actual: 'dev', status: 'PASS' },
+        { field: 'active_agent', expected: 'string', actual: 'developer', status: 'PASS' },
       ],
       raw: {
-        session: { prompt_count: 5, active_agent: { id: 'dev' } },
-        bridgeData: { id: 'dev', activation_quality: 'full' },
+        session: { prompt_count: 5, active_agent: { id: 'developer' } },
+        bridgeData: { id: 'developer', activation_quality: 'full' },
       },
     },
     manifest: {
@@ -84,14 +84,14 @@ describe('formatReport()', () => {
 
     it('includes agent info with activation quality', () => {
       const report = formatReport(buildFullData());
-      expect(report).toContain('**Agent:** @dev (activation_quality: full)');
+      expect(report).toContain('**Agent:** @developer (activation_quality: full)');
     });
 
     it('extracts agent id from session.raw.session.active_agent.id as fallback', () => {
       const data = buildFullData();
       delete data.session.raw.bridgeData.id;
       const report = formatReport(data);
-      expect(report).toContain('**Agent:** @dev');
+      expect(report).toContain('**Agent:** @developer');
     });
 
     it('omits agent line when no agent id available', () => {
@@ -137,7 +137,7 @@ describe('formatReport()', () => {
       const report = formatReport(buildFullData());
       expect(report).toContain('## 2. Session Status');
       expect(report).toContain('| session_id | UUID | abc-123 | PASS |');
-      expect(report).toContain('| active_agent | string | dev | PASS |');
+      expect(report).toContain('| active_agent | string | developer | PASS |');
     });
 
     it('shows no-data message when session is null', () => {
@@ -486,14 +486,14 @@ describe('formatReport()', () => {
     it('renders relevance matrix table', () => {
       const data = buildFullData({
         relevance: {
-          available: true, agentId: 'dev', score: 85,
+          available: true, agentId: 'developer', score: 85,
           matrix: [{ component: 'agentConfig', importance: 'critical', status: 'ok', gap: false }],
           gaps: [],
         },
       });
       const report = formatReport(data);
       expect(report).toContain('## 12. Relevance Matrix');
-      expect(report).toContain('@dev');
+      expect(report).toContain('@developer');
       expect(report).toContain('85/100');
       expect(report).toContain('| agentConfig | critical | ok | - |');
     });
@@ -501,7 +501,7 @@ describe('formatReport()', () => {
     it('renders critical gaps section', () => {
       const data = buildFullData({
         relevance: {
-          available: true, agentId: 'dev', score: 50,
+          available: true, agentId: 'developer', score: 50,
           matrix: [{ component: 'agentConfig', importance: 'critical', status: 'missing', gap: true }],
           gaps: [{ component: 'agentConfig', importance: 'critical' }],
         },
@@ -592,8 +592,8 @@ describe('synapse-diagnostics orchestrator', () => {
   const mockSession = {
     fields: [{ field: 'session_id', expected: 'UUID', actual: 'abc', status: 'PASS' }],
     raw: {
-      session: { prompt_count: 7, active_agent: { id: 'qa' } },
-      bridgeData: { id: 'dev', activation_quality: 'full' },
+      session: { prompt_count: 7, active_agent: { id: 'quality-gate' } },
+      bridgeData: { id: 'developer', activation_quality: 'full' },
     },
   };
   const mockManifest = {
@@ -652,7 +652,7 @@ describe('synapse-diagnostics orchestrator', () => {
       runDiagnostics(projectRoot);
       expect(collectPipelineSimulation).toHaveBeenCalledWith(
         7, // prompt_count from mockSession.raw.session
-        'dev', // id from mockSession.raw.bridgeData
+        'developer', // id from mockSession.raw.bridgeData
         mockParsedManifest,
       );
     });
@@ -667,12 +667,12 @@ describe('synapse-diagnostics orchestrator', () => {
       collectSessionStatus.mockReturnValue({
         fields: [],
         raw: {
-          session: { prompt_count: 3, active_agent: { id: 'pm' } },
+          session: { prompt_count: 3, active_agent: { id: 'project-lead' } },
           bridgeData: {},
         },
       });
       runDiagnostics(projectRoot);
-      expect(collectPipelineSimulation).toHaveBeenCalledWith(3, 'pm', mockParsedManifest);
+      expect(collectPipelineSimulation).toHaveBeenCalledWith(3, 'project-lead', mockParsedManifest);
     });
 
     it('constructs manifest path from projectRoot', () => {
@@ -717,7 +717,7 @@ describe('synapse-diagnostics orchestrator', () => {
 
     it('extracts promptCount and activeAgentId for pipeline', () => {
       runDiagnosticsRaw(projectRoot);
-      expect(collectPipelineSimulation).toHaveBeenCalledWith(7, 'dev', mockParsedManifest);
+      expect(collectPipelineSimulation).toHaveBeenCalledWith(7, 'developer', mockParsedManifest);
     });
 
     it('passes sessionId option when provided', () => {

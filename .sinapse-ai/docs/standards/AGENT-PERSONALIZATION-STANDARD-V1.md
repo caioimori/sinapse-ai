@@ -90,7 +90,7 @@ dependencies:
 ```yaml
 agent:
   name: Dex
-  id: dev
+  id: developer
   title: Full Stack Developer
   icon: 💻
   whenToUse: "Use for code implementation, debugging, refactoring"
@@ -423,7 +423,7 @@ workflow:
 8. Update ux-design-expert.md → Uma (Empathizer)
 9. Rename db-sage.md → data-engineer.md → Dara (Engineer)
 10. Rename github-devops.md → devops.md → Gage (Operator)
-11. Merge sinapse-developer + sinapse-orchestrator → sinapse-master.md → Orion (Orchestrator)
+11. Merge sinapse-developer + sinapse-orchestrator → sinapse-orqx.md → Orion (Orchestrator)
 
 **Deliverable:** 11 updated agent files with persona_profile section
 

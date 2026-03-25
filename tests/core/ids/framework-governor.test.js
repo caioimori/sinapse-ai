@@ -274,14 +274,14 @@ describe('FrameworkGovernor', () => {
     it('should register file via RegistryUpdater.onAgentTaskComplete', async () => {
       const result = await governor.postRegister(
         '.sinapse-ai/development/tasks/test-task.md',
-        { type: 'task', purpose: 'Test task', agent: 'sinapse-master' },
+        { type: 'task', purpose: 'Test task', agent: 'sinapse-orqx' },
       );
       expect(result.registered).toBeDefined();
       expect(result.filePath).toBe('.sinapse-ai/development/tasks/test-task.md');
       expect(updater.onAgentTaskCompleteCalls.length).toBe(1);
 
       const call = updater.onAgentTaskCompleteCalls[0];
-      expect(call.task.agent).toBe('sinapse-master');
+      expect(call.task.agent).toBe('sinapse-orqx');
       expect(call.artifacts).toContain('.sinapse-ai/development/tasks/test-task.md');
     });
 
@@ -311,10 +311,10 @@ describe('FrameworkGovernor', () => {
       expect(result.error).toBeDefined();
     });
 
-    it('should default agent to sinapse-master', async () => {
+    it('should default agent to sinapse-orqx', async () => {
       await governor.postRegister('file.md', {});
       const call = updater.onAgentTaskCompleteCalls[0];
-      expect(call.task.agent).toBe('sinapse-master');
+      expect(call.task.agent).toBe('sinapse-orqx');
     });
   });
 
@@ -561,7 +561,7 @@ describe('FrameworkGovernor', () => {
         const result = {
           entityId: 'po',
           found: true,
-          entityPath: '.sinapse-ai/development/agents/po.md',
+          entityPath: '.sinapse-ai/development/agents/product-lead.md',
           entityType: 'agent',
           riskLevel: 'NONE',
           directConsumers: [],

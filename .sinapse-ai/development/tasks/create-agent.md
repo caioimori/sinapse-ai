@@ -43,7 +43,7 @@ This task creates a single high-quality agent based on researched methodologies 
 - NEW: Phase 5 — Operational Infrastructure (command_loader, tasks, templates, checklists)
 - NEW: Phase 6 — Operational Validation (SC_AGT_004, maturity scoring)
 - NEW: Maturity levels (Nivel 1/2/3) with scoring formula
-- NEW: @qa as Process Specialist reference
+- NEW: @quality-gate as Process Specialist reference
 - Agents must now ship with operational files, not just persona
 - Reference: `aprendizado/32-ANATOMIA-AGENTE-100-PORCENTO-REPLICAVEL.md`
 

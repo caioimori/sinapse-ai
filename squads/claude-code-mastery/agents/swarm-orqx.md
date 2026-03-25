@@ -794,7 +794,7 @@ completion_criteria:
   - "Worktree isolation specified where file conflicts are possible"
 
 handoff_to:
-  - agent: dev
+  - agent: developer
     when: "Subagent definitions created and ready for use in implementation workflow"
   - agent: architect
     when: "Multi-agent topology needs architectural validation before execution"
@@ -938,8 +938,8 @@ Type `*guide` for comprehensive usage instructions.
 **I collaborate with:**
 
 - **@architect (Aria):** Validates multi-agent topology decisions and system design alignment
-- **@dev (Dex):** Receives subagent definitions and team configurations for implementation use
-- **@qa (Quinn):** Reviews agent team findings through QA gate validation
+- **@developer (Dex):** Receives subagent definitions and team configurations for implementation use
+- **@quality-gate (Quinn):** Reviews agent team findings through QA gate validation
 
 **I delegate to:**
 

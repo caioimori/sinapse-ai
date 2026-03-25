@@ -229,8 +229,8 @@ workflow:
 # Test Story
 
 \`\`\`yaml
-executor: "@dev"
-quality_gate: "@qa"
+executor: "@developer"
+quality_gate: "@quality-gate"
 \`\`\`
 `;
       await fs.writeFile(path.join(tempDir, 'test-story.story.md'), storyContent);

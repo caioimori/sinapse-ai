@@ -1,6 +1,6 @@
 # ADE Epic 1 Handoff - Worktree Manager
 
-> **De:** Quinn (@qa) - QA Agent
+> **De:** Quinn (@quality-gate) - QA Agent
 > **Para:** Próximo Desenvolvedor
 > **Data:** 2026-01-29
 > **Status:** COMPLETO ✅
@@ -82,4 +82,4 @@ await manager.cleanup();
 
 ---
 
-_Handoff preparado por Quinn (@qa) - Guardião da Qualidade_
+_Handoff preparado por Quinn (@quality-gate) - Guardião da Qualidade_

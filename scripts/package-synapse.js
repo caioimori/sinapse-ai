@@ -93,7 +93,7 @@ const RUNTIME_DOMAINS = [
   'manifest', 'constitution', 'global', 'context', 'commands',
   'agent-dev', 'agent-qa', 'agent-architect', 'agent-pm', 'agent-po',
   'agent-sm', 'agent-devops', 'agent-analyst', 'agent-data-engineer',
-  'agent-ux', 'agent-sinapse-master', 'agent-squad-creator',
+  'agent-ux', 'agent-sinapse-orqx', 'agent-squad-creator',
   'workflow-story-dev', 'workflow-epic-create', 'workflow-arch-review',
 ];
 

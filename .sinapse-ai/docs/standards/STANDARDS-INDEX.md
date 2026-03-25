@@ -201,10 +201,10 @@ grep -r "v2.0" .sinapse-ai/docs/standards --include="*.md"
 
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
-| 2025-12-09 | 2.1.0 | Initial STANDARDS-INDEX creation for v4.2 | @dev (Dex) |
+| 2025-12-09 | 2.1.0 | Initial STANDARDS-INDEX creation for v4.2 | @developer (Dex) |
 
 ---
 
 **Last Updated:** 2025-12-09
 **Version:** 2.1.0
-**Maintainer:** @po (Pax)
+**Maintainer:** @product-lead (Pax)

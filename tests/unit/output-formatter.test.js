@@ -259,7 +259,7 @@ persona_profile:
       { id: 'ux-design-expert', name: 'Uma', archetype: 'Empathizer', tone: 'empathetic' },
       { id: 'data-engineer', name: 'Dara', archetype: 'Engineer', tone: 'pragmatic' },
       { id: 'devops', name: 'Gage', archetype: 'Operator', tone: 'pragmatic' },
-      { id: 'sinapse-master', name: 'Orion', archetype: 'Orchestrator', tone: 'collaborative' },
+      { id: 'sinapse-orqx', name: 'Orion', archetype: 'Orchestrator', tone: 'collaborative' },
     ];
 
     agents.forEach(agent => {

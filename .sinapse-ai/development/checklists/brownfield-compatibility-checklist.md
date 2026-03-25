@@ -51,7 +51,7 @@
 
 ### 9. SINAPSE Integration
 - [ ] `npx sinapse-ai doctor` reports healthy
-- [ ] Agent activation works (@dev, @architect, etc.)
+- [ ] Agent activation works (@developer, @architect, etc.)
 - [ ] Existing docs not duplicated
 
 ### 10. Rollback Verification

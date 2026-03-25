@@ -6,7 +6,7 @@
  *
  * Tests the executor assignment module for automatic story-to-executor mapping.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 
@@ -108,7 +108,7 @@ describe('ExecutorAssignment', () => {
   });
 
   describe('assignExecutor (AC2, Task 1.2)', () => {
-    it('should assign @dev as executor for code_general', () => {
+    it('should assign @developer as executor for code_general', () => {
       const assignment = assignExecutor('code_general');
       expect(assignment.executor).toBe('@dev');
       expect(assignment.quality_gate).toBe('@architect');

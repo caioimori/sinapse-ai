@@ -296,7 +296,7 @@ describe('ObservabilityPanel', () => {
     it('should show next steps in detailed mode', () => {
       const panel = createPanel({ mode: PanelMode.DETAILED });
       panel.setNextSteps([
-        '@dev termina implementação',
+        '@developer termina implementação',
         'Quality Gate por @architect',
         '@devops push e PR',
       ]);
@@ -304,7 +304,7 @@ describe('ObservabilityPanel', () => {
       const output = panel.renderOnce();
 
       expect(output).toContain('Next Steps');
-      expect(output).toContain('@dev termina implementação');
+      expect(output).toContain('@developer termina implementação');
     });
 
     it('should show agent reason in detailed mode', () => {
@@ -629,7 +629,7 @@ describe('PanelRenderer', () => {
           session_start: Date.now() - 300000,
         },
         tradeoffs: [{ choice: 'JWT vs Session', selected: 'JWT', reason: 'stateless' }],
-        next_steps: ['@dev finish', '@qa review'],
+        next_steps: ['@developer finish', '@quality-gate review'],
         errors: [],
       };
 

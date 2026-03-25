@@ -94,7 +94,7 @@ This squad understands both Claude Code native capabilities AND the SINAPSE fram
 
 | SINAPSE Concept | Claude Code Equivalent | Bridge Agent |
 |-------------|----------------------|-------------|
-| Agents (@dev, @qa...) | Subagents (.claude/agents/) | Nexus |
+| Agents (@developer, @qa...) | Subagents (.claude/agents/) | Nexus |
 | Tasks (.sinapse-ai/tasks/) | Skills (.claude/skills/) | Anvil |
 | Workflows | Multi-step sessions | Nexus + Orion |
 | core-config.yaml | .claude/settings.json | Sigil |

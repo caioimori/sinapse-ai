@@ -821,7 +821,7 @@ engine_state:
 The state file persists on disk. To resume in a new Claude Code session:
 
 ```
-@sinapse-master
+@sinapse-orqx
 *run-workflow {name} continue --mode=engine
 ```
 

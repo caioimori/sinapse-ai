@@ -8,7 +8,7 @@ Extract and document code patterns from the codebase. Analyzes code via AST and 
 
 ```yaml
 task: extract-patterns()
-agent: "@dev"
+agent: "@developer"
 responsável: Dex (Developer)
 responsavel_type: Agente
 atomic_layer: Workflow
@@ -381,7 +381,7 @@ story: "7.3"
 epic: "Epic 7 - Memory Layer"
 version: 1.0.0
 created: 2026-01-29
-author: "@dev (Dex)"
+author: "@developer (Dex)"
 dependencies:
   modules:
     - .sinapse-ai/infrastructure/scripts/pattern-extractor.js

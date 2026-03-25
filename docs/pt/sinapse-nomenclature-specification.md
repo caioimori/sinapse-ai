@@ -96,7 +96,7 @@ workflow:
         - story_file
 
     - id: develop-story
-      agent: dev
+      agent: developer
       task: dev-develop-story
       inputs:
         - story_file  # Conectado do estágio anterior
@@ -140,14 +140,14 @@ workflow:
 ```yaml
 workflow:
   id: parallel-validation-workflow
-  organizer: sinapse-master
+  organizer: sinapse-orqx
 
   stages:
     - id: fork-validation
       type: fork
       organizer_decision: "Dividir validação em tasks paralelas"
       workers:
-        - agent: dev
+        - agent: developer
           task: security-scan
           inputs:
             - codebase
@@ -161,7 +161,7 @@ workflow:
           outputs:
             - test_results
 
-        - agent: dev
+        - agent: developer
           task: sync-documentation
           inputs:
             - codebase
@@ -314,7 +314,7 @@ fork:
   id: parallel-validation
   condition: "validation_needed"
   parallel_tasks:
-    - agent: dev
+    - agent: developer
       task: security-scan
       inputs:
         - codebase
@@ -324,7 +324,7 @@ fork:
       inputs:
         - codebase
 
-    - agent: dev
+    - agent: developer
       task: sync-documentation
       inputs:
         - codebase
@@ -379,7 +379,7 @@ workflow:
       outputs: [story_file]
 
     - task: develop-story
-      agent: dev
+      agent: developer
       inputs: [story_file]  # Da task anterior
       outputs: [code_changes]
 
@@ -401,13 +401,13 @@ workflow:
   id: parallel-validation-workflow
   stages:
     - task: prepare-codebase
-      agent: dev
+      agent: developer
       outputs: [codebase]
 
     - type: fork
       parallel_tasks:
         - task: security-scan
-          agent: dev
+          agent: developer
           inputs: [codebase]
 
         - task: qa-run-tests
@@ -415,7 +415,7 @@ workflow:
           inputs: [codebase]
 
         - task: sync-documentation
-          agent: dev
+          agent: developer
           inputs: [codebase]
 
     - type: join
@@ -423,7 +423,7 @@ workflow:
       outputs: [validation_complete]
 
     - task: deploy
-      agent: dev
+      agent: developer
       inputs: [validation_complete]
 ```
 
@@ -439,7 +439,7 @@ workflow:
   id: conditional-deployment
   stages:
     - task: build
-      agent: dev
+      agent: developer
       outputs: [build_artifact]
 
     - type: conditional
@@ -448,10 +448,10 @@ workflow:
         - task: security-audit
           agent: security
         - task: production-deploy
-          agent: dev
+          agent: developer
       if_false:
         - task: staging-deploy
-          agent: dev
+          agent: developer
 ```
 
 ---
@@ -580,7 +580,7 @@ workflow:
         - story_file
 
     - id: develop-story
-      agent: dev
+      agent: developer
       task: dev-develop-story
       inputs:
         - story_file

@@ -523,10 +523,10 @@ Cada memoria e um arquivo Markdown com frontmatter YAML. Arquivos sao a fonte da
         session-001-digest.md
     session/                             # Ephemeral (cleaned on next start)
       current-session.md
-  dev/                                   # @dev private memories
+  dev/                                   # @developer private memories
     durable/
     daily/
-  qa/                                    # @qa private memories
+  qa/                                    # @quality-gate private memories
     durable/
     daily/
   architect/                             # @architect private memories
@@ -925,8 +925,8 @@ Sessao 7: Erro "EACCES permission denied" 3x → auto-gotcha
 │   │   ├── durable/                          #     Permanent knowledge (.md files)
 │   │   ├── daily/{YYYY-MM-DD}/              #     Daily digests
 │   │   └── session/                          #     Ephemeral (cleaned on restart)
-│   ├── dev/                                  #   @dev private memories
-│   ├── qa/                                   #   @qa private memories
+│   ├── dev/                                  #   @developer private memories
+│   ├── qa/                                   #   @quality-gate private memories
 │   ├── architect/                            #   @architect private memories
 │   ├── pm/, devops/, ...                     #   Other agents
 │   ├── index.json                            #   Search index (rebuilt from .md)

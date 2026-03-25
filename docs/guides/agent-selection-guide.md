@@ -46,7 +46,7 @@ Need deployment? → @devops
 | **@po** (Pax)                | 🎯   | Backlog management, acceptance criteria, prioritization                                     | Epic creation, architecture              |
 | **@ux-design-expert** (Nova) | 🎨   | UI/UX design, wireframes, design systems                                                    | Implementation                           |
 | **@devops** (Gage)           | ⚙️   | Git ops, PR creation, deployment, CI/CD, worktree management, migrations                    | Local Git, implementation                |
-| **@sinapse-master** (Orion)     | 👑   | Framework development, multi-agent orchestration                                            | Routine tasks (use specialized agents)   |
+| **@sinapse-orqx** (Orion)     | 👑   | Framework development, multi-agent orchestration                                            | Routine tasks (use specialized agents)   |
 
 ---
 
@@ -72,7 +72,7 @@ Need deployment? → @devops
 
 ---
 
-### @pm (Morgan) - Product Management
+### @project-lead (Morgan) - Product Management
 
 **Spec Pipeline:**
 | Command | Description |
@@ -116,7 +116,7 @@ Need deployment? → @devops
 
 ---
 
-### @qa (Quinn) - Quality Assurance
+### @quality-gate (Quinn) - Quality Assurance
 
 **Spec Pipeline:**
 | Command | Description |
@@ -127,12 +127,12 @@ Need deployment? → @devops
 | Command | Description |
 |---------|-------------|
 | `*review-build {story}` | 10-phase structured QA review - outputs qa_report.md |
-| `*request-fix {issue}` | Request specific fix from @dev with context |
+| `*request-fix {issue}` | Request specific fix from @developer with context |
 | `*verify-fix {issue}` | Verify fix was properly implemented |
 
 ---
 
-### @dev (Dex) - Development
+### @developer (Dex) - Development
 
 **Execution Engine:**
 | Command | Description |
@@ -164,45 +164,45 @@ Need deployment? → @devops
 
 ```
 1. @analyst *brainstorm - Ideation
-2. @pm *create-prd - Product requirements
+2. @project-lead *create-prd - Product requirements
 3. @architect *create-architecture - Technical design
 4. @data-engineer *create-schema - Database design
-5. @sm *create-next-story - User stories
-6. @dev *develop - Implementation
-7. @qa *review - Quality check
+5. @sprint-lead *create-next-story - User stories
+6. @developer *develop - Implementation
+7. @quality-gate *review - Quality check
 8. @devops *create-pr - Deployment
 ```
 
 ### "I want to build using ADE Spec Pipeline" (Autonomous)
 
 ```
-1. @pm *gather-requirements - Collect and structure requirements
+1. @project-lead *gather-requirements - Collect and structure requirements
 2. @architect *assess-complexity - Evaluate complexity
 3. @analyst *research-deps - Research libraries/APIs
-4. @pm *write-spec - Generate specification
-5. @qa *critique-spec - Validate spec quality
+4. @project-lead *write-spec - Generate specification
+5. @quality-gate *critique-spec - Validate spec quality
    ↓
 [Spec Approved]
    ↓
 6. @architect *create-plan - Create implementation plan
 7. @architect *create-context - Generate context files
-8. @dev *execute-subtask 1.1 - Execute with 13 steps + self-critique
-9. @qa *review-build - 10-phase QA review
+8. @developer *execute-subtask 1.1 - Execute with 13 steps + self-critique
+9. @quality-gate *review-build - 10-phase QA review
    ↓
 [If issues found]
    ↓
-10. @qa *request-fix - Request fix
-11. @dev *apply-qa-fix - Apply fix
-12. @qa *verify-fix - Verify
+10. @quality-gate *request-fix - Request fix
+11. @developer *apply-qa-fix - Apply fix
+12. @quality-gate *verify-fix - Verify
 ```
 
 ### "I'm stuck on implementation"
 
 ```
-1. @dev *track-attempt - Log the failed attempt
-2. @dev *rollback - Revert to last good state
-3. @dev *list-gotchas - Check known pitfalls
-4. @dev *execute-subtask --approach alternative - Try different approach
+1. @developer *track-attempt - Log the failed attempt
+2. @developer *rollback - Revert to last good state
+3. @developer *list-gotchas - Check known pitfalls
+4. @developer *execute-subtask --approach alternative - Try different approach
 ```
 
 ### "I need to understand existing codebase"
@@ -210,14 +210,14 @@ Need deployment? → @devops
 ```
 1. @architect *map-codebase - Generate structure/services/patterns map
 2. @analyst *extract-patterns - Document code patterns
-3. @dev *capture-insights - Record discoveries
+3. @developer *capture-insights - Record discoveries
 ```
 
 ### "I need parallel story development"
 
 ```
 1. @devops *create-worktree STORY-42 - Isolate branch
-2. @dev *execute-subtask - Work in isolation
+2. @developer *execute-subtask - Work in isolation
 3. @devops *merge-worktree STORY-42 - Merge when done
 4. @devops *cleanup-worktrees - Clean stale branches
 ```
@@ -229,15 +229,15 @@ Need deployment? → @devops
 ### Spec Pipeline Flow
 
 ```
-@pm *gather-requirements
+@project-lead *gather-requirements
     ↓
 @architect *assess-complexity
     ↓
 @analyst *research-deps
     ↓
-@pm *write-spec
+@project-lead *write-spec
     ↓
-@qa *critique-spec
+@quality-gate *critique-spec
 ```
 
 ### Execution Flow
@@ -247,34 +247,34 @@ Need deployment? → @devops
     ↓
 @architect *create-context
     ↓
-@dev *execute-subtask (loops)
+@developer *execute-subtask (loops)
     ↓
-@qa *review-build
+@quality-gate *review-build
 ```
 
 ### QA Loop
 
 ```
-@qa *review-build
+@quality-gate *review-build
     ↓ (issues found)
-@qa *request-fix
+@quality-gate *request-fix
     ↓
-@dev *apply-qa-fix
+@developer *apply-qa-fix
     ↓
-@qa *verify-fix
+@quality-gate *verify-fix
     ↓ (loop until clean)
 ```
 
 ### Recovery Flow
 
 ```
-@dev fails subtask
+@developer fails subtask
     ↓
-@dev *track-attempt
+@developer *track-attempt
     ↓
-Retries < 3? → @dev retry with variation
+Retries < 3? → @developer retry with variation
     ↓
-@dev *rollback → try different approach
+@developer *rollback → try different approach
 ```
 
 ---

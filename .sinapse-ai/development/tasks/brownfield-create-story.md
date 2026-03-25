@@ -360,5 +360,5 @@ next_agent: @po
 next_command: *validate-story-draft {story-id}
 condition: Brownfield story created from assessment
 alternatives:
-  - agent: @sm, command: *draft, condition: Need additional stories from same assessment
+  - agent: @sprint-lead, command: *draft, condition: Need additional stories from same assessment
  

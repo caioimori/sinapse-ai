@@ -84,10 +84,10 @@ describe('Onboarding smoke flow (SINAPSE-DIFF-4.0.5)', () => {
   it('validates first-value activation signal and timing budget', () => {
     const startedAt = Date.now();
 
-    const greeting = runNode(greetingScript, ['dev'], repoRoot);
+    const greeting = runNode(greetingScript, ['developer'], repoRoot);
 
     const elapsedSeconds = (Date.now() - startedAt) / 1000;
-    expect(greeting).toContain('Agent dev loaded');
+    expect(greeting).toContain('Agent developer loaded');
     // Greeting may use full format ("Available Commands:") or fallback ("*help")
     expect(greeting).toMatch(/Available Commands|\*help/);
 

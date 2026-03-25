@@ -1,4 +1,4 @@
-# @pm (Morgan) - System Documentation
+# @project-lead (Morgan) - System Documentation
 
 > **EN** | [PT](../../sinapse-agent-flows/pm-system.md) | [ES](../../es/sinapse-agent-flows/pm-system.md)
 
@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*SINAPSE Agent Flows - @pm System v1.0*
+*SINAPSE Agent Flows - @project-lead System v1.0*

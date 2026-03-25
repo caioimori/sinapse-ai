@@ -5,9 +5,9 @@
 **ID do ADR:** ADR-HCS-001
 **Status:** Proposto
 **Criado:** 2025-12-30
-**Autor:** @architect (Aria) via @dev (Dex)
+**Autor:** @architect (Aria) via @developer (Dex)
 **Story:** Investigação HCS-1
-**Decisores:** @architect, @po, Tech Lead
+**Decisores:** @architect, @product-lead, Tech Lead
 
 ---
 
@@ -369,7 +369,7 @@ tools/
 
 | Data       | Decisão                         | Autor               |
 | ---------- | ------------------------------- | ------------------- |
-| 2025-12-30 | Proposta inicial de arquitetura | @architect via @dev |
+| 2025-12-30 | Proposta inicial de arquitetura | @architect via @developer |
 
 ---
 

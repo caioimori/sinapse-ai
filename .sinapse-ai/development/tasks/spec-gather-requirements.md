@@ -204,7 +204,7 @@ structuring:
       "storyId": "{storyId}",
       "gatheredAt": "{timestamp}",
       "source": "{source}",
-      "gatheredBy": "@pm",
+      "gatheredBy": "@project-lead",
       "elicitationVersion": "2.0",
 
       "functional": [
@@ -313,7 +313,7 @@ structuring:
     "storyId": { "type": "string" },
     "gatheredAt": { "type": "string", "format": "date-time" },
     "source": { "enum": ["prd", "user", "existing"] },
-    "gatheredBy": { "type": "string", "default": "@pm" },
+    "gatheredBy": { "type": "string", "default": "@project-lead" },
     "elicitationVersion": { "type": "string", "default": "2.0" },
     "functional": {
       "type": "array",
@@ -438,7 +438,7 @@ structuring:
 
 ## Integration
 
-### Command Integration (@pm)
+### Command Integration (@project-lead)
 
 ```yaml
 command:
@@ -549,4 +549,4 @@ next_agent: @architect
 next_command: *analyze-impact
 condition: Requirements gathered (requirements.json created)
 alternatives:
-  - agent: @pm, command: *write-spec, condition: SIMPLE complexity, skip assessment
+  - agent: @project-lead, command: *write-spec, condition: SIMPLE complexity, skip assessment

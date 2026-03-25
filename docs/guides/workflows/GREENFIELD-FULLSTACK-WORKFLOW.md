@@ -271,19 +271,19 @@ flowchart TD
 | Step | Agente | Task/Template | Entrada | Saida | Obrigatorio |
 |------|--------|---------------|---------|-------|-------------|
 | 1 | @analyst (Atlas) | `project-brief-tmpl.yaml` | Requisitos do usuario, pesquisa | `project-brief.md` | Sim |
-| 2 | @pm (Morgan) | `prd-tmpl.yaml` | `project-brief.md` | `prd.md` | Sim |
+| 2 | @project-lead (Morgan) | `prd-tmpl.yaml` | `project-brief.md` | `prd.md` | Sim |
 | 3 | @ux-expert (Uma) | `front-end-spec-tmpl.yaml` | `prd.md` | `front-end-spec.md` | Sim |
 | 4 | @ux-expert (Uma) | `generate-ai-frontend-prompt.md` | `front-end-spec.md` | Prompt para v0/Lovable | Opcional |
 | 5 | @architect (Aria) | `fullstack-architecture-tmpl.yaml` | `prd.md`, `front-end-spec.md` | `fullstack-architecture.md` | Sim |
-| 6 | @pm (Morgan) | Atualizacao | `fullstack-architecture.md` | `prd.md` atualizado | Condicional |
-| 7 | @po (Pax) | `po-master-checklist.md` | Todos os artefatos | Validacao | Sim |
+| 6 | @project-lead (Morgan) | Atualizacao | `fullstack-architecture.md` | `prd.md` atualizado | Condicional |
+| 7 | @product-lead (Pax) | `po-master-checklist.md` | Todos os artefatos | Validacao | Sim |
 
 ### Artefatos Criados
 
 | Documento | Responsavel | Localizacao |
 |-----------|-------------|-------------|
 | Project Brief | @analyst | `docs/project-brief.md` |
-| PRD | @pm | `docs/prd.md` |
+| PRD | @project-lead | `docs/prd.md` |
 | Front-End Spec | @ux-expert | `docs/front-end-spec.md` |
 | Fullstack Architecture | @architect | `docs/fullstack-architecture.md` |
 
@@ -339,7 +339,7 @@ flowchart TD
 
 | Step | Agente | Task | Entrada | Saida | Obrigatorio |
 |------|--------|------|---------|-------|-------------|
-| 1 | @po (Pax) | `shard-doc.md` | `docs/prd.md` | Pasta `docs/prd/` com arquivos fragmentados | Sim |
+| 1 | @product-lead (Pax) | `shard-doc.md` | `docs/prd.md` | Pasta `docs/prd/` com arquivos fragmentados | Sim |
 
 ### Metodo de Fragmentacao
 
@@ -406,18 +406,18 @@ flowchart TD
 
 | Step | Agente | Task | Entrada | Saida | Obrigatorio |
 |------|--------|------|---------|-------|-------------|
-| 1 | @sm (River) | `sm-create-next-story.md` | Docs fragmentados | `{epic}.{story}.story.md` | Sim |
-| 2 | @analyst/@pm | Revisao | Story draft | Story aprovada | Opcional |
-| 3 | @dev (Dex) | `dev-develop-story.md` | Story aprovada | Implementacao | Sim |
-| 4 | @qa (Quinn) | `qa-review-story.md` | Implementacao | Feedback de QA | Opcional |
-| 5 | @dev (Dex) | `dev-apply-qa-fixes.md` | Feedback de QA | Correcoes aplicadas | Condicional |
-| 6 | @po (Pax) | Retrospectiva | Epic completo | Retrospectiva | Opcional |
+| 1 | @sprint-lead (River) | `sm-create-next-story.md` | Docs fragmentados | `{epic}.{story}.story.md` | Sim |
+| 2 | @analyst/@project-lead | Revisao | Story draft | Story aprovada | Opcional |
+| 3 | @developer (Dex) | `dev-develop-story.md` | Story aprovada | Implementacao | Sim |
+| 4 | @quality-gate (Quinn) | `qa-review-story.md` | Implementacao | Feedback de QA | Opcional |
+| 5 | @developer (Dex) | `dev-apply-qa-fixes.md` | Feedback de QA | Correcoes aplicadas | Condicional |
+| 6 | @product-lead (Pax) | Retrospectiva | Epic completo | Retrospectiva | Opcional |
 
 ### Ciclo de Story
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Draft: @sm cria story
+    [*] --> Draft: @sprint-lead cria story
     Draft --> Approved: Revisao opcional
     Draft --> InProgress: Dev aceita
     Approved --> InProgress: Dev inicia
@@ -447,13 +447,13 @@ stateDiagram-v2
 |--------|----|----|-----------|-------------------|
 | Gage | @devops | ⚡ | Operator | Bootstrap de ambiente, push Git, releases, CI/CD |
 | Atlas | @analyst | 🔍 | Decoder | Pesquisa de mercado, brainstorming, project brief |
-| Morgan | @pm | 📋 | Strategist | PRD, estrategia de produto, epics |
+| Morgan | @project-lead | 📋 | Strategist | PRD, estrategia de produto, epics |
 | Uma | @ux-expert | 🎨 | Empathizer | Specs de frontend, UX, design systems |
 | Aria | @architect | 🏛️ | Visionary | Arquitetura full-stack, decisoes tecnicas |
-| Pax | @po | 🎯 | Balancer | Validacao de artefatos, backlog, fragmentacao |
-| River | @sm | 🌊 | Facilitator | Criacao de stories, sprint planning |
-| Dex | @dev | 💻 | Builder | Implementacao de codigo, testes |
-| Quinn | @qa | ✅ | Guardian | Revisao de qualidade, testes, gates |
+| Pax | @product-lead | 🎯 | Balancer | Validacao de artefatos, backlog, fragmentacao |
+| River | @sprint-lead | 🌊 | Facilitator | Criacao de stories, sprint planning |
+| Dex | @developer | 💻 | Builder | Implementacao de codigo, testes |
+| Quinn | @quality-gate | ✅ | Guardian | Revisao de qualidade, testes, gates |
 
 ### Diagrama de Interacao entre Agentes
 
@@ -501,34 +501,34 @@ graph LR
 | Fase | Task | Agente | Arquivo |
 |------|------|--------|---------|
 | 0 | Environment Bootstrap | @devops | `environment-bootstrap.md` |
-| 1 | Create Document | @analyst, @pm, @ux-expert, @architect | `create-doc.md` |
+| 1 | Create Document | @analyst, @project-lead, @ux-expert, @architect | `create-doc.md` |
 | 1 | Facilitate Brainstorming | @analyst | `facilitate-brainstorming-session.md` |
-| 1 | Deep Research Prompt | @analyst, @pm, @architect | `create-deep-research-prompt.md` |
+| 1 | Deep Research Prompt | @analyst, @project-lead, @architect | `create-deep-research-prompt.md` |
 | 1 | Generate AI Frontend Prompt | @ux-expert | `generate-ai-frontend-prompt.md` |
-| 1 | Execute Checklist | @po | `execute-checklist.md` |
-| 2 | Shard Document | @po | `shard-doc.md` |
-| 3 | Create Next Story | @sm | `sm-create-next-story.md` |
-| 3 | Develop Story | @dev | `dev-develop-story.md` |
-| 3 | Review Story | @qa | `qa-review-story.md` |
-| 3 | Apply QA Fixes | @dev | `dev-apply-qa-fixes.md` |
+| 1 | Execute Checklist | @product-lead | `execute-checklist.md` |
+| 2 | Shard Document | @product-lead | `shard-doc.md` |
+| 3 | Create Next Story | @sprint-lead | `sm-create-next-story.md` |
+| 3 | Develop Story | @developer | `dev-develop-story.md` |
+| 3 | Review Story | @quality-gate | `qa-review-story.md` |
+| 3 | Apply QA Fixes | @developer | `dev-apply-qa-fixes.md` |
 
 ### Templates Utilizados
 
 | Template | Agente | Propósito |
 |----------|--------|-----------|
 | `project-brief-tmpl.yaml` | @analyst | Estrutura do project brief |
-| `prd-tmpl.yaml` | @pm | Estrutura do PRD |
+| `prd-tmpl.yaml` | @project-lead | Estrutura do PRD |
 | `front-end-spec-tmpl.yaml` | @ux-expert | Especificacao de frontend |
 | `fullstack-architecture-tmpl.yaml` | @architect | Arquitetura completa |
-| `story-tmpl.yaml` | @sm | Template de user story |
+| `story-tmpl.yaml` | @sprint-lead | Template de user story |
 
 ### Checklists Utilizados
 
 | Checklist | Agente | Proposito |
 |-----------|--------|-----------|
-| `po-master-checklist.md` | @po | Validacao de todos os artefatos |
-| `story-draft-checklist.md` | @sm | Qualidade da story draft |
-| `story-dod-checklist.md` | @dev | Definition of Done |
+| `po-master-checklist.md` | @product-lead | Validacao de todos os artefatos |
+| `story-draft-checklist.md` | @sprint-lead | Qualidade da story draft |
+| `story-dod-checklist.md` | @developer | Definition of Done |
 
 ---
 
@@ -717,8 +717,8 @@ flowchart TD
 | Problema | Causa | Solucao |
 |----------|-------|---------|
 | Story incompleta | SM pulou campos | Executar `story-draft-checklist` |
-| Testes falhando | Codigo quebrado | @dev executar `*run-tests` |
-| QA bloqueando | Issues CRITICAL | Resolver com @dev antes de prosseguir |
+| Testes falhando | Codigo quebrado | @developer executar `*run-tests` |
+| QA bloqueando | Issues CRITICAL | Resolver com @developer antes de prosseguir |
 | Epic nao encontrado no ClickUp | Task nao criada | Criar Epic com tags corretas |
 
 ### Comandos de Diagnostico
@@ -749,12 +749,12 @@ ls -la docs/
 | De | Para | Prompt de Handoff |
 |----|------|-------------------|
 | Fase 0 | Fase 1 | "Bootstrap do ambiente completo! Repo Git criado, CLIs verificadas, estrutura do projeto pronta. Inicie um novo chat com @analyst para criar o project brief." |
-| @analyst | @pm | "Project brief completo. Salve como `docs/project-brief.md` no seu projeto, depois crie o PRD." |
-| @pm | @ux-expert | "PRD pronto. Salve como `docs/prd.md` no seu projeto, depois crie a especificacao de UI/UX." |
+| @analyst | @project-lead | "Project brief completo. Salve como `docs/project-brief.md` no seu projeto, depois crie o PRD." |
+| @project-lead | @ux-expert | "PRD pronto. Salve como `docs/prd.md` no seu projeto, depois crie a especificacao de UI/UX." |
 | @ux-expert | @architect | "Spec de UI/UX completa. Salve como `docs/front-end-spec.md` no seu projeto, depois crie a arquitetura fullstack." |
-| @architect | @po | "Arquitetura completa. Salve como `docs/fullstack-architecture.md`. Voce sugere mudancas nas stories do PRD ou precisa de novas stories?" |
-| Fase 1 | Fase 2 | "Todos os artefatos de planejamento validados. Agora fragmente documentos para desenvolvimento: @po → *shard-doc docs/prd.md" |
-| Fase 2 | Fase 3 | "Documentos fragmentados! source-tree.md, tech-stack.md, coding-standards.md criados. Inicie desenvolvimento: @sm → *draft" |
+| @architect | @product-lead | "Arquitetura completa. Salve como `docs/fullstack-architecture.md`. Voce sugere mudancas nas stories do PRD ou precisa de novas stories?" |
+| Fase 1 | Fase 2 | "Todos os artefatos de planejamento validados. Agora fragmente documentos para desenvolvimento: @product-lead → *shard-doc docs/prd.md" |
+| Fase 2 | Fase 3 | "Documentos fragmentados! source-tree.md, tech-stack.md, coding-standards.md criados. Inicie desenvolvimento: @sprint-lead → *draft" |
 | Conclusao | - | "Todas as stories implementadas e revisadas. Fase de desenvolvimento do projeto completa!" |
 
 ---

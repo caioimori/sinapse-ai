@@ -196,4 +196,4 @@ next_agent: @qa
 next_command: *review {story-id}
 condition: Autonomous build completed successfully
 alternatives:
-  - agent: @dev, command: *build-resume {story-id}, condition: Build failed, needs resume
+  - agent: @developer, command: *build-resume {story-id}, condition: Build failed, needs resume

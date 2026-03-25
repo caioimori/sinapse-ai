@@ -1,6 +1,6 @@
 # Create Fix Request Task
 
-Generate a structured fix request document (`QA_FIX_REQUEST.md`) for @dev based on QA review findings.
+Generate a structured fix request document (`QA_FIX_REQUEST.md`) for @developer based on QA review findings.
 
 ---
 
@@ -429,7 +429,7 @@ Fix ONLY the issues listed below. Do not add features or refactor unrelated code
 
 ## Constraints
 
-**CRITICAL: @dev must follow these constraints:**
+**CRITICAL: @developer must follow these constraints:**
 
 - [ ] Fix ONLY the issues listed above
 - [ ] Do NOT add new features
@@ -445,7 +445,7 @@ Fix ONLY the issues listed below. Do not add features or refactor unrelated code
 
 1. Mark each issue as fixed in this document
 2. Update the story's Dev Agent Record with summary
-3. Request QA re-review: `@qa *review {{storyId}}`
+3. Request QA re-review: `@quality-gate *review {{storyId}}`
 
 ---
 
@@ -560,7 +560,7 @@ Test file should exist at `tests/tasks/qa-review-story.test.js` with:
 
 ## Constraints
 
-**CRITICAL: @dev must follow these constraints:**
+**CRITICAL: @developer must follow these constraints:**
 
 - [ ] Fix ONLY the issues listed above
 - [ ] Do NOT add new features
@@ -576,7 +576,7 @@ Test file should exist at `tests/tasks/qa-review-story.test.js` with:
 
 1. Mark each issue as fixed in this document
 2. Update the story's Dev Agent Record with summary
-3. Request QA re-review: `@qa *review 6.3`
+3. Request QA re-review: `@quality-gate *review 6.3`
 
 ---
 
@@ -597,7 +597,7 @@ Phase 2: CodeRabbit Scan (automated)
 Phase 3: Manual QA Review
 Phase 4: QA Report Generation
 Phase 5: Fix Request Generation ← THIS TASK
-Phase 6: @dev Applies Fixes
+Phase 6: @developer Applies Fixes
 Phase 7: Re-review
 Phase 8: Gate Decision
 Phase 9: Approval/Rejection
@@ -606,7 +606,7 @@ Phase 10: Merge or Iterate
 ```
 
 **Previous Step:** QA Report generated via `*review {story-id}`
-**Next Step:** @dev runs `*apply-qa-fixes {story-id}` using this fix request
+**Next Step:** @developer runs `*apply-qa-fixes {story-id}` using this fix request
 
 ---
 
@@ -627,4 +627,4 @@ next_agent: @dev
 next_command: *fix-qa-issues
 condition: QA_FIX_REQUEST.md generated
 alternatives:
-  - agent: @dev, command: *apply-qa-fixes, condition: Simple fixes, no structured request needed
+  - agent: @developer, command: *apply-qa-fixes, condition: Simple fixes, no structured request needed

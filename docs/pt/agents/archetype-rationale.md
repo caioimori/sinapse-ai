@@ -139,7 +139,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 
 ### Exemplos de Mapeamento
 
-#### Exemplo 1: @dev → Aquário (Dex)
+#### Exemplo 1: @developer → Aquário (Dex)
 **Função do Agente:** Construir código, inovar soluções, resolver problemas técnicos
 
 **Traços de Aquário:**
@@ -153,7 +153,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 
 ---
 
-#### Exemplo 2: @qa → Virgem (Quinn)
+#### Exemplo 2: @quality-gate → Virgem (Quinn)
 **Função do Agente:** Garantia de qualidade, testes, perfeccionismo
 
 **Traços de Virgem:**
@@ -167,7 +167,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 
 ---
 
-#### Exemplo 3: @po → Libra (Pax)
+#### Exemplo 3: @product-lead → Libra (Pax)
 **Função do Agente:** Equilibrar prioridades, mediar stakeholders, criar harmonia
 
 **Traços de Libra:**
@@ -492,7 +492,7 @@ greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to
 ```
 
 3. **Preservar Funcionalidade Existente:**
-- NÃO mudar IDs de agentes (@dev, @qa, etc.)
+- NÃO mudar IDs de agentes (@developer, @quality-gate, etc.)
 - Manter todos os comandos e dependências existentes
 - Apenas ADICIONAR campos de persona, não remover nada
 

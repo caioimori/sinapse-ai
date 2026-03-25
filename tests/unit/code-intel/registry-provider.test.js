@@ -69,7 +69,7 @@ entities:
         - create-story
   agents:
     dev-agent:
-      path: .sinapse-ai/development/agents/dev.md
+      path: .sinapse-ai/development/agents/developer.md
       layer: L2
       type: agent
       purpose: Full stack developer agent
@@ -81,7 +81,7 @@ entities:
       dependencies:
         - create-story
     sm-agent:
-      path: .sinapse-ai/development/agents/sm.md
+      path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
       type: agent
       purpose: Scrum Master agent

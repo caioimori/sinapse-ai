@@ -5,6 +5,42 @@ All notable changes to SINAPSE will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] - 2026-03-25
+
+### Breaking Changes
+- Renamed agent IDs: `dev`→`developer`, `qa`→`quality-gate`, `pm`→`project-lead`, `po`→`product-lead`, `sm`→`sprint-lead`
+- Renamed `sinapse-master` to `sinapse-orqx` across entire codebase
+- Wizard simplified: PT-BR only, single LLM question, auto-detect everything
+- Removed Spanish (ES) and Chinese (ZH) language support
+- Only 19 orqx agents visible as commands (specialist agents are backend-only)
+
+### Added
+- Immersive SINAPSE AI welcome screen with ASCII art banner
+- Auto-detection of project type (greenfield/brownfield/upgrade)
+- Auto-detection of tech preset from project files
+- LLM selection: Claude Code / Codex CLI / Both
+- 19 global agent definitions installed to ~/.claude/agents/
+- 18 orqx command files in .claude/commands/SINAPSE/agents/
+
+### Changed
+- Default language hardcoded to Portuguese (PT-BR)
+- Installation wizard reduced to 1 interactive question
+- CODEOWNERS updated to @caioimori & @eusoier
+- Banner updated from AIOX-SQUAD to SINAPSE AI
+
+### Removed
+- All AIOX, Alan Nicolas, Pedrovaleriolopez, Thiago Finch references
+- Spanish (docs/es/) and Chinese (docs/zh/) documentation
+- 11 core agent commands (dev, qa, pm, po, sm, etc.) — now backend-only
+- Language selection from wizard (hardcoded PT-BR)
+- User profile selection from wizard (hardcoded Quick Mode)
+- Project type selection from wizard (auto-detected)
+- Tech preset selection from wizard (auto-detected)
+
+### Security
+- LICENSE updated with complete MIT copyright chain (BMad → AIOX → SINAPSE)
+- Zero external references in codebase (verified via automated scan)
+
 ## [4.2.11] - 2026-02-16
 
 ### Added
@@ -189,7 +225,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
   - Automatic CHANGELOG generation
 
 - **Agent Command Rationalization** (Story 6.1.2.3)
-  - Command consolidation: `sinapse-master` 44→30 commands (32% reduction)
+  - Command consolidation: `sinapse-orqx` 44→30 commands (32% reduction)
   - Command consolidation: `data-engineer` 31→28 commands (9.7% reduction)
   - New consolidated tasks: `security-audit`, `analyze-performance`, `test-as-user`, `setup-database`
   - Migration guide: `docs/guides/command-migration-guide.md`

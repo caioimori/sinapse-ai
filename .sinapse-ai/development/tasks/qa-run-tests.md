@@ -260,7 +260,7 @@ If failures:
 
 ## Integration with CodeRabbit
 
-**CodeRabbit helps @qa agent**:
+**CodeRabbit helps @quality-gate agent**:
 - Catch issues tests might miss (logic errors, race conditions)
 - Validate security patterns (SQL injection, hardcoded secrets)
 - Enforce coding standards automatically

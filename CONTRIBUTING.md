@@ -228,7 +228,7 @@ Tasks are executable workflows that agents can run.
 # Task Name
 
 **Description:** What this task does
-**Agent(s):** @dev, @qa, etc.
+**Agent(s):** @developer, @quality-gate, etc.
 **Elicit:** true | false
 
 ---
@@ -439,7 +439,7 @@ All of these must pass before a PR can be merged:
 
 ### CODEOWNERS
 
-Critical paths require approval from `@Pedrovaleriolopez` (maintainer):
+Critical paths require approval from `@caioimori @eusoier` (maintainer):
 
 | Path | Why |
 |------|-----|
@@ -449,7 +449,7 @@ Critical paths require approval from `@Pedrovaleriolopez` (maintainer):
 | `.github/` | CI/CD workflows, branch protection |
 | `.sinapse-ai/core-config.yaml` | Framework configuration |
 
-All other paths require review from `@Pedrovaleriolopez`.
+All other paths require review from `@caioimori @eusoier`.
 
 See [`.github/CODEOWNERS`](.github/CODEOWNERS) for the full ownership map.
 

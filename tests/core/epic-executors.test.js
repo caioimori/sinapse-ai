@@ -6,7 +6,7 @@
  *
  * Tests for all epic executor classes.
  *
- * @author @dev (Dex)
+ * @author @developer (Dex)
  * @version 1.0.0
  */
 

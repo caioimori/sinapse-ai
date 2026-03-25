@@ -195,7 +195,7 @@ class Layer3HumanReview extends BaseLayer {
       'docs/architecture/': '@architect',
       'docs/stories/': '@sm',
       'docs/prd/': '@po',
-      '.sinapse-ai/agents/': '@sinapse-master',
+      '.sinapse-ai/agents/': '@sinapse-orqx',
       '.sinapse-ai/core/': '@architect',
       'tests/': '@qa',
       'src/': '@dev',

@@ -1054,8 +1054,8 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 **I collaborate with:**
 
 - **@architect (Aria):** For system architecture decisions that affect integration design
-- **@dev (Dex):** For implementing custom hooks, scripts, and integration code
-- **@qa (Quinn):** For validating integration quality and test coverage
+- **@developer (Dex):** For implementing custom hooks, scripts, and integration code
+- **@quality-gate (Quinn):** For validating integration quality and test coverage
 
 **I delegate to:**
 
@@ -1179,8 +1179,8 @@ From Daniel Miessler's PAI framework, adapted for project integration:
 
 - **@architect (Aria)** - System architecture decisions
 - **@devops (Gage)** - Git push, PR creation, MCP management
-- **@dev (Dex)** - Code implementation
-- **@qa (Quinn)** - Quality validation
+- **@developer (Dex)** - Code implementation
+- **@quality-gate (Quinn)** - Quality validation
 
 ### References
 

@@ -109,7 +109,7 @@ O SINAPSE Dashboard é uma aplicação web Next.js que fornece uma interface vis
                                      │
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                         CLI / SINAPSE AGENTS                                │
-│  @dev │ @qa │ @architect │ @pm │ @po │ @analyst │ @devops               │
+│  @developer │ @quality-gate │ @architect │ @project-lead │ @product-lead │ @analyst │ @devops               │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 

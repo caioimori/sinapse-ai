@@ -231,7 +231,7 @@ Todos os 11 agentes SINAPSE exibem status do projeto:
 8. **@devops** (Gage - Operator)
 9. **@data-engineer** (Dara - Sage)
 10. **@ux-design-expert** (Uma - Empathizer)
-11. **@sinapse-master** (Orion - Orchestrator)
+11. **@sinapse-orqx** (Orion - Orchestrator)
 
 ---
 
@@ -423,7 +423,7 @@ git --version
 
 Melhorias potenciais (ainda não implementadas):
 
-- [ ] Toggle de status por agente (ex: desabilitar apenas para @qa)
+- [ ] Toggle de status por agente (ex: desabilitar apenas para @quality-gate)
 - [ ] Indicadores de status coloridos (verde limpo, amarelo modificado, vermelho conflitos)
 - [ ] Porcentagem de progresso da story (tarefas completadas / total)
 - [ ] Tempo estimado para completar story atual

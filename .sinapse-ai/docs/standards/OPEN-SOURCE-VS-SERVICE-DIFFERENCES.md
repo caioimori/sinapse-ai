@@ -502,7 +502,7 @@ function validateTask(task) {
 | Date | Version | Changes | Author |
 |------|---------|---------|--------|
 | 2025-01-14 | 1.0.0 | Initial document | @architect |
-| 2025-12-09 | 2.1.0 | Added Multi-Repo Strategy section, updated terminology (Squad), updated related docs | @dev (Dex) |
+| 2025-12-09 | 2.1.0 | Added Multi-Repo Strategy section, updated terminology (Squad), updated related docs | @developer (Dex) |
 
 ---
 

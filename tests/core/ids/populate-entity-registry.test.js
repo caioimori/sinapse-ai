@@ -346,7 +346,7 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       expect(deps).toContain('validate-story');
       // Pattern C: MD link
       expect(deps).toContain('dod-checklist');
-      // Pattern D: Agent refs
+      // Pattern D: Agent refs (KNOWN_AGENTS still uses short IDs)
       expect(deps).toContain('dev');
       expect(deps).toContain('qa');
     });
@@ -564,7 +564,7 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
 
   describe('regression: real deps preserved (NOG-16A AC6)', () => {
     it('dev agent still has 40+ dependencies after filtering (all extractors combined)', () => {
-      const devAgentPath = path.resolve(__dirname, '../../../.sinapse-ai/development/agents/dev.md');
+      const devAgentPath = path.resolve(__dirname, '../../../.sinapse-ai/development/agents/developer.md');
       if (!fs.existsSync(devAgentPath)) return;
 
       const content = fs.readFileSync(devAgentPath, 'utf8');

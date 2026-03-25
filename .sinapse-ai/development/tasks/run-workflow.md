@@ -369,7 +369,7 @@ Abort workflow execution.
 The state file persists between sessions. To continue a workflow:
 
 1. User starts new Claude Code session
-2. Activates @sinapse-master
+2. Activates @sinapse-orqx
 3. Runs `*run-workflow {name} continue`
 4. System loads state, shows current step
 5. User executes step (possibly in new agent session)

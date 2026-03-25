@@ -1272,7 +1272,7 @@ Write-Host "✅ Environment report saved to .sinapse/environment-report.json"
 ║     Start a new chat: @analyst                                             ║
 ║     Command: *create-doc project-brief                                     ║
 ║                                                                            ║
-║  2. @pm → Create PRD                                                       ║
+║  2. @project-lead → Create PRD                                                       ║
 ║     After project brief is approved                                        ║
 ║     Command: *create-doc prd                                               ║
 ║                                                                            ║
@@ -1285,7 +1285,7 @@ Write-Host "✅ Environment report saved to .sinapse/environment-report.json"
 ╠═══════════════════════════════════════════════════════════════════════════╣
 ║  • View environment report: cat .sinapse/environment-report.json              ║
 ║  • Check GitHub repo: gh repo view --web                                   ║
-║  • SINAPSE help: @sinapse-master *help                                           ║
+║  • SINAPSE help: @sinapse-orqx *help                                           ║
 ║  • Re-run bootstrap: @devops *environment-bootstrap                        ║
 ║                                                                            ║
 ╚═══════════════════════════════════════════════════════════════════════════╝

@@ -535,7 +535,7 @@ Analyze the story's technical characteristics based on:
 - File locations include `api/src/` or backend paths
 
 **Assignment:**
-- **Primary Agents**: @dev, @architect (if new patterns)
+- **Primary Agents**: @developer, @architect (if new patterns)
 - **Quality Gates**: Pre-Commit (security scan), Pre-PR (API contract validation)
 - **Focus Areas**:
   - Error handling: Try-catch blocks, proper error responses (4xx, 5xx)
@@ -583,7 +583,7 @@ Analyze the story's technical characteristics based on:
 - Implements OWASP-related features
 
 **Assignment:**
-- **Primary Agents**: @dev, @architect
+- **Primary Agents**: @developer, @architect
 - **Quality Gates**: Pre-Commit (SAST scan), Pre-PR (security review)
 - **Focus Areas**:
   - OWASP Top 10: Injection prevention, XSS protection, auth vulnerabilities
@@ -615,7 +615,7 @@ Analyze the story's technical characteristics based on:
 - Connects to external systems
 
 **Assignment:**
-- **Primary Agents**: @dev, @architect, @github-devops
+- **Primary Agents**: @developer, @architect, @github-devops
 - **Quality Gates**: Pre-Commit, Pre-PR (integration safety)
 - **Focus Areas**:
   - Backward compatibility: Existing integrations unaffected
@@ -637,7 +637,7 @@ Based on the detected story type(s), populate the template fields:
 
   Specialized Agent Assignment:
     Primary Agents:
-      - @dev (always required for pre-commit reviews)
+      - @developer (always required for pre-commit reviews)
       - @[type-specific-agent] (from detection rules above)
 
     Supporting Agents:
@@ -645,7 +645,7 @@ Based on the detected story type(s), populate the template fields:
       - @[supporting-agent-2] (if multiple systems affected)
 
   Quality Gate Tasks:
-    - [ ] Pre-Commit (@dev): Run `coderabbit --prompt-only -t uncommitted` before marking story complete
+    - [ ] Pre-Commit (@developer): Run `coderabbit --prompt-only -t uncommitted` before marking story complete
     - [ ] Pre-PR (@github-devops): Run `coderabbit --prompt-only --base main` before creating pull request
     - [ ] Pre-Deployment (@github-devops): Run `coderabbit --prompt-only -t committed --base HEAD~10` before production deploy (only for production/deployment stories)
 
@@ -686,7 +686,7 @@ If story spans multiple types (e.g., Database + API):
 
   Specialized Agent Assignment:
     Primary Agents:
-      - @dev (pre-commit reviews)
+      - @developer (pre-commit reviews)
       - @db-sage (schema and SQL review)
       - @architect (API contract changes)
 
@@ -694,7 +694,7 @@ If story spans multiple types (e.g., Database + API):
       - @github-devops (deployment coordination)
 
   Quality Gate Tasks:
-    - [ ] Pre-Commit (@dev): Run before story complete
+    - [ ] Pre-Commit (@developer): Run before story complete
     - [ ] Pre-PR (@github-devops): Run before PR creation
     - [ ] Pre-Deployment (@github-devops): Run before production deploy
 
@@ -711,7 +711,7 @@ If story spans multiple types (e.g., Database + API):
 
   Self-Healing Configuration:
     Expected Self-Healing:
-      - Primary Agent: @dev (light mode)
+      - Primary Agent: @developer (light mode)
       - Max Iterations: 2
       - Timeout: 15 minutes
       - Severity Filter: CRITICAL only
@@ -727,13 +727,13 @@ After populating the basic CodeRabbit sections, add the Self-Healing Configurati
 
 | Primary Agent | Mode | Max Iterations | Timeout | Severity Filter |
 |---------------|------|----------------|---------|-----------------|
-| @dev | light | 2 | 15 min | CRITICAL |
-| @qa | full | 3 | 30 min | CRITICAL, HIGH |
+| @developer | light | 2 | 15 min | CRITICAL |
+| @quality-gate | full | 3 | 30 min | CRITICAL, HIGH |
 | @github-devops | check | 0 | N/A | report_only |
 
 **Severity Behavior Matrix:**
 
-| Severity | @dev (light) | @qa (full) | @github-devops (check) |
+| Severity | @developer (light) | @quality-gate (full) | @github-devops (check) |
 |----------|--------------|------------|------------------------|
 | CRITICAL | auto_fix | auto_fix | report_only |
 | HIGH | document_only | auto_fix | report_only |
@@ -788,4 +788,4 @@ next_agent: @po
 next_command: *validate-story-draft {story-id}
 condition: Story status is Draft
 alternatives:
-  - agent: @dev, command: *develop {story-id}, condition: Story already validated by PO
+  - agent: @developer, command: *develop {story-id}, condition: Story already validated by PO

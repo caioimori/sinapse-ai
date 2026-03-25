@@ -1,4 +1,4 @@
-# @qa (Quinn) - System Documentation
+# @quality-gate (Quinn) - System Documentation
 
 > **EN** | [PT](../../sinapse-agent-flows/qa-system.md) | [ES](../../es/sinapse-agent-flows/qa-system.md)
 
@@ -23,4 +23,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 
 ---
 
-*SINAPSE Agent Flows - @qa System v1.0*
+*SINAPSE Agent Flows - @quality-gate System v1.0*

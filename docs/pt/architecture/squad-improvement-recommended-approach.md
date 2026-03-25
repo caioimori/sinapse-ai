@@ -302,8 +302,8 @@ outputs:
 
 | Papel | Agente | Responsabilidades |
 |------|-------|------------------|
-| Principal | @dev (Dex) | Implementar scripts e tarefas |
-| Suporte | @qa (Quinn) | Testar implementação |
+| Principal | @developer (Dex) | Implementar scripts e tarefas |
+| Suporte | @quality-gate (Quinn) | Testar implementação |
 | Revisão | @architect (Aria) | Revisão de arquitetura |
 
 ---

@@ -49,7 +49,7 @@ flowchart TB
 
     subgraph PHASE1["Fase 1: Gather Requirements"]
         direction TB
-        G1["@pm (Morgan)"]
+        G1["@project-lead (Morgan)"]
         G2["Elicitação Interativa<br/>9 categorias de perguntas"]
         G3["requirements.json"]
         G1 --> G2 --> G3
@@ -73,7 +73,7 @@ flowchart TB
 
     subgraph PHASE4["Fase 4: Write Specification"]
         direction TB
-        W1["@pm (Morgan)"]
+        W1["@project-lead (Morgan)"]
         W2["Gerar spec.md<br/>Sem invencao"]
         W3["spec.md"]
         W1 --> W2 --> W3
@@ -81,7 +81,7 @@ flowchart TB
 
     subgraph PHASE5["Fase 5: Critique Specification"]
         direction TB
-        C1["@qa (Quinn)"]
+        C1["@quality-gate (Quinn)"]
         C2["Avaliar 5 dimensoes:<br/>Accuracy, Completeness,<br/>Consistency, Feasibility,<br/>Alignment"]
         C3{"Verdict"}
         C4["APPROVED"]
@@ -94,7 +94,7 @@ flowchart TB
     end
 
     subgraph PHASE5B["Fase 5b: Revise (COMPLEX)"]
-        REV1["@pm (Morgan)"]
+        REV1["@project-lead (Morgan)"]
         REV2["Aplicar feedback<br/>e auto-fixes"]
     end
 
@@ -163,10 +163,10 @@ flowchart LR
 sequenceDiagram
     autonumber
     participant U as Usuario
-    participant PM as @pm (Morgan)
+    participant PM as @project-lead (Morgan)
     participant AR as @architect (Aria)
     participant AN as @analyst (Atlas)
-    participant QA as @qa (Quinn)
+    participant QA as @quality-gate (Quinn)
     participant FS as File System
 
     U->>PM: *create-spec STORY-42
@@ -223,7 +223,7 @@ sequenceDiagram
 |----------|-------|
 | **Step ID** | `gather` |
 | **Phase Number** | 1 |
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Task** | `spec-gather-requirements.md` |
 | **Elicit** | Sim - requer interação do usuario |
 
@@ -282,7 +282,7 @@ mindmap
   "storyId": "STORY-42",
   "gatheredAt": "2026-01-28T10:00:00Z",
   "source": "user",
-  "gatheredBy": "@pm",
+  "gatheredBy": "@project-lead",
   "elicitationVersion": "2.0",
   "functional": [
     {
@@ -434,7 +434,7 @@ flowchart LR
 |----------|-------|
 | **Step ID** | `spec` |
 | **Phase Number** | 4 |
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Task** | `spec-write-spec.md` |
 | **Constitutional Gate** | Article IV - No Invention |
 
@@ -524,7 +524,7 @@ flowchart TB
 |----------|-------|
 | **Step ID** | `critique` |
 | **Phase Number** | 5 |
-| **Agente** | @qa (Quinn) |
+| **Agente** | @quality-gate (Quinn) |
 | **Task** | `spec-critique.md` |
 | **Gate** | Blocking (APPROVED/NEEDS_REVISION/BLOCKED) |
 
@@ -605,7 +605,7 @@ flowchart TB
 |----------|-------|
 | **Step ID** | `revise` |
 | **Phase Number** | 5b |
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Condition** | `complexity.result === 'COMPLEX'` OR `critique.verdict === 'NEEDS_REVISION'` |
 
 #### Inputs
@@ -630,7 +630,7 @@ flowchart TB
 |----------|-------|
 | **Step ID** | `critique_2` |
 | **Phase Number** | 5c |
-| **Agente** | @qa (Quinn) |
+| **Agente** | @quality-gate (Quinn) |
 | **Task** | `spec-critique.md` |
 | **Condition** | `complexity.result === 'COMPLEX'` |
 
@@ -697,12 +697,12 @@ graph LR
 
 | Agente | ID | Nome | Papel no Pipeline | Fases |
 |--------|-----|------|-------------------|-------|
-| @pm | pm | Morgan | Product Manager | 1 (Gather), 4 (Spec), 5b (Revise) |
+| @project-lead | pm | Morgan | Product Manager | 1 (Gather), 4 (Spec), 5b (Revise) |
 | @architect | architect | Aria | System Architect | 2 (Assess), 6 (Plan) |
 | @analyst | analyst | Atlas | Business Analyst | 3 (Research) |
-| @qa | qa | Quinn | Test Architect | 5 (Critique), 5c (Critique 2) |
+| @quality-gate | qa | Quinn | Test Architect | 5 (Critique), 5c (Critique 2) |
 
-### 4.1 Perfil: @pm (Morgan)
+### 4.1 Perfil: @project-lead (Morgan)
 
 - **Arquetipo:** Strategist
 - **Foco:** Coleta de requisitos, criação de especificações, documentação
@@ -723,7 +723,7 @@ graph LR
 - **Principios:** Curiosity-driven, evidence-based, action-oriented
 - **Ferramentas:** EXA, Context7, Google Workspace
 
-### 4.4 Perfil: @qa (Quinn)
+### 4.4 Perfil: @quality-gate (Quinn)
 
 - **Arquetipo:** Guardian
 - **Foco:** Validacao de qualidade, gates de aprovacao, rastreabilidade
@@ -736,11 +736,11 @@ graph LR
 
 | Task | Fase | Agente | Arquivo |
 |------|------|--------|---------|
-| Gather Requirements | 1 | @pm | `.sinapse-ai/development/tasks/spec-gather-requirements.md` |
+| Gather Requirements | 1 | @project-lead | `.sinapse-ai/development/tasks/spec-gather-requirements.md` |
 | Assess Complexity | 2 | @architect | `.sinapse-ai/development/tasks/spec-assess-complexity.md` |
 | Research Dependencies | 3 | @analyst | `.sinapse-ai/development/tasks/spec-research-dependencies.md` |
-| Write Specification | 4 | @pm | `.sinapse-ai/development/tasks/spec-write-spec.md` |
-| Critique Specification | 5, 5c | @qa | `.sinapse-ai/development/tasks/spec-critique.md` |
+| Write Specification | 4 | @project-lead | `.sinapse-ai/development/tasks/spec-write-spec.md` |
+| Critique Specification | 5, 5c | @quality-gate | `.sinapse-ai/development/tasks/spec-critique.md` |
 | Create Implementation Plan | 6 | @architect | `.sinapse-ai/development/tasks/plan-create-implementation.md` |
 
 ---
@@ -958,10 +958,10 @@ flowchart TB
 
 | Agente | Localização |
 |--------|-------------|
-| @pm (Morgan) | `.sinapse-ai/development/agents/pm.md` |
+| @project-lead (Morgan) | `.sinapse-ai/development/agents/project-lead.md` |
 | @architect (Aria) | `.sinapse-ai/development/agents/architect.md` |
 | @analyst (Atlas) | `.sinapse-ai/development/agents/analyst.md` |
-| @qa (Quinn) | `.sinapse-ai/development/agents/qa.md` |
+| @quality-gate (Quinn) | `.sinapse-ai/development/agents/quality-gate.md` |
 
 ### 10.3 Documentação Relacionada
 
@@ -974,11 +974,11 @@ flowchart TB
 | Comando | Descrição | Agente |
 |---------|-----------|--------|
 | `*create-spec STORY-ID` | Executar pipeline completo | - |
-| `*gather-requirements STORY-ID` | Apenas fase Gather | @pm |
+| `*gather-requirements STORY-ID` | Apenas fase Gather | @project-lead |
 | `*assess-complexity STORY-ID` | Apenas fase Assess | @architect |
 | `*research-deps STORY-ID` | Apenas fase Research | @analyst |
-| `*write-spec STORY-ID` | Apenas fase Write | @pm |
-| `*critique-spec STORY-ID` | Apenas fase Critique | @qa |
+| `*write-spec STORY-ID` | Apenas fase Write | @project-lead |
+| `*critique-spec STORY-ID` | Apenas fase Critique | @quality-gate |
 
 ---
 
@@ -1005,7 +1005,7 @@ Artifacts:
 
 Next Steps:
    - Review spec.md
-   - Run @dev *develop {storyId}
+   - Run @developer *develop {storyId}
 ```
 
 ---

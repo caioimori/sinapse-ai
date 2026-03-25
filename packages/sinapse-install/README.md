@@ -95,7 +95,7 @@ Simplified mode for new users. Only Bob is visible, orchestrating internally.
 
 Full access to all agents and commands.
 
-- Access to all 11 agents (@dev, @qa, @architect, etc.)
+- Access to all 11 agents (@developer, @quality-gate, @architect, etc.)
 - Full command palette
 - Best for experienced users
 

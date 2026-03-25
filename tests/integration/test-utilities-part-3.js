@@ -117,10 +117,10 @@ console.log('\n\n👥 TEST 4: Agent Load Test (4 agents)\n');
 console.log('-'.repeat(60));
 
 const agents = [
-  { name: 'qa', path: '.sinapse-ai/development/agents/qa.md' },
-  { name: 'po', path: '.sinapse-ai/development/agents/po.md' },
+  { name: 'qa', path: '.sinapse-ai/development/agents/quality-gate.md' },
+  { name: 'po', path: '.sinapse-ai/development/agents/product-lead.md' },
   { name: 'devops', path: '.sinapse-ai/development/agents/devops.md' },
-  { name: 'dev', path: '.sinapse-ai/development/agents/dev.md' },
+  { name: 'dev', path: '.sinapse-ai/development/agents/developer.md' },
 ];
 
 let agentCheckCount = 0;

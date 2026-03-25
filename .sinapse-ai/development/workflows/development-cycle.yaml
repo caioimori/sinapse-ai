@@ -6,7 +6,7 @@
 # com checkpoints humanos e self-healing integrado.
 #
 # @version 1.0.0
-# @author @dev (Dex) for Story 11.3
+# @author @developer (Dex) for Story 11.3
 # ============================================
 
 workflow:
@@ -17,7 +17,7 @@ workflow:
     Workflow orquestrado para ciclo de desenvolvimento por story.
     Implementa o fluxo PO → Executor → Quality Gate → DevOps → Push
     com suporte a executor dinâmico, self-healing e checkpoints humanos.
-  orchestrator: "@po"
+  orchestrator: "@product-lead"
 
   # ============================================
   # Triggers
@@ -83,7 +83,7 @@ workflow:
     1_validation:
       id: validation
       name: "Story Validation"
-      agent: "@po"
+      agent: "@product-lead"
       task: "validate-story-draft"
       description: >-
         PO valida a story com Epic Context antes de iniciar desenvolvimento.
@@ -156,7 +156,7 @@ workflow:
     3_self_healing:
       id: self_healing
       name: "Self-Healing"
-      agent: "@dev"
+      agent: "@developer"
       task: "self-heal"
       description: >-
         Self-healing com CodeRabbit para corrigir issues automaticamente.
@@ -274,7 +274,7 @@ workflow:
     6_checkpoint:
       id: checkpoint
       name: "Story Checkpoint"
-      agent: "@po"
+      agent: "@product-lead"
       task: "story-checkpoint"
       description: >-
         PO pausa entre stories para perguntar: GO / PAUSE / REVIEW / ABORT.
@@ -326,7 +326,7 @@ workflow:
       id: validation
       phase: 1
       phase_name: "Story Validation"
-      agent: "@po"
+      agent: "@product-lead"
       task: "validate-story-draft"
       action: "Validate story and assignments"
       outputs:
@@ -352,7 +352,7 @@ workflow:
       id: self_healing
       phase: 3
       phase_name: "Self-Healing"
-      agent: "@dev"
+      agent: "@developer"
       task: "self-heal"
       action: "Apply automated fixes when enabled"
       requires: development
@@ -395,7 +395,7 @@ workflow:
       id: checkpoint
       phase: 6
       phase_name: "Story Checkpoint"
-      agent: "@po"
+      agent: "@product-lead"
       task: "story-checkpoint"
       action: "Collect human decision (GO/PAUSE/REVIEW/ABORT)"
       requires: push
@@ -416,7 +416,7 @@ workflow:
       description: "Story rejected with feedback to SM"
       actions:
         - log: "Story validation failed"
-        - notify: "@sm"
+        - notify: "@sprint-lead"
         - save_feedback: true
 
     return_to_po:
@@ -500,7 +500,7 @@ workflow:
 # Metadata
 # ============================================
 metadata:
-  author: "@dev (Dex)"
+  author: "@developer (Dex)"
   story: "11.3"
   epic: "11 - Projeto Bob"
   created_date: "2026-02-05"

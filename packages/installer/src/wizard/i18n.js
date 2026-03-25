@@ -1,7 +1,7 @@
 /**
  * Internationalization (i18n) for SINAPSE Wizard
  *
- * Supports: English, Portuguese, Spanish
+ * Supports: Portuguese (default), English (fallback)
  *
  * @module wizard/i18n
  */
@@ -12,13 +12,13 @@ const TRANSLATIONS = {
     selectLanguage: 'Select language:',
 
     // User Profile (Story 10.2 - Epic 10: User Profile System)
-    userProfileQuestion: 'When AI generates code for you, which option best describes you?',
-    modoAssistido: 'Assisted Mode',
-    modoAssistidoDesc: "I can't tell if the code is right or wrong",
-    modoAssistidoHint: 'You talk to Bob, who handles all validation',
-    modoAvancado: 'Advanced Mode',
-    modoAvancadoDesc: 'I can identify when something is wrong and fix it',
-    modoAvancadoHint: 'You have direct access to all agents',
+    userProfileQuestion: 'How would you like to set up SINAPSE?',
+    modoAssistido: 'Quick Mode',
+    modoAssistidoDesc: 'Automatic setup, zero technical decisions',
+    modoAssistidoHint: 'Best for most users — installs everything automatically',
+    modoAvancado: 'Custom Mode',
+    modoAvancadoDesc: 'Choose tech stack, IDEs, and configurations',
+    modoAvancadoHint: 'For developers who want full control',
     userProfileSkipped: 'Using existing user profile',
     languageSkipped: 'Using existing language',
 
@@ -52,9 +52,9 @@ const TRANSLATIONS = {
     readyToUse: 'Your SINAPSE project is ready.',
     nextSteps: 'Next steps:',
     quickStart: 'Quick Start:',
-    quickStartAgents: 'Talk to your AI agents: @dev, @qa, @architect',
-    quickStartStory: 'Create a story: @pm *create-story',
-    quickStartHelp: 'Get help: @sinapse-master *help',
+    quickStartAgents: 'Talk to your AI agents: @developer, @quality-gate, @architect',
+    quickStartStory: 'Create a story: @project-lead *create-story',
+    quickStartHelp: 'Get help: @sinapse-orqx *help',
 
     // Cancellation
     cancelConfirm: 'Cancel installation?',
@@ -169,14 +169,13 @@ const TRANSLATIONS = {
     selectLanguage: 'Selecione o idioma:',
 
     // User Profile (Story 10.2 - Epic 10: User Profile System)
-    // PRD: SINAPSE v2.0 "Projeto Bob" - Seção 2.4 (exact copy)
-    userProfileQuestion: 'Quando uma IA gera código para você, qual dessas opções te descreve melhor?',
-    modoAssistido: 'Modo Assistido',
-    modoAssistidoDesc: 'Não sei avaliar se o código está certo ou errado',
-    modoAssistidoHint: 'Você conversa com Bob, que cuida de toda a validação',
-    modoAvancado: 'Modo Avançado',
-    modoAvancadoDesc: 'Consigo identificar quando algo está errado e corrigir',
-    modoAvancadoHint: 'Você tem acesso direto a todos os agentes',
+    userProfileQuestion: 'Como voce gostaria de configurar o SINAPSE?',
+    modoAssistido: 'Modo Rapido',
+    modoAssistidoDesc: 'Configuracao automatica, zero decisoes tecnicas',
+    modoAssistidoHint: 'Melhor para a maioria — instala tudo automaticamente',
+    modoAvancado: 'Modo Personalizado',
+    modoAvancadoDesc: 'Escolha tech stack, IDEs e configuracoes',
+    modoAvancadoHint: 'Para desenvolvedores que querem controle total',
     userProfileSkipped: 'Usando perfil de usuário existente',
     languageSkipped: 'Usando idioma existente',
 
@@ -210,9 +209,9 @@ const TRANSLATIONS = {
     readyToUse: 'Seu projeto SINAPSE está pronto.',
     nextSteps: 'Próximos passos:',
     quickStart: 'Início Rápido:',
-    quickStartAgents: 'Converse com seus agentes IA: @dev, @qa, @architect',
-    quickStartStory: 'Crie uma story: @pm *create-story',
-    quickStartHelp: 'Obtenha ajuda: @sinapse-master *help',
+    quickStartAgents: 'Converse com seus agentes IA: @developer, @quality-gate, @architect',
+    quickStartStory: 'Crie uma story: @project-lead *create-story',
+    quickStartHelp: 'Obtenha ajuda: @sinapse-orqx *help',
 
     // Cancellation
     cancelConfirm: 'Cancelar instalação?',
@@ -322,166 +321,11 @@ const TRANSLATIONS = {
     proNpmInstallFailed: 'npm install @sinapse-fullstack/pro falhou: {message}. Tente manualmente: npm install @sinapse-fullstack/pro',
   },
 
-  es: {
-    // Language selection
-    selectLanguage: 'Seleccione idioma:',
-
-    // User Profile (Story 10.2 - Epic 10: User Profile System)
-    userProfileQuestion: 'Cuando una IA genera código para ti, ¿cuál de estas opciones te describe mejor?',
-    modoAssistido: 'Modo Asistido',
-    modoAssistidoDesc: 'No sé evaluar si el código está bien o mal',
-    modoAssistidoHint: 'Hablas con Bob, que se encarga de toda la validación',
-    modoAvancado: 'Modo Avanzado',
-    modoAvancadoDesc: 'Puedo identificar cuando algo está mal y corregirlo',
-    modoAvancadoHint: 'Tienes acceso directo a todos los agentes',
-    userProfileSkipped: 'Usando perfil de usuario existente',
-    languageSkipped: 'Usando idioma existente',
-
-    // Project type
-    projectTypeQuestion: '¿Qué tipo de proyecto estás configurando?',
-    greenfield: 'Greenfield',
-    greenfieldDesc: 'proyecto nuevo desde cero',
-    brownfield: 'Brownfield',
-    brownfieldDesc: 'proyecto existente',
-
-    // IDE selection
-    ideQuestion: 'Seleccione IDE(s):',
-    ideHint: 'Espacio para seleccionar, Enter para confirmar',
-    recommended: 'Recomendado',
-
-    // Progress messages
-    installingCore: 'Instalando SINAPSE core...',
-    installingIDE: 'Configurando IDEs...',
-    installingDeps: 'Instalando dependencias...',
-    configuringEnv: 'Configurando ambiente...',
-    validating: 'Validando instalación...',
-
-    // Status
-    success: 'Éxito',
-    error: 'Error',
-    warning: 'Advertencia',
-    skipped: 'Omitido',
-
-    // Completion
-    installComplete: '¡Instalación Completa!',
-    readyToUse: 'Tu proyecto SINAPSE está listo.',
-    nextSteps: 'Próximos pasos:',
-    quickStart: 'Inicio Rápido:',
-    quickStartAgents: 'Habla con tus agentes IA: @dev, @qa, @architect',
-    quickStartStory: 'Crea una story: @pm *create-story',
-    quickStartHelp: 'Obtén ayuda: @sinapse-master *help',
-
-    // Cancellation
-    cancelConfirm: '¿Cancelar instalación?',
-    cancelled: 'Instalación cancelada.',
-    tryAgain: 'Ejecute `npx sinapse-ai init` para intentar nuevamente.',
-    continuing: 'Continuando instalación...',
-
-    // Pro Installation Wizard (pro-setup.js)
-    proWizardTitle: 'Asistente de Instalación SINAPSE Pro',
-    proWizardSubtitle: 'Contenido y Funciones Premium',
-    proLicenseActivation: 'Activación de Licencia',
-    proContentInstallation: 'Instalación del Contenido Pro',
-    proVerification: 'Verificación',
-    proHowActivate: '¿Cómo te gustaría activar Pro?',
-    proLoginOrCreate: 'Iniciar sesión o crear cuenta (Recomendado)',
-    proEnterKey: 'Ingresar clave de licencia (legado)',
-    proEmailLabel: 'Email:',
-    proEmailRequired: 'Email es obligatorio',
-    proEmailInvalid: 'Por favor, ingrese una dirección de email válida',
-    proVerifyingAccess: 'Verificando tu acceso...',
-    proNoAccess: 'No se encontró acceso SINAPSE Pro para este email.',
-    proContactSupport: 'Si cree que esto es un error, contacte al soporte:',
-    proPurchase: 'Comprar Pro: https://pro.sinapse.ai',
-    proEmailNotBuyer: 'Email no encontrado en la lista de compradores Pro.',
-    proAccessConfirmedAccount: '¡Acceso Pro confirmado! Cuenta encontrada.',
-    proAccessConfirmedCreate: '¡Acceso Pro confirmado! Vamos a crear tu cuenta.',
-    proPasswordLabel: 'Contraseña:',
-    proPasswordMin: 'La contraseña debe tener al menos {min} caracteres',
-    proAuthenticating: 'Autenticando...',
-    proAuthSuccess: 'Autenticado exitosamente.',
-    proEmailNotVerified: 'Email aún no verificado. Revise su bandeja de entrada y haga clic en el enlace de verificación.',
-    proCheckingEvery: '(Verificando cada 5 segundos... tiempo límite de 10 minutos)',
-    proEmailVerified: '¡Email verificado!',
-    proVerificationTimeout: 'Verificación de email expiró después de 10 minutos.',
-    proRunAgain: 'Ejecute el instalador nuevamente para reintentar.',
-    proIncorrectPassword: 'Contraseña incorrecta. {remaining} intento(s) restante(s).',
-    proMaxAttempts: 'Número máximo de intentos de inicio de sesión alcanzado.',
-    proForgotPassword: '¿Olvidó su contraseña? Visite https://sinapse-license-server.vercel.app/reset-password',
-    proContactSupportEmail: 'O abra un issue: https://github.com/SinapseAI/sinapse-ai/issues',
-    proAuthFailed: 'Error de autenticación: {message}',
-    proCreateAccount: 'Cree su cuenta SINAPSE Pro para comenzar.',
-    proChoosePassword: 'Elija una contraseña:',
-    proConfirmPassword: 'Confirme la contraseña:',
-    proPasswordsNoMatch: 'Las contraseñas no coinciden',
-    proCreatingAccount: 'Creando cuenta...',
-    proAccountCreated: '¡Cuenta creada! Email de verificación enviado.',
-    proAccountExists: 'La cuenta ya existe. Cambiando a inicio de sesión...',
-    proAccountFailed: 'Error al crear la cuenta: {message}',
-    proCheckEmail: 'Por favor, revise su email y haga clic en el enlace de verificación.',
-    proWaitingVerification: 'Esperando verificación de email...',
-    proAfterVerifying: 'Después de verificar, la instalación continuará automáticamente.',
-    proPressResend: '[Presione R para reenviar email de verificación]',
-    proVerificationResent: 'Email de verificación reenviado.',
-    proCouldNotResend: 'No se pudo reenviar: {message}',
-    proRunAgainRetry: 'Ejecute el instalador nuevamente para reintentar la verificación.',
-    proValidatingSubscription: 'Validando suscripción Pro...',
-    proSubscriptionConfirmed: '¡Suscripción Pro confirmada! Licencia: {key}',
-    proNoSubscription: 'No se encontró suscripción Pro activa para este email.',
-    proPurchaseAt: 'Compre Pro en https://pro.sinapse.ai',
-    proSeatLimit: 'Desactive otro dispositivo o actualice su licencia.',
-    proAlreadyActivated: 'Licencia Pro ya activada para esta cuenta.',
-    proActivationFailed: 'Error de activación: {message}',
-    proEnterKeyPrompt: 'Ingrese su clave de licencia Pro:',
-    proKeyRequired: 'Clave de licencia es obligatoria',
-    proKeyInvalid: 'Formato inválido. Esperado: PRO-XXXX-XXXX-XXXX-XXXX',
-    proKeyValidated: 'Licencia validada: {key}',
-    proModuleNotAvailable: 'Módulo de licencia Pro no disponible. Asegúrese de que @sinapse-fullstack/pro esté instalado.',
-    proModuleBootstrap: 'Módulo de licencia Pro no encontrado localmente. Instalando @sinapse-fullstack/pro...',
-    proServerUnreachable: 'Servidor de licencias inaccesible. Verifique su conexión a internet e intente nuevamente.',
-    proVerifyingAccessShort: 'Verificando acceso...',
-    proAccessConfirmed: 'Acceso Pro confirmado.',
-    proBuyerCheckUnavailable: 'Verificación de comprador no disponible, procediendo con inicio de sesión...',
-    proLoginFailedSignup: 'Inicio de sesión fallido, intentando registro...',
-    proAccountCreatedVerify: 'Cuenta creada. ¡Email de verificación enviado!',
-    proAccountExistsWrongPw: 'La cuenta existe pero la contraseña es incorrecta.',
-    proAuthFailedShort: 'Error de autenticación.',
-    proValidatingKey: 'Validando licencia {key}...',
-    proInvalidKey: 'Clave de licencia inválida.',
-    proExpiredKey: 'Clave de licencia expirada.',
-    proMaxActivations: 'Número máximo de activaciones alcanzado para esta clave.',
-    proRateLimited: 'Demasiadas solicitudes. Espere e intente nuevamente.',
-    proValidationFailed: 'Validación de licencia fallida: {message}',
-    proInvalidKeyFormat: 'Formato de clave inválido: {key}. Esperado: PRO-XXXX-XXXX-XXXX-XXXX',
-    proScaffolding: 'Instalando contenido pro...',
-    proScaffoldingProgress: 'Instalando: {message}',
-    proContentInstalled: 'Contenido Pro instalado ({count} archivos)',
-    proScaffoldFailed: 'Instalación fallida',
-    proScaffoldError: 'Error de instalación: {message}',
-    proInitPackageJson: 'Inicializando package.json...',
-    proPackageJsonCreated: 'package.json creado',
-    proPackageJsonFailed: 'Error al crear package.json',
-    proInstallingPackage: 'Instalando @sinapse-fullstack/pro...',
-    proPackageInstalled: 'Paquete Pro instalado',
-    proPackageInstallFailed: 'Error al instalar paquete Pro',
-    proScaffolderNotAvailable: 'Scaffolder Pro no disponible. Asegúrese de que @sinapse-fullstack/pro esté instalado.',
-    proFilesInstalled: 'Archivos instalados: {count}',
-    proSquads: 'Squads: {names}',
-    proConfigs: 'Configs: {count} archivos',
-    proFeaturesUnlocked: 'Funciones desbloqueadas: {count}',
-    proInstallComplete: '¡Instalación de SINAPSE Pro completa!',
-    proNeedHelp: '¿Necesita ayuda? Ejecute: npx sinapse-pro recover',
-    proCISetEnv: 'Modo CI: Configure las variables SINAPSE_PRO_EMAIL + SINAPSE_PRO_PASSWORD o SINAPSE_PRO_KEY.',
-    proVerificationFailed: 'Verificación fallida: {message}',
-    proPackageNotFound: 'Paquete Pro no encontrado después de npm install. Verifique la salida de npm.',
-    proScaffolderNotFound: 'Módulo scaffolder Pro no encontrado.',
-    proNpmInitFailed: 'npm init falló: {message}',
-    proNpmInstallFailed: 'npm install @sinapse-fullstack/pro falló: {message}. Intente manualmente: npm install @sinapse-fullstack/pro',
-  },
+  // es: removed — PT-BR hardcoded as default
 };
 
-// Current language (default: English)
-let currentLanguage = 'en';
+// Current language (default: Portuguese)
+let currentLanguage = 'pt';
 
 /**
  * Set current language
@@ -533,9 +377,8 @@ function tf(key, params = {}) {
  */
 function getLanguageChoices() {
   return [
-    { name: 'English', value: 'en' },
     { name: 'Português', value: 'pt' },
-    { name: 'Español', value: 'es' },
+    { name: 'English', value: 'en' },
   ];
 }
 

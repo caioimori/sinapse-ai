@@ -316,14 +316,14 @@ flowchart LR
     end
 
     subgraph "Desenvolvimento"
-        DEV["@dev"]
-        QA["@qa"]
+        DEV["@developer"]
+        QA["@quality-gate"]
     end
 
     subgraph "Gestao"
-        PM["@pm"]
-        PO["@po"]
-        SM["@sm"]
+        PM["@project-lead"]
+        PO["@product-lead"]
+        SM["@sprint-lead"]
     end
 
     subgraph "Arquitetura"

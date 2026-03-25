@@ -318,7 +318,7 @@ describe('GreenfieldHandler', () => {
       expect(result.action).toBe('greenfield_dev_cycle');
       expect(result.phase).toBe(GreenfieldPhase.DEV_CYCLE);
       expect(result.data.nextStep).toBe('development_cycle');
-      expect(result.data.handoff).toContain('@sm');
+      expect(result.data.handoff).toContain('@sprint-lead');
     });
   });
 

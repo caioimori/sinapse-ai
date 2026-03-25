@@ -207,7 +207,7 @@ validation:
 # Examples (for documentation)
 examples:
   - name: {Example 1 Name}
-    agent: dev
+    agent: developer
     description: {What this example demonstrates}
     input:
       {field1}: {value1}

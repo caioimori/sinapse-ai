@@ -360,7 +360,7 @@ generate_output:
     {
       "storyId": "{storyId}",
       "critiquedAt": "{timestamp}",
-      "critiquedBy": "@qa",
+      "critiquedBy": "@quality-gate",
       "specVersion": 1,
 
       "verdict": "APPROVED|NEEDS_REVISION|BLOCKED",
@@ -419,7 +419,7 @@ generate_output:
   "properties": {
     "storyId": { "type": "string" },
     "critiquedAt": { "type": "string", "format": "date-time" },
-    "critiquedBy": { "type": "string", "default": "@qa" },
+    "critiquedBy": { "type": "string", "default": "@quality-gate" },
     "specVersion": { "type": "integer", "minimum": 1 },
     "verdict": { "enum": ["APPROVED", "NEEDS_REVISION", "BLOCKED"] },
     "verdictReason": { "type": "string" },
@@ -471,7 +471,7 @@ generate_output:
 
 ## Integration
 
-### Command Integration (@qa)
+### Command Integration (@quality-gate)
 
 ```yaml
 command:
@@ -599,5 +599,5 @@ next_agent: @architect
 next_command: *plan
 condition: Critique verdict is APPROVED
 alternatives:
-  - agent: @pm, command: *write-spec, condition: Critique verdict is NEEDS_REVISION
+  - agent: @project-lead, command: *write-spec, condition: Critique verdict is NEEDS_REVISION
   - agent: @architect, command: *analyze-impact, condition: Critique verdict is BLOCKED

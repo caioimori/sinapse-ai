@@ -8,7 +8,7 @@ Create a new service using standardized Handlebars templates from WIS-10. Genera
 
 ```yaml
 task: createService()
-agent: "@dev"
+agent: "@developer"
 responsável: Dex (Developer)
 responsavel_type: Agente
 atomic_layer: Config
@@ -401,7 +401,7 @@ token_usage: ~1,000-2,000 tokens
 story: WIS-11
 version: 1.0.0
 created: 2025-12-24
-author: "@dev (Dex)"
+author: "@developer (Dex)"
 dependencies:
   templates:
     - service-template/ (from WIS-10)

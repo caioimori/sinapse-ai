@@ -1,6 +1,6 @@
 handoff:
-  from_agent: "@sm"
-  to_agent: "@po"
+  from_agent: "@sprint-lead"
+  to_agent: "@product-lead"
   last_command: "*draft"
   story_context:
     story_id: WIS-16

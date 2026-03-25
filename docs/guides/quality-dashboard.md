@@ -118,7 +118,7 @@ Each quality gate layer has its own metrics card:
 | ----------------------- | ---------------------------------------- |
 | **Pass Rate**           | % of PRs passing automated review        |
 | **CodeRabbit Findings** | Issues found by CodeRabbit (by severity) |
-| **Quinn Findings**      | Issues found by @qa agent                |
+| **Quinn Findings**      | Issues found by @quality-gate agent                |
 | **Auto-Catch Rate**     | % of issues caught before human review   |
 
 **Expanded View (click to expand):**
@@ -136,7 +136,7 @@ Each quality gate layer has its own metrics card:
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │ Quinn (@qa) Findings                            │   │
+│  │ Quinn (@quality-gate) Findings                            │   │
 │  │ Blockers: 2  │  Warnings: 8  │  Info: 15       │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │

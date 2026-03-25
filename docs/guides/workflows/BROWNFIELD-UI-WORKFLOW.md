@@ -111,10 +111,10 @@ graph TD
 
 ```mermaid
 sequenceDiagram
-    participant SM as @sm (River)
-    participant DEV as @dev (Dex)
-    participant QA as @qa (Quinn)
-    participant PO as @po (Pax)
+    participant SM as @sprint-lead (River)
+    participant DEV as @developer (Dex)
+    participant QA as @quality-gate (Quinn)
+    participant PO as @product-lead (Pax)
 
     loop Para cada Story do Epic
         SM->>SM: Criar story a partir dos docs fragmentados
@@ -184,7 +184,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @pm (Morgan) |
+| **Agente** | @project-lead (Morgan) |
 | **Acao** | Criar PRD focado em enhancement de UI |
 | **Template** | `brownfield-prd-tmpl` |
 | **Artefatos Criados** | `prd.md` |
@@ -239,7 +239,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Acao** | Validar todos os artefatos |
 | **Checklist** | `po-master-checklist` |
 | **Artefatos Validados** | Todos os artefatos criados |
@@ -271,7 +271,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Acao** | Fragmentar documentos para desenvolvimento IDE |
 | **Artefatos Criados** | `sharded_docs` (pastas `docs/prd/` e `docs/architecture/`) |
 | **Requer** | Todos os artefatos na pasta do projeto |
@@ -287,7 +287,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @sm (River) |
+| **Agente** | @sprint-lead (River) |
 | **Acao** | Criar stories a partir dos documentos fragmentados |
 | **Artefatos Criados** | `story.md` (para cada epic) |
 | **Requer** | `sharded_docs` (Step 7) |
@@ -306,7 +306,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @analyst (Atlas) ou @pm (Morgan) |
+| **Agente** | @analyst (Atlas) ou @project-lead (Morgan) |
 | **Acao** | Revisar e aprovar story draft |
 | **Condicao** | `user_wants_story_review` - Usuario deseja revisao |
 | **Opcional** | Sim |
@@ -323,7 +323,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Acao** | Implementar story aprovada |
 | **Artefatos Criados** | Arquivos de implementacao |
 | **Requer** | `story.md` aprovada |
@@ -342,7 +342,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @qa (Quinn) |
+| **Agente** | @quality-gate (Quinn) |
 | **Acao** | Revisar implementacao como senior dev |
 | **Artefatos Atualizados** | Arquivos de implementacao |
 | **Requer** | Arquivos implementados |
@@ -363,7 +363,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @dev (Dex) |
+| **Agente** | @developer (Dex) |
 | **Condicao** | `qa_left_unchecked_items` - QA deixou items pendentes |
 | **Acao** | Enderecao de feedback do QA |
 | **Output** | Items corrigidos, retorno ao QA para aprovacao final |
@@ -384,7 +384,7 @@ stateDiagram-v2
 
 | Atributo | Valor |
 |----------|-------|
-| **Agente** | @po (Pax) |
+| **Agente** | @product-lead (Pax) |
 | **Condicao** | `epic_complete` - Epic finalizado |
 | **Opcional** | Sim |
 | **Artefatos Criados** | `epic-retrospective.md` |
@@ -414,13 +414,13 @@ stateDiagram-v2
 | Icone | ID | Nome | Titulo | Papel no Workflow |
 |-------|-----|------|--------|-------------------|
 | @architect | architect | Aria | Holistic System Architect | Analise inicial e arquitetura brownfield |
-| @pm | pm | Morgan | Product Manager | Criacao do PRD brownfield |
+| @project-lead | pm | Morgan | Product Manager | Criacao do PRD brownfield |
 | @ux-expert | ux-design-expert | Uma | UX/UI Designer | Especificacao frontend |
-| @po | po | Pax | Product Owner | Validacao, fragmentacao, retrospectiva |
-| @sm | sm | River | Scrum Master | Criacao de stories |
+| @product-lead | po | Pax | Product Owner | Validacao, fragmentacao, retrospectiva |
+| @sprint-lead | sm | River | Scrum Master | Criacao de stories |
 | @analyst | analyst | Atlas | Business Analyst | Revisao de stories (opcional) |
-| @dev | dev | Dex | Full Stack Developer | Implementacao |
-| @qa | qa | Quinn | Test Architect | Revisao de qualidade (opcional) |
+| @developer | dev | Dex | Full Stack Developer | Implementacao |
+| @quality-gate | qa | Quinn | Test Architect | Revisao de qualidade (opcional) |
 
 ### Diagrama de Colaboracao entre Agentes
 
@@ -794,7 +794,7 @@ ls .sinapse-ai/development/templates/
 
 ```bash
 # Via SINAPSE
-@sinapse-master
+@sinapse-orqx
 *status
 
 # Via Git
@@ -841,13 +841,13 @@ ls docs/architecture/
 | Agente | Arquivo | Documentacao |
 |--------|---------|--------------|
 | @architect | `.sinapse-ai/development/agents/architect.md` | Aria - Holistic System Architect |
-| @pm | `.sinapse-ai/development/agents/pm.md` | Morgan - Product Manager |
+| @project-lead | `.sinapse-ai/development/agents/project-lead.md` | Morgan - Product Manager |
 | @ux-expert | `.sinapse-ai/development/agents/ux-design-expert.md` | Uma - UX/UI Designer |
-| @po | `.sinapse-ai/development/agents/po.md` | Pax - Product Owner |
-| @sm | `.sinapse-ai/development/agents/sm.md` | River - Scrum Master |
+| @product-lead | `.sinapse-ai/development/agents/product-lead.md` | Pax - Product Owner |
+| @sprint-lead | `.sinapse-ai/development/agents/sprint-lead.md` | River - Scrum Master |
 | @analyst | `.sinapse-ai/development/agents/analyst.md` | Atlas - Business Analyst |
-| @dev | `.sinapse-ai/development/agents/dev.md` | Dex - Full Stack Developer |
-| @qa | `.sinapse-ai/development/agents/qa.md` | Quinn - Test Architect |
+| @developer | `.sinapse-ai/development/agents/developer.md` | Dex - Full Stack Developer |
+| @quality-gate | `.sinapse-ai/development/agents/quality-gate.md` | Quinn - Test Architect |
 
 ### Handoff Prompts
 
@@ -879,7 +879,7 @@ Os seguintes prompts sao usados para transicoes entre agentes:
 | Cenario | Workflow Recomendado |
 |---------|---------------------|
 | Projeto novo (greenfield) | `greenfield-ui` |
-| Bug fix simples | Workflow ad-hoc com @dev |
+| Bug fix simples | Workflow ad-hoc com @developer |
 | Mudanca isolada | Story unica sem workflow completo |
 | Migracao de backend | `brownfield-backend` |
 | Full stack | `brownfield-fullstack` |

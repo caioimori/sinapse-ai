@@ -1053,7 +1053,7 @@ handoff_to:
     command: "Delegate to @hooks-architect (Latch) for hook design"
   dev:
     when: "Skill requires complex implementation beyond scaffold"
-    command: "Delegate to @dev for implementation"
+    command: "Delegate to @developer for implementation"
 
 autoClaude:
   version: "3.0"
@@ -1104,15 +1104,15 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **I collaborate with:**
 
-- **@dev (Dex):** Implements application code that skills reference
+- **@developer (Dex):** Implements application code that skills reference
 - **@architect (Aria):** Provides system architecture context for skill design
-- **@qa (Quinn):** Reviews skill quality and validates trigger accuracy
+- **@quality-gate (Quinn):** Reviews skill quality and validates trigger accuracy
 - **@devops (Gage):** Handles plugin publishing and marketplace deployment
 
 **I delegate to:**
 
 - **@devops (Gage):** For git push, PR creation, and plugin marketplace deployment
-- **@dev (Dex):** For implementation of application features beyond skill scope
+- **@developer (Dex):** For implementation of application features beyond skill scope
 
 **When to use others:**
 
@@ -1239,10 +1239,10 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 ### Related Agents
 
-- **@dev (Dex)** - Application code implementation
+- **@developer (Dex)** - Application code implementation
 - **@architect (Aria)** - System architecture
 - **@devops (Gage)** - Publishing and deployment
-- **@qa (Quinn)** - Quality review
+- **@quality-gate (Quinn)** - Quality review
 - **@squad-creator (Craft)** - SINAPSE squad creation (complementary)
 
 ---

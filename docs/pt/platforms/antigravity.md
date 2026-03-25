@@ -154,8 +154,8 @@ projeto/
 ```yaml
 # dev-workflow.yaml
 name: Workflow do Desenvolvedor
-trigger: "@dev"
-agent: dev
+trigger: "@developer"
+agent: developer
 steps:
   - name: analyze
     action: read_story
@@ -185,9 +185,9 @@ antigravity run dev-workflow
 
 **Via @mention:**
 ```
-@dev implemente a feature de autenticação de usuário
+@developer implemente a feature de autenticação de usuário
 
-@qa revise este módulo para problemas de segurança
+@quality-gate revise este módulo para problemas de segurança
 
 @architect projete o API gateway
 ```
@@ -227,7 +227,7 @@ stages:
       - create_design_doc
 
   - name: implementation
-    agent: dev
+    agent: developer
     depends_on: planning
     steps:
       - implement_feature
@@ -241,7 +241,7 @@ stages:
       - security_review
 
   - name: documentation
-    agent: dev
+    agent: developer
     depends_on: quality
     steps:
       - update_docs
@@ -277,7 +277,7 @@ O AntiGravity tem suporte MCP nativo:
 Integração direta com GCP:
 
 ```
-@dev Faça deploy desta função para Cloud Functions
+@developer Faça deploy desta função para Cloud Functions
 
 @devops Configure Cloud Run para este serviço
 
@@ -299,7 +299,7 @@ chain:
     input: "${requirements}"
     output: design
 
-  - agent: dev
+  - agent: developer
     task: "Implementar solução"
     input: "${design}"
 ```
@@ -385,7 +385,7 @@ persona:
 workflow:
   default: dev-workflow
   triggers:
-    - "@dev"
+    - "@developer"
     - "desenvolver"
     - "implementar"
 ```

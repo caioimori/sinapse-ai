@@ -123,14 +123,14 @@ sinapse-ai/                             # Root project
 │   └── utils/                         # Core utilities
 │
 ├── data/                              # Shared Data
-│   ├── sinapse-kb.md                     # SINAPSE knowledge base (@sinapse-master, lazy-loaded)
+│   ├── sinapse-kb.md                     # SINAPSE knowledge base (@sinapse-orqx, lazy-loaded)
 │   ├── agent-config-requirements.yaml # Per-agent config loading rules (@architect, updated on agent changes)
 │   ├── technical-preferences.md       # User/team technical preferences (@architect, updated on preference changes)
-│   └── workflow-patterns.yaml         # Workflow detection patterns (@sm, updated on workflow changes)
+│   └── workflow-patterns.yaml         # Workflow detection patterns (@sprint-lead, updated on workflow changes)
 │
 ├── development/                       # Development Assets
 │   ├── agents/                        # Agent definitions (11 core agents)
-│   │   ├── sinapse-master.md             # Master orchestrator
+│   │   ├── sinapse-orqx.md             # Master orchestrator
 │   │   ├── dev.md                     # Developer agent
 │   │   ├── qa.md                      # QA engineer agent
 │   │   ├── architect.md               # System architect agent
@@ -182,10 +182,10 @@ sinapse-ai/                             # Root project
 │   │   └── change-checklist.md        # Change management
 │   ├── data/                          # PM-specific data files
 │   │   ├── brainstorming-techniques.md    # Brainstorming methods (@analyst, reference doc, rarely updated)
-│   │   ├── elicitation-methods.md         # Elicitation techniques (@po, reference doc, rarely updated)
-│   │   ├── mode-selection-best-practices.md # Mode selection guide (@sm, updated on workflow changes)
-│   │   ├── test-levels-framework.md       # Test level definitions (@qa, updated when test strategy changes)
-│   │   └── test-priorities-matrix.md      # Test priority rules (@qa, updated when priorities shift)
+│   │   ├── elicitation-methods.md         # Elicitation techniques (@product-lead, reference doc, rarely updated)
+│   │   ├── mode-selection-best-practices.md # Mode selection guide (@sprint-lead, updated on workflow changes)
+│   │   ├── test-levels-framework.md       # Test level definitions (@quality-gate, updated when test strategy changes)
+│   │   └── test-priorities-matrix.md      # Test priority rules (@quality-gate, updated when priorities shift)
 │   └── templates/                     # Document templates
 │       ├── engine/                    # Template engine
 │       ├── ide-rules/                 # IDE rule templates
@@ -267,28 +267,28 @@ All data files used by agents during activation must have documented ownership, 
 
 | File | Owner | Fill Rule | Update Trigger | Used By |
 |------|-------|-----------|----------------|---------|
-| `coding-standards.md` | @dev | Updated when coding standards change | `*update-standards` task or manual edit | @dev, @pm, @ux-design-expert, @sm |
-| `tech-stack.md` | @architect | Updated on tech stack decisions | `*create-doc architecture` or manual edit | @dev, @pm, @ux-design-expert, @analyst |
-| `source-tree.md` | @architect | Updated when structure changes | `*update-source-tree` task | @dev, @analyst |
+| `coding-standards.md` | @developer | Updated when coding standards change | `*update-standards` task or manual edit | @developer, @project-lead, @ux-design-expert, @sprint-lead |
+| `tech-stack.md` | @architect | Updated on tech stack decisions | `*create-doc architecture` or manual edit | @developer, @project-lead, @ux-design-expert, @analyst |
+| `source-tree.md` | @architect | Updated when structure changes | `*update-source-tree` task | @developer, @analyst |
 
 ### Shared Data Files (.sinapse-ai/data/)
 
 | File | Owner | Fill Rule | Update Trigger | Used By |
 |------|-------|-----------|----------------|---------|
-| `sinapse-kb.md` | @sinapse-master | Updated on major framework changes | Manual edit | @sinapse-master (lazy) |
+| `sinapse-kb.md` | @sinapse-orqx | Updated on major framework changes | Manual edit | @sinapse-orqx (lazy) |
 | `agent-config-requirements.yaml` | @architect | Updated when agent config needs change | Story-driven | AgentConfigLoader |
-| `technical-preferences.md` | @architect | Updated on preference changes | Manual edit or `*add-tech-doc` | @dev, @qa, @devops, @architect, @data-engineer |
-| `workflow-patterns.yaml` | @sm | Updated on workflow changes | Manual edit | @sm, WorkflowNavigator |
+| `technical-preferences.md` | @architect | Updated on preference changes | Manual edit or `*add-tech-doc` | @developer, @quality-gate, @devops, @architect, @data-engineer |
+| `workflow-patterns.yaml` | @sprint-lead | Updated on workflow changes | Manual edit | @sprint-lead, WorkflowNavigator |
 
 ### Product Data Files (.sinapse-ai/product/data/)
 
 | File | Owner | Fill Rule | Update Trigger | Used By |
 |------|-------|-----------|----------------|---------|
 | `brainstorming-techniques.md` | @analyst | Reference doc, rarely updated | Manual edit | @analyst |
-| `elicitation-methods.md` | @po | Reference doc, rarely updated | Manual edit | @po |
-| `mode-selection-best-practices.md` | @sm | Updated on workflow changes | Manual edit | @sm |
-| `test-levels-framework.md` | @qa | Updated when test strategy changes | `*update-test-strategy` or manual edit | @qa |
-| `test-priorities-matrix.md` | @qa | Updated when priorities shift | `*update-test-strategy` or manual edit | @qa |
+| `elicitation-methods.md` | @product-lead | Reference doc, rarely updated | Manual edit | @product-lead |
+| `mode-selection-best-practices.md` | @sprint-lead | Updated on workflow changes | Manual edit | @sprint-lead |
+| `test-levels-framework.md` | @quality-gate | Updated when test strategy changes | `*update-test-strategy` or manual edit | @quality-gate |
+| `test-priorities-matrix.md` | @quality-gate | Updated when priorities shift | `*update-test-strategy` or manual edit | @quality-gate |
 
 ---
 

@@ -87,11 +87,11 @@ User Request → Gather → Assess → Research → Write → Critique → Spec 
 
 | Agent      | Command                | Fase                   |
 | ---------- | ---------------------- | ---------------------- |
-| @pm        | `*gather-requirements` | Coletar requisitos     |
+| @project-lead        | `*gather-requirements` | Coletar requisitos     |
 | @architect | `*assess-complexity`   | Avaliar complexidade   |
 | @analyst   | `*research-deps`       | Pesquisar dependências |
-| @pm        | `*write-spec`          | Escrever spec          |
-| @qa        | `*critique-spec`       | Criticar e aprovar     |
+| @project-lead        | `*write-spec`          | Escrever spec          |
+| @quality-gate        | `*critique-spec`       | Criticar e aprovar     |
 
 **Documentação:** [ADE-EPIC3-HANDOFF.md](../architecture/ADE-EPIC3-HANDOFF.md)
 
@@ -124,7 +124,7 @@ User Request → Gather → Assess → Research → Write → Critique → Spec 
 - `*create-plan` - Criar plano de implementação
 - `*create-context` - Gerar contexto do projeto
 
-**Comandos (@dev):**
+**Comandos (@developer):**
 
 - `*execute-subtask` - Executar subtask
 
@@ -142,7 +142,7 @@ User Request → Gather → Assess → Research → Write → Critique → Spec 
 Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback → Escalate
 ```
 
-**Comandos (@dev):**
+**Comandos (@developer):**
 
 - `*track-attempt` - Registrar tentativa
 - `*rollback` - Voltar para estado anterior
@@ -168,13 +168,13 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 9. Edge Cases & Error Handling
 10. Final Summary & Decision
 
-**Comandos (@qa):**
+**Comandos (@quality-gate):**
 
 - `*review-build {story}` - Review completo
 - `*request-fix {issue}` - Solicitar correção
 - `*verify-fix {issue}` - Verificar correção
 
-**Comandos (@dev):**
+**Comandos (@developer):**
 
 - `*apply-qa-fix` - Aplicar correção do QA
 
@@ -193,7 +193,7 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 - **Gotchas** - Armadilhas conhecidas
 - **Decisions** - Decisões arquiteturais
 
-**Comandos (@dev):**
+**Comandos (@developer):**
 
 - `*capture-insights` - Capturar insights da sessão
 - `*list-gotchas` - Listar gotchas conhecidas
@@ -216,7 +216,7 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 
 ```bash
 # Ativar PM e coletar requisitos
-@pm *gather-requirements
+@project-lead *gather-requirements
 
 # Avaliar complexidade
 @architect *assess-complexity
@@ -225,10 +225,10 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 @analyst *research-deps
 
 # Escrever spec
-@pm *write-spec
+@project-lead *write-spec
 
 # Criticar e aprovar
-@qa *critique-spec
+@quality-gate *critique-spec
 ```
 
 ### 2. Executar Spec Aprovada
@@ -241,8 +241,8 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 @architect *create-context
 
 # Executar subtasks (loop)
-@dev *execute-subtask 1.1
-@dev *execute-subtask 1.2
+@developer *execute-subtask 1.1
+@developer *execute-subtask 1.2
 ...
 ```
 
@@ -250,22 +250,22 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 
 ```bash
 # Review estruturado
-@qa *review-build STORY-42
+@quality-gate *review-build STORY-42
 
 # Se há issues:
-@qa *request-fix "Missing error handling"
-@dev *apply-qa-fix
-@qa *verify-fix
+@quality-gate *request-fix "Missing error handling"
+@developer *apply-qa-fix
+@quality-gate *verify-fix
 ```
 
 ### 4. Capturar Aprendizado
 
 ```bash
 # Capturar insights da sessão
-@dev *capture-insights
+@developer *capture-insights
 
 # Documentar gotchas
-@dev *list-gotchas
+@developer *list-gotchas
 ```
 
 ---
@@ -374,7 +374,7 @@ autoClaude:
 Cada Epic tem um QA Gate que deve passar antes de prosseguir:
 
 ```bash
-@qa *gate epic-{N}-{name}
+@quality-gate *gate epic-{N}-{name}
 ```
 
 **Decisões:**
@@ -392,13 +392,13 @@ Cada Epic tem um QA Gate que deve passar antes de prosseguir:
 
 ```bash
 # Verificar histórico de tentativas
-@dev *track-attempt --status
+@developer *track-attempt --status
 
 # Rollback para último estado bom
-@dev *rollback --hard
+@developer *rollback --hard
 
 # Tentar abordagem diferente
-@dev *execute-subtask 2.1 --approach alternative
+@developer *execute-subtask 2.1 --approach alternative
 ```
 
 ### Spec não Aprovada
@@ -408,10 +408,10 @@ Cada Epic tem um QA Gate que deve passar antes de prosseguir:
 cat docs/stories/STORY-42/spec-critique.json
 
 # Refinar spec
-@pm *write-spec --iterate
+@project-lead *write-spec --iterate
 
 # Re-submeter para critique
-@qa *critique-spec
+@quality-gate *critique-spec
 ```
 
 ### Worktree Conflita

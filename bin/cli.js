@@ -178,7 +178,7 @@ function cmdInstallGlobal() {
   let cmdCount = 0;
   const sinapseBase = toForwardSlash(SINAPSE_HOME);
 
-  // Also copy framework agent commands (sinapse-master, dev, qa, etc.) if they exist in package
+  // Also copy framework agent commands (sinapse-orqx, dev, qa, etc.) if they exist in package
   const frameworkCmdsDir = path.join(ROOT, '.claude', 'commands', 'SINAPSE', 'agents');
   if (fs.existsSync(frameworkCmdsDir)) {
     for (const f of fs.readdirSync(frameworkCmdsDir).filter(f => f.endsWith('.md'))) {
@@ -265,7 +265,7 @@ function cmdInstallGlobal() {
   console.log(`    3. Or: ${CYAN}claude --add-dir ~/.sinapse${NC}`);
   console.log('');
   console.log(`  ${BOLD}Try an agent:${NC}`);
-  console.log(`    ${CYAN}/SINAPSE:agents:sinapse-master${NC}`);
+  console.log(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:dev${NC}`);
   console.log('');
@@ -348,7 +348,7 @@ ${table}
 All agents use a single prefix: \`/SINAPSE:agents:{agent-id}\`
 
 Examples:
-- \`/SINAPSE:agents:sinapse-master\` — Master orchestrator
+- \`/SINAPSE:agents:sinapse-orqx\` — Master orchestrator
 - \`/SINAPSE:agents:brand-orqx\` — Brand strategy
 - \`/SINAPSE:agents:dev\` — Development
 - \`/SINAPSE:agents:research-orqx\` — Research & analysis
@@ -373,7 +373,7 @@ When a request matches a squad domain, delegate using \`/SINAPSE:agents:{agent-i
 See \`.claude/rules/squad-awareness.md\` for the full delegation map.
 `);
 
-  // Create sinapse-master agent for --agent flag
+  // Create sinapse-orqx agent for --agent flag
   const agentsDir = path.join(claudeDir, 'agents');
   fs.mkdirSync(agentsDir, { recursive: true });
 
@@ -388,8 +388,8 @@ See \`.claude/rules/squad-awareness.md\` for the full delegation map.
     return `| ${s.name} | @${orqxName} | ${s.agents} agents, ${s.tasks} tasks |`;
   }).join('\n');
 
-  fs.writeFileSync(path.join(agentsDir, 'sinapse-master.md'), `---
-name: sinapse-master
+  fs.writeFileSync(path.join(agentsDir, 'sinapse-orqx.md'), `---
+name: sinapse-orqx
 description: "Imperator — Supreme Orchestrator of SINAPSE. ${squads.length} squads, ${squads.reduce((a, s) => a + s.agents, 0)} agents."
 ---
 
@@ -424,7 +424,7 @@ Then HALT and await user input.
 - **Simple request** → route DIRECTLY to @specialist
 - **Complex request** → route to @{domain}-orqx
 - **Cross-domain** → coordinate multiple orqx agents
-- **Dev/code** → use @dev, @qa, @architect
+- **Dev/code** → use @developer, @quality-gate, @architect
 - NEVER execute domain work yourself — ALWAYS delegate
 
 ## SQUADS
@@ -453,7 +453,7 @@ function createLauncher() {
   // Bash launcher (macOS/Linux/Git Bash)
   const bashLauncher = `#!/bin/bash
 # Sinapse — Claude Code launcher (auto-generated)
-exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-master "$@"
+exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-orqx "$@"
 `;
   const bashPath = path.join(BIN_DIR, 'sinapse');
   fs.writeFileSync(bashPath, bashLauncher);
@@ -462,7 +462,7 @@ exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-master "$@"
 
   // Windows CMD launcher
   if (IS_WIN) {
-    const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-master %*\r\n`;
+    const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-orqx %*\r\n`;
     fs.writeFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
     console.log(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
   }

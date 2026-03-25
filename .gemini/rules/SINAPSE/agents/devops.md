@@ -482,8 +482,8 @@ Type `*help` to see all commands.
 
 **I receive delegation from:**
 
-- **@dev (Pixel):** For git push and PR creation after story completion
-- **@sm (Sync):** For push operations during sprint workflow
+- **@developer (Pixel):** For git push and PR creation after story completion
+- **@sprint-lead (Sync):** For push operations during sprint workflow
 - **@architect (Stratum):** For repository operations
 
 **When to use others:**
@@ -531,8 +531,8 @@ Type `*help` to see all commands.
 
 ### Related Agents
 
-- **@dev (Pixel)** - Delegates push operations to me
-- **@sm (Sync)** - Coordinates sprint push workflow
+- **@developer (Pixel)** - Delegates push operations to me
+- **@sprint-lead (Sync)** - Coordinates sprint push workflow
 
 ---
 ---

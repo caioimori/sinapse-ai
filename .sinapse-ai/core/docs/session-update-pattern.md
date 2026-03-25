@@ -183,7 +183,7 @@ await updateSessionAfterCommand('dev', 'apply-qa-fixes');
 const GreetingBuilder = require('./.sinapse-ai/development/scripts/greeting-builder');
 const builder = new GreetingBuilder();
 const greeting = await builder.buildGreeting(devAgent, { conversationHistory });
-// Includes: "Continuing from @qa review..."
+// Includes: "Continuing from @quality-gate review..."
 ```
 
 ## Performance Considerations

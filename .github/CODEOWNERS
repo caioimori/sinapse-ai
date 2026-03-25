@@ -7,7 +7,7 @@
 # See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 #
 # Owners:
-#   @Pedrovaleriolopez (lead maintainer)
+#   @caioimori @eusoier (lead maintainer)
 #
 # All PRs require approval from a maintainer before merge.
 # Note: Org handles (e.g. @SinapseAI) cannot approve PRs — only user accounts can.
@@ -15,93 +15,93 @@
 # ============================================
 # Default Owner (fallback)
 # ============================================
-* @Pedrovaleriolopez
+* @caioimori @eusoier
 
 # ============================================
 # Critical Paths (requires lead maintainer review)
 # ============================================
 # Orchestration layer (MasterOrchestrator, BobOrchestrator, GateEvaluator)
-.sinapse-ai/core/orchestration/ @Pedrovaleriolopez
+.sinapse-ai/core/orchestration/ @caioimori @eusoier
 
 # Execution engine (WaveExecutor, ParallelExecutor)
-.sinapse-ai/core/execution/ @Pedrovaleriolopez
+.sinapse-ai/core/execution/ @caioimori @eusoier
 
 # Packages (installer, CLI, shared libraries)
-packages/ @Pedrovaleriolopez
+packages/ @caioimori @eusoier
 
 # CI/CD configurations
-.github/ @Pedrovaleriolopez
+.github/ @caioimori @eusoier
 
 # ============================================
 # Framework Core (requires senior review)
 # ============================================
 # Agent definitions
-.sinapse-ai/development/agents/ @Pedrovaleriolopez
+.sinapse-ai/development/agents/ @caioimori @eusoier
 
 # Task definitions
-.sinapse-ai/development/tasks/ @Pedrovaleriolopez
+.sinapse-ai/development/tasks/ @caioimori @eusoier
 
 # Workflow definitions
-.sinapse-ai/development/workflows/ @Pedrovaleriolopez
+.sinapse-ai/development/workflows/ @caioimori @eusoier
 
 # Templates
-.sinapse-ai/product/templates/ @Pedrovaleriolopez
-templates/ @Pedrovaleriolopez
+.sinapse-ai/product/templates/ @caioimori @eusoier
+templates/ @caioimori @eusoier
 
 # CLI utilities
-.sinapse-ai/cli/ @Pedrovaleriolopez
+.sinapse-ai/cli/ @caioimori @eusoier
 
 # ============================================
 # Infrastructure
 # ============================================
 # Docker configurations
-.docker/ @Pedrovaleriolopez
+.docker/ @caioimori @eusoier
 
 # Framework configuration
-.sinapse-ai/core-config.yaml @Pedrovaleriolopez
+.sinapse-ai/core-config.yaml @caioimori @eusoier
 
 # Package management
-package.json @Pedrovaleriolopez
-package-lock.json @Pedrovaleriolopez
+package.json @caioimori @eusoier
+package-lock.json @caioimori @eusoier
 
 # ============================================
 # Documentation (more permissive)
 # ============================================
 # General docs
-docs/ @Pedrovaleriolopez
+docs/ @caioimori @eusoier
 
 # Architecture decisions
-docs/architecture/ @Pedrovaleriolopez
+docs/architecture/ @caioimori @eusoier
 
 # Framework standards
-docs/framework/ @Pedrovaleriolopez
+docs/framework/ @caioimori @eusoier
 
 # User guides
-docs/guides/ @Pedrovaleriolopez
+docs/guides/ @caioimori @eusoier
 
 # ============================================
 # Security-Sensitive Files
 # ============================================
 # This file
-.github/CODEOWNERS @Pedrovaleriolopez
+.github/CODEOWNERS @caioimori @eusoier
 
 # Release workflows
-.github/workflows/semantic-release.yml @Pedrovaleriolopez
-.github/workflows/npm-publish.yml @Pedrovaleriolopez
-.github/workflows/release.yml @Pedrovaleriolopez
+.github/workflows/semantic-release.yml @caioimori @eusoier
+.github/workflows/npm-publish.yml @caioimori @eusoier
+.github/workflows/release.yml @caioimori @eusoier
 
 # Pro submodule workflows
-.github/workflows/pro-integration.yml @Pedrovaleriolopez
-.github/workflows/publish-pro.yml @Pedrovaleriolopez
+.github/workflows/pro-integration.yml @caioimori @eusoier
+.github/workflows/publish-pro.yml @caioimori @eusoier
 
 # Security configurations
-security/ @Pedrovaleriolopez
+security/ @caioimori @eusoier
 
 # Environment files (should not be committed, but protect pattern)
-.env* @Pedrovaleriolopez
+.env* @caioimori @eusoier
 
 # Configuration files
-*.config.js @Pedrovaleriolopez
-*.config.ts @Pedrovaleriolopez
-tsconfig.json @Pedrovaleriolopez
-eslint.config.* @Pedrovaleriolopez
+*.config.js @caioimori @eusoier
+*.config.ts @caioimori @eusoier
+tsconfig.json @caioimori @eusoier
+eslint.config.* @caioimori @eusoier

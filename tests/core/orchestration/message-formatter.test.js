@@ -129,12 +129,12 @@ describe('MessageFormatter', () => {
         const result = formatter.formatActionResult('Database Migration', {
           agents: [
             { id: '@data-engineer', name: 'Dara', task: 'Create migration' },
-            { id: '@dev', name: 'Dex', task: 'Update models' },
+            { id: '@developer', name: 'Dex', task: 'Update models' },
           ],
         });
         expect(result).toContain('👥 Agentes envolvidos:');
         expect(result).toContain('@data-engineer (Dara): Create migration');
-        expect(result).toContain('@dev (Dex): Update models');
+        expect(result).toContain('@developer (Dex): Update models');
       });
 
       it('should include tradeoffs when provided', () => {
@@ -190,21 +190,21 @@ describe('MessageFormatter', () => {
   describe('formatAgentAssignment', () => {
     it('should return empty string when educational mode is OFF', () => {
       const formatter = new MessageFormatter({ educationalMode: false });
-      const result = formatter.formatAgentAssignment('@dev', 'Dex', 'Implement feature');
+      const result = formatter.formatAgentAssignment('@developer', 'Dex', 'Implement feature');
       expect(result).toBe('');
     });
 
     it('should return explanation when educational mode is ON', () => {
       const formatter = new MessageFormatter({ educationalMode: true });
-      const result = formatter.formatAgentAssignment('@dev', 'Dex', 'Implement feature', 'Best for code implementation');
-      expect(result).toContain('🤖 @dev (Dex) assumindo: Implement feature');
+      const result = formatter.formatAgentAssignment('@developer', 'Dex', 'Implement feature', 'Best for code implementation');
+      expect(result).toContain('🤖 @developer (Dex) assumindo: Implement feature');
       expect(result).toContain('Por quê: Best for code implementation');
     });
 
     it('should work without reason', () => {
       const formatter = new MessageFormatter({ educationalMode: true });
-      const result = formatter.formatAgentAssignment('@qa', 'Quinn', 'Run tests');
-      expect(result).toContain('🤖 @qa (Quinn) assumindo: Run tests');
+      const result = formatter.formatAgentAssignment('@quality-gate', 'Quinn', 'Run tests');
+      expect(result).toContain('🤖 @quality-gate (Quinn) assumindo: Run tests');
       expect(result).not.toContain('Por quê:');
     });
   });
@@ -238,22 +238,22 @@ describe('MessageFormatter', () => {
   describe('formatPhaseTransition', () => {
     it('should return empty string when educational mode is OFF', () => {
       const formatter = new MessageFormatter({ educationalMode: false });
-      const result = formatter.formatPhaseTransition('development', '12.7', '@dev');
+      const result = formatter.formatPhaseTransition('development', '12.7', '@developer');
       expect(result).toBe('');
     });
 
     it('should return phase info when educational mode is ON', () => {
       const formatter = new MessageFormatter({ educationalMode: true });
-      const result = formatter.formatPhaseTransition('development', '12.7', '@dev');
+      const result = formatter.formatPhaseTransition('development', '12.7', '@developer');
       expect(result).toContain('📍 Fase: development → Story 12.7');
-      expect(result).toContain('Executor: @dev');
+      expect(result).toContain('Executor: @developer');
     });
   });
 
   describe('formatError', () => {
     it('should return basic error in OFF mode', () => {
       const formatter = new MessageFormatter({ educationalMode: false });
-      const result = formatter.formatError('Test failed', { phase: 'qa', agent: '@qa' });
+      const result = formatter.formatError('Test failed', { phase: 'qa', agent: '@quality-gate' });
       expect(result).toBe('❌ Erro: Test failed\n');
     });
 
@@ -261,12 +261,12 @@ describe('MessageFormatter', () => {
       const formatter = new MessageFormatter({ educationalMode: true });
       const result = formatter.formatError('Test failed', {
         phase: 'qa',
-        agent: '@qa',
+        agent: '@quality-gate',
         suggestion: 'Check test configuration',
       });
       expect(result).toContain('❌ Erro: Test failed');
       expect(result).toContain('Fase: qa');
-      expect(result).toContain('Agente: @qa');
+      expect(result).toContain('Agente: @quality-gate');
       expect(result).toContain('💡 Sugestão: Check test configuration');
     });
   });

@@ -363,7 +363,7 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
     agents: {
       enabled: true,
       directory: ideConfig.specialConfig.agentsFolder,
-      default: 'sinapse-master',
+      default: 'sinapse-orqx',
     },
     rules: {
       enabled: true,

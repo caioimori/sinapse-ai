@@ -13,7 +13,7 @@ const RISK_THRESHOLDS = {
 const REUSE_MIN_REFS = 2;
 
 /**
- * DevHelper — Code intelligence helper for @dev agent tasks.
+ * DevHelper — Code intelligence helper for @developer agent tasks.
  *
  * All functions return null gracefully when no provider is available.
  * Never throws — safe to call unconditionally in task workflows.

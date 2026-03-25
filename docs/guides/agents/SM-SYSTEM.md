@@ -2,14 +2,14 @@
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
-> **Owner:** @sm (River - Facilitator)
+> **Owner:** @sprint-lead (River - Facilitator)
 > **Status:** Documentacao Oficial
 
 ---
 
 ## Visao Geral
 
-O agente **@sm (River)** e o Scrum Master tecnico do SINAPSE, especializado em preparacao de stories e facilitacao de processos ageis. Seu papel principal e criar stories detalhadas e acionaveis que agentes desenvolvedores possam implementar com minima necessidade de pesquisa adicional.
+O agente **@sprint-lead (River)** e o Scrum Master tecnico do SINAPSE, especializado em preparacao de stories e facilitacao de processos ageis. Seu papel principal e criar stories detalhadas e acionaveis que agentes desenvolvedores possam implementar com minima necessidade de pesquisa adicional.
 
 **Responsabilidades Principais:**
 - Criacao e refinamento de user stories
@@ -42,8 +42,8 @@ O agente **@sm (River)** e o Scrum Master tecnico do SINAPSE, especializado em p
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.sinapse-ai/development/agents/sm.md` | Definicao core do agente SM |
-| `.claude/commands/SINAPSE/agents/sm.md` | Comando Claude Code para ativar @sm |
+| `.sinapse-ai/development/agents/sprint-lead.md` | Definicao core do agente SM |
+| `.claude/commands/SINAPSE/agents/sprint-lead.md` | Comando Claude Code para ativar @sprint-lead |
 | `.cursor/rules/sm.md` | Regras para Cursor IDE |
 | `.cursor/rules/sm.mdc` | Regras compiladas para Cursor |
 
@@ -60,11 +60,11 @@ O agente **@sm (River)** e o Scrum Master tecnico do SINAPSE, especializado em p
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.sinapse-ai/development/agents/po.md` | @po | Coordena com @sm em backlog e sprint planning |
-| `.sinapse-ai/development/agents/dev.md` | @dev | Recebe stories do @sm para implementacao |
-| `.sinapse-ai/development/agents/pm.md` | @pm | Cria epics que @sm quebra em stories |
+| `.sinapse-ai/development/agents/product-lead.md` | @product-lead | Coordena com @sprint-lead em backlog e sprint planning |
+| `.sinapse-ai/development/agents/developer.md` | @developer | Recebe stories do @sprint-lead para implementacao |
+| `.sinapse-ai/development/agents/project-lead.md` | @project-lead | Cria epics que @sprint-lead quebra em stories |
 | `.sinapse-ai/development/agents/devops.md` | @github-devops | Recebe stories completas para push/PR |
-| `.sinapse-ai/development/agents/qa.md` | @qa | Coordena em risk profiling |
+| `.sinapse-ai/development/agents/quality-gate.md` | @quality-gate | Coordena em risk profiling |
 
 ### Arquivos de Workflows que Utilizam @sm
 
@@ -93,12 +93,12 @@ O agente **@sm (River)** e o Scrum Master tecnico do SINAPSE, especializado em p
 ```mermaid
 flowchart TB
     subgraph INPUTS["📥 INPUTS"]
-        PRD["📄 PRD/Epic<br/>(from @pm)"]
-        BACKLOG["📋 Backlog Priorizado<br/>(from @po)"]
+        PRD["📄 PRD/Epic<br/>(from @project-lead)"]
+        BACKLOG["📋 Backlog Priorizado<br/>(from @product-lead)"]
         ARCH["🏗️ Arquitetura<br/>(docs/architecture/)"]
     end
 
-    subgraph SM_AGENT["🌊 @sm (River) - Scrum Master"]
+    subgraph SM_AGENT["🌊 @sprint-lead (River) - Scrum Master"]
         direction TB
 
         subgraph COMMANDS["Comandos Disponiveis"]
@@ -145,8 +145,8 @@ flowchart TB
     CLICKUP --> HANDOFF
 
     subgraph COLLABORATION["👥 COLABORACAO"]
-        DEV_AGENT["@dev (Dex)<br/>Recebe stories"]
-        PO_AGENT["@po (Pax)<br/>Valida stories"]
+        DEV_AGENT["@developer (Dex)<br/>Recebe stories"]
+        PO_AGENT["@product-lead (Pax)<br/>Valida stories"]
         DEVOPS_AGENT["@github-devops (Gage)<br/>Push/PR apos conclusao"]
     end
 
@@ -199,7 +199,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    subgraph SM_SCOPE["🌊 @sm - Escopo Local"]
+    subgraph SM_SCOPE["🌊 @sprint-lead - Escopo Local"]
         CREATE_BRANCH["git checkout -b<br/>feature/X.Y-story-name"]
         LIST_BRANCH["git branch<br/>Listar branches"]
         SWITCH_BRANCH["git checkout<br/>Trocar branch"]
@@ -242,17 +242,17 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph UPSTREAM["⬆️ UPSTREAM - Fornece para @sm"]
-        PM_UP["@pm (Morgan)<br/>Cria estrutura de epics"]
-        PO_UP["@po (Pax)<br/>Prioriza backlog"]
+        PM_UP["@project-lead (Morgan)<br/>Cria estrutura de epics"]
+        PO_UP["@product-lead (Pax)<br/>Prioriza backlog"]
         ANALYST_UP["@analyst (Sage)<br/>Pesquisa e insights"]
     end
 
-    SM_CENTRAL["🌊 @sm (River)<br/>Scrum Master"]
+    SM_CENTRAL["🌊 @sprint-lead (River)<br/>Scrum Master"]
 
     subgraph DOWNSTREAM["⬇️ DOWNSTREAM - Recebe de @sm"]
-        DEV_DOWN["@dev (Dex)<br/>Implementa stories"]
-        PO_DOWN["@po (Pax)<br/>Valida stories"]
-        QA_DOWN["@qa (Quinn)<br/>Risk profiling"]
+        DEV_DOWN["@developer (Dex)<br/>Implementa stories"]
+        PO_DOWN["@product-lead (Pax)<br/>Valida stories"]
+        QA_DOWN["@quality-gate (Quinn)<br/>Risk profiling"]
     end
 
     subgraph LATERAL["↔️ LATERAL - Coordena com @sm"]
@@ -279,16 +279,16 @@ flowchart TB
 
 | Agente | Relacionamento | Acao |
 |--------|----------------|------|
-| **@pm (Morgan)** | Recebe de | Epic structure, PRD shardado |
-| **@po (Pax)** | Coordena com | Backlog prioritization, sprint planning |
-| **@dev (Dex)** | Entrega para | Stories prontas para implementacao |
-| **@qa (Quinn)** | Solicita | Risk profiling para stories |
+| **@project-lead (Morgan)** | Recebe de | Epic structure, PRD shardado |
+| **@product-lead (Pax)** | Coordena com | Backlog prioritization, sprint planning |
+| **@developer (Dex)** | Entrega para | Stories prontas para implementacao |
+| **@quality-gate (Quinn)** | Solicita | Risk profiling para stories |
 | **@github-devops (Gage)** | Delega para | Push branches, criar PRs |
 | **@analyst (Sage)** | Consulta | Pesquisa e insights tecnicos |
 
 ### Delegacao para @github-devops
 
-O @sm gerencia APENAS operacoes locais de Git. Para operacoes remotas, **sempre** delegar para @github-devops:
+O @sprint-lead gerencia APENAS operacoes locais de Git. Para operacoes remotas, **sempre** delegar para @github-devops:
 
 **Operacoes Permitidas para @sm:**
 - `git checkout -b feature/X.Y-story-name` - Criar branch local
@@ -326,7 +326,7 @@ qaLocation: docs/qa
 
 # CodeRabbit Integration
 coderabbit_integration:
-  enabled: true  # Controla se @sm popula secao CodeRabbit nas stories
+  enabled: true  # Controla se @sprint-lead popula secao CodeRabbit nas stories
 ```
 
 ### Dependencies do Agente
@@ -369,7 +369,7 @@ dependencies:
 ### Colaboracao com Outros Agentes
 
 1. **Respeite limites** - Nao implemente codigo, nao crie PRs
-2. **Documente handoffs** - Deixe claro o que @dev precisa fazer
+2. **Documente handoffs** - Deixe claro o que @developer precisa fazer
 3. **Coordene com @po** - Backlog prioritization antes de criar stories
 4. **Notifique @github-devops** - Quando story estiver pronta para push
 
@@ -444,7 +444,7 @@ dependencies:
 ## Referencias
 
 ### Arquivos do Agente
-- [Agent: sm.md](.sinapse-ai/development/agents/sm.md)
+- [Agent: sm.md](.sinapse-ai/development/agents/sprint-lead.md)
 - [Task: create-next-story.md](.sinapse-ai/development/tasks/create-next-story.md)
 - [Task: execute-checklist.md](.sinapse-ai/development/tasks/execute-checklist.md)
 - [Task: correct-course.md](.sinapse-ai/development/tasks/correct-course.md)
@@ -471,14 +471,14 @@ dependencies:
 
 | Aspecto | Detalhes |
 |---------|----------|
-| **Agente** | @sm (River) - Scrum Master |
+| **Agente** | @sprint-lead (River) - Scrum Master |
 | **Arquetipo** | Facilitator (Pisces) |
 | **Total de Task Files** | 6 tasks core |
 | **Comandos Disponiveis** | 7 (`*draft`, `*story-checklist`, `*correct-course`, `*help`, `*guide`, `*session-info`, `*exit`) |
 | **Checklists Utilizados** | 4 checklists |
 | **Workflows que Usam @sm** | 7 workflows |
 | **Ferramentas** | git (local), clickup, context7 |
-| **Colabora com** | @pm, @po, @dev, @qa, @github-devops, @analyst |
+| **Colabora com** | @project-lead, @product-lead, @developer, @quality-gate, @github-devops, @analyst |
 | **Delega para** | @github-devops (operacoes remotas) |
 | **Responsabilidade Principal** | Criacao de stories detalhadas e acionaveis |
 
@@ -488,7 +488,7 @@ dependencies:
 
 | Data | Autor | Descricao |
 |------|-------|-----------|
-| 2026-02-04 | @dev | Documento inicial criado |
+| 2026-02-04 | @developer | Documento inicial criado |
 
 ---
 

@@ -17,7 +17,7 @@
  *
  * @module core/orchestration/master-orchestrator
  * @version 1.0.0
- * @author @dev (Dex)
+ * @author @developer (Dex)
  */
 
 const fs = require('fs-extra');

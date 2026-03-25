@@ -630,9 +630,9 @@ consumption:
     3. Find exemplar patterns to follow
     4. Know which tests to create
 
-  by_agent: dev
+  by_agent: developer
   usage: |
-    @dev reads context before implementing to:
+    @developer reads context before implementing to:
     1. Follow naming conventions
     2. Use correct import styles
     3. Know where to place new files

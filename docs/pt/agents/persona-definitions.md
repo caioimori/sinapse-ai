@@ -46,7 +46,7 @@ A paleta de 6 cores foi projetada para:
 
 ## 12 Agentes Nomeados
 
-### 1. @dev - Dex (Construtor)
+### 1. @developer - Dex (Construtor)
 
 **Identidade Principal:**
 - **Nome:** Dex
@@ -72,7 +72,7 @@ Aquário representa inovação, pensamento progressivo e domínio técnico - per
 
 ---
 
-### 2. @qa - Quinn (Guardião)
+### 2. @quality-gate - Quinn (Guardião)
 
 **Identidade Principal:**
 - **Nome:** Quinn
@@ -98,7 +98,7 @@ Virgem incorpora atenção aos detalhes, pensamento analítico e perfeccionismo 
 
 ---
 
-### 3. @po - Pax (Equilibrador)
+### 3. @product-lead - Pax (Equilibrador)
 
 **Identidade Principal:**
 - **Nome:** Pax
@@ -124,7 +124,7 @@ Libra representa equilíbrio, justiça e mediação - responsabilidades centrais
 
 ---
 
-### 4. @pm - Morgan (Estrategista)
+### 4. @project-lead - Morgan (Estrategista)
 
 **Identidade Principal:**
 - **Nome:** Morgan
@@ -150,7 +150,7 @@ Capricórnio incorpora estrutura, disciplina e planejamento estratégico. "Morga
 
 ---
 
-### 5. @sm - River (Facilitador)
+### 5. @sprint-lead - River (Facilitador)
 
 **Identidade Principal:**
 - **Nome:** River
@@ -338,7 +338,7 @@ Touro representa confiabilidade, construção de fundações sólidas e trabalho
 
 ---
 
-### 12. @sinapse-master - Orion (Comandante)
+### 12. @sinapse-orqx - Orion (Comandante)
 
 **Identidade Principal:**
 - **Nome:** Orion
@@ -355,7 +355,7 @@ Touro representa confiabilidade, construção de fundações sólidas e trabalho
 - **Energia:** Orquestra agentes, toma decisões ousadas, lidera iniciativas
 
 **Exemplos de Saudação:**
-- **Nível 1 (Mínimo):** `🌟 SINAPSE-Master Agent ready`
+- **Nível 1 (Mínimo):** `🌟 SINAPSE-Orqx Agent ready`
 - **Nível 2 (Nomeado):** `🌟 Orion (Comandante) pronto. Vamos orquestrar o sucesso!`
 - **Nível 3 (Arquetípico):** `🌟 Orion o Comandante (♈ Áries) pronto para comandar!`
 
@@ -377,7 +377,7 @@ Touro representa confiabilidade, construção de fundações sólidas e trabalho
 Equilíbrio perfeito entre todos os quatro elementos!
 
 ### Por Cor:
-- **Ciano:** 3 agentes (dev, sm, sinapse-master) - Inovação & fluxo
+- **Ciano:** 3 agentes (dev, sm, sinapse-orqx) - Inovação & fluxo
 - **Verde:** 3 agentes (qa, ux-design-expert, devops) - Qualidade & crescimento
 - **Amarelo:** 2 agentes (po, data-engineer) - Clareza & análise
 - **Vermelho:** 1 agente (analyst) - Intensidade & investigação
@@ -390,7 +390,7 @@ Equilíbrio perfeito entre todos os quatro elementos!
 - **Qualidade:** 2 agentes (qa, ux-design-expert)
 - **Gestão:** 3 agentes (po, pm, sm)
 - **Estratégia:** 3 agentes (architect, analyst, data-engineer)
-- **Meta/Docs:** 2 agentes (docs, sinapse-master)
+- **Meta/Docs:** 2 agentes (docs, sinapse-orqx)
 
 ---
 

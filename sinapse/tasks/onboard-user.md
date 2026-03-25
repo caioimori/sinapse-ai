@@ -1,6 +1,6 @@
 ---
 task: onboard-user
-responsavel: "@sinapse-master"
+responsavel: "@sinapse-orqx"
 responsavel_type: Agent
 atomic_layer: Task
 elicit: true
@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-sinapse
-- **Agent:** Imperator (sinapse-master)
+- **Agent:** Imperator (sinapse-orqx)
 - **Complexity:** Simple
 
 ## Objetivo

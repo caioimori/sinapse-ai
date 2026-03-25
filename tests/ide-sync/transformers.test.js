@@ -10,14 +10,14 @@ const antigravity = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/t
 describe('IDE Transformers', () => {
   // Sample agent data for testing
   const sampleAgent = {
-    path: '/path/to/dev.md',
-    filename: 'dev.md',
-    id: 'dev',
-    raw: '# dev\n\n```yaml\nagent:\n  name: Dex\n  id: dev\n```\n\nContent',
+    path: '/path/to/developer.md',
+    filename: 'developer.md',
+    id: 'developer',
+    raw: '# developer\n\n```yaml\nagent:\n  name: Dex\n  id: developer\n```\n\nContent',
     yaml: {
       agent: {
         name: 'Dex',
-        id: 'dev',
+        id: 'developer',
         title: 'Full Stack Developer',
         icon: '💻',
         whenToUse: 'Use for code implementation',
@@ -38,7 +38,7 @@ describe('IDE Transformers', () => {
     },
     agent: {
       name: 'Dex',
-      id: 'dev',
+      id: 'developer',
       title: 'Full Stack Developer',
       icon: '💻',
       whenToUse: 'Use for code implementation',
@@ -58,7 +58,7 @@ describe('IDE Transformers', () => {
     },
     sections: {
       quickCommands: '- `*help` - Show help',
-      collaboration: 'Works with @qa and @sm',
+      collaboration: 'Works with @quality-gate and @sprint-lead',
       guide: 'Developer guide content',
     },
     error: null,
@@ -67,13 +67,13 @@ describe('IDE Transformers', () => {
   describe('claude-code transformer', () => {
     it('should return raw content (identity transform)', () => {
       const result = claudeCode.transform(sampleAgent);
-      expect(result).toContain('# dev');
+      expect(result).toContain('# developer');
       expect(result).toContain('```yaml');
     });
 
     it('should add sync footer if not present', () => {
       const result = claudeCode.transform(sampleAgent);
-      expect(result).toContain('Synced from .sinapse-ai/development/agents/dev.md');
+      expect(result).toContain('Synced from .sinapse-ai/development/agents/developer.md');
     });
 
     it('should not duplicate sync footer', () => {
@@ -81,7 +81,7 @@ describe('IDE Transformers', () => {
         ...sampleAgent,
         raw:
           sampleAgent.raw +
-          '\n---\n*SINAPSE Agent - Synced from .sinapse-ai/development/agents/dev.md*',
+          '\n---\n*SINAPSE Agent - Synced from .sinapse-ai/development/agents/developer.md*',
       };
       const result = claudeCode.transform(agentWithFooter);
       const footerCount = (result.match(/Synced from/g) || []).length;
@@ -89,7 +89,7 @@ describe('IDE Transformers', () => {
     });
 
     it('should return correct filename', () => {
-      expect(claudeCode.getFilename(sampleAgent)).toBe('dev.md');
+      expect(claudeCode.getFilename(sampleAgent)).toBe('developer.md');
     });
 
     it('should have correct format identifier', () => {
@@ -107,7 +107,7 @@ describe('IDE Transformers', () => {
   describe('cursor transformer', () => {
     it('should generate condensed format', () => {
       const result = cursor.transform(sampleAgent);
-      expect(result).toContain('# Dex (@dev)');
+      expect(result).toContain('# Dex (@developer)');
       expect(result).toContain('💻 **Full Stack Developer**');
       expect(result).toContain('Builder');
     });
@@ -127,7 +127,7 @@ describe('IDE Transformers', () => {
     it('should include collaboration section', () => {
       const result = cursor.transform(sampleAgent);
       expect(result).toContain('## Collaboration');
-      expect(result).toContain('@qa');
+      expect(result).toContain('@quality-gate');
     });
 
     it('should add sync footer', () => {
@@ -143,7 +143,7 @@ describe('IDE Transformers', () => {
   describe('antigravity transformer', () => {
     it('should generate cursor-style format', () => {
       const result = antigravity.transform(sampleAgent);
-      expect(result).toContain('# Dex (@dev)');
+      expect(result).toContain('# Dex (@developer)');
       expect(result).toContain('💻 **Full Stack Developer**');
     });
 
@@ -189,7 +189,7 @@ describe('IDE Transformers', () => {
     it('should return valid filename for all', () => {
       for (const transformer of transformers) {
         const filename = transformer.getFilename(sampleAgent);
-        expect(filename).toBe('dev.md');
+        expect(filename).toBe('developer.md');
       }
     });
 
