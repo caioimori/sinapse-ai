@@ -21,6 +21,7 @@
     ".claude/rules/",
     ".claude/hooks/",
     "squads/squad-*/**",
+    "squads/claude-code-mastery/**",
     "squads/sinapse/**",
     "sinapse/**",
     "install-squads.sh",

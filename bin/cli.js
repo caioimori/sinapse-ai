@@ -48,10 +48,13 @@ function getSquads(baseDir) {
   const squads = [];
   let entries;
   try {
-    entries = fs.readdirSync(baseDir).filter(d =>
-      d.startsWith('squad-') && !d.includes('.deprecated') &&
-      fs.statSync(path.join(baseDir, d)).isDirectory()
-    );
+    entries = fs.readdirSync(baseDir).filter(d => {
+      if (d.includes('.deprecated') || d.startsWith('.')) return false;
+      const dirPath = path.join(baseDir, d);
+      if (!fs.statSync(dirPath).isDirectory()) return false;
+      // Include squad-* dirs OR any dir with a squad.yaml manifest
+      return d.startsWith('squad-') || fs.existsSync(path.join(dirPath, 'squad.yaml'));
+    });
   } catch { return squads; }
 
   for (const dir of entries) {
@@ -124,10 +127,58 @@ function toForwardSlash(p) {
   return p.replace(/\\/g, '/');
 }
 
+/**
+ * Prompt user to select LLM(s) — inquirer checkbox with readline fallback.
+ * @returns {Promise<string>} 'claude-code' | 'codex' | 'both'
+ */
+async function promptLlmChoice() {
+  try {
+    const inquirer = require('inquirer');
+    const { llms } = await inquirer.prompt([{
+      type: 'checkbox',
+      name: 'llms',
+      message: 'Escolha sua LLM (espaco seleciona, enter confirma):',
+      choices: [
+        { name: 'Claude Code (Recomendado)', value: 'claude-code', checked: true },
+        { name: 'Codex CLI', value: 'codex' },
+      ],
+    }]);
+    if (llms.length === 0) return 'claude-code'; // default if none selected
+    if (llms.length === 2) return 'both';
+    return llms[0];
+  } catch {
+    // Fallback: readline numbered choice
+    const readline = require('readline');
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    return new Promise((resolve) => {
+      console.log(`${CYAN}  Escolha sua LLM:${NC}`);
+      console.log(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
+      console.log(`    ${GREEN}2${NC}) Codex CLI`);
+      console.log(`    ${GREEN}3${NC}) Ambos`);
+      console.log('');
+      rl.question(`  ${BOLD}Opcao [1/2/3]:${NC} `, (answer) => {
+        rl.close();
+        const choice = (answer || '1').trim();
+        if (choice === '2') resolve('codex');
+        else if (choice === '3') resolve('both');
+        else resolve('claude-code');
+      });
+    });
+  }
+}
+
 // ── Global Install ───────────────────────────────────────────────────────────
 
-function cmdInstallGlobal() {
+async function cmdInstallGlobal() {
   header();
+  console.log(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+  console.log(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
+  console.log('');
+
+  // LLM selection (inquirer checkbox with readline fallback)
+  const llmChoice = await promptLlmChoice();
+
+  console.log('');
   console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
 
   // Validate package — squads live in squads/ subdirectory
@@ -164,7 +215,7 @@ function cmdInstallGlobal() {
     console.log(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
   }
 
-  // Phase 2: Generate global commands
+  // Phase 2: Generate orqx commands
   console.log(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
 
@@ -175,23 +226,10 @@ function cmdInstallGlobal() {
     }
   } catch {}
 
-  let cmdCount = 0;
   const sinapseBase = toForwardSlash(SINAPSE_HOME);
+  const writtenAgents = new Set();
 
-  // Also copy framework agent commands (sinapse-orqx, dev, qa, etc.) if they exist in package
-  const frameworkCmdsDir = path.join(ROOT, '.claude', 'commands', 'SINAPSE', 'agents');
-  if (fs.existsSync(frameworkCmdsDir)) {
-    for (const f of fs.readdirSync(frameworkCmdsDir).filter(f => f.endsWith('.md'))) {
-      let content = fs.readFileSync(path.join(frameworkCmdsDir, f), 'utf8');
-      // Update paths to point to ~/.sinapse/
-      content = content.replace(/\.sinapse-core\//g, `${sinapseBase}/.sinapse-core/`);
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, f), content);
-      cmdCount++;
-    }
-    console.log(`  ${GREEN}OK${NC} Framework agents — ${cmdCount} agents`);
-  }
-
-  // Generate commands only for orqx agents (user-facing orchestrators)
+  // Generate commands for orqx agents from squads (dynamic paths, always correct)
   for (const squad of squads) {
     const squadPath = `${sinapseBase}/${squad.name}`;
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
@@ -203,7 +241,7 @@ function cmdInstallGlobal() {
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
       fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`), cmdContent);
-      cmdCount++;
+      writtenAgents.add(file);
     }
   }
 
@@ -212,17 +250,36 @@ function cmdInstallGlobal() {
     const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
     if (fs.existsSync(masterAgentsDir)) {
       for (const file of fs.readdirSync(masterAgentsDir).filter(f => f.endsWith('.md'))) {
+        if (writtenAgents.has(file)) continue;
         const agentId = file.replace('.md', '');
-        if (fs.existsSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`))) continue; // skip if framework version exists
         const meta = extractAgentMeta(path.join(masterAgentsDir, file));
         const squadPath = `${sinapseBase}/sinapse`;
         const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file);
         fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`), cmdContent);
-        cmdCount++;
+        writtenAgents.add(file);
       }
     }
   }
-  console.log(`  ${GREEN}OK${NC} ${cmdCount} total command files`);
+  console.log(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
+
+  // Phase 2b: Install global agents based on LLM choice
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
+    fs.mkdirSync(globalAgentsDir, { recursive: true });
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
+    }
+    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
+  }
+
+  if (llmChoice === 'codex' || llmChoice === 'both') {
+    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
+    fs.mkdirSync(codexAgentsDir, { recursive: true });
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
+    }
+    console.log(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
+  }
 
   // Phase 3: Generate squad-awareness.md
   console.log(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
@@ -243,7 +300,8 @@ function cmdInstallGlobal() {
     installedAt: new Date().toISOString(),
     squads: squads.length,
     agents: totalAgents,
-    commands: cmdCount,
+    commands: writtenAgents.size,
+    llm: llmChoice,
     platform: process.platform,
   };
   fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
@@ -252,23 +310,23 @@ function cmdInstallGlobal() {
   console.log(`\n${CYAN}Verification:${NC}`);
   verifyInstall();
 
-  // Success
+  // Success message
+  let startCmd;
+  if (llmChoice === 'codex') startCmd = `Run ${CYAN}codex${NC} to start`;
+  else if (llmChoice === 'both') startCmd = `Run ${CYAN}sinapse${NC} or ${CYAN}codex${NC} to start`;
+  else startCmd = `Run ${CYAN}sinapse${NC} to start Claude Code with all agents`;
+
   console.log('');
   console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   console.log(`${GREEN}  Sinapse installed successfully!${NC}`);
   console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   console.log('');
-  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${cmdCount} agents${NC} | All under ${CYAN}/SINAPSE:agents:*${NC}`);
-  console.log('');
-  console.log(`  ${BOLD}Next steps:${NC}`);
-  console.log(`    1. Restart your terminal (for PATH changes)`);
-  console.log(`    2. Run ${CYAN}sinapse${NC} to start Claude Code with all agents`);
-  console.log(`    3. Or: ${CYAN}claude --add-dir ~/.sinapse${NC}`);
+  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
+  console.log(`  ${startCmd}`);
   console.log('');
   console.log(`  ${BOLD}Try an agent:${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
   console.log(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
-  console.log(`    ${CYAN}/SINAPSE:agents:dev${NC}`);
   console.log('');
 }
 
@@ -565,23 +623,8 @@ async function cmdUpdateGlobal() {
   console.log(`${DIM}  Vamos atualizar seu SINAPSE AI para a v${VERSION}.${NC}`);
   console.log('');
 
-  // LLM selection (re-choose on every update)
-  const readline = require('readline');
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  const llmChoice = await new Promise((resolve) => {
-    console.log(`${CYAN}  Escolha sua LLM:${NC}`);
-    console.log(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
-    console.log(`    ${GREEN}2${NC}) Codex CLI`);
-    console.log(`    ${GREEN}3${NC}) Ambos`);
-    console.log('');
-    rl.question(`  ${BOLD}Opcao [1/2/3]:${NC} `, (answer) => {
-      rl.close();
-      const choice = (answer || '1').trim();
-      if (choice === '2') resolve('codex');
-      else if (choice === '3') resolve('both');
-      else resolve('claude-code');
-    });
-  });
+  // LLM selection (inquirer checkbox with readline fallback)
+  const llmChoice = await promptLlmChoice();
 
   console.log('');
   console.log(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
@@ -614,19 +657,9 @@ async function cmdUpdateGlobal() {
   fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
 
   const sinapseBase = toForwardSlash(SINAPSE_HOME);
-  let cmdCount = 0;
+  const writtenAgents = new Set();
 
-  const frameworkCmdsDir = path.join(ROOT, '.claude', 'commands', 'SINAPSE', 'agents');
-  if (fs.existsSync(frameworkCmdsDir)) {
-    for (const f of fs.readdirSync(frameworkCmdsDir).filter(f => f.endsWith('.md'))) {
-      let content = fs.readFileSync(path.join(frameworkCmdsDir, f), 'utf8');
-      content = content.replace(/\.sinapse-core\//g, `${sinapseBase}/.sinapse-core/`);
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, f), content);
-      cmdCount++;
-    }
-  }
-
-  // Count total agents and generate orqx commands (skip if already copied from framework)
+  // Generate commands for orqx agents from squads (dynamic paths)
   let totalAgents = 0;
   for (const squad of squads) {
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
@@ -635,21 +668,29 @@ async function cmdUpdateGlobal() {
     totalAgents += allAgents.length;
     const orqxAgents = allAgents.filter(f => f.includes('-orqx'));
     for (const file of orqxAgents) {
-      const destPath = path.join(CLAUDE_COMMANDS_DIR, file);
-      if (fs.existsSync(destPath)) continue; // skip if already from framework
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const squadPath = `${sinapseBase}/${squad.name}`;
-      fs.writeFileSync(destPath, generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file));
-      cmdCount++;
+      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, file), generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file));
+      writtenAgents.add(file);
     }
   }
-  // Also count sinapse/ orqx agents
+
+  // Generate commands for sinapse/ orqx squad agents
   const sinapseAgentsDir = path.join(SINAPSE_HOME, 'sinapse', 'agents');
   if (fs.existsSync(sinapseAgentsDir)) {
-    totalAgents += fs.readdirSync(sinapseAgentsDir).filter(f => f.endsWith('.md')).length;
+    const masterAgents = fs.readdirSync(sinapseAgentsDir).filter(f => f.endsWith('.md'));
+    totalAgents += masterAgents.length;
+    for (const file of masterAgents) {
+      if (writtenAgents.has(file)) continue;
+      const agentId = file.replace('.md', '');
+      const meta = extractAgentMeta(path.join(sinapseAgentsDir, file));
+      const squadPath = `${sinapseBase}/sinapse`;
+      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, file), generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file));
+      writtenAgents.add(file);
+    }
   }
-  console.log(`  ${GREEN}OK${NC} ${cmdCount} command files (${totalAgents} agents total)`);
+  console.log(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
@@ -659,7 +700,7 @@ async function cmdUpdateGlobal() {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${cmdCount})`);
+    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
   }
 
   if (llmChoice === 'codex' || llmChoice === 'both') {
@@ -669,7 +710,7 @@ async function cmdUpdateGlobal() {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Codex global agents (${cmdCount})`);
+    console.log(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
   }
 
   // Phase 3: Regenerate awareness
@@ -682,7 +723,7 @@ async function cmdUpdateGlobal() {
   const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
   meta.updatedAt = new Date().toISOString();
   meta.squads = squads.length;
-  meta.commands = cmdCount;
+  meta.commands = writtenAgents.size;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
 
   let startCmd;
@@ -695,7 +736,7 @@ async function cmdUpdateGlobal() {
   console.log(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
   console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   console.log('');
-  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${cmdCount} orqx commands${NC}`);
+  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
   console.log(`  ${startCmd}`);
   console.log('');
 }
@@ -858,7 +899,7 @@ const command = args[0] || 'help';
 const isLocal = args.includes('--local');
 
 switch (command) {
-  case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal(); break;
+  case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal().catch(e => { console.error(e.message); process.exit(1); }); break;
   case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
   case 'uninstall': cmdUninstall(); break;
   case 'list':     cmdList(); break;
