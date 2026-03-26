@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-26T01:08:50.259Z'
+  lastUpdated: '2026-03-26T01:11:42.123Z'
   entityCount: 738
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -10526,10 +10526,15 @@ entities:
       path: .sinapse-ai/core/doctor/checks/core-config.js
       layer: L1
       type: module
-      purpose: Entity at .sinapse-ai\core\doctor\checks\core-config.js
+      purpose: Core MCPs - no API keys required
       keywords:
         - core
         - config
+        - boundary
+        - mapping
+        - framework-project
+        - separation
+        - (epic
       usedBy: []
       dependencies: []
       externalDeps: []
@@ -10539,8 +10544,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:5424528eefbc2f19213b30d00dcd96128acefdbb289c25712be844f0fbddb963
-      lastVerified: '2026-03-26T01:08:50.098Z'
+      checksum: sha256:1dfc00cfc993bacb17f683aacdf898b856744a33a76183adab2d1c1896be8b31
+      lastVerified: '2026-03-26T01:11:42.117Z'
     entity-registry:
       path: .sinapse-ai/core/doctor/checks/entity-registry.js
       layer: L1
@@ -15839,7 +15844,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:5cbd1c4458fb3e485872635e2210b3d3406c22381185039ef112db8912887201
-      lastVerified: '2026-03-26T01:08:50.212Z'
+      lastVerified: '2026-03-26T01:11:42.120Z'
     validate-paths:
       path: .sinapse-ai/infrastructure/scripts/validate-paths.js
       layer: L2
@@ -15957,12 +15962,9 @@ entities:
       path: .sinapse-ai/infrastructure/scripts/codex-skills-sync/index.js
       layer: L2
       type: script
-      purpose: ${description}
+      purpose: Entity at .sinapse-ai\infrastructure\scripts\ide-sync\index.js
       keywords:
         - index
-        - sinapse
-        - ${title}
-        - activator
       usedBy:
         - creation-helper
         - dev-helper
@@ -15973,6 +15975,9 @@ entities:
         - validate
       dependencies:
         - agent-parser
+        - redirect-generator
+        - validator
+        - claude-code
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -15980,8 +15985,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cea7c65175ebf5f1f7d47d0dc536e5889e420e6c137a41acd522be8b69fe6327
-      lastVerified: '2026-03-26T01:08:50.214Z'
+      checksum: sha256:6898ff5fc8b07e3527a145b6979c201b366587d9274cef938293b10dfecd14c4
+      lastVerified: '2026-03-26T01:11:42.118Z'
     validate:
       path: .sinapse-ai/infrastructure/scripts/codex-skills-sync/validate.js
       layer: L2
@@ -16194,6 +16199,7 @@ entities:
         - redirect
         - generator
       usedBy:
+        - index
         - validator
       dependencies: []
       externalDeps: []
@@ -16212,7 +16218,8 @@ entities:
       purpose: '{'
       keywords:
         - validator
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - redirect-generator
       externalDeps: []
@@ -16253,7 +16260,8 @@ entities:
       keywords:
         - claude
         - code
-      usedBy: []
+      usedBy:
+        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
