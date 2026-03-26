@@ -17,7 +17,7 @@
  * - Do NOT call this file directly
  *
  * Supported IDEs (4 total):
- * - Claude Code, Cursor, Gemini CLI, GitHub Copilot
+ * - Claude Code, Codex CLI
  */
 
 const path = require('path');
@@ -408,12 +408,9 @@ async function main() {
           value: 'claude',
           checked: true,
         },
-        { name: '  Cursor ' + chalk.blue('(v4)'), value: 'cursor' },
-        { name: '  Gemini CLI ' + chalk.blue('(v4)'), value: 'gemini' },
-        { name: '  GitHub Copilot ' + chalk.blue('(v4)'), value: 'github-copilot' },
         {
-          name: '  AntiGravity ' + chalk.blue('(v4)') + chalk.gray(' - Google AI IDE'),
-          value: 'antigravity',
+          name: '  Codex CLI ' + chalk.blue('(v4)') + chalk.gray(' - OpenAI'),
+          value: 'codex',
         },
         new inquirer.Separator(chalk.gray('─'.repeat(40))),
         { name: '  Skip IDE setup', value: 'none' },
@@ -432,8 +429,8 @@ async function main() {
   if (ides.includes('claude')) {
     cliToolsToCheck.push({ ide: 'claude', command: 'claude', name: 'Claude Code', npm: '@anthropic-ai/claude-code' });
   }
-  if (ides.includes('gemini')) {
-    cliToolsToCheck.push({ ide: 'gemini', command: 'gemini', name: 'Gemini CLI', npm: '@google/gemini-cli' });
+  if (ides.includes('codex')) {
+    cliToolsToCheck.push({ ide: 'codex', command: 'codex', name: 'Codex CLI', npm: '@openai/codex' });
   }
 
   if (cliToolsToCheck.length > 0) {
@@ -486,8 +483,8 @@ async function main() {
             // Show post-install instructions
             if (tool.ide === 'claude') {
               console.log(chalk.gray('  Run `claude` to authenticate with your Anthropic account'));
-            } else if (tool.ide === 'gemini') {
-              console.log(chalk.gray('  Run `gemini` to authenticate with your Google account'));
+            } else if (tool.ide === 'codex') {
+              console.log(chalk.gray('  Run `codex` to authenticate with your OpenAI account'));
             }
           } catch (error) {
             console.log(chalk.red('✗') + ` Failed to install ${tool.name}: ${error.message}`);
@@ -556,10 +553,7 @@ async function main() {
 
     const ideRulesMap = {
       claude: { source: 'claude-rules.md', target: '.claude/CLAUDE.md' },
-      cursor: { source: 'cursor-rules.md', target: '.cursor/rules.md' },
-      gemini: { source: 'gemini-rules.md', target: '.gemini/rules.md' },
-      'github-copilot': { source: 'copilot-rules.md', target: '.github/chatmodes/sinapse-agent.md' },
-      antigravity: { source: 'antigravity-rules.md', target: '.antigravity/rules.md' },
+      codex: { source: 'codex-rules.md', target: '.codex/instructions.md' },
     };
 
     // Step 1: Copy basic IDE rules files
@@ -652,105 +646,18 @@ See .sinapse-ai/user-guide.md for complete documentation.
       await setupGlobalStatuslineLegacy(sourceCoreDir);
     }
 
-    // Step 3: Install SINAPSE CORE agents for Cursor
-    // v4: Agents are in development/ module
+    // Step 3: Install SINAPSE CORE agents for Codex CLI
     // INS-2 Performance: Uses cached agent files list
-    if (ides.includes('cursor')) {
-      const cursorRulesTarget = path.join(
+    if (ides.includes('codex')) {
+      const codexAgentsTarget = path.join(
         context.projectRoot,
-        '.cursor',
-        'rules',
-        'SINAPSE',
+        '.codex',
         'agents'
       );
 
       if (cachedAgentFiles.length > 0) {
-        await fse.ensureDir(cursorRulesTarget);
-
-        // Convert .md files to .mdc for Cursor (using cached list)
-        for (const agentFile of cachedAgentFiles) {
-          const sourcePath = path.join(coreAgentsSource, agentFile);
-          const targetFileName = agentFile.replace('.md', '.mdc');
-          const targetPath = path.join(cursorRulesTarget, targetFileName);
-          await fse.copy(sourcePath, targetPath);
-        }
-
-        console.log(
-          chalk.green('✓') + ` Cursor CORE rules installed (${cachedAgentFiles.length} agents)`
-        );
-      }
-
-      // Create SINAPSE README for Cursor
-      const cursorReadme = path.join(context.projectRoot, '.cursor', 'rules', 'SINAPSE', 'README.md');
-      await fse.ensureDir(path.dirname(cursorReadme));
-      await fse.writeFile(
-        cursorReadme,
-        `# SINAPSE Core Rules
-
-This directory contains the core SINAPSE-FullStack agent rules for Cursor.
-
-## Usage
-These rules are automatically loaded by Cursor to provide agent-specific context.
-
-## Documentation
-See .sinapse-ai/user-guide.md for complete documentation.
-`
-      );
-    }
-
-    // Step 4: Install SINAPSE CORE agents for other IDEs (Gemini, AntiGravity)
-    // v4: Agents are in development/ module
-    // INS-2 Performance: Uses cached agent files list
-    const otherIdeInstalls = ['gemini', 'antigravity'];
-    for (const ide of otherIdeInstalls) {
-      if (ides.includes(ide)) {
-        const ideRulesDir = ide === 'gemini' ? '.gemini' : `.${ide}`;
-        const ideRulesTarget = path.join(
-          context.projectRoot,
-          ideRulesDir,
-          'rules',
-          'SINAPSE',
-          'agents'
-        );
-
-        if (cachedAgentFiles.length > 0) {
-          await fse.ensureDir(ideRulesTarget);
-
-          // Copy agent files (using cached list)
-          for (const agentFile of cachedAgentFiles) {
-            const sourcePath = path.join(coreAgentsSource, agentFile);
-            const targetPath = path.join(ideRulesTarget, agentFile);
-            await fse.copy(sourcePath, targetPath);
-          }
-
-          const ideName = ide.charAt(0).toUpperCase() + ide.slice(1);
-          console.log(
-            chalk.green('✓') + ` ${ideName} CORE agents installed (${cachedAgentFiles.length} agents)`
-          );
-        }
-      }
-    }
-
-    // Step 5: Install GitHub Copilot chat modes
-    // v4: Agents are in development/ module
-    // INS-2 Performance: Uses cached agent files list
-    if (ides.includes('github-copilot')) {
-      const copilotModesDir = path.join(context.projectRoot, '.github', 'chatmodes');
-
-      if (cachedAgentFiles.length > 0) {
-        await fse.ensureDir(copilotModesDir);
-
-        // Copy agent files (using cached list)
-        for (const agentFile of cachedAgentFiles) {
-          const sourcePath = path.join(coreAgentsSource, agentFile);
-          const agentName = agentFile.replace('.md', '');
-          const targetPath = path.join(copilotModesDir, `sinapse-${agentName}.md`);
-          await fse.copy(sourcePath, targetPath);
-        }
-
-        console.log(
-          chalk.green('✓') + ` GitHub Copilot chat modes installed (${cachedAgentFiles.length} modes)`
-        );
+        await fse.copy(coreAgentsSource, codexAgentsTarget);
+        console.log(chalk.green('✓') + ` Codex CLI CORE agents installed (${cachedAgentFiles.length} agents)`);
       }
     }
   }
@@ -842,7 +749,7 @@ See .sinapse-ai/user-guide.md for complete documentation.
       for (const squad of selectedSquads) {
         const targetSquad = path.join(targetSquadsDir, squad);
 
-        // INS-2 Performance: Cache squad file lists once per squad (used by Claude, Cursor, etc.)
+        // INS-2 Performance: Cache squad file lists once per squad
         const squadAgentsSource = path.join(targetSquad, 'agents');
         const squadTasksSource = path.join(targetSquad, 'tasks');
         const squadReadmeSource = path.join(targetSquad, 'README.md');
@@ -880,35 +787,6 @@ See .sinapse-ai/user-guide.md for complete documentation.
           }
         }
 
-        // Install squad agents for Cursor
-        if (ides.includes('cursor') && squadAgentFiles.length > 0) {
-          const cursorSquadTarget = path.join(
-            context.projectRoot,
-            '.cursor',
-            'rules',
-            squad,
-            'agents'
-          );
-          await fse.ensureDir(cursorSquadTarget);
-
-          // Convert .md files to .mdc for Cursor (using cached list)
-          for (const agentFile of squadAgentFiles) {
-            const sourcePath = path.join(squadAgentsSource, agentFile);
-            const targetFileName = agentFile.replace('.md', '.mdc');
-            const targetPath = path.join(cursorSquadTarget, targetFileName);
-            await fse.copy(sourcePath, targetPath);
-          }
-
-          console.log(chalk.green('  ✓') + ` Cursor ${squad} rules (${squadAgentFiles.length} agents)`);
-
-          // Copy README for Cursor (using cached check)
-          if (hasSquadReadme) {
-            await fse.copy(
-              squadReadmeSource,
-              path.join(context.projectRoot, '.cursor', 'rules', squad, 'README.md')
-            );
-          }
-        }
       }
     }
   }
@@ -1000,36 +878,10 @@ See .sinapse-ai/user-guide.md for complete documentation.
     }
   }
 
-  if (ides.includes('cursor')) {
-    console.log('  ' + chalk.dim('.cursor/'));
-    console.log('    ' + chalk.dim('├─ rules.md') + '         - Main configuration');
-    console.log('    ' + chalk.dim('└─ rules/'));
-    console.log('      ' + chalk.dim('  ├─ SINAPSE/') + '         - Core agent rules');
-    if (selectedSquads && selectedSquads.length > 0) {
-      selectedSquads.forEach((squad) => {
-        console.log('      ' + chalk.dim(`  └─ ${squad}/`) + '     - Squad rules');
-      });
-    }
-  }
-
-  // Show other IDE installations
-  const otherInstalledIdes = ['gemini', 'antigravity'].filter((ide) =>
-    ides.includes(ide)
-  );
-  for (const ide of otherInstalledIdes) {
-    const ideDir = ide === 'gemini' ? '.gemini' : `.${ide}`;
-    console.log(
-      '  ' +
-        chalk.dim(`${ideDir}/`) +
-        '           - ' +
-        ide.charAt(0).toUpperCase() +
-        ide.slice(1) +
-        ' configuration'
-    );
-  }
-
-  if (ides.includes('github-copilot')) {
-    console.log('  ' + chalk.dim('.github/chatmodes/') + '   - GitHub Copilot agent modes');
+  if (ides.includes('codex')) {
+    console.log('  ' + chalk.dim('.codex/'));
+    console.log('    ' + chalk.dim('├─ instructions.md') + '  - Main configuration');
+    console.log('    ' + chalk.dim('└─ agents/') + '          - Agent definitions');
   }
 
   console.log('');
@@ -1041,27 +893,10 @@ See .sinapse-ai/user-guide.md for complete documentation.
     console.log('    • Browse: .claude/commands/SINAPSE/agents/ for all available agents');
   }
 
-  if (ides.includes('cursor')) {
-    console.log('  ' + chalk.yellow('Cursor:'));
-    console.log('    • Agent rules auto-loaded from .cursor/rules/');
-    console.log('    • Use @agent-name to activate agents in chat');
-  }
-
-  if (ides.includes('gemini')) {
-    console.log('  ' + chalk.yellow('Gemini CLI:'));
-    console.log('    • Include agent context in your prompts');
-  }
-
-  if (ides.includes('github-copilot')) {
-    console.log('  ' + chalk.yellow('GitHub Copilot:'));
-    console.log('    • Open Chat view and select Agent mode');
-    console.log('    • Requires VS Code 1.101+ with chat.agent.enabled: true');
-  }
-
-  if (ides.includes('antigravity')) {
-    console.log('  ' + chalk.yellow('AntiGravity:'));
-    console.log('    • Use Workspace Rules to activate agents');
-    console.log('    • Browse: .antigravity/rules/SINAPSE/agents/ for all available agents');
+  if (ides.includes('codex')) {
+    console.log('  ' + chalk.yellow('Codex CLI:'));
+    console.log('    • Use /skills to list all available agents');
+    console.log('    • Activate with sinapse-<agent-name> (e.g. sinapse-dev)');
   }
 
   console.log('  ' + chalk.yellow('General:'));

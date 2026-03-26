@@ -352,9 +352,8 @@ async function generateCoreConfigYAML(projectPath, wizardState) {
  */
 function getIDEConfigFile(ideKey) {
   const ideConfigMap = {
-    cursor: '.cursorrules',
+    codex: '.codex/instructions.md',
     zed: '.zed/settings.json',
-    antigravity: '.antigravity.yaml',
     continue: '.continue/config.json',
   };
 

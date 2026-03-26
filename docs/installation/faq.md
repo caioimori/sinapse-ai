@@ -75,11 +75,11 @@ npx sinapse-ai install
 The installer will:
 
 - Create `.sinapse-ai/` directory (framework files)
-- Create IDE configuration (`.claude/`, `.cursor/`, etc.)
+- Create IDE configuration (`.claude/`, etc.)
 - NOT modify your existing source code
 - NOT overwrite existing documentation unless you choose to
 
-**Important:** If you have an existing `.claude/` or `.cursor/` directory, the installer will ask before modifying.
+**Important:** If you have an existing `.claude/` directory, the installer will ask before modifying.
 
 ---
 
@@ -118,9 +118,6 @@ your-project/
 │
 ├── .claude/                    # Claude Code (if selected)
 │   └── commands/SINAPSE/agents/   # Agent slash commands
-│
-├── .cursor/                    # Cursor (if selected)
-│   └── rules/                  # Agent rules
 │
 ├── docs/                       # Documentation structure
 │   ├── stories/                # Development stories
@@ -223,7 +220,7 @@ mv .sinapse-ai.backup .sinapse-ai
 npx sinapse-ai install
 
 # Package for offline use
-tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/ .cursor/
+tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/
 ```
 
 **On air-gapped machine:**
@@ -254,7 +251,7 @@ tar -xzvf sinapse-offline.tar.gz
    # Install and package
    npx sinapse-ai install
    cd your-project
-   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ .cursor/ docs/
+   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ docs/
    ```
 
 2. **Transfer the archive** via USB, secure transfer, etc.
@@ -276,14 +273,10 @@ tar -xzvf sinapse-offline.tar.gz
 
 **Answer:**
 
-| IDE                | Status       | Agent Activation    |
-| ------------------ | ------------ | ------------------- |
-| **Claude Code**    | Full Support | `/dev`, `/qa`, etc. |
-| **Cursor**         | Full Support | `@dev`, `@qa`, etc. |
-| **Gemini CLI**     | Full Support | Mention in prompt   |
-| **GitHub Copilot** | Full Support | Chat modes          |
-
-**Adding support for a new IDE:** Open a GitHub issue with the IDE's agent/rules specification.
+| IDE             | Status       | Agent Activation    |
+| --------------- | ------------ | ------------------- |
+| **Claude Code** | Full Support | `/dev`, `/qa`, etc. |
+| **Codex CLI**   | Limited      | `/skills` flow      |
 
 ---
 
@@ -291,23 +284,7 @@ tar -xzvf sinapse-offline.tar.gz
 
 **Answer:** Yes! Select multiple IDEs during installation:
 
-**Interactive:**
-
-```
-? Which IDE(s) do you want to configure?
-❯ ◉ Cursor
-  ◉ Claude Code
-```
-
-**Command line:**
-
-```bash
-```
-
-Each IDE gets its own configuration directory:
-
-- `.cursor/rules/` for Cursor
-- `.claude/commands/` for Claude Code
+The installer configures supported IDEs automatically. Claude Code uses `.claude/commands/` for agent configuration.
 
 ---
 
@@ -323,7 +300,7 @@ git clone your-repo
 cd your-repo
 
 # Optionally configure their preferred IDE
-npx sinapse-ai install --ide cursor
+npx sinapse-ai install
 ```
 
 If `.sinapse-ai/` is not committed:

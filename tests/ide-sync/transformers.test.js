@@ -4,8 +4,6 @@
  */
 
 const claudeCode = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code');
-const cursor = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/cursor');
-const antigravity = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/antigravity');
 
 describe('IDE Transformers', () => {
   // Sample agent data for testing
@@ -104,67 +102,8 @@ describe('IDE Transformers', () => {
     });
   });
 
-  describe('cursor transformer', () => {
-    it('should generate condensed format', () => {
-      const result = cursor.transform(sampleAgent);
-      expect(result).toContain('# Dex (@developer)');
-      expect(result).toContain('💻 **Full Stack Developer**');
-      expect(result).toContain('Builder');
-    });
-
-    it('should include whenToUse', () => {
-      const result = cursor.transform(sampleAgent);
-      expect(result).toContain('Use for code implementation');
-    });
-
-    it('should include Quick Commands section', () => {
-      const result = cursor.transform(sampleAgent);
-      expect(result).toContain('## Quick Commands');
-      expect(result).toContain('*help');
-      expect(result).toContain('*develop');
-    });
-
-    it('should include collaboration section', () => {
-      const result = cursor.transform(sampleAgent);
-      expect(result).toContain('## Collaboration');
-      expect(result).toContain('@quality-gate');
-    });
-
-    it('should add sync footer', () => {
-      const result = cursor.transform(sampleAgent);
-      expect(result).toContain('Synced from');
-    });
-
-    it('should have correct format identifier', () => {
-      expect(cursor.format).toBe('condensed-rules');
-    });
-  });
-
-  describe('antigravity transformer', () => {
-    it('should generate cursor-style format', () => {
-      const result = antigravity.transform(sampleAgent);
-      expect(result).toContain('# Dex (@developer)');
-      expect(result).toContain('💻 **Full Stack Developer**');
-    });
-
-    it('should include Quick Commands', () => {
-      const result = antigravity.transform(sampleAgent);
-      expect(result).toContain('## Quick Commands');
-    });
-
-    it('should include All Commands if more than quick+key', () => {
-      const result = antigravity.transform(sampleAgent);
-      expect(result).toContain('## All Commands');
-      expect(result).toContain('*debug');
-    });
-
-    it('should have correct format identifier', () => {
-      expect(antigravity.format).toBe('cursor-style');
-    });
-  });
-
   describe('all transformers', () => {
-    const transformers = [claudeCode, cursor, antigravity];
+    const transformers = [claudeCode];
 
     it('should handle agent with minimal data', () => {
       const minimal = {

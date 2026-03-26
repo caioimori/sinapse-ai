@@ -76,12 +76,10 @@ npx sinapse-ai install --force-upgrade
 
 ## Supported IDEs
 
-| IDE            | Agent Activation    |
-| -------------- | ------------------- |
-| Claude Code    | `/dev`, `/qa`, etc. |
-| Cursor         | `@dev`, `@qa`, etc. |
-| Gemini CLI     | Mention in prompt   |
-| GitHub Copilot | Chat modes          |
+| IDE         | Agent Activation    |
+| ----------- | ------------------- |
+| Claude Code | `/dev`, `/qa`, etc. |
+| Codex CLI   | `/skills` flow      |
 
 ---
 

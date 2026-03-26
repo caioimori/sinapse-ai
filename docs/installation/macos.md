@@ -74,26 +74,16 @@ The installer automatically:
 - ✅ Detects macOS and applies platform-specific configurations
 - ✅ Creates necessary directories with proper permissions
 - ✅ Configures IDE paths for macOS locations:
-  - Cursor: `~/Library/Application Support/Cursor/`
   - Claude: `~/.claude/`
 - ✅ Sets up shell scripts with Unix line endings
 - ✅ Handles case-sensitive filesystems properly
 
 ## IDE-Specific Setup
 
-### Cursor
-
-1. IDE rules are installed to `.cursor/rules/`
-2. Keyboard shortcut: `Cmd+L` to open chat
-3. Use `@agent-name` to activate agents
-
 ### Claude Code
 
 1. Commands are installed to `.claude/commands/SINAPSE/`
 2. Use `/agent-name` to activate agents
-
-
-2. Use `@agent-name` to activate agents
 
 ## Troubleshooting
 

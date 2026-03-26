@@ -23,7 +23,7 @@ SINAPSE AI is not another chatbot. It is an orchestration system where each agen
 - **174 specialized agents** with their own knowledge bases
 - **Complete workflows** for planning, development, QA and deploy
 - **Story-Driven Development** with automatic progress tracking
-- **Multi-IDE support**: Claude Code, Codex CLI, Cursor, Gemini CLI
+- **Multi-IDE support**: Claude Code and Codex CLI
 
 ### Architecture: CLI First
 

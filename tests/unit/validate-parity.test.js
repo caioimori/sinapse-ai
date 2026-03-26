@@ -18,11 +18,7 @@ describe('validate-parity', () => {
         '| IDE/CLI | Overall Status |',
         '| --- | --- |',
         '| Claude Code | Works |',
-        '| Gemini CLI | Works |',
-        '| Codex CLI | Limited |',
-        '| Cursor | Limited |',
-        '| GitHub Copilot | Limited |',
-        '| AntiGravity | Limited |',
+        '| Codex CLI | Works |',
       ].join('\n'),
       'utf8',
     );
@@ -35,11 +31,7 @@ describe('validate-parity', () => {
       global_required_checks: ['paths'],
       ide_matrix: [
         { ide: 'claude-code', display_name: 'Claude Code', expected_status: 'Works', required_checks: ['claude-sync', 'claude-integration'] },
-        { ide: 'gemini', display_name: 'Gemini CLI', expected_status: 'Works', required_checks: ['gemini-sync', 'gemini-integration'] },
-        { ide: 'codex', display_name: 'Codex CLI', expected_status: 'Limited', required_checks: ['codex-sync', 'codex-integration', 'codex-skills'] },
-        { ide: 'cursor', display_name: 'Cursor', expected_status: 'Limited', required_checks: ['cursor-sync'] },
-        { ide: 'github-copilot', display_name: 'GitHub Copilot', expected_status: 'Limited', required_checks: ['github-copilot-sync'] },
-        { ide: 'antigravity', display_name: 'AntiGravity', expected_status: 'Limited', required_checks: ['antigravity-sync'] },
+        { ide: 'codex', display_name: 'Codex CLI', expected_status: 'Works', required_checks: ['codex-sync', 'codex-integration', 'codex-skills'] },
       ],
     };
   }
@@ -53,7 +45,6 @@ describe('validate-parity', () => {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
         validateCodexIntegration: () => ok,
-        validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
@@ -61,7 +52,7 @@ describe('validate-parity', () => {
     );
 
     expect(result.ok).toBe(true);
-    expect(result.checks).toHaveLength(11);
+    expect(result.checks).toHaveLength(6);
     expect(result.checks.every((c) => c.ok)).toBe(true);
     expect(result.contractViolations).toHaveLength(0);
   });
@@ -80,7 +71,6 @@ describe('validate-parity', () => {
             ? { ok: false, errors: ['broken codex integration'], warnings: [] }
             : { ok: true, errors: [], warnings: [] };
         },
-        validateGeminiIntegration: () => ({ ok: true, errors: [], warnings: [] }),
         validateCodexSkills: () => ({ ok: true, errors: [], warnings: [] }),
         validatePaths: () => ({ ok: true, errors: [], warnings: [] }),
         loadCompatibilityContract: () => buildMockContract(),
@@ -103,7 +93,6 @@ describe('validate-parity', () => {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
         validateCodexIntegration: () => ok,
-        validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
@@ -116,15 +105,16 @@ describe('validate-parity', () => {
 
   it('generates diff between contract versions', () => {
     const previous = buildMockContract();
-    const current = buildMockContract();
-    current.release = 'SINAPSE 4.1.0';
-    current.global_required_checks = ['paths', 'codex-skills'];
-    current.ide_matrix = current.ide_matrix.map((ide) => {
+    // Make previous codex status different so diff detects a change
+    previous.ide_matrix = previous.ide_matrix.map((ide) => {
       if (ide.ide === 'codex') {
-        return { ...ide, expected_status: 'Works' };
+        return { ...ide, expected_status: 'Limited' };
       }
       return ide;
     });
+    const current = buildMockContract();
+    current.release = 'SINAPSE 4.1.0';
+    current.global_required_checks = ['paths', 'codex-skills'];
 
     const diff = diffCompatibilityContracts(current, previous);
 
@@ -144,7 +134,6 @@ describe('validate-parity', () => {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
         validateCodexIntegration: () => ok,
-        validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
         loadCompatibilityContract: (contractPath) => {

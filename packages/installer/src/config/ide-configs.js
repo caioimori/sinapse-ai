@@ -25,13 +25,9 @@ const path = require('path');
 /**
  * IDE Configuration Metadata
  *
- * SINAPSE v4 supports 6 main IDEs:
+ * SINAPSE v4 supports 2 main IDEs:
  * - Claude Code (Anthropic's official CLI) - Recommended
  * - Codex CLI (OpenAI coding CLI)
- * - Gemini CLI (Google AI coding CLI)
- * - Cursor (AI-first code editor)
- * - GitHub Copilot (GitHub's AI pair programmer)
- * - AntiGravity (Google agentic platform)
  */
 const IDE_CONFIGS = {
   'claude-code': {
@@ -47,54 +43,12 @@ const IDE_CONFIGS = {
   codex: {
     name: 'Codex CLI',
     description: '',
-    configFile: 'AGENTS.md',
+    configFile: '.codex/instructions.md',
     template: 'ide-rules/codex-rules.md',
-    requiresDirectory: false,
+    requiresDirectory: true,
     format: 'text',
     recommended: true,
     agentFolder: path.join('.codex', 'agents'),
-  },
-  gemini: {
-    name: 'Gemini CLI',
-    description: '',
-    configFile: path.join('.gemini', 'rules.md'),
-    template: 'ide-rules/gemini-rules.md',
-    requiresDirectory: true,
-    format: 'text',
-    agentFolder: path.join('.gemini', 'rules', 'SINAPSE', 'agents'),
-  },
-  cursor: {
-    name: 'Cursor',
-    description: '',
-    configFile: path.join('.cursor', 'rules.md'),
-    template: 'ide-rules/cursor-rules.md',
-    requiresDirectory: true,
-    format: 'text',
-    agentFolder: path.join('.cursor', 'rules'),
-  },
-  'github-copilot': {
-    name: 'GitHub Copilot',
-    description: '',
-    configFile: path.join('.github', 'copilot-instructions.md'),
-    template: 'ide-rules/copilot-rules.md',
-    requiresDirectory: true,
-    format: 'text',
-    agentFolder: path.join('.github', 'agents'),
-  },
-  antigravity: {
-    name: 'AntiGravity',
-    description: '',
-    configFile: path.join('.antigravity', 'rules.md'),
-    template: 'ide-rules/antigravity-rules.md',
-    requiresDirectory: true,
-    format: 'text',
-    agentFolder: path.join('.agent', 'workflows'),
-    specialConfig: {
-      type: 'antigravity',
-      configJsonPath: path.join('.antigravity', 'antigravity.json'),
-      workflowsFolder: path.join('.agent', 'workflows'),
-      agentsFolder: path.join('.antigravity', 'agents'),
-    },
   },
 };
 

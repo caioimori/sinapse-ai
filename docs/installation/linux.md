@@ -181,7 +181,6 @@ The installer automatically:
 - ✅ Detects your Linux distribution and applies optimizations
 - ✅ Creates necessary directories with proper Unix permissions (755/644)
 - ✅ Configures IDE paths for Linux:
-  - Cursor: `~/.config/Cursor/`
   - Claude: `~/.claude/`
 - ✅ Sets up shell scripts with Unix line endings (LF)
 - ✅ Respects XDG Base Directory specification
@@ -190,20 +189,6 @@ The installer automatically:
 ---
 
 ## IDE-Specific Setup
-
-### Cursor
-
-1. Install Cursor: Download from [cursor.sh](https://cursor.sh/)
-
-   ```bash
-   # AppImage method
-   chmod +x cursor-*.AppImage
-   ./cursor-*.AppImage
-   ```
-
-2. IDE rules are installed to `.cursor/rules/`
-3. Keyboard shortcut: `Ctrl+L` to open chat
-4. Use `@agent-name` to activate agents
 
 ### Claude Code (CLI)
 
@@ -215,14 +200,6 @@ The installer automatically:
 
 2. Commands are installed to `.claude/commands/SINAPSE/`
 3. Use `/agent-name` to activate agents
-
-
-3. Use `@agent-name` to activate agents
-
-### VS Code (with Continue extension)
-
-1. Install Continue extension
-2. Configure SINAPSE rules in `.continue/`
 
 ---
 

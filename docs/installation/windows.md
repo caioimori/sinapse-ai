@@ -156,7 +156,6 @@ The installer automatically:
 - ✅ Detects Windows and applies platform-specific configurations
 - ✅ Creates necessary directories with proper permissions
 - ✅ Configures IDE paths for Windows locations:
-  - Cursor: `%APPDATA%\Cursor\`
   - Claude: `%USERPROFILE%\.claude\`
 - ✅ Handles Windows path separators (backslashes)
 - ✅ Configures line endings correctly (CRLF for batch, LF for scripts)
@@ -165,14 +164,6 @@ The installer automatically:
 ---
 
 ## IDE-Specific Setup
-
-### Cursor
-
-1. Download from [cursor.sh](https://cursor.sh/)
-2. Run the installer
-3. IDE rules are installed to `.cursor\rules\`
-4. Keyboard shortcut: `Ctrl+L` to open chat
-5. Use `@agent-name` to activate agents
 
 ### Claude Code (CLI)
 
@@ -184,15 +175,6 @@ The installer automatically:
 
 2. Commands are installed to `.claude\commands\SINAPSE\`
 3. Use `/agent-name` to activate agents
-
-
-2. Run the installer
-4. Use `@agent-name` to activate agents
-
-### VS Code
-
-1. Install Continue extension from marketplace
-2. SINAPSE can integrate via `.continue\` configuration
 
 ---
 

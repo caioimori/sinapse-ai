@@ -547,15 +547,12 @@ nvm use 16
    ```bash
    # Claude Code
    ls .claude/commands/SINAPSE/agents/
-
-   # Cursor
-   ls .cursor/rules/
    ```
 
 3. Check IDE settings allow custom commands
-4. Re-run installation for specific IDE:
+4. Re-run installation:
    ```bash
-   npx sinapse-ai install --ide claude-code
+   npx sinapse-ai install
    ```
 
 ---
@@ -567,9 +564,8 @@ nvm use 16
 **Solution:**
 
 1. Check IDE version is compatible
-2. For Cursor: Ensure files have `.mdc` extension
-3. For Claude Code: Files should be in `.claude/commands/`
-4. Restart IDE after installation
+2. For Claude Code: Files should be in `.claude/commands/`
+3. Restart IDE after installation
 
 ---
 
@@ -690,7 +686,7 @@ ls -la .sinapse-ai/
 - OS: [Windows 11 / macOS 14 / Ubuntu 22.04]
 - Node.js version: [output of `node --version`]
 - npm version: [output of `npm --version`]
-- IDE: [Claude Code / Cursor / etc.]
+- IDE: [Claude Code / Codex CLI]
 
 **Steps to Reproduce:**
 1. [First step]

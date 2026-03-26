@@ -44,19 +44,11 @@ squadsTemplateLocation: templates/squad
 mindsLocation: outputs/minds
 ide:
   selected:
-    - vscode
-    - codex
-    - gemini
-    - cursor
     - claude-code
+    - codex
   configs:
-    vscode: true
-    codex: true
-    gemini: true
-    cursor: true
-    zed: false
-    claude-desktop: false
     claude-code: true
+    codex: true
 mcp:
   enabled: true
   configLocation: .claude/mcp.json
@@ -317,22 +309,6 @@ ideSync:
       enabled: true
       path: .codex/agents
       format: full-markdown-yaml
-    gemini:
-      enabled: true
-      path: .gemini/rules/SINAPSE/agents
-      format: full-markdown-yaml
-    github-copilot:
-      enabled: true
-      path: .github/agents
-      format: github-copilot
-    cursor:
-      enabled: true
-      path: .cursor/rules/agents
-      format: condensed-rules
-    antigravity:
-      enabled: true
-      path: .antigravity/rules/agents
-      format: cursor-style
   redirects: {}
   validation:
     strictMode: true

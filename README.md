@@ -23,7 +23,7 @@ O SINAPSE AI nao e mais um chatbot. E um sistema de orquestracao onde cada agent
 - **174 agentes especializados** com knowledge bases proprias
 - **Workflows completos** de planejamento, desenvolvimento, QA e deploy
 - **Story-Driven Development** com rastreamento automatico de progresso
-- **Compatibilidade multi-IDE**: Claude Code, Codex CLI, Cursor, Gemini CLI
+- **Compatibilidade multi-IDE**: Claude Code e Codex CLI
 
 ### Arquitetura: CLI First
 

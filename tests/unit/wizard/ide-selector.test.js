@@ -19,29 +19,29 @@ describe('IDE Selector', () => {
     });
 
     it('should accept single IDE selection', () => {
-      const result = validateIDESelection(['cursor']);
+      const result = validateIDESelection(['claude-code']);
       expect(result).toBe(true);
     });
 
     it('should accept multiple IDE selections', () => {
-      const result = validateIDESelection(['cursor', 'gemini', 'antigravity']);
+      const result = validateIDESelection(['claude-code', 'codex']);
       expect(result).toBe(true);
     });
 
-    it('should accept all 6 IDE selections', () => {
+    it('should accept all IDE selections', () => {
       const allIDEs = getIDEKeys();
       const result = validateIDESelection(allIDEs);
       expect(result).toBe(true);
     });
 
     it('should reject invalid IDE keys', () => {
-      const result = validateIDESelection(['cursor', 'invalid-ide']);
+      const result = validateIDESelection(['claude-code', 'invalid-ide']);
       expect(result).toContain('Invalid IDE selections');
       expect(result).toContain('invalid-ide');
     });
 
     it('should reject non-array input', () => {
-      const result = validateIDESelection('cursor');
+      const result = validateIDESelection('claude-code');
       expect(result).toBe('Invalid selection format');
     });
 
@@ -67,9 +67,9 @@ describe('IDE Selector', () => {
       expect(question).toHaveProperty('validate');
     });
 
-    it('should have 6 IDE choices', () => {
+    it('should have 2 IDE choices', () => {
       const question = getIDESelectionQuestion();
-      expect(question.choices).toHaveLength(6);
+      expect(question.choices).toHaveLength(2);
     });
 
     it('should have valid choice structure', () => {

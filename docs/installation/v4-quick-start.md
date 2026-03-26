@@ -230,7 +230,7 @@ npm cache clean --force
 
 ### Agent not responding
 
-1. Ensure you're in an AI-powered IDE (Cursor, VS Code with Claude, etc.) or Claude Code CLI
+1. Ensure you're in Claude Code CLI or Codex CLI
 2. Check you're using correct activation syntax: `@agent-name`
 3. Verify agent file exists: `ls .sinapse-ai/development/agents/`
 

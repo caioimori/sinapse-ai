@@ -7,10 +7,10 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.0.4
-generated_at: "2026-03-25T18:26:08.764Z"
+version: 7.1.0
+generated_at: "2026-03-26T01:11:41.641Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1090
+file_count: 1082
 files:
   - path: cli/commands/config/index.js
     hash: sha256:66f111eceef0f60fa0a8904add783b615d55b01d5fe36408623c3dd828e702f6
@@ -177,9 +177,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:c73f068e8a3fe02c0e7bb417e2d77f9eabc5f520c4dba090d69c45e213c54315
+    hash: sha256:1dfc00cfc993bacb17f683aacdf898b856744a33a76183adab2d1c1896be8b31
     type: config
-    size: 11044
+    size: 10514
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -1217,9 +1217,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:b7e7ef8e732569ca699e4adf461e0ceb1d1ce844ca75c1282e5a73b5aee2131e
+    hash: sha256:cf399a2353fddcfbb15b2336e548e2f0bf0066da95d76509e389f045ea6dacb3
     type: data
-    size: 519038
+    size: 513853
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -3081,9 +3081,9 @@ files:
     type: script
     size: 5566
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:870939c24c62b5a1d79c2cff6c698f4f9c9acd9c57f215775b1a6af417c0e448
+    hash: sha256:6898ff5fc8b07e3527a145b6979c201b366587d9274cef938293b10dfecd14c4
     type: script
-    size: 14925
+    size: 13160
   - path: infrastructure/scripts/ide-sync/README.md
     hash: sha256:cd353be0899548032cfba541266a247d706356b5b8631e73a7cdc4f43415ba92
     type: script
@@ -3092,22 +3092,10 @@ files:
     hash: sha256:38c04dd71e4ed3e703602e26c3df14835e60cd0c6145f9b5efa275b6863e5c84
     type: script
     size: 4230
-  - path: infrastructure/scripts/ide-sync/transformers/antigravity.js
-    hash: sha256:248d5fc8f6bd607ff9a76bcfb640c9cbc55cf1ba8fc68bbbb6bb9f9ae3e285a0
-    type: script
-    size: 2791
   - path: infrastructure/scripts/ide-sync/transformers/claude-code.js
     hash: sha256:da8d4ce527b04783e8638eea56841d0a93e788f0076f65d069bdda45033758e1
     type: script
     size: 2240
-  - path: infrastructure/scripts/ide-sync/transformers/cursor.js
-    hash: sha256:c0650a30485615ba7b05a5e4e91dbb67626efe5531953e343810e815d793b70b
-    type: script
-    size: 2434
-  - path: infrastructure/scripts/ide-sync/transformers/github-copilot.js
-    hash: sha256:66770317b89e104d695a4276791d7ead9e0922bcdde52446b79148675215ea63
-    type: script
-    size: 5700
   - path: infrastructure/scripts/ide-sync/validator.js
     hash: sha256:356c78125db7f88d14f4e521808e96593d729291c3d7a1c36cb02f78b4aef8fc
     type: script
@@ -3336,18 +3324,14 @@ files:
     hash: sha256:01065d27f1c9e002b3985f1b5090cf123369fcf528012c2ec8c4a02df9b3645e
     type: script
     size: 4127
-  - path: infrastructure/scripts/validate-gemini-integration.js
-    hash: sha256:0c99d62b3fd13343ae3a558df92cd52bf641d60c5119c31839c6c7b4bfd59e1e
-    type: script
-    size: 4855
   - path: infrastructure/scripts/validate-output-pattern.js
     hash: sha256:91111d656e8d7b38a20a1bda753e663b74318f75cdab2025c7e0b84c775fc83d
     type: script
     size: 6692
   - path: infrastructure/scripts/validate-parity.js
-    hash: sha256:f84e1ba2e798b6cb0bd55d5cfd357dcf64acc991c17594d63a25b1442888f8b6
+    hash: sha256:5cbd1c4458fb3e485872635e2210b3d3406c22381185039ef112db8912887201
     type: script
-    size: 12688
+    size: 12121
   - path: infrastructure/scripts/validate-paths.js
     hash: sha256:f657c32be91ed63e0b82d5b134b143d03174622eba60fb4b556adc570b8c7f5a
     type: script
@@ -3844,10 +3828,6 @@ files:
     hash: sha256:499c5dcad3c1300fd91440d6d5f5351fe488348778d256582edc1d4d3f90e919
     type: template
     size: 3691
-  - path: product/templates/ide-rules/antigravity-rules.md
-    hash: sha256:ba650cf57af7f895bf90f9793e86a60d6d77cb168db2ab0f196bfa9001fb930e
-    type: template
-    size: 3121
   - path: product/templates/ide-rules/claude-rules.md
     hash: sha256:161dca71bac7ecf6187232b9964c0889c3728afd2332967640e4eea4631668a2
     type: template
@@ -3856,18 +3836,6 @@ files:
     hash: sha256:601ffec5e24ff5e247c25e4d61728167503722acc817a1b30fbd695182bed1bc
     type: template
     size: 2843
-  - path: product/templates/ide-rules/copilot-rules.md
-    hash: sha256:5e22f4d774cfedf927a7ec79b6020fe4023b4eba6733b66cb6edc7e6a85fbfea
-    type: template
-    size: 3104
-  - path: product/templates/ide-rules/cursor-rules.md
-    hash: sha256:f9993331cb2b05e069cb55945a5519b7b838e7019b07b47df76ebf7f3c2209d0
-    type: template
-    size: 3111
-  - path: product/templates/ide-rules/gemini-rules.md
-    hash: sha256:cef296634e98d1aaa55c3dd1c125496b02627d4e38337ea7031d1725228a32ba
-    type: template
-    size: 2535
   - path: product/templates/index-strategy-tmpl.yaml
     hash: sha256:6db2b40f6eef47f4faa31ce513ee7b0d5f04d9a5e081a72e0cdbad402eb444ae
     type: template
