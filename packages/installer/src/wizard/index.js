@@ -463,16 +463,14 @@ async function runWizard(options = {}) {
       };
     } else {
       // Interactive mode — 2-step flow
-      // Step 1: Language selection
+      // Step 1: Language selection (always ask — improves UX)
       const existingLanguage = await getExistingLanguage();
-      let language;
+      const langQuestion = getLanguageQuestion();
       if (existingLanguage) {
-        language = existingLanguage;
-        console.log(`\n  ${t('languageSkipped')}: ${language === 'pt' ? 'Português' : 'English'}\n`);
-      } else {
-        const langAnswer = await inquirer.prompt([getLanguageQuestion()]);
-        language = langAnswer.language;
+        langQuestion.default = existingLanguage;
       }
+      const langAnswer = await inquirer.prompt([langQuestion]);
+      const language = langAnswer.language;
       setLanguage(language);
 
       // Step 2: LLM selection
