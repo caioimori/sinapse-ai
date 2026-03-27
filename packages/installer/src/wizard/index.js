@@ -1131,6 +1131,30 @@ async function runWizard(options = {}) {
       console.log('Installation may be incomplete. Check logs in .sinapse/ directory.');
     }
 
+    // Chrome Brain: Auto-install browser automation capability
+    if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
+      try {
+        const chromeBrainPath = path.join(__dirname, '..', '..', '..', '..', 'bin', 'modules', 'chrome-brain-installer');
+        const { detectChrome, installScripts, installHooks, installMcp, installKnowledgeBase } = require(chromeBrainPath);
+        const chromePath = detectChrome();
+        if (chromePath) {
+          console.log('\n🧠 Chrome Brain — Installing browser automation...\n');
+          const platform = require(chromeBrainPath).detectPlatform();
+          installScripts(chromePath, platform);
+          installHooks();
+          installMcp(platform);
+          installKnowledgeBase();
+          console.log('\n  ✅ Chrome Brain installed — all agents can now control Chrome\n');
+        } else {
+          console.log('\n⚠️  Chrome not found — Chrome Brain skipped');
+          console.log('   Install Chrome and run `sinapse chrome-brain install` later\n');
+        }
+      } catch (error) {
+        console.log(`\n⚠️  Chrome Brain skipped: ${error.message}`);
+        console.log('   You can install it later with: sinapse chrome-brain install\n');
+      }
+    }
+
     // Apply SINAPSE branding to Claude Code CLI (so both `sinapse` and `claude` show SINAPSE branding)
     if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
       try {
