@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "7.3.3",
+  "version": "7.4.0",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 174 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -28,6 +28,7 @@
     "squads/sinapse/**",
     "sinapse/**",
     "install-squads.sh",
+    "install-chrome-brain.sh",
     "update-squads.sh",
     "pro/license/",
     "pro/squads/",
@@ -49,6 +50,7 @@
     "docs/pt/",
     "docs/zh/",
     "docs/*.md",
+    "CHROME-BRAIN-INSTALL.md",
     "README.md",
     "LICENSE"
   ],

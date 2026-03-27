@@ -280,6 +280,59 @@ async function initializeSinapse(projectRoot, logger, dryRun) {
 }
 
 /**
+ * Install Chrome Brain capability (browser automation for all agents)
+ * @param {InstallLogger} logger - Logger instance
+ * @param {boolean} dryRun - Whether this is a dry run
+ */
+async function installChromeBrainCapability(logger, dryRun) {
+  let chromeBrainModule;
+  try {
+    chromeBrainModule = require('./capabilities/chrome-brain');
+  } catch {
+    // Fallback: try from bin/modules (when running from git repo)
+    try {
+      const altPath = path.join(__dirname, '..', '..', '..', 'bin', 'modules', 'chrome-brain-installer');
+      chromeBrainModule = require(altPath);
+    } catch {
+      logger.warn('Chrome Brain module not available — skipping');
+      return;
+    }
+  }
+
+  const { detectChrome } = chromeBrainModule;
+  const detection = detectChrome();
+  const hasChrome = detection && (detection.found !== undefined ? detection.found : !!detection);
+
+  if (!hasChrome) {
+    logger.warn('Google Chrome not found — Chrome Brain skipped');
+    logger.info('Install Chrome and run `sinapse chrome-brain install` later');
+    return;
+  }
+
+  logger.info('Google Chrome detected — installing Chrome Brain...');
+
+  if (dryRun) {
+    logger.action('Install Chrome Brain (scripts, hooks, MCP, KB)');
+    return;
+  }
+
+  const spinner = ora('Installing Chrome Brain...').start();
+
+  try {
+    if (chromeBrainModule.installChromeBrain) {
+      await chromeBrainModule.installChromeBrain({ quiet: true });
+    } else if (chromeBrainModule.runChromeBrain) {
+      // CLI module fallback
+      await chromeBrainModule.runChromeBrain(['install']);
+    }
+    spinner.succeed('Chrome Brain installed (browser automation for all agents)');
+  } catch (error) {
+    spinner.warn(`Chrome Brain had issues: ${error.message}`);
+    logger.info('Run `sinapse chrome-brain install` manually to retry');
+  }
+}
+
+/**
  * Main installer entry point
  * @param {Object} options - Installation options
  * @param {boolean} options.dryRun - Preview without making changes
@@ -449,7 +502,11 @@ async function runInstaller(options = {}) {
     await initializeSinapse(projectRoot, logger, options.dryRun);
   }
 
-  // Step 6: Run doctor
+  // Step 6: Chrome Brain (Browser Automation Capability)
+  console.log('');
+  await installChromeBrainCapability(logger, options.dryRun);
+
+  // Step 7: Run doctor
   console.log('');
   await runDoctor(projectRoot, logger, options.dryRun);
 
@@ -469,8 +526,9 @@ async function runInstaller(options = {}) {
     console.log(chalk.dim('Next steps:'));
     console.log(chalk.dim('  1. Run `npx sinapse-ai info` to see your configuration'));
     console.log(chalk.dim('  2. Activate an agent with @agent-name (e.g., @developer)'));
+    console.log(chalk.dim('  3. Try: "abre o site google.com" — Chrome Brain auto-activates'));
     if (profile === 'bob') {
-      console.log(chalk.dim('  3. Just talk to Bob - he\'ll orchestrate everything!'));
+      console.log(chalk.dim('  4. Just talk to Bob - he\'ll orchestrate everything!'));
     }
   }
 }

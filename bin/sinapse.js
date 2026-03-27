@@ -85,6 +85,11 @@ VALIDATION:
   sinapse validate --repair --dry-run # Preview repairs
   sinapse validate --detailed         # Show detailed file list
 
+CAPABILITIES:
+  sinapse chrome-brain install              # Install Chrome Brain (browser automation)
+  sinapse chrome-brain uninstall            # Remove Chrome Brain
+  sinapse chrome-brain status               # Check Chrome Brain installation
+
 CONFIGURATION:
   sinapse config show                       # Show resolved configuration
   sinapse config show --debug               # Show with source annotations
@@ -959,6 +964,19 @@ async function main() {
         process.exit(1);
       }
       break;
+
+    case 'chrome-brain': {
+      // Chrome Brain capability management - Story 7.4.1
+      const chromeBrainArgs = args.slice(1);
+      try {
+        const { runChromeBrain } = require('./modules/chrome-brain-installer');
+        await runChromeBrain(chromeBrainArgs);
+      } catch (error) {
+        console.error(`Error in chrome-brain: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+    }
 
     case 'install': {
       // Install in current project with flag support

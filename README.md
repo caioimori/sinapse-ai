@@ -48,7 +48,7 @@ cd seu-projeto && npx sinapse-ai install
 npx sinapse-ai@latest install
 ```
 
-O wizard detecta seu ambiente, configura sua IDE e instala os squads automaticamente.
+O wizard detecta seu ambiente, configura sua IDE, instala os squads e ativa o **Chrome Brain** (browser automation) automaticamente.
 
 ```bash
 # Diagnostico
@@ -88,6 +88,31 @@ Cada squad e uma equipe de agentes especializados com knowledge base, workflows 
 | **claude-code-mastery** | Dominio avancado do Claude Code | 8 |
 
 **Total: 19 squads, 174 agentes especializados**
+
+---
+
+## Chrome Brain — Browser Automation
+
+Todos os agentes do SINAPSE podem controlar o Chrome em tempo real: navegar sites, clonar paginas, preencher formularios, auditar performance e extrair dados.
+
+**Instalado automaticamente** pelo wizard. Zero configuracao manual.
+
+```bash
+# Verificar status
+sinapse chrome-brain status
+
+# Reinstalar/atualizar
+sinapse chrome-brain install
+```
+
+**Como funciona:**
+1. Voce diz: "abre o site google.com"
+2. Chrome Brain auto-ativa (sem comando manual)
+3. Chrome inicia automaticamente na porta 9222
+4. Agente usa 29 tools do Chrome DevTools MCP
+5. Resultado entregue ao squad do dominio
+
+**Suporte:** macOS, Linux, Windows (Git Bash/WSL)
 
 ---
 
@@ -213,6 +238,8 @@ npx sinapse-ai doctor              # Diagnostico
 npx sinapse-ai doctor --fix        # Corrigir problemas
 npx sinapse-ai info                # Info do sistema
 npx sinapse-ai uninstall           # Remover
+sinapse chrome-brain install       # Instalar Chrome Brain
+sinapse chrome-brain status        # Status do Chrome Brain
 ```
 
 ---

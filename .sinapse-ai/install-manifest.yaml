@@ -7,10 +7,10 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.2.0
-generated_at: "2026-03-27T03:02:17.104Z"
+version: 7.4.0
+generated_at: "2026-03-27T07:51:40.731Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1082
+file_count: 1101
 files:
   - path: cli/commands/config/index.js
     hash: sha256:66f111eceef0f60fa0a8904add783b615d55b01d5fe36408623c3dd828e702f6
@@ -1217,9 +1217,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:a6566bf25cc73144d7fde73b13baacc08ed1c23e917eb42463d19cad97a09d4d
+    hash: sha256:5538d259b13b04aa80c0ad5fd7b40c9df047f32d43bf451038aaceaf6f6c1a99
     type: data
-    size: 513853
+    size: 511377
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -2560,6 +2560,82 @@ files:
     hash: sha256:abb8d46dce28abb9cd140931db4283202d7c2b89220c43283c6518813a0911ad
     type: template
     size: 1988
+  - path: development/templates/chrome-brain/knowledge-base/chrome-brain.md
+    hash: sha256:ed47917601edfe48153290ea57b3d367220ceba6b976e7222c2451af6b4a6566
+    type: template
+    size: 5923
+  - path: development/templates/chrome-brain/rules/chrome-brain-autoload.md
+    hash: sha256:a3079e8e30f252f4a0da766b930bccc15d0288c3012482c0ad4901ccba27bc5d
+    type: template
+    size: 1944
+  - path: development/templates/chrome-brain/scripts/chrome-brain-log.sh
+    hash: sha256:d72c54d9b67745fac667f1fb05387f11b9bfc55b8bebb64cca67c9a44171d436
+    type: template
+    size: 2592
+  - path: development/templates/chrome-brain/scripts/chrome-debug.sh
+    hash: sha256:5907538f71757df0954533507e5efac4ebb4c18f92fb93cd305b61fa1c379809
+    type: template
+    size: 7207
+  - path: development/templates/chrome-brain/scripts/chrome-ensure.sh
+    hash: sha256:eab2018b622c8550381c6d4555f4496595859b98401dff63a3036abf8433ebfa
+    type: template
+    size: 6557
+  - path: development/templates/chrome-brain/squad-integrations/squad-animations.md
+    hash: sha256:596de202b6745b48bec2367f0e45788e1f87526b02fe44c9f0d212ff1e90b4c3
+    type: template
+    size: 2385
+  - path: development/templates/chrome-brain/squad-integrations/squad-brand.md
+    hash: sha256:a443cadd2a26d5b42104b652d963d3a91280028040e028ea615f5e65b357e85f
+    type: template
+    size: 1524
+  - path: development/templates/chrome-brain/squad-integrations/squad-claude.md
+    hash: sha256:96574264bde6758ee361372cdf2200ed5849f67ab7e2ac4a11827258058c0a8e
+    type: template
+    size: 2310
+  - path: development/templates/chrome-brain/squad-integrations/squad-cloning.md
+    hash: sha256:5360a6a6450d0c0199f72f2732d7ed8dbed5dc95e40c0aa612a92e11c95cf8db
+    type: template
+    size: 2374
+  - path: development/templates/chrome-brain/squad-integrations/squad-commercial.md
+    hash: sha256:51f67b9da647ad34b80384fc27ecb922caa9505ca514822bc2a3c48742b35ee9
+    type: template
+    size: 1505
+  - path: development/templates/chrome-brain/squad-integrations/squad-content.md
+    hash: sha256:c8b6acc503b81e00634a4f9dab0d04fc612059f1bfb25e06cad3f019d8993ba0
+    type: template
+    size: 1927
+  - path: development/templates/chrome-brain/squad-integrations/squad-copy.md
+    hash: sha256:1df523d5d6d45b03b8bf2eb750efd43dc07f51dfd20ef29014360d8c2822b515
+    type: template
+    size: 1870
+  - path: development/templates/chrome-brain/squad-integrations/squad-cybersecurity.md
+    hash: sha256:d047aceaee0c4982e664ada4ef5762e94b00e6a969fcfa6c102c761416c7e300
+    type: template
+    size: 1524
+  - path: development/templates/chrome-brain/squad-integrations/squad-design.md
+    hash: sha256:fe6e03aec703e0596047f4093ece9a6428c5f2abf8707f095d3593f417f13033
+    type: template
+    size: 2376
+  - path: development/templates/chrome-brain/squad-integrations/squad-growth.md
+    hash: sha256:232314cf5b68f143c8882156119420df4d9cbad45451f615e57e73b63772b43d
+    type: template
+    size: 1958
+  - path: development/templates/chrome-brain/squad-integrations/squad-paidmedia.md
+    hash: sha256:22358b19cd1bdfc33bad208b48e0c4394e5ae5ce15224a962ff5fce93acf8a95
+    type: template
+    size: 2197
+  - path: development/templates/chrome-brain/squad-integrations/squad-product.md
+    hash: sha256:0a5315bc0eb357e116417ca8f8512137bdedcb1bf961f62d491a41690dfbb257
+    type: template
+    size: 1533
+  - path: development/templates/chrome-brain/squad-integrations/squad-research.md
+    hash: sha256:5c8bd62eeafef10528d6128a185ea317d1bc1e45ecc550971c6136f50d57f15f
+    type: template
+    size: 1479
+  - path: development/templates/chrome-brain/squad-integrations/squad-storytelling.md
+    hash: sha256:a76afb13f29e56e84f520b93088195dc75610569e1e72e1867f588e86795a12e
+    type: template
+    size: 1492
   - path: development/templates/code-intel-integration-pattern.md
     hash: sha256:205a68b8473b2b01af18d0146a3221c114ce6c14dd35ba50e47ae8d055186896
     type: template
