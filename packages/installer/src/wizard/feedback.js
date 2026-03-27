@@ -136,14 +136,14 @@ const BANNER = `
 function showWelcome() {
   console.log(colors.primary(BANNER));
   console.log('');
-  console.log(colors.secondary('  Bem-vindo ao SINAPSE AI.'));
-  console.log(colors.secondary('  Seu copiloto de inteligencia artificial.'));
+  console.log(colors.secondary(`  ${t('welcomeMessage')}`));
+  console.log(colors.secondary(`  ${t('welcomeSubtitle')}`));
   console.log('');
-  console.log(colors.tertiary('  17 squads · 151 agentes · 1400+ tasks'));
-  console.log(colors.tertiary('  Tudo que voce precisa para construir,'));
-  console.log(colors.tertiary('  empacotar e distribuir com IA.'));
+  console.log(colors.tertiary('  18 squads · 175 agents · 1,370 tasks'));
+  console.log(colors.tertiary(`  ${t('welcomeDesc1')}`));
+  console.log(colors.tertiary(`  ${t('welcomeDesc2')}`));
   console.log('');
-  console.log(colors.dim('  Preparando sua imersao...'));
+  console.log(colors.dim(`  ${t('welcomePreparing')}`));
   console.log('');
   console.log(colors.dim('═'.repeat(80)));
   console.log('');
@@ -161,19 +161,19 @@ function showCompletion(context = {}) {
 
   let startCommand;
   if (llmValue === 'codex') {
-    startCommand = "Digite 'codex' no terminal para comecar.";
+    startCommand = t('startCommandCodex');
   } else if (llmValue === 'both') {
-    startCommand = "Digite 'sinapse' (Claude) ou 'codex' (Codex) no terminal para comecar.";
+    startCommand = t('startCommandBoth');
   } else {
-    startCommand = "Digite 'sinapse' no terminal para comecar.";
+    startCommand = t('startCommandClaude');
   }
 
   console.log('\n' + headings.divider());
   console.log('');
-  console.log(status.success('SINAPSE AI instalado'));
-  console.log(status.success(`${llmLabel} configurado`));
-  console.log(status.success('151 agentes disponiveis'));
-  console.log(status.success(`Pronto! ${startCommand}`));
+  console.log(status.success(t('completionInstalled')));
+  console.log(status.success(`${llmLabel} ${t('completionConfigured')}`));
+  console.log(status.success(`175 ${t('completionAgents')}`));
+  console.log(status.success(`${t('completionReady')} ${startCommand}`));
   console.log('');
   console.log(headings.divider() + '\n');
 }

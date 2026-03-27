@@ -52,7 +52,22 @@ const TRANSLATIONS = {
     warning: 'Warning',
     skipped: 'Skipped',
 
+    // Welcome
+    welcomeMessage: 'Welcome to SINAPSE AI.',
+    welcomeSubtitle: 'Your AI-powered copilot.',
+    welcomeDesc1: 'Everything you need to build,',
+    welcomeDesc2: 'package and ship with AI.',
+    welcomePreparing: 'Preparing your experience...',
+
     // Completion
+    completionInstalled: 'SINAPSE AI installed',
+    completionConfigured: 'configured',
+    completionAgents: 'agents available',
+    completionReady: 'Ready!',
+    startCommandClaude: "Type 'sinapse' in terminal to start.",
+    startCommandCodex: "Type 'codex' in terminal to start.",
+    startCommandBoth: "Type 'sinapse' (Claude) or 'codex' (Codex) in terminal to start.",
+
     installComplete: 'Installation Complete!',
     readyToUse: 'Your SINAPSE project is ready.',
     nextSteps: 'Next steps:',
@@ -214,7 +229,22 @@ const TRANSLATIONS = {
     warning: 'Aviso',
     skipped: 'Pulado',
 
+    // Welcome
+    welcomeMessage: 'Bem-vindo ao SINAPSE AI.',
+    welcomeSubtitle: 'Seu copiloto de inteligencia artificial.',
+    welcomeDesc1: 'Tudo que voce precisa para construir,',
+    welcomeDesc2: 'empacotar e distribuir com IA.',
+    welcomePreparing: 'Preparando sua imersao...',
+
     // Completion
+    completionInstalled: 'SINAPSE AI instalado',
+    completionConfigured: 'configurado',
+    completionAgents: 'agentes disponiveis',
+    completionReady: 'Pronto!',
+    startCommandClaude: "Digite 'sinapse' no terminal para comecar.",
+    startCommandCodex: "Digite 'codex' no terminal para comecar.",
+    startCommandBoth: "Digite 'sinapse' (Claude) ou 'codex' (Codex) no terminal para comecar.",
+
     installComplete: 'Instalação Completa!',
     readyToUse: 'Seu projeto SINAPSE está pronto.',
     nextSteps: 'Próximos passos:',
