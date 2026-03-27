@@ -22,6 +22,11 @@ const TRANSLATIONS = {
     userProfileSkipped: 'Using existing user profile',
     languageSkipped: 'Using existing language',
 
+    // LLM selection
+    llmQuestion: 'Select your LLM:',
+    llmRecommended: 'Recommended',
+    llmBoth: 'Both',
+
     // Project type
     projectTypeQuestion: 'What type of project are you setting up?',
     greenfield: 'Greenfield',
@@ -178,6 +183,11 @@ const TRANSLATIONS = {
     modoAvancadoHint: 'Para desenvolvedores que querem controle total',
     userProfileSkipped: 'Usando perfil de usuário existente',
     languageSkipped: 'Usando idioma existente',
+
+    // LLM selection
+    llmQuestion: 'Escolha sua LLM:',
+    llmRecommended: 'Recomendado',
+    llmBoth: 'Ambos',
 
     // Project type
     projectTypeQuestion: 'Que tipo de projeto você está configurando?',

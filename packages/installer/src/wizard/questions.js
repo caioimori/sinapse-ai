@@ -61,10 +61,10 @@ function getLLMQuestion() {
   return {
     type: 'list',
     name: 'selectedLLM',
-    message: colors.primary('Select your LLM:'),
+    message: colors.primary(t('llmQuestion')),
     choices: [
       {
-        name: colors.highlight('Claude Code') + colors.dim(' (Recommended)'),
+        name: colors.highlight('Claude Code') + colors.dim(` (${t('llmRecommended')})`),
         value: 'claude-code',
       },
       {
@@ -72,7 +72,7 @@ function getLLMQuestion() {
         value: 'codex',
       },
       {
-        name: 'Both',
+        name: t('llmBoth'),
         value: 'both',
       },
     ],
