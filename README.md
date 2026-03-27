@@ -221,55 +221,71 @@ Use `@squad-creator` ou veja o [Guia de Squads](docs/guides/squads-guide.md).
 
 ## Claude Code vs Codex CLI — Comparativo Completo
 
-O SINAPSE funciona em ambas as IDEs. Claude Code oferece a experiencia completa; Codex CLI suporta o core com algumas diferencas.
+O SINAPSE funciona em ambas as IDEs. Ambas suportam a maioria das funcionalidades com abordagens diferentes.
 
 ### Funcionalidades
 
-| Funcionalidade | Claude Code | Codex CLI |
-|---------------|:-----------:|:---------:|
-| **19 squads com 175 agentes** | SIM | SIM |
-| **Knowledge bases por squad** | SIM | SIM |
-| **Tasks e workflows** | SIM | SIM |
-| **Story-Driven Development** | SIM | SIM |
-| **Agent commands (`*help`, `*task`)** | SIM | SIM |
-| **Squad awareness auto-routing** | SIM | SIM |
-| **Chrome Brain (browser automation)** | SIM | NAO |
-| **Hooks (PreToolUse / PostToolUse)** | SIM | NAO |
-| **MCP servers (Chrome DevTools, etc.)** | SIM | NAO |
-| **Agent handoff protocol** | SIM | NAO |
-| **SYNAPSE context engine** | SIM | NAO |
-| **Multi-model (Claude + outros)** | NAO | SIM |
+| Funcionalidade | Claude Code | Codex CLI | Notas |
+|---------------|:-----------:|:---------:|-------|
+| **19 squads com 175 agentes** | SIM | SIM | Identico em ambas |
+| **Knowledge bases por squad** | SIM | SIM | Identico em ambas |
+| **Tasks e workflows** | SIM | SIM | Identico em ambas |
+| **Story-Driven Development** | SIM | SIM | Identico em ambas |
+| **Agent commands (`*help`, `*task`)** | SIM | SIM | Identico em ambas |
+| **Squad awareness auto-routing** | SIM | SIM | Identico em ambas |
+| **NSN Mode (Never Say Never)** | SIM | SIM | Regra global em ambas |
+| **Chrome Brain (browser automation)** | SIM | SIM | Claude: hooks auto-launch. Codex: via MCP ou chrome-cdp-skill |
+| **MCP servers** | SIM | SIM | Claude: `~/.claude.json`. Codex: `config.toml` ou `codex mcp add` |
+| **Hooks (PreToolUse / PostToolUse)** | SIM | PARCIAL | Codex: so Bash tool, desabilitado no Windows |
+| **Agent handoff protocol** | SIM | SIM | Via instructions + skills em ambas |
+| **SYNAPSE context engine** | SIM | PARCIAL | Codex: via instructions.md + skills (sem regras dinamicas) |
+| **Skills system nativo** | NAO | SIM | Codex tem `$skill-name` com progressive disclosure |
+| **Multi-model (Claude + outros)** | NAO | SIM | Codex suporta qualquer modelo OpenAI |
+| **Subagents paralelos** | SIM | SIM | Codex: max 6 threads configuraveis |
+| **CI/CD non-interactive** | NAO | SIM | Codex: `codex exec` com `--json` |
 
 ### Como Ativar Agentes
 
 | Acao | Claude Code | Codex CLI |
 |------|-------------|-----------|
-| Orquestrador principal | `/SINAPSE:agents:sinapse-orqx` | `/skills` > `sinapse-orqx` |
-| Squad de brand | `@brand-orqx` | `sinapse-brand` |
-| Squad de copy | `@copy-orqx` | `sinapse-copy` |
-| Developer | `@developer` | `sinapse-dev` |
+| Orquestrador principal | `/SINAPSE:agents:sinapse-orqx` | `@sinapse-orqx` ou `$sinapse-orqx` |
+| Squad de brand | `@brand-orqx` | `@brand-orqx` ou `$sinapse-brand` |
+| Squad de copy | `@copy-orqx` | `@copy-orqx` ou `$sinapse-copy` |
+| Developer | `@developer` | `@developer` ou `$sinapse-dev` |
 | Listar agentes | `@sinapse-orqx *help` | `/skills` |
+| Chrome Brain | Auto-ativa por prompt | `codex mcp add chrome-devtools` |
 
 ### Onde Cada IDE Brilha
 
-**Claude Code** — Experiencia maxima:
-- Chrome Brain auto-ativa quando voce pede algo no browser
-- Hooks automatizam pre/pos-acoes em cada tool call
-- MCP servers conectam a ferramentas externas (Chrome, Playwright, EXA)
-- Context engine injeta regras automaticamente por dominio
-- Handoff protocol otimiza troca entre agentes
+**Claude Code** — Experiencia mais integrada:
+- Chrome Brain auto-ativa por hooks (zero configuracao manual)
+- Context engine injeta regras automaticamente por dominio e arquivo
+- Deny/allow rules protegem arquivos deterministicamente
+- Maior ecossistema de MCP servers (Figma, Supabase, Notion, etc.)
 
-**Codex CLI** — Core solido:
-- Todos os squads e agentes funcionam perfeitamente
-- Knowledge bases e tasks identicas
-- Suporta multiplos modelos (nao apenas Claude)
-- Ideal para quem prefere GPT/outros modelos com a orquestracao SINAPSE
+**Codex CLI** — Mais flexivel e extensivel:
+- Skills nativas com `$skill-name` e progressive disclosure
+- Suporta qualquer modelo OpenAI (nao apenas Claude)
+- `codex exec` para automacao CI/CD sem interacao
+- Pode rodar como MCP server (outros agentes invocam Codex)
+- Profiles para alternar configuracoes rapidamente
+- Subagents com max 6 threads paralelos
+
+### Setup Chrome Brain no Codex CLI
+
+```bash
+# Adicionar Chrome DevTools MCP ao Codex
+codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
+
+# OU instalar a skill chrome-cdp (conexao direta, sem Puppeteer)
+# pi install git:github.com/pasky/chrome-cdp-skill@v1.0.1
+```
 
 ### Recomendacao
 
-> Para **maximo potencial**, use **Claude Code** — todas as funcionalidades avancadas (Chrome Brain, hooks, MCP, SYNAPSE engine) so estao disponiveis nessa IDE.
+> **Claude Code** para quem quer a experiencia mais integrada e automatizada — Chrome Brain auto-ativa, hooks rodam sozinhos, context engine injeta regras.
 >
-> Para **flexibilidade de modelo**, use **Codex CLI** — funciona com qualquer LLM e entrega o core completo de squads e agentes.
+> **Codex CLI** para quem quer flexibilidade de modelo, skills nativas, e automacao CI/CD — com setup manual minimo para Chrome Brain.
 
 ---
 
