@@ -175,6 +175,49 @@ async function cmdInstallGlobal() {
   console.log(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
   console.log('');
 
+  // Language selection (always show for UX clarity)
+  let language = 'pt';
+  try {
+    const inquirer = require('inquirer');
+    const langAnswer = await inquirer.prompt([{
+      type: 'list',
+      name: 'language',
+      message: 'Language / Idioma:',
+      choices: [
+        { name: 'Portugues', value: 'pt' },
+        { name: 'English', value: 'en' },
+      ],
+      default: 'pt',
+    }]);
+    language = langAnswer.language;
+  } catch {
+    // Fallback: readline
+    const readline = require('readline');
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    language = await new Promise((resolve) => {
+      console.log(`  ${CYAN}Language / Idioma:${NC}`);
+      console.log(`    ${GREEN}1${NC}) Portugues`);
+      console.log(`    ${GREEN}2${NC}) English`);
+      rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
+        rl.close();
+        resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
+      });
+    });
+  }
+
+  // Save language to ~/.claude/settings.json
+  const claudeSettingsDir = path.join(HOME, '.claude');
+  const claudeSettingsPath = path.join(claudeSettingsDir, 'settings.json');
+  try {
+    fs.mkdirSync(claudeSettingsDir, { recursive: true });
+    let settings = {};
+    if (fs.existsSync(claudeSettingsPath)) {
+      try { settings = JSON.parse(fs.readFileSync(claudeSettingsPath, 'utf8')); } catch { settings = {}; }
+    }
+    settings.language = language === 'pt' ? 'portuguese' : 'english';
+    fs.writeFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
+  } catch { /* non-critical */ }
+
   // LLM selection (inquirer checkbox with readline fallback)
   const llmChoice = await promptLlmChoice();
 
@@ -305,6 +348,27 @@ async function cmdInstallGlobal() {
     platform: process.platform,
   };
   fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
+
+  // Chrome Brain: Auto-install browser automation
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    try {
+      const { detectChrome, detectPlatform, installScripts, installHooks, installMcp, installKnowledgeBase } = require('./modules/chrome-brain-installer');
+      const chromePath = detectChrome();
+      if (chromePath) {
+        console.log(`\n${CYAN}Phase 7:${NC} Chrome Brain (browser automation)`);
+        const platform = detectPlatform();
+        installScripts(chromePath, platform);
+        installHooks();
+        installMcp(platform);
+        installKnowledgeBase();
+        console.log(`  ${GREEN}OK${NC} Chrome Brain installed — all agents can control Chrome`);
+      } else {
+        console.log(`\n${YELLOW}SKIP${NC} Chrome Brain — Chrome not found (install Chrome and run: sinapse chrome-brain install)`);
+      }
+    } catch (error) {
+      console.log(`\n${YELLOW}SKIP${NC} Chrome Brain: ${error.message}`);
+    }
+  }
 
   // Verify
   console.log(`\n${CYAN}Verification:${NC}`);

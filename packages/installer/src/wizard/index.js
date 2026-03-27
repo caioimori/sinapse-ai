@@ -463,18 +463,16 @@ async function runWizard(options = {}) {
       };
     } else {
       // Interactive mode — 2-step flow
-      // Step 1: Language selection (always ask — improves UX)
+      // Step 1: Language + LLM selection (combined prompt — always shown)
       const existingLanguage = await getExistingLanguage();
       const langQuestion = getLanguageQuestion();
       if (existingLanguage) {
         langQuestion.default = existingLanguage;
       }
-      const langAnswer = await inquirer.prompt([langQuestion]);
-      const language = langAnswer.language;
+      const combinedAnswers = await inquirer.prompt([langQuestion, getLLMQuestion()]);
+      const language = combinedAnswers.language;
       setLanguage(language);
-
-      // Step 2: LLM selection
-      const llmAnswer = await inquirer.prompt([getLLMQuestion()]);
+      const llmAnswer = combinedAnswers;
 
       // Derive IDEs from LLM choice
       const selectedIDEs = llmToIDEs(llmAnswer.selectedLLM);
