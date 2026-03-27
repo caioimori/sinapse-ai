@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.1.0
-generated_at: "2026-03-26T05:36:30.119Z"
+version: 7.2.0
+generated_at: "2026-03-27T03:02:17.104Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1082
 files:
@@ -1381,9 +1381,9 @@ files:
     type: agent
     size: 1368
   - path: development/agents/sinapse-orqx.md
-    hash: sha256:c891e20ecba2aadbba81003d365258088a7ea7c71ad1d7ec28836206a0e4bd98
+    hash: sha256:8eae456af41fe407facbd63ce6a9b8613b2da126b8847d74a140496c3cf6dcee
     type: agent
-    size: 19614
+    size: 31330
   - path: development/agents/sprint-lead.md
     hash: sha256:fccb55b79210cc63d7fa0b4e383d06a0dff5c24f1e3b851ab965564e8aef0aa2
     type: agent

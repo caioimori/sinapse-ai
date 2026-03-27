@@ -1123,6 +1123,20 @@ async function runWizard(options = {}) {
       console.log('Installation may be incomplete. Check logs in .sinapse/ directory.');
     }
 
+    // Apply SINAPSE branding to Claude Code CLI (so both `sinapse` and `claude` show SINAPSE branding)
+    if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
+      try {
+        const brandingPatchPath = path.join(__dirname, '..', '..', '..', '..', 'scripts', 'sinapse-patch.js');
+        if (fse.existsSync(brandingPatchPath)) {
+          console.log('\n◆ Applying SINAPSE branding to Claude Code...\n');
+          execSync(`node "${brandingPatchPath}"`, { stdio: 'inherit' });
+        }
+      } catch (error) {
+        console.log(`\n⚠️  Branding patch skipped: ${error.message}`);
+        console.log('   You can apply it later with: sinapse brand\n');
+      }
+    }
+
     // Show completion with LLM label
     showCompletion({ llmLabel: llmLabel(answers.selectedLLM), llmValue: answers.selectedLLM });
 

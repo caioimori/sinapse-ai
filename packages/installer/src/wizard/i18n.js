@@ -324,8 +324,8 @@ const TRANSLATIONS = {
   // es: removed — PT-BR hardcoded as default
 };
 
-// Current language (default: Portuguese)
-let currentLanguage = 'pt';
+// Current language (default: English — worldwide product)
+let currentLanguage = 'en';
 
 /**
  * Set current language
