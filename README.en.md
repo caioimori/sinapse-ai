@@ -194,12 +194,57 @@ Use `@squad-creator` or see the [Squads Guide](docs/guides/squads-guide.md).
 
 ---
 
-## Supported IDEs
+## Claude Code vs Codex CLI — Full Comparison
 
-| IDE | How to activate |
-|-----|----------------|
-| **Claude Code** | `@agent-name` or `/sinapse` |
-| **Codex CLI** | `/skills` > `sinapse-<agent>` or `@agent-name` |
+SINAPSE works on both IDEs. Claude Code delivers the full experience; Codex CLI supports the core with some differences.
+
+### Features
+
+| Feature | Claude Code | Codex CLI |
+|---------|:-----------:|:---------:|
+| **19 squads with 175 agents** | YES | YES |
+| **Knowledge bases per squad** | YES | YES |
+| **Tasks and workflows** | YES | YES |
+| **Story-Driven Development** | YES | YES |
+| **Agent commands (`*help`, `*task`)** | YES | YES |
+| **Squad awareness auto-routing** | YES | YES |
+| **Chrome Brain (browser automation)** | YES | NO |
+| **Hooks (PreToolUse / PostToolUse)** | YES | NO |
+| **MCP servers (Chrome DevTools, etc.)** | YES | NO |
+| **Agent handoff protocol** | YES | NO |
+| **SYNAPSE context engine** | YES | NO |
+| **Multi-model (Claude + others)** | NO | YES |
+
+### How to Activate Agents
+
+| Action | Claude Code | Codex CLI |
+|--------|-------------|-----------|
+| Main orchestrator | `/SINAPSE:agents:sinapse-orqx` | `/skills` > `sinapse-orqx` |
+| Brand squad | `@brand-orqx` | `sinapse-brand` |
+| Copy squad | `@copy-orqx` | `sinapse-copy` |
+| Developer | `@developer` | `sinapse-dev` |
+| List agents | `@sinapse-orqx *help` | `/skills` |
+
+### Where Each IDE Shines
+
+**Claude Code** — Maximum potential:
+- Chrome Brain auto-activates when you request browser actions
+- Hooks automate pre/post-actions on each tool call
+- MCP servers connect to external tools (Chrome, Playwright, EXA)
+- Context engine injects rules automatically by domain
+- Handoff protocol optimizes agent switching
+
+**Codex CLI** — Solid core:
+- All squads and agents work perfectly
+- Identical knowledge bases and tasks
+- Supports multiple models (not just Claude)
+- Ideal for those who prefer GPT/other models with SINAPSE orchestration
+
+### Recommendation
+
+> For **maximum potential**, use **Claude Code** — all advanced features (Chrome Brain, hooks, MCP, SYNAPSE engine) are only available on this IDE.
+>
+> For **model flexibility**, use **Codex CLI** — works with any LLM and delivers the complete core of squads and agents.
 
 ---
 

@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg)](LICENSE)
 
-> **174 agentes de IA. 19 squads especializados. Uma CLI.**
+> **175 agentes de IA. 19 squads especializados. Uma CLI.**
 >
 > O SINAPSE AI e um framework open source que organiza agentes de IA em squads especializados para resolver problemas reais de negocios, marketing, desenvolvimento, copy, design e mais. Funciona direto no seu terminal com Claude Code, Codex CLI ou qualquer IDE compativel.
 
@@ -20,7 +20,7 @@ O SINAPSE AI nao e mais um chatbot. E um sistema de orquestracao onde cada agent
 **O que voce ganha ao instalar:**
 
 - **19 orquestradores (orqx)** prontos para ativar direto no terminal
-- **174 agentes especializados** com knowledge bases proprias
+- **175 agentes especializados** com knowledge bases proprias
 - **Workflows completos** de planejamento, desenvolvimento, QA e deploy
 - **Story-Driven Development** com rastreamento automatico de progresso
 - **Compatibilidade multi-IDE**: Claude Code e Codex CLI
@@ -87,7 +87,7 @@ Cada squad e uma equipe de agentes especializados com knowledge base, workflows 
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 | **claude-code-mastery** | Dominio avancado do Claude Code | 8 |
 
-**Total: 19 squads, 174 agentes especializados**
+**Total: 19 squads, 175 agentes especializados**
 
 ---
 
@@ -219,12 +219,57 @@ Use `@squad-creator` ou veja o [Guia de Squads](docs/guides/squads-guide.md).
 
 ---
 
-## IDEs Suportadas
+## Claude Code vs Codex CLI — Comparativo Completo
 
-| IDE | Como ativar |
-|-----|------------|
-| **Claude Code** | `@agent-name` ou `/sinapse` |
-| **Codex CLI** | `/skills` > `sinapse-<agent>` ou `@agent-name` |
+O SINAPSE funciona em ambas as IDEs. Claude Code oferece a experiencia completa; Codex CLI suporta o core com algumas diferencas.
+
+### Funcionalidades
+
+| Funcionalidade | Claude Code | Codex CLI |
+|---------------|:-----------:|:---------:|
+| **19 squads com 175 agentes** | SIM | SIM |
+| **Knowledge bases por squad** | SIM | SIM |
+| **Tasks e workflows** | SIM | SIM |
+| **Story-Driven Development** | SIM | SIM |
+| **Agent commands (`*help`, `*task`)** | SIM | SIM |
+| **Squad awareness auto-routing** | SIM | SIM |
+| **Chrome Brain (browser automation)** | SIM | NAO |
+| **Hooks (PreToolUse / PostToolUse)** | SIM | NAO |
+| **MCP servers (Chrome DevTools, etc.)** | SIM | NAO |
+| **Agent handoff protocol** | SIM | NAO |
+| **SYNAPSE context engine** | SIM | NAO |
+| **Multi-model (Claude + outros)** | NAO | SIM |
+
+### Como Ativar Agentes
+
+| Acao | Claude Code | Codex CLI |
+|------|-------------|-----------|
+| Orquestrador principal | `/SINAPSE:agents:sinapse-orqx` | `/skills` > `sinapse-orqx` |
+| Squad de brand | `@brand-orqx` | `sinapse-brand` |
+| Squad de copy | `@copy-orqx` | `sinapse-copy` |
+| Developer | `@developer` | `sinapse-dev` |
+| Listar agentes | `@sinapse-orqx *help` | `/skills` |
+
+### Onde Cada IDE Brilha
+
+**Claude Code** — Experiencia maxima:
+- Chrome Brain auto-ativa quando voce pede algo no browser
+- Hooks automatizam pre/pos-acoes em cada tool call
+- MCP servers conectam a ferramentas externas (Chrome, Playwright, EXA)
+- Context engine injeta regras automaticamente por dominio
+- Handoff protocol otimiza troca entre agentes
+
+**Codex CLI** — Core solido:
+- Todos os squads e agentes funcionam perfeitamente
+- Knowledge bases e tasks identicas
+- Suporta multiplos modelos (nao apenas Claude)
+- Ideal para quem prefere GPT/outros modelos com a orquestracao SINAPSE
+
+### Recomendacao
+
+> Para **maximo potencial**, use **Claude Code** — todas as funcionalidades avancadas (Chrome Brain, hooks, MCP, SYNAPSE engine) so estao disponiveis nessa IDE.
+>
+> Para **flexibilidade de modelo**, use **Codex CLI** — funciona com qualquer LLM e entrega o core completo de squads e agentes.
 
 ---
 
