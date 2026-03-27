@@ -442,10 +442,6 @@ async function runWizard(options = {}) {
       showWelcome();
     }
 
-    // Hardcode PT-BR as default language
-    const language = options.language || 'pt';
-    setLanguage(language);
-
     let answers = {};
 
     // Auto-detect project type and tech preset (always)
@@ -454,6 +450,8 @@ async function runWizard(options = {}) {
 
     if (options.quiet) {
       // Quiet mode: Skip all prompts, use defaults
+      const language = options.language || 'en';
+      setLanguage(language);
       answers = {
         language,
         userProfile: 'bob',
@@ -464,10 +462,20 @@ async function runWizard(options = {}) {
         ...options, // Merge any other options
       };
     } else {
-      // Interactive mode — simplified 2-step flow
-      // Step 1: Welcome screen already shown above
+      // Interactive mode — 2-step flow
+      // Step 1: Language selection
+      const existingLanguage = await getExistingLanguage();
+      let language;
+      if (existingLanguage) {
+        language = existingLanguage;
+        console.log(`\n  ${t('languageSkipped')}: ${language === 'pt' ? 'Português' : 'English'}\n`);
+      } else {
+        const langAnswer = await inquirer.prompt([getLanguageQuestion()]);
+        language = langAnswer.language;
+      }
+      setLanguage(language);
 
-      // Step 2: Single question — LLM selection
+      // Step 2: LLM selection
       const llmAnswer = await inquirer.prompt([getLLMQuestion()]);
 
       // Derive IDEs from LLM choice
