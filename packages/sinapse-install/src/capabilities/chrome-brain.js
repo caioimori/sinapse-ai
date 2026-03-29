@@ -347,14 +347,17 @@ function writeJson(filePath, data) {
  * Preserves all existing hooks — only replaces entries with matching matchers.
  */
 function mergeHooks() {
+  const binDir = getBinDir(detectOS());
+  const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
+  const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const newHooks = {
     PreToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: 'chrome-ensure' }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: 'chrome-ensure' }] },
+      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
+      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
     ],
     PostToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: 'chrome-brain-log' }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: 'chrome-brain-log' }] },
+      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: logCmd }] },
+      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: logCmd }] },
     ],
   };
 

@@ -342,14 +342,19 @@ function installScripts(chromePath, platform) {
 function installHooks() {
   step('Merging hooks into ~/.claude/settings.json...');
 
+  const binDir = detectPlatform() === 'windows'
+    ? path.join(SINAPSE_DIR, 'bin')
+    : SCRIPTS_DIR;
+  const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
+  const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const hookDefs = {
     PreToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: 'chrome-ensure' }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: 'chrome-ensure' }] },
+      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
+      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
     ],
     PostToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: 'chrome-brain-log' }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: 'chrome-brain-log' }] },
+      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: logCmd }] },
+      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: logCmd }] },
     ],
   };
 
