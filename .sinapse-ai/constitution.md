@@ -125,6 +125,35 @@ import { useStore } from '../../../stores/feature/store'
 
 ---
 
+### VII. Ecosystem Metrics Accuracy (NON-NEGOTIABLE)
+
+Métricas do ecossistema (contagem de squads, agentes, tasks, orqx) DEVEM ser estritamente exatas em todos os documentos, código e artefatos.
+
+**Fonte de verdade:** `~/.sinapse/metadata.json` (gerado pelo installer a partir de contagem real de arquivos)
+
+**Números canônicos atuais:**
+- **18 squads** (diretórios com squad.yaml)
+- **175 agentes** (174 em squads + 1 master sinapse-orqx)
+- **20 comandos orqx** (18 squad orqx + sinapse-orqx + tools-orqx)
+
+**Regras:**
+- MUST: Todo documento que menciona contagem de squads/agentes DEVE usar os números exatos do metadata.json
+- MUST: Ao adicionar ou remover um squad/agente, TODOS os documentos que referenciam a contagem DEVEM ser atualizados na mesma operação
+- MUST NOT: Arredondar, estimar ou aproximar contagens — o número DEVE ser exato
+- MUST NOT: Ter discrepância entre qualquer par de documentos que mencionam a mesma métrica
+
+**Documentos que referenciam estas métricas (devem estar sincronizados):**
+- `README.md` e `README.en.md` (header, body, tabela)
+- `package.json` (description)
+- `AGENTS.md` (contagens de orqx e especialistas)
+- `sinapse-orqx.md` (todas as cópias: .sinapse-ai/, .claude/, .codex/, sinapse/)
+- `packages/installer/src/wizard/feedback.js` (output do installer)
+- `~/.sinapse/metadata.json` (fonte de verdade)
+
+**Gate:** Qualquer PR que altere contagem de squads/agentes sem atualizar TODOS os documentos listados acima é BLOQUEADO.
+
+---
+
 ## Governance
 
 ### Amendment Process

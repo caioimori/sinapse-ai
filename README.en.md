@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg)](LICENSE)
 
-> **174 AI agents. 19 specialized squads. One CLI.**
+> **175 AI agents. 18 specialized squads. One CLI.**
 >
 > SINAPSE AI is an open source framework that organizes AI agents into specialized squads to solve real problems in business, marketing, development, copywriting, design and more. Works directly in your terminal with Claude Code, Codex CLI or any compatible IDE.
 
@@ -19,8 +19,8 @@ SINAPSE AI is not another chatbot. It is an orchestration system where each agen
 
 **What you get when you install:**
 
-- **19 orchestrators (orqx)** ready to activate from the terminal
-- **174 specialized agents** with their own knowledge bases
+- **18 squad orchestrators (orqx)** ready to activate from the terminal
+- **175 specialized agents** with their own knowledge bases
 - **Complete workflows** for planning, development, QA and deploy
 - **Story-Driven Development** with automatic progress tracking
 - **Multi-IDE support**: Claude Code and Codex CLI
@@ -87,7 +87,7 @@ Each squad is a team of specialized agents with its own knowledge base, workflow
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 | **claude-code-mastery** | Advanced Claude Code mastery | 8 |
 
-**Total: 19 squads, 174 specialized agents**
+**Total: 18 squads, 175 specialized agents**
 
 ---
 
@@ -202,7 +202,7 @@ SINAPSE works on both IDEs. Both support most features with different approaches
 
 | Feature | Claude Code | Codex CLI | Notes |
 |---------|:-----------:|:---------:|-------|
-| **19 squads with 175 agents** | YES | YES | Identical on both |
+| **18 squads with 175 agents** | YES | YES | Identical on both |
 | **Knowledge bases per squad** | YES | YES | Identical on both |
 | **Tasks and workflows** | YES | YES | Identical on both |
 | **Story-Driven Development** | YES | YES | Identical on both |

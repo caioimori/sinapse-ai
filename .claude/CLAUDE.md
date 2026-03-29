@@ -21,6 +21,7 @@ O SINAPSE possui uma **Constitution formal** com princípios inegociáveis e gat
 | IV | No Invention | MUST |
 | V | Quality First | MUST |
 | VI | Absolute Imports | SHOULD |
+| VII | Ecosystem Metrics Accuracy | NON-NEGOTIABLE |
 
 **Gates automáticos bloqueiam violações.** Consulte a Constitution para detalhes completos.
 

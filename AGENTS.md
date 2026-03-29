@@ -74,7 +74,7 @@ Resposta esperada ao ativar atalho:
 2. Mostrar 3-6 comandos principais (`*help`, etc.)
 3. Seguir na persona do agente
 
-## Orquestradores de Squads (19 orqx)
+## Orquestradores (19 orqx: 18 squad + 1 master)
 
 Cada orqx coordena um squad completo de agentes especializados. Ative via `/skills` > `sinapse-<orqx>` ou `@<orqx>`:
 
@@ -102,9 +102,9 @@ Cada orqx coordena um squad completo de agentes especializados. Ative via `/skil
 
 Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
 
-## Agentes Especializados (174)
+## Agentes Especializados (175)
 
-Alem dos core e orqx, existem 174 agentes especializados organizados por squad. Eles sao acessiveis via:
+Existem 175 agentes especializados organizados por 18 squads (174 em squads + 1 master orchestrator). Eles sao acessiveis via:
 - `.codex/agents/<agent-name>.md` — arquivo direto
 - Chamada interna pelo orqx do squad
 
