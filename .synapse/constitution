@@ -17,13 +17,15 @@ CONSTITUTION_RULE_ART2_3=MUST: Apenas @devops pode criar releases e tags
 CONSTITUTION_RULE_ART2_4=MUST: Agentes DEVEM delegar para o agente apropriado quando fora de seu escopo
 CONSTITUTION_RULE_ART2_5=MUST: Nenhum agente pode assumir autoridade de outro
 
-# Article III: Story-Driven Development (MUST)
-CONSTITUTION_RULE_ART3_0=Story-Driven Development (MUST)
-CONSTITUTION_RULE_ART3_1=MUST: Nenhum código é escrito sem uma story associada
+# Article III: Documentation-First Development (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART3_0=Documentation-First Development (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART3_1=MUST: Nenhum código é escrito sem uma story associada e validada
 CONSTITUTION_RULE_ART3_2=MUST: Stories DEVEM ter acceptance criteria claros antes de implementação
 CONSTITUTION_RULE_ART3_3=MUST: Progresso DEVE ser rastreado via checkboxes na story
 CONSTITUTION_RULE_ART3_4=MUST: File List DEVE ser mantida atualizada na story
-CONSTITUTION_RULE_ART3_5=SHOULD: Stories seguem o workflow: @po/@sm cria → @dev implementa → @qa valida → @devops push
+CONSTITUTION_RULE_ART3_5=MUST: Story status DEVE ser >= Ready (validada) antes de qualquer código
+CONSTITUTION_RULE_ART3_6=MUST: Pipeline Epic → Story → Validação → Implementação é AUTOMÁTICO
+CONSTITUTION_RULE_ART3_7=MUST NOT: Nenhum agente pode aceitar implementação sem story validada
 
 # Article IV: No Invention (MUST)
 CONSTITUTION_RULE_ART4_0=No Invention (MUST)
@@ -47,3 +49,19 @@ CONSTITUTION_RULE_ART6_0=Absolute Imports (SHOULD)
 CONSTITUTION_RULE_ART6_1=SHOULD: Sempre usar imports absolutos com alias @/
 CONSTITUTION_RULE_ART6_2=SHOULD NOT: Usar imports relativos (../../../)
 CONSTITUTION_RULE_ART6_3=EXCEPTION: Imports dentro do mesmo módulo/feature podem ser relativos
+
+# Article VII: Ecosystem Metrics Accuracy (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART7_0=Ecosystem Metrics Accuracy (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART7_1=MUST: Todo documento que menciona contagem de squads/agentes DEVE usar números exatos
+CONSTITUTION_RULE_ART7_2=MUST: Ao adicionar/remover squad/agente, TODOS os documentos DEVEM ser atualizados
+CONSTITUTION_RULE_ART7_3=MUST NOT: Arredondar, estimar ou aproximar contagens
+
+# Article VIII: Mandatory Delegation (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART8_0=Mandatory Delegation (NON-NEGOTIABLE)
+CONSTITUTION_RULE_ART8_1=MUST: Orquestradores SEMPRE delegam trabalho de domínio ao agente especialista
+CONSTITUTION_RULE_ART8_2=MUST: Delegação é automática — nenhum usuário precisa solicitar
+CONSTITUTION_RULE_ART8_3=MUST: Mesmo quando usuário diz "faça você mesmo" → delegar ao especialista
+CONSTITUTION_RULE_ART8_4=MUST: Cada agente opera estritamente dentro de seu escopo de autoridade
+CONSTITUTION_RULE_ART8_5=MUST NOT: Nenhum orquestrador pode executar implementação de código
+CONSTITUTION_RULE_ART8_6=MUST NOT: Nenhum orquestrador pode fazer decisões arquiteturais sem @architect
+CONSTITUTION_RULE_ART8_7=MUST NOT: Nenhum orquestrador pode criar stories sem @sprint-lead

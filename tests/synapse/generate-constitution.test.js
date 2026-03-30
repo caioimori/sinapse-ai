@@ -104,16 +104,16 @@ Cada agente tem autoridades exclusivas.
 
 ---
 
-### III. Story-Driven Development (MUST)
+### III. Documentation-First Development (NON-NEGOTIABLE)
 
-Todo desenvolvimento comeca com uma story.
+Todo desenvolvimento comeca com documentacao.
 
 **Regras:**
-- MUST: Nenhum codigo e escrito sem uma story associada
+- MUST: Nenhum codigo e escrito sem uma story associada e validada
 - MUST: Stories DEVEM ter acceptance criteria claros
 - MUST: Progresso DEVE ser rastreado via checkboxes
 - MUST: File List DEVE ser mantida atualizada
-- SHOULD: Stories seguem o workflow padrao
+- MUST: Pipeline Epic > Story > Validacao > Implementacao e AUTOMATICO
 
 ---
 
@@ -265,7 +265,7 @@ describe('parseConstitution', () => {
     // Verify all articles extracted
     expect(articles[0].title).toBe('CLI First');
     expect(articles[1].title).toBe('Agent Authority');
-    expect(articles[2].title).toBe('Story-Driven Development');
+    expect(articles[2].title).toBe('Documentation-First Development');
     expect(articles[3].title).toBe('No Invention');
     expect(articles[4].title).toBe('Quality First');
     expect(articles[5].title).toBe('Absolute Imports');
@@ -273,7 +273,7 @@ describe('parseConstitution', () => {
     // Verify severities
     expect(articles[0].severity).toBe('NON-NEGOTIABLE');
     expect(articles[1].severity).toBe('NON-NEGOTIABLE');
-    expect(articles[2].severity).toBe('MUST');
+    expect(articles[2].severity).toBe('NON-NEGOTIABLE');
     expect(articles[5].severity).toBe('SHOULD');
   });
 
@@ -481,9 +481,11 @@ describe('integration: real constitution.md', () => {
     const content = fs.readFileSync(realConstitutionPath, 'utf8');
     const articles = parseConstitution(content);
 
-    expect(articles).toHaveLength(6);
+    expect(articles).toHaveLength(8);
     expect(articles[0].title).toBe('CLI First');
     expect(articles[5].title).toBe('Absolute Imports');
+    expect(articles[6].title).toBe('Ecosystem Metrics Accuracy');
+    expect(articles[7].title).toBe('Mandatory Delegation');
   });
 
   test('should generate valid constitution from real source', () => {
@@ -499,7 +501,7 @@ describe('integration: real constitution.md', () => {
       const result = main({ constitutionPath: realConstitutionPath, outputPath });
 
       expect(result.success).toBe(true);
-      expect(result.articles).toBe(6);
+      expect(result.articles).toBe(8);
 
       // Verify output is loadable by domain-loader
       const rules = loadDomainFile(outputPath);

@@ -25,7 +25,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Source** | Auto-generated from `.sinapse-ai/constitution.md` via `generate-constitution.js` |
 | **Implementation** | `.sinapse-ai/core/synapse/layers/l0-constitution.js` |
 
-**Articles:** CLI First, Agent Authority, Story-Driven Development, No Invention, Quality First, Absolute Imports.
+**Articles:** CLI First, Agent Authority, Documentation-First Development, No Invention, Quality First, Absolute Imports, Ecosystem Metrics Accuracy, Mandatory Delegation.
 
 ### L1: Global + Context
 

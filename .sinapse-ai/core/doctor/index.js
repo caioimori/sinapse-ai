@@ -34,17 +34,18 @@ async function runDoctorChecks(options = {}) {
     json = false,
     dryRun = false,
     quiet = false,
+    deep = false,
     projectRoot = process.cwd(),
   } = options;
 
   const context = {
     projectRoot,
     frameworkRoot: path.resolve(__dirname, '..', '..', '..'),
-    options: { fix, json, dryRun, quiet },
+    options: { fix, json, dryRun, quiet, deep },
   };
 
-  // Load and run all checks
-  const checks = loadChecks();
+  // Load and run all checks (deep checks only with --deep flag)
+  const checks = loadChecks({ deep });
   const results = [];
 
   for (const checkModule of checks) {

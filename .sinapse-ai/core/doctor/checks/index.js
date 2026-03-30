@@ -22,9 +22,10 @@ const npmPackages = require('./npm-packages');
 const skillsCount = require('./skills-count');
 const commandsCount = require('./commands-count');
 const hooksClaudeCount = require('./hooks-claude-count');
+const constitutionConsistency = require('./constitution-consistency');
 
-function loadChecks() {
-  return [
+function loadChecks(options = {}) {
+  const checks = [
     settingsJson,
     rulesFiles,
     agentMemory,
@@ -41,6 +42,13 @@ function loadChecks() {
     commandsCount,
     hooksClaudeCount,
   ];
+
+  // Deep checks — only run with --deep flag
+  if (options.deep) {
+    checks.push(constitutionConsistency);
+  }
+
+  return checks;
 }
 
 module.exports = { loadChecks };

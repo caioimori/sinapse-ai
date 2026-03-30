@@ -367,6 +367,7 @@ async function runDoctor(options = {}) {
     json: options.json || false,
     dryRun: options.dryRun || false,
     quiet: options.quiet || false,
+    deep: options.deep || false,
     projectRoot: process.cwd(),
   });
 
@@ -578,6 +579,7 @@ Run health checks on your SINAPSE installation.
 
 Options:
   --fix        Automatically fix detected issues
+  --deep       Run additional deep validation checks (constitution consistency, etc.)
   --dry-run    Show what --fix would do without making changes
   --json       Output results as structured JSON
   --quiet      Minimal output (exit code only)
@@ -589,6 +591,11 @@ Checks performed:
   • Agent definitions are complete
   • Task files have required fields
   • Dependencies are installed
+
+Deep checks (--deep):
+  • Constitution consistency across all documents
+  • Article references synchronized
+  • Required rule files for NON-NEGOTIABLE articles
 
 Exit Codes:
   0  All checks passed (or issues fixed with --fix)
@@ -1038,6 +1045,7 @@ async function main() {
         json: doctorArgs.includes('--json'),
         dryRun: doctorArgs.includes('--dry-run'),
         quiet: doctorArgs.includes('--quiet'),
+        deep: doctorArgs.includes('--deep'),
       };
       await runDoctor(doctorOptions);
       break;

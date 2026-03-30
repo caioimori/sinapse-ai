@@ -22,7 +22,7 @@ O SINAPSE AI nao e mais um chatbot. E um sistema de orquestracao onde cada agent
 - **18 orquestradores de squad (orqx)** prontos para ativar direto no terminal
 - **175 agentes especializados** com knowledge bases proprias
 - **Workflows completos** de planejamento, desenvolvimento, QA e deploy
-- **Story-Driven Development** com rastreamento automatico de progresso
+- **Documentation-First Development** com pipeline automatico de epics, stories e validacao
 - **Compatibilidade multi-IDE**: Claude Code e Codex CLI
 
 ### Arquitetura: CLI First
@@ -191,14 +191,16 @@ O SINAPSE vem com 12 agentes core para o ciclo completo de desenvolvimento:
 
 ---
 
-## Story-Driven Development
+## Documentation-First Development
 
-Todo desenvolvimento no SINAPSE segue stories:
+Todo desenvolvimento no SINAPSE segue o pipeline de documentacao automatico (NON-NEGOTIABLE):
 
-1. **Stories em** `docs/stories/` com acceptance criteria claros
-2. **Progresso rastreado** via checkboxes `[ ]` > `[x]`
-3. **File List** mantida atualizada na story
-4. **Quality gates** automaticos antes de merge
+1. **Epic definida** para cada iniciativa
+2. **Stories em** `docs/stories/` com acceptance criteria claros
+3. **Validacao** por @product-lead antes de qualquer codigo
+4. **Progresso rastreado** via checkboxes `[ ]` > `[x]`
+5. **File List** mantida atualizada na story
+6. **Quality gates** automaticos antes de merge
 
 ---
 
@@ -230,7 +232,7 @@ O SINAPSE funciona em ambas as IDEs. Ambas suportam a maioria das funcionalidade
 | **18 squads com 175 agentes** | SIM | SIM | Identico em ambas |
 | **Knowledge bases por squad** | SIM | SIM | Identico em ambas |
 | **Tasks e workflows** | SIM | SIM | Identico em ambas |
-| **Story-Driven Development** | SIM | SIM | Identico em ambas |
+| **Documentation-First Development** | SIM | SIM | Identico em ambas |
 | **Agent commands (`*help`, `*task`)** | SIM | SIM | Identico em ambas |
 | **Squad awareness auto-routing** | SIM | SIM | Identico em ambas |
 | **NSN Mode (Never Say Never)** | SIM | SIM | Regra global em ambas |

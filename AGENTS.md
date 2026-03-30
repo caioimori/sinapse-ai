@@ -5,12 +5,14 @@ Este arquivo configura o comportamento esperado de agentes no Codex CLI neste re
 ## Constitution
 
 Siga `.sinapse-ai/constitution.md` como fonte de verdade:
-- CLI First
-- Agent Authority
-- Story-Driven Development
-- No Invention
-- Quality First
-- Absolute Imports
+- CLI First (NON-NEGOTIABLE)
+- Agent Authority (NON-NEGOTIABLE)
+- Documentation-First Development (NON-NEGOTIABLE)
+- No Invention (MUST)
+- Quality First (MUST)
+- Absolute Imports (SHOULD)
+- Ecosystem Metrics Accuracy (NON-NEGOTIABLE)
+- Mandatory Delegation (NON-NEGOTIABLE)
 
 ## Workflow Obrigatorio
 

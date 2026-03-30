@@ -21,10 +21,12 @@ O SINAPSE possui uma **Constitution formal** com princípios inegociáveis e gat
 |--------|-----------|------------|
 | I | CLI First | NON-NEGOTIABLE |
 | II | Agent Authority | NON-NEGOTIABLE |
-| III | Story-Driven Development | MUST |
+| III | Documentation-First Development | NON-NEGOTIABLE |
 | IV | No Invention | MUST |
 | V | Quality First | MUST |
 | VI | Absolute Imports | SHOULD |
+| VII | Ecosystem Metrics Accuracy | NON-NEGOTIABLE |
+| VIII | Mandatory Delegation | NON-NEGOTIABLE |
 
 **Gates automáticos bloqueiam violações.** Consulte a Constitution para detalhes completos.
 <!-- SINAPSE-MANAGED-END: constitution -->
@@ -73,11 +75,13 @@ When an agent is active:
 
 ## Development Methodology
 
-### Story-Driven Development
-1. **Work from stories** - All development starts with a story in `docs/stories/`
-2. **Update progress** - Mark checkboxes as tasks complete: [ ] → [x]
-3. **Track changes** - Maintain the File List section in the story
-4. **Follow criteria** - Implement exactly what the acceptance criteria specify
+### Documentation-First Development (NON-NEGOTIABLE)
+1. **Documentation pipeline is AUTOMATIC** - Every briefing triggers: Epic → Story → Validation → Implementation
+2. **No code without validated story** - Story must be in `docs/stories/` with status >= Ready
+3. **Update progress** - Mark checkboxes as tasks complete: [ ] → [x]
+4. **Track changes** - Maintain the File List section in the story
+5. **Follow criteria** - Implement exactly what the acceptance criteria specify
+6. **Delegation is mandatory** - Orchestrators NEVER execute domain work, they ALWAYS delegate to specialists
 
 ### Code Standards
 - Write clean, self-documenting code

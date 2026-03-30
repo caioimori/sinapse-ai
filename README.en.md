@@ -22,7 +22,7 @@ SINAPSE AI is not another chatbot. It is an orchestration system where each agen
 - **18 squad orchestrators (orqx)** ready to activate from the terminal
 - **175 specialized agents** with their own knowledge bases
 - **Complete workflows** for planning, development, QA and deploy
-- **Story-Driven Development** with automatic progress tracking
+- **Documentation-First Development** with automatic epic, story and validation pipeline
 - **Multi-IDE support**: Claude Code and Codex CLI
 
 ### Architecture: CLI First
@@ -166,14 +166,16 @@ SINAPSE comes with 12 core agents for the complete development cycle:
 
 ---
 
-## Story-Driven Development
+## Documentation-First Development
 
-All SINAPSE development follows stories:
+All SINAPSE development follows the automatic documentation pipeline (NON-NEGOTIABLE):
 
-1. **Stories in** `docs/stories/` with clear acceptance criteria
-2. **Progress tracked** via checkboxes `[ ]` > `[x]`
-3. **File List** kept updated in the story
-4. **Quality gates** run automatically before merge
+1. **Epic defined** for each initiative
+2. **Stories in** `docs/stories/` with clear acceptance criteria
+3. **Validation** by @product-lead before any code
+4. **Progress tracked** via checkboxes `[ ]` > `[x]`
+5. **File List** kept updated in the story
+6. **Quality gates** run automatically before merge
 
 ---
 
@@ -205,7 +207,7 @@ SINAPSE works on both IDEs. Both support most features with different approaches
 | **18 squads with 175 agents** | YES | YES | Identical on both |
 | **Knowledge bases per squad** | YES | YES | Identical on both |
 | **Tasks and workflows** | YES | YES | Identical on both |
-| **Story-Driven Development** | YES | YES | Identical on both |
+| **Documentation-First Development** | YES | YES | Identical on both |
 | **Agent commands (`*help`, `*task`)** | YES | YES | Identical on both |
 | **Squad awareness auto-routing** | YES | YES | Identical on both |
 | **NSN Mode (Never Say Never)** | YES | YES | Global rule on both |

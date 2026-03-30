@@ -354,10 +354,12 @@ function mergeHooks() {
     PreToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
+      { matcher: 'mcp__dev-browser__*', hooks: [{ type: 'command', command: ensureCmd }] },
     ],
     PostToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: logCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: logCmd }] },
+      { matcher: 'mcp__dev-browser__*', hooks: [{ type: 'command', command: logCmd }] },
     ],
   };
 
@@ -378,14 +380,20 @@ function mergeHooks() {
 }
 
 /**
- * Adds Chrome DevTools MCP server to ~/.claude.json.
+ * Adds Chrome DevTools and dev-browser MCP servers to ~/.claude.json.
+ * Does NOT add claude-in-chrome — that extension manages its own MCP registration.
+ *
+ * @param {Object} osInfo - OS detection result from detectOS()
+ * @returns {string[]} List of errors (empty on success)
  */
 function mergeMcpConfig(osInfo) {
   const config = readJsonSafe(CLAUDE_JSON);
   if (!config.mcpServers) {
     config.mcpServers = {};
   }
+  const errors = [];
 
+  // --- Chrome DevTools MCP ---
   if (osInfo.type === OS_TYPE.WINDOWS) {
     config.mcpServers['chrome-devtools'] = {
       command: 'cmd',
@@ -398,7 +406,36 @@ function mergeMcpConfig(osInfo) {
     };
   }
 
+  // --- dev-browser MCP (Story 7.4.2) ---
+  // Install dev-browser globally first
+  try {
+    const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+    execSync(`${npmCmd} install -g dev-browser`, { stdio: 'pipe', timeout: 120000 });
+    LOG.ok('dev-browser installed globally');
+  } catch (err) {
+    const msg = `dev-browser global install failed: ${err.message}. Manual install: npm install -g dev-browser`;
+    LOG.warn(msg);
+    errors.push('dev-browser-install');
+    // Do NOT throw — continue with rest of install
+  }
+
+  // Add dev-browser MCP entry regardless (user may install manually later)
+  if (osInfo.type === OS_TYPE.WINDOWS) {
+    config.mcpServers['dev-browser'] = {
+      command: 'cmd',
+      args: ['/c', 'dev-browser', '--connect'],
+      env: { CDP_URL: 'http://127.0.0.1:9222' },
+    };
+  } else {
+    config.mcpServers['dev-browser'] = {
+      command: 'dev-browser',
+      args: ['--connect'],
+      env: { CDP_URL: 'http://127.0.0.1:9222' },
+    };
+  }
+
   writeJson(CLAUDE_JSON, config);
+  return errors;
 }
 
 // ---------------------------------------------------------------------------
@@ -514,10 +551,95 @@ Quando encontrar barreira:
 
 ---
 
+## Browser Automation Tool Selection
+
+| Task | Preferred Tool | Why |
+|------|---------------|-----|
+| Navigate, click, fill form | chrome-devtools-mcp (CDP) | Fastest, direct browser control |
+| Screenshot, Lighthouse audit | chrome-devtools-mcp (CDP) | Built-in |
+| Scraping with JS logic | dev-browser (Playwright) | evaluate(), full DOM access |
+| Batch / loops / headless | dev-browser (Playwright) | Headless mode supported |
+| Cross-origin iframes | dev-browser or CDP Input events | CDP has InputEvent.dispatch |
+| Visual fallback, coordinates | claude-in-chrome extension | Screen-level computer use |
+
+**Priority:** CDP > dev-browser > claude-in-chrome
+
+---
+
 ## Learnings Log
 
 > Secao atualizada automaticamente quando NSN Mode resolve problemas novos.
 
+`;
+}
+
+/**
+ * Returns the content for the claude-in-chrome KB file.
+ * Provides setup instructions since the extension cannot be auto-installed.
+ */
+function getClaudeInChromeKbContent() {
+  return `# claude-in-chrome — Chrome Extension for Visual Browser Interaction
+
+> Manual install required. This extension cannot be auto-installed via CLI.
+
+---
+
+## What It Does
+
+claude-in-chrome is a Chrome extension that acts as an MCP server directly from
+within Chrome. It exposes browser automation tools via a local WebSocket, enabling
+screen-level visual interaction (computer use) as a fallback when CDP and Playwright
+cannot handle a task (e.g., complex visual layouts, canvas elements, iframes).
+
+---
+
+## Installation
+
+1. Open Chrome and navigate to the Chrome Web Store
+2. Search for "claude-in-chrome" or visit:
+   https://chromewebstore.google.com/detail/claude-in-chrome
+3. Click "Add to Chrome" and confirm
+4. The extension icon should appear in the Chrome toolbar
+5. Click the extension icon and follow the setup wizard
+
+---
+
+## MCP Configuration
+
+The extension manages its own MCP registration automatically after install.
+**Do NOT** manually add a "claude-in-chrome" entry to ~/.claude.json.
+
+If the extension is installed and Chrome is running with debug port 9222,
+claude-in-chrome tools will be available to Claude Code automatically.
+
+---
+
+## When to Use
+
+| Scenario | Use claude-in-chrome? |
+|----------|----------------------|
+| CDP tools handle the task | No — use chrome-devtools-mcp |
+| Playwright can scrape/interact | No — use dev-browser |
+| Complex visual layout, canvas, WebGL | Yes |
+| Cross-origin iframe interaction | Maybe — try CDP Input events first |
+| Screen coordinate-based interaction | Yes |
+
+**Priority:** CDP > dev-browser > claude-in-chrome (visual fallback only)
+
+---
+
+## Troubleshooting
+
+- **Extension not showing tools:** Ensure Chrome is running with --remote-debugging-port=9222
+- **Tools timeout:** Restart Chrome via chrome-debug script, then reload extension
+- **Extension disabled:** Check chrome://extensions and re-enable
+
+---
+
+## Reference
+
+- Master KB: ~/.sinapse/sinapse/knowledge-base/chrome-brain.md
+- Chrome Brain auto-activation rule: ~/.sinapse/.claude/rules/chrome-brain-autoload.md
 `;
 }
 
@@ -665,15 +787,20 @@ function installChromeBrain(options = {}) {
     }
   }
 
-  // --- Step 4: MCP config ---
+  // --- Step 4: MCP config (chrome-devtools + dev-browser) ---
   if (!skipMcp) {
-    LOG.step('Step 4 — Adding Chrome DevTools MCP to ~/.claude.json...');
+    LOG.step('Step 4 — Adding Chrome DevTools + dev-browser MCP to ~/.claude.json...');
     try {
       if (dryRun) {
-        LOG.info('[DRY-RUN] Would merge MCP config');
+        LOG.info('[DRY-RUN] Would merge MCP config (chrome-devtools + dev-browser)');
       } else {
-        mergeMcpConfig(osInfo);
-        LOG.ok('Chrome DevTools MCP added to ~/.claude.json');
+        const mcpErrors = mergeMcpConfig(osInfo);
+        if (mcpErrors.length > 0) {
+          for (const e of mcpErrors) {
+            errors.push(e);
+          }
+        }
+        LOG.ok('Chrome DevTools + dev-browser MCP added to ~/.claude.json');
       }
     } catch (err) {
       const msg = `Failed to merge MCP config: ${err.message}`;
@@ -695,6 +822,11 @@ function installChromeBrain(options = {}) {
         path: path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'chrome-brain.md'),
         content: getMasterKbContent(),
         label: 'master KB chrome-brain.md',
+      },
+      {
+        path: path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'claude-in-chrome.md'),
+        content: getClaudeInChromeKbContent(),
+        label: 'claude-in-chrome.md KB',
       },
     ];
 
@@ -722,6 +854,15 @@ function installChromeBrain(options = {}) {
         errors.push(msg);
       }
     }
+  }
+
+  // --- claude-in-chrome instructions (Story 7.4.2) ---
+  if (!_quiet && !dryRun) {
+    LOG.step('Manual step required: claude-in-chrome extension');
+    LOG.info('Install the claude-in-chrome Chrome extension from the Chrome Web Store:');
+    LOG.info('  https://chromewebstore.google.com/detail/claude-in-chrome');
+    LOG.info('The extension manages its own MCP registration — no CLI config needed.');
+    LOG.info('See KB: ~/.sinapse/sinapse/knowledge-base/claude-in-chrome.md');
   }
 
   // --- Step 6: Validate ---
@@ -792,6 +933,7 @@ function uninstallChromeBrain(options = {}) {
       const chromeMatchers = new Set([
         'mcp__chrome-devtools__*',
         'mcp__claude-in-chrome__*',
+        'mcp__dev-browser__*',
       ]);
       let changed = false;
       for (const hookType of ['PreToolUse', 'PostToolUse']) {
@@ -819,16 +961,24 @@ function uninstallChromeBrain(options = {}) {
     errors.push(`Failed to clean hooks: ${err.message}`);
   }
 
-  // --- Remove MCP from claude.json ---
+  // --- Remove MCP from claude.json (chrome-devtools + dev-browser) ---
   try {
     const config = readJsonSafe(CLAUDE_JSON);
-    if (config.mcpServers && config.mcpServers['chrome-devtools']) {
+    let mcpChanged = false;
+    if (config.mcpServers) {
+      for (const key of ['chrome-devtools', 'dev-browser']) {
+        if (config.mcpServers[key]) {
+          delete config.mcpServers[key];
+          mcpChanged = true;
+        }
+      }
+    }
+    if (mcpChanged) {
       if (dryRun) {
-        LOG.info('[DRY-RUN] Would remove chrome-devtools from ~/.claude.json');
+        LOG.info('[DRY-RUN] Would remove chrome-devtools + dev-browser from ~/.claude.json');
       } else {
-        delete config.mcpServers['chrome-devtools'];
         writeJson(CLAUDE_JSON, config);
-        LOG.ok('Removed chrome-devtools MCP from ~/.claude.json');
+        LOG.ok('Removed chrome-devtools + dev-browser MCP from ~/.claude.json');
       }
       removed.push(CLAUDE_JSON);
     }
@@ -841,6 +991,7 @@ function uninstallChromeBrain(options = {}) {
     const kbPaths = [
       path.join(SINAPSE_DIR, '.claude', 'rules', 'chrome-brain-autoload.md'),
       path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'chrome-brain.md'),
+      path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'claude-in-chrome.md'),
     ];
     for (const squad of SQUAD_NAMES) {
       kbPaths.push(path.join(SINAPSE_DIR, squad, 'knowledge-base', 'chrome-brain-integration.md'));
@@ -911,13 +1062,25 @@ function getChromeBrainStatus() {
     // not configured
   }
 
-  // Check MCP
+  // Check MCP (chrome-devtools + dev-browser)
   let mcpConfigured = false;
+  let devBrowserMcpConfigured = false;
   try {
     const config = readJsonSafe(CLAUDE_JSON);
     mcpConfigured = !!config.mcpServers?.['chrome-devtools'];
+    devBrowserMcpConfigured = !!config.mcpServers?.['dev-browser'];
   } catch {
     // not configured
+  }
+
+  // Check dev-browser global install
+  let devBrowserInstalled = false;
+  try {
+    const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+    execSync(`${npmCmd} list -g dev-browser`, { stdio: 'pipe', timeout: 10000 });
+    devBrowserInstalled = true;
+  } catch {
+    // not installed globally
   }
 
   // Check rule
@@ -928,6 +1091,11 @@ function getChromeBrainStatus() {
   // Check master KB
   const masterKbInstalled = fs.existsSync(
     path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'chrome-brain.md'),
+  );
+
+  // Check claude-in-chrome KB
+  const claudeInChromeKbInstalled = fs.existsSync(
+    path.join(SINAPSE_DIR, 'sinapse', 'knowledge-base', 'claude-in-chrome.md'),
   );
 
   // Count squad KBs
@@ -943,8 +1111,11 @@ function getChromeBrainStatus() {
     scriptsInstalled,
     hooksConfigured,
     mcpConfigured,
+    devBrowserInstalled,
+    devBrowserMcpConfigured,
     ruleInstalled,
     masterKbInstalled,
+    claudeInChromeKbInstalled,
     squadKbComplete: squadKbCount === SQUAD_NAMES.length,
   };
 

@@ -70,8 +70,9 @@ Agent commands. Only work when an agent is active:
 Follow `.sinapse-ai/constitution.md`:
 - CLI First (NON-NEGOTIABLE)
 - Agent Authority: only @devops can push/PR
-- Story-Driven Development
+- Documentation-First Development (NON-NEGOTIABLE)
 - Quality First: lint + typecheck + test before done
+- Mandatory Delegation (NON-NEGOTIABLE)
 
 ## Quality Gates
 

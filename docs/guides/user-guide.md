@@ -302,13 +302,15 @@ npm run lint         # Check code style
 npm run build        # Build project
 ```
 
-### Story-Driven Development
+### Documentation-First Development
 
-1. **Create a story** - Use `*create-story` to define requirements
-2. **Work from stories** - All development starts with a story in `docs/stories/`
-3. **Update progress** - Mark checkboxes as tasks complete: `[ ]` --> `[x]`
-4. **Track changes** - Maintain the File List section in the story
-5. **Follow criteria** - Implement exactly what the acceptance criteria specify
+1. **Define the epic** - Every initiative starts with an epic
+2. **Create a story** - Use `*create-story` to define requirements with acceptance criteria
+3. **Validate** - @product-lead validates the story before any code
+4. **Work from stories** - All development starts with a validated story in `docs/stories/`
+5. **Update progress** - Mark checkboxes as tasks complete: `[ ]` --> `[x]`
+6. **Track changes** - Maintain the File List section in the story
+7. **Follow criteria** - Implement exactly what the acceptance criteria specify
 
 ---
 

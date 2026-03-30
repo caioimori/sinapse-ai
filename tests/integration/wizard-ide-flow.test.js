@@ -122,7 +122,7 @@ describe('Wizard IDE Flow Integration', () => {
 
       const claudeContent = await fs.readFile(path.join(testDir, '.claude', 'CLAUDE.md'), 'utf8');
       expect(claudeContent).toContain('SINAPSE');
-      expect(claudeContent).toContain('Story-Driven Development');
+      expect(claudeContent).toContain('Documentation-First Development');
     });
 
     it('should generate Claude Code config as recommended', async () => {
@@ -199,7 +199,7 @@ describe('Wizard IDE Flow Integration', () => {
 
       expect(content).toContain('SINAPSE');
       expect(content).toContain('Development Rules');
-      expect(content).toContain('Story-Driven Development');
+      expect(content).toContain('Documentation-First Development');
       expect(content).not.toContain('{{');
     });
 

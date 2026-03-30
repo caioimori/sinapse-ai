@@ -93,29 +93,37 @@ atomic_layer: Organism
 > **Reference:** Constitution Articles I, III
 > **Enforcement:** Automatic validation before execution
 
-### Gate 1: Story-Driven Development (Article III)
+### Gate 1: Documentation-First Development (Article III — NON-NEGOTIABLE)
 
 ```yaml
 constitutional_gate:
   article: III
-  name: Story-Driven Development
+  name: Documentation-First Development
   severity: BLOCK
 
   validation:
     - Story file MUST exist at docs/stories/{storyId}/story.yaml
-    - Story MUST have status != "Draft" (Ready, In Progress, or Done)
+    - Story MUST have status >= "Ready" (validated by @product-lead)
     - Story MUST have acceptance criteria defined
+    - Story MUST have scope (IN/OUT) documented
     - Story MUST have at least one task/subtask
+    - Pipeline Epic → Story → Validation MUST be completed before implementation
 
   on_violation:
     action: BLOCK
     message: |
-      CONSTITUTIONAL VIOLATION: Article III - Story-Driven Development
-      Cannot develop without a valid story.
+      CONSTITUTIONAL VIOLATION: Article III - Documentation-First Development (NON-NEGOTIABLE)
+      Cannot develop without a validated story.
 
       Issue: {violation_details}
 
-      Resolution: Create or update story via @sprint-lead *draft or @product-lead *create-story
+      This is NON-NEGOTIABLE. The documentation pipeline MUST be completed first:
+      1. Epic must exist → @project-lead *create-epic
+      2. Story must be drafted → @sprint-lead *draft
+      3. Story must be validated → @product-lead *validate
+      4. Only then can implementation begin
+
+      Resolution: Follow the pipeline above. No shortcuts allowed.
 ```
 
 ### Gate 2: CLI First (Article I)

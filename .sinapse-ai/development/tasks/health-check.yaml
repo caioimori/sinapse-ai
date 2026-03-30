@@ -130,7 +130,7 @@ governance_map:
 
   entity-registry:
     article: "III"
-    article_name: "Story-Driven Development"
+    article_name: "Documentation-First Development"
     governance_note: "Code intelligence registry for entity-aware development"
     remediation: "sinapse doctor --fix"
 
@@ -166,7 +166,7 @@ governance_map:
 
   code-intel:
     article: "III"
-    article_name: "Story-Driven Development"
+    article_name: "Documentation-First Development"
     governance_note: "Code intelligence for entity-aware development workflows"
     remediation: "sinapse doctor --fix"
 

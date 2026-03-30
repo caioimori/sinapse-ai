@@ -70,7 +70,7 @@ Each section of `.claude/CLAUDE.md` has a clear ownership classification:
 | Estrutura do Projeto | Framework | L2 | Generated from directory scan |
 | Framework vs Project Boundary | Framework | L1 | Core architecture |
 | Sistema de Agentes | Framework | L2 | Agent definitions from `.sinapse-ai/development/agents/` |
-| Story-Driven Development | Framework | L2 | Process definition |
+| Documentation-First Development | Framework | L2 | Process definition |
 | Padroes de Codigo | Project | L3 | Customizable per project |
 | Testes & Quality Gates | Project | L3 | Customizable test commands |
 | Convencoes Git | Project | L3 | Customizable conventions |

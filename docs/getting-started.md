@@ -250,9 +250,9 @@ npm run validate:parity
 npm run lint && npm run typecheck && npm test
 ```
 
-### Story-Driven Development
+### Documentation-First Development
 
-All SINAPSE development follows stories in `docs/stories/`. Each story contains:
+All SINAPSE development follows the documentation pipeline automatically. Stories live in `docs/stories/`. Each story contains:
 - Acceptance criteria with checkboxes
 - Tasks mapped to specific ACs
 - CodeRabbit integration for automated review

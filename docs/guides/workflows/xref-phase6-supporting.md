@@ -485,7 +485,7 @@ No references to `.sinapse-ai/processes/` were found in the codebase.
 
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
-| `constitution.md` | **FOUNDATIONAL** -- Defines non-negotiable principles (CLI First, Agent Authority, Story-Driven Development, No Invention, Quality First, Absolute Imports) | All agents, all tasks, CLAUDE.md | Referenced by `dev-develop-story.md`, `github-devops-pre-push-quality-gate.md`, `analyze-cross-artifact.md`, `spec-write-spec.md` | No |
+| `constitution.md` | **FOUNDATIONAL** -- Defines non-negotiable principles (CLI First, Agent Authority, Documentation-First Development, No Invention, Quality First, Absolute Imports, Ecosystem Metrics Accuracy, Mandatory Delegation) | All agents, all tasks, CLAUDE.md | Referenced by `dev-develop-story.md`, `github-devops-pre-push-quality-gate.md`, `analyze-cross-artifact.md`, `spec-write-spec.md` | No |
 | `core-config.yaml` | **PRIMARY** Legacy/monolithic config (v2.3.0) with ALL configuration sections (13 sections) | `core/config/config-loader.js`, all agents, all tasks | Central configuration file; being split into L1-L4 hierarchy | No |
 | `framework-config.yaml` | **NEW** L1 Framework config (read-only, shipped with npm) | `core/config/config-resolver.js`, config CLI | Part of ADR-PRO-002 config hierarchy; duplicates framework portions of `core-config.yaml` | No |
 | `project-config.yaml` | **NEW** L2 Project config (team-shared, committed) | `core/config/config-resolver.js`, config CLI | Part of ADR-PRO-002; duplicates project portions of `core-config.yaml` | No |
