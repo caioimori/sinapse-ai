@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-30T18:02:59.739Z'
-  entityCount: 739
+  lastUpdated: '2026-03-30T18:05:54.956Z'
+  entityCount: 740
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -1682,7 +1682,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:9e6c42e99c06367930615ecc87b7e126907965bacf321d324d69e74356980ef1
-      lastVerified: '2026-03-30T18:02:59.416Z'
+      lastVerified: '2026-03-30T18:05:54.953Z'
     dev-improve-code-quality:
       path: .sinapse-ai/development/tasks/dev-improve-code-quality.md
       layer: L2
@@ -5423,6 +5423,24 @@ entities:
         extensionPoints: []
       checksum: sha256:bfd75e8bb7e884fa95934005d658cf678be963d430811437a60bb3ab244fe218
       lastVerified: '2026-03-30T18:02:59.470Z'
+    health-check:
+      path: .sinapse-ai/development/tasks/health-check.yaml
+      layer: L2
+      type: task
+      purpose: '|'
+      keywords:
+        - health
+        - check
+        - task
+        - definition
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:eba22298ddc94793d654be4d4082e767cd4a9157f7b7bce54ab3496cd189b43e
+      lastVerified: '2026-03-30T18:05:54.953Z'
   templates:
     activation-instructions-inline-greeting:
       path: .sinapse-ai/product/templates/activation-instructions-inline-greeting.yaml
@@ -6438,7 +6456,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:ffdaf95cccaba6355368ca2e3ba2d2675e2661c52a91adaeb5cc265dca894f5a
-      lastVerified: '2026-03-30T18:02:59.488Z'
+      lastVerified: '2026-03-30T18:05:54.953Z'
     codex-rules:
       path: .sinapse-ai/product/templates/ide-rules/codex-rules.md
       layer: L2
@@ -7992,23 +8010,20 @@ entities:
       path: .sinapse-ai/core/index.js
       layer: L1
       type: module
-      purpose: Entity at .sinapse-ai\core\index.js
+      purpose: Entity at .sinapse-ai\core\health-check\checks\project\index.js
       keywords:
         - index
       usedBy: []
       dependencies:
-        - config-cache
-        - config-loader
-        - context-detector
-        - context-loader
-        - elicitation-engine
-        - session-manager
-        - agent-elicitation
-        - task-elicitation
-        - workflow-elicitation
-        - output-formatter
-        - yaml-validator
-        - registry-loader
+        - package-json
+        - dependencies
+        - framework-config
+        - node-version
+        - sinapse-directory
+        - agent-config
+        - task-definitions
+        - workflow-dependencies
+        - constitution-consistency
       externalDeps: []
       plannedDeps:
         - health-check
@@ -8017,8 +8032,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:96d2ca175a1ca9e7ed2c640195133f80205eee2070e96a47cb39f5b6a091f6b5
-      lastVerified: '2026-03-30T18:02:59.520Z'
+      checksum: sha256:0fc2732f18f9a853b6d750362836a4472c9921bf3b4e203c9855165fd31a7e88
+      lastVerified: '2026-03-30T18:05:54.952Z'
     code-intel-client:
       path: .sinapse-ai/core/code-intel/code-intel-client.js
       layer: L1
@@ -8281,7 +8296,6 @@ entities:
         - elicitation
       usedBy:
         - index.esm
-        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -8302,7 +8316,6 @@ entities:
         - engine
       usedBy:
         - index.esm
-        - index
         - batch-creator
         - component-generator
       dependencies:
@@ -8327,7 +8340,6 @@ entities:
         - manager
       usedBy:
         - index.esm
-        - index
         - elicitation-engine
       dependencies: []
       externalDeps: []
@@ -8349,7 +8361,6 @@ entities:
         - elicitation
       usedBy:
         - index.esm
-        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -8371,7 +8382,6 @@ entities:
       usedBy:
         - verify-workflow-gaps
         - index.esm
-        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -8702,6 +8712,7 @@ entities:
       usedBy:
         - check-registry
         - engine
+        - constitution-consistency
         - console
         - markdown
         - build-config
@@ -8923,7 +8934,6 @@ entities:
         - registry
         - loader
       usedBy:
-        - index
         - registry-syncer
         - framework-governor
         - code-intel-source
@@ -10064,7 +10074,6 @@ entities:
         - greeting-builder
         - unified-activation-pipeline
         - index.esm
-        - index
         - context-loader
       dependencies:
         - atomic-write
@@ -10089,7 +10098,6 @@ entities:
         - context-loading
         - unified-activation-pipeline
         - index.esm
-        - index
       dependencies:
         - context-detector
       externalDeps: []
@@ -10481,24 +10489,23 @@ entities:
       checksum: sha256:5a8b983ffe7cc31a8145c5067298badbb6c445a5ccf66e300bca0269312869df
       lastVerified: '2026-03-30T18:02:59.558Z'
     constitution-consistency:
-      path: .sinapse-ai/core/doctor/checks/constitution-consistency.js
+      path: .sinapse-ai/core/health-check/checks/project/constitution-consistency.js
       layer: L1
       type: module
-      purpose: Entity at .sinapse-ai\core\doctor\checks\constitution-consistency.js
+      purpose: '''Validates Constitution articles are consistent across all framework documents'','
       keywords:
         - constitution
         - consistency
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
+      usedBy:
+        - index
+      dependencies:
+        - base-check
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:659489ab7c353f4b69473e72b046e43ada1342acdc017398cb6a0b60ffb0ef5b
-      lastVerified: '2026-03-30T18:02:59.558Z'
+      checksum: sha256:55cd12c67c7dfbd35dc25db20b35b94fa4e8e5104488dacf6fc4834be73eb767
+      lastVerified: '2026-03-30T18:05:54.952Z'
     core-config:
       path: .sinapse-ai/core/doctor/checks/core-config.js
       layer: L1
@@ -10622,7 +10629,8 @@ entities:
       keywords:
         - node
         - version
-      usedBy: []
+      usedBy:
+        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -11960,7 +11968,8 @@ entities:
       keywords:
         - agent
         - config
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -11979,7 +11988,8 @@ entities:
       purpose: '''Verifies required dependencies are installed'','
       keywords:
         - dependencies
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -11999,7 +12009,8 @@ entities:
       keywords:
         - framework
         - config
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -12019,7 +12030,8 @@ entities:
       keywords:
         - package
         - json
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -12039,7 +12051,8 @@ entities:
       keywords:
         - sinapse
         - directory
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -12059,7 +12072,8 @@ entities:
       keywords:
         - task
         - definitions
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -12079,7 +12093,8 @@ entities:
       keywords:
         - workflow
         - dependencies
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - base-check
       externalDeps: []
@@ -14493,7 +14508,6 @@ entities:
       usedBy:
         - agent-config-loader
         - index.esm
-        - index
         - config-resolver
       dependencies: []
       externalDeps: []
@@ -14515,7 +14529,6 @@ entities:
         - loader
       usedBy:
         - index.esm
-        - index
       dependencies:
         - agent-config-loader
       externalDeps: []
@@ -14917,7 +14930,6 @@ entities:
       usedBy:
         - next
         - index.esm
-        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -15868,7 +15880,6 @@ entities:
       usedBy:
         - modification-validator
         - index.esm
-        - index
         - component-generator
       dependencies: []
       externalDeps: []

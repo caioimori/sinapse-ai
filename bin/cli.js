@@ -370,6 +370,26 @@ async function cmdInstallGlobal() {
     }
   }
 
+  // Phase 8: Install project-local files (.sinapse-ai/, .claude/, .env)
+  console.log(`\n${CYAN}Phase 8:${NC} Installing project files in current directory`);
+  try {
+    const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
+    if (fs.existsSync(wizardPath)) {
+      const { runWizard: executeWizard } = require(wizardPath);
+      await executeWizard({
+        quiet: true,
+        language: language,
+        selectedLLM: llmChoice,
+      });
+      console.log(`  ${GREEN}OK${NC} Project files installed (.sinapse-ai/, .claude/)`);
+    } else {
+      console.log(`  ${YELLOW}SKIP${NC} Project installer not available`);
+    }
+  } catch (error) {
+    console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
+    console.log(`  ${DIM}Run 'sinapse install' in your project later to complete setup${NC}`);
+  }
+
   // Verify
   console.log(`\n${CYAN}Verification:${NC}`);
   verifyInstall();
@@ -789,6 +809,26 @@ async function cmdUpdateGlobal() {
   meta.squads = squads.length;
   meta.commands = writtenAgents.size;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+
+  // Phase 4: Update project-local files (.sinapse-ai/, .claude/)
+  console.log(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
+  try {
+    const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
+    if (fs.existsSync(wizardPath)) {
+      const { runWizard: executeWizard } = require(wizardPath);
+      await executeWizard({
+        quiet: true,
+        language: meta.language || 'pt',
+        selectedLLM: llmChoice,
+      });
+      console.log(`  ${GREEN}OK${NC} Project files updated (.sinapse-ai/, .claude/)`);
+    } else {
+      console.log(`  ${YELLOW}SKIP${NC} Project installer not available`);
+    }
+  } catch (error) {
+    console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
+    console.log(`  ${DIM}Run 'sinapse install' in your project later to complete update${NC}`);
+  }
 
   let startCmd;
   if (llmChoice === 'codex') startCmd = `Digite ${CYAN}codex${NC} para comecar`;
