@@ -350,11 +350,7 @@ function installScripts(chromePath, platform) {
     ok(`${name} created at ${scriptPath}`);
   }
 
-  // Check PATH
-  const pathDirs = (process.env.PATH || '').split(path.delimiter);
-  if (!pathDirs.includes(scriptsDir)) {
-    warn(`${scriptsDir} not in PATH. Add to your shell profile: export PATH="${scriptsDir}:$PATH"`);
-  }
+  // PATH check not needed — hooks use absolute paths (v7.4.7+)
 
   return scriptsDir;
 }

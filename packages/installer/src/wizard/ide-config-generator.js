@@ -639,17 +639,19 @@ function showSuccessSummary(result) {
     return;
   }
 
-  console.log(`\n✅ Created ${result.files.length} IDE configuration(s):`);
+  // Compact summary: categorize files instead of listing each one
+  const agents = result.files.filter(f => f.includes('agents/') || f.includes('agents\\'));
+  const rules = result.files.filter(f => f.includes('rules/') || f.includes('rules\\'));
+  const hooks = result.files.filter(f => f.includes('hooks/') || f.includes('hooks\\'));
+  const other = result.files.length - agents.length - rules.length - hooks.length;
 
-  for (const file of result.files) {
-    console.log(`  - ${path.basename(file)}`);
-  }
+  const parts = [];
+  if (agents.length) parts.push(`${agents.length} agents`);
+  if (rules.length) parts.push(`${rules.length} rules`);
+  if (hooks.length) parts.push(`${hooks.length} hooks`);
+  if (other > 0) parts.push(`${other} configs`);
 
-  console.log('\n📋 Next Steps:');
-  console.log('  1. Open your project in your selected IDE(s)');
-  console.log('  2. The IDE should automatically recognize SINAPSE configuration');
-  console.log('  3. Try activating an agent with @agent-name');
-  console.log('  4. Use * commands to interact with agents\n');
+  console.log(`\n✅ IDE: ${result.files.length} files (${parts.join(', ')})`);
 }
 
 /**

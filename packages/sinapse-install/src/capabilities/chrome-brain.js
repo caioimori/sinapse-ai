@@ -757,11 +757,7 @@ function installChromeBrain(options = {}) {
         }
       }
 
-      // Warn if binDir not in PATH
-      const pathDirs = (process.env.PATH || '').split(path.delimiter);
-      if (!pathDirs.some((d) => d === binDir || d === binDir + path.sep)) {
-        LOG.warn(`${binDir} may not be in your PATH. Add it to your shell profile.`);
-      }
+      // PATH check not needed — hooks use absolute paths (v7.4.7+)
     } catch (err) {
       const msg = `Failed to create scripts: ${err.message}`;
       LOG.fail(msg);

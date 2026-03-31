@@ -104,16 +104,22 @@ function formatComponentSection(title, componentResults, componentName) {
 
   if (checks.length === 0) return '';
 
-  const allSuccess = checks.every((c) => c.status === 'success');
+  const passed = checks.filter((c) => c.status === 'success').length;
+  const total = checks.length;
+  const allSuccess = passed === total;
   const icon = allSuccess ? chalk.green('✅') : chalk.yellow('⚠️');
 
-  const lines = [`${icon} ${chalk.bold(title)}`];
+  const lines = [`${icon} ${chalk.bold(title)}: ${passed}/${total} checks passed`];
 
-  checks.forEach((check) => {
-    const statusIcon = check.status === 'success' ? chalk.green('✓') : chalk.yellow('⚠');
-    const message = check.file ? `${check.message} (${check.file})` : check.message;
-    lines.push(`  ${statusIcon} ${message}`);
-  });
+  // Only show individual checks if there are failures
+  if (!allSuccess) {
+    checks
+      .filter((c) => c.status !== 'success')
+      .forEach((check) => {
+        const message = check.file ? `${check.message} (${check.file})` : check.message;
+        lines.push(`  ${chalk.yellow('⚠')} ${message}`);
+      });
+  }
 
   lines.push('');
 

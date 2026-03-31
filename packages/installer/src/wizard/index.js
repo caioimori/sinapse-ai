@@ -499,17 +499,10 @@ async function runWizard(options = {}) {
       });
 
       if (sinapseCoreResult.success) {
-        console.log(`✅ SINAPSE core installed (${sinapseCoreResult.installedFolders.length} folders)`);
-        console.log(
-          `   - Agents: ${sinapseCoreResult.installedFolders.includes('agents') ? '✓' : '⨉'}`,
-        );
-        console.log(`   - Tasks: ${sinapseCoreResult.installedFolders.includes('tasks') ? '✓' : '⨉'}`);
-        console.log(
-          `   - Workflows: ${sinapseCoreResult.installedFolders.includes('workflows') ? '✓' : '⨉'}`,
-        );
-        console.log(
-          `   - Templates: ${sinapseCoreResult.installedFolders.includes('templates') ? '✓' : '⨉'}`,
-        );
+        const pillars = ['core', 'development', 'product', 'infrastructure'];
+        const installed = pillars.filter(p => sinapseCoreResult.installedFolders.includes(p));
+        const aux = sinapseCoreResult.installedFolders.filter(f => !pillars.includes(f));
+        console.log(`✅ SINAPSE core: ${sinapseCoreResult.installedFiles.length} files (${installed.length} pillars, ${aux.length} modules)`);
       }
       answers.sinapseCoreInstalled = true;
       answers.sinapseCoreResult = sinapseCoreResult;

@@ -24,36 +24,24 @@ function getSinapseCoreSourcePath() {
 
 /**
  * Folders to copy from .sinapse-ai
- * Includes both v4 modular structure and v2.0 legacy flat structure for compatibility
+ * v4.0.4 Modular Structure + active auxiliary directories
  * @constant {string[]}
  */
 const FOLDERS_TO_COPY = [
-  // v4.0.4 Modular Structure (Story 2.15)
+  // v4.0.4 Four Pillars
   'core',           // Framework utilities, config, registry, migration
   'development',    // Agents, tasks, workflows, scripts, personas
   'product',        // Templates, checklists, cli, api
   'infrastructure', // Hooks, telemetry, integrations, tools
 
-  // v2.0 Legacy Flat Structure (for backwards compatibility)
-  'agents',
-  'agent-teams',
-  'checklists',
-  'data',
-  'docs',
-  'elicitation',
-  'scripts',
-  'tasks',
-  'templates',
-  'tools',
-  'workflows',
-
-  // Additional directories
-  'cli',                    // CLI commands
-  'manifests',              // Manifest definitions
-  'schemas',                // JSON schemas for validation (*validate-squad, *migrate-squad)
+  // Active auxiliary directories (referenced by code/config)
+  'cli',                    // CLI commands (bin/sinapse.js)
+  'data',                   // Entity registry, tech presets, knowledge base
+  'elicitation',            // Questionnaires (core-config reference)
+  'schemas',                // JSON schemas for validation
+  'scripts',                // Utility scripts (core-config reference)
+  'utils',                  // Shared utilities (tests, format-duration)
   'workflow-intelligence',  // Workflow intelligence engine (*next, *patterns)
-  'monitor',                // Claude Code hooks for monitoring
-  'presets',                // Configuration presets
 ];
 
 /**

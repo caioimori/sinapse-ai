@@ -147,17 +147,17 @@ intelligent_routing:
   direct_to_specialist:
     when: "Single, well-defined task with clear specialist"
     examples:
-      - "Crie um headline" → @headline-specialist
-      - "Analise esse concorrente" → @deep-researcher
-      - "Me ajude com pricing" → @pricing-strategist
-      - "Revise meu codigo" → @qa
+      - '"Crie um headline" -> @headline-specialist'
+      - '"Analise esse concorrente" -> @deep-researcher'
+      - '"Me ajude com pricing" -> @pricing-strategist'
+      - '"Revise meu codigo" -> @qa'
 
   via_orchestrator:
     when: "Multi-agent workflow or broad domain request"
     examples:
-      - "Construa minha marca" → @brand-orqx
-      - "Campanha de lancamento" → @paidmedia-orqx + @copy-orqx
-      - "Assessment de seguranca" → @cyber-orqx
+      - '"Construa minha marca" -> @brand-orqx'
+      - '"Campanha de lancamento" -> @paidmedia-orqx + @copy-orqx'
+      - '"Assessment de seguranca" -> @cyber-orqx'
 
 # ══════════════════════════════════════════════════════════════════════════════
 # COMPLETE ROUTING TABLE — ALL 18 SQUADS
@@ -597,7 +597,7 @@ framework_compatibility:
       - "@sinapse-orqx sends domain request to Imperator"
       - "Imperator routes to correct squad orchestrator(s)"
       - "Squad orchestrator executes with its agents"
-      - "Results flow back: squad → Imperator → @sinapse-orqx"
+      - "Results flow back: squad -> Imperator -> @sinapse-orqx"
     coexistence_rules:
       - "SINAPSE agents own development workflow: code, testing, architecture, stories, deploys"
       - "Sinapse own domain expertise: branding, content, copy, growth, finance, etc."
