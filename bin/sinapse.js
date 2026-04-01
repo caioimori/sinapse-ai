@@ -1077,6 +1077,40 @@ async function main() {
       showHelp();
       break;
 
+    case 'health': {
+      // Framework health analytics
+      const { runHealth } = require('../.sinapse-ai/cli/commands/health/index.js');
+      const healthArgs = args.slice(1);
+      await runHealth({
+        json: healthArgs.includes('--json'),
+        fix: healthArgs.includes('--fix'),
+      });
+      break;
+    }
+
+    case 'performance': {
+      // Squad & agent performance ranking
+      const { runPerformance } = require('../.sinapse-ai/cli/commands/performance/index.js');
+      const perfArgs = args.slice(1);
+      const topIdx = perfArgs.indexOf('--top');
+      await runPerformance({
+        json: perfArgs.includes('--json'),
+        top: topIdx >= 0 ? parseInt(perfArgs[topIdx + 1], 10) : undefined,
+      });
+      break;
+    }
+
+    case 'routing-intel': {
+      // Routing intelligence analyzer
+      const { runRoutingIntel } = require('../.sinapse-ai/cli/commands/routing-intel/index.js');
+      const riArgs = args.slice(1);
+      await runRoutingIntel({
+        json: riArgs.includes('--json'),
+        analyze: riArgs.includes('analyze'),
+      });
+      break;
+    }
+
     case undefined:
       // No arguments - launch Claude Code with SINAPSE branding
       launchSinapse([]);
