@@ -676,11 +676,17 @@ async function copyClaudeHooksFolder(projectRoot) {
 
   await fs.ensureDir(targetDir);
 
-  // Only copy JS hooks that work standalone (no Python/shell deps)
+  // Copy CJS hooks that work standalone (no Python/shell deps)
   const HOOKS_TO_COPY = [
     'synapse-engine.cjs',
     'code-intel-pretool.cjs',
     'precompact-session-digest.cjs',
+    // v7.6.0 Constitutional enforcement hooks
+    'enforce-architecture-first.cjs',
+    'enforce-delegation.cjs',
+    'enforce-story-gate.cjs',
+    'secret-scanning.cjs',
+    'write-path-validation.cjs',
     'README.md',
   ];
 
@@ -727,6 +733,32 @@ const HOOK_EVENT_MAP = {
     event: 'PreCompact',
     matcher: null,
     timeout: 10,
+  },
+  // v7.6.0 Constitutional enforcement hooks
+  'enforce-architecture-first.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  'enforce-story-gate.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  'write-path-validation.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  'enforce-delegation.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit|Bash',
+    timeout: 5,
+  },
+  'secret-scanning.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
   },
 };
 
