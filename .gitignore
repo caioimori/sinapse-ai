@@ -90,6 +90,8 @@ CLAUDE.md
 !.claude/CLAUDE.md
 !.claude/rules/
 !.claude/settings.json
+!.claude/hooks/
+!.claude/skills/
 .gemini
 !.gemini/
 !.gemini/rules/
@@ -341,8 +343,14 @@ synapse-package.zip
 # Remove entries after validation
 # ============================================
 scripts/glue/
-.claude/skills/
-!.claude/hooks/
+# Framework skills are tracked (exception added at line ~92)
+# Runtime/user skills are ignored by .claude/skills/* pattern below
+.claude/skills/*
+!.claude/skills/db-review.md
+!.claude/skills/test-guard.md
+!.claude/skills/story-update.md
+!.claude/skills/component-check.md
+!.claude/skills/api-review.md
 .claude/templates/
 .claude/agents/
 .claude/agent-memory/

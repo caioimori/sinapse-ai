@@ -44,6 +44,18 @@ The incoming agent receives:
 2. The **handoff artifact** from the previous agent (compact summary)
 3. **NOT** the previous agent's full persona/instructions/tool definitions
 
+### Scratchpad Protocol (v1.1)
+
+**Before starting work**, the incoming agent MUST:
+1. Check if `.sinapse/scratchpad/{story-id}/` exists
+2. If yes, read ALL files in that directory (discoveries from previous agents)
+3. Use those insights to inform decisions (avoid rediscovering known issues)
+
+**Before handing off**, the outgoing agent SHOULD:
+1. Write key discoveries to `.sinapse/scratchpad/{story-id}/{agent-id}.md`
+2. Include the scratchpad path in the handoff artifact `scratchpad_path` field
+3. Keep each file under 2KB (focused insights, not logs)
+
 ### Compaction Limits
 
 | Limit | Value |

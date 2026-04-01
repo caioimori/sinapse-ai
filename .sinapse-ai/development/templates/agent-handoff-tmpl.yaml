@@ -40,6 +40,9 @@ handoff:
   # What the incoming agent should do next (max 2 sentences)
   next_action: ""         # e.g., "Run QA gate on TOK-4A. Verify handoff preserves story context."
 
+  # Cross-agent knowledge sharing (v1.1)
+  scratchpad_path: ""     # e.g., ".sinapse/scratchpad/TOK-4A/" — read before starting work
+
 # --- Compaction Limits (AC 9) ---
 # Max artifact size: 500 tokens (~375 words)
 # Max retained summaries: 3 (oldest discarded on 4th switch)

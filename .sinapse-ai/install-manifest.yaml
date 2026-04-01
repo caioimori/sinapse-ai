@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.5.1
-generated_at: "2026-03-30T22:35:57.460Z"
+version: 7.6.0
+generated_at: "2026-04-01T02:05:13.320Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1104
 files:
@@ -2565,9 +2565,9 @@ files:
     type: task
     size: 2254
   - path: development/templates/agent-handoff-tmpl.yaml
-    hash: sha256:abb8d46dce28abb9cd140931db4283202d7c2b89220c43283c6518813a0911ad
+    hash: sha256:9b28cc790c81960acf9c8393555d6d5474afa724e152784f8983bbf70be89b3a
     type: template
-    size: 1988
+    size: 2124
   - path: development/templates/chrome-brain/knowledge-base/chrome-brain.md
     hash: sha256:ed47917601edfe48153290ea57b3d367220ceba6b976e7222c2451af6b4a6566
     type: template
