@@ -44,7 +44,18 @@ The agent creates the branch. The user never needs to name it.
 
 Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
-**Detection:** Check `git config user.name` or `$USERNAME` or `$USER` to determine who is working.
+**User Detection (priority order):**
+1. `git config user.name` -> lookup in mapping table (case-insensitive)
+2. `$USERNAME` (Windows) or `$USER` (Unix) -> lookup in mapping table
+3. Fallback: `dev/`
+
+**Mapping Table:**
+
+| git config / env var contains | Branch prefix |
+|-------------------------------|---------------|
+| caio (case-insensitive)       | `caio/`       |
+| matheus OR soier              | `soier/`      |
+| (anything else)               | `dev/`        |
 
 ### 3. Before Every Commit — Safety Checks (MANDATORY)
 

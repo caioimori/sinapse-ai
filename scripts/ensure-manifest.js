@@ -37,6 +37,15 @@ async function main() {
     return;
   }
 
+  // In pre-commit: validate-only to prevent merge conflicts (Art. IX)
+  // Regeneration happens via `npm run generate:manifest` or prepublishOnly
+  const validateOnly = process.argv.includes('--validate-only');
+
+  if (validateOnly) {
+    console.log('⚠️ manifest: outdated — run `npm run generate:manifest` to update');
+    return;
+  }
+
   console.log('🔄 manifest: outdated, regenerating...');
   const manifest = await generateManifest();
   await writeManifest(manifest);

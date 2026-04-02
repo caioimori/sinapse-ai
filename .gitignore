@@ -181,6 +181,8 @@ PRN
 
 # Framework runtime artifacts
 .sinapse-ai/.session/
+.sinapse-ai/.cache/
+.sinapse-ai/.tmp/
 .sinapse-ai/manifests/*.csv
 .sinapse-ai/core/registry/service-registry.json
 

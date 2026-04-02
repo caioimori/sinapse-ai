@@ -33,6 +33,17 @@ Before ANY work begins, the agent MUST:
 
 Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
+**User Detection (priority order):**
+1. `git config user.name` -> lookup in mapping table (case-insensitive)
+2. `$USERNAME` (Windows) or `$USER` (Unix) -> lookup
+3. Fallback: `dev/`
+
+| git config / env contains | Branch prefix |
+|----------------------------|---------------|
+| {{user1}} (case-insensitive) | `{{user1}}/` |
+| {{user2}} (case-insensitive) | `{{user2}}/` |
+| (anything else)              | `dev/`        |
+
 ## Before Every Commit — Safety Checks
 
 1. `git status` — verify only expected files changed

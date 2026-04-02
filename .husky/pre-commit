@@ -5,5 +5,6 @@
 # Bypass: git commit --no-verify
 node bin/utils/framework-guard.js
 
-# Keep install-manifest.yaml synchronized whenever .sinapse-ai files are committed.
-node scripts/ensure-manifest.js
+# Validate install-manifest.yaml (warn-only to prevent merge conflicts — Art. IX)
+# To regenerate: npm run generate:manifest
+node scripts/ensure-manifest.js --validate-only

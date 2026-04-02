@@ -188,8 +188,9 @@ Pente fino em cada arquivo do framework. Zero assinaturas escondidas, zero easte
 - [ ] `.github/workflows/` — actions com refs externas
 - [ ] `scripts/` — automacoes com refs externas
 - [ ] `packages/` — package.json internos (author, contributors, repository)
-- [ ] Git tags — verificar se alguma tag referencia AIOX
-- [ ] Git commit messages — verificar se tem refs problematicas (informativo, nao rewrite)
+- [x] Git tags — verificar se alguma tag referencia AIOX (VERIFIED 2026-04-02: ZERO tags AIOX)
+- [x] Git commit messages — verificar se tem refs problematicas (informativo, nao rewrite)
+- [x] GitHub Issues/PRs/Labels/Milestones — VERIFIED 2026-04-02: 0 issues, 0 PRs, 0 AIOX labels, description=SINAPSE
 
 ### Pos-Audit
 - [ ] Regenerar package-lock.json limpo (`npm install`)

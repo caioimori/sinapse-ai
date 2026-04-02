@@ -2,38 +2,65 @@
 
 Template reutilizavel para configurar colaboracao segura em qualquer projeto.
 
-## Uso
-
-Copie os arquivos deste diretorio para o projeto alvo:
+## Uso rapido
 
 ```bash
-# 1. Regra para agentes Claude Code
-cp safe-collaboration-rule.md <projeto>/.claude/rules/safe-collaboration.md
-
-# 2. Guia para a equipe
-cp parallel-workflow-guide.md <projeto>/docs/guides/parallel-workflow.md
-
-# 3. CODEOWNERS (ajuste os usernames)
-cp CODEOWNERS.template <projeto>/.github/CODEOWNERS
-
-# 4. PR template simplificado
-cp pull_request_template.md <projeto>/.github/PULL_REQUEST_TEMPLATE.md
+bash apply.sh <projeto> <owner-github> <collab-github> [prefix1] [prefix2]
 ```
 
-## Configuracao no GitHub
+### Exemplo
 
-Apos copiar os arquivos, configure no repositorio:
+```bash
+bash .sinapse-ai/infrastructure/templates/safe-collab/apply.sh \
+  /path/to/meu-projeto \
+  caioimori \
+  Matheus-soier \
+  caio \
+  soier
+```
 
-1. Settings > Rules > Rulesets > New ruleset
-   - Target: `main`
+Isso cria automaticamente:
+- `.claude/rules/safe-collaboration.md` — regras para agentes
+- `.github/PULL_REQUEST_TEMPLATE.md` — template simplificado de PR
+- `.github/CODEOWNERS` — code owners configurado
+- `docs/guides/parallel-workflow.md` — guia para equipe
+- Atualiza `.gitignore` com patterns de runtime
+
+## Configuracao manual no GitHub
+
+Apos rodar o script, configure no repositorio:
+
+1. **Settings > Rules > Rulesets > New ruleset** (target: `main`)
    - Block direct pushes
    - Require 1 PR approval
    - Block force pushes
    - Block branch deletion
    - Dismiss stale reviews
 
-2. Settings > Collaborators
+2. **Settings > Collaborators**
    - Adicionar membros com permissao `Write` (nunca Admin)
 
-3. Settings > General
+3. **Settings > General**
    - Marcar "Automatically delete head branches"
+
+## Arquivos incluidos
+
+| Arquivo | Proposito |
+|---------|-----------|
+| `apply.sh` | Script de aplicacao automatica |
+| `safe-collaboration-rule.md` | Regra para `.claude/rules/` |
+| `parallel-workflow-guide.md` | Guia para equipe |
+| `CODEOWNERS.template` | Template de code owners |
+| `pull_request_template.md` | PR template simplificado |
+
+## Placeholders
+
+| Placeholder | Descricao | Exemplo |
+|-------------|-----------|---------|
+| `{{USER_1}}` | Nome do usuario 1 | Caio |
+| `{{USER_2}}` | Nome do usuario 2 | Matheus |
+| `{{user1}}` | Prefixo de branch user 1 | caio |
+| `{{user2}}` | Prefixo de branch user 2 | soier |
+| `{{OWNER_GITHUB}}` | Username GitHub do owner | caioimori |
+| `{{COLLAB_GITHUB}}` | Username GitHub do collab | Matheus-soier |
+| `{{PROJECT_NAME}}` | Nome do projeto | meu-projeto |
