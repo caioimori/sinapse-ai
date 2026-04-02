@@ -230,9 +230,6 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
     !file.startsWith('test-'),  // Exclude test agents
   );
 
-  // Check if this is AntiGravity - needs workflow files instead of direct copy
-  const isAntiGravity = ideConfig && ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
-
   for (const file of agentFiles) {
     const sourcePath = path.join(sourceDir, file);
     const agentName = file.replace('.md', '');
@@ -240,20 +237,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
     // Only copy if source is a file (not directory)
     const stat = await fs.stat(sourcePath);
     if (stat.isFile()) {
-      if (isAntiGravity) {
-        // For AntiGravity: create workflow activation files
-        const workflowContent = generateAntiGravityWorkflow(agentName);
-        const targetPath = path.join(targetDir, file);
-        await fs.writeFile(targetPath, workflowContent, 'utf8');
-        copiedFiles.push(targetPath);
-
-        // Also copy the actual agent to .antigravity/agents
-        const agentsDir = path.join(projectRoot, ideConfig.specialConfig.agentsFolder);
-        await fs.ensureDir(agentsDir);
-        const agentTargetPath = path.join(agentsDir, file);
-        await fs.copy(sourcePath, agentTargetPath);
-        copiedFiles.push(agentTargetPath);
-      } else if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
+      if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
         // GitHub Copilot: apply transformer for .agent.md format with YAML frontmatter
         try {
           const agentParser = require('../../../../.sinapse-ai/infrastructure/scripts/ide-sync/agent-parser');
@@ -317,77 +301,6 @@ async function copyClaudeRulesFolder(projectRoot) {
   return copiedFiles;
 }
 
-/**
- * Generate AntiGravity workflow activation file content
- * @param {string} agentName - Name of the agent (e.g., 'dev', 'architect')
- * @returns {string} Workflow file content
- */
-function generateAntiGravityWorkflow(agentName) {
-  // Capitalize first letter for display
-  const displayName = agentName.charAt(0).toUpperCase() + agentName.slice(1);
-
-  return `---
-description: Ativa o agente ${displayName}
----
-
-# Ativação do Agente ${displayName}
-
-**INSTRUÇÕES CRÍTICAS PARA O ANTIGRAVITY:**
-
-1. Leia COMPLETAMENTE o arquivo \`.antigravity/agents/${agentName}.md\`
-2. Siga EXATAMENTE as \`activation-instructions\` definidas no bloco YAML do agente
-3. Adote a persona conforme definido no agente
-4. Execute a saudação conforme \`greeting_levels\` definido no agente
-5. **MANTENHA esta persona até receber o comando \`*exit\`**
-6. Responda aos comandos com prefixo \`*\` conforme definido no agente
-7. Siga as regras globais do projeto em \`.antigravity/rules.md\`
-
-**Comandos disponíveis:** Use \`*help\` para ver todos os comandos do agente.
-`;
-}
-
-/**
- * Create AntiGravity configuration JSON file
- * @param {string} projectRoot - Project root directory
- * @param {Object} ideConfig - AntiGravity IDE config
- * @returns {Promise<string>} Path to created file
- */
-async function createAntiGravityConfigJson(projectRoot, ideConfig) {
-  const configPath = path.join(projectRoot, ideConfig.specialConfig.configJsonPath);
-  const projectName = path.basename(projectRoot);
-
-  const config = {
-    version: '1.0',
-    project: projectName,
-    workspace: projectRoot.replace(/\\/g, '/'),
-    agents: {
-      enabled: true,
-      directory: ideConfig.specialConfig.agentsFolder,
-      default: 'sinapse-orqx',
-    },
-    rules: {
-      enabled: true,
-      file: ideConfig.configFile,
-    },
-    features: {
-      storyDrivenDevelopment: true,
-      agentActivation: true,
-      workflowAutomation: true,
-    },
-    paths: {
-      stories: 'docs/stories',
-      prd: 'docs/prd',
-      architecture: 'docs/architecture',
-      tasks: '.sinapse-ai/tasks',
-      workflows: '.sinapse-ai/workflows',
-    },
-  };
-
-  await fs.ensureDir(path.dirname(configPath));
-  await fs.writeFile(configPath, JSON.stringify(config, null, 4), 'utf8');
-
-  return configPath;
-}
 
 /**
  * Generate IDE configuration files
@@ -514,14 +427,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
           createdFiles.push(...agentFiles);
           createdFolders.push(path.join(projectRoot, ide.agentFolder));
 
-          // For AntiGravity, also create the antigravity.json config file
-          if (ide.specialConfig && ide.specialConfig.type === 'antigravity') {
-            const configJsonPath = await createAntiGravityConfigJson(projectRoot, ide);
-            createdFiles.push(configJsonPath);
-            spinner.succeed(`Created AntiGravity config and ${agentFiles.length} workflow files`);
-          } else {
-            spinner.succeed(`Copied ${agentFiles.length} agent files to ${ide.agentFolder}`);
-          }
+          spinner.succeed(`Copied ${agentFiles.length} agent files to ${ide.agentFolder}`);
         }
 
         // For Claude Code, also copy .claude/rules folder, hooks, and settings

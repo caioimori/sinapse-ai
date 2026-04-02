@@ -203,8 +203,8 @@ describe('IDE Config Generator', () => {
 
       expect(result.success).toBe(true);
 
-      // AntiGravity uses .antigravity/rules.md
-      const configPath = path.join(testDir, '.antigravity', 'rules.md');
+      // Codex uses .codex/instructions.md
+      const configPath = path.join(testDir, '.codex', 'instructions.md');
       expect(await fs.pathExists(configPath)).toBe(true);
     });
 
@@ -216,12 +216,9 @@ describe('IDE Config Generator', () => {
         projectRoot: testDir,
       });
 
-      // v2.1: Cursor uses .claude/CLAUDE.md (not .cursorrules)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      const configPath = path.join(testDir, '.claude', 'CLAUDE.md');
       const content = await fs.readFile(configPath, 'utf8');
 
-      // v2.1 templates use static content from .sinapse-ai/templates/ide-rules/
-      // They contain SINAPSE standard rules
       expect(content).toContain('SINAPSE');
       expect(content).toContain('Development Rules');
     });
@@ -240,12 +237,10 @@ describe('IDE Config Generator', () => {
       expect(await fs.pathExists(configPath)).toBe(true);
 
       const content = await fs.readFile(configPath, 'utf8');
-      // Should contain SINAPSE rules content
       expect(content).toContain('SINAPSE');
     });
 
     it('should create text config files successfully', async () => {
-      // All v2.1 IDEs use text (markdown) format for rules
       const selectedIDEs = ['codex'];
       const wizardState = { projectName: 'test', projectType: 'greenfield' };
 
@@ -255,7 +250,7 @@ describe('IDE Config Generator', () => {
 
       expect(result.success).toBe(true);
 
-      const configPath = path.join(testDir, '.antigravity', 'rules.md');
+      const configPath = path.join(testDir, '.codex', 'instructions.md');
       expect(await fs.pathExists(configPath)).toBe(true);
     });
 

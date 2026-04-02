@@ -13,19 +13,19 @@ Guia para integrar o SINAPSE com IDEs e plataformas de desenvolvimento com IA su
 
 ## IDEs Suportadas
 
-O SINAPSE suporta 6 plataformas de desenvolvimento com IA. Escolha a que melhor se adapta ao seu fluxo de trabalho.
+O SINAPSE suporta 5 plataformas de desenvolvimento com IA. Escolha a que melhor se adapta ao seu fluxo de trabalho.
 
 ### Tabela de Comparação Rápida
 
-| Funcionalidade         | Claude Code | Codex CLI | Cursor | Copilot | AntiGravity | Gemini CLI |
-| ---------------------- | :---------: | :-------: | :----: | :-----: | :---------: | :--------: |
-| **Ativação de Agente** |  /command   |  /skills  | @mention | chat modes | workflow-based | prompt mention |
-| **Suporte MCP**        |   Native    |  Native   | Config | Config | Provider-specific | Native |
-| **Tarefas de Subagente** |   Yes     |    Yes    |   No   |   No   |     Yes     |     No     |
-| **Auto-sync**          |     Yes     |    Yes    |  Yes   |  Yes   |     Yes     |    Yes     |
-| **Sistema de Hooks**   |     Yes     |  Limited  |   No   |   No   |      No     |     Yes    |
-| **Skills/Commands**    |   Native    |  Native   |   No   |   No   |      No     |   Native   |
-| **Recomendação**       |    Best     |   Best    |  Best  |  Good  |     Good    |   Good     |
+| Funcionalidade         | Claude Code | Codex CLI | Cursor | Copilot | Gemini CLI |
+| ---------------------- | :---------: | :-------: | :----: | :-----: | :--------: |
+| **Ativação de Agente** |  /command   |  /skills  | @mention | chat modes | prompt mention |
+| **Suporte MCP**        |   Native    |  Native   | Config | Config | Native |
+| **Tarefas de Subagente** |   Yes     |    Yes    |   No   |   No   |     No     |
+| **Auto-sync**          |     Yes     |    Yes    |  Yes   |  Yes   |    Yes     |
+| **Sistema de Hooks**   |     Yes     |  Limited  |   No   |   No   |     Yes    |
+| **Skills/Commands**    |   Native    |  Native   |   No   |   No   |   Native   |
+| **Recomendação**       |    Best     |   Best    |  Best  |  Good  |   Good     |
 
 ### Paridade de Hooks e Impacto Funcional
 
@@ -36,17 +36,17 @@ O SINAPSE suporta 6 plataformas de desenvolvimento com IA. Escolha a que melhor 
 | Codex CLI | Limitada/parcial | Menor automação de ciclo de sessão e menor enforcement pre/post-tool | `AGENTS.md` + `/skills` + MCP + scripts de sync/validação |
 | Cursor | Sem hooks de ciclo equivalentes | Sem interceptação nativa pre/post-tool e trilha automática mais fraca | Regras sincronizadas + MCP + disciplina de workflow |
 | GitHub Copilot | Sem hooks de ciclo equivalentes | Mesmo impacto do Cursor, com maior dependência de fluxo manual | Instruções de repo, chat modes e MCP no VS Code |
-| AntiGravity | Baseado em workflow (não em hooks) | Sem paridade de ciclo de vida ao estilo Claude | Geração de workflows + sync de agentes |
+
 
 ### Consequências Práticas por Capacidade
 
 - Automação `SessionStart/SessionEnd`:
   - Forte em Claude/Gemini.
-  - Parcial ou manual em Codex/Cursor/Copilot/AntiGravity.
+  - Parcial ou manual em Codex/Cursor/Copilot.
 - Guardrails `BeforeTool/AfterTool`:
   - Mais robustos em Claude/Gemini.
   - Limitados no Codex.
-  - Predominantemente processuais em Cursor/Copilot/AntiGravity.
+  - Predominantemente processuais em Cursor/Copilot.
 - Riqueza de auditoria e telemetria automáticas:
   - Maior onde há hooks de ciclo de vida.
   - Menor onde a integração é majoritariamente por regras/instruções.
@@ -209,31 +209,6 @@ cat .github/copilot-instructions.md
 
 ---
 
-### AntiGravity
-
-**Nível de Recomendação:** Bom (integração com Google)
-
-```yaml
-config_file: .antigravity/rules.md
-config_json: .antigravity/antigravity.json
-agent_folder: .agent/workflows
-activation: workflow-based
-format: cursor-style
-mcp_support: native (Google)
-special_features:
-  - Google Cloud integration
-  - Workflow system
-  - Native Firebase tools
-```
-
-**Configuração:**
-
-1. SINAPSE cria o diretório `.antigravity/`
-2. Configure credenciais do Google Cloud
-3. Agentes sincronizados como workflows
-
----
-
 ### Gemini CLI
 
 **Nível de Recomendação:** Bom
@@ -268,8 +243,7 @@ O SINAPSE mantém uma única fonte de verdade para definições de agentes e as 
 │                        │                             │
 │            ┌───────────┼───────────┐                │
 │            ▼           ▼           ▼                │
-│  .claude/     .codex/      .cursor/                  │
-│  .antigravity/ .gemini/                              │
+│  .claude/     .codex/      .cursor/    .gemini/       │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -284,8 +258,6 @@ npm run sync:ide:cursor
 npm run sync:ide:codex
 npm run sync:ide:gemini
 npm run sync:ide:github-copilot
-npm run sync:ide:antigravity
-
 # Dry run (visualizar mudanças)
 npm run sync:ide -- --dry-run
 
@@ -378,9 +350,7 @@ Você usa Claude/Anthropic API?
         └── Não --> Quer uma IDE dedicada com IA?
             ├── Sim --> Qual modelo você prefere?
             │   ├── Claude/GPT --> Cursor (IDE com IA mais popular)
-            └── Não --> Usa Google Cloud?
-                ├── Sim --> AntiGravity (integração com Google)
-                └── Não --> Gemini CLI (Especializados)
+            └── Não --> Gemini CLI (Google AI models)
 ```
 
 ---

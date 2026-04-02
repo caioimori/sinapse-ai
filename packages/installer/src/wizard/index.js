@@ -46,38 +46,6 @@ const {
   isLLMRoutingInstalled,
 } = require('../../../../.sinapse-ai/infrastructure/scripts/llm-routing/install-llm-routing');
 
-// DISABLED: Legacy installation block superseded by squads flow (OSR-8)
-// /**
-//  * Generate AntiGravity workflow content for squad agents
-//  * @param {string} agentName - Agent name (e.g., 'data-collector')
-//  * @param {string} packName - Starter squad name (e.g., 'etl')
-//  * @returns {string} Workflow file content
-//  */
-// function generateExpansionPackWorkflow(agentName, packName) {
-//   const displayName = agentName.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-//
-//   return `---
-// description: Ativa o agente ${displayName} (${packName})
-// ---
-//
-// # Ativação do Agente ${displayName}
-//
-// **Squad:** ${packName}
-//
-// **INSTRUÇÕES CRÍTICAS PARA O ANTIGRAVITY:**
-//
-// 1. Leia COMPLETAMENTE o arquivo \`.antigravity/agents/${packName}/${agentName}.md\`
-// 2. Siga EXATAMENTE as \`activation-instructions\` definidas no bloco YAML do agente
-// 3. Adote a persona conforme definido no agente
-// 4. Execute a saudação conforme \`greeting_levels\` definido no agente
-// 5. **MANTENHA esta persona até receber o comando \`*exit\`**
-// 6. Responda aos comandos com prefixo \`*\` conforme definido no agente
-// 7. Siga as regras globais do projeto em \`.antigravity/rules.md\`
-//
-// **Comandos disponíveis:** Use \`*help\` para ver todos os comandos do agente.
-// `;
-// }
-
 /**
  * Check for existing user_profile in core-config.yaml (Story 10.2 - Idempotency)
  * Returns the existing profile if found, null otherwise

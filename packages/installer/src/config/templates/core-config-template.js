@@ -58,7 +58,7 @@ function generateCoreConfig(options = {}) {
         gemini: selectedIDEs.includes('gemini'),
         cursor: selectedIDEs.includes('cursor'),
         'github-copilot': selectedIDEs.includes('github-copilot'),
-        antigravity: selectedIDEs.includes('antigravity'),
+
         zed: selectedIDEs.includes('zed'),
         'claude-desktop': selectedIDEs.includes('claude-desktop'),
         'claude-code': selectedIDEs.includes('claude-code'),

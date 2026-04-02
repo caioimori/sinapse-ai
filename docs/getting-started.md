@@ -39,7 +39,7 @@ cd my-first-project
 - Claude Code: `/agent-name`
 - Gemini CLI: `/sinapse-menu` then `/sinapse-<agent>`
 - Codex CLI: `/skills` then `sinapse-<agent-id>`
-- Cursor/Copilot/AntiGravity: follow constraints in `docs/ide-integration.md`
+- Cursor/Copilot: follow constraints in `docs/ide-integration.md`
 
 ### Step 3: Validate first value
 
@@ -179,7 +179,7 @@ Summary:
 | Codex CLI | Limited | `/skills` then `sinapse-<agent-id>` |
 | Cursor | Limited | `@agent` + synced rules |
 | GitHub Copilot | Limited | chat modes + repo instructions |
-| AntiGravity | Limited | workflow-driven activation |
+
 
 - **Works**: fully recommended for new users.
 - **Limited**: usable with documented workarounds.

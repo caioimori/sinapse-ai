@@ -115,7 +115,7 @@ IDE-specific rule files generated during project setup. Referenced in service-re
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `antigravity-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
+
 | 2 | `claude-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 | 4 | `copilot-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 | 5 | `cursor-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
