@@ -28,6 +28,7 @@ const KEY_ARTICLES = [
   'Absolute Imports',
   'Ecosystem Metrics Accuracy',
   'Mandatory Delegation',
+  'Safe Collaboration',
 ];
 
 /**

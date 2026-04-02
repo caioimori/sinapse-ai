@@ -1,6 +1,6 @@
 # SINAPSE Constitution
 
-> **Version:** 2.0.0 | **Ratified:** 2025-01-30 | **Last Amended:** 2026-03-30
+> **Version:** 2.1.0 | **Ratified:** 2025-01-30 | **Last Amended:** 2026-04-02
 
 Este documento define os princípios fundamentais e inegociáveis do SINAPSE. Todos os agentes, tasks, e workflows DEVEM respeitar estes princípios. Violações são bloqueadas automaticamente via gates.
 
@@ -204,6 +204,38 @@ Orquestradores (sinapse-orqx e todos os *-orqx) NUNCA executam trabalho de domí
 **Gate:** Qualquer resposta de orquestrador que contenha trabalho de domínio direto sem delegação é uma violação constitucional.
 
 **Rule file:** `.claude/rules/mandatory-delegation.md`
+
+---
+
+### IX. Safe Collaboration (NON-NEGOTIABLE)
+
+Usuários são product builders, não especialistas em git. Agentes DEVEM gerenciar toda a complexidade de versionamento e colaboração automaticamente, garantindo que nenhum trabalho seja perdido ou sobrescrito.
+
+**Regras:**
+- MUST: Agentes DEVEM executar `git fetch` + sync no início de TODA sessão antes de qualquer trabalho
+- MUST: TODO trabalho DEVE acontecer em feature branch — NUNCA diretamente em `main`
+- MUST: Agentes DEVEM criar branches automaticamente com padrão `{user}/{type}/{desc}`
+- MUST: Agentes DEVEM escanear por secrets (tokens, senhas, chaves) antes de CADA commit — BLOQUEAR se encontrado
+- MUST: Antes de push, agentes DEVEM fazer merge de `origin/main` na branch e resolver conflitos
+- MUST: Agentes DEVEM criar PRs automaticamente com reviewer assignment após push
+- MUST: Operações destrutivas (`--force`, `reset --hard`, `branch -D`) requerem confirmação EXPLÍCITA do usuário
+- MUST NOT: Nenhum agente pode fazer push direto para `main` (branch protection + hook)
+- MUST NOT: Nenhum agente pode usar `git push --force` sem confirmação explícita do usuário
+- MUST NOT: Nenhum agente pode commitar arquivos contendo credentials em plaintext
+
+**Comunicação com o usuário:**
+- Usar linguagem simples, sem jargão git
+- "Salvei seu trabalho" em vez de "commitei no HEAD"
+- "Enviei para revisão" em vez de "pushei e criei PR"
+- "Atualizei seu projeto" em vez de "fiz fetch + merge de origin/main"
+
+**Aplicação:**
+- Aplica-se a TODOS os projetos onde agentes SINAPSE operam
+- Template reutilizável: `.sinapse-ai/infrastructure/templates/safe-collab/`
+
+**Gate:** Hook `enforce-git-push-authority.sh` + branch protection no GitHub
+
+**Rule file:** `.claude/rules/safe-collaboration.md`
 
 ---
 

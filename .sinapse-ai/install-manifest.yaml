@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 7.7.2
-generated_at: "2026-04-02T01:08:22.512Z"
+generated_at: "2026-04-02T01:14:38.245Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1112
 files:
@@ -313,9 +313,9 @@ files:
     type: core
     size: 1724
   - path: core/doctor/checks/constitution-consistency.js
-    hash: sha256:659489ab7c353f4b69473e72b046e43ada1342acdc017398cb6a0b60ffb0ef5b
+    hash: sha256:7d61a71fcc8eeaf139a9bea634dff99154441808e8411f4290ae5a34fa919951
     type: core
-    size: 3083
+    size: 3107
   - path: core/doctor/checks/core-config.js
     hash: sha256:5424528eefbc2f19213b30d00dcd96128acefdbb289c25712be844f0fbddb963
     type: core
@@ -581,9 +581,9 @@ files:
     type: core
     size: 4733
   - path: core/health-check/checks/project/constitution-consistency.js
-    hash: sha256:55cd12c67c7dfbd35dc25db20b35b94fa4e8e5104488dacf6fc4834be73eb767
+    hash: sha256:63f4aa67ac27b337d017c7b642b1e3554bd02554fa69e29b14ebb8922827b4b9
     type: core
-    size: 5883
+    size: 5960
   - path: core/health-check/checks/project/dependencies.js
     hash: sha256:a8f4d9fcadf5dc3274d8ed0605af6f25d6554b1a9b0d3e66c63d8ea4569c95b9
     type: core
@@ -3949,9 +3949,9 @@ files:
     type: template
     size: 3691
   - path: product/templates/ide-rules/claude-rules.md
-    hash: sha256:ffdaf95cccaba6355368ca2e3ba2d2675e2661c52a91adaeb5cc265dca894f5a
+    hash: sha256:e82e8b6cc5c64791ba3a70ca728a920ce522d56e9a60dd0bb4ee76b9a150adf9
     type: template
-    size: 13296
+    size: 13341
   - path: product/templates/ide-rules/codex-rules.md
     hash: sha256:601ffec5e24ff5e247c25e4d61728167503722acc817a1b30fbd695182bed1bc
     type: template
