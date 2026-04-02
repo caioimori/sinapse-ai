@@ -7,10 +7,10 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.1
-generated_at: "2026-04-01T21:15:14.671Z"
+version: 7.7.2
+generated_at: "2026-04-02T01:08:22.512Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1107
+file_count: 1112
 files:
   - path: cli/commands/config/index.js
     hash: sha256:66f111eceef0f60fa0a8904add783b615d55b01d5fe36408623c3dd828e702f6
@@ -3508,6 +3508,26 @@ files:
     hash: sha256:4c9b70cacde88097d53f9d4d6e2319f65cabf6a076047195cdcf949d9e949512
     type: template
     size: 5567
+  - path: infrastructure/templates/safe-collab/CODEOWNERS.template
+    hash: sha256:988d5f6e373df03913d84c11cc42af42917f702920059ef296b2b236be7387e8
+    type: template
+    size: 476
+  - path: infrastructure/templates/safe-collab/parallel-workflow-guide.md
+    hash: sha256:773473b226fe19eb5f6b9769f28c3388fba6f0700ca4c2bd80af9891f34dc433
+    type: template
+    size: 1485
+  - path: infrastructure/templates/safe-collab/pull_request_template.md
+    hash: sha256:1f07f6cb99640c15e11c685debd2dd66dc46ec4dce6a80ba3f1efdc3fb2e5bd7
+    type: template
+    size: 338
+  - path: infrastructure/templates/safe-collab/README.md
+    hash: sha256:7738672d855290ba8f039bf1b136650db75a948e57fc307136837cd121c4df42
+    type: template
+    size: 1024
+  - path: infrastructure/templates/safe-collab/safe-collaboration-rule.md
+    hash: sha256:e68e7df44bcb54d1f9ae1d3b121027819b8a0a2ba7e6a20e0fd181c86301af5e
+    type: template
+    size: 2449
   - path: infrastructure/templates/sinapse-sync.yaml.template
     hash: sha256:36ada7873fcbd5bab225b528c7be39035a12fc156135cc82c73d75782d7c53a2
     type: template

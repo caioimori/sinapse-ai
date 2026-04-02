@@ -1,0 +1,16 @@
+# Code Owners — {{PROJECT_NAME}}
+# All PRs require approval from an owner before merge.
+
+# Default: all files require owner review
+* @{{OWNER_GITHUB}} @{{COLLAB_GITHUB}}
+
+# Critical paths (framework, config, CI/CD)
+.sinapse-ai/   @{{OWNER_GITHUB}}
+.claude/        @{{OWNER_GITHUB}}
+.github/        @{{OWNER_GITHUB}}
+package.json    @{{OWNER_GITHUB}}
+
+# Security-sensitive
+.env*           @{{OWNER_GITHUB}}
+*.config.js     @{{OWNER_GITHUB}}
+*.config.ts     @{{OWNER_GITHUB}}

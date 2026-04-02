@@ -1,7 +1,7 @@
 # Safe Collaboration — Git Safety Net (NON-NEGOTIABLE)
 
 > **Applies to ALL agents, ALL projects using SINAPSE.**
-> Users (Caio and Matheus) are product builders, NOT git experts.
+> Users are product builders, NOT git experts.
 > Agents MUST handle ALL git complexity automatically and safely.
 
 ## Golden Rule
@@ -27,6 +27,7 @@ Before ANY work begins in a session, the agent MUST:
 3. If behind → git pull origin main (fast-forward only)
 4. If diverged → STOP, inform user, resolve safely
 5. Create work branch if not already on one
+6. Verify branch protection is active on main
 ```
 
 **NEVER start work on `main` directly.** Always create a feature branch.
@@ -45,14 +46,21 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
 **Detection:** Check `git config user.name` or `$USERNAME` or `$USER` to determine who is working.
 
-### 3. Before Every Commit — Safety Checks
+### 3. Before Every Commit — Safety Checks (MANDATORY)
 
 ```
 1. git status — verify only expected files changed
 2. git diff --stat — show summary to user
-3. Confirm no .env, credentials, or secrets in staged files
+3. SECRET SCAN — reject if ANY of these are staged:
+   - .env files (except .env.example with placeholders)
+   - Files containing API keys, tokens, passwords in plaintext
+   - Private keys (RSA, SSH, PGP)
+   - Database connection strings with credentials
+   - Webhook URLs with embedded tokens
 4. Commit with conventional message + story reference
 ```
+
+**If secrets detected → BLOCK commit, warn user, remove file from staging.**
 
 ### 4. Before Push — Conflict Prevention (MANDATORY)
 
@@ -70,7 +78,7 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
 After push, the agent MUST:
 ```
-1. gh pr create with clear title and description
+1. gh pr create with clear title and description (uses PR template)
 2. Auto-assign the OTHER person as reviewer
 3. Inform the user: "PR criado, {outro} precisa aprovar"
 ```
@@ -94,7 +102,7 @@ After push, the agent MUST:
 | Generated files (lock, build) | Regenerate after merge |
 | Story/doc files | Merge both contents (additive) |
 
-**NEVER use `--force` or `--force-push` unless explicitly authorized by user.**
+**NEVER use `--force` push. Use `--force-with-lease` ONLY as last resort with user confirmation.**
 
 ## Communication Protocol
 
@@ -102,11 +110,24 @@ When working in parallel, agents MUST inform users about:
 
 | Event | Message |
 |-------|---------|
-| Session start | "Main esta X commits atras. Sincronizando..." |
-| Branch created | "Criada branch `caio/feat/xxx`. Trabalho seguro." |
-| Pre-push conflict found | "Soier mudou {file}. Resolvendo automaticamente..." |
-| PR created | "PR #N criado. Soier precisa aprovar." |
-| PR merged by other | "Soier mergou PR #N. Atualizando sua main..." |
+| Session start | "Atualizando seu projeto... X mudancas novas do {outro}." |
+| Branch created | "Criada area segura para trabalhar: `caio/feat/xxx`" |
+| Pre-push conflict found | "{outro} mudou {file}. Resolvendo automaticamente..." |
+| Secret detected | "BLOQUEADO: encontrei {tipo} em {file}. Removendo antes de salvar." |
+| PR created | "Enviei para revisao. {outro} precisa aprovar no GitHub." |
+| PR merged by other | "{outro} aprovou suas mudancas. Atualizando seu projeto..." |
+
+## Destructive Operations — BLOCKED BY DEFAULT
+
+These operations require EXPLICIT user confirmation before execution:
+
+| Operation | Risk | Confirmation Required |
+|-----------|------|----------------------|
+| `git push --force` / `--force-with-lease` | Overwrite remote history | YES + explain risk |
+| `git reset --hard` | Destroy local uncommitted work | YES + explain risk |
+| `git branch -D` | Delete branch with unmerged commits | YES + explain risk |
+| `git clean -f` | Delete untracked files permanently | YES + explain risk |
+| Delete remote branch | Affects other collaborators | YES |
 
 ## Anti-Patterns (FORBIDDEN)
 
@@ -114,21 +135,24 @@ When working in parallel, agents MUST inform users about:
 - Pushing to `main` without PR (branch protection enforces this)
 - Ignoring `git fetch` at session start
 - Letting conflicts accumulate (merge frequently)
-- Using `git push --force` (use `--force-with-lease` only if absolutely necessary)
+- Using `git push --force` without explicit user confirmation
 - Assuming the other person isn't working on the same area
 - Committing without checking `git status` first
 - Skipping tests after resolving conflicts
+- Committing files containing secrets or credentials
+- Running destructive git operations without user confirmation
 
 ## For Projects Using SINAPSE (not just sinapse-ai repo)
 
 These same rules apply to ANY project where SINAPSE agents operate:
 1. Auto-branch before work
 2. Auto-sync before starting
-3. Auto-resolve simple conflicts
-4. Auto-PR with reviewer assignment
-5. User never touches git directly
+3. Secret scan before every commit
+4. Auto-resolve simple conflicts
+5. Auto-PR with reviewer assignment
+6. User never touches git directly
 
-## User Cheat Sheet (the ONLY git they need to know)
+## User Cheat Sheet (the ONLY things users do manually)
 
 ```
 ! git push origin main          ← when agent can't push (hook block)
