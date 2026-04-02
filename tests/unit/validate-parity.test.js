@@ -44,6 +44,7 @@ describe('validate-parity', () => {
       {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
+        validateCodexSync: () => ok,
         validateCodexIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
@@ -133,6 +134,7 @@ describe('validate-parity', () => {
       {
         runSyncValidate: () => ok,
         validateClaudeIntegration: () => ok,
+        validateCodexSync: () => ok,
         validateCodexIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,

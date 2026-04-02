@@ -1,10 +1,13 @@
 #!/usr/bin/env sh
 
-# Framework Guard — blocks commits to L1/L2 protected paths (Story BM-3)
+node bin/utils/git-branch-guard.js
+node bin/utils/staged-secret-scan.js
+
+# Framework Guard - blocks commits to L1/L2 protected paths (Story BM-3)
 # Respects boundary.frameworkProtection toggle in core-config.yaml
 # Bypass: git commit --no-verify
 node bin/utils/framework-guard.js
 
-# Validate install-manifest.yaml (warn-only to prevent merge conflicts — Art. IX)
+# Validate install-manifest.yaml (warn-only to prevent merge conflicts - Art. IX)
 # To regenerate: npm run generate:manifest
 node scripts/ensure-manifest.js --validate-only

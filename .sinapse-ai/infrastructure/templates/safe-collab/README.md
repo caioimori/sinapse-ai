@@ -2,6 +2,14 @@
 
 Template reutilizavel para configurar colaboracao segura em qualquer projeto.
 
+## Fonte canonica
+
+Para a politica completa e atualizada de colaboracao paralela, use:
+
+- `docs/guides/parallel-collaboration-source-of-truth.md`
+
+Este README explica o template. O documento acima define a regra mestra.
+
 ## Uso rapido
 
 ```bash

@@ -6,6 +6,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { spawnSync } = require('child_process');
 const { validateClaudeIntegration } = require('./validate-claude-integration');
+const { validateCodexSync } = require('./validate-codex-sync');
 const { validateCodexIntegration } = require('./validate-codex-integration');
 const { validateCodexSkills } = require('./codex-skills-sync/validate');
 const { validatePaths } = require('./validate-paths');
@@ -218,6 +219,7 @@ function diffCompatibilityContracts(currentContract, previousContract) {
 function runParityValidation(options = {}, deps = {}) {
   const projectRoot = options.projectRoot || process.cwd();
   const runSync = deps.runSyncValidate || runSyncValidate;
+  const runCodexSync = deps.validateCodexSync || validateCodexSync;
   const runClaudeIntegration = deps.validateClaudeIntegration || validateClaudeIntegration;
   const runCodexIntegration = deps.validateCodexIntegration || validateCodexIntegration;
   const runCodexSkills = deps.validateCodexSkills || validateCodexSkills;
@@ -234,7 +236,7 @@ function runParityValidation(options = {}, deps = {}) {
   const checks = [
     { id: 'claude-sync', exec: () => runSync('claude-code', projectRoot) },
     { id: 'claude-integration', exec: () => runClaudeIntegration({ projectRoot }) },
-    { id: 'codex-sync', exec: () => runSync('codex', projectRoot) },
+    { id: 'codex-sync', exec: () => runCodexSync({ projectRoot, quiet: true }) },
     { id: 'codex-integration', exec: () => runCodexIntegration({ projectRoot }) },
     { id: 'codex-skills', exec: () => runCodexSkills({ projectRoot, strict: true, quiet: true }) },
     { id: 'paths', exec: () => runPaths({ projectRoot }) },

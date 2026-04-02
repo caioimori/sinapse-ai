@@ -97,9 +97,9 @@ describe('Entity Registry Bootstrap (Story INS-4.6)', () => {
   });
 
   describe('AC3: No duplication with pre-push hook', () => {
-    test('pre-push hook calls ids-pre-push.js (incremental), not populate script', () => {
+    test('pre-push hook calls pre-push-safety.js, not populate script', () => {
       const hookContent = fs.readFileSync(PRE_PUSH_HOOK, 'utf8');
-      expect(hookContent).toContain('ids-pre-push.js');
+      expect(hookContent).toContain('pre-push-safety.js');
       expect(hookContent).not.toContain('populate-entity-registry.js');
     });
 

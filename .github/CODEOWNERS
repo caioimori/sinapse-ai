@@ -1,108 +1,39 @@
 # SINAPSE Code Owners
-# Issue: #99 (Governance)
-# Last Updated: 2026-02-21
-#
-# Format: <pattern> <owners>
-# Later patterns take precedence over earlier ones
-# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-#
-# Owners:
-#   @caioimori @eusoier (lead maintainer)
-#   @Matheus-soier (collaborator)
-#
-# All PRs require approval from a maintainer before merge.
-# Note: Org handles (e.g. @SinapseAI) cannot approve PRs — only user accounts can.
+# Maintainer model: every PR to main must be reviewed by the other maintainer.
+# The usernames below must keep write access in GitHub.
 
-# ============================================
-# Default Owner (fallback)
-# ============================================
-* @caioimori @eusoier
+# Shared fallback ownership
+* @caioimori @Matheus-soier
 
-# ============================================
-# Critical Paths (requires lead maintainer review)
-# ============================================
-# Orchestration layer (MasterOrchestrator, BobOrchestrator, GateEvaluator)
-.sinapse-ai/core/orchestration/ @caioimori @eusoier
+# Maintainer collaboration governance
+.github/ @caioimori @Matheus-soier
+.husky/ @caioimori @Matheus-soier
+.claude/hooks/ @caioimori @Matheus-soier
+.claude/rules/ @caioimori @Matheus-soier
 
-# Execution engine (WaveExecutor, ParallelExecutor)
-.sinapse-ai/core/execution/ @caioimori @eusoier
+# Framework core and infrastructure
+.sinapse-ai/core/ @caioimori @Matheus-soier
+.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
+.sinapse-ai/constitution.md @caioimori @Matheus-soier
+.sinapse-ai/core-config.yaml @caioimori @Matheus-soier
+.sinapse-ai/project-config.yaml @caioimori @Matheus-soier
 
-# Packages (installer, CLI, shared libraries)
-packages/ @caioimori @eusoier
+# Execution surface
+bin/ @caioimori @Matheus-soier
+packages/ @caioimori @Matheus-soier
+package.json @caioimori @Matheus-soier
+package-lock.json @caioimori @Matheus-soier
 
-# CI/CD configurations
-.github/ @caioimori @eusoier
+# Shared extension surfaces
+.sinapse-ai/development/agents/ @caioimori @Matheus-soier
+.sinapse-ai/development/tasks/ @caioimori @Matheus-soier
+.sinapse-ai/development/workflows/ @caioimori @Matheus-soier
+.sinapse-ai/product/ @caioimori @Matheus-soier
+docs/ @caioimori @Matheus-soier
 
-# ============================================
-# Framework Core (requires senior review)
-# ============================================
-# Agent definitions
-.sinapse-ai/development/agents/ @caioimori @eusoier
-
-# Task definitions
-.sinapse-ai/development/tasks/ @caioimori @eusoier
-
-# Workflow definitions
-.sinapse-ai/development/workflows/ @caioimori @eusoier
-
-# Templates
-.sinapse-ai/product/templates/ @caioimori @eusoier
-templates/ @caioimori @eusoier
-
-# CLI utilities
-.sinapse-ai/cli/ @caioimori @eusoier
-
-# ============================================
-# Infrastructure
-# ============================================
-# Docker configurations
-.docker/ @caioimori @eusoier
-
-# Framework configuration
-.sinapse-ai/core-config.yaml @caioimori @eusoier
-
-# Package management
-package.json @caioimori @eusoier
-package-lock.json @caioimori @eusoier
-
-# ============================================
-# Documentation (more permissive)
-# ============================================
-# General docs
-docs/ @caioimori @eusoier
-
-# Architecture decisions
-docs/architecture/ @caioimori @eusoier
-
-# Framework standards
-docs/framework/ @caioimori @eusoier
-
-# User guides
-docs/guides/ @caioimori @eusoier
-
-# ============================================
-# Security-Sensitive Files
-# ============================================
-# This file
-.github/CODEOWNERS @caioimori @eusoier
-
-# Release workflows
-.github/workflows/semantic-release.yml @caioimori @eusoier
-.github/workflows/npm-publish.yml @caioimori @eusoier
-.github/workflows/release.yml @caioimori @eusoier
-
-# Pro submodule workflows
-.github/workflows/pro-integration.yml @caioimori @eusoier
-.github/workflows/publish-pro.yml @caioimori @eusoier
-
-# Security configurations
-security/ @caioimori @eusoier
-
-# Environment files (should not be committed, but protect pattern)
-.env* @caioimori @eusoier
-
-# Configuration files
-*.config.js @caioimori @eusoier
-*.config.ts @caioimori @eusoier
-tsconfig.json @caioimori @eusoier
-eslint.config.* @caioimori @eusoier
+# Sensitive patterns
+.env* @caioimori @Matheus-soier
+*.config.js @caioimori @Matheus-soier
+*.config.ts @caioimori @Matheus-soier
+tsconfig.json @caioimori @Matheus-soier
+eslint.config.* @caioimori @Matheus-soier

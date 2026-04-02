@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "catalogMode": "expanded",
+  "canonicalAgentsDir": ".sinapse-ai/development/agents",
+  "codexAgentsDir": ".codex/agents",
+  "skillsDir": ".codex/skills",
+  "expectedSkillIds": [
+    "sinapse-analyst",
+    "sinapse-animations",
+    "sinapse-architect",
+    "sinapse-brand",
+    "sinapse-claude",
+    "sinapse-cloning",
+    "sinapse-commercial",
+    "sinapse-content",
+    "sinapse-copy",
+    "sinapse-council",
+    "sinapse-courses",
+    "sinapse-cyber",
+    "sinapse-data-engineer",
+    "sinapse-design",
+    "sinapse-dev",
+    "sinapse-devops",
+    "sinapse-finance",
+    "sinapse-growth",
+    "sinapse-orqx",
+    "sinapse-paidmedia",
+    "sinapse-pm",
+    "sinapse-po",
+    "sinapse-product",
+    "sinapse-qa",
+    "sinapse-research",
+    "sinapse-sm",
+    "sinapse-squad-creator",
+    "sinapse-storytelling",
+    "sinapse-swarm",
+    "sinapse-ux-design-expert"
+  ],
+  "generatedSkillMap": {
+    "analyst": {
+      "skillId": "sinapse-analyst"
+    },
+    "architect": {
+      "skillId": "sinapse-architect"
+    },
+    "data-engineer": {
+      "skillId": "sinapse-data-engineer"
+    },
+    "developer": {
+      "skillId": "sinapse-dev",
+      "greetingAgentId": "dev"
+    },
+    "devops": {
+      "skillId": "sinapse-devops"
+    },
+    "product-lead": {
+      "skillId": "sinapse-po",
+      "greetingAgentId": "po"
+    },
+    "project-lead": {
+      "skillId": "sinapse-pm",
+      "greetingAgentId": "pm"
+    },
+    "quality-gate": {
+      "skillId": "sinapse-qa",
+      "greetingAgentId": "qa"
+    },
+    "sinapse-orqx": {
+      "skillId": "sinapse-orqx",
+      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "canonicalReference": ".sinapse-ai/development/agents/sinapse-orqx.md",
+      "greetingScript": ".codex/scripts/generate-codex-greeting.js"
+    },
+    "sprint-lead": {
+      "skillId": "sinapse-sm",
+      "greetingAgentId": "sm"
+    },
+    "squad-creator": {
+      "skillId": "sinapse-squad-creator"
+    },
+    "ux-design-expert": {
+      "skillId": "sinapse-ux-design-expert"
+    }
+  },
+  "canonicalSkillMap": {
+    "sinapse-analyst": {
+      "agentId": "analyst",
+      "filename": "analyst.md"
+    },
+    "sinapse-architect": {
+      "agentId": "architect",
+      "filename": "architect.md"
+    },
+    "sinapse-data-engineer": {
+      "agentId": "data-engineer",
+      "filename": "data-engineer.md"
+    },
+    "sinapse-dev": {
+      "agentId": "developer",
+      "filename": "developer.md",
+      "greetingAgentId": "dev"
+    },
+    "sinapse-devops": {
+      "agentId": "devops",
+      "filename": "devops.md"
+    },
+    "sinapse-orqx": {
+      "agentId": "sinapse-orqx",
+      "filename": "sinapse-orqx.md"
+    },
+    "sinapse-po": {
+      "agentId": "product-lead",
+      "filename": "product-lead.md",
+      "greetingAgentId": "po"
+    },
+    "sinapse-pm": {
+      "agentId": "project-lead",
+      "filename": "project-lead.md",
+      "greetingAgentId": "pm"
+    },
+    "sinapse-qa": {
+      "agentId": "quality-gate",
+      "filename": "quality-gate.md",
+      "greetingAgentId": "qa"
+    },
+    "sinapse-sm": {
+      "agentId": "sprint-lead",
+      "filename": "sprint-lead.md",
+      "greetingAgentId": "sm"
+    },
+    "sinapse-squad-creator": {
+      "agentId": "squad-creator",
+      "filename": "squad-creator.md"
+    },
+    "sinapse-ux-design-expert": {
+      "agentId": "ux-design-expert",
+      "filename": "ux-design-expert.md"
+    }
+  },
+  "pathConventions": {
+    "allowedSourcePrefixes": [
+      ".sinapse-ai/development/agents/",
+      ".codex/agents/",
+      "squads/"
+    ],
+    "allowedGreetingScriptPrefixes": [
+      ".sinapse-ai/development/scripts/generate-greeting.js",
+      ".codex/scripts/generate-codex-greeting.js"
+    ],
+    "greetingOptionalSourcePrefixes": [
+      "squads/"
+    ],
+    "requiredFallbackBySourcePrefix": {
+      "squads/": ".codex/agents/"
+    }
+  }
+}

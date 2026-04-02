@@ -44,10 +44,21 @@ npm test
 - Rodar paridade multi-IDE (Claude/Codex/Gemini): `npm run validate:parity`
 - Sync Claude Code: `npm run sync:ide:claude`
 - Sincronizar Gemini CLI: `npm run sync:ide:gemini`
-- Validar Codex sync/integration: `npm run validate:codex-sync && npm run validate:codex-integration`
+- Validar Codex sync/integration: `npm run validate:codex-sync`; `npm run validate:codex-integration`
+- Validar command/task registry do Codex: `npm run validate:codex-commands`
 - Gerar skills locais do Codex: `npm run sync:skills:codex`
 - Este repositorio usa **local-first**: prefira `.codex/skills` versionado no projeto
 - Use `sync:skills:codex:global` apenas para testes fora deste repo
+
+## Command Resolution (Codex)
+
+Quando um agente no Codex receber um `*comando`, prefira resolver a execucao por esta ordem:
+
+1. Consultar `.codex/command-registry.json`
+2. Opcionalmente usar `node .codex/scripts/resolve-codex-command.js <skill-ou-agent> <comando>`
+3. Carregar a task/workflow/checklist/template mapeada
+
+Isso evita "file hunting" manual e torna a execucao de workflows/tasks mais deterministica no Codex.
 
 ## Agent Shortcuts (Codex)
 
@@ -107,7 +118,7 @@ Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
 ## Agentes Especializados (175)
 
 Existem 175 agentes especializados organizados por 18 squads (174 em squads + 1 master orchestrator). Eles sao acessiveis via:
-- `.codex/agents/<agent-name>.md` — arquivo direto
+- `.codex/agents/<agent-name>.md` - arquivo direto
 - Chamada interna pelo orqx do squad
 
 Exemplos: `brand-strategist`, `ad-copywriter`, `penetration-tester`, `content-writer`, `ga-analytics-engineer`, etc.

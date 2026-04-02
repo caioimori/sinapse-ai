@@ -89,7 +89,47 @@ describe('Path Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.errors.some(error => error.includes('missing canonical source path'))).toBe(true);
-    expect(result.errors.some(error => error.includes('missing canonical greeting script path'))).toBe(true);
+    expect(result.errors.some(error => error.includes('missing approved source path'))).toBe(true);
+  });
+
+  it('passes for squad-based skills when catalog config allows Codex expanded paths', () => {
+    write(path.join(tmpRoot, 'AGENTS.md'), '# Agents\n');
+    write(path.join(tmpRoot, '.sinapse-ai', 'product', 'templates', 'ide-rules', 'codex-rules.md'), '# codex\n');
+    write(
+      path.join(tmpRoot, '.codex', 'catalog.json'),
+      JSON.stringify({
+        version: 1,
+        catalogMode: 'expanded',
+        pathConventions: {
+          allowedSourcePrefixes: ['squads/', '.codex/agents/'],
+          allowedGreetingScriptPrefixes: ['.codex/scripts/generate-codex-greeting.js'],
+          greetingOptionalSourcePrefixes: ['squads/'],
+          requiredFallbackBySourcePrefix: {
+            'squads/': '.codex/agents/',
+          },
+        },
+      }),
+      'utf8',
+    );
+    write(
+      path.join(skillsDir, 'sinapse-brand', 'SKILL.md'),
+      [
+        '# Skill',
+        'Load squads/squad-brand/agents/brand-orqx.md',
+        'fallback: .codex/agents/brand-orqx.md',
+      ].join('\n'),
+    );
+
+    const result = validatePaths({
+      projectRoot: tmpRoot,
+      skillsDir,
+      requiredFiles: [
+        path.join(tmpRoot, 'AGENTS.md'),
+        path.join(tmpRoot, '.sinapse-ai', 'product', 'templates', 'ide-rules', 'codex-rules.md'),
+      ],
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.errors).toEqual([]);
   });
 });
