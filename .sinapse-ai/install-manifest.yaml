@@ -7,10 +7,10 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.2
-generated_at: "2026-04-02T01:14:38.245Z"
+version: 7.7.3
+generated_at: "2026-04-02T01:42:36.642Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1112
+file_count: 1113
 files:
   - path: cli/commands/config/index.js
     hash: sha256:66f111eceef0f60fa0a8904add783b615d55b01d5fe36408623c3dd828e702f6
@@ -1237,9 +1237,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:0ef926d7947a2e9a9b95e20a7309f9910b0ba2004bf18c9472d71bdc2b5fa9c9
+    hash: sha256:17d002e1c7b1dc347bc369fd82b28a931babcb69f16efc9ac76eb484eaacc1a1
     type: data
-    size: 512364
+    size: 511993
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -3508,6 +3508,10 @@ files:
     hash: sha256:4c9b70cacde88097d53f9d4d6e2319f65cabf6a076047195cdcf949d9e949512
     type: template
     size: 5567
+  - path: infrastructure/templates/safe-collab/apply.sh
+    hash: sha256:1f9d39834ff301e3ee1adf1779fc3dd9e22bd12c9a603f8ff11d430c1328ed82
+    type: template
+    size: 2738
   - path: infrastructure/templates/safe-collab/CODEOWNERS.template
     hash: sha256:988d5f6e373df03913d84c11cc42af42917f702920059ef296b2b236be7387e8
     type: template
@@ -3521,13 +3525,13 @@ files:
     type: template
     size: 338
   - path: infrastructure/templates/safe-collab/README.md
-    hash: sha256:7738672d855290ba8f039bf1b136650db75a948e57fc307136837cd121c4df42
+    hash: sha256:53e1193eaf30b5a4d9a5d2c5f700b22a210515abb661baf2b5ebe056343806fe
     type: template
-    size: 1024
+    size: 1958
   - path: infrastructure/templates/safe-collab/safe-collaboration-rule.md
-    hash: sha256:e68e7df44bcb54d1f9ae1d3b121027819b8a0a2ba7e6a20e0fd181c86301af5e
+    hash: sha256:9631681340fddc314080f9182b76ccfbb1ee3441d92ce181067e76cace960a5e
     type: template
-    size: 2449
+    size: 2871
   - path: infrastructure/templates/sinapse-sync.yaml.template
     hash: sha256:36ada7873fcbd5bab225b528c7be39035a12fc156135cc82c73d75782d7c53a2
     type: template
