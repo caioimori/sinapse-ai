@@ -1,6 +1,6 @@
 # SINAPSE Constitution
 
-> **Version:** 2.1.0 | **Ratified:** 2025-01-30 | **Last Amended:** 2026-04-02
+> **Version:** 2.2.0 | **Ratified:** 2025-01-30 | **Last Amended:** 2026-04-03
 
 Este documento define os princípios fundamentais e inegociáveis do SINAPSE. Todos os agentes, tasks, e workflows DEVEM respeitar estes princípios. Violações são bloqueadas automaticamente via gates.
 
@@ -236,6 +236,72 @@ Usuários são product builders, não especialistas em git. Agentes DEVEM gerenc
 **Gate:** Hook `enforce-git-push-authority.sh` + branch protection no GitHub
 
 **Rule file:** `.claude/rules/safe-collaboration.md`
+
+---
+
+### X. Security & Data Protection (NON-NEGOTIABLE)
+
+Todo projeto que manipula dados de usuarios DEVE seguir praticas de seguranca rigorosas. Nenhum atalho e aceito — seguranca e inegociavel desde o primeiro commit.
+
+**Regras — Banco de Dados:**
+- MUST: TODA tabela com dados de usuario DEVE ter Row Level Security (RLS) ativado
+- MUST: Chave `service_role` NUNCA exposta no frontend — apenas no servidor
+- MUST: Queries DEVEM ser parametrizadas (`$1, $2`) — NUNCA string interpolation
+- MUST: Cada servico DEVE usar role com privilegios minimos (principio do menor privilegio)
+- MUST: Dados sensiveis (CPF, cartao, saude) DEVEM ser criptografados em repouso
+
+**Regras — APIs:**
+- MUST: TODA API publica DEVE ter rate limiting configurado
+- MUST: TODA API DEVE validar input (schema validation com Zod ou equivalente)
+- MUST: CORS DEVE restringir origens permitidas (NUNCA `origin: '*'` em producao)
+- MUST: Headers de seguranca DEVEM estar ativos (helmet ou equivalente)
+- MUST: Autenticacao DEVE usar OAuth 2.0 / OIDC ou Supabase Auth
+
+**Regras — Secrets & Keys:**
+- MUST: API keys, tokens e credenciais DEVEM estar em variaveis de ambiente (.env)
+- MUST: Arquivos .env NUNCA commitados no repositorio (gitignore obrigatorio)
+- MUST: .env.example DEVE existir com placeholders (sem valores reais)
+- MUST: Variaveis prefixadas com `NEXT_PUBLIC_` sao PUBLICAS — NUNCA colocar secrets nelas
+- MUST: Rotacao de chaves DEVE ser feita ao menor sinal de vazamento
+- MUST NOT: Nenhum agente pode commitar arquivos contendo credentials em plaintext
+
+**Regras — LGPD (Lei Geral de Protecao de Dados):**
+- MUST: Consentimento explicito DEVE ser coletado antes de processar dados pessoais (Art. 7)
+- MUST: Usuarios DEVEM poder acessar, corrigir e deletar seus dados (Art. 18)
+- MUST: DPO/Encarregado DEVE ser designado para projetos com dados pessoais (Art. 37)
+- MUST: Medidas de seguranca tecnica DEVEM proteger dados contra acesso nao autorizado (Art. 46)
+- MUST: Incidentes de seguranca DEVEM ser notificados a ANPD e titulares (Art. 48)
+- MUST: Dados pessoais DEVEM ter periodo de retencao definido e documentado
+- MUST: Audit logging DEVE registrar todo acesso a dados pessoais
+
+**Regras — Repositorio:**
+- MUST: Repositorios com codigo de producao DEVEM ser privados por padrao
+- MUST: Branch protection DEVE estar ativa em main (PR + approval)
+- MUST: GitHub Secret Scanning DEVE estar habilitado
+- MUST: Dependabot DEVE estar configurado para alertas de seguranca
+- MUST: CODEOWNERS DEVE proteger arquivos criticos
+
+**Delegacao:**
+
+| Dominio de Seguranca | Agente Responsavel |
+|----------------------|-------------------|
+| Threat modeling, MITRE ATT&CK | @cyber-orqx → Shield (threat-analyst) |
+| Penetration testing, OWASP | @cyber-orqx → Breach (penetration-tester) |
+| SOC, detection engineering | @cyber-orqx → Sentinel (soc-analyst) |
+| Incident response | @cyber-orqx → Rapid (incident-responder) |
+| Cloud security, IAM, encryption | @cyber-orqx → Nimbus (cloud-security-engineer) |
+| Network security, zero trust | @cyber-orqx → Wire (network-security-engineer) |
+| LGPD, GDPR, SOC 2, ISO 27001 | @cyber-orqx → Govern (compliance-officer) |
+| Database security, RLS | @data-engineer (Dara) |
+| Application security, hooks | @developer (Dex) + hooks automaticos |
+
+**Gates:**
+- Hook `sql-governance.py` — BLOCK DDL perigoso
+- Hook `secret-scanning.cjs` — BLOCK credentials em commits
+- Hook `staged-secret-scan.js` — BLOCK .env e tokens pre-commit
+- Checklist: `.claude/rules/security-data-protection.md`
+
+**Rule file:** `.claude/rules/security-data-protection.md`
 
 ---
 

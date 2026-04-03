@@ -29,6 +29,7 @@ const KEY_ARTICLES = [
   'Ecosystem Metrics Accuracy',
   'Mandatory Delegation',
   'Safe Collaboration',
+  'Security & Data Protection',
 ];
 
 /**
