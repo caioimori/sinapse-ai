@@ -233,8 +233,8 @@ test-sample-*.md
 docs/stories/
 docs/research/
 docs/qa/
-docs/epics/
-docs/prd/
+# docs/epics/ — now tracked (separated from stories)
+# docs/prd/ — now tracked (product requirement docs)
 docs/decisions/
 docs/one-pagers/
 docs/strategy/

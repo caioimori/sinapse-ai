@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-03T22:53:09.359Z'
-  entityCount: 768
+  lastUpdated: '2026-04-03T23:28:45.267Z'
+  entityCount: 764
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -6137,28 +6137,6 @@ entities:
         extensionPoints: []
       checksum: sha256:bdaa44312274efc64626344f62ae086b4c5cec6489d98b840615bc6774aefc75
       lastVerified: '2026-04-03T22:53:09.354Z'
-    sinapse-ai-config:
-      path: .sinapse-ai/product/templates/sinapse-ai-config.yaml
-      layer: L2
-      type: template
-      purpose: SINAPSE AI Provider Configuration
-      keywords:
-        - sinapse
-        - ai
-        - config
-        - provider
-        - configuration
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
-      adaptability:
-        score: 0.5
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:f676ca26b8c7bd9a326797e8d71251308bc22df89c84fc266d7e880bcaeaa4d1
-      lastVerified: '2026-04-03T22:53:09.354Z'
     spec-tmpl:
       path: .sinapse-ai/product/templates/spec-tmpl.md
       layer: L2
@@ -8755,7 +8733,6 @@ entities:
         - lockfile-integrity
         - api-endpoints
         - claude-code
-        - gemini-cli
         - github-cli
         - mcp-integration
       dependencies: []
@@ -9461,27 +9438,6 @@ entities:
         extensionPoints: []
       checksum: sha256:8f0307c5ddda346110c3458479faaa4474a19af988d245671109d92016a1a296
       lastVerified: '2026-04-03T22:53:09.211Z'
-    gemini-model-selector:
-      path: .sinapse-ai/core/orchestration/gemini-model-selector.js
-      layer: L1
-      type: module
-      purpose: Entity at .sinapse-ai\core\orchestration\gemini-model-selector.js
-      keywords:
-        - gemini
-        - model
-        - selector
-      usedBy: []
-      dependencies:
-        - task-complexity-classifier
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.4
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:75a4b2795a70eb10878a8de98ec85943b30ee9a3987f1487289fc08ad69b4f86
-      lastVerified: '2026-04-03T22:53:09.211Z'
     greenfield-handler:
       path: .sinapse-ai/core/orchestration/greenfield-handler.js
       layer: L1
@@ -9695,8 +9651,7 @@ entities:
         - task
         - complexity
         - classifier
-      usedBy:
-        - gemini-model-selector
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -12323,26 +12278,6 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:57b8825acd265372c2a584aa9ae4fb35e21cb70d74d4efd37d0ca068a3f188c1
-      lastVerified: '2026-04-03T22:53:09.195Z'
-    gemini-cli:
-      path: .sinapse-ai/core/health-check/checks/services/gemini-cli.js
-      layer: L1
-      type: module
-      purpose: '''Verifies Gemini CLI installation and configuration'','
-      keywords:
-        - gemini
-        - cli
-      usedBy: []
-      dependencies:
-        - base-check
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.4
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:a750f71e840f3934462a1898d98053b5ebaff958e031f2b45f0e8123ef7d82a1
       lastVerified: '2026-04-03T22:53:09.195Z'
     github-cli:
       path: .sinapse-ai/core/health-check/checks/services/github-cli.js
@@ -16383,25 +16318,6 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:60d5a535a39694cb250903b1fd11cfc5d90d648796ca85329f8a16bfb3cdd697
-      lastVerified: '2026-04-03T22:53:09.319Z'
-    gemini-commands:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/gemini-commands.js
-      layer: L2
-      type: script
-      purpose: buildAgentDescription(agent),
-      keywords:
-        - gemini
-        - commands
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:2a6aaa5c5043a3082383389358e53097f4c911dace62d4190a4127cef4907c7d
       lastVerified: '2026-04-03T22:53:09.319Z'
     redirect-generator:
       path: .sinapse-ai/infrastructure/scripts/ide-sync/redirect-generator.js
