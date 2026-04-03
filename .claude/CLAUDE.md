@@ -118,16 +118,16 @@ Use `@agent-name` ou `/SINAPSE:agents:agent-name`:
 
 | Agente | Persona | Escopo Principal |
 |--------|---------|------------------|
-| `@developer` | Dex | Implementacao de codigo |
-| `@quality-gate` | Quinn | Testes e qualidade |
-| `@architect` | Aria | Arquitetura e design tecnico |
-| `@project-lead` | Morgan | Product Management |
-| `@product-lead` | Pax | Product Owner, stories/epics |
-| `@sprint-lead` | River | Scrum Master |
-| `@analyst` | Alex | Pesquisa e analise |
-| `@data-engineer` | Dara | Database design |
-| `@ux-design-expert` | Uma | UX/UI design |
-| `@devops` | Gage | CI/CD, git push (EXCLUSIVO) |
+| `@developer` | Pixel | Implementacao de codigo |
+| `@quality-gate` | Litmus | Testes e qualidade |
+| `@architect` | Stratum | Arquitetura e design tecnico |
+| `@project-lead` | Beacon | Product Management |
+| `@product-lead` | Axis | Product Owner, stories/epics |
+| `@sprint-lead` | Sync | Scrum Master |
+| `@analyst` | Scope | Pesquisa e analise |
+| `@data-engineer` | Tensor | Database design |
+| `@ux-design-expert` | Mosaic | UX/UI design |
+| `@devops` | Pipeline | CI/CD, git push (EXCLUSIVO) |
 
 ### Comandos de Agentes
 Use prefixo `*` para comandos:

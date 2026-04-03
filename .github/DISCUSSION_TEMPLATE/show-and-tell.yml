@@ -6,97 +6,90 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 🙌 Show and Tell
-        Built something cool with SINAPSE? Share it with the community!
+        ## Mostre o que Voce Construiu
+        Construiu algo com SINAPSE-AI? Compartilhe com a comunidade!
 
-        We love seeing what you've created. Your project might inspire others!
+        Adoramos ver o que voce criou. Seu projeto pode inspirar outros!
 
   - type: input
     id: project-name
     attributes:
-      label: Project Name
-      description: What's your project called?
-      placeholder: My Awesome SINAPSE Project
+      label: Nome do Projeto
+      description: Como se chama seu projeto?
+      placeholder: Meu Projeto com SINAPSE-AI
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: Tell us about your project
+      label: Descricao
+      description: Conte-nos sobre seu projeto
       placeholder: |
-        What does your project do?
-        What problem does it solve?
-        Who is it for?
+        O que seu projeto faz?
+        Qual problema ele resolve?
+        Para quem ele e feito?
     validations:
       required: true
 
   - type: dropdown
     id: sinapse-components
     attributes:
-      label: SINAPSE Components Used
-      description: Which parts of SINAPSE does your project use?
+      label: Componentes do SINAPSE Utilizados
+      description: Quais partes do SINAPSE seu projeto usa?
       multiple: true
       options:
         - sinapse-ai (Core Framework)
-        - sinapse-squads (SINAPSE Squads)
-        - ETL Squad
-        - Creator Squad
-        - Docker MCP Toolkit
-        - MCP Presets
-        - Custom Agents
-        - Custom Tasks
-        - Custom Workflows
+        - Squads do SINAPSE
+        - Agentes Customizados
+        - Tasks Customizadas
+        - Workflows Customizados
+        - CLI / Installer
     validations:
       required: true
 
   - type: textarea
     id: features
     attributes:
-      label: Key Features
-      description: What are the main features of your project?
+      label: Funcionalidades Principais
+      description: Quais sao as principais funcionalidades do seu projeto?
       placeholder: |
-        - Feature 1
-        - Feature 2
-        - Feature 3
+        - Funcionalidade 1
+        - Funcionalidade 2
+        - Funcionalidade 3
 
   - type: textarea
     id: code-snippet
     attributes:
-      label: Code Snippet (optional)
-      description: Share an interesting code snippet
+      label: Trecho de Codigo (opcional)
+      description: Compartilhe um trecho de codigo interessante
       render: javascript
-      placeholder: |
-        // Share a cool snippet from your project
 
   - type: input
     id: link
     attributes:
-      label: Project Link (optional)
-      description: GitHub repo, demo, or website
-      placeholder: https://github.com/username/project
+      label: Link do Projeto (opcional)
+      description: Repositorio GitHub, demo ou website
+      placeholder: https://github.com/username/projeto
 
   - type: textarea
     id: screenshots
     attributes:
-      label: Screenshots or Demo (optional)
-      description: Drag and drop images or paste links to demos
-      placeholder: |
-        Paste images or links here...
+      label: Screenshots ou Demo (opcional)
+      description: Arraste e solte imagens ou cole links para demos
 
   - type: textarea
     id: lessons-learned
     attributes:
-      label: Lessons Learned (optional)
-      description: What did you learn while building this?
+      label: Licoes Aprendidas (opcional)
+      description: O que voce aprendeu construindo isso?
       placeholder: |
-        - Tip 1
-        - Challenge I overcame
-        - Something I wish I knew earlier
+        - Dica 1
+        - Desafio que superei
+        - Algo que gostaria de ter sabido antes
 
   - type: markdown
     attributes:
       value: |
         ---
-        **Thank you for sharing!** Your contribution helps grow the SINAPSE community. 🎉
+        **Obrigado por compartilhar!** Sua contribuicao ajuda a comunidade SINAPSE-AI a crescer.

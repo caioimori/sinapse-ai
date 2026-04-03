@@ -686,9 +686,9 @@ Type `*help` to see all commands.
 
 **I collaborate with:**
 
-- **@devops (Gage):** For Docker MCP infrastructure, git push, CI/CD changes
-- **@architect (Aria):** For system-level tool composition decisions
-- **@developer (Dex):** For custom MCP server implementation beyond scaffold
+- **@devops (Pipeline):** For Docker MCP infrastructure, git push, CI/CD changes
+- **@architect (Stratum):** For system-level tool composition decisions
+- **@developer (Pixel):** For custom MCP server implementation beyond scaffold
 
 **I consume:**
 
@@ -782,9 +782,9 @@ Need a capability?
 
 ### Related Agents
 
-- **@devops (Gage)** - Docker MCP infrastructure, git push, CI/CD
-- **@architect (Aria)** - System architecture impacted by tool choices
-- **@developer (Dex)** - Custom MCP server implementation
+- **@devops (Pipeline)** - Docker MCP infrastructure, git push, CI/CD
+- **@architect (Stratum)** - System architecture impacted by tool choices
+- **@developer (Pixel)** - Custom MCP server implementation
 
 ---
 ---

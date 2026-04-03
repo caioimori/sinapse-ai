@@ -28,7 +28,7 @@ Core framework stabilization and community infrastructure:
 
 - [x] GitHub Discussions setup
 - [x] Contribution guides (CONTRIBUTING.md, COMMUNITY.md)
-- [x] Feature request process (FEATURE_PROCESS.md)
+- [x] Feature request process (feature-process.md)
 - [x] Public roadmap (this document!)
 - [ ] Starter squad registry
 
@@ -93,7 +93,7 @@ For significant features that need detailed design, [submit an RFC](/.github/RFC
 
 ### 4. Contribute Directly
 
-Found something you want to implement? Check our [Contributing Guide](CONTRIBUTING.md) and [Feature Process](docs/FEATURE_PROCESS.md).
+Found something you want to implement? Check our [Contributing Guide](CONTRIBUTING.md) and [Feature Process](docs/feature-process.md).
 
 ## Changelog
 

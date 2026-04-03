@@ -12,7 +12,7 @@ This PR implements comprehensive security hardening for the post-install validat
 | `src/installer/manifest-signature.js`            | **New**      | Ed25519 signature verification module    |
 | `bin/sinapse-init.js`                               | **Modified** | Added `requireSignature` option          |
 | `tests/installer/post-install-validator.test.js` | **New**      | Security test suite                      |
-| `docs/security/MANIFEST_SIGNING.md`              | **New**      | Signing workflow documentation           |
+| `docs/security/manifest-signing.md`              | **New**      | Signing workflow documentation           |
 
 ## Security Controls Implemented
 

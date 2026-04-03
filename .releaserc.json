@@ -35,5 +35,6 @@
       "npmPublish": true
     }],
     "@semantic-release/github"
-  ]
+  ],
+  "tagFormat": "${version}"
 }

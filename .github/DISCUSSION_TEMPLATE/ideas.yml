@@ -1,4 +1,4 @@
-title: "[Idea] "
+title: "[Ideia] "
 labels:
   - idea
   - community
@@ -6,65 +6,66 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 💡 Share Your Idea
-        Thanks for taking the time to suggest an improvement! Your ideas help make SINAPSE better for everyone.
+        ## Compartilhe sua Ideia
+        Obrigado por contribuir! Descreva sua ideia claramente para que possamos avaliar.
 
   - type: dropdown
-    id: repo-scope
+    id: area
     attributes:
-      label: Which repository does this idea relate to?
-      description: Select the repository this idea is most relevant to
+      label: Area relacionada
+      description: Selecione a area mais relevante para sua ideia
       options:
         - sinapse-ai (Core Framework)
-        - sinapse-squads (SINAPSE Squads - ETL, Creator, MMOS)
-        - mcp-ecosystem (MCP Tools & Docker MCP Toolkit)
-        - Multiple / Cross-repo
+        - Squads (Pacotes de Agentes)
+        - CLI e Installer
+        - Documentacao
+        - Outro
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Describe your idea
-      description: What would you like to see in SINAPSE?
+      label: Descricao da ideia
+      description: O que voce gostaria de ver no SINAPSE-AI?
       placeholder: |
-        A clear and concise description of your idea...
+        Uma descricao clara e concisa da sua ideia...
 
-        - What problem does it solve?
-        - Who would benefit from this?
-        - How should it work?
+        - Qual problema ela resolve?
+        - Quem se beneficiaria?
+        - Como deveria funcionar?
     validations:
       required: true
 
   - type: textarea
     id: use-case
     attributes:
-      label: Use Case
-      description: How would you use this feature?
+      label: Caso de Uso
+      description: Como voce usaria esta funcionalidade?
       placeholder: |
-        Describe a real-world scenario where this would be useful...
+        Descreva um cenario real onde isso seria util...
 
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives Considered
-      description: Have you considered any alternatives or workarounds?
+      label: Alternativas Consideradas
+      description: Voce considerou alguma alternativa ou workaround?
       placeholder: |
-        - Alternative 1
-        - Alternative 2
-        - Current workaround (if any)
+        - Alternativa 1
+        - Alternativa 2
+        - Workaround atual (se houver)
 
   - type: checkboxes
     id: contribution
     attributes:
-      label: Would you be willing to contribute?
+      label: Voce estaria disposto a contribuir?
       options:
-        - label: I would be interested in implementing this feature
-        - label: I can help with documentation
-        - label: I can help with testing
+        - label: Tenho interesse em implementar esta funcionalidade
+        - label: Posso ajudar com documentacao
+        - label: Posso ajudar com testes
 
   - type: markdown
     attributes:
       value: |
         ---
-        **Note:** Ideas are reviewed by maintainers. Approved ideas may become GitHub Issues for implementation.
+        **Nota:** Ideias sao revisadas pelos maintainers. Ideias aprovadas podem se tornar GitHub Issues para implementacao.

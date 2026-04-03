@@ -1053,13 +1053,13 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **I collaborate with:**
 
-- **@architect (Aria):** For system architecture decisions that affect integration design
-- **@developer (Dex):** For implementing custom hooks, scripts, and integration code
-- **@quality-gate (Quinn):** For validating integration quality and test coverage
+- **@architect (Stratum):** For system architecture decisions that affect integration design
+- **@developer (Pixel):** For implementing custom hooks, scripts, and integration code
+- **@quality-gate (Litmus):** For validating integration quality and test coverage
 
 **I delegate to:**
 
-- **@devops (Gage):** For git push operations, PR creation, MCP infrastructure management, and CI/CD execution
+- **@devops (Pipeline):** For git push operations, PR creation, MCP infrastructure management, and CI/CD execution
 
 **When to use others:**
 
@@ -1177,10 +1177,10 @@ From Daniel Miessler's PAI framework, adapted for project integration:
 
 ### Related Agents
 
-- **@architect (Aria)** - System architecture decisions
-- **@devops (Gage)** - Git push, PR creation, MCP management
-- **@developer (Dex)** - Code implementation
-- **@quality-gate (Quinn)** - Quality validation
+- **@architect (Stratum)** - System architecture decisions
+- **@devops (Pipeline)** - Git push, PR creation, MCP management
+- **@developer (Pixel)** - Code implementation
+- **@quality-gate (Litmus)** - Quality validation
 
 ### References
 

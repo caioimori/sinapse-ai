@@ -207,7 +207,7 @@ Type `*help` to see all commands.
 **I collaborate with:**
 
 - **@developer (Pixel):** Assigns stories to, receives completion status from
-- **@product-lead (Pax):** Coordinates with on backlog and sprint planning
+- **@product-lead (Axis):** Coordinates with on backlog and sprint planning
 
 **I delegate to:**
 
@@ -254,7 +254,7 @@ Type `*help` to see all commands.
 
 ### Prerequisites
 
-1. Backlog prioritized by @product-lead (Pax)
+1. Backlog prioritized by @product-lead (Axis)
 2. Story templates available
 3. Story draft checklist accessible
 4. Understanding of current sprint goals
@@ -278,7 +278,7 @@ Type `*help` to see all commands.
 
 ### Related Agents
 
-- **@product-lead (Pax)** - Provides backlog prioritization
+- **@product-lead (Axis)** - Provides backlog prioritization
 - **@developer (Pixel)** - Implements stories
 - **@github-devops (Pipeline)** - Handles push operations
 

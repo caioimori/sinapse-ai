@@ -224,7 +224,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 **I collaborate with:**
 
 - **@project-lead (Beacon):** Provides research and analysis to support PRD creation
-- **@product-lead (Pax):** Provides market insights and competitive analysis
+- **@product-lead (Axis):** Provides market insights and competitive analysis
 
 **When to use others:**
 
@@ -266,6 +266,6 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 ### Related Agents
 
 - **@project-lead (Beacon)** - Primary consumer of research
-- **@product-lead (Pax)** - May request market insights
+- **@product-lead (Axis)** - May request market insights
 
 ---

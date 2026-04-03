@@ -6,7 +6,7 @@ paths: **/*
 
 ## MCP Governance
 
-**IMPORTANT:** All MCP infrastructure management is handled EXCLUSIVELY by the **DevOps Agent (@devops / Gage)**.
+**IMPORTANT:** All MCP infrastructure management is handled EXCLUSIVELY by the **DevOps Agent (@devops / Pipeline)**.
 
 | Operation | Agent | Command |
 |-----------|-------|---------|

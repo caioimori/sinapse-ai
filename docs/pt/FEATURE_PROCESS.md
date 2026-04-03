@@ -1,12 +1,12 @@
 <!--
   Tradução: PT-BR
-  Original: /docs/en/FEATURE_PROCESS.md
+  Original: /docs/en/feature-process.md
   Última sincronização: 2026-01-26
 -->
 
 # Processo de Solicitação de Funcionalidades
 
-> 🌐 [EN](../FEATURE_PROCESS.md) | **PT** | [ES](../es/FEATURE_PROCESS.md)
+> 🌐 [EN](../feature-process.md) | **PT** | [ES](../es/feature-process.md)
 
 ---
 

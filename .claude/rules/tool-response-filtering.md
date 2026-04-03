@@ -2,6 +2,7 @@
 paths:
   - .sinapse-ai/data/tool-registry.yaml
   - .mcp.json
+  - .sinapse-ai/data/**
 ---
 # Tool Response Filtering — Dynamic Token Reduction
 

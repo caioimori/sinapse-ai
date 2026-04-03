@@ -5,10 +5,10 @@
 **Autor:** @architect (Aria)
 **Epic:** [MIS — Memory Intelligence System](../stories/epics/epic-memory-intelligence-system/EPIC-MIS-INDEX.md)
 **Baseado Em:** [MIS-1 Investigation](../stories/epics/epic-memory-intelligence-system/story-mis-1-investigation.md)
-**Documento Atual:** [MEMORY-SYSTEM.md](MEMORY-SYSTEM.md) (estado atual v1.0)
+**Documento Atual:** [memory-system.md](memory-system.md) (estado atual v1.0)
 **Tags:** memory, intelligence, session-digest, progressive-retrieval, self-learning, attention-routing, core-pro-split
 
-> **NOTA:** Este documento descreve o **estado futuro** do sistema de memoria apos todas as 7 stories do Epic MIS serem implementadas. Para o estado atual, consulte [MEMORY-SYSTEM.md](MEMORY-SYSTEM.md).
+> **NOTA:** Este documento descreve o **estado futuro** do sistema de memoria apos todas as 7 stories do Epic MIS serem implementadas. Para o estado atual, consulte [memory-system.md](memory-system.md).
 
 > **ARQUITETURA:** O MIS segue o modelo **Open Core** do SINAPSE. Toda a inteligencia de memoria reside no repositorio privado `sinapse-pro` (submodule `pro/`). O `sinapse-ai` (open source) fornece apenas extension points e funciona 100% sem memoria inteligente — exatamente como hoje.
 
@@ -1058,7 +1058,7 @@ gantt
 
 | Recurso | Caminho |
 |---------|---------|
-| Estado Atual (v1.0) | [MEMORY-SYSTEM.md](MEMORY-SYSTEM.md) |
+| Estado Atual (v1.0) | [memory-system.md](memory-system.md) |
 | Epic MIS Index | [EPIC-MIS-INDEX.md](../stories/epics/epic-memory-intelligence-system/EPIC-MIS-INDEX.md) |
 | MIS-1 Investigation | [story-mis-1-investigation.md](../stories/epics/epic-memory-intelligence-system/story-mis-1-investigation.md) |
 | MIS-2 Dead Code Cleanup | [story-mis-2-dead-code-cleanup.md](../stories/epics/epic-memory-intelligence-system/story-mis-2-dead-code-cleanup.md) |

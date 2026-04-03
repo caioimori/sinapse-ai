@@ -178,13 +178,20 @@ describe('Integration - Task 8.3: Local NPX Execution', () => {
       const binPath = path.join(PKG_DIR, 'bin/sinapse-install.js');
 
       // When
-      const result = execSync(`node "${binPath}" --invalid-flag 2>&1 || true`, {
-        encoding: 'utf8',
-        timeout: 10000,
-      });
+      let result = '';
+
+      try {
+        execSync(`node "${binPath}" --invalid-flag`, {
+          encoding: 'utf8',
+          timeout: 10000,
+          stdio: 'pipe',
+        });
+      } catch (error) {
+        result = `${error.stdout || ''}${error.stderr || ''}`;
+      }
 
       // Then
-      expect(result).toContain('error');
+      expect(result.toLowerCase()).toContain('error');
     });
   });
 

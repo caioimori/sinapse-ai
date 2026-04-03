@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Created:** 2025-12-08
 **Updated:** 2025-12-08
-**Agent:** @devops (Gage)
+**Agent:** @devops (Pipeline)
 **Story:** 5.10 - GitHub DevOps Setup for User Projects
 
 ---

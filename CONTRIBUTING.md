@@ -1,545 +1,550 @@
-# Contributing to SINAPSE
+# Contribuindo com o SINAPSE-AI
 
-> **[Versao em Portugues](docs/pt/contributing.md)**
+Bem-vindo ao **SINAPSE-AI** -- o sistema de orquestracao de agentes de IA para desenvolvimento full stack. Com **18 squads**, **175 agentes** e **12 agentes core**, o SINAPSE transforma a forma como equipes constroem software.
 
-Welcome to SINAPSE! Thank you for your interest in contributing. This guide will help you understand our development workflow, contribution process, and how to submit your changes.
-
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Types of Contributions](#types-of-contributions)
-- [Development Workflow](#development-workflow)
-- [Contributing Agents](#contributing-agents)
-- [Contributing Tasks](#contributing-tasks)
-- [Contributing Squads](#contributing-squads)
-- [Code Review Process](#code-review-process)
-- [Validation System](#validation-system)
-- [Branch Protection & PR Requirements](#branch-protection--pr-requirements)
-- [Code Standards](#code-standards)
-- [Testing Requirements](#testing-requirements)
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [Getting Help](#getting-help)
-- [Working with Pro](#working-with-pro)
+Agradecemos seu interesse em contribuir. Este guia explica nosso fluxo de desenvolvimento, processo de contribuicao e como enviar suas mudancas.
 
 ---
 
-## Quick Start
+## Indice
 
-### 1. Fork and Clone
+- [Inicio Rapido](#inicio-rapido)
+- [Tipos de Contribuicao](#tipos-de-contribuicao)
+- [Fluxo de Desenvolvimento](#fluxo-de-desenvolvimento)
+- [Contribuindo com Agentes](#contribuindo-com-agentes)
+- [Contribuindo com Tasks](#contribuindo-com-tasks)
+- [Contribuindo com Squads](#contribuindo-com-squads)
+- [Processo de Code Review](#processo-de-code-review)
+- [Sistema de Validacao](#sistema-de-validacao)
+- [Branch Protection e Requisitos de PR](#branch-protection-e-requisitos-de-pr)
+- [Padroes de Codigo](#padroes-de-codigo)
+- [Requisitos de Teste](#requisitos-de-teste)
+- [Limites do Framework](#limites-do-framework)
+- [Perguntas Frequentes](#perguntas-frequentes)
+- [Obtendo Ajuda](#obtendo-ajuda)
+- [Trabalhando com Pro](#trabalhando-com-pro)
+
+---
+
+## Inicio Rapido
+
+### Pre-requisitos
+
+- **Node.js** >= 18.0.0
+- **npm**
+- **Git**
+- **Claude Code** ou **Codex CLI** (recomendado para desenvolvimento com agentes)
+- **GitHub CLI** (`gh`) -- opcional mas recomendado
+
+### 1. Fork e Clone
 
 ```bash
-# Fork via GitHub UI, then clone your fork
-git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
+# Fork via interface do GitHub, depois clone seu fork
+git clone https://github.com/SEU_USUARIO/sinapse-ai.git
 cd sinapse-ai
 
-# Add upstream remote
-git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
+# Adicione o remote upstream
+git remote add upstream https://github.com/caioimori/sinapse-ai.git
 ```
 
-### 2. Set Up Development Environment
-
-**Prerequisites:**
-
-- Node.js >= 20.0.0
-- npm
-- Git
-- GitHub CLI (`gh`) - optional but recommended
+### 2. Configurar Ambiente de Desenvolvimento
 
 ```bash
-# Install dependencies
+# Instalar dependencias
 npm install
 
-# Verify setup
+# Instalar SINAPSE no projeto (configura agentes, hooks e estrutura)
+npx sinapse-ai install
+
+# Verificar setup
 npm test
 npm run lint
 npm run typecheck
 ```
 
-### 3. Create a Feature Branch
+### 3. Criar Branch de Trabalho
 
 ```bash
-git checkout -b feature/your-feature-name
+git checkout -b feat/nome-da-feature
 ```
 
-**Branch Naming Conventions:**
-| Prefix | Use For |
-|--------|---------|
-| `feature/` | New features, agents, tasks |
-| `fix/` | Bug fixes |
-| `docs/` | Documentation updates |
-| `refactor/` | Code refactoring |
-| `test/` | Test additions/improvements |
+**Convencoes de nomenclatura de branch:**
 
-### 4. Make Your Changes
+| Prefixo | Uso |
+|---------|-----|
+| `feat/` | Novas funcionalidades, agentes, tasks |
+| `fix/` | Correcoes de bugs |
+| `docs/` | Atualizacoes de documentacao |
+| `test/` | Adicoes/melhorias de testes |
+| `chore/` | Manutencao e tarefas auxiliares |
 
-Follow the relevant guide below for your contribution type.
+### 4. Fazer Suas Mudancas
 
-### 5. Run Local Validation
+Siga o guia relevante abaixo para seu tipo de contribuicao.
+
+### 5. Executar Validacao Local
 
 ```bash
-npm run lint      # Code style
-npm run typecheck # Type checking
-npm test          # Run tests
-npm run build     # Verify build
+npm run lint      # Estilo de codigo
+npm run typecheck # Verificacao de tipos
+npm test          # Executar testes
 ```
 
-### 6. Push and Create PR
+### 6. Push e Criar PR
 
 ```bash
-git push origin feature/your-feature-name
+git push origin feat/nome-da-feature
 ```
 
-Then create a Pull Request on GitHub targeting `main` branch.
+Depois crie um Pull Request no GitHub apontando para a branch `main`.
 
 ---
 
-## Types of Contributions
+## Tipos de Contribuicao
 
-| Contribution      | Description                          | Difficulty  |
-| ----------------- | ------------------------------------ | ----------- |
-| **Documentation** | Fix typos, improve guides            | Easy        |
-| **Bug Fixes**     | Fix reported issues                  | Easy-Medium |
-| **Tasks**         | Add new task workflows               | Medium      |
-| **Agents**        | Create new AI agent personas         | Medium      |
-| **Squads**        | Bundle of agents + tasks + workflows | Advanced    |
-| **Core Features** | Framework improvements               | Advanced    |
+| Contribuicao | Descricao | Dificuldade |
+|-------------|-----------|-------------|
+| **Documentacao** | Corrigir erros, melhorar guias | Facil |
+| **Bug Fixes** | Corrigir issues reportados | Facil-Media |
+| **Tasks** | Adicionar novos workflows de task | Media |
+| **Agentes** | Criar novas personas de agentes IA | Media |
+| **Squads** | Pacote de agentes + tasks + workflows | Avancada |
+| **Core Features** | Melhorias no framework | Avancada |
+
+### Como comecar cada tipo
+
+**Bug Fixes:**
+1. Crie uma issue primeiro descrevendo o bug
+2. Referencie a issue no seu PR
+3. Inclua teste que reproduz o bug
+
+**Novas Features:**
+1. O SINAPSE segue o processo **Documentation-First** -- toda feature precisa de uma story antes da implementacao
+2. Proponha via issue de Feature Request ou Discussion
+3. Apos aprovacao, a story sera criada e a implementacao pode comecar
+
+**Contribuicoes de Squad:**
+1. Use o template de issue **Squad Proposal**
+2. Descreva agentes, tasks e base de conhecimento propostos
+3. Apos aprovacao dos maintainers, implemente seguindo a estrutura padrao
+
+**Contribuicoes de Agentes e Tasks:**
+1. Siga os schemas e templates existentes (veja secoes abaixo)
+2. Garanta que o agente/task se integra com o ecossistema existente
+
+**Documentacao:**
+1. Sempre bem-vinda -- nao precisa de issue previa para correcoes pequenas
+2. Para novos guias, abra uma Discussion primeiro
 
 ---
 
-## Development Workflow
+## Fluxo de Desenvolvimento
 
-### Commit Conventions
+### Convencoes de Commit
 
-We use [Conventional Commits](https://www.conventionalcommits.org/):
+Usamos [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-<type>: <description>
+<tipo>: <descricao>
 
-<optional body>
+<corpo opcional>
 ```
 
-**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+**Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-**Examples:**
+**Exemplos:**
 
 ```bash
-git commit -m "feat(agent): add security-auditor agent"
-git commit -m "fix: resolve memory leak in config loader"
-git commit -m "docs: update contribution guide"
+git commit -m "feat(agent): adicionar agente security-auditor"
+git commit -m "fix: resolver memory leak no config loader"
+git commit -m "docs: atualizar guia de contribuicao"
 ```
 
-### Pull Request Process
+### Processo de Pull Request
 
-1. **Create PR** targeting `main` branch
-2. **Automated checks** run (lint, typecheck, test, build)
-3. **CodeRabbit review** provides AI-powered feedback
-4. **Maintainer review** - at least 1 approval required
-5. **Merge** after all checks pass
+1. **Criar PR** apontando para a branch `main`
+2. **Checks automaticos** executam (lint, typecheck, test)
+3. **CodeRabbit review** fornece feedback automatizado por IA
+4. **Review de maintainer** -- pelo menos 1 aprovacao necessaria
+5. **Merge** apos todos os checks passarem
 
 ---
 
-## Contributing Agents
+## Contribuindo com Agentes
 
-Agents are AI personas with specific expertise and commands.
+Agentes sao personas de IA com expertise e comandos especificos.
 
-### Agent File Location
+### Localizacao do Arquivo
 
 ```
-.sinapse-ai/development/agents/your-agent.md
+.sinapse-ai/development/agents/seu-agente.md
 ```
 
-### Required Agent Structure
+### Estrutura Obrigatoria
 
 ```yaml
 agent:
-  name: AgentName
-  id: agent-id # kebab-case, unique
-  title: Descriptive Title
+  name: NomeDoAgente
+  id: agent-id        # kebab-case, unico
+  title: Titulo Descritivo
   icon: emoji
-  whenToUse: 'When to activate this agent'
+  whenToUse: 'Quando ativar este agente'
 
 persona_profile:
   archetype: Builder | Analyst | Guardian | Operator | Strategist
-
   communication:
     tone: pragmatic | friendly | formal | analytical
     emoji_frequency: none | low | medium | high
-
     vocabulary:
-      - domain-term-1
-      - domain-term-2
-
+      - termo-dominio-1
+      - termo-dominio-2
     greeting_levels:
-      minimal: 'Short greeting'
-      named: 'Named greeting with personality'
-      archetypal: 'Full archetypal greeting'
-
-    signature_closing: 'Signature phrase'
+      minimal: 'Saudacao curta'
+      named: 'Saudacao com nome e personalidade'
+      archetypal: 'Saudacao completa arquetipal'
+    signature_closing: 'Frase de assinatura'
 
 persona:
-  role: "Agent's primary role"
-  style: 'Communication style'
-  identity: "Agent's identity description"
-  focus: 'What the agent focuses on'
-
+  role: "Papel principal do agente"
+  style: 'Estilo de comunicacao'
+  identity: "Descricao da identidade do agente"
+  focus: 'Foco principal do agente'
   core_principles:
-    - Principle 1
-    - Principle 2
+    - Principio 1
+    - Principio 2
 
 commands:
-  - help: Show available commands
-  - custom-command: Command description
+  - help: Mostrar comandos disponiveis
+  - custom-command: Descricao do comando
 
 dependencies:
   tasks:
     - related-task.md
   tools:
-    - tool-name
+    - nome-da-ferramenta
 ```
 
-### Agent Contribution Checklist
+### Checklist de Contribuicao de Agentes
 
-- [ ] Agent ID is unique and uses kebab-case
-- [ ] `persona_profile` is complete with archetype and communication
-- [ ] All commands have descriptions
-- [ ] Dependencies list all required tasks
-- [ ] No hardcoded credentials or sensitive data
-- [ ] Follows existing patterns in the codebase
-
-### PR Template for Agents
-
-Use the **Agent Contribution** template when creating your PR.
+- [ ] Agent ID e unico e usa kebab-case
+- [ ] `persona_profile` esta completo com archetype e communication
+- [ ] Todos os comandos tem descricoes
+- [ ] Dependencias listam todas as tasks necessarias
+- [ ] Sem credenciais ou dados sensiveis hardcoded
+- [ ] Segue padroes existentes no codebase
 
 ---
 
-## Contributing Tasks
+## Contribuindo com Tasks
 
-Tasks are executable workflows that agents can run.
+Tasks sao workflows executaveis que agentes podem rodar.
 
-### Task File Location
+### Localizacao do Arquivo
 
 ```
-.sinapse-ai/development/tasks/your-task.md
+.sinapse-ai/development/tasks/sua-task.md
 ```
 
-### Required Task Structure
+### Estrutura Obrigatoria
 
 ```markdown
-# Task Name
+# Nome da Task
 
-**Description:** What this task does
-**Agent(s):** @developer, @quality-gate, etc.
+**Descricao:** O que esta task faz
+**Agente(s):** @developer, @quality-gate, etc.
 **Elicit:** true | false
 
 ---
 
-## Prerequisites
+## Pre-requisitos
 
-- Prerequisite 1
-- Prerequisite 2
+- Pre-requisito 1
+- Pre-requisito 2
 
-## Steps
+## Passos
 
-### Step 1: First Step
+### Passo 1: Primeiro Passo
+Descricao do que fazer.
 
-Description of what to do.
+### Passo 2: Segundo Passo
+Continue com mais passos...
 
-**Elicitation Point (if elicit: true):**
+## Entregas
 
-- Question to ask user
-- Options to present
+- [ ] Entrega 1
+- [ ] Entrega 2
 
-### Step 2: Second Step
+## Tratamento de Erros
 
-Continue with more steps...
-
-## Deliverables
-
-- [ ] Deliverable 1
-- [ ] Deliverable 2
-
-## Error Handling
-
-If X happens, do Y.
+Se X acontecer, faca Y.
 
 ---
 
-## Dependencies
+## Dependencias
 
-- `dependency-1.md`
-- `dependency-2.md`
+- `dependencia-1.md`
+- `dependencia-2.md`
 ```
 
-### Task Contribution Checklist
+### Checklist de Contribuicao de Tasks
 
-- [ ] Task has clear description and purpose
-- [ ] Steps are sequential and logical
-- [ ] Elicitation points are clear (if applicable)
-- [ ] Deliverables are well-defined
-- [ ] Error handling guidance included
-- [ ] Dependencies exist in the codebase
-
-### PR Template for Tasks
-
-Use the **Task Contribution** template when creating your PR.
+- [ ] Task tem descricao e proposito claros
+- [ ] Passos sao sequenciais e logicos
+- [ ] Pontos de elicitacao sao claros (se aplicavel)
+- [ ] Entregas estao bem definidas
+- [ ] Orientacao de tratamento de erros incluida
+- [ ] Dependencias existem no codebase
 
 ---
 
-## Contributing Squads
+## Contribuindo com Squads
 
-Squads are bundles of related agents, tasks, and workflows.
+Squads sao pacotes de agentes, tasks e workflows relacionados.
 
-### Squad Structure
+### Estrutura de um Squad
 
 ```
-your-squad/
-├── manifest.yaml       # Squad metadata
-├── agents/
-│   └── your-agent.md
-├── tasks/
-│   └── your-task.md
-└── workflows/
-    └── your-workflow.yaml
+seu-squad/
+  manifest.yaml       # Metadados do squad
+  agents/
+    seu-agente.md
+  tasks/
+    sua-task.md
+  workflows/
+    seu-workflow.yaml
 ```
 
-### Squad Manifest
+### Manifesto do Squad
 
 ```yaml
-name: your-squad
+name: seu-squad
 version: 1.0.0
-description: What this squad does
-author: Your Name
+description: O que este squad faz
+author: Seu Nome
 dependencies:
-  - base-squad (optional)
+  - base-squad (opcional)
 agents:
-  - your-agent
+  - seu-agente
 tasks:
-  - your-task
+  - sua-task
 ```
 
-### Squad Resources
+### Recursos para Squads
 
-- [Squads Guide](docs/guides/squads-guide.md) - Complete documentation
-- [Squad Template](templates/squad/) - Start from a working template
-- [Squad Discussions](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) - Share ideas
+- [Guia de Squads](docs/guides/squads-guide.md) -- Documentacao completa
+- [Template de Squad](templates/squad/) -- Comece de um template funcional
+- [Discussoes de Squads](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas) -- Compartilhe ideias
 
 ---
 
-## Code Review Process
+## Processo de Code Review
 
-### Automated Checks
+### Checks Automaticos
 
-When you submit a PR, the following checks run automatically:
+Quando voce envia um PR, os seguintes checks executam automaticamente:
 
-| Check          | Description            | Required |
-| -------------- | ---------------------- | -------- |
-| **ESLint**     | Code style and quality | Yes      |
-| **TypeScript** | Type checking          | Yes      |
-| **Jest Tests** | Test suite (Node 18 & 20) | Yes   |
-| **Validation Summary** | Aggregate gate  | Yes      |
-| **Build**      | Build verification     | No (advisory) |
-| **Coverage**   | Coverage reporting     | No (advisory) |
+| Check | Descricao | Obrigatorio |
+|-------|-----------|-------------|
+| **ESLint** | Estilo e qualidade de codigo | Sim |
+| **TypeScript** | Verificacao de tipos | Sim |
+| **Jest Tests** | Suite de testes (Node 18 e 20) | Sim |
+| **Validation Summary** | Gate agregado | Sim |
+| **Build** | Verificacao de build | Nao (advisory) |
+| **Coverage** | Relatorio de cobertura | Nao (advisory) |
 
 ### CodeRabbit AI Review
 
-[CodeRabbit](https://coderabbit.ai) automatically reviews your PR and provides feedback on:
+[CodeRabbit](https://coderabbit.ai) automaticamente revisa seu PR e fornece feedback sobre:
 
-- Code quality and best practices
-- Security concerns
-- SINAPSE-specific patterns (agents, tasks, workflows)
-- Performance issues
+- Qualidade de codigo e boas praticas
+- Preocupacoes de seguranca
+- Padroes especificos do SINAPSE (agentes, tasks, workflows)
+- Problemas de performance
 
-**Severity Levels:**
+| Severidade | Acao Necessaria |
+|-----------|-----------------|
+| **CRITICAL** | Deve corrigir antes do merge |
+| **HIGH** | Fortemente recomendado corrigir |
+| **MEDIUM** | Considerar corrigir ou documentar como tech debt |
+| **LOW** | Melhoria opcional |
 
-| Level        | Action Required                          |
-| ------------ | ---------------------------------------- |
-| **CRITICAL** | Must fix before merge                    |
-| **HIGH**     | Strongly recommended to fix              |
-| **MEDIUM**   | Consider fixing or document as tech debt |
-| **LOW**      | Optional improvement                     |
+### Review de Maintainer
 
-**Responding to CodeRabbit:**
+Apos os checks automaticos passarem, um maintainer ira:
 
-- Address CRITICAL and HIGH issues before requesting review
-- MEDIUM issues can be documented for follow-up
-- LOW issues are informational
+1. Verificar se as mudancas atendem os padroes do projeto
+2. Checar implicacoes de seguranca
+3. Garantir que a documentacao foi atualizada
+4. Aprovar ou solicitar mudancas
 
-### Maintainer Review
+### Requisitos de Merge
 
-After automated checks pass, a maintainer will:
-
-1. Verify changes meet project standards
-2. Check for security implications
-3. Ensure documentation is updated
-4. Approve or request changes
-
-### Merge Requirements
-
-- [ ] All CI checks pass
-- [ ] At least 1 maintainer approval
-- [ ] All conversations resolved
-- [ ] No merge conflicts
-- [ ] Branch is up to date with main
+- [ ] Todos os checks de CI passam
+- [ ] Pelo menos 1 aprovacao de maintainer
+- [ ] Todas as conversas resolvidas
+- [ ] Sem conflitos de merge
+- [ ] Branch esta atualizada com main
 
 ---
 
-## Validation System
+## Sistema de Validacao
 
-SINAPSE implements a **Defense in Depth** strategy with 3 validation layers:
+O SINAPSE implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de validacao:
 
-### Layer 1: Pre-commit (Local)
+### Camada 1: Pre-commit (Local)
 
-**Performance:** < 5 seconds
+**Performance:** < 5 segundos
 
-- ESLint with cache
-- TypeScript incremental compilation
-- IDE sync (auto-stages IDE command files)
+- ESLint com cache
+- TypeScript incremental
+- IDE sync (auto-stage de arquivos de comando da IDE)
 
-### Layer 2: Pre-push (Local)
+### Camada 2: Pre-push (Local)
 
-**Performance:** < 2 seconds
+**Performance:** < 2 segundos
 
-- Story checkbox validation
-- Status consistency checks
+- Validacao de checkboxes de story
+- Verificacao de consistencia de status
 
-### Layer 3: CI/CD (Cloud)
+### Camada 3: CI/CD (Cloud)
 
-**Performance:** 2-5 minutes
+**Performance:** 2-5 minutos
 
-- Full lint and type checking
-- Complete test suite
-- Coverage reporting
-- Story validation
-- Branch protection rules
+- Lint e type checking completo
+- Suite completa de testes
+- Relatorio de cobertura
+- Validacao de story
+- Regras de branch protection
 
 ---
 
-## Branch Protection & PR Requirements
+## Branch Protection e Requisitos de PR
 
-All changes to `main` must go through a Pull Request. Direct pushes are blocked.
+Todas as mudancas em `main` devem passar por um Pull Request. Pushes diretos sao bloqueados.
 
-### Required Status Checks
+### Status Checks Obrigatorios
 
-All of these must pass before a PR can be merged:
+| Check | Descricao |
+|-------|-----------|
+| **ESLint** | Estilo e qualidade de codigo |
+| **TypeScript Type Checking** | Sem erros de tipo |
+| **Jest Tests (Node 18)** | Suite completa em Node 18 |
+| **Jest Tests (Node 20)** | Suite completa em Node 20 |
+| **Validation Summary** | Gate agregado |
 
-| Check | Description |
-|-------|-------------|
-| **ESLint** | Code style and quality |
-| **TypeScript Type Checking** | No type errors |
-| **Jest Tests (Node 18)** | Full test suite on Node 18 |
-| **Jest Tests (Node 20)** | Full test suite on Node 20 |
-| **Validation Summary** | Aggregate gate |
+### Regras de Review de PR
 
-### PR Review Rules
-
-- **1 approval required** from a CODEOWNERS reviewer
-- **Stale reviews are dismissed** when new commits are pushed
-- **Conversation resolution required** — all review threads must be resolved
-- **CODEOWNERS review required** — changes to critical paths need the designated owner's approval
+- **1 aprovacao necessaria** de um reviewer CODEOWNERS
+- **Reviews obsoletos sao descartados** quando novos commits sao pushados
+- **Resolucao de conversas obrigatoria** -- todos os threads de review devem ser resolvidos
+- **Review de CODEOWNERS obrigatorio** -- mudancas em caminhos criticos precisam da aprovacao do owner designado
 
 ### CODEOWNERS
 
-Critical paths require approval from `@caioimori @eusoier` (maintainer):
+Caminhos criticos requerem aprovacao de `@caioimori @eusoier`:
 
-| Path | Why |
-|------|-----|
-| `.sinapse-ai/core/orchestration/` | Orchestration layer (MasterOrchestrator, GateEvaluator) |
-| `.sinapse-ai/core/execution/` | Execution engine (WaveExecutor, ParallelExecutor) |
-| `packages/` | Installer, CLI, shared libraries |
+| Caminho | Razao |
+|---------|-------|
+| `.sinapse-ai/core/orchestration/` | Camada de orquestracao |
+| `.sinapse-ai/core/execution/` | Motor de execucao |
+| `packages/` | Installer, CLI, bibliotecas compartilhadas |
 | `.github/` | CI/CD workflows, branch protection |
-| `.sinapse-ai/core-config.yaml` | Framework configuration |
+| `.sinapse-ai/core-config.yaml` | Configuracao do framework |
 
-All other paths require review from `@caioimori @eusoier`.
+### Force Push e Delecoes
 
-See [`.github/CODEOWNERS`](.github/CODEOWNERS) for the full ownership map.
-
-### Force Push & Deletions
-
-- **Force push to main:** Blocked
-- **Branch deletions:** Blocked
-- **Admin bypass:** Disabled (`enforce_admins: true`)
+- **Force push para main:** Bloqueado
+- **Delecoes de branch:** Bloqueado
+- **Admin bypass:** Desabilitado
 
 ---
 
-## Code Standards
+## Padroes de Codigo
 
 ### JavaScript/TypeScript
 
-- ES2022 features
-- Prefer `const` over `let`
-- Use async/await over promises
-- Add JSDoc comments for public APIs
-- Follow existing code style
+- **Runtime:** ES2022
+- **Modulos:** CommonJS (CJS)
+- **Indentacao:** 2 espacos
+- **Aspas:** Simples (single quotes)
+- **Ponto e virgula:** Obrigatorio
+- Preferir `const` sobre `let`
+- Usar async/await sobre promises
+- Adicionar JSDoc para APIs publicas
+- Seguir o estilo existente no codebase
 
-### File Organization
+### Organizacao de Arquivos
 
 ```
 .sinapse-ai/
-├── development/
-│   ├── agents/      # Agent definitions
-│   ├── tasks/       # Task workflows
-│   └── workflows/   # Multi-step workflows
-├── core/            # Core utilities
-└── product/
-    └── templates/   # Document templates
+  development/
+    agents/        # Definicoes de agentes
+    tasks/         # Workflows de tasks
+    workflows/     # Workflows multi-step
+  core/            # Utilidades core
+  product/
+    templates/     # Templates de documentos
 
 docs/
-├── guides/          # User guides
-└── architecture/    # System architecture
+  guides/          # Guias do usuario
+  architecture/    # Arquitetura do sistema
 ```
 
-### ESLint & TypeScript
+### ESLint e TypeScript
 
 - Extends: `eslint:recommended`, `@typescript-eslint/recommended`
 - Target: ES2022
-- Strict mode enabled
-- No console.log in production (warnings)
+- Strict mode habilitado
+- Sem `console.log` em producao (warnings)
 
 ---
 
-## Testing Requirements
+## Requisitos de Teste
 
-### Coverage Requirements
+### Cobertura Minima
 
-- **Minimum:** 80% coverage (branches, functions, lines, statements)
-- **Unit Tests:** Required for all new functions
-- **Integration Tests:** Required for workflows
+- **Minimo:** 80% de cobertura (branches, functions, lines, statements)
+- **Testes Unitarios:** Obrigatorios para todas as novas funcoes
+- **Testes de Integracao:** Obrigatorios para workflows
 
-### Running Tests
+### Executando Testes
 
 ```bash
-npm test                    # Run all tests
-npm run test:coverage       # With coverage report
-npm run test:watch          # Watch mode
-npm test -- path/to/test.js # Specific file
-```
-
-### Writing Tests
-
-```javascript
-describe('MyModule', () => {
-  it('should do something', () => {
-    const result = myFunction();
-    expect(result).toBe(expected);
-  });
-});
+npm test                    # Executar todos os testes
+npm run test:coverage       # Com relatorio de cobertura
+npm test -- path/to/test.js # Arquivo especifico
 ```
 
 ---
 
-## Frequently Asked Questions
+## Limites do Framework
 
-### Q: How long does review take?
+O SINAPSE usa um modelo de 4 camadas para separar artefatos do framework e do projeto:
 
-**A:** We aim for first review within 24-48 hours. Complex changes may take longer.
+| Camada | Mutabilidade | Contribuicoes |
+|--------|-------------|---------------|
+| **L1** Framework Core | NUNCA modificar | `.sinapse-ai/core/` -- protegido, nao aceita PRs externos |
+| **L2** Framework Templates | NUNCA modificar | Tasks, templates, checklists -- extend-only |
+| **L3** Project Config | Mutavel (excecoes) | `.sinapse-ai/data/`, configs |
+| **L4** Project Runtime | SEMPRE modificar | `docs/`, `packages/`, `tests/` -- onde contribuicoes acontecem |
 
-### Q: Can I contribute without tests?
+**Importante:** PRs que modificam arquivos L1 ou L2 serao rejeitados automaticamente. Contribuicoes de agentes, tasks e squads sao muito bem-vindas nas camadas L3/L4.
 
-**A:** Tests are strongly encouraged. For documentation-only changes, tests may not be required.
+---
 
-### Q: What if my PR has conflicts?
+## Perguntas Frequentes
 
-**A:** Rebase your branch on latest main:
+### P: Quanto tempo leva o review?
+
+**R:** Buscamos primeiro review em 24-48 horas. Mudancas complexas podem levar mais.
+
+### P: Posso contribuir sem testes?
+
+**R:** Testes sao fortemente encorajados. Para mudancas apenas de documentacao, testes podem nao ser necessarios.
+
+### P: E se meu PR tiver conflitos?
+
+**R:** Faça rebase da sua branch no main mais recente:
 
 ```bash
 git fetch upstream
@@ -547,125 +552,105 @@ git rebase upstream/main
 git push --force-with-lease
 ```
 
-### Q: Can I contribute in Portuguese?
+### P: Posso contribuir em ingles?
 
-**A:** Yes! We accept PRs in Portuguese. See [CONTRIBUTING-PT](docs/pt/contributing.md).
+**R:** Sim. Aceitamos PRs em portugues e ingles.
 
-### Q: How do I become a maintainer?
+### P: Como me torno maintainer?
 
-**A:** Consistent, high-quality contributions over time. Start with small fixes and work up to larger features.
+**R:** Contribuicoes consistentes e de alta qualidade ao longo do tempo. Comece com pequenas correcoes e avance para features maiores.
 
-### Q: My CI checks are failing. What do I do?
+### P: Meus checks de CI estao falhando. O que fazer?
 
-**A:** Check the GitHub Actions logs:
+**R:** Verifique os logs do GitHub Actions:
 
 ```bash
-gh pr checks  # View PR check status
+gh pr checks  # Ver status dos checks do PR
 ```
 
-Common fixes:
-
-- Run `npm run lint -- --fix` for style issues
-- Run `npm run typecheck` to see type errors
-- Ensure tests pass locally before pushing
+Correcoes comuns:
+- Execute `npm run lint -- --fix` para problemas de estilo
+- Execute `npm run typecheck` para ver erros de tipo
+- Garanta que testes passam localmente antes de fazer push
 
 ---
 
-## Getting Help
+## Obtendo Ajuda
 
-- **GitHub Issues:** [Open an issue](https://github.com/SinapseAI/sinapse-ai/issues)
-- **Discussions:** [Start a discussion](https://github.com/SinapseAI/sinapse-ai/discussions)
-- **Community:** [COMMUNITY.md](COMMUNITY.md)
+- **GitHub Issues:** [Abrir uma issue](https://github.com/caioimori/sinapse-ai/issues)
+- **Discussions:** [Iniciar uma discussao](https://github.com/caioimori/sinapse-ai/discussions)
 
 ---
 
-## Working with Pro
+## Trabalhando com Pro
 
-SINAPSE uses an Open Core model with a private `pro/` git submodule (see [ADR-PRO-001](docs/architecture/adr/adr-pro-001-repository-strategy.md)).
+SINAPSE usa um modelo Open Core com um submodulo git privado `pro/`.
 
-### For Open-Source Contributors
+### Para Contribuidores Open-Source
 
-**You do NOT need the pro/ submodule.** The standard clone works perfectly:
+**Voce NAO precisa do submodulo pro/.** O clone padrao funciona perfeitamente:
 
 ```bash
-git clone https://github.com/SinapseAI/sinapse-ai.git
+git clone https://github.com/caioimori/sinapse-ai.git
 cd sinapse-ai
-npm install && npm test  # All tests pass without pro/
+npm install && npm test  # Todos os testes passam sem pro/
 ```
 
-The `pro/` directory will simply not exist in your clone — this is expected and all features, tests, and CI pass without it.
+O diretorio `pro/` simplesmente nao existira no seu clone -- isso e esperado e todas as features, testes e CI passam sem ele.
 
-#### Fork Workflow
+#### Workflow de Fork
 
-When forking and syncing with upstream, **do NOT use `--recurse-submodules`**:
+Ao fazer fork e sincronizar com upstream, **NAO use `--recurse-submodules`**:
 
 ```bash
-# Fork via GitHub UI, then clone (without submodules)
-git clone https://github.com/<your-fork>/sinapse-ai.git
+# Fork via interface do GitHub, depois clone (sem submodulos)
+git clone https://github.com/<seu-fork>/sinapse-ai.git
 cd sinapse-ai
 
-# Add upstream and sync
-git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
+# Adicionar upstream e sincronizar
+git remote add upstream https://github.com/caioimori/sinapse-ai.git
 git fetch upstream
 git rebase upstream/main
 
-# Push (use --force-with-lease after rebase)
+# Push (use --force-with-lease apos rebase)
 git push --force-with-lease origin main
 ```
 
-> **Submodule push error?** If you see `remote: fatal: did not receive expected object` when pushing after syncing, it means the `pro/` submodule pointer changed upstream and your fork cannot resolve the private reference.
+> **Erro de push de submodulo?** Se voce vir `remote: fatal: did not receive expected object` ao fazer push apos sincronizar, significa que o ponteiro do submodulo `pro/` mudou no upstream e seu fork nao consegue resolver a referencia privada.
 >
-> **If your fork already had a successful push before** (existing submodule pointer):
+> **Se seu fork ja teve um push bem-sucedido antes:**
 > ```bash
 > git checkout origin/main -- pro
 > git commit -m "chore: reset pro submodule pointer for fork"
 > git push origin main
 > ```
 >
-> **If this is a new fork** (no previous pro pointer on remote):
+> **Se este e um fork novo:**
 > ```bash
 > git rm --cached pro
 > git commit -m "chore: remove pro submodule reference for fork"
 > git push origin main
 > ```
 
-You can also suppress submodule noise in `git status` locally (these settings are local-only and do not affect remote pushes):
+### Para Membros da Equipe (com Acesso Pro)
 
 ```bash
-git config submodule.pro.ignore all
-git config submodule.pro.active false
-```
+# Clone com submodulo
+git clone --recurse-submodules https://github.com/caioimori/sinapse-ai.git
 
-### For Team Members (with Pro Access)
-
-```bash
-# Clone with submodule
-git clone --recurse-submodules https://github.com/SinapseAI/sinapse-ai.git
-
-# Or add to existing clone
+# Ou adicionar a clone existente
 git submodule update --init pro
 ```
 
-**Push order:** Always push `pro/` changes first, then `sinapse-ai`.
-
-### Future: CLI Setup
-
-```bash
-# Coming in a future release
-sinapse setup --pro
-```
-
-For the complete developer workflow guide, see [Pro Developer Workflow](docs/guides/workflows/pro-developer-workflow.md).
+**Ordem de push:** Sempre faca push das mudancas de `pro/` primeiro, depois `sinapse-ai`.
 
 ---
 
-## Additional Resources
+## Recursos Adicionais
 
-- [Community Guide](COMMUNITY.md) - How to participate
-- [Squads Guide](docs/guides/squads-guide.md) - Create agent teams
-- [Architecture](docs/architecture/) - System design
-- [Roadmap](ROADMAP.md) - Project direction
+- [Guia de Squads](docs/guides/squads-guide.md) -- Criar equipes de agentes
+- [Arquitetura](docs/architecture/) -- Design do sistema
 
 ---
 
-**Thank you for contributing to SINAPSE!**
+**Obrigado por contribuir com o SINAPSE-AI!**

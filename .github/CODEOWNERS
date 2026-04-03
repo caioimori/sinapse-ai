@@ -2,38 +2,38 @@
 # Maintainer model: every PR to main must be reviewed by the other maintainer.
 # The usernames below must keep write access in GitHub.
 
-# Shared fallback ownership
+# Default — all files require at least one maintainer
 * @caioimori @Matheus-soier
 
-# Maintainer collaboration governance
-.github/ @caioimori @Matheus-soier
-.husky/ @caioimori @Matheus-soier
-.claude/hooks/ @caioimori @Matheus-soier
-.claude/rules/ @caioimori @Matheus-soier
-
-# Framework core and infrastructure
+# Critical paths — framework core (L1 protected)
 .sinapse-ai/core/ @caioimori @Matheus-soier
-.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
-.sinapse-ai/constitution.md @caioimori @Matheus-soier
-.sinapse-ai/core-config.yaml @caioimori @Matheus-soier
-.sinapse-ai/project-config.yaml @caioimori @Matheus-soier
-
-# Execution surface
+.sinapse-ai/constitution.md @caioimori
 bin/ @caioimori @Matheus-soier
-packages/ @caioimori @Matheus-soier
-package.json @caioimori @Matheus-soier
-package-lock.json @caioimori @Matheus-soier
 
-# Shared extension surfaces
-.sinapse-ai/development/agents/ @caioimori @Matheus-soier
+# Framework templates (L2 protected)
 .sinapse-ai/development/tasks/ @caioimori @Matheus-soier
+.sinapse-ai/development/templates/ @caioimori @Matheus-soier
 .sinapse-ai/development/workflows/ @caioimori @Matheus-soier
-.sinapse-ai/product/ @caioimori @Matheus-soier
-docs/ @caioimori @Matheus-soier
+.sinapse-ai/development/checklists/ @caioimori @Matheus-soier
+.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
 
-# Sensitive patterns
-.env* @caioimori @Matheus-soier
-*.config.js @caioimori @Matheus-soier
-*.config.ts @caioimori @Matheus-soier
-tsconfig.json @caioimori @Matheus-soier
-eslint.config.* @caioimori @Matheus-soier
+# Agent definitions
+.sinapse-ai/development/agents/ @caioimori @Matheus-soier
+
+# Security-sensitive paths
+.claude/hooks/ @caioimori
+.claude/rules/ @caioimori
+.claude/settings.json @caioimori
+SECURITY.md @caioimori
+squads/squad-cybersecurity/ @caioimori @Matheus-soier
+
+# CI/CD and infrastructure
+.github/ @caioimori @Matheus-soier
+packages/ @caioimori @Matheus-soier
+
+# Configuration files
+package.json @caioimori @Matheus-soier
+.env* @caioimori
+
+# Documentation — more permissive
+docs/ @caioimori @Matheus-soier

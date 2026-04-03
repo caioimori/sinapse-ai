@@ -18,7 +18,8 @@ updates:
       - "dependencies"
       - "automated"
     reviewers:
-      - "SinapseAI/maintainers"
+      - "caioimori"
+      - "Matheus-soier"
     groups:
       # Group minor and patch updates together
       minor-and-patch:
@@ -53,4 +54,4 @@ updates:
       - "ci/cd"
       - "automated"
     reviewers:
-      - "SinapseAI/maintainers"
+      - "caioimori"

@@ -845,7 +845,7 @@ metadata:
   story: '4.2'
   epic: 'Epic 4 - Execution Engine'
   created: '2026-01-28'
-  author: '@architect (Aria)'
+  author: '@architect (Stratum)'
   version: '1.0.0'
   tags:
     - plan-pipeline

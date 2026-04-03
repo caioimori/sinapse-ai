@@ -838,7 +838,7 @@ For full details, see `CONTRIBUTING.md`. Key points:
 - Atomic commits - one logical change per commit
 - Must align with guiding principles
 
-**Core Principles** (from docs/GUIDING-PRINCIPLES.md):
+**Core Principles** (from docs/guiding-principles.md):
 
 - **Dev Agents Must Be Lean**: Minimize dependencies, save context for code
 - **Natural Language First**: Everything in markdown, no code in core

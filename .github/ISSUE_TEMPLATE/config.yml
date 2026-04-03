@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Documentation
-    url: https://github.com/SinapseAI/sinapse-ai/tree/main/docs
-    about: Check our documentation before opening an issue
-  - name: Discussions
-    url: https://github.com/SinapseAI/sinapse-ai/discussions
-    about: Ask questions and share ideas in Discussions
+  - name: Discussoes
+    url: https://github.com/caioimori/sinapse-ai/discussions
+    about: Perguntas gerais, ideias e conversas sobre SINAPSE-AI
+  - name: Documentacao
+    url: https://github.com/caioimori/sinapse-ai/tree/main/docs
+    about: Consulte nossa documentacao antes de abrir uma issue

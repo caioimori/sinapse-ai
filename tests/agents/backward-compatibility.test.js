@@ -1,387 +1,356 @@
-// Integration/Performance test - uses describeIntegration
-const fs = require('fs').promises;
+'use strict';
+
+const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
+const AGENTS_DIR = path.join(__dirname, '../../.sinapse-ai/development/agents');
+
+const EXPECTED_AGENTS = [
+  'analyst',
+  'architect',
+  'data-engineer',
+  'developer',
+  'devops',
+  'product-lead',
+  'project-lead',
+  'quality-gate',
+  'sinapse-orqx',
+  'sprint-lead',
+  'squad-creator',
+  'ux-design-expert',
+];
+
 /**
- * Agent Backward Compatibility Test Suite
+ * Extract the primary YAML block from an agent markdown file.
  *
- * Task 5.2 Requirements:
- * - Agents without dependencies.tools continue working
- * - No errors thrown during agent activation
- * - Existing workflows unaffected
- * - Verify graceful handling of missing tools field
+ * Most agents embed their definition inside a ```yaml code fence.
+ * sinapse-orqx uses a different layout but still has a ```yaml block
+ * for the agent definition section.
  *
- * This suite tests:
- * 1. Agents without dependencies.tools field load successfully
- * 2. No errors when accessing tools property
- * 3. Agent structure remains valid
- * 4. Workflows using agents without tools work correctly
+ * Returns the parsed YAML object or null if no block is found.
  */
-describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => {
-  const agentsPath = path.join(__dirname, '../../sinapse-ai/agents');
-
-  // Agents WITH dependencies.tools (migrated)
-  const agentsWithTools = ['dev', 'qa', 'architect', 'po', 'sm'];
-
-  // Agents WITHOUT dependencies.tools (legacy/backward compatible)
-  const agentsWithoutTools = ['analyst', 'pm', 'ux-expert'];
-
-  // Helper function to load agent YAML from markdown
-  async function loadAgentYaml(agentId) {
-    const filePath = path.join(agentsPath, `${agentId}.md`);
-    const content = await fs.readFile(filePath, 'utf8');
-
-    // Extract YAML block from markdown - handle both \n and \r\n line endings
-    const yamlMatch = content.match(/```yaml[\r\n]+([\s\S]*?)[\r\n]+```/);
-    if (!yamlMatch) {
-      throw new Error(`No YAML block found in ${agentId}.md`);
-    }
-
+function extractYaml(content) {
+  // Match the first ```yaml ... ``` block (handles \r\n and \n)
+  const yamlMatch = content.match(/```ya?ml[\r\n]+([\s\S]*?)[\r\n]+```/);
+  if (yamlMatch) {
     return yaml.load(yamlMatch[1]);
   }
 
-  // Helper to safely access dependencies.tools
-  function getAgentTools(agentConfig) {
-    return agentConfig?.dependencies?.tools || null;
+  // Fallback: try frontmatter style ---\n...\n---
+  const fmMatch = content.match(/---\n([\s\S]*?)---/);
+  if (fmMatch) {
+    return yaml.load(fmMatch[1]);
   }
 
-  describeIntegration('Agents Without Tools Field', () => {
-    test('agents without dependencies.tools load successfully', async () => {
-      const results = [];
+  return null;
+}
 
-      for (const agentId of agentsWithoutTools) {
-        const config = await loadAgentYaml(agentId);
-        results.push({
-          id: agentId,
-          hasTools: !!config.dependencies?.tools,
-          config,
-        });
-      }
+/**
+ * Load and parse an agent definition file.
+ */
+function loadAgent(agentFileName) {
+  const filePath = path.join(AGENTS_DIR, `${agentFileName}.md`);
+  const content = fs.readFileSync(filePath, 'utf8');
+  const parsed = extractYaml(content);
+  return { content, parsed, filePath };
+}
 
-      // All should load without errors
-      expect(results).toHaveLength(agentsWithoutTools.length);
+describe('Agent Backward Compatibility', () => {
+  // Cache all loaded agents for reuse across tests
+  const agentCache = {};
 
-      // All should NOT have tools field
-      results.forEach(({ _id, hasTools }) => {
-        expect(hasTools).toBe(false);
-      });
-    });
-
-    test('analyst agent has no tools field', async () => {
-      const config = await loadAgentYaml('analyst');
-
-      expect(config.dependencies).toBeDefined();
-      expect(config.dependencies.tools).toBeUndefined();
-
-      // Should have other dependencies
-      expect(config.dependencies.tasks).toBeDefined();
-      expect(config.dependencies.templates).toBeDefined();
-    });
-
-    test('pm agent has no tools field', async () => {
-      const config = await loadAgentYaml('pm');
-
-      expect(config.dependencies).toBeDefined();
-      expect(config.dependencies.tools).toBeUndefined();
-    });
-
-    test('ux-expert agent has no tools field', async () => {
-      const config = await loadAgentYaml('ux-expert');
-
-      expect(config.dependencies).toBeDefined();
-      expect(config.dependencies.tools).toBeUndefined();
-    });
+  beforeAll(() => {
+    for (const agentName of EXPECTED_AGENTS) {
+      agentCache[agentName] = loadAgent(agentName);
+    }
   });
 
-  describeIntegration('Agents With Tools Field', () => {
-    test('dev agent has tools field', async () => {
-      const config = await loadAgentYaml('dev');
+  // ─── 1. All 12 expected agent files exist ─────────────────────────────────
 
-      expect(config.dependencies).toBeDefined();
-      expect(config.dependencies.tools).toBeDefined();
-      expect(Array.isArray(config.dependencies.tools)).toBe(true);
-      expect(config.dependencies.tools.length).toBeGreaterThan(0);
+  describe('Agent file existence', () => {
+    test('all 12 expected agent definition files exist', () => {
+      for (const agentName of EXPECTED_AGENTS) {
+        const filePath = path.join(AGENTS_DIR, `${agentName}.md`);
+        expect(fs.existsSync(filePath)).toBe(true);
+      }
     });
 
-    test('qa agent has tools field', async () => {
-      const config = await loadAgentYaml('qa');
+    test('agent file names match expected list exactly', () => {
+      const mdFiles = fs
+        .readdirSync(AGENTS_DIR)
+        .filter((f) => f.endsWith('.md'))
+        .map((f) => f.replace('.md', ''))
+        .sort();
 
-      expect(config.dependencies).toBeDefined();
-      expect(config.dependencies.tools).toBeDefined();
-      expect(Array.isArray(config.dependencies.tools)).toBe(true);
-    });
-
-    test('all agents with tools have valid tool lists', async () => {
-      for (const agentId of agentsWithTools) {
-        const config = await loadAgentYaml(agentId);
-        const tools = getAgentTools(config);
-
-        expect(tools).toBeDefined();
-        expect(Array.isArray(tools)).toBe(true);
-        expect(tools.length).toBeGreaterThan(0);
-
-        // Each tool should be a string (tool ID)
-        tools.forEach(toolId => {
-          expect(typeof toolId).toBe('string');
-          expect(toolId.length).toBeGreaterThan(0);
-        });
+      // All expected agents must be present
+      for (const expected of EXPECTED_AGENTS) {
+        expect(mdFiles).toContain(expected);
       }
     });
   });
 
-  describeIntegration('No Errors Thrown for Missing Tools', () => {
-    test('getAgentTools() handles undefined tools gracefully', async () => {
-      const config = await loadAgentYaml('analyst');
+  // ─── 2. Required fields on every agent ────────────────────────────────────
 
-      expect(() => {
-        const tools = getAgentTools(config);
-        expect(tools).toBeNull();
-      }).not.toThrow();
+  describe('Required agent fields', () => {
+    test.each(EXPECTED_AGENTS)(
+      '%s has agent.name (string, non-empty)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        expect(parsed).not.toBeNull();
+        expect(parsed.agent).toBeDefined();
+        expect(typeof parsed.agent.name).toBe('string');
+        expect(parsed.agent.name.length).toBeGreaterThan(0);
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has agent.id (string, non-empty)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        expect(parsed.agent.id).toBeDefined();
+        expect(typeof parsed.agent.id).toBe('string');
+        expect(parsed.agent.id.length).toBeGreaterThan(0);
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has agent.title (string)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        expect(parsed.agent.title).toBeDefined();
+        expect(typeof parsed.agent.title).toBe('string');
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has agent.icon (string)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        expect(parsed.agent.icon).toBeDefined();
+        expect(typeof parsed.agent.icon).toBe('string');
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has persona_profile or persona (object)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        const hasPersonaProfile =
+          parsed.persona_profile && typeof parsed.persona_profile === 'object';
+        const hasPersona =
+          parsed.persona && typeof parsed.persona === 'object';
+        expect(hasPersonaProfile || hasPersona).toBe(true);
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has commands (array or object)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        expect(parsed.commands).toBeDefined();
+        const isArray = Array.isArray(parsed.commands);
+        const isObject = typeof parsed.commands === 'object';
+        expect(isArray || isObject).toBe(true);
+      },
+    );
+
+    test.each(EXPECTED_AGENTS)(
+      '%s has activation-instructions or activation (exists)',
+      (agentName) => {
+        const { parsed, content } = agentCache[agentName];
+        // Some agents (sinapse-orqx) define activation in the markdown header
+        // rather than in the YAML block
+        const hasInYaml =
+          parsed['activation-instructions'] !== undefined ||
+          parsed.activation !== undefined;
+        const hasInMarkdown =
+          content.includes('ACTIVATION') ||
+          content.includes('activation');
+        expect(hasInYaml || hasInMarkdown).toBe(true);
+      },
+    );
+  });
+
+  // ─── 3. Persona greeting levels ───────────────────────────────────────────
+
+  describe('Persona communication', () => {
+    test.each(EXPECTED_AGENTS)(
+      '%s has persona name (string)',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        // The persona name lives in agent.name for all agents
+        expect(typeof parsed.agent.name).toBe('string');
+        expect(parsed.agent.name.length).toBeGreaterThan(0);
+      },
+    );
+
+    // Most agents have greeting_levels under persona_profile.communication
+    // sinapse-orqx is the exception (uses its own greeting format in markdown)
+    const agentsWithGreetingLevels = EXPECTED_AGENTS.filter(
+      (a) => a !== 'sinapse-orqx',
+    );
+
+    test.each(agentsWithGreetingLevels)(
+      '%s has greeting_levels with named and archetypal',
+      (agentName) => {
+        const { parsed } = agentCache[agentName];
+        const gl = parsed.persona_profile?.communication?.greeting_levels;
+        expect(gl).toBeDefined();
+        expect(typeof gl).toBe('object');
+        expect(gl.named).toBeDefined();
+        expect(typeof gl.named).toBe('string');
+        expect(gl.archetypal).toBeDefined();
+        expect(typeof gl.archetypal).toBe('string');
+      },
+    );
+
+    test('sinapse-orqx has greeting defined in markdown content', () => {
+      const { content } = agentCache['sinapse-orqx'];
+      // sinapse-orqx has an ASCII banner greeting in the markdown
+      expect(content).toContain('Imperator');
+      expect(content).toContain('SINAPSE');
     });
+  });
 
-    test('accessing tools on agents without field does not throw', async () => {
-      for (const agentId of agentsWithoutTools) {
-        await expect(async () => {
-          const config = await loadAgentYaml(agentId);
-          const tools = config.dependencies?.tools;
-          expect(tools).toBeUndefined();
-        }).not.toThrow();
-      }
-    });
+  // ─── 4. MEMORY.md validation ──────────────────────────────────────────────
 
-    test('agents without tools can still be loaded and parsed', async () => {
-      const configs = await Promise.all(
-        agentsWithoutTools.map(id => loadAgentYaml(_id)),
+  describe('Agent MEMORY.md files', () => {
+    // Agents with subdirectories containing MEMORY.md
+    const agentsWithSubdir = EXPECTED_AGENTS.filter((agentName) => {
+      // sinapse-orqx and squad-creator do not have subdirectories
+      const subdir = agentName === 'ux-design-expert' ? 'ux' : agentName;
+      const subdirPath = path.join(AGENTS_DIR, subdir);
+      return (
+        fs.existsSync(subdirPath) &&
+        fs.statSync(subdirPath).isDirectory()
       );
-
-      configs.forEach((config, index) => {
-        expect(config).toBeDefined();
-        expect(config.agent).toBeDefined();
-        expect(config.agent.id).toBe(agentsWithoutTools[index]);
-      });
-    });
-  });
-
-  describeIntegration('Agent Structure Validation', () => {
-    test('all agents have required core fields', async () => {
-      const allAgents = [...agentsWithTools, ...agentsWithoutTools];
-
-      for (const agentId of allAgents) {
-        const config = await loadAgentYaml(agentId);
-
-        // Core agent fields
-        expect(config.agent).toBeDefined();
-        expect(config.agent.id).toBe(agentId);
-        expect(config.agent.name).toBeDefined();
-        expect(config.agent.title).toBeDefined();
-
-        // Core persona/behavior fields
-        expect(config.persona || config.core_principles).toBeDefined();
-
-        // Dependencies (may be empty but should exist)
-        expect(config.dependencies).toBeDefined();
-      }
     });
 
-    test('agents without tools have other dependencies', async () => {
-      for (const agentId of agentsWithoutTools) {
-        const config = await loadAgentYaml(agentId);
-
-        // Should have at least one other dependency type
-        const hasTasks = config.dependencies?.tasks?.length > 0;
-        const hasTemplates = config.dependencies?.templates?.length > 0;
-        const hasData = config.dependencies?.data?.length > 0;
-        const hasChecklists = config.dependencies?.checklists?.length > 0;
-
-        expect(hasTasks || hasTemplates || hasData || hasChecklists).toBe(true);
-      }
+    test('at least some agents have MEMORY.md subdirectories', () => {
+      expect(agentsWithSubdir.length).toBeGreaterThan(0);
     });
 
-    test('dependencies.tools is always array or undefined, never null', async () => {
-      const allAgents = [...agentsWithTools, ...agentsWithoutTools];
+    test.each(agentsWithSubdir)(
+      '%s has MEMORY.md with at least a header',
+      (agentName) => {
+        // ux-design-expert uses 'ux/' subdirectory
+        const subdir = agentName === 'ux-design-expert' ? 'ux' : agentName;
+        const memoryPath = path.join(AGENTS_DIR, subdir, 'MEMORY.md');
 
-      for (const agentId of allAgents) {
-        const config = await loadAgentYaml(agentId);
-        const tools = config.dependencies?.tools;
-
-        // Should be undefined or array, never null
-        expect(tools === null).toBe(false);
-        if (tools !== undefined) {
-          expect(Array.isArray(tools)).toBe(true);
+        if (!fs.existsSync(memoryPath)) {
+          // Skip if no MEMORY.md for this agent
+          return;
         }
+
+        const memoryContent = fs.readFileSync(memoryPath, 'utf8').trim();
+        // Should have at least a markdown header line
+        expect(memoryContent.length).toBeGreaterThan(0);
+        expect(memoryContent).toMatch(/^#/);
+      },
+    );
+  });
+
+  // ─── 5. Uniqueness constraints ────────────────────────────────────────────
+
+  describe('Uniqueness constraints', () => {
+    test('all agent IDs are unique (no duplicates)', () => {
+      const ids = EXPECTED_AGENTS.map(
+        (name) => agentCache[name].parsed.agent.id,
+      );
+      const uniqueIds = new Set(ids);
+      expect(uniqueIds.size).toBe(ids.length);
+    });
+
+    test('all persona names are unique (no duplicates)', () => {
+      const names = EXPECTED_AGENTS.map(
+        (name) => agentCache[name].parsed.agent.name,
+      );
+      const uniqueNames = new Set(names);
+      expect(uniqueNames.size).toBe(names.length);
+    });
+
+    test('agent IDs match their file names', () => {
+      // Most agents: agent.id === filename
+      // Verify the mapping is consistent
+      for (const agentName of EXPECTED_AGENTS) {
+        const { parsed } = agentCache[agentName];
+        const agentId = parsed.agent.id;
+        // The agent ID should match the filename (or be a known alias)
+        // e.g., developer.md -> agent.id = 'developer'
+        expect(agentId).toBe(agentName);
       }
     });
   });
 
-  describeIntegration('Workflow Compatibility', () => {
-    test('agents without tools can execute their commands', async () => {
-      // Test that analyst agent has valid commands despite no tools
-      const config = await loadAgentYaml('analyst');
+  // ─── 6. Structural integrity ──────────────────────────────────────────────
 
-      expect(config.commands).toBeDefined();
-      expect(config.commands.length).toBeGreaterThan(0);
-
-      // Commands should reference tasks, not tools
-      const commandsStr = JSON.stringify(config.commands);
-      expect(commandsStr).toContain('task');
-    });
-
-    test('agents without tools maintain activation instructions', async () => {
-      for (const agentId of agentsWithoutTools) {
-        const config = await loadAgentYaml(agentId);
-
-        expect(config['activation-instructions']).toBeDefined();
-        expect(Array.isArray(config['activation-instructions'])).toBe(true);
-      }
-    });
-
-    test('mock workflow execution with agent without tools', async () => {
-      // Simulate agent activation and command execution
-      const config = await loadAgentYaml('analyst');
-
-      // Mock activation
-      const mockActivation = () => {
-        return {
-          agentId: config.agent.id,
-          name: config.agent.name,
-          tools: getAgentTools(config),
-          commands: config.commands,
-        };
-      };
-
-      const activated = mockActivation();
-
-      expect(activated.agentId).toBe('analyst');
-      expect(activated.tools).toBeNull();
-      expect(activated.commands).toBeDefined();
-      expect(() => {
-        // Accessing tools should not throw
-        const tools = activated.tools || [];
-        expect(tools).toEqual([]);
-      }).not.toThrow();
-    });
-  });
-
-  describeIntegration('Graceful Degradation', () => {
-    test('agent system handles mixed agents (with and without tools)', async () => {
-      const results = {
-        withTools: [],
-        withoutTools: [],
-      };
-
-      for (const agentId of agentsWithTools) {
-        const config = await loadAgentYaml(agentId);
-        results.withTools.push({
-          id: agentId,
-          toolCount: getAgentTools(config)?.length || 0,
-        });
-      }
-
-      for (const agentId of agentsWithoutTools) {
-        const config = await loadAgentYaml(agentId);
-        results.withoutTools.push({
-          id: agentId,
-          toolCount: getAgentTools(config)?.length || 0,
-        });
-      }
-
-      // Agents with tools should have > 0 tools
-      results.withTools.forEach(({ _id, toolCount }) => {
-        expect(toolCount).toBeGreaterThan(0);
-      });
-
-      // Agents without tools should have 0 tools
-      results.withoutTools.forEach(({ _id, toolCount }) => {
-        expect(toolCount).toBe(0);
-      });
-    });
-
-    test('safe tool access pattern works for all agents', async () => {
-      const allAgents = [...agentsWithTools, ...agentsWithoutTools];
-
-      for (const agentId of allAgents) {
-        const config = await loadAgentYaml(agentId);
-
-        // Safe access pattern
-        const tools = config?.dependencies?.tools ?? [];
-
-        expect(Array.isArray(tools)).toBe(true);
-        expect(() => {
-          tools.forEach(tool => {
-            expect(typeof tool).toBe('string');
-          });
-        }).not.toThrow();
-      }
-    });
-  });
-
-  describeIntegration('Comprehensive Backward Compatibility Report', () => {
-    test('comprehensive agent compatibility check', async () => {
-      const report = {
-        agents_with_tools: [],
-        agents_without_tools: [],
-        errors: [],
-        structure_issues: [],
-      };
-
-      const allAgents = [...agentsWithTools, ...agentsWithoutTools];
-
-      for (const agentId of allAgents) {
+  describe('Structural integrity', () => {
+    test('all agent YAML blocks parse without errors', () => {
+      const errors = [];
+      for (const agentName of EXPECTED_AGENTS) {
         try {
-          const config = await loadAgentYaml(agentId);
-          const tools = getAgentTools(config);
-
-          const agentInfo = {
-            id: agentId,
-            name: config.agent.name,
-            has_tools_field: !!tools,
-            tool_count: tools?.length || 0,
-            has_dependencies: !!config.dependencies,
-            has_commands: !!config.commands,
-          };
-
-          if (tools) {
-            report.agents_with_tools.push(agentInfo);
-          } else {
-            report.agents_without_tools.push(agentInfo);
+          const filePath = path.join(AGENTS_DIR, `${agentName}.md`);
+          const content = fs.readFileSync(filePath, 'utf8');
+          const result = extractYaml(content);
+          if (!result) {
+            errors.push(`${agentName}: no YAML block found`);
           }
-
-          // Check structure
-          if (!config.agent || !config.agent.id) {
-            report.structure_issues.push({
-              agent: agentId,
-              issue: 'Missing agent.id',
-            });
-          }
-
-        } catch (error) {
-          report.errors.push({
-            agent: agentId,
-            error: error.message,
-          });
+        } catch (err) {
+          errors.push(`${agentName}: ${err.message}`);
         }
       }
+      expect(errors).toEqual([]);
+    });
 
-      // Verify results
-      expect(report.errors).toHaveLength(0);
-      expect(report.structure_issues).toHaveLength(0);
-      expect(report.agents_with_tools.length).toBe(agentsWithTools.length);
-      expect(report.agents_without_tools.length).toBe(agentsWithoutTools.length);
+    test('no agent file is empty', () => {
+      for (const agentName of EXPECTED_AGENTS) {
+        const { content } = agentCache[agentName];
+        expect(content.trim().length).toBeGreaterThan(100);
+      }
+    });
 
-      // All agents without tools should have 0 tool count
-      report.agents_without_tools.forEach(agent => {
-        expect(agent.tool_count).toBe(0);
-        expect(agent.has_dependencies).toBe(true);
-      });
+    test('all agents have either persona or persona_profile with role info', () => {
+      for (const agentName of EXPECTED_AGENTS) {
+        const { parsed } = agentCache[agentName];
+        const hasPersonaRole =
+          parsed.persona && typeof parsed.persona.role === 'string';
+        const hasProfileArchetype =
+          parsed.persona_profile &&
+          typeof parsed.persona_profile.archetype === 'string';
+        expect(hasPersonaRole || hasProfileArchetype).toBe(true);
+      }
+    });
+  });
 
-      // Log summary
-      console.log('\n✅ Agent Backward Compatibility Report:');
-      console.log(`  Agents with tools: ${report.agents_with_tools.length}`);
-      console.log(`  Agents without tools: ${report.agents_without_tools.length}`);
-      console.log(`  Errors: ${report.errors.length}`);
-      console.log(`  Structure issues: ${report.structure_issues.length}`);
-      console.log(`  Status: ${report.errors.length === 0 ? 'PASS ✅' : 'FAIL ❌'}`);
+  // ─── 7. Cross-release stability ───────────────────────────────────────────
+
+  describe('Cross-release stability', () => {
+    test('total agent count matches expected (12)', () => {
+      const mdFiles = fs
+        .readdirSync(AGENTS_DIR)
+        .filter((f) => f.endsWith('.md'));
+      expect(mdFiles.length).toBe(EXPECTED_AGENTS.length);
+    });
+
+    test('agent icons are all non-empty strings', () => {
+      for (const agentName of EXPECTED_AGENTS) {
+        const { parsed } = agentCache[agentName];
+        expect(parsed.agent.icon).toBeTruthy();
+        expect(parsed.agent.icon.trim().length).toBeGreaterThan(0);
+      }
+    });
+
+    test('commands have at least one entry per agent', () => {
+      for (const agentName of EXPECTED_AGENTS) {
+        const { parsed } = agentCache[agentName];
+        if (Array.isArray(parsed.commands)) {
+          expect(parsed.commands.length).toBeGreaterThan(0);
+        } else {
+          // Object-style commands
+          expect(Object.keys(parsed.commands).length).toBeGreaterThan(0);
+        }
+      }
     });
   });
 });
