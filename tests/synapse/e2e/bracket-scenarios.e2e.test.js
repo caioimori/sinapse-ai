@@ -19,10 +19,11 @@ const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 const SYNAPSE_PATH = path.join(PROJECT_ROOT, '.synapse');
 const ENGINE_PATH = path.join(PROJECT_ROOT, '.sinapse-ai', 'core', 'synapse', 'engine.js');
 
-const synapseExists = fs.existsSync(SYNAPSE_PATH);
+const manifestPath = path.join(SYNAPSE_PATH, 'manifest');
+const synapseReady = fs.existsSync(SYNAPSE_PATH) && fs.existsSync(manifestPath);
 const engineExists = fs.existsSync(ENGINE_PATH);
 
-const describeIfReady = (synapseExists && engineExists) ? describe : describe.skip;
+const describeIfReady = (synapseReady && engineExists) ? describe : describe.skip;
 
 /**
  * Build a session object for a given prompt count.
