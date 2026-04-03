@@ -170,6 +170,25 @@ async function configureEnvironment(options = {}) {
     // Step 6: Generate and write core-config.yaml
     const coreConfigDir = path.join(targetDir, '.sinapse-ai');
     await fs.ensureDir(coreConfigDir);
+    const coreConfigPath = path.join(coreConfigDir, 'core-config.yaml');
+
+    // Check if core-config already exists and is valid (update scenario)
+    const existingCoreConfig = await fs.pathExists(coreConfigPath);
+    if (existingCoreConfig) {
+      try {
+        const existingContent = await fs.readFile(coreConfigPath, 'utf8');
+        const existingValidation = validateYamlSyntax(existingContent);
+        if (existingValidation.valid) {
+          const existingStructure = validateCoreConfigStructure(existingValidation.parsed);
+          if (existingStructure.valid) {
+            results.coreConfigCreated = true;
+            console.log('✅ Existing .sinapse-ai/core-config.yaml is valid (kept)');
+            return results;
+          }
+        }
+      } catch { /* existing file unreadable, regenerate */ }
+      console.log('⚠️  Existing core-config.yaml invalid, regenerating...');
+    }
 
     const coreConfigContent = generateCoreConfig({
       projectType,
@@ -193,7 +212,6 @@ async function configureEnvironment(options = {}) {
       throw new Error('Generated core-config.yaml has invalid structure');
     }
 
-    const coreConfigPath = path.join(coreConfigDir, 'core-config.yaml');
     await fs.writeFile(coreConfigPath, coreConfigContent, { encoding: 'utf8' });
     results.coreConfigCreated = true;
     console.log('✅ Created .sinapse-ai/core-config.yaml');

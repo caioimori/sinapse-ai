@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.9
-generated_at: "2026-04-03T03:12:29.004Z"
+version: 7.7.10
+generated_at: "2026-04-03T03:23:08.476Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1118
 files:
@@ -1237,7 +1237,7 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:bf5a84ef1311e7422604aa07f272c11d2240d654bd39cd1128b3239b6696a40e
+    hash: sha256:7e7869ff49e475ffe0fffecf7566f1232fb1071f99b1b1941e20593fc15b9850
     type: data
     size: 515880
   - path: data/learned-patterns.yaml
@@ -1401,9 +1401,9 @@ files:
     type: agent
     size: 1368
   - path: development/agents/sinapse-orqx.md
-    hash: sha256:8eae456af41fe407facbd63ce6a9b8613b2da126b8847d74a140496c3cf6dcee
+    hash: sha256:7241d004f82a1fa583311f9ca0b1a4fc287227bcb66bc2f2973d628914a89433
     type: agent
-    size: 31330
+    size: 31337
   - path: development/agents/sprint-lead.md
     hash: sha256:fccb55b79210cc63d7fa0b4e383d06a0dff5c24f1e3b851ab965564e8aef0aa2
     type: agent
