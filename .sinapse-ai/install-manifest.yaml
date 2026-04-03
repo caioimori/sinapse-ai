@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.7
-generated_at: "2026-04-03T02:36:49.478Z"
+version: 7.7.8
+generated_at: "2026-04-03T03:10:11.540Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1118
 files:
@@ -1237,9 +1237,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:71b0007c07fe52099eacd433b0e9a40db6163a69cbd4b0687c9f284486afca8f
+    hash: sha256:bf5a84ef1311e7422604aa07f272c11d2240d654bd39cd1128b3239b6696a40e
     type: data
-    size: 515685
+    size: 515880
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -3433,9 +3433,9 @@ files:
     type: script
     size: 7266
   - path: infrastructure/scripts/validate-codex-delegation.js
-    hash: sha256:c084dff34fe7fbc82cb785219f6ed1f33d181fcc6fc9ee06c220ef2cbeaa99b5
+    hash: sha256:a71224ad31b3a28bcc26953f75bbd6387686b3b906404c833f52b8dfff306384
     type: script
-    size: 9551
+    size: 9532
   - path: infrastructure/scripts/validate-codex-integration.js
     hash: sha256:c553cc493ddbfecf41b865f8a1075df56b6500c3b2b315bae8b7e7bcec4db85a
     type: script
