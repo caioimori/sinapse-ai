@@ -31,6 +31,7 @@ describe('validate-codex-sync', () => {
       { projectRoot: tmpRoot },
       {
         validateCodexCommandRegistry: () => ({ ok: true, errors: [], warnings: [] }),
+        validateCodexDelegation: () => ({ ok: true, errors: [], warnings: [] }),
         validateCodexIntegration: () => ({ ok: true, errors: [], warnings: [] }),
         validateCodexSkills: () => ({ ok: true, errors: [], warnings: [] }),
         validatePaths: () => ({ ok: true, errors: [], warnings: [] }),
@@ -43,6 +44,7 @@ describe('validate-codex-sync', () => {
       'codex-catalog',
       'codex-integration',
       'codex-commands',
+      'codex-delegation',
       'codex-skills',
       'paths',
     ]);

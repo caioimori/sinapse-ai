@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "classifications": [
+    "validator-backed",
+    "codex-shim",
+    "exploratory"
+  ],
+  "handoffSchemaPath": ".codex/handoff-packet.schema.json",
+  "handoffTemplatePath": ".codex/handoff-packet.template.json",
+  "masterRoutes": {
+    "framework-prd": {
+      "aliases": ["prd", "project-lead", "requirements"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-pm",
+        "commandId": "create-prd"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-pm",
+        "requiredInputs": ["mission", "context-summary", "success-criteria", "constraints"]
+      }
+    },
+    "framework-story-validation": {
+      "aliases": ["story-validation", "product-owner", "po"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-po",
+        "commandId": "validate-story"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-po",
+        "requiredInputs": ["mission", "context-summary", "story-id", "quality-bar"]
+      }
+    },
+    "framework-story-draft": {
+      "aliases": ["story-draft", "sprint-lead", "sm"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-sm",
+        "commandId": "draft"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-sm",
+        "requiredInputs": ["mission", "context-summary", "acceptance-criteria", "dependencies"]
+      }
+    },
+    "framework-development": {
+      "aliases": ["development", "developer", "dev"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-dev",
+        "commandId": "develop"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-dev",
+        "requiredInputs": ["mission", "context-summary", "story-id", "definition-of-done"]
+      }
+    },
+    "framework-qa-gate": {
+      "aliases": ["qa", "quality-gate", "review"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-qa",
+        "commandId": "gate"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-qa",
+        "requiredInputs": ["mission", "context-summary", "story-id", "evidence"]
+      }
+    },
+    "framework-architecture": {
+      "aliases": ["architecture", "architect"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "architect",
+        "docPath": ".codex/agents/architect.md"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        "AGENTS.md"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "architect",
+        "requiredInputs": ["mission", "context-summary", "system-boundary", "tradeoffs"]
+      }
+    },
+    "multi-squad-initiative": {
+      "aliases": ["launch", "cross-domain", "multi-domain", "initiative"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-orqx",
+        "commandId": "plan"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json",
+        "docs/codex-total-parity-orchestration-plan.md"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "sinapse-orqx",
+        "requiredInputs": ["mission", "context-summary", "lead-squad", "handoff-artifacts"]
+      }
+    },
+    "strategic-council": {
+      "aliases": ["council", "strategy", "decision"],
+      "classification": "validator-backed",
+      "target": {
+        "type": "command-registry",
+        "agentId": "sinapse-orqx",
+        "commandId": "council"
+      },
+      "sourceDocs": [
+        ".codex/agents/sinapse-orqx.md",
+        ".codex/command-registry.json"
+      ],
+      "handoff": {
+        "owner": "sinapse-orqx",
+        "nextHandoff": "council-orqx",
+        "requiredInputs": ["mission", "context-summary", "decision-frame", "tradeoffs"]
+      }
+    }
+  },
+  "orqxRoutes": {
+    "brand": {
+      "aliases": ["brand", "branding", "identity"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "brand-orqx",
+        "docPath": ".codex/agents/brand-orqx.md"
+      }
+    },
+    "commercial": {
+      "aliases": ["commercial", "sales", "crm"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "commercial-orqx",
+        "docPath": ".codex/agents/commercial-orqx.md"
+      }
+    },
+    "content": {
+      "aliases": ["content", "editorial", "social"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "content-orqx",
+        "docPath": ".codex/agents/content-orqx.md"
+      }
+    },
+    "copy": {
+      "aliases": ["copy", "copywriting", "headline"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "copy-orqx",
+        "docPath": ".codex/agents/copy-orqx.md"
+      }
+    },
+    "animations": {
+      "aliases": ["animations", "motion", "threejs"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "animations-orqx",
+        "docPath": ".codex/agents/animations-orqx.md"
+      }
+    },
+    "design": {
+      "aliases": ["design", "ux", "ui"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "design-orqx",
+        "docPath": ".codex/agents/design-orqx.md"
+      }
+    },
+    "finance": {
+      "aliases": ["finance", "pricing", "budget"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "finance-orqx",
+        "docPath": ".codex/agents/finance-orqx.md"
+      }
+    },
+    "growth": {
+      "aliases": ["growth", "seo", "analytics"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "growth-orqx",
+        "docPath": ".codex/agents/growth-orqx.md"
+      }
+    },
+    "paidmedia": {
+      "aliases": ["paidmedia", "paid-media", "ads"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "paidmedia-orqx",
+        "docPath": ".codex/agents/paidmedia-orqx.md"
+      }
+    },
+    "product": {
+      "aliases": ["product", "discovery", "roadmap"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "product-orqx",
+        "docPath": ".codex/agents/product-orqx.md"
+      }
+    },
+    "research": {
+      "aliases": ["research", "market", "competitive"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "research-orqx",
+        "docPath": ".codex/agents/research-orqx.md"
+      }
+    },
+    "claude": {
+      "aliases": ["claude", "mcp", "hooks"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "claude-orqx",
+        "docPath": ".codex/agents/claude-orqx.md"
+      }
+    },
+    "council": {
+      "aliases": ["council", "advisory", "mental-models"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "council-orqx",
+        "docPath": ".codex/agents/council-orqx.md"
+      }
+    },
+    "storytelling": {
+      "aliases": ["storytelling", "pitch", "narrative"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "storytelling-orqx",
+        "docPath": ".codex/agents/storytelling-orqx.md"
+      }
+    },
+    "cyber": {
+      "aliases": ["cyber", "security", "pentest"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "cyber-orqx",
+        "docPath": ".codex/agents/cyber-orqx.md"
+      }
+    },
+    "cloning": {
+      "aliases": ["cloning", "dna", "mind-synthesis"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "cloning-orqx",
+        "docPath": ".codex/agents/cloning-orqx.md"
+      }
+    },
+    "courses": {
+      "aliases": ["courses", "education", "curriculum"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "courses-orqx",
+        "docPath": ".codex/agents/courses-orqx.md"
+      }
+    },
+    "swarm": {
+      "aliases": ["swarm", "multi-agent", "topology"],
+      "classification": "codex-shim",
+      "target": {
+        "type": "agent-doc",
+        "agentId": "swarm-orqx",
+        "docPath": ".codex/agents/swarm-orqx.md"
+      }
+    }
+  },
+  "specialistRoutes": {
+    "brand-orqx": {
+      "aliases": ["brand-orqx", "brand"],
+      "sourceDoc": ".codex/agents/brand-orqx.md",
+      "routes": {
+        "discovery": {
+          "aliases": ["brand-discovery"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "brand-strategist",
+            "docPath": ".codex/agents/brand-strategist.md",
+            "taskPath": "squads/squad-brand/tasks/conduct-brand-discovery.md"
+          }
+        },
+        "audit": {
+          "aliases": ["brand-audit"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "brand-auditor",
+            "docPath": ".codex/agents/brand-auditor.md",
+            "taskPath": "squads/squad-brand/tasks/audit-brand-full.md"
+          }
+        }
+      }
+    },
+    "claude-orqx": {
+      "aliases": ["claude-orqx", "claude"],
+      "sourceDoc": ".codex/agents/claude-orqx.md",
+      "routes": {
+        "hooks": {
+          "aliases": ["claude-hooks"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "hooks-architect",
+            "docPath": ".codex/agents/hooks-architect.md",
+            "taskPath": "squads/squad-claude/tasks/claude-code-hooks-setup.md"
+          }
+        },
+        "mcp": {
+          "aliases": ["claude-mcp"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "mcp-integrator",
+            "docPath": ".codex/agents/mcp-integrator.md",
+            "taskPath": "squads/squad-claude/tasks/mcp-integration-plan.md"
+          }
+        }
+      }
+    },
+    "swarm-orqx": {
+      "aliases": ["swarm-orqx", "swarm"],
+      "sourceDoc": ".codex/agents/swarm-orqx.md",
+      "routes": {
+        "audit-hooks": {
+          "aliases": ["swarm-audit-hooks"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "hooks-architect",
+            "docPath": ".codex/agents/hooks-architect.md",
+            "taskPath": "squads/claude-code-mastery/tasks/audit-integration.md"
+          }
+        },
+        "configure": {
+          "aliases": ["swarm-configure"],
+          "classification": "exploratory",
+          "target": {
+            "type": "specialist-doc",
+            "agentId": "config-engineer",
+            "docPath": ".codex/agents/config-engineer.md",
+            "taskPath": "squads/claude-code-mastery/tasks/configure-claude-code.md"
+          }
+        }
+      }
+    }
+  }
+}

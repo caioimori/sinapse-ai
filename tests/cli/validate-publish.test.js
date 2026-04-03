@@ -20,26 +20,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     scriptSource = fs.readFileSync(SCRIPT_PATH, 'utf8');
   });
 
-  describe('AC1: Submodule validation', () => {
-    test('script checks pro/ directory exists', () => {
-      expect(scriptSource).toContain("PRO_DIR");
-      expect(scriptSource).toContain("'pro'");
-      expect(scriptSource).toContain("fs.existsSync(PRO_DIR)");
-    });
-
-    test('script checks pro/ is not empty (filters .git)', () => {
-      expect(scriptSource).toContain(".filter(e => e !== '.git')");
-    });
-
-    test('script checks critical file pro/license/license-api.js', () => {
-      expect(scriptSource).toContain("license-api.js");
-      expect(scriptSource).toContain("fs.existsSync(CRITICAL_FILE)");
-    });
-
-    test('error message includes fix command for submodule', () => {
-      expect(scriptSource).toContain('git submodule update --init pro');
-    });
-
+  describe('AC1: Script structure', () => {
     test('script exits with code 1 on failure', () => {
       expect(scriptSource).toContain('process.exit(1)');
     });

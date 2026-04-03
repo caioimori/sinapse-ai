@@ -6,6 +6,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { loadCodexCatalogConfig } = require('./codex-parity/catalog');
 const { validateCodexCommandRegistry } = require('./validate-codex-command-registry');
+const { validateCodexDelegation } = require('./validate-codex-delegation');
 const { validateCodexIntegration } = require('./validate-codex-integration');
 const { validateCodexSkills } = require('./codex-skills-sync/validate');
 const { validatePaths } = require('./validate-paths');
@@ -59,6 +60,7 @@ function validateCodexSync(options = {}, deps = {}) {
   const config = loadCodexCatalogConfig(projectRoot);
   const runLegacyValidate = deps.runLegacyCodexValidate || runLegacyCodexValidate;
   const runCodexCommands = deps.validateCodexCommandRegistry || validateCodexCommandRegistry;
+  const runCodexDelegation = deps.validateCodexDelegation || validateCodexDelegation;
   const runCodexIntegration = deps.validateCodexIntegration || validateCodexIntegration;
   const runCodexSkills = deps.validateCodexSkills || validateCodexSkills;
   const runPaths = deps.validatePaths || validatePaths;
@@ -71,6 +73,7 @@ function validateCodexSync(options = {}, deps = {}) {
   const checks = [
     normalizeCheck('codex-integration', runCodexIntegration({ projectRoot, quiet: true })),
     normalizeCheck('codex-commands', runCodexCommands({ projectRoot, quiet: true })),
+    normalizeCheck('codex-delegation', runCodexDelegation({ projectRoot, quiet: true })),
     normalizeCheck('codex-skills', runCodexSkills({ projectRoot, strict: true, quiet: true })),
     normalizeCheck('paths', runPaths({ projectRoot, quiet: true })),
   ];

@@ -7,10 +7,10 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.3
-generated_at: "2026-04-02T18:56:10.225Z"
+version: 7.7.5
+generated_at: "2026-04-03T00:26:37.433Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1113
+file_count: 1118
 files:
   - path: cli/commands/config/index.js
     hash: sha256:66f111eceef0f60fa0a8904add783b615d55b01d5fe36408623c3dd828e702f6
@@ -1237,9 +1237,9 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:1214f46a53e5a5b4e17a06fcc7dfdf1bd324130589d0d3511efcb7b0ca9983f8
+    hash: sha256:534a11039e67654569d848d2348378fd7f2a1dbd336d2a675168007b61c2017f
     type: data
-    size: 511993
+    size: 515880
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -3052,14 +3052,18 @@ files:
     hash: sha256:47b3f9044ce9b92b8c486a75da82afc4cc6b49d5d97e722ef5a1938fbf49943a
     type: script
     size: 40744
+  - path: infrastructure/scripts/codex-parity/catalog.js
+    hash: sha256:cfef97860788a119c44cbb18b4249ad538814f99a03b2ca13e66dd74aa8b5242
+    type: script
+    size: 3527
   - path: infrastructure/scripts/codex-skills-sync/index.js
-    hash: sha256:cea7c65175ebf5f1f7d47d0dc536e5889e420e6c137a41acd522be8b69fe6327
+    hash: sha256:9eb2637a4f1f6edeabf358734b14e4c709bed37560f2e40aebf1ea3ef4572c3c
     type: script
-    size: 5268
+    size: 7494
   - path: infrastructure/scripts/codex-skills-sync/validate.js
-    hash: sha256:07c2d17438890bc5bd3f2cc208692ff65f6d1f394390066ff9869e03973c7e2b
+    hash: sha256:1a1301d2e3f558bedf3a1ab2c5c9ee2868a4c253068311d5014987917f367443
     type: script
-    size: 4577
+    size: 5626
   - path: infrastructure/scripts/collect-tool-usage.js
     hash: sha256:510b621078602273fb146eef57d115b08988ea43d03eb5d92192050c13e95efe
     type: script
@@ -3372,6 +3376,10 @@ files:
     hash: sha256:ceb0450fa12fa48f0255bb4565858eb1a97b28c30b98d36cb61d52d72e08b054
     type: script
     size: 22394
+  - path: infrastructure/scripts/sync-codex-local-first.js
+    hash: sha256:ad5245ead7243a39cd5116f44fcf1234ad54b016e365dfefa017764a76f4f3eb
+    type: script
+    size: 4089
   - path: infrastructure/scripts/template-engine.js
     hash: sha256:de1bc8ce51eeabf6f6ec558d35107fbc4843ac76e3361044ba9f47bb6af4f058
     type: script
@@ -3420,22 +3428,34 @@ files:
     hash: sha256:4447fbf8cffdf20b34fad71eb4caf5aec0726f2b8f27cd49cd1bd59d69cdc009
     type: script
     size: 2838
-  - path: infrastructure/scripts/validate-codex-integration.js
-    hash: sha256:01065d27f1c9e002b3985f1b5090cf123369fcf528012c2ec8c4a02df9b3645e
+  - path: infrastructure/scripts/validate-codex-command-registry.js
+    hash: sha256:a37a4c5fc8a4c3a7ce7ba240aeea16abc0a75871751f66eeb84991604ff066bf
     type: script
-    size: 4127
+    size: 7266
+  - path: infrastructure/scripts/validate-codex-delegation.js
+    hash: sha256:a71224ad31b3a28bcc26953f75bbd6387686b3b906404c833f52b8dfff306384
+    type: script
+    size: 9532
+  - path: infrastructure/scripts/validate-codex-integration.js
+    hash: sha256:c553cc493ddbfecf41b865f8a1075df56b6500c3b2b315bae8b7e7bcec4db85a
+    type: script
+    size: 4742
+  - path: infrastructure/scripts/validate-codex-sync.js
+    hash: sha256:31bcfc0cdf307e7c14064eaf0ddbf99a14344c21306937c9a7d9cc7ebba260f8
+    type: script
+    size: 4679
   - path: infrastructure/scripts/validate-output-pattern.js
     hash: sha256:91111d656e8d7b38a20a1bda753e663b74318f75cdab2025c7e0b84c775fc83d
     type: script
     size: 6692
   - path: infrastructure/scripts/validate-parity.js
-    hash: sha256:5cbd1c4458fb3e485872635e2210b3d3406c22381185039ef112db8912887201
+    hash: sha256:284c7715cc65b76579284024bbe5176b9230340d841dbfe79559c8f5844109cb
     type: script
-    size: 12121
+    size: 12266
   - path: infrastructure/scripts/validate-paths.js
-    hash: sha256:f657c32be91ed63e0b82d5b134b143d03174622eba60fb4b556adc570b8c7f5a
+    hash: sha256:942f6de9e621b7331f61dc915db5d24b987b67d1ae3377882330f7013dd214e9
     type: script
-    size: 3779
+    size: 3671
   - path: infrastructure/scripts/validate-user-profile.js
     hash: sha256:0f78a5aebd85b4b0d2a5b0f2d81ccbbbe0f2d25ed1cfcafeb129734852217683
     type: script
@@ -3525,9 +3545,9 @@ files:
     type: template
     size: 338
   - path: infrastructure/templates/safe-collab/README.md
-    hash: sha256:53e1193eaf30b5a4d9a5d2c5f700b22a210515abb661baf2b5ebe056343806fe
+    hash: sha256:0b4f3d0ce9b7111d812917312ae504df976245d902eecfa501f73e7aa0719813
     type: template
-    size: 1958
+    size: 2179
   - path: infrastructure/templates/safe-collab/safe-collaboration-rule.md
     hash: sha256:9631681340fddc314080f9182b76ccfbb1ee3441d92ce181067e76cace960a5e
     type: template

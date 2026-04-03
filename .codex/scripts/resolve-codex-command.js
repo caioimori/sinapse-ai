@@ -23,30 +23,40 @@ function normalizeCommandInput(value) {
 
 function resolveAgent(registry, agentInput) {
   const normalized = normalizeAgentInput(agentInput);
+  const matches = [];
 
   for (const [agentId, agentSpec] of Object.entries(registry.agents || {})) {
     const aliases = [agentId, ...(agentSpec.aliases || [])]
       .map((alias) => normalizeAgentInput(alias));
     if (aliases.includes(normalized)) {
-      return { agentId, agentSpec };
+      matches.push({ agentId, agentSpec });
     }
   }
 
-  return null;
+  if (matches.length > 1) {
+    throw new Error(`Ambiguous Codex agent "${agentInput}"`);
+  }
+
+  return matches[0] || null;
 }
 
 function resolveCommand(agentSpec, commandInput) {
   const normalized = normalizeCommandInput(commandInput);
+  const matches = [];
 
   for (const [commandId, commandSpec] of Object.entries(agentSpec.commands || {})) {
     const aliases = [commandId, ...(commandSpec.aliases || [])]
       .map((alias) => normalizeCommandInput(alias));
     if (aliases.includes(normalized)) {
-      return { commandId, commandSpec };
+      matches.push({ commandId, commandSpec });
     }
   }
 
-  return null;
+  if (matches.length > 1) {
+    throw new Error(`Ambiguous Codex command "${commandInput}"`);
+  }
+
+  return matches[0] || null;
 }
 
 function resolveCodexCommand(agentInput, commandInput, projectRoot = PROJECT_ROOT) {
