@@ -6,12 +6,20 @@
  * @story 2.7 - Discovery CLI Search
  */
 
+const fs = require('fs');
+const path = require('path');
 const { searchKeyword } = require('../../.sinapse-ai/cli/commands/workers/search-keyword');
 const { applyFilters } = require('../../.sinapse-ai/cli/commands/workers/search-filters');
 const { formatOutput, formatJSON } = require('../../.sinapse-ai/cli/utils/output-formatter-cli');
 const { getRegistry } = require('../../.sinapse-ai/core/registry/registry-loader');
 
-describe('Smoke Tests - Search CLI', () => {
+// Skip if service-registry.json doesn't exist (CI environment, gitignored runtime artifact)
+const registryPath = path.join(__dirname, '../../.sinapse-ai/core/registry/service-registry.json');
+const registryExists = fs.existsSync(registryPath);
+
+const describeIfRegistry = registryExists ? describe : describe.skip;
+
+describeIfRegistry('Smoke Tests - Search CLI', () => {
   let registry;
 
   beforeAll(async () => {
