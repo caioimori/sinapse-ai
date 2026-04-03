@@ -1,3 +1,9 @@
+---
+task: parallel-decomposition
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Parallel Task Decomposition for Agent Execution
 
 **Task ID:** parallel-decomposition

@@ -3,12 +3,12 @@ bundle:
   icon: 🚀
   description: Team capable of full stack, front end only, or service development.
 agents:
-  - sinapse-orchestrator
-  - analyst
-  - pm
-  - ux-expert
-  - architect
-  - po
+  - sinapse-orqx         # Imperator — master orchestrator
+  - analyst              # Scope — research & analysis
+  - project-lead         # Beacon — epic orchestration
+  - ux-design-expert     # Mosaic — UX/UI design
+  - architect            # Stratum — architecture
+  - product-lead         # Axis — story validation
 workflows:
   - brownfield-fullstack.yaml
   - brownfield-service.yaml

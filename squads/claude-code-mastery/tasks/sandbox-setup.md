@@ -1,3 +1,9 @@
+---
+task: sandbox-setup
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Configure Sandbox Environment
 
 **Task ID:** CCM-CONFIG-006

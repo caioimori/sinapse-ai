@@ -1,3 +1,9 @@
+---
+task: enterprise-config
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Enterprise Configuration
 
 **Task ID:** CCM-CONFIG-007

@@ -1,3 +1,9 @@
+---
+task: create-team-topology
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Design Agent Team Configuration
 
 **Task ID:** create-team-topology

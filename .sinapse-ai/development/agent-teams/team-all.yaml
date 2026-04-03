@@ -3,9 +3,9 @@ bundle:
   icon: 👥
   description: Includes every core system agent.
 agents:
-  - sinapse-orchestrator
-  - sinapse-developer
-  - '*'
+  - sinapse-orqx        # Imperator — master orchestrator
+  - developer            # Pixel — code implementation
+  - '*'                  # All other agents
 workflows:
   - brownfield-fullstack.yaml
   - brownfield-service.yaml

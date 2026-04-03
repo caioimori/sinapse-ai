@@ -1,3 +1,9 @@
+---
+task: create-rules
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Create Conditional Rules
 
 **Task ID:** CCM-CONFIG-003

@@ -1,3 +1,9 @@
+---
+task: diagnose
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Diagnose Claude Code Question
 
 **Task ID:** CCM-CHIEF-001

@@ -3,11 +3,11 @@ bundle:
   icon: 🔧
   description: Team with no UX or UI Planning.
 agents:
-  - sinapse-orchestrator
-  - analyst
-  - pm
-  - architect
-  - po
+  - sinapse-orqx         # Imperator — master orchestrator
+  - analyst              # Scope — research & analysis
+  - project-lead         # Beacon — epic orchestration
+  - architect            # Stratum — architecture
+  - product-lead         # Axis — story validation
 workflows:
   - greenfield-service.yaml
   - brownfield-service.yaml

@@ -1,3 +1,9 @@
+---
+task: optimize-context
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Optimize Context Window Usage
 
 **Task ID:** CCM-CONFIG-004

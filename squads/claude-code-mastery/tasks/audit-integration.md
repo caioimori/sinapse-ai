@@ -1,3 +1,9 @@
+---
+task: audit-integration
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Audit Existing Claude Code Integration
 
 **Task ID:** CCM-PI-002

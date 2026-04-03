@@ -1,3 +1,9 @@
+---
+task: worktree-strategy
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Git Worktree Isolation Strategy
 
 **Task ID:** worktree-strategy

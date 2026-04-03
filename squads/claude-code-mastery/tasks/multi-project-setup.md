@@ -1,3 +1,9 @@
+---
+task: multi-project-setup
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Multi-Project Claude Code Setup
 
 **Task ID:** CCM-PI-004

@@ -12,6 +12,7 @@
 const { Command } = require('commander');
 const { createRunCommand } = require('./run');
 const { createStatusCommand } = require('./status');
+const { createAuditCommand } = require('./audit');
 
 /**
  * Create the qa command with all subcommands
@@ -26,6 +27,7 @@ function createQaCommand() {
 Commands:
   run               Execute quality gate pipeline
   status            Show current gate status
+  audit             Audit squad ecosystem quality
 
 Examples:
   $ sinapse qa run                    Run full pipeline
@@ -33,6 +35,10 @@ Examples:
   $ sinapse qa run --layer=2          Run only Layer 2 (PR automation)
   $ sinapse qa run --verbose          Run with detailed output
   $ sinapse qa status                 Show current gate status
+  $ sinapse qa audit                  Audit all squads
+  $ sinapse qa audit -t workflows     Audit workflows only
+  $ sinapse qa audit -s squad-brand   Audit specific squad
+  $ sinapse qa audit --json           JSON output
 
 Layers:
   Layer 1: Pre-commit (lint, test, typecheck) - Fast local checks
@@ -47,6 +53,7 @@ Exit Codes:
   // Add subcommands
   qa.addCommand(createRunCommand());
   qa.addCommand(createStatusCommand());
+  qa.addCommand(createAuditCommand());
 
   return qa;
 }

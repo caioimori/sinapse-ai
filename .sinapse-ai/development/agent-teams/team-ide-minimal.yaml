@@ -3,8 +3,8 @@ bundle:
   icon: ⚡
   description: Only the bare minimum for the IDE PO SM dev qa cycle.
 agents:
-  - po
-  - sm
-  - dev
-  - qa
+  - product-lead         # Axis — story validation
+  - sprint-lead          # Sync — story creation
+  - developer            # Pixel — code implementation
+  - quality-gate         # Litmus — QA & testing
 workflows: null

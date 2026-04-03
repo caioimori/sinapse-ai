@@ -1,3 +1,9 @@
+---
+task: claude-md-engineer
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Engineer Optimal CLAUDE.md
 
 **Task ID:** claude-md-engineer

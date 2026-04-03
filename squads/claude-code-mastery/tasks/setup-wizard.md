@@ -1,3 +1,9 @@
+---
+task: setup-wizard
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Setup Wizard
 
 **Task ID:** CCM-CHIEF-003

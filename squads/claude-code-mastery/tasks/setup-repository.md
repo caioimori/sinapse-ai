@@ -1,3 +1,9 @@
+---
+task: setup-repository
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Set Up Repository with Claude Code Integration
 
 **Task ID:** CCM-PI-001

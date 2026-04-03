@@ -1,3 +1,9 @@
+---
+task: configure-claude-code
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Configure Claude Code Settings
 
 **Task ID:** CCM-CONFIG-001

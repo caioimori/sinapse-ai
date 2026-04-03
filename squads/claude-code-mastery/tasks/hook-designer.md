@@ -1,3 +1,9 @@
+---
+task: hook-designer
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Design Custom Hooks
 
 **Task ID:** CCM-PI-006

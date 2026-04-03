@@ -1,3 +1,9 @@
+---
+task: integrate-project
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Integrate Claude Code into Existing Project
 
 **Task ID:** integrate-project

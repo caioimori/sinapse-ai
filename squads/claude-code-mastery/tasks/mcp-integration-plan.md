@@ -1,3 +1,9 @@
+---
+task: mcp-integration-plan
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Plan MCP Server Integration
 
 **Task ID:** CCM-PI-005
