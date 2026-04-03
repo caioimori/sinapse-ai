@@ -22,9 +22,9 @@ Essa decisao nao e estetica --- e estrutural. Agentes de IA operam em terminais.
 
 **Por que artigos formais com enforcement automatico?**
 
-O SINAPSE possui 10 artigos constitucionais que governam o comportamento de todos os 175 agentes. Cada artigo tem severidade definida (NON-NEGOTIABLE ou MUST) e gates automaticos que bloqueiam violacoes deterministicamente.
+O SINAPSE possui 10 artigos constitucionais que governam o comportamento de todos os 186 agentes. Cada artigo tem severidade definida (NON-NEGOTIABLE ou MUST) e gates automaticos que bloqueiam violacoes deterministicamente.
 
-A alternativa --- guidelines aspiracionais --- falha em escala. Quando 175 agentes operam em 18 dominios, regras que dependem de "boa vontade" sao violadas silenciosamente. Gates automaticos (hooks pre-commit, pre-push, validacoes de story) garantem que violacoes sao detectadas e bloqueadas antes de causar dano.
+A alternativa --- guidelines aspiracionais --- falha em escala. Quando 186 agentes operam em 18 dominios, regras que dependem de "boa vontade" sao violadas silenciosamente. Gates automaticos (hooks pre-commit, pre-push, validacoes de story) garantem que violacoes sao detectadas e bloqueadas antes de causar dano.
 
 **Exemplo:** o hook `enforce-git-push-authority.sh` bloqueia qualquer agente que nao seja @devops (Pipeline) de executar `git push`. Nao e uma sugestao --- e um bloqueio deterministico.
 
@@ -66,7 +66,7 @@ A razao e separacao de responsabilidades em escala. Um orquestrador que "faz tud
 
 ## 5. Escala do Ecossistema de Agentes
 
-**Por que 175 agentes em 18 dominios?**
+**Por que 186 agentes em 18 dominios?**
 
 O SINAPSE nao e um agente generalista. E um ecossistema de 175 especialistas organizados em 18 squads tematicos. Cada agente tem persona, expertise e comandos especificos para seu dominio.
 
@@ -82,7 +82,7 @@ Os 12 agentes core cobrem o ciclo completo de desenvolvimento de software. Os 18
 |--------|---------|--------|
 | Core | 12 agentes | Desenvolvimento de software completo |
 | Squads | 163 agentes em 18 dominios | Especializacao por dominio |
-| Total | 175 agentes | Ecossistema completo |
+| Total | 186 agentes | Ecossistema completo |
 
 > Constitution Art. VII --- metricas exatas, sempre sincronizadas
 
@@ -178,7 +178,7 @@ Isso garante que o framework mantem coerencia e qualidade mesmo com contribuicoe
 | Principio | Por que existe | Enforcement |
 |-----------|---------------|-------------|
 | CLI First | Agentes operam em terminais | Hook WARN |
-| Governanca Constitucional | 175 agentes precisam de regras deterministicas | 10 artigos + gates |
+| Governanca Constitucional | 186 agentes precisam de regras deterministicas | 10 artigos + gates |
 | Documentation-First | Codigo sem spec gera retrabalho | Hook BLOCK |
 | Delegacao Obrigatoria | Separacao de responsabilidades em escala | Hook BLOCK |
 | Ecossistema 175 Agentes | Especializacao profunda por dominio | Art. VII metricas |
