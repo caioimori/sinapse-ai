@@ -105,21 +105,42 @@ function extractAgentMeta(filePath) {
 }
 
 function copyDirSync(src, dest) {
-  if (typeof fs.cpSync === 'function') {
-    fs.cpSync(src, dest, { recursive: true, force: true });
-  } else {
-    fs.mkdirSync(dest, { recursive: true });
-    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-      const s = path.join(src, entry.name);
-      const d = path.join(dest, entry.name);
-      entry.isDirectory() ? copyDirSync(s, d) : fs.copyFileSync(s, d);
+  try {
+    if (typeof fs.cpSync === 'function') {
+      fs.cpSync(src, dest, { recursive: true, force: true });
+    } else {
+      fs.mkdirSync(dest, { recursive: true });
+      for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+        const s = path.join(src, entry.name);
+        const d = path.join(dest, entry.name);
+        entry.isDirectory() ? copyDirSync(s, d) : fs.copyFileSync(s, d);
+      }
+    }
+  } catch (err) {
+    if (err.code === 'ENOTEMPTY') {
+      // Windows: dest not fully cleared, force remove and retry once
+      rmDirSync(dest);
+      fs.cpSync(src, dest, { recursive: true, force: true });
+    } else {
+      throw err;
     }
   }
 }
 
 function rmDirSync(dir) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
+  if (!fs.existsSync(dir)) return;
+  // Windows ENOTEMPTY fix: retry with maxRetries (handles antivirus/indexer locks)
+  try {
+    fs.rmSync(dir, { recursive: true, force: true, maxRetries: 3, retryDelay: 200 });
+  } catch (err) {
+    if (err.code === 'ENOTEMPTY' || err.code === 'EBUSY') {
+      // Last resort: rename to temp then delete
+      const tmp = dir + '.old.' + Date.now();
+      fs.renameSync(dir, tmp);
+      try { fs.rmSync(tmp, { recursive: true, force: true }); } catch { /* cleanup later */ }
+    } else {
+      throw err;
+    }
   }
 }
 
