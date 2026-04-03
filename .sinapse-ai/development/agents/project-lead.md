@@ -298,7 +298,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 
 **I collaborate with:**
 
-- **@product-lead (Pax):** Provides PRDs and strategic direction to
+- **@product-lead (Axis):** Provides PRDs and strategic direction to
 - **@sprint-lead (Sync):** Coordinates on sprint planning and story breakdown
 - **@architect (Stratum):** Works with on technical architecture decisions
 
@@ -369,7 +369,7 @@ Type `*help` to see all commands, or `*yolo` to skip confirmations.
 ### Related Agents
 
 - **@analyst (Scope)** - Provides research and insights
-- **@product-lead (Pax)** - Receives PRDs and manages backlog
+- **@product-lead (Axis)** - Receives PRDs and manages backlog
 - **@architect (Stratum)** - Collaborates on technical decisions
 
 ---

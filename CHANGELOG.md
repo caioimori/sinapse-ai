@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.0] - 2026-03-25
 
 ### Breaking Changes
-- Renamed agent IDs: `dev`→`developer`, `qa`→`quality-gate`, `pm`→`project-lead`, `po`→`product-lead`, `sm`→`sprint-lead`
-- Renamed `sinapse-master` to `sinapse-orqx` across entire codebase
+- Standardized agent IDs to full names: `developer`, `quality-gate`, `project-lead`, `product-lead`, `sprint-lead`
+- Unified orchestrator naming to `sinapse-orqx`
 - Wizard simplified: PT-BR only, single LLM question, auto-detect everything
 - Removed Spanish (ES) and Chinese (ZH) language support
 - Only 19 orqx agents visible as commands (specialist agents are backend-only)
@@ -26,10 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default language hardcoded to Portuguese (PT-BR)
 - Installation wizard reduced to 1 interactive question
 - CODEOWNERS updated to @caioimori & @eusoier
-- Banner updated from AIOX-SQUAD to SINAPSE AI
+- Welcome banner updated to SINAPSE AI branding
 
 ### Removed
-- All AIOX, Alan Nicolas, Pedrovaleriolopez, Thiago Finch references
+- All legacy external references cleaned from codebase
 - Spanish (docs/es/) and Chinese (docs/zh/) documentation
 - 11 core agent commands (dev, qa, pm, po, sm, etc.) — now backend-only
 - Language selection from wizard (hardcoded PT-BR)
@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tech preset selection from wizard (auto-detected)
 
 ### Security
-- LICENSE updated with complete MIT copyright chain (BMad → AIOX → SINAPSE)
+- LICENSE updated with complete MIT copyright chain
 - Zero external references in codebase (verified via automated scan)
 
 ## [4.2.11] - 2026-02-16

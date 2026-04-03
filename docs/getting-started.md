@@ -1,311 +1,195 @@
-# Getting Started with SINAPSE
+# Comecando com SINAPSE-AI
 
-> **EN** | [PT](./pt/getting-started.md) | [ES](./es/getting-started.md)
+> Guia de onboarding profissional. Objetivo: **first-value em 10 minutos**.
 
 ---
 
-Welcome to SINAPSE. This guide is optimized for first-value in 10 minutes.
+## Criterio de Sucesso
 
-## Table of Contents
+Voce atingiu o "first-value" quando estas 3 condicoes forem verdadeiras:
 
-1. [10-Minute Quick Path](#10-minute-quick-path)
-2. [Installation](#installation)
-3. [Your First Project](#your-first-project)
-4. [Basic Commands](#basic-commands)
-5. [IDE Compatibility](#ide-compatibility)
-6. [Brownfield: Existing Projects](#brownfield-existing-projects)
-7. [Advanced Path](#advanced-path)
-8. [Troubleshooting](#troubleshooting)
-9. [Next Steps](#next-steps)
+1. Um agente SINAPSE foi ativado
+2. O greeting completo foi exibido
+3. Um comando util foi executado (`*help` ou equivalente)
 
-## 10-Minute Quick Path
-
-Use this exact flow if you are new:
-
-### Step 1: Install SINAPSE
-
-```bash
-# New project
-npx sinapse-ai init my-first-project
-cd my-first-project
-
-# Existing project
-# cd existing-project
-# npx sinapse-ai install
-```
-
-### Step 2: Pick your IDE activation path
-
-- Claude Code: `/agent-name`
-- Gemini CLI: `/sinapse-menu` then `/sinapse-<agent>`
-- Codex CLI: `/skills` then `sinapse-<agent-id>`
-- Cursor/Copilot: follow constraints in `docs/ide-integration.md`
-
-### Step 3: Validate first value
-
-First value is achieved when all 3 conditions are true:
-1. You activate one SINAPSE agent.
-2. You receive a valid greeting/activation response.
-3. You run one starter command (`*help` or equivalent) and get useful output.
-
-PASS rule: complete all 3 conditions in <= 10 minutes.
-
-## Installation
-
-### Prerequisites
-
-- **Node.js** version 18.0.0 or higher (v20+ recommended)
-- **npm** version 9.0.0 or higher
-- **Git** (optional, but recommended)
-
-### Quick Installation
-
-```bash
-# Create a new project
-npx sinapse-ai init my-first-project
-
-# Navigate to your project
-cd my-first-project
-
-# Start using SINAPSE agents in your IDE
-# (see Step 2 above for IDE-specific activation)
-```
-
-### Installation Options
-
-```bash
-# 1. Create new project with custom template
-npx sinapse-ai init my-project --template enterprise
-
-# 2. Install in existing project
-cd existing-project
-npx sinapse-ai install
-
-# 3. Force installation in non-empty directory
-npx sinapse-ai init my-project --force
-
-# 4. Skip dependency installation (manual install later)
-npx sinapse-ai init my-project --skip-install
-```
-
-## Your First Project
-
-### Project Structure
-
-After installation, your project will include:
-
-```
-my-first-project/
-├── .sinapse-ai/                 # SINAPSE framework core
-│   ├── core/                   # Orchestration, memory, config
-│   ├── data/                   # Knowledge base, entity registry
-│   ├── development/            # Agents, tasks, templates, scripts
-│   └── infrastructure/         # CI/CD templates, validation scripts
-├── .claude/                    # Claude Code integration (if enabled)
-├── .codex/                     # Codex CLI integration (if enabled)
-├── .gemini/                    # Gemini CLI integration (if enabled)
-├── docs/                       # Documentation
-│   └── stories/                # Development stories
-├── packages/                   # Shared packages
-├── tests/                      # Test suites
-└── package.json                # Project dependencies
-```
-
-### Configuration
-
-SINAPSE configuration lives in `.sinapse-ai/core/config/`. The installer handles initial setup. To verify your installation:
-
-```bash
-npx sinapse-ai doctor
-```
-
-## Basic Commands
-
-### Agent Activation
-
-SINAPSE agents are activated through your IDE. Once activated, agents respond to commands prefixed with `*`:
-
-```bash
-# Universal commands (work in any agent)
-*help                    # Show available commands for this agent
-*guide                   # Show detailed usage guide
-*session-info            # Display current session details
-*exit                    # Exit agent mode
-
-# Agent-specific examples
-@developer *help               # Developer agent commands
-@quality-gate *review STORY-42     # QA agent reviews a story
-@project-lead *create-epic         # PM agent creates an epic
-@sprint-lead *draft               # Scrum Master drafts a story
-```
-
-### Available Agents
-
-| Agent | Name | Focus |
-| --- | --- | --- |
-| `@dev` | Dex | Code implementation, bug fixes, refactoring |
-| `@qa` | Quinn | Testing, quality gates, code review |
-| `@architect` | Aria | System design, technical decisions |
-| `@pm` | Bob | PRDs, strategy, roadmap |
-| `@po` | Pax | Backlog, story validation, prioritization |
-| `@sm` | River | Story creation, sprint planning |
-| `@analyst` | Alex | Research, competitive analysis |
-| `@data-engineer` | Dara | Database design, migrations |
-| `@ux-design-expert` | Uma | UI/UX design, accessibility |
-| `@devops` | Gage | Git operations, CI/CD, deployments |
-
-### Typical Workflow
-
-```
-1. @project-lead creates a PRD          → *create-epic
-2. @sprint-lead drafts stories          → *draft
-3. @product-lead validates stories       → *validate-story-draft
-4. @developer implements             → (works from story file)
-5. @quality-gate reviews                 → *review STORY-ID
-6. @devops pushes              → *push (only agent with push authority)
-7. @product-lead closes story            → *close-story STORY-ID
-```
-
-## IDE Compatibility
-
-Not all IDEs support SINAPSE features equally. See the full comparison at [`docs/ide-integration.md`](./ide-integration.md).
-
-Summary:
-
-| IDE/CLI | Overall Status | How to Activate |
-| --- | --- | --- |
-| Claude Code | Works | `/agent-name` commands |
-| Gemini CLI | Works | `/sinapse-menu` then `/sinapse-<agent>` |
-| Codex CLI | Limited | `/skills` then `sinapse-<agent-id>` |
-| Cursor | Limited | `@agent` + synced rules |
-| GitHub Copilot | Limited | chat modes + repo instructions |
-
-
-- **Works**: fully recommended for new users.
-- **Limited**: usable with documented workarounds.
-
-## Brownfield: Existing Projects
-
-Already have a codebase? SINAPSE handles brownfield projects with a dedicated workflow.
-
-### Quick Brownfield Setup
-
-```bash
-# Navigate to your existing project
-cd my-existing-project
-
-# Install SINAPSE (non-destructive, preserves your config)
-npx sinapse-ai install
-
-# Run doctor to verify compatibility
-npx sinapse-ai doctor
-```
-
-### What Happens on First Run
-
-When you first activate an SINAPSE agent in an existing project:
-
-1. **Detection**: SINAPSE detects code but no SINAPSE docs
-2. **Offer**: "I can analyze your codebase. This takes 4-8 hours."
-3. **Discovery**: Multi-agent technical debt assessment (optional)
-4. **Output**: System architecture docs + technical debt report
-
-### Brownfield Workflow Options
-
-| Your Situation | Recommended Workflow |
-|----------------|---------------------|
-| Add major feature to existing project | `@project-lead → *create-doc brownfield-prd` |
-| Audit legacy codebase | `brownfield-discovery.yaml` (full workflow) |
-| Quick enhancement | `@project-lead → *brownfield-create-epic` |
-| Single bug fix | `@project-lead → *brownfield-create-story` |
-
-### Safety Guarantees
-
-- **Non-destructive**: SINAPSE creates files, never overwrites existing
-- **Rollback**: `git checkout HEAD~1 -- .` restores pre-SINAPSE state
-- **Config preservation**: Your `.eslintrc`, `tsconfig.json`, etc. stay intact
-
-### Resources
-
-- **[Working in the Brownfield Guide](.sinapse-ai/working-in-the-brownfield.md)** - Complete brownfield documentation
-- **[Compatibility Checklist](.sinapse-ai/development/checklists/brownfield-compatibility-checklist.md)** - Pre/post migration checks
-- **[Risk Report Template](.sinapse-ai/product/templates/brownfield-risk-report-tmpl.yaml)** - Phase-by-phase risk assessment
+**Regra:** complete as 3 condicoes em ate 10 minutos.
 
 ---
 
-## Advanced Path
+## Pre-requisitos
 
-For experienced users who want to go deeper:
+| Requisito | Versao Minima | Recomendado |
+|-----------|---------------|-------------|
+| Node.js | >= 18.0.0 | v20+ |
+| npm | >= 9.0.0 | Ultima estavel |
+| Claude Code CLI | Ultima versao | — |
+| Git | Qualquer | Ultima estavel |
 
-### Sync and Validation
+> **Codex CLI** tambem e suportado. Veja [IDE Integration](./ide-integration.md) para outras opcoes.
+
+---
+
+## Instalacao (3 minutos)
+
+### Projeto Novo
 
 ```bash
-# Sync agents to all configured IDEs
-npm run sync:ide
-
-# Validate cross-IDE parity
-npm run validate:parity
-
-# Run all quality checks
-npm run lint && npm run typecheck && npm test
+npx sinapse-ai init meu-projeto
+cd meu-projeto
 ```
 
-### Documentation-First Development
-
-All SINAPSE development follows the documentation pipeline automatically. Stories live in `docs/stories/`. Each story contains:
-- Acceptance criteria with checkboxes
-- Tasks mapped to specific ACs
-- CodeRabbit integration for automated review
-- Quality gate assignments
-
-See the [User Guide](./guides/user-guide.md) for the complete workflow.
-
-### Squad Expansions
-
-Squads extend SINAPSE beyond software development into any domain. See [Squads Guide](./guides/squads-guide.md).
-
-## Troubleshooting
-
-### Installation Issues
+### Projeto Existente
 
 ```bash
-# Check Node.js version
-node --version  # Should be >= 18.0.0
+cd meu-projeto-existente
+npx sinapse-ai install
+```
 
-# Run diagnostics
+O wizard interativo vai configurar:
+- **Idioma** (PT/EN)
+- **LLM provider** (Claude, Gemini, Codex)
+- **Squads** para instalar (escolha quais dominios ativar)
+
+A instalacao e **nao-destrutiva** — seus arquivos existentes nao sao sobrescritos.
+
+---
+
+## Verificacao (1 minuto)
+
+```bash
 npx sinapse-ai doctor
+```
 
-# Auto-fix common issues
+Todos os checks devem passar (verde). Se houver warnings, execute:
+
+```bash
 npx sinapse-ai doctor --fix
 ```
 
-### Agent Not Responding
+---
 
-1. Verify your IDE is supported (see [IDE Compatibility](#ide-compatibility)).
-2. Run `npm run sync:ide` to refresh agent files.
-3. Restart your IDE/CLI session.
+## Primeiro Agente (3 minutos)
 
-### Sync Issues
+No Claude Code, digite:
 
-```bash
-# Preview what would change
-npm run sync:ide -- --dry-run
-
-# Force re-sync
-npm run sync:ide
-
-# Validate after sync
-npm run validate:parity
+```
+@developer
 ```
 
-## Next Steps
+O agente **Pixel** vai se apresentar com greeting completo, mostrando seu papel, comandos disponiveis e o estado do projeto.
 
-- **[User Guide](./guides/user-guide.md)** - Complete workflow from planning to delivery
-- **[IDE Integration](./ide-integration.md)** - Detailed setup per IDE
-- **[Architecture](./architecture/ARCHITECTURE-INDEX.md)** - Technical deep dive
-- **[Squads Guide](./guides/squads-guide.md)** - Extend SINAPSE to any domain
-- **[Troubleshooting](./troubleshooting.md)** - Common issues and solutions
+### Comandos Essenciais
+
+| Comando | O que faz |
+|---------|-----------|
+| `*help` | Lista todos os comandos do agente ativo |
+| `*guide` | Guia detalhado de uso |
+| `*session-info` | Informacoes da sessao atual |
+| `*exit` | Sair do modo agente |
 
 ---
 
-_SINAPSE Getting Started Guide v4.2.11_
+## Primeiro Workflow (3 minutos)
+
+```
+@sprint-lead
+*draft
+```
+
+O agente **Sync** vai guiar a criacao da sua primeira story de desenvolvimento. Stories sao o ponto de partida de todo trabalho no SINAPSE — elas definem o que sera implementado, com criterios de aceite claros.
+
+### Fluxo Completo
+
+```
+@sprint-lead *draft          --> Cria a story
+@product-lead *validate      --> Valida criterios
+@developer                   --> Implementa
+@quality-gate *review        --> Verifica qualidade
+@devops *push                --> Envia para o repositorio
+```
+
+---
+
+## Agentes Disponiveis
+
+| Ativacao | Persona | Foco |
+|----------|---------|------|
+| `@developer` | Pixel | Implementacao de codigo, bug fixes, refactoring |
+| `@quality-gate` | Quinn | Testes, quality gates, code review |
+| `@architect` | Aria | Design de sistema, decisoes tecnicas |
+| `@project-lead` | Morgan | PRDs, estrategia, roadmap |
+| `@product-lead` | Pax | Backlog, validacao de stories, priorizacao |
+| `@sprint-lead` | Sync | Criacao de stories, planejamento de sprint |
+| `@analyst` | Alex | Pesquisa, analise competitiva |
+| `@data-engineer` | Dara | Database design, migracoes |
+| `@ux-design-expert` | Uma | UI/UX design, acessibilidade |
+| `@devops` | Gage | Git operations, CI/CD, deploys |
+
+---
+
+## Greenfield vs Brownfield
+
+| Cenario | Comando | O que acontece |
+|---------|---------|----------------|
+| **Projeto novo** | `npx sinapse-ai init meu-projeto` | Estrutura completa criada do zero |
+| **Projeto existente** | `npx sinapse-ai install` | Installer detecta automaticamente e preserva seus arquivos |
+
+Para projetos existentes, o SINAPSE oferece um workflow de **Brownfield Discovery** que analisa a codebase e gera documentacao de arquitetura e divida tecnica. Ative com:
+
+```
+@project-lead *brownfield-create-epic
+```
+
+---
+
+## Troubleshooting
+
+| Problema | Solucao |
+|----------|---------|
+| `sinapse-ai: command not found` | Execute `npx sinapse-ai install` novamente |
+| Doctor mostra warnings | Execute `npx sinapse-ai doctor --fix` |
+| Agente nao ativa | Verifique se `.sinapse-ai/` existe no projeto |
+| Hooks nao funcionam | Verifique `.claude/settings.json` |
+| Versao do Node incompativel | Atualize para Node.js >= 18 (`node --version`) |
+| Erro no wizard de instalacao | Tente `npx sinapse-ai install --force` |
+
+### Diagnostico Avancado
+
+```bash
+# Verificar versao do Node
+node --version
+
+# Verificar instalacao
+npx sinapse-ai doctor
+
+# Corrigir problemas automaticamente
+npx sinapse-ai doctor --fix
+
+# Informacoes do sistema
+npx sinapse-ai info
+```
+
+---
+
+## Proximos Passos
+
+- **Explorar os squads** — `@sinapse-orqx *status` mostra todos os dominios disponiveis
+- **Entender os workflows** — Leia `docs/guides/workflows-overview.md`
+- **Integracao com IDEs** — Veja [IDE Integration](./ide-integration.md) para Claude Code, Gemini CLI, Codex CLI, Cursor e GitHub Copilot
+- **Contribuir** — Leia [CONTRIBUTING.md](../CONTRIBUTING.md)
+
+---
+
+## Validacao Final
+
+| Criterio | Status |
+|----------|--------|
+| Agente ativou | PASS / FAIL |
+| Greeting exibiu | PASS / FAIL |
+| `*help` mostrou comandos | PASS / FAIL |
+
+Se algum criterio falhou, abra uma [issue](https://github.com/caioimori/sinapse-ai/issues/new?template=1-bug-report.yml).
+
+---
+
+_SINAPSE Getting Started Guide v5.0_

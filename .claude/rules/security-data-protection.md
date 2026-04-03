@@ -218,8 +218,8 @@ Security work MUST be delegated to the appropriate specialist:
 | Incident response | @cyber-orqx → Rapid |
 | LGPD/compliance | @cyber-orqx → Govern |
 | Cloud security | @cyber-orqx → Nimbus |
-| Database security/RLS | @data-engineer (Dara) |
-| Application security | @developer (Dex) |
+| Database security/RLS | @data-engineer (Tensor) |
+| Application security | @developer (Pixel) |
 
 ## Anti-Patterns (FORBIDDEN)
 

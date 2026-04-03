@@ -1,27 +1,27 @@
-name: Bug Report
-description: Report a bug in sinapse-ai
+name: Relatorio de Bug
+description: Reportar um bug no SINAPSE-AI
 title: "[Bug]: "
-labels: ["type: bug", "status: needs-triage"]
+labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug! Please fill out the information below to help us investigate.
+        Obrigado por dedicar seu tempo para reportar um bug! Preencha as informacoes abaixo para nos ajudar a investigar.
 
   - type: textarea
     id: description
     attributes:
-      label: Bug Description
-      description: A clear and concise description of what the bug is.
-      placeholder: Describe the bug...
+      label: Descricao do Bug
+      description: Uma descricao clara e concisa do bug.
+      placeholder: Descreva o bug...
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: Steps to Reproduce
-      description: Walk through the issue step-by-step.
+      label: Passos para Reproduzir
+      description: Descreva passo a passo como reproduzir o problema.
       value: |
         1.
         2.
@@ -32,92 +32,85 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected Behavior
-      description: What you expected to happen.
+      label: Comportamento Esperado
+      description: O que voce esperava que acontecesse.
     validations:
       required: true
 
   - type: textarea
     id: actual
     attributes:
-      label: Actual Behavior
-      description: What actually happened.
+      label: Comportamento Atual
+      description: O que realmente aconteceu.
     validations:
       required: true
 
   - type: textarea
     id: error-output
     attributes:
-      label: Error Output
-      description: Paste any error messages or stack traces.
+      label: Saida de Erro
+      description: Cole mensagens de erro ou stack traces.
       render: bash
 
   - type: dropdown
     id: area
     attributes:
-      label: Affected Area
+      label: Area Afetada
       options:
         - "Core Framework (.sinapse-ai/core/)"
         - "Installer (packages/installer/)"
-        - "CLI (bin/, packages/sinapse-pro-cli/)"
+        - "CLI (bin/)"
         - "SYNAPSE Context Engine"
         - "Health Check System"
-        - "Pro Features"
-        - "Documentation"
+        - "Agentes (.sinapse-ai/development/agents/)"
+        - "Tasks (.sinapse-ai/development/tasks/)"
+        - "Documentacao"
         - "CI/CD / GitHub Actions"
-        - "Other"
+        - "Outro"
     validations:
       required: true
 
   - type: input
     id: version
     attributes:
-      label: SINAPSE Version
-      description: "Run `npx sinapse-ai info` to find your version."
-      placeholder: "e.g., 4.2.13"
+      label: Versao do SINAPSE
+      description: "Execute `npx sinapse-ai info` para encontrar sua versao."
+      placeholder: "ex: 7.7.11"
     validations:
       required: true
 
   - type: dropdown
     id: os
     attributes:
-      label: Operating System
+      label: Sistema Operacional
       options:
         - "Windows 11"
         - "Windows 10"
         - "macOS (Apple Silicon)"
         - "macOS (Intel)"
         - "Ubuntu / Debian"
-        - "Other Linux"
+        - "Outro Linux"
     validations:
       required: true
 
   - type: input
     id: node-version
     attributes:
-      label: Node.js Version
-      placeholder: "e.g., 22.21.0"
+      label: Versao do Node.js
+      placeholder: "ex: 22.21.0"
 
-  - type: dropdown
-    id: priority
+  - type: textarea
+    id: screenshots
     attributes:
-      label: Priority
-      description: How critical is this bug for your use case?
-      options:
-        - "Critical - Blocking production use"
-        - "High - Significant impact on functionality"
-        - "Medium - Minor impact, workaround available"
-        - "Low - Enhancement or nice-to-have fix"
-      default: 2
-    validations:
-      required: true
+      label: Screenshots (opcional)
+      description: Arraste e solte imagens que ajudem a ilustrar o problema.
 
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: "I have searched existing issues to avoid duplicates"
+        - label: "Busquei issues existentes para evitar duplicatas"
           required: true
-        - label: "I have tested with the latest version"
-        - label: "I can consistently reproduce this issue"
+        - label: "Testei com a versao mais recente"
+        - label: "Consigo reproduzir este problema consistentemente"

@@ -25,33 +25,30 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            Welcome to **sinapse-ai**! Thanks for opening your first issue.
+            Obrigado por abrir sua primeira issue no SINAPSE-AI!
 
-            **What happens next?**
-            - A maintainer will triage this and add appropriate labels
-            - We'll respond as soon as possible
-            - Feel free to join [Community Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
+            **O que acontece agora?**
+            - Um maintainer vai fazer a triagem e adicionar labels apropriadas
+            - Vamos responder o mais rapido possivel
+            - Participe das [Discussoes da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
 
-            **Helpful Resources:**
-            - [Contributing Guide](https://github.com/SinapseAI/sinapse-ai/blob/main/CONTRIBUTING.md)
-            - [Documentation](https://github.com/SinapseAI/sinapse-ai/tree/main/docs)
+            **Recursos uteis:**
+            - [Guia de Contribuicao](https://github.com/caioimori/sinapse-ai/blob/main/CONTRIBUTING.md)
+            - [Documentacao](https://github.com/caioimori/sinapse-ai/tree/main/docs)
 
-            **Looking to contribute?** Check issues labeled `community: good first issue`.
+            **Quer contribuir?** Confira issues com label `good first issue`.
 
           pr-message: |
-            Welcome to **sinapse-ai**! Thanks for your first pull request.
+            Obrigado pelo seu primeiro PR no SINAPSE-AI!
 
-            **What happens next?**
-            1. Automated checks will run on your PR
-            2. A maintainer will review your changes
-            3. Once approved, we'll merge your contribution!
+            **Checklist de revisao:**
+            - [ ] `npm run lint` passa sem erros
+            - [ ] `npm run typecheck` passa sem erros
+            - [ ] `npm test` passa sem falhas
+            - [ ] Commits seguem Conventional Commits (feat:, fix:, docs:, etc.)
+            - [ ] PR template preenchido completamente
 
-            **PR Checklist:**
-            - [ ] Tests pass (`npm test`)
-            - [ ] Linting passes (`npm run lint`)
-            - [ ] Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
-
-            Thanks for contributing!
+            Um maintainer vai revisar em breve.
 
       - name: Add triage label to new issues
         if: github.event_name == 'issues'

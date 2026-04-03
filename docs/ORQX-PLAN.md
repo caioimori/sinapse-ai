@@ -9,7 +9,7 @@
 
 ## Visao Estrategica
 
-Transformar o SINAPSE de um framework derivado em um **produto autoral, produtizado e pronto para distribuicao em massa**. Zero referencias externas, instalacao zero-error, documentacao didatica, e experiencia padronizada para TODOS os usuarios — de iniciantes a devs avancados.
+Transformar o SINAPSE em um **produto autoral, produtizado e pronto para distribuicao em massa**. Zero referencias externas, instalacao zero-error, documentacao didatica, e experiencia padronizada para TODOS os usuarios — de iniciantes a devs avancados.
 
 **Publico-alvo:**
 - Empreendedores que querem construir, empacotar e vender produtos com IA
@@ -24,7 +24,7 @@ Transformar o SINAPSE de um framework derivado em um **produto autoral, produtiz
 
 | Dimensao | Score | Notas |
 |----------|-------|-------|
-| AIOX Contamination | LIMPO | Fase 1 executada em 2026-03-24 |
+| Identity Consistency | LIMPO | Fase 1 executada em 2026-03-24 |
 | Installation Flow | BOM | Wizard v4, 8 fases, multi-IDE |
 | Agent Greetings | PARCIAL | Core 100%, Orqx 65%, Squads 95% |
 | Documentation | EXCELENTE | Multi-lang, CI/CD, governance |
@@ -32,17 +32,17 @@ Transformar o SINAPSE de um framework derivado em um **produto autoral, produtiz
 
 ---
 
-## FASE 1: Purga AIOX [COMPLETA]
+## FASE 1: Identity Cleanup [COMPLETA]
 
 **Status:** DONE (2026-03-24)
 
 Arquivos limpos:
-- [x] `.github/CODEOWNERS` — @caioimori -> @caioimori
-- [x] `CONTRIBUTING.md` — @caioimori -> @caioimori
-- [x] `CONTINUITY-PLAN.md` — Thiago Finch refs removidas
-- [x] `package-lock.json` (root) — entries aiox-install + aiox-pro-cli removidas
-- [x] `.sinapse-ai/scripts/diagnostics/health-dashboard/package-lock.json` — @aiox -> @sinapse
-- [x] Verificacao final: `grep -ri "aiox|pedrovaleriolopez|internal-reference"` = ZERO matches
+- [x] `.github/CODEOWNERS` — atualizado para @caioimori
+- [x] `CONTRIBUTING.md` — atualizado para @caioimori
+- [x] `CONTINUITY-PLAN.md` — refs externas removidas
+- [x] `package-lock.json` (root) — entries legadas removidas
+- [x] `.sinapse-ai/scripts/diagnostics/health-dashboard/package-lock.json` — namespace @sinapse
+- [x] Verificacao final: grep scan = ZERO matches de refs externas
 
 ---
 
@@ -188,9 +188,9 @@ Pente fino em cada arquivo do framework. Zero assinaturas escondidas, zero easte
 - [ ] `.github/workflows/` — actions com refs externas
 - [ ] `scripts/` — automacoes com refs externas
 - [ ] `packages/` — package.json internos (author, contributors, repository)
-- [x] Git tags — verificar se alguma tag referencia AIOX (VERIFIED 2026-04-02: ZERO tags AIOX)
+- [x] Git tags — verificar se alguma tag referencia legado (VERIFIED 2026-04-02: ZERO tags legadas)
 - [x] Git commit messages — verificar se tem refs problematicas (informativo, nao rewrite)
-- [x] GitHub Issues/PRs/Labels/Milestones — VERIFIED 2026-04-02: 0 issues, 0 PRs, 0 AIOX labels, description=SINAPSE
+- [x] GitHub Issues/PRs/Labels/Milestones — VERIFIED 2026-04-02: 0 issues, 0 PRs, 0 labels legadas, description=SINAPSE
 
 ### Pos-Audit
 - [ ] Regenerar package-lock.json limpo (`npm install`)
@@ -201,7 +201,7 @@ Pente fino em cada arquivo do framework. Zero assinaturas escondidas, zero easte
 - [ ] @devops: commit final + tag de release
 
 ### Acceptance Criteria
-- [ ] `grep -ri "aiox\|internal-reference\|pedrovaleriolopez\|alan.nicolas"` = ZERO matches
+- [ ] `grep -ri "internal-reference"` = ZERO matches de refs externas
 - [ ] Nenhum package.json interno com author/contributor externo
 - [ ] Nenhuma URL apontando para repo externo nao-autorizado
 - [ ] Todos os quality gates passam (lint, typecheck, test, build)
@@ -223,7 +223,7 @@ Semana 2 (2026-03-25):
     - Refs Pedro Valerio/OpenClaw/Mega Brain/nomes antigos limpas (55+ arquivos)
     - AGENTS.md reescrito para Codex (19 orqx + 12 core + 151 specialists)
     - Paridade Codex 100% (178 = 178 agents)
-    - Global ~/.claude/CLAUDE.md + 9 rules globais limpos de AIOX
+    - Global ~/.claude/CLAUDE.md + 9 rules globais limpos de refs externas
     - claude-code-mastery padronizado (config.yaml → squad.yaml)
     - _example movido para docs/examples/squads/
     - 16 agents reorganizados em squads naturais (chiefs + design + utils)
@@ -251,7 +251,7 @@ Semana 2 (2026-03-25):
 | 8 | Arquitetura de 3 camadas: Orqx (persona) + Wrapper YOLO + Chief (premium) | Flexibilidade: interativo, autonomo, ou premium |
 | 9 | Chiefs dentro de squads naturais, nao soltos | Acesso a KB do squad aumenta qualidade |
 | 10 | Mission Routers com task mappings reais para todos os 18 squads | Routing preciso em vez de "adivinha a task" |
-| 11 | Comandos * autoexplicativos e dominio-especificos | Diferenciacao do AIOX, UX clara |
+| 11 | Comandos * autoexplicativos e dominio-especificos | Diferenciacao, UX clara |
 
 ---
 

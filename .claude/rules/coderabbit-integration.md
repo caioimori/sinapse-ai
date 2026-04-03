@@ -4,6 +4,7 @@ paths:
   - "tests/**"
   - "packages/**"
   - "bin/**"
+  - "scripts/**"
 ---
 
 # CodeRabbit Integration — Detailed Rules

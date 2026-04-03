@@ -2,77 +2,129 @@ name: Quarterly Architecture Gap Audit
 
 on:
   schedule:
-    # Run quarterly: Jan 1, Apr 1, Jul 1, Oct 1 at midnight UTC
-    - cron: '0 0 1 1,4,7,10 *'
+    - cron: '0 9 1 1,4,7,10 *'  # First day of each quarter, 9am UTC
   workflow_dispatch:  # Manual trigger
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
-  architecture-audit:
+  audit:
+    name: Framework Gap Audit
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 15
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Parse framework entities
+      - name: Count framework entities
+        id: counts
         run: |
-          cd outputs/architecture-map/schemas
-          node parse-markdown-agents.js
-          node parse-tasks.js
-          node parse-templates.js
-          node parse-tools.js
+          echo "## Framework Entity Counts" > audit-report.md
+          echo "" >> audit-report.md
+          echo "| Entity | Count |" >> audit-report.md
+          echo "|--------|-------|" >> audit-report.md
 
-      - name: Validate tool references (Story 3.21)
-        run: node outputs/architecture-map/schemas/validate-tool-references.js
+          # Count agents
+          AGENT_COUNT=$(find .sinapse-ai/development/agents -maxdepth 1 -name "*.md" | wc -l)
+          echo "| Core Agents | $AGENT_COUNT |" >> audit-report.md
 
-      - name: Synthesize relationships
-        run: node outputs/architecture-map/schemas/synthesize-relationships.js
+          # Count tasks
+          TASK_COUNT=$(find .sinapse-ai/development/tasks -name "*.md" | wc -l)
+          echo "| Tasks | $TASK_COUNT |" >> audit-report.md
 
-      - name: Detect gaps
-        run: node outputs/architecture-map/schemas/detect-gaps.js
+          # Count workflows
+          WF_COUNT=$(find .sinapse-ai/development/workflows -name "*.yaml" -o -name "*.yml" | wc -l)
+          echo "| Workflows | $WF_COUNT |" >> audit-report.md
 
-      - name: Generate trend report
-        id: trend
+          # Count squads
+          SQUAD_COUNT=$(find squads -maxdepth 1 -type d | tail -n +2 | wc -l)
+          echo "| Squads | $SQUAD_COUNT |" >> audit-report.md
+
+          # Count hooks
+          HOOK_COUNT=$(find .claude/hooks -name "*.cjs" -o -name "*.py" -o -name "*.sh" | wc -l)
+          echo "| Active Hooks | $HOOK_COUNT |" >> audit-report.md
+
+          # Count rules
+          RULE_COUNT=$(find .claude/rules -name "*.md" | wc -l)
+          echo "| Rules | $RULE_COUNT |" >> audit-report.md
+
+          # Count tests
+          TEST_COUNT=$(find tests -name "*.test.js" -o -name "*.test.ts" | wc -l)
+          echo "| Test Files | $TEST_COUNT |" >> audit-report.md
+
+          # Count CI workflows
+          CI_COUNT=$(find .github/workflows -name "*.yml" | wc -l)
+          echo "| CI Workflows | $CI_COUNT |" >> audit-report.md
+
+          echo "" >> audit-report.md
+          echo "**Audit Date:** $(date -u +%Y-%m-%d)" >> audit-report.md
+          echo "**Commit:** ${{ github.sha }}" >> audit-report.md
+
+      - name: Check for orphaned references
         run: |
-          node outputs/architecture-map/schemas/generate-trend-report.js
-          echo "gap_count=$(cat outputs/architecture-map/reports/gap-count.txt)" >> $GITHUB_OUTPUT
+          echo "" >> audit-report.md
+          echo "## Orphaned References Check" >> audit-report.md
+          echo "" >> audit-report.md
 
-      - name: Upload audit artifacts
+          # Check if agent files reference tasks that exist
+          ORPHANS=0
+          for agent in .sinapse-ai/development/agents/*.md; do
+            AGENT_NAME=$(basename "$agent" .md)
+            # Check for task references that might not exist
+            REFS=$(grep -oP 'tasks/[a-z0-9-]+\.md' "$agent" 2>/dev/null || true)
+            for ref in $REFS; do
+              if [ ! -f ".sinapse-ai/development/$ref" ]; then
+                echo "- **Orphan:** \`$AGENT_NAME\` references \`$ref\` (not found)" >> audit-report.md
+                ORPHANS=$((ORPHANS + 1))
+              fi
+            done
+          done
+
+          if [ $ORPHANS -eq 0 ]; then
+            echo "No orphaned references found." >> audit-report.md
+          else
+            echo "" >> audit-report.md
+            echo "**Total orphans: $ORPHANS**" >> audit-report.md
+          fi
+
+      - name: Run manifest validation
+        run: |
+          echo "" >> audit-report.md
+          echo "## Manifest Validation" >> audit-report.md
+          echo "" >> audit-report.md
+          npm run validate:manifest 2>&1 | tail -5 >> audit-report.md || echo "Manifest validation failed" >> audit-report.md
+
+      - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
-          name: gap-audit-${{ github.run_number }}
-          path: |
-            outputs/architecture-map/reports/gap-backlog.csv
-            outputs/architecture-map/reports/gap-trend.json
-            outputs/architecture-map/reports/gap-trend.md
-            outputs/architecture-map/reports/gap-trend-history.json
+          name: quarterly-gap-audit-${{ github.run_number }}
+          path: audit-report.md
 
-      - name: Create GitHub issue
+      - name: Create issue with findings
+        if: github.event_name == 'schedule'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const trendReport = fs.readFileSync('outputs/architecture-map/reports/gap-trend.md', 'utf8');
-            
+            const report = fs.readFileSync('audit-report.md', 'utf8');
             const quarter = Math.ceil((new Date().getMonth() + 1) / 3);
             const year = new Date().getFullYear();
-            
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `Q${quarter} ${year} Architecture Gap Audit`,
-              body: trendReport,
-              labels: ['architecture', 'gap-remediation', 'quarterly-audit'],
-              assignees: []  // Configure team members in repo settings
+              title: `[Audit] Gap Audit Q${quarter} ${year}`,
+              body: `# Quarterly Architecture Gap Audit\n\n${report}\n\n---\n*Generated automatically by quarterly-gap-audit workflow*`,
+              labels: ['audit', 'architecture']
             });
-
-

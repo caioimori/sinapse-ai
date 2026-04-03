@@ -1,3 +1,13 @@
+---
+paths:
+  - packages/**
+  - bin/**
+  - scripts/**
+  - .sinapse-ai/core/**
+  - .claude/hooks/**
+  - tests/**
+---
+
 # Security Scanning Rules
 
 > Applies to ALL agents writing code or configuration files.

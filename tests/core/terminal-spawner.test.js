@@ -16,6 +16,29 @@ const os = require('os');
 // Module under test
 const TerminalSpawner = require('../../.sinapse-ai/core/orchestration/terminal-spawner');
 
+function loadOrchestrationIndex() {
+  let orchestration;
+
+  jest.isolateModules(() => {
+    const setIntervalSpy = jest.spyOn(global, 'setInterval').mockImplementation(() => ({
+      unref() {
+        return this;
+      },
+      ref() {
+        return this;
+      },
+      hasRef() {
+        return false;
+      },
+    }));
+
+    orchestration = require('../../.sinapse-ai/core/orchestration');
+    setIntervalSpy.mockRestore();
+  });
+
+  return orchestration;
+}
+
 describe('TerminalSpawner', () => {
   const tmpDir = os.tmpdir();
 
@@ -325,7 +348,7 @@ describe('TerminalSpawner', () => {
   // ============================================
   describe('Index Integration', () => {
     test('should be exported from orchestration index', () => {
-      const orchestration = require('../../.sinapse-ai/core/orchestration');
+      const orchestration = loadOrchestrationIndex();
 
       expect(orchestration.TerminalSpawner).toBeDefined();
       expect(orchestration.spawnAgent).toBeDefined();
@@ -337,7 +360,7 @@ describe('TerminalSpawner', () => {
     });
 
     test('exported functions should be callable', () => {
-      const orchestration = require('../../.sinapse-ai/core/orchestration');
+      const orchestration = loadOrchestrationIndex();
 
       expect(typeof orchestration.spawnAgent).toBe('function');
       expect(typeof orchestration.createContextFile).toBe('function');
@@ -352,11 +375,22 @@ describe('TerminalSpawner', () => {
 // pm.sh Script Tests (Task 6.2)
 // ============================================
 describe('pm.sh Script', () => {
-  const { execSync } = require('child_process');
+  const { execFileSync } = require('child_process');
   const scriptPath = TerminalSpawner.getScriptPath();
+  const scriptDir = path.dirname(scriptPath);
+  const scriptName = path.basename(scriptPath);
+
+  function runPmScript(args = [], options = {}) {
+    return execFileSync('bash', [scriptName, ...args], {
+      cwd: scriptDir,
+      encoding: 'utf8',
+      stdio: 'pipe',
+      ...options,
+    });
+  }
 
   test('should display help with --help flag', () => {
-    const result = execSync(`bash "${scriptPath}" --help`, { encoding: 'utf8' });
+    const result = runPmScript(['--help']);
     expect(result).toContain('SINAPSE Multi-Modal Orchestration Script');
     expect(result).toContain('Usage:');
     expect(result).toContain('Arguments:');
@@ -364,14 +398,14 @@ describe('pm.sh Script', () => {
   });
 
   test('should display version with --version flag', () => {
-    const result = execSync(`bash "${scriptPath}" --version`, { encoding: 'utf8' });
+    const result = runPmScript(['--version']);
     expect(result).toContain('version');
     expect(result).toMatch(/\d+\.\d+\.\d+/);
   });
 
   test('should fail with missing arguments', () => {
     try {
-      execSync(`bash "${scriptPath}"`, { encoding: 'utf8', stdio: 'pipe' });
+      runPmScript();
       fail('Should have thrown an error');
     } catch (error) {
       expect(error.status).toBe(1);
@@ -380,7 +414,7 @@ describe('pm.sh Script', () => {
 
   test('should fail with only agent argument', () => {
     try {
-      execSync(`bash "${scriptPath}" dev`, { encoding: 'utf8', stdio: 'pipe' });
+      runPmScript(['dev']);
       fail('Should have thrown an error');
     } catch (error) {
       expect(error.status).toBe(1);
@@ -389,10 +423,7 @@ describe('pm.sh Script', () => {
 
   test('should fail with non-existent context file', () => {
     try {
-      execSync(`bash "${scriptPath}" dev develop --context /nonexistent/file.json`, {
-        encoding: 'utf8',
-        stdio: 'pipe',
-      });
+      runPmScript(['dev', 'develop', '--context', '/nonexistent/file.json']);
       fail('Should have thrown an error');
     } catch (error) {
       expect(error.status).toBe(1);
