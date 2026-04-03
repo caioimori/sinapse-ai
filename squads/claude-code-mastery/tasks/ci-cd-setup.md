@@ -1,3 +1,9 @@
+---
+task: ci-cd-setup
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Claude Code CI/CD Pipeline Setup
 
 **Task ID:** ci-cd-setup

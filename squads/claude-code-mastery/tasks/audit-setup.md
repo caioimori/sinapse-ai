@@ -1,3 +1,9 @@
+---
+task: audit-setup
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Audit Claude Code Setup
 
 **Task ID:** CCM-CHIEF-002

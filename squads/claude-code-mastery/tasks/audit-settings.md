@@ -1,3 +1,9 @@
+---
+task: audit-settings
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Audit Claude Code Settings
 
 **Task ID:** CCM-CONFIG-002

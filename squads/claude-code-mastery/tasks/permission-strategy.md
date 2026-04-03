@@ -1,3 +1,9 @@
+---
+task: permission-strategy
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Design Permission Strategy
 
 **Task ID:** CCM-CONFIG-005

@@ -1,3 +1,9 @@
+---
+task: mcp-workflow
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: MCP Server Management Workflow
 
 **Task ID:** mcp-workflow

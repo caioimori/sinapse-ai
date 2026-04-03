@@ -1,3 +1,9 @@
+---
+task: optimize-workflow
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Optimize Claude Code Workflow
 
 **Task ID:** CCM-PI-003

@@ -1,0 +1,467 @@
+{
+  "summary": {
+    "totalFiles": 1222,
+    "totalSquads": 18,
+    "overallAvgScore": 93,
+    "passingFiles": 1196,
+    "warningFiles": 26,
+    "criticalFiles": 0,
+    "fixedInThisRun": 26
+  },
+  "squadSummaries": [
+    {
+      "squad": "claude-code-mastery",
+      "taskCount": 26,
+      "avgScore": 65,
+      "critical": 0,
+      "warning": 26,
+      "passing": 0
+    },
+    {
+      "squad": "squad-animations",
+      "taskCount": 73,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 73
+    },
+    {
+      "squad": "squad-brand",
+      "taskCount": 97,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 97
+    },
+    {
+      "squad": "squad-claude",
+      "taskCount": 49,
+      "avgScore": 95,
+      "critical": 0,
+      "warning": 0,
+      "passing": 49
+    },
+    {
+      "squad": "squad-cloning",
+      "taskCount": 54,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 54
+    },
+    {
+      "squad": "squad-commercial",
+      "taskCount": 85,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 85
+    },
+    {
+      "squad": "squad-content",
+      "taskCount": 90,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 90
+    },
+    {
+      "squad": "squad-copy",
+      "taskCount": 81,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 81
+    },
+    {
+      "squad": "squad-council",
+      "taskCount": 56,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 56
+    },
+    {
+      "squad": "squad-courses",
+      "taskCount": 59,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 59
+    },
+    {
+      "squad": "squad-cybersecurity",
+      "taskCount": 53,
+      "avgScore": 98,
+      "critical": 0,
+      "warning": 0,
+      "passing": 53
+    },
+    {
+      "squad": "squad-design",
+      "taskCount": 101,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 101
+    },
+    {
+      "squad": "squad-finance",
+      "taskCount": 45,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 45
+    },
+    {
+      "squad": "squad-growth",
+      "taskCount": 77,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 77
+    },
+    {
+      "squad": "squad-paidmedia",
+      "taskCount": 82,
+      "avgScore": 89,
+      "critical": 0,
+      "warning": 0,
+      "passing": 82
+    },
+    {
+      "squad": "squad-product",
+      "taskCount": 75,
+      "avgScore": 100,
+      "critical": 0,
+      "warning": 0,
+      "passing": 75
+    },
+    {
+      "squad": "squad-research",
+      "taskCount": 72,
+      "avgScore": 90,
+      "critical": 0,
+      "warning": 0,
+      "passing": 72
+    },
+    {
+      "squad": "squad-storytelling",
+      "taskCount": 47,
+      "avgScore": 85,
+      "critical": 0,
+      "warning": 0,
+      "passing": 47
+    }
+  ],
+  "commonIssues": [
+    {
+      "issue": "Missing ## Steps or ## Description",
+      "count": 622,
+      "pct": 51
+    },
+    {
+      "issue": "Missing ## Metadata section",
+      "count": 144,
+      "pct": 12
+    },
+    {
+      "issue": "Missing Entrada/input section",
+      "count": 70,
+      "pct": 6
+    },
+    {
+      "issue": "Missing Saida/output section",
+      "count": 70,
+      "pct": 6
+    }
+  ],
+  "problemFiles": [
+    {
+      "file": "worktree-strategy",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "setup-wizard",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "setup-repository",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "sandbox-setup",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "permission-strategy",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "parallel-decomposition",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "optimize-workflow",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "optimize-context",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "multi-project-setup",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "mcp-workflow",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "mcp-integration-plan",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "integrate-project",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "hook-designer",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "enterprise-config",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "diagnose",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "create-team-topology",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "create-rules",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "create-agent-definition",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "context-rot-audit",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "configure-claude-code",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "claude-md-engineer",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "ci-cd-setup",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "brownfield-setup",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "audit-setup",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "audit-settings",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    },
+    {
+      "file": "audit-integration",
+      "squad": "claude-code-mastery",
+      "score": 65,
+      "issues": [
+        "Missing Entrada/input section",
+        "Missing Saida/output section",
+        "Missing ## Steps or ## Description",
+        "Missing ## Metadata section"
+      ]
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+---
+task: brownfield-setup
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Brownfield Project Claude Code Setup
 
 **Task ID:** brownfield-setup

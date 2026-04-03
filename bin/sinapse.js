@@ -69,6 +69,10 @@ USAGE:
   sinapse validate                    # Validate installation integrity
   sinapse info                        # Show system info
   sinapse doctor                      # Run diagnostics
+  sinapse qa run                      # Run quality gate pipeline
+  sinapse qa run --layer=1            # Run specific layer
+  sinapse qa status                   # Show gate status
+  sinapse qa audit                    # Audit squad ecosystem quality
   sinapse --version                   # Show version
   sinapse --help                      # Show this help
 
@@ -1076,6 +1080,18 @@ async function main() {
     case '-h':
       showHelp();
       break;
+
+    case 'qa': {
+      // Quality Gate Manager — sinapse qa run|status|audit
+      try {
+        const { run } = require('../.sinapse-ai/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        console.error(`❌ QA command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+    }
 
     case 'health': {
       // Framework health analytics

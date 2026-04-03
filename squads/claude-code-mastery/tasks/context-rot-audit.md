@@ -1,3 +1,9 @@
+---
+task: context-rot-audit
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Context Rot Audit
 
 **Task ID:** context-rot-audit

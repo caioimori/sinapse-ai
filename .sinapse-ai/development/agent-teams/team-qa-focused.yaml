@@ -4,9 +4,9 @@ bundle:
   description: Quality-focused team that orchestrates code review, testing, and deployment validation using CodeRabbit integration. Ideal for pre-PR reviews, deployment gates, and comprehensive quality assurance.
 
 agents:
-  - dev                # Pre-commit CodeRabbit reviews, development quality
-  - qa                 # Automated and manual QA, story validation
-  - github-devops      # PR quality gates, deployment safety checks
+  - developer          # Pixel — pre-commit CodeRabbit reviews, development quality
+  - quality-gate       # Litmus — automated and manual QA, story validation
+  - devops             # Pipeline — PR quality gates, deployment safety checks
 
 workflows:
   - code-quality-gate.yaml          # Unified quality validation (lint, tests, CodeRabbit)
@@ -31,13 +31,13 @@ purpose: |
      - Validate story acceptance criteria
      - Block completion on CRITICAL issues
 
-  3. **PR Phase** (@github-devops):
+  3. **PR Phase** (@devops):
      - Pre-PR quality gate (0 CRITICAL issues required)
      - Automated PR validation workflow
      - Lint + Tests + CodeRabbit scan
      - Generate comprehensive PR validation report
 
-  4. **Deployment Phase** (@github-devops):
+  4. **Deployment Phase** (@devops):
      - Deep security scan with CodeRabbit
      - Risk analysis and blocking issue detection
      - Environment configuration validation
@@ -133,16 +133,16 @@ usage_example: |
   → Validates acceptance criteria
   → Reports any quality gate failures
 
-  ## 3. PR Creation (by @github-devops)
+  ## 3. PR Creation (by @devops)
   "Create PR for this feature"
-  → @github-devops runs pr-validation workflow
+  → @devops runs pr-validation workflow
   → Checks: sync, CodeRabbit, lint, tests, coverage
   → Generates validation report
   → Creates PR with report link
 
-  ## 4. Deployment (by @github-devops)
+  ## 4. Deployment (by @devops)
   "Run deployment safety check for production"
-  → @github-devops runs deployment-safety-check workflow
+  → @devops runs deployment-safety-check workflow
   → Deep scan, risk analysis, env check, migrations, tests
   → Generates safety report with GO/NO-GO decision
   → Blocks if critical issues found

@@ -1,3 +1,9 @@
+---
+task: create-agent-definition
+responsavel: "TBD"
+responsavel_type: Agent
+atomic_layer: Task
+---
 # Task: Create Custom Subagent Definition
 
 **Task ID:** create-agent-definition
