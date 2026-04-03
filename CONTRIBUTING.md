@@ -1,6 +1,6 @@
 # Contribuindo com o SINAPSE-AI
 
-Bem-vindo ao **SINAPSE-AI** -- o sistema de orquestracao de agentes de IA para desenvolvimento full stack. Com **18 squads**, **175 agentes** e **12 agentes core**, o SINAPSE transforma a forma como equipes constroem software.
+Bem-vindo ao **SINAPSE-AI** -- o sistema de orquestracao de agentes de IA para desenvolvimento full stack. Com **18 squads**, **186 agentes** e **12 agentes core**, o SINAPSE transforma a forma como equipes constroem software.
 
 Agradecemos seu interesse em contribuir. Este guia explica nosso fluxo de desenvolvimento, processo de contribuicao e como enviar suas mudancas.
 

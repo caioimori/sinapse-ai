@@ -131,7 +131,7 @@ Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
 
 ## Agentes Especializados (175)
 
-Existem 175 agentes especializados organizados por 18 squads (174 em squads + 1 master orchestrator). Eles sao acessiveis via:
+Existem 186 agentes especializados organizados por 18 squads (174 em squads + 1 master orchestrator). Eles sao acessiveis via:
 - `.codex/agents/<agent-name>.md` - arquivo direto
 - Chamada interna pelo orqx do squad
 

@@ -147,7 +147,7 @@ Métricas do ecossistema (contagem de squads, agentes, tasks, orqx) DEVEM ser es
 
 **Números canônicos atuais:**
 - **18 squads** (diretórios com squad.yaml)
-- **175 agentes** (174 em squads + 1 master sinapse-orqx)
+- **186 agentes** (174 em squads + 1 master sinapse-orqx)
 - **20 comandos orqx** (18 squad orqx + sinapse-orqx + tools-orqx)
 
 **Regras:**

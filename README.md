@@ -14,7 +14,7 @@
 
 ## O que e o SINAPSE?
 
-SINAPSE e um framework open source que organiza **175 agentes de IA em 18 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 19 hooks ativos que bloqueiam violacoes em tempo de execucao, nao depois.
+SINAPSE e um framework open source que organiza **186 agentes de IA em 18 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 19 hooks ativos que bloqueiam violacoes em tempo de execucao, nao depois.
 
 Diferente de ferramentas que apenas conversam com IA, o SINAPSE estrutura o trabalho. Antes de qualquer linha de codigo, o pipeline **Documentation-First** exige que uma story seja criada, validada e rastreada. Isso nao e uma sugestao — e uma regra que o framework impoe automaticamente. Nenhum agente escreve codigo sem uma story aprovada.
 
@@ -48,7 +48,7 @@ npx sinapse-ai doctor
   [PASS] core-config.yaml
   [PASS] IDE: claude-code
   [PASS] 18 squads loaded
-  [PASS] 175 agents available
+  [PASS] 186 agents available
   [PASS] Constitution v2.2.0
 
   Result: ALL CHECKS PASSED
@@ -102,7 +102,7 @@ Toda inteligencia vive no terminal. Dashboards observam. A UI nunca e requisito 
 | **Claude Code** | Completo | `@agent-name` | Hooks, rules contextuais, deny/allow, Chrome Brain auto-launch |
 | **Codex CLI** | Completo | `/skills` ou `$skill-name` | Skills nativas, multi-model, `codex exec` para CI/CD |
 
-Ambas as IDEs tem acesso a todos os 18 squads, 175 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
+Ambas as IDEs tem acesso a todos os 18 squads, 186 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
 ---
 
@@ -168,7 +168,7 @@ Cada squad e uma equipe autonoma com orquestrador, agentes especialistas, knowle
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 | **claude-code-mastery** | Dominio avancado do Claude Code como ferramenta | 8 |
 
-**Total: 18 squads, 175 agentes especializados**
+**Total: 18 squads, 186 agentes especializados**
 
 Cada squad e ativado via seu orquestrador:
 
@@ -438,7 +438,7 @@ Ambas as IDEs suportam o ecossistema completo. A escolha depende do seu fluxo de
 
 | Funcionalidade | Claude Code | Codex CLI |
 |---------------|:-----------:|:---------:|
-| 18 squads, 175 agentes | SIM | SIM |
+| 18 squads, 186 agentes | SIM | SIM |
 | Knowledge bases, tasks, workflows | SIM | SIM |
 | Documentation-First Development | SIM | SIM |
 | Chrome Brain | Auto-launch via hooks | Via MCP ou skill |
