@@ -78,8 +78,6 @@ sync-*.sh                     # Agent sync scripts
 .windsurf/
 !.windsurf/rules/
 !.windsurf/rules/agents/
-.cursor/rules/                # Cursor IDE personal rules and configurations
-!.cursor/rules/agents/
 
 # AI assistant files
 CLAUDE.md
@@ -92,12 +90,6 @@ CLAUDE.md
 !.claude/settings.json
 !.claude/hooks/
 !.claude/skills/
-.gemini
-!.gemini/
-!.gemini/rules/
-!.gemini/rules/SINAPSE/
-!.gemini/rules/SINAPSE/agents/
-!.gemini/rules/SINAPSE/agents/*.md
 
 # AI Session Artifacts (Story 6.1.2.6 - Decision Logging)
 # Auto-generated decision logs from yolo mode executions
@@ -115,7 +107,6 @@ sample-project/*
 # These folders are from other projects and should NOT be in this repository
 .sinapse/                        # SINAPSE expansion project files
 .sinapse/project-status.yaml     # Project status cache (Story 6.1.2.4 - auto-generated)
-.cursor/                      # Cursor IDE project files
 sinapse-memory-layer-mvp/        # Separate memory layer project
 memory/                       # Memory squad
 performance/                  # Performance squad
@@ -358,8 +349,6 @@ scripts/glue/
 .claude/setup/
 docs/guides/sinapse-workflows/
 
-# Local Gemini project rules generated/managed per workspace
-.gemini/rules.md
 
 # Dependencies (SINAPSE)
 node_modules
