@@ -42,4 +42,22 @@ describe('validate-codex-integration', () => {
     expect(result.errors.some((e) => e.includes('Missing Codex skills dir'))).toBe(true);
     expect(result.warnings.some((w) => w.includes('Codex instructions file not found yet'))).toBe(true);
   });
+
+  it('uses the configured Codex catalog for expected skill counts', () => {
+    write(path.join(tmpRoot, 'AGENTS.md'), '# rules');
+    write(path.join(tmpRoot, '.codex', 'catalog.json'), JSON.stringify({
+      version: 1,
+      catalogMode: 'expanded',
+      expectedSkillIds: ['sinapse-dev', 'sinapse-brand'],
+    }));
+    write(path.join(tmpRoot, '.codex', 'agents', 'dev.md'), '# dev');
+    write(path.join(tmpRoot, '.codex', 'skills', 'sinapse-dev', 'SKILL.md'), '# skill');
+    write(path.join(tmpRoot, '.codex', 'skills', 'sinapse-brand', 'SKILL.md'), '# skill');
+    write(path.join(tmpRoot, '.sinapse-ai', 'development', 'agents', 'dev.md'), '# dev');
+
+    const result = validateCodexIntegration({ projectRoot: tmpRoot });
+    expect(result.ok).toBe(true);
+    expect(result.warnings).toEqual([]);
+    expect(result.metrics.expectedSkills).toBe(2);
+  });
 });

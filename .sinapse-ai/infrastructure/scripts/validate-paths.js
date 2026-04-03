@@ -3,6 +3,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const {
+  loadCodexCatalogConfig,
+  validateSkillActivationPaths,
+} = require('./codex-parity/catalog');
 
 const FORBIDDEN_ABSOLUTE_PATTERNS = [
   /\/Users\/[^\s/'"]+/g,
@@ -54,21 +58,15 @@ function collectAbsolutePathViolations(content, filePath) {
   return errors;
 }
 
-function validateSkillPathConventions(content, filePath) {
-  const errors = [];
-  if (!content.includes('.sinapse-ai/development/agents/')) {
-    errors.push(`${filePath} missing canonical source path ".sinapse-ai/development/agents/"`);
-  }
-  if (!content.includes('.sinapse-ai/development/scripts/generate-greeting.js')) {
-    errors.push(`${filePath} missing canonical greeting script path`);
-  }
-  return errors;
+function validateSkillPathConventions(content, filePath, config) {
+  return validateSkillActivationPaths(content, filePath, config);
 }
 
 function validatePaths(options = {}) {
   const resolved = { ...getDefaultOptions(), ...options };
   const errors = [];
   const checkedFiles = [];
+  const config = loadCodexCatalogConfig(resolved.projectRoot);
 
   const skillFiles = listSkillFiles(resolved.skillsDir);
   const filesToCheck = [...resolved.requiredFiles, ...skillFiles];
@@ -90,7 +88,7 @@ function validatePaths(options = {}) {
     errors.push(...collectAbsolutePathViolations(content, path.relative(resolved.projectRoot, file)));
 
     if (file.endsWith('SKILL.md')) {
-      errors.push(...validateSkillPathConventions(content, path.relative(resolved.projectRoot, file)));
+      errors.push(...validateSkillPathConventions(content, path.relative(resolved.projectRoot, file), config));
     }
   }
 

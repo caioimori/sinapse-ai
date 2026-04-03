@@ -6,6 +6,11 @@ const path = require('path');
 
 const { parseAllAgents } = require('../ide-sync/agent-parser');
 const { getSkillId } = require('./index');
+const {
+  loadCodexCatalogConfig,
+  getConfiguredSkillIds,
+  validateSkillActivationPaths,
+} = require('../codex-parity/catalog');
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -32,29 +37,37 @@ function isParsableAgent(agent) {
   return !agent.error || agent.error === 'YAML parse failed, using fallback extraction';
 }
 
-function validateSkillContent(content, expected) {
+function validateSkillContent(content, expected, config) {
   const issues = [];
   const requiredChecks = [
     { ok: content.includes(`name: ${expected.skillId}`), reason: `missing frontmatter name "${expected.skillId}"` },
-    {
-      ok: content.includes(`.sinapse-ai/development/agents/${expected.filename}`),
-      reason: `missing canonical agent path "${expected.filename}"`,
-    },
-    {
-      ok: content.includes(`generate-greeting.js ${expected.agentId}`),
-      reason: `missing canonical greeting command for "${expected.agentId}"`,
-    },
     {
       ok: content.includes('source of truth'),
       reason: 'missing source-of-truth activation note',
     },
   ];
 
+  if (expected.filename) {
+    requiredChecks.push({
+      ok: content.includes(`.sinapse-ai/development/agents/${expected.filename}`) || content.includes(expected.filename),
+      reason: `missing canonical agent path "${expected.filename}"`,
+    });
+  }
+
+  if (expected.greetingAgentId && content.includes('.sinapse-ai/development/scripts/generate-greeting.js')) {
+    requiredChecks.push({
+      ok: content.includes(`generate-greeting.js ${expected.greetingAgentId}`),
+      reason: `missing canonical greeting command for "${expected.greetingAgentId}"`,
+    });
+  }
+
   for (const check of requiredChecks) {
     if (!check.ok) {
       issues.push(check.reason);
     }
   }
+
+  issues.push(...validateSkillActivationPaths(content, expected.skillId, config));
 
   return issues;
 }
@@ -63,18 +76,33 @@ function validateCodexSkills(options = {}) {
   const resolved = { ...getDefaultOptions(), ...options };
   const errors = [];
   const warnings = [];
+  const config = loadCodexCatalogConfig(resolved.projectRoot);
 
   if (!fs.existsSync(resolved.skillsDir)) {
     errors.push(`Skills directory not found: ${resolved.skillsDir}`);
     return { ok: false, checked: 0, expected: 0, errors, warnings, missing: [], orphaned: [] };
   }
 
-  const agents = parseAllAgents(resolved.sourceDir).filter(isParsableAgent);
-  const expected = agents.map(agent => ({
-    agentId: agent.id,
-    filename: agent.filename,
-    skillId: getSkillId(agent.id),
-  }));
+  const configuredSkillIds = getConfiguredSkillIds(config);
+  let expected;
+
+  if (configuredSkillIds) {
+    const canonicalMap = config.canonicalSkillMap || {};
+    expected = configuredSkillIds.map((skillId) => ({
+      skillId,
+      agentId: canonicalMap[skillId]?.agentId || null,
+      greetingAgentId: canonicalMap[skillId]?.greetingAgentId || canonicalMap[skillId]?.agentId || null,
+      filename: canonicalMap[skillId]?.filename || null,
+    }));
+  } else {
+    const agents = parseAllAgents(resolved.sourceDir).filter(isParsableAgent);
+    expected = agents.map(agent => ({
+      agentId: agent.id,
+      greetingAgentId: agent.id,
+      filename: agent.filename,
+      skillId: getSkillId(agent.id),
+    }));
+  }
 
   const missing = [];
   for (const item of expected) {
@@ -92,7 +120,7 @@ function validateCodexSkills(options = {}) {
       errors.push(`${item.skillId}: unable to read skill file (${error.message})`);
       continue;
     }
-    const issues = validateSkillContent(content, item);
+    const issues = validateSkillContent(content, item, config);
     for (const issue of issues) {
       errors.push(`${item.skillId}: ${issue}`);
     }

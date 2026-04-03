@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 7.7.3
-generated_at: "2026-04-02T01:42:36.642Z"
+generated_at: "2026-04-02T18:56:10.225Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1113
 files:
@@ -189,9 +189,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:1dfc00cfc993bacb17f683aacdf898b856744a33a76183adab2d1c1896be8b31
+    hash: sha256:fc24a8286b20ec2558c90186e99124b96d26b287ff107b747c2b68b1102e0cc8
     type: config
-    size: 10514
+    size: 10513
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -1237,7 +1237,7 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:17d002e1c7b1dc347bc369fd82b28a931babcb69f16efc9ac76eb484eaacc1a1
+    hash: sha256:1214f46a53e5a5b4e17a06fcc7dfdf1bd324130589d0d3511efcb7b0ca9983f8
     type: data
     size: 511993
   - path: data/learned-patterns.yaml

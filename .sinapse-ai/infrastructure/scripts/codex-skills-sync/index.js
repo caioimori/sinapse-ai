@@ -10,6 +10,10 @@ const {
   normalizeCommands,
   getVisibleCommands,
 } = require('../ide-sync/agent-parser');
+const {
+  loadCodexCatalogConfig,
+  getGeneratedSkillSpec,
+} = require('../codex-parity/catalog');
 
 function getCodexHome() {
   return process.env.CODEX_HOME || path.join(os.homedir(), '.codex');
@@ -43,7 +47,28 @@ function getSkillId(agentId) {
   return `sinapse-${id}`;
 }
 
-function buildSkillContent(agentData) {
+function resolveSkillSpec(agentData, config) {
+  const override = getGeneratedSkillSpec(agentData.id, config) || {};
+  const sourceOfTruth = override.sourceOfTruth || `.sinapse-ai/development/agents/${agentData.filename}`;
+  const fallbackSource = override.fallbackSource || (
+    sourceOfTruth === `.sinapse-ai/development/agents/${agentData.filename}`
+      ? `.codex/agents/${agentData.filename}`
+      : null
+  );
+
+  return {
+    skillId: override.skillId || getSkillId(agentData.id),
+    sourceOfTruth,
+    fallbackSource,
+    canonicalReference: override.canonicalReference || null,
+    greetingScript: override.greetingScript || '.sinapse-ai/development/scripts/generate-greeting.js',
+    greetingAgentId: override.greetingAgentId || agentData.id,
+  };
+}
+
+function buildSkillContent(agentData, options = {}) {
+  const config = options.config || loadCodexCatalogConfig(options.projectRoot || process.cwd());
+  const spec = resolveSkillSpec(agentData, config);
   const agent = agentData.agent || {};
   const name = agent.name || agentData.id;
   const title = agent.title || 'SINAPSE Agent';
@@ -57,8 +82,26 @@ function buildSkillContent(agentData) {
     .map(c => `- \`*${c.name}\` - ${c.description || 'No description'}`)
     .join('\n');
 
-  const skillName = getSkillId(agentData.id);
+  const skillName = spec.skillId;
   const description = trimText(`${title} (${name}). ${whenToUse}`, 180);
+  const sourceOfTruthLine = spec.fallbackSource
+    ? `1. Load \`${spec.sourceOfTruth}\` as source of truth (fallback: \`${spec.fallbackSource}\`)`
+    : `1. Load \`${spec.sourceOfTruth}\` as source of truth`;
+  const canonicalReferenceLine = spec.canonicalReference
+    ? `2. Keep \`${spec.canonicalReference}\` as the shared parity reference.`
+    : null;
+  const greetingStepNumber = canonicalReferenceLine ? 3 : 2;
+  const personaStepNumber = canonicalReferenceLine ? 4 : 3;
+  const stayInPersonaStepNumber = canonicalReferenceLine ? 5 : 4;
+
+  const activationLines = [
+    `${sourceOfTruthLine}.`,
+    canonicalReferenceLine,
+    `${greetingStepNumber}. Generate greeting via \`node ${spec.greetingScript} ${spec.greetingAgentId}\` and show it first.`,
+    `${personaStepNumber}. Adopt this agent persona and command system.`,
+    `${stayInPersonaStepNumber}. If a starred command is invoked in Codex, resolve it via \`node .codex/scripts/resolve-codex-command.js ${skillName} <command>\` when a registry mapping exists.`,
+    `${stayInPersonaStepNumber + 1}. Stay in this persona until the user asks to switch or exit.`,
+  ].filter(Boolean);
 
   return `---
 name: ${skillName}
@@ -71,10 +114,7 @@ description: ${description}
 ${whenToUse}
 
 ## Activation Protocol
-1. Load \`.sinapse-ai/development/agents/${agentData.filename}\` as source of truth (fallback: \`.codex/agents/${agentData.filename}\`).
-2. Adopt this agent persona and command system.
-3. Generate greeting via \`node .sinapse-ai/development/scripts/generate-greeting.js ${agentData.id}\` and show it first.
-4. Stay in this persona until the user asks to switch or exit.
+${activationLines.join('\n')}
 
 ## Starter Commands
 ${commands || '- `*help` - List available commands'}
@@ -86,11 +126,13 @@ ${commands || '- `*help` - List available commands'}
 `;
 }
 
-function buildSkillPlan(agents, skillsDir) {
+function buildSkillPlan(agents, skillsDir, options = {}) {
+  const config = options.config || loadCodexCatalogConfig(options.projectRoot || process.cwd());
   return agents
     .filter(a => !a.error || a.error === 'YAML parse failed, using fallback extraction')
     .map(agentData => {
-      const skillId = getSkillId(agentData.id);
+      const spec = resolveSkillSpec(agentData, config);
+      const skillId = spec.skillId;
       const targetDir = path.join(skillsDir, skillId);
       const targetFile = path.join(targetDir, 'SKILL.md');
       return {
@@ -98,7 +140,7 @@ function buildSkillPlan(agents, skillsDir) {
         skillId,
         targetDir,
         targetFile,
-        content: buildSkillContent(agentData),
+        content: buildSkillContent(agentData, { config, projectRoot: options.projectRoot }),
       };
     });
 }
@@ -121,15 +163,22 @@ function syncSkills(options = {}) {
   if (resolved.globalOnly) {
     resolved.global = true;
   }
+  const config = resolved.config || loadCodexCatalogConfig(resolved.projectRoot);
   const agents = parseAllAgents(resolved.sourceDir);
-  const plan = buildSkillPlan(agents, resolved.localSkillsDir);
+  const plan = buildSkillPlan(agents, resolved.localSkillsDir, {
+    config,
+    projectRoot: resolved.projectRoot,
+  });
 
   if (!resolved.globalOnly) {
     writeSkillPlan(plan, resolved);
   }
 
   if (resolved.global) {
-    const globalPlan = buildSkillPlan(agents, resolved.globalSkillsDir);
+    const globalPlan = buildSkillPlan(agents, resolved.globalSkillsDir, {
+      config,
+      projectRoot: resolved.projectRoot,
+    });
     writeSkillPlan(globalPlan, resolved);
   }
 

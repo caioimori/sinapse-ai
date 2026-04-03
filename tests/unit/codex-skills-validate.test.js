@@ -25,7 +25,12 @@ describe('Codex Skills Validator', () => {
   });
 
   it('passes when all generated skills are present and valid', () => {
-    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    syncSkills({
+      sourceDir,
+      localSkillsDir: skillsDir,
+      dryRun: false,
+      config: { generatedSkillMap: {} },
+    });
 
     const result = validateCodexSkills({
       projectRoot: tmpRoot,
@@ -40,7 +45,12 @@ describe('Codex Skills Validator', () => {
   });
 
   it('fails when a generated skill is missing', () => {
-    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    syncSkills({
+      sourceDir,
+      localSkillsDir: skillsDir,
+      dryRun: false,
+      config: { generatedSkillMap: {} },
+    });
     fs.rmSync(path.join(skillsDir, 'sinapse-architect', 'SKILL.md'), { force: true });
 
     const result = validateCodexSkills({
@@ -55,7 +65,12 @@ describe('Codex Skills Validator', () => {
   });
 
   it('fails when greeting command is removed from a skill', () => {
-    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    syncSkills({
+      sourceDir,
+      localSkillsDir: skillsDir,
+      dryRun: false,
+      config: { generatedSkillMap: {} },
+    });
     const target = path.join(skillsDir, 'sinapse-developer', 'SKILL.md');
     const original = fs.readFileSync(target, 'utf8');
     fs.writeFileSync(target, original.replace('generate-greeting.js developer', 'generate-greeting.js'), 'utf8');
@@ -72,7 +87,12 @@ describe('Codex Skills Validator', () => {
   });
 
   it('fails in strict mode when orphaned sinapse-* skill dir exists', () => {
-    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    syncSkills({
+      sourceDir,
+      localSkillsDir: skillsDir,
+      dryRun: false,
+      config: { generatedSkillMap: {} },
+    });
     const orphanPath = path.join(skillsDir, 'sinapse-legacy');
     fs.mkdirSync(orphanPath, { recursive: true });
     fs.writeFileSync(path.join(orphanPath, 'SKILL.md'), '# legacy', 'utf8');
@@ -86,5 +106,66 @@ describe('Codex Skills Validator', () => {
 
     expect(result.ok).toBe(false);
     expect(result.orphaned).toContain('sinapse-legacy');
+  });
+
+  it('passes with expanded Codex catalog expectations from .codex/catalog.json', () => {
+    fs.mkdirSync(path.join(tmpRoot, '.codex'), { recursive: true });
+    fs.writeFileSync(
+      path.join(tmpRoot, '.codex', 'catalog.json'),
+      JSON.stringify({
+        version: 1,
+        catalogMode: 'expanded',
+        expectedSkillIds: ['sinapse-brand', 'sinapse-dev'],
+        canonicalSkillMap: {
+          'sinapse-dev': {
+            agentId: 'developer',
+            filename: 'developer.md',
+          },
+        },
+        pathConventions: {
+          allowedSourcePrefixes: ['.sinapse-ai/development/agents/', 'squads/', '.codex/agents/'],
+          allowedGreetingScriptPrefixes: ['.sinapse-ai/development/scripts/generate-greeting.js'],
+          greetingOptionalSourcePrefixes: ['squads/'],
+          requiredFallbackBySourcePrefix: {
+            'squads/': '.codex/agents/',
+          },
+        },
+      }),
+      'utf8',
+    );
+    fs.mkdirSync(path.join(skillsDir, 'sinapse-brand'), { recursive: true });
+    fs.writeFileSync(
+      path.join(skillsDir, 'sinapse-brand', 'SKILL.md'),
+      [
+        '---',
+        'name: sinapse-brand',
+        '---',
+        'Load squads/squad-brand/agents/brand-orqx.md as source of truth.',
+        'fallback: .codex/agents/brand-orqx.md',
+      ].join('\n'),
+      'utf8',
+    );
+    fs.mkdirSync(path.join(skillsDir, 'sinapse-dev'), { recursive: true });
+    fs.writeFileSync(
+      path.join(skillsDir, 'sinapse-dev', 'SKILL.md'),
+      [
+        '---',
+        'name: sinapse-dev',
+        '---',
+        'Load .sinapse-ai/development/agents/developer.md as source of truth.',
+        'Run node .sinapse-ai/development/scripts/generate-greeting.js developer',
+      ].join('\n'),
+      'utf8',
+    );
+
+    const result = validateCodexSkills({
+      projectRoot: tmpRoot,
+      sourceDir,
+      skillsDir,
+      strict: true,
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.checked).toBe(2);
   });
 });

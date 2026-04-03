@@ -3,6 +3,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const {
+  loadCodexCatalogConfig,
+  getConfiguredSkillIds,
+} = require('./codex-parity/catalog');
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -41,14 +45,15 @@ function countSkillFiles(skillsDir) {
 
 function validateCodexIntegration(options = {}) {
   const projectRoot = options.projectRoot || process.cwd();
+  const config = loadCodexCatalogConfig(projectRoot);
   const resolved = {
     ...getDefaultOptions(),
     ...options,
     projectRoot,
     instructionsFile: options.instructionsFile || path.join(projectRoot, 'AGENTS.md'),
-    agentsDir: options.agentsDir || path.join(projectRoot, '.codex', 'agents'),
-    skillsDir: options.skillsDir || path.join(projectRoot, '.codex', 'skills'),
-    sourceAgentsDir: options.sourceAgentsDir || path.join(projectRoot, '.sinapse-ai', 'development', 'agents'),
+    agentsDir: options.agentsDir || path.join(projectRoot, config.codexAgentsDir || '.codex/agents'),
+    skillsDir: options.skillsDir || path.join(projectRoot, config.skillsDir || '.codex/skills'),
+    sourceAgentsDir: options.sourceAgentsDir || path.join(projectRoot, config.canonicalAgentsDir || '.sinapse-ai/development/agents'),
   };
   const errors = [];
   const warnings = [];
@@ -70,12 +75,15 @@ function validateCodexIntegration(options = {}) {
   const sourceCount = countMarkdownFiles(resolved.sourceAgentsDir);
   const codexAgentsCount = countMarkdownFiles(resolved.agentsDir);
   const codexSkillsCount = countSkillFiles(resolved.skillsDir);
+  const expectedSkillIds = getConfiguredSkillIds(config);
 
-  if (sourceCount > 0 && codexAgentsCount !== sourceCount) {
+  if (config.catalogMode !== 'expanded' && sourceCount > 0 && codexAgentsCount !== sourceCount) {
     warnings.push(`Codex agent count differs from source (${codexAgentsCount}/${sourceCount})`);
   }
 
-  if (sourceCount > 0 && codexSkillsCount !== sourceCount) {
+  if (expectedSkillIds && codexSkillsCount !== expectedSkillIds.length) {
+    warnings.push(`Codex skill count differs from configured catalog (${codexSkillsCount}/${expectedSkillIds.length})`);
+  } else if (!expectedSkillIds && sourceCount > 0 && codexSkillsCount !== sourceCount) {
     warnings.push(`Codex skill count differs from source (${codexSkillsCount}/${sourceCount})`);
   }
 
@@ -84,9 +92,10 @@ function validateCodexIntegration(options = {}) {
     errors,
     warnings,
     metrics: {
-      sourceAgents: sourceCount,
+      canonicalAgents: sourceCount,
       codexAgents: codexAgentsCount,
       codexSkills: codexSkillsCount,
+      expectedSkills: expectedSkillIds ? expectedSkillIds.length : sourceCount,
     },
   };
 }

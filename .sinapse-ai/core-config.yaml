@@ -192,7 +192,7 @@ github:
         style/: style
         build/: build
       default_type: feat
-    auto_assign_reviewers: false
+    auto_assign_reviewers: true
     draft_by_default: false
   semantic_release:
     enabled: true
