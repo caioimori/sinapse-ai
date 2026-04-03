@@ -495,3 +495,4 @@ module.exports = {
   DEFAULT_PRUNE_THRESHOLD,
   PATTERN_STATUS,
 };
+

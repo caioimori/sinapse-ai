@@ -173,3 +173,4 @@ Para cada transicao entre fases:
 - [ ] Lead squad para sintese final designada
 - [ ] Invocation commands corretos para cada squad
 - [ ] Riscos identificados com contingencias
+

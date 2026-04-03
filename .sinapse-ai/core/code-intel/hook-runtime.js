@@ -184,3 +184,4 @@ module.exports = {
   getProvider,
   _resetForTesting,
 };
+

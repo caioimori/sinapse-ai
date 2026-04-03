@@ -98,3 +98,4 @@ Constitution (L0) is never truncated.
 | `.sinapse-ai/core/synapse/context/context-tracker.js` | Bracket calculation, token budgets, layer configs |
 | `.synapse/context` | Bracket-specific context rules (L1) |
 | `.sinapse-ai/core/synapse/output/formatter.js` | Token budget enforcement + truncation |
+

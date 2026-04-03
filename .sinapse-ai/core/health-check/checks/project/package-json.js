@@ -103,3 +103,4 @@ class PackageJsonCheck extends BaseCheck {
 }
 
 module.exports = PackageJsonCheck;
+

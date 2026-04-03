@@ -284,3 +284,4 @@ Install and curate a Shadcn UI component library leveraging Tailwind v4, Radix p
 - Maintain parity between Shadcn variants and design token aliases
 - Document manual updates (Shadcn is copy/paste — no automatic updates)
 - Schedule regular audits to pull upstream improvements intentionally
+

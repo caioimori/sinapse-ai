@@ -124,3 +124,4 @@ Se 2+ squads sao necessarias:
 - [ ] Invocation command fornecido
 - [ ] Context para squad structurado
 - [ ] Ambiguidades resolvidas (ou pergunta feita)
+

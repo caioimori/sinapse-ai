@@ -227,3 +227,4 @@ graph TD
 ```
 
 Este ciclo continua, com os agentes Scrum Master, Desenvolvedor e opcionalmente QA trabalhando juntos. O agente QA fornece capacidades de revisão de desenvolvedor sênior através da task `review-story`, oferecendo refatoração de código, melhorias de qualidade e transferência de conhecimento. Isso garante alta qualidade de código enquanto mantém velocidade de desenvolvimento.
+

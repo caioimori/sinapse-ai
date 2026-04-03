@@ -319,3 +319,4 @@ class ElicitationSessionManager {
 }
 
 module.exports = ElicitationSessionManager;
+

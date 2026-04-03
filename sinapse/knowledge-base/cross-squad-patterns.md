@@ -242,3 +242,4 @@ Phase 4: Launch + Growth (parallel, depends on Phase 3)
 5. **Gates between phases** — Validate output before passing downstream.
 6. **Max 4-5 active squads** — More than that creates coordination overhead. Phase the rest.
 7. **Strategic council for uncertainty** — When the right path is unclear, consult before executing.
+

@@ -186,3 +186,4 @@ function countMessages(transcriptPath) {
   } catch {}
   return 0;
 }
+

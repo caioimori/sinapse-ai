@@ -355,3 +355,4 @@ module.exports = {
   DEFAULT_CACHE_TTL,
   DEFAULT_PATTERNS_PATH,
 };
+

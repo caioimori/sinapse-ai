@@ -314,3 +314,4 @@ describe('formatUpdateResult', () => {
     expect(output).toContain('Connection timeout');
   });
 });
+

@@ -61,3 +61,4 @@ activation-instructions:
 # - Use .sinapse-ai/scripts/batch-update-greetings.js to update all agents
 # - Keep this template synchronized with actual agent files
 # - Document any greeting logic changes in ADR-001-IMPLEMENTATION-SUMMARY.md
+

@@ -319,3 +319,4 @@ Invalid: 0
 - Called by `*validate-workflow` command in sinapse-orqx
 - Called by `SquadValidator.validateWorkflows()` during squad validation
 - Can be called by `FrameworkAnalyzer.validateWorkflow()` for analysis
+

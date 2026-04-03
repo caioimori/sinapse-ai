@@ -292,3 +292,4 @@ class TemplateValidator {
 module.exports = {
   TemplateValidator,
 };
+

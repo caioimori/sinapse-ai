@@ -178,3 +178,4 @@ tool:
     - "Command execution limited by system security policies"
     - "Process management may vary by operating system"
     - "Some operations blocked by antivirus software"
+

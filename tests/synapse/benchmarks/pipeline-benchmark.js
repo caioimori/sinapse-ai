@@ -314,3 +314,4 @@ if (require.main === module) {
 }
 
 module.exports = { runBenchmark, calcStats, percentile, TARGETS };
+

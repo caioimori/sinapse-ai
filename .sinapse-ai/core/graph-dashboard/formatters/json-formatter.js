@@ -11,3 +11,4 @@ function formatAsJson(graphData) {
 }
 
 module.exports = { formatAsJson };
+

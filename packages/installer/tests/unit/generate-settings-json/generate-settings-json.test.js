@@ -307,3 +307,4 @@ describe('generate-settings-json', () => {
     });
   });
 });
+

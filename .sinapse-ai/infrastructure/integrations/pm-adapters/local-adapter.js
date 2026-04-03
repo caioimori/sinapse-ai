@@ -173,3 +173,4 @@ class LocalAdapter extends PMAdapter {
 }
 
 module.exports = { LocalAdapter };
+

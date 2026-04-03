@@ -243,3 +243,4 @@ node ~/.claude/hooks/analyze-timing.js 2026-02-17
 # Last N entries
 node ~/.claude/hooks/analyze-timing.js --last 50
 ```
+

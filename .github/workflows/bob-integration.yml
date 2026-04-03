@@ -98,3 +98,4 @@ jobs:
           npx eslint .sinapse-ai/core/orchestration/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
           npx eslint .sinapse-ai/core/events/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
           echo "✅ Orchestration lint passed"
+

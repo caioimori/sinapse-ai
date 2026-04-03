@@ -321,3 +321,4 @@ transport_guide:
     when_to_use: "Legacy servers not yet migrated to HTTP Streamable"
     pros: ["Wide support"]
     cons: ["Being deprecated", "One-directional streaming"]
+

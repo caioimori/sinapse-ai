@@ -146,3 +146,4 @@ describe('pro-setup backward compatibility (AC-7)', () => {
     expect(typeof proSetup._testing.stepLicenseGateCI).toBe('function');
   });
 });
+

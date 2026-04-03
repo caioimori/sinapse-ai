@@ -254,3 +254,4 @@ describe('os-detector', () => {
     });
   });
 });
+

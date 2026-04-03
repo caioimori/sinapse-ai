@@ -567,3 +567,4 @@ find supabase/snapshots -name "daily_*.sql" -mtime +7 -delete
 - `*rollback {snapshot}` - Restore snapshot
 - `*apply-migration {path}` - Includes automatic snapshots
 - `*env-check` - Verify pg_dump available
+

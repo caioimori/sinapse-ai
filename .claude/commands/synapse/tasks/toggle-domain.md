@@ -81,3 +81,4 @@ Toggled domain "{domain-name}":
 
 *Toggle Domain — SYNAPSE CRUD Command C5*
 *Source: SYNAPSE-HOOK-SKILL-COMMAND-ANALYSIS.md section 2.3*
+

@@ -192,3 +192,4 @@ python -c "import shutil; print(shutil.which('code-graph-mcp'))"
 
 *NOG-0 — Code Graph MCP Setup Guide v1.0*
 *@devops (Gage) — 2026-02-15*
+

@@ -257,3 +257,4 @@ describe('Performance Requirements', () => {
     expect(duration).toBeLessThan(50);
   });
 });
+

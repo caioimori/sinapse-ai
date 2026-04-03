@@ -556,3 +556,4 @@ switch (command) {
     showHelp();
     process.exit(1);
 }
+

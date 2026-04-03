@@ -975,3 +975,4 @@ describe('saveRegistry', () => {
     expect(JSON.parse(written)).toEqual(registry);
   });
 });
+

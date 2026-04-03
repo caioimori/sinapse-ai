@@ -113,3 +113,4 @@ module.exports = ReporterManager;
 module.exports.MarkdownReporter = MarkdownReporter;
 module.exports.JSONReporter = JSONReporter;
 module.exports.ConsoleReporter = ConsoleReporter;
+

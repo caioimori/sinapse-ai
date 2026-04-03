@@ -84,3 +84,4 @@ categories:
   - id: agents
     description: "Agent persona definitions and configurations"
     basePath: ".sinapse-ai/development/agents"
+

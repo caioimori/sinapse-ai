@@ -246,3 +246,4 @@ When a request could map to multiple squads, use this matrix:
 | "Strategy" | Brand strategy | brand-system |
 | "Strategy" | Content strategy | content-intelligence |
 | "Security" | Any security concern | cyber-defense (always) |
+

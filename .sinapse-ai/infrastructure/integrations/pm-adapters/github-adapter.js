@@ -390,3 +390,4 @@ class GitHubProjectsAdapter extends PMAdapter {
 }
 
 module.exports = { GitHubProjectsAdapter };
+

@@ -166,3 +166,4 @@ class NetworkCheck extends BaseCheck {
 }
 
 module.exports = NetworkCheck;
+

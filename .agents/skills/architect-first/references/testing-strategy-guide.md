@@ -475,3 +475,4 @@ Acceptable to exclude from coverage:
 6. **Deployment**: Core case working + tests passing
 
 **Remember**: Tests are your license to write imperfect code. Without tests, perfection is required.
+

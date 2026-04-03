@@ -57,3 +57,4 @@ function formatText(output, options = {}) {
 }
 
 module.exports = { formatText };
+

@@ -154,3 +154,4 @@ workflows:
         task: brownfield-create-epic.md
         output: Epic + stories ready for development
         condition: QA gate APPROVED
+

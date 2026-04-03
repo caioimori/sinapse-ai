@@ -223,3 +223,4 @@ Or download a public squad: @squad-creator *download-squad squad-name
 - **Script:** squad-generator.js (listLocal method)
 - **Create:** *create-squad
 - **Validate:** *validate-squad
+

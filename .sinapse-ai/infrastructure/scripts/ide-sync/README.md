@@ -216,3 +216,4 @@ Or rely on the pre-commit hook to auto-stage changes.
 
 - Story 6.19: IDE Command Auto-Sync System
 - Story TD-4: IDE Sync Pre-commit Auto-Stage
+

@@ -150,3 +150,4 @@ USING (id = ANY(get_user_tenant_ids()));
 CREATE POLICY "tenant_members_select" ON tenant_members
 FOR SELECT TO authenticated
 USING (tenant_id = ANY(get_user_tenant_ids()));
+

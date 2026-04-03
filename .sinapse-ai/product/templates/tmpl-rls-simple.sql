@@ -75,3 +75,4 @@ WITH CHECK (auth.uid() = user_id);
 -- );
 --
 -- CREATE INDEX idx_:table_name_user_id ON :table_name(user_id);
+

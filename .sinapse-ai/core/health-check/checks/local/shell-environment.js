@@ -116,3 +116,4 @@ class ShellEnvironmentCheck extends BaseCheck {
 }
 
 module.exports = ShellEnvironmentCheck;
+

@@ -329,3 +329,4 @@ class RegistrySyncer {
 }
 
 module.exports = { RegistrySyncer, inferRole, ROLE_MAP };
+

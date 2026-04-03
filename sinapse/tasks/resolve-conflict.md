@@ -118,3 +118,4 @@ Registrar a resolucao para evitar repeticao:
 - [ ] Resolucao aceita por ambas as squads
 - [ ] Precedente documentado
 - [ ] Action items claros e assignados
+

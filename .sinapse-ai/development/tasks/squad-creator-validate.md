@@ -157,3 +157,4 @@ async function validateSquad(options) {
 - **Dependencies:** squad-loader.js, squad-validator.js
 - **Schema:** .sinapse-ai/schemas/squad-schema.json
 - **Agent:** @squad-creator (Craft)
+

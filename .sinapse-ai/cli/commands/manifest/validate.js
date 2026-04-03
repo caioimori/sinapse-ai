@@ -64,3 +64,4 @@ function createValidateCommand() {
 module.exports = {
   createValidateCommand,
 };
+

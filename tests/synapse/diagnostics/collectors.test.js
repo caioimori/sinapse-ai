@@ -684,3 +684,4 @@ describe('uap-collector: collectUapBridgeStatus', () => {
     expect(result.checks).toHaveLength(2);
   });
 });
+

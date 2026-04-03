@@ -143,3 +143,4 @@ if (require.main === module) {
 
 module.exports = { filenameToCamelCase, processTaskFile };
 
+

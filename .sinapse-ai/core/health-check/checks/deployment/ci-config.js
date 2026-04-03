@@ -121,3 +121,4 @@ class CiConfigCheck extends BaseCheck {
 }
 
 module.exports = CiConfigCheck;
+

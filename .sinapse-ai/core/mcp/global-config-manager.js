@@ -367,3 +367,4 @@ module.exports = {
   getAvailableTemplates,
   getServerTemplate,
 };
+

@@ -450,3 +450,4 @@ sinapse squads search {keyword}
 ---
 
 _Guia do Usuário SINAPSE v4.0_
+

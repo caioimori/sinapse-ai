@@ -388,3 +388,4 @@ If seed fails:
 - Never TRUNCATE in production seeds
 - Test seeds in dev/staging first
 - Version seed files in git (supabase/seeds/)
+

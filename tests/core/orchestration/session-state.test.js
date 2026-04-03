@@ -747,3 +747,4 @@ describe('SessionState Migration (ADR-011)', () => {
     expect(loadedState).toBeNull();
   });
 });
+

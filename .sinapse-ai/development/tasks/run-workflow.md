@@ -385,3 +385,4 @@ All actions produce structured output with:
 - Current step details
 - Suggested next commands
 - Handoff prompt (when transitioning between agents)
+

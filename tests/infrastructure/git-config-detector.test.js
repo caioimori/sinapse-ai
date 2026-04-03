@@ -129,3 +129,4 @@ describe('GitConfigDetector — _getCurrentBranch() fallback chain', () => {
     expect(detector._getCurrentBranchExec).not.toHaveBeenCalled();
   });
 });
+

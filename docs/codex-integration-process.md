@@ -168,3 +168,4 @@ Se houver divergencia entre estes documentos, a ordem de verdade para operacao d
 2. scripts reais em `package.json`
 3. este documento
 4. docs de overview
+

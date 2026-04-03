@@ -63,3 +63,4 @@ pnpm-lock.yaml text eol=lf
 docs/** linguist-documentation
 *.yml linguist-detectable=false
 *.yaml linguist-detectable=false
+

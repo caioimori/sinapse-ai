@@ -349,3 +349,4 @@ _metadata:
       - key: "old_setting"
         replacement: "new_setting"
         since: "0.9.0"
+

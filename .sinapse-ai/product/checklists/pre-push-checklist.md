@@ -106,3 +106,4 @@ After completing the checklist:
 Only push when confident in quality.]]
 
 - [ ] I, the DevOps Agent, confirm that all quality gates have passed and the code is safe to push to remote.
+

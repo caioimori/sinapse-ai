@@ -245,3 +245,4 @@ Para adicionar ou atualizar documentação de workflows:
 ---
 
 *SINAPSE Workflows Documentation v1.0 - Documentação detalhada dos workflows de desenvolvimento*
+

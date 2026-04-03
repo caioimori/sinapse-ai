@@ -92,3 +92,4 @@ Domain now has {TOTAL} rules.
 
 *Add Rule — SYNAPSE CRUD Command C3*
 *Source: SYNAPSE-HOOK-SKILL-COMMAND-ANALYSIS.md section 2.3*
+

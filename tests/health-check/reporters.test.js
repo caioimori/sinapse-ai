@@ -536,3 +536,4 @@ describe('Reporter Integration', () => {
     expect(verboseReport).toBeDefined();
   });
 });
+

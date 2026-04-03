@@ -88,3 +88,4 @@ sessionStart()
     console.log(JSON.stringify({ status: 'error', error: error.message }));
     process.exit(0); // Exit 0 to not block Gemini
   });
+

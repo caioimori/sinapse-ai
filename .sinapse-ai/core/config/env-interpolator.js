@@ -120,3 +120,4 @@ module.exports = {
   lintEnvPatterns,
   ENV_VAR_PATTERN,
 };
+

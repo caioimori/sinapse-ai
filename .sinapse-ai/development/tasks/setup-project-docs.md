@@ -438,3 +438,4 @@ Deployment Configuration:
 - Tasks read project-specific values from `core-config.yaml`
 - For brownfield projects, existing configurations are preserved
 - Use `*analyze-brownfield` task first for complex existing projects
+

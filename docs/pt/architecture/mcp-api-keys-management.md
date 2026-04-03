@@ -244,3 +244,4 @@ Isso indica o bug de secrets. Use a solução hardcodeada no docker-mcp.yaml.
 ---
 
 **Mantenedor:** @devops (Gage)
+

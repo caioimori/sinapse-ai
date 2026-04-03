@@ -34,3 +34,4 @@ Write-Host "`n=== Phase 1 Migration Complete ===" -ForegroundColor Green
 Write-Host "Success: $successCount" -ForegroundColor Green
 Write-Host "Failed: $failCount" -ForegroundColor $(if ($failCount -gt 0) { 'Red' } else { 'Green' })
 
+

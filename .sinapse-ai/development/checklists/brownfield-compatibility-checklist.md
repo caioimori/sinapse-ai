@@ -112,3 +112,4 @@ npm run build  # if build exists
 
 *SINAPSE Brownfield Compatibility Checklist v1.0*
 *Story SINAPSE-DIFF-4.3.2*
+

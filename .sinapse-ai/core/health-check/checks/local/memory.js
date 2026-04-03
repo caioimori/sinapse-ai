@@ -134,3 +134,4 @@ class MemoryCheck extends BaseCheck {
 }
 
 module.exports = MemoryCheck;
+

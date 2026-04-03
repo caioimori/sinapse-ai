@@ -152,3 +152,4 @@ describe('RegistryProvider Integration — Module Exports', () => {
     expect(isCodeIntelAvailable()).toBe(false);
   });
 });
+

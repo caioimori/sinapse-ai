@@ -45,3 +45,4 @@ def send_event(event_type: str, data: dict[str, Any]) -> bool:
     except Exception:
         # Silent fail - never block Claude
         return False
+

@@ -126,3 +126,4 @@ class CloudRunAdapter extends EventEmitter {
 }
 
 module.exports = { CloudRunAdapter };
+

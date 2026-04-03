@@ -296,3 +296,4 @@ ${outputContent}`;
 }
 
 module.exports = PersonalizedOutputFormatter;
+

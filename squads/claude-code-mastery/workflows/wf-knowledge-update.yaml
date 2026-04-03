@@ -163,3 +163,4 @@ schedule:
     - "User runs *update-knowledge or *updates"
     - "Claude Code version change detected"
     - "User asks 'what is new in Claude Code?'"
+

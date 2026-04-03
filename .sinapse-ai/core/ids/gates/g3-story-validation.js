@@ -164,3 +164,4 @@ class G3StoryValidationGate extends VerificationGate {
 }
 
 module.exports = { G3StoryValidationGate };
+

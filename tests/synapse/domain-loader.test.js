@@ -590,3 +590,4 @@ describe('parseManifest — edge cases for comma-separated values', () => {
     expect(result.domains.MYDOM.recall).toEqual(['a', 'b']);
   });
 });
+

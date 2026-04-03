@@ -9,3 +9,4 @@ node .sinapse-ai/infrastructure/scripts/git-hooks/post-commit.js 2>/dev/null || 
 # IDS Registry Auto-Update (Story IDS-3)
 # Updates entity registry with committed file changes (async, non-blocking).
 node .sinapse-ai/hooks/ids-post-commit.js 2>/dev/null || true
+

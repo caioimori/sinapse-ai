@@ -339,3 +339,4 @@ if (require.main === module) {
     process.exit(results.compatible ? 0 : 1);
   });
 }
+

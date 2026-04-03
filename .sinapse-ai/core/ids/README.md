@@ -119,3 +119,4 @@ The script:
 ## Scalability
 
 v1 uses a single YAML file (supports up to ~1000 entities). When entityCount exceeds 1000, a v2 sharded-by-category format is planned (see ADR-IDS-001).
+

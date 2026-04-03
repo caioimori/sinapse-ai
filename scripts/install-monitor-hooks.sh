@@ -79,3 +79,4 @@ echo "║     export SINAPSE_MONITOR_URL=http://localhost:4001              ║"
 echo "║                                                                ║"
 echo "║  3. Start using Claude Code - events will be captured!         ║"
 echo "╚════════════════════════════════════════════════════════════════╝"
+

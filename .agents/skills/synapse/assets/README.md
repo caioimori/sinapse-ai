@@ -48,3 +48,4 @@ Or reference the templates directly when creating domains manually.
 ```
 
 For the complete KEY=VALUE format specification, see [../references/manifest.md](../references/manifest.md).
+

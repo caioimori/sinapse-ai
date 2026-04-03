@@ -532,3 +532,4 @@ tool:
       command: get_workspace_hierarchy
       expected_response: "Object with 'spaces' array"
       timeout_ms: 5000
+

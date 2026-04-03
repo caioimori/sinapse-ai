@@ -14,3 +14,4 @@ fi
 
 # Pass arguments to tracker
 node "$TRACKER_SCRIPT" usage "$@"
+

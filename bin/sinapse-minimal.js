@@ -37,3 +37,4 @@ child.on('error', (error) => {
   console.error('❌ Failed to start SINAPSE:', error.message);
   process.exit(1);
 });
+

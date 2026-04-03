@@ -77,3 +77,4 @@ stats:
 - **Registry not found:** Error message, exit
 - **Partial failure:** Continue batch, log errors, report count
 - **Write failure:** Atomic write prevents corruption (temp + rename)
+

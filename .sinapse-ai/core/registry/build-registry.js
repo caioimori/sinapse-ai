@@ -450,3 +450,4 @@ module.exports = {
   saveRegistry,
   REGISTRY_VERSION,
 };
+

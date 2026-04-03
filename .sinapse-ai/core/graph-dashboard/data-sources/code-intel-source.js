@@ -232,3 +232,4 @@ class CodeIntelSource {
 }
 
 module.exports = { CodeIntelSource, _classifyScript, _detectCategory };
+

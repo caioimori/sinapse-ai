@@ -733,3 +733,4 @@ ls -la .sinapse-ai/
 ## Documentação Relacionada
 
 - [FAQ](./faq.md)
+

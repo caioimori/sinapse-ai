@@ -18,3 +18,4 @@ A test agent for unit testing the SquadValidator.
 ## Tasks
 
 - `*test-task` - Execute a test task
+

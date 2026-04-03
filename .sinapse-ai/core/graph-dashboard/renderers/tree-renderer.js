@@ -117,3 +117,4 @@ module.exports = {
   UNICODE_CHARS,
   ASCII_CHARS,
 };
+

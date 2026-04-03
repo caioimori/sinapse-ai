@@ -323,3 +323,4 @@ When converting from markdown+frontmatter templates:
 5. Convert `{{placeholders}}` to proper variable syntax
 
 This specification ensures templates are both human-readable and machine-processable while maintaining the flexibility needed for complex document generation.
+

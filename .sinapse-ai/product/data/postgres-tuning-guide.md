@@ -298,3 +298,4 @@ SELECT pg_terminate_backend(pid);
 
 **Reviewer:** ________ **Date:** ________
 **Quality Gate:** [ ] PASS [ ] NEEDS REVIEW
+

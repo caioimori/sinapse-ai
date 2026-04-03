@@ -74,3 +74,4 @@ Examples:
 module.exports = {
   createMcpCommand,
 };
+

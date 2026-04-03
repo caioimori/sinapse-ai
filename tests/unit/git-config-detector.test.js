@@ -325,3 +325,4 @@ describe('GitConfigDetector', () => {
     });
   });
 });
+

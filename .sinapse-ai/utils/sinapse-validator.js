@@ -23,3 +23,4 @@ if (require.main === module) {
   // Pass through to the original script
   require('../infrastructure/scripts/sinapse-validator');
 }
+

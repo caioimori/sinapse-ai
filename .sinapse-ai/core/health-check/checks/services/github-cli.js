@@ -113,3 +113,4 @@ class GithubCliCheck extends BaseCheck {
 }
 
 module.exports = GithubCliCheck;
+

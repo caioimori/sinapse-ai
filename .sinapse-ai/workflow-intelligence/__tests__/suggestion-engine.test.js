@@ -435,3 +435,4 @@ describe('SuggestionEngine Performance', () => {
     expect(warmDuration).toBeLessThanOrEqual(coldDuration + 5);
   });
 });
+

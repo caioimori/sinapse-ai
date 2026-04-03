@@ -334,3 +334,4 @@ echo "~/.docker/mcp/" >> ~/.gitignore_global
 ---
 
 _Docker Gateway MCP Tutorial v1.0.0 - SINAPSE Framework_
+

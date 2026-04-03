@@ -140,3 +140,4 @@ class LockfileIntegrityCheck extends BaseCheck {
 }
 
 module.exports = LockfileIntegrityCheck;
+

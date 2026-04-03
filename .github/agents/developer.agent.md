@@ -35,3 +35,4 @@ Use `*` prefix for commands:
 
 ---
 *SINAPSE Agent - Synced from .sinapse-ai/development/agents/developer.md*
+

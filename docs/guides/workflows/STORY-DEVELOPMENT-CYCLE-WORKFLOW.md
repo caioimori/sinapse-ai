@@ -841,3 +841,4 @@ cat docs/stories/{story-file}.md | grep "status:"
 ---
 
 *Documentacao gerada automaticamente baseada no arquivo `story-development-cycle.yaml`*
+

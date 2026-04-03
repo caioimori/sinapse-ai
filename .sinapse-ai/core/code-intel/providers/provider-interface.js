@@ -115,3 +115,4 @@ const CAPABILITIES = [
 ];
 
 module.exports = { CodeIntelProvider, CAPABILITIES };
+

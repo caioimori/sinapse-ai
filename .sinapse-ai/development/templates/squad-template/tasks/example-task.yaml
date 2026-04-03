@@ -44,3 +44,4 @@ error_handling:
   on_validation_error: "Invalid input: {{error.message}}"
   on_process_error: "Processing failed: {{error.message}}"
   retry_count: 1
+

@@ -379,3 +379,4 @@ A: Sim, via config: `core-config.yaml` → `agentIdentity.greeting.contextDetect
 **Documento Atualizado:** 2025-01-15
 **Autor:** Quinn (QA) + Dex (Dev)
 **Story:** 6.1.2.5 - Contextual Agent Load System
+

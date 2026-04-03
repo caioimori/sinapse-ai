@@ -57,3 +57,4 @@ function _escapeMermaid(str) {
 }
 
 module.exports = { formatAsMermaid, _safeId, _escapeMermaid };
+

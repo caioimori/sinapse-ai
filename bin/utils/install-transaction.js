@@ -443,3 +443,4 @@ class InstallTransaction {
 }
 
 module.exports = { InstallTransaction, ERROR_TYPES, CRITICAL_ERRORS };
+

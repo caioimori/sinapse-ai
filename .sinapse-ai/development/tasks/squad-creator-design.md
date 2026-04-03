@@ -332,3 +332,4 @@ async function designSquad(options) {
 - **Schema:** squad-design-schema.json
 - **Integration:** *create-squad --from-design
 - **Story:** SQS-9 (Squad Designer)
+

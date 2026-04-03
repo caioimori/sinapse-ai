@@ -60,3 +60,4 @@ describe('ACT-12: Language delegated to Claude Code settings.json', () => {
     expect(config).not.toHaveProperty('language');
   });
 });
+

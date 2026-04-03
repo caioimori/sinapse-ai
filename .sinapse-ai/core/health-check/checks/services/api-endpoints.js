@@ -164,3 +164,4 @@ class ApiEndpointsCheck extends BaseCheck {
 }
 
 module.exports = ApiEndpointsCheck;
+

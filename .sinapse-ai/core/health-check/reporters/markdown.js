@@ -319,3 +319,4 @@ class MarkdownReporter {
 }
 
 module.exports = MarkdownReporter;
+

@@ -197,3 +197,4 @@ describeIfSynapse('SYNAPSE E2E: Regression Guards', () => {
     expect(result.metrics.per_layer).toBeDefined();
   });
 });
+

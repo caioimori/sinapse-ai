@@ -259,3 +259,4 @@ Content
     expect(hasSinapseMarkers(content)).toBe(false);
   });
 });
+

@@ -16,3 +16,4 @@ echo "Using your Claude Max subscription"
 echo ""
 
 claude --dangerously-skip-permissions "$@"
+

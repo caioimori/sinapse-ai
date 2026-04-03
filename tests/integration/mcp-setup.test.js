@@ -296,3 +296,4 @@ describe('MCP CLI Command Registration', () => {
     expect(helpInfo).toContain('mcp');
   });
 });
+

@@ -889,3 +889,4 @@ Os seguintes prompts sao usados para transicoes entre agentes:
 *Documentacao gerada automaticamente a partir de `.sinapse-ai/development/workflows/brownfield-ui.yaml`*
 
 *Ultima atualizacao: 2026-02-04*
+

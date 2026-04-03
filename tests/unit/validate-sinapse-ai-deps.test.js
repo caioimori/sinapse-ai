@@ -98,3 +98,4 @@ describe('doctor npm-packages check (INS-4.12)', () => {
     expect(content).toContain('INS-4.12');
   });
 });
+

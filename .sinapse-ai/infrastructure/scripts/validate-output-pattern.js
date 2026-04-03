@@ -211,3 +211,4 @@ class OutputPatternValidator {
 
 module.exports = OutputPatternValidator;
 
+

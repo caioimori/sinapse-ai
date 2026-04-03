@@ -325,3 +325,4 @@ Após completar o Epic 3, execute:
 _Handoff preparado por Quinn (@quality-gate) - Guardião da Qualidade_
 _Commit: 3fea6ca - feat(ade): complete Epic 1+2_
 _Data: 2026-01-28_
+

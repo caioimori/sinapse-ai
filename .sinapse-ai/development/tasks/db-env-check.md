@@ -258,3 +258,4 @@ If any check fails:
 1. Show clear error message
 2. Provide remediation steps
 3. Exit with non-zero status
+

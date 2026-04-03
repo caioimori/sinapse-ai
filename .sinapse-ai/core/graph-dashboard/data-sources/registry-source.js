@@ -104,3 +104,4 @@ class RegistrySource {
 }
 
 module.exports = { RegistrySource };
+

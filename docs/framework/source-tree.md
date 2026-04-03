@@ -884,3 +884,4 @@ Runtime state is persisted in `.sinapse/`:
 ---
 
 _This is an official SINAPSE framework standard. All file placement must follow this structure._
+

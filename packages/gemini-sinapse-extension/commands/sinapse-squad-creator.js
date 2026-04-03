@@ -4,3 +4,4 @@
 const { runAgentLauncher } = require('./lib/agent-launcher');
 
 process.exitCode = runAgentLauncher('squad-creator');
+

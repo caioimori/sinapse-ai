@@ -60,3 +60,4 @@ echo ""
 >&2 echo ""
 
 claude --dangerously-skip-permissions "$@"
+

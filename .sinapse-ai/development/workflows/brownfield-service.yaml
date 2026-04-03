@@ -242,3 +242,4 @@ workflow:
     architect_to_po: "Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for service integration safety."
     po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."
+

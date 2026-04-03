@@ -207,3 +207,4 @@ class CodeGraphProvider extends CodeIntelProvider {
 }
 
 module.exports = { CodeGraphProvider, TOOL_MAP };
+

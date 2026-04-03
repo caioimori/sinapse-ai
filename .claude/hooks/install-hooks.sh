@@ -39,3 +39,4 @@ echo "  .sinapse-ai/hooks/pre-commit-mmos-guard.sh"
 echo ""
 echo "To uninstall:"
 echo "  rm .git/hooks/pre-commit"
+

@@ -173,3 +173,4 @@ npm run prepublishOnly    # Pre-publish checks (lint + test + build)
 - Test the package locally with `npm link` before publishing
 - Peer dependencies should use wide version ranges (`>=17.0.0`)
 - Bundle size matters: use `bundlephobia` to check before release
+

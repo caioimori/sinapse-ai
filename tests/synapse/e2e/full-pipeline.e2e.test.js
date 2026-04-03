@@ -268,3 +268,4 @@ describeIfSynapse('SYNAPSE E2E: Full Pipeline', () => {
     expect(xml).toContain('[HANDOFF WARNING]');
   });
 });
+

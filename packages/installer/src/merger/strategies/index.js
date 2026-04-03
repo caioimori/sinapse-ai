@@ -109,3 +109,4 @@ module.exports = {
   MarkdownMerger,
   YamlMerger,
 };
+

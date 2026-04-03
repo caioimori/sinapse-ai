@@ -145,3 +145,4 @@ export async function GET(request: Request) {
 - Never store secrets in client-side code or `NEXT_PUBLIC_` variables
 - Use `loading.tsx` and `error.tsx` for route-level loading/error states
 - Prefer Server Actions for mutations over API routes when possible
+

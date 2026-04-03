@@ -308,3 +308,4 @@ class RegistryLoader {
 }
 
 module.exports = { RegistryLoader, DEFAULT_REGISTRY_PATH, EMPTY_REGISTRY };
+

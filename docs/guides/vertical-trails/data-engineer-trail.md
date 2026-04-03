@@ -314,3 +314,4 @@ CREATE POLICY "Users can update own data"
 
 *Trilha criada para Story SINAPSE-DIFF-4.3.1*
 *-- Dara, arquitetando dados*
+

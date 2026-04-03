@@ -157,3 +157,4 @@ class SecurityAdapter {
 }
 
 module.exports = { SecurityAdapter, Severity };
+

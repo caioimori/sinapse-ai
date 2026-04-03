@@ -251,3 +251,4 @@ console.log('\n' + '='.repeat(60));
 
 // Exit with error code if tests failed
 process.exit(testResults.failed > 0 ? 1 : 0);
+

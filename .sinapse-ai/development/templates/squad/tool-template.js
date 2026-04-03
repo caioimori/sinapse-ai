@@ -101,3 +101,4 @@ module.exports = {
   {{CAMELCASE_NAME}},
   getInfo,
 };
+

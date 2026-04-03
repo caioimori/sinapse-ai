@@ -137,3 +137,4 @@ turbo run test --affected          # Test only affected packages
 - When adding a new package, update `pnpm-workspace.yaml`
 - CI should use `turbo run test --affected` for faster builds
 - Never put secrets in shared packages; keep them in app-level `.env`
+

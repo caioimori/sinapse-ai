@@ -451,3 +451,4 @@ describe('Index Building', () => {
     expect(workers.every((w) => w.agents)).toBe(true);
   });
 });
+

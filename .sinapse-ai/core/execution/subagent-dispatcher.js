@@ -844,3 +844,4 @@ class SubagentDispatcher extends EventEmitter {
 
 module.exports = SubagentDispatcher;
 module.exports.SubagentDispatcher = SubagentDispatcher;
+

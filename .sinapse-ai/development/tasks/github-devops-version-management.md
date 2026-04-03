@@ -481,3 +481,4 @@ Called by `@github-devops` agent via `*version-check` command.
 - Respects conventional commits format
 - User always has final approval
 - Does NOT push to remote (that's done by *push command)
+

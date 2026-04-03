@@ -671,3 +671,4 @@ module.exports = {
   REPO_ROOT,
   REGISTRY_PATH
 };
+

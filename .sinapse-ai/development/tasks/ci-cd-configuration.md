@@ -762,3 +762,4 @@ sinapse ci-cd setup \
 - `pr-automation` - Help users create PRs with proper format
 - `setup-repository` - Initialize repository with best practices
 
+

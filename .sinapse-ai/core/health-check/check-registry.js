@@ -249,3 +249,4 @@ class CheckRegistry {
 }
 
 module.exports = CheckRegistry;
+

@@ -1257,3 +1257,4 @@ module.exports.TestAnalyzer = TestAnalyzer;
 module.exports.CoverageAnalyzer = CoverageAnalyzer;
 module.exports.TestRunner = TestRunner;
 module.exports.FRAMEWORKS = FRAMEWORKS;
+

@@ -68,3 +68,4 @@ Esta decisão foi substituída pela remoção completa do `isolated-vm` das depe
 
 - [isolated-vm#424 - Segmentation fault on Node 20 macos arm64](https://github.com/laverdet/isolated-vm/issues/424)
 - [isolated-vm releases](https://github.com/laverdet/isolated-vm/releases)
+

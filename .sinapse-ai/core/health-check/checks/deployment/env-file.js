@@ -107,3 +107,4 @@ class EnvFileCheck extends BaseCheck {
 }
 
 module.exports = EnvFileCheck;
+

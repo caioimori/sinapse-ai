@@ -349,3 +349,4 @@ SELECT 1 FROM protected_table LIMIT 1;
 → Consider rollback: `*rollback {snapshot}`  
 → Fix migration  
 → Retry
+

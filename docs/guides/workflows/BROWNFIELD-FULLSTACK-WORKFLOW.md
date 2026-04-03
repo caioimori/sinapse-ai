@@ -836,3 +836,4 @@ stateDiagram-v2
 ---
 
 *-- Atlas, decodificando complexidade em clareza*
+

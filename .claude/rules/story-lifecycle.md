@@ -143,3 +143,4 @@ issues:
 | File List, Dev Notes, checkboxes | @developer |
 | QA Results | @quality-gate only |
 | Change Log | Any agent (append only) |
+

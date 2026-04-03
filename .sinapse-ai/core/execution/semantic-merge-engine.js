@@ -1733,3 +1733,4 @@ module.exports.ChangeType = ChangeType;
 module.exports.MergeStrategy = MergeStrategy;
 module.exports.ConflictSeverity = ConflictSeverity;
 module.exports.MergeDecision = MergeDecision;
+

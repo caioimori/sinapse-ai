@@ -100,3 +100,4 @@ function _readJsonSafe(filePath) {
 }
 
 module.exports = { collectSessionStatus };
+

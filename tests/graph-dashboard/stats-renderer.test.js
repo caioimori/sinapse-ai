@@ -251,3 +251,4 @@ describe('stats-renderer', () => {
     });
   });
 });
+

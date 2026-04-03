@@ -150,3 +150,4 @@ Proceed with merge? (y/n)
 - For PRs from **trusted contributors** (e.g., @riaworks with prior merged security PRs), standard review may suffice for docs/test PRs
 - Always re-enable enforce_admins immediately after merge
 - Reference research: `docs/research/2026-02-21-ci-security-external-prs/`
+

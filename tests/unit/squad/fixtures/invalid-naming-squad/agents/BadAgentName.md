@@ -7,3 +7,4 @@ role: Testing
 # Bad Agent
 
 This agent has a PascalCase filename instead of kebab-case.
+

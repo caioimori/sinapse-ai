@@ -145,3 +145,4 @@ class NpmInstallCheck extends BaseCheck {
 }
 
 module.exports = NpmInstallCheck;
+

@@ -161,3 +161,4 @@ console.log(`  Grade: ${grade}`);
 console.log(`${'='.repeat(60)}\n`);
 
 process.exit(percentage >= 70 ? 0 : 1);
+

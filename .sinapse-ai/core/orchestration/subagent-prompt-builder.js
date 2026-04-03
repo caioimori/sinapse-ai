@@ -366,3 +366,4 @@ Return a structured result:
 }
 
 module.exports = SubagentPromptBuilder;
+

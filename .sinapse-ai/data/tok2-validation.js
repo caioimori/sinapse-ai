@@ -166,3 +166,4 @@ if (require.main === module) {
   const result = run();
   process.exit(result ? 0 : 1);
 }
+

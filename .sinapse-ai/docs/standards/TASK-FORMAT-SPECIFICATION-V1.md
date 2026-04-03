@@ -1412,3 +1412,4 @@ atomic_layer: Strategy    # ← ADDED
 - `TEMPLATE-SYSTEM-GUIDE.md` - Template design patterns
 - `TOOLS-AND-SCRIPTS-CATALOG.md` - Available tools reference
 
+

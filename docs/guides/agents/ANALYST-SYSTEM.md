@@ -671,3 +671,4 @@ template:
 ---
 
 *-- Atlas, investigando a verdade :mag_right:*
+

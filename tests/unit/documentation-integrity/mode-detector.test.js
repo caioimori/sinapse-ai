@@ -412,3 +412,4 @@ describe('Mode Detector', () => {
     });
   });
 });
+

@@ -132,3 +132,4 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/):
 
 [Unreleased]: https://github.com/owner/repo/compare/vX.Y.Z...HEAD
 [X.Y.Z]: https://github.com/owner/repo/compare/vX.Y.W...vX.Y.Z
+

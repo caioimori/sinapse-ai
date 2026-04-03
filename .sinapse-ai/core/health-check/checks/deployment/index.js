@@ -25,3 +25,4 @@ module.exports = {
   DockerConfigCheck,
   DeploymentReadinessCheck,
 };
+

@@ -224,3 +224,4 @@ if (shouldFix && !isValid) {
 }
 
 process.exit(isValid ? 0 : 1);
+

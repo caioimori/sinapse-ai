@@ -40,3 +40,4 @@ export { default as YAMLValidator, validateYAML } from './utils/yaml-validator.j
 // Version info
 export const version = '2.0.0';
 export const moduleName = 'core';
+

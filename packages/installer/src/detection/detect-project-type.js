@@ -79,3 +79,4 @@ function detectProjectType(targetDir = process.cwd()) {
 
 module.exports = { detectProjectType };
 
+

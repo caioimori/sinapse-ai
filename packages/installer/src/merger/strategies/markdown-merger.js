@@ -205,3 +205,4 @@ class MarkdownMerger extends BaseMerger {
 }
 
 module.exports = { MarkdownMerger };
+

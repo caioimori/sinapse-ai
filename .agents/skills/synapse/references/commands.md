@@ -116,3 +116,4 @@ Write-file star-cmds    -> COMMAND (*synapse create, *synapse add, *synapse togg
 | `.claude/commands/synapse/tasks/*.md` | Individual CRUD task workflows |
 | `.claude/commands/synapse/templates/` | Domain and manifest templates |
 | `.claude/commands/synapse/utils/manifest-parser-reference.md` | Parser format reference |
+

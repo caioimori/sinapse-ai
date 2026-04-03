@@ -33,3 +33,4 @@ After completing a triage session:
 - [ ] Triage report generated
 - [ ] Story GHIM-001 updated with triage count
 - [ ] High-priority issues (P1/P2) flagged for immediate attention
+

@@ -381,3 +381,4 @@ module.exports = {
   displayInstallationStatus,
   MCP_CONFIGS,
 };
+

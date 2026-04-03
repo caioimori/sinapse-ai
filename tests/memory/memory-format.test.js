@@ -63,3 +63,4 @@ describe('MEMORY.md Structured Format', () => {
     expect(activeSection.length).toBeGreaterThan(0);
   });
 });
+

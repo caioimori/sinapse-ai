@@ -143,3 +143,4 @@ function IssuesList({ issues = {}, onAction, maxItems = 10 }) {
 }
 
 export default IssuesList;
+

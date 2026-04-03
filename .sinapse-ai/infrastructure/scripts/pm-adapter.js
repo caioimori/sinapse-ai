@@ -132,3 +132,4 @@ class PMAdapter {
 }
 
 module.exports = { PMAdapter };
+

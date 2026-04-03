@@ -444,3 +444,4 @@ cat docs/stories/STORY-42/spec-critique.json
 ---
 
 _SINAPSE Autonomous Development Engine - Turning Ideas into Code Autonomously_
+

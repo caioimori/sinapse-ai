@@ -278,3 +278,4 @@ if (require.main === module) {
   const summary = getInstallationSummary(result);
   summary.forEach(line => console.log(line));
 }
+

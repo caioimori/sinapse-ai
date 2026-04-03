@@ -154,3 +154,4 @@ class GitInstallCheck extends BaseCheck {
 }
 
 module.exports = GitInstallCheck;
+

@@ -43,3 +43,4 @@ function StatusBadge({ status, severity, size = 'md', showIcon = true }) {
 }
 
 export default StatusBadge;
+

@@ -205,3 +205,4 @@ test('formal clone uses correct tokens', () => {
 - Components extend base system (don't replace)
 - Integration is bidirectional (pack ↔ design system)
 - Document in both pack README and design system docs
+

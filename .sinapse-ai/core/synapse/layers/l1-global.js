@@ -100,3 +100,4 @@ class L1GlobalProcessor extends LayerProcessor {
 }
 
 module.exports = L1GlobalProcessor;
+

@@ -366,3 +366,4 @@ npm install -g @anthropic/desktop-commander@latest
 ---
 
 _Guia Desktop Commander MCP v1.0.0 - SINAPSE Framework_
+

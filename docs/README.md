@@ -130,3 +130,4 @@ This documentation is part of SINAPSE, licensed under [MIT License](../LICENSE).
 ---
 
 _SINAPSE - Orchestrating AI for Better Software Development_
+

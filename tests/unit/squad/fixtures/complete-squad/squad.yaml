@@ -16,3 +16,4 @@ components:
 
 config:
   extends: extend
+

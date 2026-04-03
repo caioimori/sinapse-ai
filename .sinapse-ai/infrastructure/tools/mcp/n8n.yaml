@@ -549,3 +549,4 @@ tool:
       command: list_workflows
       expected_response: "Array of workflows"
       timeout_ms: 5000
+

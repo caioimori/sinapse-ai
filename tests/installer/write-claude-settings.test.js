@@ -179,3 +179,4 @@ describe('ACT-12: writeClaudeSettings and getExistingLanguage', () => {
     });
   });
 });
+

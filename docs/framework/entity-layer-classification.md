@@ -72,3 +72,4 @@ classifyLayer('docs/stories/story-1.md');  // => 'L4'
 ## Story Reference
 
 Story BM-5: Entity Registry Layer Classification (L1-L4)
+

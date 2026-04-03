@@ -98,3 +98,4 @@ describe('resolveDomainPath', () => {
     expect(result).toBe(path.join(synapsePath, 'workflow-story-dev'));
   });
 });
+

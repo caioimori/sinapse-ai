@@ -646,3 +646,4 @@ R: Após atualizar o SINAPSE ou quando agentes são modificados no core.
 ---
 
 *SINAPSE - Guia da Plataforma Claude Code v1.0*
+

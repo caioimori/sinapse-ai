@@ -794,3 +794,4 @@ ls -la docs/
 
 **Mantido por:** SINAPSE Development Team
 **Ultima Revisao:** 2026-02-04
+

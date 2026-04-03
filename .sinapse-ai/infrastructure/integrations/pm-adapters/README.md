@@ -57,3 +57,4 @@ All adapters extend `PMAdapter` and implement:
 4. Add to adapter map in factory
 
 See existing adapters for implementation examples.
+

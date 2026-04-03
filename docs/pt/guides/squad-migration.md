@@ -354,3 +354,4 @@ console.log(result);
 ---
 
 **Versão:** 1.0.0 | **Atualizado:** 2025-12-26 | **Story:** SQS-8
+

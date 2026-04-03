@@ -24,3 +24,4 @@ echo Then restart and login again with your Max account.
 echo.
 
 claude --dangerously-skip-permissions %*
+

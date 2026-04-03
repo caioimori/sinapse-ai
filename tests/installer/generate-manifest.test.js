@@ -186,3 +186,4 @@ describe('generate-install-manifest', () => {
     });
   });
 });
+

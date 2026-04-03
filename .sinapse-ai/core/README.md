@@ -227,3 +227,4 @@ Scripts that import these modules have been updated to reference the new paths.
 ---
 
 *SINAPSE Core Module v2.0.0*
+

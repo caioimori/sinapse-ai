@@ -522,3 +522,4 @@ await registry.load(true);
 ---
 
 _Guia de Service Discovery SINAPSE v4_
+

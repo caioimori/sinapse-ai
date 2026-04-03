@@ -304,3 +304,4 @@ module.exports = {
   createGateResult,
   DEFAULT_TIMEOUT_MS,
 };
+

@@ -445,3 +445,4 @@ describe('DEFAULT_TASK_DURATIONS', () => {
     expect(DEFAULT_TASK_DURATIONS.default).toBe(10);
   });
 });
+

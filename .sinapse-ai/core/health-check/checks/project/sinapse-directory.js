@@ -139,3 +139,4 @@ class SinapseDirectoryCheck extends BaseCheck {
 }
 
 module.exports = SinapseDirectoryCheck;
+

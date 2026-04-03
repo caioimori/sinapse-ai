@@ -12,3 +12,4 @@ function formatJson(output) {
 }
 
 module.exports = { formatJson };
+

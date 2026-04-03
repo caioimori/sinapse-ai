@@ -94,3 +94,4 @@ function createRegenerateCommand() {
 module.exports = {
   createRegenerateCommand,
 };
+

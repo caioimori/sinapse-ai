@@ -54,3 +54,4 @@ describe('gemini agent launcher', () => {
     expect(commandNameForAgent('dev')).toBe('/sinapse-dev');
   });
 });
+

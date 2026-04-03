@@ -267,3 +267,4 @@ git clone https://github.com/SinapseAI/sinapse-ai.git
 ---
 
 **Bem-vindo ao SINAPSE! Bom coding!**
+

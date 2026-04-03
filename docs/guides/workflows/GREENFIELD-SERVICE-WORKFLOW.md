@@ -782,3 +782,4 @@ export SINAPSE_DEBUG=true
 ---
 
 *Documentacao gerada automaticamente a partir de `.sinapse-ai/development/workflows/greenfield-service.yaml`*
+

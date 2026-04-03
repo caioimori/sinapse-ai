@@ -875,3 +875,4 @@ module.exports = {
   SESSION_STATE_FILENAME,
   CRASH_THRESHOLD_MINUTES,
 };
+

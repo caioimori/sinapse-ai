@@ -13,3 +13,4 @@ categories:
   - id: tasks
     description: "Executable task workflows"
     basePath: ".sinapse-ai/development/tasks"
+

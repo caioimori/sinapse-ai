@@ -124,3 +124,4 @@ function createSeedCommand() {
 module.exports = {
   createSeedCommand,
 };
+

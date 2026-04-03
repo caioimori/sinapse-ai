@@ -228,3 +228,4 @@ describe('schema-validation — enriched schemas', () => {
     });
   });
 });
+

@@ -40,3 +40,4 @@ Complete worktree workflow by merging changes back to base branch.
 - `*create-worktree` - Create worktree
 - `*remove-worktree` - Remove worktree
 - `*push` - Push merged changes
+

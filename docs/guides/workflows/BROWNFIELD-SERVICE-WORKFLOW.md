@@ -810,3 +810,4 @@ Os handoff prompts facilitam a transicao entre agentes:
 ---
 
 *Documento gerado a partir do workflow `brownfield-service.yaml` - SINAPSE Framework v2.2*
+

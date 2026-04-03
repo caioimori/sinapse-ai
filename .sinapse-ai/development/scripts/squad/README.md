@@ -110,3 +110,4 @@ npm test -- tests/unit/squad/squad-loader.test.js --coverage --collectCoverageFr
 | Version | Date | Description |
 |---------|------|-------------|
 | 1.0.0 | 2025-12-18 | Initial implementation (Story SQS-2) |
+

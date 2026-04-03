@@ -131,3 +131,4 @@ class G2StoryCreationGate extends VerificationGate {
 }
 
 module.exports = { G2StoryCreationGate };
+

@@ -297,3 +297,4 @@ module.exports = {
   supportsColors,
   colors,
 };
+

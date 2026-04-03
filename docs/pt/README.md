@@ -132,3 +132,4 @@ Esta documentação faz parte do SINAPSE, licenciado sob [Licença MIT](../../LI
 ---
 
 _SINAPSE - Orquestrando IA para Melhor Desenvolvimento de Software_
+

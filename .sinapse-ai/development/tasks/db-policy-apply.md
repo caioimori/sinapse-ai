@@ -651,3 +651,4 @@ If policy application fails:
 2. Verify auth.uid() is available (Supabase)
 3. Check for existing policies with same names
 4. Rollback migration if needed: `*rollback`
+

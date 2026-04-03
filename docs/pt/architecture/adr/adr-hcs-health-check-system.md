@@ -487,3 +487,4 @@ sequenceDiagram
 ---
 
 _Este ADR foi criado como parte da Investigação da Story HCS-1_
+

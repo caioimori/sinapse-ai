@@ -232,3 +232,4 @@ module.exports = {
   removeBOM,
   BINARY_EXTENSIONS,
 };
+

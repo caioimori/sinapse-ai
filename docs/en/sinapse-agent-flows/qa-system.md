@@ -24,3 +24,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 ---
 
 *SINAPSE Agent Flows - @quality-gate System v1.0*
+

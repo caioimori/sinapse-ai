@@ -723,3 +723,4 @@ outputs/                               # Runtime outputs (gitignored)
 ---
 
 _Este é um padrão oficial do framework SINAPSE. Todo posicionamento de arquivos deve seguir esta estrutura._
+

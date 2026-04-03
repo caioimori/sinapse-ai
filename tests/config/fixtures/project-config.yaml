@@ -17,3 +17,4 @@ performance_defaults:
 logging:
   level: "info"
   format: "json"
+

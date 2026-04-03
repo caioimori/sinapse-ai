@@ -51,3 +51,4 @@ sections:
       - Unused index detection policy
       - Reindex strategy, autovacuum considerations
     elicit: true
+

@@ -24,3 +24,4 @@ For complete documentation including flowcharts, command mappings, integrations,
 ---
 
 *SINAPSE Agent Flows - @squad-creator System v1.0*
+

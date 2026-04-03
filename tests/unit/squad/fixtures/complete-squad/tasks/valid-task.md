@@ -30,3 +30,4 @@ A valid test task that follows TASK-FORMAT-SPECIFICATION-V1.
 1. Receive input
 2. Process data
 3. Return result
+

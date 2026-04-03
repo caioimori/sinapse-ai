@@ -124,3 +124,4 @@ For the manifest entry template, see: `.claude/commands/synapse/templates/manife
 | `.synapse/manifest` | Central domain registry |
 | `.synapse/*` | Domain content files |
 | `.sinapse-ai/core/synapse/domain/domain-loader.js` | Domain parser (SYN-1) |
+

@@ -103,3 +103,4 @@ class BranchProtectionCheck extends BaseCheck {
 }
 
 module.exports = BranchProtectionCheck;
+

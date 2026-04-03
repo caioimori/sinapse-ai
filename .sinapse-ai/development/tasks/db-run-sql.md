@@ -611,3 +611,4 @@ Common errors:
 
 - [PostgreSQL psql Documentation](https://www.postgresql.org/docs/current/app-psql.html)
 - [PostgreSQL SQL Commands](https://www.postgresql.org/docs/current/sql-commands.html)
+

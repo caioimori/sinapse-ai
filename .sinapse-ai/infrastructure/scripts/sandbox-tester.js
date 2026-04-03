@@ -616,3 +616,4 @@ class SandboxTester {
 }
 
 module.exports = SandboxTester;
+

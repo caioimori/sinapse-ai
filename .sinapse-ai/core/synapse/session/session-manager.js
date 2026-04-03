@@ -402,3 +402,4 @@ module.exports = {
   ensureGitignore,
   SCHEMA_VERSION,
 };
+

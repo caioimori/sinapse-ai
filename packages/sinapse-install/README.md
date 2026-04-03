@@ -115,3 +115,4 @@ If you have an existing SINAPSE installation, the installer will:
 ## License
 
 MIT
+

@@ -31,3 +31,4 @@ docker mcp tools ls
 - `*add-mcp` - Add new MCP server
 - `*remove-mcp` - Remove MCP server
 - `*search-mcp` - Search MCP catalog
+

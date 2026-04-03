@@ -268,3 +268,4 @@ class PermissionMode {
 }
 
 module.exports = { PermissionMode };
+

@@ -599,3 +599,4 @@ class QualityGateManager {
 }
 
 module.exports = { QualityGateManager };
+

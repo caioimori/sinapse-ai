@@ -271,3 +271,4 @@ describe('check-registry', () => {
     });
   });
 });
+

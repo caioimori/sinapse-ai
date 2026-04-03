@@ -133,3 +133,4 @@ describe('RegistrySource', () => {
     });
   });
 });
+

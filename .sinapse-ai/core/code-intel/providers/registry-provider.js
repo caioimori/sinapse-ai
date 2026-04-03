@@ -513,3 +513,4 @@ class RegistryProvider extends CodeIntelProvider {
 }
 
 module.exports = { RegistryProvider, LAYER_PRIORITY };
+

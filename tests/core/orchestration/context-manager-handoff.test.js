@@ -157,3 +157,4 @@ describe('ContextManager structured handoff package', () => {
     expect(summary.deliveryConfidence.score).toBeGreaterThanOrEqual(0);
   });
 });
+

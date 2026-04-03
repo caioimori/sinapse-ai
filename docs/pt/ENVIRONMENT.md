@@ -138,3 +138,4 @@ Ao adicionar novas variáveis de ambiente:
 
 **Última Atualização:** 2025-11-12
 **Story:** 4.8 - Repository Open-Source Migration
+

@@ -830,3 +830,4 @@ module.exports.SecurityAnalyzer = SecurityAnalyzer;
 module.exports.CodeQualityAnalyzer = CodeQualityAnalyzer;
 module.exports.UXAnalyzer = UXAnalyzer;
 module.exports.ArchitectureAnalyzer = ArchitectureAnalyzer;
+

@@ -393,3 +393,4 @@ describe('payload reduction targets', () => {
     expect(result.reduction_pct).toBeGreaterThanOrEqual(50);
   });
 });
+

@@ -210,3 +210,4 @@ class DiskSpaceCheck extends BaseCheck {
 }
 
 module.exports = DiskSpaceCheck;
+

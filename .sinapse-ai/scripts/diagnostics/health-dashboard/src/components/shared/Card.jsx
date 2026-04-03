@@ -23,3 +23,4 @@ function Card({ title, subtitle, children, className = '', onClick, variant = 'd
 }
 
 export default Card;
+

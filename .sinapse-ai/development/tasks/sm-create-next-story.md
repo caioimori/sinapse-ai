@@ -478,3 +478,4 @@ custom_fields:
   - Next steps: For Complex stories, suggest the user carefully review the story draft and also optionally have the PO run the task `sinapse-ai/tasks/validate-next-story`
 
 **ClickUp Integration Note:** This task now includes Epic verification (Section 5.1), ClickUp story task creation (Section 5.3), and automatic frontmatter updates (Section 5.4). Stories are created as subtasks of their parent Epic in ClickUp's Backlog list. If Epic verification or ClickUp sync fails, the story file will still be created locally with a warning message.
+

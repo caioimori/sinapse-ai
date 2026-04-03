@@ -125,3 +125,4 @@ Append to `.synapse/manifest` using the template from `.claude/commands/synapse/
 
 *Create Domain — SYNAPSE CRUD Command C2*
 *Source: SYNAPSE-HOOK-SKILL-COMMAND-ANALYSIS.md section 2.3*
+

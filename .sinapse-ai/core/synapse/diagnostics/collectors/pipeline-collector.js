@@ -73,3 +73,4 @@ function collectPipelineSimulation(promptCount, activeAgentId, manifest) {
 }
 
 module.exports = { collectPipelineSimulation };
+

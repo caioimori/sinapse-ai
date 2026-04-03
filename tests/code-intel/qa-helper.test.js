@@ -477,3 +477,4 @@ describe('QaHelper', () => {
     });
   });
 });
+

@@ -148,3 +148,4 @@ class ConflictsCheck extends BaseCheck {
 }
 
 module.exports = ConflictsCheck;
+

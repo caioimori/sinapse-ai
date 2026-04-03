@@ -138,3 +138,4 @@ UNION ALL
 SELECT 'categories', COUNT(*) FROM categories
 UNION ALL
 SELECT 'roles', COUNT(*) FROM roles;
+

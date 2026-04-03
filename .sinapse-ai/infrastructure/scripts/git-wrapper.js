@@ -441,3 +441,4 @@ ${JSON.stringify(metadata, null, 2)}`;
 }
 
 module.exports = GitWrapper;
+

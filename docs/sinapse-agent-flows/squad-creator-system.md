@@ -696,3 +696,4 @@ flowchart LR
 ---
 
 *-- Craft, sempre estruturando*
+

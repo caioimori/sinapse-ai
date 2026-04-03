@@ -486,3 +486,4 @@ describe('ResultCache', () => {
     expect(stats.ttl).toBeDefined();
   });
 });
+

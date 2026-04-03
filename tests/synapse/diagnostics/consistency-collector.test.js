@@ -142,3 +142,4 @@ describe('collectConsistencyMetrics', () => {
     expect(MAX_TIMESTAMP_GAP_MS).toBe(10 * 60 * 1000); // 10 minutes
   });
 });
+

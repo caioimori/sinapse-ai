@@ -146,3 +146,4 @@ class DependenciesCheck extends BaseCheck {
 }
 
 module.exports = DependenciesCheck;
+

@@ -46,3 +46,4 @@ Approved specification documents and stories ready for story-development-cycle.
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/spec-pipeline-workflow.md).*
+

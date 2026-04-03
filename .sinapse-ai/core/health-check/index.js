@@ -373,3 +373,4 @@ module.exports = {
   ReporterManager,
   DEFAULT_CONFIG,
 };
+

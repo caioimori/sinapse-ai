@@ -365,3 +365,4 @@ workflow:
       {{if missing_context}}: May need to gather additional context from user during story creation.
 
     complete: "All planning artifacts validated and development can begin. Stories will be created based on available documentation format."
+

@@ -209,3 +209,4 @@ describe('AC8: Helper Functions Return Real Data with RegistryProvider', () => {
     });
   });
 });
+

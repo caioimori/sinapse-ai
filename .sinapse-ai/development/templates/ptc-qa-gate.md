@@ -98,3 +98,4 @@ fi
 - Passing checks show only "PASS" (minimal context)
 - Exit code 1 = at least one check failed
 - This template can be extended with additional checks (build, coverage, etc.)
+

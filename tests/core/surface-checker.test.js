@@ -479,3 +479,4 @@ describe('shouldSurface() convenience function', () => {
     expect(result.should_surface).toBe(false);
   });
 });
+

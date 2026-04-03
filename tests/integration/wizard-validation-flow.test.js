@@ -78,3 +78,4 @@ describe('Wizard Validation Flow', () => {
     expect(progressCalls[progressCalls.length - 1].step).toBe('complete');
   });
 });
+

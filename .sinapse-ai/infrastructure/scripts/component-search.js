@@ -275,3 +275,4 @@ class ComponentSearch {
 }
 
 module.exports = ComponentSearch;
+

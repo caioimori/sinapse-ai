@@ -127,3 +127,4 @@ class DiffGenerator {
 }
 
 module.exports = DiffGenerator;
+

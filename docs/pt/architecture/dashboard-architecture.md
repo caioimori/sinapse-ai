@@ -926,3 +926,4 @@ export { StoryDetailModal } from './StoryDetailModal';
 ---
 
 _Documentação gerada por @architect (Aria) - SINAPSE Core v2.0_
+

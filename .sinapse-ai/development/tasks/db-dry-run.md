@@ -291,3 +291,4 @@ Common errors and fixes:
 **"syntax error"**
 - Check SQL syntax
 - Verify PostgreSQL version compatibility
+

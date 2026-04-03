@@ -33,3 +33,4 @@ Disable and remove an MCP server from the toolkit configuration.
 
 - `*list-mcps` - List enabled MCPs
 - `*add-mcp` - Add MCP server
+

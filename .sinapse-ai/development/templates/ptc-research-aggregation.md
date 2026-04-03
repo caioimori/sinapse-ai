@@ -92,3 +92,4 @@ echo -e "$OUTPUT"
 - Only the aggregated summary enters context
 - For web research (EXA, WebSearch), run those as separate tool calls first,
   then use this template to aggregate the saved results
+

@@ -101,3 +101,4 @@ tool:
     - "Rate limits apply based on API plan"
     - "Search quality depends on query specificity"
     - "Some websites may block crawling"
+
