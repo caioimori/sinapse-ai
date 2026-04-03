@@ -1,5 +1,7 @@
 ---
-paths: .sinapse-ai/development/agents/**
+paths:
+  - .sinapse-ai/development/agents/**
+  - .claude/agent-memory/**
 ---
 
 # Agent Memory Imports

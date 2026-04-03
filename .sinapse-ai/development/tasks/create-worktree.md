@@ -3,7 +3,7 @@
 **Task ID:** create-worktree
 **Version:** 1.0
 **Created:** 2026-01-28 (Story 1.3)
-**Agent:** @devops (Gage)
+**Agent:** @devops (Pipeline)
 
 ---
 

@@ -158,7 +158,7 @@ Report violations to: conduct@SinapseAI.com
 
 1. Check if it exists in [Ideas](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas)
 2. If new, [share your idea](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas)
-3. Read our [Feature Request Process](docs/FEATURE_PROCESS.md) for detailed guidelines
+3. Read our [Feature Request Process](docs/feature-process.md) for detailed guidelines
 
 ## Project Roadmap
 
@@ -184,7 +184,7 @@ We have a structured process for proposing new features:
 3. **Community Voting** - Use :+1: reactions to show support
 4. **Implementation** - Approved ideas move to our backlog
 
-See [Feature Request Process](docs/FEATURE_PROCESS.md) for complete details.
+See [Feature Request Process](docs/feature-process.md) for complete details.
 
 ## Resources
 

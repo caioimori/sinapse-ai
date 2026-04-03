@@ -2,7 +2,7 @@
 
 ## Delegation Matrix
 
-### @devops (Gage) — EXCLUSIVE Authority
+### @devops (Pipeline) — EXCLUSIVE Authority
 
 | Operation | Exclusive? | Other Agents |
 |-----------|-----------|--------------|
@@ -12,7 +12,7 @@
 | CI/CD pipeline management | YES | BLOCKED |
 | Release management | YES | BLOCKED |
 
-### @project-lead (Morgan) — Epic Orchestration
+### @project-lead (Beacon) — Epic Orchestration
 
 | Operation | Exclusive? | Delegated From |
 |-----------|-----------|---------------|
@@ -22,7 +22,7 @@
 | Requirements gathering | YES | — |
 | Spec writing (spec pipeline) | YES | — |
 
-### @product-lead (Pax) — Story Validation
+### @product-lead (Axis) — Story Validation
 
 | Operation | Exclusive? | Details |
 |-----------|-----------|---------|
@@ -31,14 +31,14 @@
 | Epic context management | YES | — |
 | Backlog prioritization | YES | — |
 
-### @sprint-lead (River) — Story Creation
+### @sprint-lead (Sync) — Story Creation
 
 | Operation | Exclusive? | Details |
 |-----------|-----------|---------|
 | `*draft` / `*create-story` | YES | From epic/PRD |
 | Story template selection | YES | — |
 
-### @developer (Dex) — Implementation
+### @developer (Pixel) — Implementation
 
 | Allowed | Blocked |
 |---------|---------|
@@ -47,7 +47,7 @@
 | `git stash`, `git diff`, `git log` | MCP management |
 | Story file updates (File List, checkboxes) | Story file updates (AC, scope, title) |
 
-### @architect (Aria) — Design Authority
+### @architect (Stratum) — Design Authority
 
 | Owns | Delegates To |
 |------|-------------|
@@ -57,7 +57,7 @@
 | Integration patterns | @data-engineer (query optimization) |
 | Complexity assessment | — |
 
-### @data-engineer (Dara) — Database
+### @data-engineer (Tensor) — Database
 
 | Owns (delegated from @architect) | Does NOT Own |
 |----------------------------------|-------------|

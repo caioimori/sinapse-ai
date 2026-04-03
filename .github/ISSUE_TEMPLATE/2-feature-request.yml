@@ -1,114 +1,77 @@
-name: Feature Request
-description: Suggest a new feature or improvement for sinapse-ai
+name: Solicitacao de Feature
+description: Sugerir uma nova funcionalidade ou melhoria para o SINAPSE-AI
 title: "[Feature]: "
-labels: ["type: feature", "status: needs-triage"]
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a feature! Please describe your idea clearly so we can evaluate it.
+        Obrigado por sugerir uma feature! Descreva sua ideia claramente para que possamos avaliar.
 
   - type: textarea
-    id: summary
+    id: description
     attributes:
-      label: Summary
-      description: A clear and concise description of the feature.
-      placeholder: Describe the feature...
+      label: Descricao da Feature
+      description: Uma descricao clara e concisa da funcionalidade.
+      placeholder: Descreva a feature...
     validations:
       required: true
 
   - type: textarea
     id: problem
     attributes:
-      label: Problem Statement
-      description: What problem does this solve? What use case does this enable?
-      placeholder: "Is your feature request related to a problem? Describe it..."
+      label: Problema que Resolve
+      description: Qual problema esta feature resolve? Qual caso de uso ela habilita?
+      placeholder: "Sua solicitacao esta relacionada a um problema? Descreva..."
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Proposed Solution
-      description: How should this feature work? What API or interface would you expect?
-    validations:
-      required: true
-
-  - type: dropdown
-    id: area
-    attributes:
-      label: Package / Area
-      description: Which part of sinapse-ai should this feature belong to?
-      options:
-        - "Core Framework (.sinapse-ai/core/)"
-        - "Installer (packages/installer/)"
-        - "CLI (bin/, packages/sinapse-pro-cli/)"
-        - "SYNAPSE Context Engine"
-        - "Health Check System"
-        - "Agent System (.sinapse-ai/development/agents/)"
-        - "Task System (.sinapse-ai/development/tasks/)"
-        - "Memory / Knowledge Base"
-        - "Pro Features"
-        - "Documentation"
-        - "New package / module"
-    validations:
-      required: true
-
-  - type: textarea
-    id: code-example
-    attributes:
-      label: Code Example (Optional)
-      description: What would the API look like?
-      render: javascript
+      label: Solucao Proposta (opcional)
+      description: Como esta feature deveria funcionar? Qual API ou interface voce esperaria?
 
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives Considered
-      description: Other approaches you've considered or existing workarounds.
+      label: Alternativas Consideradas (opcional)
+      description: Outras abordagens que voce considerou ou workarounds existentes.
 
   - type: dropdown
-    id: impact
+    id: area
     attributes:
-      label: Impact Assessment
+      label: Area / Pacote
+      description: Em qual parte do SINAPSE-AI esta feature deveria pertencer?
       options:
-        - "New functionality - backward compatible"
-        - "Enhancement to existing feature"
-        - "Performance improvement"
-        - "Developer experience improvement"
-        - "Breaking change - requires major version bump"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      description: How important is this feature to you?
-      options:
-        - "Critical - Blocking my use case"
-        - "High - Would significantly improve my workflow"
-        - "Medium - Nice to have"
-        - "Low - Minor improvement"
-      default: 2
+        - "Core Framework (.sinapse-ai/core/)"
+        - "Installer (packages/installer/)"
+        - "CLI (bin/)"
+        - "SYNAPSE Context Engine"
+        - "Health Check System"
+        - "Sistema de Agentes (.sinapse-ai/development/agents/)"
+        - "Sistema de Tasks (.sinapse-ai/development/tasks/)"
+        - "Memory / Knowledge Base"
+        - "Documentacao"
+        - "Novo pacote / modulo"
     validations:
       required: true
 
   - type: checkboxes
     id: contribution
     attributes:
-      label: Community Contribution
+      label: Contribuicao da Comunidade
       options:
-        - label: "I would be willing to contribute to implementing this"
-        - label: "I can help with documentation"
-        - label: "I can help with testing"
+        - label: "Estou disposto a contribuir com a implementacao desta feature"
+        - label: "Posso ajudar com documentacao"
+        - label: "Posso ajudar com testes"
 
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: "I have searched existing issues and feature requests"
+        - label: "Busquei issues e feature requests existentes"
           required: true
-        - label: "I have provided a clear use case for this feature"
+        - label: "Forneci um caso de uso claro para esta feature"
           required: true

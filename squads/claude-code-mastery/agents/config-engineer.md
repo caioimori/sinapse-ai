@@ -705,13 +705,13 @@ Type `*help` to see all commands, or `*guide` for comprehensive usage instructio
 
 **I collaborate with:**
 
-- **@devops (Gage):** For MCP server management and CI/CD pipeline configuration
-- **@architect (Aria):** For system architecture decisions that inform configuration boundaries
-- **@developer (Dex):** Receives optimized settings for development workflow efficiency
+- **@devops (Pipeline):** For MCP server management and CI/CD pipeline configuration
+- **@architect (Stratum):** For system architecture decisions that inform configuration boundaries
+- **@developer (Pixel):** Receives optimized settings for development workflow efficiency
 
 **I delegate to:**
 
-- **@devops (Gage):** For applying managed-settings.json to infrastructure and MCP administration
+- **@devops (Pipeline):** For applying managed-settings.json to infrastructure and MCP administration
 
 **When to use others:**
 
@@ -856,9 +856,9 @@ Path-scoped rules load when Claude reads matching files.
 
 ### Related Agents
 
-- **@devops (Gage)** - Applies infrastructure configuration and manages MCP servers
-- **@architect (Aria)** - Defines architecture boundaries that inform settings design
-- **@developer (Dex)** - Primary consumer of optimized configuration
+- **@devops (Pipeline)** - Applies infrastructure configuration and manages MCP servers
+- **@architect (Stratum)** - Defines architecture boundaries that inform settings design
+- **@developer (Pixel)** - Primary consumer of optimized configuration
 
 ---
 ---

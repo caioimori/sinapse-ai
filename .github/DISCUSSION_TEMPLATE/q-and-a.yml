@@ -1,85 +1,67 @@
-title: "[Q&A] "
+title: "[Pergunta] "
 labels:
   - question
 body:
   - type: markdown
     attributes:
       value: |
-        ## 🙏 Ask a Question
-        Have a question about SINAPSE? Ask here and the community will help!
+        ## Faca sua Pergunta
+        Tem uma duvida sobre o SINAPSE-AI? Pergunte aqui e a comunidade vai ajudar!
 
-        **Before posting:**
-        - Check existing discussions and documentation
-        - Search for similar questions
-        - Include relevant code examples
-
-  - type: dropdown
-    id: repo-scope
-    attributes:
-      label: Which repository is this about?
-      description: Select the repository your question relates to
-      options:
-        - sinapse-ai (Core Framework, Agents, Tasks)
-        - sinapse-squads (ETL Squad, Creator Squad)
-        - mcp-ecosystem (Docker MCP Toolkit, IDE Configs, Presets)
-        - General / Multiple repos
-    validations:
-      required: true
+        **Antes de postar:**
+        - Verifique discussoes e documentacao existentes
+        - Busque perguntas similares
+        - Inclua exemplos de codigo relevantes
 
   - type: dropdown
     id: question-type
     attributes:
-      label: Question Type
-      description: What kind of help do you need?
+      label: Tipo de Pergunta
+      description: Que tipo de ajuda voce precisa?
       options:
-        - How do I...? (Usage question)
-        - Why does...? (Understanding behavior)
-        - What is the best way to...? (Best practices)
-        - Is it possible to...? (Capability question)
-        - Other
+        - Como eu faco...? (Pergunta de uso)
+        - Por que...? (Entender comportamento)
+        - Qual a melhor forma de...? (Boas praticas)
+        - E possivel...? (Pergunta sobre capacidade)
+        - Outro
     validations:
       required: true
 
   - type: textarea
     id: question
     attributes:
-      label: Your Question
-      description: Be as specific as possible
+      label: Sua Pergunta
+      description: Seja o mais especifico possivel
       placeholder: |
-        Describe your question in detail...
+        Descreva sua pergunta em detalhes...
 
-        Include:
-        - What you're trying to achieve
-        - What you've already tried
-        - Any error messages or unexpected behavior
+        Inclua:
+        - O que voce esta tentando fazer
+        - O que voce ja tentou
+        - Mensagens de erro ou comportamento inesperado
     validations:
       required: true
 
   - type: textarea
     id: code-example
     attributes:
-      label: Code Example (if applicable)
-      description: Share relevant code to help us understand your question
+      label: Exemplo de Codigo (se aplicavel)
+      description: Compartilhe codigo relevante para nos ajudar a entender sua pergunta
       render: javascript
-      placeholder: |
-        // Your code here
-        const { SINAPSE } = require('sinapse-ai/workspace');
-
-        // ...
 
   - type: textarea
     id: context
     attributes:
-      label: Additional Context
-      description: Any other relevant information
+      label: Contexto Adicional
+      description: Qualquer informacao relevante adicional
       placeholder: |
-        - OS: Windows/macOS/Linux
-        - Node.js version:
-        - SINAPSE version:
-        - IDE: VS Code/Cursor/Other
+        - SO: Windows/macOS/Linux
+        - Versao do Node.js:
+        - Versao do SINAPSE:
+        - IDE: Claude Code/Codex/Outro
 
   - type: markdown
     attributes:
       value: |
         ---
-        **Tip:** Questions marked as answered help future users! If your question is resolved, please mark the best answer.
+        **Dica:** Perguntas marcadas como respondidas ajudam futuros usuarios! Se sua pergunta for resolvida, marque a melhor resposta.

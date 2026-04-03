@@ -28,7 +28,7 @@ Estabilização do framework principal e infraestrutura da comunidade:
 
 - [x] Configuração do GitHub Discussions
 - [x] Guias de contribuição (CONTRIBUTING.md, COMMUNITY.md)
-- [x] Processo de solicitação de features (FEATURE_PROCESS.md)
+- [x] Processo de solicitação de features (feature-process.md)
 - [x] Roadmap público (este documento!)
 - [ ] Registro de Squads
 
@@ -75,7 +75,7 @@ Para features significativas que precisam de design detalhado, [submeta um RFC](
 
 ### 4. Contribua Diretamente
 
-Encontrou algo que quer implementar? Veja nosso [Guia de Contribuição](CONTRIBUTING-PT.md) e [Processo de Features](docs/FEATURE_PROCESS.md).
+Encontrou algo que quer implementar? Veja nosso [Guia de Contribuição](CONTRIBUTING-PT.md) e [Processo de Features](docs/feature-process.md).
 
 ## Changelog
 

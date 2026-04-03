@@ -62,6 +62,11 @@ function scanStagedFiles(files) {
       continue;
     }
 
+    // Skip security test files (they contain intentional fake patterns for testing detection)
+    if (filePath.startsWith('tests/security/') && filePath.endsWith('.test.js')) {
+      continue;
+    }
+
     const content = readStagedFile(filePath);
     const matches = findSecretMatches(content);
     for (const match of matches) {

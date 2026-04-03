@@ -311,7 +311,7 @@ optimizations:
 story: WIS-3
 version: 1.0.0
 created: 2025-12-25
-author: "@developer (Dex)"
+author: "@developer (Pixel)"
 dependencies:
   modules:
     - workflow-intelligence (from WIS-2)

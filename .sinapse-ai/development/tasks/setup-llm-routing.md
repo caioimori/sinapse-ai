@@ -4,7 +4,7 @@
 **Version:** 1.1.0
 **Created:** 2025-12-12
 **Updated:** 2025-12-14
-**Agent:** @developer (Dex)
+**Agent:** @developer (Pixel)
 **Location:** .sinapse-ai/development/tasks/setup-llm-routing.md
 
 ---

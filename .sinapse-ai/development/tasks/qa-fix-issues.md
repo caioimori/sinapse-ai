@@ -675,7 +675,7 @@ metadata:
   story: '6.4'
   epic: 'Epic 6 - QA Evolution'
   created: '2026-01-29'
-  author: '@developer (Dex)'
+  author: '@developer (Pixel)'
   version: '1.0.0'
   tags:
     - qa-loop

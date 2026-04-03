@@ -181,6 +181,6 @@ Fix validation issues in tech preset {name}.md
 
 ## Related
 
-- **Agent:** @architect (Aria)
+- **Agent:** @architect (Stratum)
 - **Location:** .sinapse-ai/data/tech-presets/
 - **Similar:** validate-squad (validation pattern reference)

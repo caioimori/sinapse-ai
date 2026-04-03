@@ -91,4 +91,4 @@ All commands apply graceful degradation:
 
 ---
 
-*IDS-7 | Created 2026-02-10 by @developer (Dex)*
+*IDS-7 | Created 2026-02-10 by @developer (Pixel)*

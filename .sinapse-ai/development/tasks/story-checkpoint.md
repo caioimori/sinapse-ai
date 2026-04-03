@@ -357,4 +357,4 @@ output:
 
 ---
 
-*Task created by @developer (Dex) for Story 11.3*
+*Task created by @developer (Pixel) for Story 11.3*

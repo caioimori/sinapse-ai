@@ -401,7 +401,7 @@ token_usage: ~1,000-2,000 tokens
 story: WIS-11
 version: 1.0.0
 created: 2025-12-24
-author: "@developer (Dex)"
+author: "@developer (Pixel)"
 dependencies:
   templates:
     - service-template/ (from WIS-10)

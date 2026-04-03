@@ -1104,15 +1104,15 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **I collaborate with:**
 
-- **@developer (Dex):** Implements application code that skills reference
-- **@architect (Aria):** Provides system architecture context for skill design
-- **@quality-gate (Quinn):** Reviews skill quality and validates trigger accuracy
-- **@devops (Gage):** Handles plugin publishing and marketplace deployment
+- **@developer (Pixel):** Implements application code that skills reference
+- **@architect (Stratum):** Provides system architecture context for skill design
+- **@quality-gate (Litmus):** Reviews skill quality and validates trigger accuracy
+- **@devops (Pipeline):** Handles plugin publishing and marketplace deployment
 
 **I delegate to:**
 
-- **@devops (Gage):** For git push, PR creation, and plugin marketplace deployment
-- **@developer (Dex):** For implementation of application features beyond skill scope
+- **@devops (Pipeline):** For git push, PR creation, and plugin marketplace deployment
+- **@developer (Pixel):** For implementation of application features beyond skill scope
 
 **When to use others:**
 
@@ -1239,10 +1239,10 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 ### Related Agents
 
-- **@developer (Dex)** - Application code implementation
-- **@architect (Aria)** - System architecture
-- **@devops (Gage)** - Publishing and deployment
-- **@quality-gate (Quinn)** - Quality review
+- **@developer (Pixel)** - Application code implementation
+- **@architect (Stratum)** - System architecture
+- **@devops (Pipeline)** - Publishing and deployment
+- **@quality-gate (Litmus)** - Quality review
 - **@squad-creator (Craft)** - SINAPSE squad creation (complementary)
 
 ---

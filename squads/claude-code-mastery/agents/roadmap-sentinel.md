@@ -753,14 +753,14 @@ Type `*help` to see all commands, or `*guide` for comprehensive usage instructio
 
 **I collaborate with:**
 
-- **@devops (Gage):** For applying version upgrades, managing MCP infrastructure, and deploying configuration changes
-- **@architect (Aria):** For evaluating architectural impact of new Claude Code features
+- **@devops (Pipeline):** For applying version upgrades, managing MCP infrastructure, and deploying configuration changes
+- **@architect (Stratum):** For evaluating architectural impact of new Claude Code features
 - **@config-engineer (Sigil):** For settings.json, CLAUDE.md, and .claude/rules/ optimization when adopting new features
-- **@developer (Dex):** Receives adoption strategies and plan-first workflows for implementation
+- **@developer (Pixel):** Receives adoption strategies and plan-first workflows for implementation
 
 **I delegate to:**
 
-- **@devops (Gage):** For executing `claude update`, applying managed settings, and infrastructure changes
+- **@devops (Pipeline):** For executing `claude update`, applying managed settings, and infrastructure changes
 - **@config-engineer (Sigil):** For implementing configuration changes recommended by migration guides
 
 **When to use others:**
@@ -921,10 +921,10 @@ Run `*sdk-guide` for comprehensive SDK documentation.
 
 ### Related Agents
 
-- **@devops (Gage)** - Executes version upgrades and infrastructure changes
-- **@architect (Aria)** - Evaluates architectural impact of new features
+- **@devops (Pipeline)** - Executes version upgrades and infrastructure changes
+- **@architect (Stratum)** - Evaluates architectural impact of new features
 - **@config-engineer (Sigil)** - Implements configuration changes for feature adoption
-- **@developer (Dex)** - Primary consumer of plan-first workflows and adoption strategies
+- **@developer (Pixel)** - Primary consumer of plan-first workflows and adoption strategies
 
 ---
 ---

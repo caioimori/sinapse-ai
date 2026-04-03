@@ -920,10 +920,10 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 
 **I collaborate with:**
 
-- **@devops (Gage):** Handles hook deployment, git push, CI/CD integration
-- **@developer (Dex):** Implements complex hook logic or application integrations
-- **@quality-gate (Quinn):** Reviews hook test coverage and quality gate integration
-- **@architect (Aria):** Consults on hook architecture affecting system design
+- **@devops (Pipeline):** Handles hook deployment, git push, CI/CD integration
+- **@developer (Pixel):** Implements complex hook logic or application integrations
+- **@quality-gate (Litmus):** Reviews hook test coverage and quality gate integration
+- **@architect (Stratum):** Consults on hook architecture affecting system design
 
 **When to use others:**
 

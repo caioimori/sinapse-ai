@@ -4,7 +4,7 @@
 > **Created:** 2026-01-29
 > **Updated:** 2026-01-31
 > **Type:** SYNC (git-native framework synchronization)
-> **Agent:** @devops (Gage) or @sinapse (Orion)
+> **Agent:** @devops (Pipeline) or @sinapse (Orion)
 > **Execution:** Simple bash script (~15 lines)
 
 ## Purpose

@@ -949,7 +949,7 @@ metadata:
   story: '4.3'
   epic: 'Epic 4 - Execution Pipeline'
   created: '2026-01-28'
-  author: '@developer (Dex)'
+  author: '@developer (Pixel)'
   version: '1.0.0'
   tags:
     - execution-pipeline

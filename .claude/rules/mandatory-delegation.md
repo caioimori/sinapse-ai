@@ -36,16 +36,16 @@ The orchestrator MUST still delegate. The correct response pattern is:
 
 | Request Type | Delegate To |
 |-------------|-------------|
-| Code implementation | @developer (Dex) |
-| Story creation | @sprint-lead (River) |
-| Story validation | @product-lead (Pax) |
-| Architecture decisions | @architect (Aria) |
-| Quality/testing | @quality-gate (Quinn) |
-| Database work | @data-engineer (Dara) |
-| UX/UI design | @ux-design-expert (Uma) |
-| Git push/PR/release | @devops (Gage) |
-| Epic orchestration | @project-lead (Morgan) |
-| Research/analysis | @analyst (Alex) |
+| Code implementation | @developer (Pixel) |
+| Story creation | @sprint-lead (Sync) |
+| Story validation | @product-lead (Axis) |
+| Architecture decisions | @architect (Stratum) |
+| Quality/testing | @quality-gate (Litmus) |
+| Database work | @data-engineer (Tensor) |
+| UX/UI design | @ux-design-expert (Mosaic) |
+| Git push/PR/release | @devops (Pipeline) |
+| Epic orchestration | @project-lead (Beacon) |
+| Research/analysis | @analyst (Scope) |
 
 ### Squad Orchestrators (Domain Expertise)
 

@@ -451,7 +451,7 @@ metadata:
   story: '3.2'
   epic: 'Epic 3 - Spec Pipeline'
   created: '2026-01-28'
-  author: '@architect (Aria)'
+  author: '@architect (Stratum)'
   version: '1.0.0'
   tags:
     - spec-pipeline

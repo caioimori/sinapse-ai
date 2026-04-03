@@ -31,6 +31,7 @@ jobs:
       tests: ${{ steps.filter.outputs.tests }}
       config: ${{ steps.filter.outputs.config }}
       stories: ${{ steps.filter.outputs.stories }}
+      docs: ${{ steps.filter.outputs.docs }}
     steps:
       # NOTE: No 'submodules' parameter — pro/ submodule is intentionally
       # NOT checked out. sinapse-ai MUST work standalone without pro/.
@@ -58,6 +59,9 @@ jobs:
               - 'eslint.config.*'
             stories:
               - 'docs/stories/**'
+            docs:
+              - 'docs/**'
+              - '**/*.md'
 
   # Security audit - only fail on critical vulnerabilities
   # Note: high severity vulnerabilities in dev dependencies (semantic-release/npm/tar)
@@ -340,6 +344,7 @@ jobs:
           echo "  Tests changed: ${{ needs.changes.outputs.tests }}"
           echo "  Config changed: ${{ needs.changes.outputs.config }}"
           echo "  Stories changed: ${{ needs.changes.outputs.stories }}"
+          echo "  Docs changed: ${{ needs.changes.outputs.docs }}"
           echo ""
           echo "📊 Job Results:"
           echo "  Security Audit: ${{ needs.security-audit.result }}"

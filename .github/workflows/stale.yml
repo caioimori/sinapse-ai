@@ -19,23 +19,17 @@ jobs:
           days-before-issue-stale: 30
           days-before-issue-close: 7
           stale-issue-label: 'status: stale'
-          stale-issue-message: |
-            This issue has been automatically marked as stale because it has not had
-            recent activity. It will be closed in 7 days if no further activity occurs.
-
-            If this issue is still relevant, please leave a comment to keep it open.
+          stale-issue-message: 'Esta issue esta inativa ha 30 dias. Sera fechada em 7 dias se nao houver atividade.'
           close-issue-message: |
-            This issue has been automatically closed due to inactivity.
-            If you believe this is still relevant, please reopen it with additional context.
+            Esta issue foi fechada automaticamente por inatividade.
+            Se ainda for relevante, reabra com contexto adicional.
           close-issue-reason: 'not_planned'
 
           # PR configuration
           days-before-pr-stale: 45
           days-before-pr-close: -1
           stale-pr-label: 'status: stale'
-          stale-pr-message: |
-            This pull request has been automatically marked as stale because it has not had
-            recent activity. Please update it or it may be closed.
+          stale-pr-message: 'Este PR esta inativo ha 45 dias. Considere atualizar ou fechar.'
 
           # Exemptions
           exempt-issue-labels: 'priority: P1,priority: P2,status: in-progress,status: confirmed'
