@@ -46,6 +46,7 @@ npm test
 - Sincronizar Gemini CLI: `npm run sync:ide:gemini`
 - Validar Codex sync/integration: `npm run validate:codex-sync`; `npm run validate:codex-integration`
 - Validar command/task registry do Codex: `npm run validate:codex-commands`
+- Validar matriz de delegacao do Codex: `npm run validate:codex-delegation`
 - Gerar skills locais do Codex: `npm run sync:skills:codex`
 - Este repositorio usa **local-first**: prefira `.codex/skills` versionado no projeto
 - Use `sync:skills:codex:global` apenas para testes fora deste repo
@@ -59,6 +60,19 @@ Quando um agente no Codex receber um `*comando`, prefira resolver a execucao por
 3. Carregar a task/workflow/checklist/template mapeada
 
 Isso evita "file hunting" manual e torna a execucao de workflows/tasks mais deterministica no Codex.
+
+## Delegation Resolution (Codex)
+
+Quando um orqx no Codex precisar decidir um handoff:
+
+1. Consultar `.codex/delegation-matrix.json`
+2. Opcionalmente usar `node .codex/scripts/resolve-codex-delegation.js <source-agent> <route>`
+3. Distinguir entre:
+   - `validator-backed`
+   - `codex-shim`
+   - `exploratory`
+
+No Codex, nao trate handoffs exploratorios como se fossem caminhos garantidos pelo validator.
 
 ## Agent Shortcuts (Codex)
 

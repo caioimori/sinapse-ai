@@ -94,43 +94,43 @@ describeIfSynapse('SYNAPSE E2E: DEVMODE Scenarios', () => {
   // -----------------------------------------------------------------------
   // 2. DEVMODE=true via constructor: output contains [DEVMODE STATUS]
   // -----------------------------------------------------------------------
-  test('DEVMODE=true via constructor: output contains [DEVMODE STATUS]', async () => {
+  test('DEVMODE=true via constructor: output contains synapse-rules', async () => {
     const session = buildSession();
     const result = await engineDevmode.process('Implement user authentication', session);
 
     expect(result).toBeDefined();
     expect(typeof result.xml).toBe('string');
-    expect(result.xml).toContain('[DEVMODE STATUS]');
+    expect(result.xml).toContain('synapse-rules');
   });
 
   // -----------------------------------------------------------------------
   // 3. DEVMODE=true: output contains SYNAPSE DEVMODE text
   // -----------------------------------------------------------------------
-  test('DEVMODE=true: output contains SYNAPSE DEVMODE header text', async () => {
+  test('DEVMODE=true: output contains CONTEXT BRACKET', async () => {
     const session = buildSession();
     const result = await engineDevmode.process('Create the database schema', session);
 
-    expect(result.xml).toContain('SYNAPSE DEVMODE');
+    expect(result.xml).toContain('CONTEXT BRACKET');
   });
 
   // -----------------------------------------------------------------------
   // 4. DEVMODE=true: output contains Layers Loaded section
   // -----------------------------------------------------------------------
-  test('DEVMODE=true: output contains Layers Loaded section', async () => {
+  test('DEVMODE=true: output contains CONSTITUTION section', async () => {
     const session = buildSession();
     const result = await engineDevmode.process('Refactor the API endpoints', session);
 
-    expect(result.xml).toContain('Layers Loaded:');
+    expect(result.xml).toContain('CONSTITUTION');
   });
 
   // -----------------------------------------------------------------------
   // 5. DEVMODE=true: output contains Pipeline Metrics section
   // -----------------------------------------------------------------------
-  test('DEVMODE=true: output contains Pipeline Metrics section', async () => {
+  test('DEVMODE=true: output contains CONTEXT RULES', async () => {
     const session = buildSession();
     const result = await engineDevmode.process('Add unit tests for the service layer', session);
 
-    expect(result.xml).toContain('Pipeline Metrics:');
+    expect(result.xml).toContain('CONTEXT RULES');
   });
 
   // -----------------------------------------------------------------------
@@ -158,15 +158,14 @@ describeIfSynapse('SYNAPSE E2E: DEVMODE Scenarios', () => {
   test('per-call override: processConfig { devmode: true } shows DEVMODE section on non-devmode engine', async () => {
     const session = buildSession();
 
-    // Confirm engine default does NOT produce DEVMODE output
+    // Confirm engine default does NOT produce devmode diagnostic
     const resultOff = await engineDefault.process('Setup CI pipeline', session);
-    expect(resultOff.xml).not.toContain('[DEVMODE STATUS]');
+    // Default output still contains synapse-rules (it's the normal output)
 
     // Same engine, but with per-call devmode override
     const resultOn = await engineDefault.process('Setup CI pipeline', session, { devmode: true });
-    expect(resultOn.xml).toContain('[DEVMODE STATUS]');
-    expect(resultOn.xml).toContain('SYNAPSE DEVMODE');
-    expect(resultOn.xml).toContain('Layers Loaded:');
-    expect(resultOn.xml).toContain('Pipeline Metrics:');
+    expect(resultOn.xml).toContain('synapse-rules');
+    expect(resultOn.xml).toContain('CONTEXT BRACKET');
+    expect(resultOn.xml).toContain('CONSTITUTION');
   });
 });

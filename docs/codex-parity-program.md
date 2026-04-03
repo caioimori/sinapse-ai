@@ -243,8 +243,9 @@ Current state after Story `7.7.7`:
 
 - a Codex-only command registry now maps the critical workflow agents to concrete tasks/resources
 - Codex has a resolver CLI for `command -> task/workflow` lookup
-- Codex has a validator that fails when command targets/resources drift
-- Imperator now has Codex-only tasks for `onboard`, `route`, `plan`, and `status`
+- Codex has a validator that fails on missing targets/resources, missing minimum coverage, and alias collisions
+- Imperator now has Codex-only tasks for `onboard`, `route`, `plan`, `status`, `brief`, `resolve`, and `council`
+- repo-wide quality gates currently show `lint` and `typecheck` green, while `npm test` still has unrelated shared drift in `wizard/report-generator` and `validate-publish`
 
 ### W5. Orchestration And Delegation Parity
 
@@ -257,6 +258,17 @@ Focus:
 - handoff artifacts and context rules
 - Codex-compatible delegation patterns
 - minimum-manual-glue execution model
+
+Execution detail is now formalized in `docs/codex-total-parity-orchestration-plan.md`.
+
+Current recommended implementation story:
+
+- Story `7.7.8` - Codex delegation and handoff parity
+
+Immediate next slice:
+
+- Story `7.7.8`: Codex orchestration and delegation parity
+- execution plan recorded in `docs/codex-total-parity-orchestration-plan.md`
 
 ### W6. MCP Parity
 
@@ -649,3 +661,10 @@ The overall Codex parity initiative is only considered successful when:
 - the Codex catalog is regenerable and validated
 - MCP setup is reproducible
 - Claude/Cloud Code shows no functional regression caused by the initiative
+
+## Execution Artifacts
+
+Execution planning for the next delivery wave is now formalized in:
+
+- `docs/codex-total-parity-orchestration-plan.md`
+- Story `7.7.8` for delegation and handoff parity

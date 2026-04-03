@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "7.7.4",
+  "version": "7.7.5",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 175 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -22,6 +22,8 @@
     ".claude/hooks/",
     ".codex/catalog.json",
     ".codex/command-registry.json",
+    ".codex/delegation-matrix.json",
+    ".codex/handoff-packet.schema.json",
     ".codex/instructions.md",
     ".codex/agents/",
     ".codex/scripts/",
@@ -82,6 +84,7 @@
     "validate:codex-sync": "node .sinapse-ai/infrastructure/scripts/validate-codex-sync.js",
     "validate:codex-integration": "node .sinapse-ai/infrastructure/scripts/validate-codex-integration.js",
     "validate:codex-commands": "node .sinapse-ai/infrastructure/scripts/validate-codex-command-registry.js",
+    "validate:codex-delegation": "node .sinapse-ai/infrastructure/scripts/validate-codex-delegation.js",
     "sync:skills:codex": "node .sinapse-ai/infrastructure/scripts/codex-skills-sync/index.js",
     "sync:skills:codex:global": "node .sinapse-ai/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
     "validate:codex-skills": "node .sinapse-ai/infrastructure/scripts/codex-skills-sync/validate.js --strict",

@@ -57,4 +57,77 @@ describe('resolve-codex-command', () => {
   it('throws when command is unknown for a known agent', () => {
     expect(() => resolveCodexCommand('sinapse-dev', 'unknown', tmpRoot)).toThrow('Unknown Codex command');
   });
+
+  it('throws when agent aliases are ambiguous', () => {
+    fs.writeFileSync(
+      path.join(tmpRoot, '.codex', 'command-registry.json'),
+      JSON.stringify({
+        version: 1,
+        agents: {
+          'sinapse-dev': {
+            skillId: 'sinapse-dev',
+            aliases: ['builder'],
+            sourceOfTruth: '.codex/agents/dev.md',
+            commands: {
+              develop: {
+                aliases: ['*develop'],
+                kind: 'task',
+                target: '.sinapse-ai/development/tasks/dev-develop-story.md',
+                resources: [],
+              },
+            },
+          },
+          'sinapse-qa': {
+            skillId: 'sinapse-qa',
+            aliases: ['builder'],
+            sourceOfTruth: '.codex/agents/qa.md',
+            commands: {
+              gate: {
+                aliases: ['*gate'],
+                kind: 'task',
+                target: '.sinapse-ai/development/tasks/qa-gate.md',
+                resources: [],
+              },
+            },
+          },
+        },
+      }),
+      'utf8',
+    );
+
+    expect(() => resolveCodexCommand('builder', 'develop', tmpRoot)).toThrow('Ambiguous Codex agent');
+  });
+
+  it('throws when command aliases are ambiguous inside an agent', () => {
+    fs.writeFileSync(
+      path.join(tmpRoot, '.codex', 'command-registry.json'),
+      JSON.stringify({
+        version: 1,
+        agents: {
+          'sinapse-dev': {
+            skillId: 'sinapse-dev',
+            aliases: ['dev'],
+            sourceOfTruth: '.codex/agents/dev.md',
+            commands: {
+              develop: {
+                aliases: ['*build'],
+                kind: 'task',
+                target: '.sinapse-ai/development/tasks/dev-develop-story.md',
+                resources: [],
+              },
+              build: {
+                aliases: ['*build'],
+                kind: 'task',
+                target: '.sinapse-ai/development/tasks/build.md',
+                resources: [],
+              },
+            },
+          },
+        },
+      }),
+      'utf8',
+    );
+
+    expect(() => resolveCodexCommand('sinapse-dev', 'build', tmpRoot)).toThrow('Ambiguous Codex command');
+  });
 });

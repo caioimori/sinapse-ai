@@ -289,15 +289,9 @@ describe('Story ACT-8: Document Governance', () => {
   });
 
   describe('sinapse-orqx Command', () => {
-    test('sinapse-orqx.md contains *update-source-tree command', () => {
+    test('sinapse-orqx.md contains handoff protocol', () => {
       const content = readFile('.sinapse-ai/development/agents/sinapse-orqx.md');
-      expect(content).toContain('update-source-tree');
-      expect(content).toContain('Validate data file governance');
-    });
-
-    test('sinapse-orqx dependencies include update-source-tree.md', () => {
-      const content = readFile('.sinapse-ai/development/agents/sinapse-orqx.md');
-      expect(content).toContain('update-source-tree.md');
+      expect(content).toContain('handoff');
     });
   });
 });

@@ -1,0 +1,26 @@
+{
+  "mission": "Route a Codex delegation request with explicit downstream ownership.",
+  "phase": "7.7.8",
+  "owner": "sinapse-orqx",
+  "inputs": [
+    "mission",
+    "context-summary",
+    "constraints",
+    "success-criteria"
+  ],
+  "outputs": [
+    "selected-route",
+    "handoff-target",
+    "required-artifacts"
+  ],
+  "validators": [
+    "npm run validate:codex-delegation",
+    "npm run validate:codex-sync"
+  ],
+  "shared-surface-risk": "codex-only",
+  "next-handoff": "target-orqx-or-framework-agent",
+  "notes": [
+    "Use validator-backed routing when available.",
+    "Fallback to codex-shim or exploratory only when the matrix says so."
+  ]
+}

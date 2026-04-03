@@ -43,12 +43,12 @@ This is especially useful in Codex when a command exists in the agent persona bu
 
 Critical workflow coverage now includes:
 
-- Imperator: `onboard`, `route`, `plan`, `status`
-- PM: `create-prd`, `create-brownfield-prd`, `create-epic`, `create-story`, `research`, `execute-epic`
-- PO: `validate-story`, backlog operations, story sync/pull/index
+- Imperator: `onboard`, `route`, `plan`, `status`, `brief`, `resolve`, `council`
+- PM: `create-prd`, `create-brownfield-prd`, `create-epic`, `create-story`, `research`, `execute-epic`, `gather-requirements`, `write-spec`, `shard-prd`
+- PO: `validate-story`, `validate-story-draft`, `backlog-review`, `backlog-prioritize`, `backlog-schedule`, `close-story`, `execute-checklist-po`, `sync-story`, `pull-story`, `stories-index`
 - SM: `draft`, `story-checklist`
-- Developer: `develop`, `execute-subtask`, `verify-subtask`, build commands
-- QA: `review-story`, `gate`, `review-build`, `create-fix-request`, `test-design`, `run-tests`
+- Developer: `develop`, `run-tests`, `apply-qa-fixes`, `execute-subtask`, `verify-subtask`, `backlog-debt`, build commands
+- QA: `review`/`review-story`/`code-review`, `gate`, `review-build`, `create-fix-request`, `test-design`, `run-tests`, `nfr-assess`, `validate-libraries`, `security-check`, `validate-migrations`, `evidence-check`, `false-positive-check`, `console-check`
 
 ## Validation
 
@@ -63,6 +63,8 @@ The validator checks that:
 - each mapped agent points to a real Codex skill
 - each mapped target exists
 - each declared resource exists
+- the critical workflow agents keep their minimum required command coverage
+- agent aliases and in-agent command aliases do not collide
 
 ## Imperator Tasks
 
@@ -72,6 +74,9 @@ Because the shared `sinapse-orqx` runtime is still partially broken upstream, Co
 - `.codex/tasks/route-sinapse-request.md`
 - `.codex/tasks/plan-sinapse-initiative.md`
 - `.codex/tasks/status-sinapse-capabilities.md`
+- `.codex/tasks/create-sinapse-strategic-brief.md`
+- `.codex/tasks/resolve-sinapse-conflict.md`
+- `.codex/tasks/convene-sinapse-council.md`
 
 These keep the workflow Codex-only and avoid risky shared-runtime edits.
 
@@ -79,3 +84,4 @@ These keep the workflow Codex-only and avoid risky shared-runtime edits.
 
 This layer solves deterministic command discovery and routing for the critical workflow path.
 It does not yet provide full specialist coverage across all 178 agents, and it does not replace MCP parity.
+Direct specialist routing from `.codex/agents` should still be treated as exploratory unless the path is covered by the command registry and its validators.

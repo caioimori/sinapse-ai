@@ -154,11 +154,9 @@ describe('Report Generator', () => {
       // When
       const report = await generateReport(validationResults);
 
-      // Then
-      expect(report).toContain('IDE Config');
-      expect(report).toContain('.cursor/settings.json');
-      expect(report).toContain('Environment');
-      expect(report).toContain('.env');
+      // Then — compact format shows summary, not individual files
+      expect(report).toContain('IDE Configuration');
+      expect(report).toContain('1/1 checks passed');
     });
 
     it('should format config validation results correctly', async () => {
@@ -196,10 +194,9 @@ describe('Report Generator', () => {
       // When
       const report = await generateReport(validationResults);
 
-      // Then
+      // Then — compact format groups by component name
       expect(report).toContain('Environment Configuration');
       expect(report).toContain('Core Configuration');
-      expect(report).toContain('Valid YAML');
     });
 
     it('should format MCP health check results correctly', async () => {

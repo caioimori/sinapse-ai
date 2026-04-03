@@ -193,12 +193,17 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       expect(config.timeout).toBe(10);
     });
 
-    test('covers all 3 known hooks', () => {
+    test('covers all known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(3);
+      expect(keys).toHaveLength(8);
       expect(keys).toContain('synapse-engine.cjs');
       expect(keys).toContain('code-intel-pretool.cjs');
       expect(keys).toContain('precompact-session-digest.cjs');
+      expect(keys).toContain('enforce-architecture-first.cjs');
+      expect(keys).toContain('enforce-story-gate.cjs');
+      expect(keys).toContain('write-path-validation.cjs');
+      expect(keys).toContain('enforce-delegation.cjs');
+      expect(keys).toContain('secret-scanning.cjs');
     });
 
     test('DEFAULT_HOOK_CONFIG falls back to UserPromptSubmit', () => {
