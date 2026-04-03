@@ -321,7 +321,7 @@ optimizations:
 story: WIS-5
 version: 1.0.0
 created: 2025-12-26
-author: "@developer (Dex)"
+author: "@developer (Pixel)"
 dependencies:
   modules:
     - workflow-intelligence/learning

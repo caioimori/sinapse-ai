@@ -381,7 +381,7 @@ story: "7.3"
 epic: "Epic 7 - Memory Layer"
 version: 1.0.0
 created: 2026-01-29
-author: "@developer (Dex)"
+author: "@developer (Pixel)"
 dependencies:
   modules:
     - .sinapse-ai/infrastructure/scripts/pattern-extractor.js

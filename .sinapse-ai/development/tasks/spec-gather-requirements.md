@@ -525,7 +525,7 @@ metadata:
   epic: 'Epic 3 - Spec Pipeline'
   created: '2026-01-28'
   updated: '2025-01-30'
-  author: '@architect (Aria)'
+  author: '@architect (Stratum)'
   version: '2.0.0'
   changelog:
     - version: '2.0.0'

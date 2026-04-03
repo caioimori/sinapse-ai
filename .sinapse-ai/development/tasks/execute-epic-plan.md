@@ -870,11 +870,11 @@ This task is owned by:
 - `@project-lead` (Morgan/Bob) - Primary orchestrator
 
 This task spawns:
-- `@product-lead` (Pax) - Story validation, checkpoints
-- `@developer` (Dex) - Story implementation (via development-cycle)
-- `@architect` (Aria) - Wave gates, final gate
-- `@devops` (Gage) - Branch merge, push
-- `@quality-gate` (Quinn) - Quality gates (via development-cycle)
+- `@product-lead` (Axis) - Story validation, checkpoints
+- `@developer` (Pixel) - Story implementation (via development-cycle)
+- `@architect` (Stratum) - Wave gates, final gate
+- `@devops` (Pipeline) - Branch merge, push
+- `@quality-gate` (Litmus) - Quality gates (via development-cycle)
 
 ---
 
