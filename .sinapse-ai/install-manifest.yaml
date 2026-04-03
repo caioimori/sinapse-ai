@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 7.7.5
-generated_at: "2026-04-03T00:26:37.433Z"
+version: 7.7.6
+generated_at: "2026-04-03T02:10:16.251Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1118
 files:
@@ -313,9 +313,9 @@ files:
     type: core
     size: 1724
   - path: core/doctor/checks/constitution-consistency.js
-    hash: sha256:7d61a71fcc8eeaf139a9bea634dff99154441808e8411f4290ae5a34fa919951
+    hash: sha256:8da440ef623c8ba300a73f9833fb5b7c5f6e45e50694b488b7580c9738bfb1d8
     type: core
-    size: 3107
+    size: 3139
   - path: core/doctor/checks/core-config.js
     hash: sha256:5424528eefbc2f19213b30d00dcd96128acefdbb289c25712be844f0fbddb963
     type: core
@@ -581,9 +581,9 @@ files:
     type: core
     size: 4733
   - path: core/health-check/checks/project/constitution-consistency.js
-    hash: sha256:63f4aa67ac27b337d017c7b642b1e3554bd02554fa69e29b14ebb8922827b4b9
+    hash: sha256:e6d0320efb88db073f6f877bc63126a9825ce7a896f5629f81ac24394e96a3ec
     type: core
-    size: 5960
+    size: 6044
   - path: core/health-check/checks/project/dependencies.js
     hash: sha256:a8f4d9fcadf5dc3274d8ed0605af6f25d6554b1a9b0d3e66c63d8ea4569c95b9
     type: core
@@ -1237,7 +1237,7 @@ files:
     type: data
     size: 9586
   - path: data/entity-registry.yaml
-    hash: sha256:534a11039e67654569d848d2348378fd7f2a1dbd336d2a675168007b61c2017f
+    hash: sha256:39264cf5150201736bab688f02278e49b9042bbdc8872315d9eb568edd3841a0
     type: data
     size: 515880
   - path: data/learned-patterns.yaml
@@ -3433,9 +3433,9 @@ files:
     type: script
     size: 7266
   - path: infrastructure/scripts/validate-codex-delegation.js
-    hash: sha256:a71224ad31b3a28bcc26953f75bbd6387686b3b906404c833f52b8dfff306384
+    hash: sha256:c084dff34fe7fbc82cb785219f6ed1f33d181fcc6fc9ee06c220ef2cbeaa99b5
     type: script
-    size: 9532
+    size: 9551
   - path: infrastructure/scripts/validate-codex-integration.js
     hash: sha256:c553cc493ddbfecf41b865f8a1075df56b6500c3b2b315bae8b7e7bcec4db85a
     type: script
@@ -3973,9 +3973,9 @@ files:
     type: template
     size: 3691
   - path: product/templates/ide-rules/claude-rules.md
-    hash: sha256:e82e8b6cc5c64791ba3a70ca728a920ce522d56e9a60dd0bb4ee76b9a150adf9
+    hash: sha256:819588040a8a7e0e90f49115c2ed4474db06cf6bba190671da6a67b15a4b0b88
     type: template
-    size: 13341
+    size: 13393
   - path: product/templates/ide-rules/codex-rules.md
     hash: sha256:601ffec5e24ff5e247c25e4d61728167503722acc817a1b30fbd695182bed1bc
     type: template

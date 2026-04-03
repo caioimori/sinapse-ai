@@ -28,6 +28,7 @@ O SINAPSE possui uma **Constitution formal** com princípios inegociáveis e gat
 | VII | Ecosystem Metrics Accuracy | NON-NEGOTIABLE |
 | VIII | Mandatory Delegation | NON-NEGOTIABLE |
 | IX | Safe Collaboration | NON-NEGOTIABLE |
+| X | Security & Data Protection | NON-NEGOTIABLE |
 
 **Gates automáticos bloqueiam violações.** Consulte a Constitution para detalhes completos.
 <!-- SINAPSE-MANAGED-END: constitution -->

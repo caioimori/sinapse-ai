@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "7.7.5",
+  "version": "7.7.6",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 175 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",

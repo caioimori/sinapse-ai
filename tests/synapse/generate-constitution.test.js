@@ -481,12 +481,13 @@ describe('integration: real constitution.md', () => {
     const content = fs.readFileSync(realConstitutionPath, 'utf8');
     const articles = parseConstitution(content);
 
-    expect(articles).toHaveLength(9);
+    expect(articles).toHaveLength(10);
     expect(articles[0].title).toBe('CLI First');
     expect(articles[5].title).toBe('Absolute Imports');
     expect(articles[6].title).toBe('Ecosystem Metrics Accuracy');
     expect(articles[7].title).toBe('Mandatory Delegation');
     expect(articles[8].title).toBe('Safe Collaboration');
+    expect(articles[9].title).toBe('Security & Data Protection');
   });
 
   test('should generate valid constitution from real source', () => {
@@ -502,7 +503,7 @@ describe('integration: real constitution.md', () => {
       const result = main({ constitutionPath: realConstitutionPath, outputPath });
 
       expect(result.success).toBe(true);
-      expect(result.articles).toBe(9);
+      expect(result.articles).toBe(10);
 
       // Verify output is loadable by domain-loader
       const rules = loadDomainFile(outputPath);
