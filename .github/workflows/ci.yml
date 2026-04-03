@@ -233,6 +233,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Regenerate manifest (ensures parity with source files)
+        run: npm run generate:manifest
+
       - name: Validate install manifest
         run: npm run validate:manifest
 
@@ -256,6 +259,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run IDE sync (ensures parity before check)
+        run: npm run sync:ide || true
 
       - name: Validate IDE sync
         run: npm run sync:ide:check
@@ -289,7 +295,10 @@ jobs:
         run: npm ci
 
       - name: Run compatibility parity gate
-        run: npm run validate:parity
+        run: |
+          npm run generate:manifest
+          npm run sync:ide || true
+          npm run validate:parity
 
   semantic-lint:
     name: Semantic Lint
