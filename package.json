@@ -1,7 +1,7 @@
 {
   "name": "sinapse-ai",
   "version": "9.1.0",
-  "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 175 agentes especializados",
+  "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 186 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
     "sinapse-ai": "bin/cli.js",
@@ -33,9 +33,6 @@
     "squads/claude-code-mastery/**",
     "squads/sinapse/**",
     "sinapse/**",
-    "install-squads.sh",
-    "install-chrome-brain.sh",
-    "update-squads.sh",
     "pro/license/",
     "pro/squads/",
     "pro/pro-config.yaml",

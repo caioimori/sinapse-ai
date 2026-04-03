@@ -12,8 +12,8 @@ sinapse chrome-brain install
 npx sinapse-ai chrome-brain install
 
 # Option 3: Standalone script (macOS/Linux)
-chmod +x install-chrome-brain.sh
-./install-chrome-brain.sh
+chmod +x scripts/install-chrome-brain.sh
+./scripts/install-chrome-brain.sh
 ```
 
 ## What Gets Installed

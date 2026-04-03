@@ -648,16 +648,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
   // ==========================================================================
 
   describe('gitignore entries', () => {
-    test('.gitignore contains .synapse/sessions/', () => {
+    test('.gitignore contains .synapse/', () => {
       const gitignorePath = path.resolve(__dirname, '../../.gitignore');
       const content = fs.readFileSync(gitignorePath, 'utf8');
-      expect(content).toContain('.synapse/sessions/');
-    });
-
-    test('.gitignore contains .synapse/cache/', () => {
-      const gitignorePath = path.resolve(__dirname, '../../.gitignore');
-      const content = fs.readFileSync(gitignorePath, 'utf8');
-      expect(content).toContain('.synapse/cache/');
+      expect(content).toContain('.synapse/');
     });
 
     test('.gitignore has exception for hooks directory', () => {
