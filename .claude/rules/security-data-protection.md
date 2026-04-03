@@ -2,11 +2,60 @@
 
 > **Constitution Article X — NON-NEGOTIABLE**
 > Applies to ALL agents, ALL projects handling user data.
-> Source: SINAPSE Cyber Squad + CRIABR Security Guide #0023
+> Sources: OWASP Top 10, NIST CSF 2.0, CIS Controls v8, Zero Trust (SP 800-207),
+> LGPD/ANPD, Supabase Security, Claude API Security, CRIABR Guide #0023,
+> Historical breach analysis (Change Healthcare 192.7M, Ticketmaster 560M, 23andMe 6.9M)
 
 ## Rule
 
-Every project that handles user data MUST follow these security practices from the first commit. No shortcuts, no "we'll add security later."
+Every project that handles user data MUST follow these security practices from the first commit. No shortcuts, no "we'll add security later." Security is NOT a feature — it is the foundation.
+
+## Pre-Deploy Gate — 25 Deployment Blockers
+
+NENHUM projeto pode ir para producao sem passar por TODOS estes checks.
+Os agentes DEVEM verificar e BLOQUEAR deploy se qualquer item falhar.
+
+### TIER 1: ABSOLUTE BLOCKERS (deploy = impossivel)
+
+| # | Blocker | Source | Check |
+|---|---------|--------|-------|
+| 1 | Tabela sem RLS ativado | Supabase, OWASP A01 | `SELECT tablename FROM pg_tables WHERE NOT rowsecurity` |
+| 2 | API keys hardcoded no codigo | Claude API, CIS C3 | Hook: secret-scanning.cjs |
+| 3 | service_role no frontend | Supabase | Grep: `service_role` em `src/`, `app/`, `pages/` |
+| 4 | Sem MFA em contas admin/cloud/prod | Breach lessons, CIS C5-6 | Manual: verificar dashboard |
+| 5 | APIs sem autenticacao | OWASP A01 | Review: todo endpoint precisa de auth middleware |
+| 6 | SQL com string concatenation | OWASP A05 | Hook: sql-governance.py |
+| 7 | Vulnerabilidades critical/high em deps | OWASP A03, CIS C7 | `npm audit --audit-level=high` |
+| 8 | Secrets detectados no codebase | CIS C3 | `npx gitleaks detect` ou hook |
+| 9 | Credenciais default em producao | OWASP A02 | Review: nenhum admin/admin, test/test |
+| 10 | Sem TLS (dados em transito nao encriptados) | NIST CSF, Zero Trust | Verificar HTTPS forced |
+
+### TIER 2: COMPLIANCE BLOCKERS (deploy = ilegal no Brasil)
+
+| # | Blocker | Source |
+|---|---------|--------|
+| 11 | Sem DPO/Encarregado designado | LGPD Art. 41 |
+| 12 | Sem capacidade de notificacao de breach (<3 dias) | LGPD Resolucao 15 |
+| 13 | Sem mecanismo de consentimento | LGPD Art. 7-8 |
+| 14 | Sem portal de direitos do titular | LGPD Art. 18 |
+| 15 | Transferencia internacional sem SCCs | LGPD Art. 33 |
+| 16 | Dados de criancas sem consentimento dos pais | LGPD Art. 14 |
+| 17 | Sem politica de privacidade publicada | LGPD Art. 9 |
+
+### TIER 3: OPERATIONAL BLOCKERS (deploy = irresponsavel)
+
+| # | Blocker | Source |
+|---|---------|--------|
+| 18 | Sem inventario de ativos | CIS C1-2, NIST IDENTIFY |
+| 19 | Sem logging centralizado | CIS C8, OWASP A09 |
+| 20 | Sem plano de resposta a incidentes | CIS C17, NIST RESPOND |
+| 21 | Sem verificacao de backup nos ultimos 90 dias | CIS C11 |
+| 22 | Sem processo de vulnerability scanning | CIS C7, OWASP A03 |
+| 23 | Sem segmentacao de rede | Zero Trust, breach lessons |
+| 24 | Sem avaliacao de seguranca de vendors | NIST GOVERN, CIS C15 |
+| 25 | Sem SSL enforcement no database | Supabase, NIST CSF |
+
+**Licao #1 dos maiores vazamentos historicos:** A AUSENCIA DE MFA foi a causa raiz das maiores breaches de 2023-2025. MFA obrigatorio e o controle de maior ROI.
 
 ## Database Security
 
