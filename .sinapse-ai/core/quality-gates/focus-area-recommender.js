@@ -6,11 +6,15 @@
  * - Business logic
  * - Security considerations
  * - UX/UI implications
+ * - Git-blame hotspot analysis (v2.0)
  *
  * @module core/quality-gates/focus-area-recommender
- * @version 1.0.0
+ * @version 2.0.0
  * @story 3.5 - Human Review Orchestration (Layer 3)
+ * @story 9.0 - Ecosystem Quality (git-blame enrichment)
  */
+
+const { execSync } = require('child_process');
 
 /**
  * Focus Area Recommender
@@ -54,22 +58,121 @@ class FocusAreaRecommender {
       skip: this.skipAreas,
       summary: '',
       highlightedAspects: [],
+      hotspots: [],
     };
 
     // Analyze changed files
     const fileAnalysis = this.analyzeChangedFiles(prContext.changedFiles || []);
     recommendations.highlightedAspects.push(...fileAnalysis.highlights);
 
+    // Git-blame hotspot analysis (v2.0)
+    const blameInsights = this.getGitBlameInsights(prContext.changedFiles || []);
+    if (blameInsights.hotspots.length > 0) {
+      recommendations.hotspots = blameInsights.hotspots;
+      recommendations.highlightedAspects.push(...blameInsights.highlights);
+    }
+
     // Add primary focus areas
     recommendations.primary = this.determinePrimaryAreas(fileAnalysis, layer2Result);
 
+    // Boost priority for hotspot files
+    if (blameInsights.hotspots.length > 0) {
+      const hotspotArea = {
+        area: 'change-hotspot',
+        reason: `${blameInsights.hotspots.length} file(s) changed frequently (high churn)`,
+        files: blameInsights.hotspots.map((h) => h.file).slice(0, 5),
+        questions: [
+          'Is this file changing too often? Consider refactoring.',
+          'Are these changes addressing root cause or symptoms?',
+          'Would a different architecture reduce churn here?',
+        ],
+      };
+      // Insert hotspot as secondary if not already critical
+      if (!recommendations.primary.some((p) => p.area === 'architecture')) {
+        recommendations.primary.push(hotspotArea);
+        recommendations.primary = recommendations.primary.slice(0, 3);
+      } else {
+        recommendations.secondary = [hotspotArea, ...recommendations.secondary].slice(0, 2);
+      }
+    }
+
     // Add secondary focus areas
-    recommendations.secondary = this.determineSecondaryAreas(fileAnalysis, layer2Result);
+    if (recommendations.secondary.length === 0) {
+      recommendations.secondary = this.determineSecondaryAreas(fileAnalysis, layer2Result);
+    }
 
     // Generate summary
     recommendations.summary = this.generateSummary(recommendations);
 
     return recommendations;
+  }
+
+  /**
+   * Get git-blame insights for changed files
+   * Identifies hotspots (frequently changed files) and recent contributors
+   * @param {Array} changedFiles - List of changed file paths
+   * @returns {Object} Blame insights with hotspots and highlights
+   */
+  getGitBlameInsights(changedFiles = []) {
+    const insights = {
+      hotspots: [],
+      highlights: [],
+      contributors: new Map(),
+    };
+
+    if (changedFiles.length === 0) return insights;
+
+    for (const file of changedFiles.slice(0, 20)) {
+      try {
+        // Count commits touching this file in last 30 days
+        const commitCount = execSync(
+          `git log --oneline --since="30 days ago" -- "${file}" 2>/dev/null | wc -l`,
+          { encoding: 'utf8', timeout: 5000 },
+        ).trim();
+
+        const count = parseInt(commitCount, 10) || 0;
+
+        if (count >= 5) {
+          insights.hotspots.push({
+            file,
+            commits30d: count,
+            severity: count >= 10 ? 'critical' : 'high',
+          });
+        }
+
+        // Get unique contributors for this file
+        const authors = execSync(
+          `git log --format="%aN" --since="30 days ago" -- "${file}" 2>/dev/null | sort -u`,
+          { encoding: 'utf8', timeout: 5000 },
+        ).trim().split('\n').filter(Boolean);
+
+        for (const author of authors) {
+          insights.contributors.set(author, (insights.contributors.get(author) || 0) + 1);
+        }
+      } catch {
+        // Git not available or file not tracked — skip silently
+        continue;
+      }
+    }
+
+    // Sort hotspots by commit count
+    insights.hotspots.sort((a, b) => b.commits30d - a.commits30d);
+
+    // Generate highlights
+    if (insights.hotspots.length > 0) {
+      const topHotspot = insights.hotspots[0];
+      insights.highlights.push(
+        `Hotspot: ${topHotspot.file} changed ${topHotspot.commits30d}x in 30 days`,
+      );
+    }
+
+    if (insights.contributors.size > 1) {
+      insights.highlights.push(
+        `${insights.contributors.size} contributors touched these files recently`,
+      );
+    }
+
+    return insights;
   }
 
   /**
