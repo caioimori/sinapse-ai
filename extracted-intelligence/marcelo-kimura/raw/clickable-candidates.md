@@ -1,2 +1,0 @@
-# Candidatos clicáveis
-

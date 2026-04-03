@@ -53,7 +53,7 @@ cmd_install() {
   header
   echo -e "${BLUE}▸ Instalando squads no projeto...${NC}"
   echo ""
-  bash "$SCRIPT_DIR/install-squads.sh"
+  bash "$SCRIPT_DIR/../scripts/install-squads.sh"
 }
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -64,7 +64,7 @@ cmd_update() {
   header
   echo -e "${BLUE}▸ Atualizando squads no projeto...${NC}"
   echo ""
-  bash "$SCRIPT_DIR/update-squads.sh"
+  bash "$SCRIPT_DIR/../scripts/update-squads.sh"
 }
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -219,7 +219,7 @@ cmd_pull() {
   if [ -d "./squads" ]; then
     echo -e "${BLUE}▸ Atualizando projeto atual...${NC}"
     echo ""
-    bash "$SCRIPT_DIR/update-squads.sh"
+    bash "$SCRIPT_DIR/../scripts/update-squads.sh"
   else
     echo -e "${YELLOW}Não estamos em um projeto com squads. Só o repo foi atualizado.${NC}"
     echo ""

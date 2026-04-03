@@ -942,13 +942,13 @@ function runBash(script) {
 function cmdInstallLocal() {
   header();
   console.log(`${CYAN}▸ Installing squads in current project...${NC}\n`);
-  runBash('install-squads.sh');
+  runBash('scripts/install-squads.sh');
 }
 
 function cmdUpdateLocal() {
   header();
   console.log(`${CYAN}▸ Updating squads in current project...${NC}\n`);
-  runBash('update-squads.sh');
+  runBash('scripts/update-squads.sh');
 }
 
 // ── List / Status / Help ─────────────────────────────────────────────────────
