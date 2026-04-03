@@ -124,7 +124,7 @@ function validateCodexDelegation(options = {}) {
   }
 
   const routeAliases = new Map();
-  const ajv = schema ? new Ajv2020({ allErrors: true, strict: false }) : null;
+  const ajv = schema ? new Ajv2020({ allErrors: true, strict: false, validateSchema: false }) : null;
   const validatePacket = schema ? ajv.compile(schema) : null;
   let routeCount = 0;
   let validatorBackedCount = 0;

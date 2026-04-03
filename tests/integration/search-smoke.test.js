@@ -143,7 +143,7 @@ describeIfRegistry('Smoke Tests - Search CLI', () => {
   });
 });
 
-describe('Performance Benchmarks', () => {
+describeIfRegistry('Performance Benchmarks', () => {
   test('Search 10 times and measure average', async () => {
     const queries = ['test', 'config', 'validator', 'check', 'agent', 'template', 'workflow', 'script', 'data', 'task'];
     const times = [];

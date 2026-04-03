@@ -35,6 +35,9 @@ function isPathSafe(inputPath) {
   // Reject protocol prefixes
   if (/^[a-z]+:\/\//i.test(inputPath)) return false;
 
+  // Reject backslash traversal (cross-platform: Linux doesn't treat \ as separator)
+  if (inputPath.includes('..\\')) return false;
+
   // Resolve and check prefix
   const resolved = path.resolve(PROJECT_ROOT, inputPath);
   return resolved.startsWith(PROJECT_ROOT);
