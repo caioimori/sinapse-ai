@@ -204,7 +204,7 @@ SINAPSE works on both IDEs. Both support most features with different approaches
 
 | Feature | Claude Code | Codex CLI | Notes |
 |---------|:-----------:|:---------:|-------|
-| **18 squads with 175 agents** | YES | YES | Identical on both |
+| **18 squads with 186 agents** | YES | YES | Identical on both |
 | **Knowledge bases per squad** | YES | YES | Identical on both |
 | **Tasks and workflows** | YES | YES | Identical on both |
 | **Documentation-First Development** | YES | YES | Identical on both |

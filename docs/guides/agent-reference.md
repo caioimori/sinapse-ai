@@ -50,7 +50,7 @@ Squads sao agrupamentos tematicos de agentes especialistas. Cada squad tem um or
 | squad-storytelling | Especialistas em narrativa | Storytelling, pitch, apresentacoes | @storytelling-orqx (Arc) |
 | claude-code-mastery | Especialistas avancados | Tecnicas avancadas de Claude Code | (integrado ao squad-claude) |
 
-**Total: 175 agentes** (12 core + 163 em squads)
+**Total: 186 agentes** (12 core + 163 em squads)
 
 ---
 

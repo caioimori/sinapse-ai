@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "phase": "W5 / Delegation Matrix Parity",
+  "matrixMode": "codex-only",
+  "handoffSchema": ".codex/handoff-packet.parity.schema.json",
+  "routingClasses": ["validator-backed", "codex-only-shim", "exploratory"],
+  "requestTypes": ["single-domain", "multi-domain", "framework-workflow"],
+  "orchestrators": {
+    "sinapse-orqx": {
+      "aliases": ["sinapse-orqx", "imperator"],
+      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "approvedRoutes": [
+        "brand-discovery",
+        "content-funnel-alignment",
+        "growth-seo-audit",
+        "claude-project-setup",
+        "research-competitor-positioning",
+        "multi-domain-launch",
+        "framework-story-delivery"
+      ]
+    },
+    "animations-orqx": {
+      "aliases": ["animations-orqx", "animations"],
+      "sourceOfTruth": ".codex/agents/animations-orqx.md",
+      "squadDir": "squads/squad-animations",
+      "tasksDir": "squads/squad-animations/tasks",
+      "approvedRoutes": []
+    },
+    "brand-orqx": {
+      "aliases": ["brand-orqx", "brand"],
+      "sourceOfTruth": ".codex/agents/brand-orqx.md",
+      "squadDir": "squads/squad-brand",
+      "tasksDir": "squads/squad-brand/tasks",
+      "approvedRoutes": ["brand-discovery"]
+    },
+    "commercial-orqx": {
+      "aliases": ["commercial-orqx", "commercial"],
+      "sourceOfTruth": ".codex/agents/commercial-orqx.md",
+      "squadDir": "squads/squad-commercial",
+      "tasksDir": "squads/squad-commercial/tasks",
+      "approvedRoutes": []
+    },
+    "content-orqx": {
+      "aliases": ["content-orqx", "content"],
+      "sourceOfTruth": ".codex/agents/content-orqx.md",
+      "squadDir": "squads/squad-content",
+      "tasksDir": "squads/squad-content/tasks",
+      "approvedRoutes": ["content-funnel-alignment"]
+    },
+    "copy-orqx": {
+      "aliases": ["copy-orqx", "copy"],
+      "sourceOfTruth": ".codex/agents/copy-orqx.md",
+      "squadDir": "squads/squad-copy",
+      "tasksDir": "squads/squad-copy/tasks",
+      "approvedRoutes": ["multi-domain-launch"]
+    },
+    "design-orqx": {
+      "aliases": ["design-orqx", "design"],
+      "sourceOfTruth": ".codex/agents/design-orqx.md",
+      "squadDir": "squads/squad-design",
+      "tasksDir": "squads/squad-design/tasks",
+      "approvedRoutes": []
+    },
+    "finance-orqx": {
+      "aliases": ["finance-orqx", "finance"],
+      "sourceOfTruth": ".codex/agents/finance-orqx.md",
+      "squadDir": "squads/squad-finance",
+      "tasksDir": "squads/squad-finance/tasks",
+      "approvedRoutes": []
+    },
+    "growth-orqx": {
+      "aliases": ["growth-orqx", "growth"],
+      "sourceOfTruth": ".codex/agents/growth-orqx.md",
+      "squadDir": "squads/squad-growth",
+      "tasksDir": "squads/squad-growth/tasks",
+      "approvedRoutes": ["growth-seo-audit"]
+    },
+    "paidmedia-orqx": {
+      "aliases": ["paidmedia-orqx", "paidmedia"],
+      "sourceOfTruth": ".codex/agents/paidmedia-orqx.md",
+      "squadDir": "squads/squad-paidmedia",
+      "tasksDir": "squads/squad-paidmedia/tasks",
+      "approvedRoutes": ["multi-domain-launch"]
+    },
+    "product-orqx": {
+      "aliases": ["product-orqx", "product"],
+      "sourceOfTruth": ".codex/agents/product-orqx.md",
+      "squadDir": "squads/squad-product",
+      "tasksDir": "squads/squad-product/tasks",
+      "approvedRoutes": ["multi-domain-launch"]
+    },
+    "research-orqx": {
+      "aliases": ["research-orqx", "research"],
+      "sourceOfTruth": ".codex/agents/research-orqx.md",
+      "squadDir": "squads/squad-research",
+      "tasksDir": "squads/squad-research/tasks",
+      "approvedRoutes": ["research-competitor-positioning"]
+    },
+    "claude-orqx": {
+      "aliases": ["claude-orqx", "claude"],
+      "sourceOfTruth": ".codex/agents/claude-orqx.md",
+      "squadDir": "squads/squad-claude",
+      "tasksDir": "squads/squad-claude/tasks",
+      "approvedRoutes": ["claude-project-setup"]
+    },
+    "council-orqx": {
+      "aliases": ["council-orqx", "council"],
+      "sourceOfTruth": ".codex/agents/council-orqx.md",
+      "squadDir": "squads/squad-council",
+      "tasksDir": "squads/squad-council/tasks",
+      "approvedRoutes": []
+    },
+    "storytelling-orqx": {
+      "aliases": ["storytelling-orqx", "storytelling"],
+      "sourceOfTruth": ".codex/agents/storytelling-orqx.md",
+      "squadDir": "squads/squad-storytelling",
+      "tasksDir": "squads/squad-storytelling/tasks",
+      "approvedRoutes": []
+    },
+    "cyber-orqx": {
+      "aliases": ["cyber-orqx", "cyber"],
+      "sourceOfTruth": ".codex/agents/cyber-orqx.md",
+      "squadDir": "squads/squad-cybersecurity",
+      "tasksDir": "squads/squad-cybersecurity/tasks",
+      "approvedRoutes": []
+    },
+    "cloning-orqx": {
+      "aliases": ["cloning-orqx", "cloning"],
+      "sourceOfTruth": ".codex/agents/cloning-orqx.md",
+      "squadDir": "squads/squad-cloning",
+      "tasksDir": "squads/squad-cloning/tasks",
+      "approvedRoutes": []
+    },
+    "courses-orqx": {
+      "aliases": ["courses-orqx", "courses"],
+      "sourceOfTruth": ".codex/agents/courses-orqx.md",
+      "squadDir": "squads/squad-courses",
+      "tasksDir": "squads/squad-courses/tasks",
+      "approvedRoutes": []
+    },
+    "swarm-orqx": {
+      "aliases": ["swarm-orqx", "swarm"],
+      "sourceOfTruth": ".codex/agents/swarm-orqx.md",
+      "squadDir": "squads/claude-code-mastery",
+      "tasksDir": "squads/claude-code-mastery/tasks",
+      "approvedRoutes": []
+    }
+  },
+  "frameworkAgents": {
+    "sinapse-pm": {
+      "aliases": ["sinapse-pm", "pm", "project-lead"],
+      "sourceOfTruth": ".codex/agents/pm.md",
+      "registryAgentId": "sinapse-pm"
+    },
+    "sinapse-po": {
+      "aliases": ["sinapse-po", "po", "product-lead"],
+      "sourceOfTruth": ".codex/agents/po.md",
+      "registryAgentId": "sinapse-po"
+    },
+    "sinapse-sm": {
+      "aliases": ["sinapse-sm", "sm", "sprint-lead"],
+      "sourceOfTruth": ".codex/agents/sm.md",
+      "registryAgentId": "sinapse-sm"
+    },
+    "sinapse-dev": {
+      "aliases": ["sinapse-dev", "dev", "developer"],
+      "sourceOfTruth": ".codex/agents/dev.md",
+      "registryAgentId": "sinapse-dev"
+    },
+    "sinapse-qa": {
+      "aliases": ["sinapse-qa", "qa", "quality-gate"],
+      "sourceOfTruth": ".codex/agents/qa.md",
+      "registryAgentId": "sinapse-qa"
+    }
+  },
+  "routes": {
+    "brand-discovery": {
+      "aliases": ["brand-strategy"],
+      "owner": "sinapse-orqx",
+      "requestType": "single-domain",
+      "classification": "validator-backed",
+      "mission": "Route brand strategy and discovery requests from the master orchestrator into the brand squad.",
+      "summary": "SINAPSE master orchestration into brand discovery.",
+      "inputs": ["request-brief", "brand-context", "constraints"],
+      "outputs": ["brand-discovery-brief"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "low",
+      "resources": [
+        ".codex/agents/brand-orqx.md",
+        ".codex/agents/brand-strategist.md",
+        "squads/squad-brand/tasks/conduct-brand-discovery.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "brand-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/brand-orqx.md",
+          "handoff": "delegate-to-squad",
+          "reason": "Brand requests should enter the dedicated brand squad orchestrator."
+        },
+        {
+          "from": "brand-orqx",
+          "fromType": "orqx",
+          "to": "brand-strategist",
+          "toType": "specialist",
+          "path": ".codex/agents/brand-strategist.md",
+          "task": "squads/squad-brand/tasks/conduct-brand-discovery.md",
+          "handoff": "execute-squad-task",
+          "reason": "Brand strategist owns the discovery workflow and outputs the handoff brief."
+        }
+      ]
+    },
+    "content-funnel-alignment": {
+      "aliases": ["content-funnel", "editorial-funnel"],
+      "owner": "sinapse-orqx",
+      "requestType": "single-domain",
+      "classification": "validator-backed",
+      "mission": "Route editorial and funnel-alignment work into the content squad.",
+      "summary": "Master orchestration into content funnel alignment.",
+      "inputs": ["content-goal", "audience-context", "funnel-stage"],
+      "outputs": ["editorial-alignment-brief"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "low",
+      "resources": [
+        ".codex/agents/content-orqx.md",
+        ".codex/agents/editorial-strategist.md",
+        "squads/squad-content/tasks/align-content-to-funnel.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "content-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/content-orqx.md",
+          "handoff": "delegate-to-squad",
+          "reason": "Content planning should be routed into the content squad orchestrator."
+        },
+        {
+          "from": "content-orqx",
+          "fromType": "orqx",
+          "to": "editorial-strategist",
+          "toType": "specialist",
+          "path": ".codex/agents/editorial-strategist.md",
+          "task": "squads/squad-content/tasks/align-content-to-funnel.md",
+          "handoff": "execute-squad-task",
+          "reason": "Editorial strategist owns the funnel-alignment task in the content squad."
+        }
+      ]
+    },
+    "growth-seo-audit": {
+      "aliases": ["seo-audit", "growth-seo"],
+      "owner": "sinapse-orqx",
+      "requestType": "single-domain",
+      "classification": "validator-backed",
+      "mission": "Route SEO and growth auditing work into the growth squad.",
+      "summary": "Master orchestration into growth SEO audit.",
+      "inputs": ["site-context", "growth-goal", "constraints"],
+      "outputs": ["seo-audit-brief"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "low",
+      "resources": [
+        ".codex/agents/growth-orqx.md",
+        ".codex/agents/ga-seo-strategist.md",
+        "squads/squad-growth/tasks/audit-sitemap-robots.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "growth-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/growth-orqx.md",
+          "handoff": "delegate-to-squad",
+          "reason": "SEO requests should be routed into the growth squad orchestrator."
+        },
+        {
+          "from": "growth-orqx",
+          "fromType": "orqx",
+          "to": "ga-seo-strategist",
+          "toType": "specialist",
+          "path": ".codex/agents/ga-seo-strategist.md",
+          "task": "squads/squad-growth/tasks/audit-sitemap-robots.md",
+          "handoff": "execute-squad-task",
+          "reason": "GA SEO strategist owns the sitemap and robots audit task."
+        }
+      ]
+    },
+    "claude-project-setup": {
+      "aliases": ["claude-setup", "codex-claude-setup"],
+      "owner": "sinapse-orqx",
+      "requestType": "single-domain",
+      "classification": "validator-backed",
+      "mission": "Route Codex/Claude project setup work into the Claude integration squad.",
+      "summary": "Master orchestration into Claude setup parity work.",
+      "inputs": ["repo-context", "integration-goal", "constraints"],
+      "outputs": ["claude-setup-brief"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "medium",
+      "resources": [
+        ".codex/agents/claude-orqx.md",
+        ".codex/agents/project-integrator.md",
+        "squads/squad-claude/tasks/claude-code-project-setup.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "claude-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/claude-orqx.md",
+          "handoff": "delegate-to-squad",
+          "reason": "Runtime and setup parity work belongs to the Claude mastery squad."
+        },
+        {
+          "from": "claude-orqx",
+          "fromType": "orqx",
+          "to": "project-integrator",
+          "toType": "specialist",
+          "path": ".codex/agents/project-integrator.md",
+          "task": "squads/squad-claude/tasks/claude-code-project-setup.md",
+          "handoff": "execute-squad-task",
+          "reason": "Project integrator owns the setup implementation workflow for Codex/Claude integration."
+        }
+      ]
+    },
+    "research-competitor-positioning": {
+      "aliases": ["competitor-positioning", "research-positioning"],
+      "owner": "sinapse-orqx",
+      "requestType": "single-domain",
+      "classification": "exploratory",
+      "mission": "Route competitor positioning analysis into the research squad with an explicit shared-surface review stop.",
+      "summary": "Exploratory route that touches shared Claude artifacts for advanced analysis.",
+      "inputs": ["research-brief", "market-context", "competitor-list"],
+      "outputs": ["competitive-positioning-brief"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "high",
+      "resources": [
+        ".codex/agents/research-orqx.md",
+        ".codex/agents/competitive-intelligence.md",
+        ".claude/agents/data-chief.md",
+        "squads/squad-research/tasks/analyze-competitor-positioning.md"
+      ],
+      "notes": [
+        "Exploratory means the path is documented and validated, but any change to shared Claude surfaces still requires explicit review."
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "research-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/research-orqx.md",
+          "handoff": "delegate-to-squad",
+          "reason": "Research requests should enter the research squad orchestrator."
+        },
+        {
+          "from": "research-orqx",
+          "fromType": "orqx",
+          "to": "competitive-intelligence",
+          "toType": "specialist",
+          "path": ".codex/agents/competitive-intelligence.md",
+          "task": "squads/squad-research/tasks/analyze-competitor-positioning.md",
+          "handoff": "execute-squad-task",
+          "reason": "Competitive intelligence owns the positioning analysis workflow."
+        },
+        {
+          "from": "competitive-intelligence",
+          "fromType": "specialist",
+          "to": "data-chief",
+          "toType": "specialist",
+          "path": ".claude/agents/data-chief.md",
+          "handoff": "shared-surface-review",
+          "reason": "This escalation exists only as an exploratory review stop because it touches shared Claude artifacts."
+        }
+      ]
+    },
+    "multi-domain-launch": {
+      "aliases": ["launch", "cross-domain-launch"],
+      "owner": "sinapse-orqx",
+      "requestType": "multi-domain",
+      "classification": "codex-only-shim",
+      "mission": "Coordinate a multi-squad launch plan inside Codex without mutating shared Claude runtime surfaces.",
+      "summary": "Codex-only orchestration shim for cross-squad launch execution.",
+      "inputs": ["initiative-brief", "timeline", "launch-goal"],
+      "outputs": ["multi-domain-launch-plan"],
+      "validators": ["npm run validate:codex-delegation", "npm run validate:codex-sync"],
+      "sharedSurfaceRisk": "medium",
+      "notes": [
+        "This route is a Codex-only shim that preserves Cloud/Claude behavior by keeping orchestration logic local to Codex."
+      ],
+      "resources": [
+        ".codex/agents/product-orqx.md",
+        ".codex/agents/copy-orqx.md",
+        ".codex/agents/paidmedia-orqx.md",
+        "docs/codex-total-parity-orchestration-plan.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "product-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/product-orqx.md",
+          "handoff": "scope-launch-workstream",
+          "reason": "Product orchestrates sequencing, scope, and initiative framing."
+        },
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "copy-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/copy-orqx.md",
+          "handoff": "shape-launch-messaging",
+          "reason": "Copy orchestrates campaign messaging and conversion assets."
+        },
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "paidmedia-orqx",
+          "toType": "orqx",
+          "path": ".codex/agents/paidmedia-orqx.md",
+          "handoff": "activate-launch-distribution",
+          "reason": "Paid media orchestrates channel activation and distribution planning."
+        }
+      ]
+    },
+    "framework-story-delivery": {
+      "aliases": ["story-delivery", "framework-delivery"],
+      "owner": "sinapse-orqx",
+      "requestType": "framework-workflow",
+      "classification": "validator-backed",
+      "mission": "Run the canonical PM -> PO -> SM -> Dev -> QA delivery chain inside Codex with validator-backed command resolution.",
+      "summary": "Framework delivery route using the Codex command registry as the handoff resolver.",
+      "inputs": ["initiative-brief", "story-context", "quality-bar"],
+      "outputs": ["qa-gate-decision"],
+      "validators": [
+        "npm run validate:codex-commands",
+        "npm run validate:codex-delegation",
+        "npm run validate:codex-sync"
+      ],
+      "sharedSurfaceRisk": "low",
+      "resources": [
+        ".codex/command-registry.json",
+        ".sinapse-ai/development/tasks/create-doc.md",
+        ".sinapse-ai/development/tasks/validate-next-story.md",
+        ".sinapse-ai/development/tasks/create-next-story.md",
+        ".sinapse-ai/development/tasks/dev-develop-story.md",
+        ".sinapse-ai/development/tasks/qa-gate.md"
+      ],
+      "delegationChain": [
+        {
+          "from": "sinapse-orqx",
+          "fromType": "orqx",
+          "to": "sinapse-pm",
+          "toType": "framework-agent",
+          "path": ".codex/agents/pm.md",
+          "resolver": "command-registry",
+          "command": "create-prd",
+          "handoff": "define-scope",
+          "reason": "PM defines the delivery brief and product scope."
+        },
+        {
+          "from": "sinapse-pm",
+          "fromType": "framework-agent",
+          "to": "sinapse-po",
+          "toType": "framework-agent",
+          "path": ".codex/agents/po.md",
+          "resolver": "command-registry",
+          "command": "validate-story",
+          "handoff": "validate-backlog-readiness",
+          "reason": "PO validates readiness and acceptance quality before drafting."
+        },
+        {
+          "from": "sinapse-po",
+          "fromType": "framework-agent",
+          "to": "sinapse-sm",
+          "toType": "framework-agent",
+          "path": ".codex/agents/sm.md",
+          "resolver": "command-registry",
+          "command": "draft",
+          "handoff": "draft-implementation-story",
+          "reason": "SM drafts the executable story from validated requirements."
+        },
+        {
+          "from": "sinapse-sm",
+          "fromType": "framework-agent",
+          "to": "sinapse-dev",
+          "toType": "framework-agent",
+          "path": ".codex/agents/dev.md",
+          "resolver": "command-registry",
+          "command": "develop",
+          "handoff": "implement-story",
+          "reason": "Developer executes the implementation against the drafted story."
+        },
+        {
+          "from": "sinapse-dev",
+          "fromType": "framework-agent",
+          "to": "sinapse-qa",
+          "toType": "framework-agent",
+          "path": ".codex/agents/qa.md",
+          "resolver": "command-registry",
+          "command": "gate",
+          "handoff": "issue-quality-gate",
+          "reason": "QA closes the chain with the gate decision."
+        }
+      ]
+    }
+  }
+}
