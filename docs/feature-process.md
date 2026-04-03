@@ -159,4 +159,4 @@ Contribuidores cujas ideias sao implementadas recebem credito em:
 
 ---
 
-_Veja tambem: [CONTRIBUTING.md](../CONTRIBUTING.md) | [Guiding Principles](GUIDING-PRINCIPLES.md) | [Code of Conduct](../CODE_OF_CONDUCT.md)_
+_Veja tambem: [CONTRIBUTING.md](../CONTRIBUTING.md) | [Guiding Principles](guiding-principles.md) | [Code of Conduct](../CODE_OF_CONDUCT.md)_

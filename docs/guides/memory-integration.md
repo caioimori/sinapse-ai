@@ -464,8 +464,8 @@ npm test -- tests/integration/pipeline-memory-integration.test.js --coverage
 
 ## Related Documentation
 
-- **[Memory System (Current State)](MEMORY-SYSTEM.md)** - Overview of memory architecture
-- **[Memory Intelligence System (Target State)](MEMORY-INTELLIGENCE-SYSTEM.md)** - Full MIS vision
+- **[Memory System (Current State)](memory-system.md)** - Overview of memory architecture
+- **[Memory Intelligence System (Target State)](memory-intelligence-system.md)** - Full MIS vision
 - **Story MIS-3:** Session Digest (PreCompact Hook) - Memory capture
 - **Story MIS-4:** Progressive Memory Retrieval - Retrieval API
 - **Story MIS-6:** Pipeline Integration - This guide

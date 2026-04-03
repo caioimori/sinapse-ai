@@ -1,12 +1,12 @@
 <!--
   Tradução: PT-BR
-  Original: /docs/en/GUIDING-PRINCIPLES.md
+  Original: /docs/en/guiding-principles.md
   Última sincronização: 2026-01-26
 -->
 
 # Princípios Orientadores do Método SINAPSE
 
-> 🌐 [EN](../GUIDING-PRINCIPLES.md) | **PT** | [ES](../es/GUIDING-PRINCIPLES.md)
+> 🌐 [EN](../guiding-principles.md) | **PT** | [ES](../es/guiding-principles.md)
 
 ---
 

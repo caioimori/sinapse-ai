@@ -236,4 +236,4 @@ Cada etapa e rastreavel, documentada e verificavel. O sistema e desenhado para q
 
 ---
 
-_Veja tambem: [Agent Reference](guides/agent-reference.md) | [Workflows Overview](guides/workflows-overview.md) | [Guiding Principles](GUIDING-PRINCIPLES.md)_
+_Veja tambem: [Agent Reference](guides/agent-reference.md) | [Workflows Overview](guides/workflows-overview.md) | [Guiding Principles](guiding-principles.md)_

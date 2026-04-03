@@ -229,7 +229,7 @@ Semana 2 (2026-03-25):
     - 16 agents reorganizados em squads naturais (chiefs + design + utils)
     - 18 wrappers autonomos YOLO criados para todos os orqx
     - Mission Routers ricos construidos (7 via chiefs + 11 novos)
-    - Comandos * diferenciados por squad (docs/SQUAD-COMMANDS-REFERENCE.md)
+    - Comandos * diferenciados por squad (docs/squad-commands-reference.md)
   Fase 5 [PEND] ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0%
 
   >>> RELEASE: SINAPSE v7.0.0 — Autonomous Squad Edition

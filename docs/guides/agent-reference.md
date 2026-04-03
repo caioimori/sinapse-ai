@@ -200,4 +200,4 @@ Violacoes de autoridade sao bloqueadas via hooks (Constitution Art. II).
 
 ---
 
-_Veja tambem: [Workflows Overview](workflows-overview.md) | [Architecture Overview](../architecture-overview.md) | [Guiding Principles](../GUIDING-PRINCIPLES.md)_
+_Veja tambem: [Workflows Overview](workflows-overview.md) | [Architecture Overview](../architecture-overview.md) | [Guiding Principles](../guiding-principles.md)_
