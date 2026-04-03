@@ -651,3 +651,4 @@ module.exports = {
   DEFAULT_CONFIG,
   GOTCHA_SCHEMA,
 };
+

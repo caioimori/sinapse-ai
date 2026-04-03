@@ -72,3 +72,4 @@ module.exports = {
   generateRecommendations: brownfieldAnalyzer.generateRecommendations,
   formatMigrationReport: brownfieldAnalyzer.formatMigrationReport,
 };
+

@@ -359,3 +359,4 @@ The auto-refresh pauses when:
 ---
 
 _SINAPSE Quality Dashboard v1.0_
+

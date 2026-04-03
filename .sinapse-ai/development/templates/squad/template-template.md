@@ -95,3 +95,4 @@ const result = await renderTemplate('{{COMPONENTNAME}}.md', {
 ---
 
 *Template created by squad-creator*
+

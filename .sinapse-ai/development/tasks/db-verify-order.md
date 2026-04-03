@@ -513,3 +513,4 @@ This is a heuristic check, not a full parser:
 ❌ **Misses**: Subtle type dependencies  
 
 For 100% validation, use: `*dry-run {path}`
+

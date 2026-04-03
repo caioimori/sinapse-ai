@@ -144,3 +144,4 @@ class IdeDetectionCheck extends BaseCheck {
 }
 
 module.exports = IdeDetectionCheck;
+

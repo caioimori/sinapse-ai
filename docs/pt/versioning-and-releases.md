@@ -144,3 +144,4 @@ npm publish
 ---
 
 *Última atualização: Story 6.17 - Automação de Semantic Release*
+

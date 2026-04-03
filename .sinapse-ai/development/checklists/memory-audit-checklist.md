@@ -51,3 +51,4 @@ Common patterns that typically appear in multiple agents:
 | CommonJS module system | dev, analyst, sm, data-engineer, ux, architect | Already in CLAUDE.md |
 | Conventional commits format | dev, qa, devops, analyst, sm, data-engineer, ux | Already in CLAUDE.md |
 | kebab-case for files | dev, analyst, sm, data-engineer, ux | Already in CLAUDE.md |
+

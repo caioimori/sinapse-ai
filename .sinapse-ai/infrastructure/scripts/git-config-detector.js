@@ -347,3 +347,4 @@ class GitConfigDetector {
 }
 
 module.exports = GitConfigDetector;
+

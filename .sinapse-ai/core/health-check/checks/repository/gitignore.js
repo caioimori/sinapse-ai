@@ -190,3 +190,4 @@ class GitignoreCheck extends BaseCheck {
 }
 
 module.exports = GitignoreCheck;
+

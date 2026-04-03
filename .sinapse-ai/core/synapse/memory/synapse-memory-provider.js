@@ -199,3 +199,4 @@ module.exports = {
   BRACKET_CONFIG,
   DEFAULT_SECTORS,
 };
+

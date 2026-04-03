@@ -7,3 +7,4 @@ It only has a title and description, no YAML frontmatter.
 ## Usage
 
 Just a placeholder task that will fail validation.
+

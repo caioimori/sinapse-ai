@@ -114,3 +114,4 @@ function DomainCard({ domain, data }) {
 }
 
 export default DomainCard;
+

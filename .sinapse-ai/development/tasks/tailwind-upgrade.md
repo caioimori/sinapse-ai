@@ -292,3 +292,4 @@ Plan and execute migration from Tailwind CSS v3 (or earlier) to v4 (Oxide engine
 - Tailwind plugins may require v4-compatible versions (@tailwindcss/forms/typography/container-queries)
 - Validate IDE tooling (Tailwind IntelliSense, Prettier plugin) upgraded to v4-aware releases
 - Encourage incremental adoption: keep feature flags until confidence is high
+

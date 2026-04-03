@@ -237,3 +237,4 @@ describe('permissions/index facade', () => {
     });
   });
 });
+

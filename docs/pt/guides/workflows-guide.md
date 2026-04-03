@@ -398,3 +398,4 @@ cat .sinapse-ai/development/workflows/{name}.yaml
 ---
 
 *Guia de Workflows do SINAPSE v1.0 - Orquestrando Colaboracao IA-Humano*
+

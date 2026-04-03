@@ -327,3 +327,4 @@ module.exports = {
   DEFAULT_MIN_SEQUENCE_LENGTH,
   KEY_WORKFLOW_COMMANDS,
 };
+

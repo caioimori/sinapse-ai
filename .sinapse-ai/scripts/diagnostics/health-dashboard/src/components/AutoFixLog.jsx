@@ -70,3 +70,4 @@ function formatTime(timestamp) {
 }
 
 export default AutoFixLog;
+

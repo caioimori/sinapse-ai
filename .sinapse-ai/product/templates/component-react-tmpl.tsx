@@ -96,3 +96,4 @@ export const {{ComponentName}} = React.forwardRef<{{ElementTag}}, {{ComponentNam
 {{ComponentName}}.displayName = '{{ComponentName}}';
 
 export type {{ComponentName}}Variant = VariantProps<typeof {{componentName}}Variants>;
+

@@ -374,3 +374,4 @@ Do [Prisma CONTRIBUTING.md](https://github.com/prisma/prisma/blob/main/CONTRIBUT
 ---
 
 _Documento gerado como parte da investigação da Story COLLAB-1._
+

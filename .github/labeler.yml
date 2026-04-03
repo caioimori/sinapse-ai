@@ -88,3 +88,4 @@ mcp:
       - '.sinapse-ai/tools/mcp/**/*'
       - '**/*mcp*.yaml'
       - '**/*mcp*.json'
+

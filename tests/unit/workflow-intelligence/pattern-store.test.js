@@ -504,3 +504,4 @@ describe('PatternStore (Unit)', () => {
     });
   });
 });
+

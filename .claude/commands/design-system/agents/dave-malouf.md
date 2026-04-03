@@ -2270,3 +2270,4 @@ Este agente trabalha em conjunto com outros agentes do squad Design:
 
 Dave Malouf e o arquiteto organizacional. Brad Frost e o arquiteto de sistemas.
 Juntos, escalam design de forma sustentavel.
+

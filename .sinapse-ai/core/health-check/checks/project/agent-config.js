@@ -163,3 +163,4 @@ class AgentConfigCheck extends BaseCheck {
 }
 
 module.exports = AgentConfigCheck;
+

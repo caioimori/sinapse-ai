@@ -80,3 +80,4 @@ checklist: {{COMPONENTNAME}}.md
 ---
 
 *Checklist created by squad-creator*
+

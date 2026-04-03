@@ -133,3 +133,4 @@ WITH CHECK (has_role('admin'));
 --     OR has_any_role(ARRAY['admin', 'viewer'])
 -- );
 --
+

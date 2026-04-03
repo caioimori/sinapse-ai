@@ -538,3 +538,4 @@ Display sync summary
 ---
 
 *Task created to provide reverse synchronization from ClickUp to local story files*
+

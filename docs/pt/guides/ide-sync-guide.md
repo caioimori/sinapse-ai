@@ -192,3 +192,4 @@ Verifique se a IDE está habilitada na seção `active_ides`.
 - [Visão Geral de Squads](./squads-overview.md)
 - [Referência de Agentes](../agent-reference-guide.md)
 - [Arquitetura SINAPSE](../core-architecture.md)
+

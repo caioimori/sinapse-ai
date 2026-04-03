@@ -140,3 +140,4 @@ SUCCESS METRICS:
 - [ ] Riscos identificados com mitigacoes
 - [ ] Metricas de sucesso definidas
 - [ ] Invocation commands fornecidos para todas as squads
+

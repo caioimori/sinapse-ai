@@ -288,3 +288,4 @@ if (require.main === module) {
 }
 
 module.exports = { run, detectToolSearch, detectProjectMcps, detectGlobalMcps, detectDockerGateway };
+

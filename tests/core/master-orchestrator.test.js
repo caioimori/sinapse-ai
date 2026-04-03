@@ -628,3 +628,4 @@ describe('Module Exports', () => {
     expect(typeof EPIC_CONFIG).toBe('object');
   });
 });
+

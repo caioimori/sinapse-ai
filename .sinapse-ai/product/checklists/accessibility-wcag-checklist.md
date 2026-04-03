@@ -78,3 +78,4 @@
 - APCA contrast calculator / Inclusive Colors
 
 **Result:** [ ] WCAG AA ✓ [ ] Issues Found
+

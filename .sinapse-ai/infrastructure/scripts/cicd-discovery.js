@@ -1266,3 +1266,4 @@ module.exports.ProviderDetector = ProviderDetector;
 module.exports.PipelineAnalyzer = PipelineAnalyzer;
 module.exports.IntegrationSuggester = IntegrationSuggester;
 module.exports.PROVIDERS = PROVIDERS;
+

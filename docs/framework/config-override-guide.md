@@ -191,3 +191,4 @@ Valid section IDs for `template_overrides.story`:
 ---
 
 *Story BM-4 — Boundary Schema Enrichment & Template Customization*
+

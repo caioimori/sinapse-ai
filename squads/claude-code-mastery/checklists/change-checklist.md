@@ -73,3 +73,4 @@ Treat configuration changes with the same rigor as production deployments.]]
 **FAIL:** Any item in Security Impact is unchecked without justification, OR no rollback plan documented, OR scope assessment incomplete.
 
 **Action on FAIL:** Address all security gaps and document rollback plan before proceeding. Escalate to config-engineer if unsure about security implications.
+

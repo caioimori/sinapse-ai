@@ -332,3 +332,4 @@ Ative o agente e verifique que a ferramenta é acessível e funcional.
 ---
 
 **Mantenedor:** @architect (Aria)
+

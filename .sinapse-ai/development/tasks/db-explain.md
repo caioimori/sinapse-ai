@@ -629,3 +629,4 @@ Query optimization workflow:
 - `*analyze-hotpaths` - Check common query patterns
 - `*design-indexes` - Plan index strategy
 - `*rls-audit` - Check RLS policy performance
+

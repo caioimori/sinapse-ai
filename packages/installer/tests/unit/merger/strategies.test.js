@@ -151,3 +151,4 @@ describe('ReplaceMerger', () => {
     expect(merger.canMerge('', '')).toBe(false);
   });
 });
+

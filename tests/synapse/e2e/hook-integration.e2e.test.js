@@ -238,3 +238,4 @@ describeIfHookExists('SYNAPSE E2E: Hook Integration', () => {
     expect(stdout.trim()).toBe(reparsed);
   });
 });
+

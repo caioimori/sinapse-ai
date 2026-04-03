@@ -548,3 +548,4 @@ class NotificationManager {
 }
 
 module.exports = { NotificationManager };
+

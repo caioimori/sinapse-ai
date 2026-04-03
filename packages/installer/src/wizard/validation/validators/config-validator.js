@@ -360,3 +360,4 @@ async function validateGitignore(results) {
 module.exports = {
   validateConfigs,
 };
+

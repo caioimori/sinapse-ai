@@ -127,3 +127,4 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]] || [[ -z $REPLY ]]; then
     tmux attach -t "$SESSION_NAME"
 fi
+

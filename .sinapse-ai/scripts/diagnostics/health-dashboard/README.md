@@ -119,3 +119,4 @@ The dashboard expects health check JSON in the format produced by the JSON repor
 ---
 
 _Part of SINAPSE-FULLSTACK - Story HCS-2 Phase 4_
+

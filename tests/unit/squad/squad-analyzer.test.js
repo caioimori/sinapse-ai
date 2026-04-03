@@ -281,3 +281,4 @@ describe('SquadAnalyzer', () => {
     });
   });
 });
+

@@ -476,3 +476,4 @@ Output includes additional features:
 - Documentation mirrors props/types for instant onboarding
 - Components follow Atomic Design principles
 - Atlas ensures quality at every step
+

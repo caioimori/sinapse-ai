@@ -57,3 +57,4 @@ describe('ActivationRuntime', () => {
     expect(result.quality).toBe('full');
   });
 });
+

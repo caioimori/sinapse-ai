@@ -155,3 +155,4 @@ class GitRepoCheck extends BaseCheck {
 }
 
 module.exports = GitRepoCheck;
+

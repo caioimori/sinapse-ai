@@ -835,3 +835,4 @@ sinapse-ai/                        # Root project
 ---
 
 _Este documento consolida SINAPSE-LIVRO-DE-OURO.md (v2.0) + deltas v4.0.4 em um único documento completo._
+

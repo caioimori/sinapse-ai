@@ -913,3 +913,4 @@ A comprehensive testing strategy for MCP tools should cover:
 * **Security testing**: Validate authentication, authorization, input sanitization, and rate limiting
 * **Performance testing**: Check behavior under load, timeout handling, and resource cleanup
 * **Error handling**: Ensure tools properly report errors through the MCP protocol and clean up resources
+

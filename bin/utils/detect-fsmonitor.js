@@ -68,3 +68,4 @@ function detectFsmonitor(gitVersionStr) {
 }
 
 module.exports = { detectFsmonitor, compareVersions };
+

@@ -585,3 +585,4 @@ estratégias:
 ---
 
 _Este é um padrão oficial do framework SINAPSE documentando o Motor de Desenvolvimento Autônomo._
+

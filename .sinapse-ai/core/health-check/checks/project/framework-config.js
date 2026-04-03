@@ -129,3 +129,4 @@ class FrameworkConfigCheck extends BaseCheck {
 }
 
 module.exports = FrameworkConfigCheck;
+

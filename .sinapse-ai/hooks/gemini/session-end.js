@@ -88,3 +88,4 @@ function updateRecentSessions(sessionDir, sessionId) {
 }
 
 sessionEnd();
+

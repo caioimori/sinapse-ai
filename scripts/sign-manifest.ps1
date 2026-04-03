@@ -128,3 +128,4 @@ Write-Host "  1. git add .sinapse-ai\install-manifest.yaml.minisig"
 Write-Host "  2. git commit -m 'chore: sign manifest for release'"
 Write-Host "  3. npm publish"
 Write-Host ""
+

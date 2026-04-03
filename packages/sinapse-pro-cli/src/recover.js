@@ -98,3 +98,4 @@ async function recoverLicense() {
 }
 
 module.exports = { recoverLicense, maskEmail, promptEmail, openBrowser, RECOVERY_URL, RECOVERY_MESSAGE };
+

@@ -439,3 +439,4 @@ Rollback:
 module.exports = {
   createMigrateCommand,
 };
+

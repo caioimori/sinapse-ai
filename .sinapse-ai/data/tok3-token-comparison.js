@@ -121,3 +121,4 @@ console.log('~20-40% by consolidating tool calls and keeping intermediate result
 console.log('in shell variables instead of context.');
 
 process.exit(passed ? 0 : 1);
+

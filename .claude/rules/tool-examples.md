@@ -62,3 +62,4 @@ Use for managing Docker-based MCP servers. `@devops` manages infrastructure.
 
 Full examples registry: `.sinapse-ai/data/mcp-tool-examples.yaml`
 Tool registry: `.sinapse-ai/data/tool-registry.yaml`
+

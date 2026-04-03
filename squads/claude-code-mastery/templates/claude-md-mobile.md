@@ -196,3 +196,4 @@ eas update --branch preview              # Preview update
 - Test accessibility with screen readers (VoiceOver on iOS, TalkBack on Android)
 - Use `react-native-reanimated` for 60fps animations (avoid Animated API for complex cases)
 - Handle app state changes (background, foreground) for data refresh
+

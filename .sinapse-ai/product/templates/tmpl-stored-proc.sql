@@ -138,3 +138,4 @@ $$;
 -- 1. Function is in public schema
 -- 2. GRANT EXECUTE to appropriate roles
 -- 3. Consider using SECURITY DEFINER for bypassing RLS when needed
+

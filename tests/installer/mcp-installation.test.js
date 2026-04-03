@@ -397,3 +397,4 @@ describe('MCP Installation Module', () => {
     });
   });
 });
+

@@ -646,3 +646,4 @@ analytics:
     demote:
       maxUsesPerNSessions: 1  # Tool used <N times per window
       sessionWindow: 5        # Window of M sessions for demote calculation
+

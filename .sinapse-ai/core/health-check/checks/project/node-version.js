@@ -159,3 +159,4 @@ class NodeVersionCheck extends BaseCheck {
 }
 
 module.exports = NodeVersionCheck;
+

@@ -59,3 +59,4 @@ class BaseMerger {
 }
 
 module.exports = { BaseMerger };
+

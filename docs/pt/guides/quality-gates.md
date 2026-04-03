@@ -612,3 +612,4 @@ verbose:
 ---
 
 _Guia do Sistema de Quality Gates SINAPSE v4_
+

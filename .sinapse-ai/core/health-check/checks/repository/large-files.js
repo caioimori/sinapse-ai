@@ -179,3 +179,4 @@ class LargeFilesCheck extends BaseCheck {
 }
 
 module.exports = LargeFilesCheck;
+

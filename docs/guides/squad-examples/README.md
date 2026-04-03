@@ -61,3 +61,4 @@ Have a useful squad pattern? We welcome contributions!
 ---
 
 *SINAPSE Squads: Equipes de AI agents trabalhando com você* 🤖
+

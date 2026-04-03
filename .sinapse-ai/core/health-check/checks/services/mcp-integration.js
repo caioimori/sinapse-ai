@@ -121,3 +121,4 @@ class McpIntegrationCheck extends BaseCheck {
 }
 
 module.exports = McpIntegrationCheck;
+

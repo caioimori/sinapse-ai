@@ -427,3 +427,4 @@ function getMonitor(config = {}) {
 module.exports = ParallelMonitor;
 module.exports.ParallelMonitor = ParallelMonitor;
 module.exports.getMonitor = getMonitor;
+

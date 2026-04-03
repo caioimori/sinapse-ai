@@ -282,3 +282,4 @@ Atlas says: "Documentation is code. Keep it fresh."
 - Updates when components change
 - Includes live Storybook links (if enabled)
 - Searchable by component name, prop, or token
+

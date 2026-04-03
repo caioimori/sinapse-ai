@@ -124,3 +124,4 @@ describe('atomicWriteSync', () => {
     fs.unlinkSync(tmpPath);
   });
 });
+

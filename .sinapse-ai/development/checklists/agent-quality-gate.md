@@ -557,3 +557,4 @@ research-then-create-agent workflow
 - v4.0: Added SC_AGT_004 (Operational Completeness), maturity scoring, task/template/checklist validation
 - v3.0: Added Level 0 loader checks
 - v2.0: Initial hybrid loader architecture
+

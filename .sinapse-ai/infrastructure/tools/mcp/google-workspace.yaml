@@ -928,3 +928,4 @@ tool:
       command: list_files
       expected_response: "Array of file objects or empty array"
       timeout_ms: 5000
+

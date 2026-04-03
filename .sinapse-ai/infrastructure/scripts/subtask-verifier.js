@@ -791,3 +791,4 @@ module.exports = { SubtaskVerifier };
 if (require.main === module) {
   main();
 }
+

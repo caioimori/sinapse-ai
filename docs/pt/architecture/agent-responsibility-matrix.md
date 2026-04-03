@@ -442,3 +442,4 @@ Se novos agentes forem adicionados via Squads:
 
 *Documento mantido por @architect (Winston) e @product-lead (Sarah)*
 *Última revisão: 2025-10-25*
+

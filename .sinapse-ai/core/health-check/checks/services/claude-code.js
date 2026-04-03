@@ -135,3 +135,4 @@ class ClaudeCodeCheck extends BaseCheck {
 }
 
 module.exports = ClaudeCodeCheck;
+

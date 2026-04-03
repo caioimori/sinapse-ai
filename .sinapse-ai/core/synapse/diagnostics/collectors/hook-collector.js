@@ -127,3 +127,4 @@ function collectHookStatus(projectRoot) {
 }
 
 module.exports = { collectHookStatus };
+

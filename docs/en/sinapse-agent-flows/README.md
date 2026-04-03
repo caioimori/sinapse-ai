@@ -188,3 +188,4 @@ To add or update agent documentation:
 ---
 
 *SINAPSE Agent Flows Documentation v1.0 - Detailed documentation of the agent system*
+

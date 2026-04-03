@@ -43,3 +43,4 @@ dependencies:
 - `*status` - Check progress
 - `*help` - Show commands
 - `*exit` - Exit agent
+

@@ -632,3 +632,4 @@ class UsageAnalytics {
 }
 
 module.exports = UsageAnalytics;
+

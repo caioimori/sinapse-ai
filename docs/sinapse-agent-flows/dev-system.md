@@ -577,3 +577,4 @@ O @developer deve **HALT** e perguntar ao usuario quando:
 ---
 
 *-- Dex, sempre construindo*
+

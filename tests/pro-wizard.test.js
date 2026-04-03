@@ -553,3 +553,4 @@ describe('API Error Handling', () => {
     expect(result.data.features).toContain('pro.*');
   });
 });
+

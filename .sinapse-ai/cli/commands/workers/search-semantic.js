@@ -291,3 +291,4 @@ module.exports = {
   precomputeEmbeddings,
   buildSearchText,
 };
+

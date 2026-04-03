@@ -111,3 +111,4 @@ fi
 - Extensible: add more checks by appending to the script
 - Each check reports PASS/FAIL/WARN independently
 - Only summary enters context — intermediate grep/read results stay in shell
+

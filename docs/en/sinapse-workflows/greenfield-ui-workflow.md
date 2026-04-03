@@ -43,3 +43,4 @@ The **Greenfield UI Workflow** is designed for creating new frontend application
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/greenfield-ui-workflow.md).*
+

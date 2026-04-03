@@ -519,3 +519,4 @@ module.exports = {
   createSemanticSearch,
   DEFAULT_CONFIG,
 };
+

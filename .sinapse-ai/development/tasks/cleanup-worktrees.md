@@ -37,3 +37,4 @@ Clean up abandoned worktrees to maintain repository hygiene.
 - `*list-worktrees` - List all worktrees
 - `*remove-worktree` - Remove single worktree
 - `*create-worktree` - Create new worktree
+

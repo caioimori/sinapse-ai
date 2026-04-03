@@ -551,3 +551,4 @@ if (require.main === module) {
 
 module.exports = ChangelogGenerator;
 module.exports.ChangelogGenerator = ChangelogGenerator;
+

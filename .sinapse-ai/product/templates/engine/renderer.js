@@ -341,3 +341,4 @@ module.exports = {
   TemplateRenderer,
   registerDefaultHelpers,
 };
+

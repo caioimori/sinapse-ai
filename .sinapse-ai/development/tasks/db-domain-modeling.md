@@ -691,3 +691,4 @@ $$ LANGUAGE plpgsql;
 - [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [PostgreSQL Data Types](https://www.postgresql.org/docs/current/datatype.html)
 - [Supabase RLS Policies](https://supabase.com/docs/guides/auth/row-level-security)
+

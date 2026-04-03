@@ -115,3 +115,4 @@ Write-Host ""
 Write-Host "If all checks passed, run:" -ForegroundColor Green
 Write-Host "  npx sinapse-ai@latest" -ForegroundColor White
 Write-Host ""
+

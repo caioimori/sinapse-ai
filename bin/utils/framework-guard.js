@@ -242,3 +242,4 @@ module.exports = { readBoundaryConfig, globToRegex, matchesAny, getStagedFiles, 
 if (require.main === module) {
   main();
 }
+

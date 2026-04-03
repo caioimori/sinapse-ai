@@ -1251,3 +1251,4 @@ const DEFAULT_RETENTION: EventRetentionSettings = {
 ---
 
 _Documentação gerada por @architect (Aria) - SINAPSE Core v2.0_
+

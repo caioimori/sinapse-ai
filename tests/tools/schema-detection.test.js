@@ -366,3 +366,4 @@ describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
     });
   });
 });
+

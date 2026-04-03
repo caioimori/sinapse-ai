@@ -104,3 +104,4 @@ describe('gemini command sync', () => {
     expect(fs.existsSync(path.join(tmpRoot, '.gemini', 'commands', 'sinapse-qa.toml'))).toBe(true);
   });
 });
+

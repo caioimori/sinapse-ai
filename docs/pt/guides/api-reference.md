@@ -897,3 +897,4 @@ Para desenvolvimento paralelo:
 ---
 
 _SINAPSE Referência de API v4.2.11_
+

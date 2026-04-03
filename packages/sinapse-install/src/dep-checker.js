@@ -304,3 +304,4 @@ module.exports = {
   formatDependencyStatus,
   displayResults,
 };
+

@@ -48,3 +48,4 @@ The **Brownfield Fullstack Workflow** is designed for evolving existing full-sta
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/brownfield-fullstack-workflow.md).*
+

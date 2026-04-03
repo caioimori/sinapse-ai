@@ -106,3 +106,4 @@ console.log(context.config.devLoadAlwaysFiles);
 - Block executes in <2 seconds for typical projects
 - Gotchas are cached per session to avoid repeated reads
 - Git commands are non-blocking and fail gracefully
+

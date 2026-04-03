@@ -12,3 +12,4 @@ tool:
   mcp_specific:
     server_command: npx -y test-simple-server
     transport: stdio
+

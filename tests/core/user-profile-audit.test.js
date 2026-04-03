@@ -602,3 +602,4 @@ describe('validate-user-profile standalone', () => {
     expect(result.error).toContain('must be a string');
   });
 });
+

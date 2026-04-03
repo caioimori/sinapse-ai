@@ -221,3 +221,4 @@ describe('Legacy Flag Support (--legacy)', () => {
     expect(config.legacyStructure).toBe(false);
   });
 });
+

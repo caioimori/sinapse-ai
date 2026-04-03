@@ -689,3 +689,4 @@ In `bob` mode, non-PM agents return **empty command lists** (redirect to @projec
 *Updated on 2026-02-06 | Story ACT-2 - user_profile impact matrix added*
 *Updated on 2026-02-06 | Story ACT-6 - Unified Activation Pipeline (Path A/B merged)*
 *Updated on 2026-02-06 | Story ACT-8 - Config governance: enriched pm, ux-design-expert, analyst, sm, squad-creator*
+

@@ -366,3 +366,4 @@ describe('generate-optimization-report.js', () => {
     });
   });
 });
+

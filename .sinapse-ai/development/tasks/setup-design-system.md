@@ -460,3 +460,4 @@ User selects 1
 - Base styles include CSS reset and token variables
 - Setup can be re-run safely (asks before overwriting)
 - Next step after setup: *build {pattern} to generate components
+

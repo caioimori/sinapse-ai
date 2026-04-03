@@ -196,3 +196,4 @@ module.exports = {
   hasSinapseMarkers,
   getSinapseSectionIds,
 };
+

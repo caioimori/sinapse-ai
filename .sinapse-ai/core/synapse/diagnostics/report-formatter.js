@@ -482,3 +482,4 @@ function _formatRelevanceSection(lines, relevance) {
 }
 
 module.exports = { formatReport };
+

@@ -106,3 +106,4 @@ echo -e "${YELLOW}Only use in trusted repositories/environments.${NC}" >&2
 echo "" >&2
 
 exec claude --dangerously-skip-permissions "$@"
+

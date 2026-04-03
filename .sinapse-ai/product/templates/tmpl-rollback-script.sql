@@ -75,3 +75,4 @@ COMMIT;
 -- 3. Update migration tracking if applicable
 -- 4. Document reason for rollback
 --
+

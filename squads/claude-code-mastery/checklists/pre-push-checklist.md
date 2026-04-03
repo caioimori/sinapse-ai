@@ -77,3 +77,4 @@ CRITICAL items are marked with (CRITICAL) suffix.]]
 **FAIL:** Any item marked (CRITICAL) is unchecked, OR more than 3 non-critical items fail without justification.
 
 **Action on FAIL:** Fix all critical issues before push. Document non-critical issues as tech debt if deferring.
+

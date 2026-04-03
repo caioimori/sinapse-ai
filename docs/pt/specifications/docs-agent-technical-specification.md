@@ -2159,3 +2159,4 @@ Com a adicao do @docs (Ajax), SINAPSE agora tem **13 agentes nomeados**:
 - Decisao: `docs/decisions/docs-agent-creation-decision.md`
 - Epic: `docs/epics/epic-6.1-agent-identity-system.md`
 - Story: Story 6.1.3 (atualizada para criar apenas @docs, cancelar @security)
+

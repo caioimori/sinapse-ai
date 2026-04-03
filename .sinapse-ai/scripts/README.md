@@ -120,3 +120,4 @@ const sessionLoader = require('./.sinapse-ai/scripts/session-context-loader');
 ---
 
 **Last updated:** 2025-12-18 - Story 6.16 Scripts Path Consolidation
+

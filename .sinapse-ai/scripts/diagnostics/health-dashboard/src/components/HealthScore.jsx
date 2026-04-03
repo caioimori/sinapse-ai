@@ -79,3 +79,4 @@ function HealthScore({ score, size = 'lg', showLabel = true, animate = true }) {
 }
 
 export default HealthScore;
+

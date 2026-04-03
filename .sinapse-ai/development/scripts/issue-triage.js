@@ -169,3 +169,4 @@ if (args.includes('--list')) {
   console.log('Priorities:', VALID_PRIORITIES.join(', '));
   console.log('Areas:', VALID_AREAS.join(', '));
 }
+

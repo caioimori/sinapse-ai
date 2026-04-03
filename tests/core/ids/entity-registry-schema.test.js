@@ -133,3 +133,4 @@ describe('Entity Registry Schema (AC: 1, 7, 8)', () => {
     });
   });
 });
+

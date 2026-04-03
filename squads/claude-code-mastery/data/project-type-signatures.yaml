@@ -333,3 +333,4 @@ project_types:
         event: PostToolUse
       - pattern: context-preservation
         event: PreCompact
+

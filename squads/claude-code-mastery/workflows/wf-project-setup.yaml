@@ -190,3 +190,4 @@ veto_conditions:
   - "No .env or secrets files accessible without deny rules"
   - "No autoApprove permission mode without explicit user consent"
   - "No MCP configuration that exceeds context budget"
+

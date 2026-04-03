@@ -172,3 +172,4 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
     });
   });
 });
+

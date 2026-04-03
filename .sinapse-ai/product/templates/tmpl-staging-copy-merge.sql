@@ -137,3 +137,4 @@ WHERE _import_status = 'error';
 
 -- Drop staging table (automatic for TEMP, but explicit is clearer)
 DROP TABLE IF EXISTS :staging_table;
+

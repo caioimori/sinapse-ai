@@ -374,3 +374,4 @@ describe('collectQualityMetrics — Staleness detection', () => {
     expect(result.hook.stale).toBe(false);
   });
 });
+

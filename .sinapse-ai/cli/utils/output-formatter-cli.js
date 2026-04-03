@@ -230,3 +230,4 @@ module.exports = {
   formatCategories,
   truncate,
 };
+

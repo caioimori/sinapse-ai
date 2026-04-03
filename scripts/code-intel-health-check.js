@@ -341,3 +341,4 @@ function outputReport(report, exitCode) {
 }
 
 runHealthCheck();
+

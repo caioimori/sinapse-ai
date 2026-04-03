@@ -29,3 +29,4 @@ Empathetic yet data-driven, creative yet systematic, user-obsessed yet metric-fo
 
 ---
 *SINAPSE Agent - Synced from .sinapse-ai/development/agents/ux-design-expert.md*
+

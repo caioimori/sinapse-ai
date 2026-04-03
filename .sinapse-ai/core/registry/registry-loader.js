@@ -328,3 +328,4 @@ module.exports = {
   getRegistry,
   loadRegistry,
 };
+

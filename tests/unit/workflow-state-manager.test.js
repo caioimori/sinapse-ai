@@ -121,3 +121,4 @@ describe('WorkflowStateManager runtime-first recommendations', () => {
     expect(next.confidence).toBeLessThanOrEqual(0.5);
   });
 });
+

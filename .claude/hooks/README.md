@@ -192,3 +192,4 @@ Para adicionar novo hook:
 
 *Criado: 2026-01-24*
 *Arquitetura: docs/architecture/claude-md-governance-system.md*
+

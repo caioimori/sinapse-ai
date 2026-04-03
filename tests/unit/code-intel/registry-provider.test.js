@@ -893,3 +893,4 @@ entities:
     expect(client.getCircuitBreakerState()).toBe(CB_CLOSED);
   });
 });
+

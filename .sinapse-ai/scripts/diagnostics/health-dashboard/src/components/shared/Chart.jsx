@@ -136,3 +136,4 @@ function TrendChart({ data, height = 200, showArea = true }) {
 }
 
 export default TrendChart;
+

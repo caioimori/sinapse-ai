@@ -39,3 +39,4 @@ describe('CLAUDE.md Ownership Annotations', () => {
     expect(firstFramework).toBeLessThan(firstProject);
   });
 });
+

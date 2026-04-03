@@ -493,3 +493,4 @@ Never bypass Supabase Auth in production. Always use:
 - Supabase client with user authentication
 - Proper JWT tokens from auth.users
 - Real user sessions with valid credentials
+

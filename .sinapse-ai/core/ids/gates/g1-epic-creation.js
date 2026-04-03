@@ -99,3 +99,4 @@ class G1EpicCreationGate extends VerificationGate {
 }
 
 module.exports = { G1EpicCreationGate };
+

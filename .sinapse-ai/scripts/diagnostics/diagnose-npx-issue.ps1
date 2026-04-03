@@ -94,3 +94,4 @@ Write-Host "2. Desinstale Node v24"
 Write-Host "3. Instale a versão LTS"
 Write-Host "4. Tente novamente: npx sinapse-ai@latest"
 Write-Host ""
+

@@ -52,3 +52,4 @@ tool:
   mcp_specific:
     server_command: npx -y test-complex-server
     transport: stdio
+

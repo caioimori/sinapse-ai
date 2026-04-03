@@ -14,3 +14,4 @@ SELECT proname FROM pg_proc WHERE pronamespace = 'public'::regnamespace
 -- RLS sanity (should not error even if it returns 0)
 -- SET LOCAL request.jwt.claims = '{"sub":"<user-uuid>","role":"authenticated"}';
 -- SELECT 1 FROM fragments WHERE false;
+

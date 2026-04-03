@@ -268,3 +268,4 @@ Review Tailwind CSS v4 setup to guarantee @theme layering, content scanning, uti
 - Encourage automated linting (ESLint + prettier-plugin-tailwindcss) post-audit
 - Document class naming conventions (order: layout → size → spacing → typography → color → effect)
 - Track manual overrides (safelist patterns, arbitrary values) for future cleanup
+

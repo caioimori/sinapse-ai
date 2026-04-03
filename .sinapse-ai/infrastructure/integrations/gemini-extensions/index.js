@@ -39,3 +39,4 @@ module.exports = {
   Severity,
   getExtensionStatus,
 };
+

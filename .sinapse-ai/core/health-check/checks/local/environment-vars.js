@@ -132,3 +132,4 @@ class EnvironmentVarsCheck extends BaseCheck {
 }
 
 module.exports = EnvironmentVarsCheck;
+

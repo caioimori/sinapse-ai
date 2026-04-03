@@ -39,3 +39,4 @@ dependencies:
 - `*summarize` - Summarize current findings
 - `*help` - Show commands
 - `*exit` - Exit agent
+

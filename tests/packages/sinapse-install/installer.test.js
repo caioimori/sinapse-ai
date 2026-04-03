@@ -286,3 +286,4 @@ describe('installer', () => {
     });
   });
 });
+

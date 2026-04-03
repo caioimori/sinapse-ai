@@ -885,3 +885,4 @@ cp .sinapse.backup/memory.db .sinapse/
 4. Verificando permissões
 
 Em caso de dúvida, a comunidade está aqui para ajudar!
+

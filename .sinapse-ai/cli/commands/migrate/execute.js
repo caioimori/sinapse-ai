@@ -290,3 +290,4 @@ module.exports = {
   loadMigrationState,
   clearMigrationState,
 };
+

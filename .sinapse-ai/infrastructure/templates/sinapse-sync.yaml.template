@@ -180,3 +180,4 @@ logging:
   log_level: "info"  # debug, info, warn, error
   max_log_size_mb: 10
   rotate_logs: true
+

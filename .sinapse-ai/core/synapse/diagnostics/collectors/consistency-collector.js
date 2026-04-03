@@ -166,3 +166,4 @@ function _checkQuality(uapData, hookData) {
 }
 
 module.exports = { collectConsistencyMetrics, MAX_TIMESTAMP_GAP_MS };
+

@@ -570,3 +570,4 @@ const { data, error } = await supabase
 - [Supabase Query Optimization](https://supabase.com/docs/guides/database/query-optimization)
 - [Supabase RLS Performance](https://supabase.com/docs/guides/troubleshooting/rls-performance-and-best-practices-Z5Jjwv)
 - [index_advisor Extension](https://supabase.com/docs/guides/database/extensions/index_advisor)
+

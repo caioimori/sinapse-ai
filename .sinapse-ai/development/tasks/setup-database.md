@@ -739,3 +739,4 @@ Started supabase local development setup.
 ---
 
 **Note:** This task replaces `db-supabase-setup.md` with database-agnostic version (renamed in Story 6.1.2.3)
+

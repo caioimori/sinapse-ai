@@ -43,3 +43,4 @@ function _escapeDot(str) {
 }
 
 module.exports = { formatAsDot, _escapeDot };
+

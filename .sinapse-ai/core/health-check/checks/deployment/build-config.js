@@ -107,3 +107,4 @@ class BuildConfigCheck extends BaseCheck {
 }
 
 module.exports = BuildConfigCheck;
+

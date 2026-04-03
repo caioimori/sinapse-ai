@@ -57,3 +57,4 @@ multi-agent-squad/
 4. **Collaboration patterns** - How agents work together
 
 See [Squad Development Guide](../../../guides/squads-guide.md) for details.
+

@@ -272,3 +272,4 @@ Unit + Integration tests. Unit tests para cada widget/data-source adapter. Integ
 ---
 
 *— Morgan, planejando o futuro 📊*
+

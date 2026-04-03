@@ -73,3 +73,4 @@ Reference: .claude/commands/synapse/utils/manifest-parser-reference.md
 
 *SYNAPSE Manager — Router for CRUD operations on `.synapse/` content.*
 *Source: SYNAPSE-HOOK-SKILL-COMMAND-ANALYSIS.md section 2.3 (C1)*
+

@@ -366,3 +366,4 @@ describe('Issue #7: BRACKET_ACTIVE_LAYERS should match engine context-tracker', 
     }
   });
 });
+

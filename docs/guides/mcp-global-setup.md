@@ -694,3 +694,4 @@ Create `.mcp.json` in project root to override global settings:
 ---
 
 _SINAPSE v4 MCP Global Setup Guide_
+

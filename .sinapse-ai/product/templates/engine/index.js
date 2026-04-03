@@ -306,3 +306,4 @@ module.exports = {
   TemplateValidator,
   SUPPORTED_TYPES,
 };
+

@@ -1029,3 +1029,4 @@ metadata:
     - sinapse
     - auto-claude
 ```
+

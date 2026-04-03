@@ -184,3 +184,4 @@ npm run seed --workspace=user-service        # Seed data
 - Keep services small and focused — if a service grows too large, split it
 - Use feature flags for gradual rollouts across services
 - Always test backward compatibility when changing event schemas
+

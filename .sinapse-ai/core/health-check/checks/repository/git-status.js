@@ -145,3 +145,4 @@ class GitStatusCheck extends BaseCheck {
 }
 
 module.exports = GitStatusCheck;
+

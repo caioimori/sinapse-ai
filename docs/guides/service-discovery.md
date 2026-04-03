@@ -516,3 +516,4 @@ await registry.load(true);
 ---
 
 _SINAPSE v4 Service Discovery Guide_
+

@@ -167,3 +167,4 @@ class GreetingPreferenceManager {
 
 module.exports = GreetingPreferenceManager;
 
+

@@ -91,3 +91,4 @@ describe('dot-formatter', () => {
     });
   });
 });
+

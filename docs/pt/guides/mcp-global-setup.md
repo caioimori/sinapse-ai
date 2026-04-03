@@ -661,3 +661,4 @@ Crie `.mcp.json` na raiz do projeto para sobrescrever configurações globais:
 ---
 
 _SINAPSE v4 Guia de Configuração Global MCP_
+

@@ -51,3 +51,4 @@ SINAPSE skills work identically in both Claude Code and Gemini CLI. Same agents,
 ## License
 
 MIT
+

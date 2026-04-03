@@ -701,3 +701,4 @@ describe('DEFAULT_CONFIG', () => {
     expect(DEFAULT_CONFIG.autoCheckpoint).toBe(true);
   });
 });
+

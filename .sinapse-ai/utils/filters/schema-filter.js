@@ -155,3 +155,4 @@ if (require.main === module) {
 }
 
 module.exports = { filterSchema, projectFields, CHARS_PER_TOKEN };
+

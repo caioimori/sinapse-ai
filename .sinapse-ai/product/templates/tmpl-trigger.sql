@@ -150,3 +150,4 @@ BEGIN
     RETURN COALESCE(NEW, OLD);
 END;
 $$ LANGUAGE plpgsql;
+

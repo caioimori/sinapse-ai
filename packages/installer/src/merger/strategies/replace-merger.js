@@ -66,3 +66,4 @@ class ReplaceMerger extends BaseMerger {
 }
 
 module.exports = { ReplaceMerger };
+

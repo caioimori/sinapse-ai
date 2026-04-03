@@ -63,3 +63,4 @@ function classifyLayer(entityPath) {
 }
 
 module.exports = { classifyLayer, LAYER_RULES };
+

@@ -43,3 +43,4 @@ The **Greenfield Fullstack Workflow** is designed for creating new full-stack ap
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/greenfield-fullstack-workflow.md).*
+

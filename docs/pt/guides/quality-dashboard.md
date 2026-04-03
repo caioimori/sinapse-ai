@@ -365,3 +365,4 @@ A auto-atualização pausa quando:
 ---
 
 _SINAPSE Quality Dashboard v1.0_
+

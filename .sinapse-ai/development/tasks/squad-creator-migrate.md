@@ -241,3 +241,4 @@ async function migrateSquad(options) {
 - **Schema:** .sinapse-ai/schemas/squad-schema.json
 - **Agent:** @squad-creator (Craft)
 - **Similar Tasks:** *validate-squad, *create-squad
+

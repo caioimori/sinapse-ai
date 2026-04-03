@@ -44,3 +44,4 @@ Examples:
 module.exports = {
   createManifestCommand,
 };
+

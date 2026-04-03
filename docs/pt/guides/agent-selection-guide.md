@@ -293,3 +293,4 @@ Retries < 3? → @developer tenta com variação
 ---
 
 **Versão:** 2.0 | **ADE:** v2.2.0 | **Data:** 2026-01-29
+

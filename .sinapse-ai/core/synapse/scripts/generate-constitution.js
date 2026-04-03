@@ -202,3 +202,4 @@ if (require.main === module) {
 }
 
 module.exports = { parseConstitution, extractRules, generateConstitution, cleanText, main, ROMAN_TO_ARABIC };
+

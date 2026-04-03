@@ -180,3 +180,4 @@ DROP INDEX IF EXISTS idx_old_index;
 
 **Reviewer:** ________ **Date:** ________
 **Quality Gate:** [ ] PASS [ ] NEEDS REVIEW
+

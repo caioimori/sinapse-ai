@@ -49,3 +49,4 @@ const DashboardEventType = {
 module.exports = {
   DashboardEventType,
 };
+

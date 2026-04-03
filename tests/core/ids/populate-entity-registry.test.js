@@ -834,3 +834,4 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
     });
   });
 });
+

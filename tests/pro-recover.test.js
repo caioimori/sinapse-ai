@@ -221,3 +221,4 @@ describe('CLI alias reset-password', () => {
     expect(cliSource).toMatch(/reset-password\s+.*alias/i);
   });
 });
+

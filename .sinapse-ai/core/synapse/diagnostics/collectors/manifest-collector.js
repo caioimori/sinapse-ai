@@ -80,3 +80,4 @@ function collectManifestIntegrity(projectRoot) {
 }
 
 module.exports = { collectManifestIntegrity };
+

@@ -117,3 +117,4 @@ describe('BuyerValidationError', () => {
     expect(json.code).toBe('NOT_A_BUYER');
   });
 });
+

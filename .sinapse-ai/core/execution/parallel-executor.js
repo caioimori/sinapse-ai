@@ -290,3 +290,4 @@ class ParallelExecutor extends EventEmitter {
 }
 
 module.exports = { ParallelExecutor, ParallelMode };
+

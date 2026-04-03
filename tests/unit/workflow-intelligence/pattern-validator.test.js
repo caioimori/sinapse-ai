@@ -372,3 +372,4 @@ describe('PatternValidator (Unit)', () => {
     });
   });
 });
+

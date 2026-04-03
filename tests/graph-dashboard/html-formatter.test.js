@@ -938,3 +938,4 @@ describe('html-formatter', () => {
     });
   });
 });
+

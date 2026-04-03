@@ -140,3 +140,4 @@ Use `*synapse create` or manually:
 | `.sinapse-ai/core/synapse/domain/domain-loader.js` | Manifest parser + domain file loader |
 | `.claude/commands/synapse/utils/manifest-parser-reference.md` | Detailed parser format spec |
 | `.claude/commands/synapse/templates/manifest-entry-template` | Template for new manifest entries |
+

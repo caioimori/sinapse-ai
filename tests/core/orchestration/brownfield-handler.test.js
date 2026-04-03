@@ -540,3 +540,4 @@ describe('BrownfieldHandler integration with BobOrchestrator', () => {
     expect(['brownfield_complete', 'brownfield_error', 'brownfield_failed']).toContain(result.action);
   });
 });
+

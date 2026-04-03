@@ -127,3 +127,4 @@ QUICK ACCESS — HOW TO INVOKE:
 - [ ] Numeros de agents/tasks/KBs corretos
 - [ ] Invocation commands validos
 - [ ] Formato legivel e estruturado
+

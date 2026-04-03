@@ -609,3 +609,4 @@ describe('UAP Session Bridge — Edge Cases', () => {
     expect(metrics.loaders.synapseSession.status).toBe('ok');
   });
 });
+

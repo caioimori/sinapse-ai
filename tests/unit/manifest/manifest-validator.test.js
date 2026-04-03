@@ -284,3 +284,4 @@ describe('ManifestValidator', () => {
     });
   });
 });
+

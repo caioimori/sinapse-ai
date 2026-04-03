@@ -112,3 +112,4 @@ For each category, count failed items (excluding N/A). Apply weights:
 4. **Rule Health** failures -- stale rules load unnecessary content
 5. **Size Check** failures -- bloat degrades all operations
 6. **Memory Hygiene** failures -- stale memory misleads agents
+

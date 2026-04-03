@@ -78,3 +78,4 @@ endlocal & set "ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic" & set "AN
 >&2 echo.
 
 claude --dangerously-skip-permissions %*
+

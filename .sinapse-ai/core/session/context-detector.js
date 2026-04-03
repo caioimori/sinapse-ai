@@ -225,3 +225,4 @@ class ContextDetector {
 }
 
 module.exports = ContextDetector;
+

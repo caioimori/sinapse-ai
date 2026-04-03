@@ -264,3 +264,4 @@ describe('generateInstalledManifest', () => {
     expect(manifest.files[0].timestamp).toBeDefined();
   });
 });
+

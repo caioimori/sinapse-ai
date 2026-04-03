@@ -120,3 +120,4 @@ After completing the checklist:
 Releases are public commitments to quality.]]
 
 - [ ] I, the DevOps Agent, confirm that all release criteria have been met and the release is ready to proceed.
+

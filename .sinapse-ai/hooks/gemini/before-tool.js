@@ -112,3 +112,4 @@ beforeTool().catch((error) => {
   console.log(JSON.stringify({ status: 'allow', error: error.message }));
   process.exit(0);
 });
+

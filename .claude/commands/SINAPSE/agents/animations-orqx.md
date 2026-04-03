@@ -37,3 +37,4 @@ If the task requires expertise outside this squad:
 1. Identify which squad covers the needed domain
 2. Recommend: /SINAPSE:agents:{appropriate-agent}
 3. Provide handoff context
+

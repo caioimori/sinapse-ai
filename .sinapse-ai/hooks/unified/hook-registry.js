@@ -141,3 +141,4 @@ class HookRegistry {
 const registry = new HookRegistry();
 
 module.exports = { HookRegistry, registry };
+

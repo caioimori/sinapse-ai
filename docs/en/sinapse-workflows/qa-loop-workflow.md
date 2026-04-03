@@ -48,3 +48,4 @@ The **QA Loop Workflow** defines the quality assurance cycle within SINAPSE deve
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/qa-loop-workflow.md).*
+

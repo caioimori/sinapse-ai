@@ -51,3 +51,4 @@ The **Design System Build Quality Workflow** guides the creation and maintenance
 ---
 
 *For complete details, diagrams, and step-by-step instructions, see the [Portuguese documentation](../../sinapse-workflows/design-system-build-quality-workflow.md).*
+

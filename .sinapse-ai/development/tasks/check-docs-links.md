@@ -112,3 +112,4 @@ SUMMARY
 
 - `scripts/check-markdown-links.py` - Script de verificação
 - `docs/` - Diretório de documentação
+

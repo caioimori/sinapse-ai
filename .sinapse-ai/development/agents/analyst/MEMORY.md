@@ -31,3 +31,4 @@
 ## Archived
 <!-- Patterns no longer relevant — kept for history -->
 <!-- Format: - ~~{pattern}~~ | Archived: {YYYY-MM-DD} | Reason: {reason} -->
+

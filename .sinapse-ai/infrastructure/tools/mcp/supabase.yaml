@@ -806,3 +806,4 @@ tool:
       command: list_projects
       expected_response: "Array of projects or organization prompt"
       timeout_ms: 10000
+

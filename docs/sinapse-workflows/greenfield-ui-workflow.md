@@ -920,3 +920,4 @@ flowchart TD
 ---
 
 *Documento gerado automaticamente a partir de `.sinapse-ai/development/workflows/greenfield-ui.yaml`*
+

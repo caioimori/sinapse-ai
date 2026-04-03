@@ -312,3 +312,4 @@ cli_flags:
   - flag: "--permission-mode"
     values: [default, plan, autoApprove]
     description: "Set permission mode for session"
+

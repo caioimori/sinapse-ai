@@ -74,3 +74,4 @@ The doctor will report:
 ---
 
 _This is an official SINAPSE framework standard._
+

@@ -355,3 +355,4 @@ sinapse-ai/
 **Última Atualização:** 2025-12-09
 **Versão:** 2.1.0
 **Mantenedor:** @architect (Aria)
+

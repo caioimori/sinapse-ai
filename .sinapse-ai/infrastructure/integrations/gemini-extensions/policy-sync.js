@@ -71,3 +71,4 @@ class PolicySync {
 }
 
 module.exports = { PolicySync };
+

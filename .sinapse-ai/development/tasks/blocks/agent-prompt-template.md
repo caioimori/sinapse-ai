@@ -113,3 +113,4 @@ Task({ prompt, subagent_type: 'general-purpose' });
 - Composes with `context-loading` block for project context
 - Consistent "send message to team lead" ending for orchestration
 - Works with both sequential and parallel agent invocation patterns
+

@@ -86,3 +86,4 @@ class SupabaseAdapter {
 }
 
 module.exports = { SupabaseAdapter };
+

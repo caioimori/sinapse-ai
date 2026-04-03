@@ -44,3 +44,4 @@ To add more functionality:
 3. Add tools for custom integrations
 
 See [Squad Development Guide](../../../guides/squads-guide.md) for details.
+

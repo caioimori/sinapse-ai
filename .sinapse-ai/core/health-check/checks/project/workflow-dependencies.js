@@ -210,3 +210,4 @@ class WorkflowDependenciesCheck extends BaseCheck {
 }
 
 module.exports = WorkflowDependenciesCheck;
+

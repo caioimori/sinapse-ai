@@ -175,3 +175,4 @@ GRANT SELECT ON :view_name TO authenticated;
 
 -- For updateable views, also grant UPDATE
 -- GRANT UPDATE ON :view_name_editable TO authenticated;
+

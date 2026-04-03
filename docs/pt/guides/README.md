@@ -131,3 +131,4 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 
 **Última Atualização:** 2025-12-17
 **Versão:** 2.1 (Story 6.14)
+

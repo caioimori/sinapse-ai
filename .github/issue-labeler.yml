@@ -28,3 +28,4 @@
   - '(pro feature|license|sinapse-pro|pro/|pro submodule)'
 "area: health-check":
   - '(health.?check|doctor|diagnostic)'
+

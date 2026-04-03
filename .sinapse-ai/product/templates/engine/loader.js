@@ -229,3 +229,4 @@ module.exports = {
   parseTemplate,
   validateMetadata,
 };
+

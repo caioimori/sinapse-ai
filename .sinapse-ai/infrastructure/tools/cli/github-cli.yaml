@@ -198,3 +198,4 @@ tool:
     - "Rate limits apply (higher for authenticated requests)"
     - "Some operations require repository write access"
     - "Not all GitHub API features exposed via CLI"
+

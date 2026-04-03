@@ -118,3 +118,4 @@ class DockerConfigCheck extends BaseCheck {
 }
 
 module.exports = DockerConfigCheck;
+

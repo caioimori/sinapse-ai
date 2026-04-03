@@ -53,3 +53,4 @@ describe('semantic-lint', () => {
     expect(result.warnings.length).toBeGreaterThan(0);
   });
 });
+

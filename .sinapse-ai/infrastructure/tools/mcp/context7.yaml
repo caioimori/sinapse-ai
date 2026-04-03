@@ -76,3 +76,4 @@ tool:
     - "Documentation availability depends on Context7 coverage"
     - "Token usage counts against retrieval limits"
     - "SSE connection may timeout on slow networks"
+

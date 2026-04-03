@@ -413,3 +413,4 @@ describe('SCHEMA_FILES', () => {
     expect(SCHEMA_FILES.user).toBe('user-config.schema.json');
   });
 });
+

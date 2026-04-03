@@ -413,3 +413,4 @@ async function validateYAML(content, type = 'general') {
 module.exports = YAMLValidator;
 module.exports.YAMLValidator = YAMLValidator;
 module.exports.validateYAML = validateYAML;
+

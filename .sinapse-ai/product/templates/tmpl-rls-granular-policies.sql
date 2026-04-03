@@ -102,3 +102,4 @@ USING (
 -- SET LOCAL ROLE authenticated;
 -- SET LOCAL request.jwt.claims = '{"sub": "user-uuid-here"}';
 -- SELECT * FROM :table_name; -- Should only return authorized rows
+

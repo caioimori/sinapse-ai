@@ -410,3 +410,4 @@ patterns:
                   --head "$BRANCH"
               env:
                 GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+

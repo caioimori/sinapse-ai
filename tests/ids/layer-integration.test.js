@@ -143,3 +143,4 @@ describe('Layer Preservation — Registry Healer (AC: 6)', () => {
     expect(testEntity.layer).toBe('L3');
   });
 });
+

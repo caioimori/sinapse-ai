@@ -1288,3 +1288,4 @@ describe('ACT-3: Git post-commit hook (AC5)', () => {
     expect(actualFs.existsSync(huskyPath)).toBe(true);
   });
 });
+

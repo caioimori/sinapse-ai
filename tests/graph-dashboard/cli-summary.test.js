@@ -140,3 +140,4 @@ describe('cli-summary', () => {
     });
   });
 });
+

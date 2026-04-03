@@ -503,3 +503,4 @@ def example_function():
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | YYYY-MM-DD | [Name] | Initial version |
+

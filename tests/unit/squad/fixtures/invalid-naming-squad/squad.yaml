@@ -1,3 +1,4 @@
 name: invalid-naming
 version: 1.0.0
 description: Squad with files that have non-kebab-case names
+

@@ -336,3 +336,4 @@ Não há dependência do Dashboard para o ADE funcionar.
 
 _Handoff preparado por Quinn (@quality-gate) - Guardian of Quality_
 _Data: 2026-01-28_
+

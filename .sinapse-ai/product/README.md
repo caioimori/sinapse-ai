@@ -54,3 +54,4 @@ Created as part of [Story 2.4](../../../docs/stories/v4.0.4/sprint-2/story-2.4-p
 
 ---
 *SINAPSE v4 - Product Module*
+

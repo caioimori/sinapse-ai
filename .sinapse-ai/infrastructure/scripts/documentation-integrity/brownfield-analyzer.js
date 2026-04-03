@@ -499,3 +499,4 @@ module.exports = {
   generateRecommendations,
   formatMigrationReport,
 };
+

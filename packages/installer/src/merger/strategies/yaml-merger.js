@@ -179,3 +179,4 @@ class YamlMerger extends BaseMerger {
 }
 
 module.exports = { YamlMerger };
+

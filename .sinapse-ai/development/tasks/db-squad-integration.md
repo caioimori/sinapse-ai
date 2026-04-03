@@ -661,3 +661,4 @@ proposed_schema:
 - `*create-migration-plan` - Generate detailed migration strategy
 - `*migrate` - Execute the actual migrations
 - `*smoke-test` - Validate integration after migration
+

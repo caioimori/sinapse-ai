@@ -164,3 +164,4 @@ switch (command) {
     console.log('  --enable <name>  Re-enable specific server');
     console.log('  --status         Show current status');
 }
+

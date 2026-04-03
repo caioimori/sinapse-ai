@@ -701,3 +701,4 @@ class WorktreeManager {
 }
 
 module.exports = WorktreeManager;
+

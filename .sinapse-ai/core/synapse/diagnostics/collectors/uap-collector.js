@@ -81,3 +81,4 @@ function collectUapBridgeStatus(projectRoot) {
 }
 
 module.exports = { collectUapBridgeStatus };
+

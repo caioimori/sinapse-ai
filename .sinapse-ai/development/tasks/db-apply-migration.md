@@ -379,3 +379,4 @@ SELECT * FROM pg_locks WHERE locktype = 'advisory';
 ✅ Transaction-wrapped execution  
 ✅ Automatic diff generation  
 ✅ Rollback instructions provided
+

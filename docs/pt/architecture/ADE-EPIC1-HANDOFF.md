@@ -83,3 +83,4 @@ await manager.cleanup();
 ---
 
 _Handoff preparado por Quinn (@quality-gate) - Guardião da Qualidade_
+

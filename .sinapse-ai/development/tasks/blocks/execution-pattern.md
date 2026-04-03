@@ -119,3 +119,4 @@ None - this is a reference/documentation block.
 - Anti-patterns section prevents common mistakes
 - Found in 8+ skills with 98% similarity
 - Total lines saved: ~35 lines × 8 skills = 280 lines
+

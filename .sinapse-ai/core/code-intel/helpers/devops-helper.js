@@ -164,3 +164,4 @@ module.exports = {
   // Exposed for testing
   _formatImpactReport,
 };
+

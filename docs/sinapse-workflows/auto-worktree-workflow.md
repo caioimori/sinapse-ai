@@ -787,3 +787,4 @@ ls .git/worktrees/{storyId}/locked
 ---
 
 *Documentação gerada automaticamente pelo SINAPSE-FULLSTACK*
+

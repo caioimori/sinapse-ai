@@ -62,3 +62,4 @@ function detectRepositoryContext() {
 }
 
 module.exports = { detectRepositoryContext };
+

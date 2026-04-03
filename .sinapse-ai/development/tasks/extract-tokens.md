@@ -465,3 +465,4 @@ Ready for Atlas to build components or generate migration strategy.
 - Export formats stay in sync - update tokens.yaml and regenerate all
 - Brad recommends: Run *migrate next to create migration strategy
 - For component generation, hand off to Atlas: *agent atlas
+

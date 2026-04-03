@@ -325,3 +325,4 @@ describe('Existing strategies still work', () => {
     expect(fs.existsSync(testPath)).toBe(true);
   });
 });
+

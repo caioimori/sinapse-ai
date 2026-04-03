@@ -5,3 +5,4 @@ logging:
 app_specific:
   port: 3000
   name: "dashboard"
+

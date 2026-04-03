@@ -230,3 +230,4 @@ describe('DashboardEmitter Bob-specific methods', () => {
     });
   });
 });
+

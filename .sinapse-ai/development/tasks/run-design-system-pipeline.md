@@ -638,3 +638,4 @@ jobs:
 - Modo Interactive ideal para desenvolvimento local
 - A11y violations serious não bloqueiam, mas devem ser corrigidas antes do release
 - ROI é opcional mas recomendado para justificar investimento
+

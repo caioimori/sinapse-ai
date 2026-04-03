@@ -157,3 +157,4 @@ class CodeIntelEnricher {
 }
 
 module.exports = { CodeIntelEnricher };
+

@@ -635,3 +635,4 @@ SELECT u.*, COUNT(p.id) FROM users u LEFT JOIN posts p ON p.user_id = u.id GROUP
 ---
 
 **Note:** This consolidated task replaces `db-explain.md` and `db-analyze-hotpaths.md` (deprecated in v3.0)
+

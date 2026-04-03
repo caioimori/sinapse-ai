@@ -1109,3 +1109,4 @@ mv qa/loop-status.json qa/loop-status.json.bak
 ---
 
 *Documentação gerada automaticamente a partir do workflow `qa-loop.yaml`*
+

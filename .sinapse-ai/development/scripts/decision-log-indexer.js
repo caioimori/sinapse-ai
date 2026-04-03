@@ -282,3 +282,4 @@ module.exports = {
   parseLogMetadata,
   generateIndexContent,
 };
+

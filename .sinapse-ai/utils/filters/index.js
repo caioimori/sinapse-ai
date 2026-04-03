@@ -178,3 +178,4 @@ if (require.main === module) {
 }
 
 module.exports = { applyFilter, loadFilterConfig };
+

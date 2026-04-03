@@ -24,3 +24,4 @@ Official terminology for SINAPSE 4.x differentiation.
 - Enforced by `scripts/semantic-lint.js`.
 - Error-level terms block commits/CI.
 - Warning-level terms are reported for gradual migration.
+

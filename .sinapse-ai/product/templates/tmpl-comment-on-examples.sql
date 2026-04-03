@@ -156,3 +156,4 @@ SELECT
 FROM information_schema.columns c
 WHERE c.table_schema = 'public'
 ORDER BY c.table_name, c.ordinal_position;
+

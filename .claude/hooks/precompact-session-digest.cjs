@@ -139,3 +139,4 @@ function run() {
 if (require.main === module) run();
 
 module.exports = { readStdin, main, run, HOOK_TIMEOUT_MS };
+

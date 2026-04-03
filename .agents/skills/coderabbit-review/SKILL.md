@@ -104,3 +104,4 @@ Output a summary table:
 ## Report Location
 
 Save reports to: `docs/qa/coderabbit-reports/`
+

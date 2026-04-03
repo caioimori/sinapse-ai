@@ -483,3 +483,4 @@ class ResultAggregator extends EventEmitter {
 
 module.exports = ResultAggregator;
 module.exports.ResultAggregator = ResultAggregator;
+

@@ -553,3 +553,4 @@ describe('SquadGenerator Blueprint Methods', () => {
     });
   });
 });
+

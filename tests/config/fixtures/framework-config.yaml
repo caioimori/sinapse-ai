@@ -18,3 +18,4 @@ ide_sync_system:
   enabled: true
   targets:
     - ".claude/CLAUDE.md"
+

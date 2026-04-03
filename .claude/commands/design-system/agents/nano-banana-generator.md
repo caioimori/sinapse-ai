@@ -160,3 +160,4 @@ When passing work:
 - NEVER commit to git (the lead handles git)
 - ALWAYS document prompts for reproducibility
 - ALWAYS offer variations, not single options
+

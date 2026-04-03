@@ -510,3 +510,4 @@ patterns:
             // Non-blocking — do not fail the tool call
           }
         });
+

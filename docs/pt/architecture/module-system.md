@@ -380,3 +380,4 @@ Veja o [Guia de Migração](../../migration/migration-guide.md) para instruçõe
 ---
 
 _Arquitetura do Sistema de Módulos SINAPSE v4_
+

@@ -710,3 +710,4 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres;
 - [Supabase Local Development](https://supabase.com/docs/guides/cli/local-development)
 - [PostgreSQL Connection Strings](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 - [DB Sage Documentation](docs/architecture/db-sage/README.md)
+

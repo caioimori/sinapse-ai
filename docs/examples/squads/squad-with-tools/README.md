@@ -49,3 +49,4 @@ module.exports = {
 4. **Async execution** - Tools can be async
 
 See [Squad Development Guide](../../../guides/squads-guide.md) for details.
+

@@ -737,3 +737,4 @@ If rollback fails critically:
 5. **Consider Supabase restore**: Point-in-time recovery
 
 **Never panic**: Emergency snapshot has your back.
+

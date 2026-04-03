@@ -75,3 +75,4 @@ afterTool().catch((error) => {
   console.log(JSON.stringify({ status: 'error', error: error.message }));
   process.exit(0);
 });
+

@@ -219,3 +219,4 @@ module.exports = {
   boostExactMatches,
   calculateSearchAccuracy,
 };
+

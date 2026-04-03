@@ -237,3 +237,4 @@ class GeminiCliCheck extends BaseCheck {
 }
 
 module.exports = GeminiCliCheck;
+

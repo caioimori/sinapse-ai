@@ -104,3 +104,4 @@ parallel_execution:
   quality_thresholds:
     consensus_similarity: 0.85
     merge_min_quality: 0.7
+

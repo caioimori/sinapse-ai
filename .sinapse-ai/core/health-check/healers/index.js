@@ -326,3 +326,4 @@ class HealerManager {
 module.exports = HealerManager;
 module.exports.HealingTier = HealingTier;
 module.exports.BackupManager = BackupManager;
+

@@ -148,3 +148,4 @@ Every statement in spec.md MUST trace to FR-*, NFR-*, CON-*, or research finding
 | Complex feature needs spec | Spec Pipeline → then SDC |
 | Joining existing project | Brownfield Discovery |
 | Simple bug fix | SDC only (YOLO mode) |
+

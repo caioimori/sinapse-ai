@@ -349,3 +349,4 @@ describe('Wizard Integration with Project Type Detection', () => {
   });
 });
 
+

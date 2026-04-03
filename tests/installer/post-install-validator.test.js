@@ -683,3 +683,4 @@ describe('Manifest Signature DoS Protection', () => {
     expect(result.content).not.toBeNull();
   });
 });
+

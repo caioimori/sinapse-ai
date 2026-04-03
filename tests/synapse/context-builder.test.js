@@ -33,3 +33,4 @@ describe('buildLayerContext', () => {
     expect(context.previousLayers).toHaveLength(1);
   });
 });
+

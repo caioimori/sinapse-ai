@@ -215,3 +215,4 @@ module.exports = {
   _generateSparkline,
   _timeAgo,
 };
+

@@ -409,3 +409,4 @@ describe('Integration with MasterOrchestrator', () => {
     expect(orchestrator.gateEvaluator.strictMode).toBe(true);
   });
 });
+

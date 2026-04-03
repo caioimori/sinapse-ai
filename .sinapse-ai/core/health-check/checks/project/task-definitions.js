@@ -188,3 +188,4 @@ class TaskDefinitionsCheck extends BaseCheck {
 }
 
 module.exports = TaskDefinitionsCheck;
+

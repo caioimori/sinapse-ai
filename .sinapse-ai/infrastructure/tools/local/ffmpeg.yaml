@@ -259,3 +259,4 @@ tool:
     - "Some codecs require additional libraries"
     - "Patent restrictions on certain codecs in some regions"
     - "Quality loss with repeated re-encoding"
+

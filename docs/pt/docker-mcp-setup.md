@@ -424,3 +424,4 @@ Use docker-gateway apenas quando:
 ---
 
 _Guia de Configuração Docker MCP do SINAPSE v4.0_
+

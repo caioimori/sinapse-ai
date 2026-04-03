@@ -111,3 +111,4 @@ For each section calculate:
 | `release-checklist.md` | @devops | Release readiness verification |
 | `po-master-checklist.md` | @product-lead | PO validation checklist |
 | `change-checklist.md` | @product-lead | Change impact assessment |
+

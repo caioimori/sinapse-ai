@@ -221,3 +221,4 @@ if (require.main === module) {
 }
 
 module.exports = { filterContent, stripHtml, truncateAtBoundary, extractFields, CHARS_PER_TOKEN };
+

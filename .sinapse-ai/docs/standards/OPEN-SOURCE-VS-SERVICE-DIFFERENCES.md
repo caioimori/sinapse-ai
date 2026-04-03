@@ -509,3 +509,4 @@ function validateTask(task) {
 **Last Updated:** 2025-12-09
 **Version:** 2.1.0
 **Applies to:** SINAPSE v4.2+
+

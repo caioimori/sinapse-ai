@@ -132,3 +132,4 @@ function _analyzeHookOutput(data) {
 }
 
 module.exports = { collectOutputAnalysis, UAP_OUTPUT_EXPECTATIONS };
+

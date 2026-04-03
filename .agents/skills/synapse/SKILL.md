@@ -130,3 +130,4 @@ Full details: [references/commands.md](references/commands.md)
 | `.synapse/manifest` | Domain registry (KEY=VALUE) |
 | `.synapse/commands` | Star-command definitions |
 | `.Codex/commands/synapse/manager.md` | CRUD command router |
+

@@ -261,3 +261,4 @@ describe('WIS Performance', () => {
     expect(duration).toBeLessThan(100);
   });
 });
+

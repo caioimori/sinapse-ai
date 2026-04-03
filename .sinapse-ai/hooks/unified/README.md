@@ -336,3 +336,4 @@ const proModule = require('../../pro/...'); // Fails if pro absent
 
 *Unified Hooks System - SINAPSE Core*
 *Updated: 2026-02-26 - Story MIS-3.1*
+

@@ -591,3 +591,4 @@ But COPY is **10-100x faster** for bulk loads!
 
 - [PostgreSQL COPY Documentation](https://www.postgresql.org/docs/current/sql-copy.html)
 - [psql \copy Command](https://www.postgresql.org/docs/current/app-psql.html)
+

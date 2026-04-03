@@ -56,3 +56,4 @@ def detect_agent_from_prompt(prompt: str) -> str | None:
     if match:
         return match.group(1)
     return None
+

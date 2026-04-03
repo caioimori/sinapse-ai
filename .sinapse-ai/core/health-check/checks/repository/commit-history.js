@@ -140,3 +140,4 @@ class CommitHistoryCheck extends BaseCheck {
 }
 
 module.exports = CommitHistoryCheck;
+

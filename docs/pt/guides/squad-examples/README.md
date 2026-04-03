@@ -62,3 +62,4 @@ Tem um padrao de squad util? Aceitamos contribuicoes!
 ---
 
 _SINAPSE Squads: Equipes de agentes de IA trabalhando com voce_
+

@@ -131,3 +131,4 @@ COMMENT ON MATERIALIZED VIEW :view_name IS ':description. Refresh: hourly or on-
 --
 -- Check last refresh time (approximate):
 -- SELECT pg_stat_get_last_analyze_time(':view_name'::regclass);
+

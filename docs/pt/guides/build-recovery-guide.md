@@ -268,3 +268,4 @@ Se o build está travado (mesmo erro se repetindo):
 
 _Guia para Story 8.4 - Recuperação e Retomada de Build_
 _Parte do Epic 8 - Motor de Build Autônomo_
+

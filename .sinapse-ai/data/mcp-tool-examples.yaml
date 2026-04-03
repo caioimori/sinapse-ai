@@ -213,3 +213,4 @@ tools:
         input:
           command: "docker mcp server ls"
         expected: "Returns list of MCP servers with enabled/disabled status"
+

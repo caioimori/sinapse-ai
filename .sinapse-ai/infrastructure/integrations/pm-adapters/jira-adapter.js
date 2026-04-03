@@ -446,3 +446,4 @@ class JiraAdapter extends PMAdapter {
 }
 
 module.exports = { JiraAdapter };
+

@@ -606,3 +606,4 @@ verbose:
 ---
 
 _SINAPSE v4 Quality Gate System Guide_
+

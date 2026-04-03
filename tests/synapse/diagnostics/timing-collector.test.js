@@ -302,3 +302,4 @@ describe('collectTimingMetrics — Staleness (SYN-14)', () => {
     expect(result.hook.stale).toBe(false);
   });
 });
+
