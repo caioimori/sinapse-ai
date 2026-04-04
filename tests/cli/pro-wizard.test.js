@@ -53,7 +53,7 @@ afterEach(() => {
 
 // ─── Helper to get module ───────────────────────────────────────────────────
 
-const proSetup = require('../packages/installer/src/wizard/pro-setup');
+const proSetup = require('../../packages/installer/src/wizard/pro-setup');
 
 // ─── maskLicenseKey ──────────────────────────────────────────────────────────
 

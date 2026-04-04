@@ -9,7 +9,7 @@
  */
 
 const readline = require('readline');
-const { maskEmail, openBrowser, promptEmail, recoverLicense, RECOVERY_URL, RECOVERY_MESSAGE } = require('../packages/sinapse-pro-cli/src/recover');
+const { maskEmail, openBrowser, promptEmail, recoverLicense, RECOVERY_URL, RECOVERY_MESSAGE } = require('../../packages/sinapse-pro-cli/src/recover');
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -203,7 +203,7 @@ describe('CLI alias reset-password', () => {
   test('sinapse-pro.js switch handles reset-password same as recover', () => {
     // Verify the CLI entry point has reset-password as a case that calls recoverLicense
     const cliSource = require('fs').readFileSync(
-      require('path').join(__dirname, '../packages/sinapse-pro-cli/bin/sinapse-pro.js'),
+      require('path').join(__dirname, '../../packages/sinapse-pro-cli/bin/sinapse-pro.js'),
       'utf-8'
     );
     // Both cases should exist in the same switch block
@@ -215,7 +215,7 @@ describe('CLI alias reset-password', () => {
 
   test('showHelp includes reset-password as alias for recover', () => {
     const cliSource = require('fs').readFileSync(
-      require('path').join(__dirname, '../packages/sinapse-pro-cli/bin/sinapse-pro.js'),
+      require('path').join(__dirname, '../../packages/sinapse-pro-cli/bin/sinapse-pro.js'),
       'utf-8'
     );
     expect(cliSource).toMatch(/reset-password\s+.*alias/i);

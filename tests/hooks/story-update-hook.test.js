@@ -12,17 +12,17 @@ const {
   generateChangelog,
   syncStoryToClickUp,
   updateFrontmatterTimestamp,
-} = require('../common/utils/story-update-hook');
+} = require('../../common/utils/story-update-hook');
 
 // Mock ClickUp helper functions
-jest.mock('../common/utils/clickup-helpers', () => ({
+jest.mock('../../common/utils/clickup-helpers', () => ({
   updateStoryStatus: jest.fn(),
   updateTaskDescription: jest.fn(),
   addTaskComment: jest.fn(),
   verifyEpicExists: jest.fn(),
 }));
 
-const clickupHelpers = require('../common/utils/clickup-helpers');
+const clickupHelpers = require('../../common/utils/clickup-helpers');
 
 describe('Story Update Hook - Change Detection', () => {
   beforeEach(() => {
