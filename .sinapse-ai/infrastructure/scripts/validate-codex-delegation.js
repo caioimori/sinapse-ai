@@ -5,9 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const Ajv2020 = require('ajv/dist/2020');
 const {
-  buildHandoffPacket,
   loadDelegationMatrix,
 } = require(path.join(__dirname, '..', '..', '..', '.codex', 'scripts', 'resolve-codex-delegation'));
+const {
+  buildHandoffPacket,
+} = require(path.join(__dirname, '..', '..', '..', '.codex', 'scripts', 'resolve-codex-delegation-parity'));
 const {
   loadRegistry: loadCommandRegistryFile,
 } = require('./validate-codex-command-registry');
