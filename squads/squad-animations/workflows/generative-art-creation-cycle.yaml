@@ -1,0 +1,47 @@
+name: generative-art-creation-cycle
+version: "1.0"
+description: "Criacao de arte generativa, particulas e point clouds animados"
+trigger: "Pedido de particulas, arte generativa, point cloud animation ou background generativo"
+agents_involved:
+  - animation-interpreter
+  - generative-particle-engineer
+  - shader-artist
+  - threejs-architect
+  - animation-performance-engineer
+
+phases:
+  - name: "Phase 1: Interpretar Visao Generativa"
+    agent: animation-interpreter
+    tasks:
+      - interpret-animation-prompt
+      - build-animation-brief
+    output: "generative-brief.md"
+
+  - name: "Phase 2: Sistema Generativo"
+    agent: generative-particle-engineer
+    depends_on: ["Phase 1"]
+    tasks:
+      - create-particle-system
+      - create-generative-pattern
+      - build-flow-field
+    output: "Sistema generativo funcional"
+
+  - name: "Phase 3: Shaders de Suporte"
+    agent: shader-artist
+    depends_on: ["Phase 2"]
+    tasks:
+      - create-custom-shader
+      - implement-post-processing
+    output: "Shaders aplicados ao sistema"
+
+  - name: "Phase 4: Otimizacao"
+    agent: animation-performance-engineer
+    depends_on: ["Phase 3"]
+    tasks:
+      - audit-animation-performance
+      - implement-gpu-instancing
+    output: "Sistema otimizado para producao"
+
+completion:
+  notification: "animations-orqx"
+  message: "Workflow concluido com sucesso."

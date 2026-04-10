@@ -1,0 +1,246 @@
+name: squad-animations
+version: "1.0.0"
+description: >
+  Squad de elite para criacao de animacoes web de altissima qualidade.
+  Cobre CSS, JavaScript, Three.js, GLSL shaders, scroll-driven animations,
+  page transitions, particulas, point clouds, generative art e motion design.
+  Possui sistema de interpretacao de prompts que traduz descricoes vagas
+  em especificacoes tecnicas precisas, eliminando a necessidade de iteracao.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-15"
+  updated_at: "2026-03-15"
+  created_by: "squad-creator (Craft)"
+  agents_count: 9
+  tasks_count: 75
+  knowledge_bases_count: 14
+  workflows_count: 5
+  checklists_count: 3
+  templates_count: 5
+
+agents:
+  - id: animations-orqx
+    name: Kinetic
+    file: agents/animations-orqx.md
+    role: "Orquestrador da squad — coordena agentes, gerencia pipeline de animacao"
+    tasks:
+      - orchestrate-animation-project
+      - coordinate-multi-agent-delivery
+      - review-animation-quality
+      - manage-animation-pipeline
+      - generate-animation-report
+
+  - id: animation-interpreter
+    name: Lens
+    file: agents/animation-interpreter.md
+    role: "Interpreta prompts vagos e traduz em specs tecnicas precisas de animacao"
+    tasks:
+      - interpret-animation-prompt
+      - extract-animation-intent
+      - build-animation-brief
+      - cross-reference-brand-system
+      - generate-motion-vocabulary
+      - translate-feeling-to-parameters
+      - analyze-reference-animation
+      - identify-website-animation
+      - create-animation-storyboard
+      - refine-animation-specification
+      - validate-animation-feasibility
+
+  - id: threejs-architect
+    name: Vertex
+    file: agents/threejs-architect.md
+    role: "Especialista Three.js — cenas 3D, materiais, cameras, iluminacao, modelos"
+    tasks:
+      - setup-threejs-scene
+      - create-3d-environment
+      - configure-camera-system
+      - design-lighting-setup
+      - load-3d-models
+      - create-material-system
+      - implement-environment-maps
+      - build-shadow-system
+      - create-fog-atmosphere
+      - implement-lod-system
+
+  - id: shader-artist
+    name: Fragment
+    file: agents/shader-artist.md
+    role: "Artista de shaders — GLSL/WGSL, post-processing, efeitos visuais avancados"
+    tasks:
+      - create-custom-shader
+      - implement-post-processing
+      - build-noise-based-effect
+      - create-distortion-effect
+      - implement-transition-shader
+      - create-image-effect-shader
+      - create-unicorn-animation
+      - build-sdf-visualization
+      - optimize-shader-performance
+
+  - id: css-motion-artist
+    name: Flux
+    file: agents/css-motion-artist.md
+    role: "Mestre CSS — animations, transitions, keyframes, SVG, micro-interactions"
+    tasks:
+      - create-css-animation
+      - build-micro-interaction
+      - implement-hover-effect
+      - create-svg-animation
+      - build-text-animation
+      - create-loading-animation
+      - implement-layout-animation
+      - build-css-3d-transform
+
+  - id: motion-choreographer
+    name: Tempo
+    file: agents/motion-choreographer.md
+    role: "Coreografo de motion — timing, easing, Disney principles, motion design"
+    tasks:
+      - design-animation-timing
+      - create-easing-curve
+      - choreograph-stagger-sequence
+      - apply-disney-principles
+      - design-entrance-animation
+      - design-exit-animation
+      - create-animation-system
+      - build-motion-guidelines
+
+  - id: scroll-narrative-engineer
+    name: Parallax
+    file: agents/scroll-narrative-engineer.md
+    role: "Engenheiro de scroll — scroll-driven, parallax, page transitions, storytelling"
+    tasks:
+      - implement-scroll-animation
+      - build-parallax-effect
+      - create-pinned-section
+      - implement-page-transition
+      - build-horizontal-scroll
+      - create-scroll-storytelling
+      - implement-text-reveal
+      - build-scroll-progress-indicator
+
+  - id: generative-particle-engineer
+    name: Cloud
+    file: agents/generative-particle-engineer.md
+    role: "Engenheiro de particulas e dados 3D — particles, point clouds, PCD, generative art"
+    tasks:
+      - create-particle-system
+      - implement-point-cloud-animation
+      - build-flow-field
+      - create-generative-pattern
+      - implement-physics-simulation
+      - build-flocking-system
+      - create-noise-visualization
+      - animate-data-visualization
+      - build-point-cloud-transition
+
+  - id: animation-performance-engineer
+    name: Benchmark
+    file: agents/animation-performance-engineer.md
+    role: "Guardian de performance — FPS, GPU, mobile, acessibilidade, otimizacao"
+    tasks:
+      - audit-animation-performance
+      - optimize-threejs-scene
+      - implement-gpu-instancing
+      - optimize-for-mobile
+      - implement-adaptive-quality
+      - setup-performance-monitoring
+      - ensure-animation-accessibility
+
+knowledge_bases:
+  - name: disney-12-principles-web
+    file: knowledge-base/disney-12-principles-web.md
+    description: "12 principios Disney aplicados a animacao web com exemplos praticos"
+  - name: feeling-to-parameters-mapping
+    file: knowledge-base/feeling-to-parameters-mapping.md
+    description: "Mapeamento de descricoes subjetivas para parametros tecnicos de animacao"
+  - name: creative-coding-masters-reference
+    file: knowledge-base/creative-coding-masters-reference.md
+    description: "Heuristicas e tecnicas dos maiores creative coders do mundo"
+  - name: threejs-patterns-encyclopedia
+    file: knowledge-base/threejs-patterns-encyclopedia.md
+    description: "Enciclopedia de padroes Three.js — cenas, materiais, luzes, cameras"
+  - name: shader-techniques-library
+    file: knowledge-base/shader-techniques-library.md
+    description: "Biblioteca de tecnicas GLSL — noise, SDF, ray marching, post-processing"
+  - name: scroll-animation-patterns
+    file: knowledge-base/scroll-animation-patterns.md
+    description: "Padroes de scroll animation — parallax, pinning, horizontal, storytelling"
+  - name: generative-algorithms-reference
+    file: knowledge-base/generative-algorithms-reference.md
+    description: "Algoritmos generativos — noise, flow fields, L-systems, voronoi, fractals"
+  - name: css-animation-mastery
+    file: knowledge-base/css-animation-mastery.md
+    description: "Dominio completo de CSS animations, transitions, transforms, SVG"
+  - name: point-cloud-data-guide
+    file: knowledge-base/point-cloud-data-guide.md
+    description: "Guia PCD/point cloud — formatos, importacao, animacao, reconstrucao"
+  - name: motion-psychology-engagement
+    file: knowledge-base/motion-psychology-engagement.md
+    description: "Psicologia do motion — engajamento, atencao, emocao, retencao"
+  - name: easing-functions-reference
+    file: knowledge-base/easing-functions-reference.md
+    description: "Referencia completa de easing — cubic-bezier, spring, custom curves"
+  - name: page-transition-patterns
+    file: knowledge-base/page-transition-patterns.md
+    description: "Padroes de transicao de pagina — Barba.js, View Transitions API, SPA"
+  - name: comprehensive-animation-reference
+    file: knowledge-base/comprehensive-animation-reference.md
+    description: "Referencia aprofundada — Disney principles, psicologia, vocabulary gap, performance budgets, masters deep techniques"
+  - name: criterion-driven-creativity
+    file: knowledge-base/criterion-driven-creativity.md
+    description: "Criatividade orientada por criterio — decisao intencional sobre expressao livre"
+  - name: unicorn-studio-pipeline
+    file: knowledge-base/unicorn-studio-pipeline.md
+    description: "Pipeline programatico Unicorn Studio — JSON templates, endpoints publicos, image swap, brand-aware parameters, SDK integration"
+
+workflows:
+  - name: prompt-to-animation-cycle
+    file: workflows/prompt-to-animation-cycle.yaml
+    description: "Ciclo principal — do prompt do usuario a animacao finalizada"
+  - name: animation-quality-review-cycle
+    file: workflows/animation-quality-review-cycle.yaml
+    description: "Ciclo de revisao de qualidade e refinamento de animacoes"
+  - name: scroll-experience-creation-cycle
+    file: workflows/scroll-experience-creation-cycle.yaml
+    description: "Criacao de experiencias baseadas em scroll do zero"
+  - name: 3d-scene-creation-cycle
+    file: workflows/3d-scene-creation-cycle.yaml
+    description: "Criacao de cenas 3D completas com Three.js"
+  - name: generative-art-creation-cycle
+    file: workflows/generative-art-creation-cycle.yaml
+    description: "Criacao de arte generativa e sistemas de particulas"
+
+checklists:
+  - name: animation-quality-checklist
+    file: checklists/animation-quality-checklist.md
+  - name: performance-audit-checklist
+    file: checklists/performance-audit-checklist.md
+  - name: accessibility-animation-checklist
+    file: checklists/accessibility-animation-checklist.md
+
+templates:
+  - name: animation-brief-template
+    file: templates/animation-brief-template.md
+  - name: motion-spec-template
+    file: templates/motion-spec-template.md
+  - name: threejs-scene-template
+    file: templates/threejs-scene-template.md
+  - name: shader-template
+    file: templates/shader-template.md
+  - name: scroll-animation-template
+    file: templates/scroll-animation-template.md
+
+cross_squad_connections:
+  inbound:
+    - squad-brand: "Brand guidelines, tom de voz visual, paleta de cores, identidade"
+    - squad-design: "Wireframes, especificacoes de UI, design system"
+    - squad-research: "Pesquisa de mercado, analise de concorrentes, tendencias"
+  outbound:
+    - squad-design: "Componentes animados, micro-interactions, scroll experiences"
+    - squad-brand: "Motion guidelines, animated brand assets"
+    - squad-content: "Animacoes para storytelling de conteudo"

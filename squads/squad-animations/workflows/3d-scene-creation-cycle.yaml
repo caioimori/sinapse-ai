@@ -1,0 +1,55 @@
+name: 3d-scene-creation-cycle
+version: "1.0"
+description: "Criacao de cenas 3D completas com Three.js"
+trigger: "Pedido de cena 3D, hero 3D, produto 3D ou experiencia imersiva"
+agents_involved:
+  - animation-interpreter
+  - threejs-architect
+  - shader-artist
+  - motion-choreographer
+  - animation-performance-engineer
+
+phases:
+  - name: "Phase 1: Interpretar Visao 3D"
+    agent: animation-interpreter
+    tasks:
+      - interpret-animation-prompt
+      - build-animation-brief
+    output: "3d-brief.md"
+
+  - name: "Phase 2: Setup de Cena"
+    agent: threejs-architect
+    depends_on: ["Phase 1"]
+    tasks:
+      - setup-threejs-scene
+      - configure-camera-system
+      - design-lighting-setup
+      - create-material-system
+    output: "Cena base funcional"
+
+  - name: "Phase 3: Efeitos Visuais"
+    agent: shader-artist
+    depends_on: ["Phase 2"]
+    tasks:
+      - implement-post-processing
+      - create-custom-shader
+    output: "Efeitos visuais aplicados"
+
+  - name: "Phase 4: Motion"
+    agent: motion-choreographer
+    depends_on: ["Phase 3"]
+    tasks:
+      - design-animation-timing
+    output: "Timing de camera e objetos"
+
+  - name: "Phase 5: Otimizacao"
+    agent: animation-performance-engineer
+    depends_on: ["Phase 4"]
+    tasks:
+      - optimize-threejs-scene
+      - implement-adaptive-quality
+    output: "Cena otimizada para producao"
+
+completion:
+  notification: "animations-orqx"
+  message: "Workflow concluido com sucesso."
