@@ -2,18 +2,19 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Codex Handoff Packet",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "mission",
-    "phase",
     "owner",
     "inputs",
     "outputs",
-    "validators",
-    "shared-surface-risk",
-    "next-handoff"
+    "validators"
   ],
   "properties": {
+    "routeId": {
+      "type": "string",
+      "minLength": 1
+    },
     "mission": {
       "type": "string",
       "minLength": 1
@@ -25,6 +26,12 @@
     "owner": {
       "type": "string",
       "minLength": 1
+    },
+    "classification": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
     },
     "inputs": {
       "type": "array",
@@ -50,13 +57,30 @@
         "minLength": 1
       }
     },
+    "sharedSurfaceRisk": {
+      "type": "string"
+    },
     "shared-surface-risk": {
       "type": "string",
-      "enum": ["none", "codex-only", "shared-review-required"]
+      "enum": ["none", "codex-only", "shared-review-required", "low"]
+    },
+    "nextHandoff": {
+      "type": "object",
+      "properties": {
+        "to": { "type": "string" },
+        "artifact": { "type": "string" }
+      }
     },
     "next-handoff": {
       "type": "string",
       "minLength": 1
+    },
+    "delegationChain": {
+      "type": "array"
+    },
+    "resources": {
+      "type": "array",
+      "items": { "type": "string" }
     },
     "notes": {
       "type": "array",
