@@ -116,7 +116,7 @@
             "properties": {
               "enabled": { "type": "boolean" },
               "path": { "type": "string" },
-              "format": { "type": "string", "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style"] }
+              "format": { "type": "string", "enum": ["full-markdown-yaml", "condensed-rules"] }
             },
             "additionalProperties": false
           }

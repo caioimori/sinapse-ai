@@ -13,7 +13,9 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const { ClaudeProvider } = require('./claude-provider');
-const { GeminiProvider } = require('./gemini-provider');
+
+// GeminiProvider removed — Claude Code + Codex only (Epic 10.0)
+const GeminiProvider = null;
 
 /**
  * Cached provider instances (singleton pattern)
@@ -113,8 +115,7 @@ function getProvider(providerName, config = null) {
       break;
 
     case 'gemini':
-      provider = new GeminiProvider(providerConfig);
-      break;
+      throw new Error('Gemini provider has been removed. Use Claude Code or Codex CLI.');
 
     default:
       throw new Error(`Unknown AI provider: ${providerName}`);
@@ -213,7 +214,7 @@ async function executeWithFallback(prompt, options = {}) {
  * @returns {Promise<AIProvider[]>} Array of available providers
  */
 async function getAvailableProviders() {
-  const providers = [getProvider('claude'), getProvider('gemini')];
+  const providers = [getProvider('claude')];
 
   const available = [];
   for (const provider of providers) {
@@ -232,7 +233,7 @@ async function getAvailableProviders() {
 async function getProvidersStatus() {
   const status = {};
 
-  for (const name of ['claude', 'gemini']) {
+  for (const name of ['claude']) {
     const provider = getProvider(name);
     const isAvailable = await provider.checkAvailability();
 

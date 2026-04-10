@@ -20,17 +20,10 @@
 # --- IDE Configuration (Section 4) ---
 ide:
   selected:
-    - vscode
     - codex
-    - gemini
     - claude-code
   configs:
-    vscode: true
     codex: true
-    gemini: true
-    cursor: false
-    zed: false
-    claude-desktop: false
     claude-code: true
 
 # --- MCP Configuration (Section 5) ---

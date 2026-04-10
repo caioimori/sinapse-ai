@@ -2,18 +2,18 @@
 
 **Module:** `.sinapse-ai/hooks/unified`
 **Purpose:** Cross-CLI hook abstraction layer
-**Supported CLIs:** Claude Code, Gemini Code
+**Supported CLIs:** Claude Code, Codex CLI
 
 ---
 
 ## Overview
 
-The Unified Hooks System provides a consistent interface for lifecycle hooks across different AI coding assistants (Claude Code, Gemini Code, future CLIs).
+The Unified Hooks System provides a consistent interface for lifecycle hooks across different AI coding assistants (Claude Code, Codex CLI, future CLIs).
 
 ### Architecture
 
 ```
-CLI-Specific Hooks (.claude/hooks/, .gemini/hooks/)
+CLI-Specific Hooks (.claude/hooks/, .codex/hooks/)
          ↓
 Hook Interface (hook-interface.js)
          ↓
@@ -32,13 +32,13 @@ Application Logic (sinapse-ai, sinapse-pro)
 
 **Event Mapping:**
 
-| Unified Event | Claude Code | Gemini Code |
-|---------------|-------------|-------------|
-| `sessionStart` | N/A | `SessionStart` |
-| `beforeAgent` | `PreToolUse` | `BeforeAgent` |
-| `beforeTool` | `PreToolUse` | `BeforeTool` |
-| `afterTool` | `PostToolUse` | `AfterTool` |
-| `sessionEnd` | `Stop` | `SessionEnd` |
+| Unified Event | Claude Code | Codex CLI |
+|---------------|-------------|-----------|
+| `sessionStart` | N/A | N/A |
+| `beforeAgent` | `PreToolUse` | N/A |
+| `beforeTool` | `PreToolUse` | N/A |
+| `afterTool` | `PostToolUse` | N/A |
+| `sessionEnd` | `Stop` | N/A |
 
 **Usage:**
 
@@ -326,7 +326,6 @@ const proModule = require('../../pro/...'); // Fails if pro absent
 
 ## Related Stories
 
-- **Story GEMINI-INT.8:** Unified Hook Interface (completed)
 - **Story MIS-2:** Dead Code Cleanup (restored hooks foundation)
 - **Story MIS-3:** Session Digest (PreCompact Hook)
 - **Story MIS-3.1:** Fix Session-Digest Hook Registration ← **CURRENT**

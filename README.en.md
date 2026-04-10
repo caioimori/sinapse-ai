@@ -1,286 +1,234 @@
-# SINAPSE AI
+[![npm version](https://img.shields.io/npm/v/sinapse-ai.svg)](https://www.npmjs.com/package/sinapse-ai)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
+[![CI](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
 
-> **English** | [Portugues](README.md)
+```
+ ____  ___ _   _    _    ____  ____  _____
+/ ___|/ _ \ \ | |  / \  |  _ \/ ___|| ____|
+\___ \ | | |  \| | / _ \ | |_) \___ \|  _|
+ ___) | |_| | |\  |/ ___ \|  __/ ___) | |___
+|____/ \___/|_| \_/_/   \_\_|   |____/|_____|
+```
 
-[![npm](https://img.shields.io/npm/v/sinapse-ai.svg)](https://www.npmjs.com/package/sinapse-ai)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
-[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg)](LICENSE)
+> **AI squads that build with you, not for you.**
 
-> **175 AI agents. 18 specialized squads. One CLI.**
->
-> SINAPSE AI is an open source framework that organizes AI agents into specialized squads to solve real problems in business, marketing, development, copywriting, design and more. Works directly in your terminal with Claude Code, Codex CLI or any compatible IDE.
+[English] | [**Portugues**](README.md)
 
 ---
 
-## What is SINAPSE AI
+## What is SINAPSE?
 
-SINAPSE AI is not another chatbot. It is an orchestration system where each agent has a clear role, each squad masters a discipline, and everything runs via CLI.
+SINAPSE is an open-source meta-framework that organizes **186 AI agents into 18 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 19 active hooks that block violations at runtime.
 
-**What you get when you install:**
+The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. Each with its own knowledge base, workflows, and tasks -- totaling **1,425 executable tasks** ready to use.
 
-- **18 squad orchestrators (orqx)** ready to activate from the terminal
-- **175 specialized agents** with their own knowledge bases
-- **Complete workflows** for planning, development, QA and deploy
-- **Documentation-First Development** with automatic epic, story and validation pipeline
-- **Multi-IDE support**: Claude Code and Codex CLI
-
-### Architecture: CLI First
-
-```
-CLI First > Observability Second > UI Third
-```
-
-All intelligence lives in the CLI. Dashboards observe. The UI is never a requirement.
+Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Documentation-First** pipeline requires a story to be created and validated before any code is written. Quality gates run automatically before merge. Unauthorized agents are blocked from pushing. All via hooks that intercept operations in real time -- not after the fact.
 
 ---
 
-## Installation (2 minutes)
+## Quick Start
+
+### 1. Install
 
 ```bash
-# New project
-npx sinapse-ai init my-project
-
-# Existing project
-cd your-project && npx sinapse-ai install
-
-# Update existing installation
-npx sinapse-ai@latest install
+npx sinapse-ai install
 ```
 
-The wizard detects your environment, configures your IDE and installs squads automatically.
+The wizard detects your environment, configures your IDE, and installs squads automatically.
+
+### 2. Verify
 
 ```bash
-# Diagnostics
 npx sinapse-ai doctor
-
-# System info
-npx sinapse-ai info
 ```
 
-**Requirements:** Node.js 18+ (v20+ recommended)
+### 3. Activate your first agent
+
+```
+@developer          # Activate the development agent
+*help               # List available commands
+```
+
+Done. You have 18 squads operating in your terminal.
 
 ---
 
-## Available Squads
+## Architecture
 
-Each squad is a team of specialized agents with its own knowledge base, workflows and tasks. All squads are **free and open source**.
+### CLI First
 
-| Squad | Focus | Agents |
-|-------|-------|--------|
-| **squad-brand** | Brand strategy, archetypes, auditing | 15 |
-| **squad-copy** | Persuasive copywriting, headlines, conversion | 14 |
-| **squad-council** | Strategic advisors (Munger, Dalio, Thiel) | 11 |
-| **squad-storytelling** | Narrative, scripts, story frameworks | 11 |
-| **squad-commercial** | Sales, funnel, revenue, pipeline | 11 |
-| **squad-animations** | Motion design, CSS, particles, 3D | 9 |
-| **squad-paidmedia** | Meta Ads, Google Ads, campaigns, optimization | 10 |
-| **squad-claude** | Claude Code, MCP, advanced integration | 10 |
-| **squad-cloning** | Cognitive cloning, mind synthesis | 9 |
-| **squad-courses** | Courses, curriculum, assessments, launch | 8 |
-| **squad-cybersecurity** | Security, threat intel, pentest | 9 |
-| **squad-design** | Design systems, components, tokens | 15 |
-| **squad-content** | Editorial governance, content strategy | 7 |
-| **squad-product** | Product discovery, strategy, operations | 7 |
-| **squad-research** | Market analysis, competitive intelligence | 8 |
-| **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
-| **squad-finance** | Budget, pricing, profitability analysis | 5 |
-| **claude-code-mastery** | Advanced Claude Code mastery | 8 |
+```
+CLI First  >  Observability Second  >  UI Third
+```
 
-**Total: 18 squads, 175 specialized agents**
+All intelligence lives in the terminal. Dashboards observe. The UI is never required to operate the system. This is Article I of the Constitution -- non-negotiable.
+
+### 4-Layer Model
+
+SINAPSE separates framework and project artifacts into 4 layers with automatic protection:
+
+| Layer | Mutability | Content |
+|-------|-----------|---------|
+| **L1** Framework Core | Never | `.sinapse-ai/core/`, `bin/`, Constitution |
+| **L2** Templates | Never | Tasks, templates, checklists, workflows |
+| **L3** Configuration | Restricted | Entity registry, agent memory, config |
+| **L4** Project | Always | Stories, packages, squads, tests |
+
+Deny rules in `.claude/settings.json` enforce this deterministically.
+
+### Constitution
+
+SINAPSE is governed by a formal Constitution with 10 articles and 19 enforcement hooks:
+
+| Article | Principle | Severity |
+|---------|-----------|----------|
+| I | CLI First | NON-NEGOTIABLE |
+| II | Agent Authority | NON-NEGOTIABLE |
+| III | Documentation-First Development | NON-NEGOTIABLE |
+| IV | No Invention | MUST |
+| V | Quality First | MUST |
+| VI | Absolute Imports | SHOULD |
+| VII | Ecosystem Metrics Accuracy | NON-NEGOTIABLE |
+| VIII | Mandatory Delegation | NON-NEGOTIABLE |
+| IX | Safe Collaboration | NON-NEGOTIABLE |
+| X | Security & Data Protection | NON-NEGOTIABLE |
+
+6 articles are NON-NEGOTIABLE -- violations are automatically blocked before execution.
 
 ---
 
-## How to Use
+## Agent System
 
-### In Claude Code
+SINAPSE includes 12 core agents covering the complete development cycle:
 
-Activate any orchestrator by name:
+| Agent | Persona | Role |
+|-------|---------|------|
+| `sinapse-orqx` | **Imperator** | Master orchestrator -- routing and cross-squad coordination |
+| `developer` | **Pixel** | Code implementation and story development |
+| `quality-gate` | **Litmus** | Testing, QA, and quality gates |
+| `architect` | **Stratum** | Architecture and technology decisions |
+| `project-lead` | **Beacon** | Product management and epics |
+| `product-lead` | **Axis** | Story validation and prioritization |
+| `sprint-lead` | **Sync** | Story creation and sprints |
+| `analyst` | **Scope** | Business research and analysis |
+| `data-engineer` | **Tensor** | Database design, migrations, and RLS |
+| `ux-design-expert` | **Mosaic** | UX/UI design |
+| `devops` | **Pipeline** | CI/CD, git push (exclusive), releases |
+| `squad-creator` | **Loom** | New squad creation |
 
-```
-/sinapse            # Main orchestrator
-@brand-orqx         # Brand squad
-@copy-orqx          # Copy squad
-@research-orqx      # Research squad
-```
-
-Or use the development agents:
-
-```
-@developer           # Code implementation
-@quality-gate        # Testing and quality
-@architect           # Architecture and design
-@sprint-lead         # Story creation
-@product-lead        # Story validation
-@project-lead        # Product management
-@analyst             # Research and analysis
-@data-engineer       # Database design
-@devops              # CI/CD and git push (exclusive)
-```
-
-### In Codex CLI
-
-```
-/skills              # List all available agents
-sinapse-dev          # Activate the developer
-sinapse-architect    # Activate the architect
-```
-
-### Agent Commands
-
-Inside any agent, use `*` for commands:
-
-```
-*help                # Available commands
-*create-story        # Create development story
-*task <name>         # Execute specific task
-*exit                # Exit the agent
-```
-
----
-
-## Development Agents
-
-SINAPSE comes with 12 core agents for the complete development cycle:
-
-| Agent | Persona | Scope |
-|-------|---------|-------|
-| `sinapse-orqx` | Imperator | Main orchestrator for all squads |
-| `developer` | Dex | Code implementation |
-| `quality-gate` | Quinn | Testing, QA and quality gates |
-| `architect` | Aria | Architecture and technical design |
-| `project-lead` | Morgan | Product management and epics |
-| `product-lead` | Pax | Story validation and backlog |
-| `sprint-lead` | River | Story creation and sprints |
-| `analyst` | Alex | Business research and analysis |
-| `data-engineer` | Dara | Database design and migrations |
-| `ux-design-expert` | Uma | UX/UI design and experience |
-| `devops` | Gage | CI/CD, git push (exclusive) |
-| `squad-creator` | - | New squad creation |
+Activate any agent with `@agent-name` and use `*help` to see its commands.
 
 ### Development Workflow
 
 ```
-@sprint-lead creates story > @product-lead validates > @developer implements > @quality-gate tests > @devops pushes
+@sprint-lead creates story
+       |
+@product-lead validates
+       |
+@developer implements
+       |
+@quality-gate tests
+       |
+@devops push + PR
 ```
+
+The framework ensures no step is skipped.
 
 ---
 
-## Documentation-First Development
+## 18 Specialized Squads
 
-All SINAPSE development follows the automatic documentation pipeline (NON-NEGOTIABLE):
+Each squad is an autonomous team with its own orchestrator, specialist agents, knowledge base, tasks, and workflows.
 
-1. **Epic defined** for each initiative
-2. **Stories in** `docs/stories/` with clear acceptance criteria
-3. **Validation** by @product-lead before any code
-4. **Progress tracked** via checkboxes `[ ]` > `[x]`
-5. **File List** kept updated in the story
-6. **Quality gates** run automatically before merge
+| Squad | Domain | Agents |
+|-------|--------|--------|
+| **squad-brand** | Brand strategy, archetypes, visual audit | 15 |
+| **squad-design** | Design systems, components, tokens, UI | 15 |
+| **squad-copy** | Persuasive copywriting, headlines, conversion | 14 |
+| **squad-council** | Strategic advisors (Munger, Dalio, Thiel, ...) | 11 |
+| **squad-storytelling** | Narrative, scripts, story frameworks | 11 |
+| **squad-commercial** | Sales, funnel, revenue, commercial pipeline | 11 |
+| **squad-paidmedia** | Meta Ads, Google Ads, campaigns, optimization | 10 |
+| **squad-claude** | Advanced Claude Code, MCP, deep integration | 10 |
+| **squad-animations** | Motion design, CSS, particles, 3D | 9 |
+| **squad-cloning** | Cognitive cloning, mind synthesis, digital twins | 9 |
+| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 9 |
+| **squad-courses** | Courses, curricula, assessments, educational launch | 8 |
+| **squad-research** | Market analysis, competitive intelligence | 8 |
+| **claude-code-mastery** | Advanced Claude Code tool mastery | 8 |
+| **squad-content** | Editorial governance, content strategy | 7 |
+| **squad-product** | Product discovery, strategy, operations | 7 |
+| **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
+| **squad-finance** | Budget, pricing, profitability analysis | 5 |
+
+**Total: 18 squads, 186 specialized agents, 1,425 tasks**
+
+Activate any squad via its orchestrator:
+
+```
+@brand-orqx         # Brand squad
+@copy-orqx          # Copy squad
+@cyber-orqx         # Cybersecurity squad
+@research-orqx      # Research squad
+```
+
+The orchestrator receives your request and automatically delegates to the right specialist within the squad.
 
 ---
 
-## Creating Your Own Squad
+## IDE Support
 
-Anyone can create a squad for any domain:
+SINAPSE supports two IDEs with deep integrations:
 
-```
-squads/my-squad/
-  squad.yaml            # Squad manifest
-  agents/               # Specialized agents
-  knowledge-base/       # Knowledge base
-  tasks/                # Executable tasks
-  workflows/            # Squad workflows
-```
+| IDE | Activation | Highlights |
+|-----|------------|------------|
+| **Claude Code** | `@agent-name` | Hooks, contextual rules, deny/allow, Chrome Brain |
+| **Codex CLI** | `/skills` or `$skill-name` | Native skills, multi-model, `codex exec` for CI/CD |
 
-Use `@squad-creator` or see the [Squads Guide](docs/guides/squads-guide.md).
+Both IDEs have access to all 18 squads, 186 agents, workflows, and knowledge bases. The installer detects and configures automatically.
 
----
+### Parity Table
 
-## Claude Code vs Codex CLI — Full Comparison
+| Feature | Claude Code | Codex CLI |
+|---------|:-----------:|:---------:|
+| Agent activation (@agent) | Full | Full |
+| Constitutional hooks (19) | Full | Partial (5) |
+| Story-driven development | Full | Full |
+| Quality gates | Full | Full |
+| Delegation enforcement | Full | Partial |
+| Secret scanning | Full | Manual |
+| CodeRabbit integration | Full | N/A |
+| Skills system | Full | Commands |
+| MCP servers | Full | N/A |
+| Terminal Bus | Full | N/A |
 
-SINAPSE works on both IDEs. Both support most features with different approaches.
-
-### Features
-
-| Feature | Claude Code | Codex CLI | Notes |
-|---------|:-----------:|:---------:|-------|
-| **18 squads with 186 agents** | YES | YES | Identical on both |
-| **Knowledge bases per squad** | YES | YES | Identical on both |
-| **Tasks and workflows** | YES | YES | Identical on both |
-| **Documentation-First Development** | YES | YES | Identical on both |
-| **Agent commands (`*help`, `*task`)** | YES | YES | Identical on both |
-| **Squad awareness auto-routing** | YES | YES | Identical on both |
-| **NSN Mode (Never Say Never)** | YES | YES | Global rule on both |
-| **Chrome Brain (browser automation)** | YES | YES | Claude: hooks auto-launch. Codex: via MCP or chrome-cdp-skill |
-| **MCP servers** | YES | YES | Claude: `~/.claude.json`. Codex: `config.toml` or `codex mcp add` |
-| **Hooks (PreToolUse / PostToolUse)** | YES | PARTIAL | Codex: Bash tool only, disabled on Windows |
-| **Agent handoff protocol** | YES | YES | Via instructions + skills on both |
-| **SYNAPSE context engine** | YES | PARTIAL | Codex: via instructions.md + skills (no dynamic rules) |
-| **Native skills system** | NO | YES | Codex has `$skill-name` with progressive disclosure |
-| **Multi-model (Claude + others)** | NO | YES | Codex supports any OpenAI model |
-| **Parallel subagents** | YES | YES | Codex: configurable max 6 threads |
-| **Non-interactive CI/CD** | NO | YES | Codex: `codex exec` with `--json` |
-
-### How to Activate Agents
-
-| Action | Claude Code | Codex CLI |
-|--------|-------------|-----------|
-| Main orchestrator | `/SINAPSE:agents:sinapse-orqx` | `@sinapse-orqx` or `$sinapse-orqx` |
-| Brand squad | `@brand-orqx` | `@brand-orqx` or `$sinapse-brand` |
-| Copy squad | `@copy-orqx` | `@copy-orqx` or `$sinapse-copy` |
-| Developer | `@developer` | `@developer` or `$sinapse-dev` |
-| List agents | `@sinapse-orqx *help` | `/skills` |
-| Chrome Brain | Auto-activates by prompt | `codex mcp add chrome-devtools` |
-
-### Where Each IDE Shines
-
-**Claude Code** — Most integrated experience:
-- Chrome Brain auto-activates via hooks (zero manual config)
-- Context engine injects rules automatically by domain and file
-- Deny/allow rules protect files deterministically
-- Largest MCP server ecosystem (Figma, Supabase, Notion, etc.)
-
-**Codex CLI** — Most flexible and extensible:
-- Native skills with `$skill-name` and progressive disclosure
-- Supports any OpenAI model (not just Claude)
-- `codex exec` for non-interactive CI/CD automation
-- Can run AS an MCP server (other agents can invoke Codex)
-- Profiles for quick config switching
-- Subagents with max 6 parallel threads
-
-### Chrome Brain Setup on Codex CLI
-
-```bash
-# Add Chrome DevTools MCP to Codex
-codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
-
-# OR install the chrome-cdp skill (direct connection, no Puppeteer)
-# pi install git:github.com/pasky/chrome-cdp-skill@v1.0.1
-```
-
-### Recommendation
-
-> **Claude Code** for the most integrated and automated experience — Chrome Brain auto-activates, hooks run automatically, context engine injects rules.
->
-> **Codex CLI** for model flexibility, native skills, and CI/CD automation — with minimal manual setup for Chrome Brain.
+**Claude Code** for the most integrated and automated experience.
+**Codex CLI** for model flexibility and CI/CD automation.
 
 ---
 
-## CLI
+## Quality and Security
 
-```bash
-npx sinapse-ai init <project>       # Create project
-npx sinapse-ai install              # Install in current project
-npx sinapse-ai update               # Update
-npx sinapse-ai doctor               # Diagnostics
-npx sinapse-ai doctor --fix         # Fix issues
-npx sinapse-ai info                 # System info
-npx sinapse-ai uninstall            # Remove
-```
+### Constitutional Enforcement
 
----
+SINAPSE doesn't just document rules -- it enforces them with **19 active hooks**:
 
-## Quality and Validation
+- `enforce-git-push-authority.sh` -- blocks push by unauthorized agents
+- `enforce-story-gate.cjs` -- blocks code without a validated story
+- `sql-governance.py` -- blocks dangerous SQL (injection patterns)
+- `enforce-delegation.cjs` -- blocks orchestrators from executing domain work
+- `enforce-architecture-first.cjs` -- blocks code in protected paths without documentation
+
+### 25 Deployment Blockers (3 Tiers)
+
+No project goes to production without passing all of them:
+
+- **Tier 1** -- 10 absolute blockers: RLS, zero hardcoded keys, protected service_role, MFA, authenticated APIs, parameterized SQL
+- **Tier 2** -- 7 compliance blockers: DPO, consent, data subject rights, breach notification (LGPD)
+- **Tier 3** -- 8 operational blockers: logging, backup, vulnerability scanning, incident response
+
+### Quality Gates
 
 ```bash
 npm run lint           # ESLint
@@ -289,7 +237,7 @@ npm test               # Tests
 npm run test:coverage  # Coverage
 ```
 
-Pre-commit and pre-push hooks validate automatically.
+Pre-commit and pre-push hooks validate automatically before each operation.
 
 ---
 
@@ -297,19 +245,34 @@ Pre-commit and pre-push hooks validate automatically.
 
 | Resource | Link |
 |----------|------|
-| User Guide | [docs/guides/user-guide.md](docs/guides/user-guide.md) |
-| Architecture | [docs/pt/architecture/](docs/pt/architecture/) |
+| Getting Started | [docs/guides/getting-started.md](docs/guides/getting-started.md) |
+| Architecture | [docs/framework/core-architecture.md](docs/framework/core-architecture.md) |
 | Squads Guide | [docs/guides/squads-guide.md](docs/guides/squads-guide.md) |
-| Getting Started | [docs/getting-started.md](docs/getting-started.md) |
-| Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |
-| Guiding Principles | [docs/GUIDING-PRINCIPLES.md](docs/GUIDING-PRINCIPLES.md) |
+| Agent Reference | [docs/guides/agent-reference.md](docs/guides/agent-reference.md) |
+| Workflows | [docs/guides/workflows-guide.md](docs/guides/workflows-guide.md) |
+| Security | [SECURITY.md](SECURITY.md) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
+
+---
+
+## CLI Reference
+
+```bash
+npx sinapse-ai init <name>       # Create project
+npx sinapse-ai install           # Install in current project
+npx sinapse-ai update            # Update framework
+npx sinapse-ai doctor            # System diagnostics
+npx sinapse-ai doctor --fix      # Diagnostics with auto-fix
+npx sinapse-ai info              # System information
+npx sinapse-ai uninstall         # Remove framework
+```
 
 ---
 
 ## Contributing
 
 ```bash
-git clone https://github.com/SinapseAI/sinapse-ai.git
+git clone https://github.com/caioimori/sinapse-ai.git
 cd sinapse-ai && npm install
 ```
 
@@ -319,25 +282,25 @@ cd sinapse-ai && npm install
 4. Push (`git push origin feat/my-feature`)
 5. Open a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 
 ---
 
 ## Legal
 
-| Doc | Link |
-|-----|------|
+| Document | Link |
+|----------|------|
 | License | [MIT](LICENSE) |
-| Privacy | [Privacy](docs/legal/privacy.md) |
-| Terms | [Terms](docs/legal/terms.md) |
-| Conduct | [Code of Conduct](CODE_OF_CONDUCT.md) |
-| Security | [Security](docs/security.md) |
+| Security | [SECURITY.md](SECURITY.md) |
+| Code of Conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
 
 ---
 
-## Contributors
+## Maintainers
 
-[![Contributors](https://contrib.rocks/image?repo=SinapseAI/sinapse-ai)](https://github.com/SinapseAI/sinapse-ai/graphs/contributors)
+- [@caioimori](https://github.com/caioimori) -- Lead Maintainer
+- [@Matheus-soier](https://github.com/Matheus-soier) -- Co-Maintainer
 
 ---
 

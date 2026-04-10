@@ -23,10 +23,8 @@ describe('AI Provider Factory', () => {
       expect(provider.name).toBe('claude');
     });
 
-    it('should export GeminiProvider class', () => {
-      expect(GeminiProvider).toBeDefined();
-      const provider = new GeminiProvider();
-      expect(provider.name).toBe('gemini');
+    it('should not export GeminiProvider (removed)', () => {
+      expect(GeminiProvider).toBeNull();
     });
   });
 
@@ -37,10 +35,8 @@ describe('AI Provider Factory', () => {
       expect(provider.name).toBe('claude');
     });
 
-    it('should return gemini provider', () => {
-      const provider = getProvider('gemini');
-      expect(provider).toBeDefined();
-      expect(provider.name).toBe('gemini');
+    it('should throw for gemini provider (removed)', () => {
+      expect(() => getProvider('gemini')).toThrow('removed');
     });
 
     it('should throw error for unknown provider', () => {
@@ -57,10 +53,9 @@ describe('AI Provider Factory', () => {
   });
 
   describe('getFallbackProvider', () => {
-    it('should return the fallback provider', () => {
-      const provider = getFallbackProvider();
-      expect(provider).toBeDefined();
-      expect(provider.name).toBe('gemini');
+    it('should throw for fallback provider (gemini removed)', () => {
+      // Default config has gemini as fallback, which is now removed
+      expect(() => getFallbackProvider()).toThrow('removed');
     });
   });
 

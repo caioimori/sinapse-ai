@@ -1,0 +1,86 @@
+name: prompt-to-animation-cycle
+version: "1.0"
+description: "Ciclo principal — do prompt/briefing do usuario a animacao finalizada de alta qualidade"
+trigger: "Usuario descreve uma animacao desejada (prompt, briefing, referencia ou contexto do site)"
+agents_involved:
+  - animation-interpreter
+  - animations-orqx
+  - threejs-architect
+  - shader-artist
+  - css-motion-artist
+  - motion-choreographer
+  - scroll-narrative-engineer
+  - generative-particle-engineer
+  - animation-performance-engineer
+
+phases:
+  - name: "Phase 1: Interpretacao de Intent"
+    agent: animation-interpreter
+    tasks:
+      - interpret-animation-prompt
+      - extract-animation-intent
+      - cross-reference-brand-system
+      - translate-feeling-to-parameters
+    output: "animation-brief.md"
+    quality_gate: "Brief tem: tipo, feeling, parametros tecnicos, agente recomendado, complexidade"
+    notes: |
+      CRITICO: Esta fase resolve a maior dor do usuario.
+      O animation-interpreter (Lens) recebe qualquer input:
+      - Prompt vago ("quero algo legal no hero")
+      - Briefing do site ("landing page de fintech premium")
+      - Referencia ("tipo Apple mas mais colorido")
+      - Brand system (paleta, personalidade, tom)
+      E traduz em especificacao tecnica precisa.
+      NO MAXIMO 2 perguntas ao usuario. Inferir o resto.
+
+  - name: "Phase 2: Planejamento e Roteamento"
+    agent: animations-orqx
+    depends_on: ["Phase 1"]
+    tasks:
+      - orchestrate-animation-project
+      - coordinate-multi-agent-delivery
+    output: "animation-plan.md"
+    quality_gate: "Plano com tasks decompostas, agentes assignados, ordem de execucao"
+
+  - name: "Phase 3: Execucao Especializada"
+    agent: "[Definido pelo plano — pode ser multiplos em paralelo]"
+    depends_on: ["Phase 2"]
+    tasks:
+      - "[Tasks especificas por agente conforme plano]"
+    output: "Codigo da animacao (HTML/CSS/JS/GLSL)"
+    quality_gate: "Animacao funcional, parametros conforme brief, codigo limpo"
+    notes: |
+      Agentes trabalham em paralelo quando possivel:
+      - Vertex (3D) + Fragment (shaders) em paralelo
+      - Flux (CSS) + Tempo (timing) em paralelo
+      - Cloud (particulas) + Vertex (cena) em paralelo
+
+  - name: "Phase 4: Coreografia e Timing"
+    agent: motion-choreographer
+    depends_on: ["Phase 3"]
+    tasks:
+      - design-animation-timing
+      - choreograph-stagger-sequence
+    output: "Timing refinado aplicado ao codigo"
+    quality_gate: "Easing correto, stagger coeso, Disney principles aplicados"
+
+  - name: "Phase 5: Performance e Acessibilidade"
+    agent: animation-performance-engineer
+    depends_on: ["Phase 4"]
+    tasks:
+      - audit-animation-performance
+      - ensure-animation-accessibility
+    output: "Animacao otimizada e acessivel"
+    quality_gate: "60fps desktop, 30fps+ mobile, prefers-reduced-motion implementado"
+
+  - name: "Phase 6: Review Final"
+    agent: animations-orqx
+    depends_on: ["Phase 5"]
+    tasks:
+      - review-animation-quality
+    output: "Animacao aprovada e entregue"
+    quality_gate: "Transmite o feeling desejado, performance OK, acessivel, codigo limpo"
+
+completion:
+  notification: "animations-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,55 @@
+name: scroll-experience-creation-cycle
+version: "1.0"
+description: "Criacao de experiencias scroll-driven completas"
+trigger: "Pedido de scroll storytelling, parallax ou experiencia de scroll"
+agents_involved:
+  - animation-interpreter
+  - scroll-narrative-engineer
+  - motion-choreographer
+  - css-motion-artist
+  - animation-performance-engineer
+
+phases:
+  - name: "Phase 1: Interpretar Narrativa"
+    agent: animation-interpreter
+    tasks:
+      - interpret-animation-prompt
+      - build-animation-brief
+    output: "scroll-brief.md"
+
+  - name: "Phase 2: Arquitetar Scroll"
+    agent: scroll-narrative-engineer
+    depends_on: ["Phase 1"]
+    tasks:
+      - create-scroll-storytelling
+      - implement-scroll-animation
+      - build-parallax-effect
+    output: "Estrutura de scroll implementada"
+
+  - name: "Phase 3: Text Reveals e Detalhes"
+    agent: css-motion-artist
+    depends_on: ["Phase 2"]
+    tasks:
+      - build-text-animation
+      - build-micro-interaction
+    output: "Micro-animations integradas"
+
+  - name: "Phase 4: Timing Global"
+    agent: motion-choreographer
+    depends_on: ["Phase 3"]
+    tasks:
+      - choreograph-stagger-sequence
+      - design-animation-timing
+    output: "Timing coeso da experiencia"
+
+  - name: "Phase 5: Performance"
+    agent: animation-performance-engineer
+    depends_on: ["Phase 4"]
+    tasks:
+      - audit-animation-performance
+      - optimize-for-mobile
+    output: "Experiencia otimizada"
+
+completion:
+  notification: "animations-orqx"
+  message: "Workflow concluido com sucesso."

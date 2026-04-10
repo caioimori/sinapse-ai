@@ -1,0 +1,45 @@
+name: animation-quality-review-cycle
+version: "1.0"
+description: "Ciclo de revisao de qualidade e refinamento de animacoes"
+trigger: "Animacao criada precisa de review ou refinamento"
+agents_involved:
+  - animations-orqx
+  - motion-choreographer
+  - animation-performance-engineer
+
+phases:
+  - name: "Phase 1: Review Visual"
+    agent: animations-orqx
+    tasks:
+      - review-animation-quality
+    output: "review-report.md"
+    quality_gate: "Feeling correto, coesao com o site, hierarquia visual"
+
+  - name: "Phase 2: Review de Motion"
+    agent: motion-choreographer
+    depends_on: ["Phase 1"]
+    tasks:
+      - apply-disney-principles
+      - design-animation-timing
+    output: "Timing e easing refinados"
+    quality_gate: "Principios Disney aplicados, timing coerente"
+
+  - name: "Phase 3: Review de Performance"
+    agent: animation-performance-engineer
+    depends_on: ["Phase 2"]
+    tasks:
+      - audit-animation-performance
+      - optimize-for-mobile
+    output: "Performance report + otimizacoes"
+    quality_gate: "60fps, bundle size OK, mobile OK"
+
+  - name: "Phase 4: Aprovacao Final"
+    agent: animations-orqx
+    depends_on: ["Phase 3"]
+    tasks:
+      - generate-animation-report
+    output: "Aprovacao ou lista de ajustes"
+
+completion:
+  notification: "animations-orqx"
+  message: "Workflow concluido com sucesso."
