@@ -97,10 +97,20 @@ Be honest. Finding bugs NOW saves debugging time LATER.]]
 ### 5.5.4 Security Review
 
 - [ ] No hardcoded secrets, API keys, or credentials
-- [ ] User input is validated and sanitized
+- [ ] User input is validated and sanitized (Zod/schema preferred)
 - [ ] No SQL injection or XSS vulnerabilities introduced
 - [ ] Sensitive data is not logged or exposed in errors
 - [ ] Authentication/authorization checks are in place where needed
+- [ ] RLS policies reviewed if database tables affected
+- [ ] CORS not set to wildcard `*` in production code
+- [ ] Rate limiting considered for public-facing endpoints
+
+### 5.5.5 Architecture Review
+
+- [ ] Code follows SOLID principles (no god classes, proper abstractions)
+- [ ] Dependency direction correct (inner layers do not import outer)
+- [ ] No circular dependencies introduced
+- [ ] New abstractions justified (REUSE > ADAPT > CREATE)
 
 ---
 
@@ -171,6 +181,14 @@ DOCUMENTATION:
 - [ ] No TODO comments without tracking ticket
 - [ ] No debugging artifacts (debugger statements, test data)
 - [ ] No unused imports or variables
+
+### 6.5.6 Performance Review
+
+- [ ] No N+1 query patterns introduced
+- [ ] Database queries use appropriate indexes
+- [ ] No synchronous blocking operations on main thread
+- [ ] Bundle size impact considered for frontend changes
+- [ ] Animations use GPU-accelerated properties (transform, opacity)
 
 ---
 

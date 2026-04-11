@@ -25,6 +25,15 @@ For each issue being triaged, verify:
 - [ ] Related issues cross-referenced if applicable
 - [ ] No sensitive information in issue (API keys, credentials)
 
+### Security Assessment
+- [ ] Checked if issue involves security vulnerability (if yes, mark `security`)
+- [ ] Security issues assigned P1 by default unless triaged otherwise
+- [ ] Verified no PII or credentials included in issue body or screenshots
+
+### Sizing & Estimation
+- [ ] Estimated PR size (< 400 lines preferred, flag if likely > 600)
+- [ ] Identified if issue requires story (feature/enhancement) or fast-track (bug fix)
+
 ## Session Checklist
 
 After completing a triage session:
