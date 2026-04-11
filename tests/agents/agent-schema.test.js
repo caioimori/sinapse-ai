@@ -270,13 +270,19 @@ describeIfSquads('Squad YAML Manifest Schema Validation', () => {
       expect(unique.size).toBe(names.length);
     });
 
-    test('total declared agents across all squads is reasonable (>150)', () => {
+    test('total declared agents across all squads is reasonable (>= 1 per squad)', () => {
       let total = 0;
       for (const squad of squadNames) {
         const agents = getDeclaredAgentFiles(manifests[squad]);
         if (agents) total += agents.length;
       }
-      expect(total).toBeGreaterThan(150);
+      // In CI only tracked squads exist (2); locally all 18+ are present
+      // Require at least 1 agent per squad as minimum
+      expect(total).toBeGreaterThanOrEqual(squadNames.length);
+      // When all squads are present, expect >150
+      if (squadNames.length >= 18) {
+        expect(total).toBeGreaterThan(150);
+      }
     });
   });
 });

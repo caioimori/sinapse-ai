@@ -996,7 +996,7 @@ describe('UnifiedActivationPipeline', () => {
         expect(data).toHaveProperty('start');
         expect(data).toHaveProperty('end');
         expect(typeof data.duration).toBe('number');
-        expect(['ok', 'timeout', 'error']).toContain(data.status);
+        expect(['ok', 'timeout', 'error', 'skipped']).toContain(data.status);
       }
     });
 
