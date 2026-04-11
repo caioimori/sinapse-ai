@@ -1,3 +1,10 @@
+---
+paths:
+  - "docs/stories/**"
+  - ".sinapse-ai/development/tasks/**"
+  - ".sinapse-ai/development/workflows/**"
+---
+
 # Workflow Execution — Detailed Rules
 
 ## Task-First Principle

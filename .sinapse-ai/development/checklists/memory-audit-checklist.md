@@ -52,3 +52,19 @@ Common patterns that typically appear in multiple agents:
 | Conventional commits format | dev, qa, devops, analyst, sm, data-engineer, ux | Already in CLAUDE.md |
 | kebab-case for files | dev, analyst, sm, data-engineer, ux | Already in CLAUDE.md |
 
+---
+
+## Step 7: Memory Health Checks (Research-Enriched)
+
+- [ ] Verify no MEMORY.md exceeds 200 lines / 25KB (size limit)
+- [ ] Check for contradictions between MEMORY.md files across agents
+- [ ] Validate entries marked as "hints" not treated as ground truth
+- [ ] Ensure stale patterns (> 90 days without validation) are flagged
+- [ ] Confirm promotion candidates have been reviewed within 7 days of flagging
+
+## Step 8: Memory-as-Hints Verification
+
+- [ ] Each MEMORY.md has disclaimer: entries are hints, verify against codebase
+- [ ] No memory entries reference deleted files or deprecated APIs
+- [ ] Active patterns align with current codebase architecture decisions
+

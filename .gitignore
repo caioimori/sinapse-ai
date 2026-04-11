@@ -370,3 +370,4 @@ build/
 .sinapse-ai/local/
 .claude/settings.local.json
 .sinapse/install-log.txt
+.npmrc

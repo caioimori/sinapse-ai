@@ -465,75 +465,6 @@ autoClaude:
 
 ---
 
-## Research-Backed Frameworks
-
-### Architecture Decision Tree
-
-When starting a new project or module, select architecture by context:
-
-| Project Type | Architecture | When |
-|-------------|-------------|------|
-| Landing Page | JAMstack (SSG + Edge) | Static content, SEO-critical |
-| SaaS B2B | Modular Monolith + Clean Architecture | 3-15 devs, medium complexity |
-| E-commerce | Modular Monolith + CQRS | Read-heavy, catalog browsing |
-| Fintech | Modular Monolith + DDD + Event Sourcing | Audit trail, complex domain |
-| Real-time App | Event-Driven + WebSockets + Edge | Chat, collab, notifications |
-| MVP/Prototype | Monolith (well-structured) | <= 5 devs, speed priority |
-
-**Default:** Start with Modular Monolith. Extract microservices ONLY when independent scaling is proven necessary.
-
-### SOLID in TypeScript (Quick Reference)
-
-| Principle | Pattern | Anti-Pattern |
-|-----------|---------|-------------|
-| **S**ingle Responsibility | One class = one reason to change. Domain events for side effects | God classes doing everything |
-| **O**pen/Closed | Strategy + Factory for extensibility without modification | if/else chains for each new variant |
-| **L**iskov Substitution | Composition over inheritance | Subtypes breaking parent contracts |
-| **I**nterface Segregation | Small focused interfaces (`Workable`, `Feedable`) | Fat interfaces with unused methods |
-| **D**ependency Inversion | Constructor injection, both levels depend on abstractions | `new PostgresDB()` in services |
-
-### TypeScript Quality Patterns
-
-- **Branded Types:** `type UserId = string & { __brand: 'UserId' }` -- prevents ID mixups at compile time
-- **Discriminated Unions:** `{ ok: true; value: T } | { ok: false; error: E }` for exhaustive handling
-- **Zod Schemas:** Single source of truth for runtime validation + `z.infer` for type inference
-- **Result Type (neverthrow):** Replace try/catch with `Result<T, E>` for explicit error paths
-- **Strict tsconfig:** `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `strict: true`
-
-### Testing Pyramid (Concrete Tools)
-
-| Layer | Tools | What to Test | Ratio |
-|-------|-------|-------------|-------|
-| Unit | Vitest | Pure functions, domain logic, validators | 70% |
-| Integration | Vitest + MSW + Testing Library | Component interactions, API | 20% |
-| E2E | Playwright | Login, checkout, critical paths only | 10% |
-
-**MSW (Mock Service Worker):** Intercepts network requests at service worker level for realistic API mocking.
-
-### State Management Stack (2025-2026)
-
-| State Type | Tool | Note |
-|-----------|------|------|
-| Server State | TanStack Query | 40-60% fewer requests vs Redux |
-| Client State | Zustand | Global UI without boilerplate |
-| URL State | nuqs | Filters, pagination, search params |
-| Form State | React Hook Form + Zod | Complex forms with validation |
-| Local State | useState/useReducer | Simple component-level state |
-
-### Animation Principles (Disney 12 for Web)
-
-| Principle | Web Implementation |
-|-----------|-------------------|
-| Squash & Stretch | `scale()` transforms on interaction |
-| Anticipation | Pre-movement before main action (hover before click) |
-| Follow Through | Elements overshoot then settle |
-| Ease In/Out | Always `cubic-bezier`, never linear for UI |
-| Secondary Action | Supporting animations complementing primary |
-
-**Targets:** LCP < 2.5s, INP < 200ms, CLS < 0.1. Always respect `prefers-reduced-motion`.
-
----
-
 ## Quick Commands
 
 **Story Development:**
@@ -625,3 +556,5 @@ Type `*help` to see all commands, or `*explain` to learn more.
 - **@github-devops (Pipeline)** - Pushes my commits
 
 ---
+---
+*SINAPSE Agent - Synced from .sinapse-ai/development/agents/developer.md*

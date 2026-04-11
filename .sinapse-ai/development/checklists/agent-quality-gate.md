@@ -519,6 +519,33 @@ For Copy/Legal/Storytelling/Data:
 
 ---
 
+## Level 7: Security & Resilience (Research-Enriched)
+
+```yaml
+security_checks:
+  - id: no-hardcoded-secrets
+    check: "Agent file contains no API keys, tokens, or credentials"
+    type: blocking
+    validation: "grep for patterns: sk_, pk_, token=, password=, secret="
+
+  - id: error-handling-documented
+    check: "Agent has error recovery patterns defined"
+    type: recommended
+    validation: "objection_algorithms covers failure scenarios"
+
+  - id: input-validation
+    check: "Commands validate inputs before execution"
+    type: recommended
+    validation: "task files include input validation step"
+
+  - id: graceful-degradation
+    check: "Agent defines fallback behavior when dependencies unavailable"
+    type: recommended
+    validation: "completion_criteria includes degradation scenarios"
+```
+
+---
+
 ## Scoring
 
 | Score | Result | Action |

@@ -73,6 +73,26 @@
 | `.github/workflows/*` | Inventory only | User decides integration |
 | `package.json` scripts | Preserve all | None |
 
+### 11. Security Posture Assessment
+- [ ] Existing RLS policies inventoried (if Supabase/Postgres)
+- [ ] Secret scanning ran on codebase (`gitleaks` or `truffleHog`)
+- [ ] `.env` files verified not committed to git history
+- [ ] API keys checked for exposure in client-side code
+- [ ] CORS configuration reviewed for overly permissive origins
+
+### 12. Architecture Alignment
+- [ ] Architecture pattern identified (monolith, modular monolith, microservices)
+- [ ] SOLID principle violations flagged in initial assessment
+- [ ] Dependency injection patterns documented
+- [ ] Import structure analyzed (absolute vs relative)
+- [ ] Test coverage baseline measured
+
+### 13. CI/CD Pipeline Assessment
+- [ ] Existing CI/CD workflows documented
+- [ ] DORA metrics baseline captured (deploy frequency, lead time, MTTR, CFR)
+- [ ] Branch protection rules reviewed
+- [ ] Automated testing pipeline identified
+
 ## Rollback Procedure
 
 If migration fails or is unwanted:

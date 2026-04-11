@@ -1,3 +1,9 @@
+---
+paths:
+  - ".sinapse-ai/development/agents/**"
+  - "docs/stories/**"
+---
+
 # Agent Authority — Detailed Rules
 
 ## Delegation Matrix

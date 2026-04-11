@@ -1,3 +1,12 @@
+---
+paths:
+  - ".env*"
+  - "supabase/**"
+  - "packages/**/auth/**"
+  - "apps/**"
+  - ".github/workflows/**"
+---
+
 # Security & Data Protection (NON-NEGOTIABLE)
 
 > **Constitution Article X — NON-NEGOTIABLE**

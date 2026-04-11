@@ -1,5 +1,7 @@
 ---
-paths: **/*
+paths:
+  - ".mcp.json"
+  - ".sinapse-ai/data/tool-registry.yaml"
 ---
 
 # MCP Server Usage Rules - SINAPSE Architecture

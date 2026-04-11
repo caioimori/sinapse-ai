@@ -1,0 +1,87 @@
+workflow:
+  id: fast-track
+  name: Fast-Track Fix
+  version: "1.0"
+  description: >-
+    Streamlined workflow for trivial fixes that bypasses full story validation.
+    Auto-generates a Ready story, simplified QA (lint + typecheck + test only).
+  type: fast-fix
+
+  eligibility:
+    all_required:
+      - type: [bugfix, docs, typo, config]
+      - lines_changed: "<= 50"
+      - files_changed: "<= 3"
+      - no_new_dependencies: true
+      - no_architecture_or_api_or_schema_changes: true
+
+  metadata:
+    elicit: false
+    confirmation_required: false
+
+  execution_modes:
+    - mode: yolo
+      description: Fully autonomous
+      prompts: 0
+      default: true
+
+  phases:
+    - phase_1: Auto Story + Implement
+    - phase_2: Simplified QA
+
+  sequence:
+    - step: auto_story_and_implement
+      id: implement
+      phase: 1
+      agent: developer
+      action: Auto-generate story + implement fix
+      notes: |
+        1. Generate story: docs/stories/active/fast-track-{timestamp}.story.md
+           Status: Ready (auto-validated), Type: bugfix|docs|typo|config
+           AC: "Fix applied and verified by automated checks"
+        2. Implement the fix
+        3. Verify eligibility: diff <= 50 lines, <= 3 files, no dep changes
+        4. If eligibility fails → STOP, switch to full SDC
+        5. Commit with conventional message referencing story
+      outputs: [story_file, implementation_files, commit_hash]
+      next: quick_qa
+
+    - step: quick_qa
+      id: quick_qa
+      phase: 2
+      agent: developer
+      action: Automated checks only (no full QA gate)
+      requires: implement
+      notes: |
+        1. npm run lint (must pass)
+        2. npm run typecheck (must pass)
+        3. npm test (must pass, no new failures)
+        If all pass → mark story Done, ready for push.
+        If fail → fix and retry (max 2 iterations).
+        After 2 failures → escalate to full SDC.
+        No CodeRabbit. No @quality-gate involvement.
+      outputs: [lint_result, typecheck_result, test_result, story_final_status]
+      next: complete
+      on_failure: implement
+
+    - workflow_end:
+        id: complete
+        action: fast_track_complete
+        notes: Fast-track complete. Story auto-closed, ready for @devops push.
+
+  flow_diagram: |
+    Eligible? → [Yes] dev: auto-story + implement → lint+typecheck+test
+    → [Pass] Done | [Fail, iter<2] retry | [Fail, iter>=2] escalate to SDC
+
+  decision_guidance:
+    when_to_use:
+      - Single-line bug fixes, typos, config changes
+      - Import path fixes, small renames
+    when_not_to_use:
+      - New features, API/DB changes, 4+ files, architecture changes
+
+metadata:
+  author: SINAPSE Framework
+  created_date: 2026-04-10
+  version: 1.0.0
+  tags: [fast-track, bugfix, lightweight, simplified-qa]

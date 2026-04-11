@@ -360,91 +360,6 @@ autoClaude:
 
 ---
 
-## Research-Backed Frameworks
-
-### Verification-First Architecture (7-Layer Defense)
-
-Hallucination is a mathematically inevitable property of LLMs (arXiv:2401.11817). No single technique eliminates it. Apply defense in depth:
-
-```
-Layer 1: Prompt Engineering     — Allow "I don't know", citation anchoring, CoVe (50-70% reduction)
-Layer 2: Tool Grounding         — Read/Grep BEFORE generating (Read-before-Edit pattern)
-Layer 3: Type Checking          — TypeScript strict mode catches phantom APIs
-Layer 4: Linting                — ESLint catches incorrect patterns
-Layer 5: Test Execution         — Vitest/Playwright catches logic errors
-Layer 6: Code Review            — CodeRabbit + human review catches architectural issues
-Layer 7: Quality Gates          — Automated gates before merge (this agent's domain)
-```
-
-**Key insight (Simon Willison):** Code hallucinations are the LEAST dangerous type because execution reveals them immediately. The real danger is **logic errors that compile and run but produce incorrect results**. Focus QA effort on logic verification, not just syntax.
-
-### Hallucination Detection Patterns for Code
-
-| Type | Detection Method | Tool |
-|------|-----------------|------|
-| Phantom APIs | Type checking | `tsc --strict` |
-| Ghost packages | Dependency audit | `npm audit`, verify against registry |
-| Version confusion | Lock file validation | `npm ci` (strict lockfile) |
-| File path hallucination | Glob verification | Read tool before Edit |
-| Config hallucination | Schema validation | Zod schemas for config |
-| Logic errors | Test execution + review | Vitest + manual review of edge cases |
-
-**Slopsquatting risk:** 19.7% of packages recommended by LLMs are fabricated. 58% are repeated across runs (deterministic hallucination). Always verify packages exist in registry before installation.
-
-### AI Code Quality Metrics (2025 Benchmarks)
-
-| Metric | AI-Generated Code | Implication |
-|--------|-------------------|-------------|
-| Security vulnerabilities | 29-45% contain vulns | Security review is mandatory |
-| Package hallucination | 19.7% recommend fake packages | Dependency audit is mandatory |
-| Major issues (CodeRabbit, 470 PRs) | 1.7x more than human code | Automated review catches most |
-| Misconfigurations | 75% more than human code | Config validation gates needed |
-| SWE-bench accuracy (best model) | 80.9% | 1 in 5 tasks needs human intervention |
-
-### Testing Pyramid with Concrete Tools
-
-| Layer | Tools | What to Test | Coverage Target |
-|-------|-------|-------------|----------------|
-| Unit (70%) | Vitest | Domain logic, validators, transforms, pure functions | > 80% line coverage |
-| Integration (20%) | Vitest + MSW + Testing Library | Component interactions, API contracts, DB queries | Critical paths |
-| E2E (10%) | Playwright | Login, checkout, core user journeys | Happy path + main error paths |
-
-**Adjustments by context:** Prototypes: reduce E2E, focus unit. Fintech: increase integration + E2E. Safety-critical: test everything extensively.
-
-### Code Churn as Quality Signal
-
-**Code churn** = percentage of recently changed code changed again within 2-3 weeks.
-
-| Churn Level | Interpretation | Action |
-|-------------|---------------|--------|
-| < 15% | Healthy | Normal review |
-| 15-25% | Moderate | Watch for unclear requirements |
-| > 25% | Red flag | Investigate: unclear specs, poor implementation, scope creep |
-
-### Self-Healing Loop Pattern (TDAD)
-
-Test-Driven AI Development reduces regressions by 70% (6.08% to 1.82%):
-
-```
-1. Tests define "correct" (human writes or validates test specs)
-2. AI implements code to pass tests
-3. Tests auto-execute after each change
-4. Failures feed back to agent for correction
-5. Max N iterations, then escalate
-6. Trust scoring with fallback reduces failure rates by 50%
-```
-
-### Chain-of-Verification (CoVe) for QA Reviews
-
-When reviewing AI-generated deliverables, apply CoVe to reduce factual hallucinations by 50-70%:
-
-1. **Draft:** Read the code/document
-2. **Plan:** Formulate verification questions (Does this API exist? Is this pattern correct for this framework version?)
-3. **Execute:** Answer each question INDEPENDENTLY (without bias from the draft)
-4. **Revise:** Final assessment based on verified facts
-
----
-
 ## Quick Commands
 
 **Code Review & Analysis:**
@@ -530,3 +445,5 @@ Type `*help` to see all commands.
 - **CodeRabbit** - Automated pre-review
 
 ---
+---
+*SINAPSE Agent - Synced from .sinapse-ai/development/agents/quality-gate.md*
