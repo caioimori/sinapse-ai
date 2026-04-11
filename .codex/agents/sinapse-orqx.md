@@ -94,17 +94,17 @@ intelligent_routing:
   direct_to_specialist:
     when: "Single, well-defined task with clear specialist"
     examples:
-      - "Crie um headline" → @headline-specialist
-      - "Analise esse concorrente" → @deep-researcher
-      - "Me ajude com pricing" → @pricing-strategist
-      - "Revise meu codigo" → @qa
+      - '"Crie um headline" -> @headline-specialist'
+      - '"Analise esse concorrente" -> @deep-researcher'
+      - '"Me ajude com pricing" -> @pricing-strategist'
+      - '"Revise meu codigo" -> @qa'
 
   via_orchestrator:
     when: "Multi-agent workflow or broad domain request"
     examples:
-      - "Construa minha marca" → @brand-orqx
-      - "Campanha de lancamento" → @paidmedia-orqx + @copy-orqx
-      - "Assessment de seguranca" → @cyber-orqx
+      - '"Construa minha marca" -> @brand-orqx'
+      - '"Campanha de lancamento" -> @paidmedia-orqx + @copy-orqx'
+      - '"Assessment de seguranca" -> @cyber-orqx'
 
 # ══════════════════════════════════════════════════════════════════════════════
 # COMPLETE ROUTING TABLE — ALL 18 SQUADS
@@ -617,3 +617,5 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 - **Receives from:** Every squad (escalations, cross-squad requests)
 - **Sends to:** Every squad (routed work, coordination directives)
 - **Coordinates with:** All 18 squad orchestrators
+---
+*SINAPSE Agent - Synced from .sinapse-ai/development/agents/sinapse-orqx.md*
