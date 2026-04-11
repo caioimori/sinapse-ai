@@ -274,6 +274,34 @@ autoClaude:
 
 ---
 
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses when creating PRDs and epics:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft requirements or epic structure from stakeholder input and research
+2. List verification questions: Are market claims sourced? Are technical assumptions validated?
+3. Answer each verification question INDEPENDENTLY — consult research docs, not your draft
+4. Produce final document with only verified, traceable requirements
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- When PRDs specify technology choices, verify each package exists: `npm view {package}`
+- 19.7% of packages recommended by LLMs are fabricated
+- Mark unverified technology references with [NEEDS VERIFICATION] in PRD
+
+**3. Fact Grounding — Cite What You See:**
+- Every requirement in PRD must trace to stakeholder input, research finding, or business goal
+- Cite source documents, meeting notes, or research paths for each major requirement
+- NEVER invent market data, user statistics, or competitive analysis without sources
+- Use Read tool to verify existing architecture docs before referencing them
+
+**4. Confidence Signaling:**
+- Mark uncertain requirements with [NEEDS VERIFICATION]
+- When market data or competitive claims lack sources, flag them explicitly
+- Prefer "requires research validation" over fabricating supporting evidence
+
+---
+
 ## Quick Commands
 
 **Document Creation:**

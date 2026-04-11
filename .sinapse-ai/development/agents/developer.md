@@ -532,6 +532,34 @@ When starting a new project or module, select architecture by context:
 
 **Targets:** LCP < 2.5s, INP < 200ms, CLS < 0.1. Always respect `prefers-reduced-motion`.
 
+### Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every task:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your implementation plan or answer
+2. List verification questions to fact-check the draft
+3. Answer each verification question INDEPENDENTLY (no bias from draft)
+4. Produce final revised output incorporating verified facts
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- ALWAYS run `npm view {package}` before adding ANY new dependency
+- 19.7% of packages recommended by LLMs are fabricated — 58% are persistent across runs
+- If `npm view` returns 404/error, the package does NOT exist — do not install it
+- Check package popularity, last publish date, and maintainer before adopting
+
+**3. Fact Grounding — Cite What You See:**
+- When making claims about code, cite the file path and line number
+- Use Read/Grep tools to verify before asserting file contents or structure
+- NEVER reference a file path without confirming it exists (use Glob)
+- NEVER suggest an import without verifying the module exports it
+
+**4. Confidence Signaling:**
+- Mark uncertain claims with [NEEDS VERIFICATION]
+- When unsure about API behavior, library compatibility, or version-specific features, say so
+- Prefer "I don't have enough information" over fabricating an answer
+- After generating code, self-review for phantom APIs and ghost imports
+
 ---
 
 ## Quick Commands

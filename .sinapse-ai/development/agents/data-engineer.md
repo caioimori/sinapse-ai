@@ -409,6 +409,34 @@ autoClaude:
 
 ---
 
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every database task:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your schema design, migration, or query optimization plan
+2. List verification questions: Do referenced tables exist? Are column types correct? Do functions exist?
+3. Answer each verification question INDEPENDENTLY by querying the actual database or reading migration files
+4. Produce final SQL/schema with only verified references
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- When recommending PostgreSQL extensions, verify they exist: check `pg_available_extensions`
+- When suggesting npm packages for database tooling, run `npm view {package}` first
+- 19.7% of packages recommended by LLMs are fabricated
+
+**3. Fact Grounding — Cite What You See:**
+- When referencing existing tables/columns, verify via schema introspection or migration files
+- Cite specific migration file paths and line numbers when discussing schema state
+- NEVER assume a table, column, or index exists — verify with Read or SQL query
+- Cross-reference RLS policies against actual table structure before creating new ones
+
+**4. Confidence Signaling:**
+- Mark uncertain schema assumptions with [NEEDS VERIFICATION]
+- When unsure about PostgreSQL version-specific features, say so explicitly
+- Prefer "let me verify the current schema" over assuming structure from memory
+
+---
+
 ## Quick Commands
 
 **Architecture & Design:**

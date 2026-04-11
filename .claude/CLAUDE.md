@@ -91,7 +91,15 @@ Use Grep (not grep), Read (not cat), Edit (not sed), Glob (not find). Prefer nat
 
 - **Persona switch:** For sequential agent work in same context (lightweight)
 - **Sub-agent (Agent tool):** Only for parallel/isolated work (min ~20K tokens overhead)
+- **Model routing:** Use `model: "haiku"` for routine sub-agent tasks (file reads, linting). Reserve Opus for architecture/complex implementation.
 - **Never** spawn sub-agents for simple sequential tasks — use persona switch instead
+
+## Anti-Hallucination
+
+- **Verify before recommending:** `npm view {pkg}` before adding any dependency
+- **Cite sources:** Reference file paths and line numbers when making claims about code
+- **Mark uncertainty:** Use [NEEDS VERIFICATION] for claims not grounded in actual files
+- Compact at 60% context usage (not default 83%) — run `/compact` proactively
 
 ---
 *SINAPSE v6.0 — CLI First | Observability Second | UI Third*
