@@ -1,0 +1,21 @@
+name: PR Size Check
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  size-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PR size
+        run: |
+          ADDITIONS=$(gh pr view ${{ github.event.pull_request.number }} --json additions -q '.additions')
+          if [ "$ADDITIONS" -gt 600 ]; then
+            echo "::warning::PR has $ADDITIONS additions (target: <200, warning: >400, block: >600)"
+          elif [ "$ADDITIONS" -gt 400 ]; then
+            echo "::notice::PR has $ADDITIONS additions — consider splitting"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

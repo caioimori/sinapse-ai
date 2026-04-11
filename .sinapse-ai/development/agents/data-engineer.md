@@ -413,6 +413,13 @@ autoClaude:
 
 Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every database task:
 
+**0. Schema-First Rule (MANDATORY before ANY SQL output):**
+- ALWAYS introspect the current schema before writing queries — never assume table or column names
+- NEVER generate migration SQL without reading the current schema state first (via `\dt`, `\d table`, migration files, or `information_schema`)
+- Verify PostgreSQL extensions exist before using them: `SELECT * FROM pg_available_extensions WHERE name = '{ext}'`
+- Verify RLS policies exist before claiming they do: `SELECT * FROM pg_policies WHERE tablename = '{table}'`
+- If introspection is impossible (no DB access), mark ALL schema references with [NEEDS VERIFICATION]
+
 **1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
 1. Draft your schema design, migration, or query optimization plan
 2. List verification questions: Do referenced tables exist? Are column types correct? Do functions exist?
