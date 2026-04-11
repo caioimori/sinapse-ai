@@ -114,6 +114,12 @@ workflow:
       notify: true
       rollback: true
 
+  # Complexity-adaptive execution (research gap 4.1)
+  complexity:
+    class: STANDARD  # SIMPLE (3 phases) | STANDARD (all) | COMPLEX (+ revision)
+    estimated_tokens: null  # Filled at runtime
+    fast_track_eligible: false  # true for trivial fixes
+
   validation:
     pre_run:
       - "Check all required inputs are provided"
@@ -121,4 +127,5 @@ workflow:
     post_run:
       - "Verify output is valid"
       - "Log completion metrics"
+      - "Report DORA metrics (lead time, failure rate)"
 

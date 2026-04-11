@@ -57,13 +57,21 @@ After completion, verify:
 
 ---
 
+## Scoring (research-backed)
+
+| Metric | Value |
+|--------|-------|
+| Total items | {{TOTAL}} |
+| Passed | {{PASSED}} |
+| Score | {{PASSED}}/{{TOTAL}} ({{PERCENTAGE}}%) |
+| Gate | PASS (>=80%) / CONCERNS (60-79%) / FAIL (<60%) |
+
 ## Sign-off
 
-| Role | Name | Date | Signature |
-|------|------|------|-----------|
-| Creator | | | |
-| Reviewer | | | |
-| Approver | | | |
+| Role | Name | Date | Verdict |
+|------|------|------|---------|
+| Executor | | | |
+| Reviewer | | | PASS / CONCERNS / FAIL |
 
 ---
 

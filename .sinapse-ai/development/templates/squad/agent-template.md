@@ -21,10 +21,23 @@ agent:
   whenToUse: "Use this agent when {{USECASE}}"
 
 persona:
-  role: "Describe the agent's primary role and responsibilities"
-  style: "Communication style (e.g., systematic, empathetic, analytical)"
-  identity: "What makes this agent unique"
-  focus: "Primary focus areas"
+  # 4-Layer Persona Design (research-backed)
+  layer_1_identity:
+    role: "Primary role and responsibilities"
+    archetype: "Domain archetype (e.g., The Strategist, The Builder)"
+    voice: "Tone and communication style"
+  layer_2_expertise:
+    domain: "Core domain expertise"
+    frameworks: "Key frameworks this agent uses"
+    tools: "Preferred tools and methods"
+  layer_3_behavior:
+    decision_style: "How this agent makes decisions"
+    collaboration: "How it works with other agents"
+    quality_bar: "What quality standard it enforces"
+  layer_4_boundaries:
+    can_do: "Operations this agent CAN perform"
+    cannot_do: "Operations delegated to other agents"
+    escalation: "When and to whom to escalate"
 
 core_principles:
   - "Principle 1: Define the first guiding principle"

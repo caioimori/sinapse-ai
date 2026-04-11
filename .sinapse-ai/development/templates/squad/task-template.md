@@ -22,6 +22,13 @@ Checklist:
   - "[ ] Step 1: Describe first step"
   - "[ ] Step 2: Describe second step"
   - "[ ] Step 3: Describe third step"
+
+# Execution mode (research-backed, gap 4.1)
+# fast-track: trivial fixes < 50 lines, auto-validated story
+# standard: normal features, full SDC workflow
+# heavy: complex initiatives, spec pipeline first
+execution_mode: standard
+complexity_estimate: S|M|L|XL
 ---
 
 # {{COMPONENTNAME}}

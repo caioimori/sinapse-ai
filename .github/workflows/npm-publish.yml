@@ -158,6 +158,9 @@ jobs:
   publish:
     needs: [test, build]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # OIDC trusted publishing (research 21, section 20.6)
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -211,11 +214,14 @@ jobs:
       - name: Publish sinapse-ai to NPM
         if: steps.should-publish.outputs.should_publish == 'true'
         run: |
-          # Create npmrc for authentication
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          # OIDC trusted publishing (preferred) or fallback to NPM_TOKEN
+          # To enable OIDC: configure trust in npm web UI for repo caioimori/sinapse-ai
+          if [ -n "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          fi
 
-          # Publish with appropriate tag
-          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
+          # Publish with provenance (OIDC attestation when id-token permission granted)
+          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public --provenance
 
           echo "✅ Published sinapse-ai@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
         env:
