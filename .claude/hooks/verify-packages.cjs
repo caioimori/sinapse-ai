@@ -60,7 +60,7 @@ process.stdin.on('end', () => {
       if (pkgName.endsWith('.tgz') || pkgName.endsWith('.tar.gz')) continue;
 
       try {
-        execSync(`npm view "${pkgName}" name`, { timeout: 15000, stdio: 'pipe' });
+        execSync(`npm view "${pkgName}" name`, { timeout: 8000, stdio: 'pipe' });
       } catch {
         failed.push(pkgName);
       }
