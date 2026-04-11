@@ -1,0 +1,12 @@
+# Code Owners — {{PROJECT_NAME}}
+# All PRs require approval from an owner before merge.
+
+# Default: all files require maintainer review
+* @{{MAINTAINER}}
+
+# Framework and agent configuration
+.sinapse-ai/ @{{MAINTAINER}}
+.claude/      @{{MAINTAINER}}
+
+# CI/CD and GitHub config
+.github/      @{{MAINTAINER}}
