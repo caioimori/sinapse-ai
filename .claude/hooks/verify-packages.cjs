@@ -24,8 +24,11 @@ process.stdin.on('end', () => {
     const data = JSON.parse(input);
     const command = (data.tool_input && data.tool_input.command) || '';
 
-    // Only check npm install/add commands
-    const installMatch = command.match(/npm\s+(install|add|i)\s+(.+)/);
+    // Only check direct npm install/add commands (not text in PR bodies, etc.)
+    // Skip if command is gh, curl, echo, or other non-npm commands
+    const trimmed = command.trim();
+    if (trimmed.startsWith('gh ') || trimmed.startsWith('curl ') || trimmed.startsWith('echo ')) process.exit(0);
+    const installMatch = trimmed.match(/^npm\s+(install|add|i)\s+(.+)/m);
     if (!installMatch) process.exit(0);
 
     const argsStr = installMatch[2];
