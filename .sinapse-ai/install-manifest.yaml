@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 9.4.0
-generated_at: "2026-04-11T20:03:21.951Z"
+generated_at: "2026-04-11T20:33:47.096Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1140
+file_count: 1148
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1241,9 +1241,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:ea77353646dd4e8124c45a87a9f7b141dc98c38b3253b7610f6a8947d103fe2f
+    hash: sha256:89c3a05a662c998e74af9f7a84e4863dba947bde8f091639343f082d94f26983
     type: data
-    size: 509602
+    size: 521848
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -3448,6 +3448,10 @@ files:
     hash: sha256:25001fe4083c45b14a1576a10de152b3108e5db732d7335b2e0cff3d78f5b84b
     type: script
     size: 9539
+  - path: infrastructure/scripts/setup-project-infra.js
+    hash: sha256:adcd31e8274b7c5debf0dbaf6c2e80945dfed179fc5c38b8bab76af0f4bbb56b
+    type: script
+    size: 4339
   - path: infrastructure/scripts/sinapse-validator.js
     hash: sha256:7cefe23afa2423faff96f9651d3c44e766130664cd84249d93c7571e9dfd7e24
     type: script
@@ -3572,6 +3576,14 @@ files:
     hash: sha256:c56a83af5c7cf782ef976530b465b40b6df6f945ec5a4c2a83d04da3a31ea0bb
     type: template
     size: 8326
+  - path: infrastructure/templates/config/env.example
+    hash: sha256:a7c757f69b37d712e3cd323870b0d06b60a72d28e2eff18b47517899c73fb011
+    type: template
+    size: 663
+  - path: infrastructure/templates/config/gitignore-additions.tmpl
+    hash: sha256:04532e3ae1e2a6efa864e8ab61c00670a5db82e0dfa1ba84c52996aa8be3b300
+    type: template
+    size: 708
   - path: infrastructure/templates/core-config/core-config-brownfield.tmpl.yaml
     hash: sha256:34955d66b70112be19362815ab8758070da7169db0447afc72dfa42ad553a680
     type: template
@@ -3596,6 +3608,26 @@ files:
     hash: sha256:e0c0ca04e0601f0f4157ca5aeaa7538c266a151118d19ca7592703612c6fcf07
     type: template
     size: 6802
+  - path: infrastructure/templates/github/ci-template.yml
+    hash: sha256:76f6000b456f0574562c4b8a46b1e5922c2ce5f8115da1a548872935996005ab
+    type: template
+    size: 1920
+  - path: infrastructure/templates/github/CODEOWNERS.template
+    hash: sha256:e484867dbce95078ed29378041db526873b7194cd1fd297aa3ff1b880937dc44
+    type: template
+    size: 309
+  - path: infrastructure/templates/github/issue-templates/bug_report.md
+    hash: sha256:380e9e885504464968cae940ff6c0b457c7935e1f33045ace3236fe8fe7c4a06
+    type: template
+    size: 684
+  - path: infrastructure/templates/github/issue-templates/feature_request.md
+    hash: sha256:0580bdaf6aa81ffa270e3835f8ffd2b0bada503ad5230799fa7bb634060f7ff2
+    type: template
+    size: 442
+  - path: infrastructure/templates/github/PULL_REQUEST_TEMPLATE.md
+    hash: sha256:a6e7a5ce1afee5185cdc123fb1986ffcaa1fc63f5c6284166aa0ff67cb9075bf
+    type: template
+    size: 570
   - path: infrastructure/templates/gitignore/gitignore-brownfield-merge.tmpl
     hash: sha256:43cd686b77e9a4f89b79b84313fcc9d5556ad94882e326c22b4fe7e89ec943c0
     type: template
