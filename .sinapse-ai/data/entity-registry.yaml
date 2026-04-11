@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-04T05:46:52.783Z'
-  entityCount: 742
+  lastUpdated: '2026-04-11T04:59:52.673Z'
+  entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -16,8 +16,7 @@ entities:
         - mcp
         - server
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - analyst
       externalDeps: []
@@ -38,8 +37,7 @@ entities:
         - advanced
         - elicitation
         - advanced-elicitation
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -196,8 +194,7 @@ entities:
         - analyze
         - project
         - structure
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -224,8 +221,7 @@ entities:
         - apply
         - qa
         - fixes
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -248,8 +244,7 @@ entities:
         - architect
         - analyze
         - impact
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - dependency-impact-analyzer
         - modification-risk-assessment
@@ -444,8 +439,7 @@ entities:
         - build
         - autonomous
         - 'task:'
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - autonomous-build-loop.js
         - plan-execute-subtask
@@ -493,8 +487,7 @@ entities:
         - build
         - resume
         - 'task:'
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -515,8 +508,7 @@ entities:
         - build
         - status
         - 'task:'
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -584,8 +576,7 @@ entities:
         - docs
         - links
         - check-docs-links
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -610,8 +601,7 @@ entities:
         - configure
         - ci/cd
         - pipeline
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -661,7 +651,6 @@ entities:
       usedBy:
         - list-worktrees
         - remove-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -683,8 +672,7 @@ entities:
         - collaborative
         - edit
         - collaborative-edit
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -849,8 +837,6 @@ entities:
         - task
         - creates
       usedBy:
-        - analyst
-        - architect
         - data-engineer
         - project-lead
       dependencies:
@@ -881,8 +867,6 @@ entities:
         - dynamically
         - during
       usedBy:
-        - analyst
-        - architect
         - data-engineer
         - project-lead
         - ux-design-expert
@@ -950,8 +934,7 @@ entities:
       keywords:
         - create
         - service
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - code-intel
         - dev-helper
@@ -976,8 +959,7 @@ entities:
         - test-suite-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - component-generator.js
       externalDeps: []
@@ -1060,8 +1042,6 @@ entities:
       usedBy:
         - list-worktrees
         - remove-worktree
-        - developer
-        - devops
         - auto-worktree
       dependencies:
         - worktree-manager
@@ -1669,8 +1649,7 @@ entities:
         - develop
         - story
         - task
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - decision-recorder
       externalDeps: []
@@ -1700,8 +1679,7 @@ entities:
         - task
         - performs
         - automated
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - code-quality-improver
       externalDeps: []
@@ -1730,8 +1708,7 @@ entities:
         - sinapse
         - developer
         - task
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - performance-optimizer
       externalDeps: []
@@ -1761,8 +1738,7 @@ entities:
         - sinapse
         - developer
         - task
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - refactoring-suggester
       externalDeps: []
@@ -1847,9 +1823,7 @@ entities:
         - project-documentation-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - analyst
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1876,7 +1850,6 @@ entities:
         - environment-bootstrap
       usedBy:
         - setup-github
-        - devops
       dependencies:
         - config-resolver
         - github-cli.yaml
@@ -1914,9 +1887,7 @@ entities:
         - executes
         - existing
       usedBy:
-        - architect
         - data-engineer
-        - developer
         - product-lead
         - project-lead
         - sprint-lead
@@ -2070,8 +2041,7 @@ entities:
         - facilitate
         - brainstorming
         - session
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -2205,7 +2175,6 @@ entities:
         - github-pr-automation.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
@@ -2240,7 +2209,6 @@ entities:
       usedBy:
         - publish-npm
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
@@ -2266,8 +2234,7 @@ entities:
         - repository
         - cleanup
         - repository-cleanup.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -2292,8 +2259,7 @@ entities:
         - version
         - management
         - version-management.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - repository-detector
       externalDeps: []
@@ -2338,8 +2304,7 @@ entities:
         - gotcha
         - 'task:'
         - add
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - gotchas-memory.js
         - gotchas
@@ -2365,7 +2330,6 @@ entities:
       usedBy:
         - document-gotchas
         - gotcha
-        - developer
       dependencies:
         - gotchas-memory.js
       externalDeps: []
@@ -2624,8 +2588,7 @@ entities:
         - list
         - mcps
         - list-mcps
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -2648,8 +2611,6 @@ entities:
       usedBy:
         - create-worktree
         - remove-worktree
-        - developer
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -2698,7 +2659,6 @@ entities:
         - merge-worktree
       usedBy:
         - create-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -2930,8 +2890,7 @@ entities:
         - create
         - context
         - 'pipeline:'
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -2961,8 +2920,7 @@ entities:
         - implementation
         - execution
         - 'pipeline:'
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -2992,7 +2950,6 @@ entities:
         - agent)
       usedBy:
         - build-autonomous
-        - developer
       dependencies:
         - plan-tracker
       externalDeps: []
@@ -3068,7 +3025,6 @@ entities:
         - backlog
         - manage-story-backlog
       usedBy:
-        - developer
         - product-lead
       dependencies: []
       externalDeps: []
@@ -3398,8 +3354,7 @@ entities:
         - console
         - check
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3422,7 +3377,6 @@ entities:
         - request
         - task
       usedBy:
-        - quality-gate
         - qa-loop
       dependencies:
         - qa-review-story
@@ -3447,8 +3401,7 @@ entities:
         - evidence
         - requirements
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3470,8 +3423,7 @@ entities:
         - positive
         - detection
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3496,8 +3448,7 @@ entities:
         - issue
         - fixer
         - task
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - plan-tracker
       externalDeps: []
@@ -3520,8 +3471,7 @@ entities:
         - qa
         - gate
         - qa-gate
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -3552,8 +3502,7 @@ entities:
         - test-generation-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - test-generator
         - coverage-analyzer
@@ -3581,8 +3530,7 @@ entities:
         - library
         - validation
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - context7
       externalDeps: []
@@ -3604,8 +3552,7 @@ entities:
         - migration
         - validation
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3626,8 +3573,7 @@ entities:
         - nfr
         - assess
         - nfr-assess
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3656,8 +3602,7 @@ entities:
         - 10-phase
         - quality
         - assurance
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - architect
       externalDeps: []
@@ -3681,8 +3626,7 @@ entities:
         - sinapse
         - developer
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - dependency-impact-analyzer
         - diff-generator
@@ -3712,7 +3656,6 @@ entities:
         - review-story
       usedBy:
         - qa-create-fix-request
-        - quality-gate
         - qa-loop
       dependencies:
         - devops
@@ -3740,8 +3683,7 @@ entities:
         - risk
         - profile
         - risk-profile
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3767,8 +3709,7 @@ entities:
         - (with
         - code
         - quality
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3791,8 +3732,7 @@ entities:
         - security
         - checklist
         - task
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3815,8 +3755,7 @@ entities:
         - test
         - design
         - test-design
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3842,8 +3781,7 @@ entities:
         - trace
         - requirements
         - trace-requirements
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies:
         - po-master-checklist
       externalDeps: []
@@ -3870,7 +3808,6 @@ entities:
         - releases
       usedBy:
         - publish-npm
-        - devops
       dependencies:
         - devops
       externalDeps: []
@@ -3894,8 +3831,7 @@ entities:
         - remove
         - mcp
         - remove-mcp
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3918,8 +3854,6 @@ entities:
       usedBy:
         - create-worktree
         - list-worktrees
-        - developer
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -3947,7 +3881,6 @@ entities:
         - resolve-github-issue.md
       usedBy:
         - triage-github-issues
-        - devops
       dependencies:
         - triage-github-issues
         - github-devops-pre-push-quality-gate
@@ -4073,8 +4006,7 @@ entities:
         - mcp
         - catalog
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4212,8 +4144,7 @@ entities:
         - setup
         - github
         - setup-github
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - environment-bootstrap
         - github-cli.yaml
@@ -4265,8 +4196,7 @@ entities:
         - mcp
         - docker
         - toolkit
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -4394,7 +4324,6 @@ entities:
         - complexity
         - 'pipeline:'
       usedBy:
-        - architect
         - spec-pipeline
       dependencies:
         - architect
@@ -4420,7 +4349,6 @@ entities:
         - 'pipeline:'
         - specification
       usedBy:
-        - quality-gate
         - spec-pipeline
       dependencies:
         - architect
@@ -4473,7 +4401,6 @@ entities:
         - dependencies
         - 'pipeline:'
       usedBy:
-        - analyst
         - spec-pipeline
       dependencies:
         - analyst
@@ -4827,8 +4754,7 @@ entities:
         - sync
         - documentation
         - sync-documentation
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - documentation-synchronizer
       externalDeps: []
@@ -4949,7 +4875,6 @@ entities:
         - triage-github-issues.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - resolve-github-issue
         - devops
@@ -5173,7 +5098,6 @@ entities:
         - task
       usedBy:
         - po-close-story
-        - developer
         - product-lead
       dependencies:
         - po-master-checklist
@@ -5203,8 +5127,7 @@ entities:
         - tech
         - preset
         - \*validate-tech-preset
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - architect
       externalDeps: []
@@ -5250,8 +5173,7 @@ entities:
       keywords:
         - verify
         - subtask
-      usedBy:
-        - developer
+      usedBy: []
       dependencies:
         - architect
       externalDeps: []
@@ -5274,8 +5196,7 @@ entities:
         - '`*waves`'
         - wave
         - analysis
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -5496,8 +5417,7 @@ entities:
       keywords:
         - architecture
         - tmpl
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5517,8 +5437,7 @@ entities:
         - brainstorming
         - output
         - tmpl
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5538,8 +5457,7 @@ entities:
         - brownfield
         - architecture
         - tmpl
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5602,8 +5520,7 @@ entities:
       keywords:
         - changelog
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5644,8 +5561,7 @@ entities:
         - competitor
         - analysis
         - tmpl
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5739,8 +5655,7 @@ entities:
         - end
         - architecture
         - tmpl
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5782,8 +5697,7 @@ entities:
         - fullstack
         - architecture
         - tmpl
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5804,8 +5718,7 @@ entities:
         - actions
         - cd
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5826,8 +5739,7 @@ entities:
         - actions
         - ci
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5849,8 +5761,7 @@ entities:
         - template
         - pull
         - request
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5913,8 +5824,7 @@ entities:
         - market
         - research
         - tmpl
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6134,8 +6044,7 @@ entities:
         - project
         - brief
         - tmpl
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6155,8 +6064,7 @@ entities:
         - qa
         - gate
         - tmpl
-      usedBy:
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6286,7 +6194,6 @@ entities:
         - tmpl
       usedBy:
         - product-lead
-        - quality-gate
         - sprint-lead
       dependencies:
         - architect
@@ -8412,7 +8319,6 @@ entities:
       usedBy:
         - build-autonomous
         - build-orchestrator
-        - developer
       dependencies:
         - build-state-manager
         - recovery-tracker
@@ -8436,7 +8342,6 @@ entities:
         - orchestrator
       usedBy:
         - build
-        - developer
       dependencies:
         - autonomous-build-loop
         - build-state-manager
@@ -8463,7 +8368,6 @@ entities:
       usedBy:
         - autonomous-build-loop
         - build-orchestrator
-        - developer
       dependencies:
         - stuck-detector
         - recovery-tracker
@@ -9094,7 +8998,6 @@ entities:
         - subagent-dispatcher
         - ideation-engine
         - active-modules.verify
-        - developer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -12558,21 +12461,7 @@ entities:
         - greenfield-service
         - greenfield-ui
         - spec-pipeline
-      dependencies:
-        - facilitate-brainstorming-session
-        - create-deep-research-prompt
-        - create-doc
-        - advanced-elicitation
-        - document-project
-        - spec-research-dependencies
-        - project-brief-tmpl.yaml
-        - market-research-tmpl.yaml
-        - competitor-analysis-tmpl.yaml
-        - brainstorming-output-tmpl.yaml
-        - google-workspace
-        - exa
-        - context7
-        - pattern-extractor.js
+      dependencies: []
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -12580,8 +12469,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:16b6bf39b1208f44be26384308beace1fbc6fadd32e43bf8854ce695e9aabf26
-      lastVerified: '2026-04-04T05:46:52.647Z'
+      checksum: sha256:e05de6a0bfc20173b5a9374d2b624d6b1f13b738a7fcd4e789495b3101210a97
+      lastVerified: '2026-04-11T04:59:52.669Z'
     architect:
       path: .sinapse-ai/development/agents/architect.md
       layer: L2
@@ -12611,7 +12500,6 @@ entities:
         - story-tmpl
         - claude-rules
         - codex-rules
-        - brownfield-compatibility-checklist
         - brownfield-discovery
         - brownfield-fullstack
         - brownfield-service
@@ -12621,28 +12509,7 @@ entities:
         - greenfield-ui
         - spec-pipeline
         - story-draft-checklist
-      dependencies:
-        - analyze-project-structure
-        - architect-analyze-impact
-        - collaborative-edit
-        - create-deep-research-prompt
-        - create-doc
-        - document-project
-        - execute-checklist
-        - validate-tech-preset
-        - spec-assess-complexity
-        - plan-create-implementation
-        - plan-create-context
-        - architecture-tmpl.yaml
-        - front-end-architecture-tmpl.yaml
-        - fullstack-architecture-tmpl.yaml
-        - brownfield-architecture-tmpl.yaml
-        - architect-checklist
-        - exa
-        - context7
-        - supabase-cli
-        - railway-cli
-        - codebase-mapper.js
+      dependencies: []
       externalDeps:
         - git
         - coderabbit
@@ -12652,8 +12519,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:ef539297b851cb60e35a83a97dcf949069d5a201a115d3e5712a7b48443e1983
-      lastVerified: '2026-04-04T05:46:52.650Z'
+      checksum: sha256:bd4eac6209730757b1a3a6d977fbae92a17c267b7c1e0c937d6efa3822f8ecfc
+      lastVerified: '2026-04-11T04:59:52.670Z'
     data-engineer:
       path: .sinapse-ai/development/agents/data-engineer.md
       layer: L2
@@ -12740,44 +12607,6 @@ entities:
         - story-development-cycle
       dependencies:
         - decision-log-generator
-        - apply-qa-fixes
-        - qa-fix-issues
-        - create-service
-        - dev-develop-story
-        - execute-checklist
-        - plan-execute-subtask
-        - verify-subtask
-        - dev-improve-code-quality
-        - po-manage-story-backlog
-        - dev-optimize-performance
-        - dev-suggest-refactoring
-        - sync-documentation
-        - validate-next-story
-        - waves
-        - build-resume
-        - build-status
-        - build-autonomous
-        - gotcha
-        - gotchas
-        - create-worktree
-        - list-worktrees
-        - remove-worktree
-        - story-dod-checklist
-        - self-critique-checklist
-        - context7
-        - supabase
-        - n8n
-        - browser
-        - ffmpeg
-        - recovery-tracker.js
-        - stuck-detector.js
-        - approach-manager.js
-        - rollback-manager.js
-        - build-state-manager.js
-        - autonomous-build-loop.js
-        - build-orchestrator.js
-        - gotchas-memory.js
-        - worktree-manager.js
       externalDeps:
         - coderabbit
         - git
@@ -12787,8 +12616,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:34b3a97efcdff9dcf29e21223bcf0550cabcdeb0532838524d7df023b3fe8e98
-      lastVerified: '2026-04-04T05:46:52.655Z'
+      checksum: sha256:2fc6b9b43f73d069ba593bec4be43f563252121e55272e98ff0af6627989a0dd
+      lastVerified: '2026-04-11T04:59:52.670Z'
     devops:
       path: .sinapse-ai/development/agents/devops.md
       layer: L2
@@ -12819,40 +12648,8 @@ entities:
         - story-tmpl
         - claude-rules
         - codex-rules
-        - memory-audit-checklist
         - greenfield-fullstack
-      dependencies:
-        - environment-bootstrap
-        - setup-github
-        - github-devops-version-management
-        - github-devops-pre-push-quality-gate
-        - github-devops-github-pr-automation
-        - ci-cd-configuration
-        - github-devops-repository-cleanup
-        - release-management
-        - search-mcp
-        - add-mcp
-        - list-mcps
-        - remove-mcp
-        - setup-mcp-docker
-        - check-docs-links
-        - triage-github-issues
-        - resolve-github-issue
-        - create-worktree
-        - list-worktrees
-        - remove-worktree
-        - cleanup-worktrees
-        - merge-worktree
-        - github-pr-template
-        - github-actions-ci.yml
-        - github-actions-cd.yml
-        - changelog-template
-        - pre-push-checklist
-        - release-checklist
-        - github-cli
-        - asset-inventory.js
-        - path-analyzer.js
-        - migrate-agent.js
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -12864,8 +12661,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:ea83611eab67a75f2a54b963d2881cf7213683c7ab4f473f047a5e73ae06f0e3
-      lastVerified: '2026-04-04T05:46:52.657Z'
+      checksum: sha256:8ddef6fee36f279e0c9d3b6663ad4c2a5f95dfc42908e76f4fa9d4e78bdd7a8a
+      lastVerified: '2026-04-11T04:59:52.671Z'
     product-lead:
       path: .sinapse-ai/development/agents/product-lead.md
       layer: L2
@@ -12946,31 +12743,7 @@ entities:
         - quality
         - gate
       usedBy: []
-      dependencies:
-        - qa-create-fix-request
-        - qa-generate-tests
-        - qa-nfr-assess
-        - qa-gate
-        - qa-review-build
-        - qa-review-proposal
-        - qa-review-story
-        - qa-risk-profile
-        - qa-run-tests
-        - qa-test-design
-        - qa-trace-requirements
-        - create-suite
-        - spec-critique
-        - qa-library-validation
-        - qa-security-checklist
-        - qa-migration-validation
-        - qa-evidence-requirements
-        - qa-false-positive-detection
-        - qa-browser-console-check
-        - qa-gate-tmpl.yaml
-        - story-tmpl.yaml
-        - browser
-        - context7
-        - supabase
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -12981,8 +12754,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:93d4c833a9a1aa8569209176701492ea6ddedca498bba1546f8f1374ced19bcd
-      lastVerified: '2026-04-04T05:46:52.662Z'
+      checksum: sha256:3d5305bd5c442bbdd49a31a1076475c32ccfd25eea8d18b10db1a429f8c13f18
+      lastVerified: '2026-04-11T04:59:52.672Z'
     sinapse-orqx:
       path: .sinapse-ai/development/agents/sinapse-orqx.md
       layer: L2
@@ -13191,8 +12964,8 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:b616d2b8898aee1a896ae7b438ca4fb548eff7af2bc0436322950a328dca730e
-      lastVerified: '2026-04-04T05:46:52.669Z'
+      checksum: sha256:511d05a2df0e59f3503d882f61131703a5fcecb47d75f99b392086fc3a663433
+      lastVerified: '2026-04-11T04:55:28.842Z'
     brownfield-compatibility-checklist:
       path: .sinapse-ai/development/checklists/brownfield-compatibility-checklist.md
       layer: L2
@@ -13203,8 +12976,7 @@ entities:
         - compatibility
         - checklist
       usedBy: []
-      dependencies:
-        - architect
+      dependencies: []
       externalDeps: []
       plannedDeps: []
       lifecycle: experimental
@@ -13212,8 +12984,8 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:5ef51ffefdd7d5fc970aa63855e1627a554e8b5e0a09fdac7a4468ee67d01f79
-      lastVerified: '2026-04-04T05:46:52.669Z'
+      checksum: sha256:9a65292e4a34af3a2ad6fea75fa91b1f649629e35737073e51a8832541fd78dd
+      lastVerified: '2026-04-11T04:55:28.844Z'
     issue-triage-checklist:
       path: .sinapse-ai/development/checklists/issue-triage-checklist.md
       layer: L2
@@ -13232,8 +13004,8 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:2c693806a2ac40802a99a924ed8937cbb230613fd33224ca72e53f1050b54fa3
-      lastVerified: '2026-04-04T05:46:52.669Z'
+      checksum: sha256:55be4e845e777fbc02761afe07a366c4850987407ee17841e59208603a234c42
+      lastVerified: '2026-04-11T04:55:28.845Z'
     memory-audit-checklist:
       path: .sinapse-ai/development/checklists/memory-audit-checklist.md
       layer: L2
@@ -13244,8 +13016,7 @@ entities:
         - audit
         - checklist
       usedBy: []
-      dependencies:
-        - devops
+      dependencies: []
       externalDeps: []
       plannedDeps: []
       lifecycle: experimental
@@ -13253,8 +13024,8 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:9f1145110e10cd1cca2eb517b166c569e8b8db5c055ab9ac1bf0ddaa598dd421
-      lastVerified: '2026-04-04T05:46:52.670Z'
+      checksum: sha256:74c93aa038f2e996f2d69979996c4beb6e5a90ddff9bc4633c79f08c444a4141
+      lastVerified: '2026-04-11T04:55:28.846Z'
     self-critique-checklist:
       path: .sinapse-ai/development/checklists/self-critique-checklist.md
       layer: L2
@@ -13276,8 +13047,64 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:0ff14a5d708f39a107acc3c916edb13bf1bb185f068580e114d57304fc3dab5e
-      lastVerified: '2026-04-04T05:46:52.670Z'
+      checksum: sha256:9605e7d82a5d33367b52a73a880a87339ff2984616af033bdb0950d19e59c7c7
+      lastVerified: '2026-04-11T04:55:28.846Z'
+    code-review-checklist:
+      path: .sinapse-ai/development/checklists/code-review-checklist.md
+      layer: L2
+      type: checklist
+      purpose: Systematic review of code changes for quality, security, and architecture
+      keywords:
+        - code
+        - review
+        - checklist
+        - 'checklist:'
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.6
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b1395e4b144bfb8826d50ebc0ac4578b5ba85efae734e8506c9c4e134d965c32
+      lastVerified: '2026-04-11T04:55:59.899Z'
+    pr-quality-checklist:
+      path: .sinapse-ai/development/checklists/pr-quality-checklist.md
+      layer: L2
+      type: checklist
+      purpose: Validate pull requests meet size, convention, and review standards
+      keywords:
+        - pr
+        - quality
+        - checklist
+        - 'checklist:'
+        - gate
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.6
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:46d6e190b605f1884be33a4de07847e364c33b79ca97bffe5197b106cda6f7fb
+      lastVerified: '2026-04-11T04:55:28.846Z'
+    security-deployment-checklist:
+      path: .sinapse-ai/development/checklists/security-deployment-checklist.md
+      layer: L2
+      type: checklist
+      purpose: Block production deployments that violate security requirements
+      keywords:
+        - security
+        - deployment
+        - checklist
+        - 'checklist:'
+        - gate
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.6
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:e08b6d1252ede8c16252f2b5e32fcf45d374047efaf1f52f6a6852de2d25e2de
+      lastVerified: '2026-04-11T04:55:28.846Z'
   data:
     agent-config-requirements:
       path: .sinapse-ai/data/agent-config-requirements.yaml
@@ -14006,6 +13833,22 @@ entities:
         extensionPoints: []
       checksum: sha256:acf9c3050b6adc07e9dd79c56da90b44057d2294d75876172d14ee9bbb0f6352
       lastVerified: '2026-04-04T05:46:52.693Z'
+    fast-track:
+      path: .sinapse-ai/development/workflows/fast-track.yaml
+      layer: L2
+      type: workflow
+      purpose: '>-'
+      keywords:
+        - fast
+        - track
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:1a4f5665af164b8c6425d2ff3c2e713ff8559a66066aa0c7cbd1c6773aaa8266
+      lastVerified: '2026-04-11T04:55:28.847Z'
   utils:
     output-formatter:
       path: .sinapse-ai/core/utils/output-formatter.js
@@ -14074,8 +13917,7 @@ entities:
       keywords:
         - approach
         - manager
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14114,8 +13956,7 @@ entities:
       keywords:
         - asset
         - inventory
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14319,8 +14160,7 @@ entities:
       keywords:
         - codebase
         - mapper
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14825,8 +14665,7 @@ entities:
       keywords:
         - migrate
         - agent
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14912,8 +14751,7 @@ entities:
       keywords:
         - path
         - analyzer
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14934,7 +14772,6 @@ entities:
         - extractor
       usedBy:
         - extract-patterns
-        - analyst
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -15191,7 +15028,6 @@ entities:
         - autonomous-build-loop
         - build-state-manager
         - recovery-handler
-        - developer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -15255,7 +15091,6 @@ entities:
       usedBy:
         - recovery-handler
         - epic-5-executor
-        - developer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -15402,7 +15237,6 @@ entities:
         - build-state-manager
         - recovery-handler
         - epic-5-executor
-        - developer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -15919,7 +15753,6 @@ entities:
         - remove-worktree
         - autonomous-build-loop
         - build-orchestrator
-        - developer
         - auto-worktree
         - project-status-loader
         - story-worktree-hooks
@@ -16315,7 +16148,6 @@ entities:
       usedBy:
         - environment-bootstrap
         - setup-github
-        - devops
         - product-lead
       dependencies: []
       externalDeps: []
@@ -16359,7 +16191,6 @@ entities:
         - cli
       usedBy:
         - environment-bootstrap
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16382,7 +16213,6 @@ entities:
         - cli
       usedBy:
         - environment-bootstrap
-        - architect
         - data-engineer
       dependencies: []
       externalDeps: []
@@ -16401,8 +16231,7 @@ entities:
       purpose: Complete, cross-platform solution for recording, converting, and streaming audio and video
       keywords:
         - ffmpeg
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16444,8 +16273,6 @@ entities:
       keywords:
         - browser
       usedBy:
-        - developer
-        - quality-gate
         - ux-design-expert
       dependencies: []
       externalDeps: []
@@ -16485,11 +16312,7 @@ entities:
         - context7
       usedBy:
         - qa-library-validation
-        - analyst
-        - architect
-        - developer
         - product-lead
-        - quality-gate
         - sprint-lead
         - squad-creator
       dependencies: []
@@ -16530,9 +16353,7 @@ entities:
         company research, and content crawling
       keywords:
         - exa
-      usedBy:
-        - analyst
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16553,8 +16374,7 @@ entities:
       keywords:
         - google
         - workspace
-      usedBy:
-        - analyst
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16572,8 +16392,7 @@ entities:
       purpose: n8n workflow management with execution validation and credential handling
       keywords:
         - n8n
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16593,9 +16412,7 @@ entities:
         subscriptions
       keywords:
         - supabase
-      usedBy:
-        - developer
-        - quality-gate
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16638,8 +16455,7 @@ entities:
         - checklist
         - solution
         - validation
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16880,8 +16696,7 @@ entities:
         - pre-push
         - quality
         - gate
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16902,7 +16717,6 @@ entities:
         - checklist
       usedBy:
         - publish-npm
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16925,7 +16739,6 @@ entities:
         - self-critique
       usedBy:
         - build-autonomous
-        - developer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16948,8 +16761,7 @@ entities:
         - definition
         - done
         - (dod)
-      usedBy:
-        - developer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
