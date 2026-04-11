@@ -253,6 +253,11 @@ dependencies:
     # Execution Engine (Epic 4)
     - plan-create-implementation.md
     - plan-create-context.md
+    # Infrastructure & Observability (Infra Research 2026-04)
+    - infrastructure-assessment.md
+    - observability-blueprint.md
+  knowledge_bases:
+    - infrastructure-decision-framework.md
   scripts:
     # Memory Layer (Epic 7)
     - codebase-mapper.js
