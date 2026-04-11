@@ -87,19 +87,12 @@ Use Grep (not grep), Read (not cat), Edit (not sed), Glob (not find). Prefer nat
 - Agent memory in `.sinapse-ai/development/agents/{id}/MEMORY.md`
 - **Memory as hints:** Memory entries are hints, NOT ground truth. Always verify against actual codebase before acting on remembered facts.
 
-## Delegation Model
+## Delegation & Anti-Hallucination
 
-- **Persona switch:** For sequential agent work in same context (lightweight)
-- **Sub-agent (Agent tool):** Only for parallel/isolated work (min ~20K tokens overhead)
-- **Model routing:** Use `model: "haiku"` for routine sub-agent tasks (file reads, linting). Reserve Opus for architecture/complex implementation.
-- **Never** spawn sub-agents for simple sequential tasks — use persona switch instead
-
-## Anti-Hallucination
-
-- **Verify before recommending:** `npm view {pkg}` before adding any dependency
-- **Cite sources:** Reference file paths and line numbers when making claims about code
-- **Mark uncertainty:** Use [NEEDS VERIFICATION] for claims not grounded in actual files
-- Compact at 60% context usage (not default 83%) — run `/compact` proactively
+- **Persona switch** for sequential work, **sub-agent** only for parallel (20K+ tokens each)
+- **Model routing:** `haiku` for routine, `sonnet` for standard, `opus` for complex
+- **Verify** `npm view {pkg}` before adding deps. Cite file:line for code claims.
+- Mark uncertain claims with [NEEDS VERIFICATION]. Compact at 60% context.
 
 ---
 *SINAPSE v6.0 — CLI First | Observability Second | UI Third*
