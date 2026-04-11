@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 9.4.0
-generated_at: "2026-04-11T19:04:59.609Z"
+generated_at: "2026-04-11T19:53:50.164Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1130
+file_count: 1132
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1484,6 +1484,10 @@ files:
     hash: sha256:c13d4296a295b6a6c1cafc803d329cb5bd61e78170a7dabaec296e1c971f8489
     type: development
     size: 9457
+  - path: development/knowledge-base/gotchas-patterns.md
+    hash: sha256:52ae760c59d38fc25becad9befbe82953f3cd81580de0a83e273ab23603b335f
+    type: development
+    size: 12045
   - path: development/knowledge-base/infrastructure-decision-framework.md
     hash: sha256:f6250764865bcfc3bfed6bd2b34763d9a5b5c72f522dec251e706534a808c217
     type: development
@@ -1492,6 +1496,10 @@ files:
     hash: sha256:e7e358db9cfd2fe91ec80efbecc6f9825cbab6f64df58b8302d6813ecdcb7dc3
     type: development
     size: 12147
+  - path: development/knowledge-base/software-architecture-patterns.md
+    hash: sha256:da3c879e6e8608c67f6809e9b9fdfe08767ebea4e3218d55bad2b81ecc832d11
+    type: development
+    size: 10414
   - path: development/README.md
     hash: sha256:cb3aa87366eba1adebeb1f033c62e3cfc2a65430dc456914808b2c108884ebf2
     type: development
