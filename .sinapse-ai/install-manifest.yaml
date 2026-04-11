@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 9.4.0
-generated_at: "2026-04-11T19:53:50.164Z"
+generated_at: "2026-04-11T20:03:21.951Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1132
+file_count: 1140
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1241,9 +1241,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:88eabec5b74fe94b5df82475dd56cba167b5ca0771ce84a1508571cda61592d0
+    hash: sha256:ea77353646dd4e8124c45a87a9f7b141dc98c38b3253b7610f6a8947d103fe2f
     type: data
-    size: 510173
+    size: 509602
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1361,9 +1361,9 @@ files:
     type: agent
     size: 1395
   - path: development/agents/data-engineer.md
-    hash: sha256:a461ca2ff273fc6b2e8689f7465224511207ad566a0c88e5d45c596f6ebca20e
+    hash: sha256:cb88190502320722d496bf8510bbb5c4f34387be0247973004829cdb5135e8be
     type: agent
-    size: 23507
+    size: 24141
   - path: development/agents/data-engineer/MEMORY.md
     hash: sha256:91b84ee63dafd3fbeec8d00744752753d1a74acdd3a6b398f26db6662d2babf3
     type: agent
@@ -1421,9 +1421,9 @@ files:
     type: agent
     size: 1125
   - path: development/agents/squad-creator.md
-    hash: sha256:fa3d79f38530127ab226f98b339311efb3bb8531147d7e95e45f417def0280a2
+    hash: sha256:4c1248b95b630fdbf36692193077f693847307ceb627c3b1d387a7faff18f7c7
     type: agent
-    size: 14011
+    size: 16584
   - path: development/agents/ux-design-expert.md
     hash: sha256:043c902bf7a22e0041eb4bb204cbee77f5a2a965cdbab5aa79e6d8e7c22f3005
     type: agent
@@ -1476,6 +1476,10 @@ files:
     hash: sha256:c11f03e760547bfd0abbd0ea7d0e636c3f32527cb1a717811c481fce3fad49ea
     type: data
     size: 11117
+  - path: development/knowledge-base/agent-communication-protocol.md
+    hash: sha256:2aeb80a48f338891729ec926d1c179d68310703a122e5922b01bbe251ff9ed74
+    type: development
+    size: 4808
   - path: development/knowledge-base/database-scaling-patterns.md
     hash: sha256:d2f5d54ab7dbbcdfad4a34cf8027003f65457ddc0e16a52794d9ca202e8da2bf
     type: development
@@ -1500,6 +1504,10 @@ files:
     hash: sha256:da3c879e6e8608c67f6809e9b9fdfe08767ebea4e3218d55bad2b81ecc832d11
     type: development
     size: 10414
+  - path: development/knowledge-base/token-economy-guide.md
+    hash: sha256:cd92d1becb3ea5e728a041fef5d7b850e66996ce1d2222a1ff1604758867d948
+    type: development
+    size: 5932
   - path: development/README.md
     hash: sha256:cb3aa87366eba1adebeb1f033c62e3cfc2a65430dc456914808b2c108884ebf2
     type: development
@@ -1784,14 +1792,30 @@ files:
     hash: sha256:b64ef84a6def84cc600aca2c04fedd1999be394cac017409231752ee9eb51f46
     type: script
     size: 10338
+  - path: development/skills/captcha-handler.md
+    hash: sha256:de3fcdf981a727a2b2efd532d4596bed50a0f2ba14c340bcd8b735ad7fab5876
+    type: development
+    size: 2611
+  - path: development/skills/chrome-brain.md
+    hash: sha256:4697a1cd612d6f21c8bb16baf447d1a61df0e1781ea64425daecfa7f8e6bf747
+    type: development
+    size: 3354
   - path: development/skills/debug.md
     hash: sha256:7fe2ab7a6d728e2a43d6cf48fb84aa7ab28262ee805529713777e40e6038dd81
     type: development
     size: 1916
+  - path: development/skills/deploy-readiness.md
+    hash: sha256:7ce1043fd3f886e00b9cbc88dda53eeabb9c8d817674ac50c352729fd5d6a170
+    type: development
+    size: 3834
   - path: development/skills/fast-review.md
     hash: sha256:b9f6910e13fb4c92fa380828f3eee9ac1bc160d06e4b20a5b58a61d17c51495d
     type: development
     size: 1780
+  - path: development/skills/model-router.md
+    hash: sha256:0638522505e1e7f65ccdcea4a65c70e5197bd874563fc5296b13f1f58615df71
+    type: development
+    size: 3137
   - path: development/skills/research-synthesis.md
     hash: sha256:11f815d3fffaff667c8432286000c0fb96dcdbf299e1eeb1761099f0003d539b
     type: development
@@ -1800,6 +1824,14 @@ files:
     hash: sha256:0859bdce7be73bafce78bce311e138d48b848a22af975107ef760770b11efaa9
     type: development
     size: 1993
+  - path: development/skills/sinapse-methodology.md
+    hash: sha256:08c4077a742ea50e08854e13643ad37b659eae496e6f2a50bf1bc64caa745124
+    type: development
+    size: 6469
+  - path: development/skills/story-fast-track.md
+    hash: sha256:39b0abd8d8b987441828722d2bdc5bde5dd3153fa31cebe65c2ea305601f9738
+    type: development
+    size: 2281
   - path: development/skills/verify.md
     hash: sha256:5f71ce92ea89e2c2e55b1398b1399d7b7c22ab51d1f807d4b38e9c9bdabc9b65
     type: development

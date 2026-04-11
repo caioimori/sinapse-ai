@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-11T19:04:49.685Z'
+  lastUpdated: '2026-04-11T20:03:11.256Z'
   entityCount: 750
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -4401,8 +4401,7 @@ entities:
         - creator
         - analyze
         - task
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-loader
         - squad-analyzer
@@ -4426,8 +4425,7 @@ entities:
         - creator
         - create
         - '*create-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-generator.js
         - squad-validator.js
@@ -4454,8 +4452,7 @@ entities:
         - creator
         - design
         - '*design-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-designer.js
       externalDeps: []
@@ -4479,8 +4476,7 @@ entities:
         - creator
         - download
         - '*download-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4503,8 +4499,7 @@ entities:
         - creator
         - extend
         - task
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-loader
         - squad-extender
@@ -4530,8 +4525,7 @@ entities:
         - creator
         - list
         - '*list-squads'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-generator.js
       externalDeps: []
@@ -4554,8 +4548,7 @@ entities:
         - creator
         - migrate
         - '*migrate-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-migrator.js
         - squad-validator.js
@@ -4580,8 +4573,7 @@ entities:
         - creator
         - publish
         - '*publish-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4626,8 +4618,7 @@ entities:
         - sync
         - sinapse
         - '*sync-squad-sinapse'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4648,8 +4639,7 @@ entities:
         - creator
         - validate
         - '*validate-squad'
-      usedBy:
-        - squad-creator
+      usedBy: []
       dependencies:
         - squad-loader.js
         - squad-validator.js
@@ -12586,8 +12576,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:a461ca2ff273fc6b2e8689f7465224511207ad566a0c88e5d45c596f6ebca20e
-      lastVerified: '2026-04-11T19:04:49.680Z'
+      checksum: sha256:cb88190502320722d496bf8510bbb5c4f34387be0247973004829cdb5135e8be
+      lastVerified: '2026-04-11T20:03:11.251Z'
     developer:
       path: .sinapse-ai/development/agents/developer.md
       layer: L2
@@ -12789,18 +12779,7 @@ entities:
         - creator
         - squad-creator
       usedBy: []
-      dependencies:
-        - squad-creator-design
-        - squad-creator-create
-        - squad-creator-validate
-        - squad-creator-list
-        - squad-creator-migrate
-        - squad-creator-analyze
-        - squad-creator-extend
-        - squad-creator-download
-        - squad-creator-publish
-        - squad-creator-sync-sinapse
-        - context7
+      dependencies: []
       externalDeps:
         - git
       plannedDeps:
@@ -12816,8 +12795,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:fa3d79f38530127ab226f98b339311efb3bb8531147d7e95e45f417def0280a2
-      lastVerified: '2026-04-11T12:15:04.976Z'
+      checksum: sha256:4c1248b95b630fdbf36692193077f693847307ceb627c3b1d387a7faff18f7c7
+      lastVerified: '2026-04-11T20:03:11.253Z'
     ux-design-expert:
       path: .sinapse-ai/development/agents/ux-design-expert.md
       layer: L2
@@ -16260,7 +16239,6 @@ entities:
       usedBy:
         - qa-library-validation
         - analyst
-        - squad-creator
       dependencies: []
       externalDeps: []
       plannedDeps: []
