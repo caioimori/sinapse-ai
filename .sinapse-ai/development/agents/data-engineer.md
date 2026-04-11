@@ -193,6 +193,9 @@ dependencies:
     # Utilities
     - execute-checklist.md
     - create-deep-research-prompt.md
+  knowledge_bases:
+    # Database Scaling (Infra Research 2026-04)
+    - database-scaling-patterns.md
 
   # Deprecated tasks (Story 6.1.2.3 - backward compatibility v2.0→v3.0, 6 months):
   #   - db-rls-audit.md → security-audit.md {scope=rls}

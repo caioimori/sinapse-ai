@@ -226,6 +226,10 @@ dependencies:
     - qa-evidence-requirements.md
     - qa-false-positive-detection.md
     - qa-browser-console-check.md
+    # Load Testing & Security (Infra Research 2026-04)
+    - load-testing-setup.md
+  knowledge_bases:
+    - security-pre-deploy-checklist.md
   templates:
     - qa-gate-tmpl.yaml
     - story-tmpl.yaml

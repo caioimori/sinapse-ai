@@ -278,6 +278,10 @@ dependencies:
     - remove-worktree.md
     - cleanup-worktrees.md
     - merge-worktree.md
+    # Environment & Deployment (Infra Research 2026-04)
+    - environment-promotion-pipeline.md
+  knowledge_bases:
+    - environment-deployment-patterns.md
   workflows:
     - auto-worktree.yaml
   templates:
