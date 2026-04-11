@@ -98,6 +98,24 @@ db.query('SELECT * FROM users WHERE name = $1', [input]);
 supabase.from('users').select('*').eq('name', input);
 ```
 
+### RLS Performance Optimization (research-backed, ~95% improvement)
+
+```sql
+-- SLOW: auth.uid() called per-row (function call overhead)
+CREATE POLICY "bad" ON items USING (auth.uid() = user_id);
+
+-- FAST: subselect evaluates once per query (~95% faster)
+CREATE POLICY "good" ON items USING ((SELECT auth.uid()) = user_id);
+```
+
+**Index strategy:** Create indexes on EVERY column used in RLS USING/WITH CHECK clauses:
+```sql
+CREATE INDEX idx_items_user ON items(user_id);
+CREATE INDEX idx_items_org ON items(org_id);
+```
+
+**Anti-patterns:** No `EXISTS` subqueries in RLS, no JOINs in policies, no RLS on tables accessed >1000 req/s without indexes.
+
 ### Least Privilege
 - Each service uses a dedicated role with minimal permissions
 - Read-only services get SELECT only
