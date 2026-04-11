@@ -450,6 +450,123 @@ autoClaude:
 
 ---
 
+## Research-Backed Frameworks
+
+### Modified GitHub Flow for AI Teams
+
+GitHub Flow is the correct base strategy for SINAPSE. Do NOT use GitFlow (too complex for 2 humans), trunk-based (too risky without comprehensive test suite), or release branches (single npm package does not need them).
+
+```
+main (protected, always deployable)
+  |
+  +-- caio/feat/{description}        Human: Caio
+  +-- soier/feat/{description}       Human: Matheus
+  +-- agent/{squad}/{agent-id}/{desc}  AI agent (traceability)
+  +-- release/v{X.Y.Z}              Release candidate (major versions only)
+```
+
+**AI agent branch rules:**
+1. Always include agent ID in branch name (avoid agent-to-agent collision)
+2. Never reuse branch names
+3. Always branch from latest main (fetch + pull before branching)
+4. One concern per branch (never mix features)
+5. Short-lived: merge or close within 24 hours
+
+### OIDC Trusted Publishing for NPM
+
+Eliminate long-lived NPM tokens by using GitHub as identity provider:
+
+```yaml
+# In release workflow
+permissions:
+  contents: write
+  id-token: write  # OIDC for NPM trusted publishing
+
+steps:
+  - run: npm publish --provenance
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+| Security Practice | Description |
+|------------------|-------------|
+| OIDC Trusted Publishing | No long-lived tokens; GitHub is identity provider for NPM |
+| Provenance | `npm publish --provenance` signs package with Sigstore |
+| 2FA | FIDO-based 2FA mandatory (TOTP deprecated by NPM) |
+| Granular Tokens | NPM Granular Access Tokens (legacy tokens sunset 2025) |
+| npm ci | Strict lockfile, fails on inconsistency |
+
+### DORA Metrics (2025 Benchmarks)
+
+Track these four metrics to measure engineering performance:
+
+| Metric | Top 15% (Elite) | Median | Bottom 15% |
+|--------|-----------------|--------|------------|
+| Deployment Frequency | Multiple/day | Weekly-Monthly | < Monthly |
+| Change Lead Time | < 1 day | 1-7 days | > 1 month |
+| Change Failure Rate | < 4% | 10-15% | > 30% |
+| Failed Deploy Recovery | < 1 hour | 1-7 days | > 1 month |
+
+**Key finding:** Only 16.2% of orgs deploy on-demand (multiple/day). PR Size is the single most significant driver of velocity -- smaller PRs = faster cycles.
+
+### PR-Level Metrics (LinearB 2025, 6.1M+ PRs)
+
+| Metric | Elite | Average | Poor |
+|--------|-------|---------|------|
+| PR Cycle Time | < 1 day | 7 days | > 14 days |
+| Pickup Time | < 2 hours | 4 days | > 7 days |
+| Review Time | < 4 hours | 4 days | > 7 days |
+| PR Size (lines) | < 100 | 200-400 | > 1,000 |
+
+### Graphite Stacked PRs
+
+For large features, decompose into a stack of small dependent PRs:
+
+```bash
+gt branch create feat-auth-types
+gt commit create -m "feat: add auth type definitions"
+gt branch create feat-auth-logic
+gt commit create -m "feat: implement auth logic"
+gt stack submit  # Creates chained PRs
+gt stack sync    # Keeps stack synced with main
+```
+
+**Impact:** Shopify saw 33% more PRs merged/dev. Asana engineers saved 7 hours/week and shipped 21% more code.
+
+### Semantic Release vs Changesets
+
+| Tool | Best For | Automation Level |
+|------|----------|-----------------|
+| semantic-release | Single package, full automation | Fully automatic from commit messages |
+| Changesets | Monorepo with multiple packages | Semi-automatic, explicit version intent |
+
+**SINAPSE recommendation:** Changesets for monorepo packages, semantic-release for single-package projects.
+
+### Git Safety Nets for Autonomous Agents
+
+| Safety Net | Implementation |
+|-----------|---------------|
+| Branch protection on main | GitHub branch rules (no direct push) |
+| Required CI checks | All tests must pass before merge |
+| Secret scanning | Pre-commit hook + GitHub secret scanning |
+| File path validation | Hook rejects writes to protected paths |
+| Commit message validation | commitlint + conventional commits |
+| Max PR size | Bot warns if PR > 400 lines |
+| Required human approval | At least 1 human must approve every PR |
+| Audit trail | Co-Authored-By on every AI commit |
+
+### GitHub Actions Best Practices (2025)
+
+1. **Fail fast:** Lint and test first before expensive build steps
+2. **Use `npm ci`:** Respects lockfile exactly (reproducibility)
+3. **Aggressive caching:** `actions/setup-node` with `cache: 'npm'`
+4. **Protected environments:** Production requires manual approval
+5. **Pin actions by SHA:** Prevent supply chain attacks (tj-actions incident 2025)
+6. **OIDC federation:** Eliminate static cloud provider secrets
+7. **Reusable workflows:** DRY pattern for shared CI/CD logic
+
+---
+
 ## Quick Commands
 
 **Repository Management:**

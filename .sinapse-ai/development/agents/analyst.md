@@ -203,6 +203,96 @@ autoClaude:
 
 ---
 
+## Research-Backed Frameworks
+
+### Knowledge Architecture (GraphRAG)
+
+Modern knowledge systems combine three retrieval paradigms for maximum accuracy:
+
+```
+[Query]
+  --> BM25 (keyword search) --> Top-K results
+  --> Dense Embeddings (semantic) --> Top-K results
+  --> Knowledge Graph (structured) --> Entities/Relations
+  --> Reciprocal Rank Fusion (RRF) --> Merged & Ranked
+  --> Cross-Encoder Reranking --> Final Top-N
+  --> LLM Generation with Context
+```
+
+**Why hybrid matters:** BM25 alone misses semantic similarity. Embeddings alone miss exact terms (product codes, acronyms, legal terms). Graph alone misses nuance. Hybrid search reduces errors by 35-60% vs semantic-only retrieval.
+
+### Context Engineering (Karpathy 2025)
+
+**Definition (Andrej Karpathy):** "Context engineering is the delicate art and science of filling the context window with just the right information for the next step."
+
+**Mental model:** Think of the LLM as a CPU. The context window is RAM. Your job is analogous to an OS: load working memory with exactly the right code and data for the task.
+
+| Memory Tier | Analogy | Function | Cost |
+|-------------|---------|----------|------|
+| HOT | Working memory | Active task info in context window | Direct tokens |
+| WARM | Short-term | Retrievable in <300ms via vector/graph search | Low |
+| COLD | Long-term | On-demand from filesystem/archive | Minimal |
+
+**Token budget principle:** A well-managed memory system cuts token costs by ~90% and latency by ~91% vs sending full history.
+
+### Research Synthesis Framework
+
+When conducting research, apply the FINDING-IMPLICATION-RECOMMENDATION pattern:
+
+1. **FINDING:** Objective fact with source attribution
+2. **IMPLICATION:** What this means for the project/decision
+3. **RECOMMENDATION:** Actionable next step
+
+Example:
+- **FINDING:** 82% of container users run K8s in production (CNCF 2025)
+- **IMPLICATION:** K8s is mainstream, not bleeding-edge risk for SINAPSE projects
+- **RECOMMENDATION:** Include K8s patterns in architect knowledge base
+
+### Organization Frameworks for Knowledge
+
+| Framework | Structure | Best For |
+|-----------|-----------|----------|
+| Zettelkasten | Network of atomic interlinked notes | Research, writing, idea emergence |
+| PARA | Projects / Areas / Resources / Archives | Action-oriented productivity |
+| Evergreen Notes | Conceptual notes that evolve over time | Deep reflection, lasting knowledge |
+| MOC (Maps of Content) | Index notes aggregating themes | Navigation in large vaults |
+| Knowledge Graph | Entities + relations + attributes | Agent reasoning, inference |
+
+### Vector Database Selection (2026)
+
+| Database | Best For | Max Scale | Compliance |
+|----------|----------|-----------|------------|
+| Pinecone | Enterprise production | Billions | SOC 2 II, ISO 27001 |
+| Weaviate | Native hybrid search | Hundreds of millions | SOC 2 II, HIPAA |
+| Qdrant | Performance/cost ratio | Hundreds of millions | SOC 2 II |
+| pgvector | PostgreSQL integration (Supabase) | 5-100M | Inherits from PG |
+| Chroma | Rapid prototyping | Millions | Open-source |
+
+**Strategy:** Start with pgvector/Chroma for prototype, migrate to Pinecone/Weaviate for production.
+
+### Agentic RAG Patterns
+
+Modern RAG systems are not simple retrieve-then-generate. State of the art (2026):
+
+1. **Plan:** Decompose query into sub-queries
+2. **Retrieve:** Hybrid search (BM25 + embeddings + graph traversal)
+3. **Reason:** Evaluate retrieved context for relevance and sufficiency
+4. **Critique:** Self-assess if answer is grounded or needs more retrieval
+5. **Refine:** Loop until confidence threshold met (max N iterations)
+
+**LazyGraphRAG (Microsoft):** Achieves indexing at 0.1% the cost of full GraphRAG with comparable quality for global queries.
+
+### Multi-Agent Research Orchestration
+
+| Agent Pattern | Description | When to Use |
+|---------------|-------------|-------------|
+| ReAct | Reason + Act in loop | Tasks with tools (search, edit) |
+| Tree of Thought | Explore multiple reasoning paths | Problems with multiple valid solutions |
+| Graph of Thought | Reasoning as graph, merge/refine | Complex synthesis from multiple sources |
+| Reflection | Agent evaluates own output | Quality assurance, self-correction |
+
+---
+
 ## Quick Commands
 
 **Research & Analysis:**
