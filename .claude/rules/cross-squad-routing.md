@@ -1,3 +1,8 @@
+---
+paths:
+  - "squads/**"
+---
+
 # Cross-Squad Routing Rules
 
 > Applies to Imperator (sinapse-orqx) and ALL squad orchestrators (*-orqx).

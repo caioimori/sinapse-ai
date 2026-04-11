@@ -1,3 +1,8 @@
+---
+paths:
+  - ".sinapse-ai/development/agents/**"
+---
+
 # Agent Handoff Protocol — Context Compaction
 
 ## Purpose

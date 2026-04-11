@@ -1,5 +1,7 @@
 ---
-paths: **/*
+paths:
+  - "squads/**"
+  - ".sinapse-ai/development/agents/**"
 ---
 
 # Sinapse — Orchestration Rules

@@ -1,3 +1,9 @@
+---
+paths:
+  - ".sinapse-ai/data/tool-registry.yaml"
+  - ".mcp.json"
+---
+
 # Tool Input Examples — Selection Guidance
 
 ## Purpose

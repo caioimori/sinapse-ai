@@ -1,3 +1,9 @@
+---
+paths:
+  - ".claude/hooks/**"
+  - ".claude/settings.json"
+---
+
 # Hook Governance Rules
 
 > Applies to ALL agents. Hooks are the enforcement layer of the Constitution.

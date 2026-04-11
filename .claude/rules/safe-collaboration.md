@@ -40,6 +40,7 @@ The agent creates the branch. The user never needs to name it.
 |-----|---------------|---------|
 | Caio's session | `caio/{type}/{short-desc}` | `caio/feat/installer-ux` |
 | Matheus's session | `soier/{type}/{short-desc}` | `soier/fix/agent-config` |
+| AI agent | `agent/{squad}/{agent-id}/{type}-{desc}` | `agent/core/pixel/feat-dark-mode` |
 | Unknown | `dev/{type}/{short-desc}` | `dev/feat/new-feature` |
 
 Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
@@ -171,3 +172,12 @@ These same rules apply to ANY project where SINAPSE agents operate:
 ```
 
 Everything else: **ask the agent to do it.**
+
+## PR Quality Standards
+
+| Metric | Target | Warning |
+|--------|--------|---------|
+| PR size | < 200 lines | > 400 lines |
+| PR cycle time | < 1 day | > 3 days |
+
+**DORA Targets (Elite):** Deploy multiple/day, lead time < 1 day, failure rate < 4%, recovery < 1 hour.
