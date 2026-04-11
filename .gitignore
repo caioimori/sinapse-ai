@@ -53,6 +53,10 @@ credentials/
 .claude/commands/mmosMapper/
 .claude/commands/hybridOps/
 
+# Squad-generated orqx agents (created by sinapse install, not source-controlled)
+.claude/commands/SINAPSE/agents/*-orqx.md
+!.claude/commands/SINAPSE/agents/sinapse-orqx.md
+
 # Private local squads (not for repository)
 squads/*
 !squads/.gitkeep
