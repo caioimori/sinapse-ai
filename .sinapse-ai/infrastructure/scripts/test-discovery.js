@@ -720,10 +720,15 @@ class CoverageAnalyzer {
           const match = content.match(/module\.exports\s*=\s*(\{[\s\S]*\})/);
           if (match) {
             try {
-              // eslint-disable-next-line no-eval
-              return eval('(' + match[1] + ')');
+              // Try JSON.parse first (safe — no code execution)
+              return JSON.parse(match[1]);
             } catch {
-              return {};
+              // If not valid JSON (e.g., contains JS expressions), fall back to require()
+              try {
+                return require(fullPath);
+              } catch {
+                return {};
+              }
             }
           }
         }

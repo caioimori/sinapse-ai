@@ -29,36 +29,48 @@ const SignatureLimits = {
 };
 
 /**
- * PINNED PUBLIC KEY - MUST BE HARDCODED
- * This is the root of trust for manifest verification.
+ * Signature verification feature flag.
+ * Set to true AND provide SINAPSE_MANIFEST_PUBLIC_KEY env var (or replace
+ * the pinned key below) to enable manifest signature verification.
+ */
+const SIGNATURE_VERIFICATION_ENABLED = false;
+
+/**
+ * PINNED PUBLIC KEY - Root of trust for manifest verification.
  * Generated with: minisign -G -p sinapse-ai.pub -s sinapse-ai.key
  *
- * Format: base64-encoded Ed25519 public key
- * DO NOT load this from external files or environment variables.
+ * When SIGNATURE_VERIFICATION_ENABLED is true, the public key MUST be set.
+ * It can be provided via:
+ *   1. SINAPSE_MANIFEST_PUBLIC_KEY environment variable (base64-encoded Ed25519)
+ *   2. Hardcoded below (replace null with the actual key)
+ *
+ * Format: base64-encoded Ed25519 public key (32 bytes)
  */
 const PINNED_PUBLIC_KEY = {
   // Key ID (8 bytes, base64 encoded) - opaque identifier, not UTF-8 text
   // This is compared as raw bytes against the signature's key ID
   keyId: Buffer.from('SINAPSE0001').toString('base64'), // 'QUlPUzAwMDE='
   // Ed25519 public key (32 bytes, base64 encoded)
-  // TODO: Replace with actual generated public key before production
-  publicKey: 'REPLACE_WITH_ACTUAL_PUBLIC_KEY_BASE64_HERE',
+  // Set via env var SINAPSE_MANIFEST_PUBLIC_KEY or hardcode here when production key is generated
+  publicKey: process.env.SINAPSE_MANIFEST_PUBLIC_KEY || null,
   // Algorithm identifier
   algorithm: 'Ed25519',
 };
 
 /**
- * Placeholder key identifier - used to detect uninitialized keys
- * @constant {string}
+ * Check if signature verification is properly configured
+ * @returns {boolean} True if verification is enabled and a key is set
  */
-const PLACEHOLDER_KEY = 'REPLACE_WITH_ACTUAL_PUBLIC_KEY_BASE64_HERE';
+function isVerificationConfigured() {
+  return SIGNATURE_VERIFICATION_ENABLED && PINNED_PUBLIC_KEY.publicKey != null;
+}
 
 /**
- * Check if the pinned public key is still the placeholder
- * @returns {boolean} True if key needs to be replaced
+ * Check if the pinned public key is still the placeholder (legacy compat)
+ * @returns {boolean} True if key is not configured
  */
 function isPlaceholderKey() {
-  return PINNED_PUBLIC_KEY.publicKey === PLACEHOLDER_KEY;
+  return !PINNED_PUBLIC_KEY.publicKey;
 }
 
 /**
@@ -185,12 +197,13 @@ function verifyManifestSignature(manifestContent, signatureContent, options = {}
   };
 
   try {
-    // SECURITY: Check for placeholder key before any verification
+    // SECURITY: Check if verification is properly configured
     const pubKey = options.publicKey || PINNED_PUBLIC_KEY;
-    if (!options.publicKey && isPlaceholderKey()) {
-      result.error =
-        'SECURITY ERROR: Public key has not been configured. ' +
-        'Replace PINNED_PUBLIC_KEY in manifest-signature.js with the actual Ed25519 public key.';
+    if (!options.publicKey && !isVerificationConfigured()) {
+      result.error = 'Signature verification not configured: ' +
+        (SIGNATURE_VERIFICATION_ENABLED
+          ? 'Set SINAPSE_MANIFEST_PUBLIC_KEY env var or hardcode the Ed25519 public key.'
+          : 'SIGNATURE_VERIFICATION_ENABLED is false. Enable when production key is ready.');
       return result;
     }
 
@@ -372,8 +385,10 @@ module.exports = {
   signatureExists,
   loadAndVerifyManifest,
   isPlaceholderKey,
+  isVerificationConfigured,
   parseMinisignSignature,
   PINNED_PUBLIC_KEY,
+  SIGNATURE_VERIFICATION_ENABLED,
   SignatureLimits,
 };
 
