@@ -4,70 +4,96 @@ paths:
   - ".sinapse-ai/development/agents/**"
 ---
 
-# Sinapse — Orchestration Rules
+# Sinapse — Intelligent Auto-Routing (NON-NEGOTIABLE)
 
-> **CRITICAL:** This project has specialized AI agent squads installed. When a user request falls within a domain covered by a squad, you MUST delegate to the appropriate specialist agent instead of handling it yourself.
+> Users are NOT AI experts. They should NEVER need to know agent names, commands, or squad structures.
+> The system MUST understand natural language and route automatically.
 
-## Delegation Rule
+## Golden Rule
 
-When a user request matches a squad domain (see table below):
-1. **Acknowledge** the domain is covered by a specialized squad
-2. **Recommend** activating the squad's orchestrator or specialist agent
-3. **Provide** the invocation command (e.g., `/ca:agents:ca-orchestrator`)
-4. **Do NOT** handle the request yourself if a dedicated agent exists
+**User types anything → SINAPSE understands → Routes to the right specialist → Delivers result.**
 
-**Exception:** If the user explicitly asks you to handle it anyway, proceed — but note the specialized squad exists.
+The user NEVER needs to:
+- Know which agent handles what
+- Type `@agent-name` or `/SINAPSE:agents:...`
+- Understand greenfield vs brownfield
+- Know about squads, orchestrators, or handoffs
 
-## Squads Instaladas
+## Auto-Detection at Session Start
 
-| Squad | Capacidade |
-|-------|-----------|
+On EVERY session start, automatically detect:
+1. **Project State:** Greenfield (empty/new) | Brownfield (existing code) | SINAPSE-managed
+2. **Tech Stack:** Framework, language, database, testing, CI/CD
+3. **Maturity:** Score 0-10 based on tests, docs, CI presence
 
+Use this context to adjust behavior:
+- **Greenfield:** Start with scaffolding, architecture decisions, project setup
+- **Brownfield:** Start with discovery, tech debt assessment, understanding existing code
+- **SINAPSE-managed:** Continue normal SDC workflow
 
-## Mapa de Delegacao por Dominio
+## Automatic Request Routing
 
-| Dominio | Squad | Agente Lead | Invocacao |
-|---------|-------|-------------|-----------|
-| Branding e identidade visual | squad-brand | brand-orchestrator (Meridian) | `/brand:agents:brand-orchestrator` |
-| Vendas e estrategia comercial | squad-commercial | cs-orchestrator (Pipeline) | `/commercial:agents:cs-orchestrator` |
-| Conteudo e editorial | squad-content | content-orchestrator | `/content:agents:content-orchestrator` |
-| Copywriting e persuasao | squad-copy | copy-strategist (Quill) | `/copywriting:agents:copy-strategist` |
-| Animacoes web, Three.js, shaders, motion | squad-animations | ca-orchestrator (Kinetic) | `/ca:agents:ca-orchestrator` |
-| UX/UI e experiencia digital | squad-design | dx-orchestrator (Nexus) | `/digital-experience:agents:dx-orchestrator` |
-| Inteligencia financeira e pricing | squad-finance | fi-orchestrator (Ledger) | `/finance:agents:fi-orchestrator` |
-| Growth organico, SEO e analytics | squad-growth | ga-orchestrator (Catalyst) | `/growth:agents:ga-orchestrator` |
-| Midia paga (Meta Ads, Google Ads, CRO) | squad-paidmedia | pm-orchestrator (Apex) | `/pm:agents:pm-orchestrator` |
-| Produto e discovery | squad-product | ps-orchestrator (Vector) | `/product:agents:ps-orchestrator` |
-| Pesquisa e inteligencia competitiva | squad-research | research-orchestrator (Prism) | `/research:agents:research-orchestrator` |
-| Claude Code mastery e automacao | squad-claude | cm-orchestrator (Orion) | `/claude:agents:cm-orchestrator` |
-| Conselho estrategico e modelos mentais | squad-council | council-orchestrator (Zenith) | `/council:agents:council-orchestrator` |
-| Narrativa, storytelling e pitch | squad-storytelling | narrative-orchestrator (Arc) | `/narrative:agents:narrative-orchestrator` |
-| Seguranca cibernetica e compliance | squad-cybersecurity | cyber-orchestrator (Fortress) | `/cyber:agents:cyber-orchestrator` |
+When ANY user message arrives, classify and route:
 
-## Quando Delegar
+| User Says (examples) | Route To | How |
+|----------------------|----------|-----|
+| "cria um site", "novo projeto", "scaffold" | @architect → @developer | Greenfield workflow |
+| "arruma esse bug", "fix isso" | @developer | Fast-track if trivial |
+| "cria uma marca", "logo", "identidade" | squad-brand | Auto-delegate |
+| "escreve um copy", "headline", "landing page" | squad-copy | Auto-delegate |
+| "pesquisa sobre X", "analise competitiva" | squad-research | Auto-delegate |
+| "faz deploy", "publica", "push" | @devops | Exclusive authority |
+| "testa isso", "quality check" | @quality-gate | QA gate |
+| "cria uma story", "nova feature" | @sprint-lead → @product-lead | SDC workflow |
+| "animacao", "three.js", "shader" | squad-animations | Auto-delegate |
+| "SEO", "growth", "analytics" | squad-growth | Auto-delegate |
+| "ads", "campanha", "meta ads" | squad-paidmedia | Auto-delegate |
+| "financeiro", "pricing", "P&L" | squad-finance | Auto-delegate |
+| "seguranca", "pentest", "LGPD" | squad-cybersecurity | Auto-delegate |
+| "conteudo", "blog", "editorial" | squad-content | Auto-delegate |
+| "design system", "UI", "wireframe" | squad-design | Auto-delegate |
+| "estrategia", "conselho", "decisao" | squad-council | Auto-delegate |
+| "storytelling", "pitch", "narrativa" | squad-storytelling | Auto-delegate |
+| "vende isso", "proposta", "CRM" | squad-commercial | Auto-delegate |
+| "produto", "roadmap", "discovery" | squad-product | Auto-delegate |
 
-| Situacao | Squad |
-|----------|-------|
-| Animacao/motion/Three.js/shader | squad-animations |
-| Copy/headline/persuasao | squad-copy |
-| Branding/identidade/logo | squad-brand |
-| Pesquisa/benchmark/analise competitiva | squad-research |
-| Conteudo/editorial/blog/social media | squad-content |
-| UX/UI/design system/wireframe | squad-design |
-| Growth/SEO/analytics/metricas organicas | squad-growth |
-| Vendas/proposta/pitch/CRM | squad-commercial |
-| Financeiro/pricing/P&L/budget | squad-finance |
-| Midia paga/Meta Ads/Google Ads/CRO | squad-paidmedia |
-| Produto/discovery/roadmap | squad-product |
-| Claude Code/prompt engineering/MCP | squad-claude |
-| Conselho estrategico/modelos mentais/decisao | squad-council |
-| Storytelling/narrativa/pitch/apresentacao | squad-storytelling |
-| Seguranca/pentest/compliance/incident response | squad-cybersecurity |
+## Handoff Protocol (Automatic)
 
-## Handoff Protocol
+When routing between agents/squads:
+1. **Never ask permission** — just route
+2. **Provide context** — pass the user's original request + project state
+3. **Confirm briefly** — "Delegando para @specialist que e o expert nisso."
+4. **Return result** — bring the deliverable back to the user
 
-1. **Identificar** o dominio do pedido
-2. **Informar** qual squad cobre e como invocar: `/{prefix}:agents:{agent-id}`
-3. **Fornecer contexto** do handoff se necessario
-4. Squads sao **autonomas** — o orchestrator coordena internamente
-5. Squads possuem **knowledge bases**, **tasks** e **workflows** proprios em `./squads/{squad-name}/`
+## Brownfield Auto-Behavior
+
+When project is detected as BROWNFIELD and user hasn't run discovery:
+1. **First interaction:** "Detectei um projeto existente. Vou analisar a estrutura antes de comecar."
+2. **Auto-run:** Quick tech stack scan (< 30 seconds, not full brownfield discovery)
+3. **Inform:** "Projeto {framework} com {database}. Pronto para trabalhar."
+4. **Then proceed** with the user's original request
+
+## Greenfield Auto-Behavior
+
+When project is detected as GREENFIELD:
+1. **First interaction:** "Projeto novo detectado. Vou configurar a estrutura ideal."
+2. **Ask minimal:** "Que tipo de projeto? (web app, API, landing page)"
+3. **Auto-scaffold:** Apply templates, CI/CD, .env.example
+4. **Then proceed** with implementation
+
+## Tool & Command Handoff
+
+When ANY agent encounters a task outside its domain:
+- **Git push needed** → Auto-delegate to @devops (NEVER ask user)
+- **Database work** → Auto-delegate to @data-engineer
+- **Test needed** → Auto-delegate to @quality-gate
+- **Architecture decision** → Auto-delegate to @architect
+- **Story needed** → Auto-create via fast-track (trivial) or @sprint-lead (complex)
+
+## Anti-Patterns (FORBIDDEN)
+
+- Asking user "which agent should handle this?"
+- Showing agent invocation commands to the user
+- Requiring user to type `@agent-name` for routing
+- Leaving a task unfinished because "that's another agent's job" without auto-delegating
+- Asking user if project is greenfield or brownfield (auto-detect it)
