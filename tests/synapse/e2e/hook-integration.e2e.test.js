@@ -19,10 +19,12 @@ jest.setTimeout(30000);
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 const HOOK_PATH = path.join(PROJECT_ROOT, '.claude', 'hooks', 'synapse-engine.cjs');
 const HOOK_EXISTS = fs.existsSync(HOOK_PATH);
-const SYNAPSE_RUNTIME_EXISTS = fs.existsSync(path.join(PROJECT_ROOT, '.sinapse'));
+// .sinapse/ dir may exist but be empty in CI — check for actual runtime content
+const SYNAPSE_RUNTIME_READY = fs.existsSync(path.join(PROJECT_ROOT, '.sinapse', 'runtime-capabilities.json'))
+  || fs.existsSync(path.join(PROJECT_ROOT, '.sinapse', 'sessions'))
+  || (process.env.CI === undefined && fs.existsSync(path.join(PROJECT_ROOT, '.sinapse')));
 
-// Use conditional describe — skip entire suite in CI where .sinapse/ doesn't exist
-const describeIfRuntime = SYNAPSE_RUNTIME_EXISTS ? describe : describe.skip;
+const describeIfRuntime = SYNAPSE_RUNTIME_READY ? describe : describe.skip;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -75,7 +77,7 @@ function buildInput(overrides = {}) {
 // Test Suite
 // ---------------------------------------------------------------------------
 
-const describeIfHookExists = (HOOK_EXISTS && SYNAPSE_RUNTIME_EXISTS) ? describe : describe.skip;
+const describeIfHookExists = (HOOK_EXISTS && SYNAPSE_RUNTIME_READY) ? describe : describe.skip;
 
 describeIfHookExists('SYNAPSE E2E: Hook Integration', () => {
 
