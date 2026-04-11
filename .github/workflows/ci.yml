@@ -20,6 +20,7 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: read  # Required by dorny/paths-filter to access PR diff
 
 jobs:
   # Path-based change detection for smart job skipping
