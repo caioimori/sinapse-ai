@@ -951,70 +951,71 @@ function cmdUpdateLocal() {
   runBash('scripts/update-squads.sh');
 }
 
-// ── List / Status / Help ─────────────────────────────────────────────────────
-
-function cmdList() {
-  header();
-  const baseDir = fs.existsSync(SINAPSE_HOME) ? SINAPSE_HOME : ROOT;
-  const squads = getSquads(baseDir);
-  let totalAgents = 0, totalTasks = 0;
-
-  console.log(`${BOLD}Squads available:${NC}\n`);
-
-  for (const s of squads) {
-    totalAgents += s.agents;
-    totalTasks += s.tasks;
-    const agents = `${s.agents} agents`.padStart(10);
-    const tasks = `${s.tasks} tasks`.padStart(10);
-    console.log(`  ${CYAN}${s.name.padEnd(25)}${NC} ${GREEN}${agents}${NC} ${YELLOW}${tasks}${NC}  ${s.desc}`);
-  }
-
-  console.log('');
-  console.log(`  ${BOLD}Total: ${GREEN}${totalAgents} agents${NC} | ${YELLOW}${totalTasks} tasks${NC}`);
-  console.log(`  ${BOLD}Invoke: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  console.log('');
-}
+// ── Status / Help ────────────────────────────────────────────────────────────
 
 function cmdStatus() {
   header();
 
-  // Check global install
-  console.log(`${BOLD}Global Install:${NC}\n`);
+  console.log(`${BOLD}Instalacao:${NC}\n`);
 
-  if (fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
+  const installed = fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'));
+
+  if (installed) {
     const meta = JSON.parse(fs.readFileSync(path.join(SINAPSE_HOME, 'metadata.json'), 'utf8'));
-    console.log(`  ${GREEN}✓${NC} Installed (v${meta.version})`);
-    console.log(`  ${GREEN}✓${NC} ${meta.squads} squads, ${meta.commands || '?'} agents`);
-    console.log(`  ${GREEN}✓${NC} Installed: ${meta.installedAt}`);
-    if (meta.updatedAt) console.log(`  ${GREEN}✓${NC} Updated: ${meta.updatedAt}`);
+    console.log(`  ${GREEN}✓${NC} Instalado (v${meta.version})`);
+    console.log(`  ${GREEN}✓${NC} ${meta.squads} squads, ${meta.commands || '?'} agentes`);
+    console.log(`  ${GREEN}✓${NC} Data: ${meta.installedAt}`);
+    if (meta.updatedAt) console.log(`  ${GREEN}✓${NC} Atualizado: ${meta.updatedAt}`);
   } else {
-    console.log(`  ${RED}✗${NC} Not installed globally`);
-    console.log(`  ${YELLOW}Run:${NC} npx sinapse-ai install`);
+    console.log(`  ${RED}✗${NC} Nao instalado`);
+    console.log(`  ${YELLOW}Rode:${NC} npx sinapse-ai install`);
   }
 
   verifyInstall();
+
+  const baseDir = installed && fs.existsSync(SINAPSE_HOME) ? SINAPSE_HOME : ROOT;
+  const squads = getSquads(baseDir);
+
+  if (squads.length > 0) {
+    let totalAgents = 0;
+    let totalTasks = 0;
+
+    console.log('');
+    console.log(`${BOLD}Squads disponiveis:${NC}\n`);
+
+    for (const s of squads) {
+      totalAgents += s.agents;
+      totalTasks += s.tasks;
+      const agents = `${s.agents} agents`.padStart(10);
+      const tasks = `${s.tasks} tasks`.padStart(10);
+      console.log(`  ${CYAN}${s.name.padEnd(25)}${NC} ${GREEN}${agents}${NC} ${YELLOW}${tasks}${NC}  ${s.desc}`);
+    }
+
+    console.log('');
+    console.log(`  ${BOLD}Total: ${GREEN}${totalAgents} agentes${NC} | ${YELLOW}${totalTasks} tasks${NC}`);
+    console.log(`  ${BOLD}Invocar: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  }
+
   console.log('');
 }
 
 function cmdHelp() {
   header();
-  console.log(`${BOLD}Commands:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai install${NC}          Install SINAPSE in current project`);
-  console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
-  console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
+  console.log(`${BOLD}Comandos:${NC}\n`);
+  console.log(`  ${CYAN}npx sinapse-ai install${NC}     Instala o SINAPSE no projeto atual`);
+  console.log(`  ${CYAN}npx sinapse-ai update${NC}      Atualiza para a versao mais nova`);
+  console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}   Remove do projeto atual`);
+  console.log(`  ${CYAN}npx sinapse-ai status${NC}      Diagnostico + lista de squads instaladas`);
   console.log('');
-  console.log(`${BOLD}Diagnostics:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
-  console.log(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
-  console.log(`  ${CYAN}npx sinapse-ai help${NC}             Show this help`);
+  console.log(`${BOLD}Depois de instalar:${NC}\n`);
+  console.log(`  ${CYAN}sinapse${NC}                 Abre o Claude Code com os agentes`);
+  console.log(`  ${CYAN}sinapse --continue${NC}      Continua a ultima sessao`);
   console.log('');
-  console.log(`${BOLD}After install:${NC}\n`);
-  console.log(`  ${CYAN}sinapse${NC}                      Start Claude Code with all agents`);
-  console.log(`  ${CYAN}sinapse --continue${NC}           Continue last session`);
+  console.log(`${BOLD}Agentes:${NC}\n`);
+  console.log(`  Invocacao: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  console.log(`  Exemplo:   ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   console.log('');
-  console.log(`${BOLD}Agents:${NC}\n`);
-  console.log(`  All agents use: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  console.log(`  Example: ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  console.log(`${DIM}Avancado: ${CYAN}npx sinapse-ai chrome-brain <install|status|uninstall>${NC}`);
   console.log('');
 }
 
@@ -1028,7 +1029,6 @@ switch (command) {
   case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal().catch(e => { console.error(e.message); process.exit(1); }); break;
   case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
   case 'uninstall': cmdUninstall(); break;
-  case 'list':     cmdList(); break;
   case 'status':   cmdStatus(); break;
   case 'chrome-brain': {
     // Story 10.13 — chrome-brain is the canonical sub-capability for browser
