@@ -1,13 +1,13 @@
 # ══════════════════════════════════════════════════════════════════════════════
-# SQUAD MANIFEST — squad-brand v3.2
+# SQUAD MANIFEST — squad-brand v3.3
 # ══════════════════════════════════════════════════════════════════════════════
 # The world-class brand system squad for creating, managing and evolving
 # complete brand systems — from strategic positioning to compiled brandbook.
-# 15 agents | 97 tasks | 4 workflows | 19 KBs | 6 templates | Full coverage
+# 15 agents | 97 tasks | 4 workflows | 30 KBs | 6 templates | Full coverage
 # ══════════════════════════════════════════════════════════════════════════════
 
 name: squad-brand
-version: 3.2.0
+version: 3.3.0
 description: >
   Squad de classe mundial para criacao, gestao e evolucao de sistemas de marca
   completos. 15 agentes especialistas cobrindo 100% de um brand system world-class:
@@ -24,17 +24,31 @@ slashPrefix: SINAPSE
 
 metadata:
   created_at: "2026-03-11"
-  updated_at: "2026-03-13"
+  updated_at: "2026-04-12"
   created_by: "squad-creator (Craft)"
   blueprint: "squads/.designs/squad-brand-design.yaml"
   quality_target: "5.0/5.0 em todas as dimensoes"
   agents_count: 15
   tasks_count: 97
-  knowledge_bases_count: 19
+  knowledge_bases_count: 30
   checklists_count: 3
   templates_count: 6
   workflows_count: 4
-  total_files: 143
+  total_files: 155
+
+changelog:
+  - version: "3.3.0"
+    date: "2026-04-12"
+    story: fw-v2.3
+    epic: EPIC-framework-upgrade-v2
+    highlights:
+      - "Shipped ai-visual-generation-canon.md KB — raises ai-api-capabilities.md + prompt-engineering-visual.md from capability notes to canonical playbook. Covers the 5 brand-consistency dimensions with lock protocols (style/lighting/palette/subject/composition), model selection matrix, batch QA checklist, legal/IP guardrails, session hygiene, batch orchestration patterns, agent ownership matrix."
+      - "Reconciled knowledge_bases_count 19 -> 30 to match disk reality (drift accumulated over multiple minor releases)."
+      - "Minor version bump (additive-only, no breaking changes, no persona edits)."
+    breaking_changes: []
+    deferred_to_follow_up:
+      - "AC2 — brand-to-platform-token-bridge.md (partially superseded: squads/squad-design/knowledge-base/cross-surface-token-canon.md already defines the Nexus<->Atlas contract that includes Meridian upstream; a brand-side mirror doc remains useful for brand-originated handoffs but is lower priority)."
+      - "AC3 — brand-ops-playbook.md (separate canon doc, worthy but scoped out to avoid diluting AI visual canon shipment quality)."
 
 # ══════════════════════════════════════════════════════════════════════════════
 # QUALITY STANDARDS — Regras de Robustez (v3.2)
