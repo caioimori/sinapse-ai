@@ -1,0 +1,164 @@
+id: course-launch-cycle
+name: Course Launch Cycle
+description: End-to-end launch workflow from platform setup to student onboarding.
+version: "1.0"
+agents:
+  - Launchpad
+
+phases:
+  - id: phase-1-platform
+    name: Platform Setup
+    agent: Launchpad
+    description: Configure the course platform for hosting and delivery.
+    inputs:
+      - Course content (videos, written lessons, workbooks)
+      - Platform selection decision (Hotmart / Kajabi / Teachable / Thinkific)
+    tasks:
+      - Create course on selected platform
+      - Configure course title, description, and thumbnail
+      - Set course structure (modules and lessons in order)
+      - Upload all content (videos, PDFs, slides, workbooks)
+      - Configure access settings (drip vs all-at-once)
+      - Configure completion certificates (if applicable)
+      - Configure platform community or external community link
+      - Test student view: enroll test account and verify all content accessible
+    outputs:
+      - platform-setup-log.md
+      - test-enrollment-report.md
+    gate: Test enrollment completed — all content accessible on desktop and mobile
+
+  - id: phase-2-pricing
+    name: Pricing Configuration
+    agent: Launchpad
+    description: Set pricing strategy, tiers, and payment options.
+    inputs:
+      - Pricing decision (from course-pricing-models.md or brief)
+    tasks:
+      - Configure pricing tiers (1, 2, or 3 tiers)
+      - Set payment options (one-time, installments, subscription)
+      - Configure discount codes or early-bird pricing (if launch strategy requires)
+      - Set currency and regional pricing if applicable
+      - Configure affiliate commission rate (if affiliate launch)
+      - Test checkout flow (payment, confirmation, access grant)
+    outputs:
+      - pricing-configuration-log.md
+    quality_checks:
+      - Checkout tested with real or test payment
+      - Enrollment confirmation email sent correctly
+      - Access granted immediately after payment
+    gate: Checkout tested and payment confirmed with access granted
+
+  - id: phase-3-sales-page
+    name: Sales Page
+    agent: Launchpad
+    description: Write and publish the course sales page.
+    inputs:
+      - sales-page-brief-template.md (completed)
+      - course-scope.md
+      - Student testimonials or beta feedback (if available)
+    tasks:
+      - Write headline (transformation, not feature)
+      - Write problem section (pain the audience recognizes)
+      - Write solution section (the course promise)
+      - Write modules overview (what's inside)
+      - Write instructor section (credibility + relatability)
+      - Write testimonials section (social proof)
+      - Write pricing section (with anchoring if tiered)
+      - Write guarantee section (if applicable)
+      - Write FAQ (5–8 objection-handling questions)
+      - Write CTAs (above fold, middle, end)
+      - Publish page and configure SEO metadata
+    outputs:
+      - sales-page-url
+      - sales-page-copy.md (backup)
+    quality_checks:
+      - Page loads under 3 seconds
+      - CTA buttons functional and linked to correct checkout
+      - Mobile layout reviewed
+    gate: Sales page live and linked to correct pricing tier
+
+  - id: phase-4-email
+    name: Email Sequence
+    agent: Launchpad
+    description: Configure pre-launch, welcome, and re-engagement email sequences.
+    inputs:
+      - sales-page-url
+      - Audience segment list
+    tasks:
+      - Write waitlist/pre-launch email (if building list before launch)
+      - Write launch announcement email (Day 1)
+      - Write value email (Day 2–3: share a lesson insight or tip)
+      - Write objection-handling email (Day 4–5: FAQ format)
+      - Write cart-close or urgency email (if launch window)
+      - "Write welcome sequence for new students (3-5 emails): Email 1 Welcome + how to start, Email 2 Quick win reminder (Day 2), Email 3 Community invite (Day 3), Email 4 Module 2 prompt (Day 7), Email 5 Check-in + resources (Day 14)"
+      - Configure automations for all sequences
+      - Test all email triggers and send times
+    outputs:
+      - email-sequences/ (launch + welcome)
+      - email-automation-log.md
+    gate: All email automations tested (trigger, content, deliverability)
+
+  - id: phase-5-bonuses
+    name: Bonuses
+    agent: Launchpad
+    description: Prepare and configure launch bonuses.
+    inputs:
+      - Bonus assets (templates, extra lessons, tools, community access)
+    tasks:
+      - Define bonus stack (2–4 bonuses with perceived value)
+      - Create or assemble all bonus assets
+      - Upload bonuses to platform or delivery mechanism
+      - Configure bonus delivery trigger (purchase → bonus access)
+      - Write bonus descriptions for sales page
+      - Test bonus access after purchase
+    outputs:
+      - bonus-delivery-log.md
+    gate: Bonus access confirmed after test purchase
+
+  - id: phase-6-funnel
+    name: Enrollment Funnel
+    agent: Launchpad
+    description: Build and test the complete lead-to-student enrollment funnel.
+    inputs:
+      - sales-page-url
+      - Email sequences
+      - Pricing configuration
+    tasks:
+      - Map funnel stages (awareness → lead → checkout → enrolled)
+      - Configure lead capture (opt-in page or waitlist if applicable)
+      - Set up tracking pixels and analytics (UTM params, conversion goal)
+      - Test full funnel: opt-in → email sequence → sales page → checkout → enrollment
+      - Verify conversion events fire correctly in analytics
+    outputs:
+      - funnel-map.md
+      - funnel-test-report.md
+    gate: Full funnel tested — conversion events tracked correctly
+
+  - id: phase-7-onboarding
+    name: Student Onboarding
+    agent: Launchpad
+    description: Configure and test the student onboarding experience.
+    inputs:
+      - Platform configuration
+      - Email sequences (welcome)
+      - Community setup
+    tasks:
+      - Confirm welcome email sent immediately on enrollment
+      - Confirm student lands on correct start page
+      - Verify community access instructions are clear
+      - Configure onboarding video or welcome message from instructor
+      - Test progress tracking (lesson completion registers correctly)
+      - Test mobile experience for new student
+      - Confirm support channel is visible and monitored
+    outputs:
+      - onboarding-test-report.md
+    gate: Onboarding tested as student — experience is smooth from purchase to first lesson
+
+completion_criteria:
+  - Platform configured and content accessible
+  - Checkout tested with payment and access confirmation
+  - Sales page live and mobile-optimized
+  - All email automations configured and tested
+  - Bonuses delivered automatically post-purchase
+  - Funnel tested end-to-end with analytics tracking
+  - Onboarding experience smooth for new students

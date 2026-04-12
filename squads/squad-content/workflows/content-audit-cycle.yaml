@@ -1,0 +1,93 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Content Audit Cycle
+# ══════════════════════════════════════════════════════════════════════════════
+# Auditoria de qualidade e performance do acervo de conteudo
+# Pipeline: Lens (analisar) → Index (auditar) → North (replanejar)
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: content-audit-cycle
+version: 1.0.0
+description: >
+  Ciclo de auditoria que avalia o acervo de conteudo existente em 3 dimensoes:
+  performance (esta gerando resultado?), qualidade (atende padroes?), e cobertura
+  (todos os pilares e estagios de funil estao cobertos?). Gera recomendacoes
+  para replanejar estrategia editorial.
+trigger: "Trimestral ou sob demanda (queda de performance, novo cliente com acervo)"
+cadence: "Trimestral"
+estimated_duration: "4-8 horas"
+
+phases:
+  - phase: 1
+    name: "Performance Analysis"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - analyze-content-performance
+      - identify-top-performers
+      - measure-content-roi
+      - benchmark-against-competitors
+      - analyze-audience-behavior
+    input: "Acervo de conteudo publicado, metricas de todas as plataformas"
+    output: "Performance report completo + top/bottom performers + ROI por pilar/formato"
+    gate: "Metricas coletadas para >=80% do acervo"
+
+  - phase: 2
+    name: "Quality Audit"
+    agent: "content-governor (Index)"
+    tasks:
+      - audit-content-library
+      - check-brand-consistency
+      - manage-content-taxonomy
+    input: "Acervo catalogado, brand guidelines atuais"
+    output: "Audit report: qualidade, consistencia, taxonomia, gaps"
+    gate: "Audit completo com scoring por dimensao"
+
+  - phase: 3
+    name: "E-E-A-T Assessment"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - evaluate-eeat-compliance
+    input: "Conteudo de blog/SEO"
+    output: "E-E-A-T scorecard"
+    gate: "Scoring E-E-A-T por dimensao com recomendacoes"
+    conditional: "Executar apenas se cliente tem blog/conteudo SEO"
+
+  - phase: 4
+    name: "Gap & Coverage Analysis"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - map-content-gaps
+      - balance-content-mix
+    input: "Performance report + audit report + E-E-A-T scorecard"
+    output: "Mapa de gaps: pilares sub-cobertos, formatos sub-explorados, funil desequilibrado"
+    gate: "Gaps identificados e priorizados por impacto"
+
+  - phase: 5
+    name: "Strategic Recommendations"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - define-content-kpis  # revisao, nao criacao
+      - prioritize-themes
+    input: "Gaps + performance data + competitor benchmark"
+    output: "Plano de acao: o que criar, o que reciclar, o que descontinuar, KPIs revisados"
+    gate: "Plano de acao aprovado por stakeholder"
+
+  - phase: 6
+    name: "Preference Update"
+    agent: "content-governor (Index)"
+    tasks:
+      - update-content-preferences
+    input: "Resultados da auditoria, padroes identificados"
+    output: "Preference log atualizado com insights da auditoria"
+    gate: "Preference log atualizado, metricas de evolucao recalculadas"
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  deliverables:
+    - "content-audit-report.md (completo)"
+    - "content-performance-report.md (metricas)"
+    - "content-gap-analysis.md (gaps e recomendacoes)"
+    - "preferences/{projeto}-preferences.md (atualizado)"
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,140 @@
+name: security-audit-workflow
+version: "1.0.0"
+description: "Comprehensive security audit workflow covering threat modeling, vulnerability assessment, cloud security, network security, and compliance. Coordinates all 7 specialist agents."
+squad: squad-cybersecurity
+trigger: manual
+
+phases:
+  - name: "Phase 1: Scoping & Threat Modeling"
+    description: "Define audit scope, build threat model, and prioritize assessment areas"
+    agents:
+      - "@cyber-orqx"
+      - "@threat-analyst"
+    tasks:
+      - triage-security-request
+      - threat-model
+    inputs:
+      - audit_scope: "Systems, applications, and infrastructure to assess"
+      - business_context: "Industry, data types, compliance requirements"
+      - architecture_documentation: "System architecture and data flow diagrams"
+    outputs:
+      - threat_model: "Comprehensive threat model with MITRE ATT&CK mapping"
+      - assessment_plan: "Prioritized list of assessment activities based on threat model"
+      - scope_document: "Formal audit scope with inclusions and exclusions"
+    gate:
+      condition: "Threat model complete, assessment plan approved, scope documented"
+      on_fail: "Refine scope and threat model before proceeding"
+
+  - name: "Phase 2: Vulnerability Assessment"
+    description: "Conduct vulnerability assessments of applications, APIs, and code"
+    agent: "@penetration-tester"
+    tasks:
+      - vulnerability-assessment
+      - web-app-pentest
+      - api-security-audit
+      - code-security-review
+    inputs:
+      - assessment_plan: "from Phase 1"
+      - authorization: "Written authorization for all in-scope targets"
+      - target_details: "URLs, API specs, code repositories"
+    outputs:
+      - vulnerability_findings: "All confirmed vulnerabilities with CVSS scores"
+      - pentest_report: "Detailed penetration test report"
+    gate:
+      condition: "All in-scope targets assessed, findings validated, authorization verified for each target"
+      on_fail: "Complete remaining assessments before proceeding"
+    note: "Authorization is MANDATORY for each target. Breach will not test without it."
+
+  - name: "Phase 3: Infrastructure Security"
+    description: "Assess cloud and network infrastructure security posture"
+    agents:
+      - "@cloud-security-engineer"
+      - "@network-security-engineer"
+    tasks:
+      - cloud-security-assessment
+      - iam-audit
+      - container-security-review
+      - network-segmentation-review
+      - firewall-rule-audit
+    inputs:
+      - cloud_accounts: "Cloud provider accounts/subscriptions in scope"
+      - network_topology: "Network diagrams and firewall exports"
+      - container_configs: "Dockerfiles, K8s manifests (if applicable)"
+    outputs:
+      - cloud_security_report: "CSPM assessment with CIS Benchmark scores"
+      - iam_audit_report: "IAM findings with least-privilege recommendations"
+      - network_security_report: "Segmentation and firewall audit findings"
+      - container_security_report: "Container security assessment (if applicable)"
+    gate:
+      condition: "All infrastructure components assessed, findings prioritized"
+      on_fail: "Complete remaining infrastructure assessments"
+    note: "Nimbus leads cloud assessment. Wire leads network assessment. Both run in parallel."
+
+  - name: "Phase 4: Detection & Monitoring Assessment"
+    description: "Evaluate security monitoring, detection coverage, and hunting capabilities"
+    agent: "@soc-analyst"
+    tasks:
+      - detection-rule-engineering
+    inputs:
+      - threat_model: "from Phase 1 (for detection coverage mapping)"
+      - current_detections: "Existing SIEM rules and monitoring configuration"
+      - vulnerability_findings: "from Phase 2 (inform detection priorities)"
+    outputs:
+      - detection_coverage_map: "MITRE ATT&CK coverage with gaps identified"
+      - new_detection_rules: "Sigma rules for identified gaps"
+      - monitoring_recommendations: "Log source and monitoring improvements"
+    gate:
+      condition: "ATT&CK coverage mapped, critical gaps addressed with new rules"
+      on_fail: "Identify minimum viable detection rules for critical gaps"
+
+  - name: "Phase 5: Compliance Assessment"
+    description: "Map findings to regulatory requirements and assess compliance posture"
+    agent: "@compliance-officer"
+    tasks:
+      - compliance-gap-analysis
+      - risk-assessment
+    inputs:
+      - applicable_frameworks: "Regulatory frameworks relevant to the organization"
+      - all_findings: "Consolidated findings from Phases 2-4"
+      - current_policies: "Existing security policies and procedures"
+    outputs:
+      - compliance_gap_analysis: "Gap analysis against applicable frameworks"
+      - risk_register: "Updated risk register with audit findings"
+      - policy_recommendations: "Policy updates needed based on findings"
+    gate:
+      condition: "All applicable frameworks assessed, gaps mapped, risk register updated"
+      on_fail: "Complete remaining framework assessments"
+
+  - name: "Phase 6: Consolidated Reporting"
+    description: "Synthesize all findings into a unified security audit report"
+    agent: "@cyber-orqx"
+    tasks: []
+    inputs:
+      - all_phase_outputs: "Complete outputs from Phases 1-5"
+    outputs:
+      - executive_summary: "High-level risk posture for leadership"
+      - technical_report: "Detailed findings for security and engineering teams"
+      - remediation_roadmap: "Prioritized remediation plan with effort estimates and timelines"
+      - risk_scorecard: "Overall security posture score across all domains"
+    gate:
+      condition: "All findings consolidated, remediation roadmap prioritized, stakeholder-appropriate reports generated"
+      on_fail: "Address missing sections before finalizing"
+
+completion:
+  success_criteria: "All 6 phases complete, comprehensive report delivered, remediation roadmap accepted"
+  deliverables:
+    - "Threat model"
+    - "Penetration test report"
+    - "Cloud security assessment (CIS Benchmark)"
+    - "IAM audit report"
+    - "Network security assessment"
+    - "Container security review (if applicable)"
+    - "Detection coverage analysis"
+    - "Compliance gap analysis"
+    - "Risk register"
+    - "Executive summary"
+    - "Remediation roadmap"
+  estimated_duration:
+    small_scope: "1-2 weeks"
+    medium_scope: "2-4 weeks"
+    large_scope: "4-8 weeks"

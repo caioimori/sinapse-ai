@@ -1,0 +1,255 @@
+name: squad-product
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de Product Systems — orquestra discovery, delivery, analytics e product operations
+  para agencias que constroem produtos digitais. Cada feature e validada antes de ser
+  construida, cada lancamento e instrumentado, cada handoff e completo.
+
+metadata:
+  tier: 3
+  domain: product-systems
+  complexity: high
+  language: pt-BR
+  created: "2026-03-13"
+  author: "Sinapse"
+  agents_count: 7
+  tasks_count: 75
+  knowledge_bases_count: 11
+  workflows_count: 6
+  templates_count: 5
+  checklists_count: 3
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+agents:
+  - id: product-orqx
+    name: Vector
+    icon: "🎯"
+    role: Product Operations Orchestrator
+    file: agents/product-orqx.md
+    tasks_count: 10
+
+  - id: ps-product-strategist
+    name: Charter
+    icon: "📐"
+    role: Product Strategy & Vision Lead
+    file: agents/ps-product-strategist.md
+    tasks_count: 10
+
+  - id: ps-discovery-lead
+    name: Quorum
+    icon: "🔬"
+    role: Product Discovery & Validation Lead
+    file: agents/ps-discovery-lead.md
+    tasks_count: 12
+
+  - id: ps-product-analyst
+    name: Delta
+    icon: "📈"
+    role: Product Analytics & Metrics Specialist
+    file: agents/ps-product-analyst.md
+    tasks_count: 11
+
+  - id: ps-delivery-manager
+    name: Tempo
+    icon: "⏱️"
+    role: Delivery & Sprint Operations Manager
+    file: agents/ps-delivery-manager.md
+    tasks_count: 11
+
+  - id: ps-client-product-manager
+    name: Proxy
+    icon: "🤝"
+    role: Client-Facing Product Manager
+    file: agents/ps-client-product-manager.md
+    tasks_count: 11
+
+  - id: ps-product-ops-specialist
+    name: Mosaic
+    icon: "🧩"
+    role: Product Operations & Systems Specialist
+    file: agents/ps-product-ops-specialist.md
+    tasks_count: 10
+
+total_tasks: 75
+
+workflows:
+  - id: product-discovery-cycle
+    name: Product Discovery Cycle
+    file: workflows/product-discovery-cycle.yaml
+    description: "Discovery sprint — do problema validado ao opportunity map"
+
+  - id: story-development-delivery-cycle
+    name: Story Development & Delivery Cycle
+    file: workflows/story-development-delivery-cycle.yaml
+    description: "Shaping, sprint planning, delivery e lancamento"
+
+  - id: client-roadmap-alignment-cycle
+    name: Client Roadmap Alignment Cycle
+    file: workflows/client-roadmap-alignment-cycle.yaml
+    description: "Alinhamento trimestral de roadmap com cliente"
+
+  - id: product-launch-cycle
+    name: Product Launch Cycle
+    file: workflows/product-launch-cycle.yaml
+    description: "Lancamento de feature com tiers, flags e monitoramento"
+
+  - id: product-handoff-cycle
+    name: Product Handoff Cycle
+    file: workflows/product-handoff-cycle.yaml
+    description: "Handoff completo de produto agencia → equipe do cliente"
+
+  - id: product-strategy-definition-cycle
+    name: Product Strategy Definition Cycle
+    file: workflows/product-strategy-definition-cycle.yaml
+    description: "Definicao de visao, strategy canvas e OKRs"
+
+knowledge_base:
+  - id: pm-frameworks-reference
+    file: knowledge-base/pm-frameworks-reference.md
+    description: "RICE, ICE, MoSCoW, Kano, Weighted Scoring, OKRs"
+
+  - id: product-analytics-formulas
+    file: knowledge-base/product-analytics-formulas.md
+    description: "AARRR, DAU/MAU, Activation, Retention, PLG metrics"
+
+  - id: discovery-methodology-playbook
+    file: knowledge-base/discovery-methodology-playbook.md
+    description: "Continuous Discovery, JTBD, Assumption Testing, OST"
+
+  - id: agile-lean-ceremonies-guide
+    file: knowledge-base/agile-lean-ceremonies-guide.md
+    description: "Scrum, Kanban, Shape Up, Dual-Track Agile"
+
+  - id: agency-product-management-patterns
+    file: knowledge-base/agency-product-management-patterns.md
+    description: "Multi-client backlogs, dual roadmaps, MVP negotiation"
+
+  - id: product-led-growth-reference
+    file: knowledge-base/product-led-growth-reference.md
+    description: "PLG loops, viral coefficient, PQL, freemium conversion"
+
+  - id: client-stakeholder-management-protocols
+    file: knowledge-base/client-stakeholder-management-protocols.md
+    description: "RACI, cadences, No framework, scope negotiation"
+
+  - id: product-tool-stack-guide
+    file: knowledge-base/product-tool-stack-guide.md
+    description: "ProductBoard, Amplitude, Mixpanel, Pendo, Linear, LaunchDarkly"
+
+  - id: technical-debt-management-framework
+    file: knowledge-base/technical-debt-management-framework.md
+    description: "Fowler Quadrant, debt scoring, 20% sprint budget rule"
+
+checklists:
+  - id: discovery-readiness-checklist
+    file: checklists/discovery-readiness-checklist.md
+    description: "Gate de validacao antes de solucao entrar no Delivery Track"
+
+  - id: launch-readiness-checklist
+    file: checklists/launch-readiness-checklist.md
+    description: "Gate obrigatorio antes de feature ir para producao"
+
+  - id: product-handoff-completeness-checklist
+    file: checklists/product-handoff-completeness-checklist.md
+    description: "Gate de completude de handoff agencia → cliente"
+
+templates:
+  - id: product-roadmap-template
+    file: templates/product-roadmap-template.md
+    description: "Now/Next/Later roadmap com versao interna e client-facing"
+
+  - id: product-discovery-report-template
+    file: templates/product-discovery-report-template.md
+    description: "Relatorio de discovery sprint com JTBD e OST"
+
+  - id: client-request-intake-template
+    file: templates/client-request-intake-template.md
+    description: "Intake de request com reframe e RICE scoring"
+
+  - id: sprint-planning-template
+    file: templates/sprint-planning-template.md
+    description: "Template de sprint planning com capacity math"
+
+  - id: product-health-dashboard-template
+    file: templates/product-health-dashboard-template.md
+    description: "Dashboard de saude do produto para cliente"
+
+quality_standards:
+  reference_authors:
+    - "Marty Cagan (Inspired, Empowered, Transformed)"
+    - "Teresa Torres (Continuous Discovery Habits)"
+    - "Melissa Perri (Escaping the Build Trap)"
+    - "Eric Ries (The Lean Startup)"
+    - "Ryan Singer (Shape Up)"
+    - "Bob Moesta (Demand-Side Sales, JTBD)"
+    - "Jeff Patton (User Story Mapping)"
+    - "Rich Mironov (Art of Product Management)"
+    - "Roman Pichler (Strategize)"
+    - "Gibson Biddle (ex-Netflix, PM leadership)"
+    - "Sean Ellis (Hacking Growth, PMF Test)"
+    - "Andrew Chen (The Cold Start Problem)"
+    - "Noriaki Kano (Kano Model)"
+    - "Martin Fowler (Technical Debt Quadrant)"
+    - "John Doerr (Measure What Matters — OKRs)"
+
+  reference_companies:
+    - "ProductBoard (Requirements + Roadmapping)"
+    - "Amplitude (Product Analytics)"
+    - "Mixpanel (Event-Based Analytics)"
+    - "Pendo (In-App Guidance)"
+    - "LaunchDarkly (Feature Flags)"
+    - "Linear (Issue Tracking)"
+    - "Intercom (JTBD applied)"
+    - "Basecamp/37signals (Shape Up)"
+    - "Canny (Client Request Management)"
+    - "FullStory/Hotjar (Session Recording)"
+
+  core_concepts:
+    - name: "Dual-Track Agile"
+      description: "Discovery Track (validacao continua) + Delivery Track (construcao de solucoes validadas)"
+    - name: "Opportunity Solution Tree"
+      description: "Desired Outcome → Opportunities → Solutions → Experiments (Teresa Torres)"
+    - name: "RICE Scoring"
+      description: "(Reach × Impact × Confidence) / Effort — priorizacao quantitativa"
+    - name: "Product-Market Fit"
+      description: "Sean Ellis Test: >40% Very Disappointed = PMF achieved"
+    - name: "Shape Up"
+      description: "6-week cycles, appetite-based scoping, fixed time variable scope"
+
+  mandatory_gates:
+    - name: "Discovery Entry Gate"
+      description: "Problema validado com evidencia antes de qualquer solucao entrar em delivery"
+      blocking: true
+      agent: ps-discovery-lead
+
+    - name: "Launch Go/No-Go Gate"
+      description: "Feature 100% AC passing + analytics instrumentados + rollback plan antes de producao"
+      blocking: true
+      agent: ps-delivery-manager
+
+cross_squad_handoffs:
+  inbound:
+    - from: squad-commercial
+      receives: "Client feedback, NPS verbatims, feature requests, expansion signals"
+    - from: squad-research
+      receives: "Market analysis, competitive intelligence, user research data"
+    - from: squad-design
+      receives: "UX designs, design system components, accessibility audit"
+
+  outbound:
+    - to: squad-commercial
+      sends: "Resource needs, sprint capacity forecasts, process automation requests"
+    - to: squad-design
+      sends: "Discovery opportunities for UX, product specs for UI design"
+    - to: squad-content
+      sends: "Content strategy briefs, launch content needs"
+    - to: squad-commercial
+      sends: "Product metrics for QBR, feature adoption data for expansion"
+    - to: squad-research
+      sends: "Research briefs requiring deep analysis"
+
+preferences:
+  file: preferences/README.md

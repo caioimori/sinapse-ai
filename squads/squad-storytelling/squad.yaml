@@ -1,0 +1,211 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-storytelling v1.0
+# ══════════════════════════════════════════════════════════════════════════════
+# World-class narrative & storytelling squad. 10 agents covering mythology,
+# screenwriting, pitch, presentations, business storytelling, personal narrative,
+# improvisation, and social movements. 47 tasks | 2 workflows | 3 KBs
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-storytelling
+version: "1.0.0"
+description: >
+  Squad de 10 mestres da narrativa. Mitologia, screenwriting, pitch,
+  apresentacoes, storytelling pessoal, business storytelling, improviso
+  e movimentos sociais. Frameworks de Campbell, Harmon, Snyder, Klaff,
+  Duarte, Hall, Howell, Johnstone e Ganz reunidos sob um unico
+  orquestrador. Atemporal e reutilizavel.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-03-16"
+  created_by: "Caio Imori"
+  quality_target: "5.0/5.0 em todas as dimensoes"
+  agents_count: 10
+  tasks_count: 47
+  knowledge_bases_count: 3
+  workflows_count: 2
+
+# ══════════════════════════════════════════════════════════════════════════════
+# QUALITY STANDARDS
+# ══════════════════════════════════════════════════════════════════════════════
+
+quality_standards:
+  robustness:
+    min_agents: 6
+    min_tasks: 15
+    min_workflows: 2
+    min_knowledge_bases: 3
+    world_class_references: required
+
+  references:
+    authors:
+      - "Joseph Campbell — Hero's Journey, Monomyth, 17 stages, archetypes"
+      - "Dan Harmon — Story Circle, 8 steps, fractal narrative, TV writing"
+      - "Blake Snyder — Save the Cat, 15 beats, 10 genres, The Board"
+      - "Oren Klaff — Pitch Anything, STRONG method, frame control, neurofinance"
+      - "Nancy Duarte — Resonate, Sparkline, STAR moment, audience as hero"
+      - "Kindra Hall — Stories That Stick, 4 story types, Story Gap"
+      - "Park Howell — ABT, Story Cycle System, narrative fitness"
+      - "Keith Johnstone — Impro, status transactions, Theatresports"
+      - "Marshall Ganz — Public Narrative, Story of Self/Us/Now, organizing"
+      - "Randy Olson — ABT framework, Houston We Have a Narrative"
+      - "Christopher Vogler — The Writer's Journey, adapted Campbell"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTES — 10 ESPECIALISTAS
+# ══════════════════════════════════════════════════════════════════════════════
+
+components:
+  agents:
+    - storytelling-orqx.md    # Arc — Orchestrator (routing, diagnosis)
+    - joseph-campbell.md           # Joseph Campbell — Monomyth & Mythology
+    - dan-harmon.md                # Dan Harmon — Story Circle & TV Writing
+    - blake-snyder.md              # Blake Snyder — Save the Cat & Screenwriting
+    - oren-klaff.md                # Oren Klaff — Pitch Anything & Frame Control
+    - nancy-duarte.md              # Nancy Duarte — Sparkline & Presentations
+    - kindra-hall.md               # Kindra Hall — Stories That Stick & Business
+    - park-howell.md               # Park Howell — ABT & Brand Storytelling
+    - keith-johnstone.md           # Keith Johnstone — Impro & Status
+    - marshall-ganz.md             # Marshall Ganz — Public Narrative & Movements
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASKS — 47 TOTAL
+# ══════════════════════════════════════════════════════════════════════════════
+
+  tasks:
+    # ── Orchestrator (Arc) — 2 tasks ──
+    - diagnose-narrative.md
+    - review-narrative-output.md
+
+    # ── Joseph Campbell — 5 tasks ──
+    - map-heros-journey.md
+    - identify-archetypes.md
+    - brand-origin-story.md
+    - customer-journey-narrative.md
+    - transformation-arc-design.md
+
+    # ── Dan Harmon — 5 tasks ──
+    - build-story-circle.md
+    - structure-episode.md
+    - content-series-story-circle.md
+    - product-launch-narrative.md
+    - community-narrative-design.md
+
+    # ── Blake Snyder — 5 tasks ──
+    - create-beat-sheet.md
+    - craft-logline.md
+    - video-script-beat-sheet.md
+    - case-study-beat-structure.md
+    - landing-page-story-beats.md
+
+    # ── Oren Klaff — 5 tasks ──
+    - create-pitch.md
+    - design-frame-control.md
+    - investor-pitch-deck.md
+    - sales-presentation-frames.md
+    - partnership-pitch-narrative.md
+
+    # ── Nancy Duarte — 6 tasks ──
+    - create-presentation.md
+    - design-datastory.md
+    - keynote-presentation-design.md
+    - data-storytelling-presentation.md
+    - internal-change-presentation.md
+    - workshop-narrative-design.md
+
+    # ── Kindra Hall — 6 tasks ──
+    - build-business-stories.md
+    - close-story-gap.md
+    - brand-storytelling-strategy.md
+    - testimonial-story-framework.md
+    - founder-story-craft.md
+    - employee-advocacy-stories.md
+
+    # ── Park Howell — 5 tasks ──
+    - build-brand-narrative.md
+    - brand-script-sb7.md
+    - email-sequence-storytelling.md
+    - website-narrative-audit.md
+    - social-media-story-strategy.md
+
+    # ── Keith Johnstone — 4 tasks ──
+    - unblock-creative.md
+    - improvised-content-creation.md
+    - status-dynamics-negotiation.md
+    - spontaneous-presentation-skills.md
+
+    # ── Marshall Ganz — 4 tasks ──
+    - write-manifesto.md
+    - movement-building-narrative.md
+    - advocacy-campaign-story.md
+    - organizational-story-of-us.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 2 CICLOS
+# ══════════════════════════════════════════════════════════════════════════════
+
+  workflows:
+    - story-development-cycle.yaml
+    - pitch-narrative-workflow.yaml
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 3 BASES
+# ══════════════════════════════════════════════════════════════════════════════
+
+  knowledge-base:
+    - routing-catalog.md
+    - narrative-frameworks-catalog.md
+    - story-structure-reference.md
+    - process-as-narrative.md              # Tornar processo invisivel em narrativa visivel — 4 camadas de profundidade
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURACAO
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  external_apis: []
+
+tags:
+  - storytelling
+  - narrative
+  - screenplay
+  - presentation
+  - pitch
+  - improv
+  - brand-story
+  - mythology
+  - hero-journey
+  - story-circle
+  - beat-sheet
+  - frame-control
+  - sparkline
+  - public-narrative
+  - business-storytelling
+  - creative-unblocking
+  - world-class
+  - atemporal
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  outbound:
+    - squad-brand: "Brand story, manifesto, origin narrative, presentation narrative"
+    - squad-content: "Story frameworks for content creation, editorial narrative"
+    - squad-copy: "Persuasion frameworks, pitch structure, storytelling techniques"
+    - squad-commercial: "Sales narratives, pitch decks, value stories"
+    - squad-product: "User story narrative, product story"
+  inbound:
+    - squad-brand: "Brand values, positioning, tone of voice for narrative alignment"
+    - squad-research: "Market insights, audience data for narrative targeting"

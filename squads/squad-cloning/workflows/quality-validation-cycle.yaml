@@ -1,0 +1,56 @@
+name: quality-validation-cycle
+version: "1.0"
+description: "Ciclo de validacao de qualidade end-to-end antes do deployment"
+trigger: "Clone pronto para review final"
+agents_involved:
+  - cognitive-extractor
+  - mind-synthesizer
+  - squad-assembler
+  - cloning-orqx
+
+phases:
+  - name: "Phase 1: Extraction Completeness"
+    agent: cognitive-extractor
+    tasks:
+      - tag-confidence-levels
+      - generate-extraction-report
+    output: "Extraction quality report"
+    quality_gate: "Todas extracoes tagadas, minimos do tier atingidos"
+
+  - name: "Phase 2: Confidence Verification"
+    agent: mind-synthesizer
+    depends_on: ["Phase 1"]
+    tasks:
+      - calculate-confidence-score
+      - determine-clone-tier
+    output: "Confidence score final e tier determination"
+    quality_gate: "Score >= threshold do tier assignado"
+
+  - name: "Phase 3: Pre-Publish Check"
+    agent: squad-assembler
+    depends_on: ["Phase 2"]
+    tasks:
+      - run-pre-publish-checklist
+    output: "Checklist result (PASS/FAIL)"
+    quality_gate: "100% items passed"
+
+  - name: "Phase 4: Final Approval"
+    agent: cloning-orqx
+    depends_on: ["Phase 3"]
+    tasks:
+      - finalize-clone-delivery
+    output: "Clone approved/rejected"
+    quality_gate: "Helix sign-off"
+
+decisions:
+  on_pass:
+    action: "Proceed to deployment (Phase 8 of full pipeline)"
+  on_fail:
+    action: >
+      Identify failing item. If extraction incomplete: return to Phase 3 (DNA Extraction).
+      If confidence below threshold: consider tier downgrade. If pre-publish fails:
+      fix specific items and re-run. Max 2 retries before escalation.
+
+completion:
+  notification: "cloning-orqx"
+  message: "Workflow concluido com sucesso."

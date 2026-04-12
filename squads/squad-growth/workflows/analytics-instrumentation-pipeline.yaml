@@ -1,0 +1,90 @@
+name: Analytics Instrumentation Pipeline
+version: "1.0"
+description: >
+  Pipeline end-to-end de instrumentacao de analytics — da definicao de eventos
+  ate data quality assurance. Garante tracking completo e preciso.
+trigger: "New product launch, tracking overhaul, new feature instrumentation"
+owner: ga-analytics-engineer
+max_iterations: 2
+
+phases:
+  - name: "Phase 1: Event Architecture"
+    agents: [ga-analytics-engineer, growth-orqx]
+    tasks:
+      - define-event-taxonomy
+      - create-tracking-plan
+      - create-data-dictionary
+    inputs:
+      - "Product requirements"
+      - "User journeys"
+      - "Business KPIs"
+    outputs:
+      - "Event taxonomy document"
+      - "Tracking plan with event schema"
+      - "Data dictionary"
+    gate:
+      name: "Taxonomy Review"
+      criteria: "Event naming follows convention, all critical flows covered, no duplicates"
+      verdict: ["APPROVED", "REVISE"]
+      blocking: true
+
+  - name: "Phase 2: Implementation"
+    agents: [ga-analytics-engineer]
+    depends_on: "Phase 1"
+    tasks:
+      - implement-ga4-configuration
+      - setup-gtm-container
+      - configure-data-layer
+      - implement-server-side-tracking
+      - configure-cross-domain-tracking
+    inputs:
+      - "Approved tracking plan"
+      - "Technical access (GA4, GTM, site)"
+    outputs:
+      - "GA4 property configured"
+      - "GTM container with tags/triggers/variables"
+      - "Data layer specification"
+      - "Server-side tracking (if applicable)"
+
+  - name: "Phase 3: Privacy & Consent"
+    agents: [ga-analytics-engineer]
+    depends_on: "Phase 2"
+    tasks:
+      - implement-consent-management
+    inputs:
+      - "Privacy policy"
+      - "LGPD/GDPR requirements"
+      - "Consent banner specs"
+    outputs:
+      - "Consent management integrated"
+      - "Conditional tag firing configured"
+      - "Privacy compliance verified"
+
+  - name: "Phase 4: Quality Assurance"
+    agents: [ga-analytics-engineer, growth-orqx]
+    depends_on: "Phase 2, Phase 3"
+    tasks:
+      - audit-tracking-accuracy
+      - setup-data-pipeline
+    inputs:
+      - "Implemented tracking"
+      - "Expected event data"
+    outputs:
+      - "Tracking accuracy report"
+      - "Data pipeline configured"
+    gate:
+      name: "Data Quality Gate"
+      criteria: "Tracking accuracy >= 98%, all critical events verified, no PII leaks"
+      verdict: ["PASS", "FAIL"]
+      blocking: true
+      on_fail: "Fix tracking issues, re-audit"
+
+completion:
+  requires: "Data Quality Gate PASS"
+  outputs:
+    - "Complete analytics infrastructure"
+    - "Verified tracking plan"
+    - "Data quality certification"
+  handoff:
+    to: "ga-data-analyst, ga-cro-specialist"
+    delivers: "Reliable event data for analysis and experimentation"

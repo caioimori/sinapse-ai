@@ -1,0 +1,133 @@
+name: incident-response-cycle
+version: "1.0.0"
+description: "6-phase incident response workflow based on NIST SP 800-61. Coordinates Sentinel (detection), Rapid (response), Shield (intelligence), Wire (containment), Nimbus (cloud), and Govern (compliance)."
+squad: squad-cybersecurity
+trigger: manual_or_escalation
+
+phases:
+  - name: "Phase 1: Detection & Triage"
+    description: "Validate the incident report, classify severity, and determine initial scope"
+    agent: "@soc-analyst"
+    tasks:
+      - siem-alert-triage
+    inputs:
+      - alert_data: "SIEM alert, user report, or automated detection"
+      - log_sources: "Available log sources for correlation"
+    outputs:
+      - triage_verdict: "True Positive with severity classification and initial timeline"
+    gate:
+      condition: "Alert confirmed as True Positive with severity assigned"
+      on_fail: "If False Positive, close with tuning recommendation. If Inconclusive, request additional data."
+    sla:
+      critical: "15 minutes"
+      high: "30 minutes"
+      medium: "4 hours"
+
+  - name: "Phase 2: Incident Classification"
+    description: "Formally classify the incident, determine scope, and activate response resources"
+    agent: "@incident-responder"
+    tasks:
+      - incident-triage
+    inputs:
+      - triage_verdict: "from Phase 1"
+      - initial_evidence: "Logs, alerts, and timeline from Sentinel"
+    outputs:
+      - incident_classification: "SEV1-4 classification with scope assessment"
+      - stakeholder_notification: "Initial notification sent per severity level"
+    gate:
+      condition: "Incident classified, scope assessed, resources activated, initial notification sent"
+      on_fail: "Cannot proceed without severity classification"
+
+  - name: "Phase 3: Containment"
+    description: "Execute containment strategies to stop the threat from spreading"
+    agents:
+      - "@incident-responder"
+      - "@network-security-engineer"
+      - "@cloud-security-engineer"
+    tasks:
+      - incident-containment
+    inputs:
+      - incident_classification: "from Phase 2"
+      - affected_systems: "from Phase 2 scope assessment"
+      - network_topology: "Current network architecture"
+    outputs:
+      - containment_status: "Confirmed containment with evidence"
+      - preserved_evidence: "Forensic images, memory dumps, log snapshots"
+    gate:
+      condition: "Threat contained (verified), evidence preserved, business impact documented"
+      on_fail: "Escalate — containment not achieved, expand response team"
+    note: "Wire handles network-level isolation. Nimbus handles cloud-specific containment. Rapid coordinates."
+
+  - name: "Phase 4: Investigation & Forensics"
+    description: "Deep investigation to determine root cause, attack timeline, and full scope"
+    agents:
+      - "@incident-responder"
+      - "@threat-analyst"
+    tasks:
+      - forensic-analysis
+    inputs:
+      - preserved_evidence: "from Phase 3"
+      - investigation_questions: "What happened, when, how, who, what was accessed"
+    outputs:
+      - forensic_report: "Complete timeline with ATT&CK mapping"
+      - root_cause: "Identified root cause and attack vector"
+      - iocs: "Extracted indicators of compromise"
+    gate:
+      condition: "Root cause identified, timeline complete, IOCs extracted"
+      on_fail: "Continue investigation with additional evidence sources"
+    note: "Shield provides threat intelligence context. Rapid leads forensic analysis."
+
+  - name: "Phase 5: Eradication & Recovery"
+    description: "Remove the threat, patch vulnerabilities, and restore operations"
+    agents:
+      - "@incident-responder"
+      - "@cloud-security-engineer"
+      - "@network-security-engineer"
+    tasks: []
+    inputs:
+      - forensic_report: "from Phase 4"
+      - root_cause: "from Phase 4"
+    outputs:
+      - eradication_confirmation: "All threat artifacts removed, vulnerabilities patched"
+      - recovery_status: "Systems restored and validated"
+      - enhanced_monitoring: "Additional detection rules deployed"
+    gate:
+      condition: "Threat eradicated (verified), systems recovered, no IOCs remaining, monitoring enhanced"
+      on_fail: "Return to Phase 4 — eradication incomplete, investigate remaining artifacts"
+    note: "Nimbus handles cloud recovery. Wire restores network configuration. Sentinel deploys new detection rules."
+
+  - name: "Phase 6: Post-Incident Review"
+    description: "Blameless review to document lessons learned and define corrective actions"
+    agents:
+      - "@incident-responder"
+      - "@compliance-officer"
+    tasks:
+      - post-incident-review
+    inputs:
+      - incident_documentation: "Complete incident documentation from all phases"
+      - forensic_report: "from Phase 4"
+    outputs:
+      - pir_report: "Post-incident review with root cause, lessons learned, and corrective actions"
+      - updated_detections: "New or improved detection rules"
+      - updated_playbooks: "Revised IR playbooks based on lessons"
+      - compliance_actions: "Regulatory notifications if required (Govern advises)"
+    gate:
+      condition: "PIR completed within 5 business days, corrective actions assigned with owners and deadlines"
+      on_fail: "Schedule PIR — do not skip"
+
+completion:
+  success_criteria: "All 6 phases complete, incident resolved, PIR conducted, corrective actions assigned"
+  deliverables:
+    - "Complete incident timeline"
+    - "Forensic analysis report"
+    - "Post-incident review report"
+    - "Updated detection rules"
+    - "Updated IR playbooks"
+    - "Regulatory notifications (if applicable)"
+    - "Corrective action tracking sheet"
+  metrics:
+    - "MTTD: Mean Time to Detect"
+    - "MTTC: Mean Time to Contain"
+    - "MTTR: Mean Time to Recover"
+    - "Total incident cost"
+    - "Data impact assessment"

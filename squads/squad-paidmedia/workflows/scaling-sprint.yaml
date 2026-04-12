@@ -1,0 +1,76 @@
+name: scaling-sprint
+version: "1.0"
+description: "Sprint de scaling progressivo em 4 fases"
+trigger: "Decisao de escalar budget apos periodo de performance estavel"
+agents_involved:
+  - paidmedia-orqx
+  - creative-strategist
+  - meta-ads-specialist
+  - google-ads-specialist
+  - campaign-analyst
+
+phases:
+  - name: "Phase 1: Readiness Assessment"
+    agent: paidmedia-orqx
+    tasks:
+      - manage-scaling-roadmap
+      - allocate-cross-channel-budget
+    output: "Scaling readiness report + budget progression plan"
+    quality_gate: "Readiness criteria atendidos, fase atual identificada, budget progression planejado"
+    notes: |
+      Apex avalia se a conta atende os criterios da proxima fase:
+      - CPA estavel por 14+ dias
+      - CPA marginal <1.3x average
+      - Tracking 100% saudavel
+      - Creative pipeline pronto
+      Se NAO atende: listar blockers e resolver antes de prosseguir.
+
+  - name: "Phase 2: Creative Velocity"
+    agent: creative-strategist
+    depends_on: ["Phase 1"]
+    tasks:
+      - plan-creative-velocity
+      - generate-creative-brief
+      - design-creative-testing-framework
+    output: "Creative pipeline pronto para suportar scaling"
+    quality_gate: "Velocity target atingido, pipeline de producao operacional"
+    notes: |
+      Canvas prepara pipeline de criativos para suportar o volume.
+      Foundation: 2/semana, Early: 4/semana, Growth: 8/semana.
+      SEM criativos suficientes, scaling causa fatigue e CPA sobe.
+
+  - name: "Phase 3: Budget Progression"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+    depends_on: ["Phase 1", "Phase 2"]
+    tasks:
+      - allocate-meta-budget
+      - reallocate-budget
+      - create-scaling-roadmap
+    output: "Budget increases implementados semana a semana"
+    quality_gate: "Max +20%/semana, CPA marginal monitorado, risk triggers ativos"
+    notes: |
+      Signal e Query implementam budget increases graduais.
+      REGRA: max +20% por semana por campanha.
+      REGRA: monitorar CPA marginal a cada incremento.
+      REGRA: rollback imediato se CPA >1.5x target.
+
+  - name: "Phase 4: Performance Monitoring"
+    agent: campaign-analyst
+    depends_on: ["Phase 3"]
+    tasks:
+      - generate-weekly-summary
+      - detect-performance-anomalies
+      - analyze-conversion-funnel
+    output: "Weekly scaling performance reports"
+    quality_gate: "CPA estavel, volume crescendo, ROAS mantido"
+    notes: |
+      Pulse monitora performance intensivamente durante scaling.
+      Reports semanais (vs mensais em operacao normal).
+      Alerta imediato se anomalia detectada.
+      Feedback para Apex para decidir continuar ou pausar scaling.
+
+completion:
+  notification: "paidmedia-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,109 @@
+name: squad-cybersecurity
+version: "1.0.0"
+short-title: "Cyber Defense Squad"
+description: "Squad de 8 especialistas em seguranca cibernetica. Threat analysis, pentesting, SOC operations, incident response, cloud security, network security e compliance."
+author: "Sinapse"
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-04-01"
+  created_by: "squad-creator (Craft)"
+  agents_count: 9
+  tasks_count: 53
+  knowledge_bases_count: 3
+  workflows_count: 2
+  templates_count: 0
+  checklists_count: 0
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+tags:
+  - cybersecurity
+  - security
+  - pentesting
+  - compliance
+  - incident-response
+  - threat-intelligence
+  - cloud-security
+  - network-security
+
+components:
+  agents:
+    - cyber-orqx.md
+    - threat-analyst.md
+    - penetration-tester.md
+    - soc-analyst.md
+    - incident-responder.md
+    - cloud-security-engineer.md
+    - network-security-engineer.md
+    - compliance-officer.md
+  tasks:
+    # Orchestrator
+    - triage-security-request.md
+    # Threat Analyst (Shield)
+    - threat-model.md
+    - threat-intelligence-report.md
+    - threat-landscape-report.md
+    - attack-surface-mapping.md
+    - threat-intelligence-feed-setup.md
+    - risk-scoring-matrix.md
+    - supply-chain-risk-assessment.md
+    - risk-assessment.md
+    # Penetration Tester (Breach)
+    - vulnerability-assessment.md
+    - web-app-pentest.md
+    - web-app-security-audit.md
+    - api-security-audit.md
+    - api-security-testing.md
+    - authentication-security-review.md
+    - social-engineering-assessment.md
+    - mobile-app-security-review.md
+    - code-security-review.md
+    # SOC Analyst (Sentinel)
+    - siem-alert-triage.md
+    - siem-rule-creation.md
+    - threat-hunting-campaign.md
+    - detection-rule-engineering.md
+    - log-analysis-playbook.md
+    - alert-triage-workflow.md
+    - security-dashboard-design.md
+    # Incident Responder (Rapid)
+    - incident-triage.md
+    - incident-containment.md
+    - incident-response-plan.md
+    - tabletop-exercise-design.md
+    - forensic-analysis.md
+    - forensic-analysis-workflow.md
+    - communication-plan-incident.md
+    - post-incident-review.md
+    # Cloud Security Engineer (Nimbus)
+    - cloud-security-assessment.md
+    - cloud-security-posture-review.md
+    - iam-audit.md
+    - iam-policy-audit.md
+    - container-security-review.md
+    - container-security-hardening.md
+    - serverless-security-review.md
+    - cloud-compliance-mapping.md
+    # Network Security Engineer (Wire)
+    - network-segmentation-review.md
+    - network-segmentation-design.md
+    - firewall-rule-audit.md
+    - zero-trust-architecture-plan.md
+    - wireless-security-assessment.md
+    - dns-security-hardening.md
+    # Compliance Officer (Govern)
+    - compliance-gap-analysis.md
+    - security-policy-draft.md
+    - security-policy-creation.md
+    - vendor-security-assessment.md
+    - data-classification-framework.md
+    - privacy-impact-assessment.md
+  workflows:
+    - incident-response-cycle.yaml
+    - security-audit-workflow.yaml
+  knowledge-base:
+    - routing-catalog.md
+    - security-frameworks-catalog.md
+    - threat-intelligence-reference.md

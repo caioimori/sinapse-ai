@@ -1,0 +1,539 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-research v1.0
+# ══════════════════════════════════════════════════════════════════════════════
+# The world-class research & intelligence squad for transforming questions into
+# actionable insights. Deep research, audience intelligence, competitive analysis,
+# market sizing, trend forecasting and data synthesis.
+# 7 agents | 72 tasks | 6 workflows | 13 KBs | 6 templates | Full coverage
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-research
+version: 1.0.0
+description: >
+  Squad de classe mundial para pesquisa e inteligencia estrategica.
+  7 agentes especialistas cobrindo 100% do ciclo de investigacao:
+  deep research multi-fonte, inteligencia de audiencia, analise competitiva,
+  sizing de mercado, sintese de dados e forecasting de tendencias.
+  Core concepts: Research Depth Pyramid (4 niveis de profundidade),
+  Insight Crystallization Engine (dado → insight → acao),
+  Source Credibility Matrix (5 tiers de credibilidade).
+  Absorve V1-Research + V2-DeepResearch + V2-AudienceIntel.
+  Atemporal, parametrizavel para qualquer cliente/projeto/industria.
+author: Caio Imori
+license: UNLICENSED
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-13"
+  updated_at: "2026-03-13"
+  created_by: "squad-creator (Craft)"
+  quality_target: "5.0/5.0 em todas as dimensoes"
+  agents_count: 7
+  tasks_count: 72
+  knowledge_bases_count: 13
+  checklists_count: 3
+  templates_count: 6
+  workflows_count: 6
+  total_files: 109
+
+# ══════════════════════════════════════════════════════════════════════════════
+# QUALITY STANDARDS — Regras de Robustez
+# ══════════════════════════════════════════════════════════════════════════════
+
+quality_standards:
+  robustness:
+    min_agents: 6
+    min_tasks: 50
+    min_workflows: 3
+    min_knowledge_bases: 8
+    min_checklists: 2
+    min_templates: 3
+    world_class_references: required
+    gap_audit: required
+
+  references:
+    authors:
+      - name: "Michael Porter"
+        contribution: "Five Forces, Competitive Strategy, Value Chain Analysis"
+      - name: "Clayton Christensen"
+        contribution: "Innovator's Dilemma, Jobs To Be Done theory"
+      - name: "W. Chan Kim & Renee Mauborgne"
+        contribution: "Blue Ocean Strategy, Strategy Canvas"
+      - name: "Alexander Osterwalder"
+        contribution: "Business Model Canvas, Value Proposition Canvas"
+      - name: "Steve Blank"
+        contribution: "Customer Development methodology"
+      - name: "Eric Ries"
+        contribution: "Lean Startup, Validated Learning"
+      - name: "Geoffrey Moore"
+        contribution: "Crossing the Chasm, technology adoption lifecycle"
+      - name: "Daniel Kahneman"
+        contribution: "Thinking Fast and Slow, cognitive biases in research"
+      - name: "Nassim Taleb"
+        contribution: "Black Swan, Antifragile, uncertainty frameworks"
+      - name: "Philip Kotler"
+        contribution: "Marketing Management, STP framework"
+      - name: "Rita McGrath"
+        contribution: "Seeing Around Corners, inflection points"
+      - name: "Peter Schwartz"
+        contribution: "Art of the Long View, scenario planning"
+      - name: "Malcolm Gladwell"
+        contribution: "Tipping Point, outlier detection patterns"
+      - name: "Jonah Berger"
+        contribution: "Contagious, why things spread (STEPPS)"
+      - name: "Dan Ariely"
+        contribution: "Predictably Irrational, behavioral economics"
+      - name: "Robert Cialdini"
+        contribution: "Influence, 6 principles of persuasion"
+      - name: "Henry Mintzberg"
+        contribution: "Strategy Safari, 10 schools of strategy"
+      - name: "C.K. Prahalad & Gary Hamel"
+        contribution: "Core Competence, Strategic Intent"
+      - name: "Theodore Levitt"
+        contribution: "Marketing Myopia, customer-centric research"
+      - name: "Peter Drucker"
+        contribution: "Management principles, market orientation"
+      - name: "Ray Dalio"
+        contribution: "Principles, systematic decision-making"
+      - name: "Robert Yin"
+        contribution: "Case Study Research methodology"
+      - name: "Chris Anderson"
+        contribution: "Long Tail economics, niche markets"
+      - name: "Joe Pine & James Gilmore"
+        contribution: "Experience Economy framework"
+      - name: "Simon Sinek"
+        contribution: "Golden Circle, Start With Why"
+
+    companies:
+      - name: "McKinsey & Company"
+        contribution: "7S Framework, Growth Pyramid, industry reports"
+      - name: "Boston Consulting Group (BCG)"
+        contribution: "Growth-Share Matrix, BCG Henderson Institute"
+      - name: "Bain & Company"
+        contribution: "NPS methodology, Loyalty frameworks"
+      - name: "Gartner"
+        contribution: "Hype Cycle, Magic Quadrant, peer insights"
+      - name: "Forrester"
+        contribution: "Wave reports, Total Economic Impact (TEI)"
+      - name: "Nielsen"
+        contribution: "Consumer panel data, media measurement"
+      - name: "Kantar"
+        contribution: "BrandZ, consumer insights, Worldpanel"
+      - name: "Statista"
+        contribution: "Statistical data aggregation, market reports"
+      - name: "CB Insights"
+        contribution: "Startup/tech intelligence, industry taxonomy"
+      - name: "Euromonitor"
+        contribution: "Consumer trends, Passport database"
+      - name: "SparkToro"
+        contribution: "Audience intelligence, Fake Followers audit"
+      - name: "SimilarWeb"
+        contribution: "Digital competitive intelligence, traffic analysis"
+      - name: "SEMrush"
+        contribution: "Competitive SEO, market explorer"
+      - name: "Google"
+        contribution: "Google Trends, Think with Google, Market Finder"
+      - name: "Crunchbase"
+        contribution: "Company intelligence, funding data"
+
+  learning:
+    preferences_dir: "preferences/"
+    feedback_loop: true
+    auto_calibration: true
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CORE CONCEPTS — Diferenciais Metodologicos
+# ══════════════════════════════════════════════════════════════════════════════
+
+core_concepts:
+  research_depth_pyramid:
+    description: >
+      Framework de 4 niveis de profundidade de pesquisa.
+      Cada nivel define escopo, tempo, fontes e formato de entrega.
+      Nivel certo para cada situacao evita over-research e under-research.
+    levels:
+      - name: "SCAN"
+        depth: 1
+        time: "15-30 min"
+        sources: "2-3 fontes, Tier 3-5"
+        output: "Resumo executivo 1 pagina"
+        when: "Orientacao rapida, triagem de oportunidade"
+      - name: "ANALYZE"
+        depth: 2
+        time: "1-3 horas"
+        sources: "5-8 fontes, Tier 2-4"
+        output: "Relatorio estruturado 3-5 paginas"
+        when: "Decisao tatica, validacao de hipotese"
+      - name: "DEEP DIVE"
+        depth: 3
+        time: "4-8 horas"
+        sources: "10-15 fontes, Tier 1-3"
+        output: "Dossie completo 10-20 paginas"
+        when: "Decisao estrategica, novo mercado, investimento"
+      - name: "DEFINITIVE"
+        depth: 4
+        time: "Multi-dia"
+        sources: "20+ fontes, todos os Tiers"
+        output: "Pesquisa publicavel 30+ paginas"
+        when: "Thought leadership, repositionamento, M&A due diligence"
+
+  insight_crystallization_engine:
+    description: >
+      Motor que transforma dados brutos em insights acionaveis.
+      Cada insight DEVE conter 3 componentes: FINDING + IMPLICATION + RECOMMENDATION.
+      Sem os 3, nao e um insight — e apenas um dado.
+    components:
+      - name: "FINDING"
+        role: "O que foi descoberto (dado + evidencia)"
+        example: "73% dos compradores B2B consultam 3+ fornecedores antes de decidir"
+      - name: "IMPLICATION"
+        role: "O que isso significa para o negocio (so what?)"
+        example: "Se nao estamos entre os 3 primeiros consultados, perdemos antes de competir"
+      - name: "RECOMMENDATION"
+        role: "O que fazer com isso (now what?)"
+        example: "Investir em thought leadership para garantir presenca no consideration set"
+
+  source_credibility_matrix:
+    description: >
+      Classificacao de fontes em 5 tiers de credibilidade.
+      Toda pesquisa DEVE citar fontes com tier classificado.
+      Pesquisas de nivel DEEP DIVE+ exigem maioria Tier 1-2.
+    tiers:
+      - tier: 1
+        name: "Primaria"
+        examples: "Dados proprios, surveys, entrevistas, experimentos, dados internos"
+        reliability: "Maxima — dados de primeira mao"
+      - tier: 2
+        name: "Academica"
+        examples: "Peer-reviewed journals, meta-analises, pesquisas publicadas"
+        reliability: "Alta — metodologia rigida, revisao por pares"
+      - tier: 3
+        name: "Industria"
+        examples: "McKinsey, Gartner, Forrester, BCG, relatórios de analistas"
+        reliability: "Alta — expertise setorial, mas com potencial vies de venda"
+      - tier: 4
+        name: "Mercado"
+        examples: "Trade publications, midia especializada, reportagens, blogs de autoridade"
+        reliability: "Media — curadoria variavel, verificar contra Tier 1-3"
+      - tier: 5
+        name: "Social"
+        examples: "Social listening, forums, reviews, comentarios, Reddit"
+        reliability: "Baixa isolada — util para sentimento, nao para fatos"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTS — 7 Agentes Especializados
+# ══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  # --- Orchestrator ---
+  - id: research-orqx
+    name: Prism
+    file: agents/research-orqx.md
+    role: "Research Operations Conductor"
+    archetype: Conductor
+    icon: "🔮"
+    tasks: # 5 tasks
+      - orchestrate-research-pipeline
+      - prioritize-research-requests
+      - coordinate-cross-squad-research
+      - manage-research-sprint
+      - triage-research-request
+
+  # --- Deep Research ---
+  - id: deep-researcher
+    name: Sage
+    file: agents/deep-researcher.md
+    role: "Deep Research Scholar"
+    archetype: Scholar
+    icon: "📚"
+    tasks: # 13 tasks
+      - conduct-deep-research
+      - conduct-rapid-scan
+      - synthesize-multi-source
+      - validate-research-sources
+      - create-research-brief
+      - map-knowledge-landscape
+      - conduct-literature-review
+      - answer-strategic-question
+      - create-research-dossier
+      - evaluate-methodology
+      - cross-reference-findings
+      - generate-hypothesis
+      - design-research-framework
+
+  # --- Audience Intelligence ---
+  - id: audience-intelligence
+    name: Pulse
+    file: agents/audience-intelligence.md
+    role: "Audience Intelligence Empath"
+    archetype: Empath
+    icon: "💓"
+    tasks: # 13 tasks
+      - build-audience-persona
+      - map-audience-journey
+      - analyze-audience-psychographics
+      - segment-audience
+      - conduct-jobs-to-be-done
+      - map-pain-gain-matrix
+      - analyze-audience-behavior
+      - create-empathy-map
+      - design-survey
+      - analyze-social-listening
+      - profile-ideal-customer
+      - map-audience-ecosystem
+      - validate-persona-with-data
+
+  # --- Competitive Intelligence ---
+  - id: competitive-intelligence
+    name: Hawk
+    file: agents/competitive-intelligence.md
+    role: "Competitive Intelligence Sentinel"
+    archetype: Sentinel
+    icon: "🦅"
+    tasks: # 11 tasks
+      - map-competitive-landscape
+      - analyze-competitor-positioning
+      - monitor-competitor-movements
+      - benchmark-competitor-digital
+      - analyze-competitor-strategy
+      - identify-competitive-gaps
+      - track-competitor-launches
+      - evaluate-competitive-threats
+      - create-battle-card
+      - run-porter-five-forces
+      - analyze-competitor-pricing
+
+  # --- Market Analysis ---
+  - id: market-analyst
+    name: Scope
+    file: agents/market-analyst.md
+    role: "Market Analysis Strategist"
+    archetype: Strategist
+    icon: "🔭"
+    tasks: # 11 tasks
+      - size-market-tam-sam-som
+      - analyze-industry-trends
+      - map-market-opportunity
+      - evaluate-market-entry
+      - analyze-value-chain
+      - assess-market-maturity
+      - identify-market-segments
+      - forecast-market-growth
+      - map-industry-ecosystem
+      - evaluate-regulatory-landscape
+      - analyze-pricing-landscape
+
+  # --- Data Synthesis ---
+  - id: data-synthesizer
+    name: Loom
+    file: agents/data-synthesizer.md
+    role: "Data Synthesis Weaver"
+    archetype: Weaver
+    icon: "🧶"
+    tasks: # 10 tasks
+      - synthesize-research-report
+      - create-executive-briefing
+      - build-data-narrative
+      - create-insight-deck
+      - map-strategic-implications
+      - visualize-research-data
+      - compile-competitive-dossier
+      - generate-actionable-recommendations
+      - create-swot-analysis
+      - create-research-repository
+
+  # --- Trend Forecasting ---
+  - id: trend-forecaster
+    name: Horizon
+    file: agents/trend-forecaster.md
+    role: "Trend Forecasting Oracle"
+    archetype: Oracle
+    icon: "🌅"
+    tasks: # 9 tasks
+      - forecast-industry-trends
+      - detect-weak-signals
+      - run-scenario-planning
+      - map-technology-adoption
+      - predict-market-shifts
+      - analyze-macro-forces
+      - identify-inflection-points
+      - create-future-landscape
+      - track-emerging-technologies
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 6 Fluxos Operacionais
+# ══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  - name: deep-research-cycle
+    file: workflows/deep-research-cycle.yaml
+    description: "Ciclo completo: brief → pesquisa → sintese → entrega"
+    trigger: "Nova demanda de pesquisa profunda"
+    primary: true
+
+  - name: audience-intelligence-cycle
+    file: workflows/audience-intelligence-cycle.yaml
+    description: "Ciclo completo de inteligencia de audiencia"
+    trigger: "Nova audiencia para analisar ou persona para construir"
+
+  - name: competitive-intelligence-cycle
+    file: workflows/competitive-intelligence-cycle.yaml
+    description: "Ciclo de analise competitiva completa"
+    trigger: "Novo competidor ou review periodico"
+
+  - name: market-analysis-cycle
+    file: workflows/market-analysis-cycle.yaml
+    description: "Analise de mercado e sizing de oportunidade"
+    trigger: "Novo mercado, novo produto, ou decisao de entrada"
+
+  - name: trend-forecasting-cycle
+    file: workflows/trend-forecasting-cycle.yaml
+    description: "Deteccao de tendencias e planejamento de cenarios"
+    trigger: "Revisao estrategica periodica ou sinal de mudanca"
+
+  - name: onboarding-research-cycle
+    file: workflows/onboarding-research-cycle.yaml
+    description: "Setup de pesquisa para novo cliente/projeto"
+    trigger: "Novo cliente ou projeto onboarded"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 12 Bases de Conhecimento
+# ══════════════════════════════════════════════════════════════════════════════
+
+knowledge_bases:
+  - name: research-depth-pyramid
+    file: knowledge-base/research-depth-pyramid.md
+    description: "Framework dos 4 niveis de profundidade de pesquisa"
+
+  - name: insight-crystallization-engine
+    file: knowledge-base/insight-crystallization-engine.md
+    description: "Motor FINDING + IMPLICATION + RECOMMENDATION"
+
+  - name: source-credibility-matrix
+    file: knowledge-base/source-credibility-matrix.md
+    description: "5 tiers de credibilidade de fontes"
+
+  - name: research-frameworks-encyclopedia
+    file: knowledge-base/research-frameworks-encyclopedia.md
+    description: "SWOT, PESTEL, Porter, BCG, Canvas, etc."
+
+  - name: audience-research-methods
+    file: knowledge-base/audience-research-methods.md
+    description: "Persona, JTBD, Empathy Map, Journey"
+
+  - name: competitive-analysis-frameworks
+    file: knowledge-base/competitive-analysis-frameworks.md
+    description: "Ferramentas e metodos de analise competitiva"
+
+  - name: market-sizing-methods
+    file: knowledge-base/market-sizing-methods.md
+    description: "TAM/SAM/SOM, top-down, bottom-up"
+
+  - name: cognitive-bias-awareness
+    file: knowledge-base/cognitive-bias-awareness.md
+    description: "Vieses cognitivos que distorcem pesquisa"
+
+  - name: data-visualization-principles
+    file: knowledge-base/data-visualization-principles.md
+    description: "Principios de visualizacao de dados para pesquisa"
+
+  - name: scenario-planning-methods
+    file: knowledge-base/scenario-planning-methods.md
+    description: "Metodos de planejamento de cenarios"
+
+  - name: survey-design-principles
+    file: knowledge-base/survey-design-principles.md
+    description: "Melhores praticas de design de survey"
+
+  - name: cross-squad-integration-protocol
+    file: knowledge-base/cross-squad-integration-protocol.md
+    description: "Protocolo de integracao com outros squads"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHECKLISTS — 3 Checklists de Validacao
+# ══════════════════════════════════════════════════════════════════════════════
+
+checklists:
+  - name: research-quality-checklist
+    file: checklists/research-quality-checklist.md
+    description: "Qualidade de pesquisa antes de entrega"
+
+  - name: source-validation-checklist
+    file: checklists/source-validation-checklist.md
+    description: "Validacao de credibilidade de fontes"
+
+  - name: onboarding-research-checklist
+    file: checklists/onboarding-research-checklist.md
+    description: "Setup de pesquisa para novo cliente"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES — 6 Templates Operacionais
+# ══════════════════════════════════════════════════════════════════════════════
+
+templates:
+  - name: research-brief-template
+    file: templates/research-brief-template.md
+    description: "Brief de solicitacao de pesquisa"
+
+  - name: research-report-template
+    file: templates/research-report-template.md
+    description: "Relatorio de pesquisa completo"
+
+  - name: competitive-dossier-template
+    file: templates/competitive-dossier-template.md
+    description: "Dossie competitivo"
+
+  - name: audience-persona-template
+    file: templates/audience-persona-template.md
+    description: "Template de persona de audiencia"
+
+  - name: market-analysis-template
+    file: templates/market-analysis-template.md
+    description: "Relatorio de analise de mercado"
+
+  - name: executive-briefing-template
+    file: templates/executive-briefing-template.md
+    description: "Briefing executivo (1-2 paginas)"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  inbound:
+    - squad: brand-system
+      receives: "Posicionamento, arquitetura de marca, territorios"
+      agents: [Sage, Hawk]
+
+    - squad: content-intelligence
+      receives: "Sinais detectados que requerem pesquisa, dados de performance"
+      agents: [Sage, Pulse]
+
+    - squad: commercial-systems
+      receives: "Dados de vendas, pipeline, objecoes de clientes"
+      agents: [Pulse, Scope]
+
+  outbound:
+    - squad: brand-system
+      sends: "Insights de mercado, analise competitiva, pesquisa de posicionamento"
+      agents: [Hawk, Scope, Loom]
+
+    - squad: content-intelligence
+      sends: "Dados de audiencia, insights de mercado, trends para planejamento editorial"
+      agents: [Pulse, Horizon, Loom]
+
+    - squad: copywriting-persuasion
+      sends: "Psychographics, pain points, JTBD, dados de audiencia"
+      agents: [Pulse, Loom]
+
+    - squad: digital-experience
+      sends: "Pesquisa de UX, benchmarks, analise de concorrentes digitais"
+      agents: [Hawk, Pulse]
+
+    - squad: growth-analytics
+      sends: "Market sizing, trend forecasts, competitive benchmarks"
+      agents: [Scope, Horizon, Loom]
+
+    - squad: commercial-systems
+      sends: "Battle cards, competitive intelligence, market opportunity"
+      agents: [Hawk, Scope, Loom]

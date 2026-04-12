@@ -1,0 +1,98 @@
+name: optimization-cycle
+version: "1.0.0"
+description: "4-phase workflow for optimizing an existing Claude Code setup: Diagnose, Optimize, Test, Document."
+squad: squad-claude
+trigger: manual
+phases:
+  - name: "Phase 1: Diagnose"
+    description: "Identify performance bottlenecks, context waste, and configuration issues"
+    agents:
+      - "@claude-orqx"
+      - "@skill-craftsman"
+    tasks:
+      - diagnose
+      - context-rot-audit
+      - audit-hooks
+      - audit-settings
+    inputs:
+      - project_root: "path to project"
+      - pain_points: "reported issues or symptoms"
+    outputs:
+      - diagnosis_report: "Root cause analysis"
+      - rot_report: "Context rot findings"
+      - hooks_audit: "Hooks audit report"
+      - settings_audit: "Settings audit report"
+    gate:
+      condition: "All diagnostic reports generated with actionable findings"
+      on_fail: "Expand diagnostic scope if no findings"
+
+  - name: "Phase 2: Optimize"
+    description: "Apply optimizations based on diagnostic findings"
+    agents:
+      - "@skill-craftsman"
+      - "@config-engineer"
+      - "@hooks-architect"
+    tasks:
+      - optimize-context
+      - optimize-workflow
+      - configure-settings
+      - hook-designer
+    inputs:
+      - diagnosis_report: "from Phase 1"
+      - rot_report: "from Phase 1"
+      - hooks_audit: "from Phase 1"
+      - settings_audit: "from Phase 1"
+    outputs:
+      - context_optimization: "Updated config files with reduced token footprint"
+      - workflow_optimization: "Improved interaction patterns and extracted skills"
+      - updated_settings: "Fixed settings.json"
+      - updated_hooks: "New or improved hooks"
+    gate:
+      condition: "Context token footprint reduced by >= 15% AND no essential info lost"
+      on_fail: "Review optimizations for over-aggressive trimming"
+
+  - name: "Phase 3: Test"
+    description: "Validate optimizations in a sandbox before applying to production"
+    agents:
+      - "@roadmap-sentinel"
+      - "@claude-orqx"
+    tasks:
+      - sandbox-setup
+      - audit-setup
+    inputs:
+      - optimized_configs: "from Phase 2"
+      - baseline_configs: "original pre-optimization configs"
+    outputs:
+      - sandbox_report: "Test results comparing baseline vs optimized"
+      - validation_audit: "Post-optimization audit scores"
+    gate:
+      condition: "Sandbox tests pass AND audit score improved from baseline"
+      on_fail: "Roll back problematic optimizations, re-test"
+
+  - name: "Phase 4: Document"
+    description: "Document all changes and update project knowledge"
+    agents:
+      - "@skill-craftsman"
+      - "@config-engineer"
+    tasks:
+      - claude-md-engineer
+      - optimize-context
+    inputs:
+      - all_changes: "from Phases 2-3"
+      - sandbox_report: "from Phase 3"
+    outputs:
+      - updated_claude_md: "Refreshed CLAUDE.md reflecting optimizations"
+      - optimization_changelog: "Record of all changes made"
+    gate:
+      condition: "Documentation complete AND CLAUDE.md within token budget"
+      on_fail: "Trim documentation to meet token budget"
+
+completion:
+  success_criteria: "All 4 phases complete, audit score improved, context reduced >= 15%"
+  deliverables:
+    - "Optimized configuration files"
+    - "Context rot eliminated"
+    - "Workflow improvements documented"
+    - "Sandbox test evidence"
+    - "Updated CLAUDE.md"
+    - "Optimization changelog"

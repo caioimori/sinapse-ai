@@ -1,0 +1,86 @@
+name: SEO Audit & Optimization Cycle
+version: "1.0"
+description: >
+  Ciclo de auditoria e otimizacao SEO — avaliacao tecnica, content strategy,
+  schema implementation e monitoring de rankings.
+trigger: "SEO audit request, new site launch, organic traffic decline"
+owner: ga-seo-strategist
+max_iterations: 2
+
+phases:
+  - name: "Phase 1: Technical SEO Audit"
+    agents: [ga-seo-strategist]
+    tasks:
+      - conduct-technical-seo-audit
+      - audit-sitemap-robots
+      - optimize-core-web-vitals-seo
+    inputs:
+      - "Current site URL"
+      - "Search Console access"
+      - "Crawl data"
+    outputs:
+      - "Technical SEO audit report"
+      - "Sitemap/robots.txt audit"
+      - "CWV optimization recommendations"
+    gate:
+      name: "Technical Health Gate"
+      criteria: "Zero critical technical issues, crawlability verified"
+      verdict: ["HEALTHY", "NEEDS_FIXES"]
+      blocking: true
+      on_fail: "Fix critical technical issues before content optimization"
+
+  - name: "Phase 2: Keyword & Content Strategy"
+    agents: [ga-seo-strategist, ga-data-analyst]
+    depends_on: "Phase 1"
+    tasks:
+      - research-keyword-strategy
+      - create-topic-cluster-map
+      - conduct-competitive-seo-analysis
+    inputs:
+      - "Business objectives"
+      - "Current rankings"
+      - "Competitor sites"
+    outputs:
+      - "Keyword strategy document"
+      - "Topic cluster map"
+      - "Competitive gap analysis"
+
+  - name: "Phase 3: On-Page Optimization"
+    agents: [ga-seo-strategist]
+    depends_on: "Phase 2"
+    tasks:
+      - optimize-meta-tags
+      - implement-schema-markup
+      - implement-hreflang
+    inputs:
+      - "Keyword strategy"
+      - "Page inventory"
+      - "Schema.org reference"
+    outputs:
+      - "Optimized meta tags"
+      - "Schema markup implementation"
+      - "Hreflang configuration (if multilingual)"
+
+  - name: "Phase 4: Authority & Monitoring"
+    agents: [ga-seo-strategist, ga-campaign-analyst]
+    depends_on: "Phase 3"
+    tasks:
+      - analyze-backlink-profile
+      - configure-search-console
+      - monitor-ranking-trends
+    inputs:
+      - "Backlink data"
+      - "Search Console data"
+      - "Ranking tracking tools"
+    outputs:
+      - "Backlink analysis and link plan"
+      - "Search Console dashboard"
+      - "Ranking monitoring setup"
+
+completion:
+  requires: "Technical Health Gate PASS + all optimizations implemented"
+  outputs:
+    - "Complete SEO audit report"
+    - "Optimization implementation plan"
+    - "Monitoring dashboard active"
+  review_cadence: "Monthly ranking review, quarterly full audit"

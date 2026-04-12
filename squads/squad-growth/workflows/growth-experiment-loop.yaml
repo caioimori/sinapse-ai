@@ -1,0 +1,104 @@
+name: Growth Experiment Loop
+version: "1.0"
+description: >
+  Loop iterativo de experimentacao de growth — design de growth loops,
+  testes de activation/retention, e mecanismos virais. Ciclo continuo.
+trigger: "Growth initiative, activation improvement, retention optimization"
+owner: ga-growth-hacker
+max_iterations: 10
+
+phases:
+  - name: "Phase 1: Growth Diagnosis"
+    agents: [ga-growth-hacker, ga-data-analyst]
+    tasks:
+      - define-north-star-metric
+      - map-growth-loops
+      - map-product-channel-fit
+    inputs:
+      - "Product data"
+      - "User behavior analytics"
+      - "Business objectives"
+    outputs:
+      - "North Star Metric defined"
+      - "Growth loop designs"
+      - "Product-channel fit assessment"
+
+  - name: "Phase 2: Activation & Onboarding"
+    agents: [ga-growth-hacker, ga-cro-specialist]
+    depends_on: "Phase 1"
+    tasks:
+      - optimize-activation-flow
+      - design-onboarding-flow
+      - formulate-test-hypotheses
+    inputs:
+      - "Current activation metrics"
+      - "User research"
+      - "Drop-off analysis"
+    outputs:
+      - "Optimized activation flow"
+      - "Onboarding flow design"
+      - "Activation experiment hypotheses"
+
+  - name: "Phase 3: Retention Engineering"
+    agents: [ga-growth-hacker, ga-data-analyst]
+    depends_on: "Phase 1"
+    parallel_with: "Phase 2"
+    tasks:
+      - create-retention-hooks
+      - design-gamification-mechanics
+      - analyze-retention-churn
+      - design-reengagement-campaigns
+    inputs:
+      - "Retention cohort data"
+      - "Churn analysis"
+      - "User segments"
+    outputs:
+      - "Retention mechanism designs"
+      - "Gamification specs"
+      - "Churn driver analysis"
+      - "Re-engagement campaign designs"
+
+  - name: "Phase 4: Viral & Referral"
+    agents: [ga-growth-hacker]
+    depends_on: "Phase 2"
+    tasks:
+      - design-referral-system
+      - model-viral-coefficient
+    inputs:
+      - "Current sharing behavior"
+      - "Network effects data"
+      - "Competitor referral programs"
+    outputs:
+      - "Referral system specification"
+      - "Viral coefficient model"
+      - "Incentive structure"
+
+  - name: "Phase 5: Experiment & Measure"
+    agents: [ga-cro-specialist, ga-data-analyst, growth-orqx]
+    depends_on: "Phase 2, Phase 3, Phase 4"
+    tasks:
+      - design-ab-experiment
+      - analyze-experiment-results
+      - certify-statistical-validity
+      - conduct-growth-retrospective
+    inputs:
+      - "Experiment briefs from all phases"
+      - "Running experiment data"
+    outputs:
+      - "Experiment results"
+      - "Statistical certifications"
+      - "Growth retrospective"
+    gate:
+      name: "Growth Impact Gate"
+      criteria: "North Star Metric improvement measured, statistical significance achieved"
+      verdict: ["POSITIVE_IMPACT", "NO_IMPACT", "NEGATIVE"]
+      blocking: false
+      on_no_impact: "Iterate with new hypotheses"
+
+completion:
+  requires: "At least 1 validated growth mechanism"
+  outputs:
+    - "Validated growth loops"
+    - "Experiment results portfolio"
+    - "Growth playbook updated"
+  next_iteration: "Start Phase 1 with updated data and learnings"

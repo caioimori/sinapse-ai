@@ -1,0 +1,326 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-courses v1.0
+# ══════════════════════════════════════════════════════════════════════════════
+# Course creation squad — designs, writes, and produces educational content
+# across all formats: video courses, written courses, mentoring presentations,
+# workshops, workbooks, assessments, and learning paths.
+# 8 agents | 62 tasks | 6 workflows | 10 KBs | 3 checklists | 6 templates
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-courses
+version: "1.0.0"
+description: >
+  Squad de criacao de cursos e material educacional. Cobre o espectro completo:
+  cursos gravados em video (modulos, aulas, roteiro), cursos escritos (ebooks,
+  workbooks), apresentacoes didaticas (mentorias, workshops, treinamentos),
+  material de apoio (checklists, handouts, exercicios), assessments (quizzes,
+  certificados), curriculum design (learning paths, outcomes) e launch strategy
+  (sequencia de lancamento, plataformas). Da ideia ao curso publicado.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+sinapse:
+  minVersion: "1.0.0"
+  type: squad
+
+metadata:
+  created_at: "2026-03-20"
+  updated_at: "2026-03-20"
+  created_by: "Claude Code (Sprint 1.5)"
+  quality_target: "Cursos com estrutura pedagogica solida e alta taxa de conclusao"
+  agents_count: 8
+  tasks_count: 59
+  knowledge_bases_count: 10
+  workflows_count: 6
+  checklists_count: 3
+  templates_count: 6
+  total_files: 100
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTS — 8 SPECIALISTS
+# ══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  - id: courses-orqx
+    name: Syllabus
+    file: agents/courses-orqx.md
+    role: "Course project coordinator — manages the full course creation lifecycle"
+    tasks:
+      - initiate-course-project
+      - define-course-scope
+      - monitor-course-progress
+      - review-course-quality
+      - finalize-course-delivery
+
+  - id: curriculum-designer
+    name: Compass
+    file: agents/curriculum-designer.md
+    role: "Curriculum architect — designs learning paths, outcomes, and pedagogical structure"
+    tasks:
+      - define-learning-outcomes
+      - design-learning-path
+      - map-prerequisite-chain
+      - structure-module-sequence
+      - define-competency-framework
+      - create-syllabus-document
+      - validate-pedagogical-coherence
+
+  - id: lesson-architect
+    name: Blueprint
+    file: agents/lesson-architect.md
+    role: "Lesson structure designer — architects individual lessons, modules, and sections"
+    tasks:
+      - design-module-structure
+      - design-lesson-flow
+      - create-lesson-outline
+      - define-lesson-objectives
+      - plan-practical-exercises
+      - design-knowledge-checkpoints
+      - estimate-lesson-duration
+      - sequence-difficulty-progression
+
+  - id: content-writer
+    name: Scribe
+    file: agents/content-writer.md
+    role: "Educational content writer — writes course text, ebooks, workbooks, handouts"
+    tasks:
+      - write-lesson-content
+      - write-ebook-chapter
+      - write-workbook-exercises
+      - write-handout-material
+      - write-case-studies
+      - write-summary-sheets
+      - adapt-content-for-level
+      - proofread-course-content
+
+  - id: slide-designer
+    name: Deck
+    file: agents/slide-designer.md
+    role: "Presentation designer — creates slides for mentoring, workshops, and course modules"
+    tasks:
+      - design-slide-structure
+      - create-presentation-outline
+      - write-slide-content
+      - design-visual-hierarchy
+      - create-speaker-notes
+      - adapt-slides-for-format
+      - create-workshop-materials
+      - design-interactive-elements
+
+  - id: assessment-creator
+    name: Gauge
+    file: agents/assessment-creator.md
+    role: "Assessment designer — creates quizzes, exercises, evaluations, and certificates"
+    tasks:
+      - create-quiz-questions
+      - design-practical-assessment
+      - create-self-evaluation
+      - design-peer-review-rubric
+      - create-final-project-brief
+      - design-certification-criteria
+      - create-progress-milestones
+
+  - id: production-director
+    name: Lens
+    file: agents/production-director.md
+    role: "Video/audio production planner — scripts, shot lists, recording guides"
+    tasks:
+      - write-video-script
+      - create-shot-list
+      - plan-recording-session
+      - design-screen-recording-flow
+      - create-teleprompter-script
+      - plan-b-roll-sequences
+      - design-intro-outro
+      - create-production-checklist
+
+  - id: launch-strategist
+    name: Launchpad
+    file: agents/launch-strategist.md
+    role: "Course launch planner — platform setup, pricing, launch sequence"
+    tasks:
+      - select-platform-strategy
+      - design-pricing-model
+      - create-sales-page-brief
+      - plan-launch-sequence
+      - design-email-sequence
+      - create-bonus-strategy
+      - plan-enrollment-funnel
+      - design-student-onboarding
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 10
+# ══════════════════════════════════════════════════════════════════════════════
+
+knowledge_bases:
+  - name: instructional-design-frameworks
+    file: knowledge-base/instructional-design-frameworks.md
+    description: "ADDIE, Bloom taxonomy, Gagne's 9 events, backward design, microlearning"
+
+  - name: curriculum-mapping-guide
+    file: knowledge-base/curriculum-mapping-guide.md
+    description: "How to map learning outcomes to modules, lessons, and assessments"
+
+  - name: course-format-patterns
+    file: knowledge-base/course-format-patterns.md
+    description: "Patterns for video courses, written courses, workshops, mentoring sessions"
+
+  - name: presentation-design-principles
+    file: knowledge-base/presentation-design-principles.md
+    description: "Slide design, visual hierarchy, cognitive load, storytelling in presentations"
+
+  - name: assessment-design-guide
+    file: knowledge-base/assessment-design-guide.md
+    description: "Quiz types, rubrics, formative vs summative, practical assessments"
+
+  - name: video-production-guide
+    file: knowledge-base/video-production-guide.md
+    description: "Recording setup, scripting, screen recording, editing, equipment"
+
+  - name: platform-comparison
+    file: knowledge-base/platform-comparison.md
+    description: "Hotmart, Kajabi, Teachable, Udemy, Thinkific — features, pricing, best fit"
+
+  - name: engagement-retention-patterns
+    file: knowledge-base/engagement-retention-patterns.md
+    description: "Patterns for keeping students engaged and improving completion rates"
+
+  - name: course-pricing-models
+    file: knowledge-base/course-pricing-models.md
+    description: "Pricing strategies: one-time, subscription, cohort, freemium, tiered"
+
+  - name: adult-learning-principles
+    file: knowledge-base/adult-learning-principles.md
+    description: "Andragogy, experiential learning, motivation, self-directed learning"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 6
+# ══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  - name: full-course-creation
+    file: workflows/full-course-creation.yaml
+    description: "End-to-end course creation from idea to published course"
+
+  - name: video-course-production
+    file: workflows/video-course-production.yaml
+    description: "Video-specific workflow: script → record → edit → publish"
+
+  - name: written-course-creation
+    file: workflows/written-course-creation.yaml
+    description: "Written course: outline → write → design → publish"
+
+  - name: presentation-creation
+    file: workflows/presentation-creation.yaml
+    description: "Mentoring/workshop presentation: outline → slides → notes → deliver"
+
+  - name: course-launch-cycle
+    file: workflows/course-launch-cycle.yaml
+    description: "Launch sequence: platform → pricing → sales page → email → launch"
+
+  - name: course-quality-review
+    file: workflows/course-quality-review.yaml
+    description: "Quality validation cycle before publishing"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHECKLISTS — 3
+# ══════════════════════════════════════════════════════════════════════════════
+
+checklists:
+  - name: course-completeness-checklist
+    file: checklists/course-completeness-checklist.md
+    description: "Validates course has all required components before launch"
+
+  - name: lesson-quality-checklist
+    file: checklists/lesson-quality-checklist.md
+    description: "Quality check for individual lessons/modules"
+
+  - name: pre-launch-checklist
+    file: checklists/pre-launch-checklist.md
+    description: "Final validation before publishing on platform"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES — 6
+# ══════════════════════════════════════════════════════════════════════════════
+
+templates:
+  - name: course-outline-template
+    file: templates/course-outline-template.md
+    description: "Template for complete course outline with modules and lessons"
+
+  - name: lesson-plan-template
+    file: templates/lesson-plan-template.md
+    description: "Template for individual lesson plans"
+
+  - name: video-script-template
+    file: templates/video-script-template.md
+    description: "Template for video lesson scripts with visual cues"
+
+  - name: presentation-template
+    file: templates/presentation-template.md
+    description: "Template for mentoring/workshop slide decks"
+
+  - name: workbook-template
+    file: templates/workbook-template.md
+    description: "Template for student workbooks and exercise sheets"
+
+  - name: sales-page-brief-template
+    file: templates/sales-page-brief-template.md
+    description: "Template for course sales page content brief"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+
+tags:
+  - courses
+  - education
+  - instructional-design
+  - curriculum
+  - presentations
+  - workshops
+  - mentoring
+  - video-production
+  - ebook
+  - workbook
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  inbound:
+    - from: squad-copy
+      receives: "Sales copy for course pages, email sequences, headlines"
+    - from: squad-brand
+      receives: "Brand guidelines, visual identity for course materials"
+    - from: squad-content
+      receives: "Content strategy, editorial calendar for course launches"
+    - from: squad-research
+      receives: "Market research, audience analysis, competitor courses"
+    - from: squad-storytelling
+      receives: "Narrative structure for course modules, storytelling frameworks"
+    - from: squad-design
+      receives: "UI/UX for course platforms, design system for materials"
+    - from: squad-cloning
+      receives: "Cognitive clone KBs as source material for expert courses"
+
+  outbound:
+    - to: squad-commercial
+      delivers: "Course as product for sales pipeline, pricing models"
+    - to: squad-growth
+      delivers: "Course as lead magnet, SEO content from course materials"
+    - to: squad-paidmedia
+      delivers: "Course launch campaign briefs, ad creatives brief"
+    - to: squad-copy
+      delivers: "Course content for repurposing into copy/headlines"

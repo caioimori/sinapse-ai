@@ -1,0 +1,136 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Onboarding Content Cycle
+# ══════════════════════════════════════════════════════════════════════════════
+# Setup de cliente novo: do zero ao primeiro sprint editorial
+# Pipeline: Nexus (coordena) → North (estrategia) → Radar (fontes) →
+#           Morph (contracts) → Index (governance) → Arc (primeiro conteudo)
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: onboarding-content-cycle
+version: 1.0.0
+description: >
+  Ciclo de onboarding para novo cliente ou projeto. Configura toda a infraestrutura
+  editorial do zero: Big Idea, pilares, fontes de sinal, template contracts,
+  governance, e produz o primeiro sprint de conteudo. Garante que a operacao
+  comece alinhada, configurada e produtiva desde o dia 1.
+trigger: "Novo cliente ou novo projeto"
+cadence: "Uma vez por projeto (setup)"
+estimated_duration: "2-5 dias"
+
+phases:
+  - phase: 1
+    name: "Briefing & Brand Alignment"
+    agent: "content-orqx (Nexus)"
+    tasks:
+      - coordinate-cross-squad
+    input: "Briefing do cliente, contexto do projeto"
+    output: "Brand guidelines recebidas do brand-system (tom de voz, personalidade, visual)"
+    gate: "Brand guidelines disponiveis e compreendidas"
+    cross_squad:
+      - squad-brand: "Solicitar tom de voz, brand pillars, visual guidelines, message house"
+      - squad-research: "Solicitar audience insights se disponivel"
+
+  - phase: 2
+    name: "Editorial Strategy Definition"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - define-big-idea
+      - define-editorial-pillars
+      - align-content-to-funnel
+      - define-content-kpis
+    input: "Brand guidelines, briefing do cliente, contexto de mercado"
+    output: "Big Idea + 3-5 pilares + mapeamento de funil + KPIs"
+    gate: "Big Idea aprovada pelo cliente, pilares cobrem todos os estagios de funil"
+
+  - phase: 3
+    name: "Signal Source Configuration"
+    agent: "signal-intelligence (Radar)"
+    tasks:
+      - configure-signal-sources
+      - scan-daily-signals  # primeiro scan
+      - monitor-competitor-content  # baseline competitivo
+    input: "Pilares editoriais de North, setor do cliente, concorrentes"
+    output: "Fontes configuradas, primeiro scan completo, baseline competitivo"
+    gate: "Fontes cobrem todos os pilares com redundancia"
+
+  - phase: 4
+    name: "Template Contract Setup"
+    agent: "platform-specialist (Morph)"
+    tasks:
+      - register-template-contract   # para cada template do cliente
+      - create-platform-guidelines
+      - integrate-brand-visual-assets
+      - define-posting-schedule
+    input: "Templates do cliente (Figma, design docs), brand assets, plataformas-alvo"
+    output: "Template Contracts registrados, guidelines por plataforma, posting schedule"
+    gate: "Cada template tem contract registrado com limites de caracteres validados"
+
+  - phase: 5
+    name: "Governance Setup"
+    agent: "content-governor (Index)"
+    tasks:
+      - create-content-governance
+      - define-content-standards
+      - manage-content-taxonomy
+      - import-existing-content-library  # se cliente tem acervo
+    input: "Estrategia editorial, brand guidelines, acervo existente (se houver)"
+    output: "Governance framework, content standards, taxonomia, biblioteca importada"
+    gate: "Governance documentado, standards claros, taxonomia funcional"
+    conditional:
+      import-existing-content-library: "Executar apenas se cliente tem acervo existente"
+
+  - phase: 6
+    name: "First Sprint Planning"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - create-editorial-calendar  # primeiro mes
+      - plan-content-sprint        # primeira semana
+      - plan-seasonal-content      # se ha datas proximas
+    input: "Estrategia definida, sinais do primeiro scan, template contracts"
+    output: "Calendario do primeiro mes + sprint da primeira semana"
+    gate: "Sprint planejado com temas, formatos, template contracts e deadlines"
+
+  - phase: 7
+    name: "First Content Production"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - design-content-spine       # para primeiros temas
+      - create-content-brief
+      - write-carousel-content     # ou formato prioritario
+    input: "Sprint planejado, template contracts, brand guidelines"
+    output: "Primeiras pecas de conteudo produzidas"
+    gate: "Pelo menos 3 pecas produzidas e aprovadas pelo Index"
+
+  - phase: 8
+    name: "First QA & Calibration"
+    agent: "content-governor (Index)"
+    tasks:
+      - validate-content-quality
+      - audit-template-compliance
+    input: "Primeiras pecas produzidas"
+    output: "QA report + calibracao de padroes"
+    gate: "Primeiras pecas APPROVED — sistema calibrado"
+    note: >
+      O primeiro ciclo de QA e especialmente importante: calibra expectativas,
+      identifica gaps nos template contracts, e estabelece baseline de qualidade.
+      Se NEEDS REVISION: ajustar e iterar ate APPROVED.
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  deliverables:
+    - "Big Idea + Pilares + KPIs documentados"
+    - "Signal sources configuradas"
+    - "Template Contracts registrados"
+    - "Governance framework documentado"
+    - "Primeiro calendario editorial"
+    - "Primeiras pecas publicadas"
+    - "Baseline de qualidade calibrado"
+  success_criteria:
+    - "Operacao editorial funcional em <=5 dias"
+    - "Pelo menos 3 pecas publicadas na primeira semana"
+    - "Template Contracts validados com producao real"
+    - "Todos os agentes alinhados com brand guidelines"
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

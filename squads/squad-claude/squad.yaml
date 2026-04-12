@@ -1,0 +1,24 @@
+name: squad-claude
+version: "1.0.0"
+short-title: "Claude Code Mastery Squad"
+description: "Squad especialista em Claude Code: hooks, MCP servers, subagents, skills, configuracao, context engineering, integracao de projetos e roadmap tracking."
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-04-01"
+  created_by: "squad-creator (Craft)"
+  agents_count: 10
+  tasks_count: 49
+  knowledge_bases_count: 5
+  workflows_count: 2
+  templates_count: 0
+  checklists_count: 0
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+tags: [claude-code, hooks, mcp, subagents, skills, context-engineering, configuration]
+components:
+  agents: [claude-orqx.md, hooks-architect.md, mcp-integrator.md, swarm-orqx.md, config-engineer.md, skill-craftsman.md, project-integrator.md, roadmap-sentinel.md]
+  tasks: [audit-setup.md, setup-wizard.md, diagnose.md, hook-designer.md, audit-hooks.md, configure-settings.md, audit-settings.md, create-rules.md, claude-md-engineer.md, permission-strategy.md, mcp-integration-plan.md, mcp-workflow.md, create-team-topology.md, parallel-decomposition.md, worktree-strategy.md, create-agent-definition.md, optimize-context.md, context-rot-audit.md, optimize-workflow.md, integrate-project.md, brownfield-setup.md, setup-repository.md, multi-project-setup.md, ci-cd-setup.md, enterprise-config.md, sandbox-setup.md, system-prompt-design.md, chain-of-thought-optimization.md, few-shot-example-library.md, prompt-testing-framework.md, multi-turn-conversation-design.md, mcp-server-design.md, mcp-integration-audit.md, tool-orchestration-pattern.md, claude-code-hooks-setup.md, automated-code-review-pipeline.md, ai-testing-automation.md, batch-processing-workflow.md, context-window-audit.md, memory-system-design.md, knowledge-retrieval-optimization.md, claude-code-project-setup.md, slash-command-library-design.md, agent-persona-creation.md, multi-agent-orchestration.md, end-to-end-ai-workflow.md, human-in-the-loop-design.md, knowledge-base-architecture.md, content-curation-pipeline.md]
+  knowledge-base: [claude-code-hooks-reference.md, mcp-integration-patterns.md, context-engineering-guide.md, agent-team-patterns.md, claude-code-configuration-reference.md]
+  workflows: [project-setup-cycle.yaml, optimization-cycle.yaml]

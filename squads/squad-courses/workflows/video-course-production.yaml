@@ -1,0 +1,169 @@
+id: video-course-production
+name: Video Course Production
+description: Production workflow for recording, editing, and publishing video course content.
+version: "1.0"
+agents:
+  - Scribe
+  - Deck
+  - Lens
+
+phases:
+  - id: phase-1-script
+    name: Script
+    agent: Scribe
+    description: Write production-ready scripts for all video lessons.
+    inputs:
+      - lesson-plans/ (from full-course-creation or standalone)
+      - slide-outlines/ (if applicable)
+    tasks:
+      - Write full script per video lesson using video-script-template.md
+      - Include [SLIDE], [SCREEN], [CAMERA] cues in each script
+      - Mark timing estimates per section
+      - Write hook (10–20 sec) for each lesson
+      - Write CTA and outro per lesson
+      - Proofread for spoken language (contractions ok, jargon flagged)
+    outputs:
+      - scripts/ (one .md per lesson, named {module}-{lesson}-script.md)
+    quality_checks:
+      - No sentence over 25 words (harder to read aloud)
+      - Every lesson has a clear hook
+      - Every lesson ends with a CTA or next-step prompt
+    gate: Scripts reviewed by instructor before recording
+
+  - id: phase-2-shot-list
+    name: Shot List
+    agent: Lens
+    description: Create production shot list and prepare recording environment.
+    inputs:
+      - scripts/
+    tasks:
+      - Map each script section to shot type (talking head, screen, slides, B-roll)
+      - Group lessons by shot type for efficient recording (batch screen recordings separately)
+      - Create recording schedule (time estimate per lesson)
+      - Prepare equipment checklist per session type
+      - Prepare lighting, audio, background for camera sessions
+      - Prepare screen environment (clean desktop, browser profile, font sizes)
+    outputs:
+      - shot-list.md
+      - recording-schedule.md
+      - equipment-checklist.md
+    gate: Environment tested and shot list reviewed
+
+  - id: phase-3-record
+    name: Record (Camera)
+    agent: Lens
+    description: Record all talking-head and camera segments.
+    inputs:
+      - scripts/
+      - shot-list.md
+    tasks:
+      - Record warm-up take (discard)
+      - Record each camera lesson (multiple takes as needed)
+      - Log best take per lesson in recording-log.md
+      - Capture room tone (10 sec silence) each session
+      - Review footage for audio/video quality before session ends
+    outputs:
+      - raw-camera-footage/ (named {module}-{lesson}-cam-take{n}.mp4)
+      - recording-log.md
+    quality_checks:
+      - Audio peaks between -12dB and -6dB
+      - No background noise or echo
+      - Face well-lit, no harsh shadows
+      - Camera in focus throughout
+    gate: All camera recordings reviewed and best takes selected
+
+  - id: phase-4-screen-record
+    name: Record (Screen)
+    agent: Lens
+    description: Record all screen-based demo and walkthrough segments.
+    inputs:
+      - scripts/
+      - shot-list.md
+    tasks:
+      - Configure screen recording software (OBS/Loom/Camtasia)
+      - Record each screen lesson with cursor highlighting active
+      - Record at 1920×1080 minimum
+      - Narrate from script while recording (or record silent + voiceover separately)
+      - Review for cursor visibility, font legibility, audio sync
+    outputs:
+      - raw-screen-footage/ (named {module}-{lesson}-screen.mp4)
+    quality_checks:
+      - Text on screen readable at 1080p
+      - Cursor movements slow and deliberate
+      - No personal data or notifications visible
+    gate: All screen recordings reviewed for legibility and quality
+
+  - id: phase-5-slides
+    name: Slides Production
+    agent: Deck
+    description: Produce final slide decks from outlines for all presentation segments.
+    inputs:
+      - slide-outlines/
+      - scripts/ (for context)
+    tasks:
+      - Build slide deck per module/lesson from outline
+      - Apply consistent template and brand
+      - Add speaker notes from script
+      - Export as PDF (student resource) and video-compatible format
+      - Record slide-based segments if needed (screen record of slides)
+    outputs:
+      - slide-decks/ (.pptx or .key per module)
+      - slide-pdfs/ (student downloads)
+    quality_checks:
+      - One idea per slide
+      - Minimum 24pt font
+      - Consistent layout and color usage
+    gate: Slide decks reviewed for design quality and accuracy
+
+  - id: phase-6-edit
+    name: Edit
+    agent: Lens
+    description: Edit all footage into final lesson videos.
+    inputs:
+      - raw-camera-footage/
+      - raw-screen-footage/
+      - slide-decks/
+      - scripts/ (for reference)
+    tasks:
+      - Cut silence and filler words (ah, um, long pauses)
+      - Assemble segments in script order (camera + screen + slides)
+      - Add lower thirds (name/title) on first appearance only
+      - Add captions (auto-generate then review)
+      - Add background music at -20dB under voice
+      - Add intro (logo/title card, under 10 sec)
+      - Add outro (next lesson CTA, under 15 sec)
+      - Color grade if needed (basic exposure/contrast)
+      - Export at 1080p MP4 H.264
+    outputs:
+      - final-videos/ (named {module}-{lesson}-final.mp4)
+      - edit-notes.md
+    quality_checks:
+      - Captions accurate (spot-check 3 random lessons)
+      - No audio clipping
+      - Transitions smooth
+      - Music not distracting
+    gate: All final videos reviewed by instructor
+
+  - id: phase-7-publish
+    name: Publish
+    agent: Lens
+    description: Upload and configure all video content on the course platform.
+    inputs:
+      - final-videos/
+      - slide-pdfs/
+    tasks:
+      - Upload videos to platform in correct module/lesson order
+      - Set lesson titles and descriptions
+      - Attach downloadable resources (PDFs, workbooks)
+      - Configure video thumbnails
+      - Set lesson durations (verify platform shows correct)
+      - Test playback in student view (desktop + mobile)
+    outputs:
+      - publish-log.md (lesson URLs, upload status)
+    gate: All videos playable in student view on desktop and mobile
+
+completion_criteria:
+  - All scripts written and approved
+  - All footage recorded, reviewed, and edited
+  - All videos uploaded and playable on platform
+  - All resources attached and downloadable

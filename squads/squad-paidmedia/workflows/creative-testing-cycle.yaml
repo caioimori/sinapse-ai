@@ -1,0 +1,78 @@
+name: creative-testing-cycle
+version: "1.0"
+description: "Ciclo de teste de criativos em 4 fases"
+trigger: "Necessidade de testar novos criativos ou otimizar creative performance"
+agents_involved:
+  - creative-strategist
+  - meta-ads-specialist
+  - google-ads-specialist
+  - cro-specialist
+  - campaign-analyst
+
+phases:
+  - name: "Phase 1: Hypothesis"
+    agent: creative-strategist
+    tasks:
+      - analyze-creative-performance
+      - design-creative-testing-framework
+      - generate-creative-brief
+    output: "Test hypotheses + creative variants"
+    quality_gate: "Hipotese no formato IF/THEN/BECAUSE, 1 variavel por teste"
+    notes: |
+      Canvas analisa performance dos criativos atuais,
+      identifica patterns de winners/losers,
+      e formula hipoteses de teste.
+      Produz variantes baseadas nas hipoteses.
+
+  - name: "Phase 2: Test Design"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+      - cro-specialist
+    depends_on: ["Phase 1"]
+    tasks:
+      - run-creative-test
+      - design-ab-test
+      - calculate-sample-size
+    output: "Test configurations ready"
+    quality_gate: "Sample size calculado, duracao estimada, testes configurados nas plataformas"
+    notes: |
+      Signal configura testes em Meta (A/B Test feature).
+      Query configura testes em Google (Campaign Experiments).
+      Convert calcula sample size e valida metodologia.
+
+  - name: "Phase 3: Execution"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+    depends_on: ["Phase 2"]
+    tasks:
+      - detect-creative-fatigue
+      - analyze-audience-performance
+    output: "Tests running + monitoring data"
+    quality_gate: "Testes rodando min 7 dias, delivery balanceado, sem interferencia"
+    notes: |
+      Signal e Query monitoram delivery dos testes.
+      NAO modificar testes durante execucao.
+      Monitorar apenas para garantir que tudo esta rodando.
+
+  - name: "Phase 4: Analysis"
+    agents:
+      - campaign-analyst
+      - creative-strategist
+    depends_on: ["Phase 3"]
+    tasks:
+      - analyze-creative-performance
+      - rank-ad-copy-performance
+    output: "Test results + learnings + next actions"
+    quality_gate: "Significancia estatistica calculada, learnings documentados, winners escalados"
+    notes: |
+      Pulse calcula significancia estatistica.
+      Canvas interpreta resultados e documenta learnings.
+      Winners: escalar para campanhas ativas.
+      Losers: documentar e nao repetir.
+      Inconclusivos: re-testar com variacao mais dramatica.
+
+completion:
+  notification: "paidmedia-orqx"
+  message: "Workflow concluido com sucesso."

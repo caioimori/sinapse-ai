@@ -1,0 +1,136 @@
+name: market-analysis-cycle
+description: Ciclo completo de analise de mercado — do sizing ao entry assessment
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+
+triggers:
+  - Avaliacao de novo mercado/oportunidade
+  - Planejamento estrategico anual
+  - Request de market sizing para investidores
+  - Cross-squad request para dados de mercado
+
+phases:
+  - id: market-sizing
+    name: "1. Market Sizing"
+    agent: market-analyst (Scope)
+    tasks:
+      - size-market-tam-sam-som
+    inputs:
+      - Mercado/industria a dimensionar
+      - Produto/servico especifico
+    outputs:
+      - TAM, SAM, SOM calculados
+      - Dual methodology (top-down + bottom-up)
+      - Confidence tier classification
+    quality_gate:
+      criteria: Ambas metodologias aplicadas, delta <30%
+
+  - id: segmentation
+    name: "2. Market Segmentation"
+    agent: market-analyst (Scope)
+    tasks:
+      - identify-market-segments
+      - assess-market-maturity
+    inputs:
+      - Market sizing completo
+    outputs:
+      - 3-7 segmentos identificados e dimensionados
+      - Market maturity assessment
+      - Attractiveness scoring
+    quality_gate:
+      criteria: Segmentos MECE, scoring justificado
+
+  - id: industry-analysis
+    name: "3. Industry & Value Chain Analysis"
+    agent: market-analyst (Scope)
+    tasks:
+      - analyze-industry-trends
+      - analyze-value-chain
+      - map-industry-ecosystem
+    inputs:
+      - Mercado dimensionado e segmentado
+    outputs:
+      - Industry trends (5 categorias)
+      - Value chain com poder e margens
+      - Ecosystem map
+    quality_gate:
+      criteria: Trends classificados, value chain completa
+
+  - id: pricing-regulatory
+    name: "4. Pricing & Regulatory Landscape"
+    agent: market-analyst (Scope)
+    tasks:
+      - analyze-pricing-landscape
+      - evaluate-regulatory-landscape
+    inputs:
+      - Industry analysis
+    outputs:
+      - Pricing models, faixas, estrategias
+      - Regulatory map com risk assessment
+    quality_gate:
+      criteria: Pricing gaps identificados, regulatory risk classificado
+
+  - id: opportunity-entry
+    name: "5. Opportunity & Entry Assessment"
+    agent: market-analyst (Scope)
+    tasks:
+      - map-market-opportunity
+      - evaluate-market-entry
+      - forecast-market-growth
+    inputs:
+      - Todas as analises anteriores
+    outputs:
+      - Opportunity scoring (5 criterios)
+      - Market entry assessment (GO/CONDITIONAL/NO-GO)
+      - Growth forecast (3 cenarios)
+    quality_gate:
+      criteria: Decision clara com evidencia
+
+  - id: synthesis
+    name: "6. Market Report"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - synthesize-research-report
+      - create-executive-briefing
+    inputs:
+      - Todos os outputs de mercado
+    outputs:
+      - Market analysis report completo
+      - Executive briefing
+    quality_gate:
+      criteria: Report com Pyramid Principle, briefing decision-ready
+
+  - id: delivery
+    name: "7. Delivery"
+    agent: research-orqx (Prism)
+    tasks:
+      - coordinate-cross-squad-research
+    inputs:
+      - Report e briefing finalizados
+    outputs:
+      - Deliverables por squad
+    quality_gate:
+      criteria: Formatos corretos por destino
+
+success_criteria:
+  - TAM/SAM/SOM calculados com dual methodology
+  - Segmentos priorizados
+  - Entry assessment com GO/NO-GO
+  - Growth forecast em 3 cenarios
+  - Report e briefing entregues
+
+cross_squad_handoffs:
+  - to: commercial-systems
+    delivers: market sizing, pricing, entry assessment
+    format: quantitative report
+  - to: growth-analytics
+    delivers: TAM/SAM/SOM, growth rates, segments
+    format: data tables + projections
+  - to: product-systems
+    delivers: market gaps, opportunities, trends
+    format: opportunity cards
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,250 @@
+name: squad-paidmedia
+version: "1.0.0"
+description: >
+  Squad de elite para gestao de midia paga cross-channel. Cobre Meta Ads
+  (Facebook/Instagram), Google Ads (Search/Display/Shopping/Pmax), CRO
+  (conversion optimization), creative strategy e analytics de performance.
+  Possui sistema de auditoria de contas, planejamento de budget, scaling
+  roadmaps e testing frameworks com rigor estatistico.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-03-16"
+  created_by: "squad-creator (Craft)"
+  agents_count: 9
+  tasks_count: 82
+  knowledge_bases_count: 14
+  workflows_count: 5
+  checklists_count: 4
+  templates_count: 5
+
+agents:
+  - id: paidmedia-orqx
+    name: Apex
+    file: agents/paidmedia-orqx.md
+    role: "Orquestrador da squad — coordena agentes, gerencia pipeline de campanhas, aloca budget cross-channel"
+    tasks:
+      - orchestrate-campaign-launch
+      - coordinate-cross-channel-strategy
+      - allocate-cross-channel-budget
+      - generate-performance-report
+      - triage-campaign-issues
+      - manage-scaling-roadmap
+
+  - id: meta-ads-specialist
+    name: Signal
+    file: agents/meta-ads-specialist.md
+    role: "Especialista Meta Ads — Facebook/Instagram campaigns, audiences, pixel/CAPI, creative testing"
+    tasks:
+      - audit-meta-ads-account
+      - build-audience-architecture
+      - allocate-meta-budget
+      - design-campaign-structure
+      - run-creative-test
+      - execute-launch-checklist
+      - generate-monthly-report
+      - create-scaling-roadmap
+      - analyze-audience-performance
+      - optimize-ad-set-targeting
+      - manage-pixel-capi-health
+      - detect-creative-fatigue
+
+  - id: google-ads-specialist
+    name: Query
+    file: agents/google-ads-specialist.md
+    role: "Especialista Google Ads — Search, Display, Shopping, Pmax, keywords, bidding, Quality Score"
+    tasks:
+      - design-ab-test
+      - rank-ad-copy-performance
+      - audit-google-ads-account
+      - audit-utm-tracking
+      - audit-search-terms
+      - optimize-ad-group-structure
+      - reallocate-budget
+      - analyze-channel-breakdown
+      - improve-ad-copy
+      - assess-smart-bidding-readiness
+      - diagnose-conversion-tracking
+      - audit-keywords
+      - recommend-negative-keywords
+      - analyze-budget-pacing
+      - detect-performance-anomalies
+      - analyze-keyword-search-terms
+
+  - id: campaign-analyst
+    name: Pulse
+    file: agents/campaign-analyst.md
+    role: "Analista de performance — reporting, attribution, analytics cross-channel, anomaly detection"
+    tasks:
+      - analyze-traffic-sources
+      - analyze-conversion-funnel
+      - analyze-content-performance
+      - analyze-user-behavior
+      - generate-weekly-summary
+      - analyze-keyword-rankings
+      - check-indexing-status
+      - generate-search-performance-overview
+      - audit-sitemap-health
+      - analyze-top-pages
+      - audit-gmb-location
+      - analyze-local-market
+      - plan-customer-engagement
+      - analyze-local-keywords
+      - track-gmb-performance-trends
+      - analyze-reviews-strategy
+
+  - id: creative-strategist
+    name: Canvas
+    file: agents/creative-strategist.md
+    role: "Estrategista de criativos para ads — briefs, video scripts, creative testing, ad libraries research"
+    tasks:
+      - generate-creative-brief
+      - write-video-ad-script
+      - research-competitor-facebook-ads
+      - analyze-creative-trends
+      - research-google-ads-transparency
+      - research-linkedin-ads
+      - audit-multi-platform-ads
+      - design-creative-testing-framework
+      - plan-creative-velocity
+      - analyze-creative-performance
+
+  - id: cro-specialist
+    name: Convert
+    file: agents/cro-specialist.md
+    role: "Especialista CRO — form optimization, signup flows, onboarding, landing pages, A/B testing"
+    tasks:
+      - optimize-form-conversion
+      - optimize-onboarding-activation
+      - optimize-page-conversion
+      - optimize-signup-flow
+      - run-ab-test
+      - calculate-sample-size
+      - analyze-landing-page
+      - audit-conversion-tracking
+      - design-progressive-profiling
+      - measure-activation-rate
+
+  - id: performance-engineer
+    name: Lighthouse
+    file: agents/performance-engineer.md
+    role: "Engenheiro de performance — Core Web Vitals, PageSpeed, mobile optimization, tracking health"
+    tasks:
+      - audit-core-web-vitals
+      - run-full-lighthouse-audit
+      - compare-mobile-desktop-performance
+      - optimize-resources
+      - check-accessibility-seo
+      - audit-tracking-implementation
+      - validate-pixel-health
+      - audit-tag-manager-setup
+
+  - id: pm-youtube-ads-specialist
+    name: Tube
+    file: agents/pm-youtube-ads-specialist.md
+    role: "YouTube Advertising Specialist — YouTube ad formats, video creative strategy, audience targeting, YouTube funnel architecture"
+    tasks:
+      - design-youtube-ad-campaign
+      - write-video-ad-script
+
+  - id: pm-creative-performance-analyst
+    name: Lens
+    file: agents/pm-creative-performance-analyst.md
+    role: "Creative Performance Analyst — creative performance analysis, pattern identification, fatigue detection, testing insights"
+    tasks:
+      - analyze-creative-effectiveness
+      - build-creative-scorecard
+      - detect-creative-fatigue
+
+knowledge_bases:
+  - name: meta-ads-campaign-architecture
+    file: knowledge-base/meta-ads-campaign-architecture.md
+    description: "Three-tier audience architecture, CBO vs ABO, consolidation, naming conventions"
+  - name: meta-ads-optimization-playbook
+    file: knowledge-base/meta-ads-optimization-playbook.md
+    description: "Marginal CPA, budget tiers, creative fatigue, frequency caps, CAPI"
+  - name: meta-ads-scaling-framework
+    file: knowledge-base/meta-ads-scaling-framework.md
+    description: "4-phase scaling roadmap, readiness checklist, creative velocity by spend"
+  - name: google-ads-account-architecture
+    file: knowledge-base/google-ads-account-architecture.md
+    description: "Three templates, keyword portfolio, match types, Quality Score, Smart Bidding"
+  - name: google-ads-optimization-playbook
+    file: knowledge-base/google-ads-optimization-playbook.md
+    description: "Search term hygiene, negatives, budget pacing, anomaly detection, conversion tracking"
+  - name: creative-testing-framework
+    file: knowledge-base/creative-testing-framework.md
+    description: "Hypothesis formation, variable isolation, sample size, test duration, hook formulas"
+  - name: video-ad-production-guide
+    file: knowledge-base/video-ad-production-guide.md
+    description: "Universal video structure, platform specs, sound-off optimization, text overlay"
+  - name: cro-conversion-optimization
+    file: knowledge-base/cro-conversion-optimization.md
+    description: "Form friction model, progressive profiling, signup methods, activation framework"
+  - name: analytics-reporting-frameworks
+    file: knowledge-base/analytics-reporting-frameworks.md
+    description: "Attribution models, funnel analysis, user behavior, anomaly detection"
+  - name: local-seo-gmb-playbook
+    file: knowledge-base/local-seo-gmb-playbook.md
+    description: "GMB audit, local market, review management, local keywords, engagement"
+  - name: competitive-ad-intelligence
+    file: knowledge-base/competitive-ad-intelligence.md
+    description: "Facebook Ad Library, Google Transparency, LinkedIn ads, multi-platform audit"
+  - name: paid-media-metrics-reference
+    file: knowledge-base/paid-media-metrics-reference.md
+    description: "All key metrics with formulas, industry benchmarks by vertical"
+
+workflows:
+  - name: campaign-launch-cycle
+    file: workflows/campaign-launch-cycle.yaml
+    description: "6 fases: Strategy → Structure → Creative → CRO → Launch → Review"
+  - name: account-audit-cycle
+    file: workflows/account-audit-cycle.yaml
+    description: "5 fases: Tracking → Structure → Performance → Creative → Recommendations"
+  - name: scaling-sprint
+    file: workflows/scaling-sprint.yaml
+    description: "4 fases: Readiness → Creative velocity → Budget progression → Monitoring"
+  - name: creative-testing-cycle
+    file: workflows/creative-testing-cycle.yaml
+    description: "4 fases: Hypothesis → Test design → Execution → Analysis"
+  - name: cro-optimization-cycle
+    file: workflows/cro-optimization-cycle.yaml
+    description: "5 fases: Audit → Hypothesis → Test design → Execution → Analysis"
+
+checklists:
+  - name: campaign-launch-checklist
+    file: checklists/campaign-launch-checklist.md
+  - name: account-audit-checklist
+    file: checklists/account-audit-checklist.md
+  - name: creative-testing-checklist
+    file: checklists/creative-testing-checklist.md
+  - name: cro-audit-checklist
+    file: checklists/cro-audit-checklist.md
+
+templates:
+  - name: campaign-brief-template
+    file: templates/campaign-brief-template.md
+  - name: creative-brief-template
+    file: templates/creative-brief-template.md
+  - name: monthly-report-template
+    file: templates/monthly-report-template.md
+  - name: ab-test-plan-template
+    file: templates/ab-test-plan-template.md
+  - name: scaling-roadmap-template
+    file: templates/scaling-roadmap-template.md
+
+cross_squad_connections:
+  inbound:
+    - squad-brand: "Brand guidelines, identidade visual, paleta, tom de voz"
+    - squad-copy: "Copy para ads, headlines, CTAs, persuasion frameworks"
+    - squad-design: "Landing pages, design system, UX de conversion"
+    - squad-research: "Market research, competitive intelligence, audience insights"
+    - squad-content: "Content strategy, editorial calendar, social media content"
+  outbound:
+    - squad-growth: "Campaign data, attribution data, ROAS reports"
+    - squad-commercial: "Lead quality data, CAC metrics, pipeline attribution"
+    - squad-content: "Ad performance data para content optimization"
+    - squad-design: "CRO insights, heatmaps, user behavior data"

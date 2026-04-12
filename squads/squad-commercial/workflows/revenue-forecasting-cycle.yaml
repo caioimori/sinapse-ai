@@ -1,0 +1,107 @@
+name: revenue-forecasting-cycle
+version: "1.0"
+description: >
+  Ciclo mensal de forecasting de receita — coleta, análise, projeção e apresentação.
+  Combina dados de pipeline (Vault), unit economics (Ledger), e expansion (Bond).
+
+trigger: First business day of each month (or on-demand before board meeting)
+owner: commercial-orqx (Pipeline)
+frequency: monthly
+estimated_duration: 3-5 days
+
+phases:
+  - id: data-collection
+    name: Data Collection & Validation
+    agent: cs-crm-specialist
+    tasks:
+      - monitor-pipeline-health
+      - build-pipeline-dashboard
+    artifacts:
+      - pipeline-snapshot.md
+      - data-quality-report.md
+    exit_criteria:
+      - All deals in pipeline updated within last 7 days
+      - Stage dates and amounts current
+      - No stale deals (>30 days without activity flagged)
+    duration: 1 day
+
+  - id: deal-analysis
+    name: Deal-Level Forecast Analysis
+    agent: cs-crm-specialist
+    depends_on: [data-collection]
+    tasks:
+      - build-deal-scoring-model
+    artifacts:
+      - deal-scoring-output.md
+    exit_criteria:
+      - Every deal scored with win probability
+      - Weighted pipeline calculated
+      - Commit vs upside vs long-shot categorized
+    duration: 0.5 day
+
+  - id: expansion-forecast
+    name: Expansion & Retention Forecast
+    agent: cs-client-success
+    depends_on: [data-collection]
+    parallel_with: [deal-analysis]
+    tasks:
+      - map-expansion-opportunities
+      - identify-churn-risks
+    artifacts:
+      - expansion-pipeline.md
+      - churn-risk-report.md
+    exit_criteria:
+      - All green accounts evaluated for expansion
+      - At-risk accounts identified with save probability
+      - Net expansion/contraction estimated
+    duration: 1 day
+
+  - id: revenue-modeling
+    name: Revenue Model & Projections
+    agent: cs-revops-analyst
+    depends_on: [deal-analysis, expansion-forecast]
+    tasks:
+      - build-forecasting-model
+      - build-unit-economics-model
+    artifacts:
+      - revenue-forecast.md
+      - scenarios-analysis.md
+    exit_criteria:
+      - Three scenarios modeled (conservative, base, optimistic)
+      - NRR calculated with expansion and churn inputs
+      - CAC payback and LTV projections updated
+    duration: 1 day
+
+  - id: review-presentation
+    name: Forecast Review & Presentation
+    agent: commercial-orqx
+    depends_on: [revenue-modeling]
+    tasks:
+      - manage-pipeline-forecast
+      - run-quarterly-commercial-review
+    artifacts:
+      - forecast-presentation.md
+      - action-items.md
+    exit_criteria:
+      - Forecast reviewed with sales leadership
+      - Gaps identified with specific action plans
+      - Forecast locked for the period
+    duration: 0.5 day
+
+quality_gates:
+  - name: Data Integrity Gate
+    phase: data-collection
+    criteria:
+      - Pipeline data freshness < 7 days
+      - No deals missing required MEDDIC fields
+      - Stage conversion rates within normal variance
+  - name: Forecast Accuracy Gate
+    phase: revenue-modeling
+    criteria:
+      - Prior month forecast vs actual variance < 15%
+      - Scenario assumptions documented and defensible
+      - Unit economics inputs validated against actuals
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."

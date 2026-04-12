@@ -1,0 +1,167 @@
+id: full-course-creation
+name: Full Course Creation
+description: End-to-end workflow for creating a complete course from scope to quality-reviewed launch.
+version: "1.0"
+agents:
+  - Blueprint
+  - Compass
+  - Scribe
+  - Deck
+  - Gauge
+  - Lens
+  - Launchpad
+  - Mentor
+
+phases:
+  - id: phase-1-scope
+    name: Scope
+    agent: Blueprint
+    description: Define the course concept, audience, outcomes, and format.
+    inputs:
+      - Course topic or brief
+      - Target audience description
+      - Business goal (lead gen, premium offer, cohort, etc.)
+    tasks:
+      - Write audience persona (3–5 key traits)
+      - Define 3–5 measurable course outcomes
+      - Select course format (video, written, cohort, workshop)
+      - Estimate scope (modules, total duration)
+      - Confirm prerequisites and prior knowledge needed
+    outputs:
+      - course-scope.md
+    gate: Scope approved by course owner before proceeding
+
+  - id: phase-2-curriculum
+    name: Curriculum
+    agent: Compass
+    description: Map outcomes to modules, lessons, and assessments.
+    inputs:
+      - course-scope.md
+    tasks:
+      - Break outcomes into modules (3–8 modules)
+      - Define lesson sequence per module (3–6 lessons each)
+      - Write one objective per lesson using Bloom's action verbs
+      - Plan assessments per lesson and per module
+      - Validate curriculum alignment (outcomes → modules → lessons → assessments)
+    outputs:
+      - curriculum-map.md
+    gate: Curriculum validated for alignment and completeness
+
+  - id: phase-3-lessons
+    name: Lessons
+    agent: Scribe
+    description: Create detailed lesson plans for all lessons in the curriculum.
+    inputs:
+      - curriculum-map.md
+    tasks:
+      - Write lesson plan for each lesson (hook, content, exercise, takeaways)
+      - Tag each lesson with type (concept, demo, practice, review)
+      - Estimate duration for each lesson
+      - Flag lessons requiring video, screen recording, or slides
+    outputs:
+      - lesson-plans/ (one file per module)
+    gate: All lesson plans reviewed and approved
+
+  - id: phase-4-content
+    name: Content
+    agent: Scribe
+    description: Write all content — scripts, written lessons, slides outlines.
+    inputs:
+      - lesson-plans/
+    tasks:
+      - Write video scripts for all video lessons
+      - Write full text for all written lessons
+      - Create slide outlines for all presentation lessons
+      - Write workbook exercises for each module
+      - Draft speaker notes for slide decks
+    outputs:
+      - scripts/
+      - written-lessons/
+      - slide-outlines/
+      - workbooks/
+    gate: Content reviewed for clarity and accuracy
+
+  - id: phase-5-assessments
+    name: Assessments
+    agent: Gauge
+    description: Create all quizzes, exercises, rubrics, and the final project.
+    inputs:
+      - curriculum-map.md
+      - lesson-plans/
+    tasks:
+      - Write quiz questions per lesson (3–5 questions, Bloom's-aligned)
+      - Write exercise prompts per module
+      - Create rubric for final project
+      - Write self-evaluation prompts per module
+      - Write final project brief
+    outputs:
+      - assessments/quizzes/
+      - assessments/exercises/
+      - assessments/rubrics/
+      - assessments/final-project-brief.md
+    gate: All assessments reviewed for Bloom's alignment
+
+  - id: phase-6-production
+    name: Production
+    agent: Lens
+    description: Record, edit, and produce all video and slide content.
+    inputs:
+      - scripts/
+      - slide-outlines/
+    tasks:
+      - Record all video lessons (camera + screen as needed)
+      - Produce all slide decks from outlines
+      - Edit all video (captions, cuts, music)
+      - Export assets in platform-required formats
+      - Upload all content to staging environment
+    outputs:
+      - video-files/
+      - slide-decks/
+      - production-log.md
+    gate: All media reviewed for quality (audio, video, captions)
+
+  - id: phase-7-launch
+    name: Launch
+    agent: Launchpad
+    description: Configure platform, set pricing, write sales page, build funnel.
+    inputs:
+      - course-scope.md
+      - video-files/
+      - slide-decks/
+      - assessments/
+    tasks:
+      - Configure course on platform (Hotmart/Kajabi/Teachable)
+      - Upload all content in correct order
+      - Set pricing and payment options
+      - Write and publish sales page
+      - Configure email welcome sequence (3–5 emails)
+      - Test enrollment flow end-to-end
+      - Configure community or support channel
+    outputs:
+      - sales-page-url
+      - enrollment-flow-test-report.md
+    gate: Full test enrollment completed successfully
+
+  - id: phase-8-quality-review
+    name: Quality Review
+    agent: Mentor
+    description: Final review of entire course for completeness, quality, and student experience.
+    inputs:
+      - All phase outputs
+      - enrollment-flow-test-report.md
+    tasks:
+      - Complete course-completeness-checklist.md
+      - Complete pre-launch-checklist.md
+      - Watch 20% sample of video content as a student
+      - Complete one exercise from each module
+      - Review sales page and emails for accuracy
+      - Confirm all links, downloads, and uploads work
+    outputs:
+      - quality-review-report.md
+      - approval-decision: APPROVED | NEEDS REVISION
+    gate: APPROVED required before public launch
+
+completion_criteria:
+  - All 8 phases completed with gates passed
+  - quality-review-report.md shows APPROVED
+  - Course publicly accessible and enrollment tested

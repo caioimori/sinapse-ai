@@ -1,0 +1,240 @@
+name: squad-copy
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de copywriting e persuasão — transforma insights de pesquisa e estratégia de marca
+  em comunicação que move pessoas à ação. Combina arte narrativa com ciência da persuasão,
+  psicologia comportamental e frameworks testados por décadas de direct response e brand advertising.
+
+metadata:
+  created: "2026-03-12"
+  author: "Sinapse"
+  tier: 1
+  total_files: 113
+  agents: 12
+  tasks: 81
+  workflows: 6
+  knowledge_bases: 14
+  checklists: 3
+  templates: 7
+  preferences: 1
+
+quality_standards:
+  reference_authors:
+    - David Ogilvy (advertising fundamentals, Ogilvy on Advertising)
+    - Eugene Schwartz (breakthrough advertising, market awareness levels)
+    - Robert Cialdini (influence, 6 principles of persuasion)
+    - Daniel Kahneman (thinking fast and slow, System 1/System 2)
+    - Gary Halbert (direct response, The Boron Letters)
+    - Joseph Sugarman (triggers, The Adweek Copywriting Handbook)
+    - Claude Hopkins (scientific advertising, tested advertising methods)
+    - John Caples (tested advertising methods, headline mastery)
+    - Dan Kennedy (no BS direct marketing, magnetic marketing)
+    - Gary Bencivenga (bullets, persuasion architecture)
+    - Bill Bernbach (creative revolution, DDB)
+    - Drayton Bird (commonsense direct & digital marketing)
+    - Donald Miller (StoryBrand framework)
+    - Nancy Duarte (resonate, data storytelling)
+    - Joanna Wiebe (conversion copywriting, Copyhackers)
+    - Oren Klaff (pitch anything, frame control)
+    - Blair Warren (one sentence persuasion)
+    - Andy Maslen (persuasive copywriting)
+    - Aristotle (ethos, pathos, logos — rhetoric foundations)
+    - Robert McKee (story, narrative structure)
+    - Chip & Dan Heath (made to stick, SUCCESs framework)
+    - Jonah Berger (contagious, STEPPS framework)
+    - Rory Sutherland (alchemy, behavioral economics in advertising)
+    - Seth Godin (permission marketing, purple cow)
+    - Ann Handley (everybody writes, content quality)
+
+  reference_companies:
+    - Ogilvy & Mather (brand advertising excellence)
+    - DDB Worldwide (creative revolution)
+    - Wieden+Kennedy (Nike, emotional storytelling)
+    - Copyhackers (conversion copywriting methodology)
+    - Agora Financial (direct response mastery)
+    - BBDO (emotional connection)
+    - Leo Burnett (brand archetypes)
+    - Droga5 (modern creative excellence)
+    - VaynerMedia (social-first copy)
+    - Basecamp/37signals (concise product copy)
+
+  core_concepts:
+    - name: "Persuasion Architecture"
+      description: >
+        Todo copy segue uma arquitetura de persuasão em 5 camadas:
+        1. ATTENTION (capturar em 3 segundos)
+        2. INTEREST (gerar curiosidade com relevância)
+        3. DESIRE (ativar emoção + lógica)
+        4. CONVICTION (eliminar objeções + prova social)
+        5. ACTION (CTA claro com urgência legítima)
+        Cada camada tem técnicas específicas e métricas de sucesso.
+
+    - name: "Market Awareness Spectrum"
+      description: >
+        Eugene Schwartz: o copy muda COMPLETAMENTE baseado no nível de consciência do leitor.
+        5 níveis: UNAWARE (não sabe que tem problema) → PROBLEM AWARE (sente a dor) →
+        SOLUTION AWARE (sabe que soluções existem) → PRODUCT AWARE (conhece nosso produto) →
+        MOST AWARE (pronto para comprar). Copy para UNAWARE é storytelling.
+        Copy para MOST AWARE é oferta direta. Errar o nível = copy ineficaz.
+
+    - name: "Emotional-Rational Bridge"
+      description: >
+        Kahneman + Cialdini: pessoas decidem com System 1 (emocional, rápido, intuitivo)
+        e justificam com System 2 (racional, lento, analítico). O copy world-class
+        ativa System 1 PRIMEIRO (emoção, storytelling, social proof) e depois
+        fornece System 2 (dados, ROI, comparações) para justificar a decisão
+        já tomada emocionalmente. A ponte entre os dois é a arte do copywriting.
+
+agents:
+  - id: copy-orqx
+    name: Quill Prime
+    icon: "✍️"
+    archetype: Conductor
+    role: Copy Squad Orchestrator
+    tasks_count: 0
+
+  - id: copy-strategist
+    name: Quill
+    icon: "🪶"
+    archetype: Strategist
+    role: Copy Strategy Architect & Voice Director
+    tasks_count: 8
+
+  - id: headline-specialist
+    name: Hook
+    icon: "🎣"
+    archetype: Provocateur
+    role: Headline & Hook Specialist
+    tasks_count: 9
+
+  - id: long-form-writer
+    name: Saga
+    icon: "📖"
+    archetype: Storyteller
+    role: Long-Form & Narrative Copywriter
+    tasks_count: 10
+
+  - id: conversion-writer
+    name: Spark
+    icon: "⚡"
+    archetype: Catalyst
+    role: Conversion & Direct Response Copywriter
+    tasks_count: 12
+
+  - id: brand-voice-writer
+    name: Tone
+    icon: "🎵"
+    archetype: Harmonizer
+    role: Brand Voice & Tone Specialist
+    tasks_count: 9
+
+  - id: persuasion-psychologist
+    name: Nudge
+    icon: "🧠"
+    archetype: Architect
+    role: Persuasion Psychology & Behavioral Copy Specialist
+    tasks_count: 11
+
+  - id: copy-editor
+    name: Chisel
+    icon: "🔨"
+    archetype: Refiner
+    role: Copy Editor, Reviewer & Quality Guardian
+    tasks_count: 9
+
+  - id: ad-copywriter
+    name: Spark
+    icon: "⚡"
+    archetype: Specialist
+    role: Advertising Copy Specialist — short-form ad copy for Meta, Google, LinkedIn, TikTok
+
+  - id: direct-response-writer
+    name: Forge
+    icon: "🔥"
+    archetype: Specialist
+    role: Direct Response & Long-Form Sales Copy Specialist — sales pages, VSLs, sales letters
+
+  - id: email-sequence-strategist
+    name: Drip
+    icon: "📧"
+    archetype: Strategist
+    role: Email Sequence & Automation Strategist — nurture sequences, launch sequences, re-engagement
+
+  - id: funnel-copywriter
+    name: Flow
+    icon: "🌊"
+    archetype: Specialist
+    role: Funnel Copy Specialist — copy for every funnel stage from ads to thank you page
+
+  - id: proof-architect
+    name: Evidence
+    icon: "🏆"
+    archetype: Specialist
+    role: Proof & Credibility Architect — social proof, testimonials, case studies, data-driven claims
+
+workflows:
+  - name: full-copy-cycle
+    description: Ciclo completo de copywriting — do brief ao copy final revisado
+  - name: conversion-copy-sprint
+    description: Sprint de copy para conversão — landing pages, emails, ads
+  - name: brand-voice-development
+    description: Desenvolvimento de brand voice e tom — guidelines e exemplos
+  - name: campaign-copy-cycle
+    description: Ciclo de copy para campanha completa — multi-canal, multi-peça
+  - name: sales-copy-pipeline
+    description: Pipeline de copy para vendas — sales pages, sequences, proposals
+  - name: content-copy-cycle
+    description: Ciclo de copy para conteúdo — articles, newsletters, social
+
+knowledge_bases:
+  - persuasion-architecture-framework
+  - market-awareness-spectrum
+  - emotional-rational-bridge
+  - copywriting-formulas-encyclopedia
+  - headline-patterns-library
+  - persuasion-triggers-catalog
+  - voice-and-tone-system
+  - storytelling-frameworks
+  - conversion-optimization-principles
+  - cognitive-biases-in-copy
+  - ethical-persuasion-guidelines
+  - criterion-over-tools                   # Ensinar criterio de decisao em copy, nao apenas tecnica ou ferramenta
+  - consequence-headline-patterns          # Headlines que vendem consequencia, nao feature — hooks de ruptura e urgencia
+
+checklists:
+  - copy-quality-checklist
+  - conversion-copy-checklist
+  - brand-voice-compliance-checklist
+
+templates:
+  - copy-brief-template
+  - landing-page-copy-template
+  - email-sequence-template
+  - sales-page-template
+  - ad-copy-template
+  - brand-voice-guidelines-template
+  - campaign-copy-template
+
+cross_squad_connections:
+  inbound:
+    - from: squad-research
+      receives: personas, pain points, JTBD, objections, language patterns
+    - from: squad-brand
+      receives: brand voice, positioning, messaging framework, archetypes
+    - from: squad-content
+      receives: topics, keywords, content strategy, audience preferences
+
+  outbound:
+    - to: squad-content
+      delivers: copy templates, headlines, CTAs, content pieces
+    - to: squad-design
+      delivers: UI copy, microcopy, UX writing, error messages
+    - to: squad-commercial
+      delivers: sales copy, proposals, pitch decks, objection handling
+    - to: squad-growth
+      delivers: ad copy, email copy, landing page copy for testing
+    - to: squad-brand
+      delivers: brand voice examples, tone calibrations

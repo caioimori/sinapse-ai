@@ -1,0 +1,162 @@
+name: Full Growth Analytics Cycle
+version: "1.0"
+description: >
+  Ciclo completo de growth analytics — da avaliacao de maturidade ate otimizacao
+  continua. Orquestra instrumentacao, analise, experimentacao e growth engineering.
+trigger: "Novo projeto ou iniciativa de growth"
+owner: growth-orqx
+max_iterations: 3
+
+phases:
+  - name: "Phase 1: Growth Assessment & Strategy"
+    agents: [growth-orqx]
+    tasks:
+      - classify-analytics-maturity
+      - create-growth-brief
+      - select-growth-workflow
+    inputs:
+      - "Business objectives"
+      - "Current analytics state"
+      - "Target metrics"
+    outputs:
+      - "Analytics maturity classification (Level 0-4)"
+      - "Growth brief with North Star Metric"
+      - "Selected workflow and roadmap"
+    gate:
+      name: "Growth Strategy Approval"
+      criteria: "North Star Metric definida, AARRR mapped, maturity assessed"
+      verdict: ["APPROVED", "NEEDS_REVISION"]
+      blocking: false
+
+  - name: "Phase 2: Analytics Instrumentation"
+    agents: [ga-analytics-engineer]
+    depends_on: "Phase 1"
+    tasks:
+      - define-event-taxonomy
+      - create-tracking-plan
+      - implement-ga4-configuration
+      - setup-gtm-container
+      - configure-data-layer
+      - implement-consent-management
+    inputs:
+      - "Growth brief"
+      - "User journeys"
+      - "Feature specs"
+    outputs:
+      - "Event taxonomy"
+      - "Tracking plan"
+      - "GA4 + GTM configured"
+      - "Data layer implemented"
+      - "Consent management active"
+    gate:
+      name: "Data Quality Gate"
+      criteria: "Tracking accuracy >= 98%, all critical events firing, consent working"
+      verdict: ["PASS", "FAIL"]
+      blocking: true
+      on_fail: "Fix tracking issues before proceeding"
+
+  - name: "Phase 3: SEO Foundation"
+    agents: [ga-seo-strategist]
+    depends_on: "Phase 1"
+    parallel_with: "Phase 2"
+    tasks:
+      - conduct-technical-seo-audit
+      - research-keyword-strategy
+      - create-topic-cluster-map
+      - implement-schema-markup
+      - optimize-meta-tags
+    inputs:
+      - "Growth brief"
+      - "Current site/app"
+      - "Competitor landscape"
+    outputs:
+      - "SEO audit report"
+      - "Keyword strategy"
+      - "Topic cluster map"
+      - "Schema markup specs"
+    gate:
+      name: "SEO Foundation Approval"
+      criteria: "Technical issues < 5 critical, keyword strategy approved"
+      verdict: ["APPROVED", "NEEDS_WORK"]
+      blocking: false
+
+  - name: "Phase 4: Data Analysis & Insights"
+    agents: [ga-data-analyst, ga-campaign-analyst]
+    depends_on: "Phase 2"
+    tasks:
+      - conduct-cohort-analysis
+      - analyze-funnel-segmented
+      - build-kpi-tree-dashboard
+      - analyze-channel-performance
+      - analyze-cac-by-channel
+    inputs:
+      - "Tracking data (2+ weeks)"
+      - "Campaign data"
+      - "Revenue data"
+    outputs:
+      - "Cohort analysis report"
+      - "Funnel analysis with segments"
+      - "KPI tree dashboard"
+      - "Channel performance report"
+      - "CAC analysis"
+
+  - name: "Phase 5: CRO & Experimentation"
+    agents: [ga-cro-specialist, ga-growth-hacker]
+    depends_on: "Phase 4"
+    tasks:
+      - conduct-cro-audit
+      - analyze-conversion-funnel
+      - identify-friction-points
+      - formulate-test-hypotheses
+      - map-growth-loops
+      - optimize-activation-flow
+    inputs:
+      - "Data analysis insights"
+      - "Heatmaps and session recordings"
+      - "User research findings"
+    outputs:
+      - "CRO audit report"
+      - "Prioritized hypothesis backlog"
+      - "Growth loop designs"
+      - "Activation optimization plan"
+    gate:
+      name: "Experiment Readiness Gate"
+      criteria: "Hypotheses prioritized, sample sizes calculated, tracking verified"
+      verdict: ["READY", "NOT_READY"]
+      blocking: true
+
+  - name: "Phase 6: Optimization & Growth"
+    agents: [ga-cro-specialist, ga-growth-hacker, growth-orqx]
+    depends_on: "Phase 5"
+    tasks:
+      - design-ab-experiment
+      - analyze-experiment-results
+      - certify-statistical-validity
+      - design-referral-system
+      - create-retention-hooks
+      - conduct-growth-retrospective
+    inputs:
+      - "Experiment briefs"
+      - "Growth loop designs"
+      - "Running experiments data"
+    outputs:
+      - "Experiment results"
+      - "Statistical validity certification"
+      - "Growth mechanisms implemented"
+      - "Growth retrospective document"
+    gate:
+      name: "Growth Results Gate"
+      criteria: "Statistically valid results, documented learnings, next iteration planned"
+      verdict: ["CERTIFIED", "INCONCLUSIVE", "CONTINUE"]
+      blocking: false
+
+completion:
+  requires: "Phase 2 Data Quality Gate PASS + all analyses complete"
+  outputs:
+    - "Complete analytics infrastructure"
+    - "Growth insights and recommendations"
+    - "Experiment results and learnings"
+    - "Optimized growth mechanisms"
+  handoff:
+    to: ["squad-product", "squad-commercial"]
+    delivers: "Analytics data, growth insights, experiment learnings"

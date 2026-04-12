@@ -1,0 +1,100 @@
+name: ux-research-sprint
+version: "1.0"
+description: >
+  Sprint de pesquisa UX — discovery focado para validar decisoes de design,
+  descobrir necessidades ou avaliar UX existente.
+trigger: Necessidade de validacao, discovery ou avaliacao de UX
+owner: design-orqx (Nexus)
+
+phases:
+  - name: "Phase 1: Research Planning"
+    agent: dx-ux-strategist (Compass)
+    tasks:
+      - plan-ux-research-sprint
+    input:
+      - Perguntas de pesquisa
+      - Acesso a usuarios/dados
+      - Contexto do projeto
+    output:
+      - Research plan (metodo, participantes, protocolo, success criteria)
+      - Recruitment criteria
+      - Timeline de execucao
+    gate:
+      name: Research Plan Approval
+      criteria: Plano aprovado, metodo adequado as perguntas
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 2: Research Execution"
+    agent: dx-ux-strategist (Compass)
+    depends_on: Phase 1
+    tasks:
+      - synthesize-user-research
+      - conduct-competitive-ux-analysis
+      - validate-ux-with-testing
+      - conduct-usability-heuristic-review
+    input:
+      - Research plan (de Phase 1)
+      - Acesso a participantes (ou desk research / analytics)
+    output:
+      - Raw findings (notas de entrevista, dados de survey, gravacoes de usabilidade)
+      - Competitive analysis results
+      - Usability test results
+      - Heuristic evaluation (se aplicavel)
+    gate:
+      name: Data Collection Complete
+      criteria: Dados suficientes coletados, qualidade validada
+      verdict: [COMPLETE, NEED_MORE_DATA]
+
+  - name: "Phase 3: Synthesis"
+    agent: dx-ux-strategist (Compass)
+    depends_on: Phase 2
+    tasks:
+      - synthesize-user-research
+      - create-user-personas
+      - map-user-journeys
+    input:
+      - Raw findings (de Phase 2)
+    output:
+      - Affinity diagram
+      - Insight clusters
+      - Opportunity areas
+      - Personas atualizadas (se aplicavel)
+      - Journey maps atualizados (se aplicavel)
+      - Design recommendations
+    gate:
+      name: Synthesis Review
+      criteria: Insights acionaveis, recomendacoes claras
+      verdict: [SYNTHESIS_COMPLETE]
+
+  - name: "Phase 4: Brief Generation"
+    agent: dx-ux-strategist (Compass)
+    depends_on: Phase 3
+    tasks:
+      - create-wireframe-brief
+      - create-ux-principles
+      - define-content-hierarchy
+      - design-user-flows
+    input:
+      - Synthesis outputs (de Phase 3)
+    output:
+      - UX brief / design direction document
+      - UX principles para o projeto
+      - Content hierarchy
+      - User flows principais
+    gate:
+      name: Brief Delivery
+      criteria: Brief completo, pronto para Phase 2 de outro workflow
+      verdict: [DELIVERED]
+
+completion:
+  deliverables:
+    - Research report completo
+    - Personas (novas ou atualizadas)
+    - Journey maps
+    - UX brief para design
+    - UX principles
+    - Prioritized opportunity areas
+  feeds_into:
+    - "zero-to-digital-product-cycle Phase 2 (UI Design)"
+    - "landing-page-sprint Phase 1 (UX & Visual)"
+    - "squad-research (compartilhar insights)"

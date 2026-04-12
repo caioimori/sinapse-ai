@@ -1,0 +1,97 @@
+name: brand-voice-development
+version: "1.0"
+title: "Brand Voice Development — From Scratch to Guidelines"
+description: "Workflow completo para desenvolver brand voice: pesquisa, definicao, documentacao, exemplos e treinamento."
+complexity: COMPLEX
+estimated_duration: "5-7 dias"
+squad: squad-copy
+
+triggers:
+  - "Nova marca precisa de voice"
+  - "Rebrand/reposicionamento"
+  - "Voice inconsistente detectada"
+
+phases:
+  - phase: 1
+    name: "Voice Discovery"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - conduct-voice-audit
+    outputs:
+      - Audit de voice existente (se houver)
+      - Gap analysis
+      - Benchmark de competitors
+    gate: "Diagnostico claro da situacao atual"
+    notes: "Se marca nova sem copy existente, pular audit e focar em brand inputs"
+
+  - phase: 2
+    name: "Voice Definition"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - develop-brand-voice
+      - create-tone-spectrum
+    outputs:
+      - Voice attributes (3-5)
+      - This/Not That guide
+      - Vocabulario always/never
+      - Voice archetype
+      - Tone spectrum
+    gate: "Voice definition aprovada por stakeholders"
+
+  - phase: 3
+    name: "Voice Documentation"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - create-writing-style-guide
+      - write-voice-examples-by-channel
+      - write-microcopy-guidelines
+    outputs:
+      - Writing style guide completo
+      - Voice examples por canal
+      - Microcopy guidelines
+    gate: "Documentacao completa e revisada"
+
+  - phase: 4
+    name: "Voice Adaptation"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - adapt-voice-for-market
+    outputs:
+      - Voice adaptation por mercado
+      - Localizacao guidelines
+    gate: "Adaptacoes aprovadas (se multi-mercado)"
+    notes: "Fase opcional — apenas se marca opera em multiplos mercados"
+
+  - phase: 5
+    name: "Training & Enablement"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - create-voice-training-materials
+    outputs:
+      - Training deck
+      - Exercicios praticos
+      - Quick reference card
+      - AI voice prompt template
+      - Onboarding program
+    gate: "Materiais testados com 1+ pessoa"
+
+  - phase: 6
+    name: "Rollout & Calibration"
+    agent: brand-voice-writer (Tone)
+    outputs:
+      - Voice guidelines distribuidas
+      - Training sessions agendadas
+      - Voice audit scheduled (30 dias)
+    gate: "Equipe treinada e aplicando"
+
+cross_squad_handoffs:
+  - to: squad-brand-identity
+    delivers: "Voice guidelines para alinhamento visual"
+  - to: squad-design
+    delivers: "Microcopy guidelines + UX writing examples"
+  - to: squad-content
+    delivers: "Voice guidelines para content creation"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

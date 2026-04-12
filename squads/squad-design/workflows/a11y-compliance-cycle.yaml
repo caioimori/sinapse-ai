@@ -1,0 +1,105 @@
+name: a11y-compliance-cycle
+version: "1.0"
+description: >
+  Ciclo de compliance de acessibilidade — audit automatizado + manual,
+  remediacao e certificacao WCAG 2.2 Level AA.
+trigger: Audit de acessibilidade solicitado (compliance legal, qualidade ou iniciativa)
+owner: design-orqx (Nexus)
+
+phases:
+  - name: "Phase 1: Automated Audit"
+    agent: dx-accessibility-specialist (Beacon)
+    tasks:
+      - conduct-wcag-audit
+      - verify-color-contrast
+    input:
+      - URL(s) de producao/staging
+      - Escopo (paginas, componentes, features)
+    output:
+      - axe-core scan report
+      - Lighthouse a11y score
+      - Issues categorizados por severidade (Critical/Major/Minor)
+      - Cobertura automatizada vs manual
+    gate:
+      name: Automated Scan Complete
+      criteria: Todas as paginas escaneadas, issues categorizados
+      verdict: [SCAN_COMPLETE]
+
+  - name: "Phase 2: Manual Audit"
+    agent: dx-accessibility-specialist (Beacon)
+    depends_on: Phase 1
+    tasks:
+      - test-keyboard-navigation
+      - review-aria-patterns
+      - create-screen-reader-specs
+      - design-focus-management
+      - design-accessible-form-patterns
+    input:
+      - Automated scan report (de Phase 1)
+      - Gaps que requerem teste manual
+    output:
+      - Keyboard navigation test results
+      - Screen reader test results (NVDA + VoiceOver)
+      - ARIA implementation review
+      - Focus management assessment
+      - Form accessibility assessment
+      - Full audit report (automated + manual combined)
+    gate:
+      name: Full Audit Complete
+      criteria: 87 criterios WCAG avaliados, manual testing concluido
+      verdict: [AUDIT_COMPLETE]
+
+  - name: "Phase 3: Remediation"
+    agent: dx-frontend-engineer (Scaffold)
+    guided_by: dx-accessibility-specialist (Beacon)
+    depends_on: Phase 2
+    tasks:
+      - implement-component-library
+      - implement-form-system
+    supporting_tasks_from_beacon:
+      - create-a11y-remediation-plan
+      - implement-reduced-motion
+    input:
+      - Full audit report com prescricoes (de Phase 2)
+      - Remediation plan priorizado
+    output:
+      - Componentes corrigidos
+      - ARIA patterns implementados
+      - Keyboard navigation corrigida
+      - Focus management implementado
+      - Reduced-motion suportado
+    gate:
+      name: Remediation Complete
+      criteria: Todos issues Critical e Major corrigidos
+      verdict: [REMEDIATED, PARTIAL]
+
+  - name: "Phase 4: Certification"
+    agent: dx-accessibility-specialist (Beacon)
+    depends_on: Phase 3
+    tasks:
+      - conduct-wcag-audit
+      - certify-accessibility-compliance
+    input:
+      - Produto remediado
+    output:
+      - Re-audit results (automated + manual)
+      - WCAG 2.2 AA compliance statement
+      - Residual issues register
+      - Ongoing monitoring recommendations
+    gate:
+      name: Certification Gate
+      criteria: WCAG 2.2 AA compliance verificada
+      verdict: [PASS, CONDITIONAL, FAIL]
+      blocking: true
+      on_fail: Retorna para Phase 3 com issues restantes
+
+completion:
+  deliverables:
+    - WCAG 2.2 AA compliance statement
+    - Full audit report (before/after)
+    - Residual issues register (com timeline de correcao)
+    - Accessibility monitoring setup
+  legal_compliance:
+    - "EU EAA (European Accessibility Act) — obrigatorio desde junho 2025"
+    - "ADA (Americans with Disabilities Act) — compliance recomendado"
+    - "LGPD/CDC — acessibilidade como direito do consumidor"

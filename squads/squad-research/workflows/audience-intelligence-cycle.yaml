@@ -1,0 +1,141 @@
+name: audience-intelligence-cycle
+description: Ciclo completo de inteligencia de audiencia — de dados brutos a personas acionaveis
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+
+triggers:
+  - Novo produto/servico sendo planejado
+  - Necessidade de entender audiencia-alvo
+  - Cross-squad request para dados de audiencia
+  - Persona desatualizada (>6 meses)
+
+phases:
+  - id: brief
+    name: "1. Audience Brief"
+    agent: research-orqx (Prism)
+    tasks:
+      - triage-research-request
+    inputs:
+      - Mercado/produto a analisar
+      - Dados existentes de clientes
+    outputs:
+      - Audience research brief
+      - Scope definido (B2B/B2C, geo, segmentos)
+    quality_gate:
+      criteria: Scope claro, perguntas definidas
+
+  - id: persona-building
+    name: "2. Persona Building"
+    agent: audience-intelligence (Pulse)
+    tasks:
+      - build-audience-persona
+      - profile-ideal-customer
+      - create-empathy-map
+    inputs:
+      - Research brief
+      - Dados existentes de clientes/mercado
+    outputs:
+      - Personas data-driven (v1.0)
+      - ICP (Ideal Customer Profile)
+      - Empathy maps
+    quality_gate:
+      criteria: Personas com dados reais, nao fictícios
+
+  - id: journey-mapping
+    name: "3. Journey Mapping"
+    agent: audience-intelligence (Pulse)
+    tasks:
+      - map-audience-journey
+      - map-pain-gain-matrix
+    inputs:
+      - Personas construidas
+    outputs:
+      - Journey maps (5 stages)
+      - Pain/gain matrix com intensidade
+      - Moments of truth identificados
+    quality_gate:
+      criteria: Todos os stages cobertos, gaps identificados
+
+  - id: jtbd-analysis
+    name: "4. JTBD Analysis"
+    agent: audience-intelligence (Pulse)
+    tasks:
+      - conduct-jobs-to-be-done
+      - analyze-audience-behavior
+    inputs:
+      - Personas e journeys
+    outputs:
+      - JTBD cards (functional, emotional, social)
+      - Behavior patterns
+      - Forces of Progress
+    quality_gate:
+      criteria: Jobs priorizados, outcomes mensuráveis
+
+  - id: psychographic-profiling
+    name: "5. Psychographic Profiling"
+    agent: audience-intelligence (Pulse)
+    tasks:
+      - analyze-audience-psychographics
+      - segment-audience
+      - map-audience-ecosystem
+    inputs:
+      - Personas, journeys, JTBD
+    outputs:
+      - Psychographic profiles
+      - Segmentacao comportamental
+      - Audience ecosystem map
+    quality_gate:
+      criteria: Segmentos distintos, psychographics actionable
+
+  - id: validation
+    name: "6. Persona Validation"
+    agent: audience-intelligence (Pulse)
+    tasks:
+      - validate-persona-with-data
+    inputs:
+      - Personas v1.0, dados de validacao
+    outputs:
+      - Personas validadas (v1.1+)
+      - Confidence scores por atributo
+    quality_gate:
+      criteria: Validation score >= 70%
+
+  - id: synthesis-delivery
+    name: "7. Synthesis & Delivery"
+    agent: data-synthesizer (Loom) → research-orqx (Prism)
+    tasks:
+      - synthesize-research-report
+      - coordinate-cross-squad-research
+    inputs:
+      - Todos os outputs de audiencia
+    outputs:
+      - Audience intelligence report
+      - Deliverables por squad
+    quality_gate:
+      criteria: Report completo, handoffs formatados
+
+success_criteria:
+  - Personas validadas com dados reais
+  - Journey maps com moments of truth
+  - JTBD priorizados com outcomes
+  - Segmentacao actionable
+  - Cross-squad deliverables formatados
+
+cross_squad_handoffs:
+  - to: brand-system
+    delivers: personas com valores e arquetipo
+    format: persona cards + psychographic summary
+  - to: content-intelligence
+    delivers: topicos, interesses, consumption patterns
+    format: content preference matrix
+  - to: copywriting-persuasion
+    delivers: pain points, JTBD, gatilhos emocionais
+    format: messaging framework inputs
+  - to: commercial-systems
+    delivers: ICP, segmentos, willingness-to-pay
+    format: ICP scorecard + segment profiles
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

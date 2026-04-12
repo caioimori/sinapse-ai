@@ -1,0 +1,88 @@
+name: product-handoff-cycle
+description: "Ciclo de handoff de produto para novo PM, cliente interno, ou encerramento de contrato"
+version: "1.0"
+trigger: "PM transition, client internalization, or contract conclusion"
+estimated_duration: "4-6 weeks"
+
+phases:
+  - name: "Assess"
+    description: "Avaliar readiness e planejar handoff"
+    agents:
+      - product-orqx
+      - ps-client-product-manager
+    tasks:
+      - initiate-product-handoff
+    outputs:
+      - handoff-readiness-scorecard
+      - handoff-timeline
+    gate:
+      criteria: "Readiness score >= 3.5/5, timeline approved by both parties"
+      decision: "PROCEED / REMEDIATE gaps first"
+
+  - name: "Document"
+    description: "Preparar pacote completo de handoff (10 documentos)"
+    agents:
+      - ps-client-product-manager
+      - ps-product-strategist
+      - ps-discovery-lead
+      - ps-product-analyst
+      - ps-delivery-manager
+      - ps-product-ops-specialist
+    tasks:
+      - prepare-product-handoff-package
+    outputs:
+      - handoff-package-complete
+    gate:
+      criteria: "All 10 documents reviewed and current"
+      decision: "Ready for Knowledge Transfer"
+    parallel_work:
+      - "Each agent prepares their documents simultaneously"
+      - "ps-product-ops-specialist coordinates and quality-checks"
+
+  - name: "Transfer"
+    description: "Executar 7 sessoes de Knowledge Transfer"
+    agents:
+      - all-squad-agents
+    tasks:
+      - prepare-product-handoff-package
+    outputs:
+      - kt-session-notes
+      - recorded-sessions
+    gate:
+      criteria: "All 7 KT sessions completed, incoming PM confirms understanding"
+      decision: "Ready for Shadow period"
+
+  - name: "Shadow"
+    description: "Periodo de 4 semanas de transicao gradual"
+    agents:
+      - ps-client-product-manager
+      - product-orqx
+    schedule:
+      week_1: "Incoming PM shadows (observes all activities)"
+      week_2: "Paired leadership (co-lead meetings and decisions)"
+      week_3: "Reverse shadow (incoming leads, outgoing advises)"
+      week_4: "Independence (incoming fully autonomous, outgoing on-call)"
+    gate:
+      criteria: "Incoming PM operating independently for 1+ week"
+      decision: "COMPLETE handoff / EXTEND shadow"
+
+  - name: "Close"
+    description: "Formalizar handoff e encerrar"
+    agents:
+      - ps-client-product-manager
+      - product-orqx
+    outputs:
+      - handoff-signoff-document
+      - 30-day-support-agreement
+    gate:
+      criteria: "Both parties sign off, emergency contact established"
+      decision: "Handoff COMPLETE"
+
+post_handoff:
+  support_period: "30 days post-handoff"
+  support_scope: "Escalation questions only (not day-to-day)"
+  final_check: "30-day post-handoff survey to receiving party"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

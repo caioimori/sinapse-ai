@@ -1,0 +1,330 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-cloning v1.0
+# ══════════════════════════════════════════════════════════════════════════════
+# Cognitive cloning pipeline — extracts mental models, heuristics, and decision
+# patterns from real minds and generates AI agent squads that think like them.
+# 8 agents | 54 tasks | 6 workflows | 8 KBs | 3 checklists | 5 templates
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-cloning
+version: "1.0.0"
+description: >
+  Pipeline de clonagem cognitiva — extrai modelos mentais, heuristicas, padroes de
+  decisao e vocabulario de mentes reais (via transcricoes, livros, artigos, podcasts)
+  e gera squads de agentes IA que pensam como elas. Suporta 3 tiers de fidelidade
+  (KB-only, Consultant Clone, Full Clone) e se adapta a qualquer volume de conteudo
+  fonte — de 5K a 200K+ palavras. Projetado para o pipeline Max-only com 1M de contexto.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+sinapse:
+  minVersion: "1.0.0"
+  type: squad
+
+metadata:
+  created_at: "2026-03-20"
+  updated_at: "2026-03-20"
+  created_by: "Claude Code (Sprint 1)"
+  quality_target: "Tier 3 clones with ≥85% confidence score"
+  agents_count: 8
+  tasks_count: 54
+  knowledge_bases_count: 8
+  workflows_count: 6
+  checklists_count: 3
+  templates_count: 5
+  total_files: 84
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTS — 8 SPECIALISTS
+# ══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  - id: cloning-orqx
+    name: Helix
+    file: agents/cloning-orqx.md
+    role: "Pipeline coordinator — manages the full cloning lifecycle"
+    tasks:
+      - initiate-clone-project
+      - assign-content-class
+      - monitor-pipeline-progress
+      - escalate-quality-issues
+      - finalize-clone-delivery
+
+  - id: source-hunter
+    name: Scout
+    file: agents/source-hunter.md
+    role: "Source discovery — finds and catalogs all available content"
+    tasks:
+      - discover-youtube-channels
+      - discover-podcasts-appearances
+      - discover-books-publications
+      - discover-articles-interviews
+      - discover-social-media-content
+      - compile-source-catalog
+      - estimate-content-volume
+
+  - id: content-capturer
+    name: Capture
+    file: agents/content-capturer.md
+    role: "Content capture — transcribes and digitizes raw content"
+    tasks:
+      - transcribe-youtube-videos
+      - transcribe-podcast-episodes
+      - extract-book-content
+      - capture-article-text
+      - capture-social-posts
+      - normalize-raw-content
+      - validate-transcription-quality
+
+  - id: cognitive-extractor
+    name: Cortex
+    file: agents/cognitive-extractor.md
+    role: "DNA extraction — identifies the 5 cognitive layers from raw content"
+    tasks:
+      - extract-mental-models
+      - extract-heuristics
+      - extract-decision-patterns
+      - extract-vocabulary-tone
+      - extract-workflows-processes
+      - identify-contradictions
+      - tag-confidence-levels
+      - generate-extraction-report
+
+  - id: mind-synthesizer
+    name: Synth
+    file: agents/mind-synthesizer.md
+    role: "Cognitive synthesis — consolidates extractions into a unified mind profile"
+    tasks:
+      - resolve-contradictions
+      - build-cognitive-profile
+      - identify-meta-patterns
+      - calculate-confidence-score
+      - determine-clone-tier
+      - generate-mind-map
+
+  - id: agent-forger
+    name: Forge
+    file: agents/agent-forger.md
+    role: "Agent generation — creates agent.md files from cognitive profiles"
+    tasks:
+      - generate-agent-persona
+      - generate-agent-heuristics
+      - generate-agent-protocols
+      - generate-agent-commands
+      - generate-cross-squad-handoffs
+      - validate-agent-completeness
+
+  - id: kb-architect
+    name: Archive
+    file: agents/kb-architect.md
+    role: "Knowledge base generation — creates KB files from extracted intelligence"
+    tasks:
+      - design-kb-taxonomy
+      - generate-framework-kbs
+      - generate-pattern-kbs
+      - generate-methodology-kbs
+      - generate-reference-kbs
+      - validate-kb-citations
+      - cross-reference-kbs
+
+  - id: squad-assembler
+    name: Assembly
+    file: agents/squad-assembler.md
+    role: "Squad assembly — packages everything into a deployable squad"
+    tasks:
+      - generate-squad-yaml
+      - generate-task-files
+      - generate-workflow-files
+      - generate-checklist-files
+      - generate-template-files
+      - run-pre-publish-checklist
+      - package-squad-output
+      - deploy-cross-squad-kbs
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 8
+# ══════════════════════════════════════════════════════════════════════════════
+
+knowledge_bases:
+  - name: cognitive-dna-framework
+    file: knowledge-base/cognitive-dna-framework.md
+    description: "The 5-layer cognitive DNA extraction model"
+
+  - name: clone-tier-standards
+    file: knowledge-base/clone-tier-standards.md
+    description: "Quality standards for Tier 1, 2, and 3 clones"
+
+  - name: source-classification
+    file: knowledge-base/source-classification.md
+    description: "Content availability classes (A-D) and strategies per class"
+
+  - name: confidence-scoring
+    file: knowledge-base/confidence-scoring.md
+    description: "Confidence score calculation methodology and thresholds"
+
+  - name: extraction-patterns
+    file: knowledge-base/extraction-patterns.md
+    description: "Patterns for identifying mental models, heuristics, and decision rules"
+
+  - name: agent-generation-guide
+    file: knowledge-base/agent-generation-guide.md
+    description: "How to generate high-fidelity agent.md from cognitive profiles"
+
+  - name: kb-generation-guide
+    file: knowledge-base/kb-generation-guide.md
+    description: "How to structure and generate knowledge base files from extractions"
+
+  - name: cross-squad-deployment
+    file: knowledge-base/cross-squad-deployment.md
+    description: "Rules for deploying generated KBs to destination squads"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 6
+# ══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  - name: full-clone-pipeline
+    file: workflows/full-clone-pipeline.yaml
+    description: "End-to-end cloning from source discovery to squad delivery"
+
+  - name: tier1-kb-only
+    file: workflows/tier1-kb-only.yaml
+    description: "Lightweight pipeline for KB-only clones (5-20K words)"
+
+  - name: tier2-consultant
+    file: workflows/tier2-consultant.yaml
+    description: "Mid-tier pipeline with agent + KBs (30-100K words)"
+
+  - name: tier3-full-clone
+    file: workflows/tier3-full-clone.yaml
+    description: "Full pipeline with agent + KBs + tasks (80-200K+ words)"
+
+  - name: source-discovery-cycle
+    file: workflows/source-discovery-cycle.yaml
+    description: "Source hunting and cataloging workflow"
+
+  - name: quality-validation-cycle
+    file: workflows/quality-validation-cycle.yaml
+    description: "End-to-end quality validation before delivery"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHECKLISTS — 3
+# ══════════════════════════════════════════════════════════════════════════════
+
+checklists:
+  - name: extraction-quality-checklist
+    file: checklists/extraction-quality-checklist.md
+    description: "Validates extraction completeness and confidence"
+
+  - name: clone-completeness-checklist
+    file: checklists/clone-completeness-checklist.md
+    description: "Validates clone meets tier requirements"
+
+  - name: pre-deploy-checklist
+    file: checklists/pre-deploy-checklist.md
+    description: "Final validation before deploying to ecosystem"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES — 5
+# ══════════════════════════════════════════════════════════════════════════════
+
+templates:
+  - name: source-catalog-template
+    file: templates/source-catalog-template.yaml
+    description: "Template for source discovery output"
+
+  - name: cognitive-profile-template
+    file: templates/cognitive-profile-template.md
+    description: "Template for unified cognitive profile"
+
+  - name: extraction-report-template
+    file: templates/extraction-report-template.md
+    description: "Template for extraction layer reports"
+
+  - name: clone-agent-template
+    file: templates/clone-agent-template.md
+    description: "Template for generated agent.md files"
+
+  - name: clone-kb-template
+    file: templates/clone-kb-template.md
+    description: "Template for generated KB files"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+  pipeline:
+    max_context: "1M tokens"
+    sessions_per_tier:
+      tier1: 1
+      tier2: 2
+      tier3: 3
+    tools:
+      transcription: "Whisper API"
+      search: "Brave Search"
+      processing: "Claude Code (Max)"
+      sync: "Syncthing"
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  external:
+    - name: Whisper
+      purpose: "Whisper transcription, Playwright capture"
+      required: false
+    - name: Brave Search
+      purpose: "Web search for source discovery"
+      required: false
+
+tags:
+  - cloning
+  - cognitive-extraction
+  - mind-mapping
+  - agent-generation
+  - knowledge-base
+  - pipeline
+  - intelligence
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  inbound:
+    - from: sinapse
+      receives: "Clone requests, target mind specifications, priority"
+    - from: squad-research
+      receives: "Source discovery data, competitive intelligence on target minds"
+
+  outbound:
+    - to: squad-content
+      delivers: "Content pattern KBs, editorial framework KBs"
+    - to: squad-copy
+      delivers: "Copy/headline pattern KBs, persuasion framework KBs"
+    - to: squad-brand
+      delivers: "Brand voice KBs, brand strategy KBs"
+    - to: squad-commercial
+      delivers: "Business strategy KBs, sales methodology KBs"
+    - to: squad-council
+      delivers: "Strategic thinking KBs, mental model KBs"
+    - to: squad-growth
+      delivers: "Growth/marketing KBs"
+    - to: squad-paidmedia
+      delivers: "Advertising strategy KBs"
+    - to: squad-product
+      delivers: "Product thinking KBs"
+    - to: squad-storytelling
+      delivers: "Narrative pattern KBs"
+    - to: squad-research
+      delivers: "Research methodology KBs"
+    - to: squad-design
+      delivers: "Design system KBs"
+    - to: squad-cybersecurity
+      delivers: "Security framework KBs"
+    - to: squad-finance
+      delivers: "Financial model KBs"

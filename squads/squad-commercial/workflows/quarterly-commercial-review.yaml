@@ -1,0 +1,165 @@
+name: quarterly-commercial-review
+version: "1.0"
+description: >
+  Review comercial trimestral — análise completa de performance do squad com
+  retrospectiva, ajustes estratégicos e planejamento do próximo trimestre.
+
+trigger: Last 2 weeks of each quarter
+owner: commercial-orqx (Pipeline)
+frequency: quarterly
+estimated_duration: 1-2 weeks
+
+phases:
+  - id: data-compilation
+    name: Data Compilation & Analysis
+    agents:
+      - cs-revops-analyst
+      - cs-crm-specialist
+    tasks:
+      - create-revenue-dashboard
+      - build-pipeline-dashboard
+      - build-unit-economics-model
+      - monitor-saas-metrics
+    artifacts:
+      - quarterly-data-package.md
+    exit_criteria:
+      - All key metrics compiled (revenue, pipeline, unit economics)
+      - Quarter-over-quarter comparisons calculated
+      - Target vs actual variance analyzed
+      - Top/bottom performer data prepared
+    duration: 2-3 days
+
+  - id: client-health-review
+    name: Client Portfolio Health Review
+    agent: cs-client-success
+    depends_on: [data-compilation]
+    parallel_with: [funnel-review]
+    tasks:
+      - design-health-score
+      - run-nps-program
+      - map-expansion-opportunities
+      - identify-churn-risks
+    artifacts:
+      - portfolio-health-report.md
+      - nps-quarterly-report.md
+    exit_criteria:
+      - All accounts health-scored and categorized
+      - NPS results analyzed with verbatim themes
+      - Expansion pipeline for next quarter identified
+      - At-risk accounts with save plans documented
+    duration: 3-5 days
+
+  - id: funnel-review
+    name: Funnel & Pipeline Performance Review
+    agent: cs-funnel-architect
+    depends_on: [data-compilation]
+    parallel_with: [client-health-review]
+    tasks:
+      - audit-funnel-conversions
+      - calculate-funnel-math
+      - optimize-funnel-bottleneck
+    artifacts:
+      - funnel-performance-report.md
+    exit_criteria:
+      - Stage-by-stage conversion rates analyzed
+      - Bottlenecks identified with root causes
+      - Funnel math recalculated for next quarter targets
+      - Optimization recommendations prioritized
+    duration: 3-5 days
+
+  - id: commercial-effectiveness
+    name: Commercial Effectiveness Review
+    agent: cs-sales-enablement
+    depends_on: [data-compilation]
+    parallel_with: [client-health-review, funnel-review]
+    tasks:
+      - audit-sales-methodology
+      - design-call-review-process
+    artifacts:
+      - sales-effectiveness-report.md
+    exit_criteria:
+      - Win/loss patterns analyzed
+      - Methodology adherence scored
+      - Call quality trends reported
+      - Training needs identified for next quarter
+    duration: 3-5 days
+
+  - id: strategic-review
+    name: Strategic Review Meeting
+    agent: commercial-orqx
+    depends_on: [client-health-review, funnel-review, commercial-effectiveness]
+    tasks:
+      - run-quarterly-commercial-review
+    artifacts:
+      - quarterly-review-deck.md
+      - strategic-decisions.md
+    exit_criteria:
+      - All reports presented to leadership
+      - Key wins celebrated
+      - Misses analyzed with accountability
+      - Strategic decisions documented
+    duration: Half-day meeting
+
+  - id: next-quarter-planning
+    name: Next Quarter Planning
+    agent: commercial-orqx
+    depends_on: [strategic-review]
+    tasks:
+      - manage-pipeline-forecast
+      - conduct-commercial-retrospective
+    artifacts:
+      - next-quarter-plan.md
+      - retrospective-actions.md
+    exit_criteria:
+      - Next quarter revenue targets set
+      - Pipeline coverage requirements calculated
+      - Expansion targets per account defined
+      - Process improvements prioritized (top 3)
+      - Team capacity plan confirmed
+    duration: 2-3 days
+
+quality_gates:
+  - name: Data Completeness Gate
+    phase: data-compilation
+    criteria:
+      - All CRM data current (< 7 days stale)
+      - Financial data reconciled with accounting
+      - NPS survey completed with ≥ 40% response rate
+  - name: Review Readiness Gate
+    phase: strategic-review
+    criteria:
+      - All 4 review reports completed and shared 24h before meeting
+      - Recommendations specific and actionable
+      - Next quarter targets proposed with supporting math
+
+review_agenda:
+  duration: 4 hours
+  sections:
+    - name: Financial Performance
+      duration: 45 min
+      presenter: cs-revops-analyst
+      content: Revenue, ARR, NRR, unit economics, forecast accuracy
+    - name: Pipeline & Funnel
+      duration: 45 min
+      presenter: cs-funnel-architect
+      content: Conversion rates, bottlenecks, demand gen effectiveness
+    - name: Client Health & Retention
+      duration: 45 min
+      presenter: cs-client-success
+      content: Health scores, NPS, churn analysis, expansion pipeline
+    - name: Sales Effectiveness
+      duration: 30 min
+      presenter: cs-sales-enablement
+      content: Win rates, methodology adherence, training impact
+    - name: Strategic Decisions
+      duration: 30 min
+      facilitator: commercial-orqx
+      content: Key decisions needed, resource allocation, priority shifts
+    - name: Next Quarter Planning
+      duration: 45 min
+      facilitator: commercial-orqx
+      content: Targets, initiatives, process improvements, capacity
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."

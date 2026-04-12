@@ -1,0 +1,89 @@
+name: cro-optimization-cycle
+version: "1.0"
+description: "Ciclo de otimizacao de conversao em 5 fases"
+trigger: "CVR abaixo do benchmark, CPA alto por LP issue, ou CRO sprint planejado"
+agents_involved:
+  - cro-specialist
+  - performance-engineer
+  - campaign-analyst
+
+phases:
+  - name: "Phase 1: Audit"
+    agents:
+      - cro-specialist
+      - performance-engineer
+    tasks:
+      - analyze-landing-page
+      - optimize-page-conversion
+      - audit-core-web-vitals
+      - run-full-lighthouse-audit
+      - audit-conversion-tracking
+    output: "CRO audit report + performance baseline"
+    quality_gate: "LP auditada, CWV medidos, tracking validado, baseline CVR documentado"
+    notes: |
+      Convert e Lighthouse trabalham em paralelo.
+      Convert: CRO audit (message match, hierarchy, trust elements).
+      Lighthouse: performance audit (CWV, page speed, tracking).
+      Baseline metrics para comparacao pos-otimizacao.
+
+  - name: "Phase 2: Hypothesis"
+    agent: cro-specialist
+    depends_on: ["Phase 1"]
+    tasks:
+      - optimize-form-conversion
+      - optimize-signup-flow
+      - design-progressive-profiling
+    output: "Prioritized optimization hypotheses"
+    quality_gate: "Hipoteses no formato IF/THEN/BECAUSE, priorizadas por impacto estimado"
+    notes: |
+      Convert formula hipoteses baseadas nos findings do audit.
+      Prioriza por: impacto estimado × facilidade de implementacao.
+      Cada hipotese tem metrica de sucesso clara.
+
+  - name: "Phase 3: Test Design"
+    agent: cro-specialist
+    depends_on: ["Phase 2"]
+    tasks:
+      - run-ab-test
+      - calculate-sample-size
+    output: "A/B test configurations"
+    quality_gate: "Sample size calculado, teste configurado, duracao estimada"
+    notes: |
+      Convert configura A/B test para cada hipotese prioritaria.
+      Um teste por vez (nao testar multiplas coisas simultaneamente na mesma page).
+      Calcular se ha trafego suficiente para resultado em <30 dias.
+
+  - name: "Phase 4: Execution"
+    agent: cro-specialist
+    depends_on: ["Phase 3"]
+    tasks:
+      - run-ab-test
+      - audit-conversion-tracking
+    output: "Tests running + monitoring data"
+    quality_gate: "Teste rodando min 7 dias, tracking validado durante teste"
+    notes: |
+      Convert monitora execucao.
+      Verifica que tracking continua funcionando.
+      NAO parar teste antes do sample size.
+
+  - name: "Phase 5: Analysis"
+    agents:
+      - campaign-analyst
+      - cro-specialist
+    depends_on: ["Phase 4"]
+    tasks:
+      - analyze-conversion-funnel
+      - measure-activation-rate
+    output: "Test results + implementation plan"
+    quality_gate: "Significancia calculada, winner implementado, learnings documentados"
+    notes: |
+      Pulse fornece analise de funil pre/pos.
+      Convert analisa resultados e decide:
+      - Winner: implementar permanentemente
+      - Loser: documentar learning, proxima hipotese
+      - Inconclusivo: aumentar sample ou variacao
+      Ciclo recomeça com proxima hipotese.
+
+completion:
+  notification: "paidmedia-orqx"
+  message: "Workflow concluido com sucesso."

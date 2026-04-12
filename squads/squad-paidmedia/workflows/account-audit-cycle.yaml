@@ -1,0 +1,86 @@
+name: account-audit-cycle
+version: "1.0"
+description: "Ciclo de auditoria completa de conta em 5 fases"
+trigger: "Nova conta para onboarding, auditoria trimestral, ou queda significativa de performance"
+agents_involved:
+  - performance-engineer
+  - meta-ads-specialist
+  - google-ads-specialist
+  - campaign-analyst
+  - creative-strategist
+  - paidmedia-orqx
+
+phases:
+  - name: "Phase 1: Tracking Audit"
+    agent: performance-engineer
+    tasks:
+      - audit-tracking-implementation
+      - validate-pixel-health
+      - audit-tag-manager-setup
+      - audit-core-web-vitals
+    output: "Tracking audit report"
+    quality_gate: "Todos os pixels verificados, eventos testados end-to-end"
+    notes: |
+      Lighthouse audita toda a infraestrutura de tracking.
+      Se tracking esta quebrado, NADA mais importa.
+      Esta fase e pre-requisito para todas as outras.
+
+  - name: "Phase 2: Account Structure"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+    depends_on: ["Phase 1"]
+    tasks:
+      - audit-meta-ads-account
+      - audit-google-ads-account
+      - audit-keywords
+      - audit-search-terms
+      - audit-utm-tracking
+    output: "Account structure audit reports (Meta + Google)"
+    quality_gate: "Score card por area, problemas identificados, waste quantificado"
+    notes: |
+      Signal audita conta Meta (estrutura, pixel, audiences, criativos).
+      Query audita conta Google (estrutura, keywords, bidding, QS).
+      Trabalham em paralelo.
+
+  - name: "Phase 3: Performance Analysis"
+    agent: campaign-analyst
+    depends_on: ["Phase 2"]
+    tasks:
+      - analyze-traffic-sources
+      - analyze-conversion-funnel
+      - analyze-user-behavior
+      - detect-performance-anomalies
+    output: "Performance analysis report"
+    quality_gate: "Attribution mapeada, funil analisado, anomalias identificadas"
+    notes: |
+      Pulse analisa dados cross-channel com contexto dos audits.
+      Correlaciona findings de Signal/Query com dados de GA4.
+
+  - name: "Phase 4: Creative Review"
+    agent: creative-strategist
+    depends_on: ["Phase 2"]
+    tasks:
+      - analyze-creative-performance
+      - research-competitor-facebook-ads
+      - analyze-creative-trends
+    output: "Creative review report"
+    quality_gate: "Patterns de winners/losers identificados, competitive intelligence"
+
+  - name: "Phase 5: Recommendations"
+    agent: paidmedia-orqx
+    depends_on: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"]
+    tasks:
+      - generate-performance-report
+      - triage-campaign-issues
+      - manage-scaling-roadmap
+    output: "Consolidated audit report with prioritized recommendations"
+    quality_gate: "Score card consolidado, top 10 recomendacoes priorizadas, roadmap"
+    notes: |
+      Apex consolida todos os findings em report unico.
+      Prioriza recomendacoes por impacto.
+      Define roadmap de implementacao.
+
+completion:
+  notification: "paidmedia-orqx"
+  message: "Workflow concluido com sucesso."

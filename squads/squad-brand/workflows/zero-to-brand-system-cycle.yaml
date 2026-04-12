@@ -1,0 +1,252 @@
+# Zero-to-Brand-System Cycle
+# Workflow completo: do briefing ao brand system entregue
+# 9 fases sequenciais com quality gates entre cada fase
+
+name: zero-to-brand-system-cycle
+version: "2.0"
+description: >
+  Ciclo completo de criacao de marca do zero ao brand system final.
+  9 fases com quality gates (Sentinel) entre cada transicao.
+  Resultado: brandbook completo + delivery package + design system implementavel.
+
+trigger:
+  command: "*start-brand-project"
+  agent: brand-orqx
+
+phases:
+  - id: phase-1-discovery
+    name: "Discovery & Strategy"
+    agent: brand-strategist
+    description: "Briefing, pesquisa, posicionamento, arquetipo, manifesto, tom de voz"
+    tasks:
+      - conduct-brand-discovery
+      - define-brand-positioning
+      - create-brand-manifesto
+      - define-tone-of-voice
+      - define-message-house
+      - map-brand-architecture
+      - define-personas
+      - define-social-voice
+    outputs:
+      - brand-strategy-document
+      - positioning-statement
+      - brand-manifesto
+      - tone-of-voice-guide
+      - message-house
+      - brand-architecture-map
+      - persona-profiles
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase strategy"
+      criteria: "Posicionamento claro, diferenciado. Arquetipo consistente. Tom de voz com exemplos."
+      threshold: 4.0
+
+  - id: phase-2-visual-identity
+    name: "Visual Identity"
+    agent: brand-identity-designer
+    depends_on: [phase-1-discovery]
+    description: "Paleta, tipografia, logo system, moodboard, photography, illustration, data viz"
+    tasks:
+      - define-color-palette
+      - select-typography
+      - design-logo-system
+      - create-moodboard
+      - define-photography-direction
+      - define-illustration-style
+      - define-graphic-vocabulary
+      - define-image-treatments
+      - define-data-viz-style
+    outputs:
+      - color-system-complete
+      - typography-system
+      - logo-system-6-variations
+      - visual-moodboard
+      - photography-style-guide
+      - illustration-guidelines
+      - graphic-vocabulary
+      - image-treatment-rules
+      - data-viz-style-guide
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase visual"
+      criteria: "Paleta com fundamento psicologico. WCAG AA compliance. Logo funcional em todos os tamanhos."
+      threshold: 4.0
+
+  - id: phase-3-sonic-identity
+    name: "Sonic Identity"
+    agent: brand-sonic-designer
+    depends_on: [phase-1-discovery]
+    description: "Identidade sonora, audio logo, notification sounds, audio beds"
+    tasks:
+      - create-sonic-identity
+      - create-audio-logo
+      - create-notification-sounds
+      - create-audio-beds
+    outputs:
+      - sonic-dna-document
+      - audio-logo-3-versions
+      - notification-sound-set
+      - audio-bed-collection
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase audio"
+      criteria: "Sonic DNA coerente com personalidade. Audio logo memoravel. Sons funcionais."
+      threshold: 4.0
+
+  - id: phase-4-asset-creation
+    name: "Creative Asset Engineering"
+    agent: brand-creative-engineer
+    depends_on: [phase-2-visual-identity]
+    description: "Logo SVG, icones, patterns, mockups, apparel, social templates, web templates"
+    tasks:
+      - create-svg-logo
+      - create-icon-set
+      - create-pattern
+      - create-mockup-batch
+      - create-apparel-visualizations
+      - create-social-templates
+      - create-web-templates
+    outputs:
+      - svg-logo-files
+      - icon-set
+      - brand-patterns
+      - product-mockups
+      - apparel-visualizations
+      - social-media-templates
+      - web-page-templates
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase assets"
+      criteria: "Assets seguem paleta. SVGs otimizados. Mockups fotorrealistas. Templates responsivos."
+      threshold: 4.0
+
+  - id: phase-5-collateral
+    name: "Brand Collateral & Applications"
+    agent: brand-collateral-designer
+    depends_on: [phase-2-visual-identity]
+    description: "Business cards, stationery, presentations, packaging, signage, newsletters"
+    tasks:
+      - create-business-cards
+      - create-stationery
+      - create-email-signature
+      - create-presentation-template
+      - create-proposal-template
+      - create-packaging
+      - create-signage
+      - create-vehicle-wrap
+      - create-newsletter-template
+      - create-invoice-template
+      - create-thumbnail-templates
+    outputs:
+      - business-card-design
+      - stationery-set
+      - email-signature-html
+      - presentation-template
+      - proposal-template
+      - packaging-design
+      - signage-design
+      - vehicle-wrap-design
+      - newsletter-template
+      - invoice-template
+      - thumbnail-templates
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase collateral"
+      criteria: "Print specs corretas (CMYK, bleed, DPI). Digital responsivo. Brand application consistente."
+      threshold: 4.0
+
+  - id: phase-6-design-system
+    name: "Design System"
+    agent: brand-system-architect
+    depends_on: [phase-2-visual-identity, phase-4-asset-creation]
+    description: "Tokens 3 niveis, grid, componentes, dark mode, exportacao"
+    tasks:
+      - create-token-system
+      - define-grid-system
+      - create-components
+      - create-dark-mode
+      - export-tokens
+    outputs:
+      - token-system-3-tiers
+      - grid-system-specs
+      - component-library
+      - dark-mode-theme
+      - token-exports-css-json-tailwind
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase system"
+      criteria: "Tokens sem hardcoded values. Componentes com ARIA. Dark mode com contrast OK. Codigo implementavel."
+      threshold: 4.0
+
+  - id: phase-7-motion
+    name: "Motion & VFX"
+    agent: brand-motion-vfx
+    depends_on: [phase-6-design-system, phase-3-sonic-identity]
+    description: "Motion language, micro-interactions, page transitions, video templates, animation library"
+    tasks:
+      - define-motion-language
+      - create-micro-interactions
+      - create-page-transitions
+      - create-video-templates
+      - create-animation-library
+    outputs:
+      - motion-principles-document
+      - micro-interaction-specs
+      - page-transition-specs
+      - video-template-set
+      - animation-library-lottie-css-ae
+    gate:
+      validator: brand-auditor
+      command: "*validate-phase --phase motion"
+      criteria: "Motion alinhado com personalidade. 60fps. prefers-reduced-motion. Audio-visual sync."
+      threshold: 4.0
+
+  - id: phase-8-full-audit
+    name: "Full Brand Audit"
+    agent: brand-auditor
+    depends_on: [phase-4-asset-creation, phase-5-collateral, phase-6-design-system, phase-7-motion]
+    description: "Auditoria completa de todos os outputs — brand consistency score"
+    tasks:
+      - audit-brand-full
+      - calculate-brand-score
+      - generate-audit-report
+    outputs:
+      - full-audit-report
+      - brand-consistency-score
+      - correction-list-if-needed
+    gate:
+      self_validated: true
+      criteria: "Brand consistency score >= 85. Cada dimensao >= 70 individual."
+      threshold: 85
+      on_fail: "Retornar outputs para agentes responsaveis com lista de correcoes"
+
+  - id: phase-9-compilation
+    name: "Compilation & Delivery"
+    agent: brand-compiler
+    depends_on: [phase-8-full-audit]
+    description: "Brandbook, quick reference, delivery package, onboarding guide, governance"
+    tasks:
+      - compile-brandbook
+      - create-quick-reference
+      - assemble-delivery-package
+      - create-onboarding-guide
+      - create-governance-document
+    outputs:
+      - brandbook-pdf-web
+      - quick-reference-card
+      - delivery-package-complete
+      - onboarding-guide
+      - governance-document
+    final_delivery: true
+
+completion:
+  notification: "brand-orqx"
+  message: "Brand system completo. Delivery package pronto."
+  artifacts:
+    - brandbook (PDF + web)
+    - quick-reference (PDF)
+    - delivery-package (ZIP organizado)
+    - design-system (tokens + componentes + codigo)
+    - animation-library (Lottie + CSS + AE)
+    - sound-system (WAV + MP3 + specs)
+    - all-assets (SVG + PNG + mockups)

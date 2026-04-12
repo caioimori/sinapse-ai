@@ -1,0 +1,150 @@
+name: new-offer-launch
+version: "1.0"
+description: >
+  Workflow completo para lançamento de nova oferta — do design à ativação comercial.
+  Integra Mint (design), Edge (enablement), Cascade (demand gen), Vault (CRM), e Ledger (tracking).
+
+trigger: New service or offer package ready for market launch
+owner: commercial-orqx (Pipeline)
+estimated_duration: 4-6 weeks
+
+phases:
+  - id: offer-design
+    name: Offer Design & Packaging
+    agent: cs-offer-designer
+    tasks:
+      - apply-value-equation
+      - design-service-tiers
+      - develop-pricing-strategy
+      - design-guarantees
+    artifacts:
+      - offer-brief.md
+      - pricing-model.xlsx
+      - guarantee-framework.md
+    exit_criteria:
+      - Value equation score ≥ 7/10
+      - Three-tier pricing with clear differentiation
+      - At least one risk-reversal guarantee defined
+    duration: 1-2 weeks
+
+  - id: positioning
+    name: Positioning & Competitive
+    agent: cs-offer-designer
+    depends_on: [offer-design]
+    tasks:
+      - conduct-positioning-workshop
+      - map-competitive-landscape
+    artifacts:
+      - positioning-statement.md
+      - competitive-battlecards.md
+    exit_criteria:
+      - April Dunford 5-component positioning complete
+      - Competitive comparison matrix for top 5 alternatives
+    duration: 3-5 days
+
+  - id: sales-enablement
+    name: Sales Enablement Preparation
+    agent: cs-sales-enablement
+    depends_on: [positioning]
+    tasks:
+      - build-sales-playbook
+      - build-demo-scripts
+      - create-objection-library
+    artifacts:
+      - offer-playbook.md
+      - demo-script.md
+      - objection-responses.md
+    exit_criteria:
+      - Playbook covers full sales cycle for new offer
+      - Demo script customized to new offer value proposition
+      - Top 10 anticipated objections with responses
+    duration: 1 week
+
+  - id: funnel-activation
+    name: Funnel & Demand Generation Setup
+    agent: cs-funnel-architect
+    depends_on: [positioning]
+    parallel_with: [sales-enablement]
+    tasks:
+      - design-lead-magnets
+      - build-nurture-sequences
+      - map-content-to-funnel
+    artifacts:
+      - lead-magnet-brief.md
+      - nurture-sequence-config.md
+      - content-funnel-map.md
+    exit_criteria:
+      - At least 1 lead magnet designed for new offer
+      - Nurture sequence with ≥ 5 touchpoints
+      - Content mapped to TOFU/MOFU/BOFU for new offer
+    duration: 1 week
+
+  - id: crm-setup
+    name: CRM & Pipeline Configuration
+    agent: cs-crm-specialist
+    depends_on: [sales-enablement]
+    tasks:
+      - configure-pipeline-stages
+      - configure-activity-tracking
+    artifacts:
+      - crm-configuration-log.md
+    exit_criteria:
+      - Pipeline stages reflect new offer sales cycle
+      - Activity tracking configured for offer-specific metrics
+    duration: 2-3 days
+
+  - id: launch-activation
+    name: Launch & Team Activation
+    agent: cs-sales-enablement
+    depends_on: [crm-setup, funnel-activation]
+    tasks:
+      - review-proposals
+    artifacts:
+      - launch-readiness-checklist.md
+      - team-training-log.md
+    exit_criteria:
+      - Team trained on new offer (quiz pass rate 80%+)
+      - Proposal templates updated with new offer options
+      - First prospect list identified for outbound
+    duration: 3-5 days
+
+  - id: tracking-setup
+    name: Revenue Tracking Setup
+    agent: cs-revops-analyst
+    depends_on: [launch-activation]
+    tasks:
+      - create-revenue-dashboard
+      - monitor-saas-metrics
+    artifacts:
+      - offer-dashboard.md
+    exit_criteria:
+      - Dashboard tracking offer-specific pipeline and revenue
+      - 30/60/90 day targets defined
+    duration: 2-3 days
+
+quality_gates:
+  - name: Offer Quality Gate
+    phase: offer-design
+    criteria:
+      - Hormozi Value Equation applied and scored
+      - Three-options pricing structure validated
+      - Guarantee designed with clear boundaries
+  - name: Launch Readiness Gate
+    phase: launch-activation
+    criteria:
+      - All team members trained and certified
+      - CRM configured and tested
+      - At least 3 proposal templates ready
+      - Funnel assets live or scheduled
+
+cross_squad_dependencies:
+  - squad: squad-content
+    context: Content creation for lead magnets and nurture sequences
+  - squad: squad-copy
+    context: Copy for offer pages, email sequences, and proposals
+  - squad: squad-brand
+    context: Brand-aligned visual identity for new offer materials
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."

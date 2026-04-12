@@ -1,0 +1,210 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-finance v1.0
+# ══════════════════════════════════════════════════════════════════════════════
+# Squad especializada em inteligencia financeira para agencias e negocios
+# digitais. Cobre analise de rentabilidade, precificacao, forecasting,
+# unit economics, controle orcamentario e otimizacao de custos.
+# 5 agents | 45 tasks | 8 KBs | 4 workflows | 3 checklists | 4 templates
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-finance
+version: "1.0.0"
+description: >
+  Squad especializada em inteligencia financeira para agencias e negocios
+  digitais. Cobre analise de rentabilidade, precificacao, forecasting,
+  unit economics, controle orcamentario e otimizacao de custos. Produz
+  dashboards financeiros, modelos de pricing e reports executivos com
+  rigor analitico.
+author: Caio Imori
+license: UNLICENSED
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-16"
+  updated_at: "2026-03-16"
+  created_by: "squad-creator (Craft)"
+  agents_count: 5
+  tasks_count: 45
+  knowledge_bases_count: 8
+  workflows_count: 4
+  checklists_count: 3
+  templates_count: 4
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTES — 5 ESPECIALISTAS
+# ══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  - id: finance-orqx
+    name: Ledger
+    file: agents/finance-orqx.md
+    role: "Orquestrador financeiro — coordena analises, prioriza demandas, gera reports executivos"
+    tasks:
+      - orchestrate-financial-analysis
+      - generate-executive-dashboard
+      - triage-financial-alerts
+      - coordinate-quarterly-review
+      - manage-financial-calendar
+
+  - id: profitability-analyst
+    name: Margin
+    file: agents/profitability-analyst.md
+    role: "Analista de rentabilidade — P&L por projeto/cliente, cost-per-delivery, margens, unit economics"
+    tasks:
+      - calculate-project-profitability
+      - analyze-client-profitability
+      - calculate-cost-per-delivery
+      - analyze-unit-economics
+      - track-budget-vs-actual
+      - prepare-financial-operations-report
+      - calculate-team-cost-efficiency
+      - analyze-revenue-per-employee
+      - benchmark-profitability-metrics
+      - run-monthly-p-and-l
+
+  - id: pricing-strategist
+    name: Mint
+    file: agents/pricing-strategist.md
+    role: "Estrategista de precificacao — modelos de pricing, service tiers, value-based pricing, rate cards"
+    tasks:
+      - model-pricing-scenario
+      - design-service-tiers
+      - calculate-rate-card
+      - analyze-price-sensitivity
+      - design-value-based-pricing
+      - benchmark-competitor-pricing
+      - simulate-pricing-impact
+      - create-proposal-pricing
+      - optimize-rate-realization
+      - track-pricing-performance
+
+  - id: budget-controller
+    name: Vault
+    file: agents/budget-controller.md
+    role: "Controlador orcamentario — forecasting, budget tracking, cost optimization, vendor management"
+    tasks:
+      - forecast-revenue-pipeline
+      - track-monthly-budget
+      - analyze-budget-variance
+      - optimize-vendor-costs
+      - create-annual-budget
+      - run-quarterly-financial-review
+      - forecast-cash-flow
+      - manage-cost-centers
+      - analyze-spending-patterns
+      - generate-budget-pacing-report
+
+  - id: revenue-analyst
+    name: Flow
+    file: agents/revenue-analyst.md
+    role: "Analista de receita — revenue recognition, invoicing reconciliation, collection optimization"
+    tasks:
+      - reconcile-invoicing
+      - analyze-revenue-waterfall
+      - track-accounts-receivable
+      - optimize-collection-process
+      - analyze-revenue-concentration
+      - forecast-revenue-by-client
+      - generate-revenue-report
+      - track-recurring-revenue
+      - analyze-payment-patterns
+      - manage-revenue-recognition
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 7 BASES
+# ══════════════════════════════════════════════════════════════════════════════
+
+knowledge_bases:
+  - name: agency-financial-models
+    file: knowledge-base/agency-financial-models.md
+    description: "P&L para agencias digitais, cost-per-delivery, utilizacao, overhead allocation"
+  - name: pricing-strategy-frameworks
+    file: knowledge-base/pricing-strategy-frameworks.md
+    description: "Hormozi Value Equation, Van Westendorp, tier architecture, rate cards"
+  - name: unit-economics-reference
+    file: knowledge-base/unit-economics-reference.md
+    description: "CAC, LTV, Magic Number, NRR, GRR, Quick Ratio, Payback Period"
+  - name: budget-forecasting-methods
+    file: knowledge-base/budget-forecasting-methods.md
+    description: "Rolling forecast, zero-based budgeting, variance analysis, budget pacing"
+  - name: revenue-recognition-guide
+    file: knowledge-base/revenue-recognition-guide.md
+    description: "Revenue recognition para servicos, milestone-based, retainers, projetos"
+  - name: financial-metrics-benchmarks
+    file: knowledge-base/financial-metrics-benchmarks.md
+    description: "Benchmarks para agencias: gross margin, EBITDA, utilizacao, effective rate"
+  - name: cost-optimization-playbook
+    file: knowledge-base/cost-optimization-playbook.md
+    description: "Vendor negotiation, tool stack optimization, freelancer vs FTE, overhead reduction"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 4 CICLOS
+# ══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  - name: monthly-financial-cycle
+    file: workflows/monthly-financial-cycle.yaml
+    description: "Ciclo mensal — coleta, P&L, budget review, pricing review, report executivo"
+  - name: pricing-design-cycle
+    file: workflows/pricing-design-cycle.yaml
+    description: "Ciclo de design de pricing — market analysis, cost modeling, tier design, validacao"
+  - name: quarterly-financial-review
+    file: workflows/quarterly-financial-review.yaml
+    description: "Review trimestral — revenue, profitability, budget, forecast, pricing, board report"
+  - name: client-profitability-audit
+    file: workflows/client-profitability-audit.yaml
+    description: "Auditoria de rentabilidade por cliente — revenue, custos, scoring, recomendacoes"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHECKLISTS — 3
+# ══════════════════════════════════════════════════════════════════════════════
+
+checklists:
+  - name: monthly-close-checklist
+    file: checklists/monthly-close-checklist.md
+  - name: pricing-design-checklist
+    file: checklists/pricing-design-checklist.md
+  - name: quarterly-review-checklist
+    file: checklists/quarterly-review-checklist.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES — 4
+# ══════════════════════════════════════════════════════════════════════════════
+
+templates:
+  - name: monthly-p-and-l-template
+    file: templates/monthly-p-and-l-template.md
+  - name: pricing-proposal-template
+    file: templates/pricing-proposal-template.md
+  - name: client-profitability-report-template
+    file: templates/client-profitability-report-template.md
+  - name: financial-dashboard-template
+    file: templates/financial-dashboard-template.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  inbound:
+    - squad-commercial: "Dados de vendas, propostas fechadas, pipeline comercial"
+    - squad-growth: "Metricas de growth, CAC, conversion rates, funnel data"
+    - squad-commercial: "Dados operacionais, timesheets, utilizacao de equipe"
+    - squad-product: "Custos de desenvolvimento, estimativas de esforco"
+  outbound:
+    - squad-commercial: "Rate cards, pricing tiers, margens por servico para propostas"
+    - squad-growth: "Unit economics, LTV/CAC, ROI por canal para otimizacao"
+    - squad-commercial: "Budget targets, cost centers, vendor budgets"
+    - squad-brand: "Investimento em marca, ROI de branding"
+
+tags:
+  - financial-intelligence
+  - profitability
+  - pricing
+  - budgeting
+  - forecasting
+  - unit-economics
+  - revenue
+  - cost-optimization
+  - agency-finance
+  - p-and-l

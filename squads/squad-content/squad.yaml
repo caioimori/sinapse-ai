@@ -1,0 +1,578 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-content v2.0
+# ══════════════════════════════════════════════════════════════════════════════
+# The world-class content intelligence squad for detecting signals, planning
+# editorially, structuring narratives, producing content at scale, adapting
+# natively per platform, auditing quality, and measuring performance.
+# 7 agents | 90 tasks | 6 workflows | 32 KBs | 7 templates | Full coverage
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-content
+version: 2.0.0
+description: >
+  Squad de classe mundial para inteligencia de conteudo: deteccao de sinais em
+  tempo real, planejamento editorial estrategico, producao de conteudo em escala
+  com Espinha Dorsal (tese-mecanismo-prova-direcao), adaptacao nativa por
+  plataforma com Template Contract System, auditoria de qualidade, medicao de
+  performance e retroalimentacao sistemica. 7 agentes especialistas cobrindo
+  100% do pipeline content ops world-class. Parametrizavel para qualquer cliente,
+  qualquer plataforma, qualquer idioma. Atemporal e reutilizavel.
+author: Caio Imori
+license: UNLICENSED
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-13"
+  updated_at: "2026-04-12"
+  created_by: "squad-creator (Craft)"
+  last_upgraded_by: "Story fw-v2.4 (squad-content v2.0 upgrade) via @sinapse-orqx Imperator"
+  quality_target: "5.0/5.0 em todas as dimensoes"
+  agents_count: 7
+  tasks_count: 90
+  knowledge_bases_count: 32
+  checklists_count: 3
+  templates_count: 7
+  workflows_count: 6
+  total_files: 146
+
+# ══════════════════════════════════════════════════════════════════════════════
+# QUALITY STANDARDS — Regras de Robustez (v1.0)
+# ══════════════════════════════════════════════════════════════════════════════
+
+quality_standards:
+  robustness:
+    min_agents: 6
+    min_tasks: 50
+    min_workflows: 3
+    min_knowledge_bases: 8
+    min_checklists: 2
+    min_templates: 3
+    world_class_references: required
+    gap_audit: required
+    preference_tracking: required
+
+  references:
+    authors:
+      # Content Strategy
+      - "Joe Pulizzi — Content Inc. 6-Step Model, Tilt, audience-first strategy"
+      - "Kristina Halvorson — Content Strategy Quad (Substance, Structure, Workflow, Governance)"
+      - "Robert Rose — Content Marketing Operating Model, Intelligent Content"
+      - "Ann Handley — Writing GPS 17 steps, Everybody Writes, craft de producao"
+      - "Margot Bloomstein — Message Architecture Framework, card sorting de atributos"
+      # Narrative & Story
+      - "Donald Miller — StoryBrand SB7 Framework, customer-as-hero"
+      - "Joseph Campbell — Hero's Journey, Monomyth, estrutura narrativa universal"
+      - "Chip & Dan Heath — Made to Stick SUCCESs Framework (Simple, Unexpected, Concrete, Credible, Emotional, Stories)"
+      # Viral & Sharing
+      - "Jonah Berger — Contagious STEPPS (Social Currency, Triggers, Emotion, Public, Practical Value, Stories)"
+      - "Brendan Kane — Hook Point, 3-second rule, pattern interrupt"
+      # Platform & Social
+      - "Gary Vaynerchuk — Jab Jab Right Hook, context over content, platform-native"
+      - "Andy Crestodina — Content Chemistry, Conversion Science, data-driven content"
+      # SEO & Discovery
+      - "Rand Fishkin — SparkToro, audience research, zero-click content"
+      # Content Ops & Governance
+      - "Sara Wachter-Boettcher — Structured Content Methodology, content modeling"
+      # Trust & Credibility
+      - "Rachel Botsman — Distributed Trust Framework, credibilidade digital"
+      # Information Architecture
+      - "Rosenfeld & Morville — Information Architecture (Polar Bear Book), taxonomia, findability"
+      # Creator Economy & Audience
+      - "Amanda Natividad — Audience research, zero-click content, SparkToro methodology"
+      - "Jay Acunzo — Break the Wheel, unfinished ideas, resonance over reach"
+      - "Nicolas Cole — Art and Business of Online Writing, digital writing frameworks"
+      # Persuasion (overlap com copywriting)
+      - "Eugene Schwartz — Breakthrough Advertising, 5 awareness levels"
+      - "Robert Cialdini — Influence, 7 principles of persuasion"
+      # Newsletter & Audio
+      - "Ann Friedman — Newsletter economics, audience building"
+      - "Eric Nuzum — Make Noise, podcast narrative structure"
+      # AI Content
+      - "Jimmy Daly — Superpath, content ops + AI integration"
+    agencies:
+      - "Content Marketing Institute — 5-Stage Maturity Model"
+      - "HubSpot — Pillar-Cluster Model, Topic Authority"
+      - "BuzzSumo — Evergreen Score, Content Characteristics Analysis"
+      - "Semrush — SEO Writing Assistant, Topical Authority"
+      - "MarketMuse — Topic Cluster Mapping, Content Gap Analysis"
+      - "Contently — Expert-in-the-loop signal detection, micro-trend AI"
+      - "Valona Intelligence — AI signal detection + human curation"
+      - "Morning Brew — Newsletter empire, audience-first content"
+      - "The Hustle — Content-to-acquisition pipeline"
+      - "Animalz — Long-form B2B content, content moat strategy"
+      - "Superpath — Content ops community, AI integration"
+      - "Demand Curve — Growth + content integration"
+      - "Stacked Marketer — Daily curation + monetization"
+      - "Google — E-E-A-T Framework (Experience, Expertise, Authoritativeness, Trustworthiness)"
+      - "Parse.ly — Content analytics, audience insights"
+
+  learning:
+    preference_tracking: true
+    preference_log_path: "preferences/"
+    update_trigger: "after each content approval cycle"
+    update_agent: "content-governor (Index)"
+
+  task_complexity_levels:
+    simple: "Tasks diretas, 1 agente, output unico (ex: write-instagram-caption)"
+    medium: "Tasks com co-agents, multiplos steps (ex: create-editorial-calendar)"
+    complex: "Tasks com pesquisa, multiplos outputs, decisoes estrategicas (ex: define-big-idea)"
+    critical: "Tasks que definem arquitetura editorial ou motor de conteudo (ex: design-content-spine)"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CORE CONCEPTS — Espinha Dorsal & Template Contract System
+# ══════════════════════════════════════════════════════════════════════════════
+
+core_concepts:
+  content_spine_engine:
+    description: >
+      Motor central de producao: todo conteudo (qualquer formato, qualquer plataforma)
+      parte da mesma Espinha Dorsal — TESE (o que defende), MECANISMO (como funciona),
+      PROVA (evidencia), DIRECAO (proximo passo). A Espinha Dorsal e format-agnostic:
+      mesma espinha → carrossel, thread, reel, blog, newsletter.
+    agent: "content-engineer (Arc)"
+    knowledge_base: "content-spine-engine.md"
+
+  template_contract_system:
+    description: >
+      Sistema de contratos tecnicos por plataforma x formato x template. Cada contrato
+      define: numero de blocos/slides, numero de campos textuais, limites de caracteres
+      por campo (min/max), regras de formatacao, specs tecnicas. Contratos sao inviolaveis
+      — AI DEVE respeitar limites. Versionados para acompanhar mudancas de plataforma.
+    agents: ["content-engineer (Arc)", "platform-specialist (Morph)", "content-governor (Index)"]
+    knowledge_base: "template-contract-system.md"
+    template: "template-contract-registry-template.md"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTES — 7 ESPECIALISTAS
+# ══════════════════════════════════════════════════════════════════════════════
+
+components:
+  agents:
+    - content-orqx.md      # Nexus — Conductor (5 tasks)
+    - signal-intelligence.md       # Radar — Scout (9 tasks)
+    - editorial-strategist.md      # North — Navigator (10 tasks)
+    - content-engineer.md          # Arc — Engineer (25 tasks)
+    - platform-specialist.md       # Morph — Shapeshifter (15 tasks)
+    - content-governor.md          # Index — Librarian (10 tasks)
+    - content-analyst.md           # Lens — Analyst (11 tasks)
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASKS — 90 TOTAL
+# ══════════════════════════════════════════════════════════════════════════════
+
+  tasks:
+    # ── Orchestrator (Nexus) — 5 tasks ──
+    - orchestrate-content-pipeline.md
+    - manage-content-sprint.md
+    - coordinate-cross-squad.md
+    - triage-content-requests.md
+    - triage-urgent-signal.md
+
+    # ── Signal Intelligence (Radar) — 10 tasks ──
+    - scan-daily-signals.md
+    - detect-trending-topics.md
+    - map-cultural-signals.md
+    - curate-weekly-briefing.md
+    - monitor-competitor-content.md
+    - alert-opportunity-windows.md
+    - classify-signal-temperature.md
+    - map-signal-to-pillar.md
+    - configure-signal-sources.md
+    - curate-ugc-signals.md
+
+    # ── Editorial Strategist (North) — 10 tasks ──
+    - define-big-idea.md
+    - define-editorial-pillars.md
+    - create-editorial-calendar.md
+    - plan-content-sprint.md
+    - align-content-to-funnel.md
+    - map-content-gaps.md
+    - plan-seasonal-content.md
+    - prioritize-themes.md
+    - balance-content-mix.md
+    - define-content-kpis.md
+
+    # ── Content Engineer (Arc) — 25 tasks ──
+    # Structure mode
+    - design-content-spine.md
+    - design-narrative-arc.md
+    - structure-carousel-progression.md
+    - structure-video-script.md
+    - design-content-series.md
+    - apply-storybrand-framework.md
+    - design-pillar-cluster-model.md
+    - create-content-brief.md
+    - design-hook-system.md
+    - structure-argument-progression.md
+    - define-content-depth-levels.md
+    # Write mode
+    - write-carousel-content.md
+    - write-instagram-caption.md
+    - write-linkedin-post.md
+    - write-blog-article.md
+    - write-video-script.md
+    - write-reel-script.md
+    - write-newsletter-editorial.md
+    - write-thread-content.md
+    - write-opinion-post.md
+    - write-case-study.md
+    - write-educational-content.md
+    - write-product-content.md
+    # Verification mode
+    - verify-algorithmic-hooks.md
+    # Batch mode
+    - batch-content-production.md
+
+    # ── Platform Specialist (Morph) — 17 tasks ──
+    - adapt-for-instagram-feed.md
+    - adapt-for-instagram-stories.md
+    - adapt-for-instagram-reels.md
+    - adapt-for-linkedin.md
+    - adapt-for-blog-seo.md
+    - adapt-for-tiktok.md
+    - adapt-for-twitter-threads.md
+    - define-posting-schedule.md
+    - create-platform-guidelines.md
+    - optimize-for-algorithm.md
+    - design-content-atomization.md
+    - register-template-contract.md
+    - update-template-specs.md
+    - adapt-content-language.md
+    - batch-platform-adaptation.md
+    - flag-content-for-amplification.md
+    - integrate-brand-visual-assets.md
+
+    # ── Content Governor (Index) — 12 tasks ──
+    - audit-content-library.md
+    - check-brand-consistency.md
+    - validate-content-quality.md
+    - manage-content-taxonomy.md
+    - organize-content-archive.md
+    - create-content-governance.md
+    - define-content-standards.md
+    - audit-template-compliance.md
+    - validate-content-compliance.md
+    - process-content-rejection.md
+    - import-existing-content-library.md
+    - update-content-preferences.md
+
+    # ── Content Analyst (Lens) — 11 tasks ──
+    - analyze-content-performance.md
+    - score-content-quality.md
+    - measure-content-roi.md
+    - track-engagement-patterns.md
+    - benchmark-against-competitors.md
+    - evaluate-eeat-compliance.md
+    - generate-content-report.md
+    - identify-top-performers.md
+    - predict-content-performance.md
+    - analyze-audience-behavior.md
+    - generate-retrofeed-insights.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 6 CICLOS
+# ══════════════════════════════════════════════════════════════════════════════
+
+  workflows:
+    - signal-to-content-cycle.yaml       # Ciclo completo: sinal → conteudo → analise
+    - editorial-planning-cycle.yaml      # Planejamento editorial periodico
+    - content-creation-cycle.yaml        # Criacao: brief → producao → QA → publicacao
+    - content-audit-cycle.yaml           # Auditoria de qualidade e performance
+    - performance-feedback-loop.yaml     # Retroalimentacao sistemica Lens → Radar/North/Arc
+    - onboarding-content-cycle.yaml      # Setup de cliente novo: Big Idea → primeiro sprint
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 32 BASES (reconciled to disk 2026-04-12, v2.0.0)
+# ══════════════════════════════════════════════════════════════════════════════
+
+  knowledge_bases:
+    # Canon playbooks (v2 — story fw-v2.4)
+    - ai-native-content-loop.md              # Canon 6-phase loop: signal→ai draft→human edit→adapt→measure→retrofeed
+    - task-ownership-map.md                  # 90-task ownership matrix, imbalance audit, routing reference
+    - signal-intelligence-v2.md              # 2026 source landscape, classification taxonomy, routing, quality scoring
+
+    # Strategy & Planning
+    - content-strategy-master-reference.md   # Master content strategy reference
+    - editorial-strategy-frameworks.md       # Editorial strategy frameworks (Pulizzi, Halvorson, Rose, CMI, HubSpot)
+    - content-architecture-taxonomy.md       # Taxonomy, topic clusters, Rosenfeld & Morville
+    - content-spine-engine.md                # Motor central: tese-mecanismo-prova-direcao
+    - content-governance-principles.md       # Governanca, RACI, lifecycle, style guide
+
+    # Narrative & Writing
+    - narrative-structures-library.md        # Campbell, Miller SB7, Heath SUCCESs, Hook Systems
+    - hook-formulas-library.md               # Hook Point, pattern interrupts, attention capture formulas
+    - copywriting-formulas-library.md        # Persuasion formulas shared with squad-copy
+    - strategic-content-authority.md         # Processo visivel como ativo de autoridade
+    - ai-leverage-content-framework.md       # Transformar updates de IA em consequencia empresarial
+    - social-compression-framework.md        # Compressao de tese densa sem perder substancia
+
+    # Platform & Distribution
+    - platform-algorithm-intelligence.md     # Algoritmo por plataforma, versionado
+    - social-algorithms-master-reference.md  # Master reference for social algorithms
+    - template-contract-system.md            # Contratos tecnicos por plataforma x formato
+    - content-repurposing-playbook.md        # Atomizacao + matrizes de transformacao
+    - content-formats-encyclopedia.md        # Encyclopedia of content formats per platform
+    - email-newsletter-strategy.md           # Newsletter economics + lifecycle
+    - video-audio-content-playbook.md        # Video/audio content playbook
+
+    # Quality & Measurement
+    - content-quality-criteria.md            # Quality criteria for E-E-A-T, voice, narrative
+    - content-measurement-framework.md       # Measurement framework, KPIs, attribution
+    - viral-potential-scoring.md             # SPV unificado pre/pos, STEPPS, Hook Point
+
+    # Intelligence & Architecture
+    - signal-detection-methods.md            # v1 — foundational signal definitions (UNTOUCHED in v2)
+    - competitor-analysis-methods.md         # Competitor content analysis methods
+    - seo-content-deep.md                    # Deep SEO content strategies
+    - content-references-bibliography.md     # Bibliography of world-class references
+
+    # AI & Production
+    - ai-content-production.md               # AI-assisted creation, prompt engineering, governance
+    - content-tech-stack.md                  # Content ops tech stack
+
+    # Context & Routing
+    - brazilian-content-context.md           # pt-BR cultural + linguistic context
+    - cross-squad-integration-protocol.md    # Cross-squad handoff protocol
+    - routing-catalog.md                     # Intra-squad routing catalog
+
+  checklists:
+    - content-quality-checklist.md       # QA pre-publicacao: voice, narrative, E-E-A-T, platform
+    - editorial-planning-checklist.md    # Validacao de planejamento: pilares, funil, mix, KPIs
+    - content-audit-checklist.md         # Auditoria de acervo: performance, relevancia, gaps
+
+  templates:
+    - content-brief-template.md          # Brief para qualquer producao
+    - editorial-calendar-template.md     # Calendario editorial (semanal/mensal)
+    - weekly-signal-briefing-template.md # Briefing semanal de sinais
+    - content-performance-report-template.md  # Relatorio de performance
+    - template-contract-registry-template.md  # Registro de Template Contract
+    - content-spine-template.md          # Template da Espinha Dorsal
+    - preference-log-template.md         # Auto-learning por projeto
+
+  preferences:
+    - README.md                          # Diretorio de preference logs por projeto
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURACAO
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  external_apis:
+    - "BuzzSumo API — trend detection, evergreen scoring"
+    - "Google Trends API — trending topics, interest over time"
+    - "Semrush API — SEO analysis, topical authority"
+    - "SparkToro API — audience research, content discovery"
+    - "Parse.ly API — content analytics, audience insights"
+    - "Social APIs (Instagram, LinkedIn, TikTok, Twitter) — publishing, analytics"
+    - "Figma MCP — template design, visual asset integration"
+    - "OpenAI/Claude API — AI-assisted content production"
+
+tags:
+  - content-intelligence
+  - content-strategy
+  - editorial-planning
+  - signal-detection
+  - content-production
+  - platform-native
+  - template-contracts
+  - espinha-dorsal
+  - content-spine
+  - narrative-architecture
+  - seo
+  - eeat
+  - viral-scoring
+  - content-atomization
+  - repurposing
+  - editorial-governance
+  - content-analytics
+  - performance-measurement
+  - auto-learning
+  - preference-tracking
+  - multi-platform
+  - multi-language
+  - ugc
+  - ai-content
+  - world-class
+  - atemporal
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS — 10 INTERCONNECTIONS
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  outbound:
+    - squad-brand: "Content performance data para refinamento de voz e brand guidelines"
+    - squad-research: "Sinais que precisam de deep research, trends para investigacao"
+    - squad-copy: "Conteudo que precisa de otimizacao de conversao, CTAs avancados"
+    - squad-design: "Blog posts otimizados, conteudo para websites e landing pages"
+    - squad-growth: "Performance organica, conteudo SEO, dados de engagement"
+    - squad-commercial: "Case studies, conteudo por estagio de funil, nurture content"
+  inbound:
+    - squad-brand: "Tom de voz, visual guidelines, illustration system, templates visuais, brand story, creator toolkit"
+    - squad-research: "Audience insights, competitive intel, market models, deep research"
+    - squad-copy: "Tecnicas de persuasao, frameworks de copy, awareness levels"
+    - squad-growth: "SEO keywords, pillar-cluster data, search intent mapping"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENT TASK OWNERSHIP — v2.0 backfill (source of truth: task-ownership-map.md KB)
+# ══════════════════════════════════════════════════════════════════════════════
+# This block makes task ownership deterministic. Every task has exactly one
+# primary agent. See task-ownership-map.md for secondary mappings and rationale.
+# Added in v2.0 (Story fw-v2.4) — AC2 of the rebalance story.
+# ══════════════════════════════════════════════════════════════════════════════
+
+agent_task_ownership:
+  content-orqx:
+    primary_count: 5
+    phase_coverage: "cross-phase (coordinator)"
+    tasks:
+      - orchestrate-content-pipeline.md
+      - manage-content-sprint.md
+      - coordinate-cross-squad.md
+      - triage-content-requests.md
+      - triage-urgent-signal.md
+  signal-intelligence:
+    primary_count: 10
+    phase_coverage: "phase 1 (signal)"
+    tasks:
+      - scan-daily-signals.md
+      - detect-trending-topics.md
+      - map-cultural-signals.md
+      - curate-weekly-briefing.md
+      - monitor-competitor-content.md
+      - alert-opportunity-windows.md
+      - classify-signal-temperature.md
+      - map-signal-to-pillar.md
+      - configure-signal-sources.md
+      - curate-ugc-signals.md
+  editorial-strategist:
+    primary_count: 10
+    phase_coverage: "pre-phase-1 + phase 6"
+    tasks:
+      - define-big-idea.md
+      - define-editorial-pillars.md
+      - create-editorial-calendar.md
+      - plan-content-sprint.md
+      - align-content-to-funnel.md
+      - map-content-gaps.md
+      - plan-seasonal-content.md
+      - prioritize-themes.md
+      - balance-content-mix.md
+      - define-content-kpis.md
+  content-engineer:
+    primary_count: 25
+    phase_coverage: "phase 2 (ai draft)"
+    load_status: "OVER-LOADED — documented, split candidate for future story"
+    tasks:
+      - design-content-spine.md
+      - design-narrative-arc.md
+      - structure-carousel-progression.md
+      - structure-video-script.md
+      - design-content-series.md
+      - apply-storybrand-framework.md
+      - design-pillar-cluster-model.md
+      - create-content-brief.md
+      - design-hook-system.md
+      - structure-argument-progression.md
+      - define-content-depth-levels.md
+      - write-carousel-content.md
+      - write-instagram-caption.md
+      - write-linkedin-post.md
+      - write-blog-article.md
+      - write-video-script.md
+      - write-reel-script.md
+      - write-newsletter-editorial.md
+      - write-thread-content.md
+      - write-opinion-post.md
+      - write-case-study.md
+      - write-educational-content.md
+      - write-product-content.md
+      - verify-algorithmic-hooks.md
+      - batch-content-production.md
+  platform-specialist:
+    primary_count: 17
+    phase_coverage: "phase 4 (platform adapt)"
+    tasks:
+      - adapt-for-instagram-feed.md
+      - adapt-for-instagram-stories.md
+      - adapt-for-instagram-reels.md
+      - adapt-for-linkedin.md
+      - adapt-for-blog-seo.md
+      - adapt-for-tiktok.md
+      - adapt-for-twitter-threads.md
+      - define-posting-schedule.md
+      - create-platform-guidelines.md
+      - optimize-for-algorithm.md
+      - design-content-atomization.md
+      - register-template-contract.md
+      - update-template-specs.md
+      - adapt-content-language.md
+      - batch-platform-adaptation.md
+      - flag-content-for-amplification.md
+      - integrate-brand-visual-assets.md
+  content-governor:
+    primary_count: 12
+    phase_coverage: "phase 3 (human edit) + phase 6 (governance)"
+    tasks:
+      - audit-content-library.md
+      - check-brand-consistency.md
+      - validate-content-quality.md
+      - manage-content-taxonomy.md
+      - organize-content-archive.md
+      - create-content-governance.md
+      - define-content-standards.md
+      - audit-template-compliance.md
+      - validate-content-compliance.md
+      - process-content-rejection.md
+      - import-existing-content-library.md
+      - update-content-preferences.md
+  content-analyst:
+    primary_count: 11
+    phase_coverage: "phase 5 (measure) + phase 6 (retrofeed)"
+    tasks:
+      - analyze-content-performance.md
+      - score-content-quality.md
+      - measure-content-roi.md
+      - track-engagement-patterns.md
+      - benchmark-against-competitors.md
+      - evaluate-eeat-compliance.md
+      - generate-content-report.md
+      - identify-top-performers.md
+      - predict-content-performance.md
+      - analyze-audience-behavior.md
+      - generate-retrofeed-insights.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHANGELOG
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# v2.0.0 (2026-04-12) — Content Loop Canon + Task Ownership + Signal v2
+#   Story: fw-v2.4 (squad-content agent rebalance + AI-native loop)
+#   Epic: EPIC-framework-upgrade-v2
+#   Changes:
+#     - NEW KB: ai-native-content-loop.md — canon 6-phase loop playbook
+#     - NEW KB: task-ownership-map.md — 90-task ownership matrix with imbalance audit
+#     - NEW KB: signal-intelligence-v2.md — 2026 source landscape, classification, quality scoring
+#     - YAML reconciled to disk reality: knowledge_bases_count 16 → 32 (16 prior undeclared)
+#     - YAML gained agent_task_ownership block (authoritative primary mapping)
+#     - total_files 130 → 146
+#     - Zero edits to the 7 agent persona files (AC5 respected)
+#     - Zero edits to signal-detection-methods.md v1 (v2 is additive companion)
+#   Imbalance audit logged: content-engineer over-loaded (25 primaries) — split candidate for future story
+#
+# v1.0.0 (2026-03-13) — Initial Release
+#   Squad criada com 3 rodadas de provocacao + micro-rodada cirurgica
+#   7 agentes, 90 tasks, 6 workflows, 14 KBs, 3 checklists, 7 templates
+#   25 autores de referencia mundial, 15 empresas de referencia
+#   Core concepts: Espinha Dorsal Engine + Template Contract System
+#   Parametrizavel para qualquer cliente/plataforma/idioma
+#   Auto-learning com preference tracking
+#   Cross-squad connections: 6 outbound, 4 inbound
+#   Total: 128 arquivos

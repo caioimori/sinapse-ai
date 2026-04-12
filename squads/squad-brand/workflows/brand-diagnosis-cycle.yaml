@@ -1,0 +1,161 @@
+# Brand Diagnosis Cycle
+# Workflow para diagnosticar marcas existentes e recomendar melhorias
+# Analise completa de consistencia, gaps e oportunidades
+
+name: brand-diagnosis-cycle
+version: "1.0"
+description: >
+  Ciclo de diagnostico para marcas existentes. Analisa todos os aspectos
+  da marca (estrategia, visual, verbal, aplicacoes, sistema) e gera
+  report com score, gaps identificados e plano de acao.
+  Pode resultar em rebranding parcial ou total.
+
+trigger:
+  command: "*diagnose-brand"
+  agent: brand-orqx
+  prerequisite: "Acesso a materiais existentes da marca"
+
+input:
+  required:
+    - brand-name
+    - existing-materials-path
+  optional:
+    - competitors-list
+    - pain-points
+    - goals
+
+phases:
+  - id: material-collection
+    name: "Material Collection & Inventory"
+    agent: brand-orqx
+    description: "Coletar e inventariar todos os materiais existentes da marca"
+    tasks:
+      - inventory-existing-materials
+      - categorize-assets
+      - identify-documented-guidelines
+    outputs:
+      - material-inventory
+      - asset-catalog
+      - existing-guidelines-summary
+
+  - id: strategic-diagnosis
+    name: "Strategic Diagnosis"
+    agent: brand-strategist
+    depends_on: [material-collection]
+    description: "Analisar posicionamento, diferenciacao e coerencia estrategica"
+    tasks:
+      - analyze-current-positioning
+      - evaluate-competitive-differentiation
+      - assess-brand-architecture
+      - evaluate-messaging-consistency
+    outputs:
+      - strategic-diagnosis-report
+      - positioning-gap-analysis
+      - competitive-landscape
+
+  - id: visual-diagnosis
+    name: "Visual Identity Diagnosis"
+    agent: brand-identity-designer
+    depends_on: [material-collection]
+    description: "Analisar identidade visual: consistencia, qualidade, contemporaneidade"
+    tasks:
+      - audit-color-usage
+      - audit-typography-usage
+      - audit-logo-usage
+      - evaluate-visual-consistency
+      - assess-accessibility-compliance
+    outputs:
+      - visual-diagnosis-report
+      - color-inconsistencies
+      - typography-issues
+      - logo-misuse-examples
+      - accessibility-failures
+
+  - id: application-diagnosis
+    name: "Application & Touchpoint Diagnosis"
+    agent: brand-auditor
+    depends_on: [visual-diagnosis]
+    description: "Auditar todas as aplicacoes e touchpoints existentes"
+    tasks:
+      - audit-digital-touchpoints
+      - audit-print-materials
+      - audit-environmental-branding
+      - audit-cross-channel-consistency
+    outputs:
+      - touchpoint-audit-report
+      - cross-channel-consistency-score
+      - worst-offenders-list
+
+  - id: system-diagnosis
+    name: "System & Technical Diagnosis"
+    agent: brand-system-architect
+    depends_on: [material-collection]
+    description: "Avaliar existencia e qualidade de design system"
+    tasks:
+      - assess-token-system
+      - assess-component-library
+      - assess-documentation-quality
+      - evaluate-developer-handoff
+    outputs:
+      - system-diagnosis-report
+      - technical-debt-assessment
+      - documentation-gaps
+
+  - id: scoring-synthesis
+    name: "Scoring & Synthesis"
+    agent: brand-auditor
+    depends_on: [strategic-diagnosis, visual-diagnosis, application-diagnosis, system-diagnosis]
+    description: "Sintetizar todos os diagnosticos em score unificado"
+    tasks:
+      - calculate-brand-health-score
+      - prioritize-issues
+      - generate-recommendations
+    outputs:
+      - brand-health-score
+      - prioritized-issue-list
+      - recommendation-matrix
+    scoring:
+      dimensions:
+        - strategic-alignment (25%)
+        - visual-consistency (30%)
+        - application-quality (20%)
+        - system-maturity (15%)
+        - documentation (10%)
+      scale: 0-100
+      thresholds:
+        healthy: ">= 85"
+        needs-attention: "70-84"
+        needs-intervention: "50-69"
+        critical: "< 50"
+
+  - id: action-plan
+    name: "Action Plan & Report"
+    agent: brand-compiler
+    depends_on: [scoring-synthesis]
+    description: "Compilar diagnostico completo com plano de acao"
+    tasks:
+      - compile-diagnosis-report
+      - create-action-plan
+      - estimate-effort
+    outputs:
+      - brand-diagnosis-report-pdf
+      - action-plan-prioritized
+      - effort-estimation
+    report_structure:
+      - executive-summary
+      - brand-health-score-dashboard
+      - strategic-diagnosis-detail
+      - visual-diagnosis-detail
+      - application-audit-detail
+      - system-assessment-detail
+      - prioritized-recommendations
+      - action-plan-phases
+      - effort-and-timeline-estimate
+
+completion:
+  notification: "brand-orqx"
+  message: "Diagnostico de marca completo. Report e plano de acao prontos."
+  next_steps:
+    high_score: "Ajustes pontuais via brand-application-cycle"
+    medium_score: "Refresh parcial (fases selecionadas do zero-to-brand-system-cycle)"
+    low_score: "Rebranding completo via zero-to-brand-system-cycle"

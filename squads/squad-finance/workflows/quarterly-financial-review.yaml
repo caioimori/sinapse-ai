@@ -1,0 +1,113 @@
+name: quarterly-financial-review
+version: "1.0"
+description: "Review financeiro trimestral completo — 6 fases de analise profunda e board report"
+trigger: "Fechamento do trimestre"
+cadence: quarterly
+agents_involved:
+  - revenue-analyst
+  - profitability-analyst
+  - budget-controller
+  - pricing-strategist
+  - finance-orqx
+
+phases:
+  - name: "Phase 1: Revenue Analysis"
+    agent: revenue-analyst
+    tasks:
+      - analyze-revenue-waterfall
+      - analyze-revenue-concentration
+      - track-recurring-revenue
+      - forecast-revenue-by-client
+    output: "quarterly-revenue-analysis-{quarter}.md"
+    quality_gate: "Revenue waterfall completo, concentration risk avaliado, MRR/ARR trending"
+    notes: |
+      Flow analisa receita do trimestre em profundidade:
+      - Revenue waterfall end-to-end
+      - Concentracao de receita por cliente
+      - MRR/ARR decomposicao e tendencia
+      - Forecast por cliente para proximo trimestre
+
+  - name: "Phase 2: Profitability Deep-Dive"
+    agent: profitability-analyst
+    depends_on: ["Phase 1"]
+    tasks:
+      - run-monthly-p-and-l
+      - analyze-unit-economics
+      - benchmark-profitability-metrics
+    output: "quarterly-profitability-{quarter}.md"
+    quality_gate: "P&L trimestral, unit economics atualizados, benchmarks comparados"
+    notes: |
+      Margin faz deep-dive de rentabilidade:
+      - P&L consolidado do trimestre
+      - Top/bottom clientes por rentabilidade
+      - Unit economics atualizados (CAC, LTV, NRR)
+      - Benchmarks vs industria
+
+  - name: "Phase 3: Budget Variance"
+    agent: budget-controller
+    depends_on: ["Phase 2"]
+    tasks:
+      - analyze-budget-variance
+      - analyze-spending-patterns
+    output: "quarterly-budget-variance-{quarter}.md"
+    quality_gate: "Variance com root cause, patterns identificados, classificacao one-time vs recorrente"
+    notes: |
+      Vault analisa variacoes do trimestre:
+      - Budget vs actual trimestral
+      - Root cause de cada desvio significativo
+      - Patterns de gasto
+      - Classificacao dos desvios
+
+  - name: "Phase 4: Forecast Update"
+    agent: budget-controller
+    depends_on: ["Phase 3"]
+    tasks:
+      - run-quarterly-financial-review
+      - forecast-revenue-pipeline
+      - forecast-cash-flow
+    output: "updated-forecast-{quarter}.md"
+    quality_gate: "Rolling forecast atualizado, forecast accuracy calculada, cash flow projetado"
+    notes: |
+      Vault atualiza forecast com dados reais:
+      - Rolling forecast com dados do trimestre
+      - Forecast accuracy do periodo
+      - Cash flow projetado para proximos 6-12 meses
+      - 3 cenarios atualizados
+
+  - name: "Phase 5: Pricing Adjustment"
+    agent: pricing-strategist
+    depends_on: ["Phase 2"]
+    tasks:
+      - optimize-rate-realization
+      - track-pricing-performance
+    output: "quarterly-pricing-review-{quarter}.md"
+    quality_gate: "Rate realization analisada, ajustes recomendados se necessario"
+    notes: |
+      Mint avalia pricing do trimestre:
+      - Rate realization trend
+      - Win rate por faixa de preco
+      - Descontos concedidos
+      - Recomendacoes de ajuste
+
+  - name: "Phase 6: Board Report"
+    agent: finance-orqx
+    depends_on: ["Phase 4", "Phase 5"]
+    tasks:
+      - coordinate-quarterly-review
+      - generate-executive-dashboard
+    output: "board-report-{quarter}.md"
+    quality_gate: "Board report executivo completo, top 5 acoes para proximo trimestre"
+    notes: |
+      Ledger consolida tudo em board report:
+      - Executive summary (1 pagina)
+      - Revenue analysis
+      - Profitability analysis
+      - Budget performance
+      - Updated forecast
+      - Pricing recommendations
+      - Risk register
+      - Top 5 acoes prioritarias
+
+completion:
+  notification: "finance-orqx"
+  message: "Workflow concluido com sucesso."

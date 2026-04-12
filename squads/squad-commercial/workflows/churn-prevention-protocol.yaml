@@ -1,0 +1,160 @@
+name: churn-prevention-protocol
+version: "1.0"
+description: >
+  Protocolo de prevenção de churn — ativado automaticamente quando Health Score cai
+  para Yellow (<80) ou Red (<50). Escala resposta baseada na severidade.
+
+trigger: Health Score drops below 80 (Yellow) or below 50 (Red)
+owner: cs-client-success (Bond)
+estimated_duration: 2-8 weeks depending on severity
+
+phases:
+  - id: alert-triage
+    name: Alert Triage & Assessment
+    agent: cs-client-success
+    tasks:
+      - identify-churn-risks
+    artifacts:
+      - risk-assessment.md
+    exit_criteria:
+      - Root cause hypothesis formed
+      - Risk severity classified (Yellow or Red)
+      - Client relationship temperature checked
+      - Historical pattern reviewed (first time vs recurring)
+    duration: 24 hours (Yellow), 4 hours (Red)
+    sla:
+      yellow: Assessment within 24 hours
+      red: Assessment within 4 hours
+
+  - id: intervention-plan
+    name: Intervention Planning
+    agent: cs-client-success
+    depends_on: [alert-triage]
+    tasks:
+      - execute-save-play
+      - build-cs-playbooks
+    artifacts:
+      - save-play-plan.md
+      - intervention-timeline.md
+    exit_criteria:
+      - Specific intervention actions defined per root cause
+      - Internal alignment meeting held (CSM + Manager)
+      - Resources allocated (time, budget, escalation authority)
+      - Client outreach strategy agreed
+    duration: 1-2 days
+
+  - id: executive-alignment
+    name: Executive Alignment (Red Only)
+    agent: commercial-orqx
+    depends_on: [intervention-plan]
+    condition: severity == "red"
+    tasks:
+      - conduct-deal-review
+    artifacts:
+      - executive-briefing.md
+    exit_criteria:
+      - CS Director briefed on account risk
+      - Executive sponsor assigned if needed
+      - Budget authority for concessions approved
+      - Escalation path to CEO defined if critical account
+    duration: 1 day
+
+  - id: client-engagement
+    name: Client Engagement & Recovery
+    agent: cs-client-success
+    depends_on: [intervention-plan]
+    tasks:
+      - design-qbr-framework
+      - execute-save-play
+    artifacts:
+      - recovery-meeting-notes.md
+      - action-plan-shared.md
+    exit_criteria:
+      - Direct conversation with client champion
+      - Issues acknowledged and validated
+      - Joint action plan created with specific dates
+      - Quick-win identified and committed (show immediate value)
+    duration: 1-2 weeks
+
+  - id: delivery-recovery
+    name: Delivery Recovery Actions
+    agent: commercial-orqx
+    depends_on: [client-engagement]
+    tasks:
+      - manage-commercial-handoffs
+    artifacts:
+      - recovery-progress.md
+    exit_criteria:
+      - All committed actions being executed
+      - Weekly progress updates to client
+      - Service delivery issues resolved or escalated
+      - Additional resources deployed if needed
+    duration: 2-4 weeks
+
+  - id: monitoring
+    name: Recovery Monitoring
+    agent: cs-client-success
+    depends_on: [delivery-recovery]
+    tasks:
+      - design-health-score
+      - run-nps-program
+    artifacts:
+      - recovery-report.md
+      - health-score-trend.md
+    exit_criteria:
+      - Health Score trending upward (week-over-week improvement)
+      - Client confirms satisfaction improvement
+      - Root cause fully addressed
+      - Account moved back to Green (≥80) OR escalated
+    duration: 2-4 weeks monitoring period
+
+  - id: post-mortem
+    name: Post-Mortem & Prevention
+    agent: commercial-orqx
+    depends_on: [monitoring]
+    tasks:
+      - conduct-commercial-retrospective
+    artifacts:
+      - churn-prevention-postmortem.md
+    exit_criteria:
+      - Root cause documented
+      - Systemic fixes identified (process, product, people)
+      - Playbook updated with learnings
+      - Prevention measures implemented
+    duration: 1 session (2 hours)
+
+escalation_matrix:
+  yellow_alert:
+    response_time: 24 hours
+    owner: CSM
+    notification: CS Manager (email)
+    authority: Standard service recovery
+  red_alert:
+    response_time: 4 hours
+    owner: CSM + CS Director
+    notification: CS Director (immediate) + Head of Revenue (same day)
+    authority: Concessions up to 15% of ARR
+  critical_account_red:
+    response_time: 2 hours
+    owner: CS Director + CEO
+    notification: CEO (immediate)
+    authority: Full recovery authority
+    criteria: Top 10 account by ARR AND Red health score
+
+quality_gates:
+  - name: Assessment Quality Gate
+    phase: alert-triage
+    criteria:
+      - Root cause is specific (not generic "client unhappy")
+      - Impact quantified (ARR at risk, expansion lost)
+      - Historical context reviewed
+  - name: Recovery Quality Gate
+    phase: monitoring
+    criteria:
+      - Health Score improved ≥ 10 points from nadir
+      - Client verbal confirmation of improvement
+      - No new issues surfaced during recovery
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."

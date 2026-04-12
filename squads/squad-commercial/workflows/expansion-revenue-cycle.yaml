@@ -1,0 +1,128 @@
+name: expansion-revenue-cycle
+version: "1.0"
+description: >
+  Ciclo de receita de expansão — identificação, qualificação e execução de upsell/cross-sell
+  em clientes existentes. Contribui diretamente para NRR > 110%.
+
+trigger: Expansion trigger detected (QBR insight, usage threshold, or proactive mapping)
+owner: cs-client-success (Bond)
+estimated_duration: 4-8 weeks per opportunity
+
+phases:
+  - id: signal-detection
+    name: Expansion Signal Detection
+    agent: cs-client-success
+    tasks:
+      - map-expansion-opportunities
+    artifacts:
+      - expansion-signals.md
+    exit_criteria:
+      - Trigger validated (not just noise)
+      - Account health confirmed Green (≥80)
+      - Client tenure ≥ 6 months
+      - Current deliverables on track (no open issues)
+    duration: Ongoing (signals detected continuously)
+
+  - id: opportunity-qualification
+    name: Opportunity Qualification
+    agent: cs-client-success
+    depends_on: [signal-detection]
+    tasks:
+      - design-qbr-framework
+    artifacts:
+      - expansion-opportunity-brief.md
+    exit_criteria:
+      - Need validated with client champion
+      - Budget signal confirmed (timing and availability)
+      - Decision maker identified for expansion
+      - Estimated value sized
+    duration: 1-2 weeks
+
+  - id: solution-design
+    name: Solution Design & Packaging
+    agent: cs-offer-designer
+    depends_on: [opportunity-qualification]
+    tasks:
+      - architect-upsell-path
+      - design-service-tiers
+    artifacts:
+      - expansion-solution.md
+    exit_criteria:
+      - Solution mapped to validated client need
+      - Pricing aligned with existing contract structure
+      - Three-options framework applied (if new service line)
+      - Internal margin analysis completed
+    duration: 3-5 days
+
+  - id: proposal-delivery
+    name: Proposal & Negotiation
+    agent: cs-sales-enablement
+    depends_on: [solution-design]
+    tasks:
+      - review-proposals
+      - build-demo-scripts
+    artifacts:
+      - expansion-proposal.md
+    exit_criteria:
+      - Proposal passes quality gate (21-point checklist)
+      - Proposal presented to decision maker
+      - Questions and concerns addressed
+      - Decision timeline confirmed
+    duration: 1-2 weeks
+
+  - id: close-activate
+    name: Close & Activate
+    agent: commercial-orqx
+    depends_on: [proposal-delivery]
+    tasks:
+      - manage-commercial-handoffs
+      - coordinate-revenue-cycle
+    artifacts:
+      - expansion-contract.md
+      - activation-plan.md
+    exit_criteria:
+      - Contract amendment or new SOW signed
+      - CRM updated with expanded ARR
+      - Delivery team briefed on new scope
+      - Success plan updated with expansion milestones
+    duration: 1-2 weeks
+
+  - id: tracking
+    name: Revenue Tracking & Attribution
+    agent: cs-revops-analyst
+    depends_on: [close-activate]
+    tasks:
+      - monitor-saas-metrics
+      - create-revenue-dashboard
+    artifacts:
+      - expansion-tracking.md
+    exit_criteria:
+      - Expansion revenue attributed to correct source
+      - NRR impact calculated
+      - CSM credited for expansion contribution
+      - Dashboard updated with new ARR
+    duration: 1-2 days
+
+quality_gates:
+  - name: Expansion Qualification Gate
+    phase: opportunity-qualification
+    criteria:
+      - Client Health Score ≥ 80
+      - Champion confirmed and engaged
+      - Budget and timing validated
+      - Current engagement satisfaction ≥ 8/10
+  - name: Proposal Quality Gate
+    phase: proposal-delivery
+    criteria:
+      - 21-point proposal checklist score ≥ 18
+      - Discovery-to-proposal alignment verified
+      - ROI estimate included and defensible
+
+nrr_impact:
+  target: NRR > 110%
+  formula: (Beginning ARR + Expansion - Contraction - Churn) / Beginning ARR × 100
+  expansion_target: ≥ 20% of eligible accounts expanded per quarter
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."
