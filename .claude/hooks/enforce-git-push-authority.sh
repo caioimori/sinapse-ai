@@ -1,12 +1,33 @@
 #!/bin/bash
 # enforce-git-push-authority.sh
-# PreToolUse hook: blocks "git push" commands in Bash tool
-# Only meant to run when agent is NOT @devops
+# PreToolUse hook: blocks "git push" commands in Bash tool unless active agent is @devops
+# Detects active agent via .sinapse/session-state.json (same pattern as enforce-delegation.cjs)
 # Uses node (not jq) for JSON parsing — works on Windows/Git Bash
-# FAIL-CLOSED: if parsing fails, blocks the command (exit 2)
-# Hardened v2: also detects indirect execution via script files and pipes
+# FAIL-CLOSED: if parsing fails OR session-state is missing/unreadable, blocks the command
+# Hardened v3: adds real agent detection (Story 10.15), retains indirect-execution checks
 
 INPUT=$(cat)
+
+# Resolve project root consistently with other hooks
+PROJECT_ROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"
+
+# Detect active agent from session state (fail-closed: empty string on any error)
+AGENT=$(node -e "
+  const fs = require('fs');
+  const path = require('path');
+  try {
+    const p = path.join(process.argv[1], '.sinapse', 'session-state.json');
+    const s = JSON.parse(fs.readFileSync(p, 'utf8'));
+    console.log(s.lastAgent || '');
+  } catch (e) {
+    console.log('');
+  }
+" "$PROJECT_ROOT" 2>/dev/null)
+
+# If active agent is @devops, allow the command immediately (AC 1)
+if [ "$AGENT" = "devops" ]; then
+  exit 0
+fi
 
 # Extract command from JSON using node (available on all SINAPSE systems)
 COMMAND=$(echo "$INPUT" | node -e "

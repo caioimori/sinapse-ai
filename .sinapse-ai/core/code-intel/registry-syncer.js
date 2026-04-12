@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const yaml = require('js-yaml');
 const { getClient, isCodeIntelAvailable } = require('../code-intel');
 const { RegistryLoader, DEFAULT_REGISTRY_PATH } = require('../ids/registry-loader');
@@ -112,16 +113,68 @@ class RegistrySyncer {
       }
     }
 
-    // Update metadata
+    // Update metadata (entityCount is structural; lastUpdated is deferred to after hash check)
     registry.metadata = registry.metadata || {};
-    registry.metadata.lastUpdated = new Date().toISOString();
     registry.metadata.entityCount = allEntities.length;
+
+    // Idempotency: compute content hash excluding metadata.lastUpdated.
+    // If the on-disk registry produces the same hash, skip the write entirely
+    // so timestamp-only reruns do not churn the working tree.
+    const newHash = this._computeContentHash(registry);
+    const oldHash = this._readDiskContentHash(this._registryPath);
+
+    if (oldHash !== null && oldHash === newHash) {
+      this._logger(`[registry-syncer] Sync complete: ${this._stats.processed} processed, ${this._stats.skipped} skipped, ${this._stats.errors} errors (no content change — write skipped)`);
+      return { ...this._stats, writeSkipped: true };
+    }
+
+    // Stamp fresh timestamp only when we know we are going to write.
+    registry.metadata.lastUpdated = new Date().toISOString();
 
     // Atomic write
     this._atomicWrite(this._registryPath, registry);
 
     this._logger(`[registry-syncer] Sync complete: ${this._stats.processed} processed, ${this._stats.skipped} skipped, ${this._stats.errors} errors`);
-    return { ...this._stats };
+    return { ...this._stats, writeSkipped: false };
+  }
+
+  /**
+   * Compute a stable content hash of the registry, deliberately excluding
+   * `metadata.lastUpdated` so that timestamp-only reruns produce the same hash.
+   * @param {Object} registry - Registry object
+   * @returns {string} SHA-256 hex digest
+   * @private
+   */
+  _computeContentHash(registry) {
+    // Shallow clone + strip lastUpdated from the metadata copy only.
+    const clone = {
+      ...registry,
+      metadata: { ...(registry.metadata || {}) },
+    };
+    delete clone.metadata.lastUpdated;
+    // yaml.dump with stable key ordering produces a deterministic serialization.
+    const serialized = yaml.dump(clone, { lineWidth: 120, noRefs: true, sortKeys: true });
+    return crypto.createHash('sha256').update(serialized).digest('hex');
+  }
+
+  /**
+   * Read the existing on-disk registry and compute its content hash
+   * (excluding metadata.lastUpdated). Returns null if the file does not
+   * exist or cannot be parsed — callers should treat null as "write needed".
+   * @param {string} registryPath - Path to on-disk registry
+   * @returns {string|null} SHA-256 hex digest or null
+   * @private
+   */
+  _readDiskContentHash(registryPath) {
+    try {
+      if (!fs.existsSync(registryPath)) return null;
+      const raw = fs.readFileSync(registryPath, 'utf8');
+      const parsed = yaml.load(raw);
+      if (!parsed || typeof parsed !== 'object') return null;
+      return this._computeContentHash(parsed);
+    } catch (_error) {
+      return null;
+    }
   }
 
   /**
