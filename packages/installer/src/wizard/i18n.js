@@ -33,6 +33,12 @@ const TRANSLATIONS = {
     greenfieldDesc: 'new project from scratch',
     brownfield: 'Brownfield',
     brownfieldDesc: 'existing project',
+    detectedProjectType: 'Detected: {type} project',
+    detectedProjectTypeWithStack: 'Detected: {type} project ({stack})',
+    detectedUpgrade: 'Detected: Existing SINAPSE project (upgrade)',
+    infraApplied: 'Infrastructure templates applied',
+    infraSkipped: 'Infrastructure templates skipped',
+    agentsMdCreated: 'AGENTS.md created',
 
     // IDE selection
     ideQuestion: 'Select IDE(s):',
@@ -210,6 +216,12 @@ const TRANSLATIONS = {
     greenfieldDesc: 'projeto novo do zero',
     brownfield: 'Brownfield',
     brownfieldDesc: 'projeto existente',
+    detectedProjectType: 'Detectado: projeto {type}',
+    detectedProjectTypeWithStack: 'Detectado: projeto {type} ({stack})',
+    detectedUpgrade: 'Detectado: projeto SINAPSE existente (upgrade)',
+    infraApplied: 'Templates de infraestrutura aplicados',
+    infraSkipped: 'Templates de infraestrutura ignorados',
+    agentsMdCreated: 'AGENTS.md criado',
 
     // IDE selection
     ideQuestion: 'Selecione IDE(s):',

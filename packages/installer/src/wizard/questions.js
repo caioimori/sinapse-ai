@@ -82,7 +82,7 @@ function getLLMQuestion() {
 
 /**
  * Get project type question (Story 1.3)
- * Uses i18n for translation
+ * @deprecated Project type is now auto-detected. Kept for backward compat.
  *
  * @returns {Object} Inquirer question object
  */
@@ -317,8 +317,7 @@ function buildQuestionSequence(_context = {}) {
   // Language selection (first question)
   questions.push(getLanguageQuestion());
 
-  // Story 1.2: Foundation (project type only)
-  questions.push(getProjectTypeQuestion());
+  // Story 1.2: Project type is auto-detected (question removed from flow)
 
   // Story 1.4: IDE Selection
   questions.push(...getIDEQuestions());
