@@ -10,6 +10,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execSync } = require('child_process');
+const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
@@ -942,6 +943,14 @@ async function initProject() {
 
 // Command routing (async main function)
 async function main() {
+  // Story 10.13 — emit deprecation notice when the legacy `sinapse` binary
+  // is used for the canonical subcommands. The warning goes to stderr so it
+  // does NOT interfere with pipes, does NOT change the exit code, and does
+  // NOT block execution (backward compat preserved for one major version).
+  if (command === 'install' || command === 'update' || command === 'uninstall') {
+    emitDeprecationWarning('sinapse', command);
+  }
+
   switch (command) {
     case 'workers':
       // Service Discovery CLI - Story 2.7
