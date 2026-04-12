@@ -1,39 +1,30 @@
 # SINAPSE Code Owners
-# Maintainer model: every PR to main must be reviewed by the other maintainer.
-# The usernames below must keep write access in GitHub.
+# Caio is the primary owner — his approval is required for ALL PRs.
+# Matheus can merge after Caio approves. Caio can bypass (admin).
 
-# Default — all files require at least one maintainer
-* @caioimori @Matheus-soier
+# Default — Caio must approve all changes
+* @caioimori
 
-# Critical paths — framework core (L1 protected)
-.sinapse-ai/core/ @caioimori @Matheus-soier
+# Critical paths — framework core (Caio only)
+.sinapse-ai/core/ @caioimori
 .sinapse-ai/constitution.md @caioimori
-bin/ @caioimori @Matheus-soier
+bin/ @caioimori
 
-# Framework templates (L2 protected)
-.sinapse-ai/development/tasks/ @caioimori @Matheus-soier
-.sinapse-ai/development/templates/ @caioimori @Matheus-soier
-.sinapse-ai/development/workflows/ @caioimori @Matheus-soier
-.sinapse-ai/development/checklists/ @caioimori @Matheus-soier
-.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
+# Framework templates (Caio only)
+.sinapse-ai/development/ @caioimori
+.sinapse-ai/infrastructure/ @caioimori
 
-# Agent definitions
-.sinapse-ai/development/agents/ @caioimori @Matheus-soier
-
-# Security-sensitive paths
-.claude/hooks/ @caioimori
-.claude/rules/ @caioimori
-.claude/settings.json @caioimori
+# Security-sensitive paths (Caio only)
+.claude/ @caioimori
 SECURITY.md @caioimori
-squads/squad-cybersecurity/ @caioimori @Matheus-soier
 
-# CI/CD and infrastructure
-.github/ @caioimori @Matheus-soier
-packages/ @caioimori @Matheus-soier
+# CI/CD and infrastructure (Caio only)
+.github/ @caioimori
+packages/ @caioimori
 
 # Configuration files
-package.json @caioimori @Matheus-soier
+package.json @caioimori
 .env* @caioimori
 
-# Documentation — more permissive
-docs/ @caioimori @Matheus-soier
+# Documentation — Caio reviews
+docs/ @caioimori
