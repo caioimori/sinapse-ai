@@ -455,6 +455,17 @@ async function runWizard(options = {}) {
       };
     }
 
+    // Display auto-detected project type with tech stack (informational)
+    if (detectedProjectType === 'upgrade') {
+      console.log(`\n${colors.primary(t('detectedUpgrade'))}`);
+    } else if (detection.label) {
+      const typeLabel = detectedProjectType.charAt(0).toUpperCase() + detectedProjectType.slice(1);
+      console.log(`\n${colors.primary(tf('detectedProjectTypeWithStack', { type: typeLabel, stack: detection.label }))}`);
+    } else {
+      const typeLabel = detectedProjectType.charAt(0).toUpperCase() + detectedProjectType.slice(1);
+      console.log(`\n${colors.primary(tf('detectedProjectType', { type: typeLabel }))}`);
+    }
+
     // Story 1.4: Install SINAPSE core framework (agents, tasks, workflows, templates)
     console.log('\n📦 Installing SINAPSE core framework...');
     let sinapseCoreResult = null;
