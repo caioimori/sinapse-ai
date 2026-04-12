@@ -91,6 +91,7 @@
     "collab:check": "node bin/utils/collab-start.js --check",
     "collab:start": "node bin/utils/collab-start.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",
+    "validate:docs": "node scripts/validate-install-docs.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
