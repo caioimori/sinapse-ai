@@ -51,12 +51,28 @@ When this epic closes, SINAPSE will have:
 
 | Story ID | Title | Squad/Area | Status |
 |----------|-------|------------|--------|
-| fw-v2.1 | squad-artdir v2.0 finalization (close story 2.1 + 2.3) | squad-artdir | Ready |
-| fw-v2.2 | squad-design cross-surface token canon + DX persona refinement | squad-design | Ready |
-| fw-v2.3 | squad-brand AI visual generation canon + platform bridge | squad-brand | Ready |
-| fw-v2.4 | squad-content agent rebalance + AI-native loop | squad-content | Ready |
-| fw-v2.5 | squad-copy AI human-in-the-loop playbook + cross-lingual | squad-copy | Ready |
-| fw-v2.6 | Core engine intervention — agent handoff compaction enforcer | core | Ready |
+| fw-v2.1 | squad-artdir v2.0 finalization (close story 2.1 + 2.3) | squad-artdir | Done |
+| fw-v2.2 | squad-design cross-surface token canon + DX persona refinement | squad-design | Ready (handoff prepared) |
+| fw-v2.3 | squad-brand AI visual generation canon + platform bridge | squad-brand | Ready (handoff prepared) |
+| fw-v2.4 | squad-content agent rebalance + AI-native loop | squad-content | Done (runtime — see note) |
+| fw-v2.5 | squad-copy AI human-in-the-loop playbook + cross-lingual | squad-copy | Ready (handoff prepared) |
+| fw-v2.6 | Core engine intervention — agent handoff compaction enforcer | core | Done |
+
+### Status Notes (2026-04-12 update)
+
+- **fw-v2.1 Done** — Closed via PR #41 (squad-artdir v2.0 platform expansion + handoff enforcer + framework upgrade epic)
+- **fw-v2.6 Done** — Handoff compaction enforcer task `generate-agent-handoff.md` shipped via PR #41 + workflow integration in `story-development-cycle.yaml`
+- **fw-v2.4 Done (runtime)** — All 5 ACs PASS per QA gate `docs/qa/gates/fw-v2.4-content-qa-gate.yml`. Deliverables on disk:
+  - `squads/squad-content/knowledge-base/ai-native-content-loop.md` (canon 6-phase loop)
+  - `squads/squad-content/knowledge-base/task-ownership-map.md` (90-task ownership matrix, 0 orphans)
+  - `squads/squad-content/knowledge-base/signal-intelligence-v2.md` (2026 source landscape + classification + scoring)
+  - `squads/squad-content/squad.yaml` reconciled to v2.0.0 (KB count 16 → 32, agent_task_ownership block added, full changelog)
+  - **GOVERNANCE FINDING (medium):** `squads/squad-content/*` is gitignored in this repo per `.gitignore` line 61 (`squads/*` blocked, only 3 squads whitelisted: claude-code-mastery, squad-animations, squad-artdir). The work is delivered at the runtime layer (on disk) but cannot ship via PR until @devops decides between (a) whitelisting squad-content for publication, (b) moving squad-content to a sibling published repo, or (c) creating a sync mechanism to `~/.sinapse/squad-content/`. The same issue affects fw-v2.2, fw-v2.3, fw-v2.5 — none of those squads are whitelisted either.
+- **fw-v2.2, fw-v2.3, fw-v2.5 Ready** — Story files on disk + structured handoff artifacts prepared at `docs/handoffs/framework-v2-{design,brand,copy}.yaml` (also gitignored — workspace artifacts) ready for next-session execution by `@design-orqx`, `@brand-orqx`, `@copy-orqx`. Each handoff contains the AC contract, deliverables expected, scope IN/OUT, dependencies, and concrete next action.
+
+### Cross-cutting governance issue (raised 2026-04-12)
+
+The four "squad upgrade" sub-stories (fw-v2.2 through fw-v2.5) all target squads that are gitignored in the `sinapse-ai` repo. This is a deliberate framework boundary: only `claude-code-mastery`, `squad-animations`, and `squad-artdir` are published. Before fw-v2.2, fw-v2.3 and fw-v2.5 are executed, Caio + @devops should decide the publishing model so the work either ships in-repo or in a clearly-defined external location. Without this decision, the upgrade work remains a per-machine runtime artifact rather than a framework deliverable.
 
 ## Dependencies
 
@@ -114,8 +130,9 @@ This epic file itself IS the Documentation-First artifact required before ANY im
 
 Caio's briefing explicitly says: "qualidade > quantidade. Se der pra entregar 3 squads perfeitos e 2 no mínimo, melhor que 5 meia-bomba." This epic captures the full target, but Imperator explicitly acknowledges that materializing all 6 sub-stories in a single execution session is **not realistic**. The honest delivery model is:
 
-- **This turn (2026-04-12):** Create epic + 6 sub-stories (Ready), close artdir v2.1 finalization, implement 1 core engine intervention.
-- **Next turns:** Execute fw-v2.2 through fw-v2.5 one at a time, each with full SDC and PR.
+- **Turn 1 (2026-04-12 morning):** Created epic + 6 sub-stories (Ready), closed artdir v2.1 finalization (PR #41), implemented 1 core engine intervention (handoff compaction enforcer task in PR #41). fw-v2.1 + fw-v2.6 → Done.
+- **Turn 2 (2026-04-12 afternoon, this turn):** Executed fw-v2.4 end-to-end at the runtime layer (3 KBs + yaml reconciliation, QA gate PASS 9.5/10). Surfaced cross-cutting governance finding: squad-content/squad-design/squad-brand/squad-copy are all gitignored, blocking PR-based delivery. Prepared structured handoff artifacts for fw-v2.2/2.3/2.5 in `docs/handoffs/framework-v2-{design,brand,copy}.yaml` so next-session execution starts with full context.
+- **Turn 3+ (next sessions, after governance decision):** Execute fw-v2.2 / fw-v2.3 / fw-v2.5 once Caio + @devops decide the squad publishing model. Each handoff carries the full contract; specialist orqx (Nexus / Meridian / Quill) drives execution from there.
 
 This is documented so a future session (human or agent) can resume without ambiguity about what remains.
 
