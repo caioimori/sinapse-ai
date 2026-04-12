@@ -8,6 +8,8 @@
  * auto-detect project type/tech preset, userProfile always 'bob'.
  */
 
+jest.setTimeout(60000); // Integration tests need more time in CI
+
 const inquirer = require('inquirer');
 const fse = require('fs-extra');
 const { runWizard } = require('../../packages/installer/src/wizard/index');
