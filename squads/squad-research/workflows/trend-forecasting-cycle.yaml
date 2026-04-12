@@ -1,0 +1,134 @@
+name: trend-forecasting-cycle
+description: Ciclo completo de forecasting de tendencias — de macro forces a future landscape
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+
+triggers:
+  - Planejamento estrategico (anual ou semestral)
+  - Avaliacao de tecnologias para roadmap
+  - Necessidade de cenarios para decisao de investimento
+  - Cross-squad request para dados de tendencias
+
+phases:
+  - id: macro-forces
+    name: "1. Macro Forces Analysis"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - analyze-macro-forces
+    inputs:
+      - Mercado/industria
+      - Geografias relevantes
+    outputs:
+      - PESTEL completo com scoring
+      - Cross-force interactions
+      - Top 10 forcas priorizadas
+    quality_gate:
+      criteria: 6 categorias PESTEL cobertas, scoring atribuido
+
+  - id: signal-detection
+    name: "2. Weak Signal Detection"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - detect-weak-signals
+      - track-emerging-technologies
+    inputs:
+      - PESTEL analysis
+      - Fontes de sinais fracos
+    outputs:
+      - Inventario de sinais classificados (Level 1-5)
+      - Technology radar
+    quality_gate:
+      criteria: Min 5 fontes escaneadas, sinais classificados
+
+  - id: technology-mapping
+    name: "3. Technology Adoption Mapping"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - map-technology-adoption
+    inputs:
+      - Tecnologias emergentes identificadas
+    outputs:
+      - Rogers/Moore/Gartner positioning
+      - Technology adoption roadmap
+    quality_gate:
+      criteria: Tecnologias classificadas nos 3 frameworks
+
+  - id: trend-forecasting
+    name: "4. Trend Forecasting"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - forecast-industry-trends
+      - predict-market-shifts
+      - identify-inflection-points
+    inputs:
+      - Macro forces, sinais, tecnologias
+    outputs:
+      - Tendencias por horizonte (1/3/5 anos)
+      - Market shifts previstos
+      - Inflection points candidatos
+    quality_gate:
+      criteria: Confidence scoring aplicado, leading indicators definidos
+
+  - id: scenario-planning
+    name: "5. Scenario Planning"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - run-scenario-planning
+      - create-future-landscape
+    inputs:
+      - Tendencias, macro forces, inflexoes
+    outputs:
+      - 4 cenarios nomeados (Schwartz)
+      - Future landscape map
+      - Wind tunneling results
+    quality_gate:
+      criteria: 4 cenarios com narrativas e early indicators
+
+  - id: synthesis
+    name: "6. Trend Report"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - synthesize-research-report
+      - map-strategic-implications
+    inputs:
+      - Todos os outputs de forecasting
+    outputs:
+      - Trend forecast report
+      - Strategic implications map
+    quality_gate:
+      criteria: Implicacoes em 3 ordens mapeadas
+
+  - id: delivery
+    name: "7. Delivery"
+    agent: research-orqx (Prism)
+    tasks:
+      - coordinate-cross-squad-research
+    inputs:
+      - Report e implications finalizados
+    outputs:
+      - Deliverables por squad
+    quality_gate:
+      criteria: Formatos corretos por destino
+
+success_criteria:
+  - PESTEL completo com scoring
+  - Tendencias projetadas em 3 horizontes
+  - 4 cenarios com narrativas
+  - Future landscape visualizado
+  - Strategic implications mapeadas
+
+cross_squad_handoffs:
+  - to: brand-system
+    delivers: tendencias culturais e de posicionamento
+    format: trend cards com implicacao de marca
+  - to: product-systems
+    delivers: technology radar e tendencias de produto
+    format: roadmap input com timeline
+  - to: digital-experience
+    delivers: tendencias de comportamento digital
+    format: UX trend brief
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,124 @@
+name: full-clone-pipeline
+version: "1.0"
+description: "Pipeline end-to-end de clonagem cognitiva — da source discovery a squad delivery"
+trigger: "Quando um novo projeto de clone e iniciado via *clone {target}"
+agents_involved:
+  - cloning-orqx
+  - source-hunter
+  - content-capturer
+  - cognitive-extractor
+  - mind-synthesizer
+  - agent-forger
+  - kb-architect
+  - squad-assembler
+
+phases:
+  - name: "Phase 1: Source Discovery"
+    agent: source-hunter
+    tasks:
+      - discover-youtube-channels
+      - discover-podcasts-appearances
+      - discover-books-publications
+      - discover-articles-interviews
+      - discover-social-media-content
+      - compile-source-catalog
+      - estimate-content-volume
+    output: "source-catalog.yaml"
+    quality_gate: "Catalogo completo com volume estimado e content class definida"
+
+  - name: "Phase 2: Content Capture"
+    agent: content-capturer
+    depends_on: ["Phase 1"]
+    tasks:
+      - transcribe-youtube-videos
+      - transcribe-podcast-episodes
+      - extract-book-content
+      - capture-article-text
+      - capture-social-posts
+      - normalize-raw-content
+      - validate-transcription-quality
+    output: "raw/ directory com conteudo normalizado"
+    quality_gate: "Transcricoes validadas, quality report gerado"
+
+  - name: "Phase 3: Cognitive DNA Extraction"
+    agent: cognitive-extractor
+    depends_on: ["Phase 2"]
+    tasks:
+      - extract-mental-models
+      - extract-heuristics
+      - extract-decision-patterns
+      - extract-vocabulary-tone
+      - extract-workflows-processes
+      - identify-contradictions
+      - tag-confidence-levels
+      - generate-extraction-report
+    output: "5 camadas de DNA cognitivo extraidas"
+    quality_gate: "Minimos por tier atingidos, todas extracoes tagadas"
+
+  - name: "Phase 4: Mind Synthesis"
+    agent: mind-synthesizer
+    depends_on: ["Phase 3"]
+    tasks:
+      - resolve-contradictions
+      - build-cognitive-profile
+      - identify-meta-patterns
+      - calculate-confidence-score
+      - determine-clone-tier
+      - generate-mind-map
+    output: "cognitive-profile.md"
+    quality_gate: "Confidence score calculado, tier determinado, perfil coerente"
+
+  - name: "Phase 5: Agent Generation"
+    agent: agent-forger
+    depends_on: ["Phase 4"]
+    condition: "Somente se tier >= 2 (confidence >= 75%)"
+    tasks:
+      - generate-agent-persona
+      - generate-agent-heuristics
+      - generate-agent-protocols
+      - generate-agent-commands
+      - generate-cross-squad-handoffs
+      - validate-agent-completeness
+    output: "agent.md"
+    quality_gate: "Agent.md segue SQUAD-CREATION-STANDARDS, todos campos obrigatorios"
+
+  - name: "Phase 6: KB Generation"
+    agent: kb-architect
+    depends_on: ["Phase 4"]
+    tasks:
+      - design-kb-taxonomy
+      - generate-framework-kbs
+      - generate-pattern-kbs
+      - generate-methodology-kbs
+      - generate-reference-kbs
+      - validate-kb-citations
+      - cross-reference-kbs
+    output: "knowledge-base/*.md"
+    quality_gate: "Min KBs por tier, todas citacoes tagadas, sem contradicoes"
+
+  - name: "Phase 7: Task & Workflow Generation"
+    agent: squad-assembler
+    depends_on: ["Phase 5", "Phase 6"]
+    condition: "Somente se tier == 3 (confidence >= 85%)"
+    tasks:
+      - generate-task-files
+      - generate-workflow-files
+      - generate-checklist-files
+      - generate-template-files
+    output: "tasks/*.md, workflows/*.yaml"
+    quality_gate: "Tasks seguem TASK-FORMAT-SPECIFICATION-V1"
+
+  - name: "Phase 8: Assembly & Deployment"
+    agent: squad-assembler
+    depends_on: ["Phase 7"]
+    tasks:
+      - generate-squad-yaml
+      - run-pre-publish-checklist
+      - package-squad-output
+      - deploy-cross-squad-kbs
+    output: "Squad completa deployada"
+    quality_gate: "Pre-publish checklist 100% pass, KBs deployados em destinos"
+
+completion:
+  notification: "cloning-orqx"
+  message: "Workflow concluido com sucesso."

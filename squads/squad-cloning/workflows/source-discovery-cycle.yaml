@@ -1,0 +1,64 @@
+name: source-discovery-cycle
+version: "1.0"
+description: "Ciclo focado de source hunting — varredura completa de fontes para um target"
+trigger: "Inicio de qualquer projeto de clone"
+agents_involved:
+  - source-hunter
+  - cloning-orqx
+
+phases:
+  - name: "Phase 1: YouTube Search"
+    agent: source-hunter
+    tasks:
+      - discover-youtube-channels
+    output: "Lista de canais e videos com duracoes"
+    quality_gate: "Busca em YouTube, verificar canal proprio e aparicoes"
+
+  - name: "Phase 2: Podcast Search"
+    agent: source-hunter
+    tasks:
+      - discover-podcasts-appearances
+    output: "Lista de episodios com URLs"
+    quality_gate: "Busca em Spotify, Apple Podcasts, Google Podcasts"
+
+  - name: "Phase 3: Book Search"
+    agent: source-hunter
+    tasks:
+      - discover-books-publications
+    output: "Lista de livros com ISBNs/links"
+    quality_gate: "Amazon, Google Books, bibliotecas digitais"
+
+  - name: "Phase 4: Article Search"
+    agent: source-hunter
+    tasks:
+      - discover-articles-interviews
+    output: "Lista de artigos/entrevistas com URLs"
+    quality_gate: "Brave Search, Google Scholar"
+
+  - name: "Phase 5: Social Media Search"
+    agent: source-hunter
+    tasks:
+      - discover-social-media-content
+    output: "Lista de perfis e threads relevantes"
+    quality_gate: "Twitter/X, LinkedIn, Instagram"
+
+  - name: "Phase 6: Compile & Classify"
+    agent: source-hunter
+    depends_on: ["Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5"]
+    tasks:
+      - compile-source-catalog
+      - estimate-content-volume
+    output: "source-catalog.yaml completo"
+    quality_gate: "Volume estimado, content class definida, tier recomendado"
+
+  - name: "Phase 7: Orchestrator Review"
+    agent: cloning-orqx
+    depends_on: ["Phase 6"]
+    tasks:
+      - assign-content-class
+    output: "Content class e tier confirmados"
+    quality_gate: "Helix confirma viabilidade e tier"
+
+completion:
+  notification: "cloning-orqx"
+  message: "Workflow concluido com sucesso."

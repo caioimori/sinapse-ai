@@ -1,0 +1,107 @@
+# Brand Application Cycle
+# Workflow para aplicar marca existente em novos touchpoints/canais
+# Usa guidelines ja aprovadas para criar novos assets e aplicacoes
+
+name: brand-application-cycle
+version: "1.0"
+description: >
+  Ciclo para aplicar uma marca ja criada em novos pontos de contato.
+  Nao redefine estrategia ou identidade — usa guidelines existentes
+  para criar novos assets, colateral ou extensoes.
+  Exemplo: marca ja existe, precisa de packaging para novo produto.
+
+trigger:
+  command: "*apply-brand"
+  agent: brand-orqx
+  prerequisite: "Brand system existente com guidelines aprovadas"
+
+input:
+  required:
+    - brand-guidelines-path
+    - application-type
+    - application-brief
+  optional:
+    - reference-assets
+    - client-preferences
+    - deadline
+
+phases:
+  - id: scope-definition
+    name: "Scope & Requirements"
+    agent: brand-orqx
+    description: "Definir escopo da aplicacao e identificar agentes necessarios"
+    tasks:
+      - analyze-application-request
+      - identify-required-agents
+      - load-existing-guidelines
+    outputs:
+      - application-scope-document
+      - agent-assignment-plan
+
+  - id: guideline-review
+    name: "Guidelines Review"
+    agent: brand-auditor
+    depends_on: [scope-definition]
+    description: "Revisar guidelines existentes e confirmar que sao suficientes"
+    tasks:
+      - review-existing-guidelines
+      - identify-gaps-for-application
+    outputs:
+      - guideline-review-report
+      - gap-analysis
+
+  - id: asset-creation
+    name: "Asset Creation"
+    agents:
+      - brand-creative-engineer
+      - brand-collateral-designer
+      - brand-motion-vfx
+    depends_on: [guideline-review]
+    description: "Criar assets para o novo touchpoint seguindo guidelines"
+    dynamic_tasks: true
+    task_selection: "Baseado no application-type definido no scope"
+    task_categories:
+      digital:
+        agent: brand-creative-engineer
+        tasks: [create-social-templates, create-web-templates, create-mockups]
+      print:
+        agent: brand-collateral-designer
+        tasks: [create-business-cards, create-stationery, create-packaging, create-signage]
+      motion:
+        agent: brand-motion-vfx
+        tasks: [create-video-templates, create-micro-interactions]
+      audio:
+        agent: brand-sonic-designer
+        tasks: [create-notification-sounds, create-audio-beds]
+
+  - id: quality-check
+    name: "Quality Validation"
+    agent: brand-auditor
+    depends_on: [asset-creation]
+    description: "Validar novos assets contra guidelines existentes"
+    tasks:
+      - audit-new-assets
+      - validate-brand-consistency
+    outputs:
+      - asset-audit-report
+      - consistency-validation
+    gate:
+      criteria: "Novos assets 100% alinhados com guidelines existentes"
+      threshold: 4.0
+
+  - id: delivery
+    name: "Package & Deliver"
+    agent: brand-compiler
+    depends_on: [quality-check]
+    description: "Empacotar novos assets e atualizar delivery package"
+    tasks:
+      - package-new-assets
+      - update-delivery-package
+      - update-changelog
+    outputs:
+      - new-assets-package
+      - updated-delivery-package
+
+completion:
+  notification: "brand-orqx"
+  message: "Novos assets criados, validados e empacotados."

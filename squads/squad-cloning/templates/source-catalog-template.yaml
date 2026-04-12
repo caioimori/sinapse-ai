@@ -1,0 +1,83 @@
+# Source Catalog — {TARGET_NAME}
+# Gerado por: source-hunter (Scout)
+# Data: {DATE}
+
+target:
+  name: "{Full Name}"
+  domain: "{Primary domain (e.g., marketing, copywriting, business strategy)}"
+  known_aliases: []
+  content_class: "{A|B|C|D}"
+  estimated_total_words: 0
+  recommended_tier: "{1|2|3|insufficient}"
+
+sources:
+  youtube:
+    # Canal(is) proprio(s) e aparicoes em canais de terceiros
+    - url: ""
+      channel: ""
+      title: ""
+      type: "{own_channel|appearance|interview}"
+      duration_minutes: 0
+      estimated_words: 0
+      language: "pt-BR"
+      quality: "{high|medium|low}"
+      priority: "{must|should|could}"
+      notes: ""
+
+  podcasts:
+    - url: ""
+      podcast_name: ""
+      episode_title: ""
+      type: "{host|guest}"
+      duration_minutes: 0
+      estimated_words: 0
+      language: ""
+      quality: "{high|medium|low}"
+      priority: "{must|should|could}"
+
+  books:
+    - title: ""
+      author: ""
+      isbn: ""
+      year: 0
+      pages: 0
+      estimated_words: 0
+      format: "{pdf|ebook|physical|audiobook}"
+      accessibility: "{available|requires_purchase|rare}"
+      priority: "{must|should|could}"
+
+  articles:
+    - url: ""
+      title: ""
+      source: ""
+      type: "{blog_post|interview|essay|academic}"
+      estimated_words: 0
+      language: ""
+      priority: "{must|should|could}"
+
+  social_media:
+    - platform: "{twitter|linkedin|instagram|tiktok|other}"
+      handle: ""
+      url: ""
+      content_type: "{threads|posts|videos|stories}"
+      volume: "{high|medium|low}"
+      priority: "{must|should|could}"
+
+  other:
+    - type: ""
+      description: ""
+      url: ""
+      estimated_words: 0
+      priority: "{must|should|could}"
+
+summary:
+  total_sources: 0
+  total_estimated_words: 0
+  content_class: ""
+  class_justification: ""
+  recommended_tier: ""
+  tier_justification: ""
+  estimated_sessions: 0
+  primary_language: ""
+  accessibility_notes: ""
+  gaps_identified: []

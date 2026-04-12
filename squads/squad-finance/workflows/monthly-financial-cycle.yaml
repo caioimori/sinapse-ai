@@ -1,0 +1,96 @@
+name: monthly-financial-cycle
+version: "1.0"
+description: "Ciclo financeiro mensal — da coleta de dados ao report executivo"
+trigger: "Fechamento do mes (D+1 do mes seguinte)"
+cadence: monthly
+agents_involved:
+  - revenue-analyst
+  - profitability-analyst
+  - budget-controller
+  - pricing-strategist
+  - finance-orqx
+
+phases:
+  - name: "Phase 1: Coleta e Reconciliacao de Receita"
+    agent: revenue-analyst
+    tasks:
+      - reconcile-invoicing
+      - track-accounts-receivable
+      - generate-revenue-report
+      - track-recurring-revenue
+    output: "revenue-report-{month}.md"
+    quality_gate: "Receita reconciliada, DSO calculado, aging atualizado"
+    deadline: "D+1 a D+3"
+    notes: |
+      Flow coleta todos os dados de receita do mes:
+      - Faturas emitidas vs recebidas
+      - Aging de contas a receber
+      - MRR/ARR e componentes
+      - Collection rate
+
+  - name: "Phase 2: Analise de Rentabilidade (P&L)"
+    agent: profitability-analyst
+    depends_on: ["Phase 1"]
+    tasks:
+      - run-monthly-p-and-l
+      - prepare-financial-operations-report
+    output: "monthly-pnl-{month}.md"
+    quality_gate: "P&L fechado, gross margin e EBITDA calculados, comparacoes MoM/YoY"
+    deadline: "D+3 a D+5"
+    notes: |
+      Margin recebe dados de receita do Flow e calcula:
+      - P&L completo do mes
+      - Gross margin e EBITDA
+      - Comparacoes MoM e YoY
+      - Report de operacoes financeiras
+
+  - name: "Phase 3: Budget Review"
+    agent: budget-controller
+    depends_on: ["Phase 2"]
+    tasks:
+      - track-monthly-budget
+      - generate-budget-pacing-report
+    output: "budget-review-{month}.md"
+    quality_gate: "Budget vs actual por rubrica, pacing YTD, alertas de desvio"
+    deadline: "D+5 a D+7"
+    notes: |
+      Vault compara budget vs actual e calcula pacing:
+      - Variancia por rubrica
+      - Pacing YTD
+      - EAC projetado
+      - Alertas de desvio
+
+  - name: "Phase 4: Pricing Review"
+    agent: pricing-strategist
+    depends_on: ["Phase 2"]
+    tasks:
+      - track-pricing-performance
+    output: "pricing-review-{month}.md"
+    quality_gate: "Rate realization, deal size medio, win rate atualizado"
+    deadline: "D+7 a D+8"
+    notes: |
+      Mint revisa metricas de pricing do mes:
+      - Rate realization
+      - Average deal size
+      - Win rate por faixa de preco
+      - Sinais de necessidade de ajuste
+
+  - name: "Phase 5: Dashboard Executivo"
+    agent: finance-orqx
+    depends_on: ["Phase 3", "Phase 4"]
+    tasks:
+      - generate-executive-dashboard
+      - triage-financial-alerts
+    output: "executive-dashboard-{month}.md"
+    quality_gate: "Dashboard com todos os KPIs, traffic light, executive summary 3x3"
+    deadline: "D+8 a D+10"
+    notes: |
+      Ledger consolida todos os outputs em dashboard executivo:
+      - Health score
+      - Revenue, profitability, cash, budget, pricing
+      - Alertas triados
+      - Top 3 recomendacoes
+
+completion:
+  notification: "finance-orqx"
+  message: "Workflow concluido com sucesso."

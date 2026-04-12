@@ -1,0 +1,79 @@
+name: content-copy-cycle
+version: "1.0"
+title: "Content Copy Cycle — Story-Driven Content"
+description: "Ciclo para criacao de conteudo com foco em storytelling e persuasao: cases, stories, manifestos e whitepapers."
+complexity: STANDARD
+estimated_duration: "2-4 dias"
+squad: squad-copy
+
+triggers:
+  - "Novo case study necessario"
+  - "Brand manifesto solicitado"
+  - "Whitepaper/thought leadership"
+  - "Founder/customer story"
+
+phases:
+  - phase: 1
+    name: "Content Brief"
+    agent: copy-strategist (Quill)
+    tasks:
+      - create-copy-brief
+      - align-copy-strategy-with-brand
+    outputs:
+      - Content brief
+      - Brand alignment check
+    gate: "Brief aprovado"
+
+  - phase: 2
+    name: "Story & Content Creation"
+    agent: long-form-writer (Saga)
+    tasks:
+      - "[Conforme tipo]"
+    task_selection:
+      case_study: write-case-study
+      customer_story: create-customer-story
+      brand_manifesto: create-brand-manifesto
+      whitepaper: write-whitepaper-persuasive
+      founder_story: create-founder-story
+      comparison: write-comparison-piece
+      product_narrative: write-product-narrative
+    outputs:
+      - Conteudo completo
+      - Versoes derivadas
+    gate: "Conteudo draft completo"
+
+  - phase: 3
+    name: "Voice & Tone Review"
+    agent: brand-voice-writer (Tone)
+    outputs:
+      - Voice compliance verificada
+      - Ajustes de tom aplicados
+    gate: "On-brand confirmado"
+
+  - phase: 4
+    name: "Edit & Polish"
+    agent: copy-editor (Chisel)
+    tasks:
+      - conduct-full-copy-review
+    outputs:
+      - Conteudo editado (5-pass)
+    gate: "Score >= 4.0"
+
+  - phase: 5
+    name: "Approval & Distribution"
+    agent: copy-strategist (Quill)
+    outputs:
+      - Conteudo aprovado
+      - Formatos derivados prontos
+      - Distribution brief
+    gate: "Aprovado para publicacao"
+
+cross_squad_handoffs:
+  - to: squad-content
+    delivers: "Conteudo para publicacao e distribuicao"
+  - to: squad-research
+    delivers: "Data/claims para verificacao (whitepapers)"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,87 @@
+name: project-setup-cycle
+version: "1.0.0"
+description: "4-phase workflow for setting up Claude Code in a project: Audit, Configure, Integrate, Validate."
+squad: squad-claude
+trigger: manual
+phases:
+  - name: "Phase 1: Audit"
+    description: "Assess the current state of Claude Code in the project"
+    agent: "@claude-orqx"
+    tasks:
+      - audit-setup
+    inputs:
+      - project_root: "path to project"
+      - project_type: "greenfield | brownfield"
+    outputs:
+      - audit_report: "Setup audit report with scores and recommendations"
+    gate:
+      condition: "audit_report generated with all 6 dimensions scored"
+      on_fail: "Cannot proceed without complete audit"
+
+  - name: "Phase 2: Configure"
+    description: "Create or update all Claude Code configuration files"
+    agent: "@config-engineer"
+    tasks:
+      - configure-settings
+      - claude-md-engineer
+      - create-rules
+      - permission-strategy
+    inputs:
+      - audit_report: "from Phase 1"
+      - technology_stack: "project stack info"
+      - security_requirements: "strict | standard | permissive"
+    outputs:
+      - settings_json: ".claude/settings.json"
+      - claude_md: "CLAUDE.md"
+      - rules_files: ".claude/rules/*.md"
+      - permission_doc: "Permission strategy document"
+    gate:
+      condition: "All config files pass validation AND permission model is consistent"
+      on_fail: "Fix validation errors before proceeding"
+
+  - name: "Phase 3: Integrate"
+    description: "Set up MCP servers, hooks, and CI/CD integration"
+    agents:
+      - "@mcp-integrator"
+      - "@hooks-architect"
+      - "@project-integrator"
+    tasks:
+      - mcp-integration-plan
+      - hook-designer
+      - ci-cd-setup
+    inputs:
+      - settings_json: "from Phase 2"
+      - mcp_requirements: "list of needed integrations"
+      - automation_level: "minimal | standard | full"
+    outputs:
+      - mcp_config: "MCP server configurations added to settings.json"
+      - hooks_config: "Hook configurations"
+      - cicd_config: "CI/CD pipeline configuration"
+    gate:
+      condition: "All MCP servers connect AND hooks execute without error"
+      on_fail: "Debug connection/execution issues before proceeding"
+
+  - name: "Phase 4: Validate"
+    description: "Run comprehensive validation of the complete setup"
+    agent: "@claude-orqx"
+    tasks:
+      - audit-setup
+      - diagnose
+    inputs:
+      - all_outputs: "from Phases 1-3"
+    outputs:
+      - final_audit: "Post-setup audit report"
+      - setup_summary: "Complete setup documentation"
+    gate:
+      condition: "Overall health score >= 20/30 AND no critical issues"
+      on_fail: "Return to Phase 2 or 3 to address deficiencies"
+
+completion:
+  success_criteria: "All 4 phases complete, final audit score >= 20/30"
+  deliverables:
+    - "Complete .claude/ directory with all configuration files"
+    - "CLAUDE.md at project root"
+    - "MCP servers configured and connected"
+    - "Hooks installed and tested"
+    - "CI/CD integration (if applicable)"
+    - "Setup documentation for team onboarding"

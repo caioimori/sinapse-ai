@@ -1,0 +1,188 @@
+name: squad-council
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de Strategic Council — 11 conselheiros estrategicos de classe mundial.
+  Modelos mentais, decision-making, lideranca, cultura, inovacao, investimentos
+  e filosofia de negocios. Cada conselheiro traz frameworks reais, principios
+  testados e decadas de experiencia destilada em sabedoria acionavel.
+
+metadata:
+  tier: 1
+  domain: strategic-advisory
+  complexity: high
+  language: pt-BR
+  created: "2026-03-16"
+  author: "Sinapse"
+  agents_count: 11
+  tasks_count: 56
+  knowledge_bases_count: 3
+  workflows_count: 2
+  templates_count: 0
+  checklists_count: 0
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+agents:
+  - id: council-orqx
+    name: Zenith
+    icon: "🏛️"
+    role: Strategic Council Orchestrator
+    file: agents/council-orqx.md
+    tasks_count: 8
+
+  - id: ray-dalio
+    name: Ray Dalio
+    icon: "📐"
+    role: Principles Architect & Systematic Decision-Making
+    file: agents/ray-dalio.md
+    tasks_count: 6
+
+  - id: charlie-munger
+    name: Charlie Munger
+    icon: "🧠"
+    role: Multidisciplinary Thinker & Mental Models
+    file: agents/charlie-munger.md
+    tasks_count: 6
+
+  - id: naval-ravikant
+    name: Naval Ravikant
+    icon: "🧘"
+    role: Philosopher-Investor & Wealth-Leverage Advisor
+    file: agents/naval-ravikant.md
+    tasks_count: 6
+
+  - id: peter-thiel
+    name: Peter Thiel
+    icon: "♟️"
+    role: Contrarian Strategist & Monopoly Thinker
+    file: agents/peter-thiel.md
+    tasks_count: 6
+
+  - id: reid-hoffman
+    name: Reid Hoffman
+    icon: "🔗"
+    role: Network Strategist & Blitzscaling Advisor
+    file: agents/reid-hoffman.md
+    tasks_count: 6
+
+  - id: simon-sinek
+    name: Simon Sinek
+    icon: "⭕"
+    role: Purpose-Driven Leadership & Infinite Mindset
+    file: agents/simon-sinek.md
+    tasks_count: 4
+
+  - id: brene-brown
+    name: Brene Brown
+    icon: "💛"
+    role: Vulnerability, Courage & Empathic Leadership
+    file: agents/brene-brown.md
+    tasks_count: 4
+
+  - id: patrick-lencioni
+    name: Patrick Lencioni
+    icon: "🏗️"
+    role: Organizational Health & Team Dynamics
+    file: agents/patrick-lencioni.md
+    tasks_count: 4
+
+  - id: derek-sivers
+    name: Derek Sivers
+    icon: "🎯"
+    role: Minimalist Founder & Simplicity Philosopher
+    file: agents/derek-sivers.md
+    tasks_count: 3
+
+  - id: yvon-chouinard
+    name: Yvon Chouinard
+    icon: "🏔️"
+    role: Purpose-Driven Business & Environmental Activism
+    file: agents/yvon-chouinard.md
+    tasks_count: 3
+
+total_tasks: 56
+
+workflows:
+  - id: strategic-advisory-session
+    name: Strategic Advisory Session
+    file: workflows/strategic-advisory-session.yaml
+    description: "Sessao de conselho estrategico — questao apresentada, conselheiros consultados, sintese entregue"
+
+  - id: business-audit-cycle
+    name: Business Audit Cycle
+    file: workflows/business-audit-cycle.yaml
+    description: "Ciclo de auditoria de negocio — diagnostico multi-perspectiva com recomendacoes priorizadas"
+
+knowledge_base:
+  - id: routing-catalog
+    file: knowledge-base/routing-catalog.md
+    description: "Catalogo de roteamento por dominio — keywords, agentes primarios e secundarios"
+
+  - id: mental-models-catalog
+    file: knowledge-base/mental-models-catalog.md
+    description: "Catalogo de 50+ modelos mentais organizados por categoria e aplicacao"
+
+  - id: strategic-frameworks-reference
+    file: knowledge-base/strategic-frameworks-reference.md
+    description: "Referencia de frameworks estrategicos dos 10 conselheiros consolidados"
+
+quality_standards:
+  reference_authors:
+    - "Ray Dalio (Principles, Changing World Order)"
+    - "Charlie Munger (Poor Charlie's Almanack, Latticework of Mental Models)"
+    - "Naval Ravikant (Almanack of Naval Ravikant)"
+    - "Peter Thiel (Zero to One)"
+    - "Reid Hoffman (Blitzscaling, The Alliance, The Start-Up of You)"
+    - "Simon Sinek (Start With Why, The Infinite Game, Leaders Eat Last)"
+    - "Brene Brown (Dare to Lead, Daring Greatly, Rising Strong)"
+    - "Patrick Lencioni (Five Dysfunctions, The Advantage, Working Genius)"
+    - "Derek Sivers (Anything You Want, Hell Yeah or No, Useful Not Famous)"
+    - "Yvon Chouinard (Let My People Go Surfing)"
+
+  core_concepts:
+    - name: "Principles-Based Decision Making"
+      description: "Converter experiencia em regras explicitas que conectam valores a acoes (Dalio)"
+    - name: "Latticework of Mental Models"
+      description: "Resolver problemas aplicando modelos de multiplas disciplinas simultaneamente (Munger)"
+    - name: "Specific Knowledge + Leverage"
+      description: "Criar riqueza combinando conhecimento unico com alavancagem (Naval)"
+    - name: "Zero to One"
+      description: "Criar algo novo vs copiar o existente — monopolio vs competicao (Thiel)"
+    - name: "Blitzscaling"
+      description: "Priorizar velocidade sobre eficiencia em mercados winner-take-most (Hoffman)"
+    - name: "Start With Why"
+      description: "Liderar pela inspiracao, nao manipulacao — Golden Circle (Sinek)"
+    - name: "Dare to Lead"
+      description: "Vulnerabilidade como medida de coragem na lideranca (Brown)"
+    - name: "Organizational Health"
+      description: "Saude organizacional como vantagem competitiva definitiva (Lencioni)"
+    - name: "Hell Yeah or No"
+      description: "Se nao e um sim entusiastico, e um nao (Sivers)"
+    - name: "Purpose Over Profit"
+      description: "Negocios como ferramenta para proteger o planeta (Chouinard)"
+
+cross_squad_handoffs:
+  inbound:
+    - from: squad-product
+      receives: "Product strategy questions, roadmap decisions, feature prioritization"
+    - from: squad-commercial
+      receives: "Business model decisions, pricing strategy, market entry"
+    - from: squad-finance
+      receives: "Investment decisions, capital allocation, financial modeling"
+    - from: squad-growth
+      receives: "Growth strategy questions, scaling decisions"
+
+  outbound:
+    - to: squad-product
+      sends: "Strategic direction, product vision, competitive positioning"
+    - to: squad-commercial
+      sends: "Business model recommendations, pricing philosophy, go-to-market strategy"
+    - to: squad-finance
+      sends: "Investment thesis, risk frameworks, portfolio strategy"
+    - to: squad-growth
+      sends: "Growth philosophy, scaling vs restraint recommendations"
+
+preferences:
+  file: preferences/README.md

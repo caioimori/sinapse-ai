@@ -1,0 +1,55 @@
+name: tier3-full-clone
+version: "1.0"
+description: "Pipeline completo — squad inteira com agente, KBs, tasks e workflows (80-200K+ palavras, 2-3 sessoes)"
+trigger: "Clone com content class A e confidence >= 85%"
+agents_involved:
+  - cloning-orqx
+  - source-hunter
+  - content-capturer
+  - cognitive-extractor
+  - mind-synthesizer
+  - agent-forger
+  - kb-architect
+  - squad-assembler
+
+notes: >
+  Este workflow e identico ao full-clone-pipeline.yaml mas otimizado
+  para distribuicao em 2-3 sessoes de 1M contexto. Ver full-clone-pipeline.yaml
+  para detalhes de cada fase.
+
+sessions:
+  session_1:
+    description: "Discovery + Capture + Extract"
+    phases: ["Phase 1", "Phase 2", "Phase 3"]
+    context_budget: "~500K tokens (transcricoes + extracoes)"
+
+  session_2:
+    description: "Synthesize + Generate Agent + Generate KBs"
+    phases: ["Phase 4", "Phase 5", "Phase 6"]
+    context_budget: "~300K tokens (perfil + artefatos gerados)"
+
+  session_3:
+    description: "Generate Tasks + Assemble + Deploy"
+    phases: ["Phase 7", "Phase 8"]
+    context_budget: "~200K tokens (tasks + squad assembly)"
+    condition: "Necessaria apenas se task/workflow generation e complexa"
+
+phases:
+  - name: "Phase 1-3: Discovery → Extract"
+    agents: [source-hunter, content-capturer, cognitive-extractor]
+    output: "5 camadas DNA extraidas"
+    session: 1
+
+  - name: "Phase 4-6: Synthesize → Generate"
+    agents: [mind-synthesizer, agent-forger, kb-architect]
+    output: "cognitive-profile.md + agent.md + KBs"
+    session: 2
+
+  - name: "Phase 7-8: Tasks → Deploy"
+    agents: [squad-assembler]
+    output: "Squad completa deployada"
+    session: 3
+
+completion:
+  notification: "cloning-orqx"
+  message: "Workflow concluido com sucesso."

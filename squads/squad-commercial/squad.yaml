@@ -1,0 +1,268 @@
+name: squad-commercial
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de Commercial Systems — orquestra CRM, pipeline, funnel architecture,
+  offer design, revenue operations, client success e sales enablement para
+  maximizar receita previsivel e retenção de clientes. Todo deal e qualificado,
+  toda oferta e irresistivel, toda relacao e cultivada.
+
+metadata:
+  tier: 2
+  domain: commercial-systems
+  complexity: high
+  language: pt-BR
+  created: "2026-03-13"
+  author: "Sinapse"
+  agents_count: 11
+  tasks_count: 85
+  knowledge_bases_count: 13
+  workflows_count: 6
+  templates_count: 6
+  checklists_count: 3
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+agents:
+  - id: commercial-orqx
+    name: Pipeline
+    icon: "🚀"
+    role: Revenue Cycle Orchestrator
+    file: agents/commercial-orqx.md
+    tasks_count: 8
+
+  - id: cs-crm-specialist
+    name: Vault
+    icon: "🗄️"
+    role: CRM & Pipeline Operations Specialist
+    file: agents/cs-crm-specialist.md
+    tasks_count: 10
+
+  - id: cs-funnel-architect
+    name: Cascade
+    icon: "🌊"
+    role: Funnel Architecture & Demand Generation
+    file: agents/cs-funnel-architect.md
+    tasks_count: 10
+
+  - id: cs-offer-designer
+    name: Mint
+    icon: "💰"
+    role: Offer Architect & Pricing Strategist
+    file: agents/cs-offer-designer.md
+    tasks_count: 10
+
+  - id: cs-revops-analyst
+    name: Ledger
+    icon: "📊"
+    role: Revenue Operations & Analytics Lead
+    file: agents/cs-revops-analyst.md
+    tasks_count: 10
+
+  - id: cs-client-success
+    name: Bond
+    icon: "🤝"
+    role: Client Success & Retention Strategist
+    file: agents/cs-client-success.md
+    tasks_count: 10
+
+  - id: cs-sales-enablement
+    name: Edge
+    icon: "⚔️"
+    role: Sales Methodology & Enablement Coach
+    file: agents/cs-sales-enablement.md
+    tasks_count: 8
+
+total_tasks: 66
+
+workflows:
+  - id: new-offer-launch
+    name: New Offer Launch
+    file: workflows/new-offer-launch.yaml
+    description: "Lancamento de nova oferta — do design ao CRM configurado"
+
+  - id: revenue-forecasting-cycle
+    name: Revenue Forecasting Cycle
+    file: workflows/revenue-forecasting-cycle.yaml
+    description: "Ciclo de forecasting — pipeline audit a projecao board-ready"
+
+  - id: client-onboarding-activation
+    name: Client Onboarding & Activation
+    file: workflows/client-onboarding-activation.yaml
+    description: "Onboarding de cliente — do contrato ao primeiro valor entregue"
+
+  - id: churn-prevention-protocol
+    name: Churn Prevention Protocol
+    file: workflows/churn-prevention-protocol.yaml
+    description: "Protocolo de prevencao de churn — Yellow e Red save plays"
+
+  - id: expansion-revenue-cycle
+    name: Expansion Revenue Cycle
+    file: workflows/expansion-revenue-cycle.yaml
+    description: "Ciclo de expansao — upsell, cross-sell e account growth"
+
+  - id: quarterly-commercial-review
+    name: Quarterly Commercial Review
+    file: workflows/quarterly-commercial-review.yaml
+    description: "Revisao trimestral completa do sistema comercial"
+
+knowledge_base:
+  - id: sales-qualification-methodology
+    file: knowledge-base/sales-qualification-methodology.md
+    description: "MEDDIC, BANT, SPIN, Sandler, Challenger — frameworks de qualificacao"
+
+  - id: revenue-architecture-models
+    file: knowledge-base/revenue-architecture-models.md
+    description: "CAC, LTV, Magic Number, NRR, Quick Ratio — unit economics"
+
+  - id: offer-design-frameworks
+    file: knowledge-base/offer-design-frameworks.md
+    description: "Hormozi Value Equation, pricing, positioning, proposal frameworks"
+
+  - id: funnel-architecture-reference
+    file: knowledge-base/funnel-architecture-reference.md
+    description: "TOFU/MOFU/BOFU, Bow Tie Funnel, Value Ladder, AIDA"
+
+  - id: customer-success-operations
+    file: knowledge-base/customer-success-operations.md
+    description: "Health Score, onboarding, churn prevention, NPS, expansion"
+
+  - id: prospecting-pipeline-generation
+    file: knowledge-base/prospecting-pipeline-generation.md
+    description: "ICP, ABM, outbound, lead scoring, Predictable Revenue model"
+
+  - id: commercial-tech-stack-guide
+    file: knowledge-base/commercial-tech-stack-guide.md
+    description: "CRM, sales engagement, revenue intelligence, CS platforms"
+
+  - id: commercial-analytics-reporting
+    file: knowledge-base/commercial-analytics-reporting.md
+    description: "Revenue dashboards, pipeline reports, cohort analysis"
+
+  - id: agency-productization-playbook
+    file: knowledge-base/agency-productization-playbook.md
+    description: "Productized services, value pricing, service-as-a-product"
+
+  - id: ai-as-competitive-infrastructure
+    file: knowledge-base/ai-as-competitive-infrastructure.md
+    description: "IA como infraestrutura de vantagem comercial — framing de venda por consequencia"
+
+checklists:
+  - id: deal-qualification-checklist
+    file: checklists/deal-qualification-checklist.md
+    description: "Checklist MEDDPICC de qualificacao de deal (8 elementos, /16 scale)"
+
+  - id: proposal-quality-checklist
+    file: checklists/proposal-quality-checklist.md
+    description: "Checklist de qualidade de proposta comercial"
+
+  - id: client-onboarding-checklist
+    file: checklists/client-onboarding-checklist.md
+    description: "Checklist de onboarding de novo cliente"
+
+templates:
+  - id: proposal-template
+    file: templates/proposal-template.md
+    description: "Template de proposta comercial three-options"
+
+  - id: success-plan-template
+    file: templates/success-plan-template.md
+    description: "Template de Success Plan co-autorado com cliente"
+
+  - id: qbr-template
+    file: templates/qbr-template.md
+    description: "Template de Quarterly Business Review"
+
+  - id: commercial-forecast-template
+    file: templates/commercial-forecast-template.md
+    description: "Template de forecast de revenue trimestral"
+
+  - id: offer-brief-template
+    file: templates/offer-brief-template.md
+    description: "Template de brief para nova oferta/servico"
+
+  - id: win-loss-analysis-template
+    file: templates/win-loss-analysis-template.md
+    description: "Template de analise win/loss"
+
+quality_standards:
+  reference_authors:
+    - "Aaron Ross (Predictable Revenue)"
+    - "Jacco van der Kooij (Revenue Architecture)"
+    - "Alex Hormozi ($100M Offers)"
+    - "Mark Roberge (Sales Acceleration Formula)"
+    - "Nick Mehta & Lincoln Murphy (Customer Success)"
+    - "Brent Adamson & Matt Dixon (The Challenger Sale)"
+    - "Blair Enns (Pricing Creativity, Win Without Pitching)"
+    - "April Dunford (Obviously Awesome)"
+    - "Russell Brunson (DotCom Secrets)"
+    - "David Skok (For Entrepreneurs — SaaS Metrics)"
+    - "Jason Lemkin (SaaStr)"
+    - "Ron Baker (Value Pricing)"
+    - "Neil Rackham (SPIN Selling)"
+    - "Fred Reichheld (NPS, Loyalty Effect)"
+    - "David Maister (Trusted Advisor)"
+
+  reference_companies:
+    - "Salesforce (CRM, Revenue Cloud)"
+    - "HubSpot (Inbound CRM, Marketing Hub)"
+    - "Gong (Revenue Intelligence)"
+    - "Gainsight (Customer Success Platform)"
+    - "Clari (Revenue Operations)"
+    - "Outreach (Sales Engagement)"
+    - "ClickFunnels (Funnel Building)"
+    - "Stripe (Revenue Analytics)"
+    - "PandaDoc (Proposals & CPQ)"
+    - "Apollo.io (Prospecting)"
+
+  core_concepts:
+    - name: "Predictable Revenue"
+      description: "Separacao de funcoes (SDR/AE/CS) para pipeline escalavel"
+    - name: "MEDDIC/MEDDPICC"
+      description: "Framework de qualificacao: Metrics, Economic Buyer, Decision Criteria/Process, Identify Pain, Champion"
+    - name: "Bow Tie Funnel"
+      description: "Extensao do funil tradicional para incluir retencao, expansao e advocacy"
+    - name: "Value Equation (Hormozi)"
+      description: "(Dream Outcome × P(Achievement)) / (Time Delay × Effort)"
+    - name: "Customer Health Score"
+      description: "Composite score preditor de churn/expansion baseado em usage, satisfaction, outcomes"
+
+  mandatory_gates:
+    - name: "Deal Qualification Gate"
+      description: "MEDDPICC score >= 10/16 antes de enviar proposta"
+      blocking: true
+      agent: cs-crm-specialist
+
+    - name: "Proposal Quality Gate"
+      description: "Three-options, value framing, social proof, risk reversal obrigatorios"
+      blocking: true
+      agent: cs-offer-designer
+
+cross_squad_handoffs:
+  inbound:
+    - from: squad-growth
+      receives: "Lead scoring data, conversion analytics, campaign performance, attribution data"
+    - from: squad-content
+      receives: "TOFU/MOFU/BOFU content assets, case studies, sales enablement content"
+    - from: squad-copy
+      receives: "Proposal copy, email sequences, landing page copy, objection handling scripts"
+    - from: squad-brand
+      receives: "Brand guidelines for proposals, presentation templates, messaging framework"
+    - from: squad-design
+      receives: "Landing pages, conversion-optimized pages, UX insights"
+
+  outbound:
+    - to: squad-growth
+      sends: "Pipeline data, win/loss intelligence, ICP feedback, funnel requirements"
+    - to: squad-content
+      sends: "Content briefs for funnel stages, objection-based content requests, win stories"
+    - to: squad-copy
+      sends: "Proposal copy briefs, email sequence requirements, case study raw data"
+    - to: squad-product
+      sends: "Feature requests, client feedback, expansion blockers, NPS verbatims"
+    - to: squad-commercial
+      sends: "Tech stack requirements, process automation needs, reporting requirements"
+
+preferences:
+  file: preferences/README.md

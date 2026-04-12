@@ -1,0 +1,178 @@
+name: zero-to-digital-product-cycle
+version: "1.0"
+description: >
+  Ciclo completo para criacao de produto digital do zero — do brief ao deploy
+  performatico com gates obrigatorios de acessibilidade e performance.
+trigger: Produto/site novo do zero ou redesign completo
+owner: design-orqx (Nexus)
+max_iterations: 3
+
+phases:
+  - name: "Phase 1: Discovery & UX Strategy"
+    agent: dx-ux-strategist (Compass)
+    tasks:
+      - synthesize-user-research
+      - create-user-personas
+      - map-user-journeys
+      - design-information-architecture
+      - create-wireframe-brief
+      - create-ux-principles
+    input:
+      - Brief do cliente (de Nexus)
+      - Dados de pesquisa (de squad-research, se disponivel)
+      - Brand guidelines (de squad-brand, se disponivel)
+    output:
+      - UX brief completo
+      - Personas documentadas
+      - Journey maps
+      - Arquitetura de informacao
+      - Wireframe brief estrategico
+    gate:
+      name: UX Brief Approval
+      criteria: UX brief revisado e aprovado por stakeholder
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 2: UI Design"
+    agent: dx-ui-designer (Canvas)
+    depends_on: Phase 1
+    tasks:
+      - compose-screen-layouts
+      - design-visual-hierarchy
+      - create-responsive-grid-system
+      - design-component-visual-states
+      - create-dark-light-themes
+      - design-form-patterns
+      - create-empty-error-states
+      - create-mobile-first-designs
+      - produce-design-handoff-specs
+    input:
+      - UX brief (de Phase 1)
+      - Brand guidelines (de squad-brand)
+      - Copy aprovada (de squad-copy)
+    output:
+      - Screen designs completos
+      - Component visual specs
+      - Responsive layouts
+      - Design handoff specs
+    gate:
+      name: UI Design Approval
+      criteria: Designs revisados, handoff specs completos
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 3: Design System Architecture"
+    agent: dx-design-system-architect (Stratum)
+    depends_on: Phase 2
+    tasks:
+      - define-token-taxonomy
+      - create-primitive-tokens
+      - create-semantic-tokens
+      - create-component-tokens
+      - design-component-api-contracts
+      - define-atomic-hierarchy
+      - configure-token-export-pipeline
+    input:
+      - UI designs (de Phase 2)
+      - Brand tokens (de squad-brand)
+    output:
+      - Token taxonomy (3-tier)
+      - Component API contracts
+      - Token export pipeline configurado
+    gate:
+      name: Token Architecture Approval
+      criteria: Tokens documentados, APIs sem ambiguidade
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 4: Frontend Implementation"
+    agent: dx-frontend-engineer (Scaffold)
+    depends_on: Phase 3
+    parallel_support:
+      - agent: dx-interaction-designer (Kinetic)
+        tasks:
+          - define-motion-principles
+          - create-easing-curve-library
+          - spec-micro-interactions
+          - create-motion-tokens
+    tasks:
+      - setup-frontend-architecture
+      - implement-component-library
+      - configure-build-tooling
+      - implement-routing-strategy
+      - setup-state-management
+      - implement-responsive-layouts
+      - setup-storybook-integration
+      - implement-form-system
+      - setup-testing-infrastructure
+    input:
+      - Design handoff specs (de Phase 2)
+      - Token files + API contracts (de Phase 3)
+      - Motion specs (de Kinetic)
+    output:
+      - Componentes implementados
+      - Paginas construidas
+      - Storybook stories completos
+      - Testes passando
+    gate:
+      name: Implementation Complete
+      criteria: Todos componentes construidos, testes passando, Storybook completo
+      verdict: [COMPLETE, NEEDS_WORK]
+
+  - name: "Phase 5: Accessibility + Motion QA"
+    agents:
+      - dx-accessibility-specialist (Beacon)
+      - dx-interaction-designer (Kinetic)
+    depends_on: Phase 4
+    execution: parallel
+    tasks:
+      beacon:
+        - conduct-wcag-audit
+        - review-aria-patterns
+        - test-keyboard-navigation
+        - verify-color-contrast
+        - certify-accessibility-compliance
+      kinetic:
+        - audit-motion-performance
+    input:
+      - Produto implementado em staging
+    output:
+      - A11y audit report
+      - Motion review report
+      - Remediacoes prescritas
+    gate:
+      name: Accessibility Gate
+      criteria: WCAG 2.2 AA pass + motion validated
+      verdict: [PASS, CONDITIONAL, FAIL]
+      blocking: true
+      on_fail: Retorna para Phase 4 com prescricoes
+
+  - name: "Phase 6: Performance Certification"
+    agent: dx-performance-engineer (Apex)
+    depends_on: Phase 5
+    tasks:
+      - audit-core-web-vitals
+      - define-performance-budgets
+      - setup-performance-ci-gates
+    input:
+      - Produto em staging (pos-a11y fixes)
+    output:
+      - Core Web Vitals audit report
+      - Performance budget compliance
+      - CI gates configurados
+    gate:
+      name: Performance Gate
+      criteria: "LCP < 2.5s, INP < 200ms, CLS < 0.1, Lighthouse >= 90"
+      verdict: [CERTIFIED, EXCEEDS_BUDGET, FAIL]
+      blocking: true
+      on_fail: Retorna para Phase 4 com otimizacoes prescritas
+
+completion:
+  criteria:
+    - Phase 5 gate = PASS ou CONDITIONAL
+    - Phase 6 gate = CERTIFIED
+  deliverables:
+    - Produto digital completo em staging
+    - Design system documentado
+    - A11y compliance statement
+    - Performance certification report
+  handoff_to:
+    - "@devops para deploy de producao"
+    - "squad-growth para tracking e testes"

@@ -1,0 +1,93 @@
+name: story-development-delivery-cycle
+description: "Ciclo de desenvolvimento e entrega de stories dentro de sprints"
+version: "1.0"
+trigger: "Validated opportunity ready for implementation, or prioritized backlog item"
+estimated_duration: "1-2 sprints (2-4 weeks)"
+
+phases:
+  - name: "Plan"
+    description: "Planejar sprint e alocar capacidade"
+    agents:
+      - ps-delivery-manager
+      - product-orqx
+    tasks:
+      - manage-sprint-capacity-planning
+      - run-sprint-planning-session
+      - map-cross-functional-dependencies
+    outputs:
+      - capacity-plan
+      - sprint-backlog
+      - dependency-map
+    gate:
+      criteria: "Sprint goal defined, team confidence >= 3.5/5, dependencies mapped"
+      decision: "COMMIT to sprint / REDUCE scope"
+
+  - name: "Build"
+    description: "Executar desenvolvimento com monitoramento continuo"
+    agents:
+      - ps-delivery-manager
+      - ps-product-analyst
+    tasks:
+      - calculate-sprint-velocity
+      - configure-feature-flag-rollout
+    outputs:
+      - velocity-tracking
+      - feature-flag-config
+    gate:
+      criteria: "Features code-complete, tests passing, flags configured"
+      decision: "GO to Launch / CARRY OVER incomplete items"
+    notes: "Mid-sprint check at 50% — if blocked, escalate immediately"
+
+  - name: "Launch"
+    description: "Lancar feature com controle e monitoramento"
+    agents:
+      - ps-delivery-manager
+      - ps-product-analyst
+    tasks:
+      - execute-feature-launch-checklist
+      - write-release-notes
+    outputs:
+      - launch-checklist-completed
+      - release-notes
+    gate:
+      criteria: "All launch checklist items passed, rollback plan ready"
+      decision: "SHIP / DELAY (with specific blocker)"
+
+  - name: "Monitor"
+    description: "Monitorar metricas pos-lancamento"
+    agents:
+      - ps-product-analyst
+      - ps-delivery-manager
+    tasks:
+      - calculate-product-health-metrics
+      - generate-product-metrics-report
+    outputs:
+      - health-metrics
+      - metrics-report
+    gate:
+      criteria: "48h post-launch stable, no critical issues"
+      decision: "STABLE / ROLLBACK / HOTFIX"
+
+  - name: "Reflect"
+    description: "Retrospectiva e aprendizados"
+    agents:
+      - ps-delivery-manager
+      - product-orqx
+    tasks:
+      - facilitate-sprint-retrospective
+      - triage-technical-debt-backlog
+    outputs:
+      - retro-notes
+      - tech-debt-backlog-updated
+    handoff: "Feeds back into next Plan phase"
+
+cadence:
+  sprint_duration: "2 weeks (default, adjustable)"
+  planning: "First day of sprint"
+  mid_check: "Mid-sprint (day 5)"
+  demo: "Last day of sprint"
+  retro: "After demo, same day"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

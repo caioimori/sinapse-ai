@@ -1,0 +1,129 @@
+id: presentation-creation
+name: Presentation Creation
+description: Workflow for producing a workshop or mentoring presentation from objective to reviewed slide deck.
+version: "1.0"
+agents:
+  - Deck
+  - Scribe
+  - Blueprint
+
+phases:
+  - id: phase-1-objective
+    name: Objective
+    agent: Blueprint
+    description: Define the presentation purpose, audience, and measurable outcome.
+    inputs:
+      - Presentation brief or request
+      - Audience description
+      - Context (workshop, internal training, keynote, mentoring session)
+    tasks:
+      - 'Write presentation objective (1 sentence: "By the end, participants will be able to...")'
+      - Identify audience: experience level, prior knowledge, expectations
+      - Define format: lecture, workshop, hybrid, mentoring
+      - Define duration and structure (e.g., 60 min = 45 min content + 15 min Q&A)
+      - Identify key message (the one thing they must leave knowing)
+      - List 3–5 supporting points that build to the key message
+    outputs:
+      - presentation-brief.md
+    gate: Objective and key message approved before outlining
+
+  - id: phase-2-outline
+    name: Outline
+    agent: Scribe
+    description: Build structured presentation outline using story arc.
+    inputs:
+      - presentation-brief.md
+    tasks:
+      - Structure content using story arc (Problem → Stakes → Solution → Proof → Action)
+      - Identify slide types needed per section (concept, diagram, example, exercise, quote)
+      - Estimate slide count per section
+      - Note where exercises or breakouts occur (workshop presentations)
+      - Note where demos or live examples occur
+      - Write transition lines between sections
+      - Identify slides that need visual design vs text
+    outputs:
+      - presentation-outline.md
+    quality_checks:
+      - Outline follows a logical argument (not just a topic list)
+      - Exercises placed every 20–30 min in workshop format
+      - Total estimated slides appropriate for duration (1–2 min per slide average)
+    gate: Outline reviewed and approved before slide production
+
+  - id: phase-3-slides
+    name: Slides
+    agent: Deck
+    description: Build slide deck from outline following presentation-design-principles.md.
+    inputs:
+      - presentation-outline.md
+      - presentation-brief.md
+      - Brand/template assets
+    tasks:
+      - Create title slide (presentation title, presenter name, date/event)
+      - Create agenda slide
+      - Build content slides from outline (one idea per slide)
+      - Add diagrams and visual aids for key concepts
+      - Create exercise slides with clear prompts (workshop format)
+      - Create summary slide per section
+      - Add transition slides between major sections
+      - Add final summary + Q&A + resources slide
+      - Apply brand colors, fonts, and layout consistently
+    outputs:
+      - presentation-draft.pptx (or .key or Figma)
+    quality_checks:
+      - No slide with more than 6 words of body text (if visual-only)
+      - No slide with wall of bullet points
+      - Consistent visual hierarchy
+      - Minimum 24pt font
+      - Color used purposefully (max 3 colors)
+    gate: Slide deck reviewed by instructor/presenter for content accuracy
+
+  - id: phase-4-notes
+    name: Speaker Notes
+    agent: Scribe
+    description: Write full speaker notes for every slide.
+    inputs:
+      - presentation-draft.pptx
+      - presentation-outline.md
+    tasks:
+      - Write full sentences for each slide's speaker notes (not keywords)
+      - Include timing cues per section ("[~3 min] [~10 min exercise]")
+      - Add transition language between slides ("This leads us to...")
+      - "Mark story moments, statistics, and demo cues: [STORY] [STAT] [DEMO]"
+      - Add facilitation notes for exercise slides (what to observe, how to debrief)
+      - Write pause prompts for audience reflection or chat responses
+    outputs:
+      - presentation-with-notes.pptx
+    quality_checks:
+      - Every slide has notes (even if just "pause for questions")
+      - Timing cues add up to total session duration
+      - No slide note that just repeats slide text verbatim
+    gate: Speaker notes reviewed and presenter rehearsal scheduled
+
+  - id: phase-5-review
+    name: Review
+    agent: Blueprint
+    description: Final review pass — alignment, quality, and presenter readiness.
+    inputs:
+      - presentation-with-notes.pptx
+      - presentation-brief.md
+    tasks:
+      - Verify presentation achieves stated objective
+      - Check key message is clear and memorable
+      - Review for cognitive load (nothing too dense per slide)
+      - Check exercises are actionable and timed
+      - Verify all links, videos, and embedded media work
+      - Export PDF for audience handout (notes hidden)
+      - Export presenter version (with notes)
+      - Create resource list or follow-up doc if needed
+    outputs:
+      - presentation-final.pptx
+      - presentation-handout.pdf
+      - presentation-resources.md (optional)
+      - review-report.md (approval status + notes)
+    gate: APPROVED by instructor before delivery
+
+completion_criteria:
+  - Objective clearly stated and achieved in slide structure
+  - Speaker notes complete for all slides
+  - Final deck and handout exported and ready
+  - Review approved before presentation is delivered

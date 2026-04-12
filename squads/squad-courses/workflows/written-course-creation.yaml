@@ -1,0 +1,145 @@
+id: written-course-creation
+name: Written Course Creation
+description: Workflow for producing a text-based course with written lessons, workbooks, and exercises.
+version: "1.0"
+agents:
+  - Scribe
+  - Gauge
+  - Compass
+
+phases:
+  - id: phase-1-outline
+    name: Outline
+    agent: Compass
+    description: Create a detailed written course outline from the curriculum map.
+    inputs:
+      - curriculum-map.md (from full-course-creation or standalone)
+      - course-scope.md
+    tasks:
+      - Convert curriculum map into written course outline
+      - Define reading length per lesson (target 1,000–2,500 words)
+      - Identify lessons requiring diagrams, tables, or visual aids
+      - Identify lessons requiring downloadable templates or worksheets
+      - Sequence lessons within each module (foundational to applied)
+      - Write one-sentence content brief per lesson
+    outputs:
+      - written-course-outline.md
+    gate: Outline reviewed and approved before writing begins
+
+  - id: phase-2-write
+    name: Write
+    agent: Scribe
+    description: Write all lesson content using lesson-plan-template.md as structure.
+    inputs:
+      - written-course-outline.md
+      - lesson-plans/
+    tasks:
+      - Write each lesson using the lesson-plan-template
+      - Open each lesson with objective and hook (problem or question)
+      - Use headers (H2, H3) to break content into scannable sections
+      - Include at least one example or case study per lesson
+      - Include 1 concept per section — no section longer than 400 words
+      - Write plain language (Grade 8–10 reading level)
+      - End each lesson with key takeaways (3–5 bullets)
+    outputs:
+      - written-lessons/ (one .md per lesson, {module}-{lesson}.md)
+    quality_checks:
+      - Each lesson has: objective, hook, content sections, example, takeaways
+      - No lesson shorter than 800 words or longer than 3,000 words
+      - No jargon without definition
+      - Every exercise prompt is actionable
+    gate: All lessons written and reviewed by instructor
+
+  - id: phase-3-workbook
+    name: Workbook
+    agent: Scribe
+    description: Create module workbooks using workbook-template.md.
+    inputs:
+      - written-lessons/
+      - assessments/exercises/
+    tasks:
+      - Create one workbook per module using workbook-template.md
+      - Include pre-assessment (What do you know so far?)
+      - Include fill-in exercises for key frameworks
+      - Include reflection prompts (at least 2 per module)
+      - Include practical application exercise (student's real context)
+      - Include post-assessment (What can you do now?)
+      - Design for print and digital use (clean layout, enough whitespace)
+    outputs:
+      - workbooks/ ({module}-workbook.md or .pdf)
+    quality_checks:
+      - Every exercise has a clear prompt and response space
+      - Pre and post assessments are aligned to module outcome
+    gate: Workbooks reviewed for completeness and usability
+
+  - id: phase-4-exercises
+    name: Exercises
+    agent: Gauge
+    description: Write and validate all standalone exercises and quizzes.
+    inputs:
+      - written-lessons/
+      - curriculum-map.md
+    tasks:
+      - Write 3–5 quiz questions per lesson (formative)
+      - Write module-end exercise (Apply level or above)
+      - Write answer keys and rationales for all quiz questions
+      - Write rubric for module-end exercises
+      - Write self-evaluation prompts for each module (confidence + reflection)
+      - Write final project brief
+    outputs:
+      - assessments/quizzes/ ({module}-{lesson}-quiz.md)
+      - assessments/exercises/ ({module}-exercise.md)
+      - assessments/rubrics/
+      - assessments/final-project.md
+    quality_checks:
+      - All quiz questions mapped to a specific lesson objective
+      - Wrong answers have explanations (not just "incorrect")
+      - Rubric criteria are observable and concrete
+    gate: All exercises and quizzes validated for Bloom's alignment
+
+  - id: phase-5-proofread
+    name: Proofread
+    agent: Scribe
+    description: Editorial pass across all written content for quality and consistency.
+    inputs:
+      - written-lessons/
+      - workbooks/
+      - assessments/
+    tasks:
+      - Proofread all lessons for grammar and spelling
+      - Check consistency of terminology across modules
+      - Verify all internal references (e.g., "as covered in Module 2") are accurate
+      - Check all links and references work
+      - Ensure consistent formatting style across all files
+      - Remove filler phrases ("basically", "obviously", "just")
+      - Verify reading level is appropriate for target audience
+    outputs:
+      - proofread-complete-log.md (list of files reviewed + issues fixed)
+    gate: Proofread sign-off before publishing
+
+  - id: phase-6-publish
+    name: Publish
+    agent: Compass
+    description: Upload and configure all written content on the course platform.
+    inputs:
+      - written-lessons/
+      - workbooks/
+      - assessments/
+      - proofread-complete-log.md
+    tasks:
+      - Upload lessons to platform in correct module/lesson order
+      - Configure lesson titles and descriptions
+      - Attach workbooks as downloadable resources
+      - Upload quizzes using platform quiz builder
+      - Configure exercise submission method (if applicable)
+      - Test student view on desktop and mobile
+      - Verify all downloads work
+    outputs:
+      - publish-log.md
+    gate: Student view tested and all content accessible
+
+completion_criteria:
+  - All lessons written, proofread, and published
+  - All workbooks created and attached as downloads
+  - All exercises and quizzes configured on platform
+  - Student view tested on desktop and mobile

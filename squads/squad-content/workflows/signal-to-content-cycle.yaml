@@ -1,0 +1,127 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Signal-to-Content Cycle
+# ══════════════════════════════════════════════════════════════════════════════
+# Ciclo completo: deteccao de sinal → producao de conteudo → publicacao → analise
+# Pipeline: Radar → North → Arc → Morph → Index → Publicacao → Lens → Retrofeed
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: signal-to-content-cycle
+version: 1.0.0
+description: >
+  Ciclo completo desde a deteccao de um sinal de mercado ate a analise de
+  performance pos-publicacao. Este e o workflow PRIMARIO da squad — representa
+  o pipeline end-to-end de producao de conteudo baseado em inteligencia.
+trigger: "Sinal relevante detectado pelo Radar (WARM ou HOT)"
+cadence: "Continuo — acionado por sinais"
+estimated_duration: "2-5 dias (normal) | <2 horas (fast-track HOT)"
+
+phases:
+  - phase: 1
+    name: "Signal Detection"
+    agent: "signal-intelligence (Radar)"
+    tasks:
+      - scan-daily-signals
+      - detect-trending-topics
+      - classify-signal-temperature
+      - map-signal-to-pillar
+    input: "Fontes configuradas, pilares editoriais"
+    output: "Sinais classificados (HOT/WARM/COLD) com SPV score"
+    gate: "Sinal relevante identificado (SPV >= 3 para WARM, >= 4 para HOT)"
+    fast_track: "Se HOT: bypass Phase 2, ir direto para Phase 3 com briefing rapido via Nexus"
+
+  - phase: 2
+    name: "Editorial Planning"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - prioritize-themes
+      - align-content-to-funnel
+      - plan-content-sprint
+    input: "Sinais priorizados do Radar, calendario editorial"
+    output: "Backlog priorizado com temas, formatos, template contracts definidos"
+    gate: "Temas selecionados e alinhados a pilares + funil"
+
+  - phase: 3
+    name: "Content Structuring"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - design-content-spine
+      - design-narrative-arc
+      - structure-carousel-progression  # ou structure-video-script, conforme formato
+      - design-hook-system
+    input: "Tema aprovado, formato definido, template contract"
+    output: "Espinha Dorsal + estrutura narrativa completa"
+    gate: "Espinha Dorsal validada (tese unica, mecanismo solido, prova presente, direcao clara)"
+
+  - phase: 4
+    name: "Content Production"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - write-carousel-content    # ou write-blog-article, write-reel-script, etc.
+      - create-content-brief      # se batch, usar batch-content-production
+    input: "Espinha Dorsal + estrutura + template contract"
+    output: "Conteudo escrito com verificacao algoritmica (5 sinais)"
+    gate: "Todos os campos dentro dos limites do template contract + 5/5 sinais algoritimicos"
+
+  - phase: 5
+    name: "Platform Adaptation"
+    agent: "platform-specialist (Morph)"
+    tasks:
+      - adapt-for-instagram-feed   # ou adapt-for-linkedin, adapt-for-tiktok, etc.
+      - optimize-for-algorithm
+    input: "Conteudo escrito, plataforma-alvo, template contract"
+    output: "Conteudo adaptado nativamente para plataforma"
+    gate: "Conteudo nativo, specs tecnicas respeitadas, algoritmo alinhado"
+
+  - phase: 6
+    name: "Quality Assurance"
+    agent: "content-governor (Index)"
+    tasks:
+      - validate-content-quality
+      - audit-template-compliance
+      - check-brand-consistency
+    input: "Conteudo adaptado, template contract, brand guidelines"
+    output: "QA report com scoring por dimensao"
+    gate: "APPROVED (media >= 4.0) ou NEEDS REVISION (lista de correcoes)"
+    on_fail: "Retornar para Phase 4 (Arc) com correcoes especificas"
+
+  - phase: 7
+    name: "Publication"
+    agent: "content-orqx (Nexus)"
+    tasks: []
+    input: "Conteudo aprovado pelo Index"
+    output: "Conteudo publicado na plataforma"
+    gate: "Publicacao confirmada"
+    note: "Publicacao pode ser manual (humano) ou via API/scheduler"
+
+  - phase: 8
+    name: "Performance Analysis"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - analyze-content-performance
+      - track-engagement-patterns
+      - identify-top-performers
+    input: "Conteudo publicado (48h-7d apos publicacao)"
+    output: "Performance report + insights"
+    gate: "Metricas coletadas e analisadas"
+
+  - phase: 9
+    name: "Feedback Loop"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - generate-retrofeed-insights
+    input: "Dados de performance acumulados"
+    output: "Retrofeed para Radar, North e Arc"
+    gate: "Insights distribuidos para todos os agentes relevantes"
+    note: "Fecha o ciclo — insights alimentam o proximo Signal Detection"
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  fast_track_protocol:
+    trigger: "Sinal HOT com janela de oportunidade < 24h"
+    bypass: [2]  # Skip Editorial Planning
+    timeline: "< 2 horas"
+    qa_mode: "express (checklist reduzido)"
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

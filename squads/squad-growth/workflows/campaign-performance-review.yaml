@@ -1,0 +1,73 @@
+name: Campaign Performance Review
+version: "1.0"
+description: >
+  Ciclo de review de performance de campanhas — setup de tracking,
+  analise cross-channel, atribuicao e otimizacao de ROAS.
+trigger: "Campaign launch, monthly review, budget allocation decision"
+owner: ga-campaign-analyst
+max_iterations: 2
+
+phases:
+  - name: "Phase 1: Campaign Setup & Tracking"
+    agents: [ga-campaign-analyst, ga-analytics-engineer]
+    tasks:
+      - define-utm-strategy
+      - setup-campaign-tracking
+      - configure-conversion-tracking
+    inputs:
+      - "Campaign brief"
+      - "Target channels"
+      - "Conversion goals"
+    outputs:
+      - "UTM naming convention"
+      - "Campaign tracking configured"
+      - "Conversion pixels/APIs active"
+    gate:
+      name: "Tracking Verification"
+      criteria: "All UTMs correct, conversion tracking verified, attribution window set"
+      verdict: ["VERIFIED", "FIX_REQUIRED"]
+      blocking: true
+
+  - name: "Phase 2: Performance Analysis"
+    agents: [ga-campaign-analyst, ga-data-analyst]
+    depends_on: "Phase 1"
+    tasks:
+      - analyze-channel-performance
+      - calculate-roas-optimization
+      - analyze-cac-by-channel
+      - model-multi-touch-attribution
+    inputs:
+      - "Campaign data (14+ days)"
+      - "Revenue data"
+      - "Cost data per channel"
+    outputs:
+      - "Channel performance report"
+      - "ROAS analysis"
+      - "CAC by channel"
+      - "Attribution model comparison"
+
+  - name: "Phase 3: Optimization & Reporting"
+    agents: [ga-campaign-analyst, ga-data-analyst]
+    depends_on: "Phase 2"
+    tasks:
+      - conduct-channel-mix-analysis
+      - create-campaign-dashboard
+      - create-campaign-report
+      - create-executive-report
+    inputs:
+      - "Performance analysis"
+      - "Attribution data"
+      - "Budget data"
+    outputs:
+      - "Channel mix recommendations"
+      - "Campaign dashboard"
+      - "Campaign performance report"
+      - "Executive summary"
+
+completion:
+  requires: "All analyses complete"
+  outputs:
+    - "Campaign performance report with recommendations"
+    - "Budget reallocation recommendations"
+    - "Live campaign dashboard"
+  review_cadence: "Weekly performance check, monthly deep review, quarterly strategy review"

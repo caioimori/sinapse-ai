@@ -1,0 +1,116 @@
+# Strategic Advisory Session Workflow
+# Full council session with multi-advisor consultation and synthesis
+
+workflow:
+  id: strategic-advisory-session
+  name: "Sessao de Conselho Estrategico"
+  version: "1.0"
+  trigger: "*council-session"
+  entry_agent: council-orqx
+  estimated_duration: "45-120 minutes"
+  description: |
+    Workflow estruturado de sessao do conselho onde uma questao estrategica e
+    apresentada, conselheiros relevantes sao consultados, perspectivas sao
+    sintetizadas, e uma recomendacao unificada e entregue com visoes dissidentes.
+
+  type: sequential
+  sequence:
+    - agent: council-orqx
+      action: diagnose-and-route
+      creates: diagnosis
+    - agent: council-orqx
+      action: convene-council-session
+      creates: agenda
+    - agent: "{selected_advisors}"
+      action: counsel
+      creates: perspectives
+    - agent: council-orqx
+      action: synthesize-perspectives
+      creates: recommendation
+
+phases:
+  - id: phase_1_diagnose
+    name: "Diagnose & Frame"
+    agent: council-orqx
+    task: diagnose-and-route.md
+    depends_on: []
+    description: "Diagnosticar a questao, identificar dominio, selecionar conselheiros"
+    checkpoint:
+      gate: "Questao enquadrada com precisao, 3-5 conselheiros selecionados com justificativa"
+      veto: "HALT se a questao e vaga demais para consulta significativa"
+    outputs:
+      - framed_question
+      - advisor_selection
+      - cross_cutting_answer
+
+  - id: phase_2_consult
+    name: "Advisor Consultation"
+    agent: "{3-5 selected advisors}"
+    task: convene-council-session.md
+    depends_on: [phase_1_diagnose]
+    description: "Cada conselheiro contribui com sua perspectiva atraves de seu framework"
+    parallel: true
+    advisor_slots:
+      - slot: "advisor_1"
+        deliverable: "Analysis + recommendation + confidence level"
+      - slot: "advisor_2"
+        deliverable: "Analysis + recommendation + confidence level"
+      - slot: "advisor_3"
+        deliverable: "Analysis + recommendation + confidence level"
+      - slot: "advisor_4"
+        deliverable: "Analysis + recommendation + confidence level (if selected)"
+      - slot: "advisor_5"
+        deliverable: "Analysis + recommendation + confidence level (if selected)"
+    checkpoint:
+      gate: "Todos os conselheiros selecionados forneceram analise e recomendacao"
+      veto: "HALT se algum conselheiro nao tem contexto suficiente para opinar"
+    outputs:
+      - individual_perspectives
+      - recommendations_per_advisor
+
+  - id: phase_3_synthesis
+    name: "Synthesis & Tension Mapping"
+    agent: council-orqx
+    task: synthesize-perspectives.md
+    depends_on: [phase_2_consult]
+    description: "Cruzar perspectivas, identificar concordancias, discordancias, e tensoes"
+    checkpoint:
+      gate: "Areas de concordancia e discordancia mapeadas, blind spots identificados"
+      veto: "HALT se todos concordam sem tensao — verificar groupthink"
+    outputs:
+      - synthesis_analysis
+      - tension_map
+      - blind_spots
+
+  - id: phase_4_recommend
+    name: "Unified Recommendation"
+    agent: council-orqx
+    task: synthesize-perspectives.md
+    depends_on: [phase_3_synthesis]
+    description: "Entregar recomendacao sintetizada com visoes dissidentes e proximos passos"
+    checkpoint:
+      gate: "Recomendacao inclui raciocinio, dissent, contrarian check, e proximos passos"
+      veto: "HALT se recomendacao ignora argumentos dissidentes fortes"
+    outputs:
+      - unified_recommendation
+      - contrarian_check
+      - next_steps
+
+completion_criteria:
+  - "Questao estrategica enquadrada com precisao e restricoes"
+  - "3-5 conselheiros consultados com perspectivas individuais documentadas"
+  - "Sintese identifica convergencia, divergencia, e blind spots"
+  - "Recomendacao unificada inclui visoes dissidentes e contrarian check"
+  - "Proximos passos claros definidos para implementacao"
+
+routing_guide:
+  investment_decisions: [ray-dalio, charlie-munger, naval-ravikant]
+  scaling_strategy: [reid-hoffman, peter-thiel, derek-sivers]
+  culture_crisis: [simon-sinek, brene-brown, patrick-lencioni]
+  founder_crossroads: [derek-sivers, yvon-chouinard, naval-ravikant]
+  leadership_challenge: [simon-sinek, brene-brown, patrick-lencioni]
+  market_entry: [peter-thiel, reid-hoffman, ray-dalio]
+  team_building: [patrick-lencioni, reid-hoffman, brene-brown]
+  exit_strategy: [charlie-munger, naval-ravikant, derek-sivers]
+  purpose_alignment: [simon-sinek, yvon-chouinard, brene-brown]
+  competitive_strategy: [peter-thiel, charlie-munger, reid-hoffman]

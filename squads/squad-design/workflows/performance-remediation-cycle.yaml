@@ -1,0 +1,108 @@
+name: performance-remediation-cycle
+version: "1.0"
+description: >
+  Ciclo de remediacao de performance para sites/produtos com Core Web Vitals
+  ruins ou regressao de performance. Audit → Fix → Validate → Prevent.
+trigger: Core Web Vitals falham ou regressao de performance detectada
+owner: design-orqx (Nexus)
+
+phases:
+  - name: "Phase 1: Performance Audit"
+    agent: dx-performance-engineer (Apex)
+    tasks:
+      - audit-core-web-vitals
+      - analyze-javascript-bundles
+      - govern-third-party-scripts
+      - eliminate-render-blocking
+    input:
+      - URL(s) de producao
+      - Chrome CrUX data (se disponivel)
+      - Relatos de performance ruim
+    output:
+      - Baseline metrics (LCP, INP, CLS, TTFB, TBT)
+      - Root cause analysis por metrica
+      - Lista priorizada de fixes (ICE scoring)
+      - Bundle analysis report
+      - Third-party impact report
+    gate:
+      name: Audit Complete
+      criteria: Root causes identificadas, fixes priorizados
+      verdict: [AUDIT_COMPLETE]
+
+  - name: "Phase 2: Implementation"
+    agent: dx-frontend-engineer (Scaffold)
+    depends_on: Phase 1
+    tasks:
+      - implement-lazy-loading
+      - configure-build-tooling
+    supporting_tasks_from_apex:
+      - optimize-image-pipeline
+      - extract-critical-css
+      - optimize-font-loading
+    input:
+      - Lista priorizada de fixes (de Phase 1)
+    output:
+      - Codigo otimizado
+      - Imagens otimizadas
+      - CSS critico extraido
+      - Fonts otimizados
+      - Lazy loading implementado
+    gate:
+      name: Fixes Implemented
+      criteria: Todos fixes de alta prioridade implementados
+      verdict: [IMPLEMENTED, PARTIAL]
+
+  - name: "Phase 3: Validation"
+    agent: dx-performance-engineer (Apex)
+    depends_on: Phase 2
+    tasks:
+      - audit-core-web-vitals
+      - define-performance-budgets
+    input:
+      - Staging com fixes aplicados
+    output:
+      - Comparacao before/after
+      - CWV target verification
+      - Budgets definidos
+    gate:
+      name: Performance Gate
+      criteria: "LCP < 2.5s, INP < 200ms, CLS < 0.1"
+      verdict: [CERTIFIED, NEEDS_MORE_WORK, FAIL]
+      blocking: true
+      on_fail: Retorna para Phase 2 com fixes adicionais
+
+  - name: "Phase 4: Prevention Setup"
+    agents:
+      - dx-performance-engineer (Apex)
+      - dx-frontend-engineer (Scaffold)
+    depends_on: Phase 3
+    execution: collaborative
+    tasks:
+      apex:
+        - setup-performance-ci-gates
+        - monitor-performance-regression
+      scaffold:
+        - configure-build-tooling
+    input:
+      - Melhorias validadas
+    output:
+      - Lighthouse CI configurado no pipeline
+      - Performance budget documentado e enforced
+      - Monitoring continuo configurado
+      - Alertas de regressao ativos
+    gate:
+      name: Prevention Active
+      criteria: CI gates passando, monitoring ativo
+      verdict: [ACTIVE, NEEDS_CONFIG]
+
+completion:
+  deliverables:
+    - Performance remediation report (before/after)
+    - Performance budgets definidos e enforced
+    - CI gates configurados
+    - Monitoring continuo ativo
+  metrics:
+    - "LCP improvement: X.Xs → Y.Ys"
+    - "INP improvement: Xms → Yms"
+    - "CLS improvement: X.XX → Y.YY"
+    - "Lighthouse score: X → Y"

@@ -1,0 +1,118 @@
+name: conversion-copy-sprint
+version: "1.0"
+title: "Conversion Copy Sprint — LP + Email + Ads"
+description: "Sprint focado em conversao: cria copy de landing page, email sequence e ads em paralelo para campanha de conversao."
+complexity: COMPLEX
+estimated_duration: "3-5 dias"
+squad: squad-copy
+
+triggers:
+  - "Nova campanha de conversao"
+  - "Launch de produto/servico"
+  - "Sprint de growth"
+
+phases:
+  - phase: 1
+    name: "Strategy Sprint"
+    agent: copy-strategist (Quill)
+    tasks:
+      - create-copy-brief
+      - define-market-awareness-level
+      - build-message-hierarchy
+      - map-objection-landscape
+    outputs:
+      - Copy brief (compartilhado por todas as pecas)
+      - Awareness level
+      - Message hierarchy unificada
+    gate: "Brief aprovado"
+
+  - phase: 2
+    name: "Headlines & Hooks"
+    agent: headline-specialist (Hook)
+    tasks:
+      - generate-headline-variations
+      - score-and-rank-headlines
+      - write-email-subject-lines
+      - write-subheadlines-and-deck-copy
+    outputs:
+      - Headlines para LP
+      - Subject lines para emails
+      - Hooks para ads
+    gate: "Headlines aprovados"
+
+  - phase: 3
+    name: "Parallel Copy Creation"
+    execution: PARALLEL
+    streams:
+      - stream: "Landing Page"
+        agent: conversion-writer (Spark)
+        tasks:
+          - write-landing-page-copy
+          - craft-cta-variations
+        outputs:
+          - LP copy completa
+          - CTAs com variantes
+
+      - stream: "Email Sequence"
+        agent: conversion-writer (Spark)
+        tasks:
+          - create-email-campaign
+          - create-welcome-sequence
+        outputs:
+          - Campaign emails
+          - Welcome sequence
+
+      - stream: "Ad Copy"
+        agent: conversion-writer (Spark)
+        tasks:
+          - write-ad-copy-google
+          - write-ad-copy-social
+        outputs:
+          - Google Ads copy
+          - Social ads copy
+
+    gate: "Todas as pecas draft completas"
+
+  - phase: 4
+    name: "Persuasion & Ethics Review"
+    agent: persuasion-psychologist (Nudge)
+    tasks:
+      - review-copy-persuasion-architecture
+      - apply-cialdini-principles
+      - optimize-pricing-framing
+      - review-ethical-compliance
+    outputs:
+      - Persuasion review por peca
+      - Pricing otimizado
+      - Ethical clearance
+    gate: "Todas as pecas ethically approved"
+
+  - phase: 5
+    name: "Edit & Polish"
+    agent: copy-editor (Chisel)
+    tasks:
+      - conduct-full-copy-review
+    outputs:
+      - Todas as pecas editadas
+      - Consistency check cross-pieces
+    gate: "Score >= 4.0 em todas as pecas"
+    notes: "Verificar consistencia de messaging entre LP, emails e ads"
+
+  - phase: 6
+    name: "Approval & Handoff"
+    agent: copy-strategist (Quill)
+    outputs:
+      - Package completo aprovado
+      - Brief de implementacao
+      - KPIs definidos
+    gate: "Package aprovado para launch"
+
+cross_squad_handoffs:
+  - to: squad-design
+    delivers: "LP copy + ad specs para implementacao"
+  - to: squad-growth
+    delivers: "Campaign copy + KPIs + A/B test plan"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

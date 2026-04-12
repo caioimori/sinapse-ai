@@ -1,0 +1,94 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Editorial Planning Cycle
+# ══════════════════════════════════════════════════════════════════════════════
+# Planejamento editorial periodico (semanal/mensal/trimestral)
+# Pipeline: Radar (sinais) → North (plano) → Aprovacao → Arc (briefing)
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: editorial-planning-cycle
+version: 1.0.0
+description: >
+  Ciclo de planejamento editorial que transforma sinais em calendario de conteudo.
+  Executado periodicamente (semanal para sprints, mensal para calendario, trimestral
+  para estrategia). Garante que producao de conteudo seja intencional, balanceada
+  e alinhada com estrategia.
+trigger: "Inicio de periodo de planejamento (semanal/mensal/trimestral)"
+cadence: "Semanal (sprint), Mensal (calendario), Trimestral (estrategia)"
+estimated_duration: "2-4 horas"
+
+phases:
+  - phase: 1
+    name: "Signal Compilation"
+    agent: "signal-intelligence (Radar)"
+    tasks:
+      - curate-weekly-briefing
+      - monitor-competitor-content
+      - curate-ugc-signals
+    input: "Sinais acumulados do periodo, fontes configuradas"
+    output: "Briefing curado com sinais rankeados por SPV"
+    gate: "Briefing entregue com >=5 sinais acionaveis"
+
+  - phase: 2
+    name: "Strategic Planning"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - prioritize-themes
+      - balance-content-mix
+      - align-content-to-funnel
+      - create-editorial-calendar  # ou plan-content-sprint para semanal
+      - map-content-gaps
+    input: "Briefing do Radar, performance anterior (Lens), brand guidelines"
+    output: "Calendario/sprint com temas, formatos, plataformas, pilares, funil"
+    gate: "Todos os pilares cobertos, funil equilibrado, mix variado"
+
+  - phase: 3
+    name: "Seasonal Integration"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - plan-seasonal-content
+    input: "Datas relevantes do periodo, calendario base"
+    output: "Calendario atualizado com conteudo sazonal"
+    gate: "Conteudo sazonal alinhado a pilares (nao generico)"
+    conditional: "Executar apenas se ha datas relevantes no periodo"
+
+  - phase: 4
+    name: "Approval Gate"
+    agent: "content-orqx (Nexus)"
+    tasks: []
+    input: "Calendario/sprint finalizado"
+    output: "Plano aprovado"
+    gate: "Aprovacao do cliente ou stakeholder"
+    on_fail: "Retornar para Phase 2 com feedback"
+
+  - phase: 5
+    name: "Briefing Generation"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - create-content-brief
+      - design-content-spine  # para temas prioritarios
+    input: "Plano aprovado, temas definidos"
+    output: "Briefs com Espinhas Dorsais prontas para producao"
+    gate: "Cada tema tem brief completo com Espinha Dorsal"
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  cadence_options:
+    weekly:
+      focus: "Sprint planning — temas da semana"
+      phases: [1, 2, 4, 5]
+      duration: "1-2 horas"
+    monthly:
+      focus: "Calendario completo — distribuicao por semana"
+      phases: [1, 2, 3, 4, 5]
+      duration: "2-4 horas"
+    quarterly:
+      focus: "Estrategia — revisao de pilares, KPIs, Big Idea"
+      phases: [1, 2, 3, 4, 5]
+      duration: "4-8 horas"
+      additional_tasks:
+        - define-content-kpis
+        - define-editorial-pillars  # revisao, nao criacao
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,231 @@
+name: squad-design
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de experiencia digital — cria experiencias digitais de classe mundial combinando
+  UX research, UI design, design systems, frontend engineering, acessibilidade, motion design
+  e performance optimization. Da estrategia UX ao deploy performatico, com gates obrigatorios
+  de acessibilidade (WCAG 2.2 AA) e performance (Core Web Vitals).
+
+metadata:
+  created: "2026-03-12"
+  author: "Sinapse"
+  tier: 2
+  total_files: 140
+  agents: 8
+  tasks: 101
+  workflows: 6
+  knowledge_bases: 13
+  checklists: 3
+  templates: 7
+  preferences: 1
+
+quality_standards:
+  reference_authors:
+    - Don Norman (design of everyday things, affordances, mental models)
+    - Steve Krug (don't make me think, usability)
+    - Jakob Nielsen (10 usability heuristics, Nielsen Norman Group)
+    - Jesse James Garrett (elements of user experience, five planes)
+    - Jon Yablonski (laws of UX, psychology-driven design)
+    - Brad Frost (atomic design, design systems methodology)
+    - Nathan Curtis (design systems as products, governance)
+    - Jina Anne (design tokens pioneer, Salesforce Lightning)
+    - Dan Mall (design system collaboration, designer-developer handoff)
+    - Luke Wroblewski (mobile first, form design)
+    - Aarron Walter (designing for emotion, emotional hierarchy)
+    - Jaime Levy (UX strategy, business-design bridge)
+    - Addy Osmani (JavaScript performance, image optimization)
+    - Harry Roberts (CSS architecture, ITCSS, web performance)
+    - Ilya Grigorik (HTTP/2, web fundamentals, high performance browser networking)
+    - Leonie Watson (screen reader expertise, ARIA patterns)
+    - Marcy Sutton (accessibility testing, axe-core)
+    - Scott O'Hara (semantic HTML, ARIA deep dives)
+    - Issara Willenskomer (UX in motion, 12 principles of UI animation)
+    - Vitaly Friedman (Smashing Magazine, responsive design, modern CSS)
+    - Jen Simmons (CSS Grid, intrinsic web design)
+    - Josh Comeau (CSS for JavaScript developers, joy of React)
+    - Kent C. Dodds (testing JavaScript, React patterns)
+    - Nir Eyal (hooked, habit-forming design)
+    - Jake Knapp (design sprint, GV methodology)
+
+  reference_companies:
+    - Apple (Human Interface Guidelines, motion design)
+    - Google (Material Design, Core Web Vitals, Lighthouse)
+    - Shopify (Polaris design system)
+    - GitHub (Primer design system, developer-centric)
+    - IBM (Carbon design system, enterprise accessibility)
+    - Microsoft (Fluent design, adaptive design)
+    - Uber (Base Web, performance-first components)
+    - Vercel (Next.js, web performance, edge rendering)
+    - Figma (design-to-code, auto layout, variables)
+    - Storybook (component-driven development)
+    - IDEO (design thinking methodology)
+    - Design Council (double diamond framework)
+    - Deque Systems (axe-core, accessibility testing)
+    - W3C WAI (WCAG, ARIA, design tokens spec)
+
+  core_concepts:
+    - name: "Double Diamond"
+      description: >
+        Design Council framework: Discover (diverge) → Define (converge) →
+        Develop (diverge) → Deliver (converge). Garante que o problema certo
+        e resolvido antes de projetar a solucao certa.
+
+    - name: "Atomic Design"
+      description: >
+        Brad Frost: componentes organizados em 5 niveis — Atoms (elementos basicos),
+        Molecules (grupos simples), Organisms (secoes complexas), Templates (layouts),
+        Pages (instancias reais). Cada nivel compoe o proximo.
+
+    - name: "Three-Tier Token Architecture"
+      description: >
+        Design tokens em 3 camadas: Primitive (color.blue.500 = #0066CC),
+        Semantic (color.action.primary = {color.blue.500}),
+        Component (button.bg.default = {color.action.primary}).
+        Permite multi-brand, dark mode e escalabilidade.
+
+    - name: "Core Web Vitals"
+      description: >
+        Metricas do Google que definem experiencia do usuario: LCP < 2.5s
+        (loading), INP < 200ms (interatividade), CLS < 0.1 (estabilidade visual).
+        Gate obrigatorio — nenhuma pagina ship sem passar.
+
+    - name: "WCAG 2.2 Level AA"
+      description: >
+        87 criterios de acessibilidade. Gate obrigatorio legal (EU EAA desde
+        junho 2025). Todo componente e pagina DEVE passar. Inclui 9 novos
+        criterios do WCAG 2.2 (target size, focus appearance, accessible auth).
+
+  mandatory_quality_gates:
+    - name: "Accessibility Gate"
+      owner: dx-accessibility-specialist
+      criteria: "WCAG 2.2 AA compliance — all 87 criteria"
+      verdict: "PASS / CONDITIONAL / FAIL"
+      blocking: true
+
+    - name: "Performance Gate"
+      owner: dx-performance-engineer
+      criteria: "LCP < 2.5s, INP < 200ms, CLS < 0.1, Lighthouse >= 90"
+      verdict: "CERTIFIED / EXCEEDS BUDGET / FAIL"
+      blocking: true
+
+agents:
+  - id: design-orqx
+    name: Nexus
+    icon: "🎯"
+    archetype: Conductor
+    role: Digital Experience Orchestrator
+    tasks_count: 8
+
+  - id: dx-ux-strategist
+    name: Compass
+    icon: "🧭"
+    archetype: Investigator
+    role: UX Strategy & Research Lead
+    tasks_count: 12
+
+  - id: dx-ui-designer
+    name: Canvas
+    icon: "🎨"
+    archetype: Artist
+    role: UI Design & Visual Systems Specialist
+    tasks_count: 14
+
+  - id: dx-design-system-architect
+    name: Stratum
+    icon: "🏛️"
+    archetype: Architect
+    role: Design System & Token Architecture Specialist
+    tasks_count: 16
+
+  - id: dx-frontend-engineer
+    name: Scaffold
+    icon: "🔧"
+    archetype: Builder
+    role: Frontend Architecture & Component Engineer
+    tasks_count: 18
+
+  - id: dx-accessibility-specialist
+    name: Beacon
+    icon: "♿"
+    archetype: Guardian
+    role: Accessibility & Inclusive Design Expert
+    tasks_count: 10
+
+  - id: dx-interaction-designer
+    name: Kinetic
+    icon: "✨"
+    archetype: Animator
+    role: Interaction Design & Motion Systems Specialist
+    tasks_count: 12
+
+  - id: dx-performance-engineer
+    name: Apex
+    icon: "⚡"
+    archetype: Optimizer
+    role: Web Performance Optimization Specialist
+    tasks_count: 11
+
+workflows:
+  - name: zero-to-digital-product-cycle
+    description: Ciclo completo de produto digital — do brief ao deploy performatico
+  - name: design-system-build-cycle
+    description: Construcao de design system — tokens, componentes, documentacao
+  - name: landing-page-sprint
+    description: Sprint acelerado para landing pages e paginas de campanha
+  - name: performance-remediation-cycle
+    description: Ciclo de remediacao de performance — audit, fix, validate, prevent
+  - name: a11y-compliance-cycle
+    description: Ciclo de compliance de acessibilidade — WCAG 2.2 AA audit e remediacao
+  - name: ux-research-sprint
+    description: Sprint de pesquisa UX — discovery, execucao, sintese, brief
+
+knowledge_bases:
+  - ux-laws-and-heuristics
+  - user-research-methods
+  - information-architecture
+  - ui-composition-principles
+  - design-token-architecture
+  - component-api-patterns
+  - frontend-architecture-patterns
+  - wcag-aria-reference
+  - motion-interaction-playbook
+  - web-performance-reference
+  - responsive-modern-css
+
+checklists:
+  - dx-quality-gate-checklist
+  - accessibility-audit-checklist
+  - performance-audit-checklist
+
+templates:
+  - dx-project-brief-template
+  - ux-research-plan-template
+  - design-handoff-template
+  - component-spec-template
+  - token-taxonomy-template
+  - performance-budget-template
+  - a11y-audit-report-template
+
+cross_squad_connections:
+  inbound:
+    - from: squad-brand
+      receives: brand tokens (colors, typography, spacing), motion language, visual guidelines
+    - from: squad-copy
+      receives: approved copy, CTA text, form labels, error messages, microcopy
+    - from: squad-content
+      receives: content strategy, content types, content hierarchy, SEO briefs
+    - from: squad-research
+      receives: user research data, personas, market insights, competitive analysis
+
+  outbound:
+    - to: squad-growth
+      delivers: implemented pages (UTM-ready, tracking hooks), performance-certified
+    - to: squad-product
+      delivers: component library (Storybook), design tokens, API integration patterns
+    - to: squad-copy
+      delivers: UI copy specs (character limits, truncation behavior, responsive variants)
+    - to: squad-brand
+      delivers: token implementation feedback, edge cases, dark mode issues

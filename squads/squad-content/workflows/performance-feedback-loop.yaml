@@ -1,0 +1,100 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Performance Feedback Loop
+# ══════════════════════════════════════════════════════════════════════════════
+# Retroalimentacao sistemica: dados de performance → insights → ajustes
+# Pipeline: Lens → Nexus (distribui) → Radar + North + Arc (ajustam)
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: performance-feedback-loop
+version: 1.0.0
+description: >
+  Ciclo de retroalimentacao que fecha o loop do sistema: dados de performance
+  pos-publicacao sao transformados em insights acionaveis e distribuidos para
+  cada agente relevante. Radar aprende quais sinais geram resultado. North
+  aprende quais pilares e formatos performam. Arc aprende quais estruturas
+  narrativas convertem. Este workflow e o que transforma a squad de "producao
+  de conteudo" em "sistema de aprendizado continuo".
+trigger: "Mensal (regular) ou apos acumulo de >=20 pecas publicadas"
+cadence: "Mensal"
+estimated_duration: "2-4 horas"
+
+phases:
+  - phase: 1
+    name: "Data Compilation"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - analyze-content-performance
+      - track-engagement-patterns
+      - identify-top-performers
+    input: "Metricas de todas as plataformas do periodo"
+    output: "Dataset compilado: performance por peca, padroes identificados, top/bottom performers"
+    gate: "Dados coletados para >=90% do conteudo publicado no periodo"
+
+  - phase: 2
+    name: "Insight Generation"
+    agent: "content-analyst (Lens)"
+    tasks:
+      - generate-retrofeed-insights
+    input: "Dataset compilado"
+    output: >
+      3 pacotes de insights:
+      1) RADAR INSIGHTS: quais sinais geraram top performers? Quais falharam?
+         Quais fontes geram sinais mais acionaveis?
+      2) NORTH INSIGHTS: quais pilares tem melhor ROI? Quais formatos engajam mais?
+         Funil esta equilibrado vs resultados? Quais gaps de cobertura impactam?
+      3) ARC INSIGHTS: quais Espinhas Dorsais convertem? Quais hooks funcionam?
+         Qual profundidade (shallow/medium/deep) tem melhor resultado por formato?
+    gate: "Cada pacote tem >=3 insights acionaveis"
+
+  - phase: 3
+    name: "Insight Distribution"
+    agent: "content-orqx (Nexus)"
+    tasks: []
+    input: "3 pacotes de insights do Lens"
+    output: "Insights distribuidos para Radar, North e Arc"
+    gate: "Cada agente confirmou recebimento e compreensao"
+
+  - phase: 4
+    name: "Signal Calibration"
+    agent: "signal-intelligence (Radar)"
+    tasks:
+      - configure-signal-sources  # ajuste fino
+    input: "RADAR INSIGHTS do Lens"
+    output: "Fontes e filtros recalibrados baseado em performance"
+    gate: "Calibracao atualizada"
+
+  - phase: 5
+    name: "Strategy Adjustment"
+    agent: "editorial-strategist (North)"
+    tasks:
+      - balance-content-mix
+      - prioritize-themes
+    input: "NORTH INSIGHTS do Lens"
+    output: "Mix e priorizacao ajustados para proximo periodo"
+    gate: "Plano ajustado incorpora insights"
+
+  - phase: 6
+    name: "Preference Update"
+    agent: "content-governor (Index)"
+    tasks:
+      - update-content-preferences
+    input: "Insights + ajustes realizados"
+    output: "Preference log atualizado com aprendizados do periodo"
+    gate: "Metricas de evolucao calculadas (first-try rate, tendencias)"
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  metrics_tracked:
+    - "Signal-to-content conversion rate (sinais que viraram conteudo)"
+    - "Content-to-performance hit rate (conteudo que atingiu KPI)"
+    - "First-try approval rate (conteudo aprovado sem revisao)"
+    - "Average production time per piece"
+    - "ROI per content piece"
+  evolution_indicators:
+    improving: "Hit rate subindo, production time caindo, first-try rate subindo"
+    stagnating: "Metricas estaveis por 2+ periodos — requer revisao estrategica"
+    degrading: "Hit rate caindo — acionar content-audit-cycle urgente"
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

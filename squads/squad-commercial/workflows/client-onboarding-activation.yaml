@@ -1,0 +1,117 @@
+name: client-onboarding-activation
+version: "1.0"
+description: >
+  Workflow de onboarding de novo cliente — do contrato assinado até a ativação completa
+  em 30 dias. Orquestra handoff comercial→CS e garante time-to-value acelerado.
+
+trigger: Contract signed (deal marked Closed-Won in CRM)
+owner: cs-client-success (Bond)
+estimated_duration: 30 days
+
+phases:
+  - id: handoff
+    name: Sales-to-CS Handoff
+    agent: commercial-orqx
+    tasks:
+      - manage-commercial-handoffs
+    artifacts:
+      - handoff-document.md
+      - account-brief.md
+    exit_criteria:
+      - Complete handoff document received from sales
+      - Key contacts and stakeholders mapped
+      - Discovery notes and proposal shared with CS
+      - CSM assigned and introduced to client
+    duration: 1-3 days
+    sla: Kickoff call scheduled within 5 business days of contract
+
+  - id: success-planning
+    name: Success Plan Co-Creation
+    agent: cs-client-success
+    depends_on: [handoff]
+    tasks:
+      - create-success-plan-template
+      - design-health-score
+    artifacts:
+      - success-plan-draft.md
+      - health-score-baseline.md
+    exit_criteria:
+      - Success plan drafted with client objectives
+      - Milestones defined for 30/60/90 days
+      - Health score initialized with baseline data
+      - Communication cadence agreed
+    duration: 5-7 days
+
+  - id: kickoff-execution
+    name: Kickoff & Onboarding Execution
+    agent: cs-client-success
+    depends_on: [success-planning]
+    tasks:
+      - create-onboarding-playbook
+    artifacts:
+      - kickoff-deck.md
+      - onboarding-checklist.md
+    exit_criteria:
+      - Kickoff meeting conducted with all stakeholders
+      - Onboarding checklist items initiated
+      - Client has access to all required platforms/tools
+      - First deliverable timeline confirmed
+    duration: 1-2 weeks
+
+  - id: crm-account-setup
+    name: CRM Account Configuration
+    agent: cs-crm-specialist
+    depends_on: [handoff]
+    parallel_with: [success-planning]
+    tasks:
+      - configure-activity-tracking
+    artifacts:
+      - account-config-log.md
+    exit_criteria:
+      - Account fully configured in CRM
+      - Health score tracking active
+      - Activity tracking for CS touchpoints configured
+      - Renewal date and milestones calendared
+    duration: 1-2 days
+
+  - id: thirty-day-checkpoint
+    name: 30-Day Activation Checkpoint
+    agent: cs-client-success
+    depends_on: [kickoff-execution, crm-account-setup]
+    tasks:
+      - build-cs-playbooks
+    artifacts:
+      - thirty-day-review.md
+      - health-score-update.md
+    exit_criteria:
+      - 30-day milestone achieved (or gap plan created)
+      - Health score trending green
+      - Client confirms satisfaction via check-in
+      - Success plan updated with progress
+      - Quick-win delivered and documented
+    duration: Day 28-30
+
+quality_gates:
+  - name: Handoff Quality Gate
+    phase: handoff
+    criteria:
+      - All MEDDIC fields transferred from sales
+      - Client expectations documented from discovery/proposal
+      - No open issues or unresolved promises from sales
+  - name: Activation Quality Gate
+    phase: thirty-day-checkpoint
+    criteria:
+      - Client satisfaction confirmed (verbal or survey)
+      - At least 1 measurable quick-win delivered
+      - Health score ≥ 70 (green/yellow minimum)
+      - No critical risks unaddressed
+
+cross_squad_dependencies:
+  - squad: squad-content
+    context: Content deliverables during onboarding period
+  - squad: squad-design
+    context: Digital assets or platform access setup
+
+completion:
+  notification: "commercial-orqx"
+  message: "Workflow concluido com sucesso."

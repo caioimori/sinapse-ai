@@ -1,0 +1,196 @@
+# Client IDV Delivery Cycle
+# Workflow de entrega faseada para projetos de Identidade Visual de clientes
+# 5 fases de entrega com aprovacao do cliente entre cada fase
+
+name: client-idv-delivery-cycle
+version: "1.0"
+description: >
+  Ciclo de entrega de IDV para clientes com aprovacoes faseadas.
+  Cada fase gera um entregavel que o cliente revisa e aprova antes da proxima.
+  Garante alinhamento continuo e minimiza retrabalho.
+  Integra com zero-to-brand-system-cycle (producao interna) e adiciona
+  camada de apresentacao e aprovacao do cliente.
+
+trigger:
+  command: "*start-client-idv"
+  agent: brand-orqx
+  prerequisite: "Briefing completo coletado do cliente"
+
+client_interaction:
+  model: "phased-approval"
+  max_revision_rounds: 2
+  escalation_on: "3rd revision request"
+
+phases:
+  - id: delivery-1-strategy
+    name: "Entrega 1 — Estrategia de Marca"
+    production_phases: [phase-1-discovery]
+    description: "Apresentacao da estrategia ao cliente para aprovacao"
+    presenter: brand-compiler
+    presentation_command: "*create-client-presentation --phase strategy"
+    deliverables:
+      - strategy-presentation-deck
+      - brand-positioning-summary
+      - brand-manifesto-draft
+      - tone-of-voice-overview
+      - persona-profiles
+    client_review:
+      format: "Presentation deck (30min) + Q&A"
+      approval_items:
+        - "Posicionamento estrategico"
+        - "Arquetipo da marca"
+        - "Manifesto"
+        - "Tom de voz"
+        - "Personas"
+      decisions_required:
+        - "Aprovar posicionamento"
+        - "Confirmar arquetipo"
+        - "Validar tom de voz"
+      outcome:
+        approved: "Prosseguir para Entrega 2"
+        revision: "Ajustar pontos especificos (max 2 rounds)"
+        rejected: "Re-briefing necessario — escalar para Meridian"
+
+  - id: delivery-2-visual
+    name: "Entrega 2 — Identidade Visual"
+    depends_on: [delivery-1-strategy]
+    production_phases: [phase-2-visual-identity, phase-3-sonic-identity]
+    description: "Apresentacao da identidade visual e sonora ao cliente"
+    presenter: brand-compiler
+    presentation_command: "*create-client-presentation --phase visual"
+    deliverables:
+      - visual-identity-presentation
+      - color-palette-rationale
+      - typography-selection-rationale
+      - logo-system-all-variations
+      - moodboard
+      - sonic-identity-preview
+    client_review:
+      format: "Presentation deck (45min) + mockups preview + audio demo"
+      approval_items:
+        - "Paleta de cores"
+        - "Sistema tipografico"
+        - "Logo principal + variacoes"
+        - "Direcao fotografica"
+        - "Identidade sonora"
+      decisions_required:
+        - "Aprovar paleta de cores"
+        - "Aprovar logo system"
+        - "Aprovar tipografia"
+        - "Aprovar sonic identity"
+      outcome:
+        approved: "Prosseguir para Entrega 3"
+        revision: "Ajustar elementos visuais especificos (max 2 rounds)"
+        rejected: "Redesign visual — manter estrategia aprovada"
+
+  - id: delivery-3-applications
+    name: "Entrega 3 — Assets, Mockups & Aplicacoes"
+    depends_on: [delivery-2-visual]
+    production_phases: [phase-4-asset-creation, phase-5-collateral]
+    description: "Apresentacao de todas as aplicacoes e mockups ao cliente"
+    presenter: brand-compiler
+    presentation_command: "*create-client-presentation --phase assets"
+    deliverables:
+      - applications-presentation
+      - product-mockups-gallery
+      - apparel-visualizations
+      - business-card-design
+      - stationery-set
+      - social-media-templates
+      - presentation-template
+      - packaging-preview
+      - signage-preview
+    client_review:
+      format: "Presentation deck (60min) + mockup gallery review"
+      approval_items:
+        - "Mockups de produtos"
+        - "Business cards e stationery"
+        - "Templates de social media"
+        - "Templates de apresentacao"
+        - "Packaging (se aplicavel)"
+        - "Signage (se aplicavel)"
+      decisions_required:
+        - "Aprovar aplicacoes fisicas"
+        - "Aprovar templates digitais"
+        - "Aprovar mockups"
+      outcome:
+        approved: "Prosseguir para Entrega 4"
+        revision: "Ajustar aplicacoes especificas (max 2 rounds)"
+        rejected: "Revisao ampla de aplicacoes — manter identidade aprovada"
+
+  - id: delivery-4-system
+    name: "Entrega 4 — Design System & Motion"
+    depends_on: [delivery-3-applications]
+    production_phases: [phase-6-design-system, phase-7-motion]
+    description: "Apresentacao do design system tecnico e motion language"
+    presenter: brand-compiler
+    presentation_command: "*create-client-presentation --phase system"
+    deliverables:
+      - design-system-overview
+      - token-system-demo
+      - component-library-preview
+      - dark-mode-demo
+      - motion-language-demo
+      - video-templates-preview
+      - animation-library-preview
+    client_review:
+      format: "Presentation deck (45min) + live demo interativa"
+      approval_items:
+        - "Design system (tokens, componentes)"
+        - "Dark mode"
+        - "Motion language"
+        - "Video templates"
+      decisions_required:
+        - "Aprovar design system"
+        - "Aprovar motion language"
+        - "Confirmar formatos de exportacao"
+      outcome:
+        approved: "Prosseguir para Entrega Final"
+        revision: "Ajustar sistema especifico (max 2 rounds)"
+        rejected: "Revisao tecnica — manter visual aprovado"
+
+  - id: delivery-5-final
+    name: "Entrega 5 — Brandbook Final & Delivery Package"
+    depends_on: [delivery-4-system]
+    production_phases: [phase-8-full-audit, phase-9-compilation]
+    description: "Entrega final: brandbook completo + todos os assets + documentacao"
+    presenter: brand-compiler
+    presentation_command: "*create-client-presentation --phase final"
+    deliverables:
+      - brandbook-complete-pdf
+      - brandbook-web-version
+      - quick-reference-card
+      - delivery-package-zip
+      - onboarding-guide
+      - governance-document
+      - all-source-files
+      - audit-report-summary
+    client_review:
+      format: "Presentation deck (30min) + delivery package walkthrough"
+      approval_items:
+        - "Brandbook completo"
+        - "Delivery package"
+        - "Onboarding guide"
+        - "Governance document"
+      decisions_required:
+        - "Aceitar entrega final"
+        - "Confirmar completude"
+      outcome:
+        approved: "Projeto concluido — handoff para time do cliente"
+        revision: "Ajustes finais pontuais (max 1 round)"
+        rejected: "Escalacao para reuniao executiva com Meridian"
+
+post_delivery:
+  handoff_to_client:
+    - "Sessao de onboarding (1h) — como usar o delivery package"
+    - "Transferencia de todos os arquivos source"
+    - "Documentacao de governanca entregue"
+    - "Contato de suporte pos-entrega definido"
+  follow_up:
+    - "30 dias: check-in de uso e duvidas"
+    - "90 dias: mini-auditoria de consistencia"
+
+completion:
+  notification: "brand-orqx"
+  message: "IDV do cliente entregue e aprovada. Projeto concluido."
+  final_score: "Brand consistency score do audit report"

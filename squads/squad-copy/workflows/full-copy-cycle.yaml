@@ -1,0 +1,111 @@
+name: full-copy-cycle
+version: "1.0"
+title: "Full Copy Cycle — Brief to Publication"
+description: "Ciclo completo de copywriting: do brief ate a publicacao, passando por estrategia, criacao, persuasao review, edicao e aprovacao."
+complexity: COMPLEX
+estimated_duration: "3-5 dias"
+squad: squad-copy
+
+triggers:
+  - "Nova peca de copy necessaria"
+  - "Novo projeto de copywriting"
+  - "Cliente solicita copy completa"
+
+phases:
+  - phase: 1
+    name: "Strategy & Brief"
+    agent: copy-strategist (Quill)
+    tasks:
+      - create-copy-brief
+      - define-market-awareness-level
+      - build-message-hierarchy
+      - map-objection-landscape
+    outputs:
+      - Copy brief completo
+      - Awareness level definido
+      - Message hierarchy aprovada
+      - Objecoes mapeadas
+    gate: "Brief aprovado pelo cliente/stakeholder"
+
+  - phase: 2
+    name: "Headline & Hook"
+    agent: headline-specialist (Hook)
+    tasks:
+      - generate-headline-variations
+      - score-and-rank-headlines
+      - create-opening-hooks
+      - write-subheadlines-and-deck-copy
+    outputs:
+      - 25+ headline variations
+      - Top 3 rankados
+      - Opening hooks
+      - Subheadlines hierarquia
+    gate: "Headline e hooks aprovados (score >= 3.5)"
+
+  - phase: 3
+    name: "Draft Copy"
+    agent: "[writer conforme tipo — Saga, Spark, ou Tone]"
+    tasks:
+      - "[Task conforme tipo de copy]"
+    outputs:
+      - Copy draft completa
+      - Notas de intencao por secao
+    gate: "Draft completo e coerente"
+    notes: |
+      Agente varia conforme tipo de copy:
+      - Sales letter / Long-form → Saga
+      - Landing page / Email / Ads → Spark
+      - Brand copy / Voice-specific → Tone
+
+  - phase: 4
+    name: "Persuasion Review"
+    agent: persuasion-psychologist (Nudge)
+    tasks:
+      - review-copy-persuasion-architecture
+      - review-ethical-compliance
+    outputs:
+      - Persuasion review report
+      - Ethical compliance report
+    gate: "APPROVED ou REVISE (se REWRITE, volta a Phase 3)"
+
+  - phase: 5
+    name: "Full Edit (5-Pass)"
+    agent: copy-editor (Chisel)
+    tasks:
+      - conduct-full-copy-review
+    outputs:
+      - Copy editada (5 passes)
+      - Full review report
+    gate: "Overall score >= 4.0/5"
+
+  - phase: 6
+    name: "Final Approval"
+    agent: copy-strategist (Quill)
+    tasks:
+      - "[Aprovacao final vs. brief original]"
+    outputs:
+      - Copy final aprovada
+      - Sign-off documentado
+    gate: "Copy alinhada com brief e pronta para publicacao"
+
+iteration_rules:
+  max_iterations: 3
+  escalation: "Se 3 iteracoes sem aprovacao, escalar para Quill para rebrief"
+
+cross_squad_handoffs:
+  - to: squad-design
+    delivers: "Copy aprovada para implementacao"
+  - to: squad-content
+    delivers: "Copy para distribuicao multi-canal"
+  - to: squad-growth
+    delivers: "Copy com KPIs para tracking"
+
+metrics:
+  - "Time to publish (brief → live)"
+  - "Number of revision rounds"
+  - "Overall quality score"
+  - "Post-publish performance vs. KPIs"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

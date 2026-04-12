@@ -1,0 +1,151 @@
+name: design-system-build-cycle
+version: "1.0"
+description: >
+  Ciclo de construcao de design system — da fundacao de tokens ate componentes
+  documentados, acessiveis e performaticos em Storybook.
+trigger: Cliente precisa de design system ou component library nova
+owner: design-orqx (Nexus)
+
+phases:
+  - name: "Phase 1: Token Foundation"
+    agent: dx-design-system-architect (Stratum)
+    tasks:
+      - define-token-taxonomy
+      - create-primitive-tokens
+      - create-semantic-tokens
+      - create-component-tokens
+      - design-spacing-scale
+      - design-typography-scale
+      - create-color-system
+      - map-dark-mode-tokens
+    input:
+      - Brand tokens (de squad-brand)
+      - UI audit de produto existente (se redesign)
+    output:
+      - Token taxonomy document (3-tier)
+      - Token files exportados (JSON/CSS/SCSS)
+      - Color system completo
+      - Typography scale
+      - Spacing scale
+    gate:
+      name: Token Foundation Review
+      criteria: Tokens completos, naming consistente, dark mode mapeado
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 2: Component Inventory & API Design"
+    agents:
+      - dx-design-system-architect (Stratum)
+      - dx-ui-designer (Canvas)
+    depends_on: Phase 1
+    execution: collaborative
+    tasks:
+      stratum:
+        - design-component-api-contracts
+        - define-atomic-hierarchy
+        - create-component-governance
+      canvas:
+        - design-component-visual-states
+        - design-icon-system
+        - design-form-patterns
+    input:
+      - Token files (de Phase 1)
+      - Inventario de UI existente
+    output:
+      - Component API contracts
+      - Atomic Design hierarchy
+      - Component visual specs (todos os estados)
+      - Icon system
+    gate:
+      name: Component API Review
+      criteria: APIs sem ambiguidade, hierarchy definida, visual specs completos
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 3: Component Implementation"
+    agent: dx-frontend-engineer (Scaffold)
+    depends_on: Phase 2
+    tasks:
+      - implement-component-library
+      - setup-storybook-integration
+      - implement-form-system
+      - setup-testing-infrastructure
+    input:
+      - Component API contracts (de Phase 2)
+      - Token files (de Phase 1)
+      - Visual specs (de Phase 2)
+    output:
+      - Componentes implementados em React/framework
+      - Storybook stories por componente
+      - Testes unitarios + integracao
+    gate:
+      name: Implementation Review
+      criteria: Todos componentes construidos, stories completos, testes passando
+      verdict: [COMPLETE, NEEDS_WORK]
+
+  - name: "Phase 4: Accessibility Certification"
+    agent: dx-accessibility-specialist (Beacon)
+    depends_on: Phase 3
+    tasks:
+      - conduct-wcag-audit
+      - review-aria-patterns
+      - test-keyboard-navigation
+      - verify-color-contrast
+      - design-accessible-form-patterns
+    input:
+      - Componentes em Storybook
+    output:
+      - ARIA patterns documentados por componente
+      - Keyboard interaction specs
+      - A11y story variants
+      - Audit report
+    gate:
+      name: Accessibility Gate
+      criteria: WCAG 2.2 AA pass por componente
+      verdict: [PASS, CONDITIONAL, FAIL]
+      blocking: true
+
+  - name: "Phase 5: Performance Baseline"
+    agent: dx-performance-engineer (Apex)
+    depends_on: Phase 4
+    tasks:
+      - analyze-javascript-bundles
+      - define-performance-budgets
+    input:
+      - Component library bundle
+    output:
+      - Bundle size report
+      - Tree-shaking verification
+      - Performance budget definido
+    gate:
+      name: Performance Baseline
+      criteria: Bundle sizes dentro do budget, tree-shaking funcional
+      verdict: [CERTIFIED, EXCEEDS_BUDGET]
+
+  - name: "Phase 6: Documentation & Delivery"
+    agent: dx-design-system-architect (Stratum)
+    depends_on: Phase 5
+    tasks:
+      - create-storybook-documentation-standards
+      - configure-token-export-pipeline
+      - audit-design-system-health
+    input:
+      - Componentes aprovados (Phases 3-5)
+    output:
+      - Storybook documentation completa
+      - Token export pipeline funcional
+      - Design system health report
+      - Usage guidelines
+    gate:
+      name: Design System Delivery
+      criteria: Documentacao completa, pipeline funcional, health score > 85%
+      verdict: [DELIVERED, NEEDS_POLISH]
+
+completion:
+  deliverables:
+    - Design system completo em Storybook
+    - Token files exportados (CSS/JSON/Tailwind)
+    - Component library (npm package)
+    - Documentation site
+    - Governance model documentado
+  handoff_to:
+    - "squad-product para integracao"
+    - "squad-brand como feedback de tokens"

@@ -1,0 +1,197 @@
+name: full-research-sprint
+description: Sprint completo de pesquisa — orquestra TODOS os agentes em paralelo para pesquisa abrangente
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+complexity: COMPLEX
+
+triggers:
+  - Lancamento de novo produto/servico
+  - Entrada em novo mercado
+  - Planejamento estrategico completo
+  - Due diligence para investimento/aquisicao
+
+phases:
+  - id: sprint-planning
+    name: "1. Sprint Planning"
+    agent: research-orqx (Prism)
+    tasks:
+      - orchestrate-research-pipeline
+      - manage-research-sprint
+    inputs:
+      - Objetivo do sprint
+      - Perguntas-chave a responder
+      - Timeline e recursos
+    outputs:
+      - Sprint backlog com tasks priorizadas
+      - Agent assignments
+      - Timeline com milestones
+    quality_gate:
+      criteria: Scope definido, agents alocados, timeline realista
+
+  - id: parallel-research
+    name: "2. Parallel Research Streams"
+    execution: PARALLEL
+    streams:
+      - id: audience-stream
+        name: "2A. Audience Intelligence"
+        agent: audience-intelligence (Pulse)
+        tasks:
+          - build-audience-persona
+          - map-audience-journey
+          - conduct-jobs-to-be-done
+          - segment-audience
+        outputs:
+          - Personas, journeys, JTBD, segmentos
+
+      - id: competitive-stream
+        name: "2B. Competitive Intelligence"
+        agent: competitive-intelligence (Hawk)
+        tasks:
+          - map-competitive-landscape
+          - analyze-competitor-strategy
+          - analyze-competitor-pricing
+          - identify-competitive-gaps
+        outputs:
+          - Landscape, strategies, pricing, gaps
+
+      - id: market-stream
+        name: "2C. Market Analysis"
+        agent: market-analyst (Scope)
+        tasks:
+          - size-market-tam-sam-som
+          - analyze-industry-trends
+          - identify-market-segments
+          - evaluate-market-entry
+        outputs:
+          - TAM/SAM/SOM, trends, segments, entry assessment
+
+      - id: trends-stream
+        name: "2D. Trend Forecasting"
+        agent: trend-forecaster (Horizon)
+        tasks:
+          - analyze-macro-forces
+          - detect-weak-signals
+          - forecast-industry-trends
+          - map-technology-adoption
+        outputs:
+          - PESTEL, weak signals, trends, tech adoption
+
+    quality_gate:
+      criteria: Todos os 4 streams completados com outputs validados
+
+  - id: deep-dives
+    name: "3. Deep Dives (Priority Topics)"
+    agent: deep-researcher (Sage)
+    tasks:
+      - conduct-deep-research
+      - generate-hypothesis
+      - answer-strategic-question
+    inputs:
+      - Gaps e perguntas emergentes dos streams paralelos
+      - Top 3-5 topicos que precisam de profundidade
+    outputs:
+      - Deep research reports por topico
+      - Hipoteses geradas e testadas
+      - Strategic questions respondidas
+    quality_gate:
+      criteria: Triangulacao completa, confidence levels atribuidos
+
+  - id: scenario-planning
+    name: "4. Scenario Planning"
+    agent: trend-forecaster (Horizon)
+    tasks:
+      - run-scenario-planning
+      - create-future-landscape
+    inputs:
+      - Todos os dados de trends e market
+    outputs:
+      - 4 cenarios nomeados
+      - Future landscape map
+    quality_gate:
+      criteria: Cenarios com narrativas e early indicators
+
+  - id: cross-domain-synthesis
+    name: "5. Cross-Domain Synthesis"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - synthesize-research-report
+      - create-swot-analysis
+      - map-strategic-implications
+      - visualize-research-data
+    inputs:
+      - TODOS os outputs de TODOS os streams
+    outputs:
+      - Relatorio integrado (Pyramid Principle)
+      - SWOT com TOWS
+      - Strategic implications (3 ordens)
+      - Data visualizations
+    quality_gate:
+      criteria: Insights cross-domain identificados, SWOT com evidencias
+
+  - id: recommendations
+    name: "6. Strategic Recommendations"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - generate-actionable-recommendations
+      - create-executive-briefing
+      - create-insight-deck
+      - compile-competitive-dossier
+    inputs:
+      - Sintese cross-domain
+    outputs:
+      - Recomendacoes SMART priorizadas
+      - Executive briefing (2-3 pags)
+      - Insight deck
+      - Competitive dossier
+    quality_gate:
+      criteria: Recomendacoes com owners e timeline, briefing decision-ready
+
+  - id: sprint-review
+    name: "7. Sprint Review & Delivery"
+    agent: research-orqx (Prism)
+    tasks:
+      - coordinate-cross-squad-research
+    inputs:
+      - Todos os deliverables finalizados
+    outputs:
+      - Deliverables por squad (formatados)
+      - Sprint retrospective
+      - Research repository atualizado
+    quality_gate:
+      criteria: Todos os squads receberam seus deliverables
+
+success_criteria:
+  - 4 streams paralelos completados
+  - Deep dives nos topicos prioritarios
+  - Cenarios construidos
+  - Relatorio integrado com Pyramid Principle
+  - Recomendacoes SMART com owners
+  - Deliverables entregues a todos os squads
+
+cross_squad_handoffs:
+  - to: brand-system
+    delivers: personas, positioning, cultural trends
+    format: brand strategy input package
+  - to: content-intelligence
+    delivers: topics, audience data, trends
+    format: content strategy input package
+  - to: copywriting-persuasion
+    delivers: pain points, JTBD, objections
+    format: messaging framework input
+  - to: digital-experience
+    delivers: journeys, behavior, tech trends
+    format: UX research package
+  - to: growth-analytics
+    delivers: TAM/SAM/SOM, segments, growth rates
+    format: growth strategy data package
+  - to: commercial-systems
+    delivers: pricing, battle cards, market sizing
+    format: commercial strategy package
+  - to: product-systems
+    delivers: gaps, opportunities, tech radar
+    format: product strategy input package
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

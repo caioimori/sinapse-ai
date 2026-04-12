@@ -1,0 +1,111 @@
+name: campaign-launch-cycle
+version: "1.0"
+description: "Ciclo completo de lancamento de campanha cross-channel em 6 fases"
+trigger: "Novo briefing de campanha recebido ou nova conta para setup"
+agents_involved:
+  - paidmedia-orqx
+  - meta-ads-specialist
+  - google-ads-specialist
+  - creative-strategist
+  - cro-specialist
+  - performance-engineer
+  - campaign-analyst
+
+phases:
+  - name: "Phase 1: Strategy & Planning"
+    agent: paidmedia-orqx
+    tasks:
+      - orchestrate-campaign-launch
+      - coordinate-cross-channel-strategy
+      - allocate-cross-channel-budget
+    output: "campaign-launch-plan.md"
+    quality_gate: "Budget alocado, channels definidos, KPIs e targets claros"
+    notes: |
+      Apex recebe o briefing e define a estrategia cross-channel.
+      Determina mix Meta/Google, budget por tier, e timeline.
+      Delega tasks para agentes especializados.
+
+  - name: "Phase 2: Structure & Setup"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+    depends_on: ["Phase 1"]
+    tasks:
+      - design-campaign-structure
+      - build-audience-architecture
+      - audit-google-ads-account
+      - audit-keywords
+    output: "Campaign structures configuradas em ambas plataformas"
+    quality_gate: "Campanhas estruturadas, audiences definidas, keywords selecionadas"
+    notes: |
+      Signal e Query trabalham em paralelo.
+      Signal: campaign structure Meta + audience architecture
+      Query: campaign structure Google + keyword portfolio
+
+  - name: "Phase 3: Creative Production"
+    agent: creative-strategist
+    depends_on: ["Phase 1"]
+    tasks:
+      - generate-creative-brief
+      - write-video-ad-script
+      - research-competitor-facebook-ads
+    output: "Criativos produzidos e aprovados"
+    quality_gate: "Criativos em specs corretos, hooks testados, variacoes suficientes"
+    notes: |
+      Canvas pode comecar em paralelo com Phase 2.
+      Produz criativos para Meta (images, videos, carousels) e
+      ad copies para Google (headlines, descriptions, extensions).
+
+  - name: "Phase 4: CRO & Landing Page"
+    agents:
+      - cro-specialist
+      - performance-engineer
+    depends_on: ["Phase 1"]
+    tasks:
+      - optimize-page-conversion
+      - analyze-landing-page
+      - audit-core-web-vitals
+      - audit-tracking-implementation
+    output: "Landing pages otimizadas e tracking validado"
+    quality_gate: "LP score >80 Lighthouse, tracking 100% validado, message match confirmado"
+    notes: |
+      Convert otimiza landing pages para conversao.
+      Lighthouse valida performance e tracking.
+      GATE CRITICO: tracking DEVE estar 100% antes de Phase 5.
+
+  - name: "Phase 5: Launch"
+    agents:
+      - meta-ads-specialist
+      - google-ads-specialist
+    depends_on: ["Phase 2", "Phase 3", "Phase 4"]
+    tasks:
+      - execute-launch-checklist
+      - manage-pixel-capi-health
+      - validate-pixel-health
+    output: "Campanhas ativas em todas as plataformas"
+    quality_gate: "Pre-launch checklist 100%, todas as campanhas ativas, delivery confirmado"
+    notes: |
+      Signal executa launch checklist Meta.
+      Query executa launch de Google.
+      GATE: pre-launch checklist DEVE ser 100% para GO.
+
+  - name: "Phase 6: Review & Optimization"
+    agents:
+      - campaign-analyst
+      - paidmedia-orqx
+    depends_on: ["Phase 5"]
+    tasks:
+      - generate-weekly-summary
+      - analyze-traffic-sources
+      - detect-performance-anomalies
+      - generate-performance-report
+    output: "First week report + optimization recommendations"
+    quality_gate: "Dados de 7+ dias, insights acionaveis, recomendacoes de otimizacao"
+    notes: |
+      Pulse gera first-day report, then daily monitoring.
+      Week 1 review completo com recomendacoes.
+      Apex consolida e decide proximos passos.
+
+completion:
+  notification: "paidmedia-orqx"
+  message: "Workflow concluido com sucesso."

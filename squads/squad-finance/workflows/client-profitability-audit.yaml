@@ -1,0 +1,85 @@
+name: client-profitability-audit
+version: "1.0"
+description: "Auditoria de rentabilidade por cliente — do mapeamento de receita as recomendacoes"
+trigger: "Review anual de portfolio, decisao de renovacao, ou investigacao de margem"
+cadence: on-demand
+agents_involved:
+  - revenue-analyst
+  - profitability-analyst
+  - finance-orqx
+
+phases:
+  - name: "Phase 1: Revenue Mapping"
+    agent: revenue-analyst
+    tasks:
+      - analyze-revenue-waterfall
+      - analyze-revenue-concentration
+      - analyze-payment-patterns
+    output: "client-revenue-mapping.md"
+    quality_gate: "Receita por cliente mapeada, concentration risk avaliado, padroes de pagamento identificados"
+    notes: |
+      Flow mapeia toda a receita por cliente:
+      - Revenue por cliente e por projeto
+      - % de cada cliente na receita total
+      - DSO por cliente
+      - Padrao de pagamento (bom pagador? atrasado?)
+      - Risk: concentracao excessiva?
+
+  - name: "Phase 2: Cost Allocation"
+    agent: profitability-analyst
+    depends_on: ["Phase 1"]
+    tasks:
+      - calculate-project-profitability
+      - calculate-cost-per-delivery
+      - calculate-team-cost-efficiency
+    output: "client-cost-allocation.md"
+    quality_gate: "Custo alocado por cliente/projeto, COGS + overhead mapeados"
+    notes: |
+      Margin aloca custos a cada cliente:
+      - Horas da equipe por cliente (timesheet)
+      - Custo loaded alocado
+      - Ferramentas e despesas diretas
+      - Overhead proporcional
+      - Custo de servicing (account management, pre-venda)
+
+  - name: "Phase 3: Profitability Scoring"
+    agent: profitability-analyst
+    depends_on: ["Phase 2"]
+    tasks:
+      - analyze-client-profitability
+      - benchmark-profitability-metrics
+    output: "client-profitability-scores.md"
+    quality_gate: "P&L por cliente, Client Profitability Matrix posicionada, ranking de rentabilidade"
+    notes: |
+      Margin calcula rentabilidade e posiciona cada cliente:
+      - P&L por cliente completo
+      - Gross margin e net margin por cliente
+      - Posicao na Client Profitability Matrix:
+        STAR (alta receita + alta margem)
+        CASH COW (alta receita + baixa margem)
+        QUESTION MARK (baixa receita + alta margem)
+        DOG (baixa receita + baixa margem)
+      - Ranking de clientes por margem
+
+  - name: "Phase 4: Recommendations"
+    agent: finance-orqx
+    depends_on: ["Phase 3"]
+    tasks:
+      - orchestrate-financial-analysis
+      - triage-financial-alerts
+    output: "client-profitability-recommendations.md"
+    quality_gate: "Recomendacao por cliente (investir/renegociar/expandir/descontinuar), impacto financeiro"
+    notes: |
+      Ledger consolida e gera recomendacoes:
+      - Para cada cliente: acao recomendada
+        STAR: investir, expandir escopo, upsell
+        CASH COW: renegociar para melhorar margem
+        QUESTION MARK: expandir receita, growth plan
+        DOG: renegociar drasticamente ou descontinuar
+      - Impacto financeiro de cada recomendacao
+      - Plano de acao priorizado
+      - Timeline de implementacao
+
+completion:
+  notification: "finance-orqx"
+  message: "Workflow concluido com sucesso."

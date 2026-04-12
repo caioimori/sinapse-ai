@@ -1,0 +1,94 @@
+name: product-discovery-cycle
+description: "Ciclo completo de discovery de produto: da hipotese a decisao validada"
+version: "1.0"
+trigger: "New product opportunity, metric decline, or strategic question requiring user evidence"
+estimated_duration: "2-4 weeks"
+
+phases:
+  - name: "Frame"
+    description: "Definir escopo, questoes de pesquisa e metodo"
+    agent: ps-discovery-lead
+    tasks:
+      - plan-discovery-sprint
+      - brief-ux-research-sprint
+    outputs:
+      - discovery-sprint-plan
+      - research-brief
+    gate:
+      criteria: "Research questions defined, methods selected, team assigned"
+      decision: "GO to Explore / REFINE scope"
+
+  - name: "Explore"
+    description: "Coletar dados qualitativos e quantitativos"
+    agents:
+      - ps-discovery-lead
+      - ps-product-analyst
+    tasks:
+      - conduct-user-interviews
+      - validate-problem-hypothesis
+      - build-assumption-test
+    outputs:
+      - interview-notes
+      - assumption-map
+      - evidence-log
+    gate:
+      criteria: "Min 5 interviews completed, assumptions mapped"
+      decision: "GO to Synthesize / EXTEND fieldwork"
+
+  - name: "Synthesize"
+    description: "Analisar e sintetizar descobertas em insights acionaveis"
+    agents:
+      - ps-discovery-lead
+      - ps-product-analyst
+    tasks:
+      - synthesize-research-findings
+      - create-user-personas
+      - map-current-state-journey
+      - map-opportunity-solution-tree
+    outputs:
+      - research-synthesis
+      - personas
+      - journey-map
+      - opportunity-solution-tree
+    gate:
+      criteria: "Insights triangulated, opportunities prioritized"
+      decision: "GO to Validate / PIVOT research direction"
+
+  - name: "Validate"
+    description: "Testar solucoes propostas com usuarios"
+    agents:
+      - ps-discovery-lead
+      - ps-product-strategist
+    tasks:
+      - run-prototype-usability-test
+      - identify-aha-moment
+    outputs:
+      - usability-results
+      - aha-moment-definition
+    gate:
+      criteria: "Solution validated with users, success metrics defined"
+      decision: "GO to Decide / ITERATE on solution"
+
+  - name: "Decide"
+    description: "Compilar relatorio e tomar decisao"
+    agents:
+      - ps-discovery-lead
+      - product-orqx
+    tasks:
+      - write-product-discovery-report
+    outputs:
+      - discovery-report
+      - go-no-go-recommendation
+    gate:
+      criteria: "Evidence-based recommendation with confidence level"
+      decision: "BUILD / PIVOT / PARK / KILL"
+
+handoff:
+  build: "Passes to story-development-delivery-cycle with discovery artifacts"
+  pivot: "Returns to Frame phase with adjusted scope"
+  park: "Logged in opportunity backlog for future evaluation"
+  kill: "Documented learning, no further investment"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,118 @@
+name: sales-copy-pipeline
+version: "1.0"
+title: "Sales Copy Pipeline — High-Converting Sales Assets"
+description: "Pipeline completo para criacao de assets de vendas: sales letter, launch sequence, pricing page e materiais de suporte."
+complexity: COMPLEX
+estimated_duration: "5-7 dias"
+squad: squad-copy
+
+triggers:
+  - "Novo produto para venda"
+  - "Launch de produto/curso/servico"
+  - "Otimizacao de funil de vendas"
+
+phases:
+  - phase: 1
+    name: "Sales Strategy"
+    agent: copy-strategist (Quill)
+    tasks:
+      - create-copy-brief
+      - define-market-awareness-level
+      - build-message-hierarchy
+      - map-objection-landscape
+    outputs:
+      - Sales copy brief
+      - Awareness level da audiencia
+      - Message hierarchy com proof points
+      - Objection landscape completo
+    gate: "Sales strategy aprovada"
+
+  - phase: 2
+    name: "Persuasion Architecture"
+    agent: persuasion-psychologist (Nudge)
+    tasks:
+      - create-persuasion-map
+      - design-trigger-sequence
+      - optimize-pricing-framing
+      - craft-objection-handlers
+    outputs:
+      - Persuasion map completo
+      - Trigger sequence por peca
+      - Pricing framing otimizado
+      - Objection handlers library
+    gate: "Architecture de persuasao aprovada"
+
+  - phase: 3
+    name: "Core Sales Copy"
+    agent: long-form-writer (Saga)
+    tasks:
+      - write-sales-letter
+      - write-product-narrative
+    outputs:
+      - Sales letter completa
+      - Product narrative
+    gate: "Core copy draft completa"
+
+  - phase: 4
+    name: "Supporting Sales Assets"
+    execution: PARALLEL
+    streams:
+      - stream: "Launch Sequence"
+        agent: conversion-writer (Spark)
+        tasks:
+          - write-launch-sequence
+          - write-landing-page-copy
+      - stream: "Conversion Assets"
+        agent: conversion-writer (Spark)
+        tasks:
+          - craft-cta-variations
+          - write-upsell-copy
+          - create-cart-abandonment-sequence
+      - stream: "Social Proof"
+        agent: persuasion-psychologist (Nudge)
+        tasks:
+          - write-social-proof-section
+          - create-urgency-scarcity-framework
+    gate: "Todos os supporting assets completos"
+
+  - phase: 5
+    name: "Review & Polish"
+    agent: copy-editor (Chisel)
+    tasks:
+      - conduct-full-copy-review
+    outputs:
+      - Todas as pecas editadas (5-pass)
+      - Consistencia de messaging verificada
+    gate: "Score >= 4.0 em todas as pecas"
+
+  - phase: 6
+    name: "Ethical Final Review"
+    agent: persuasion-psychologist (Nudge)
+    tasks:
+      - review-ethical-compliance
+    outputs:
+      - Ethical clearance final
+    gate: "100% ethically compliant"
+
+  - phase: 7
+    name: "Approval & Handoff"
+    agent: copy-strategist (Quill)
+    tasks:
+      - orchestrate-copy-pipeline
+    outputs:
+      - Sales copy package completo aprovado
+      - Implementation brief
+      - Revenue targets e KPIs
+    gate: "Package aprovado para launch"
+
+cross_squad_handoffs:
+  - to: squad-design
+    delivers: "LP + checkout copy para implementacao"
+  - to: squad-growth
+    delivers: "Funnel copy + KPIs + A/B test plan"
+  - to: squad-commercial
+    delivers: "Sales materials para equipe comercial"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

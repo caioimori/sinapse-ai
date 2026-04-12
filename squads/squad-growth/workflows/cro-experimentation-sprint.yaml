@@ -1,0 +1,91 @@
+name: CRO Experimentation Sprint
+version: "1.0"
+description: >
+  Sprint focado de experimentacao CRO — da identificacao de oportunidade
+  ao resultado estatisticamente valido. Ciclo de 2-4 semanas.
+trigger: "CRO initiative, conversion optimization need"
+owner: ga-cro-specialist
+max_iterations: 5
+
+phases:
+  - name: "Phase 1: Discovery & Analysis"
+    agents: [ga-cro-specialist, ga-data-analyst]
+    tasks:
+      - conduct-cro-audit
+      - analyze-conversion-funnel
+      - identify-friction-points
+    inputs:
+      - "Target pages/flows"
+      - "Analytics data (30+ days)"
+      - "Heatmap/session recording data"
+    outputs:
+      - "CRO audit with opportunity score"
+      - "Funnel drop-off analysis"
+      - "Friction points map"
+    gate:
+      name: "Opportunity Validation"
+      criteria: "Clear opportunities identified with data support"
+      verdict: ["PROCEED", "INSUFFICIENT_DATA"]
+      blocking: true
+
+  - name: "Phase 2: Hypothesis & Design"
+    agents: [ga-cro-specialist]
+    depends_on: "Phase 1"
+    tasks:
+      - formulate-test-hypotheses
+      - calculate-sample-size
+      - design-ab-experiment
+    inputs:
+      - "CRO audit findings"
+      - "Friction points"
+      - "Baseline conversion rates"
+    outputs:
+      - "Prioritized hypotheses (ICE scored)"
+      - "Sample size calculations"
+      - "Experiment brief with variants"
+
+  - name: "Phase 3: Implementation & Launch"
+    agents: [ga-cro-specialist, ga-analytics-engineer]
+    depends_on: "Phase 2"
+    tasks:
+      - audit-tracking-accuracy
+    inputs:
+      - "Experiment brief"
+      - "Variant designs"
+    outputs:
+      - "QA-verified experiment"
+      - "Tracking validated"
+    gate:
+      name: "Experiment Launch Gate"
+      criteria: "Variants QA'd, tracking verified, no conflicts with other tests"
+      verdict: ["LAUNCH", "FIX_ISSUES"]
+      blocking: true
+
+  - name: "Phase 4: Analysis & Decision"
+    agents: [ga-cro-specialist, ga-data-analyst]
+    depends_on: "Phase 3"
+    tasks:
+      - analyze-experiment-results
+      - certify-statistical-validity
+      - build-experiment-knowledge-base
+    inputs:
+      - "Experiment data (full duration)"
+      - "Minimum sample reached"
+    outputs:
+      - "Results analysis with confidence intervals"
+      - "Statistical validity certification"
+      - "Knowledge base entry"
+    gate:
+      name: "Statistical Validity Gate"
+      criteria: "p < 0.05, 95% CI, minimum sample reached, no SRM"
+      verdict: ["SIGNIFICANT", "NOT_SIGNIFICANT", "INCONCLUSIVE"]
+      blocking: true
+      on_inconclusive: "Extend test or redesign"
+
+completion:
+  requires: "Statistical Validity Gate verdict"
+  outputs:
+    - "Experiment results report"
+    - "Recommendation (implement/discard/iterate)"
+    - "Knowledge base updated"
+  next_action: "Implement winner OR start next experiment"

@@ -1,0 +1,142 @@
+# Business Audit Cycle Workflow
+# Comprehensive multi-perspective business audit
+
+workflow:
+  id: business-audit-cycle
+  name: "Ciclo de Auditoria de Negocio"
+  version: "1.0"
+  trigger: "*business-audit"
+  entry_agent: council-orqx
+  estimated_duration: "2-4 hours"
+  description: |
+    Ciclo completo de auditoria estrategica de negocio. Avalia 6 dimensoes
+    usando perspectivas de multiplos conselheiros, identifica o constraint
+    principal, e gera recomendacoes priorizadas.
+
+  type: sequential
+  sequence:
+    - agent: council-orqx
+      action: frame-audit
+      creates: audit_scope
+    - agent: "{dimension_advisors}"
+      action: assess-dimensions
+      creates: dimension_scores
+    - agent: council-orqx
+      action: identify-constraint
+      creates: constraint_analysis
+    - agent: "{relevant_advisors}"
+      action: deep-dive
+      creates: recommendations
+    - agent: council-orqx
+      action: prioritize
+      creates: action_plan
+
+phases:
+  - id: phase_1_snapshot
+    name: "Business Snapshot"
+    agent: council-orqx
+    task: conduct-business-audit.md
+    depends_on: []
+    description: "Coletar informacoes basicas do negocio: modelo, metricas, equipe, estagio"
+    checkpoint:
+      gate: "Informacoes suficientes para avaliar todas as 6 dimensoes"
+      veto: "HALT se dados insuficientes — solicitar mais contexto"
+    outputs:
+      - business_model
+      - key_metrics
+      - team_overview
+      - stage_assessment
+
+  - id: phase_2_dimension_assessment
+    name: "Six-Dimension Assessment"
+    agent: "{multiple advisors}"
+    task: conduct-business-audit.md
+    depends_on: [phase_1_snapshot]
+    description: "Avaliar cada dimensao com o advisor primario"
+    parallel: true
+    dimensions:
+      - dimension: "Decision Quality"
+        advisor: ray-dalio
+        framework: "5-Step Process, Principles, Believability"
+      - dimension: "Competitive Position"
+        advisor: peter-thiel
+        framework: "Zero to One, Seven Questions, Monopoly"
+      - dimension: "Growth Strategy"
+        advisor: reid-hoffman
+        framework: "Blitzscaling, Network Effects, Distribution"
+      - dimension: "Purpose & Culture"
+        advisors: [simon-sinek, brene-brown]
+        framework: "Golden Circle, BRAVING Trust, Infinite Game"
+      - dimension: "Team Health"
+        advisor: patrick-lencioni
+        framework: "Five Dysfunctions, Working Genius, Org Health"
+      - dimension: "Founder Alignment"
+        advisors: [naval-ravikant, derek-sivers, yvon-chouinard]
+        framework: "Leverage, Hell Yeah, Purpose Alignment"
+    checkpoint:
+      gate: "Todas as 6 dimensoes avaliadas com scores e evidencias"
+      veto: "HALT se alguma dimensao nao pode ser avaliada por falta de dados"
+    outputs:
+      - dimension_scores
+      - per_dimension_insights
+
+  - id: phase_3_constraint
+    name: "Identify Primary Constraint"
+    agent: council-orqx
+    task: conduct-business-audit.md
+    depends_on: [phase_2_dimension_assessment]
+    description: "Identificar a dimensao com menor score — o constraint principal"
+    checkpoint:
+      gate: "Constraint identificado com justificativa clara"
+      veto: "HALT se multiplos constraints empatam — priorizar pelo impacto"
+    outputs:
+      - primary_constraint
+      - constraint_analysis
+      - impact_assessment
+
+  - id: phase_4_deep_dive
+    name: "Deep Dive on Constraint"
+    agent: "{advisors relevant to constraint}"
+    task: conduct-business-audit.md
+    depends_on: [phase_3_constraint]
+    description: "Consultar 3-5 conselheiros mais relevantes para o constraint principal"
+    checkpoint:
+      gate: "Multiplas perspectivas coletadas sobre o constraint com recomendacoes especificas"
+      veto: "HALT se recomendacoes sao contradictorias sem sintese"
+    outputs:
+      - advisor_perspectives
+      - specific_recommendations
+      - tension_analysis
+
+  - id: phase_5_action_plan
+    name: "Prioritized Action Plan"
+    agent: council-orqx
+    task: conduct-business-audit.md
+    depends_on: [phase_4_deep_dive]
+    description: "Sintetizar recomendacoes em plano de acao priorizado"
+    checkpoint:
+      gate: "Plano com acoes imediatas, quick wins, investimentos LP, e coisas para PARAR"
+      veto: "HALT se plano e generico demais — deve ser especifico e acionavel"
+    outputs:
+      - immediate_actions
+      - quick_wins
+      - long_term_investments
+      - stop_doing_list
+      - monitoring_metrics
+
+completion_criteria:
+  - "Business snapshot completo com metricas chave"
+  - "Todas as 6 dimensoes avaliadas com scores e insights"
+  - "Constraint principal identificado e justificado"
+  - "3-5 conselheiros consultados sobre o constraint"
+  - "Plano de acao priorizado com 5 categorias"
+  - "Metricas de monitoramento definidas"
+
+dimension_scoring:
+  scale: "1-10"
+  interpretation:
+    9_10: "Excelente — manter e otimizar"
+    7_8: "Bom — melhorias incrementais"
+    5_6: "Adequado — atencao necessaria"
+    3_4: "Fraco — intervencao urgente"
+    1_2: "Critico — constraint principal provavel"

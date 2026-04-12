@@ -1,0 +1,89 @@
+name: client-roadmap-alignment-cycle
+description: "Ciclo de alinhamento de roadmap com cliente: do intake ao acordo"
+version: "1.0"
+trigger: "Quarterly planning, client strategy change, or major scope adjustment"
+estimated_duration: "1-2 weeks"
+
+phases:
+  - name: "Assess"
+    description: "Avaliar estado atual e coletar inputs"
+    agents:
+      - ps-client-product-manager
+      - ps-product-analyst
+    tasks:
+      - facilitate-quarterly-product-review
+      - generate-product-metrics-report
+      - present-product-metrics-to-client
+    outputs:
+      - quarterly-performance-summary
+      - metrics-report
+    gate:
+      criteria: "Quarter performance reviewed, client feedback captured"
+      decision: "Proceed to Strategy alignment"
+
+  - name: "Strategize"
+    description: "Refinar estrategia e prioridades"
+    agents:
+      - ps-product-strategist
+      - product-orqx
+    tasks:
+      - define-quarterly-okrs
+      - run-pmf-assessment
+      - conduct-quarterly-roadmap-review
+    outputs:
+      - quarterly-okrs
+      - strategy-update
+    gate:
+      criteria: "OKRs defined, strategic priorities aligned"
+      decision: "Proceed to Roadmap update"
+
+  - name: "Roadmap"
+    description: "Atualizar e apresentar roadmap ao cliente"
+    agents:
+      - ps-client-product-manager
+      - ps-product-strategist
+    tasks:
+      - prepare-client-roadmap-presentation
+    outputs:
+      - client-facing-roadmap
+      - presentation-deck
+    gate:
+      criteria: "Roadmap approved by internal team, presentation ready"
+      decision: "Present to client"
+
+  - name: "Align"
+    description: "Sessao com cliente para alinhamento final"
+    agents:
+      - ps-client-product-manager
+      - product-orqx
+    tasks:
+      - run-client-product-workshop
+      - negotiate-scope-change-request
+    outputs:
+      - aligned-priorities
+      - scope-agreements
+    gate:
+      criteria: "Client aligned on priorities and roadmap direction"
+      decision: "ALIGNED / NEEDS REVISION"
+
+  - name: "Formalize"
+    description: "Documentar acordos e preparar execucao"
+    agents:
+      - ps-client-product-manager
+      - ps-delivery-manager
+    tasks:
+      - document-product-decisions-log
+      - prepare-mvp-scope-agreement
+    outputs:
+      - decision-log-updated
+      - scope-agreement
+    handoff: "Feeds into story-development-delivery-cycle with aligned priorities"
+
+cadence:
+  full_cycle: "Quarterly"
+  interim_check: "Monthly roadmap pulse check"
+  client_sync: "Weekly during active alignment"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

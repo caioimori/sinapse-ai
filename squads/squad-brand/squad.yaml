@@ -1,0 +1,442 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — squad-brand v3.2
+# ══════════════════════════════════════════════════════════════════════════════
+# The world-class brand system squad for creating, managing and evolving
+# complete brand systems — from strategic positioning to compiled brandbook.
+# 15 agents | 97 tasks | 4 workflows | 19 KBs | 6 templates | Full coverage
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: squad-brand
+version: 3.2.0
+description: >
+  Squad de classe mundial para criacao, gestao e evolucao de sistemas de marca
+  completos. 15 agentes especialistas cobrindo 100% de um brand system world-class:
+  estrategia, identidade visual, brand equity & growth, cultura de marca, assets
+  criativos, colateral corporativo, design system, motion, sonic branding, auditoria
+  e compilacao. Inclui Brand Value Tracker, illustration system, brand characters,
+  e preference tracking para auto-learning progressivo.
+  v3.2: +3 tasks (illustration system, brand characters, preference tracking)
+  + 1 KB (illustration styles) + 1 template (preference log) + quality_standards.
+  Atemporal e reutilizavel.
+author: Caio Imori
+license: UNLICENSED
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-03-11"
+  updated_at: "2026-03-13"
+  created_by: "squad-creator (Craft)"
+  blueprint: "squads/.designs/squad-brand-design.yaml"
+  quality_target: "5.0/5.0 em todas as dimensoes"
+  agents_count: 15
+  tasks_count: 97
+  knowledge_bases_count: 19
+  checklists_count: 3
+  templates_count: 6
+  workflows_count: 4
+  total_files: 143
+
+# ══════════════════════════════════════════════════════════════════════════════
+# QUALITY STANDARDS — Regras de Robustez (v3.2)
+# ══════════════════════════════════════════════════════════════════════════════
+
+quality_standards:
+  robustness:
+    min_agents: 6
+    min_tasks: 50
+    min_workflows: 3
+    min_knowledge_bases: 8
+    min_checklists: 2
+    min_templates: 3
+    world_class_references: required
+    gap_audit: required
+    preference_tracking: required
+
+  references:
+    authors:
+      - "Kapferer — Brand Identity Prism, 6-facet model"
+      - "Keller — CBBE Pyramid, brand resonance"
+      - "Aaker — Brand Identity System, brand personality"
+      - "Sharp — How Brands Grow, 7 Rules, mental/physical availability"
+      - "Neumeier — Onlyness, Zag, brand gap"
+      - "Lindstrom — Brand Sense, 5 senses, sensory branding"
+      - "Romaniuk — Distinctive Assets, Category Entry Points"
+      - "Yohn — Brand-Culture Fusion, Fusion Framework"
+      - "Hofstede — Cultural Dimensions, 6D model"
+      - "Erin Meyer — Culture Map, 8 scales"
+      - "Sinek — Golden Circle, Start With Why"
+      - "Wheeler — 5-Phase Process, brand identity design"
+      - "Ries & Trout — Positioning Laws, 22 rules"
+      - "Aradhna Krishna — Sensory Marketing"
+      - "Marieke de Mooij — Global Marketing, cultural advertising"
+    agencies:
+      - "Pentagram"
+      - "Wolff Olins"
+      - "Landor"
+      - "Collins"
+      - "Interbrand"
+      - "JKR (Jones Knowles Ritchie)"
+      - "Lippincott"
+      - "FutureBrand"
+      - "Ragged Edge"
+
+  learning:
+    preference_tracking: true
+    preference_log_path: "preferences/"
+    update_trigger: "after each client approval cycle"
+    update_agent: "brand-auditor (Sentinel)"
+
+  task_complexity_levels:
+    simple: "Tasks diretas, 1 agente, output unico"
+    medium: "Tasks com co-agents, multiplos steps"
+    complex: "Tasks com pesquisa, multiplos outputs, decisoes estrategicas"
+    critical: "Tasks que definem posicionamento ou identidade central da marca"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# AGENTES — 15 ESPECIALISTAS
+# ══════════════════════════════════════════════════════════════════════════════
+
+components:
+  agents:
+    - brand-orqx.md        # Meridian — Conductor (2 tasks)
+    - brand-strategist.md          # Athena — Strategist (15 tasks) ★ +2 v3.1
+    - brand-growth-strategist.md   # Catalyst — Alchemist (6 tasks) ★ NEW v3.0
+    - brand-culture-architect.md   # Ethos — Purpose Guardian (8 tasks) ★ +3 v3.1
+    - brand-identity-designer.md   # Iris — Artist (13 tasks) ★ +1 v3.2
+    - brand-creative-engineer.md   # Forge — Builder-Creator (12 tasks) ★ +1 v3.2
+    - brand-collateral-designer.md # Vellum — Craftsman (12 tasks) ★ +1 v3.1
+    - brand-system-architect.md    # Grid — Architect (5 tasks)
+    - brand-motion-vfx.md          # Flux — Animator (5 tasks)
+    - brand-sonic-designer.md      # Echo — Composer (4 tasks)
+    - brand-auditor.md             # Sentinel — Guardian (4 tasks) ★ +1 v3.2
+    - brand-compiler.md            # Atlas — Compiler (5 tasks)
+    - brand-archetype-strategist.md # Archetype — Oracle (archetype & personality)
+    - brand-naming-specialist.md    # Namer — Wordsmith (naming & verbal identity)
+    - brand-positioning-strategist.md # Position — Strategist (positioning & category strategy)
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASKS — 97 TOTAL
+# ══════════════════════════════════════════════════════════════════════════════
+
+  tasks:
+    # ── Orchestrator (Meridian) — 2 tasks ──
+    - orchestrate-brand-project.md
+    - manage-phase-transition.md
+
+    # ── Strategist (Athena) — 14 tasks ── ★ +2 v3.1
+    - conduct-brand-discovery.md
+    - define-brand-positioning.md
+    - create-brand-manifesto.md
+    - define-tone-of-voice.md
+    - define-message-house.md
+    - map-brand-architecture.md
+    - define-brand-personas.md
+    - define-social-voice.md
+    - define-naming-system.md
+    - create-brand-story.md
+    - define-brand-experience-principles.md
+    - analyze-competitive-landscape.md
+    - define-brand-identity-prism.md          # ★ v3.1 — Kapferer Prism, 6 facetas
+    - define-cultural-adaptation-guidelines.md # ★ v3.1 — Glocal, Hofstede, Meyer
+    - define-ai-voice-guidelines.md           # ★ v3.1 — AI/chatbot brand voice
+
+    # ── Growth Strategist (Catalyst) — 6 tasks ── ★ NEW v3.0
+    - calculate-brand-valuation.md        # Brand Value Tracker — calculo real por fase
+    - define-growth-strategy.md           # Sharp's 7 Rules, growth levers, roadmap
+    - audit-distinctive-assets.md         # Romaniuk distinctive assets framework
+    - map-category-entry-points.md        # CEPs para mental availability
+    - generate-roi-report.md              # ROI report com dados para dashboard
+    - create-competitive-equity-analysis.md  # BAV PowerGrid, competitive equity
+
+    # ── Culture Architect (Ethos) — 8 tasks ── ★ +3 v3.1
+    - conduct-culture-audit.md            # Brand-culture alignment audit
+    - design-brand-culture.md             # Culture Code, rituals, values activation
+    - create-evp.md                       # Employee Value Proposition
+    - design-community-architecture.md    # Community building, ambassador programs
+    - define-brand-activism-position.md   # Activism spectrum, ESG, social positioning
+    - define-sensory-brand-strategy.md    # ★ v3.1 — Multi-sensory, Lindstrom 5 sentidos
+    - create-brand-training-program.md    # ★ v3.1 — Training, certification, adoption
+    - define-sustainability-branding.md   # ★ v3.1 — ESG, anti-greenwashing, reporting
+
+    # ── Identity Designer (Iris) — 12 tasks ── ★ +1 v3.1
+    - define-color-palette.md
+    - select-typography.md
+    - design-logo-system.md
+    - create-moodboard.md
+    - define-photography-direction.md
+    - define-illustration-style.md
+    - define-graphic-vocabulary.md
+    - define-image-treatments.md
+    - define-data-viz-style.md
+    - create-visual-guidelines.md
+    - validate-visual-accessibility.md
+    - design-dynamic-identity-system.md   # ★ v3.1 — Generative/responsive identity
+    - design-illustration-system.md      # ★ v3.2 — Brand illustration style, guidelines, AI prompting
+
+    # ── Creative Engineer (Forge) — 12 tasks ── ★ +1 v3.2
+    - create-svg-logo.md
+    - create-icon-set.md
+    - create-pattern.md
+    - create-mockup-batch.md
+    - create-apparel-visualizations.md
+    - create-social-templates.md
+    - create-web-templates.md
+    - generate-ai-asset.md
+    - create-figma-components.md
+    - create-digital-ad-templates.md      # ★ v3.1 — Meta, Google, YouTube, TikTok, LinkedIn
+    - create-creator-toolkit.md           # ★ v3.1 — Influencer/creator brand toolkit
+    - create-brand-characters.md         # ★ v3.2 — Characters, avatars, mascots, model sheets
+
+    # ── Collateral Designer (Vellum) — 12 tasks ── ★ +1 v3.1
+    - create-business-cards.md
+    - create-stationery.md
+    - create-email-signature.md
+    - create-presentation-template.md
+    - create-proposal-template.md
+    - create-packaging.md
+    - create-signage.md
+    - create-vehicle-wrap.md
+    - create-newsletter-template.md
+    - create-invoice-template.md
+    - create-thumbnail-templates.md
+    - create-event-branding.md            # ★ v3.1 — Event branding system completo
+
+    # ── System Architect (Grid) — 5 tasks ──
+    - create-token-system.md
+    - define-grid-system.md
+    - create-components.md
+    - create-dark-mode.md
+    - export-tokens.md
+
+    # ── Motion & VFX (Flux) — 5 tasks ──
+    - define-motion-language.md
+    - create-micro-interactions.md
+    - create-page-transitions.md
+    - create-video-templates.md
+    - create-animation-library.md
+
+    # ── Sonic Designer (Echo) — 4 tasks ──
+    - create-sonic-identity.md
+    - create-audio-logo.md
+    - create-notification-sounds.md
+    - create-audio-beds.md
+
+    # ── Auditor (Sentinel) — 4 tasks ── ★ +1 v3.2
+    - audit-brand-full.md
+    - validate-phase-output.md
+    - diagnose-brand-misalignment.md
+    - update-brand-preferences.md        # ★ v3.2 — Auto-learning preference tracking
+
+    # ── Compiler (Atlas) — 5 tasks ──
+    - compile-brandbook.md
+    - create-quick-reference.md
+    - assemble-delivery-package.md
+    - create-onboarding-guide.md
+    - create-governance-document.md
+
+    # ── Archetype Strategist (Archetype) — 1 task ──
+    - map-brand-archetype.md
+
+    # ── Naming Specialist (Namer) — 2 tasks ──
+    - generate-brand-names.md
+    - create-verbal-identity-system.md
+
+    # ── Positioning Strategist (Position) — 3 tasks ──
+    - define-brand-positioning-strategy.md
+    - design-category-strategy.md
+    - design-tone-of-voice-system.md
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — 4 CICLOS
+# ══════════════════════════════════════════════════════════════════════════════
+
+  workflows:
+    - zero-to-brand-system-cycle.yaml     # Ciclo completo do zero (9 fases com 12 agentes)
+    - client-idv-delivery-cycle.yaml      # Entregas faseadas para aprovacao de cliente
+    - brand-application-cycle.yaml        # Aplicar marca existente a novo contexto
+    - brand-diagnosis-cycle.yaml          # Diagnosticar e corrigir desalinhamentos
+
+# ══════════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — 19 BASES
+# ══════════════════════════════════════════════════════════════════════════════
+
+  knowledge_bases:
+    # Strategist (Athena) + Growth (Catalyst)
+    - archetype-brand-mapping.md          # 12 arquetipos → paleta, tipo, fotografia, design system
+    - brand-valuation-frameworks.md       # Keller CBBE, Interbrand, BAV, Royalty Relief ★ NEW v3.0
+    - brand-audit-criteria.md             # 5 dimensoes, 32 criterios, scoring system
+    - cultural-brand-adaptation.md        # ★ v3.1 — Hofstede, Meyer, sensibilidades, glocal
+
+    # Identity Designer (Iris)
+    - color-psychology.md                 # psicologia das cores profunda, WCAG, harmonias
+    - typography-personality.md           # personalidade tipografica, scales, pairing
+    - gestalt-principles.md              # Gestalt aplicada a branding e design
+    - photography-styles.md              # estilos fotograficos, iluminacao, composicao
+
+    # Creative Engineer (Forge) + Identity Designer (Iris)
+    - prompt-engineering-visual.md        # templates de prompts por categoria de asset
+    - 3d-render-styles.md               # estilos de render 3D, PBR materials
+    - product-categories.md             # categorias de produto com specs de mockup
+    - ai-api-capabilities.md            # comparativo DALL-E, Midjourney, SD, Ideogram
+    - illustration-styles.md             # ★ v3.2 — Estilos de ilustracao, character design, IA generativa
+
+    # System Architect (Grid)
+    - design-system-patterns.md          # Tokens, grid, componentes, dark mode, WCAG
+
+    # Sonic Designer (Echo)
+    - sonic-branding-principles.md       # psicoacustica, sound-emotion mapping
+
+    # Compiler (Atlas)
+    - brandbook-structure.md             # Estrutura de brandbook, niveis, formatos
+    - delivery-formats.md               # Formatos de arquivo, naming, entrega
+
+    # Strategist (new agents)
+    - brand-strategy-frameworks-catalog.md  # Catalog de frameworks estrategicos
+    - routing-catalog.md                    # Routing catalog para delegacao
+
+    # Method & Craft
+    - method-from-craft.md                  # Transformar talento tacito em metodo reaplicavel e escalavel
+
+  checklists:
+    - brand-quality-checklist.md          # 32 items, 5 dimensoes, brand consistency score
+    - phase-approval-checklist.md         # Per-phase: 8-10 items por fase
+    - collateral-specs-checklist.md       # Print, digital, motion, audio specs
+
+  templates:
+    - brandbook-template.md              # 10-section skeleton
+    - quick-reference-template.md        # 2-page front/back card
+    - client-briefing-template.md        # 42 perguntas, 7 categorias
+    - client-delivery-template.md        # Per-phase presentation slides
+    - brand-onboarding-template.md       # Onboarding guide for new team members
+    - preference-log-template.md         # ★ v3.2 — Auto-learning preference log por projeto
+
+  preferences:
+    - README.md                          # ★ v3.2 — Diretorio de preference logs por projeto
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURACAO
+# ══════════════════════════════════════════════════════════════════════════════
+
+config:
+  extends: none
+  source: standalone
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  external_apis:
+    - "DALL-E 3 — photorealistic renders, product mockups"
+    - "Midjourney — aesthetic exploration, moodboards"
+    - "Ideogram — typography-heavy assets, logos"
+    - "Stable Diffusion — consistent series, ControlNet"
+    - "Gemini — contextual generation, multimodal"
+    - "Figma MCP — design components, prototyping"
+    - "Suno/ElevenLabs — sonic logos, voice branding"
+
+tags:
+  - branding
+  - design-system
+  - identity
+  - strategy
+  - visual-design
+  - motion-design
+  - sonic-branding
+  - corporate-collateral
+  - brand-equity
+  - brand-valuation
+  - brand-culture
+  - growth-strategy
+  - sensory-branding
+  - dynamic-identity
+  - sustainability
+  - creator-economy
+  - event-branding
+  - ai-voice
+  - cultural-adaptation
+  - illustration-system
+  - brand-characters
+  - preference-tracking
+  - auto-learning
+  - world-class
+  - atemporal
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS — 13 SQUADS INTERCONNECTED
+# ══════════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  outbound:
+    - squad-content: "Tom de voz, guidelines visuais, illustration system, templates, creator toolkit, brand story"
+    - squad-copy: "Voz da marca, vocabulario, DO/DON'Ts, message house, AI voice guidelines, brand personality"
+    - squad-design: "Design system, tokens, components, illustration style, motion language, dynamic identity, visual guidelines"
+    - squad-growth: "Brand KPIs, valuation data, ROI metrics, digital ad templates, creator toolkit"
+    - squad-commercial: "Marca aplicada em ofertas, packaging, sensory strategy, brand experience principles"
+    - squad-product: "Design system, tokens, illustration style, motion language, brand characters, UI patterns"
+    - squad-brand: "Brand assets, templates, governance, training program, brand characters"
+  inbound:
+    - squad-research: "Insights de mercado → posicionamento, competitive equity, cultural adaptation, audience data"
+    - squad-growth: "Campaign performance → brand lift measurement, brand health tracking"
+    - squad-content: "Content performance data → brand voice refinement"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# BRAND VALUE TRACKER — INTEGRATED VALUATION SYSTEM ★ NEW v3.0
+# ══════════════════════════════════════════════════════════════════════════════
+
+brand_value_tracker:
+  description: >
+    Sistema integrado de valuacao de marca que calcula brand equity em cada fase
+    de entrega, demonstrando ROI tangivel ao cliente. Metodologia hibrida baseada
+    em Interbrand, Keller CBBE, e BAV.
+  agent: brand-growth-strategist (Catalyst)
+  methodology:
+    - Cost-Based Valuation (custo de recriar do zero)
+    - Brand Strength Score (10 dimensoes, 0-100)
+    - CBBE Score (4 niveis de Keller, 0-100)
+    - Royalty Relief (para empresas com receita)
+  phases_tracked:
+    - baseline: "Antes do projeto — valor inicial"
+    - phase_1_strategy: "Apos estrategia — posicionamento, manifesto, voz"
+    - phase_2_visual: "Apos visual — logo, cores, tipografia, moodboard"
+    - phase_3_assets: "Apos assets — mockups, templates, colaterais"
+    - phase_4_system: "Apos system — tokens, componentes, motion, audio"
+    - phase_5_final: "Entrega final — brandbook compilado, governance"
+  output_format:
+    - "brand-valuation-report-phase-{N}.md"
+    - "roi-dashboard-data.json (para frontend)"
+    - "brand-roi-report.md (relatorio executivo)"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CHANGELOG
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# v3.2.0 (2026-03-13) — Illustration System, Characters & Auto-Learning
+#   +3 tasks:
+#     1. design-illustration-system.md (Iris) — Brand illustration style, AI prompting
+#     2. create-brand-characters.md (Forge) — Characters, avatars, mascots
+#     3. update-brand-preferences.md (Sentinel) — Auto-learning preference tracking
+#   +1 knowledge base:
+#     - illustration-styles.md — Styles, character design, AI gen, case studies
+#   +1 template:
+#     - preference-log-template.md — Auto-learning log por projeto/cliente
+#   +1 directory:
+#     - preferences/ — Diretorio para preference logs por projeto
+#   + quality_standards section no manifest
+#   + cross_squad_connections atualizadas para plano consolidado (9 squads)
+#   Total: 88 → 91 tasks, 16 → 17 KBs, 5 → 6 templates, 128 → 137 files
+#
+# v3.1.0 (2026-03-12) — World-Class Audit Fixes
+#   +10 tasks:
+#     1. define-brand-identity-prism.md (Athena) — Kapferer 6-facet Prism
+#     2. define-sensory-brand-strategy.md (Ethos) — Lindstrom multi-sensory
+#     3. define-cultural-adaptation-guidelines.md (Athena) — Hofstede/Meyer glocal
+#     4. create-digital-ad-templates.md (Forge) — All platform ad templates
+#     5. design-dynamic-identity-system.md (Iris) — Generative/responsive identity
+#     6. create-brand-training-program.md (Ethos) — Training & certification
+#     7. define-ai-voice-guidelines.md (Athena) — AI/chatbot brand voice
+#     8. create-event-branding.md (Vellum) — Event branding system
+#     9. define-sustainability-branding.md (Ethos) — ESG anti-greenwashing
+#    10. create-creator-toolkit.md (Forge) — Creator/influencer toolkit
+#   +1 knowledge base:
+#     - cultural-brand-adaptation.md — Hofstede, Meyer, sensibilidades culturais
+#   Total: 78 → 88 tasks, 15 → 16 KBs, 117 → 128 files

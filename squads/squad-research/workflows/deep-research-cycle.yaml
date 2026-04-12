@@ -1,0 +1,120 @@
+name: deep-research-cycle
+description: Ciclo completo de pesquisa profunda — do request ao deliverable
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+
+triggers:
+  - Research request recebido (interno ou cross-squad)
+  - Pergunta estrategica que requer investigacao profunda
+  - Decisao de negocio que precisa de evidencia
+
+phases:
+  - id: triage
+    name: "1. Request Triage"
+    agent: research-orqx (Prism)
+    tasks:
+      - triage-research-request
+      - prioritize-research-requests
+    inputs:
+      - Research request (pergunta, contexto, urgencia)
+    outputs:
+      - Request classificado (depth level, dominio, urgencia)
+      - Agentes designados
+    quality_gate:
+      criteria: Request tem pergunta clara, depth level definido, agentes alocados
+
+  - id: design
+    name: "2. Research Design"
+    agent: deep-researcher (Sage)
+    tasks:
+      - create-research-brief
+      - design-research-framework
+    inputs:
+      - Request triado com depth level
+    outputs:
+      - Research brief completo
+      - Framework de pesquisa (MECE)
+      - Sub-perguntas definidas
+    quality_gate:
+      criteria: Brief aprovado, framework MECE, fontes identificadas
+
+  - id: execution
+    name: "3. Deep Research Execution"
+    agent: deep-researcher (Sage)
+    tasks:
+      - conduct-deep-research
+      - conduct-literature-review
+      - map-knowledge-landscape
+    inputs:
+      - Research brief e framework
+    outputs:
+      - Dados coletados e organizados
+      - Literature review
+      - Knowledge landscape map
+    quality_gate:
+      criteria: Minimum source requirements met per depth level
+
+  - id: validation
+    name: "4. Source Validation"
+    agent: deep-researcher (Sage)
+    tasks:
+      - validate-research-sources
+      - cross-reference-findings
+      - evaluate-methodology
+    inputs:
+      - Dados coletados, fontes utilizadas
+    outputs:
+      - Sources validadas com tier classification
+      - Cross-reference matrix
+      - Methodology quality score
+    quality_gate:
+      criteria: Triangulacao completada, confidence levels atribuidos
+
+  - id: synthesis
+    name: "5. Synthesis & Report"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - synthesize-research-report
+      - generate-actionable-recommendations
+    inputs:
+      - Dados validados, findings cristalizados
+    outputs:
+      - Research report (Pyramid Principle)
+      - Recomendacoes priorizadas (SMART)
+    quality_gate:
+      criteria: Cada insight tem FINDING+IMPLICATION+RECOMMENDATION
+
+  - id: delivery
+    name: "6. Review & Delivery"
+    agent: research-orqx (Prism)
+    tasks:
+      - coordinate-cross-squad-research
+    inputs:
+      - Research report finalizado
+    outputs:
+      - Deliverables formatados por squad destino
+      - Executive briefing (se solicitado)
+    quality_gate:
+      criteria: Output alinhado com request original, cross-squad formats corretos
+
+success_criteria:
+  - Pergunta de pesquisa respondida com evidencia
+  - Confidence level atribuido a todas as claims
+  - Recomendacoes actionable geradas
+  - Deliverables entregues aos squads requisitantes
+
+cross_squad_handoffs:
+  - to: brand-system
+    delivers: insights de audiencia e posicionamento
+    format: research brief com recomendacoes
+  - to: content-intelligence
+    delivers: topicos e dados de audiencia
+    format: lista de insights priorizados
+  - to: commercial-systems
+    delivers: dados de mercado e competitivo
+    format: report com metricas quantitativas
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

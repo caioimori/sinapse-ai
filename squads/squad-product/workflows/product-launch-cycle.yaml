@@ -1,0 +1,90 @@
+name: product-launch-cycle
+description: "Ciclo completo de lancamento de produto ou feature major"
+version: "1.0"
+trigger: "Feature or product ready for production release"
+estimated_duration: "1-2 weeks (preparation + launch + stabilization)"
+
+phases:
+  - name: "Pre-Launch"
+    description: "Preparacao completa para lancamento"
+    agents:
+      - ps-delivery-manager
+      - ps-product-ops-specialist
+    tasks:
+      - execute-feature-launch-checklist
+      - configure-feature-flag-rollout
+    outputs:
+      - launch-readiness-assessment
+      - feature-flag-configuration
+      - rollback-plan
+    gate:
+      criteria: "All checklist items passed, rollout plan approved, rollback tested"
+      decision: "GO / NO-GO / GO WITH CONDITIONS"
+
+  - name: "Communication"
+    description: "Preparar comunicacao interna e externa"
+    agents:
+      - ps-delivery-manager
+      - ps-client-product-manager
+    tasks:
+      - write-release-notes
+      - present-product-metrics-to-client
+    outputs:
+      - internal-release-notes
+      - external-release-notes
+      - client-notification
+    gate:
+      criteria: "All audiences notified, support team briefed"
+      decision: "Ready to deploy"
+
+  - name: "Deploy"
+    description: "Executar lancamento controlado"
+    agent: ps-delivery-manager
+    tasks:
+      - configure-feature-flag-rollout
+    outputs:
+      - deployment-confirmation
+      - initial-metrics-snapshot
+    gate:
+      criteria: "Phase 1 rollout stable (internal + canary)"
+      decision: "EXPAND / PAUSE / ROLLBACK"
+
+  - name: "Stabilize"
+    description: "Monitorar e estabilizar pos-lancamento"
+    agents:
+      - ps-product-analyst
+      - ps-delivery-manager
+    tasks:
+      - calculate-product-health-metrics
+      - generate-product-metrics-report
+    outputs:
+      - post-launch-metrics
+      - stability-report
+    gate:
+      criteria: "48h stable at full rollout, no critical issues, metrics within expected range"
+      decision: "STABLE (close launch) / HOTFIX / ROLLBACK"
+
+  - name: "Retrospect"
+    description: "Revisar lancamento e capturar aprendizados"
+    agents:
+      - ps-delivery-manager
+      - ps-product-ops-specialist
+    tasks:
+      - facilitate-sprint-retrospective
+    outputs:
+      - launch-retrospective
+      - process-improvements
+    handoff: "Learnings feed into product playbook and next launch improvement"
+
+rollback_protocol:
+  trigger: "Error rate >2x baseline OR critical user-facing bug OR data integrity risk"
+  steps:
+    - "Disable feature flag immediately (< 1 min)"
+    - "Verify feature is off for all users"
+    - "Notify stakeholders (Slack + email)"
+    - "Assess impact and create fix plan"
+    - "Schedule re-launch with fixes"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

@@ -1,0 +1,135 @@
+name: competitive-intelligence-cycle
+description: Ciclo completo de inteligencia competitiva — do landscape mapping ao battle card
+version: "1.0"
+squad: squad-research
+orchestrator: research-orqx (Prism)
+
+triggers:
+  - Entrada em novo mercado
+  - Novo competidor relevante identificado
+  - Atualizacao trimestral de competitive intel
+  - Cross-squad request para dados competitivos
+
+phases:
+  - id: landscape-mapping
+    name: "1. Landscape Mapping"
+    agent: competitive-intelligence (Hawk)
+    tasks:
+      - map-competitive-landscape
+      - run-porter-five-forces
+    inputs:
+      - Mercado/industria definido
+      - Lista inicial de competidores conhecidos
+    outputs:
+      - Mapa competitivo (diretos, indiretos, substitutos)
+      - Five Forces analysis
+      - White spaces identificados
+    quality_gate:
+      criteria: Todos os tipos de competidores mapeados, Five Forces completo
+
+  - id: competitor-profiling
+    name: "2. Competitor Deep Profiles"
+    agent: competitive-intelligence (Hawk)
+    tasks:
+      - analyze-competitor-strategy
+      - analyze-competitor-positioning
+      - benchmark-competitor-digital
+    inputs:
+      - Landscape map com competidores priorizados
+    outputs:
+      - Perfis detalhados (top 5-7)
+      - Analise de estrategia por competidor
+      - Digital benchmark comparativo
+    quality_gate:
+      criteria: Top competidores perfilados com evidencia
+
+  - id: strategy-analysis
+    name: "3. Strategy & Pricing Analysis"
+    agent: competitive-intelligence (Hawk)
+    tasks:
+      - analyze-competitor-pricing
+      - evaluate-competitive-threats
+      - track-competitor-launches
+    inputs:
+      - Perfis de competidores
+    outputs:
+      - Pricing comparison
+      - Threat assessment matrix
+      - Recent launch tracking
+    quality_gate:
+      criteria: Pricing mapeado, threats classificados
+
+  - id: gap-identification
+    name: "4. Gap Identification"
+    agent: competitive-intelligence (Hawk)
+    tasks:
+      - identify-competitive-gaps
+      - monitor-competitor-movements
+    inputs:
+      - Analises competitivas completas
+    outputs:
+      - Gaps de produto, segmento, modelo, posicionamento
+      - Blue Ocean ERRC canvas
+    quality_gate:
+      criteria: Gaps priorizados por oportunidade
+
+  - id: battle-cards
+    name: "5. Battle Card Creation"
+    agent: competitive-intelligence (Hawk)
+    tasks:
+      - create-battle-card
+    inputs:
+      - Perfis, estrategias, pricing, gaps
+    outputs:
+      - Battle cards (1-2 pags por competidor-chave)
+      - Killer questions compiladas
+    quality_gate:
+      criteria: Battle cards sales-ready, testados com equipe comercial
+
+  - id: dossier-compilation
+    name: "6. Competitive Dossier"
+    agent: data-synthesizer (Loom)
+    tasks:
+      - compile-competitive-dossier
+      - create-swot-analysis
+    inputs:
+      - Todos os outputs competitivos
+    outputs:
+      - Dossier competitivo completo
+      - SWOT com TOWS analysis
+    quality_gate:
+      criteria: Dossier abrangente, SWOT com evidencias
+
+  - id: delivery
+    name: "7. Delivery"
+    agent: research-orqx (Prism)
+    tasks:
+      - coordinate-cross-squad-research
+    inputs:
+      - Dossier e battle cards finalizados
+    outputs:
+      - Deliverables por squad
+    quality_gate:
+      criteria: Formatos corretos por destino
+
+success_criteria:
+  - Landscape completo com todos os tipos de competidores
+  - Top competidores perfilados com estrategia
+  - Battle cards sales-ready
+  - Gaps e oportunidades priorizados
+  - Dossier competitivo consolidado
+
+cross_squad_handoffs:
+  - to: commercial-systems
+    delivers: battle cards, pricing comparison
+    format: sales enablement package
+  - to: brand-system
+    delivers: positioning gaps, diferenciacao
+    format: competitive positioning summary
+  - to: copywriting-persuasion
+    delivers: objecoes competitivas, counterpoints
+    format: objection handling guide
+
+completion:
+  notification: "research-orqx"
+  message: "Workflow concluido com sucesso."

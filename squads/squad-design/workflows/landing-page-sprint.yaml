@@ -1,0 +1,102 @@
+name: landing-page-sprint
+version: "1.0"
+description: >
+  Sprint acelerado para landing pages e paginas de campanha — 3 fases comprimidas
+  para entrega rapida sem sacrificar qualidade.
+trigger: Landing page, pagina de campanha ou pagina de conversao unica
+owner: design-orqx (Nexus)
+
+phases:
+  - name: "Phase 1: UX & Visual Design"
+    agents:
+      - dx-ux-strategist (Compass)
+      - dx-ui-designer (Canvas)
+    execution: concurrent
+    tasks:
+      compass:
+        - define-content-hierarchy
+        - create-wireframe-brief
+      canvas:
+        - compose-screen-layouts
+        - design-visual-hierarchy
+        - create-mobile-first-designs
+        - design-landing-page-ui
+        - produce-design-handoff-specs
+    input:
+      - Brief do projeto (de Nexus)
+      - Brand guidelines (de squad-brand)
+      - Copy aprovada (de squad-copy)
+    output:
+      - Content hierarchy
+      - Wireframe brief
+      - Visual design completo (desktop + mobile)
+      - Design handoff specs
+    gate:
+      name: Visual Design Approval
+      criteria: Design aprovado por stakeholder
+      verdict: [APPROVED, NEEDS_REVISION]
+
+  - name: "Phase 2: Implementation + Motion"
+    agents:
+      - dx-frontend-engineer (Scaffold)
+      - dx-interaction-designer (Kinetic)
+    depends_on: Phase 1
+    execution: collaborative
+    tasks:
+      scaffold:
+        - implement-responsive-layouts
+        - implement-form-system
+        - implement-lazy-loading
+      kinetic:
+        - spec-micro-interactions
+        - design-feedback-animations
+    input:
+      - Design handoff specs (de Phase 1)
+      - Motion brief
+    output:
+      - Pagina implementada com animacoes
+      - Responsivo verificado
+      - Formulario funcional
+    gate:
+      name: Implementation Complete
+      criteria: Pagina funcional em staging, interacoes implementadas
+      verdict: [COMPLETE, NEEDS_WORK]
+
+  - name: "Phase 3: Dual QA Gate"
+    agents:
+      - dx-accessibility-specialist (Beacon)
+      - dx-performance-engineer (Apex)
+    depends_on: Phase 2
+    execution: parallel
+    tasks:
+      beacon:
+        - conduct-wcag-audit
+        - test-keyboard-navigation
+        - verify-color-contrast
+      apex:
+        - audit-core-web-vitals
+        - optimize-image-pipeline
+    input:
+      - Pagina em staging
+    output:
+      - A11y audit result
+      - Performance audit result
+    gate:
+      name: Dual Quality Gate
+      criteria:
+        accessibility: "WCAG 2.2 AA compliance"
+        performance: "LCP < 2.5s, INP < 200ms, CLS < 0.1"
+      verdict: [BOTH_PASS, NEEDS_FIX]
+      blocking: true
+      on_fail: Retorna para Phase 2 com fixes
+
+completion:
+  deliverables:
+    - Landing page funcional em staging
+    - A11y compliance verificada
+    - Performance certificada
+    - Tracking hooks implementados
+  handoff_to:
+    - "@devops para deploy"
+    - "squad-growth para A/B testing e tracking"
+    - "squad-copy para feedback de copy performance"

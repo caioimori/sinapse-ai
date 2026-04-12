@@ -1,0 +1,150 @@
+id: course-quality-review
+name: Course Quality Review
+description: Multi-layer quality review workflow for curriculum, lessons, assessments, and production before launch.
+version: "1.0"
+agents:
+  - Compass
+  - Gauge
+  - Lens
+  - Mentor
+
+phases:
+  - id: phase-1-curriculum-check
+    name: Curriculum Check
+    agent: Compass
+    description: Validate curriculum alignment from outcomes to lessons to assessments.
+    inputs:
+      - curriculum-map.md
+      - course-scope.md
+    tasks:
+      - Verify every lesson has a written objective
+      - Verify every objective maps to a module outcome
+      - Verify every module outcome maps to a course outcome
+      - Verify every assessment item maps to a specific objective
+      - Check for orphan lessons (no outcome mapping)
+      - Check for uncovered outcomes (stated but not taught)
+      - Verify prerequisite chain is documented and logical
+      - Verify total duration is realistic for format
+    outputs:
+      - curriculum-review-report.md
+    verdict_options:
+      - ALIGNED: All checks pass
+      - GAPS FOUND: List of specific gaps with fix required
+    gate: ALIGNED required to proceed
+
+  - id: phase-2-lesson-check
+    name: Lesson Quality Check
+    agent: Compass
+    description: Review a sample of lessons for quality, clarity, and structure.
+    inputs:
+      - written-lessons/ or scripts/
+      - lesson-plans/
+    tasks:
+      - Review 30% sample of lessons (prioritize Module 1 and final module)
+      - Check each reviewed lesson against lesson-quality-checklist.md
+      - Verify hooks are compelling (not just "in this lesson we'll cover...")
+      - Verify each lesson teaches one concept
+      - Verify exercises are actionable and tied to objective
+      - Verify lesson duration matches plan
+      - Flag lessons below quality bar
+    outputs:
+      - lesson-review-report.md (with pass/fail per reviewed lesson)
+    verdict_options:
+      - PASS: All reviewed lessons meet quality bar
+      - REVISE: Specific lessons flagged with revision notes
+    gate: All flagged lessons revised before proceeding
+
+  - id: phase-3-assessment-check
+    name: Assessment Check
+    agent: Gauge
+    description: Validate all quizzes, exercises, and rubrics for quality and alignment.
+    inputs:
+      - assessments/
+      - curriculum-map.md
+    tasks:
+      - Verify quiz questions exist for all lessons
+      - Verify all quiz questions are mapped to a lesson objective
+      - Verify no quiz is all-Remember level (minimum 50% Apply+)
+      - Verify wrong answers have explanations
+      - Verify rubrics exist for graded exercises
+      - Verify rubric criteria are concrete and observable
+      - Verify final project brief is complete and clear
+      - Test quiz flow on platform (if configured)
+    outputs:
+      - assessment-review-report.md
+    verdict_options:
+      - PASS: All assessments meet standards
+      - REVISE: Specific issues listed
+    gate: All assessment issues resolved
+
+  - id: phase-4-production-check
+    name: Production Quality Check
+    agent: Lens
+    description: Review all video and media content for technical quality.
+    inputs:
+      - final-videos/
+      - slide-decks/
+    tasks:
+      - Watch intro of every video (first 30 sec) for audio/video quality
+      - Watch one complete lesson from each module
+      - Verify captions exist and are accurate on spot-checked lessons
+      - Verify background music is not distracting
+      - Verify intros and outros are consistent
+      - Verify slide decks follow design principles
+      - Check all lesson durations are as labeled
+      - Verify all downloads are attached and accessible
+    outputs:
+      - production-review-report.md
+    verdict_options:
+      - PASS: All media meets quality standard
+      - REVISE: Specific files flagged with issues
+    gate: All production issues resolved
+
+  - id: phase-5-pre-launch
+    name: Pre-Launch Check
+    agent: Mentor
+    description: Final end-to-end check using the pre-launch-checklist.md.
+    inputs:
+      - All previous review reports
+      - Platform (live environment)
+      - Sales page
+      - Email sequences
+    tasks:
+      - Complete pre-launch-checklist.md in full
+      - Enroll as test student and complete first module
+      - Verify sales page → checkout → access works end-to-end
+      - Verify welcome email received and links work
+      - Verify community access works
+      - Verify mobile experience is acceptable
+      - Verify support contact is visible
+      - Confirm all previous review reports show PASS or resolved
+    outputs:
+      - pre-launch-report.md
+    gate: All checklist items complete
+
+  - id: phase-6-decision
+    name: Approve or Reject
+    agent: Mentor
+    description: Final binary approval decision for course launch.
+    inputs:
+      - curriculum-review-report.md
+      - lesson-review-report.md
+      - assessment-review-report.md
+      - production-review-report.md
+      - pre-launch-report.md
+    tasks:
+      - Review all reports for outstanding issues
+      - Confirm all gates were passed
+      - Issue final approval decision
+    outputs:
+      - final-approval.md
+    verdict_options:
+      - APPROVED: Course may launch
+      - NEEDS REVISION: Outstanding issues listed, resubmit after fixes
+    gate: APPROVED required for public launch
+
+completion_criteria:
+  - All 5 review phases completed with PASS verdicts
+  - All flagged issues resolved
+  - final-approval.md shows APPROVED
+  - Pre-launch checklist 100% complete

@@ -1,0 +1,76 @@
+name: pricing-design-cycle
+version: "1.0"
+description: "Ciclo de design de pricing — da analise de mercado a validacao"
+trigger: "Lancamento de novo servico, revisao anual de pricing, ou reestruturacao de oferta"
+cadence: on-demand
+agents_involved:
+  - pricing-strategist
+  - profitability-analyst
+  - finance-orqx
+
+phases:
+  - name: "Phase 1: Market Analysis"
+    agent: pricing-strategist
+    tasks:
+      - benchmark-competitor-pricing
+      - analyze-price-sensitivity
+    output: "market-pricing-analysis.md"
+    quality_gate: "Mapa de precos do mercado, faixa aceitavel de preco, posicionamento definido"
+    notes: |
+      Mint analisa o mercado:
+      - Precos praticados por concorrentes (minimo 5)
+      - Sensibilidade de preco do publico (Van Westendorp se dados disponiveis)
+      - Posicionamento desejado (below/at/above market)
+      - Faixa aceitavel de preco
+
+  - name: "Phase 2: Cost Modeling"
+    agent: profitability-analyst
+    depends_on: ["Phase 1"]
+    tasks:
+      - calculate-cost-per-delivery
+      - calculate-team-cost-efficiency
+    output: "cost-model.md"
+    quality_gate: "Floor price definido com margem minima, custo por delivery calculado"
+    notes: |
+      Margin calcula a base de custo:
+      - Custo por unidade de delivery
+      - Custo loaded da equipe necessaria
+      - Floor price (custo + margem minima 40%)
+      - Ceiling de custo para diferentes escopos
+
+  - name: "Phase 3: Tier Design & Pricing"
+    agent: pricing-strategist
+    depends_on: ["Phase 2"]
+    tasks:
+      - design-service-tiers
+      - design-value-based-pricing
+      - model-pricing-scenario
+      - calculate-rate-card
+    output: "pricing-proposal.md"
+    quality_gate: "Tiers definidos (G/B/B), value-based fundamentado, 3 cenarios modelados"
+    notes: |
+      Mint desenha o pricing completo:
+      - Tiers Good/Better/Best com atributos
+      - Value-based pricing com Hormozi
+      - 3 cenarios de preco com simulacao de impacto
+      - Rate card atualizado se aplicavel
+      - Todas as opcoes acima do floor definido na Phase 2
+
+  - name: "Phase 4: Validation"
+    agent: finance-orqx
+    depends_on: ["Phase 3"]
+    tasks:
+      - orchestrate-financial-analysis
+    output: "pricing-validation.md"
+    quality_gate: "Pricing validado financeiramente, margens aceitaveis, alinhado com estrategia"
+    notes: |
+      Ledger valida o pricing proposto:
+      - Margem de cada tier acima do minimo
+      - Impacto no P&L projetado
+      - Alinhamento com posicionamento estrategico
+      - Aprovacao ou pedido de ajustes
+      - Pricing aprovado para uso em propostas
+
+completion:
+  notification: "finance-orqx"
+  message: "Workflow concluido com sucesso."

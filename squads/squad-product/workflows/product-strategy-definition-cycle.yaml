@@ -1,0 +1,94 @@
+name: product-strategy-definition-cycle
+description: "Ciclo de definicao ou refinamento de estrategia de produto"
+version: "1.0"
+trigger: "New product engagement, annual strategy refresh, or major pivot"
+estimated_duration: "2-4 weeks"
+
+phases:
+  - name: "Context"
+    description: "Coletar contexto de mercado, competidores e usuarios"
+    agents:
+      - ps-product-strategist
+      - ps-discovery-lead
+    tasks:
+      - map-competitive-positioning
+      - conduct-jtbd-interviews
+      - run-pmf-assessment
+    outputs:
+      - competitive-positioning-map
+      - jtbd-findings
+      - pmf-assessment
+    gate:
+      criteria: "Market context understood, user needs validated, competitive landscape mapped"
+      decision: "Sufficient context to define strategy"
+
+  - name: "Vision"
+    description: "Definir ou refinar visao de produto"
+    agents:
+      - ps-product-strategist
+      - ps-client-product-manager
+    tasks:
+      - define-product-vision
+      - facilitate-product-vision-workshop
+    outputs:
+      - product-vision-statement
+      - workshop-outputs
+    gate:
+      criteria: "Vision statement created, stakeholder alignment confirmed"
+      decision: "Vision approved / needs refinement"
+
+  - name: "Differentiate"
+    description: "Definir posicionamento e estrategia de diferenciacao"
+    agents:
+      - ps-product-strategist
+    tasks:
+      - create-strategy-canvas
+      - validate-product-hypothesis
+    outputs:
+      - strategy-canvas
+      - errc-grid
+      - positioning-statement
+    gate:
+      criteria: "Differentiation clear, ERRC grid actionable, positioning defensible"
+      decision: "Strategy defined / iterate on positioning"
+
+  - name: "Plan"
+    description: "Traduzir estrategia em OKRs e roadmap"
+    agents:
+      - ps-product-strategist
+      - product-orqx
+    tasks:
+      - define-quarterly-okrs
+      - build-opportunity-solution-tree
+      - define-product-okrs
+    outputs:
+      - quarterly-okrs
+      - opportunity-solution-tree
+      - roadmap-themes
+    gate:
+      criteria: "OKRs measurable, OST populated, roadmap themes defined"
+      decision: "Ready for execution planning"
+
+  - name: "Operationalize"
+    description: "Configurar operacoes para executar a estrategia"
+    agents:
+      - product-orqx
+      - ps-delivery-manager
+      - ps-product-ops-specialist
+    tasks:
+      - run-backlog-prioritization
+      - facilitate-sprint-planning
+    outputs:
+      - prioritized-backlog
+      - first-sprint-plan
+    handoff: "Transitions to story-development-delivery-cycle for execution"
+
+review_cadence:
+  strategy_refresh: "Annually or at major pivot"
+  okr_review: "Quarterly (see score-okrs-retrospective)"
+  roadmap_update: "Monthly"
+  competitive_update: "Quarterly"
+
+completion:
+  notification: "product-orqx"
+  message: "Workflow concluido com sucesso."

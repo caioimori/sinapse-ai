@@ -1,0 +1,88 @@
+name: campaign-copy-cycle
+version: "1.0"
+title: "Campaign Copy Cycle — Multi-Channel Campaign"
+description: "Ciclo de copy para campanha multi-canal: define tom da campanha, cria copy por canal e garante consistencia cross-channel."
+complexity: STANDARD
+estimated_duration: "2-4 dias"
+squad: squad-copy
+
+triggers:
+  - "Nova campanha de marketing"
+  - "Campanha sazonal"
+  - "Campanha de awareness/branding"
+
+phases:
+  - phase: 1
+    name: "Campaign Strategy"
+    agent: copy-strategist (Quill)
+    tasks:
+      - create-copy-brief
+      - plan-multi-channel-copy
+    outputs:
+      - Campaign copy brief
+      - Channel mapping
+      - Content cascade model
+    gate: "Strategy aprovada"
+
+  - phase: 2
+    name: "Tone Calibration"
+    agent: brand-voice-writer (Tone)
+    tasks:
+      - calibrate-tone-for-campaign
+    outputs:
+      - Tone brief da campanha
+      - Exemplos por touchpoint
+      - Intensidade por canal
+    gate: "Tone calibrado e aprovado"
+
+  - phase: 3
+    name: "Copy Creation"
+    execution: PARALLEL
+    streams:
+      - stream: "Headlines & Hooks"
+        agent: headline-specialist (Hook)
+        tasks:
+          - generate-headline-variations
+          - craft-social-media-hooks
+      - stream: "Email Copy"
+        agent: conversion-writer (Spark)
+        tasks:
+          - create-email-campaign
+      - stream: "Ad Copy"
+        agent: conversion-writer (Spark)
+        tasks:
+          - write-ad-copy-social
+      - stream: "Long-form"
+        agent: long-form-writer (Saga)
+        tasks:
+          - "[Conforme necessidade: blog, story, etc.]"
+    gate: "Todas as pecas draft completas"
+
+  - phase: 4
+    name: "Consistency Review"
+    agent: copy-editor (Chisel)
+    tasks:
+      - conduct-full-copy-review
+    outputs:
+      - Consistency cross-channel verificada
+      - Copy editada e polida
+    gate: "Messaging consistente em todos os canais"
+
+  - phase: 5
+    name: "Approval & Launch"
+    agent: copy-strategist (Quill)
+    outputs:
+      - Campaign copy package aprovado
+      - Copy calendar com datas
+      - KPIs por canal
+    gate: "Package aprovado para launch"
+
+cross_squad_handoffs:
+  - to: squad-content
+    delivers: "Campaign copy para producao/publicacao"
+  - to: squad-growth
+    delivers: "Campaign copy + KPIs para tracking"
+
+completion:
+  notification: "copy-orqx"
+  message: "Workflow concluido com sucesso."

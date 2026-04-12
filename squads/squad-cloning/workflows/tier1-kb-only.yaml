@@ -1,0 +1,71 @@
+name: tier1-kb-only
+version: "1.0"
+description: "Pipeline leve para clones Tier 1 — gera apenas KBs (5-20K palavras, 1 sessao)"
+trigger: "Clone com content class C/D ou confidence < 75%"
+agents_involved:
+  - cloning-orqx
+  - source-hunter
+  - content-capturer
+  - cognitive-extractor
+  - mind-synthesizer
+  - kb-architect
+
+phases:
+  - name: "Phase 1: Source Discovery"
+    agent: source-hunter
+    tasks:
+      - discover-youtube-channels
+      - discover-books-publications
+      - discover-articles-interviews
+      - compile-source-catalog
+      - estimate-content-volume
+    output: "source-catalog.yaml"
+    quality_gate: "Min 5K palavras estimadas, content class definida"
+
+  - name: "Phase 2: Content Capture"
+    agent: content-capturer
+    depends_on: ["Phase 1"]
+    tasks:
+      - transcribe-youtube-videos
+      - extract-book-content
+      - capture-article-text
+      - normalize-raw-content
+    output: "raw/ normalizado"
+    quality_gate: "Conteudo capturado e normalizado"
+
+  - name: "Phase 3: Extract & Synthesize"
+    agent: cognitive-extractor
+    depends_on: ["Phase 2"]
+    tasks:
+      - extract-mental-models
+      - extract-heuristics
+      - extract-workflows-processes
+      - tag-confidence-levels
+      - generate-extraction-report
+    output: "Extracoes tagadas"
+    quality_gate: "Min 5 models, 8 heuristics, 3 workflows"
+
+  - name: "Phase 4: Profile & KBs"
+    agent: mind-synthesizer
+    depends_on: ["Phase 3"]
+    tasks:
+      - build-cognitive-profile
+      - calculate-confidence-score
+      - determine-clone-tier
+    output: "cognitive-profile.md"
+    quality_gate: "Confidence >= 60%"
+
+  - name: "Phase 5: Generate KBs"
+    agent: kb-architect
+    depends_on: ["Phase 4"]
+    tasks:
+      - design-kb-taxonomy
+      - generate-framework-kbs
+      - generate-pattern-kbs
+      - validate-kb-citations
+    output: "3-8 KBs"
+    quality_gate: "Min 3 KBs com citacoes corretas"
+
+completion:
+  notification: "cloning-orqx"
+  message: "Workflow concluido com sucesso."

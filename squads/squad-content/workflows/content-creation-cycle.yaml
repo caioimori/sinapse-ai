@@ -1,0 +1,101 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Content Creation Cycle
+# ══════════════════════════════════════════════════════════════════════════════
+# Ciclo de criacao focado: brief → producao → adaptacao → QA → publicacao
+# Pipeline: Arc → Morph → Index → Publicacao
+# ══════════════════════════════════════════════════════════════════════════════
+
+name: content-creation-cycle
+version: 1.0.0
+description: >
+  Ciclo de producao de conteudo individual ou em batch. Assume que planejamento
+  ja foi feito (editorial-planning-cycle) e Espinha Dorsal ja existe. Foco
+  na execucao: estruturar, escrever, adaptar, validar, publicar.
+trigger: "Brief aprovado ou Espinha Dorsal validada"
+cadence: "Continuo — acionado por demanda"
+estimated_duration: "1-4 horas (unitario) | 4-8 horas (batch)"
+
+phases:
+  - phase: 1
+    name: "Content Structuring"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - design-content-spine       # se nao existe ainda
+      - structure-carousel-progression  # ou structure-video-script, etc.
+      - design-hook-system
+    input: "Brief com tema, formato, template contract, pilar, funil"
+    output: "Estrutura narrativa completa + hooks"
+    gate: "Espinha Dorsal validada + estrutura alinhada com template contract"
+    note: "Se Espinha Dorsal ja existe do editorial-planning, pular design-content-spine"
+
+  - phase: 2
+    name: "Content Writing"
+    agent: "content-engineer (Arc)"
+    tasks:
+      - write-carousel-content     # ou write-blog-article, write-reel-script, etc.
+    input: "Estrutura aprovada, template contract, regras de escrita"
+    output: "Conteudo escrito com verificacao algoritmica (5 sinais)"
+    gate: "Caracteres dentro dos limites + 5/5 sinais algoritimicos"
+    batch_mode:
+      task: batch-content-production
+      trigger: ">=3 pecas do mesmo formato"
+
+  - phase: 3
+    name: "Platform Adaptation"
+    agent: "platform-specialist (Morph)"
+    tasks:
+      - adapt-for-instagram-feed   # ou plataforma relevante
+      - optimize-for-algorithm
+    input: "Conteudo escrito, plataforma-alvo"
+    output: "Conteudo nativo para plataforma"
+    gate: "Specs tecnicas respeitadas, formato nativo"
+    batch_mode:
+      task: batch-platform-adaptation
+      trigger: ">=3 pecas para mesma plataforma"
+    optional_tasks:
+      - design-content-atomization  # se 1 conteudo → multiplos formatos
+      - adapt-content-language      # se multi-idioma
+
+  - phase: 4
+    name: "Quality Assurance"
+    agent: "content-governor (Index)"
+    tasks:
+      - validate-content-quality
+      - audit-template-compliance
+      - check-brand-consistency
+    input: "Conteudo adaptado, template contract, brand guidelines"
+    output: "QA report: APPROVED ou NEEDS REVISION"
+    gate: "APPROVED (scoring >= 4.0)"
+    on_fail:
+      action: "Retornar para Phase 2 com correcoes"
+      max_iterations: 3
+      escalation: "Se 3 rejeicoes: escalar para North para reavaliar tema/angulo"
+    optional_tasks:
+      - validate-content-compliance  # se setor regulado
+
+  - phase: 5
+    name: "Publication"
+    agent: "content-orqx (Nexus)"
+    tasks: []
+    input: "Conteudo aprovado"
+    output: "Conteudo publicado"
+    gate: "Publicacao confirmada"
+
+orchestration:
+  coordinator: "content-orqx (Nexus)"
+  modes:
+    single:
+      description: "Producao unitaria — 1 peca"
+      duration: "1-4 horas"
+    batch:
+      description: "Producao em lote — 3+ pecas"
+      duration: "4-8 horas"
+      optimization: "Agrupar por formato para Arc, por plataforma para Morph"
+    fast_track:
+      description: "Producao urgente — sinal HOT"
+      duration: "< 2 horas"
+      qa_mode: "express"
+
+completion:
+  notification: "content-orqx"
+  message: "Workflow concluido com sucesso."

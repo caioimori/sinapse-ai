@@ -1,0 +1,263 @@
+name: squad-growth
+version: "1.0.0"
+slashPrefix: SINAPSE
+author: Caio Imori
+license: UNLICENSED
+description: >
+  Squad de Growth Analytics — orquestra analytics engineering, CRO, experimentacao,
+  SEO, data analysis e growth engineering para maximizar crescimento mensuravel.
+  Toda decisao e data-driven, toda acao e rastreavel, todo resultado e atribuivel.
+
+metadata:
+  tier: 2
+  domain: growth-analytics
+  complexity: high
+  language: pt-BR
+  created: "2026-03-12"
+  author: "Sinapse"
+  agents_count: 7
+  tasks_count: 77
+  knowledge_bases_count: 12
+  workflows_count: 6
+  templates_count: 6
+  checklists_count: 3
+  quality_target: "5.0/5.0 em todas as dimensoes"
+
+agents:
+  - id: growth-orqx
+    name: Catalyst
+    icon: "🚀"
+    role: Growth Orchestrator
+    file: agents/growth-orqx.md
+    tasks_count: 8
+
+  - id: ga-analytics-engineer
+    name: Signal
+    icon: "📊"
+    role: Analytics Architecture & Tracking Engineer
+    file: agents/ga-analytics-engineer.md
+    tasks_count: 12
+
+  - id: ga-cro-specialist
+    name: Convert
+    icon: "🎯"
+    role: CRO & Experimentation Specialist
+    file: agents/ga-cro-specialist.md
+    tasks_count: 11
+
+  - id: ga-seo-strategist
+    name: Rank
+    icon: "🔍"
+    role: SEO Strategy & Technical SEO
+    file: agents/ga-seo-strategist.md
+    tasks_count: 12
+
+  - id: ga-data-analyst
+    name: Insight
+    icon: "💡"
+    role: Data Analysis & Business Intelligence
+    file: agents/ga-data-analyst.md
+    tasks_count: 10
+
+  - id: ga-growth-hacker
+    name: Lever
+    icon: "🔧"
+    role: Growth Engineering & Activation
+    file: agents/ga-growth-hacker.md
+    tasks_count: 10
+
+  - id: ga-campaign-analyst
+    name: Pulse
+    icon: "📈"
+    role: Campaign Analytics & Channel Attribution
+    file: agents/ga-campaign-analyst.md
+    tasks_count: 9
+
+total_tasks: 72
+
+workflows:
+  - id: full-growth-analytics-cycle
+    name: Full Growth Analytics Cycle
+    file: workflows/full-growth-analytics-cycle.yaml
+    description: "Ciclo completo de growth — da instrumentacao a otimizacao"
+
+  - id: cro-experimentation-sprint
+    name: CRO Experimentation Sprint
+    file: workflows/cro-experimentation-sprint.yaml
+    description: "Sprint de experimentacao CRO — hipotese a resultado"
+
+  - id: seo-audit-optimization-cycle
+    name: SEO Audit & Optimization Cycle
+    file: workflows/seo-audit-optimization-cycle.yaml
+    description: "Ciclo de auditoria e otimizacao SEO"
+
+  - id: analytics-instrumentation-pipeline
+    name: Analytics Instrumentation Pipeline
+    file: workflows/analytics-instrumentation-pipeline.yaml
+    description: "Pipeline de instrumentacao de analytics end-to-end"
+
+  - id: growth-experiment-loop
+    name: Growth Experiment Loop
+    file: workflows/growth-experiment-loop.yaml
+    description: "Loop iterativo de experimentacao de growth"
+
+  - id: campaign-performance-review
+    name: Campaign Performance Review
+    file: workflows/campaign-performance-review.yaml
+    description: "Ciclo de review de performance de campanhas"
+
+knowledge_base:
+  - id: analytics-event-taxonomy
+    file: knowledge-base/analytics-event-taxonomy.md
+    description: "Taxonomia de eventos, naming conventions e event schema"
+
+  - id: cro-experimentation-framework
+    file: knowledge-base/cro-experimentation-framework.md
+    description: "Framework de experimentacao — hipoteses, sample size, significancia"
+
+  - id: seo-technical-reference
+    file: knowledge-base/seo-technical-reference.md
+    description: "Referencia tecnica de SEO — Core Web Vitals, schema, crawlability"
+
+  - id: attribution-models
+    file: knowledge-base/attribution-models.md
+    description: "Modelos de atribuicao — last-click, multi-touch, data-driven"
+
+  - id: growth-frameworks
+    file: knowledge-base/growth-frameworks.md
+    description: "Frameworks de growth — AARRR, North Star, ICE, RICE"
+
+  - id: data-visualization-guide
+    file: knowledge-base/data-visualization-guide.md
+    description: "Guia de data visualization — chart types, storytelling, dashboards"
+
+  - id: privacy-compliance-analytics
+    file: knowledge-base/privacy-compliance-analytics.md
+    description: "LGPD/GDPR compliance para analytics — consent, anonimizacao"
+
+  - id: ga4-gtm-reference
+    file: knowledge-base/ga4-gtm-reference.md
+    description: "Referencia GA4 e GTM — configuracao, eventos, dimensoes customizadas"
+
+  - id: sql-analytics-patterns
+    file: knowledge-base/sql-analytics-patterns.md
+    description: "Padroes SQL para analytics — cohorts, funnels, retention, LTV"
+
+checklists:
+  - id: analytics-instrumentation-checklist
+    file: checklists/analytics-instrumentation-checklist.md
+    description: "Checklist de instrumentacao de tracking"
+
+  - id: seo-audit-checklist
+    file: checklists/seo-audit-checklist.md
+    description: "Checklist de auditoria SEO completa"
+
+  - id: experiment-launch-checklist
+    file: checklists/experiment-launch-checklist.md
+    description: "Checklist de lancamento de experimento A/B"
+
+templates:
+  - id: experiment-brief-template
+    file: templates/experiment-brief-template.md
+    description: "Template de brief para experimentos A/B/n"
+
+  - id: analytics-dashboard-spec-template
+    file: templates/analytics-dashboard-spec-template.md
+    description: "Template de especificacao de dashboard"
+
+  - id: seo-audit-report-template
+    file: templates/seo-audit-report-template.md
+    description: "Template de relatorio de auditoria SEO"
+
+  - id: campaign-report-template
+    file: templates/campaign-report-template.md
+    description: "Template de relatorio de performance de campanha"
+
+  - id: growth-experiment-report-template
+    file: templates/growth-experiment-report-template.md
+    description: "Template de relatorio de experimento de growth"
+
+  - id: tracking-plan-template
+    file: templates/tracking-plan-template.md
+    description: "Template de tracking plan com event schema"
+
+quality_standards:
+  reference_authors:
+    - "Sean Ellis (Hacking Growth)"
+    - "Andrew Chen (The Cold Start Problem)"
+    - "Alistair Croll & Benjamin Yoskovitz (Lean Analytics)"
+    - "Eric Ries (The Lean Startup)"
+    - "Nir Eyal (Hooked)"
+    - "Brian Balfour (Reforge Growth Series)"
+    - "Casey Winters (Growth Models)"
+    - "Elena Verna (Product-Led Growth)"
+    - "Rand Fishkin (Lost and Founder, Moz)"
+    - "Avinash Kaushik (Web Analytics 2.0)"
+    - "Edward Tufte (The Visual Display of Quantitative Information)"
+    - "Cole Nussbaumer Knaflic (Storytelling with Data)"
+    - "Ron Kohavi (Trustworthy Online Controlled Experiments)"
+    - "Stefan Thomke (Experimentation Works)"
+    - "John Caples (Tested Advertising Methods)"
+
+  reference_companies:
+    - "Google (GA4, Search Console, Optimize)"
+    - "Meta (Conversion API, Attribution)"
+    - "Amplitude (Product Analytics)"
+    - "Mixpanel (Event Analytics)"
+    - "Segment (CDP)"
+    - "Optimizely (Experimentation Platform)"
+    - "VWO (CRO Platform)"
+    - "Ahrefs/Semrush (SEO Tools)"
+    - "Hotjar (Behavioral Analytics)"
+    - "Looker/Metabase (BI Dashboards)"
+    - "HubSpot (Growth Marketing)"
+    - "Stripe (Revenue Analytics)"
+
+  core_concepts:
+    - name: "AARRR (Pirate Metrics)"
+      description: "Acquisition → Activation → Retention → Revenue → Referral funnel"
+    - name: "North Star Metric"
+      description: "Single metric that best captures core value delivered to customers"
+    - name: "Statistical Significance"
+      description: "p-value < 0.05, 95% confidence interval for experiment decisions"
+    - name: "Multi-Touch Attribution"
+      description: "Distribuicao de credito entre touchpoints no customer journey"
+    - name: "Growth Loops"
+      description: "Self-reinforcing cycles that compound growth over time"
+
+  mandatory_gates:
+    - name: "Data Quality Gate"
+      description: "Tracking accuracy >= 98%, no missing critical events"
+      blocking: true
+      agent: ga-analytics-engineer
+
+    - name: "Statistical Validity Gate"
+      description: "Experiments must reach statistical significance before decisions"
+      blocking: true
+      agent: ga-cro-specialist
+
+cross_squad_handoffs:
+  inbound:
+    - from: squad-design
+      receives: "Implemented pages, performance metrics, component analytics hooks"
+    - from: squad-content
+      receives: "Content assets, content performance data, editorial calendar"
+    - from: squad-brand
+      receives: "Brand guidelines for campaign creatives, messaging framework"
+    - from: squad-copy
+      receives: "Landing page copy, CTAs, email sequences for campaigns"
+
+  outbound:
+    - to: squad-design
+      sends: "Analytics requirements, tracking specs, heatmap insights for UX"
+    - to: squad-content
+      sends: "Content performance data, SEO keyword opportunities, top content"
+    - to: squad-copy
+      sends: "CRO insights, winning copy variants, conversion data"
+    - to: squad-commercial
+      sends: "Lead scoring data, conversion analytics, pipeline metrics"
+    - to: squad-product
+      sends: "Product analytics, feature adoption data, user behavior insights"
+
+preferences:
+  file: preferences/README.md
