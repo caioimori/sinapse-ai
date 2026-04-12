@@ -28,6 +28,27 @@ const yaml = require('js-yaml');
 
 const { RegistrySyncer } = require('../../.sinapse-ai/core/code-intel/registry-syncer');
 
+/**
+ * Atomically read a file's content + stat via a single open file descriptor.
+ *
+ * This avoids the classic check-then-use race (CodeQL js/file-system-race)
+ * that arises when `fs.readFileSync(path)` and `fs.statSync(path)` are
+ * called separately — they resolve the path twice and, in theory, may see
+ * different inodes. By opening once and issuing both `fstatSync(fd)` and
+ * `readFileSync(fd)` against the same descriptor, content and stats are
+ * guaranteed to refer to the exact same file state.
+ */
+function atomicReadAndStat(filePath) {
+  const fd = fs.openSync(filePath, 'r');
+  try {
+    const stats = fs.fstatSync(fd);
+    const content = fs.readFileSync(fd, 'utf8');
+    return { content, stats };
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
 function makeTempRegistry() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-registry-'));
   const registryPath = path.join(dir, 'entity-registry.yaml');
@@ -106,29 +127,24 @@ describe('RegistrySyncer idempotency (Story 10.15)', () => {
     // file already matches the canonical hash. We only care that after
     // this run, subsequent no-op runs are true no-ops.
     //
-    // Note: order matters here to avoid a TOCTOU-style race (CodeQL
-    // js/file-system-race). We read the file BEFORE calling statSync so
-    // the observed content and the observed mtime refer to the same
-    // post-sync state of the file, not two independent observations.
+    // We use atomicReadAndStat() so content and stats are taken from a
+    // single open file descriptor (no TOCTOU, no CodeQL js/file-system-race).
     await syncer.sync({ full: false });
-    const contentAfterFirst = fs.readFileSync(temp.registryPath, 'utf8');
-    const statsAfterFirst = fs.statSync(temp.registryPath);
+    const afterFirst = atomicReadAndStat(temp.registryPath);
     const lastUpdatedAfterFirst = readRegistryMetadata(temp.registryPath).lastUpdated;
 
     // Small wait to ensure mtime resolution differs if the file is rewritten.
     await new Promise((r) => setTimeout(r, 50));
 
     // Second sync with no structural changes MUST skip the write.
-    // Same read-before-stat ordering as above.
     const second = await syncer.sync({ full: false });
-    const contentAfterSecond = fs.readFileSync(temp.registryPath, 'utf8');
-    const statsAfterSecond = fs.statSync(temp.registryPath);
+    const afterSecond = atomicReadAndStat(temp.registryPath);
     const lastUpdatedAfterSecond = readRegistryMetadata(temp.registryPath).lastUpdated;
 
     expect(second.writeSkipped).toBe(true);
-    expect(contentAfterSecond).toBe(contentAfterFirst);
+    expect(afterSecond.content).toBe(afterFirst.content);
     expect(lastUpdatedAfterSecond).toBe(lastUpdatedAfterFirst);
-    expect(statsAfterSecond.mtimeMs).toBe(statsAfterFirst.mtimeMs);
+    expect(afterSecond.stats.mtimeMs).toBe(afterFirst.stats.mtimeMs);
   });
 
   test('AC 6 (repeat): third sync is also a no-op', async () => {
@@ -143,14 +159,14 @@ describe('RegistrySyncer idempotency (Story 10.15)', () => {
     await new Promise((r) => setTimeout(r, 20));
     await syncer.sync({ full: false }); // first no-op
 
-    const statsBefore = fs.statSync(temp.registryPath);
+    const before = atomicReadAndStat(temp.registryPath);
     await new Promise((r) => setTimeout(r, 50));
 
     const third = await syncer.sync({ full: false });
-    const statsAfter = fs.statSync(temp.registryPath);
+    const after = atomicReadAndStat(temp.registryPath);
 
     expect(third.writeSkipped).toBe(true);
-    expect(statsAfter.mtimeMs).toBe(statsBefore.mtimeMs);
+    expect(after.stats.mtimeMs).toBe(before.stats.mtimeMs);
   });
 
   test('AC 7: genuine content change (new entity) DOES rewrite the file', async () => {
