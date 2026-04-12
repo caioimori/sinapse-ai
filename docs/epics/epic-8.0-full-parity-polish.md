@@ -139,7 +139,7 @@ Close all framework gaps, polish public-facing infrastructure, and establish SIN
 ### Story 8.13: Legal Documentation
 - [x] Create docs/legal/privacy.md (politica de privacidade, LGPD aligned)
 - [x] Create docs/legal/terms.md (termos de uso)
-- [x] Create docs/legal/license-clarification.md (MIT core, Pro proprietary, BMad chain)
+- [x] Create docs/legal/license-clarification.md (MIT core, Pro proprietary, upstream attribution chain)
 - [ ] Bilingual (PT + EN versions)
 
 ### Story 8.14: README Professional Rewrite

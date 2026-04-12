@@ -254,6 +254,9 @@ test-sample-*.md
 # Development artifacts, internal strategy, and proprietary content.
 # These stay local only — not published to GitHub or npm.
 
+# Internal competitive analysis (never publish)
+.sinapse-ai/internal/
+
 docs/stories/
 docs/research/
 docs/qa/

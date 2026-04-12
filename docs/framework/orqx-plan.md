@@ -242,7 +242,7 @@ Semana 2 (2026-03-25):
 | # | Decisao | Justificativa |
 |---|---------|---------------|
 | 1 | @caioimori como unico maintainer no CODEOWNERS | Autoria completa |
-| 2 | BMad Method attribution mantida SOMENTE em LICENSE | Obrigacao MIT, invisivel ao usuario |
+| 2 | Upstream attribution mantida SOMENTE em LICENSE | Obrigacao MIT, invisivel ao usuario |
 | 3 | Linguas: PT + EN only | Foco, menos manutencao |
 | 4 | Modos: Rapido (default) + Personalizado | Mass market + power users |
 | 5 | Claude Code + Codex como IDEs primarias | Maior base de usuarios |

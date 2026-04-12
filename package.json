@@ -92,6 +92,7 @@
     "collab:start": "node bin/utils/collab-start.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",
     "validate:docs": "node scripts/validate-install-docs.js",
+    "validate:no-external-refs": "node scripts/validate-no-external-refs.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
