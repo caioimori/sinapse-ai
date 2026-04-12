@@ -105,18 +105,24 @@ describe('RegistrySyncer idempotency (Story 10.15)', () => {
     // First sync — may or may not write depending on whether the seeded
     // file already matches the canonical hash. We only care that after
     // this run, subsequent no-op runs are true no-ops.
+    //
+    // Note: order matters here to avoid a TOCTOU-style race (CodeQL
+    // js/file-system-race). We read the file BEFORE calling statSync so
+    // the observed content and the observed mtime refer to the same
+    // post-sync state of the file, not two independent observations.
     await syncer.sync({ full: false });
-    const statsAfterFirst = fs.statSync(temp.registryPath);
     const contentAfterFirst = fs.readFileSync(temp.registryPath, 'utf8');
+    const statsAfterFirst = fs.statSync(temp.registryPath);
     const lastUpdatedAfterFirst = readRegistryMetadata(temp.registryPath).lastUpdated;
 
     // Small wait to ensure mtime resolution differs if the file is rewritten.
     await new Promise((r) => setTimeout(r, 50));
 
     // Second sync with no structural changes MUST skip the write.
+    // Same read-before-stat ordering as above.
     const second = await syncer.sync({ full: false });
-    const statsAfterSecond = fs.statSync(temp.registryPath);
     const contentAfterSecond = fs.readFileSync(temp.registryPath, 'utf8');
+    const statsAfterSecond = fs.statSync(temp.registryPath);
     const lastUpdatedAfterSecond = readRegistryMetadata(temp.registryPath).lastUpdated;
 
     expect(second.writeSkipped).toBe(true);
