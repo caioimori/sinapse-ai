@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-12T12:42:04.062Z'
+  lastUpdated: '2026-04-12T23:01:08.253Z'
   entityCount: 752
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -13291,12 +13291,13 @@ entities:
       path: .sinapse-ai/development/agents/analyst/MEMORY.md
       layer: L3
       type: agent
-      purpose: Analyst Agent Memory (Scope)
+      purpose: Scrum Master Agent Memory (Sync)
       keywords:
         - memory
-        - analyst
+        - scrum
+        - master
         - agent
-        - (scope)
+        - (sync)
       usedBy: []
       dependencies: []
       externalDeps: []
@@ -13306,8 +13307,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:1c0f22927a27f6b4446b74253747db214e78456bde7343fe98300b7106858025
-      lastVerified: '2026-04-12T02:57:59.890Z'
+      checksum: sha256:12a5b03243b3dd6d8df71ae70cb74bd380f00ad892aa2aeffcd9ec6a447cebb0
+      lastVerified: '2026-04-12T23:01:08.249Z'
   checklists:
     agent-quality-gate:
       path: .sinapse-ai/development/checklists/agent-quality-gate.md

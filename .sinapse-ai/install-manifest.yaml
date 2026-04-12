@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 9.4.0
-generated_at: "2026-04-12T12:42:44.491Z"
+generated_at: "2026-04-12T23:01:15.542Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1149
 files:
@@ -1241,9 +1241,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:a4f0dde199f90f698a0a366efd97ba17a857e46f6702529b283f5183c33b3085
+    hash: sha256:0ddde8bdb90507f5445527e2bb70811359f6492e9e2052d5a1fffd41e9aafab2
     type: data
-    size: 522616
+    size: 522634
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1417,9 +1417,9 @@ files:
     type: agent
     size: 14161
   - path: development/agents/sprint-lead/MEMORY.md
-    hash: sha256:fcc36fd4080c382d3ab0d455910805f045a29972c7ff0a1e20a4461474de56b0
+    hash: sha256:12a5b03243b3dd6d8df71ae70cb74bd380f00ad892aa2aeffcd9ec6a447cebb0
     type: agent
-    size: 1125
+    size: 2023
   - path: development/agents/squad-creator.md
     hash: sha256:4c1248b95b630fdbf36692193077f693847307ceb627c3b1d387a7faff18f7c7
     type: agent
