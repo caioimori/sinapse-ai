@@ -13,7 +13,7 @@
  * Based on Auto-Claude's AI PR Reviewer architecture.
  */
 
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events');
@@ -577,8 +577,9 @@ Respond with a JSON object:
   async callClaude(prompt) {
     return new Promise((resolve, reject) => {
       try {
-        const result = execSync(
-          `claude --print --dangerously-skip-permissions -p "${prompt.replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/`/g, '\\`')}"`,
+        const result = execFileSync(
+          'claude',
+          ['--print', '--dangerously-skip-permissions', '-p', prompt],
           {
             encoding: 'utf8',
             maxBuffer: 10 * 1024 * 1024,
@@ -705,9 +706,10 @@ class PRReviewAI extends EventEmitter {
    */
   async fetchPRData(prNumber) {
     try {
-      // Get PR info
-      const prJson = execSync(
-        `gh pr view ${prNumber} --json title,body,author,baseRefName,headRefName,files,additions,deletions`,
+      // Get PR info (use execFileSync array form to prevent shell injection)
+      const prJson = execFileSync(
+        'gh',
+        ['pr', 'view', String(prNumber), '--json', 'title,body,author,baseRefName,headRefName,files,additions,deletions'],
         {
           cwd: this.rootPath,
           encoding: 'utf8',
@@ -716,7 +718,7 @@ class PRReviewAI extends EventEmitter {
       const pr = JSON.parse(prJson);
 
       // Get diff
-      const diff = execSync(`gh pr diff ${prNumber}`, {
+      const diff = execFileSync('gh', ['pr', 'diff', String(prNumber)], {
         cwd: this.rootPath,
         encoding: 'utf8',
         maxBuffer: 50 * 1024 * 1024,
@@ -842,16 +844,17 @@ class PRReviewAI extends EventEmitter {
     const body = this.formatReviewBody(review);
 
     try {
-      // Post as PR comment
-      execSync(`gh pr comment ${prNumber} --body "${body.replace(/"/g, '\\"')}"`, {
+      // Post as PR comment (use execFileSync array form to prevent shell injection)
+      execFileSync('gh', ['pr', 'comment', String(prNumber), '--body', body], {
         cwd: this.rootPath,
         encoding: 'utf8',
       });
 
       // If requesting changes, also submit a review
       if (review.verdict === Verdict.REQUEST_CHANGES) {
-        execSync(
-          `gh pr review ${prNumber} --request-changes --body "Please address the issues found by the automated review."`,
+        execFileSync(
+          'gh',
+          ['pr', 'review', String(prNumber), '--request-changes', '--body', 'Please address the issues found by the automated review.'],
           {
             cwd: this.rootPath,
             encoding: 'utf8',
@@ -861,7 +864,7 @@ class PRReviewAI extends EventEmitter {
         review.verdict === Verdict.APPROVE &&
         review.findings.filter((f) => f.severity === Severity.CRITICAL).length === 0
       ) {
-        execSync(`gh pr review ${prNumber} --approve --body "LGTM! Automated review passed."`, {
+        execFileSync('gh', ['pr', 'review', String(prNumber), '--approve', '--body', 'LGTM! Automated review passed.'], {
           cwd: this.rootPath,
           encoding: 'utf8',
         });
@@ -931,7 +934,7 @@ class PRReviewAI extends EventEmitter {
    * Review local changes (not yet in PR)
    */
   async reviewLocal(baseBranch = 'main') {
-    const diff = execSync(`git diff ${baseBranch}...HEAD`, {
+    const diff = execFileSync('git', ['diff', `${baseBranch}...HEAD`], {
       cwd: this.rootPath,
       encoding: 'utf8',
     });

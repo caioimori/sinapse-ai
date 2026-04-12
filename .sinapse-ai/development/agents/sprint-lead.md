@@ -187,6 +187,34 @@ autoClaude:
 
 ---
 
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses when creating stories:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft the story content from PRD/epic sources
+2. List verification questions: Does each AC trace to a PRD requirement? Are dependencies real?
+3. Answer each verification question INDEPENDENTLY against source documents
+4. Produce final story with only verified, traceable content
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- When stories reference specific libraries or packages, verify they exist via `npm view {package}`
+- 19.7% of packages recommended by LLMs are fabricated
+- Flag any unverified dependency in story notes as [NEEDS VERIFICATION]
+
+**3. Fact Grounding — Cite What You See:**
+- When referencing architecture decisions, cite the source document path and section
+- Use Read tool to verify PRD content before including in stories
+- NEVER invent acceptance criteria not traceable to requirements
+- Cross-reference existing stories to avoid duplicate scope
+
+**4. Confidence Signaling:**
+- Mark uncertain scope items with [NEEDS VERIFICATION]
+- When unsure about technical feasibility or dependency availability, flag it
+- Prefer explicit "requires architect input" over fabricating technical details
+
+---
+
 ## Quick Commands
 
 **Story Management:**

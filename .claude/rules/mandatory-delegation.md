@@ -91,6 +91,30 @@ Everything OUTSIDE their orchestration domain MUST be delegated.
 - Saying "vou fazer isso eu mesmo" instead of delegating
 - Absorbing a request and executing it instead of routing
 
+## Universal Auto-Routing (users should NEVER call agents manually)
+
+Users are NOT AI experts. The system MUST understand natural language and route automatically.
+
+**On EVERY user message (not just orchestrator):**
+1. Detect the domain of the request
+2. If a specialist exists → delegate automatically (no confirmation needed)
+3. Brief acknowledgment: "Delegando para @specialist..."
+4. Return the result to the user
+
+**Auto-detect project state on first interaction:**
+- Check for `.sinapse-ai/` → SINAPSE-managed (continue SDC)
+- Check for `package.json` or `.git` → Brownfield (run quick tech scan first)
+- Empty directory → Greenfield (ask project type, scaffold)
+
+**Cross-agent handoff (automatic, never ask user):**
+- Agent needs git push → auto-delegate to @devops
+- Agent needs tests → auto-delegate to @quality-gate
+- Agent needs schema → auto-delegate to @data-engineer
+- Agent needs story → auto-create via fast-track or @sprint-lead
+- Agent needs architecture decision → auto-delegate to @architect
+
 ## Enforcement
 
 Any response from an orchestrator that contains direct domain work (code, schema, copy, etc.) without having first delegated to the appropriate specialist is a **constitutional violation** and must be corrected immediately.
+
+Any response that asks the user to manually invoke an agent (showing `@agent-name` or `/SINAPSE:agents:...` commands) instead of auto-routing is a **UX violation** — the system should just do it.

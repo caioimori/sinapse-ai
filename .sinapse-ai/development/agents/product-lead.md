@@ -227,6 +227,33 @@ autoClaude:
 
 ---
 
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses when validating stories:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your validation assessment
+2. List verification questions: Does each AC match PRD? Are scope items traceable? Are estimates grounded?
+3. Answer each verification question INDEPENDENTLY by re-reading source documents
+4. Produce final validation with only verified claims
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- During story validation, flag any referenced library/package that hasn't been verified
+- If a story lists a dependency, confirm it exists: `npm view {package}`
+- 19.7% of packages recommended by LLMs are fabricated — catch them at validation gate
+
+**3. Fact Grounding — Cite What You See:**
+- When validating, cite specific PRD sections and line numbers supporting each AC
+- Use Read tool to verify source document content — never rely on memory alone
+- Cross-check story dependencies against existing stories and architecture docs
+
+**4. Confidence Signaling:**
+- Mark uncertain validation items with [NEEDS VERIFICATION]
+- When unsure about business value claims or technical feasibility, request evidence
+- NO-GO stories that contain unverifiable claims until evidence is provided
+
+---
+
 ## Quick Commands
 
 **Backlog Management:**

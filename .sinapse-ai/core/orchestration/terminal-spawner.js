@@ -12,7 +12,7 @@
 
 'use strict';
 
-const { spawn, execSync } = require('child_process');
+const { spawn, execSync, execFileSync } = require('child_process');
 const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
@@ -554,7 +554,7 @@ async function spawnAgent(agent, task, options = {}) {
         SINAPSE_OUTPUT_DIR: opts.outputDir,
       };
 
-      const result = execSync(`bash "${scriptPath}" ${args.join(' ')}`, {
+      const result = execFileSync('bash', [scriptPath, ...args], {
         encoding: 'utf8',
         timeout: opts.timeout,
         env,

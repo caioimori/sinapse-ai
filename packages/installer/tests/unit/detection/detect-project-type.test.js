@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { detectProjectType } = require('../../../src/detection/detect-project-type');
+const { detectProjectType, detectProjectTypeExtended } = require('../../../src/detection/detect-project-type');
 
 // Mock fs module
 jest.mock('fs');
@@ -399,4 +399,141 @@ describe('detectProjectType', () => {
   });
 });
 
+// ============================================================================
+// detectProjectTypeExtended
+// ============================================================================
+describe('detectProjectTypeExtended', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
 
+  afterEach(() => {
+    console.error.mockRestore();
+  });
+
+  test('returns object with type, techStack, maturityScore, recommendations', () => {
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === path.resolve('/test/ext')) return true;
+      return false;
+    });
+    fs.readdirSync.mockReturnValue([]);
+
+    const result = detectProjectTypeExtended('/test/ext');
+
+    expect(result).toHaveProperty('type', 'GREENFIELD');
+    expect(result).toHaveProperty('techStack');
+    expect(result).toHaveProperty('maturityScore', 0);
+    expect(result).toHaveProperty('recommendations');
+    expect(Array.isArray(result.recommendations)).toBe(true);
+  });
+
+  test('GREENFIELD returns empty tech stack and score 0', () => {
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === path.resolve('/test/green')) return true;
+      return false;
+    });
+    fs.readdirSync.mockReturnValue([]);
+
+    const result = detectProjectTypeExtended('/test/green');
+
+    expect(result.type).toBe('GREENFIELD');
+    expect(result.techStack.framework).toBeNull();
+    expect(result.techStack.language).toBeNull();
+    expect(result.techStack.database).toBeNull();
+    expect(result.techStack.testing).toBeNull();
+    expect(result.techStack.ci).toBeNull();
+    expect(result.maturityScore).toBe(0);
+  });
+
+  test('detects framework from package.json dependencies', () => {
+    const dir = path.resolve('/test/next-project');
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === dir) return true;
+      if (checkPath === path.join(dir, 'package.json')) return true;
+      if (checkPath === path.join(dir, 'tsconfig.json')) return true;
+      return false;
+    });
+    fs.readdirSync.mockImplementation((readDir) => {
+      if (typeof readDir === 'string' && readDir === dir) return ['package.json', 'tsconfig.json', 'src'];
+      return [];
+    });
+    fs.readFileSync.mockReturnValue(JSON.stringify({
+      dependencies: { next: '14.0.0', react: '18.0.0' },
+      devDependencies: { jest: '29.0.0' },
+    }));
+
+    const result = detectProjectTypeExtended('/test/next-project');
+
+    expect(result.type).toBe('BROWNFIELD');
+    expect(result.techStack.framework).toBe('next');
+    expect(result.techStack.language).toBe('typescript');
+    expect(result.techStack.testing).toBe('jest');
+  });
+
+  test('detects CI from .github/workflows', () => {
+    const dir = path.resolve('/test/ci-project');
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === dir) return true;
+      if (checkPath === path.join(dir, '.git')) return true;
+      if (checkPath === path.join(dir, '.github', 'workflows')) return true;
+      return false;
+    });
+    fs.readdirSync.mockImplementation((readDir) => {
+      if (typeof readDir === 'string' && readDir === dir) return ['.git', '.github'];
+      return [];
+    });
+
+    const result = detectProjectTypeExtended('/test/ci-project');
+
+    expect(result.techStack.ci).toBe('github-actions');
+  });
+
+  test('builds recommendations for missing items', () => {
+    const dir = path.resolve('/test/recs');
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === dir) return true;
+      if (checkPath === path.join(dir, 'package.json')) return true;
+      return false;
+    });
+    fs.readdirSync.mockImplementation((readDir) => {
+      if (typeof readDir === 'string' && readDir === dir) return ['package.json'];
+      return [];
+    });
+    fs.readFileSync.mockReturnValue(JSON.stringify({ dependencies: {} }));
+
+    const result = detectProjectTypeExtended('/test/recs');
+
+    expect(result.recommendations).toEqual(expect.arrayContaining([
+      expect.stringContaining('testing framework'),
+      expect.stringContaining('CI/CD'),
+      expect.stringContaining('.env.example'),
+      expect.stringContaining('README'),
+    ]));
+  });
+
+  test('backward compat: detectProjectType returns same string as extended .type', () => {
+    fs.existsSync.mockImplementation((checkPath) => {
+      if (checkPath === path.resolve('/test/compat')) return true;
+      if (checkPath.endsWith('package.json')) return true;
+      return false;
+    });
+    fs.readdirSync.mockImplementation((readDir) => {
+      if (typeof readDir === 'string') return ['package.json'];
+      return [];
+    });
+    fs.readFileSync.mockReturnValue(JSON.stringify({ dependencies: {} }));
+
+    const simple = detectProjectType('/test/compat');
+    const extended = detectProjectTypeExtended('/test/compat');
+
+    expect(simple).toBe(extended.type);
+    expect(simple).toBe('BROWNFIELD');
+  });
+
+  test('throws same errors as original for invalid input', () => {
+    expect(() => detectProjectTypeExtended(null)).toThrow('Invalid targetDir parameter');
+    expect(() => detectProjectTypeExtended('')).toThrow('Invalid targetDir parameter');
+    expect(() => detectProjectTypeExtended(123)).toThrow('Invalid targetDir parameter');
+  });
+});

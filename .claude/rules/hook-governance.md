@@ -14,6 +14,7 @@ paths:
 | Hook | Purpose | Behavior |
 |------|---------|----------|
 | `enforce-git-push-authority.sh` | Art. II — Only @devops can push | BLOCK (deny) |
+| `verify-packages.cjs` | Security — Block hallucinated npm packages (slopsquatting) | BLOCK (exit 2) |
 | `sql-governance.py` | Security — Block dangerous SQL | BLOCK (exit 2) |
 | `enforce-delegation.cjs` | Art. VIII — Orchestrators can't execute | BLOCK (exit 2) |
 
