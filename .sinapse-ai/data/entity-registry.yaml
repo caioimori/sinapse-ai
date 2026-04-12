@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-12T02:58:00.004Z'
-  entityCount: 751
+  lastUpdated: '2026-04-12T12:42:04.062Z'
+  entityCount: 752
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -5530,6 +5530,27 @@ entities:
         extensionPoints: []
       checksum: sha256:69004556b7d8908b694bddac0efb79e90ddf6c258fa1f5344fb352ec32e56acf
       lastVerified: '2026-04-12T02:57:59.746Z'
+    generate-agent-handoff:
+      path: .sinapse-ai/development/tasks/generate-agent-handoff.md
+      layer: L2
+      type: task
+      purpose: >-
+        Produce a structured, compact handoff artifact (< 500 tokens) when one SINAPSE agent hands off work to another.
+        This task is the **operational enforcement** of the compaction claim documented in Artic
+      keywords:
+        - generate
+        - agent
+        - handoff
+        - 'task:'
+        - generate-agent-handoff
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:4b409dec3a3fc59d6274a1acab1529532fd29f71b85a1b417cf6d313bbc53b89
+      lastVerified: '2026-04-12T12:42:04.056Z'
   templates:
     activation-instructions-inline-greeting:
       path: .sinapse-ai/product/templates/activation-instructions-inline-greeting.yaml
@@ -12849,7 +12870,6 @@ entities:
         - greenfield-service
         - greenfield-ui
         - qa-loop
-        - story-development-cycle
       dependencies:
         - decision-log-generator
         - apply-qa-fixes
@@ -14197,8 +14217,7 @@ entities:
         - development
         - cycle
       usedBy: []
-      dependencies:
-        - developer
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - sm
@@ -14209,8 +14228,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:acf9c3050b6adc07e9dd79c56da90b44057d2294d75876172d14ee9bbb0f6352
-      lastVerified: '2026-04-12T02:57:59.920Z'
+      checksum: sha256:137fc6d2a7aedb50bbebfa045e877c382399604708ce03477f358f282b76727f
+      lastVerified: '2026-04-12T12:42:04.060Z'
   utils:
     output-formatter:
       path: .sinapse-ai/core/utils/output-formatter.js
