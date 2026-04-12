@@ -172,7 +172,9 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node: ['18', '20', '22', '24', '25']
+        # Node 25 removed 2026-04-12 [Story 10.14]: not LTS, not in cross-platform matrix.
+        # engines: '>=18.0.0' — re-add when Node 25 becomes LTS or a consumer requests it.
+        node: ['18', '20', '22', '24']
 
     steps:
       - name: Checkout code
@@ -530,7 +532,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node: ['18', '20', '22', '24', '25']
+        # Node 25 removed 2026-04-12 [Story 10.14]: matches test matrix.
+        node: ['18', '20', '22', '24']
 
     steps:
       - name: Checkout code
