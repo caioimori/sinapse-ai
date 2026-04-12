@@ -272,14 +272,53 @@ workflow:
 
       Retornando para Dev corrigir...
 
+  # ──────────────────────────────────────────────────────────────────────────
+  # Agent Handoff Compaction — wired v1.1 (fw-v2.6, EPIC-framework-upgrade-v2)
+  # ──────────────────────────────────────────────────────────────────────────
+  # Operational enforcement of the handoff compaction protocol. The outgoing
+  # agent of each phase MUST run `generate-agent-handoff` task before the
+  # incoming agent is activated. This collapses persona context from ~3-5K
+  # tokens to ~379 per switch (90%+ compaction).
+  #
+  # Reference:
+  #   - Task: .sinapse-ai/development/tasks/generate-agent-handoff.md
+  #   - Rule: .claude/rules/agent-handoff.md
+  #   - Template: .sinapse-ai/development/templates/agent-handoff-tmpl.yaml
+  handoff_hooks:
+    enabled: true
+    task: generate-agent-handoff
+    transitions:
+      - from: create        # sprint-lead (sm)
+        to: validate        # product-lead (po)
+        required: true
+      - from: validate      # product-lead (po)
+        to: implement       # developer (dev)
+        required: true
+      - from: implement     # developer (dev)
+        to: review          # quality-gate (qa)
+        required: true
+    storage: ".sinapse/handoffs/"
+    max_tokens_per_artifact: 500
+    on_failure: "warn-and-proceed"  # per graceful-degradation principle in ids-principles.md
+
 metadata:
   author: Orion (SINAPSE Master)
   created_date: 2025-01-30
-  version: 1.0.0
+  version: 1.1.0
+  version_history:
+    - version: 1.0.0
+      date: 2025-01-30
+      author: Orion
+      notes: "Initial 4-phase SDC workflow"
+    - version: 1.1.0
+      date: 2026-04-12
+      author: "Imperator (sinapse-orqx) via fw-v2.6"
+      notes: "Wired handoff_hooks to enforce agent handoff compaction between phase transitions. No breaking changes — existing sequence untouched."
   tags:
     - story
     - development-cycle
     - quality-gate
     - agile
     - generic
+    - handoff-compaction
 

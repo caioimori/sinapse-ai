@@ -1,7 +1,7 @@
 # EPIC — squad-artdir v2.0: Expansion to Platform/SaaS Art Direction
 
 **Epic ID:** `EPIC-artdir-v2`
-**Status:** In Progress
+**Status:** Done
 **Owner:** Caio Imori (via @project-lead Beacon)
 **Created:** 2026-04-12
 **Squad Target:** `squads/squad-artdir/`
@@ -77,4 +77,16 @@ Enable SINAPSE users (starting with Caio's portfolio: Colegio Modulo, Astro Bran
 
 ---
 
-*Generated via @project-lead Beacon orchestration | Documentation-First Article III*
+## Closing Note (2026-04-12)
+
+This epic is **Done**. All three sub-stories delivered:
+
+- **artdir-v2.1** — Benchmark + Framework Extension — **Done** (QA gate PASS 95/100, gate file `docs/qa/gates/artdir-v2.1-qa-gate.yml`)
+- **artdir-v2.2** — Implement 4 New Agents + 6 Tasks + 2 KBs + 1 Workflow — **Done** (delivered in commit 28563ef)
+- **artdir-v2.3** — QA Gate + squad.yaml bump + README update + PR — **Done** (squad.yaml declares v2.0.0 with exact disk counts 14/13/8/3, README already refreshed)
+
+squad-artdir v2.0.0 is officially released. Cross-refs: story `fw-v2.1` (EPIC-framework-upgrade-v2) absorbed the closing actions.
+
+---
+
+*Generated via @project-lead Beacon orchestration | Closed via @sinapse-orqx Imperator | Documentation-First Article III*
