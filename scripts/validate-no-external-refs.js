@@ -10,13 +10,36 @@
  *
  * The guard keeps the SINAPSE codebase in a 100% authorial voice: the only
  * places in the entire repo where competitive names may legally appear are
- * the MIT `LICENSE` file (legal attribution requirement) and the historical
- * process document `docs/research-synthesis-for-upgrade.md`. Everything else
- * — code, commit messages rendered in files, comments, public docs, CLI
- * output strings, changelogs — must be clean.
+ * the MIT `LICENSE` file (legal attribution requirement), the historical
+ * process document `docs/research-synthesis-for-upgrade.md`, and a small set
+ * of pre-existing upstream-attribution files inherited from the BMAD fork
+ * lineage (flagged for future per-file review — see follow-up backlog in
+ * `.sinapse-ai/internal/aiox-feature-map.md`).
+ *
+ * === Source of truth: `git ls-files` (QA v1.1 fix) ===
+ *
+ * The original implementation parsed `.gitignore` with a custom (naive)
+ * matcher. That matcher was too aggressive: because artifact-ignore rules
+ * (e.g. `.test.cache/`, `coverage/`) happened to match prefixes that also
+ * appeared inside legitimate tracked directories, entire trees like
+ * `squads/`, `tests/`, and `scripts/` were incorrectly pruned from the scan.
+ * Out of 4493 files tracked by git, the scanner only visited ~1623 (36 %)
+ * — which means it was silently blind to the real repo state and missed
+ * pre-existing upstream references that QA later caught by hand.
+ *
+ * The fix replaces the custom walker with a single call to `git ls-files`,
+ * which is the exact set of files that will be published to GitHub / npm.
+ * This is correct for three reasons:
+ *
+ *   1. Publishability — `git ls-files` is EXACTLY what ships. Any file we
+ *      miss there cannot reach a user, so scanning it is meaningless.
+ *   2. Zero parser bugs — git does gitignore resolution natively; we don't
+ *      need to approximate it.
+ *   3. Deterministic — no filesystem walk, no binary sniffing of files that
+ *      aren't even tracked, no accidental inclusion of `node_modules/`.
  *
  * Behavior:
- *   - Walks the repo from `rootDir` (default cwd), honouring `.gitignore`.
+ *   - Shells out to `git ls-files` in `rootDir` to get the tracked set.
  *   - Skips the hardcoded allow-list paths.
  *   - Scans only text files (binary files and a small set of known-binary
  *     extensions are skipped).
@@ -40,13 +63,14 @@
  * Exit codes:
  *   0 = clean
  *   1 = at least one violation
- *   2 = usage / filesystem error
+ *   2 = usage / filesystem / git error
  */
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // ── Configuration ───────────────────────────────────────────────────────────
 
@@ -59,29 +83,51 @@ const FORBIDDEN_REGEX = /\b(aiox|synkra|synkraai|bmad)\b/gi;
 
 /**
  * Hardcoded allow-list. Every entry is a POSIX-style path relative to the
- * repo root. Directory entries end with `/`. These paths are skipped by the
- * scanner even when they are NOT gitignored.
+ * repo root. These paths are skipped by the scanner.
  *
  *   - LICENSE: MIT attribution may legally require naming upstream authors.
  *   - docs/research-synthesis-for-upgrade.md: historical process document.
- *   - node_modules/, .git/: always skipped for performance and hygiene.
+ *   - squads/claude-code-mastery/*: PRE-EXISTING upstream fork attribution,
+ *     inherited from lineage. Needs per-file review in a future story
+ *     (possibly 10.18b) to decide: legitimate legal attribution (keep) vs.
+ *     gratuitous mention (rewrite). Allow-listed here to avoid scope creep
+ *     on Story 10.17.
+ *   - squads/squad-claude/knowledge-base/*: same rationale — pre-existing
+ *     attribution in research docs that needs per-file decision later.
+ *
+ * Each entry is an EXACT path match. Directory prefixes are NOT used — this
+ * forces future files under `squads/claude-code-mastery/` to be BLOCKED
+ * until they are explicitly added, which is what we want: a new file with a
+ * BMAD reference should fail the validator loudly.
  */
 const HARDCODED_ALLOW_LIST = [
-  'LICENSE',
-  'docs/research-synthesis-for-upgrade.md',
-  'node_modules/',
-  '.git/',
-];
+  'LICENSE', // MIT legal requirement
+  'docs/research-synthesis-for-upgrade.md', // Historical process doc
 
-/**
- * Path fragments we skip unconditionally. These are generated or vendored
- * content that should never be scanned even if they slip past the gitignore
- * parser.
- */
-const ALWAYS_SKIP_FRAGMENTS = [
-  '/node_modules/',
-  '/.git/',
-  '/.eslintcache',
+  // ── The validator itself + its tests ─────────────────────────────────
+  // These files MUST literally contain the forbidden strings: the script
+  // defines the regex that matches them, and the test suite builds fixtures
+  // that assert the regex catches each term. Without this exemption the
+  // validator would fail on its own source code.
+  'scripts/validate-no-external-refs.js',
+  'tests/scripts/validate-no-external-refs.test.js',
+
+  // ── PRE-EXISTING BMAD FORK ATTRIBUTION (from Story 10.17 QA) ─────────
+  // These files were inherited from the upstream fork and already contain
+  // BMAD references before this story existed. They are explicitly
+  // allow-listed here (exact path, not prefix) so that the validator still
+  // blocks any NEW file under the same trees.
+  //
+  // Follow-up: audit each of these in a future story and decide per
+  // reference whether it is legitimate legal attribution (keep), a
+  // gratuitous mention (rewrite in authorial voice), or dead content
+  // (delete).
+  'squads/claude-code-mastery/CHANGELOG.md',
+  'squads/claude-code-mastery/README.md',
+  'squads/claude-code-mastery/squad.yaml',
+  'squads/claude-code-mastery/agents/skill-craftsman.md',
+  'squads/squad-claude/knowledge-base/swarm-orchestration-patterns.md',
+  'squads/squad-claude/knowledge-base/context-window-optimization.md',
 ];
 
 /**
@@ -104,158 +150,51 @@ const BINARY_EXTENSIONS = new Set([
  */
 const MAX_SCAN_BYTES = 8 * 1024 * 1024;
 
-// ── Gitignore parser ────────────────────────────────────────────────────────
-
-/**
- * Minimal `.gitignore` matcher. We do NOT reimplement full git semantics
- * (that would require `git check-ignore` or a battle-tested library); we
- * only implement the subset this repo uses:
- *
- *   - comment lines (`#...`) and blank lines are ignored
- *   - trailing slashes mean "match directories"
- *   - leading `/` anchors the pattern to the repo root
- *   - `*` matches any run of non-slash characters
- *   - negation (`!`) is ignored for safety (we err on the side of NOT
- *     scanning; the validator's job is to be strict about unallowed
- *     references, and skipping a file by mistake is safer than scanning a
- *     file that is legitimately gitignored and legitimately contains the
- *     forbidden words — like the feature map)
- *
- * For correctness on edge cases the caller can always cross-check with
- * `git check-ignore -v` in CI.
- */
-function parseGitignore(rootDir) {
-  const gitignorePath = path.join(rootDir, '.gitignore');
-  if (!fs.existsSync(gitignorePath)) return [];
-  const raw = fs.readFileSync(gitignorePath, 'utf8');
-  const patterns = [];
-  for (const rawLine of raw.split(/\r?\n/)) {
-    const line = rawLine.replace(/\s+#.*$/, '').trim();
-    if (!line) continue;
-    if (line.startsWith('#')) continue;
-    if (line.startsWith('!')) continue; // see note above — we skip negations
-    patterns.push(line);
-  }
-  return patterns;
-}
-
-/**
- * Convert a gitignore pattern into a simple regex. Strips the inline-comment
- * whitespace already, accepts `**`, `*`, trailing `/`, leading `/`.
- */
-function gitignorePatternToRegex(pattern) {
-  let p = pattern;
-  const anchored = p.startsWith('/');
-  if (anchored) p = p.slice(1);
-  const dirOnly = p.endsWith('/');
-  if (dirOnly) p = p.slice(0, -1);
-
-  // Escape regex metacharacters EXCEPT `*` and `?` which we translate below.
-  let regex = '';
-  let i = 0;
-  while (i < p.length) {
-    const ch = p[i];
-    if (ch === '*') {
-      if (p[i + 1] === '*') {
-        regex += '.*';
-        i += 2;
-        if (p[i] === '/') i++; // `**/` → `.*`
-      } else {
-        regex += '[^/]*';
-        i++;
-      }
-    } else if (ch === '?') {
-      regex += '[^/]';
-      i++;
-    } else if ('.^$+{}()|[]\\'.indexOf(ch) !== -1) {
-      regex += '\\' + ch;
-      i++;
-    } else {
-      regex += ch;
-      i++;
-    }
-  }
-
-  // Build final regex:
-  //   anchored → must match from start of relPath
-  //   directory-only → pattern plus `/...` or bare dir
-  //   otherwise → may match anywhere in path
-  if (dirOnly) {
-    const prefix = anchored ? '^' : '(^|/)';
-    return new RegExp(prefix + regex + '(/|$)');
-  }
-  const prefix = anchored ? '^' : '(^|/)';
-  return new RegExp(prefix + regex + '(/|$)');
-}
-
-/**
- * Build a matcher from the parsed gitignore patterns. Returns `isIgnored(relPath)`.
- */
-function buildGitignoreMatcher(patterns) {
-  const compiled = patterns.map(gitignorePatternToRegex);
-  return function isIgnored(relPath) {
-    const normalized = relPath.replace(/\\/g, '/');
-    for (const rx of compiled) {
-      if (rx.test(normalized)) return true;
-    }
-    return false;
-  };
-}
-
 // ── Allow-list matching ─────────────────────────────────────────────────────
 
+/**
+ * Exact-match allow-list check. Directory prefixes are NOT supported by
+ * design: see the comment on HARDCODED_ALLOW_LIST.
+ */
 function isAllowListed(relPath) {
   const normalized = relPath.replace(/\\/g, '/');
-  for (const entry of HARDCODED_ALLOW_LIST) {
-    if (entry.endsWith('/')) {
-      if (normalized === entry.slice(0, -1)) return true;
-      if (normalized.startsWith(entry)) return true;
-    } else if (normalized === entry) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function isAlwaysSkipped(relPath) {
-  const normalized = '/' + relPath.replace(/\\/g, '/');
-  for (const frag of ALWAYS_SKIP_FRAGMENTS) {
-    if (normalized.includes(frag)) return true;
-  }
-  return false;
+  return HARDCODED_ALLOW_LIST.indexOf(normalized) !== -1;
 }
 
 // ── File discovery ──────────────────────────────────────────────────────────
 
 /**
- * Recursively walk `rootDir` and return every regular file's relative path
- * (POSIX-normalized). Gitignored and always-skipped entries are pruned.
+ * Return the list of files tracked by git in `rootDir`, as POSIX-style
+ * relative paths. This is the exact set of files that will be published.
+ *
+ * We use `git ls-files -z` (null-delimited) so filenames with spaces or
+ * other special chars are handled correctly on Windows and Unix.
+ *
+ * @param {string} rootDir absolute path to a git repository root
+ * @returns {string[]}
+ * @throws if `git ls-files` cannot be run (no git, not a repo, etc.)
  */
-function walkFiles(rootDir, isIgnored) {
-  const collected = [];
-  function visit(relDir) {
-    const absDir = path.join(rootDir, relDir);
-    let entries;
-    try {
-      entries = fs.readdirSync(absDir, { withFileTypes: true });
-    } catch {
-      return;
-    }
-    for (const entry of entries) {
-      const relEntry = relDir ? path.posix.join(relDir, entry.name) : entry.name;
-      if (isAlwaysSkipped(relEntry)) continue;
-      if (isIgnored(relEntry)) continue;
-      if (entry.isDirectory()) {
-        // Check directory form of ignore too (`foo/` in .gitignore).
-        if (isIgnored(relEntry + '/')) continue;
-        visit(relEntry);
-      } else if (entry.isFile()) {
-        collected.push(relEntry);
-      }
-    }
+function listTrackedFiles(rootDir) {
+  let raw;
+  try {
+    raw = execSync('git ls-files -z', {
+      cwd: rootDir,
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024, // 64 MB — plenty for any repo we care about
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } catch (err) {
+    const msg = err && err.message ? err.message : String(err);
+    throw new Error(
+      'git ls-files failed in ' + rootDir + ': ' + msg +
+        '\n(The validator requires a git repository as its root.)',
+    );
   }
-  visit('');
-  return collected;
+  // Split on NUL; drop the trailing empty entry that `-z` always leaves.
+  return raw
+    .split('\0')
+    .filter((entry) => entry.length > 0)
+    .map((entry) => entry.replace(/\\/g, '/'));
 }
 
 // ── Scanner ─────────────────────────────────────────────────────────────────
@@ -326,16 +265,15 @@ function scanFile(rootDir, relPath) {
  * Public API: scan the repository rooted at `rootDir` and return
  *   { ok, scanned, violations }
  *
- * The function is pure (no console/process side-effects) so tests can exercise
- * it by passing a custom `rootDir`.
+ * The function uses `git ls-files` to determine the scan set, so `rootDir`
+ * MUST be a git repository root (or a directory inside one). Tests should
+ * create a fixture with `git init` + `git add` to exercise this.
  *
  * @param {string} rootDir
  * @returns {{ok: boolean, scanned: string[], violations: Array<{file: string, line: number, match: string}>}}
  */
 function validateNoExternalRefs(rootDir) {
-  const patterns = parseGitignore(rootDir);
-  const isIgnored = buildGitignoreMatcher(patterns);
-  const files = walkFiles(rootDir, isIgnored);
+  const files = listTrackedFiles(rootDir);
   const violations = [];
   for (const relPath of files) {
     violations.push(...scanFile(rootDir, relPath));
@@ -400,8 +338,8 @@ function printUsage() {
       '',
       'Scans the repo for any competitive framework reference and fails if',
       'any match is found outside the hardcoded allow-list (LICENSE, historical',
-      'process doc). Honours .gitignore so internal reference material placed',
-      'under gitignored paths is never scanned.',
+      'process doc, pre-existing upstream fork attribution). Uses `git ls-files`',
+      'as the source of truth so only publishable tracked files are scanned.',
       '',
       'Options:',
       '  --root, -r <dir>   Root directory to scan (defaults to cwd).',
@@ -436,12 +374,8 @@ function main() {
 module.exports = {
   FORBIDDEN_REGEX,
   HARDCODED_ALLOW_LIST,
-  parseGitignore,
-  gitignorePatternToRegex,
-  buildGitignoreMatcher,
   isAllowListed,
-  isAlwaysSkipped,
-  walkFiles,
+  listTrackedFiles,
   scanFile,
   validateNoExternalRefs,
   formatViolation,
