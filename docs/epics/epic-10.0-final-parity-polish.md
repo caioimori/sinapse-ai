@@ -12,7 +12,7 @@
 
 ## Objective
 
-Close remaining AIOX gaps, clean up IDE support to Claude Code + Codex only, create professional repo structure and README. Final polish pass before v10.0.0 release.
+Achieve professional installer maturity with Claude Code + Codex as supported targets. Deliver idempotent install, self-repair diagnostics (doctor), cross-IDE parity validation, and comprehensive quality gates. Final polish pass before v10.0.0 release.
 
 ## Constraints
 
