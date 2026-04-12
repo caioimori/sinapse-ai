@@ -91,8 +91,10 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 After push, the agent MUST:
 ```
 1. gh pr create with clear title and description (uses PR template)
-2. Auto-assign the OTHER person as reviewer
-3. Inform the user: "PR criado, {outro} precisa aprovar"
+2. Auto-assign reviewer based on who is pushing:
+   - Caio's PR → Caio can merge directly (admin bypass)
+   - Matheus's PR → Assign @caioimori as reviewer (required approval)
+3. Inform the user: "PR criado"
 ```
 
 ### 6. After PR Merge — Cleanup
