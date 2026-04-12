@@ -64,6 +64,7 @@ squads/*
 # Published squads (whitelisted for repository)
 !squads/claude-code-mastery/
 !squads/squad-animations/
+!squads/squad-artdir/
 keys/
 *.secret
 *.credentials

@@ -1,0 +1,143 @@
+name: squad-artdir
+version: "1.0.0"
+description: >
+  Art direction focused on retention and conversion. Every pixel carries
+  behavioral intent. Combines the 7 Pillars framework — visual hierarchy,
+  psychologically intentional color, typography as identity signal, motion as
+  kinesthetic narrative, information architecture for retention, visual
+  persuasion via CRO patterns, and layout as cognitive breathing — to produce
+  landing pages and websites where aesthetic decisions are always justified
+  by a psychological principle and measured by conversion impact.
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-04-10"
+  updated_at: "2026-04-10"
+  created_by: "squad-creator (Craft)"
+  agents_count: 10
+  tasks_count: 7
+  knowledge_bases_count: 5
+  workflows_count: 2
+  checklists_count: 1
+  templates_count: 1
+
+agents:
+  - id: artdir-orqx
+    name: Canvas
+    file: agents/artdir-orqx.md
+    role: "Orquestrador — coordena os 7 pilares, roteia briefings, entrega os 8 deliverables padrao"
+    tasks:
+      - create-art-direction-brief
+      - validate-against-pillars
+
+  - id: visual-strategist
+    name: Prism
+    file: agents/visual-strategist.md
+    role: "Define linguagem visual, mood, posicionamento estetico baseado em audiencia e categoria"
+    tasks:
+      - diagnose-visual-language
+      - create-art-direction-brief
+
+  - id: motion-architect
+    name: Tempo
+    file: agents/motion-architect.md
+    role: "Sistema de motion — timing, easing, selecao de lib, performance, Disney 12 principles"
+    tasks:
+      - specify-motion-system
+
+  - id: type-systemist
+    name: Kern
+    file: agents/type-systemist.md
+    role: "Type scale, font pairing, tracking, hierarquia tipografica, fluid typography"
+    tasks:
+      - create-art-direction-brief
+
+  - id: color-psychologist
+    name: Spectrum
+    file: agents/color-psychologist.md
+    role: "Sistemas de cor justificados por neurociencia, WCAG AAA, Von Restorff, emotion mapping"
+    tasks:
+      - design-color-system
+
+  - id: layout-engineer
+    name: Grid
+    file: agents/layout-engineer.md
+    role: "Grids, spacing, full-bleed vs contained, responsividade, container queries"
+    tasks:
+      - create-wireflow
+
+  - id: ia-architect
+    name: Flow
+    file: agents/ia-architect.md
+    role: "Arquitetura de informacao para retencao cognitiva — disclosure, Zeigarnik, curiosity gaps"
+    tasks:
+      - create-wireflow
+      - audit-conversion
+
+  - id: cro-persuasion
+    name: Convert
+    file: agents/cro-persuasion.md
+    role: "Padroes de conversao — comparison tables, social proof, scarcity, risk reversal, sticky bars"
+    tasks:
+      - audit-conversion
+
+  - id: interaction-designer
+    name: Pulse
+    file: agents/interaction-designer.md
+    role: "Hover states, micro-interactions, feedback loops, custom cursors, prefers-reduced-motion"
+    tasks:
+      - specify-motion-system
+
+  - id: accessibility-guardian
+    name: Shield
+    file: agents/accessibility-guardian.md
+    role: "WCAG AAA, prefers-reduced-motion, contraste, HTML semantico, keyboard nav, ARIA, focus"
+    tasks:
+      - validate-against-pillars
+
+knowledge_bases:
+  - name: seven-pillars-framework
+    file: knowledge-base/seven-pillars-framework.md
+    description: "Os 7 pilares completos — hierarquia visual, cor, tipografia, motion, IA, CRO, layout"
+  - name: psychological-toolkit
+    file: knowledge-base/psychological-toolkit.md
+    description: "Arsenal psicologico — 10 vieses cognitivos, 6 principios de retencao, 6 leis UX, 7 Gestalt"
+  - name: case-nyo-ia-reference
+    file: knowledge-base/case-nyo-ia-reference.md
+    description: "Analise completa do nyo.ia.br como referencia canonica de art direction para conversao"
+  - name: motion-technique-catalog
+    file: knowledge-base/motion-technique-catalog.md
+    description: "Catalogo de tecnicas de motion com lib, easing, duracao e regras de performance"
+  - name: deliverables-templates
+    file: knowledge-base/deliverables-templates.md
+    description: "Templates dos 8 deliverables padrao da squad"
+
+workflows:
+  - name: full-art-direction-cycle
+    file: workflows/full-art-direction-cycle.yaml
+    description: "Ciclo completo — do briefing ao art direction brief validado contra 7 pilares"
+  - name: conversion-audit-cycle
+    file: workflows/conversion-audit-cycle.yaml
+    description: "Auditoria de conversao de site/LP existente com recomendacoes priorizadas"
+
+checklists:
+  - name: seven-pillars-validation-checklist
+    file: checklists/seven-pillars-validation-checklist.md
+
+templates:
+  - name: art-direction-brief-template
+    file: templates/art-direction-brief-template.md
+
+cross_squad_connections:
+  inbound:
+    - squad-brand: "Brand guidelines, identidade visual, paleta de cores, tom visual"
+    - squad-research: "Pesquisa de audiencia, analise de concorrentes, benchmarks de conversao"
+    - squad-copy: "Copy strategy, headlines, microcopy, CTA labels"
+    - squad-product: "PRDs, roadmap de features, personas"
+  outbound:
+    - squad-design: "Art direction brief, design tokens, motion spec, wireflow anotado"
+    - squad-animations: "Motion spec, easing curves, timing tokens, kinesthetic narrative"
+    - squad-content: "Hierarquia visual para conteudo, pacing de leitura"
+    - squad-growth: "CRO patterns map, hipoteses de impacto, metricas de conversao"
