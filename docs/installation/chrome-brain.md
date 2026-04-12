@@ -5,13 +5,23 @@ Chrome Brain is a **cross-squad capability** that gives ALL SINAPSE agents the p
 ## Quick Install
 
 ```bash
-# Option 1: Via SINAPSE CLI (recommended)
-sinapse chrome-brain install
-
-# Option 2: Via npx
 npx sinapse-ai chrome-brain install
+```
 
-# Option 3: Standalone script (macOS/Linux)
+That is the only command you need. Chrome Brain is a sub-capability of the
+canonical installer, so it follows the same rule as every other SINAPSE
+install/update/uninstall path: `npx sinapse-ai <cmd>` is the single public
+entry point.
+
+### Internal (developer-only)
+
+> The snippets in this section are for framework contributors working inside
+> the repository clone. They are NOT instructions for end users — the
+> `npx sinapse-ai chrome-brain install` command above invokes the same script
+> under the hood.
+
+```bash
+# Run the installer script directly from a repo checkout
 chmod +x scripts/install-chrome-brain.sh
 ./scripts/install-chrome-brain.sh
 ```
@@ -44,13 +54,13 @@ chmod +x scripts/install-chrome-brain.sh
 ## Verify Installation
 
 ```bash
-sinapse chrome-brain status
+npx sinapse-ai chrome-brain status
 ```
 
 ## Uninstall
 
 ```bash
-sinapse chrome-brain uninstall
+npx sinapse-ai chrome-brain uninstall
 ```
 
 ## Supported Platforms
