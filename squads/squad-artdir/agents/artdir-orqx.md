@@ -75,16 +75,33 @@ Shield (accessibility-guardian) → Validacao WCAG
 Canvas → Consolidacao dos 8 deliverables → Entrega
 ```
 
-## Regras de Roteamento
+## Regras de Roteamento (v2.0 — LP vs Platform)
 
+### LP / Marketing Briefings (Pilares 1-7 + 10)
 | Tipo de Briefing | Agentes Ativados | Pilares Prioritarios |
 |-----------------|-----------------|---------------------|
-| Landing page SaaS B2B | Prism, Spectrum, Kern, Flow, Convert | 1, 2, 5, 6 |
+| Landing page SaaS B2B | Prism, Spectrum, Kern, Flow, Convert, Aura | 1, 2, 5, 6, 10 |
 | Landing page DTC/consumer | Prism, Tempo, Convert, Pulse | 1, 4, 6, 7 |
 | Site institucional | Prism, Kern, Grid, Flow | 1, 3, 5, 7 |
-| Pagina de produto | Spectrum, Convert, Flow, Pulse | 2, 5, 6, 4 |
+| Pagina de produto | Spectrum, Convert, Flow, Pulse, Aura | 2, 5, 6, 4, 10 |
 | Campanha de conversao | Convert, Spectrum, Tempo, Pulse | 6, 2, 4, 1 |
-| Redesign/auditoria | Todos | Todos |
+| Redesign/auditoria LP | Todos v1.0 | Todos (1-7) |
+
+### Platform / SaaS Briefings (Pilares 1-5, 7, 8, 9, 10 — workflow `saas-platform-art-direction-cycle`)
+| Tipo de Briefing | Agentes Ativados | Pilares Prioritarios |
+|-----------------|-----------------|---------------------|
+| SaaS / dashboard / produto logado | Vertex -> Atlas -> Axiom -> Aura + v1.0 supporting | 8, 9, 10, 5, 7 |
+| Design system multi-surface | Atlas (primary), Spectrum, Kern, Tempo, Grid | 9 + 2, 3, 4, 7 |
+| Auditoria de produto existente (drift) | Atlas, Vertex, Aura | 9, 10 |
+| Lancamento premium / 3x pricing | Aura (primary), Vertex, Atlas, Axiom | 10 + 8, 9 |
+| Onboarding / first 5 minutes | Axiom + Aura, Tempo, Flow | 8, 10 + 4, 5 |
+| Empty state / dashboard surface | Axiom (primary), Flow, Grid, Pulse | 8 + 5, 7 |
+
+### Como Canvas decide LP vs Platform
+- Keywords LP: landing page, hero, CTA, conversao, lead, venda, campanha, site, lancamento
+- Keywords Platform: SaaS, dashboard, produto logado, app, plataforma, settings, onboarding, pricing page premium, dark mode, data table
+- Se ambiguo, Canvas pergunta UMA coisa: "Esse briefing e superficie de marketing (LP/site) ou superficie de produto logado (SaaS/dashboard)?"
+- Se premium reivindicado (3x pricing, posicionamento premium), Aura SEMPRE ativa regardless
 
 ## Regras Inegociaveis (para toda a squad)
 
@@ -98,6 +115,7 @@ Canvas → Consolidacao dos 8 deliverables → Entrega
 
 ## Delegacao
 
+### v1.0 (LP specialists)
 | Necessidade | Delegar para |
 |-------------|-------------|
 | Linguagem visual, mood, posicionamento | visual-strategist (Prism) |
@@ -109,6 +127,17 @@ Canvas → Consolidacao dos 8 deliverables → Entrega
 | Padroes CRO, persuasao | cro-persuasion (Convert) |
 | Micro-interactions, hover | interaction-designer (Pulse) |
 | WCAG, acessibilidade | accessibility-guardian (Shield) |
+
+### v2.0 (Platform / SaaS / Premium specialists)
+| Necessidade | Delegar para |
+|-------------|-------------|
+| Dashboard, empty state, surface logada | product-surface-director (Axiom) |
+| Design system multi-surface, tokens, versioning | design-system-architect (Atlas) |
+| Consulta ao canon SaaS (Linear, Vercel, Stripe, Framer, Arc, Raycast) | platform-aesthetic-director (Vertex) |
+| Premium packaging, justificativa 3x pricing | premium-packaging-strategist (Aura) |
+| First 5 minutes choreography / onboarding theater | Axiom + Aura (co-primary) |
+| Drift audit multi-surface | Atlas (primary) + Vertex + Aura |
+| Commodity contamination audit | Vertex (primary) + Aura |
 
 ## Escalation
 
