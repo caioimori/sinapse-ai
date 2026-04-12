@@ -57,14 +57,32 @@ credentials/
 .claude/commands/SINAPSE/agents/*-orqx.md
 !.claude/commands/SINAPSE/agents/sinapse-orqx.md
 
-# Private local squads (not for repository)
+# Published squads (whitelisted for repository)
+# Governance: SINAPSE is an open-source framework. Production-ready squads
+# (those with a populated squad.yaml + agents/ + tasks/ + knowledge-base/)
+# are published so the framework's real surface area is visible to users.
+# To keep a squad private, remove its whitelist entry AND document the reason.
 squads/*
 !squads/.gitkeep
-!squads/_example/
-# Published squads (whitelisted for repository)
 !squads/claude-code-mastery/
 !squads/squad-animations/
 !squads/squad-artdir/
+!squads/squad-brand/
+!squads/squad-claude/
+!squads/squad-cloning/
+!squads/squad-commercial/
+!squads/squad-content/
+!squads/squad-copy/
+!squads/squad-council/
+!squads/squad-courses/
+!squads/squad-cybersecurity/
+!squads/squad-design/
+!squads/squad-finance/
+!squads/squad-growth/
+!squads/squad-paidmedia/
+!squads/squad-product/
+!squads/squad-research/
+!squads/squad-storytelling/
 keys/
 *.secret
 *.credentials
