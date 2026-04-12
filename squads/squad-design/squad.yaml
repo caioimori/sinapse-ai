@@ -1,5 +1,5 @@
 name: squad-design
-version: "1.0.0"
+version: "2.0.0"
 slashPrefix: SINAPSE
 author: Caio Imori
 license: UNLICENSED
@@ -11,16 +11,31 @@ description: >
 
 metadata:
   created: "2026-03-12"
+  last_updated: "2026-04-12"
   author: "Sinapse"
   tier: 2
-  total_files: 140
-  agents: 8
+  total_files: 152
+  agents: 15
   tasks: 101
   workflows: 6
-  knowledge_bases: 13
+  knowledge_bases: 19
   checklists: 3
   templates: 7
   preferences: 1
+
+changelog:
+  - version: "2.0.0"
+    date: "2026-04-12"
+    story: fw-v2.2
+    epic: EPIC-framework-upgrade-v2
+    highlights:
+      - "Shipped cross-surface-token-canon.md KB — canonical contract between Nexus (squad-design) and Atlas (squad-artdir) covering token tiers, surface dialects, ownership diff matrix, immutable vs surface-adapted classes, and semver handoff protocol."
+      - "Reconciled squad.yaml counts to disk reality (agents 8->15, knowledge_bases 13->19, total_files 140->152) — prior drift was from 7 dx-* specialists + nano-banana-generator + 6 new KBs added during the epoch between v1.0 and v2.0."
+      - "Explicitly deferred to follow-up story: full dx-* persona refinement pass (AC2 of fw-v2.2) and design-to-code-pipeline.md deep refresh (AC4 of fw-v2.2) — scope-cut per epic guidance 'qualidade > quantidade'."
+    breaking_changes: []
+    deferred_to_follow_up:
+      - "AC2 — 6 dx-* agent persona refinement pass (Operating Principles + Refuses To sections + archetype clarification)"
+      - "AC4 — design-to-code-pipeline.md full refresh (current version still valid)"
 
 quality_standards:
   reference_authors:
