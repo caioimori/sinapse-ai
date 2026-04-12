@@ -30,6 +30,18 @@ jest.mock('../../packages/installer/src/installer/dependency-installer');
 jest.mock('../../packages/installer/src/config/configure-environment');
 jest.mock('../../packages/installer/src/wizard/ide-config-generator');
 jest.mock('../../packages/installer/src/installer/sinapse-ai-installer');
+// Mock project type detector — commit 4c3251a routed detection through the
+// native `fs` module (`detect-project-type.js`), so mocking `fs-extra` alone is
+// insufficient. Default to GREENFIELD; individual tests can override. [Story 10.14]
+jest.mock('../../packages/installer/src/detection/detect-project-type', () => ({
+  detectProjectType: jest.fn().mockReturnValue('GREENFIELD'),
+  detectProjectTypeExtended: jest.fn().mockReturnValue({
+    type: 'GREENFIELD',
+    techStack: { framework: null, language: null, database: null, testing: null, ci: null, containerized: false },
+    maturityScore: 0,
+    recommendations: [],
+  }),
+}));
 jest.mock('../../bin/modules/mcp-installer', () => ({
   installProjectMCPs: jest.fn().mockResolvedValue({
     success: true,
@@ -127,7 +139,7 @@ describe('Wizard Integration - Story 1.7', () => {
     it('should complete full wizard with dependency installation', async () => {
       const answers = await runWizard();
 
-      // projectType is auto-detected (fse.existsSync returns false -> greenfield)
+      // projectType is auto-detected via detect-project-type mock (GREENFIELD -> 'greenfield')
       expect(answers.projectType).toBe('greenfield');
       // selectedIDEs derived from LLM choice (claude-code -> ['claude-code'])
       expect(answers.selectedIDEs).toContain('claude-code');
