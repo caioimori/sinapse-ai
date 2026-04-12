@@ -1,5 +1,5 @@
 name: squad-copy
-version: "1.0.0"
+version: "2.0.0"
 slashPrefix: SINAPSE
 author: Caio Imori
 license: UNLICENSED
@@ -10,16 +10,31 @@ description: >
 
 metadata:
   created: "2026-03-12"
+  last_updated: "2026-04-12"
   author: "Sinapse"
   tier: 1
-  total_files: 113
-  agents: 12
+  total_files: 135
+  agents: 14
   tasks: 81
   workflows: 6
-  knowledge_bases: 14
+  knowledge_bases: 24
   checklists: 3
   templates: 7
   preferences: 1
+
+changelog:
+  - version: "2.0.0"
+    date: "2026-04-12"
+    story: fw-v2.5
+    epic: EPIC-framework-upgrade-v2
+    highlights:
+      - "Shipped ai-copy-human-loop-canon.md KB — 4-gate decision framework (Trust/Light/Heavy/Scrap) for when AI drafts ship vs when humans intervene. Covers signals per gate, AI prompt library (12 templates mapped to owner agents), production hygiene, integration with existing KBs, anti-patterns."
+      - "Raises ai-copy-production.md from capability reference to canonical decision framework."
+      - "Reconciled yaml counts to disk reality (agents 12->14, knowledge_bases 14->24, total_files 113->135). Prior drift accumulated over multiple minor releases."
+    breaking_changes: []
+    deferred_to_follow_up:
+      - "AC2 — cross-lingual-conversion-copy.md KB (pt-BR <-> en-US adaptation patterns). Scoped out to ship ai-copy-human-loop-canon at canon quality rather than dilute two KBs."
+      - "AC3 — rsa-ads-copy-guide.md standalone stub (RSA character limits, pinning strategy). Lower priority, can ship as follow-up."
 
 quality_standards:
   reference_authors:
