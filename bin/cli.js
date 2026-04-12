@@ -384,7 +384,7 @@ async function cmdInstallGlobal() {
         installKnowledgeBase();
         console.log(`  ${GREEN}OK${NC} Chrome Brain installed — all agents can control Chrome`);
       } else {
-        console.log(`\n${YELLOW}SKIP${NC} Chrome Brain — Chrome not found (install Chrome and run: sinapse chrome-brain install)`);
+        console.log(`\n${YELLOW}SKIP${NC} Chrome Brain — Chrome not found (install Chrome and run: npx sinapse-ai chrome-brain install)`);
       }
     } catch (error) {
       console.log(`\n${YELLOW}SKIP${NC} Chrome Brain: ${error.message}`);
@@ -408,7 +408,7 @@ async function cmdInstallGlobal() {
     }
   } catch (error) {
     console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
-    console.log(`  ${DIM}Run 'sinapse install' in your project later to complete setup${NC}`);
+    console.log(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete setup${NC}`);
   }
 
   // Verify
@@ -719,7 +719,7 @@ async function cmdUpdateGlobal() {
   header();
 
   if (!fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
-    console.log(`${YELLOW}Sinapse not installed globally. Run: npx sinapse install${NC}\n`);
+    console.log(`${YELLOW}Sinapse not installed globally. Run: npx sinapse-ai install${NC}\n`);
     process.exit(1);
   }
 
@@ -848,7 +848,7 @@ async function cmdUpdateGlobal() {
     }
   } catch (error) {
     console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
-    console.log(`  ${DIM}Run 'sinapse install' in your project later to complete update${NC}`);
+    console.log(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete update${NC}`);
   }
 
   let startCmd;
@@ -989,7 +989,7 @@ function cmdStatus() {
     if (meta.updatedAt) console.log(`  ${GREEN}✓${NC} Updated: ${meta.updatedAt}`);
   } else {
     console.log(`  ${RED}✗${NC} Not installed globally`);
-    console.log(`  ${YELLOW}Run:${NC} npx sinapse install`);
+    console.log(`  ${YELLOW}Run:${NC} npx sinapse-ai install`);
   }
 
   verifyInstall();
@@ -999,13 +999,14 @@ function cmdStatus() {
 function cmdHelp() {
   header();
   console.log(`${BOLD}Commands:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse install${NC}          Global setup (recommended)`);
-  console.log(`  ${CYAN}npx sinapse install --local${NC}  Install in current project`);
-  console.log(`  ${CYAN}npx sinapse update${NC}           Update global squads`);
-  console.log(`  ${CYAN}npx sinapse uninstall${NC}        Remove global install`);
-  console.log(`  ${CYAN}npx sinapse list${NC}             List all squads and agents`);
-  console.log(`  ${CYAN}npx sinapse status${NC}           Check installation status`);
-  console.log(`  ${CYAN}npx sinapse help${NC}             Show this help`);
+  console.log(`  ${CYAN}npx sinapse-ai install${NC}          Install SINAPSE in current project`);
+  console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
+  console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
+  console.log('');
+  console.log(`${BOLD}Diagnostics:${NC}\n`);
+  console.log(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
+  console.log(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
+  console.log(`  ${CYAN}npx sinapse-ai help${NC}             Show this help`);
   console.log('');
   console.log(`${BOLD}After install:${NC}\n`);
   console.log(`  ${CYAN}sinapse${NC}                      Start Claude Code with all agents`);
@@ -1029,11 +1030,28 @@ switch (command) {
   case 'uninstall': cmdUninstall(); break;
   case 'list':     cmdList(); break;
   case 'status':   cmdStatus(); break;
+  case 'chrome-brain': {
+    // Story 10.13 — chrome-brain is the canonical sub-capability for browser
+    // automation. Delegating to the shared chrome-brain-installer module keeps
+    // `npx sinapse-ai chrome-brain <install|uninstall|status>` working without
+    // requiring users to fall back to legacy binaries.
+    const chromeBrainArgs = args.slice(1);
+    (async () => {
+      try {
+        const { runChromeBrain } = require('./modules/chrome-brain-installer');
+        await runChromeBrain(chromeBrainArgs);
+      } catch (e) {
+        console.error(`${RED}chrome-brain error:${NC} ${e.message}`);
+        process.exit(1);
+      }
+    })();
+    break;
+  }
   case 'help':
   case '--help':
   case '-h':       cmdHelp(); break;
   default:
     console.error(`${RED}Unknown command:${NC} ${command}`);
-    console.error(`Run ${CYAN}npx sinapse help${NC}`);
+    console.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
     process.exit(1);
 }

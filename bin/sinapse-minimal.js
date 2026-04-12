@@ -11,17 +11,22 @@
 
 const { spawn } = require('child_process');
 const path = require('path');
+const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 
-// Show deprecation warning
-console.log('\n⚠️  DEPRECATION WARNING: sinapse-minimal is deprecated.');
-console.log('   The --minimal mode (squads) was replaced by Squads.');
-console.log('   Running standard installation wizard instead.\n');
+// Story 10.13 — sinapse-minimal is internal/deprecated. Emit the canonical
+// deprecation notice on stderr, pointing users at `npx sinapse-ai install`.
+// The subcommand (if any) is forwarded to the router; the warning uses the
+// first known subcmd when present, otherwise it falls back to the generic
+// --help pointer.
+const rawArgs = process.argv.slice(2);
+const knownSubcmd = rawArgs.find((a) => ['install', 'update', 'uninstall'].includes(a));
+emitDeprecationWarning('sinapse-minimal', knownSubcmd || 'install');
 
 // Get the path to the main router (sinapse.js)
 const routerPath = path.join(__dirname, 'sinapse.js');
 
 // Forward all arguments to the main router
-const args = process.argv.slice(2);
+const args = rawArgs;
 
 // Spawn the main router
 const child = spawn('node', [routerPath, ...args], {
