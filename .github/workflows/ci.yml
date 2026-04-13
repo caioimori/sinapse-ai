@@ -193,11 +193,12 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Check coverage threshold
-        run: |
-          echo "=== Coverage Threshold Check ==="
-          # Coverage threshold is enforced by jest.config.js
-          # Target: 80% overall, 85% for core modules
+      - name: Coverage Report (Story 10.25)
+        # Coverage gating is enforced by jest.config.js coverageThreshold
+        # (Story 10.19 ratchet). This step prints actual numbers vs floors
+        # for visibility and writes a Markdown table to the GitHub Actions
+        # job summary so PR reviewers see coverage at a glance.
+        run: node scripts/coverage-report-summary.js
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4

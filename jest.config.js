@@ -2,6 +2,9 @@
 module.exports = {
   testEnvironment: 'node',
   coverageDirectory: 'coverage',
+  // Story 10.25 — json-summary lets scripts/coverage-report-summary.js
+  // read the rolled-up percentages from coverage/coverage-summary.json.
+  coverageReporters: ['lcov', 'text', 'text-summary', 'html', 'json-summary', 'clover'],
 
   // Test patterns from LOCAL (mais específico)
   testMatch: [
