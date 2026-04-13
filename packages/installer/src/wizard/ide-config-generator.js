@@ -109,6 +109,11 @@ async function promptFileExists(filePath, options = {}) {
   // Default to merge for brownfield if available, otherwise backup
   const defaultChoice = isBrownfield && canMerge ? 'merge' : 'backup';
 
+  // Non-TTY (CI, Docker, scripts, agents): skip prompt, use default choice.
+  if (!process.stdin.isTTY) {
+    return defaultChoice;
+  }
+
   const { action } = await inquirer.prompt([
     {
       type: 'list',

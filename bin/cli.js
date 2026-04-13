@@ -236,6 +236,10 @@ function toForwardSlash(p) {
  * @returns {Promise<string>} 'claude-code' | 'codex' | 'both'
  */
 async function promptLlmChoice() {
+  // Non-TTY (CI, Docker, scripts, agents): skip prompt, default to claude-code.
+  if (!process.stdin.isTTY) {
+    return 'claude-code';
+  }
   try {
     const inquirer = require('inquirer');
     const { llms } = await inquirer.prompt([{
@@ -295,36 +299,38 @@ async function cmdInstallGlobal(opts = {}) {
     console.log('');
   }
 
-  // Language selection (skipped in upsert mode if already known)
+  // Language selection (skipped in upsert mode if already known, or non-TTY)
   let language = isUpsert && existing.language ? existing.language : null;
   if (!language) {
     language = 'pt';
-    try {
-      const inquirer = require('inquirer');
-      const langAnswer = await inquirer.prompt([{
-        type: 'list',
-        name: 'language',
-        message: 'Language / Idioma:',
-        choices: [
-          { name: 'Portugues', value: 'pt' },
-          { name: 'English', value: 'en' },
-        ],
-        default: 'pt',
-      }]);
-      language = langAnswer.language;
-    } catch {
-      // Fallback: readline
-      const readline = require('readline');
-      const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-      language = await new Promise((resolve) => {
-        console.log(`  ${CYAN}Language / Idioma:${NC}`);
-        console.log(`    ${GREEN}1${NC}) Portugues`);
-        console.log(`    ${GREEN}2${NC}) English`);
-        rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
-          rl.close();
-          resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
+    if (process.stdin.isTTY) {
+      try {
+        const inquirer = require('inquirer');
+        const langAnswer = await inquirer.prompt([{
+          type: 'list',
+          name: 'language',
+          message: 'Language / Idioma:',
+          choices: [
+            { name: 'Portugues', value: 'pt' },
+            { name: 'English', value: 'en' },
+          ],
+          default: 'pt',
+        }]);
+        language = langAnswer.language;
+      } catch {
+        // Fallback: readline
+        const readline = require('readline');
+        const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+        language = await new Promise((resolve) => {
+          console.log(`  ${CYAN}Language / Idioma:${NC}`);
+          console.log(`    ${GREEN}1${NC}) Portugues`);
+          console.log(`    ${GREEN}2${NC}) English`);
+          rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
+            rl.close();
+            resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
+          });
         });
-      });
+      }
     }
   }
 
@@ -1219,6 +1225,8 @@ function cmdHelp() {
   console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
   console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
   console.log('');
+  console.log(`  ${DIM}Works in CI / non-interactive environments (uses sensible defaults).${NC}`);
+  console.log('');
   console.log(`${BOLD}Diagnostics:${NC}\n`);
   console.log(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
   console.log(`  ${CYAN}npx sinapse-ai doctor${NC}           Run health checks (--fix --dry-run --json --deep)`);
@@ -1244,6 +1252,7 @@ module.exports = {
   syncDirSync,
   detectExistingInstall,
   cmdDoctor,
+  promptLlmChoice,
   SINAPSE_HOME,
   HOME,
 };
