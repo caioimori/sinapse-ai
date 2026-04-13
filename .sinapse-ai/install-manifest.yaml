@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 9.4.0
-generated_at: "2026-04-12T23:23:56.335Z"
+generated_at: "2026-04-13T02:50:51.489Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1149
+file_count: 1151
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1241,7 +1241,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:d955de8ffd9ca04515b868486b125d375b9b5c0d254ac02b157a138799dbe598
+    hash: sha256:fa987fdf337f8f076cef3617f12122201191e33a47272e673193718cdbff5fce
     type: data
     size: 522848
   - path: data/learned-patterns.yaml
@@ -3040,10 +3040,18 @@ files:
     hash: sha256:070e608c593ddf752d09e0d383ad5e19e96c33eaf8adf95006f67b0a768b3390
     type: code
     size: 747
+  - path: infrastructure/contracts/compatibility/README.md
+    hash: sha256:d431c72b49b6fb9d10c5f0c2a5b79aaf2fb274568103cc0e42c654edd29edc41
+    type: infrastructure
+    size: 1709
   - path: infrastructure/contracts/compatibility/sinapse-4.0.4.yaml
     hash: sha256:3c718b4ed4e6a203ed3619cf1043a86f787585b20bcfbe55508201fc5d22049b
     type: infrastructure
     size: 543
+  - path: infrastructure/contracts/compatibility/sinapse-current.yaml
+    hash: sha256:a4d63c8357b61efae0466894ed5f005c128e00361629163fb589de843da23292
+    type: infrastructure
+    size: 1072
   - path: infrastructure/index.js
     hash: sha256:1b8b8f000139b51c8332b7175c99ba86649807f0d40e6c7baf343ac3c6b0fdcc
     type: infrastructure
@@ -3553,9 +3561,9 @@ files:
     type: script
     size: 6693
   - path: infrastructure/scripts/validate-parity.js
-    hash: sha256:284c7715cc65b76579284024bbe5176b9230340d841dbfe79559c8f5844109cb
+    hash: sha256:4649397644f29f5df4ec87554a27910b22955ba480093a5946f30e28fdd5f9a2
     type: script
-    size: 12266
+    size: 14228
   - path: infrastructure/scripts/validate-paths.js
     hash: sha256:942f6de9e621b7331f61dc915db5d24b987b67d1ae3377882330f7013dd214e9
     type: script

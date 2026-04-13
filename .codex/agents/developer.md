@@ -465,6 +465,103 @@ autoClaude:
 
 ---
 
+## Research-Backed Frameworks
+
+### Architecture Decision Tree
+
+When starting a new project or module, select architecture by context:
+
+| Project Type | Architecture | When |
+|-------------|-------------|------|
+| Landing Page | JAMstack (SSG + Edge) | Static content, SEO-critical |
+| SaaS B2B | Modular Monolith + Clean Architecture | 3-15 devs, medium complexity |
+| E-commerce | Modular Monolith + CQRS | Read-heavy, catalog browsing |
+| Fintech | Modular Monolith + DDD + Event Sourcing | Audit trail, complex domain |
+| Real-time App | Event-Driven + WebSockets + Edge | Chat, collab, notifications |
+| MVP/Prototype | Monolith (well-structured) | <= 5 devs, speed priority |
+
+**Default:** Start with Modular Monolith. Extract microservices ONLY when independent scaling is proven necessary.
+
+### SOLID in TypeScript (Quick Reference)
+
+| Principle | Pattern | Anti-Pattern |
+|-----------|---------|-------------|
+| **S**ingle Responsibility | One class = one reason to change. Domain events for side effects | God classes doing everything |
+| **O**pen/Closed | Strategy + Factory for extensibility without modification | if/else chains for each new variant |
+| **L**iskov Substitution | Composition over inheritance | Subtypes breaking parent contracts |
+| **I**nterface Segregation | Small focused interfaces (`Workable`, `Feedable`) | Fat interfaces with unused methods |
+| **D**ependency Inversion | Constructor injection, both levels depend on abstractions | `new PostgresDB()` in services |
+
+### TypeScript Quality Patterns
+
+- **Branded Types:** `type UserId = string & { __brand: 'UserId' }` -- prevents ID mixups at compile time
+- **Discriminated Unions:** `{ ok: true; value: T } | { ok: false; error: E }` for exhaustive handling
+- **Zod Schemas:** Single source of truth for runtime validation + `z.infer` for type inference
+- **Result Type (neverthrow):** Replace try/catch with `Result<T, E>` for explicit error paths
+- **Strict tsconfig:** `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `strict: true`
+
+### Testing Pyramid (Concrete Tools)
+
+| Layer | Tools | What to Test | Ratio |
+|-------|-------|-------------|-------|
+| Unit | Vitest | Pure functions, domain logic, validators | 70% |
+| Integration | Vitest + MSW + Testing Library | Component interactions, API | 20% |
+| E2E | Playwright | Login, checkout, critical paths only | 10% |
+
+**MSW (Mock Service Worker):** Intercepts network requests at service worker level for realistic API mocking.
+
+### State Management Stack (2025-2026)
+
+| State Type | Tool | Note |
+|-----------|------|------|
+| Server State | TanStack Query | 40-60% fewer requests vs Redux |
+| Client State | Zustand | Global UI without boilerplate |
+| URL State | nuqs | Filters, pagination, search params |
+| Form State | React Hook Form + Zod | Complex forms with validation |
+| Local State | useState/useReducer | Simple component-level state |
+
+### Animation Principles (Disney 12 for Web)
+
+| Principle | Web Implementation |
+|-----------|-------------------|
+| Squash & Stretch | `scale()` transforms on interaction |
+| Anticipation | Pre-movement before main action (hover before click) |
+| Follow Through | Elements overshoot then settle |
+| Ease In/Out | Always `cubic-bezier`, never linear for UI |
+| Secondary Action | Supporting animations complementing primary |
+
+**Targets:** LCP < 2.5s, INP < 200ms, CLS < 0.1. Always respect `prefers-reduced-motion`.
+
+### Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every task:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your implementation plan or answer
+2. List verification questions to fact-check the draft
+3. Answer each verification question INDEPENDENTLY (no bias from draft)
+4. Produce final revised output incorporating verified facts
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- ALWAYS run `npm view {package}` before adding ANY new dependency
+- 19.7% of packages recommended by LLMs are fabricated — 58% are persistent across runs
+- If `npm view` returns 404/error, the package does NOT exist — do not install it
+- Check package popularity, last publish date, and maintainer before adopting
+
+**3. Fact Grounding — Cite What You See:**
+- When making claims about code, cite the file path and line number
+- Use Read/Grep tools to verify before asserting file contents or structure
+- NEVER reference a file path without confirming it exists (use Glob)
+- NEVER suggest an import without verifying the module exports it
+
+**4. Confidence Signaling:**
+- Mark uncertain claims with [NEEDS VERIFICATION]
+- When unsure about API behavior, library compatibility, or version-specific features, say so
+- Prefer "I don't have enough information" over fabricating an answer
+- After generating code, self-review for phantom APIs and ghost imports
+
+---
+
 ## Quick Commands
 
 **Story Development:**

@@ -209,6 +209,64 @@ autoClaude:
 
 ---
 
+## Enhanced Squad Creation Protocol
+
+### 1. 4-Layer Persona Model (Mandatory for All New Agents)
+
+Every agent created by `*create-squad` or `*extend-squad` MUST define all 4 layers:
+
+| Layer | Contents | Required Fields |
+|-------|----------|-----------------|
+| **L1: Identity** | Role, archetype, voice, icon | `name`, `role`, `archetype`, `tone`, `icon` |
+| **L2: Expertise** | Domain knowledge, frameworks, tools | `focus`, `core_principles[]`, `tools[]` |
+| **L3: Behavior** | Decision style, collaboration patterns, quality bar | `style`, `customization`, `coderabbit_integration` |
+| **L4: Boundaries** | Can do, cannot do, escalation paths | `commands[]`, `security_notes[]`, Agent Collaboration section |
+
+Validation: `*validate-squad` checks all agents for 4-layer completeness. Missing layers produce a FAIL verdict.
+
+### 2. Auto-KB Generation
+
+When creating a new squad, automatically generate knowledge base scaffolding:
+
+**Step 1 — Research Discovery:**
+- Check `squads/*/knowledge-base/` for existing patterns in similar domains
+- Check `.sinapse-ai/development/knowledge-base/` for cross-cutting references
+- If `caioimori-pesquisas` research exists for the domain, extract key patterns
+
+**Step 2 — KB Skeleton Generation:**
+Generate at minimum 3 knowledge-base files per squad:
+
+```
+squads/{squad-name}/knowledge-base/
+  {domain}-fundamentals.md        # Core concepts and terminology
+  {domain}-patterns.md            # Proven patterns and anti-patterns
+  {domain}-tool-reference.md      # Tools, frameworks, and integrations
+```
+
+**Step 3 — Cross-Squad Integration:**
+- Add routing catalog entry in squad's `squad.yaml` under `routing`
+- Define cross-squad patterns (which squads this one collaborates with)
+- Update `.claude/rules/squad-awareness.md` delegation map
+
+### 3. Quality Checklist (Every New Squad Must Pass)
+
+Before a squad is considered complete, ALL items must be checked:
+
+- [ ] All agents have 4-layer personas (L1-L4 complete)
+- [ ] Knowledge base has at least 3 reference files
+- [ ] All tasks have pre-conditions and post-conditions defined
+- [ ] Workflows connect all agents (no orphan agents)
+- [ ] Anti-hallucination protocol present on all agents that generate domain output
+- [ ] `squad.yaml` manifest passes JSON Schema validation
+- [ ] README.md exists with activation instructions
+- [ ] At least one workflow defined in `workflows/`
+- [ ] Cross-squad routing documented if applicable
+- [ ] Agent collaboration section defines handoff patterns
+
+Run `*validate-squad {name}` to execute this checklist automatically.
+
+---
+
 ## Quick Commands
 
 **Squad Design & Creation:**

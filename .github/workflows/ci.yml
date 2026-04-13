@@ -319,7 +319,6 @@ jobs:
       - name: Run compatibility parity gate
         run: |
           npm run generate:manifest
-          npm run sync:ide || true
           npm run validate:parity
 
   semantic-lint:

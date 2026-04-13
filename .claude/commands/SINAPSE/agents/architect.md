@@ -253,6 +253,11 @@ dependencies:
     # Execution Engine (Epic 4)
     - plan-create-implementation.md
     - plan-create-context.md
+    # Infrastructure & Observability (Infra Research 2026-04)
+    - infrastructure-assessment.md
+    - observability-blueprint.md
+  knowledge_bases:
+    - infrastructure-decision-framework.md
   scripts:
     # Memory Layer (Epic 7)
     - codebase-mapper.js
@@ -385,6 +390,79 @@ autoClaude:
     canExecute: false
     canVerify: false
 ```
+
+---
+
+## Research-Backed Frameworks
+
+### Cloud Provider Decision Matrix
+
+| Criterion | AWS | Azure | GCP | Cloudflare |
+|-----------|-----|-------|-----|------------|
+| Breadth of services | Largest (200+) | Large | Medium | Focused (edge) |
+| AI/ML | Bedrock + SageMaker | OpenAI + Copilot | Vertex AI + TPUs | Workers AI |
+| Enterprise integration | Strong | Strongest | Medium | Weak |
+| Data warehouse | Redshift | Synapse | BigQuery (best) | N/A |
+| Edge compute | Lambda@Edge | Front Door | Cloud Run | Workers (leader) |
+| Brazilian region | sa-east-1 (SP, 3 AZs) | Brazil South (SP, 3 AZs) | southamerica-east1 (SP) | POPs in SP, RJ, Fortaleza |
+| Egress fees | High | High | High | Zero (R2) |
+
+**Default for SINAPSE projects:** Vercel (frontend) + Supabase (backend) + Cloudflare (CDN/edge). Escalate to hyperscalers only for specific workloads (GPU, compliance, enterprise integration).
+
+### Kubernetes Patterns (When Applicable)
+
+- **82% of container users run K8s in production** (CNCF 2025); it is the de facto "OS for AI"
+- **Managed K8s:** GKE (most mature, fastest version adoption) > EKS (largest ecosystem) > AKS (best for Microsoft shops)
+- **Anti-patterns to block:** Cluster-as-monolith, pods without resource limits, RBAC over-permissive, secrets in ConfigMaps, no PodDisruptionBudgets
+- **Service Mesh decision:** Linkerd (performance-first, small teams) > Istio (feature-rich, multi-cluster) > Cilium (eBPF, high-throughput fintech)
+
+### Infrastructure as Code (IaC) Decision
+
+| Criterion | OpenTofu | Pulumi | Crossplane |
+|-----------|----------|--------|------------|
+| License | MPL 2.0 (OSS) | Apache 2.0 | Apache 2.0 (CNCF Graduated) |
+| Language | HCL | Python, TS, Go, C#, Java | YAML (K8s CRDs) |
+| Best for | New OSS default (Terraform successor) | Dev teams wanting real language + unit tests | Platform teams, K8s-heavy orgs |
+| Learning curve | Medium | Low (if language known) | High (K8s + IaC) |
+
+**Recommendation:** OpenTofu as default IaC (50% of Spacelift deployments already). Pulumi for teams with strong TypeScript culture. Avoid Terraform BSL lock-in post-IBM acquisition.
+
+### Observability Stack
+
+**OpenTelemetry is the universal standard** (2nd most active CNCF project after K8s). 57% orgs use it for metrics, 50% for traces, 48% for logs (Grafana Survey 2025).
+
+| Signal | Tool | Purpose |
+|--------|------|---------|
+| Metrics | Prometheus + Grafana | Time-series, alerting, dashboards |
+| Traces | Tempo (Grafana) or Jaeger | Distributed request tracing |
+| Logs | Loki (Grafana) | Log aggregation and correlation |
+| Profiling | Pyroscope | Continuous CPU/memory profiling via eBPF |
+| Errors | Sentry | Exception tracking, replay on error |
+
+**Architecture pattern:** Instrument with OTel SDKs -> OTel Collector (process/export) -> Backend (Grafana stack or Datadog). This eliminates vendor lock-in at the instrumentation layer.
+
+### Platform Engineering (Backstage)
+
+Backstage (Spotify, CNCF) has 3,000+ adopters and 270+ orgs in production. Use as Internal Developer Portal when team exceeds 10 developers. Provides: service catalog, scaffolder templates, TechDocs, and plugin ecosystem.
+
+### SRE Error Budgets
+
+The most impactful SRE concept for architecture decisions:
+
+| SLO | Error Budget | Meaning |
+|-----|-------------|---------|
+| 99.9% | 0.1% (~43 min/month) | Budget full -> deploy freely. Empty -> freeze releases, fix stability |
+| 99.95% | 0.05% (~22 min/month) | Typical for internal tools |
+| 99.99% | 0.01% (~4.3 min/month) | Financial systems, auth services |
+
+**Formula:** `Error Budget = 1 - SLO`. When budget is consumed, product velocity pauses and engineering focuses on reliability. This programmatically aligns product (speed) and SRE (stability) incentives.
+
+### FinOps Quick Rules
+
+- 50% of orgs put "waste reduction" as priority #1 (FinOps Foundation 2025)
+- 63% now manage AI spend as a distinct cost category
+- H100 GPU prices dropped 64% in 2025 -- GPU compute is now a manageable cost, not a fixed tax
+- **Cloudflare R2 eliminates egress fees** -- consider for any S3-compatible storage workload
 
 ---
 
