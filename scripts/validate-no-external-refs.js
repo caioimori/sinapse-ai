@@ -87,18 +87,16 @@ const FORBIDDEN_REGEX = /\b(aiox|synkra|synkraai|bmad)\b/gi;
  *
  *   - LICENSE: MIT attribution may legally require naming upstream authors.
  *   - docs/research-synthesis-for-upgrade.md: historical process document.
- *   - squads/claude-code-mastery/*: PRE-EXISTING upstream fork attribution,
- *     inherited from lineage. Needs per-file review in a future story
- *     (possibly 10.18b) to decide: legitimate legal attribution (keep) vs.
- *     gratuitous mention (rewrite). Allow-listed here to avoid scope creep
- *     on Story 10.17.
- *   - squads/squad-claude/knowledge-base/*: same rationale — pre-existing
- *     attribution in research docs that needs per-file decision later.
+ *   - squads/claude-code-mastery/agents/skill-craftsman.md: PERMANENT.
+ *     The agent's documented purpose is to study and adapt external
+ *     agile-AI methodologies, so the references serve the framework
+ *     rather than inheriting from a fork. Story 10.23 audited the file
+ *     and decided to keep it allow-listed indefinitely.
  *
  * Each entry is an EXACT path match. Directory prefixes are NOT used — this
  * forces future files under `squads/claude-code-mastery/` to be BLOCKED
  * until they are explicitly added, which is what we want: a new file with a
- * BMAD reference should fail the validator loudly.
+ * forbidden literal should fail the validator loudly.
  */
 const HARDCODED_ALLOW_LIST = [
   'LICENSE', // MIT legal requirement
@@ -112,22 +110,13 @@ const HARDCODED_ALLOW_LIST = [
   'scripts/validate-no-external-refs.js',
   'tests/scripts/validate-no-external-refs.test.js',
 
-  // ── PRE-EXISTING BMAD FORK ATTRIBUTION (from Story 10.17 QA) ─────────
-  // These files were inherited from the upstream fork and already contain
-  // BMAD references before this story existed. They are explicitly
-  // allow-listed here (exact path, not prefix) so that the validator still
-  // blocks any NEW file under the same trees.
-  //
-  // Follow-up: audit each of these in a future story and decide per
-  // reference whether it is legitimate legal attribution (keep), a
-  // gratuitous mention (rewrite in authorial voice), or dead content
-  // (delete).
-  'squads/claude-code-mastery/CHANGELOG.md',
-  'squads/claude-code-mastery/README.md',
-  'squads/claude-code-mastery/squad.yaml',
+  // ── PERMANENT: skill-craftsman methodology study ─────────────────────
+  // Story 10.23 audited the 6 pre-existing fork attribution files from
+  // Story 10.17. Five were rewritten in authorial voice and removed from
+  // the allow-list. This one stays: the agent's identity is built around
+  // studying external agile-AI methodologies and the references are
+  // load-bearing, not inherited noise.
   'squads/claude-code-mastery/agents/skill-craftsman.md',
-  'squads/squad-claude/knowledge-base/swarm-orchestration-patterns.md',
-  'squads/squad-claude/knowledge-base/context-window-optimization.md',
 ];
 
 /**

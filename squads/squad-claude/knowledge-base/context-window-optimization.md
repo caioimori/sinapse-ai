@@ -152,7 +152,7 @@ Only loaded when editing API files.
 - Historical context (why decisions were made)
 - Duplicate information
 
-### 5. Document Sharding (BMAD Pattern)
+### 5. Document Sharding
 
 Large documents split into focused shards:
 
