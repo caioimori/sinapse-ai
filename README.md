@@ -135,6 +135,39 @@ Toda inteligencia vive no terminal. Dashboards observam. A UI nunca e requisito 
 
 O SINAPSE separa artefatos do framework e do projeto em 4 camadas com protecao automatica:
 
+```mermaid
+graph TB
+    subgraph L4["L4 - PROJETO (sempre mutavel)"]
+        L4A[Stories]
+        L4B[Packages]
+        L4C[Squads]
+        L4D[Tests]
+    end
+    subgraph L3["L3 - CONFIGURACAO (com restricoes)"]
+        L3A[Entity Registry]
+        L3B[Agent Memory]
+        L3C[Config files]
+    end
+    subgraph L2["L2 - TEMPLATES (imutavel)"]
+        L2A[Tasks]
+        L2B[Templates]
+        L2C[Checklists]
+        L2D[Workflows]
+    end
+    subgraph L1["L1 - FRAMEWORK CORE (imutavel)"]
+        L1A[.sinapse-ai/core]
+        L1B[bin/]
+        L1C[Constitution]
+    end
+
+    L1 --> L2 --> L3 --> L4
+
+    style L1 fill:#0f172a,stroke:#ef4444,color:#fff
+    style L2 fill:#1e293b,stroke:#f59e0b,color:#fff
+    style L3 fill:#1e293b,stroke:#8b5cf6,color:#fff
+    style L4 fill:#1e293b,stroke:#10b981,color:#fff
+```
+
 | Camada | Mutabilidade | Conteudo |
 |--------|-------------|----------|
 | **L1** Framework Core | Nunca | `.sinapse-ai/core/`, `bin/`, Constitution |
@@ -142,7 +175,7 @@ O SINAPSE separa artefatos do framework e do projeto em 4 camadas com protecao a
 | **L3** Configuracao | Com restricoes | Entity registry, agent memory, config |
 | **L4** Projeto | Sempre | Stories, packages, squads, testes |
 
-Deny rules em `.claude/settings.json` reforcam isso deterministicamente.
+Deny rules em `.claude/settings.json` reforcam isso deterministicamente. **Update do framework atualiza L1+L2, nunca L3+L4** — suas customizacoes sao preservadas.
 
 ### Constitution
 
@@ -188,19 +221,25 @@ Ative qualquer agente com `@agent-name` e use `*help` para ver seus comandos.
 
 ### Workflow de Desenvolvimento
 
-```
-@sprint-lead cria story
-       |
-@product-lead valida
-       |
-@developer implementa
-       |
-@quality-gate testa
-       |
-@devops push + PR
+```mermaid
+flowchart LR
+    A([User briefing]) --> B[sprint-lead<br/>cria story]
+    B --> C{product-lead<br/>valida}
+    C -->|GO| D[developer<br/>implementa]
+    C -->|NO-GO| B
+    D --> E{quality-gate<br/>testa}
+    E -->|PASS| F[devops<br/>push + PR]
+    E -->|FAIL| D
+    F --> G([Merged em main])
+
+    style B fill:#1e293b,stroke:#3b82f6,color:#fff
+    style C fill:#1e293b,stroke:#8b5cf6,color:#fff
+    style D fill:#1e293b,stroke:#10b981,color:#fff
+    style E fill:#1e293b,stroke:#f59e0b,color:#fff
+    style F fill:#1e293b,stroke:#ef4444,color:#fff
 ```
 
-O framework garante que nenhuma etapa seja pulada.
+O framework garante que nenhuma etapa seja pulada. Cada gate bloqueia automaticamente se a anterior nao foi cumprida.
 
 ---
 
