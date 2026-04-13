@@ -42,6 +42,7 @@ const GATES = [
   { id: 'lint', name: 'ESLint', cmd: ['npm', 'run', 'lint', '--silent'] },
   { id: 'typecheck', name: 'TypeScript', cmd: ['npm', 'run', 'typecheck', '--silent'] },
   { id: 'agents', name: 'Core agents', cmd: ['npm', 'run', 'validate:agents', '--silent'] },
+  { id: 'squad-orqx', name: 'Squad orqx (10.28)', cmd: ['npm', 'run', 'validate:squad-orqx', '--silent'] },
   { id: 'story-meta', name: 'Story meta (10.19)', cmd: ['npm', 'run', 'validate:story-meta', '--silent'] },
   { id: 'no-external-refs', name: 'External refs (10.17)', cmd: ['npm', 'run', 'validate:no-external-refs', '--silent'] },
   { id: 'parity', name: 'Cross-IDE parity (10.18)', cmd: ['npm', 'run', 'validate:parity', '--silent'] },
