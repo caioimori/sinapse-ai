@@ -95,6 +95,7 @@
     "validate:docs": "node scripts/validate-install-docs.js",
     "validate:no-external-refs": "node scripts/validate-no-external-refs.js",
     "validate:story-meta": "node scripts/validate-story-meta.js",
+    "validate:squad-orqx": "node scripts/validate-squad-orqx.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
