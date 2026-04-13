@@ -483,10 +483,15 @@ class RegistryUpdater {
   }
 
   _writeRegistry(registryData) {
+    // Story 10.24 — sortKeys: true makes the YAML output deterministic.
+    // Without it, key order follows JS object insertion order, which means
+    // semantically-identical writes can produce textually-different files
+    // and cause endless `M entity-registry.yaml` churn in `git status`.
+    // The registry is machine-managed so alphabetical key order is fine.
     const yamlStr = yaml.dump(registryData, {
       lineWidth: 120,
       noRefs: true,
-      sortKeys: false,
+      sortKeys: true,
     });
 
     const dir = path.dirname(this._registryPath);
