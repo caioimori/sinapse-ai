@@ -144,6 +144,89 @@ function rmDirSync(dir) {
   }
 }
 
+// syncDirSync — Story 10.20
+// Copies src -> dest, only writing files whose mtime+size differ. Returns a
+// {added, updated, unchanged, removed} delta. Removes orphaned files in dest
+// that are no longer present in src. Used by install upsert mode to avoid
+// the rmDir+copyDir destruction of user-customized files.
+function syncDirSync(src, dest, delta = { added: 0, updated: 0, unchanged: 0, removed: 0 }) {
+  if (!fs.existsSync(src)) return delta;
+  fs.mkdirSync(dest, { recursive: true });
+  const srcEntries = new Set();
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    srcEntries.add(entry.name);
+    const sp = path.join(src, entry.name);
+    const dp = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      syncDirSync(sp, dp, delta);
+    } else {
+      const srcStat = fs.statSync(sp);
+      let needsWrite = true;
+      if (fs.existsSync(dp)) {
+        try {
+          const dstStat = fs.statSync(dp);
+          if (dstStat.size === srcStat.size && dstStat.mtimeMs >= srcStat.mtimeMs) {
+            needsWrite = false;
+            delta.unchanged += 1;
+          } else {
+            delta.updated += 1;
+          }
+        } catch {
+          delta.updated += 1;
+        }
+      } else {
+        delta.added += 1;
+      }
+      if (needsWrite) fs.copyFileSync(sp, dp);
+    }
+  }
+  if (fs.existsSync(dest)) {
+    for (const name of fs.readdirSync(dest)) {
+      if (!srcEntries.has(name)) {
+        const orphan = path.join(dest, name);
+        try {
+          const stat = fs.statSync(orphan);
+          if (stat.isDirectory()) rmDirSync(orphan);
+          else fs.unlinkSync(orphan);
+          delta.removed += 1;
+        } catch { /* skip */ }
+      }
+    }
+  }
+  return delta;
+}
+
+// detectExistingInstall — Story 10.20
+// Returns { upsert: true, prevMeta, language, llm } when ~/.sinapse/metadata.json
+// exists, or { upsert: false } otherwise. Reads ~/.claude/settings.json for
+// language reuse.
+function detectExistingInstall() {
+  const metaPath = path.join(SINAPSE_HOME, 'metadata.json');
+  if (!fs.existsSync(metaPath)) return { upsert: false };
+  let prevMeta = null;
+  try {
+    prevMeta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+  } catch {
+    return { upsert: false };
+  }
+  let language = null;
+  try {
+    const settingsPath = path.join(HOME, '.claude', 'settings.json');
+    if (fs.existsSync(settingsPath)) {
+      const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+      if (settings && typeof settings.language === 'string') {
+        language = settings.language === 'portuguese' ? 'pt' : (settings.language === 'english' ? 'en' : null);
+      }
+    }
+  } catch { /* fall through */ }
+  return {
+    upsert: true,
+    prevMeta,
+    language,
+    llm: prevMeta && typeof prevMeta.llm === 'string' ? prevMeta.llm : null,
+  };
+}
+
 function toForwardSlash(p) {
   return p.replace(/\\/g, '/');
 }
@@ -190,40 +273,59 @@ async function promptLlmChoice() {
 
 // ── Global Install ───────────────────────────────────────────────────────────
 
-async function cmdInstallGlobal() {
+async function cmdInstallGlobal(opts = {}) {
   header();
-  console.log(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
-  console.log(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
-  console.log('');
 
-  // Language selection (always show for UX clarity)
-  let language = 'pt';
-  try {
-    const inquirer = require('inquirer');
-    const langAnswer = await inquirer.prompt([{
-      type: 'list',
-      name: 'language',
-      message: 'Language / Idioma:',
-      choices: [
-        { name: 'Portugues', value: 'pt' },
-        { name: 'English', value: 'en' },
-      ],
-      default: 'pt',
-    }]);
-    language = langAnswer.language;
-  } catch {
-    // Fallback: readline
-    const readline = require('readline');
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-    language = await new Promise((resolve) => {
-      console.log(`  ${CYAN}Language / Idioma:${NC}`);
-      console.log(`    ${GREEN}1${NC}) Portugues`);
-      console.log(`    ${GREEN}2${NC}) English`);
-      rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
-        rl.close();
-        resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
+  // Story 10.20 — Upsert detection
+  const force = Boolean(opts.force);
+  const existing = force ? { upsert: false } : detectExistingInstall();
+  const isUpsert = existing.upsert;
+
+  if (force && fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
+    console.log(`${YELLOW}--force flag detected: running fresh install (overwriting any existing install).${NC}`);
+    console.log('');
+  } else if (isUpsert) {
+    const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
+    console.log(`${BOLD}  Detected existing install (v${prevVer}). Refreshing in place...${NC}`);
+    console.log(`${DIM}  Use --force to wipe and reinstall fresh.${NC}`);
+    console.log('');
+  } else {
+    console.log(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+    console.log(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
+    console.log('');
+  }
+
+  // Language selection (skipped in upsert mode if already known)
+  let language = isUpsert && existing.language ? existing.language : null;
+  if (!language) {
+    language = 'pt';
+    try {
+      const inquirer = require('inquirer');
+      const langAnswer = await inquirer.prompt([{
+        type: 'list',
+        name: 'language',
+        message: 'Language / Idioma:',
+        choices: [
+          { name: 'Portugues', value: 'pt' },
+          { name: 'English', value: 'en' },
+        ],
+        default: 'pt',
+      }]);
+      language = langAnswer.language;
+    } catch {
+      // Fallback: readline
+      const readline = require('readline');
+      const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+      language = await new Promise((resolve) => {
+        console.log(`  ${CYAN}Language / Idioma:${NC}`);
+        console.log(`    ${GREEN}1${NC}) Portugues`);
+        console.log(`    ${GREEN}2${NC}) English`);
+        rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
+          rl.close();
+          resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
+        });
       });
-    });
+    }
   }
 
   // Save language to ~/.claude/settings.json
@@ -239,8 +341,8 @@ async function cmdInstallGlobal() {
     fs.writeFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
   } catch { /* non-critical */ }
 
-  // LLM selection (inquirer checkbox with readline fallback)
-  const llmChoice = await promptLlmChoice();
+  // LLM selection (skipped in upsert mode if previous llm known)
+  const llmChoice = isUpsert && existing.llm ? existing.llm : await promptLlmChoice();
 
   console.log('');
   console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
@@ -254,26 +356,48 @@ async function cmdInstallGlobal() {
   }
 
   // Phase 1: Copy squads to ~/.sinapse/
-  console.log(`${CYAN}Phase 1:${NC} Copying squads to ~/.sinapse/`);
+  console.log(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);
   fs.mkdirSync(SINAPSE_HOME, { recursive: true });
 
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
   let totalAgents = 0;
+  const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
+  let squadsRefreshed = 0;
+  let squadsAdded = 0;
   for (const squad of squads) {
     const src = path.join(squadsSrcBase, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
-    rmDirSync(dest);
-    copyDirSync(src, dest);
+    if (isUpsert) {
+      const existedBefore = fs.existsSync(dest);
+      const delta = syncDirSync(src, dest);
+      totalDelta.added += delta.added;
+      totalDelta.updated += delta.updated;
+      totalDelta.unchanged += delta.unchanged;
+      totalDelta.removed += delta.removed;
+      if (existedBefore) squadsRefreshed += 1; else squadsAdded += 1;
+      console.log(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
+    } else {
+      rmDirSync(dest);
+      copyDirSync(src, dest);
+      console.log(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
+    }
     totalAgents += squad.agents;
-    console.log(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
   }
 
   // Copy sinapse/ orqx squad
   const sinapseMasterSrc = path.join(ROOT, 'sinapse');
   const sinapseMasterDest = path.join(SINAPSE_HOME, 'sinapse');
   if (fs.existsSync(sinapseMasterSrc)) {
-    rmDirSync(sinapseMasterDest);
-    copyDirSync(sinapseMasterSrc, sinapseMasterDest);
+    if (isUpsert) {
+      const delta = syncDirSync(sinapseMasterSrc, sinapseMasterDest);
+      totalDelta.added += delta.added;
+      totalDelta.updated += delta.updated;
+      totalDelta.unchanged += delta.unchanged;
+      totalDelta.removed += delta.removed;
+    } else {
+      rmDirSync(sinapseMasterDest);
+      copyDirSync(sinapseMasterSrc, sinapseMasterDest);
+    }
     const masterAgents = getAgentFiles(sinapseMasterDest).length;
     totalAgents += masterAgents;
     console.log(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
@@ -358,17 +482,36 @@ async function cmdInstallGlobal() {
   console.log(`\n${CYAN}Phase 5:${NC} Configuring PATH`);
   ensurePath();
 
-  // Phase 6: Write metadata
+  // Phase 6: Write metadata (Story 10.20 — preserve installedAt on upsert)
+  const nowIso = new Date().toISOString();
   const meta = {
     version: VERSION,
-    installedAt: new Date().toISOString(),
+    installedAt: isUpsert && existing.prevMeta && existing.prevMeta.installedAt
+      ? existing.prevMeta.installedAt
+      : nowIso,
     squads: squads.length,
     agents: totalAgents,
     commands: writtenAgents.size,
     llm: llmChoice,
     platform: process.platform,
   };
+  if (isUpsert) {
+    meta.updatedAt = nowIso;
+  }
   fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
+
+  // Story 10.20 — Upsert summary block
+  if (isUpsert) {
+    const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
+    console.log('');
+    console.log(`${BOLD}Upsert complete:${NC}`);
+    console.log(`  ${CYAN}Mode:${NC}    upsert (--force to reinstall)`);
+    console.log(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
+    console.log(`  ${CYAN}Squads:${NC}  ${squadsRefreshed} refreshed${squadsAdded ? ', ' + squadsAdded + ' added' : ''}`);
+    console.log(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
+    console.log(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
+    console.log(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
+  }
 
   // Chrome Brain: Auto-install browser automation
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
@@ -999,7 +1142,8 @@ function cmdStatus() {
 function cmdHelp() {
   header();
   console.log(`${BOLD}Commands:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai install${NC}          Install SINAPSE in current project`);
+  console.log(`  ${CYAN}npx sinapse-ai install${NC}          Install SINAPSE (idempotent — re-runs are upserts)`);
+  console.log(`  ${CYAN}npx sinapse-ai install --force${NC}  Wipe and reinstall fresh, even if already installed`);
   console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
   console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
   console.log('');
@@ -1020,16 +1164,32 @@ function cmdHelp() {
 
 // ── Router ───────────────────────────────────────────────────────────────────
 
-const args = process.argv.slice(2);
-const command = args[0] || 'help';
-const isLocal = args.includes('--local');
+// Story 10.20 — Export helpers for unit tests. Router only runs when this
+// file is invoked directly by Node; importing it from a test gets the
+// helpers without triggering the switch statement.
+module.exports = {
+  syncDirSync,
+  detectExistingInstall,
+  SINAPSE_HOME,
+  HOME,
+};
 
-switch (command) {
-  case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal().catch(e => { console.error(e.message); process.exit(1); }); break;
-  case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
-  case 'uninstall': cmdUninstall(); break;
-  case 'list':     cmdList(); break;
-  case 'status':   cmdStatus(); break;
+if (require.main === module) {
+  runRouter();
+}
+
+function runRouter() {
+  const args = process.argv.slice(2);
+  const command = args[0] || 'help';
+  const isLocal = args.includes('--local');
+  const isForce = args.includes('--force');
+
+  switch (command) {
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce }).catch(e => { console.error(e.message); process.exit(1); }); break;
+    case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
+    case 'uninstall': cmdUninstall(); break;
+    case 'list':     cmdList(); break;
+    case 'status':   cmdStatus(); break;
   case 'chrome-brain': {
     // Story 10.13 — chrome-brain is the canonical sub-capability for browser
     // automation. Delegating to the shared chrome-brain-installer module keeps
@@ -1047,11 +1207,12 @@ switch (command) {
     })();
     break;
   }
-  case 'help':
-  case '--help':
-  case '-h':       cmdHelp(); break;
-  default:
-    console.error(`${RED}Unknown command:${NC} ${command}`);
-    console.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
-    process.exit(1);
+    case 'help':
+    case '--help':
+    case '-h':       cmdHelp(); break;
+    default:
+      console.error(`${RED}Unknown command:${NC} ${command}`);
+      console.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
+      process.exit(1);
+  }
 }
