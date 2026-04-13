@@ -20,9 +20,37 @@ function parseArgs(argv = process.argv.slice(2)) {
   return {
     quiet: args.has('--quiet') || args.has('-q'),
     json: args.has('--json'),
+    fast: args.has('--fast'),
     contractPath: contractArg ? contractArg.slice('--contract='.length) : null,
     diffPath: diffArg ? diffArg.slice('--diff='.length) : null,
   };
+}
+
+function extractSyncFailureDetails(rawOutput) {
+  if (!rawOutput || typeof rawOutput !== 'string') {
+    return [];
+  }
+  const details = [];
+  const driftMatch = rawOutput.match(/\|\s*Drift\s*\|\s*(\d+)\s*\|/i);
+  const missingMatch = rawOutput.match(/\|\s*Missing\s*\|\s*(\d+)\s*\|/i);
+  const orphanedMatch = rawOutput.match(/\|\s*Orphaned\s*\|\s*(\d+)\s*\|/i);
+  if (driftMatch && Number(driftMatch[1]) > 0) {
+    details.push(`${driftMatch[1]} file(s) drifted from source-of-truth`);
+  }
+  if (missingMatch && Number(missingMatch[1]) > 0) {
+    details.push(`${missingMatch[1]} file(s) missing from IDE mirror`);
+  }
+  if (orphanedMatch && Number(orphanedMatch[1]) > 0) {
+    details.push(`${orphanedMatch[1]} orphaned file(s) in IDE mirror`);
+  }
+  const fileBlocks = rawOutput.match(/(?:^|\n)-\s+`?([^`\n]+\.md)`?/g);
+  if (fileBlocks) {
+    for (const block of fileBlocks.slice(0, 5)) {
+      const name = block.replace(/^[\s\-`]+|`+\s*$/g, '');
+      if (name) details.push(`  - ${name}`);
+    }
+  }
+  return details;
 }
 
 function runSyncValidate(ide, projectRoot) {
@@ -31,23 +59,32 @@ function runSyncValidate(ide, projectRoot) {
     cwd: projectRoot,
     encoding: 'utf8',
   });
-  return {
-    ok: result.status === 0,
-    errors: result.status === 0 ? [] : [`Sync validation failed for ${ide}`],
-    warnings: [],
-    raw: result.stdout || result.stderr || '',
-  };
+  const raw = result.stdout || result.stderr || '';
+  if (result.status === 0) {
+    return { ok: true, errors: [], warnings: [], raw };
+  }
+  const details = extractSyncFailureDetails(raw);
+  const errors = [
+    `Sync validation failed for ${ide}`,
+    ...details,
+    `Run \`npm run sync:ide\` then re-stage the .claude/ and .codex/ changes`,
+  ];
+  return { ok: false, errors, warnings: [], raw };
 }
 
 function getDefaultContractPath(projectRoot = process.cwd()) {
-  return path.join(
+  const contractsDir = path.join(
     projectRoot,
     '.sinapse-ai',
     'infrastructure',
     'contracts',
     'compatibility',
-    'sinapse-4.0.4.yaml',
   );
+  const currentPath = path.join(contractsDir, 'sinapse-current.yaml');
+  if (fs.existsSync(currentPath)) {
+    return currentPath;
+  }
+  return path.join(contractsDir, 'sinapse-4.0.4.yaml');
 }
 
 function loadCompatibilityContract(contractPath) {
@@ -218,6 +255,7 @@ function diffCompatibilityContracts(currentContract, previousContract) {
 
 function runParityValidation(options = {}, deps = {}) {
   const projectRoot = options.projectRoot || process.cwd();
+  const fast = Boolean(options.fast);
   const runSync = deps.runSyncValidate || runSyncValidate;
   const runCodexSync = deps.validateCodexSync || validateCodexSync;
   const runClaudeIntegration = deps.validateClaudeIntegration || validateClaudeIntegration;
@@ -228,12 +266,12 @@ function runParityValidation(options = {}, deps = {}) {
     ? path.resolve(projectRoot, options.contractPath)
     : getDefaultContractPath(projectRoot);
   const loadContract = deps.loadCompatibilityContract || loadCompatibilityContract;
-  const contract = loadContract(resolvedContractPath);
+  const contract = fast ? null : loadContract(resolvedContractPath);
   const resolvedDiffPath = options.diffPath ? path.resolve(projectRoot, options.diffPath) : null;
-  const previousContract = resolvedDiffPath ? loadContract(resolvedDiffPath) : null;
+  const previousContract = resolvedDiffPath && !fast ? loadContract(resolvedDiffPath) : null;
   const docsPath = path.join(projectRoot, 'docs', 'ide-integration.md');
   const docsPathRelative = path.relative(projectRoot, docsPath);
-  const checks = [
+  const fullChecks = [
     { id: 'claude-sync', exec: () => runSync('claude-code', projectRoot) },
     { id: 'claude-integration', exec: () => runClaudeIntegration({ projectRoot }) },
     { id: 'codex-sync', exec: () => runCodexSync({ projectRoot, quiet: true }) },
@@ -241,31 +279,42 @@ function runParityValidation(options = {}, deps = {}) {
     { id: 'codex-skills', exec: () => runCodexSkills({ projectRoot, strict: true, quiet: true }) },
     { id: 'paths', exec: () => runPaths({ projectRoot }) },
   ];
+  const fastChecks = [
+    { id: 'claude-sync', exec: () => runSync('claude-code', projectRoot) },
+    { id: 'codex-sync', exec: () => runCodexSync({ projectRoot, quiet: true }) },
+    { id: 'paths', exec: () => runPaths({ projectRoot }) },
+  ];
+  const checks = fast ? fastChecks : fullChecks;
 
   const results = checks.map((check) => {
     const normalized = normalizeResult(check.exec());
     return { id: check.id, ...normalized };
   });
   const resultById = Object.fromEntries(results.map((r) => [r.id, r]));
-  const contractViolations = validateCompatibilityContract(contract, resultById, {
-    docsPath,
-    docsPathRelative,
-  });
-  const contractSummary = contract
-    ? {
-        release: contract.release || null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      }
-    : {
-        release: null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      };
+  const contractViolations = fast
+    ? []
+    : validateCompatibilityContract(contract, resultById, {
+        docsPath,
+        docsPathRelative,
+      });
+  const contractSummary = fast
+    ? null
+    : contract
+      ? {
+          release: contract.release || null,
+          path: path.relative(projectRoot, resolvedContractPath),
+        }
+      : {
+          release: null,
+          path: path.relative(projectRoot, resolvedContractPath),
+        };
 
   return {
     ok: results.every((r) => r.ok) && contractViolations.length === 0,
+    fast,
     checks: results,
     contract: contractSummary,
-    contractDiff: diffCompatibilityContracts(contract, previousContract),
+    contractDiff: fast ? null : diffCompatibilityContracts(contract, previousContract),
     contractViolations,
   };
 }
@@ -347,4 +396,6 @@ module.exports = {
   normalizeResult,
   formatHumanReport,
   diffCompatibilityContracts,
+  getDefaultContractPath,
+  extractSyncFailureDetails,
 };

@@ -146,6 +146,26 @@ Agents sao personas de IA com expertise e comandos especificos.
 .sinapse-ai/development/agents/seu-agent.md
 ```
 
+> **Cross-IDE parity (Story 10.18)**
+>
+> O diretorio `.sinapse-ai/development/agents/` e a fonte unica de verdade.
+> Ele se espelha automaticamente para `.claude/commands/SINAPSE/agents/` e
+> `.codex/agents/` via `npm run sync:ide`. O hook `lint-staged` ja roda o
+> sync quando voce comita um arquivo de agent, mas se voce editar um agent
+> e empurrar sem deixar o lint-staged rodar, o hook `pre-push` BLOQUEIA o
+> push.
+>
+> **Como destravar um push bloqueado por drift de IDE:**
+>
+> ```bash
+> npm run sync:ide
+> git add .claude .codex
+> git commit --amend --no-edit
+> git push
+> ```
+>
+> Em emergencia: `git push --no-verify` (mas o CI vai reprovar a PR).
+
 ### Estrutura Obrigatoria
 
 ```yaml

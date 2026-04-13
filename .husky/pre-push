@@ -1,3 +1,53 @@
 #!/usr/bin/env sh
+#
+# pre-push hook
+#
+# Runs two safety checks before allowing a push:
+#
+#   1. pre-push-safety.js   - existing branch/safety net
+#   2. validate:parity:fast - cross-IDE drift guard (Story 10.18)
+#
+# The parity check short-circuits when no file under
+# .sinapse-ai/development/agents/ has changed in the commits being pushed,
+# so a typical push pays zero overhead.
+#
+# To bypass both checks in an emergency:    git push --no-verify
+# To fix a parity failure:                  npm run sync:ide
+#                                           git add .claude .codex
+#                                           git commit --amend --no-edit
+#
+
+set -e
 
 node bin/utils/pre-push-safety.js
+
+# Resolve the upstream ref to diff against. If the branch has no upstream
+# (first push), diff against origin/main as a sane default.
+upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main")"
+
+# Get the list of files that changed between upstream and HEAD. If git
+# cannot resolve the upstream (truly orphan branch), assume something
+# under agents/ may have changed and run the full check.
+if changed_files="$(git diff --name-only "$upstream"...HEAD 2>/dev/null)"; then
+  case "$changed_files" in
+    *".sinapse-ai/development/agents/"*)
+      echo "🔍 Cross-IDE parity check (agent files changed)..."
+      if ! npm run --silent validate:parity:fast; then
+        echo ""
+        echo "❌ Push blocked: .claude/ or .codex/ is out of sync with .sinapse-ai/development/agents/"
+        echo ""
+        echo "Fix:"
+        echo "  1. npm run sync:ide"
+        echo "  2. git add .claude .codex"
+        echo "  3. git commit --amend --no-edit   (or a new commit if you prefer)"
+        echo "  4. git push"
+        echo ""
+        echo "Bypass (emergency only):  git push --no-verify"
+        exit 1
+      fi
+      ;;
+    *)
+      # No agent files touched — skip the parity check entirely
+      ;;
+  esac
+fi

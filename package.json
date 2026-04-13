@@ -87,6 +87,7 @@
     "validate:codex-skills": "node .sinapse-ai/infrastructure/scripts/codex-skills-sync/validate.js --strict",
     "validate:paths": "node .sinapse-ai/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .sinapse-ai/infrastructure/scripts/validate-parity.js",
+    "validate:parity:fast": "node .sinapse-ai/infrastructure/scripts/validate-parity.js --fast --quiet",
     "collab:adopt": "node bin/utils/collab-start.js --adopt-current",
     "collab:check": "node bin/utils/collab-start.js --check",
     "collab:start": "node bin/utils/collab-start.js",
