@@ -1139,6 +1139,54 @@ function cmdStatus() {
   console.log('');
 }
 
+// cmdDoctor — Story 10.21
+// Wires the existing modular doctor (.sinapse-ai/core/doctor) into the
+// canonical sinapse-ai CLI. Mirrors bin/sinapse.js runDoctor() but uses
+// process.exitCode (rather than process.exit) to let stdout flush cleanly.
+async function cmdDoctor(opts = {}) {
+  if (opts.help) {
+    console.log(`Usage: npx sinapse-ai doctor [options]
+
+Run health checks against the SINAPSE environment.
+
+Options:
+  --fix            Auto-correct fixable issues
+  --dry-run        Show what --fix would do without applying
+  --json           Output as JSON (machine-readable)
+  --quiet          Minimal output
+  --deep           Run deep checks too (slower)
+  --help, -h       Show this help
+
+Exit codes:
+  0   All checks PASS or WARN
+  1   At least one check FAIL
+`);
+    return { ok: true, formatted: '', data: null };
+  }
+
+  const doctorModulePath = path.join(__dirname, '..', '.sinapse-ai', 'core', 'doctor');
+  // eslint-disable-next-line global-require
+  const { runDoctorChecks } = require(doctorModulePath);
+  const result = await runDoctorChecks({
+    fix: Boolean(opts.fix),
+    json: Boolean(opts.json),
+    dryRun: Boolean(opts.dryRun),
+    quiet: Boolean(opts.quiet),
+    deep: Boolean(opts.deep),
+    projectRoot: process.cwd(),
+  });
+
+  if (result && result.formatted) {
+    console.log(result.formatted);
+  }
+
+  if (result && result.data && result.data.summary && result.data.summary.fail > 0) {
+    process.exitCode = 1;
+  }
+
+  return result;
+}
+
 function cmdHelp() {
   header();
   console.log(`${BOLD}Commands:${NC}\n`);
@@ -1148,8 +1196,9 @@ function cmdHelp() {
   console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
   console.log('');
   console.log(`${BOLD}Diagnostics:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
   console.log(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
+  console.log(`  ${CYAN}npx sinapse-ai doctor${NC}           Run health checks (--fix --dry-run --json --deep)`);
+  console.log(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
   console.log(`  ${CYAN}npx sinapse-ai help${NC}             Show this help`);
   console.log('');
   console.log(`${BOLD}After install:${NC}\n`);
@@ -1170,6 +1219,7 @@ function cmdHelp() {
 module.exports = {
   syncDirSync,
   detectExistingInstall,
+  cmdDoctor,
   SINAPSE_HOME,
   HOME,
 };
@@ -1190,6 +1240,20 @@ function runRouter() {
     case 'uninstall': cmdUninstall(); break;
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
+    case 'doctor': {
+      // Story 10.21 — wires the modular doctor into the canonical CLI
+      const doctorArgs = args.slice(1);
+      const doctorOpts = {
+        help: doctorArgs.includes('--help') || doctorArgs.includes('-h'),
+        fix: doctorArgs.includes('--fix'),
+        json: doctorArgs.includes('--json'),
+        dryRun: doctorArgs.includes('--dry-run'),
+        quiet: doctorArgs.includes('--quiet'),
+        deep: doctorArgs.includes('--deep'),
+      };
+      cmdDoctor(doctorOpts).catch(e => { console.error(`${RED}doctor error:${NC} ${e.message}`); process.exit(1); });
+      break;
+    }
   case 'chrome-brain': {
     // Story 10.13 — chrome-brain is the canonical sub-capability for browser
     // automation. Delegating to the shared chrome-brain-installer module keeps
