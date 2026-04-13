@@ -27,6 +27,16 @@ Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Document
 
 ---
 
+## Why does SINAPSE exist?
+
+Generative AI has a known problem: the more you ask of it, the worse it gets. A single assistant trying to do everything -- code, copy, branding, testing, deployment -- loses context, invents features, and suffers from context amnesia after just a few long iterations.
+
+SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 186 agents in 18 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
+
+The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 10 articles governs the framework, and 6 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
+
+---
+
 ## Quick Start
 
 ### 1. Install
@@ -54,6 +64,58 @@ Done. You have 18 squads operating in your terminal.
 
 ---
 
+## Why install in every project?
+
+Every first installation raises objections. All of them legitimate. Answered here, in the spirit of SINAPSE culture -- direct, no defensiveness.
+
+### "I'll have multiple copies on my computer. Isn't that wasteful?"
+
+No. Each project has its own `.sinapse-ai/` -- just like it has its own `package.json` or `node_modules/`. And this **isn't waste, it's isolation**.
+
+Real footprint: `.sinapse-ai/` weighs ~500KB. Twenty projects = 10MB. Smaller than a single `node_modules/` of a typical Next.js project (300MB+). The disk cost is marginal. The isolation gain is essential.
+
+### "Why not install once globally and be done with it?"
+
+Because open source projects need to be **self-contained**. When you share a project (or someone clones yours), the framework needs to travel with it.
+
+**With local installation:** `git clone` and you're done. Framework, rules, agents, Constitution, context -- everything comes with the project. Any person, any machine, any time: it works the same.
+
+**With global installation:** whoever clones the project has to install SINAPSE separately, ensure the same version, copy rules manually, and pray there's no drift between machines. Open source dies like that.
+
+### "What's the actual difference between global and local?"
+
+| Aspect | Global | Local (recommended) |
+|--------|:------:|:-------------------:|
+| Disk space | Smaller (1 copy) | Larger (~500KB/project) |
+| Per-project versioning | No | Yes |
+| Clone = working | No | Yes |
+| Project-specific custom rules | No | Yes |
+| Team collaboration | Broken | Perfect |
+| Update without breaking other projects | No | Yes |
+| Open source compatible | No | Yes |
+
+### "Does it work on Windows?"
+
+Yes. Tested on Windows 11, macOS, and Linux. The installer detects the OS automatically. WSL is not required (but recommended for advanced features like automated CodeRabbit review).
+
+### "How do I update without losing my customizations?"
+
+```bash
+npx sinapse-ai update
+```
+
+The update is **idempotent by design**. L1 (framework core) and L2 (templates) get updated. L3 (configuration) and L4 (your stories, packages, customizations) **are never touched**. You can run `update` as many times as you want, including after customizing rules locally. Nothing is lost.
+
+### TL;DR
+
+Local installation = a bit more disk, much more robustness.
+
+If you work alone and never share projects, global will technically work -- but the moment you join a team, publish open source, or need multiple versions in parallel, local becomes essential.
+
+SINAPSE optimizes for the generic case: **your project should work for anyone who clones it, on any machine, at any time**.
+
+---
+
 ## Architecture
 
 ### CLI First
@@ -68,6 +130,39 @@ All intelligence lives in the terminal. Dashboards observe. The UI is never requ
 
 SINAPSE separates framework and project artifacts into 4 layers with automatic protection:
 
+```mermaid
+graph TB
+    subgraph L4["L4 - PROJECT (always mutable)"]
+        L4A[Stories]
+        L4B[Packages]
+        L4C[Squads]
+        L4D[Tests]
+    end
+    subgraph L3["L3 - CONFIGURATION (restricted)"]
+        L3A[Entity Registry]
+        L3B[Agent Memory]
+        L3C[Config files]
+    end
+    subgraph L2["L2 - TEMPLATES (immutable)"]
+        L2A[Tasks]
+        L2B[Templates]
+        L2C[Checklists]
+        L2D[Workflows]
+    end
+    subgraph L1["L1 - FRAMEWORK CORE (immutable)"]
+        L1A[.sinapse-ai/core]
+        L1B[bin/]
+        L1C[Constitution]
+    end
+
+    L1 --> L2 --> L3 --> L4
+
+    style L1 fill:#0f172a,stroke:#ef4444,color:#fff
+    style L2 fill:#1e293b,stroke:#f59e0b,color:#fff
+    style L3 fill:#1e293b,stroke:#8b5cf6,color:#fff
+    style L4 fill:#1e293b,stroke:#10b981,color:#fff
+```
+
 | Layer | Mutability | Content |
 |-------|-----------|---------|
 | **L1** Framework Core | Never | `.sinapse-ai/core/`, `bin/`, Constitution |
@@ -75,7 +170,7 @@ SINAPSE separates framework and project artifacts into 4 layers with automatic p
 | **L3** Configuration | Restricted | Entity registry, agent memory, config |
 | **L4** Project | Always | Stories, packages, squads, tests |
 
-Deny rules in `.claude/settings.json` enforce this deterministically.
+Deny rules in `.claude/settings.json` enforce this deterministically. **Framework updates touch L1+L2, never L3+L4** — your customizations are preserved.
 
 ### Constitution
 
@@ -121,19 +216,25 @@ Activate any agent with `@agent-name` and use `*help` to see its commands.
 
 ### Development Workflow
 
-```
-@sprint-lead creates story
-       |
-@product-lead validates
-       |
-@developer implements
-       |
-@quality-gate tests
-       |
-@devops push + PR
+```mermaid
+flowchart LR
+    A([User briefing]) --> B[sprint-lead<br/>creates story]
+    B --> C{product-lead<br/>validates}
+    C -->|GO| D[developer<br/>implements]
+    C -->|NO-GO| B
+    D --> E{quality-gate<br/>tests}
+    E -->|PASS| F[devops<br/>push + PR]
+    E -->|FAIL| D
+    F --> G([Merged to main])
+
+    style B fill:#1e293b,stroke:#3b82f6,color:#fff
+    style C fill:#1e293b,stroke:#8b5cf6,color:#fff
+    style D fill:#1e293b,stroke:#10b981,color:#fff
+    style E fill:#1e293b,stroke:#f59e0b,color:#fff
+    style F fill:#1e293b,stroke:#ef4444,color:#fff
 ```
 
-The framework ensures no step is skipped.
+The framework ensures no step is skipped. Each gate blocks automatically if the previous one wasn't fulfilled.
 
 ---
 
@@ -208,6 +309,28 @@ Both IDEs have access to all 18 squads, 186 agents, workflows, and knowledge bas
 
 ---
 
+## Who is SINAPSE for?
+
+SINAPSE isn't for everyone. It's opinionated, rigorous, and demands discipline. But for those who need speed **with rigor**, it transforms generative AI from a toy into real infrastructure.
+
+### Ideal for
+
+- **Technical founders** building SaaS solo or in small teams who need to operate like a large team
+- **Consultants and agencies** delivering complete projects (brand + copy + dev + deploy) who need consistent quality across clients
+- **Product teams** who want to eliminate inconsistency between requirements, design, implementation, and QA
+- **Educators** teaching applied AI who need a real framework to demonstrate in class
+- **Independent builders** who treat AI as infrastructure, not as a toy
+
+### Not for
+
+- One-shot projects without continuity or process discipline
+- Teams that prefer total flexibility over governance
+- Users who expect "magic AI" without methodology
+
+If you identify with the first group, you're in the right place.
+
+---
+
 ## Quality and Security
 
 ### Constitutional Enforcement
@@ -257,15 +380,27 @@ Pre-commit and pre-push hooks validate automatically before each operation.
 
 ## CLI Reference
 
+The public surface is intentional -- four canonical lifecycle commands, two diagnostics, one advanced sub-command.
+
 ```bash
-npx sinapse-ai init <name>       # Create project
-npx sinapse-ai install           # Install in current project
-npx sinapse-ai update            # Update framework
-npx sinapse-ai doctor            # System diagnostics
-npx sinapse-ai doctor --fix      # Diagnostics with auto-fix
-npx sinapse-ai info              # System information
-npx sinapse-ai uninstall         # Remove framework
+# Lifecycle
+npx sinapse-ai install           # Install (idempotent -- re-runs are upserts)
+npx sinapse-ai install --force   # Reinstall from scratch, ignoring existing state
+npx sinapse-ai update            # Update to the latest version
+npx sinapse-ai uninstall         # Remove the framework from the project
+
+# Diagnostics
+npx sinapse-ai status            # Installation state + list of squads
+npx sinapse-ai doctor            # 12 health checks against the environment
+npx sinapse-ai doctor --fix      # Auto-fix detected issues
+npx sinapse-ai doctor --json     # Machine-readable output for CI
+npx sinapse-ai doctor --dry-run  # Show what `--fix` would do without applying
+
+# Advanced
+npx sinapse-ai chrome-brain install   # Install browser automation
 ```
+
+All commands are safe to re-run. To list active agents after installing, open Claude Code or Codex CLI and type `@` to autocomplete.
 
 ---
 
@@ -304,6 +439,18 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 
 ---
 
-Built for builders.
+## Ready to start?
+
+```bash
+npx sinapse-ai install
+```
+
+One command. 18 squads. 186 agents. Constitutional governance. All operating directly in the terminal.
+
+**[Full documentation](docs/guides/getting-started.md)** • **[Report issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
+
+---
+
+**Built for builders. Governed by a Constitution. Operating 100% in the terminal.**
 
 **[Back to top](#sinapse-ai)**
