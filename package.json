@@ -94,6 +94,7 @@
     "validate:semantic-lint": "node scripts/semantic-lint.js",
     "validate:docs": "node scripts/validate-install-docs.js",
     "validate:no-external-refs": "node scripts/validate-no-external-refs.js",
+    "validate:story-meta": "node scripts/validate-story-meta.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
@@ -182,6 +183,9 @@
     ],
     ".sinapse-ai/development/agents/*.md": [
       "npm run sync:ide"
+    ],
+    "docs/stories/*.story.md": [
+      "node scripts/validate-story-meta.js --staged"
     ]
   },
   "overrides": {

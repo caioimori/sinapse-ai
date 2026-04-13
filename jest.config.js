@@ -98,22 +98,42 @@ module.exports = {
     '!.sinapse-ai/core/utils/**',
   ],
 
-  // Coverage thresholds (Story TD-3)
-  // Target: 80% global, 85% for core modules
-  // Current baseline (2025-12-27): ~31% (needs improvement)
-  // TEMPORARY: Lowered thresholds for PR #53, #76 (Gemini), #96 (CI fix)
-  // TODO: Restore thresholds after adding tests - tracked in Story SEC-1 follow-up
+  // Coverage thresholds — RATCHET POLICY (Story 10.19)
+  //
+  // These floors track the current actual coverage MINUS a 1pp safety buffer.
+  // A 1pp regression still passes; a 2pp regression fails. The intent is to
+  // make coverage monotonically non-decreasing over time without forcing a
+  // PR to add tests just because of timing.
+  //
+  // To raise the floors:
+  //   1. npm run test:coverage
+  //   2. Read the actual numbers from coverage/lcov-report/index.html
+  //   3. Bump the values below to (actual - 1)
+  //   4. Document the bump in the relevant story's Change Log
+  //
+  // NEVER lower these floors without an explicit story justification.
+  //
+  // Baseline captured 2026-04-13 on Story 10.19 (deterministic re-run after
+  // first reading was inflated by test pollution between runs):
+  //   statements 24.44% -> floor 23
+  //   branches   22.03% -> floor 21
+  //   functions  26.06% -> floor 25
+  //   lines      24.58% -> floor 23
+  //
+  // These floors are deliberately just above the legacy 19-22 floors so the
+  // ratchet starts from an honest, reproducible state. Raising them is
+  // future work for a follow-up story focused on test additions.
+  //
+  // .sinapse-ai/core/ — kept at 38 (legacy floor, was already passing before
+  // this story; raising it requires a separate baseline-capture pass that
+  // this story explicitly leaves out of scope).
   coverageThreshold: {
     global: {
-      branches: 19,
-      functions: 22,
-      lines: 22,
-      statements: 22,
+      branches: 21,
+      functions: 25,
+      lines: 23,
+      statements: 23,
     },
-    // Core modules coverage threshold
-    // TD-6: Adjusted to 45% to reflect current coverage (47.14%)
-    // TEMPORARY: Lowered to 38% for PR #76 - Gemini integration adds many new files
-    // Many core modules are I/O-heavy orchestration that's difficult to unit test
     '.sinapse-ai/core/': {
       lines: 38,
     },
