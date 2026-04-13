@@ -274,9 +274,13 @@ async function generateManifest() {
   fileEntries.sort((a, b) => a.path.localeCompare(b.path));
 
   // Build manifest object
+  // Story 10.27 — `generated_at` removed from the manifest body to keep
+  // the file deterministic across regenerations. Without removal, every
+  // post-commit hook regen produced a new timestamp -> new file content
+  // -> recurring "M install-manifest.yaml" churn in git status. Consumers
+  // (post-install-validator) treat the field as optional metadata.
   const manifest = {
     version: version,
-    generated_at: new Date().toISOString(),
     generator: 'scripts/generate-install-manifest.js',
     file_count: fileEntries.length,
     files: fileEntries,
@@ -318,7 +322,7 @@ async function writeManifest(manifest) {
   console.log(`\nManifest written to: ${manifestPath}`);
   console.log(`  Version: ${manifest.version}`);
   console.log(`  Files: ${manifest.file_count}`);
-  console.log(`  Generated: ${manifest.generated_at}`);
+  console.log(`  Generated: ${new Date().toISOString()}`);
 
   // Also compute and display manifest hash for integrity verification
   const manifestHash = hashString(yamlContent);
