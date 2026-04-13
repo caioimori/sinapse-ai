@@ -11,6 +11,7 @@
 
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 const fse = require('fs-extra');
 
 const { promptLlmChoice } = require('../../bin/cli');
@@ -59,8 +60,7 @@ describe('Story 10.33 — Install non-TTY handling', () => {
     let tempFile;
 
     beforeEach(async () => {
-      const tempDir = path.join(os.tmpdir(), `sinapse-test-non-tty-${Date.now()}`);
-      await fse.ensureDir(tempDir);
+      const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-test-non-tty-'));
       tempFile = path.join(tempDir, 'CLAUDE.md');
       await fse.writeFile(tempFile, '# existing content\n');
     });
