@@ -4,9 +4,7 @@
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 186 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
-    "sinapse-ai": "bin/cli.js",
-    "sinapse-minimal": "bin/sinapse-minimal.js",
-    "sinapse-graph": "bin/sinapse-graph.js"
+    "sinapse-ai": "bin/cli.js"
   },
   "preferGlobal": false,
   "workspaces": [
