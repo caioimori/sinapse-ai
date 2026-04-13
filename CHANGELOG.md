@@ -5,6 +5,16 @@ All notable changes to SINAPSE will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.0-rc.2] - 2026-04-13
+
+Bug fix: `--reconfigure` flag for `npx sinapse-ai install`.
+
+### Fixed
+
+- **Story 10.35** — `npx sinapse-ai install --reconfigure` re-prompts
+  language and LLM choice without wiping existing install. Upsert fast
+  path (plain `install`) is unchanged. Non-TTY guard preserved. PR #69.
+
 ## [10.0.0-rc.1] - 2026-04-13
 
 Phase 0 + Phase 1 closeout for the v10.0.0 release. 15 stories shipped
