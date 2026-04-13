@@ -62,7 +62,8 @@ describe('Onboarding smoke flow (SINAPSE-DIFF-4.0.5)', () => {
     expect(initHelp).toContain('--template');
 
     const versionOutput = runNode(cliBin, ['--version'], tempDir).trim();
-    expect(versionOutput).toMatch(/^\d+\.\d+\.\d+$/);
+    // Accept SemVer with optional prerelease/build metadata (Story 10.32 — 10.0.0-rc.1)
+    expect(versionOutput).toMatch(/^\d+\.\d+\.\d+(?:-[\w.]+)?(?:\+[\w.]+)?$/);
   });
 
   it('validates onboarding docs keep an objective first-value path', async () => {
