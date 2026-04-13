@@ -29,6 +29,16 @@ Diferente de ferramentas que apenas conversam com IA, o SINAPSE impoe disciplina
 
 ---
 
+## Por que SINAPSE existe?
+
+IA generativa tem um problema conhecido: quanto mais voce pede, pior fica. Um unico assistente tentando fazer tudo — codigo, copy, branding, testes, deploy — perde contexto, inventa features e sofre de context amnesia depois de poucas iteracoes longas.
+
+SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 186 agentes em 18 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
+
+O diferencial nao e apenas quantidade de agentes. E **governanca real**: 19 hooks ativos interceptam operacoes em tempo de execucao, uma Constitution com 10 artigos rege o framework, e 6 desses artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas antes de executar, nao detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
+
+---
+
 ## Quick Start
 
 ### 1. Instale
@@ -56,6 +66,58 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 ```
 
 Pronto. Voce tem 18 squads operando no seu terminal.
+
+---
+
+## Por que instalar em cada projeto?
+
+Toda primeira instalacao levanta objecoes. Todas legitimas. Respondidas aqui, no espirito da cultura SINAPSE — direto, sem defensivo.
+
+### "Vou ter multiplas copias no computador. Nao e desperdicio?"
+
+Nao. Cada projeto tem seu proprio `.sinapse-ai/` — assim como tem seu proprio `package.json` ou `node_modules/`. E isso **nao e desperdicio, e isolamento**.
+
+Tamanho real: `.sinapse-ai/` pesa ~500KB. Vinte projetos = 10MB. Menor que um unico `node_modules/` de um projeto Next.js tipico (300MB+). O custo de espaco e marginal. O ganho de isolamento e essencial.
+
+### "Por que nao instalar uma vez global e pronto?"
+
+Porque projetos open source precisam ser **auto-contidos**. Quando voce compartilha um projeto (ou alguem clona o seu), o framework precisa viajar junto.
+
+**Com instalacao local:** `git clone` e pronto. Framework, rules, agentes, Constitution, contexto — tudo ja vem no projeto. Qualquer pessoa, qualquer maquina, qualquer horario: funciona igual.
+
+**Com instalacao global:** quem clona o projeto precisa instalar SINAPSE separado, garantir a mesma versao, copiar rules manualmente, torcer pra nao ter drift entre maquinas. Open source morre assim.
+
+### "Qual a diferenca real entre global e local?"
+
+| Aspecto | Global | Local (recomendado) |
+|---------|:------:|:-------------------:|
+| Espaco em disco | Menor (1 copia) | Maior (~500KB/projeto) |
+| Versionamento per-project | Nao | Sim |
+| Clone e funcionando | Nao | Sim |
+| Rules customizadas por projeto | Nao | Sim |
+| Colaboracao em time | Quebrada | Perfeita |
+| Atualizar sem quebrar outros projetos | Nao | Sim |
+| Open source compativel | Nao | Sim |
+
+### "Funciona no Windows?"
+
+Sim. Testado em Windows 11, macOS e Linux. O instalador detecta o OS automaticamente. WSL nao e obrigatorio (mas recomendado para algumas features avancadas como review automatizado via CodeRabbit).
+
+### "Como atualizar sem perder minhas customizacoes?"
+
+```bash
+npx sinapse-ai update
+```
+
+O update e **idempotente por design**. L1 (framework core) e L2 (templates) sao atualizados. L3 (configuracao) e L4 (suas stories, packages, customizacoes) **nunca sao tocados**. Voce pode rodar `update` quantas vezes quiser, inclusive apos customizar rules localmente. Nada se perde.
+
+### TL;DR
+
+Instalacao local = um pouco mais de disco, muito mais robustez.
+
+Se voce trabalha sozinho e nunca compartilha projetos, global ate funciona — mas assim que voce entra em time, publica open source ou precisa de multiplas versoes em paralelo, local vira imprescindivel.
+
+O SINAPSE otimiza para o caso generico: **seu projeto deve funcionar para qualquer pessoa que clone ele, em qualquer maquina, a qualquer hora**.
 
 ---
 
@@ -213,6 +275,28 @@ Ambas as IDEs tem acesso a todos os 18 squads, 186 agentes, workflows e knowledg
 
 ---
 
+## Para quem e o SINAPSE?
+
+O SINAPSE nao e para todo mundo. Ele e opinativo, rigoroso e exige disciplina. Mas para quem precisa de velocidade **com rigor**, ele transforma IA generativa de brinquedo em infraestrutura real.
+
+### Ideal para
+
+- **Founders tecnicos** que constroem SaaS sozinho ou em times pequenos e precisam operar como um time grande
+- **Consultores e agencias** que entregam projetos completos (brand + copy + dev + deploy) e precisam de qualidade consistente entre clientes
+- **Teams de produto** que querem eliminar inconsistencia entre requisitos, design, implementacao e QA
+- **Educadores** que ensinam IA aplicada e precisam de um framework real para demonstrar em aula
+- **Builders independentes** que tratam IA como infraestrutura, nao como brinquedo
+
+### Nao e para
+
+- Projetos one-shot sem continuidade ou disciplina processual
+- Equipes que preferem flexibilidade total sobre governanca
+- Usuarios que esperam "IA magica" sem metodologia
+
+Se voce se identifica com o primeiro grupo, voce esta no lugar certo.
+
+---
+
 ## Qualidade e Seguranca
 
 ### Enforcement Constitucional
@@ -321,6 +405,18 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes completos.
 
 ---
 
-Construido para quem constroi.
+## Pronto para comecar?
+
+```bash
+npx sinapse-ai install
+```
+
+Um comando. 18 squads. 186 agentes. Governanca constitucional. Tudo operando direto no terminal.
+
+**[Documentacao completa](docs/guides/getting-started.md)** • **[Reportar issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
+
+---
+
+**Construido para quem constroi. Governado por uma Constitution. Operando 100% no terminal.**
 
 **[Voltar ao topo](#sinapse-ai)**
