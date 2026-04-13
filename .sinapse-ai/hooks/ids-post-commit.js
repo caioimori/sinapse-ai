@@ -111,6 +111,28 @@ async function main() {
     // Post-commit hook should NEVER block workflow
     console.error(`[IDS-Hook] Registry update failed (non-blocking): ${err.message}`);
   }
+
+  // Story 10.27 — When .sinapse-ai/ files changed, the registry update we
+  // just ran (and any other auto-managed file under .sinapse-ai/) needs the
+  // install-manifest.yaml to be refreshed too, otherwise the next commit's
+  // pre-commit hook will print "manifest outdated". Regenerate it here so
+  // the working tree converges to a clean state after every commit.
+  const sinapseChanges = changes.some(
+    (c) => c.relativePath && c.relativePath.startsWith('.sinapse-ai/'),
+  );
+  if (sinapseChanges) {
+    try {
+      const { generateManifest, writeManifest } = require(
+        path.resolve(REPO_ROOT, 'scripts/generate-install-manifest.js'),
+      );
+      const manifest = await generateManifest();
+      await writeManifest(manifest);
+      console.log('[IDS-Hook] install-manifest.yaml regenerated to stay in sync.');
+    } catch (err) {
+      // Same non-blocking philosophy as the registry update
+      console.error(`[IDS-Hook] Manifest regen failed (non-blocking): ${err.message}`);
+    }
+  }
 }
 
 main();
