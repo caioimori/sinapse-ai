@@ -137,7 +137,9 @@ describe('generate-install-manifest', () => {
       const manifest = await generateManifest();
 
       expect(manifest).toHaveProperty('version');
-      expect(manifest).toHaveProperty('generated_at');
+      // Story 10.27 — generated_at removed from manifest body for
+      // content determinism. Field is optional metadata.
+      expect(manifest).not.toHaveProperty('generated_at');
       expect(manifest).toHaveProperty('generator');
       expect(manifest).toHaveProperty('file_count');
       expect(manifest).toHaveProperty('files');
