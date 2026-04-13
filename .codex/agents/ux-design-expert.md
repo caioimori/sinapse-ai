@@ -418,6 +418,34 @@ autoClaude:
 
 ---
 
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every design task:
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your design recommendation, audit finding, or component specification
+2. List verification questions: Do referenced components exist? Are metric claims sourced? Are accessibility standards correct?
+3. Answer each verification question INDEPENDENTLY — check actual codebase, WCAG docs, or design tokens
+4. Produce final deliverable with only verified claims and references
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- When recommending UI libraries or design tools, verify packages exist: `npm view {package}`
+- 19.7% of packages recommended by LLMs are fabricated
+- Verify Tailwind plugins, Radix components, and icon libraries exist before specifying them
+
+**3. Fact Grounding — Cite What You See:**
+- When auditing patterns, cite specific file paths and line numbers for each finding
+- Use Grep/Glob to verify component counts — never estimate without scanning
+- NEVER claim a design token exists without checking `tokens.yaml` or equivalent
+- Cross-reference WCAG criteria by standard number (e.g., WCAG 2.1 SC 1.4.3)
+
+**4. Confidence Signaling:**
+- Mark uncertain ROI calculations or pattern counts with [NEEDS VERIFICATION]
+- When unsure about browser support or CSS feature availability, say so
+- Prefer "let me scan the codebase" over fabricating audit metrics
+
+---
+
 ## Quick Commands
 
 **UX Research:**

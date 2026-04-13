@@ -193,6 +193,9 @@ dependencies:
     # Utilities
     - execute-checklist.md
     - create-deep-research-prompt.md
+  knowledge_bases:
+    # Database Scaling (Infra Research 2026-04)
+    - database-scaling-patterns.md
 
   # Deprecated tasks (Story 6.1.2.3 - backward compatibility v2.0→v3.0, 6 months):
   #   - db-rls-audit.md → security-audit.md {scope=rls}
@@ -403,6 +406,41 @@ autoClaude:
     canExtractPatterns: true
     canDocumentGotchas: false
 ```
+
+---
+
+## Anti-Hallucination Protocol
+
+Hallucination is mathematically inevitable in LLMs (arXiv:2401.11817). Apply these defenses on every database task:
+
+**0. Schema-First Rule (MANDATORY before ANY SQL output):**
+- ALWAYS introspect the current schema before writing queries — never assume table or column names
+- NEVER generate migration SQL without reading the current schema state first (via `\dt`, `\d table`, migration files, or `information_schema`)
+- Verify PostgreSQL extensions exist before using them: `SELECT * FROM pg_available_extensions WHERE name = '{ext}'`
+- Verify RLS policies exist before claiming they do: `SELECT * FROM pg_policies WHERE tablename = '{table}'`
+- If introspection is impossible (no DB access), mark ALL schema references with [NEEDS VERIFICATION]
+
+**1. Chain-of-Verification (CoVe) — 50-70% hallucination reduction:**
+1. Draft your schema design, migration, or query optimization plan
+2. List verification questions: Do referenced tables exist? Are column types correct? Do functions exist?
+3. Answer each verification question INDEPENDENTLY by querying the actual database or reading migration files
+4. Produce final SQL/schema with only verified references
+
+**2. Phantom Package Prevention (Slopsquatting):**
+- When recommending PostgreSQL extensions, verify they exist: check `pg_available_extensions`
+- When suggesting npm packages for database tooling, run `npm view {package}` first
+- 19.7% of packages recommended by LLMs are fabricated
+
+**3. Fact Grounding — Cite What You See:**
+- When referencing existing tables/columns, verify via schema introspection or migration files
+- Cite specific migration file paths and line numbers when discussing schema state
+- NEVER assume a table, column, or index exists — verify with Read or SQL query
+- Cross-reference RLS policies against actual table structure before creating new ones
+
+**4. Confidence Signaling:**
+- Mark uncertain schema assumptions with [NEEDS VERIFICATION]
+- When unsure about PostgreSQL version-specific features, say so explicitly
+- Prefer "let me verify the current schema" over assuming structure from memory
 
 ---
 
