@@ -148,20 +148,22 @@ describe('Environment Configuration Integration', () => {
       expect(mode).toBe(0o600);
     });
 
-    it('should create backup of existing .env in non-prompt mode', async () => {
-      // Create existing .env
+    it('should preserve existing .env values via merge (Story 10.38)', async () => {
+      // Create existing .env with a user-defined value
       const envPath = path.join(testDir, '.env');
       await fs.writeFile(envPath, 'EXISTING_KEY=existing_value', 'utf8');
 
-      // Run configuration (skipPrompts mode doesn't backup)
+      // Story 10.38: merge-only policy — existing values are ALWAYS preserved.
       await configureEnvironment({
         targetDir: testDir,
         skipPrompts: true,
       });
 
-      // In skipPrompts mode, no backup is created, file is overwritten
       const content = await fs.readFile(envPath, 'utf8');
-      expect(content).not.toContain('EXISTING_KEY=existing_value');
+      // User value is preserved
+      expect(content).toContain('EXISTING_KEY=existing_value');
+      // SINAPSE variables are added
+      expect(content).toMatch(/OPENROUTER_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY/);
     });
 
     it('should handle errors gracefully', async () => {

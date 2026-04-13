@@ -5,6 +5,23 @@ All notable changes to SINAPSE will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.0-rc.3] - 2026-04-13
+
+Critical UX fix: installer can no longer destroy user config.
+
+### Fixed
+
+- **Story 10.38** — Installer merge-only policy. Existing `CLAUDE.md`,
+  `.env` and other known config files are ALWAYS merged during
+  install — never overwritten, never prompted. User customizations
+  (custom rules, env values) are preserved by default and
+  unconditionally. Files without a registered merge strategy are
+  backed up (`<file>.backup.<ts>`) before any change. Legacy fallback
+  installer (`bin/sinapse-init.js`) now also runs `MarkdownMerger` on
+  existing `CLAUDE.md` instead of plain `fse.copy`. The old
+  `--merge` / `--no-merge` flags are accepted as no-ops for
+  backward compatibility.
+
 ## [10.0.0-rc.2] - 2026-04-13
 
 Bug fix: `--reconfigure` flag for `npx sinapse-ai install`.
