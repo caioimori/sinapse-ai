@@ -87,12 +87,17 @@ Use Grep (not grep), Read (not cat), Edit (not sed), Glob (not find). Prefer nat
 - Agent memory in `.sinapse-ai/development/agents/{id}/MEMORY.md`
 - **Memory as hints:** Memory entries are hints, NOT ground truth. Always verify against actual codebase before acting on remembered facts.
 
+## Token Economy & Response Format (NON-NEGOTIABLE)
+
+Auto-applied to all agents: `~/.claude/rules/token-economy.md` + `~/.claude/rules/response-format.md`. Compact at 60%, model route haiku/sonnet/opus, no preamble, no trailing summary.
+
 ## Delegation & Anti-Hallucination
 
-- **Persona switch** for sequential work, **sub-agent** only for parallel (20K+ tokens each)
-- **Model routing:** `haiku` for routine, `sonnet` for standard, `opus` for complex
-- **Verify** `npm view {pkg}` before adding deps. Cite file:line for code claims.
-- Mark uncertain claims with [NEEDS VERIFICATION]. Compact at 60% context.
+- Persona switch for sequential work, sub-agent only for parallel (20K+ tokens each)
+- Model routing: `haiku` routine, `sonnet` standard, `opus` complex
+- Sub-agents announce their model for visual verification via statusline
+- `npm view {pkg}` before adding deps. Cite file:line for claims.
+- Mark uncertain claims with [NEEDS VERIFICATION]. Compact at 60%.
 
 ---
 *SINAPSE v6.0 — CLI First | Observability Second | UI Third*

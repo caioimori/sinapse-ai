@@ -5,6 +5,99 @@ All notable changes to SINAPSE will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.0-rc.1] - 2026-04-13
+
+Phase 0 + Phase 1 closeout for the v10.0.0 release. 15 stories shipped
+across 5 cycles, +130 tests, zero regressions, deterministic working
+tree, idempotent installer + updater, doctor reachable from canonical
+CLI, hardened cross-IDE parity, and full release-readiness aggregator.
+
+### Added
+
+- **Story 10.17** — External-refs CI guard (`scripts/validate-no-external-refs.js`)
+  scanning 100% of git-tracked files, plus Phase 0 authorial hygiene
+  pass and Epic 11.0 placeholder. PR #51.
+- **Story 10.18** — Cross-IDE parity hardening: self-sufficient
+  `validate-parity.js` error reporting, new `validate:parity:fast`
+  pre-push guard with smart short-circuit, compatibility contract
+  versioning policy (`sinapse-current.yaml`). PR #52.
+- **Story 10.19** — Coverage floor ratchet (jest.config.js policy
+  comment + 23/21/23/25 floors) and story-meta linter
+  (`scripts/validate-story-meta.js`). PR #53.
+- **Story 10.20** — Install upsert idempotente in `bin/cli.js`:
+  `syncDirSync`, `detectExistingInstall`, `--force` escape hatch.
+  Re-running install preserves `installedAt` and reuses prior
+  language/LLM choices. PR #54.
+- **Story 10.21** — `npx sinapse-ai doctor` wired into the canonical
+  CLI with `--fix`, `--dry-run`, `--json`, `--quiet`, `--deep`,
+  `--help` flags. Mirrors legacy `bin/sinapse.js` wiring but uses
+  `process.exitCode` for clean stdout flush. PR #55.
+- **Story 10.22** — Update upsert idempotente: `cmdUpdateGlobal`
+  reuses settings, calls `syncDirSync`, preserves `installedAt`,
+  prints "Update complete" summary mirroring 10.20 install upsert. PR #56.
+- **Story 10.23** — Squad allow-list cleanup. 5 of 6 pre-existing
+  fork attribution files rewritten in authorial voice; the 6th
+  (`skill-craftsman.md`) kept as permanent allow-list entry with
+  documented rationale. PR #57.
+- **Story 10.25** — Coverage Report Summary script
+  (`scripts/coverage-report-summary.js`) replaces the no-op CI step;
+  emits a Markdown table to `$GITHUB_STEP_SUMMARY` so PR reviewers
+  see coverage at a glance. PR #59.
+- **Story 10.28** — Squad orqx activation verification
+  (`scripts/validate-squad-orqx.js`) covering 21 squad orchestrators
+  across 4 distinct file formats. Companion to the existing
+  `validate-agents.js` for core framework agents. PR #61.
+- **Story 10.29** — Release readiness aggregator
+  (`scripts/release-readiness.js`) wraps every validator built
+  throughout Epic 10.0 into one pre-release report. PR #62.
+- **Story 10.31** — Surgical README polish: CLI Reference now matches
+  the canonical command surface, badges include test count and
+  Constitution. PR #64.
+- **Story 10.32** — This release prep: bump to 10.0.0-rc.1 +
+  CHANGELOG entry summarizing all of Phase 0 + Phase 1.
+
+### Fixed
+
+- **Story 10.24** — Registry write idempotency. Changed
+  `_writeRegistry` from `sortKeys: false` to `sortKeys: true`. Two
+  writes of the same data now produce byte-identical files,
+  eliminating the recurring `M entity-registry.yaml` churn that
+  polluted git status throughout cycles 1-2. PR #58.
+- **Story 10.27** — Pre-commit manifest auto-regen. The IDS
+  post-commit hook now also regenerates `install-manifest.yaml`
+  after any `.sinapse-ai/` change, and `generate-install-manifest.js`
+  no longer writes a non-deterministic `generated_at` timestamp
+  into the file body. The recurring "manifest outdated" warning
+  is gone. PR #60.
+
+### Changed
+
+- **Story 10.30** — `sinapse-minimal` and `sinapse-graph` removed
+  from `package.json` `bin`. The .js files stay for one release
+  cycle as direct-node fallbacks, then are deleted entirely in
+  v11. The canonical surface is now exactly two binaries:
+  `sinapse` (legacy router) and `sinapse-ai` (canonical CLI). PR #63.
+
+### Quality Metrics
+
+- Tests: 10599 → 10729 (+130 across cycles 1-5, 0 regressions)
+- Coverage actual: statements 34.9%, branches 32.47%, lines 35.03%,
+  functions 37.73% (all above the 23/21/23/25 ratchet floors)
+- Working tree determinism: every commit converges to clean state
+- CI: 32-33 checks pass per PR (the only "fail" is the standalone
+  CodeQL standalone scan unrelated to PR content)
+- Allow-list shrunk from 6 → 1 permanent entry
+- 6 new validators / scripts in production
+
+### Breaking Changes
+
+None. v10.0.0-rc.1 is fully backward-compatible with 9.x. The only
+removal (`sinapse-minimal` / `sinapse-graph` bin entries) is for
+binaries that have been deprecated since v3.11.1 with runtime
+warnings.
+
+---
+
 ## [6.0.0] - 2026-03-25
 
 ### Breaking Changes
