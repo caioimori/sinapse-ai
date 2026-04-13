@@ -782,19 +782,21 @@ Usage: npx sinapse-ai install [options]
 Install SINAPSE in the current directory.
 
 Options:
-  --force      Overwrite existing SINAPSE installation
+  --force      Overwrite existing SINAPSE installation (destructive, opt-in)
   --quiet      Minimal output (no banner, no prompts) - ideal for CI/CD
   --dry-run    Simulate installation without modifying files
-  --merge      Auto-merge existing config files (brownfield mode)
-  --no-merge   Disable merge option, use legacy overwrite behavior
   -h, --help   Show this help message
 
-Smart Merge (Brownfield):
+Safe Merge (Always On):
   When installing in a project with existing config files (.env, CLAUDE.md),
-  SINAPSE can merge new settings while preserving your customizations.
+  SINAPSE ALWAYS merges — your customizations are never overwritten.
 
   - .env files: Adds new variables, preserves existing values
   - CLAUDE.md: Updates SINAPSE sections, keeps your custom rules
+  - Unknown file types: Backed up automatically before any change
+
+  This behavior is non-negotiable and replaces the old --merge / --no-merge
+  flags (which are accepted as no-ops for backward compatibility).
 
 Exit Codes:
   0  Installation successful
@@ -806,9 +808,6 @@ Examples:
 
   # Force reinstall without prompts
   npx sinapse-ai install --force
-
-  # Brownfield: merge configs automatically
-  npx sinapse-ai install --merge
 
   # Silent install for CI/CD
   npx sinapse-ai install --quiet --force

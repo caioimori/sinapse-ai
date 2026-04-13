@@ -557,6 +557,14 @@ async function main() {
     };
 
     // Step 1: Copy basic IDE rules files
+    // Story 10.38: Merge-only policy. If the target file already exists, we
+    // ALWAYS merge via MarkdownMerger — never overwrite — so that user custom
+    // rules in CLAUDE.md / instructions.md are preserved across re-installs.
+    const { MarkdownMerger } = require(path.join(
+      sourceCoreDir, '..', 'packages', 'installer', 'src', 'merger', 'strategies', 'markdown-merger.js'
+    ));
+    const markdownMerger = new MarkdownMerger();
+
     for (const ide of ides) {
       if (ide !== 'none' && ideRulesMap[ide]) {
         const ideConfig = ideRulesMap[ide];
@@ -565,10 +573,34 @@ async function main() {
 
         if (fs.existsSync(sourceRules)) {
           await fse.ensureDir(path.dirname(targetRules));
-          await fse.copy(sourceRules, targetRules);
-          console.log(
-            chalk.green('✓') + ` ${ide.charAt(0).toUpperCase() + ide.slice(1)} base rules installed`
-          );
+
+          const targetExists = fs.existsSync(targetRules);
+          if (targetExists) {
+            try {
+              const existing = await fse.readFile(targetRules, 'utf8');
+              const incoming = await fse.readFile(sourceRules, 'utf8');
+              const mergeResult = await markdownMerger.merge(existing, incoming);
+              await fse.writeFile(targetRules, mergeResult.content, 'utf8');
+              console.log(
+                chalk.green('✓') +
+                  ` ${ide.charAt(0).toUpperCase() + ide.slice(1)} rules merged (existing content preserved)`
+              );
+            } catch (mergeErr) {
+              // Merge failed: back up existing file before overwriting so nothing is lost.
+              const backupPath = `${targetRules}.backup.${Date.now()}`;
+              await fse.copy(targetRules, backupPath);
+              await fse.copy(sourceRules, targetRules);
+              console.log(
+                chalk.yellow('⚠') +
+                  ` ${ide} rules merge failed (${mergeErr.message}); existing file backed up to ${path.basename(backupPath)}`
+              );
+            }
+          } else {
+            await fse.copy(sourceRules, targetRules);
+            console.log(
+              chalk.green('✓') + ` ${ide.charAt(0).toUpperCase() + ide.slice(1)} base rules installed`
+            );
+          }
         }
       }
     }

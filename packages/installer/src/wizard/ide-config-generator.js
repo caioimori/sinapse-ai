@@ -10,7 +10,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
-const inquirer = require('inquirer');
 const ora = require('ora');
 const { spawnSync } = require('child_process');
 const { getIDEConfig } = require('../config/ide-configs');
@@ -80,51 +79,16 @@ async function backupFile(filePath) {
  * @param {boolean} options.noMerge - If true, don't offer merge option
  * @returns {Promise<string>} Action: 'merge', 'overwrite', 'skip', or 'backup'
  */
-async function promptFileExists(filePath, options = {}) {
-  const { projectType, forceMerge, noMerge } = options;
-  const canMerge = !noMerge && hasMergeStrategy(filePath);
-  const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_SINAPSE';
-
-  // If force merge is set and merge is available, return merge directly
-  if (forceMerge && canMerge) {
+async function promptFileExists(filePath, _options = {}) {
+  // Story 10.38: Merge-only policy. Users who are not developers must never
+  // be able to destroy their own config by choosing "overwrite" in a prompt.
+  // If the file has a registered merge strategy, merge unconditionally.
+  // Otherwise, fall back to a timestamped backup + overwrite (never plain
+  // overwrite, never skip, never prompt).
+  if (hasMergeStrategy(filePath)) {
     return 'merge';
   }
-
-  // Build choices based on available options
-  const choices = [];
-
-  if (canMerge) {
-    choices.push({
-      name: 'Merge (complement existing)',
-      value: 'merge',
-    });
-  }
-
-  choices.push(
-    { name: 'Overwrite completely', value: 'overwrite' },
-    { name: 'Create backup and overwrite', value: 'backup' },
-    { name: 'Skip', value: 'skip' },
-  );
-
-  // Default to merge for brownfield if available, otherwise backup
-  const defaultChoice = isBrownfield && canMerge ? 'merge' : 'backup';
-
-  // Non-TTY (CI, Docker, scripts, agents): skip prompt, use default choice.
-  if (!process.stdin.isTTY) {
-    return defaultChoice;
-  }
-
-  const { action } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'action',
-      message: `File ${path.basename(filePath)} already exists. What would you like to do?`,
-      choices,
-      default: defaultChoice,
-    },
-  ]);
-
-  return action;
+  return 'backup';
 }
 
 /**

@@ -12,7 +12,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const { password, select } = require('@clack/prompts');
+const { password } = require('@clack/prompts');
 const { generateEnvContent, generateEnvExample } = require('./templates/env-template');
 const { generateCoreConfig } = require('./templates/core-config-template');
 const {
@@ -59,52 +59,29 @@ async function configureEnvironment(options = {}) {
   };
 
   try {
-    // Step 1: Check for existing .env and handle with merge/backup/overwrite
+    // Story 10.38: Merge-only policy for existing .env.
+    // Never prompt, never overwrite. If an existing .env is found, we always
+    // merge (preserving user values). If merge strategy is unavailable, we
+    // create a timestamped backup before writing. forceMerge/noMerge flags
+    // are kept as no-ops for backward compatibility.
+    void forceMerge;
+    void noMerge;
+    void skipPrompts;
+    void projectType;
     const envPath = path.join(targetDir, '.env');
     const envExists = await fs.pathExists(envPath);
-    let envAction = 'create'; // 'create', 'merge', 'overwrite', 'skip'
-    const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_SINAPSE';
-    const canMerge = !noMerge && hasMergeStrategy(envPath);
+    let envAction = 'create'; // 'create' | 'merge' | 'overwrite'
+    const canMerge = hasMergeStrategy(envPath);
 
     if (envExists) {
-      // Story 9.4: Handle CLI flags for merge behavior
-      if (forceMerge && canMerge) {
-        // --merge flag: Force merge without prompting
+      if (canMerge) {
         envAction = 'merge';
-        console.log('🔀 Using merge mode (--merge flag)');
-      } else if (skipPrompts) {
-        // Quiet mode: default to merge for brownfield, overwrite for greenfield
-        envAction = isBrownfield && canMerge ? 'merge' : 'overwrite';
       } else {
-        // Interactive mode: Offer merge option for brownfield projects
-        const choices = [];
-
-        if (canMerge) {
-          choices.push({
-            value: 'merge',
-            label: 'Merge (add new variables, keep existing)',
-            hint: isBrownfield ? 'recommended' : '',
-          });
-        }
-
-        choices.push(
-          { value: 'backup', label: 'Backup and overwrite' },
-          { value: 'overwrite', label: 'Overwrite completely' },
-          { value: 'skip', label: 'Skip (keep existing)' },
-        );
-
-        envAction = await select({
-          message: 'Found existing .env file. What would you like to do?',
-          options: choices,
-          initialValue: isBrownfield && canMerge ? 'merge' : 'backup',
-        });
-
-        if (envAction === 'backup') {
-          const backupPath = path.join(targetDir, `.env.backup.${Date.now()}`);
-          await fs.copy(envPath, backupPath);
-          console.log(`✅ Backup created: ${backupPath}`);
-          envAction = 'overwrite';
-        }
+        // Safety net: back up the existing file before writing the new one.
+        const backupPath = path.join(targetDir, `.env.backup.${Date.now()}`);
+        await fs.copy(envPath, backupPath);
+        console.log(`📦 Existing .env backed up to ${path.basename(backupPath)}`);
+        envAction = 'overwrite';
       }
     }
 
@@ -127,9 +104,7 @@ async function configureEnvironment(options = {}) {
     }
 
     // Step 4: Write .env file based on action
-    if (envAction === 'skip') {
-      console.log('⏭️  Skipped .env file (keeping existing)');
-    } else if (envAction === 'merge' && envExists) {
+    if (envAction === 'merge' && envExists) {
       // Merge existing with new
       const existingContent = await fs.readFile(envPath, 'utf8');
       const merger = getMergeStrategy(envPath);

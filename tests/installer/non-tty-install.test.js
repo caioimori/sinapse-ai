@@ -71,39 +71,43 @@ describe('Story 10.33 — Install non-TTY handling', () => {
       }
     });
 
-    test('returns backup default for greenfield in non-TTY mode', async () => {
-      process.stdin.isTTY = false;
+    test('Story 10.38: always returns merge for CLAUDE.md regardless of projectType', async () => {
+      // Greenfield
+      let result = await promptFileExists(tempFile, { projectType: 'GREENFIELD' });
+      expect(result).toBe('merge');
 
-      const result = await promptFileExists(tempFile, { projectType: 'GREENFIELD' });
+      // Brownfield
+      result = await promptFileExists(tempFile, { projectType: 'BROWNFIELD' });
+      expect(result).toBe('merge');
 
-      expect(['merge', 'backup']).toContain(result);
+      // Existing SINAPSE install
+      result = await promptFileExists(tempFile, { projectType: 'EXISTING_SINAPSE' });
+      expect(result).toBe('merge');
     });
 
-    test('returns merge default for brownfield when merge strategy available', async () => {
-      process.stdin.isTTY = false;
+    test('Story 10.38: ignores forceMerge/noMerge flags (merge is unconditional)', async () => {
+      let result = await promptFileExists(tempFile, { forceMerge: true });
+      expect(result).toBe('merge');
 
+      result = await promptFileExists(tempFile, { noMerge: true });
+      expect(result).toBe('merge');
+    });
+
+    test('Story 10.38: does not prompt user (works in non-TTY)', async () => {
+      process.stdin.isTTY = false;
       const result = await promptFileExists(tempFile, { projectType: 'BROWNFIELD' });
-
-      expect(['merge', 'backup']).toContain(result);
+      expect(result).toBe('merge');
     });
 
-    test('does not throw ERR_USE_AFTER_CLOSE in non-TTY mode', async () => {
-      process.stdin.isTTY = false;
+    test('Story 10.38: falls back to backup for file types without merge strategy', async () => {
+      const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-test-nomerge-'));
+      const unknownFile = path.join(tempDir, 'config.unknown');
+      await fse.writeFile(unknownFile, 'stuff');
 
-      await expect(
-        promptFileExists(tempFile, { projectType: 'BROWNFIELD' }),
-      ).resolves.toBeDefined();
-    });
+      const result = await promptFileExists(unknownFile, { projectType: 'GREENFIELD' });
+      expect(result).toBe('backup');
 
-    test('honors forceMerge shortcut regardless of TTY', async () => {
-      process.stdin.isTTY = false;
-
-      const result = await promptFileExists(tempFile, {
-        projectType: 'BROWNFIELD',
-        forceMerge: true,
-      });
-
-      expect(['merge', 'backup']).toContain(result);
+      await fse.remove(tempDir);
     });
   });
 });
