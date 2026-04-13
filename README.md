@@ -2,6 +2,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
 [![CI](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-10729%20passed-success)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
+[![Constitution](https://img.shields.io/badge/Constitution-10%20articles-blueviolet)](.sinapse-ai/constitution.md)
 
 ```
  ____  ___ _   _    _    ____  ____  _____
@@ -35,13 +37,16 @@ Diferente de ferramentas que apenas conversam com IA, o SINAPSE impoe disciplina
 npx sinapse-ai install
 ```
 
-O wizard detecta seu ambiente, configura a IDE e instala os squads automaticamente.
+O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex), e instala os 18 squads automaticamente. Re-rodar o comando faz upsert idempotente — preserva suas customizacoes e so atualiza o que mudou.
 
 ### 2. Verifique
 
 ```bash
-npx sinapse-ai doctor
+npx sinapse-ai status   # Lista de squads + agentes instalados
+npx sinapse-ai doctor   # 12 health checks contra o ambiente
 ```
+
+Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 
 ### 3. Ative seu primeiro agente
 
@@ -257,15 +262,27 @@ Pre-commit e pre-push hooks validam automaticamente antes de cada operacao.
 
 ## CLI Reference
 
+A superficie publica e proposital — quatro comandos canonicos de lifecycle, dois diagnosticos, um sub-comando avancado.
+
 ```bash
-npx sinapse-ai init <nome>       # Criar projeto
-npx sinapse-ai install           # Instalar no projeto atual
-npx sinapse-ai update            # Atualizar framework
-npx sinapse-ai doctor            # Diagnostico do sistema
-npx sinapse-ai doctor --fix      # Diagnostico com correcao
-npx sinapse-ai info              # Informacoes do sistema
-npx sinapse-ai uninstall         # Remover framework
+# Lifecycle
+npx sinapse-ai install           # Instala (idempotente — re-runs sao upserts)
+npx sinapse-ai install --force   # Reinstala do zero, ignorando estado existente
+npx sinapse-ai update            # Atualiza para a versao mais recente
+npx sinapse-ai uninstall         # Remove o framework do projeto
+
+# Diagnostico
+npx sinapse-ai status            # Estado da instalacao + lista de squads
+npx sinapse-ai doctor            # 12 health checks contra o ambiente
+npx sinapse-ai doctor --fix      # Auto-corrige problemas detectados
+npx sinapse-ai doctor --json     # Saida machine-readable para CI
+npx sinapse-ai doctor --dry-run  # Mostra o que `--fix` faria sem aplicar
+
+# Avancado
+npx sinapse-ai chrome-brain install   # Instala browser automation
 ```
+
+Todos os comandos sao seguros para re-rodar. Para listar agentes ativos depois de instalar, abra Claude Code ou Codex CLI e digite `@` para autocompletar.
 
 ---
 
