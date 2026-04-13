@@ -244,28 +244,28 @@ describe('validate-no-external-refs', () => {
   });
 
   // ─────────────────────────────────────────────────────────────────────────
-  describe('pre-existing BMAD fork attribution allow-list (QA v1.1)', () => {
+  describe('skill-craftsman permanent allow-list (Story 10.23)', () => {
     let root;
 
     beforeAll(() => {
-      root = makeTmpRoot('bmad-fork');
+      root = makeTmpRoot('skill-craftsman-allowlist');
       initGit(root);
       writeFile(
         root,
-        'squads/claude-code-mastery/README.md',
+        'squads/claude-code-mastery/agents/skill-craftsman.md',
         [
-          '# Claude Code Mastery',
+          '# skill-craftsman',
           '',
-          'This squad was originally forked from the BMAD Method project.',
+          'This agent studies BMAD Method patterns by design.',
           '',
         ].join('\n'),
       );
-      gitAdd(root, 'squads/claude-code-mastery/README.md');
+      gitAdd(root, 'squads/claude-code-mastery/agents/skill-craftsman.md');
     });
 
     afterAll(() => cleanup(root));
 
-    test('pre-existing fork README is allow-listed', () => {
+    test('skill-craftsman.md is permanently allow-listed', () => {
       const result = validateNoExternalRefs(root);
       expect(result.ok).toBe(true);
       expect(result.violations).toEqual([]);
@@ -443,8 +443,20 @@ describe('validate-no-external-refs', () => {
       ).toBe(true);
     });
 
-    test('pre-existing BMAD fork README is allow-listed', () => {
-      expect(isAllowListed('squads/claude-code-mastery/README.md')).toBe(true);
+    test('skill-craftsman.md is permanently allow-listed (Story 10.23)', () => {
+      expect(
+        isAllowListed('squads/claude-code-mastery/agents/skill-craftsman.md'),
+      ).toBe(true);
+    });
+
+    test('previously-allow-listed README is now NOT allow-listed (Story 10.23 rewrite)', () => {
+      expect(isAllowListed('squads/claude-code-mastery/README.md')).toBe(false);
+    });
+
+    test('previously-allow-listed swarm-orchestration is now NOT allow-listed (Story 10.23 rewrite)', () => {
+      expect(
+        isAllowListed('squads/squad-claude/knowledge-base/swarm-orchestration-patterns.md'),
+      ).toBe(false);
     });
 
     test('arbitrary source file is not allow-listed', () => {

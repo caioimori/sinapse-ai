@@ -321,9 +321,9 @@ Workers request authorization for dangerous operations via a queue:
 
 ---
 
-## BMAD Method Patterns
+## Spec-Driven Agile-AI Patterns
 
-BMAD (Breakthrough Method for Agile AI-Driven Development) v6 provides patterns SINAPSE can adopt.
+External agile-AI methodologies focused on spec-first development with strong human-in-the-loop checkpoints provide patterns SINAPSE can adopt.
 
 ### Document Sharding
 

@@ -110,7 +110,7 @@ agents:
   skill-craftsman:
     file: agents/skill-craftsman.md
     tier: 2
-    based_on: "BMAD-CODE-ORG + community"
+    based_on: "spec-driven agile-AI methodology + community"
     icon: "🛠️"
     focus: "Skills, commands, plugins, context engineering, spec-driven dev"
 

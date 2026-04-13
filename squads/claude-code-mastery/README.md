@@ -34,7 +34,7 @@
 | 1 | mcp-integrator | Piper | Peter Steinberger (@steipete) | 791 | MCP servers, tool discovery, context budget |
 | 1 | swarm-orqx | Nexus | Kieran Klaassen + Reuven Cohen | 1,008 | Agent teams, subagents, parallel execution |
 | 1 | config-engineer | Sigil | SuperClaude-Org | 663 | Settings, permissions, CLAUDE.md, sandbox |
-| 2 | skill-craftsman | Anvil | BMAD-CODE-ORG | 1,046 | Skills, plugins, commands, context engineering |
+| 2 | skill-craftsman | Anvil | spec-driven agile-AI methodology | 1,046 | Skills, plugins, commands, context engineering |
 | 2 | project-integrator | Conduit | Daniel Miessler (PAI) | 959 | Project integration, CI/CD, SINAPSE bridge |
 | 2 | roadmap-sentinel | Vigil | Boris Cherny | 707 | Roadmap, changelog, feature adoption |
 
@@ -84,7 +84,7 @@ This squad was created through iterative research with devil's advocate validati
 | **Kieran Klaassen** | TeammateTool discovery, swarm patterns documentation | [Gists](https://gist.github.com/kieranklaassen) |
 | **Reuven Cohen** (ruvnet) | Ruflo orchestration platform, 54+ agents, WASM kernels | [GitHub](https://github.com/ruvnet/ruflo) |
 | **SuperClaude-Org** | 9 cognitive personas, 5 behavioral modes, pure .md config | [GitHub](https://github.com/SuperClaude-Org/SuperClaude_Framework) |
-| **BMAD-CODE-ORG** | BMAD Method, 21 agents, 50+ workflows, spec-driven development | [Docs](https://docs.bmad-method.org/) |
+| **Spec-driven agile-AI methodology** | 21 agents, 50+ workflows, spec-first development with strong human-in-the-loop | (community research) |
 | **Daniel Miessler** | Personal AI Infrastructure (PAI), Unix philosophy for AI | [Blog](https://danielmiessler.com/), [GitHub](https://github.com/danielmiessler/Personal_AI_Infrastructure) |
 | **Boris Cherny** | Claude Code creator, plan-first methodology, parallel instances | [Blog](https://boristane.com/), [Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built) |
 

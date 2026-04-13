@@ -10,7 +10,7 @@ All notable changes to the Claude Code Mastery squad.
 - 3 multi-phase workflows (wf-project-setup, wf-knowledge-update, wf-audit-complete)
 - 5 knowledge base files (quick-ref, project-type-signatures, hook-patterns, ci-cd-patterns, mcp-catalog)
 - 7 templates (5 CLAUDE.md project templates + 2 GitHub Actions workflows)
-- 8 mind DNA summaries (disler, steipete, kieran-klaassen, reuven-cohen, superclaude-org, bmad-code-org, daniel-miessler, boris-cherny)
+- 8 mind DNA summaries from prominent Claude Code practitioners and agile-AI methodology researchers
 - 1 validation script (validate-setup.js)
 - Tier architecture: Tier 0 (Diagnosis), Tier 1 (Core Mastery), Tier 2 (Strategic & Context)
 - Handoff matrix with full routing between all agents
