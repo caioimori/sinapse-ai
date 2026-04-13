@@ -866,13 +866,18 @@ async function cmdUpdateGlobal() {
     process.exit(1);
   }
 
+  // Story 10.22 — reuse settings from existing install
+  const existing = detectExistingInstall();
+  const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
+
   // Welcome back screen
   console.log(`${BOLD}  Que bom que voce voltou!${NC}`);
-  console.log(`${DIM}  Vamos atualizar seu SINAPSE AI para a v${VERSION}.${NC}`);
+  console.log(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
   console.log('');
 
-  // LLM selection (inquirer checkbox with readline fallback)
-  const llmChoice = await promptLlmChoice();
+  // Story 10.22 — skip LLM prompt when previous llm known. To re-prompt,
+  // run `npx sinapse-ai install --force`.
+  const llmChoice = existing.llm || await promptLlmChoice();
 
   console.log('');
   console.log(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
@@ -881,20 +886,27 @@ async function cmdUpdateGlobal() {
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
   const squads = getSquads(squadsSrcBase);
 
-  // Phase 1: Re-copy squads
-  console.log(`${CYAN}Phase 1:${NC} Updating squads`);
+  // Phase 1: Sync squads (Story 10.22 — replaces rmDir+copy with syncDirSync)
+  console.log(`${CYAN}Phase 1:${NC} Refreshing squads`);
+  const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
   for (const squad of squads) {
     const src = path.join(squadsSrcBase, squad.name);
     const dest = path.join(SINAPSE_HOME, squad.name);
-    rmDirSync(dest);
-    copyDirSync(src, dest);
-    console.log(`  ${GREEN}OK${NC} ${squad.name}`);
+    const delta = syncDirSync(src, dest);
+    totalDelta.added += delta.added;
+    totalDelta.updated += delta.updated;
+    totalDelta.unchanged += delta.unchanged;
+    totalDelta.removed += delta.removed;
+    console.log(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
   }
 
   const sinapseMasterSrc = path.join(ROOT, 'sinapse');
   if (fs.existsSync(sinapseMasterSrc)) {
-    rmDirSync(path.join(SINAPSE_HOME, 'sinapse'));
-    copyDirSync(sinapseMasterSrc, path.join(SINAPSE_HOME, 'sinapse'));
+    const delta = syncDirSync(sinapseMasterSrc, path.join(SINAPSE_HOME, 'sinapse'));
+    totalDelta.added += delta.added;
+    totalDelta.updated += delta.updated;
+    totalDelta.unchanged += delta.unchanged;
+    totalDelta.removed += delta.removed;
     console.log(`  ${GREEN}OK${NC} sinapse (orqx)`);
   }
 
@@ -966,13 +978,25 @@ async function cmdUpdateGlobal() {
   generateSquadAwareness(SINAPSE_HOME, squads);
   console.log(`  ${GREEN}OK${NC} squad-awareness.md`);
 
-  // Update metadata
+  // Update metadata (Story 10.22 — preserve installedAt, bump version + updatedAt)
   const metaPath = path.join(SINAPSE_HOME, 'metadata.json');
   const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+  // installedAt preserved by NOT touching it
   meta.updatedAt = new Date().toISOString();
+  meta.version = VERSION;
   meta.squads = squads.length;
   meta.commands = writtenAgents.size;
+  meta.llm = llmChoice;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+
+  // Story 10.22 — Update summary block (mirrors Story 10.20 install upsert)
+  console.log('');
+  console.log(`${BOLD}Update complete:${NC}`);
+  console.log(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
+  console.log(`  ${CYAN}Squads:${NC}  ${squads.length} refreshed`);
+  console.log(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
+  console.log(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
+  console.log(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
 
   // Phase 4: Update project-local files (.sinapse-ai/, .claude/)
   console.log(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
