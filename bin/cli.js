@@ -282,6 +282,7 @@ async function cmdInstallGlobal(opts = {}) {
 
   // Story 10.20 — Upsert detection
   const force = Boolean(opts.force);
+  const reconfigure = Boolean(opts.reconfigure);
   const existing = force ? { upsert: false } : detectExistingInstall();
   const isUpsert = existing.upsert;
 
@@ -291,7 +292,7 @@ async function cmdInstallGlobal(opts = {}) {
   } else if (isUpsert) {
     const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
     console.log(`${BOLD}  Detected existing install (v${prevVer}). Refreshing in place...${NC}`);
-    console.log(`${DIM}  Use --force to wipe and reinstall fresh.${NC}`);
+    console.log(`${DIM}  Use --force to wipe and reinstall fresh. Use --reconfigure to re-prompt language/LLM.${NC}`);
     console.log('');
   } else {
     console.log(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
@@ -300,7 +301,8 @@ async function cmdInstallGlobal(opts = {}) {
   }
 
   // Language selection (skipped in upsert mode if already known, or non-TTY)
-  let language = isUpsert && existing.language ? existing.language : null;
+  // Story 10.35: --reconfigure forces prompt even in upsert mode
+  let language = (isUpsert && !reconfigure && existing.language) ? existing.language : null;
   if (!language) {
     language = 'pt';
     if (process.stdin.isTTY) {
@@ -348,7 +350,8 @@ async function cmdInstallGlobal(opts = {}) {
   } catch { /* non-critical */ }
 
   // LLM selection (skipped in upsert mode if previous llm known)
-  const llmChoice = isUpsert && existing.llm ? existing.llm : await promptLlmChoice();
+  // Story 10.35: --reconfigure forces prompt even in upsert mode
+  const llmChoice = (isUpsert && !reconfigure && existing.llm) ? existing.llm : await promptLlmChoice();
 
   console.log('');
   console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
@@ -1220,8 +1223,9 @@ Exit codes:
 function cmdHelp() {
   header();
   console.log(`${BOLD}Commands:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai install${NC}          Install SINAPSE (idempotent — re-runs are upserts)`);
-  console.log(`  ${CYAN}npx sinapse-ai install --force${NC}  Wipe and reinstall fresh, even if already installed`);
+  console.log(`  ${CYAN}npx sinapse-ai install${NC}               Install SINAPSE (idempotent — re-runs are upserts)`);
+  console.log(`  ${CYAN}npx sinapse-ai install --force${NC}       Wipe and reinstall fresh, even if already installed`);
+  console.log(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-prompt language/LLM without wiping existing install`);
   console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
   console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
   console.log('');
@@ -1266,9 +1270,10 @@ function runRouter() {
   const command = args[0] || 'help';
   const isLocal = args.includes('--local');
   const isForce = args.includes('--force');
+  const isReconfigure = args.includes('--reconfigure');
 
   switch (command) {
-    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce }).catch(e => { console.error(e.message); process.exit(1); }); break;
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { console.error(e.message); process.exit(1); }); break;
     case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
     case 'uninstall': cmdUninstall(); break;
     case 'list':     cmdList(); break;
