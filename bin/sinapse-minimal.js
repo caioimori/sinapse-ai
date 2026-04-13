@@ -3,10 +3,16 @@
 /**
  * SINAPSE-FullStack Minimal Installation
  *
- * DEPRECATED (since v3.11.1, scheduled for removal in v5.0.0):
- * The --minimal mode was designed for squads which have been
- * replaced by the Squads system (OSR-8). This command now runs the
- * standard wizard through the main router.
+ * REMOVED FROM PUBLIC SURFACE — Story 10.30 (Cycle 5)
+ *
+ * As of v10.0.0 this binary is no longer registered in package.json
+ * `bin`, so `npm install -g sinapse-ai` does not install a
+ * `sinapse-minimal` shim anymore. The file is kept in the repo for one
+ * release cycle as a forwarder, then will be deleted entirely in v11.
+ *
+ * Originally deprecated in v3.11.1 (Story 10.13 added the deprecation
+ * warning). The "minimal" install is no longer a real distinct mode —
+ * `npx sinapse-ai install` is the single canonical entry point.
  */
 
 const { spawn } = require('child_process');
