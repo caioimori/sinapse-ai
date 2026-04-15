@@ -17,7 +17,16 @@ jest.mock(
       globalThis.__doctorMockState__.lastCallOptions = options;
       return globalThis.__doctorMockState__.mockResult;
     }),
-    DOCTOR_VERSION: '2.0.0-test',
+    // Story A.3: expose resolveExitCode so the CLI wrapper uses the canonical mapping.
+    resolveExitCode: jest.fn((result) => {
+      if (!result || !result.data) return 3;
+      if (result.data.internalError) return 3;
+      const s = result.data.summary || {};
+      if ((s.fail || 0) > 0) return 2;
+      if ((s.warn || 0) > 0) return 1;
+      return 0;
+    }),
+    DOCTOR_VERSION: '2.1.0-test',
   }),
   { virtual: true },
 );
@@ -26,12 +35,14 @@ const { cmdDoctor } = require('../../bin/cli');
 
 describe('Story 10.21 — cmdDoctor wiring', () => {
   let originalExitCode;
-  let consoleLogSpy;
+  let stdoutSpy;
 
+  // Story A.2 — cmdDoctor now writes via the shared logger which targets
+  // process.stdout.write directly, so we spy on that instead of console.log.
   beforeEach(() => {
     originalExitCode = process.exitCode;
     process.exitCode = 0;
-    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    stdoutSpy = jest.spyOn(process.stdout, 'write').mockImplementation(() => true);
     globalThis.__doctorMockState__.lastCallOptions = null;
     globalThis.__doctorMockState__.mockResult = {
       formatted: '== mock doctor output ==',
@@ -40,7 +51,7 @@ describe('Story 10.21 — cmdDoctor wiring', () => {
   });
 
   afterEach(() => {
-    consoleLogSpy.mockRestore();
+    stdoutSpy.mockRestore();
     process.exitCode = originalExitCode;
   });
 
@@ -48,8 +59,8 @@ describe('Story 10.21 — cmdDoctor wiring', () => {
     const result = await cmdDoctor({ help: true });
     expect(result.formatted).toBe('');
     expect(globalThis.__doctorMockState__.lastCallOptions).toBeNull();
-    expect(consoleLogSpy).toHaveBeenCalled();
-    const helpText = consoleLogSpy.mock.calls.map((call) => call.join(' ')).join('\n');
+    expect(stdoutSpy).toHaveBeenCalled();
+    const helpText = stdoutSpy.mock.calls.map((call) => String(call[0])).join('');
     expect(helpText).toContain('Usage: npx sinapse-ai doctor');
     expect(helpText).toContain('--fix');
     expect(helpText).toContain('--json');
@@ -80,26 +91,47 @@ describe('Story 10.21 — cmdDoctor wiring', () => {
 
   it('prints the formatted result', async () => {
     await cmdDoctor({});
-    const allOutput = consoleLogSpy.mock.calls.map((call) => call.join(' ')).join('\n');
+    const allOutput = stdoutSpy.mock.calls.map((call) => String(call[0])).join('');
     expect(allOutput).toContain('== mock doctor output ==');
   });
 
-  it('keeps process.exitCode at 0 when summary.fail === 0', async () => {
+  it('keeps process.exitCode at 0 when all checks PASS (Story A.3)', async () => {
     globalThis.__doctorMockState__.mockResult = {
       formatted: 'all good',
-      data: { summary: { pass: 5, warn: 2, fail: 0, info: 1 } },
+      data: { summary: { pass: 5, warn: 0, fail: 0, info: 1 } },
     };
     await cmdDoctor({});
     expect(process.exitCode).toBe(0);
   });
 
-  it('sets process.exitCode to 1 when summary.fail > 0', async () => {
+  it('sets process.exitCode to 2 when summary.fail > 0 (Story A.3)', async () => {
     globalThis.__doctorMockState__.mockResult = {
       formatted: 'some failures',
       data: { summary: { pass: 5, warn: 0, fail: 3, info: 0 } },
     };
     await cmdDoctor({});
+    expect(process.exitCode).toBe(2);
+  });
+
+  it('sets process.exitCode to 1 when WARN only (Story A.3)', async () => {
+    globalThis.__doctorMockState__.mockResult = {
+      formatted: 'warnings',
+      data: { summary: { pass: 5, warn: 2, fail: 0, info: 0 } },
+    };
+    await cmdDoctor({});
     expect(process.exitCode).toBe(1);
+  });
+
+  it('sets process.exitCode to 3 when internal error (Story A.3)', async () => {
+    globalThis.__doctorMockState__.mockResult = {
+      formatted: 'internal error',
+      data: {
+        summary: { pass: 0, warn: 0, fail: 0, info: 0 },
+        internalError: { message: 'boom' },
+      },
+    };
+    await cmdDoctor({});
+    expect(process.exitCode).toBe(3);
   });
 
   it('returns the result object so callers can inspect it', async () => {

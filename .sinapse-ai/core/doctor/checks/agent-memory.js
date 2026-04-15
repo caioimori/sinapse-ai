@@ -60,5 +60,9 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run, EXPECTED_AGENTS };
+// Story A.3: agent memory directories may not exist yet on a fresh install.
+// Treat runtime exceptions as WARN so fresh installs exit cleanly.
+const onError = 'warn';
+
+module.exports = { name, run, EXPECTED_AGENTS, onError };
 

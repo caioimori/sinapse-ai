@@ -5,6 +5,15 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
+// Story A.2 — unified logger. Levels: error/warn/info/debug.
+// Flags: --verbose, --debug, --quiet, --json. Default level: warn.
+const {
+  getLogger,
+  shouldShowHeader,
+  markFirstRunDone,
+} = require('../.sinapse-ai/core/logger');
+const logger = getLogger();
+
 // ══════════════════════════════════════════════════════════════════════════════
 // Sinapse CLI — Global + Local installer for Claude Code agent squads
 // ══════════════════════════════════════════════════════════════════════════════
@@ -29,18 +38,31 @@ const NC = '\x1b[0m';
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function header() {
+  // Story A.2 AC 7 — ASCII art only on --verbose / --debug OR first-run.
+  // Never in --quiet or --json mode.
+  if (!shouldShowHeader(logger)) return;
   const W = `${WHITE}${BOLD}`;
-  console.log('');
-  console.log(`${W} ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗     █████╗ ██╗${NC}`);
-  console.log(`${W} ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║${NC}`);
-  console.log(`${W} ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗      ███████║██║${NC}`);
-  console.log(`${W} ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝      ██╔══██║██║${NC}`);
-  console.log(`${W} ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗    ██║  ██║██║${NC}`);
-  console.log(`${W} ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝${NC}`);
-  console.log('');
-  console.log(`${DIM} Seu copiloto de inteligencia artificial${NC}`);
-  console.log(`${DIM} v${VERSION}${NC}`);
-  console.log('');
+  const lines = [
+    '',
+    `${W} ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗     █████╗ ██╗${NC}`,
+    `${W} ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║${NC}`,
+    `${W} ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗      ███████║██║${NC}`,
+    `${W} ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝      ██╔══██║██║${NC}`,
+    `${W} ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗    ██║  ██║██║${NC}`,
+    `${W} ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝${NC}`,
+    '',
+    `${DIM} Seu copiloto de inteligencia artificial${NC}`,
+    `${DIM} v${VERSION}${NC}`,
+    '',
+  ];
+  // Write directly to stdout so the header still shows on first-run even when
+  // the logger level is `warn` (default). `shouldShowHeader` is the single
+  // gate that decides whether we get here at all.
+  for (const line of lines) {
+    try { process.stdout.write(`${line}\n`); } catch { /* ignore */ }
+  }
+  // Mark first-run done so subsequent runs stay clean unless --verbose.
+  markFirstRunDone();
 }
 
 function getSquads(baseDir) {
@@ -259,11 +281,11 @@ async function promptLlmChoice() {
     const readline = require('readline');
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
     return new Promise((resolve) => {
-      console.log(`${CYAN}  Escolha sua LLM:${NC}`);
-      console.log(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
-      console.log(`    ${GREEN}2${NC}) Codex CLI`);
-      console.log(`    ${GREEN}3${NC}) Ambos`);
-      console.log('');
+      logger.always(`${CYAN}  Escolha sua LLM:${NC}`);
+      logger.always(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
+      logger.always(`    ${GREEN}2${NC}) Codex CLI`);
+      logger.always(`    ${GREEN}3${NC}) Ambos`);
+      logger.always('');
       rl.question(`  ${BOLD}Opcao [1/2/3]:${NC} `, (answer) => {
         rl.close();
         const choice = (answer || '1').trim();
@@ -287,17 +309,17 @@ async function cmdInstallGlobal(opts = {}) {
   const isUpsert = existing.upsert;
 
   if (force && fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
-    console.log(`${YELLOW}--force flag detected: running fresh install (overwriting any existing install).${NC}`);
-    console.log('');
+    logger.always(`${YELLOW}--force flag detected: running fresh install (overwriting any existing install).${NC}`);
+    logger.always('');
   } else if (isUpsert) {
     const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
-    console.log(`${BOLD}  Detected existing install (v${prevVer}). Refreshing in place...${NC}`);
-    console.log(`${DIM}  Use --force to wipe and reinstall fresh. Use --reconfigure to re-prompt language/LLM.${NC}`);
-    console.log('');
+    logger.always(`${BOLD}  Detected existing install (v${prevVer}). Refreshing in place...${NC}`);
+    logger.always(`${DIM}  Use --force to wipe and reinstall fresh. Use --reconfigure to re-prompt language/LLM.${NC}`);
+    logger.always('');
   } else {
-    console.log(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
-    console.log(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
-    console.log('');
+    logger.always(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+    logger.always(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
+    logger.always('');
   }
 
   // Language selection (skipped in upsert mode if already known, or non-TTY)
@@ -324,9 +346,9 @@ async function cmdInstallGlobal(opts = {}) {
         const readline = require('readline');
         const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
         language = await new Promise((resolve) => {
-          console.log(`  ${CYAN}Language / Idioma:${NC}`);
-          console.log(`    ${GREEN}1${NC}) Portugues`);
-          console.log(`    ${GREEN}2${NC}) English`);
+          logger.always(`  ${CYAN}Language / Idioma:${NC}`);
+          logger.always(`    ${GREEN}1${NC}) Portugues`);
+          logger.always(`    ${GREEN}2${NC}) English`);
           rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
             rl.close();
             resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
@@ -353,19 +375,19 @@ async function cmdInstallGlobal(opts = {}) {
   // Story 10.35: --reconfigure forces prompt even in upsert mode
   const llmChoice = (isUpsert && !reconfigure && existing.llm) ? existing.llm : await promptLlmChoice();
 
-  console.log('');
-  console.log(`${BOLD}Installing Sinapse globally...${NC}\n`);
+  logger.always('');
+  logger.always(`${BOLD}Installing Sinapse globally...${NC}\n`);
 
   // Validate package — squads live in squads/ subdirectory
   const squadsDir = path.join(ROOT, 'squads');
   const squads = getSquads(fs.existsSync(squadsDir) ? squadsDir : ROOT);
   if (squads.length === 0) {
-    console.error(`${RED}ERROR: No squad directories found in package.${NC}`);
+    logger.error(`${RED}ERROR: No squad directories found in package.${NC}`);
     process.exit(1);
   }
 
   // Phase 1: Copy squads to ~/.sinapse/
-  console.log(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);
+  logger.always(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);
   fs.mkdirSync(SINAPSE_HOME, { recursive: true });
 
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
@@ -384,11 +406,11 @@ async function cmdInstallGlobal(opts = {}) {
       totalDelta.unchanged += delta.unchanged;
       totalDelta.removed += delta.removed;
       if (existedBefore) squadsRefreshed += 1; else squadsAdded += 1;
-      console.log(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
+      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
     } else {
       rmDirSync(dest);
       copyDirSync(src, dest);
-      console.log(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
+      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
     }
     totalAgents += squad.agents;
   }
@@ -409,11 +431,11 @@ async function cmdInstallGlobal(opts = {}) {
     }
     const masterAgents = getAgentFiles(sinapseMasterDest).length;
     totalAgents += masterAgents;
-    console.log(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
+    logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
   }
 
   // Phase 2: Generate orqx commands
-  console.log(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
+  logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
 
   // Clear old commands
@@ -457,7 +479,7 @@ async function cmdInstallGlobal(opts = {}) {
       }
     }
   }
-  console.log(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
+  logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
@@ -466,7 +488,7 @@ async function cmdInstallGlobal(opts = {}) {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
+    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
   }
 
   if (llmChoice === 'codex' || llmChoice === 'both') {
@@ -475,20 +497,20 @@ async function cmdInstallGlobal(opts = {}) {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
+    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
   }
 
   // Phase 3: Generate squad-awareness.md
-  console.log(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
+  logger.always(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
   generateSquadAwareness(SINAPSE_HOME, squads);
-  console.log(`  ${GREEN}OK${NC} squad-awareness.md`);
+  logger.always(`  ${GREEN}OK${NC} squad-awareness.md`);
 
   // Phase 4: Create launcher
-  console.log(`\n${CYAN}Phase 4:${NC} Creating launcher`);
+  logger.always(`\n${CYAN}Phase 4:${NC} Creating launcher`);
   createLauncher();
 
   // Phase 5: PATH management
-  console.log(`\n${CYAN}Phase 5:${NC} Configuring PATH`);
+  logger.always(`\n${CYAN}Phase 5:${NC} Configuring PATH`);
   ensurePath();
 
   // Phase 6: Write metadata (Story 10.20 — preserve installedAt on upsert)
@@ -512,14 +534,14 @@ async function cmdInstallGlobal(opts = {}) {
   // Story 10.20 — Upsert summary block
   if (isUpsert) {
     const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
-    console.log('');
-    console.log(`${BOLD}Upsert complete:${NC}`);
-    console.log(`  ${CYAN}Mode:${NC}    upsert (--force to reinstall)`);
-    console.log(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
-    console.log(`  ${CYAN}Squads:${NC}  ${squadsRefreshed} refreshed${squadsAdded ? ', ' + squadsAdded + ' added' : ''}`);
-    console.log(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
-    console.log(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
-    console.log(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
+    logger.always('');
+    logger.always(`${BOLD}Upsert complete:${NC}`);
+    logger.always(`  ${CYAN}Mode:${NC}    upsert (--force to reinstall)`);
+    logger.always(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
+    logger.always(`  ${CYAN}Squads:${NC}  ${squadsRefreshed} refreshed${squadsAdded ? ', ' + squadsAdded + ' added' : ''}`);
+    logger.always(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
+    logger.always(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
+    logger.always(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
   }
 
   // Chrome Brain: Auto-install browser automation
@@ -528,23 +550,23 @@ async function cmdInstallGlobal(opts = {}) {
       const { detectChrome, detectPlatform, installScripts, installHooks, installMcp, installKnowledgeBase } = require('./modules/chrome-brain-installer');
       const chromePath = detectChrome();
       if (chromePath) {
-        console.log(`\n${CYAN}Phase 7:${NC} Chrome Brain (browser automation)`);
+        logger.always(`\n${CYAN}Phase 7:${NC} Chrome Brain (browser automation)`);
         const platform = detectPlatform();
         installScripts(chromePath, platform);
         installHooks();
         installMcp(platform);
         installKnowledgeBase();
-        console.log(`  ${GREEN}OK${NC} Chrome Brain installed — all agents can control Chrome`);
+        logger.always(`  ${GREEN}OK${NC} Chrome Brain installed — all agents can control Chrome`);
       } else {
-        console.log(`\n${YELLOW}SKIP${NC} Chrome Brain — Chrome not found (install Chrome and run: npx sinapse-ai chrome-brain install)`);
+        logger.always(`\n${YELLOW}SKIP${NC} Chrome Brain — Chrome not found (install Chrome and run: npx sinapse-ai chrome-brain install)`);
       }
     } catch (error) {
-      console.log(`\n${YELLOW}SKIP${NC} Chrome Brain: ${error.message}`);
+      logger.always(`\n${YELLOW}SKIP${NC} Chrome Brain: ${error.message}`);
     }
   }
 
   // Phase 8: Install project-local files (.sinapse-ai/, .claude/, .env)
-  console.log(`\n${CYAN}Phase 8:${NC} Installing project files in current directory`);
+  logger.always(`\n${CYAN}Phase 8:${NC} Installing project files in current directory`);
   try {
     const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
     if (fs.existsSync(wizardPath)) {
@@ -554,17 +576,17 @@ async function cmdInstallGlobal(opts = {}) {
         language: language,
         selectedLLM: llmChoice,
       });
-      console.log(`  ${GREEN}OK${NC} Project files installed (.sinapse-ai/, .claude/)`);
+      logger.always(`  ${GREEN}OK${NC} Project files installed (.sinapse-ai/, .claude/)`);
     } else {
-      console.log(`  ${YELLOW}SKIP${NC} Project installer not available`);
+      logger.always(`  ${YELLOW}SKIP${NC} Project installer not available`);
     }
   } catch (error) {
-    console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
-    console.log(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete setup${NC}`);
+    logger.always(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
+    logger.always(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete setup${NC}`);
   }
 
   // Verify
-  console.log(`\n${CYAN}Verification:${NC}`);
+  logger.always(`\n${CYAN}Verification:${NC}`);
   verifyInstall();
 
   // Success message
@@ -573,18 +595,18 @@ async function cmdInstallGlobal(opts = {}) {
   else if (llmChoice === 'both') startCmd = `Run ${CYAN}sinapse${NC} or ${CYAN}codex${NC} to start`;
   else startCmd = `Run ${CYAN}sinapse${NC} to start Claude Code with all agents`;
 
-  console.log('');
-  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  console.log(`${GREEN}  Sinapse installed successfully!${NC}`);
-  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  console.log('');
-  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
-  console.log(`  ${startCmd}`);
-  console.log('');
-  console.log(`  ${BOLD}Try an agent:${NC}`);
-  console.log(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
-  console.log(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
-  console.log('');
+  logger.always('');
+  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  logger.always(`${GREEN}  Sinapse installed successfully!${NC}`);
+  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  logger.always('');
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
+  logger.always(`  ${startCmd}`);
+  logger.always('');
+  logger.always(`  ${BOLD}Try an agent:${NC}`);
+  logger.always(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
+  logger.always(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  logger.always('');
 }
 
 function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
@@ -774,13 +796,13 @@ exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-orqx "$@"
   const bashPath = path.join(BIN_DIR, 'sinapse');
   fs.writeFileSync(bashPath, bashLauncher);
   try { fs.chmodSync(bashPath, 0o755); } catch {}
-  console.log(`  ${GREEN}OK${NC} ~/bin/sinapse`);
+  logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse`);
 
   // Windows CMD launcher
   if (IS_WIN) {
     const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-orqx %*\r\n`;
     fs.writeFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
-    console.log(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
+    logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
   }
 }
 
@@ -790,7 +812,7 @@ function ensurePath() {
   const alreadyInPath = pathDirs.some(p => path.normalize(p) === binNorm);
 
   if (alreadyInPath) {
-    console.log(`  ${YELLOW}SKIP${NC} ~/bin already in PATH`);
+    logger.always(`  ${YELLOW}SKIP${NC} ~/bin already in PATH`);
     return;
   }
 
@@ -800,7 +822,7 @@ function ensurePath() {
     ensurePathUnix();
   }
 
-  console.log(`  ${YELLOW}NOTE${NC} Restart your terminal for PATH changes`);
+  logger.always(`  ${YELLOW}NOTE${NC} Restart your terminal for PATH changes`);
 }
 
 function ensurePathUnix() {
@@ -814,13 +836,13 @@ function ensurePathUnix() {
     const content = fs.readFileSync(rcPath, 'utf8');
     if (content.includes(marker) || content.includes(exportLine)) continue;
     fs.appendFileSync(rcPath, `\n${marker}\n${exportLine}\n`);
-    console.log(`  ${GREEN}OK${NC} Updated ~/${rc}`);
+    logger.always(`  ${GREEN}OK${NC} Updated ~/${rc}`);
     return;
   }
 
   // If no RC file found, create .profile
   fs.writeFileSync(path.join(HOME, '.profile'), `${marker}\n${exportLine}\n`, { flag: 'a' });
-  console.log(`  ${GREEN}OK${NC} Created ~/.profile`);
+  logger.always(`  ${GREEN}OK${NC} Created ~/.profile`);
 }
 
 function ensurePathWindows() {
@@ -830,24 +852,24 @@ function ensurePathWindows() {
     const currentPath = match ? match[1].trim() : '';
 
     if (currentPath.includes('%USERPROFILE%\\bin') || currentPath.includes(BIN_DIR.replace(/\//g, '\\'))) {
-      console.log(`  ${YELLOW}SKIP${NC} ~/bin already in Windows PATH`);
+      logger.always(`  ${YELLOW}SKIP${NC} ~/bin already in Windows PATH`);
       return;
     }
 
     const newPath = currentPath ? `${currentPath};%USERPROFILE%\\bin` : '%USERPROFILE%\\bin';
     if (newPath.length > 900) {
-      console.log(`  ${YELLOW}WARN${NC} PATH too long for setx. Add manually: ${BIN_DIR}`);
+      logger.always(`  ${YELLOW}WARN${NC} PATH too long for setx. Add manually: ${BIN_DIR}`);
       return;
     }
 
     execSync(`setx PATH "${newPath}"`, { encoding: 'utf8', stdio: 'pipe' });
-    console.log(`  ${GREEN}OK${NC} Added ~/bin to Windows User PATH`);
+    logger.always(`  ${GREEN}OK${NC} Added ~/bin to Windows User PATH`);
   } catch {
     try {
       execSync(`setx PATH "%USERPROFILE%\\bin"`, { encoding: 'utf8', stdio: 'pipe' });
-      console.log(`  ${GREEN}OK${NC} Created Windows User PATH with ~/bin`);
+      logger.always(`  ${GREEN}OK${NC} Created Windows User PATH with ~/bin`);
     } catch {
-      console.log(`  ${YELLOW}WARN${NC} Could not modify PATH. Add manually: ${BIN_DIR}`);
+      logger.always(`  ${YELLOW}WARN${NC} Could not modify PATH. Add manually: ${BIN_DIR}`);
     }
   }
 }
@@ -861,7 +883,7 @@ function verifyInstall() {
   ];
 
   for (const [ok, msg] of checks) {
-    console.log(`  ${ok ? GREEN + '✓' : RED + '✗'}${NC} ${msg}`);
+    logger.always(`  ${ok ? GREEN + '✓' : RED + '✗'}${NC} ${msg}`);
   }
 }
 
@@ -871,7 +893,7 @@ async function cmdUpdateGlobal() {
   header();
 
   if (!fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
-    console.log(`${YELLOW}Sinapse not installed globally. Run: npx sinapse-ai install${NC}\n`);
+    logger.always(`${YELLOW}Sinapse not installed globally. Run: npx sinapse-ai install${NC}\n`);
     process.exit(1);
   }
 
@@ -880,23 +902,23 @@ async function cmdUpdateGlobal() {
   const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
 
   // Welcome back screen
-  console.log(`${BOLD}  Que bom que voce voltou!${NC}`);
-  console.log(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
-  console.log('');
+  logger.always(`${BOLD}  Que bom que voce voltou!${NC}`);
+  logger.always(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
+  logger.always('');
 
   // Story 10.22 — skip LLM prompt when previous llm known. To re-prompt,
   // run `npx sinapse-ai install --force`.
   const llmChoice = existing.llm || await promptLlmChoice();
 
-  console.log('');
-  console.log(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
+  logger.always('');
+  logger.always(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
 
   const squadsDir = path.join(ROOT, 'squads');
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
   const squads = getSquads(squadsSrcBase);
 
   // Phase 1: Sync squads (Story 10.22 — replaces rmDir+copy with syncDirSync)
-  console.log(`${CYAN}Phase 1:${NC} Refreshing squads`);
+  logger.always(`${CYAN}Phase 1:${NC} Refreshing squads`);
   const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
   for (const squad of squads) {
     const src = path.join(squadsSrcBase, squad.name);
@@ -906,7 +928,7 @@ async function cmdUpdateGlobal() {
     totalDelta.updated += delta.updated;
     totalDelta.unchanged += delta.unchanged;
     totalDelta.removed += delta.removed;
-    console.log(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
+    logger.always(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
   }
 
   const sinapseMasterSrc = path.join(ROOT, 'sinapse');
@@ -916,11 +938,11 @@ async function cmdUpdateGlobal() {
     totalDelta.updated += delta.updated;
     totalDelta.unchanged += delta.unchanged;
     totalDelta.removed += delta.removed;
-    console.log(`  ${GREEN}OK${NC} sinapse (orqx)`);
+    logger.always(`  ${GREEN}OK${NC} sinapse (orqx)`);
   }
 
   // Phase 2: Regenerate commands (reuse install logic)
-  console.log(`\n${CYAN}Phase 2:${NC} Regenerating commands`);
+  logger.always(`\n${CYAN}Phase 2:${NC} Regenerating commands`);
   // Clear and regenerate
   rmDirSync(CLAUDE_COMMANDS_DIR);
   fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
@@ -959,7 +981,7 @@ async function cmdUpdateGlobal() {
       writtenAgents.add(file);
     }
   }
-  console.log(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
+  logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
@@ -969,7 +991,7 @@ async function cmdUpdateGlobal() {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
+    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
   }
 
   if (llmChoice === 'codex' || llmChoice === 'both') {
@@ -979,13 +1001,13 @@ async function cmdUpdateGlobal() {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
     }
-    console.log(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
+    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
   }
 
   // Phase 3: Regenerate awareness
-  console.log(`\n${CYAN}Phase 3:${NC} Updating squad-awareness`);
+  logger.always(`\n${CYAN}Phase 3:${NC} Updating squad-awareness`);
   generateSquadAwareness(SINAPSE_HOME, squads);
-  console.log(`  ${GREEN}OK${NC} squad-awareness.md`);
+  logger.always(`  ${GREEN}OK${NC} squad-awareness.md`);
 
   // Update metadata (Story 10.22 — preserve installedAt, bump version + updatedAt)
   const metaPath = path.join(SINAPSE_HOME, 'metadata.json');
@@ -999,16 +1021,16 @@ async function cmdUpdateGlobal() {
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
 
   // Story 10.22 — Update summary block (mirrors Story 10.20 install upsert)
-  console.log('');
-  console.log(`${BOLD}Update complete:${NC}`);
-  console.log(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
-  console.log(`  ${CYAN}Squads:${NC}  ${squads.length} refreshed`);
-  console.log(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
-  console.log(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
-  console.log(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
+  logger.always('');
+  logger.always(`${BOLD}Update complete:${NC}`);
+  logger.always(`  ${CYAN}Version:${NC} ${prevVer} -> ${VERSION}`);
+  logger.always(`  ${CYAN}Squads:${NC}  ${squads.length} refreshed`);
+  logger.always(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
+  logger.always(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
+  logger.always(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
 
   // Phase 4: Update project-local files (.sinapse-ai/, .claude/)
-  console.log(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
+  logger.always(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
   try {
     const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
     if (fs.existsSync(wizardPath)) {
@@ -1018,13 +1040,13 @@ async function cmdUpdateGlobal() {
         language: meta.language || 'pt',
         selectedLLM: llmChoice,
       });
-      console.log(`  ${GREEN}OK${NC} Project files updated (.sinapse-ai/, .claude/)`);
+      logger.always(`  ${GREEN}OK${NC} Project files updated (.sinapse-ai/, .claude/)`);
     } else {
-      console.log(`  ${YELLOW}SKIP${NC} Project installer not available`);
+      logger.always(`  ${YELLOW}SKIP${NC} Project installer not available`);
     }
   } catch (error) {
-    console.log(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
-    console.log(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete update${NC}`);
+    logger.always(`  ${YELLOW}WARN${NC} Project files: ${error.message}`);
+    logger.always(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete update${NC}`);
   }
 
   let startCmd;
@@ -1032,21 +1054,21 @@ async function cmdUpdateGlobal() {
   else if (llmChoice === 'both') startCmd = `Digite ${CYAN}sinapse${NC} ou ${CYAN}codex${NC} para comecar`;
   else startCmd = `Digite ${CYAN}sinapse${NC} para comecar`;
 
-  console.log('');
-  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  console.log(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
-  console.log(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  console.log('');
-  console.log(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
-  console.log(`  ${startCmd}`);
-  console.log('');
+  logger.always('');
+  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  logger.always(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
+  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  logger.always('');
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
+  logger.always(`  ${startCmd}`);
+  logger.always('');
 }
 
 // ── Uninstall ────────────────────────────────────────────────────────────────
 
 function cmdUninstall() {
   header();
-  console.log(`${BOLD}Uninstalling Sinapse...${NC}\n`);
+  logger.always(`${BOLD}Uninstalling Sinapse...${NC}\n`);
 
   const items = [
     [SINAPSE_HOME, '~/.sinapse/'],
@@ -1063,14 +1085,14 @@ function cmdUninstall() {
       } else {
         fs.unlinkSync(p);
       }
-      console.log(`  ${GREEN}✓${NC} Removed ${label}`);
+      logger.always(`  ${GREEN}✓${NC} Removed ${label}`);
     } else {
-      console.log(`  ${YELLOW}-${NC} ${label} (not found)`);
+      logger.always(`  ${YELLOW}-${NC} ${label} (not found)`);
     }
   }
 
-  console.log(`\n${GREEN}Sinapse uninstalled.${NC}`);
-  console.log(`${YELLOW}Note:${NC} PATH entry in shell RC files was not removed. Clean up manually if desired.\n`);
+  logger.always(`\n${GREEN}Sinapse uninstalled.${NC}`);
+  logger.always(`${YELLOW}Note:${NC} PATH entry in shell RC files was not removed. Clean up manually if desired.\n`);
 }
 
 // ── Local Install (existing behavior) ────────────────────────────────────────
@@ -1085,7 +1107,7 @@ function toPosixPath(p) {
 function runBash(script) {
   const scriptPath = path.join(ROOT, script);
   if (!fs.existsSync(scriptPath)) {
-    console.error(`${RED}Script not found: ${script}${NC}`);
+    logger.error(`${RED}Script not found: ${script}${NC}`);
     process.exit(1);
   }
 
@@ -1117,13 +1139,13 @@ function runBash(script) {
 
 function cmdInstallLocal() {
   header();
-  console.log(`${CYAN}▸ Installing squads in current project...${NC}\n`);
+  logger.always(`${CYAN}▸ Installing squads in current project...${NC}\n`);
   runBash('scripts/install-squads.sh');
 }
 
 function cmdUpdateLocal() {
   header();
-  console.log(`${CYAN}▸ Updating squads in current project...${NC}\n`);
+  logger.always(`${CYAN}▸ Updating squads in current project...${NC}\n`);
   runBash('scripts/update-squads.sh');
 }
 
@@ -1135,41 +1157,41 @@ function cmdList() {
   const squads = getSquads(baseDir);
   let totalAgents = 0, totalTasks = 0;
 
-  console.log(`${BOLD}Squads available:${NC}\n`);
+  logger.always(`${BOLD}Squads available:${NC}\n`);
 
   for (const s of squads) {
     totalAgents += s.agents;
     totalTasks += s.tasks;
     const agents = `${s.agents} agents`.padStart(10);
     const tasks = `${s.tasks} tasks`.padStart(10);
-    console.log(`  ${CYAN}${s.name.padEnd(25)}${NC} ${GREEN}${agents}${NC} ${YELLOW}${tasks}${NC}  ${s.desc}`);
+    logger.always(`  ${CYAN}${s.name.padEnd(25)}${NC} ${GREEN}${agents}${NC} ${YELLOW}${tasks}${NC}  ${s.desc}`);
   }
 
-  console.log('');
-  console.log(`  ${BOLD}Total: ${GREEN}${totalAgents} agents${NC} | ${YELLOW}${totalTasks} tasks${NC}`);
-  console.log(`  ${BOLD}Invoke: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  console.log('');
+  logger.always('');
+  logger.always(`  ${BOLD}Total: ${GREEN}${totalAgents} agents${NC} | ${YELLOW}${totalTasks} tasks${NC}`);
+  logger.always(`  ${BOLD}Invoke: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  logger.always('');
 }
 
 function cmdStatus() {
   header();
 
   // Check global install
-  console.log(`${BOLD}Global Install:${NC}\n`);
+  logger.always(`${BOLD}Global Install:${NC}\n`);
 
   if (fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) {
     const meta = JSON.parse(fs.readFileSync(path.join(SINAPSE_HOME, 'metadata.json'), 'utf8'));
-    console.log(`  ${GREEN}✓${NC} Installed (v${meta.version})`);
-    console.log(`  ${GREEN}✓${NC} ${meta.squads} squads, ${meta.commands || '?'} agents`);
-    console.log(`  ${GREEN}✓${NC} Installed: ${meta.installedAt}`);
-    if (meta.updatedAt) console.log(`  ${GREEN}✓${NC} Updated: ${meta.updatedAt}`);
+    logger.always(`  ${GREEN}✓${NC} Installed (v${meta.version})`);
+    logger.always(`  ${GREEN}✓${NC} ${meta.squads} squads, ${meta.commands || '?'} agents`);
+    logger.always(`  ${GREEN}✓${NC} Installed: ${meta.installedAt}`);
+    if (meta.updatedAt) logger.always(`  ${GREEN}✓${NC} Updated: ${meta.updatedAt}`);
   } else {
-    console.log(`  ${RED}✗${NC} Not installed globally`);
-    console.log(`  ${YELLOW}Run:${NC} npx sinapse-ai install`);
+    logger.always(`  ${RED}✗${NC} Not installed globally`);
+    logger.always(`  ${YELLOW}Run:${NC} npx sinapse-ai install`);
   }
 
   verifyInstall();
-  console.log('');
+  logger.always('');
 }
 
 // cmdDoctor — Story 10.21
@@ -1178,7 +1200,7 @@ function cmdStatus() {
 // process.exitCode (rather than process.exit) to let stdout flush cleanly.
 async function cmdDoctor(opts = {}) {
   if (opts.help) {
-    console.log(`Usage: npx sinapse-ai doctor [options]
+    logger.always(`Usage: npx sinapse-ai doctor [options]
 
 Run health checks against the SINAPSE environment.
 
@@ -1190,16 +1212,18 @@ Options:
   --deep           Run deep checks too (slower)
   --help, -h       Show this help
 
-Exit codes:
-  0   All checks PASS or WARN
-  1   At least one check FAIL
+Exit codes (Story A.3):
+  0   PASS — all checks passed, no warnings
+  1   WARN only — non-blocking issues detected
+  2   FAIL — at least one blocking check failed
+  3   Internal error — doctor runner crashed
 `);
     return { ok: true, formatted: '', data: null };
   }
 
   const doctorModulePath = path.join(__dirname, '..', '.sinapse-ai', 'core', 'doctor');
   // eslint-disable-next-line global-require
-  const { runDoctorChecks } = require(doctorModulePath);
+  const { runDoctorChecks, resolveExitCode } = require(doctorModulePath);
   const result = await runDoctorChecks({
     fix: Boolean(opts.fix),
     json: Boolean(opts.json),
@@ -1210,10 +1234,19 @@ Exit codes:
   });
 
   if (result && result.formatted) {
-    console.log(result.formatted);
+    logger.always(result.formatted);
   }
 
-  if (result && result.data && result.data.summary && result.data.summary.fail > 0) {
+  // Story A.3 — precise exit code mapping:
+  //   0 PASS | 1 WARN only | 2 FAIL | 3 internal runner error
+  // Fall back to resolveExitCode when available (module may be mocked in tests
+  // that pre-date A.3; in that case, keep the legacy 0/1 behavior).
+  if (typeof resolveExitCode === 'function') {
+    const code = resolveExitCode(result);
+    if (code !== 0) {
+      process.exitCode = code;
+    }
+  } else if (result && result.data && result.data.summary && result.data.summary.fail > 0) {
     process.exitCode = 1;
   }
 
@@ -1222,29 +1255,29 @@ Exit codes:
 
 function cmdHelp() {
   header();
-  console.log(`${BOLD}Commands:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai install${NC}               Install SINAPSE (idempotent — re-runs are upserts)`);
-  console.log(`  ${CYAN}npx sinapse-ai install --force${NC}       Wipe and reinstall fresh, even if already installed`);
-  console.log(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-prompt language/LLM without wiping existing install`);
-  console.log(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
-  console.log(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
-  console.log('');
-  console.log(`  ${DIM}Works in CI / non-interactive environments (uses sensible defaults).${NC}`);
-  console.log('');
-  console.log(`${BOLD}Diagnostics:${NC}\n`);
-  console.log(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
-  console.log(`  ${CYAN}npx sinapse-ai doctor${NC}           Run health checks (--fix --dry-run --json --deep)`);
-  console.log(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
-  console.log(`  ${CYAN}npx sinapse-ai help${NC}             Show this help`);
-  console.log('');
-  console.log(`${BOLD}After install:${NC}\n`);
-  console.log(`  ${CYAN}sinapse${NC}                      Start Claude Code with all agents`);
-  console.log(`  ${CYAN}sinapse --continue${NC}           Continue last session`);
-  console.log('');
-  console.log(`${BOLD}Agents:${NC}\n`);
-  console.log(`  All agents use: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  console.log(`  Example: ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
-  console.log('');
+  logger.always(`${BOLD}Commands:${NC}\n`);
+  logger.always(`  ${CYAN}npx sinapse-ai install${NC}               Install SINAPSE (idempotent — re-runs are upserts)`);
+  logger.always(`  ${CYAN}npx sinapse-ai install --force${NC}       Wipe and reinstall fresh, even if already installed`);
+  logger.always(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-prompt language/LLM without wiping existing install`);
+  logger.always(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
+  logger.always(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
+  logger.always('');
+  logger.always(`  ${DIM}Works in CI / non-interactive environments (uses sensible defaults).${NC}`);
+  logger.always('');
+  logger.always(`${BOLD}Diagnostics:${NC}\n`);
+  logger.always(`  ${CYAN}npx sinapse-ai status${NC}           Check installation status`);
+  logger.always(`  ${CYAN}npx sinapse-ai doctor${NC}           Run health checks (--fix --dry-run --json --deep)`);
+  logger.always(`  ${CYAN}npx sinapse-ai list${NC}             List all squads and agents`);
+  logger.always(`  ${CYAN}npx sinapse-ai help${NC}             Show this help`);
+  logger.always('');
+  logger.always(`${BOLD}After install:${NC}\n`);
+  logger.always(`  ${CYAN}sinapse${NC}                      Start Claude Code with all agents`);
+  logger.always(`  ${CYAN}sinapse --continue${NC}           Continue last session`);
+  logger.always('');
+  logger.always(`${BOLD}Agents:${NC}\n`);
+  logger.always(`  All agents use: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  logger.always(`  Example: ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  logger.always('');
 }
 
 // ── Router ───────────────────────────────────────────────────────────────────
@@ -1273,8 +1306,8 @@ function runRouter() {
   const isReconfigure = args.includes('--reconfigure');
 
   switch (command) {
-    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { console.error(e.message); process.exit(1); }); break;
-    case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { console.error(e.message); process.exit(1); });  break;
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { logger.error(e.message); process.exit(1); }); break;
+    case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(e.message); process.exit(1); });  break;
     case 'uninstall': cmdUninstall(); break;
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
@@ -1289,7 +1322,7 @@ function runRouter() {
         quiet: doctorArgs.includes('--quiet'),
         deep: doctorArgs.includes('--deep'),
       };
-      cmdDoctor(doctorOpts).catch(e => { console.error(`${RED}doctor error:${NC} ${e.message}`); process.exit(1); });
+      cmdDoctor(doctorOpts).catch(e => { logger.error(`${RED}doctor error:${NC} ${e.message}`); process.exit(1); });
       break;
     }
   case 'chrome-brain': {
@@ -1303,7 +1336,7 @@ function runRouter() {
         const { runChromeBrain } = require('./modules/chrome-brain-installer');
         await runChromeBrain(chromeBrainArgs);
       } catch (e) {
-        console.error(`${RED}chrome-brain error:${NC} ${e.message}`);
+        logger.error(`${RED}chrome-brain error:${NC} ${e.message}`);
         process.exit(1);
       }
     })();
@@ -1313,8 +1346,8 @@ function runRouter() {
     case '--help':
     case '-h':       cmdHelp(); break;
     default:
-      console.error(`${RED}Unknown command:${NC} ${command}`);
-      console.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
+      logger.error(`${RED}Unknown command:${NC} ${command}`);
+      logger.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
       process.exit(1);
   }
 }

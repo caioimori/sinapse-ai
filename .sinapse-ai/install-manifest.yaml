@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 10.0.0-rc.1
+version: 10.0.0-rc.3
 generator: scripts/generate-install-manifest.js
-file_count: 1151
+file_count: 1154
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -300,73 +300,73 @@ files:
     type: template
     size: 728
   - path: core/doctor/checks/agent-memory.js
-    hash: sha256:9e3eaf1e779a483f9fd56da7b4a10101f41fe3814ece1d99e8aebe29b264a46f
+    hash: sha256:adad35cd3995b813cb9d87fd617fbbe7784397edb0f58c3114511ba45bc76f19
     type: core
-    size: 1376
+    size: 1555
   - path: core/doctor/checks/claude-md.js
-    hash: sha256:cf1069dd6f8d0d85e50da135029c4ad8c3eeef98df05ecb70fcb77488301686a
+    hash: sha256:c35202407eedc1835021e82642e64497345d66d83eb387e8ab693cdd3c3d2af5
     type: core
-    size: 1196
+    size: 1312
   - path: core/doctor/checks/code-intel.js
-    hash: sha256:0f78d62945df1f6b55e1fb9e0d2f1550069b87efb121e43926ab1f2c368309b6
+    hash: sha256:92575328f8cf65e1a24d82eafa7225bf080a60a3aab8de60ddee1737196c0b70
     type: core
-    size: 4105
+    size: 4298
   - path: core/doctor/checks/commands-count.js
-    hash: sha256:3355330d74c0e2c8ec628515936f202715c4a26fbca558aef2236aac48130d51
+    hash: sha256:9a0cf5d3dd327a9daaac90f8347d4d36933e6d7c43eb58910b3a185c7ae7cd48
     type: core
-    size: 1725
+    size: 1812
   - path: core/doctor/checks/constitution-consistency.js
-    hash: sha256:8da440ef623c8ba300a73f9833fb5b7c5f6e45e50694b488b7580c9738bfb1d8
+    hash: sha256:56d9b1585b6bb1888c38a4799b9121d624cad88646720c10217d219731c97d28
     type: core
-    size: 3139
+    size: 3236
   - path: core/doctor/checks/core-config.js
-    hash: sha256:591d6b04eecb4ca2058fa6b919f1b2f16f072e23f507271a06fc7a46928d9d11
+    hash: sha256:77b3a167f52a6145aeaf83ac4ce558ec7b8efd66beccfa05ec106367315d7e9a
     type: core
-    size: 1213
+    size: 1325
   - path: core/doctor/checks/entity-registry.js
-    hash: sha256:a119b2b0121caaeeedf3c8071f0d3ff76a15e4f227c47c47b716e7052c45ba46
+    hash: sha256:abf0ccde886034d64445188d04707b9433b7e32c4255c0375b4ad1b427851e76
     type: core
-    size: 1339
+    size: 1581
   - path: core/doctor/checks/git-hooks.js
-    hash: sha256:2d6979a01f6366c17deb34b4aabcea68a20e8fd55b344960460fd1b4d41f5d19
+    hash: sha256:57bcea17d4317083b6b22bae5bd1ce785d93eb904413aded287595038cb347e6
     type: core
-    size: 1031
+    size: 1212
   - path: core/doctor/checks/graph-dashboard.js
-    hash: sha256:e4be727c83e281ca9035e3bbfba46fc5e8b6be95e9996d7b6d11a0cc9f3a045a
+    hash: sha256:6996b47faf1945ed27a24db2a0061c46f9fd0069b0c73a8af0f4b68d68142047
     type: core
-    size: 1112
+    size: 1202
   - path: core/doctor/checks/hooks-claude-count.js
-    hash: sha256:e8d40654b551ba161d5eca4cb070d86078fc1df0611d3678d7000d8fb17ba41e
+    hash: sha256:a57af232ba33178c0d581dc10588bfdc256c41db28c5d433b967ba952d10778f
     type: core
-    size: 3355
+    size: 3529
   - path: core/doctor/checks/ide-sync.js
-    hash: sha256:cc61d0237f1aac5041887923acacc1b275481b2f5d14586ed6a1495ad04bd9b4
+    hash: sha256:833092abcbfef419b8dc40a61b9c832b54fcef212b3f5e516c152dc49a147299
     type: core
-    size: 2160
+    size: 2275
   - path: core/doctor/checks/index.js
     hash: sha256:46c492327d3aa9e704ee098c43fad1fd884edfb96620d15f51e6f54699f1ea39
     type: core
     size: 1418
   - path: core/doctor/checks/node-version.js
-    hash: sha256:feca6394a162fcf0a8a0eed3ad5f80853c16ba03b97a7a3011a0d49ddc94cce6
+    hash: sha256:1128759128fd60822b6dc08527442bc88bc713266ef1561fcfcba5dd31992a84
     type: core
-    size: 676
+    size: 785
   - path: core/doctor/checks/npm-packages.js
-    hash: sha256:fda1c46b7611399191983b4d8800f41ea0340979867e644374bfc548efb65d24
+    hash: sha256:770d0ae3a6232ca6f09a5ed68bddbed14d8303d061279a3947a0679546d645a3
     type: core
-    size: 2305
+    size: 2416
   - path: core/doctor/checks/rules-files.js
-    hash: sha256:31f77fdd73874acdd1e4bc74b1ec67fb8c1bdfac07626efd379457f72d7343fe
+    hash: sha256:16205df27fd9c8d73de42593429afbe6b2c4d70cca4bdde3a51b704f1d292e63
     type: core
-    size: 1434
+    size: 1552
   - path: core/doctor/checks/settings-json.js
-    hash: sha256:0abcf3c18dc12a80ea147b286e44b06896d92a4289dbe723d13afe96757fd4e7
+    hash: sha256:7ed4e501be86f1e306c6eeac97641bfc3efedb1d541bd5883ed10f8d3204fb19
     type: core
-    size: 3297
+    size: 3411
   - path: core/doctor/checks/skills-count.js
-    hash: sha256:f26d7f56ef615a5e00bab7d117611b70617cae2e40badf87dc499fb562cbbaca
+    hash: sha256:4861a2330ce5f3c696d53fc768d1575e03c4efcd5a217185d392556d2b1576cc
     type: core
-    size: 1590
+    size: 1675
   - path: core/doctor/fix-handler.js
     hash: sha256:1463b78a16235f184da1d5d39af089d56641aaab585c0c0ccb326b566f6297de
     type: core
@@ -380,9 +380,9 @@ files:
     type: core
     size: 1461
   - path: core/doctor/index.js
-    hash: sha256:e63be0d9a3a974c74232b89a99f13340dc85e65d420806a9d783c127b90eee90
+    hash: sha256:6c7c5ede24379c217376df9113b2f77dce0592d08b830bec6120e1517b2ffe8a
     type: core
-    size: 2604
+    size: 5773
   - path: core/elicitation/agent-elicitation.js
     hash: sha256:92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81
     type: elicitation
@@ -775,6 +775,10 @@ files:
     hash: sha256:1096fccecd12c7b7e6219951048c57bbf6a413e965bd80ae677ad1fc4d5ff604
     type: core
     size: 2590
+  - path: core/logger/index.js
+    hash: sha256:e8b912c3cdafdae021a139c92f8f2a3a63bd44863f2adeee2ccf97b7e553b87d
+    type: core
+    size: 8942
   - path: core/manifest/manifest-generator.js
     hash: sha256:1b368f539322ca0588618fb3ef86bcb19164941df851879e388f7b9c7240bdd1
     type: core
@@ -1207,6 +1211,10 @@ files:
     hash: sha256:4f0b16538c3a2c2dbbe264e6edbe0ca2d943af49936d0de68b21be4a469f5492
     type: core
     size: 574
+  - path: core/telemetry/index.js
+    hash: sha256:d1089c1743bf7679c3734f71f4d348c448053865c34fa30ba61648bfef30fb53
+    type: core
+    size: 8515
   - path: core/ui/index.js
     hash: sha256:a0a8d6aca4aaaf5d129e43260eb2d2c7f5b7d44d90fa8c0339253593aaab2371
     type: core
@@ -1240,9 +1248,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:9740914dd516e3a7308f1fc45c678ea394b2e2f933ee70890e4542d14ee422c2
+    hash: sha256:4610b68a1b746338330655f45e453a63419977dfca248474fb9c1487b32bbea1
     type: data
-    size: 522848
+    size: 522914
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1652,9 +1660,9 @@ files:
     type: script
     size: 23414
   - path: development/scripts/populate-entity-registry.js
-    hash: sha256:c2f8b76c7d555a12ada3e055c75298176567a01b55a3bad967f88e3839f0580c
+    hash: sha256:51fe2e6fb0561506df8c070e2a595651d0b12b2b796fc9b4c1e9eabdeca5558c
     type: script
-    size: 22593
+    size: 22872
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:66bf0be38efb417619e652c690d41337202dae7defa454bec73b010b05bb6db4
     type: script
@@ -3555,6 +3563,10 @@ files:
     hash: sha256:31bcfc0cdf307e7c14064eaf0ddbf99a14344c21306937c9a7d9cc7ebba260f8
     type: script
     size: 4679
+  - path: infrastructure/scripts/validate-manifest-parity.js
+    hash: sha256:58de4fac542c7d67fdbfc0d18b501854290f48bc3a44eae5a7485dca9c816006
+    type: script
+    size: 12160
   - path: infrastructure/scripts/validate-output-pattern.js
     hash: sha256:ce4ea341a94ca4dbbd176816c7f3c567574715a0fedbf4c17405a9d312bd138b
     type: script

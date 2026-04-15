@@ -53,5 +53,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: CLAUDE.md ships with the framework; exceptions indicate corruption.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

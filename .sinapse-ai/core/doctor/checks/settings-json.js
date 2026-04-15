@@ -118,5 +118,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: .claude/settings.json is a hard requirement. Exceptions are FAIL.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

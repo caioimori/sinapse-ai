@@ -45,5 +45,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: graph-dashboard ships with the framework.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

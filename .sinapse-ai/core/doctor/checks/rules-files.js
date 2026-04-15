@@ -58,5 +58,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run, EXPECTED_RULES };
+// Story A.3: rules files ship with the framework; exceptions indicate real damage.
+const onError = 'fail';
+
+module.exports = { name, run, EXPECTED_RULES, onError };
 

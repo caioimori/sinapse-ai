@@ -50,5 +50,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: core-config.yaml is a hard requirement for framework operation.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

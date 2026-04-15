@@ -12,6 +12,13 @@ const os = require('os');
 const { execSync } = require('child_process');
 const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 
+// Story A.2 — unified logger. Levels: error/warn/info/debug.
+// Flags: --verbose, --debug, --quiet, --json. Default level: warn.
+// sinapse.js does NOT render the ASCII header itself (cli.js owns it), so it
+// only imports getLogger. shouldShowHeader / markFirstRunDone stay in cli.js.
+const { getLogger } = require('../.sinapse-ai/core/logger');
+const logger = getLogger();
+
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -30,7 +37,7 @@ async function runWizard(options = {}) {
     const legacyScript = path.join(__dirname, 'sinapse-init.js');
     if (fs.existsSync(legacyScript)) {
       if (!options.quiet) {
-        console.log('⚠️  Using legacy wizard (src/wizard not found)');
+        logger.always('⚠️  Using legacy wizard (src/wizard not found)');
       }
       // Legacy wizard doesn't support options, pass via env vars
       process.env.SINAPSE_INSTALL_FORCE = options.force ? '1' : '';
@@ -39,8 +46,8 @@ async function runWizard(options = {}) {
       require(legacyScript);
       return;
     }
-    console.error('❌ Initialization wizard not found');
-    console.error('Please ensure SINAPSE-FullStack is installed correctly.');
+    logger.error('❌ Initialization wizard not found');
+    logger.error('Please ensure SINAPSE-FullStack is installed correctly.');
     process.exit(1);
   }
 
@@ -49,14 +56,14 @@ async function runWizard(options = {}) {
     const { runWizard: executeWizard } = require(wizardPath);
     await executeWizard(options);
   } catch (error) {
-    console.error('❌ Wizard error:', error.message);
+    logger.error('❌ Wizard error:', error.message);
     process.exit(1);
   }
 }
 
 // Helper: Show help
 function showHelp() {
-  console.log(`
+  logger.always(`
 SINAPSE-FullStack v${packageJson.version}
 AI-Orchestrated System for Full Stack Development
 
@@ -70,6 +77,9 @@ USAGE:
   sinapse validate                    # Validate installation integrity
   sinapse info                        # Show system info
   sinapse doctor                      # Run diagnostics
+  sinapse telemetry status            # Show telemetry state (disabled by default)
+  sinapse telemetry enable            # Opt in to anonymized telemetry
+  sinapse telemetry disable           # Opt out of telemetry
   sinapse qa run                      # Run quality gate pipeline
   sinapse qa run --layer=1            # Run specific layer
   sinapse qa status                   # Show gate status
@@ -132,13 +142,13 @@ async function showVersion() {
 
   if (!isDetailed) {
     // Simple version output (backwards compatible)
-    console.log(packageJson.version);
+    logger.always(packageJson.version);
     return;
   }
 
   // Detailed version output (Story 7.2: Version Tracking)
-  console.log(`SINAPSE-FullStack v${packageJson.version}`);
-  console.log('Package: sinapse-ai');
+  logger.always(`SINAPSE-FullStack v${packageJson.version}`);
+  logger.always('Package: sinapse-ai');
 
   // Check for local installation
   const localVersionPath = path.join(process.cwd(), '.sinapse-ai', 'version.json');
@@ -146,61 +156,61 @@ async function showVersion() {
   if (fs.existsSync(localVersionPath)) {
     try {
       const versionInfo = JSON.parse(fs.readFileSync(localVersionPath, 'utf8'));
-      console.log('\n📦 Local Installation:');
-      console.log(`  Version:    ${versionInfo.version}`);
-      console.log(`  Mode:       ${versionInfo.mode || 'unknown'}`);
+      logger.always('\n📦 Local Installation:');
+      logger.always(`  Version:    ${versionInfo.version}`);
+      logger.always(`  Mode:       ${versionInfo.mode || 'unknown'}`);
 
       if (versionInfo.installedAt) {
         const installedDate = new Date(versionInfo.installedAt);
-        console.log(`  Installed:  ${installedDate.toLocaleDateString()}`);
+        logger.always(`  Installed:  ${installedDate.toLocaleDateString()}`);
       }
 
       if (versionInfo.updatedAt) {
         const updatedDate = new Date(versionInfo.updatedAt);
-        console.log(`  Updated:    ${updatedDate.toLocaleDateString()}`);
+        logger.always(`  Updated:    ${updatedDate.toLocaleDateString()}`);
       }
 
       if (versionInfo.fileHashes) {
         const fileCount = Object.keys(versionInfo.fileHashes).length;
-        console.log(`  Files:      ${fileCount} tracked`);
+        logger.always(`  Files:      ${fileCount} tracked`);
       }
 
       if (versionInfo.customized && versionInfo.customized.length > 0) {
-        console.log(`  Customized: ${versionInfo.customized.length} files`);
+        logger.always(`  Customized: ${versionInfo.customized.length} files`);
       }
 
       // Version comparison
       if (versionInfo.version !== packageJson.version) {
-        console.log('\n⚠️  Version mismatch!');
-        console.log(`  Local:  ${versionInfo.version}`);
-        console.log(`  Latest: ${packageJson.version}`);
-        console.log('  Run \'npx sinapse-ai update\' to update.');
+        logger.always('\n⚠️  Version mismatch!');
+        logger.always(`  Local:  ${versionInfo.version}`);
+        logger.always(`  Latest: ${packageJson.version}`);
+        logger.always('  Run \'npx sinapse-ai update\' to update.');
       } else {
-        console.log('\n✅ Up to date');
+        logger.always('\n✅ Up to date');
       }
     } catch (error) {
-      console.log(`\n⚠️  Could not read version.json: ${error.message}`);
+      logger.always(`\n⚠️  Could not read version.json: ${error.message}`);
     }
   } else {
-    console.log('\n📭 No local installation found');
-    console.log('  Run \'npx sinapse-ai install\' to install SINAPSE in this project.');
+    logger.always('\n📭 No local installation found');
+    logger.always('  Run \'npx sinapse-ai install\' to install SINAPSE in this project.');
   }
 }
 
 // Helper: Show system info
 function showInfo() {
-  console.log('📊 SINAPSE-FullStack System Information\n');
-  console.log(`Version: ${packageJson.version}`);
-  console.log(`Platform: ${process.platform}`);
-  console.log(`Node.js: ${process.version}`);
-  console.log(`Architecture: ${process.arch}`);
-  console.log(`Working Directory: ${process.cwd()}`);
-  console.log(`Install Location: ${path.join(__dirname, '..')}`);
+  logger.always('📊 SINAPSE-FullStack System Information\n');
+  logger.always(`Version: ${packageJson.version}`);
+  logger.always(`Platform: ${process.platform}`);
+  logger.always(`Node.js: ${process.version}`);
+  logger.always(`Architecture: ${process.arch}`);
+  logger.always(`Working Directory: ${process.cwd()}`);
+  logger.always(`Install Location: ${path.join(__dirname, '..')}`);
 
   // Check if .sinapse-ai exists
   const sinapseCoreDir = path.join(__dirname, '..', '.sinapse-ai');
   if (fs.existsSync(sinapseCoreDir)) {
-    console.log('\n✓ SINAPSE Core installed');
+    logger.always('\n✓ SINAPSE Core installed');
 
     // Count components
     const countFiles = (dir) => {
@@ -214,19 +224,19 @@ function showInfo() {
     const devDir = path.join(sinapseCoreDir, 'development');
     const componentBase = fs.existsSync(devDir) ? devDir : sinapseCoreDir;
 
-    console.log(`  - Agents: ${countFiles(path.join(componentBase, 'agents'))}`);
-    console.log(`  - Tasks: ${countFiles(path.join(componentBase, 'tasks'))}`);
-    console.log(`  - Templates: ${countFiles(path.join(componentBase, 'templates'))}`);
-    console.log(`  - Workflows: ${countFiles(path.join(componentBase, 'workflows'))}`);
+    logger.always(`  - Agents: ${countFiles(path.join(componentBase, 'agents'))}`);
+    logger.always(`  - Tasks: ${countFiles(path.join(componentBase, 'tasks'))}`);
+    logger.always(`  - Templates: ${countFiles(path.join(componentBase, 'templates'))}`);
+    logger.always(`  - Workflows: ${countFiles(path.join(componentBase, 'workflows'))}`);
 
   } else {
-    console.log('\n⚠️  SINAPSE Core not found');
+    logger.always('\n⚠️  SINAPSE Core not found');
   }
 
   // Check SINAPSE Pro status (Task 5.1)
   const proDir = path.join(__dirname, '..', 'pro');
   if (fs.existsSync(proDir)) {
-    console.log('\n✓ SINAPSE Pro installed');
+    logger.always('\n✓ SINAPSE Pro installed');
 
     try {
       const { featureGate } = require(path.join(proDir, 'license', 'feature-gate'));
@@ -240,14 +250,14 @@ function showInfo() {
         'Not Activated': '➖',
       };
 
-      console.log(`  - License: ${stateEmoji[state] || ''} ${state}`);
+      logger.always(`  - License: ${stateEmoji[state] || ''} ${state}`);
 
       if (info && info.features) {
         const availableCount = featureGate.listAvailable().length;
-        console.log(`  - Features: ${availableCount} available`);
+        logger.always(`  - Features: ${availableCount} available`);
       }
     } catch {
-      console.log('  - License: Unable to check status');
+      logger.always('  - License: Unable to check status');
     }
   }
 }
@@ -265,7 +275,7 @@ async function runValidate() {
     await validateCmd.parseAsync(['node', 'sinapse', ...validateArgs]);
   } catch (_error) {
     // Fallback: Run quick validation inline
-    console.log('Running installation validation...\n');
+    logger.always('Running installation validation...\n');
 
     try {
       const validatorPath = path.join(
@@ -283,7 +293,7 @@ async function runValidate() {
       const validator = new PostInstallValidator(projectRoot, path.join(__dirname, '..'));
       const report = await validator.validate();
 
-      console.log(formatReport(report, { colors: true }));
+      logger.always(formatReport(report, { colors: true }));
 
       if (
         report.status === 'failed' ||
@@ -293,9 +303,9 @@ async function runValidate() {
         process.exit(1);
       }
     } catch (validatorError) {
-      console.error(`❌ Validation error: ${validatorError.message}`);
+      logger.error(`❌ Validation error: ${validatorError.message}`);
       if (args.includes('--verbose') || args.includes('-v')) {
-        console.error(validatorError.stack);
+        logger.error(validatorError.stack);
       }
       process.exit(2);
     }
@@ -314,8 +324,8 @@ async function runUpdate() {
     const updaterPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'updater', 'index.js');
 
     if (!fs.existsSync(updaterPath)) {
-      console.error('❌ Updater module not found');
-      console.error('Please ensure SINAPSE-FullStack is installed correctly.');
+      logger.error('❌ Updater module not found');
+      logger.error('Please ensure SINAPSE-FullStack is installed correctly.');
       process.exit(1);
     }
 
@@ -328,44 +338,45 @@ async function runUpdate() {
 
     if (isCheck) {
       // Check only mode
-      console.log('🔍 Checking for updates...\n');
+      logger.always('🔍 Checking for updates...\n');
       const result = await updater.checkForUpdates();
-      console.log(formatCheckResult(result, { colors: true }));
+      logger.always(formatCheckResult(result, { colors: true }));
 
       if (result.status === 'check_failed') {
         process.exit(1);
       }
     } else {
       // Update mode
-      console.log('🔄 SINAPSE Update\n');
+      logger.always('🔄 SINAPSE Update\n');
 
       const result = await updater.update({
         dryRun: isDryRun,
         onProgress: (phase, message) => {
           if (isVerbose) {
-            console.log(`[${phase}] ${message}`);
+            logger.always(`[${phase}] ${message}`);
           }
         },
       });
 
-      console.log(formatUpdateResult(result, { colors: true }));
+      logger.always(formatUpdateResult(result, { colors: true }));
 
       if (!result.success && result.error !== 'Already up to date') {
         process.exit(1);
       }
     }
   } catch (error) {
-    console.error(`❌ Update error: ${error.message}`);
+    logger.error(`❌ Update error: ${error.message}`);
     if (args.includes('--verbose') || args.includes('-v')) {
-      console.error(error.stack);
+      logger.error(error.stack);
     }
     process.exit(1);
   }
 }
 
-// Helper: Run doctor diagnostics (v2.0 — delegates to modular doctor)
+// Helper: Run doctor diagnostics (v2.1 — delegates to modular doctor)
+// Story A.3: exit code mapping is now 0 PASS | 1 WARN only | 2 FAIL | 3 internal error.
 async function runDoctor(options = {}) {
-  const { runDoctorChecks } = require(path.join(__dirname, '..', '.sinapse-ai', 'core', 'doctor'));
+  const { runDoctorChecks, resolveExitCode } = require(path.join(__dirname, '..', '.sinapse-ai', 'core', 'doctor'));
 
   const result = await runDoctorChecks({
     fix: options.fix || false,
@@ -376,11 +387,14 @@ async function runDoctor(options = {}) {
     projectRoot: process.cwd(),
   });
 
-  console.log(result.formatted);
+  logger.always(result.formatted);
 
-  // Exit with code 1 if any FAIL results
-  if (result.data && result.data.summary && result.data.summary.fail > 0) {
-    process.exit(1);
+  const code = typeof resolveExitCode === 'function'
+    ? resolveExitCode(result)
+    : (result && result.data && result.data.summary && result.data.summary.fail > 0 ? 2 : 0);
+
+  if (code !== 0) {
+    process.exit(code);
   }
 }
 
@@ -429,7 +443,7 @@ function cleanGitignore(gitignorePath) {
 
 // Helper: Show uninstall help
 function showUninstallHelp() {
-  console.log(`
+  logger.always(`
 Usage: npx sinapse-ai uninstall [options]
 
 Remove SINAPSE from the current project.
@@ -504,17 +518,17 @@ function runBrand() {
   const patchPath = path.join(__dirname, '..', 'scripts', 'sinapse-patch.js');
 
   if (!fs.existsSync(patchPath)) {
-    console.error('❌ Patch script not found at:', patchPath);
-    console.error('Please ensure SINAPSE-FullStack is installed correctly.');
+    logger.error('❌ Patch script not found at:', patchPath);
+    logger.error('Please ensure SINAPSE-FullStack is installed correctly.');
     process.exit(1);
   }
 
-  console.log('◆ Applying SINAPSE branding to Claude Code...\n');
+  logger.always('◆ Applying SINAPSE branding to Claude Code...\n');
 
   try {
     execSync(`node "${patchPath}"`, { stdio: 'inherit' });
   } catch (error) {
-    console.error('❌ Branding patch failed:', error.message);
+    logger.error('❌ Branding patch failed:', error.message);
     process.exit(1);
   }
 }
@@ -524,8 +538,8 @@ function launchSinapse(extraArgs) {
   // 1. Check if Claude Code is installed
   const cliPath = findClaudeCliPath();
   if (!cliPath) {
-    console.error('❌ Claude Code not found. Install it first:');
-    console.error('   npm install -g @anthropic-ai/claude-code');
+    logger.error('❌ Claude Code not found. Install it first:');
+    logger.error('   npm install -g @anthropic-ai/claude-code');
     process.exit(1);
   }
 
@@ -533,12 +547,12 @@ function launchSinapse(extraArgs) {
   if (!isBrandingApplied()) {
     const patchPath = path.join(__dirname, '..', 'scripts', 'sinapse-patch.js');
     if (fs.existsSync(patchPath)) {
-      console.log('◆ First run — applying SINAPSE branding...\n');
+      logger.always('◆ First run — applying SINAPSE branding...\n');
       try {
         execSync(`node "${patchPath}"`, { stdio: 'inherit' });
-        console.log('');
+        logger.always('');
       } catch {
-        console.error('⚠️  Branding patch failed, launching without branding...\n');
+        logger.error('⚠️  Branding patch failed, launching without branding...\n');
       }
     }
   }
@@ -577,7 +591,7 @@ function launchSinapse(extraArgs) {
 
 // Helper: Show doctor help
 function showDoctorHelp() {
-  console.log(`
+  logger.always(`
 Usage: npx sinapse-ai doctor [options]
 
 Run health checks on your SINAPSE installation.
@@ -640,7 +654,7 @@ async function runUninstall(options = {}) {
   );
 
   if (existingItems.length === 0) {
-    console.log('ℹ️  No SINAPSE installation found in this directory.');
+    logger.always('ℹ️  No SINAPSE installation found in this directory.');
     return;
   }
 
@@ -684,27 +698,27 @@ async function runUninstall(options = {}) {
 
   // Show what will be removed
   if (!quiet) {
-    console.log('\n📋 Items to be removed:\n');
+    logger.always('\n📋 Items to be removed:\n');
     for (const item of itemSizes) {
       const sizeStr = item.size > 0 ? ` (${formatBytes(item.size)})` : '';
-      console.log(`  • ${item.path}/${sizeStr} - ${item.description}`);
+      logger.always(`  • ${item.path}/${sizeStr} - ${item.description}`);
     }
-    console.log(`\n  Total: ${formatBytes(totalSize)}`);
+    logger.always(`\n  Total: ${formatBytes(totalSize)}`);
 
     // Check for .gitignore cleanup
     const gitignorePath = path.join(cwd, '.gitignore');
     if (fs.existsSync(gitignorePath)) {
       const content = fs.readFileSync(gitignorePath, 'utf8');
       if (content.includes('# SINAPSE') || content.includes('# Added by SINAPSE')) {
-        console.log('  • .gitignore SINAPSE entries will be cleaned');
+        logger.always('  • .gitignore SINAPSE entries will be cleaned');
       }
     }
-    console.log('');
+    logger.always('');
   }
 
   // Dry run - stop here
   if (dryRun) {
-    console.log('🔍 Dry run - no changes made.');
+    logger.always('🔍 Dry run - no changes made.');
     return;
   }
 
@@ -722,21 +736,21 @@ async function runUninstall(options = {}) {
     rl.close();
 
     if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'yes') {
-      console.log('❌ Uninstall cancelled.');
+      logger.always('❌ Uninstall cancelled.');
       process.exit(1);
     }
   }
 
   // Perform removal
-  if (!quiet) console.log('\n🗑️  Removing SINAPSE components...\n');
+  if (!quiet) logger.always('\n🗑️  Removing SINAPSE components...\n');
 
   for (const item of existingItems) {
     const itemPath = path.join(cwd, item.path);
     try {
       fs.rmSync(itemPath, { recursive: true, force: true });
-      if (!quiet) console.log(`  ✓ Removed ${item.path}/`);
+      if (!quiet) logger.always(`  ✓ Removed ${item.path}/`);
     } catch (error) {
-      console.error(`  ✗ Failed to remove ${item.path}: ${error.message}`);
+      logger.error(`  ✗ Failed to remove ${item.path}: ${error.message}`);
     }
   }
 
@@ -750,10 +764,10 @@ async function runUninstall(options = {}) {
       const sinapseAgents = globalFiles.filter((f) => f.endsWith(orqxSuffix));
       for (const file of sinapseAgents) {
         fs.rmSync(path.join(globalAgentsDir, file), { force: true });
-        if (!quiet) console.log(`  ✓ Removed global agent: ~/.claude/agents/${file}`);
+        if (!quiet) logger.always(`  ✓ Removed global agent: ~/.claude/agents/${file}`);
       }
     } catch (error) {
-      if (!quiet) console.warn(`  ⚠ Could not clean global agents: ${error.message}`);
+      if (!quiet) logger.warn(`  ⚠ Could not clean global agents: ${error.message}`);
     }
   }
 
@@ -761,22 +775,22 @@ async function runUninstall(options = {}) {
   const gitignorePath = path.join(cwd, '.gitignore');
   const gitignoreResult = cleanGitignore(gitignorePath);
   if (gitignoreResult.removed && !quiet) {
-    console.log(`  ✓ Cleaned ${gitignoreResult.lines} SINAPSE entries from .gitignore`);
+    logger.always(`  ✓ Cleaned ${gitignoreResult.lines} SINAPSE entries from .gitignore`);
   }
 
   // Summary
   if (!quiet) {
-    console.log('\n✅ SINAPSE has been uninstalled.');
+    logger.always('\n✅ SINAPSE has been uninstalled.');
     if (keepData) {
-      console.log('   Your project data in .sinapse/ has been preserved.');
+      logger.always('   Your project data in .sinapse/ has been preserved.');
     }
-    console.log('\n   To reinstall: npx sinapse-ai install');
+    logger.always('\n   To reinstall: npx sinapse-ai install');
   }
 }
 
 // Helper: Show install help
 function showInstallHelp() {
-  console.log(`
+  logger.always(`
 Usage: npx sinapse-ai install [options]
 
 Install SINAPSE in the current directory.
@@ -820,7 +834,7 @@ Examples:
 // Helper: Create new project
 // Helper: Show init help
 function showInitHelp() {
-  console.log(`
+  logger.always(`
 Usage: npx sinapse-ai init <project-name> [options]
 
 Create a new SINAPSE project with the specified name.
@@ -865,8 +879,8 @@ async function initProject() {
   if (templateIndex !== -1) {
     template = initArgs[templateIndex + 1];
     if (!template || template.startsWith('-')) {
-      console.error('❌ --template requires a template name');
-      console.error('Available templates: default, minimal, enterprise');
+      logger.error('❌ --template requires a template name');
+      logger.error('Available templates: default, minimal, enterprise');
       process.exit(1);
     }
   }
@@ -874,8 +888,8 @@ async function initProject() {
   // Validate template
   const validTemplates = ['default', 'minimal', 'enterprise'];
   if (!validTemplates.includes(template)) {
-    console.error(`❌ Unknown template: ${template}`);
-    console.error(`Available templates: ${validTemplates.join(', ')}`);
+    logger.error(`❌ Unknown template: ${template}`);
+    logger.error(`Available templates: ${validTemplates.join(', ')}`);
     process.exit(1);
   }
 
@@ -889,9 +903,9 @@ async function initProject() {
   });
 
   if (!projectName) {
-    console.error('❌ Project name is required');
-    console.log('\nUsage: npx sinapse-ai init <project-name> [options]');
-    console.log('Run with --help for more information.');
+    logger.error('❌ Project name is required');
+    logger.always('\nUsage: npx sinapse-ai init <project-name> [options]');
+    logger.always('Run with --help for more information.');
     process.exit(1);
   }
 
@@ -904,28 +918,28 @@ async function initProject() {
   if (fs.existsSync(targetPath) && !isCurrentDir) {
     const contents = fs.readdirSync(targetPath).filter((f) => !f.startsWith('.'));
     if (contents.length > 0 && !isForce) {
-      console.error(`❌ Directory already exists and is not empty: ${projectName}`);
-      console.error('Use --force to overwrite.');
+      logger.error(`❌ Directory already exists and is not empty: ${projectName}`);
+      logger.error('Use --force to overwrite.');
       process.exit(1);
     }
     if (contents.length > 0 && isForce) {
-      console.log(`⚠️  Using --force: overwriting existing directory: ${projectName}`);
+      logger.always(`⚠️  Using --force: overwriting existing directory: ${projectName}`);
     } else {
-      console.log(`✓ Using existing empty directory: ${projectName}`);
+      logger.always(`✓ Using existing empty directory: ${projectName}`);
     }
   } else if (!fs.existsSync(targetPath)) {
     fs.mkdirSync(targetPath, { recursive: true });
-    console.log(`✓ Created directory: ${projectName}`);
+    logger.always(`✓ Created directory: ${projectName}`);
   }
 
-  console.log(`Creating new SINAPSE project: ${displayName}`);
+  logger.always(`Creating new SINAPSE project: ${displayName}`);
   if (template !== 'default') {
-    console.log(`Template: ${template}`);
+    logger.always(`Template: ${template}`);
   }
   if (skipInstall) {
-    console.log('Skip install: enabled');
+    logger.always('Skip install: enabled');
   }
-  console.log('');
+  logger.always('');
 
   // 7. Change to project directory (if not already there)
   if (!isCurrentDir) {
@@ -957,7 +971,7 @@ async function main() {
         const { run } = require('../.sinapse-ai/cli/index.js');
         await run(process.argv);
       } catch (error) {
-        console.error(`❌ Workers command error: ${error.message}`);
+        logger.error(`❌ Workers command error: ${error.message}`);
         process.exit(1);
       }
       break;
@@ -968,7 +982,7 @@ async function main() {
         const { run } = require('../.sinapse-ai/cli/index.js');
         await run(process.argv);
       } catch (error) {
-        console.error(`❌ Config command error: ${error.message}`);
+        logger.error(`❌ Config command error: ${error.message}`);
         process.exit(1);
       }
       break;
@@ -979,7 +993,7 @@ async function main() {
         const { run } = require('../.sinapse-ai/cli/index.js');
         await run(process.argv);
       } catch (error) {
-        console.error(`❌ Pro command error: ${error.message}`);
+        logger.error(`❌ Pro command error: ${error.message}`);
         process.exit(1);
       }
       break;
@@ -991,7 +1005,7 @@ async function main() {
         const { runChromeBrain } = require('./modules/chrome-brain-installer');
         await runChromeBrain(chromeBrainArgs);
       } catch (error) {
-        console.error(`Error in chrome-brain: ${error.message}`);
+        logger.error(`Error in chrome-brain: ${error.message}`);
         process.exit(1);
       }
       break;
@@ -1004,15 +1018,25 @@ async function main() {
         showInstallHelp();
         break;
       }
+      // Story A.2 — expose verbosity flags on the wizard options so the wizard
+      // can pipe them down to sub-steps that still use raw console.
       const installOptions = {
         force: installArgs.includes('--force'),
-        quiet: installArgs.includes('--quiet'),
+        quiet: installArgs.includes('--quiet') || logger._flags?.quiet,
+        verbose: installArgs.includes('--verbose') || logger._flags?.verbose,
+        debug: installArgs.includes('--debug') || logger._flags?.debug,
+        json: installArgs.includes('--json') || logger._flags?.json,
         dryRun: installArgs.includes('--dry-run'),
         forceMerge: installArgs.includes('--merge'),
         noMerge: installArgs.includes('--no-merge'),
       };
-      if (!installOptions.quiet) {
-        console.log('SINAPSE-FullStack Installation\n');
+      // Story A.2 AC 9 — json mode: record metadata so flush() emits a
+      // structured summary at process exit.
+      if (installOptions.json) {
+        logger.setVersion(packageJson.version);
+      }
+      if (!installOptions.quiet && !installOptions.json) {
+        logger.always('SINAPSE-FullStack Installation\n');
       }
       await runWizard(installOptions);
       break;
@@ -1063,6 +1087,54 @@ async function main() {
       break;
     }
 
+    case 'telemetry': {
+      // Story C.1 — Opt-in telemetry (disabled by default).
+      // Subcommands: enable | disable | status
+      const sub = args[1];
+      const telemetry = require(path.join(__dirname, '..', '.sinapse-ai', 'core', 'telemetry'));
+      if (sub === 'enable') {
+        const ok = telemetry.enable();
+        if (ok) {
+          logger.always('Telemetria ativada. Obrigado por ajudar a melhorar o SINAPSE!');
+          logger.always('Política de privacidade: docs/TELEMETRY.md');
+        } else {
+          logger.error(`Falha ao gravar ${telemetry.configPath()} — telemetria não ativada.`);
+          process.exit(1);
+        }
+      } else if (sub === 'disable') {
+        const ok = telemetry.disable();
+        if (ok) {
+          logger.always('Telemetria desativada.');
+        } else {
+          logger.error(`Falha ao gravar ${telemetry.configPath()} — estado não alterado.`);
+          process.exit(1);
+        }
+      } else if (sub === 'status' || sub === undefined) {
+        const enabled = telemetry.isEnabled();
+        const envOverride = process.env.SINAPSE_TELEMETRY;
+        logger.always(`Telemetria: ${enabled ? 'ATIVADA' : 'DESATIVADA (padrão)'}`);
+        if (envOverride === '1' || envOverride === 'true') {
+          logger.always('  (forçada por SINAPSE_TELEMETRY env var)');
+        } else if (envOverride === '0' || envOverride === 'false') {
+          logger.always('  (forçada desativada por SINAPSE_TELEMETRY env var)');
+        } else {
+          logger.always(`  Config: ${telemetry.configPath()}`);
+        }
+        logger.always('');
+        logger.always('Comandos:');
+        logger.always('  sinapse telemetry enable    Ativar telemetria (opt-in)');
+        logger.always('  sinapse telemetry disable   Desativar telemetria');
+        logger.always('  sinapse telemetry status    Ver estado atual');
+        logger.always('');
+        logger.always('Política de privacidade: docs/TELEMETRY.md');
+      } else {
+        logger.error(`Subcomando desconhecido: telemetry ${sub}`);
+        logger.always('Use: sinapse telemetry [enable|disable|status]');
+        process.exit(1);
+      }
+      break;
+    }
+
     case 'validate':
       // Post-installation validation - Story 6.19
       await runValidate();
@@ -1095,7 +1167,7 @@ async function main() {
         const { run } = require('../.sinapse-ai/cli/index.js');
         await run(process.argv);
       } catch (error) {
-        console.error(`❌ QA command error: ${error.message}`);
+        logger.error(`❌ QA command error: ${error.message}`);
         process.exit(1);
       }
       break;
@@ -1149,6 +1221,6 @@ async function main() {
 
 // Execute main function
 main().catch((error) => {
-  console.error('❌ Fatal error:', error.message);
+  logger.error('❌ Fatal error:', error.message);
   process.exit(1);
 });

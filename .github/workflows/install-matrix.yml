@@ -1,0 +1,172 @@
+name: Install Matrix (A.5 Gate)
+# Story A.5 - Windows Wrapper & Cross-Platform Test Matrix
+# Runs the 27-combo install validation grid:
+#   (Windows 11 / macOS latest / Ubuntu 22.04) x (npm / pnpm / yarn) x (global / npx+dlx / local)
+# GATE: all 27 combos MUST pass before rc -> latest promotion.
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Release PRs trigger this by label OR by touching packaging files.
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'CHANGELOG.md'
+      - 'bin/**'
+      - '.sinapse-ai/install-manifest.yaml'
+      - '.github/workflows/install-matrix.yml'
+    types: [opened, synchronize, reopened, labeled]
+  # Allow manual dispatch for ad-hoc runs by @devops
+  workflow_dispatch:
+
+concurrency:
+  group: install-matrix-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '20'
+  # Skip our own postinstall hooks from interfering with the candidate tarball's postinstall.
+  SINAPSE_SKIP_POSTINSTALL: '0'
+
+jobs:
+  # Gate via label: only runs the full matrix when the PR has the `release` label
+  # OR when dispatched manually. This keeps regular PRs fast.
+  gate:
+    name: Gate (release label check)
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.decide.outputs.should_run }}
+    steps:
+      - id: decide
+        run: |
+          EVENT="${{ github.event_name }}"
+          LABEL_MATCH="${{ contains(github.event.pull_request.labels.*.name, 'release') }}"
+          if [ "$EVENT" = "workflow_dispatch" ] || [ "$LABEL_MATCH" = "true" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "::notice title=Install Matrix::Running full 27-combo matrix (release gate)"
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
+            echo "::notice title=Install Matrix::Skipped (not a release PR). Add the 'release' label to run."
+          fi
+
+  install-matrix:
+    name: ${{ matrix.os }} / ${{ matrix.pm }} / ${{ matrix.method }}
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-latest, windows-latest]
+        pm: [npm, pnpm, yarn]
+        method: [global, npx, local]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # ----------------------------------------------------------------
+      # Build a tarball of the current repo so every combo installs the
+      # EXACT candidate, not a published version.
+      # ----------------------------------------------------------------
+      - name: Pack candidate tarball
+        id: pack
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Use npm for packing regardless of the combo's target PM.
+          npm pack --silent > /dev/null
+          TARBALL=$(ls sinapse-ai-*.tgz | head -n1)
+          echo "tarball=$TARBALL" >> $GITHUB_OUTPUT
+          echo "abs_path=$(pwd)/$TARBALL" >> $GITHUB_OUTPUT
+
+      # ----------------------------------------------------------------
+      # Install package managers that are not npm.
+      # ----------------------------------------------------------------
+      - name: Install pnpm
+        if: matrix.pm == 'pnpm'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install yarn (classic)
+        if: matrix.pm == 'yarn'
+        shell: bash
+        run: npm install -g yarn@1
+
+      # ----------------------------------------------------------------
+      # Create an isolated install directory so nothing from the repo
+      # interferes with the combo under test.
+      # ----------------------------------------------------------------
+      - name: Create isolated test dir
+        id: isolate
+        shell: bash
+        run: |
+          set -euo pipefail
+          TEST_DIR="$RUNNER_TEMP/install-matrix-${{ matrix.pm }}-${{ matrix.method }}"
+          mkdir -p "$TEST_DIR"
+          echo "dir=$TEST_DIR" >> $GITHUB_OUTPUT
+
+      # ----------------------------------------------------------------
+      # Run the install + 4 checks via the helper script.
+      # The script outputs to $GITHUB_STEP_SUMMARY and exits non-zero on
+      # any failed check, which fails this matrix cell.
+      # ----------------------------------------------------------------
+      - name: Run install combo and checks (bash)
+        if: runner.os != 'Windows'
+        shell: bash
+        env:
+          SM_PM: ${{ matrix.pm }}
+          SM_METHOD: ${{ matrix.method }}
+          SM_TARBALL: ${{ steps.pack.outputs.abs_path }}
+          SM_TEST_DIR: ${{ steps.isolate.outputs.dir }}
+        run: |
+          bash .github/workflows/install-matrix/run-combo.sh
+
+      - name: Run install combo and checks (Windows bash)
+        if: runner.os == 'Windows'
+        shell: bash
+        env:
+          SM_PM: ${{ matrix.pm }}
+          SM_METHOD: ${{ matrix.method }}
+          SM_TARBALL: ${{ steps.pack.outputs.abs_path }}
+          SM_TEST_DIR: ${{ steps.isolate.outputs.dir }}
+        run: |
+          bash .github/workflows/install-matrix/run-combo.sh
+
+      - name: Annotate cell result
+        if: always()
+        shell: bash
+        run: |
+          STATUS="${{ job.status }}"
+          COMBO="${{ matrix.os }} / ${{ matrix.pm }} / ${{ matrix.method }}"
+          if [ "$STATUS" = "success" ]; then
+            echo "::notice title=Matrix cell PASS::$COMBO"
+          else
+            echo "::error title=Matrix cell FAIL::$COMBO"
+          fi
+
+  summary:
+    name: Gate Summary (27 combos)
+    needs: install-matrix
+    if: always() && needs.install-matrix.result != 'skipped'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate gate
+        run: |
+          RESULT="${{ needs.install-matrix.result }}"
+          echo "Install Matrix aggregate result: $RESULT"
+          if [ "$RESULT" != "success" ]; then
+            echo "::error title=Install Matrix GATE FAIL::One or more combos failed. rc CANNOT be promoted to latest until all 27 combos pass."
+            exit 1
+          fi
+          echo "::notice title=Install Matrix GATE PASS::All 27 combos PASS. rc may be promoted to latest."

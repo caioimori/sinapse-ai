@@ -47,5 +47,9 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: git hooks rely on a git repo + husky install. Neither is
+// guaranteed on a fresh global install, so exceptions are treated as WARN.
+const onError = 'warn';
+
+module.exports = { name, run, onError };
 
