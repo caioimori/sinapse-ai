@@ -9,7 +9,7 @@
 #
 version: 10.0.0-rc.3
 generator: scripts/generate-install-manifest.js
-file_count: 1153
+file_count: 1154
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1211,6 +1211,10 @@ files:
     hash: sha256:4f0b16538c3a2c2dbbe264e6edbe0ca2d943af49936d0de68b21be4a469f5492
     type: core
     size: 574
+  - path: core/telemetry/index.js
+    hash: sha256:d1089c1743bf7679c3734f71f4d348c448053865c34fa30ba61648bfef30fb53
+    type: core
+    size: 8515
   - path: core/ui/index.js
     hash: sha256:a0a8d6aca4aaaf5d129e43260eb2d2c7f5b7d44d90fa8c0339253593aaab2371
     type: core
@@ -1244,7 +1248,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:efb71287b80de749d1630135da2f99d165ade55e0288289ff1b984f4c32d79fb
+    hash: sha256:4610b68a1b746338330655f45e453a63419977dfca248474fb9c1487b32bbea1
     type: data
     size: 522914
   - path: data/learned-patterns.yaml
