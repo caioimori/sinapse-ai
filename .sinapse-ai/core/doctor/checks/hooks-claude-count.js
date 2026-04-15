@@ -115,5 +115,9 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: Claude Code hooks live in .claude/, which may not be fully
+// populated on a fresh install. Degrade to WARN rather than FAIL.
+const onError = 'warn';
+
+module.exports = { name, run, onError };
 

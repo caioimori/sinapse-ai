@@ -75,5 +75,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: missing npm packages are always blocking. Exceptions are FAIL.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

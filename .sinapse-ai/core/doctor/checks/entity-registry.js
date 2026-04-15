@@ -50,5 +50,10 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: entity-registry may be absent or unreadable on a fresh install
+// (before `sinapse install` populates it). Treat runtime exceptions as WARN
+// so that fresh installs do not produce false FAILs.
+const onError = 'warn';
+
+module.exports = { name, run, onError };
 

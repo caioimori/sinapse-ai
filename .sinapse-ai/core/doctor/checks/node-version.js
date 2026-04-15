@@ -30,5 +30,8 @@ async function run() {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: Node.js version is a hard prerequisite. Exceptions are FAIL.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

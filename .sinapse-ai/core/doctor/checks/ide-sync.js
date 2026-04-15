@@ -82,5 +82,8 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: IDE sync mirrors agents; exceptions indicate broken install state.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
 

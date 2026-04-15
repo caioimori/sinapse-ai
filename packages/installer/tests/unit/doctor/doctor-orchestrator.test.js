@@ -14,8 +14,8 @@ const projectRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
 
 describe('Doctor Orchestrator', () => {
   describe('version', () => {
-    it('should export DOCTOR_VERSION as 2.0.0', () => {
-      expect(DOCTOR_VERSION).toBe('2.0.0');
+    it('should export DOCTOR_VERSION as semver string (Story A.3 bumped to 2.1.0)', () => {
+      expect(DOCTOR_VERSION).toBe('2.1.0');
     });
   });
 
@@ -24,7 +24,7 @@ describe('Doctor Orchestrator', () => {
       const result = await runDoctorChecks({ projectRoot });
       expect(result).toHaveProperty('formatted');
       expect(result).toHaveProperty('data');
-      expect(result.data).toHaveProperty('version', '2.0.0');
+      expect(result.data).toHaveProperty('version', '2.1.0');
       expect(result.data).toHaveProperty('summary');
       expect(result.data).toHaveProperty('checks');
     });

@@ -128,5 +128,9 @@ async function run(context) {
   }
 }
 
-module.exports = { name, run };
+// Story A.3: code-intel is optional infrastructure; runtime exceptions are not
+// blocking and the check itself already handles missing providers gracefully.
+const onError = 'warn';
+
+module.exports = { name, run, onError };
 

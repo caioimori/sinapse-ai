@@ -115,4 +115,7 @@ async function run(context) {
   };
 }
 
-module.exports = { name, run };
+// Story A.3: deep check; exceptions are real and should FAIL.
+const onError = 'fail';
+
+module.exports = { name, run, onError };
