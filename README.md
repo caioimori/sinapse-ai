@@ -67,6 +67,8 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 
 Pronto. Voce tem 18 squads operando no seu terminal.
 
+> **Nota sobre `npm install`:** A partir da v10.0.0-rc.4, o SINAPSE roda um postinstall automatico que sincroniza agents para o Claude Code, cria os diretorios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e executa um health check rapido. Para desabilitar (CI, pipelines avancadas), defina `SINAPSE_SKIP_POSTINSTALL=1` antes do `npm install`, ou rode `npm install --ignore-scripts` (comportamento nativo do npm — nenhum postinstall eh executado). Nesse caso, rode `sinapse doctor --fix` apos a instalacao para garantir que o ambiente esteja pronto.
+
 ---
 
 ## Por que instalar em cada projeto?
