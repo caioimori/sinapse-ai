@@ -16,7 +16,11 @@ const SCAN_CONFIG = [
   { category: 'templates', basePath: '.sinapse-ai/product/templates', glob: '**/*.{yaml,yml,md}', type: 'template' },
   { category: 'scripts', basePath: '.sinapse-ai/development/scripts', glob: '**/*.{js,mjs}', type: 'script' },
   { category: 'modules', basePath: '.sinapse-ai/core', glob: '**/*.{js,mjs}', type: 'module' },
-  { category: 'agents', basePath: '.sinapse-ai/development/agents', glob: '**/*.{md,yaml,yml}', type: 'agent' },
+  // Story A.4: restrict to top-level *.md so agent MEMORY.md files under
+  // agents/{name}/MEMORY.md are NOT indexed as agents (they are memory, not
+  // persona definitions). Without this restriction, `extractEntityId`
+  // collapses every MEMORY.md to a single agent entry named "MEMORY".
+  { category: 'agents', basePath: '.sinapse-ai/development/agents', glob: '*.md', type: 'agent' },
   { category: 'checklists', basePath: '.sinapse-ai/development/checklists', glob: '**/*.md', type: 'checklist' },
   { category: 'data', basePath: '.sinapse-ai/data', glob: '**/*.{yaml,yml,md}', type: 'data' },
   { category: 'workflows', basePath: '.sinapse-ai/development/workflows', glob: '**/*.{yaml,yml}', type: 'workflow' },

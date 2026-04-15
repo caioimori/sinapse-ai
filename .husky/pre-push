@@ -21,6 +21,25 @@ set -e
 
 node bin/utils/pre-push-safety.js
 
+# Story A.4 — install-manifest parity guard.
+# Blocks push if install-manifest.yaml / entity-registry.yaml disagree
+# with the real files under .sinapse-ai/development/{agents,tasks,
+# templates,checklists}/. Runs in <1s (filesystem only, no hashing).
+if ! npm run --silent validate:manifest:parity; then
+  echo ""
+  echo "Push blocked: install-manifest.yaml / entity-registry.yaml drift detected."
+  echo ""
+  echo "Fix:"
+  echo "  1. npm run generate:manifest"
+  echo "  2. review entity-registry.yaml agents section"
+  echo "  3. git add .sinapse-ai/install-manifest.yaml .sinapse-ai/data/entity-registry.yaml"
+  echo "  4. git commit --amend --no-edit   (or a new commit)"
+  echo "  5. git push"
+  echo ""
+  echo "Bypass (emergency only):  git push --no-verify"
+  exit 1
+fi
+
 # Resolve the upstream ref to diff against. If the branch has no upstream
 # (first push), diff against origin/main as a sane default.
 upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main")"
