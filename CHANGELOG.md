@@ -5,6 +5,80 @@ All notable changes to SINAPSE will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+Epic `install-ux-hardening` — hardens the install pipeline, CLI output,
+agent activation and handoff runtime so a non-technical user can
+`npm install -g sinapse-ai` on Windows / macOS / Linux, see a minimal
+friendly output, invoke `@developer` immediately, and get a clean
+`sinapse doctor` on a fresh machine. 6 stories Done, 1 (A.5) InReview
+gated on rc.4 CI matrix execution. Resolves gargalos G1-G7 from the
+2026-04-14 internal install audit. Blocks v1.0.0 GA.
+
+### Added
+
+- **Story A.1** — Postinstall orchestrator (`bin/postinstall.js`). Fresh
+  `npm install -g sinapse-ai` now automatically runs `sync:ide --ide
+  claude-code`, creates `.sinapse/handoffs/` and `.sinapse/scratchpad/`
+  runtime dirs, and runs `sinapse doctor --quiet`. No manual sync step
+  needed after install. Respects `SINAPSE_SKIP_POSTINSTALL=1`
+  (explicit opt-out) and auto-skips on common CI env vars
+  (`CI=true`, `GITHUB_ACTIONS`, etc.) unless
+  `SINAPSE_FORCE_POSTINSTALL=1` is set. Fails loudly (exit 2) on
+  critical failures (sync:ide error, doctor FAIL). Resolves G1, G2, G7.
+- **Story A.2** — Structured logger (`.sinapse-ai/core/logger/`) with
+  levels `error | warn | info | debug`. Default level is `warn` so
+  fresh installs emit ≤ 10 lines of output. `--verbose` promotes to
+  `info`, `--debug` to `debug`, `--quiet` suppresses all but `error`,
+  `--json` emits structured output for CI/automation. All 336
+  existing `console.*` calls in `bin/cli.js` and `bin/sinapse.js`
+  migrated to the logger. ASCII art header only shown on `--verbose`
+  or first-run. Resolves structural half of G3.
+- **Story A.3** — Doctor exception classification. Each check module
+  now declares its own failure severity via `onError: 'fail' | 'warn'
+  | 'skip'`. The generic `catch` in `.sinapse-ai/core/doctor/index.js`
+  no longer marks every exception as FAIL. `entity-registry`,
+  `agent-memory`, `git-hooks` are `warn` in fresh-install context;
+  `node-version`, `npm-packages`, `settings-json` remain `fail`.
+  Doctor exit codes: `0` PASS, `1` WARN only, `2` FAIL, `3` internal.
+  Fresh install on clean machine now returns exit code `0`. Resolves
+  G4.
+- **Story A.4** — Manifest parity validation. New script
+  `.sinapse-ai/infrastructure/scripts/validate-manifest-parity.js`
+  compares `install-manifest.yaml` against real files in
+  `.sinapse-ai/development/{agents,tasks,templates,checklists}/`.
+  Wired into `pre-push` hook and `npm run validate:manifest`. CI
+  workflow `.github/workflows/manifest-parity.yml` runs parity check
+  on every PR. `install-manifest.yaml` regenerated with accurate
+  counts (12 agents, not 23) and hashes. Resolves G5.
+- **Story A.5** — Cross-platform install test matrix infra
+  (`.github/workflows/install-matrix.yml` + local harness
+  `scripts/test-install-matrix-local.sh`). 27 combos (Win/Mac/Linux ×
+  npm/pnpm/yarn × global/npx/local). Gated behind release label —
+  execution deferred to rc.4 CI run (A.5 remains `InReview` until
+  matrix is green). Resolves G6 (infra only).
+- **Story B.1** — Minimalist install output. Default `sinapse install`
+  output is ≤ 8 lines: version, agent/squad count, `sinapse doctor`
+  hint, `@sinapse` hint, docs URL. `--verbose` preserves full
+  relatório for power users, `--json` for CI, first-run detection
+  adds a "Bem-vindo ao SINAPSE!" line once per machine. Copy reviewed
+  for non-technical PT-BR voice. Resolves content half of G3.
+- **Story C.1** — Exit codes, auto-doctor and opt-in telemetry stub.
+  Install script exits `0` success, `1` partial (warnings), `2`
+  failed. `sinapse doctor --quiet` runs at end of postinstall with a
+  one-liner on failure. New `.sinapse-ai/core/telemetry/` module —
+  **disabled by default**, opt-in via `sinapse telemetry enable` or
+  `SINAPSE_TELEMETRY=1`. Anonymized payload (no paths, no usernames):
+  failure category + platform + version only. Privacy policy in
+  `docs/TELEMETRY.md`. Real endpoint is follow-up work.
+
+### Notes
+
+- **Story A.5 (`InReview`)** — workflow infrastructure is merged; the
+  27-combo matrix itself will execute as part of the rc.4 release
+  cycle. A.5 is promoted to `Done` only after the matrix passes
+  green, per the epic-level gate for `rc → latest` promotion.
+
 ## [10.0.0-rc.3] - 2026-04-13
 
 Critical UX fix: installer can no longer destroy user config.
