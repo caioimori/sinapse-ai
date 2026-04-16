@@ -85,7 +85,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Use npm for packing regardless of the combo's target PM.
+          # Strip the prepare script (husky) before packing — husky is a
+          # devDependency not installed in the CI checkout, and consumers
+          # don't need it. The tarball keeps postinstall intact.
+          npm pkg delete scripts.prepare
           npm pack --ignore-scripts --silent > /dev/null
           TARBALL=$(ls sinapse-ai-*.tgz | head -n1)
           echo "tarball=$TARBALL" >> $GITHUB_OUTPUT
