@@ -15,6 +15,16 @@ Execute story development with selectable automation modes to accommodate differ
 - Minimal user interaction
 - **Best for:** Simple, deterministic tasks
 
+**Auto-Activation Conditions (no additional check-ins required):**
+
+YOLO / auto mode activates WITHOUT additional check-ins when **ALL** of the following are true:
+
+1. Story status is `Ready` (upgraded by `@product-lead` via `*validate-story-draft`)
+2. Story has been validated by `@product-lead` (validation entry present in Change Log)
+3. Story scope is clear (IN/OUT sections populated, AC numbered and testable, no ambiguous dependencies)
+
+When these three conditions hold, the developer proceeds autonomously through all tasks/subtasks, logging decisions to `.ai/decision-log-{story-id}.md` instead of prompting the user. If ANY condition is unmet (e.g., status still `Draft`, missing validation, scope contains open questions), fall back to **Interactive** or **Pre-Flight** mode.
+
 ### 2. Interactive Mode - Balanced, Educational (5-10 prompts) **[DEFAULT]**
 - Explicit decision checkpoints
 - Educational explanations
