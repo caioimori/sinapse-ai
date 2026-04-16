@@ -84,7 +84,7 @@ jobs:
         run: |
           set -euo pipefail
           # Use npm for packing regardless of the combo's target PM.
-          npm pack --silent > /dev/null
+          npm pack --ignore-scripts --silent > /dev/null
           TARBALL=$(ls sinapse-ai-*.tgz | head -n1)
           echo "tarball=$TARBALL" >> $GITHUB_OUTPUT
           echo "abs_path=$(pwd)/$TARBALL" >> $GITHUB_OUTPUT
