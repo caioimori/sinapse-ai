@@ -242,7 +242,7 @@ popd >/dev/null
 # The banner uses: "instalado", "agents", "squads", "doctor",
 # "@sinapse", "sinapse.club", "Bem-vindo", "parcial".
 BANNER_PATTERN="instalado|agents.*squads|sinapse doctor|@sinapse|sinapse\.club|Bem-vindo|parcial"
-LINES=$(echo "$OUTPUT" | grep -cE "$BANNER_PATTERN" 2>/dev/null || echo 0)
+LINES=$(echo "$OUTPUT" | grep -cE "$BANNER_PATTERN" 2>/dev/null) || LINES=0
 if [ "$LINES" -le "$MAX_LINES" ]; then
   CHECK4=0
 fi
