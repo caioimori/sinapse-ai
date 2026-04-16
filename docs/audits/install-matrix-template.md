@@ -1,9 +1,15 @@
 # Install Matrix — {DATE}
 
 > **Story:** A.5 — Windows Wrapper & Cross-Platform Test Matrix
-> **Gate:** rc → `latest` (all 27 combos MUST be PASS before promotion)
+> **Gate:** rc → `latest` (24/27 combos MUST be PASS — Yarn v1 Windows is a documented platform exception)
 > **Execution:** filled in after `.github/workflows/install-matrix.yml` runs on the release PR
 > **Template** — copy this file to `docs/audits/install-matrix-{YYYY-MM-DD}.md` and fill in results.
+
+**Platform exception (since 2026-04-16):** Yarn v1 on Windows is **unsupported**.
+Combos 7, 8, 9 (Windows × yarn v1 × {global, dlx, local}) are expected to FAIL
+and do NOT block rc promotion. Yarn v1 has been in maintenance mode since 2020.
+Windows users should install via npm, pnpm, or Yarn v2+ (Berry). See
+`docs/audits/install-matrix-2026-04-16.md` for the original decision record.
 
 ## How to fill this file
 
@@ -73,8 +79,10 @@ Each row records: OS, package manager, install method, `sinapse`-in-PATH, `@deve
 | Metric | Value |
 |--------|-------|
 | Total combos | 27 |
+| Required PASS | 24 / 27 (combos 7, 8, 9 excluded — Yarn v1 Windows unsupported) |
 | PASS | 0 / 27 |
-| FAIL | 0 / 27 |
+| FAIL (expected) | 0 / 3 |
+| FAIL (blocking) | 0 / 24 |
 | PENDING | 27 / 27 |
 | Gate clear? | NO |
 
