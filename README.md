@@ -105,6 +105,20 @@ Porque projetos open source precisam ser **auto-contidos**. Quando voce comparti
 
 Sim. Testado em Windows 11, macOS e Linux. O instalador detecta o OS automaticamente. WSL nao e obrigatorio (mas recomendado para algumas features avancadas como review automatizado via CodeRabbit).
 
+### Matriz de plataformas suportadas
+
+Cada release passa por uma matriz de instalacao de 27 combinacoes (3 OSes x 3 package managers x 3 metodos) executada em CI. A tabela abaixo resume os caminhos oficialmente suportados:
+
+| OS | npm | pnpm | Yarn v2+ (Berry) | Yarn v1 (Classic) |
+|----|:---:|:----:|:----------------:|:-----------------:|
+| Windows 11 | Sim | Sim | Sim | **Nao** |
+| macOS (latest) | Sim | Sim | Sim | Sim |
+| Linux (Ubuntu 22.04) | Sim | Sim | Sim | Sim |
+
+**Sobre Yarn v1 no Windows:** Yarn v1 (Classic) esta em modo manutencao desde 2020, com Yarn v2+ (Berry) como sucessor oficial. A combinacao Windows + Yarn v1 apresenta falhas de resolucao de wrapper que nao compensam investigar por ser ecossistema em declinio. Usuarios Windows em Yarn v1 devem migrar para Yarn v2+ (recomendado) ou usar npm/pnpm. macOS e Linux em Yarn v1 continuam suportados.
+
+Registro completo da decisao e resultados: [docs/audits/install-matrix-2026-04-16.md](docs/audits/install-matrix-2026-04-16.md).
+
 ### "Como atualizar sem perder minhas customizacoes?"
 
 ```bash
