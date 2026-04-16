@@ -306,10 +306,69 @@ sections:
       - If known add Relevant Source Tree info that relates to this story
       - If there were important notes from previous story that are relevant to this one, include them here
       - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story, meeting all AC and completing all tasks+subtasks
+
+      **Opus 4.7 Optimization — Upfront Spec Block (REQUIRED):**
+      The Dev Notes MUST begin with an "Upfront Spec" structured block (see `upfront-spec` sub-section).
+      This consolidates intent + constraints + AC summary + key file locations at the top of Dev Notes,
+      so the developer agent loads the full problem specification in one read instead of discovering
+      it mid-implementation. Adaptive thinking in Opus 4.7 benefits strongly from upfront specification.
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
     sections:
+      - id: upfront-spec
+        title: Upfront Spec
+        instruction: |
+          **REQUIRED — appears at the TOP of Dev Notes.**
+
+          Consolidate the full problem specification in a single structured block, so the developer
+          agent has everything needed before making the first tool call. This is an Opus 4.7 best
+          practice: upfront specification reduces mid-task re-planning and improves adaptive thinking
+          quality.
+
+          Fill all four fields; do not leave placeholders.
+        template: |
+          **Intent:** {{intent_one_paragraph}}
+
+          **Constraints:**
+          - {{constraint_1}}
+          - {{constraint_2}}
+          - {{constraint_3}}
+
+          **Acceptance Criteria Summary:** {{ac_summary_one_paragraph}}
+
+          **Key Files:**
+          - `{{file_path_1}}` — {{purpose_1}}
+          - `{{file_path_2}}` — {{purpose_2}}
+          - `{{file_path_3}}` — {{purpose_3}}
+        elicit: true
+        owner: scrum-master
+        editors: [scrum-master]
+
+      - id: prompt-hints
+        title: Prompt Hints by Story Type
+        instruction: |
+          **Opus 4.7 Adaptive Thinking Hints (STRUCTURED FIELDS — survive YAML parse).**
+
+          Emit the appropriate hint based on story type classification. These are NOT comments —
+          they are structured fields consumed by the developer agent at story load time to calibrate
+          thinking depth for Opus 4.7's adaptive reasoning.
+
+          Story type classification:
+          - `critical` → migration, security, architecture, data integrity, irreversible operations
+          - `routine` → lint, rename, documentation edits, formatting, trivial refactors
+          - `standard` → feature implementation, bug fix with known cause, test additions (no hint emitted)
+
+          Only ONE hint field is populated per story (critical OR routine). Standard stories omit both.
+        template: |
+          prompt_hint_critical: "Think carefully and step-by-step — this problem is harder than it looks"
+          prompt_hint_routine: "Prioritize responding quickly rather than thinking deeply"
+          story_type_classification: "{{critical|routine|standard}}"
+          active_hint: "{{prompt_hint_critical or prompt_hint_routine or none}}"
+        elicit: false
+        owner: scrum-master
+        editors: [scrum-master]
+
       - id: testing-standards
         title: Testing
         instruction: |

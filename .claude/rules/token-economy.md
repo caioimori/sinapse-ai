@@ -21,14 +21,30 @@ Por que 60%? Acima disso já perde coerência sobre instruções iniciais ("cont
 
 **Regra zero:** Execute direto sempre que der. Sub-agente custa ~20K mínimo.
 
-| Task | Modelo |
-|---|---|
-| Arquitetura cross-system, debug complexo, auditoria, refactor multi-file | **opus** |
-| Feature do spec, code review, bug fix com causa, testes, stories | **sonnet** |
-| Lint, rename, validação YAML, lookup, bulk processing | **haiku** |
+**Opus 4.7 nota:** Effort default é `xhigh` (novo tier entre `high` e `max`). Extended Thinking com `thinking_budget` fixo NÃO é mais suportado — o modelo decide adaptivamente (mais profundo em sessões longas). Prefira raciocínio inline a spawnar subagents.
+
+| Task | Modelo | Effort Level |
+|---|---|---|
+| Arquitetura cross-system, debug complexo, auditoria, refactor multi-file | **opus** | `xhigh` (default 4.7) |
+| Spec Pipeline COMPLEX class (score >= 16) | **opus** | `max` |
+| Feature do spec, code review, bug fix com causa, testes, stories | **sonnet** | `high` (paralelo OK) |
+| Análise single-file, pergunta factual de código | **sonnet** | `medium` |
+| Lint, rename, validação YAML, lookup, bulk processing | **haiku** | `low` |
+
+### Exemplos de mapeamento por task type
+
+| Task concreta | Modelo | Effort |
+|---|---|---|
+| "bulk YAML validation em 50 arquivos" | haiku | `low` |
+| "refactor multi-file de auth middleware" | opus | `xhigh` |
+| "Spec COMPLEX de migração de DB + integração" | opus | `max` |
+| "feature story 3 ACs com testes" | sonnet | `high` |
+| "rename variable em 1 arquivo" | haiku | `low` |
+| "explain why this test is flaky" | sonnet | `medium` |
 
 - Em dúvida entre tiers: escolhe o menor. Escala se falhar.
 - Nunca opus pra task que haiku resolve.
+- Nunca `max` fora de Spec COMPLEX — custo cresce não-linear.
 - Sub-agente anuncia modelo ao spawnar.
 
 ---
@@ -38,14 +54,16 @@ Por que 60%? Acima disso já perde coerência sobre instruções iniciais ("cont
 | Anti-Pattern | Fix |
 |---|---|
 | Ler mesmo arquivo 2x | Uma vez, guarda line numbers |
-| Persona completo em troca de agente | Handoff protocol |
+| Persona completo em troca de agente | Handoff protocol (consolidar perguntas ANTES do switch) |
 | Grep/Glob sem `head_limit` | Sempre setar |
 | **Re-ler arquivo após Edit/Write** | Edit confirma sucesso, não releia |
-| Sub-agente pra task <5 tool calls | Faz inline |
+| Sub-agente pra task <8 tool calls | Faz inline |
 | Não compactar antes de task longa | Compacta em 60% |
 | Sequential reads quando independentes | Paralelo (uma mensagem, N tool calls) |
 | Ler README/package.json sem necessidade | Só se task pedir |
 | Cole payload bruto no raciocínio | Extrai só o relevante |
+| Usar `thinking_budget` fixo em Opus 4.7 | Adaptive thinking — não suportado |
+| Spawn subagent em task sequencial curta | Subagent só com fan-out paralelo real |
 
 ---
 
@@ -61,6 +79,14 @@ Edição pontual    → Edit   (não Write)
 Bash só pra operações que nenhuma tool dedicada cobre.
 
 Leitura cirúrgica: `offset`+`limit` pra ler seção, nunca 500 linhas pra usar 30.
+
+### Subagent threshold (Opus 4.7)
+
+**Spawn subagent APENAS se:**
+- `>= 8 tool calls` previstos na task, **OU**
+- Fan-out paralelo real (N tasks independentes rodando simultaneamente)
+
+Abaixo disso → executa inline. Subagent custa ~20K tokens de overhead; Opus 4.7 lida com mais tool calls por turn com boa coerência, então o threshold anterior (`>= 5`) causava overhead desnecessário.
 
 ---
 
