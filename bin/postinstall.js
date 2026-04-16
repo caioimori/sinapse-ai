@@ -24,9 +24,14 @@
  *   --json    Single JSON object: { status, version, agents, squads, warnings, errors }.
  *
  * Exit codes:
- *   0  success (or skipped)
- *   1  non-critical warning (doctor exit 1, permission fallback)
- *   2  critical failure (sync:ide failed, or doctor exit 2)
+ *   0  success OR non-critical warning (framework operational)
+ *   2  critical failure (sync:ide failed, or doctor exit >= 2)
+ *
+ * Note: exit 1 is NOT used. npm treats any non-zero postinstall exit as
+ * `command failed`, which scares users when the install is actually operational.
+ * Partial installs (doctor WARN, permission fallback) print the "Instalação
+ * parcial" message and exit 0 so `npm install` completes cleanly. Callers that
+ * want strict behavior should parse `--json` output and check `status: warn`.
  */
 
 'use strict';
@@ -506,14 +511,17 @@ function main(argvOverride) {
     markFirstRunDone();
   }
 
-  // Non-critical warnings yield exit code 1 to signal "partial" per Story C.1 pattern.
+  // Non-critical warnings: show user the "partial install" message but exit 0
+  // so `npm install` does not report `command failed`. Critical failures have
+  // already returned 2 above. The `--json` output still carries `status: warn`
+  // for pipelines that want to act on it. [Story 10.39]
   if (!syncIde.ok || !runtimeDirs.ok || !doctor.ok) {
     renderPartialInstallMessage();
     if (FLAGS.json) {
       if (jsonState.status === 'success') jsonState.status = 'warn';
       flushJson();
     }
-    return 1;
+    return 0;
   }
 
   if (FLAGS.json) flushJson();

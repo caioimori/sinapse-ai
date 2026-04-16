@@ -221,13 +221,14 @@ describe('postinstall — main() integration', () => {
     expect(code).toBe(2);
   });
 
-  test('returns 1 when doctor exits 1 (WARN only)', () => {
+  test('returns 0 when doctor exits 1 (WARN only) — Story 10.39: never kill npm install', () => {
     spawnSync
       .mockReturnValueOnce({ status: 0, error: null }) // sync:ide
       .mockReturnValueOnce({ status: 1, error: null }); // doctor WARN
     const code = postinstall.main();
-    expect(code).toBe(1);
+    expect(code).toBe(0);
   });
+
 });
 
 // ─── Story B.1: Minimalist Install Output ───────────────────────────────────
@@ -453,12 +454,14 @@ describe('postinstall — partial install message (Story C.1 AC 3)', () => {
     expect(stdoutChunks.join('')).toBe('');
   });
 
-  test('AC 1 + AC 3: main() with doctor exit 1 returns 1 and prints partial message', () => {
+  test('AC 1 + AC 3: main() with doctor exit 1 returns 0 and prints partial message [Story 10.39]', () => {
     spawnSync
       .mockReturnValueOnce({ status: 0, error: null }) // sync:ide
       .mockReturnValueOnce({ status: 1, error: null }); // doctor WARN
     const code = postinstall.main();
-    expect(code).toBe(1);
+    // Story 10.39: exit 0 even with WARN, to avoid killing `npm install`.
+    // The user-visible message is still printed.
+    expect(code).toBe(0);
     const text = stripAnsi(stdoutChunks.join(''));
     expect(text).toContain("Instalação parcial — rode 'sinapse doctor' pra ver o quê");
   });
