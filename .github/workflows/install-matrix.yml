@@ -31,6 +31,8 @@ env:
   NODE_VERSION: '20'
   # Skip our own postinstall hooks from interfering with the candidate tarball's postinstall.
   SINAPSE_SKIP_POSTINSTALL: '0'
+  # Prevent husky from running during npm pack / install in CI (husky v9 respects this).
+  HUSKY: '0'
 
 jobs:
   # Gate via label: only runs the full matrix when the PR has the `release` label
