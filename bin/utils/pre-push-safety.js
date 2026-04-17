@@ -60,6 +60,14 @@ function main() {
   const branchName = getCurrentBranch();
   const refs = parsePushRefs(fs.readFileSync(0));
 
+  // Allow tag-only pushes (semantic-release pushes release tags from main in CI).
+  // Tags do not modify branch history, so branch-protection rules don't apply.
+  const tagOnlyPush =
+    refs.length > 0 && refs.every((ref) => ref.remoteRef && ref.remoteRef.startsWith('refs/tags/'));
+  if (tagOnlyPush) {
+    return;
+  }
+
   if (branchName === defaultBranch || branchName === 'master') {
     console.error('');
     console.error(`Pre-push Safety: push blocked on protected branch '${branchName}'.`);
