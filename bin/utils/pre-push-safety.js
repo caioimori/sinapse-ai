@@ -60,11 +60,17 @@ function main() {
   const branchName = getCurrentBranch();
   const refs = parsePushRefs(fs.readFileSync(0));
 
-  // Allow tag-only pushes (semantic-release pushes release tags from main in CI).
-  // Tags do not modify branch history, so branch-protection rules don't apply.
-  const tagOnlyPush =
-    refs.length > 0 && refs.every((ref) => ref.remoteRef && ref.remoteRef.startsWith('refs/tags/'));
-  if (tagOnlyPush) {
+  // Allow metadata-only pushes (tags and git notes). semantic-release pushes
+  // release tags and semantic-release notes from main in CI; neither modifies
+  // branch history, so branch-protection rules don't apply.
+  const metadataOnlyPush =
+    refs.length > 0 &&
+    refs.every(
+      (ref) =>
+        ref.remoteRef &&
+        (ref.remoteRef.startsWith('refs/tags/') || ref.remoteRef.startsWith('refs/notes/')),
+    );
+  if (metadataOnlyPush) {
     return;
   }
 
