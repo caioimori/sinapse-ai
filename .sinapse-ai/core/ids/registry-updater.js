@@ -381,15 +381,20 @@ class RegistryUpdater {
 
     const newChecksum = computeChecksum(absPath);
 
+    // Only update timestamps + return mutated=true when the entity actually
+    // changed. Touching lastVerified on every commit (even no-op modifies)
+    // caused chronic git churn — the file would always show modified, forcing
+    // users to either commit noise or stash repeatedly. (Story: timestamp churn fix.)
     if (newChecksum !== existing.checksum) {
       existing.checksum = newChecksum;
       existing.purpose = extractPurpose(content, absPath);
       existing.keywords = extractKeywords(absPath, content);
       existing.dependencies = detectDependencies(content, entityId);
+      existing.lastVerified = new Date().toISOString();
+      return true;
     }
 
-    existing.lastVerified = new Date().toISOString();
-    return true;
+    return false;
   }
 
   _handleFileDelete(registry, absPath) {
