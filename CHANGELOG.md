@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.4] — 2026-04-16
+
+Release candidate closing the pre-v1.0.0 GA gate. Three blockers resolved today:
+
+### Fixed
+
+- **Story 10.39** — Postinstall exit code fix. Fresh `npm install sinapse-ai` no longer fails with `npm error command failed` when the framework is operational but doctor reports non-critical WARN findings. Exit 1 removed from the contract; only critical failures (sync:ide error, doctor exit ≥ 2) now produce non-zero exit. `--json` output still carries `status: warn` for pipelines that want strict behavior. (PR #82)
+- **Story 10.34** — Dependabot vulnerabilities cleanup. Root lockfile now overrides `serialize-javascript ^7.0.5`, `picomatch ^4.0.4`, `brace-expansion ^5.0.5`. Health-dashboard subpackage lockfile regenerated against current `package.json` (vite@7.3.1, react@18.2). `npm audit --omit=dev` on root = 0 vulnerabilities; `npm audit` on health-dashboard = 0 vulnerabilities. Remaining dev-only vulns inside bundled npm CLI (via `@semantic-release/npm`) dismissed as tolerable risk. (PR #83)
+
+### Changed
+
+- **Story A.5 closed** — Windows Wrapper & Cross-Platform Test Matrix accepted with 24/27 PASS. The 3 FAIL combos are all Windows × Yarn v1 (classic), documented as an unsupported platform: Yarn v1 has been in maintenance mode since 2020 with Yarn Berry (v2+) as successor. Windows users should migrate to Yarn v2+ or use npm/pnpm. macOS/Linux on Yarn v1 remain supported. (PR #80)
+- `README.md` — "Supported Platforms" matrix published under installation FAQ, documenting the Yarn v1 Windows exception.
+- `docs/audits/install-matrix-2026-04-16.md` — full decision record for the A.5 gate.
+
+## [Previous Unreleased]
+
 Epic `install-ux-hardening` — hardens the install pipeline, CLI output,
 agent activation and handoff runtime so a non-technical user can
 `npm install -g sinapse-ai` on Windows / macOS / Linux, see a minimal

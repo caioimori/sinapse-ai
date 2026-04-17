@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "10.0.0-rc.3",
+  "version": "10.0.0-rc.4",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 186 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -147,12 +147,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SinapseAI/sinapse-ai.git"
+    "url": "git+https://github.com/caioimori/sinapse-ai.git"
   },
   "bugs": {
-    "url": "https://github.com/SinapseAI/sinapse-ai/issues"
+    "url": "https://github.com/caioimori/sinapse-ai/issues"
   },
-  "homepage": "https://github.com/SinapseAI/sinapse-ai#readme",
+  "homepage": "https://github.com/caioimori/sinapse-ai#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
