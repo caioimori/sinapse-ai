@@ -1248,9 +1248,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:4610b68a1b746338330655f45e453a63419977dfca248474fb9c1487b32bbea1
+    hash: sha256:b2968e479ace1540947c264d1f68b7db6eb9bdb2abd2f3a77e5810329187c9d8
     type: data
-    size: 522914
+    size: 522892
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -2116,9 +2116,9 @@ files:
     type: task
     size: 11063
   - path: development/tasks/dev-develop-story.md
-    hash: sha256:9e6c42e99c06367930615ecc87b7e126907965bacf321d324d69e74356980ef1
+    hash: sha256:4da6cb33507a28f0bbce6e1b456fd6cf9e56623576f52284cf6bc973c7d24ffb
     type: task
-    size: 27889
+    size: 28677
   - path: development/tasks/dev-improve-code-quality.md
     hash: sha256:1895669a353fdc27473b55c04998815d3ac80fd2258be1d3453035373cb282db
     type: task
@@ -4228,9 +4228,9 @@ files:
     type: template
     size: 1806
   - path: product/templates/story-tmpl.yaml
-    hash: sha256:b947db1e98315ab78ec454e9c02f702051729b809fe2310cf607104398ea9fcd
+    hash: sha256:43a050de5ef51f53f890fd20f77ac567b297a40597f467b3bc6d00c8193c7fa6
     type: template
-    size: 13840
+    size: 16686
   - path: product/templates/story.hbs
     hash: sha256:126c55c30e2e49816acc7c1712e71e7c26874b010edfe34e8d7890bac67095b2
     type: template
@@ -4352,9 +4352,9 @@ files:
     type: script
     size: 377
   - path: scripts/diagnostics/health-dashboard/package-lock.json
-    hash: sha256:98517a0868f25336c3869e26d42968f47b55902ccb4f2afa0498442bcca4dd86
+    hash: sha256:af446a82b6f1e2815e7b4ccb4cc708dc2823ed0b7b37a64040c34ad0937bdabf
     type: script
-    size: 181772
+    size: 184365
   - path: scripts/diagnostics/health-dashboard/package.json
     hash: sha256:bceff5a33e4bde3dc5cd5796ec2ac2150ca37a6a4b1964cd9c7f7314b7dd5e16
     type: script
