@@ -134,18 +134,18 @@ const BANNER = `
  * Show immersive welcome banner
  */
 function showWelcome() {
-  console.log(colors.primary(BANNER));
+  console.log(BANNER);
   console.log('');
-  console.log(colors.secondary(`  ${t('welcomeMessage')}`));
-  console.log(colors.secondary(`  ${t('welcomeSubtitle')}`));
+  console.log(`  ${t('welcomeMessage')}`);
+  console.log(`  ${t('welcomeSubtitle')}`);
   console.log('');
-  console.log(colors.tertiary('  18 squads · 175 agents · 1,370 tasks'));
-  console.log(colors.tertiary(`  ${t('welcomeDesc1')}`));
-  console.log(colors.tertiary(`  ${t('welcomeDesc2')}`));
+  console.log('  18 squads · 175 agents · 1,370 tasks');
+  console.log(`  ${t('welcomeDesc1')}`);
+  console.log(`  ${t('welcomeDesc2')}`);
   console.log('');
-  console.log(colors.dim(`  ${t('welcomePreparing')}`));
+  console.log(`  ${t('welcomePreparing')}`);
   console.log('');
-  console.log(colors.dim('═'.repeat(80)));
+  console.log('═'.repeat(80));
   console.log('');
 }
 
