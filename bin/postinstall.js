@@ -264,19 +264,53 @@ function run(command, args, opts = {}) {
 }
 
 /**
+ * Detect if we're running inside a global npm install.
+ * Global installs land in /usr/local/lib/node_modules (Mac/Linux) or
+ * %APPDATA%\npm\node_modules (Windows). Agent sync to those paths is pointless
+ * — sync:ide must run inside a real project (per-project install).
+ */
+function isGlobalInstall() {
+  if (process.env.npm_config_global === 'true') return true;
+  const root = PROJECT_ROOT.replace(/\\/g, '/');
+  const globalMarkers = [
+    '/lib/node_modules/sinapse-ai',
+    '/node_modules/sinapse-ai',
+    '/npm/node_modules/sinapse-ai',
+  ];
+  return globalMarkers.some((m) => root.endsWith(m) || root.includes(m));
+}
+
+/**
  * Step 1: sync:ide --ide claude-code.
  * Copies agent definitions to .claude/commands/SINAPSE/agents/ so Claude Code can resolve @developer, etc.
+ *
+ * Skipped on global installs (no project to sync to). EACCES is treated as a
+ * non-critical warning — the user can run `sinapse install` inside their project
+ * to complete setup with proper permissions.
  */
 function stepSyncIde() {
+  if (isGlobalInstall()) {
+    verboseLog(`${c.dim}sync:ide pulado (install global — rode 'sinapse install' no seu projeto)${c.reset}`);
+    return { ok: true, critical: false, skipped: true };
+  }
   verboseLog(`${c.cyan}›${c.reset} Sincronizando agents para Claude Code...`);
   const result = run('npm', ['run', 'sync:ide', '--silent', '--', '--ide', 'claude-code', '--quiet']);
   if (result.error) {
-    error(`sync:ide falhou ao iniciar: ${result.error.message}`);
-    return { ok: false, critical: true };
+    if (result.error.code === 'EACCES' || result.error.code === 'EPERM') {
+      warn("Sem permissão pra sincronizar agents. Rode 'sinapse install' dentro do seu projeto.");
+      return { ok: false, critical: false };
+    }
+    warn(`sync:ide falhou ao iniciar: ${result.error.message} — rode 'sinapse install' no projeto pra completar.`);
+    return { ok: false, critical: false };
   }
   if (result.status !== 0) {
-    error(`sync:ide saiu com código ${result.status}`);
-    return { ok: false, critical: true };
+    const stderr = result.stderr ? result.stderr.toString() : '';
+    if (/EACCES|EPERM|permission denied/i.test(stderr)) {
+      warn("Sem permissão pra sincronizar agents (npm global sem write). Rode 'sinapse install' no seu projeto.");
+      return { ok: false, critical: false };
+    }
+    warn(`sync:ide saiu com código ${result.status} — rode 'sinapse install' no projeto pra completar.`);
+    return { ok: false, critical: false };
   }
   verboseLog(`${c.green}✓${c.reset} Agents sincronizados`);
   return { ok: true, critical: false };
@@ -288,6 +322,9 @@ function stepSyncIde() {
  * Permission errors are non-critical (warn, continue).
  */
 function stepCreateRuntimeDirs() {
+  if (isGlobalInstall()) {
+    return { ok: true, critical: false, skipped: true };
+  }
   const dirs = [
     path.join(PROJECT_ROOT, '.sinapse', 'handoffs'),
     path.join(PROJECT_ROOT, '.sinapse', 'scratchpad'),
@@ -302,8 +339,9 @@ function stepCreateRuntimeDirs() {
         softFailures += 1;
         continue;
       }
-      error(`Falha ao criar ${dir}: ${err.message}`);
-      return { ok: false, critical: true };
+      warn(`Falha ao criar ${dir}: ${err.message} — não-crítico.`);
+      softFailures += 1;
+      continue;
     }
   }
   if (softFailures === 0) {
@@ -320,6 +358,9 @@ function stepCreateRuntimeDirs() {
  *   2 = FAIL (critical — abort postinstall with non-zero exit)
  */
 function stepDoctor() {
+  if (isGlobalInstall()) {
+    return { ok: true, critical: false, skipped: true };
+  }
   verboseLog(`${c.cyan}›${c.reset} Verificando saúde da instalação...`);
   const doctorBin = path.join(PROJECT_ROOT, 'bin', 'sinapse.js');
   if (!fs.existsSync(doctorBin)) {
@@ -391,15 +432,24 @@ function renderFinalSummary(opts = {}) {
   const squadsWord = squads === 1 ? 'squad' : 'squads';
   const prontosWord = squads === 1 && agents === 1 ? 'pronto' : 'prontos';
 
+  const isGlobal = isGlobalInstall();
   const lines = [];
   if (firstRun) {
     lines.push(`${c.bold}Bem-vindo ao SINAPSE!${c.reset} 🎉`);
   }
   lines.push(`${c.bold}SINAPSE ${version}${c.reset} instalado ${c.green}✓${c.reset}`);
-  lines.push(`${c.dim}${agents} ${agentsWord} · ${squads} ${squadsWord} ${prontosWord}${c.reset}`);
+  if (!isGlobal) {
+    lines.push(`${c.dim}${agents} ${agentsWord} · ${squads} ${squadsWord} ${prontosWord}${c.reset}`);
+  }
   lines.push('');
-  lines.push(`Teste:   ${c.cyan}sinapse doctor${c.reset}`);
-  lines.push(`Começar: ${c.cyan}@sinapse${c.reset} no Claude Code`);
+  if (isGlobal) {
+    lines.push(`Próximo passo:`);
+    lines.push(`  cd ${c.cyan}seu-projeto${c.reset}`);
+    lines.push(`  ${c.cyan}sinapse install${c.reset}`);
+  } else {
+    lines.push(`Teste:   ${c.cyan}sinapse doctor${c.reset}`);
+    lines.push(`Começar: ${c.cyan}@sinapse${c.reset} no Claude Code`);
+  }
   lines.push('');
   lines.push(`Docs:    ${c.dim}https://sinapse.club${c.reset}`);
 
@@ -533,6 +583,7 @@ module.exports = {
   main,
   detectFlags,
   shouldSkip,
+  isGlobalInstall,
   isValidInstallRoot,
   stepSyncIde,
   stepCreateRuntimeDirs,
