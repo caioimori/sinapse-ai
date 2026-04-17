@@ -7,6 +7,8 @@
 
 ---
 
+> **Stale version after publish / npx serving old code?** See [`npx-cache.md`](./npx-cache.md) — quick fix is `npx clear-npx-cache`.
+
 ## Table of Contents
 
 - [Quick Diagnosis](#quick-diagnosis)

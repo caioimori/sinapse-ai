@@ -906,6 +906,16 @@ async function cmdUpdateGlobal() {
   logger.always(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
   logger.always('');
 
+  // Story 10.40 — Staleness warning (installed vs executing version)
+  const staleness = detectStaleness(prevVer, VERSION);
+  if (staleness.kind === 'stale') {
+    logger.always(`${YELLOW}WARN:${NC} Versao instalada (${prevVer}) mais antiga que a executada (${VERSION}). Atualizando agora...`);
+    logger.always('');
+  } else if (staleness.kind === 'ahead') {
+    logger.always(`${YELLOW}WARN:${NC} Versao instalada (${prevVer}) mais nova que a executada (${VERSION}). Seu cache npx pode estar velho — rode: ${CYAN}npx clear-npx-cache${NC} ou use ${CYAN}@latest${NC}.`);
+    logger.always('');
+  }
+
   // Story 10.22 — skip LLM prompt when previous llm known. To re-prompt,
   // run `npx sinapse-ai install --force`.
   const llmChoice = existing.llm || await promptLlmChoice();
@@ -1064,20 +1074,129 @@ async function cmdUpdateGlobal() {
   logger.always('');
 }
 
+// ── Staleness Detection (Story 10.40) ────────────────────────────────────────
+
+/**
+ * Compare installed vs executing version. Returns:
+ *   { kind: 'none' }     — versions equal or undetectable
+ *   { kind: 'stale' }    — installed < executing (normal update path)
+ *   { kind: 'ahead' }    — installed > executing (npx cache likely stale)
+ */
+function detectStaleness(installedVersion, executingVersion) {
+  if (!installedVersion || !executingVersion) return { kind: 'none' };
+  if (installedVersion === executingVersion) return { kind: 'none' };
+  let semver;
+  try {
+    semver = require('semver');
+  } catch {
+    return { kind: 'none' };
+  }
+  try {
+    const iv = semver.valid(semver.coerce(installedVersion)) ? installedVersion : null;
+    const ev = semver.valid(semver.coerce(executingVersion)) ? executingVersion : null;
+    if (!iv || !ev) return { kind: 'none' };
+    if (semver.lt(iv, ev)) return { kind: 'stale' };
+    if (semver.gt(iv, ev)) return { kind: 'ahead' };
+    return { kind: 'none' };
+  } catch {
+    return { kind: 'none' };
+  }
+}
+
 // ── Uninstall ────────────────────────────────────────────────────────────────
 
-function cmdUninstall() {
+// Story 10.40 — Remove SINAPSE-authored orqx agents from a global agents dir.
+// Returns { removed: N } for reporting. Only touches files matching *-orqx.md
+// so we don't accidentally remove user-authored agents.
+function removeOrqxAgentsFrom(dir) {
+  if (!fs.existsSync(dir)) return { removed: 0, existed: false };
+  let removed = 0;
+  try {
+    const entries = fs.readdirSync(dir).filter(f => /-orqx\.md$/.test(f));
+    for (const f of entries) {
+      try {
+        fs.unlinkSync(path.join(dir, f));
+        removed++;
+      } catch { /* best-effort */ }
+    }
+  } catch { /* best-effort */ }
+  return { removed, existed: true };
+}
+
+// Story 10.40 — Strip SINAPSE-owned keys from ~/.claude/settings.json without
+// touching anything else the user put there. Safe if the file is missing or
+// already clean.
+function cleanClaudeSettingsJson(settingsPath) {
+  if (!fs.existsSync(settingsPath)) return { touched: false };
+  let raw;
+  try {
+    raw = fs.readFileSync(settingsPath, 'utf8');
+  } catch {
+    return { touched: false };
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return { touched: false, invalid: true };
+  }
+  if (!parsed || typeof parsed !== 'object') return { touched: false };
+  let touched = false;
+  for (const key of ['language', 'sinapse']) {
+    if (Object.prototype.hasOwnProperty.call(parsed, key)) {
+      delete parsed[key];
+      touched = true;
+    }
+  }
+  if (touched) {
+    fs.writeFileSync(settingsPath, JSON.stringify(parsed, null, 2) + '\n');
+  }
+  return { touched };
+}
+
+// Story 10.40 — Confirmation prompt for destructive uninstall.
+// Returns true if user confirmed, false otherwise.
+async function confirmUninstall() {
+  return new Promise((resolve) => {
+    const readline = require('readline');
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    rl.question(`${YELLOW}Remove SINAPSE completely from this machine?${NC} [y/${BOLD}N${NC}] `, (answer) => {
+      rl.close();
+      const a = (answer || '').trim().toLowerCase();
+      resolve(a === 'y' || a === 'yes');
+    });
+  });
+}
+
+async function cmdUninstall(opts = {}) {
   header();
+
+  // AC 2 — confirmation + TTY guard + --yes flag
+  const yes = !!opts.yes;
+  if (!yes) {
+    if (!process.stdin.isTTY) {
+      logger.error(`${RED}Uninstall in non-TTY requires --yes flag.${NC}`);
+      logger.error(`Run ${CYAN}npx sinapse-ai uninstall --yes${NC}`);
+      process.exit(1);
+    }
+    const confirmed = await confirmUninstall();
+    if (!confirmed) {
+      logger.always(`\n${YELLOW}Uninstall cancelled.${NC}\n`);
+      return;
+    }
+  }
+
   logger.always(`${BOLD}Uninstalling Sinapse...${NC}\n`);
 
-  const items = [
+  // Paths that are fully SINAPSE-owned (directory or launcher file)
+  const ownedItems = [
     [SINAPSE_HOME, '~/.sinapse/'],
     [path.join(HOME, '.claude', 'commands', 'SINAPSE'), '~/.claude/commands/SINAPSE/'],
     [path.join(BIN_DIR, 'sinapse'), '~/bin/sinapse'],
     [path.join(BIN_DIR, 'sinapse.cmd'), '~/bin/sinapse.cmd'],
   ];
 
-  for (const [p, label] of items) {
+  for (const [p, label] of ownedItems) {
     if (fs.existsSync(p)) {
       const stat = fs.statSync(p);
       if (stat.isDirectory()) {
@@ -1089,6 +1208,39 @@ function cmdUninstall() {
     } else {
       logger.always(`  ${YELLOW}-${NC} ${label} (not found)`);
     }
+  }
+
+  // Story 10.40 — SINAPSE-authored global agents (suffix *-orqx.md)
+  const claudeAgentsDir = path.join(HOME, '.claude', 'agents');
+  const codexAgentsDir = path.join(HOME, '.codex', 'agents');
+
+  const claudeOrqx = removeOrqxAgentsFrom(claudeAgentsDir);
+  if (!claudeOrqx.existed) {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/*-orqx.md (dir not found)`);
+  } else if (claudeOrqx.removed === 0) {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/*-orqx.md (none present)`);
+  } else {
+    logger.always(`  ${GREEN}✓${NC} Removed ~/.claude/agents/*-orqx.md (${claudeOrqx.removed} files)`);
+  }
+
+  const codexOrqx = removeOrqxAgentsFrom(codexAgentsDir);
+  if (!codexOrqx.existed) {
+    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/*-orqx.md (dir not found)`);
+  } else if (codexOrqx.removed === 0) {
+    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/*-orqx.md (none present)`);
+  } else {
+    logger.always(`  ${GREEN}✓${NC} Removed ~/.codex/agents/*-orqx.md (${codexOrqx.removed} files)`);
+  }
+
+  // Story 10.40 — clean SINAPSE-owned keys from ~/.claude/settings.json
+  const settingsPath = path.join(HOME, '.claude', 'settings.json');
+  const settingsClean = cleanClaudeSettingsJson(settingsPath);
+  if (settingsClean.touched) {
+    logger.always(`  ${GREEN}✓${NC} Cleaned SINAPSE keys from ~/.claude/settings.json`);
+  } else if (settingsClean.invalid) {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/settings.json (invalid JSON, skipped)`);
+  } else {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/settings.json (no SINAPSE keys found)`);
   }
 
   logger.always(`\n${GREEN}Sinapse uninstalled.${NC}`);
@@ -1260,7 +1412,8 @@ function cmdHelp() {
   logger.always(`  ${CYAN}npx sinapse-ai install --force${NC}       Wipe and reinstall fresh, even if already installed`);
   logger.always(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-prompt language/LLM without wiping existing install`);
   logger.always(`  ${CYAN}npx sinapse-ai update${NC}           Update SINAPSE to the latest version`);
-  logger.always(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE from current project`);
+  logger.always(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE globally (prompts for confirmation)`);
+  logger.always(`  ${CYAN}npx sinapse-ai uninstall --yes${NC}  Remove SINAPSE globally (no prompt — required in CI)`);
   logger.always('');
   logger.always(`  ${DIM}Works in CI / non-interactive environments (uses sensible defaults).${NC}`);
   logger.always('');
@@ -1292,6 +1445,11 @@ module.exports = {
   promptLlmChoice,
   SINAPSE_HOME,
   HOME,
+  // Story 10.40 — exported for tests
+  detectStaleness,
+  removeOrqxAgentsFrom,
+  cleanClaudeSettingsJson,
+  cmdUninstall,
 };
 
 if (require.main === module) {
@@ -1308,7 +1466,11 @@ function runRouter() {
   switch (command) {
     case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { logger.error(e.message); process.exit(1); }); break;
     case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(e.message); process.exit(1); });  break;
-    case 'uninstall': cmdUninstall(); break;
+    case 'uninstall': {
+      const isYes = args.includes('--yes') || args.includes('-y');
+      cmdUninstall({ yes: isYes }).catch(e => { logger.error(e.message); process.exit(1); });
+      break;
+    }
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
     case 'doctor': {

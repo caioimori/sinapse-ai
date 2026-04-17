@@ -18,6 +18,8 @@ This guide provides comprehensive instructions for uninstalling SINAPSE from you
 8. [Post-Uninstall Cleanup](#post-uninstall-cleanup)
 9. [Reinstallation](#reinstallation)
 
+> **Cache nao atualizando?** Se voce ja desinstalou e reinstalou e os arquivos parecem antigos, e provavel que seja o cache do npx — veja [`npx-cache.md`](./npx-cache.md).
+
 ## Before You Uninstall
 
 ### Important Considerations
