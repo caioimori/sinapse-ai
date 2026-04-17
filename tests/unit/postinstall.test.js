@@ -110,16 +110,16 @@ describe('postinstall — stepSyncIde()', () => {
     expect(result).toEqual({ ok: true, critical: false });
   });
 
-  test('reports critical failure when spawn errors', () => {
+  test('reports non-critical warn when spawn errors (rc.7: degrade gracefully)', () => {
     spawnSync.mockReturnValue({ status: null, error: new Error('ENOENT') });
     const result = postinstall.stepSyncIde();
-    expect(result).toEqual({ ok: false, critical: true });
+    expect(result).toEqual({ ok: false, critical: false });
   });
 
-  test('reports critical failure on non-zero exit', () => {
+  test('reports non-critical warn on non-zero exit (rc.7: never kill npm install)', () => {
     spawnSync.mockReturnValue({ status: 1, error: null });
     const result = postinstall.stepSyncIde();
-    expect(result).toEqual({ ok: false, critical: true });
+    expect(result).toEqual({ ok: false, critical: false });
   });
 });
 
@@ -207,10 +207,12 @@ describe('postinstall — main() integration', () => {
     expect(spawnSync).toHaveBeenCalledTimes(2);
   });
 
-  test('returns 2 when sync:ide fails critically', () => {
-    spawnSync.mockReturnValueOnce({ status: 1, error: null }); // sync:ide fails
+  test('returns 0 when sync:ide fails (rc.7: degraded gracefully, never kills npm install)', () => {
+    spawnSync
+      .mockReturnValueOnce({ status: 1, error: null })  // sync:ide fails (now non-critical)
+      .mockReturnValueOnce({ status: 0, error: null }); // doctor OK
     const code = postinstall.main();
-    expect(code).toBe(2);
+    expect(code).toBe(0);
   });
 
   test('returns 2 when doctor exits 2 (FAIL)', () => {
