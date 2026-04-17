@@ -1051,75 +1051,8 @@ async function runWizard(options = {}) {
       answers.llmRoutingInstalled = false;
     }
 
-    // Story INS-3.2: Pro Installation Wizard (optional phase)
-    if (!options.skipPro) {
-      try {
-        const { runProWizard } = require('./pro-setup');
-        const isCI = process.env.CI === 'true' || !process.stdout.isTTY;
-        const hasProKey = !!process.env.SINAPSE_PRO_KEY;
-
-        const proOptions = { targetDir: process.cwd() };
-
-        if (isCI && hasProKey) {
-          // CI mode: auto-run if SINAPSE_PRO_KEY is set
-          console.log('\n🔑 Pro license key detected, running Pro setup...');
-          const proResult = await runProWizard({ ...proOptions, quiet: true });
-          answers.proInstalled = proResult.success;
-          answers.proResult = proResult;
-        } else if (!isCI && !options.quiet) {
-          // Interactive mode: ask which edition to install
-          const { edition } = await inquirer.prompt([
-            {
-              type: 'list',
-              name: 'edition',
-              message: colors.primary('Which edition do you want to install?'),
-              choices: [
-                {
-                  name: 'Community (free) — agents, workflows, squads, full CLI',
-                  value: 'community',
-                },
-                {
-                  name: 'Pro (requires account) — premium squads, minds, priority support',
-                  value: 'pro',
-                },
-              ],
-              default: 'community',
-            },
-          ]);
-
-          if (edition === 'pro') {
-            const proResult = await runProWizard(proOptions);
-            answers.proInstalled = proResult.success;
-            answers.proResult = proResult;
-
-            if (!proResult.success && proResult.error) {
-              console.error(`\n⚠️  Pro activation failed: ${proResult.error}`);
-
-              const { fallback } = await inquirer.prompt([
-                {
-                  type: 'confirm',
-                  name: 'fallback',
-                  message: colors.primary('Continue with Community (free) edition instead?'),
-                  default: true,
-                },
-              ]);
-
-              if (!fallback) {
-                console.log('\n👋 Installation cancelled. Run again when ready.');
-                return answers;
-              }
-
-              console.log('\n📦 Continuing with Community edition...\n');
-            }
-          } else {
-            answers.proInstalled = false;
-          }
-        }
-      } catch (error) {
-        console.error(`\n⚠️  Pro setup error: ${error.message}`);
-        answers.proInstalled = false;
-      }
-    }
+    // SINAPSE AI is fully free. No edition selection.
+    answers.proInstalled = false;
 
     // Story 1.8: Installation Validation
     console.log('\n🔍 Validating installation...\n');
