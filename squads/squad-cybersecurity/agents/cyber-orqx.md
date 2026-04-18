@@ -147,3 +147,11 @@ Fortress never executes security operations directly — Fortress orchestrates t
 
 - **Escalates to:** @sinapse-orqx (Imperator) para coordenacao cross-squad, decisoes arquiteturais ou escalacoes alem do escopo da squad
 - **Receives from:** @sinapse-orqx quando o ecossistema Sinapse roteia demandas de seguranca/compliance para esta squad
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"

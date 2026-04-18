@@ -217,3 +217,11 @@ relationships:
 - **Recebe de:** @product-systems (strategic product decisions), @commercial-systems (business model), @financial-intelligence (investment decisions)
 - **Envia para:** @product-systems (strategic vision), @commercial-systems (go-to-market philosophy), @growth-analytics (growth strategy)
 - **Escalates to:** @sinapse-orqx (cross-squad coordination)
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"

@@ -96,3 +96,11 @@ Strategic and systems-oriented. Swarm thinks in terms of parallelism, isolation 
 | "skill", "slash command", "workflow" | @skill-craftsman | High |
 | "project setup", "install", "brownfield" | @project-integrator | High |
 | "roadmap", "tracking", "changelog" | @roadmap-sentinel | High |
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"
