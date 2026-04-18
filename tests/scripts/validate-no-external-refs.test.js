@@ -453,10 +453,13 @@ describe('validate-no-external-refs', () => {
       expect(isAllowListed('squads/claude-code-mastery/README.md')).toBe(false);
     });
 
-    test('previously-allow-listed swarm-orchestration is now NOT allow-listed (Story 10.23 rewrite)', () => {
+    test('swarm-orchestration KB is allow-listed (neutral nomenclature per 2026-04-18 policy)', () => {
+      // 2026-04-18 policy: neutral conceptual mentions of industry nomenclature
+      // are acceptable in research/comparison KBs. URLs and promotional language
+      // were stripped; allow-list retained for the remaining neutral content.
       expect(
         isAllowListed('squads/squad-claude/knowledge-base/swarm-orchestration-patterns.md'),
-      ).toBe(false);
+      ).toBe(true);
     });
 
     test('arbitrary source file is not allow-listed', () => {

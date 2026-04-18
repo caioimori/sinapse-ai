@@ -12,7 +12,7 @@ Two squads in the SINAPSE codebase share the Claude Code domain but serve fundam
 | Register | Path | Purpose | Size |
 |----------|------|---------|------|
 | **SINAPSE-voice** | `squads/squad-claude/agents/*.md` | Personas with SINAPSE brand voice, integrated into the orchestration graph | 60–100 lines per agent |
-| **BMAD operational** | `squads/claude-code-mastery/agents/*.md` | BMAD activation blocks with external references (books, tools, external frameworks) | 800–1250 lines per agent |
+| **Extended persona** | `squads/claude-code-mastery/agents/*.md` | Long-form activation blocks with external references (books, tools, external frameworks) | 800–1250 lines per agent |
 
 They intentionally describe overlapping territory with **different contracts**.
 
@@ -25,10 +25,10 @@ They intentionally describe overlapping territory with **different contracts**.
 - **Contract:** Plug into `sinapse-orqx` routing, respect SINAPSE commands (`*help`, `*task {name}`, etc.), respect Constitution.
 - **External refs:** None — self-contained inside the framework.
 
-### BMAD operational register (`claude-code-mastery/`)
+### Extended persona register (`claude-code-mastery/`)
 
 - **Reader:** Operators wanting deep Claude Code mastery with external canonical references.
-- **Voice:** BMAD-style activation blocks (long-form, English, with explicit YAML headers).
+- **Voice:** Long-form activation blocks (English, with explicit YAML headers).
 - **Contract:** Reference external authoritative sources (Anthropic docs, MCP spec, Claude Code changelog).
 - **External refs:** Allowed and expected — this register is the bridge to the external ecosystem.
 
@@ -37,21 +37,21 @@ They intentionally describe overlapping territory with **different contracts**.
 Three independent audits (2026-04-18, pre-GA 1.0.0) proposed collapsing one into the other. All three were aborted because:
 
 1. **Capability loss:** Merging would delete either ~6500 lines of operational content OR the SINAPSE persona layer that users interact with daily.
-2. **Contract mismatch:** SINAPSE-voice has constraints BMAD register explicitly rejects (no external refs, short form). Forcing either contract on the other breaks the target audience.
+2. **Contract mismatch:** SINAPSE-voice has constraints the extended register explicitly rejects (no external refs, short form). Forcing either contract on the other breaks the target audience.
 3. **Tooling support:** `scripts/validate-no-external-refs.js` already has `HARDCODED_ALLOW_LIST` at line 119 for `skill-craftsman` — this is the codified acknowledgment that the two registers have different validation rules.
 4. **Story 10.23:** The dual register was an explicit design decision, documented as a story. Undoing it without a counter-story is a constitutional violation (Article IV: No Invention).
 
 ## How to Distinguish (for future auditors)
 
-| Clue | SINAPSE-voice | BMAD operational |
+| Clue | SINAPSE-voice | Extended persona |
 |------|---------------|------------------|
 | Path prefix | `squads/squad-claude/` | `squads/claude-code-mastery/` |
 | File size | 60–100 lines | 800–1250 lines |
-| Frontmatter | Minimal YAML, SINAPSE fields | Large YAML, BMAD `activation` block |
+| Frontmatter | Minimal YAML, SINAPSE fields | Large YAML, extended `activation` block |
 | Presence of `ACTIVATION-NOTICE` | No | Yes (first 10 lines) |
 | External URL refs | No (blocked by validator) | Yes (allowed) |
 | Language | Portuguese-first | English-first |
-| Persona depth | Short identity + routing | Full BMAD operational block |
+| Persona depth | Short identity + routing | Full Extended persona block |
 
 If a file has `ACTIVATION-NOTICE` at the top and is > 500 lines, it belongs to `claude-code-mastery/` and MUST NOT be normalized to the SINAPSE-voice register.
 
@@ -62,7 +62,7 @@ If a file has `ACTIVATION-NOTICE` at the top and is > 500 lines, it belongs to `
 ```js
 const HARDCODED_ALLOW_LIST = [
   // ...
-  'skill-craftsman', // dual register — BMAD operational block allowed
+  'skill-craftsman', // dual register — Extended persona block allowed
 ];
 ```
 

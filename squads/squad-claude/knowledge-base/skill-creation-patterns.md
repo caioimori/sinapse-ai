@@ -196,14 +196,13 @@ Do NOT use when:
 | Official vendor skills | 307 |
 | Community skills | 144+ |
 | Platforms supporting SKILL.md format | 33 |
-| obra/superpowers stars | 134,347 |
-| anthropics/skills stars | 110,197 |
+| Notable community frameworks | Tens to hundreds of K stars (varies) |
 
 ### Quality Distribution
 
 | Tier | Description | Estimated % |
 |------|-------------|-------------|
-| S-tier | Official Anthropic + Trail of Bits + Superpowers | ~5% |
+| S-tier | Official Anthropic + top-tier security-reviewed sources | ~5% |
 | A-tier | Official vendors (Vercel, Netlify, Expo, Microsoft) | ~15% |
 | B-tier | Strong community (documented, tested) | ~25% |
 | C-tier | Basic community (functional, no polish) | ~35% |
@@ -211,32 +210,31 @@ Do NOT use when:
 
 ---
 
-## obra/superpowers Framework
+## Community Skill Framework Patterns
 
-The dominant community reference with 134K stars — not just skills, but a complete development methodology.
+Community skill frameworks commonly converge on a shared set of high-value meta-skills,
+which inform SINAPSE's own skill taxonomy.
 
-### 14 Skills Included
+### Common Skill Categories Observed
 
-- `brainstorming` — Structured ideation
-- `dispatching-parallel-agents` — Parallel agent orchestration
-- `executing-plans` — Implementation plan execution
-- `finishing-a-development-branch` — Branch finalization
-- `receiving-code-review` — Code review reception
-- `requesting-code-review` — Code review solicitation
-- `subagent-driven-development` — Development with subagents
-- `systematic-debugging` — Systematic debug process
-- `test-driven-development` — TDD workflow
-- `using-git-worktrees` — Worktrees for parallelism
-- `verification-before-completion` — Pre-delivery verification
-- `writing-plans` — Implementation plan writing
-- `writing-skills` — Meta-skill for creating skills
-- `using-superpowers` — Framework usage guide
+- Structured ideation / brainstorming
+- Parallel agent orchestration
+- Implementation plan execution
+- Branch finalization flows
+- Code review reception / solicitation
+- Subagent-driven development
+- Systematic debugging
+- TDD workflow
+- Worktrees for parallelism
+- Pre-delivery verification
+- Implementation plan writing
+- Meta-skills for creating skills
 
-### Methodology (5 steps)
+### Recurring Methodology (5 steps)
 
 1. Understand what user wants (spec)
 2. Show spec in digestible chunks
-3. Create implementation plan for "enthusiastic junior engineer"
+3. Create implementation plan suited to a junior-level contributor
 4. Subagent-driven development (one agent per task)
 5. Two-stage review (spec compliance + code quality)
 

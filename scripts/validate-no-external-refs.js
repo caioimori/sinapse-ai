@@ -79,7 +79,16 @@ const { execSync } = require('child_process');
  * matching inside longer identifiers (e.g., `sinapse-ai` must not hit even
  * though it contains `ai`).
  */
-const FORBIDDEN_REGEX = /\b(aiox|synkra|synkraai|bmad)\b/gi;
+const FORBIDDEN_REGEX = /\b(aiox|synkra|synkraai|bmad|llamaindex|langchain|autogen|crewai|metagpt)\b/gi;
+
+/**
+ * Persona-leak detector — flags BMAD-heritage persona names ("Sally",
+ * "Winston", "Sarah") only when used in an agent/persona/author context.
+ * This catches regressions where a persona name slips back into a canonical
+ * SINAPSE agent or doc. Conceptual/unrelated uses of these common first
+ * names in research or narrative content are NOT flagged by this regex.
+ */
+const PERSONA_LEAK_REGEX = /\b(sally|winston|sarah)\s*(?:\(@|,?\s*\(?@)(architect|product-lead|pm|po|dev|developer|ux-design-expert)/gi;
 
 /**
  * Hardcoded allow-list. Every entry is a POSIX-style path relative to the
@@ -117,6 +126,22 @@ const HARDCODED_ALLOW_LIST = [
   // studying external agile-AI methodologies and the references are
   // load-bearing, not inherited noise.
   'squads/claude-code-mastery/agents/skill-craftsman.md',
+
+  // ── Research/comparison KBs — neutral nomenclature only ──────────────
+  // These knowledge bases contain comparison tables of multi-agent
+  // frameworks (CrewAI, LangChain, AutoGen, MetaGPT) as industry
+  // nomenclature. Per the 2026-04-18 third-party policy, neutral
+  // conceptual mentions are OK; URLs and promotional/endorse language
+  // were stripped in the cleanup pass.
+  'squads/squad-claude/knowledge-base/swarm-orchestration-patterns.md',
+  'squads/squad-cloning/knowledge-base/multi-agent-deployment-patterns.md',
+  'squads/squad-research/knowledge-base/agentic-second-brain-reference.md',
+  'squads/squad-research/knowledge-base/multi-agent-research-methodology.md',
+  'squads/squad-claude/knowledge-base/skill-creation-patterns.md',
+  'squads/claude-code-mastery/knowledge-base/claude-code-internals-reference.md',
+
+  // Standards doc with competitive positioning table (nomenclature only).
+  '.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO-V2.1-COMPLETE.md',
 ];
 
 /**
@@ -246,6 +271,15 @@ function scanFile(rootDir, relPath) {
         match: match[0],
       });
     }
+    PERSONA_LEAK_REGEX.lastIndex = 0;
+    let pMatch;
+    while ((pMatch = PERSONA_LEAK_REGEX.exec(line)) !== null) {
+      violations.push({
+        file: relPath,
+        line: i + 1,
+        match: pMatch[0],
+      });
+    }
   }
   return violations;
 }
@@ -362,6 +396,7 @@ function main() {
 // Exports for unit testing.
 module.exports = {
   FORBIDDEN_REGEX,
+  PERSONA_LEAK_REGEX,
   HARDCODED_ALLOW_LIST,
   isAllowListed,
   listTrackedFiles,
