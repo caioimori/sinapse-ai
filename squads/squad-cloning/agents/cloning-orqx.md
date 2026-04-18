@@ -186,3 +186,11 @@ Fase 8: Assemble & Validate → Assembly → squad completa
 | B (Moderado) | 20-100h | Transcricao + busca + livros |
 | C (Escasso) | <20h | Livros primarios + terceiros |
 | D (Historico) | So obras escritas | OCR + biografias + academicos |
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"

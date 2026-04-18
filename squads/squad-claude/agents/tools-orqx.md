@@ -217,3 +217,11 @@ IF both unclear:
 - ALWAYS identify operation type before routing
 - ALWAYS validate output against checklist before returning
 - ALWAYS clarify if domain unknown or operation unclear
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"

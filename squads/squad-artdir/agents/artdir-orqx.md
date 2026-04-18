@@ -143,3 +143,11 @@ Canvas → Consolidacao dos 8 deliverables → Entrega
 
 - **Escalates to:** @sinapse-orqx (Imperator) para coordenacao cross-squad ou decisoes alem do escopo de art direction
 - **Receives from:** @sinapse-orqx quando o ecossistema roteia demandas de art direction, design de LP, ou visual strategy
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"
