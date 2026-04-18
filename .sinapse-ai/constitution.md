@@ -305,6 +305,37 @@ Todo projeto que manipula dados de usuarios DEVE seguir praticas de seguranca ri
 
 ---
 
+### XI. Conservative Default (MUST)
+
+Em qualquer auditoria, refactor, fusão ou cleanup: quando houver dúvida sobre remover uma capability, agent, squad ou entidade, **MANTER por default**.
+
+**Rationale:** Custo de remover errado (perda de diferencial, quebra silenciosa) >> custo de manter (código latente, inofensivo).
+
+**Precedente histórico (2026-04-18):**
+Auditoria pré-GA 1.0.0 identificou "duplicação" entre `squad-claude` e `claude-code-mastery`. Análise sequencial gerou 3 false positives:
+1. Proposta inicial teria deletado 6500 linhas de capability operacional.
+2. Redirecionamento teria deletado arquivo inteiro do mastery.
+3. Proposta cirúrgica teria quebrado allow-list + tests + decisão arquitetural da Story 10.23.
+
+Resultado: nada foi fundido. Dual register preservado. Article XI formalizado pra prevenir dano em auditorias futuras.
+
+**Aplica em:** agent rename, curadoria squads, consolidação orqx, cleanup tasks/tools, qualquer "limpeza pra simplificar".
+
+**Regras:**
+- MUST: Em dúvida sobre remoção → MANTER. Documentar a dúvida, não executar a remoção.
+- MUST: Remoções exigem justificativa explícita + validação cross-agent (arquiteto + dono do domínio).
+- MUST: Audit trails (git log, stories) são fonte de verdade — consultar antes de propor remoção.
+- MUST NOT: Agrupar remoções heterogêneas em "cleanup sweeps" — cada remoção é sua própria decisão.
+- MUST NOT: Usar "aparente duplicação" como justificativa suficiente — investigar se é dual register intencional.
+
+**Gate:** QA review em auditorias DEVE verificar que remoções propostas passaram pelo check Article XI antes de aprovar.
+
+**Violação:** falha de qualidade constitucional (ver Article V).
+
+**Rule file:** `docs/pt/architecture/sub-orqx-pattern.md`, `docs/pt/architecture/dual-register-pattern.md` (precedentes documentados).
+
+---
+
 ## Governance
 
 ### Amendment Process
