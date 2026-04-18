@@ -8,7 +8,7 @@
 
 **Versão do Documento**: 1.0
 **Última Atualização**: 2025-10-25
-**Autor**: Winston (@architect) + Sarah (@product-lead)
+**Autor**: @architect + @product-lead
 **Contexto**: Epic 3 Fase 2 - Melhorias Estratégicas (Stories 3.13-3.19)
 
 ---
@@ -78,7 +78,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ## Limites de Responsabilidade dos Agentes
 
-### @architect (Winston) 🏗️
+### @architect 🏗️
 **Papel**: Arquiteto de Sistema Holístico e Líder Técnico Full-Stack
 
 **Escopo Principal**:
@@ -223,7 +223,7 @@ Este documento define limites claros de responsabilidade para todos os agentes S
 
 ---
 
-### @product-lead (Sarah) 📝
+### @product-lead 📝
 **Papel**: Product Owner Técnica e Guardiã de Processos
 
 **Escopo Principal**:
@@ -440,6 +440,6 @@ Se novos agentes forem adicionados via Squads:
 
 ---
 
-*Documento mantido por @architect (Winston) e @product-lead (Sarah)*
+*Documento mantido por @architect e @product-lead*
 *Última revisão: 2025-10-25*
 

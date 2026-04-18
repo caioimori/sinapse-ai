@@ -8,7 +8,7 @@
 
 **Versão:** 1.0.0
 **Criado em:** 2025-10-29
-**Autores:** Sarah (@product-lead), Winston (@architect)
+**Autores:** @product-lead, @architect
 **Propósito:** Definir padrões para integração de scripts utilitários no framework SINAPSE
 
 ---
@@ -355,5 +355,5 @@ Um utilitário é integrado com sucesso quando:
 
 **Versão do Guia:** 1.0.0
 **Última Atualização:** 2025-10-29
-**Mantenedor:** Winston (@architect)
+**Mantenedor:** @architect
 
