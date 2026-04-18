@@ -385,40 +385,6 @@ export NODE_OPTIONS="--max-old-space-size=1024"
 npx sinapse-ai
 ```
 
-### Problema: Erros do LlamaIndex
-
-**Sintomas:**
-```
-Error: LlamaIndex initialization failed
-```
-
-**Soluções:**
-
-1. **Verificar chaves de API:**
-```bash
-# Verificar chave OpenAI para embeddings
-echo $OPENAI_API_KEY
-
-# Testar acesso à API
-curl https://api.openai.com/v1/models \
-  -H "Authorization: Bearer $OPENAI_API_KEY"
-```
-
-2. **Usar embeddings locais:**
-```javascript
-// .sinapse/memory-config.json
-{
-  "embedModel": "local",
-  "localModelPath": "./models/embeddings"
-}
-```
-
-3. **Reinstalar LlamaIndex:**
-```bash
-npm uninstall llamaindex
-npm install llamaindex@latest
-```
-
 ## Problemas de Performance
 
 ### Problema: Execução lenta de comandos

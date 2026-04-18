@@ -337,7 +337,7 @@ steps:
 
 ## Conceitos Básicos da Camada de Memória
 
-A camada de memória alimentada pelo LlamaIndex fornece gerenciamento inteligente de contexto.
+A camada de memória da SINAPSE (Chrome Brain v3) fornece gerenciamento inteligente de contexto com grounding do Second Brain e recuperação semântica nativa.
 
 ### Como a Memória Funciona
 

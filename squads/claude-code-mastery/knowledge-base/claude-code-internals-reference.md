@@ -642,12 +642,11 @@ The SKILL.md format is the de facto universal standard, supported by Claude Code
 
 ### Top Repositories
 
-| Repository | Stars | Description |
-|------------|-------|-------------|
-| obra/superpowers | 134K | Complete dev methodology framework |
-| anthropics/skills | 110K | Official Anthropic skills + spec |
-| anthropics/claude-code | 108K | Official Claude Code CLI |
-| trailofbits/skills | 4.2K | 73 security-focused skills |
+| Repository | Description |
+|------------|-------------|
+| anthropics/skills | Official Anthropic skills + spec |
+| anthropics/claude-code | Official Claude Code CLI |
+| (Broader community ecosystem) | Multiple third-party skill collections exist; evaluate each independently |
 
 ---
 
@@ -910,14 +909,14 @@ SINAPSE uses primarily Orchestrator-Worker (Imperator at top, squad orchestrator
 |-----------|---------|-----------------|
 | Cross-domain orchestration | 20+ squads | None |
 | Constitution/governance | Formal, enforced | None |
-| Quality gates | Automatic (hooks + QA) | obra/superpowers (2-stage review) |
+| Quality gates | Automatic (hooks + QA) | Community frameworks (varies) |
 | Memory + context | Agent memory + scratchpad | None |
 | Skill format | Proprietary (powerful) | SKILL.md (universal) |
 
 ### Strategic Recommendations
 
 1. Export squad knowledge as SKILL.md for 33-platform reach
-2. Position as "Superpowers on steroids" -- not just skills but orchestrated system
+2. Position as a fully orchestrated multi-agent system, not just a skill library
 3. Monitor KAIROS pattern for autonomous agent capabilities
 4. Adopt prompt caching strategies from Claude Code architecture
 5. Implement Deferred Tool pattern to reduce context consumption

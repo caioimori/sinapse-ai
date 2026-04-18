@@ -10,13 +10,13 @@ Este documento captura o estado atual do codebase do **SINAPSE**, servindo como 
 
 ## Escopo do Documento
 
-Documentação abrangente do framework SINAPSE para servir como baseline para o MVP do SINAPSE, que inclui: Rebranding, Workflow de Setup de IDE, Camada de Memória com LlamaIndex e o Meta-Agente `sinapse-developer`.
+Documentação abrangente do framework SINAPSE para servir como baseline para o MVP do SINAPSE, que inclui: Rebranding, Workflow de Setup de IDE, Camada de Memória (Chrome Brain v3) e o Meta-Agente `sinapse-developer`.
 
 ## Registro de Alterações
 
 | Data | Versão | Descrição | Autor |
 | :--- | :--- | :--- | :--- |
-| 2025-07-24 | 1.0 | Geração inicial da arquitetura base. | Winston |
-| 2025-07-24 | 2.0 | Estrutura de diretórios corrigida com base no input do usuário. | Winston |
-| 2025-07-24 | 3.0 | Adição dos novos componentes do MVP. | Winston |
+| 2025-07-24 | 1.0 | Geração inicial da arquitetura base. | @architect |
+| 2025-07-24 | 2.0 | Estrutura de diretórios corrigida com base no input do usuário. | @architect |
+| 2025-07-24 | 3.0 | Adição dos novos componentes do MVP. | @architect |
 
