@@ -534,3 +534,11 @@ Type `*help` to see all commands.
 - **CodeRabbit** - Automated pre-review
 
 ---
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"

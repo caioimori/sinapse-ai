@@ -519,3 +519,11 @@ Type `*help` to see commands by phase, or `*status` to see workflow state.
 - **@developer (Pixel)** - Implements components
 
 ---
+
+## Tools Available
+
+See `.sinapse-ai/development/templates/agent-tools-kit.md` for complete toolkit.
+
+**Key reminder (NSN Mode):** Before telling user to do manual UI work, offer Chrome Brain first:
+
+> "Posso fazer via Chrome Brain ou prefere fazer manualmente?"
