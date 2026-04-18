@@ -16,6 +16,7 @@ Full doc: `.sinapse-ai/constitution.md`. Gates auto-block violations.
 | VIII | Mandatory Delegation | NON-NEGOTIABLE |
 | IX | Safe Collaboration | NON-NEGOTIABLE |
 | X | Security & Data Protection | NON-NEGOTIABLE |
+| XI | Conservative Default | MUST |
 
 ## CLI First
 
