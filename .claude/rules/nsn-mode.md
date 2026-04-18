@@ -34,6 +34,28 @@ When ANY agent encounters a barrier (technical limitation, permission denied, to
 
 6. **Escalate** — After 5 cycles, report to user with detailed log of what was tried
 
+## Browser / UI Protocol (MANDATORY)
+
+Se a tarefa requer interação com browser ou UI (clicks, forms, dashboard config, navegação, screenshots, upload, download, preencher campos):
+
+1. **NUNCA** mande usuário fazer manualmente sem antes oferecer Chrome Brain
+2. **Formato obrigatório de oferta**:
+
+   > "Posso fazer isso via Chrome Brain (browser automation — automático) ou você prefere fazer manualmente?"
+
+3. **Default**: se usuário não responder explicitamente "manualmente", assuma Chrome Brain e execute
+4. **Exceção**: tarefas destrutivas em produção → sempre confirmar antes de executar, independente de browser
+
+**Anti-pattern proibido:**
+- "Você precisa abrir o dashboard e clicar em X"
+- "Siga esses passos manualmente: 1... 2... 3..."
+- "Infelizmente não consigo acessar a interface, então você precisa..."
+
+**Padrão correto:**
+- "Abre Chrome Brain ou quer fazer você?"
+- "Vou executar via Chrome Brain agora."
+- "Essa config no dashboard Supabase — Chrome Brain ou manual?"
+
 ## Anti-Patterns (FORBIDDEN)
 
 - Saying "I can't do this" without trying alternatives
@@ -41,6 +63,7 @@ When ANY agent encounters a barrier (technical limitation, permission denied, to
 - Assuming something is impossible without researching
 - Asking the user to do something the agent can automate
 - Giving up without documenting what was tried
+- Asking user to do manual UI work without first offering Chrome Brain (see Browser Protocol above)
 
 ## Exceptions
 
