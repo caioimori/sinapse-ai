@@ -25,8 +25,8 @@
     },
     "description": {
       "type": "string",
-      "maxLength": 500,
-      "description": "Brief description of the squad's purpose"
+      "maxLength": 2000,
+      "description": "Description of the squad's purpose (multi-paragraph allowed up to 2000 chars)"
     },
     "author": {
       "type": "string",
@@ -40,8 +40,8 @@
     },
     "slashPrefix": {
       "type": "string",
-      "pattern": "^[a-z0-9-]+$",
-      "description": "Prefix for slash commands (e.g., 'etl' for /etl-*)"
+      "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
+      "description": "Prefix for slash commands (e.g., 'etl' or 'SINAPSE'). Must start with a letter; letters, digits, and hyphens allowed."
     },
     "sinapse": {
       "type": "object",

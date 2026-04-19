@@ -1,168 +1,13 @@
-name: saas-platform-art-direction-cycle
-version: "1.0.0"
-description: >
-  Ciclo completo de art direction para SaaS / plataformas / produtos logados.
-  Diferente do full-art-direction-cycle (LP-focused), este workflow otimiza
-  para ergonomia cognitiva de uso diario + design system multi-surface +
-  premium packaging. Ativa os 10 Pilares (7 originais + 3 novos) com
-  Axiom, Atlas, Vertex e Aura como agentes primarios.
-
-trigger: user_briefing | cross_squad_request
-
-pillars_activated: [1, 2, 3, 4, 5, 7, 8, 9, 10]
-# Pilar 6 (CRO) fica PARTIAL — ativa so no pricing page e upgrade paths
-# Pilar 4 (Motion) fica PARTIAL — motion proposital, nao marketing flash
-
-phases:
-  - id: canon-consult
-    name: "Consulta ao Canon SaaS"
-    agent: platform-aesthetic-director
-    task: consult-saas-canon
-    description: "Vertex consulta o canon das 6 refs e retorna category-fit + principios extraidos"
-    inputs:
-      - product_category
-      - audience
-      - positioning
-      - pricing_posture
-      - proposed_references (optional)
-    outputs:
-      - canon_consultation
-      - category_fit_matrix
-      - custom_craft_candidates
-      - commodity_audit_result
-    blocking: "Se commodity_audit_result == FAIL, escalar para Aura e bloquear o ciclo ate remediar"
-
-  - id: token-system
-    name: "Design System Multi-Surface"
-    agent: design-system-architect
-    task: design-token-system
-    description: "Atlas desenha o sistema canonico de tokens e dialetos por surface"
-    depends_on: [canon-consult]
-    inputs:
-      - brand_tokens
-      - target_surfaces
-      - product_context
-      - canon_consultation (from canon-consult)
-    outputs:
-      - canonical_tokens
-      - surface_dialects
-      - token_registry
-      - versioning_protocol
-    sub_routing:
-      - color-psychologist: color tokens
-      - type-systemist: type tokens
-      - motion-architect: motion tokens
-      - layout-engineer: spacing tokens
-
-  - id: product-surface
-    name: "Art Direction de Surfaces Logadas"
-    agent: product-surface-director
-    task: design-product-surface
-    description: "Axiom desenha cada surface logada principal aplicando o Pilar 8"
-    depends_on: [token-system]
-    inputs:
-      - existing_tokens (from token-system)
-      - personas
-      - dark_mode_priority
-      - density_target
-    outputs:
-      - product_surface_brief
-      - empty_state_spec
-      - dark_mode_spec
-      - token_requests
-    sub_routing:
-      - ia-architect: disclosure e cognitive zones
-      - layout-engineer: grid e densidade
-      - interaction-designer: hover e micro-interactions
-    iterate_per_surface: true
-
-  - id: first-5-minutes
-    name: "First 5 Minutes Choreography"
-    agent: product-surface-director
-    co_agent: premium-packaging-strategist
-    task: first-5-minutes-choreography
-    description: "Axiom + Aura desenham a choreographia de onboarding (arrival, ceremony, orientation, first value, activation)"
-    depends_on: [product-surface]
-    inputs:
-      - product
-      - activation_metric
-      - premium_positioning
-    outputs:
-      - first_5_minutes_spec
-      - arrival_screen_design
-      - ceremony_spec
-      - first_value_experience
-      - activation_punctuation
-      - motion_budget
-
-  - id: premium-packaging
-    name: "Premium Packaging Brief"
-    agent: premium-packaging-strategist
-    task: create-premium-packaging-brief
-    description: "Aura entrega o brief completo de packaging premium aplicando os 5 principios nao-negociaveis"
-    depends_on: [canon-consult, token-system, product-surface, first-5-minutes]
-    inputs:
-      - product
-      - target_price
-      - competitor_price
-      - canon_consultation
-      - canonical_tokens
-      - first_5_minutes_spec
-    outputs:
-      - premium_packaging_brief
-      - custom_craft_spec
-      - friction_point_design
-      - restraint_audit
-      - pillar_10_checklist
-    sub_routing:
-      - type-systemist: custom type craft (se selecionado)
-      - motion-architect: motion signature (se selecionado)
-      - cro-persuasion: friction point no funil
-    blocking: "Aura bloqueia se 5 diagnostic questions nao forem respondidas"
-
-  - id: drift-audit
-    name: "Auditoria de Drift Multi-Surface"
-    agent: design-system-architect
-    task: audit-drift-multi-surface
-    description: "Atlas audita drift entre surfaces deployadas (se existem) contra os tokens canonicos"
-    depends_on: [token-system]
-    skip_if: "greenfield project"
-    inputs:
-      - product_url
-      - canonical_tokens
-      - surfaces_to_audit
-    outputs:
-      - drift_inventory
-      - remediation_priorities
-      - premium_impact_report
-
-  - id: validate
-    name: "Validacao 10 Pilares"
-    agent: artdir-orqx
-    task: validate-against-pillars
-    description: "Canvas valida todos os deliverables contra os 10 pilares (7 originais + 3 novos)"
-    depends_on: [canon-consult, token-system, product-surface, first-5-minutes, premium-packaging]
-    inputs:
-      - all previous phase outputs
-    outputs:
-      - validation_report
-      - verdict
-    sub_routing:
-      - accessibility-guardian: WCAG validation
-      - platform-aesthetic-director: canon adherence check
-    decision:
-      PASS: "Entrega os deliverables como output final"
-      CONCERNS: "Entrega com concerns documentados"
-      FAIL: "Retorna ao phase relevante com remediation list"
-
-  - id: remediate
-    name: "Remediacao"
-    agent: artdir-orqx
-    description: "Corrige gaps identificados na validacao"
-    depends_on: [validate]
-    condition: "verdict == FAIL"
-    max_iterations: 2
-
+pillars_activated:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 7
+  - 8
+  - 9
+  - 10
 quality_gates:
   - commodity_audit_passed: true
   - canonical_tokens_defined: true
@@ -172,3 +17,322 @@ quality_gates:
   - first_5_minutes_choreography_documented: true
   - five_premium_principles_honored: true
   - pillar_8_9_10_validated: true
+workflow:
+  name: saas-platform-art-direction-cycle
+  version: 1.0.0
+  description: |
+    Ciclo completo de art direction para SaaS / plataformas / produtos logados. Diferente do full-art-direction-cycle (LP-focused), este workflow otimiza para ergonomia cognitiva de uso diario + design system multi-surface + premium packaging. Ativa os 10 Pilares (7 originais + 3 novos) com Axiom, Atlas, Vertex e Aura como agentes primarios.
+  trigger: user_briefing | cross_squad_request
+  phases:
+    - id: canon-consult
+      name: Consulta ao Canon SaaS
+      agent: platform-aesthetic-director
+      task: consult-saas-canon
+      description: Vertex consulta o canon das 6 refs e retorna category-fit + principios extraidos
+      inputs:
+        - product_category
+        - audience
+        - positioning
+        - pricing_posture
+        - proposed_references (optional)
+      outputs:
+        - canon_consultation
+        - category_fit_matrix
+        - custom_craft_candidates
+        - commodity_audit_result
+      blocking: Se commodity_audit_result == FAIL, escalar para Aura e bloquear o ciclo ate remediar
+    - id: token-system
+      name: Design System Multi-Surface
+      agent: design-system-architect
+      task: design-token-system
+      description: Atlas desenha o sistema canonico de tokens e dialetos por surface
+      depends_on:
+        - canon-consult
+      inputs:
+        - brand_tokens
+        - target_surfaces
+        - product_context
+        - canon_consultation (from canon-consult)
+      outputs:
+        - canonical_tokens
+        - surface_dialects
+        - token_registry
+        - versioning_protocol
+      sub_routing:
+        - color-psychologist: color tokens
+        - type-systemist: type tokens
+        - motion-architect: motion tokens
+        - layout-engineer: spacing tokens
+    - id: product-surface
+      name: Art Direction de Surfaces Logadas
+      agent: product-surface-director
+      task: design-product-surface
+      description: Axiom desenha cada surface logada principal aplicando o Pilar 8
+      depends_on:
+        - token-system
+      inputs:
+        - existing_tokens (from token-system)
+        - personas
+        - dark_mode_priority
+        - density_target
+      outputs:
+        - product_surface_brief
+        - empty_state_spec
+        - dark_mode_spec
+        - token_requests
+      sub_routing:
+        - ia-architect: disclosure e cognitive zones
+        - layout-engineer: grid e densidade
+        - interaction-designer: hover e micro-interactions
+      iterate_per_surface: true
+    - id: first-5-minutes
+      name: First 5 Minutes Choreography
+      agent: product-surface-director
+      co_agent: premium-packaging-strategist
+      task: first-5-minutes-choreography
+      description: Axiom + Aura desenham a choreographia de onboarding (arrival, ceremony, orientation, first value, activation)
+      depends_on:
+        - product-surface
+      inputs:
+        - product
+        - activation_metric
+        - premium_positioning
+      outputs:
+        - first_5_minutes_spec
+        - arrival_screen_design
+        - ceremony_spec
+        - first_value_experience
+        - activation_punctuation
+        - motion_budget
+    - id: premium-packaging
+      name: Premium Packaging Brief
+      agent: premium-packaging-strategist
+      task: create-premium-packaging-brief
+      description: Aura entrega o brief completo de packaging premium aplicando os 5 principios nao-negociaveis
+      depends_on:
+        - canon-consult
+        - token-system
+        - product-surface
+        - first-5-minutes
+      inputs:
+        - product
+        - target_price
+        - competitor_price
+        - canon_consultation
+        - canonical_tokens
+        - first_5_minutes_spec
+      outputs:
+        - premium_packaging_brief
+        - custom_craft_spec
+        - friction_point_design
+        - restraint_audit
+        - pillar_10_checklist
+      sub_routing:
+        - type-systemist: custom type craft (se selecionado)
+        - motion-architect: motion signature (se selecionado)
+        - cro-persuasion: friction point no funil
+      blocking: Aura bloqueia se 5 diagnostic questions nao forem respondidas
+    - id: drift-audit
+      name: Auditoria de Drift Multi-Surface
+      agent: design-system-architect
+      task: audit-drift-multi-surface
+      description: Atlas audita drift entre surfaces deployadas (se existem) contra os tokens canonicos
+      depends_on:
+        - token-system
+      skip_if: greenfield project
+      inputs:
+        - product_url
+        - canonical_tokens
+        - surfaces_to_audit
+      outputs:
+        - drift_inventory
+        - remediation_priorities
+        - premium_impact_report
+    - id: validate
+      name: Validacao 10 Pilares
+      agent: artdir-orqx
+      task: validate-against-pillars
+      description: Canvas valida todos os deliverables contra os 10 pilares (7 originais + 3 novos)
+      depends_on:
+        - canon-consult
+        - token-system
+        - product-surface
+        - first-5-minutes
+        - premium-packaging
+      inputs:
+        - all previous phase outputs
+      outputs:
+        - validation_report
+        - verdict
+      sub_routing:
+        - accessibility-guardian: WCAG validation
+        - platform-aesthetic-director: canon adherence check
+      decision:
+        PASS: Entrega os deliverables como output final
+        CONCERNS: Entrega com concerns documentados
+        FAIL: Retorna ao phase relevante com remediation list
+    - id: remediate
+      name: Remediacao
+      agent: artdir-orqx
+      description: Corrige gaps identificados na validacao
+      depends_on:
+        - validate
+      condition: verdict == FAIL
+      max_iterations: 2
+  id: saas-platform-art-direction-cycle
+  sequence:
+    - id: canon-consult
+      name: Consulta ao Canon SaaS
+      agent: platform-aesthetic-director
+      task: consult-saas-canon
+      description: Vertex consulta o canon das 6 refs e retorna category-fit + principios extraidos
+      inputs:
+        - product_category
+        - audience
+        - positioning
+        - pricing_posture
+        - proposed_references (optional)
+      outputs:
+        - canon_consultation
+        - category_fit_matrix
+        - custom_craft_candidates
+        - commodity_audit_result
+      blocking: Se commodity_audit_result == FAIL, escalar para Aura e bloquear o ciclo ate remediar
+    - id: token-system
+      name: Design System Multi-Surface
+      agent: design-system-architect
+      task: design-token-system
+      description: Atlas desenha o sistema canonico de tokens e dialetos por surface
+      depends_on:
+        - canon-consult
+      inputs:
+        - brand_tokens
+        - target_surfaces
+        - product_context
+        - canon_consultation (from canon-consult)
+      outputs:
+        - canonical_tokens
+        - surface_dialects
+        - token_registry
+        - versioning_protocol
+      sub_routing:
+        - color-psychologist: color tokens
+        - type-systemist: type tokens
+        - motion-architect: motion tokens
+        - layout-engineer: spacing tokens
+    - id: product-surface
+      name: Art Direction de Surfaces Logadas
+      agent: product-surface-director
+      task: design-product-surface
+      description: Axiom desenha cada surface logada principal aplicando o Pilar 8
+      depends_on:
+        - token-system
+      inputs:
+        - existing_tokens (from token-system)
+        - personas
+        - dark_mode_priority
+        - density_target
+      outputs:
+        - product_surface_brief
+        - empty_state_spec
+        - dark_mode_spec
+        - token_requests
+      sub_routing:
+        - ia-architect: disclosure e cognitive zones
+        - layout-engineer: grid e densidade
+        - interaction-designer: hover e micro-interactions
+      iterate_per_surface: true
+    - id: first-5-minutes
+      name: First 5 Minutes Choreography
+      agent: product-surface-director
+      co_agent: premium-packaging-strategist
+      task: first-5-minutes-choreography
+      description: Axiom + Aura desenham a choreographia de onboarding (arrival, ceremony, orientation, first value, activation)
+      depends_on:
+        - product-surface
+      inputs:
+        - product
+        - activation_metric
+        - premium_positioning
+      outputs:
+        - first_5_minutes_spec
+        - arrival_screen_design
+        - ceremony_spec
+        - first_value_experience
+        - activation_punctuation
+        - motion_budget
+    - id: premium-packaging
+      name: Premium Packaging Brief
+      agent: premium-packaging-strategist
+      task: create-premium-packaging-brief
+      description: Aura entrega o brief completo de packaging premium aplicando os 5 principios nao-negociaveis
+      depends_on:
+        - canon-consult
+        - token-system
+        - product-surface
+        - first-5-minutes
+      inputs:
+        - product
+        - target_price
+        - competitor_price
+        - canon_consultation
+        - canonical_tokens
+        - first_5_minutes_spec
+      outputs:
+        - premium_packaging_brief
+        - custom_craft_spec
+        - friction_point_design
+        - restraint_audit
+        - pillar_10_checklist
+      sub_routing:
+        - type-systemist: custom type craft (se selecionado)
+        - motion-architect: motion signature (se selecionado)
+        - cro-persuasion: friction point no funil
+      blocking: Aura bloqueia se 5 diagnostic questions nao forem respondidas
+    - id: drift-audit
+      name: Auditoria de Drift Multi-Surface
+      agent: design-system-architect
+      task: audit-drift-multi-surface
+      description: Atlas audita drift entre surfaces deployadas (se existem) contra os tokens canonicos
+      depends_on:
+        - token-system
+      skip_if: greenfield project
+      inputs:
+        - product_url
+        - canonical_tokens
+        - surfaces_to_audit
+      outputs:
+        - drift_inventory
+        - remediation_priorities
+        - premium_impact_report
+    - id: validate
+      name: Validacao 10 Pilares
+      agent: artdir-orqx
+      task: validate-against-pillars
+      description: Canvas valida todos os deliverables contra os 10 pilares (7 originais + 3 novos)
+      depends_on:
+        - canon-consult
+        - token-system
+        - product-surface
+        - first-5-minutes
+        - premium-packaging
+      inputs:
+        - all previous phase outputs
+      outputs:
+        - validation_report
+        - verdict
+      sub_routing:
+        - accessibility-guardian: WCAG validation
+        - platform-aesthetic-director: canon adherence check
+      decision:
+        PASS: Entrega os deliverables como output final
+        CONCERNS: Entrega com concerns documentados
+        FAIL: Retorna ao phase relevante com remediation list
+    - id: remediate
+      name: Remediacao
+      agent: artdir-orqx
+      description: Corrige gaps identificados na validacao
+      depends_on:
+        - validate
+      condition: verdict == FAIL
+      max_iterations: 2
