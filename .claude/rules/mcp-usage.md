@@ -24,15 +24,21 @@ Other agents (Dev, Architect, etc.) are MCP **consumers**, not administrators. I
 
 ## MCP Configuration Architecture
 
-SINAPSE uses Docker MCP Toolkit as the primary MCP infrastructure:
+SINAPSE supports two MCP deployment paths. The right choice depends on the user's environment; neither is required for the core framework to work.
 
-### Direct in Claude Code (global ~/.claude.json)
+### Direct in Claude Code (local ~/.claude.json)
+
+The default path — MCPs run as local processes declared in `~/.claude.json`. Typical entries on a SINAPSE install:
+
 | MCP | Purpose |
 |-----|---------|
-| **playwright** | Browser automation, screenshots, web testing |
-| **desktop-commander** | Docker container operations via docker-gateway |
+| **chrome-devtools** | Chrome CDP (installed by Chrome Brain, Phase 7 of `npx sinapse-ai install`) |
+| **dev-browser** | Playwright-backed browser (installed by Chrome Brain) |
+| **terminal-bus** | Cross-terminal messaging (user-installed, optional) |
 
-### Inside Docker Desktop (via docker-gateway)
+### Docker MCP Toolkit (optional acceleration layer, via docker-gateway)
+
+An opt-in deployment that runs EXA, Context7, and Apify inside Docker for isolation. Requires Docker Desktop + the MCP Toolkit extension. **Not installed by `npx sinapse-ai install` and not required** — use only if the acceleration layer is wanted.
 
 | MCP | Purpose |
 |-----|---------|
