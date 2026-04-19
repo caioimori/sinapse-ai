@@ -132,11 +132,16 @@ function mergeHooks(settingsPath, hookDefs) {
   const settings = readJson(settingsPath);
   if (!settings.hooks) settings.hooks = {};
 
+  const hookKey = (matcher, entry) => {
+    const cmd = entry?.hooks?.[0]?.command || '';
+    return `${matcher}::${cmd}`;
+  };
   for (const [hookType, hookList] of Object.entries(hookDefs)) {
     const existing = settings.hooks[hookType] || [];
-    const newMatchers = new Set(hookList.map(h => h.matcher));
-    // Keep existing entries that don't conflict
-    const filtered = existing.filter(e => !newMatchers.has(e.matcher));
+    const newKeys = new Set(hookList.map(h => hookKey(h.matcher, h)));
+    // Dedupe by (matcher + command) so SessionStart matcher="" doesn't
+    // collide with other modules' SessionStart hooks (e.g. vault-grounding).
+    const filtered = existing.filter(e => !newKeys.has(hookKey(e.matcher, e)));
     filtered.push(...hookList);
     settings.hooks[hookType] = filtered;
   }
@@ -149,8 +154,16 @@ function removeHooks(settingsPath, matchers) {
   if (!settings.hooks) return;
 
   for (const hookType of Object.keys(settings.hooks)) {
-    settings.hooks[hookType] = (settings.hooks[hookType] || [])
-      .filter(e => !matchers.includes(e.matcher));
+    settings.hooks[hookType] = (settings.hooks[hookType] || []).filter(e => {
+      // Drop entries whose matcher is in the explicit list
+      if (matchers.includes(e.matcher)) return false;
+      // Also drop SessionStart entries owned by Chrome Brain (identify by command)
+      if (hookType === 'SessionStart') {
+        const cmd = e?.hooks?.[0]?.command || '';
+        if (/chrome-ensure/i.test(cmd)) return false;
+      }
+      return true;
+    });
     if (settings.hooks[hookType].length === 0) {
       delete settings.hooks[hookType];
     }
@@ -364,6 +377,12 @@ function installHooks() {
   const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
   const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const hookDefs = {
+    // SessionStart: warm up Chrome before MCP attempts connection. Without this,
+    // chrome-devtools-mcp (--browser-url=...) fails at boot if Chrome isn't up
+    // yet and never reconnects — tools silently drop until Claude Code restart.
+    SessionStart: [
+      { matcher: '', hooks: [{ type: 'command', command: ensureCmd, timeout: 15000 }] },
+    ],
     PreToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },

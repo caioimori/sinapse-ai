@@ -351,6 +351,9 @@ function mergeHooks() {
   const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
   const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const newHooks = {
+    SessionStart: [
+      { matcher: '', hooks: [{ type: 'command', command: ensureCmd, timeout: 15000 }] },
+    ],
     PreToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
@@ -368,10 +371,14 @@ function mergeHooks() {
     settings.hooks = {};
   }
 
+  const hookKey = (matcher, entry) => {
+    const cmd = entry?.hooks?.[0]?.command || '';
+    return `${matcher}::${cmd}`;
+  };
   for (const [hookType, hookList] of Object.entries(newHooks)) {
     const existing = settings.hooks[hookType] || [];
-    const newMatchers = new Set(hookList.map((h) => h.matcher));
-    const filtered = existing.filter((e) => !newMatchers.has(e.matcher));
+    const newKeys = new Set(hookList.map((h) => hookKey(h.matcher, h)));
+    const filtered = existing.filter((e) => !newKeys.has(hookKey(e.matcher, e)));
     filtered.push(...hookList);
     settings.hooks[hookType] = filtered;
   }
@@ -941,6 +948,17 @@ function uninstallChromeBrain(options = {}) {
           if (settings.hooks[hookType].length < before) {
             changed = true;
           }
+        }
+      }
+      // Remove SessionStart entries that invoke chrome-ensure (identify by command)
+      if (Array.isArray(settings.hooks.SessionStart)) {
+        const before = settings.hooks.SessionStart.length;
+        settings.hooks.SessionStart = settings.hooks.SessionStart.filter((e) => {
+          const cmd = e?.hooks?.[0]?.command || '';
+          return !/chrome-ensure/i.test(cmd);
+        });
+        if (settings.hooks.SessionStart.length < before) {
+          changed = true;
         }
       }
       if (changed) {
