@@ -376,13 +376,13 @@ files:
     type: core
     size: 258
   - path: core/doctor/formatters/text.js
-    hash: sha256:91510157831e5c0434a3c01f99f9635604aa47619127df5ceca572c9e5afc589
+    hash: sha256:965e1a14148b595661cfca72ae1f98bfee18b4235a491d6ca0a9804a6715f255
     type: core
-    size: 1461
+    size: 1807
   - path: core/doctor/index.js
-    hash: sha256:6c7c5ede24379c217376df9113b2f77dce0592d08b830bec6120e1517b2ffe8a
+    hash: sha256:b8f7fea288882345109bc55e11df1ad1e8d2490500b1f89e72d83e0c7fc09f03
     type: core
-    size: 5773
+    size: 8472
   - path: core/elicitation/agent-elicitation.js
     hash: sha256:92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81
     type: elicitation
@@ -1248,9 +1248,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:946970ae1585d382748b3db0c2abd7081f66ddff77432c3fa9af7a75f94576a0
+    hash: sha256:ae0acca5057a6b3e1fbd939c5a77c3a1e090f605d5c68742e451167b05a54f1c
     type: data
-    size: 522892
+    size: 522497
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1432,9 +1432,9 @@ files:
     type: agent
     size: 16584
   - path: development/agents/ux-design-expert.md
-    hash: sha256:10a0a83a1ee2619ad3eaf6cb33bbbd10598e0fc0bb328010e8a546f0ca76d03c
+    hash: sha256:ef221c2ce9dc7b808feab65d04c80e5d0186fe3343e079404d761b1d9ff056a2
     type: agent
-    size: 21838
+    size: 21931
   - path: development/agents/ux/MEMORY.md
     hash: sha256:315ac4d963d09f50c2686fdcb56fa4c34761b5097600f6a834a44cfacca12414
     type: agent

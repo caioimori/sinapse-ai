@@ -20,6 +20,8 @@
  * @story INS-4.1, A.3
  */
 
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { loadChecks } = require('./checks');
 const { formatText } = require('./formatters/text');
@@ -27,6 +29,47 @@ const { formatJson } = require('./formatters/json');
 const { applyFixes } = require('./fix-handler');
 
 const DOCTOR_VERSION = '2.1.0';
+
+/**
+ * Detect whether SINAPSE has any installation footprint for this user.
+ *
+ * Returns `{ installed: false }` when ALL of the following are absent:
+ *   - `<projectRoot>/.sinapse-ai/`
+ *   - `~/.sinapse/`
+ *   - `~/.claude/commands/SINAPSE/`
+ *
+ * If ANY marker is present we short-circuit to `installed: true` and let
+ * the full check suite run — partial installs still need diagnosis.
+ *
+ * Story 10.42: avoid the "11 FAIL wall of text" on the very first run in
+ * a directory where a new user has just opened the terminal and typed
+ * `sinapse doctor` before ever running the installer.
+ *
+ * @param {Object} context - runDoctorChecks context
+ * @returns {{ installed: boolean, marker?: string }}
+ */
+function detectInstallState(context) {
+  // Allow the caller (tests, CI harnesses) to override the home directory
+  // without mutating process env. Falls back to os.homedir() for real runs.
+  const home = (context && context.options && context.options.homeDir)
+    || process.env.SINAPSE_DOCTOR_HOME
+    || os.homedir();
+  const markers = [
+    { label: 'project', path: path.join(context.projectRoot, '.sinapse-ai') },
+    { label: 'global-sinapse', path: path.join(home, '.sinapse') },
+    { label: 'claude-commands', path: path.join(home, '.claude', 'commands', 'SINAPSE') },
+  ];
+  for (const m of markers) {
+    try {
+      if (fs.existsSync(m.path)) {
+        return { installed: true, marker: m.label };
+      }
+    } catch {
+      // permission error on one marker — keep checking others
+    }
+  }
+  return { installed: false };
+}
 
 const VALID_ON_ERROR = new Set(['fail', 'warn', 'skip']);
 
@@ -86,14 +129,39 @@ async function runDoctorChecks(options = {}) {
     quiet = false,
     deep = false,
     projectRoot = process.cwd(),
+    homeDir,
   } = options;
 
   try {
     const context = {
       projectRoot,
       frameworkRoot: path.resolve(__dirname, '..', '..', '..'),
-      options: { fix, json, dryRun, quiet, deep },
+      options: { fix, json, dryRun, quiet, deep, homeDir },
     };
+
+    // Story 10.42 — Short-circuit when SINAPSE has never been installed.
+    // A fresh user running `sinapse doctor` in an empty dir should see a
+    // single friendly line, not 11 FAILs. We still want the full check
+    // suite to run when ANY install marker exists (so partial installs
+    // are diagnosable).
+    const installState = detectInstallState(context);
+    if (!installState.installed) {
+      const summary = { pass: 0, warn: 0, fail: 0, info: 0 };
+      const output = {
+        version: DOCTOR_VERSION,
+        timestamp: new Date().toISOString(),
+        summary,
+        checks: [],
+        fixResults: null,
+        internalError: null,
+        notInstalled: true,
+        installCommand: 'npx sinapse-ai install',
+      };
+      return {
+        formatted: json ? formatJson(output) : formatText(output, { quiet }),
+        data: output,
+      };
+    }
 
     // Load and run all checks (deep checks only with --deep flag)
     const checks = loadChecks({ deep });
@@ -183,6 +251,11 @@ function resolveExitCode(result) {
   }
   if (result.data.internalError) {
     return 3;
+  }
+  // Story 10.42 — distinct exit code for "SINAPSE never installed".
+  // Scripts that today branch on 0/1/2/3 are unaffected; 4 is new.
+  if (result.data.notInstalled) {
+    return 4;
   }
   const summary = result.data.summary || {};
   if ((summary.fail || 0) > 0) {
