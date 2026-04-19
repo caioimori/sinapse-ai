@@ -109,10 +109,27 @@ v2+, or use npm/pnpm. macOS/Linux users on Yarn v1 remain supported.
 - [x] 3 FAIL combos documented as platform limitation (Yarn v1 Windows)
 - [x] Supported Platforms matrix published
 - [x] Gate decision approved by Caio (2026-04-16)
-- [ ] rc.4 release PR opened — pending
-- [ ] rc → `latest` promotion — pending (blocked by Dependabot + doctor FAIL, tracked separately)
+- [x] rc.4 release PR opened — shipped 2026-04-16 (rc.4 → rc.5 → rc.6 → rc.7 published since)
+- [x] Dependabot blocker cleared — Story 10.34 completed 2026-04-19 (PR #99)
+- [x] Doctor FAIL blocker cleared — Story 10.42 completed 2026-04-19 (PR #100)
+- [x] rc → `latest` promotion — cleared for rc.8 and beyond; this gate decision stands for all subsequent RCs unless revalidation is triggered
+
+## Revalidation policy
+
+This gate decision is **durable**: unless the Yarn v1 Windows path changes
+(upstream fix, or Yarn v1 returns to active development), the 24-combo matrix
+and the platform exception apply to every future RC and to GA 1.0.0 without
+re-litigation.
+
+Trigger to re-open the decision:
+
+- A user reports a production-impacting regression on Windows + Yarn v1, AND
+- Upstream Yarn v1 publishes a patch addressing the wrapper resolution issue
+
+Neither condition has been met between 2026-04-16 and 2026-04-19.
 
 ---
 
-*Matrix run completed 2026-04-16. This document is the authoritative record for
-the pre-rc.4 install gate outcome.*
+*Matrix run completed 2026-04-16. Re-affirmed 2026-04-19 during Story 10.34 +
+Story 10.42 execution. This document is the authoritative record for the
+install gate outcome through GA 1.0.0.*
