@@ -5,10 +5,12 @@
  * Tests for options forwarding, output format, and fix/dry-run behavior.
  */
 
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 // Use real modules for orchestrator testing (checks will hit real filesystem)
-const { runDoctorChecks, DOCTOR_VERSION } = require('../../../../../.sinapse-ai/core/doctor');
+const { runDoctorChecks, DOCTOR_VERSION, resolveExitCode } = require('../../../../../.sinapse-ai/core/doctor');
 
 const projectRoot = path.resolve(__dirname, '..', '..', '..', '..', '..');
 
@@ -112,6 +114,60 @@ describe('Doctor Orchestrator', () => {
           expect(fr.applied).toBe(false);
         }
       }
+    });
+  });
+
+  describe('NOT_INSTALLED short-circuit (Story 10.42)', () => {
+    let tempDir;
+    let fakeHome;
+
+    beforeEach(() => {
+      // Isolated projectRoot + fake HOME so the doctor cannot see the
+      // developer's real ~/.sinapse or ~/.claude. Passing homeDir via
+      // options is the reliable way across POSIX and Windows (os.homedir
+      // sometimes ignores env changes mid-process).
+      tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-doctor-fresh-'));
+      fakeHome = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-doctor-home-'));
+    });
+
+    afterEach(() => {
+      try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch {}
+      try { fs.rmSync(fakeHome, { recursive: true, force: true }); } catch {}
+    });
+
+    it('should return notInstalled=true when no SINAPSE markers exist', async () => {
+      const result = await runDoctorChecks({ projectRoot: tempDir, homeDir: fakeHome });
+      expect(result.data.notInstalled).toBe(true);
+      expect(result.data.installCommand).toBe('npx sinapse-ai install');
+      expect(result.data.checks).toHaveLength(0);
+    });
+
+    it('should produce friendly NOT_INSTALLED text (no FAIL lines)', async () => {
+      const result = await runDoctorChecks({ projectRoot: tempDir, homeDir: fakeHome });
+      expect(result.formatted).toContain('SINAPSE is not installed');
+      expect(result.formatted).toContain('npx sinapse-ai install');
+      expect(result.formatted).not.toContain('[FAIL]');
+    });
+
+    it('should include notInstalled flag in JSON output', async () => {
+      const result = await runDoctorChecks({ json: true, projectRoot: tempDir, homeDir: fakeHome });
+      const parsed = JSON.parse(result.formatted);
+      expect(parsed.notInstalled).toBe(true);
+      expect(parsed.installCommand).toBe('npx sinapse-ai install');
+    });
+
+    it('should map to exit code 4', async () => {
+      const result = await runDoctorChecks({ projectRoot: tempDir, homeDir: fakeHome });
+      expect(resolveExitCode(result)).toBe(4);
+    });
+
+    it('should fall back to full check suite when a project marker exists', async () => {
+      // Drop a .sinapse-ai/ dir into the temp project. That alone should
+      // flip detection to installed=true and run the full check path.
+      fs.mkdirSync(path.join(tempDir, '.sinapse-ai'), { recursive: true });
+      const result = await runDoctorChecks({ projectRoot: tempDir, homeDir: fakeHome });
+      expect(result.data.notInstalled).toBeUndefined();
+      expect(result.data.checks.length).toBeGreaterThan(0);
     });
   });
 

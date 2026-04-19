@@ -21,6 +21,15 @@ function formatText(output, options = {}) {
   lines.push(`SINAPSE Doctor v${output.version} — Environment Health Check`);
   lines.push('');
 
+  // Story 10.42 — friendly NOT_INSTALLED path takes precedence over the
+  // check loop. A fresh user sees three short lines instead of 11 FAILs.
+  if (output.notInstalled) {
+    lines.push('  SINAPSE is not installed in this project.');
+    lines.push('');
+    lines.push(`  Run: ${output.installCommand}`);
+    return lines.join('\n');
+  }
+
   for (const result of output.checks) {
     const prefix = STATUS_PREFIX[result.status] || '[????]';
     lines.push(`  ${prefix} ${result.check}: ${result.message}`);
