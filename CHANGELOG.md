@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.9] — 2026-04-19
+
+Release candidate closing Fase B (Hardening): CLI surface parity, NSN guard enforcement at the hook layer, and the plan-first clinical audit epic. No new user-facing features — this is trust-infrastructure work ahead of GA.
+
+### Added
+
+- **Story 10.43** — `init <name>` on the canonical `npx sinapse-ai` entry. The greenfield scaffolder was reachable through the legacy `sinapse` binary but missing from `npx sinapse-ai`. Fixed with a thin `case 'init'` that forwards via `spawnSync` to the existing wizard — single source of truth, identical flags (`--force`, `--skip-install`, `--template default|minimal|enterprise`). Help text updated. (PR #103)
+- **Story 10.44** — NSN Mode guard hook (`.claude/hooks/enforce-nsn-guard.cjs`). Scans `.md/.mdx/.txt` content on Write/Edit PreToolUse for NSN anti-patterns ("abra o dashboard manualmente", "siga esses passos manualmente", "não consigo acessar a interface", "você precisa abrir/clicar", "I can't do this"). WARN mode (stderr + exit 0) — gives agents visibility without false-positive blocking. Registered in `.claude/settings.json` and documented in `hook-governance.md`. (PR #104)
+- **Epic: Clinical Audit (Pre-GA)** — `docs/epics/epic-clinical-audit-pre-ga.md`. Plan-first deliverable per explicit directive ("IA não pode alucinar — plano ANTES da execução"). Defines 17-dimension audit scope, per-dimension execution protocol (Inventory → Contract → Reality → Delta → Severity → Recommendation → Gate), phased dependency chain, and citation discipline (file:line required for every Reality claim). Audit execution does NOT begin with this merge — individual dimension stories must be written + validated Ready first. (PR #105)
+
+### Changed
+
+- **CLI help surface** — `npx sinapse-ai --help` now lists `init <name>` as the first command, reflecting the greenfield path now has parity.
+
+### Unblocked
+
+With rc.9, the pre-GA backlog is reduced to: (1) execute the clinical audit (blocked on explicit go-ahead per epic), (2) dual-CLI consolidation (separate story, not a GA blocker), (3) Fase C APSE rename (separate epic).
+
 ## [10.0.0-rc.8] — 2026-04-19
 
 Release candidate clearing the rc.8 gate: the three pre-GA blockers (Dependabot, Doctor FAIL on fresh project, Yarn v1 Windows platform exception) are resolved or durably triaged.
