@@ -1408,6 +1408,7 @@ Exit codes (Story A.3):
 function cmdHelp() {
   header();
   logger.always(`${BOLD}Commands:${NC}\n`);
+  logger.always(`  ${CYAN}npx sinapse-ai init <name>${NC}           Scaffold a new SINAPSE project (greenfield)`);
   logger.always(`  ${CYAN}npx sinapse-ai install${NC}               Install SINAPSE (idempotent — re-runs are upserts)`);
   logger.always(`  ${CYAN}npx sinapse-ai install --force${NC}       Wipe and reinstall fresh, even if already installed`);
   logger.always(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-prompt language/LLM without wiping existing install`);
@@ -1470,6 +1471,24 @@ function runRouter() {
       const isYes = args.includes('--yes') || args.includes('-y');
       cmdUninstall({ yes: isYes }).catch(e => { logger.error(e.message); process.exit(1); });
       break;
+    }
+    case 'init': {
+      // Story 10.43 — greenfield project scaffold at the canonical CLI entry.
+      // Delegates to bin/sinapse.js (which already owns the init wizard for
+      // the legacy binary) via a synchronous child process so both entry
+      // points share one source of truth and flag behavior stays identical.
+      const { spawnSync } = require('child_process');
+      const initArgs = args.slice(1);
+      const result = spawnSync(
+        process.execPath,
+        [path.join(__dirname, 'sinapse.js'), 'init', ...initArgs],
+        { stdio: 'inherit' },
+      );
+      if (result.error) {
+        logger.error(`${RED}init error:${NC} ${result.error.message}`);
+        process.exit(1);
+      }
+      process.exit(result.status ?? 0);
     }
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
