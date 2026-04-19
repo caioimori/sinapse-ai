@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.8] — 2026-04-19
+
+Release candidate clearing the rc.8 gate: the three pre-GA blockers (Dependabot, Doctor FAIL on fresh project, Yarn v1 Windows platform exception) are resolved or durably triaged.
+
+### Fixed
+
+- **Story 10.41** — Chrome Brain SessionStart hook. The `chrome-devtools` MCP is configured with `--browser-url=http://127.0.0.1:9222`, so it tries to connect to an already-running Chrome at boot. Before this release the installer only registered `PreToolUse` / `PostToolUse` hooks — both fire **after** MCP init — so the MCP would fail, mark itself disconnected, and never auto-reconnect (user had to restart Claude Code). Installer now registers a `SessionStart` hook (`timeout=15s`) that runs `chrome-ensure` before MCP startup, and deduplicates hooks by `(matcher + command)` so the `matcher=""` slot does not collide with other modules (e.g. vault-grounding). Uninstall drops SessionStart entries by matching `chrome-ensure` in the command. Applied to both installer entrypoints (`bin/modules/chrome-brain-installer.js` + `packages/sinapse-install/src/capabilities/chrome-brain.js`). (PR #98)
+- **Story 10.42 / Bug 3** — Doctor fresh-project detection. Running `sinapse doctor` in a directory where SINAPSE was never installed previously produced 11 FAIL entries — every check fired because no artifact existed. New users read that as "the framework is broken" on first contact. Fix: pre-flight `detectInstallState` in `.sinapse-ai/core/doctor/index.js`. If ALL THREE markers are absent (`<projectRoot>/.sinapse-ai/`, `~/.sinapse/`, `~/.claude/commands/SINAPSE/`), doctor short-circuits with a three-line NOT_INSTALLED block ("SINAPSE is not installed in this project. Run: npx sinapse-ai install") and exits code **4** (distinct from 0/1/2/3). JSON output carries `notInstalled: true` + `installCommand`. `--homeDir` option and `SINAPSE_DOCTOR_HOME` env override added for test isolation. Any single marker present → full 15-check suite runs unchanged. 5 new unit tests. (PR #100)
+
+### Changed
+
+- **Story 10.34 — re-executed + hardened.** GitHub Dependabot open-alert count already 0 (all 12 rc.1-era alerts closed). `npm audit --omit=dev` is clean. The 2 remaining advisories on the full tree (`picomatch@4.0.3` HIGH, `brace-expansion@5.0.4` MODERATE) are bundled inside `npm@11.12.1` within `@semantic-release/npm` — outside the reach of root `overrides`. Accepted with audit trail at `docs/security/dependabot-triage.md`. CI gate upgraded per Constitution Art. X Tier 1 #7: new job `npm audit --omit=dev --audit-level=high` (HIGH/CRITICAL in prod deps blocks); existing `--audit-level=critical` full-tree job retained. (PR #99)
+- **Install matrix Yarn v1 Windows exception re-affirmed for GA.** `docs/audits/install-matrix-2026-04-16.md` sign-off updated: Dependabot + Doctor FAIL blockers cleared, gate decision marked durable through GA 1.0.0 with explicit revalidation triggers. 24/27 combo matrix stands. (PR #101)
+
+### Infrastructure
+
+- **Doctor exit code table expanded.** `0=PASS, 1=WARN, 2=FAIL, 3=internal-error, 4=NOT_INSTALLED`. Release notes for downstream scripts that branch on exit code.
+- **CI security gate** now enforces zero HIGH/CRITICAL in production deps on every PR that touches `package-lock.json`.
+
 ## [10.0.0-rc.4] — 2026-04-16
 
 Release candidate closing the pre-v1.0.0 GA gate. Three blockers resolved today:
