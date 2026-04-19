@@ -88,18 +88,32 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run security audit
+      - name: Run security audit — production deps (HIGH blocks)
         run: |
-          echo "=== npm audit (critical level for dev dependencies) ==="
-          # Only fail on critical vulnerabilities
-          # High severity in dev-only dependencies (semantic-release chain) is accepted
+          echo "=== npm audit --omit=dev --audit-level=high ==="
+          # Article X Tier 1 #7: HIGH/CRITICAL in production deps is a hard block.
+          # Production deps are what users receive via `npx sinapse-ai install`.
+          npm audit --omit=dev --audit-level=high || {
+            echo ""
+            echo "❌ HIGH or CRITICAL vulnerability found in PRODUCTION deps."
+            echo "This blocks merge. Run 'npm audit --omit=dev' locally for details."
+            echo "Fix via 'overrides' in package.json or by bumping the offending direct dep."
+            exit 1
+          }
+          echo "✅ No HIGH/CRITICAL vulnerabilities in production deps"
+
+      - name: Run security audit — full tree (CRITICAL blocks)
+        run: |
+          echo "=== npm audit --audit-level=critical (full tree incl. dev) ==="
+          # CRITICAL anywhere — even in dev deps — blocks merge.
+          # HIGH/MODERATE in dev deps is governed by docs/security/dependabot-triage.md.
           npm audit --audit-level=critical || {
             echo ""
-            echo "⚠️ Critical vulnerabilities found!"
+            echo "❌ CRITICAL vulnerability found."
             echo "Run 'npm audit' locally for details."
             exit 1
           }
-          echo "✅ No critical vulnerabilities found"
+          echo "✅ No CRITICAL vulnerabilities in full tree"
 
   # Secret scanning - detect leaked secrets in codebase
   secret-scanning:
