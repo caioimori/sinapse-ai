@@ -24,6 +24,7 @@ paths:
 | `enforce-architecture-first.cjs` | Art. III — Docs before protected code | BLOCK (exit 2) |
 | `write-path-validation.cjs` | Convention — Warn wrong doc paths | WARN (exit 0) |
 | `enforce-story-gate.cjs` | Art. III — Story required for code | BLOCK (exit 2) |
+| `enforce-nsn-guard.cjs` | NSN Mode — Warn on "open dashboard / follow steps manually" anti-patterns in .md/.mdx/.txt | WARN (exit 0) |
 | `slug-validation.py` | Convention — Validate naming | WARN (exit 0) |
 | `mind-clone-governance.py` | Cloning — DNA required | BLOCK (exit 2) |
 | `enforce-delegation.cjs` | Art. VIII — Orchestrators can't execute | BLOCK (exit 2) |
