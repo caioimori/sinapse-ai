@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.10] — 2026-04-19
+
+Release candidate capturing the first nine dimensions of the pre-GA Clinical Audit (Phases 1 through 3) and one rule-drift correction surfaced by the audit. Zero runtime changes — all deliverables here are documentation / governance artifacts that land ahead of the Fase C agent-rename work scheduled for 2026-04-23.
+
+### Added — Clinical Audit coverage (9/17 dimensions)
+
+- **Dim 13 Gitflows — PASS.** Branch protection, husky hooks (pre-commit + pre-push), and CI status checks verified against `safe-collaboration.md`. Admin-bypass flow exercised 7 times this session (PRs #98–#107) without issue. One MEDIUM logged (session-start auto-fetch is a convention, not a hook — post-GA stub). Evidence in `docs/audits/audit-dim-13-gitflows.md`. (PR #108)
+- **Dim 11 Plugins — CONCERNS.** Installer footprint on plugin system confirmed zero (as intended). Two MEDIUMs: no plugin trust/review rule, no version-pinning guidance. Both are post-GA docs stories, not GA blockers. `docs/audits/audit-dim-11-plugins.md`. (PR #109)
+- **Dim 12 MCP — PASS.** Chrome Brain MCP stack validated stable post-rc.8 (SessionStart hook in place). Installer idempotency observed. Two MEDIUMs: upstream figma-console instability (out of SINAPSE locus of control) and rule-drift in `mcp-usage.md` (fixed in PR #112). `docs/audits/audit-dim-12-mcp.md`. (PR #109)
+- **Dim 1 Features — PASS.** Inventory of user-facing features validated against CLI help text + installer code. One MEDIUM (partial canonical-CLI parity, tracked as item #9 dual-CLI). `docs/audits/audit-dim-01-features.md`. (PR #110)
+- **Dim 8 Commands — CONCERNS.** Dual CLI drift confirmed (`npx sinapse-ai` narrower than `sinapse`). Agent-subcommand audit deferred to Phase 4 per epic ordering (post-APSE-rename). `docs/audits/audit-dim-08-commands.md`. (PR #110)
+- **Dim 9 Skills — PASS.** All 17 authored skills + plugin + third-party skills load cleanly. One LOW (no top-level skill index doc). `docs/audits/audit-dim-09-skills.md`. (PR #110)
+- **Dim 2 Workflows — PASS.** Four primary workflows (SDC, QA Loop, Spec Pipeline, Brownfield Discovery) have corresponding YAML definitions; 210 task files present. One MEDIUM (per-task contract quality not covered by shell audit — folded into Phase 5 follow-up). `docs/audits/audit-dim-02-workflows.md`. (PR #111)
+- **Dim 10 Tools — PASS.** Hook coverage matches `hook-governance.md`; 74 hook-security tests pass; native-first discipline observed throughout session. One LOW (hook timeout guidance unwritten). `docs/audits/audit-dim-10-tools.md`. (PR #111)
+- **Dim 16 Token Economy — PASS.** All 9 sections of the NON-NEGOTIABLE rule aligned with observed session behavior. One LOW (compaction threshold is convention, not hook — intentional). `docs/audits/audit-dim-16-token-economy.md`. (PR #111)
+
+### Fixed
+
+- **`.claude/rules/mcp-usage.md` drift** — Rule no longer claims Docker MCP Toolkit is the "primary MCP infrastructure"; relabeled as an optional acceleration layer. The "Direct in Claude Code" table now lists the three MCPs the SINAPSE installer actually registers (`chrome-devtools`, `dev-browser`, `terminal-bus`) instead of the previous `playwright` + `desktop-commander` entries that no installer path produces. Doc-only, no runtime change. (PR #112)
+
+### Audit summary
+
+Across the 9 dimensions audited pre-rename: **zero CRITICAL, zero HIGH, zero GA blockers.** Findings breakdown: 7 MEDIUM (all docs-only or tracked elsewhere) + 3 LOW (all optional polish). The remaining 8 dimensions (3 Agents, 4 Subagents, 5 Workers, 6 Squads, 7 Clones, 14 Research, 15 Knowledge Base, 17 Hallucinations) are deferred to Phase 4 + Phase 5 per the epic's ordering rule: "Rename (Fase C) executed between audit Phase 3 and Phase 4" to avoid auditing names that will churn.
+
 ## [10.0.0-rc.9] — 2026-04-19
 
 Release candidate closing Fase B (Hardening): CLI surface parity, NSN guard enforcement at the hook layer, and the plan-first clinical audit epic. No new user-facing features — this is trust-infrastructure work ahead of GA.
