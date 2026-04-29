@@ -253,13 +253,41 @@ function toForwardSlash(p) {
   return p.replace(/\\/g, '/');
 }
 
+// Story 10.46 — multi-signal interactive-mode detection. Avoids the Git Bash +
+// Windows trap where `process.stdin.isTTY === undefined`. Honors CI env vars and
+// explicit `--yes` / `--non-interactive` overrides; `--interactive` forces on.
+function detectInteractiveMode(argv = process.argv) {
+  if (argv.includes('--interactive')) return true;
+  if (argv.includes('--non-interactive')) return false;
+  if (argv.includes('--yes') || argv.includes('-y')) return false;
+  if (process.env.CI === 'true') return false;
+  if (process.env.GITHUB_ACTIONS === 'true') return false;
+  if (process.env.npm_config_yes === 'true') return false;
+  return Boolean(process.stdin.isTTY || process.stdout.isTTY);
+}
+
+// Story 10.46 — emit non-interactive warning at most once per CLI invocation so
+// users always know defaults were applied silently (was invisible pre-fix).
+let nonInteractiveWarned = false;
+function warnNonInteractive() {
+  if (nonInteractiveWarned) return;
+  nonInteractiveWarned = true;
+  // stderr so it never pollutes stdout consumers (CI logs, pipes).
+  process.stderr.write(
+    `${YELLOW}INFO${NC} ambiente nao-interativo detectado, usando defaults pt + claude-code ` +
+    `${DIM}(use --interactive pra forcar prompts)${NC}\n`,
+  );
+}
+
 /**
  * Prompt user to select LLM(s) — inquirer checkbox with readline fallback.
  * @returns {Promise<string>} 'claude-code' | 'codex' | 'both'
  */
 async function promptLlmChoice() {
-  // Non-TTY (CI, Docker, scripts, agents): skip prompt, default to claude-code.
-  if (!process.stdin.isTTY) {
+  // Story 10.46 — multi-signal gate replaces the old `!process.stdin.isTTY`
+  // check that silently skipped this prompt in Git Bash + Windows.
+  if (!detectInteractiveMode()) {
+    warnNonInteractive();
     return 'claude-code';
   }
   try {
@@ -327,7 +355,9 @@ async function cmdInstallGlobal(opts = {}) {
   let language = (isUpsert && !reconfigure && existing.language) ? existing.language : null;
   if (!language) {
     language = 'pt';
-    if (process.stdin.isTTY) {
+    // Story 10.46 — multi-signal gate replaces the old `process.stdin.isTTY`
+    // check that silently defaulted to `pt` in Git Bash + Windows.
+    if (detectInteractiveMode()) {
       try {
         const inquirer = require('inquirer');
         const langAnswer = await inquirer.prompt([{
@@ -355,6 +385,9 @@ async function cmdInstallGlobal(opts = {}) {
           });
         });
       }
+    } else {
+      // Story 10.46 — surface the silent default so users on CI / pipes know.
+      warnNonInteractive();
     }
   }
 
@@ -571,6 +604,13 @@ async function cmdInstallGlobal(opts = {}) {
     const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
     if (fs.existsSync(wizardPath)) {
       const { runWizard: executeWizard } = require(wizardPath);
+      // Story 10.46 — `quiet: true` is intentional here: language + LLM were
+      // already collected by the upstream prompts above (cmdInstallGlobal).
+      // The modular wizard's interactive path would re-prompt the same two
+      // questions, causing a double-prompt UX. We pass the resolved values so
+      // it skips its own ask. If the modular wizard ever grows additional
+      // prompts (user profile, project type) that should surface here, this
+      // call site needs to switch to a more granular `skipLangLLMPrompts` flag.
       await executeWizard({
         quiet: true,
         language: language,
@@ -1451,15 +1491,36 @@ module.exports = {
   removeOrqxAgentsFrom,
   cleanClaudeSettingsJson,
   cmdUninstall,
+  // Story 10.46 — exported for tests
+  detectInteractiveMode,
+  isFirstRun,
 };
 
 if (require.main === module) {
   runRouter();
 }
 
+// Story 10.46 — detect first-time use so `npx sinapse-ai` (no args) can hint at
+// `install` instead of dumping help. Considered "first run" when neither the
+// global metadata nor a local project install is present in the cwd.
+function isFirstRun() {
+  try {
+    if (fs.existsSync(path.join(SINAPSE_HOME, 'metadata.json'))) return false;
+    if (fs.existsSync(path.join(process.cwd(), '.sinapse-ai'))) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function runRouter() {
   const args = process.argv.slice(2);
-  const command = args[0] || 'help';
+  // Story 10.46 — empty invocation on a fresh machine routes to a first-run
+  // hint instead of the bare help screen, so new users discover `install`.
+  let command = args[0];
+  if (!command) {
+    command = isFirstRun() ? 'first-run' : 'help';
+  }
   const isLocal = args.includes('--local');
   const isForce = args.includes('--force');
   const isReconfigure = args.includes('--reconfigure');
@@ -1523,6 +1584,19 @@ function runRouter() {
     })();
     break;
   }
+    case 'first-run': {
+      // Story 10.46 — friendly hint on bare `npx sinapse-ai` for a fresh machine.
+      header();
+      logger.always(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+      logger.always(`${DIM}  Detectei que ainda nao ha instalacao nesta maquina.${NC}`);
+      logger.always('');
+      logger.always('  Pra comecar, rode:');
+      logger.always(`    ${CYAN}npx sinapse-ai install${NC}`);
+      logger.always('');
+      logger.always(`  Outras opcoes:  ${CYAN}npx sinapse-ai help${NC}`);
+      logger.always('');
+      break;
+    }
     case 'help':
     case '--help':
     case '-h':       cmdHelp(); break;
