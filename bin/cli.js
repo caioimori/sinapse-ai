@@ -1551,6 +1551,7 @@ function runRouter() {
       }
       process.exit(result.status ?? 0);
     }
+    // eslint-disable-next-line no-fallthrough -- process.exit above terminates; Story 10.45 piggyback fix.
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
     case 'doctor': {
