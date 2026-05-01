@@ -325,6 +325,66 @@ async function promptLlmChoice() {
   }
 }
 
+// Story 10.47 — collect optional grounding paths (vault / design system /
+// brand). Empty answers leave the section disabled and the shipped hook
+// stays a no-op. Reuses the multi-signal interactive detector from Story
+// 10.46 so CI / non-TTY runs skip silently with the consolidated warning
+// already emitted by lang/LLM helpers.
+async function promptGroundingSections({ isUpsert = false, reconfigure = false } = {}) {
+  const groundingConfig = require(path.join(
+    ROOT, 'packages', 'installer', 'src', 'wizard', 'grounding-config',
+  ));
+  const existing = groundingConfig.readGroundingConfig();
+  const pending = isUpsert && !reconfigure
+    ? groundingConfig.pendingGroundingSections(existing)
+    : { askVault: true, askDesignSystem: true, askBrand: true };
+
+  if (!pending.askVault && !pending.askDesignSystem && !pending.askBrand) {
+    return existing;
+  }
+
+  if (!detectInteractiveMode()) {
+    warnNonInteractive();
+    // Persist defaults so the file exists with a documented schema even on
+    // headless installs (helps users discover it later via `--reconfigure`).
+    const merged = groundingConfig.buildGroundingFromAnswers({}, existing);
+    groundingConfig.writeGroundingConfig(merged);
+    return merged;
+  }
+
+  const questions = require(path.join(
+    ROOT, 'packages', 'installer', 'src', 'wizard', 'questions',
+  ));
+  const inquirer = require('inquirer');
+
+  const ask = [];
+  if (pending.askVault) ask.push(questions.getVaultGroundingQuestion());
+  if (pending.askDesignSystem) ask.push(questions.getDesignSystemGroundingQuestion());
+  if (pending.askBrand) ask.push(questions.getBrandGroundingQuestion());
+
+  logger.always('');
+  logger.always(`${CYAN}Grounding semantico (opt-in):${NC}`);
+  logger.always(`${DIM}  Pular qualquer pergunta ativa o fallback generico do framework.${NC}`);
+
+  let answers = {};
+  try {
+    answers = await inquirer.prompt(ask);
+  } catch {
+    // Fallback: minimal readline loop if inquirer fails (e.g. exotic shells).
+    const readline = require('readline');
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    const askLine = (msg) => new Promise((resolve) => rl.question(msg, resolve));
+    if (pending.askVault) answers.vaultPath = (await askLine('  Vault path (Enter pra pular): ')).trim();
+    if (pending.askDesignSystem) answers.designSystemPath = (await askLine('  Design system path (Enter pra pular): ')).trim();
+    if (pending.askBrand) answers.brandbookPath = (await askLine('  Brandbook path (Enter pra pular): ')).trim();
+    rl.close();
+  }
+
+  const merged = groundingConfig.buildGroundingFromAnswers(answers, existing);
+  groundingConfig.writeGroundingConfig(merged);
+  return merged;
+}
+
 // ── Global Install ───────────────────────────────────────────────────────────
 
 async function cmdInstallGlobal(opts = {}) {
@@ -407,6 +467,11 @@ async function cmdInstallGlobal(opts = {}) {
   // LLM selection (skipped in upsert mode if previous llm known)
   // Story 10.35: --reconfigure forces prompt even in upsert mode
   const llmChoice = (isUpsert && !reconfigure && existing.llm) ? existing.llm : await promptLlmChoice();
+
+  // Story 10.47 — grounding (vault / design system / brand) opt-in BYO.
+  // Each section is independently optional; empty answer = skip = no-op hook.
+  // Honors upsert + --reconfigure semantics established by Stories 10.20/10.35.
+  await promptGroundingSections({ isUpsert, reconfigure });
 
   logger.always('');
   logger.always(`${BOLD}Installing Sinapse globally...${NC}\n`);
@@ -1494,6 +1559,8 @@ module.exports = {
   // Story 10.46 — exported for tests
   detectInteractiveMode,
   isFirstRun,
+  // Story 10.47 — exported for tests
+  promptGroundingSections,
 };
 
 if (require.main === module) {

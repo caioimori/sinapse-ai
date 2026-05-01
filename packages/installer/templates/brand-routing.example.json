@@ -1,0 +1,12 @@
+{
+  "$schema": "https://sinapse-ai.dev/schemas/grounding-brand-v1.json",
+  "_comment": "Generic example for brand grounding (Story 10.47). Copy fields into ~/.claude/sinapse-ai-config.yaml under grounding.brand — or run `npx sinapse-ai install --reconfigure`.",
+  "version": "1",
+  "brand": {
+    "enabled": true,
+    "_comment_profileName": "Friendly name shown in agent context. Free-form string.",
+    "profileName": "my-brand",
+    "_comment_brandbookPath": "Absolute path to your brandbook (PDF, markdown directory, or single .md file). Used to inject positioning, MVV, tone-of-voice into agent context.",
+    "brandbookPath": "/absolute/path/to/your/brandbook"
+  }
+}

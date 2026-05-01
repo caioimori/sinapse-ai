@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 10.0.0-rc.7
+version: 10.0.0-rc.10
 generator: scripts/generate-install-manifest.js
-file_count: 1155
+file_count: 1161
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -507,6 +507,26 @@ files:
     hash: sha256:3a171bf985b7deb1a30abd9c28f5d339cc3bc2f5c94f0efc444ee3597acc47c3
     type: core
     size: 3600
+  - path: core/grounding/brand.cjs
+    hash: sha256:05e1e8b8a7415885ba5709189aa26fe0bc0bd97478e3f87d685592427fa08c5f
+    type: core
+    size: 884
+  - path: core/grounding/config-loader.cjs
+    hash: sha256:bab7222b546570e124e8dd986b94b7cb3ddcbf3a9ab7d9c4c9e56ada5896ffc7
+    type: core
+    size: 1555
+  - path: core/grounding/design-system.cjs
+    hash: sha256:369bff34d0d507486ab4fa005b46a4c4f3f73e4ad35571241a6b9ad9d258fcc9
+    type: core
+    size: 938
+  - path: core/grounding/README.md
+    hash: sha256:5db896ada8ccb9307e3a104887e3c47996de1d9a2410c132d039f38dc1e8ff9d
+    type: core
+    size: 1159
+  - path: core/grounding/vault.cjs
+    hash: sha256:79cac355693a7bdf0fc374160e84508d0cdcdafb7b50e5df5e088602eaf5ee03
+    type: core
+    size: 1291
   - path: core/health-check/base-check.js
     hash: sha256:1d322d1bd5cbb4cb4834165e795691fe761e0d84a208d4f4db1b839fa9b01dec
     type: core
@@ -1248,9 +1268,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:ae0acca5057a6b3e1fbd939c5a77c3a1e090f605d5c68742e451167b05a54f1c
+    hash: sha256:a275a97bfe866a7ef6d7c2ec28920ec5bf0ff755d2af775cc47dffcda0e3ad62
     type: data
-    size: 522497
+    size: 523558
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1683,6 +1703,10 @@ files:
     hash: sha256:2544e6b04fe7b886fda05f339f53301480331a03392f8707138fb3c864d42aeb
     type: script
     size: 2659
+  - path: development/scripts/squad/migrate-workflows-to-wrapper.js
+    hash: sha256:65a8b4994622910b3e6466e172af24127110ab115244921bf001228ae3254b0a
+    type: script
+    size: 6181
   - path: development/scripts/squad/README.md
     hash: sha256:cee9fdeedb39d1d74c62ad90f3733fa15489e6f95ea4c601990ea391329d1140
     type: script
