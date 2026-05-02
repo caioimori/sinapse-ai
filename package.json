@@ -195,7 +195,6 @@
     ]
   },
   "overrides": {
-    "tar": "^7.5.7",
     "diff": "^8.0.3",
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
