@@ -1076,9 +1076,9 @@ files:
     type: core
     size: 5290
   - path: core/registry/service-registry.json
-    hash: sha256:b9d55960c864c574df2592eda1d468e9f089cf42f4f9e1c8a6e71ae8dbbf3f20
+    hash: sha256:1b0b8a0acd2de9372e63a72c56afe1723ace3ecd64d42af38028f060059c3926
     type: core
-    size: 155380
+    size: 289408
   - path: core/registry/validate-registry.js
     hash: sha256:8612f683f1b7ecd043a0342d05fbe434721b19568b6ff76a483a6de7aa830d5c
     type: core
@@ -1268,7 +1268,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:649fac5f816b4ed54b7a04502d31a0ddc5373d6d94b675af2fe569cd25d1b21b
+    hash: sha256:3f0650de6f6e65a4d73b0a77eedecd238741371ed81aaadc5b0445e2be3933fe
     type: data
     size: 523558
   - path: data/learned-patterns.yaml

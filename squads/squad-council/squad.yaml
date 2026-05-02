@@ -23,6 +23,14 @@ metadata:
   templates_count: 0
   checklists_count: 0
   quality_target: "5.0/5.0 em todas as dimensoes"
+  total_files: 83
+  agents: 11
+  tasks: 56
+  workflows: 0
+  knowledge_bases: 11
+  checklists: 0
+  templates: 0
+  preferences: 0
 
 agents:
   - id: council-orqx

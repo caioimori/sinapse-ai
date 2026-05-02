@@ -20,6 +20,14 @@ metadata:
   workflows_count: 5
   checklists_count: 4
   templates_count: 5
+  total_files: 135
+  agents: 10
+  tasks: 82
+  workflows: 0
+  knowledge_bases: 21
+  checklists: 4
+  templates: 5
+  preferences: 0
 
 agents:
   - id: paidmedia-orqx

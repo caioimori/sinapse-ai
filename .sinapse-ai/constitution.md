@@ -146,9 +146,16 @@ Métricas do ecossistema (contagem de squads, agentes, tasks, orqx) DEVEM ser es
 **Fonte de verdade:** `~/.sinapse/metadata.json` (gerado pelo installer a partir de contagem real de arquivos)
 
 **Números canônicos atuais:**
-- **18 squads** (diretórios com squad.yaml)
-- **186 agentes** (174 em squads + 1 master sinapse-orqx)
-- **20 comandos orqx** (18 squad orqx + sinapse-orqx + tools-orqx)
+
+<!-- BEGIN AUTO-GENERATED COUNTS (sync via `npm run sync:counts`) -->
+- **19 squads** (diretórios em `squads/`)
+- **200 agentes** (188 em squads + 12 framework agents)
+- **22 comandos orqx** (21 squad orqx + 1 master sinapse-orqx)
+- **1237 tasks** (em `squads/*/tasks/`)
+
+*Last synced: 2026-05-02T06:24:39.761Z*
+<!-- END AUTO-GENERATED COUNTS -->
+
 
 **Regras:**
 - MUST: Todo documento que menciona contagem de squads/agentes DEVE usar os números exatos do metadata.json
