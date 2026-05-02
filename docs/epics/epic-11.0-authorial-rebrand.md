@@ -1,4 +1,4 @@
-# Epic 11.0 — Authorial Rebrand (APSE-* naming)
+# Epic 11.0 — Authorial Rebrand (SNPS-* naming)
 
 **Status:** Planned
 **Priority:** P2 (deferred)
@@ -17,7 +17,7 @@ This epic is a **parking lot placeholder**. No stories defined yet. This file is
 
 ## Objective
 
-Transition agent, squad, and framework surface naming to the authorial APSE-* convention (e.g., APSE Copy, APSE Orqx, APSE Content, APSE PaidMedia, APSE Copy Chief) so that the SINAPSE ecosystem presents a single, coherent, fully authorial brand system across all 186 agents, 18 squads, framework docs, CI job names, memory paths, and vault grounding rules.
+Transition agent, squad, and framework surface naming to the authorial SNPS-* convention (e.g., SNPS Copy, SNPS Orqx, SNPS Content, SNPS PaidMedia, SNPS Copy Chief) so that the SINAPSE ecosystem presents a single, coherent, fully authorial brand system across all 186 agents, 18 squads, framework docs, CI job names, memory paths, and vault grounding rules.
 
 ---
 
@@ -25,7 +25,7 @@ Transition agent, squad, and framework surface naming to the authorial APSE-* co
 
 ### Naming Migration
 
-- **186 agents** renamed to the APSE-* convention (e.g., APSE Pixel, APSE Stratum, APSE Litmus, etc.)
+- **186 agents** renamed to the SNPS-* convention (e.g., SNPS Pixel, SNPS Stratum, SNPS Litmus, etc.)
 - **18 squads** renamed (squad-brand → apse-brand, squad-copy → apse-copy, and so on)
 - Deprecated aliases kept for backwards compatibility during a transition window
 
@@ -38,7 +38,7 @@ Transition agent, squad, and framework surface naming to the authorial APSE-* co
 
 ### CI/CD & Infrastructure
 
-- CI job names updated to APSE-* convention where they reference agents
+- CI job names updated to SNPS-* convention where they reference agents
 - Skills, MCP configs, and tool registry entries updated
 - `.claude/commands/SINAPSE/agents/*` and `.codex/agents/*` regenerated
 - Sync pipelines (`sync:ide`, `sync:skills:codex`) must remain green throughout

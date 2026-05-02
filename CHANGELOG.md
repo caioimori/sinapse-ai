@@ -17,7 +17,7 @@ Release candidate capturing the first nine dimensions of the pre-GA Clinical Aud
 - **Dim 11 Plugins — CONCERNS.** Installer footprint on plugin system confirmed zero (as intended). Two MEDIUMs: no plugin trust/review rule, no version-pinning guidance. Both are post-GA docs stories, not GA blockers. `docs/audits/audit-dim-11-plugins.md`. (PR #109)
 - **Dim 12 MCP — PASS.** Chrome Brain MCP stack validated stable post-rc.8 (SessionStart hook in place). Installer idempotency observed. Two MEDIUMs: upstream figma-console instability (out of SINAPSE locus of control) and rule-drift in `mcp-usage.md` (fixed in PR #112). `docs/audits/audit-dim-12-mcp.md`. (PR #109)
 - **Dim 1 Features — PASS.** Inventory of user-facing features validated against CLI help text + installer code. One MEDIUM (partial canonical-CLI parity, tracked as item #9 dual-CLI). `docs/audits/audit-dim-01-features.md`. (PR #110)
-- **Dim 8 Commands — CONCERNS.** Dual CLI drift confirmed (`npx sinapse-ai` narrower than `sinapse`). Agent-subcommand audit deferred to Phase 4 per epic ordering (post-APSE-rename). `docs/audits/audit-dim-08-commands.md`. (PR #110)
+- **Dim 8 Commands — CONCERNS.** Dual CLI drift confirmed (`npx sinapse-ai` narrower than `sinapse`). Agent-subcommand audit deferred to Phase 4 per epic ordering (post-SNPS-rename). `docs/audits/audit-dim-08-commands.md`. (PR #110)
 - **Dim 9 Skills — PASS.** All 17 authored skills + plugin + third-party skills load cleanly. One LOW (no top-level skill index doc). `docs/audits/audit-dim-09-skills.md`. (PR #110)
 - **Dim 2 Workflows — PASS.** Four primary workflows (SDC, QA Loop, Spec Pipeline, Brownfield Discovery) have corresponding YAML definitions; 210 task files present. One MEDIUM (per-task contract quality not covered by shell audit — folded into Phase 5 follow-up). `docs/audits/audit-dim-02-workflows.md`. (PR #111)
 - **Dim 10 Tools — PASS.** Hook coverage matches `hook-governance.md`; 74 hook-security tests pass; native-first discipline observed throughout session. One LOW (hook timeout guidance unwritten). `docs/audits/audit-dim-10-tools.md`. (PR #111)
@@ -47,7 +47,7 @@ Release candidate closing Fase B (Hardening): CLI surface parity, NSN guard enfo
 
 ### Unblocked
 
-With rc.9, the pre-GA backlog is reduced to: (1) execute the clinical audit (blocked on explicit go-ahead per epic), (2) dual-CLI consolidation (separate story, not a GA blocker), (3) Fase C APSE rename (separate epic).
+With rc.9, the pre-GA backlog is reduced to: (1) execute the clinical audit (blocked on explicit go-ahead per epic), (2) dual-CLI consolidation (separate story, not a GA blocker), (3) Fase C SNPS rename (separate epic).
 
 ## [10.0.0-rc.8] — 2026-04-19
 

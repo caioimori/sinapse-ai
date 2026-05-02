@@ -57,7 +57,7 @@ Stories that do not cite `file:line` for Reality claims MUST be returned to the 
 ```
 Pre-condition:     All Fase A/B work merged (Chrome Brain, Dependabot, Doctor, NSN guard, init parity) ✓
 Trigger:           Caio explicitly approves starting (cannot be inferred)
-Pre-audit step:    Agent rename (APSE) — Fase C — MUST happen before dim 3 (Agents) and dim 6 (Squads)
+Pre-audit step:    Agent rename (SNPS) — Fase C — MUST happen before dim 3 (Agents) and dim 6 (Squads)
                    to avoid auditing names that will churn
 Execution order:   Lower-risk dimensions first (to build confidence), then core, then cross-cutting:
                    → Phase 1: dims 13, 11, 12 (infra — gitflows, plugins, MCP)
@@ -96,7 +96,7 @@ Execution order:   Lower-risk dimensions first (to build confidence), then core,
 ## Related
 
 - Pending Execution Plan (pre-GA): `~/.claude/projects/.../memory/project_pending_execution_ga.md`
-- APSE naming convention (feeds Fase C rename): `~/.claude/projects/.../memory/project_apse_naming_convention.md`
+- SNPS naming convention (feeds Fase C rename): `~/.claude/projects/.../memory/project_apse_naming_convention.md`
 - Reset versão 10.x → 1.0.0 (last step): `~/.claude/projects/.../memory/project_versioning_reset_v1.md`
 
 ## Change Log

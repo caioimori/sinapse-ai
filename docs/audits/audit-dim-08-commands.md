@@ -80,7 +80,7 @@ Source: `~/.claude/rules/agent-authority.md` (delegation matrix, command-per-age
 
 **MEDIUM — Dual CLI drift.** The canonical `npx sinapse-ai` surface is narrower than the legacy `sinapse` binary. This is known and tracked (pending-execution item #9, deferred past GA in the current plan). Users landing via `npx` may hit a "command not found" that the legacy binary would have handled (e.g., `npx sinapse-ai telemetry status` fails, `sinapse telemetry status` works). Not a GA blocker because `npx sinapse-ai` covers the install/init/doctor/uninstall happy path that the README promises.
 
-Agent subcommand audit is **deferred to Phase 4 (dim 3 Agents)** per the epic's explicit ordering — "Rename (Fase C) executed between audit Phase 3 and Phase 4" — to avoid auditing names that will churn in the APSE rename.
+Agent subcommand audit is **deferred to Phase 4 (dim 3 Agents)** per the epic's explicit ordering — "Rename (Fase C) executed between audit Phase 3 and Phase 4" — to avoid auditing names that will churn in the SNPS rename.
 
 ## 6. Recommendation
 

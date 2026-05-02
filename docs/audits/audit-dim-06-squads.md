@@ -263,7 +263,7 @@ The 7 cross-squad patterns in `~/.claude/rules/cross-squad-routing.md` reference
 
 18 of 19 squads are named `squad-{domain}`. `claude-code-mastery` is the outlier. Its `squad.yaml` is also the only one without a metric block (F6-1). Suggests it was authored before the manifest convention solidified and never harmonized.
 
-This will be touched by the APSE rename — decide convention now to avoid a partial rename.
+This will be touched by the SNPS rename — decide convention now to avoid a partial rename.
 
 ### Finding F6-7 — `.backup/` directories carry stale workflows (P3)
 
@@ -286,7 +286,7 @@ All 7 patterns in `~/.claude/rules/cross-squad-routing.md` reference squad names
 |---|---|---|---|
 | R1 | Extend squad-validator (PR #116 trajectory) to validate **arithmetic** counts: declared `agents_count` MUST equal `find squads/{squad}/agents -name "*.md" | wc -l`, etc. for tasks/templates/KB/workflows. Run in CI on every PR. | @devops | Pre-GA, blocks F6-1 |
 | R2 | One-shot reconcile pass on the 10 drifted/incomplete squad manifests. Prefer auto-regeneration via the squad-creator script (`created_by: squad-creator`) so the fix is a one-line script run, not a 19-PR campaign. | @sprint-lead → @architect | Pre-GA, paired with R1 |
-| R3 | Decide and apply naming convention: rename `claude-code-mastery/` → `squad-claude-code-mastery/` (or merge with `squad-claude/`). This is APSE-rename territory. | @architect → Caio | Pre-APSE rename |
+| R3 | Decide and apply naming convention: rename `claude-code-mastery/` → `squad-claude-code-mastery/` (or merge with `squad-claude/`). This is SNPS-rename territory. | @architect → Caio | Pre-SNPS rename |
 | R4 | For the 14 squads without explicit handoff contract: at minimum, document in each `squad.yaml` which output domains the squad produces (so the next squad in a routing chain knows what to expect). Full handoff tasks per-squad is post-GA work. | @architect | Post-GA acceptable |
 | R5 | Document orchestrator hierarchy inside squad-claude: when does claude-orqx vs swarm-orqx vs tools-orqx get invoked? Add to `squad-claude/squad.yaml` or `cross-squad-routing.md`. | @architect | Pre-GA |
 | R6 | Decide whether `.backup/` directories ship in npm package. Either: (a) add `.backup/` to npm publish ignore list (`.npmignore`), or (b) delete `.backup/` directories entirely from the repo. | @devops | Pre-GA, low-risk |
@@ -296,12 +296,12 @@ All 7 patterns in `~/.claude/rules/cross-squad-routing.md` reference squad names
 
 | Dimension | Verdict | Rationale |
 |---|---|---|
-| **6. Squads** | **CONCERNS** | Zero P0 / 2 P1 / 4 P2 / 2 P3. Manifest drift in 10 of 19 squads (53%) is the headline number. None of this breaks runtime — squads still load, agents still activate, routing still works. But shipping v1 GA with 10 wrong manifests across what the constitution calls "18" squads (actually 19) is a credibility risk. R1 + R2 should ship in the same PR pre-GA. R3 must clear before APSE rename. |
+| **6. Squads** | **CONCERNS** | Zero P0 / 2 P1 / 4 P2 / 2 P3. Manifest drift in 10 of 19 squads (53%) is the headline number. None of this breaks runtime — squads still load, agents still activate, routing still works. But shipping v1 GA with 10 wrong manifests across what the constitution calls "18" squads (actually 19) is a credibility risk. R1 + R2 should ship in the same PR pre-GA. R3 must clear before SNPS rename. |
 
-## 9. Blocks rename APSE → SNPS?
+## 9. Blocks rename SNPS → SNPS?
 
-**Yes — same soft block as Dim 3.** F6-1 and F6-6 in particular: the rename will touch persona names AND squad directory names. Renaming `claude-code-mastery/` to `squad-X/` is a directory move; combining that with persona-name churn means high blast-radius. R1 + R2 + R3 must clear before APSE rename to avoid renaming on a fuzzy manifest.
+**Yes — same soft block as Dim 3.** F6-1 and F6-6 in particular: the rename will touch persona names AND squad directory names. Renaming `claude-code-mastery/` to `squad-X/` is a directory move; combining that with persona-name churn means high blast-radius. R1 + R2 + R3 must clear before SNPS rename to avoid renaming on a fuzzy manifest.
 
 ## Change Log
 
-- 2026-04-28 — Dim 6 audit completed (Block 2). CONCERNS, soft-blocks APSE rename until R1 + R2 + R3 cleared. @architect (Aria, Visionary).
+- 2026-04-28 — Dim 6 audit completed (Block 2). CONCERNS, soft-blocks SNPS rename until R1 + R2 + R3 cleared. @architect (Aria, Visionary).

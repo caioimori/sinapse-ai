@@ -385,9 +385,9 @@ This is acceptable as one layer of defense — but if mind-clone-governance is t
 |---|---|---|
 | **7. Clones** | **CONCERNS** | Zero P0 / 2 P1 / 3 P2 / 1 P3. F7-1 + F7-2 are the headlines: the framework's first principle ("NUNCA inventar") is structurally unenforceable on the 20 shipped clones, AND those 20 clones are public-OSS distribution of named real people without consent/license metadata. Neither breaks runtime; both are GA-blocking decisions. R1 is the gating question — Caio must decide v1-GA mind-clone posture. R2/R3/R5 follow from R1. |
 
-## 9. Blocks rename APSE → SNPS?
+## 9. Blocks rename SNPS → SNPS?
 
-**Soft block.** F7-1 doesn't touch naming. But R1 + R2 (if chosen as option (b) "sanitize") will rename 20 person-named agents to archetype-named agents. That rename is conceptually adjacent to APSE rename and likely should ship in the same coordination window. Recommendation: resolve R1 before APSE rename is scheduled, then either (a) batch the sanitization rename with APSE, or (b) execute sanitization first (smaller blast radius) and APSE second.
+**Soft block.** F7-1 doesn't touch naming. But R1 + R2 (if chosen as option (b) "sanitize") will rename 20 person-named agents to archetype-named agents. That rename is conceptually adjacent to SNPS rename and likely should ship in the same coordination window. Recommendation: resolve R1 before SNPS rename is scheduled, then either (a) batch the sanitization rename with SNPS, or (b) execute sanitization first (smaller blast radius) and SNPS second.
 
 ## 10. Out of scope for this audit
 
@@ -398,4 +398,4 @@ This is acceptable as one layer of defense — but if mind-clone-governance is t
 
 ## Change Log
 
-- 2026-04-28 — Dim 7 audit completed (Block 2). CONCERNS, soft-blocks APSE rename until R1 cleared. R1 is a Caio decision, not an architect decision. @architect (Aria, Visionary).
+- 2026-04-28 — Dim 7 audit completed (Block 2). CONCERNS, soft-blocks SNPS rename until R1 cleared. R1 is a Caio decision, not an architect decision. @architect (Aria, Visionary).
