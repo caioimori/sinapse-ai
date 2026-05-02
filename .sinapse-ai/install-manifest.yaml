@@ -352,9 +352,9 @@ files:
     type: core
     size: 785
   - path: core/doctor/checks/npm-packages.js
-    hash: sha256:770d0ae3a6232ca6f09a5ed68bddbed14d8303d061279a3947a0679546d645a3
+    hash: sha256:558f8f4388085c5711853f2a6cc9f0e3fcf8c0558cc606ff1fe0ff746693e325
     type: core
-    size: 2416
+    size: 3296
   - path: core/doctor/checks/rules-files.js
     hash: sha256:16205df27fd9c8d73de42593429afbe6b2c4d70cca4bdde3a51b704f1d292e63
     type: core
@@ -1268,7 +1268,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:a95e0acc787ca934f352dda6001e9157b288feaf88f069717f75a009ea02ccf0
+    hash: sha256:649fac5f816b4ed54b7a04502d31a0ddc5373d6d94b675af2fe569cd25d1b21b
     type: data
     size: 523558
   - path: data/learned-patterns.yaml
