@@ -7,6 +7,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.11] — 2026-05-02
+
+Pre-GA hardening sprint. Closes the remaining clinical-audit blockers and the
+last UX/legal items that were holding back v1.0.0 promotion. Zero new features
+— this RC exists to make v1.0.0 boring.
+
+### Added — Clinical Audit completion (14/17 dimensions)
+
+- **Dim 3 — Agents (CONCERNS).** 0 P0 / 3 P1 / 3 P2 / 2 P3. Constitutional
+  drift in the canonical counts block, Imperator banner referencing stale
+  numbers, and undecided subagent surface across 178 files in `.claude/agents/`.
+  None block runtime; all block honest v1 messaging. `docs/audits/audit-dim-03-agents.md`. (PR #121)
+- **Dim 4 — Subagents (CONCERNS).** 0 P0 / 1 P1 / 4 P2 / 2 P3. Spawn vs
+  activator surface is undocumented; `sinapse-` prefix policy still pending.
+  Mirrors Dim 3 F3-4. `docs/audits/audit-dim-04-subagents.md`. (PR #121)
+- **Dim 5 — Workers (CONCERNS).** 0 P0 / 1 P1 / 3 P2 / 2 P3. Service registry
+  was 5 months stale with 8 phantom entries (regenerated in Block 3a).
+  `docs/audits/audit-dim-05-workers.md`. (PR #121)
+- **Dim 6 — Squads (CONCERNS).** 0 P0 / 2 P1 / 4 P2 / 2 P3. 10/19 squad
+  manifests had count drift; 3 lacked the metrics block entirely. Reconciled
+  in Block 3a via new idempotent script. `docs/audits/audit-dim-06-squads.md`. (PR #121)
+- **Dim 7 — Clones (CONCERNS).** 0 P0 / 2 P1 / 3 P2 / 1 P3. 22 simulated
+  personas of real public figures shipped with no licensing or disclaimer
+  in the OSS package. Resolved in Block 3b — disclaimer in every persona
+  file + LICENSE notice + governance hook hardened to fail-closed.
+  `docs/audits/audit-dim-07-clones.md`. (PR #121)
+- **Dim 14, 15, 17 — DEFERRED.** Cognition-layer dimensions deferred from
+  v1.0.0 with explicit justification. `docs/audits/dim-14-15-17-deferral.md`. (PR #121)
+
+### Added — Pre-GA hardening (Block 1, 3, 7)
+
+- Auto-generated counts block in `.sinapse-ai/constitution.md`
+  with `npm run sync:counts`. Real numbers: 19 squads, 200 agents,
+  22 orqx commands, 1237 tasks. (PR #119, #122)
+- 16 squad manifests reconciled with disk reality via
+  `npm run reconcile:squads` (idempotent). (PR #122)
+- Service registry rebuilt: 369 workers, fresh timestamp. (PR #122)
+- Persona simulation notice in 22 mind clones across squad-council,
+  squad-storytelling, squad-design + machine-readable markers
+  + `npm run apply:persona-disclaimer` (idempotent) +
+  fail-closed `mind-clone-governance.py`. (PR #123)
+- `LICENSE` "PERSONA SIMULATION NOTICE" section with takedown procedure. (PR #123)
+- `.claude/agents/README.md` documents the activator pattern (decision 2a). (PR #122)
+- `README.md` grounding section aligned with foundation-only state of
+  Story 10.47 hooks (Concern 1 from Story 10.47 QA). (PR #119)
+- `APSE → SNPS` string rename across docs/CHANGELOG (Caio decision 2026-05-02).
+  Word-boundary safe — `SINAPSE` brand and `sinapse-` prefix preserved. (PR #124)
+
+### Fixed
+
+- Doctor `npm-packages` check honors Node module resolution instead of
+  expecting sibling `.sinapse-ai/node_modules/`. Resolves Bug 3 GA blocker.
+  Also adds `tar` as direct runtime dep (was only in `overrides`). (PR #120)
+- Pre-existing `no-fallthrough` ESLint error at `bin/cli.js` cleared
+  (Story 10.45 piggyback inside Story 10.46). (PR #117)
+- Setup wizard now prompts for language + LLM in Git Bash + Windows where
+  `process.stdin.isTTY === undefined` previously bypassed the prompts.
+  Multi-signal `detectInteractiveMode()` honors stdout TTY + flag overrides
+  + CI env vars. P0 GA blocker. (PR #117 / Story 10.46)
+- Setup wizard now collects optional grounding paths (vault, design system,
+  brand) via opt-in BYO and ships shipping-ready hooks under
+  `.sinapse-ai/core/grounding/` with no-op default + JSON example templates
+  + full guide `docs/guides/grounding-setup.md`. (PR #118 / Story 10.47)
+- `tar` removed from `package.json` overrides after becoming a direct dep
+  (resolves EOVERRIDE on `npm install`). (PR #125)
+
+### Resolved (no work needed)
+
+- Dependabot 20 historical alerts: all 17 fixed + 3 dismissed. 0 open. (Block 4)
+- CodeQL 3s phantom check: self-resolved across PRs #117–#119. (Block 6)
+
+### Notes for v1.0.0 promotion
+
+This RC closes Phase 1 of the pre-GA gate. The next promotion event publishes
+v1.0.0 to `latest` with `--provenance` (OIDC trusted publishing). Migration
+notes for users on rc.x: backward compat alias for the (so-far-unused) APSE
+prefix is unnecessary because no rc shipped APSE-prefixed agents publicly.
+
 ## [10.0.0-rc.10] — 2026-04-19
 
 Release candidate capturing the first nine dimensions of the pre-GA Clinical Audit (Phases 1 through 3) and one rule-drift correction surfaced by the audit. Zero runtime changes — all deliverables here are documentation / governance artifacts that land ahead of the Fase C agent-rename work scheduled for 2026-04-23.
