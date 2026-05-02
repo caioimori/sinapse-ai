@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 10.0.0-rc.10
+version: 10.0.0-rc.11
 generator: scripts/generate-install-manifest.js
-file_count: 1161
+file_count: 1162
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -340,13 +340,17 @@ files:
     type: core
     size: 3529
   - path: core/doctor/checks/ide-sync.js
-    hash: sha256:833092abcbfef419b8dc40a61b9c832b54fcef212b3f5e516c152dc49a147299
+    hash: sha256:6ff4b422c03ef7f84b0e72ccbe97faf6324dee45da18cd878bfe5e91d00271b9
     type: core
-    size: 2275
+    size: 3671
   - path: core/doctor/checks/index.js
-    hash: sha256:46c492327d3aa9e704ee098c43fad1fd884edfb96620d15f51e6f54699f1ea39
+    hash: sha256:898106a6aae49bdc7b4ca7518c8e7d2ba8d0614a8bfb7ecd7515862d8ed61764
     type: core
-    size: 1418
+    size: 1513
+  - path: core/doctor/checks/manifest-version-parity.js
+    hash: sha256:c54afe044aec071ed0939a8cc2b99e9584597d3156d96f20afe57d5b83a05ffa
+    type: core
+    size: 2946
   - path: core/doctor/checks/node-version.js
     hash: sha256:1128759128fd60822b6dc08527442bc88bc713266ef1561fcfcba5dd31992a84
     type: core
@@ -1268,7 +1272,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:859e8d8fade7402997732c170539b1291262ee18588d55aee7ee1ce52daeb2c0
+    hash: sha256:faa26082587490022204efa777e0db97c8c1b6fcdb02a0a0752b8dfe60ee27d7
     type: data
     size: 523558
   - path: data/learned-patterns.yaml

@@ -363,11 +363,14 @@ describe('ide-sync check', () => {
     expect(result.status).toBe('PASS');
   });
 
-  it('should WARN when counts mismatch', async () => {
+  it('should WARN when IDE has fewer agents than expected (Audit 1 P1 DOC-1)', async () => {
+    // Post-DOC-1 fix: WARN fires when IDE count < (framework + squad orqx).
+    // Source dir has 5 framework agents; IDE has only 2 (missing 3 expected).
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('commands')) return ['dev.md', 'qa.md', 'pm.md'];
-      return ['dev.md', 'qa.md'];
+      if (p.includes('commands')) return ['dev.md', 'qa.md']; // 2 in IDE
+      // Source agents dir — 5 framework agents (>= IDE count → expected gap)
+      return ['dev.md', 'qa.md', 'pm.md', 'po.md', 'sm.md'];
     });
 
     const result = await ideSyncCheck.run(mockContext);
@@ -555,7 +558,7 @@ describe('check registry (INS-4.8)', () => {
   it('should load 15 checks total', () => {
     // loadChecks is the real function (not mocked) — verifies registration
     const checks = loadChecks();
-    expect(checks).toHaveLength(15);
+    expect(checks).toHaveLength(16);
   });
 
   it('should include all 3 new checks', () => {
