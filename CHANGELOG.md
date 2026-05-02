@@ -7,6 +7,71 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0-rc.12] — 2026-05-02
+
+3-audit consolidation. Closes 11 of the 15 P0 surfaced by the three
+sequential pre-GA audits (Functional / Quality / UX-DX). Remaining
+P1/P2 are tracked in `docs/audits/` for follow-up; none block GA.
+
+### Fixed — Audit 1 (Functional)
+
+- Uninstall now removes every SINAPSE-authored agent file via
+  `~/.sinapse/installed-agents.json` manifest (was leaving ~178
+  orphaned files in `~/.claude/agents/` + `~/.codex/agents/`).
+  Backward-compat heuristic for pre-manifest installs. (PR #129)
+- Doctor `ide-sync` check no longer reports `12/12 ✓` while ~21
+  squad orqx files are missing — now expects framework + squad orqx
+  baseline. (PR #130)
+- New doctor `manifest-version-parity` check fails on package.json ↔
+  install-manifest.yaml drift. (PR #130)
+
+### Fixed — Audit 2 (Quality)
+
+- `chrome-brain.js` (1145 LOC) now has 6 smoke tests locking the
+  public contract — was 0% coverage. (PR #132)
+- `sinapse-pro.js` bin (232 LOC) now has 5 smoke tests — was 0%. (PR #132)
+- `yaml@^2.8.3` declared in `dependencies` (was used but undeclared,
+  silent-break risk on hoist-strip publish). (PR #132)
+- `@eslint/js@^9.39.4` declared in `devDependencies` (used in
+  `eslint.config.js`, was undeclared). (PR #132)
+
+### Fixed — Audit 3 (UX/DX)
+
+- README counts reconciled to disk reality: 200 agentes (was 186), 19
+  squads (was 18), 1.237 tasks (was 1.425). Test badge bumped to 11014. (PR #134)
+- `getting-started.md` persona table replaced legacy-upstream codenames
+  with canonical SINAPSE codenames (Litmus/Stratum/Beacon/Axis/Scope/
+  Tensor/Mosaic/Pipeline). (PR #134)
+- `agent-reference.md` was misnamed AGENTS.md for Codex — renamed to
+  `codex-config.md`; created a real `agent-reference.md` documenting
+  the 10 framework agents + 21 squad orqx + ~170 specialists. (PR #134)
+- GitHub org consolidated to `caioimori/` across ~120 files (was a
+  split-brain with vestigial `SinapseAI/` references). (PR #134)
+- `SECURITY.md` supported-versions table replaced legacy v7.x with the
+  real channel matrix (rc.x on `rc`, 9.x last-GA on `latest`). (PR #134)
+- Replaced illustrative `ghp_xxxx` / `sk-xxxx` placeholders in
+  security-hardening.md with `<your-X-here>` form. (PR #134)
+- Deleted `.github/ISSUE_DRAFT_P0_missing_module.md` (Jan 2025
+  obsolete draft referencing legacy persona names). (PR #134)
+
+### Added — Pre-GA hardening artifacts
+
+- `docs/audits/audit-1-functional/` — 8 sub-reports + SUMMARY (PR #128)
+- `docs/audits/audit-2-quality/` — 8 sub-reports + SUMMARY (PR #131)
+- `docs/audits/audit-3-ux-dx/` — 10 sub-reports + SUMMARY (PR #133)
+
+### Notes for v1.0.0 promotion
+
+This RC closes the three pre-GA audit cycles. Remaining open items
+(Audit 2 Wave B/C, Audit 3 Bloco C/D/E) are P1/P2 that do not block
+GA — they become v1.0.x or v1.1 backlog.
+
+For the v1.0.0 GA promotion (next event):
+- Tag `v1.0.0` (clean semver, no -rc suffix) → workflow auto-routes
+  to `latest` (per PR #127 fix)
+- `--provenance` automatic via OIDC
+- GitHub release notes + migration guide
+
 ## [10.0.0-rc.11] — 2026-05-02
 
 Pre-GA hardening sprint. Closes the remaining clinical-audit blockers and the
