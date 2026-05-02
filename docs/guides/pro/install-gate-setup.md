@@ -145,7 +145,7 @@ License activation failed: Invalid key format
 
 - Verifique o formato: `PRO-XXXX-XXXX-XXXX-XXXX` (4 blocos de 4 caracteres hex)
 - Sem espacos extras
-- Abra uma issue em https://github.com/SinapseAI/sinapse-ai/issues se a chave foi fornecida a voce
+- Abra uma issue em https://github.com/caioimori/sinapse-ai/issues se a chave foi fornecida a voce
 
 ### Maximo de seats excedido
 
@@ -196,8 +196,8 @@ License activation failed: ECONNREFUSED
 
 - **Documentacao:** https://sinapse.ai/pro/docs
 - **Comprar:** https://sinapse.ai/pro
-- **Suporte:** https://github.com/SinapseAI/sinapse-ai/issues
-- **Issues:** https://github.com/SinapseAI/sinapse-ai/issues
+- **Suporte:** https://github.com/caioimori/sinapse-ai/issues
+- **Issues:** https://github.com/caioimori/sinapse-ai/issues
 
 ---
 

@@ -153,7 +153,7 @@ License information.
 ```
 
 This will:
-1. Fork `SinapseAI/sinapse-squads` (if needed)
+1. Fork `caioimori/sinapse-squads` (if needed)
 2. Create branch with your squad
 3. Open PR for review
 
@@ -235,15 +235,15 @@ Follow semantic versioning:
 
 ## Getting Help
 
-- **Questions**: [GitHub Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
-- **Issues**: [Issue Tracker](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Questions**: [GitHub Discussions](https://github.com/caioimori/sinapse-ai/discussions)
+- **Issues**: [Issue Tracker](https://github.com/caioimori/sinapse-ai/issues)
 - **Guidelines**: This document
 
 ## Related Resources
 
 - [Squad Development Guide](./squads-guide.md)
 - [Squad Migration Guide](./squad-migration.md)
-- [sinapse-squads Repository](https://github.com/SinapseAI/sinapse-squads)
+- [sinapse-squads Repository](https://github.com/caioimori/sinapse-squads)
 
 ---
 

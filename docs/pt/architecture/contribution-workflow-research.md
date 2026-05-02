@@ -176,23 +176,23 @@ Dockerfile @org/devops-team
 
 ```codeowners
 # Padrão - requer review de maintainer
-* @SinapseAI/maintainers
+* @caioimori/maintainers
 
 # Definições de agentes - requer core team
-.sinapse-ai/development/agents/ @SinapseAI/core-team
+.sinapse-ai/development/agents/ @caioimori/core-team
 
 # Definições de tasks - requer core team
-.sinapse-ai/development/tasks/ @SinapseAI/core-team
+.sinapse-ai/development/tasks/ @caioimori/core-team
 
 # CI/CD - requer aprovação devops
-.github/ @SinapseAI/devops
+.github/ @caioimori/devops
 
 # Documentação - mais permissivo para contribuidores
-docs/ @SinapseAI/maintainers
+docs/ @caioimori/maintainers
 
 # Templates - requer review de architect
-templates/ @SinapseAI/core-team
-.sinapse-ai/product/templates/ @SinapseAI/core-team
+templates/ @caioimori/core-team
+.sinapse-ai/product/templates/ @caioimori/core-team
 ```
 
 ---

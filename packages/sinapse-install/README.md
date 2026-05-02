@@ -109,8 +109,8 @@ If you have an existing SINAPSE installation, the installer will:
 
 ## Support
 
-- Documentation: https://github.com/SinapseAI/sinapse-ai
-- Issues: https://github.com/SinapseAI/sinapse-ai/issues
+- Documentation: https://github.com/caioimori/sinapse-ai
+- Issues: https://github.com/caioimori/sinapse-ai/issues
 
 ## License
 

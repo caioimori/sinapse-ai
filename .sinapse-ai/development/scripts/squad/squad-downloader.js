@@ -18,14 +18,14 @@ const path = require('path');
  * @constant {string}
  */
 const REGISTRY_URL =
-  'https://raw.githubusercontent.com/SinapseAI/sinapse-squads/main/registry.json';
+  'https://raw.githubusercontent.com/caioimori/sinapse-squads/main/registry.json';
 
 /**
  * GitHub API base URL for sinapse-squads contents
  * @constant {string}
  */
 const GITHUB_API_BASE =
-  'https://api.github.com/repos/SinapseAI/sinapse-squads/contents/packages';
+  'https://api.github.com/repos/caioimori/sinapse-squads/contents/packages';
 
 /**
  * Default path for downloaded squads

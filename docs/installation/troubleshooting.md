@@ -679,7 +679,7 @@ ls -la .sinapse-ai/
 
 1. Run `npx sinapse-ai status` and note the output
 2. Check this troubleshooting guide
-3. Search existing [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)
+3. Search existing [GitHub Issues](https://github.com/caioimori/sinapse-ai/issues)
 
 ### Information to Include in Bug Reports
 
@@ -714,7 +714,7 @@ ls -la .sinapse-ai/
 
 ### Support Channels
 
-- **GitHub Issues**: [sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Issues**: [sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 - **Documentation**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

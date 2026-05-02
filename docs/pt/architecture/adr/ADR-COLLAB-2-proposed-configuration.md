@@ -69,7 +69,7 @@ branch_protection:
 **Comando de Implementação:**
 
 ```bash
-gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/caioimori/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test","validation-summary"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -208,76 +208,76 @@ abort_on_close: true
 # ============================================
 # Owner Padrão (fallback)
 # ============================================
-* @SinapseAI/maintainers
+* @caioimori/maintainers
 
 # ============================================
 # Framework Core
 # ============================================
 # Definições de agentes - requer revisão do core team
-.sinapse-ai/development/agents/ @SinapseAI/core-team
+.sinapse-ai/development/agents/ @caioimori/core-team
 
 # Definições de tarefas - requer revisão do core team
-.sinapse-ai/development/tasks/ @SinapseAI/core-team
+.sinapse-ai/development/tasks/ @caioimori/core-team
 
 # Definições de workflows - requer revisão do core team
-.sinapse-ai/development/workflows/ @SinapseAI/core-team
+.sinapse-ai/development/workflows/ @caioimori/core-team
 
 # Templates - requer revisão de architect/core team
-.sinapse-ai/product/templates/ @SinapseAI/core-team
-templates/ @SinapseAI/core-team
+.sinapse-ai/product/templates/ @caioimori/core-team
+templates/ @caioimori/core-team
 
 # Utilitários core - requer revisão sênior
-.sinapse-ai/core/ @SinapseAI/core-team
-.sinapse-ai/cli/ @SinapseAI/core-team
+.sinapse-ai/core/ @caioimori/core-team
+.sinapse-ai/cli/ @caioimori/core-team
 
 # ============================================
 # Infraestrutura
 # ============================================
 # CI/CD - requer aprovação de devops
-.github/ @SinapseAI/devops
+.github/ @caioimori/devops
 
 # Configurações Docker
-.docker/ @SinapseAI/devops
+.docker/ @caioimori/devops
 
 # Arquivos de configuração
-.sinapse-ai/core-config.yaml @SinapseAI/core-team
-package.json @SinapseAI/maintainers
-package-lock.json @SinapseAI/maintainers
+.sinapse-ai/core-config.yaml @caioimori/core-team
+package.json @caioimori/maintainers
+package-lock.json @caioimori/maintainers
 
 # ============================================
 # Documentação (Mais Permissivo)
 # ============================================
 # Docs gerais - maintainers podem aprovar
-docs/ @SinapseAI/maintainers
+docs/ @caioimori/maintainers
 
 # Decisões de arquitetura - requer core team
-docs/architecture/ @SinapseAI/core-team
-docs/framework/ @SinapseAI/core-team
+docs/architecture/ @caioimori/core-team
+docs/framework/ @caioimori/core-team
 
 # Stories - maintainers (docs de desenvolvimento interno)
-docs/stories/ @SinapseAI/maintainers
+docs/stories/ @caioimori/maintainers
 
 # Guias - maintainers (amigável para contribuidores)
-docs/guides/ @SinapseAI/maintainers
+docs/guides/ @caioimori/maintainers
 
 # ============================================
 # Arquivos Sensíveis de Segurança
 # ============================================
 # Configurações de segurança
-.github/CODEOWNERS @SinapseAI/core-team
-.github/workflows/semantic-release.yml @SinapseAI/devops
-.github/workflows/npm-publish.yml @SinapseAI/devops
+.github/CODEOWNERS @caioimori/core-team
+.github/workflows/semantic-release.yml @caioimori/devops
+.github/workflows/npm-publish.yml @caioimori/devops
 
 # Arquivos de configuração raiz
-.env* @SinapseAI/core-team
-*.config.js @SinapseAI/maintainers
+.env* @caioimori/core-team
+*.config.js @caioimori/maintainers
 ```
 
 **Teams GitHub Necessários:**
 
-- `@SinapseAI/maintainers` - Maintainers gerais (acesso de escrita)
-- `@SinapseAI/core-team` - Desenvolvedores core do framework
-- `@SinapseAI/devops` - CI/CD e infraestrutura
+- `@caioimori/maintainers` - Maintainers gerais (acesso de escrita)
+- `@caioimori/core-team` - Desenvolvedores core do framework
+- `@caioimori/devops` - CI/CD e infraestrutura
 
 ---
 
@@ -444,10 +444,10 @@ _Ao submeter este PR, confirmo que li as [Diretrizes de Contribuição](../../..
 
 ```bash
 # Remover toda proteção de branch (apenas emergência)
-gh api -X DELETE repos/SinapseAI/sinapse-ai/branches/main/protection
+gh api -X DELETE repos/caioimori/sinapse-ai/branches/main/protection
 
 # Restaurar proteção mínima
-gh api repos/SinapseAI/sinapse-ai/branches/main/protection -X PUT \
+gh api repos/caioimori/sinapse-ai/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \

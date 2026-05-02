@@ -562,7 +562,7 @@ projectStatus:
 
 **Resposta:**
 
-1. **Faça fork do repositório:** https://github.com/SinapseAI/sinapse-ai
+1. **Faça fork do repositório:** https://github.com/caioimori/sinapse-ai
 
 2. **Crie um branch de feature:**
 
@@ -598,8 +598,8 @@ projectStatus:
 | ------------------- | ---------------------------------------------------------- |
 | **Documentação**    | `docs/` no seu projeto                                     |
 | **Solução de Problemas** | [troubleshooting.md](./troubleshooting.md)            |
-| **Issues no GitHub** | https://github.com/SinapseAI/sinapse-ai/issues              |
-| **Código-fonte**    | https://github.com/SinapseAI/sinapse-ai                      |
+| **Issues no GitHub** | https://github.com/caioimori/sinapse-ai/issues              |
+| **Código-fonte**    | https://github.com/caioimori/sinapse-ai                      |
 
 **Antes de pedir ajuda:**
 

@@ -2,10 +2,15 @@
 
 ## Supported Versions
 
-| Version | Supported |
-|---------|-----------|
-| 7.x     | Yes       |
-| < 7.0   | No        |
+| Version           | Channel  | Supported |
+|-------------------|----------|-----------|
+| 10.0.0-rc.x       | `rc`     | Yes (pre-GA, security fixes only) |
+| 9.x (last GA)     | `latest` | Yes (until v1.0.0 GA promotion)   |
+| 8.x and earlier   | —        | No                                |
+
+After v1.0.0 GA promotion, the policy becomes:
+- v1.x: latest minor receives security fixes
+- < v1.0: no support
 
 ## Reporting a Vulnerability
 
@@ -74,4 +79,4 @@ This policy applies to the `sinapse-ai` npm package and the `caioimori/sinapse-a
 
 ---
 
-*Last updated: 2026-04-03*
+*Last updated: 2026-05-02*

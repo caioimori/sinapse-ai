@@ -403,8 +403,8 @@ sinapse rebuild
 
 ### Getting Help
 
-- **GitHub Discussions**: [github.com/SinapseAI/sinapse-ai/discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
-- **Issue Tracker**: [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Discussions**: [github.com/caioimori/sinapse-ai/discussions](https://github.com/caioimori/sinapse-ai/discussions)
+- **Issue Tracker**: [github.com/caioimori/sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 - **Discord**: [Join our server](https://discord.gg/gk8jAdXWmj)
 
 ---

@@ -24,7 +24,7 @@ Windows users should install via npm, pnpm, or Yarn v2+ (Berry). See
 | Field | Value |
 |-------|-------|
 | SINAPSE version | `v10.0.0-rc.X` |
-| Workflow run URL | https://github.com/SinapseAI/sinapse-ai/actions/runs/XXXXXXXXXX |
+| Workflow run URL | https://github.com/caioimori/sinapse-ai/actions/runs/XXXXXXXXXX |
 | Executed by | @devops (Pipeline) |
 | Node versions tested | 18.x, 20.x (matrix) |
 

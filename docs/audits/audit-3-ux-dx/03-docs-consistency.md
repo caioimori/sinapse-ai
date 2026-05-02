@@ -90,7 +90,7 @@ docs/community/README-community-snippet-core.md:5
 docs/community/README-community-snippet-mcp.md:13, 17, 18, 20, 21, 45
 docs/community/README-community-snippet-squads.md:13, 17, 18, 20, 21
 ```
-URLs apontam pra `github.com/SinapseAI/sinapse-ai`. Reality (CONTRIBUTING.md,
+URLs apontam pra `github.com/caioimori/sinapse-ai`. Reality (CONTRIBUTING.md,
 SECURITY.md, CODE_OF_CONDUCT.md): repo é `caioimori/sinapse-ai`.
 
 Detalhe em sub-relatório 4 (Naming consistency). Aqui só documenta-se que
@@ -101,7 +101,7 @@ Detalhe em sub-relatório 4 (Naming consistency). Aqui só documenta-se que
 ### F5 [P1] — `docs/framework/roadmap.md` aponta pra org SinapseAI também
 
 **Onde:** `docs/framework/roadmap.md:84, 88, 111`
-**Fix:** s/SinapseAI/caioimori/
+**Fix:** s/caioimori/caioimori/
 
 ---
 

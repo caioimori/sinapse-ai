@@ -41,7 +41,7 @@ node .sinapse-ai/infrastructure/scripts/llm-routing/install-llm-routing.js
 **Opção 2: Instalação nova**
 ```bash
 # Clone o repositório
-git clone https://github.com/SinapseAI/sinapse-ai.git
+git clone https://github.com/caioimori/sinapse-ai.git
 cd sinapse-ai
 
 # Execute o instalador

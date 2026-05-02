@@ -16,7 +16,7 @@ sinapse-ai/
 ├── bin/
 ├── src/
 ├── packages/
-├── pro/ ─── git submodule ──► SinapseAI/sinapse-pro (private)
+├── pro/ ─── git submodule ──► caioimori/sinapse-pro (private)
 ├── squads/ (community)
 └── package.json
 ```
@@ -35,7 +35,7 @@ git clone https://github.com/YOUR_USERNAME/sinapse-ai.git
 cd sinapse-ai
 
 # Add upstream remote
-git remote add upstream https://github.com/SinapseAI/sinapse-ai.git
+git remote add upstream https://github.com/caioimori/sinapse-ai.git
 
 # Install dependencies
 npm install
@@ -68,7 +68,7 @@ git push origin feature/my-feature
 - All core tests pass without `pro/` present
 - `bin/utils/pro-detector.js` returns `isProAvailable() === false`
 - No features are degraded for core-only developers
-- You do NOT need access to SinapseAI/sinapse-pro
+- You do NOT need access to caioimori/sinapse-pro
 
 ---
 
@@ -80,7 +80,7 @@ Team members with access to the private sinapse-pro repository can work on both 
 
 ```bash
 # Clone with submodules
-git clone --recurse-submodules https://github.com/SinapseAI/sinapse-ai.git
+git clone --recurse-submodules https://github.com/caioimori/sinapse-ai.git
 cd sinapse-ai
 
 # Install dependencies
@@ -212,7 +212,7 @@ git submodule update --init pro
 
 ### Permission denied when cloning submodule
 
-You need access to `SinapseAI/sinapse-pro`. Contact the team lead.
+You need access to `caioimori/sinapse-pro`. Contact the team lead.
 
 ### Tests fail with pro/ present
 

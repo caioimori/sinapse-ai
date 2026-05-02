@@ -124,7 +124,7 @@ Until all four are done, `send()` remains a stub.
 
 ## Contact
 
-Found a bug in the telemetry implementation? Think we are collecting something we should not? Open an issue at <https://github.com/SinapseAI/sinapse-ai/issues> or email the maintainers listed in `package.json`.
+Found a bug in the telemetry implementation? Think we are collecting something we should not? Open an issue at <https://github.com/caioimori/sinapse-ai/issues> or email the maintainers listed in `package.json`.
 
 ## Audit trail
 

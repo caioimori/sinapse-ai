@@ -126,7 +126,7 @@ Para questoes relacionadas a privacidade e protecao de dados no contexto do SINA
 Para duvidas sobre privacidade e protecao de dados:
 
 - **E-mail:** privacy@sinapse-ai.dev
-- **GitHub Issues:** [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Issues:** [github.com/caioimori/sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 
 ---
 

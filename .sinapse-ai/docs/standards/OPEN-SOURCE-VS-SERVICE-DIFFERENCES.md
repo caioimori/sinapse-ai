@@ -23,11 +23,11 @@ This document clarifies which features apply to which context.
 
 | Repository | License | Type | Contains |
 |------------|---------|------|----------|
-| `SinapseAI/sinapse-ai` | Commons Clause | Public | Core framework, 11 agents, Quality Gates |
-| `SinapseAI/sinapse-squads` | MIT | Public | ETL, Creator, MMOS-Mapper squads |
-| `SinapseAI/mcp-ecosystem` | Apache 2.0 | Public | Docker MCP, IDE configs, MCP presets |
-| `SinapseAI/mmos` | Proprietary + NDA | Private | MMOS Minds, DNA Mental |
-| `SinapseAI/certified-partners` | Proprietary | Private | Premium squads, partner portal |
+| `caioimori/sinapse-ai` | Commons Clause | Public | Core framework, 11 agents, Quality Gates |
+| `caioimori/sinapse-squads` | MIT | Public | ETL, Creator, MMOS-Mapper squads |
+| `caioimori/mcp-ecosystem` | Apache 2.0 | Public | Docker MCP, IDE configs, MCP presets |
+| `caioimori/mmos` | Proprietary + NDA | Private | MMOS Minds, DNA Mental |
+| `caioimori/certified-partners` | Proprietary | Private | Premium squads, partner portal |
 
 ### npm Package Scoping
 
@@ -45,7 +45,7 @@ This document clarifies which features apply to which context.
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    OPEN-SOURCE (Public Repos)                           │
 │                                                                         │
-│   SinapseAI/sinapse-ai        SinapseAI/sinapse-squads                   │
+│   caioimori/sinapse-ai        caioimori/sinapse-squads                   │
 │   ┌─────────────────────┐     ┌─────────────────────┐                  │
 │   │ • Core Framework    │     │ • ETL Squad         │                  │
 │   │ • 11 Base Agents    │     │ • Creator Squad     │                  │
@@ -53,7 +53,7 @@ This document clarifies which features apply to which context.
 │   │ • Standards Docs    │     │ • squad.yaml format │                  │
 │   └─────────────────────┘     └─────────────────────┘                  │
 │                                                                         │
-│   SinapseAI/mcp-ecosystem                                             │
+│   caioimori/mcp-ecosystem                                             │
 │   ┌─────────────────────┐                                              │
 │   │ • Docker MCP        │                                              │
 │   │ • IDE Configurations│                                              │
@@ -65,7 +65,7 @@ This document clarifies which features apply to which context.
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    SERVICE (Private Repos)                              │
 │                                                                         │
-│   SinapseAI/mmos             SinapseAI/certified-partners            │
+│   caioimori/mmos             caioimori/certified-partners            │
 │   ┌─────────────────────┐     ┌─────────────────────┐                  │
 │   │ • MMOS Minds        │     │ • Premium Squads    │                  │
 │   │ • DNA Mental™       │     │ • Partner Portal    │                  │

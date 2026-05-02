@@ -166,8 +166,8 @@ tags:
 
 | Squad             | Version | Description                        | Repository                                                                       |
 | ----------------- | ------- | ---------------------------------- | -------------------------------------------------------------------------------- |
-| **etl-squad**     | 2.0.0   | Data collection and transformation | [sinapse-squads/etl](https://github.com/SinapseAI/sinapse-squads/tree/main/etl)         |
-| **creator-squad** | 1.0.0   | Content generation utilities       | [sinapse-squads/creator](https://github.com/SinapseAI/sinapse-squads/tree/main/creator) |
+| **etl-squad**     | 2.0.0   | Data collection and transformation | [sinapse-squads/etl](https://github.com/caioimori/sinapse-squads/tree/main/etl)         |
+| **creator-squad** | 1.0.0   | Content generation utilities       | [sinapse-squads/creator](https://github.com/caioimori/sinapse-squads/tree/main/creator) |
 
 ### Distribution Levels
 
@@ -270,7 +270,7 @@ Use semantic versioning:
 ## Next Steps
 
 - **Create Your First Squad:** Follow the [Squads Guide](./squads-guide.md) for detailed instructions
-- **Explore Official Squads:** Check [sinapse-squads repository](https://github.com/SinapseAI/sinapse-squads)
+- **Explore Official Squads:** Check [sinapse-squads repository](https://github.com/caioimori/sinapse-squads)
 - **Contribute:** See [Contributing Squads Guide](./contributing-squads.md)
 - **Learn Task Format:** Read [TASK-FORMAT-SPECIFICATION-V1](../../.sinapse-ai/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
 

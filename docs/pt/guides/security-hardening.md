@@ -106,12 +106,12 @@ Chaves de API são os segredos mais críticos no SINAPSE. Chaves comprometidas p
 ```bash
 # .env - Adicione ao .gitignore IMEDIATAMENTE
 # Chaves de Provedor de API
-ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ANTHROPIC_API_KEY=<your-anthropic-key-here>
+OPENAI_API_KEY=<your-openai-key-here>
 
 # Chaves de Servidor MCP
 EXA_API_KEY=exa-xxxxxxxxxxxxxxxxxxxxxxxx
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GITHUB_TOKEN=<your-github-personal-token-here>
 APIFY_TOKEN=apify_api_xxxxxxxxxxxxxxxxxxxxx
 
 # Nunca use valores padrão ou fracos
@@ -1288,7 +1288,7 @@ Se você descobrir uma vulnerabilidade de segurança no SINAPSE, por favor siga 
 ### Processo de Relatório
 
 1. **NÃO** crie uma issue pública no GitHub para vulnerabilidades de segurança
-2. Reporte preocupações de segurança via [GitHub Security Advisories](https://github.com/SinapseAI/sinapse-ai/security/advisories)
+2. Reporte preocupações de segurança via [GitHub Security Advisories](https://github.com/caioimori/sinapse-ai/security/advisories)
 3. Inclua o seguinte no seu relatório:
    - Descrição da vulnerabilidade
    - Passos para reproduzir

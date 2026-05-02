@@ -71,7 +71,7 @@ Community:
 *download-squad etl-squad
 
 Downloading: etl-squad@1.0.0
-  Source: github.com/SinapseAI/sinapse-squads/packages/etl-squad
+  Source: github.com/caioimori/sinapse-squads/packages/etl-squad
   Target: ./squads/etl-squad/
 
 ✓ Downloaded 12 files

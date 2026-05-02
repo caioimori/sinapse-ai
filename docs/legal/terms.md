@@ -142,7 +142,7 @@ Eventuais disputas serao submetidas ao foro da comarca de Sao Paulo, Estado de S
 Para duvidas sobre estes Termos de Uso:
 
 - **E-mail:** legal@sinapse-ai.dev
-- **GitHub Issues:** [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Issues:** [github.com/caioimori/sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 
 ---
 

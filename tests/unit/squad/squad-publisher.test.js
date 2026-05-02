@@ -75,7 +75,7 @@ describe('SquadPublisher', () => {
 
   describe('Constants', () => {
     it('should export SINAPSE_SQUADS_REPO', () => {
-      expect(SINAPSE_SQUADS_REPO).toBe('SinapseAI/sinapse-squads');
+      expect(SINAPSE_SQUADS_REPO).toBe('caioimori/sinapse-squads');
     });
 
     it('should export PublisherErrorCodes enum', () => {

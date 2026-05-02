@@ -115,15 +115,15 @@ O agente **Sync** vai guiar a criacao da sua primeira story de desenvolvimento. 
 | Ativacao | Persona | Foco |
 |----------|---------|------|
 | `@developer` | Pixel | Implementacao de codigo, bug fixes, refactoring |
-| `@quality-gate` | Quinn | Testes, quality gates, code review |
-| `@architect` | Aria | Design de sistema, decisoes tecnicas |
-| `@project-lead` | Morgan | PRDs, estrategia, roadmap |
-| `@product-lead` | Pax | Backlog, validacao de stories, priorizacao |
+| `@quality-gate` | Litmus | Testes, quality gates, code review |
+| `@architect` | Stratum | Design de sistema, decisoes tecnicas |
+| `@project-lead` | Beacon | PRDs, estrategia, roadmap |
+| `@product-lead` | Axis | Backlog, validacao de stories, priorizacao |
 | `@sprint-lead` | Sync | Criacao de stories, planejamento de sprint |
-| `@analyst` | Alex | Pesquisa, analise competitiva |
-| `@data-engineer` | Dara | Database design, migracoes |
-| `@ux-design-expert` | Uma | UI/UX design, acessibilidade |
-| `@devops` | Gage | Git operations, CI/CD, deploys |
+| `@analyst` | Scope | Pesquisa, analise competitiva |
+| `@data-engineer` | Tensor | Database design, migracoes |
+| `@ux-design-expert` | Mosaic | UI/UX design, acessibilidade |
+| `@devops` | Pipeline | Git operations, CI/CD, deploys |
 
 ---
 

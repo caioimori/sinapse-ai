@@ -17,7 +17,7 @@ defeitos de identidade visível imediatamente após `npm install`.
 
 **Inventário (grep `github.com/(SinapseAI|caioimori)/sinapse-ai`):**
 
-**Aponta pra `SinapseAI/sinapse-ai`** (ERRADO conforme realidade):
+**Aponta pra `caioimori/sinapse-ai`** (ERRADO conforme realidade):
 - `bin/sinapse.js:135` — texto de help "For more information, visit..."
 - `.sinapse-ai/package.json:81, 84, 86` — repository, bugs, homepage
 - `.sinapse-ai/schemas/squad-schema.json:3` — `$id`
@@ -38,7 +38,7 @@ defeitos de identidade visível imediatamente após `npm install`.
 - `docs/guides/getting-started.md:191`
 
 **Reality check (`.sinapse/audit/repo-settings.json:1`):** Repo real **é**
-`SinapseAI/sinapse-ai` segundo a API do GitHub. Owner login: SinapseAI (org).
+`caioimori/sinapse-ai` segundo a API do GitHub. Owner login: SinapseAI (org).
 Mas todos os docs front-of-house (README, CONTRIBUTING, SECURITY) usam
 `caioimori`.
 
@@ -118,7 +118,7 @@ casos. Não-blocker, mas inconsistente.
 ---
 
 ## Severity counts
-- **P0:** 1 (org split-brain SinapseAI/caioimori)
+- **P0:** 1 (org split-brain caioimori/caioimori)
 - **P1:** 2 (SINAPSE-FullStack legacy, APSE→SNPS verificação)
 - **P2:** 1 (capitalização sem guideline)
 - **P3:** 1 (Sinapse title case)

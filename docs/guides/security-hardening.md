@@ -106,12 +106,12 @@ API keys are the most critical secrets in SINAPSE. Compromised keys can lead to 
 ```bash
 # .env - Add to .gitignore IMMEDIATELY
 # API Provider Keys
-ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ANTHROPIC_API_KEY=<your-anthropic-key-here>
+OPENAI_API_KEY=<your-openai-key-here>
 
 # MCP Server Keys
 EXA_API_KEY=exa-xxxxxxxxxxxxxxxxxxxxxxxx
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GITHUB_TOKEN=<your-github-personal-token-here>
 APIFY_TOKEN=apify_api_xxxxxxxxxxxxxxxxxxxxx
 
 # Never use default or weak values
@@ -1288,7 +1288,7 @@ If you discover a security vulnerability in SINAPSE, please follow responsible d
 ### Reporting Process
 
 1. **DO NOT** create a public GitHub issue for security vulnerabilities
-2. Report security concerns via [GitHub Security Advisories](https://github.com/SinapseAI/sinapse-ai/security/advisories)
+2. Report security concerns via [GitHub Security Advisories](https://github.com/caioimori/sinapse-ai/security/advisories)
 3. Include the following in your report:
    - Description of the vulnerability
    - Steps to reproduce

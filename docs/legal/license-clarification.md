@@ -123,7 +123,7 @@ O usuario e responsavel por verificar a compatibilidade de licencas ao combinar 
 Para duvidas sobre licenciamento:
 
 - **E-mail:** legal@sinapse-ai.dev
-- **GitHub Issues:** [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Issues:** [github.com/caioimori/sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 
 ---
 

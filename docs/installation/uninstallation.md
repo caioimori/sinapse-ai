@@ -534,8 +534,8 @@ cp -r ~/sinapse-backup/agents/* ./agents/
 If you encounter issues during uninstallation:
 
 1. **Check Documentation**
-   - [FAQ](https://github.com/SinapseAI/sinapse-ai/wiki/faq#uninstall)
-   - [Troubleshooting](https://github.com/SinapseAI/sinapse-ai/wiki/troubleshooting)
+   - [FAQ](https://github.com/caioimori/sinapse-ai/wiki/faq#uninstall)
+   - [Troubleshooting](https://github.com/caioimori/sinapse-ai/wiki/troubleshooting)
 
 2. **Community Support**
    - Discord: #uninstall-help

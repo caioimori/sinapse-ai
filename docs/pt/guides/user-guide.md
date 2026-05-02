@@ -366,8 +366,8 @@ sinapse rebuild
 
 ### Obtendo Ajuda
 
-- **GitHub Discussions**: [github.com/SinapseAI/sinapse-ai/discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
-- **Issue Tracker**: [github.com/SinapseAI/sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **GitHub Discussions**: [github.com/caioimori/sinapse-ai/discussions](https://github.com/caioimori/sinapse-ai/discussions)
+- **Issue Tracker**: [github.com/caioimori/sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 - **Discord**: [Entre no nosso servidor](https://discord.gg/gk8jAdXWmj)
 
 ---

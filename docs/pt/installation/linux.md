@@ -152,7 +152,7 @@ sudo pacman -S base-devel
 3. Execute o instalador:
 
    ```bash
-   npx github:SinapseAI/sinapse-ai install
+   npx github:caioimori/sinapse-ai install
    ```
 
 ### O Que o Instalador Faz
@@ -268,7 +268,7 @@ Para atualizar uma instalação existente:
 
 ```bash
 # Usando npx (recomendado)
-npx github:SinapseAI/sinapse-ai install
+npx github:caioimori/sinapse-ai install
 ```
 
 O atualizador irá:
@@ -308,4 +308,4 @@ O atualizador irá:
 - [Guia de Solução de Problemas](troubleshooting.md)
 - [FAQ](faq.md)
 - [Comunidade Discord](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/caioimori/sinapse-ai/issues)
