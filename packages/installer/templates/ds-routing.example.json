@@ -1,0 +1,12 @@
+{
+  "$schema": "https://sinapse-ai.dev/schemas/grounding-design-system-v1.json",
+  "_comment": "Generic example for design-system grounding (Story 10.47). Copy fields into ~/.claude/sinapse-ai-config.yaml under grounding.designSystem — or run `npx sinapse-ai install --reconfigure`.",
+  "version": "1",
+  "designSystem": {
+    "enabled": true,
+    "_comment_profileName": "Friendly name shown in agent context. Free-form string.",
+    "profileName": "my-product-ds",
+    "_comment_rootPath": "Absolute path to the root of your design-system source-of-truth (Figma export, code repo, brand site, etc.).",
+    "rootPath": "/absolute/path/to/your/design-system"
+  }
+}
