@@ -23,6 +23,7 @@ const skillsCount = require('./skills-count');
 const commandsCount = require('./commands-count');
 const hooksClaudeCount = require('./hooks-claude-count');
 const constitutionConsistency = require('./constitution-consistency');
+const manifestVersionParity = require('./manifest-version-parity');
 
 function loadChecks(options = {}) {
   const checks = [
@@ -41,6 +42,7 @@ function loadChecks(options = {}) {
     skillsCount,
     commandsCount,
     hooksClaudeCount,
+    manifestVersionParity,
   ];
 
   // Deep checks — only run with --deep flag
