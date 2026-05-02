@@ -14,14 +14,14 @@ metadata:
   last_updated: "2026-04-12"
   author: "Sinapse"
   tier: 2
-  total_files: 152
+  total_files: 160
   agents: 15
   tasks: 101
-  workflows: 6
+  workflows: 0
   knowledge_bases: 19
   checklists: 3
   templates: 7
-  preferences: 1
+  preferences: 0
 
 changelog:
   - version: "2.0.0"

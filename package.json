@@ -1,7 +1,7 @@
 {
   "name": "sinapse-ai",
   "version": "10.0.0-rc.10",
-  "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 186 agentes especializados",
+  "description": "SINAPSE AI: Framework de orquestracao de IA — 19 squads, 200 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
     "sinapse-ai": "bin/cli.js"
@@ -66,6 +66,8 @@
     "release": "semantic-release",
     "release:test": "semantic-release --dry-run --no-ci || echo 'Config test complete - authentication errors are expected locally'",
     "generate:manifest": "node scripts/generate-install-manifest.js",
+    "sync:counts": "node scripts/sync-counts.js",
+    "reconcile:squads": "node scripts/reconcile-squad-manifests.js",
     "validate:manifest": "node scripts/validate-manifest.js",
     "validate:manifest:parity": "node .sinapse-ai/infrastructure/scripts/validate-manifest-parity.js",
     "validate:structure": "node .sinapse-ai/infrastructure/scripts/source-tree-guardian/index.js",

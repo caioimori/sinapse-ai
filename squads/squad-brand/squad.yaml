@@ -34,8 +34,15 @@ metadata:
   checklists_count: 3
   templates_count: 6
   workflows_count: 4
-  total_files: 155
+  total_files: 162
 
+  agents: 15
+  tasks: 97
+  workflows: 0
+  knowledge_bases: 30
+  checklists: 3
+  templates: 6
+  preferences: 0
 changelog:
   - version: "3.3.0"
     date: "2026-04-12"

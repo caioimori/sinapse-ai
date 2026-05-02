@@ -33,12 +33,19 @@ metadata:
   checklists_count: 3
   templates_count: 7
   workflows_count: 6
-  total_files: 146
+  total_files: 154
 
 # ══════════════════════════════════════════════════════════════════════════════
 # QUALITY STANDARDS — Regras de Robustez (v1.0)
 # ══════════════════════════════════════════════════════════════════════════════
 
+  agents: 7
+  tasks: 90
+  workflows: 0
+  knowledge_bases: 32
+  checklists: 3
+  templates: 7
+  preferences: 0
 quality_standards:
   robustness:
     min_agents: 6

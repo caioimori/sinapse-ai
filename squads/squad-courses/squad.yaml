@@ -35,12 +35,19 @@ metadata:
   workflows_count: 6
   checklists_count: 3
   templates_count: 6
-  total_files: 100
+  total_files: 103
 
 # ══════════════════════════════════════════════════════════════════════════════
 # AGENTS — 8 SPECIALISTS
 # ══════════════════════════════════════════════════════════════════════════════
 
+  agents: 8
+  tasks: 59
+  workflows: 0
+  knowledge_bases: 13
+  checklists: 3
+  templates: 6
+  preferences: 0
 agents:
   - id: courses-orqx
     name: Syllabus

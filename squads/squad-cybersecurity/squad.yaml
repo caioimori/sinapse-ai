@@ -17,6 +17,14 @@ metadata:
   templates_count: 0
   checklists_count: 0
   quality_target: "5.0/5.0 em todas as dimensoes"
+  total_files: 83
+  agents: 9
+  tasks: 53
+  workflows: 0
+  knowledge_bases: 14
+  checklists: 0
+  templates: 0
+  preferences: 0
 
 tags:
   - cybersecurity

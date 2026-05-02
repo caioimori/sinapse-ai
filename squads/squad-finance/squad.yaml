@@ -33,6 +33,14 @@ metadata:
 # ══════════════════════════════════════════════════════════════════════════════
 # AGENTES — 5 ESPECIALISTAS
 # ══════════════════════════════════════════════════════════════════════════════
+  total_files: 89
+  agents: 5
+  tasks: 45
+  workflows: 0
+  knowledge_bases: 21
+  checklists: 3
+  templates: 4
+  preferences: 0
 
 agents:
   - id: finance-orqx

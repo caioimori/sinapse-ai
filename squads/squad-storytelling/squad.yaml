@@ -31,6 +31,14 @@ metadata:
 # ══════════════════════════════════════════════════════════════════════════════
 # QUALITY STANDARDS
 # ══════════════════════════════════════════════════════════════════════════════
+  total_files: 79
+  agents: 11
+  tasks: 47
+  workflows: 0
+  knowledge_bases: 16
+  checklists: 0
+  templates: 0
+  preferences: 0
 
 quality_standards:
   robustness:

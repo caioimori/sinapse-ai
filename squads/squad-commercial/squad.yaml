@@ -23,6 +23,14 @@ metadata:
   templates_count: 6
   checklists_count: 3
   quality_target: "5.0/5.0 em todas as dimensoes"
+  total_files: 142
+  agents: 11
+  tasks: 85
+  workflows: 0
+  knowledge_bases: 22
+  checklists: 3
+  templates: 6
+  preferences: 0
 
 agents:
   - id: commercial-orqx
