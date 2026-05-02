@@ -580,12 +580,16 @@ async function cmdInstallGlobal(opts = {}) {
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
+  const installedAgentFilenames = new Set();
+  const installedIdes = [];
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     const globalAgentsDir = path.join(HOME, '.claude', 'agents');
     fs.mkdirSync(globalAgentsDir, { recursive: true });
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
+      installedAgentFilenames.add(f);
     }
+    installedIdes.push('claude-code');
     logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
   }
 
@@ -594,9 +598,15 @@ async function cmdInstallGlobal(opts = {}) {
     fs.mkdirSync(codexAgentsDir, { recursive: true });
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
+      installedAgentFilenames.add(f);
     }
+    installedIdes.push('codex');
     logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
   }
+
+  // Audit 1 P0 (UN-1) — record manifest so uninstall can remove every file
+  // we wrote (not just `*-orqx.md`). Idempotent: re-install overwrites.
+  recordInstalledAgents(installedAgentFilenames, installedIdes);
 
   // Phase 3: Generate squad-awareness.md
   logger.always(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
@@ -1213,19 +1223,78 @@ function detectStaleness(installedVersion, executingVersion) {
 // Story 10.40 — Remove SINAPSE-authored orqx agents from a global agents dir.
 // Returns { removed: N } for reporting. Only touches files matching *-orqx.md
 // so we don't accidentally remove user-authored agents.
-function removeOrqxAgentsFrom(dir) {
+// Audit 1 P0 (UN-1) — install writes ~200 agent files to ~/.claude/agents/ +
+// ~/.codex/agents/ but uninstall historically removed only `*-orqx.md` (~21
+// files). Files were left orphaned. Fix: install records every authored
+// filename in ~/.sinapse/installed-agents.json; uninstall reads that manifest
+// and removes only those files (preserving anything the user added by hand).
+const INSTALLED_AGENTS_MANIFEST = path.join(SINAPSE_HOME, 'installed-agents.json');
+
+function recordInstalledAgents(filenames, ides) {
+  try {
+    fs.mkdirSync(SINAPSE_HOME, { recursive: true });
+    fs.writeFileSync(INSTALLED_AGENTS_MANIFEST, JSON.stringify({
+      version: 1,
+      timestamp: new Date().toISOString(),
+      ides,
+      filenames: [...filenames].sort(),
+    }, null, 2));
+  } catch { /* non-critical */ }
+}
+
+function readInstalledAgentsManifest() {
+  try {
+    if (!fs.existsSync(INSTALLED_AGENTS_MANIFEST)) return null;
+    const raw = fs.readFileSync(INSTALLED_AGENTS_MANIFEST, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.filenames)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function removeInstalledAgentsFrom(dir) {
   if (!fs.existsSync(dir)) return { removed: 0, existed: false };
   let removed = 0;
-  try {
-    const entries = fs.readdirSync(dir).filter(f => /-orqx\.md$/.test(f));
-    for (const f of entries) {
-      try {
-        fs.unlinkSync(path.join(dir, f));
-        removed++;
-      } catch { /* best-effort */ }
-    }
-  } catch { /* best-effort */ }
+  let candidates;
+
+  const manifest = readInstalledAgentsManifest();
+  if (manifest && Array.isArray(manifest.filenames)) {
+    // Manifest path — surgical removal of exactly what install wrote.
+    candidates = manifest.filenames;
+  } else {
+    // Backward-compat fallback for installs predating the manifest
+    // (rc.10 and earlier). Heuristic: SINAPSE-authored files end in
+    // `-orqx.md`, OR start with `name: sinapse-` in their frontmatter.
+    try {
+      candidates = fs.readdirSync(dir).filter((f) => {
+        if (!f.endsWith('.md')) return false;
+        if (/-orqx\.md$/.test(f)) return true;
+        try {
+          const head = fs.readFileSync(path.join(dir, f), 'utf8').slice(0, 600);
+          return /^\s*name:\s*sinapse-/im.test(head);
+        } catch { return false; }
+      });
+    } catch { return { removed: 0, existed: true }; }
+  }
+
+  for (const f of candidates) {
+    const filepath = path.join(dir, f);
+    if (!fs.existsSync(filepath)) continue;
+    try {
+      fs.unlinkSync(filepath);
+      removed++;
+    } catch { /* best-effort */ }
+  }
   return { removed, existed: true };
+}
+
+// Backward-compat alias for callers that still import `removeOrqxAgentsFrom`.
+// Kept exported until any external consumer migrates. Behavior now identical
+// to `removeInstalledAgentsFrom` (delegates to the manifest-aware path).
+function removeOrqxAgentsFrom(dir) {
+  return removeInstalledAgentsFrom(dir);
 }
 
 // Story 10.40 — Strip SINAPSE-owned keys from ~/.claude/settings.json without
@@ -1315,26 +1384,28 @@ async function cmdUninstall(opts = {}) {
     }
   }
 
-  // Story 10.40 — SINAPSE-authored global agents (suffix *-orqx.md)
+  // Audit 1 P0 (UN-1) — remove every SINAPSE-authored agent file recorded
+  // in ~/.sinapse/installed-agents.json (or fall back to a name heuristic on
+  // pre-manifest installs). Previously this only removed `*-orqx.md`.
   const claudeAgentsDir = path.join(HOME, '.claude', 'agents');
   const codexAgentsDir = path.join(HOME, '.codex', 'agents');
 
-  const claudeOrqx = removeOrqxAgentsFrom(claudeAgentsDir);
-  if (!claudeOrqx.existed) {
-    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/*-orqx.md (dir not found)`);
-  } else if (claudeOrqx.removed === 0) {
-    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/*-orqx.md (none present)`);
+  const claudeRemoved = removeInstalledAgentsFrom(claudeAgentsDir);
+  if (!claudeRemoved.existed) {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/ SINAPSE files (dir not found)`);
+  } else if (claudeRemoved.removed === 0) {
+    logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/ SINAPSE files (none present)`);
   } else {
-    logger.always(`  ${GREEN}✓${NC} Removed ~/.claude/agents/*-orqx.md (${claudeOrqx.removed} files)`);
+    logger.always(`  ${GREEN}✓${NC} Removed ~/.claude/agents/ SINAPSE files (${claudeRemoved.removed} files)`);
   }
 
-  const codexOrqx = removeOrqxAgentsFrom(codexAgentsDir);
-  if (!codexOrqx.existed) {
-    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/*-orqx.md (dir not found)`);
-  } else if (codexOrqx.removed === 0) {
-    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/*-orqx.md (none present)`);
+  const codexRemoved = removeInstalledAgentsFrom(codexAgentsDir);
+  if (!codexRemoved.existed) {
+    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/ SINAPSE files (dir not found)`);
+  } else if (codexRemoved.removed === 0) {
+    logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/ SINAPSE files (none present)`);
   } else {
-    logger.always(`  ${GREEN}✓${NC} Removed ~/.codex/agents/*-orqx.md (${codexOrqx.removed} files)`);
+    logger.always(`  ${GREEN}✓${NC} Removed ~/.codex/agents/ SINAPSE files (${codexRemoved.removed} files)`);
   }
 
   // Story 10.40 — clean SINAPSE-owned keys from ~/.claude/settings.json
@@ -1556,6 +1627,11 @@ module.exports = {
   removeOrqxAgentsFrom,
   cleanClaudeSettingsJson,
   cmdUninstall,
+  // Audit 1 P0 (UN-1) — exported for tests
+  removeInstalledAgentsFrom,
+  recordInstalledAgents,
+  readInstalledAgentsManifest,
+  INSTALLED_AGENTS_MANIFEST,
   // Story 10.46 — exported for tests
   detectInteractiveMode,
   isFirstRun,
