@@ -189,7 +189,7 @@ squad_distribution:
       description: 'Private, project-specific squads'
       command: '*create-squad'
     public:
-      repo: 'github.com/SinapseAI/sinapse-squads'
+      repo: 'github.com/caioimori/sinapse-squads'
       description: 'Community squads (free)'
       command: '*publish-squad'
     marketplace:

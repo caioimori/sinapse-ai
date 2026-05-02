@@ -94,7 +94,7 @@ sensível.
 
 **Onde:** `SECURITY.md:17, 75`
 **Análise:** Coberto em sub-relatório 4 F1. Aqui resumo: "scope" diz
-`caioimori/sinapse-ai`, mas API GitHub mostra `SinapseAI/sinapse-ai`.
+`caioimori/sinapse-ai`, mas API GitHub mostra `caioimori/sinapse-ai`.
 Researcher abrindo Advisory pode bater no repo errado.
 
 ---

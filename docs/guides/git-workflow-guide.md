@@ -985,5 +985,5 @@ strategy:
 
 **Questions? Issues?**
 
-- [Open an Issue](https://github.com/SinapseAI/sinapse-ai/issues)
+- [Open an Issue](https://github.com/caioimori/sinapse-ai/issues)
 - [Join Discord](https://discord.gg/gk8jAdXWmj)

@@ -81,7 +81,7 @@ Se você está contribuindo para o SINAPSE-FullStack em si:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SinapseAI/sinapse-ai
+git clone https://github.com/caioimori/sinapse-ai
 cd sinapse-ai
 
 # Instale dependências
@@ -817,7 +817,7 @@ O agente @github-devops funciona com QUALQUER repositório git:
 @github-devops
 *detect-repo
 # Output:
-# Repository: github.com/SinapseAI/sinapse-ai
+# Repository: github.com/caioimori/sinapse-ai
 # Mode: framework-development
 # Quality Gates: Testes do framework SINAPSE
 ```
@@ -1392,7 +1392,7 @@ Use este checklist para garantir que está seguindo o workflow corretamente:
 - [Trabalhando em Brownfield](./working-in-the-brownfield.md)
 
 ### Suporte
-- [GitHub Issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- [GitHub Issues](https://github.com/caioimori/sinapse-ai/issues)
 
 ### Exemplos
 Veja `Squads/` para exemplos de:

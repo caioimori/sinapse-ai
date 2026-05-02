@@ -113,5 +113,5 @@ npx sinapse-ai install --force-upgrade
 
 - [Solucao de Problemas](./installation/troubleshooting.md)
 - [FAQ](./installation/faq.md)
-- [Repositorio GitHub](https://github.com/SinapseAI/sinapse-ai)
-- [Rastreador de Issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- [Repositorio GitHub](https://github.com/caioimori/sinapse-ai)
+- [Rastreador de Issues](https://github.com/caioimori/sinapse-ai/issues)

@@ -51,7 +51,7 @@ Aqui só registra: o **primeiro contato textual** após `--help` é uma marca le
 
 **Onde:** `bin/sinapse.js:135`
 ```
-For more information, visit: https://github.com/SinapseAI/sinapse-ai
+For more information, visit: https://github.com/caioimori/sinapse-ai
 ```
 **Reality:** Coberto em sub-relatório 4 F1. Esse link é mostrado em **todo**
 `sinapse --help`. Bandeira vermelha permanente.

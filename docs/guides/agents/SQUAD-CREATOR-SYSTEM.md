@@ -156,7 +156,7 @@ flowchart TB
 
     subgraph DISTRIBUTE["🚀 DISTRIBUTION"]
         LOCAL["📂 Local<br/>./squads/"]
-        PUBLIC["🌐 Public<br/>github.com/SinapseAI/sinapse-squads"]
+        PUBLIC["🌐 Public<br/>github.com/caioimori/sinapse-squads"]
         MARKET["💰 Marketplace<br/>api.sinapse.ai/squads"]
     end
 
@@ -564,7 +564,7 @@ flowchart LR
     end
 
     subgraph PUBLIC["🌐 Nivel 2: Publico"]
-        P_REPO["github.com/SinapseAI/sinapse-squads"]
+        P_REPO["github.com/caioimori/sinapse-squads"]
         P_DESC["Squads da comunidade (gratuitos)"]
         P_CMD["*publish-squad"]
     end

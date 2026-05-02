@@ -150,7 +150,7 @@
 │   ═══════════════════                                                   │
 │                                                                         │
 │   ┌────────────────────┐     ┌────────────────────┐                    │
-│   │  SinapseAI/         │     │  SinapseAI/         │                    │
+│   │  caioimori/         │     │  caioimori/         │                    │
 │   │  sinapse-ai         │     │  sinapse-squads       │                    │
 │   │  (MIT)  │◄────│  (MIT)             │                    │
 │   │                    │     │                    │                    │
@@ -163,7 +163,7 @@
 │            │ dependência opcional                                       │
 │            ▼                                                            │
 │   ┌────────────────────┐                                               │
-│   │  SinapseAI/         │                                               │
+│   │  caioimori/         │                                               │
 │   │  mcp-ecosystem     │                                               │
 │   │  (Apache 2.0)      │                                               │
 │   │                    │                                               │
@@ -176,7 +176,7 @@
 │   ════════════════════                                                  │
 │                                                                         │
 │   ┌────────────────────┐     ┌────────────────────┐                    │
-│   │  SinapseAI/mmos     │     │  SinapseAI/         │                    │
+│   │  caioimori/mmos     │     │  caioimori/         │                    │
 │   │  (Proprietário+NDA)│     │  certified-partners│                    │
 │   │                    │     │  (Proprietário)    │                    │
 │   │  • MMOS Minds      │     │  • Squads Premium  │                    │

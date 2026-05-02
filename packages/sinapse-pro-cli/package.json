@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SinapseAI/sinapse-ai.git",
+    "url": "git+https://github.com/caioimori/sinapse-ai.git",
     "directory": "packages/sinapse-pro-cli"
   },
   "engines": {

@@ -13,7 +13,7 @@
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** Padrão Oficial do Framework
-**Aviso de Migração:** Este documento migrará para o repositório `SinapseAI/sinapse-ai` em Q2 2026 (veja Decision 005)
+**Aviso de Migração:** Este documento migrará para o repositório `caioimori/sinapse-ai` em Q2 2026 (veja Decision 005)
 
 ---
 
@@ -795,7 +795,7 @@ SUPABASE_ACCESS_TOKEN=xxx         # Supabase CLI auth
 | Versão | Data       | Alterações                                                                                       | Autor            |
 | ------ | ---------- | ------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial do tech stack                                                               | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado aviso de migração para SinapseAI/sinapse-ai, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado aviso de migração para caioimori/sinapse-ai, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
 
 ---
 

@@ -64,7 +64,7 @@ Organização SinapseAI
 │   ═══════════════════════                                                │
 │                                                                          │
 │   ┌────────────────────┐     ┌────────────────────┐                     │
-│   │  SinapseAI/         │     │  SinapseAI/         │                     │
+│   │  caioimori/         │     │  caioimori/         │                     │
 │   │  sinapse-ai         │     │  sinapse-squads       │                     │
 │   │  (MIT)  │◄────│  (MIT)             │                     │
 │   │                    │     │                    │                     │
@@ -77,7 +77,7 @@ Organização SinapseAI
 │            │ dependência opcional                                        │
 │            ▼                                                             │
 │   ┌────────────────────┐                                                │
-│   │  SinapseAI/         │                                                │
+│   │  caioimori/         │                                                │
 │   │  mcp-ecosystem     │                                                │
 │   │  (Apache 2.0)      │                                                │
 │   │                    │                                                │
@@ -90,7 +90,7 @@ Organização SinapseAI
 │   ═══════════════════════                                                │
 │                                                                          │
 │   ┌────────────────────┐     ┌────────────────────┐                     │
-│   │  SinapseAI/mmos     │     │  SinapseAI/         │                     │
+│   │  caioimori/mmos     │     │  caioimori/         │                     │
 │   │  (Proprietário+NDA)│     │  certified-partners│                     │
 │   │                    │     │  (Proprietário)    │                     │
 │   │  - MMOS Minds      │     │  - Squads Premium  │                     │
@@ -238,7 +238,7 @@ npm install @sinapse/mcp-presets
 
 ## Repositórios Privados
 
-### SinapseAI/mmos (Proprietário + NDA)
+### caioimori/mmos (Proprietário + NDA)
 
 Contém componentes proprietários MMOS (Mental Model Operating System):
 
@@ -249,7 +249,7 @@ Contém componentes proprietários MMOS (Mental Model Operating System):
 
 **Acesso:** Requer NDA e acordo de licenciamento.
 
-### SinapseAI/certified-partners (Proprietário)
+### caioimori/certified-partners (Proprietário)
 
 Recursos para parceiros SINAPSE certificados:
 
@@ -293,10 +293,10 @@ Para projetos que precisam de múltiplos repositórios:
 
 ```bash
 # Adicionar squads como submódulo
-git submodule add https://github.com/SinapseAI/sinapse-squads.git squads
+git submodule add https://github.com/caioimori/sinapse-squads.git squads
 
 # Adicionar ecossistema MCP como submódulo
-git submodule add https://github.com/SinapseAI/mcp-ecosystem.git mcp
+git submodule add https://github.com/caioimori/mcp-ecosystem.git mcp
 ```
 
 ### Dependências npm (Recomendado)

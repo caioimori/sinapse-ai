@@ -4,7 +4,7 @@
 
 **Status:** Official Framework Standards
 **Created:** 2025-01-16 (Story 6.1.2.6)
-**Migration Target:** Q2 2026 → `SinapseAI/sinapse-ai` repository
+**Migration Target:** Q2 2026 → `caioimori/sinapse-ai` repository
 
 ---
 
@@ -28,12 +28,12 @@ This directory contains **official SINAPSE framework documentation** that define
 
 ## 🔄 Migration Notice
 
-**⚠️ IMPORTANT**: These documents are now in the `SinapseAI/sinapse-ai` repository. The migration from the old `sinapse/sinapse-ai` org was completed in December 2024 as part of OSR-9 (Rebranding).
+**⚠️ IMPORTANT**: These documents are now in the `caioimori/sinapse-ai` repository. The migration from the old `sinapse/sinapse-ai` org was completed in December 2024 as part of OSR-9 (Rebranding).
 
 ### Migration Timeline
 
 - **Phase 1 (Q1 2026 - Story 6.1.2.6):** ✅ Framework docs separated into `docs/framework/`
-- **Phase 2 (Q4 2024):** ✅ Repository migrated to `SinapseAI/sinapse-ai` (OSR-9)
+- **Phase 2 (Q4 2024):** ✅ Repository migrated to `caioimori/sinapse-ai` (OSR-9)
 - **Phase 3 (Q3 2026):** Old `docs/architecture/` copies removed from brownfield project
 
 ### Backward Compatibility
@@ -51,7 +51,7 @@ For backward compatibility, framework docs remain accessible at **both** locatio
 ### Framework Documentation (`docs/framework/`)
 - **Scope**: Portable across all SINAPSE projects
 - **Examples**: Coding standards, tech stack, source tree structure
-- **Lifecycle**: Lives in `SinapseAI/sinapse-ai` repository
+- **Lifecycle**: Lives in `caioimori/sinapse-ai` repository
 - **Changes**: Require framework-level approval
 
 ### Project Documentation (`docs/architecture/project-decisions/`)

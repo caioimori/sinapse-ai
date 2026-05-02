@@ -24,7 +24,7 @@ const SAFE_NAME_PATTERN = /^[a-zA-Z0-9._-]+$/;
  * Repository for sinapse-squads
  * @constant {string}
  */
-const SINAPSE_SQUADS_REPO = 'SinapseAI/sinapse-squads';
+const SINAPSE_SQUADS_REPO = 'caioimori/sinapse-squads';
 
 /**
  * Error codes for SquadPublisherError
@@ -114,7 +114,7 @@ class SquadPublisher {
    * @param {Object} [options={}] - Configuration options
    * @param {boolean} [options.verbose=false] - Enable verbose logging
    * @param {boolean} [options.dryRun=false] - Simulate without creating PR
-   * @param {string} [options.repo] - Target repository (default: SinapseAI/sinapse-squads)
+   * @param {string} [options.repo] - Target repository (default: caioimori/sinapse-squads)
    */
   constructor(options = {}) {
     this.verbose = options.verbose || false;

@@ -72,7 +72,7 @@ Baixe em [cli.github.com](https://cli.github.com/)
 
 3. Execute o instalador:
    ```bash
-   npx github:SinapseAI/sinapse-ai install
+   npx github:caioimori/sinapse-ai install
    ```
 
 ### O Que o Instalador Faz
@@ -157,7 +157,7 @@ Os sistemas de arquivos do macOS podem ser case-insensitive por padrão. Se voc�
 Para atualizar uma instalação existente:
 
 ```bash
-npx github:SinapseAI/sinapse-ai install
+npx github:caioimori/sinapse-ai install
 ```
 
 O atualizador irá:

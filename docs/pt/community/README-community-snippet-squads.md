@@ -2,7 +2,7 @@
 
 # Seção de Comunidade do README - sinapse-squads
 
-> **Propósito:** Copie este snippet para o README.md do repositório `SinapseAI/sinapse-squads`.
+> **Propósito:** Copie este snippet para o README.md do repositório `caioimori/sinapse-squads`.
 
 ---
 
@@ -10,15 +10,15 @@
 
 Para discussões, perguntas e interação com a comunidade, visite nosso hub central:
 
-**[Discussões da Comunidade SINAPSE](https://github.com/SinapseAI/sinapse-ai/discussions)**
+**[Discussões da Comunidade SINAPSE](https://github.com/caioimori/sinapse-ai/discussions)**
 
 | Necessidade | Onde Ir |
 |-------------|---------|
-| **Perguntas sobre Squad?** | Use a [categoria "Squads"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/squads) |
-| **Ideias de funcionalidades?** | Inicie uma [Discussão em "Ideas"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) |
-| **Encontrou um bug?** | [Abra uma issue](https://github.com/SinapseAI/sinapse-squads/issues/new/choose) **neste repositório** |
-| **Precisa de ajuda?** | Pergunte em ["Q&A"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/q-a) |
-| **Construiu algo legal?** | Compartilhe em ["Show and Tell"](https://github.com/SinapseAI/sinapse-ai/discussions/categories/show-and-tell) |
+| **Perguntas sobre Squad?** | Use a [categoria "Squads"](https://github.com/caioimori/sinapse-ai/discussions/categories/squads) |
+| **Ideias de funcionalidades?** | Inicie uma [Discussão em "Ideas"](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas) |
+| **Encontrou um bug?** | [Abra uma issue](https://github.com/caioimori/sinapse-squads/issues/new/choose) **neste repositório** |
+| **Precisa de ajuda?** | Pergunte em ["Q&A"](https://github.com/caioimori/sinapse-ai/discussions/categories/q-a) |
+| **Construiu algo legal?** | Compartilhe em ["Show and Tell"](https://github.com/caioimori/sinapse-ai/discussions/categories/show-and-tell) |
 
 ### Squads Disponíveis
 
@@ -31,8 +31,8 @@ Para discussões, perguntas e interação com a comunidade, visite nosso hub cen
 
 Tem uma ideia para um novo SINAPSE Squad? Adoraríamos ouvir!
 
-1. Verifique as [propostas de Squad existentes](https://github.com/SinapseAI/sinapse-squads/labels/new-squad)
-2. Abra uma [issue de Proposta de Squad](https://github.com/SinapseAI/sinapse-squads/issues/new?template=squad-proposal.md)
+1. Verifique as [propostas de Squad existentes](https://github.com/caioimori/sinapse-squads/labels/new-squad)
+2. Abra uma [issue de Proposta de Squad](https://github.com/caioimori/sinapse-squads/issues/new?template=squad-proposal.md)
 3. Discuta na comunidade
 
 ---

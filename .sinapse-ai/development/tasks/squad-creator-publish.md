@@ -66,7 +66,7 @@ Author: developer-name
 PR Preview:
   Title: Add squad: my-squad
   Branch: squad/my-squad
-  Target: SinapseAI/sinapse-squads
+  Target: caioimori/sinapse-squads
 
 Components:
   - Tasks: 5
@@ -86,7 +86,7 @@ Run without --dry-run to create the actual PR.
 
 Publishing: my-squad@1.0.0
   Source: ./squads/my-squad/
-  Target: github.com/SinapseAI/sinapse-squads
+  Target: github.com/caioimori/sinapse-squads
 
 ✓ Validated successfully
 ✓ GitHub auth verified (user: your-username)
@@ -97,7 +97,7 @@ Publishing: my-squad@1.0.0
 ✓ Pushed to fork
 
 Pull Request Created!
-  URL: https://github.com/SinapseAI/sinapse-squads/pull/42
+  URL: https://github.com/caioimori/sinapse-squads/pull/42
   Branch: squad/my-squad
 
 Next steps:
@@ -129,7 +129,7 @@ Next steps:
    └── Verify gh auth status
 
 4. Create/check fork
-   └── Fork SinapseAI/sinapse-squads if needed
+   └── Fork caioimori/sinapse-squads if needed
 
 5. Clone fork to temp directory
    └── Shallow clone for speed

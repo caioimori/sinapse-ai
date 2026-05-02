@@ -13,7 +13,7 @@
 **Versão:** 2.0
 **Última Atualização:** 2025-12-15
 **Status:** Padrão Oficial do Framework
-**Repositório:** SinapseAI/sinapse-ai
+**Repositório:** caioimori/sinapse-ai
 
 ---
 
@@ -429,7 +429,7 @@ dependencies:
 
 **Decision 005 define 5 repositórios separados:**
 
-### REPO 1: SinapseAI/sinapse-ai (MIT)
+### REPO 1: caioimori/sinapse-ai (MIT)
 
 ```
 sinapse-ai/
@@ -479,7 +479,7 @@ sinapse-ai/
     └── multi-agent-workflow/
 ```
 
-### REPO 2: SinapseAI/squads (MIT)
+### REPO 2: caioimori/squads (MIT)
 
 ```
 squads/
@@ -501,7 +501,7 @@ squads/
     └── create-sinapse-squad/
 ```
 
-### REPO 3: SinapseAI/mcp-ecosystem (Apache 2.0)
+### REPO 3: caioimori/mcp-ecosystem (Apache 2.0)
 
 ```
 mcp-ecosystem/
@@ -521,7 +521,7 @@ mcp-ecosystem/
     └── cursor/
 ```
 
-### REPO 4: SinapseAI/certified-partners (Privado)
+### REPO 4: caioimori/certified-partners (Privado)
 
 ```
 certified-partners/
@@ -538,7 +538,7 @@ certified-partners/
     └── web/
 ```
 
-### REPO 5: SinapseAI/mmos (Privado + NDA)
+### REPO 5: caioimori/mmos (Privado + NDA)
 
 ```
 mmos/

@@ -60,8 +60,8 @@ Squads são equipes modulares de agentes de IA que estendem a funcionalidade do 
 
 | Squad                                                                      | Versão | Descrição                          |
 | -------------------------------------------------------------------------- | ------ | ---------------------------------- |
-| [etl-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/etl)         | 2.0.0  | Coleta e transformação de dados    |
-| [creator-squad](https://github.com/SinapseAI/sinapse-squads/tree/main/creator) | 1.0.0  | Utilitários de geração de conteúdo |
+| [etl-squad](https://github.com/caioimori/sinapse-squads/tree/main/etl)         | 2.0.0  | Coleta e transformação de dados    |
+| [creator-squad](https://github.com/caioimori/sinapse-squads/tree/main/creator) | 1.0.0  | Utilitários de geração de conteúdo |
 
 ---
 
@@ -551,7 +551,7 @@ Squads em `./squads/` estão automaticamente disponíveis para seu projeto.
 *publish-squad ./squads/my-squad
 ```
 
-Isso cria um PR para [SinapseAI/sinapse-squads](https://github.com/SinapseAI/sinapse-squads).
+Isso cria um PR para [caioimori/sinapse-squads](https://github.com/caioimori/sinapse-squads).
 
 ### Nível 3: SINAPSE Marketplace
 
@@ -820,14 +820,14 @@ npm test -- tests/squads/my-squad/
 - [Guia de Migração de Squad](./squad-migration.md)
 - [Referência da API de Squads](../api/squads-api.md)
 - [Agente @squad-creator](../../../.sinapse-ai/development/agents/squad-creator.md)
-- [Repositório sinapse-squads](https://github.com/SinapseAI/sinapse-squads)
+- [Repositório sinapse-squads](https://github.com/caioimori/sinapse-squads)
 
 ---
 
 ## Obtendo Ajuda
 
-- [GitHub Discussions](https://github.com/SinapseAI/sinapse-ai/discussions)
-- [Issue Tracker](https://github.com/SinapseAI/sinapse-ai/issues)
+- [GitHub Discussions](https://github.com/caioimori/sinapse-ai/discussions)
+- [Issue Tracker](https://github.com/caioimori/sinapse-ai/issues)
 
 ---
 

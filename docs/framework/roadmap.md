@@ -4,7 +4,7 @@
 
 This document outlines the planned development direction for SINAPSE.
 
-> For detailed tracking, see our [GitHub Project](https://github.com/orgs/SinapseAI/projects/1)
+> For detailed tracking, see our [GitHub Project](https://github.com/orgs/caioimori/projects/1)
 
 ## Vision
 
@@ -81,11 +81,11 @@ We welcome community input on our direction! Here's how to participate:
 
 ### 1. Vote on Ideas
 
-React with :+1: on existing [Ideas in Discussions](https://github.com/SinapseAI/sinapse-ai/discussions/categories/ideas) to show support.
+React with :+1: on existing [Ideas in Discussions](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas) to show support.
 
 ### 2. Propose Features
 
-Have a new idea? Open an [Idea Discussion](https://github.com/SinapseAI/sinapse-ai/discussions/new?category=ideas) to share it with the community.
+Have a new idea? Open an [Idea Discussion](https://github.com/caioimori/sinapse-ai/discussions/new?category=ideas) to share it with the community.
 
 ### 3. Write an RFC
 
@@ -108,7 +108,7 @@ This roadmap is reviewed and updated monthly by the project maintainers.
 2. Update status of completed/in-progress items
 3. Add newly approved features from community discussions
 4. Remove cancelled or deprioritized items
-5. Communicate significant changes via [Announcements](https://github.com/SinapseAI/sinapse-ai/discussions/categories/announcements)
+5. Communicate significant changes via [Announcements](https://github.com/caioimori/sinapse-ai/discussions/categories/announcements)
 
 **Responsible:** @project-lead (Morgan) or @product-lead (Pax) agents, with maintainer oversight.
 
@@ -118,7 +118,7 @@ This public roadmap is synchronized with our internal sprint planning:
 
 | Public Roadmap | Internal Tracking |
 |----------------|-------------------|
-| [GitHub Project](https://github.com/orgs/SinapseAI/projects/1) | `docs/strategy/SINAPSE-DIFFERENTIATION-PLAN-4.0.4.md` |
+| [GitHub Project](https://github.com/orgs/caioimori/projects/1) | `docs/strategy/SINAPSE-DIFFERENTIATION-PLAN-4.0.4.md` |
 | High-level features | Detailed stories per sprint |
 | Quarterly timeline | Sprint-based execution |
 

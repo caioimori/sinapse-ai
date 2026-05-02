@@ -410,7 +410,7 @@ flowchart TD
     M --> N[Display success + next steps]
 ```
 
-**Source:** `github.com/SinapseAI/sinapse-squads`
+**Source:** `github.com/caioimori/sinapse-squads`
 
 ---
 
@@ -446,7 +446,7 @@ flowchart TD
     N --> O[Display PR URL]
 ```
 
-**Target:** `github.com/SinapseAI/sinapse-squads` via Pull Request
+**Target:** `github.com/caioimori/sinapse-squads` via Pull Request
 
 **Tools used:** github-cli (gh auth, gh pr create)
 

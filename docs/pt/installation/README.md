@@ -59,7 +59,7 @@ npx sinapse-ai install --force-upgrade
 
 1. Consulte o [Guia de Solução de Problemas](./troubleshooting.md)
 2. Pesquise no [FAQ](./faq.md)
-3. Abra uma [Issue no GitHub](https://github.com/SinapseAI/sinapse-ai/issues)
+3. Abra uma [Issue no GitHub](https://github.com/caioimori/sinapse-ai/issues)
 
 ---
 
@@ -104,5 +104,5 @@ npx sinapse-ai install --force-upgrade
 
 ## Suporte
 
-- **Issues no GitHub**: [sinapse-ai/issues](https://github.com/SinapseAI/sinapse-ai/issues)
+- **Issues no GitHub**: [sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
 - **Documentação**: [docs/](../)
