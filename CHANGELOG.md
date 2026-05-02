@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] — 2026-05-02 — 🎉 General Availability
+
+**SINAPSE-AI v1.0 is here.** First public stable release. The framework
+that started as IMORI experiments and grew into a 19-squad / 200-agent
+orchestration system with Constitutional governance is now production-ready.
+
+### Migration from rc.x
+
+If you were tracking `dist-tag rc`:
+```bash
+npm install -g sinapse-ai@latest
+```
+
+Or pin v1 explicitly:
+```bash
+npm install -g sinapse-ai@1.0.0
+```
+
+There are no breaking changes between `10.0.0-rc.12` and `1.0.0` — the
+version reset to v1.0.0 is the formal GA promotion of the rc.x line
+(decision: 10.x was the beta version of the product; v1.0.0 is the
+official launch).
+
+### What v1.0.0 ships
+
+- **19 squads** organized around domain expertise (brand, copy,
+  growth, paid media, finance, content, design, animations, cybersec,
+  product, research, council, courses, commercial, storytelling,
+  cloning, art direction, claude-code-mastery, plus the master)
+- **200 agents** (12 framework + 188 squad specialists)
+- **22 orqx** orchestrators (21 squad + 1 master `sinapse-orqx`)
+- **1.237 tasks** executable across the squads
+- **Constitution** with 12 articles, 6 marked NON-NEGOTIABLE, enforced
+  by 19 runtime hooks
+- **Multi-IDE parity:** Claude Code + Codex CLI
+- **Grounding semantic foundation** (vault / design-system / brand
+  opt-in BYO via `~/.claude/sinapse-ai-config.yaml`)
+- **Doctor** with 16 health checks, fail-fast on broken state
+- **Safe Collaboration** for non-developer users (Caio + Matheus)
+- **Persona simulation notice** in 22 mind clones (LICENSE §VII)
+- **`--provenance`** signed publish via OIDC trusted publishing
+
+### Pre-GA cycles closed
+
+This GA is built on top of three sequential pre-GA audit cycles:
+
+- Audit 1 (Functional) — runtime/install verified across 8 sub-domains.
+  Closed P0 uninstall completeness.
+- Audit 2 (Quality) — code/security/perf reviewed across 8 sub-domains.
+  Closed 3 P0 (chrome-brain coverage, sinapse-pro coverage, undeclared deps).
+- Audit 3 (UX/DX) — public messaging/onboarding reviewed across 10
+  sub-domains. Closed 6 P0 (counts/badge/persona table/agent reference/
+  org consolidation/security versions).
+
+11 of 15 P0 surfaced by the audits are closed. Remaining P1/P2 items
+become v1.0.x or v1.1 backlog — none block GA.
+
+### Backlog for v1.0.x and beyond
+
+- Audit 2 Wave B/C — refactor `bin/cli.js` (1752 LOC), consolidate
+  `dev/` vs `infra/` duplications, fail-mode matrix doc, automated
+  Article VII/VIII/XI gates
+- Audit 3 Bloco C/D/E — CLI error PT consolidation, `sinapse` vs
+  `sinapse-ai` binary deprecation path, fuzzy-match unknowns,
+  postinstall next-step hint, examples library expansion
+- SNPS prefix rename (`sinapse-X` → `snps-X` agent files) — v1.1
+- Dim 14/15/17 audit reactivation — driven by post-GA telemetry
+
+### Acknowledgments
+
+Built with Claude Opus 4.7 (1M context) co-author across the entire
+audit + GA preparation cycle. Full transcript-to-PR traceability in
+the commit log.
+
 ## [10.0.0-rc.12] — 2026-05-02
 
 3-audit consolidation. Closes 11 of the 15 P0 surfaced by the three
