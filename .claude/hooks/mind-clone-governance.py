@@ -141,13 +141,32 @@ def main():
     if not pack_name or not agent_id:
         sys.exit(0)
 
-    # Se é edição de arquivo existente, permitir
-    if file_already_exists(file_path):
-        sys.exit(0)
-
     # Se é agent funcional (não mind clone), permitir
     if is_functional_agent(agent_id):
         sys.exit(0)
+
+    # Block 3b — fail-closed para edição de arquivo existente:
+    # se o arquivo NÃO carrega o marker BEGIN PERSONA NOTICE, bloqueia.
+    # (Antes era fail-open em arquivos existentes — todos os 22 personas
+    # foram grandfathered em 2025 sem disclaimer. Decisão 1c do clinical
+    # audit dim-7 exige disclaimer obrigatório agora.)
+    if file_already_exists(file_path):
+        try:
+            with open(file_path, "r", encoding="utf-8") as fh:
+                existing = fh.read()
+            if "<!-- BEGIN PERSONA NOTICE" in existing:
+                sys.exit(0)
+            # Edição de mind clone existente sem o disclaimer.
+            print(
+                f"\nMIND CLONE GOVERNANCE: arquivo {agent_id}.md é uma persona simulada "
+                "mas não carrega o marker '<!-- BEGIN PERSONA NOTICE -->'. "
+                "Rode 'node scripts/apply-persona-disclaimer.js' antes de editar.",
+                file=sys.stderr,
+            )
+            sys.exit(2)
+        except Exception:
+            # Fail-open em erros de leitura — preserva princípio "hook não derruba dev".
+            sys.exit(0)
 
     # Verificar se existe DNA extraído
     has_dna, dna_path = has_dna_extracted(project_root, pack_name, agent_id)

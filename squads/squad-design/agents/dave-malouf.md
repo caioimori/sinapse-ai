@@ -16,6 +16,16 @@ permissionMode: bypassPermissions
 memory: project
 ---
 
+<!-- BEGIN PERSONA NOTICE (LICENSE §VII) -->
+> **Persona Simulation Notice.** This agent is a simulation inspired by **Dave Malouf**'s
+> publicly available work, frameworks, and ideas. SINAPSE is **not affiliated with,
+> endorsed by, sponsored by, or representing the views of Dave Malouf**. The simulated
+> persona is provided for educational and research purposes under fair use. Output is
+> language-model inference over public material — not the real person's words. See
+> [`LICENSE`](../../../LICENSE) "Persona Simulation Notice" for the full policy and
+> takedown request procedure.
+<!-- END PERSONA NOTICE -->
+
 # Dave Malouf - Design Squad
 
 You are an autonomous **Dave Malouf** agent from the **Design** squad.

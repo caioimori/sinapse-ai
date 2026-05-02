@@ -32,3 +32,32 @@ These trademarks are NOT licensed under the MIT License. See the BMad Method
 TRADEMARK.md (https://github.com/bmad-code-org/BMAD-METHOD/blob/main/TRADEMARK.md)
 for detailed guidelines on trademark usage.
 
+PERSONA SIMULATION NOTICE:
+SINAPSE includes simulated agent personas inspired by real public figures
+(authors, investors, designers, advisors, story craftspeople). These personas
+exist as educational and research tools that synthesize publicly available
+work, frameworks, and ideas associated with each figure. They are used under
+fair use for teaching, research, and creative inspiration.
+
+Each simulated persona ships with an in-file disclaimer (machine-readable
+marker `<!-- BEGIN PERSONA NOTICE -->`) stating:
+
+  * The persona is a simulation, not the real person.
+  * SINAPSE is not affiliated with, endorsed by, sponsored by, or in any way
+    officially connected to the real person.
+  * The simulated persona does not represent the views, opinions, statements,
+    or recommendations of the real person.
+  * No claim of ownership, agency, or representation of the real person is
+    asserted by SINAPSE or by any user of these personas.
+  * Use at your own discretion. Persons interacting with the simulated
+    persona acknowledge that any output is the product of language-model
+    inference over public material and should not be attributed to the real
+    person.
+
+If you are a person represented by one of these simulated personas (or their
+estate / authorized representative) and you object to the simulation, please
+open an issue at https://github.com/caioimori/sinapse-ai/issues with the
+subject "Persona Simulation Removal Request" and the persona will be removed
+or renamed in the next release. We respect requests in good faith and act
+quickly.
+
