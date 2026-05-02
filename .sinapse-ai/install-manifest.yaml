@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:faa26082587490022204efa777e0db97c8c1b6fcdb02a0a0752b8dfe60ee27d7
+    hash: sha256:c6d97d1a1b937e4b8bea35c69800349810b8a396dcbc83032129e1f5dc0dc475
     type: data
-    size: 523558
+    size: 524180
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1452,7 +1452,7 @@ files:
     type: agent
     size: 2023
   - path: development/agents/squad-creator.md
-    hash: sha256:4c1248b95b630fdbf36692193077f693847307ceb627c3b1d387a7faff18f7c7
+    hash: sha256:45326e5a21a8d0497f8164160c03db991ea8782300a8880ca46ec4df9835ac01
     type: agent
     size: 16584
   - path: development/agents/ux-design-expert.md
@@ -1724,7 +1724,7 @@ files:
     type: script
     size: 29549
   - path: development/scripts/squad/squad-downloader.js
-    hash: sha256:673d1d793020d38dfd47d6ecaf905e4b86bb1219682184699c1a21f5cfd1b9e8
+    hash: sha256:fa0a0e6320c04d6e489d7f90f4eb6ff6d22ab9a252ce9e134027a087a64d2e0e
     type: script
     size: 15365
   - path: development/scripts/squad/squad-extender.js
@@ -1744,7 +1744,7 @@ files:
     type: script
     size: 19505
   - path: development/scripts/squad/squad-publisher.js
-    hash: sha256:7bc8ce247ee5412b914ef404d18188a637dc76a08677ba007df2bdbfa7ac4751
+    hash: sha256:b642bc012200f33326a1e388d410dafbebc55e6d3890c292fa7428f608b1cd48
     type: script
     size: 18759
   - path: development/scripts/squad/squad-validator.js
@@ -2404,7 +2404,7 @@ files:
     type: task
     size: 6911
   - path: development/tasks/pr-automation.md
-    hash: sha256:13081f435bbfa242f4c37c9e0b7b62145ba4ee139694850ad459466737a5230f
+    hash: sha256:5ecd773244fb033b043438c2304985de983cba9175ddc03bd23332dedb331eb0
     type: task
     size: 19074
   - path: development/tasks/project-status.md
@@ -2612,7 +2612,7 @@ files:
     type: task
     size: 12700
   - path: development/tasks/squad-creator-download.md
-    hash: sha256:cc096b5624cd28fc994f4c1ebcfc2d33df92de23fa5ec986a5c5c20460937161
+    hash: sha256:eeb80dc5eaff839e7e63c9c65e3e4705149f970de7453c198080eb890d6129c8
     type: task
     size: 3874
   - path: development/tasks/squad-creator-extend.md
@@ -2628,7 +2628,7 @@ files:
     type: task
     size: 8737
   - path: development/tasks/squad-creator-publish.md
-    hash: sha256:710a3cc83f6b5c98068dcd22a652ec387e388447733012e35b6a6a2c65ebdeae
+    hash: sha256:eaecfd6251cbb1227adb0d8b939ace1f1830ec0b229a80e396b3db9fcb981a9a
     type: task
     size: 4941
   - path: development/tasks/squad-creator-sync-ide-command.md
@@ -2680,7 +2680,7 @@ files:
     type: task
     size: 9751
   - path: development/tasks/update-sinapse.md
-    hash: sha256:4d478e5baecac772aef47a8b1f859d3ca821d8884f972180be71e2ea77f8d285
+    hash: sha256:2396f096e6173042d6e472988103d55191150b5053a544d8b581aa6859f99afd
     type: task
     size: 4209
   - path: development/tasks/update-source-tree.md
@@ -3032,7 +3032,7 @@ files:
     type: documentation
     size: 19275
   - path: docs/standards/OPEN-SOURCE-VS-SERVICE-DIFFERENCES.md
-    hash: sha256:3fed0f77ca97d0f7039193b1133aae620b763441630448d86102e61cd3c926b0
+    hash: sha256:90eedcdc935e04c10252f98d77d1857a211fc3fef712689e952c738b15c7c14b
     type: documentation
     size: 16458
   - path: docs/standards/QUALITY-GATES-SPECIFICATION.md
@@ -3860,7 +3860,7 @@ files:
     type: monitor
     size: 861
   - path: package.json
-    hash: sha256:9f0fd1ba37e633bb3d8d2ba5040bec8820a2e0cb66169b2c773525f230893c13
+    hash: sha256:18000d777759b5e90fda49c1dd1218db387a915b4ed509247bb7d191cc96bd03
     type: other
     size: 2539
   - path: product/checklists/accessibility-wcag-checklist.md
@@ -4372,7 +4372,7 @@ files:
     type: script
     size: 5049
   - path: scripts/diagnostics/diagnose-installation.js
-    hash: sha256:0bef22a6426248fd36d0761524d5f6f31430a6c1d45c7a7308c1f20131276d95
+    hash: sha256:bc35777a19f96cdfdb7d6074f6bd2e71c3d7861a83daf5d4b2184040ecb84ebf
     type: script
     size: 11145
   - path: scripts/diagnostics/diagnose-npx-issue.ps1
@@ -4576,7 +4576,7 @@ files:
     type: script
     size: 1712
   - path: user-guide.md
-    hash: sha256:5e99c3bf1c80b40ce1d0c0925d051e601d2a18e7f26d531424cf96046a8a4ea4
+    hash: sha256:674a5de8d3a8c2423f29fb93830fe861587455ffe64ee2e8d3bb2e868f862e34
     type: documentation
     size: 38455
   - path: workflow-intelligence/__tests__/confidence-scorer.test.js
