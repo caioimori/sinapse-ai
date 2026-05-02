@@ -185,8 +185,24 @@ jobs:
       - name: Set publishing tag
         id: publish-tag
         run: |
-          if [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
+          # Version-aware tag detection (fixes 2026-05-02 incident where
+          # rc.11 was promoted to `latest` because event_name=push assumed
+          # stable). Pre-release suffix in the version string takes priority
+          # over `event_name`-based heuristics.
+          VERSION="${{ needs.build.outputs.version }}"
+
+          if echo "$VERSION" | grep -qE -- '-rc\.'; then
+            echo "tag=rc" >> $GITHUB_OUTPUT
+            echo "Detected RC version $VERSION → tag=rc"
+          elif echo "$VERSION" | grep -qE -- '-beta\.'; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+            echo "Detected beta version $VERSION → tag=beta"
+          elif echo "$VERSION" | grep -qE -- '-(alpha|preview|next)\.'; then
+            echo "tag=next" >> $GITHUB_OUTPUT
+            echo "Detected pre-release version $VERSION → tag=next"
+          elif [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
             echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "Detected stable release $VERSION → tag=latest"
           elif [ "${{ github.event.inputs.publish_mode }}" = "beta" ]; then
             echo "tag=beta" >> $GITHUB_OUTPUT
           else
@@ -274,7 +290,17 @@ jobs:
       - name: Set publishing tag
         id: publish-tag
         run: |
-          if [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
+          # Version-aware tag detection (mirrors sinapse-ai job; fixes
+          # 2026-05-02 incident where pre-release was promoted to latest).
+          VERSION="${{ steps.pkg-version.outputs.version }}"
+
+          if echo "$VERSION" | grep -qE -- '-rc\.'; then
+            echo "tag=rc" >> $GITHUB_OUTPUT
+          elif echo "$VERSION" | grep -qE -- '-beta\.'; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+          elif echo "$VERSION" | grep -qE -- '-(alpha|preview|next)\.'; then
+            echo "tag=next" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
             echo "tag=latest" >> $GITHUB_OUTPUT
           elif [ "${{ github.event.inputs.publish_mode }}" = "beta" ]; then
             echo "tag=beta" >> $GITHUB_OUTPUT
