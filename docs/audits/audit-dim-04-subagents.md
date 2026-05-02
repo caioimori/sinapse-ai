@@ -239,7 +239,7 @@ Verified: `grep -A3 "^hooks:" .claude/agents/devops.md` returns nothing on devop
 - `.claude/agents/tools-orqx.md:1-N` → `name: tools-orqx` (not `sinapse-tools-orqx`)
 - `.claude/agents/data-chief.md:1-N` → `name: data-chief`
 
-These will be touched by APSE rename. Decide convention now or rename twice later.
+These will be touched by SNPS rename. Decide convention now or rename twice later.
 
 ### Finding F4-5 — Imperator/squad-chief unspawnable (P2)
 
@@ -270,10 +270,10 @@ No subagent today opts into stricter permission mode (e.g. `acceptEdits`, `defau
 | # | Action | Owner | Window |
 |---|---|---|---|
 | R1 | Author `.claude/agents/README.md` distinguishing the 3 invocation paths: (a) Task spawn (frontmatter required, 45 files today), (b) slash command persona (132 stubs + Imperator/squad-chief), (c) library persona (squads/*/agents/*.md, never invoked directly). | @architect | Pre-GA, paired with Dim 3 R4 |
-| R2 | Decide and document the `sinapse-` prefix convention. Recommendation: prefix everything (`sinapse-copy-chief`, `sinapse-tools-orqx`). Apply during the same APSE rename pass. | @architect → Caio | Pre-APSE rename |
+| R2 | Decide and document the `sinapse-` prefix convention. Recommendation: prefix everything (`sinapse-copy-chief`, `sinapse-tools-orqx`). Apply during the same SNPS rename pass. | @architect → Caio | Pre-SNPS rename |
 | R3 | Add per-subagent hooks where capability is asymmetric: `sinapse-devops` gets git-push enforcement at the subagent level (not just global), `sinapse-data-engineer` gets schema-write guard. | @devops | Pre-GA, low-risk |
 | R4 | Make `permissionMode: bypassPermissions` an explicit policy decision in `agent-authority.md`. Either justify the universal bypass or scope it (e.g. only autonomous-mode subagents bypass). | @architect | Pre-GA |
-| R5 | Decide whether to add `Imperator` and `squad-chief` frontmatter so they can be `Task`-spawned. Today they are slash-only. Documentation must match the runtime. | @architect | Pre-APSE rename |
+| R5 | Decide whether to add `Imperator` and `squad-chief` frontmatter so they can be `Task`-spawned. Today they are slash-only. Documentation must match the runtime. | @architect | Pre-SNPS rename |
 | R6 | Add `name`-field validation to existing `squad-validator` (PR #116): every `.claude/agents/*.md` with frontmatter MUST have `name:`, `description:`, `model:`, `tools:`. Fail CI on drift. | @devops | Pre-GA |
 | R7 | (Post-GA) Either expand the read-only subagent allowlist in `operation-guard.js:196` to include SINAPSE-defined read-only agents, or document explicitly that all SINAPSE subagents are write-capable. | @architect | Post-GA |
 
@@ -281,15 +281,15 @@ No subagent today opts into stricter permission mode (e.g. `acceptEdits`, `defau
 
 | Dimension | Verdict | Rationale |
 |---|---|---|
-| **4. Subagents** | **CONCERNS** | Zero P0 / 1 P1 / 4 P2 / 2 P3. F4-1 mirrors Dim 3 F3-4 (same root cause: undocumented split between spawn and activator surfaces). The remaining P2 items are policy-clarification debt, not runtime breakage. None block GA mechanically; F4-1 + F4-4 should be cleared before APSE rename to avoid renaming on a fuzzy contract. |
+| **4. Subagents** | **CONCERNS** | Zero P0 / 1 P1 / 4 P2 / 2 P3. F4-1 mirrors Dim 3 F3-4 (same root cause: undocumented split between spawn and activator surfaces). The remaining P2 items are policy-clarification debt, not runtime breakage. None block GA mechanically; F4-1 + F4-4 should be cleared before SNPS rename to avoid renaming on a fuzzy contract. |
 
-## 9. Blocks rename APSE → SNPS?
+## 9. Blocks rename SNPS → SNPS?
 
-**Yes — same soft block as Dim 3.** F4-1 (spawn surface contract) and F4-4 (`sinapse-` prefix decision) must be resolved before APSE rename touches 200 personas. Otherwise the rename will:
+**Yes — same soft block as Dim 3.** F4-1 (spawn surface contract) and F4-4 (`sinapse-` prefix decision) must be resolved before SNPS rename touches 200 personas. Otherwise the rename will:
 - Apply consistently to the 28 `sinapse-*` agents but not to the 17 unprefixed ones (or vice-versa).
 - Leave the 132 stubs in an undefined "do these still work?" state.
 - Continue to obscure the Imperator/squad-chief invocation contract.
 
 ## Change Log
 
-- 2026-04-28 — Dim 4 audit completed (Block 2). CONCERNS, soft-blocks APSE rename until R1 + R2 cleared. @architect (Aria, Visionary).
+- 2026-04-28 — Dim 4 audit completed (Block 2). CONCERNS, soft-blocks SNPS rename until R1 + R2 cleared. @architect (Aria, Visionary).

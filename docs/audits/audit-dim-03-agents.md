@@ -5,7 +5,7 @@
 > **Executor:** @architect (Aria, Visionary)
 > **Date:** 2026-04-28
 > **Verdict:** **CONCERNS** — multiple drift findings, 0 P0 / 2 P1 / 5 P2 / 3 P3
-> **Severity:** **MEDIUM-HIGH** — does not block GA on its own, but blocks pre-GA APSE rename until reconciliation passes
+> **Severity:** **MEDIUM-HIGH** — does not block GA on its own, but blocks pre-GA SNPS rename until reconciliation passes
 
 ## Scope
 
@@ -163,7 +163,7 @@ Per §3.2: 4 squads under-count (cloning, paidmedia, research, storytelling), 3 
 - (a) **Intentional**: ratify the activator pattern in docs, mark the 132 stubs explicitly as "loaded via `/SINAPSE:agents:*`, not as `Task(subagent_type=...)`", and document the 45 frontmatter agents as the spawn surface.
 - (b) **Bug**: every `squads/*/agents/*.md` should also have a corresponding frontmatter file in `.claude/agents/`, currently broken.
 
-This decision **must** precede the APSE rename to avoid renaming 132 files in (a) for nothing or 132 in (b) without fixing the underlying bug.
+This decision **must** precede the SNPS rename to avoid renaming 132 files in (a) for nothing or 132 in (b) without fixing the underlying bug.
 
 ### Finding F3-5 — Entity registry excludes squad agents (P3)
 
@@ -180,7 +180,7 @@ This decision **must** precede the APSE rename to avoid renaming 132 files in (a
 ## 6. Severity Roll-Up
 
 - **P0:** 0
-- **P1:** 3 (F3-1, F3-2, F3-4) — block APSE rename and v1 GA messaging until reconciled
+- **P1:** 3 (F3-1, F3-2, F3-4) — block SNPS rename and v1 GA messaging until reconciled
 - **P2:** 3 (F3-3, F3-7, plus the manifest-missing trio inside F3-3)
 - **P3:** 2 (F3-5, F3-6)
 
@@ -188,10 +188,10 @@ This decision **must** precede the APSE rename to avoid renaming 132 files in (a
 
 | # | Action | Owner | Window |
 |---|---|---|---|
-| R1 | Author a single `agents-truth.yaml` (or extend entity-registry to include squad agents) — generated from `find squads -name "*.md" -path "*/agents/*"` and `find .sinapse-ai/development/agents -name "*.md"`. Make this the only allowed source of "X agents / Y squads" claims. | @architect | Pre-GA, before APSE rename |
+| R1 | Author a single `agents-truth.yaml` (or extend entity-registry to include squad agents) — generated from `find squads -name "*.md" -path "*/agents/*"` and `find .sinapse-ai/development/agents -name "*.md"`. Make this the only allowed source of "X agents / Y squads" claims. | @architect | Pre-GA, before SNPS rename |
 | R2 | Replace the constitutional numerals on `constitution.md:149-151` with a `<!-- generated -->` block populated by a script. Same for the Imperator activation banner. Acceptance: `npm run validate:counts` exits 0 only if doc claims match disk. | @architect + @devops | Pre-GA |
 | R3 | Update the 4 drifted squad manifests (cloning, paidmedia, research, storytelling) and add `agents_count` to the 3 missing ones (claude-code-mastery, squad-copy, squad-design). Add a CI check (extend the existing `squad-validator` from PR #116) that fails on drift. | @sprint-lead | Pre-GA, in same PR as R1 |
-| R4 | Decide explicitly: are the 132 stub files in `.claude/agents/` a *feature* (activator pattern, OK) or a *bug* (every squad agent should also be a Claude Code subagent)? Document the decision in `.claude/agents/README.md` (currently absent) and reference from `agent-authority.md`. **Block APSE rename until this decision is made.** | @architect → Caio | Pre-GA, before any rename |
+| R4 | Decide explicitly: are the 132 stub files in `.claude/agents/` a *feature* (activator pattern, OK) or a *bug* (every squad agent should also be a Claude Code subagent)? Document the decision in `.claude/agents/README.md` (currently absent) and reference from `agent-authority.md`. **Block SNPS rename until this decision is made.** | @architect → Caio | Pre-GA, before any rename |
 | R5 | Rename `squads/squad-claude/agents/swarm-orqx.md` to `squad-claude-swarm-orqx.md` (or fold one of the two `swarm-orqx` files). Otherwise the projection logic into `.claude/agents/` is silently lossy. | @sprint-lead | Pre-GA |
 | R6 | Add Imperator + squad-chief to the registry-or-decision-set: either add YAML frontmatter so they are spawn-able as subagents, or document them as "slash-command-only personas". | @architect | Same window as R4 |
 | R7 | (Post-GA) Decide whether squad agents belong in `entity-registry.yaml`. Consequence: the IDS REUSE > ADAPT > CREATE check today is structurally blind to 94% of personas. | @architect | Post-GA |
@@ -200,12 +200,12 @@ This decision **must** precede the APSE rename to avoid renaming 132 files in (a
 
 | Dimension | Verdict | Rationale |
 |---|---|---|
-| **3. Agents** | **CONCERNS** | Zero P0 / 3 P1 / 3 P2 / 2 P3. The P1 items (constitutional drift, Imperator banner drift, undecided subagent surface) do not break runtime — agents activate, stories execute. But shipping v1.0.0 GA with a constitution that contradicts `ls`, and renaming agents (APSE) on a surface that is half stubs, would each cause downstream pain. **Must clear R1–R4 before APSE rename.** R5–R6 fold into the same PR cycle. R7 deferable. |
+| **3. Agents** | **CONCERNS** | Zero P0 / 3 P1 / 3 P2 / 2 P3. The P1 items (constitutional drift, Imperator banner drift, undecided subagent surface) do not break runtime — agents activate, stories execute. But shipping v1.0.0 GA with a constitution that contradicts `ls`, and renaming agents (SNPS) on a surface that is half stubs, would each cause downstream pain. **Must clear R1–R4 before SNPS rename.** R5–R6 fold into the same PR cycle. R7 deferable. |
 
-## 9. Blocks rename APSE → SNPS?
+## 9. Blocks rename SNPS → SNPS?
 
-**Yes — soft block.** The APSE rename will touch every persona. Doing so before R1 (single source of truth) and R4 (decision on the stub surface) means renaming 200 personas on a surface with three different schemas: 12 framework (clean), 188 squad (clean), 178 `.claude/agents/` (45 frontmatter + 132 stubs + 1 Imperator + 1 squad-chief). Renaming the 132 stubs is trivial; renaming the 45 frontmatter files requires also updating the `name: sinapse-X` field; the Imperator/squad-chief require manual handling. Without R1 + R4 first, the rename PR will either miss files or rename inconsistently.
+**Yes — soft block.** The SNPS rename will touch every persona. Doing so before R1 (single source of truth) and R4 (decision on the stub surface) means renaming 200 personas on a surface with three different schemas: 12 framework (clean), 188 squad (clean), 178 `.claude/agents/` (45 frontmatter + 132 stubs + 1 Imperator + 1 squad-chief). Renaming the 132 stubs is trivial; renaming the 45 frontmatter files requires also updating the `name: sinapse-X` field; the Imperator/squad-chief require manual handling. Without R1 + R4 first, the rename PR will either miss files or rename inconsistently.
 
 ## Change Log
 
-- 2026-04-28 — Dim 3 audit completed (Block 2 of pre-GA clinical audit). CONCERNS, soft-blocks APSE rename until R1–R4 cleared. @architect (Aria, Visionary).
+- 2026-04-28 — Dim 3 audit completed (Block 2 of pre-GA clinical audit). CONCERNS, soft-blocks SNPS rename until R1–R4 cleared. @architect (Aria, Visionary).

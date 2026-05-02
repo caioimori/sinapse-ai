@@ -238,10 +238,10 @@ Acceptable design (CLI-first per Constitution Article I), but the "workforce" fr
 |---|---|---|
 | **5. Workers** | **CONCERNS** | Zero P0 / 1 P1 / 3 P2 / 2 P3. F5-1 is the only P1 — registry counts are wrong, but functional impact is "search returns wrong totals", not "workflow breaks". The terminology debt (F5-3) and stale registry (F5-2) are reputational risks for v1. R1+R2 should ship pre-GA in a single PR. R3 is a clean-language fix worth doing pre-GA but not blocking. |
 
-## 9. Blocks rename APSE → SNPS?
+## 9. Blocks rename SNPS → SNPS?
 
-**No.** None of the worker findings touch persona names. The APSE rename can proceed independently of worker registry reconciliation.
+**No.** None of the worker findings touch persona names. The SNPS rename can proceed independently of worker registry reconciliation.
 
 ## Change Log
 
-- 2026-04-28 — Dim 5 audit completed (Block 2). CONCERNS, does not block APSE rename. @architect (Aria, Visionary).
+- 2026-04-28 — Dim 5 audit completed (Block 2). CONCERNS, does not block SNPS rename. @architect (Aria, Visionary).

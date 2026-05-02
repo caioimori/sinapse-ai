@@ -25,9 +25,9 @@ Agents were telling users to do manual UI work ("abra o dashboard e clique em X"
 
 Specialist agents inside `squads/*/agents/` (all `.md` files that are NOT `*-orqx.md`) did NOT receive the Chrome Brain awareness block in this PR.
 
-**Rationale:** Specialists will go through a larger rename migration (APSE naming scheme) planned separately. Propagating Chrome Brain awareness now would create churn that gets overwritten by the rename migration.
+**Rationale:** Specialists will go through a larger rename migration (SNPS naming scheme) planned separately. Propagating Chrome Brain awareness now would create churn that gets overwritten by the rename migration.
 
-**Action item:** During the APSE rename migration, include the Chrome Brain `## Tools Available` block (same content as `agent-tools-kit.md` reference) in every specialist agent file as part of the rename pass.
+**Action item:** During the SNPS rename migration, include the Chrome Brain `## Tools Available` block (same content as `agent-tools-kit.md` reference) in every specialist agent file as part of the rename pass.
 
 **Count to migrate:** ~168 specialist agents across 21 squads.
 
