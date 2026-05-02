@@ -44,11 +44,11 @@ O diferencial nao e apenas quantidade de agentes. E **governanca real**: 19 hook
 
 A maior parte dos frameworks de agente assume que o LLM ja sabe tudo sobre o seu negocio. SINAPSE-AI assume o oposto e oferece tres canais opcionais de **grounding** para conectar agentes ao **seu** contexto real:
 
-| Canal | O que faz | Skip? |
-|-------|-----------|-------|
-| **Vault grounding** | Le notas do seu vault (Obsidian, Logseq, markdown plano) e injeta contexto relevante em cada interacao | Sim — fallback generico |
-| **Design system grounding** | Le seu DS source-of-truth (tokens, componentes, brandbook) e impede que agentes inventem layouts genericos `max-w-7xl shadcn-default` | Sim — defaults de alta qualidade |
-| **Brand grounding** | Le seu brandbook (positioning, MVV, tone-of-voice) para que copy e UX nasçam alinhados ao seu posicionamento | Sim — sem injecao de marca |
+| Canal | O que faz | Status | Skip? |
+|-------|-----------|--------|-------|
+| **Vault grounding** | Configura ponto de injecao para notas do seu vault (Obsidian, Logseq, markdown plano). Concrete content injection em desenvolvimento | Foundation pre-GA | Sim — fallback generico |
+| **Design system grounding** | Configura ponto de injecao do seu DS source-of-truth (tokens, componentes, brandbook). Concrete DS resolver em desenvolvimento | Foundation pre-GA | Sim — defaults de alta qualidade |
+| **Brand grounding** | Configura ponto de injecao do seu brandbook (positioning, MVV, tone-of-voice). Concrete brandbook parser em desenvolvimento | Foundation pre-GA | Sim — sem injecao de marca |
 
 Cada um e **opcional e independente**. Voce configura os que importam, pula os que nao se aplicam. Quando configurados via `npx sinapse-ai install`, geram um arquivo unico em `~/.claude/sinapse-ai-config.yaml` que os hooks shipados leem em tempo de execucao. Sem o arquivo, hooks sao no-op completos — zero overhead, zero ruido.
 
