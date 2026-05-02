@@ -68,6 +68,7 @@
     "generate:manifest": "node scripts/generate-install-manifest.js",
     "sync:counts": "node scripts/sync-counts.js",
     "reconcile:squads": "node scripts/reconcile-squad-manifests.js",
+    "apply:persona-disclaimer": "node scripts/apply-persona-disclaimer.js",
     "validate:manifest": "node scripts/validate-manifest.js",
     "validate:manifest:parity": "node .sinapse-ai/infrastructure/scripts/validate-manifest-parity.js",
     "validate:structure": "node .sinapse-ai/infrastructure/scripts/source-tree-guardian/index.js",
