@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0] — 2026-05-02 — 🎉 General Availability
+
+> **Note on versioning:** initial plan was a 10.x → 1.0.0 reset, but
+> versions 1.0.0/1.0.1/1.1.0 were already published in March 2026 to
+> npm under the same package name (legacy). Skipping the symbolic
+> reset and promoting `10.0.0` (clean, no -rc) as GA on the
+> `latest` dist-tag. Functionally equivalent: same code, same
+> contracts, same audit results. The 10.x line becomes the official
+> stable line.
+
 ## [1.0.0] — 2026-05-02 — 🎉 General Availability
 
 **SINAPSE-AI v1.0 is here.** First public stable release. The framework
