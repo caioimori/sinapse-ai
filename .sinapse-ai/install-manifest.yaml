@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 10.0.0-rc.11
+version: 10.0.0-rc.12
 generator: scripts/generate-install-manifest.js
 file_count: 1162
 files:
