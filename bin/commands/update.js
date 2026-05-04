@@ -46,7 +46,7 @@ async function cmdUpdateGlobal() {
 
   // Welcome back screen
   logger.always(`${BOLD}  Que bom que voce voltou!${NC}`);
-  logger.always(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
+  logger.always(`${DIM}  Atualizando SNPS AI: v${prevVer} -> v${VERSION}${NC}`);
   logger.always('');
 
   // Story 10.40 — Staleness warning (installed vs executing version)
@@ -64,7 +64,7 @@ async function cmdUpdateGlobal() {
   const llmChoice = existing.llm || await promptLlmChoice();
 
   logger.always('');
-  logger.always(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
+  logger.always(`${BOLD}Atualizando SNPS AI...${NC}\n`);
 
   const squadsDir = path.join(ROOT, 'squads');
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
@@ -209,7 +209,7 @@ async function cmdUpdateGlobal() {
 
   logger.always('');
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  logger.always(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
+  logger.always(`${GREEN}  SNPS AI atualizado para v${VERSION}!${NC}`);
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   logger.always('');
   logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);

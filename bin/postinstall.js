@@ -335,7 +335,7 @@ function stepCreateRuntimeDirs() {
       fs.mkdirSync(dir, { recursive: true });
     } catch (err) {
       if (err.code === 'EACCES' || err.code === 'EPERM') {
-        warn(`Sem permissão para criar ${path.relative(PROJECT_ROOT, dir)} — SINAPSE vai tentar criar no primeiro uso.`);
+        warn(`Sem permissão para criar ${path.relative(PROJECT_ROOT, dir)} — SNPS AI vai tentar criar no primeiro uso.`);
         softFailures += 1;
         continue;
       }
@@ -435,9 +435,9 @@ function renderFinalSummary(opts = {}) {
   const isGlobal = isGlobalInstall();
   const lines = [];
   if (firstRun) {
-    lines.push(`${c.bold}Bem-vindo ao SINAPSE!${c.reset} 🎉`);
+    lines.push(`${c.bold}Bem-vindo ao SNPS AI!${c.reset} 🎉`);
   }
-  lines.push(`${c.bold}SINAPSE ${version}${c.reset} instalado ${c.green}✓${c.reset}`);
+  lines.push(`${c.bold}SNPS AI ${version}${c.reset} instalado ${c.green}✓${c.reset}`);
   if (!isGlobal) {
     lines.push(`${c.dim}${agents} ${agentsWord} · ${squads} ${squadsWord} ${prontosWord}${c.reset}`);
   }
@@ -525,7 +525,7 @@ function main(argvOverride) {
     return 0;
   }
 
-  verboseLog(`${c.dim}SINAPSE postinstall — configurando ambiente...${c.reset}`);
+  verboseLog(`${c.dim}SNPS AI postinstall — configurando ambiente...${c.reset}`);
 
   const syncIde = stepSyncIde();
   if (syncIde.critical) {
