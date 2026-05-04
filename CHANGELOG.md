@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-05-04 — 🎉 GA Definitiva (versioning reset, branding SNPS AI)
+
+> **Branding reset.** Após bloqueio de v1.0.0/1.0.1/1.1.0 no npm (publishes legacy de março/2026), v1.2.0 estabelece a linha 1.x oficial do framework. Linha 10.x mantida no histórico.
+> **Visible branding:** o logo e ASCII art agora mostram **SNPS AI** (abreviação de SINAPSE) em wizard, postinstall, banners, help, status. Nome formal `SINAPSE AI` permanece em README h1, LICENSE, npm package name (`sinapse-ai`).
+> **Inclui (PRs #138-#143):** refactor cli.js modular (1752→175 LOC), audit 3 CLI UX polish, SNPS rename + slash namespace migration, article gates VII/VIII/XI automatizados, grounding hooks shipados (vault/DS/brand), trusted publishing OIDC, 3 revisões clínicas com zero P0/P1.
+
 ### Added (Story GA-1.6 — Grounding hooks shipados: vault / DS / brand)
 
 - **3 executable Claude Code hooks** at `.sinapse-ai/hooks/sinapse-{vault,ds,brand}-grounding.cjs`,
