@@ -183,6 +183,18 @@ function runRouter() {
     case 'help':
     case '--help':
     case '-h':       cmdHelp(); break;
+    case 'version':
+    case '--version':
+    case '-v': {
+      // Story GA-1.2.1 — canonical --version flag. Reads from package.json
+      // so the value tracks releases automatically, and prints just the
+      // semver (no banner, no decoration) so scripts can capture it cleanly:
+      //   $ npx sinapse-ai --version
+      //   1.2.0
+      const pkgVersion = require('../package.json').version;
+      process.stdout.write(`${pkgVersion}\n`);
+      break;
+    }
     default: {
       // Story GA-1.3 — fuzzy match suggestion. If the typed command is within
       // 2 edits of a known command, hint at the closest match (e.g. `insta` →

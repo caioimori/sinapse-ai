@@ -24,6 +24,7 @@ function cmdHelp() {
   logger.always(`  ${CYAN}npx sinapse-ai doctor${NC}           Roda health checks (--fix --dry-run --json --deep)`);
   logger.always(`  ${CYAN}npx sinapse-ai list${NC}             Lista todos squads e agents`);
   logger.always(`  ${CYAN}npx sinapse-ai help${NC}             Mostra esta ajuda`);
+  logger.always(`  ${CYAN}npx sinapse-ai --version${NC}        Mostra versão instalada (semver puro)`);
   logger.always('');
   logger.always(`${BOLD}Após instalar:${NC}\n`);
   logger.always(`  ${CYAN}sinapse${NC}                      Inicia Claude Code com todos os agents`);
