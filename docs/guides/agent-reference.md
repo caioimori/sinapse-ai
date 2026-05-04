@@ -41,7 +41,7 @@ and it routes intra-squad. Examples:
 
 Plus the master orchestrator:
 
-- `@sinapse-orqx` (Imperator) — framework governance, cross-squad routing
+- `@snps-orqx` (Imperator) — framework governance, cross-squad routing _(alias: `@sinapse-orqx` until v1.3.0)_
 
 ## Squad specialists (~170)
 
