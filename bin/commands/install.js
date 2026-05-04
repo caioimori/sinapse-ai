@@ -131,13 +131,15 @@ async function cmdInstallGlobal(opts = {}) {
   await promptGroundingSections({ isUpsert, reconfigure });
 
   logger.always('');
-  logger.always(`${BOLD}Installing Sinapse globally...${NC}\n`);
+  logger.always(`${BOLD}Instalando Sinapse globalmente...${NC}\n`);
 
   // Validate package — squads live in squads/ subdirectory
   const squadsDir = path.join(ROOT, 'squads');
   const squads = getSquads(fs.existsSync(squadsDir) ? squadsDir : ROOT);
   if (squads.length === 0) {
-    logger.error(`${RED}ERROR: No squad directories found in package.${NC}`);
+    logger.error(`${RED}Erro: nenhum diretório de squad encontrado no pacote.${NC}`);
+    logger.error(`Tente reinstalar: ${CYAN}npm install -g sinapse-ai${NC}`);
+    logger.error(`Se persistir, abra um issue: https://github.com/caioimori/sinapse-ai/issues`);
     process.exit(1);
   }
 
