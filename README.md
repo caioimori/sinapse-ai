@@ -408,6 +408,8 @@ Pre-commit e pre-push hooks validam automaticamente antes de cada operacao.
 | Recurso | Link |
 |---------|------|
 | Getting Started | [docs/guides/getting-started.md](docs/guides/getting-started.md) |
+| Quickstart (recording) | [docs/examples/quickstart-recording.md](docs/examples/quickstart-recording.md) |
+| Erros do CLI (troubleshooting) | [docs/guides/cli-errors.md](docs/guides/cli-errors.md) |
 | Arquitetura | [docs/framework/core-architecture.md](docs/framework/core-architecture.md) |
 | Guia de Squads | [docs/guides/squads-guide.md](docs/guides/squads-guide.md) |
 | Referencia de Agentes | [docs/guides/agent-reference.md](docs/guides/agent-reference.md) |
