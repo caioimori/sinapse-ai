@@ -1,30 +1,33 @@
 # SINAPSE Code Owners
-# Caio is the primary owner — his approval is required for ALL PRs.
-# Matheus can merge after Caio approves. Caio can bypass (admin).
+#
+# Co-maintainers: Caio (@caioimori) and Soier (@Matheus-soier).
+# Both have equal authority to review, approve, and merge PRs.
+# Required approving reviews on main = 0 (trust + CI gates).
+# Code owners are listed for OPTIONAL review attribution and external contributor PRs.
 
-# Default — Caio must approve all changes
-* @caioimori
+# Default — both co-maintainers
+* @caioimori @Matheus-soier
 
-# Critical paths — framework core (Caio only)
-.sinapse-ai/core/ @caioimori
-.sinapse-ai/constitution.md @caioimori
-bin/ @caioimori
+# Framework core
+.sinapse-ai/core/ @caioimori @Matheus-soier
+.sinapse-ai/constitution.md @caioimori @Matheus-soier
+bin/ @caioimori @Matheus-soier
 
-# Framework templates (Caio only)
-.sinapse-ai/development/ @caioimori
-.sinapse-ai/infrastructure/ @caioimori
+# Framework templates
+.sinapse-ai/development/ @caioimori @Matheus-soier
+.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
 
-# Security-sensitive paths (Caio only)
-.claude/ @caioimori
-SECURITY.md @caioimori
+# Security-sensitive paths
+.claude/ @caioimori @Matheus-soier
+SECURITY.md @caioimori @Matheus-soier
 
-# CI/CD and infrastructure (Caio only)
-.github/ @caioimori
-packages/ @caioimori
+# CI/CD and infrastructure
+.github/ @caioimori @Matheus-soier
+packages/ @caioimori @Matheus-soier
 
 # Configuration files
-package.json @caioimori
-.env* @caioimori
+package.json @caioimori @Matheus-soier
+.env* @caioimori @Matheus-soier
 
-# Documentation — Caio reviews
-docs/ @caioimori
+# Documentation
+docs/ @caioimori @Matheus-soier

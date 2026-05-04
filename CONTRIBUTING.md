@@ -163,10 +163,46 @@ git commit -m "docs: atualizar guia de contribuicao"
 ### Processo de Pull Request
 
 1. **Criar PR** apontando para a branch `main`
-2. **Checks automaticos** executam (lint, typecheck, test)
+2. **Checks automaticos** executam (lint, typecheck, test, manifest parity, install matrix)
 3. **CodeRabbit review** fornece feedback automatizado por IA
-4. **Review de maintainer** -- pelo menos 1 aprovacao necessaria
-5. **Merge** apos todos os checks passarem
+4. **Review** -- ver secao "Co-Maintainers e Reviews" abaixo
+5. **Merge** apos todos os checks de status obrigatorios passarem (status check `Validation Summary`)
+
+---
+
+## Co-Maintainers e Reviews
+
+O SINAPSE-AI e mantido em colaboracao por dois co-maintainers com autoridade equivalente:
+
+| Maintainer | GitHub | Responsabilidade |
+|-----------|--------|------------------|
+| Caio Imori | [@caioimori](https://github.com/caioimori) | Co-maintainer, owner do repo |
+| Matheus Soier | [@Matheus-soier](https://github.com/Matheus-soier) | Co-maintainer |
+
+### Politica de review
+
+- **Required approving reviews em `main`: 0**. Confiamos nos status checks de CI (`Validation Summary` agrega lint, testes, manifest parity, security scans) e no CodeRabbit.
+- **Code owners** ficam listados em `.github/CODEOWNERS` para *atribuicao opcional* de review e para guiar contribuidores externos. Nao bloqueiam merge.
+- **Cada co-maintainer pode mergear o proprio PR** apos CI verde, sem depender do outro. Isso mantem o fluxo continuo quando um esta offline.
+- **Auto-merge esta habilitado** -- ative com `gh pr merge --squash --auto` no momento da criacao do PR para mergear automaticamente quando CI passar.
+- **Reviews mutuos sao incentivados** em mudancas estruturais (Constitution, core, install pipeline, security). Nao sao obrigatorios.
+
+### Convencao de branches
+
+| Quem | Padrao | Exemplo |
+|------|--------|---------|
+| Caio | `caio/{tipo}/{desc}` | `caio/feat/installer-ux` |
+| Soier | `soier/{tipo}/{desc}` | `soier/fix/agent-config` |
+| Contribuidor externo | `feat/{desc}`, `fix/{desc}` etc. (ver tabela acima) | `feat/new-squad` |
+| Agente IA | `agent/{squad}/{tipo}-{desc}` | `agent/core/feat-dark-mode` |
+
+### Operacoes destrutivas
+
+`git push --force` em `main`, `git reset --hard` em commits publicos e delecao de branches com trabalho nao mergeado **exigem confirmacao explicita** entre os co-maintainers. Branch protection ja bloqueia force push e delecao em `main`.
+
+### Releases
+
+Releases em `latest` no NPM sao publicados via GitHub Actions com OIDC trusted publishing (`.github/workflows/npm-publish.yml`). Ambos co-maintainers podem disparar uma release publicando uma tag `vX.Y.Z`. Ver `docs/guides/release-process.md` (em construcao).
 
 ---
 
