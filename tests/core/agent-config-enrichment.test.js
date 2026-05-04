@@ -290,7 +290,7 @@ describe('Story ACT-8: Document Governance', () => {
 
   describe('sinapse-orqx Command', () => {
     test('sinapse-orqx.md contains handoff protocol', () => {
-      const content = readFile('.sinapse-ai/development/agents/sinapse-orqx.md');
+      const content = readFile('.sinapse-ai/development/agents/snps-orqx.md');
       expect(content).toContain('handoff');
     });
   });

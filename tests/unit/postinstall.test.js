@@ -317,8 +317,8 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     const text = stripAnsi(captured.join(''));
     const lines = text.split('\n').filter((_, i, arr) => i < arr.length - 1); // drop trailing empty
 
-    // Line 1: "SINAPSE {version} instalado ✓"
-    expect(lines[0]).toMatch(/^SINAPSE .+ instalado ✓$/);
+    // Line 1: "SNPS AI {version} instalado ✓"
+    expect(lines[0]).toMatch(/^SNPS AI .+ instalado ✓$/);
     // Line 2: "{N} agents · {M} squads prontos" (or singular variants)
     expect(lines[1]).toMatch(/^\d+ agents? · \d+ squads? (prontos|pronto)$/);
     // Line 3: blank
@@ -338,16 +338,16 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     expect(result.lineCount).toBeLessThanOrEqual(8);
 
     const text = stripAnsi(captured.join(''));
-    expect(text).toContain('Bem-vindo ao SINAPSE!');
+    expect(text).toContain('Bem-vindo ao SNPS AI!');
     // Welcome must be the first content line.
     const firstLine = text.split('\n')[0];
-    expect(firstLine).toMatch(/^Bem-vindo ao SINAPSE!/);
+    expect(firstLine).toMatch(/^Bem-vindo ao SNPS AI!/);
   });
 
   test('AC 5: firstRun=false does NOT show welcome line', () => {
     postinstall.renderFinalSummary({ firstRun: false });
     const text = stripAnsi(captured.join(''));
-    expect(text).not.toContain('Bem-vindo ao SINAPSE!');
+    expect(text).not.toContain('Bem-vindo ao SNPS AI!');
   });
 
   test('AC 6: copy is Portuguese and non-technical (no paths, no agent IDs)', () => {
