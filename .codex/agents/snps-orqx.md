@@ -619,4 +619,4 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 - **Sends to:** Every squad (routed work, coordination directives)
 - **Coordinates with:** All 18 squad orchestrators
 ---
-*SINAPSE Agent - Synced from .sinapse-ai/development/agents/sinapse-orqx.md*
+*SINAPSE Agent - Synced from .sinapse-ai/development/agents/snps-orqx.md*
