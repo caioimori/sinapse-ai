@@ -232,6 +232,9 @@ PRN
 # Test/sample files (prefixed patterns)
 test-sample-*.md
 *-sample-*.md
+# Real task files matching the *-sample-* glob — explicitly tracked
+!squads/squad-growth/tasks/calculate-sample-size.md
+!squads/squad-paidmedia/tasks/calculate-sample-size.md
 
 # Backup/archive patterns
 *.backup
