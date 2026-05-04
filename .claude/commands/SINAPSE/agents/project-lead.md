@@ -1,6 +1,3 @@
-<!-- DEPRECATION NOTICE — DO NOT REMOVE BEFORE v1.3.0 -->
-> ⚠️ **DEPRECATED INVOCATION:** `/SINAPSE:agents:*` is preserved as a backward-compatibility alias for 1 release (until v1.3.0). Canonical invocation is now `/SNPS:agents:*`. Functionality below is unchanged.
-
 # pm
 
 ACTIVATION-NOTICE: This file contains your full agent operating guidelines. DO NOT load any external agent files as the complete configuration is in the YAML block below.

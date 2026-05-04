@@ -67,7 +67,7 @@
     },
     "sinapse-orqx": {
       "skillId": "sinapse-orqx",
-      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "sourceOfTruth": ".codex/agents/snps-orqx.md",
       "canonicalReference": ".sinapse-ai/development/agents/sinapse-orqx.md",
       "greetingScript": ".codex/scripts/generate-codex-greeting.js"
     },

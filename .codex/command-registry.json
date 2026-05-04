@@ -4,7 +4,7 @@
     "sinapse-orqx": {
       "skillId": "sinapse-orqx",
       "aliases": ["sinapse-orqx", "imperator"],
-      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "sourceOfTruth": ".codex/agents/snps-orqx.md",
       "commands": {
         "onboard": {
           "aliases": ["*onboard"],
@@ -22,7 +22,7 @@
           "target": ".codex/tasks/route-sinapse-request.md",
           "resources": [
             ".codex/catalog.json",
-            ".codex/agents/sinapse-orqx.md"
+            ".codex/agents/snps-orqx.md"
           ]
         },
         "plan": {
@@ -31,7 +31,7 @@
           "target": ".codex/tasks/plan-sinapse-initiative.md",
           "resources": [
             ".codex/catalog.json",
-            ".codex/agents/sinapse-orqx.md",
+            ".codex/agents/snps-orqx.md",
             "docs/codex-parity-program.md"
           ]
         },
@@ -50,7 +50,7 @@
           "target": ".codex/tasks/create-sinapse-strategic-brief.md",
           "resources": [
             ".codex/catalog.json",
-            ".codex/agents/sinapse-orqx.md"
+            ".codex/agents/snps-orqx.md"
           ]
         },
         "resolve": {
@@ -59,7 +59,7 @@
           "target": ".codex/tasks/resolve-sinapse-conflict.md",
           "resources": [
             ".codex/catalog.json",
-            ".codex/agents/sinapse-orqx.md",
+            ".codex/agents/snps-orqx.md",
             "docs/codex-parity-program.md"
           ]
         },
@@ -69,7 +69,7 @@
           "target": ".codex/tasks/convene-sinapse-council.md",
           "resources": [
             ".codex/catalog.json",
-            ".codex/agents/sinapse-orqx.md",
+            ".codex/agents/snps-orqx.md",
             ".codex/agents/council-orqx.md"
           ]
         }

@@ -19,7 +19,7 @@
         "sinapse-orqx",
         "imperator"
       ],
-      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "sourceOfTruth": ".codex/agents/snps-orqx.md",
       "approvedRoutes": [
         "brand-discovery",
         "content-funnel-alignment",
