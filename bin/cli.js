@@ -15,6 +15,20 @@ const { getLogger } = require('../.sinapse-ai/core/logger');
 const logger = getLogger();
 
 const { CYAN, RED, NC, SINAPSE_HOME, HOME } = require('./lib/constants');
+const { closestMatch } = require('./lib/fuzzy');
+
+// Story GA-1.3 — canonical command list shared by router + fuzzy match.
+const KNOWN_COMMANDS = [
+  'install',
+  'update',
+  'uninstall',
+  'init',
+  'list',
+  'status',
+  'doctor',
+  'chrome-brain',
+  'help',
+];
 const {
   syncDirSync,
 } = require('./lib/fs-utils');
@@ -91,11 +105,11 @@ function runRouter() {
   const isReconfigure = args.includes('--reconfigure');
 
   switch (command) {
-    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { logger.error(e.message); process.exit(1); }); break;
-    case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(e.message); process.exit(1); });  break;
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { logger.error(`${RED}Erro ao instalar:${NC} ${e.message}`); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); }); break;
+    case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(`${RED}Erro ao atualizar:${NC} ${e.message}`); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); });  break;
     case 'uninstall': {
       const isYes = args.includes('--yes') || args.includes('-y');
-      cmdUninstall({ yes: isYes }).catch(e => { logger.error(e.message); process.exit(1); });
+      cmdUninstall({ yes: isYes }).catch(e => { logger.error(`${RED}Erro ao desinstalar:${NC} ${e.message}`); process.exit(1); });
       break;
     }
     case 'init': {
@@ -111,7 +125,8 @@ function runRouter() {
         { stdio: 'inherit' },
       );
       if (result.error) {
-        logger.error(`${RED}init error:${NC} ${result.error.message}`);
+        logger.error(`${RED}Erro ao iniciar projeto:${NC} ${result.error.message}`);
+        logger.error(`Tente: ${CYAN}npx sinapse-ai init --help${NC}`);
         process.exit(1);
       }
       process.exit(result.status ?? 0);
@@ -130,26 +145,27 @@ function runRouter() {
         quiet: doctorArgs.includes('--quiet'),
         deep: doctorArgs.includes('--deep'),
       };
-      cmdDoctor(doctorOpts).catch(e => { logger.error(`${RED}doctor error:${NC} ${e.message}`); process.exit(1); });
+      cmdDoctor(doctorOpts).catch(e => { logger.error(`${RED}Erro no doctor:${NC} ${e.message}`); process.exit(1); });
       break;
     }
-  case 'chrome-brain': {
+    case 'chrome-brain': {
     // Story 10.13 — chrome-brain is the canonical sub-capability for browser
     // automation. Delegating to the shared chrome-brain-installer module keeps
     // `npx sinapse-ai chrome-brain <install|uninstall|status>` working without
     // requiring users to fall back to legacy binaries.
-    const chromeBrainArgs = args.slice(1);
-    (async () => {
-      try {
-        const { runChromeBrain } = require('./modules/chrome-brain-installer');
-        await runChromeBrain(chromeBrainArgs);
-      } catch (e) {
-        logger.error(`${RED}chrome-brain error:${NC} ${e.message}`);
-        process.exit(1);
-      }
-    })();
-    break;
-  }
+      const chromeBrainArgs = args.slice(1);
+      (async () => {
+        try {
+          const { runChromeBrain } = require('./modules/chrome-brain-installer');
+          await runChromeBrain(chromeBrainArgs);
+        } catch (e) {
+          logger.error(`${RED}Erro no chrome-brain:${NC} ${e.message}`);
+          logger.error(`Tente: ${CYAN}npx sinapse-ai chrome-brain status${NC}`);
+          process.exit(1);
+        }
+      })();
+      break;
+    }
     case 'first-run': {
       // Story 10.46 — friendly hint on bare `npx sinapse-ai` for a fresh machine.
       header();
@@ -167,9 +183,25 @@ function runRouter() {
     case 'help':
     case '--help':
     case '-h':       cmdHelp(); break;
-    default:
-      logger.error(`${RED}Unknown command:${NC} ${command}`);
-      logger.error(`Run ${CYAN}npx sinapse-ai help${NC}`);
+    default: {
+      // Story GA-1.3 — fuzzy match suggestion. If the typed command is within
+      // 2 edits of a known command, hint at the closest match (e.g. `insta` →
+      // `install`). Otherwise fall back to listing the canonical commands so
+      // the user can copy one. Never crash on the suggestion path — the goal
+      // is to recover, not to lecture.
+      logger.error(`${RED}Comando desconhecido:${NC} ${command}`);
+      const suggestion = closestMatch(command, KNOWN_COMMANDS, { maxDistance: 2 });
+      if (suggestion) {
+        logger.error(`Você quis dizer ${CYAN}${suggestion}${NC}?`);
+        logger.error(`Tente: ${CYAN}npx sinapse-ai ${suggestion}${NC}`);
+      } else {
+        logger.error('Comandos disponíveis:');
+        for (const cmd of KNOWN_COMMANDS) {
+          logger.error(`  ${CYAN}${cmd}${NC}`);
+        }
+        logger.error(`Detalhes: ${CYAN}npx sinapse-ai help${NC}`);
+      }
       process.exit(1);
+    }
   }
 }
