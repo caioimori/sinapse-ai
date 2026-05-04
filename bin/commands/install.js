@@ -62,7 +62,7 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`${DIM}  Use --force to wipe and reinstall fresh. Use --reconfigure to re-prompt language/LLM.${NC}`);
     logger.always('');
   } else {
-    logger.always(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+    logger.always(`${BOLD}  Bem-vindo ao SNPS AI!${NC}`);
     logger.always(`${DIM}  Vamos configurar seu copiloto de inteligencia artificial.${NC}`);
     logger.always('');
   }

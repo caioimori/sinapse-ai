@@ -21,7 +21,7 @@
         "commandId": "create-prd"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -48,7 +48,7 @@
         "commandId": "validate-story"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -75,7 +75,7 @@
         "commandId": "draft"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -102,7 +102,7 @@
         "commandId": "develop"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -129,7 +129,7 @@
         "commandId": "gate"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -155,7 +155,7 @@
         "docPath": ".codex/agents/architect.md"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         "AGENTS.md"
       ],
       "handoff": {
@@ -183,7 +183,7 @@
         "commandId": "plan"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json",
         "docs/codex-total-parity-orchestration-plan.md"
       ],
@@ -211,7 +211,7 @@
         "commandId": "council"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md",
+        ".codex/agents/snps-orqx.md",
         ".codex/command-registry.json"
       ],
       "handoff": {
@@ -306,7 +306,7 @@
         "agentId": "sinapse-orqx"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md"
+        ".codex/agents/snps-orqx.md"
       ]
     },
     "framework-story-delivery": {
@@ -320,7 +320,7 @@
         "agentId": "sinapse-orqx"
       },
       "sourceDocs": [
-        ".codex/agents/sinapse-orqx.md"
+        ".codex/agents/snps-orqx.md"
       ]
     }
   },
@@ -667,7 +667,7 @@
         "sinapse-orqx",
         "imperator"
       ],
-      "sourceOfTruth": ".codex/agents/sinapse-orqx.md",
+      "sourceOfTruth": ".codex/agents/snps-orqx.md",
       "approvedRoutes": [
         "brand-discovery",
         "content-funnel-alignment",

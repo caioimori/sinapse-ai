@@ -170,7 +170,7 @@ function runRouter() {
       // Story 10.46 — friendly hint on bare `npx sinapse-ai` for a fresh machine.
       header();
       const { BOLD, DIM } = require('./lib/constants');
-      logger.always(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
+      logger.always(`${BOLD}  Bem-vindo ao SNPS AI!${NC}`);
       logger.always(`${DIM}  Detectei que ainda nao ha instalacao nesta maquina.${NC}`);
       logger.always('');
       logger.always('  Pra comecar, rode:');

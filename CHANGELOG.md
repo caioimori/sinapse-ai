@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (Story GA-1.4 — SNPS Rename)
+
+- **Master orchestrator renamed:** `sinapse-orqx` → `snps-orqx`.
+  Backward-compat alias `@sinapse-orqx` preserved for one release (until v1.3.0).
+- **Slash command namespace migrated:** `/SINAPSE:agents:*` → `/SNPS:agents:*`.
+  The legacy `/SINAPSE:` namespace remains available as a deprecation alias for one release.
+- **Visual branding updated:** CLI banner ASCII art and user-facing strings
+  ("Bem-vindo ao SNPS AI", postinstall summary, update messages) now show **SNPS AI**.
+- **Formal name preserved:** the npm package (`sinapse-ai`), README h1, LICENSE,
+  internal env vars (`SINAPSE_HOME`, `SINAPSE_SKIP_POSTINSTALL`, etc.), and source
+  file names are intentionally unchanged.
+
+### Files renamed
+
+- `.sinapse-ai/development/agents/sinapse-orqx.md` → `snps-orqx.md`
+- `.claude/agents/sinapse-orqx.md` → `snps-orqx.md`
+- `.codex/agents/sinapse-orqx.md` → `snps-orqx.md`
+- `.github/agents/sinapse-orqx.agent.md` → `snps-orqx.agent.md`
+- `sinapse/agents/sinapse-orqx.md` → `snps-orqx.md`
+- `docs/guides/agents/traces/sinapse-orqx-execution-trace.md` → `snps-orqx-execution-trace.md`
+- `docs/sinapse-agent-flows/sinapse-orqx-system.md` → `snps-orqx-system.md`
+- `.claude/commands/SINAPSE/` content copied to `.claude/commands/SNPS/` (SINAPSE/ retained as alias)
+
 ## [10.0.0] — 2026-05-02 — 🎉 General Availability
 
 > **Note on versioning:** initial plan was a 10.x → 1.0.0 reset, but

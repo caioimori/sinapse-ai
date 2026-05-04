@@ -55,7 +55,10 @@ credentials/
 
 # Squad-generated orqx agents (created by sinapse install, not source-controlled)
 .claude/commands/SINAPSE/agents/*-orqx.md
+.claude/commands/SNPS/agents/*-orqx.md
 !.claude/commands/SINAPSE/agents/sinapse-orqx.md
+!.claude/commands/SINAPSE/agents/snps-orqx.md
+!.claude/commands/SNPS/agents/snps-orqx.md
 
 # Published squads (whitelisted for repository)
 # Governance: SINAPSE is an open-source framework. Production-ready squads

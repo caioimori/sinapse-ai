@@ -315,7 +315,7 @@ describe('Workflow Chains (Story WIS-16)', () => {
     const agentFiles = [
       'developer.md', 'quality-gate.md', 'devops.md', 'architect.md', 'project-lead.md', 'product-lead.md',
       'sprint-lead.md', 'analyst.md', 'data-engineer.md', 'ux-design-expert.md',
-      'squad-creator.md', 'sinapse-orqx.md',
+      'squad-creator.md', 'snps-orqx.md',
     ];
 
     test.each(agentFiles)('%s contains handoff reference', (file) => {
