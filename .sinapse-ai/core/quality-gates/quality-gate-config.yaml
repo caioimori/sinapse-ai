@@ -1,0 +1,175 @@
+# Quality Gate Configuration
+# Version: 2.0.0
+# Story: 10.4 — Quality Gates Module
+#
+# 3-layer quality gate system for SINAPSE projects.
+# Layers execute sequentially with fail-fast behavior.
+
+version: "2.0"
+
+# ─────────────────────────────────────────────────────
+# Layer 1: Pre-commit checks (fast, local)
+# ─────────────────────────────────────────────────────
+layer1:
+  enabled: true
+  failFast: true  # Stop pipeline on first blocker failure
+  checks:
+    lint:
+      enabled: true
+      command: "npm run lint"
+      failOn: "error"  # error | warning
+      timeout: 60000   # 1 minute
+    typecheck:
+      enabled: true
+      command: "npm run typecheck"
+      timeout: 120000  # 2 minutes
+    test:
+      enabled: true
+      command: "npm test"
+      timeout: 300000  # 5 minutes
+      coverage:
+        enabled: true
+        minimum: 80
+    secret-scan:
+      enabled: true
+      patterns:
+        - '\.env$'
+        - 'credentials\.json$'
+        - '\.pem$'
+        - '\.key$'
+      contentPatterns:
+        - 'AKIA[A-Z0-9]{16}'
+        - 'sk_live_[A-Za-z0-9]+'
+        - 'ghp_[A-Za-z0-9]{36}'
+        - 'password\s*[:=]\s*["\x27][^\x27"]+["\x27]'
+      timeout: 10000
+    story-gate:
+      enabled: true
+      requireStoryFile: true
+      requireReadyStatus: true
+      storyDir: "docs/stories"
+      timeout: 5000
+
+# ─────────────────────────────────────────────────────
+# Layer 2: PR Automation (external tools)
+# ─────────────────────────────────────────────────────
+layer2:
+  enabled: true
+  coderabbit:
+    enabled: true
+    command: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+    timeout: 900000  # 15 minutes
+    blockOn:
+      - CRITICAL
+    warnOn:
+      - HIGH
+    documentOn:
+      - MEDIUM
+    ignoreOn:
+      - LOW
+  coverage-threshold:
+    enabled: true
+    minimum: 80        # Minimum coverage percentage
+    failOn: "decrease" # decrease | absolute
+  story-validation:
+    enabled: true
+    requireAcceptanceCriteria: true
+    requireScope: true
+    requireComplexityEstimate: false
+  dependency-audit:
+    enabled: true
+    command: "npm audit --audit-level=high"
+    blockOn:
+      - critical
+      - high
+    timeout: 60000     # 1 minute
+  quinn:
+    enabled: true
+    autoReview: true
+    agentPath: ".claude/commands/SINAPSE/agents/quality-gate.md"
+    severity:
+      block:
+        - CRITICAL
+      warn:
+        - HIGH
+        - MEDIUM
+
+# ─────────────────────────────────────────────────────
+# Layer 3: Human Review (manual)
+# ─────────────────────────────────────────────────────
+layer3:
+  enabled: true
+  requireSignoff: true
+  assignmentStrategy: "auto"  # auto | manual | round-robin
+  defaultReviewer: "@architect"
+  checklist:
+    enabled: true
+    template: "strategic-review-checklist"
+    minItems: 5
+  signoff:
+    required: true
+    expiry: 86400000  # 24 hours in ms
+  reviewer-assignment:
+    enabled: true
+    strategy: "auto"
+    fallback: "@architect"
+    codeownerRequired: true
+  approval-count:
+    minimum: 1
+    requireCodeowner: true
+  escalation:
+    enabled: true
+    staleTimeout: 86400000    # 24 hours — escalate if no review
+    reminderInterval: 14400000 # 4 hours — send reminder
+    escalateTo: "@tech-lead"
+
+# ─────────────────────────────────────────────────────
+# Notifications
+# ─────────────────────────────────────────────────────
+notifications:
+  enabled: true
+  channels:
+    - console
+    - file
+  notificationsPath: ".sinapse/notifications"
+
+# ─────────────────────────────────────────────────────
+# Report settings
+# ─────────────────────────────────────────────────────
+reports:
+  location: ".sinapse/qa-reports"
+  format: "json"  # json | yaml | markdown
+  retention: 30   # days to keep reports
+  includeMetrics: true
+
+# ─────────────────────────────────────────────────────
+# Status persistence
+# ─────────────────────────────────────────────────────
+status:
+  location: ".sinapse/qa-status.json"
+  updateOnChange: true
+
+# ─────────────────────────────────────────────────────
+# Focus areas for human review
+# ─────────────────────────────────────────────────────
+focusAreas:
+  strategicAreas:
+    - architecture
+    - business-logic
+    - security
+    - ux
+    - performance
+    - data-integrity
+  skipAreas:
+    - syntax
+    - formatting
+    - simple-logic
+    - naming-conventions
+    - import-order
+
+# ─────────────────────────────────────────────────────
+# Human review orchestration
+# ─────────────────────────────────────────────────────
+humanReview:
+  statusPath: ".sinapse/qa-status.json"
+  reviewRequestsPath: ".sinapse/human-review-requests"

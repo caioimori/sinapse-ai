@@ -1,0 +1,41 @@
+name: Manifest Parity
+# Story A.4 — Install Manifest Parity & Regeneration
+#
+# Blocks PRs that would land install-manifest.yaml / entity-registry.yaml
+# drift against the real files under .sinapse-ai/development/.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: manifest-parity-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    name: Validate install-manifest parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (root only, no workspaces)
+        run: npm install --no-audit --no-fund --ignore-scripts --workspaces=false
+
+      - name: Run parity check
+        run: npm run validate:manifest:parity

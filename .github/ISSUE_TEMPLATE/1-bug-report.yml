@@ -1,0 +1,116 @@
+name: Relatorio de Bug
+description: Reportar um bug no SINAPSE-AI
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por dedicar seu tempo para reportar um bug! Preencha as informacoes abaixo para nos ajudar a investigar.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descricao do Bug
+      description: Uma descricao clara e concisa do bug.
+      placeholder: Descreva o bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para Reproduzir
+      description: Descreva passo a passo como reproduzir o problema.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento Esperado
+      description: O que voce esperava que acontecesse.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento Atual
+      description: O que realmente aconteceu.
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Saida de Erro
+      description: Cole mensagens de erro ou stack traces.
+      render: bash
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area Afetada
+      options:
+        - "Core Framework (.sinapse-ai/core/)"
+        - "Installer (packages/installer/)"
+        - "CLI (bin/)"
+        - "SYNAPSE Context Engine"
+        - "Health Check System"
+        - "Agentes (.sinapse-ai/development/agents/)"
+        - "Tasks (.sinapse-ai/development/tasks/)"
+        - "Documentacao"
+        - "CI/CD / GitHub Actions"
+        - "Outro"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versao do SINAPSE
+      description: "Execute `npx sinapse-ai info` para encontrar sua versao."
+      placeholder: "ex: 7.7.11"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Sistema Operacional
+      options:
+        - "Windows 11"
+        - "Windows 10"
+        - "macOS (Apple Silicon)"
+        - "macOS (Intel)"
+        - "Ubuntu / Debian"
+        - "Outro Linux"
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Versao do Node.js
+      placeholder: "ex: 22.21.0"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots (opcional)
+      description: Arraste e solte imagens que ajudem a ilustrar o problema.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "Busquei issues existentes para evitar duplicatas"
+          required: true
+        - label: "Testei com a versao mais recente"
+        - label: "Consigo reproduzir este problema consistentemente"

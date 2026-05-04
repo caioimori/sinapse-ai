@@ -1,0 +1,12 @@
+{
+  "$schema": "https://sinapse-ai.dev/schemas/grounding-vault-v1.json",
+  "_comment": "Generic example for vault grounding (Story 10.47). Copy fields into ~/.claude/sinapse-ai-config.yaml under grounding.vault — or just run `npx sinapse-ai install --reconfigure` and the wizard handles it.",
+  "version": "1",
+  "vault": {
+    "enabled": true,
+    "_comment_path": "Absolute path to the root of your notes vault. Obsidian, Logseq, or any flat-markdown layout works.",
+    "path": "/absolute/path/to/your/vault",
+    "_comment_domains": "Optional filter — only inject notes tagged with these domains. Leave empty to allow all.",
+    "domains": []
+  }
+}

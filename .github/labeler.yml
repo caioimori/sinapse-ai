@@ -1,0 +1,91 @@
+# Labeler configuration for GitHub Actions
+# Used by: .github/workflows/pr-labeling.yml (PR file-based labeling via actions/labeler)
+# NOTE: Issue body regex matching uses a SEPARATE file: .github/issue-labeler.yml
+#
+# Story: GHIM-001 - GitHub Issue Management
+# Updated: 2026-02-20
+
+# ============================================
+# PR FILE-BASED LABELS (actions/labeler)
+# Applied when PR changes files in these paths
+# ============================================
+
+"area: core":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.sinapse-ai/core/**/*'
+
+"area: agents":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.sinapse-ai/development/agents/**/*'
+      - '.claude/commands/**/*'
+
+"area: workflows":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.sinapse-ai/development/workflows/**/*'
+
+"area: installer":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'packages/installer/**/*'
+      - 'bin/**/*'
+
+"area: cli":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'packages/sinapse-pro-cli/**/*'
+      - 'bin/*.js'
+
+"area: synapse":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.claude/hooks/**/*'
+      - '.claude/synapse/**/*'
+
+"area: pro":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'pro/**/*'
+
+"area: health-check":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.sinapse-ai/core/health-check/**/*'
+
+"area: docs":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'docs/**/*'
+      - '**/*.md'
+      - '!node_modules/**/*'
+      - '!.github/ISSUE_TEMPLATE/**/*'
+
+"area: devops":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/**/*'
+      - 'Dockerfile'
+      - 'docker-compose*.yml'
+
+"type: test":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'tests/**/*'
+      - '**/*.test.js'
+      - '**/*.spec.js'
+      - 'jest.config.*'
+
+squad:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'squads/**/*'
+
+mcp:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.sinapse-ai/tools/mcp/**/*'
+      - '**/*mcp*.yaml'
+      - '**/*mcp*.json'
+

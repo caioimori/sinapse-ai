@@ -1,0 +1,453 @@
+name: Publish to NPM
+# Story 6.1 - Added concurrency
+# Story 12.9 - Added @sinapse/sinapse-install package support
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*.*.*'  # Semantic version tags trigger publish
+  workflow_dispatch:
+    inputs:
+      publish_mode:
+        description: 'Publishing mode'
+        required: true
+        default: 'preview'
+        type: choice
+        options:
+          - preview
+          - stable
+          - beta
+      packages:
+        description: 'Packages to publish (comma-separated, or "all")'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - sinapse-ai
+          - sinapse-install
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false  # Never cancel publishing in progress
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '20'
+  NPM_REGISTRY: 'https://registry.npmjs.org/'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run security audit
+        # Note: Using critical level because high vulns are in dev deps (semantic-release, mocha)
+        # These don't ship to production - only used for CI tooling
+        # See: Story SEC-1 for security audit improvements
+        run: npm audit --audit-level=critical --omit=dev || true
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.package-version.outputs.version }}
+      packages: ${{ steps.detect-packages.outputs.packages }}
+      has_sinapse_install: ${{ steps.detect-packages.outputs.has_sinapse_install }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get package version
+        id: package-version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Detect packages to publish
+        id: detect-packages
+        run: |
+          SELECTED="${{ github.event.inputs.packages }}"
+
+          # Default to all packages on release/tag events
+          if [ -z "$SELECTED" ] || [ "$SELECTED" = "all" ]; then
+            PACKAGES="sinapse-ai"
+
+            # Add sinapse-install if it exists
+            if [ -d "packages/sinapse-install" ] && [ -f "packages/sinapse-install/package.json" ]; then
+              PACKAGES="$PACKAGES,sinapse-install"
+              echo "has_sinapse_install=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_sinapse_install=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            PACKAGES="$SELECTED"
+            if [ "$SELECTED" = "sinapse-install" ]; then
+              echo "has_sinapse_install=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_sinapse_install=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+          echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
+          echo "📦 Packages to publish: $PACKAGES"
+
+      - name: Build all packages
+        run: |
+          # Create lib directories for packages that need them
+          for pkg in .sinapse-ai memory security performance telemetry; do
+            if [ -d "$pkg" ]; then
+              mkdir -p "$pkg/lib"
+              echo '{"built": true}' > "$pkg/lib/build.json"
+            fi
+          done
+          
+          echo "✅ Build preparation complete"
+
+      - name: Create distribution archive
+        run: |
+          mkdir -p dist
+          tar -czf dist/sinapse-ai-${{ steps.package-version.outputs.version }}.tar.gz \
+            --exclude=node_modules \
+            --exclude=.git \
+            --exclude=dist \
+            --exclude=tests \
+            --exclude='*.log' \
+            .
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            .sinapse-ai/lib/
+            memory/lib/
+            security/lib/
+            performance/lib/
+            telemetry/lib/
+          retention-days: 7
+
+  publish:
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # OIDC trusted publishing (research 21, section 20.6)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          registry-url: ${{ env.NPM_REGISTRY }}
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          HUSKY: '0'
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: Set publishing tag
+        id: publish-tag
+        run: |
+          # Version-aware tag detection (fixes 2026-05-02 incident where
+          # rc.11 was promoted to `latest` because event_name=push assumed
+          # stable). Pre-release suffix in the version string takes priority
+          # over `event_name`-based heuristics.
+          VERSION="${{ needs.build.outputs.version }}"
+
+          if echo "$VERSION" | grep -qE -- '-rc\.'; then
+            echo "tag=rc" >> $GITHUB_OUTPUT
+            echo "Detected RC version $VERSION → tag=rc"
+          elif echo "$VERSION" | grep -qE -- '-beta\.'; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+            echo "Detected beta version $VERSION → tag=beta"
+          elif echo "$VERSION" | grep -qE -- '-(alpha|preview|next)\.'; then
+            echo "tag=next" >> $GITHUB_OUTPUT
+            echo "Detected pre-release version $VERSION → tag=next"
+          elif [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "Detected stable release $VERSION → tag=latest"
+          elif [ "${{ github.event.inputs.publish_mode }}" = "beta" ]; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+          else
+            echo "tag=preview" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Article VII gate (Story GA-1.5 — Metrics Accuracy)
+        run: npm run validate:article-vii
+
+      - name: Publish safety gate (INS-4.10)
+        run: node bin/utils/validate-publish.js
+
+      - name: Check if sinapse-ai should be published
+        id: should-publish
+        run: |
+          PKG_NAME="sinapse-ai"
+          VERSION="${{ needs.build.outputs.version }}"
+
+          # Check if package exists in registry
+          if npm view "${PKG_NAME}@${VERSION}" version > /dev/null 2>&1; then
+            echo "Version ${VERSION} already exists for ${PKG_NAME}"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Package ${PKG_NAME}@${VERSION} not found in registry"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish sinapse-ai to NPM
+        if: steps.should-publish.outputs.should_publish == 'true'
+        run: |
+          # OIDC trusted publishing (preferred) or fallback to NPM_TOKEN
+          # To enable OIDC: configure trust in npm web UI for repo caioimori/sinapse-ai
+          if [ -n "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          fi
+
+          # Publish with provenance (OIDC attestation when id-token permission granted)
+          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public --provenance
+
+          echo "✅ Published sinapse-ai@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Verify publication
+        if: steps.should-publish.outputs.should_publish == 'true'
+        run: |
+          # Wait for npm registry to propagate (can take up to 60s)
+          for i in 1 2 3 4 5 6; do
+            sleep 15
+            if npm view "sinapse-ai@${{ needs.build.outputs.version }}" version > /dev/null 2>&1; then
+              echo "✅ Verified: sinapse-ai@${{ needs.build.outputs.version }} is available on NPM"
+              exit 0
+            fi
+            echo "⏳ Waiting for npm registry propagation... (attempt $i/6)"
+          done
+
+          echo "❌ Verification failed: sinapse-ai@${{ needs.build.outputs.version }} not found after 90s"
+          exit 1
+
+  # Story 12.9 - Publish @sinapse/sinapse-install NPX package
+  publish-sinapse-install:
+    needs: [test, build]
+    if: ${{ needs.build.outputs.has_sinapse_install == 'true' }}
+    continue-on-error: true  # Don't block main publish if @sinapse org not yet configured
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          registry-url: ${{ env.NPM_REGISTRY }}
+
+      - name: Install dependencies
+        working-directory: packages/sinapse-install
+        run: npm ci --ignore-scripts
+
+      - name: Get sinapse-install version
+        id: pkg-version
+        working-directory: packages/sinapse-install
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Set publishing tag
+        id: publish-tag
+        run: |
+          # Version-aware tag detection (mirrors sinapse-ai job; fixes
+          # 2026-05-02 incident where pre-release was promoted to latest).
+          VERSION="${{ steps.pkg-version.outputs.version }}"
+
+          if echo "$VERSION" | grep -qE -- '-rc\.'; then
+            echo "tag=rc" >> $GITHUB_OUTPUT
+          elif echo "$VERSION" | grep -qE -- '-beta\.'; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+          elif echo "$VERSION" | grep -qE -- '-(alpha|preview|next)\.'; then
+            echo "tag=next" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.publish_mode }}" = "beta" ]; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+          else
+            echo "tag=preview" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if already published
+        id: should-publish
+        run: |
+          PKG_NAME="@sinapse/sinapse-install"
+          VERSION="${{ steps.pkg-version.outputs.version }}"
+
+          if npm view "${PKG_NAME}@${VERSION}" version > /dev/null 2>&1; then
+            echo "Version ${VERSION} already exists for ${PKG_NAME}"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Package ${PKG_NAME}@${VERSION} not found in registry"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish @sinapse/sinapse-install
+        if: steps.should-publish.outputs.should_publish == 'true'
+        working-directory: packages/sinapse-install
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
+          echo "✅ Published @sinapse/sinapse-install@${{ steps.pkg-version.outputs.version }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Smoke test - verify npx works
+        if: steps.should-publish.outputs.should_publish == 'true'
+        run: |
+          # Wait for npm registry propagation
+          for i in 1 2 3 4 5 6; do
+            sleep 15
+            if npx @sinapse/sinapse-install --version 2>/dev/null; then
+              echo "✅ Smoke test passed: npx @sinapse/sinapse-install --version works"
+              exit 0
+            fi
+            echo "⏳ Waiting for npm propagation... (attempt $i/6)"
+          done
+          echo "⚠️ Smoke test timeout - package may need more time to propagate"
+          # Don't fail the build - propagation can take longer
+
+  notify:
+    needs: [build, publish, publish-sinapse-install]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify completion
+        run: |
+          PUBLISHED_PACKAGES=""
+
+          if [ "${{ needs.publish.result }}" = "success" ]; then
+            PUBLISHED_PACKAGES="sinapse-ai"
+          fi
+
+          if [ "${{ needs.publish-sinapse-install.result }}" = "success" ]; then
+            if [ -n "$PUBLISHED_PACKAGES" ]; then
+              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, @sinapse/sinapse-install"
+            else
+              PUBLISHED_PACKAGES="@sinapse/sinapse-install"
+            fi
+          fi
+
+          if [ -n "$PUBLISHED_PACKAGES" ]; then
+            echo "🎉 Successfully published to NPM:"
+            echo "   Packages: $PUBLISHED_PACKAGES"
+            echo "   Registry: ${{ env.NPM_REGISTRY }}"
+          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish-sinapse-install.result }}" = "skipped" ]; then
+            echo "⏭️ No packages needed publishing (already up-to-date)"
+          else
+            echo "❌ Publishing failed"
+            exit 1
+          fi
+
+  create-release-notes:
+    needs: [build, publish, publish-sinapse-install]
+    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish-sinapse-install.result == 'success')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate release notes
+        run: |
+          # Check if sinapse-install was published
+          SINAPSE_INSTALL_ROW=""
+          if [ "${{ needs.publish-sinapse-install.result }}" = "success" ]; then
+            SINAPSE_INSTALL_ROW="| @sinapse/sinapse-install | [npmjs.com](https://www.npmjs.com/package/@sinapse/sinapse-install) | NPX Installer for SINAPSE |"
+          fi
+
+          cat > release-notes.md << EOF
+          # SINAPSE v${{ needs.build.outputs.version }}
+
+          ## 📦 NPM Packages
+
+          | Package | NPM Link | Description |
+          |---------|----------|-------------|
+          | sinapse-ai | [npmjs.com](https://www.npmjs.com/package/sinapse-ai) | AI-Orchestrated System for Full Stack Development |
+          ${SINAPSE_INSTALL_ROW}
+
+          ## 🚀 Installation
+
+          \`\`\`bash
+          # Quick install via NPX (recommended for new users)
+          npx @sinapse/sinapse-install
+
+          # Or global installation
+          npm install -g sinapse-ai
+
+          # Or as project dependency
+          npm install sinapse-ai
+          \`\`\`
+
+          ## 📋 What's New
+
+          * ✅ Complete Meta-Agent MVP and Framework Distribution
+          * 🔒 Security hardening with penetration testing
+          * ⚡ Performance optimization framework
+          * 📊 Privacy-conscious telemetry system
+          * 📦 Modular NPM package distribution
+
+          ## 🔗 Links
+
+          * [GitHub Repository](https://github.com/SinapseAI/sinapse-ai)
+          * [Documentation](https://github.com/SinapseAI/sinapse-ai#readme)
+          * [Issues](https://github.com/SinapseAI/sinapse-ai/issues)
+          EOF
+
+      - name: Update release with notes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const releaseNotes = fs.readFileSync('release-notes.md', 'utf8');
+
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: context.payload.release.id,
+              body: releaseNotes
+            });

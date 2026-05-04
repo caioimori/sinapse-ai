@@ -1,0 +1,120 @@
+# Story Development Cycle Workflow
+# From concept to polished narrative — full multi-agent development pipeline
+
+workflow:
+  id: wf-story-development
+  name: "Ciclo de Desenvolvimento de Historia"
+  version: "1.0"
+  trigger: "*story-development"
+  entry_agent: storytelling-orqx
+  estimated_duration: "1-3 hours"
+  description: |
+    Desenvolvimento completo de historia, do conceito bruto ate a selecao de framework,
+    design estrutural, rascunho, analise e polimento. Direciona atraves de agentes
+    especialistas com base no genero e adequacao ao framework.
+
+  type: sequential
+  sequence:
+    - agent: storytelling-orqx
+      action: diagnose-narrative
+      creates: framework_selection
+    - agent: "{specialist}"
+      action: build-narrative
+      creates: draft
+    - agent: storytelling-orqx
+      action: review-narrative-output
+      creates: review
+    - agent: "{specialist}"
+      action: revise
+      creates: final_story
+
+phases:
+  - id: phase_1_concept
+    name: "Concept & Framework Selection"
+    agent: storytelling-orqx
+    task: diagnose-narrative.md
+    depends_on: []
+    description: "Analyze the concept, determine genre, select the best narrative framework"
+    checkpoint:
+      gate: "Framework selected with reasoning confirmed by user"
+      veto: "HALT if concept is too vague — ask clarifying questions first"
+    outputs:
+      - framework_selection
+      - genre_identification
+      - initial_concept_analysis
+
+  - id: phase_2_structure
+    name: "Build Narrative Structure"
+    agent: "{routed by framework: joseph-campbell | blake-snyder | dan-harmon}"
+    task: "{framework-specific task: map-heros-journey.md | create-beat-sheet.md | build-story-circle.md}"
+    depends_on: [phase_1_concept]
+    description: "Build the complete structural framework with all beats defined"
+    checkpoint:
+      gate: "All structural beats populated with turning points and emotional states"
+      veto: "HALT if obligatory beats are missing for the selected framework"
+    outputs:
+      - narrative_structure
+      - beat_sheet_or_circle
+      - emotional_arc
+
+  - id: phase_3_draft
+    name: "Flesh Out & Draft"
+    agent: "{same specialist from Phase 2}"
+    task: "{framework-specific task}"
+    depends_on: [phase_2_structure]
+    support_agents: [kindra-hall, park-howell]
+    description: "Expand beats into full scenes/sections with dialogue, detail, and emotion"
+    checkpoint:
+      gate: "Complete draft with all beats fleshed out into narrative content"
+      veto: "HALT if any beat is still at outline level — all must be expanded"
+    outputs:
+      - story_draft
+      - scene_details
+
+  - id: phase_4_review
+    name: "Quality Review"
+    agent: storytelling-orqx
+    task: review-narrative-output.md
+    depends_on: [phase_3_draft]
+    description: "Review the draft against quality criteria — structure, emotion, audience fit"
+    checkpoint:
+      gate: "All critical issues identified with specific feedback"
+      veto: "HALT if emotional arc is broken or transformation is unearned"
+    outputs:
+      - review_report
+      - verdict
+      - revision_notes
+
+  - id: phase_5_revise
+    name: "Revision & Polish"
+    agent: "{original framework specialist}"
+    task: "{framework-specific task}"
+    depends_on: [phase_4_review]
+    description: "Apply feedback from review, revise structure and content"
+    checkpoint:
+      gate: "All critical and major issues from review resolved"
+      veto: "HALT if critical issues remain unaddressed"
+    outputs:
+      - revised_draft
+      - revision_notes
+
+  - id: phase_6_final
+    name: "Final Approval"
+    agent: storytelling-orqx
+    task: review-narrative-output.md
+    depends_on: [phase_5_revise]
+    description: "Final quality check — coherence, emotional impact, audience fit"
+    checkpoint:
+      gate: "Story is complete, coherent, and ready for its intended use"
+      veto: "HALT if emotional arc is broken or transformation is unearned"
+    outputs:
+      - final_narrative
+      - quality_assessment
+
+completion_criteria:
+  - "Framework selected and confirmed with user"
+  - "All structural beats defined and populated"
+  - "Draft expanded with full scenes and emotional detail"
+  - "Quality review completed with feedback"
+  - "Critical and major issues resolved in revision"
+  - "Final narrative delivers on genre promise and emotional arc"

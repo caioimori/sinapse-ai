@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "agents": {
+    "sinapse-orqx": {
+      "skillId": "sinapse-orqx",
+      "aliases": ["sinapse-orqx", "imperator"],
+      "sourceOfTruth": ".codex/agents/snps-orqx.md",
+      "commands": {
+        "onboard": {
+          "aliases": ["*onboard"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/onboard-sinapse-codex.md",
+          "resources": [
+            ".codex/catalog.json",
+            "AGENTS.md",
+            "docs/codex-integration-process.md"
+          ]
+        },
+        "route": {
+          "aliases": ["*route"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/route-sinapse-request.md",
+          "resources": [
+            ".codex/catalog.json",
+            ".codex/agents/snps-orqx.md"
+          ]
+        },
+        "plan": {
+          "aliases": ["*plan"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/plan-sinapse-initiative.md",
+          "resources": [
+            ".codex/catalog.json",
+            ".codex/agents/snps-orqx.md",
+            "docs/codex-parity-program.md"
+          ]
+        },
+        "status": {
+          "aliases": ["*status"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/status-sinapse-capabilities.md",
+          "resources": [
+            ".codex/catalog.json",
+            "docs/codex-parity-program.md"
+          ]
+        },
+        "brief": {
+          "aliases": ["*brief"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/create-sinapse-strategic-brief.md",
+          "resources": [
+            ".codex/catalog.json",
+            ".codex/agents/snps-orqx.md"
+          ]
+        },
+        "resolve": {
+          "aliases": ["*resolve"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/resolve-sinapse-conflict.md",
+          "resources": [
+            ".codex/catalog.json",
+            ".codex/agents/snps-orqx.md",
+            "docs/codex-parity-program.md"
+          ]
+        },
+        "council": {
+          "aliases": ["*council"],
+          "kind": "codex-task",
+          "target": ".codex/tasks/convene-sinapse-council.md",
+          "resources": [
+            ".codex/catalog.json",
+            ".codex/agents/snps-orqx.md",
+            ".codex/agents/council-orqx.md"
+          ]
+        }
+      }
+    },
+    "sinapse-pm": {
+      "skillId": "sinapse-pm",
+      "aliases": ["sinapse-pm", "pm", "project-lead"],
+      "sourceOfTruth": ".codex/agents/pm.md",
+      "commands": {
+        "create-prd": {
+          "aliases": ["*create-prd"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/create-doc.md",
+          "resources": [
+            ".sinapse-ai/product/templates/prd-tmpl.yaml",
+            ".sinapse-ai/product/checklists/pm-checklist.md"
+          ]
+        },
+        "create-brownfield-prd": {
+          "aliases": ["*create-brownfield-prd"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/create-doc.md",
+          "resources": [
+            ".sinapse-ai/product/templates/brownfield-prd-tmpl.yaml",
+            ".sinapse-ai/product/checklists/pm-checklist.md"
+          ]
+        },
+        "create-epic": {
+          "aliases": ["*create-epic"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/brownfield-create-epic.md",
+          "resources": []
+        },
+        "create-story": {
+          "aliases": ["*create-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/brownfield-create-story.md",
+          "resources": [
+            ".sinapse-ai/product/templates/story-tmpl.yaml"
+          ]
+        },
+        "research": {
+          "aliases": ["*research"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/create-deep-research-prompt.md",
+          "resources": []
+        },
+        "execute-epic": {
+          "aliases": ["*execute-epic"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/execute-epic-plan.md",
+          "resources": []
+        },
+        "gather-requirements": {
+          "aliases": ["*gather-requirements"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-gather-requirements.md",
+          "resources": []
+        },
+        "write-spec": {
+          "aliases": ["*write-spec"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-write-spec.md",
+          "resources": []
+        },
+        "shard-prd": {
+          "aliases": ["*shard-prd"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/shard-doc.md",
+          "resources": [
+            ".sinapse-ai/product/templates/prd-tmpl.yaml"
+          ]
+        }
+      }
+    },
+    "sinapse-po": {
+      "skillId": "sinapse-po",
+      "aliases": ["sinapse-po", "po", "product-lead"],
+      "sourceOfTruth": ".codex/agents/po.md",
+      "commands": {
+        "validate-story": {
+          "aliases": ["*validate-story", "*validate-story-draft"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/validate-next-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/po-master-checklist.md",
+            ".sinapse-ai/product/checklists/change-checklist.md"
+          ]
+        },
+        "backlog-review": {
+          "aliases": ["*backlog-review"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-manage-story-backlog.md",
+          "resources": []
+        },
+        "backlog-add": {
+          "aliases": ["*backlog-add"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-manage-story-backlog.md",
+          "resources": []
+        },
+        "backlog-prioritize": {
+          "aliases": ["*backlog-prioritize"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-manage-story-backlog.md",
+          "resources": []
+        },
+        "backlog-schedule": {
+          "aliases": ["*backlog-schedule"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-manage-story-backlog.md",
+          "resources": []
+        },
+        "create-story": {
+          "aliases": ["*create-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/create-brownfield-story.md",
+          "resources": [
+            ".sinapse-ai/product/templates/story-tmpl.yaml"
+          ]
+        },
+        "pull-story": {
+          "aliases": ["*pull-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-pull-story.md",
+          "resources": []
+        },
+        "sync-story": {
+          "aliases": ["*sync-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-sync-story.md",
+          "resources": []
+        },
+        "close-story": {
+          "aliases": ["*close-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-close-story.md",
+          "resources": []
+        },
+        "execute-checklist-po": {
+          "aliases": ["*execute-checklist-po"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/execute-checklist.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/po-master-checklist.md"
+          ]
+        },
+        "stories-index": {
+          "aliases": ["*stories-index"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/po-stories-index.md",
+          "resources": []
+        }
+      }
+    },
+    "sinapse-sm": {
+      "skillId": "sinapse-sm",
+      "aliases": ["sinapse-sm", "sm", "sprint-lead"],
+      "sourceOfTruth": ".codex/agents/sm.md",
+      "commands": {
+        "draft": {
+          "aliases": ["*draft", "*create-story"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/create-next-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-draft-checklist.md",
+            ".sinapse-ai/product/templates/story-tmpl.yaml"
+          ]
+        },
+        "story-checklist": {
+          "aliases": ["*story-checklist"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/execute-checklist.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-draft-checklist.md"
+          ]
+        }
+      }
+    },
+    "sinapse-dev": {
+      "skillId": "sinapse-dev",
+      "aliases": ["sinapse-dev", "dev", "developer"],
+      "sourceOfTruth": ".codex/agents/dev.md",
+      "commands": {
+        "develop": {
+          "aliases": ["*develop"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-develop-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-dod-checklist.md",
+            ".sinapse-ai/product/checklists/self-critique-checklist.md"
+          ]
+        },
+        "develop-yolo": {
+          "aliases": ["*develop-yolo"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-develop-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-dod-checklist.md",
+            ".sinapse-ai/product/checklists/self-critique-checklist.md"
+          ]
+        },
+        "develop-interactive": {
+          "aliases": ["*develop-interactive"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-develop-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-dod-checklist.md",
+            ".sinapse-ai/product/checklists/self-critique-checklist.md"
+          ]
+        },
+        "develop-preflight": {
+          "aliases": ["*develop-preflight"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-develop-story.md",
+          "resources": [
+            ".sinapse-ai/product/checklists/story-dod-checklist.md",
+            ".sinapse-ai/product/checklists/self-critique-checklist.md"
+          ]
+        },
+        "execute-subtask": {
+          "aliases": ["*execute-subtask"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/plan-execute-subtask.md",
+          "resources": []
+        },
+        "verify-subtask": {
+          "aliases": ["*verify-subtask"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/verify-subtask.md",
+          "resources": []
+        },
+        "run-tests": {
+          "aliases": ["*run-tests"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-run-tests.md",
+          "resources": []
+        },
+        "apply-qa-fixes": {
+          "aliases": ["*apply-qa-fixes"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-apply-qa-fixes.md",
+          "resources": []
+        },
+        "backlog-debt": {
+          "aliases": ["*backlog-debt"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/dev-backlog-debt.md",
+          "resources": []
+        },
+        "build-autonomous": {
+          "aliases": ["*build-autonomous"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/build-autonomous.md",
+          "resources": []
+        },
+        "build-resume": {
+          "aliases": ["*build-resume"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/build-resume.md",
+          "resources": []
+        },
+        "build-status": {
+          "aliases": ["*build-status"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/build-status.md",
+          "resources": []
+        },
+        "build": {
+          "aliases": ["*build"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/build.md",
+          "resources": []
+        }
+      }
+    },
+    "sinapse-qa": {
+      "skillId": "sinapse-qa",
+      "aliases": ["sinapse-qa", "qa", "quality-gate"],
+      "sourceOfTruth": ".codex/agents/qa.md",
+      "commands": {
+        "review-story": {
+          "aliases": ["*review-story", "*review", "*code-review"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-review-story.md",
+          "resources": [
+            ".sinapse-ai/product/templates/qa-gate-tmpl.yaml",
+            ".sinapse-ai/product/templates/story-tmpl.yaml"
+          ]
+        },
+        "gate": {
+          "aliases": ["*gate"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-gate.md",
+          "resources": [
+            ".sinapse-ai/product/templates/qa-gate-tmpl.yaml"
+          ]
+        },
+        "review-build": {
+          "aliases": ["*review-build"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-review-build.md",
+          "resources": []
+        },
+        "nfr-assess": {
+          "aliases": ["*nfr-assess"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-nfr-assess.md",
+          "resources": []
+        },
+        "validate-libraries": {
+          "aliases": ["*validate-libraries"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-library-validation.md",
+          "resources": []
+        },
+        "security-check": {
+          "aliases": ["*security-check"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-security-checklist.md",
+          "resources": []
+        },
+        "validate-migrations": {
+          "aliases": ["*validate-migrations"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-migration-validation.md",
+          "resources": []
+        },
+        "evidence-check": {
+          "aliases": ["*evidence-check"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-evidence-requirements.md",
+          "resources": []
+        },
+        "false-positive-check": {
+          "aliases": ["*false-positive-check"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-false-positive-detection.md",
+          "resources": []
+        },
+        "console-check": {
+          "aliases": ["*console-check"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-browser-console-check.md",
+          "resources": []
+        },
+        "create-fix-request": {
+          "aliases": ["*create-fix-request"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-create-fix-request.md",
+          "resources": []
+        },
+        "test-design": {
+          "aliases": ["*test-design", "*generate-tests"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-test-design.md",
+          "resources": []
+        },
+        "run-tests": {
+          "aliases": ["*run-tests"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/qa-run-tests.md",
+          "resources": []
+        }
+      }
+    }
+  }
+}

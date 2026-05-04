@@ -1,0 +1,94 @@
+title: "[Ajuda] "
+labels:
+  - help-wanted
+  - troubleshooting
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Solucao de Problemas
+        Encontrou um problema? Vamos resolver juntos!
+
+        **Nota:** Se voce confirmou que e um bug, por favor [abra uma issue](https://github.com/caioimori/sinapse-ai/issues/new/choose).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: O que esta acontecendo?
+      description: Descreva o problema que voce esta enfrentando
+      placeholder: |
+        Descreva o que esta dando errado...
+
+        - O que voce estava tentando fazer?
+        - O que aconteceu em vez disso?
+        - Alguma mensagem de erro?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: O que voce esperava?
+      description: O que deveria ter acontecido?
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para Reproduzir
+      description: Como podemos reproduzir este problema?
+      placeholder: |
+        1. Passo 1
+        2. Passo 2
+        3. Ver erro
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Codigo / Configuracao
+      description: Compartilhe codigo ou configuracao relevante
+      render: javascript
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Saida de Erro
+      description: Mensagens de erro ou stack traces
+      render: shell
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Informacoes do seu sistema
+      placeholder: |
+        - SO: Windows 11 / macOS / Ubuntu
+        - Node.js: v20.x
+        - SINAPSE versao: x.x.x
+        - IDE: Claude Code / Codex / Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: O que voce ja tentou?
+      description: Liste solucoes que voce ja tentou
+      placeholder: |
+        - Tentei reiniciar...
+        - Limpei cache...
+        - Consultei documentacao...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Busquei discussoes existentes sobre problemas similares
+        - label: Consultei a documentacao
+        - label: Tentei com a versao mais recente
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Dica:** Quanto mais detalhes voce fornecer, mais rapido podemos ajudar! Se isso se confirmar como um bug, um maintainer ajudara voce a abrir uma issue.

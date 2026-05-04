@@ -1,0 +1,141 @@
+/**
+ * Unit tests for IDE transformers
+ * @story 6.19 - IDE Command Auto-Sync System
+ */
+
+const claudeCode = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code');
+
+describe('IDE Transformers', () => {
+  // Sample agent data for testing
+  const sampleAgent = {
+    path: '/path/to/developer.md',
+    filename: 'developer.md',
+    id: 'developer',
+    raw: '# developer\n\n```yaml\nagent:\n  name: Dex\n  id: developer\n```\n\nContent',
+    yaml: {
+      agent: {
+        name: 'Dex',
+        id: 'developer',
+        title: 'Full Stack Developer',
+        icon: '💻',
+        whenToUse: 'Use for code implementation',
+      },
+      persona_profile: {
+        archetype: 'Builder',
+      },
+      commands: [
+        { name: 'help', visibility: ['full', 'quick', 'key'], description: 'Show help' },
+        { name: 'develop', visibility: ['full', 'quick'], description: 'Develop story' },
+        { name: 'debug', visibility: ['full'], description: 'Debug mode' },
+        { name: 'exit', visibility: ['full', 'quick', 'key'], description: 'Exit agent' },
+      ],
+      dependencies: {
+        tasks: ['task1.md', 'task2.md'],
+        tools: ['git', 'context7'],
+      },
+    },
+    agent: {
+      name: 'Dex',
+      id: 'developer',
+      title: 'Full Stack Developer',
+      icon: '💻',
+      whenToUse: 'Use for code implementation',
+    },
+    persona_profile: {
+      archetype: 'Builder',
+    },
+    commands: [
+      { name: 'help', visibility: ['full', 'quick', 'key'], description: 'Show help' },
+      { name: 'develop', visibility: ['full', 'quick'], description: 'Develop story' },
+      { name: 'debug', visibility: ['full'], description: 'Debug mode' },
+      { name: 'exit', visibility: ['full', 'quick', 'key'], description: 'Exit agent' },
+    ],
+    dependencies: {
+      tasks: ['task1.md', 'task2.md'],
+      tools: ['git', 'context7'],
+    },
+    sections: {
+      quickCommands: '- `*help` - Show help',
+      collaboration: 'Works with @quality-gate and @sprint-lead',
+      guide: 'Developer guide content',
+    },
+    error: null,
+  };
+
+  describe('claude-code transformer', () => {
+    it('should return raw content (identity transform)', () => {
+      const result = claudeCode.transform(sampleAgent);
+      expect(result).toContain('# developer');
+      expect(result).toContain('```yaml');
+    });
+
+    it('should add sync footer if not present', () => {
+      const result = claudeCode.transform(sampleAgent);
+      expect(result).toContain('Synced from .sinapse-ai/development/agents/developer.md');
+    });
+
+    it('should not duplicate sync footer', () => {
+      const agentWithFooter = {
+        ...sampleAgent,
+        raw:
+          sampleAgent.raw +
+          '\n---\n*SINAPSE Agent - Synced from .sinapse-ai/development/agents/developer.md*',
+      };
+      const result = claudeCode.transform(agentWithFooter);
+      const footerCount = (result.match(/Synced from/g) || []).length;
+      expect(footerCount).toBe(1);
+    });
+
+    it('should return correct filename', () => {
+      expect(claudeCode.getFilename(sampleAgent)).toBe('developer.md');
+    });
+
+    it('should have correct format identifier', () => {
+      expect(claudeCode.format).toBe('full-markdown-yaml');
+    });
+
+    it('should handle agent without raw content', () => {
+      const noRaw = { ...sampleAgent, raw: null };
+      const result = claudeCode.transform(noRaw);
+      expect(result).toContain('Dex');
+      expect(result).toContain('Full Stack Developer');
+    });
+  });
+
+  describe('all transformers', () => {
+    const transformers = [claudeCode];
+
+    it('should handle agent with minimal data', () => {
+      const minimal = {
+        filename: 'minimal.md',
+        id: 'minimal',
+        agent: null,
+        persona_profile: null,
+        commands: [],
+        dependencies: null,
+        sections: {},
+        error: null,
+      };
+
+      for (const transformer of transformers) {
+        expect(() => transformer.transform(minimal)).not.toThrow();
+        const result = transformer.transform(minimal);
+        expect(typeof result).toBe('string');
+        expect(result.length).toBeGreaterThan(0);
+      }
+    });
+
+    it('should return valid filename for all', () => {
+      for (const transformer of transformers) {
+        const filename = transformer.getFilename(sampleAgent);
+        expect(filename).toBe('developer.md');
+      }
+    });
+
+    it('should have format property', () => {
+      for (const transformer of transformers) {
+        expect(typeof transformer.format).toBe('string');
+      }
+    });
+  });
+});

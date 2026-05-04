@@ -1,0 +1,59 @@
+# ========================================
+# SINAPSE Project Ignores
+# Applied by: sinapse setup-infra
+# ========================================
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+
+# Environment (NEVER commit real values)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# Testing
+coverage/
+.nyc_output/
+test-results/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE & Editor
+.vscode/settings.json
+.idea/
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# SINAPSE runtime
+.sinapse/
+.sinapse-ai/.cache/
+.sinapse-ai/logs/
+.sinapse-ai/*.local.yaml
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.swp
+*~

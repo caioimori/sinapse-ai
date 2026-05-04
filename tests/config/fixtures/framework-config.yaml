@@ -1,0 +1,21 @@
+# Test fixture: L1 Framework config
+metadata:
+  framework_name: "SINAPSE-FullStack"
+  framework_version: "3.12.0"
+
+resource_locations:
+  agents: ".sinapse-ai/development/agents"
+  tasks: ".sinapse-ai/development/tasks"
+
+performance_defaults:
+  max_concurrent_operations: 4
+  cache_ttl_seconds: 300
+
+utility_scripts_registry:
+  scripts_base: ".sinapse-ai/development/scripts"
+
+ide_sync_system:
+  enabled: true
+  targets:
+    - ".claude/CLAUDE.md"
+

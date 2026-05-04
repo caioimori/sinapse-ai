@@ -1,0 +1,71 @@
+title: "[Ideia] "
+labels:
+  - idea
+  - community
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Compartilhe sua Ideia
+        Obrigado por contribuir! Descreva sua ideia claramente para que possamos avaliar.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area relacionada
+      description: Selecione a area mais relevante para sua ideia
+      options:
+        - sinapse-ai (Core Framework)
+        - Squads (Pacotes de Agentes)
+        - CLI e Installer
+        - Documentacao
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descricao da ideia
+      description: O que voce gostaria de ver no SINAPSE-AI?
+      placeholder: |
+        Uma descricao clara e concisa da sua ideia...
+
+        - Qual problema ela resolve?
+        - Quem se beneficiaria?
+        - Como deveria funcionar?
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Caso de Uso
+      description: Como voce usaria esta funcionalidade?
+      placeholder: |
+        Descreva um cenario real onde isso seria util...
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas
+      description: Voce considerou alguma alternativa ou workaround?
+      placeholder: |
+        - Alternativa 1
+        - Alternativa 2
+        - Workaround atual (se houver)
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Voce estaria disposto a contribuir?
+      options:
+        - label: Tenho interesse em implementar esta funcionalidade
+        - label: Posso ajudar com documentacao
+        - label: Posso ajudar com testes
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Nota:** Ideias sao revisadas pelos maintainers. Ideias aprovadas podem se tornar GitHub Issues para implementacao.

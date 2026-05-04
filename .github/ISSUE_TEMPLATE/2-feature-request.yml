@@ -1,0 +1,77 @@
+name: Solicitacao de Feature
+description: Sugerir uma nova funcionalidade ou melhoria para o SINAPSE-AI
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sugerir uma feature! Descreva sua ideia claramente para que possamos avaliar.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descricao da Feature
+      description: Uma descricao clara e concisa da funcionalidade.
+      placeholder: Descreva a feature...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema que Resolve
+      description: Qual problema esta feature resolve? Qual caso de uso ela habilita?
+      placeholder: "Sua solicitacao esta relacionada a um problema? Descreva..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solucao Proposta (opcional)
+      description: Como esta feature deveria funcionar? Qual API ou interface voce esperaria?
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas (opcional)
+      description: Outras abordagens que voce considerou ou workarounds existentes.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area / Pacote
+      description: Em qual parte do SINAPSE-AI esta feature deveria pertencer?
+      options:
+        - "Core Framework (.sinapse-ai/core/)"
+        - "Installer (packages/installer/)"
+        - "CLI (bin/)"
+        - "SYNAPSE Context Engine"
+        - "Health Check System"
+        - "Sistema de Agentes (.sinapse-ai/development/agents/)"
+        - "Sistema de Tasks (.sinapse-ai/development/tasks/)"
+        - "Memory / Knowledge Base"
+        - "Documentacao"
+        - "Novo pacote / modulo"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribuicao da Comunidade
+      options:
+        - label: "Estou disposto a contribuir com a implementacao desta feature"
+        - label: "Posso ajudar com documentacao"
+        - label: "Posso ajudar com testes"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "Busquei issues e feature requests existentes"
+          required: true
+        - label: "Forneci um caso de uso claro para esta feature"
+          required: true

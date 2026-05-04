@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "sinapse-ai": ["./.sinapse-ai/core"],
+      "sinapse-ai/*": ["./.sinapse-ai/core/*"]
+    }
+  },
+  "include": [
+    "types/**/*.d.ts",
+    ".sinapse-ai/**/*",
+    "tools/**/*",
+    "scripts/**/*",
+    "src/**/*",
+    "common/**/*",
+    "bin/**/*",
+    "*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".tsbuildinfo",
+    "coverage",
+    ".test-temp",
+    "**/*-tmpl.*",
+    "**/*.tmpl.*",
+    "**/*-template.*",
+    ".sinapse-ai/development/templates/**",
+    ".sinapse-ai.backup*/**",
+    "sinapse-ai.backup*/**",
+    "sinapse-ai-deprecated/**",
+    "sinapse-ai-depracated/**",
+    "eslint.config.js"
+  ]
+}

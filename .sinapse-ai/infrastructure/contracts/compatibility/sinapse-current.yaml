@@ -1,0 +1,35 @@
+# Compatibility Contract — current
+#
+# This file is the authoritative compatibility contract for the CURRENT release.
+# When the IDE matrix or required-checks set changes, edit this file in place
+# and bump the release/updated_at fields.
+#
+# A snapshot of the previous contract may be kept under a versioned name
+# (e.g. sinapse-4.0.4.yaml) to support contract diffing via the validator's
+# --diff=<path> flag, but the loader always prefers sinapse-current.yaml.
+#
+# See README.md in this directory for the versioning policy.
+
+release: "SINAPSE 10.0.0"
+updated_at: "2026-04-12"
+source_of_truth:
+  docs_matrix: "docs/ide-integration.md"
+  validator: ".sinapse-ai/infrastructure/scripts/validate-parity.js"
+
+global_required_checks:
+  - paths
+
+ide_matrix:
+  - ide: "claude-code"
+    display_name: "Claude Code"
+    expected_status: "Works"
+    required_checks:
+      - claude-sync
+      - claude-integration
+  - ide: "codex"
+    display_name: "Codex CLI"
+    expected_status: "Limited"
+    required_checks:
+      - codex-sync
+      - codex-integration
+      - codex-skills

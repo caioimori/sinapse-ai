@@ -1,0 +1,130 @@
+name: Quarterly Architecture Gap Audit
+
+on:
+  schedule:
+    - cron: '0 9 1 1,4,7,10 *'  # First day of each quarter, 9am UTC
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    name: Framework Gap Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Count framework entities
+        id: counts
+        run: |
+          echo "## Framework Entity Counts" > audit-report.md
+          echo "" >> audit-report.md
+          echo "| Entity | Count |" >> audit-report.md
+          echo "|--------|-------|" >> audit-report.md
+
+          # Count agents
+          AGENT_COUNT=$(find .sinapse-ai/development/agents -maxdepth 1 -name "*.md" | wc -l)
+          echo "| Core Agents | $AGENT_COUNT |" >> audit-report.md
+
+          # Count tasks
+          TASK_COUNT=$(find .sinapse-ai/development/tasks -name "*.md" | wc -l)
+          echo "| Tasks | $TASK_COUNT |" >> audit-report.md
+
+          # Count workflows
+          WF_COUNT=$(find .sinapse-ai/development/workflows -name "*.yaml" -o -name "*.yml" | wc -l)
+          echo "| Workflows | $WF_COUNT |" >> audit-report.md
+
+          # Count squads
+          SQUAD_COUNT=$(find squads -maxdepth 1 -type d | tail -n +2 | wc -l)
+          echo "| Squads | $SQUAD_COUNT |" >> audit-report.md
+
+          # Count hooks
+          HOOK_COUNT=$(find .claude/hooks -name "*.cjs" -o -name "*.py" -o -name "*.sh" | wc -l)
+          echo "| Active Hooks | $HOOK_COUNT |" >> audit-report.md
+
+          # Count rules
+          RULE_COUNT=$(find .claude/rules -name "*.md" | wc -l)
+          echo "| Rules | $RULE_COUNT |" >> audit-report.md
+
+          # Count tests
+          TEST_COUNT=$(find tests -name "*.test.js" -o -name "*.test.ts" | wc -l)
+          echo "| Test Files | $TEST_COUNT |" >> audit-report.md
+
+          # Count CI workflows
+          CI_COUNT=$(find .github/workflows -name "*.yml" | wc -l)
+          echo "| CI Workflows | $CI_COUNT |" >> audit-report.md
+
+          echo "" >> audit-report.md
+          echo "**Audit Date:** $(date -u +%Y-%m-%d)" >> audit-report.md
+          echo "**Commit:** ${{ github.sha }}" >> audit-report.md
+
+      - name: Check for orphaned references
+        run: |
+          echo "" >> audit-report.md
+          echo "## Orphaned References Check" >> audit-report.md
+          echo "" >> audit-report.md
+
+          # Check if agent files reference tasks that exist
+          ORPHANS=0
+          for agent in .sinapse-ai/development/agents/*.md; do
+            AGENT_NAME=$(basename "$agent" .md)
+            # Check for task references that might not exist
+            REFS=$(grep -oP 'tasks/[a-z0-9-]+\.md' "$agent" 2>/dev/null || true)
+            for ref in $REFS; do
+              if [ ! -f ".sinapse-ai/development/$ref" ]; then
+                echo "- **Orphan:** \`$AGENT_NAME\` references \`$ref\` (not found)" >> audit-report.md
+                ORPHANS=$((ORPHANS + 1))
+              fi
+            done
+          done
+
+          if [ $ORPHANS -eq 0 ]; then
+            echo "No orphaned references found." >> audit-report.md
+          else
+            echo "" >> audit-report.md
+            echo "**Total orphans: $ORPHANS**" >> audit-report.md
+          fi
+
+      - name: Run manifest validation
+        run: |
+          echo "" >> audit-report.md
+          echo "## Manifest Validation" >> audit-report.md
+          echo "" >> audit-report.md
+          npm run validate:manifest 2>&1 | tail -5 >> audit-report.md || echo "Manifest validation failed" >> audit-report.md
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: quarterly-gap-audit-${{ github.run_number }}
+          path: audit-report.md
+
+      - name: Create issue with findings
+        if: github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('audit-report.md', 'utf8');
+            const quarter = Math.ceil((new Date().getMonth() + 1) / 3);
+            const year = new Date().getFullYear();
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[Audit] Gap Audit Q${quarter} ${year}`,
+              body: `# Quarterly Architecture Gap Audit\n\n${report}\n\n---\n*Generated automatically by quarterly-gap-audit workflow*`,
+              labels: ['audit', 'architecture']
+            });

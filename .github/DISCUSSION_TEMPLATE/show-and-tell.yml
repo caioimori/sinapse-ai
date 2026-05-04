@@ -1,0 +1,95 @@
+title: "[Showcase] "
+labels:
+  - community
+  - showcase
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Mostre o que Voce Construiu
+        Construiu algo com SINAPSE-AI? Compartilhe com a comunidade!
+
+        Adoramos ver o que voce criou. Seu projeto pode inspirar outros!
+
+  - type: input
+    id: project-name
+    attributes:
+      label: Nome do Projeto
+      description: Como se chama seu projeto?
+      placeholder: Meu Projeto com SINAPSE-AI
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descricao
+      description: Conte-nos sobre seu projeto
+      placeholder: |
+        O que seu projeto faz?
+        Qual problema ele resolve?
+        Para quem ele e feito?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: sinapse-components
+    attributes:
+      label: Componentes do SINAPSE Utilizados
+      description: Quais partes do SINAPSE seu projeto usa?
+      multiple: true
+      options:
+        - sinapse-ai (Core Framework)
+        - Squads do SINAPSE
+        - Agentes Customizados
+        - Tasks Customizadas
+        - Workflows Customizados
+        - CLI / Installer
+    validations:
+      required: true
+
+  - type: textarea
+    id: features
+    attributes:
+      label: Funcionalidades Principais
+      description: Quais sao as principais funcionalidades do seu projeto?
+      placeholder: |
+        - Funcionalidade 1
+        - Funcionalidade 2
+        - Funcionalidade 3
+
+  - type: textarea
+    id: code-snippet
+    attributes:
+      label: Trecho de Codigo (opcional)
+      description: Compartilhe um trecho de codigo interessante
+      render: javascript
+
+  - type: input
+    id: link
+    attributes:
+      label: Link do Projeto (opcional)
+      description: Repositorio GitHub, demo ou website
+      placeholder: https://github.com/username/projeto
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots ou Demo (opcional)
+      description: Arraste e solte imagens ou cole links para demos
+
+  - type: textarea
+    id: lessons-learned
+    attributes:
+      label: Licoes Aprendidas (opcional)
+      description: O que voce aprendeu construindo isso?
+      placeholder: |
+        - Dica 1
+        - Desafio que superei
+        - Algo que gostaria de ter sabido antes
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Obrigado por compartilhar!** Sua contribuicao ajuda a comunidade SINAPSE-AI a crescer.

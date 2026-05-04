@@ -1,0 +1,130 @@
+# Pitch Narrative Workflow
+# Complete pitch development from strategy through presentation-ready materials
+
+workflow:
+  id: wf-pitch-narrative
+  name: "Pipeline de Narrativa de Pitch"
+  version: "1.0"
+  trigger: "*pitch-narrative"
+  entry_agent: storytelling-orqx
+  estimated_duration: "2-4 hours"
+  description: |
+    Construir um ecossistema completo de narrativa de pitch e brand: estrategia de
+    frame control, historias de negocio, narrativa de apresentacao e manifesto de marca.
+    Combina especialistas em pitch, business storytelling e apresentacoes.
+
+  type: sequential
+  sequence:
+    - agent: park-howell
+      action: build-brand-narrative
+      creates: brand_story
+    - agent: kindra-hall
+      action: build-business-stories
+      creates: business_stories
+    - agent: oren-klaff
+      action: create-pitch
+      creates: pitch_narrative
+    - agent: nancy-duarte
+      action: create-presentation
+      creates: presentation
+
+phases:
+  - id: phase_1_brand_story
+    name: "Core Brand Narrative"
+    agent: park-howell
+    task: build-brand-narrative.md
+    depends_on: []
+    description: "Define the brand's And-But-Therefore narrative and core identity story"
+    checkpoint:
+      gate: "Brand ABT defined with clear identity, conflict, and resolution"
+      veto: "HALT if brand values are undefined — must clarify before storytelling"
+    outputs:
+      - brand_abt
+      - brand_identity_narrative
+      - story_cycle
+      - core_values_expressed
+
+  - id: phase_2_business_stories
+    name: "Business Story Suite"
+    agent: kindra-hall
+    task: build-business-stories.md
+    depends_on: [phase_1_brand_story]
+    description: "Build the four essential brand stories: Value, Founder, Purpose, Customer"
+    checkpoint:
+      gate: "All four story types drafted with specific, relatable examples"
+      veto: "HALT if stories lack specificity — generic stories do not stick"
+    outputs:
+      - value_story
+      - founder_story
+      - purpose_story
+      - customer_story
+
+  - id: phase_3_pitch
+    name: "Pitch Narrative (STRONG)"
+    agent: oren-klaff
+    task: create-pitch.md
+    depends_on: [phase_1_brand_story, phase_2_business_stories]
+    description: "Structure the pitch using STRONG method with frame control strategy"
+    checkpoint:
+      gate: "STRONG phases complete with frame strategy and croc brain optimization"
+      veto: "HALT if no clear hookpoint within first 5 minutes"
+    outputs:
+      - pitch_narrative
+      - frame_strategy
+      - hookpoint_design
+      - objection_handling
+
+  - id: phase_4_presentation
+    name: "Presentation Materials (Sparkline)"
+    agent: nancy-duarte
+    task: create-presentation.md
+    depends_on: [phase_3_pitch]
+    description: "Package the pitch narrative into presentation-ready Sparkline format"
+    checkpoint:
+      gate: "Sparkline structure complete with S.T.A.R. moment and call to action"
+      veto: "HALT if presentation lacks clear call to action or audience empowerment"
+    outputs:
+      - sparkline_structure
+      - star_moment
+      - slide_concepts
+      - call_to_action
+
+  - id: phase_5_manifesto
+    name: "Movement Manifesto (optional)"
+    agent: marshall-ganz
+    task: write-manifesto.md
+    depends_on: [phase_1_brand_story]
+    description: "Create a brand/movement manifesto using Public Narrative — optional phase"
+    optional: true
+    checkpoint:
+      gate: "Manifesto weaves Self/Us/Now with authentic emotional truth"
+      veto: "HALT if manifesto lacks genuine personal origin or urgent call to action"
+    outputs:
+      - manifesto
+      - rallying_cry
+      - story_of_self
+      - story_of_us
+      - story_of_now
+
+  - id: phase_6_review
+    name: "Final Quality Review"
+    agent: storytelling-orqx
+    task: review-narrative-output.md
+    depends_on: [phase_4_presentation]
+    description: "Review all deliverables for coherence, emotional impact, and audience alignment"
+    checkpoint:
+      gate: "All narratives are coherent, emotionally powerful, and ready for use"
+      veto: "HALT if pitch and presentation narratives are misaligned"
+    outputs:
+      - quality_review
+      - final_approval
+      - revision_notes
+
+completion_criteria:
+  - "Core brand ABT narrative defined"
+  - "Four essential business stories completed (Value, Founder, Purpose, Customer)"
+  - "Pitch structured with STRONG method and frame control"
+  - "Presentation designed with Sparkline and S.T.A.R. moment"
+  - "All narratives are coherent and aligned"
+  - "Clear calls to action throughout"
+  - "Quality review passed"

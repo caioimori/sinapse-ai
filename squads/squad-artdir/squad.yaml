@@ -1,0 +1,279 @@
+name: squad-artdir
+version: "2.0.0"
+description: >
+  Art direction for retention, conversion AND platform premium packaging.
+  v1.0 was born for landing pages. v2.0 extends the framework from 7 to 10
+  Pillars to cover SaaS platforms, logged-in product surfaces, multi-surface
+  design systems, and premium packaging that justifies 3x pricing. The core
+  principle is unchanged: every pixel carries behavioral intent, every
+  aesthetic decision is justified by a psychological principle and measured
+  by either conversion (LP) or retention + perceived value (Platform).
+author: Caio Imori
+license: MIT
+slashPrefix: SINAPSE
+
+metadata:
+  created_at: "2026-04-10"
+  updated_at: "2026-04-12"
+  created_by: "squad-creator (Craft)"
+  expanded_by: "sinapse-orqx (Imperator) via EPIC-artdir-v2"
+  agents_count: 14
+  tasks_count: 13
+  knowledge_bases_count: 8
+  workflows_count: 3
+  checklists_count: 1
+  templates_count: 1
+  total_files: 46
+  agents: 14
+  tasks: 13
+  workflows: 0
+  knowledge_bases: 8
+  checklists: 1
+  templates: 1
+  preferences: 0
+
+agents:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # v1.0 CORE (10 agents — LP-focused, preserved verbatim)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: artdir-orqx
+    name: Canvas
+    file: agents/artdir-orqx.md
+    role: "Orquestrador — coordena os 10 pilares, roteia briefings (LP vs Platform), entrega os deliverables padrao"
+    tasks:
+      - create-art-direction-brief
+      - validate-against-pillars
+
+  - id: visual-strategist
+    name: Prism
+    file: agents/visual-strategist.md
+    role: "Define linguagem visual, mood, posicionamento estetico baseado em audiencia e categoria"
+    tasks:
+      - diagnose-visual-language
+      - create-art-direction-brief
+
+  - id: motion-architect
+    name: Tempo
+    file: agents/motion-architect.md
+    role: "Sistema de motion — timing, easing, selecao de lib, performance, Disney 12 principles"
+    tasks:
+      - specify-motion-system
+
+  - id: type-systemist
+    name: Kern
+    file: agents/type-systemist.md
+    role: "Type scale, font pairing, tracking, hierarquia tipografica, fluid typography, custom type (premium)"
+    tasks:
+      - create-art-direction-brief
+
+  - id: color-psychologist
+    name: Spectrum
+    file: agents/color-psychologist.md
+    role: "Sistemas de cor justificados por neurociencia, WCAG AAA, Von Restorff, emotion mapping"
+    tasks:
+      - design-color-system
+
+  - id: layout-engineer
+    name: Grid
+    file: agents/layout-engineer.md
+    role: "Grids, spacing, full-bleed vs contained, responsividade, container queries"
+    tasks:
+      - create-wireflow
+
+  - id: ia-architect
+    name: Flow
+    file: agents/ia-architect.md
+    role: "Arquitetura de informacao para retencao cognitiva — disclosure, Zeigarnik, curiosity gaps"
+    tasks:
+      - create-wireflow
+      - audit-conversion
+
+  - id: cro-persuasion
+    name: Convert
+    file: agents/cro-persuasion.md
+    role: "Padroes de conversao — comparison tables, social proof, scarcity, risk reversal, sticky bars"
+    tasks:
+      - audit-conversion
+
+  - id: interaction-designer
+    name: Pulse
+    file: agents/interaction-designer.md
+    role: "Hover states, micro-interactions, feedback loops, custom cursors, prefers-reduced-motion"
+    tasks:
+      - specify-motion-system
+
+  - id: accessibility-guardian
+    name: Shield
+    file: agents/accessibility-guardian.md
+    role: "WCAG AAA, prefers-reduced-motion, contraste, HTML semantico, keyboard nav, ARIA, focus"
+    tasks:
+      - validate-against-pillars
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # v2.0 EXPANSION (4 agents — Platform / SaaS / Premium Packaging)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: product-surface-director
+    name: Axiom
+    file: agents/product-surface-director.md
+    role: "Art direction de surfaces logadas — dashboards, empty states, data density, dark mode parity, choreographia de onboarding. Pilar 8."
+    tasks:
+      - design-product-surface
+      - first-5-minutes-choreography
+
+  - id: design-system-architect
+    name: Atlas
+    file: agents/design-system-architect.md
+    role: "Multi-surface design system — canonical tokens, surface dialects, semver, ownership, quarterly drift audit. Pilar 9."
+    tasks:
+      - design-token-system
+      - audit-drift-multi-surface
+
+  - id: platform-aesthetic-director
+    name: Vertex
+    file: agents/platform-aesthetic-director.md
+    role: "Custodiante do canon de SaaS premium (Linear/Vercel/Stripe/Framer/Arc/Raycast). Lens nos Pilares 8, 9, 10. Previne commodity contamination."
+    tasks:
+      - consult-saas-canon
+
+  - id: premium-packaging-strategist
+    name: Aura
+    file: agents/premium-packaging-strategist.md
+    role: "Traduz 'cobrar 3x mais' em decisoes estheticas concretas. Aplica os 5 principios nao-negociaveis. Pilar 10."
+    tasks:
+      - create-premium-packaging-brief
+      - first-5-minutes-choreography
+
+# ═══════════════════════════════════════════════════════════════════════════
+# KNOWLEDGE BASES — v1.0 (5) + v2.0 (2) = 7
+# ═══════════════════════════════════════════════════════════════════════════
+
+knowledge_bases:
+  - name: seven-pillars-framework
+    file: knowledge-base/seven-pillars-framework.md
+    description: "Os 7 pilares originais (v1.0) — preservado verbatim, canon LP"
+  - name: ten-pillars-framework
+    file: knowledge-base/ten-pillars-framework.md
+    description: "v2.0 extension — 10 pilares com applicability matrix LP vs Platform"
+  - name: psychological-toolkit
+    file: knowledge-base/psychological-toolkit.md
+    description: "Arsenal psicologico — 10 vieses cognitivos, 6 principios de retencao, 6 leis UX, 7 Gestalt"
+  - name: case-nyo-ia-reference
+    file: knowledge-base/case-nyo-ia-reference.md
+    description: "Analise completa do nyo.ia.br como referencia canonica de art direction para LP de conversao"
+  - name: saas-art-direction-canon
+    file: knowledge-base/saas-art-direction-canon.md
+    description: "v2.0 — Canon de 6 refs premium (Linear, Vercel, Stripe, Framer, Arc, Raycast) decomposto em 5 dimensoes"
+  - name: premium-packaging-principles
+    file: knowledge-base/premium-packaging-principles.md
+    description: "v2.0 — Os 5 principios nao-negociaveis de premium packaging (council-orqx pressurization)"
+  - name: motion-technique-catalog
+    file: knowledge-base/motion-technique-catalog.md
+    description: "Catalogo de tecnicas de motion com lib, easing, duracao e regras de performance"
+  - name: deliverables-templates
+    file: knowledge-base/deliverables-templates.md
+    description: "Templates dos 8 deliverables padrao da squad"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TASKS — v1.0 (7) + v2.0 (6) = 13
+# ═══════════════════════════════════════════════════════════════════════════
+
+tasks:
+  # v1.0
+  - name: create-art-direction-brief
+    file: tasks/create-art-direction-brief.md
+  - name: diagnose-visual-language
+    file: tasks/diagnose-visual-language.md
+  - name: design-color-system
+    file: tasks/design-color-system.md
+  - name: specify-motion-system
+    file: tasks/specify-motion-system.md
+  - name: create-wireflow
+    file: tasks/create-wireflow.md
+  - name: audit-conversion
+    file: tasks/audit-conversion.md
+  - name: validate-against-pillars
+    file: tasks/validate-against-pillars.md
+  # v2.0
+  - name: design-product-surface
+    file: tasks/design-product-surface.md
+  - name: design-token-system
+    file: tasks/design-token-system.md
+  - name: audit-drift-multi-surface
+    file: tasks/audit-drift-multi-surface.md
+  - name: create-premium-packaging-brief
+    file: tasks/create-premium-packaging-brief.md
+  - name: consult-saas-canon
+    file: tasks/consult-saas-canon.md
+  - name: first-5-minutes-choreography
+    file: tasks/first-5-minutes-choreography.md
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WORKFLOWS — v1.0 (2) + v2.0 (1) = 3
+# ═══════════════════════════════════════════════════════════════════════════
+
+workflows:
+  - name: full-art-direction-cycle
+    file: workflows/full-art-direction-cycle.yaml
+    description: "v1.0 — Ciclo completo LP do briefing ao art direction brief validado contra 7 pilares"
+  - name: conversion-audit-cycle
+    file: workflows/conversion-audit-cycle.yaml
+    description: "v1.0 — Auditoria de conversao de site/LP existente"
+  - name: saas-platform-art-direction-cycle
+    file: workflows/saas-platform-art-direction-cycle.yaml
+    description: "v2.0 — Ciclo completo para SaaS/plataforma/produto logado aplicando os 10 Pilares (canon -> token system -> product surface -> first 5 minutes -> premium packaging -> drift audit -> validate)"
+
+checklists:
+  - name: seven-pillars-validation-checklist
+    file: checklists/seven-pillars-validation-checklist.md
+
+templates:
+  - name: art-direction-brief-template
+    file: templates/art-direction-brief-template.md
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CROSS-SQUAD CONNECTIONS
+# ═══════════════════════════════════════════════════════════════════════════
+
+cross_squad_connections:
+  inbound:
+    - squad-brand: "Brand guidelines, identidade visual, paleta de cores, tom visual, root tokens para Atlas"
+    - squad-research: "Pesquisa de audiencia, analise de concorrentes, benchmarks de conversao, feeds para Vertex"
+    - squad-copy: "Copy strategy, headlines, microcopy, CTA labels"
+    - squad-product: "PRDs, roadmap de features, personas, fluxo de uso diario para Axiom"
+    - squad-council: "Pressurizacao estrategica (v2.0: fonte dos 5 principios de premium packaging)"
+    - squad-finance: "Pricing power, unit economics que justificam posicionamento premium (input para Aura)"
+  outbound:
+    - squad-design: "Art direction brief, design tokens (DDL completo do Atlas), motion spec, wireflow anotado, component spec"
+    - squad-animations: "Motion spec, easing curves, timing tokens, kinesthetic narrative, custom motion signatures"
+    - squad-content: "Hierarquia visual para conteudo, pacing de leitura"
+    - squad-growth: "CRO patterns map, hipoteses de impacto, metricas de conversao + retencao"
+    - squad-commercial: "Pricing page art direction, premium packaging brief"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# v2.0 CHANGELOG
+# ═══════════════════════════════════════════════════════════════════════════
+
+changelog:
+  - version: "2.0.0"
+    date: "2026-04-12"
+    type: "major — additive expansion"
+    epic: "EPIC-artdir-v2"
+    summary: >
+      Expansion from LP-only to full platform/SaaS art direction. Framework
+      extended from 7 to 10 Pillars. 4 new specialist agents (Axiom, Atlas,
+      Vertex, Aura). 6 new tasks. 2 new knowledge bases. 1 new workflow.
+      v1.0 agents and pillars preserved verbatim for backward compatibility.
+    additions:
+      - "4 new agents: product-surface-director (Axiom), design-system-architect (Atlas), platform-aesthetic-director (Vertex), premium-packaging-strategist (Aura)"
+      - "6 new tasks: design-product-surface, design-token-system, audit-drift-multi-surface, create-premium-packaging-brief, consult-saas-canon, first-5-minutes-choreography"
+      - "2 new KBs: saas-art-direction-canon, premium-packaging-principles"
+      - "1 new KB for framework: ten-pillars-framework (extends seven-pillars)"
+      - "1 new workflow: saas-platform-art-direction-cycle"
+    breaking_changes: []
+    backward_compat: "Full — all v1.0 components preserved"
+  - version: "1.0.0"
+    date: "2026-04-10"
+    type: "initial release"
+    summary: "Squad created for LP art direction with 7 Pillars, 10 agents, 7 tasks, 5 KBs, 2 workflows"

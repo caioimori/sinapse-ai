@@ -1,0 +1,90 @@
+#!/usr/bin/env sh
+#
+# pre-push hook
+#
+# Runs two safety checks before allowing a push:
+#
+#   1. pre-push-safety.js   - existing branch/safety net
+#   2. validate:parity:fast - cross-IDE drift guard (Story 10.18)
+#
+# The parity check short-circuits when no file under
+# .sinapse-ai/development/agents/ has changed in the commits being pushed,
+# so a typical push pays zero overhead.
+#
+# To bypass both checks in an emergency:    git push --no-verify
+# To fix a parity failure:                  npm run sync:ide
+#                                           git add .claude .codex
+#                                           git commit --amend --no-edit
+#
+
+set -e
+
+node bin/utils/pre-push-safety.js
+
+# Third-party references guard (2026-04-18).
+# Blocks push if any file references forbidden external framework names.
+# See scripts/validate-no-external-refs.js for the full list.
+# This is the same check CI runs, surfaced locally to prevent red-CI cycles.
+if ! npm run --silent validate:no-external-refs; then
+  echo ""
+  echo "Push blocked: external framework references detected."
+  echo ""
+  echo "Fix:"
+  echo "  1. Rewrite in SINAPSE voice (see policy in memory/feedback_third_party_references.md)"
+  echo "  2. git add ..."
+  echo "  3. git commit"
+  echo "  4. git push"
+  echo ""
+  echo "Bypass (emergency only):  git push --no-verify"
+  exit 1
+fi
+
+# Story A.4 — install-manifest parity guard.
+# Blocks push if install-manifest.yaml / entity-registry.yaml disagree
+# with the real files under .sinapse-ai/development/{agents,tasks,
+# templates,checklists}/. Runs in <1s (filesystem only, no hashing).
+if ! npm run --silent validate:manifest:parity; then
+  echo ""
+  echo "Push blocked: install-manifest.yaml / entity-registry.yaml drift detected."
+  echo ""
+  echo "Fix:"
+  echo "  1. npm run generate:manifest"
+  echo "  2. review entity-registry.yaml agents section"
+  echo "  3. git add .sinapse-ai/install-manifest.yaml .sinapse-ai/data/entity-registry.yaml"
+  echo "  4. git commit --amend --no-edit   (or a new commit)"
+  echo "  5. git push"
+  echo ""
+  echo "Bypass (emergency only):  git push --no-verify"
+  exit 1
+fi
+
+# Resolve the upstream ref to diff against. If the branch has no upstream
+# (first push), diff against origin/main as a sane default.
+upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main")"
+
+# Get the list of files that changed between upstream and HEAD. If git
+# cannot resolve the upstream (truly orphan branch), assume something
+# under agents/ may have changed and run the full check.
+if changed_files="$(git diff --name-only "$upstream"...HEAD 2>/dev/null)"; then
+  case "$changed_files" in
+    *".sinapse-ai/development/agents/"*)
+      echo "🔍 Cross-IDE parity check (agent files changed)..."
+      if ! npm run --silent validate:parity:fast; then
+        echo ""
+        echo "❌ Push blocked: .claude/ or .codex/ is out of sync with .sinapse-ai/development/agents/"
+        echo ""
+        echo "Fix:"
+        echo "  1. npm run sync:ide"
+        echo "  2. git add .claude .codex"
+        echo "  3. git commit --amend --no-edit   (or a new commit if you prefer)"
+        echo "  4. git push"
+        echo ""
+        echo "Bypass (emergency only):  git push --no-verify"
+        exit 1
+      fi
+      ;;
+    *)
+      # No agent files touched — skip the parity check entirely
+      ;;
+  esac
+fi

@@ -1,0 +1,67 @@
+title: "[Pergunta] "
+labels:
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Faca sua Pergunta
+        Tem uma duvida sobre o SINAPSE-AI? Pergunte aqui e a comunidade vai ajudar!
+
+        **Antes de postar:**
+        - Verifique discussoes e documentacao existentes
+        - Busque perguntas similares
+        - Inclua exemplos de codigo relevantes
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Tipo de Pergunta
+      description: Que tipo de ajuda voce precisa?
+      options:
+        - Como eu faco...? (Pergunta de uso)
+        - Por que...? (Entender comportamento)
+        - Qual a melhor forma de...? (Boas praticas)
+        - E possivel...? (Pergunta sobre capacidade)
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Sua Pergunta
+      description: Seja o mais especifico possivel
+      placeholder: |
+        Descreva sua pergunta em detalhes...
+
+        Inclua:
+        - O que voce esta tentando fazer
+        - O que voce ja tentou
+        - Mensagens de erro ou comportamento inesperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: code-example
+    attributes:
+      label: Exemplo de Codigo (se aplicavel)
+      description: Compartilhe codigo relevante para nos ajudar a entender sua pergunta
+      render: javascript
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto Adicional
+      description: Qualquer informacao relevante adicional
+      placeholder: |
+        - SO: Windows/macOS/Linux
+        - Versao do Node.js:
+        - Versao do SINAPSE:
+        - IDE: Claude Code/Codex/Outro
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Dica:** Perguntas marcadas como respondidas ajudam futuros usuarios! Se sua pergunta for resolvida, marque a melhor resposta.

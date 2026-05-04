@@ -1,0 +1,30 @@
+# SINAPSE Code Owners
+# Caio is the primary owner — his approval is required for ALL PRs.
+# Matheus can merge after Caio approves. Caio can bypass (admin).
+
+# Default — Caio must approve all changes
+* @caioimori
+
+# Critical paths — framework core (Caio only)
+.sinapse-ai/core/ @caioimori
+.sinapse-ai/constitution.md @caioimori
+bin/ @caioimori
+
+# Framework templates (Caio only)
+.sinapse-ai/development/ @caioimori
+.sinapse-ai/infrastructure/ @caioimori
+
+# Security-sensitive paths (Caio only)
+.claude/ @caioimori
+SECURITY.md @caioimori
+
+# CI/CD and infrastructure (Caio only)
+.github/ @caioimori
+packages/ @caioimori
+
+# Configuration files
+package.json @caioimori
+.env* @caioimori
+
+# Documentation — Caio reviews
+docs/ @caioimori

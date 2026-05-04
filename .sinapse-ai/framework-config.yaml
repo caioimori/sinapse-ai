@@ -1,0 +1,143 @@
+# ============================================
+# SINAPSE Framework Configuration (Level 1)
+# ============================================
+# DO NOT EDIT — This file is part of the SINAPSE framework.
+# Override values in project-config.yaml or local-config.yaml.
+#
+# Level: L1 (Framework)
+# Mutability: Read-only (shipped with npm package)
+# Git status: Committed (framework source)
+# ADR: ADR-PRO-002 — Configuration Hierarchy
+# ============================================
+
+# --- Metadata (framework portion) ---
+metadata:
+  name: "SINAPSE"
+  framework_version: "4.0.0"
+
+markdownExploder: true
+
+# --- Resource Locations (Section 3) ---
+resource_locations:
+  agents_dir: ".sinapse-ai/development/agents"
+  tasks_dir: ".sinapse-ai/development/tasks"
+  templates_dir: ".sinapse-ai/development/templates"
+  checklists_dir: ".sinapse-ai/development/checklists"
+  tools_dir: ".sinapse-ai/tools"
+  scripts:
+    core: ".sinapse-ai/core"
+    development: ".sinapse-ai/development/scripts"
+    infrastructure: ".sinapse-ai/infrastructure/scripts"
+    legacy: ".sinapse-ai/scripts"
+  data_dir: ".sinapse-ai/data"
+  elicitation_dir: ".sinapse-ai/elicitation"
+  squads_template_dir: "templates/squad"
+  minds_dir: "outputs/minds"
+
+# --- Performance Defaults (Section 6 - defaults only) ---
+performance_defaults:
+  lazy_loading:
+    enabled: true
+    heavy_sections:
+      - pvMindContext
+      - squads
+      - registry
+  git:
+    show_config_warning: true
+    cache_time_seconds: 300
+
+# --- Utility Scripts Registry (Section 11) ---
+utility_scripts_registry:
+  # Agent Helper utilities (28) — Used directly by agents
+  helpers:
+    - batch-creator
+    - capability-analyzer
+    - change-propagation-predictor
+    - clickup-helpers
+    - code-quality-improver
+    - compatibility-checker
+    - component-metadata
+    - component-preview
+    - conflict-manager
+    - coverage-analyzer
+    - dependency-analyzer
+    - diff-generator
+    - framework-analyzer
+    - git-wrapper
+    - manifest-preview
+    - migration-path-generator
+    - migration-tester
+    - modification-history
+    - modification-risk-assessment
+    - modification-validator
+    - performance-analyzer
+    - redundancy-analyzer
+    - refactoring-suggester
+    - sandbox-tester
+    - template-validator
+    - test-quality-assessment
+    - validate-filenames
+    - version-tracker
+    - visual-impact-generator
+
+  # Task Execution utilities (17) — Called during task execution
+  executors:
+    - approval-workflow
+    - branch-manager
+    - commit-message-generator
+    - component-generator
+    - component-search
+    - conflict-resolver
+    - deprecation-manager
+    - dependency-impact-analyzer
+    - documentation-synchronizer
+    - migration-generator
+    - migration-rollback
+    - modification-synchronizer
+    - performance-optimizer
+    - rollback-handler
+    - safe-removal-handler
+    - test-generator
+    - test-updater
+
+  # Framework utilities (11) — Framework-level components
+  framework:
+    - elicitation-engine
+    - elicitation-session-manager
+    - improvement-engine
+    - improvement-validator
+    - metrics-tracker
+    - pattern-learner
+    - template-engine
+    - test-template-system
+    - transaction-manager
+    - usage-analytics
+    - usage-tracker
+
+# --- IDE Sync System (Section 12) ---
+ide_sync_system:
+  enabled: true
+  source: ".sinapse-ai/development/agents"
+  targets:
+    claude-code:
+      enabled: true
+      path: ".claude/commands/SINAPSE/agents"
+      format: "full-markdown-yaml"
+    codex:
+      enabled: true
+      path: ".codex/agents"
+      format: "full-markdown-yaml"
+  redirects: {}
+  validation:
+    strict_mode: true
+    fail_on_drift: true
+    fail_on_orphaned: false
+
+# --- Template Override Defaults (Section 13) ---
+# Override in project-config.yaml to customize story template rendering.
+# null = use template default order; [] = no optional sections.
+template_overrides:
+  story:
+    sections_order: null
+    optional_sections: []
+

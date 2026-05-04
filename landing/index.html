@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SINAPSE — AI Agent Squads for Claude Code</title>
+  <meta name="description" content="17 squads. 161+ agents. 1400+ tasks. The AI orchestration framework that transforms how you build software with Claude Code.">
+  <meta property="og:title" content="SINAPSE — AI Agent Squads for Claude Code">
+  <meta property="og:description" content="17 squads. 161+ agents. 1400+ tasks. The AI orchestration framework that transforms how you build software with Claude Code.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            foreground: '#1a1a1a',
+            muted: '#9a9a9a',
+            'text-secondary': '#6e6e6e',
+            border: '#e5e5e5',
+            surface: '#f7f7f7',
+          },
+          maxWidth: {
+            'shell': '1200px',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '200% 0' },
+              '100%': { backgroundPosition: '-50% 0' },
+            },
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.6s ease-out forwards',
+            'fade-up-delay-1': 'fadeUp 0.6s ease-out 0.1s forwards',
+            'fade-up-delay-2': 'fadeUp 0.6s ease-out 0.2s forwards',
+            'fade-up-delay-3': 'fadeUp 0.6s ease-out 0.3s forwards',
+            'shimmer': 'shimmer 3s infinite',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(26, 26, 26, 0.1); }
+
+    .shimmer-text {
+      background: linear-gradient(105deg, #1a1a1a 35%, #6e6e6e 50%, #1a1a1a 65%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s infinite;
+    }
+
+    .liquid-glass {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .liquid-glass:hover {
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
+    }
+
+    .fade-section { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    .code-block {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      border-radius: 12px;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      position: relative;
+      overflow: hidden;
+    }
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(26,26,26,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,26,26,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .squad-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+      transition: all 0.2s;
+    }
+    .squad-pill:hover {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 border-b border-border">
+    <div class="max-w-shell mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <span class="text-lg font-bold tracking-tight">SINAPSE</span>
+        <span class="text-xs font-medium text-muted bg-surface px-2 py-0.5 rounded-md">v5.0.8</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
+        <a href="#features" class="hover:text-foreground transition-colors">Features</a>
+        <a href="#squads" class="hover:text-foreground transition-colors">Squads</a>
+        <a href="#how-it-works" class="hover:text-foreground transition-colors">How it works</a>
+        <a href="https://github.com/SinapseAI/sinapse-ai" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-foreground text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#2a2a2a] transition-colors active:scale-[0.98]">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="pt-32 pb-20 md:pt-44 md:pb-32 px-6 grid-bg relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-white to-surface pointer-events-none"></div>
+    <div class="max-w-shell mx-auto relative">
+      <div class="max-w-3xl">
+        <div class="opacity-0 animate-fade-up">
+          <span class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary bg-surface border border-border px-4 py-1.5 rounded-full mb-8">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Open Source &middot; MIT License
+          </span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight opacity-0 animate-fade-up-delay-1">
+          AI Agent Squads<br>
+          <span class="shimmer-text">for Claude Code</span>
+        </h1>
+
+        <p class="mt-6 text-lg md:text-xl text-text-secondary leading-relaxed max-w-xl opacity-0 animate-fade-up-delay-2">
+          17 specialized squads. 161+ autonomous agents. 1,400+ executable tasks.
+          The orchestration framework that gives your AI workforce real structure.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-up-delay-3">
+          <div class="code-block px-6 py-3.5 flex items-center gap-3">
+            <span class="text-muted text-sm">$</span>
+            <code class="text-sm md:text-base text-white">npx sinapse-ai init</code>
+            <button onclick="navigator.clipboard.writeText('npx sinapse-ai init')" class="ml-2 text-muted hover:text-white transition-colors" title="Copy">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            </button>
+          </div>
+          <a href="https://github.com/SinapseAI/sinapse-ai" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-border text-sm font-medium hover:bg-surface transition-colors">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="py-16 px-6 border-y border-border bg-surface">
+    <div class="max-w-shell mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <div class="fade-section text-center">
+        <div class="text-3xl md:text-4xl font-bold tracking-tight">17</div>
+        <div class="mt-1 text-sm text-text-secondary">Specialized Squads</div>
+      </div>
+      <div class="fade-section text-center">
+        <div class="text-3xl md:text-4xl font-bold tracking-tight">161+</div>
+        <div class="mt-1 text-sm text-text-secondary">Autonomous Agents</div>
+      </div>
+      <div class="fade-section text-center">
+        <div class="text-3xl md:text-4xl font-bold tracking-tight">1,400+</div>
+        <div class="mt-1 text-sm text-text-secondary">Executable Tasks</div>
+      </div>
+      <div class="fade-section text-center">
+        <div class="text-3xl md:text-4xl font-bold tracking-tight">6</div>
+        <div class="mt-1 text-sm text-text-secondary">IDE Integrations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROBLEM ═══ -->
+  <section class="py-20 md:py-28 px-6">
+    <div class="max-w-shell mx-auto">
+      <div class="max-w-2xl mx-auto text-center fade-section">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+          AI coding assistants are powerful.<br>
+          <span class="text-text-secondary">But they lack structure.</span>
+        </h2>
+        <p class="mt-6 text-text-secondary text-lg leading-relaxed">
+          Without clear roles, workflows, and governance, AI assistants produce inconsistent code,
+          lose context between tasks, and invent features nobody asked for.
+        </p>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-3 gap-6">
+        <div class="liquid-glass p-8 fade-section">
+          <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg">Context Loss</h3>
+          <p class="mt-2 text-sm text-text-secondary leading-relaxed">Every new prompt starts from scratch. Decisions evaporate. Architecture drifts. Your AI has amnesia.</p>
+        </div>
+        <div class="liquid-glass p-8 fade-section">
+          <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg">No Specialization</h3>
+          <p class="mt-2 text-sm text-text-secondary leading-relaxed">One generic assistant handles architecture, testing, database design, and UX. It does everything, masters nothing.</p>
+        </div>
+        <div class="liquid-glass p-8 fade-section">
+          <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg">Invented Features</h3>
+          <p class="mt-2 text-sm text-text-secondary leading-relaxed">AI adds "nice-to-have" features nobody requested. Scope creep becomes the default. Requirements get lost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section id="features" class="py-20 md:py-28 px-6 bg-surface border-y border-border">
+    <div class="max-w-shell mx-auto">
+      <div class="max-w-2xl fade-section">
+        <span class="text-sm font-medium text-muted uppercase tracking-widest">The Framework</span>
+        <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight">
+          Structure for your AI workforce
+        </h2>
+        <p class="mt-4 text-text-secondary text-lg">
+          SINAPSE gives every agent a clear role, every task a defined workflow,
+          and every decision an auditable trail.
+        </p>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-6">
+        <!-- Feature 1 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">12 Specialized Agents</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                Developer, QA, Architect, PM, PO, Scrum Master, Data Engineer, UX Expert, DevOps, Analyst.
+                Each with exclusive authority over their domain.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">Documentation-First Development</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                Every task starts from a validated story with full context baked in.
+                No guessing. No inventing. Epic → Story → Validation → Implementation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">Constitutional Governance</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                6 core principles enforced by automatic gates. CLI First. Agent Authority.
+                No Invention. Quality gates block violations before they ship.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">Autonomous Dev Engine</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                7-epic system: worktree management, spec pipeline, execution engine,
+                recovery system, QA evolution. Requirements to merged code, autonomously.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">Multi-IDE Support</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                Works with Claude Code, Codex CLI, Cursor, GitHub Copilot,
+                and Gemini CLI. One framework, every editor.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="liquid-glass p-8 fade-section">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-foreground flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg">Extensible Squads</h3>
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">
+                Go beyond dev. Add domain squads for branding, content, growth,
+                finance, cybersecurity, or build your own.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section id="how-it-works" class="py-20 md:py-28 px-6">
+    <div class="max-w-shell mx-auto">
+      <div class="max-w-2xl mx-auto text-center fade-section">
+        <span class="text-sm font-medium text-muted uppercase tracking-widest">Get Started</span>
+        <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight">
+          Three commands. Full power.
+        </h2>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-3 gap-8">
+        <div class="fade-section text-center">
+          <div class="w-14 h-14 rounded-2xl bg-foreground text-white flex items-center justify-center mx-auto text-xl font-bold">1</div>
+          <h3 class="mt-6 font-semibold text-lg">Install</h3>
+          <div class="mt-3 code-block px-4 py-3 text-sm text-left">
+            <code class="text-white">npx sinapse-ai init</code>
+          </div>
+          <p class="mt-4 text-sm text-text-secondary">Interactive installer configures agents, IDE integration, and project structure in seconds.</p>
+        </div>
+
+        <div class="fade-section text-center">
+          <div class="w-14 h-14 rounded-2xl bg-foreground text-white flex items-center justify-center mx-auto text-xl font-bold">2</div>
+          <h3 class="mt-6 font-semibold text-lg">Activate</h3>
+          <div class="mt-3 code-block px-4 py-3 text-sm text-left">
+            <code class="text-white">@dev *help</code>
+          </div>
+          <p class="mt-4 text-sm text-text-secondary">Invoke any agent with @mention. Each has its own persona, commands, and domain authority.</p>
+        </div>
+
+        <div class="fade-section text-center">
+          <div class="w-14 h-14 rounded-2xl bg-foreground text-white flex items-center justify-center mx-auto text-xl font-bold">3</div>
+          <h3 class="mt-6 font-semibold text-lg">Build</h3>
+          <div class="mt-3 code-block px-4 py-3 text-sm text-left">
+            <code class="text-white">@pm *execute-epic</code>
+          </div>
+          <p class="mt-4 text-sm text-text-secondary">Orchestrate full development cycles. Stories, implementation, QA, and deploy — all autonomous.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SQUADS ═══ -->
+  <section id="squads" class="py-20 md:py-28 px-6 bg-foreground text-white">
+    <div class="max-w-shell mx-auto">
+      <div class="max-w-2xl fade-section">
+        <span class="text-sm font-medium text-stone-400 uppercase tracking-widest">Ecosystem</span>
+        <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight">
+          17 squads. Every domain covered.
+        </h2>
+        <p class="mt-4 text-stone-400 text-lg">
+          From branding to cybersecurity, each squad is a self-contained team
+          of specialized agents with their own tasks, knowledge bases, and workflows.
+        </p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-3 fade-section">
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Brand
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9672;</span> Commercial
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9671;</span> Content
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9674;</span> Copywriting
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9656;</span> Animations
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9673;</span> Design
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9651;</span> Finance
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9650;</span> Growth
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9654;</span> Paid Media
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9679;</span> Product
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Research
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9733;</span> Claude Mastery
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Strategic Council
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9671;</span> Storytelling
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Cybersecurity
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Cloning
+        </span>
+        <span class="squad-pill bg-white/5 border-white/10 text-stone-300 hover:bg-white hover:text-foreground hover:border-white">
+          <span>&#9670;</span> Courses
+        </span>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6 fade-section">
+        <div class="p-6 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl font-bold">965+</div>
+          <div class="mt-1 text-sm text-stone-400">Tasks across all squads</div>
+        </div>
+        <div class="p-6 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl font-bold">127+</div>
+          <div class="mt-1 text-sm text-stone-400">Knowledge bases</div>
+        </div>
+        <div class="p-6 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl font-bold">49+</div>
+          <div class="mt-1 text-sm text-stone-400">Pre-built workflows</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CODE PREVIEW ═══ -->
+  <section class="py-20 md:py-28 px-6">
+    <div class="max-w-shell mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-section">
+          <span class="text-sm font-medium text-muted uppercase tracking-widest">Developer Experience</span>
+          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight">
+            Feels like talking to a team
+          </h2>
+          <p class="mt-4 text-text-secondary text-lg leading-relaxed">
+            Each agent has a name, persona, and specialized commands.
+            Switch contexts naturally. Let the framework handle the coordination.
+          </p>
+          <div class="mt-8 space-y-4">
+            <div class="flex items-center gap-3 text-sm">
+              <div class="w-6 h-6 rounded-full bg-foreground text-white flex items-center justify-center flex-shrink-0">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span><strong>@dev</strong> for implementation &mdash; <strong>@qa</strong> for review</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <div class="w-6 h-6 rounded-full bg-foreground text-white flex items-center justify-center flex-shrink-0">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span><strong>@architect</strong> for design &mdash; <strong>@devops</strong> for deploy</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <div class="w-6 h-6 rounded-full bg-foreground text-white flex items-center justify-center flex-shrink-0">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span><strong>@pm</strong> for planning &mdash; <strong>@po</strong> for validation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-section">
+          <div class="code-block p-6 text-sm leading-relaxed">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#febc2e]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#28c840]"></div>
+              <span class="ml-2 text-xs text-stone-500">claude-code</span>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <span class="text-stone-500">you:</span>
+                <span class="text-stone-300"> @pm create an epic for the auth module</span>
+              </div>
+              <div>
+                <span class="text-emerald-400">Morgan (PM):</span>
+                <span class="text-stone-300"> Epic AUTH-001 created with 5 stories.</span>
+              </div>
+              <div>
+                <span class="text-emerald-400">Morgan (PM):</span>
+                <span class="text-stone-300"> Routing to @sm for story drafting...</span>
+              </div>
+              <div>
+                <span class="text-blue-400">River (SM):</span>
+                <span class="text-stone-300"> Story 1.1 drafted. Sending to @po...</span>
+              </div>
+              <div>
+                <span class="text-amber-400">Pax (PO):</span>
+                <span class="text-stone-300"> Validated. Score: 9/10. GO.</span>
+              </div>
+              <div>
+                <span class="text-purple-400">Dex (Dev):</span>
+                <span class="text-stone-300"> Implementing story 1.1...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="py-20 md:py-28 px-6 bg-surface border-t border-border">
+    <div class="max-w-shell mx-auto text-center fade-section">
+      <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+        Give your AI a real team.
+      </h2>
+      <p class="mt-6 text-text-secondary text-lg max-w-xl mx-auto">
+        Stop prompting a single assistant. Start orchestrating a workforce.
+        Open source. Free forever. MIT licensed.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="code-block px-6 py-4 flex items-center gap-3">
+          <span class="text-muted text-sm">$</span>
+          <code class="text-base text-white">npx sinapse-ai init</code>
+          <button onclick="navigator.clipboard.writeText('npx sinapse-ai init')" class="ml-2 text-muted hover:text-white transition-colors" title="Copy">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+        <a href="https://github.com/SinapseAI/sinapse-ai" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-foreground text-white text-sm font-medium hover:bg-[#2a2a2a] transition-colors active:scale-[0.98]">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <p class="mt-8 text-sm text-muted">
+        Works with Claude Code, Codex CLI, Cursor, GitHub Copilot, and Gemini CLI.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="py-10 px-6 border-t border-border">
+    <div class="max-w-shell mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold tracking-tight">SINAPSE</span>
+        <span class="text-sm text-muted">&middot; AI Agent Squads for Claude Code</span>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-text-secondary">
+        <a href="https://github.com/SinapseAI/sinapse-ai" target="_blank" rel="noopener" class="hover:text-foreground transition-colors">GitHub</a>
+        <a href="https://www.npmjs.com/package/sinapse-ai" target="_blank" rel="noopener" class="hover:text-foreground transition-colors">npm</a>
+        <a href="https://github.com/SinapseAI/sinapse-ai/blob/main/docs/guides/user-guide.md" target="_blank" rel="noopener" class="hover:text-foreground transition-colors">Docs</a>
+        <span class="text-muted">MIT License</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ SCROLL ANIMATIONS ═══ -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+
+    // Mobile menu
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      const nav = document.querySelector('nav .hidden');
+      nav?.classList.toggle('hidden');
+      nav?.classList.toggle('flex');
+      nav?.classList.toggle('flex-col');
+      nav?.classList.toggle('absolute');
+      nav?.classList.toggle('top-16');
+      nav?.classList.toggle('left-0');
+      nav?.classList.toggle('right-0');
+      nav?.classList.toggle('bg-white');
+      nav?.classList.toggle('p-6');
+      nav?.classList.toggle('border-b');
+      nav?.classList.toggle('border-border');
+      nav?.classList.toggle('shadow-lg');
+    });
+  </script>
+
+</body>
+</html>

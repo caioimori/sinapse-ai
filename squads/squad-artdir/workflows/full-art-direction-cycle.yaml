@@ -1,0 +1,179 @@
+quality_gates:
+  - every_decision_cites_principle: true
+  - wcag_aaa_ctas: true
+  - reduced_motion_coverage: 100%
+  - mobile_first: true
+  - impact_hypotheses: true
+workflow:
+  name: full-art-direction-cycle
+  version: 1.0.0
+  description: |
+    Ciclo completo de art direction — do briefing ao art direction brief validado contra os 7 pilares. Produz os 8 deliverables padrao.
+  trigger: user_briefing | cross_squad_request
+  phases:
+    - id: diagnose
+      name: Diagnostico Visual
+      agent: visual-strategist
+      task: diagnose-visual-language
+      description: Analisa estado atual (se URL) ou requisitos (se briefing)
+      inputs:
+        - url (optional)
+        - briefing
+        - audience
+        - category
+        - objective
+      outputs:
+        - diagnostic_report
+        - pillar_scores
+      skip_if: no URL provided AND project is greenfield
+    - id: brief
+      name: Art Direction Brief
+      agent: artdir-orqx
+      task: create-art-direction-brief
+      description: Gera o Art Direction Brief completo com todos os 8 deliverables
+      depends_on:
+        - diagnose
+      inputs:
+        - briefing
+        - audience
+        - category
+        - objective
+        - diagnostic_report (from diagnose)
+      outputs:
+        - art_direction_brief
+        - design_tokens
+        - motion_spec
+        - wireflow
+        - component_spec
+        - cro_map
+        - implementation_guide
+        - validation_checklist
+      sub_routing:
+        - visual-strategist: visual language, mood
+        - color-psychologist: color system
+        - type-systemist: typography
+        - motion-architect: motion system
+        - ia-architect: information architecture
+        - cro-persuasion: CRO patterns
+        - layout-engineer: grid and spacing
+        - interaction-designer: micro-interactions
+    - id: validate
+      name: Validacao 7 Pilares
+      agent: artdir-orqx
+      task: validate-against-pillars
+      description: Valida todos os deliverables contra os 7 pilares + WCAG + performance
+      depends_on:
+        - brief
+      inputs:
+        - art_direction_brief
+        - design_tokens
+        - motion_spec
+        - wireflow
+        - cro_map
+      outputs:
+        - validation_report
+        - verdict
+      sub_routing:
+        - accessibility-guardian: WCAG validation
+      decision:
+        PASS: Entrega os 8 deliverables como output final
+        CONCERNS: Entrega com concerns documentados
+        FAIL: Retorna ao phase brief com remediation list
+    - id: remediate
+      name: Remediacao
+      agent: artdir-orqx
+      task: create-art-direction-brief
+      description: Corrige gaps identificados na validacao
+      depends_on:
+        - validate
+      condition: verdict == FAIL
+      max_iterations: 2
+      inputs:
+        - remediation list from validate
+        - original briefing
+      outputs:
+        - updated deliverables
+  id: full-art-direction-cycle
+  sequence:
+    - id: diagnose
+      name: Diagnostico Visual
+      agent: visual-strategist
+      task: diagnose-visual-language
+      description: Analisa estado atual (se URL) ou requisitos (se briefing)
+      inputs:
+        - url (optional)
+        - briefing
+        - audience
+        - category
+        - objective
+      outputs:
+        - diagnostic_report
+        - pillar_scores
+      skip_if: no URL provided AND project is greenfield
+    - id: brief
+      name: Art Direction Brief
+      agent: artdir-orqx
+      task: create-art-direction-brief
+      description: Gera o Art Direction Brief completo com todos os 8 deliverables
+      depends_on:
+        - diagnose
+      inputs:
+        - briefing
+        - audience
+        - category
+        - objective
+        - diagnostic_report (from diagnose)
+      outputs:
+        - art_direction_brief
+        - design_tokens
+        - motion_spec
+        - wireflow
+        - component_spec
+        - cro_map
+        - implementation_guide
+        - validation_checklist
+      sub_routing:
+        - visual-strategist: visual language, mood
+        - color-psychologist: color system
+        - type-systemist: typography
+        - motion-architect: motion system
+        - ia-architect: information architecture
+        - cro-persuasion: CRO patterns
+        - layout-engineer: grid and spacing
+        - interaction-designer: micro-interactions
+    - id: validate
+      name: Validacao 7 Pilares
+      agent: artdir-orqx
+      task: validate-against-pillars
+      description: Valida todos os deliverables contra os 7 pilares + WCAG + performance
+      depends_on:
+        - brief
+      inputs:
+        - art_direction_brief
+        - design_tokens
+        - motion_spec
+        - wireflow
+        - cro_map
+      outputs:
+        - validation_report
+        - verdict
+      sub_routing:
+        - accessibility-guardian: WCAG validation
+      decision:
+        PASS: Entrega os 8 deliverables como output final
+        CONCERNS: Entrega com concerns documentados
+        FAIL: Retorna ao phase brief com remediation list
+    - id: remediate
+      name: Remediacao
+      agent: artdir-orqx
+      task: create-art-direction-brief
+      description: Corrige gaps identificados na validacao
+      depends_on:
+        - validate
+      condition: verdict == FAIL
+      max_iterations: 2
+      inputs:
+        - remediation list from validate
+        - original briefing
+      outputs:
+        - updated deliverables
