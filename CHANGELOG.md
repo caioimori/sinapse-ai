@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] — 2026-05-04 — Polish patch (--version flag)
+
+### Added
+
+- **Canonical `--version` flag** (`-v` / `version` aliases): every CLI user
+  expects `npx sinapse-ai --version` to return the semver. Previously routed
+  to fuzzy match (`Comando desconhecido: --version`). Now reads from
+  package.json and prints raw semver only — no banner, no ANSI — so scripts
+  capture cleanly.
+- 5 contract tests in `tests/unit/cli-version-flag.test.js`.
+
 ## [1.2.0] — 2026-05-04 — 🎉 GA Definitiva (versioning reset, branding SNPS AI)
 
 > **Branding reset.** Após bloqueio de v1.0.0/1.0.1/1.1.0 no npm (publishes legacy de março/2026), v1.2.0 estabelece a linha 1.x oficial do framework. Linha 10.x mantida no histórico.
