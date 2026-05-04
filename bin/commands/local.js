@@ -12,7 +12,8 @@ function runBash(script) {
   const logger = getLogger();
   const scriptPath = path.join(ROOT, script);
   if (!fs.existsSync(scriptPath)) {
-    logger.error(`${RED}Script not found: ${script}${NC}`);
+    logger.error(`${RED}Script não encontrado:${NC} ${script}`);
+    logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`);
     process.exit(1);
   }
 

@@ -135,8 +135,8 @@ async function cmdUninstall(opts = {}) {
   const yes = !!opts.yes;
   if (!yes) {
     if (!process.stdin.isTTY) {
-      logger.error(`${RED}Uninstall in non-TTY requires --yes flag.${NC}`);
-      logger.error(`Run ${CYAN}npx sinapse-ai uninstall --yes${NC}`);
+      logger.error(`${RED}Desinstalação em ambiente não-interativo exige --yes.${NC}`);
+      logger.error(`Tente: ${CYAN}npx sinapse-ai uninstall --yes${NC}`);
       process.exit(1);
     }
     const confirmed = await confirmUninstall();
