@@ -324,15 +324,9 @@ Quality Score =
 
 ---
 
-## Obsidian as Second Brain Infrastructure
+## Local-First Vault as Second Brain Infrastructure
 
-### Why Obsidian
-
-- **Local-first:** Files are plain markdown on your filesystem
-- **Plugin ecosystem:** 1,000+ community plugins
-- **Graph view:** Visual knowledge network
-- **Claude Code integration:** Vault can be working directory for agents
-- **No vendor lock-in:** Standard markdown, portable forever
+A markdown vault on the filesystem (one file per note, plain text, version-controlled) is the most portable substrate for a Second Brain. No vendor lock-in, agents can read/write directly, and everything is greppable.
 
 ### Optimal Vault Structure
 
@@ -348,24 +342,8 @@ vault/
 ├── 07-agents/             # Agent configurations + memory
 ├── 08-analytics/          # Vault health metrics
 ├── _attachments/          # Images, PDFs, media
-├── _data/                 # Structured data (JSON, YAML)
-└── .obsidian/             # Config (theme, plugins, etc.)
+└── _data/                 # Structured data (JSON, YAML)
 ```
-
-### Claudian Integration (2026)
-
-Plugin embedding Claude Code as collaborator inside Obsidian:
-- Vault as agent working directory
-- Inline edit with diff preview
-- Slash commands/skills
-- @mentions for subagents and MCP servers
-- ~4K GitHub stars (April 2026)
-
-### obsidian-skills Starter Kit
-
-Official [obsidian-skills](https://github.com/kepano/obsidian-skills) (by Obsidian CEO Steph Ango):
-- Teaches agents to correctly handle wikilinks, frontmatter, Bases databases, JSON Canvas
-- Obsidian 1.12 CLI natively supports agent integration
 
 ---
 

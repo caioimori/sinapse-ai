@@ -3,7 +3,6 @@
 Markdown Link Checker for SINAPSE Documentation
 
 Validates internal markdown links and tracks documentation status.
-Inspired by Obsidian's broken link checker.
 
 Usage:
     python scripts/check-markdown-links.py              # Default report

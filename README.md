@@ -46,7 +46,7 @@ A maior parte dos frameworks de agente assume que o LLM ja sabe tudo sobre o seu
 
 | Canal | O que faz | Status | Skip? |
 |-------|-----------|--------|-------|
-| **Vault grounding** | Configura ponto de injecao para notas do seu vault (Obsidian, Logseq, markdown plano). Concrete content injection em desenvolvimento | Foundation pre-GA | Sim — fallback generico |
+| **Vault grounding** | Configura ponto de injecao para notas do seu vault de markdown. Concrete content injection em desenvolvimento | Foundation pre-GA | Sim — fallback generico |
 | **Design system grounding** | Configura ponto de injecao do seu DS source-of-truth (tokens, componentes, brandbook). Concrete DS resolver em desenvolvimento | Foundation pre-GA | Sim — defaults de alta qualidade |
 | **Brand grounding** | Configura ponto de injecao do seu brandbook (positioning, MVV, tone-of-voice). Concrete brandbook parser em desenvolvimento | Foundation pre-GA | Sim — sem injecao de marca |
 

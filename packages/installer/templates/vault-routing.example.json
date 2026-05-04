@@ -4,7 +4,7 @@
   "version": "1",
   "vault": {
     "enabled": true,
-    "_comment_path": "Absolute path to the root of your notes vault. Obsidian, Logseq, or any flat-markdown layout works.",
+    "_comment_path": "Absolute path to the root of your notes vault. Any flat-markdown layout works.",
     "path": "/absolute/path/to/your/vault",
     "_comment_domains": "Optional filter — only inject notes tagged with these domains. Leave empty to allow all.",
     "domains": []

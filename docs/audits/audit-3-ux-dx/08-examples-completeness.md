@@ -66,7 +66,7 @@ um teste no CI que carrega cada example e valida que parseia + agentes carregam.
 Não inspecionei o guide a fundo, mas falta:
 - Example real de `~/.claude/sinapse-ai-config.yaml` populado
 - Diff antes/depois mostrando como uma resposta de agente muda com vault grounding ativo
-- Example de injection point para Obsidian (path Windows + macOS + Linux)
+- Example de injection point pra vault markdown (path Windows + macOS + Linux)
 
 **Fix:** Seção "Examples" no `grounding-setup.md` com 3 cenários concretos.
 

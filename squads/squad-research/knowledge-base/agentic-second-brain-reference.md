@@ -10,7 +10,7 @@ Comprehensive reference on building agentic Second Brains -- systems where AI ag
 
 Three waves converge to create the Agentic Second Brain:
 
-1. **PKM Wave:** Obsidian, Logseq, Roam Research -- local-first vaults with markdown and bidirectional links
+1. **PKM Wave:** local-first markdown vaults with bidirectional links
 2. **LLM Wave:** GPT-4, Claude, Gemini -- models capable of reading, summarizing, synthesizing, and producing knowledge
 3. **Agentic Wave:** CrewAI, LangGraph, Claude Code, OpenAI Agents SDK -- frameworks giving agents autonomy, tools, and persistent memory
 
@@ -515,52 +515,7 @@ vault/
 
 ---
 
-## 12. Orchestration for Obsidian + Claude Code (System 12)
-
-### Why This Stack
-
-Obsidian is the most mature and extensible local-first vault tool. Claude Code is the AI agent with the greatest capability to operate on local filesystems. The combination is, in 2026, the most powerful stack for Agentic Second Brains.
-
-### Key Integrations (2025-2026)
-
-**Claudian:** Obsidian plugin embedding AI agents (Claude Code, Codex) as vault collaborators. Vault becomes the agent's working directory with full agentic capabilities. ~4K GitHub stars.
-
-**Obsidian Agent Skills (Jan 2026):** Official repository by Obsidian CEO (Steph Ango/Kepano) teaching AI agents to correctly handle wikilinks, frontmatter, Bases databases, and JSON Canvas. Obsidian 1.12 introduced a native CLI dramatically facilitating agent integration.
-
-**obsidian-claude-pkm (Starter Kit):** Complete kit with 4 specialized agents with memory, 10 skills, auto-commit hooks, and agents that use memory to learn user patterns between sessions.
-
-### CLAUDE.md as Vault Constitution
-
-Claude Code reads CLAUDE.md at project root every session -- analogous to the SINAPSE Constitution. For Second Brain vaults, this file defines:
-
-- Vault structure and conventions
-- Agent permissions and boundaries
-- Capture and curation rules
-- Quality standards
-- Automation triggers
-
-### Human-Machine Interface
-
-| Interface | Function | Complexity |
-|-----------|----------|-----------|
-| Quick Capture | Rapid idea/insight input | Minimal |
-| Search Bar | Semantic + keyword search | Low |
-| Note Editor | Edit with connection preview | Medium |
-| Graph View | Knowledge network visualization | Medium-High |
-| Dashboard | Health metrics, gaps, trends | Medium |
-| Agent Chat | Natural conversation with vault | Low |
-| Command Palette | Skills and automations by command | Low |
-
-### Progressive Disclosure for Second Brain UX
-
-1. **Level 1:** Quick capture (one text box, one button)
-2. **Level 2:** Note created with basic metadata and suggested connections
-3. **Level 3:** Full editing, tags, manual links, template selection
-4. **Level 4:** Graph view, analytics, bulk operations
-
----
-
-## 13. Key People and References
+## 12. Key People and References
 
 ### Researchers and Practitioners
 
@@ -578,7 +533,6 @@ Claude Code reads CLAUDE.md at project root every session -- analogous to the SI
 
 | Tool | Category | Differentiator |
 |------|----------|---------------|
-| Obsidian | PKM vault | Plugin ecosystem, graph view, markdown, local-first |
 | Graphiti/Zep | Temporal graph | Bi-temporal model, provenance tracking |
 | Mem0 | Memory layer | 26% accuracy gain, 90% token reduction |
 | Letta (MemGPT) | Virtual context | OS-inspired, #1 Terminal-Bench |
