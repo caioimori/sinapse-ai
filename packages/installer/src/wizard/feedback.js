@@ -139,7 +139,7 @@ function showWelcome() {
   console.log(`  ${t('welcomeMessage')}`);
   console.log(`  ${t('welcomeSubtitle')}`);
   console.log('');
-  console.log('  18 squads · 175 agents · 1,370 tasks');
+  console.log('  19 squads · 200 agents · 1,237 tasks');
   console.log(`  ${t('welcomeDesc1')}`);
   console.log(`  ${t('welcomeDesc2')}`);
   console.log('');
@@ -172,7 +172,7 @@ function showCompletion(context = {}) {
   console.log('');
   console.log(status.success(t('completionInstalled')));
   console.log(status.success(`${llmLabel} ${t('completionConfigured')}`));
-  console.log(status.success(`175 ${t('completionAgents')}`));
+  console.log(status.success(`200 ${t('completionAgents')}`));
   console.log(status.success(`${t('completionReady')} ${startCommand}`));
   console.log('');
   console.log(headings.divider() + '\n');

@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 18 squads, 186 agents, 1,430 tasks
+> 19 squads, 200 agents, 1,237 tasks
 
 ## Project Context
 
@@ -21,7 +21,7 @@ SINAPSE is a meta-framework that orchestrates AI agents into specialized squads 
 bin/                      # CLI executables (sinapse.js, sinapse-init.js)
 docs/stories/             # Development stories (active/, completed/)
 packages/                 # Shared packages
-squads/                   # Squad expansions (18 domain squads)
+squads/                   # Squad expansions (19 domain squads)
 tests/                    # Test suites
 ```
 
@@ -88,7 +88,7 @@ tests/                    # Test suites
 - **Constraints:** Design and specification only. Delegates implementation to @developer.
 
 ### @sinapse-orqx (Imperator)
-- **Role:** Supreme Ecosystem Orchestrator -- routes requests across 18 squads (186 agents)
+- **Role:** Supreme Ecosystem Orchestrator -- routes requests across 19 squads (200 agents)
 - **Capabilities:** Intelligent routing (direct to specialist or via orchestrator), cross-squad coordination, conflict resolution, strategic synthesis, framework governance
 - **Key Commands:** `*route`, `*plan`, `*status`, `*onboard`, `*council`
 - **Constraints:** Never executes domain work directly (Mandatory Delegation). Diagnoses, routes, and coordinates only.
@@ -156,4 +156,4 @@ Plus CodeRabbit automated review (0 CRITICAL issues required).
 | Git push/PR/release | @devops |
 | Epic orchestration | @project-lead |
 | Research/analysis | @analyst |
-| Domain expertise | @sinapse-orqx (routes to 18 squads) |
+| Domain expertise | @sinapse-orqx (routes to 19 squads) |

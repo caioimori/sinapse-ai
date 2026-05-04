@@ -277,7 +277,7 @@ O framework garante que nenhuma etapa seja pulada. Cada gate bloqueia automatica
 
 ---
 
-## 18 Squads Especializados
+## 19 Squads Especializados
 
 Cada squad e uma equipe autonoma com orquestrador, agentes especialistas, knowledge base, tasks e workflows proprios.
 
