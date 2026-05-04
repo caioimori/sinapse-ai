@@ -40,6 +40,7 @@ const {
 } = require('../lib/prompts');
 const { recordInstalledAgents } = require('./uninstall');
 const { verifyInstall } = require('./status');
+const { registerGroundingHooks, HOOK_FILENAMES } = require('../lib/register-grounding-hooks');
 
 // ── Global Install ───────────────────────────────────────────────────────────
 
@@ -309,6 +310,39 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
     logger.always(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
     logger.always(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
+  }
+
+  // Phase 6b — Story GA-1.6: copy framework grounding hooks to a stable
+  // location and register them in ~/.claude/settings.json. Idempotent and
+  // non-destructive: existing personal hooks (Caio's vault-grounding,
+  // terminal-bus, etc.) are preserved.
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    try {
+      logger.always(`\n${CYAN}Phase 6b:${NC} Grounding hooks (vault / DS / brand)`);
+      const srcHooksDir = path.join(ROOT, '.sinapse-ai', 'hooks');
+      const destHooksDir = path.join(SINAPSE_HOME, 'hooks');
+      fs.mkdirSync(destHooksDir, { recursive: true });
+      let copied = 0;
+      for (const hookName of HOOK_FILENAMES) {
+        const src = path.join(srcHooksDir, hookName);
+        if (!fs.existsSync(src)) continue;
+        fs.copyFileSync(src, path.join(destHooksDir, hookName));
+        copied++;
+      }
+      const settingsPath = path.join(HOME, '.claude', 'settings.json');
+      const result = registerGroundingHooks({
+        settingsPath,
+        hooksDir: destHooksDir,
+        notify: (msg) => logger.always(`  ${DIM}${msg}${NC}`),
+      });
+      const summary = `${result.added.length} added, ${result.skipped.length} already present`;
+      logger.always(`  ${GREEN}OK${NC} ${copied} hook files copied — ${summary}`);
+      if (result.errors.length > 0) {
+        for (const err of result.errors) logger.always(`  ${YELLOW}WARN${NC} ${err}`);
+      }
+    } catch (error) {
+      logger.always(`  ${YELLOW}SKIP${NC} Grounding hooks: ${error.message}`);
+    }
   }
 
   // Chrome Brain: Auto-install browser automation

@@ -30,6 +30,7 @@ const {
 } = require('../lib/detection');
 const { promptLlmChoice } = require('../lib/prompts');
 const { generateCommandMd, generateSquadAwareness } = require('./install');
+const { registerGroundingHooks, HOOK_FILENAMES } = require('../lib/register-grounding-hooks');
 
 async function cmdUpdateGlobal() {
   const logger = getLogger();
@@ -181,6 +182,36 @@ async function cmdUpdateGlobal() {
   logger.always(`  ${CYAN}Files:${NC}   ${totalDelta.added} added, ${totalDelta.updated} updated, ${totalDelta.unchanged} unchanged${totalDelta.removed ? ', ' + totalDelta.removed + ' removed' : ''}`);
   logger.always(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
   logger.always(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
+
+  // Phase 3b — Story GA-1.6: ensure grounding hooks are present + registered.
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    try {
+      logger.always(`\n${CYAN}Phase 3b:${NC} Refreshing grounding hooks`);
+      const srcHooksDir = path.join(ROOT, '.sinapse-ai', 'hooks');
+      const destHooksDir = path.join(SINAPSE_HOME, 'hooks');
+      fs.mkdirSync(destHooksDir, { recursive: true });
+      let copied = 0;
+      for (const hookName of HOOK_FILENAMES) {
+        const src = path.join(srcHooksDir, hookName);
+        if (!fs.existsSync(src)) continue;
+        fs.copyFileSync(src, path.join(destHooksDir, hookName));
+        copied++;
+      }
+      const settingsPath = path.join(HOME, '.claude', 'settings.json');
+      const result = registerGroundingHooks({
+        settingsPath,
+        hooksDir: destHooksDir,
+        notify: (msg) => logger.always(`  ${DIM}${msg}${NC}`),
+      });
+      const summary = `${result.added.length} added, ${result.skipped.length} already present`;
+      logger.always(`  ${GREEN}OK${NC} ${copied} hook files refreshed — ${summary}`);
+      if (result.errors.length > 0) {
+        for (const err of result.errors) logger.always(`  ${YELLOW}WARN${NC} ${err}`);
+      }
+    } catch (error) {
+      logger.always(`  ${YELLOW}SKIP${NC} Grounding hooks: ${error.message}`);
+    }
+  }
 
   // Phase 4: Update project-local files (.sinapse-ai/, .claude/)
   logger.always(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
