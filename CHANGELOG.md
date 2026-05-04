@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (Story GA-1.6 — Grounding hooks shipados: vault / DS / brand)
+
+- **3 executable Claude Code hooks** at `.sinapse-ai/hooks/sinapse-{vault,ds,brand}-grounding.cjs`,
+  closing the gap left by Story 10.47 (which shipped the wizard + library
+  hooks but no executable hooks). Hooks read `~/.claude/sinapse-ai-config.yaml`
+  and inject `<vault-grounding>`, `<ds-grounding>`, or `<brand-grounding>`
+  blocks into the user prompt via the standard `UserPromptSubmit` contract.
+- **Auto-registration in `~/.claude/settings.json`** during `sinapse-ai install`
+  and `update` — idempotent, non-destructive (preserves any existing personal
+  hooks like `vault-grounding.cjs`, `terminal-bus.cjs`).
+- **Coexistence with personal hooks:** `sinapse-` filename prefix + dedicated
+  config file (`sinapse-ai-config.yaml` instead of `vault-routing.json` /
+  `ds-routing.json`) means both layers can run side-by-side.
+- **Fail-open guarantees:** every error path exits 0 silently. 3500 ms timeout
+  per hook. Anti-double-injection check. Size caps (6000 / 3000 / 2000 chars).
+- **31 new tests** in `tests/hooks/` covering executable contract (spawned
+  child processes with isolated `HOME`), helpers (pure functions), and the
+  settings.json registrar (idempotence, missing-file safety, malformed JSON
+  handling, personal-hook preservation).
+- **Docs:** new "How the hooks work" section in `docs/guides/grounding-setup.md`
+  covering activation triggers, size caps, and coexistence policy.
+
 ### Added (Story GA-1.5 — Article gates VII/VIII/XI automated)
 
 - **Article VII gate (Metrics Accuracy):** new `scripts/validate-article-vii.js`

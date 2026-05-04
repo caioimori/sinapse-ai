@@ -92,15 +92,54 @@ ship vault contents anywhere. The grounding hooks read locally and
 inject only what the agent's working context requires for the task at
 hand.
 
+## How the hooks work (Story GA-1.6)
+
+After running `sinapse-ai install` (or `update`), three executable hooks
+are placed in `~/.sinapse/hooks/` and registered in
+`~/.claude/settings.json` under `UserPromptSubmit`:
+
+| Hook | Reads from config | Activates when | Injects |
+|------|-------------------|---------------|---------|
+| `sinapse-vault-grounding.cjs` | `grounding.vault` | Any prompt ≥ 10 chars | `<vault-grounding>` with up to 5 most-recent vault notes (500 chars each, 6000 total cap) |
+| `sinapse-ds-grounding.cjs` | `grounding.designSystem` | Prompt contains UI keywords (PT + EN: `pagina`, `componente`, `layout`, `react`, `tailwind`, etc.) | `<ds-grounding>` with the first 3000 chars of the DS law file (`0.0-guidelines.md`, `principles.md`, `README.md`, …) |
+| `sinapse-brand-grounding.cjs` | `grounding.brand` | Any prompt ≥ 10 chars | `<brand-grounding>` with the first 2000 chars of the brandbook |
+
+All three follow the same contract:
+
+- **Fail-open** — any error (missing config, malformed YAML, unreadable
+  file, timeout) exits 0 silently. Claude Code never sees a broken
+  prompt because grounding misfired.
+- **Anti-double-injection** — if the prompt already contains the
+  matching tag (e.g. another tool or a previous hook ran), the hook is
+  a no-op.
+- **Timeout 3500 ms** — each hook short-circuits on its own timer so a
+  slow filesystem can't stall agent activation.
+- **Size caps** — vault 6000 / DS 3000 / brand 2000 chars. Truncated
+  with a `[...truncated...]` marker.
+
+### Coexistence with personal hooks
+
+If you also maintain personal global hooks (e.g.
+`~/.claude/hooks/vault-grounding.cjs` reading from
+`~/.claude/vault-routing.json`), the framework hooks are
+**file-name-prefixed** with `sinapse-` and **read a different config
+file** (`~/.claude/sinapse-ai-config.yaml`). Both can run side-by-side
+without conflict — the fail-open guarantee makes any duplication
+harmless.
+
+### Disabling temporarily
+
+Open `~/.claude/sinapse-ai-config.yaml` and set the section's
+`enabled: false`. Re-running `sinapse-ai install --reconfigure` lets you
+update paths interactively.
+
 ## What grounding does NOT do (today)
 
-This story (`10.47`) ships the **foundation**: configuration schema,
-opt-in wizard prompts, no-op default hooks, generic templates, and this
-guide. The concrete domain integration logic for each channel —
-parsing Obsidian markdown into chunks, walking a DS token tree, reading
-a brandbook PDF — lands in follow-up stories per channel. Until then,
-configured hooks return a structural envelope so downstream tooling can
-detect that the integration point is ready.
+Story `10.47` shipped the **foundation** (schema, wizard, no-op library
+hooks). Story `GA-1.6` (this entry) ships **executable hooks** that
+inject real context. The concrete domain integration logic — parsing
+Obsidian frontmatter, walking a deep DS token tree, reading a
+brandbook PDF — still lands in follow-up stories per channel.
 
 ## Troubleshooting
 
