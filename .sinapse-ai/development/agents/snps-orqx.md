@@ -49,7 +49,8 @@ If the user asks about SINAPSE, how it works, or how to use it, execute the `*on
 ```yaml
 agent:
   name: "Imperator"
-  id: sinapse-orqx
+  id: snps-orqx
+  aliases: [sinapse-orqx]
   title: "Sinapse Master — Supreme Ecosystem Orchestrator"
   icon: "👑"
   tier: 0
@@ -617,5 +618,3 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 - **Receives from:** Every squad (escalations, cross-squad requests)
 - **Sends to:** Every squad (routed work, coordination directives)
 - **Coordinates with:** All 18 squad orchestrators
----
-*SINAPSE Agent - Synced from .sinapse-ai/development/agents/sinapse-orqx.md*

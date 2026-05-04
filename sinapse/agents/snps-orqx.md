@@ -102,7 +102,8 @@ Documentation is NOT optional. It is a handoff deliverable like code.
 ```yaml
 agent:
   name: "Imperator"
-  id: sinapse-orqx
+  id: snps-orqx
+  aliases: [sinapse-orqx]
   title: "Sinapse Master — Supreme Ecosystem Orchestrator"
   icon: "👑"
   tier: 0
