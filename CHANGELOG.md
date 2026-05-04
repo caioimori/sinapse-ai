@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (Story GA-1.5 — Article gates VII/VIII/XI automated)
+
+- **Article VII gate (Metrics Accuracy):** new `scripts/validate-article-vii.js`
+  detects drift in squad/agent/orqx/task counts across `README.md`, `README.en.md`,
+  `AGENTS.md`, `package.json` description, and `packages/installer/src/wizard/feedback.js`.
+  Runs in CI on every PR/push and as a pre-publish step in `npm-publish.yml`.
+- **Article VIII gate (Mandatory Delegation):** new `scripts/validate-article-viii.js`
+  verifies `enforce-delegation.cjs` is registered in `.claude/settings.json`,
+  has valid syntax, and that no `*-orqx.md` agent contains direct execution
+  instructions (e.g., "use Edit tool", "run npm").
+- **Article XI gate (Conservative Default):** new `scripts/validate-article-xi.js`
+  blocks PRs that delete files in protected paths (`squads/*/agents/`,
+  `squads/*/tasks/`, `squads/*/knowledge-base/`, `bin/`, `.claude/hooks/`,
+  `.sinapse-ai/development/agents/`) without an explicit
+  `Article XI override: <reason>` justification in commit messages or PR body.
+  Renames (`git mv`) are not blocked.
+- **CI workflow:** new `.github/workflows/article-gates.yml` with three parallel
+  jobs (article-vii, article-viii, article-xi) wired to PR and push triggers.
+- **NPM scripts:** `validate:article-vii`, `validate:article-viii`, `validate:article-xi`.
+- **Docs:** `docs/pt/architecture/article-gates.md` explaining each gate and
+  the override protocol for Article XI.
+
+### Fixed (Story GA-1.5 — collateral metrics drift)
+
+- README.md, README.en.md, AGENTS.md, and `packages/installer/src/wizard/feedback.js`
+  updated from stale counts (18/186, 18/175, 1,425/1,430/1,370 tasks) to canonical
+  counts (19 squads, 200 agents, 1,237 tasks) — surfaced and required by the new
+  Article VII gate.
+
 ### Changed (Story GA-1.4 — SNPS Rename)
 
 - **Master orchestrator renamed:** `sinapse-orqx` → `snps-orqx`.
