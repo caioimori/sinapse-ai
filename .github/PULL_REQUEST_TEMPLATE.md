@@ -5,6 +5,15 @@
 <!-- OBRIGATORIO: Link para a story associada -->
 **Story:** `docs/stories/__.story.md`
 
+<!--
+Article XI override (opcional — apenas se este PR DELETA arquivos em paths protegidos:
+.sinapse-ai/development/agents/, squads/*/agents/, squads/*/tasks/,
+squads/*/knowledge-base/, bin/, .claude/hooks/).
+
+Se aplicavel, descomente UMA das linhas abaixo com a justificativa:
+-->
+<!-- Article XI override: <razao concreta da deletion — ex: agente movido pra legacy/, KB obsoleta substituida por X> -->
+
 ## Tipo de Mudanca
 <!-- Marque o que se aplica -->
 - [ ] Bug fix (correcao que nao quebra funcionalidade existente)
