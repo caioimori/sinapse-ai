@@ -361,7 +361,7 @@ function getVaultGroundingQuestion() {
   return {
     type: 'input',
     name: 'vaultPath',
-    message: '📚 Vault de notas (Obsidian/Logseq) — caminho absoluto, ou Enter pra pular:',
+    message: '📚 Vault de notas markdown — caminho absoluto, ou Enter pra pular:',
     default: '',
     filter: (value) => (typeof value === 'string' ? value.trim() : ''),
   };

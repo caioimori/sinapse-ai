@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.2.0
+version: 1.2.1
 generator: scripts/generate-install-manifest.js
 file_count: 1162
 files:
@@ -528,9 +528,9 @@ files:
     type: core
     size: 1159
   - path: core/grounding/vault.cjs
-    hash: sha256:79cac355693a7bdf0fc374160e84508d0cdcdafb7b50e5df5e088602eaf5ee03
+    hash: sha256:9254360614fd3625479465a04e34f14a8e11cfe8adb5cea75386c0597ac9ae8d
     type: core
-    size: 1291
+    size: 1259
   - path: core/health-check/base-check.js
     hash: sha256:1d322d1bd5cbb4cb4834165e795691fe761e0d84a208d4f4db1b839fa9b01dec
     type: core
