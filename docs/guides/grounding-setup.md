@@ -10,7 +10,7 @@ business. SINAPSE-AI assumes the opposite: it ships three optional
 
 | Channel | Purpose | Disabled = |
 |---------|---------|------------|
-| **Vault** | Inject context from your notes vault (Obsidian, Logseq, plain markdown) into agent prompts | Hook is a no-op |
+| **Vault** | Inject context from your markdown notes vault into agent prompts | Hook is a no-op |
 | **Design System** | Resolve tokens / components / layouts from your DS source-of-truth so agents stop generating generic `max-w-7xl shadcn-default` UIs | Hook is a no-op (high-quality fallback principles still apply at the framework level) |
 | **Brand** | Read your brandbook (positioning, MVV, tone-of-voice) so copy and UX nasce aligned to your brand | Hook is a no-op |
 
@@ -18,7 +18,7 @@ All three are independent. Configure the ones that matter, skip the rest.
 
 ## When does each one make sense?
 
-- **Enable vault grounding** if you keep a structured knowledge base (Obsidian, Logseq, etc.) with notes about your projects, clients, decisions, or domain. Agents reference these instead of inventing.
+- **Enable vault grounding** if you keep a structured markdown knowledge base with notes about your projects, clients, decisions, or domain. Agents reference these instead of inventing.
 - **Enable design system grounding** if your project has a defined visual identity (tokens, components, layout primitives). Without it, design agents fall back to generic principles — still good, but not yours.
 - **Enable brand grounding** if you have a brandbook with positioning, MVV, tone-of-voice. Especially valuable for copy + storytelling squads.
 - **Skip all three** if you're prototyping or evaluating. The framework defaults are high-quality enough to ship; you can come back later via `--reconfigure`.
@@ -138,7 +138,7 @@ update paths interactively.
 Story `10.47` shipped the **foundation** (schema, wizard, no-op library
 hooks). Story `GA-1.6` (this entry) ships **executable hooks** that
 inject real context. The concrete domain integration logic — parsing
-Obsidian frontmatter, walking a deep DS token tree, reading a
+note frontmatter, walking a deep DS token tree, reading a
 brandbook PDF — still lands in follow-up stories per channel.
 
 ## Troubleshooting

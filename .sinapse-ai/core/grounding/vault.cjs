@@ -5,7 +5,7 @@
  *
  * Reads the user's vault path from `~/.claude/sinapse-ai-config.yaml`
  * (`grounding.vault`) and is the entry point for future context injection
- * from a notes vault (Obsidian, Logseq, plain markdown, etc.).
+ * from a markdown notes vault.
  *
  * Today this hook is a **structural no-op**: when the section is enabled
  * it returns a stub envelope describing the available vault path so
