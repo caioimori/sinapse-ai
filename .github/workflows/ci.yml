@@ -186,9 +186,11 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        # Node 25 removed 2026-04-12 [Story 10.14]: not LTS, not in cross-platform matrix.
-        # engines: '>=18.0.0' — re-add when Node 25 becomes LTS or a consumer requests it.
-        node: ['18', '20', '22', '24']
+        # Node 18 removed 2026-05-04 [health-check audit CI-2]: EOL since April 2025.
+        # Active LTS only: 20, 22, 24. cross-platform job (main-only) still runs 18 for
+        # broader compat smoke. Re-add 18 to PR matrix when external user reports breakage.
+        # Node 25 removed 2026-04-12 [Story 10.14]: not LTS.
+        node: ['20', '22', '24']
 
     steps:
       - name: Checkout code
@@ -582,8 +584,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        # Node 25 removed 2026-04-12 [Story 10.14]: matches test matrix.
-        node: ['18', '20', '22', '24']
+        # Matches test matrix [health-check CI-2]. cross-platform keeps full range.
+        node: ['20', '22', '24']
 
     steps:
       - name: Checkout code
