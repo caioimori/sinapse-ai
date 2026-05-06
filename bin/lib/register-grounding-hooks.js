@@ -5,7 +5,7 @@
 //
 // Contract:
 // - Idempotent: re-running never duplicates an entry.
-// - Non-destructive: existing UserPromptSubmit hooks (e.g. Caio's personal
+// - Non-destructive: existing UserPromptSubmit hooks (e.g. user's personal
 //   `vault-grounding.cjs`, terminal-bus, etc.) are preserved.
 // - Fail-soft: every error is caught and logged via `notify`; settings.json
 //   is never left in a corrupted state (we read → mutate → write atomically).

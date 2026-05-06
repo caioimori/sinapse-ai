@@ -65,7 +65,7 @@ describe('registerGroundingHooks', () => {
     expect(written.hooks.UserPromptSubmit[0].hooks).toHaveLength(3);
   });
 
-  test('preserves existing personal hook (Caios vault-grounding scenario)', () => {
+  test("preserves existing personal hook (user's vault-grounding scenario)", () => {
     const existing = {
       hooks: {
         UserPromptSubmit: [{
