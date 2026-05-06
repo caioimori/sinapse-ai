@@ -281,7 +281,7 @@ Saída: `To use variables, write {{VARIABLE_NAME}}.`
 | **PMDR**  | `templates/pmdr-tmpl.md`    | Registro de Decisão de Mapeamento de Processos |
 | **DBDR**  | `templates/dbdr-tmpl.md`    | Registro de Design de Banco de Dados           |
 | **Story** | `templates/story-tmpl.yaml` | User Story                                     |
-| **Epic**  | `templates/epic-tmpl.md`    | Definição de Epic                              |
+| **Epic**  | `templates/epic.hbs`    | Definição de Epic                              |
 | **Task**  | `templates/task-tmpl.md`    | Definição de Task                              |
 
 ### Localização dos Templates
