@@ -335,3 +335,18 @@ cross_squad_connections:
       delivers: "Security framework KBs"
     - to: squad-finance
       delivers: "Financial model KBs"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - agent-forger.md
+    - cloning-orqx.md
+    - cognitive-extractor.md
+    - content-capturer.md
+    - kb-architect.md
+    - mind-synthesizer.md
+    - sop-extractor.md
+    - source-hunter.md
+    - squad-assembler.md
