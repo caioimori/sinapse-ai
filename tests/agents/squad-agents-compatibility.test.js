@@ -34,7 +34,7 @@ const EXPECTED_SQUADS = ALL_EXPECTED_SQUADS.filter((s) =>
 
 const ALL_SQUADS_PRESENT = EXPECTED_SQUADS.length === ALL_EXPECTED_SQUADS.length;
 
-const EXPECTED_TOTAL_AGENTS = 174;
+const EXPECTED_TOTAL_AGENTS = 170;
 
 // Skip if squads directory doesn't exist (CI or minimal install)
 const squadsExist = fs.existsSync(SQUADS_DIR);
@@ -533,7 +533,7 @@ describeIfSquads('Squad Agent Compatibility', () => {
       'squad-council': 11,
       'squad-courses': 8,
       'squad-cybersecurity': 9,
-      'squad-design': 15,
+      'squad-design': 11,
       'squad-finance': 5,
       'squad-growth': 7,
       'squad-paidmedia': 10,
