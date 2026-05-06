@@ -417,6 +417,39 @@ jobs:
       - name: Validate no external framework references
         run: node scripts/validate-no-external-refs.js
 
+  # Deep-audit 2026-05-05: broken markdown links monitoring (WARN, non-blocking).
+  # 523 broken links existem hoje (legacy de varias reorganizacoes).
+  # Story `docs-broken-links-triage` cobre o cleanup completo. Este job evita
+  # REGRESSAO (PRs nao podem aumentar o numero de broken links sem awareness).
+  markdown-links-monitor:
+    name: Markdown Links Monitor (WARN)
+    needs: changes
+    if: ${{ needs.changes.outputs.docs == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    continue-on-error: true  # NON-BLOCKING — informational only
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Check broken markdown links
+        run: |
+          python scripts/check-markdown-links.py 2>&1 | tee links-report.txt
+          BROKEN=$(grep -oP 'Broken links \(ACTION: mark coming soon\): \K\d+' links-report.txt || echo 0)
+          BASELINE=523  # captured 2026-05-05 in deep-audit
+          echo ""
+          echo "=== Markdown Links Monitor ==="
+          echo "Current broken: $BROKEN"
+          echo "Baseline (2026-05-05): $BASELINE"
+          if [ "$BROKEN" -gt "$BASELINE" ]; then
+            echo "::warning::Broken links increased ($BROKEN > $BASELINE). Please fix or update baseline if intentional."
+          else
+            echo "✅ No regression"
+          fi
+
   validation-summary:
     name: Validation Summary
     runs-on: ubuntu-latest
