@@ -190,7 +190,7 @@ sinapse-ai/                             # Root project
 │       ├── ide-rules/                 # Templates de regras IDE
 │       ├── story-tmpl.yaml            # Template de story
 │       ├── prd-tmpl.yaml              # Template de PRD
-│       └── epic-tmpl.md               # Template de epic
+│       └── epic.hbs               # Template de epic
 │
 ├── quality/                           # Sistema de Qualidade
 │   └── schemas/                       # Schemas de quality gate

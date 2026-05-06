@@ -275,7 +275,7 @@ Output: `To use variables, write {{VARIABLE_NAME}}.`
 | **PMDR**  | `templates/pmdr-tmpl.md`    | Process Mapping Decision Record |
 | **DBDR**  | `templates/dbdr-tmpl.md`    | Database Design Record          |
 | **Story** | `templates/story-tmpl.yaml` | User Story                      |
-| **Epic**  | `templates/epic-tmpl.md`    | Epic Definition                 |
+| **Epic**  | `templates/epic.hbs`    | Epic Definition                 |
 | **Task**  | `templates/task-tmpl.md`    | Task Definition                 |
 
 ### Template Location

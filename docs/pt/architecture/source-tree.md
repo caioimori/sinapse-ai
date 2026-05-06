@@ -164,7 +164,7 @@ sinapse-ai/                             # Raiz (projeto brownfield)
 │   ├── story-tmpl.yaml                # Template de story v2.0
 │   ├── design-story-tmpl.yaml         # Template de design story v1.0
 │   ├── prd-tmpl.yaml                  # Template de PRD
-│   ├── epic-tmpl.md                   # Template de epic
+│   ├── epic.hbs                   # Template de epic
 │   ├── architecture-tmpl.yaml         # Template de arquitetura
 │   ├── fullstack-architecture-tmpl.yaml  # Template de arquitetura full-stack
 │   ├── brownfield-architecture-tmpl.yaml # Template de arquitetura brownfield
