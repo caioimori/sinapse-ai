@@ -92,6 +92,7 @@
     "validate:docs": "node scripts/validate-install-docs.js",
     "validate:no-external-refs": "node scripts/validate-no-external-refs.js",
     "validate:no-personal-leaks": "node scripts/validate-no-personal-leaks.js",
+    "validate:orqx-discipline": "node scripts/validate-orqx-discipline.js",
     "validate:story-meta": "node scripts/validate-story-meta.js",
     "validate:squad-orqx": "node scripts/validate-squad-orqx.js",
     "validate:release-readiness": "node scripts/release-readiness.js",
