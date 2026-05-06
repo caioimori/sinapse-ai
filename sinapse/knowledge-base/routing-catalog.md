@@ -17,7 +17,7 @@
 | 9 | squad-paidmedia | pm | paidmedia-orqx (Apex) | `/pm:agents:paidmedia-orqx` |
 | 10 | squad-product | product | product-orqx (Vector) | `/product:agents:product-orqx` |
 | 11 | squad-research | research | research-orqx (Prism) | `/research:agents:research-orqx` |
-| 12 | squad-claude | claude | claude-orqx (Orion) | `/claude:agents:claude-orqx` |
+| 12 | claude-code-mastery | claude | claude-orqx (Orion) | `/claude:agents:claude-orqx` |
 | 13 | squad-council | council | council-orqx (Zenith) | `/council:agents:council-orqx` |
 | 14 | squad-storytelling | narrative | storytelling-orqx (Arc) | `/narrative:agents:storytelling-orqx` |
 | 15 | squad-cybersecurity | cyber | cyber-orqx (Fortress) | `/cyber:agents:cyber-orqx` |
@@ -168,7 +168,7 @@
   - Industry deep dives
 - **Keywords:** pesquisa, research, competitivo, benchmark, mercado, tendencia, analise, inteligencia, competitor, trend, insight
 
-### 12. squad-claude (Orion)
+### 12. claude-code-mastery (Orion)
 - **Domain:** Claude Code optimization, prompt engineering, MCP management, AI workflow automation, squad creation
 - **Agents:** 8 | **Tasks:** 26 | **KBs:** 5 | **Workflows:** 2
 - **Key Capabilities:**

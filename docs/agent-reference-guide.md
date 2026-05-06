@@ -53,7 +53,7 @@ Localização: `.sinapse-ai/development/agents/`
 | squad-courses | `@courses-orqx` | Cursos, mentorias, lançamento |
 | squad-storytelling | `@storytelling-orqx` | Pitch, narrativa |
 | squad-council | `@council-orqx` | Conselho estratégico (mental models) |
-| squad-claude | `@claude-orqx` | Claude Code mastery (hooks, MCP, skills) |
+| claude-code-mastery | `@claude-orqx` | Claude Code mastery (hooks, MCP, skills) |
 | squad-artdir | `@artdir-orqx` | Direção de arte |
 | claude-code-mastery | `@claude-mastery-chief` | Setup avançado Claude Code |
 

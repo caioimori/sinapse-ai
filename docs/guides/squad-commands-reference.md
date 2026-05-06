@@ -175,7 +175,7 @@
 | `*principios` | Framework de principios para decisao |
 | `*alianca` | Desenha framework de alianca estrategica |
 
-## squad-claude (Claude)
+## claude-code-mastery (Claude)
 
 | Comando | O que faz |
 |---------|-----------|
