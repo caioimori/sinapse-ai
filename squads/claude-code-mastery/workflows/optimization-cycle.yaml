@@ -1,4 +1,4 @@
-squad: squad-claude
+squad: claude-code-mastery
 completion:
   success_criteria: All 4 phases complete, audit score improved, context reduced >= 15%
   deliverables:

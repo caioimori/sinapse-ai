@@ -139,7 +139,7 @@ function showWelcome() {
   console.log(`  ${t('welcomeMessage')}`);
   console.log(`  ${t('welcomeSubtitle')}`);
   console.log('');
-  console.log('  19 squads · 196 agents · 1,237 tasks');
+  console.log('  18 squads · 189 agents · 1,213 tasks');
   console.log(`  ${t('welcomeDesc1')}`);
   console.log(`  ${t('welcomeDesc2')}`);
   console.log('');

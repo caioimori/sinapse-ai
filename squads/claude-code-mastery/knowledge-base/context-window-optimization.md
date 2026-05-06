@@ -331,4 +331,4 @@ Knowledge base files are NOT automatically loaded. They are:
 - Loaded on-demand when agent needs specific knowledge
 - Ideal for: reference material, patterns, examples
 
-**Recommendation:** Keep KB files as standalone reference documents. Link from CLAUDE.md with `see squads/squad-claude/knowledge-base/X.md` comments, not full @include.
+**Recommendation:** Keep KB files as standalone reference documents. Link from CLAUDE.md with `see squads/claude-code-mastery/knowledge-base/X.md` comments, not full @include.
