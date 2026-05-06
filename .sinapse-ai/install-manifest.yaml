@@ -192,9 +192,9 @@ files:
     type: cli
     size: 5908
   - path: core-config.yaml
-    hash: sha256:fc24a8286b20ec2558c90186e99124b96d26b287ff107b747c2b68b1102e0cc8
+    hash: sha256:af0e4e1b42d11bc9ba0054ac094e0bbf428914dbad03773deff08fb53df6b01a
     type: config
-    size: 10513
+    size: 10398
   - path: core/code-intel/code-intel-client.js
     hash: sha256:65f6c0f2bb639ff3080db3d85660e0b8097e5af7c60dc04f582ef20f42cc9cfc
     type: core
@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:5068d9ea0ad7f20228d3f19c010264b9a0134d64833e5ca2dd818bd34e0dec86
+    hash: sha256:37a8893a3358f11937f3aaec7aa0f0cfc5feefb20b5369e9a7c8bba4fdf158b2
     type: data
-    size: 523932
+    size: 524011
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data

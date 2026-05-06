@@ -6,7 +6,7 @@
 
 # Roadmap de Documentação SINAPSE
 
-> 🌐 [EN](../DOCUMENTATION-ROADMAP.md) | **PT** | [ES](../es/DOCUMENTATION-ROADMAP.md)
+> 🌐 [EN](../DOCUMENTATION-ROADMAP.md) | **PT**
 
 ---
 
@@ -159,17 +159,18 @@ Semana 4 (Fase 3 + Consolidação)
 
 ## Requisitos de Tradução
 
-Todos os novos documentos devem ser criados em **3 idiomas**:
+Todos os novos documentos devem ser criados em **2 idiomas**:
 
 - `docs/en/` - Inglês (primário)
-- `docs/pt-BR/` - Português (Brasil)
-- `docs/es/` - Espanhol
+- `docs/pt/` - Português (Brasil)
 
 **Fluxo de tradução:**
 
 1. Criar versão em inglês primeiro
-2. Usar @developer ou agente de tradução para PT-BR e ES
+2. Usar agente de tradução para PT
 3. Revisar traduções para precisão técnica
+
+> Decisão histórica: ES e ZH foram removidos por falta de manutenção contínua. Suporte futuro a outros idiomas exige novo planejamento.
 
 ---
 

@@ -160,7 +160,7 @@ Qualquer pessoa que acessar o repositorio no GitHub entende imediatamente:
 4. **docs/glossary.md** — Termos atuais (orqx, squad, agent, etc.)
 5. **docs/roadmap.md** — Atualizado com visao 2026
 6. **CONTRIBUTING.md** — Simplificar fluxo para novos contribuidores
-7. **Remover docs/zh/ e docs/es/** — Nao mais suportados
+7. ~~**Remover docs/zh/ e docs/es/** — Nao mais suportados~~ ✅ **CONCLUÍDO 2026-05-06**: pastas vazias deletadas, refs em package.json/configs/docs limpas (PR `caio/chore/remove-es-zh-stowaways`)
 
 ### Acceptance Criteria
 - [ ] README tem quick start em 3 passos
