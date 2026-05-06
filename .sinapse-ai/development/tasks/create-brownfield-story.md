@@ -1,5 +1,19 @@
 ---
 
+# create-brownfield-story
+
+> **WHEN TO USE THIS TASK (vs `brownfield-create-story.md`):**
+>
+> | Scope | Use this task | Use `brownfield-create-story.md` |
+> |---|:-:|:-:|
+> | Brownfield with varied doc formats | YES | — |
+> | Multi-doc / complex analysis flow | YES | — |
+> | Single story / fix / bug (< 4h) | — | YES |
+> | Default invoker | @sprint-lead (SM) / @product-lead (PO) | @project-lead (PM) |
+> | Output complexity | Comprehensive (726 LOC task) | Lean (363 LOC task) |
+>
+> **Disambiguation note (master-workflow-audit 2026-05-06):** these two tasks are NOT duplicates. They serve distinct contexts. If you need to handle a brownfield project with varied documentation (PRDs scattered, partial architecture, ad-hoc specs), use this one. For a single bug fix or focused work, use `brownfield-create-story.md`.
+
 ## Execution Modes
 
 **Choose your execution mode:**

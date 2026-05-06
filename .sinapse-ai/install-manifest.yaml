@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:6933830d8eec5da6846405592359984ed8b742c3b6fec1a5cc3e6e10b81463c4
+    hash: sha256:8aef33f2117d01a2fa193dd7a1b1cdd4a989a2bdc4a579fda18e9ea5962f0aa5
     type: data
-    size: 523909
+    size: 523704
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1952,9 +1952,9 @@ files:
     type: task
     size: 18007
   - path: development/tasks/brownfield-create-story.md
-    hash: sha256:844b49d9b366c3b654963ee5de783e1a74a01cb4aec74acacefcbb6f1d61ea61
+    hash: sha256:f94b0614753b7abf2e931df002949c3fd788f8403101e1f7552dd9eb4bc52bee
     type: task
-    size: 9252
+    size: 9966
   - path: development/tasks/build-autonomous.md
     hash: sha256:661548adbb909bf5ced835ae8f4a7d21e760f9ab3c91ccd014fae72475a84197
     type: task
@@ -2016,9 +2016,9 @@ files:
     type: task
     size: 31965
   - path: development/tasks/create-brownfield-story.md
-    hash: sha256:aec82ed1b370a83701bc75a082d477e06f710aa433fcab7b616cade308e24855
+    hash: sha256:b9229a3060952df7bcd45d446f1ffdcaad3ee264718e8e864b3d88464d1f06f0
     type: task
-    size: 22435
+    size: 23262
   - path: development/tasks/create-deep-research-prompt.md
     hash: sha256:9d6137464444a174fc6f8bc6ceb55b90ad063d7a1a9c5e06a637f5734202da04
     type: task
