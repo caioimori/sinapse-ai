@@ -10,12 +10,18 @@ UserPromptSubmit Hooks
 
 PreToolUse Hooks
 ├── Read          → read-protection.py
-├── Write|Edit    → enforce-architecture-first.py
-│                 → write-path-validation.py
+├── Write|Edit    → enforce-architecture-first.cjs
+│                 → write-path-validation.cjs
+│                 → enforce-story-gate.cjs
+│                 → enforce-nsn-guard.cjs
+│                 → slug-validation.py
 │                 → mind-clone-governance.py
-│                 → code-intel-pretool.cjs
-└── Bash          → sql-governance.py
-                  → slug-validation.py
+│                 → secret-scanning.cjs
+│                 → enforce-delegation.cjs
+└── Bash          → enforce-git-push-authority.sh
+                  → verify-packages.cjs
+                  → sql-governance.py
+                  → enforce-delegation.cjs
 
 PreCompact Hooks
 └── (manual+auto)  → precompact-session-digest.cjs
@@ -35,15 +41,13 @@ Impede leitura parcial (`limit`/`offset`) em arquivos protegidos:
 - `package.json`, `tsconfig.json`
 - `app/components/ui/icons/icon-map.ts`
 
-### 2. enforce-architecture-first.py
+### 2. enforce-architecture-first.cjs
 **Trigger:** `Write|Edit`
 **Comportamento:** BLOQUEIA (exit 2)
 
-Exige documentação aprovada antes de criar código em paths protegidos:
-- `supabase/functions/` → requer doc em `docs/architecture/` ou `docs/approved-plans/`
-- `supabase/migrations/` → requer doc ou permite edição de arquivo existente
+Exige documentação aprovada antes de criar código em paths protegidos. Implementação CJS substituiu a versão Python legacy em 2026-05-05 (auditoria deep-audit).
 
-### 3. write-path-validation.py
+### 3. write-path-validation.cjs
 **Trigger:** `Write|Edit`
 **Comportamento:** AVISA (exit 0 + stderr)
 
@@ -51,6 +55,8 @@ Avisa quando documentos parecem estar no path errado:
 - Sessions/handoffs → `docs/sessions/YYYY-MM/`
 - Architecture → `docs/architecture/`
 - Guides → `docs/guides/`
+
+Implementação CJS substituiu a versão Python legacy em 2026-05-05.
 
 ### 4. sql-governance.py
 **Trigger:** `Bash`
