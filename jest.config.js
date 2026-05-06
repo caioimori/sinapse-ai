@@ -130,15 +130,19 @@ module.exports = {
   // .sinapse-ai/core/ — kept at 38 (legacy floor, was already passing before
   // this story; raising it requires a separate baseline-capture pass that
   // this story explicitly leaves out of scope).
+  // Coverage ratchet — só sobe, nunca desce.
+  // Baseline 2026-05-05 (deep-audit): real lines 35.95%, statements 35.84%,
+  // functions 38.77%, branches 33.21%. Threshold setado 1pp abaixo do real
+  // pra absorver flake; quando coverage real subir, atualize estes números.
   coverageThreshold: {
     global: {
-      branches: 21,
-      functions: 25,
-      lines: 23,
-      statements: 23,
+      branches: 32,
+      functions: 37,
+      lines: 34,
+      statements: 34,
     },
     '.sinapse-ai/core/': {
-      lines: 38,
+      lines: 45,
     },
   },
 
