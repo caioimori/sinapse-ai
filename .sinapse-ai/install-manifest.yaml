@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:f457c94e0e7d499993419bb5b0c8a8ba1ab3c7bfc44f4db193482625f599c074
+    hash: sha256:3ad3852ffacdd74006dc3a75b3f5bdaefa3e993578f6354de47d7cd2fc511761
     type: data
-    size: 523932
+    size: 523909
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1788,9 +1788,9 @@ files:
     type: script
     size: 17614
   - path: development/scripts/unified-activation-pipeline.js
-    hash: sha256:b56f170df30858fe7cf64ff93ea40fac07eec10f86299cca6c575d13ab37f12a
+    hash: sha256:9ac8eabc4635500e9d10cebe52e2147f15366840b0a3f97313f17a61b95d1062
     type: script
-    size: 30138
+    size: 30006
   - path: development/scripts/usage-tracker.js
     hash: sha256:868022a7b5a097bf704ffa5d82600b4fcaf497d0ed78eeedfd310a7398d011d0
     type: script

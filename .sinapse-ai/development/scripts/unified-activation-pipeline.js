@@ -55,15 +55,10 @@ const GreetingPreferenceManager = require('./greeting-preference-manager');
 const ContextDetector = require('../../core/session/context-detector');
 const WorkflowNavigator = require('./workflow-navigator');
 const { atomicWriteSync } = require('../../core/synapse/utils/atomic-write');
-// BUG-1 fix (INS-1): Graceful degradation when pro-detector is not available
-// In installed projects, bin/utils/pro-detector.js does not exist
-let isProAvailable, loadProModule;
-try {
-  ({ isProAvailable, loadProModule } = require('../../../bin/utils/pro-detector'));
-} catch {
-  isProAvailable = () => false;
-  loadProModule = () => null;
-}
+// PRO concept deprecated in 2026-05-06 audit (Wave 3 PR-10).
+// These stubs preserve the call surface so existing PRO branches no-op safely.
+const isProAvailable = () => false;
+const loadProModule = () => null;
 
 /**
  * ACT-11: Loader importance tiers with per-tier timeout budgets.
