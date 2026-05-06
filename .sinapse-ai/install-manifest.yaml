@@ -9,7 +9,7 @@
 #
 version: 1.2.1
 generator: scripts/generate-install-manifest.js
-file_count: 1162
+file_count: 1164
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -2419,6 +2419,10 @@ files:
     hash: sha256:c075c87c592bb88976477480123d40cb226f5edb896abf52e78c8ae1840a25e6
     type: task
     size: 6511
+  - path: development/tasks/push-and-pr.md
+    hash: sha256:0b2ce0445004d998afd5b7cb05cfccc1857ddf641c46b3af0d123ad56b01f6e4
+    type: task
+    size: 3077
   - path: development/tasks/qa-after-creation.md
     hash: sha256:5ed9bb8dbf76fbc7ed79e00423b70a6a8caf315d31ec580a5514f0f5a49173e8
     type: task
@@ -2543,6 +2547,10 @@ files:
     hash: sha256:5ba5c41e0c3812100dd51a48b722f76d1a23d949f97272595cee692207aa63e9
     type: task
     size: 19100
+  - path: development/tasks/self-heal.md
+    hash: sha256:4a5fe54ba771d5388a86738d7a9ff9cd9aba196a78eed313dc383d02a7957b3a
+    type: task
+    size: 2672
   - path: development/tasks/session-resume.md
     hash: sha256:155c9a9cfc4930f6a8a109db6555cb78cf09238089ef10fa76bd8a346676ff46
     type: task
@@ -2984,9 +2992,9 @@ files:
     type: workflow
     size: 6949
   - path: development/workflows/development-cycle.yaml
-    hash: sha256:b0d75d80198ad475eab92ad6f166b224b02766b401045423b8977ebf02830156
+    hash: sha256:e0903d4d811660f3d7ed80a3e985dfed9a590d157c5bb592b812e4e30ecc0849
     type: workflow
-    size: 15940
+    size: 15968
   - path: development/workflows/epic-orchestration.yaml
     hash: sha256:be5c5c28bb0fb41c6df383952d8aba9efb02dbf58e3521983f65a79212c38d84
     type: workflow

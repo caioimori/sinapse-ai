@@ -84,7 +84,7 @@ workflow:
       id: validation
       name: "Story Validation"
       agent: "@product-lead"
-      task: "validate-story-draft"
+      task: "dev-validate-next-story"
       description: >-
         PO valida a story com Epic Context antes de iniciar desenvolvimento.
         Garante que a story tem executor e quality_gate atribuídos.
@@ -119,7 +119,7 @@ workflow:
       id: development
       name: "Development"
       agent: "${story.executor}"  # Dynamic from Story 11.1
-      task: "develop"
+      task: "dev-develop-story"
       description: >-
         Executor dinâmico desenvolve a story baseado na atribuição.
         Usa terminal spawning para contexto limpo (Story 11.2).
@@ -194,7 +194,7 @@ workflow:
       id: quality_gate
       name: "Quality Gate"
       agent: "${story.quality_gate}"  # Dynamic, different from executor
-      task: "quality-review"
+      task: "qa-review-story"
       description: >-
         Quality gate executado por agente DIFERENTE do executor.
         Valida código, testes, arquitetura e padrões.
@@ -327,7 +327,7 @@ workflow:
       phase: 1
       phase_name: "Story Validation"
       agent: "@product-lead"
-      task: "validate-story-draft"
+      task: "dev-validate-next-story"
       action: "Validate story and assignments"
       outputs:
         - validation_result
@@ -339,7 +339,7 @@ workflow:
       phase: 2
       phase_name: "Development"
       agent: "${story.executor}"
-      task: "develop"
+      task: "dev-develop-story"
       action: "Implement approved story"
       requires: validation
       outputs:
@@ -367,7 +367,7 @@ workflow:
       phase: 4
       phase_name: "Quality Gate"
       agent: "${story.quality_gate}"
-      task: "quality-review"
+      task: "qa-review-story"
       action: "Review code quality and acceptance"
       requires:
         - development
