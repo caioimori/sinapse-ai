@@ -149,11 +149,11 @@ Métricas do ecossistema (contagem de squads, agentes, tasks, orqx) DEVEM ser es
 
 <!-- BEGIN AUTO-GENERATED COUNTS (sync via `npm run sync:counts`) -->
 - **19 squads** (diretórios em `squads/`)
-- **200 agentes** (188 em squads + 12 framework agents)
+- **196 agentes** (184 em squads + 12 framework agents)
 - **22 comandos orqx** (21 squad orqx + 1 master sinapse-orqx)
 - **1237 tasks** (em `squads/*/tasks/`)
 
-*Last synced: 2026-05-06T05:34:48.499Z*
+*Last synced: 2026-05-06T05:49:09.855Z*
 <!-- END AUTO-GENERATED COUNTS -->
 
 

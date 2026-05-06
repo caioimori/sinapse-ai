@@ -21,7 +21,7 @@
 
 ## O que e o SINAPSE?
 
-SINAPSE e um meta-framework open source que organiza **200 agentes de IA em 19 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 13 hooks ativos que bloqueiam violacoes em tempo de execucao.
+SINAPSE e um meta-framework open source que organiza **196 agentes de IA em 19 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 13 hooks ativos que bloqueiam violacoes em tempo de execucao.
 
 O conceito central e simples: em vez de um unico assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasao e conversao. Cada um com sua propria knowledge base, workflows e tasks — totalizando **1.237 tasks executaveis** prontas para uso, distribuidas pelos 19 squads.
 
@@ -33,7 +33,7 @@ Diferente de ferramentas que apenas conversam com IA, o SINAPSE impoe disciplina
 
 IA generativa tem um problema conhecido: quanto mais voce pede, pior fica. Um unico assistente tentando fazer tudo — codigo, copy, branding, testes, deploy — perde contexto, inventa features e sofre de context amnesia depois de poucas iteracoes longas.
 
-SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 200 agentes em 19 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
+SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 196 agentes em 19 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
 
 O diferencial nao e apenas quantidade de agentes. E **governanca real**: 13 hooks ativos interceptam operacoes em tempo de execucao, uma Constitution com 10 artigos rege o framework, e 6 desses artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas antes de executar, nao detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
 
@@ -302,7 +302,7 @@ Cada squad e uma equipe autonoma com orquestrador, agentes especialistas, knowle
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 
-**Total: 19 squads, 200 agentes especializados, 1.237 tasks**
+**Total: 19 squads, 196 agentes especializados, 1.237 tasks**
 
 Cada squad e ativado via seu orquestrador:
 
@@ -326,7 +326,7 @@ O SINAPSE suporta duas IDEs com integracoes profundas:
 | **Claude Code** | `@agent-name` | Hooks, rules contextuais, deny/allow, Chrome Brain |
 | **Codex CLI** | `/skills` ou `$skill-name` | Skills nativas, multi-model, `codex exec` para CI/CD |
 
-Ambas as IDEs tem acesso a todos os 19 squads, 200 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
+Ambas as IDEs tem acesso a todos os 19 squads, 196 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
 ### Tabela de Paridade
 
@@ -486,7 +486,7 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes completos.
 npx sinapse-ai install
 ```
 
-Um comando. 19 squads. 200 agentes. Governanca constitucional. Tudo operando direto no terminal.
+Um comando. 19 squads. 196 agentes. Governanca constitucional. Tudo operando direto no terminal.
 
 **[Documentacao completa](docs/guides/getting-started.md)** • **[Reportar issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
 

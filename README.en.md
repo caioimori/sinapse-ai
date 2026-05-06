@@ -31,7 +31,7 @@ Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Document
 
 Generative AI has a known problem: the more you ask of it, the worse it gets. A single assistant trying to do everything -- code, copy, branding, testing, deployment -- loses context, invents features, and suffers from context amnesia after just a few long iterations.
 
-SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 200 agents in 19 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
+SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 196 agents in 19 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
 
 The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 10 articles governs the framework, and 6 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
 
@@ -263,7 +263,7 @@ Each squad is an autonomous team with its own orchestrator, specialist agents, k
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 5 |
 
-**Total: 19 squads, 200 specialized agents, 1,237 tasks**
+**Total: 19 squads, 196 specialized agents, 1,237 tasks**
 
 Activate any squad via its orchestrator:
 
@@ -287,7 +287,7 @@ SINAPSE supports two IDEs with deep integrations:
 | **Claude Code** | `@agent-name` | Hooks, contextual rules, deny/allow, Chrome Brain |
 | **Codex CLI** | `/skills` or `$skill-name` | Native skills, multi-model, `codex exec` for CI/CD |
 
-Both IDEs have access to all 19 squads, 200 agents, workflows, and knowledge bases. The installer detects and configures automatically.
+Both IDEs have access to all 19 squads, 196 agents, workflows, and knowledge bases. The installer detects and configures automatically.
 
 ### Parity Table
 
@@ -445,7 +445,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 npx sinapse-ai install
 ```
 
-One command. 19 squads. 200 agents. Constitutional governance. All operating directly in the terminal.
+One command. 19 squads. 196 agents. Constitutional governance. All operating directly in the terminal.
 
 **[Full documentation](docs/guides/getting-started.md)** • **[Report issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
 
