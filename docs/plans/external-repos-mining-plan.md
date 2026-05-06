@@ -3,7 +3,7 @@
 > **Plan ID:** EXT-MINING-V1
 > **Author:** @sinapse-orqx (Imperator)
 > **Created:** 2026-04-12
-> **Status:** PROPOSAL — awaiting Caio approval to execute
+> **Status:** PROPOSAL — awaiting maintainer approval to execute
 > **Companion epic stub:** `docs/epics/epic-external-mining-v1.md` (created alongside this plan)
 
 ---
@@ -85,7 +85,7 @@ The plan does **not** execute extraction. It defines the analysis, governance, a
 
 #### Risks
 
-- **Conflict with vault-grounding** — Caio's Second Brain at `OneDrive\...\Second-Brain` is the canonical memory source. A second memory system could create confusion or contradiction.
+- **Conflict with vault-grounding** — User's external memory source (e.g. Obsidian vault) is the canonical memory source. A second memory system could create confusion or contradiction.
 - **Conflict with agent-handoff protocol** — we already have a 379-token handoff template. A different memory schema could fragment the system.
 - **Security exposure** — memory systems often have weak access controls; need to validate before adopting any storage layer.
 
@@ -267,7 +267,7 @@ A pattern that fails any of the three is rejected regardless of how useful it se
 Reasoning:
 
 1. **Governance prerequisite** — the squads-gitignore decision raised by fw-v2.4 must be resolved first. Mining squad-claude content is pointless if we can't ship it.
-2. **Cognitive load** — running mining in parallel with v2 upgrade execution doubles the contextual surface @sinapse-orqx and the squads must hold simultaneously. Quality > parallelism per Caio's own briefing.
+2. **Cognitive load** — running mining in parallel with v2 upgrade execution doubles the contextual surface @sinapse-orqx and the squads must hold simultaneously. Quality > parallelism per project standing directive.
 3. **Canonical reference** — Phase 4 cross-references against squad-claude. If squad-claude is being upgraded as part of v2 (it isn't currently in v2, but is a candidate for v3), the reference is stable now and it's a good moment to capture it.
 4. **Low urgency** — neither external repo is going anywhere; the cost of waiting 1-2 sessions is approximately zero.
 

@@ -314,7 +314,7 @@ async function cmdInstallGlobal(opts = {}) {
 
   // Phase 6b — Story GA-1.6: copy framework grounding hooks to a stable
   // location and register them in ~/.claude/settings.json. Idempotent and
-  // non-destructive: existing personal hooks (Caio's vault-grounding,
+  // non-destructive: existing personal hooks (user's vault-grounding,
   // terminal-bus, etc.) are preserved.
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     try {
