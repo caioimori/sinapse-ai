@@ -39,9 +39,6 @@ documentation_paths:
     - "docs/pt/framework/coding-standards.md"
     - "docs/pt/framework/tech-stack.md"
     - "docs/pt/framework/source-tree.md"
-    - "docs/es/framework/coding-standards.md"
-    - "docs/es/framework/tech-stack.md"
-    - "docs/es/framework/source-tree.md"
 
 # --- GitHub Integration (Section 8) ---
 github_integration:

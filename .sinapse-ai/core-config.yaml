@@ -26,9 +26,6 @@ devLoadAlwaysFilesFallback:
   - docs/pt/framework/coding-standards.md
   - docs/pt/framework/tech-stack.md
   - docs/pt/framework/source-tree.md
-  - docs/es/framework/coding-standards.md
-  - docs/es/framework/tech-stack.md
-  - docs/es/framework/source-tree.md
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 slashPrefix: SINAPSE
