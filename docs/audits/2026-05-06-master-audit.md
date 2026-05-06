@@ -92,15 +92,28 @@
 ### 🌊 Onda 5 — APSE→SNPS legacy cleanup (3-5 sessões)
 **Tema:** Limpar dívida histórica grande.
 
-| PR | Escopo | Tamanho | Risco |
-|---|---|:-:|:-:|
-| **PR-16** | APSE→SNPS bulk em **marketing público** (READMEs, CONTRIBUTING, AGENTS.md, getting-started) | M | 🟢 |
-| **PR-17** | APSE→SNPS em **docs operacionais** (TELEMETRY, troubleshooting) | S | 🟢 |
-| **PR-18** | APSE→SNPS em **configs estruturais** (`.coderabbit.yaml`, `.codex/*`, `.claude/templates/*`) — validar via `validate:codex-*` | M | 🟡 |
-| **PR-19** | APSE→SNPS em **código de produção** (`bin/cli.js`, `bin/commands/*`, `bin/utils/*`) — testar install matrix | L | 🔴 |
-| **PR-20** | Allowlist histórico (CHANGELOG, research-synthesis-for-upgrade) — adicionar lint exception | XS | 🟢 |
+**[CORREÇÃO 2026-05-06 pós-execução]** — Wave 5 cancelada por **falso positivo do Eixo D**.
 
-**Resultado:** Rename completo. UX consistente. Onboarding de usuário externo limpo.
+Verificação direta:
+```bash
+rg "APSE" --type md --type js --type yaml --type json \
+   -g '!node_modules' -g '!coverage' -g '!CHANGELOG.md' \
+   -g '!docs/audits/*' -g '!docs/research-synthesis*' \
+   | grep -v "SINAPSE" | grep -vi "synapse"
+# Resultado: 0 matches
+```
+
+As "3.123 APSE refs" reportadas pelo sub-agent eram majoritariamente **substring de SINAPSE** (S-I-N-**APSE**). O rename APSE→SNPS já está 100% completo de sessões anteriores. Os 5 PRs (PR-16 a PR-20) **não são necessários**:
+
+| PR | Escopo planejado | Status |
+|---|---|:-:|
+| ~~PR-16~~ | marketing público | ✅ N/A (zero APSE standalone) |
+| ~~PR-17~~ | docs operacionais | ✅ N/A |
+| ~~PR-18~~ | configs estruturais | ✅ N/A |
+| ~~PR-19~~ | código de produção | ✅ N/A |
+| ~~PR-20~~ | allowlist histórico | ✅ N/A (sem violações) |
+
+**Lição:** Sub-agents Explore podem confundir substring com referência standalone. Sempre validar com regex preciso (negative lookbehind ou pipe filter `grep -v SINAPSE`) antes de planejar bulk rename.
 
 ---
 
