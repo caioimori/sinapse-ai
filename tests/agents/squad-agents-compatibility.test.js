@@ -9,8 +9,8 @@ const SQUADS_DIR = path.join(__dirname, '../../squads');
 const ALL_EXPECTED_SQUADS = [
   'claude-code-mastery',
   'squad-animations',
+  'squad-artdir',
   'squad-brand',
-  'squad-claude',
   'squad-cloning',
   'squad-commercial',
   'squad-content',
@@ -34,7 +34,7 @@ const EXPECTED_SQUADS = ALL_EXPECTED_SQUADS.filter((s) =>
 
 const ALL_SQUADS_PRESENT = EXPECTED_SQUADS.length === ALL_EXPECTED_SQUADS.length;
 
-const EXPECTED_TOTAL_AGENTS = 170;
+const EXPECTED_TOTAL_AGENTS = 177;
 
 // Skip if squads directory doesn't exist (CI or minimal install)
 const squadsExist = fs.existsSync(SQUADS_DIR);
@@ -522,10 +522,10 @@ describeIfSquads('Squad Agent Compatibility', () => {
 
   describeIfAllSquads('Per-squad agent counts', () => {
     const expectedCounts = {
-      'claude-code-mastery': 8,
+      'claude-code-mastery': 11,
       'squad-animations': 9,
+      'squad-artdir': 14,
       'squad-brand': 15,
-      'squad-claude': 10,
       'squad-cloning': 9,
       'squad-commercial': 11,
       'squad-content': 7,

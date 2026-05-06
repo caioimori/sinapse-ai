@@ -7,7 +7,7 @@
 | **Name** | Orion |
 | **Icon** | 🧠 |
 | **Agent ID** | `@claude-orqx` |
-| **Squad** | squad-claude |
+| **Squad** | claude-code-mastery |
 
 ## Role
 

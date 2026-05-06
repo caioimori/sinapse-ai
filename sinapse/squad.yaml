@@ -73,7 +73,7 @@ dependencies:
   python: []
   squads:
     - squad-brand
-    - squad-claude
+    - claude-code-mastery
     - squad-commercial
     - squad-content
     - squad-copy
@@ -109,7 +109,7 @@ cross_squad_connections:
     the entire ecosystem.
   bidirectional:
     - squad-brand
-    - squad-claude
+    - claude-code-mastery
     - squad-commercial
     - squad-content
     - squad-copy

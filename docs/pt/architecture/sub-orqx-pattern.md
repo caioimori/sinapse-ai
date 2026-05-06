@@ -1,7 +1,7 @@
 # Sub-Orqx 3-Level Pattern
 
 > **Status:** Documented pattern — intentional architectural choice.
-> **Scope:** Currently only `squad-claude`. Do NOT normalize elsewhere without justification.
+> **Scope:** Currently only `claude-code-mastery`. Do NOT normalize elsewhere without justification.
 > **Related:** Constitution Article XI (Conservative Default)
 
 ## Overview
@@ -16,7 +16,7 @@ sinapse-orqx (Imperator)
             +-- specialist agents
 ```
 
-`squad-claude` breaks this pattern intentionally with a **3-level** topology:
+`claude-code-mastery` breaks this pattern intentionally with a **3-level** topology:
 
 ```
 sinapse-orqx (Imperator)
@@ -90,14 +90,14 @@ User: "Create a reusable skill for X and document the DB access pattern"
 2. The change is proposed as its own Story (not as a side effect of another refactor).
 3. A specialist on the affected squad has reviewed the impact.
 
-**Rationale:** This pattern was introduced because the flat topology was causing routing confusion inside `squad-claude`. Collapsing back to 2 levels would re-introduce that confusion. Constitution Article XI (Conservative Default) applies.
+**Rationale:** This pattern was introduced because the flat topology was causing routing confusion inside `claude-code-mastery`. Collapsing back to 2 levels would re-introduce that confusion. Constitution Article XI (Conservative Default) applies.
 
 ## Historical Context
 
-- Established: Story 10.23 (squad-claude dual register + orchestration refactor).
+- Established: Story 10.23 (claude-code-mastery dual register + orchestration refactor).
 - Audited: Pre-GA audit 2026-04-18 — pattern validated, retained.
 
 ## See Also
 
-- `docs/architecture/dual-register-pattern.md` — Related: why squad-claude and claude-code-mastery coexist.
+- `docs/architecture/dual-register-pattern.md` — Related: why claude-code-mastery and claude-code-mastery coexist.
 - `.sinapse-ai/constitution.md` — Article XI (Conservative Default).

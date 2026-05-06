@@ -71,7 +71,7 @@ description: |
 license: Apache-2.0
 compatibility: Requires Python 3.12+
 metadata:
-  author: squad-claude
+  author: claude-code-mastery
   version: "1.0"
   category: security
 allowed-tools: Read Grep Glob Bash(git diff *)
@@ -265,7 +265,7 @@ description: |
   Use when: {specific trigger conditions — include keywords users say}.
 license: Apache-2.0
 metadata:
-  author: squad-claude
+  author: claude-code-mastery
   version: "1.0"
   category: {claude-code|configuration|agent|workflow}
 allowed-tools: {space-separated list or omit}
@@ -336,7 +336,7 @@ Do NOT use when:
 ### Installation
 
 ```bash
-/plugin marketplace add sinapse-ai/squad-claude-skills
+/plugin marketplace add sinapse-ai/claude-code-mastery-skills
 /plugin install development-workflow@sinapse-claude-skills
 ```
 

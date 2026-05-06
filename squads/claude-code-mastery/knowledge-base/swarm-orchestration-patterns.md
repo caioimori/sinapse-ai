@@ -1,26 +1,23 @@
 # Swarm Orchestration Patterns
 
-> Multi-agent frameworks comparison, orchestration patterns, and implementation guidance. Based on MS-009 research + Claude Code internals analysis (April 2026).
+> Multi-agent orchestration patterns and implementation guidance for the SINAPSE ecosystem, focused on Claude Code internals (April 2026).
 
 ---
 
-## Framework Landscape (2026)
+## Orchestration Architecture Categories
 
-### 9 Frameworks Compared
+Multi-agent systems generally fall into a small number of architectural patterns. Understanding the tradeoffs between them informs how SINAPSE composes its 18 squads + 189 agents.
 
-| Framework | Architecture | Control Level | Ideal For | Maturity |
-|-----------|-------------|---------------|-----------|----------|
-| **LangGraph** | State machine with directed graph | Maximum (nodes, edges, conditional routing) | Enterprise production, complex flows | High |
-| **CrewAI** | Role-playing + task delegation | Medium (roles, tasks, SOPs) | Rapid prototyping, conceptual teams | High |
-| **Claude Agent SDK** | Claude-native with tool use | Medium | Claude ecosystem, Sonnet 4.5/4.6 | High |
-| **OpenAI Agents SDK** | Agents with handoffs + guardrails | Medium | OpenAI ecosystem | High |
-| **Google ADK** | Agent Development Kit | Medium | Google/Gemini ecosystem | High |
-| **Microsoft Agent Framework** | AutoGen + Semantic Kernel unified | Medium-High | Enterprise Microsoft stack | New (2026) |
-| **AG2 (AutoGen fork)** | Multi-agent conversation | Low-Medium | Open-source community | Active |
-| **deepagents (LangChain)** | Batteries-included harness | Medium | Long-horizon tasks, LangChain users | Growing |
-| **Ruflo** | 60+ agent swarm with MCP | N/A | Claude Code native | New |
+| Pattern | Architecture | Control Level | Ideal For |
+|---------|-------------|---------------|-----------|
+| **Directed graph / state machine** | Explicit nodes and edges, conditional routing | Maximum | Enterprise production, complex flows |
+| **Role-playing + task delegation** | Personas with delegated responsibilities | Medium | Rapid prototyping, conceptual teams |
+| **Claude-native with tool use** | Single-model orchestration via tools | Medium | Claude Code ecosystem (SINAPSE default) |
+| **Multi-agent conversation** | Agents converse to converge on output | Low-Medium | Open-ended exploration |
+| **Batteries-included harness** | Pre-built agent skeleton + memory | Medium | Long-horizon tasks |
+| **Mass swarm with MCP** | Many agents over Model Context Protocol | N/A | Claude Code native (SINAPSE pattern) |
 
-**Note (April 2026):** Microsoft retired AutoGen in favor of new Microsoft Agent Framework, unifying AutoGen + Semantic Kernel. AutoGen is maintenance-only. Community fork: AG2 (ag2ai/ag2).
+**SINAPSE's choice:** the framework leans on the Claude-native tool-use pattern combined with the mass-swarm-via-MCP approach. This keeps orchestration inside Claude Code (no external runtime), uses MCP for tool surface expansion, and lets each squad expose its own specialists without leaving the IDE.
 
 ---
 

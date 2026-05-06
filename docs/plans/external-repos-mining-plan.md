@@ -35,7 +35,7 @@ The plan does **not** execute extraction. It defines the analysis, governance, a
 
 - Concrete and copy-pastable (not abstract advice)
 - Compatible with our 18-squad orchestration model (or adaptable with minimal change)
-- Adds capability that we don't already have (cross-reference required against `squads/squad-claude/` and `claude-code-mastery/`)
+- Adds capability that we don't already have (cross-reference required against `squads/claude-code-mastery/` and `claude-code-mastery/`)
 - Has clear MIT/Apache/CC0 licence allowing use + redistribution
 - Pattern that survives a "is this a real signal or just one person's preference?" test
 
@@ -49,7 +49,7 @@ The plan does **not** execute extraction. It defines the analysis, governance, a
 
 #### Risks
 
-- **Sobreposição com squad-claude** — squad-claude already exists with 8 agents and 26 tasks. Most of what this repo offers may already be there. Cross-reference is essential.
+- **Sobreposição com claude-code-mastery** — claude-code-mastery already exists with 8 agents and 26 tasks. Most of what this repo offers may already be there. Cross-reference is essential.
 - **Tone and voice mismatch** — community advice tends to be informal/incomplete; SINAPSE canon is structured/comprehensive. Direct copy would dilute our standards.
 - **Licence ambiguity** — many community repos have no LICENSE file, which legally means "all rights reserved".
 
@@ -132,7 +132,7 @@ features_catalogued:
     description: "..."
     dependencies: [...]
     licence_compatible: true|false|unknown
-    sinapse_overlap: "compares to squads/squad-claude/{...}.md"
+    sinapse_overlap: "compares to squads/claude-code-mastery/{...}.md"
     extraction_difficulty: low|medium|high
 ```
 
@@ -144,15 +144,15 @@ Output: `docs/research/external-mining-pressurization.md`. Format: ranked list w
 
 Council's job is to be skeptical. Default to NOISE unless the feature clearly fills a gap that SINAPSE identified during the diagnostic of the framework upgrade v2.
 
-### Phase 4 — Cross-Reference with squad-claude
+### Phase 4 — Cross-Reference with claude-code-mastery
 
-Manual scan: every catalog entry classified as SIGNAL or MAYBE is checked against `squads/squad-claude/` to detect duplication. Three outcomes per entry:
+Manual scan: every catalog entry classified as SIGNAL or MAYBE is checked against `squads/claude-code-mastery/` to detect duplication. Three outcomes per entry:
 
 | Outcome | Action |
 |---------|--------|
-| Already in squad-claude | DROP (don't re-import) |
-| Partially in squad-claude | MERGE (extend existing file with the new pattern) |
-| Not in squad-claude | NEW (candidate for fresh import) |
+| Already in claude-code-mastery | DROP (don't re-import) |
+| Partially in claude-code-mastery | MERGE (extend existing file with the new pattern) |
+| Not in claude-code-mastery | NEW (candidate for fresh import) |
 
 ### Phase 5 — Extraction Proposal
 
@@ -166,7 +166,7 @@ Generate `docs/research/external-mining-extraction-proposal.md` with a ranked li
 
 Group accepted features into clusters by squad/domain. Each cluster becomes a story in `epic-external-mining-v1`. Example:
 
-- Story 1: import 3 prompt patterns into squad-claude
+- Story 1: import 3 prompt patterns into claude-code-mastery
 - Story 2: import memory schema into agent-handoff layer
 - Story 3: adopt 2 hook patterns into `.claude/hooks/`
 
@@ -228,7 +228,7 @@ A pattern that fails any of the three is rejected regardless of how useful it se
 | 1. Clone + map | 30 min | Both repos |
 | 2. Analyst cataloging | 1 session (~60-90 min) | Could be split per repo |
 | 3. Council pressurization | 30 min | Single pass |
-| 4. Cross-reference | 30 min | Manual scan against squad-claude |
+| 4. Cross-reference | 30 min | Manual scan against claude-code-mastery |
 | 5. Extraction proposal | 30 min | Ranked output |
 | 6. Epic decomposition | 30 min | Story drafting |
 | Per imported item | 1-3 hours | Depends on item complexity (story → impl → QA → push) |
@@ -245,12 +245,12 @@ A pattern that fails any of the three is rejected regardless of how useful it se
 
 - **Network access** to clone public github repos (verified)
 - **Disk space** in `{WORKSPACE_ROOT}/external-reference/` (2 small repos, < 100MB)
-- **squad-claude is canonical** — the cross-reference in Phase 4 assumes squad-claude is the current reference for Claude Code patterns. If squad-claude is in flux, run this plan AFTER it stabilizes.
+- **claude-code-mastery is canonical** — the cross-reference in Phase 4 assumes claude-code-mastery is the current reference for Claude Code patterns. If claude-code-mastery is in flux, run this plan AFTER it stabilizes.
 
 ### 6.2 Soft Dependencies (recommended but not required)
 
 - **EPIC-framework-upgrade-v2 should be in a stable state** — running this plan in the middle of a heavy upgrade adds coordination overhead. Recommendation: wait until fw-v2.2/2.3/2.5 are either Done or formally paused.
-- **Governance decision on the squads-gitignore finding** (raised in fw-v2.4 QA gate) — if external mining produces patterns destined for squad-claude, we need to know whether squad-claude is publishable in this repo or lives elsewhere.
+- **Governance decision on the squads-gitignore finding** (raised in fw-v2.4 QA gate) — if external mining produces patterns destined for claude-code-mastery, we need to know whether claude-code-mastery is publishable in this repo or lives elsewhere.
 
 ### 6.3 Anti-dependencies (things that would BLOCK this plan)
 
@@ -266,14 +266,14 @@ A pattern that fails any of the three is rejected regardless of how useful it se
 
 Reasoning:
 
-1. **Governance prerequisite** — the squads-gitignore decision raised by fw-v2.4 must be resolved first. Mining squad-claude content is pointless if we can't ship it.
+1. **Governance prerequisite** — the squads-gitignore decision raised by fw-v2.4 must be resolved first. Mining claude-code-mastery content is pointless if we can't ship it.
 2. **Cognitive load** — running mining in parallel with v2 upgrade execution doubles the contextual surface @sinapse-orqx and the squads must hold simultaneously. Quality > parallelism per project standing directive.
-3. **Canonical reference** — Phase 4 cross-references against squad-claude. If squad-claude is being upgraded as part of v2 (it isn't currently in v2, but is a candidate for v3), the reference is stable now and it's a good moment to capture it.
+3. **Canonical reference** — Phase 4 cross-references against claude-code-mastery. If claude-code-mastery is being upgraded as part of v2 (it isn't currently in v2, but is a candidate for v3), the reference is stable now and it's a good moment to capture it.
 4. **Low urgency** — neither external repo is going anywhere; the cost of waiting 1-2 sessions is approximately zero.
 
 **Concrete order of operations:**
 
-1. Caio + @devops resolve the squads-gitignore governance question (decision affects fw-v2.2/2.3/2.5 and any future squad-claude work)
+1. Caio + @devops resolve the squads-gitignore governance question (decision affects fw-v2.2/2.3/2.5 and any future claude-code-mastery work)
 2. Execute fw-v2.2, fw-v2.3, fw-v2.5 once governance is clear (or formally pause them with rationale)
 3. Run this mining plan (Phases 0-6) in 1 focused session
 4. Execute the resulting epic-external-mining-v1 stories incrementally over 3-5 sessions
