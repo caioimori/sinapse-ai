@@ -39,6 +39,25 @@ if ! npm run --silent validate:no-external-refs; then
   exit 1
 fi
 
+# Personal leaks guard (2026-05-06 / Wave 2 PR-8).
+# Blocks push if any operational personal context leaks into framework code.
+# Detects: maintainer-name in operational text, absolute paths, vault refs.
+# See scripts/validate-no-personal-leaks.js for the full pattern list + allowlist.
+if ! npm run --silent validate:no-personal-leaks; then
+  echo ""
+  echo "Push blocked: operational personal references detected in framework code."
+  echo ""
+  echo "Fix:"
+  echo "  1. Generalize the offending text (use 'maintainer'/'user' instead of 'Caio')"
+  echo "  2. Replace absolute paths with placeholders (e.g. {WORKSPACE_ROOT})"
+  echo "  3. git add ..."
+  echo "  4. git commit"
+  echo "  5. git push"
+  echo ""
+  echo "Bypass (emergency only):  git push --no-verify"
+  exit 1
+fi
+
 # Story A.4 — install-manifest parity guard.
 # Blocks push if install-manifest.yaml / entity-registry.yaml disagree
 # with the real files under .sinapse-ai/development/{agents,tasks,

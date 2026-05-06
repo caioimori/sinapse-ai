@@ -102,7 +102,7 @@ The plan does **not** execute extraction. It defines the analysis, governance, a
 ### Phase 1 — Clone and Map (15 minutes)
 
 ```
-Workspace dir: C:\Users\Caio Imori\Workspace\external-reference\
+Workspace dir: {WORKSPACE_ROOT}/external-reference/
   ├── claude-code-best-practice/   (cloned)
   └── claude-mem/                  (cloned)
 ```
@@ -244,7 +244,7 @@ A pattern that fails any of the three is rejected regardless of how useful it se
 ### 6.1 Hard Dependencies (must be in place BEFORE running this plan)
 
 - **Network access** to clone public github repos (verified)
-- **Disk space** in `C:\Users\Caio Imori\Workspace\external-reference\` (2 small repos, < 100MB)
+- **Disk space** in `{WORKSPACE_ROOT}/external-reference/` (2 small repos, < 100MB)
 - **squad-claude is canonical** — the cross-reference in Phase 4 assumes squad-claude is the current reference for Claude Code patterns. If squad-claude is in flux, run this plan AFTER it stabilizes.
 
 ### 6.2 Soft Dependencies (recommended but not required)
