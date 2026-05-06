@@ -194,3 +194,20 @@ cross_squad_handoffs:
 
 preferences:
   file: preferences/README.md
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - brene-brown.md
+    - charlie-munger.md
+    - council-orqx.md
+    - derek-sivers.md
+    - naval-ravikant.md
+    - patrick-lencioni.md
+    - peter-thiel.md
+    - ray-dalio.md
+    - reid-hoffman.md
+    - simon-sinek.md
+    - yvon-chouinard.md

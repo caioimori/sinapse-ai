@@ -256,3 +256,19 @@ cross_squad_connections:
     - squad-commercial: "Lead quality data, CAC metrics, pipeline attribution"
     - squad-content: "Ad performance data para content optimization"
     - squad-design: "CRO insights, heatmaps, user behavior data"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - campaign-analyst.md
+    - creative-strategist.md
+    - cro-specialist.md
+    - google-ads-specialist.md
+    - meta-ads-specialist.md
+    - paidmedia-orqx.md
+    - performance-engineer.md
+    - pm-creative-performance-analyst.md
+    - pm-youtube-ads-specialist.md
+    - traffic-masters-chief.md

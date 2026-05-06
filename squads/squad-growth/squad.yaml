@@ -269,3 +269,16 @@ cross_squad_handoffs:
 
 preferences:
   file: preferences/README.md
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - ga-analytics-engineer.md
+    - ga-campaign-analyst.md
+    - ga-cro-specialist.md
+    - ga-data-analyst.md
+    - ga-growth-hacker.md
+    - ga-seo-strategist.md
+    - growth-orqx.md

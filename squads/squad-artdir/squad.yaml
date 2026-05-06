@@ -277,3 +277,23 @@ changelog:
     date: "2026-04-10"
     type: "initial release"
     summary: "Squad created for LP art direction with 7 Pillars, 10 agents, 7 tasks, 5 KBs, 2 workflows"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - accessibility-guardian.md
+    - artdir-orqx.md
+    - color-psychologist.md
+    - cro-persuasion.md
+    - design-system-architect.md
+    - ia-architect.md
+    - interaction-designer.md
+    - layout-engineer.md
+    - motion-architect.md
+    - platform-aesthetic-director.md
+    - premium-packaging-strategist.md
+    - product-surface-director.md
+    - type-systemist.md
+    - visual-strategist.md

@@ -274,3 +274,20 @@ cross_squad_handoffs:
 
 preferences:
   file: preferences/README.md
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - commercial-orqx.md
+    - cs-business-auditor.md
+    - cs-client-success.md
+    - cs-crm-specialist.md
+    - cs-funnel-architect.md
+    - cs-lead-generation-strategist.md
+    - cs-offer-designer.md
+    - cs-revops-analyst.md
+    - cs-sales-closer.md
+    - cs-sales-enablement.md
+    - legal-chief.md
