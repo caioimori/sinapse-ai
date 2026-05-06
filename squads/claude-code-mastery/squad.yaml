@@ -203,3 +203,17 @@ settings:
   activation:
     prefix: "claude-code-mastery"
     example: "@claude-code-mastery:hooks-architect"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - claude-mastery-chief.md
+    - config-engineer.md
+    - hooks-architect.md
+    - mcp-integrator.md
+    - project-integrator.md
+    - roadmap-sentinel.md
+    - skill-craftsman.md
+    - swarm-orqx.md

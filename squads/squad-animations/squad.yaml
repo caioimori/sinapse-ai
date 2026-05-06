@@ -252,3 +252,18 @@ cross_squad_connections:
     - squad-design: "Componentes animados, micro-interactions, scroll experiences"
     - squad-brand: "Motion guidelines, animated brand assets"
     - squad-content: "Animacoes para storytelling de conteudo"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - animation-interpreter.md
+    - animation-performance-engineer.md
+    - animations-orqx.md
+    - css-motion-artist.md
+    - generative-particle-engineer.md
+    - motion-choreographer.md
+    - scroll-narrative-engineer.md
+    - shader-artist.md
+    - threejs-architect.md

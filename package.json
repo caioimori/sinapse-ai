@@ -93,6 +93,8 @@
     "validate:no-external-refs": "node scripts/validate-no-external-refs.js",
     "validate:no-personal-leaks": "node scripts/validate-no-personal-leaks.js",
     "validate:orqx-discipline": "node scripts/validate-orqx-discipline.js",
+    "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
+    "validate:squad-yaml": "node scripts/sync-squad-yaml-components.js --check",
     "validate:story-meta": "node scripts/validate-story-meta.js",
     "validate:squad-orqx": "node scripts/validate-squad-orqx.js",
     "validate:release-readiness": "node scripts/release-readiness.js",

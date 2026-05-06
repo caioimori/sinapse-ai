@@ -244,3 +244,20 @@ cross_squad_connections:
       delivers: UI copy specs (character limits, truncation behavior, responsive variants)
     - to: squad-brand
       delivers: token implementation feedback, edge cases, dark mode issues
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - design-chief.md
+    - design-orqx.md
+    - design-system.md
+    - dx-accessibility-specialist.md
+    - dx-design-system-architect.md
+    - dx-frontend-engineer.md
+    - dx-interaction-designer.md
+    - dx-performance-engineer.md
+    - dx-ui-designer.md
+    - dx-ux-strategist.md
+    - ux-designer.md

@@ -331,3 +331,17 @@ cross_squad_connections:
       delivers: "Course launch campaign briefs, ad creatives brief"
     - to: squad-copy
       delivers: "Course content for repurposing into copy/headlines"
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - assessment-creator.md
+    - content-writer.md
+    - courses-orqx.md
+    - curriculum-designer.md
+    - launch-strategist.md
+    - lesson-architect.md
+    - production-director.md
+    - slide-designer.md

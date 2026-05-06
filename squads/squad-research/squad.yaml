@@ -544,3 +544,17 @@ cross_squad_connections:
     - squad: commercial-systems
       sends: "Battle cards, competitive intelligence, market opportunity"
       agents: [Hawk, Scope, Loom]
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - audience-intelligence.md
+    - competitive-intelligence.md
+    - data-chief.md
+    - data-synthesizer.md
+    - deep-researcher.md
+    - market-analyst.md
+    - research-orqx.md
+    - trend-forecaster.md

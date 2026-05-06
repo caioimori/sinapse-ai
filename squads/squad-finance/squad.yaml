@@ -216,3 +216,14 @@ tags:
   - cost-optimization
   - agency-finance
   - p-and-l
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - budget-controller.md
+    - finance-orqx.md
+    - pricing-strategist.md
+    - profitability-analyst.md
+    - revenue-analyst.md

@@ -253,3 +253,23 @@ cross_squad_connections:
       delivers: ad copy, email copy, landing page copy for testing
     - to: squad-brand
       delivers: brand voice examples, tone calibrations
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - ad-copywriter.md
+    - brand-voice-writer.md
+    - conversion-writer.md
+    - copy-chief.md
+    - copy-editor.md
+    - copy-orqx.md
+    - copy-strategist.md
+    - direct-response-writer.md
+    - email-sequence-strategist.md
+    - funnel-copywriter.md
+    - headline-specialist.md
+    - long-form-writer.md
+    - persuasion-psychologist.md
+    - proof-architect.md

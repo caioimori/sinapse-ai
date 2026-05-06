@@ -261,3 +261,16 @@ cross_squad_handoffs:
 
 preferences:
   file: preferences/README.md
+
+# ════════════════════════════════════════════════════
+# COMPONENTS — declared agents (synced from filesystem)
+# ════════════════════════════════════════════════════
+components:
+  agents:
+    - product-orqx.md
+    - ps-client-product-manager.md
+    - ps-delivery-manager.md
+    - ps-discovery-lead.md
+    - ps-product-analyst.md
+    - ps-product-ops-specialist.md
+    - ps-product-strategist.md
