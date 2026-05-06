@@ -211,6 +211,15 @@ routing_table:
       tasks: 73
       keywords: ["animacao", "animation", "Three.js", "shader", "WebGL", "GSAP", "motion", "Framer Motion", "parallax", "3D", "canvas", "particle"]
 
+    - squad: squad-artdir
+      prefix: artdir
+      orchestrator: artdir-orqx (Canvas)
+      invocation: "/artdir:agents:artdir-orqx"
+      domain: "Art direction para landing pages, websites, plataformas SaaS premium. 7 pilares de retencao + conversao. Visual strategy, design system premium, packaging visual."
+      agents: 14
+      tasks: 13
+      keywords: ["art direction", "direcao de arte", "landing page", "LP", "site", "website", "premium", "platform", "SaaS visual", "packaging visual", "visual strategy", "pilar", "retencao", "conversao"]
+
     - squad: squad-design
       prefix: design
       orchestrator: design-orqx (Nexus)
