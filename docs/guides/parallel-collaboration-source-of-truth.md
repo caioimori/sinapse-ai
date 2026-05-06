@@ -197,7 +197,7 @@ For `sinapse-ai`, the standard location is under:
 - starts work with `collab:start` or `collab:adopt`
 - works inside his own branch or worktree
 - opens PRs for review
-- reviews Caio's PRs
+- reviews other maintainers' PRs
 
 ### Shared rule
 
