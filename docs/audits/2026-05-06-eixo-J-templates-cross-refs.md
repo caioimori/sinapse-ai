@@ -60,24 +60,23 @@ Sub-agent confirmou: **zero templates em rules/agents/tasks que não existem no 
 
 ---
 
-## 4. Templates órfãos (existem mas não citados) — 12+
+## 4. Templates órfãos — CORREÇÃO PÓS-VERIFICAÇÃO
 
-Templates em `.sinapse-ai/product/templates/` sem refs no repo (excluindo audits):
+**[Wave C cancelada — 2026-05-06]:** Verificação rigorosa via `git grep` em todos os 136 templates retornou **ZERO órfãos reais**. Sub-agent superdetectou (mesmo padrão do APSE falso positivo).
 
-- `personalized-workflow-template.yaml`
-- `personalized-template-file.yaml`
-- `activation-instructions-inline-greeting.yaml`
-- `gordon-mcp.yaml`
-- `state-persistence-tmpl.yaml`
-- `shock-report-tmpl.tsx` (citado em 1 agent.md mas órfão funcional)
-- `component-react-tmpl.tsx` (idem)
-- `token-exports-css-tmpl.css` (idem)
-- `token-exports-tailwind-tmpl.js` (idem)
+Validação dos 5 "órfãos" inicialmente reportados:
 
-**Recomendação:** auditar caso-a-caso:
-- Manter se reativação planejada
-- Deletar se experimento abandonado
-- Documentar propósito se mantido
+| Template | Refs reais (git grep) |
+|---|:-:|
+| `personalized-workflow-template.yaml` | 3 |
+| `personalized-template-file.yaml` | 3 |
+| `gordon-mcp.yaml` | 3 |
+| `state-persistence-tmpl.yaml` | **12** |
+| `shock-report-tmpl.html` | **13** |
+
+Todos os 136 templates auditados têm pelo menos 1 referência válida no repo (excluindo `docs/audits/`). Não há limpeza a fazer.
+
+**Lição (3ª vez confirmada):** Sub-agents Explore precisam validação cruzada com `git grep -l` direto antes de planejar bulk delete.
 
 ---
 
