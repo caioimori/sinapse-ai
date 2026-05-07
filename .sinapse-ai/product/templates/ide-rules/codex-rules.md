@@ -37,7 +37,7 @@ Este arquivo define as instrucoes do projeto para o Codex CLI.
 - `npm run sync:ide:check`
 - `npm run sync:skills:codex`
 - `npm run sync:skills:codex:global` (opcional; neste repo o padrao e local-first)
-- `npm run validate:structure`
+- `npm run validate:manifest:parity`
 - `npm run validate:agents`
 <!-- SINAPSE-MANAGED-END: commands -->
 

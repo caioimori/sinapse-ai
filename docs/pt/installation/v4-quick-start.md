@@ -175,7 +175,7 @@ npx sinapse-ai@latest info      # Mostrar info do sistema
 npm run lint                           # Verificar estilo de código
 npm run typecheck                      # Verificar tipos TypeScript
 npm test                               # Executar testes unitários
-npm run validate:structure             # Validar estrutura SINAPSE
+npm run validate:manifest:parity             # Validar estrutura SINAPSE
 ```
 
 ### Estrutura do Projeto
