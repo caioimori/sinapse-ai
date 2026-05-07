@@ -44,6 +44,72 @@ No implementation proceeds without ALL of these:
 
 **Attempting to write code without a valid story → BLOCKED.**
 
+## Project Type Gate (NON-NEGOTIABLE)
+
+> **Why this exists:** A bare `epic + story` pipeline is necessary but not sufficient for **large projects**. A site, landing page, SaaS platform, mobile app, or backend service needs *upstream* artifacts (project brief, PRD, architecture, design spec) **before** stories can be written meaningfully. Without this gate, the framework writes stories from a vague verbal description and produces generic / off-brand output.
+
+### Classification matrix
+
+The first thing every agent does on a briefing is **classify the project type** by intent + keywords:
+
+| Project type | Trigger keywords (PT/EN) | Required workflow |
+|---|---|---|
+| `site` | site, website, institutional, página | `greenfield-ui.yaml` |
+| `lp` | landing page, LP, captura, sales page | `greenfield-ui.yaml` |
+| `app` | app, mobile, ios, android, react native | `greenfield-ui.yaml` |
+| `platform` | plataforma, dashboard, admin, portal | `greenfield-fullstack.yaml` |
+| `saas` | SaaS, software as a service, app web | `greenfield-fullstack.yaml` |
+| `api` | API, backend, microservice, serviço | `greenfield-service.yaml` |
+| `service` | worker, integration, automation, ETL | `greenfield-service.yaml` |
+| `feature` | feature, funcionalidade (existing project) | SDC (Story Development Cycle) |
+| `fix` | bug, conserta, corrige, ajusta, tweak | SDC YOLO mode |
+| `refactor` | refatora, limpa, renomeia | SDC interactive mode |
+
+### The gate
+
+```
+project_type ∈ [site, lp, app, platform, saas, api, service]
+  AND no epic exists in docs/epics/
+  → BLOCK execution
+  → INVOKE the required greenfield workflow
+  → No "implement first, document later" — ever
+```
+
+### Required upstream artifacts per project type
+
+| Project type | Required artifacts BEFORE first story |
+|---|---|
+| `site` / `lp` / `app` | project-brief.md → prd.md → front-end-spec.md → front-end-architecture.md |
+| `platform` / `saas` | project-brief.md → prd.md → front-end-spec.md → fullstack-architecture.md |
+| `api` / `service` | project-brief.md → prd.md → service-architecture.md |
+| `feature` (in existing project) | epic.md → story.md (no upstream re-doc needed) |
+| `fix` / `refactor` | story.md only (SDC) |
+
+### Complexity gate (Spec Pipeline trigger)
+
+When the user briefing is ambiguous or the scope is large, the gate ALSO triggers the Spec Pipeline (see `workflow-execution.md` § 3):
+
+```
+complexity_score ≥ 16 (COMPLEX class) → run Spec Pipeline FIRST
+  → @project-lead gathers requirements
+  → @architect assesses + plans
+  → @analyst researches
+  → @project-lead writes spec.md
+  → @quality-gate critiques
+  → only then: epic + stories
+```
+
+### Examples
+
+| User says | Classification | What the framework does |
+|---|---|---|
+| "criar um site pra meu cliente Vascularte" | `site` | Invokes `greenfield-ui.yaml` (5-agent Phase 1) |
+| "monta uma plataforma SaaS de gestão" | `saas` (COMPLEX) | Spec Pipeline → then `greenfield-fullstack.yaml` |
+| "API de cobrança Asaas" | `api` | Invokes `greenfield-service.yaml` |
+| "corrige o botão verde da home" | `fix` | SDC YOLO direct |
+| "implementa dark mode na plataforma" | `feature` | SDC interactive |
+| "landing page do lançamento de outubro" | `lp` | Invokes `greenfield-ui.yaml` |
+
 ## Workflow Enforcement
 
 ### CORRECT Flow (always)
@@ -75,3 +141,6 @@ The ONLY exception is framework governance work by @sinapse-orqx (constitutional
 - Starting implementation with a Draft story (must be Ready)
 - Treating documentation as "optional" or "we'll do it later"
 - Any agent accepting implementation work without verifying story exists
+- Routing a `site` / `lp` / `app` / `platform` / `saas` / `api` request directly to a domain orchestrator (e.g., `@artdir-orqx`, `@design-orqx`) **before** the greenfield workflow runs and produces project-brief.md + prd.md
+- Skipping the Spec Pipeline on COMPLEX briefings (score ≥ 16)
+- Generating UI without DS grounding (see `~/.claude/rules/design-system-grounding.md`)
