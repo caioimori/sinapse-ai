@@ -107,10 +107,8 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
-    "@kayvan/markdown-tree-parser": "^1.5.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "ansi-to-html": "^0.7.2",
     "asciichart": "^1.5.25",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
@@ -124,11 +122,9 @@
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
     "ora": "^5.4.1",
-    "picocolors": "^1.1.1",
     "proper-lockfile": "^4.1.2",
     "semver": "^7.7.2",
     "tar": "^7.5.13",
-    "validator": "^13.15.15",
     "yaml": "^2.8.3"
   },
   "keywords": [
@@ -176,8 +172,7 @@
     "mocha": "^11.7.5",
     "prettier": "^3.5.3",
     "semantic-release": "^25.0.2",
-    "typescript": "^5.9.3",
-    "yaml-lint": "^1.7.0"
+    "typescript": "^5.9.3"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts}": [
