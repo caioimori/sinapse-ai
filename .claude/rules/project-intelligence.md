@@ -37,10 +37,51 @@ Report to user in ONE line: "Projeto Next.js + TypeScript + Supabase detectado."
 ## Behavior Adaptation by State
 
 ### Greenfield Behavior
-- Prioritize: scaffolding, architecture decisions, project setup
-- Workflow: setup → story → implement (no brownfield discovery needed)
-- Auto-apply: infra templates (PR template, CI, .env.example, CODEOWNERS)
-- Ask: "Que tipo de projeto? (web app, API, SaaS, landing page)"
+
+A bare `setup → story → implement` loop is **not enough** for greenfield. Large projects need upstream artifacts (project-brief, PRD, architecture, design spec) BEFORE stories. The greenfield branch sub-classifies the request and invokes the right workflow.
+
+#### Step 1 — Sub-classify project_type
+
+Detect intent and target from the user's first message (PT-BR or EN keywords):
+
+| project_type | Triggers |
+|---|---|
+| `site` | site, website, institucional, página, web page |
+| `lp` | landing page, LP, captura, sales page, squeeze page |
+| `app` | app mobile, ios, android, react native, flutter |
+| `platform` | plataforma, dashboard, admin panel, portal interno |
+| `saas` | SaaS, software as a service, app web com login, multi-tenant |
+| `api` | API, backend, REST, GraphQL, microservice |
+| `service` | worker, cron job, ETL, integration, automation |
+
+If detection is ambiguous, ask ONE clarifying question with these options as choices.
+
+#### Step 2 — Map to required workflow
+
+| project_type | Workflow file | Phase 1 agents |
+|---|---|---|
+| `site` / `lp` / `app` | `.sinapse-ai/development/workflows/greenfield-ui.yaml` | analyst → project-lead → ux-design-expert → architect → product-lead |
+| `platform` / `saas` | `.sinapse-ai/development/workflows/greenfield-fullstack.yaml` | analyst → project-lead → ux-design-expert → architect → product-lead |
+| `api` / `service` | `.sinapse-ai/development/workflows/greenfield-service.yaml` | analyst → project-lead → architect → product-lead |
+
+Execution mechanism: `.sinapse-ai/core/orchestration/greenfield-handler.js` orchestrates Phase 0 (Bootstrap) → Phase 1 (Discovery 5-agent) → Phase 2 (Sharding) → Phase 3 (Dev Cycle).
+
+#### Step 3 — Apply DS grounding (UI projects)
+
+For `site` / `lp` / `app` / `platform` / `saas`, the DS Resolver runs before any visual output (see `~/.claude/rules/design-system-grounding.md`). Internal projects use the SINAPSE Brandbook; external clients use the client's brand or the high-quality fallback.
+
+#### Step 4 — Forbidden shortcut
+
+The greenfield branch NEVER skips to "implement" without:
+- `docs/project-brief.md` validated
+- `docs/prd.md` validated
+- `docs/{front-end-spec | service-architecture}.md` validated
+- `docs/architecture.md` (or `fullstack-architecture.md`) validated
+- Stories in `docs/stories/` with status ≥ Ready
+
+#### Auto-apply infra templates
+
+Independent of project_type: PR template, CI, `.env.example`, CODEOWNERS, gitignore. These run during Phase 0 (Bootstrap) of the greenfield workflow.
 
 ### Brownfield Behavior
 - Prioritize: understanding existing code before changing anything
@@ -61,3 +102,7 @@ Report to user in ONE line: "Projeto Next.js + TypeScript + Supabase detectado."
 - Starting implementation in brownfield without reading existing code first
 - Applying greenfield templates to a brownfield project (overwriting existing CI/configs)
 - Ignoring existing patterns and imposing SINAPSE conventions forcefully
+- Treating greenfield as "setup → story → implement" without sub-classifying project_type
+- Skipping `greenfield-handler.js` (or its workflow file) on a `site` / `lp` / `platform` / `saas` / `api` request
+- Letting a domain orchestrator (artdir, design, brand) generate visual output before greenfield Phase 1 produces project-brief.md + prd.md + design spec
+- Generating UI without DS grounding (see `~/.claude/rules/design-system-grounding.md`)
