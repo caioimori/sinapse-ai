@@ -2,22 +2,68 @@
 
 > Applies to ALL agents, ALL sessions. Users NEVER configure project type manually.
 
-## Auto-Detect on First Interaction
+## Initial State Audit (ALWAYS FIRST — runs before classification)
 
-Before ANY work, silently detect project state:
+> **This is a NON-NEGOTIABLE preflight step.** Without it, the framework treats every fresh-looking directory as "greenfield" and ignores partial work that's already there (existing brand, components, half-written PRD, abandoned epics, an in-progress design system, brownfield code with no `package.json`, etc.). The audit costs ~2 seconds and prevents the framework from overwriting or duplicating work.
+
+### Eight dimensions to check (silent, parallel)
+
+The audit collects existence + summary for each dimension. Each is a YES/NO/PARTIAL signal:
+
+| # | Dimension | Signals checked |
+|---|---|---|
+| 1 | **Docs** | `docs/project-brief.md`, `docs/prd.md`, `docs/architecture*.md`, `docs/front-end-spec.md`, `docs/epics/`, `docs/stories/` |
+| 2 | **Brand** | `brand/`, `brandbook*`, `assets/brand/`, `public/brand/`, `*logo*`, `BRAND.md`, `BRANDBOOK.md` |
+| 3 | **Design system** | `tokens.json`, `design-tokens.json`, `tailwind.config.*` with custom theme, `components/ui/`, `DESIGN.md`, `DS.md` |
+| 4 | **Components** | `components/`, `src/components/`, `app/`, `pages/` with `.tsx` / `.jsx` / `.vue` files |
+| 5 | **Code** | `package.json`, `tsconfig.json`, `src/`, language-specific markers (`go.mod`, `pyproject.toml`, `Cargo.toml`) |
+| 6 | **Tests** | `jest.config.*`, `vitest.config.*`, `__tests__/`, `tests/`, `*.test.*`, `*.spec.*` |
+| 7 | **Infra** | `.github/workflows/`, `Dockerfile`, `docker-compose.*`, `vercel.json`, `.env.example`, CI configs |
+| 8 | **Git history** | `.git/` exists, `git log` has commits, recent activity (last 30 days), branch count |
+
+### Maturity classification
+
+Combining the 8 signals produces 1 of 5 maturity levels:
+
+| Level | Criteria | Recommended workflow |
+|---|---|---|
+| `EMPTY` | 0/8 signals; directory has only `.git/` or nothing | Full greenfield workflow (greenfield-handler.js) |
+| `BOOTSTRAPPED` | Only Infra (7) present (CI, Dockerfile, .env.example) — no code yet | Skip Phase 0 Bootstrap, jump to Phase 1 Discovery |
+| `PARTIAL` | Some Docs/Brand/DS but no Code, OR Code without Docs | **Continue from where it stopped** — never overwrite, merge with existing |
+| `MATURE` | Code + Tests + (Docs OR Infra) — real working project | Brownfield Discovery (10-phase technical debt) before any change |
+| `SINAPSE_MANAGED` | `.sinapse-ai/` exists with `core-config.yaml` | Resume SDC: read `docs/stories/`, find active story, continue |
+
+### Audit output (always presented to user before proceeding)
+
+After running the audit, the framework reports in ONE structured paragraph (PT-BR):
 
 ```
-1. Check: does .sinapse-ai/ exist?
-   YES → SINAPSE-managed project. Read core-config.yaml for context.
-   NO  → Continue to step 2.
+Estado detectado: {maturity_level}
+Já existe: {list of YES dimensions, e.g., "Brand (logo + brandbook), 1 PRD parcial em docs/, 5 componentes UI"}
+Faltando: {list of NO dimensions critical to the user's request}
+Recomendação: {workflow + concrete first step}
+```
 
-2. Check: is directory empty (or only has .git)?
-   YES → GREENFIELD. Ask project type, then scaffold.
-   NO  → Continue to step 3.
+Only AFTER this report (and any user adjustment) does the framework proceed to classification + workflow invocation.
 
-3. Check: does package.json or .git exist?
-   YES → BROWNFIELD. Run quick tech scan, then proceed.
-   NO  → UNKNOWN. Ask user what they want to build.
+### Anti-shortcuts (FORBIDDEN)
+
+- Skipping the audit because "it looks empty" — always run, always check all 8 dimensions
+- Calling a directory "greenfield" because `package.json` is missing (could have brand assets, half-written PRD, design tokens — all without `package.json`)
+- Calling a directory "brownfield" only because `package.json` exists (could be just bootstrapped infra with zero feature work — different workflow)
+- Overwriting existing partial work without listing it to the user first
+- Ignoring `docs/epics/` and `docs/stories/` from a previous session
+
+## Classification (after audit)
+
+Use the maturity level from the audit to pick the path:
+
+```
+maturity == EMPTY              → Full greenfield (see Greenfield Behavior below)
+maturity == BOOTSTRAPPED       → Greenfield Phase 1 onward (skip Bootstrap)
+maturity == PARTIAL            → Continuation Behavior (below)
+maturity == MATURE             → Brownfield Behavior (below)
+maturity == SINAPSE_MANAGED    → SINAPSE-Managed Behavior (below)
 ```
 
 ## Quick Tech Scan (BROWNFIELD, < 5 seconds)
@@ -83,12 +129,26 @@ The greenfield branch NEVER skips to "implement" without:
 
 Independent of project_type: PR template, CI, `.env.example`, CODEOWNERS, gitignore. These run during Phase 0 (Bootstrap) of the greenfield workflow.
 
-### Brownfield Behavior
+### Continuation Behavior (PARTIAL maturity)
+
+When the audit detects partial work — e.g., a brandbook without a site, a PRD without code, components without architecture, an abandoned epic — the framework MUST treat it as a continuation, not a bootstrap.
+
+- **Inventory first:** list every existing artifact and tell the user what's there
+- **Identify gaps:** what's missing to ship the user's stated goal?
+- **Propose continuation plan:** which greenfield phase resumes from here? which brownfield steps apply?
+- **Merge, never replace:** existing brand/DS/components are inputs to the workflow, not throwaway scaffolding
+- **Preserve epic + story state:** if `docs/epics/` or `docs/stories/` exist, resume their lifecycle (Draft → Ready → InProgress → Done)
+
+Example: user says "criar um site" but the audit finds a `brand/` folder with logo + brandbook. The framework reports:
+> Estado: `PARTIAL`. Já existe: brand assets (logo + brandbook). Faltando: PRD, design spec, código. Recomendação: greenfield-ui.yaml começando da Phase 1, usando seu brandbook como input.
+
+### Brownfield Behavior (MATURE maturity)
 - Prioritize: understanding existing code before changing anything
 - First action: read README, package.json, folder structure
 - Workflow: quick scan → understand → then proceed with user request
 - NEVER rewrite or refactor without understanding existing patterns
 - Respect existing conventions (naming, folder structure, testing framework)
+- For non-trivial changes: invoke Brownfield Discovery (10-phase technical debt assessment)
 
 ### SINAPSE-Managed Behavior
 - Check for active story in docs/stories/
