@@ -177,7 +177,7 @@ npm run lint
 npm run typecheck
 
 # Validar estrutura do projeto
-npm run validate:structure
+npm run validate:manifest:parity
 ```
 
 ### Passo 4: Integração com IDE (Opcional)
@@ -878,7 +878,7 @@ npm run lint
 npm run typecheck
 
 # Validar estrutura
-npm run validate:structure
+npm run validate:manifest:parity
 ```
 
 ### Passo 4: Commit e Push

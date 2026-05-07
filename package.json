@@ -66,7 +66,6 @@
     "apply:persona-disclaimer": "node scripts/apply-persona-disclaimer.js",
     "validate:manifest": "node scripts/validate-manifest.js",
     "validate:manifest:parity": "node .sinapse-ai/infrastructure/scripts/validate-manifest-parity.js",
-    "validate:structure": "node .sinapse-ai/infrastructure/scripts/source-tree-guardian/index.js",
     "validate:agents": "node .sinapse-ai/infrastructure/scripts/validate-agents.js",
     "sync:ide": "node .sinapse-ai/infrastructure/scripts/ide-sync/index.js sync",
     "sync:ide:validate": "node .sinapse-ai/infrastructure/scripts/ide-sync/index.js validate",
