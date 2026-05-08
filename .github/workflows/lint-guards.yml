@@ -1,0 +1,108 @@
+name: Lint Guards
+
+# Sessao 2 / Categoria 2 / PR 2.3.
+#
+# Mirrors the local pre-push lint guards in CI so the same checks run on
+# every push and PR — including pushes from contributors without a working
+# husky setup, or pushes where someone bypassed the hook with --no-verify.
+#
+# Two jobs:
+#   1. lint-guards          — runs scripts/validate-all.js (6 guards in parallel)
+#   2. cross-ide-parity     — runs validate:parity:fast (only when an agent
+#                              file actually changed, matching the pre-push
+#                              short-circuit)
+#
+# Both block merge on failure (status checks). They are intentionally
+# fast (typical run < 90s including npm ci) so they don't slow down PRs.
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: lint-guards-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  lint-guards:
+    name: Lint Guards (validate:all)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run all lint guards in parallel
+        run: npm run validate:all
+
+  cross-ide-parity:
+    name: Cross-IDE Parity (conditional)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Need full history for the path-based filter on PRs
+          fetch-depth: 0
+
+      - name: Detect agent file changes
+        id: detect
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          # On PRs, diff against the merge base with the PR base branch.
+          # On pushes to main, diff against the previous commit so we still
+          # short-circuit when a non-agent change lands.
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            git fetch --no-tags --depth=50 origin "$BASE_REF" 2>/dev/null || true
+            base="origin/$BASE_REF"
+            range="$base...HEAD"
+          else
+            range="HEAD~1...HEAD"
+          fi
+
+          if git diff --name-only "$range" 2>/dev/null \
+             | grep -q '^\.sinapse-ai/development/agents/'; then
+            echo "needs_check=true" >> "$GITHUB_OUTPUT"
+            echo "Agent files changed - will run parity check."
+          else
+            echo "needs_check=false" >> "$GITHUB_OUTPUT"
+            echo "No agent files changed - skipping parity check."
+          fi
+
+      - name: Setup Node.js
+        if: steps.detect.outputs.needs_check == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.detect.outputs.needs_check == 'true'
+        run: npm ci --ignore-scripts
+
+      - name: Run cross-IDE parity check
+        if: steps.detect.outputs.needs_check == 'true'
+        run: npm run validate:parity:fast
