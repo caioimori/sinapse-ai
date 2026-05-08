@@ -864,9 +864,9 @@ files:
     type: core
     size: 8129
   - path: core/orchestration/brownfield-handler.js
-    hash: sha256:5a72ffd463bfee2f27155230c95259b7fe171ba7ba77342176a9f05216974618
+    hash: sha256:b717c5c4c0f6c548f87f65ae394c78e71368c85186b5763a28abc9dfb0e1f71a
     type: core
-    size: 26079
+    size: 27310
   - path: core/orchestration/checklist-runner.js
     hash: sha256:9bee322fb2572ef81361a3f695b2855f61d610739c612d8b6317cb1b5d6d84c9
     type: core
@@ -932,9 +932,9 @@ files:
     type: core
     size: 15816
   - path: core/orchestration/greenfield-handler.js
-    hash: sha256:9ab317f8d27f935090e6aacf7adbece5b1b6cc311bb8ff352024b03d7910013e
+    hash: sha256:e48ac3f3413f8a7e8dbcc034d23db64e8c351b64ae0218bdaa6c25a8603f5d83
     type: core
-    size: 35318
+    size: 37513
   - path: core/orchestration/index.js
     hash: sha256:c6c22df6c4f1b370e00dd7af6eeb99824a4fda6e9ca19d65c71940e1087dd6dd
     type: core
@@ -1272,7 +1272,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:b4b3c5f88e61521d79f9a3e1de3e650d21698f2b849e4f9442bd37a77953b970
+    hash: sha256:a082cb8aa7c6a2b0a51553ba2baa24d9298f0594742d3b1337368b35c9b7b247
     type: data
     size: 520811
   - path: data/learned-patterns.yaml

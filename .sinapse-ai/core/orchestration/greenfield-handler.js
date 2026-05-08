@@ -465,17 +465,76 @@ class GreenfieldHandler extends EventEmitter {
 
     this.emit('phaseComplete', { phase: GreenfieldPhase.DEV_CYCLE, context });
 
+    // PR C (2026-05-08): write a graduation marker so the next Bob
+    // invocation can detect that this project completed the greenfield
+    // arc. The marker is best-effort — if SessionState isn't available
+    // we still return the standard dev-cycle result, just without the
+    // explicit graduation flag (the 8-dim audit will catch up on the
+    // next call regardless).
+    let graduated = false;
+    try {
+      graduated = await this._recordGraduation(context);
+    } catch (err) {
+      this._log(`Graduation marker failed: ${err.message}`, 'warn');
+    }
+
+    this.emit('graduation', {
+      phase: GreenfieldPhase.DEV_CYCLE,
+      from: 'greenfield',
+      to: 'mature',
+      timestamp: new Date().toISOString(),
+      recorded: graduated,
+    });
+
     return {
       action: 'greenfield_dev_cycle',
       phase: GreenfieldPhase.DEV_CYCLE,
       data: {
-        message: 'Greenfield workflow completo! Entrando no ciclo de desenvolvimento.',
+        message: 'Greenfield workflow completo! Entrando no ciclo de desenvolvimento. '
+          + (graduated
+            ? 'Projeto marcado como graduado — proximas execucoes farao discovery brownfield.'
+            : 'Marker de graduacao nao foi escrito (SessionState indisponivel).'),
         nextStep: 'development_cycle',
+        graduated,
         workflowExecutorAvailable: !!workflowExecutor,
-        handoff: 'Use @sprint-lead → *create-story para iniciar o ciclo de stories',
+        handoff: 'Use @sprint-lead -> *create-story para iniciar o ciclo de stories',
         context,
       },
     };
+  }
+
+  /**
+   * Writes a "graduated to mature" marker to SessionState so the next
+   * Bob invocation knows this project has completed the greenfield arc.
+   *
+   * Best-effort: returns false (and logs) when SessionState is missing
+   * or refuses the write. Never throws.
+   *
+   * @param {Object} context - Execution context to attach to the marker
+   * @returns {Promise<boolean>} true if the marker was persisted
+   * @private
+   */
+  async _recordGraduation(context) {
+    const sessionState = this._getSessionState();
+    if (!sessionState) return false;
+
+    try {
+      const exists = await sessionState.exists();
+      if (exists) await sessionState.loadSessionState();
+      await sessionState.updateSessionState({
+        workflow: {
+          maturity: 'mature',
+          graduated_from: 'greenfield',
+          graduated_at: new Date().toISOString(),
+          graduation_context: { ...context, phase3Result: this.phaseProgress[GreenfieldPhase.DEV_CYCLE] },
+        },
+      });
+      this._log('Graduation marker written: greenfield -> mature');
+      return true;
+    } catch (err) {
+      this._log(`Failed to write graduation marker: ${err.message}`, 'warn');
+      return false;
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════
