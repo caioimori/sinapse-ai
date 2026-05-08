@@ -153,7 +153,7 @@ Métricas do ecossistema (contagem de squads, agentes, tasks, orqx) DEVEM ser es
 - **21 comandos orqx** (20 squad orqx + 1 master sinapse-orqx)
 - **1213 tasks** (em `squads/*/tasks/`)
 
-*Last synced: 2026-05-06T22:33:48.485Z*
+*Last synced: 2026-05-08T23:25:53.040Z*
 <!-- END AUTO-GENERATED COUNTS -->
 
 
