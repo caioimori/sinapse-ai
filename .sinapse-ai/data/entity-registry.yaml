@@ -3906,7 +3906,7 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:51bd077896d45505ba9af7294764d68eb7afb23f9b2ce58e50b72efe9fe3af7c
+      checksum: sha256:54ad95bdc7d088aab5e03a0fb0d2d3ea6b261f09cbecd66c13128421fdb90629
       dependencies:
         - config-resolver
         - executor-assignment
@@ -3925,7 +3925,7 @@ entities:
       keywords:
         - bob
         - orchestrator
-      lastVerified: '2026-05-07T21:34:53.726Z'
+      lastVerified: '2026-05-08T18:38:36.601Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/bob-orchestrator.js
@@ -17489,6 +17489,6 @@ entities:
 metadata:
   checksumAlgorithm: sha256
   entityCount: 756
-  lastUpdated: '2026-05-08T18:20:41.494Z'
+  lastUpdated: '2026-05-08T18:38:36.605Z'
   resolutionRate: 100
   version: 1.0.0
