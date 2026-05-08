@@ -852,9 +852,9 @@ files:
     type: core
     size: 16592
   - path: core/orchestration/bob-orchestrator.js
-    hash: sha256:51bd077896d45505ba9af7294764d68eb7afb23f9b2ce58e50b72efe9fe3af7c
+    hash: sha256:dfa8f96439b4b7bc1f9e0ae712fa189cb00927e30535fbd1d08fa9d0b43ab0b1
     type: core
-    size: 35857
+    size: 42546
   - path: core/orchestration/bob-status-writer.js
     hash: sha256:7bbe95c493c44163546317479c5e330063e93a547ba60dfa27eddb2f85ba4489
     type: core
@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:0d595a52f476262a2e1a1b704e36a9adcdb59cbeeb3635d154b4f4f9743b147c
+    hash: sha256:b4b3c5f88e61521d79f9a3e1de3e650d21698f2b849e4f9442bd37a77953b970
     type: data
-    size: 520814
+    size: 520811
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
