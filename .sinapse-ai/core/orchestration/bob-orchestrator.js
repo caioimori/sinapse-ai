@@ -50,7 +50,20 @@ const { MessageFormatter } = require('./message-formatter');
 const { setUserConfigValue } = require('../config/config-resolver');
 
 /**
- * Project state enum — detected by decision tree
+ * Project state enum — detected by decision tree.
+ *
+ * The four legacy states (NO_CONFIG, EXISTING_NO_DOCS, EXISTING_WITH_DOCS,
+ * GREENFIELD) cover the SINAPSE-managed install paths. MATURE and PARTIAL
+ * (added 2026-05-08, PR B) cover the lifecycle of *any* project:
+ *
+ *   - MATURE   : enough dimensions covered (>= 6 of 8) that the project
+ *                should run brownfield discovery before further changes,
+ *                even if it once started as a SINAPSE greenfield.
+ *   - PARTIAL  : some dimensions present (3-5 of 8) but not enough to be
+ *                treated as fully formed — needs continuation behavior
+ *                that merges with what's already there instead of
+ *                overwriting.
+ *
  * @enum {string}
  */
 const ProjectState = {
@@ -58,6 +71,8 @@ const ProjectState = {
   EXISTING_NO_DOCS: 'EXISTING_NO_DOCS',
   EXISTING_WITH_DOCS: 'EXISTING_WITH_DOCS',
   GREENFIELD: 'GREENFIELD',
+  PARTIAL: 'PARTIAL',
+  MATURE: 'MATURE',
 };
 
 /**
@@ -687,25 +702,128 @@ class BobOrchestrator {
   }
 
   /**
-   * Detects the current project state (AC3-6)
+   * Audit the project across 8 maturity dimensions (Initial State Audit).
    *
-   * Decision tree implemented as pure if/else statements (AC7 — no LLM).
+   * Mirrors the dimensions documented in `.claude/rules/project-intelligence.md`:
+   * Docs, Brand, Design system, Components, Code, Tests, Infra, Git history.
    *
-   * @param {string} [projectRoot=this.projectRoot] - Project root directory (defaults to instance projectRoot)
+   * Cheap on purpose — every check is a `fs.existsSync` or a single `readdir`
+   * filter. No file content parsing, no `git log` shelling. The full audit
+   * runs in single-digit milliseconds.
+   *
+   * @param {string} [projectRoot=this.projectRoot]
+   * @returns {{dimensions: Object<string, boolean>, score: number, hasPackageJson: boolean, hasGit: boolean}}
+   */
+  auditMaturityDimensions(projectRoot = this.projectRoot) {
+    const has = (rel) => fs.existsSync(path.join(projectRoot, rel));
+    const hasAny = (rels) => rels.some(has);
+    const dirHasFiles = (dir, predicate) => {
+      const fullPath = path.join(projectRoot, dir);
+      if (!fs.existsSync(fullPath)) return false;
+      try {
+        return fs.readdirSync(fullPath).some(predicate);
+      } catch {
+        return false;
+      }
+    };
+
+    const dimensions = {
+      docs: hasAny([
+        'docs/project-brief.md',
+        'docs/prd.md',
+        'docs/architecture.md',
+        'docs/fullstack-architecture.md',
+        'docs/front-end-spec.md',
+        'docs/epics',
+        'docs/stories',
+      ]),
+      brand: hasAny([
+        'brand',
+        'assets/brand',
+        'public/brand',
+        'BRAND.md',
+        'BRANDBOOK.md',
+      ]),
+      designSystem: hasAny([
+        'tokens.json',
+        'design-tokens.json',
+        'DESIGN.md',
+        'DS.md',
+      ]) || dirHasFiles('components/ui', (f) => /\.(t|j)sx?$/.test(f)),
+      components: dirHasFiles('components', (f) => /\.(t|j)sx?$|\.vue$/.test(f))
+        || dirHasFiles('src/components', (f) => /\.(t|j)sx?$|\.vue$/.test(f))
+        || dirHasFiles('app', (f) => /page\.(t|j)sx?$/.test(f))
+        || dirHasFiles('pages', (f) => /\.(t|j)sx?$/.test(f)),
+      code: hasAny([
+        'package.json',
+        'tsconfig.json',
+        'src',
+        'go.mod',
+        'pyproject.toml',
+        'Cargo.toml',
+      ]),
+      tests: hasAny([
+        'jest.config.js',
+        'jest.config.cjs',
+        'jest.config.mjs',
+        'jest.config.ts',
+        'vitest.config.js',
+        'vitest.config.ts',
+        '__tests__',
+        'tests',
+      ]) || dirHasFiles('.', (f) => /\.(test|spec)\.(t|j)sx?$/.test(f)),
+      infra: hasAny([
+        '.github/workflows',
+        'Dockerfile',
+        'docker-compose.yml',
+        'docker-compose.yaml',
+        'vercel.json',
+        '.env.example',
+      ]),
+      git: has('.git'),
+    };
+
+    const score = Object.values(dimensions).filter(Boolean).length;
+
+    return {
+      dimensions,
+      score,
+      hasPackageJson: dimensions.code && has('package.json'),
+      hasGit: dimensions.git,
+    };
+  }
+
+  /**
+   * Detects the current project state.
+   *
+   * Decision tree (pure if/else, no LLM). Order matters:
+   *
+   *   1. EMPTY  → GREENFIELD
+   *      No code, no git, no docs of any kind.
+   *
+   *   2. SINAPSE-managed paths first (preserve legacy behavior):
+   *      - No config             → NO_CONFIG
+   *      - Config but no arch    → EXISTING_NO_DOCS
+   *      - Config + docs/arch    → EXISTING_WITH_DOCS
+   *
+   *   3. Maturity gates only fire when SINAPSE config is absent or
+   *      partial (handled above), avoiding double-classification:
+   *      - score >= 6/8         → MATURE
+   *      - score >= 3/8         → PARTIAL
+   *      - score < 3/8 with code → EXISTING_NO_DOCS (legacy fallback)
+   *
+   * @param {string} [projectRoot=this.projectRoot]
    * @returns {string} ProjectState enum value
    */
   detectProjectState(projectRoot = this.projectRoot) {
-    // Check 1: Is this a greenfield project? (AC6)
-    // No package.json, no .git, no docs/ → brand new project
-    const hasPackageJson = fs.existsSync(path.join(projectRoot, 'package.json'));
-    const hasGit = fs.existsSync(path.join(projectRoot, '.git'));
-    const hasDocs = fs.existsSync(path.join(projectRoot, 'docs'));
+    const audit = this.auditMaturityDimensions(projectRoot);
 
-    if (!hasPackageJson && !hasGit && !hasDocs) {
+    // 1. Empty directory → greenfield (audit score 0 means none of the 8 hit)
+    if (audit.score === 0) {
       return ProjectState.GREENFIELD;
     }
 
-    // Check 2: Does config exist? (AC3)
+    // 2. SINAPSE-managed paths (legacy decision tree, preserved verbatim)
     let configExists = false;
     try {
       const result = resolveConfig(projectRoot, { skipCache: true });
@@ -714,18 +832,19 @@ class BobOrchestrator {
       configExists = false;
     }
 
-    if (!configExists) {
-      return ProjectState.NO_CONFIG;
+    if (configExists) {
+      const hasArchDocs = fs.existsSync(path.join(projectRoot, 'docs/architecture'));
+      return hasArchDocs ? ProjectState.EXISTING_WITH_DOCS : ProjectState.EXISTING_NO_DOCS;
     }
 
-    // Check 3: Does SINAPSE documentation exist? (AC4, AC5)
-    const hasArchDocs = fs.existsSync(path.join(projectRoot, 'docs/architecture'));
-
-    if (!hasArchDocs) {
-      return ProjectState.EXISTING_NO_DOCS;
-    }
-
-    return ProjectState.EXISTING_WITH_DOCS;
+    // 3. No SINAPSE config: classify by maturity score.
+    // - >= 6/8 dimensions: project is far along; brownfield discovery applies.
+    // - >= 3/8 dimensions: partial — continuation behavior (merge, don't overwrite).
+    // - <  3/8 dimensions: legacy NO_CONFIG path so onboarding triggers
+    //   (a fresh project with only `package.json` or `.git` initialized).
+    if (audit.score >= 6) return ProjectState.MATURE;
+    if (audit.score >= 3) return ProjectState.PARTIAL;
+    return ProjectState.NO_CONFIG;
   }
 
   /**
@@ -752,12 +871,72 @@ class BobOrchestrator {
       case ProjectState.GREENFIELD:
         return this._handleGreenfield(context);
 
+      // PR B: 2026-05-08 — maturity-based routing.
+      // MATURE projects share the brownfield handler entry point so they
+      // get full Discovery (architecture audit, technical-debt report)
+      // before any structural change.
+      case ProjectState.MATURE:
+        return this._handleMature(context);
+
+      // PARTIAL projects (3-5/8 dimensions) need the continuation
+      // behavior described in `.claude/rules/project-intelligence.md`:
+      // inventory what already exists, identify gaps, merge — never
+      // overwrite. Wired to a dedicated handler in PR D.
+      case ProjectState.PARTIAL:
+        return this._handlePartial(context);
+
       default:
         return {
           action: 'unknown_state',
           error: `Unknown project state: ${projectState}`,
         };
     }
+  }
+
+  /**
+   * Handles MATURE state — brownfield discovery on a project that's
+   * far enough along that overwriting would lose value (PR B 2026-05-08).
+   *
+   * Funnels through the same BrownfieldHandler as EXISTING_NO_DOCS so we
+   * don't fork the discovery workflow. The handler can branch on the
+   * actual state in `context.projectState` if it ever needs to.
+   *
+   * @param {Object} context
+   * @returns {Promise<Object>}
+   * @private
+   */
+  async _handleMature(context) {
+    this._log('Mature project detected (>= 6 of 8 dimensions) — routing to brownfield discovery');
+    return this.brownfieldHandler.handle({
+      ...context,
+      projectState: ProjectState.MATURE,
+    });
+  }
+
+  /**
+   * Handles PARTIAL state — continuation behavior placeholder (PR B 2026-05-08).
+   *
+   * Real implementation lands in PR D. For now we return a structured
+   * surface result so callers know the path exists and the decision is
+   * deliberate rather than falling back to the legacy brownfield handler.
+   *
+   * @param {Object} context
+   * @returns {Promise<Object>}
+   * @private
+   */
+  async _handlePartial(_context) {
+    this._log('Partial project detected (3-5 of 8 dimensions) — continuation behavior pending');
+    return {
+      action: 'partial_continuation',
+      data: {
+        message:
+          'Detectei trabalho parcial no projeto (entre 3 e 5 dimensoes preenchidas). '
+          + 'O comportamento de continuacao (inventariar e mesclar sem sobrescrever) sera '
+          + 'ativado em PR D. Por enquanto, escolha manualmente: greenfield (forcar) '
+          + 'ou brownfield (analisar).',
+        nextStep: 'await_continuation_implementation',
+      },
+    };
   }
 
   /**
