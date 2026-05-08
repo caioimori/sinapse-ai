@@ -53,6 +53,7 @@ activation-instructions:
 agent:
   name: Axis
   id: product-lead
+  aliases: [po]
   title: Product Owner
   icon: 🎯
   whenToUse: Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions

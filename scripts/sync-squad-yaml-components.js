@@ -55,7 +55,7 @@ function hasComponentsAgents(yamlContent) {
   for (let i = 0; i < lines.length; i++) {
     if (/^components:\s*$/.test(lines[i])) {
       for (let j = i + 1; j < Math.min(i + 30, lines.length); j++) {
-        if (/^  agents:/.test(lines[j])) return true;
+        if (/^ {2}agents:/.test(lines[j])) return true;
         // Stop searching if we hit a top-level key (no leading space, not blank/comment)
         if (/^\S/.test(lines[j]) && !/^\s*#/.test(lines[j])) break;
       }

@@ -56,6 +56,7 @@ activation-instructions:
 agent:
   name: Pixel
   id: developer
+  aliases: [dev]
   title: Full Stack Developer
   icon: 💻
   whenToUse: 'Use for code implementation, debugging, refactoring, and development best practices'

@@ -1272,9 +1272,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:86b501f202158c1f2329fbc055b8af00a3d3787e225b965570fd1e5fa17652a5
+    hash: sha256:0d595a52f476262a2e1a1b704e36a9adcdb59cbeeb3635d154b4f4f9743b147c
     type: data
-    size: 526351
+    size: 520814
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1400,9 +1400,9 @@ files:
     type: agent
     size: 1110
   - path: development/agents/developer.md
-    hash: sha256:f0f9356c1044372a4fc9162205e29e373dbe7b9a663a52a3e19f8683757accf7
+    hash: sha256:4ab407631a60ce5810d8a497ff204cc04d17e5f3f8b1e8e9a3dd396fd050aee5
     type: agent
-    size: 29739
+    size: 29756
   - path: development/agents/developer/MEMORY.md
     hash: sha256:98e00ca0bd5b0b2fdfbcf8ad52256dd7f73df6236e2098618d63fae97652949a
     type: agent
@@ -1416,25 +1416,25 @@ files:
     type: agent
     size: 1403
   - path: development/agents/product-lead.md
-    hash: sha256:356f9119996047f1b22680ed2fd342d0f626a09ad8997f8804936148fc746e8b
+    hash: sha256:a6427801bc1ab8af034d7ca64a9992c918d340503e34105844c657f212b547e7
     type: agent
-    size: 16197
+    size: 16213
   - path: development/agents/product-lead/MEMORY.md
     hash: sha256:148c843a490e35e89d5fac74cea9beafb2fc4055aa9bbf52505ab383b265360f
     type: agent
     size: 1398
   - path: development/agents/project-lead.md
-    hash: sha256:c5f7eafe88a0fb48eefbc018b472edf527703bd0387d054c6bd3701b59ab98fd
+    hash: sha256:be876cef505639e7cf4fdfd82028bb61be459f6a2fbca72ce8cb83836ef4c594
     type: agent
-    size: 18571
+    size: 18587
   - path: development/agents/project-lead/MEMORY.md
     hash: sha256:b7b754e37419cb605871920283decde2c01125c5f641f90afe569491838cf5e3
     type: agent
     size: 1238
   - path: development/agents/quality-gate.md
-    hash: sha256:34c5fc65fd8632eddf16cfa6d26d10584c9fb7eb2ce3bc62c4a7be4674d3b7c5
+    hash: sha256:e88d8f73c9d493be149eb0ca7b27d398c5a4039298499140bfa6ff1657a29a69
     type: agent
-    size: 23726
+    size: 23742
   - path: development/agents/quality-gate/MEMORY.md
     hash: sha256:a17353257dc4dce493f6a87690c8ac8e8bbc1f0d71018f926277324c6a2869bb
     type: agent
@@ -1444,9 +1444,9 @@ files:
     type: agent
     size: 34532
   - path: development/agents/sprint-lead.md
-    hash: sha256:7a904b8935b320d76f344132d957ea419c977b39caf3db770259b5c3b048aea4
+    hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
     type: agent
-    size: 14425
+    size: 14441
   - path: development/agents/sprint-lead/MEMORY.md
     hash: sha256:12a5b03243b3dd6d8df71ae70cb74bd380f00ad892aa2aeffcd9ec6a447cebb0
     type: agent
@@ -4164,9 +4164,9 @@ files:
     type: template
     size: 13393
   - path: product/templates/ide-rules/codex-rules.md
-    hash: sha256:601ffec5e24ff5e247c25e4d61728167503722acc817a1b30fbd695182bed1bc
+    hash: sha256:0f47b1625e56a13ce6e8a87b90139a18231fd76f56da787cd2b79f772d8dae97
     type: template
-    size: 2843
+    size: 2849
   - path: product/templates/index-strategy-tmpl.yaml
     hash: sha256:a8a9e627393e58a052a94806026d7a842065ceb2efa14cfa6e241d0d778fc39a
     type: template
