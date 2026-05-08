@@ -2,112 +2,46 @@
 #
 # pre-push hook
 #
-# Runs two safety checks before allowing a push:
+# Runs three groups of safety checks before allowing a push:
 #
-#   1. pre-push-safety.js   - existing branch/safety net
-#   2. validate:parity:fast - cross-IDE drift guard (Story 10.18)
+#   1. pre-push-safety.js   - branch/safety net
+#   2. validate:all         - 6 lint guards in parallel (Sessao 2 / PR 2.2):
+#                               * no-external-refs
+#                               * no-personal-leaks
+#                               * orqx-discipline
+#                               * cross-refs
+#                               * manifest:parity
+#                               * squad-yaml
+#   3. validate:parity:fast - cross-IDE drift guard (only when agent files changed)
 #
-# The parity check short-circuits when no file under
-# .sinapse-ai/development/agents/ has changed in the commits being pushed,
-# so a typical push pays zero overhead.
+# Group 2 used to be 6 sequential `npm run` calls (~12-18 s on cold cache).
+# It now runs as concurrent child processes, typically 4-6 s wall time.
 #
-# To bypass both checks in an emergency:    git push --no-verify
-# To fix a parity failure:                  npm run sync:ide
-#                                           git add .claude .codex
-#                                           git commit --amend --no-edit
+# To bypass all checks in an emergency:    git push --no-verify
+# To fix common failures:
+#   - external/personal/orqx/cross-refs:    follow the message printed by the guard
+#   - manifest drift:                        npm run generate:manifest
+#   - cross-IDE drift:                       npm run sync:ide
 #
 
 set -e
 
 node bin/utils/pre-push-safety.js
 
-# Third-party references guard (2026-04-18).
-# Blocks push if any file references forbidden external framework names.
-# See scripts/validate-no-external-refs.js for the full list.
-# This is the same check CI runs, surfaced locally to prevent red-CI cycles.
-if ! npm run --silent validate:no-external-refs; then
+# Run all six lint guards in parallel and aggregate their results.
+# Individual failures print to stderr with the guard name so the offending
+# rule is still obvious. See scripts/validate-all.js for the guard list.
+if ! npm run --silent validate:all; then
   echo ""
-  echo "Push blocked: external framework references detected."
+  echo "Push blocked: one or more lint guards failed (see output above)."
   echo ""
-  echo "Fix:"
-  echo "  1. Rewrite in SINAPSE voice (see policy in memory/feedback_third_party_references.md)"
-  echo "  2. git add ..."
-  echo "  3. git commit"
-  echo "  4. git push"
-  echo ""
-  echo "Bypass (emergency only):  git push --no-verify"
-  exit 1
-fi
-
-# Personal leaks guard (2026-05-06 / Wave 2 PR-8).
-# Blocks push if any operational personal context leaks into framework code.
-# Detects: maintainer-name in operational text, absolute paths, vault refs.
-# See scripts/validate-no-personal-leaks.js for the full pattern list + allowlist.
-if ! npm run --silent validate:no-personal-leaks; then
-  echo ""
-  echo "Push blocked: operational personal references detected in framework code."
-  echo ""
-  echo "Fix:"
-  echo "  1. Generalize the offending text (use 'maintainer'/'user' instead of 'Caio')"
-  echo "  2. Replace absolute paths with placeholders (e.g. {WORKSPACE_ROOT})"
-  echo "  3. git add ..."
-  echo "  4. git commit"
-  echo "  5. git push"
-  echo ""
-  echo "Bypass (emergency only):  git push --no-verify"
-  exit 1
-fi
-
-# Orchestrator discipline guard (2026-05-06 / Wave 4 PR-14).
-# Blocks push if any squad orchestrator declares commands with execution verbs.
-# Squad orqx must ROUTE to specialists, never execute domain work directly.
-# See scripts/validate-orqx-discipline.js for the allowlist + forbidden patterns.
-if ! npm run --silent validate:orqx-discipline; then
-  echo ""
-  echo "Push blocked: orchestrator commands with execution verbs detected."
-  echo ""
-  echo "Fix:"
-  echo "  1. Replace executor command (write/build/create-X) with router (route/delegate)"
-  echo "  2. Move execution to a specialist agent in the squad"
-  echo "  3. git add ..."
-  echo "  4. git commit"
-  echo "  5. git push"
-  echo ""
-  echo "Bypass (emergency only):  git push --no-verify"
-  exit 1
-fi
-
-# Cross-refs guard (Sessao 2 / PR 2.1).
-# Blocks push if any agent: ref in .sinapse-ai/development/workflows/*.yaml
-# does not resolve to an actual agent file (or pseudo-agent allowlist).
-# See scripts/validate-cross-refs.js for scope and rules.
-if ! npm run --silent validate:cross-refs; then
-  echo ""
-  echo "Push blocked: broken cross-references in workflow YAMLs."
-  echo ""
-  echo "Fix:"
-  echo "  1. Rename the workflow ref to a valid agent id, or"
-  echo "  2. Add the missing agent under .sinapse-ai/development/agents/, or"
-  echo "  3. Add the id as an alias in an existing agent definition."
-  echo ""
-  echo "Bypass (emergency only):  git push --no-verify"
-  exit 1
-fi
-
-# Story A.4 — install-manifest parity guard.
-# Blocks push if install-manifest.yaml / entity-registry.yaml disagree
-# with the real files under .sinapse-ai/development/{agents,tasks,
-# templates,checklists}/. Runs in <1s (filesystem only, no hashing).
-if ! npm run --silent validate:manifest:parity; then
-  echo ""
-  echo "Push blocked: install-manifest.yaml / entity-registry.yaml drift detected."
-  echo ""
-  echo "Fix:"
-  echo "  1. npm run generate:manifest"
-  echo "  2. review entity-registry.yaml agents section"
-  echo "  3. git add .sinapse-ai/install-manifest.yaml .sinapse-ai/data/entity-registry.yaml"
-  echo "  4. git commit --amend --no-edit   (or a new commit)"
-  echo "  5. git push"
+  echo "Common fixes:"
+  echo "  - External framework references:   rewrite in SINAPSE voice"
+  echo "  - Personal leaks:                  generalize text, replace absolute paths"
+  echo "  - Orchestrator execution verbs:    move execution to a specialist"
+  echo "  - Broken cross-refs:               check workflow agent: ids vs registry"
+  echo "  - Manifest drift:                  npm run generate:manifest"
+  echo "  - Squad YAML drift:                npm run sync:squad-yaml"
   echo ""
   echo "Bypass (emergency only):  git push --no-verify"
   exit 1
@@ -117,16 +51,17 @@ fi
 # (first push), diff against origin/main as a sane default.
 upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main")"
 
-# Get the list of files that changed between upstream and HEAD. If git
-# cannot resolve the upstream (truly orphan branch), assume something
-# under agents/ may have changed and run the full check.
+# Cross-IDE parity is conditional: it runs only when at least one agent file
+# changed, so a typical push pays zero overhead. If git cannot resolve the
+# upstream (truly orphan branch), assume something under agents/ may have
+# changed and run the full check.
 if changed_files="$(git diff --name-only "$upstream"...HEAD 2>/dev/null)"; then
   case "$changed_files" in
     *".sinapse-ai/development/agents/"*)
-      echo "🔍 Cross-IDE parity check (agent files changed)..."
+      echo "Cross-IDE parity check (agent files changed)..."
       if ! npm run --silent validate:parity:fast; then
         echo ""
-        echo "❌ Push blocked: .claude/ or .codex/ is out of sync with .sinapse-ai/development/agents/"
+        echo "Push blocked: .claude/ or .codex/ is out of sync with .sinapse-ai/development/agents/"
         echo ""
         echo "Fix:"
         echo "  1. npm run sync:ide"
@@ -139,7 +74,7 @@ if changed_files="$(git diff --name-only "$upstream"...HEAD 2>/dev/null)"; then
       fi
       ;;
     *)
-      # No agent files touched — skip the parity check entirely
+      # No agent files touched - skip the parity check entirely
       ;;
   esac
 fi
