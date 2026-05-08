@@ -914,29 +914,170 @@ class BobOrchestrator {
   }
 
   /**
-   * Handles PARTIAL state — continuation behavior placeholder (PR B 2026-05-08).
+   * Handles PARTIAL state — Continuation Behavior (PR D 2026-05-08).
    *
-   * Real implementation lands in PR D. For now we return a structured
-   * surface result so callers know the path exists and the decision is
-   * deliberate rather than falling back to the legacy brownfield handler.
+   * Implements the contract described in `.claude/rules/project-intelligence.md`
+   * § Continuation Behavior:
    *
-   * @param {Object} context
-   * @returns {Promise<Object>}
+   *   1. Inventory: list every dimension that's already present
+   *   2. Identify gaps: which dimensions are missing
+   *   3. Propose a continuation plan: which greenfield phase resumes from here
+   *   4. Surface the decision: continue / brownfield-audit / start-over
+   *
+   * Never overwrites. Existing brand / DS / components / docs are inputs
+   * to the continuation, not throwaway scaffolding.
+   *
+   * @param {Object} context - Execution context
+   * @returns {Promise<Object>} Continuation surface result
    * @private
    */
-  async _handlePartial(_context) {
-    this._log('Partial project detected (3-5 of 8 dimensions) — continuation behavior pending');
+  async _handlePartial(context) {
+    const audit = this.auditMaturityDimensions();
+    this._log(`Partial project detected (${audit.score}/8 dimensions present) — continuation flow`);
+
+    const present = Object.entries(audit.dimensions)
+      .filter(([, v]) => v)
+      .map(([k]) => k);
+    const missing = Object.entries(audit.dimensions)
+      .filter(([, v]) => !v)
+      .map(([k]) => k);
+
+    const recommendedPhase = this._recommendContinuationPhase(audit.dimensions);
+    const inventoryLine = present.length ? present.join(', ') : 'nenhuma';
+    const gapsLine = missing.length ? missing.join(', ') : 'nenhuma';
+
+    const message = [
+      `Detectei trabalho parcial no projeto (${audit.score}/8 dimensoes preenchidas).`,
+      '',
+      `Ja existe: ${inventoryLine}`,
+      `Faltando:  ${gapsLine}`,
+      '',
+      `Recomendacao: retomar greenfield a partir da Phase ${recommendedPhase.phaseNumber}`,
+      `             (${recommendedPhase.label}) usando o que ja existe como input.`,
+      '',
+      'Escolha como prosseguir:',
+      `  1. continue      — Phase ${recommendedPhase.phaseNumber} (recomendado, sem sobrescrever)`,
+      '  2. brownfield    — discovery completa (audit tecnico, 4-8 horas)',
+      '  3. start-over    — greenfield desde a Phase 0 (DESTRUTIVO, sobrescreve)',
+    ].join('\n');
+
+    const surfaceChecker = this._getSurfaceChecker?.();
+    const surfaceResult = surfaceChecker
+      ? surfaceChecker.shouldSurface({
+        valid_options_count: 3,
+        options_with_tradeoffs: message,
+      })
+      : { should_surface: true };
+
     return {
       action: 'partial_continuation',
+      projectState: ProjectState.PARTIAL,
       data: {
-        message:
-          'Detectei trabalho parcial no projeto (entre 3 e 5 dimensoes preenchidas). '
-          + 'O comportamento de continuacao (inventariar e mesclar sem sobrescrever) sera '
-          + 'ativado em PR D. Por enquanto, escolha manualmente: greenfield (forcar) '
-          + 'ou brownfield (analisar).',
-        nextStep: 'await_continuation_implementation',
+        message,
+        inventory: present,
+        gaps: missing,
+        score: audit.score,
+        recommendation: recommendedPhase,
+        options: ['continue', 'brownfield', 'start-over'],
+        surfaceResult,
+        context,
       },
     };
+  }
+
+  /**
+   * Pick the greenfield phase that best resumes a partial project.
+   *
+   * Heuristic (matches the doc's example: brandbook without site,
+   * PRD without code, components without architecture):
+   *
+   *   - components present but no docs       -> Phase 1 (Discovery, retro-doc)
+   *   - docs + architecture present, no code -> Phase 3 (Dev Cycle)
+   *   - docs present, no architecture        -> mid Phase 1 (architect step)
+   *   - brand only                           -> Phase 1 (Discovery using brand)
+   *   - default fallback                     -> Phase 1 (always safe)
+   *
+   * @param {Object<string, boolean>} dims - Dimension flags
+   * @returns {{phaseNumber: number, label: string, reason: string}}
+   * @private
+   */
+  _recommendContinuationPhase(dims) {
+    if (dims.docs && dims.code && !dims.tests) {
+      return {
+        phaseNumber: 3,
+        label: 'Development Cycle',
+        reason: 'docs + code presentes, falta consolidar testes',
+      };
+    }
+    if (dims.docs && !dims.code) {
+      return {
+        phaseNumber: 3,
+        label: 'Development Cycle',
+        reason: 'docs presentes, falta implementar codigo',
+      };
+    }
+    if (dims.components && !dims.docs) {
+      return {
+        phaseNumber: 1,
+        label: 'Discovery (retro-doc)',
+        reason: 'componentes presentes sem PRD/architecture — documentar antes',
+      };
+    }
+    if (dims.brand && !dims.docs && !dims.code) {
+      return {
+        phaseNumber: 1,
+        label: 'Discovery (using brand as input)',
+        reason: 'brand assets presentes, falta PRD/architecture',
+      };
+    }
+    return {
+      phaseNumber: 1,
+      label: 'Discovery',
+      reason: 'fallback seguro — Phase 1 cobre todos os casos parciais',
+    };
+  }
+
+  /**
+   * Handles user response to a Continuation Behavior surface (PR D).
+   *
+   * @param {'continue'|'brownfield'|'start-over'} choice - User decision
+   * @param {Object} [context={}] - Execution context
+   * @returns {Promise<Object>} Next step result
+   */
+  async handleContinuationDecision(choice, context = {}) {
+    this._log(`Continuation decision: ${choice}`);
+    const normalized = String(choice).toLowerCase().trim();
+
+    switch (normalized) {
+      case 'continue': {
+        const audit = this.auditMaturityDimensions();
+        const recommendation = this._recommendContinuationPhase(audit.dimensions);
+        return this.greenfieldHandler.handle({
+          ...context,
+          resumeFromPhase: recommendation.phaseNumber,
+          continuation: {
+            inventory: Object.keys(audit.dimensions).filter((k) => audit.dimensions[k]),
+            score: audit.score,
+            recommendedPhase: recommendation,
+          },
+        });
+      }
+      case 'brownfield':
+        return this.brownfieldHandler.handle({
+          ...context,
+          projectState: ProjectState.PARTIAL,
+        });
+      case 'start-over':
+        return this.greenfieldHandler.handle({
+          ...context,
+          forceFromScratch: true,
+        });
+      default:
+        return {
+          action: 'partial_continuation_invalid',
+          error: `Unknown continuation choice: ${choice}`,
+        };
+    }
   }
 
   /**
