@@ -93,6 +93,7 @@
     "validate:no-personal-leaks": "node scripts/validate-no-personal-leaks.js",
     "validate:orqx-discipline": "node scripts/validate-orqx-discipline.js",
     "validate:cross-refs": "node scripts/validate-cross-refs.js",
+    "validate:all": "node scripts/validate-all.js",
     "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
     "validate:squad-yaml": "node scripts/sync-squad-yaml-components.js --check",
     "validate:story-meta": "node scripts/validate-story-meta.js",
