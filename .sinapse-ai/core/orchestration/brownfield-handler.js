@@ -183,7 +183,16 @@ class BrownfieldHandler extends EventEmitter {
    * @returns {Promise<Object>} Handler result
    */
   async handle(context = {}) {
-    this._log('🔍 First execution detected — project has code but no SINAPSE docs');
+    // PR C (2026-05-08): the handler now serves two entry points
+    // - EXISTING_NO_DOCS (legacy): "first execution, project has code but no SINAPSE docs"
+    // - MATURE: "project graduated from greenfield OR is far enough along that we
+    //   should run discovery before structural changes"
+    // The discovery workflow is the same; only the welcome message differs so
+    // the user understands why we're auditing again.
+    const isMature = context.projectState === 'MATURE';
+    this._log(isMature
+      ? 'Mature project entry — running discovery before structural changes'
+      : '🔍 First execution detected — project has code but no SINAPSE docs');
 
     // Step 1: Check if user has already accepted (resuming)
     if (context.userAccepted === true) {
@@ -200,16 +209,29 @@ class BrownfieldHandler extends EventEmitter {
   }
 
   /**
-   * Presents welcome message with time estimate (AC2 - PRD §3.2)
+   * Presents welcome message with time estimate (AC2 - PRD §3.2).
+   *
+   * PR C (2026-05-08): when entering as a MATURE project (graduated from
+   * greenfield, or detected as MATURE by the 8-dim audit), the message
+   * acknowledges that the project already has structure rather than
+   * pretending it's a first-touch brownfield.
    *
    * @param {Object} context - Execution context
    * @returns {Object} Welcome result with surface prompt
    * @private
    */
   _presentWelcomeMessage(context) {
-    this._log('Presenting welcome message for first execution');
+    const isMature = context.projectState === 'MATURE';
+    this._log(isMature
+      ? 'Presenting MATURE-aware welcome'
+      : 'Presenting welcome message for first execution');
 
-    const welcomeMessage = `Bem-vindo! Percebi que é a primeira vez que trabalho neste projeto.
+    const welcomeMessage = isMature
+      ? `Detectei um projeto maduro (>= 6 dimensoes preenchidas: codigo, testes,
+docs, brand, etc). Antes de qualquer mudanca estrutural, preciso rodar uma
+discovery rapida pra entender o que ja existe. 4-8 horas dependendo do
+tamanho. Continuar?`
+      : `Bem-vindo! Percebi que é a primeira vez que trabalho neste projeto.
 Posso dar uma olhada no que você tem aqui e configurar tudo para a gente
 trabalhar bem. Isso leva entre 4-8 horas dependendo do tamanho do projeto.
 Quer que eu comece?`;
