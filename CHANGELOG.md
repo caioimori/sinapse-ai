@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] — 2026-05-08 — 🎉 Pre-GA hardening (Install UX + Greenfield/Brownfield handoff)
+
+> **Versão oficial estável.** Fecha os dois bloqueadores de release reportados pelo maintainer: install UX que pulava configurações (idioma/IDE/modo) e handoff greenfield→brownfield onde projetos nunca graduavam. Soma 14 PRs nesta sessão (#180-#193): doc-first hardening (Categoria 0), lint hardening (Categoria 2), MCP+Skills audits (5.2/5.3) e os 4 PRs estruturais de pré-GA.
+
+### Added (Pre-GA structural — PRs #190-#193)
+
+- **Real interactive wizard** (PR #190 — `selectInstallationMode()`): usuário confirma greenfield vs brownfield via inquirer list; non-interactive (CI / piped stdin / `SINAPSE_NON_INTERACTIVE=1`) cai pro detected mode imprimindo a escolha. Novo helper `confirmInstallSummary()` renderiza summary estruturado (mode/language/IDE/target/grounding) antes de qualquer ação destrutiva.
+- **Skip-announce** em `bin/commands/install.js`: quando idioma/IDE são reusados de `~/.claude/settings.json` (upsert), o installer agora imprime exatamente o que foi reusado e como forçar re-prompt (`--reconfigure`). Antes pulava silenciosamente.
+- **Pre-install summary block** antes da Phase 1: `Idioma / IDE / Modo / Destino` com chance de Ctrl+C.
+- **8-dimension maturity audit** (PR #191 — `auditMaturityDimensions()`): substitui os 3 signals antigos por checagem de docs, brand, designSystem, components, code, tests, infra, git history. Single-digit ms; safe to call em todo detect.
+- **`MATURE` e `PARTIAL` no enum `ProjectState`** (PR #191): código alinha com a doc do PR #184 (5 maturity levels). Decisão tree em `detectProjectState()` reescrita em camadas; legacy paths preservados verbatim.
+- **Routing cases `_handleMature()` e `_handlePartial()`** no `_routeByState()` switch.
+- **Graduation signal** (PR #192 — `greenfield-handler` Phase 3): emite evento `graduation` + grava marker `workflow.maturity = 'mature'` em SessionState. Best-effort — falhas não bloqueiam.
+- **MATURE-aware brownfield welcome** (PR #192 — `brownfield-handler`): aceita `context.projectState === 'MATURE'` como entry point legítimo e troca a mensagem de boas-vindas pra "Detectei um projeto maduro..." em vez do first-touch genérico.
+- **Continuation Behavior real** (PR #193 — `_handlePartial()`): inventário das dimensões presentes + gap analysis + recomendação de phase (heurística: docs+code sem tests → Phase 3, components sem docs → Phase 1, etc) + 3-way surface (`continue` / `brownfield` / `start-over`). Nunca sobrescreve.
+- **`handleContinuationDecision(choice)`** roteia a escolha do user pro handler correto, propagando `continuation.inventory` como input ao próximo handler.
+
+### Added (Doc-first hardening — PRs #180-#184)
+
+- **Project Type Gate** em `.claude/rules/documentation-first.md`: bloqueia execução em [site, lp, app, platform, saas, api, service] sem epic/PRD/architecture.
+- **Bootstrap Classification** no Imperator (`sinapse-orqx.md`): Step -1 (Initial State Audit) → Step 0 (project_type sub-classification) → Step 1 (route).
+- **Greenfield sub-classification** em `.claude/rules/project-intelligence.md`: project_type → workflow file (greenfield-{ui,service,fullstack}.yaml).
+- **Continuation Behavior (PARTIAL maturity)** documentada como contrato.
+- **Audit doc-first**: `docs/audits/2026-05-07-doc-first-bug.md` com root cause de 4 gaps.
+
+### Added (Lint hardening — PRs #185-#187)
+
+- **`validate:cross-refs`** (PR #185): novo lint guard que checa refs `agent: <id>` em workflow YAMLs contra registry de agents. **Achou 71 refs quebrados em 13 workflows** — fix via aliases backward-compat (`pm` → `project-lead`, `po` → `product-lead`, `sm` → `sprint-lead`, `qa` → `quality-gate`, `dev` → `developer`).
+- **`validate:all`** (PR #186): runner paralelo dos 6 lint guards (no-external-refs, no-personal-leaks, orqx-discipline, cross-refs, manifest:parity, squad-yaml). **~6x faster** (~5s sequencial → 0.85s paralelo).
+- **CI lint mirror** (PR #187 — `.github/workflows/lint-guards.yml`): mesmos 6 guards rodam em PR + push to main, cobrindo contributors sem husky e pushes com `--no-verify`.
+
+### Added (Audits read-only — PRs #188-#189)
+
+- `docs/audits/2026-05-08-mcp-integration-audit.md`: PASS, 1 LOW recommendation.
+- `docs/audits/2026-05-08-skills-audit.md`: PASS com 1 MEDIUM (`.claude/skills/` não está em `package.json#files`).
+- `docs/audits/2026-05-08-install-ux-audit.md`: FAIL pra GA (resolvido em PR #190).
+- `docs/audits/2026-05-08-greenfield-brownfield-handoff-audit.md`: FAIL pra GA (resolvido em PRs #191-#193).
+
+### Changed
+
+- 5 framework agents (`project-lead`, `product-lead`, `sprint-lead`, `quality-gate`, `developer`) ganharam aliases backward-compat (`pm`, `po`, `sm`, `qa`, `dev`) pra workflows que usam IDs legacy continuarem resolvíveis.
+- `pre-push` hook: 6 lint guards seriais consolidados em uma única chamada paralela `validate:all` (tempo de push reduzido).
+
+### Fixed
+
+- ESLint pré-existente em `scripts/sync-squad-yaml-components.js:58` (no-regex-spaces — literal duplo espaço → `{2}` quantifier).
+
 ## [1.2.1] — 2026-05-04 — Polish patch (--version flag)
 
 ### Added
