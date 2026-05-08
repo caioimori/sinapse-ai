@@ -92,6 +92,7 @@ activation-instructions:
 agent:
   name: Beacon
   id: project-lead
+  aliases: [pm]
   title: Product Manager
   icon: 📋
   whenToUse: |

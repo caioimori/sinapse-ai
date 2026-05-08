@@ -53,6 +53,7 @@ activation-instructions:
 agent:
   name: Sync
   id: sprint-lead
+  aliases: [sm]
   title: Scrum Master
   icon: 🌊
   whenToUse: |

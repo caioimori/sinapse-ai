@@ -77,6 +77,23 @@ if ! npm run --silent validate:orqx-discipline; then
   exit 1
 fi
 
+# Cross-refs guard (Sessao 2 / PR 2.1).
+# Blocks push if any agent: ref in .sinapse-ai/development/workflows/*.yaml
+# does not resolve to an actual agent file (or pseudo-agent allowlist).
+# See scripts/validate-cross-refs.js for scope and rules.
+if ! npm run --silent validate:cross-refs; then
+  echo ""
+  echo "Push blocked: broken cross-references in workflow YAMLs."
+  echo ""
+  echo "Fix:"
+  echo "  1. Rename the workflow ref to a valid agent id, or"
+  echo "  2. Add the missing agent under .sinapse-ai/development/agents/, or"
+  echo "  3. Add the id as an alias in an existing agent definition."
+  echo ""
+  echo "Bypass (emergency only):  git push --no-verify"
+  exit 1
+fi
+
 # Story A.4 — install-manifest parity guard.
 # Blocks push if install-manifest.yaml / entity-registry.yaml disagree
 # with the real files under .sinapse-ai/development/{agents,tasks,
