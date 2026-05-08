@@ -71,6 +71,14 @@ async function cmdInstallGlobal(opts = {}) {
   // Language selection (skipped in upsert mode if already known, or non-TTY)
   // Story 10.35: --reconfigure forces prompt even in upsert mode
   let language = (isUpsert && !reconfigure && existing.language) ? existing.language : null;
+  let languageWasReused = false;
+  if (language) {
+    // Surface the silent skip so the user understands why the prompt is missing.
+    languageWasReused = true;
+    const labelMap = { pt: 'Portugues', portuguese: 'Portugues', en: 'English', english: 'English' };
+    const label = labelMap[language] || language;
+    logger.always(`${DIM}  Language: ${label} (from saved config; pass --reconfigure to change)${NC}`);
+  }
   if (!language) {
     language = 'pt';
     // Story 10.46 — multi-signal gate replaces the old `process.stdin.isTTY`
@@ -124,13 +132,37 @@ async function cmdInstallGlobal(opts = {}) {
 
   // LLM selection (skipped in upsert mode if previous llm known)
   // Story 10.35: --reconfigure forces prompt even in upsert mode
-  const llmChoice = (isUpsert && !reconfigure && existing.llm) ? existing.llm : await promptLlmChoice();
+  let llmChoice;
+  let llmWasReused = false;
+  if (isUpsert && !reconfigure && existing.llm) {
+    llmChoice = existing.llm;
+    llmWasReused = true;
+    const ideLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
+    logger.always(`${DIM}  IDE: ${ideLabel} (from saved config; pass --reconfigure to change)${NC}`);
+  } else {
+    llmChoice = await promptLlmChoice();
+  }
+  if (languageWasReused || llmWasReused) logger.always('');
 
   // Story 10.47 — grounding (vault / design system / brand) opt-in BYO.
   // Each section is independently optional; empty answer = skip = no-op hook.
   // Honors upsert + --reconfigure semantics established by Stories 10.20/10.35.
   await promptGroundingSections({ isUpsert, reconfigure });
 
+  // Pre-install summary — surface every resolved choice before any
+  // destructive action so the user can abort if something looks wrong.
+  // This is part of the install UX hardening for the GA release: even when
+  // settings are reused (silent skip path), the user still sees what the
+  // installer is about to do.
+  logger.always('');
+  logger.always(`${BOLD}──── Resumo da instalacao ────${NC}`);
+  const langLabelMap = { pt: 'Portugues', portuguese: 'Portugues', en: 'English', english: 'English' };
+  logger.always(`  Idioma:    ${langLabelMap[language] || language}`);
+  const llmLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
+  logger.always(`  IDE:       ${llmLabel}`);
+  logger.always(`  Modo:      ${isUpsert ? 'upsert (atualizar instalacao existente)' : 'fresh install'}`);
+  logger.always(`  Destino:   ~/.sinapse/`);
+  logger.always(`${BOLD}──────────────────────────────${NC}`);
   logger.always('');
   logger.always(`${BOLD}Instalando Sinapse globalmente...${NC}\n`);
 
