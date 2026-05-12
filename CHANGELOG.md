@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] — 2026-05-12 — 📦 Install UX Hardening epic complete
+
+> **Consolidation release.** Fecha formalmente o epic `install-ux-hardening` (8 stories validadas e marcadas Done) e estabelece v1.4.0 como o baseline pós-pré-GA estável. Sem mudanças de código vs 1.3.0 — todo o trabalho já estava em main desde os PRs de abril/maio. Esta release marca o fim do ciclo e sinaliza pros users no canal 10.x (deprecated em 2026-05-12) que o caminho oficial é `npm install sinapse-ai@latest`.
+
+### Changed (epic closure — documentation only)
+
+- **All 8 stories of `epic install-ux-hardening` validated and closed as Done:**
+  - **10.35** — `--reconfigure` flag (re-prompt language/LLM without `--force` wipe)
+  - **10.38** — Install merge-only for existing config files (PR #195 today — status closure)
+  - **10.39** — Postinstall exit code fix (warn never kills `npm install`)
+  - **10.40** — Uninstall completeness + update staleness + npx cache docs
+  - **10.41** — Chrome Brain SessionStart hook (prevent MCP disconnect at boot)
+  - **10.42** — Doctor fresh-project detection (friendly NOT_INSTALLED message)
+  - **10.46** — Setup wizard always prompts language + LLM (PR #117, validated PR #196 today)
+  - **10.47** — Generalize grounding semantico as opt-in BYO (PR #118 + #142, validated PR #196 today)
+
+### Deprecated (npm distribution)
+
+- **All `10.x` versions deprecated on npm** (13 total: `10.0.0` plus `10.0.0-rc.1` through `10.0.0-rc.12`). Message: "Published in error during framework reset. Run `npm install sinapse-ai@latest` for the current GA release (1.3.0+)."
+- The `10.x` line was published during the pre-rename phase; `1.x` is the canonical, supported line.
+
 ## [1.3.0] — 2026-05-08 — 🎉 Pre-GA hardening (Install UX + Greenfield/Brownfield handoff)
 
 > **Versão oficial estável.** Fecha os dois bloqueadores de release reportados pelo maintainer: install UX que pulava configurações (idioma/IDE/modo) e handoff greenfield→brownfield onde projetos nunca graduavam. Soma 14 PRs nesta sessão (#180-#193): doc-first hardening (Categoria 0), lint hardening (Categoria 2), MCP+Skills audits (5.2/5.3) e os 4 PRs estruturais de pré-GA.
