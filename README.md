@@ -40,17 +40,19 @@ O diferencial nao e apenas quantidade de agentes. E **governanca real**: 13 hook
 ---
 
 <!-- BEGIN GROUNDING (Story 10.47) -->
-## Grounding semantico (opt-in)
+## Grounding semantico (opt-in, foundation pre-GA)
 
-A maior parte dos frameworks de agente assume que o LLM ja sabe tudo sobre o seu negocio. SINAPSE-AI assume o oposto e oferece tres canais opcionais de **grounding** para conectar agentes ao **seu** contexto real:
+Frameworks de agente assumem que o LLM ja sabe o que importa no seu projeto. SINAPSE-AI inverte: oferece **tres canais opcionais** para ancorar o agente no seu contexto real — vault de notas, design system, brandbook. Configuracao zero-overhead agora; injecao semantica completa entra nas proximas releases da linha 1.x.
 
-| Canal | O que faz | Status | Skip? |
-|-------|-----------|--------|-------|
-| **Vault grounding** | Configura ponto de injecao para notas do seu vault de markdown. Concrete content injection em desenvolvimento | Foundation pre-GA | Sim — fallback generico |
-| **Design system grounding** | Configura ponto de injecao do seu DS source-of-truth (tokens, componentes, brandbook). Concrete DS resolver em desenvolvimento | Foundation pre-GA | Sim — defaults de alta qualidade |
-| **Brand grounding** | Configura ponto de injecao do seu brandbook (positioning, MVV, tone-of-voice). Concrete brandbook parser em desenvolvimento | Foundation pre-GA | Sim — sem injecao de marca |
+| Canal | Funcao na release atual | Injecao semantica |
+|-------|------------------------|-------------------|
+| **Vault** | Detecta `~/.claude/sinapse-ai-config.yaml`, valida schema e expoe o path do seu vault aos hooks shipados | Roadmap — proxima minor 1.x |
+| **Design System** | Mesma foundation: detecta DS configurado, expoe path. Quando ausente, agentes seguem defaults de alta qualidade | Roadmap — proxima minor 1.x |
+| **Brand** | Mesma foundation: detecta brandbook, expoe path. Quando ausente, agentes seguem tom neutro | Roadmap — proxima minor 1.x |
 
-Cada um e **opcional e independente**. Voce configura os que importam, pula os que nao se aplicam. Quando configurados via `npx sinapse-ai install`, geram um arquivo unico em `~/.claude/sinapse-ai-config.yaml` que os hooks shipados leem em tempo de execucao. Sem o arquivo, hooks sao no-op completos — zero overhead, zero ruido.
+**Por que configurar agora:** os 3 hooks ja sao shipados zero-overhead — sem config, `no-op` completo, zero ruido. Voce define os paths uma vez via `npx sinapse-ai install`, e quando a injecao semantica entrar, ativa automaticamente. Nada de reconfigurar, nada de migrar.
+
+**Por que isso e diferencial:** outros frameworks de agente acoplam grounding ao runtime do framework (te forcam a entrar no ecossistema deles). SINAPSE-AI mantem grounding como **camada opt-in declarativa** — voce escolhe quando e o que ativar, em arquivo proprio, sem lock-in.
 
 Configuracao detalhada: [`docs/guides/grounding-setup.md`](docs/guides/grounding-setup.md).
 <!-- END GROUNDING (Story 10.47) -->
