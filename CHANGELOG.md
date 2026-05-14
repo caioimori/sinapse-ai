@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] — 2026-05-14 — 🔒 Security + docs honesty patch
+
+> **Patch release.** Consolida no npm o que entrou em main depois da v1.4.0: README com copy honesta sobre o estado real dos hooks de grounding (PR #198) + bump transitivo de `ip-address` para versão patched, resolvendo Dependabot #21 (PR #199). Mais cleanup completo de versões legacy no npm registry.
+
+### Security
+
+- **Dependabot #21** — `ip-address` (dev-scope, transitive): vulnerable versions `<= 10.1.0` carregam XSS em métodos `Address6` HTML-emitting (severity: medium). Bundled `ip-address` dentro de `npm` (consumido por `@semantic-release/npm`) bumped para 10.1.1 via regeneração limpa de `package-lock.json`. `package.json` overrides também carregam `"ip-address": "^10.1.1"` como safeguard.
+
+### Documentation
+
+- **README** — Seção "Grounding semantico" reescrita para alinhar messaging com implementação real:
+  - Status renomeado "foundation pre-GA" (substituindo claims de injection concreta)
+  - Tabela cobre "Funcao na release atual" e "Injecao semantica" (roadmap)
+  - Adicionado bloco explicando o moat (opt-in declarativo vs runtime-coupled grounding em frameworks competidores)
+
+### Changed (npm registry cleanup)
+
+- **72 versões legacy deprecated no npm** com mensagens orientando pra `@latest`:
+  - 3 da linha 1.x pré-reset (1.0.0, 1.0.1, 1.1.0)
+  - 5.x série completa (6 versões: 5.0.3-5.0.8)
+  - 6.x série completa (5 versões: 6.0.0-6.0.4)
+  - 7.x série completa (39 versões: 7.0.0-7.7.11)
+  - 8.x série completa (3 versões: 8.0.0-8.0.2)
+  - 9.x série completa (6 versões: 9.0.0-9.5.0)
+  - 10.x série completa (13 versões: 10.0.0 + 12 RCs)
+- **dist-tag `rc` removida** (era órfã apontando pra `10.0.0-rc.12` deprecated). Apenas `latest` permanece, apontando para 1.4.1.
+
+### Migration
+
+Sem ação necessária para quem já está na linha 1.x. Patch transparente.
+
+```bash
+npm install sinapse-ai@latest
+```
+
 ## [1.4.0] — 2026-05-12 — 📦 Install UX Hardening epic complete
 
 > **Consolidation release.** Fecha formalmente o epic `install-ux-hardening` (8 stories validadas e marcadas Done) e estabelece v1.4.0 como o baseline pós-pré-GA estável. Sem mudanças de código vs 1.3.0 — todo o trabalho já estava em main desde os PRs de abril/maio. Esta release marca o fim do ciclo e sinaliza pros users no canal 10.x (deprecated em 2026-05-12) que o caminho oficial é `npm install sinapse-ai@latest`.
