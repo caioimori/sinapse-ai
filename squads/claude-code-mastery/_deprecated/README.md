@@ -8,8 +8,8 @@ Estes arquivos foram movidos para `_deprecated/` em 2026-05-15 durante auditoria
 
 Duplicata do orquestrador canonico **`claude-mastery-chief.md`** (tambem Orion).
 
-- `claude-mastery-chief.md` segue formato persona BMAD completo (555 linhas, activation-instructions, persona_profile, communication YAML)
-- `claude-orqx.md` era versao curta (132 linhas, formato markdown plain) que existiu como rascunho
+- `claude-mastery-chief.md` segue o formato persona canonico do SINAPSE (555 linhas, com activation-instructions, persona_profile, communication YAML)
+- `claude-orqx.md` era versao curta (132 linhas, markdown plain) que existiu como rascunho
 - `squad.yaml` declara apenas `claude-mastery-chief` como `entry_agent`
 
 **Canonico:** `agents/claude-mastery-chief.md`
