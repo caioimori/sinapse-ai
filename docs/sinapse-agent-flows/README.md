@@ -1,6 +1,6 @@
 # SINAPSE Agent Flows - Documentação Detalhada dos Agentes
 
-> 🌐 **PT** | [EN](../en/sinapse-agent-flows/README.md) | [ES](../es/sinapse-agent-flows/README.md) | [ZH](../zh/sinapse-agent-flows/README.md)
+> 🌐 **PT**
 
 ---
 
@@ -27,7 +27,7 @@ Esta pasta contém a documentação detalhada de todos os agentes do SINAPSE, in
 
 | Agente | Persona | Arquétipo | Documento |
 |--------|---------|-----------|-----------|
-| **@sinapse-orqx** | Orion | Orchestrator | [sinapse-orqx-system.md](./sinapse-orqx-system.md) |
+| **@sinapse-orqx** | Orion | Orchestrator | [snps-orqx-system.md](./snps-orqx-system.md) |
 | **@analyst** | Atlas | Researcher | [analyst-system.md](./analyst-system.md) |
 | **@architect** | Aria | Visionary | [architect-system.md](./architect-system.md) |
 | **@data-engineer** | Dara | Data Sage | [data-engineer-system.md](./data-engineer-system.md) |
@@ -169,10 +169,9 @@ flowchart TB
 
 | Documentação | Localização | Propósito |
 |--------------|-------------|-----------|
-| Meta-Agent Commands | [docs/meta-agent-commands.md](../meta-agent-commands.md) | Referência rápida |
 | Workflows Guide | [docs/guides/workflows-guide.md](../guides/workflows-guide.md) | Guia de workflows |
 | SINAPSE Workflows | [docs/sinapse-workflows/](../sinapse-workflows/) | Detalhamento de workflows |
-| Architecture | [docs/architecture/](../architecture/) | Arquitetura técnica |
+| Framework | [docs/framework/](../framework/) | Documentação do framework |
 
 ---
 

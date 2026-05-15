@@ -689,15 +689,15 @@ flowchart LR
 
 ## Referencias
 
-- [Agent Definition: pm.md](.sinapse-ai/development/agents/project-lead.md)
-- [Task: create-doc.md](.sinapse-ai/development/tasks/create-doc.md)
-- [Task: brownfield-create-epic.md](.sinapse-ai/development/tasks/brownfield-create-epic.md)
-- [Task: correct-course.md](.sinapse-ai/development/tasks/correct-course.md)
-- [Template: prd-tmpl.yaml](.sinapse-ai/product/templates/prd-tmpl.yaml)
-- [Template: brownfield-prd-tmpl.yaml](.sinapse-ai/product/templates/brownfield-prd-tmpl.yaml)
-- [Checklist: pm-checklist.md](.sinapse-ai/product/checklists/pm-checklist.md)
-- [Checklist: change-checklist.md](.sinapse-ai/product/checklists/change-checklist.md)
-- [Workflow: brownfield-discovery.yaml](.sinapse-ai/development/workflows/brownfield-discovery.yaml)
+- [Agent Definition: pm.md](../../.sinapse-ai/development/agents/project-lead.md)
+- [Task: create-doc.md](../../.sinapse-ai/development/tasks/create-doc.md)
+- [Task: brownfield-create-epic.md](../../.sinapse-ai/development/tasks/brownfield-create-epic.md)
+- [Task: correct-course.md](../../.sinapse-ai/development/tasks/correct-course.md)
+- [Template: prd-tmpl.yaml](../../.sinapse-ai/product/templates/prd-tmpl.yaml)
+- [Template: brownfield-prd-tmpl.yaml](../../.sinapse-ai/product/templates/brownfield-prd-tmpl.yaml)
+- [Checklist: pm-checklist.md](../../.sinapse-ai/product/checklists/pm-checklist.md)
+- [Checklist: change-checklist.md](../../.sinapse-ai/product/checklists/change-checklist.md)
+- [Workflow: brownfield-discovery.yaml](../../.sinapse-ai/development/workflows/brownfield-discovery.yaml)
 
 ---
 

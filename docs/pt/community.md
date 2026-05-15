@@ -19,7 +19,7 @@ Estamos construindo o futuro do desenvolvimento orquestrado por IA juntos.
 
 1. Dê uma estrela no repositório
 2. Leia o [README](README.md)
-3. Configure seu [ambiente de desenvolvimento](CONTRIBUTING-PT.md#começando)
+3. Configure seu [ambiente de desenvolvimento](contributing.md#começando)
 4. Apresente-se nas [Discussões](https://github.com/caioimori/sinapse-ai/discussions)
 
 ### Encontre Sua Primeira Contribuição
@@ -63,7 +63,7 @@ Para relatórios de bugs e solicitações de funcionalidades:
 4. Execute os testes (`npm test`)
 5. Submeta um Pull Request
 
-Veja [CONTRIBUTING-PT.md](CONTRIBUTING-PT.md) para diretrizes detalhadas.
+Veja [contributing.md](contributing.md) para diretrizes detalhadas.
 
 ### Contribuições Não-Código
 
@@ -84,7 +84,7 @@ Squads são equipes especializadas de agentes IA que trabalham juntos em domíni
 - **Squad ETL** - Coleta e transformação de dados
 - **Squad Creator** - Geração de conteúdo
 
-Veja [docs/Squads.md](docs/Squads.md) para detalhes sobre como criar seu próprio Squad.
+Veja a documentação de Squads *(coming soon)* para detalhes sobre como criar seu próprio Squad.
 
 ## Papéis na Comunidade
 
@@ -136,7 +136,7 @@ Para mudanças significativas:
 
 ### Código de Conduta
 
-Seguimos o [Contributor Covenant](CODE_OF_CONDUCT-PT.md). Por favor, leia e respeite-o.
+Seguimos o Contributor Covenant. Por favor, leia e respeite-o.
 
 Reporte violações para: conduct@SinapseAI.com
 
@@ -144,7 +144,7 @@ Reporte violações para: conduct@SinapseAI.com
 
 ### Travado em algo?
 
-1. Verifique a [Documentação](docs/)
+1. Verifique a [Documentação](../)
 2. Pesquise [Discussões existentes](https://github.com/caioimori/sinapse-ai/discussions)
 3. Pergunte nas Discussões de Q&A
 4. Abra uma discussão de Troubleshooting
@@ -158,19 +158,19 @@ Reporte violações para: conduct@SinapseAI.com
 
 1. Verifique se existe em [Ideias](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas)
 2. Se for nova, [compartilhe sua ideia](https://github.com/caioimori/sinapse-ai/discussions/new?category=ideas)
-3. Leia nosso [Processo de Solicitação de Features](docs/feature-process.md) para diretrizes detalhadas
+3. Leia nosso [Processo de Solicitação de Features](../framework/feature-process.md) para diretrizes detalhadas
 
 ## Roadmap do Projeto
 
 Quer saber para onde o SINAPSE está indo? Confira nosso roadmap público:
 
-- [ROADMAP-PT.md](ROADMAP-PT.md) - Visão de alto nível e funcionalidades planejadas
+- Roadmap *(coming soon)* - Visão de alto nível e funcionalidades planejadas
 - [Projeto GitHub](https://github.com/orgs/caioimori/projects/1) - Quadro de rastreamento detalhado
 
 O roadmap é atualizado mensalmente e reflete a contribuição da comunidade. Você pode influenciar nossa direção por:
 
 1. **Votando** em ideias nas [Discussões](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas)
-2. **Propondo** novas features via o [processo de RFC](/.github/RFC_TEMPLATE.md)
+2. **Propondo** novas features via o processo de RFC *(via Discussions)*
 3. **Contribuindo** diretamente para features planejadas
 
 > Itens do roadmap são planos, não compromissos. Prioridades podem mudar baseadas nas necessidades da comunidade e restrições técnicas.
@@ -180,19 +180,19 @@ O roadmap é atualizado mensalmente e reflete a contribuição da comunidade. Vo
 Temos um processo estruturado para propor novas features:
 
 1. **Ideias Rápidas** - Abra uma Discussão na categoria "Ideias"
-2. **Processo RFC** - Para features significativas, escreva um RFC usando nosso [template](/.github/RFC_TEMPLATE.md)
+2. **Processo RFC** - Para features significativas, escreva um RFC nas Discussões com prefixo `[RFC]`
 3. **Votação da Comunidade** - Use reações :+1: para mostrar apoio
 4. **Implementação** - Ideias aprovadas vão para nosso backlog
 
-Veja [Processo de Solicitação de Features](docs/feature-process.md) para detalhes completos.
+Veja [Processo de Solicitação de Features](../framework/feature-process.md) para detalhes completos.
 
 ## Recursos
 
 ### Aprendendo SINAPSE
 
-- [Guia de Início Rápido](docs/getting-started.md)
-- [Visão Geral da Arquitetura](docs/architecture.md)
-- [Guia do Usuário](.sinapse-ai/user-guide.md)
+- [Guia de Início Rápido](getting-started.md)
+- Visão Geral da Arquitetura *(coming soon)*
+- Guia do Usuário *(coming soon)*
 
 ### Recursos Externos
 

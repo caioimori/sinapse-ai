@@ -748,22 +748,22 @@ Erro: Another migration is running
 
 ### Tasks do @data-engineer
 
-- [db-domain-modeling.md](.sinapse-ai/development/tasks/db-domain-modeling.md)
-- [setup-database.md](.sinapse-ai/development/tasks/setup-database.md)
-- [db-apply-migration.md](.sinapse-ai/development/tasks/db-apply-migration.md)
-- [security-audit.md](.sinapse-ai/development/tasks/security-audit.md)
-- [analyze-performance.md](.sinapse-ai/development/tasks/analyze-performance.md)
-- [db-snapshot.md](.sinapse-ai/development/tasks/db-snapshot.md)
-- [db-rollback.md](.sinapse-ai/development/tasks/db-rollback.md)
-- [db-bootstrap.md](.sinapse-ai/development/tasks/db-bootstrap.md)
+- [db-domain-modeling.md](../../.sinapse-ai/development/tasks/db-domain-modeling.md)
+- [setup-database.md](../../.sinapse-ai/development/tasks/setup-database.md)
+- [db-apply-migration.md](../../.sinapse-ai/development/tasks/db-apply-migration.md)
+- [security-audit.md](../../.sinapse-ai/development/tasks/security-audit.md)
+- [analyze-performance.md](../../.sinapse-ai/development/tasks/analyze-performance.md)
+- [db-snapshot.md](../../.sinapse-ai/development/tasks/db-snapshot.md)
+- [db-rollback.md](../../.sinapse-ai/development/tasks/db-rollback.md)
+- [db-bootstrap.md](../../.sinapse-ai/development/tasks/db-bootstrap.md)
 
 ### Agente
 
-- [data-engineer.md](.sinapse-ai/development/agents/data-engineer.md)
+- [data-engineer.md](../../.sinapse-ai/development/agents/data-engineer.md)
 
 ### Workflows
 
-- [brownfield-discovery.yaml](.sinapse-ai/development/workflows/brownfield-discovery.yaml)
+- [brownfield-discovery.yaml](../../.sinapse-ai/development/workflows/brownfield-discovery.yaml)
 
 ### Relacionados
 

@@ -525,21 +525,21 @@ agent:
 
 ### Arquivos Core
 
-- [Agente sinapse-orqx](.sinapse-ai/development/agents/sinapse-orqx.md)
-- [Knowledge Base](.sinapse-ai/development/data/sinapse-kb.md)
-- [Guia do Usuario](.sinapse-ai/user-guide.md)
+- [Agente sinapse-orqx](../../.sinapse-ai/development/agents/sinapse-orqx.md)
+- [Knowledge Base](../../.sinapse-ai/development/data/sinapse-kb.md)
+- [Guia do Usuario](../../.sinapse-ai/user-guide.md)
 
 ### Standards e Documentação
 
-- [SINAPSE Framework Master](.sinapse-ai/docs/standards/SINAPSE-FRAMEWORK-MASTER.md)
-- [SINAPSE Livro de Ouro](.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO.md)
-- [Agent Personalization Standard](.sinapse-ai/docs/standards/AGENT-PERSONALIZATION-STANDARD-V1.md)
+- [SINAPSE Framework Master](../../.sinapse-ai/docs/standards/SINAPSE-FRAMEWORK-MASTER.md)
+- [SINAPSE Livro de Ouro](../../.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO.md)
+- [Agent Personalization Standard](../../.sinapse-ai/docs/standards/AGENT-PERSONALIZATION-STANDARD-V1.md)
 
 ### Diretorio de Tasks
 
-- [Tasks Directory](.sinapse-ai/development/tasks/)
-- [Templates Directory](.sinapse-ai/development/templates/)
-- [Workflows Directory](.sinapse-ai/development/workflows/)
+- [Tasks Directory](../../.sinapse-ai/development/tasks/)
+- [Templates Directory](../../.sinapse-ai/development/templates/)
+- [Workflows Directory](../../.sinapse-ai/development/workflows/)
 
 ---
 

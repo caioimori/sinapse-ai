@@ -1,6 +1,6 @@
 # SINAPSE Guides
 
-> **EN** | [PT](../pt/guides/README.md) | [ES](../es/guides/README.md)
+> **EN** | [PT](../pt/guides/README.md)
 
 ---
 
@@ -34,7 +34,7 @@ Use the DevOps agent: `@devops` then `*setup-mcp-docker`
 | Guide                                                                     | Purpose                         | Time   | Audience  |
 | ------------------------------------------------------------------------- | ------------------------------- | ------ | --------- |
 | **[MCP Global Setup Guide](./mcp-global-setup.md)**                       | Global MCP server configuration | 10 min | All users |
-| **[MCP API Keys Management](../architecture/mcp-api-keys-management.md)** | Secure credential handling      | 10 min | DevOps    |
+| **MCP API Keys Management** *(coming soon)*                                | Secure credential handling      | 10 min | DevOps    |
 
 > **Note:** 1MCP documentation has been deprecated. SINAPSE now uses Docker MCP Toolkit exclusively (Story 5.11). Archived docs available in `.github/deprecated-docs/guides/`.
 
@@ -50,9 +50,9 @@ Use the DevOps agent: `@devops` then `*setup-mcp-docker`
 
 | Guide                                                              | Purpose                               | Time   | Audience               |
 | ------------------------------------------------------------------ | ------------------------------------- | ------ | ---------------------- |
-| **[Module System Architecture](../architecture/module-system.md)** | v4.2 modular architecture (4 modules) | 15 min | Architects, Developers |
+| **Module System Architecture** *(coming soon)*                     | v4.2 modular architecture (4 modules) | 15 min | Architects, Developers |
 | **[Service Discovery Guide](./service-discovery.md)**              | Worker discovery and registry API     | 10 min | Developers             |
-| **[Migration Guide v2.0→v4.2](../migration/migration-guide.md)**      | Step-by-step migration instructions   | 20 min | All users upgrading    |
+| **Migration Guide v2.0→v4.2** *(coming soon)*                      | Step-by-step migration instructions   | 20 min | All users upgrading    |
 
 ### System Configuration
 
@@ -71,13 +71,13 @@ Use the DevOps agent: `@devops` then `*setup-mcp-docker`
 ### Quick Navigation (v4)
 
 **...understand the 4-module architecture**
-→ [`module-system.md`](../architecture/module-system.md) (15 min)
+→ `module-system.md` *(coming soon)*
 
 **...discover available workers and tasks**
 → [`service-discovery.md`](./service-discovery.md) (10 min)
 
 **...migrate from v2.0 to v4.2**
-→ [`migration-guide.md`](../migration/migration-guide.md) (20 min)
+→ `migration-guide.md` *(coming soon)*
 
 **...configure quality gates**
 → [`quality-gates.md`](./quality-gates.md) (15 min)
@@ -98,7 +98,7 @@ Use the DevOps agent: `@devops` then `*setup-mcp-docker`
 ## Other Guides
 
 - [Agent Reference Guide](../agent-reference-guide.md)
-- [Git Workflow Guide](../git-workflow-guide.md)
+- Git Workflow Guide *(coming soon)*
 - [Getting Started](../getting-started.md)
 - [Installation Troubleshooting](./installation-troubleshooting.md)
 - [Troubleshooting](../troubleshooting.md)

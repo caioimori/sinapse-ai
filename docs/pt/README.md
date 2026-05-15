@@ -6,20 +6,18 @@
 
 # Documentação SINAPSE
 
-> 🌐 [EN](../README.md) | **PT** | [ES](../es/README.md) | [ZH](../zh/README.md)
+> 🌐 [EN](../README.md) | **PT**
 
 > **Sistema Orquestrado por IA para Desenvolvimento Full Stack**
 
 ---
 
-## 🌐 Selecione o Idioma / Select Language / Seleccione el Idioma / 选择语言
+## 🌐 Selecione o Idioma / Select Language
 
 | Idioma             | Status         | Link                                                    |
 | ------------------ | -------------- | ------------------------------------------------------- |
 | **English**        | ✅ Completo    | [📖 English Documentation](../getting-started.md)       |
 | **Português**      | ✅ Completo    | [📖 Documentação em Português](./getting-started.md)    |
-| **Español**        | ✅ Completo    | [📖 Documentación en Español](../es/getting-started.md) |
-| **中文（简体）**   | 🟡 Em progresso | [📖 Documentação em Chinês](../zh/getting-started.md)   |
 
 ---
 
@@ -30,23 +28,9 @@ docs/
 ├── getting-started.md         # English (raiz)
 ├── guides/                    # English
 ├── installation/              # English
-├── architecture/              # English
 ├── framework/                 # English
-├── platforms/                 # English
 │
-├── pt/                        # Português (traduções)
-│   ├── getting-started.md
-│   ├── guides/
-│   ├── platforms/
-│   └── ...
-│
-├── es/                        # Español (traduções)
-│   ├── getting-started.md
-│   ├── guides/
-│   ├── platforms/
-│   └── ...
-│
-└── zh/                        # 中文（简体）(traduções)
+└── pt/                        # Português (traduções)
     ├── getting-started.md
     ├── guides/
     └── ...
@@ -60,8 +44,6 @@ docs/
 
 - [Getting Started](../getting-started.md)
 - [Installation Guide](../installation/README.md)
-- [Architecture Overview](../core-architecture.md)
-- [Meta-Agent Commands](../meta-agent-commands.md)
 - [Troubleshooting](../troubleshooting.md)
 
 ### Português
@@ -73,24 +55,6 @@ docs/
 - [Documentação do Sistema de Agentes](../sinapse-agent-flows/README.md)
 - [Documentação de Workflows](../sinapse-workflows/README.md)
 - [Solução de Problemas](./troubleshooting.md)
-
-### Español
-
-- [Comenzando](../es/getting-started.md)
-- [Guía de Instalación](../es/installation/README.md)
-- [Visión General de la Arquitectura](../es/architecture/ARCHITECTURE-INDEX.md)
-- [Referencia de Agentes](../es/agent-reference-guide.md)
-- [Documentación del Sistema de Agentes](../es/sinapse-agent-flows/README.md)
-- [Documentación de Workflows](../es/sinapse-workflows/README.md)
-- [Solución de Problemas](../es/troubleshooting.md)
-
-### 中文（简体）
-
-- [快速入门](../zh/getting-started.md)
-- [安装指南](../zh/installation/README.md)
-- [架构总览](../zh/architecture/ARCHITECTURE-INDEX.md)
-- [代理参考](../zh/agent-reference-guide.md)
-- [故障排查](../zh/troubleshooting.md)
 
 ---
 
