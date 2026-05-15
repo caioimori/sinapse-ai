@@ -1,43 +1,46 @@
 # ═══════════════════════════════════════════════════════════════════════════════
+# SQUAD MANIFEST — claude-code-mastery v1.0
+# ═══════════════════════════════════════════════════════════════════════════════
 # Squad: Claude Code Mastery
 # Domain: Claude Code — Full Spectrum Expertise
-# Created: 2026-03-01
-# Version: 1.0.0
+# Migrated 2026-05-15 from nested (squad: {...}) to flat schema (canonical).
 # ═══════════════════════════════════════════════════════════════════════════════
 
-squad:
-  name: claude-code-mastery
-  display_name: "Claude Code Mastery Squad"
-  version: "1.0.0"
-  domain: "Claude Code — Full Spectrum Expertise"
-  description: |
-    Squad especialista em todas as dimensões do Claude Code: hooks, skills,
-    subagents, MCP, plugins, agent teams, customização, integração com projetos,
-    roadmap tracking, e SINAPSE architecture awareness.
+name: claude-code-mastery
+version: "1.0.0"
+display_name: "Claude Code Mastery Squad"
+domain: "Claude Code — Full Spectrum Expertise"
+description: |
+  Squad especialista em todas as dimensões do Claude Code: hooks, skills,
+  subagents, MCP, plugins, agent teams, customização, integração com projetos,
+  roadmap tracking, e SINAPSE architecture awareness.
 
-  philosophy: |
-    "Master the tool to master the craft."
-    Cada agent é baseado em elite minds reais com frameworks documentados
-    no ecossistema Claude Code. O squad cobre desde automação com hooks
-    até orquestração multi-agente e engenharia de contexto.
+philosophy: |
+  "Master the tool to master the craft."
+  Cada agent é baseado em elite minds reais com frameworks documentados
+  no ecossistema Claude Code. O squad cobre desde automação com hooks
+  até orquestração multi-agente e engenharia de contexto.
 
-  keywords:
-    - claude-code
-    - hooks
-    - skills
-    - subagents
-    - mcp
-    - plugins
-    - agent-teams
-    - customization
-    - integration
-    - context-engineering
-    - roadmap
-    - sinapse
+tags:
+  - claude-code
+  - hooks
+  - skills
+  - subagents
+  - mcp
+  - plugins
+  - agent-teams
+  - customization
+  - integration
+  - context-engineering
+  - roadmap
+  - sinapse
 
-  entry_agent: claude-mastery-chief
-  created_by: "squad-creator-pro"
+entry_agent: claude-mastery-chief
+
+metadata:
   created_at: "2026-03-01"
+  created_by: "squad-creator-pro"
+  migrated_to_flat_schema: "2026-05-15"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TIER ARCHITECTURE
@@ -68,63 +71,57 @@ tiers:
     purpose: "Cross-cutting expertise: skills, project integration, roadmap awareness"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# AGENT REGISTRY
+# AGENT REGISTRY (dict-form: id -> metadata)
+# Note: distinct from `components.agents` which is the flat file list used
+# by tooling. This dict captures agent metadata (tier, focus, icon).
 # ─────────────────────────────────────────────────────────────────────────────
 
-agents:
+agents_registry:
   claude-mastery-chief:
     file: agents/claude-mastery-chief.md
     tier: 0
-    based_on: "Original (Orchestrator)"
     icon: "🧠"
     focus: "Triage, routing, SINAPSE awareness"
 
   hooks-architect:
     file: agents/hooks-architect.md
     tier: 1
-    based_on: "disler (Hooks Mastery)"
     icon: "🪝"
     focus: "17 hook events, automation pipelines, meta-agent patterns"
 
   mcp-integrator:
     file: agents/mcp-integrator.md
     tier: 1
-    based_on: "Peter Steinberger (@steipete)"
     icon: "🔌"
     focus: "MCP servers, tool discovery, agent-as-MCP, integration patterns"
 
   swarm-orqx:
     file: agents/swarm-orqx.md
     tier: 1
-    based_on: "Kieran Klaassen + Reuven Cohen"
     icon: "🐝"
     focus: "Agent Teams, subagents, multi-session coordination, worktrees"
 
   config-engineer:
     file: agents/config-engineer.md
     tier: 1
-    based_on: "SuperClaude-Org"
     icon: "⚙️"
     focus: "Settings, permissions, CLAUDE.md, rules, managed policies, personas"
 
   skill-craftsman:
     file: agents/skill-craftsman.md
     tier: 2
-    based_on: "spec-driven agile-AI methodology + community"
     icon: "🛠️"
     focus: "Skills, commands, plugins, context engineering, spec-driven dev"
 
   project-integrator:
     file: agents/project-integrator.md
     tier: 2
-    based_on: "Daniel Miessler (PAI)"
     icon: "📦"
     focus: "Project integration, repository setup, SINAPSE awareness, Unix philosophy"
 
   roadmap-sentinel:
     file: agents/roadmap-sentinel.md
     tier: 2
-    based_on: "Boris Cherny (philosophy) + Official sources"
     icon: "🔭"
     focus: "Roadmap tracking, changelog monitoring, feature adoption, plan-first"
 
@@ -184,11 +181,11 @@ cross_cutting:
       - "https://code.claude.com/docs/en/overview"
       - "https://github.com/anthropics/claude-code/releases"
 
-  quality_standards:
-    min_score: 7.0
-    smoke_tests: 3
-    voice_dna_required: true
-    thinking_dna_required: true
+quality_standards:
+  min_score: 7.0
+  smoke_tests: 3
+  voice_dna_required: true
+  thinking_dna_required: true
 
 # ─────────────────────────────────────────────────────────────────────────────
 # SETTINGS
