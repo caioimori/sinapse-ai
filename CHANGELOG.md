@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] — 2026-05-14 — 🩹 Doctor bugfix patch (Story 10.42 regression + false-FAIL cleanup)
+
+> **Bugfix patch.** Smoke test pós-v1.4.1 detectou 1 regressão real + 4 ruídos no doctor que arruinavam a primeira impressão pra users novos. Esta release consolida os 5 fixes.
+
+### Fixed
+
+- **Story 10.42 regressão** — `npx sinapse-ai doctor` em projeto fresh exibia 11 FAILs ao invés da mensagem amigável `NOT_INSTALLED`. Root cause: `detectInstallState()` qualificava `~/.sinapse/` e `~/.claude/commands/SINAPSE/` como markers globais — esses sempre existem em máquinas que já rodaram SINAPSE em qualquer outro projeto, anulando completamente a detecção de fresh-project. Agora só `<projectRoot>/.sinapse-ai/` qualifica. EXIT=4 + mensagem amigável confirmados em smoke test.
+- **`npm-packages` check** — não falha mais quando `node_modules/` está ausente no projeto raiz. Confia em `canResolveDep` (Story 10.48) para validar deps do `.sinapse-ai/` via Node module resolution (parent + global). Projetos sem deps Node próprios (writing repos, design repos, infra-only) não levam mais FAIL falso.
+- **`skills-count` check** — `.claude/skills/` é OPCIONAL e não shipado pelo install (verificado contra `install-manifest.yaml`). Status mudado de FAIL para INFO. Mensagem revisada: "skills are optional — install via `npx claude-skills add <name>`". `onError` policy: `'warn'` ao invés de `'fail'`.
+- **`manifest-version-parity` check** — comparava `<projectRoot>/package.json#version` (do user) com `.sinapse-ai/install-manifest.yaml#version` (do framework) em qualquer cwd. Em projeto user isso sempre dava FAIL com "Run `npm run generate:manifest`" — script que só existe no repo do framework. Agora detecta context via `package.json#name === "sinapse-ai"`: se não for o repo do framework, INFO + skipped.
+- **`scripts/sinapse-patch.js` Windows detection** — `findCliPath` só procurava `cli.js` em paths POSIX. Claude Code 2.x no Windows ships `cli-wrapper.cjs` em `~/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/`. Adicionados Windows-specific candidates + variantes de filename (`cli.js`, `cli-wrapper.cjs`, `bin/cli.js`). Plus mensagem `[ERRO]` → `[INFO]` e `process.exit(1)` → `process.exit(0)` quando CLI não é encontrado: branding patch é cosmético opcional, não deve nunca bloquear o install pipeline.
+
+### Removed
+
+- **`validator` dep órfã** removida de `.sinapse-ai/package.json`. Estava declarada como dependency mas sem nenhum import no código. Causava FAIL legítimo em `npm-packages` check porque era unresolvable. Zero impacto runtime.
+
+### Smoke test confirmation (2026-05-14)
+
+| Capability | Antes (v1.4.1) | Agora (v1.4.2) |
+|---|---|---|
+| `doctor` em projeto fresh | 11 FAIL, EXIT=2 | mensagem amigável, EXIT=4 |
+| `doctor` em projeto instalado | 3 FALSE FAIL | 0 FAIL |
+| `npm install` + branding patch | `[ERRO]` visível | `[INFO]` informativo + exit 0 |
+| `npm-packages` em repo do framework | FAIL "validator unresolvable" | PASS "13 deps resolved" |
+
 ## [1.4.1] — 2026-05-14 — 🔒 Security + docs honesty patch
 
 > **Patch release.** Consolida no npm o que entrou em main depois da v1.4.0: README com copy honesta sobre o estado real dos hooks de grounding (PR #198) + bump transitivo de `ip-address` para versão patched, resolvendo Dependabot #21 (PR #199). Mais cleanup completo de versões legacy no npm registry.

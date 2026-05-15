@@ -36,29 +36,32 @@ function readManifestVersion(manifestPath) {
 }
 
 async function run(context) {
+  // v1.4.2 fix: this check was designed for the FRAMEWORK REPO itself — it
+  // detects drift between `package.json` and the auto-generated install-manifest
+  // during pre-publish. When run in a USER project, the cwd `package.json` is
+  // the user's own (e.g. `version: "1.0.0"`), and `install-manifest.yaml` ships
+  // with the framework version. Comparing them is meaningless and the FAIL
+  // message + fix command (`npm run generate:manifest`) are confusing — that
+  // script only exists in the framework repo.
+  //
+  // Detect framework-repo context by reading `name` from package.json. Only
+  // perform parity check when name === "sinapse-ai". Otherwise INFO.
+
   const pkgPath = path.join(context.projectRoot, 'package.json');
   const manifestPath = path.join(context.projectRoot, '.sinapse-ai', 'install-manifest.yaml');
 
   if (!fs.existsSync(pkgPath)) {
     return {
       check: name,
-      status: 'WARN',
-      message: 'package.json not found in project root',
+      status: 'INFO',
+      message: 'No package.json — parity check not applicable',
       fixCommand: null,
     };
   }
-  if (!fs.existsSync(manifestPath)) {
-    return {
-      check: name,
-      status: 'WARN',
-      message: 'install-manifest.yaml not found',
-      fixCommand: 'npm run generate:manifest',
-    };
-  }
 
-  let pkgVersion;
+  let pkgJson;
   try {
-    pkgVersion = JSON.parse(fs.readFileSync(pkgPath, 'utf8')).version;
+    pkgJson = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   } catch {
     return {
       check: name,
@@ -68,6 +71,26 @@ async function run(context) {
     };
   }
 
+  // Only audit parity inside the framework repo itself.
+  if (pkgJson.name !== 'sinapse-ai') {
+    return {
+      check: name,
+      status: 'INFO',
+      message: 'Parity check skipped (not the sinapse-ai repo)',
+      fixCommand: null,
+    };
+  }
+
+  if (!fs.existsSync(manifestPath)) {
+    return {
+      check: name,
+      status: 'WARN',
+      message: 'install-manifest.yaml not found',
+      fixCommand: 'npm run generate:manifest',
+    };
+  }
+
+  const pkgVersion = pkgJson.version;
   const manifestVersion = readManifestVersion(manifestPath);
 
   if (!pkgVersion || !manifestVersion) {
