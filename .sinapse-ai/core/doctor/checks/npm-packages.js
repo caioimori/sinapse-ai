@@ -31,18 +31,15 @@ function canResolveDep(dep, fromDir) {
 }
 
 async function run(context) {
-  const nodeModulesPath = path.join(context.projectRoot, 'node_modules');
-  // Check 1: Project node_modules
-  if (!fs.existsSync(nodeModulesPath)) {
-    return {
-      check: name,
-      status: 'FAIL',
-      message: 'node_modules not found',
-      fixCommand: 'npm install',
-    };
-  }
+  // v1.4.2 fix: drop the "node_modules not found" hard FAIL.
+  // Many user projects don't have a project-level package.json or node_modules
+  // (e.g. someone using SINAPSE in a writing project, design repo, infra-only
+  // repo). The presence of project node_modules is NOT a requirement for the
+  // framework to work — Story 10.48 already established that .sinapse-ai deps
+  // can resolve via parent/global node_modules. Only flag what truly blocks
+  // the framework: unresolvable .sinapse-ai deps.
 
-  // Check 2 (Story 10.48): resolve declared deps via Node's resolver.
+  // Story 10.48: resolve declared deps via Node's resolver.
   // Walks parent + global directories — does NOT require a sibling
   // node_modules/ inside .sinapse-ai/ when the dep is reachable elsewhere.
   const sinapseCoreDir = path.join(context.projectRoot, '.sinapse-ai');
@@ -82,19 +79,25 @@ async function run(context) {
     };
   }
 
-  let detail = '';
+  // v1.4.2: report status based on what's actually relevant — sinapse-ai
+  // deps resolvability, not the presence of an arbitrary node_modules dir.
+  let message;
   if (hasSinapseCorePkg) {
     if (fs.existsSync(sinapseCoreNodeModules)) {
-      detail = ', .sinapse-ai deps complete';
+      message = `.sinapse-ai deps complete (${totalDeps} declared)`;
     } else if (totalDeps > 0) {
-      detail = `, .sinapse-ai deps (${totalDeps}) resolved via parent node_modules`;
+      message = `.sinapse-ai deps (${totalDeps}) resolved via parent/global node_modules`;
+    } else {
+      message = '.sinapse-ai package has no deps declared';
     }
+  } else {
+    message = 'no .sinapse-ai/package.json — framework runs from npm install';
   }
 
   return {
     check: name,
     status: 'PASS',
-    message: 'node_modules present' + detail,
+    message,
     fixCommand: null,
   };
 }

@@ -20,24 +20,39 @@ const os = require('os');
 function findCliPath() {
   const HOME = os.homedir();
 
-  // Caminhos possiveis (npm global, nvm, default)
-  const candidates = [
-    path.join(HOME, '.npm-global/lib/node_modules/@anthropic-ai/claude-code/cli.js'),
-    path.join(HOME, '.nvm/versions/node', process.version, 'lib/node_modules/@anthropic-ai/claude-code/cli.js'),
-    // npm root -g
-    '/usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js',
-    '/usr/lib/node_modules/@anthropic-ai/claude-code/cli.js',
-  ];
+  // v1.4.2 fix: include Windows npm-global path + multiple entry-point
+  // filename variants. Claude Code 2.x on Windows ships cli-wrapper.cjs at
+  // the package root, with the actual cli.js inside bin/.
 
-  // Tenta npm root -g como fallback
+  // Try `npm root -g` first (most reliable cross-platform).
+  let npmRoot = null;
   try {
     const { execSync } = require('child_process');
-    const npmRoot = execSync('npm root -g', { encoding: 'utf8' }).trim();
-    candidates.unshift(path.join(npmRoot, '@anthropic-ai/claude-code/cli.js'));
-  } catch {}
+    npmRoot = execSync('npm root -g', { encoding: 'utf8' }).trim();
+  } catch {
+    /* ignore — fall back to platform-specific defaults */
+  }
 
-  for (const p of candidates) {
-    if (fs.existsSync(p)) return p;
+  const packageDirs = [];
+  if (npmRoot) {
+    packageDirs.push(path.join(npmRoot, '@anthropic-ai', 'claude-code'));
+  }
+  packageDirs.push(
+    path.join(HOME, '.npm-global', 'lib', 'node_modules', '@anthropic-ai', 'claude-code'),
+    path.join(HOME, '.nvm', 'versions', 'node', process.version, 'lib', 'node_modules', '@anthropic-ai', 'claude-code'),
+    path.join(HOME, 'AppData', 'Roaming', 'npm', 'node_modules', '@anthropic-ai', 'claude-code'),
+    '/usr/local/lib/node_modules/@anthropic-ai/claude-code',
+    '/usr/lib/node_modules/@anthropic-ai/claude-code',
+  );
+
+  // Multiple possible entry-point filenames across versions/platforms.
+  const entryFiles = ['cli.js', 'cli-wrapper.cjs', path.join('bin', 'cli.js')];
+
+  for (const pkgDir of packageDirs) {
+    for (const entry of entryFiles) {
+      const candidate = path.join(pkgDir, entry);
+      if (fs.existsSync(candidate)) return candidate;
+    }
   }
   return null;
 }
@@ -45,10 +60,13 @@ function findCliPath() {
 const CLI_PATH = findCliPath();
 
 if (!CLI_PATH) {
-  console.error('\n[ERRO] Claude Code CLI nao encontrado.');
-  console.error('Certifique-se de ter instalado com: npm install -g @anthropic-ai/claude-code');
-  console.error('Depois rode este script novamente.\n');
-  process.exit(1);
+  // v1.4.2: branding patch is OPTIONAL cosmetic — not finding Claude Code
+  // is not an error. Downgrade message from [ERRO] to [INFO] and exit 0
+  // so it never blocks the install pipeline.
+  console.log('\n[INFO] Claude Code CLI nao encontrado — branding patch ignorado.');
+  console.log('       (Patch e opcional. Para aplicar, instale Claude Code globalmente:');
+  console.log('        npm install -g @anthropic-ai/claude-code, e rode este script.)\n');
+  process.exit(0);
 }
 
 console.log('CLI encontrado em:', CLI_PATH);

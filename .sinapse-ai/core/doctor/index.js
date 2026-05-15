@@ -49,24 +49,23 @@ const DOCTOR_VERSION = '2.1.0';
  * @returns {{ installed: boolean, marker?: string }}
  */
 function detectInstallState(context) {
-  // Allow the caller (tests, CI harnesses) to override the home directory
-  // without mutating process env. Falls back to os.homedir() for real runs.
-  const home = (context && context.options && context.options.homeDir)
-    || process.env.SINAPSE_DOCTOR_HOME
-    || os.homedir();
-  const markers = [
-    { label: 'project', path: path.join(context.projectRoot, '.sinapse-ai') },
-    { label: 'global-sinapse', path: path.join(home, '.sinapse') },
-    { label: 'claude-commands', path: path.join(home, '.claude', 'commands', 'SINAPSE') },
-  ];
-  for (const m of markers) {
-    try {
-      if (fs.existsSync(m.path)) {
-        return { installed: true, marker: m.label };
-      }
-    } catch {
-      // permission error on one marker — keep checking others
+  // Story 10.42 (v1.4.2 fix): doctor is PROJECT-centric.
+  // Previous version qualified `~/.sinapse/` and `~/.claude/commands/SINAPSE/`
+  // as "installed" markers, but those are GLOBAL artifacts left by any past
+  // install on the machine. They were always TRUE for any user who had ever
+  // run `npx sinapse-ai install` in any other project, defeating the entire
+  // purpose of fresh-project detection.
+  //
+  // The only marker that means "SINAPSE is installed IN THIS PROJECT" is
+  // `<projectRoot>/.sinapse-ai/`. Without it, the user is in a fresh dir
+  // and should see the NOT_INSTALLED friendly message.
+  const projectMarker = path.join(context.projectRoot, '.sinapse-ai');
+  try {
+    if (fs.existsSync(projectMarker)) {
+      return { installed: true, marker: 'project' };
     }
+  } catch {
+    // permission error — treat as not installed and let user retry
   }
   return { installed: false };
 }
