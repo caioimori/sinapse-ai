@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] — 2026-05-15 — 🚀 Feature release (sinapse-delegate + fast-path-gate)
+
+> **Feature release.** Adiciona dois patterns úteis ao SINAPSE: outsource explícito pra executor externo via `sinapse-delegate` e heurística de fast-path no orchestrator. Sem breaking changes; ambos opt-in.
+
+### Added
+
+- **`sinapse-delegate` CLI** — novo entry point pra outsource de tasks específicas (story implementations, refactors, mechanical edits) pra executor externo como Codex CLI. Grava prompt + output + log em `.sinapse/external-runs/<timestamp>-<slug>/` pra audit completo. Suporta sandboxes (read-only, workspace-write, full-auto, danger-full-access), git cleanliness gate (`--allow-dirty` pra bypass intencional), dry-run, foreground/background. **Caso de uso principal:** economizar tokens Opus em tasks repetitivas/mecânicas roteando-as pra modelos menores (Codex/Haiku).
+  - Entry: `bin/sinapse-delegate.js` (registrado em `package.json#bin`)
+  - Implementação: `.sinapse-ai/core/external-executors/delegate-cli.js`
+  - Provider suportado nesta release: `codex` (extensível pra outros via `PROVIDERS` map)
+  - Uso: `sinapse-delegate codex -t story-10.50 -f prompt.md --sandbox workspace-write`
+
+- **Fast-Path Gate** em `.sinapse-ai/core/orchestration/fast-path-gate.js` — heurística determinística que avalia se uma task pode rodar em modo acelerado (`parallel_batch`, `deterministic_batch`, `external_executor`) versus workflow padrão sequencial. Analisa sinais de automação (bulk-edit, structured-transform, mechanical-edit, map-then-apply, repetition, parallelizable) versus sinais de risco (architecture, security, destructive, production, migration). Retorna `mode`, `confidence` (0-1), `parallelizable`, `riskLevel`, `reasons` e `actions` recomendadas. Configurável via `DEFAULT_FAST_PATH_CONFIG`.
+  - Exportado em `.sinapse-ai/core/orchestration/index.js` como `evaluateFastPath`, `DEFAULT_FAST_PATH_CONFIG`, `getAutomationPatterns`, `getRiskPatterns`, `getStructuredFileExtensions`, `normalizeFastPathConfig`, `normalizeFastPathTask`
+  - Sem state global, sem dependências externas, pure function — fácil de integrar em qualquer decisão de roteamento
+
+### Notes
+
+- **Service Discovery (`sinapse workers search/list/info`) já existia** desde versão anterior em `.sinapse-ai/cli/commands/workers/` — confirmado via smoke test e bin/sinapse.js já roteia. Sem ação necessária nesta release.
+- **Implementação:** pure functions, sem state global, sem dependências externas além do que já existe. Integração via export em `.sinapse-ai/core/orchestration/index.js`.
+- **Sem breaking changes.** Features são opt-in: ninguém precisa rodar `sinapse-delegate` ou chamar `evaluateFastPath` se não quiser.
+
+### Migration
+
+Nada necessário pra usuários da v1.4.x. Quem quiser usar:
+
+```bash
+npm install sinapse-ai@latest
+
+# Outsource uma task pesada pro Codex
+sinapse-delegate codex -t my-task -p "Replace deprecated React imports in src/" --sandbox workspace-write
+
+# Avaliar uma task antes de executar (programático)
+node -e "console.log(require('sinapse-ai/.sinapse-ai/core/orchestration').evaluateFastPath({ task: { description: 'bulk rename yaml files', files: ['a.yaml','b.yaml','c.yaml'] }}))"
+```
+
 ## [1.4.2] — 2026-05-14 — 🩹 Doctor bugfix patch (Story 10.42 regression + false-FAIL cleanup)
 
 > **Bugfix patch.** Smoke test pós-v1.4.1 detectou 1 regressão real + 4 ruídos no doctor que arruinavam a primeira impressão pra users novos. Esta release consolida os 5 fixes.
