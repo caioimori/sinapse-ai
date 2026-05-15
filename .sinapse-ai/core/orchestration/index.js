@@ -145,6 +145,20 @@ const {
   PHASE_1_SEQUENCE,
 } = require('./greenfield-handler');
 
+// v1.5.0: Fast-Path Gate
+// Heuristic gate to decide when a task can be executed via a faster mode
+// (parallel_batch / deterministic_batch / external_executor) versus the
+// standard sequential workflow. Used as input to orchestrator decisions.
+const {
+  DEFAULT_FAST_PATH_CONFIG,
+  evaluateFastPath,
+  getAutomationPatterns,
+  getRiskPatterns,
+  getStructuredFileExtensions,
+  normalizeConfig: normalizeFastPathConfig,
+  normalizeTask: normalizeFastPathTask,
+} = require('./fast-path-gate');
+
 module.exports = {
   // Main orchestrators
   WorkflowOrchestrator,
@@ -319,5 +333,14 @@ module.exports = {
   GreenfieldPhaseFailureAction,
   DEFAULT_GREENFIELD_INDICATORS,
   PHASE_1_SEQUENCE,
+
+  // v1.5.0: Fast-Path Gate
+  DEFAULT_FAST_PATH_CONFIG,
+  evaluateFastPath,
+  getAutomationPatterns,
+  getRiskPatterns,
+  getStructuredFileExtensions,
+  normalizeFastPathConfig,
+  normalizeFastPathTask,
 };
 
