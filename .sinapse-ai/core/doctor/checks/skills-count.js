@@ -14,14 +14,20 @@ const fs = require('fs');
 const name = 'skills-count';
 
 async function run(context) {
+  // v1.4.2 fix: skills are OPTIONAL user-installed artifacts under .claude/skills/,
+  // not shipped by `npx sinapse-ai install` (verified against install-manifest).
+  // Previous behavior FAILed with "Run `npx sinapse-ai install --force`" — but
+  // force-reinstall doesn't create skills either. Now reports as INFO when
+  // absent and as PASS/WARN proportional to how many were installed by the user.
+
   const skillsDir = path.join(context.projectRoot, '.claude', 'skills');
 
   if (!fs.existsSync(skillsDir)) {
     return {
       check: name,
-      status: 'FAIL',
-      message: 'Skills directory not found (.claude/skills/)',
-      fixCommand: 'npx sinapse-ai install --force',
+      status: 'INFO',
+      message: 'No .claude/skills/ directory — skills are optional (install via `npx claude-skills add <name>`)',
+      fixCommand: null,
     };
   }
 
@@ -31,9 +37,9 @@ async function run(context) {
   } catch {
     return {
       check: name,
-      status: 'FAIL',
-      message: 'Cannot read skills directory',
-      fixCommand: 'npx sinapse-ai install --force',
+      status: 'WARN',
+      message: 'Cannot read .claude/skills/ directory',
+      fixCommand: null,
     };
   }
 
@@ -46,31 +52,22 @@ async function run(context) {
   if (count === 0) {
     return {
       check: name,
-      status: 'FAIL',
-      message: 'No skills found (expected >=7)',
-      fixCommand: 'npx sinapse-ai install --force',
-    };
-  }
-
-  if (count >= 7) {
-    return {
-      check: name,
-      status: 'PASS',
-      message: `${count} skills found`,
+      status: 'INFO',
+      message: 'Skills directory exists but empty — skills are optional',
       fixCommand: null,
     };
   }
 
   return {
     check: name,
-    status: 'WARN',
-    message: `Only ${count}/7 skills found`,
-    fixCommand: 'npx sinapse-ai install --force',
+    status: 'PASS',
+    message: `${count} skill${count === 1 ? '' : 's'} installed`,
+    fixCommand: null,
   };
 }
 
-// Story A.3: skills dir ships with the framework.
-const onError = 'fail';
+// v1.4.2: skills are optional — never FAIL on this check.
+const onError = 'warn';
 
 module.exports = { name, run, onError };
 
