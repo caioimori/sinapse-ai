@@ -600,28 +600,28 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 
 ### Tasks Core
 
-- [qa-gate.md](/.sinapse-ai/development/tasks/qa-gate.md)
-- [qa-review-story.md](/.sinapse-ai/development/tasks/qa-review-story.md)
-- [qa-test-design.md](/.sinapse-ai/development/tasks/qa-test-design.md)
-- [qa-risk-profile.md](/.sinapse-ai/development/tasks/qa-risk-profile.md)
-- [qa-nfr-assess.md](/.sinapse-ai/development/tasks/qa-nfr-assess.md)
-- [qa-trace-requirements.md](/.sinapse-ai/development/tasks/qa-trace-requirements.md)
+- [qa-gate.md](../../.sinapse-ai/development/tasks/qa-gate.md)
+- [qa-review-story.md](../../.sinapse-ai/development/tasks/qa-review-story.md)
+- [qa-test-design.md](../../.sinapse-ai/development/tasks/qa-test-design.md)
+- [qa-risk-profile.md](../../.sinapse-ai/development/tasks/qa-risk-profile.md)
+- [qa-nfr-assess.md](../../.sinapse-ai/development/tasks/qa-nfr-assess.md)
+- [qa-trace-requirements.md](../../.sinapse-ai/development/tasks/qa-trace-requirements.md)
 
 ### Workflows
 
-- [qa-loop.yaml](/.sinapse-ai/development/workflows/qa-loop.yaml)
+- [qa-loop.yaml](../../.sinapse-ai/development/workflows/qa-loop.yaml)
 
 ### Teams
 
-- [team-qa-focused.yaml](/.sinapse-ai/development/agent-teams/team-qa-focused.yaml)
+- [team-qa-focused.yaml](../../.sinapse-ai/development/agent-teams/team-qa-focused.yaml)
 
 ### Agente
 
-- [qa.md](/.sinapse-ai/development/agents/quality-gate.md)
+- [qa.md](../../.sinapse-ai/development/agents/quality-gate.md)
 
 ### Documentos Relacionados
 
-- [BACKLOG-MANAGEMENT-SYSTEM.md](/docs/guides/BACKLOG-MANAGEMENT-SYSTEM.md)
+- [BACKLOG-MANAGEMENT-SYSTEM.md](../guides/BACKLOG-MANAGEMENT-SYSTEM.md)
 
 ---
 

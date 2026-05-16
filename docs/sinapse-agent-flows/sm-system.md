@@ -444,20 +444,20 @@ dependencies:
 ## Referencias
 
 ### Arquivos do Agente
-- [Agent: sm.md](.sinapse-ai/development/agents/sprint-lead.md)
-- [Task: create-next-story.md](.sinapse-ai/development/tasks/create-next-story.md)
-- [Task: execute-checklist.md](.sinapse-ai/development/tasks/execute-checklist.md)
-- [Task: correct-course.md](.sinapse-ai/development/tasks/correct-course.md)
+- [Agent: sm.md](../../.sinapse-ai/development/agents/sprint-lead.md)
+- [Task: create-next-story.md](../../.sinapse-ai/development/tasks/create-next-story.md)
+- [Task: execute-checklist.md](../../.sinapse-ai/development/tasks/execute-checklist.md)
+- [Task: correct-course.md](../../.sinapse-ai/development/tasks/correct-course.md)
 
 ### Checklists
-- [Checklist: story-draft-checklist.md](.sinapse-ai/product/checklists/story-draft-checklist.md)
-- [Checklist: story-dod-checklist.md](.sinapse-ai/product/checklists/story-dod-checklist.md)
-- [Checklist: change-checklist.md](.sinapse-ai/product/checklists/change-checklist.md)
+- [Checklist: story-draft-checklist.md](../../.sinapse-ai/product/checklists/story-draft-checklist.md)
+- [Checklist: story-dod-checklist.md](../../.sinapse-ai/product/checklists/story-dod-checklist.md)
+- [Checklist: change-checklist.md](../../.sinapse-ai/product/checklists/change-checklist.md)
 
 ### Workflows
-- [Workflow: story-development-cycle.yaml](.sinapse-ai/development/workflows/story-development-cycle.yaml)
-- [Workflow: greenfield-fullstack.yaml](.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
-- [Workflow: brownfield-fullstack.yaml](.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
+- [Workflow: story-development-cycle.yaml](../../.sinapse-ai/development/workflows/story-development-cycle.yaml)
+- [Workflow: greenfield-fullstack.yaml](../../.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
+- [Workflow: brownfield-fullstack.yaml](../../.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
 
 ### Configuracao
 - [Core Config](../.sinapse-ai/core-config.yaml)

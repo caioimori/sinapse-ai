@@ -591,11 +591,11 @@ npm audit --ignore-advisories=ADVISORY_ID
 
 | Task | Descrição |
 |------|-----------|
-| [Pre-Push Quality Gate](.sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md) | Validacao antes do push |
-| [Version Management](.sinapse-ai/development/tasks/github-devops-version-management.md) | Gerenciamento de versoes |
-| [CI/CD Configuration](.sinapse-ai/development/tasks/ci-cd-configuration.md) | Configuracao de pipelines |
-| [Release Management](.sinapse-ai/development/tasks/release-management.md) | Gerenciamento de releases |
-| [Environment Bootstrap](.sinapse-ai/development/tasks/environment-bootstrap.md) | Bootstrap de ambientes |
+| [Pre-Push Quality Gate](../../.sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md) | Validacao antes do push |
+| [Version Management](../../.sinapse-ai/development/tasks/github-devops-version-management.md) | Gerenciamento de versoes |
+| [CI/CD Configuration](../../.sinapse-ai/development/tasks/ci-cd-configuration.md) | Configuracao de pipelines |
+| [Release Management](../../.sinapse-ai/development/tasks/release-management.md) | Gerenciamento de releases |
+| [Environment Bootstrap](../../.sinapse-ai/development/tasks/environment-bootstrap.md) | Bootstrap de ambientes |
 
 ---
 
