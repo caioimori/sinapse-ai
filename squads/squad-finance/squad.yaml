@@ -1,46 +1,43 @@
 # ══════════════════════════════════════════════════════════════════════════════
-# SQUAD MANIFEST — squad-finance v1.0
+# SQUAD MANIFEST — squad-finance v1.1
 # ══════════════════════════════════════════════════════════════════════════════
 # Squad especializada em inteligencia financeira para agencias e negocios
-# digitais. Cobre analise de rentabilidade, precificacao, forecasting,
-# unit economics, controle orcamentario e otimizacao de custos.
-# 5 agents | 45 tasks | 8 KBs | 4 workflows | 3 checklists | 4 templates
+# digitais. Cobre analise de rentabilidade, precificacao, forecasting
+# estrategico, unit economics, controle orcamentario, otimizacao de
+# custos (FinOps) e conformidade fiscal brasileira.
+# 8 agents | 75 tasks | 8 KBs | 4 workflows | 3 checklists | 4 templates
 # ══════════════════════════════════════════════════════════════════════════════
 
 name: squad-finance
-version: "1.0.0"
+version: "1.1.0"
 description: >
   Squad especializada em inteligencia financeira para agencias e negocios
-  digitais. Cobre analise de rentabilidade, precificacao, forecasting,
-  unit economics, controle orcamentario e otimizacao de custos. Produz
-  dashboards financeiros, modelos de pricing e reports executivos com
-  rigor analitico.
+  digitais. Cobre analise de rentabilidade, precificacao, forecasting
+  estrategico, unit economics, controle orcamentario, otimizacao de custos
+  (FinOps) e conformidade fiscal brasileira. Produz dashboards financeiros,
+  modelos de pricing, reports executivos, cenarios projetivos e auditoria
+  de waste com rigor analitico.
 author: Caio Imori
 license: UNLICENSED
 slashPrefix: SINAPSE
 
 metadata:
   created_at: "2026-03-16"
-  updated_at: "2026-03-16"
+  updated_at: "2026-05-15"
   created_by: "squad-creator (Craft)"
-  agents_count: 5
-  tasks_count: 45
+  expanded_by: "Onda 4 — endereca gaps do PR #204"
+  agents_count: 8
+  tasks_count: 75
   knowledge_bases_count: 8
   workflows_count: 4
   checklists_count: 3
   templates_count: 4
+  total_files: 102
+  preferences: 0
 
 # ══════════════════════════════════════════════════════════════════════════════
-# AGENTES — 5 ESPECIALISTAS
+# AGENTES — 8 ESPECIALISTAS
 # ══════════════════════════════════════════════════════════════════════════════
-  total_files: 89
-  agents: 5
-  tasks: 45
-  workflows: 0
-  knowledge_bases: 21
-  checklists: 3
-  templates: 4
-  preferences: 0
 
 agents:
   - id: finance-orqx
@@ -118,6 +115,54 @@ agents:
       - analyze-payment-patterns
       - manage-revenue-recognition
 
+  - id: cost-optimizer
+    name: Trim
+    file: agents/cost-optimizer.md
+    role: "Especialista FinOps — auditoria de gastos cloud/SaaS, deteccao de waste, otimizacao com saving em R$"
+    tasks:
+      - audit-saas-stack
+      - audit-cloud-spend
+      - detect-zombie-licenses
+      - negotiate-vendor-renewal
+      - build-cost-optimization-plan
+      - track-cost-creep
+      - consolidate-redundant-tools
+      - right-size-infrastructure
+      - build-tool-inventory
+      - calculate-saving-roi
+
+  - id: forecast-strategist
+    name: Horizon
+    file: agents/forecast-strategist.md
+    role: "Forecasting estrategico — driver-based, cenarios P10/P50/P90, sensitivity, runway, breakeven, unit economics"
+    tasks:
+      - build-revenue-forecast
+      - build-cost-forecast
+      - run-scenario-analysis
+      - run-sensitivity-analysis
+      - calculate-runway-breakeven
+      - build-cohort-analysis
+      - model-unit-economics
+      - forecast-vs-actual-review
+      - update-rolling-forecast
+      - build-what-if-scenario
+
+  - id: fiscal-compliance-br
+    name: Tribute
+    file: agents/fiscal-compliance-br.md
+    role: "Conformidade fiscal BR — Simples/Presumido/Real, NFS-e, ISS, competencia vs caixa, obrigacoes acessorias"
+    tasks:
+      - analyze-tax-regime
+      - simulate-tax-burden
+      - review-service-invoice
+      - map-iss-by-municipality
+      - define-competence-vs-cash
+      - audit-tax-obligations
+      - calculate-withholdings
+      - review-contract-fiscal
+      - alert-regulatory-changes
+      - build-fiscal-calendar
+
 # ══════════════════════════════════════════════════════════════════════════════
 # KNOWLEDGE BASES — 7 BASES
 # ══════════════════════════════════════════════════════════════════════════════
@@ -190,6 +235,72 @@ templates:
     file: templates/financial-dashboard-template.md
 
 # ══════════════════════════════════════════════════════════════════════════════
+# HANDOFFS — Intra-squad routing matrix
+# ══════════════════════════════════════════════════════════════════════════════
+
+handoffs:
+  finance-orqx:
+    delegates_to:
+      - profitability-analyst: "Analise de rentabilidade, P&L, margens, unit economics realizado"
+      - pricing-strategist: "Modelos de pricing, tiers, propostas comerciais"
+      - budget-controller: "Forecast operacional, budget mensal, cash flow, vendor cost"
+      - revenue-analyst: "Reconciliacao de receita, aging, collection"
+      - cost-optimizer: "Auditoria FinOps, identificacao de waste, otimizacao de spend"
+      - forecast-strategist: "Forecast estrategico, cenarios, runway, breakeven, cohort"
+      - fiscal-compliance-br: "Regime tributario, NF, ISS, obrigacoes acessorias"
+    receives_from:
+      - "@sinapse-orqx (Imperator) — demandas financeiras roteadas pelo Imperator"
+
+  profitability-analyst:
+    delegates_to:
+      - cost-optimizer: "Quando custo identificado em P&L revela waste estrutural"
+      - fiscal-compliance-br: "Quando carga tributaria afeta margem por projeto"
+    escalates_to:
+      - finance-orqx
+
+  pricing-strategist:
+    delegates_to:
+      - fiscal-compliance-br: "Gross-up de impostos para precificacao final"
+      - profitability-analyst: "Validacao de margem alvo do tier"
+    escalates_to:
+      - finance-orqx
+
+  budget-controller:
+    delegates_to:
+      - cost-optimizer: "Vendor cost optimization e renegociacao de contrato"
+      - forecast-strategist: "Coordenacao de rolling forecast estrategico"
+    escalates_to:
+      - finance-orqx
+
+  revenue-analyst:
+    delegates_to:
+      - fiscal-compliance-br: "Regime de competencia vs caixa por contrato; retencoes"
+      - forecast-strategist: "Dados de recorrencia para cohort e LTV"
+    escalates_to:
+      - finance-orqx
+
+  cost-optimizer:
+    delegates_to:
+      - budget-controller: "Saving incorporado em budget pacing"
+      - forecast-strategist: "Saving projetado em forecast de despesa"
+    escalates_to:
+      - finance-orqx
+
+  forecast-strategist:
+    delegates_to:
+      - budget-controller: "Forecast operacional do mes corrente"
+      - fiscal-compliance-br: "Projecao de carga tributaria por cenario"
+    escalates_to:
+      - finance-orqx
+
+  fiscal-compliance-br:
+    delegates_to:
+      - revenue-analyst: "Emissao de NF e reconciliacao apos definicao fiscal"
+      - pricing-strategist: "Repasse de gross-up para pricing"
+    escalates_to:
+      - finance-orqx
+
+# ══════════════════════════════════════════════════════════════════════════════
 # CROSS-SQUAD CONNECTIONS
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -214,6 +325,11 @@ tags:
   - unit-economics
   - revenue
   - cost-optimization
+  - finops
+  - fiscal-compliance-br
+  - tax-brazil
+  - scenarios
+  - runway
   - agency-finance
   - p-and-l
 
@@ -223,7 +339,10 @@ tags:
 components:
   agents:
     - budget-controller.md
+    - cost-optimizer.md
     - finance-orqx.md
+    - fiscal-compliance-br.md
+    - forecast-strategist.md
     - pricing-strategist.md
     - profitability-analyst.md
     - revenue-analyst.md
