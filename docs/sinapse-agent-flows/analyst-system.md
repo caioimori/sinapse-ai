@@ -623,27 +623,27 @@ template:
 
 ### Tasks Principais
 
-- [Task: facilitate-brainstorming-session.md](.sinapse-ai/development/tasks/facilitate-brainstorming-session.md)
-- [Task: create-deep-research-prompt.md](.sinapse-ai/development/tasks/create-deep-research-prompt.md)
-- [Task: advanced-elicitation.md](.sinapse-ai/development/tasks/advanced-elicitation.md)
-- [Task: create-doc.md](.sinapse-ai/development/tasks/create-doc.md)
-- [Task: document-project.md](.sinapse-ai/development/tasks/document-project.md)
+- [Task: facilitate-brainstorming-session.md](../../.sinapse-ai/development/tasks/facilitate-brainstorming-session.md)
+- [Task: create-deep-research-prompt.md](../../.sinapse-ai/development/tasks/create-deep-research-prompt.md)
+- [Task: advanced-elicitation.md](../../.sinapse-ai/development/tasks/advanced-elicitation.md)
+- [Task: create-doc.md](../../.sinapse-ai/development/tasks/create-doc.md)
+- [Task: document-project.md](../../.sinapse-ai/development/tasks/document-project.md)
 
 ### Templates
 
-- [Template: project-brief-tmpl.yaml](.sinapse-ai/product/templates/project-brief-tmpl.yaml)
-- [Template: market-research-tmpl.yaml](.sinapse-ai/product/templates/market-research-tmpl.yaml)
-- [Template: competitor-analysis-tmpl.yaml](.sinapse-ai/product/templates/competitor-analysis-tmpl.yaml)
-- [Template: brainstorming-output-tmpl.yaml](.sinapse-ai/product/templates/brainstorming-output-tmpl.yaml)
+- [Template: project-brief-tmpl.yaml](../../.sinapse-ai/product/templates/project-brief-tmpl.yaml)
+- [Template: market-research-tmpl.yaml](../../.sinapse-ai/product/templates/market-research-tmpl.yaml)
+- [Template: competitor-analysis-tmpl.yaml](../../.sinapse-ai/product/templates/competitor-analysis-tmpl.yaml)
+- [Template: brainstorming-output-tmpl.yaml](../../.sinapse-ai/product/templates/brainstorming-output-tmpl.yaml)
 
 ### Workflows
 
-- [Workflow: greenfield-fullstack.yaml](.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
-- [Workflow: brownfield-discovery.yaml](.sinapse-ai/development/workflows/brownfield-discovery.yaml)
+- [Workflow: greenfield-fullstack.yaml](../../.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
+- [Workflow: brownfield-discovery.yaml](../../.sinapse-ai/development/workflows/brownfield-discovery.yaml)
 
 ### Agente
 
-- [Agent: analyst.md](.sinapse-ai/development/agents/analyst.md)
+- [Agent: analyst.md](../../.sinapse-ai/development/agents/analyst.md)
 
 ---
 

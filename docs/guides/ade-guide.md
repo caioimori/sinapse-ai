@@ -54,7 +54,7 @@ O **SINAPSE Autonomous Development Engine (ADE)** é um sistema de desenvolvimen
 - `*merge-worktree {story}` - Fazer merge do worktree
 - `*cleanup-worktrees` - Remover worktrees antigos
 
-**Documentação:** [ADE-EPIC1-HANDOFF.md](../architecture/ADE-EPIC1-HANDOFF.md)
+**Documentação:** ADE-EPIC1-HANDOFF.md
 
 ---
 
@@ -69,7 +69,7 @@ O **SINAPSE Autonomous Development Engine (ADE)** é um sistema de desenvolvimen
 - `*migrate-agent` - Migrar agente individual
 - `*migrate-batch` - Migrar todos em batch
 
-**Documentação:** [ADE-EPIC2-HANDOFF.md](../architecture/ADE-EPIC2-HANDOFF.md)
+**Documentação:** ADE-EPIC2-HANDOFF.md
 
 ---
 
@@ -93,7 +93,7 @@ User Request → Gather → Assess → Research → Write → Critique → Spec 
 | @project-lead        | `*write-spec`          | Escrever spec          |
 | @quality-gate        | `*critique-spec`       | Criticar e aprovar     |
 
-**Documentação:** [ADE-EPIC3-HANDOFF.md](../architecture/ADE-EPIC3-HANDOFF.md)
+**Documentação:** ADE-EPIC3-HANDOFF.md
 
 ---
 
@@ -128,7 +128,7 @@ User Request → Gather → Assess → Research → Write → Critique → Spec 
 
 - `*execute-subtask` - Executar subtask
 
-**Documentação:** [ADE-EPIC4-HANDOFF.md](../architecture/ADE-EPIC4-HANDOFF.md)
+**Documentação:** ADE-EPIC4-HANDOFF.md
 
 ---
 
@@ -147,7 +147,7 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 - `*track-attempt` - Registrar tentativa
 - `*rollback` - Voltar para estado anterior
 
-**Documentação:** [ADE-EPIC5-HANDOFF.md](../architecture/ADE-EPIC5-HANDOFF.md)
+**Documentação:** ADE-EPIC5-HANDOFF.md
 
 ---
 
@@ -178,7 +178,7 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 
 - `*apply-qa-fix` - Aplicar correção do QA
 
-**Documentação:** [ADE-EPIC6-HANDOFF.md](../architecture/ADE-EPIC6-HANDOFF.md)
+**Documentação:** ADE-EPIC6-HANDOFF.md
 
 ---
 
@@ -206,7 +206,7 @@ Subtask Fails → Track Attempt → Retry (<3) → Stuck Detection → Rollback 
 
 - `*extract-patterns` - Extrair padrões do código
 
-**Documentação:** [ADE-EPIC7-HANDOFF.md](../architecture/ADE-EPIC7-HANDOFF.md)
+**Documentação:** ADE-EPIC7-HANDOFF.md
 
 ---
 
@@ -431,15 +431,15 @@ cat docs/stories/STORY-42/spec-critique.json
 
 ## Related Documentation
 
-- [ADE Architect Handoff](../architecture/ADE-ARCHITECT-HANDOFF.md) - Overview geral
-- [ADE Agent Changes](../architecture/ADE-AGENT-CHANGES.md) - Alterações em todos os agentes com matriz de capabilities
-- [Epic 1 - Worktree Manager](../architecture/ADE-EPIC1-HANDOFF.md)
-- [Epic 2 - Migration V2→V3](../architecture/ADE-EPIC2-HANDOFF.md)
-- [Epic 3 - Spec Pipeline](../architecture/ADE-EPIC3-HANDOFF.md)
-- [Epic 4 - Execution Engine](../architecture/ADE-EPIC4-HANDOFF.md)
-- [Epic 5 - Recovery System](../architecture/ADE-EPIC5-HANDOFF.md)
-- [Epic 6 - QA Evolution](../architecture/ADE-EPIC6-HANDOFF.md)
-- [Epic 7 - Memory Layer](../architecture/ADE-EPIC7-HANDOFF.md)
+- ADE Architect Handoff - Overview geral
+- ADE Agent Changes - Alterações em todos os agentes com matriz de capabilities
+- Epic 1 - Worktree Manager
+- Epic 2 - Migration V2→V3
+- Epic 3 - Spec Pipeline
+- Epic 4 - Execution Engine
+- Epic 5 - Recovery System
+- Epic 6 - QA Evolution
+- Epic 7 - Memory Layer
 
 ---
 

@@ -678,31 +678,31 @@ Ative @github-devops para operacoes de push:
 
 ### Tasks Core
 
-- [architect-analyze-impact.md](.sinapse-ai/development/tasks/architect-analyze-impact.md)
-- [document-project.md](.sinapse-ai/development/tasks/document-project.md)
-- [create-doc.md](.sinapse-ai/development/tasks/create-doc.md)
-- [execute-checklist.md](.sinapse-ai/development/tasks/execute-checklist.md)
-- [spec-assess-complexity.md](.sinapse-ai/development/tasks/spec-assess-complexity.md)
+- [architect-analyze-impact.md](../../.sinapse-ai/development/tasks/architect-analyze-impact.md)
+- [document-project.md](../../.sinapse-ai/development/tasks/document-project.md)
+- [create-doc.md](../../.sinapse-ai/development/tasks/create-doc.md)
+- [execute-checklist.md](../../.sinapse-ai/development/tasks/execute-checklist.md)
+- [spec-assess-complexity.md](../../.sinapse-ai/development/tasks/spec-assess-complexity.md)
 
 ### Templates de Arquitetura
 
-- [fullstack-architecture-tmpl.yaml](.sinapse-ai/product/templates/fullstack-architecture-tmpl.yaml)
-- [architecture-tmpl.yaml](.sinapse-ai/product/templates/architecture-tmpl.yaml)
-- [front-end-architecture-tmpl.yaml](.sinapse-ai/product/templates/front-end-architecture-tmpl.yaml)
-- [brownfield-architecture-tmpl.yaml](.sinapse-ai/product/templates/brownfield-architecture-tmpl.yaml)
+- [fullstack-architecture-tmpl.yaml](../../.sinapse-ai/product/templates/fullstack-architecture-tmpl.yaml)
+- [architecture-tmpl.yaml](../../.sinapse-ai/product/templates/architecture-tmpl.yaml)
+- [front-end-architecture-tmpl.yaml](../../.sinapse-ai/product/templates/front-end-architecture-tmpl.yaml)
+- [brownfield-architecture-tmpl.yaml](../../.sinapse-ai/product/templates/brownfield-architecture-tmpl.yaml)
 
 ### Workflows Relacionados
 
-- [greenfield-fullstack.yaml](.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
-- [brownfield-fullstack.yaml](.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
-- [spec-pipeline.yaml](.sinapse-ai/development/workflows/spec-pipeline.yaml)
+- [greenfield-fullstack.yaml](../../.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
+- [brownfield-fullstack.yaml](../../.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
+- [spec-pipeline.yaml](../../.sinapse-ai/development/workflows/spec-pipeline.yaml)
 
 ### Agentes Colaboradores
 
-- [@db-sage](.sinapse-ai/development/agents/db-sage.md) - Arquitetura de dados
-- [@ux-design-expert](.sinapse-ai/development/agents/ux-design-expert.md) - Arquitetura frontend
-- [@pm](.sinapse-ai/development/agents/project-lead.md) - Requisitos e PRD
-- [@devops](.sinapse-ai/development/agents/devops.md) - Git push e infraestrutura
+- [@db-sage](../../.sinapse-ai/development/agents/db-sage.md) - Arquitetura de dados
+- [@ux-design-expert](../../.sinapse-ai/development/agents/ux-design-expert.md) - Arquitetura frontend
+- [@pm](../../.sinapse-ai/development/agents/project-lead.md) - Requisitos e PRD
+- [@devops](../../.sinapse-ai/development/agents/devops.md) - Git push e infraestrutura
 
 ---
 

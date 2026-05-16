@@ -661,13 +661,13 @@ flowchart LR
 
 ## Referencias
 
-- [Task: squad-creator-create.md](.sinapse-ai/development/tasks/squad-creator-create.md)
-- [Task: squad-creator-validate.md](.sinapse-ai/development/tasks/squad-creator-validate.md)
-- [Task: squad-creator-design.md](.sinapse-ai/development/tasks/squad-creator-design.md)
-- [Script: squad-generator.js](.sinapse-ai/development/scripts/squad/squad-generator.js)
-- [Script: squad-validator.js](.sinapse-ai/development/scripts/squad/squad-validator.js)
-- [Schema: squad-schema.json](.sinapse-ai/schemas/squad-schema.json)
-- [Agent: squad-creator.md](.sinapse-ai/development/agents/squad-creator.md)
+- [Task: squad-creator-create.md](../../.sinapse-ai/development/tasks/squad-creator-create.md)
+- [Task: squad-creator-validate.md](../../.sinapse-ai/development/tasks/squad-creator-validate.md)
+- [Task: squad-creator-design.md](../../.sinapse-ai/development/tasks/squad-creator-design.md)
+- [Script: squad-generator.js](../../.sinapse-ai/development/scripts/squad/squad-generator.js)
+- [Script: squad-validator.js](../../.sinapse-ai/development/scripts/squad/squad-validator.js)
+- [Schema: squad-schema.json](../../.sinapse-ai/schemas/squad-schema.json)
+- [Agent: squad-creator.md](../../.sinapse-ai/development/agents/squad-creator.md)
 - [Command: squad-creator.md](.claude/commands/SINAPSE/agents/squad-creator.md)
 
 ---

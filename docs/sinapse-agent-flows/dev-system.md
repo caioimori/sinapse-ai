@@ -529,23 +529,23 @@ O @developer deve **HALT** e perguntar ao usuario quando:
 ## Referencias
 
 ### Tasks do @dev
-- [dev-develop-story.md](.sinapse-ai/development/tasks/dev-develop-story.md)
-- [dev-improve-code-quality.md](.sinapse-ai/development/tasks/dev-improve-code-quality.md)
-- [dev-optimize-performance.md](.sinapse-ai/development/tasks/dev-optimize-performance.md)
-- [dev-suggest-refactoring.md](.sinapse-ai/development/tasks/dev-suggest-refactoring.md)
-- [dev-backlog-debt.md](.sinapse-ai/development/tasks/dev-backlog-debt.md)
-- [apply-qa-fixes.md](.sinapse-ai/development/tasks/apply-qa-fixes.md)
+- [dev-develop-story.md](../../.sinapse-ai/development/tasks/dev-develop-story.md)
+- [dev-improve-code-quality.md](../../.sinapse-ai/development/tasks/dev-improve-code-quality.md)
+- [dev-optimize-performance.md](../../.sinapse-ai/development/tasks/dev-optimize-performance.md)
+- [dev-suggest-refactoring.md](../../.sinapse-ai/development/tasks/dev-suggest-refactoring.md)
+- [dev-backlog-debt.md](../../.sinapse-ai/development/tasks/dev-backlog-debt.md)
+- [apply-qa-fixes.md](../../.sinapse-ai/development/tasks/apply-qa-fixes.md)
 
 ### Checklists
-- [story-dod-checklist.md](.sinapse-ai/product/checklists/story-dod-checklist.md)
-- [pre-push-checklist.md](.sinapse-ai/product/checklists/pre-push-checklist.md)
+- [story-dod-checklist.md](../../.sinapse-ai/product/checklists/story-dod-checklist.md)
+- [pre-push-checklist.md](../../.sinapse-ai/product/checklists/pre-push-checklist.md)
 
 ### Agente
-- [dev.md](.sinapse-ai/development/agents/developer.md)
+- [dev.md](../../.sinapse-ai/development/agents/developer.md)
 
 ### Workflows
-- [brownfield-fullstack.yaml](.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
-- [greenfield-fullstack.yaml](.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
+- [brownfield-fullstack.yaml](../../.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
+- [greenfield-fullstack.yaml](../../.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
 
 ### Relacionados
 - [BACKLOG-MANAGEMENT-SYSTEM.md](../BACKLOG-MANAGEMENT-SYSTEM.md)
