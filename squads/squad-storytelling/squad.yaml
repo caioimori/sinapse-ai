@@ -69,6 +69,7 @@ quality_standards:
 components:
   agents:
     - storytelling-orqx.md    # Arc — Orchestrator (routing, diagnosis)
+    - story-chief.md               # Story Chief — Senior narrative authority
     - joseph-campbell.md           # Joseph Campbell — Monomyth & Mythology
     - dan-harmon.md                # Dan Harmon — Story Circle & TV Writing
     - blake-snyder.md              # Blake Snyder — Save the Cat & Screenwriting

@@ -39,6 +39,7 @@ tags:
 components:
   agents:
     - cyber-orqx.md
+    - cyber-chief.md
     - threat-analyst.md
     - penetration-tester.md
     - soc-analyst.md
