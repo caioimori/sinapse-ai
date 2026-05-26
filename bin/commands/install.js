@@ -450,6 +450,21 @@ async function cmdInstallGlobal(opts = {}) {
 }
 
 function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
+  // Detecta se é orquestrador: id termina em -orqx OU é Imperator (snps-orqx/sinapse-orqx)
+  const isOrchestrator = /-orqx$/.test(agentId) || agentId === 'snps-orqx' || agentId === 'sinapse-orqx';
+
+  const step4 = isOrchestrator
+    ? `4. Briefing-on-activation check (this agent is an ORCHESTRATOR):
+   - If user provided briefing/context with the activation → proceed IMMEDIATELY: absorb → diagnose → plan with phases + agents + handoffs → execute (YOLO). NEVER ask "do you want me to plan?".
+   - If bare activation only → await briefing. On receipt, apply same flow automatically.`
+    : `4. HALT and await user input`;
+
+  const step6 = isOrchestrator
+    ? `6. Briefing-on-activation check (ORCHESTRATOR):
+   - If user provided briefing → proceed IMMEDIATELY: absorb → diagnose → plan → execute
+   - If bare activation → await briefing, then plan automatically. NEVER ask "do you want me to plan?".`
+    : `6. HALT and await user input`;
+
   return `# ${agentId}
 
 ACTIVATION-NOTICE: This command activates an agent from ${squadName}.
@@ -458,7 +473,7 @@ CRITICAL: Read the agent definition file at \`${squadPath}/agents/${agentFile}\`
 1. Adopt the persona defined in that file (name: ${agentName}, icon: ${agentIcon})
 2. Load the squad manifest at \`${squadPath}/squad.yaml\` for context
 3. Display a greeting showing your agent name, role, and available commands
-4. HALT and await user input
+${step4}
 
 ## Agent Reference
 - **Agent ID:** ${agentId}
@@ -475,7 +490,7 @@ CRITICAL: Read the agent definition file at \`${squadPath}/agents/${agentFile}\`
 3. Show greeting: "{icon} {name} — {role} ativado"
 4. Show: "Squad: ${squadName} | Invoke: /SINAPSE:agents:${agentId}"
 5. List your key tasks from the agent definition
-6. HALT and await user input
+${step6}
 
 ## How to Execute Tasks
 When the user requests a task:
@@ -595,7 +610,7 @@ v1.0 · ${squads.length} squads · ${squads.reduce((a, s) => a + s.agents, 0)} a
 👑 Imperator — Sinapse Master ativado
 \`\`\`
 
-Then HALT and await user input.
+After the greeting, check if the user provided briefing/context with the activation. If YES → proceed IMMEDIATELY: Initial State Audit → Bootstrap Classification → ORCHESTRATION PLAN (phases + squads + agents + handoffs) → execute (YOLO). NEVER ask "do you want me to plan?" — the answer is always YES for Imperator. If NO (bare activation) → await briefing, then plan automatically on receipt.
 
 ## INTELLIGENT ROUTING
 

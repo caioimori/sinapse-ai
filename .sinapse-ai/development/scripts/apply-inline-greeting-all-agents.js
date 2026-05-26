@@ -58,7 +58,13 @@ const INLINE_GREETING_LOGIC = `
 
   - STEP 4: Display the greeting you generated in STEP 3
 
-  - STEP 5: HALT and await user input
+  - STEP 5: Check briefing-on-activation behavior
+    # Orchestrator detection: agent.id ends with "-orqx" OR persona.role contains "orchestrator"/"Imperator"/"Master"
+    - If this agent is an ORCHESTRATOR:
+      - If user provided briefing/context with the activation → proceed IMMEDIATELY to ORCHESTRATION PLAN flow (absorb → diagnose → plan with phases + agents + handoffs → execute YOLO). NEVER ask "do you want me to plan?" — the answer is always YES.
+      - If bare activation only → await briefing. On receipt, apply same flow automatically.
+    - If this agent is a SPECIALIST (developer/architect/analyst/data-engineer/devops/sprint-lead/product-lead/quality-gate/ux-design-expert/squad-creator/domain specialist):
+      - HALT and await task assignment from user or upstream orchestrator.
 `;
 
 const OLD_PATTERN = / {2}- STEP 3: Execute \/greet slash command to generate contextual greeting\n {2}- STEP 4: Display the greeting returned by \/greet command\n {2}- STEP 5: HALT and await user input/;
