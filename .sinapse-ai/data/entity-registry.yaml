@@ -417,7 +417,7 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.3
-      checksum: sha256:208198d58f3f17bd5766ec6c70928c8ecda3db5645f03d134e2db0014149ee79
+      checksum: sha256:93210b103a23b23a7e1c7687a95cc9739bc264a0543b2a8d5c76fd00f8f1068c
       dependencies: []
       externalDeps: []
       keywords:
@@ -427,7 +427,7 @@ entities:
         - imperator
         - sinapse
         - master
-      lastVerified: '2026-05-07T21:34:53.806Z'
+      lastVerified: '2026-05-25T16:16:10.948Z'
       layer: L2
       lifecycle: orphan
       path: .sinapse-ai/development/agents/snps-orqx.md
@@ -16035,7 +16035,7 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.5
-      checksum: sha256:b8b0fb255878b246eae503c1cbef53dbcd5b14ed4907ef057eb129d11330c345
+      checksum: sha256:81ae9d16501e01fef5fea1e27fea006f27f262adf4b7394ee0ff52588b86b53b
       dependencies: []
       externalDeps: []
       keywords:
@@ -16044,7 +16044,7 @@ entities:
         - inline
         - greeting
         - template
-      lastVerified: '2026-05-07T21:34:53.663Z'
+      lastVerified: '2026-05-25T16:16:10.950Z'
       layer: L2
       lifecycle: orphan
       path: .sinapse-ai/product/templates/activation-instructions-inline-greeting.yaml
@@ -17489,6 +17489,6 @@ entities:
 metadata:
   checksumAlgorithm: sha256
   entityCount: 756
-  lastUpdated: '2026-05-08T18:38:36.605Z'
+  lastUpdated: '2026-05-25T16:16:10.952Z'
   resolutionRate: 100
   version: 1.0.0
