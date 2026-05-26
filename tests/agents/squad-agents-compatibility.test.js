@@ -522,7 +522,7 @@ describeIfSquads('Squad Agent Compatibility', () => {
 
   describeIfAllSquads('Per-squad agent counts', () => {
     const expectedCounts = {
-      'claude-code-mastery': 11,
+      'claude-code-mastery': 8,
       'squad-animations': 9,
       'squad-artdir': 14,
       'squad-brand': 15,
@@ -534,7 +534,7 @@ describeIfSquads('Squad Agent Compatibility', () => {
       'squad-courses': 8,
       'squad-cybersecurity': 9,
       'squad-design': 11,
-      'squad-finance': 5,
+      'squad-finance': 8,
       'squad-growth': 7,
       'squad-paidmedia': 10,
       'squad-product': 7,
