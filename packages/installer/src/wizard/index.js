@@ -373,7 +373,9 @@ function buildAgentTemplate(agentId, squadName, homedir) {
     `1. Adopt the persona defined in that file`,
     `2. Load the squad manifest at \`${squadManifestPath}\` for context`,
     '3. Display a greeting showing your agent name, role, and available commands',
-    '4. HALT and await user input',
+    '4. Briefing-on-activation check (this agent is an ORCHESTRATOR):',
+    '   - If user provided briefing/context with the activation → proceed IMMEDIATELY: absorb → diagnose → plan with phases + agents + handoffs → execute (YOLO). NEVER ask "do you want me to plan?".',
+    '   - If bare activation only → await briefing. On receipt, apply same flow automatically.',
     '',
   ].join('\n');
 }

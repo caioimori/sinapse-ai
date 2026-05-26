@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] — 2026-05-26 — 🩹 Patch: fix installer regression do BUG-001
+
+> **Patch release imediato.** O v1.6.0 corrigiu o BUG-001 (orqx voltando ao auto-plano) nas personas canônicas e no template YAML, MAS deixou 3 arquivos JS do installer com `"HALT and await user input"` hardcoded. Resultado: `npx sinapse-ai install` ou `update` gerava stubs orqx errados de novo, regredindo o fix.
+
+### Fixed
+
+- **`bin/commands/install.js`** — função `generateCommandMd()` agora detecta orquestradores (id termina em `-orqx` OU é Imperator) e gera STEP 4/6 com briefing-on-activation flow. Specialists continuam com HALT (correto).
+- **`bin/commands/install.js`** — bloco do Imperator template substitui `Then HALT and await user input` por briefing-on-activation check + Initial State Audit + Bootstrap Classification + Orchestration Plan + Execute.
+- **`packages/installer/src/wizard/index.js`** — `buildAgentTemplate()` (que só gera stubs orqx) corrigida pra emitir STEP 4 com briefing-on-activation.
+- **`.sinapse-ai/development/scripts/apply-inline-greeting-all-agents.js`** — INLINE_GREETING_LOGIC STEP 5 agora é condicional (orqx → auto-plan; specialist → HALT).
+
+### Why this matters
+
+Sem este patch, **toda instalação fresh do v1.6.0 regredia o BUG-001 imediatamente**. Detectado ao rodar `npx sinapse-ai@latest update`: o sinapse-orqx.md stub voltou pro formato curto com "HALT and await user input".
+
 ## [1.6.0] — 2026-05-26 — 🔧 Framework cleanup release (15 bugs P0/P1/P2/P3)
 
 > **Cleanup + 2 squads oficiais.** Resolve 15 bugs estruturais mapeados pela auditoria 2026-05-25, oficializa n8n + higgsfield-studio como squads SINAPSE, simplifica regras opt-in, e corrige comportamento crítico dos orquestradores (auto-plano de orquestração ao receber briefing).
