@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] — 2026-05-26 — 🔧 Framework cleanup release (15 bugs P0/P1/P2/P3)
+
+> **Cleanup + 2 squads oficiais.** Resolve 15 bugs estruturais mapeados pela auditoria 2026-05-25, oficializa n8n + higgsfield-studio como squads SINAPSE, simplifica regras opt-in, e corrige comportamento crítico dos orquestradores (auto-plano de orquestração ao receber briefing).
+
+### Fixed (Onda 1 — P0 críticos, PR #208)
+
+- **BUG-001 — orchestrators agora disparam plano automático** ao receber briefing. Persona Imperator tinha regra contraditória: `"HALT and await user input. Do NOT do anything else."` vencia sobre a regra `"NON-NEGOTIABLE: ORCHESTRATION PLAN ON EVERY BRIEFING"`. Resultado: usuário sempre precisava pedir `cria plano`. Fix: substituído por briefing-on-activation check em 6 personas Imperator + template `activation-instructions-inline-greeting.yaml` + swarm-orqx STEP 5.
+- **BUG-002 — Imperator (sinapse-orqx) era "fantasma"**: stub apontava pra `~/.sinapse/sinapse/agents/sinapse-orqx.md` que nunca existiu. Fix: source canônico criado em `sinapse/agents/sinapse-orqx.md` (791 linhas, persona completa com ASCII art, 18 squads routing table, Initial State Audit, Bootstrap Classification, NSN mode).
+- **BUG-003 — 19 dos 22 stubs orqx em formato truncado** (15 linhas, sem blocos Activation Instructions / How to Execute / Cross-Squad Handoff). Fix: novo script `scripts/regenerate-orqx-stubs.ps1` regenera todos os 22 stubs no formato completo (42-55 linhas) com o flow de briefing-auto-orchestration.
+- **BUG-005 — slash command `/SINAPSE:agents:sinapse-orqx` ausente** (só existiam os 21 squad-orqx + snps-orqx). Fix: criado em `~/.claude/commands/SINAPSE/agents/sinapse-orqx.md`.
+
+### Fixed (Onda 2 — P1, PR #209)
+
+- **BUG-004** — 12 commands SNPS (`/SNPS:agents:*`) propagados pra `~/.claude/commands/SNPS/agents/` (parity Codex no nível local).
+- **BUG-006 + BUG-012** — **n8n vira squad oficial SINAPSE**. Consolidação em `~/.sinapse/squad-n8n/` (18 agents + squad.yaml v1.0). Rule `n8n-squad-routing.md` atualizada removendo "não faz parte do framework". Knowledge base externa em `Workspace/sinapse/n8n/` (18k linhas) mantida.
+- **BUG-009** — MEMORY.md de 29.6KB → 12.6KB (limite 24.4KB, agora com margem). Entradas longas encurtadas pra <200 chars cada, mantendo discovery via pointers.
+
+### Changed (Onda 3 — P1+P2, PR #209)
+
+- **BUG-007 — rules opt-in viram always-on**. `CLAUDE.md` global bumpado pra v6.4. `documentation-first`, `mandatory-delegation`, `workflow-execution` agora sempre carregadas; agente calibra cerimônia conforme escopo (story epic vs bug fix simples). Mais simples que implementar hook trigger custom por path/keyword.
+- **BUG-014** — **higgsfield-studio vira squad oficial SINAPSE**. Consolidação em `~/.sinapse/squad-higgsfield-studio/` (14 agents + squad.yaml v1.0). Mesma arquitetura padrão dos outros squads.
+- **BUG-010** — `vault-routing.json` corrigido: 7 entradas apontavam pra notas inexistentes. Substituídas por equivalentes funcionais.
+- **BUG-008** — rules deprecated (`sinapse-source-of-truth.md`, `response-format.md`) movidas pra `~/.claude/rules/_deprecated/`.
+
+### Cleanup (Onda 4 — P2/P3, PR #209)
+
+- **BUG-011** — `.backup-stubs-20260512-120825/` movido de `~/.claude/agents/` pra `~/.claude/backups/`.
+- **BUG-013** — nova doc `docs/guides/hooks-two-layers.md` explicando arquitetura intencional dos hooks (camada global `~/.claude/hooks/` vs camada framework `<repo>/.claude/hooks/`).
+- **BUG-015** — memory sincronizada: removidas menções de stories Ready (10.35/10.38/10.39/10.40/10.41/10.42) que já estavam Done.
+- **BUG-016** — 9 skills com espaço no nome renomeadas pra kebab-case (`Creative Skills` → `creative-skills`, etc).
+
+### Added
+
+- `docs/audits/2026-05-25-framework-gargalos-audit.md` — relatório completo da auditoria que mapeou os 15 bugs deste release.
+- `sinapse/agents/sinapse-orqx.md` — persona canônica Imperator (faltava no source do repo).
+- `scripts/regenerate-orqx-stubs.ps1` — script PowerShell que regenera os 22 stubs em qualquer máquina.
+- `docs/guides/hooks-two-layers.md` — doc da arquitetura de hooks.
+
+### Notes
+
+- **Sem breaking changes** se você só usa o framework como orchestrator. Comportamento novo dos orqx (auto-plano) é uma melhoria, não quebra fluxos existentes.
+- **Inclui também outros 5 PRs entre v1.5.0 e v1.6.0**: #203 (limpa claude-code-mastery orphan agents), #204 (docs audit Onda 3 orqx coverage gap), #205 (canonical flat squad-schema + validator), #206 (169 broken links fixed), #207 (squad-finance ganha 3 agentes).
+- **3 investigações pendentes** (fora do escopo desta release): hooks órfãos no settings.json, validação cruzada task_refs em workflows, health check completo dos 17 squads canonicos.
+
 ## [1.5.0] — 2026-05-15 — 🚀 Feature release (sinapse-delegate + fast-path-gate)
 
 > **Feature release.** Adiciona dois patterns úteis ao SINAPSE: outsource explícito pra executor externo via `sinapse-delegate` e heurística de fast-path no orchestrator. Sem breaking changes; ambos opt-in.
