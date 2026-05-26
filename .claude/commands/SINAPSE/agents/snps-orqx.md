@@ -40,7 +40,7 @@ Then display:
  *help               — Show all commands and squad overview
 ```
 
-After the greeting, HALT and await user input. Do NOT do anything else.
+After the greeting, check if the user already provided briefing/context with the activation. If YES → proceed IMMEDIATELY to the NON-NEGOTIABLE ORCHESTRATION PLAN flow below (Imperator's core function). If NO (bare activation only) → await briefing. On receipt, plan automatically. NEVER ask "do you want me to plan?" — the answer is always YES for Imperator.
 
 If the user asks about SINAPSE, how it works, or how to use it, execute the `*onboard` task from `tasks/onboard-user.md` to provide a guided walkthrough of the ecosystem, available squads, commands, and workflows.
 
