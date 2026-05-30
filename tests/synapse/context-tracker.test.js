@@ -112,34 +112,38 @@ describe('estimateContextPercent', () => {
     expect(estimateContextPercent(0)).toBe(100);
   });
 
-  test('should return 98.2% for 2 prompts with defaults (2*1500*1.2/200000)', () => {
+  // NOTE (v1.1.0 port): estimateContextPercent now sources defaults from
+  // core-config.yaml → models.active. These arithmetic tests pin the 200k
+  // window explicitly via options (the unchanged public contract) so they
+  // validate the formula independent of which model is active.
+  test('should return 98.2% for 2 prompts at 200k window (2*1500*1.2/200000)', () => {
     // 100 - (2 * 1500 * 1.2 / 200000 * 100) = 100 - 1.8 = 98.2
-    expect(estimateContextPercent(2)).toBeCloseTo(98.2, 5);
+    expect(estimateContextPercent(2, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBeCloseTo(98.2, 5);
   });
 
-  test('should return 73% for 30 prompts with defaults', () => {
+  test('should return 73% for 30 prompts at 200k window', () => {
     // 100 - (30 * 1500 * 1.2 / 200000 * 100) = 100 - 27 = 73
-    expect(estimateContextPercent(30)).toBeCloseTo(73, 5);
+    expect(estimateContextPercent(30, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBeCloseTo(73, 5);
   });
 
-  test('should return 10% for 100 prompts with defaults', () => {
+  test('should return 10% for 100 prompts at 200k window', () => {
     // 100 - (100 * 1500 * 1.2 / 200000 * 100) = 100 - 90 = 10
-    expect(estimateContextPercent(100)).toBeCloseTo(10, 5);
+    expect(estimateContextPercent(100, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBeCloseTo(10, 5);
   });
 
   test('should clamp to 0% when tokens exceed max context', () => {
     // 200 prompts * 1500 * 1.2 = 360000 > 200000
-    expect(estimateContextPercent(200)).toBe(0);
+    expect(estimateContextPercent(200, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBe(0);
   });
 
   test('should support custom avgTokensPerPrompt', () => {
     // 100 - (10 * 2000 * 1.2 / 200000 * 100) = 100 - 12 = 88
-    expect(estimateContextPercent(10, { avgTokensPerPrompt: 2000 })).toBeCloseTo(88, 5);
+    expect(estimateContextPercent(10, { avgTokensPerPrompt: 2000, maxContext: 200000 })).toBeCloseTo(88, 5);
   });
 
   test('should support custom maxContext', () => {
     // 100 - (10 * 1500 * 1.2 / 100000 * 100) = 100 - 18 = 82
-    expect(estimateContextPercent(10, { maxContext: 100000 })).toBeCloseTo(82, 5);
+    expect(estimateContextPercent(10, { avgTokensPerPrompt: 1500, maxContext: 100000 })).toBeCloseTo(82, 5);
   });
 
   test('should support both custom options', () => {
@@ -168,9 +172,9 @@ describe('estimateContextPercent', () => {
     expect(estimateContextPercent(5, { maxContext: -100 })).toBe(0);
   });
 
-  test('should return exactly 1 prompt worth of usage', () => {
+  test('should return exactly 1 prompt worth of usage at 200k window', () => {
     // 100 - (1 * 1500 * 1.2 / 200000 * 100) = 100 - 0.9 = 99.1
-    expect(estimateContextPercent(1)).toBeCloseTo(99.1, 5);
+    expect(estimateContextPercent(1, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBeCloseTo(99.1, 5);
   });
 });
 
@@ -379,26 +383,26 @@ describe('integration: estimate → bracket pipeline', () => {
     expect(calculateBracket(percent)).toBe('FRESH');
   });
 
-  test('should be MODERATE at 50 prompts (55%) with 1.2x multiplier', () => {
+  test('should be MODERATE at 50 prompts (55%) at 200k window with 1.2x multiplier', () => {
     // 100 - (50 * 1500 * 1.2 / 200000 * 100) = 100 - 45 = 55
-    const percent = estimateContextPercent(50);
+    const percent = estimateContextPercent(50, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent)).toBe('MODERATE');
   });
 
-  test('should be DEPLETED at 83 prompts (~25.3%) with 1.2x multiplier', () => {
+  test('should be DEPLETED at 83 prompts (~25.3%) at 200k window with 1.2x multiplier', () => {
     // 100 - (83 * 1500 * 1.2 / 200000 * 100) = 100 - 74.7 = 25.3
-    const percent = estimateContextPercent(83);
+    const percent = estimateContextPercent(83, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent)).toBe('DEPLETED');
   });
 
-  test('should be CRITICAL at 100 prompts (10%) with 1.2x multiplier', () => {
+  test('should be CRITICAL at 100 prompts (10%) at 200k window with 1.2x multiplier', () => {
     // 100 - (100 * 1500 * 1.2 / 200000 * 100) = 100 - 90 = 10
-    const percent = estimateContextPercent(100);
+    const percent = estimateContextPercent(100, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent)).toBe('CRITICAL');
   });
 
   test('should be CRITICAL when context is fully used', () => {
-    const percent = estimateContextPercent(200);
+    const percent = estimateContextPercent(200, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent)).toBe('CRITICAL');
     expect(percent).toBe(0);
   });
@@ -413,54 +417,58 @@ describe('XML_SAFETY_MULTIPLIER (QW-3)', () => {
     expect(XML_SAFETY_MULTIPLIER).toBe(1.2);
   });
 
+  // NOTE (v1.1.0 port): pin the 200k window via options so the multiplier
+  // behavior is validated independent of the active model's real window.
   test('estimateContextPercent should apply 1.2x multiplier', () => {
     // With multiplier: usedTokens = 2 * 1500 * 1.2 = 3600
     // percent = 100 - (3600 / 200000 * 100) = 100 - 1.8 = 98.2
-    expect(estimateContextPercent(2)).toBeCloseTo(98.2, 5);
+    expect(estimateContextPercent(2, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBeCloseTo(98.2, 5);
   });
 
   test('MODERATE bracket should be reached earlier with multiplier', () => {
     // Without multiplier: 60 prompts = 55% (MODERATE)
     // With 1.2x: 60 prompts → usedTokens = 60*1500*1.2 = 108000
     // percent = 100 - (108000/200000*100) = 100 - 54 = 46% → still MODERATE
-    const percent60 = estimateContextPercent(60);
+    const percent60 = estimateContextPercent(60, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent60)).toBe('MODERATE');
 
     // With 1.2x: 50 prompts → usedTokens = 50*1500*1.2 = 90000
     // percent = 100 - (90000/200000*100) = 100 - 45 = 55% → MODERATE
-    const percent50 = estimateContextPercent(50);
+    const percent50 = estimateContextPercent(50, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent50)).toBe('MODERATE');
   });
 
   test('DEPLETED bracket should be reached earlier with multiplier', () => {
     // With 1.2x: 80 prompts → usedTokens = 80*1500*1.2 = 144000
     // percent = 100 - (144000/200000*100) = 100 - 72 = 28% → DEPLETED
-    const percent80 = estimateContextPercent(80);
+    const percent80 = estimateContextPercent(80, { avgTokensPerPrompt: 1500, maxContext: 200000 });
     expect(calculateBracket(percent80)).toBe('DEPLETED');
   });
 
   test('context exhaustion happens earlier with multiplier', () => {
     // Without multiplier: 134 prompts = 0% (200000/1500 ≈ 133.3)
     // With 1.2x: 200000 / (1500*1.2) ≈ 111.1 prompts to exhaust
-    expect(estimateContextPercent(112)).toBe(0); // Should be 0 (clamped)
+    expect(estimateContextPercent(112, { avgTokensPerPrompt: 1500, maxContext: 200000 })).toBe(0); // Should be 0 (clamped)
   });
 });
 
 // =============================================================================
-// AC8: Zero External Dependencies
+// v1.1.0: model-aware config loading (supersedes AC8 zero-deps contract)
 // =============================================================================
 
-describe('AC8: zero external dependencies', () => {
-  test('module source should not contain require statements', () => {
+describe('v1.1.0: graceful config dependency loading', () => {
+  test('module source loads only fs/path at top level (js-yaml lazy-required)', () => {
     const fs = require('fs');
     const path = require('path');
     const source = fs.readFileSync(
       path.join(__dirname, '../../.sinapse-ai/core/synapse/context/context-tracker.js'),
       'utf8',
     );
-    // Should not have any require() calls (only module.exports)
-    const requireMatches = source.match(/\brequire\s*\(/g);
-    expect(requireMatches).toBeNull();
+    // fs + path are required at module top; js-yaml is lazily required inside
+    // getModelConfig so a missing/broken yaml dep degrades gracefully.
+    expect(source).toMatch(/const fs = require\('fs'\)/);
+    expect(source).toMatch(/const path = require\('path'\)/);
+    expect(source).toMatch(/require\('js-yaml'\)/);
   });
 });
 

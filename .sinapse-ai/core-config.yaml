@@ -358,4 +358,23 @@ boundary:
     - .sinapse-ai/core/config/schemas/**
     - .sinapse-ai/core/config/template-overrides.js
 
+# Context-tracker dynamic model registry.
+# Consumed by .sinapse-ai/core/synapse/context/context-tracker.js (getModelConfig).
+# active selects which registry entry drives estimateContextPercent.
+models:
+  active: claude-opus-4-8
+  registry:
+    claude-opus-4-8:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 2000
+    claude-sonnet-4-6:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 1500
+    claude-sonnet-4-6-200k:
+      contextWindow: 200000
+      avgTokensPerPrompt: 1500
+    claude-haiku-4-5:
+      contextWindow: 200000
+      avgTokensPerPrompt: 1000
+
 # Memory Intelligence System (Epic MIS) configuration placeholder — MIS-2+
