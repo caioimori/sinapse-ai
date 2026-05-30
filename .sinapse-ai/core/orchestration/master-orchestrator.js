@@ -171,6 +171,8 @@ class MasterOrchestrator extends EventEmitter {
     this._state = OrchestratorState.INITIALIZED;
     this._previousState = null;
     this._inFullPipeline = false; // Flag for gate evaluation during full pipeline
+    this._persistenceAvailable = true;
+    this._persistenceError = null;
 
     // Execution state
     this.executionState = {
@@ -1060,12 +1062,21 @@ class MasterOrchestrator extends EventEmitter {
 
   /**
    * Save current state to disk (AC1, AC3)
-   * Called after each epic completion and state transition
-   * @returns {Promise<boolean>} Success status
+   *
+   * Persists epic progress, timestamps, tech-stack profile, recovery tracking,
+   * errors, and collected insights. Called after epic completion and state
+   * transitions. On I/O failure (disk full, permission, Windows path), marks
+   * persistence unavailable and continues in memory instead of crashing.
+   *
+   * @returns {Promise<boolean>} True if state was saved successfully, false on failure.
    */
   async saveState() {
     try {
       await fs.ensureDir(path.dirname(this.statePath));
+      const persistedHealth = {
+        available: true,
+        lastError: null,
+      };
 
       // Build comprehensive state object (AC2, AC6, AC7)
       const stateToSave = {
@@ -1110,17 +1121,22 @@ class MasterOrchestrator extends EventEmitter {
         // Errors and insights
         errors: this.executionState.errors,
         insights: this.executionState.insights,
+        persistence: persistedHealth,
 
         // Session insights
         sessionInsights: this._collectSessionInsights(),
       };
 
       await fs.writeJson(this.statePath, stateToSave, { spaces: 2 });
+      this._persistenceAvailable = persistedHealth.available;
+      this._persistenceError = persistedHealth.lastError;
       this._log('State saved successfully', { path: this.statePath });
 
       return true;
     } catch (error) {
-      this._log(`Failed to save state: ${error.message}`, { level: 'warn' });
+      this._persistenceAvailable = false;
+      this._persistenceError = error && error.message ? error.message : String(error);
+      this._log(`Failed to save state: ${this._persistenceError}`, { level: 'warn' });
       return false;
     }
   }
@@ -1397,6 +1413,10 @@ class MasterOrchestrator extends EventEmitter {
       },
       errors: this.executionState.errors,
       insights: this.executionState.insights,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
       state: this.executionState,
     };
   }
@@ -1436,7 +1456,29 @@ class MasterOrchestrator extends EventEmitter {
         ]),
       ),
       errors: this.executionState.errors.length,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
     };
+  }
+
+  /**
+   * Whether the last state persistence operation succeeded.
+   *
+   * @returns {boolean} True when persistence is available.
+   */
+  isPersistenceAvailable() {
+    return this._persistenceAvailable;
+  }
+
+  /**
+   * Return the last state persistence error message, if any.
+   *
+   * @returns {string|null} Last persistence error message.
+   */
+  getPersistenceError() {
+    return this._persistenceError;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════

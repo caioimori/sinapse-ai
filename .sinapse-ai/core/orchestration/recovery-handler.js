@@ -23,6 +23,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const EventEmitter = require('events');
 
+// Re-use the cycle-safe sanitizer from the errors module rather than duplicating.
+const { sanitizeValue: _sanitizeValueFromErrors } = require('../errors');
+
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              RECOVERY STRATEGIES (AC2)
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -165,6 +168,8 @@ class RecoveryHandler extends EventEmitter {
    * @returns {Promise<Object>} Recovery result
    */
   async handleEpicFailure(epicNum, error, context = {}) {
+    this._assertValidEpicNum(epicNum);
+
     const errorMessage = error instanceof Error ? error.message : String(error);
     const timestamp = new Date().toISOString();
 
@@ -656,52 +661,120 @@ class RecoveryHandler extends EventEmitter {
   }
 
   /**
-   * Get all logs (AC7)
+   * Gets all recovery logs (AC7).
+   *
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Copy of all log entries.
    */
   getLogs() {
     return [...this.logs];
   }
 
   /**
-   * Get logs for specific epic
+   * Gets logs filtered by a specific epic number.
+   *
+   * @param {number} epicNum - Epic number to filter logs for.
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Filtered log entries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   getEpicLogs(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.logs.filter(
       (log) => log.message.includes(`Epic ${epicNum}`) || log.message.includes(`epic-${epicNum}`),
     );
   }
 
   /**
-   * Get attempt history for all epics
+   * Gets attempt history for all epics.
+   *
+   * Returns deep-cloned attempt arrays to prevent callers from mutating internal
+   * recovery state. Attempt records are normalized through _cloneAttempt as
+   * data-only objects, so Error, Map, Set, BigInt, function, symbol, and circular
+   * context values are represented with stable serializable shapes.
+   *
+   * @returns {Object<string, Array>} Map of stringified epic numbers to attempt records.
    */
   getAttemptHistory() {
-    return { ...this.attempts };
+    return Object.fromEntries(
+      Object.entries(this.attempts).map(([epicNum, attempts]) => [
+        epicNum,
+        attempts.map((attempt) => this._cloneAttempt(attempt)),
+      ]),
+    );
   }
 
   /**
-   * Get attempt count for specific epic (AC5)
+   * Gets the recovery attempt count for a specific epic (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {number} Number of recovery attempts made for the epic.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   getAttemptCount(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return (this.attempts[epicNum] || []).length;
   }
 
   /**
-   * Check if can retry (under max retries) (AC5)
+   * Checks whether an epic can still be retried (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {boolean} True if the epic attempt count is below maxRetries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   canRetry(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.getAttemptCount(epicNum) < this.maxRetries;
   }
 
   /**
-   * Reset attempts for an epic
+   * Resets all recovery attempts for a specific epic.
+   *
+   * @param {number} epicNum - Epic number to reset.
+   * @returns {void}
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   resetAttempts(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     this.attempts[epicNum] = [];
     this._log(`Reset attempts for Epic ${epicNum}`, 'info');
   }
 
   /**
-   * Clear all state
+   * Validates an epic number argument.
+   *
+   * @param {number} epicNum - Epic number to validate.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
+   * @private
+   */
+  _assertValidEpicNum(epicNum) {
+    if (typeof epicNum !== 'number' || !Number.isInteger(epicNum) || epicNum < 0) {
+      throw new TypeError(`epicNum must be a non-negative integer, got: ${String(epicNum)}`);
+    }
+  }
+
+  /**
+   * Clones an attempt record for safe external access.
+   *
+   * Delegates to the shared sanitizeValue from core/errors so that
+   * function/symbol/Map/Set/BigInt/circular values are handled
+   * consistently without duplicating logic.
+   *
+   * @param {Object} attempt - Attempt record.
+   * @returns {Object} Sanitized data-only representation.
+   * @private
+   */
+  _cloneAttempt(attempt) {
+    return _sanitizeValueFromErrors(attempt);
+  }
+
+  /**
+   * Clears all internal recovery state.
+   *
+   * @returns {void}
    */
   clear() {
     this.attempts = {};
