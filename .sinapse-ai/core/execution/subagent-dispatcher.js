@@ -9,15 +9,20 @@
  */
 
 const EventEmitter = require('events');
-const { spawn } = require('child_process');
 const _path = require('path');
+const { runSafe } = require('../utils/spawn-safe');
 
-// Import AI Provider Factory
+// Import AI Provider Factory (factory module directly — the index barrel
+// requires a removed gemini-provider and would throw on load).
 let AIProviderFactory;
 try {
-  AIProviderFactory = require('../../infrastructure/integrations/ai-providers');
+  AIProviderFactory = require('../../infrastructure/integrations/ai-providers/ai-provider-factory');
 } catch {
-  AIProviderFactory = null;
+  try {
+    AIProviderFactory = require('../../infrastructure/integrations/ai-providers');
+  } catch {
+    AIProviderFactory = null;
+  }
 }
 
 // Import dependencies with fallbacks
@@ -93,6 +98,9 @@ class SubagentDispatcher extends EventEmitter {
     // Retry configuration
     this.maxRetries = config.maxRetries || 2;
     this.retryDelay = config.retryDelay || 2000;
+
+    // Claude CLI execution timeout (per spawn), 10 min default
+    this.claudeTimeout = config.claudeTimeout || 10 * 60 * 1000;
 
     // Dependencies
     this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
@@ -304,6 +312,42 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
+   * Resolve the fallback provider name for a given primary.
+   * Reads ai_providers.fallback / primary from the factory config instead of
+   * the old hardcoded claude<->gemini pair. Falls back safely when config or
+   * factory is unavailable.
+   * @param {string} primaryName - The provider that just failed/was unavailable.
+   * @returns {string|null} - Fallback provider name, or null if none distinct.
+   */
+  getFallbackProviderName(primaryName) {
+    let config = null;
+    if (AIProviderFactory && typeof AIProviderFactory.getConfig === 'function') {
+      try {
+        config = AIProviderFactory.getConfig();
+      } catch (error) {
+        this.log('fallback_config_error', { error: error.message });
+      }
+    }
+
+    const providers = config?.ai_providers || {};
+    const configuredFallback = providers.fallback;
+    const configuredPrimary = providers.primary;
+
+    // Prefer explicit fallback when it differs from the failing provider.
+    if (configuredFallback && configuredFallback !== primaryName) {
+      return configuredFallback;
+    }
+
+    // If the failing provider IS the configured fallback, try the primary.
+    if (configuredPrimary && configuredPrimary !== primaryName) {
+      return configuredPrimary;
+    }
+
+    // Last-resort safe default: never return the same provider that just failed.
+    return primaryName === 'claude' ? null : 'claude';
+  }
+
+  /**
    * Enrich context with memory and gotchas
    * @param {Object} task - Task being dispatched
    * @param {Object} context - Base context
@@ -431,9 +475,9 @@ class SubagentDispatcher extends EventEmitter {
     if (!isAvailable) {
       this.log('provider_not_available', { provider: providerName });
 
-      // Try fallback provider
-      const fallbackName = providerName === 'claude' ? 'gemini' : 'claude';
-      const fallback = this.getAIProvider(fallbackName);
+      // Try fallback provider (config-driven, not hardcoded)
+      const fallbackName = this.getFallbackProviderName(providerName);
+      const fallback = fallbackName ? this.getAIProvider(fallbackName) : null;
 
       if (fallback && (await fallback.checkAvailability())) {
         this.log('using_fallback_provider', { original: providerName, fallback: fallbackName });
@@ -642,49 +686,48 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
-   * Execute prompt via Claude CLI
+   * Execute prompt via Claude CLI.
+   *
+   * Hardened: the prompt is delivered through stdin (never the command line)
+   * and the process is spawned by argv via cross-spawn — so the prompt can
+   * contain quotes, pipes, `;`, `$()` or any shell metacharacter without ever
+   * being interpreted as a command (shell-injection is structurally impossible).
+   * cross-spawn also resolves `claude.cmd` on Windows (native spawn → ENOENT).
+   *
    * @param {string} prompt - Prompt to execute
-   * @returns {Promise<Object>} - Execution result
+   * @returns {Promise<Object>} - { success, output, filesModified }
    */
-  executeClaude(prompt) {
-    return new Promise((resolve, reject) => {
-      const args = ['--print', '--dangerously-skip-permissions'];
-      const escapedPrompt = prompt.replace(/'/g, "'\\''");
-      const fullCommand = `echo '${escapedPrompt}' | claude ${args.join(' ')}`;
+  async executeClaude(prompt) {
+    if (!prompt || typeof prompt !== 'string') {
+      throw new Error('executeClaude requires a non-empty string prompt');
+    }
 
-      const child = spawn('sh', ['-c', fullCommand], {
-        cwd: this.rootPath,
-        env: { ...process.env },
-        stdio: ['pipe', 'pipe', 'pipe'],
-      });
+    const args = ['--print', '--dangerously-skip-permissions'];
 
-      let stdout = '';
-      let stderr = '';
-
-      child.stdout.on('data', (data) => {
-        stdout += data.toString();
-      });
-
-      child.stderr.on('data', (data) => {
-        stderr += data.toString();
-      });
-
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve({
-            success: true,
-            output: stdout,
-            filesModified: this.extractModifiedFiles(stdout),
-          });
-        } else {
-          reject(new Error(`Claude CLI exited with code ${code}: ${stderr || stdout}`));
-        }
-      });
-
-      child.on('error', (error) => {
-        reject(error);
-      });
+    const result = await runSafe('claude', args, {
+      cwd: this.rootPath,
+      env: { ...process.env },
+      timeout: this.claudeTimeout,
+      input: prompt,
     });
+
+    if (result.success) {
+      return {
+        success: true,
+        output: result.stdout,
+        filesModified: this.extractModifiedFiles(result.stdout),
+      };
+    }
+
+    if (result.signal) {
+      throw new Error(
+        `Claude CLI killed by signal ${result.signal}: ${result.stderr || result.stdout}`,
+      );
+    }
+
+    throw new Error(
+      `Claude CLI exited with code ${result.code}: ${result.stderr || result.stdout}`,
+    );
   }
 
   /**
