@@ -103,7 +103,7 @@ complexity_score ≥ 16 (COMPLEX class) → run Spec Pipeline FIRST
 
 | User says | Classification | What the framework does |
 |---|---|---|
-| "criar um site pra meu cliente Vascularte" | `site` | Invokes `greenfield-ui.yaml` (5-agent Phase 1) |
+| "criar um site pra meu cliente Acme" | `site` | Invokes `greenfield-ui.yaml` (5-agent Phase 1) |
 | "monta uma plataforma SaaS de gestão" | `saas` (COMPLEX) | Spec Pipeline → then `greenfield-fullstack.yaml` |
 | "API de cobrança Asaas" | `api` | Invokes `greenfield-service.yaml` |
 | "corrige o botão verde da home" | `fix` | SDC YOLO direct |
