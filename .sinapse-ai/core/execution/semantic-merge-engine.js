@@ -16,7 +16,7 @@
  * Based on Auto-Claude's merge system architecture.
  */
 
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events');
@@ -180,17 +180,29 @@ class SemanticAnalyzer {
       }));
 
       // Extract functions
+      // DATA-003: the jsFunction regex can degrade to quadratic on pathological
+      // inputs (very large files with lots of whitespace). Cap the analyzed size
+      // and the iteration count so a single oversized file can't stall the engine.
+      // Normal files (well under the limits) are unaffected.
+      const MAX_FUNC_SCAN_BYTES = 200_000;
+      const MAX_FUNC_MATCHES = 10_000;
       let match;
-      const funcRegex = new RegExp(this.patterns.jsFunction.source, 'gm');
-      while ((match = funcRegex.exec(content)) !== null) {
-        const name = match[1] || match[2] || match[3];
-        if (name) {
-          elements.functions.push({
-            type: 'function',
-            name,
-            content: this.extractFunctionBody(content, match.index),
-            location: this.getLocation(content, match.index),
-          });
+      if (content.length <= MAX_FUNC_SCAN_BYTES) {
+        const funcRegex = new RegExp(this.patterns.jsFunction.source, 'gm');
+        let matchCount = 0;
+        while ((match = funcRegex.exec(content)) !== null) {
+          if (++matchCount > MAX_FUNC_MATCHES) break;
+          const name = match[1] || match[2] || match[3];
+          if (name) {
+            elements.functions.push({
+              type: 'function',
+              name,
+              content: this.extractFunctionBody(content, match.index),
+              location: this.getLocation(content, match.index),
+            });
+          }
+          // Guard against zero-width matches causing an infinite loop.
+          if (match.index === funcRegex.lastIndex) funcRegex.lastIndex++;
         }
       }
 
@@ -1521,7 +1533,7 @@ class SemanticMergeEngine extends EventEmitter {
 
     try {
       // Get list of files
-      const fileList = execSync(`git ls-tree -r --name-only ${branch}`, {
+      const fileList = execFileSync('git', ['ls-tree', '-r', '--name-only', branch], {
         cwd: this.rootPath,
         encoding: 'utf8',
       })
@@ -1531,7 +1543,7 @@ class SemanticMergeEngine extends EventEmitter {
       for (const filePath of fileList) {
         if (this.shouldProcessFile(filePath)) {
           try {
-            const content = execSync(`git show ${branch}:${filePath}`, {
+            const content = execFileSync('git', ['show', `${branch}:${filePath}`], {
               cwd: this.rootPath,
               encoding: 'utf8',
             });
@@ -1564,7 +1576,7 @@ class SemanticMergeEngine extends EventEmitter {
 
     try {
       // Get modified files in this task
-      const diffOutput = execSync(`git diff --name-only ${branch || 'main'}...HEAD`, {
+      const diffOutput = execFileSync('git', ['diff', '--name-only', `${branch || 'main'}...HEAD`], {
         cwd: workDir,
         encoding: 'utf8',
       }).trim();

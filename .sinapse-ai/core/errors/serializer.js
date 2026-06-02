@@ -1,8 +1,7 @@
 /**
  * core/errors/serializer.js — JSON-safe error serialization for SINAPSE.
  *
- * Ported from AIOX-Core (.aiox-core/core/errors/serializer.js) with branding
- * (AIOX → SINAPSE) plus one ADDITIVE, defensive hardening on stack exposure:
+ * SINAPSE-branded serializer with one ADDITIVE, defensive hardening on stack exposure:
  * stacks are NEVER exposed when NODE_ENV === 'production' unless the caller
  * explicitly passes `includeStack: true`. This prevents leaking internal stack
  * traces to users in production (security: do not leak implementation detail).

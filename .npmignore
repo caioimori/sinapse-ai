@@ -1,0 +1,11 @@
+# Defense-in-depth: never publish internal docs.
+# The package.json "files" allowlist is the primary control (explicit per-file
+# entries under docs/). This .npmignore is a second guard so that if a glob is
+# ever re-introduced, these internal doc patterns still get excluded.
+
+docs/*-plan.md
+docs/*-compliance.md
+docs/security-audit-report.md
+docs/research-synthesis*.md
+docs/mega-*.md
+docs/chrome-brain-*.md

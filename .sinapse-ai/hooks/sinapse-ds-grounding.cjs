@@ -11,7 +11,7 @@
  * (PT + EN). Injects the first 3000 chars of the DS law file as
  * `<ds-grounding>` context.
  *
- * Coexistence: Caio's personal `~/.claude/hooks/design-system-grounding.cjs`
+ * Coexistence: the user's personal `~/.claude/hooks/design-system-grounding.cjs` (if present)
  * reads `ds-routing.json` and is unaffected by this file.
  */
 

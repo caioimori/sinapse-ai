@@ -1,8 +1,8 @@
 /**
  * Core Errors Module Tests
  *
- * Port #10 — foundation typed-error module (core/errors/).
- * Ported from AIOX-Core with branding (SinapseError / SNPS_* / SINAPSE).
+ * Foundation typed-error module (core/errors/) with SINAPSE branding
+ * (SinapseError / SNPS_* / SINAPSE).
  *
  * Proves:
  *   - SinapseError carries the typed fields (code, category, severity,
@@ -62,7 +62,7 @@ describe('Core Errors Module (Port #10)', () => {
       }
     });
 
-    test('SNPS_SYNAPSE_LAYER_FAILED is registered (branded from AIOX_SYNAPSE_LAYER_FAILED)', () => {
+    test('SNPS_SYNAPSE_LAYER_FAILED is registered', () => {
       expect(defaultErrorRegistry.has('SNPS_SYNAPSE_LAYER_FAILED')).toBe(true);
       const def = defaultErrorRegistry.lookup('SNPS_SYNAPSE_LAYER_FAILED');
       expect(def.category).toBe(ErrorCategory.SYNAPSE);

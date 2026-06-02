@@ -1,4 +1,4 @@
-# Trabalhando em Paralelo — Guia para Caio e Matheus
+# Trabalhando em Paralelo — Guia para dois colaboradores
 
 ## TL;DR
 
@@ -42,12 +42,12 @@ Para evitar que os dois mexam no mesmo arquivo ao mesmo tempo:
 
 | Area | Responsavel |
 |------|-------------|
-| Installer, CLI, hooks | Caio |
-| Squads, agents, tasks | Matheus |
+| Installer, CLI, hooks | Colaborador A |
+| Squads, agents, tasks | Colaborador B |
 | Docs, stories | Quem estiver trabalhando naquela feature |
 | Tests | Quem escreveu o codigo |
 
-Se precisar mexer na area do outro: **avisem antes no WhatsApp/Discord**.
+Se precisar mexer na area do outro: **avisem antes no canal combinado do time**.
 
 ## Regra #2: Mudancas pequenas e frequentes
 
@@ -98,7 +98,7 @@ Em vez de comandos tecnicos, fale normalmente:
 | Voce diz | O agente entende |
 |----------|------------------|
 | "salva meu trabalho" | git add + commit |
-| "envia pro Soier revisar" | push + criar PR |
+| "envia pro outro revisar" | push + criar PR |
 | "atualiza meu projeto" | git fetch + pull + merge |
-| "o que o Caio mudou?" | git log + diff |
+| "o que o outro mudou?" | git log + diff |
 | "desfaz isso" | git revert (seguro) |

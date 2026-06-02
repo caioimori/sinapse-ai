@@ -7,7 +7,7 @@
  * @see Story 3.20 - PM Tool-Agnostic Integration (TR-3.20.3)
  */
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { PMAdapter } = require('../../scripts/pm-adapter');
@@ -293,8 +293,10 @@ class GitHubProjectsAdapter extends PMAdapter {
    * @returns {string} Command output
    */
   _execGH(args) {
-    const command = `gh ${args.join(' ')}`;
-    return execSync(command, { encoding: 'utf8' });
+    // Pass args as an argv array to execFileSync — no shell is spawned, so each
+    // argument is delivered to `gh` verbatim. This prevents shell-metacharacter
+    // injection (e.g. $(...), backticks, ;, &&, |) from story-derived title/body.
+    return execFileSync('gh', args, { encoding: 'utf8' });
   }
 
   /**
@@ -360,8 +362,8 @@ class GitHubProjectsAdapter extends PMAdapter {
 
     const result = this._execGH([
       'issue', 'create',
-      '--title', `"${title}"`,
-      '--body', `"${body.replace(/"/g, '\\"')}"`,
+      '--title', title,
+      '--body', body,
       '--label', labels.join(','),
     ]);
 
@@ -383,8 +385,8 @@ class GitHubProjectsAdapter extends PMAdapter {
 
     this._execGH([
       'issue', 'edit', issueNumber.toString(),
-      '--title', `"${title}"`,
-      '--body', `"${body.replace(/"/g, '\\"')}"`,
+      '--title', title,
+      '--body', body,
     ]);
   }
 }

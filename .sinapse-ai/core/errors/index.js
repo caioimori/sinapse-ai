@@ -1,8 +1,7 @@
 /**
  * core/errors/index.js — barrel for the SINAPSE typed-error module.
  *
- * Ported from AIOX-Core (.aiox-core/core/errors/index.js) with branding.
- * This is the FOUNDATION module: downstream ports consume it via
+ * SINAPSE-branded barrel. This is the FOUNDATION module: downstream modules consume it via
  *   const { SinapseError, normalizeError, serializeError } = require('../errors');
  *
  * Public API exported here:

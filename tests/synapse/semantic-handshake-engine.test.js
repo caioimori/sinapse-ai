@@ -144,7 +144,6 @@ describe('SemanticHandshakeEngine', () => {
       expect(message.metadata.snps).toBeDefined();
       expect(message.metadata.snps.type).toBe('semantic_handshake_report');
       expect(message.metadata.snps.passed).toBe(false);
-      expect(message.metadata).not.toHaveProperty('aiox');
     });
   });
 

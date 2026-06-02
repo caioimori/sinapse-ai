@@ -173,7 +173,7 @@ Frameworks para construcao, gestao e posicionamento de marca. Da identidade ao v
   - **Network Effect**: Conecte pessoas de forma generosa — voce se torna o hub de conexoes
   
   **Ferramentas**: LinkedIn (B2B), Twitter/X (tech/thought leadership), YouTube (profundidade), Substack/Newsletter (ownership), Podcast (intimidade)
-- **Example Application**: Caio Imori (contexto Astro Brand Studio): Specific Knowledge = intersection de IA + branding + storytelling. Public: publicar casos de uso, frameworks proprios, resultados dos clientes. Leverage: SINAPSE como produto que escala o conhecimento.
+- **Example Application**: a solo founder (boutique brand studio context): Specific Knowledge = intersection de IA + branding + storytelling. Public: publicar casos de uso, frameworks proprios, resultados dos clientes. Leverage: SINAPSE como produto que escala o conhecimento.
 - **Key Metrics**: Inbound leads via personal brand; speaking invites; colaboracoes inbound; preco hora premium vs. mercado
 - **Cross-References**: Productize Yourself (Naval), Golden Circle (Sinek), Specific Knowledge Audit
 

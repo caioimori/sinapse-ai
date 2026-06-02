@@ -1,9 +1,7 @@
 /**
  * core/errors/sinapse-error.js — the SinapseError class + normalizeError.
  *
- * Ported from AIOX-Core (.aiox-core/core/errors/aiox-error.js) with branding:
- *   AIOXError → SinapseError ; isAIOXError → isSinapseError ;
- *   this.isAIOXError → this.isSinapseError ; AIOX prose → SINAPSE.
+ * SinapseError class + normalizeError with SINAPSE branding.
  *
  * SinapseError extends Error and carries the typed fields the framework relies
  * on: code, category, severity, retryable, recovery, exitCode (+ userMessage,

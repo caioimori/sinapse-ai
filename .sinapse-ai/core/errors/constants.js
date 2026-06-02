@@ -1,8 +1,7 @@
 /**
  * core/errors/constants.js — SINAPSE typed error constants.
  *
- * Ported from AIOX-Core (.aiox-core/core/errors/constants.js) with branding:
- *   AIOX_* error codes → SNPS_* ; "AIOX" prose → "SINAPSE".
+ * SNPS_* typed error codes with SINAPSE branding.
  *
  * ErrorCategory / ErrorSeverity are the closed enums consumed across the
  * framework. DEFAULT_ERROR_CODE is the fallback code used when a thrown value

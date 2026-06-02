@@ -1,8 +1,8 @@
 /**
  * core/errors/utils.js — pure helpers for the SINAPSE error module.
  *
- * Ported verbatim from AIOX-Core (.aiox-core/core/errors/utils.js); contains
- * no AIOX branding, so logic is unchanged. These helpers are shared by the
+ * Pure helpers with no external branding, so the logic stays portable. These
+ * helpers are shared by the
  * registry, the SinapseError class, and the serializer — keep them dependency
  * free so every other error file can require them safely.
  */

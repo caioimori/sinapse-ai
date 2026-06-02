@@ -18,7 +18,7 @@ services:
       - GROQ_API_KEY=${GROQ_API_KEY:-}
 
       # LiteLLM Settings
-      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-sinapse-litellm-default}
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:?LITELLM_MASTER_KEY must be set to a strong random value}
       - LITELLM_DROP_PARAMS=true
 
       # Logging

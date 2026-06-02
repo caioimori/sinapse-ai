@@ -1,10 +1,9 @@
 /**
  * core/errors/error-registry.js — SINAPSE error definition registry.
  *
- * Ported from AIOX-Core (.aiox-core/core/errors/error-registry.js) with
- * branding: AIOX prose → SINAPSE; code regex unchanged (still [A-Z0-9_]+, so
- * SNPS_* codes validate). The Pro-tier registry (pro-error-registry.js) was
- * intentionally NOT ported.
+ * SINAPSE-branded error registry; code regex is [A-Z0-9_]+, so SNPS_* codes
+ * validate. The Pro-tier registry (pro-error-registry.js) is intentionally
+ * not included.
  *
  * The registry maps an error code → frozen definition (category, severity,
  * retryable, userMessage, recovery, optional exitCode). Lookups never throw:

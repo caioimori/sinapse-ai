@@ -40,10 +40,42 @@ try {
   GotchasMemory = null;
 }
 
+/**
+ * Validate that a root path is safe to interpolate into shell command strings.
+ *
+ * EXEC-004 fix: the analyzers below build shell commands via execSync that
+ * interpolate `rootPath` directly (grep/wc/npx madge). A rootPath containing
+ * shell metacharacters or quotes could break the command or allow shell
+ * injection. The shell features in those commands (globs `**`, pipes,
+ * `2>/dev/null`, `|| true`) make a clean execFileSync conversion impractical
+ * without changing behavior, so we close the injection vector at the source by
+ * resolving and validating rootPath once, in the constructor.
+ *
+ * @param {string} rootPath - Candidate root path.
+ * @returns {string} The resolved, validated absolute path.
+ * @throws {Error} If the path contains shell metacharacters or quotes.
+ */
+function validateRootPath(rootPath) {
+  const resolved = path.resolve(rootPath);
+
+  // Reject shell metacharacters and quotes. Spaces are allowed (handled by the
+  // shell quoting the analyzers already rely on for normal paths), but these
+  // characters can break out of the command string or chain new commands.
+  const SHELL_UNSAFE = /[;&|$`<>(){}'"\n\r]/;
+  if (SHELL_UNSAFE.test(resolved)) {
+    throw new Error(
+      `Unsafe rootPath for IdeationEngine: "${resolved}" contains shell metacharacters or quotes. ` +
+        'Refusing to interpolate it into shell commands.',
+    );
+  }
+
+  return resolved;
+}
+
 class IdeationEngine {
   constructor(config = {}) {
-    // Root path
-    this.rootPath = config.rootPath || process.cwd();
+    // Root path — validated to prevent shell injection in analyzer commands (EXEC-004).
+    this.rootPath = validateRootPath(config.rootPath || process.cwd());
 
     // Analysis areas
     this.areas = config.areas || ['performance', 'security', 'codeQuality', 'ux', 'architecture'];

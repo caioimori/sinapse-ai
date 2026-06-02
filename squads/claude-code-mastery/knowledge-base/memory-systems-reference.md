@@ -339,7 +339,7 @@ class AgentMemory:
 ```python
 # Track how facts change over time
 fact = KnowledgeFact(
-    content="User works at Astro Brand Studio",
+    content="User works at Acme Corp",
     valid_from="2025-01",
     valid_to=None,          # Still valid
     ingested_at="2025-01-15",
