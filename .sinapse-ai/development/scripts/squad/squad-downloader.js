@@ -34,6 +34,25 @@ const GITHUB_API_BASE =
 const DEFAULT_SQUADS_PATH = './squads';
 
 /**
+ * Allowlist of HTTPS hosts permitted when following HTTP redirects.
+ * Prevents SSRF / redirect-based exfiltration to arbitrary hosts.
+ * @constant {Set<string>}
+ */
+const ALLOWED_REDIRECT_HOSTS = new Set([
+  'raw.githubusercontent.com',
+  'api.github.com',
+  'github.com',
+  'objects.githubusercontent.com',
+  'codeload.github.com',
+]);
+
+/**
+ * Maximum number of redirects to follow before aborting a fetch.
+ * @constant {number}
+ */
+const MAX_REDIRECTS = 5;
+
+/**
  * Error codes for SquadDownloaderError
  * @enum {string}
  */
@@ -371,6 +390,51 @@ class SquadDownloader {
   }
 
   /**
+   * Resolve and validate that an item lands strictly inside the target path.
+   * Defends against zip-slip / path traversal when `item.name` originates from
+   * an untrusted remote source (GitHub API / registry).
+   *
+   * @private
+   * @param {string} targetPath - Trusted base directory
+   * @param {string} itemName - Untrusted entry name from remote response
+   * @returns {string} Safe, resolved item path contained within targetPath
+   * @throws {SquadDownloaderError} VALIDATION_ERROR if traversal is detected
+   */
+  _safeResolve(targetPath, itemName) {
+    // Reject names that are missing, contain path separators, or use '..'.
+    if (
+      typeof itemName !== 'string' ||
+      itemName.length === 0 ||
+      itemName === '.' ||
+      itemName === '..' ||
+      itemName.includes('/') ||
+      itemName.includes('\\') ||
+      itemName.includes('\0')
+    ) {
+      throw new SquadDownloaderError(
+        DownloaderErrorCodes.VALIDATION_ERROR,
+        `Unsafe item name from remote response: "${itemName}"`,
+        'Squad entries must be plain file/directory names without path separators or ".."',
+      );
+    }
+
+    const itemPath = path.join(targetPath, itemName);
+    const resolved = path.resolve(itemPath);
+    const base = path.resolve(targetPath);
+
+    // Resolved path must be strictly inside the base directory.
+    if (resolved !== base && !resolved.startsWith(base + path.sep)) {
+      throw new SquadDownloaderError(
+        DownloaderErrorCodes.VALIDATION_ERROR,
+        `Path traversal detected: "${itemName}" escapes target directory`,
+        'Squad entries must stay within the download directory',
+      );
+    }
+
+    return itemPath;
+  }
+
+  /**
    * Download contents recursively
    * @private
    * @param {Array} contents - GitHub API contents array
@@ -378,7 +442,8 @@ class SquadDownloader {
    */
   async _downloadContents(contents, targetPath) {
     for (const item of contents) {
-      const itemPath = path.join(targetPath, item.name);
+      // Validate containment BEFORE any filesystem write (zip-slip guard).
+      const itemPath = this._safeResolve(targetPath, item.name);
 
       if (item.type === 'file') {
         // Download file - Buffer is written directly (supports binary files)
@@ -400,9 +465,10 @@ class SquadDownloader {
    * @private
    * @param {string} url - URL to fetch
    * @param {boolean} [useApi=false] - Whether to use GitHub API headers
+   * @param {number} [redirectCount=0] - Current redirect depth (internal)
    * @returns {Promise<Buffer>} Response body as Buffer (supports binary files)
    */
-  _fetch(url, useApi = false) {
+  _fetch(url, useApi = false, redirectCount = 0) {
     return new Promise((resolve, reject) => {
       const options = {
         headers: {
@@ -438,7 +504,53 @@ class SquadDownloader {
 
           // Check for redirect
           if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-            this._fetch(res.headers.location, useApi).then(resolve).catch(reject);
+            // Drain the redirect response to free the socket.
+            res.resume();
+
+            // Cap redirect depth to prevent redirect loops.
+            if (redirectCount >= MAX_REDIRECTS) {
+              reject(
+                new SquadDownloaderError(
+                  DownloaderErrorCodes.NETWORK_ERROR,
+                  `Too many redirects (>${MAX_REDIRECTS}) while fetching ${url}`,
+                  'The remote server may be misconfigured or attempting a redirect loop',
+                ),
+              );
+              return;
+            }
+
+            // Resolve the Location against the current URL and enforce an
+            // HTTPS host allowlist (SSRF / exfiltration guard).
+            let redirectUrl;
+            try {
+              redirectUrl = new URL(res.headers.location, url);
+            } catch {
+              reject(
+                new SquadDownloaderError(
+                  DownloaderErrorCodes.NETWORK_ERROR,
+                  `Invalid redirect URL: ${res.headers.location}`,
+                ),
+              );
+              return;
+            }
+
+            if (
+              redirectUrl.protocol !== 'https:' ||
+              !ALLOWED_REDIRECT_HOSTS.has(redirectUrl.hostname)
+            ) {
+              reject(
+                new SquadDownloaderError(
+                  DownloaderErrorCodes.VALIDATION_ERROR,
+                  `Refusing redirect to disallowed host: ${redirectUrl.protocol}//${redirectUrl.hostname}`,
+                  'Redirects are restricted to trusted GitHub HTTPS hosts',
+                ),
+              );
+              return;
+            }
+
+            this._fetch(redirectUrl.toString(), useApi, redirectCount + 1)
+              .then(resolve)
+              .catch(reject);
             return;
           }
 

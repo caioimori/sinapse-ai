@@ -13,8 +13,8 @@
  *
  * Coexistence with personal hooks: this file lives at
  *   .sinapse-ai/hooks/sinapse-vault-grounding.cjs
- * and reads `sinapse-ai-config.yaml`. Caio's personal
- * `~/.claude/hooks/vault-grounding.cjs` reads `vault-routing.json`. The two
+ * and reads `sinapse-ai-config.yaml`. The user's personal
+ * `~/.claude/hooks/vault-grounding.cjs` (if present) reads `vault-routing.json`. The two
  * files do not collide (different filenames, different config sources, and
  * fail-open guarantees that running both is safe).
  *

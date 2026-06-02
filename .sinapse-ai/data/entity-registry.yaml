@@ -3697,7 +3697,6 @@ entities:
       purpose: '''Let\''s start with the fundamental details about your agent'','
       type: module
       usedBy:
-        - index
         - index.esm
     agent-invoker:
       adaptability:
@@ -3857,7 +3856,6 @@ entities:
         - deployment-readiness
         - disk-space
         - docker-config
-        - engine
         - env-file
         - environment-vars
         - framework-config
@@ -4023,8 +4021,9 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:2f6364c0f7c3570f37bf31f9f2e9130232fffe9804499671109c670682b07d7e
+      checksum: sha256:3fd8668b2a6894b31b1c48091ebd0009b6f739b21ebf2aa7b7b645126ea42518
       dependencies:
+        - spawn-safe
         - autonomous-build-loop
         - build-state-manager
         - worktree-manager
@@ -4033,7 +4032,7 @@ entities:
       keywords:
         - build
         - orchestrator
-      lastVerified: '2026-05-07T21:34:53.717Z'
+      lastVerified: '2026-06-02T05:08:31.233Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/execution/build-orchestrator.js
@@ -4066,8 +4065,9 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:70f0eec0bbdaea2f8f8430dcc4cef7a78d11e6334f275451cd21996314307c37
+      checksum: sha256:3b2fe56bf0e1a480f663a02afbb83c6d11cf89fb56815381c7ccafab948a63ae
       dependencies:
+        - errors
         - stuck-detector
         - recovery-tracker
       externalDeps: []
@@ -4075,7 +4075,7 @@ entities:
         - build
         - state
         - manager
-      lastVerified: '2026-05-07T21:34:53.717Z'
+      lastVerified: '2026-06-02T05:08:32.217Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/execution/build-state-manager.js
@@ -4438,13 +4438,13 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:f1e27fa8f01972a1e025893755e8ade40a215ceab0e9b18920036e77fad1b7ce
+      checksum: sha256:c90c2b1506d72ce8c468b8b2b90cf4116fd1fc441eb591e8ce09dbcb75e28c00
       dependencies: []
       externalDeps: []
       keywords:
         - condition
         - evaluator
-      lastVerified: '2026-05-07T21:34:53.727Z'
+      lastVerified: '2026-06-02T05:08:27.305Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/condition-evaluator.js
@@ -4473,7 +4473,6 @@ entities:
       type: module
       usedBy:
         - config-resolver
-        - index
         - index.esm
         - agent-config-loader
     config-loader:
@@ -4497,7 +4496,6 @@ entities:
       purpose: Entity at .sinapse-ai\core\config\config-loader.js
       type: module
       usedBy:
-        - index
         - index.esm
     config-migrator:
       adaptability:
@@ -4605,6 +4603,24 @@ entities:
       purpose: Entity at .sinapse-ai\core\health-check\reporters\console.js
       type: module
       usedBy: []
+    constants:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:47b7af8ec11131100aefe1234918a645d5402706a18d4d56aaacffd9cfbf5e24
+      dependencies: []
+      keywords:
+        - constants
+      lastVerified: '2026-06-02T05:08:32.210Z'
+      layer: L1
+      path: .sinapse-ai/core/errors/constants.js
+      purpose: Entity at .sinapse-ai\core\errors\constants.js
+      type: module
+      usedBy:
+        - error-registry
+        - serializer
+        - sinapse-error
     constitution-consistency:
       adaptability:
         constraints: []
@@ -4642,7 +4658,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\synapse\context\context-builder.js
       type: module
-      usedBy: []
+      usedBy:
+        - engine
     context-detector:
       adaptability:
         constraints: []
@@ -4664,7 +4681,6 @@ entities:
       type: module
       usedBy:
         - context-loader
-        - index
         - index.esm
         - agent-exit-hooks
         - greeting-builder
@@ -4711,7 +4727,6 @@ entities:
       purpose: Entity at .sinapse-ai\core\session\context-loader.js
       type: module
       usedBy:
-        - index
         - index.esm
         - unified-activation-pipeline
         - context-loading
@@ -4740,13 +4755,13 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:e4eaf1af1fc9ca18d6a0fa48f4739087fb5f4060588e0ed9182e561a9cae5869
+      checksum: sha256:c9dae4f2e046590d48d2e03be894f437ff0257eb1a487cec3c4ebe773d33b1dc
       dependencies: []
       externalDeps: []
       keywords:
         - context
         - tracker
-      lastVerified: '2026-05-07T21:34:53.760Z'
+      lastVerified: '2026-06-02T05:08:27.307Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/synapse/context/context-tracker.js
@@ -4754,24 +4769,30 @@ entities:
       purpose: Entity at .sinapse-ai\core\synapse\context\context-tracker.js
       type: module
       usedBy:
+        - engine
         - pipeline-collector
     core-config:
       adaptability:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:77b3a167f52a6145aeaf83ac4ce558ec7b8efd66beccfa05ec106367315d7e9a
+      checksum: sha256:402ab48803020cd0132703554770ae599e0701c1fdc3421a6e3b5f5d58a4bacf
       dependencies: []
       externalDeps: []
       keywords:
         - core
         - config
-      lastVerified: '2026-05-07T21:34:53.749Z'
+        - boundary
+        - mapping
+        - framework-project
+        - separation
+        - (epic
+      lastVerified: '2026-06-02T05:08:27.302Z'
       layer: L1
       lifecycle: orphan
       path: .sinapse-ai/core/doctor/checks/core-config.js
       plannedDeps: []
-      purpose: Entity at .sinapse-ai\core\doctor\checks\core-config.js
+      purpose: Core MCPs - no API keys required
       type: module
       usedBy: []
     creation-helper:
@@ -5055,18 +5076,22 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:5979d3b4985d72f6f75180c136c830dcc3f9cf424ca87db6ef4fce766574696c
+      checksum: sha256:66b124c47e1fd275cfd7e4bc02a12ef429e436959a7e56999fdeee5c80f0a23e
       dependencies:
-        - base-check
+        - errors
+        - context-tracker
+        - context-builder
+        - formatter
+        - memory-bridge
       externalDeps: []
       keywords:
         - engine
-      lastVerified: '2026-05-07T21:34:53.720Z'
+      lastVerified: '2026-06-02T05:08:32.219Z'
       layer: L1
       lifecycle: experimental
       path: .sinapse-ai/core/health-check/engine.js
       plannedDeps: []
-      purpose: Entity at .sinapse-ai\core\health-check\engine.js
+      purpose: Entity at .sinapse-ai\core\synapse\engine.js
       type: module
       usedBy: []
     entity-registry:
@@ -5280,6 +5305,25 @@ entities:
         - epic-4-executor
         - epic-5-executor
         - epic-6-executor
+    error-registry:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:25da2ffbaf62e05b34fb2c940669c8658f788b441c055ae3c45cf5345de17d1c
+      dependencies:
+        - constants
+        - utils
+      keywords:
+        - error
+        - registry
+      lastVerified: '2026-06-02T05:08:32.213Z'
+      layer: L1
+      path: .sinapse-ai/core/errors/error-registry.js
+      purpose: Entity at .sinapse-ai\core\errors\error-registry.js
+      type: module
+      usedBy:
+        - sinapse-error
     execution-profile-resolver:
       adaptability:
         constraints: []
@@ -5383,7 +5427,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\synapse\output\formatter.js
       type: module
-      usedBy: []
+      usedBy:
+        - engine
     framework-config:
       adaptability:
         constraints: []
@@ -5691,13 +5736,13 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:3ce4d245c4a13c3f2cf63d5a1910a6955390fb214e7ba7d5bbfec5e1f3917c36
+      checksum: sha256:ef746d1c65d3bbe94a06ebe755ce0777e4e1ddd90867a2b96f6c8544c397fcb3
       dependencies: []
       externalDeps: []
       keywords:
         - gotchas
         - memory
-      lastVerified: '2026-05-07T21:34:53.725Z'
+      lastVerified: '2026-06-02T05:08:29.464Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/memory/gotchas-memory.js
@@ -5708,7 +5753,6 @@ entities:
         - active-modules.verify
         - build-orchestrator
         - context-injector
-        - ideation-engine
         - subagent-dispatcher
         - gotcha
         - gotchas
@@ -5902,14 +5946,13 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:f9773242c2f7ba6e837680b96f277181ed5a316e374c162d8db3280ee2debe16
-      dependencies:
-        - gotchas-memory
+      checksum: sha256:bcc08be98d5313f51bac47b65e0dc2f68bb1440f1e6adf57f17208b15036ce11
+      dependencies: []
       externalDeps: []
       keywords:
         - ideation
         - engine
-      lastVerified: '2026-05-07T21:34:53.720Z'
+      lastVerified: '2026-06-02T05:08:29.462Z'
       layer: L1
       lifecycle: experimental
       path: .sinapse-ai/core/ideation/ideation-engine.js
@@ -5943,30 +5986,14 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:1096fccecd12c7b7e6219951048c57bbf6a413e965bd80ae677ad1fc4d5ff604
-      dependencies:
-        - config-cache
-        - config-loader
-        - context-detector
-        - context-loader
-        - elicitation-engine
-        - session-manager
-        - agent-elicitation
-        - task-elicitation
-        - workflow-elicitation
-        - output-formatter
-        - yaml-validator
-        - registry-loader
-      externalDeps: []
+      checksum: sha256:f0a1fe4d0215bc7089edac490604fc4a4007e1c9a446164deef231fbf6925cd0
+      dependencies: []
       keywords:
         - index
-      lastVerified: '2026-05-07T21:34:53.711Z'
+      lastVerified: '2026-06-02T05:08:33.932Z'
       layer: L1
-      lifecycle: experimental
-      path: .sinapse-ai/core/index.js
-      plannedDeps:
-        - health-check
-      purpose: Entity at .sinapse-ai\core\index.js
+      path: .sinapse-ai/core/synapse/context/index.js
+      purpose: Entity at .sinapse-ai\core\synapse\context\index.js
       type: module
       usedBy: []
     index.esm:
@@ -6482,9 +6509,10 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:2aaaa7d4442b1d08c2d0b06c28b6bebcd49cc851a0edfdfb680c3975e61e3029
+      checksum: sha256:214aebc004e38a9d7fe158d287750fd02c28d905d53d1c2ec700a6963c5c2d76
       dependencies:
         - tech-stack-detector
+        - executors
         - recovery-handler
         - gate-evaluator
         - agent-invoker
@@ -6493,7 +6521,7 @@ entities:
       keywords:
         - master
         - orchestrator
-      lastVerified: '2026-05-07T21:34:53.730Z'
+      lastVerified: '2026-06-02T05:08:32.218Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/master-orchestrator.js
@@ -6563,7 +6591,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\synapse\memory\memory-bridge.js
       type: module
-      usedBy: []
+      usedBy:
+        - engine
     merge-utils:
       adaptability:
         constraints: []
@@ -7010,14 +7039,14 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:8ab9376ced03345d686059e7ea1b0a8a8fb945366b49d87882a0379b40de82d4
+      checksum: sha256:1d8f21889d3f08896a5c3ee08e9ea02774003bcc1a108d989c67e4c9fe325b3f
       dependencies:
         - context-tracker
       externalDeps: []
       keywords:
         - pipeline
         - collector
-      lastVerified: '2026-05-07T21:34:53.774Z'
+      lastVerified: '2026-06-02T05:08:27.308Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/synapse/diagnostics/collectors/pipeline-collector.js
@@ -7183,8 +7212,9 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:d7917584bc839e705c75867a805fe0b072e0bb2caf943db041d8d0a145456710
+      checksum: sha256:cfbf41b69336548b2fc4179a5513243491ca6eb501de3426f98254f118b074e7
       dependencies:
+        - errors
         - stuck-detector
         - rollback-manager
         - recovery-tracker
@@ -7192,7 +7222,7 @@ entities:
       keywords:
         - recovery
         - handler
-      lastVerified: '2026-05-07T21:34:53.732Z'
+      lastVerified: '2026-06-02T05:08:32.218Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/recovery-handler.js
@@ -7226,23 +7256,22 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:2e4b9bffe58f3d0aa90fe17d6a67e17d7dd5a640bc2c33dc5d30c14827800bb1
+      checksum: sha256:2db0e197f7af525ec9164cb0364770d981aa6f5c851ef02ba6e35e122aaa381e
       dependencies: []
       externalDeps: []
       keywords:
         - registry
         - loader
-      lastVerified: '2026-05-07T21:34:53.722Z'
+      lastVerified: '2026-06-02T05:08:27.307Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/ids/registry-loader.js
       plannedDeps: []
-      purpose: Entity at .sinapse-ai\core\ids\registry-loader.js
+      purpose: Entity at .sinapse-ai\core\registry\registry-loader.js
       type: module
       usedBy:
         - code-intel-source
         - framework-governor
-        - index
         - registry-source
         - registry-syncer
     registry-provider:
@@ -7453,6 +7482,23 @@ entities:
       purpose: Entity at .sinapse-ai\core\utils\security-utils.js
       type: module
       usedBy: []
+    semantic-handshake-engine:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:0364c74a5945d2bbf775fbbdc3c5b5fdfb59b725abba9569fcc98bb1aa9c13c9
+      dependencies: []
+      keywords:
+        - semantic
+        - handshake
+        - engine
+      lastVerified: '2026-06-02T05:08:33.934Z'
+      layer: L1
+      path: .sinapse-ai/core/synapse/context/semantic-handshake-engine.js
+      purpose: '''Must use PostgreSQL adapter, not SQLite or another local database.'','
+      type: module
+      usedBy: []
     semantic-merge-engine:
       adaptability:
         constraints: []
@@ -7474,6 +7520,24 @@ entities:
       type: module
       usedBy:
         - active-modules.verify
+    serializer:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:4f0548adb1c78af9129de21c2c6ec43c4da6aedd9a4f90fe30ec098a69743753
+      dependencies:
+        - constants
+        - utils
+      keywords:
+        - serializer
+      lastVerified: '2026-06-02T05:08:32.214Z'
+      layer: L1
+      path: .sinapse-ai/core/errors/serializer.js
+      purpose: Entity at .sinapse-ai\core\errors\serializer.js
+      type: module
+      usedBy:
+        - sinapse-error
     session-collector:
       adaptability:
         constraints: []
@@ -7514,7 +7578,6 @@ entities:
       type: module
       usedBy:
         - elicitation-engine
-        - index
         - index.esm
     session-state:
       adaptability:
@@ -7600,6 +7663,26 @@ entities:
       purpose: '''Verifies .sinapse/ directory structure'','
       type: module
       usedBy: []
+    sinapse-error:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:b73578a3fb90e179d2c9d5d34e60da9646434cf7073996bf547ee452d5cdb019
+      dependencies:
+        - constants
+        - error-registry
+        - serializer
+        - utils
+      keywords:
+        - sinapse
+        - error
+      lastVerified: '2026-06-02T05:08:32.214Z'
+      layer: L1
+      path: .sinapse-ai/core/errors/sinapse-error.js
+      purpose: Entity at .sinapse-ai\core\errors\sinapse-error.js
+      type: module
+      usedBy: []
     skill-dispatcher:
       adaptability:
         constraints: []
@@ -7639,6 +7722,24 @@ entities:
       purpose: Entity at .sinapse-ai\core\doctor\checks\skills-count.js
       type: module
       usedBy: []
+    spawn-safe:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:529436ca4744e43a373e4d932720f91afa66c94f169eff7ce82cb59bd7319849
+      dependencies: []
+      keywords:
+        - spawn
+        - safe
+      lastVerified: '2026-06-02T05:08:31.236Z'
+      layer: L1
+      path: .sinapse-ai/core/utils/spawn-safe.js
+      purpose: Entity at .sinapse-ai\core\utils\spawn-safe.js
+      type: module
+      usedBy:
+        - build-orchestrator
+        - subagent-dispatcher
     stats-renderer:
       adaptability:
         constraints: []
@@ -7704,14 +7805,18 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:376c3c1c7407360f085e6628b8cd5d25596b2bc0d644c9bf001b4c0145bd2d50
+      checksum: sha256:885e8521f9404c9c8bb3f0da875f6e4b6c0c99e4f7c37f8a6b94e7e77218ad58
       dependencies:
+        - spawn-safe
+        - ai-provider-factory
+        - ai-providers
+        - memory-query
         - gotchas-memory
       externalDeps: []
       keywords:
         - subagent
         - dispatcher
-      lastVerified: '2026-05-07T21:34:53.719Z'
+      lastVerified: '2026-06-02T05:08:31.235Z'
       layer: L1
       lifecycle: experimental
       path: .sinapse-ai/core/execution/subagent-dispatcher.js
@@ -7894,7 +7999,6 @@ entities:
       purpose: '''Define the fundamental details of your task'','
       type: module
       usedBy:
-        - index
         - index.esm
     tech-stack-detector:
       adaptability:
@@ -8076,6 +8180,24 @@ entities:
       type: module
       usedBy:
         - synapse-diagnostics
+    utils:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.4
+      checksum: sha256:c2527a96f31e21b9f4b07276477fbb1ec1f858663fe762b8940cfa51e6a59f45
+      dependencies: []
+      keywords:
+        - utils
+      lastVerified: '2026-06-02T05:08:32.215Z'
+      layer: L1
+      path: .sinapse-ai/core/errors/utils.js
+      purpose: Entity at .sinapse-ai\core\errors\utils.js
+      type: module
+      usedBy:
+        - error-registry
+        - serializer
+        - sinapse-error
     validate-registry:
       adaptability:
         constraints: []
@@ -8175,7 +8297,6 @@ entities:
       purpose: '''Where should this workflow be created?'','
       type: module
       usedBy:
-        - index
         - index.esm
         - verify-workflow-gaps
     workflow-executor:
@@ -9422,7 +9543,6 @@ entities:
       usedBy:
         - batch-creator
         - component-generator
-        - index
         - index.esm
     elicitation-session-manager:
       adaptability:
@@ -17067,7 +17187,6 @@ entities:
       purpose: Entity at .sinapse-ai\core\utils\output-formatter.js
       type: util
       usedBy:
-        - index
         - index.esm
         - next
     security-utils:
@@ -17110,7 +17229,6 @@ entities:
       usedBy:
         - component-generator
         - modification-validator
-        - index
         - index.esm
   workflows:
     auto-worktree:
@@ -17488,7 +17606,7 @@ entities:
       usedBy: []
 metadata:
   checksumAlgorithm: sha256
-  entityCount: 756
-  lastUpdated: '2026-05-25T16:16:10.952Z'
+  entityCount: 763
+  lastUpdated: '2026-06-02T05:08:33.937Z'
   resolutionRate: 100
   version: 1.0.0

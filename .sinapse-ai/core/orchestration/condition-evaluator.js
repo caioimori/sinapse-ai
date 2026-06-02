@@ -24,6 +24,28 @@
  */
 
 /**
+ * Runtime-resolved condition defaults.
+ * These values are used when a condition is not a built-in evaluator and
+ * no runtime override has been set.  Frozen so callers cannot mutate them.
+ */
+const RUNTIME_CONDITION_DEFAULTS = Object.freeze({
+  after_prd_creation: true,
+  architecture_changes_needed: true,
+  architecture_suggests_prd_changes: true,
+  based_on_classification: true,
+  documentation_inadequate: true,
+  epic_complete: true,
+  gate_approved: true,
+  major_enhancement_path: true,
+  po_checklist_issues: true,
+  qa_left_unchecked_items: true,
+  stories_remaining: true,
+  user_has_generated_ui: true,
+  user_wants_ai_generation: true,
+  user_wants_story_review: true,
+});
+
+/**
  * Evaluates workflow conditions based on detected tech stack
  */
 class ConditionEvaluator {
@@ -36,6 +58,30 @@ class ConditionEvaluator {
     // Context for QA approval tracking (updated externally)
     this._qaApproved = false;
     this._phaseOutputs = {};
+
+    // Runtime condition overrides — take precedence over defaults and built-ins
+    this._runtimeOverrides = new Map();
+  }
+
+  /**
+   * Set a single runtime-resolved condition value.
+   * Runtime overrides take precedence over RUNTIME_CONDITION_DEFAULTS and
+   * over built-in tech-stack evaluators.
+   * @param {string} name - Condition name
+   * @param {boolean} value - Runtime condition value
+   */
+  setRuntimeCondition(name, value) {
+    this._runtimeOverrides.set(name, Boolean(value));
+  }
+
+  /**
+   * Set multiple runtime-resolved condition values at once.
+   * @param {Object} overrides - Map of condition names to boolean values
+   */
+  setRuntimeConditions(overrides = {}) {
+    for (const [name, value] of Object.entries(overrides)) {
+      this.setRuntimeCondition(name, value);
+    }
   }
 
   /**
@@ -63,6 +109,11 @@ class ConditionEvaluator {
     // Handle null/undefined conditions
     if (!condition) {
       return true;
+    }
+
+    // Runtime overrides take highest precedence
+    if (this._runtimeOverrides.has(condition)) {
+      return this._runtimeOverrides.get(condition);
     }
 
     // Built-in condition evaluators
@@ -103,6 +154,11 @@ class ConditionEvaluator {
     const evaluator = evaluators[condition];
     if (evaluator) {
       return evaluator();
+    }
+
+    // Fall back to frozen defaults for known runtime conditions
+    if (Object.prototype.hasOwnProperty.call(RUNTIME_CONDITION_DEFAULTS, condition)) {
+      return RUNTIME_CONDITION_DEFAULTS[condition];
     }
 
     // Handle negation first
@@ -377,4 +433,5 @@ class ConditionEvaluator {
 }
 
 module.exports = ConditionEvaluator;
+module.exports.RUNTIME_CONDITION_DEFAULTS = RUNTIME_CONDITION_DEFAULTS;
 

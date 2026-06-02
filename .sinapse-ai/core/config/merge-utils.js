@@ -50,6 +50,14 @@ function deepMerge(target, source) {
   const result = { ...target };
 
   for (const [key, value] of Object.entries(source)) {
+    // Defense-in-depth: block prototype-pollution keys (CWE-1321).
+    // The {...target} spread already neutralizes this today, but an explicit
+    // deny-list prevents a future refactor from reintroducing the vulnerability
+    // via untrusted config (YAML/JSON).
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      continue;
+    }
+
     // Handle +append modifier for arrays
     if (key.endsWith('+append')) {
       const baseKey = key.slice(0, -7); // Remove '+append'

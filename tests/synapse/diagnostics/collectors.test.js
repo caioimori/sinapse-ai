@@ -495,8 +495,10 @@ describe('pipeline-collector: collectPipelineSimulation', () => {
   });
 
   test('MODERATE bracket: all 8 layers ACTIVE', () => {
-    // promptCount=60 => usedTokens=90000 => percent=55 => MODERATE
-    const result = collectPipelineSimulation(60, null, { domains: {} });
+    // Pin the 200k reference scale so this exercises bracket-transition logic
+    // deterministically, independent of the active model's context window.
+    // promptCount=60 @ 1500 tok/prompt => MODERATE
+    const result = collectPipelineSimulation(60, null, { domains: {} }, { maxContext: 200000, avgTokensPerPrompt: 1500 });
 
     expect(result.bracket).toBe('MODERATE');
     for (const layer of result.layers) {
@@ -533,8 +535,9 @@ describe('pipeline-collector: collectPipelineSimulation', () => {
   });
 
   test('CRITICAL bracket for very high prompt count', () => {
-    // promptCount=120 => usedTokens=180000 => percent=10 => CRITICAL
-    const result = collectPipelineSimulation(120, null, { domains: {} });
+    // Pin 200k reference scale (see MODERATE test) — exercises bracket logic, not model config.
+    // promptCount=120 @ 1500 tok/prompt => CRITICAL
+    const result = collectPipelineSimulation(120, null, { domains: {} }, { maxContext: 200000, avgTokensPerPrompt: 1500 });
 
     expect(result.bracket).toBe('CRITICAL');
     expect(result.contextPercent).toBeLessThanOrEqual(25);

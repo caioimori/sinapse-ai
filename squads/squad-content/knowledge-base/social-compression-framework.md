@@ -1,6 +1,6 @@
 # Social Compression Framework — Compressao de Tese Densa em Conteudo Social-Native
 
-> Fonte: Inteligencia extraida do posicionamento de Matheus Soier — embalagem social-native e retencao.
+> Fonte: padrões de posicionamento de alta densidade — embalagem social-native e retencao.
 
 ## Principio Central
 

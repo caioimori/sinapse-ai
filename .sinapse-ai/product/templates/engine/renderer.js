@@ -205,6 +205,23 @@ class TemplateRenderer {
     this.customHelpers = new Map();
     registerDefaultHelpers(this.handlebars);
 
+    // HTML-escape policy for compiled templates.
+    //
+    // Default is `noEscape: true` (HTML escaping OFF) BY DESIGN. This renderer
+    // produces Markdown / plain-text documents (ADR, PRD, story, epic, task —
+    // see SUPPORTED_TYPES in index.js, all saved as `.md` under docs/). Markdown
+    // legitimately contains raw `<`, `>`, `&`, quotes (headings, tables,
+    // comparison operators, code blocks, HTML-in-markdown). Turning escaping ON
+    // would corrupt that output (`&` -> `&amp;`, `<` -> `&lt;`), so it stays OFF.
+    //
+    // SECURITY CONTRACT: this renderer must ONLY receive TRUSTED context
+    // (framework-elicited template variables) and its output is consumed as
+    // Markdown/CLI/docs — NEVER served as HTML to a browser. If you ever reuse
+    // this engine to emit HTML for a web response, construct it with
+    // `{ noEscape: false }` so Handlebars escapes interpolated values and
+    // mitigates XSS. Do not feed untrusted user input through the trusted path.
+    this.noEscape = options.noEscape !== false;
+
     // Register any custom helpers from options
     if (options.helpers) {
       for (const [name, fn] of Object.entries(options.helpers)) {
@@ -242,9 +259,11 @@ class TemplateRenderer {
     const templateBody = typeof template === 'string' ? template : template.body;
 
     try {
+      // noEscape default = true (Markdown/docs output, trusted context). See the
+      // SECURITY CONTRACT note in the constructor before changing this.
       const compiledTemplate = this.handlebars.compile(templateBody, {
         strict: false,
-        noEscape: true,
+        noEscape: this.noEscape,
       });
 
       // Add metadata to context if available

@@ -73,7 +73,7 @@ describe('registerGroundingHooks', () => {
           hooks: [
             {
               type: 'command',
-              command: 'node "C:/Users/Caio Imori/.claude/hooks/vault-grounding.cjs"',
+              command: 'node "/home/user/.claude/hooks/vault-grounding.cjs"',
               timeout: 4000,
             },
           ],

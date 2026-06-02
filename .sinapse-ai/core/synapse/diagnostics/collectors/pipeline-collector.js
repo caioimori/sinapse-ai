@@ -34,10 +34,12 @@ const LAYER_NAMES = {
  * @param {number} promptCount - Current prompt count from session
  * @param {string|null} activeAgentId - Active agent ID (for L2 match check)
  * @param {object} manifest - Parsed manifest object
+ * @param {object} [options={}] - Context-estimate overrides (maxContext, avgTokensPerPrompt).
+ *   Defaults to the active model's config (model-aware), matching the engine's own bracket calc.
  * @returns {{ bracket: string, contextPercent: number, layers: Array<{ layer: string, expected: string, status: string }> }}
  */
-function collectPipelineSimulation(promptCount, activeAgentId, manifest) {
-  const contextPercent = estimateContextPercent(promptCount || 0);
+function collectPipelineSimulation(promptCount, activeAgentId, manifest, options = {}) {
+  const contextPercent = estimateContextPercent(promptCount || 0, options);
   const bracket = calculateBracket(contextPercent);
   const layerConfig = getActiveLayers(bracket);
 

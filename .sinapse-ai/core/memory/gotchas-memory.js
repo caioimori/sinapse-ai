@@ -253,15 +253,29 @@ class GotchasMemory extends EventEmitter {
         count: 0,
         firstSeen: now,
         lastSeen: now,
+        timestamps: [],
         samples: [],
         errorPattern: errorData.message,
         category: this._detectCategory(errorData.message + ' ' + (errorData.stack || '')),
       };
     }
 
-    // Update tracking
-    tracking.count++;
+    // Keep only occurrences inside the configured rolling error window.
+    const windowStart = now - this.options.errorWindowMs;
+    const timestamps = this._normalizeErrorTimestamps(tracking).filter(
+      (timestamp) => timestamp >= windowStart,
+    );
+    timestamps.push(now);
+
+    tracking.timestamps = timestamps;
+    tracking.count = timestamps.length;
+    tracking.firstSeen = timestamps[0];
     tracking.lastSeen = now;
+    tracking.samples = (tracking.samples || []).filter((sample) => {
+      const timestamp = Date.parse(sample.timestamp);
+      return Number.isFinite(timestamp) && timestamp >= windowStart;
+    });
+
     if (tracking.samples.length < 5) {
       tracking.samples.push({
         timestamp: new Date(now).toISOString(),
@@ -757,6 +771,27 @@ class GotchasMemory extends EventEmitter {
       hash = hash & hash;
     }
     return Math.abs(hash).toString(16);
+  }
+
+  /**
+   * Normalize persisted error occurrence timestamps.
+   * Backward-compat: if tracking only has lastSeen (legacy format), fall back to [lastSeen].
+   * @private
+   * @param {Object} tracking - Error tracking entry
+   * @returns {number[]} Timestamp list in milliseconds
+   */
+  _normalizeErrorTimestamps(tracking) {
+    const timestamps = Array.isArray(tracking.timestamps) ? tracking.timestamps : [tracking.lastSeen];
+
+    return timestamps
+      .map((timestamp) => {
+        if (typeof timestamp === 'number') {
+          return timestamp;
+        }
+        const parsed = Date.parse(timestamp);
+        return Number.isFinite(parsed) ? parsed : null;
+      })
+      .filter((timestamp) => timestamp !== null);
   }
 
   /**

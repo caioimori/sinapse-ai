@@ -4,9 +4,14 @@
  * Loads and queries the service registry with caching support.
  * Provides fast lookups by ID, category, tags, and search.
  *
+ * Multi-path resolution: tries cwd-based path first, then falls back to
+ * the package-bundled registry so the registry is always found whether
+ * SINAPSE is run from source or installed as an npm package.
+ *
  * @module registry-loader
- * @version 1.0.0
+ * @version 1.1.0
  * @created Story 2.6 - Service Registry Creation
+ * @updated PORT #7 - Multi-path resolution (registry never disappears when installed as npm package)
  */
 
 const fs = require('fs').promises;
@@ -14,6 +19,60 @@ const path = require('path');
 
 // Cache configuration
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+// Relative path from project root to the registry file
+const REGISTRY_RELATIVE_PATH = path.join('.sinapse-ai', 'core', 'registry', 'service-registry.json');
+
+// Absolute path to the registry bundled alongside this module (npm-installed package)
+const PACKAGE_REGISTRY_PATH = path.join(__dirname, 'service-registry.json');
+
+/**
+ * Return a de-duplicated ordered list of candidate registry paths.
+ * The cwd-based path is tried first (project-local wins).
+ * The package-bundled path serves as the npm-install fallback.
+ *
+ * @returns {string[]} Ordered list of candidate paths
+ */
+function uniquePaths(paths) {
+  return Array.from(new Set(paths));
+}
+
+/**
+ * Build the default ordered list of registry candidate paths.
+ *
+ * @returns {string[]} Ordered candidate paths
+ */
+function getDefaultRegistryPaths() {
+  return uniquePaths([
+    path.join(process.cwd(), REGISTRY_RELATIVE_PATH),
+    PACKAGE_REGISTRY_PATH,
+  ]);
+}
+
+/**
+ * Attempt to read the registry file from an ordered list of paths.
+ * Returns the first successful read.
+ *
+ * @param {string[]} paths - Ordered candidate paths
+ * @returns {Promise<{content: string, registryPath: string}>}
+ * @throws {Error} When all paths fail
+ */
+async function readRegistryFile(paths) {
+  const errors = [];
+
+  for (const registryPath of paths) {
+    try {
+      return {
+        content: await fs.readFile(registryPath, 'utf8'),
+        registryPath,
+      };
+    } catch (error) {
+      errors.push(`${registryPath}: ${error.message}`);
+    }
+  }
+
+  throw new Error(`Failed to load registry: ${errors.join('; ')}`);
+}
 
 /**
  * Service Registry class with caching
@@ -24,6 +83,7 @@ class ServiceRegistry {
     this.cache = null;
     this.cacheTimestamp = 0;
     this.cacheTTL = options.cacheTTL || CACHE_TTL_MS;
+    this.resolvedRegistryPath = null;
 
     // Indexed lookups (built on load)
     this._byId = new Map();
@@ -45,16 +105,16 @@ class ServiceRegistry {
       return this.cache;
     }
 
-    // Determine registry path
-    const registryPath = this.registryPath ||
-      path.join(process.cwd(), '.sinapse-ai/core/registry/service-registry.json');
+    // Build ordered candidate list: explicit path → cwd-based → package-bundled
+    const registryPaths = this.registryPath ? [this.registryPath] : getDefaultRegistryPaths();
 
     const startTime = Date.now();
 
     try {
-      const content = await fs.readFile(registryPath, 'utf8');
+      const { content, registryPath } = await readRegistryFile(registryPaths);
       this.cache = JSON.parse(content);
       this.cacheTimestamp = now;
+      this.resolvedRegistryPath = registryPath;
 
       // Build indexes
       this._buildIndexes();
@@ -66,6 +126,9 @@ class ServiceRegistry {
 
       return this.cache;
     } catch (error) {
+      if (error.message.startsWith('Failed to load registry:')) {
+        throw error;
+      }
       throw new Error(`Failed to load registry: ${error.message}`);
     }
   }
@@ -276,6 +339,7 @@ class ServiceRegistry {
   clearCache() {
     this.cache = null;
     this.cacheTimestamp = 0;
+    this.resolvedRegistryPath = null;
     this._byId.clear();
     this._byCategory.clear();
     this._byTag.clear();
@@ -290,6 +354,7 @@ class ServiceRegistry {
     return {
       cached: this.cache !== null,
       cacheAge: this.cache ? Date.now() - this.cacheTimestamp : null,
+      registryPath: this.resolvedRegistryPath,
       workerCount: this._byId.size,
       categoryCount: this._byCategory.size,
       tagCount: this._byTag.size,
@@ -326,6 +391,7 @@ async function loadRegistry(registryPath = null) {
 module.exports = {
   ServiceRegistry,
   getRegistry,
+  getDefaultRegistryPaths,
   loadRegistry,
 };
 

@@ -22,8 +22,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawn, execSync } = require('child_process');
+const { execSync } = require('child_process');
 const { EventEmitter } = require('events');
+const { runSafe } = require('../utils/spawn-safe');
 
 // Import components
 const { AutonomousBuildLoop, BuildEvent } = require('./autonomous-build-loop');
@@ -501,61 +502,55 @@ The subtask is complete only when verification passes.
   }
 
   /**
-   * Run Claude CLI with prompt
+   * Run Claude CLI with the prompt delivered through stdin.
+   *
+   * Hardened: the prompt goes through stdin (never the command line) and the
+   * process is spawned by argv via cross-spawn — so the prompt can contain
+   * quotes, pipes, `;`, `$()` or any shell metacharacter without ever being
+   * interpreted as a command (shell-injection is structurally impossible).
+   * `--model` is pushed onto the argv (not interpolated into a string).
+   * cross-spawn resolves `claude.cmd` on Windows (native spawn → ENOENT).
+   *
+   * @param {string} prompt - Prompt to execute
+   * @param {string} workDir - Working directory for the CLI
+   * @param {Object} [config={}] - { claudeModel, subtaskTimeout, verbose }
+   * @returns {Promise<{stdout:string, stderr:string, code:number|null}>}
    */
-  async runClaudeCLI(prompt, workDir, config) {
-    return new Promise((resolve, reject) => {
-      const args = [
-        '--print', // Non-interactive mode
-        '--dangerously-skip-permissions', // Allow file writes
-      ];
+  async runClaudeCLI(prompt, workDir, config = {}) {
+    if (!prompt || typeof prompt !== 'string') {
+      throw new Error('runClaudeCLI requires a non-empty string prompt');
+    }
 
-      if (config.claudeModel) {
-        args.push('--model', config.claudeModel);
-      }
+    const args = [
+      '--print', // Non-interactive mode
+      '--dangerously-skip-permissions', // Allow file writes
+    ];
 
-      // Escape prompt for shell
-      const escapedPrompt = prompt.replace(/'/g, "'\\''");
+    // Model goes onto the argv, never interpolated into a shell string.
+    if (config.claudeModel) {
+      args.push('--model', config.claudeModel);
+    }
 
-      const fullCommand = `echo '${escapedPrompt}' | claude ${args.join(' ')}`;
+    this.log(`Running Claude CLI in ${workDir}`, 'debug');
 
-      this.log(`Running Claude CLI in ${workDir}`, 'debug');
-
-      const child = spawn('sh', ['-c', fullCommand], {
-        cwd: workDir,
-        env: { ...process.env },
-        timeout: config.subtaskTimeout,
-      });
-
-      let stdout = '';
-      let stderr = '';
-
-      child.stdout.on('data', (data) => {
-        stdout += data.toString();
-        if (config.verbose) {
-          process.stdout.write(data);
-        }
-      });
-
-      child.stderr.on('data', (data) => {
-        stderr += data.toString();
-        if (config.verbose) {
-          process.stderr.write(data);
-        }
-      });
-
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve({ stdout, stderr, code });
-        } else {
-          reject(new Error(`Claude CLI exited with code ${code}: ${stderr}`));
-        }
-      });
-
-      child.on('error', (error) => {
-        reject(error);
-      });
+    const result = await runSafe('claude', args, {
+      cwd: workDir,
+      env: { ...process.env },
+      timeout: config.subtaskTimeout,
+      input: prompt,
+      onStdout: config.verbose ? (chunk) => process.stdout.write(chunk) : undefined,
+      onStderr: config.verbose ? (chunk) => process.stderr.write(chunk) : undefined,
     });
+
+    if (result.success) {
+      return { stdout: result.stdout, stderr: result.stderr, code: result.code };
+    }
+
+    if (result.signal) {
+      throw new Error(`Claude CLI killed by signal ${result.signal}: ${result.stderr}`);
+    }
+
+    throw new Error(`Claude CLI exited with code ${result.code}: ${result.stderr}`);
   }
 
   /**

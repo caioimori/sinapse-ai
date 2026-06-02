@@ -13,9 +13,9 @@ The previous "safe collaboration" suggestions should be **partially approved**, 
 
 ### Approved now
 
-- Standardize how Caio and Soier work in parallel inside the same repository
+- Standardize how two collaborators work in parallel inside the same repository
 - Create a clear contributor operating model for framework changes
-- Define which changes Soier can make autonomously without waiting for Caio
+- Define which changes a contributor can make autonomously without waiting for the maintainer
 - Reuse the existing SINAPSE infrastructure already present in the repository
 
 ### Not approved now
@@ -33,8 +33,8 @@ The core need is **not only Git safety**.
 
 The real requirement is:
 
-1. Caio and Soier must be able to work in sync without overwriting each other.
-2. Soier must be able to add framework features without depending on Caio to explain where things go or how to wire them in.
+1. Two collaborators must be able to work in sync without overwriting each other.
+2. A contributor must be able to add framework features without depending on the maintainer to explain where things go or how to wire them in.
 
 The repository already contains strong building blocks for this:
 
@@ -59,14 +59,14 @@ What is missing is a **single operating model** that tells a collaborator:
 
 ## Why Scope Reduction Is Correct
 
-If the team prioritizes generic template hardening first, it will improve portability but **not solve the immediate bottleneck**: Soier still may not know when a framework change is autonomous, coordinated, or blocked.
+If the team prioritizes generic template hardening first, it will improve portability but **not solve the immediate bottleneck**: a contributor still may not know when a framework change is autonomous, coordinated, or blocked.
 
 If the team prioritizes contributor autonomy first, the outcome is immediately useful inside the active repository and can later be extracted into a stronger reusable template.
 
 Therefore the correct order is:
 
 1. Fix the operating model inside `sinapse-ai`
-2. Prove it with Caio + Soier
+2. Prove it with both collaborators
 3. Only then generalize it into the reusable template
 
 ---
@@ -77,7 +77,7 @@ Therefore the correct order is:
 
 There are two branch models in the repository context:
 
-- Safe collaboration rule suggests human prefixes like `caio/feat/...` and `soier/fix/...`
+- Safe collaboration rule suggests human prefixes like `alice/feat/...` and `bob/fix/...`
 - Worktree infrastructure currently creates `auto-claude/{storyId}`
 
 This divergence creates ambiguity and weakens adoption.
@@ -86,7 +86,7 @@ This divergence creates ambiguity and weakens adoption.
 
 The repo has generators, tasks, workflows, and standards, but there is no short operational guide saying:
 
-- "Soier can do these classes of framework changes alone"
+- "A contributor can do these classes of framework changes alone"
 - "These paths require coordination first"
 - "After this type of change, run these sync commands"
 
@@ -102,9 +102,9 @@ Reviewer auto-assignment is documented, but `auto_assign_reviewers` is still `fa
 
 ## Orchestration Objective
 
-Create a **framework contributor mode** for Caio and Soier with these outcomes:
+Create a **framework contributor mode** for two collaborators with these outcomes:
 
-- Soier can add supported framework features end-to-end without waiting for Caio
+- A contributor can add supported framework features end-to-end without waiting for the maintainer
 - Git collisions are minimized by isolation plus coordination rules
 - Core-risk edits are routed through a tighter review path
 - Sync steps are deterministic for agent, workflow, template, and manifest changes
@@ -128,7 +128,7 @@ Create a **framework contributor mode** for Caio and Soier with these outcomes:
 
 ### Exit Criteria
 
-- Caio and Soier can classify any proposed change in under 1 minute
+- Two collaborators can classify any proposed change in under 1 minute
 - Both know whether they can proceed alone or need coordination
 - No feature work starts directly on `main`
 
@@ -142,7 +142,7 @@ Create a **framework contributor mode** for Caio and Soier with these outcomes:
 
 ### Autonomous Lane
 
-Changes Soier should be able to make without waiting for Caio, as long as the story and quality gates are respected:
+Changes a contributor should be able to make without waiting for the maintainer, as long as the story and quality gates are respected:
 
 - new or updated agent definitions
 - new or updated tasks
@@ -172,7 +172,7 @@ Changes that should stay under explicit authority:
 
 ### Exit Criteria
 
-- Soier can add a framework feature from story to PR inside the Autonomous Lane without asking where things belong
+- A contributor can add a framework feature from story to PR inside the Autonomous Lane without asking where things belong
 - Coordinated Lane is clearly documented and followed
 
 ---
@@ -186,7 +186,7 @@ Changes that should stay under explicit authority:
 ### Recommended hardening now
 
 - enforce "no work on main" as team habit and documented rule
-- make reviewer routing explicit for Caio/Soier handoff
+- make reviewer routing explicit for the maintainer/contributor handoff
 - standardize when to use worktrees versus plain feature branches
 - ensure manifest and sync steps are part of the contribution workflow
 
@@ -200,7 +200,7 @@ Changes that should stay under explicit authority:
 ### Exit Criteria
 
 - daily collaboration no longer depends on ad hoc verbal coordination
-- PR handoff between Caio and Soier is predictable
+- PR handoff between two collaborators is predictable
 - no accidental drift in agent/config sync for framework changes
 
 ---
@@ -219,9 +219,9 @@ Changes that should stay under explicit authority:
 
 ## Success Metrics
 
-- Soier can independently ship a framework feature inside the Autonomous Lane
+- A contributor can independently ship a framework feature inside the Autonomous Lane
 - Fewer edits start on `main`
-- Fewer handoffs depend on Caio explaining structure manually
+- Fewer handoffs depend on the maintainer explaining structure manually
 - Reduced accidental omissions in `sync:ide`, skills sync, and manifest updates
 - PR review becomes the coordination point instead of synchronous chat
 
@@ -233,7 +233,7 @@ Approve the initiative, but with this narrowed scope:
 
 **Do not start by polishing the generic safe-collab template.**
 
-Start by formalizing the contributor operating model inside `sinapse-ai`, because that is the shortest path to real autonomy for Soier and safe parallel optimization for both of you.
+Start by formalizing the contributor operating model inside `sinapse-ai`, because that is the shortest path to real autonomy for contributors and safe parallel optimization for the team.
 
 ---
 

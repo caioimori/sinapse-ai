@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] — 2026-06-02 — 🔒 Security & Robustness Hardening
+
+> **Release de seguranca e robustez.** Auditoria de ciberseguranca completa (6 frentes + verificacao adversarial) + fundacao de robustez (execucao segura cross-OS, learning loop, cadeia de erros tipada). Prepara o framework para distribuicao publica.
+
+### Security
+
+- **Command injection / RCE eliminado** nos motores de execucao de subagentes: troca de `spawn('sh','-c', ...)` por execucao via argv+stdin sem shell (cross-spawn). Resolve injecao via story/task/gotcha.
+- **github-adapter** — `execSync(string)` -> `execFileSync('gh', argv)`: fecha injecao de shell via titulo/corpo de story.
+- **ideation-engine** — validacao de `rootPath` contra metacaracteres de shell.
+- **semantic-merge-engine** — `execFileSync('git', argv)` nas chamadas git; cap de tamanho/iteracoes no scan de funcoes (ReDoS).
+- **squad-downloader** — protecao anti zip-slip (containment de path) + allowlist de host no follow de redirect (SSRF).
+- **merge-utils** — deny-list `__proto__`/`constructor`/`prototype` (prototype pollution).
+- **renderer** — escaping configuravel com security contract documentado.
+- **docker-compose (llm-routing)** — master key sem default conhecido (fail-fast).
+
+### Changed (robustez — base de execucao)
+
+- **Execucao de agentes cross-OS**: resolucao segura do binario da CLI no Windows (sem shell injection, sem quebra de `claude.cmd`).
+- **Learning loop religado**: gotcha-loader endurecido + janela rolante de erro.
+- **Cadeia de erros tipada** (`core/errors/`): SinapseError com normalize/serialize, sem vazar stack em producao.
+- **context-tracker model-aware** + bloco `models:` no core-config (estimativa de contexto precisa).
+- **semantic-handshake-engine**: motor de constraints executaveis.
+
+### Privacy & Packaging
+
+- Removidos nomes pessoais e referencias a projeto privado dos materiais publicados.
+- `files`: glob `docs/*.md` substituido por allow-list explicita de docs publicos + `.npmignore` (impede vazamento de docs internos no pacote).
+
 ## [1.6.1] — 2026-05-26 — 🩹 Patch: fix installer regression do BUG-001
 
 > **Patch release imediato.** O v1.6.0 corrigiu o BUG-001 (orqx voltando ao auto-plano) nas personas canônicas e no template YAML, MAS deixou 3 arquivos JS do installer com `"HALT and await user input"` hardcoded. Resultado: `npx sinapse-ai install` ou `update` gerava stubs orqx errados de novo, regredindo o fix.

@@ -34,11 +34,12 @@ $stubsDir = Join-Path $env:USERPROFILE '.claude\agents'
 foreach ($m in $mapping) {
     $id = $m.id
     $squad = $m.squad
-    $canonical = "C:/Users/Caio Imori/.sinapse/$squad/agents/$id.md"
-    $manifest = "C:/Users/Caio Imori/.sinapse/$squad/squad.yaml"
-    $tasks = "C:/Users/Caio Imori/.sinapse/$squad/tasks/"
-    $kb = "C:/Users/Caio Imori/.sinapse/$squad/knowledge-base/"
-    $wf = "C:/Users/Caio Imori/.sinapse/$squad/workflows/"
+    $sinapseHome = Join-Path $env:USERPROFILE '.sinapse'
+    $canonical = "$sinapseHome/$squad/agents/$id.md"
+    $manifest = "$sinapseHome/$squad/squad.yaml"
+    $tasks = "$sinapseHome/$squad/tasks/"
+    $kb = "$sinapseHome/$squad/knowledge-base/"
+    $wf = "$sinapseHome/$squad/workflows/"
     $invocation = "/SINAPSE:agents:$id"
 
     $content = @"

@@ -5,7 +5,7 @@
 ---
 
 ## Slide 1: Capa
-{Logo do projeto + "Entrega {N}: {phase_name}" + data + Astro Brand Studio logo}
+{Logo do projeto + "Entrega {N}: {phase_name}" + data + {{your_brand}} logo}
 
 ## Slide 2: Agenda
 {Lista dos topicos que serao apresentados nesta entrega}
