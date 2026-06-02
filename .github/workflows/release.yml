@@ -130,29 +130,18 @@ jobs:
         run: |
           VERSION="${{ needs.create-release.outputs.version }}"
 
-          # Create output directory
-          mkdir -p dist
+          # SECURITY: use `npm pack` so the release archive honors the
+          # package.json `files` allow-list AND .npmignore — i.e. the EXACT
+          # same contents shipped to npm. A raw `tar`/`zip` of the working
+          # tree does NOT respect the allow-list and would re-leak any loose
+          # internal doc that happens to sit in the tree (the root cause of
+          # the historical docs leak). npm pack emits sinapse-ai-${VERSION}.tgz.
+          npm pack
 
-          # Use tar with || true to ignore "file changed" warnings
-          tar -czf sinapse-ai-${VERSION}.tar.gz \
-            --exclude=node_modules \
-            --exclude=.git \
-            --exclude=tests \
-            --exclude='*.log' \
-            --exclude='.github' \
-            --exclude='*.tar.gz' \
-            --exclude='*.zip' \
-            . || true
-
-          # Verify tar was created
-          if [ ! -f "sinapse-ai-${VERSION}.tar.gz" ]; then
-            echo "❌ Failed to create tar archive"
+          if [ ! -f "sinapse-ai-${VERSION}.tgz" ]; then
+            echo "❌ Failed to create npm pack archive"
             exit 1
           fi
-
-          # Create source code zip
-          zip -r sinapse-ai-${VERSION}-source.zip . \
-            -x "node_modules/*" ".git/*" "tests/*" "*.log" ".github/*" "*.tar.gz" "*.zip"
 
       - name: Upload Release Assets
         env:
@@ -161,14 +150,9 @@ jobs:
           VERSION="${{ needs.create-release.outputs.version }}"
           TAG="${{ needs.create-release.outputs.tag }}"
 
-          # Upload tar.gz file
+          # Upload the allow-list-safe npm pack tarball (same contents as npm).
           gh release upload "${TAG}" \
-            "sinapse-ai-${VERSION}.tar.gz" \
-            --clobber
-
-          # Upload source zip file
-          gh release upload "${TAG}" \
-            "sinapse-ai-${VERSION}-source.zip" \
+            "sinapse-ai-${VERSION}.tgz" \
             --clobber
 
   trigger-npm-publish:
