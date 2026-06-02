@@ -38,12 +38,22 @@ jest.mock('../../.sinapse-ai/core/doctor/formatters/json', () => ({
   formatJson: jest.fn((output) => JSON.stringify({ s: output.summary, e: output.internalError })),
 }));
 
+const path = require('path');
+
 const {
   runDoctorChecks,
   resolveExitCode,
   resolveOnError,
   DOCTOR_VERSION,
 } = require('../../.sinapse-ai/core/doctor');
+
+// runDoctorChecks() short-circuits (Story 10.42) when the projectRoot has no
+// `<projectRoot>/.sinapse-ai/` marker, returning the friendly NOT_INSTALLED
+// payload (empty checks, exit code 4) BEFORE any check runs. These tests
+// exercise the exception-classification + exit-code logic that lives *behind*
+// that gate, so they must point projectRoot at an installed project. The repo
+// root itself is an installed project (it ships `.sinapse-ai/`), so we use it.
+const INSTALLED_ROOT = path.resolve(__dirname, '..', '..');
 
 function makeCheck({ name, status, onError, throws }) {
   return {
@@ -93,7 +103,7 @@ describe('Story A.3 — exception classification', () => {
 
   it('onError: fail → thrown exception becomes FAIL', async () => {
     setChecks([makeCheck({ name: 'blocker', onError: 'fail', throws: new Error('ENOENT') })]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.summary).toEqual({ pass: 0, warn: 0, fail: 1, info: 0 });
     expect(result.data.checks).toHaveLength(1);
     expect(result.data.checks[0].status).toBe('FAIL');
@@ -103,7 +113,7 @@ describe('Story A.3 — exception classification', () => {
 
   it('onError: warn → thrown exception becomes WARN (not FAIL)', async () => {
     setChecks([makeCheck({ name: 'optional', onError: 'warn', throws: new Error('missing dir') })]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.summary).toEqual({ pass: 0, warn: 1, fail: 0, info: 0 });
     expect(result.data.checks[0].status).toBe('WARN');
     expect(result.data.checks[0].message).toContain('missing dir');
@@ -115,7 +125,7 @@ describe('Story A.3 — exception classification', () => {
       makeCheck({ name: 'skipped', onError: 'skip', throws: new Error('noop') }),
       makeCheck({ name: 'omega', status: 'PASS' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.checks).toHaveLength(2);
     expect(result.data.checks.map((c) => c.check)).toEqual(['alpha', 'omega']);
     expect(result.data.summary).toEqual({ pass: 2, warn: 0, fail: 0, info: 0 });
@@ -123,7 +133,7 @@ describe('Story A.3 — exception classification', () => {
 
   it('undeclared onError defaults to fail', async () => {
     setChecks([makeCheck({ name: 'legacy', throws: new Error('oops') })]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.checks[0].status).toBe('FAIL');
   });
 
@@ -133,7 +143,7 @@ describe('Story A.3 — exception classification', () => {
       makeCheck({ name: 'b', onError: 'warn', status: 'WARN' }),
       makeCheck({ name: 'c', onError: 'warn', status: 'FAIL' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.summary).toEqual({ pass: 1, warn: 1, fail: 1, info: 0 });
   });
 });
@@ -148,7 +158,7 @@ describe('Story A.3 — exit code mapping', () => {
       makeCheck({ name: 'a', status: 'PASS' }),
       makeCheck({ name: 'b', status: 'PASS' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(resolveExitCode(result)).toBe(0);
   });
 
@@ -157,7 +167,7 @@ describe('Story A.3 — exit code mapping', () => {
       makeCheck({ name: 'a', status: 'PASS' }),
       makeCheck({ name: 'b', status: 'WARN' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(resolveExitCode(result)).toBe(1);
   });
 
@@ -167,7 +177,7 @@ describe('Story A.3 — exit code mapping', () => {
       makeCheck({ name: 'b', status: 'WARN' }),
       makeCheck({ name: 'c', status: 'FAIL' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(resolveExitCode(result)).toBe(2);
   });
 
@@ -178,7 +188,7 @@ describe('Story A.3 — exit code mapping', () => {
     loadChecks.mockImplementationOnce(() => {
       throw new Error('boom: loadChecks crashed');
     });
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.internalError).toBeTruthy();
     expect(result.data.internalError.message).toContain('boom');
     expect(resolveExitCode(result)).toBe(3);
@@ -214,7 +224,7 @@ describe('Story A.3 — fresh install simulation', () => {
       makeCheck({ name: 'agent-memory', onError: 'warn', throws: new Error('ENOENT') }),
       makeCheck({ name: 'git-hooks', onError: 'warn', throws: new Error('ENOENT') }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp/fresh' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.summary.fail).toBe(0);
     expect(result.data.summary.warn).toBe(3);
     expect(result.data.summary.pass).toBe(3);
@@ -228,7 +238,7 @@ describe('Story A.3 — fresh install simulation', () => {
       makeCheck({ name: 'settings-json', onError: 'fail', status: 'PASS' }),
       makeCheck({ name: 'entity-registry', onError: 'warn', status: 'PASS' }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp/pristine' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(resolveExitCode(result)).toBe(0);
   });
 
@@ -237,7 +247,7 @@ describe('Story A.3 — fresh install simulation', () => {
       makeCheck({ name: 'node-version', onError: 'fail', throws: new Error('exec failed') }),
       makeCheck({ name: 'entity-registry', onError: 'warn', throws: new Error('ENOENT') }),
     ]);
-    const result = await runDoctorChecks({ projectRoot: '/tmp' });
+    const result = await runDoctorChecks({ projectRoot: INSTALLED_ROOT });
     expect(result.data.summary).toEqual({ pass: 0, warn: 1, fail: 1, info: 0 });
     expect(resolveExitCode(result)).toBe(2);
   });

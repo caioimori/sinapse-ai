@@ -49,18 +49,41 @@ describe('node-version check', () => {
 });
 
 describe('npm-packages check', () => {
-  it('should PASS when node_modules exists', async () => {
+  // Story 10.48 + v1.4.2: this check no longer treats a missing project-level
+  // node_modules/ as a blocker. It validates that the deps DECLARED in
+  // .sinapse-ai/package.json are *resolvable* via Node's resolver (which walks
+  // parent + global node_modules). PASS unless a declared dep is unresolvable.
+
+  it('should PASS when .sinapse-ai package has zero declared deps', async () => {
+    // existsSync true everywhere → .sinapse-ai/package.json + node_modules present.
+    // readFileSync auto-mock returns undefined → JSON.parse throws → caught →
+    // falls through to PASS with totalDeps=0 and node_modules present.
     fs.existsSync.mockReturnValue(true);
     const result = await npmPackagesCheck.run(mockContext);
     expect(result.status).toBe('PASS');
-    expect(result.message).toContain('node_modules present');
+    expect(result.message).toContain('.sinapse-ai deps complete');
   });
 
-  it('should FAIL when node_modules missing', async () => {
+  it('should PASS (not FAIL) when there is no .sinapse-ai/package.json', async () => {
     fs.existsSync.mockReturnValue(false);
     const result = await npmPackagesCheck.run(mockContext);
+    expect(result.status).toBe('PASS');
+    expect(result.message).toContain('no .sinapse-ai/package.json');
+    expect(result.fixCommand).toBeNull();
+  });
+
+  it('should FAIL when a declared .sinapse-ai dep is unresolvable', async () => {
+    // .sinapse-ai/package.json present, declaring a dep that cannot resolve.
+    fs.existsSync.mockImplementation((p) =>
+      String(p).includes('package.json'),
+    );
+    fs.readFileSync.mockReturnValue(
+      JSON.stringify({ dependencies: { '@sinapse/definitely-not-installed-xyz': '^1.0.0' } }),
+    );
+    const result = await npmPackagesCheck.run(mockContext);
     expect(result.status).toBe('FAIL');
-    expect(result.fixCommand).toBe('npm install');
+    expect(result.message).toContain('unresolvable');
+    expect(result.fixCommand).toBe('cd .sinapse-ai && npm install --production');
   });
 });
 
@@ -381,7 +404,12 @@ describe('ide-sync check', () => {
 // === INS-4.8: New checks ===
 
 describe('skills-count check', () => {
-  it('should PASS when >=7 skills directories with SKILL.md', async () => {
+  // v1.4.2: .claude/skills/ is an OPTIONAL user-installed area, not shipped by
+  // `npx sinapse-ai install`. The check never FAILs: it PASSes proportional to
+  // however many skills the user installed (>=1), and reports INFO when the
+  // directory is absent or empty.
+
+  it('should PASS when skill directories with SKILL.md exist', async () => {
     fs.existsSync.mockReturnValue(true);
     const dirs = Array.from({ length: 8 }, (_, i) => ({
       name: `skill-${i}`,
@@ -396,12 +424,8 @@ describe('skills-count check', () => {
     expect(result.message).toContain('8');
   });
 
-  it('should WARN when <7 skills found', async () => {
-    fs.existsSync.mockImplementation((p) => {
-      if (p.includes('skills') && !p.includes('SKILL.md')) return true;
-      if (p.includes('SKILL.md')) return true;
-      return true;
-    });
+  it('should PASS even with a small number of installed skills', async () => {
+    fs.existsSync.mockReturnValue(true);
     const dirs = Array.from({ length: 3 }, (_, i) => ({
       name: `skill-${i}`,
       isDirectory: () => true,
@@ -410,27 +434,25 @@ describe('skills-count check', () => {
     fs.readdirSync.mockReturnValue(dirs);
 
     const result = await skillsCountCheck.run(mockContext);
-    expect(result.status).toBe('WARN');
-    expect(result.message).toContain('3/7');
+    expect(result.status).toBe('PASS');
+    expect(result.message).toContain('3');
   });
 
-  it('should FAIL when 0 skills found', async () => {
-    fs.existsSync.mockImplementation((p) => {
-      if (p.includes('SKILL.md')) return false;
-      return true;
-    });
+  it('should report INFO (not FAIL) when 0 skills found', async () => {
+    // skills dir exists, but no subdir has a SKILL.md → count 0.
+    fs.existsSync.mockImplementation((p) => !String(p).includes('SKILL.md'));
     const dirs = [{ name: 'empty', isDirectory: () => true, isFile: () => false }];
     fs.readdirSync.mockReturnValue(dirs);
 
     const result = await skillsCountCheck.run(mockContext);
-    expect(result.status).toBe('FAIL');
-    expect(result.fixCommand).toBe('npx sinapse-ai install --force');
+    expect(result.status).toBe('INFO');
+    expect(result.fixCommand).toBeNull();
   });
 
-  it('should FAIL when skills directory missing', async () => {
+  it('should report INFO (not FAIL) when skills directory missing', async () => {
     fs.existsSync.mockReturnValue(false);
     const result = await skillsCountCheck.run(mockContext);
-    expect(result.status).toBe('FAIL');
+    expect(result.status).toBe('INFO');
   });
 });
 
