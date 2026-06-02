@@ -85,6 +85,12 @@ const { G2StoryCreationGate } = require('./gates/g2-story-creation');
 const { G3StoryValidationGate } = require('./gates/g3-story-validation');
 const { G4DevContextGate, G4_DEFAULT_TIMEOUT_MS } = require('./gates/g4-dev-context');
 
+// IDS-5b: Gate G5 (Blocking — Semantic Handshake)
+const {
+  G5SemanticHandshakeGate,
+  G5_DEFAULT_TIMEOUT_MS,
+} = require('./gates/g5-semantic-handshake');
+
 // IDS-7: Framework Governor (sinapse-orqx integration)
 const {
   FrameworkGovernor,
@@ -148,6 +154,10 @@ module.exports = {
   G3StoryValidationGate,
   G4DevContextGate,
   G4_DEFAULT_TIMEOUT_MS,
+
+  // IDS-5b: Gate G5 (Blocking)
+  G5SemanticHandshakeGate,
+  G5_DEFAULT_TIMEOUT_MS,
 
   // IDS-7: Framework Governor
   FrameworkGovernor,
