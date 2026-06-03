@@ -192,8 +192,8 @@ function loadSuite(evalsPath) {
   if (typeof suite.gateId !== 'string' || !/^G[1-9][0-9]*$/.test(suite.gateId)) {
     throw new Error(
       `Eval suite '${evalsPath}' has missing/invalid "gateId" (expected /^G[1-9][0-9]*$/, got ${JSON.stringify(
-        suite.gateId
-      )}).`
+        suite.gateId,
+      )}).`,
     );
   }
   if (!Array.isArray(suite.cases)) {
@@ -237,7 +237,7 @@ async function runSuite(suite, evalsPath, buildGate, evaluateCase) {
   if (!gate) {
     throw new Error(
       `Eval suite '${evalsPath}' targets unknown gateId "${suite.gateId}". ` +
-        `Known gates: G1, G2, G3, G4, G5.`
+        'Known gates: G1, G2, G3, G4, G5.',
     );
   }
   if (typeof gate.verify !== 'function') {
@@ -307,7 +307,7 @@ async function main() {
   if (requestedGate && !/^G[1-9][0-9]*$/i.test(requestedGate)) {
     fail(
       `Invalid gateId argument "${requestedGate}". Expected something like "G5", ` +
-        `or no argument to run all suites.`
+        'or no argument to run all suites.',
     );
   }
 
@@ -318,12 +318,12 @@ async function main() {
     const target = requestedGate.toUpperCase();
     const targetFolder = target.toLowerCase();
     suites = allSuites.filter(
-      (s) => s.gateFolder.toLowerCase() === targetFolder || s.gateFolder.toLowerCase() === target.toLowerCase()
+      (s) => s.gateFolder.toLowerCase() === targetFolder || s.gateFolder.toLowerCase() === target.toLowerCase(),
     );
     if (suites.length === 0) {
       fail(
         `No eval suite found for gate "${target}". Expected ` +
-          `${path.resolve(EVALS_ROOT, targetFolder, 'evals.json')}.`
+          `${path.resolve(EVALS_ROOT, targetFolder, 'evals.json')}.`,
       );
     }
   }

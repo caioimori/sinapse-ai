@@ -99,7 +99,7 @@ function parseArgs(argv) {
     } else if (a === '--artifacts') {
       const next = argv[i + 1];
       if (!next) {
-        process.stderr.write(`[validate-schemas] --artifacts requires a directory argument.\n`);
+        process.stderr.write('[validate-schemas] --artifacts requires a directory argument.\n');
         process.exit(2);
       }
       opts.artifactsRoot = path.resolve(next);
@@ -131,16 +131,15 @@ function rel(p, root = REPO_ROOT) {
 
 let TemplateValidator;
 try {
-  // eslint-disable-next-line import/no-dynamic-require, global-require
   ({ TemplateValidator } = require(VALIDATOR_PATH));
   if (typeof TemplateValidator !== 'function') {
     throw new Error('validator.js did not export a TemplateValidator class');
   }
 } catch (err) {
   process.stderr.write(
-    `[validate-schemas] FATAL: could not load TemplateValidator from\n` +
+    '[validate-schemas] FATAL: could not load TemplateValidator from\n' +
       `  ${VALIDATOR_PATH}\n` +
-      `  reason: ${err.message}\n`
+      `  reason: ${err.message}\n`,
   );
   process.exit(2);
 }
@@ -168,24 +167,24 @@ let Ajv2020;
 let Ajv2019;
 let addFormats;
 try {
-  // eslint-disable-next-line global-require
+   
   AjvDraft07 = require('ajv'); // draft-07 (also draft-06/04 via addMetaSchema, default here)
-  // eslint-disable-next-line global-require
+   
   addFormats = require('ajv-formats');
 } catch (err) {
   process.stderr.write(
-    `[validate-schemas] FATAL: ajv / ajv-formats not available (expected as deps): ${err.message}\n`
+    `[validate-schemas] FATAL: ajv / ajv-formats not available (expected as deps): ${err.message}\n`,
   );
   process.exit(2);
 }
 try {
-  // eslint-disable-next-line global-require
+   
   Ajv2020 = require('ajv/dist/2020');
 } catch {
   Ajv2020 = null; // graceful: a 2020-12 schema then fails with an actionable message
 }
 try {
-  // eslint-disable-next-line global-require
+   
   Ajv2019 = require('ajv/dist/2019');
 } catch {
   Ajv2019 = null;
@@ -215,7 +214,7 @@ function newAjvFor(schema) {
   const { ctor, draft } = ajvCtorFor(schema);
   if (!ctor) {
     const err = new Error(
-      `meta-schema ${draft} requested but the matching Ajv build is unavailable in this environment`
+      `meta-schema ${draft} requested but the matching Ajv build is unavailable in this environment`,
     );
     err.unsupportedDraft = true;
     throw err;
@@ -323,7 +322,7 @@ async function kindCoverage() {
   for (const missing of result.missing) {
     addViolation(
       rel(SCHEMAS_DIR),
-      `known template kind '${missing}' has no schema (expected ${missing}.schema.json in ${rel(SCHEMAS_DIR)}/).`
+      `known template kind '${missing}' has no schema (expected ${missing}.schema.json in ${rel(SCHEMAS_DIR)}/).`,
     );
   }
   return result; // { complete, found, missing }
@@ -489,28 +488,28 @@ async function main() {
   // -------------------------------------------------------------------------
   // Summary
   // -------------------------------------------------------------------------
-  process.stdout.write(`\n[validate-schemas] summary\n`);
+  process.stdout.write('\n[validate-schemas] summary\n');
   process.stdout.write(
-    `  schemas checked : ${schemaFiles.length} (${compiledOk} compiled OK, ${schemaFiles.length - compiledOk} failed)\n`
+    `  schemas checked : ${schemaFiles.length} (${compiledOk} compiled OK, ${schemaFiles.length - compiledOk} failed)\n`,
   );
   process.stdout.write(
     `  kinds covered   : ${coverage.found.length}/${KNOWN_KINDS.length} ` +
       `(found: ${coverage.found.join(', ') || 'none'}` +
-      `${coverage.missing.length ? ` | missing: ${coverage.missing.join(', ')}` : ''})\n`
+      `${coverage.missing.length ? ` | missing: ${coverage.missing.join(', ')}` : ''})\n`,
   );
   if (artifacts.total === 0) {
-    process.stdout.write(`  artifacts       : 0 artifacts found (skipped)\n`);
+    process.stdout.write('  artifacts       : 0 artifacts found (skipped)\n');
   } else {
     const perKind = Object.entries(artifacts.kinds)
       .map(([k, n]) => `${k}:${n}`)
       .join(', ');
     process.stdout.write(
-      `  artifacts       : ${artifacts.total} validated (${artifacts.valid} valid, ${artifacts.invalid} invalid) [${perKind}]\n`
+      `  artifacts       : ${artifacts.total} validated (${artifacts.valid} valid, ${artifacts.invalid} invalid) [${perKind}]\n`,
     );
   }
 
   if (violations.length === 0) {
-    process.stdout.write(`\n[validate-schemas] OK — all schemas compile, all known kinds covered, all artifacts valid.\n`);
+    process.stdout.write('\n[validate-schemas] OK — all schemas compile, all known kinds covered, all artifacts valid.\n');
     process.exit(0);
   }
 
@@ -524,7 +523,7 @@ async function main() {
     process.stdout.write(`\n  ${file}\n`);
     for (const m of msgs) process.stdout.write(`    - ${m}\n`);
   }
-  process.stdout.write(`\n`);
+  process.stdout.write('\n');
   process.exit(1);
 }
 

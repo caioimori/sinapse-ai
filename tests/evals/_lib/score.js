@@ -83,8 +83,8 @@ function toScore(gateResult, expectations, opts = {}) {
   const reason = success
     ? `${passedCount}/${list.length} expectations passed (score ${score.toFixed(2)} >= threshold ${threshold})`
     : `${passedCount}/${list.length} expectations passed (score ${score.toFixed(2)} < threshold ${threshold}); failed: ${failed
-        .map((f) => `${f.id} (${f.reason})`)
-        .join('; ')}`;
+      .map((f) => `${f.id} (${f.reason})`)
+      .join('; ')}`;
 
   return { score, reason, success, threshold, details };
 }

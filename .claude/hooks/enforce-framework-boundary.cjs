@@ -160,7 +160,7 @@ function toRelativePosix(filePath, root) {
  *
  * Examples:
  *   ".sinapse-ai/core/**"        matches ".sinapse-ai/core/a/b.js"
- *   ".sinapse-ai/development/agents/*​/MEMORY.md"
+ *   ".sinapse-ai/development/agents/<seg>/MEMORY.md"
  *                                matches ".sinapse-ai/development/agents/dev/MEMORY.md"
  *                                but NOT ".sinapse-ai/development/agents/a/b/MEMORY.md"
  *   ".sinapse-ai/constitution.md" matches itself exactly.
@@ -298,19 +298,19 @@ function main() {
 
   // BLOCK — exit 2 with a clear message.
   process.stderr.write(
-    `\nFRAMEWORK-BOUNDARY BLOCK [L1/L2 protected]\n` +
+    '\nFRAMEWORK-BOUNDARY BLOCK [L1/L2 protected]\n' +
     `Tool: ${toolName}\n` +
     `File: ${relPath}\n` +
     `Matched protected rule: ${protectedHit}\n` +
-    `\n` +
-    `This path is a protected framework artifact (Constitution Art. II —\n` +
-    `Agent Authority / L1-L2 boundary). Direct edits are blocked while\n` +
-    `boundary.frameworkProtection is enabled.\n` +
-    `\n` +
-    `To change it:\n` +
-    `  - Edit it through a story (the proper SDC flow), OR\n` +
-    `  - If you are a framework contributor, set\n` +
-    `    boundary.frameworkProtection: false in .sinapse-ai/core-config.yaml.\n`,
+    '\n' +
+    'This path is a protected framework artifact (Constitution Art. II —\n' +
+    'Agent Authority / L1-L2 boundary). Direct edits are blocked while\n' +
+    'boundary.frameworkProtection is enabled.\n' +
+    '\n' +
+    'To change it:\n' +
+    '  - Edit it through a story (the proper SDC flow), OR\n' +
+    '  - If you are a framework contributor, set\n' +
+    '    boundary.frameworkProtection: false in .sinapse-ai/core-config.yaml.\n',
   );
   process.exit(2);
 }
