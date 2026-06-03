@@ -1,6 +1,6 @@
 # sinapse-ai/governance/patterns/
 
-Catalog of approved framework patterns. Each pattern was promoted from an AuditFinding via FrameworkProposal and approved by Caio Imori.
+Catalog of approved framework patterns. Each pattern was promoted from an AuditFinding via FrameworkProposal and approved by the maintainer.
 
 See [`../evolution-pipeline.md`](../evolution-pipeline.md) for the promotion flow.
 
@@ -25,4 +25,4 @@ Each pattern doc includes:
 
 ## Authority
 
-Patterns become canonical only after Caio Imori approval. Catalog updates happen as part of the FrameworkProposal merge PR.
+Patterns become canonical only after the maintainer approval. Catalog updates happen as part of the FrameworkProposal merge PR.

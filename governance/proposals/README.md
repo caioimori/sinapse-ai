@@ -16,11 +16,11 @@ proposals/
 
 ## Status of a proposal
 
-- **PENDING** — awaiting Caio Imori's review
-- **APPROVED** — Caio Imori signed; implementer can open PR in sinapse-ai
-- **REJECTED** — Caio Imori declined; proposal moves to `archive/` with rationale
-- **NEEDS_REVISION** — Caio Imori requested changes; proposer addresses and resubmits
+- **PENDING** — awaiting the maintainer's review
+- **APPROVED** — the maintainer signed; implementer can open PR in sinapse-ai
+- **REJECTED** — the maintainer declined; proposal moves to `archive/` with rationale
+- **NEEDS_REVISION** — the maintainer requested changes; proposer addresses and resubmits
 
 ## Authority
 
-Only Caio Imori sets the `orchestrator_decision` field. Any agent can write a proposal but cannot self-approve.
+Only the maintainer sets the `orchestrator_decision` field. Any agent can write a proposal but cannot self-approve.

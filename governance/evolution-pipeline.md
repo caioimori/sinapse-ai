@@ -3,7 +3,7 @@
 **Status:** Draft v1.0
 **Date:** 2026-05-07
 **Author:** @sinapse-orqx
-**Approval gate:** Caio Imori (sole orchestrator approver)
+**Approval gate:** the maintainer (sole orchestrator approver)
 **Triggered by:** Sessão de correção Wave 1.A revelou que descobertas de auditoria em projetos consumidores não retornavam ao framework como evolução formal
 
 ---
@@ -13,7 +13,7 @@
 Define how the SINAPSE framework (`sinapse-ai`) evolves from real-world findings discovered in consumer projects. The framework is not static — it grows via **audited evidence** from production usage. This document specifies the formal pipeline:
 
 ```text
-Project audit → Finding → Proposal → Caio Imori approval → sinapse-ai PR → Distribution
+Project audit → Finding → Proposal → the maintainer approval → sinapse-ai PR → Distribution
 ```
 
 Without this pipeline:
@@ -24,7 +24,7 @@ Without this pipeline:
 
 With this pipeline:
 - Every audit finding is a candidate framework evolution
-- Caio Imori as orchestrator decides what is generic enough to promote
+- the maintainer as orchestrator decides what is generic enough to promote
 - Approved findings ship as framework PRs (rules, agents, hooks, tasks, templates)
 - Consumer projects pull the evolved framework on next sync
 
@@ -32,7 +32,7 @@ With this pipeline:
 
 ## Roles
 
-### Auditor (any agent or Caio Imori)
+### Auditor (any agent or the maintainer)
 - Identifies a finding during project work that may have framework-wide implications
 - Writes the finding using the AuditFinding template (below)
 - Submits to the Proposal Gate
@@ -43,7 +43,7 @@ With this pipeline:
 - If framework-candidate: drafts a FrameworkProposal using template (below)
 - Includes: pattern generalization, target framework artifact, migration path, deprecation plan
 
-### Approver (Caio Imori — sole authority)
+### Approver (the maintainer — sole authority)
 - Reviews FrameworkProposal
 - Decides: APPROVED / REJECTED / NEEDS_REVISION
 - If APPROVED: signs the proposal with `orchestrator_decision` field + timestamp
@@ -179,7 +179,7 @@ framework_proposal:
 ```text
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. Project session discovers issue                          │
-│    (auditor agent or Caio Imori)                            │
+│    (auditor agent or the maintainer)                            │
 └────────────────────────────┬────────────────────────────────┘
                              │
                              ▼
@@ -203,7 +203,7 @@ framework_proposal:
                                               │
                                               ▼
                                    ┌─────────────────────┐
-                                   │ 4. Caio Imori reviews│
+                                   │ 4. the maintainer reviews│
                                    │    APPROVED / REJECTED│
                                    │    / NEEDS_REVISION  │
                                    └──────────┬──────────┘
@@ -347,15 +347,15 @@ framework_proposal:
     distributed_to: []
 ```
 
-This is the artifact Caio Imori reviews. On `APPROVED`, the PR opens in `sinapse-ai`.
+This is the artifact the maintainer reviews. On `APPROVED`, the PR opens in `sinapse-ai`.
 
 ---
 
 ## Operational rules
 
-1. **No framework change without an approved proposal.** Even if @sinapse-orqx spots an opportunity, it MUST go through the pipeline. Caio Imori is the gate.
+1. **No framework change without an approved proposal.** Even if @sinapse-orqx spots an opportunity, it MUST go through the pipeline. the maintainer is the gate.
 2. **Project-bound findings stay project-bound.** Not every audit promotes. The `framework_candidate: false` path is normal and healthy.
-3. **Agent opinions are evidence, not authority.** Agent analysis is input to the proposal but cannot bypass Caio Imori.
+3. **Agent opinions are evidence, not authority.** Agent analysis is input to the proposal but cannot bypass the maintainer.
 4. **Approval is per-proposal, not per-class.** Approving one vocabulary-contract proposal does not auto-approve future similar ones.
 5. **Reverts use the pipeline.** If a framework change shipped and proves harmful, a new proposal `PROP-<date>-revert-<id>` opens. Same gate.
 6. **All proposals (approved + rejected + revised) archived forever.** They are the institutional memory of the framework's evolution.
@@ -392,7 +392,7 @@ sinapse-ai/
 ## Out of scope (this version)
 
 - Automated detection of framework-candidate findings (would need ML/heuristic; future work)
-- Multi-orchestrator approval (currently Caio Imori is sole approver; future may add @architect or @quality-gate as co-approvers for non-strategic changes)
+- Multi-orchestrator approval (currently the maintainer is sole approver; future may add @architect or @quality-gate as co-approvers for non-strategic changes)
 - Cross-organization adoption (this is internal to SINAPSE projects for now)
 - Versioning sinapse-ai releases (already handled by `CHANGELOG.md` and `package.json` version)
 

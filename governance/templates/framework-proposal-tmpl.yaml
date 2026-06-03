@@ -4,7 +4,7 @@
 # Usage:
 #   1. Copy this file to governance/proposals/PROP-<YYYYMMDD>-<slug>.yaml
 #   2. Fill all fields. Reference source AuditFinding by ID.
-#   3. Submit to Caio Imori for approval.
+#   3. Submit to the maintainer for approval.
 #   4. On APPROVED: implementer opens PR in sinapse-ai; fill implementation.* fields.
 #   5. On REJECTED: move to proposals/archive/.
 #   6. On NEEDS_REVISION: address revision_request, resubmit.
