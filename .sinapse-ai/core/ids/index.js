@@ -98,6 +98,12 @@ const {
   RISK_THRESHOLDS,
 } = require('./framework-governor');
 
+// IDS Gate Wiring: Gate Evaluator (wires G1-G5 into the SDC workflow)
+const {
+  GateEvaluator,
+  DEFAULT_PHASE_GATES,
+} = require('./gate-evaluator');
+
 module.exports = {
   // IDS-1: Registry Foundation
   RegistryLoader,
@@ -163,5 +169,9 @@ module.exports = {
   FrameworkGovernor,
   TIMEOUT_MS,
   RISK_THRESHOLDS,
+
+  // IDS Gate Wiring: Gate Evaluator
+  GateEvaluator,
+  DEFAULT_PHASE_GATES,
 };
 

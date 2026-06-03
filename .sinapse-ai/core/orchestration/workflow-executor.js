@@ -28,6 +28,16 @@ const ExecutorAssignment = require('./executor-assignment');
 const TerminalSpawner = require('./terminal-spawner');
 const { SessionState, ActionType } = require('./session-state');
 
+// IDS Gate Wiring: GateEvaluator wires the IDS verification gates into the
+// development phase. Loaded with a fallback so a missing module never breaks
+// the workflow (graceful degradation — IDS must never block development).
+let GateEvaluator = null;
+try {
+  GateEvaluator = require('../ids/gate-evaluator').GateEvaluator;
+} catch (_err) {
+  // GateEvaluator unavailable — workflow runs without IDS gate enrichment.
+}
+
 // Constants
 const DEFAULT_TIMEOUT_MS = 7200000; // 2 hours
 const CHECKPOINT_TIMEOUT_MS = 1800000; // 30 minutes
@@ -598,6 +608,37 @@ class WorkflowExecutor {
 
       // Story 12.6: Emit agent spawn for observability (AC1)
       this._emitAgentSpawn(agent, 'development');
+
+      // IDS Gate Wiring: evaluate the IDS gates mapped to the development phase
+      // (G4 advisory dev-context + G5 blocking semantic-handshake). Fail-open:
+      // any evaluator failure is logged and the workflow proceeds. Only a real
+      // G5 BLOCKER violation fails the phase.
+      if (GateEvaluator) {
+        try {
+          const evaluator = new GateEvaluator(this.config?.ids || {});
+          const storyId = path.basename(storyPath, path.extname(storyPath));
+          const verdict = await evaluator.evaluateGatesForPhase('2_development', {
+            intent: phase.description || storyId,
+            storyId,
+            filePaths: [],
+          });
+
+          if (verdict.blocked) {
+            return {
+              status: PhaseStatus.FAILED,
+              error: `[IDS-${verdict.blockingGate}] Semantic Handshake blocker: ${verdict.correctionPrompt}`,
+              gateVerdict: verdict,
+            };
+          }
+
+          if (this.options.debug && verdict.results.length > 0) {
+            console.log('[WorkflowExecutor] IDS gate advisory:', JSON.stringify(verdict.results));
+          }
+        } catch (gateError) {
+          // Fail-open: a degraded evaluator never halts development.
+          console.warn(`[WorkflowExecutor] IDS gate-evaluator degraded: ${gateError.message}`);
+        }
+      }
 
       // Use terminal spawning (Story 11.2)
       if (phase.spawn_in_terminal && TerminalSpawner.isSpawnerAvailable()) {
