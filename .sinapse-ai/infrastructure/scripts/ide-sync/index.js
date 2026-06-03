@@ -24,8 +24,14 @@ const yaml = require('js-yaml');
 const { parseAllAgents } = require('./agent-parser');
 const { generateAllRedirects, writeRedirects } = require('./redirect-generator');
 const { validateAllIdes, formatValidationReport } = require('./validator');
+const { syncGeminiCommands, buildGeminiCommandFiles } = require('./gemini-commands');
+
 // Transformers
 const claudeCodeTransformer = require('./transformers/claude-code');
+const cursorTransformer = require('./transformers/cursor');
+const antigravityTransformer = require('./transformers/antigravity');
+const githubCopilotTransformer = require('./transformers/github-copilot');
+const kimiTransformer = require(path.resolve(__dirname, 'transformers', 'kimi'));
 
 // ANSI colors for output
 const colors = {
@@ -61,6 +67,31 @@ function loadConfig(projectRoot) {
         enabled: true,
         path: '.codex/agents',
         format: 'full-markdown-yaml',
+      },
+      gemini: {
+        enabled: true,
+        path: '.gemini/rules/SINAPSE/agents',
+        format: 'full-markdown-yaml',
+      },
+      'github-copilot': {
+        enabled: true,
+        path: '.github/agents',
+        format: 'github-copilot',
+      },
+      cursor: {
+        enabled: true,
+        path: '.cursor/rules/agents',
+        format: 'condensed-rules',
+      },
+      antigravity: {
+        enabled: true,
+        path: '.antigravity/rules/agents',
+        format: 'cursor-style',
+      },
+      kimi: {
+        enabled: true,
+        path: '.kimi/skills',
+        format: 'kimi-skill',
       },
     },
     redirects: {
@@ -100,9 +131,54 @@ function loadConfig(projectRoot) {
 function getTransformer(format) {
   const transformers = {
     'full-markdown-yaml': claudeCodeTransformer,
+    'condensed-rules': cursorTransformer,
+    'cursor-style': antigravityTransformer,
+    'github-copilot': githubCopilotTransformer,
+    'kimi-skill': kimiTransformer,
   };
 
-  return transformers[format] || claudeCodeTransformer;
+  const transformer = transformers[format];
+  if (!transformer) {
+    throw new Error(
+      `No transformer registered for format '${format}'. ` +
+        `Register it in getTransformer() before adding a target with this format. ` +
+        `Available formats: ${Object.keys(transformers).join(', ')}`
+    );
+  }
+  return transformer;
+}
+
+/**
+ * Resolve the primary file content for an agent.
+ * Allows IDE-specific transform variants (e.g. transformCommand) when present,
+ * falling back to the standard transform() otherwise.
+ * @param {object} transformer - Transformer module
+ * @param {object} agent - Parsed agent data
+ * @param {string} ideName - IDE name
+ * @returns {string} - Transformed content
+ */
+function transformPrimaryContent(transformer, agent, ideName) {
+  if (ideName === 'claude-code' && typeof transformer.transformCommand === 'function') {
+    return transformer.transformCommand(agent);
+  }
+  return transformer.transform(agent);
+}
+
+/**
+ * Guard against path traversal: returns true only when candidatePath resolves
+ * to a location strictly inside rootDir.
+ * @param {string} rootDir - Allowed root directory
+ * @param {string} candidatePath - Path to validate
+ * @returns {boolean}
+ */
+function isPathInside(rootDir, candidatePath) {
+  const relativePath = path.relative(rootDir, candidatePath);
+  return (
+    relativePath !== '' &&
+    relativePath !== '..' &&
+    !relativePath.startsWith(`..${path.sep}`) &&
+    !path.isAbsolute(relativePath)
+  );
 }
 
 /**
@@ -153,9 +229,30 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
     }
 
     try {
-      const content = transformer.transform(agent);
+      const content = transformPrimaryContent(transformer, agent, ideName);
       const filename = transformer.getFilename(agent);
-      const targetPath = path.join(result.targetDir, filename);
+      const targetRoot = path.resolve(result.targetDir);
+
+      // Kimi format uses subdirectories per skill: <skill-id>/SKILL.md
+      let targetPath;
+      if (ideConfig.format === 'kimi-skill' && transformer.getDirname) {
+        const dirname = transformer.getDirname(agent);
+        const skillDir = path.resolve(targetRoot, dirname);
+        targetPath = path.resolve(skillDir, filename);
+
+        if (!isPathInside(targetRoot, skillDir) || !isPathInside(targetRoot, targetPath)) {
+          throw new Error(`Unsafe Kimi output path for agent '${agent.id}'`);
+        }
+
+        if (!options.dryRun) {
+          fs.ensureDirSync(skillDir);
+        }
+      } else {
+        targetPath = path.resolve(targetRoot, filename);
+        if (!isPathInside(targetRoot, targetPath)) {
+          throw new Error(`Unsafe output path for agent '${agent.id}' in ${ideName}`);
+        }
+      }
 
       if (!options.dryRun) {
         fs.writeFileSync(targetPath, content, 'utf8');
@@ -237,7 +334,13 @@ async function commandSync(options) {
 
     const result = syncIde(agents, ideConfig, ideName, projectRoot, options);
 
-    result.commandFiles = [];
+    // Gemini CLI: also sync slash launcher command files (.gemini/commands/*.toml)
+    if (ideName === 'gemini') {
+      const geminiCommands = syncGeminiCommands(agents, projectRoot, options);
+      result.commandFiles = geminiCommands.files;
+    } else {
+      result.commandFiles = [];
+    }
 
     results.push(result);
 
@@ -339,9 +442,14 @@ async function commandValidate(options) {
       if (agent.error) continue;
 
       try {
-        const content = transformer.transform(agent);
+        const content = transformPrimaryContent(transformer, agent, ideName);
         const filename = transformer.getFilename(agent);
-        expectedFiles.push({ filename, content });
+        // Kimi format stores each skill in <skill-id>/SKILL.md — record nested path
+        const relPath =
+          ideConfig.format === 'kimi-skill' && transformer.getDirname
+            ? path.join(transformer.getDirname(agent), filename)
+            : filename;
+        expectedFiles.push({ filename: relPath, content });
       } catch (error) {
         // Skip agents that fail to transform
       }
@@ -366,6 +474,17 @@ async function commandValidate(options) {
       targetDir: path.join(projectRoot, ideConfig.path),
     };
 
+    // Gemini CLI command launcher files are synced under .gemini/commands/*.toml
+    if (ideName === 'gemini') {
+      const commandFiles = buildGeminiCommandFiles(agents).map((entry) => ({
+        filename: entry.filename,
+        content: entry.content,
+      }));
+      ideConfigs['gemini-commands'] = {
+        expectedFiles: commandFiles,
+        targetDir: path.join(projectRoot, '.gemini', 'commands'),
+      };
+    }
   }
 
   // Validate
@@ -486,6 +605,8 @@ if (require.main === module) {
 module.exports = {
   loadConfig,
   getTransformer,
+  transformPrimaryContent,
+  isPathInside,
   syncIde,
   commandSync,
   commandValidate,

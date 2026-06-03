@@ -13,6 +13,7 @@ const McpIntegrationCheck = require('./mcp-integration');
 const GithubCliCheck = require('./github-cli');
 const ClaudeCodeCheck = require('./claude-code');
 const ApiEndpointsCheck = require('./api-endpoints');
+const GeminiCliCheck = require('./gemini-cli');
 
 /**
  * All services domain checks
@@ -22,5 +23,6 @@ module.exports = {
   GithubCliCheck,
   ClaudeCodeCheck,
   ApiEndpointsCheck,
+  GeminiCliCheck,
 };
 

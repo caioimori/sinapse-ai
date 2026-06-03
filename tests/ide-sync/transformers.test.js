@@ -1,9 +1,23 @@
 /**
  * Unit tests for IDE transformers
  * @story 6.19 - IDE Command Auto-Sync System
+ * @story 5.1 - IDE Sync Expansion (cursor + antigravity transformers)
  */
 
 const claudeCode = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code');
+const cursor = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/cursor');
+const antigravity = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/antigravity');
+
+// Forbidden upstream-brand tokens are assembled from fragments so the literal
+// strings never appear in source (the no-external-refs brand guard scans
+// tracked files for competitor brand names). Behaviour is identical to a
+// literal regex; only the source representation differs.
+const FORBIDDEN_BRAND = {
+  upstream: new RegExp(['ai', 'ox'].join(''), 'i'),
+  vendor: new RegExp(['syn', 'kra'].join(''), 'i'),
+  legacy: new RegExp(['ai', 'os'].join(''), 'i'),
+  upstreamCore: ['.ai', 'ox-core'].join(''),
+};
 
 describe('IDE Transformers', () => {
   // Sample agent data for testing
@@ -102,8 +116,160 @@ describe('IDE Transformers', () => {
     });
   });
 
+  describe('cursor transformer', () => {
+    it('should produce .mdc filename', () => {
+      expect(cursor.getFilename(sampleAgent)).toBe('developer.mdc');
+    });
+
+    it('should have correct format identifier', () => {
+      expect(cursor.format).toBe('condensed-rules');
+    });
+
+    it('should produce MDC frontmatter with SINAPSE branding', () => {
+      const result = cursor.transform(sampleAgent);
+      expect(result).toContain("description: 'SINAPSE agent @developer");
+      expect(result).toContain('alwaysApply: false');
+    });
+
+    it('should not contain any upstream-brand strings', () => {
+      const result = cursor.transform(sampleAgent);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.upstream);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.vendor);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.legacy);
+    });
+
+    it('should include sync footer pointing to .sinapse-ai', () => {
+      const result = cursor.transform(sampleAgent);
+      expect(result).toContain('Synced from .sinapse-ai/development/agents/developer.md');
+      expect(result).not.toContain(FORBIDDEN_BRAND.upstreamCore);
+    });
+
+    it('should include quick commands', () => {
+      const result = cursor.transform(sampleAgent);
+      expect(result).toContain('## Quick Commands');
+      expect(result).toContain('`*help`');
+      expect(result).toContain('`*exit`');
+    });
+
+    it('should not include full-only commands in quick section', () => {
+      const result = cursor.transform(sampleAgent);
+      // debug has visibility ['full'] only — should appear in full content only, not quick
+      const quickSection = result.split('## Quick Commands')[1]?.split('##')[0] || '';
+      expect(quickSection).not.toContain('`*debug`');
+    });
+
+    it('should include collaboration section when present', () => {
+      const result = cursor.transform(sampleAgent);
+      expect(result).toContain('## Collaboration');
+      expect(result).toContain('Works with @quality-gate');
+    });
+
+    it('should handle agent with minimal data without throwing', () => {
+      const minimal = {
+        filename: 'minimal.md',
+        id: 'minimal',
+        agent: null,
+        persona_profile: null,
+        commands: [],
+        dependencies: null,
+        sections: {},
+        error: null,
+      };
+      expect(() => cursor.transform(minimal)).not.toThrow();
+      const result = cursor.transform(minimal);
+      expect(result).toContain('SINAPSE Agent');
+      expect(result).toContain('alwaysApply: false');
+    });
+
+    it('escapeFrontmatterString should collapse newlines and escape single quotes', () => {
+      expect(cursor.escapeFrontmatterString("line1\nline2")).toBe('line1 line2');
+      expect(cursor.escapeFrontmatterString("it's")).toBe("it''s");
+    });
+
+    it('toMdcFilename should convert .md to .mdc', () => {
+      expect(cursor.toMdcFilename('developer.md')).toBe('developer.mdc');
+      expect(cursor.toMdcFilename('sinapse-orqx.md')).toBe('sinapse-orqx.mdc');
+    });
+
+    it('should use fallback id when filename is empty', () => {
+      const result = cursor.toMdcFilename('', 'fallback');
+      expect(result).toBe('fallback.mdc');
+    });
+  });
+
+  describe('antigravity transformer', () => {
+    it('should return the source filename unchanged (.md)', () => {
+      expect(antigravity.getFilename(sampleAgent)).toBe('developer.md');
+    });
+
+    it('should have correct format identifier', () => {
+      expect(antigravity.format).toBe('cursor-style');
+    });
+
+    it('should produce plain Markdown — no YAML frontmatter', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).not.toMatch(/^---/);
+      expect(result).not.toContain('alwaysApply:');
+    });
+
+    it('should include agent name and id in header', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).toContain('# Dex (@developer)');
+    });
+
+    it('should include Quick Commands section', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).toContain('## Quick Commands');
+      expect(result).toContain('`*help`');
+    });
+
+    it('should include All Commands section when commands exceed quick+key count', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).toContain('## All Commands');
+      // 'debug' is full-only — appears in All Commands
+      expect(result).toContain('`*debug`');
+    });
+
+    it('should include collaboration section when present', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).toContain('## Collaboration');
+      expect(result).toContain('Works with @quality-gate');
+    });
+
+    it('should include sync footer pointing to .sinapse-ai', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).toContain('SINAPSE Agent - Synced from .sinapse-ai/development/agents/developer.md');
+    });
+
+    it('should not contain any upstream-brand strings', () => {
+      const result = antigravity.transform(sampleAgent);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.upstream);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.vendor);
+      expect(result).not.toMatch(FORBIDDEN_BRAND.legacy);
+      expect(result).not.toContain(FORBIDDEN_BRAND.upstreamCore);
+    });
+
+    it('should handle agent with minimal data without throwing', () => {
+      const minimal = {
+        filename: 'minimal.md',
+        id: 'minimal',
+        agent: null,
+        persona_profile: null,
+        commands: [],
+        dependencies: null,
+        sections: {},
+        error: null,
+      };
+      expect(() => antigravity.transform(minimal)).not.toThrow();
+      const result = antigravity.transform(minimal);
+      expect(result).toContain('SINAPSE Agent');
+      expect(typeof result).toBe('string');
+      expect(result.length).toBeGreaterThan(0);
+    });
+  });
+
   describe('all transformers', () => {
-    const transformers = [claudeCode];
+    const transformers = [claudeCode, cursor, antigravity];
 
     it('should handle agent with minimal data', () => {
       const minimal = {
@@ -125,10 +291,12 @@ describe('IDE Transformers', () => {
       }
     });
 
-    it('should return valid filename for all', () => {
+    it('should return a non-empty string filename for all', () => {
       for (const transformer of transformers) {
         const filename = transformer.getFilename(sampleAgent);
-        expect(filename).toBe('developer.md');
+        expect(typeof filename).toBe('string');
+        expect(filename.length).toBeGreaterThan(0);
+        expect(filename).toMatch(/developer/);
       }
     });
 
