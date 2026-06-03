@@ -31,6 +31,8 @@ docs/stories/          # Development stories
 packages/              # Shared packages
 squads/                # Squad expansions
 tests/                 # Tests
+governance/            # Framework evolution pipeline: audit → proposal → approval → PR
+audits/                # Framework-level AuditFindings (promoted/ and archived/)
 ```
 
 ## Framework Boundary (L1-L4)
@@ -38,9 +40,13 @@ tests/                 # Tests
 | Layer | Mutability | Key Paths |
 |-------|-----------|-----------|
 | L1 Core | NEVER | `.sinapse-ai/core/`, `bin/sinapse*.js` |
-| L2 Templates | NEVER | `.sinapse-ai/development/{tasks,templates,checklists,workflows}/` |
+| L2 Templates | NEVER | `.sinapse-ai/development/{tasks,templates,checklists,workflows,external-executors}/` |
 | L3 Config | Mutable | `.sinapse-ai/data/`, `core-config.yaml` |
 | L4 Runtime | ALWAYS | `docs/stories/`, `packages/`, `squads/`, `tests/` |
+
+**External Executors (opt-in delegation):** `sinapse-delegate` CLI outsources `@developer` implementation to an external CLI (e.g., Codex) while SINAPSE retains orchestration authority. Protocol: `.sinapse-ai/development/external-executors/`. Task: `.sinapse-ai/development/tasks/delegate-to-external-executor.md`. Run artifacts: `.sinapse/external-runs/<timestamp>-<slug>/`.
+
+**Framework Governance (Evolution Pipeline):** How the framework evolves: `governance/evolution-pipeline.md`. AuditFindings that become framework proposals live in `governance/proposals/`. Approved patterns in `governance/patterns/`. Templates in `governance/templates/`. Framework-level promoted findings in `audits/promoted/`.
 
 ## Agents
 
