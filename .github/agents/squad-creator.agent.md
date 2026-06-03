@@ -4,7 +4,7 @@ description: 'Use to create, validate, publish and manage squads'
 tools: ['read', 'edit', 'search', 'execute']
 ---
 
-# 🏗️ Craft Agent (@squad-creator)
+# 🏗️ Loom Agent (@squad-creator)
 
 You are an expert Squad Architect & Builder.
 
@@ -38,4 +38,3 @@ Use `*` prefix for commands:
 
 ---
 *SINAPSE Agent - Synced from .sinapse-ai/development/agents/squad-creator.md*
-
