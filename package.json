@@ -60,6 +60,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:health-check": "mocha tests/health-check/**/*.test.js --timeout 30000",
+    "eval": "node scripts/eval-runner.js",
+    "validate:evals": "node scripts/validate-evals.js",
     "lint": "eslint . --cache --cache-location .eslintcache",
     "typecheck": "tsc --noEmit",
     "release": "semantic-release",

@@ -1,0 +1,35 @@
+{
+  "gateId": "G3",
+  "phase": "story_validation",
+  "cases": [
+    {
+      "id": "missing-referenced-artifact-with-override",
+      "description": "Story references one real registry artifact and one missing path, with a valid override reason -> G3 is advisory, so it still passes and never blocks, while warning about the missing reference.",
+      "context": {
+        "intent": "Add a verification gate evaluator that wires IDS gates into the SDC workflow",
+        "referencedArtifacts": [".sinapse-ai/core/ids/gate-evaluator.js", "totally/missing/artifact.js"],
+        "override": { "reason": "Intentional reuse of existing gate evaluator pattern", "user": "po" }
+      },
+      "expectations": [
+        { "id": "e1", "description": "advisory gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "advisory gate never blocks", "kind": "blocking_false" },
+        { "id": "e3", "description": "produces warnings (missing + verified references)", "kind": "has_warnings" },
+        { "id": "e4", "description": "warning names the missing-in-registry reference", "kind": "warning_matches", "arg": "not found in registry" },
+        { "id": "e5", "description": "soft-block stays under the < 4h SLA (well under 2s wall time)", "kind": "execution_under_ms", "arg": 2000 }
+      ]
+    },
+    {
+      "id": "plain-intent-no-references",
+      "description": "Story with a plain documentation intent, no referenced artifacts and no likely duplication -> G3 passes advisory with no critical issues and never blocks.",
+      "context": {
+        "intent": "Document the override policy for the incremental development system gates",
+        "type": "documentation"
+      },
+      "expectations": [
+        { "id": "e1", "description": "advisory gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "advisory gate never blocks", "kind": "blocking_false" },
+        { "id": "e3", "description": "executes quickly, well under the SLA", "kind": "execution_under_ms", "arg": 2000 }
+      ]
+    }
+  ]
+}

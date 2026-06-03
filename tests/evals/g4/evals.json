@@ -1,0 +1,35 @@
+{
+  "gateId": "G4",
+  "phase": "2_development",
+  "cases": [
+    {
+      "id": "dev-context-with-file-paths-surfaces-reuse",
+      "description": "Dev task with intent plus file paths overlapping existing IDS core files -> G4 is informational, always passes, never blocks, and surfaces matching artifacts as reuse opportunities.",
+      "context": {
+        "intent": "Implement the circuit breaker reset timeout for verification gates",
+        "storyId": "IDS-5a",
+        "filePaths": [".sinapse-ai/core/ids/circuit-breaker.js", ".sinapse-ai/core/ids/verification-gate.js"]
+      },
+      "expectations": [
+        { "id": "e1", "description": "informational gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "informational gate never blocks", "kind": "blocking_false" },
+        { "id": "e3", "description": "surfaces relevant artifacts as reuse opportunities", "kind": "has_opportunities" },
+        { "id": "e4", "description": "warns to consider REUSE/ADAPT before creating new", "kind": "warning_matches", "arg": "REUSE/ADAPT" },
+        { "id": "e5", "description": "meets the < 2s latency SLA", "kind": "execution_under_ms", "arg": 2000 }
+      ]
+    },
+    {
+      "id": "dev-context-intent-only",
+      "description": "Dev task with only an intent and storyId, no file paths and no strong registry match -> G4 still passes advisory, never blocks, and stays under the latency SLA.",
+      "context": {
+        "intent": "Write the registry loader queryByPath public API",
+        "storyId": "IDS-1"
+      },
+      "expectations": [
+        { "id": "e1", "description": "informational gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "informational gate never blocks", "kind": "blocking_false" },
+        { "id": "e3", "description": "meets the < 2s latency SLA", "kind": "execution_under_ms", "arg": 2000 }
+      ]
+    }
+  ]
+}

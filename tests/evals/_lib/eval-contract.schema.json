@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sinapse-ai/schemas/eval-contract.schema.json",
+  "title": "SINAPSE Eval Harness Contract",
+  "description": "Schema for the deterministic gate-eval harness. Defines two file shapes: evals.json (per-gate test cases) and triggers.json (phase routing for a gate). Use the matching definition via $ref, e.g. { \"$ref\": \"eval-contract.schema.json#/definitions/EvalFile\" }.",
+  "type": "object",
+  "oneOf": [
+    { "$ref": "#/definitions/EvalFile" },
+    { "$ref": "#/definitions/TriggersFile" }
+  ],
+  "definitions": {
+    "GateId": {
+      "type": "string",
+      "pattern": "^G[1-9][0-9]*$",
+      "description": "Gate identifier, e.g. 'G1'..'G5'."
+    },
+    "Phase": {
+      "type": "string",
+      "enum": [
+        "epic_creation",
+        "story_creation",
+        "story_validation",
+        "2_development"
+      ],
+      "description": "SDC phase id as mapped by GateEvaluator.getGatesForPhase()."
+    },
+    "PredicateKind": {
+      "type": "string",
+      "enum": [
+        "passed_true",
+        "passed_false",
+        "blocking_true",
+        "blocking_false",
+        "has_warnings",
+        "has_opportunities",
+        "opportunities_min",
+        "warning_matches",
+        "correction_prompt_present",
+        "correction_prompt_matches",
+        "execution_under_ms"
+      ],
+      "description": "Closed set of deterministic predicate kinds (see tests/evals/_lib/predicates.js)."
+    },
+    "Expectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable expectation id, unique within a case."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable intent of the expectation."
+        },
+        "kind": { "$ref": "#/definitions/PredicateKind" },
+        "arg": {
+          "type": ["integer", "string"],
+          "description": "Predicate argument. Integer for *_min / execution_under_ms; regex string for *_matches."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": ["opportunities_min", "execution_under_ms"]
+              }
+            }
+          },
+          "then": {
+            "required": ["arg"],
+            "properties": { "arg": { "type": "integer", "minimum": 0 } }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": ["warning_matches", "correction_prompt_matches"]
+              }
+            }
+          },
+          "then": {
+            "required": ["arg"],
+            "properties": { "arg": { "type": "string", "minLength": 1 } }
+          }
+        }
+      ]
+    },
+    "Case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "context", "expectations"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "kebab-case case id, unique within the file."
+        },
+        "description": {
+          "type": "string",
+          "description": "What this case exercises."
+        },
+        "context": {
+          "type": "object",
+          "description": "The context object passed verbatim to gate.verify(context)."
+        },
+        "expectations": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "$ref": "#/definitions/Expectation" },
+          "description": "At least 3 expectations per case."
+        }
+      }
+    },
+    "EvalFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "phase", "cases"],
+      "properties": {
+        "gateId": { "$ref": "#/definitions/GateId" },
+        "phase": { "$ref": "#/definitions/Phase" },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Case" }
+        }
+      }
+    },
+    "TriggersFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gateId", "positives", "negatives"],
+      "properties": {
+        "gateId": { "$ref": "#/definitions/GateId" },
+        "positives": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Phase" },
+          "description": "Phases whose getGatesForPhase() MUST include this gateId."
+        },
+        "negatives": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Phase" },
+          "description": "Phases whose getGatesForPhase() MUST NOT include this gateId."
+        }
+      }
+    }
+  }
+}

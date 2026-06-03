@@ -1,0 +1,78 @@
+{
+  "gateId": "G5",
+  "phase": "2_development",
+  "cases": [
+    {
+      "id": "postgres-constraint-violated-by-sqlite",
+      "description": "Planning mandates PostgreSQL but proposed code uses sqlite -> G5 must fail, block, and return a correction prompt naming the constraint.",
+      "context": {
+        "planningOutput": "The persistence layer must use PostgreSQL. Connect via the pg adapter.",
+        "proposedCode": "const Database = require('better-sqlite3');\nconst db = new Database('app.sqlite');",
+        "storyId": "eval-g5-001"
+      },
+      "expectations": [
+        { "id": "e1", "description": "gate fails", "kind": "passed_false" },
+        { "id": "e2", "description": "gate blocks (G5 is blocking)", "kind": "blocking_true" },
+        { "id": "e3", "description": "a correction prompt is present", "kind": "correction_prompt_present" },
+        { "id": "e4", "description": "correction prompt references the PostgreSQL constraint", "kind": "correction_prompt_matches", "arg": "TECH-POSTGRESQL" },
+        { "id": "e5", "description": "warnings mention the SQLite/PostgreSQL violation", "kind": "warning_matches", "arg": "PostgreSQL" }
+      ]
+    },
+    {
+      "id": "postgres-constraint-satisfied-by-pg",
+      "description": "Planning mandates PostgreSQL and code uses the pg adapter -> G5 passes and does not block.",
+      "context": {
+        "planningOutput": "The persistence layer must use PostgreSQL. Connect via the pg adapter.",
+        "proposedCode": "const { Pool } = require('pg');\nconst pool = new Pool({ connectionString: process.env.PG_URL });",
+        "storyId": "eval-g5-002"
+      },
+      "expectations": [
+        { "id": "e1", "description": "gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "gate does not block", "kind": "blocking_false" },
+        { "id": "e3", "description": "verified constraint surfaced as opportunity", "kind": "has_opportunities" }
+      ]
+    },
+    {
+      "id": "constraints-registered-but-no-code",
+      "description": "Planning registers a constraint but no proposed code is supplied -> G5 passes advisory and surfaces the constraint as an opportunity.",
+      "context": {
+        "planningOutput": "The persistence layer must use PostgreSQL.",
+        "storyId": "eval-g5-003"
+      },
+      "expectations": [
+        { "id": "e1", "description": "gate passes (advisory)", "kind": "passed_true" },
+        { "id": "e2", "description": "gate does not block", "kind": "blocking_false" },
+        { "id": "e3", "description": "constraint surfaced as opportunity", "kind": "has_opportunities" },
+        { "id": "e4", "description": "warns that no code was provided", "kind": "warning_matches", "arg": "no proposed code" }
+      ]
+    },
+    {
+      "id": "no-constraints-registered",
+      "description": "No planning constraints and arbitrary code -> G5 passes advisory with the no-constraints note.",
+      "context": {
+        "proposedCode": "function add(a, b) { return a + b; }",
+        "storyId": "eval-g5-004"
+      },
+      "expectations": [
+        { "id": "e1", "description": "gate passes", "kind": "passed_true" },
+        { "id": "e2", "description": "gate does not block", "kind": "blocking_false" },
+        { "id": "e3", "description": "warns no constraints are registered", "kind": "warning_matches", "arg": "No Semantic Handshake constraints registered" }
+      ]
+    },
+    {
+      "id": "no-eval-constraint-violated",
+      "description": "Planning forbids eval but code calls eval() -> G5 fails, blocks, correction prompt names the security constraint.",
+      "context": {
+        "planningOutput": "Security: never use eval. No eval in the codebase.",
+        "proposedCode": "const result = eval(userInput);",
+        "storyId": "eval-g5-005"
+      },
+      "expectations": [
+        { "id": "e1", "description": "gate fails", "kind": "passed_false" },
+        { "id": "e2", "description": "gate blocks", "kind": "blocking_true" },
+        { "id": "e3", "description": "correction prompt present", "kind": "correction_prompt_present" },
+        { "id": "e4", "description": "correction prompt references no-eval constraint", "kind": "correction_prompt_matches", "arg": "SEC-NO-EVAL" }
+      ]
+    }
+  ]
+}

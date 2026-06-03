@@ -1,0 +1,5 @@
+{
+  "gateId": "G3",
+  "positives": ["story_validation"],
+  "negatives": ["epic_creation", "2_development"]
+}
