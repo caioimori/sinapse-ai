@@ -21,6 +21,7 @@ paths:
 ### PreToolUse — Write|Edit
 | Hook | Purpose | Behavior |
 |------|---------|----------|
+| `enforce-framework-boundary.cjs` | Boundary L1-L4 — protects untouchable core when `boundary.frameworkProtection=true` | BLOCK (exit 2) |
 | `enforce-architecture-first.cjs` | Art. III — Docs before protected code | BLOCK (exit 2) |
 | `write-path-validation.cjs` | Convention — Warn wrong doc paths | WARN (exit 0) |
 | `enforce-story-gate.cjs` | Art. III — Story required for code | BLOCK (exit 2) |
