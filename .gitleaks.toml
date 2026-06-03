@@ -1,0 +1,23 @@
+# SINAPSE — gitleaks configuration
+#
+# Keeps ALL of gitleaks' default rules (extend.useDefault) and adds a path
+# allowlist for files that carry INTENTIONAL fake/sample secrets by design:
+#   - the secret-scanner's own source (named-pattern regexes embed token shapes);
+#   - its test fixtures (they must contain realistic-looking fakes to prove the
+#     scanner detects real secrets end-to-end).
+# Production code paths remain fully scanned by the default ruleset.
+
+title = "SINAPSE gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Secret-scanner source + test fixtures contain intentional fake secrets"
+paths = [
+  '''tests/security/.*''',
+  '''tests/bin/collaboration-guards\.test\.js''',
+  '''bin/utils/secret-scanner-core\.js''',
+  '''bin/utils/staged-secret-scan\.js''',
+  '''\.claude/hooks/secret-scanning\.cjs''',
+]

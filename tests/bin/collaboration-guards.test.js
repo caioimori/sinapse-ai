@@ -90,10 +90,12 @@ describe('collaboration safety helpers', () => {
     });
 
     it('detects obvious secret patterns', () => {
-      expect(findSecretMatches('token=ghp_1234567890abcdefghijklmnop')).toContain(
-        'GitHub personal token',
+      // GitHub PATs are prefix + 36+ chars; prefix split so this file holds no
+      // contiguous token literal (runtime value is identical, regex still matches).
+      expect(findSecretMatches('token=ghp' + '_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij01')).toContain(
+        'GitHub Token',
       );
-      expect(findSecretMatches('-----BEGIN PRIVATE KEY-----')).toContain('generic private key');
+      expect(findSecretMatches('-----BEGIN PRIVATE KEY-----')).toContain('Generic Private Key');
     });
   });
 
