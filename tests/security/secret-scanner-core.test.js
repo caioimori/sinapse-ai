@@ -29,7 +29,7 @@ describe('shannonEntropy', () => {
     expect(core.shannonEntropy('abababab')).toBeCloseTo(1, 5);
   });
 
-  test('random-looking token clears the 4.0 threshold', () => {
+  test('random-looking token clears the entropy threshold', () => {
     expect(core.shannonEntropy('Xq9Zk2mNp7Bv4Lc8Rt6Wy3Ds1Fg5Hj0Aa')).toBeGreaterThanOrEqual(core.ENTROPY_THRESHOLD);
   });
 });

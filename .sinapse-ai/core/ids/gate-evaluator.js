@@ -120,6 +120,17 @@ class GateEvaluator {
 
       verdict.results.push(result);
 
+      // B.2 — Emit IDS telemetry gate decision (fail-open, never throws).
+      try {
+        const { emitGateDecision } = require('../telemetry/ids-sink');
+        emitGateDecision({
+          tool: gateId,
+          phase: phaseId,
+          blocked: !!(result.result && result.result.blocking === true),
+          warnings: (result.result && result.result.warnings) || [],
+        });
+      } catch { /* fail-open: telemetry must never block gate evaluation */ }
+
       // A blocking gate that failed marks the verdict blocked.
       if (result.result && result.result.blocking === true) {
         verdict.blocked = true;

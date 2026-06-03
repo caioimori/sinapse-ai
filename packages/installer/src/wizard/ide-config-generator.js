@@ -562,6 +562,9 @@ async function copyClaudeHooksFolder(projectRoot) {
     'enforce-story-gate.cjs',
     'secret-scanning.cjs',
     'write-path-validation.cjs',
+    // Frente 4.3 — DORA + OTel telemetry hooks (STREAM A)
+    'telemetry-post-tool.cjs',
+    'telemetry-stop.cjs',
     'README.md',
   ];
 
@@ -633,6 +636,18 @@ const HOOK_EVENT_MAP = {
   'secret-scanning.cjs': {
     event: 'PreToolUse',
     matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  // Frente 4.3 — DORA + OTel observability hooks (STREAM A)
+  // FAIL-OPEN: these hooks swallow all errors and always exit 0.
+  'telemetry-post-tool.cjs': {
+    event: 'PostToolUse',
+    matcher: null,
+    timeout: 3,
+  },
+  'telemetry-stop.cjs': {
+    event: 'Stop',
+    matcher: null,
     timeout: 5,
   },
 };

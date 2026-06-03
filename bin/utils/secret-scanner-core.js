@@ -9,9 +9,10 @@
  *
  * Hardening (Frente 4.2 — Stream A):
  *   - All 20+ named patterns preserved (no regression).
- *   - Shannon entropy: flags high-entropy tokens (>= 20 chars, >= 4.0 bits/char)
- *     as suspected secrets, BEYOND the named patterns. Lockfile-hash context is
- *     allowlisted to avoid false positives on integrity hashes.
+ *   - Shannon entropy: flags high-entropy tokens (>= 20 contiguous chars,
+ *     >= 4.5 bits/char) as suspected secrets, BEYOND the named patterns.
+ *     Lockfile-hash context + code-identifier band are allowlisted to avoid
+ *     false positives on integrity hashes and long camelCase symbols.
  *   - Allowlist: placeholders (your-key-here, xxx, CHANGEME, REPLACE_ME, <...>,
  *     example.com, etc.) and obvious fakes PASS.
  *   - Redaction: matched secrets are never printed in full.
@@ -116,7 +117,12 @@ function shannonEntropy(str) {
   return entropy;
 }
 
-const ENTROPY_THRESHOLD = 4.0;
+// 4.5 bits/char: long camelCase/snake identifiers in source top out around
+// ~4.2 (dictionary words have repeated letters), while real random secrets —
+// base64 of random bytes (~5.5), mixed alphanumeric tokens (~5.0), even base64
+// of text (~4.5) — clear it. Set above the identifier band to kill false
+// positives on code symbols; named patterns still catch branded low-entropy keys.
+const ENTROPY_THRESHOLD = 4.5;
 const ENTROPY_MIN_LEN = 20;
 const TOKEN_SHAPE = /[A-Za-z0-9_\-/+=]{20,}/g;
 

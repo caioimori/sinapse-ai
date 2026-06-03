@@ -171,6 +171,7 @@ describe('Hook Security Properties (Story 8.10)', () => {
         'write-path-validation', // warn-only path checker
         'synapse-engine',        // context injection, never blocks
         'enforce-nsn-guard',     // NSN Mode guard — WARN only (stderr + exit 0)
+        'telemetry',             // telemetry observers — fail-open, always exit 0, never block
       ];
       const isWarnOnly = WARN_ONLY_HOOKS.some((kw) => hookFile.includes(kw));
       if (!isWarnOnly) {
