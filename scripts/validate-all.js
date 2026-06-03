@@ -52,6 +52,7 @@ const GUARDS = [
   { name: 'cross-refs', script: 'validate:cross-refs' },
   { name: 'manifest:parity', script: 'validate:manifest:parity' },
   { name: 'squad-yaml', script: 'validate:squad-yaml' },
+  { name: 'squad-orqx', script: 'validate:squad-orqx' },
 ];
 
 /**
