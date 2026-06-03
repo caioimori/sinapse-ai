@@ -10,7 +10,8 @@ UserPromptSubmit Hooks
 
 PreToolUse Hooks
 ├── Read          → read-protection.py
-├── Write|Edit    → enforce-architecture-first.cjs
+├── Write|Edit    → enforce-framework-boundary.cjs
+│                 → enforce-architecture-first.cjs
 │                 → write-path-validation.cjs
 │                 → enforce-story-gate.cjs
 │                 → enforce-nsn-guard.cjs
@@ -110,6 +111,17 @@ Impede criação de mind clones sem DNA extraído previamente.
 1. Execute o pipeline de extração de DNA: `/squad-creator` → `*collect-sources` → `*extract-voice-dna` → `*extract-thinking-dna`
 2. OU se é agent funcional, renomeie com sufixo apropriado
 
+### 7. enforce-framework-boundary.cjs
+**Trigger:** `Write|Edit` (cobre `Write`, `Edit` e `NotebookEdit` internamente)
+**Comportamento:** BLOQUEIA (exit 2)
+
+Camada runtime de defesa em profundidade do boundary L1-L4. Lê o bloco `boundary` de `.sinapse-ai/core-config.yaml` dinamicamente a cada Write/Edit e bloqueia edições em paths protegidos (núcleo intocável L1/L2) quando `boundary.frameworkProtection: true`.
+
+- **Exceptions vencem:** se o path casa um glob de `exceptions`, libera (exit 0) mesmo dentro de dir protegido.
+- **Toggle respeitado:** com `frameworkProtection: false` (modo contribuidor), nunca bloqueia.
+- **Fail-open total:** js-yaml ausente, config ausente/ilegível, YAML malformado, bloco `boundary` ausente, ou path ausente/escapando a raiz → exit 0.
+- **Independente** do gerador estático `generate-settings-json.js` (que assa deny/allow no settings.json no install). Os dois leem a MESMA fonte (bloco `boundary`).
+
 ## Exit Codes
 
 | Code | Significado |
@@ -157,6 +169,7 @@ Hooks são registrados em `.claude/settings.json` (framework, commitado) ou `.cl
 | `synapse-engine.cjs` | `UserPromptSubmit` | — | SYNAPSE context engine |
 | `code-intel-pretool.cjs` | `PreToolUse` | `Write\|Edit` | Code intelligence injection |
 | `precompact-session-digest.cjs` | `PreCompact` | — | Session digest capture |
+| `enforce-framework-boundary.cjs` | `PreToolUse` | `Write\|Edit` | Boundary L1-L4 (BLOCK quando `frameworkProtection=true`) |
 
 ### Exemplo de Configuração
 

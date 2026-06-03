@@ -195,15 +195,19 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
 
     test('covers all known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(8);
+      expect(keys).toHaveLength(11);
       expect(keys).toContain('synapse-engine.cjs');
       expect(keys).toContain('code-intel-pretool.cjs');
       expect(keys).toContain('precompact-session-digest.cjs');
       expect(keys).toContain('enforce-architecture-first.cjs');
       expect(keys).toContain('enforce-story-gate.cjs');
+      expect(keys).toContain('enforce-framework-boundary.cjs');
       expect(keys).toContain('write-path-validation.cjs');
       expect(keys).toContain('enforce-delegation.cjs');
       expect(keys).toContain('secret-scanning.cjs');
+      // Telemetry observers added in Onda 4.3 (PostToolUse + Stop, fail-open)
+      expect(keys).toContain('telemetry-post-tool.cjs');
+      expect(keys).toContain('telemetry-stop.cjs');
     });
 
     test('DEFAULT_HOOK_CONFIG falls back to UserPromptSubmit', () => {

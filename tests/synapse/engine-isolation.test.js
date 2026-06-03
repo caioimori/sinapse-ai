@@ -94,7 +94,17 @@ jest.mock('../../.sinapse-ai/core/synapse/layers/l7-star-command', () => {
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
 
-const { SynapseEngine, PipelineMetrics } = require('../../.sinapse-ai/core/synapse/engine');
+// Re-required fresh before each test (below). A test running earlier in the same
+// Jest worker can otherwise leave the engine module cached with the REAL
+// context-tracker bound, so getActiveLayers() returns its real value and every
+// layer reports 'skipped' — cross-file module-cache pollution. resetModules()
+// rebuilds the registry so the hoisted mocks above always apply.
+let SynapseEngine, PipelineMetrics;
+
+beforeEach(() => {
+  jest.resetModules();
+  ({ SynapseEngine, PipelineMetrics } = require('../../.sinapse-ai/core/synapse/engine'));
+});
 
 // =============================================================================
 // Pipeline isolation — throwing layer

@@ -291,12 +291,49 @@ class HealerManager {
   }
 
   /**
-   * Register built-in healers
+   * Register built-in Tier-1 (Silent) healers.
+   *
+   * Each healer is sourced from its check class via `getHealer()` so the
+   * fix logic lives beside the detection logic — single source of truth.
+   *
+   * Caller: `HealthCheck.run({ autoFix: true, autoFixTier: 1 })` →
+   *         `this.healers.applyFixes(checkResults, 1)` (index.js line 112)
+   *
    * @private
    */
   registerBuiltInHealers() {
-    // Healers will be registered by individual checks
-    // This is a placeholder for future built-in healers
+    // Lazy-require to avoid circular deps at module load time
+    const builtIns = [
+      {
+        id: 'project.sinapse-directory',
+        module: '../checks/project/sinapse-directory',
+      },
+      {
+        id: 'project.framework-config',
+        module: '../checks/project/framework-config',
+      },
+      {
+        id: 'project.package-json',
+        module: '../checks/project/package-json',
+      },
+      {
+        id: 'repository.gitignore',
+        module: '../checks/repository/gitignore',
+      },
+    ];
+
+    for (const { id, module: modulePath } of builtIns) {
+      try {
+        const CheckClass = require(modulePath);
+        const instance = new CheckClass();
+        const healer = instance.getHealer && instance.getHealer();
+        if (healer && typeof healer.fix === 'function') {
+          this.registerHealer(id, healer);
+        }
+      } catch (_err) {
+        // Graceful degradation — missing check module never blocks startup
+      }
+    }
   }
 
   /**

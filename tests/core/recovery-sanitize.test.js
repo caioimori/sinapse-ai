@@ -152,7 +152,7 @@ describe('RecoveryHandler — sanitization (Port #14)', () => {
   // ─── BigInt ───────────────────────────────────────────────────────────────
 
   test('BigInt value in context does not throw JSON.stringify', () => {
-    injectAttempt(11, { big: BigInt(9007199254740993) });
+    injectAttempt(11, { big: BigInt('9007199254740993') });
 
     const history = handler.getAttemptHistory();
     expect(() => JSON.stringify(history)).not.toThrow();

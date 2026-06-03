@@ -28,7 +28,7 @@ class PackageJsonCheck extends BaseCheck {
       severity: CheckSeverity.CRITICAL,
       timeout: 2000,
       cacheable: true,
-      healingTier: 0, // Cannot auto-fix missing/invalid package.json
+      healingTier: 1, // Can auto-patch cosmetic fields (name/version stubs) when JSON is valid
       tags: ['npm', 'config', 'required'],
     });
   }
@@ -70,8 +70,10 @@ class PackageJsonCheck extends BaseCheck {
 
       if (issues.length > 0) {
         return this.warning(`package.json has issues: ${issues.join(', ')}`, {
-          recommendation: 'Fix the package.json fields to match npm requirements',
-          details: { issues, path: packagePath },
+          recommendation: 'Run health check with --fix to patch missing fields',
+          healable: true,
+          healingTier: 1,
+          details: { issues, path: packagePath, packagePath },
         });
       }
 
@@ -99,6 +101,48 @@ class PackageJsonCheck extends BaseCheck {
 
       return this.error(`Failed to read package.json: ${error.message}`, error);
     }
+  }
+
+  /**
+   * Get healer for this check
+   * Patches stub name/version fields when JSON is valid but incomplete
+   * @returns {Object} Healer configuration
+   */
+  getHealer() {
+    return {
+      name: 'patch-package-json-fields',
+      action: 'patch-fields',
+      successMessage: 'Patched missing package.json fields with safe defaults',
+      targetFile: 'package.json',
+      fix: async (_result) => {
+        const projectRoot = process.cwd();
+        const packagePath = path.join(projectRoot, 'package.json');
+
+        const content = await fs.readFile(packagePath, 'utf8');
+        const packageJson = JSON.parse(content);
+
+        let patched = false;
+
+        if (!packageJson.name) {
+          packageJson.name = path.basename(projectRoot).toLowerCase().replace(/[^a-z0-9-]/g, '-');
+          patched = true;
+        }
+
+        if (!packageJson.version) {
+          packageJson.version = '0.1.0';
+          patched = true;
+        }
+
+        if (patched) {
+          await fs.writeFile(packagePath, JSON.stringify(packageJson, null, 2) + '\n', 'utf8');
+        }
+
+        return {
+          success: true,
+          message: patched ? 'Patched package.json with stub fields' : 'No patches needed',
+        };
+      },
+    };
   }
 }
 

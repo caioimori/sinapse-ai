@@ -123,8 +123,14 @@ function parseOrqxFormat(content) {
     const nameMatch = content.match(/\*\*Nome:\*\*\s*([^\n]+)/);
     if (nameMatch) data.agent.name = nameMatch[1].trim();
 
-    const roleHeadingMatch = content.match(/^##\s+Role\s*\n+([\s\S]+?)(?:\n##|\n$)/m);
+    // Accept "## Role" or "## Papel" (PT-BR alias)
+    const roleHeadingMatch = content.match(/^##\s+(?:Role|Papel)\s*\n+([\s\S]+?)(?:\n##|\n$)/m);
     if (roleHeadingMatch) data.persona.role = roleHeadingMatch[1].trim().split('\n')[0];
+    // Inline role in list item (e.g. "- **Role:** Product Operations Orchestrator")
+    if (!data.persona.role) {
+      const inlineRoleMatch = content.match(/\*\*(?:Role|Papel):\*\*\s*([^\n]+)/);
+      if (inlineRoleMatch) data.persona.role = inlineRoleMatch[1].trim();
+    }
 
     return data;
   }
@@ -141,7 +147,8 @@ function parseOrqxFormat(content) {
     const idMatch = content.match(/\*\*Agent ID\*\*\s*\|\s*`?@?([^|`\n]+?)`?\s*\|/);
     if (idMatch) data.agent.id = idMatch[1].trim();
 
-    const roleHeadingMatch = content.match(/^##\s+Role\s*\n+([\s\S]+?)(?:\n##|\n$)/m);
+    // Accept "## Role" or "## Papel" (PT-BR alias)
+    const roleHeadingMatch = content.match(/^##\s+(?:Role|Papel)\s*\n+([\s\S]+?)(?:\n##|\n$)/m);
     if (roleHeadingMatch) data.persona.role = roleHeadingMatch[1].trim().split('\n')[0];
 
     return data;

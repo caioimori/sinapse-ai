@@ -31,6 +31,8 @@ docs/stories/          # Development stories
 packages/              # Shared packages
 squads/                # Squad expansions
 tests/                 # Tests
+governance/            # Framework evolution pipeline
+audits/                # Framework-level AuditFindings
 ```
 
 ## Framework Boundary (L1-L4)
@@ -38,7 +40,7 @@ tests/                 # Tests
 | Layer | Mutability | Key Paths |
 |-------|-----------|-----------|
 | L1 Core | NEVER | `.sinapse-ai/core/`, `bin/sinapse*.js` |
-| L2 Templates | NEVER | `.sinapse-ai/development/{tasks,templates,checklists,workflows}/` |
+| L2 Templates | NEVER | `.sinapse-ai/development/{tasks,templates,checklists,workflows,external-executors}/` |
 | L3 Config | Mutable | `.sinapse-ai/data/`, `core-config.yaml` |
 | L4 Runtime | ALWAYS | `docs/stories/`, `packages/`, `squads/`, `tests/` |
 
@@ -88,17 +90,9 @@ Use Grep (not grep), Read (not cat), Edit (not sed), Glob (not find). Prefer nat
 - Agent memory in `.sinapse-ai/development/agents/{id}/MEMORY.md`
 - **Memory as hints:** Memory entries are hints, NOT ground truth. Always verify against actual codebase before acting on remembered facts.
 
-## Token Economy & Response Format (NON-NEGOTIABLE)
+## Token Economy & Delegation (NON-NEGOTIABLE)
 
-Auto-applied to all agents: `~/.claude/rules/token-economy.md` + `~/.claude/rules/response-format.md`. Compact at 60%, model route haiku/sonnet/opus, no preamble, no trailing summary.
-
-## Delegation & Anti-Hallucination
-
-- Persona switch for sequential work, sub-agent only for parallel (20K+ tokens each)
-- Model routing: `haiku` routine, `sonnet` standard, `opus` complex
-- Sub-agents announce their model for visual verification via statusline
-- `npm view {pkg}` before adding deps. Cite file:line for claims.
-- Mark uncertain claims with [NEEDS VERIFICATION]. Compact at 60%.
+Rules: `~/.claude/rules/token-economy.md` + `response-format.md`. Compact at 60%, no preamble/trailing summary. Model routing: `haiku` routine, `sonnet` standard, `opus` complex; sub-agents announce model via statusline (sub-agent only for parallel, 20K+ each). Persona switch for sequential work. `npm view {pkg}` before deps; cite file:line; mark uncertain with [NEEDS VERIFICATION].
 
 ---
 *SINAPSE v6.0 — CLI First | Observability Second | UI Third*

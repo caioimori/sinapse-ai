@@ -306,6 +306,26 @@ ideSync:
       enabled: true
       path: .codex/agents
       format: full-markdown-yaml
+    gemini:
+      enabled: true
+      path: .gemini/rules/SINAPSE/agents
+      format: full-markdown-yaml
+    github-copilot:
+      enabled: true
+      path: .github/agents
+      format: github-copilot
+    cursor:
+      enabled: true
+      path: .cursor/rules/agents
+      format: condensed-rules
+    antigravity:
+      enabled: true
+      path: .antigravity/rules/agents
+      format: cursor-style
+    kimi:
+      enabled: true
+      path: .kimi/skills
+      format: kimi-skill
   redirects: {}
   validation:
     strictMode: true
@@ -328,6 +348,28 @@ autoClaude:
     enabled: false
   qa:
     enabled: false
+# IDS Gate Evaluation — phase->gates mapping (IDS Gate Wiring frente)
+# Consumed by .sinapse-ai/core/ids/gate-evaluator.js to wire the inert
+# verification gates (G1-G5) into the live SDC workflow.
+# G1-G4 are advisory (warnings/opportunities only). G5 is blocking — when its
+# result reports a BLOCKER violation, the development phase fails fast with a
+# correction prompt. failOpen guarantees a degraded evaluator never halts dev.
+ids:
+  gateEvaluation:
+    enabled: true
+    failOpen: true # if the evaluator degrades, log and proceed
+    timeoutMs: 2000
+    registryPath: .sinapse-ai/data/entity-registry.yaml
+    phaseGates:
+      epic_creation: # trigger: *create-epic
+        - G1
+      story_creation: # trigger: *draft
+        - G2
+      story_validation: # trigger: *validate-story-draft
+        - G3
+      2_development: # trigger: start of Phase 2 (executeDevelopmentPhase)
+        - G4
+        - G5 # G5 is blocking — keep it last
 # Boundary Mapping — Framework-Project Separation (Epic BM)
 # Controls deterministic protection of framework core files via Claude Code deny rules.
 # When frameworkProtection is true (default), .claude/settings.json includes deny rules

@@ -560,8 +560,12 @@ async function copyClaudeHooksFolder(projectRoot) {
     'enforce-architecture-first.cjs',
     'enforce-delegation.cjs',
     'enforce-story-gate.cjs',
+    'enforce-framework-boundary.cjs',
     'secret-scanning.cjs',
     'write-path-validation.cjs',
+    // Frente 4.3 — DORA + OTel telemetry hooks (STREAM A)
+    'telemetry-post-tool.cjs',
+    'telemetry-stop.cjs',
     'README.md',
   ];
 
@@ -620,6 +624,13 @@ const HOOK_EVENT_MAP = {
     matcher: 'Write|Edit',
     timeout: 5,
   },
+  // Boundary L1-L4 — protects untouchable framework core when
+  // boundary.frameworkProtection=true (read dynamically from core-config.yaml).
+  'enforce-framework-boundary.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
   'write-path-validation.cjs': {
     event: 'PreToolUse',
     matcher: 'Write|Edit',
@@ -633,6 +644,18 @@ const HOOK_EVENT_MAP = {
   'secret-scanning.cjs': {
     event: 'PreToolUse',
     matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  // Frente 4.3 — DORA + OTel observability hooks (STREAM A)
+  // FAIL-OPEN: these hooks swallow all errors and always exit 0.
+  'telemetry-post-tool.cjs': {
+    event: 'PostToolUse',
+    matcher: null,
+    timeout: 3,
+  },
+  'telemetry-stop.cjs': {
+    event: 'Stop',
+    matcher: null,
     timeout: 5,
   },
 };
