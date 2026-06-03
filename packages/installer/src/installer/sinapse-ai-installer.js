@@ -335,6 +335,22 @@ async function installSinapseCore(options = {}) {
       }
     }
 
+    // Stream B (Frente 4.2): propagate the SINAPSE secret-scan guard into the
+    // target project via git core.hooksPath + a managed Node pre-commit hook.
+    // Best-effort: a hooks-wiring failure must not abort a successful install.
+    spinner.text = 'Installing git secret-scan guard...';
+    result.gitHooksInstalled = false;
+    try {
+      const { installGitHooks } = require('./git-hooks-installer');
+      const hooksResult = await installGitHooks({ projectDir: targetDir });
+      result.gitHooksInstalled = hooksResult.success;
+      if (!hooksResult.success && hooksResult.error) {
+        result.errors.push(`Git hooks warning: ${hooksResult.error}`);
+      }
+    } catch (hooksError) {
+      result.errors.push(`Git hooks warning: ${hooksError.message}`);
+    }
+
     result.success = true;
     spinner.succeed(`SINAPSE core installed (${result.installedFiles.length} files)`);
 

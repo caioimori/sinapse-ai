@@ -224,6 +224,12 @@ class GreenfieldHandler extends EventEmitter {
   async handle(context = {}) {
     this._log('Greenfield handler invoked');
 
+    // Stream B (Frente 4.2): ensure the secret-scan git guard is wired into the
+    // target project. Runs on EVERY entry (Phase 0 bootstrap AND the
+    // skip-bootstrap / resume paths) so a project that already has package.json
+    // + .git still gets the guard. Best-effort, idempotent, never throws.
+    await this._ensureGitHooks();
+
     // Check for resume (AC14)
     const resumePhase = context.resumeFromPhase;
     if (typeof resumePhase === 'number' && resumePhase >= 0) {
@@ -270,6 +276,51 @@ class GreenfieldHandler extends EventEmitter {
           action: 'greenfield_error',
           error: `Invalid phase number: ${phaseNumber}`,
         };
+    }
+  }
+
+  /**
+   * Ensures the SINAPSE secret-scan git guard is installed in the project.
+   *
+   * Stream B (Frente 4.2): wires `core.hooksPath` to a managed Node pre-commit
+   * hook so every greenfield project the framework bootstraps blocks staged
+   * secrets. Best-effort and idempotent — re-running never duplicates hooks and
+   * a failure here never aborts the workflow.
+   *
+   * @returns {Promise<boolean>} true if the guard is wired
+   * @private
+   */
+  async _ensureGitHooks() {
+    // Resolve the installer across both layouts: the sinapse-ai dev repo
+    // (`<root>/packages/installer/...`) and an installed project copy (where
+    // the framework lives under `.sinapse-ai/`). First match wins.
+    const candidates = [
+      path.join(this.projectRoot, 'packages', 'installer', 'src', 'installer', 'git-hooks-installer'),
+      path.join(this.projectRoot, '.sinapse-ai', 'packages', 'installer', 'src', 'installer', 'git-hooks-installer'),
+    ];
+
+    let installGitHooks = null;
+    for (const candidate of candidates) {
+      try {
+        ({ installGitHooks } = require(candidate));
+        if (typeof installGitHooks === 'function') break;
+      } catch {
+        // Try the next candidate.
+      }
+    }
+
+    if (typeof installGitHooks !== 'function') {
+      this._log('Git secret-scan guard not installed: git-hooks-installer not found', 'warn');
+      return false;
+    }
+
+    try {
+      const res = await installGitHooks({ projectDir: this.projectRoot });
+      this._log(`Git secret-scan guard: ${res.success ? 'installed' : 'skipped'}${res.error ? ` (${res.error})` : ''}`);
+      return res.success;
+    } catch (error) {
+      this._log(`Git secret-scan guard not installed: ${error.message}`, 'warn');
+      return false;
     }
   }
 

@@ -10,7 +10,12 @@
  *   exit 0  → allow
  *   exit 2  → block (message shown to model via stderr)
  *
- * Fail-open: if parsing fails, allow.
+ * fail-CLOSED: if the scanner cannot load or stdin cannot be parsed, BLOCK
+ * (exit 2) rather than silently allowing an unscanned write.
+ *
+ * Detection logic is shared with the git pre-commit scanner via
+ * bin/utils/secret-scanner-core.js (20+ named patterns + Shannon-entropy
+ * backstop + placeholder allowlist + lockfile-hash allowlist + redaction).
  *
  * @module secret-scanning
  */
@@ -19,38 +24,23 @@ const fs = require('fs');
 const path = require('path');
 
 // ---------------------------------------------------------------------------
-// Secret Patterns — ordered by severity
+// Shared detection core (single source of truth for patterns + entropy)
 // ---------------------------------------------------------------------------
 
-const SECRET_PATTERNS = [
-  // API Keys & Tokens
-  { name: 'AWS Access Key', pattern: /AKIA[0-9A-Z]{16}/ },
-  { name: 'AWS Secret Key', pattern: /(?:aws_secret_access_key|secret_key)\s*[=:]\s*['"]?[A-Za-z0-9/+=]{40}['"]?/i },
-  { name: 'GitHub Token', pattern: /gh[ps]_[A-Za-z0-9_]{36,}/ },
-  { name: 'GitHub OAuth', pattern: /gho_[A-Za-z0-9_]{36,}/ },
-  { name: 'Slack Token', pattern: /xox[bpors]-[0-9]{10,}-[A-Za-z0-9-]+/ },
-  { name: 'Stripe Key', pattern: /[sr]k_(live|test)_[A-Za-z0-9]{20,}/ },
-  { name: 'OpenAI Key', pattern: /sk-[A-Za-z0-9]{20,}/ },
-  { name: 'Anthropic Key', pattern: /sk-ant-[A-Za-z0-9-]{20,}/ },
-  { name: 'Supabase Key', pattern: /eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[A-Za-z0-9_-]{50,}/ },
-  { name: 'Google API Key', pattern: /AIza[0-9A-Za-z_-]{35}/ },
-  { name: 'Vercel Token', pattern: /vercel_[A-Za-z0-9]{20,}/ },
+let core;
+try {
+  // Hook lives at <root>/.claude/hooks/; core lives at <root>/bin/utils/.
+  core = require(path.join(__dirname, '..', '..', 'bin', 'utils', 'secret-scanner-core.js'));
+} catch (err) {
+  // fail-CLOSED: cannot scan → do not allow the write.
+  process.stderr.write(
+    '\nSECRET SCANNING BLOCK: scanner failed to load (fail-closed).\n' +
+    String(err && err.message ? err.message : err) + '\n',
+  );
+  process.exit(2);
+}
 
-  // Private Keys
-  { name: 'RSA Private Key', pattern: /-----BEGIN RSA PRIVATE KEY-----/ },
-  { name: 'SSH Private Key', pattern: /-----BEGIN OPENSSH PRIVATE KEY-----/ },
-  { name: 'PGP Private Key', pattern: /-----BEGIN PGP PRIVATE KEY BLOCK-----/ },
-  { name: 'EC Private Key', pattern: /-----BEGIN EC PRIVATE KEY-----/ },
-
-  // Connection Strings
-  { name: 'DB Connection String', pattern: /(?:postgres|mysql|mongodb|redis):\/\/[^:]+:[^@]+@[^/\s]+/i },
-  { name: 'Supabase DB URL', pattern: /postgresql:\/\/postgres\.[A-Za-z0-9]+:[^@]+@/i },
-
-  // Generic Patterns (broader, lower confidence)
-  { name: 'Hardcoded Password', pattern: /(?:password|passwd|pwd)\s*[=:]\s*['"][^'"]{8,}['"]/i },
-  { name: 'Bearer Token', pattern: /[Bb]earer\s+[A-Za-z0-9_\-.]{20,}/ },
-  { name: 'Basic Auth', pattern: /[Bb]asic\s+[A-Za-z0-9+/=]{20,}/ },
-];
+const { scanContent } = core;
 
 /** Files that are expected to contain secret-like patterns */
 const EXEMPT_PATHS = [
@@ -94,14 +84,9 @@ function isScannable(rel) {
   return SCANNABLE_EXTENSIONS.some((ext) => rel.endsWith(ext));
 }
 
-function scanForSecrets(content) {
-  const findings = [];
-  for (const { name, pattern } of SECRET_PATTERNS) {
-    if (pattern.test(content)) {
-      findings.push(name);
-    }
-  }
-  return findings;
+function scanForSecrets(content, filePath) {
+  // Delegates to the shared, hardened core. Returns redacted findings.
+  return scanContent(content, { filePath: filePath || '' });
 }
 
 // ---------------------------------------------------------------------------
@@ -113,7 +98,9 @@ function main() {
   try {
     input = JSON.parse(fs.readFileSync(0, 'utf8'));
   } catch {
-    process.exit(0); // fail-open
+    // fail-CLOSED: unparseable hook input → block rather than allow blindly.
+    process.stderr.write('\nSECRET SCANNING BLOCK: could not parse hook input (fail-closed).\n');
+    process.exit(2);
   }
 
   const toolName = input.tool_name || '';
@@ -135,14 +122,18 @@ function main() {
   const content = toolInput.content || toolInput.new_string || '';
   if (!content) process.exit(0);
 
-  const findings = scanForSecrets(content);
+  const findings = scanForSecrets(content, rel);
   if (findings.length === 0) process.exit(0);
 
-  // BLOCK
+  // BLOCK — secrets are reported REDACTED (the core never returns raw values).
+  const lines = findings.map((f) => {
+    const ent = f.entropy ? ` (entropy ${f.entropy})` : '';
+    return `  - ${f.name}: ${f.redacted}${ent}`;
+  });
   process.stderr.write(
     `\nSECRET SCANNING BLOCK: Potential secrets detected!\n` +
     `File: ${rel}\n` +
-    `Found: ${findings.join(', ')}\n` +
+    `Found:\n${lines.join('\n')}\n` +
     `\n` +
     `DO NOT commit secrets to code. Instead:\n` +
     `  - Use environment variables (.env) for local dev\n` +
