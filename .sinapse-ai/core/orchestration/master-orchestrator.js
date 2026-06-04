@@ -457,7 +457,14 @@ class MasterOrchestrator extends EventEmitter {
           // Execute epic
           const result = await this.executeEpic(epicNum);
 
-          if (result.success) {
+          if (result.stub || result.status === 'stub') {
+            // Honesty invariant (epic: orchestration-consolidation, F0a):
+            // a stub is neither success nor failure. The pipeline continues, but it
+            // is recorded as stubbed so finalize() never reports it as a real success.
+            pipelineResult.epicsExecuted.push(epicNum);
+            (pipelineResult.epicsStubbed = pipelineResult.epicsStubbed || []).push(epicNum);
+            pipelineResult.hasStubs = true;
+          } else if (result.success) {
             pipelineResult.epicsExecuted.push(epicNum);
           } else {
             pipelineResult.epicsFailed.push(epicNum);
@@ -632,7 +639,16 @@ class MasterOrchestrator extends EventEmitter {
         }
       }
 
-      return { success: true, epicNum, result, gateResult };
+      // Propagate stub status so the pipeline (and finalize) never count a stubbed
+      // epic as a real success. Honesty invariant (F0a).
+      return {
+        success: true,
+        status: isStubResult ? 'stub' : 'success',
+        stub: isStubResult,
+        epicNum,
+        result,
+        gateResult,
+      };
     } catch (error) {
       // Mark as failed
       this.executionState.epics[epicNum] = {
@@ -1398,11 +1414,22 @@ class MasterOrchestrator extends EventEmitter {
     const minutes = Math.floor(duration / 60000);
     const seconds = Math.floor((duration % 60000) / 1000);
 
+    const hasStubs = pipelineResult.hasStubs || (pipelineResult.epicsStubbed || []).length > 0;
     return {
       workflowId: this.executionState.workflowId,
       storyId: this.storyId,
       status: this._state,
-      success: pipelineResult.success ?? this._state === OrchestratorState.COMPLETE,
+      // Honesty invariant (epic: orchestration-consolidation, F0a): a pipeline that ran
+      // any epic in STUB mode did NOT really build anything — it must not report success:true.
+      success: (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) && !hasStubs,
+      mode: hasStubs ? 'stub' : 'real',
+      stubbedEpics: pipelineResult.epicsStubbed || [],
+      ...(hasStubs
+        ? {
+            warning:
+              'Pipeline ran one or more epics in STUB mode — no real work was performed for those. This is not a successful build (see epic: orchestration-consolidation).',
+          }
+        : {}),
       duration: `${minutes}m ${seconds}s`,
       durationMs: duration,
       techStack: TechStackDetector.getSummary(this.executionState.techStackProfile || {}),

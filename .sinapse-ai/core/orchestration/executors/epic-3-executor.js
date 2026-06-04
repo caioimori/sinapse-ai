@@ -77,6 +77,7 @@ class Epic3Executor extends EpicExecutor {
       // Execute spec pipeline phases
       const phaseResults = {};
       let specPath = null;
+      let specWasStubbed = false;
 
       for (const phase of SPEC_PHASES) {
         this._log(`Running phase: ${phase}`);
@@ -116,6 +117,7 @@ class Epic3Executor extends EpicExecutor {
         // Create stub spec for pipeline to continue
         await this._createStubSpec(specPath, storyId, context);
         this._log('Created stub spec (real spec generation requires agent invocation)');
+        specWasStubbed = true;
       }
 
       this._addArtifact('spec', specPath);
@@ -124,12 +126,20 @@ class Epic3Executor extends EpicExecutor {
       const complexity = phaseResults['assess-complexity']?.complexity || 'STANDARD';
       const requirements = phaseResults['gather-requirements']?.requirements || [];
 
-      return this._completeExecution({
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // if the spec was auto-stubbed (no real agent ran), report STUB, not success.
+      const specResult = {
         specPath,
         complexity,
         requirements,
         phases: Object.keys(phaseResults),
-      });
+      };
+      return specWasStubbed
+        ? this._stubExecution(
+            'Spec auto-stubbed — real spec generation requires agent invocation',
+            specResult,
+          )
+        : this._completeExecution(specResult);
     } catch (error) {
       return this._failExecution(error);
     }

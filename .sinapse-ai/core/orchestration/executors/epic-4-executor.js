@@ -123,14 +123,20 @@ class Epic4Executor extends EpicExecutor {
 
       this._addArtifact('progress', JSON.stringify(progress));
 
-      return this._completeExecution({
-        implementationPath: planPath,
-        planPath,
-        progress,
-        subtaskResults,
-        codeChanges,
-        testResults,
-      });
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // Epic 4 subtasks/tests are stubbed (see _executeSubtasks/_runTests) — no real
+      // agent invocation happens yet. Report as STUB, never success. Wired for real in F1.
+      return this._stubExecution(
+        'Epic 4 (Execution) not yet wired to real agent invocation — subtasks and tests are stubbed',
+        {
+          implementationPath: planPath,
+          planPath,
+          progress,
+          subtaskResults,
+          codeChanges,
+          testResults,
+        },
+      );
     } catch (error) {
       return this._failExecution(error);
     }

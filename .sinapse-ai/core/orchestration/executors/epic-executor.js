@@ -22,6 +22,7 @@ const ExecutionStatus = {
   SUCCESS: 'success',
   FAILED: 'failed',
   SKIPPED: 'skipped',
+  STUB: 'stub',
 };
 
 /**
@@ -143,6 +144,31 @@ class EpicExecutor {
       ...this.getResult(),
       skipped: true,
       skipReason: reason,
+    };
+  }
+
+  /**
+   * Complete execution in STUB mode — work was NOT actually performed.
+   *
+   * Honesty invariant (epic: orchestration-consolidation, Frente F0a):
+   * a stub MUST NOT report success:true. getResult() yields success:false
+   * because this.status !== SUCCESS.
+   *
+   * @param {string} reason - What real work is missing
+   * @param {Object} [result] - Optional result data to merge
+   * @protected
+   */
+  _stubExecution(reason, result = {}) {
+    this.status = ExecutionStatus.STUB;
+    this.endTime = new Date().toISOString();
+    this._log(`Epic ${this.epicNum} ran in STUB mode (no real work performed): ${reason}`, 'warn');
+
+    return {
+      ...this.getResult(),
+      status: ExecutionStatus.STUB,
+      stub: true,
+      stubReason: reason,
+      ...result,
     };
   }
 

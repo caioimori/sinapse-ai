@@ -128,13 +128,18 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(3);
     });
 
-    it('should execute and return spec path', async () => {
+    it('should run in STUB mode and report it honestly (no real agent wired yet)', async () => {
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // with no spec present and no real agent, Epic 3 auto-stubs the spec and MUST
+      // report status:'stub' / success:false — never a fabricated success.
       const result = await executor.execute({
         storyId: 'TEST-001',
         source: 'story',
       });
 
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
+      expect(result.status).toBe('stub');
+      expect(result.stub).toBe(true);
       expect(result.specPath).toBeDefined();
       expect(result.complexity).toBeDefined();
     });
@@ -173,14 +178,19 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(4);
     });
 
-    it('should execute and return progress', async () => {
+    it('should run in STUB mode and report it honestly (subtasks/tests not wired yet)', async () => {
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // Epic 4 does not yet invoke real agents — it MUST report status:'stub',
+      // never success:true. Wired for real in Frente F1.
       const result = await executor.execute({
         storyId: 'TEST-001',
         specPath: '/path/to/spec.md',
         complexity: 'STANDARD',
       });
 
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
+      expect(result.status).toBe('stub');
+      expect(result.stub).toBe(true);
       expect(result.progress).toBeDefined();
       expect(result.planPath).toBeDefined();
     });
