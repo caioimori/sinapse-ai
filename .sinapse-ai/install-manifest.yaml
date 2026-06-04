@@ -948,13 +948,13 @@ files:
     type: core
     size: 11379
   - path: core/orchestration/executors/epic-3-executor.js
-    hash: sha256:02d9abba65c21962f0edd5885dd6d12c828da02c06ce3f90ccefdf6cb94a79f6
+    hash: sha256:31c3762233b7a9182f774794b75160c05588737ed0f4a15f21c90c4123475a07
     type: core
-    size: 6154
+    size: 6586
   - path: core/orchestration/executors/epic-4-executor.js
-    hash: sha256:0a22a70572515c59d1fa702177adbda6a07e0e319794aec00a47c04cad4cd2ff
+    hash: sha256:abb399ee0c86a4d23423df6aed6f69d5ca573c270854e6ce38846ec6c5e1c479
     type: core
-    size: 6856
+    size: 7236
   - path: core/orchestration/executors/epic-5-executor.js
     hash: sha256:865224cd6cb1f80c1228e149349aea5c335440201c9047f849d2ec85b73d3f03
     type: core
@@ -964,9 +964,9 @@ files:
     type: core
     size: 6790
   - path: core/orchestration/executors/epic-executor.js
-    hash: sha256:36b5735f5717505d7709bf62024d3d23de1078f0ec22a6a0e0367c1bc383a1ab
+    hash: sha256:d6129152fff80773cf0180c42f69edf1e9db889b338580b7e5b7dcd17eac674b
     type: core
-    size: 5867
+    size: 6673
   - path: core/orchestration/executors/index.js
     hash: sha256:eb474ba4a9017681d218d40920d7aed08591e5db2eda335eccc538e6a116b114
     type: core
@@ -992,9 +992,9 @@ files:
     type: core
     size: 8667
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:214aebc004e38a9d7fe158d287750fd02c28d905d53d1c2ec700a6963c5c2d76
+    hash: sha256:6deebaf825b783e39f186ae5851aa151c15deb96f0c170eed8118b4c096e7119
     type: core
-    size: 55845
+    size: 57257
   - path: core/orchestration/message-formatter.js
     hash: sha256:4683565c3da6d33fa5aeb4629dfa525f90715cb3b3cbbaa4c8a8d952766839d7
     type: core
@@ -1336,9 +1336,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:c7a4cb009d455b6c599a100aa44d432ba89568f85cddca2de39628b2be009787
+    hash: sha256:1ca6266cd5808c185c1e9cb01c9535b032c5b14b0fa606bed40786f69e757db7
     type: data
-    size: 537251
+    size: 537271
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
