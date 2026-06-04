@@ -892,9 +892,9 @@ files:
     type: core
     size: 1836
   - path: core/orchestration/agent-invoker.js
-    hash: sha256:f2138230433442b26b5779fc942616faed473853e51e86950506ae4946f28ea2
+    hash: sha256:dbbc63f4e5ce76da39f22349f1dc4171b0a12fccf6850a3ff02c29497c5945c7
     type: core
-    size: 16592
+    size: 16965
   - path: core/orchestration/bob-orchestrator.js
     hash: sha256:54ad95bdc7d088aab5e03a0fb0d2d3ea6b261f09cbecd66c13128421fdb90629
     type: core
@@ -992,9 +992,9 @@ files:
     type: core
     size: 8667
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:6deebaf825b783e39f186ae5851aa151c15deb96f0c170eed8118b4c096e7119
+    hash: sha256:7729759120dbcd5323b492154534ff07fb10d784eb1b1c7602e3094cc892fa29
     type: core
-    size: 57257
+    size: 59462
   - path: core/orchestration/message-formatter.js
     hash: sha256:4683565c3da6d33fa5aeb4629dfa525f90715cb3b3cbbaa4c8a8d952766839d7
     type: core
@@ -1336,9 +1336,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:1ca6266cd5808c185c1e9cb01c9535b032c5b14b0fa606bed40786f69e757db7
+    hash: sha256:bf2ee65cc2400ca159cc38442176f3bf8f22f9e20aaf2b7322898c8da4daabd9
     type: data
-    size: 537271
+    size: 537325
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
