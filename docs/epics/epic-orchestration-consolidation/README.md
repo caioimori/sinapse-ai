@@ -86,10 +86,11 @@ Este checkpoint é a diferença entre apostar e apostar com disciplina.
 
 | Story | Frente | Status |
 |---|---|---|
-| [F1.1 — Executor único e real](stories/STORY-F1.1-executor-unico-real.md) | F1 | Draft (detalhada) |
-| F0.1 — Pré-flight: proteções + honestidade transitória | F0 | A detalhar |
-| F2.1 — Resolver agentes de squad no dispatcher | F2 | A detalhar |
-| F3.1 — Poda das linhagens mortas | F3 | A detalhar |
-| F4.1 — Planning via Claude | F4 | A detalhar |
+| F0a — Honestidade transitória (stubs param de mentir verde) | F0 | ✅ **Concluída** — categoria `stub` na base; epic-3/4 + master-orchestrator honestos; 3 testes viraram trava. 732 testes verdes |
+| [F1.1 — Executor único e real](stories/STORY-F1.1-executor-unico-real.md) | F1 | 🔧 **Fundação cabeada** — `SubagentDispatcher` real é o executor default do motor; `AgentInvoker` não simula mais. Falta: conectar os epic-executors a este executor + AC3 (`useSubagentDispatch`) |
+| F2.1 — Resolver os 177 agentes de squad no dispatcher | F2 | A detalhar |
+| F3.1 — Poda das linhagens mortas (terminal-spawner/pm.sh) | F3 | A detalhar |
+| F4.1 — Planning via Claude (não grep de checkbox) | F4 | A detalhar |
 | F5.1 — Gates com input real | F5 | A detalhar |
+| F0.1 — Pré-flight: religar `frameworkProtection` (POR ÚLTIMO — só com core estável) | F0 | A detalhar |
 | F7.1 — Suite E2E anti-teatro | F7 | A detalhar |
