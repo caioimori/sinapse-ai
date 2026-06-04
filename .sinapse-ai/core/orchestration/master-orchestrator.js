@@ -39,6 +39,11 @@ const { GateEvaluator, GateVerdict } = require('./gate-evaluator');
 // Agent Invoker (Story 0.7)
 const { AgentInvoker, SUPPORTED_AGENTS: _SUPPORTED_AGENTS } = require('./agent-invoker');
 
+// Subagent Dispatcher (epic: orchestration-consolidation, F1) — the real executor
+// that actually spawns agents (claude via runSafe). The orchestrator coordinates;
+// the dispatcher invokes. This replaces the fabricated 'simulated' default.
+const SubagentDispatcher = require('../execution/subagent-dispatcher');
+
 // Dashboard Integration (Story 0.8)
 const { DashboardIntegration, NotificationType: _NotificationType } = require('./dashboard-integration');
 
@@ -165,7 +170,11 @@ class MasterOrchestrator extends EventEmitter {
     this.onEpicStart = options.onEpicStart || this._defaultEpicStart.bind(this);
     this.onEpicComplete = options.onEpicComplete || this._defaultEpicComplete.bind(this);
     this.onStateChange = options.onStateChange || this._defaultStateChange.bind(this);
-    this.invokeAgent = options.invokeAgent || null;
+    // Real executor by default (epic: orchestration-consolidation, F1): wire the
+    // SubagentDispatcher so the orchestrator actually invokes agents instead of
+    // fabricating 'simulated' results. Callers/tests may inject their own executor
+    // via options.invokeAgent (e.g. a mock) to bypass real CLI dispatch.
+    this.invokeAgent = options.invokeAgent || this._createDispatchExecutor();
 
     // State machine (AC6)
     this._state = OrchestratorState.INITIALIZED;
@@ -897,6 +906,47 @@ class MasterOrchestrator extends EventEmitter {
    */
   getAgentInvoker() {
     return this.agentInvoker;
+  }
+
+  /**
+   * Create the default real executor backed by the SubagentDispatcher.
+   *
+   * epic: orchestration-consolidation, Frente F1 — the "invocation layer": the
+   * orchestrator coordinates, the dispatcher actually spawns the agent (claude via
+   * runSafe, shell-injection-proof). Lazily instantiated on first use so the
+   * constructor stays cheap. If the CLI is unavailable, dispatch() returns
+   * { success:false, error } and we surface a 'failed' status — never a fabricated
+   * success (honesty invariant).
+   *
+   * @returns {Function} executor(agent, task, context) => Promise<Object>
+   * @private
+   */
+  _createDispatchExecutor() {
+    let dispatcher = null;
+    return async (agent, task, context = {}) => {
+      if (!dispatcher) {
+        dispatcher = new SubagentDispatcher({ rootPath: this.projectRoot });
+      }
+      const agentName = (agent && agent.name) || agent || 'dev';
+      const dispatchResult = await dispatcher.dispatch(
+        {
+          id: (task && (task.id || task.name)) || 'task',
+          agent: agentName,
+          type: task && task.type,
+          description: (task && (task.description || task.name)) || '',
+        },
+        context,
+      );
+      return {
+        status: dispatchResult.success ? 'success' : 'failed',
+        success: dispatchResult.success,
+        output: dispatchResult.output,
+        error: dispatchResult.error,
+        filesModified: dispatchResult.filesModified || [],
+        agentName,
+        timestamp: new Date().toISOString(),
+      };
+    };
   }
 
   /**

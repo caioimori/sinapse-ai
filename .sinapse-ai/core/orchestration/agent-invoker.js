@@ -401,11 +401,16 @@ class AgentInvoker extends EventEmitter {
       );
     }
 
-    // Default: return simulated result
-    // In production, this would interface with Claude/LLM
+    // Honesty invariant (epic: orchestration-consolidation, F1):
+    // No executor wired → do NOT fabricate a 'simulated' success. Report a stub so
+    // callers never mistake "nothing ran" for real work. The MasterOrchestrator
+    // supplies a real SubagentDispatcher executor by default (_createDispatchExecutor).
     return {
-      status: 'simulated',
-      message: `Task ${task.name} executed by @${agent.name}`,
+      status: 'stub',
+      stub: true,
+      stubReason:
+        'No executor wired into AgentInvoker — real dispatch is supplied by MasterOrchestrator.',
+      message: `Task ${task.name} not executed (no executor) for @${agent.name}`,
       context: {
         agentName: agent.name,
         taskName: task.name,
