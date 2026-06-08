@@ -165,6 +165,30 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(result.success).toBe(true);
       expect(result.reused).toBe(true);
     });
+
+    it('should generate a REAL spec when a real executor is wired (F1)', async () => {
+      // Inject a real executor (mock) — proves Epic 3 invokes the agent, not stubbing.
+      const orchWithExecutor = {
+        ...mockOrchestrator,
+        invokeAgent: jest.fn(async () => ({
+          status: 'success',
+          success: true,
+          output: '# Specification: TEST-001\n\nReal agent-generated spec.\n',
+          filesModified: [],
+        })),
+      };
+      const exec = new Epic3Executor(orchWithExecutor);
+
+      const result = await exec.execute({ storyId: 'TEST-001', source: 'story' });
+
+      expect(orchWithExecutor.invokeAgent).toHaveBeenCalled();
+      // Real work happened → NOT a stub.
+      expect(result.success).toBe(true);
+      expect(result.stub).toBeFalsy();
+      // The written spec is the agent output, not the template stub.
+      const written = await fs.readFile(result.specPath, 'utf8');
+      expect(written).toContain('Real agent-generated spec');
+    });
   });
 
   describe('Epic4Executor - Execution Engine (AC3)', () => {

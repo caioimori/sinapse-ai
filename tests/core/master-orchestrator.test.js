@@ -44,6 +44,14 @@ describe('MasterOrchestrator', () => {
       storyId: 'TEST-001',
       maxRetries: 2,
       autoRecovery: false,
+      // F1: inject a mock executor so pipeline tests never spawn the real
+      // dispatcher/claude (the orchestrator now wires a real executor by default).
+      invokeAgent: async (agent) => ({
+        status: 'success',
+        success: true,
+        output: `mock output for @${(agent && agent.name) || agent}`,
+        filesModified: [],
+      }),
     });
   });
 

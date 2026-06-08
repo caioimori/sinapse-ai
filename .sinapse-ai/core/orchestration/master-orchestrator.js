@@ -924,6 +924,23 @@ class MasterOrchestrator extends EventEmitter {
   _createDispatchExecutor() {
     let dispatcher = null;
     return async (agent, task, context = {}) => {
+      // Safety guard: NEVER spawn the real claude CLI inside the test runner unless
+      // explicitly allowed (set SINAPSE_REAL_DISPATCH=1). Spawning claude in unit
+      // tests is slow, non-deterministic and burns real tokens. Tests that exercise
+      // the wiring inject their own options.invokeAgent; everything else falls back
+      // honestly (a 'failed' result → caller stubs).
+      if (
+        process.env.JEST_WORKER_ID !== undefined &&
+        process.env.SINAPSE_REAL_DISPATCH !== '1'
+      ) {
+        return {
+          status: 'failed',
+          success: false,
+          error:
+            'Real dispatch disabled in test environment (set SINAPSE_REAL_DISPATCH=1 to enable).',
+          filesModified: [],
+        };
+      }
       if (!dispatcher) {
         dispatcher = new SubagentDispatcher({ rootPath: this.projectRoot });
       }

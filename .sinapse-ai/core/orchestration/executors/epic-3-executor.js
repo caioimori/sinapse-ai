@@ -114,10 +114,18 @@ class Epic3Executor extends EpicExecutor {
 
       // Check if spec file exists
       if (!(await fs.pathExists(specPath))) {
-        // Create stub spec for pipeline to continue
-        await this._createStubSpec(specPath, storyId, context);
-        this._log('Created stub spec (real spec generation requires agent invocation)');
-        specWasStubbed = true;
+        // F1: try to generate a REAL spec via a real agent through the orchestrator.
+        const generated = await this._generateSpecViaAgent(storyId, source, techStack, context);
+        if (generated) {
+          await fs.ensureDir(path.dirname(specPath));
+          await fs.writeFile(specPath, generated);
+          this._log('Generated spec via real agent invocation');
+        } else {
+          // No executor wired (or agent produced nothing) → honest stub.
+          await this._createStubSpec(specPath, storyId, context);
+          this._log('Created stub spec (no real agent available)');
+          specWasStubbed = true;
+        }
       }
 
       this._addArtifact('spec', specPath);
@@ -189,6 +197,46 @@ class Epic3Executor extends EpicExecutor {
       complexity: phase === 'assess-complexity' ? 'STANDARD' : undefined,
       requirements: phase === 'gather-requirements' ? [] : undefined,
     };
+  }
+
+  /**
+   * Generate the spec by invoking a real agent through the orchestrator.
+   *
+   * epic: orchestration-consolidation, F1 — connects Epic 3 to the real executor
+   * (orchestrator.invokeAgent → SubagentDispatcher → claude). Returns the generated
+   * spec markdown, or null when no executor is wired or the agent produced nothing
+   * (the caller then falls back to an honest stub).
+   *
+   * @returns {Promise<string|null>} Generated spec markdown, or null
+   * @private
+   */
+  async _generateSpecViaAgent(storyId, source, techStack, context = {}) {
+    const invokeAgent = this.orchestrator && this.orchestrator.invokeAgent;
+    if (typeof invokeAgent !== 'function') {
+      return null; // No real executor wired → caller falls back to stub
+    }
+
+    const description =
+      `Generate a complete, implementation-ready specification (spec.md) for story "${storyId}". ` +
+      `Source: ${source || 'story'}. ` +
+      (techStack ? `Tech stack: ${JSON.stringify(techStack)}. ` : '') +
+      'Output ONLY the spec markdown: overview, scope (in/out), acceptance criteria, ' +
+      'dependencies and complexity estimate. No commentary outside the spec.';
+
+    try {
+      const result = await invokeAgent(
+        { name: 'analyst' },
+        { id: `spec-${storyId}`, type: 'analysis', description },
+        { ...context, storyId, source, techStack },
+      );
+      const content = result && (result.output || result.content);
+      if (result && result.success !== false && content && content.trim().length > 0) {
+        return content;
+      }
+    } catch (err) {
+      this._log(`Spec agent invocation failed: ${err.message}`, 'warn');
+    }
+    return null;
   }
 
   /**
