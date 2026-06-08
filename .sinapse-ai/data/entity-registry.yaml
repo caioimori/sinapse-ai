@@ -5423,14 +5423,14 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:31c3762233b7a9182f774794b75160c05588737ed0f4a15f21c90c4123475a07
+      checksum: sha256:72f930720976751b42af16bd8d3d78dbc3435938914d97671b1087edced652dc
       dependencies:
         - epic-executor
       externalDeps: []
       keywords:
         - epic
         - executor
-      lastVerified: '2026-06-04T17:41:51.103Z'
+      lastVerified: '2026-06-08T21:43:49.044Z'
       layer: L1
       lifecycle: experimental
       path: .sinapse-ai/core/orchestration/executors/epic-3-executor.js
@@ -6855,7 +6855,7 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:7729759120dbcd5323b492154534ff07fb10d784eb1b1c7602e3094cc892fa29
+      checksum: sha256:71b5d1c46fa30474f428ab630c94c8d17aafffd1a35c5dd6992cfb7df064a818
       dependencies:
         - tech-stack-detector
         - executors
@@ -6868,7 +6868,7 @@ entities:
       keywords:
         - master
         - orchestrator
-      lastVerified: '2026-06-04T22:42:49.544Z'
+      lastVerified: '2026-06-08T21:43:49.052Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/master-orchestrator.js
@@ -18097,6 +18097,6 @@ entities:
 metadata:
   checksumAlgorithm: sha256
   entityCount: 775
-  lastUpdated: '2026-06-04T22:42:49.548Z'
+  lastUpdated: '2026-06-08T21:43:49.055Z'
   resolutionRate: 100
   version: 1.0.0

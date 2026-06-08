@@ -120,7 +120,7 @@
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
     "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
-    "postinstall": "node bin/postinstall.js",
+    "setup": "node bin/postinstall.js",
     "prepare": "husky"
   },
   "dependencies": {

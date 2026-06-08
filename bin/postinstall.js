@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
 /**
- * SINAPSE Postinstall Orchestrator
- * @story A.1 - Postinstall Script & Runtime Dirs
+ * SINAPSE Setup Orchestrator (formerly the npm `postinstall` lifecycle hook)
+ * @story A.1 - Setup Script & Runtime Dirs
  * @story B.1 - Minimalist Install Output Design
+ * @security 2026-06 - NO LONGER wired as an npm `postinstall` hook. Auto-running
+ *   code on `npm install` is a supply-chain surface: a compromised publish would
+ *   execute on every consumer's machine without any explicit action. Setup is now
+ *   EXPLICIT — it runs only via `npm run setup` or as part of `npx sinapse-ai install`,
+ *   never automatically. The module's behavior is otherwise unchanged.
  *
- * Runs automatically after `npm install` (global or local) unless:
+ * When invoked, it still skips itself when:
  *   - SINAPSE_SKIP_POSTINSTALL=1 is set (explicit opt-out)
  *   - A known CI env var is present (GITHUB_ACTIONS, CI=true, etc.)
  *   - npm was invoked with --ignore-scripts (native npm behavior, nothing to do here)

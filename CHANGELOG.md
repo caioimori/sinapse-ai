@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- **Auto-execucao no install removida (supply-chain).** O hook npm `postinstall` (`node bin/postinstall.js`) foi retirado do `package.json`. Executar codigo automaticamente em `npm install` e uma superficie de supply-chain — um publish comprometido rodaria na maquina de todos os instaladores sem nenhuma acao explicita. O setup agora e EXPLICITO: via `npx sinapse-ai install` (caminho recomendado, ja documentado no README) ou via `npm run setup`. O modulo `bin/postinstall.js` foi mantido sem mudanca de comportamento — apenas deixou de ser auto-executado. CI install-matrix e comentarios ajustados ao novo modelo.
+
 ## [1.7.0] — 2026-06-02 — 🔒 Security & Robustness Hardening
 
 > **Release de seguranca e robustez.** Auditoria de ciberseguranca completa (6 frentes + verificacao adversarial) + fundacao de robustez (execucao segura cross-OS, learning loop, cadeia de erros tipada). Prepara o framework para distribuicao publica.
