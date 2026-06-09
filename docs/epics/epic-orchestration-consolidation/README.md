@@ -87,9 +87,9 @@ Este checkpoint é a diferença entre apostar e apostar com disciplina.
 | Story | Frente | Status |
 |---|---|---|
 | F0a — Honestidade transitória (stubs param de mentir verde) | F0 | ✅ **Concluída** — categoria `stub` na base; epic-3/4 + master-orchestrator honestos; 3 testes viraram trava. 732 testes verdes |
-| [F1.1 — Executor único e real](stories/STORY-F1.1-executor-unico-real.md) | F1 | 🔧 **Fundação cabeada** — `SubagentDispatcher` real é o executor default do motor; `AgentInvoker` não simula mais. Falta: conectar os epic-executors a este executor + AC3 (`useSubagentDispatch`) |
+| [F1.1 — Executor único e real](stories/STORY-F1.1-executor-unico-real.md) | F1 | 🔧 **Em progresso** — executor real (`SubagentDispatcher`) é o default do motor; **epic-3** gera spec via agente real; **epic-4 delega ao `BuildOrchestrator`** (convergência). Falta: epic-6 (QA) + AC3 (`useSubagentDispatch`) + validação e2e real |
 | F2.1 — Resolver os 177 agentes de squad no dispatcher | F2 | A detalhar |
-| F3.1 — Poda das linhagens mortas (terminal-spawner/pm.sh) | F3 | A detalhar |
+| F3.1 — Poda das linhagens mortas (terminal-spawner/pm.sh) | F3 | 🔧 Iniciada — epic-4 já converge no `BuildOrchestrator` (uma engine de execução, não duas). Falta podar terminal-spawner/pm.sh |
 | F4.1 — Planning via Claude (não grep de checkbox) | F4 | A detalhar |
 | F5.1 — Gates com input real | F5 | A detalhar |
 | F0.1 — Pré-flight: religar `frameworkProtection` (POR ÚLTIMO — só com core estável) | F0 | A detalhar |
