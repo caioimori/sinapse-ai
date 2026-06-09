@@ -952,9 +952,9 @@ files:
     type: core
     size: 8685
   - path: core/orchestration/executors/epic-4-executor.js
-    hash: sha256:abb399ee0c86a4d23423df6aed6f69d5ca573c270854e6ce38846ec6c5e1c479
+    hash: sha256:b830a13e8d6c44c462f2bc87623f6134143b43c7eb53dc489a1b1fa48ea04713
     type: core
-    size: 7236
+    size: 9172
   - path: core/orchestration/executors/epic-5-executor.js
     hash: sha256:865224cd6cb1f80c1228e149349aea5c335440201c9047f849d2ec85b73d3f03
     type: core
@@ -964,9 +964,9 @@ files:
     type: core
     size: 6790
   - path: core/orchestration/executors/epic-executor.js
-    hash: sha256:d6129152fff80773cf0180c42f69edf1e9db889b338580b7e5b7dcd17eac674b
+    hash: sha256:0c25d4799a6338252017d9deb2f73bbdbde58cd5f7bfe4ac0fccdc66fe0229d2
     type: core
-    size: 6673
+    size: 7160
   - path: core/orchestration/executors/index.js
     hash: sha256:eb474ba4a9017681d218d40920d7aed08591e5db2eda335eccc538e6a116b114
     type: core
@@ -1336,9 +1336,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:d36ef7f01c09c653362ea27f629556e58c24504dcc9b7139093b07db304f6a4e
+    hash: sha256:35a6276b3797d223d9328b6871cabe539c0bc5cd5814044cfcf4fad2b9e53b48
     type: data
-    size: 537325
+    size: 537380
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data

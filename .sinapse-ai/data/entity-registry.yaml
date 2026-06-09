@@ -4268,6 +4268,7 @@ entities:
       type: module
       usedBy:
         - developer
+        - epic-4-executor
         - build
     build-registry:
       adaptability:
@@ -5443,11 +5444,12 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:abb399ee0c86a4d23423df6aed6f69d5ca573c270854e6ce38846ec6c5e1c479
+      checksum: sha256:b830a13e8d6c44c462f2bc87623f6134143b43c7eb53dc489a1b1fa48ea04713
       dependencies:
         - epic-executor
         - plan-tracker
         - subtask-verifier
+        - build-orchestrator
       externalDeps: []
       keywords:
         - epic
@@ -5455,7 +5457,7 @@ entities:
         - 'generated:'
         - ${new
         - date().toisostring()}
-      lastVerified: '2026-06-04T17:41:51.105Z'
+      lastVerified: '2026-06-09T12:07:18.915Z'
       layer: L1
       lifecycle: experimental
       path: .sinapse-ai/core/orchestration/executors/epic-4-executor.js
@@ -5531,13 +5533,13 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:d6129152fff80773cf0180c42f69edf1e9db889b338580b7e5b7dcd17eac674b
+      checksum: sha256:0c25d4799a6338252017d9deb2f73bbdbde58cd5f7bfe4ac0fccdc66fe0229d2
       dependencies: []
       externalDeps: []
       keywords:
         - epic
         - executor
-      lastVerified: '2026-06-04T17:41:51.106Z'
+      lastVerified: '2026-06-09T12:07:18.917Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/orchestration/executors/epic-executor.js
@@ -18097,6 +18099,6 @@ entities:
 metadata:
   checksumAlgorithm: sha256
   entityCount: 775
-  lastUpdated: '2026-06-08T21:43:49.055Z'
+  lastUpdated: '2026-06-09T12:07:18.920Z'
   resolutionRate: 100
   version: 1.0.0
