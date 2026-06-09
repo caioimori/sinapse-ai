@@ -95,15 +95,15 @@ do Codex já estar configurado (e está, no install).
 | Resumo pré-instalação | ✅ Já implementado | `install.js:157-166` (mostra idioma + IDE + modo antes de agir) |
 | Greenfield / brownfield | 🔴 **NÃO perguntado — proposital** | `project-intelligence.md` **proíbe** perguntar; faz auto-detecção (Initial State Audit, 8 dimensões). É um anti-pattern explícito: *"Asking user 'is this a new or existing project?'"* |
 
-### Decisão necessária (CONFLITO)
-O pedido de adicionar prompt greenfield/brownfield **conflita** com `project-intelligence.md`
-(NON-NEGOTIABLE: auto-detecta, nunca pergunta). Duas saídas possíveis:
+### Decisão (CONFLITO resolvido)
+O pedido de adicionar prompt greenfield/brownfield **conflitava** com `project-intelligence.md`
+(NON-NEGOTIABLE: auto-detecta, nunca pergunta).
 
-- **(A) Manter regra (recomendado):** não perguntar; melhorar a **mensagem** do Initial State Audit
-  para que o usuário *veja* o tipo detectado e possa corrigir ("Detectei brownfield Next.js — correto?").
-  Mantém a regra e dá a sensação de controle. Esforço S.
-- **(B) Emendar a regra:** transformar a auto-detecção em *sugestão com confirmação* no install.
-  Exige emenda constitucional (a regra é NON-NEGOTIABLE) — não fazer sem decisão explícita.
+**✅ DECIDIDO — Opção A (manter regra):** não perguntar; melhorar a **mensagem** do Initial State
+Audit para que o usuário *veja* o tipo detectado e possa corrigir ("Detectei brownfield Next.js —
+correto?"). Mantém a regra NON-NEGOTIABLE intacta e dá sensação de controle. Esforço S.
+
+> Opção B (emendar a regra para perguntar de fato) foi **descartada** — exigiria emenda constitucional.
 
 ### Inconsistência menor encontrada (a verificar)
 - `package.json` diz `version: 1.7.0`, mas o greeting gerado no install ainda mostra `v1.0`
