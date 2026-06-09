@@ -219,6 +219,35 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(result.planPath).toBeDefined();
     });
 
+    it('should DELEGATE to BuildOrchestrator when real execution is allowed (F1 convergence)', async () => {
+      const buildModule = require('../../.sinapse-ai/core/execution/build-orchestrator');
+      const buildSpy = jest
+        .spyOn(buildModule.BuildOrchestrator.prototype, 'build')
+        .mockResolvedValue({
+          success: true,
+          storyId: 'TEST-001',
+          duration: 1,
+          phases: {},
+          reportPath: 'report.md',
+        });
+
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const exec = new Epic4Executor(mockOrchestrator);
+        const result = await exec.execute({ storyId: 'TEST-001', specPath: '/path/to/spec.md' });
+
+        // Proves Epic 4 delegates instead of re-implementing/stubbing.
+        expect(buildSpy).toHaveBeenCalledWith('TEST-001', expect.anything());
+        // Real build (mocked) succeeded → completed, NOT a stub.
+        expect(result.success).toBe(true);
+        expect(result.stub).toBeFalsy();
+        expect(result.build).toBeDefined();
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+        buildSpy.mockRestore();
+      }
+    });
+
     it('should create stub plan if not exists', async () => {
       const result = await executor.execute({
         storyId: 'TEST-001',

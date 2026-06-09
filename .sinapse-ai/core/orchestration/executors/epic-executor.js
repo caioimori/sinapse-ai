@@ -173,6 +173,20 @@ class EpicExecutor {
   }
 
   /**
+   * Whether real execution (spawning claude / running the real build) is allowed.
+   * Returns false inside the test runner unless SINAPSE_REAL_DISPATCH=1 — this
+   * prevents slow, costly, non-deterministic CLI/build calls during unit tests.
+   * epic: orchestration-consolidation, F1.
+   * @returns {boolean}
+   * @protected
+   */
+  _realExecutionAllowed() {
+    return (
+      process.env.JEST_WORKER_ID === undefined || process.env.SINAPSE_REAL_DISPATCH === '1'
+    );
+  }
+
+  /**
    * Add artifact to results
    * @param {string} type - Artifact type (file, report, data)
    * @param {string} path - Path or identifier
