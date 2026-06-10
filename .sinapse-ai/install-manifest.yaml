@@ -480,9 +480,9 @@ files:
     type: core
     size: 52328
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:885e8521f9404c9c8bb3f0da875f6e4b6c0c99e4f7c37f8a6b94e7e77218ad58
+    hash: sha256:43137f7e8f169e81bc01de3e92ddc8a4de6d5a203103d56b4ad64a004931de26
     type: core
-    size: 27750
+    size: 29683
   - path: core/execution/wave-executor.js
     hash: sha256:630b8d59b147e52c6211877392a20ad51d9733a6632e80d8864f94bd697d2988
     type: core
@@ -948,9 +948,9 @@ files:
     type: core
     size: 11379
   - path: core/orchestration/executors/epic-3-executor.js
-    hash: sha256:72f930720976751b42af16bd8d3d78dbc3435938914d97671b1087edced652dc
+    hash: sha256:da06c2b492104e453a8b18b1333bd2fd24123efb4933ab623045bff657b6d1d2
     type: core
-    size: 8685
+    size: 9463
   - path: core/orchestration/executors/epic-4-executor.js
     hash: sha256:b830a13e8d6c44c462f2bc87623f6134143b43c7eb53dc489a1b1fa48ea04713
     type: core
@@ -1336,9 +1336,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:35a6276b3797d223d9328b6871cabe539c0bc5cd5814044cfcf4fad2b9e53b48
+    hash: sha256:a210902e08707ed3ec11a6b153e39585d4fdf1e517d36b7f69068a1b99ee696c
     type: data
-    size: 537380
+    size: 537361
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -3180,17 +3180,17 @@ files:
     type: infrastructure
     size: 6898
   - path: infrastructure/integrations/ai-providers/ai-provider-factory.js
-    hash: sha256:e3995fc6e0aab734487fa13c9de410dd5bdc763007739225a5f9c8f1ae3fc8e2
+    hash: sha256:f31d9854d2b239c90668dc7fb53e149fb6cf1ead6a4fd67d5f2e35d3495a4d49
     type: infrastructure
-    size: 7028
+    size: 7207
   - path: infrastructure/integrations/ai-providers/ai-provider.js
     hash: sha256:d96ffea1f0f453bc9d0fab4f173d4e97090f67943741712b34f5731b87fc68d7
     type: infrastructure
     size: 4508
   - path: infrastructure/integrations/ai-providers/claude-provider.js
-    hash: sha256:33aef0591b07a1d318debb27dfbbf27ecb0a4de8cdf66eb77f30bcb42cf63ec3
+    hash: sha256:7cf8064d3c2b736239295a866a23c76b6b0db1a30bef4efbcc4f6cdf98d9da13
     type: infrastructure
-    size: 4797
+    size: 5365
   - path: infrastructure/integrations/ai-providers/index.js
     hash: sha256:faa9c1663fee99f2c542b1e99e9cdea31b5fe9dd85e3c961aa1aa2e6d8e25f79
     type: infrastructure
