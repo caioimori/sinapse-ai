@@ -173,7 +173,26 @@ describe('Epic Executors (Story 0.3)', () => {
         invokeAgent: jest.fn(async () => ({
           status: 'success',
           success: true,
-          output: '# Specification: TEST-001\n\nReal agent-generated spec.\n',
+          // Must pass the plausibility gate (≥200 chars + markdown structure):
+          // a real spec, not a one-liner — mirrors what a real agent returns.
+          output: [
+            '# Specification: TEST-001',
+            '',
+            '## Overview',
+            'Real agent-generated spec for TEST-001 covering the full scope.',
+            '',
+            '## Acceptance Criteria',
+            '1. Given a valid input, when processed, then output matches the contract.',
+            '2. Given an invalid input, when processed, then a clear error is raised.',
+            '',
+            '## Scope',
+            '- IN: core behavior, unit tests',
+            '- OUT: integrations beyond this story',
+            '',
+            '## Complexity',
+            'SIMPLE — single module, no external dependencies.',
+            '',
+          ].join('\n'),
           filesModified: [],
         })),
       };

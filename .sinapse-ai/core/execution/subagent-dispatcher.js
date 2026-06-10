@@ -28,12 +28,16 @@ try {
 // Import dependencies with fallbacks
 let MemoryQuery, GotchasMemory;
 try {
-  MemoryQuery = require('../memory/memory-query');
+  const memoryQueryModule = require('../memory/memory-query');
+  MemoryQuery = memoryQueryModule.MemoryQuery || memoryQueryModule;
+  if (typeof MemoryQuery !== 'function') MemoryQuery = null;
 } catch {
   MemoryQuery = null;
 }
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
+  const gotchasModule = require('../memory/gotchas-memory');
+  GotchasMemory = gotchasModule.GotchasMemory || gotchasModule;
+  if (typeof GotchasMemory !== 'function') GotchasMemory = null;
 } catch {
   GotchasMemory = null;
 }
@@ -102,16 +106,34 @@ class SubagentDispatcher extends EventEmitter {
     // Claude CLI execution timeout (per spawn), 10 min default
     this.claudeTimeout = config.claudeTimeout || 10 * 60 * 1000;
 
-    // Dependencies
-    this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
-    this.gotchasMemory = config.gotchasMemory || (GotchasMemory ? new GotchasMemory() : null);
-
-    // Dispatch log
+    // Dispatch log (initialized before optional deps — _tryConstruct logs failures)
     this.dispatchLog = [];
     this.maxLogSize = 100;
 
-    // Root path for project
+    // Root path for project (resolved before memory deps — they need it)
     this.rootPath = config.rootPath || process.cwd();
+
+    // Dependencies (never let optional memory enrichment break the dispatcher)
+    this.memoryQuery = config.memoryQuery || this._tryConstruct(MemoryQuery, this.rootPath);
+    this.gotchasMemory = config.gotchasMemory || this._tryConstruct(GotchasMemory, this.rootPath);
+  }
+
+  /**
+   * Safely construct an optional dependency. Memory enrichment is best-effort:
+   * a broken/missing memory module must never break real agent dispatch.
+   * @param {Function|null} Ctor - Constructor (or null when unavailable)
+   * @param {string} rootPath - Project root passed to the constructor
+   * @returns {Object|null} - Instance or null
+   * @private
+   */
+  _tryConstruct(Ctor, rootPath) {
+    if (typeof Ctor !== 'function') return null;
+    try {
+      return new Ctor(rootPath);
+    } catch (error) {
+      this.log?.('optional_dependency_failed', { dep: Ctor.name, error: error.message });
+      return null;
+    }
   }
 
   /**
@@ -142,7 +164,13 @@ class SubagentDispatcher extends EventEmitter {
 
     // Enrich context
     const enrichedContext = await this.enrichContext(task, context);
-    dispatchRecord.contextSize = JSON.stringify(enrichedContext).length;
+    // Context may contain non-serializable/circular values injected by callers;
+    // size accounting is best-effort and must never break dispatch.
+    try {
+      dispatchRecord.contextSize = JSON.stringify(enrichedContext).length;
+    } catch {
+      dispatchRecord.contextSize = -1;
+    }
 
     // Execute with retries
     let lastError = null;
@@ -711,23 +739,35 @@ class SubagentDispatcher extends EventEmitter {
       input: prompt,
     });
 
+    const stdout = (result.stdout || '').trim();
+    const stderr = (result.stderr || '').trim();
+
     if (result.success) {
       return {
         success: true,
-        output: result.stdout,
-        filesModified: this.extractModifiedFiles(result.stdout),
+        output: stdout,
+        filesModified: this.extractModifiedFiles(stdout),
       };
     }
 
     if (result.signal) {
-      throw new Error(
-        `Claude CLI killed by signal ${result.signal}: ${result.stderr || result.stdout}`,
-      );
+      throw new Error(`Claude CLI killed by signal ${result.signal}: ${stderr || stdout}`);
     }
 
-    throw new Error(
-      `Claude CLI exited with code ${result.code}: ${result.stderr || result.stdout}`,
-    );
+    // User-environment hooks (SessionEnd etc.) can fail AFTER the model already
+    // printed its full response, poisoning the exit code. In --print mode a
+    // non-empty stdout + hook-related stderr means the work was done — accept it
+    // instead of discarding paid output and retrying.
+    if (stdout.length > 0 && /hook/i.test(stderr)) {
+      this.log('exit_code_poisoned_by_hook', { code: result.code, stderr: stderr.slice(0, 200) });
+      return {
+        success: true,
+        output: stdout,
+        filesModified: this.extractModifiedFiles(stdout),
+      };
+    }
+
+    throw new Error(`Claude CLI exited with code ${result.code}: ${stderr || stdout}`);
   }
 
   /**

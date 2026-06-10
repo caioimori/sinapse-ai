@@ -42,7 +42,10 @@ const DEFAULT_CONFIG = {
     },
   },
   claude: {
-    model: 'claude-3-5-sonnet',
+    // No hardcoded model: stale IDs get rejected by the CLI ("model may not
+    // exist"). null → omit --model and use the user's CLI default, which is
+    // always a valid, current model.
+    model: null,
     timeout: 300000,
     dangerouslySkipPermissions: false,
   },

@@ -224,14 +224,27 @@ class Epic3Executor extends EpicExecutor {
       'dependencies and complexity estimate. No commentary outside the spec.';
 
     try {
+      // Pass only serializable, prompt-relevant context — never the execution
+      // context wholesale (it carries `orchestrator: this` → circular reference).
       const result = await invokeAgent(
         { name: 'analyst' },
         { id: `spec-${storyId}`, type: 'analysis', description },
-        { ...context, storyId, source, techStack },
+        { storyId, source, techStack, prdPath: context.prdPath },
       );
       const content = result && (result.output || result.content);
-      if (result && result.success !== false && content && content.trim().length > 0) {
+      // Honesty: an agent "success" whose output is a CLI error banner or a
+      // few stray lines is NOT a spec. Require minimum substance + markdown
+      // structure before accepting, otherwise fall back to the honest stub.
+      const looksLikeSpec =
+        typeof content === 'string' &&
+        content.trim().length >= 200 &&
+        /^#{1,3}\s/m.test(content) &&
+        !/issue with the selected model|may not exist or you may not have access/i.test(content);
+      if (result && result.success !== false && looksLikeSpec) {
         return content;
+      }
+      if (content && !looksLikeSpec) {
+        this._log('Agent output rejected (not a plausible spec) — falling back to stub', 'warn');
       }
     } catch (err) {
       this._log(`Spec agent invocation failed: ${err.message}`, 'warn');
