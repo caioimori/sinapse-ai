@@ -21,10 +21,13 @@
  *      lifecycle when available.
  *   Neither present → unknown agent → fail-open (allow).
  *
- * NOTE (audit 2026-06-11, Article VIII): until an activation writer populates
- * one of these signals in a given environment, this hook is effectively inert
- * (fails open). The block logic below is real and tested; wiring a reliable
- * activation writer is the remaining integration to make enforcement bite.
+ * NOTE (audit 2026-06-11, Article VIII): the AUTONOMOUS path now populates the
+ * signal — the SubagentDispatcher sets SINAPSE_ACTIVE_AGENT in the env of every
+ * agent it spawns, so this hook enforces correctly when the engine spawns an
+ * orchestrator. The INTERACTIVE path (a human typing `@some-orqx` in chat) is
+ * intentionally NOT wired here: enforcing it would block a solo operator's own
+ * edits, so it stays opt-in (set SINAPSE_ACTIVE_AGENT yourself, or add a
+ * prompt-parsing writer) rather than changing chat behavior by default.
  *
  * Exception: sinapse-orqx is allowed Write/Edit in .sinapse-ai/ paths
  *            (framework governance — operates above the story layer).

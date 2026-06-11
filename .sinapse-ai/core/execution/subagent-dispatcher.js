@@ -492,11 +492,25 @@ class SubagentDispatcher extends EventEmitter {
 
     // Try to use AI Provider Factory if available
     if (this.multiProviderEnabled && AIProviderFactory) {
-      return this.executeWithProvider(prompt, providerName, task);
+      return this.executeWithProvider(prompt, providerName, task, agentId);
     }
 
     // Fallback to direct Claude CLI
-    return this.executeClaude(prompt);
+    return this.executeClaude(prompt, agentId);
+  }
+
+  /**
+   * Build the env for a spawned agent process. Declares the active agent via
+   * SINAPSE_ACTIVE_AGENT so the autonomous path is observable AND the Article
+   * VIII delegation hook can enforce when the spawned agent is an orchestrator.
+   * (Interactive chat activations don't go through here — they're opt-in.)
+   * @param {string} agentId - Resolved agent id (with or without '@')
+   * @returns {Object} env additions
+   * @private
+   */
+  _agentEnv(agentId) {
+    const id = String(agentId || '').replace(/^@/, '').trim();
+    return id ? { SINAPSE_ACTIVE_AGENT: id } : {};
   }
 
   /**
@@ -506,7 +520,7 @@ class SubagentDispatcher extends EventEmitter {
    * @param {Object} task - Original task for context
    * @returns {Promise<Object>} - Execution result
    */
-  async executeWithProvider(prompt, providerName, task) {
+  async executeWithProvider(prompt, providerName, task, agentId) {
     const startTime = Date.now();
 
     // Get primary provider
@@ -515,7 +529,7 @@ class SubagentDispatcher extends EventEmitter {
     if (!provider) {
       this.log('provider_unavailable', { provider: providerName });
       // Fallback to legacy Claude execution
-      return this.executeClaude(prompt);
+      return this.executeClaude(prompt, agentId);
     }
 
     // Check availability
@@ -530,15 +544,15 @@ class SubagentDispatcher extends EventEmitter {
 
       if (fallback && (await fallback.checkAvailability())) {
         this.log('using_fallback_provider', { original: providerName, fallback: fallbackName });
-        return this.executeWithSingleProvider(fallback, prompt, task);
+        return this.executeWithSingleProvider(fallback, prompt, task, agentId);
       }
 
       // Last resort: legacy Claude
-      return this.executeClaude(prompt);
+      return this.executeClaude(prompt, agentId);
     }
 
     // Execute with selected provider
-    return this.executeWithSingleProvider(provider, prompt, task);
+    return this.executeWithSingleProvider(provider, prompt, task, agentId);
   }
 
   /**
@@ -548,10 +562,11 @@ class SubagentDispatcher extends EventEmitter {
    * @param {Object} task - Original task
    * @returns {Promise<Object>} - Execution result
    */
-  async executeWithSingleProvider(provider, prompt, task) {
+  async executeWithSingleProvider(provider, prompt, task, agentId) {
     try {
       const response = await provider.executeWithRetry(prompt, {
         workingDir: this.rootPath,
+        env: this._agentEnv(agentId),
       });
 
       this.emit('provider_execution_complete', {
@@ -768,7 +783,7 @@ class SubagentDispatcher extends EventEmitter {
    * @param {string} prompt - Prompt to execute
    * @returns {Promise<Object>} - { success, output, filesModified }
    */
-  async executeClaude(prompt) {
+  async executeClaude(prompt, agentId) {
     if (!prompt || typeof prompt !== 'string') {
       throw new Error('executeClaude requires a non-empty string prompt');
     }
@@ -777,7 +792,7 @@ class SubagentDispatcher extends EventEmitter {
 
     const result = await runSafe('claude', args, {
       cwd: this.rootPath,
-      env: { ...process.env },
+      env: { ...process.env, ...this._agentEnv(agentId) },
       timeout: this.claudeTimeout,
       input: prompt,
     });

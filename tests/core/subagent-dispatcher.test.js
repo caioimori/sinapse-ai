@@ -248,6 +248,42 @@ describe('SubagentDispatcher', () => {
     });
   });
 
+  // ── _agentEnv + active-agent propagation (Article VIII writer) ─────────
+
+  describe('active agent env (SINAPSE_ACTIVE_AGENT)', () => {
+    test('_agentEnv strips @ and trims', () => {
+      const sd = new SubagentDispatcher();
+      expect(sd._agentEnv('@penetration-tester')).toEqual({ SINAPSE_ACTIVE_AGENT: 'penetration-tester' });
+      expect(sd._agentEnv('developer')).toEqual({ SINAPSE_ACTIVE_AGENT: 'developer' });
+    });
+
+    test('_agentEnv is empty for missing agent', () => {
+      const sd = new SubagentDispatcher();
+      expect(sd._agentEnv()).toEqual({});
+      expect(sd._agentEnv('')).toEqual({});
+    });
+
+    test('spawnSubagent propagates the active agent to the provider env', async () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      // Force the provider path with a fake provider capturing the options.
+      let capturedOptions = null;
+      const fakeProvider = {
+        name: 'claude',
+        async checkAvailability() { return true; },
+        async executeWithRetry(_prompt, options) {
+          capturedOptions = options;
+          return { success: true, output: 'done', metadata: {} };
+        },
+      };
+      sd.multiProviderEnabled = true;
+      sd.getAIProvider = () => fakeProvider;
+
+      await sd.spawnSubagent('@quality-gate', { id: 't', description: 'review' }, {});
+      expect(capturedOptions).not.toBeNull();
+      expect(capturedOptions.env).toEqual({ SINAPSE_ACTIVE_AGENT: 'quality-gate' });
+    });
+  });
+
   // ── extractModifiedFiles ──────────────────────────────────────────────
 
   describe('extractModifiedFiles', () => {
