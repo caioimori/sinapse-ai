@@ -53,6 +53,20 @@ const ALLOWED_REDIRECT_HOSTS = new Set([
 const MAX_REDIRECTS = 5;
 
 /**
+ * Per-request timeout (ms). Aborts a hung/slow remote so a compromised or
+ * unresponsive host can't stall the installer indefinitely (P3-001).
+ * @constant {number}
+ */
+const REQUEST_TIMEOUT_MS = 30000;
+
+/**
+ * Maximum response size (bytes). Caps a single download so a malicious/
+ * misconfigured host can't exhaust memory (10 MB is ample for a squad).
+ * @constant {number}
+ */
+const MAX_RESPONSE_BYTES = 10 * 1024 * 1024;
+
+/**
  * Error codes for SquadDownloaderError
  * @enum {string}
  */
@@ -483,8 +497,7 @@ class SquadDownloader {
         }
       }
 
-      https
-        .get(url, options, (res) => {
+      const req = https.get(url, options, (res) => {
           // Check for rate limiting
           if (res.statusCode === 403) {
             const rateLimitRemaining = res.headers['x-ratelimit-remaining'];
@@ -565,25 +578,55 @@ class SquadDownloader {
             return;
           }
 
-          // Collect chunks as Buffer objects to support binary files
+          // Collect chunks as Buffer objects to support binary files, capping
+          // total size to prevent a malicious host from exhausting memory.
           const chunks = [];
+          let total = 0;
           res.on('data', (chunk) => {
+            total += chunk.length;
+            if (total > MAX_RESPONSE_BYTES) {
+              const err = new SquadDownloaderError(
+                DownloaderErrorCodes.NETWORK_ERROR,
+                `Response exceeded ${MAX_RESPONSE_BYTES} bytes — aborting`,
+                'The remote file is unexpectedly large; verify the source',
+              );
+              if (typeof req.destroy === 'function') req.destroy(err);
+              else reject(err);
+              return;
+            }
             chunks.push(chunk);
           });
           res.on('end', () => {
             // Concatenate all chunks into a single Buffer
             resolve(Buffer.concat(chunks));
           });
-        })
-        .on('error', (error) => {
-          reject(
-            new SquadDownloaderError(
-              DownloaderErrorCodes.NETWORK_ERROR,
-              `Network error: ${error.message}`,
-              'Check internet connection',
-            ),
-          );
         });
+
+      // Abort hung requests (P3-001) — destroy() surfaces via the 'error' handler.
+      // Guarded: test doubles for https.get may not implement setTimeout/destroy.
+      if (typeof req.setTimeout === 'function') {
+        req.setTimeout(REQUEST_TIMEOUT_MS, () => {
+          const err = new SquadDownloaderError(
+            DownloaderErrorCodes.NETWORK_ERROR,
+            `Request timed out after ${REQUEST_TIMEOUT_MS}ms fetching ${url}`,
+            'Check internet connection or try again later',
+          );
+          if (typeof req.destroy === 'function') req.destroy(err);
+          else reject(err);
+        });
+      }
+
+      req.on('error', (error) => {
+        reject(
+          error instanceof SquadDownloaderError
+            ? error
+            : new SquadDownloaderError(
+                DownloaderErrorCodes.NETWORK_ERROR,
+                `Network error: ${error.message}`,
+                'Check internet connection',
+              ),
+        );
+      });
     });
   }
 

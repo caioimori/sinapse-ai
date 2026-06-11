@@ -73,6 +73,12 @@ function loadBoundary(root) {
 
   let content;
   try {
+    // Cap size before reading/parsing (P3-003): a pathological core-config.yaml
+    // (e.g. 10k nested keys) shouldn't be able to stall this PreToolUse hook.
+    const stat = fs.statSync(configPath);
+    if (stat.size > 1024 * 1024) {
+      return null; // > 1 MB → treat as unreadable rather than risk a parse DoS
+    }
     content = fs.readFileSync(configPath, 'utf8');
   } catch {
     return null; // missing or unreadable
