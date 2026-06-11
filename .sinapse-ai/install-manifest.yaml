@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1188
+file_count: 1189
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -448,9 +448,9 @@ files:
     type: core
     size: 34059
   - path: core/execution/build-orchestrator.js
-    hash: sha256:3fd8668b2a6894b31b1c48091ebd0009b6f739b21ebf2aa7b7b645126ea42518
+    hash: sha256:d0bcee0a2bd7b8512d5fcddfc3b29f1390aedf4457f6f3d56cbd8787fa0e71c9
     type: core
-    size: 32380
+    size: 32609
   - path: core/execution/build-state-manager.js
     hash: sha256:3b2fe56bf0e1a480f663a02afbb83c6d11cf89fb56815381c7ccafab948a63ae
     type: core
@@ -480,9 +480,9 @@ files:
     type: core
     size: 52328
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:43137f7e8f169e81bc01de3e92ddc8a4de6d5a203103d56b4ad64a004931de26
+    hash: sha256:827a41f11dc4c590a33b435cc911c2695fc1c320938a43f9adbd7420f7b3f10b
     type: core
-    size: 29683
+    size: 31458
   - path: core/execution/wave-executor.js
     hash: sha256:630b8d59b147e52c6211877392a20ad51d9733a6632e80d8864f94bd697d2988
     type: core
@@ -960,9 +960,9 @@ files:
     type: core
     size: 8543
   - path: core/orchestration/executors/epic-6-executor.js
-    hash: sha256:62556e00563bbe3d89a09130f4782f6bce110d4f6a87a21215ed80eb2520d45c
+    hash: sha256:ec8d66cde48b09912b13ba3f514e91cfddb14552384722b2bd37931be18cafdc
     type: core
-    size: 6790
+    size: 9131
   - path: core/orchestration/executors/epic-executor.js
     hash: sha256:0c25d4799a6338252017d9deb2f73bbdbde58cd5f7bfe4ac0fccdc66fe0229d2
     type: core
@@ -1131,6 +1131,10 @@ files:
     hash: sha256:1b0b8a0acd2de9372e63a72c56afe1723ace3ecd64d42af38028f060059c3926
     type: core
     size: 289408
+  - path: core/registry/squad-agent-resolver.js
+    hash: sha256:33a8a516de79895d56aec524fab4503d143ec6457ad750ca8f8816826a818a96
+    type: core
+    size: 5750
   - path: core/registry/validate-registry.js
     hash: sha256:8612f683f1b7ecd043a0342d05fbe434721b19568b6ff76a483a6de7aa830d5c
     type: core
@@ -1336,9 +1340,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:a210902e08707ed3ec11a6b153e39585d4fdf1e517d36b7f69068a1b99ee696c
+    hash: sha256:bf986385a95a466c5ea497622b8355c4c630b91fdb393733553d08ba24c7dbf3
     type: data
-    size: 537361
+    size: 537950
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
