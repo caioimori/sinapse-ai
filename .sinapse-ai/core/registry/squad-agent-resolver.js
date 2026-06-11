@@ -185,6 +185,68 @@ class SquadAgentResolver {
   size() {
     return this.buildIndex().size;
   }
+
+  /**
+   * Normalized metadata for an agent, extracted from whatever structure the
+   * file uses (frontmatter, `# Agent: X`, `# X`, or an embedded ```yaml block).
+   * This is the uniform schema (SCHEMA-001 closure) without mutating the 199
+   * heterogeneous persona files — the canonical shape is DERIVED, not imposed.
+   *
+   * @param {string} ref
+   * @returns {{id, name, squad, type, hasStructuredYaml, file}|null}
+   */
+  describe(ref) {
+    const entry = this.resolve(ref);
+    if (!entry) return null;
+    const content = this.loadPersona(entry.id) || '';
+    return {
+      id: entry.id,
+      name: SquadAgentResolver.extractName(content, entry.id),
+      squad: entry.squad || 'framework',
+      type: /-orqx$/.test(entry.id) ? 'orchestrator' : 'specialist',
+      hasStructuredYaml: /```ya?ml/.test(content) || /^\s*agent:\s*$/m.test(content),
+      file: entry.filePath,
+    };
+  }
+
+  /**
+   * Describe every indexed agent (sorted by id) — the uniform registry view.
+   * @returns {Array<Object>}
+   */
+  list() {
+    return this.listIds().map((id) => this.describe(id));
+  }
+
+  /**
+   * Best-effort display name from heterogeneous structures. Falls back to a
+   * title-cased id so the result is never empty.
+   * @param {string} content - File content
+   * @param {string} id - Canonical id (filename)
+   * @returns {string}
+   */
+  static extractName(content, id) {
+    const src = String(content || '');
+    // 1. YAML frontmatter `name:`
+    const fm = src.match(/^---\s*\n([\s\S]*?)\n---/);
+    if (fm) {
+      const m = fm[1].match(/^\s*name:\s*["']?([^"'\n]+)["']?\s*$/m);
+      if (m && m[1].trim()) return m[1].trim();
+    }
+    // 2. Embedded yaml `name:` (inside an ```yaml block or agent: section)
+    const ym = src.match(/^\s*name:\s*["']?([^"'\n]+)["']?\s*$/m);
+    if (ym && ym[1].trim()) return ym[1].trim();
+    // 3. `# Agent: Name`
+    const ah = src.match(/^#\s*Agent:\s*(.+?)\s*$/m);
+    if (ah && ah[1].trim()) return ah[1].trim();
+    // 4. First `# Heading`
+    const h1 = src.match(/^#\s+(.+?)\s*$/m);
+    if (h1 && h1[1].trim()) return h1[1].trim().replace(/^@/, '');
+    // 5. Title-cased id
+    return String(id)
+      .split('-')
+      .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+      .join(' ');
+  }
 }
 
 module.exports = SquadAgentResolver;

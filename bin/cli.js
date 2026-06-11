@@ -27,6 +27,7 @@ const KNOWN_COMMANDS = [
   'status',
   'doctor',
   'ideate',
+  'agents',
   'chrome-brain',
   'help',
 ];
@@ -141,6 +142,13 @@ function runRouter() {
       cmdIdeate({ argv: args.slice(1) })
         .then((code) => { if (code) process.exitCode = code; })
         .catch((e) => { logger.error(`${RED}Erro no ideate:${NC} ${e.message}`); process.exit(1); });
+      break;
+    }
+    case 'agents': {
+      // Lists the full agent roster with uniform derived metadata (SCHEMA-001).
+      const { cmdAgents } = require('./commands/agents');
+      try { process.exitCode = cmdAgents({ argv: args.slice(1) }) || 0; }
+      catch (e) { logger.error(`${RED}Erro no agents:${NC} ${e.message}`); process.exit(1); }
       break;
     }
     case 'doctor': {
