@@ -768,9 +768,9 @@ files:
     type: core
     size: 7763
   - path: core/ideation/ideation-engine.js
-    hash: sha256:f0f7dba23bc0d9b6b054ed7aa88a85b1411bbdcd8b8d8987dcf158f3d600a326
+    hash: sha256:eb9119085bfeb5eee344a8949b54f8375f85c50ee38818bd4b9aab299ad871e9
     type: core
-    size: 25406
+    size: 27450
   - path: core/ids/circuit-breaker.js
     hash: sha256:d9ff8c6e540902457b17aba668ff67c04d40564ed479993ad3c4807fb8c09c3f
     type: core
@@ -1340,9 +1340,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:c5a1db49d9192194347da8e127d3ed92b6449b7483a0e226c76cd1c7dc445503
+    hash: sha256:b1d8dc5753d6c53b4bc023774a14d60b8cacafb73df23928da9f3021c5cdb5c1
     type: data
-    size: 537893
+    size: 537965
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
