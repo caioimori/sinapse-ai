@@ -82,7 +82,13 @@ const KNOWN_KINDS = ['adr', 'dbdr', 'epic', 'pmdr', 'prd-v2', 'prd', 'story', 't
 // `dir` is relative to the artifact root; `suffix` matches filename endings.
 const ARTIFACT_CONVENTIONS = [
   { kind: 'story', dir: path.join('docs', 'stories'), suffix: '.story.md' },
-  { kind: 'epic', dir: path.join('docs', 'epics'), suffix: '.md' },
+  // Epic artifacts are machine docs validated against the Epic *template
+  // variables* schema (id ^EPIC-…$, owner, objective, stories). Use an explicit
+  // `.epic.md` suffix — mirroring `.story.md` — so prose planning docs
+  // (README.md, SESSION-HANDOFF.md, story files) under docs/epics/ are NOT
+  // misclassified as epic artifacts. Before this, every .md under docs/epics/
+  // (tracked since the epics/stories split) failed the gate.
+  { kind: 'epic', dir: path.join('docs', 'epics'), suffix: '.epic.md' },
   { kind: 'prd', dir: path.join('docs', 'prd'), suffix: '.md' },
 ];
 
