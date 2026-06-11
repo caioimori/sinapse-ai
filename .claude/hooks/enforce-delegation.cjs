@@ -11,7 +11,20 @@
  *   exit 0  → allow
  *   exit 2  → block (message shown to model via stderr)
  *
- * Fail-open: if session state is unreadable or agent is unknown, allow.
+ * Fail-open: if the active agent is unknown, allow (Hook Design Principle #1).
+ *
+ * Active-agent signal (first match wins):
+ *   1. process.env.SINAPSE_ACTIVE_AGENT — explicit signal set by the
+ *      orchestration layer when it activates/spawns an agent. This is the
+ *      reliable channel; the session-state file is a secondary fallback.
+ *   2. .sinapse/session-state.json → { lastAgent } — written by the session
+ *      lifecycle when available.
+ *   Neither present → unknown agent → fail-open (allow).
+ *
+ * NOTE (audit 2026-06-11, Article VIII): until an activation writer populates
+ * one of these signals in a given environment, this hook is effectively inert
+ * (fails open). The block logic below is real and tested; wiring a reliable
+ * activation writer is the remaining integration to make enforcement bite.
  *
  * Exception: sinapse-orqx is allowed Write/Edit in .sinapse-ai/ paths
  *            (framework governance — operates above the story layer).
@@ -56,11 +69,23 @@ function relativize(filePath, root) {
 }
 
 /**
- * Read the active agent from session state.
- * Returns the agent ID string or null if unknown.
+ * Resolve the active agent id. Explicit env signal wins; session-state file is
+ * the fallback. Returns the agent ID string or null if unknown (fail-open).
+ * @param {string} root - Project root
+ * @returns {string|null}
  */
 function getActiveAgent(root) {
+  // 1. Explicit, reliable signal from the orchestration layer.
+  const envAgent = (process.env.SINAPSE_ACTIVE_AGENT || '').trim();
+  if (envAgent) return envAgent;
+
+  // 2. Session-state file fallback. Validate the resolved path stays within the
+  //    project (defense-in-depth against a manipulated root — P2-003).
   const sessionStatePath = path.join(root, '.sinapse', 'session-state.json');
+  const resolvedRoot = path.resolve(root);
+  if (!path.resolve(sessionStatePath).startsWith(resolvedRoot)) {
+    return null;
+  }
   try {
     const state = JSON.parse(fs.readFileSync(sessionStatePath, 'utf8'));
     return state.lastAgent || null;
