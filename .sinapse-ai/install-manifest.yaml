@@ -256,9 +256,9 @@ files:
     type: core
     size: 4929
   - path: core/config/config-loader.js
-    hash: sha256:5c7dd626866c0b853ea98ee06276ed3bcd08bd274cd2a805b412f005cb3bf959
+    hash: sha256:7cb98af385dda142db1b06bc3ca04c44988be425edf251ed0ea914e06e538dd5
     type: core
-    size: 8540
+    size: 9460
   - path: core/config/config-resolver.js
     hash: sha256:e5167c2d301d14e8b24880a502780e4a77aa95fe3988d6673ebb6554cc746f26
     type: core
@@ -1340,7 +1340,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:b1d8dc5753d6c53b4bc023774a14d60b8cacafb73df23928da9f3021c5cdb5c1
+    hash: sha256:c94733894a5b7cac12da7692098dddcb04de0339564870bcdb659928e67c6a87
     type: data
     size: 537965
   - path: data/learned-patterns.yaml
