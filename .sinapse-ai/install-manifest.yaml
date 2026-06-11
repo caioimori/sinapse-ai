@@ -192,9 +192,9 @@ files:
     type: cli
     size: 5908
   - path: core-config.yaml
-    hash: sha256:1366990578b9e157ba9029c4a2dc0e76a2fa9579bb84ec20707a6b8ae29b1990
+    hash: sha256:b74736a9ad195006d3310eed224111ca77cc30a0944976bb290d18da8af8011a
     type: config
-    size: 12401
+    size: 12810
   - path: core/code-intel/code-intel-client.js
     hash: sha256:65f6c0f2bb639ff3080db3d85660e0b8097e5af7c60dc04f582ef20f42cc9cfc
     type: core
@@ -460,9 +460,9 @@ files:
     type: core
     size: 14864
   - path: core/execution/parallel-executor.js
-    hash: sha256:b2e69804b554a2d44f1c8c182c15512f46dc8fcfb62d32f37298c7747ba7fa83
+    hash: sha256:f5a68f60536ad6116ddc49e4d55ce5f1fc3b55c26ae27622b221e342b2ed37a3
     type: core
-    size: 8025
+    size: 8399
   - path: core/execution/parallel-monitor.js
     hash: sha256:4b789fd8d6736ff794181be2069b972752649759cc33b69201bef2d8c41ec6b5
     type: core
@@ -1000,9 +1000,9 @@ files:
     type: core
     size: 8344
   - path: core/orchestration/parallel-executor.js
-    hash: sha256:d99abcd7853db1ad6828b2e660e72dcf7a88eea76de8b2b166364729c762e039
+    hash: sha256:f72ce9b96274082399af3ed63ec78def1a1e00a60ec7543bf15a510328e83d4e
     type: core
-    size: 5821
+    size: 6127
   - path: core/orchestration/recovery-handler.js
     hash: sha256:cfbf41b69336548b2fc4179a5513243491ca6eb501de3426f98254f118b074e7
     type: core
@@ -1340,9 +1340,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:8cf523ebb7fa16110e3361408deb602dfebadf0012db6a6265783a6c706d00d6
+    hash: sha256:5f963aa813e80f04ba1c335e4ecf37841bd9f18a598dad564d33ba34e6a2ba98
     type: data
-    size: 538669
+    size: 539466
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1800,9 +1800,9 @@ files:
     type: script
     size: 29549
   - path: development/scripts/squad/squad-downloader.js
-    hash: sha256:62486aef322d45e01f88f46633256173803e6272537a20eea9447f8f5400160e
+    hash: sha256:5f937ed4ecbb3b45d3f92647ece93b73a39591bc117e64069ae8379a53bac6b0
     type: script
-    size: 19363
+    size: 21112
   - path: development/scripts/squad/squad-extender.js
     hash: sha256:0e8e1053d1844dd24b682e5884509d0a777ee6b348db2b8232b8c37ab57c6857
     type: script
