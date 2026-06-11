@@ -37,20 +37,12 @@ class Epic6Executor extends EpicExecutor {
     this._qaOrchestrator = null;
   }
 
-  /**
-   * Get QA Loop Orchestrator
-   * @private
-   */
-  _getQAOrchestrator() {
-    if (!this._qaOrchestrator) {
-      try {
-        this._qaOrchestrator = require('../../infrastructure/scripts/qa-loop-orchestrator');
-      } catch (error) {
-        this._log(`QA Loop Orchestrator not available: ${error.message}`, 'warn');
-      }
-    }
-    return this._qaOrchestrator;
-  }
+  // NOTE: the previous `_getQAOrchestrator()` path was triple-broken theater —
+  // it did `new` on the module object (not the QALoopOrchestrator class), passed
+  // the wrong constructor shape, and called a `runReview()` method that doesn't
+  // exist. It ALWAYS threw and silently fell back to basic checks while reporting
+  // success:true. Replaced by a real @quality-gate agent invocation (_reviewViaAgent),
+  // same proven path as epic-3 spec generation (epic: orchestration-consolidation).
 
   /**
    * Execute QA Loop
@@ -109,53 +101,60 @@ class Epic6Executor extends EpicExecutor {
       this._addArtifact('qa-report', reportPath);
 
       const passed = currentVerdict === QAVerdict.APPROVED;
+      const anyRealReview = reviewHistory.some((r) => r.reviewSource === 'agent');
 
-      return this._completeExecution({
+      const baseResult = {
         verdict: currentVerdict,
         passed,
         iterations: iteration,
         reviewHistory,
         reportPath,
-      });
+      };
+
+      // Honesty invariant (F0a/F7): a QA loop that only ran deterministic basic
+      // checks did NOT really review the work — it must report STUB, not success.
+      if (!anyRealReview) {
+        return this._stubExecution(
+          'QA ran deterministic basic checks only — no real review agent wired',
+          baseResult,
+        );
+      }
+
+      return this._completeExecution(baseResult);
     } catch (error) {
       return this._failExecution(error);
     }
   }
 
   /**
-   * Run a single review cycle
+   * Run a single review cycle.
+   *
+   * Tries a REAL review via the @quality-gate agent (orchestrator.invokeAgent →
+   * SubagentDispatcher → claude). Falls back to deterministic basic checks when
+   * no executor is wired or real execution isn't allowed — and marks the source
+   * (`agent` vs `basic-checks`) so the epic can report honestly.
    * @private
    */
   async _runReview(context) {
-    const { storyId, iteration, techStack: _techStack } = context;
-
+    const { iteration } = context;
     this._log(`Running review cycle ${iteration}`);
 
-    // Check for QA orchestrator
-    const QAOrchestrator = this._getQAOrchestrator();
-
-    if (QAOrchestrator) {
+    const invokeAgent = this.orchestrator && this.orchestrator.invokeAgent;
+    if (typeof invokeAgent === 'function' && this._realExecutionAllowed()) {
       try {
-        const orchestrator = new QAOrchestrator({
-          storyId,
-          rootPath: this.projectRoot,
-        });
-
-        return await orchestrator.runReview(context);
+        const realReview = await this._reviewViaAgent(invokeAgent, context);
+        if (realReview) return realReview;
       } catch (error) {
-        this._log(`QA orchestrator error: ${error.message}`, 'warn');
+        this._log(`Real review failed, falling back to basic checks: ${error.message}`, 'warn');
       }
     }
 
-    // Fallback: perform basic checks
+    // Honest fallback: deterministic basic checks (clearly marked as a stub source).
     const issues = await this._performBasicChecks(context);
 
-    // Determine verdict based on issues
     let verdict = QAVerdict.APPROVED;
-
     const criticalIssues = issues.filter((i) => i.severity === 'critical');
     const majorIssues = issues.filter((i) => i.severity === 'major');
-
     if (criticalIssues.length > 0) {
       verdict = QAVerdict.BLOCKED;
     } else if (majorIssues.length > 0 || issues.length > 5) {
@@ -166,8 +165,69 @@ class Epic6Executor extends EpicExecutor {
       iteration,
       verdict,
       issues,
+      reviewSource: 'basic-checks',
       timestamp: new Date().toISOString(),
     };
+  }
+
+  /**
+   * Perform a real QA review by invoking the @quality-gate agent.
+   * @param {Function} invokeAgent - orchestrator.invokeAgent
+   * @param {Object} context - review context
+   * @returns {Promise<Object|null>} review result with verdict, or null when the
+   *   agent produced nothing usable (caller falls back to basic checks).
+   * @private
+   */
+  async _reviewViaAgent(invokeAgent, context) {
+    const { storyId, iteration, codeChanges, testResults } = context;
+
+    const description =
+      `Perform a QA review for story "${storyId || 'unknown'}". ` +
+      'Assess correctness, test coverage, and adherence to acceptance criteria. ' +
+      `${Array.isArray(codeChanges) ? `${codeChanges.length} code change(s). ` : ''}` +
+      `${Array.isArray(testResults) ? `${testResults.length} test result(s). ` : ''}` +
+      'End your response with a single verdict line in the form: ' +
+      'VERDICT: APPROVED | NEEDS_REVISION | BLOCKED.';
+
+    const result = await invokeAgent(
+      { name: 'quality-gate' },
+      { id: `qa-review-${storyId || 'story'}-${iteration}`, type: 'review', description },
+      { storyId, iteration },
+    );
+
+    const output = result && (result.output || result.content);
+    if (!result || result.success === false || !output || output.trim().length === 0) {
+      return null;
+    }
+
+    return {
+      iteration,
+      verdict: this._parseVerdict(output),
+      issues: [],
+      reviewSource: 'agent',
+      raw: output,
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Parse a QA verdict from free-form agent output. Defaults to NEEDS_REVISION
+   * (the safe, non-approving default) when no explicit verdict is found.
+   * @param {string} output
+   * @returns {string} QAVerdict
+   * @private
+   */
+  _parseVerdict(output) {
+    const text = String(output).toUpperCase();
+    const m = text.match(/VERDICT:\s*(APPROVED|NEEDS[_\s]?REVISION|BLOCKED)/);
+    const token = (m ? m[1] : '').replace(/\s/g, '_');
+    if (token === 'APPROVED') return QAVerdict.APPROVED;
+    if (token === 'BLOCKED') return QAVerdict.BLOCKED;
+    if (token === 'NEEDS_REVISION') return QAVerdict.NEEDS_REVISION;
+    // No explicit verdict → don't fabricate approval.
+    if (/\bBLOCKED\b/.test(text)) return QAVerdict.BLOCKED;
+    if (/\bAPPROVED\b/.test(text)) return QAVerdict.APPROVED;
+    return QAVerdict.NEEDS_REVISION;
   }
 
   /**

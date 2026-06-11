@@ -345,16 +345,38 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(6);
     });
 
-    it('should execute QA loop and return verdict', async () => {
+    it('should execute QA loop and report STUB honestly when no real reviewer is wired', async () => {
       const result = await executor.execute({
         storyId: 'TEST-001',
         buildResult: {},
         testResults: [],
       });
 
-      expect(result.success).toBe(true);
+      // Honesty invariant (F0a/F7): basic-checks-only QA must NOT fabricate success.
+      expect(result.stub).toBe(true);
+      expect(result.success).not.toBe(true);
       expect(result.verdict).toBeDefined();
       expect(result.iterations).toBeDefined();
+    });
+
+    it('reports real success when a real @quality-gate reviewer approves', async () => {
+      const invokeAgent = jest.fn(async () => ({
+        success: true,
+        output: 'Reviewed the changes; coverage is adequate.\nVERDICT: APPROVED',
+      }));
+      const exec = new Epic6Executor({ ...mockOrchestrator, invokeAgent });
+
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const result = await exec.execute({ storyId: 'TEST-001', buildResult: {}, testResults: [] });
+        expect(invokeAgent).toHaveBeenCalled();
+        expect(result.success).toBe(true);
+        expect(result.stub).toBeFalsy();
+        expect(result.verdict).toBe(QAVerdict.APPROVED);
+        expect(result.passed).toBe(true);
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+      }
     });
 
     it('should generate QA report', async () => {
