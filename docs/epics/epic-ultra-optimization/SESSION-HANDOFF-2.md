@@ -68,3 +68,32 @@
 - Relatório da auditoria B/C/D: task output do workflow `w0f2gzwo3` (18 achados).
 - Auditoria fria lastro: `docs/audits/AUDIT-2026-06-04-cold-review.md`.
 - Memory: `project_sinapse_ai_ultra_optimization` (frase-gatilho + não-óbvios).
+
+---
+
+## SESSÃO 3 (11/06, noite) — Deep-dive EM ANDAMENTO, interrompido 2x por limite de tokens
+
+A frota do deep-dive foi desenhada e lançada (workflow `deep-dive-rationalization`: 28 auditores de módulo + 5 frentes especiais + céticos adversariais + síntese). Duas rodadas caíram no limite de sessão do plano; uma terceira foi relançada. **Tudo necessário pra retomar está salvo:**
+
+### Artefatos salvos (permanentes)
+| Artefato | Onde |
+|---|---|
+| Script canônico da frota (versionado, aceita retomada incremental via `args`) | `docs/epics/epic-ultra-optimization/workflows/deep-dive-rationalization.workflow.js` |
+| Cópia global pra invocar por nome em qualquer sessão | `~/.claude/workflows/deep-dive-rationalization.js` |
+| Resultados parciais da rodada 2 — **5 módulos completos** (docs, doctor +3) com reports na íntegra | `docs/epics/epic-ultra-optimization/workflows/partial-results-rodada2-2026-06-11.json` |
+| Destino da síntese final (quando a frota completar) | `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` |
+
+### Achados parciais já confirmados (rodada 2)
+- **`core/docs`** (misto, P2): excluído ACIDENTALMENTE do `install-manifest.yaml` por regex de sufixo em `scripts/generate-install-manifest.js:70-74` (upgrades brownfield não rastreiam drift); paths stale internos (`troubleshooting-guide.md:596-597`); nenhum fluxo runtime aponta agentes pra essa doc na hora de criar componentes. Ação: ancorar regex na raiz + corrigir paths + cabear referência em `create-agent.md`.
+- **`doctor`** (funcional): 16 checks rodam, exit codes corretos, 10 consumidores reais. Gap: auto-fix (`--fix`) cobre só 4 dos 16 checks (`fix-handler.js:72-136`). Sobreposição parcial com `health-check` a investigar.
+- Os outros 3 reports estão no JSON parcial.
+
+### Como retomar o deep-dive
+1. **Mesma sessão da frota** (se ainda viva): `Workflow({scriptPath: <script da sessão>, resumeFromRunId: 'wf_f675d4bd-006'})` — cache do journal devolve o que completou. (Resume por runId é same-session only.)
+2. **Sessão nova** (caminho normal): relançar do script salvo passando os parciais —
+   `Workflow({scriptPath: 'docs/epics/epic-ultra-optimization/workflows/deep-dive-rationalization.workflow.js', args: {skipModules: [<nomes dos módulos no JSON parcial>], precomputed: {modules: [<reports do JSON parcial>]}}})`.
+   Os nomes em `skipModules` devem ser os da lista `MODULES` do script; os reports vêm de `data.modules[]` do JSON parcial (e de qualquer rodada posterior — acumular).
+3. Custo observado: cada rodada completa da frota consome ~2-3M tokens de subagentes. Se o limite bater no meio, salvar o task output da rodada (`<taskId>.output` em Temp) na pasta `workflows/` e acumular nos parciais.
+
+### Depois do deep-dive (inalterado)
+Mapa do core classificado → plano P0→P3 → executar frentes seguras → suíte verde → SÓ ENTÃO publicar (revogar token npm exposto + gerar novo antes).
