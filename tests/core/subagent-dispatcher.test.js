@@ -207,10 +207,33 @@ describe('SubagentDispatcher', () => {
         files: ['src/app.js'],
       }, {});
 
+      // F2: the agent role label is always present (persona injected on top when known)
       expect(prompt).toContain('@dev');
       expect(prompt).toContain('Build feature X');
       expect(prompt).toContain('AC1');
       expect(prompt).toContain('src/app.js');
+    });
+
+    test('injects the real persona when the agent id is known (F2)', () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      const prompt = sd.buildPrompt('@penetration-tester', {
+        id: 't1',
+        description: 'pentest the API',
+      }, {});
+
+      // The full persona is injected, not a one-line generic prompt.
+      expect(prompt).toContain('Your Agent Definition');
+      expect(prompt.length).toBeGreaterThan(2000);
+    });
+
+    test('falls back to generic prompt for unknown agents (F2)', () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      const prompt = sd.buildPrompt('@totally-unknown-agent-xyz', {
+        id: 't1',
+        description: 'do something',
+      }, {});
+
+      expect(prompt).toContain('You are @totally-unknown-agent-xyz');
     });
 
     test('includes gotchas and patterns from context', () => {

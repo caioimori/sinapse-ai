@@ -12,6 +12,16 @@ const EventEmitter = require('events');
 const _path = require('path');
 const { runSafe } = require('../utils/spawn-safe');
 
+// epic: orchestration-consolidation, F2 — resolves any of the 189 agent ids to
+// its real persona on disk (squads/ + framework agents). Optional: degrades to a
+// generic prompt if the module is missing.
+let SquadAgentResolver;
+try {
+  SquadAgentResolver = require('../registry/squad-agent-resolver');
+} catch {
+  SquadAgentResolver = null;
+}
+
 // Import AI Provider Factory (factory module directly — the index barrel
 // requires a removed gemini-provider and would throw on load).
 let AIProviderFactory;
@@ -112,6 +122,11 @@ class SubagentDispatcher extends EventEmitter {
 
     // Root path for project (resolved before memory deps — they need it)
     this.rootPath = config.rootPath || process.cwd();
+
+    // Agent persona resolver (F2): make every squad/framework agent addressable.
+    this.agentResolver =
+      config.agentResolver ||
+      (SquadAgentResolver ? new SquadAgentResolver(this.rootPath) : null);
 
     // Dependencies (never let optional memory enrichment break the dispatcher)
     this.memoryQuery = config.memoryQuery || this._tryConstruct(MemoryQuery, this.rootPath);
@@ -245,6 +260,12 @@ class SubagentDispatcher extends EventEmitter {
     // Check task type
     if (task.type && this.agentMapping[task.type.toLowerCase()]) {
       return this.agentMapping[task.type.toLowerCase()];
+    }
+
+    // F2: if the task names a real agent id directly (any of the 189 squad/
+    // framework personas), honor it instead of inferring a generic one.
+    if (this.agentResolver && task.name && this.agentResolver.has(task.name)) {
+      return `@${this.agentResolver.resolve(task.name).id}`;
     }
 
     // Check task tags
@@ -663,7 +684,29 @@ class SubagentDispatcher extends EventEmitter {
    * @returns {string} - Formatted prompt
    */
   buildPrompt(agentId, task, context) {
-    let prompt = `You are ${agentId}, a specialized agent in the SINAPSE framework.\n\n`;
+    let prompt = '';
+
+    // F2: inject the FULL real persona when the agent is known on disk. This is
+    // the difference between "act as a generic dev" and "act as Nimbus, the cloud
+    // security engineer with these exact frameworks". Falls back to the one-liner
+    // only when the agent is unknown or the resolver is unavailable.
+    let personaLoaded = false;
+    if (this.agentResolver) {
+      const persona = this.agentResolver.loadPersona(agentId);
+      if (persona && persona.trim().length > 0) {
+        prompt += '## Your Agent Definition (adopt this persona fully)\n\n';
+        prompt += persona.trim();
+        prompt += '\n\n---\n\n';
+        personaLoaded = true;
+      }
+    }
+    if (!personaLoaded) {
+      prompt += `You are ${agentId}, a specialized agent in the SINAPSE framework.\n\n`;
+    }
+
+    // Always state the role label so the dispatched run knows which agent it is,
+    // on top of (or instead of) the injected persona.
+    prompt += `## Acting as\n${agentId}\n\n`;
 
     prompt += '## Task\n';
     prompt += `**ID:** ${task.id}\n`;

@@ -366,6 +366,39 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(result.reportPath).toBeDefined();
       expect(await fs.pathExists(result.reportPath)).toBe(true);
     });
+
+    it('_applyFixes invokes the real agent when one is wired (F: epic-6 real)', async () => {
+      const invokeAgent = jest.fn(async () => ({
+        success: true,
+        output: 'fixed',
+        filesModified: ['src/x.js'],
+      }));
+      const orchWithExecutor = { ...mockOrchestrator, invokeAgent };
+      const exec = new Epic6Executor(orchWithExecutor);
+
+      const issues = [{ type: 'lint', severity: 'major', message: 'unused var' }];
+      // SINAPSE_REAL_DISPATCH gate: allow real path inside the test runner.
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const res = await exec._applyFixes(issues, { storyId: 'TEST-001' });
+        expect(invokeAgent).toHaveBeenCalled();
+        expect(res.applied).toBe(true);
+        expect(res.stub).toBe(false);
+        expect(res.fixed).toBe(1);
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+      }
+    });
+
+    it('_applyFixes is honest (stub) when no executor is wired', async () => {
+      // mockOrchestrator has no invokeAgent → must NOT claim a fix happened.
+      const res = await executor._applyFixes(
+        [{ type: 'lint', severity: 'minor', message: 'x' }],
+        { storyId: 'TEST-001' },
+      );
+      expect(res.applied).toBe(false);
+      expect(res.stub).toBe(true);
+    });
   });
 
   describe('Factory Functions', () => {

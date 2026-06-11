@@ -86,7 +86,10 @@ const DEFAULT_CONFIG = {
   // Epic 10: Parallel Execution
   parallelMode: false, // Enable wave-based parallel execution
   maxParallel: 4, // Max concurrent tasks per wave
-  useSubagentDispatch: false, // Route tasks to specialized agents
+  // NOTE: a dead `useSubagentDispatch` flag lived here — it was never read.
+  // Agent routing happens one level up: epic-4 delegates to this BuildOrchestrator,
+  // which builds via executeSubtaskWithClaude. Removed to kill the false affordance
+  // (epic: orchestration-consolidation, AC3).
 
   // Claude CLI
   claudeModel: null, // Use default model from CLI config

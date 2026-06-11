@@ -98,7 +98,9 @@ class Epic6Executor extends EpicExecutor {
 
         if (currentVerdict === QAVerdict.NEEDS_REVISION && iteration < this.maxIterations) {
           this._log('Review needs revision, applying fixes...');
-          await this._applyFixes(reviewResult.issues, context);
+          // Record whether fixes were really applied (honesty invariant): a
+          // stubbed fix must not look like a real one in the QA report.
+          reviewResult.fixResult = await this._applyFixes(reviewResult.issues, context);
         }
       }
 
@@ -193,17 +195,67 @@ class Epic6Executor extends EpicExecutor {
   }
 
   /**
-   * Apply fixes for found issues
+   * Apply fixes for found issues by invoking the real @developer agent through
+   * the orchestrator (orchestrator.invokeAgent → SubagentDispatcher → claude).
+   *
+   * epic: orchestration-consolidation — connects Epic 6 to the real executor,
+   * same pattern as Epic 3. Falls back honestly (logs that no real fix ran) when
+   * no executor is wired or real execution isn't allowed in this environment.
+   *
+   * @param {Array} issues - Issues found by the review
+   * @param {Object} context - Execution context (storyId, techStack, ...)
+   * @returns {Promise<Object>} { applied: boolean, fixed: number, stub: boolean }
    * @private
    */
-  async _applyFixes(issues, _context) {
+  async _applyFixes(issues, context = {}) {
     this._log(`Applying fixes for ${issues.length} issues`);
 
-    // In full implementation, this would invoke @developer agent
-    // to fix each issue. For now, just log.
-    for (const issue of issues) {
-      this._log(`Would fix: ${issue.type} - ${issue.message}`);
+    const invokeAgent = this.orchestrator && this.orchestrator.invokeAgent;
+    const canRunReal = typeof invokeAgent === 'function' && this._realExecutionAllowed();
+
+    if (!canRunReal || issues.length === 0) {
+      // Honest fallback: do NOT claim fixes were applied.
+      for (const issue of issues) {
+        this._log(`Fix not applied (no real executor): ${issue.type} - ${issue.message}`, 'warn');
+      }
+      return { applied: false, fixed: 0, stub: true };
     }
+
+    const issueList = issues
+      .map((i, n) => `${n + 1}. [${i.severity || 'unknown'}] ${i.type}: ${i.message}`)
+      .join('\n');
+
+    const description =
+      `Fix the following QA issues found during review of story "${context.storyId || 'unknown'}". ` +
+      'Apply the minimal, correct change for each; preserve existing patterns and tests.\n\n' +
+      `Issues:\n${issueList}`;
+
+    try {
+      const result = await invokeAgent(
+        { name: 'developer' },
+        { id: `qa-fix-${context.storyId || 'story'}`, type: 'bugfix', description },
+        {
+          storyId: context.storyId,
+          techStack: context.techStack,
+          issues: issues.map((i) => ({ type: i.type, severity: i.severity, message: i.message })),
+        },
+      );
+
+      if (result && result.success !== false) {
+        this._log(`Applied fixes via real agent (${issues.length} issues addressed)`);
+        return {
+          applied: true,
+          fixed: issues.length,
+          stub: false,
+          filesModified: result.filesModified || [],
+        };
+      }
+      this._log(`Fix agent returned no success: ${result && result.error}`, 'warn');
+    } catch (err) {
+      this._log(`Fix agent invocation failed: ${err.message}`, 'warn');
+    }
+
+    return { applied: false, fixed: 0, stub: true };
   }
 
   /**
