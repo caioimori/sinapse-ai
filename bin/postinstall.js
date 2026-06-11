@@ -356,6 +356,43 @@ function stepCreateRuntimeDirs() {
 }
 
 /**
+ * Step: generate the SYNAPSE context-engine runtime (.synapse/ domain files).
+ * Compiles the L0 constitution domain from .sinapse-ai/constitution.md so the
+ * UserPromptSubmit context engine actually injects rules. Without this, the
+ * engine is inert (the hook silently emits no context). Tolerant + non-critical:
+ * the wrapper always exits 0 and the engine degrades gracefully if absent.
+ */
+function stepGenerateSynapse() {
+  if (isGlobalInstall()) {
+    return { ok: true, critical: false, skipped: true };
+  }
+  verboseLog(`${c.cyan}›${c.reset} Gerando runtime do motor de contexto (.synapse/)...`);
+  const script = path.join(PROJECT_ROOT, 'scripts', 'generate-synapse-runtime.js');
+  if (!fs.existsSync(script)) {
+    return { ok: true, critical: false, skipped: true };
+  }
+  // Run in-process (not a subprocess) — faster, and keeps the shared run()
+  // sequence (sync:ide → doctor) intact for callers/tests. The wrapper's
+  // generate() is tolerant and never throws; preserve our own exit code since
+  // the underlying generator sets process.exitCode=1 on a miss.
+  const savedExit = process.exitCode;
+  let ok = false;
+  try {
+    const { generate } = require(script);
+    ok = generate();
+  } catch (err) {
+    warn(`Geração do .synapse/ falhou: ${err.message} — não-crítico (motor degrada).`);
+  } finally {
+    process.exitCode = savedExit;
+  }
+  if (ok) {
+    verboseLog(`${c.green}✓${c.reset} Runtime do motor de contexto pronto (.synapse/constitution)`);
+  }
+  // Always non-critical: the engine degrades gracefully without domains.
+  return { ok: true, critical: false };
+}
+
+/**
  * Step 4: sinapse doctor --quiet.
  * Exit code semantics (per Story A.1 Dev Notes + Story A.3):
  *   0 = PASS (ok)
@@ -546,6 +583,9 @@ function main(argvOverride) {
     return 2;
   }
 
+  // Compile the SYNAPSE context-engine runtime (.synapse/). Non-critical.
+  const synapseGen = stepGenerateSynapse();
+
   const doctor = stepDoctor();
   if (doctor.critical) {
     renderPartialInstallMessage();
@@ -570,7 +610,7 @@ function main(argvOverride) {
   // so `npm install` does not report `command failed`. Critical failures have
   // already returned 2 above. The `--json` output still carries `status: warn`
   // for pipelines that want to act on it. [Story 10.39]
-  if (!syncIde.ok || !runtimeDirs.ok || !doctor.ok) {
+  if (!syncIde.ok || !runtimeDirs.ok || !synapseGen.ok || !doctor.ok) {
     renderPartialInstallMessage();
     if (FLAGS.json) {
       if (jsonState.status === 'success') jsonState.status = 'warn';
@@ -592,6 +632,7 @@ module.exports = {
   isValidInstallRoot,
   stepSyncIde,
   stepCreateRuntimeDirs,
+  stepGenerateSynapse,
   stepDoctor,
   renderFinalSummary,
   renderPartialInstallMessage,
