@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1189
+file_count: 1190
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -480,9 +480,9 @@ files:
     type: core
     size: 52328
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:827a41f11dc4c590a33b435cc911c2695fc1c320938a43f9adbd7420f7b3f10b
+    hash: sha256:19f050834b0c5faf69ac5ff8d448ab3a7af7109c82fd2cbb5299320b7e7b6e2b
     type: core
-    size: 31458
+    size: 32197
   - path: core/execution/wave-executor.js
     hash: sha256:630b8d59b147e52c6211877392a20ad51d9733a6632e80d8864f94bd697d2988
     type: core
@@ -1132,9 +1132,9 @@ files:
     type: core
     size: 289408
   - path: core/registry/squad-agent-resolver.js
-    hash: sha256:33a8a516de79895d56aec524fab4503d143ec6457ad750ca8f8816826a818a96
+    hash: sha256:04f7a4835f4a7d4430e2d495eb8e47af1d3f86158cb9de50797c85c7e4889d49
     type: core
-    size: 5750
+    size: 8014
   - path: core/registry/validate-registry.js
     hash: sha256:8612f683f1b7ecd043a0342d05fbe434721b19568b6ff76a483a6de7aa830d5c
     type: core
@@ -1340,9 +1340,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:c94733894a5b7cac12da7692098dddcb04de0339564870bcdb659928e67c6a87
+    hash: sha256:8cf523ebb7fa16110e3361408deb602dfebadf0012db6a6265783a6c706d00d6
     type: data
-    size: 537965
+    size: 538669
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -3427,6 +3427,10 @@ files:
     hash: sha256:c1becf067f67378779a7a9945c88c7dbc7bdeae5d62e82cda5bf2c4baea77b79
     type: script
     size: 17620
+  - path: infrastructure/scripts/ide-sync/persona-renderer.js
+    hash: sha256:44f76be1e48c4a6271d8c721687d8788d2317a1163d74731abfe97f36775334d
+    type: script
+    size: 3638
   - path: infrastructure/scripts/ide-sync/README.md
     hash: sha256:9d7730fbb6c3fe3fc826bddb36987ce008b7b80cf0ea7a8b07e8a2c20484aba1
     type: script
@@ -3436,21 +3440,21 @@ files:
     type: script
     size: 4231
   - path: infrastructure/scripts/ide-sync/transformers/antigravity.js
-    hash: sha256:3ecbf331e0a43bbb29cc0cd9c0dbb07222f763758369aba465481c4aeb131014
+    hash: sha256:ad8db6a847adedb5765eb78f0e420442008bc61c23795c2ab5bf3a3bb1f291d8
     type: script
-    size: 3586
+    size: 3789
   - path: infrastructure/scripts/ide-sync/transformers/claude-code.js
     hash: sha256:c641d14da8f314795da3c7156af6ca4c184cd4883a239b5b02ab4850a200e545
     type: script
     size: 2241
   - path: infrastructure/scripts/ide-sync/transformers/cursor.js
-    hash: sha256:951dbe0088e5b59146b83200dbed32a4867e5833c113af695b0975400451d2fd
+    hash: sha256:38ddee53269c64d5f22ed67a958a103cf384e2e8b80bf2b7b635b4be69a9773c
     type: script
-    size: 3005
+    size: 3293
   - path: infrastructure/scripts/ide-sync/transformers/github-copilot.js
-    hash: sha256:daca292200f9ee0032d1bd50185bc6a900d1ea650798a9e0ae5c81852ab20bac
+    hash: sha256:a38e7d1c385f546f6affb7b56c6d363432538531057cd42b72d43179d5807aa9
     type: script
-    size: 5631
+    size: 5886
   - path: infrastructure/scripts/ide-sync/transformers/kimi.js
     hash: sha256:579679665ee24792b3908d6108b36b53cc71d876bdfada691b6f0fc86163a018
     type: script

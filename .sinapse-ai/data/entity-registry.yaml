@@ -75,6 +75,7 @@ entities:
       purpose: '''Show all available commands with descriptions'''
       type: agent
       usedBy:
+        - entity-registry
         - add-mcp
         - architect-analyze-impact
         - brownfield-create-epic
@@ -82,11 +83,10 @@ entities:
         - spec-research-dependencies
         - validate-next-story
         - brownfield-risk-report-tmpl
-        - design-story-tmpl
-        - story-tmpl
         - claude-rules
         - codex-rules
-        - entity-registry
+        - design-story-tmpl
+        - story-tmpl
         - brownfield-discovery
         - brownfield-fullstack
         - greenfield-fullstack
@@ -136,6 +136,8 @@ entities:
       purpose: '''Show all available commands with descriptions'''
       type: agent
       usedBy:
+        - brownfield-compatibility-checklist
+        - story-draft-checklist
         - analyze-project-structure
         - brownfield-create-epic
         - create-brownfield-story
@@ -156,11 +158,10 @@ entities:
         - validate-next-story
         - validate-tech-preset
         - verify-subtask
-        - design-story-tmpl
-        - story-tmpl
         - claude-rules
         - codex-rules
-        - brownfield-compatibility-checklist
+        - design-story-tmpl
+        - story-tmpl
         - brownfield-discovery
         - brownfield-fullstack
         - brownfield-service
@@ -169,7 +170,6 @@ entities:
         - greenfield-service
         - greenfield-ui
         - spec-pipeline
-        - story-draft-checklist
     data-engineer:
       adaptability:
         constraints: []
@@ -233,9 +233,9 @@ entities:
         - analyze-project-structure
         - brownfield-create-epic
         - validate-next-story
-        - story-tmpl
         - claude-rules
         - codex-rules
+        - story-tmpl
         - brownfield-discovery
     developer:
       adaptability:
@@ -360,6 +360,9 @@ entities:
       purpose: '''Show all available commands with descriptions'''
       type: agent
       usedBy:
+        - memory-audit-checklist
+        - pr-quality-checklist
+        - security-deployment-checklist
         - analyze-project-structure
         - brownfield-create-epic
         - create-worktree
@@ -382,12 +385,9 @@ entities:
         - triage-github-issues
         - update-sinapse
         - validate-next-story
-        - story-tmpl
         - claude-rules
         - codex-rules
-        - memory-audit-checklist
-        - pr-quality-checklist
-        - security-deployment-checklist
+        - story-tmpl
         - greenfield-fullstack
     product-lead:
       adaptability:
@@ -658,10 +658,10 @@ entities:
         - brownfield-create-epic
         - run-design-system-pipeline
         - validate-next-story
-        - design-story-tmpl
-        - story-tmpl
         - claude-rules
         - codex-rules
+        - design-story-tmpl
+        - story-tmpl
         - brownfield-discovery
         - brownfield-ui
         - design-system-build-quality
@@ -1238,23 +1238,24 @@ entities:
       purpose: value"
       type: script
       usedBy:
-        - index
-        - validate
         - antigravity
         - cursor
         - github-copilot
+        - index
+        - validate
     antigravity:
       adaptability:
         constraints: []
         extensionPoints: []
         score: 0.7
-      checksum: sha256:3ecbf331e0a43bbb29cc0cd9c0dbb07222f763758369aba465481c4aeb131014
+      checksum: sha256:ad8db6a847adedb5765eb78f0e420442008bc61c23795c2ab5bf3a3bb1f291d8
       dependencies:
         - agent-parser
+        - persona-renderer
       externalDeps: []
       keywords:
         - antigravity
-      lastVerified: '2026-06-11T06:22:37.909Z'
+      lastVerified: '2026-06-11T13:01:18.677Z'
       layer: L2
       lifecycle: experimental
       path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/antigravity.js
@@ -1300,8 +1301,7 @@ entities:
       plannedDeps: []
       purpose: impactReport.summary,
       type: script
-      usedBy:
-        - architect-analyze-impact
+      usedBy: []
     asset-inventory:
       adaptability:
         constraints: []
@@ -1362,6 +1362,7 @@ entities:
       type: script
       usedBy:
         - improve-self
+        - undo-last
     batch-creator:
       adaptability:
         constraints: []
@@ -1464,12 +1465,12 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\codex-parity\catalog.js
       type: script
       usedBy:
+        - index
         - sync-codex-local-first
+        - validate
         - validate-codex-integration
         - validate-codex-sync
         - validate-paths
-        - index
-        - validate
     changelog-generator:
       adaptability:
         constraints: []
@@ -1568,8 +1569,7 @@ entities:
       plannedDeps: []
       purpose: '''Apply consistent code formatting'','
       type: script
-      usedBy:
-        - dev-improve-code-quality
+      usedBy: []
     codebase-mapper:
       adaptability:
         constraints: []
@@ -1660,6 +1660,7 @@ entities:
       purpose: '`Create ${componentType}`,'
       type: script
       usedBy:
+        - batch-creator
         - build-component
         - compose-molecule
         - create-brownfield-story
@@ -1673,7 +1674,6 @@ entities:
         - generate-documentation
         - generate-migration-strategy
         - generate-shock-report
-        - batch-creator
     component-metadata:
       adaptability:
         constraints: []
@@ -1694,8 +1694,8 @@ entities:
       purpose: null,
       type: script
       usedBy:
-        - transaction-manager
         - component-generator
+        - transaction-manager
     component-search:
       adaptability:
         constraints: []
@@ -1735,11 +1735,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\config-cache.js
       type: script
-      usedBy:
-        - agent-config-loader
-        - index.esm
-        - index
-        - config-resolver
+      usedBy: []
     config-generator:
       adaptability:
         constraints: []
@@ -1779,9 +1775,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\config-loader.js
       type: script
-      usedBy:
-        - index.esm
-        - index
+      usedBy: []
     conflict-resolver:
       adaptability:
         constraints: []
@@ -1827,15 +1821,16 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.7
-      checksum: sha256:951dbe0088e5b59146b83200dbed32a4867e5833c113af695b0975400451d2fd
+      checksum: sha256:38ddee53269c64d5f22ed67a958a103cf384e2e8b80bf2b7b635b4be69a9773c
       dependencies:
         - agent-parser
+        - persona-renderer
       externalDeps: []
       keywords:
         - cursor
         - ${name}
         - (@${agentdata.id})
-      lastVerified: '2026-06-11T06:22:37.910Z'
+      lastVerified: '2026-06-11T13:01:18.677Z'
       layer: L2
       lifecycle: experimental
       path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/cursor.js
@@ -1881,9 +1876,7 @@ entities:
       plannedDeps: []
       purpose: '`Dependency task for ${id}`,'
       type: script
-      usedBy:
-        - modification-validator
-        - batch-creator
+      usedBy: []
     dependency-impact-analyzer:
       adaptability:
         constraints: []
@@ -1948,9 +1941,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\diff-generator.js
       type: script
-      usedBy:
-        - qa-review-proposal
-        - commit-message-generator
+      usedBy: []
     doc-generator:
       adaptability:
         constraints: []
@@ -2011,8 +2002,8 @@ entities:
       purpose: metadata.description || this.extractDescription(markdownContent),
       type: script
       usedBy:
-        - analyze-framework
         - verify-workflow-gaps
+        - analyze-framework
     gemini-commands:
       adaptability:
         constraints: []
@@ -2113,21 +2104,20 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\git-wrapper.js
       type: script
       usedBy:
-        - branch-manager
-        - conflict-resolver
+        - improve-self
     github-copilot:
       adaptability:
         constraints: []
         extensionPoints: []
         score: 0.7
-      checksum: sha256:daca292200f9ee0032d1bd50185bc6a900d1ea650798a9e0ae5c81852ab20bac
+      checksum: sha256:a38e7d1c385f546f6affb7b56c6d363432538531057cd42b72d43179d5807aa9
       dependencies:
         - agent-parser
       externalDeps: []
       keywords:
         - github
         - copilot
-      lastVerified: '2026-06-11T06:22:37.910Z'
+      lastVerified: '2026-06-11T13:01:18.678Z'
       layer: L2
       lifecycle: experimental
       path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/github-copilot.js
@@ -2241,14 +2231,7 @@ entities:
       purpose: ${description}
       type: script
       usedBy:
-        - creation-helper
-        - dev-helper
-        - devops-helper
-        - planning-helper
-        - qa-helper
-        - story-helper
-        - sync-codex-local-first
-        - validate
+        - setup-project-docs
     install-llm-routing:
       adaptability:
         constraints: []
@@ -2376,9 +2359,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\modification-validator.js
       type: script
-      usedBy:
-        - commit-message-generator
-        - rollback-handler
+      usedBy: []
     output-formatter:
       adaptability:
         constraints: []
@@ -2397,10 +2378,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\output-formatter.js
       type: script
-      usedBy:
-        - next
-        - index.esm
-        - index
+      usedBy: []
     path-analyzer:
       adaptability:
         constraints: []
@@ -2440,8 +2418,8 @@ entities:
       purpose: '''State management with persistence across browser sessions using Zustand and persist middleware.'','
       type: script
       usedBy:
-        - extract-patterns
         - analyst
+        - extract-patterns
     performance-analyzer:
       adaptability:
         constraints: []
@@ -2460,8 +2438,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\performance-analyzer.js
       type: script
-      usedBy:
-        - analyze-framework
+      usedBy: []
     performance-and-error-resolver:
       adaptability:
         constraints: []
@@ -2523,6 +2500,24 @@ entities:
       type: script
       usedBy:
         - agent-config-loader
+    persona-renderer:
+      adaptability:
+        constraints: []
+        extensionPoints: []
+        score: 0.7
+      checksum: sha256:44f76be1e48c4a6271d8c721687d8788d2317a1163d74731abfe97f36775334d
+      dependencies: []
+      keywords:
+        - persona
+        - renderer
+      lastVerified: '2026-06-11T13:01:18.675Z'
+      layer: L2
+      path: .sinapse-ai/infrastructure/scripts/ide-sync/persona-renderer.js
+      purpose: Entity at .sinapse-ai\infrastructure\scripts\ide-sync\persona-renderer.js
+      type: script
+      usedBy:
+        - antigravity
+        - cursor
     plan-tracker:
       adaptability:
         constraints: []
@@ -2542,9 +2537,9 @@ entities:
       purpose: subtask.description,
       type: script
       usedBy:
+        - epic-4-executor
         - plan-execute-subtask
         - qa-fix-issues
-        - epic-4-executor
     pm-adapter:
       adaptability:
         constraints: []
@@ -2588,9 +2583,9 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\pm-adapter-factory.js
       type: script
       usedBy:
+        - story-manager
         - po-pull-story
         - po-sync-story
-        - story-manager
     post-commit:
       adaptability:
         constraints: []
@@ -2651,9 +2646,9 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\project-status-loader.js
       type: script
       usedBy:
-        - init-project-status
         - greeting-builder
         - unified-activation-pipeline
+        - init-project-status
     qa-loop-orchestrator:
       adaptability:
         constraints: []
@@ -2713,10 +2708,10 @@ entities:
       purpose: ${this.storyId}`));
       type: script
       usedBy:
+        - developer
         - autonomous-build-loop
         - build-state-manager
         - recovery-handler
-        - developer
     redirect-generator:
       adaptability:
         constraints: []
@@ -2755,8 +2750,7 @@ entities:
       plannedDeps: []
       purpose: '''Extract long methods into smaller, focused methods'','
       type: script
-      usedBy:
-        - dev-suggest-refactoring
+      usedBy: []
     repository-detector:
       adaptability:
         constraints: []
@@ -2798,9 +2792,9 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\rollback-manager.js
       type: script
       usedBy:
-        - recovery-handler
-        - epic-5-executor
         - developer
+        - epic-5-executor
+        - recovery-handler
     sandbox-tester:
       adaptability:
         constraints: []
@@ -2839,12 +2833,7 @@ entities:
       plannedDeps: []
       purpose: '{'
       type: script
-      usedBy:
-        - elicitation-engine
-        - modification-validator
-        - capability-analyzer
-        - component-generator
-        - improvement-validator
+      usedBy: []
     setup-project-infra:
       adaptability:
         constraints: []
@@ -2964,10 +2953,10 @@ entities:
       purpose: '{'
       type: script
       usedBy:
-        - build-state-manager
-        - recovery-handler
-        - epic-5-executor
         - developer
+        - build-state-manager
+        - epic-5-executor
+        - recovery-handler
     subtask-verifier:
       adaptability:
         constraints: []
@@ -3029,9 +3018,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\template-engine.js
       type: script
-      usedBy:
-        - template-validator
-        - component-generator
+      usedBy: []
     template-validator:
       adaptability:
         constraints: []
@@ -3051,8 +3038,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\template-validator.js
       type: script
-      usedBy:
-        - component-generator
+      usedBy: []
     test-discovery:
       adaptability:
         constraints: []
@@ -3090,8 +3076,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\test-generator.js
       type: script
-      usedBy:
-        - qa-generate-tests
+      usedBy: []
     test-quality-assessment:
       adaptability:
         constraints: []
@@ -3171,9 +3156,9 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\tool-resolver.js
       type: script
       usedBy:
-        - story-manager
         - clickup-helpers
         - README
+        - story-manager
     transaction-manager:
       adaptability:
         constraints: []
@@ -3193,10 +3178,7 @@ entities:
       plannedDeps: []
       purpose: options.description || 'Component operation',
       type: script
-      usedBy:
-        - rollback-handler
-        - batch-creator
-        - component-generator
+      usedBy: []
     usage-analytics:
       adaptability:
         constraints: []
@@ -3541,15 +3523,15 @@ entities:
       purpose: Entity at .sinapse-ai\infrastructure\scripts\worktree-manager.js
       type: script
       usedBy:
+        - developer
+        - project-status-loader
+        - story-worktree-hooks
+        - autonomous-build-loop
+        - build-orchestrator
         - create-worktree
         - list-worktrees
         - remove-worktree
-        - autonomous-build-loop
-        - build-orchestrator
-        - developer
         - auto-worktree
-        - project-status-loader
-        - story-worktree-hooks
     yaml-validator:
       adaptability:
         constraints: []
@@ -3568,11 +3550,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\infrastructure\scripts\yaml-validator.js
       type: script
-      usedBy:
-        - modification-validator
-        - index.esm
-        - index
-        - component-generator
+      usedBy: []
   infra-tools:
     21st-dev-magic:
       adaptability:
@@ -3619,9 +3597,7 @@ entities:
       plannedDeps: []
       purpose: '"What this tool does"'
       type: tool
-      usedBy:
-        - db-supabase-setup
-        - environment-bootstrap
+      usedBy: []
     browser:
       adaptability:
         constraints: []
@@ -3680,7 +3656,6 @@ entities:
       purpose: Retrieve up-to-date documentation and code examples for any software library via Context7 AI
       type: tool
       usedBy:
-        - qa-library-validation
         - analyst
         - architect
         - developer
@@ -3688,6 +3663,7 @@ entities:
         - quality-gate
         - sprint-lead
         - squad-creator
+        - qa-library-validation
     desktop-commander:
       adaptability:
         constraints: []
@@ -3771,8 +3747,6 @@ entities:
       usedBy:
         - environment-bootstrap
         - setup-github
-        - devops
-        - product-lead
     google-workspace:
       adaptability:
         constraints: []
@@ -3855,8 +3829,8 @@ entities:
       purpose: Official Railway command-line interface for deploying and managing cloud applications, databases, and services
       type: tool
       usedBy:
-        - environment-bootstrap
         - architect
+        - environment-bootstrap
     supabase:
       adaptability:
         constraints: []
@@ -3900,9 +3874,9 @@ entities:
         management
       type: tool
       usedBy:
-        - environment-bootstrap
         - architect
         - data-engineer
+        - environment-bootstrap
   modules:
     active-modules.verify:
       adaptability:
@@ -3965,8 +3939,8 @@ entities:
       purpose: '''Let\''s start with the fundamental details about your agent'','
       type: module
       usedBy:
-        - index.esm
         - index
+        - index.esm
     agent-invoker:
       adaptability:
         constraints: []
@@ -4046,8 +4020,8 @@ entities:
       purpose: Entity at .sinapse-ai\core\synapse\utils\atomic-write.js
       type: module
       usedBy:
-        - unified-activation-pipeline
         - context-detector
+        - unified-activation-pipeline
     autonomous-build-loop:
       adaptability:
         constraints: []
@@ -4071,9 +4045,9 @@ entities:
       purpose: subtask.description,
       type: module
       usedBy:
-        - build-autonomous
-        - build-orchestrator
         - developer
+        - build-orchestrator
+        - build-autonomous
     backup-manager:
       adaptability:
         constraints: []
@@ -4112,43 +4086,43 @@ entities:
       purpose: this.description,
       type: module
       usedBy:
-        - check-registry
-        - engine
-        - console
-        - markdown
+        - agent-config
+        - api-endpoints
+        - branch-protection
         - build-config
+        - check-registry
         - ci-config
+        - claude-code
+        - commit-history
+        - conflicts
+        - console
+        - dependencies
         - deployment-readiness
-        - docker-config
-        - env-file
         - disk-space
+        - docker-config
+        - engine
+        - env-file
         - environment-vars
+        - framework-config
+        - gemini-cli
         - git-install
+        - git-repo
+        - git-status
+        - github-cli
+        - gitignore
         - ide-detection
+        - large-files
+        - lockfile-integrity
+        - markdown
+        - mcp-integration
         - memory
         - network
         - npm-install
-        - shell-environment
-        - agent-config
-        - dependencies
-        - framework-config
         - package-json
+        - shell-environment
         - sinapse-directory
         - task-definitions
         - workflow-dependencies
-        - branch-protection
-        - commit-history
-        - conflicts
-        - git-repo
-        - git-status
-        - gitignore
-        - large-files
-        - lockfile-integrity
-        - api-endpoints
-        - claude-code
-        - gemini-cli
-        - github-cli
-        - mcp-integration
     base-layer:
       adaptability:
         constraints: []
@@ -4312,9 +4286,9 @@ entities:
       purpose: ${subtask.description}
       type: module
       usedBy:
-        - build
-        - epic-4-executor
         - developer
+        - epic-4-executor
+        - build
     build-registry:
       adaptability:
         constraints: []
@@ -4357,9 +4331,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\execution\build-state-manager.js
       type: module
       usedBy:
+        - developer
         - autonomous-build-loop
         - build-orchestrator
-        - developer
     check-registry:
       adaptability:
         constraints: []
@@ -4593,6 +4567,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\doctor\checks\code-intel.js
       type: module
       usedBy:
+        - code-intel-source
+        - metrics-source
+        - registry-syncer
         - analyze-project-structure
         - brownfield-create-epic
         - create-doc
@@ -4601,9 +4578,6 @@ entities:
         - github-devops-pre-push-quality-gate
         - plan-create-context
         - plan-create-implementation
-        - registry-syncer
-        - code-intel-source
-        - metrics-source
     code-intel-client:
       adaptability:
         constraints: []
@@ -4746,7 +4720,11 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\config\config-cache.js
       type: module
-      usedBy: []
+      usedBy:
+        - config-resolver
+        - index
+        - index.esm
+        - agent-config-loader
     config-loader:
       adaptability:
         constraints: []
@@ -4767,7 +4745,9 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\config\config-loader.js
       type: module
-      usedBy: []
+      usedBy:
+        - index
+        - index.esm
     config-migrator:
       adaptability:
         constraints: []
@@ -4811,11 +4791,11 @@ entities:
       purpose: Entity at .sinapse-ai\core\config\config-resolver.js
       type: module
       usedBy:
-        - environment-bootstrap
+        - bob-orchestrator
+        - config-loader
         - agent-config-loader
         - greeting-builder
-        - config-loader
-        - bob-orchestrator
+        - environment-bootstrap
     conflicts:
       adaptability:
         constraints: []
@@ -4953,12 +4933,12 @@ entities:
       purpose: Entity at .sinapse-ai\core\session\context-detector.js
       type: module
       usedBy:
+        - context-loader
+        - index
+        - index.esm
         - agent-exit-hooks
         - greeting-builder
         - unified-activation-pipeline
-        - index.esm
-        - index
-        - context-loader
     context-injector:
       adaptability:
         constraints: []
@@ -5001,10 +4981,10 @@ entities:
       purpose: Entity at .sinapse-ai\core\session\context-loader.js
       type: module
       usedBy:
-        - context-loading
-        - unified-activation-pipeline
-        - index.esm
         - index
+        - index.esm
+        - unified-activation-pipeline
+        - context-loading
     context-manager:
       adaptability:
         constraints: []
@@ -5147,8 +5127,8 @@ entities:
       purpose: Entity at .sinapse-ai\core\orchestration\data-lifecycle-manager.js
       type: module
       usedBy:
-        - bob-orchestrator
         - project-lead
+        - bob-orchestrator
     delegate-cli:
       adaptability:
         constraints: []
@@ -5309,7 +5289,6 @@ entities:
       purpose: Entity at .sinapse-ai\core\synapse\domain\domain-loader.js
       type: module
       usedBy:
-        - synapse-diagnostics
         - l0-constitution
         - l1-global
         - l2-agent
@@ -5318,6 +5297,7 @@ entities:
         - l6-keyword
         - l7-star-command
         - manifest-collector
+        - synapse-diagnostics
     dot-formatter:
       adaptability:
         constraints: []
@@ -5358,11 +5338,7 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\elicitation\elicitation-engine.js
       type: module
-      usedBy:
-        - index.esm
-        - index
-        - batch-creator
-        - component-generator
+      usedBy: []
     engine:
       adaptability:
         constraints: []
@@ -5655,9 +5631,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\orchestration\executor-assignment.js
       type: module
       usedBy:
-        - brownfield-create-epic
         - bob-orchestrator
         - workflow-executor
+        - brownfield-create-epic
     fast-path-gate:
       adaptability:
         constraints: []
@@ -6040,7 +6016,9 @@ entities:
       plannedDeps: []
       purpose: '''Verifies GitHub CLI (gh) installation and authentication'','
       type: module
-      usedBy: []
+      usedBy:
+        - devops
+        - product-lead
     gitignore:
       adaptability:
         constraints: []
@@ -6101,13 +6079,13 @@ entities:
       purpose: data.description || '',
       type: module
       usedBy:
-        - gotcha
-        - gotchas
+        - developer
+        - active-modules.verify
         - build-orchestrator
         - context-injector
         - subagent-dispatcher
-        - active-modules.verify
-        - developer
+        - gotcha
+        - gotchas
     graph-dashboard:
       adaptability:
         constraints: []
@@ -7657,11 +7635,11 @@ entities:
       purpose: Entity at .sinapse-ai\core\ids\registry-loader.js
       type: module
       usedBy:
-        - index
-        - registry-syncer
-        - framework-governor
         - code-intel-source
+        - framework-governor
+        - index
         - registry-source
+        - registry-syncer
     registry-provider:
       adaptability:
         constraints: []
@@ -7971,9 +7949,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\elicitation\session-manager.js
       type: module
       usedBy:
-        - index.esm
-        - index
         - elicitation-engine
+        - index
+        - index.esm
     session-state:
       adaptability:
         constraints: []
@@ -7993,12 +7971,12 @@ entities:
       purpose: '''Resume from last saved state'','
       type: module
       usedBy:
-        - session-resume
-        - greeting-builder
         - bob-orchestrator
         - brownfield-handler
         - greenfield-handler
         - workflow-executor
+        - greeting-builder
+        - session-resume
     settings-json:
       adaptability:
         constraints: []
@@ -8144,14 +8122,14 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:33a8a516de79895d56aec524fab4503d143ec6457ad750ca8f8816826a818a96
+      checksum: sha256:04f7a4835f4a7d4430e2d495eb8e47af1d3f86158cb9de50797c85c7e4889d49
       dependencies: []
       externalDeps: []
       keywords:
         - squad
         - agent
         - resolver
-      lastVerified: '2026-06-11T06:22:37.787Z'
+      lastVerified: '2026-06-11T13:07:24.325Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/registry/squad-agent-resolver.js
@@ -8225,16 +8203,19 @@ entities:
         constraints: []
         extensionPoints: []
         score: 0.4
-      checksum: sha256:827a41f11dc4c590a33b435cc911c2695fc1c320938a43f9adbd7420f7b3f10b
+      checksum: sha256:19f050834b0c5faf69ac5ff8d448ab3a7af7109c82fd2cbb5299320b7e7b6e2b
       dependencies:
         - spawn-safe
         - squad-agent-resolver
+        - ai-provider-factory
+        - ai-providers
+        - memory-query
         - gotchas-memory
       externalDeps: []
       keywords:
         - subagent
         - dispatcher
-      lastVerified: '2026-06-11T06:22:37.758Z'
+      lastVerified: '2026-06-11T12:50:54.735Z'
       layer: L1
       lifecycle: production
       path: .sinapse-ai/core/execution/subagent-dispatcher.js
@@ -8286,10 +8267,10 @@ entities:
       purpose: Entity at .sinapse-ai\core\orchestration\surface-checker.js
       type: module
       usedBy:
-        - greeting-builder
         - bob-orchestrator
         - brownfield-handler
         - greenfield-handler
+        - greeting-builder
     symlink-manager:
       adaptability:
         constraints: []
@@ -8419,8 +8400,8 @@ entities:
       purpose: '''Define the fundamental details of your task'','
       type: module
       usedBy:
-        - index.esm
         - index
+        - index.esm
     tech-stack-detector:
       adaptability:
         constraints: []
@@ -8539,9 +8520,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\synapse\utils\tokens.js
       type: module
       usedBy:
+        - formatter
         - memory-bridge
         - synapse-memory-provider
-        - formatter
     tree-renderer:
       adaptability:
         constraints: []
@@ -8721,9 +8702,9 @@ entities:
       purpose: '''Where should this workflow be created?'','
       type: module
       usedBy:
-        - verify-workflow-gaps
-        - index.esm
         - index
+        - index.esm
+        - verify-workflow-gaps
     workflow-executor:
       adaptability:
         constraints: []
@@ -8747,10 +8728,10 @@ entities:
       purpose: Entity at .sinapse-ai\core\orchestration\workflow-executor.js
       type: module
       usedBy:
-        - story-checkpoint
         - bob-orchestrator
         - brownfield-handler
         - greenfield-handler
+        - story-checkpoint
     workflow-orchestrator:
       adaptability:
         constraints: []
@@ -8863,6 +8844,8 @@ entities:
         significant change (pivot, tech issue, missing requirement, failed story) is identified during 
       type: checklist
       usedBy:
+        - product-lead
+        - project-lead
         - brownfield-create-epic
         - correct-course
         - modify-agent
@@ -8871,8 +8854,6 @@ entities:
         - propose-modification
         - qa-review-proposal
         - update-manifest
-        - product-lead
-        - project-lead
     component-quality-checklist:
       adaptability:
         constraints: []
@@ -9048,6 +9029,7 @@ entities:
       purpose: Product Owner (PO) Master Validation Checklist
       type: checklist
       usedBy:
+        - product-lead
         - brownfield-create-epic
         - brownfield-create-story
         - create-brownfield-story
@@ -9058,7 +9040,6 @@ entities:
         - qa-trace-requirements
         - sm-create-next-story
         - validate-next-story
-        - product-lead
     pre-push-checklist:
       adaptability:
         constraints: []
@@ -9102,8 +9083,8 @@ entities:
       purpose: Release Checklist
       type: checklist
       usedBy:
-        - publish-npm
         - devops
+        - publish-npm
     self-critique-checklist:
       adaptability:
         constraints: []
@@ -9125,8 +9106,8 @@ entities:
       purpose: '** Mandatory self-review checkpoints to catch issues before they propagate'
       type: checklist
       usedBy:
-        - build-autonomous
         - developer
+        - build-autonomous
     story-dod-checklist:
       adaptability:
         constraints: []
@@ -9568,8 +9549,8 @@ entities:
       purpose: Description"
       type: script
       usedBy:
-        - unified-activation-pipeline
         - config-loader
+        - unified-activation-pipeline
     agent-exit-hooks:
       adaptability:
         constraints: []
@@ -9631,7 +9612,8 @@ entities:
       plannedDeps: []
       purpose: impactReport.summary,
       type: script
-      usedBy: []
+      usedBy:
+        - architect-analyze-impact
     audit-agent-config:
       adaptability:
         constraints: []
@@ -9694,7 +9676,6 @@ entities:
       type: script
       usedBy:
         - improve-self
-        - undo-last
     batch-update-agents-session-context:
       adaptability:
         constraints: []
@@ -9756,7 +9737,8 @@ entities:
       plannedDeps: []
       purpose: '''Apply consistent code formatting'','
       type: script
-      usedBy: []
+      usedBy:
+        - dev-improve-code-quality
     commit-message-generator:
       adaptability:
         constraints: []
@@ -9844,8 +9826,8 @@ entities:
       purpose: Full rollback to state before execution
       type: script
       usedBy:
-        - decision-recorder
         - developer
+        - decision-recorder
     decision-log-indexer:
       adaptability:
         constraints: []
@@ -9908,7 +9890,9 @@ entities:
       plannedDeps: []
       purpose: '`Dependency task for ${id}`,'
       type: script
-      usedBy: []
+      usedBy:
+        - batch-creator
+        - modification-validator
     dev-context-loader:
       adaptability:
         constraints: []
@@ -9947,7 +9931,9 @@ entities:
       plannedDeps: []
       purpose: '{'
       type: script
-      usedBy: []
+      usedBy:
+        - commit-message-generator
+        - qa-review-proposal
     elicitation-engine:
       adaptability:
         constraints: []
@@ -9968,7 +9954,11 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\elicitation-engine.js
       type: script
-      usedBy: []
+      usedBy:
+        - batch-creator
+        - component-generator
+        - index
+        - index.esm
     elicitation-session-manager:
       adaptability:
         constraints: []
@@ -10029,7 +10019,8 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\git-wrapper.js
       type: script
       usedBy:
-        - improve-self
+        - branch-manager
+        - conflict-resolver
     greeting-builder:
       adaptability:
         constraints: []
@@ -10130,7 +10121,14 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\squad\index.js
       type: script
       usedBy:
-        - setup-project-docs
+        - sync-codex-local-first
+        - validate
+        - creation-helper
+        - dev-helper
+        - devops-helper
+        - planning-helper
+        - qa-helper
+        - story-helper
     issue-triage:
       adaptability:
         constraints: []
@@ -10254,7 +10252,9 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\modification-validator.js
       type: script
-      usedBy: []
+      usedBy:
+        - commit-message-generator
+        - rollback-handler
     pattern-learner:
       adaptability:
         constraints: []
@@ -10293,7 +10293,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\performance-analyzer.js
       type: script
-      usedBy: []
+      usedBy:
+        - analyze-framework
     populate-entity-registry:
       adaptability:
         constraints: []
@@ -10333,7 +10334,8 @@ entities:
       plannedDeps: []
       purpose: '''Extract long methods into smaller, focused methods'','
       type: script
-      usedBy: []
+      usedBy:
+        - dev-suggest-refactoring
     rollback-handler:
       adaptability:
         constraints: []
@@ -10373,7 +10375,12 @@ entities:
       plannedDeps: []
       purpose: '{'
       type: script
-      usedBy: []
+      usedBy:
+        - capability-analyzer
+        - component-generator
+        - improvement-validator
+        - modification-validator
+        - elicitation-engine
     skill-validator:
       adaptability:
         constraints: []
@@ -10434,8 +10441,8 @@ entities:
       purpose: '`Squad for ${analysis.domain.replace(/-/g, '' '')} management`,'
       type: script
       usedBy:
-        - squad-creator-design
         - index
+        - squad-creator-design
     squad-downloader:
       adaptability:
         constraints: []
@@ -10500,9 +10507,9 @@ entities:
       purpose: ${safeYamlValue(config.description || 'Custom squad')}
       type: script
       usedBy:
+        - index
         - squad-creator-create
         - squad-creator-list
-        - index
     squad-loader:
       adaptability:
         constraints: []
@@ -10522,13 +10529,13 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\squad\squad-loader.js
       type: script
       usedBy:
+        - index
+        - squad-downloader
+        - squad-publisher
         - squad-creator-analyze
         - squad-creator-create
         - squad-creator-extend
         - squad-creator-validate
-        - index
-        - squad-downloader
-        - squad-publisher
     squad-migrator:
       adaptability:
         constraints: []
@@ -10548,8 +10555,8 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\squad\squad-migrator.js
       type: script
       usedBy:
-        - squad-creator-migrate
         - index
+        - squad-creator-migrate
     squad-publisher:
       adaptability:
         constraints: []
@@ -10593,14 +10600,14 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\squad\squad-validator.js
       type: script
       usedBy:
+        - index
+        - squad-downloader
+        - squad-publisher
+        - verify-workflow-gaps
         - squad-creator-create
         - squad-creator-extend
         - squad-creator-migrate
         - squad-creator-validate
-        - verify-workflow-gaps
-        - index
-        - squad-downloader
-        - squad-publisher
     story-index-generator:
       adaptability:
         constraints: []
@@ -10644,10 +10651,10 @@ entities:
       purpose: storyContent,
       type: script
       usedBy:
-        - po-pull-story-from-clickup
         - po-pull-story
-        - po-sync-story-to-clickup
+        - po-pull-story-from-clickup
         - po-sync-story
+        - po-sync-story-to-clickup
     story-update-hook:
       adaptability:
         constraints: []
@@ -10708,7 +10715,9 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\template-engine.js
       type: script
-      usedBy: []
+      usedBy:
+        - component-generator
+        - template-validator
     template-validator:
       adaptability:
         constraints: []
@@ -10728,7 +10737,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\template-validator.js
       type: script
-      usedBy: []
+      usedBy:
+        - component-generator
     test-generator:
       adaptability:
         constraints: []
@@ -10747,7 +10757,8 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\development\scripts\test-generator.js
       type: script
-      usedBy: []
+      usedBy:
+        - qa-generate-tests
     test-greeting-system:
       adaptability:
         constraints: []
@@ -10788,7 +10799,10 @@ entities:
       plannedDeps: []
       purpose: options.description || 'Component operation',
       type: script
-      usedBy: []
+      usedBy:
+        - batch-creator
+        - component-generator
+        - rollback-handler
     unified-activation-pipeline:
       adaptability:
         constraints: []
@@ -10966,9 +10980,9 @@ entities:
       purpose: Entity at .sinapse-ai\development\scripts\workflow-state-manager.js
       type: script
       usedBy:
+        - verify-workflow-gaps
         - next
         - run-workflow-engine
-        - verify-workflow-gaps
     workflow-validator:
       adaptability:
         constraints: []
@@ -10988,11 +11002,11 @@ entities:
       purpose: data.description,
       type: script
       usedBy:
+        - framework-analyzer
+        - squad-validator
+        - verify-workflow-gaps
         - run-workflow-engine
         - validate-workflow
-        - verify-workflow-gaps
-        - squad-validator
-        - framework-analyzer
     yaml-validator:
       adaptability:
         constraints: []
@@ -11035,7 +11049,9 @@ entities:
         - block-loader
       purpose: '{One-line description}'
       type: task
-      usedBy: []
+      usedBy:
+        - db-supabase-setup
+        - environment-bootstrap
     add-mcp:
       adaptability:
         constraints: []
@@ -11557,8 +11573,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - run-design-system-pipeline
         - ux-design-expert
+        - run-design-system-pipeline
     build-resume:
       adaptability:
         constraints: []
@@ -11626,8 +11642,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - run-design-system-pipeline
         - ux-design-expert
+        - run-design-system-pipeline
     check-docs-links:
       adaptability:
         constraints: []
@@ -11723,9 +11739,9 @@ entities:
       purpose: Clean up abandoned worktrees to maintain repository hygiene.
       type: task
       usedBy:
+        - devops
         - list-worktrees
         - remove-worktree
-        - devops
     collaborative-edit:
       adaptability:
         constraints: []
@@ -12151,10 +12167,10 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - list-worktrees
-        - remove-worktree
         - developer
         - devops
+        - list-worktrees
+        - remove-worktree
         - auto-worktree
     db-analyze-hotpaths:
       adaptability:
@@ -12998,8 +13014,8 @@ entities:
         services, initializes Git/GitHub repository, and validates the development environment b
       type: task
       usedBy:
-        - setup-github
         - devops
+        - setup-github
     environment-promotion-pipeline:
       adaptability:
         constraints: []
@@ -13334,8 +13350,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - run-design-system-pipeline
         - ux-design-expert
+        - run-design-system-pipeline
     generate-migration-strategy:
       adaptability:
         constraints: []
@@ -13416,8 +13432,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - resolve-github-issue
         - devops
+        - resolve-github-issue
     github-devops-pre-push-quality-gate:
       adaptability:
         constraints: []
@@ -13446,9 +13462,9 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
+        - devops
         - publish-npm
         - resolve-github-issue
-        - devops
     github-devops-repository-cleanup:
       adaptability:
         constraints: []
@@ -13569,9 +13585,9 @@ entities:
       purpose: List and search known gotchas (issues and workarounds) from the project's gotchas memory.
       type: task
       usedBy:
+        - developer
         - document-gotchas
         - gotcha
-        - developer
     ids-governor:
       adaptability:
         constraints: []
@@ -13885,10 +13901,10 @@ entities:
       purpose: list-worktrees
       type: task
       usedBy:
-        - create-worktree
-        - remove-worktree
         - developer
         - devops
+        - create-worktree
+        - remove-worktree
     load-testing-setup:
       adaptability:
         constraints: []
@@ -13957,8 +13973,8 @@ entities:
       purpose: Complete worktree workflow by merging changes back to base branch.
       type: task
       usedBy:
-        - create-worktree
         - devops
+        - create-worktree
     modify-agent:
       adaptability:
         constraints: []
@@ -14281,8 +14297,8 @@ entities:
         mandatory self-critique phases (5.5 and 6.5) to catch bugs, edge cases, and pattern viola
       type: task
       usedBy:
-        - build-autonomous
         - developer
+        - build-autonomous
     po-backlog-add:
       adaptability:
         constraints: []
@@ -15027,8 +15043,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - qa-create-fix-request
         - quality-gate
+        - qa-create-fix-request
         - qa-loop
     qa-risk-profile:
       adaptability:
@@ -15185,8 +15201,8 @@ entities:
       purpose: 'To automate the complete software release process, including:'
       type: task
       usedBy:
-        - publish-npm
         - devops
+        - publish-npm
     remove-mcp:
       adaptability:
         constraints: []
@@ -15233,10 +15249,10 @@ entities:
       purpose: remove-worktree
       type: task
       usedBy:
-        - create-worktree
-        - list-worktrees
         - developer
         - devops
+        - create-worktree
+        - list-worktrees
     resolve-github-issue:
       adaptability:
         constraints: []
@@ -15262,8 +15278,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - triage-github-issues
         - devops
+        - triage-github-issues
     review-contributor-pr:
       adaptability:
         constraints: []
@@ -16288,8 +16304,8 @@ entities:
       purpose: '** Validate prerequisites BEFORE task execution (blocking)'
       type: task
       usedBy:
-        - resolve-github-issue
         - devops
+        - resolve-github-issue
     undo-last:
       adaptability:
         constraints: []
@@ -16518,9 +16534,9 @@ entities:
         provides sufficient context for successful development. This task identifies issues and g
       type: task
       usedBy:
-        - po-close-story
         - developer
         - product-lead
+        - po-close-story
     validate-tech-preset:
       adaptability:
         constraints: []
@@ -17681,7 +17697,10 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\utils\output-formatter.js
       type: util
-      usedBy: []
+      usedBy:
+        - index
+        - index.esm
+        - next
     security-utils:
       adaptability:
         constraints: []
@@ -17740,7 +17759,11 @@ entities:
       plannedDeps: []
       purpose: Entity at .sinapse-ai\core\utils\yaml-validator.js
       type: util
-      usedBy: []
+      usedBy:
+        - component-generator
+        - modification-validator
+        - index
+        - index.esm
   workflows:
     auto-worktree:
       adaptability:
@@ -18117,7 +18140,7 @@ entities:
       usedBy: []
 metadata:
   checksumAlgorithm: sha256
-  entityCount: 776
-  lastUpdated: '2026-06-11T06:28:07.431Z'
+  entityCount: 777
+  lastUpdated: '2026-06-11T13:07:24.328Z'
   resolutionRate: 100
   version: 1.0.0
