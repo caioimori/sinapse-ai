@@ -8,6 +8,7 @@
  */
 
 const { getVisibleCommands, normalizeCommands } = require('../agent-parser');
+const { renderPersona } = require('../persona-renderer');
 
 /**
  * Transform agent data to Antigravity format.
@@ -46,6 +47,9 @@ ${icon} **${title}**${archetype ? ` | ${archetype}` : ''}
 > ${whenToUse}
 
 `;
+
+  // PARIDADE-IDE-002: include the persona contract, not just the label.
+  content += renderPersona(agentData, { includeCommunication: true });
 
   // Quick Commands section
   if (quickCommands.length > 0) {
