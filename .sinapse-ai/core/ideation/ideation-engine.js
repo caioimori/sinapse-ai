@@ -8,7 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
 
 // Import dependencies with fallbacks
 const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
@@ -41,35 +41,130 @@ try {
 }
 
 /**
- * Validate that a root path is safe to interpolate into shell command strings.
+ * Resolve the analyzer root to an absolute path.
  *
- * EXEC-004 fix: the analyzers below build shell commands via execSync that
- * interpolate `rootPath` directly (grep/wc/npx madge). A rootPath containing
- * shell metacharacters or quotes could break the command or allow shell
- * injection. The shell features in those commands (globs `**`, pipes,
- * `2>/dev/null`, `|| true`) make a clean execFileSync conversion impractical
- * without changing behavior, so we close the injection vector at the source by
- * resolving and validating rootPath once, in the constructor.
+ * Historical note (EXEC-004): the analyzers used to interpolate `rootPath` into
+ * `execSync('grep …')` shell strings, so this function rejected shell
+ * metacharacters to block injection. The analyzers no longer shell out at all
+ * (they use the pure-Node `nodeGrep`/`nodeCountLines` scanners), so the
+ * injection vector is gone and the strict rejection would only cause
+ * false-positives on legitimate paths (e.g. `C:\Users\Foo (Bar)\proj`). We now
+ * simply resolve to an absolute path.
  *
  * @param {string} rootPath - Candidate root path.
- * @returns {string} The resolved, validated absolute path.
- * @throws {Error} If the path contains shell metacharacters or quotes.
+ * @returns {string} The resolved absolute path.
  */
 function validateRootPath(rootPath) {
-  const resolved = path.resolve(rootPath);
+  return path.resolve(rootPath);
+}
 
-  // Reject shell metacharacters and quotes. Spaces are allowed (handled by the
-  // shell quoting the analyzers already rely on for normal paths), but these
-  // characters can break out of the command string or chain new commands.
-  const SHELL_UNSAFE = /[;&|$`<>(){}'"\n\r]/;
-  if (SHELL_UNSAFE.test(resolved)) {
-    throw new Error(
-      `Unsafe rootPath for IdeationEngine: "${resolved}" contains shell metacharacters or quotes. ` +
-        'Refusing to interpolate it into shell commands.',
-    );
+// ---------------------------------------------------------------------------
+// Cross-platform code scanners (replace the Unix `grep`/`wc` shell-outs).
+//
+// The analyzers used to `execSync('grep -rn … 2>/dev/null || true')`, which only
+// works where grep/sh exist — on Windows (the primary dev platform) every scan
+// failed, so the engine produced ZERO suggestions and printed shell errors.
+// These pure-Node helpers walk the tree and match in-process: identical results
+// on every OS, and the shell-injection surface (EXEC-004) disappears entirely
+// because no command string is ever built.
+// ---------------------------------------------------------------------------
+
+/** Directories never worth scanning. */
+const SCAN_SKIP_DIRS = new Set([
+  'node_modules', '.git', '.synapse', '.sinapse', 'coverage', 'dist', 'build',
+  '.next', '.cache', '.turbo', 'out',
+]);
+
+/**
+ * Walk `roots`, yielding absolute file paths whose extension is in `exts`.
+ * Bounded by `maxFiles` to stay fast on huge trees.
+ * @param {string[]} roots
+ * @param {string[]} exts
+ * @param {number} maxFiles
+ * @returns {string[]}
+ */
+function walkFiles(roots, exts, maxFiles) {
+  const out = [];
+  const seen = new Set();
+  const visit = (dir) => {
+    if (out.length >= maxFiles) return;
+    let entries;
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const e of entries) {
+      if (out.length >= maxFiles) return;
+      if (e.isDirectory()) {
+        if (SCAN_SKIP_DIRS.has(e.name)) continue;
+        visit(path.join(dir, e.name));
+      } else if (e.isFile() && exts.includes(path.extname(e.name))) {
+        out.push(path.join(dir, e.name));
+      }
+    }
+  };
+  for (const r of Array.isArray(roots) ? roots : [roots]) {
+    const abs = path.resolve(r);
+    if (seen.has(abs)) continue;
+    seen.add(abs);
+    try {
+      if (fs.existsSync(abs)) visit(abs);
+    } catch {
+      /* skip unreadable root */
+    }
   }
+  return out;
+}
 
-  return resolved;
+/**
+ * Cross-platform `grep -rn`. Returns newline-joined `absPath:line:content` rows
+ * (or just `content` when `contentOnly`) — the exact shape the analyzers parse.
+ * @param {string[]} roots - Directories to scan.
+ * @param {RegExp} regex - Per-line matcher (non-global).
+ * @param {{exts?: string[], contentOnly?: boolean, maxFiles?: number}} [opts]
+ * @returns {string}
+ */
+function nodeGrep(roots, regex, opts = {}) {
+  const exts = opts.exts || ['.js', '.ts'];
+  const maxFiles = opts.maxFiles || 20000;
+  const rows = [];
+  for (const file of walkFiles(roots, exts, maxFiles)) {
+    let content;
+    try {
+      content = fs.readFileSync(file, 'utf8');
+    } catch {
+      continue;
+    }
+    const lines = content.split(/\r?\n/);
+    for (let i = 0; i < lines.length; i++) {
+      if (regex.test(lines[i])) {
+        rows.push(opts.contentOnly ? lines[i] : `${file}:${i + 1}:${lines[i]}`);
+      }
+    }
+  }
+  return rows.join('\n');
+}
+
+/**
+ * Cross-platform `wc -l` + `sort -rn`. Returns `[{ file, count }]` descending.
+ * @param {string[]} roots
+ * @param {{exts?: string[], maxFiles?: number}} [opts]
+ * @returns {Array<{file: string, count: number}>}
+ */
+function nodeCountLines(roots, opts = {}) {
+  const exts = opts.exts || ['.js'];
+  const maxFiles = opts.maxFiles || 20000;
+  const counts = [];
+  for (const file of walkFiles(roots, exts, maxFiles)) {
+    try {
+      const content = fs.readFileSync(file, 'utf8');
+      counts.push({ file, count: content.split(/\r?\n/).length });
+    } catch {
+      /* skip */
+    }
+  }
+  return counts.sort((a, b) => b.count - a.count);
 }
 
 class IdeationEngine {
@@ -341,12 +436,9 @@ class PerformanceAnalyzer {
 
     try {
       // Search for sync file operations
-      const result = execSync(
-        `grep -rn "readFileSync\\|writeFileSync\\|existsSync" --include="*.js" --include="*.ts" ${this.rootPath}/src ${this.rootPath}/.sinapse-ai 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          maxBuffer: 5 * 1024 * 1024,
-        },
+      const result = nodeGrep(
+        [path.join(this.rootPath, 'src'), path.join(this.rootPath, '.sinapse-ai')],
+        /readFileSync|writeFileSync|existsSync/,
       );
 
       const lines = result.split('\n').filter((l) => l.trim() && !l.includes('node_modules'));
@@ -374,13 +466,7 @@ class PerformanceAnalyzer {
 
     try {
       // Look for nested loops
-      const result = execSync(
-        `grep -rn "for.*for\\|forEach.*forEach" --include="*.js" --include="*.ts" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          maxBuffer: 5 * 1024 * 1024,
-        },
-      );
+      const result = nodeGrep([this.rootPath], /for.*for|forEach.*forEach/);
 
       const lines = result.split('\n').filter((l) => l.trim() && !l.includes('node_modules'));
 
@@ -406,13 +492,7 @@ class PerformanceAnalyzer {
 
     try {
       // Check for large library imports without tree shaking
-      const result = execSync(
-        `grep -rn "import.*from 'lodash'" --include="*.js" --include="*.ts" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          maxBuffer: 5 * 1024 * 1024,
-        },
-      );
+      const result = nodeGrep([this.rootPath], /import.*from 'lodash'/);
 
       const lines = result.split('\n').filter((l) => l.trim() && !l.includes('node_modules'));
 
@@ -438,13 +518,7 @@ class PerformanceAnalyzer {
 
     try {
       // Look for repeated file reads without caching
-      const result = execSync(
-        `grep -rn "JSON.parse.*readFile\\|readFile.*JSON.parse" --include="*.js" --include="*.ts" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          maxBuffer: 5 * 1024 * 1024,
-        },
-      );
+      const result = nodeGrep([this.rootPath], /JSON\.parse.*readFile|readFile.*JSON\.parse/);
 
       const lines = result
         .split('\n')
@@ -491,13 +565,7 @@ class SecurityAnalyzer {
 
     try {
       // Look for potential hardcoded secrets
-      const result = execSync(
-        `grep -rn "password.*=\\s*['\\"]\\|api_key.*=\\s*['\\"]\\|secret.*=\\s*['\\"]" --include="*.js" --include="*.ts" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          maxBuffer: 5 * 1024 * 1024,
-        },
-      );
+      const result = nodeGrep([this.rootPath], /(password|api_key|secret)\s*=\s*['"]/);
 
       const lines = result
         .split('\n')
@@ -528,12 +596,7 @@ class SecurityAnalyzer {
 
     try {
       // Check for eval usage
-      const evalResult = execSync(
-        `grep -rn "\\beval\\s*(" --include="*.js" --include="*.ts" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const evalResult = nodeGrep([this.rootPath], /\beval\s*\(/);
 
       const evalLines = evalResult
         .split('\n')
@@ -561,13 +624,18 @@ class SecurityAnalyzer {
     const findings = [];
 
     try {
-      const auditResult = execSync('npm audit --json 2>/dev/null || true', {
+      // spawnSync (no shell) — cross-platform; npm exits non-zero when vulns
+      // exist but still prints the JSON report to stdout, which is what we parse.
+      const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+      const audit = spawnSync(npmCmd, ['audit', '--json'], {
         cwd: this.rootPath,
         encoding: 'utf8',
+        maxBuffer: 10 * 1024 * 1024,
+        windowsHide: true,
       });
-
-      const audit = JSON.parse(auditResult);
-      const vulns = audit.metadata?.vulnerabilities || {};
+      if (audit.error || !audit.stdout) return findings;
+      const auditJson = JSON.parse(audit.stdout);
+      const vulns = auditJson.metadata?.vulnerabilities || {};
       const critical = vulns.critical || 0;
       const high = vulns.high || 0;
 
@@ -612,18 +680,11 @@ class CodeQualityAnalyzer {
 
     // This is a simplified check - in production would use AST analysis
     try {
-      const result = execSync(
-        `wc -l ${this.rootPath}/src/**/*.js ${this.rootPath}/.sinapse-ai/**/*.js 2>/dev/null | sort -rn | head -10 || true`,
-        {
-          encoding: 'utf8',
-        },
+      const counts = nodeCountLines(
+        [path.join(this.rootPath, 'src'), path.join(this.rootPath, '.sinapse-ai')],
+        { exts: ['.js'] },
       );
-
-      const lines = result.split('\n').filter((l) => l.trim() && !l.includes('total'));
-      const longFiles = lines.filter((l) => {
-        const count = parseInt(l.trim().split(/\s+/)[0]);
-        return count > 500;
-      });
+      const longFiles = counts.filter((c) => c.count > 500);
 
       if (longFiles.length > 0) {
         findings.push({
@@ -645,14 +706,21 @@ class CodeQualityAnalyzer {
   checkDuplication() {
     const findings = [];
 
-    // Simplified duplication check
+    // Simplified duplication check: collect candidate declaration lines and look
+    // for exact duplicates (the old `grep -rh … | sort | uniq -d` pipeline).
     try {
-      const result = execSync(
-        `grep -rh "function\\|const.*=.*=>" --include="*.js" ${this.rootPath}/src 2>/dev/null | sort | uniq -d | head -5 || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const raw = nodeGrep([path.join(this.rootPath, 'src')], /function|const.*=.*=>/, {
+        contentOnly: true,
+      });
+      const seen = new Set();
+      const dups = new Set();
+      for (const line of raw.split('\n')) {
+        const t = line.trim();
+        if (!t) continue;
+        if (seen.has(t)) dups.add(t);
+        else seen.add(t);
+      }
+      const result = [...dups].slice(0, 5).join('\n');
 
       if (result.trim().length > 0) {
         findings.push({
@@ -675,12 +743,7 @@ class CodeQualityAnalyzer {
     const findings = [];
 
     try {
-      const result = execSync(
-        `grep -rn "console\\.log\\|console\\.error" --include="*.js" --include="*.ts" ${this.rootPath}/src 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const result = nodeGrep([path.join(this.rootPath, 'src')], /console\.(log|error)/);
 
       const lines = result.split('\n').filter((l) => l.trim() && !l.includes('node_modules'));
 
@@ -724,12 +787,7 @@ class UXAnalyzer {
 
     try {
       // Check for missing aria labels in React components
-      const result = execSync(
-        `grep -rn "<button\\|<a\\s" --include="*.tsx" --include="*.jsx" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const result = nodeGrep([this.rootPath], /<button|<a\s/, { exts: ['.tsx', '.jsx'] });
 
       const lines = result
         .split('\n')
@@ -757,23 +815,15 @@ class UXAnalyzer {
 
     try {
       // Check for fetch/async without loading states
-      const result = execSync(
-        `grep -rn "fetch\\|axios\\|useQuery" --include="*.tsx" --include="*.jsx" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const result = nodeGrep([this.rootPath], /fetch|axios|useQuery/, { exts: ['.tsx', '.jsx'] });
 
       const asyncCalls = result
         .split('\n')
         .filter((l) => l.trim() && !l.includes('node_modules')).length;
 
-      const loadingResult = execSync(
-        `grep -rn "isLoading\\|loading\\|Spinner\\|Skeleton" --include="*.tsx" --include="*.jsx" ${this.rootPath} 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
-      );
+      const loadingResult = nodeGrep([this.rootPath], /isLoading|loading|Spinner|Skeleton/, {
+        exts: ['.tsx', '.jsx'],
+      });
 
       const loadingStates = loadingResult
         .split('\n')
@@ -818,14 +868,14 @@ class ArchitectureAnalyzer {
     const findings = [];
 
     try {
-      // Use madge if available
-      const result = execSync(
-        `npx madge --circular --warning ${this.rootPath}/src 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-          timeout: 30000,
-        },
-      );
+      // Use madge if available (spawnSync, no shell — cross-platform).
+      const npxCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+      const proc = spawnSync(npxCmd, ['madge', '--circular', '--warning', path.join(this.rootPath, 'src')], {
+        encoding: 'utf8',
+        timeout: 30000,
+        windowsHide: true,
+      });
+      const result = proc.stdout || '';
 
       if (result.includes('Circular')) {
         const circularCount = (result.match(/→/g) || []).length;
@@ -852,11 +902,10 @@ class ArchitectureAnalyzer {
 
     try {
       // Check if UI imports from infrastructure
-      const result = execSync(
-        `grep -rn "from.*infrastructure\\|from.*database" --include="*.tsx" --include="*.jsx" ${this.rootPath}/src/components 2>/dev/null || true`,
-        {
-          encoding: 'utf8',
-        },
+      const result = nodeGrep(
+        [path.join(this.rootPath, 'src', 'components')],
+        /from.*infrastructure|from.*database/,
+        { exts: ['.tsx', '.jsx'] },
       );
 
       const violations = result.split('\n').filter((l) => l.trim());

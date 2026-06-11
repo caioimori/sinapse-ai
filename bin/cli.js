@@ -26,6 +26,7 @@ const KNOWN_COMMANDS = [
   'list',
   'status',
   'doctor',
+  'ideate',
   'chrome-brain',
   'help',
 ];
@@ -134,6 +135,14 @@ function runRouter() {
     // eslint-disable-next-line no-fallthrough -- process.exit above terminates; Story 10.45 piggyback fix.
     case 'list':     cmdList(); break;
     case 'status':   cmdStatus(); break;
+    case 'ideate': {
+      // Wires the IdeationEngine (self-improvement analyzers) into the CLI.
+      const { cmdIdeate } = require('./commands/ideate');
+      cmdIdeate({ argv: args.slice(1) })
+        .then((code) => { if (code) process.exitCode = code; })
+        .catch((e) => { logger.error(`${RED}Erro no ideate:${NC} ${e.message}`); process.exit(1); });
+      break;
+    }
     case 'doctor': {
       // Story 10.21 — wires the modular doctor into the canonical CLI
       const doctorArgs = args.slice(1);
