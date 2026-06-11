@@ -4652,9 +4652,9 @@ files:
     type: script
     size: 9539
   - path: scripts/pm.sh
-    hash: sha256:f77ee7c6a874da06153e3d24df5ec6fe3496cd1b04bffaa559d9bb442a19c6f0
+    hash: sha256:060c5ab9ee43372e2177353b2b6f54f036b7dd86122fc6e2dc6e91fb0e3ab6d2
     type: script
-    size: 12053
+    size: 12644
   - path: scripts/README.md
     hash: sha256:d6961b96ff7163261d6f56f441f2fb0a35568d5e0034aa4bfecc9fe0993edfe1
     type: script
