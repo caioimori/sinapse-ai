@@ -960,9 +960,9 @@ files:
     type: core
     size: 8543
   - path: core/orchestration/executors/epic-6-executor.js
-    hash: sha256:ec8d66cde48b09912b13ba3f514e91cfddb14552384722b2bd37931be18cafdc
+    hash: sha256:0cd51d8989ac242b7c3da1ac149cc869827c777fe632bc22610921f31b25541c
     type: core
-    size: 9131
+    size: 12446
   - path: core/orchestration/executors/epic-executor.js
     hash: sha256:0c25d4799a6338252017d9deb2f73bbdbde58cd5f7bfe4ac0fccdc66fe0229d2
     type: core
@@ -1340,9 +1340,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:bf986385a95a466c5ea497622b8355c4c630b91fdb393733553d08ba24c7dbf3
+    hash: sha256:c5a1db49d9192194347da8e127d3ed92b6449b7483a0e226c76cd1c7dc445503
     type: data
-    size: 537950
+    size: 537893
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
