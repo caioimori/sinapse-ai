@@ -70,6 +70,11 @@
             "type": "command",
             "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/enforce-nsn-guard.cjs\"",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/code-intel-pretool.cjs\"",
+            "timeout": 5
           }
         ]
       },

@@ -29,6 +29,7 @@ paths:
 | `slug-validation.py` | Convention — Validate naming | WARN (exit 0) |
 | `mind-clone-governance.py` | Cloning — DNA required | BLOCK (exit 2) |
 | `enforce-delegation.cjs` | Art. VIII — Orchestrators can't execute | BLOCK (exit 2) |
+| `code-intel-pretool.cjs` | Code Intelligence — injects existing entity/refs/deps as context before editing | ALLOW (additionalContext, exit 0) |
 
 ### PreToolUse — Read
 | Hook | Purpose | Behavior |
