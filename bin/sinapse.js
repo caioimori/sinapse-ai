@@ -9,7 +9,7 @@
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 
 // Story A.2 — unified logger. Levels: error/warn/info/debug.
@@ -1207,12 +1207,38 @@ async function main() {
       break;
     }
 
+    case 'graph': {
+      // Dependency/stats dashboard. Consolidated from the deprecated
+      // standalone `sinapse-graph` binary into a subcommand of the main CLI.
+      // Closes the published interface contract (claude-md template + CI test
+      // expect `sinapse graph --deps` to work in every installed project).
+      const { run } = require('../.sinapse-ai/core/graph-dashboard/cli');
+      await run(args.slice(1));
+      break;
+    }
+
+    case 'mcp': {
+      // Global MCP configuration manager (setup, link, status, add).
+      // Routes to the Commander CLI, same pattern as the `qa` case.
+      const { run } = require('../.sinapse-ai/cli/index.js');
+      await run(process.argv);
+      break;
+    }
+
     case undefined:
       // No arguments - launch Claude Code with SINAPSE branding
       launchSinapse([]);
       break;
 
     default:
+      // IDS subcommands (`ids:query`, `ids:health`, ...) delegate to the
+      // dedicated IDS CLI. Without this they fell through to launchSinapse and
+      // were silently passed to Claude Code as args (confirmed bug).
+      if (typeof command === 'string' && command.startsWith('ids:')) {
+        const idsBin = path.join(__dirname, 'sinapse-ids.js');
+        const result = spawnSync(process.execPath, [idsBin, ...args], { stdio: 'inherit' });
+        process.exit(result.status === null ? 1 : result.status);
+      }
       // Any unknown command is passed through to Claude Code as arguments
       // e.g. `sinapse --model sonnet` → `claude --model sonnet`
       launchSinapse(args);
