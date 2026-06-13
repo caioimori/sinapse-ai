@@ -119,7 +119,7 @@ const modulePromise = pipeline(
   MODULES_TO_RUN,
   (m) => agent(
     `Você é um auditor de framework. Analise o módulo \`${m}\` em ${REPO}/.sinapse-ai/core/${m}/.\n${CONTEXT}\nTarefas:\n1. Leia o código do módulo (entry points, index, README se houver) e resuma o que ele PROMETE.\n2. Encontre TODOS os consumidores reais: Grep por imports/requires E por referências dinâmicas (nome por string) em bin/, .sinapse-ai/core/ (outros módulos), .sinapse-ai/development/, .sinapse-ai/data/, scripts/, tests/, packages/, .github/. Auto-referência (o módulo consumindo a si mesmo) NÃO conta como consumidor.\n3. Avalie se o módulo FUNCIONA quando invocado de verdade (trace o caminho; smoke read-only via node -e se ajudar).\n4. Detecte sobreposição REAL de responsabilidade com outros módulos do core: ${MODULES.join(', ')}.\n5. Classifique (funcional/inerte/redundante/misto) e recomende ação conforme a LEI. Seja honesto: "tem testes" NÃO prova consumidor real — teste que só testa o próprio módulo é tautologia.\nRetorne via StructuredOutput.`,
-    { label: `mapa:${m}`, phase: 'Mapa', schema: MODULE_SCHEMA }
+    { label: `mapa:${m}`, phase: 'Mapa', schema: MODULE_SCHEMA, model: 'sonnet' }
   ),
   async (report, m) => {
     if (!report) return null
@@ -127,7 +127,7 @@ const modulePromise = pipeline(
     if (clean) return { ...report, contested: false, skeptics: [] }
     const votes = await parallel(
       skepticPrompts(`módulo core/${m}`, report).map((p) => () =>
-        agent(p, { label: `verify:${m}`, phase: 'Verify', schema: VERDICT_SCHEMA })
+        agent(p, { label: `verify:${m}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'sonnet' })
       )
     )
     const valid = votes.filter(Boolean)
@@ -165,7 +165,7 @@ log(`Frentes especiais: ${SPECIALS_TO_RUN.map((s) => s.key).join(', ')}`)
 
 const specialPromise = pipeline(
   SPECIALS_TO_RUN,
-  (s) => agent(s.prompt, { label: `especial:${s.key}`, phase: 'Especiais', schema: FINDINGS_SCHEMA }),
+  (s) => agent(s.prompt, { label: `especial:${s.key}`, phase: 'Especiais', schema: FINDINGS_SCHEMA, model: 'sonnet' }),
   async (rep, s) => {
     if (!rep) return null
     const checked = await parallel(
@@ -174,7 +174,7 @@ const specialPromise = pipeline(
         if (!needsCheck) return Promise.resolve({ ...f, contested: false, skeptic: null })
         return agent(
           `Você é um cético adversarial. Na frente "${s.key}" do repo, um auditor alegou: "${f.title}" — ${f.detail}. Evidência: ${f.evidence}. Ação recomendada: ${f.recommended_action}.\n${CONTEXT}\nREFUTE com evidência concreta (consumidor escondido, consumo dinâmico, funcionamento real diferente do alegado, contrato público que quebraria, caminho de potencialização que muda a recomendação). refuted=true só com file:line concreto em new_evidence.`,
-          { label: `verify:${s.key}`, phase: 'Verify', schema: VERDICT_SCHEMA }
+          { label: `verify:${s.key}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'sonnet' }
         ).then((v) => ({ ...f, contested: !!(v && v.refuted), skeptic: v }))
       })
     )
@@ -194,7 +194,7 @@ const data = { modules: moduleResults, specials: specialResults }
 
 const synth = await agent(
   `Você é o sintetizador do deep-dive de racionalização do SINAPSE-AI.\n${CONTEXT}\nEscreva o arquivo ${REPO}/docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md consolidando os dados abaixo. Estrutura do doc (PT-BR sóbrio, sem nome de agentes internos):\n1. Resumo executivo (3 frases).\n2. Mapa do core — tabela: módulo | veredicto | ação recomendada | prioridade | contestado?\n3. Frentes especiais — um bloco por frente com os achados.\n4. Achados CONTESTADOS — para cada um, os dois lados (auditor vs cético, com evidências) e seu julgamento fundamentado de qual lado vence.\n5. Plano de racionalização P0→P3 — cada item: o quê, como (passos concretos), risco, e se precisa de OK explícito do dono (qualquer corte precisa).\nRegras: a LEI vence (potencializar > cortar); achados refutados pelo cético com evidência concreta NÃO entram no plano como estavam — entram ajustados. Inclua no fim a lista de módulos 100% saudáveis (veredicto funcional, sem ação).\n\nDADOS (JSON):\n${JSON.stringify(data)}`,
-  { label: 'síntese', schema: SYNTH_SCHEMA }
+  { label: 'síntese', schema: SYNTH_SCHEMA, model: 'opus' }
 )
 
 if (!synth) {
