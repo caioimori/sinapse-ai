@@ -12,7 +12,10 @@ const _path = require('path');
 // Import dependencies with fallbacks
 let WaveAnalyzer;
 try {
-  WaveAnalyzer = require('../../workflow-intelligence/engine/wave-analyzer');
+  // Named export — the module exports { WaveAnalyzer, ... }. Requiring the
+  // whole object and calling `new WaveAnalyzer()` (line ~37) would throw
+  // "not a constructor". Destructure the class.
+  ({ WaveAnalyzer } = require('../../workflow-intelligence/engine/wave-analyzer'));
 } catch {
   WaveAnalyzer = null;
 }
