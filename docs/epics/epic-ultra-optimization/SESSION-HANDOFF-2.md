@@ -97,3 +97,30 @@ A frota do deep-dive foi desenhada e lançada (workflow `deep-dive-rationalizati
 
 ### Depois do deep-dive (inalterado)
 Mapa do core classificado → plano P0→P3 → executar frentes seguras → suíte verde → SÓ ENTÃO publicar (revogar token npm exposto + gerar novo antes).
+
+---
+
+## SESSÃO 3 (13/06) — DEEP-DIVE COMPLETO + EXECUÇÃO P1 EM ANDAMENTO
+
+**Deep-dive concluído:** frota de 79 agentes (Sonnet bulk + Opus síntese, ~7,8M tokens) rodou inteira numa tacada. Doc final: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` (commit `1b8b006`). Veredito: framework saudável; problema = cabeamento CLI incompleto, não capacidade ausente. Plano P0(3)/P1(10)/P2(11)/P3(6). 14 achados contestados pela verificação adversarial (6 falso-positivos derrubados). **Caio aprovou:** executar tudo que melhora o framework começando por P1 completo + os 2 cortes seguros (test-validation-task.md, duplicata órfã elicitation).
+
+**Roteamento de modelo da frota (cabeado no script, commit `a67cc01`):** bulk em Sonnet, síntese em Opus. Caio roda main loop em Opus 4.8 (1M context) — não afeta custo da frota (modelos cabeados por agente).
+
+### P1 — FEITO nesta sessão (testado + commitado, árvore limpa)
+| Onda | Commit | Itens |
+|---|---|---|
+| 1 | `e82014d` | Cabear **graph**, **ids:***, **mcp** como subcomandos do `bin/sinapse.js`. graph corrige bug confirmado (contrato CI do template) consolidando o binário deprecated `sinapse-graph`; ids corrige bug (caía no Claude Code); mcp roteia ao Commander. |
+| 2 | `b2baff7` | Fix **WaveAnalyzer** (named export — `new` lançava "not a constructor"); **diagnostics SYNAPSE** no `doctor --deep`. |
+| 3 | `1eef215` | Cria **hook code-intel-pretool.cjs** ausente (installer mapeava arquivo inexistente) + registra no settings.json + documenta no hook-governance. |
+
+### P1 — RESTANTE (próxima onda)
+- **orchestrate** (risco médio): cabear `case 'orchestrate'` no `sinapse.js` → `cliCommands.orchestrate(storyId, options)` de `core/orchestration` (variantes: status/stop/resume/dry-run). Expõe pipeline autônomo. Caminho quente — testar com cuidado.
+- **task @devops quality-gates** (baixo): `github-devops-pre-push-quality-gate.md` deve chamar `sinapse qa run --layer=1` em vez de reimplementar.
+- **IDS G6** (médio): wrapper do hook ids-pre-push no GateEvaluator (só G1-G5 implementados).
+
+### Achados NOVOS da execução (não estavam no plano — registrar)
+1. **Gerador de entity-registry não escaneia `bin/`** → `ideate.js:82` consome o ideation-engine mas o registry marca `lifecycle: orphan`/`usedBy: []`. O item P1 "registry stale do ideation" não é editar o YAML (auto-gerado, reverte) — é melhorar o gerador pra escanear `bin/`. Vira item P2.
+2. **Churn não-determinístico do entity-registry**: tocar QUALQUER arquivo em `.sinapse-ai/` dispara regen que reescreve o YAML inteiro com ordenação instável (~28k linhas de diff por mudança de ordem, não de conteúdo). Fragilidade real — gerador precisa de ordenação estável/determinística. Item P2/P3. (Por isso descartei os artefatos regenerados nos commits — não poluir.)
+
+### Como continuar
+Frase-gatilho de sempre. Ler este handoff §"SESSÃO 3". Próximo: onda P1 restante (orchestrate + task @devops + G6), depois P2/P3 + 2 cortes aprovados. Suíte sempre verde por onda. Publicar = último passo (revogar token npm antes).
