@@ -124,3 +124,23 @@ Mapa do core classificado → plano P0→P3 → executar frentes seguras → su�
 
 ### Como continuar
 Frase-gatilho de sempre. Ler este handoff §"SESSÃO 3". Próximo: onda P1 restante (orchestrate + task @devops + G6), depois P2/P3 + 2 cortes aprovados. Suíte sempre verde por onda. Publicar = último passo (revogar token npm antes).
+
+---
+
+## SESSÃO 4 (14/06) — P1 COMPLETO (10/10) + descoberta de baseline
+
+**P1 FECHADO.** Os 3 itens restantes commitados (`11418b5`) + registro do gate no manifest (`f449d54`):
+- **orchestrate** cabeado no `bin/sinapse.js` → `core/orchestration` (full pipeline + status/stop/resume/dry-run/epic). storyId = 1º arg não-flag. Smoke-testado (exit 3 sem story, exit 1 state-not-found). Fecha gap Art. I no pipeline autônomo (Epic 0).
+- **IDS G6** implementado: novo `core/ids/gates/g6-ci-integrity.js` (G6CiIntegrityGate, blocking, @devops) — integrity check do Entity Registry (CRITICAL bloqueia) + sync de arquivos alterados (MEDIUM/LOW = warning). Cabeado no GateEvaluator (phase `ci_cd`) + barrel `index.js`. SLA 60s (CI), não 2s. Novo teste `tests/core/ids/g6-ci-integrity.test.js` (15 casos).
+- **task @devops** (`github-devops-pre-push-quality-gate.md`) agora chama `sinapse qa run --layer=1` em vez de reimplementar lint/test/typecheck; build vira passo à parte (fora da Layer 1); seções renumeradas.
+
+**Descoberta importante — baseline NÃO estava 100% verde nesta máquina (Node 24):** suíte completa deu 32 falhas / 11 suites. Classificação:
+- **31 = ambiente/timing** (pré-existentes, independentes das mudanças): asserts `toBeLessThan` de "Performance" (SquadGenerator, Squad Designer, Health Check) + WorktreeManager (361s!) e git-hooks-installer e2e que fazem `git init/commit/worktree` reais via execa numa máquina sob carga. execa é 5.1.1 (CJS ok, não é erro de import). O `jest.config` já documenta diferença Node 24 vs 22.
+- **1 = real determinístico (CORRIGIDO):** `hook-security.test.js` exigia `process.exit(2)` do `code-intel-pretool.cjs` (criado na onda P1 anterior), que é ALLOW-only por design (`hook-governance.md`). Adicionado à lista `WARN_ONLY_HOOKS`. Suíte hook-security 90/90.
+
+Validação onda: IDS 453/453, gate-evaluator, hook-security, cli — todas verdes. lint (só warning `catch {}` pré-existente em sinapse.js:497) + typecheck limpos.
+
+**Churn não-determinístico do entity-registry + install-manifest** segue ativo (handoff sessão 3 §achados novos): qualquer commit dispara regen com timestamp/hash/ordem instável. Descartado dos commits (revert). O install-manifest FOI commitado uma vez (registra o g6 real); o resto é churn revertido. **Item P2/P3 pendente: ordenação determinística do gerador.**
+
+### Próximo (sessão 5)
+Plano inalterado: **2 cortes aprovados** (`test-validation-task.md` fixture + duplicata órfã `development/scripts/elicitation-*.js`) + **P2** (11 itens: output-formatter consolidação, grounding dedup, health backend, variants por project_type, tasks órfãs nos agentes, _saveState colapso, cache AgentInvoker, manifest regex core/docs, gerador entity-registry determinístico) + **P3** (6 itens). Suíte verde por onda. Publicar = último passo (revogar token npm antes). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
