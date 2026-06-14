@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1190
+file_count: 1191
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -484,9 +484,9 @@ files:
     type: core
     size: 32197
   - path: core/execution/wave-executor.js
-    hash: sha256:630b8d59b147e52c6211877392a20ad51d9733a6632e80d8864f94bd697d2988
+    hash: sha256:49cc1b4712d13cb0638f514cc3b00fa0ab576737c942103fbf5d0931010727b7
     type: core
-    size: 11061
+    size: 11268
   - path: core/external-executors/delegate-cli.js
     hash: sha256:f9ba17ba23010e94f13c41182487fa2d71458331403bbb32e76e7859bcfc7275
     type: core
@@ -780,9 +780,9 @@ files:
     type: core
     size: 18065
   - path: core/ids/gate-evaluator.js
-    hash: sha256:70ab12ad720ad67cc94ea2202bf5ab874f57fca36106210a3228203b27a2d1d2
+    hash: sha256:bd7df6909e933b339cd5f9cbe8f926dcd4fdc013fcbefbdda308a1dfbfb2616c
     type: core
-    size: 10514
+    size: 10819
   - path: core/ids/gates/g1-epic-creation.js
     hash: sha256:243f93c5d17df6f2e526a87e60fcbd6df19ddef34bf5af42bbfa139a986817f9
     type: core
@@ -803,14 +803,18 @@ files:
     hash: sha256:15dcbeba76ac865e69ff9215905154538482968dc918db637283180a7c8796fa
     type: core
     size: 6366
+  - path: core/ids/gates/g6-ci-integrity.js
+    hash: sha256:567cdbfea471bf8441ce70685f313df630bd5b937e8e8e29500c935a370eb3c5
+    type: core
+    size: 6116
   - path: core/ids/incremental-decision-engine.js
     hash: sha256:8c952e724acc886de6ab9283717acb63a1d46e1ac6e9179afc782ef5dd7b80bd
     type: core
     size: 21405
   - path: core/ids/index.js
-    hash: sha256:25d2928027c6f095c30aecce16dfe45f64032768c4ac9ffd2ccdd4d4a614e369
+    hash: sha256:fc40a8c185f158b1f30b9db59e62902dbd6b0be4cbf5beead5446250e15673f3
     type: core
-    size: 4102
+    size: 4382
   - path: core/ids/layer-classifier.js
     hash: sha256:d05c0bc4766f5595cd4bd60d3d8d5cc4a6d98e041d8dd84bde795e8531785391
     type: core
@@ -1340,9 +1344,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:93d1c061275f8b5725f65e77d78f13b2970a5bc0fa115aa30f31de041d0fb6d1
+    hash: sha256:037a36b2074bb4ed9d4dc919c858bc058931d09fb8ac60e85b745cc30bd07108
     type: data
-    size: 539455
+    size: 540001
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -2312,9 +2316,9 @@ files:
     type: task
     size: 19505
   - path: development/tasks/github-devops-pre-push-quality-gate.md
-    hash: sha256:566fcc02c4dcbfe7c1a37c6c48a99fe1f96987559d90fa4b23f1d68ab7abafa4
+    hash: sha256:90969a5b843c976b8cd902c55517589c64c88bd4001590dbc4b107703fa12ce6
     type: task
-    size: 23861
+    size: 24774
   - path: development/tasks/github-devops-repository-cleanup.md
     hash: sha256:0cc4129dd7139badf882650a01fcee93a4c181f8d8eb70213fe721fa0ee63e9c
     type: task
