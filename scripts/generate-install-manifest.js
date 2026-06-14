@@ -63,15 +63,19 @@ const EXCLUDE_PATTERNS = [
   /\.bak$/,
   /\.tmp$/,
   /~$/,
-  // Gitignored legacy docs (not tracked in repo)
-  /docs\/standards\/SINAPSE-LIVRO-DE-OURO/,
-  /docs\/standards\/SINAPSE-FRAMEWORK-MASTER\.md$/,
-  /docs\/standards\/V3-ARCHITECTURAL-DECISIONS\.md$/,
-  /docs\/SHARD-TRANSLATION-GUIDE\.md$/,
-  /docs\/component-creation-guide\.md$/,
-  /docs\/template-syntax\.md$/,
-  /docs\/troubleshooting-guide\.md$/,
-  /docs\/session-update-pattern\.md$/,
+  // Gitignored legacy docs (not tracked in repo).
+  // Anchored to ^docs/ so they only match the top-level .sinapse-ai/docs/ tree.
+  // Unanchored, /docs\/.../ also matched nested core/docs/*.md and wrongly
+  // excluded 5 TRACKED framework docs from the manifest (so brownfield upgrades
+  // never tracked their drift).
+  /^docs\/standards\/SINAPSE-LIVRO-DE-OURO/,
+  /^docs\/standards\/SINAPSE-FRAMEWORK-MASTER\.md$/,
+  /^docs\/standards\/V3-ARCHITECTURAL-DECISIONS\.md$/,
+  /^docs\/SHARD-TRANSLATION-GUIDE\.md$/,
+  /^docs\/component-creation-guide\.md$/,
+  /^docs\/template-syntax\.md$/,
+  /^docs\/troubleshooting-guide\.md$/,
+  /^docs\/session-update-pattern\.md$/,
   // Gitignored generated files
   /data\/registry-update-log\.jsonl$/,
   /data\/registry-healing-log\.jsonl$/,

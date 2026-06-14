@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1188
+file_count: 1193
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -299,6 +299,26 @@ files:
     hash: sha256:4da0e29fa2aad5d2dcc83c25f3dbecb00ed2de932166d39f1311b19ae862710d
     type: template
     size: 728
+  - path: core/docs/component-creation-guide.md
+    hash: sha256:9f25621ed3ebb88c931f82f9827abb3eecb65fe02c8637e46dff6c987793793b
+    type: documentation
+    size: 9330
+  - path: core/docs/session-update-pattern.md
+    hash: sha256:007f7672d6f6bb34d97d382f998e4a749aafa0290724b5662a1d4602448e621f
+    type: documentation
+    size: 8831
+  - path: core/docs/SHARD-TRANSLATION-GUIDE.md
+    hash: sha256:9b17ab6f27ea9a8adec4598c0d82ceaefc201c58ad4d62ff40e4277318211a66
+    type: documentation
+    size: 8680
+  - path: core/docs/template-syntax.md
+    hash: sha256:7916a88ec14ada601ebf9c6e43246c404e495e9ab860ea71cdbd8601de19ff99
+    type: documentation
+    size: 6240
+  - path: core/docs/troubleshooting-guide.md
+    hash: sha256:8a47e61f5313372b52f9ef7ed64215299daa43ffa40a0f56c64a7d6758243654
+    type: documentation
+    size: 11580
   - path: core/doctor/checks/agent-memory.js
     hash: sha256:adad35cd3995b813cb9d87fd617fbbe7784397edb0f58c3114511ba45bc76f19
     type: core
@@ -1344,9 +1364,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:a98beb0f60030279aeeeaa56b227353f9ff46adf53aac653a63e569a77feaad0
+    hash: sha256:93d1c061275f8b5725f65e77d78f13b2970a5bc0fa115aa30f31de041d0fb6d1
     type: data
-    size: 537419
+    size: 539455
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
