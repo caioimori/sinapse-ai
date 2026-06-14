@@ -29,6 +29,7 @@ const { G2StoryCreationGate } = require(path.resolve(__dirname, 'gates/g2-story-
 const { G3StoryValidationGate } = require(path.resolve(__dirname, 'gates/g3-story-validation.js'));
 const { G4DevContextGate } = require(path.resolve(__dirname, 'gates/g4-dev-context.js'));
 const { G5SemanticHandshakeGate } = require(path.resolve(__dirname, 'gates/g5-semantic-handshake.js'));
+const { G6CiIntegrityGate } = require(path.resolve(__dirname, 'gates/g6-ci-integrity.js'));
 const { RegistryLoader } = require(path.resolve(__dirname, 'registry-loader.js'));
 const { IncrementalDecisionEngine } = require(path.resolve(__dirname, 'incremental-decision-engine.js'));
 
@@ -43,6 +44,7 @@ const DEFAULT_PHASE_GATES = Object.freeze({
   story_creation: ['G2'],
   story_validation: ['G3'],
   '2_development': ['G4', 'G5'],
+  ci_cd: ['G6'],
 });
 
 /**
@@ -243,6 +245,12 @@ class GateEvaluator {
         return new G5SemanticHandshakeGate({
           engine: this._injectedEngine || undefined,
           timeoutMs,
+          logger,
+        });
+      case 'G6':
+        return new G6CiIntegrityGate({
+          registryLoader: this._getRegistryLoader(),
+          registryPath: this._registryPath || undefined,
           logger,
         });
       default:

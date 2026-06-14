@@ -1225,6 +1225,55 @@ async function main() {
       break;
     }
 
+    case 'orchestrate': {
+      // Autonomous pipeline entry point (Epic 0 — MasterOrchestrator).
+      // Usage: sinapse orchestrate <story-id> [--status|--stop|--resume]
+      //                                        [--dry-run] [--epic N] [--strict]
+      // Without this case the most powerful pipeline (executeFullPipeline) was
+      // only reachable programmatically — violating Art. I (CLI First).
+      try {
+        const orchestration = require('../.sinapse-ai/core/orchestration');
+        const epicIdx = args.indexOf('--epic');
+        // The story-id is the first positional arg after `orchestrate` — i.e.
+        // the first token that is neither a flag nor the `--epic` value. This
+        // keeps `orchestrate STORY-1 --status` and `orchestrate --status STORY-1`
+        // both resolving STORY-1 as the id.
+        const epicValueIdx = epicIdx !== -1 ? epicIdx + 1 : -1;
+        const storyId = args
+          .slice(1)
+          .find((a, i) => !a.startsWith('--') && i + 1 !== epicValueIdx);
+        const options = {
+          projectRoot: process.cwd(),
+          dryRun: args.includes('--dry-run'),
+          strict: args.includes('--strict'),
+          epic: epicIdx !== -1 ? parseInt(args[epicIdx + 1], 10) : undefined,
+        };
+
+        let result;
+        if (args.includes('--status')) {
+          result = await orchestration.orchestrateStatus(storyId, options);
+        } else if (args.includes('--stop')) {
+          result = await orchestration.orchestrateStop(storyId, options);
+        } else if (args.includes('--resume')) {
+          result = await orchestration.orchestrateResume(storyId, options);
+        } else {
+          result = await orchestration.orchestrate(storyId, options);
+        }
+
+        const exitCode =
+          result && typeof result.exitCode === 'number'
+            ? result.exitCode
+            : result && result.success === false
+              ? 1
+              : 0;
+        process.exit(exitCode);
+      } catch (error) {
+        logger.error(`❌ Orchestrate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
     case undefined:
       // No arguments - launch Claude Code with SINAPSE branding
       launchSinapse([]);
