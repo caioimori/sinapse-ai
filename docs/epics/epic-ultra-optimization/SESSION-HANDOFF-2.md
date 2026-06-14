@@ -142,5 +142,12 @@ Validação onda: IDS 453/453, gate-evaluator, hook-security, cli — todas verd
 
 **Churn não-determinístico do entity-registry + install-manifest** segue ativo (handoff sessão 3 §achados novos): qualquer commit dispara regen com timestamp/hash/ordem instável. Descartado dos commits (revert). O install-manifest FOI commitado uma vez (registra o g6 real); o resto é churn revertido. **Item P2/P3 pendente: ordenação determinística do gerador.**
 
-### Próximo (sessão 5)
-Plano inalterado: **2 cortes aprovados** (`test-validation-task.md` fixture + duplicata órfã `development/scripts/elicitation-*.js`) + **P2** (11 itens: output-formatter consolidação, grounding dedup, health backend, variants por project_type, tasks órfãs nos agentes, _saveState colapso, cache AgentInvoker, manifest regex core/docs, gerador entity-registry determinístico) + **P3** (6 itens). Suíte verde por onda. Publicar = último passo (revogar token npm antes). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
+### FEITO ainda na sessão 4 (após P1)
+- **2 cortes aprovados** (`ef5c436` + `976434d` manifest sync): removido `test-validation-task.md` (fixture zero-consumidor) + as 2 cópias órfãs `development/scripts/elicitation-{engine,session-manager}.js` (todos consumidores reais usam `core/elicitation/`; busca por require específico voltou vazia). Validado: elicitation+core-security 60/60, manifest 38/38.
+- **P2 — manifest regex (`6f08778`):** ancorado `^docs/` em `generate-install-manifest.js` — os padrões não-ancorados excluíam `core/docs/*.md` (5 docs TRACKED) do manifest. Agora incluídos (file_count +5), legacy `.sinapse-ai/docs/standards/` segue excluído. Validado: 100/100 (generate/parity/ensure/post-install/brownfield).
+
+### Próximo (sessão 5) — P2 restante + P3
+**P2 restante (10 itens, deep-dive §5):** output-formatter consolidação (core importa de infra), grounding Layer 1 dedup (3 hooks → config-loader.cjs), backend `sinapse health` (35 checks), expor `sinapse create`/`sinapse mode`, cabear variants por project_type (greenfield/brownfield handlers), cabear 9 tasks órfãs nas dependencies dos agentes, colapsar `_saveState()` redundante, cache agent/task no AgentInvoker, **gerador entity-registry determinístico** (alta prioridade — churn polui todo commit), gerador entity-registry escanear `bin/` (ideation registry stale).
+**P3 (6 itens):** migration YAMLs fonte de verdade, header stale update-sinapse.md, teste unitário fast-path-gate, documentar 3 namespaces de session, memory verify script align, (test-validation-task.md já cortado).
+
+Suíte verde por onda. **Baseline tem ~31 falhas de ambiente/timing no Node 24** (WorktreeManager/git-hooks-installer execa + perf `toBeLessThan`) — não são regressões; validar por suite afetada, não pela suíte inteira nesta máquina. Publicar = último passo (revogar token npm antes). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
