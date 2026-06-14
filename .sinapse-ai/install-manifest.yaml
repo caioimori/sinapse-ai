@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1191
+file_count: 1188
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1344,9 +1344,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:037a36b2074bb4ed9d4dc919c858bc058931d09fb8ac60e85b745cc30bd07108
+    hash: sha256:a98beb0f60030279aeeeaa56b227353f9ff46adf53aac653a63e569a77feaad0
     type: data
-    size: 540001
+    size: 537419
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1707,14 +1707,6 @@ files:
     hash: sha256:d55d4a61ad34053338b29ecfbcf1d2547980ba884318c0752f7a9e3b22389460
     type: script
     size: 10668
-  - path: development/scripts/elicitation-engine.js
-    hash: sha256:4248602dc493a85354ddfc5c1ebb092080522426de24d819e274a970c113acdb
-    type: script
-    size: 10590
-  - path: development/scripts/elicitation-session-manager.js
-    hash: sha256:9cb2cb00d2679be5cf4bf40dded3a74873b671f22837a314f47248b62a1e42b1
-    type: script
-    size: 8115
   - path: development/scripts/generate-greeting.js
     hash: sha256:052b669917fe0934942cc85f613af8fe7302a9b7d70187c9558337bef3f9ec92
     type: script
@@ -2755,10 +2747,6 @@ files:
     hash: sha256:93642974ba45bf22e00eb311a0b5afca656bb6efc0264bd5a27f4d94ddb54979
     type: task
     size: 14052
-  - path: development/tasks/test-validation-task.md
-    hash: sha256:41f0efff2782a64d2e09af78df8926a5b0c3f29d705a85e1eb0774c67dca09de
-    type: task
-    size: 3345
   - path: development/tasks/triage-github-issues.md
     hash: sha256:460d80252993ff6da04cec6112918c52df643db8a259bde4c8501a9e88ffa3e5
     type: task
