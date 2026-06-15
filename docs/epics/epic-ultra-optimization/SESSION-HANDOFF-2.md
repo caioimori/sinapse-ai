@@ -156,8 +156,20 @@ Validação onda: IDS 453/453, gate-evaluator, hook-security, cli — todas verd
 | **grounding Layer 1 dedup** | `0999a54` | 3 hooks sinapse-*-grounding.cjs delegam loadConfig ao config-loader.cjs (require guardado = fail-open). 57 testes grounding verdes. |
 | **manifest regex** (sessão 4 cedo) | `6f08778` | ^docs/ ancorado — 5 docs de core/docs voltaram ao manifest. |
 
-### Próximo (sessão 5) — P2 restante + P3
-**P2 restante (5 itens, deep-dive §5, médio/baixo risco):** backend `sinapse health` (trocar p/ os 35 checks de core/health-check, médio), expor `sinapse create`/`sinapse mode` no CLI (baixo), cabear variants por project_type nos greenfield/brownfield handlers (médio), colapsar `_saveState()` redundante no MasterOrchestrator (baixo), cache agent/task no AgentInvoker (baixo). **+ decisão de ownership das 6 tasks órfãs ambíguas.**
-**P3 (6 itens):** migration YAMLs fonte de verdade, header stale update-sinapse.md, teste unitário fast-path-gate, documentar 3 namespaces de session, memory verify script align.
+### SESSÃO 5 (15/06) — P2 RESTANTE + P3 COMPLETOS (YOLO, 7 commits)
+Plano P2/P3 do deep-dive **fechado** (todos os itens executáveis sem regressão):
+| Item | Commit | O quê |
+|---|---|---|
+| `sinapse create`/`mode`/`generate` | `2604122` | 3 cases no switch: create→ComponentGenerator, mode→PermissionMode (show/set/cycle), generate→Commander (estava caindo no default, bug). |
+| 6 tasks órfãs restantes | `decf917` | yolo-toggle→@developer; ids-governor/health/query+sync-registry-intel+delegate-to-external-executor→@devops. Todas as 9 cabeadas. |
+| cache AgentInvoker + colapsa _saveState | `3af429f` | Memoiza _loadAgent/_loadTask; remove double-write de _saveState por epic no sucesso (executeEpic já persiste). |
+| P3 higiene (4/5) | `07d4864` | header update-sinapse v5.2; teste fast-path-gate (12 casos); 3 namespaces session no core/README; status header no active-modules.verify (Story 9.4 pendente). **P3.1 migration DEFERIDO** (verificação: MODULE_MAPPING JS e module-mapping.yaml têm estruturas divergentes + teste dependente — não é dedup limpo). |
+| `sinapse health --deep` + `--output-file` | `9b24e21` | Expõe o engine core/health-check (35 checks, 6 domínios) que não tinha entry-point. NÃO troca o default (lightweight install-health) — verificação mostrou que checam coisas diferentes (seria regressão). |
+| handlers despacham por project_type | `28171f5` | greenfield/brownfield-handler resolvem o variant (ui/fullstack/service) por options.projectType; default = histórico (fullstack/discovery). Arquivos de workflow mantidos separados (fusão refutada). |
 
-Suíte verde por onda. **Baseline tem ~31 falhas de ambiente/timing no Node 24** (WorktreeManager/git-hooks-installer execa + perf `toBeLessThan`) — não são regressões; validar por suite afetada, não pela suíte inteira nesta máquina. Publicar = último passo (revogar token npm antes). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
+**Decisões YOLO tomadas (documentadas):** ownership das 6 tasks (devops/developer por domínio); health vira `--deep` aditivo (não troca backend) pra não regredir; P3.1 deferido por não ser dedup limpo.
+
+### Status final do epic
+- **P0 preservado, P1 (10/10), 3 cortes, P2 (11/11), P3 (4/5 + 1 deferido)** — tudo commitado, árvore limpa, churn do registry eliminado (commits limpos daqui pra frente).
+- **Baseline tem ~31 falhas de ambiente/timing no Node 24** (WorktreeManager/git-hooks-installer execa + perf `toBeLessThan`) — pré-existentes, NÃO regressões; validar por suite afetada.
+- **ÚNICO pendente real antes de publicar:** revogar+regerar o token npm exposto no chat. Publicar no npm = decisão do Caio (último passo). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
