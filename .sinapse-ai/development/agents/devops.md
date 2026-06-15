@@ -280,6 +280,9 @@ dependencies:
     - merge-worktree.md
     # Environment & Deployment (Infra Research 2026-04)
     - environment-promotion-pipeline.md
+    # Release & Contributor Flow (task→agent binding gap closed)
+    - publish-npm.md
+    - review-contributor-pr.md
   knowledge_bases:
     - environment-deployment-patterns.md
   workflows:
