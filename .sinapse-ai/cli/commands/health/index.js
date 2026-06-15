@@ -164,6 +164,30 @@ function checkSkills(root) {
 
 async function runHealth(options = {}) {
   const root = findProjectRoot();
+
+  // --deep: run the full core/health-check engine (project/runtime domains:
+  // deployment, local, project, repository, services — ~35 checks). The default
+  // path runs the lightweight install-health checks below (hooks/squads/rules/
+  // skills). Before this the 35-check engine had no CLI entry point at all.
+  if (options.deep) {
+    const { HealthCheck } = require(path.join(root, '.sinapse-ai', 'core'));
+    const hc = new HealthCheck({ projectRoot: root });
+    const results = await hc.run({
+      autoFix: !!options.fix,
+      output: { format: options.json ? 'json' : 'console' },
+    });
+    const text = typeof results.report === 'string'
+      ? results.report
+      : JSON.stringify(results, null, 2);
+    if (options.outputFile) {
+      fs.writeFileSync(options.outputFile, text);
+      console.log(`Health report written to ${options.outputFile}`);
+    } else {
+      console.log(text);
+    }
+    return;
+  }
+
   const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
   const hookResults = checkHooks(root);

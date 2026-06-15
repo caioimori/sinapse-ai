@@ -1174,13 +1174,23 @@ async function main() {
     }
 
     case 'health': {
-      // Framework health analytics
+      // Framework health analytics. Default = lightweight install-health
+      // (hooks/squads/rules/skills). --deep runs the full core/health-check
+      // engine (~35 project/runtime checks). --output-file writes the report.
       const { runHealth } = require('../.sinapse-ai/cli/commands/health/index.js');
       const healthArgs = args.slice(1);
+      const outIdx = healthArgs.indexOf('--output-file');
+      const isDeepHealth = healthArgs.includes('--deep');
       await runHealth({
         json: healthArgs.includes('--json'),
         fix: healthArgs.includes('--fix'),
+        deep: isDeepHealth,
+        outputFile: outIdx >= 0 ? healthArgs[outIdx + 1] : undefined,
       });
+      // The --deep engine can leave async handles (e.g. spawned git checks)
+      // open; exit explicitly so the CLI returns promptly. The report is fully
+      // written/printed synchronously above. Lightweight path exits naturally.
+      if (isDeepHealth) process.exit(0);
       break;
     }
 
