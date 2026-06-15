@@ -272,6 +272,8 @@ dependencies:
     - create-worktree.md
     - list-worktrees.md
     - remove-worktree.md
+    # Execution Mode (task→agent binding gap closed)
+    - yolo-toggle.md
   scripts:
     # Recovery System (Epic 5)
     - recovery-tracker.js # Track implementation attempts

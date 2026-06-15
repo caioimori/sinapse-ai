@@ -9,6 +9,7 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 
 /**
  * Maximum input lengths to prevent buffer overflow
@@ -18,6 +19,32 @@ const INPUT_LIMITS = {
   path: 255,
   generic: 500,
 };
+
+/**
+ * Canonicalize the deepest EXISTING ancestor of a path (the target itself may
+ * not exist yet during install). Used to detect symlink escapes that
+ * path.relative() alone can't see (P3-002). Returns the realpath of the nearest
+ * existing ancestor, or the resolved path unchanged when nothing resolves.
+ * @param {string} resolved - An already path.resolve()'d absolute path
+ * @returns {string}
+ */
+function realpathOfExistingAncestor(resolved) {
+  let current = resolved;
+  // Walk up until we hit an existing directory we can realpath.
+  for (let i = 0; i < 64; i++) {
+    try {
+      const real = fs.realpathSync(current);
+      // Re-attach the non-existent tail so containment checks stay meaningful.
+      const tail = path.relative(current, resolved);
+      return tail ? path.join(real, tail) : real;
+    } catch {
+      const parent = path.dirname(current);
+      if (parent === current) break; // reached the root
+      current = parent;
+    }
+  }
+  return resolved;
+}
 
 /**
  * Allowed project types (whitelist)
@@ -94,11 +121,21 @@ function validatePath(input, baseDir = process.cwd()) {
   // Use path.relative to detect traversal attempts
   // If resolved is within baseDir, relative path won't start with '..'
   const relativePath = path.relative(normalizedBaseDir, resolved);
-  
+
   // Check for up-level traversal indicators
   // Empty string means paths are identical, which is valid
   if (relativePath && (relativePath.startsWith('..') || relativePath.includes('..'))) {
     return 'Path must be within project directory (path traversal detected)';
+  }
+
+  // Symlink-escape guard (P3-002): a symlinked ancestor inside baseDir could
+  // point OUT of it — path.relative() on the lexical path wouldn't catch that.
+  // Compare canonical (realpath) forms of the deepest existing ancestors.
+  const realBase = realpathOfExistingAncestor(normalizedBaseDir);
+  const realResolved = realpathOfExistingAncestor(resolved);
+  const realRel = path.relative(realBase, realResolved);
+  if (realRel && (realRel.startsWith('..') || realRel.includes('..'))) {
+    return 'Path must be within project directory (symlink escape detected)';
   }
 
   return true;

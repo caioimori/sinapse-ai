@@ -86,6 +86,14 @@ function buildMarkdownBody(params) {
     parts.push(`You are an expert ${title}.\n`);
   }
 
+  // Identity + Focus (PARIDADE-IDE-002: keep the full persona contract)
+  if (personaBlock.identity) {
+    parts.push(`**Identity:** ${personaBlock.identity}\n`);
+  }
+  if (personaBlock.focus) {
+    parts.push(`**Focus:** ${personaBlock.focus}\n`);
+  }
+
   // Style
   if (personaBlock.style) {
     parts.push(`## Style\n\n${personaBlock.style}\n`);

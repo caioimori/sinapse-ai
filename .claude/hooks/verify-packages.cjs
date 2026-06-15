@@ -14,7 +14,7 @@
  */
 'use strict';
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 let input = '';
 process.stdin.setEncoding('utf8');
@@ -59,8 +59,15 @@ process.stdin.on('end', () => {
       if (pkgName.startsWith('.') || pkgName.startsWith('/') || pkgName.includes('://')) continue;
       if (pkgName.endsWith('.tgz') || pkgName.endsWith('.tar.gz')) continue;
 
+      // Defense-in-depth: reject anything that isn't a valid npm package name
+      // BEFORE shelling out, then call npm WITHOUT a shell (no command injection).
+      if (!/^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/i.test(pkgName)) {
+        failed.push(pkgName);
+        continue;
+      }
       try {
-        execSync(`npm view "${pkgName}" name`, { timeout: 8000, stdio: 'pipe' });
+        const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+        execFileSync(npmBin, ['view', pkgName, 'name'], { timeout: 8000, stdio: 'pipe' });
       } catch {
         failed.push(pkgName);
       }

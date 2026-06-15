@@ -26,6 +26,25 @@ const fs = require('fs').promises;
 const path = require('path');
 const yaml = require('js-yaml');
 
+// One-time runtime deprecation notice (audit 2026-06-11, DEPRECATED-BARREL-1):
+// the barrel still re-exports this module, but it's superseded by
+// config-resolver.js (resolveConfig) + agent-config-loader.js (AgentConfigLoader)
+// and is slated for removal in v4.0.0. Warn ONCE at load so consumers migrate,
+// but stay silent under tests/CI to avoid noise. The export itself is preserved
+// for backward compatibility (potentiate, don't break consumers).
+if (
+  !global.__SINAPSE_CONFIG_LOADER_DEPRECATION_WARNED__ &&
+  process.env.JEST_WORKER_ID === undefined &&
+  !process.env.CI
+) {
+  global.__SINAPSE_CONFIG_LOADER_DEPRECATION_WARNED__ = true;
+  process.emitWarning(
+    'config-loader is deprecated — use config-resolver.js (resolveConfig) or ' +
+      'agent-config-loader.js (AgentConfigLoader). Removal target: v4.0.0.',
+    { type: 'DeprecationWarning', code: 'SINAPSE_CONFIG_LOADER_DEPRECATED' },
+  );
+}
+
 /**
  * Config cache with TTL
  */

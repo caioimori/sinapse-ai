@@ -39,10 +39,32 @@ function readStdin() {
   });
 }
 
+/** Write to stdout robustly across real and mocked (Jest) streams. */
+function writeStdout(output) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const finish = (err) => {
+      if (settled) return;
+      settled = true;
+      if (err) reject(err); else resolve();
+    };
+    try {
+      const flushed = process.stdout.write(output, (err) => finish(err));
+      if (flushed) setImmediate(() => finish());
+      else if (typeof process.stdout.once === 'function') process.stdout.once('drain', () => finish());
+    } catch (err) {
+      finish(err);
+    }
+  });
+}
+
 /** Main hook execution pipeline. */
 async function main() {
   const input = await readStdin();
   const runtime = resolveHookRuntime(input);
+  // Silent exit (empty stdout = valid "no context") when no runtime is
+  // resolvable — missing cwd or missing `.synapse/`. Only NON-empty output
+  // must conform to the hook schema.
   if (!runtime) return;
 
   const result = await runtime.engine.process(input.prompt, runtime.session);
@@ -62,29 +84,7 @@ async function main() {
   }
 
   const output = JSON.stringify(buildHookOutput(result.xml));
-
-  // Write output robustly across real process.stdout and mocked Jest streams.
-  // Some mocks return boolean but never invoke callback; handle both patterns.
-  await new Promise((resolve, reject) => {
-    let settled = false;
-    const finish = (err) => {
-      if (settled) return;
-      settled = true;
-      if (err) reject(err);
-      else resolve();
-    };
-
-    try {
-      const flushed = process.stdout.write(output, (err) => finish(err));
-      if (flushed) {
-        setImmediate(() => finish());
-      } else if (typeof process.stdout.once === 'function') {
-        process.stdout.once('drain', () => finish());
-      }
-    } catch (err) {
-      finish(err);
-    }
-  });
+  await writeStdout(output);
 }
 
 /** Entry point runner — lets Node exit naturally after stdout flush. */

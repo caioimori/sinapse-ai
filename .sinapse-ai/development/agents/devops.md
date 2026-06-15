@@ -280,6 +280,15 @@ dependencies:
     - merge-worktree.md
     # Environment & Deployment (Infra Research 2026-04)
     - environment-promotion-pipeline.md
+    # Release & Contributor Flow (task→agent binding gap closed)
+    - publish-npm.md
+    - review-contributor-pr.md
+    # IDS Governance & Registry (task→agent binding gap closed — devops owns CI/G6)
+    - ids-governor.md
+    - ids-health.md
+    - ids-query.md
+    - sync-registry-intel.md
+    - delegate-to-external-executor.md
   knowledge_bases:
     - environment-deployment-patterns.md
   workflows:

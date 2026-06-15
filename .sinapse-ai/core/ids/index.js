@@ -91,6 +91,12 @@ const {
   G5_DEFAULT_TIMEOUT_MS,
 } = require('./gates/g5-semantic-handshake');
 
+// IDS Gate Wiring: Gate G6 (Blocking — CI/CD Registry Integrity)
+const {
+  G6CiIntegrityGate,
+  G6_DEFAULT_TIMEOUT_MS,
+} = require('./gates/g6-ci-integrity');
+
 // IDS-7: Framework Governor (sinapse-orqx integration)
 const {
   FrameworkGovernor,
@@ -164,6 +170,10 @@ module.exports = {
   // IDS-5b: Gate G5 (Blocking)
   G5SemanticHandshakeGate,
   G5_DEFAULT_TIMEOUT_MS,
+
+  // IDS Gate Wiring: Gate G6 (Blocking — CI/CD Registry Integrity)
+  G6CiIntegrityGate,
+  G6_DEFAULT_TIMEOUT_MS,
 
   // IDS-7: Framework Governor
   FrameworkGovernor,

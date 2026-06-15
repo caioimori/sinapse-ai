@@ -44,6 +44,14 @@ describe('MasterOrchestrator', () => {
       storyId: 'TEST-001',
       maxRetries: 2,
       autoRecovery: false,
+      // F1: inject a mock executor so pipeline tests never spawn the real
+      // dispatcher/claude (the orchestrator now wires a real executor by default).
+      invokeAgent: async (agent) => ({
+        status: 'success',
+        success: true,
+        output: `mock output for @${(agent && agent.name) || agent}`,
+        filesModified: [],
+      }),
     });
   });
 
@@ -200,12 +208,16 @@ describe('MasterOrchestrator', () => {
       expect(orchestrator.state).toBe(OrchestratorState.COMPLETE);
     });
 
-    it('should return finalized result', async () => {
+    it('should return finalized result that honestly reports STUB mode', async () => {
       const result = await orchestrator.executeFullPipeline();
 
       expect(result.workflowId).toBeDefined();
       expect(result.storyId).toBe('TEST-001');
-      expect(result.success).toBe(true);
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // the default pipeline runs stubbed epics (3/4) — it MUST NOT report success:true.
+      expect(result.success).toBe(false);
+      expect(result.mode).toBe('stub');
+      expect(result.stubbedEpics.length).toBeGreaterThan(0);
       expect(result.duration).toBeDefined();
       expect(result.techStack).toBeDefined();
     });

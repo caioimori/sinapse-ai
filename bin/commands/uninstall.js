@@ -18,6 +18,35 @@ const {
 const { header } = require('../lib/header');
 const { rmDirSync } = require('../lib/fs-utils');
 const { confirmUninstall } = require('../lib/prompts');
+const { runSafe } = require('../../.sinapse-ai/core/utils/spawn-safe');
+
+// The installer sets git `core.hooksPath` to this managed dir. On uninstall we
+// must unset it — otherwise git keeps pointing at removed hooks and every future
+// commit fails with "cannot run hook" (UNINSTALL-GIT-HOOKS, audit 2026-06-11).
+const MANAGED_HOOKS_MARKER = path.join('.sinapse-ai', 'git-hooks');
+
+/**
+ * Unset git core.hooksPath IF it points at the SINAPSE-managed hooks dir.
+ * Only touches our own config — a user's custom hooksPath is left untouched.
+ * @param {string} projectDir - Git project directory (default cwd)
+ * @returns {Promise<{unset: boolean, value: string|null}>}
+ */
+async function removeGitHooksConfig(projectDir = process.cwd()) {
+  try {
+    const get = await runSafe('git', ['-C', projectDir, 'config', '--get', 'core.hooksPath']);
+    const value = (get.stdout || '').trim();
+    if (!get.success || !value) return { unset: false, value: null };
+    // Normalize separators so the marker matches on Windows and POSIX.
+    const normalized = value.replace(/\\/g, '/');
+    if (!normalized.includes(MANAGED_HOOKS_MARKER.replace(/\\/g, '/'))) {
+      return { unset: false, value }; // not ours — leave it alone
+    }
+    const unset = await runSafe('git', ['-C', projectDir, 'config', '--unset', 'core.hooksPath']);
+    return { unset: unset.success, value };
+  } catch {
+    return { unset: false, value: null };
+  }
+}
 
 // Story 10.40 — Remove SINAPSE-authored orqx agents from a global agents dir.
 // Returns { removed: N } for reporting. Only touches files matching *-orqx.md
@@ -205,6 +234,16 @@ async function cmdUninstall(opts = {}) {
     logger.always(`  ${YELLOW}-${NC} ~/.claude/settings.json (no SINAPSE keys found)`);
   }
 
+  // UNINSTALL-GIT-HOOKS — reset git hooks config so commits keep working.
+  const hooksResult = await removeGitHooksConfig(process.cwd());
+  if (hooksResult.unset) {
+    logger.always(`  ${GREEN}✓${NC} Reset git core.hooksPath (was SINAPSE-managed)`);
+  } else if (hooksResult.value) {
+    logger.always(`  ${YELLOW}-${NC} git core.hooksPath kept (custom, not SINAPSE-managed)`);
+  } else {
+    logger.always(`  ${YELLOW}-${NC} git core.hooksPath (not set)`);
+  }
+
   logger.always(`\n${GREEN}Sinapse uninstalled.${NC}`);
   logger.always(`${YELLOW}Note:${NC} PATH entry in shell RC files was not removed. Clean up manually if desired.\n`);
 }
@@ -216,5 +255,6 @@ module.exports = {
   removeInstalledAgentsFrom,
   removeOrqxAgentsFrom,
   cleanClaudeSettingsJson,
+  removeGitHooksConfig,
   INSTALLED_AGENTS_MANIFEST,
 };

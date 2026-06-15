@@ -172,6 +172,7 @@ describe('Hook Security Properties (Story 8.10)', () => {
         'synapse-engine',        // context injection, never blocks
         'enforce-nsn-guard',     // NSN Mode guard — WARN only (stderr + exit 0)
         'telemetry',             // telemetry observers — fail-open, always exit 0, never block
+        'code-intel',            // code-intel-pretool — injects additionalContext, ALLOW-only by design (hook-governance.md)
       ];
       const isWarnOnly = WARN_ONLY_HOOKS.some((kw) => hookFile.includes(kw));
       if (!isWarnOnly) {

@@ -7,6 +7,7 @@
  */
 
 const { getVisibleCommands, normalizeCommands } = require('../agent-parser');
+const { renderPersona } = require('../persona-renderer');
 
 function escapeFrontmatterString(value) {
   return String(value || '')
@@ -54,6 +55,10 @@ ${icon} **${title}**${archetype ? ` | ${archetype}` : ''}
 > ${whenToUse}
 
 `;
+
+  // PARIDADE-IDE-002: emit the persona contract (role/identity/style/focus +
+  // core principles) so the IDE stub reasons like the agent, not just a label.
+  content += renderPersona(agentData, { includeCommunication: true });
 
   // Add quick commands section
   if (quickCommands.length > 0) {

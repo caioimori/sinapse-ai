@@ -9,7 +9,7 @@
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 
 // Story A.2 — unified logger. Levels: error/warn/info/debug.
@@ -1174,13 +1174,23 @@ async function main() {
     }
 
     case 'health': {
-      // Framework health analytics
+      // Framework health analytics. Default = lightweight install-health
+      // (hooks/squads/rules/skills). --deep runs the full core/health-check
+      // engine (~35 project/runtime checks). --output-file writes the report.
       const { runHealth } = require('../.sinapse-ai/cli/commands/health/index.js');
       const healthArgs = args.slice(1);
+      const outIdx = healthArgs.indexOf('--output-file');
+      const isDeepHealth = healthArgs.includes('--deep');
       await runHealth({
         json: healthArgs.includes('--json'),
         fix: healthArgs.includes('--fix'),
+        deep: isDeepHealth,
+        outputFile: outIdx >= 0 ? healthArgs[outIdx + 1] : undefined,
       });
+      // The --deep engine can leave async handles (e.g. spawned git checks)
+      // open; exit explicitly so the CLI returns promptly. The report is fully
+      // written/printed synchronously above. Lightweight path exits naturally.
+      if (isDeepHealth) process.exit(0);
       break;
     }
 
@@ -1207,12 +1217,146 @@ async function main() {
       break;
     }
 
+    case 'graph': {
+      // Dependency/stats dashboard. Consolidated from the deprecated
+      // standalone `sinapse-graph` binary into a subcommand of the main CLI.
+      // Closes the published interface contract (claude-md template + CI test
+      // expect `sinapse graph --deps` to work in every installed project).
+      const { run } = require('../.sinapse-ai/core/graph-dashboard/cli');
+      await run(args.slice(1));
+      break;
+    }
+
+    case 'mcp': {
+      // Global MCP configuration manager (setup, link, status, add).
+      // Routes to the Commander CLI, same pattern as the `qa` case.
+      const { run } = require('../.sinapse-ai/cli/index.js');
+      await run(process.argv);
+      break;
+    }
+
+    case 'generate': {
+      // Document generator (templates: prd/adr/story/epic/task) — routes to the
+      // Commander CLI. Without this case `sinapse generate` fell through to the
+      // default and was passed to Claude Code as args (same bug class as graph/ids).
+      try {
+        const { run } = require('../.sinapse-ai/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        logger.error(`❌ Generate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+    }
+
+    case 'create': {
+      // Component generator — sinapse create <agent|task|workflow>
+      // Exposes ComponentGenerator (template + elicitation) at the CLI.
+      try {
+        const ComponentGenerator = require('../.sinapse-ai/infrastructure/scripts/component-generator');
+        const type = args[1];
+        if (!type || type.startsWith('--')) {
+          logger.error('Usage: sinapse create <agent|task|workflow>');
+          process.exit(1);
+        }
+        const generator = new ComponentGenerator({ rootPath: process.cwd() });
+        const result = await generator.generateComponent(type, {});
+        process.exit(result && result.success === false ? 1 : 0);
+      } catch (error) {
+        logger.error(`❌ Create command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'mode': {
+      // Permission mode manager — sinapse mode [explore|ask|auto] [--cycle]
+      // Exposes PermissionMode (explore/ask/auto) at the CLI.
+      try {
+        const { PermissionMode } = require('../.sinapse-ai/core/permissions');
+        const pm = new PermissionMode(process.cwd());
+        await pm.load(); // load persisted mode first
+        const target = args[1];
+        let info;
+        if (args.includes('--cycle')) {
+          info = await pm.cycleMode();
+        } else if (target && !target.startsWith('--')) {
+          info = await pm.setMode(target);
+        } else {
+          info = pm.getModeInfo();
+        }
+        console.log(`Permission mode: ${info.name} — ${info.description}`);
+        process.exit(0);
+      } catch (error) {
+        logger.error(`❌ Mode command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'orchestrate': {
+      // Autonomous pipeline entry point (Epic 0 — MasterOrchestrator).
+      // Usage: sinapse orchestrate <story-id> [--status|--stop|--resume]
+      //                                        [--dry-run] [--epic N] [--strict]
+      // Without this case the most powerful pipeline (executeFullPipeline) was
+      // only reachable programmatically — violating Art. I (CLI First).
+      try {
+        const orchestration = require('../.sinapse-ai/core/orchestration');
+        const epicIdx = args.indexOf('--epic');
+        // The story-id is the first positional arg after `orchestrate` — i.e.
+        // the first token that is neither a flag nor the `--epic` value. This
+        // keeps `orchestrate STORY-1 --status` and `orchestrate --status STORY-1`
+        // both resolving STORY-1 as the id.
+        const epicValueIdx = epicIdx !== -1 ? epicIdx + 1 : -1;
+        const storyId = args
+          .slice(1)
+          .find((a, i) => !a.startsWith('--') && i + 1 !== epicValueIdx);
+        const options = {
+          projectRoot: process.cwd(),
+          dryRun: args.includes('--dry-run'),
+          strict: args.includes('--strict'),
+          epic: epicIdx !== -1 ? parseInt(args[epicIdx + 1], 10) : undefined,
+        };
+
+        let result;
+        if (args.includes('--status')) {
+          result = await orchestration.orchestrateStatus(storyId, options);
+        } else if (args.includes('--stop')) {
+          result = await orchestration.orchestrateStop(storyId, options);
+        } else if (args.includes('--resume')) {
+          result = await orchestration.orchestrateResume(storyId, options);
+        } else {
+          result = await orchestration.orchestrate(storyId, options);
+        }
+
+        const exitCode =
+          result && typeof result.exitCode === 'number'
+            ? result.exitCode
+            : result && result.success === false
+              ? 1
+              : 0;
+        process.exit(exitCode);
+      } catch (error) {
+        logger.error(`❌ Orchestrate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
     case undefined:
       // No arguments - launch Claude Code with SINAPSE branding
       launchSinapse([]);
       break;
 
     default:
+      // IDS subcommands (`ids:query`, `ids:health`, ...) delegate to the
+      // dedicated IDS CLI. Without this they fell through to launchSinapse and
+      // were silently passed to Claude Code as args (confirmed bug).
+      if (typeof command === 'string' && command.startsWith('ids:')) {
+        const idsBin = path.join(__dirname, 'sinapse-ids.js');
+        const result = spawnSync(process.execPath, [idsBin, ...args], { stdio: 'inherit' });
+        process.exit(result.status === null ? 1 : result.status);
+      }
       // Any unknown command is passed through to Claude Code as arguments
       // e.g. `sinapse --model sonnet` → `claude --model sonnet`
       launchSinapse(args);

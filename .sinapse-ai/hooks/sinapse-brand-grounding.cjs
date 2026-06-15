@@ -39,15 +39,12 @@ function readStdin() {
   });
 }
 
+// Story 10.47: delegate to the shared grounding config loader instead of
+// duplicating the read+parse. The require is guarded so the hook stays
+// fail-open even if the shared module is somehow absent at runtime.
 function loadConfig() {
   try {
-    if (!fs.existsSync(CONFIG_PATH)) return null;
-    const raw = fs.readFileSync(CONFIG_PATH, 'utf8');
-    let yaml;
-    try { yaml = require('js-yaml'); } catch { return null; }
-    const parsed = yaml.load(raw);
-    if (!parsed || typeof parsed !== 'object') return null;
-    return parsed;
+    return require('../core/grounding/config-loader.cjs').loadGroundingConfig(CONFIG_PATH);
   } catch {
     return null;
   }

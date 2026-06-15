@@ -12,6 +12,16 @@ const EventEmitter = require('events');
 const _path = require('path');
 const { runSafe } = require('../utils/spawn-safe');
 
+// epic: orchestration-consolidation, F2 — resolves any of the 189 agent ids to
+// its real persona on disk (squads/ + framework agents). Optional: degrades to a
+// generic prompt if the module is missing.
+let SquadAgentResolver;
+try {
+  SquadAgentResolver = require('../registry/squad-agent-resolver');
+} catch {
+  SquadAgentResolver = null;
+}
+
 // Import AI Provider Factory (factory module directly — the index barrel
 // requires a removed gemini-provider and would throw on load).
 let AIProviderFactory;
@@ -28,12 +38,16 @@ try {
 // Import dependencies with fallbacks
 let MemoryQuery, GotchasMemory;
 try {
-  MemoryQuery = require('../memory/memory-query');
+  const memoryQueryModule = require('../memory/memory-query');
+  MemoryQuery = memoryQueryModule.MemoryQuery || memoryQueryModule;
+  if (typeof MemoryQuery !== 'function') MemoryQuery = null;
 } catch {
   MemoryQuery = null;
 }
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
+  const gotchasModule = require('../memory/gotchas-memory');
+  GotchasMemory = gotchasModule.GotchasMemory || gotchasModule;
+  if (typeof GotchasMemory !== 'function') GotchasMemory = null;
 } catch {
   GotchasMemory = null;
 }
@@ -102,16 +116,39 @@ class SubagentDispatcher extends EventEmitter {
     // Claude CLI execution timeout (per spawn), 10 min default
     this.claudeTimeout = config.claudeTimeout || 10 * 60 * 1000;
 
-    // Dependencies
-    this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
-    this.gotchasMemory = config.gotchasMemory || (GotchasMemory ? new GotchasMemory() : null);
-
-    // Dispatch log
+    // Dispatch log (initialized before optional deps — _tryConstruct logs failures)
     this.dispatchLog = [];
     this.maxLogSize = 100;
 
-    // Root path for project
+    // Root path for project (resolved before memory deps — they need it)
     this.rootPath = config.rootPath || process.cwd();
+
+    // Agent persona resolver (F2): make every squad/framework agent addressable.
+    this.agentResolver =
+      config.agentResolver ||
+      (SquadAgentResolver ? new SquadAgentResolver(this.rootPath) : null);
+
+    // Dependencies (never let optional memory enrichment break the dispatcher)
+    this.memoryQuery = config.memoryQuery || this._tryConstruct(MemoryQuery, this.rootPath);
+    this.gotchasMemory = config.gotchasMemory || this._tryConstruct(GotchasMemory, this.rootPath);
+  }
+
+  /**
+   * Safely construct an optional dependency. Memory enrichment is best-effort:
+   * a broken/missing memory module must never break real agent dispatch.
+   * @param {Function|null} Ctor - Constructor (or null when unavailable)
+   * @param {string} rootPath - Project root passed to the constructor
+   * @returns {Object|null} - Instance or null
+   * @private
+   */
+  _tryConstruct(Ctor, rootPath) {
+    if (typeof Ctor !== 'function') return null;
+    try {
+      return new Ctor(rootPath);
+    } catch (error) {
+      this.log?.('optional_dependency_failed', { dep: Ctor.name, error: error.message });
+      return null;
+    }
   }
 
   /**
@@ -142,7 +179,13 @@ class SubagentDispatcher extends EventEmitter {
 
     // Enrich context
     const enrichedContext = await this.enrichContext(task, context);
-    dispatchRecord.contextSize = JSON.stringify(enrichedContext).length;
+    // Context may contain non-serializable/circular values injected by callers;
+    // size accounting is best-effort and must never break dispatch.
+    try {
+      dispatchRecord.contextSize = JSON.stringify(enrichedContext).length;
+    } catch {
+      dispatchRecord.contextSize = -1;
+    }
 
     // Execute with retries
     let lastError = null;
@@ -217,6 +260,12 @@ class SubagentDispatcher extends EventEmitter {
     // Check task type
     if (task.type && this.agentMapping[task.type.toLowerCase()]) {
       return this.agentMapping[task.type.toLowerCase()];
+    }
+
+    // F2: if the task names a real agent id directly (any of the 189 squad/
+    // framework personas), honor it instead of inferring a generic one.
+    if (this.agentResolver && task.name && this.agentResolver.has(task.name)) {
+      return `@${this.agentResolver.resolve(task.name).id}`;
     }
 
     // Check task tags
@@ -443,11 +492,25 @@ class SubagentDispatcher extends EventEmitter {
 
     // Try to use AI Provider Factory if available
     if (this.multiProviderEnabled && AIProviderFactory) {
-      return this.executeWithProvider(prompt, providerName, task);
+      return this.executeWithProvider(prompt, providerName, task, agentId);
     }
 
     // Fallback to direct Claude CLI
-    return this.executeClaude(prompt);
+    return this.executeClaude(prompt, agentId);
+  }
+
+  /**
+   * Build the env for a spawned agent process. Declares the active agent via
+   * SINAPSE_ACTIVE_AGENT so the autonomous path is observable AND the Article
+   * VIII delegation hook can enforce when the spawned agent is an orchestrator.
+   * (Interactive chat activations don't go through here — they're opt-in.)
+   * @param {string} agentId - Resolved agent id (with or without '@')
+   * @returns {Object} env additions
+   * @private
+   */
+  _agentEnv(agentId) {
+    const id = String(agentId || '').replace(/^@/, '').trim();
+    return id ? { SINAPSE_ACTIVE_AGENT: id } : {};
   }
 
   /**
@@ -457,7 +520,7 @@ class SubagentDispatcher extends EventEmitter {
    * @param {Object} task - Original task for context
    * @returns {Promise<Object>} - Execution result
    */
-  async executeWithProvider(prompt, providerName, task) {
+  async executeWithProvider(prompt, providerName, task, agentId) {
     const startTime = Date.now();
 
     // Get primary provider
@@ -466,7 +529,7 @@ class SubagentDispatcher extends EventEmitter {
     if (!provider) {
       this.log('provider_unavailable', { provider: providerName });
       // Fallback to legacy Claude execution
-      return this.executeClaude(prompt);
+      return this.executeClaude(prompt, agentId);
     }
 
     // Check availability
@@ -481,15 +544,15 @@ class SubagentDispatcher extends EventEmitter {
 
       if (fallback && (await fallback.checkAvailability())) {
         this.log('using_fallback_provider', { original: providerName, fallback: fallbackName });
-        return this.executeWithSingleProvider(fallback, prompt, task);
+        return this.executeWithSingleProvider(fallback, prompt, task, agentId);
       }
 
       // Last resort: legacy Claude
-      return this.executeClaude(prompt);
+      return this.executeClaude(prompt, agentId);
     }
 
     // Execute with selected provider
-    return this.executeWithSingleProvider(provider, prompt, task);
+    return this.executeWithSingleProvider(provider, prompt, task, agentId);
   }
 
   /**
@@ -499,10 +562,11 @@ class SubagentDispatcher extends EventEmitter {
    * @param {Object} task - Original task
    * @returns {Promise<Object>} - Execution result
    */
-  async executeWithSingleProvider(provider, prompt, task) {
+  async executeWithSingleProvider(provider, prompt, task, agentId) {
     try {
       const response = await provider.executeWithRetry(prompt, {
         workingDir: this.rootPath,
+        env: this._agentEnv(agentId),
       });
 
       this.emit('provider_execution_complete', {
@@ -635,7 +699,29 @@ class SubagentDispatcher extends EventEmitter {
    * @returns {string} - Formatted prompt
    */
   buildPrompt(agentId, task, context) {
-    let prompt = `You are ${agentId}, a specialized agent in the SINAPSE framework.\n\n`;
+    let prompt = '';
+
+    // F2: inject the FULL real persona when the agent is known on disk. This is
+    // the difference between "act as a generic dev" and "act as Nimbus, the cloud
+    // security engineer with these exact frameworks". Falls back to the one-liner
+    // only when the agent is unknown or the resolver is unavailable.
+    let personaLoaded = false;
+    if (this.agentResolver) {
+      const persona = this.agentResolver.loadPersona(agentId);
+      if (persona && persona.trim().length > 0) {
+        prompt += '## Your Agent Definition (adopt this persona fully)\n\n';
+        prompt += persona.trim();
+        prompt += '\n\n---\n\n';
+        personaLoaded = true;
+      }
+    }
+    if (!personaLoaded) {
+      prompt += `You are ${agentId}, a specialized agent in the SINAPSE framework.\n\n`;
+    }
+
+    // Always state the role label so the dispatched run knows which agent it is,
+    // on top of (or instead of) the injected persona.
+    prompt += `## Acting as\n${agentId}\n\n`;
 
     prompt += '## Task\n';
     prompt += `**ID:** ${task.id}\n`;
@@ -697,7 +783,7 @@ class SubagentDispatcher extends EventEmitter {
    * @param {string} prompt - Prompt to execute
    * @returns {Promise<Object>} - { success, output, filesModified }
    */
-  async executeClaude(prompt) {
+  async executeClaude(prompt, agentId) {
     if (!prompt || typeof prompt !== 'string') {
       throw new Error('executeClaude requires a non-empty string prompt');
     }
@@ -706,28 +792,40 @@ class SubagentDispatcher extends EventEmitter {
 
     const result = await runSafe('claude', args, {
       cwd: this.rootPath,
-      env: { ...process.env },
+      env: { ...process.env, ...this._agentEnv(agentId) },
       timeout: this.claudeTimeout,
       input: prompt,
     });
 
+    const stdout = (result.stdout || '').trim();
+    const stderr = (result.stderr || '').trim();
+
     if (result.success) {
       return {
         success: true,
-        output: result.stdout,
-        filesModified: this.extractModifiedFiles(result.stdout),
+        output: stdout,
+        filesModified: this.extractModifiedFiles(stdout),
       };
     }
 
     if (result.signal) {
-      throw new Error(
-        `Claude CLI killed by signal ${result.signal}: ${result.stderr || result.stdout}`,
-      );
+      throw new Error(`Claude CLI killed by signal ${result.signal}: ${stderr || stdout}`);
     }
 
-    throw new Error(
-      `Claude CLI exited with code ${result.code}: ${result.stderr || result.stdout}`,
-    );
+    // User-environment hooks (SessionEnd etc.) can fail AFTER the model already
+    // printed its full response, poisoning the exit code. In --print mode a
+    // non-empty stdout + hook-related stderr means the work was done — accept it
+    // instead of discarding paid output and retrying.
+    if (stdout.length > 0 && /hook/i.test(stderr)) {
+      this.log('exit_code_poisoned_by_hook', { code: result.code, stderr: stderr.slice(0, 200) });
+      return {
+        success: true,
+        output: stdout,
+        filesModified: this.extractModifiedFiles(stdout),
+      };
+    }
+
+    throw new Error(`Claude CLI exited with code ${result.code}: ${stderr || stdout}`);
   }
 
   /**

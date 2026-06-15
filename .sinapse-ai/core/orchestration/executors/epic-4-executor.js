@@ -105,34 +105,80 @@ class Epic4Executor extends EpicExecutor {
         }
       }
 
-      // Execute subtasks
+      // F1/convergência (epic: orchestration-consolidation): Epic 4 no longer
+      // re-implements execution. It DELEGATES to the BuildOrchestrator — the single
+      // real build path (worktree → plan → execute via claude → QA → merge). This
+      // kills the duplication the audit flagged (two competing execution engines).
+      if (this._realExecutionAllowed()) {
+        const buildResult = await this._executeViaBuildOrchestrator(storyId, context);
+        if (buildResult && buildResult.success) {
+          return this._completeExecution({
+            implementationPath: planPath,
+            planPath,
+            build: buildResult,
+            reportPath: buildResult.reportPath,
+            phases: buildResult.phases,
+          });
+        }
+        // Build actually ran and failed → honest failure (not a stub, not fake success).
+        return this._failExecution(
+          (buildResult && buildResult.error) || 'BuildOrchestrator failed',
+        );
+      }
+
+      // Fallback (test runner without SINAPSE_REAL_DISPATCH): honest stub — never
+      // fabricate success. Preserves the F0a invariant and keeps unit tests fast.
       const subtaskResults = await this._executeSubtasks(storyId, tracker, context);
-
-      // Collect code changes
       const codeChanges = this._collectCodeChanges(subtaskResults);
-
-      // Run tests if available
       const testResults = await this._runTests(context);
-
-      // Calculate final progress
       const progress = {
         total: subtaskResults.length,
         completed: subtaskResults.filter((r) => r.success).length,
         failed: subtaskResults.filter((r) => !r.success).length,
       };
-
       this._addArtifact('progress', JSON.stringify(progress));
-
-      return this._completeExecution({
-        implementationPath: planPath,
-        planPath,
-        progress,
-        subtaskResults,
-        codeChanges,
-        testResults,
-      });
+      return this._stubExecution(
+        'Epic 4 stub mode — real build is delegated to BuildOrchestrator outside the test runner',
+        {
+          implementationPath: planPath,
+          planPath,
+          progress,
+          subtaskResults,
+          codeChanges,
+          testResults,
+        },
+      );
     } catch (error) {
       return this._failExecution(error);
+    }
+  }
+
+  /**
+   * Delegate execution to the BuildOrchestrator — the single real build path.
+   *
+   * epic: orchestration-consolidation, F1/convergence — instead of re-implementing
+   * the build (and duplicating it), Epic 4 hands off to the BuildOrchestrator, which
+   * runs plan → execute (claude) → QA → merge. Conservative defaults inside the
+   * pipeline (no worktree/merge side-effects, QA is Epic 6's job); tune via
+   * context.buildOptions.
+   *
+   * @returns {Promise<Object>} BuildOrchestrator result ({ success, ... })
+   * @private
+   */
+  async _executeViaBuildOrchestrator(storyId, context) {
+    try {
+      const { BuildOrchestrator } = require('../../execution/build-orchestrator');
+      const builder = new BuildOrchestrator({
+        rootPath: this.projectRoot,
+        useWorktree: false,
+        autoMerge: false,
+        runQA: false,
+        ...(context.buildOptions || {}),
+      });
+      return await builder.build(storyId, context.buildOptions || {});
+    } catch (err) {
+      this._log(`BuildOrchestrator delegation failed: ${err.message}`, 'error');
+      return { success: false, error: err.message };
     }
   }
 

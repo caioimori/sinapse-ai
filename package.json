@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 189 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -56,6 +56,8 @@
   ],
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
+    "generate:synapse": "node scripts/generate-synapse-runtime.js",
+    "pretest": "node scripts/generate-synapse-runtime.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -120,7 +122,7 @@
     "validate:publish": "node bin/utils/validate-publish.js",
     "brand": "node scripts/sinapse-patch.js",
     "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
-    "postinstall": "node bin/postinstall.js",
+    "setup": "node bin/postinstall.js",
     "prepare": "husky"
   },
   "dependencies": {
@@ -213,7 +215,7 @@
     "diff": "^8.0.3",
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
-    "brace-expansion": "^5.0.5",
+    "brace-expansion": "^5.0.6",
     "fast-uri": "^3.1.2",
     "ip-address": "^10.1.1"
   }

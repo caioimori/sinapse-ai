@@ -7,8 +7,11 @@
  * @see Epic GEMINI-INT - Story 2: AI Provider Factory Pattern
  */
 
-const { spawn, execSync } = require('child_process');
+const { execSync } = require('child_process');
 const { AIProvider } = require('./ai-provider');
+// runSafe (cross-spawn): resolves claude.cmd on Windows and delivers the prompt
+// via stdin/argv — same hardened spawn path used by the SubagentDispatcher.
+const { runSafe } = require('../../../core/utils/spawn-safe');
 
 /**
  * Claude Code provider implementation
@@ -20,7 +23,7 @@ class ClaudeProvider extends AIProvider {
   /**
    * Create a Claude provider
    * @param {Object} [config={}] - Provider configuration
-   * @param {string} [config.model='claude-3-5-sonnet'] - Model to use
+   * @param {string} [config.model] - Model override; omitted → CLI default model
    * @param {number} [config.timeout=300000] - Execution timeout
    * @param {boolean} [config.dangerouslySkipPermissions=false] - Skip permission prompts
    */
@@ -31,7 +34,9 @@ class ClaudeProvider extends AIProvider {
       timeout: config.timeout || 300000,
       maxRetries: config.maxRetries || 3,
       options: {
-        model: config.model || 'claude-3-5-sonnet',
+        // No hardcoded model: stale IDs break the CLI. Only pass --model when
+        // a caller explicitly configures one; otherwise use the CLI's default.
+        model: config.model || null,
         dangerouslySkipPermissions: config.dangerouslySkipPermissions || false,
         ...config,
       },
@@ -82,59 +87,56 @@ class ClaudeProvider extends AIProvider {
       args.push('--model', options.model || this.options.model);
     }
 
-    return new Promise((resolve, reject) => {
-      let stdout = '';
-      let stderr = '';
-
-      // Spawn claude directly without shell interpolation (safer)
-      const child = spawn(this.command, args, {
-        cwd: workingDir,
-        env: { ...process.env, ...options.env },
-        windowsHide: true,
-        stdio: ['pipe', 'pipe', 'pipe'],
-      });
-
-      // Write prompt via stdin to avoid shell injection
-      child.stdin.write(prompt);
-      child.stdin.end();
-
-      const timeoutId = setTimeout(() => {
-        child.kill('SIGTERM');
-        reject(new Error(`Claude execution timed out after ${timeout}ms`));
-      }, timeout);
-
-      child.stdout.on('data', (data) => {
-        stdout += data.toString();
-      });
-
-      child.stderr.on('data', (data) => {
-        stderr += data.toString();
-      });
-
-      child.on('close', (code) => {
-        clearTimeout(timeoutId);
-        const duration = Date.now() - startTime;
-
-        if (code === 0) {
-          resolve({
-            success: true,
-            output: stdout.trim(),
-            metadata: {
-              duration,
-              provider: 'claude',
-              model: options.model || this.options.model,
-            },
-          });
-        } else {
-          reject(new Error(`Claude exited with code ${code}: ${stderr || stdout}`));
-        }
-      });
-
-      child.on('error', (error) => {
-        clearTimeout(timeoutId);
-        reject(new Error(`Claude spawn error: ${error.message}`));
-      });
+    // runSafe: argv-based spawn via cross-spawn (resolves claude.cmd on Windows),
+    // prompt delivered through stdin — shell injection structurally impossible.
+    const result = await runSafe(this.command, args, {
+      cwd: workingDir,
+      env: { ...process.env, ...options.env },
+      timeout,
+      input: prompt,
     });
+
+    const duration = Date.now() - startTime;
+
+    const stdout = (result.stdout || '').trim();
+    const stderr = (result.stderr || '').trim();
+
+    if (result.success) {
+      return {
+        success: true,
+        output: stdout,
+        metadata: {
+          duration,
+          provider: 'claude',
+          model: options.model || this.options.model || 'cli-default',
+        },
+      };
+    }
+
+    if (result.signal) {
+      throw new Error(
+        `Claude killed by signal ${result.signal} (timeout ${timeout}ms?): ${stderr || stdout}`,
+      );
+    }
+
+    // User-environment hooks (SessionEnd etc.) can fail AFTER the model already
+    // printed its full response, poisoning the exit code. In --print mode a
+    // non-empty stdout + hook-related stderr means the work was done — accept it
+    // (with a warning) instead of discarding paid output and retrying.
+    if (stdout.length > 0 && /hook/i.test(stderr)) {
+      return {
+        success: true,
+        output: stdout,
+        metadata: {
+          duration,
+          provider: 'claude',
+          model: options.model || this.options.model || 'cli-default',
+          warning: `non-zero exit (${result.code}) caused by environment hook failure: ${stderr.slice(0, 200)}`,
+        },
+      };
+    }
+
+    throw new Error(`Claude exited with code ${result.code}: ${stderr || stdout}`);
   }
 
   /**

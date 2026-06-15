@@ -318,45 +318,64 @@ If conflicts detected, fail with message:
 Resolve conflicts before pushing.
 ```
 
-### 4. Run npm run lint (if script exists)
+### 4. Run Layer 1 Quality Gate (lint + test + typecheck) — CANONICAL
+
+> **Do NOT reimplement lint/test/typecheck here.** The framework already ships
+> the canonical Layer 1 pre-commit gate (`core/quality-gates/layer1-precommit.js`),
+> exposed via the CLI. Calling it keeps a single source of truth for the quality
+> checks (Constitution Art. I — CLI First) instead of forking the logic.
+
+```bash
+sinapse qa run --layer=1
+```
+
+Layer 1 runs **lint (ESLint), unit tests (Jest), and typecheck** — fast local
+checks — and gracefully skips any check whose npm script is absent. Exit code:
+`0` = PASS, non-zero = FAIL.
 
 ```javascript
-function runNpmScript(scriptName, projectRoot) {
-  const packageJsonPath = path.join(projectRoot, 'package.json');
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const { execSync } = require('child_process');
 
-  if (!packageJson.scripts || !packageJson.scripts[scriptName]) {
-    console.log(`⚠️  Script "${scriptName}" not found - skipping`);
-    return { skipped: true };
-  }
-
+function runLayer1QualityGate(projectRoot) {
   try {
-    execSync(`npm run ${scriptName}`, {
-      cwd: projectRoot,
-      stdio: 'inherit'
-    });
-    console.log(`✓ ${scriptName} PASSED`);
+    // The canonical 3-check Layer 1 gate. stdio:'inherit' streams its report.
+    execSync('sinapse qa run --layer=1', { cwd: projectRoot, stdio: 'inherit' });
+    console.log('✓ Layer 1 (lint + test + typecheck) PASSED');
     return { passed: true };
   } catch (error) {
-    console.error(`❌ ${scriptName} FAILED`);
+    console.error('❌ Layer 1 quality gate FAILED');
     return { passed: false, error };
   }
 }
 ```
 
-### 5. Run npm test (if script exists)
+### 5. Run npm run build (if script exists)
 
-Same logic as lint, but for `npm test`.
+Build is outside Layer 1's scope (Layer 1 is the fast lint/test/typecheck pass),
+so it stays a separate step. Skips gracefully when the `build` script is absent.
 
-### 6. Run npm run typecheck (if script exists)
+```javascript
+function runBuild(projectRoot) {
+  const packageJsonPath = path.join(projectRoot, 'package.json');
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
-Same logic as lint, but for `npm run typecheck`.
+  if (!packageJson.scripts || !packageJson.scripts.build) {
+    console.log('⚠️  Script "build" not found - skipping');
+    return { skipped: true };
+  }
 
-### 7. Run npm run build (if script exists)
+  try {
+    execSync('npm run build', { cwd: projectRoot, stdio: 'inherit' });
+    console.log('✓ build PASSED');
+    return { passed: true };
+  } catch (error) {
+    console.error('❌ build FAILED');
+    return { passed: false, error };
+  }
+}
+```
 
-Same logic as lint, but for `npm run build`.
-
-### 8. Run CodeRabbit CLI Review (TR-3.14.12)
+### 6. Run CodeRabbit CLI Review (TR-3.14.12)
 
 ```javascript
 const { execSync } = require('child_process');
@@ -503,7 +522,7 @@ if (coderabbitResult.gateImpact === 'CONCERNS') {
 }
 ```
 
-### 9. Run Security Scan (TR-3.14.11)
+### 7. Run Security Scan (TR-3.14.11)
 
 ```javascript
 const { execSync } = require('child_process');
@@ -630,7 +649,7 @@ function determineSecurityGate(results) {
 }
 ```
 
-### 9.1 Impact Analysis (Code Intelligence — Advisory Only)
+### 7.1 Impact Analysis (Code Intelligence — Advisory Only)
 
 > **Added by:** Story NOG-7 (DevOps Pre-Push Impact Analysis)
 > **Behavior:** Advisory only — NEVER blocks push. Auto-skips if code intelligence unavailable.
@@ -688,7 +707,7 @@ Impact Analysis:
 
 ---
 
-### 10. Verify Story Status (Optional - if using story-driven workflow)
+### 8. Verify Story Status (Optional - if using story-driven workflow)
 
 ```javascript
 function checkStoryStatus(storyPath) {
@@ -735,9 +754,7 @@ Mode:        {framework-development | project-development}
 Quality Checks:
   ✓ No uncommitted changes
   ✓ No merge conflicts
-  ✓ npm run lint         PASSED
-  ✓ npm test             PASSED
-  ✓ npm run typecheck    PASSED
+  ✓ Layer 1 (lint+test+typecheck)  PASSED   (via `sinapse qa run --layer=1`)
   ✓ npm run build        PASSED
   ✓ Security scan        PASSED
   ⚠️ Story status         SKIPPED (no story file)

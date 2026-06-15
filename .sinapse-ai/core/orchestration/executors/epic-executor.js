@@ -22,6 +22,7 @@ const ExecutionStatus = {
   SUCCESS: 'success',
   FAILED: 'failed',
   SKIPPED: 'skipped',
+  STUB: 'stub',
 };
 
 /**
@@ -144,6 +145,45 @@ class EpicExecutor {
       skipped: true,
       skipReason: reason,
     };
+  }
+
+  /**
+   * Complete execution in STUB mode — work was NOT actually performed.
+   *
+   * Honesty invariant (epic: orchestration-consolidation, Frente F0a):
+   * a stub MUST NOT report success:true. getResult() yields success:false
+   * because this.status !== SUCCESS.
+   *
+   * @param {string} reason - What real work is missing
+   * @param {Object} [result] - Optional result data to merge
+   * @protected
+   */
+  _stubExecution(reason, result = {}) {
+    this.status = ExecutionStatus.STUB;
+    this.endTime = new Date().toISOString();
+    this._log(`Epic ${this.epicNum} ran in STUB mode (no real work performed): ${reason}`, 'warn');
+
+    return {
+      ...this.getResult(),
+      status: ExecutionStatus.STUB,
+      stub: true,
+      stubReason: reason,
+      ...result,
+    };
+  }
+
+  /**
+   * Whether real execution (spawning claude / running the real build) is allowed.
+   * Returns false inside the test runner unless SINAPSE_REAL_DISPATCH=1 — this
+   * prevents slow, costly, non-deterministic CLI/build calls during unit tests.
+   * epic: orchestration-consolidation, F1.
+   * @returns {boolean}
+   * @protected
+   */
+  _realExecutionAllowed() {
+    return (
+      process.env.JEST_WORKER_ID === undefined || process.env.SINAPSE_REAL_DISPATCH === '1'
+    );
   }
 
   /**

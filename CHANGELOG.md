@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] — 2026-06-15 — ⚡ Orchestration, IDS & CLI Optimization
+
+> **Release de racionalizacao do core.** Deep-dive de 28 modulos + frentes especiais (plano P0–P3, verificacao adversarial): fecha gaps de cabeamento CLI (pipelines poderosos existiam mas nao tinham porta de entrada), torna o gerador de entity-registry deterministico, consolida duplicatas reais e cabeia tasks orfas — tudo sem corte de capacidade. Lei travada: potencializar, nao cortar.
+
+### Added
+
+- `sinapse orchestrate <story-id>` — porta de entrada CLI do pipeline autonomo (Epic 0 / MasterOrchestrator): `--status` / `--stop` / `--resume` / `--dry-run` / `--epic N`.
+- `sinapse create <agent|task|workflow>` — gerador de componentes (ComponentGenerator) no CLI.
+- `sinapse mode [explore|ask|auto] [--cycle]` — gerenciador de modo de permissao.
+- `sinapse health --deep [--output-file <path>]` — expoe o engine completo de ~35 checks (dominios deployment/local/project/repository/services), antes sem entry-point. O `sinapse health` default (install-health) permanece inalterado.
+- **IDS Gate G6** (CI/CD registry integrity, blocking) — implementado e cabeado no GateEvaluator (fase `ci_cd`); o codigo so trazia G1–G5.
+- Dispatch de workflow por `project_type` nos handlers greenfield/brownfield (site/lp/app→ui, platform/saas→fullstack, api/service→service); variants mantidos como arquivos separados.
+- Teste unitario do `fast-path-gate` (unico modulo de orquestracao sem cobertura dedicada).
+
+### Fixed
+
+- `sinapse graph`, `sinapse ids:*`, `sinapse mcp`, `sinapse generate` caiam no `default` do binario (passados ao Claude Code como args) — agora cabeados no switch. Fecha contrato de CI do template `sinapse graph --deps`.
+- **Gerador de entity-registry agora e DETERMINISTICO**: sort de arquivos (fast-glob retornava ordem de readdir), sort de `usedBy`, `lastVerified` preservado por checksum, `lastUpdated` idempotente, self-entry excluido. Elimina o churn de ~1600 linhas por commit.
+- Gerador passa a escanear `bin/` — corrige `ideation-engine` falsamente marcado como `orphan` (agora `usedBy: [ideate]`, `lifecycle: production`).
+- Regex de exclusao de docs ancorado em `^docs/` — 5 docs tracked de `core/docs` voltam ao install-manifest (drift de upgrade brownfield deixava de ser rastreado).
+- WaveAnalyzer named export (`new` lancava "not a constructor"); diagnostics SYNAPSE no `doctor --deep`; hook `code-intel-pretool.cjs` ausente criado e registrado.
+
+### Changed
+
+- `output-formatter` consolidado — `core/utils` re-exporta a fonte unica em `infrastructure/scripts` (−290 linhas de duplicata byte-identica).
+- Os 3 grounding hooks (`sinapse-{brand,ds,vault}-grounding.cjs`) delegam `loadConfig` ao `config-loader.cjs` compartilhado (require guardado, fail-open preservado).
+- Task @devops pre-push invoca `sinapse qa run --layer=1` em vez de reimplementar lint/test/typecheck.
+- `AgentInvoker` memoiza `_loadAgent`/`_loadTask`; `MasterOrchestrator` colapsa o `_saveState()` redundante por epic no caminho de sucesso.
+- 9 tasks orfas cabeadas aos agentes (devops/developer por dominio); 3 namespaces de session documentados em `core/README.md`.
+
+### Removed
+
+- `test-validation-task.md` (fixture auto-declarado, zero consumidor) e as 2 copias orfas `development/scripts/elicitation-{engine,session-manager}.js` (consumidores reais usam `core/elicitation/`).
+
+### Security
+
+- **Auto-execucao no install removida (supply-chain).** O hook npm `postinstall` (`node bin/postinstall.js`) foi retirado do `package.json`. Executar codigo automaticamente em `npm install` e uma superficie de supply-chain — um publish comprometido rodaria na maquina de todos os instaladores sem nenhuma acao explicita. O setup agora e EXPLICITO: via `npx sinapse-ai install` (caminho recomendado, ja documentado no README) ou via `npm run setup`. O modulo `bin/postinstall.js` foi mantido sem mudanca de comportamento — apenas deixou de ser auto-executado. CI install-matrix e comentarios ajustados ao novo modelo.
+
 ## [1.7.0] — 2026-06-02 — 🔒 Security & Robustness Hardening
 
 > **Release de seguranca e robustez.** Auditoria de ciberseguranca completa (6 frentes + verificacao adversarial) + fundacao de robustez (execucao segura cross-OS, learning loop, cadeia de erros tipada). Prepara o framework para distribuicao publica.

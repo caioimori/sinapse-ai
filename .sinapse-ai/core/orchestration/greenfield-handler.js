@@ -40,6 +40,35 @@ const DEFAULT_GREENFIELD_INDICATORS = [
 ];
 
 /**
+ * Maps a classified project_type to its greenfield workflow variant. The
+ * variants stay separate files (distinct phase/agent contracts — fusion was
+ * refuted in the deep-dive); the handler just dispatches to the right one.
+ * Unknown/absent type falls back to fullstack (the historical default).
+ * @see project-intelligence.md classification matrix
+ */
+const GREENFIELD_WORKFLOW_BY_TYPE = Object.freeze({
+  site: 'greenfield-ui',
+  lp: 'greenfield-ui',
+  app: 'greenfield-ui',
+  platform: 'greenfield-fullstack',
+  saas: 'greenfield-fullstack',
+  api: 'greenfield-service',
+  service: 'greenfield-service',
+});
+
+const DEFAULT_GREENFIELD_WORKFLOW = 'greenfield-fullstack';
+
+/**
+ * Resolve the greenfield workflow basename for a project_type.
+ * @param {string} [projectType]
+ * @returns {string} workflow name (without extension)
+ */
+function resolveGreenfieldWorkflow(projectType) {
+  const key = String(projectType || '').toLowerCase();
+  return GREENFIELD_WORKFLOW_BY_TYPE[key] || DEFAULT_GREENFIELD_WORKFLOW;
+}
+
+/**
  * Greenfield workflow phases
  * @enum {string}
  */
@@ -112,10 +141,12 @@ class GreenfieldHandler extends EventEmitter {
     this._surfaceChecker = options.surfaceChecker || null;
     this._sessionState = options.sessionState || null;
 
-    // Workflow path
+    // Workflow variant dispatched by project_type (site/lp/app → ui,
+    // platform/saas → fullstack, api/service → service). Default fullstack.
+    this.workflowName = resolveGreenfieldWorkflow(options.projectType);
     this.workflowPath = path.join(
       projectRoot,
-      '.sinapse-ai/development/workflows/greenfield-fullstack.yaml',
+      `.sinapse-ai/development/workflows/${this.workflowName}.yaml`,
     );
 
     // Phase progress tracking
@@ -871,7 +902,7 @@ class GreenfieldHandler extends EventEmitter {
       const exists = await sessionState.exists();
       if (exists) {
         await sessionState.loadSessionState();
-        await sessionState.recordPhaseChange(`greenfield_${phase}`, 'greenfield-fullstack', '@pm');
+        await sessionState.recordPhaseChange(`greenfield_${phase}`, this.workflowName, '@pm');
         this._log(`Phase recorded in session state: ${phase}`);
       }
     } catch (error) {
@@ -995,5 +1026,7 @@ module.exports = {
   PhaseFailureAction,
   DEFAULT_GREENFIELD_INDICATORS,
   PHASE_1_SEQUENCE,
+  GREENFIELD_WORKFLOW_BY_TYPE,
+  resolveGreenfieldWorkflow,
 };
 

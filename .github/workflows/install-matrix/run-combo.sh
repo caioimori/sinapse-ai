@@ -211,12 +211,13 @@ echo "[check3] sinapse doctor exit: $DOCTOR_EXIT ($([ $CHECK3 -eq 0 ] && echo PA
 [ $CHECK3 -ne 0 ] && FAIL=1
 
 # ------------------------------------------------------------
-# Check 4: SINAPSE postinstall banner output <= MAX_LINES
-# Re-run the install into a throwaway dir to capture output.
-# We count only SINAPSE-authored postinstall lines by matching
-# the known banner markers (instalado, agents, squads, doctor,
-# @sinapse, sinapse.club, Bem-vindo, parcial). Package-manager
-# progress/resolution output (pnpm/yarn are verbose) is excluded.
+# Check 4: `npm install` of the package stays QUIET (no auto-exec).
+# Since the 2026-06 supply-chain hardening the package ships NO
+# `postinstall` hook — installing the tarball must NOT run setup or
+# print a SINAPSE banner. Setup is explicit via `npx sinapse-ai install`.
+# We match the known banner markers (instalado, agents, squads, doctor,
+# @sinapse, sinapse.club, Bem-vindo, parcial); 0 is the expected count.
+# The check stays tolerant (<= MAX_LINES) to ignore package-manager noise.
 # ------------------------------------------------------------
 CHECK4=1
 LINES=-1

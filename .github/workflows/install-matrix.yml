@@ -35,7 +35,9 @@ permissions:
 
 env:
   NODE_VERSION: '20'
-  # Skip our own postinstall hooks from interfering with the candidate tarball's postinstall.
+  # The package no longer ships an npm `postinstall` hook (removed 2026-06 for
+  # supply-chain safety; setup is explicit via `npx sinapse-ai install`). This
+  # var only affects the opt-in `npm run setup` path now.
   SINAPSE_SKIP_POSTINSTALL: '0'
   # Prevent husky from running during npm pack / install in CI (husky v9 respects this).
   HUSKY: '0'

@@ -381,24 +381,36 @@ spawn_terminal() {
   # Add agent activation
   agent_cmd="${agent_cmd} --print-only"  # Just for testing, real impl would use actual claude flags
 
+  # SECURITY (SHELL-INJECTION-PM-SH): AGENT/TASK/PARAMS/CONTEXT_FILE come from
+  # CLI args and are interpolated into a command string run by a shell in the
+  # spawned terminal. Escape every interpolated value with `printf %q` so shell
+  # metacharacters (`;`, `$()`, backticks, quotes) cannot break out and execute.
+  local q_agent q_task q_params q_context q_output q_lock
+  printf -v q_agent '%q' "$AGENT"
+  printf -v q_task '%q' "$TASK"
+  printf -v q_params '%q' "$PARAMS"
+  printf -v q_context '%q' "$CONTEXT_FILE"
+  printf -v q_output '%q' "$OUTPUT_FILE"
+  printf -v q_lock '%q' "$LOCK_FILE"
+
   # For now, we'll create a simpler command that demonstrates the concept
   # The actual claude CLI integration will depend on how claude accepts agent/task args
   local full_cmd="echo '=== SINAPSE Agent Session ===' && "
-  full_cmd+="echo 'Agent: ${AGENT}' && "
-  full_cmd+="echo 'Task: ${TASK}' && "
-  [[ -n "$PARAMS" ]] && full_cmd+="echo 'Params: ${PARAMS}' && "
-  [[ -n "$CONTEXT_FILE" ]] && full_cmd+="echo 'Context: ${CONTEXT_FILE}' && "
+  full_cmd+="echo Agent: ${q_agent} && "
+  full_cmd+="echo Task: ${q_task} && "
+  [[ -n "$PARAMS" ]] && full_cmd+="echo Params: ${q_params} && "
+  [[ -n "$CONTEXT_FILE" ]] && full_cmd+="echo Context: ${q_context} && "
   full_cmd+="echo '' && "
 
   # Actual execution would be something like:
   # full_cmd+="${CLAUDE_CMD} @${AGENT} *${TASK} ${PARAMS}"
   # For now, simulate the output
-  full_cmd+="echo 'Executing: @${AGENT} *${TASK} ${PARAMS}' && "
+  full_cmd+="echo Executing: @${q_agent} '*'${q_task} ${q_params} && "
   full_cmd+="echo 'Agent execution would happen here...' && "
   full_cmd+="echo '=== Session Complete ===' "
 
   # Redirect output to file and remove lock when done
-  full_cmd+=" > '${OUTPUT_FILE}' 2>&1; rm -f '${LOCK_FILE}'"
+  full_cmd+=" > ${q_output} 2>&1; rm -f ${q_lock}"
 
   # Spawn based on OS
   case "$os" in

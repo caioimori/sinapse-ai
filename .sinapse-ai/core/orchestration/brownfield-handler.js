@@ -67,6 +67,35 @@ const PhaseFailureAction = {
   ABORT: 'abort',
 };
 
+/**
+ * Maps a classified project_type to its brownfield workflow variant. Variants
+ * stay separate files (distinct contracts — fusion refuted in the deep-dive);
+ * the handler dispatches to the right one. Unknown/absent type falls back to
+ * brownfield-discovery (the generic 10-phase tech-debt assessment default).
+ * @see project-intelligence.md classification matrix
+ */
+const BROWNFIELD_WORKFLOW_BY_TYPE = Object.freeze({
+  site: 'brownfield-ui',
+  lp: 'brownfield-ui',
+  app: 'brownfield-ui',
+  platform: 'brownfield-fullstack',
+  saas: 'brownfield-fullstack',
+  api: 'brownfield-service',
+  service: 'brownfield-service',
+});
+
+const DEFAULT_BROWNFIELD_WORKFLOW = 'brownfield-discovery';
+
+/**
+ * Resolve the brownfield workflow basename for a project_type.
+ * @param {string} [projectType]
+ * @returns {string} workflow name (without extension)
+ */
+function resolveBrownfieldWorkflow(projectType) {
+  const key = String(projectType || '').toLowerCase();
+  return BROWNFIELD_WORKFLOW_BY_TYPE[key] || DEFAULT_BROWNFIELD_WORKFLOW;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              BROWNFIELD HANDLER CLASS
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -101,10 +130,12 @@ class BrownfieldHandler extends EventEmitter {
     this._surfaceChecker = options.surfaceChecker || null;
     this._sessionState = options.sessionState || null;
 
-    // Workflow path
+    // Workflow variant dispatched by project_type (site/lp/app → ui,
+    // platform/saas → fullstack, api/service → service). Default discovery.
+    this.workflowName = resolveBrownfieldWorkflow(options.projectType);
     this.workflowPath = path.join(
       projectRoot,
-      '.sinapse-ai/development/workflows/brownfield-discovery.yaml',
+      `.sinapse-ai/development/workflows/${this.workflowName}.yaml`,
     );
 
     // Phase progress tracking
@@ -723,7 +754,7 @@ Quer que eu comece?`;
       const exists = await sessionState.exists();
       if (exists) {
         await sessionState.loadSessionState();
-        await sessionState.recordPhaseChange(`brownfield_${phase}`, 'brownfield-discovery', '@architect');
+        await sessionState.recordPhaseChange(`brownfield_${phase}`, this.workflowName, '@architect');
         this._log(`Phase recorded in session state: ${phase}`);
       }
     } catch (error) {
@@ -758,5 +789,7 @@ module.exports = {
   BrownfieldPhase,
   PostDiscoveryChoice,
   PhaseFailureAction,
+  BROWNFIELD_WORKFLOW_BY_TYPE,
+  resolveBrownfieldWorkflow,
 };
 

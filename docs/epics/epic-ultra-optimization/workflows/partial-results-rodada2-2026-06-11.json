@@ -1,0 +1,263 @@
+{
+  "summary": "Deep-dive SINAPSE-AI: mapa do core (28 módulos), features inertes/redundantes, gargalos de orquestração, verificação adversarial e plano P0-P3",
+  "agentCount": 38,
+  "logs": [
+    "Mapa do core: 28 auditores + céticos por achado, em pipeline",
+    "Frentes especiais: bin/, tasks órfãos, workflows, linhagens/gargalos, coverage",
+    "[mapa:migration] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:orchestration] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:permissions] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:quality-gates] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:registry] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:session] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:synapse] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:ids] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:telemetry] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:ui] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:utils] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[especial:bin-entries] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[especial:tasks-orfaos] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:grounding] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[especial:workflows-orfaos] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[verify:docs] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:logger] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[verify:docs] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[verify:health-check] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[especial:coverage-real] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[verify:health-check] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[especial:linhagens-gargalos] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:mcp] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:execution] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:manifest] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:elicitation] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:code-intel] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:events] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:memory] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:config] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:external-executors] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "[mapa:graph-dashboard] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)",
+    "Mapa: 5/28 módulos analisados. Especiais: 0/5 frentes. Sintetizando...",
+    "[síntese] failed: You've hit your session limit · resets 8:10pm (America/Sao_Paulo)"
+  ],
+  "result": {
+    "error": "síntese falhou",
+    "modules": 5,
+    "specials": 0,
+    "data": {
+      "modules": [
+        {
+          "module": "core/docs",
+          "promise": "Documentação interna de referência do framework: 5 guias markdown cobrindo criação de componentes via meta-agent (*create-agent), sintaxe do template engine ({{VAR}}, {{#IF_}}, {{#EACH_}}), tradução PT→EN no sharding de documentos, padrão de session-update (Story 6.1.4) e troubleshooting do meta-agent. Não há código — é o \"manual\" dos subsistemas de criação/templating.",
+          "consumers": [
+            {
+              "file": "docs/guides/framework-contributor-mode.md",
+              "detail": "linha 23 — link markdown direto pro component-creation-guide.md; este guia é publicado no pacote npm (campo files inclui docs/guides/)"
+            },
+            {
+              "file": "docs/framework/collaboration-autonomy-plan.md",
+              "detail": "linha 45 — cita .sinapse-ai/core/docs/component-creation-guide.md como referência de scaffolding de componentes"
+            },
+            {
+              "file": "packages/installer/src/installer/sinapse-ai-installer.js",
+              "detail": "linhas 30 e 252 — FOLDERS_TO_COPY inclui 'core' e copia a pasta inteira, então os 5 docs são distribuídos a todo projeto instalado (npm files inclui .sinapse-ai/)"
+            },
+            {
+              "file": ".gitignore",
+              "detail": "linhas 329-334 — declara core/docs como os ORIGINAIS canônicos e ignora os duplicados legados em .sinapse-ai/docs/ (dedupe já resolvido via gitignore)"
+            },
+            {
+              "file": "scripts/generate-install-manifest.js",
+              "detail": "linhas 70-74 — referencia os 5 arquivos por nome em EXCLUDE_PATTERNS (intenção: excluir duplicados legados; efeito colateral: regex por sufixo também exclui core/docs do install-manifest.yaml)"
+            },
+            {
+              "file": ".claude/commands/SINAPSE/stories/story-6.1.4.md",
+              "detail": "linhas 945 e 1175 — story histórica que originou session-update-pattern.md (proveniência, não consumo runtime)"
+            }
+          ],
+          "works": "Como documentação, funciona: conteúdo é substancialmente preciso contra o código atual. Verificado: template-engine.js:13-14 implementa exatamente {{#IF_X}}/{{#EACH_X}}/INDEX como o template-syntax.md descreve; o dicionário PT→EN do SHARD-TRANSLATION-GUIDE existe em development/tasks/shard-doc.md:301+; .sinapse-ai/scripts/command-execution-hook.js (citado pelo session-update-pattern) existe; o task create-agent.md existe. Defeitos: (1) paths stale internos — troubleshooting-guide.md:596-597 aponta pra 'sinapse-ai/docs/...' (layout flat antigo) e o SHARD guide cita '.sinapse-ai/tasks/shard-doc.md' quando o real é '.sinapse-ai/development/tasks/shard-doc.md'; (2) nenhum agent/task/workflow/CLI referencia esses guias por path em runtime — agentes não são apontados pra eles na hora de criar componentes; (3) bug do manifest: shipped pelo installer mas ausente do install-manifest.yaml, então upgrades brownfield não rastreiam drift desses arquivos.",
+          "verdict": "misto",
+          "overlap_with": null,
+          "recommended_action": "potencializar",
+          "action_detail": "3 passos concretos: (1) Corrigir o bug do manifest — em scripts/generate-install-manifest.js:70-74, ancorar os regexes na raiz (ex: /^docs\\/component-creation-guide\\.md$/ em vez de sufixo solto) pra que core/docs/*.md entrem no install-manifest.yaml e fiquem rastreáveis em upgrades brownfield; regenerar via npm run generate:manifest. (2) Corrigir paths stale dentro dos guias (troubleshooting-guide.md:596-597 → .sinapse-ai/core/docs/...; SHARD guide → .sinapse-ai/development/tasks/shard-doc.md). (3) Cabear consumo runtime: adicionar referência a template-syntax.md e component-creation-guide.md no task development/tasks/create-agent.md e no core/README.md (que já lista 'docs/ # Internal documentation' na linha 36), pra que agentes leiam a doc canônica ao criar componentes — hoje a doc existe mas nenhum fluxo manda o agente consultá-la. Não fundir com development/knowledge-base/: conteúdos não duplicam (knowledge-base = padrões de arquitetura/operação; core/docs = manual dos subsistemas de criação/templating), mas vale registrar a fronteira no core/README.md.",
+          "priority": "P2",
+          "evidence": ".sinapse-ai/core/docs/ (5 arquivos .md, sem código); scripts/generate-install-manifest.js:57-83 (EXCLUDE_PATTERNS com regex por sufixo); .sinapse-ai/install-manifest.yaml (zero entradas core/docs vs core/code-intel presente a partir da linha 198 — confirma exclusão acidental); packages/installer/src/installer/sinapse-ai-installer.js:30,252 (copia core/ inteiro, docs chegam nos installs); .gitignore:329-334 (core/docs = originais canônicos); docs/guides/framework-contributor-mode.md:23 e docs/framework/collaboration-autonomy-plan.md:45 (consumidores reais); .sinapse-ai/development/scripts/template-engine.js:13-14 (sintaxe documentada é real); .sinapse-ai/development/tasks/shard-doc.md:301-337 (dicionário PT→EN existe); .sinapse-ai/core/docs/troubleshooting-guide.md:596-597 (paths stale)",
+          "contested": false,
+          "skeptics": []
+        },
+        {
+          "module": "doctor (.sinapse-ai/core/doctor/)",
+          "promise": "Diagnóstico de saúde do ambiente SINAPSE: orquestra 16 checks modulares (settings, rules, agent-memory, entity-registry, git-hooks, core-config, CLAUDE.md, ide-sync, graph-dashboard, code-intel, node, npm, skills/commands/hooks counts, manifest-parity) + 1 check deep (constitution-consistency), com --fix/--dry-run/--json/--quiet, política de exceção por check (onError fail/warn/skip), detecção de projeto sem instalação (exit 4) e mapa canônico de exit codes 0-4 (index.js:1-21, 235-267).",
+          "consumers": [
+            {
+              "file": "bin/sinapse.js",
+              "detail": "CLI legado: case 'doctor' (linha 1072) chama runDoctor() que faz require de .sinapse-ai/core/doctor (linha 379) e usa runDoctorChecks + resolveExitCode"
+            },
+            {
+              "file": "bin/commands/doctor.js",
+              "detail": "CLI canônico (sinapse-ai doctor): cmdDoctor faz require do módulo (linha 35-37) e mapeia exit codes; roteado por bin/cli.js case 'doctor' (linha ~154) e listado em KNOWN_COMMANDS (bin/cli.js:28)"
+            },
+            {
+              "file": "bin/postinstall.js",
+              "detail": "Gate de saúde pós-instalação: Step 4 executa 'doctor --quiet' como subprocess (linha 412); exit 2 aborta instalação, 0/1 OK — consumidor crítico do contrato de exit codes"
+            },
+            {
+              "file": ".github/workflows/install-matrix/run-combo.sh",
+              "detail": "CI install-matrix Check 3 executa 'sinapse doctor --quiet' (linha 204) e valida exit code em matriz de combos de instalação"
+            },
+            {
+              "file": ".sinapse-ai/development/tasks/health-check.yaml",
+              "detail": "Consumidor dinâmico (string): task agent-facing *health-check v3.0.0 delega TODA a lógica pra 'sinapse doctor --json' via Bash (linhas 4, 11-15, 45) — single source of truth declarado"
+            },
+            {
+              "file": ".github/agents/devops.agent.md",
+              "detail": "Comando *health-check do agente devops referencia 'sinapse doctor --json + governance interpretation' (linha 41); espelhado em .sinapse-ai/development/agents/devops.md"
+            },
+            {
+              "file": "scripts/perf-baseline.sh",
+              "detail": "Baseline de performance cronometra 'npx sinapse-ai doctor' (linha 43) e grava no JSON de métricas"
+            },
+            {
+              "file": "tests/installer/cli-doctor.test.js",
+              "detail": "Teste de integração REAL do wiring: importa cmdDoctor via bin/cli (linha 34), exercita o caminho CLI→módulo (não tautológico)"
+            },
+            {
+              "file": "packages/installer/tests/unit/doctor/doctor-orchestrator.test.js",
+              "detail": "Importa o módulo real (require '../../../../../.sinapse-ai/core/doctor', linha 13) — unit do próprio módulo (tautológico, citado só por completude) + tests/unit/doctor-exception-classification.test.js"
+            },
+            {
+              "file": ".github/issue-labeler.yml",
+              "detail": "Consumidor fraco: labeler automático rotula issues que mencionam 'doctor/health check/diagnostic' (linhas 26, 30)"
+            }
+          ],
+          "works": "SIM — smoke read-only via node -e executou runDoctorChecks({quiet,json}) no próprio repo: 16 checks rodaram sem crash, summary {pass:10, warn:5, fail:0, info:1}, internalError null, resolveExitCode retornou 1 (WARN only) conforme contrato A.3. Os 5 WARNs são ambientais do repo (settings-json, agent-memory, claude-md, ide-sync, hooks-claude-count), não bugs do doctor. fix-handler tem FIX_MAP real porém parcial: auto-fix só pra 4 dos 16 checks (rules-files, agent-memory, claude-md, settings-json — fix-handler.js:72-136); os demais retornam 'No auto-fix available'.",
+          "verdict": "funcional",
+          "overlap_with": "health-check (.sinapse-ai/core/health-check/)",
+          "recommended_action": "potencializar",
+          "action_detail": "Doctor é o módulo mais forte do par doctor/health-check — a unificação INS-4.8 já demoveu o health-check (\"preserved for potential programmatic use but is NOT the primary\", health-check/index.js:8-12) e a task *health-check já delega ao doctor. Falta completar a fusão: (1) portar os domínios únicos do health-check engine (Deployment Environment e Service Integration — que o doctor não cobre) como checks --deep em .sinapse-ai/core/doctor/checks/, e então aposentar core/health-check (hoje sem consumidor real fora dos próprios testes e do barrel core/index.js) — isso é \"fundir duplicata real no módulo mais forte\"; (2) ampliar FIX_MAP além dos 4 checks atuais (entity-registry, git-hooks e core-config são fixáveis deterministicamente); (3) avaliar promover constitution-consistency do --deep pro default se o custo for baixo, já que a Constitution é NON-NEGOTIABLE.",
+          "priority": "P2",
+          "evidence": ".sinapse-ai/core/doctor/index.js:123-233 (runner) e 247-267 (exit codes); .sinapse-ai/core/doctor/checks/index.js:28-54 (16+1 checks); .sinapse-ai/core/doctor/fix-handler.js:72-136 (FIX_MAP 4 checks); bin/sinapse.js:379,1072; bin/commands/doctor.js:35-37; bin/cli.js:28,154; bin/postinstall.js:412-426; .github/workflows/install-matrix/run-combo.sh:204-210; scripts/perf-baseline.sh:43; .sinapse-ai/development/tasks/health-check.yaml:4-15; .github/agents/devops.agent.md:41; .sinapse-ai/core/health-check/index.js:8-17 (declara doctor como sistema primário); tests/installer/cli-doctor.test.js:34; smoke node -e: 16 checks, 0 FAIL, exit 1",
+          "contested": false,
+          "skeptics": []
+        },
+        {
+          "module": "errors (.sinapse-ai/core/errors/)",
+          "promise": "Cadeia de erros tipada da fundação do framework: classe SinapseError (code/category/severity/retryable/recovery/exitCode/userMessage/metadata/cause), ErrorRegistry com 13 definições SNPS_* embutidas, normalizeError (envelopa qualquer valor lançado), serializeError (JSON-safe, stack redigida em produção) e sanitizeValue cycle-safe. O barrel se autodeclara \"FOUNDATION module\" a ser consumido por todos os módulos downstream (index.js:4-21).",
+          "consumers": [
+            {
+              "file": ".sinapse-ai/core/synapse/engine.js",
+              "detail": "require('../errors') na linha 15; errorLayer() (linhas 135-148) envelopa falhas de layer com normalizeError(code: SNPS_SYNAPSE_LAYER_FAILED) e grava errorDetails via serializeError — caminho quente do Synapse Engine (que está cabeado via auto-bootstrap)"
+            },
+            {
+              "file": ".sinapse-ai/core/execution/build-state-manager.js",
+              "detail": "require('../errors') nas linhas 26-30; usa normalizeError, sanitizeValue e serializeError (linhas 140-149) pra persistir errorDetails tipados (SNPS_EXECUTION_FAILED) no build-state.json de builds autônomos"
+            },
+            {
+              "file": "tests/synapse/engine-isolation.test.js",
+              "detail": "Consumo INDIRETO (não-tautológico): linhas 144-181 asserem que errorDetails carrega código SNPS_ produzido via engine — prova de integração real"
+            },
+            {
+              "file": "tests/core/persistence-graceful.test.js",
+              "detail": "Consumo INDIRETO via MasterOrchestrator → build-state-manager: linha 137 assere errorDetails.code === 'SNPS_EXECUTION_FAILED' em fluxo de orquestração"
+            },
+            {
+              "file": ".sinapse-ai/install-manifest.yaml",
+              "detail": "Linhas 410-430: os 6 arquivos do módulo fazem parte do install set distribuído via npm — referência dinâmica por path"
+            },
+            {
+              "file": ".sinapse-ai/data/entity-registry.yaml",
+              "detail": "Linhas 8602-8700: 5 entidades registradas; porém usedBy só lista links intra-módulo (registry SUBESTIMA os consumidores reais synapse/engine e build-state-manager — dado desatualizado)"
+            }
+          ],
+          "works": "FUNCIONA. Smoke test read-only via node -e passou integralmente: construção de SinapseError com lookup no registry (code/category/severity/retryable corretos), normalizeError de TypeError crua → envelope SNPS_UNKNOWN_ERROR com isSinapseError=true, serializeError com NODE_ENV=production redige stack pra '[redacted]', registry com 13 definições e fallback gracioso pra código desconhecido (nunca lança). O caminho de produção real (synapse engine errorLayer e build-state-manager failure persistence) é coberto por testes de integração que passam pelo módulo de verdade. Nota: tests/core/errors.test.js (281 linhas) é tautológico — testa só o próprio módulo — e NÃO foi contado como prova de consumo.",
+          "verdict": "funcional",
+          "overlap_with": "config (merge-utils.js duplica deepMerge/isPlainObject) + logger (serialização própria de Error que vaza stack, ignorando a política do serializer)",
+          "recommended_action": "potencializar",
+          "action_detail": "O módulo é sólido e funcional, mas vive MUITO abaixo da promessa de 'foundation': só 2 de ~27 módulos do core o consomem, enquanto há 150 `throw new Error(` não-tipados em 55 arquivos do core. Potencialização concreta, em ordem de valor: (1) Cabear o error boundary do CLI — bin/sinapse.js tem dezenas de catch + process.exit(1) crus (ex: linhas 58-60) e NUNCA usa SinapseError.exitCode, apesar do módulo suportar exit codes tipados (SNPS_PERMISSION_DENIED → 13); um único wrapper `catch → normalizeError → exit(err.exitCode ?? 1)` no entry point ativa a feature morta sem tocar nos comandos. (2) Fazer logger/index.js delegar serialização de Error pra serializeError — hoje (linhas 134 e 154) ele emite `a.stack || a.message` cru inclusive no modo --json, vazando stack trace em produção e contornando exatamente a proteção que o serializer implementa (ganho de segurança alinhado à frente cyber/muros do epic). (3) Adoção progressiva nos módulos de alto tráfego (orchestration, execution, health-check, quality-gates) trocando `throw new Error` por SinapseError nos caminhos que cruzam process boundaries. (4) Corrigir usedBy no entity-registry.yaml pra refletir os consumidores reais (Constituição Art. VII — metrics accuracy). (5) Resolver a duplicação leve: config/merge-utils.js:23,45 reimplementa isPlainObject/deepMerge de errors/utils.js:10,52 — fundir os helpers em um único lugar neutro (core/utils) mantendo errors dependency-free ou aceitando a dependência leve; é duplicata de helper, não de módulo.",
+          "priority": "P2",
+          "evidence": ".sinapse-ai/core/errors/index.js:4-21 (promessa 'FOUNDATION'); .sinapse-ai/core/synapse/engine.js:15,135-148 (consumidor real 1); .sinapse-ai/core/execution/build-state-manager.js:26-30,140-149 (consumidor real 2); tests/synapse/engine-isolation.test.js:144-181 e tests/core/persistence-graceful.test.js:137 (prova de integração não-tautológica); .sinapse-ai/install-manifest.yaml:410-430 e .sinapse-ai/data/entity-registry.yaml:8602-8700 (referências dinâmicas por path; usedBy desatualizado); bin/sinapse.js:58-60 (CLI ignora exitCode tipado); .sinapse-ai/core/logger/index.js:134,154 (vazamento de stack em --json, bypass do serializer); .sinapse-ai/core/config/merge-utils.js:23,45 vs .sinapse-ai/core/errors/utils.js:10,52 (helpers duplicados); grep: 150 ocorrências de 'throw new Error(' em 55 arquivos do core (gap de adoção)",
+          "contested": false,
+          "skeptics": []
+        },
+        {
+          "module": "health-check (.sinapse-ai/core/health-check/)",
+          "promise": "Sistema de diagnóstico de saúde (HCS-2) com 35 checks em 5 domínios (project 9, local 8, repository 8, deployment 5, services 5), engine paralelo com cache, scoring 0-100 por domínio, self-healing em 3 tiers (HealerManager + BackupManager com blocklist de segurança) e 3 reporters (console/json/markdown).",
+          "consumers": [
+            {
+              "file": ".sinapse-ai/core/index.js",
+              "detail": "Único require real (linha 37): barrel re-export `const healthCheck = require('./health-check')`. Porém NENHUM consumidor do core/index.js usa o export healthCheck (verificado nos 4 arquivos que importam core/index: tests/security/path-traversal.test.js, tests/unit/code-intel/registry-provider.test.js, packages/installer/tests/.../generate-settings-json.test.js, development/scripts/populate-entity-registry.js — zero uso de healthCheck). Re-export órfão."
+            },
+            {
+              "file": "tests/health-check/ (4 arquivos) + tests/unit/healers-tier1.test.js",
+              "detail": "Testes que testam o próprio módulo (tautologia — rodam no CI via npm test/jest, mas não provam consumidor de runtime). healers-tier1.test.js é recente (PR #215, jun/3) e valida 4 healers Tier-1 built-in."
+            },
+            {
+              "file": ".sinapse-ai/install-manifest.yaml",
+              "detail": "Linhas 566+ listam todos os ~50 arquivos do módulo pra distribuição no pacote npm — é shipping, não consumo: o código é instalado mas nada o invoca."
+            },
+            {
+              "file": ".sinapse-ai/development/tasks/health-check.yaml",
+              "detail": "NÃO-consumidor comprovado: task *health-check v3.0 (INS-4.8) delega TUDO pra `npx sinapse-ai doctor --json` e declara explicitamente que não tem lista própria de checks. O caminho agent-facing (devops.md *health-check) foi deliberadamente desviado do módulo."
+            },
+            {
+              "file": ".github/labeler.yml + issue-labeler.yml + ISSUE_TEMPLATE/3-test-coverage.yml + development/scripts/issue-triage.js",
+              "detail": "Referências meta: label 'area: health-check' por path e opção de área em template de issue. Não invocam o código."
+            },
+            {
+              "file": ".sinapse-ai/data/entity-registry.yaml",
+              "detail": "Entradas auto-geradas de inventário (linhas ~9045+); usedBy só aponta arquivos internos do próprio módulo. Inventário, não consumo."
+            }
+          ],
+          "works": "FUNCIONA. Smoke read-only: `new HealthCheck()` carrega e registra 35 checks ({project:9, local:8, repository:8, deployment:5, services:5}); `run({domain:'project', autoFix:false})` executou 5 checks quick em 43ms, score 84/degraded — e inclusive detectou um FAIL real (Constitution Consistency). Código saudável, com investimento recente (healers Tier-1 adicionados em jun/3, PR #215). O problema não é funcionamento, é que nenhum caminho de runtime o invoca: bin/sinapse.js doctor → core/doctor/ (linha 379), e core/doctor/ tem ZERO referências a health-check (grep vazio).",
+          "verdict": "misto",
+          "recommended_action": "fundir",
+          "action_detail": "Fundir no doctor (módulo mais forte: cabeado no CLI `sinapse doctor`, na task *health-check e no agente devops — INS-4.8 já decretou doctor como single source of truth). Plano concreto: (1) cabear os 4 domínios que doctor NÃO cobre (local: disk/memory/network/shell/IDE; repository: git-status/conflicts/large-files/lockfile/branch-protection; deployment: docker/CI/env-file/build; services: github-cli/claude-code/MCP/gemini/API) como checks deep do doctor, aproveitando o flag `--deep` que já existe (doctor/index.js:166 `loadChecks({deep})`) — ou novo `--domain <x>`; (2) deduplicar os checks que existem nos dois lados (constitution-consistency, node-version, package-json/npm-packages, framework-config/core-config) mantendo a versão do doctor; (3) migrar o HealerManager 3-tier + BackupManager (mais sofisticado que doctor/fix-handler.js: tem backup, blocklist de secrets e tiers de risco) pra dentro do `doctor --fix`; (4) atualizar tests/health-check pra apontar pro novo local; (5) remover o re-export órfão de core/index.js:37 e os arquivos absorvidos do install-manifest. Resultado: doctor sobe de 17 checks de instalação pra ~45+ checks cobrindo ambiente, repo, deploy e serviços, com healing seguro — zero capacidade perdida.",
+          "priority": "P1",
+          "evidence": ".sinapse-ai/core/health-check/index.js:8-12 (nota INS-4.8: 'NOT the primary health check mechanism', preservado pra uso programático que não existe); .sinapse-ai/development/tasks/health-check.yaml:3-15 (task delega a `sinapse doctor --json`); .sinapse-ai/core/index.js:37 (único require, barrel sem consumidores do export); bin/sinapse.js:379 e :1072 (comando doctor → core/doctor, nunca health-check); core/doctor/ sem nenhuma referência a health-check (grep vazio); .sinapse-ai/core/doctor/checks/constitution-consistency.js + node-version.js vs .sinapse-ai/core/health-check/checks/project/constitution-consistency.js + node-version.js (duplicatas diretas); .sinapse-ai/core/doctor/fix-handler.js vs .sinapse-ai/core/health-check/healers/index.js (auto-fix duplicado, healers é superior: 3 tiers + backup + blocklist); smoke: 35 checks registrados, run 43ms score 84; PR #215 (jun/3) tocou healers/index.js + tests/unit/healers-tier1.test.js (investimento recente confirma valor vivo)",
+          "overlap_with": "doctor",
+          "contested": false,
+          "skeptics": []
+        },
+        {
+          "module": "core/ideation (ideation-engine.js)",
+          "promise": "Motor de auto-melhoria: analisa o codebase do projeto com 5 analisadores heurísticos (performance, security, codeQuality, ux, architecture), filtra sugestões que batem com gotchas já conhecidos (via core/memory/gotchas-memory) e gera relatório priorizado (quick wins primeiro) em .sinapse/ideation/ (suggestions.json + suggestions.md).",
+          "consumers": [
+            {
+              "file": "bin/cli.js",
+              "detail": "Consumo real: 'ideate' está no KNOWN_COMMANDS (linha 29) e o case 'ideate' (linhas 139-146) faz require dinâmico de ./commands/ideate e executa cmdIdeate"
+            },
+            {
+              "file": "bin/commands/ideate.js",
+              "detail": "Comando CLI completo: require('../../.sinapse-ai/core/ideation/ideation-engine') (linha 82), parse de --focus/--json/--no-save, chama engine.ideate() (linha 96) e formata saída PT-BR"
+            },
+            {
+              "file": "tests/ideation/ideate-cli.test.js",
+              "detail": "Testa o wiring CLI (parseIdeateArgs de bin/commands/ideate) E o engine end-to-end em tmpdir — não é tautologia pura porque valida o consumidor (CLI), mas não prova consumo em workflows"
+            },
+            {
+              "file": "tests/ideation/gotcha-loader.test.js",
+              "detail": "Testa integração cross-módulo real ideation↔memory (GotchasMemory named export + listGotchas + filtro de sugestões)"
+            },
+            {
+              "file": ".sinapse-ai/install-manifest.yaml",
+              "detail": "Linha 770: core/ideation/ideation-engine.js listado no manifest — o arquivo é distribuído nas instalações do framework"
+            },
+            {
+              "file": ".sinapse-ai/data/entity-registry.yaml",
+              "detail": "Linhas 9144-9150: entrada ideation-engine no registry (metadado/inventário, não execução)"
+            }
+          ],
+          "works": "SIM — cabeamento validado como REAL hoje. Smoke test read-only: `node bin/cli.js ideate --no-save --json --focus codeQuality` rodou em 45ms e retornou resultado estruturado válido (1 sugestão: 128 arquivos >500 linhas). Analisadores são Node puro (nodeGrep/nodeCountLines, linhas 86-168) — cross-platform, sem shell-out (fix do VAPORWARE-1 confirmado no código e nos testes). Integração com gotchas-memory carrega com fallback gracioso. Ressalvas funcionais: (1) `ideate` NÃO aparece no help screen (bin/commands/help.js não tem entrada — só doctor/install/etc), então o comando é invisível pra quem não leu o SESSION-HANDOFF; (2) em modo non-TTY o `--json` sai duplo-encapsulado dentro do envelope JSON do logger ({status,messages:[{text:\"<json do relatório>\"}]}), quebrando o uso prometido 'pra pipelines'; (3) analisadores são regex rasos (ex: 'for.*for' na mesma linha = loop aninhado; check de lodash num framework sem lodash; UX analyzer procura React/tsx num framework CLI) — funcionam, mas geram pouco sinal no próprio repo.",
+          "verdict": "funcional",
+          "overlap_with": "code-intel (parcial, complementar — não duplicata)",
+          "recommended_action": "potencializar",
+          "action_detail": "3 cabos curtos, nessa ordem: (1) DISCOVERABILITY — adicionar linha `npx sinapse-ai ideate` em bin/commands/help.js (hoje o comando existe mas é invisível; 1 linha de fix); (2) JSON pipeline — fazer cmdIdeate com --json escrever direto em process.stdout (bypass do envelope do logger) pra `sinapse ideate --json | jq` funcionar como prometido; (3) PROFUNDIDADE — quando code-intel provider estiver disponível (isCodeIntelAvailable()), o CodeQualityAnalyzer/ArchitectureAnalyzer delegam pra analyzeComplexity/findReferences do code-intel-enricher em vez de regex, com fallback pros scanners atuais — isso converte a sobreposição parcial em composição (ideation = camada de apresentação/priorização; code-intel = camada de análise). Opcional P3: referenciar `sinapse ideate` em 1 task de workflow (ex: quality-gate pre-review ou doctor --deep) pra ganhar consumidor de pipeline além do humano no terminal. NÃO fundir com doctor/health-check: doctor diagnostica a instalação do framework, health-check mede o ecossistema, ideation analisa o código do projeto-alvo — domínios distintos.",
+          "priority": "P2",
+          "evidence": ".sinapse-ai/core/ideation/ideation-engine.js:170-264 (classe+ideate), :86-168 (scanners Node puro), :931-937 (exports); bin/cli.js:29 e :139-146 (roteamento real); bin/commands/ideate.js:82,96 (require+execução); tests/ideation/ideate-cli.test.js:12,64-75; tests/ideation/gotcha-loader.test.js:31-49; .sinapse-ai/install-manifest.yaml:770; .sinapse-ai/data/entity-registry.yaml:9144-9150; bin/commands/help.js:24 (doctor listado, ideate AUSENTE — gap); docs/epics/epic-ultra-optimization/SESSION-HANDOFF-2.md:20,31 (registro do cabeamento); smoke test: saída JSON válida em 45ms com envelope do logger por fora (bug de pipeline)",
+          "contested": false,
+          "skeptics": []
+        }
+      ],
+      "specials": []
+    }
+  }
+}

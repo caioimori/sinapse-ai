@@ -153,3 +153,44 @@ describe('Audit 1 P0 regression — uninstall removes ~200 agent files, not just
     expect(fs.readdirSync(tmpAgentsDir).filter((f) => f.endsWith('.md')).length).toBe(0);
   });
 });
+
+describe('UNINSTALL-GIT-HOOKS — removeGitHooksConfig (audit 2026-06-11)', () => {
+  const { execFileSync } = require('child_process');
+  const { removeGitHooksConfig } = require(path.join(__dirname, '..', '..', 'bin', 'commands', 'uninstall'));
+
+  let repoDir;
+
+  function git(args) {
+    return execFileSync('git', ['-C', repoDir, ...args], { encoding: 'utf8' }).trim();
+  }
+
+  beforeEach(() => {
+    repoDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-hooks-'));
+    execFileSync('git', ['init', repoDir], { stdio: 'ignore' });
+  });
+
+  afterEach(() => {
+    try { fs.rmSync(repoDir, { recursive: true, force: true }); } catch { /* ignore */ }
+  });
+
+  test('unsets a SINAPSE-managed core.hooksPath', async () => {
+    git(['config', 'core.hooksPath', '.sinapse-ai/git-hooks']);
+    const res = await removeGitHooksConfig(repoDir);
+    expect(res.unset).toBe(true);
+    // git config --get now exits non-zero (unset) → execFileSync throws.
+    expect(() => git(['config', '--get', 'core.hooksPath'])).toThrow();
+  });
+
+  test('preserves a user-custom core.hooksPath', async () => {
+    git(['config', 'core.hooksPath', '.husky']);
+    const res = await removeGitHooksConfig(repoDir);
+    expect(res.unset).toBe(false);
+    expect(git(['config', '--get', 'core.hooksPath'])).toBe('.husky');
+  });
+
+  test('no-op when core.hooksPath is not set', async () => {
+    const res = await removeGitHooksConfig(repoDir);
+    expect(res.unset).toBe(false);
+    expect(res.value).toBeNull();
+  });
+});

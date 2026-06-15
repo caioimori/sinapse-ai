@@ -39,6 +39,11 @@ const { GateEvaluator, GateVerdict } = require('./gate-evaluator');
 // Agent Invoker (Story 0.7)
 const { AgentInvoker, SUPPORTED_AGENTS: _SUPPORTED_AGENTS } = require('./agent-invoker');
 
+// Subagent Dispatcher (epic: orchestration-consolidation, F1) — the real executor
+// that actually spawns agents (claude via runSafe). The orchestrator coordinates;
+// the dispatcher invokes. This replaces the fabricated 'simulated' default.
+const SubagentDispatcher = require('../execution/subagent-dispatcher');
+
 // Dashboard Integration (Story 0.8)
 const { DashboardIntegration, NotificationType: _NotificationType } = require('./dashboard-integration');
 
@@ -165,7 +170,11 @@ class MasterOrchestrator extends EventEmitter {
     this.onEpicStart = options.onEpicStart || this._defaultEpicStart.bind(this);
     this.onEpicComplete = options.onEpicComplete || this._defaultEpicComplete.bind(this);
     this.onStateChange = options.onStateChange || this._defaultStateChange.bind(this);
-    this.invokeAgent = options.invokeAgent || null;
+    // Real executor by default (epic: orchestration-consolidation, F1): wire the
+    // SubagentDispatcher so the orchestrator actually invokes agents instead of
+    // fabricating 'simulated' results. Callers/tests may inject their own executor
+    // via options.invokeAgent (e.g. a mock) to bypass real CLI dispatch.
+    this.invokeAgent = options.invokeAgent || this._createDispatchExecutor();
 
     // State machine (AC6)
     this._state = OrchestratorState.INITIALIZED;
@@ -457,7 +466,14 @@ class MasterOrchestrator extends EventEmitter {
           // Execute epic
           const result = await this.executeEpic(epicNum);
 
-          if (result.success) {
+          if (result.stub || result.status === 'stub') {
+            // Honesty invariant (epic: orchestration-consolidation, F0a):
+            // a stub is neither success nor failure. The pipeline continues, but it
+            // is recorded as stubbed so finalize() never reports it as a real success.
+            pipelineResult.epicsExecuted.push(epicNum);
+            (pipelineResult.epicsStubbed = pipelineResult.epicsStubbed || []).push(epicNum);
+            pipelineResult.hasStubs = true;
+          } else if (result.success) {
             pipelineResult.epicsExecuted.push(epicNum);
           } else {
             pipelineResult.epicsFailed.push(epicNum);
@@ -491,14 +507,18 @@ class MasterOrchestrator extends EventEmitter {
             }
           }
 
+          // executeEpic threw before reaching its own _saveState(), so this is
+          // the only durable capture of the new executionState.errors entry.
+          await this._saveState();
+
           // If not recovered and strict, stop
           if (!pipelineResult.success && this.strictGates) {
             break;
           }
         }
-
-        // Save state after each epic
-        await this._saveState();
+        // Note: no per-epic save on the success/stub path — executeEpic already
+        // persists executionState at its own completion point (collapsed the
+        // redundant double-write the deep-dive flagged).
       }
 
       // Finalize pipeline
@@ -632,7 +652,16 @@ class MasterOrchestrator extends EventEmitter {
         }
       }
 
-      return { success: true, epicNum, result, gateResult };
+      // Propagate stub status so the pipeline (and finalize) never count a stubbed
+      // epic as a real success. Honesty invariant (F0a).
+      return {
+        success: true,
+        status: isStubResult ? 'stub' : 'success',
+        stub: isStubResult,
+        epicNum,
+        result,
+        gateResult,
+      };
     } catch (error) {
       // Mark as failed
       this.executionState.epics[epicNum] = {
@@ -881,6 +910,64 @@ class MasterOrchestrator extends EventEmitter {
    */
   getAgentInvoker() {
     return this.agentInvoker;
+  }
+
+  /**
+   * Create the default real executor backed by the SubagentDispatcher.
+   *
+   * epic: orchestration-consolidation, Frente F1 — the "invocation layer": the
+   * orchestrator coordinates, the dispatcher actually spawns the agent (claude via
+   * runSafe, shell-injection-proof). Lazily instantiated on first use so the
+   * constructor stays cheap. If the CLI is unavailable, dispatch() returns
+   * { success:false, error } and we surface a 'failed' status — never a fabricated
+   * success (honesty invariant).
+   *
+   * @returns {Function} executor(agent, task, context) => Promise<Object>
+   * @private
+   */
+  _createDispatchExecutor() {
+    let dispatcher = null;
+    return async (agent, task, context = {}) => {
+      // Safety guard: NEVER spawn the real claude CLI inside the test runner unless
+      // explicitly allowed (set SINAPSE_REAL_DISPATCH=1). Spawning claude in unit
+      // tests is slow, non-deterministic and burns real tokens. Tests that exercise
+      // the wiring inject their own options.invokeAgent; everything else falls back
+      // honestly (a 'failed' result → caller stubs).
+      if (
+        process.env.JEST_WORKER_ID !== undefined &&
+        process.env.SINAPSE_REAL_DISPATCH !== '1'
+      ) {
+        return {
+          status: 'failed',
+          success: false,
+          error:
+            'Real dispatch disabled in test environment (set SINAPSE_REAL_DISPATCH=1 to enable).',
+          filesModified: [],
+        };
+      }
+      if (!dispatcher) {
+        dispatcher = new SubagentDispatcher({ rootPath: this.projectRoot });
+      }
+      const agentName = (agent && agent.name) || agent || 'dev';
+      const dispatchResult = await dispatcher.dispatch(
+        {
+          id: (task && (task.id || task.name)) || 'task',
+          agent: agentName,
+          type: task && task.type,
+          description: (task && (task.description || task.name)) || '',
+        },
+        context,
+      );
+      return {
+        status: dispatchResult.success ? 'success' : 'failed',
+        success: dispatchResult.success,
+        output: dispatchResult.output,
+        error: dispatchResult.error,
+        filesModified: dispatchResult.filesModified || [],
+        agentName,
+        timestamp: new Date().toISOString(),
+      };
+    };
   }
 
   /**
@@ -1398,11 +1485,22 @@ class MasterOrchestrator extends EventEmitter {
     const minutes = Math.floor(duration / 60000);
     const seconds = Math.floor((duration % 60000) / 1000);
 
+    const hasStubs = pipelineResult.hasStubs || (pipelineResult.epicsStubbed || []).length > 0;
     return {
       workflowId: this.executionState.workflowId,
       storyId: this.storyId,
       status: this._state,
-      success: pipelineResult.success ?? this._state === OrchestratorState.COMPLETE,
+      // Honesty invariant (epic: orchestration-consolidation, F0a): a pipeline that ran
+      // any epic in STUB mode did NOT really build anything — it must not report success:true.
+      success: (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) && !hasStubs,
+      mode: hasStubs ? 'stub' : 'real',
+      stubbedEpics: pipelineResult.epicsStubbed || [],
+      ...(hasStubs
+        ? {
+            warning:
+              'Pipeline ran one or more epics in STUB mode — no real work was performed for those. This is not a successful build (see epic: orchestration-consolidation).',
+          }
+        : {}),
       duration: `${minutes}m ${seconds}s`,
       durationMs: duration,
       techStack: TechStackDetector.getSummary(this.executionState.techStackProfile || {}),

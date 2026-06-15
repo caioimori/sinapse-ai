@@ -128,13 +128,18 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(3);
     });
 
-    it('should execute and return spec path', async () => {
+    it('should run in STUB mode and report it honestly (no real agent wired yet)', async () => {
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // with no spec present and no real agent, Epic 3 auto-stubs the spec and MUST
+      // report status:'stub' / success:false — never a fabricated success.
       const result = await executor.execute({
         storyId: 'TEST-001',
         source: 'story',
       });
 
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
+      expect(result.status).toBe('stub');
+      expect(result.stub).toBe(true);
       expect(result.specPath).toBeDefined();
       expect(result.complexity).toBeDefined();
     });
@@ -160,6 +165,49 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(result.success).toBe(true);
       expect(result.reused).toBe(true);
     });
+
+    it('should generate a REAL spec when a real executor is wired (F1)', async () => {
+      // Inject a real executor (mock) — proves Epic 3 invokes the agent, not stubbing.
+      const orchWithExecutor = {
+        ...mockOrchestrator,
+        invokeAgent: jest.fn(async () => ({
+          status: 'success',
+          success: true,
+          // Must pass the plausibility gate (≥200 chars + markdown structure):
+          // a real spec, not a one-liner — mirrors what a real agent returns.
+          output: [
+            '# Specification: TEST-001',
+            '',
+            '## Overview',
+            'Real agent-generated spec for TEST-001 covering the full scope.',
+            '',
+            '## Acceptance Criteria',
+            '1. Given a valid input, when processed, then output matches the contract.',
+            '2. Given an invalid input, when processed, then a clear error is raised.',
+            '',
+            '## Scope',
+            '- IN: core behavior, unit tests',
+            '- OUT: integrations beyond this story',
+            '',
+            '## Complexity',
+            'SIMPLE — single module, no external dependencies.',
+            '',
+          ].join('\n'),
+          filesModified: [],
+        })),
+      };
+      const exec = new Epic3Executor(orchWithExecutor);
+
+      const result = await exec.execute({ storyId: 'TEST-001', source: 'story' });
+
+      expect(orchWithExecutor.invokeAgent).toHaveBeenCalled();
+      // Real work happened → NOT a stub.
+      expect(result.success).toBe(true);
+      expect(result.stub).toBeFalsy();
+      // The written spec is the agent output, not the template stub.
+      const written = await fs.readFile(result.specPath, 'utf8');
+      expect(written).toContain('Real agent-generated spec');
+    });
   });
 
   describe('Epic4Executor - Execution Engine (AC3)', () => {
@@ -173,16 +221,50 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(4);
     });
 
-    it('should execute and return progress', async () => {
+    it('should run in STUB mode and report it honestly (subtasks/tests not wired yet)', async () => {
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // Epic 4 does not yet invoke real agents — it MUST report status:'stub',
+      // never success:true. Wired for real in Frente F1.
       const result = await executor.execute({
         storyId: 'TEST-001',
         specPath: '/path/to/spec.md',
         complexity: 'STANDARD',
       });
 
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
+      expect(result.status).toBe('stub');
+      expect(result.stub).toBe(true);
       expect(result.progress).toBeDefined();
       expect(result.planPath).toBeDefined();
+    });
+
+    it('should DELEGATE to BuildOrchestrator when real execution is allowed (F1 convergence)', async () => {
+      const buildModule = require('../../.sinapse-ai/core/execution/build-orchestrator');
+      const buildSpy = jest
+        .spyOn(buildModule.BuildOrchestrator.prototype, 'build')
+        .mockResolvedValue({
+          success: true,
+          storyId: 'TEST-001',
+          duration: 1,
+          phases: {},
+          reportPath: 'report.md',
+        });
+
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const exec = new Epic4Executor(mockOrchestrator);
+        const result = await exec.execute({ storyId: 'TEST-001', specPath: '/path/to/spec.md' });
+
+        // Proves Epic 4 delegates instead of re-implementing/stubbing.
+        expect(buildSpy).toHaveBeenCalledWith('TEST-001', expect.anything());
+        // Real build (mocked) succeeded → completed, NOT a stub.
+        expect(result.success).toBe(true);
+        expect(result.stub).toBeFalsy();
+        expect(result.build).toBeDefined();
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+        buildSpy.mockRestore();
+      }
     });
 
     it('should create stub plan if not exists', async () => {
@@ -263,16 +345,38 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(6);
     });
 
-    it('should execute QA loop and return verdict', async () => {
+    it('should execute QA loop and report STUB honestly when no real reviewer is wired', async () => {
       const result = await executor.execute({
         storyId: 'TEST-001',
         buildResult: {},
         testResults: [],
       });
 
-      expect(result.success).toBe(true);
+      // Honesty invariant (F0a/F7): basic-checks-only QA must NOT fabricate success.
+      expect(result.stub).toBe(true);
+      expect(result.success).not.toBe(true);
       expect(result.verdict).toBeDefined();
       expect(result.iterations).toBeDefined();
+    });
+
+    it('reports real success when a real @quality-gate reviewer approves', async () => {
+      const invokeAgent = jest.fn(async () => ({
+        success: true,
+        output: 'Reviewed the changes; coverage is adequate.\nVERDICT: APPROVED',
+      }));
+      const exec = new Epic6Executor({ ...mockOrchestrator, invokeAgent });
+
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const result = await exec.execute({ storyId: 'TEST-001', buildResult: {}, testResults: [] });
+        expect(invokeAgent).toHaveBeenCalled();
+        expect(result.success).toBe(true);
+        expect(result.stub).toBeFalsy();
+        expect(result.verdict).toBe(QAVerdict.APPROVED);
+        expect(result.passed).toBe(true);
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+      }
     });
 
     it('should generate QA report', async () => {
@@ -283,6 +387,39 @@ describe('Epic Executors (Story 0.3)', () => {
 
       expect(result.reportPath).toBeDefined();
       expect(await fs.pathExists(result.reportPath)).toBe(true);
+    });
+
+    it('_applyFixes invokes the real agent when one is wired (F: epic-6 real)', async () => {
+      const invokeAgent = jest.fn(async () => ({
+        success: true,
+        output: 'fixed',
+        filesModified: ['src/x.js'],
+      }));
+      const orchWithExecutor = { ...mockOrchestrator, invokeAgent };
+      const exec = new Epic6Executor(orchWithExecutor);
+
+      const issues = [{ type: 'lint', severity: 'major', message: 'unused var' }];
+      // SINAPSE_REAL_DISPATCH gate: allow real path inside the test runner.
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const res = await exec._applyFixes(issues, { storyId: 'TEST-001' });
+        expect(invokeAgent).toHaveBeenCalled();
+        expect(res.applied).toBe(true);
+        expect(res.stub).toBe(false);
+        expect(res.fixed).toBe(1);
+      } finally {
+        delete process.env.SINAPSE_REAL_DISPATCH;
+      }
+    });
+
+    it('_applyFixes is honest (stub) when no executor is wired', async () => {
+      // mockOrchestrator has no invokeAgent → must NOT claim a fix happened.
+      const res = await executor._applyFixes(
+        [{ type: 'lint', severity: 'minor', message: 'x' }],
+        { storyId: 'TEST-001' },
+      );
+      expect(res.applied).toBe(false);
+      expect(res.stub).toBe(true);
     });
   });
 

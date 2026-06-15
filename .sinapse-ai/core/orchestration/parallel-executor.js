@@ -1,8 +1,13 @@
 /**
- * Parallel Executor - Executes multiple phases concurrently
+ * Parallel Executor - Executes multiple workflow PHASES concurrently
  *
  * Handles parallel execution of workflow phases that don't have
  * dependencies on each other (e.g., phases 1-3 in brownfield discovery).
+ *
+ * NOT a duplicate of `core/execution/parallel-executor.js` (audit 2026-06-11
+ * flagged them as duplicate — they are NOT). That one races/merges AI PROVIDERS
+ * (Claude vs Gemini). This one runs independent WORKFLOW PHASES concurrently
+ * (maxConcurrency). Different concerns; do not merge.
  *
  * @module core/orchestration/parallel-executor
  * @version 1.0.0

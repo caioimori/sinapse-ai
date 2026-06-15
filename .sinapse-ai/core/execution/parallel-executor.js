@@ -1,8 +1,14 @@
 /**
- * Parallel Executor
+ * Parallel Executor (PROVIDER-level)
  * Story GEMINI-INT.17 - Multi-Agent Parallel Execution
  *
  * Executes Claude and Gemini in parallel for improved quality and reliability.
+ *
+ * NOT a duplicate of `core/orchestration/parallel-executor.js` (audit 2026-06-11
+ * flagged them as duplicate — they are NOT). This one races/merges AI PROVIDERS
+ * (RACE/CONSENSUS/BEST_OF/MERGE/FALLBACK). The orchestration one runs independent
+ * WORKFLOW PHASES concurrently. Different concerns; do not merge (a merge would
+ * lose one capability).
  */
 
 const EventEmitter = require('events');

@@ -424,14 +424,25 @@ describe('Integration with MasterOrchestrator', () => {
     await fs.ensureDir(tasksDir);
     await fs.writeFile(path.join(tasksDir, 'test-task.md'), '# Test Task');
 
+    // Inject a mock executor so the test exercises the real dispatch path
+    // (orchestrator → AgentInvoker → executor) WITHOUT spawning the claude CLI.
+    // epic: orchestration-consolidation, F1 — proves the wiring, not 'simulated'.
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
+      invokeAgent: async (agent) => ({
+        status: 'success',
+        success: true,
+        output: `mock output for @${(agent && agent.name) || agent}`,
+        filesModified: [],
+      }),
     });
 
     const result = await orchestrator.invokeAgentForTask('dev', 'test-task', { key: 'value' });
 
     expect(result).toBeDefined();
     expect(result.success).toBe(true);
+    // Honesty trava: the executor result is the real (mocked) dispatch, never 'simulated'.
+    expect(result.result.status).toBe('success');
   });
 });
 

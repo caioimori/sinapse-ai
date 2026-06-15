@@ -77,6 +77,7 @@ class Epic3Executor extends EpicExecutor {
       // Execute spec pipeline phases
       const phaseResults = {};
       let specPath = null;
+      let specWasStubbed = false;
 
       for (const phase of SPEC_PHASES) {
         this._log(`Running phase: ${phase}`);
@@ -113,9 +114,18 @@ class Epic3Executor extends EpicExecutor {
 
       // Check if spec file exists
       if (!(await fs.pathExists(specPath))) {
-        // Create stub spec for pipeline to continue
-        await this._createStubSpec(specPath, storyId, context);
-        this._log('Created stub spec (real spec generation requires agent invocation)');
+        // F1: try to generate a REAL spec via a real agent through the orchestrator.
+        const generated = await this._generateSpecViaAgent(storyId, source, techStack, context);
+        if (generated) {
+          await fs.ensureDir(path.dirname(specPath));
+          await fs.writeFile(specPath, generated);
+          this._log('Generated spec via real agent invocation');
+        } else {
+          // No executor wired (or agent produced nothing) → honest stub.
+          await this._createStubSpec(specPath, storyId, context);
+          this._log('Created stub spec (no real agent available)');
+          specWasStubbed = true;
+        }
       }
 
       this._addArtifact('spec', specPath);
@@ -124,12 +134,20 @@ class Epic3Executor extends EpicExecutor {
       const complexity = phaseResults['assess-complexity']?.complexity || 'STANDARD';
       const requirements = phaseResults['gather-requirements']?.requirements || [];
 
-      return this._completeExecution({
+      // Honesty invariant (epic: orchestration-consolidation, F0a):
+      // if the spec was auto-stubbed (no real agent ran), report STUB, not success.
+      const specResult = {
         specPath,
         complexity,
         requirements,
         phases: Object.keys(phaseResults),
-      });
+      };
+      return specWasStubbed
+        ? this._stubExecution(
+            'Spec auto-stubbed — real spec generation requires agent invocation',
+            specResult,
+          )
+        : this._completeExecution(specResult);
     } catch (error) {
       return this._failExecution(error);
     }
@@ -179,6 +197,59 @@ class Epic3Executor extends EpicExecutor {
       complexity: phase === 'assess-complexity' ? 'STANDARD' : undefined,
       requirements: phase === 'gather-requirements' ? [] : undefined,
     };
+  }
+
+  /**
+   * Generate the spec by invoking a real agent through the orchestrator.
+   *
+   * epic: orchestration-consolidation, F1 — connects Epic 3 to the real executor
+   * (orchestrator.invokeAgent → SubagentDispatcher → claude). Returns the generated
+   * spec markdown, or null when no executor is wired or the agent produced nothing
+   * (the caller then falls back to an honest stub).
+   *
+   * @returns {Promise<string|null>} Generated spec markdown, or null
+   * @private
+   */
+  async _generateSpecViaAgent(storyId, source, techStack, context = {}) {
+    const invokeAgent = this.orchestrator && this.orchestrator.invokeAgent;
+    if (typeof invokeAgent !== 'function') {
+      return null; // No real executor wired → caller falls back to stub
+    }
+
+    const description =
+      `Generate a complete, implementation-ready specification (spec.md) for story "${storyId}". ` +
+      `Source: ${source || 'story'}. ` +
+      (techStack ? `Tech stack: ${JSON.stringify(techStack)}. ` : '') +
+      'Output ONLY the spec markdown: overview, scope (in/out), acceptance criteria, ' +
+      'dependencies and complexity estimate. No commentary outside the spec.';
+
+    try {
+      // Pass only serializable, prompt-relevant context — never the execution
+      // context wholesale (it carries `orchestrator: this` → circular reference).
+      const result = await invokeAgent(
+        { name: 'analyst' },
+        { id: `spec-${storyId}`, type: 'analysis', description },
+        { storyId, source, techStack, prdPath: context.prdPath },
+      );
+      const content = result && (result.output || result.content);
+      // Honesty: an agent "success" whose output is a CLI error banner or a
+      // few stray lines is NOT a spec. Require minimum substance + markdown
+      // structure before accepting, otherwise fall back to the honest stub.
+      const looksLikeSpec =
+        typeof content === 'string' &&
+        content.trim().length >= 200 &&
+        /^#{1,3}\s/m.test(content) &&
+        !/issue with the selected model|may not exist or you may not have access/i.test(content);
+      if (result && result.success !== false && looksLikeSpec) {
+        return content;
+      }
+      if (content && !looksLikeSpec) {
+        this._log('Agent output rejected (not a plausible spec) — falling back to stub', 'warn');
+      }
+    } catch (err) {
+      this._log(`Spec agent invocation failed: ${err.message}`, 'warn');
+    }
+    return null;
   }
 
   /**

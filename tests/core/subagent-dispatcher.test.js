@@ -207,10 +207,33 @@ describe('SubagentDispatcher', () => {
         files: ['src/app.js'],
       }, {});
 
+      // F2: the agent role label is always present (persona injected on top when known)
       expect(prompt).toContain('@dev');
       expect(prompt).toContain('Build feature X');
       expect(prompt).toContain('AC1');
       expect(prompt).toContain('src/app.js');
+    });
+
+    test('injects the real persona when the agent id is known (F2)', () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      const prompt = sd.buildPrompt('@penetration-tester', {
+        id: 't1',
+        description: 'pentest the API',
+      }, {});
+
+      // The full persona is injected, not a one-line generic prompt.
+      expect(prompt).toContain('Your Agent Definition');
+      expect(prompt.length).toBeGreaterThan(2000);
+    });
+
+    test('falls back to generic prompt for unknown agents (F2)', () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      const prompt = sd.buildPrompt('@totally-unknown-agent-xyz', {
+        id: 't1',
+        description: 'do something',
+      }, {});
+
+      expect(prompt).toContain('You are @totally-unknown-agent-xyz');
     });
 
     test('includes gotchas and patterns from context', () => {
@@ -222,6 +245,42 @@ describe('SubagentDispatcher', () => {
 
       expect(prompt).toContain('avoid X');
       expect(prompt).toContain('Pattern A');
+    });
+  });
+
+  // ── _agentEnv + active-agent propagation (Article VIII writer) ─────────
+
+  describe('active agent env (SINAPSE_ACTIVE_AGENT)', () => {
+    test('_agentEnv strips @ and trims', () => {
+      const sd = new SubagentDispatcher();
+      expect(sd._agentEnv('@penetration-tester')).toEqual({ SINAPSE_ACTIVE_AGENT: 'penetration-tester' });
+      expect(sd._agentEnv('developer')).toEqual({ SINAPSE_ACTIVE_AGENT: 'developer' });
+    });
+
+    test('_agentEnv is empty for missing agent', () => {
+      const sd = new SubagentDispatcher();
+      expect(sd._agentEnv()).toEqual({});
+      expect(sd._agentEnv('')).toEqual({});
+    });
+
+    test('spawnSubagent propagates the active agent to the provider env', async () => {
+      const sd = new SubagentDispatcher({ rootPath: process.cwd() });
+      // Force the provider path with a fake provider capturing the options.
+      let capturedOptions = null;
+      const fakeProvider = {
+        name: 'claude',
+        async checkAvailability() { return true; },
+        async executeWithRetry(_prompt, options) {
+          capturedOptions = options;
+          return { success: true, output: 'done', metadata: {} };
+        },
+      };
+      sd.multiProviderEnabled = true;
+      sd.getAIProvider = () => fakeProvider;
+
+      await sd.spawnSubagent('@quality-gate', { id: 't', description: 'review' }, {});
+      expect(capturedOptions).not.toBeNull();
+      expect(capturedOptions.env).toEqual({ SINAPSE_ACTIVE_AGENT: 'quality-gate' });
     });
   });
 

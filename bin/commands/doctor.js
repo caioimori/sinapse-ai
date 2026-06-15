@@ -48,6 +48,21 @@ Exit codes (Story A.3):
     logger.always(result.formatted);
   }
 
+  // --deep also surfaces the SYNAPSE context-engine diagnostics, which until now
+  // were only reachable via the diagnose-synapse skill (not the public CLI).
+  // Defensive: the collectors already degrade gracefully, but guard the require
+  // so a missing module never breaks `doctor`.
+  if (opts.deep) {
+    try {
+      const {
+        runDiagnostics,
+      } = require('../../.sinapse-ai/core/synapse/diagnostics/synapse-diagnostics');
+      logger.always('\n' + runDiagnostics(process.cwd()));
+    } catch (err) {
+      logger.always(`\n(SYNAPSE diagnostics unavailable: ${err.message})`);
+    }
+  }
+
   // Story A.3 — precise exit code mapping:
   //   0 PASS | 1 WARN only | 2 FAIL | 3 internal runner error
   // Fall back to resolveExitCode when available (module may be mocked in tests
