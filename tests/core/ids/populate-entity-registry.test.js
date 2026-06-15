@@ -208,9 +208,10 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
   });
 
   describe('SCAN_CONFIG (NOG-16A AC1)', () => {
-    it('has 14 categories (10 existing + 4 new)', () => {
-      expect(SCAN_CONFIG).toHaveLength(14);
+    it('has 15 categories (10 existing + 4 new + bin)', () => {
+      expect(SCAN_CONFIG).toHaveLength(15);
       const categories = SCAN_CONFIG.map((c) => c.category);
+      expect(categories).toContain('bin');
       expect(categories).toContain('workflows');
       expect(categories).toContain('utils');
       expect(categories).toContain('tools');
@@ -218,6 +219,13 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       expect(categories).toContain('infra-tools');
       expect(categories).toContain('product-checklists');
       expect(categories).toContain('product-data');
+    });
+
+    it('scans bin entry-points so their requires populate usedBy', () => {
+      const bin = SCAN_CONFIG.find((c) => c.category === 'bin');
+      expect(bin).toBeDefined();
+      expect(bin.basePath).toBe('bin');
+      expect(bin.type).toBe('script');
     });
 
     it('preserves all 10 original categories', () => {

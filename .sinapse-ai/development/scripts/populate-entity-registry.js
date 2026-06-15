@@ -12,6 +12,12 @@ const REPO_ROOT = path.resolve(__dirname, '../../..');
 const REGISTRY_PATH = path.resolve(__dirname, '../../data/entity-registry.yaml');
 
 const SCAN_CONFIG = [
+  // `bin` scanned FIRST on purpose: buildNameIndex is last-wins for the entity
+  // id key, so scanning bin before the other categories lets later categories
+  // win on the few generic id collisions (cli, constants) — preserving existing
+  // dependency resolution — while still indexing bin entry-points so their
+  // requires (e.g. bin/commands/ideate.js → ideation-engine) populate usedBy.
+  { category: 'bin', basePath: 'bin', glob: '**/*.js', type: 'script' },
   { category: 'tasks', basePath: '.sinapse-ai/development/tasks', glob: '**/*.md', type: 'task' },
   { category: 'templates', basePath: '.sinapse-ai/product/templates', glob: '**/*.{yaml,yml,md}', type: 'template' },
   { category: 'scripts', basePath: '.sinapse-ai/development/scripts', glob: '**/*.{js,mjs}', type: 'script' },
@@ -667,6 +673,7 @@ function populate(options = {}) {
 
 function getCategoryDescription(category) {
   const descriptions = {
+    bin: 'CLI entry points and command implementations',
     tasks: 'Executable task workflows for agent operations',
     templates: 'Document and code generation templates',
     scripts: 'Utility and automation scripts',

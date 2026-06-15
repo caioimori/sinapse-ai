@@ -1,10 +1,874 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-15T00:34:21.001Z'
-  entityCount: 774
+  lastUpdated: '2026-06-15T01:36:43.451Z'
+  entityCount: 813
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
+  bin:
+    cli:
+      path: bin/cli.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\cli.js
+      keywords:
+        - cli
+      usedBy: []
+      dependencies:
+        - constants
+        - fuzzy
+        - fs-utils
+        - detection
+        - prompts
+        - header
+        - help
+        - status
+        - local
+        - install
+        - update
+        - doctor
+        - uninstall
+        - ideate
+        - agents
+        - chrome-brain-installer
+      externalDeps: []
+      plannedDeps:
+        - logger
+        - package
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8eba52957801153e967613e6ae3ce7c81867084a7e5f8efc2586018d5c8eed8a
+      lastVerified: '2026-06-15T01:36:42.584Z'
+    agents:
+      path: bin/commands/agents.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\agents.js
+      keywords:
+        - agents
+      usedBy:
+        - cli
+      dependencies:
+        - constants
+        - squad-agent-resolver
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:4994eee7c352951d74438efb45d3740ea679afe84f6952338f7dadcf59c5f5b0
+      lastVerified: '2026-06-15T01:36:42.592Z'
+    doctor:
+      path: bin/commands/doctor.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\doctor.js
+      keywords:
+        - doctor
+      usedBy:
+        - cli
+      dependencies:
+        - synapse-diagnostics
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ac9934829d3192a16ae0b47033f7194deb7ea2c8ad09076781de603724a27fe4
+      lastVerified: '2026-06-15T01:36:42.594Z'
+    help:
+      path: bin/commands/help.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\help.js
+      keywords:
+        - help
+      usedBy:
+        - cli
+      dependencies:
+        - constants
+        - header
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:79b7f9531499f2ebb2efebff1e91434334064a78479397c3080af3380962cb4c
+      lastVerified: '2026-06-15T01:36:42.594Z'
+    ideate:
+      path: bin/commands/ideate.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\ideate.js
+      keywords:
+        - ideate
+      usedBy:
+        - cli
+      dependencies:
+        - constants
+        - ideation-engine
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:1fe529a9b5cda73758448a18f848ba92edc8172b29fc5031576b6c400b3374b7
+      lastVerified: '2026-06-15T01:36:42.595Z'
+    install:
+      path: bin/commands/install.js
+      layer: L1
+      type: script
+      purpose: >-
+        "Imperator — Supreme Orchestrator of SINAPSE. ${squads.length} squads, ${squads.reduce((a, s) => a + s.agents,
+        0)} agents."
+      keywords:
+        - install
+        - sinapse
+        - orchestration
+        - rules
+      usedBy:
+        - cli
+        - update
+      dependencies:
+        - constants
+        - header
+        - squads
+        - fs-utils
+        - detection
+        - prompts
+        - uninstall
+        - status
+        - register-grounding-hooks
+        - chrome-brain-installer
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:0be7995450d249af3961dc2ea2dc5446bc0f68925da28243994030003e94fca7
+      lastVerified: '2026-06-15T01:36:42.597Z'
+    local:
+      path: bin/commands/local.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\local.js
+      keywords:
+        - local
+      usedBy:
+        - check-registry
+        - cli
+      dependencies:
+        - constants
+        - header
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:92c3b68b4858759fec2f42ec9d7dcb4d8d49e5e25080fbf219547ef4129561c7
+      lastVerified: '2026-06-15T01:36:42.598Z'
+    status:
+      path: bin/commands/status.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\status.js
+      keywords:
+        - status
+      usedBy:
+        - cli
+        - install
+      dependencies:
+        - constants
+        - header
+        - squads
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:9eab89252bfe84f0179ffe4cbb62cbac5392fb75db434f6fc9deef6a636f6d15
+      lastVerified: '2026-06-15T01:36:42.599Z'
+    uninstall:
+      path: bin/commands/uninstall.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\uninstall.js
+      keywords:
+        - uninstall
+      usedBy:
+        - cli
+        - install
+      dependencies:
+        - constants
+        - header
+        - fs-utils
+        - prompts
+        - spawn-safe
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d06ce22670f135d81483da98314a2f2fb843b8eb85f13ba5d37c13629ef80848
+      lastVerified: '2026-06-15T01:36:42.600Z'
+    update:
+      path: bin/commands/update.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\commands\update.js
+      keywords:
+        - update
+      usedBy:
+        - cli
+      dependencies:
+        - constants
+        - header
+        - squads
+        - fs-utils
+        - detection
+        - prompts
+        - install
+        - register-grounding-hooks
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:008bba08929f0c6f5dba65740c078f9cde2fe090a5beb942c9ebeca45e0439c9
+      lastVerified: '2026-06-15T01:36:42.602Z'
+    constants:
+      path: bin/lib/constants.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\constants.js
+      keywords:
+        - constants
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:516e8e226d9f5d582fa5f4b2807903f90a41a8a7853a0fe92c847202f4ebe591
+      lastVerified: '2026-06-15T01:36:42.603Z'
+    detection:
+      path: bin/lib/detection.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\detection.js
+      keywords:
+        - detection
+      usedBy:
+        - cli
+        - install
+        - prompts
+        - update
+      dependencies:
+        - constants
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:5e030cef7b85e23faa4a27d075236cfca98e4938c6255fc6148e775ab791980f
+      lastVerified: '2026-06-15T01:36:42.604Z'
+    fs-utils:
+      path: bin/lib/fs-utils.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\fs-utils.js
+      keywords:
+        - fs
+        - utils
+      usedBy:
+        - cli
+        - install
+        - uninstall
+        - update
+      dependencies:
+        - constants
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bba90ac19f4cd648c31f7481f018b9d00362be05bb1163c756677d7c59be5639
+      lastVerified: '2026-06-15T01:36:42.605Z'
+    fuzzy:
+      path: bin/lib/fuzzy.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\fuzzy.js
+      keywords:
+        - fuzzy
+      usedBy:
+        - cli
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:c37c55166f25c7fc493fc9b813c64389a85457245aa850731e899f54344a3431
+      lastVerified: '2026-06-15T01:36:42.606Z'
+    header:
+      path: bin/lib/header.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\header.js
+      keywords:
+        - header
+      usedBy:
+        - cli
+        - help
+        - install
+        - local
+        - status
+        - uninstall
+        - update
+      dependencies:
+        - constants
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:3f31509f446942a48eb62f52474823676b9b1572f08c505da70a80dacc7cc352
+      lastVerified: '2026-06-15T01:36:42.607Z'
+    prompts:
+      path: bin/lib/prompts.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\prompts.js
+      keywords:
+        - prompts
+      usedBy:
+        - cli
+        - install
+        - uninstall
+        - update
+      dependencies:
+        - constants
+        - detection
+      externalDeps: []
+      plannedDeps:
+        - logger
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ad4190251d492e0f970131f36abc9b289f64e04e1f1440bc9fd20681a5dd9831
+      lastVerified: '2026-06-15T01:36:42.609Z'
+    register-grounding-hooks:
+      path: bin/lib/register-grounding-hooks.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\register-grounding-hooks.js
+      keywords:
+        - register
+        - grounding
+        - hooks
+      usedBy:
+        - install
+        - update
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:0856daf29e660ededff840173ba939b38967f525d1271635a671710d28de4e35
+      lastVerified: '2026-06-15T01:36:42.609Z'
+    squads:
+      path: bin/lib/squads.js
+      layer: L1
+      type: script
+      purpose: \s*["']?(.+)/m);
+      keywords:
+        - squads
+      usedBy:
+        - install
+        - status
+        - update
+      dependencies:
+        - constants
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8490730198a680f2e11817a8a20cc6398e4664e0cd853cddc009efc4c33cd6dd
+      lastVerified: '2026-06-15T01:36:42.610Z'
+    chrome-brain-installer:
+      path: bin/modules/chrome-brain-installer.js
+      layer: L1
+      type: script
+      purpose: ''')} ${installed}/${total} checks passed`);'
+      keywords:
+        - chrome
+        - brain
+        - installer
+        - chrome-ensure
+        - (auto-launch)
+      usedBy:
+        - cli
+        - install
+        - sinapse
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:f003104e0458a62c67413fe960a7d19cae8ea00547f3eb9fb898d0f5501e7345
+      lastVerified: '2026-06-15T01:36:42.612Z'
+    env-config:
+      path: bin/modules/env-config.js
+      layer: L1
+      type: script
+      purpose: '''));'
+      keywords:
+        - env
+        - config
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bae9f26b4f3fb700e01c4154c1b9b5f1e6e0dc6fe9434e452621492b243e5dc3
+      lastVerified: '2026-06-15T01:36:42.613Z'
+    mcp-installer:
+      path: bin/modules/mcp-installer.js
+      layer: L1
+      type: script
+      purpose: '''Navigate to blank page test'','
+      keywords:
+        - mcp
+        - installer
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8007ac9ff6662acd65154c4b1e7ad6c436fd20e4e69d12281ba11885133d40bf
+      lastVerified: '2026-06-15T01:36:42.613Z'
+    postinstall:
+      path: bin/postinstall.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\postinstall.js
+      keywords:
+        - postinstall
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:0bcdaf5ef929dfae38bf2f080ab6fe8bef69081ab491239e264cf15f917895ee
+      lastVerified: '2026-06-15T01:36:42.615Z'
+    sinapse-delegate:
+      path: bin/sinapse-delegate.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\sinapse-delegate.js
+      keywords:
+        - sinapse
+        - delegate
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b2708f544b2fd2a5051cddb1e9523a43064b6d9c7d4a069b892193e78776700a
+      lastVerified: '2026-06-15T01:36:42.617Z'
+    sinapse-graph:
+      path: bin/sinapse-graph.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\sinapse-graph.js
+      keywords:
+        - sinapse
+        - graph
+      usedBy: []
+      dependencies:
+        - deprecation-warning
+        - cli
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:eaa333476e0a6afce2755c0e76fda390421d37a9852b504240f49e8b7faae3aa
+      lastVerified: '2026-06-15T01:36:42.618Z'
+    sinapse-ids:
+      path: bin/sinapse-ids.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\sinapse-ids.js
+      keywords:
+        - sinapse
+        - ids
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b1f27c401184fd45d3c4c505cd4e09fce3d03db4f2899a3822883f7c5f5e630b
+      lastVerified: '2026-06-15T01:36:42.619Z'
+    sinapse-init:
+      path: bin/sinapse-init.js
+      layer: L1
+      type: script
+      purpose: '''SINAPSE-FullStack project'','
+      keywords:
+        - sinapse
+        - init
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps:
+        - brownfield-upgrader
+        - post-install-validator
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bfb2a06d21fda79740df339efa1289d1d5ed0110494e988029cdcf5243e5f46d
+      lastVerified: '2026-06-15T01:36:42.620Z'
+    sinapse-minimal:
+      path: bin/sinapse-minimal.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\sinapse-minimal.js
+      keywords:
+        - sinapse
+        - minimal
+      usedBy: []
+      dependencies:
+        - deprecation-warning
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bf8fe3e86235e6971c44d2a3e9e1036f21c2d6653ac878af441097e8c3e8bd48
+      lastVerified: '2026-06-15T01:36:42.621Z'
+    sinapse:
+      path: bin/sinapse.js
+      layer: L1
+      type: script
+      purpose: '''Framework core'' },'
+      keywords:
+        - sinapse
+      usedBy: []
+      dependencies:
+        - deprecation-warning
+        - index
+        - chrome-brain-installer
+        - cli
+      externalDeps: []
+      plannedDeps:
+        - logger
+        - orchestration
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:830a8fceb2b0ec602d3ec12b492c9f2dc318511b3753283c654b2e9b5a8d7d61
+      lastVerified: '2026-06-15T01:36:42.624Z'
+    collab-start:
+      path: bin/utils/collab-start.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\collab-start.js
+      keywords:
+        - collab
+        - start
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:708ab1a5b417138768ba9fc72df54bd89d81e2fc92882fc7d6a23613d9776fa6
+      lastVerified: '2026-06-15T01:36:42.625Z'
+    deprecation-warning:
+      path: bin/utils/deprecation-warning.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\deprecation-warning.js
+      keywords:
+        - deprecation
+        - warning
+      usedBy:
+        - sinapse
+        - sinapse-graph
+        - sinapse-minimal
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:efa34f3235a4efaace631a6a2ab5bccc7ae2522ec72128cb50a41a408fcedfb6
+      lastVerified: '2026-06-15T01:36:42.627Z'
+    detect-fsmonitor:
+      path: bin/utils/detect-fsmonitor.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\detect-fsmonitor.js
+      keywords:
+        - detect
+        - fsmonitor
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:57d0ea1be3572a5c7ba4b21928b9f532037fd49188cd55d6fc56f56cbda7c301
+      lastVerified: '2026-06-15T01:36:42.627Z'
+    framework-guard:
+      path: bin/utils/framework-guard.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\framework-guard.js
+      keywords:
+        - framework
+        - guard
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:c1c035a710707f65df3510fba9da4abae7a478800c73f7d9ec63a1631b807dcd
+      lastVerified: '2026-06-15T01:36:42.628Z'
+    git-branch-guard:
+      path: bin/utils/git-branch-guard.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\git-branch-guard.js
+      keywords:
+        - git
+        - branch
+        - guard
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:0bd32a0a56f88b319fe677914d8ee8bf002454f0822dc964b6d656e00f1ae130
+      lastVerified: '2026-06-15T01:36:42.628Z'
+    install-errors:
+      path: bin/utils/install-errors.js
+      layer: L1
+      type: script
+      purpose: '''Installation failed due to insufficient file system permissions.'','
+      keywords:
+        - install
+        - errors
+      usedBy: []
+      dependencies:
+        - install-transaction
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:27dd30ebd12b96106c928555e96b6be31cb99f8148c1db382340062e0dd1a354
+      lastVerified: '2026-06-15T01:36:42.629Z'
+    install-transaction:
+      path: bin/utils/install-transaction.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\install-transaction.js
+      keywords:
+        - install
+        - transaction
+      usedBy:
+        - install-errors
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:16a8e5c5726bc8b76989466f6166ec1c7d3047a72c8859f3d8ec3a9d8796a15e
+      lastVerified: '2026-06-15T01:36:42.630Z'
+    pre-push-safety:
+      path: bin/utils/pre-push-safety.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\pre-push-safety.js
+      keywords:
+        - pre
+        - push
+        - safety
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:6843590edc8e15ab57e81b9bd07eae74b012e619d6b88d6244fe9ea3f23bc7bd
+      lastVerified: '2026-06-15T01:36:42.631Z'
+    secret-scanner-core:
+      path: bin/utils/secret-scanner-core.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\secret-scanner-core.js
+      keywords:
+        - secret
+        - scanner
+        - core
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ae21d7556195c178427c79dc096004e704e60be874fd471a4d9712c8b3ee3a41
+      lastVerified: '2026-06-15T01:36:42.631Z'
+    staged-secret-scan:
+      path: bin/utils/staged-secret-scan.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\staged-secret-scan.js
+      keywords:
+        - staged
+        - secret
+        - scan
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:c463834c3b63e4f6fb0be1bdc3486e7ac6b6a3ecbb9b1ceba998e4af2064331a
+      lastVerified: '2026-06-15T01:36:42.632Z'
+    validate-publish:
+      path: bin/utils/validate-publish.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\validate-publish.js
+      keywords:
+        - validate
+        - publish
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:526309fd29e71d21723f89bffb0b2a06e840bd955e481f1a667df73240a91ccf
+      lastVerified: '2026-06-15T01:36:42.632Z'
   tasks:
     add-mcp:
       path: .sinapse-ai/development/tasks/add-mcp.md
@@ -3594,14 +4458,15 @@ entities:
         - 'pipeline:'
         - preview
         - latest
-      usedBy: []
+      usedBy:
+        - devops
       dependencies:
         - release-management
         - github-devops-pre-push-quality-gate
         - release-checklist
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -4268,11 +5133,12 @@ entities:
         - pr
         - 'task:'
         - external
-      usedBy: []
+      usedBy:
+        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
-      lifecycle: orphan
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -7338,7 +8204,7 @@ entities:
       path: .sinapse-ai/development/scripts/populate-entity-registry.js
       layer: L2
       type: script
-      purpose: getCategoryDescription(c.category),
+      purpose: buildNameIndex is last-wins for the entity
       keywords:
         - populate
         - entity
@@ -7353,8 +8219,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:28aae1359b4ad47e9142091612e15916862920d41122972231e371379e83d39a
-      lastVerified: '2026-06-15T00:34:20.591Z'
+      checksum: sha256:2232bebc783c13e222c7b80713eae016343406ab2a878b0c6950b0691202d8c1
+      lastVerified: '2026-06-15T01:36:42.969Z'
     refactoring-suggester:
       path: .sinapse-ai/development/scripts/refactoring-suggester.js
       layer: L2
@@ -9061,9 +9927,23 @@ entities:
       keywords:
         - constants
       usedBy:
+        - agents
+        - cli
+        - detection
         - error-registry
+        - fs-utils
+        - header
+        - help
+        - ideate
+        - install
+        - local
+        - prompts
         - serializer
         - sinapse-error
+        - squads
+        - status
+        - uninstall
+        - update
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -9475,7 +10355,9 @@ entities:
       purpose: Entity at .sinapse-ai\core\graph-dashboard\cli.js
       keywords:
         - cli
-      usedBy: []
+      usedBy:
+        - sinapse
+        - sinapse-graph
       dependencies:
         - code-intel-source
         - registry-source
@@ -9489,7 +10371,7 @@ entities:
         - html-formatter
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.4
         constraints: []
@@ -9768,10 +10650,10 @@ entities:
       usedBy: []
       dependencies:
         - base-check
+        - local
       externalDeps: []
       plannedDeps:
         - project
-        - local
         - repository
         - deployment
         - services
@@ -10522,11 +11404,12 @@ entities:
       keywords:
         - ideation
         - engine
-      usedBy: []
+      usedBy:
+        - ideate
       dependencies: []
       externalDeps: []
       plannedDeps: []
-      lifecycle: orphan
+      lifecycle: production
       adaptability:
         score: 0.4
         constraints: []
@@ -12090,6 +12973,7 @@ entities:
         - agent
         - resolver
       usedBy:
+        - agents
         - subagent-dispatcher
       dependencies: []
       externalDeps: []
@@ -12482,7 +13366,8 @@ entities:
       keywords:
         - synapse
         - diagnostics
-      usedBy: []
+      usedBy:
+        - doctor
       dependencies:
         - hook-collector
         - session-collector
@@ -12493,7 +13378,7 @@ entities:
         - domain-loader
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.4
         constraints: []
@@ -12943,8 +13828,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4c019bb44fd47d76d6b61ad7f895b8fa6a9f1f4fca0c40465d95a69fcce596c0
-      lastVerified: '2026-06-15T00:26:26.427Z'
+      checksum: sha256:60fb5671c8c0c324b8b902a85a13905d74026a286d0090e94477e19cf10a746a
+      lastVerified: '2026-06-15T01:36:43.190Z'
     security-utils:
       path: .sinapse-ai/core/utils/security-utils.js
       layer: L1
@@ -13325,6 +14210,8 @@ entities:
         - cleanup-worktrees
         - merge-worktree
         - environment-promotion-pipeline
+        - publish-npm
+        - review-contributor-pr
         - github-pr-template
         - github-actions-ci.yml
         - github-actions-cd.yml
@@ -13346,8 +14233,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:7d6e049d67bb1125c34790dfa49bad9d6a734d7b3eac2e2d80159b99784c9203
-      lastVerified: '2026-06-15T00:26:26.448Z'
+      checksum: sha256:8b4d9fab8be4e3a35e1567968d8517a773ed6a321c04fd1c780b0f9ffc9fb5a7
+      lastVerified: '2026-06-15T01:36:43.211Z'
     product-lead:
       path: .sinapse-ai/development/agents/product-lead.md
       layer: L2
@@ -14549,8 +15436,8 @@ entities:
         score: 0.6
         constraints: []
         extensionPoints: []
-      checksum: sha256:4c019bb44fd47d76d6b61ad7f895b8fa6a9f1f4fca0c40465d95a69fcce596c0
-      lastVerified: '2026-06-15T00:26:26.491Z'
+      checksum: sha256:60fb5671c8c0c324b8b902a85a13905d74026a286d0090e94477e19cf10a746a
+      lastVerified: '2026-06-15T01:36:43.280Z'
     security-utils:
       path: .sinapse-ai/core/utils/security-utils.js
       layer: L1
@@ -14581,6 +15468,7 @@ entities:
       usedBy:
         - build-orchestrator
         - subagent-dispatcher
+        - uninstall
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14917,6 +15805,7 @@ entities:
         - devops-helper
         - planning-helper
         - qa-helper
+        - sinapse
         - story-helper
         - sync-codex-local-first
         - validate
@@ -18022,6 +18911,9 @@ entities:
       checksum: sha256:d756dbbadd58a1c86d4ad51c7527d00fa04e4e3e8dfde32edf5ba56ac0a9a03f
       lastVerified: '2026-06-15T00:26:26.535Z'
 categories:
+  - id: bin
+    description: CLI entry points and command implementations
+    basePath: bin
   - id: tasks
     description: Executable task workflows for agent operations
     basePath: .sinapse-ai/development/tasks
