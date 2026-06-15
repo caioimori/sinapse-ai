@@ -1225,6 +1225,65 @@ async function main() {
       break;
     }
 
+    case 'generate': {
+      // Document generator (templates: prd/adr/story/epic/task) — routes to the
+      // Commander CLI. Without this case `sinapse generate` fell through to the
+      // default and was passed to Claude Code as args (same bug class as graph/ids).
+      try {
+        const { run } = require('../.sinapse-ai/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        logger.error(`❌ Generate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+    }
+
+    case 'create': {
+      // Component generator — sinapse create <agent|task|workflow>
+      // Exposes ComponentGenerator (template + elicitation) at the CLI.
+      try {
+        const ComponentGenerator = require('../.sinapse-ai/infrastructure/scripts/component-generator');
+        const type = args[1];
+        if (!type || type.startsWith('--')) {
+          logger.error('Usage: sinapse create <agent|task|workflow>');
+          process.exit(1);
+        }
+        const generator = new ComponentGenerator({ rootPath: process.cwd() });
+        const result = await generator.generateComponent(type, {});
+        process.exit(result && result.success === false ? 1 : 0);
+      } catch (error) {
+        logger.error(`❌ Create command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'mode': {
+      // Permission mode manager — sinapse mode [explore|ask|auto] [--cycle]
+      // Exposes PermissionMode (explore/ask/auto) at the CLI.
+      try {
+        const { PermissionMode } = require('../.sinapse-ai/core/permissions');
+        const pm = new PermissionMode(process.cwd());
+        await pm.load(); // load persisted mode first
+        const target = args[1];
+        let info;
+        if (args.includes('--cycle')) {
+          info = await pm.cycleMode();
+        } else if (target && !target.startsWith('--')) {
+          info = await pm.setMode(target);
+        } else {
+          info = pm.getModeInfo();
+        }
+        console.log(`Permission mode: ${info.name} — ${info.description}`);
+        process.exit(0);
+      } catch (error) {
+        logger.error(`❌ Mode command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
     case 'orchestrate': {
       // Autonomous pipeline entry point (Epic 0 — MasterOrchestrator).
       // Usage: sinapse orchestrate <story-id> [--status|--stop|--resume]
