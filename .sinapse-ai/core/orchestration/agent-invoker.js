@@ -116,6 +116,12 @@ class AgentInvoker extends EventEmitter {
     // Audit log (AC7)
     this.invocations = [];
     this.logs = [];
+
+    // Memoization caches: agent/task definitions are read from disk on every
+    // invocation but never change during a process run. Caching avoids the
+    // repeated fs.readFile hops the deep-dive flagged as a redundant I/O hop.
+    this._agentCache = new Map();
+    this._taskCache = new Map();
   }
 
   /**
@@ -218,6 +224,10 @@ class AgentInvoker extends EventEmitter {
     // Normalize agent name (remove @ prefix if present)
     const name = agentName.replace(/^@/, '').toLowerCase();
 
+    if (this._agentCache.has(name)) {
+      return this._agentCache.get(name);
+    }
+
     // Check if supported
     const agentConfig = SUPPORTED_AGENTS[name];
     if (!agentConfig) {
@@ -239,12 +249,14 @@ class AgentInvoker extends EventEmitter {
 
     const content = await fs.readFile(agentPath, 'utf8');
 
-    return {
+    const result = {
       ...agentConfig,
       loaded: true,
       content,
       path: agentPath,
     };
+    this._agentCache.set(name, result);
+    return result;
   }
 
   /**
@@ -252,6 +264,10 @@ class AgentInvoker extends EventEmitter {
    * @private
    */
   async _loadTask(taskPath) {
+    if (this._taskCache.has(taskPath)) {
+      return this._taskCache.get(taskPath);
+    }
+
     // Handle both full path and task name
     let fullPath = taskPath;
     if (!path.isAbsolute(taskPath)) {
@@ -275,12 +291,14 @@ class AgentInvoker extends EventEmitter {
     // Parse task metadata from frontmatter
     const metadata = this._parseTaskMetadata(content);
 
-    return {
+    const result = {
       path: fullPath,
       name: path.basename(fullPath, '.md'),
       content,
       ...metadata,
     };
+    this._taskCache.set(taskPath, result);
+    return result;
   }
 
   /**

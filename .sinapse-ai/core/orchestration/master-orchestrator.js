@@ -507,14 +507,18 @@ class MasterOrchestrator extends EventEmitter {
             }
           }
 
+          // executeEpic threw before reaching its own _saveState(), so this is
+          // the only durable capture of the new executionState.errors entry.
+          await this._saveState();
+
           // If not recovered and strict, stop
           if (!pipelineResult.success && this.strictGates) {
             break;
           }
         }
-
-        // Save state after each epic
-        await this._saveState();
+        // Note: no per-epic save on the success/stub path — executeEpic already
+        // persists executionState at its own completion point (collapsed the
+        // redundant double-write the deep-dive flagged).
       }
 
       // Finalize pipeline
