@@ -32,6 +32,11 @@ const SCAN_CONFIG = [
   { category: 'product-data', basePath: '.sinapse-ai/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' }
 ];
 
+// Generated/self-referential artifacts excluded from scanning. The registry
+// must not track ITSELF as an entity — its checksum would change every regen
+// (each run rewrites the file), so it could never reach a stable fixed point.
+const SCAN_IGNORE = ['**/entity-registry.yaml'];
+
 const ADAPTABILITY_DEFAULTS = {
   agent: 0.3,
   module: 0.4,
@@ -322,7 +327,17 @@ function scanCategory(config, verbose = false) {
   }
 
   const globPattern = path.posix.join(absBase.replace(/\\/g, '/'), config.glob);
-  const files = fg.sync(globPattern, { onlyFiles: true, absolute: true });
+  // Sort the glob result: fast-glob returns files in filesystem (readdir) order,
+  // which varies across machines/runs and reorders the entire registry on every
+  // regen (non-deterministic churn). A stable sort makes entity insertion order —
+  // and everything derived from it (usedBy push order, YAML key order) —
+  // deterministic.
+  // `ignore` drops self-referential / generated artifacts (the registry file
+  // itself) — tracking the registry as an entity makes its checksum oscillate
+  // every run (each regen rewrites the file), which can never stabilize.
+  const files = fg
+    .sync(globPattern, { onlyFiles: true, absolute: true, ignore: SCAN_IGNORE })
+    .sort();
 
   const entities = {};
   const seenIds = new Set();
@@ -474,6 +489,14 @@ function resolveUsedBy(allEntities) {
       }
     }
   }
+
+  // Sort usedBy lists so the serialized order is deterministic regardless of the
+  // order entities were scanned in.
+  for (const entities of Object.values(allEntities)) {
+    for (const entity of Object.values(entities)) {
+      entity.usedBy.sort();
+    }
+  }
 }
 
 function classifyDependencies(allEntities, nameIndex) {
@@ -551,14 +574,23 @@ function populate(options = {}) {
       for (const [category, entities] of Object.entries(existingRegistry.entities)) {
         if (!allEntities[category]) continue;
         for (const [entityId, entity] of Object.entries(entities)) {
-          if (entity.invocationExamples && Array.isArray(entity.invocationExamples) && allEntities[category][entityId]) {
+          const fresh = allEntities[category][entityId];
+          if (!fresh) continue;
+          if (entity.invocationExamples && Array.isArray(entity.invocationExamples)) {
             // Enforce limits: max 3 examples, each max 200 chars
             const examples = entity.invocationExamples.slice(0, 3).map((e) => String(e).slice(0, 200));
-            allEntities[category][entityId].invocationExamples = examples;
+            fresh.invocationExamples = examples;
+          }
+          // Preserve lastVerified when the file content (checksum) is unchanged.
+          // Re-stamping every entity on each regen — even untouched ones — was a
+          // primary source of registry churn; the timestamp only carries meaning
+          // when the entity was actually re-verified (i.e. its checksum changed).
+          if (entity.lastVerified && entity.checksum === fresh.checksum) {
+            fresh.lastVerified = entity.lastVerified;
           }
         }
       }
-      console.log('[IDS] Preserved invocationExamples from existing registry');
+      console.log('[IDS] Preserved invocationExamples + lastVerified from existing registry');
     }
   } catch {
     // No existing registry or parse error — skip preservation
@@ -599,11 +631,28 @@ function populate(options = {}) {
     categories
   };
 
-  const yamlContent = yaml.dump(registry, {
-    lineWidth: 120,
-    noRefs: true,
-    sortKeys: false
-  });
+  const dumpOpts = { lineWidth: 120, noRefs: true, sortKeys: false };
+
+  // Idempotent timestamp: only bump `lastUpdated` when the substantive content
+  // (everything except the timestamp itself) actually changed. Without this,
+  // every regen rewrites the file solely because of a new timestamp, producing
+  // churn on each commit even when nothing meaningful changed.
+  try {
+    const existing = yaml.load(fs.readFileSync(REGISTRY_PATH, 'utf8'));
+    if (existing && existing.metadata && existing.metadata.lastUpdated) {
+      const stripStamp = (r) => yaml.dump(
+        { ...r, metadata: { ...r.metadata, lastUpdated: null } },
+        dumpOpts,
+      );
+      if (stripStamp(existing) === stripStamp(registry)) {
+        registry.metadata.lastUpdated = existing.metadata.lastUpdated;
+      }
+    }
+  } catch {
+    // No existing registry or parse error — keep the fresh timestamp.
+  }
+
+  const yamlContent = yaml.dump(registry, dumpOpts);
 
   try {
     fs.writeFileSync(REGISTRY_PATH, yamlContent, 'utf8');
