@@ -90,6 +90,17 @@ const config = await loadConfigSections(['persona', 'commands']);
 
 ### Session Management
 
+> **Three distinct "session" namespaces — do not conflate them:**
+>
+> | Namespace | Path | Responsibility |
+> |---|---|---|
+> | **session** (activation) | `core/session/` (`ContextDetector`, `SessionContextLoader`) | Detects execution context and loads session context at agent activation (Tier 3 of the activation pipeline). |
+> | **orchestration session-state** | `core/orchestration/session-state.js` | Persists the orchestrator's pipeline/run state for resume. |
+> | **synapse session-manager** | `core/synapse/session/session-manager.js` | Manages the SYNAPSE context-engine session (the 8-layer context runtime). |
+>
+> They share the word "session" but have separate consumers and lifecycles; the
+> API below documents the activation namespace only.
+
 #### `ContextDetector`
 Detects current execution context (IDE, terminal, environment).
 

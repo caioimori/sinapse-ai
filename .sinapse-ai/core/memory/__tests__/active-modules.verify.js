@@ -7,6 +7,17 @@
  *
  * @created 2026-01-29
  * @updated 2026-02-09 - Removed orphan modules tests (Story MIS-2)
+ * @updated 2026-06-15 - Status note added (see below)
+ *
+ * STATUS — IMPORTANT (do not mistake this for a passing CI gate):
+ * This is a `.verify.js` standalone script (run manually via `node`), NOT a
+ * Jest spec — jest.config.js only matches `*.test.js`/`*.spec.js`, so it never
+ * runs in CI. The "Feedback Loop" section below asserts the Story 9.4 surface
+ * (FeedbackType enum + trackUserFeedback / getAccuracyMetrics / getSuggestedRules)
+ * which is NOT yet implemented in gotchas-memory.js — those assertions are a
+ * forward spec for pending work, not a regression check. The Custom Rules
+ * section reflects shipped behavior. Do not "fix" this by inventing the feedback
+ * feature without its story (Constitution Art. IV — No Invention).
  */
 
 const path = require('path');
