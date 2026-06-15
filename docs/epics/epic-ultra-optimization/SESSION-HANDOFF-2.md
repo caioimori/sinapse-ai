@@ -146,8 +146,18 @@ Validação onda: IDS 453/453, gate-evaluator, hook-security, cli — todas verd
 - **2 cortes aprovados** (`ef5c436` + `976434d` manifest sync): removido `test-validation-task.md` (fixture zero-consumidor) + as 2 cópias órfãs `development/scripts/elicitation-{engine,session-manager}.js` (todos consumidores reais usam `core/elicitation/`; busca por require específico voltou vazia). Validado: elicitation+core-security 60/60, manifest 38/38.
 - **P2 — manifest regex (`6f08778`):** ancorado `^docs/` em `generate-install-manifest.js` — os padrões não-ancorados excluíam `core/docs/*.md` (5 docs TRACKED) do manifest. Agora incluídos (file_count +5), legacy `.sinapse-ai/docs/standards/` segue excluído. Validado: 100/100 (generate/parity/ensure/post-install/brownfield).
 
+### SESSÃO 4 (continuação) — LOTE P2 (6 itens, 8 commits)
+| Item | Commit(s) | O quê |
+|---|---|---|
+| **entity-registry determinístico** | `2b389b1` + `c5c5de1` | 5 fontes de não-determinismo eliminadas (sort de arquivos via fast-glob, sort de usedBy, lastVerified preservado por checksum, lastUpdated idempotente, self-entry excluído via SCAN_IGNORE). 2 regens consecutivas = byte-idênticas. **Churn que poluía TODO commit acabou** — confirmado: commits seguintes não re-churnam o registry. |
+| **gerador escaneia bin/** | `b153aaf` | Categoria `bin` (39 entry-points) adicionada PRIMEIRO no SCAN_CONFIG (last-wins preserva colisões cli/constants). ideation-engine: `usedBy: [ideate]`, `lifecycle: production` (era orphan). entityCount 774→813. |
+| **output-formatter consolidado** | `10bae6d` | core/utils re-exporta infra (canônica, -290 linhas dup). |
+| **9 tasks órfãs** | `0365157` | publish-npm + review-contributor-pr cabeadas no @devops (donos declarados). As 6 ambíguas (ids-*, yolo-toggle, delegate-to-external-executor, sync-registry-intel) NÃO cabeadas — dono ambíguo ("Any"/"Orchestrating") OU já via CLI. **Decisão de ownership pendente.** |
+| **grounding Layer 1 dedup** | `0999a54` | 3 hooks sinapse-*-grounding.cjs delegam loadConfig ao config-loader.cjs (require guardado = fail-open). 57 testes grounding verdes. |
+| **manifest regex** (sessão 4 cedo) | `6f08778` | ^docs/ ancorado — 5 docs de core/docs voltaram ao manifest. |
+
 ### Próximo (sessão 5) — P2 restante + P3
-**P2 restante (10 itens, deep-dive §5):** output-formatter consolidação (core importa de infra), grounding Layer 1 dedup (3 hooks → config-loader.cjs), backend `sinapse health` (35 checks), expor `sinapse create`/`sinapse mode`, cabear variants por project_type (greenfield/brownfield handlers), cabear 9 tasks órfãs nas dependencies dos agentes, colapsar `_saveState()` redundante, cache agent/task no AgentInvoker, **gerador entity-registry determinístico** (alta prioridade — churn polui todo commit), gerador entity-registry escanear `bin/` (ideation registry stale).
-**P3 (6 itens):** migration YAMLs fonte de verdade, header stale update-sinapse.md, teste unitário fast-path-gate, documentar 3 namespaces de session, memory verify script align, (test-validation-task.md já cortado).
+**P2 restante (5 itens, deep-dive §5, médio/baixo risco):** backend `sinapse health` (trocar p/ os 35 checks de core/health-check, médio), expor `sinapse create`/`sinapse mode` no CLI (baixo), cabear variants por project_type nos greenfield/brownfield handlers (médio), colapsar `_saveState()` redundante no MasterOrchestrator (baixo), cache agent/task no AgentInvoker (baixo). **+ decisão de ownership das 6 tasks órfãs ambíguas.**
+**P3 (6 itens):** migration YAMLs fonte de verdade, header stale update-sinapse.md, teste unitário fast-path-gate, documentar 3 namespaces de session, memory verify script align.
 
 Suíte verde por onda. **Baseline tem ~31 falhas de ambiente/timing no Node 24** (WorktreeManager/git-hooks-installer execa + perf `toBeLessThan`) — não são regressões; validar por suite afetada, não pela suíte inteira nesta máquina. Publicar = último passo (revogar token npm antes). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
