@@ -1364,9 +1364,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:93d1c061275f8b5725f65e77d78f13b2970a5bc0fa115aa30f31de041d0fb6d1
+    hash: sha256:497ad832adb748eab28a24f61097c87b6c1757f51034710dbaae7188b869780e
     type: data
-    size: 539455
+    size: 536364
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1776,9 +1776,9 @@ files:
     type: script
     size: 23414
   - path: development/scripts/populate-entity-registry.js
-    hash: sha256:51fe2e6fb0561506df8c070e2a595651d0b12b2b796fc9b4c1e9eabdeca5558c
+    hash: sha256:28aae1359b4ad47e9142091612e15916862920d41122972231e371379e83d39a
     type: script
-    size: 22872
+    size: 25397
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:66bf0be38efb417619e652c690d41337202dae7defa454bec73b010b05bb6db4
     type: script
