@@ -1,3 +1,11 @@
+---
+task: merge-worktree
+responsavel: '@developer'
+entrada: '`worktree-name` — nome do worktree a mesclar'
+saida: 'Branch do worktree mesclada na base (após quality gates) + worktree opcionalmente removido'
+atomic_layer: Task
+---
+
 # merge-worktree
 
 Merge a worktree branch back to its base branch.
@@ -40,4 +48,3 @@ Complete worktree workflow by merging changes back to base branch.
 - `*create-worktree` - Create worktree
 - `*remove-worktree` - Remove worktree
 - `*push` - Push merged changes
-

@@ -1,3 +1,11 @@
+---
+task: list-mcps
+responsavel: '@developer'
+entrada: 'Nenhuma — lê a configuração do Docker MCP Toolkit'
+saida: 'Lista de servidores MCP habilitados, status e ferramentas disponíveis'
+atomic_layer: Task
+---
+
 # list-mcps
 
 List currently enabled MCP servers and their available tools.
@@ -15,6 +23,7 @@ Display all MCP servers configured in Docker MCP Toolkit with their status and t
 ## Output
 
 Shows:
+
 - Server name and status (enabled/disabled)
 - Available tools per server
 - Connection status
@@ -22,6 +31,7 @@ Shows:
 ## Implementation
 
 Uses Docker MCP Toolkit CLI:
+
 ```bash
 docker mcp tools ls
 ```
@@ -32,3 +42,8 @@ docker mcp tools ls
 - `*remove-mcp` - Remove MCP server
 - `*search-mcp` - Search MCP catalog
 
+## Steps
+
+1. Consultar o toolkit: `docker mcp tools ls`
+2. Agrupar ferramentas por servidor
+3. Exibir nome, status (enabled/disabled) e conexão de cada servidor

@@ -1,3 +1,11 @@
+---
+task: ids-health
+responsavel: '@data-engineer'
+entrada: '`.sinapse-ai/data/entity-registry.yaml`; flags `--fix` / `--json` opcionais'
+saida: 'Relatório de integridade do registro, correções auto-aplicadas e log de auditoria'
+atomic_layer: Task
+---
+
 # IDS Registry Health Check Task
 
 ## Purpose
@@ -32,6 +40,7 @@ node bin/sinapse-ids.js ids:health --fix
 ```
 
 This will:
+
 - Create a backup of the registry before changes
 - Auto-fix issues: checksum mismatches, orphaned references, missing keywords, stale timestamps
 - Skip non-auto-healable issues (missing files) and emit warnings
@@ -63,10 +72,10 @@ Review the warnings and take manual action as suggested.
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | No critical issues |
-| 1 | Critical issues found (e.g., missing files) |
+| Code | Meaning                                     |
+| ---- | ------------------------------------------- |
+| 0    | No critical issues                          |
+| 1    | Critical issues found (e.g., missing files) |
 
 ---
 
@@ -86,5 +95,4 @@ if (healthResult.summary.total > 0) {
 
 ---
 
-*Story IDS-4a | Self-Healing Data Integrity*
-
+_Story IDS-4a | Self-Healing Data Integrity_

@@ -1,3 +1,11 @@
+---
+task: gotcha
+responsavel: '@developer'
+entrada: '`title`, `description` e opções (`--category`, `--severity`, `--workaround`, `--files`)'
+saida: 'Gotcha registrado na memória de gotchas do projeto'
+atomic_layer: Task
+---
+
 # Task: Add Gotcha
 
 > **Command:** `*gotcha {title} - {description}`

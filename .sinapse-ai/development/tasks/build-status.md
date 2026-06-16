@@ -1,3 +1,11 @@
+---
+task: build-status
+responsavel: '@developer'
+entrada: '`story-id` ou `--all`'
+saida: 'Status, progresso, métricas e indicadores de saúde dos builds'
+atomic_layer: Task
+---
+
 # Task: Build Status
 
 > **Command:** `*build-status {story-id}` or `*build-status --all`
