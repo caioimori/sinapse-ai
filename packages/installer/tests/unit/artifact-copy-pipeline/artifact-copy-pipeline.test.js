@@ -195,7 +195,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
 
     test('covers all known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(11);
+      expect(keys).toHaveLength(13);
       expect(keys).toContain('synapse-engine.cjs');
       expect(keys).toContain('code-intel-pretool.cjs');
       expect(keys).toContain('precompact-session-digest.cjs');
@@ -208,6 +208,25 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       // Telemetry observers added in Onda 4.3 (PostToolUse + Stop, fail-open)
       expect(keys).toContain('telemetry-post-tool.cjs');
       expect(keys).toContain('telemetry-stop.cjs');
+      // Statusline agent/squad trackers (Cluster D — feedback visual)
+      expect(keys).toContain('track-agent.cjs');
+      expect(keys).toContain('track-agent-clear.cjs');
+    });
+
+    test('maps track-agent.cjs to UserPromptSubmit (statusline detector)', () => {
+      const config = HOOK_EVENT_MAP['track-agent.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('UserPromptSubmit');
+      expect(config.matcher).toBeNull();
+      expect(config.timeout).toBe(10);
+    });
+
+    test('maps track-agent-clear.cjs to Stop (statusline clear)', () => {
+      const config = HOOK_EVENT_MAP['track-agent-clear.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('Stop');
+      expect(config.matcher).toBeNull();
+      expect(config.timeout).toBe(10);
     });
 
     test('DEFAULT_HOOK_CONFIG falls back to UserPromptSubmit', () => {

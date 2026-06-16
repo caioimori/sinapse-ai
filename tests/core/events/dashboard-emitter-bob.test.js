@@ -184,25 +184,66 @@ describe('DashboardEmitter Bob-specific methods', () => {
     });
   });
 
-  describe('Fallback behavior', () => {
-    it('should write to fallback file when emit fails', async () => {
-      // Force HTTP to fail
+  describe('Fallback behavior (only when an external sink is configured)', () => {
+    // The web monitor was archived (Etapa 7 / D6): with no SINAPSE_MONITOR_URL,
+    // emit() is a safe no-op and never writes the fallback file. This test
+    // re-loads the module WITH a sink URL set to exercise the POST→file fallback.
+    it('should write to fallback file when a configured POST fails', async () => {
+      const sinkTempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'emitter-sink-'));
+      const fallbackPath = path.join(sinkTempDir, '.sinapse', 'dashboard', 'events.jsonl');
+      const savedUrl = process.env.SINAPSE_MONITOR_URL;
+      process.env.SINAPSE_MONITOR_URL = 'http://localhost:4001/events';
+
+      try {
+        // Re-evaluate the module so MONITOR_SERVER_URL (read at load time)
+        // picks up the env var set above.
+        let SinkEmitter;
+        jest.isolateModules(() => {
+          // eslint-disable-next-line global-require
+          ({ DashboardEmitter: SinkEmitter } = require('../../../.sinapse-ai/core/events/dashboard-emitter'));
+        });
+        SinkEmitter.instance = null;
+        const sinkEmitter = new SinkEmitter();
+        sinkEmitter.enabled = true;
+        sinkEmitter.projectRoot = sinkTempDir;
+        sinkEmitter.fallbackPath = fallbackPath;
+
+        // Force the configured HTTP POST to fail → should fall back to file.
+        sinkEmitter._postEvent = async () => {
+          throw new Error('Network error');
+        };
+
+        await sinkEmitter.emit(DashboardEventType.BOB_PHASE_CHANGE, { phase: 'test' });
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        const exists = await fs.pathExists(fallbackPath);
+        expect(exists).toBe(true);
+
+        const content = await fs.readFile(fallbackPath, 'utf8');
+        const event = JSON.parse(content.trim());
+        expect(event.type).toBe(DashboardEventType.BOB_PHASE_CHANGE);
+        expect(event.data.phase).toBe('test');
+      } finally {
+        if (savedUrl === undefined) {
+          delete process.env.SINAPSE_MONITOR_URL;
+        } else {
+          process.env.SINAPSE_MONITOR_URL = savedUrl;
+        }
+        await fs.remove(sinkTempDir);
+      }
+    });
+
+    it('is a safe no-op (no file written) when no sink is configured', async () => {
+      // Default case: no SINAPSE_MONITOR_URL → emit() writes nothing.
       emitter._postEvent = async () => {
-        throw new Error('Network error');
+        throw new Error('should never be called without a sink');
       };
 
       await emitter.emit(DashboardEventType.BOB_PHASE_CHANGE, { phase: 'test' });
-
-      // Wait for async write
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       const exists = await fs.pathExists(emitter.fallbackPath);
-      expect(exists).toBe(true);
-
-      const content = await fs.readFile(emitter.fallbackPath, 'utf8');
-      const event = JSON.parse(content.trim());
-      expect(event.type).toBe(DashboardEventType.BOB_PHASE_CHANGE);
-      expect(event.data.phase).toBe('test');
+      expect(exists).toBe(false);
     });
   });
 

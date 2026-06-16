@@ -1134,6 +1134,23 @@ async function runWizard(options = {}) {
       }
     }
 
+    // Statusline feedback loop: install global statusline + agent trackers (Cluster D).
+    // Graceful skip if the user already has a statusLine; idempotent on hooks.
+    if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
+      try {
+        const { setupStatusline } = require('../../../../bin/lib/setup-statusline');
+        const sourceCoreDir = path.join(__dirname, '..', '..', '..', '..', '.sinapse-ai');
+        const slResult = await setupStatusline({ sourceCoreDir });
+        if (slResult.installed) {
+          console.log('\n✅ Statusline configurada (agente/squad ao vivo).');
+        }
+        answers.statuslineInstalled = !!slResult.installed;
+      } catch (_slErr) {
+        // Non-critical — statusline is observability, never blocks install.
+        answers.statuslineInstalled = false;
+      }
+    }
+
     // Generate AGENTS.md at project root (universal format for Claude Code + Codex)
     try {
       const agentsCreated = await generateAgentsMd(process.cwd());

@@ -56,8 +56,21 @@ function cmdList() {
   logger.always('');
 }
 
-function cmdStatus() {
+function cmdStatus({ watch = false } = {}) {
   const logger = getLogger();
+
+  // D7 — live observability panel. `--watch` drives the animated panel from
+  // the runtime status sources (Bob dashboard + per-cwd session-cache).
+  if (watch) {
+    const { ObservabilityPanel } = require('../../.sinapse-ai/core/ui/observability-panel');
+    const handle = ObservabilityPanel.watchFromStatusFile(process.cwd(), {});
+    process.on('SIGINT', () => {
+      handle.stop();
+      process.exit(0);
+    });
+    return;
+  }
+
   header();
 
   // Check global install

@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-16T06:09:14.921Z'
-  entityCount: 808
+  lastUpdated: '2026-06-16T17:13:39.363Z'
+  entityCount: 809
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -40,8 +40,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:8eba52957801153e967613e6ae3ce7c81867084a7e5f8efc2586018d5c8eed8a
-      lastVerified: '2026-06-15T01:36:42.584Z'
+      checksum: sha256:52b9f4351e951350c5658bb036f49974df7bc3a5e0fdc7b5f8866c880f932d80
+      lastVerified: '2026-06-16T17:13:38.673Z'
     agents:
       path: bin/commands/agents.js
       layer: L1
@@ -203,6 +203,7 @@ entities:
         - constants
         - header
         - squads
+        - observability-panel
       externalDeps: []
       plannedDeps:
         - logger
@@ -211,8 +212,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:9eab89252bfe84f0179ffe4cbb62cbac5392fb75db434f6fc9deef6a636f6d15
-      lastVerified: '2026-06-15T01:36:42.599Z'
+      checksum: sha256:a40e4f98aa319d5e8c9f94d37448fe95f67598848693a5f6db4158f675e8fdbe
+      lastVerified: '2026-06-16T17:13:38.678Z'
     uninstall:
       path: bin/commands/uninstall.js
       layer: L1
@@ -425,6 +426,26 @@ entities:
         extensionPoints: []
       checksum: sha256:0856daf29e660ededff840173ba939b38967f525d1271635a671710d28de4e35
       lastVerified: '2026-06-15T01:36:42.609Z'
+    setup-statusline:
+      path: bin/lib/setup-statusline.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\setup-statusline.js
+      keywords:
+        - setup
+        - statusline
+      usedBy:
+        - sinapse-init
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:5233a7b0ae9828eda7f64d4729f9ebc564793c3ffe38fb74bf4a3d07a6c61608
+      lastVerified: '2026-06-16T17:13:38.683Z'
     squads:
       path: bin/lib/squads.js
       layer: L1
@@ -596,7 +617,8 @@ entities:
         - sinapse
         - init
       usedBy: []
-      dependencies: []
+      dependencies:
+        - setup-statusline
       externalDeps: []
       plannedDeps:
         - brownfield-upgrader
@@ -606,8 +628,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:bfb2a06d21fda79740df339efa1289d1d5ed0110494e988029cdcf5243e5f46d
-      lastVerified: '2026-06-15T01:36:42.620Z'
+      checksum: sha256:b64473255cf407925dd805ecfc1e5acb715d131e66e5fa7692261f48f1008c06
+      lastVerified: '2026-06-16T17:13:38.689Z'
     sinapse-minimal:
       path: bin/sinapse-minimal.js
       layer: L1
@@ -1437,8 +1459,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:661548adbb909bf5ced835ae8f4a7d21e760f9ab3c91ccd014fae72475a84197
-      lastVerified: '2026-06-15T00:26:26.241Z'
+      checksum: sha256:56f8f1e1a5dc349d2361ea6d58ae4fd17c048a98e6a7672af390b2e0c31b7234
+      lastVerified: '2026-06-16T17:13:38.706Z'
     build-component:
       path: .sinapse-ai/development/tasks/build-component.md
       layer: L2
@@ -1484,8 +1506,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:830db53a43d3608038f835ccfdc0b541e2c027fb100333c529e5b9b8e1c52459
-      lastVerified: '2026-06-15T00:26:26.242Z'
+      checksum: sha256:5eb57ca6ffbc122c3164ac1fe289eef036db443d9d5d5a8e99c0c92087df31ce
+      lastVerified: '2026-06-16T17:13:38.707Z'
     build-status:
       path: .sinapse-ai/development/tasks/build-status.md
       layer: L2
@@ -1505,8 +1527,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:ec15e743b2de28880f2371a29e583d23dcd8f0bb356bef9e4f7942fbae71ee8e
-      lastVerified: '2026-06-15T00:26:26.242Z'
+      checksum: sha256:b6f5d04524fe65f5cb74141c043519a04e1ec32fa7b1e54d139d3d5d5c492690
+      lastVerified: '2026-06-16T17:13:38.707Z'
     build:
       path: .sinapse-ai/development/tasks/build.md
       layer: L2
@@ -1526,8 +1548,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:b89199eb302732527f6e3c1ee9b31fe2502cd9ad905693d1d837c3f9175c462e
-      lastVerified: '2026-06-15T00:26:26.242Z'
+      checksum: sha256:5bd9978b7ea75c7397a0ec3f355c3fd5c828ab545f738609ecc1af0792eb5cdb
+      lastVerified: '2026-06-16T17:13:38.707Z'
     calculate-roi:
       path: .sinapse-ai/development/tasks/calculate-roi.md
       layer: L2
@@ -1650,8 +1672,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:c97a7e6ecbf12b77142b2850b0a44a999c13fb896a768ae3aa603e032400e745
-      lastVerified: '2026-06-15T00:26:26.243Z'
+      checksum: sha256:2e6c43425ae86e336884246cb3ab8a6712d5715e34e1dbbfc3f488ae9965303b
+      lastVerified: '2026-06-16T17:13:38.710Z'
     collaborative-edit:
       path: .sinapse-ai/development/tasks/collaborative-edit.md
       layer: L2
@@ -3406,8 +3428,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:1222c2e8a2bb15290a85ef5b07fb395244cf7503721580c38ade0c90c4fec7de
-      lastVerified: '2026-06-15T00:26:26.268Z'
+      checksum: sha256:3df82784f72fd1cc3d3ad1dbf524c1023d1e0b9e5d16de8e745654f72827a33e
+      lastVerified: '2026-06-16T17:13:38.844Z'
     gotchas:
       path: .sinapse-ai/development/tasks/gotchas.md
       layer: L2
@@ -3431,8 +3453,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:4a54613b7521147878e310c561a57461c6522bcb80d6b8ea4b96b8e25c54988f
-      lastVerified: '2026-06-15T00:26:26.269Z'
+      checksum: sha256:564ae42e4e46dffb6eafe2bafc1674e513535013a21140926e8c7eda8c4cb4ff
+      lastVerified: '2026-06-16T17:13:38.845Z'
     ids-governor:
       path: .sinapse-ai/development/tasks/ids-governor.md
       layer: L2
@@ -3471,6 +3493,7 @@ entities:
         - devops
       dependencies:
         - registry-healer
+        - data-engineer
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -3478,8 +3501,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:3fc944b0392e12eb0594951f20479916b7e7525c73eb4bc48c2e7a9c23dc441f
-      lastVerified: '2026-06-15T00:26:26.269Z'
+      checksum: sha256:d3bece995350c2226e62aad89606e4b9186b2ce7160eb2e45f91f15afa54ac5b
+      lastVerified: '2026-06-16T17:13:38.847Z'
     ids-query:
       path: .sinapse-ai/development/tasks/ids-query.md
       layer: L2
@@ -3722,8 +3745,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:1968007b336ea153eedeb58ebf3eb9e5b3ba4b4486ffcdac256b18ef662af553
-      lastVerified: '2026-06-15T00:26:26.272Z'
+      checksum: sha256:cac66f5235352e0efddee807f140891d10357b5793a8f6e9e4456b8239a538d3
+      lastVerified: '2026-06-16T17:13:38.853Z'
     list-worktrees:
       path: .sinapse-ai/development/tasks/list-worktrees.md
       layer: L2
@@ -3821,8 +3844,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:117bd3c5999b172bee7a6ccf1c14c10c6cfc4e3052a57a92e15932c35ad70e69
-      lastVerified: '2026-06-15T00:26:26.273Z'
+      checksum: sha256:8b3a07c5885147c854963fdcc7f872a9bebdbf7c48559d7b85839db2ff8d590c
+      lastVerified: '2026-06-16T17:13:38.861Z'
     modify-agent:
       path: .sinapse-ai/development/tasks/modify-agent.md
       layer: L2
@@ -4834,8 +4857,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:4e7a3fd5b4fb8e961cdc421882bc35734b06c37224c4ba63f87440a969e4e093
-      lastVerified: '2026-06-15T00:26:26.287Z'
+      checksum: sha256:11f3374377b5ffd3d6cd2d962574d40b96caa3e0ff19d91c74103e7505678636
+      lastVerified: '2026-06-16T17:13:38.893Z'
     qa-review-proposal:
       path: .sinapse-ai/development/tasks/qa-review-proposal.md
       layer: L2
@@ -5071,8 +5094,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:97ec89150e11d3428df73556ab923bbdc994bc64140df5e9da9a9c3c9a76e278
-      lastVerified: '2026-06-15T00:26:26.290Z'
+      checksum: sha256:d672e0f0500decdefef21a0a10e90b7da60ff587fa169c69767bb3542f71d5d4
+      lastVerified: '2026-06-16T17:13:38.900Z'
     remove-worktree:
       path: .sinapse-ai/development/tasks/remove-worktree.md
       layer: L2
@@ -6330,8 +6353,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:3d36a4156b6001864846898b6967c907ffbeb368e8e1df4b62097b79f4e5131e
-      lastVerified: '2026-06-15T00:26:26.307Z'
+      checksum: sha256:82048e2abf2c1278ff0df5fbfe4601bf22ea0450b16d66b8101a366a9bb39c14
+      lastVerified: '2026-06-16T17:13:38.954Z'
     validate-next-story:
       path: .sinapse-ai/development/tasks/validate-next-story.md
       layer: L2
@@ -10069,8 +10092,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:e6e2fb9637dd808a410c7238ace6226b6fd8eb7ac2f6d663adba3832310416d7
-      lastVerified: '2026-06-15T00:26:26.377Z'
+      checksum: sha256:fb05de8dd0802d394d6463ab3170c2ca7e3bde7ff0924d6f33aeec0744c1f538
+      lastVerified: '2026-06-16T17:13:39.056Z'
     types:
       path: .sinapse-ai/core/events/types.js
       layer: L1
@@ -13789,6 +13812,7 @@ entities:
         - panel
       usedBy:
         - bob-orchestrator
+        - status
       dependencies:
         - panel-renderer
       externalDeps: []
@@ -13798,8 +13822,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:624978379faf0da1fe30e8eb4f217ae298fc7f49b832d6bb1b73a59b4226dc43
-      lastVerified: '2026-06-15T00:26:26.427Z'
+      checksum: sha256:5cf10da7121c57bb340590a3a55cde630ed60197ba33fc41d037a885497c97f6
+      lastVerified: '2026-06-16T17:13:39.122Z'
     panel-renderer:
       path: .sinapse-ai/core/ui/panel-renderer.js
       layer: L1
@@ -14038,6 +14062,7 @@ entities:
         - brownfield-discovery
         - claude-rules
         - codex-rules
+        - ids-health
         - story-tmpl
         - validate-next-story
       dependencies:
@@ -16088,8 +16113,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1b3ed188fa3f9acbac09e60499d00755a4bec6a3786e83b6e95dbc2c1ba2d6ec
-      lastVerified: '2026-06-15T00:26:26.501Z'
+      checksum: sha256:6a38a2528850fb22e9ce99c8c8c670236393ac5b929c7dad8021d617129d6107
+      lastVerified: '2026-06-16T17:13:39.211Z'
     dependency-analyzer:
       path: .sinapse-ai/infrastructure/scripts/dependency-analyzer.js
       layer: L2

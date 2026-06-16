@@ -1,14 +1,20 @@
 /**
  * Dashboard Event Emitter
  *
- * Singleton that emits high-level events to the monitor-server
- * for real-time dashboard observability.
+ * Singleton for high-level orchestration events (agent activation, command
+ * lifecycle, story status, Bob phases). Kept as a stable API consumed by the
+ * orchestrator (dashboard-integration.js, bob-orchestrator.js).
  *
- * Features:
- * - Non-blocking HTTP POST to monitor-server
- * - 500ms timeout (never blocks CLI)
- * - Silent failure with fallback to file
- * - Lazy initialization
+ * Transport status:
+ * - The legacy web monitor server (POST http://localhost:4001/events) was
+ *   ARCHIVED (16/06/2026, Etapa 7 / decisão D6). That server never shipped in
+ *   this repo, so emit() is a SAFE NO-OP by default — it never opens a socket.
+ * - The full event API (emit + emitXxx helpers) is preserved 1:1 so existing
+ *   importers keep working without changes.
+ * - To opt back in to an HTTP sink later, set SINAPSE_MONITOR_URL in the env.
+ *   When set, events POST to that URL (non-blocking, 500ms timeout, silent
+ *   fail, fallback to a local .jsonl file). When unset (the normal case), the
+ *   emitter does nothing — no network, no file writes.
  *
  * @module core/events/dashboard-emitter
  */
@@ -18,7 +24,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const { DashboardEventType } = require('./types');
 
-const MONITOR_SERVER_URL = process.env.SINAPSE_MONITOR_URL || 'http://localhost:4001/events';
+// No default endpoint: the web monitor was archived. The emitter only attempts
+// a POST when SINAPSE_MONITOR_URL is explicitly provided. null => fail-silent no-op.
+const MONITOR_SERVER_URL = process.env.SINAPSE_MONITOR_URL || null;
 const EMIT_TIMEOUT_MS = 500;
 
 /**
@@ -92,6 +100,13 @@ class DashboardEmitter {
    */
   async emit(type, data = {}) {
     if (!this.enabled) return;
+
+    // Web monitor archived (Etapa 7 / D6): with no sink configured, emit() is a
+    // safe no-op. Build nothing, open no sockets, write no files. Opt back in by
+    // setting SINAPSE_MONITOR_URL. This keeps the public API identical for all
+    // callers (dashboard-integration.js, bob-orchestrator.js, tests) while
+    // killing the dead POST to localhost:4001.
+    if (!MONITOR_SERVER_URL) return;
 
     const event = {
       id: randomUUID(),
@@ -303,11 +318,17 @@ class DashboardEmitter {
   }
 
   /**
-   * POST event to monitor-server with timeout
+   * POST event to an external sink with timeout.
+   * No-op when SINAPSE_MONITOR_URL is unset (the archived web monitor case) —
+   * never opens a socket. Only runs when an endpoint is explicitly configured.
    * @private
    * @param {Object} event
    */
   async _postEvent(event) {
+    // Defense-in-depth: emit() already short-circuits, but guard here too so a
+    // direct call can't resurrect the dead localhost:4001 POST.
+    if (!MONITOR_SERVER_URL) return;
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), EMIT_TIMEOUT_MS);
 

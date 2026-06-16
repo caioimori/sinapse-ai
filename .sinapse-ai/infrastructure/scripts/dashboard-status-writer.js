@@ -1,8 +1,12 @@
 /**
  * Dashboard Status Writer
  *
- * Writes the current SINAPSE agent status to .sinapse/dashboard/status.json
- * This file is watched by the dashboard via SSE for real-time updates.
+ * Writes the current SINAPSE agent status to .sinapse/dashboard/status.json.
+ *
+ * Note: this file is a plain on-disk status snapshot. The CLI observability
+ * panel (`sinapse status --watch`) tails it. The old web dashboard that
+ * consumed it over SSE was the localhost:4001 monitor, which was ARCHIVED
+ * (16/06/2026, Etapa 7 / D6) — there is no SSE stream anymore, just the file.
  *
  * Usage:
  *   const statusWriter = require('./dashboard-status-writer');

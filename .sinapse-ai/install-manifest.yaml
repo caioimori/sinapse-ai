@@ -9,7 +9,7 @@
 #
 version: 1.7.0
 generator: scripts/generate-install-manifest.js
-file_count: 1193
+file_count: 1194
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -4376,13 +4376,17 @@ files:
     type: template
     size: 6764
   - path: product/templates/statusline/statusline-script.js
-    hash: sha256:d29b25954e0dd36273e6b13a050754993e50ac68f77d8879608886c37674ac21
+    hash: sha256:05945437a07c0156ff5bff3238ad8fc71728c591933db64fde94aa219d6f9146
     type: template
-    size: 6196
-  - path: product/templates/statusline/track-agent.sh
-    hash: sha256:9514275a22a08add4ca080436e43b23a578b22852c9c157662000d513f841aad
+    size: 7530
+  - path: product/templates/statusline/track-agent-clear.cjs
+    hash: sha256:3cda606de2463374e60440ba6cae9ca98e39b782b19c6ae39aa7569a1b211f09
     type: template
-    size: 1806
+    size: 2137
+  - path: product/templates/statusline/track-agent.cjs
+    hash: sha256:898d576f257734e9954e8949e5a4685f38167af0dcad986745b411a3b318559e
+    type: template
+    size: 6244
   - path: product/templates/story-tmpl.yaml
     hash: sha256:43a050de5ef51f53f890fd20f77ac567b297a40597f467b3bc6d00c8193c7fa6
     type: template

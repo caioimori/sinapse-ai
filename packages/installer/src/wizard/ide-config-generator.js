@@ -637,6 +637,19 @@ const HOOK_EVENT_MAP = {
     matcher: null,
     timeout: 5,
   },
+  // Statusline agent/squad tracker (Cluster D — feedback visual).
+  // Detector writes the per-cwd session-cache the statusline reads;
+  // clear wipes it when the session ends. FAIL-OPEN: both exit 0 on error.
+  'track-agent.cjs': {
+    event: 'UserPromptSubmit',
+    matcher: null,
+    timeout: 10,
+  },
+  'track-agent-clear.cjs': {
+    event: 'Stop',
+    matcher: null,
+    timeout: 10,
+  },
 };
 
 /** Default event config for unmapped hooks (backwards compatible). */

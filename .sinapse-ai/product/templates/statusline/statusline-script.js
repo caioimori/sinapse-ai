@@ -47,9 +47,9 @@ function buildStatusLine(data) {
   const sessionId = data.session_id || '';
   if (sessionId) parts.push(`${dim}${sessionId.substring(0, 8)}${reset}`);
 
-  // 2. Model
-  const modelId = data.model?.id || '';
-  const modelName = formatModel(modelId);
+  // 2. Model — derive from payload (display_name or id), strip parenthetical suffixes
+  const rawModel = (data.model?.display_name || data.model?.id || '').replace(/\s*\([^)]*\)/g, '').trim();
+  const modelName = rawModel || formatModel(data.model?.id || '');
   if (modelName) parts.push(`${boldBlue}${modelName}${reset}`);
 
   // 3. Context — progress bar + % + total (in/out)
@@ -79,6 +79,19 @@ function buildStatusLine(data) {
   const activeSquad = cache.squad || '';
   if (activeAgent) parts.push(`${cyan}\ud83e\udd16 ${activeAgent}${reset}`);
   if (activeSquad) parts.push(`${orange}\ud83c\udfaf ${activeSquad}${reset}`);
+
+  // 6.5 Orchestration \u2014 Imperator + active specialists (TTL 6h)
+  // Back-compat: v1 cache lacks imperator/specialists \u2192 block silent (only \ud83e\udd16).
+  const TTL = 21600;
+  const nowSec = Math.floor(Date.now() / 1000);
+  const imperator = cache.imperator;
+  if (imperator?.active && (nowSec - imperator.ts) < TTL) {
+    parts.push(`${bold}${magenta}\ud83d\udc51 IMPERATOR acionado${reset}`);
+  }
+  const ativos = (cache.specialists || []).filter(s => nowSec - s.ts < TTL);
+  if (ativos.length > 0) {
+    parts.push(`${cyan}\ud83e\udded ${ativos.length} especialistas: ${ativos.map(s => s.id).join(', ')}${reset}`);
+  }
 
   // 7. Project:Branch
   const gitInfo = getGitInfo();
@@ -111,11 +124,13 @@ function buildStatusLine(data) {
 
 // --- Helpers ---
 
+// Fallback only — used when payload has neither display_name nor id.
+// Returns a short family label without hardcoded version numbers (which go stale).
 function formatModel(id) {
   if (!id) return '';
-  if (id.includes('opus')) return 'Opus 4.6';
-  if (id.includes('sonnet')) return 'Sonnet 4.5';
-  if (id.includes('haiku')) return 'Haiku 4.5';
+  if (id.includes('opus')) return 'Opus';
+  if (id.includes('sonnet')) return 'Sonnet';
+  if (id.includes('haiku')) return 'Haiku';
   return id.split('-').slice(0, 2).join(' ');
 }
 
@@ -133,6 +148,8 @@ function fmtTokens(n) {
 }
 
 function readSessionCache() {
+  // Back-compat: v1 cache {agent,squad} has no imperator/specialists/role —
+  // those fields come back null/empty and the orchestration block stays silent.
   try {
     const cacheDir = path.join(os.homedir(), '.claude', 'session-cache');
     const cwd = process.cwd();
@@ -140,10 +157,16 @@ function readSessionCache() {
     const cachePath = path.join(cacheDir, `${hash}.json`);
     if (fs.existsSync(cachePath)) {
       const cache = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
-      return { agent: cache.agent || '', squad: cache.squad || '' };
+      return {
+        agent: cache.agent || '',
+        squad: cache.squad || '',
+        role: cache.role || null,
+        imperator: cache.imperator || null,
+        specialists: Array.isArray(cache.specialists) ? cache.specialists : [],
+      };
     }
   } catch {}
-  return { agent: '', squad: '' };
+  return { agent: '', squad: '', role: null, imperator: null, specialists: [] };
 }
 
 function simpleHash(str) {
