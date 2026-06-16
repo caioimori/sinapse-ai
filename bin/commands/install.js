@@ -244,8 +244,10 @@ async function cmdInstallGlobal(opts = {}) {
     const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
     if (!fs.existsSync(agentsDir)) continue;
 
-    const orqxAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md') && f.includes('-orqx'));
-    for (const file of orqxAgents) {
+    // agent-invocation fix: generate a command/subagent for EVERY agent (not only -orqx),
+    // so every specialist is invokable via @agent and /SINAPSE:agents:agent.
+    const squadAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'));
+    for (const file of squadAgents) {
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
@@ -267,6 +269,20 @@ async function cmdInstallGlobal(opts = {}) {
         fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`), cmdContent);
         writtenAgents.add(file);
       }
+    }
+  }
+
+  // Short aliases: @sinapse and @snps → master orchestrator (Imperator).
+  // These are the names users actually type; without them, @sinapse/@snps resolve to nothing.
+  if (fs.existsSync(sinapseMasterDest)) {
+    const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
+    const masterSquadPath = `${sinapseBase}/sinapse`;
+    for (const [alias, personaFile] of [['sinapse', 'sinapse-orqx.md'], ['snps', 'snps-orqx.md']]) {
+      const personaPath = path.join(masterAgentsDir, personaFile);
+      const aliasMeta = fs.existsSync(personaPath) ? extractAgentMeta(personaPath) : { name: 'Imperator', icon: '\u{1F451}' };
+      const cmdContent = generateCommandMd(alias, aliasMeta.name, aliasMeta.icon, 'sinapse', masterSquadPath, personaFile);
+      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${alias}.md`), cmdContent);
+      writtenAgents.add(`${alias}.md`);
     }
   }
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
@@ -451,7 +467,8 @@ async function cmdInstallGlobal(opts = {}) {
 
 function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
   // Detecta se é orquestrador: id termina em -orqx OU é Imperator (snps-orqx/sinapse-orqx)
-  const isOrchestrator = /-orqx$/.test(agentId) || agentId === 'snps-orqx' || agentId === 'sinapse-orqx';
+  // ou um dos apelidos curtos do master (sinapse/snps).
+  const isOrchestrator = /-orqx$/.test(agentId) || agentId === 'snps-orqx' || agentId === 'sinapse-orqx' || agentId === 'sinapse' || agentId === 'snps';
 
   const step4 = isOrchestrator
     ? `4. Briefing-on-activation check (this agent is an ORCHESTRATOR):
@@ -465,7 +482,19 @@ function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, 
    - If bare activation → await briefing, then plan automatically. NEVER ask "do you want me to plan?".`
     : `6. HALT and await user input`;
 
-  return `# ${agentId}
+  // Frontmatter (name + description) is REQUIRED so the file resolves as a Claude Code
+  // subagent (@id) — without it, @id matches nothing. The same file doubles as a slash
+  // command (/SINAPSE:agents:id); extra frontmatter is harmless there.
+  const fmDesc = (isOrchestrator
+    ? `${agentName || agentId} — orchestrator for ${squadName}; diagnoses, routes to specialists and auto-generates an orchestration plan`
+    : `${agentName || agentId} — ${squadName} specialist`).replace(/["\n\r]/g, ' ').trim();
+
+  return `---
+name: ${agentId}
+description: "${fmDesc}"
+---
+
+# ${agentId}
 
 ACTIVATION-NOTICE: This command activates an agent from ${squadName}.
 
