@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-15T01:36:43.451Z'
-  entityCount: 813
+  lastUpdated: '2026-06-16T06:09:14.921Z'
+  entityCount: 808
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -134,13 +134,14 @@ entities:
       layer: L1
       type: script
       purpose: >-
-        "Imperator — Supreme Orchestrator of SINAPSE. ${squads.length} squads, ${squads.reduce((a, s) => a + s.agents,
-        0)} agents."
+        "Imperator — Sinapse Master: supreme orchestrator of ${squadCount} squads / ${agentCount} agents. Diagnoses
+        every briefing and auto-generates an orchestration plan."
       keywords:
         - install
+        - imperator
         - sinapse
-        - orchestration
-        - rules
+        - master
+        - (${agentid})
       usedBy:
         - cli
         - update
@@ -163,8 +164,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:0be7995450d249af3961dc2ea2dc5446bc0f68925da28243994030003e94fca7
-      lastVerified: '2026-06-15T01:36:42.597Z'
+      checksum: sha256:8464af9d0c6e4f576ad8ef9e8dce8af9d00ba8e8eb0ea989d2e49cb72e96d914
+      lastVerified: '2026-06-16T06:09:14.626Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -264,8 +265,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:008bba08929f0c6f5dba65740c078f9cde2fe090a5beb942c9ebeca45e0439c9
-      lastVerified: '2026-06-15T01:36:42.602Z'
+      checksum: sha256:83ebc6f5e09807dfe8c3da2d56c5c309b1d06dbeb7712d143c575d300199cb77
+      lastVerified: '2026-06-16T06:09:14.627Z'
     constants:
       path: bin/lib/constants.js
       layer: L1
@@ -640,17 +641,19 @@ entities:
         - index
         - chrome-brain-installer
         - cli
+        - component-generator
       externalDeps: []
       plannedDeps:
         - logger
+        - permissions
         - orchestration
       lifecycle: experimental
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:830a8fceb2b0ec602d3ec12b492c9f2dc318511b3753283c654b2e9b5a8d7d61
-      lastVerified: '2026-06-15T01:36:42.624Z'
+      checksum: sha256:2687d270771ed2c9ba1df903ca4585218b31f83d167208e589c6f379d17b90ee
+      lastVerified: '2026-06-16T06:09:14.632Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
@@ -2563,12 +2566,13 @@ entities:
         - external
         - executor
         - delegate-to-external-executor.md
-      usedBy: []
+      usedBy:
+        - devops
       dependencies:
         - devops
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -3439,12 +3443,13 @@ entities:
         - governor
         - 'task:'
         - commands
-      usedBy: []
+      usedBy:
+        - devops
       dependencies: []
       externalDeps: []
       plannedDeps:
         - sinapse-orqx
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -3462,12 +3467,13 @@ entities:
         - registry
         - check
         - task
-      usedBy: []
+      usedBy:
+        - devops
       dependencies:
         - registry-healer
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -3485,13 +3491,14 @@ entities:
         - ids
         - query
         - basic
-      usedBy: []
+      usedBy:
+        - devops
       dependencies: []
       externalDeps: []
       plannedDeps:
         - registry-loader.js (IDS-1)
         - incremental-decision-engine.js (IDS-2)
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -6037,13 +6044,14 @@ entities:
         - registry
         - intel
         - 'task:'
-      usedBy: []
+      usedBy:
+        - devops
       dependencies:
         - registry-syncer
       externalDeps: []
       plannedDeps:
         - sinapse-orqx
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -6200,8 +6208,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:2396f096e6173042d6e472988103d55191150b5053a544d8b581aa6859f99afd
-      lastVerified: '2026-06-15T00:26:26.306Z'
+      checksum: sha256:8152c56906792345c8cac62332e251557c51bcb2e53e529cdc98bce969dde950
+      lastVerified: '2026-06-16T06:09:14.703Z'
     update-source-tree:
       path: .sinapse-ai/development/tasks/update-source-tree.md
       layer: L2
@@ -6461,14 +6469,15 @@ entities:
         - yolo
         - toggle
         - yolo-toggle
-      usedBy: []
+      usedBy:
+        - developer
       dependencies: []
       externalDeps: []
       plannedDeps:
         - permissions
         - .sinapse-ai/core/permissions/permission-mode.js
         - .sinapse-ai/core/permissions/index.js
-      lifecycle: experimental
+      lifecycle: production
       adaptability:
         score: 0.8
         constraints: []
@@ -11897,8 +11906,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f4bdaee54d35bb009b587c17af716c228602ea8ab086eb2ae0887ffc23935f48
-      lastVerified: '2026-06-15T00:26:26.401Z'
+      checksum: sha256:f9d19b7afe34a3855795bab464dc5a6d23c1926c5eed05192910f898d6bbefec
+      lastVerified: '2026-06-16T06:09:14.789Z'
     gotchas-memory:
       path: .sinapse-ai/core/memory/gotchas-memory.js
       layer: L1
@@ -11943,8 +11952,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:dbbc63f4e5ce76da39f22349f1dc4171b0a12fccf6850a3ff02c29497c5945c7
-      lastVerified: '2026-06-15T00:26:26.402Z'
+      checksum: sha256:d884a0a78b2d3be36ddda10964984b1a6667fbd7df73bae156995a739ee369e2
+      lastVerified: '2026-06-16T06:09:14.790Z'
     bob-orchestrator:
       path: .sinapse-ai/core/orchestration/bob-orchestrator.js
       layer: L1
@@ -12020,8 +12029,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:b717c5c4c0f6c548f87f65ae394c78e71368c85186b5763a28abc9dfb0e1f71a
-      lastVerified: '2026-06-15T00:26:26.403Z'
+      checksum: sha256:8ef9a6d27f9d1d4145fbbfb8657691582aaf0c348278edd638d55fd139edddd4
+      lastVerified: '2026-06-16T06:09:14.791Z'
     checklist-runner:
       path: .sinapse-ai/core/orchestration/checklist-runner.js
       layer: L1
@@ -12362,8 +12371,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:5b2db2478ee8f9bf416adf27c2ee153a99743ba7b878cfa0238f5280263a5b78
-      lastVerified: '2026-06-15T00:26:26.409Z'
+      checksum: sha256:33bb2c05c3aee3e02c247afd80e27051a8c0eeb9b32dd3c246d11d5db60773e6
+      lastVerified: '2026-06-16T06:09:14.796Z'
     lock-manager:
       path: .sinapse-ai/core/orchestration/lock-manager.js
       layer: L1
@@ -12410,8 +12419,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:71b5d1c46fa30474f428ab630c94c8d17aafffd1a35c5dd6992cfb7df064a818
-      lastVerified: '2026-06-15T00:26:26.410Z'
+      checksum: sha256:20187d7a36b06b3ad8667a51f0fe9b2e4c506c7c26f26f37d79ab397618442a1
+      lastVerified: '2026-06-16T06:09:14.797Z'
     message-formatter:
       path: .sinapse-ai/core/orchestration/message-formatter.js
       layer: L1
@@ -14123,6 +14132,7 @@ entities:
         - create-worktree
         - list-worktrees
         - remove-worktree
+        - yolo-toggle
         - story-dod-checklist
         - self-critique-checklist
         - context7
@@ -14148,8 +14158,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:4ab407631a60ce5810d8a497ff204cc04d17e5f3f8b1e8e9a3dd396fd050aee5
-      lastVerified: '2026-06-15T00:26:26.442Z'
+      checksum: sha256:05e2e6362f95eb66c80e4f01dcb25232e283666c2195ec070e1bb59cc486ecb2
+      lastVerified: '2026-06-16T06:09:14.823Z'
     devops:
       path: .sinapse-ai/development/agents/devops.md
       layer: L2
@@ -14212,6 +14222,11 @@ entities:
         - environment-promotion-pipeline
         - publish-npm
         - review-contributor-pr
+        - ids-governor
+        - ids-health
+        - ids-query
+        - sync-registry-intel
+        - delegate-to-external-executor
         - github-pr-template
         - github-actions-ci.yml
         - github-actions-cd.yml
@@ -14233,8 +14248,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:8b4d9fab8be4e3a35e1567968d8517a773ed6a321c04fd1c780b0f9ffc9fb5a7
-      lastVerified: '2026-06-15T01:36:43.211Z'
+      checksum: sha256:710906315093f603a8744f5e9733bf8bdbd2641519a7d8181016457a474bb511
+      lastVerified: '2026-06-16T06:09:14.826Z'
     product-lead:
       path: .sinapse-ai/development/agents/product-lead.md
       layer: L2
@@ -14374,8 +14389,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:93210b103a23b23a7e1c7687a95cc9739bc264a0543b2a8d5c76fd00f8f1068c
-      lastVerified: '2026-06-15T00:26:26.454Z'
+      checksum: sha256:93287d3ec05bf9f3e89c3a10994c4fe270910d564d3632363c6ff569c0bb3344
+      lastVerified: '2026-06-16T06:09:14.832Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
@@ -15909,6 +15924,7 @@ entities:
         - generate-documentation
         - generate-migration-strategy
         - generate-shock-report
+        - sinapse
       dependencies:
         - template-engine
         - template-validator
@@ -16437,9 +16453,6 @@ entities:
         - agent
         - parser
       usedBy:
-        - antigravity
-        - cursor
-        - github-copilot
         - index
         - validate
       dependencies: []
@@ -16452,25 +16465,6 @@ entities:
         extensionPoints: []
       checksum: sha256:60d5a535a39694cb250903b1fd11cfc5d90d648796ca85329f8a16bfb3cdd697
       lastVerified: '2026-06-15T00:26:26.506Z'
-    gemini-commands:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/gemini-commands.js
-      layer: L2
-      type: script
-      purpose: string }}
-      keywords:
-        - gemini
-        - commands
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:475e1df64dd93022184231d9869670f96c1095a96c6e5053bf808975838e574e
-      lastVerified: '2026-06-15T00:26:26.506Z'
     persona-renderer:
       path: .sinapse-ai/infrastructure/scripts/ide-sync/persona-renderer.js
       layer: L2
@@ -16479,13 +16473,11 @@ entities:
       keywords:
         - persona
         - renderer
-      usedBy:
-        - antigravity
-        - cursor
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
-      lifecycle: production
+      lifecycle: orphan
       adaptability:
         score: 0.7
         constraints: []
@@ -16512,26 +16504,6 @@ entities:
         extensionPoints: []
       checksum: sha256:0e824085da02bb1c463422050ae1e58f3bd3d813b9d84970a30f83300793ffe6
       lastVerified: '2026-06-15T00:26:26.507Z'
-    antigravity:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/antigravity.js
-      layer: L2
-      type: script
-      purpose: Entity at .sinapse-ai\infrastructure\scripts\ide-sync\transformers\antigravity.js
-      keywords:
-        - antigravity
-      usedBy: []
-      dependencies:
-        - agent-parser
-        - persona-renderer
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:ad8db6a847adedb5765eb78f0e420442008bc61c23795c2ab5bf3a3bb1f291d8
-      lastVerified: '2026-06-15T00:26:26.507Z'
     claude-code:
       path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code.js
       layer: L2
@@ -16551,71 +16523,6 @@ entities:
         extensionPoints: []
       checksum: sha256:c641d14da8f314795da3c7156af6ca4c184cd4883a239b5b02ab4850a200e545
       lastVerified: '2026-06-15T00:26:26.507Z'
-    cursor:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/cursor.js
-      layer: L2
-      type: script
-      purpose: '''${description}'''
-      keywords:
-        - cursor
-        - ${name}
-        - (@${agentdata.id})
-      usedBy: []
-      dependencies:
-        - agent-parser
-        - persona-renderer
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:38ddee53269c64d5f22ed67a958a103cf384e2e8b80bf2b7b635b4be69a9773c
-      lastVerified: '2026-06-15T00:26:26.507Z'
-    github-copilot:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/github-copilot.js
-      layer: L2
-      type: script
-      purpose: '''${description}''`,'
-      keywords:
-        - github
-        - copilot
-      usedBy: []
-      dependencies:
-        - agent-parser
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:a38e7d1c385f546f6affb7b56c6d363432538531057cd42b72d43179d5807aa9
-      lastVerified: '2026-06-15T00:26:26.508Z'
-    kimi:
-      path: .sinapse-ai/infrastructure/scripts/ide-sync/transformers/kimi.js
-      layer: L2
-      type: script
-      purpose: ${JSON.stringify(description)}
-      keywords:
-        - kimi
-        - ${icon}
-        - '@${id}'
-        - ${name}${archetype
-        - '!=='
-        - '''specialist'''
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:579679665ee24792b3908d6108b36b53cc71d876bdfada691b6f0fc86163a018
-      lastVerified: '2026-06-15T00:26:26.508Z'
     validator:
       path: .sinapse-ai/infrastructure/scripts/ide-sync/validator.js
       layer: L2
