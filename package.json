@@ -1,7 +1,7 @@
 {
   "name": "sinapse-ai",
   "version": "1.8.0",
-  "description": "SINAPSE AI: Framework de orquestracao de IA — 18 squads, 189 agentes especializados",
+  "description": "SINAPSE AI: Framework de orquestracao de IA — 17 squads, 172 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
     "sinapse-ai": "bin/cli.js",
@@ -30,7 +30,6 @@
     ".codex/tasks/",
     "squads/squad-*/**",
     "squads/claude-code-mastery/**",
-    "squads/sinapse/**",
     "sinapse/**",
     "docs/guides/",
     "docs/installation/",

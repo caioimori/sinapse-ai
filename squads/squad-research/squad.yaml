@@ -34,13 +34,13 @@ metadata:
   checklists_count: 3
   templates_count: 6
   workflows_count: 6
-  total_files: 130
+  total_files: 123
 
 # ══════════════════════════════════════════════════════════════════════════════
 # QUALITY STANDARDS — Regras de Robustez
 # ══════════════════════════════════════════════════════════════════════════════
 
-  agents: 8
+  agents: 7
   tasks: 72
   workflows: 0
   knowledge_bases: 26
@@ -552,7 +552,6 @@ components:
   agents:
     - audience-intelligence.md
     - competitive-intelligence.md
-    - data-chief.md
     - data-synthesizer.md
     - deep-researcher.md
     - market-analyst.md

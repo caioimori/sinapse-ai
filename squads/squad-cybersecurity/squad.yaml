@@ -17,8 +17,8 @@ metadata:
   templates_count: 0
   checklists_count: 0
   quality_target: "5.0/5.0 em todas as dimensoes"
-  total_files: 83
-  agents: 9
+  total_files: 80
+  agents: 8
   tasks: 53
   workflows: 0
   knowledge_bases: 14
@@ -39,7 +39,6 @@ tags:
 components:
   agents:
     - cyber-orqx.md
-    - cyber-chief.md
     - threat-analyst.md
     - penetration-tester.md
     - soc-analyst.md

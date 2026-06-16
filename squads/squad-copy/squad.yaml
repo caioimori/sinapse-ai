@@ -13,8 +13,8 @@ metadata:
   last_updated: "2026-04-12"
   author: "Sinapse"
   tier: 1
-  total_files: 144
-  agents: 14
+  total_files: 137
+  agents: 13
   tasks: 81
   workflows: 0
   knowledge_bases: 24
@@ -262,7 +262,6 @@ components:
     - ad-copywriter.md
     - brand-voice-writer.md
     - conversion-writer.md
-    - copy-chief.md
     - copy-editor.md
     - copy-orqx.md
     - copy-strategist.md

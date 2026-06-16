@@ -164,5 +164,5 @@ Example: user says "criar um site" but the audit finds a `brand/` folder with lo
 - Ignoring existing patterns and imposing SINAPSE conventions forcefully
 - Treating greenfield as "setup → story → implement" without sub-classifying project_type
 - Skipping `greenfield-handler.js` (or its workflow file) on a `site` / `lp` / `platform` / `saas` / `api` request
-- Letting a domain orchestrator (artdir, design, brand) generate visual output before greenfield Phase 1 produces project-brief.md + prd.md + design spec
+- Letting a domain orchestrator (design, brand) generate visual output before greenfield Phase 1 produces project-brief.md + prd.md + design spec
 - Generating UI without DS grounding (see `~/.claude/rules/design-system-grounding.md`)
