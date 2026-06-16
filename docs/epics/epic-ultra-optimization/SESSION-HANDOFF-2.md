@@ -172,4 +172,10 @@ Plano P2/P3 do deep-dive **fechado** (todos os itens executáveis sem regressão
 ### Status final do epic
 - **P0 preservado, P1 (10/10), 3 cortes, P2 (11/11), P3 (4/5 + 1 deferido)** — tudo commitado, árvore limpa, churn do registry eliminado (commits limpos daqui pra frente).
 - **Baseline tem ~31 falhas de ambiente/timing no Node 24** (WorktreeManager/git-hooks-installer execa + perf `toBeLessThan`) — pré-existentes, NÃO regressões; validar por suite afetada.
-- **ÚNICO pendente real antes de publicar:** revogar+regerar o token npm exposto no chat. Publicar no npm = decisão do Caio (último passo). Ref: `docs/audits/DEEP-DIVE-RATIONALIZATION-2026-06.md` §5.
+
+### ✅ RELEASE PUBLICADA — sinapse-ai@1.8.0 (15/06/2026) — EPIC ENCERRADO
+- **npm:** `sinapse-ai@1.8.0` publicado, é o `latest`. Auditoria adversarial pré-publish (6 verificadores) deu GO, zero bloqueios.
+- **GitHub:** `main` em `d1beda7` (merge PR #216), tag `v1.8.0` enviada, sincronizado. Conta git ativa = caioimori.
+- **Token npm:** configurado em `~/.npmrc` (fora do repo), válido ~90 dias desde 15/06. Pipeline de publish documentado em memory `reference_sinapse_ai_npm_publish`.
+- **Gotcha resolvido:** pre-push exige `npm run sync:ide` quando se edita agentes (mirrors IDE estavam stale de antes — sincronizados no commit `fc7ac11`); push direto na main é bloqueado (usar PR+admin).
+- **Manutenção futura opcional (não-bloqueante):** 3 Dependabot são dev-only (jest/babel — não vão no pacote); mirrors IDE da 1.8.0 publicada um tiquinho stale (cosmético); `docs/en/` stale em files[]; rotacionar token p/ granular. NADA disso justifica 1.8.1 por si só.
