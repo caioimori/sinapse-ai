@@ -14,8 +14,8 @@ metadata:
   last_updated: "2026-04-12"
   author: "Sinapse"
   tier: 2
-  total_files: 160
-  agents: 15
+  total_files: 153
+  agents: 14
   tasks: 101
   workflows: 0
   knowledge_bases: 19
@@ -250,7 +250,6 @@ cross_squad_connections:
 # ════════════════════════════════════════════════════
 components:
   agents:
-    - design-chief.md
     - design-orqx.md
     - design-system.md
     - dx-accessibility-specialist.md
@@ -261,3 +260,7 @@ components:
     - dx-ui-designer.md
     - dx-ux-strategist.md
     - ux-designer.md
+    - cro-persuasion.md
+    - platform-aesthetic-director.md
+    - premium-packaging-strategist.md
+    - product-surface-director.md

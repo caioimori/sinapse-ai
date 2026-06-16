@@ -45,6 +45,14 @@ metadata:
 # ─────────────────────────────────────────────────────────────────────────────
 # TIER ARCHITECTURE
 # ─────────────────────────────────────────────────────────────────────────────
+  total_files: 105
+  agents: 8
+  tasks: 51
+  workflows: 0
+  knowledge_bases: 14
+  checklists: 7
+  templates: 5
+  preferences: 0
 
 tiers:
   tier_0:

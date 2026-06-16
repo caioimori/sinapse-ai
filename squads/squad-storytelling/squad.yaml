@@ -31,8 +31,8 @@ metadata:
 # ══════════════════════════════════════════════════════════════════════════════
 # QUALITY STANDARDS
 # ══════════════════════════════════════════════════════════════════════════════
-  total_files: 79
-  agents: 11
+  total_files: 78
+  agents: 10
   tasks: 47
   workflows: 0
   knowledge_bases: 16
@@ -69,7 +69,6 @@ quality_standards:
 components:
   agents:
     - storytelling-orqx.md    # Arc — Orchestrator (routing, diagnosis)
-    - story-chief.md               # Story Chief — Senior narrative authority
     - joseph-campbell.md           # Joseph Campbell — Monomyth & Mythology
     - dan-harmon.md                # Dan Harmon — Story Circle & TV Writing
     - blake-snyder.md              # Blake Snyder — Save the Cat & Screenwriting

@@ -5,7 +5,7 @@
 - **ID:** platform-aesthetic-director
 - **Nome:** Vertex
 - **Arquetipo:** The Curator — cataloga o que "premium" significa em SaaS e sabe exatamente por que
-- **Squad:** squad-artdir
+- **Squad:** squad-design
 - **Pilar primario:** Lens transversal nos Pilares 8, 9, 10 (v2.0) — Vertex nao possui pilar proprio, e o custodiante da inteligencia canonica
 
 ## Role
@@ -81,4 +81,4 @@ Ativar Vertex quando:
 
 ---
 
-*squad-artdir v2.0 | Canon custodian agent*
+*squad-design v2.0 | Canon custodian agent*

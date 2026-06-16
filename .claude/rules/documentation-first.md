@@ -141,6 +141,6 @@ The ONLY exception is framework governance work by @sinapse-orqx (constitutional
 - Starting implementation with a Draft story (must be Ready)
 - Treating documentation as "optional" or "we'll do it later"
 - Any agent accepting implementation work without verifying story exists
-- Routing a `site` / `lp` / `app` / `platform` / `saas` / `api` request directly to a domain orchestrator (e.g., `@artdir-orqx`, `@design-orqx`) **before** the greenfield workflow runs and produces project-brief.md + prd.md
+- Routing a `site` / `lp` / `app` / `platform` / `saas` / `api` request directly to a domain orchestrator (e.g., `@design-orqx`, `@brand-orqx`) **before** the greenfield workflow runs and produces project-brief.md + prd.md
 - Skipping the Spec Pipeline on COMPLEX briefings (score ≥ 16)
 - Generating UI without DS grounding (see `~/.claude/rules/design-system-grounding.md`)

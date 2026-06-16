@@ -1,6 +1,6 @@
 # Agent Reference Guide — SINAPSE-AI
 
-> Referência rápida dos **200 agentes** organizados em **19 squads** + **12 framework agents**. Total: 1.237 tasks executáveis.
+> Referência rápida dos **172 agentes** organizados em **17 squads** + **12 framework agents**. Total: 1.200 tasks executáveis.
 
 ## Como invocar
 
@@ -33,14 +33,14 @@ Localização: `.sinapse-ai/development/agents/`
 | `@squad-creator` | — | Cria squads customizados |
 | `@snps-orqx` | Imperator | Master orchestrator |
 
-## Squad Orchestrators (19) — Especialistas por Domínio
+## Squad Orchestrators (17) — Especialistas por Domínio
 
 | Squad | Orchestrator | Domínio principal |
 |---|---|---|
 | squad-brand | `@brand-orqx` | Branding, identidade visual, MVV |
 | squad-copy | `@copy-orqx` | Copywriting, persuasão, ads |
 | squad-content | `@content-orqx` | Conteúdo, editorial, SEO |
-| squad-design | `@design-orqx` | Design system, UI, wireframes |
+| squad-design | `@design-orqx` | Design system, UI, wireframes, art direction (LP/site/premium) |
 | squad-animations | `@animations-orqx` | Motion, GSAP, Three.js, shaders |
 | squad-product | `@product-orqx` | Product discovery, roadmap |
 | squad-commercial | `@commercial-orqx` | Vendas, CRM, funil |
@@ -54,8 +54,6 @@ Localização: `.sinapse-ai/development/agents/`
 | squad-storytelling | `@storytelling-orqx` | Pitch, narrativa |
 | squad-council | `@council-orqx` | Conselho estratégico (mental models) |
 | claude-code-mastery | `@claude-orqx` | Claude Code mastery (hooks, MCP, skills) |
-| squad-artdir | `@artdir-orqx` | Direção de arte |
-| claude-code-mastery | `@claude-mastery-chief` | Setup avançado Claude Code |
 
 ## Como descobrir agentes de um squad
 
@@ -105,4 +103,4 @@ squads/{squad-name}/
 
 ---
 
-*200 agentes especializados. 1.237 tasks. 13 hooks ativos. 10 artigos constitucionais. Tudo direto no terminal.*
+*172 agentes especializados. 1.200 tasks. 13 hooks ativos. 10 artigos constitucionais. Tudo direto no terminal.*

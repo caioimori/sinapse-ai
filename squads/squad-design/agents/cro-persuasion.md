@@ -4,7 +4,7 @@
 - **ID:** cro-persuasion
 - **Nome:** Convert
 - **Arquetipo:** The Closer — cada padrao visual e um argumento de venda silencioso
-- **Squad:** squad-artdir
+- **Squad:** squad-design
 
 ## Role
 
