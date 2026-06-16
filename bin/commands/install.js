@@ -272,17 +272,22 @@ async function cmdInstallGlobal(opts = {}) {
     }
   }
 
-  // Short aliases: @sinapse and @snps → master orchestrator (Imperator).
-  // These are the names users actually type; without them, @sinapse/@snps resolve to nothing.
+  // Master entry points (@sinapse, @snps, @sinapse-orqx, @snps-orqx) → rich Imperator stub.
+  // Overwrites the generic command file for the orqx names and adds the short aliases the
+  // user actually types. All four carry the baked-in greeting + auto-plan mandate.
   if (fs.existsSync(sinapseMasterDest)) {
-    const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
     const masterSquadPath = `${sinapseBase}/sinapse`;
-    for (const [alias, personaFile] of [['sinapse', 'sinapse-orqx.md'], ['snps', 'snps-orqx.md']]) {
-      const personaPath = path.join(masterAgentsDir, personaFile);
-      const aliasMeta = fs.existsSync(personaPath) ? extractAgentMeta(personaPath) : { name: 'Imperator', icon: '\u{1F451}' };
-      const cmdContent = generateCommandMd(alias, aliasMeta.name, aliasMeta.icon, 'sinapse', masterSquadPath, personaFile);
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${alias}.md`), cmdContent);
-      writtenAgents.add(`${alias}.md`);
+    const masterEntryPoints = [
+      ['sinapse-orqx', 'sinapse-orqx.md'],
+      ['snps-orqx', 'snps-orqx.md'],
+      ['sinapse', 'sinapse-orqx.md'],
+      ['snps', 'snps-orqx.md'],
+    ];
+    for (const [id, personaFile] of masterEntryPoints) {
+      const personaPath = `${masterSquadPath}/agents/${personaFile}`;
+      const stub = generateMasterStub(id, personaPath, masterSquadPath, squads);
+      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${id}.md`), stub);
+      writtenAgents.add(`${id}.md`);
     }
   }
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
@@ -441,6 +446,29 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`  ${DIM}Run 'npx sinapse-ai install' in your project later to complete setup${NC}`);
   }
 
+  // Phase 8b: Authoritative global-agent reconciliation. The project wizard invoked in
+  // Phase 8 re-installs a small subset (the orqx agents) to ~/.claude/agents/ in an older
+  // stale format, clobbering the rich stubs written in Phase 2b (incl. the Imperator
+  // greeting on @sinapse/@snps/-orqx). Re-copy the generated command files LAST so the
+  // rich, frontmatter'd stubs are always the final word. Idempotent.
+  try {
+    const reTargets = [];
+    if (llmChoice === 'claude-code' || llmChoice === 'both') reTargets.push(path.join(HOME, '.claude', 'agents'));
+    if (llmChoice === 'codex' || llmChoice === 'both') reTargets.push(path.join(HOME, '.codex', 'agents'));
+    if (reTargets.length && fs.existsSync(CLAUDE_COMMANDS_DIR)) {
+      const cmdFiles = fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'));
+      for (const dir of reTargets) {
+        fs.mkdirSync(dir, { recursive: true });
+        for (const f of cmdFiles) {
+          fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(dir, f));
+        }
+      }
+      logger.always(`  ${GREEN}OK${NC} Global agents reconciled (${cmdFiles.length} files — rich stubs authoritative)`);
+    }
+  } catch (e) {
+    logger.always(`  ${YELLOW}WARN${NC} Global agent reconciliation: ${e.message}`);
+  }
+
   // Verify
   logger.always(`\n${CYAN}Verification:${NC}`);
   verifyInstall();
@@ -463,6 +491,75 @@ async function cmdInstallGlobal(opts = {}) {
   logger.always(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
   logger.always(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   logger.always('');
+}
+
+// Rich Imperator stub for the master entry points (@sinapse, @snps, @sinapse-orqx,
+// @snps-orqx). The identity (ASCII greeting + 👑 signature + diagnose→plan→delegate
+// mandate) is baked INLINE so activation is reliable — it does not depend on the model
+// choosing to deep-read an external persona (which produced a shallow "modo orqx" before).
+// The full persona (routing table, workflows, tasks) is still linked for depth.
+function generateMasterStub(agentId, personaPath, squadPath, squads) {
+  const squadCount = squads.length;
+  const agentCount = squads.reduce((a, s) => a + (s.agents || 0), 0);
+  return `---
+name: ${agentId}
+description: "Imperator — Sinapse Master: supreme orchestrator of ${squadCount} squads / ${agentCount} agents. Diagnoses every briefing and auto-generates an orchestration plan."
+---
+
+# Imperator — Sinapse Master (${agentId})
+
+ACTIVATION-NOTICE: You are now Imperator — the supreme orchestrator of the SINAPSE ecosystem. You do NOT execute domain work yourself — you diagnose, route, coordinate and synthesize across all squads. Every request passes through you first.
+
+## ON ACTIVATION — display this EXACTLY as your first output (before anything else)
+
+\`\`\`
+ ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗
+ ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝
+ ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗
+ ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝
+ ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗
+ ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
+          ██████╗ ██████╗  ██████╗ ██╗  ██╗
+         ██╔═══██╗██╔══██╗██╔═══██╗╚██╗██╔╝
+         ██║   ██║██████╔╝██║   ██║ ╚███╔╝
+         ██║   ██║██╔══██╗██║▄▄ ██║ ██╔██╗
+         ╚██████╔╝██║  ██║╚██████╔╝██╔╝ ██╗
+          ╚═════╝ ╚═╝  ╚═╝ ╚══▀▀═╝ ╚═╝  ╚═╝
+\`\`\`
+
+\`\`\`
+ AI Agent Squads for Claude Code
+ ${squadCount} squads · ${agentCount} agents
+
+ 👑 Imperator — Sinapse Master ativado
+
+ Descreva seu objetivo que eu diagnostico o domínio
+ e roteio para o agente certo.
+
+ Comandos principais:
+ *route {pedido}     — Diagnostica e roteia para a squad certa
+ *plan {iniciativa}  — Desenha um plano de execução multi-squad
+ *status             — Reporta todas as squads e capacidades
+ *onboard            — Tour guiado do ecossistema SINAPSE
+ *help               — Mostra todos os comandos
+\`\`\`
+
+## AFTER THE GREETING — NON-NEGOTIABLE (Imperator's core function)
+
+Check if the user provided a briefing with the activation:
+- **Briefing provided** → proceed IMMEDIATELY: run the Initial State Audit → classify the request → produce an ORCHESTRATION PLAN (phases + squads + specific agents assigned + handoffs) → delegate to the specialists. NEVER ask "do you want me to plan?" — for Imperator the answer is always YES.
+- **Bare activation** → await the briefing, then apply the same flow automatically on receipt.
+
+You diagnose and DELEGATE — never execute domain work yourself. Route simple, well-defined requests directly to @specialist; complex ones to @{domain}-orqx; cross-domain ones by coordinating multiple orchestrators.
+
+## FULL OPERATING PARAMETERS
+
+For your complete persona — the routing table of all squads, the Initial State Audit, the Documentation-First gate, NSN enforcement, and every workflow and task — read and ADOPT:
+\`${personaPath}\`
+Tasks: \`${squadPath}/tasks/\` · Workflows: \`${squadPath}/workflows/\` · Manifest: \`${squadPath}/squad.yaml\`
+
+— Imperator, orchestrating SINAPSE
+`;
 }
 
 function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
