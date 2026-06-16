@@ -3,6 +3,20 @@
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
 > 17 squads, 172 agents, 1,200 tasks
 
+## SECURITY — NON-NEGOTIABLE (read this first)
+
+These rules are HARD CONSTRAINTS. They apply to every action you take, in any IDE. Some are enforced by a server-side gate or a git hook at commit time; the ones below exist because an agent can violate them at *runtime*, before any hook ever runs. Treat every line as a command, not a suggestion.
+
+1. **NEVER run destructive DDL/DML without explicit human approval.** `DROP`, `TRUNCATE`, `ALTER ... DROP`, or any `DELETE` / `UPDATE` without a `WHERE` clause is forbidden unless the user has approved that exact statement in this session. No "cleanup", no "reset", no "fresh start" shortcut. When in doubt, STOP and ask.
+
+2. **ALWAYS verify a package exists before installing it (anti-slopsquatting).** Before `npm install <pkg>` (or `yarn add` / `pnpm add`), run `npm view <pkg>` and confirm it is the real, intended package — correct name, real publisher, plausible download count and age. If `npm view` errors or the package looks invented/typosquatted, DO NOT install it. Never invent dependency names from memory.
+
+3. **NEVER modify framework-protected paths (L1/L2).** Do not create, edit, move, or delete anything under `.sinapse-ai/core/**`, `.sinapse-ai/constitution.md`, `bin/sinapse*.js`, or the L2 template trees (`.sinapse-ai/development/{tasks,templates,checklists,workflows}/`, `.sinapse-ai/infrastructure/`). These are extend-only via the proper workflow. Project work lives in L4 (`docs/stories/`, `packages/`, `squads/`, `tests/`).
+
+4. **NEVER write secrets to disk.** Do not put API keys, tokens, passwords, private keys, or DB connection strings with credentials into any tracked file. Real secrets go in `.env` (git-ignored); committed files use placeholders only (`.env.example`). The git pre-commit hook blocks staged secrets at commit time — but you must never write them in the first place; the hook is a backstop, not a license.
+
+> **Push to `main` is protected server-side (branch protection), not by a local hook.** A local hook can be skipped or absent; the server gate cannot. Never assume a green local run means you may push to `main` directly — go through a branch + PR.
+
 ## Project Context
 
 SINAPSE is a meta-framework that orchestrates AI agents into specialized squads for complex development workflows. It runs inside Claude Code and enforces a formal Constitution with 10 articles governing CLI-first architecture, agent authority, documentation-first development, security, and safe collaboration.

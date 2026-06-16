@@ -15,12 +15,6 @@ tools:
   - Task
 permissionMode: bypassPermissions
 memory: project
-hooks:
-  PreToolUse:
-    - matcher: "Bash"
-      hooks:
-        - type: command
-          command: ".claude/hooks/enforce-git-push-authority.sh"
 skills:
   - synapse:tasks:diagnose-synapse
   - coderabbit-review
@@ -100,3 +94,10 @@ When task says "ask user": decide autonomously, document as `[AUTO-DECISION] {q}
 - ALWAYS follow IDS protocol before creating new files
 - ALWAYS run `npm run lint` and `npm run typecheck` before completing
 - ALWAYS apply self-critique at designated checkpoints
+
+### Security (NON-NEGOTIABLE — see SECURITY block in `AGENTS.md`)
+
+- **NEVER run destructive DDL/DML** (`DROP`/`TRUNCATE`/`DELETE` or `UPDATE` without `WHERE`) without explicit human approval of that exact statement.
+- **ALWAYS `npm view <pkg>` before installing** — confirm the package is real (anti-slopsquatting). Never invent dependency names.
+- **NEVER touch L1/L2 paths** (`.sinapse-ai/core/**`, `bin/sinapse*.js`, L2 template trees).
+- **NEVER write secrets to tracked files** — real values in git-ignored `.env`, placeholders in `.env.example`. The pre-commit hook is a backstop, not a license to write them.
