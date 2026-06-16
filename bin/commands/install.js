@@ -149,24 +149,7 @@ async function cmdInstallGlobal(opts = {}) {
   // Honors upsert + --reconfigure semantics established by Stories 10.20/10.35.
   await promptGroundingSections({ isUpsert, reconfigure });
 
-  // Pre-install summary — surface every resolved choice before any
-  // destructive action so the user can abort if something looks wrong.
-  // This is part of the install UX hardening for the GA release: even when
-  // settings are reused (silent skip path), the user still sees what the
-  // installer is about to do.
-  logger.always('');
-  logger.always(`${BOLD}──── Resumo da instalacao ────${NC}`);
-  const langLabelMap = { pt: 'Portugues', portuguese: 'Portugues', en: 'English', english: 'English' };
-  logger.always(`  Idioma:    ${langLabelMap[language] || language}`);
-  const llmLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
-  logger.always(`  IDE:       ${llmLabel}`);
-  logger.always(`  Modo:      ${isUpsert ? 'upsert (atualizar instalacao existente)' : 'fresh install'}`);
-  logger.always(`  Destino:   ~/.sinapse/`);
-  logger.always(`${BOLD}──────────────────────────────${NC}`);
-  logger.always('');
-  logger.always(`${BOLD}Instalando Sinapse globalmente...${NC}\n`);
-
-  // Validate package — squads live in squads/ subdirectory
+  // Validate package + compute what will be installed (squads live in squads/).
   const squadsDir = path.join(ROOT, 'squads');
   const squads = getSquads(fs.existsSync(squadsDir) ? squadsDir : ROOT);
   if (squads.length === 0) {
@@ -175,6 +158,65 @@ async function cmdInstallGlobal(opts = {}) {
     logger.error(`Se persistir, abra um issue: https://github.com/caioimori/sinapse-ai/issues`);
     process.exit(1);
   }
+
+  // ── Didactic preview + confirmation gate ─────────────────────────
+  // Surface EXACTLY what will be installed before any destructive action, and
+  // (interactive mode only) require an explicit choice before writing anything.
+  // Non-interactive / --yes / CI skips the gate and proceeds.
+  const langLabelMap = { pt: 'Portugues', portuguese: 'Portugues', en: 'English', english: 'English' };
+  const llmLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
+  const agentTotal = squads.reduce((a, s) => a + (s.agents || 0), 0);
+  let hookCount = 0;
+  try {
+    hookCount = fs.readdirSync(path.join(ROOT, '.claude', 'hooks')).filter(f => /\.(cjs|js|py|sh)$/.test(f)).length;
+  } catch { /* hooks dir optional */ }
+
+  logger.always('');
+  logger.always(`${BOLD}──── O que será instalado ────${NC}`);
+  logger.always(`  ${BOLD}${squads.length}${NC} squads · ${BOLD}${agentTotal}${NC} agentes especializados`);
+  logger.always(`  Orquestrador master (Imperator) — chamável por ${CYAN}@sinapse${NC} / ${CYAN}@snps${NC}`);
+  if (hookCount) logger.always(`  ${hookCount} hooks de proteção + regras do framework`);
+  logger.always(`  Editor(es): ${BOLD}${llmLabel}${NC}`);
+  logger.always(`  Idioma: ${langLabelMap[language] || language}`);
+  logger.always(`  Modo: ${isUpsert ? 'atualizar instalação existente' : 'instalação nova'}`);
+  logger.always(`  Destino: ${DIM}~/.sinapse/${NC} (núcleo) + ${DIM}~/.claude/agents/${NC} (agentes)`);
+  logger.always(`${BOLD}──────────────────────────────${NC}`);
+
+  if (detectInteractiveMode()) {
+    const inquirer = require('inquirer');
+    let proceed = false;
+    while (!proceed) {
+      const { action } = await inquirer.prompt([{
+        type: 'list',
+        name: 'action',
+        message: 'Pronto para instalar:',
+        default: 'install',
+        choices: [
+          { name: 'Instalar agora', value: 'install' },
+          { name: 'Ver em detalhe o que será instalado', value: 'details' },
+          { name: 'Cancelar (nada será alterado)', value: 'cancel' },
+        ],
+      }]);
+      if (action === 'cancel') {
+        logger.always(`\n${YELLOW}Instalação cancelada. Nada foi alterado.${NC}`);
+        return;
+      }
+      if (action === 'details') {
+        logger.always('');
+        logger.always(`${BOLD}Squads e agentes:${NC}`);
+        for (const s of squads) {
+          logger.always(`  • ${s.name.replace(/^squad-/, '')} — ${s.agents} agentes`);
+        }
+        logger.always('');
+        logger.always(`${DIM}Também instala: o orquestrador master, ${hookCount} hooks de proteção, as regras do framework e os comandos /SINAPSE:agents:* .${NC}`);
+        logger.always(`${DIM}Onde: o núcleo vai para ~/.sinapse/ e os agentes chamáveis para ~/.claude/agents/. Nada fora disso é tocado.${NC}`);
+        continue;
+      }
+      proceed = true;
+    }
+  }
+
+  logger.always(`\n${BOLD}Instalando Sinapse globalmente...${NC}\n`);
 
   // Phase 1: Copy squads to ~/.sinapse/
   logger.always(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);

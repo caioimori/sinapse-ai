@@ -31,6 +31,29 @@ const {
 const { promptLlmChoice } = require('../lib/prompts');
 const { generateCommandMd, generateSquadAwareness } = require('./install');
 const { registerGroundingHooks, HOOK_FILENAMES } = require('../lib/register-grounding-hooks');
+const { execSync } = require('child_process');
+
+// Query the latest version published to npm. Returns null when npm is unreachable.
+function fetchLatestVersion() {
+  try {
+    const out = execSync('npm view sinapse-ai version', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      timeout: 15000,
+    });
+    return (out || '').trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+function isNewerVersion(candidate, current) {
+  try {
+    return require('semver').gt(candidate, current);
+  } catch {
+    return candidate !== current;
+  }
+}
 
 async function cmdUpdateGlobal() {
   const logger = getLogger();
@@ -44,6 +67,35 @@ async function cmdUpdateGlobal() {
   // Story 10.22 — reuse settings from existing install
   const existing = detectExistingInstall();
   const prevVer = existing.prevMeta && existing.prevMeta.version ? existing.prevMeta.version : 'unknown';
+
+  // Real update (like `claude update`): fetch the latest published version and, if
+  // it is newer than what is running, download + apply it, then hand off to the
+  // freshly installed binary to re-sync. `--local` / `--no-fetch` skip this (used by
+  // the handoff to avoid a loop, and for offline re-sync of the running version).
+  const skipFetch = process.argv.includes('--local') || process.argv.includes('--no-fetch');
+  if (!skipFetch) {
+    const latest = fetchLatestVersion();
+    if (latest && isNewerVersion(latest, VERSION)) {
+      logger.always(`${BOLD}  Nova versão disponível: v${latest}${NC} ${DIM}(você está na v${VERSION})${NC}`);
+      logger.always(`${DIM}  Baixando e aplicando a versão nova...${NC}\n`);
+      try {
+        execSync('npm install -g sinapse-ai@latest', { stdio: 'inherit' });
+        // Hand off to the new version to apply it. No loop: once installed, the new
+        // run sees latest === running and falls through to the local re-sync.
+        execSync('sinapse-ai update --local', { stdio: 'inherit' });
+        logger.always(`\n${GREEN}Atualizado para v${latest}.${NC}`);
+        return;
+      } catch (e) {
+        const reason = (e && e.message ? e.message.split('\n')[0] : 'erro desconhecido');
+        logger.always(`\n${YELLOW}Não consegui atualizar automaticamente (${reason}).${NC}`);
+        logger.always(`${DIM}  Rode manualmente: ${CYAN}! npm install -g sinapse-ai@latest${NC} e depois ${CYAN}sinapse update${NC}.${NC}`);
+        logger.always(`${DIM}  Seguindo com a versão atual por enquanto...${NC}\n`);
+        // fall through to local re-sync below
+      }
+    } else if (latest) {
+      logger.always(`${GREEN}  Você já está na versão mais recente (v${VERSION}).${NC}\n`);
+    }
+  }
 
   // Welcome back screen
   logger.always(`${BOLD}  Que bom que voce voltou!${NC}`);
