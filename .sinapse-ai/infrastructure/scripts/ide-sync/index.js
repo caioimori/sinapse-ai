@@ -24,14 +24,9 @@ const yaml = require('js-yaml');
 const { parseAllAgents } = require('./agent-parser');
 const { generateAllRedirects, writeRedirects } = require('./redirect-generator');
 const { validateAllIdes, formatValidationReport } = require('./validator');
-const { syncGeminiCommands, buildGeminiCommandFiles } = require('./gemini-commands');
 
-// Transformers
+// Transformers (Claude Code + Codex only — secondary IDE adapters removed)
 const claudeCodeTransformer = require('./transformers/claude-code');
-const cursorTransformer = require('./transformers/cursor');
-const antigravityTransformer = require('./transformers/antigravity');
-const githubCopilotTransformer = require('./transformers/github-copilot');
-const kimiTransformer = require(path.resolve(__dirname, 'transformers', 'kimi'));
 
 // ANSI colors for output
 const colors = {
@@ -67,31 +62,6 @@ function loadConfig(projectRoot) {
         enabled: true,
         path: '.codex/agents',
         format: 'full-markdown-yaml',
-      },
-      gemini: {
-        enabled: true,
-        path: '.gemini/rules/SINAPSE/agents',
-        format: 'full-markdown-yaml',
-      },
-      'github-copilot': {
-        enabled: true,
-        path: '.github/agents',
-        format: 'github-copilot',
-      },
-      cursor: {
-        enabled: true,
-        path: '.cursor/rules/agents',
-        format: 'condensed-rules',
-      },
-      antigravity: {
-        enabled: true,
-        path: '.antigravity/rules/agents',
-        format: 'cursor-style',
-      },
-      kimi: {
-        enabled: true,
-        path: '.kimi/skills',
-        format: 'kimi-skill',
       },
     },
     redirects: {
@@ -131,10 +101,6 @@ function loadConfig(projectRoot) {
 function getTransformer(format) {
   const transformers = {
     'full-markdown-yaml': claudeCodeTransformer,
-    'condensed-rules': cursorTransformer,
-    'cursor-style': antigravityTransformer,
-    'github-copilot': githubCopilotTransformer,
-    'kimi-skill': kimiTransformer,
   };
 
   const transformer = transformers[format];
@@ -334,13 +300,7 @@ async function commandSync(options) {
 
     const result = syncIde(agents, ideConfig, ideName, projectRoot, options);
 
-    // Gemini CLI: also sync slash launcher command files (.gemini/commands/*.toml)
-    if (ideName === 'gemini') {
-      const geminiCommands = syncGeminiCommands(agents, projectRoot, options);
-      result.commandFiles = geminiCommands.files;
-    } else {
-      result.commandFiles = [];
-    }
+    result.commandFiles = [];
 
     results.push(result);
 
@@ -473,18 +433,6 @@ async function commandValidate(options) {
       expectedFiles,
       targetDir: path.join(projectRoot, ideConfig.path),
     };
-
-    // Gemini CLI command launcher files are synced under .gemini/commands/*.toml
-    if (ideName === 'gemini') {
-      const commandFiles = buildGeminiCommandFiles(agents).map((entry) => ({
-        filename: entry.filename,
-        content: entry.content,
-      }));
-      ideConfigs['gemini-commands'] = {
-        expectedFiles: commandFiles,
-        targetDir: path.join(projectRoot, '.gemini', 'commands'),
-      };
-    }
   }
 
   // Validate

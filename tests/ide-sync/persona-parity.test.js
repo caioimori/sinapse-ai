@@ -1,21 +1,14 @@
 /**
- * PARIDADE-IDE-002 — IDE stubs now preserve the persona contract.
+ * PARIDADE-IDE-002 — persona-renderer preserves the persona contract.
  *
- * Before: cursor/antigravity emitted only name/title/whenToUse + commands
- * (~8% of the agent). These tests assert the role/identity/style/focus + core
- * principles now reach every IDE format.
+ * These tests assert the role/identity/style/focus + core principles are
+ * rendered into the shared persona block consumed by the IDE transformers.
  */
 
-const path = require('path');
 const {
   renderPersona,
   renderCorePrinciples,
 } = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/persona-renderer');
-const { parseAgentFile } = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/agent-parser');
-
-const DEV_AGENT = path.resolve(
-  __dirname, '..', '..', '.sinapse-ai', 'development', 'agents', 'developer.md',
-);
 
 describe('persona-renderer', () => {
   test('renderCorePrinciples handles strings and {KEY: value} objects', () => {
@@ -60,20 +53,24 @@ describe('persona-renderer', () => {
   });
 });
 
-describe('IDE transformers keep the persona (PARIDADE-IDE-002)', () => {
-  const r = parseAgentFile(DEV_AGENT);
+describe('claude-code transformer keeps the persona (PARIDADE-IDE-002)', () => {
+  const path = require('path');
+  const { parseAgentFile } = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/agent-parser');
+  const claudeCode = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code');
 
-  for (const t of ['cursor', 'antigravity', 'github-copilot']) {
-    test(`${t} stub includes role + identity + focus + core principles`, () => {
-      const transformer = require(`../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/${t}.js`);
-      const out = transformer.transform(r);
-      // Role appears either as "**Role:**" (cursor/antigravity) or "expert <role>" (copilot).
-      expect(/Role|expert /i.test(out)).toBe(true);
-      expect(out).toMatch(/Identity/i);
-      expect(out).toMatch(/Focus/i);
-      expect(out).toMatch(/Core Principles/i);
-      // Materially richer than the old label-only stub.
-      expect(out.length).toBeGreaterThan(1200);
-    });
-  }
+  const DEV_AGENT = path.resolve(
+    __dirname, '..', '..', '.sinapse-ai', 'development', 'agents', 'developer.md',
+  );
+
+  test('claude-code output includes role + identity + focus + core principles', () => {
+    const r = parseAgentFile(DEV_AGENT);
+    const out = claudeCode.transform(r);
+    // claude-code is an identity transform: the full agent definition (with the
+    // persona YAML + body) reaches the IDE verbatim.
+    expect(/Role|role:/i.test(out)).toBe(true);
+    expect(out).toMatch(/Identity|identity:/i);
+    expect(out).toMatch(/Focus|focus:/i);
+    expect(out).toMatch(/Core Principles|core_principles:/i);
+    expect(out.length).toBeGreaterThan(1200);
+  });
 });
