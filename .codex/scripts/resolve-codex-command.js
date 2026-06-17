@@ -4,6 +4,11 @@
 const fs = require('fs');
 const path = require('path');
 
+const {
+  resolveCodexAgent,
+  resolveCodexAgentCommand,
+} = require('./resolve-codex-agent');
+
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const REGISTRY_PATH = path.join(PROJECT_ROOT, '.codex', 'command-registry.json');
 
@@ -62,23 +67,80 @@ function resolveCommand(agentSpec, commandInput) {
 function resolveCodexCommand(agentInput, commandInput, projectRoot = PROJECT_ROOT) {
   const registry = loadCommandRegistry(projectRoot);
   const agent = resolveAgent(registry, agentInput);
-  if (!agent) {
-    throw new Error(`Unknown Codex agent "${agentInput}"`);
+
+  // Tier 1 — curated registry (the SDC core agents with explicit command maps).
+  if (agent) {
+    const command = resolveCommand(agent.agentSpec, commandInput);
+    if (command) {
+      return {
+        agentId: agent.agentId,
+        skillId: agent.agentSpec.skillId,
+        commandId: command.commandId,
+        kind: command.commandSpec.kind,
+        target: command.commandSpec.target,
+        resources: command.commandSpec.resources || [],
+        sourceOfTruth: agent.agentSpec.sourceOfTruth,
+        resolvedBy: 'registry',
+      };
+    }
+    // Agent is in the registry but the command isn't — fall through to the
+    // parametric activator (the agent may own squad/dev tasks beyond its
+    // curated commands).
   }
 
-  const command = resolveCommand(agent.agentSpec, commandInput);
-  if (!command) {
-    throw new Error(`Unknown Codex command "${commandInput}" for agent "${agent.agentId}"`);
+  // Tier 2 — parametric activator: resolves ANY of the ~172 agents and the
+  // tasks they actually own from source, with on-disk pointer verification.
+  try {
+    const parametric = resolveCodexAgentCommand(agentInput, commandInput, projectRoot);
+    return {
+      agentId: parametric.agentId,
+      skillId: null,
+      squad: parametric.squad,
+      commandId: parametric.commandId,
+      kind: parametric.kind,
+      target: parametric.target,
+      resources: [],
+      sourceOfTruth: parametric.sourceOfTruth,
+      resolvedBy: 'activator',
+    };
+  } catch (err) {
+    // If the agent existed in the curated registry but neither tier knew the
+    // command, report a command error (not an agent error).
+    if (agent && /Unknown Codex agent/.test(err.message)) {
+      throw new Error(
+        `Unknown Codex command "${commandInput}" for agent "${agent.agentId}"`,
+      );
+    }
+    throw err;
   }
+}
 
+/**
+ * Resolve an agent (without a specific command) across BOTH tiers. Returns the
+ * curated registry entry when present, otherwise the parametric activator view.
+ * Guarantees every one of the ~172 agents resolves — never "Unknown Codex agent".
+ */
+function resolveCodexAgentEntry(agentInput, projectRoot = PROJECT_ROOT) {
+  const registry = loadCommandRegistry(projectRoot);
+  const agent = resolveAgent(registry, agentInput);
+  if (agent) {
+    return {
+      agentId: agent.agentId,
+      skillId: agent.agentSpec.skillId,
+      sourceOfTruth: agent.agentSpec.sourceOfTruth,
+      commands: Object.keys(agent.agentSpec.commands || {}),
+      resolvedBy: 'registry',
+    };
+  }
+  const parametric = resolveCodexAgent(agentInput, projectRoot);
   return {
-    agentId: agent.agentId,
-    skillId: agent.agentSpec.skillId,
-    commandId: command.commandId,
-    kind: command.commandSpec.kind,
-    target: command.commandSpec.target,
-    resources: command.commandSpec.resources || [],
-    sourceOfTruth: agent.agentSpec.sourceOfTruth,
+    agentId: parametric.agentId,
+    skillId: null,
+    squad: parametric.squad,
+    sourceOfTruth: parametric.sourceOfTruth,
+    taskCount: parametric.taskCount,
+    commands: parametric.tasks.map((t) => t.command),
+    resolvedBy: 'activator',
   };
 }
 
@@ -142,6 +204,7 @@ module.exports = {
   resolveAgent,
   resolveCommand,
   resolveCodexCommand,
+  resolveCodexAgentEntry,
   parseArgs,
   formatHumanResult,
 };

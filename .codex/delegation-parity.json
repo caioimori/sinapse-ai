@@ -137,7 +137,7 @@
         "claude-orqx",
         "claude"
       ],
-      "sourceOfTruth": ".codex/agents/claude-orqx.md",
+      "sourceOfTruth": ".codex/agents/swarm-orqx.md",
       "approvedRoutes": [
         "claude-project-setup"
       ]
@@ -198,7 +198,7 @@
         "pm",
         "project-lead"
       ],
-      "sourceOfTruth": ".codex/agents/pm.md",
+      "sourceOfTruth": ".codex/agents/project-lead.md",
       "registryAgentId": "sinapse-pm"
     },
     "sinapse-po": {
@@ -207,7 +207,7 @@
         "po",
         "product-lead"
       ],
-      "sourceOfTruth": ".codex/agents/po.md",
+      "sourceOfTruth": ".codex/agents/product-lead.md",
       "registryAgentId": "sinapse-po"
     },
     "sinapse-sm": {
@@ -216,7 +216,7 @@
         "sm",
         "sprint-lead"
       ],
-      "sourceOfTruth": ".codex/agents/sm.md",
+      "sourceOfTruth": ".codex/agents/sprint-lead.md",
       "registryAgentId": "sinapse-sm"
     },
     "sinapse-dev": {
@@ -225,7 +225,7 @@
         "dev",
         "developer"
       ],
-      "sourceOfTruth": ".codex/agents/dev.md",
+      "sourceOfTruth": ".codex/agents/developer.md",
       "registryAgentId": "sinapse-dev"
     },
     "sinapse-qa": {
@@ -234,7 +234,7 @@
         "qa",
         "quality-gate"
       ],
-      "sourceOfTruth": ".codex/agents/qa.md",
+      "sourceOfTruth": ".codex/agents/quality-gate.md",
       "registryAgentId": "sinapse-qa"
     }
   },
@@ -412,7 +412,7 @@
       ],
       "sharedSurfaceRisk": "medium",
       "resources": [
-        ".codex/agents/claude-orqx.md",
+        ".codex/agents/swarm-orqx.md",
         ".codex/agents/project-integrator.md",
         "squads/squad-claude/tasks/claude-code-project-setup.md"
       ],
@@ -422,7 +422,7 @@
           "fromType": "orqx",
           "to": "claude-orqx",
           "toType": "orqx",
-          "path": ".codex/agents/claude-orqx.md",
+          "path": ".codex/agents/swarm-orqx.md",
           "handoff": "delegate-to-squad",
           "reason": "Runtime and setup parity work belongs to the Claude mastery squad."
         },
@@ -601,7 +601,7 @@
           "fromType": "orqx",
           "to": "sinapse-pm",
           "toType": "framework-agent",
-          "path": ".codex/agents/pm.md",
+          "path": ".codex/agents/project-lead.md",
           "resolver": "command-registry",
           "command": "create-prd",
           "handoff": "define-scope",
@@ -612,7 +612,7 @@
           "fromType": "framework-agent",
           "to": "sinapse-po",
           "toType": "framework-agent",
-          "path": ".codex/agents/po.md",
+          "path": ".codex/agents/product-lead.md",
           "resolver": "command-registry",
           "command": "validate-story",
           "handoff": "validate-backlog-readiness",
@@ -623,7 +623,7 @@
           "fromType": "framework-agent",
           "to": "sinapse-sm",
           "toType": "framework-agent",
-          "path": ".codex/agents/sm.md",
+          "path": ".codex/agents/sprint-lead.md",
           "resolver": "command-registry",
           "command": "draft",
           "handoff": "draft-implementation-story",
@@ -634,7 +634,7 @@
           "fromType": "framework-agent",
           "to": "sinapse-dev",
           "toType": "framework-agent",
-          "path": ".codex/agents/dev.md",
+          "path": ".codex/agents/developer.md",
           "resolver": "command-registry",
           "command": "develop",
           "handoff": "implement-story",
@@ -645,7 +645,7 @@
           "fromType": "framework-agent",
           "to": "sinapse-qa",
           "toType": "framework-agent",
-          "path": ".codex/agents/qa.md",
+          "path": ".codex/agents/quality-gate.md",
           "resolver": "command-registry",
           "command": "gate",
           "handoff": "issue-quality-gate",

@@ -1,7 +1,11 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 17 squads, 172 agents, 1,200 tasks
+> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,410 task files, 1,348 resolvable via the parametric activator
+>
+> Codex resolves every agent and its real tasks at runtime from source (no frozen
+> snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
+> Counts are measured from disk — run `… resolve-codex-agent.js --stats` to verify.
 
 ## SECURITY — NON-NEGOTIABLE (read this first)
 
@@ -35,11 +39,27 @@ SINAPSE is a meta-framework that orchestrates AI agents into specialized squads 
 bin/                      # CLI executables (sinapse.js, sinapse-init.js)
 docs/stories/             # Development stories (active/, completed/)
 packages/                 # Shared packages
-squads/                   # Squad expansions (19 domain squads)
+squads/                   # Squad expansions (17 domain squads)
 tests/                    # Test suites
 ```
 
 ## Agents
+
+The core SDC agents below are documented in full. They are NOT the whole roster:
+**every one of the 172 agents** (12 core + 160 squad specialists/orchestrators across
+17 squads) resolves by `@name` and so do their real tasks. Resolution is parametric —
+read from the source agent definitions at runtime, never from a frozen list:
+
+```bash
+node .codex/scripts/resolve-codex-agent.js <agent>            # agent + its resolvable tasks
+node .codex/scripts/resolve-codex-agent.js <agent> <command>  # resolve a specific task pointer
+node .codex/scripts/resolve-codex-agent.js --stats            # ecosystem counts (measured from disk)
+```
+
+Examples that resolve (no "Unknown Codex agent"): `@brand-orqx`, `@meta-ads-specialist`,
+`@cyber-orqx`, `@headline-specialist`, `@simon-sinek`, `@developer`. Squad specialists
+inherit their squad's task pool; orchestrators (`*-orqx`) govern their whole squad.
+Every task pointer the activator emits is verified to exist on disk before it is returned.
 
 ### @developer (Pixel)
 - **Role:** Full Stack Developer -- code implementation, debugging, refactoring

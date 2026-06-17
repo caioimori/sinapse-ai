@@ -9,8 +9,8 @@ description: Claude Code, MCP, hooks, skills, integracao avancada
 Claude Code, MCP, hooks, skills, integracao avancada
 
 ## Activation Protocol
-1. Load `squads/squad-claude/agents/claude-orqx.md` as source of truth (fallback: `.codex/agents/claude-orqx.md`).
-2. Load squad knowledge base from `squads/squad-claude/knowledge-base/`.
+1. Load `squads/claude-code-mastery/agents/swarm-orqx.md` as source of truth (fallback: `.codex/agents/swarm-orqx.md`).
+2. Load squad knowledge base from `squads/claude-code-mastery/knowledge-base/`.
 3. Adopt the orqx persona and command system.
 4. Stay in this persona until the user asks to switch or exit.
 
@@ -24,5 +24,5 @@ Claude Code, MCP, hooks, skills, integracao avancada
 ## Non-Negotiables
 - Follow `.sinapse-ai/constitution.md`.
 - Load squad KB before executing any task.
-- Execute tasks only from `squads/squad-claude/tasks/`.
+- Execute tasks only from `squads/claude-code-mastery/tasks/`.
 - Output quality: 5.0/5.0 minimum.

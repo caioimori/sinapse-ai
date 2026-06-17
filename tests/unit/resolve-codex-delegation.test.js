@@ -9,8 +9,7 @@ const {
   resolveCodexDelegation,
 } = require('../../.codex/scripts/resolve-codex-delegation');
 
-// TODO: buildHandoffPacket not yet exported — re-enable when delegation is complete
-describe.skip('resolve-codex-delegation', () => {
+describe('resolve-codex-delegation', () => {
   let tmpRoot;
 
   beforeEach(() => {

@@ -9,7 +9,7 @@ Load the agent file from `.codex/agents/{agent-name}.md`, adopt the persona, and
 
 Examples:
 - `@brand-orqx` → Load `.codex/agents/brand-orqx.md`
-- `@developer` → Load `.codex/agents/dev.md`
+- `@developer` → Load `.codex/agents/developer.md`
 - `@architect` → Load `.codex/agents/architect.md`
 - `@copy-orqx` → Load `.codex/agents/copy-orqx.md`
 
@@ -59,11 +59,11 @@ Agent commands. Only work when an agent is active:
 ### Shortcut aliases
 | Alias | Maps to |
 |-------|---------|
-| `@dev` | `.codex/agents/dev.md` (Developer) |
-| `@qa` | `.codex/agents/qa.md` (Quality Gate) |
-| `@pm` | `.codex/agents/pm.md` (Project Lead) |
-| `@po` | `.codex/agents/po.md` (Product Lead) |
-| `@sm` | `.codex/agents/sm.md` (Sprint Lead) |
+| `@dev` | `.codex/agents/developer.md` (Developer) |
+| `@qa` | `.codex/agents/quality-gate.md` (Quality Gate) |
+| `@pm` | `.codex/agents/project-lead.md` (Project Lead) |
+| `@po` | `.codex/agents/product-lead.md` (Product Lead) |
+| `@sm` | `.codex/agents/sprint-lead.md` (Sprint Lead) |
 
 ## Constitution
 

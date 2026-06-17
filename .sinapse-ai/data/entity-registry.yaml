@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-16T17:13:39.363Z'
-  entityCount: 809
+  lastUpdated: '2026-06-17T08:20:38.537Z'
+  entityCount: 811
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -753,8 +753,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:c1c035a710707f65df3510fba9da4abae7a478800c73f7d9ec63a1631b807dcd
-      lastVerified: '2026-06-15T01:36:42.628Z'
+      checksum: sha256:bb4244dcccedbe80018f0ffc7c178f0af5e06d0647a952023b00d6d75abd5398
+      lastVerified: '2026-06-16T19:50:23.592Z'
     git-branch-guard:
       path: bin/utils/git-branch-guard.js
       layer: L1
@@ -853,8 +853,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ae21d7556195c178427c79dc096004e704e60be874fd471a4d9712c8b3ee3a41
-      lastVerified: '2026-06-15T01:36:42.631Z'
+      checksum: sha256:2b4e1d72abb938a05a35135fb93e18d53224bddf701161ded6830f22c48ffcd3
+      lastVerified: '2026-06-16T19:50:23.592Z'
     staged-secret-scan:
       path: bin/utils/staged-secret-scan.js
       layer: L1
@@ -875,6 +875,26 @@ entities:
         extensionPoints: []
       checksum: sha256:c463834c3b63e4f6fb0be1bdc3486e7ac6b6a3ecbb9b1ceba998e4af2064331a
       lastVerified: '2026-06-15T01:36:42.632Z'
+    staged-sql-guard:
+      path: bin/utils/staged-sql-guard.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\staged-sql-guard.js
+      keywords:
+        - staged
+        - sql
+        - guard
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8cdf4ea05744168eabea3ff1db1e0710cdffa00fe4acb11b50bbbc535d360f4e
+      lastVerified: '2026-06-16T19:50:23.593Z'
     validate-publish:
       path: bin/utils/validate-publish.js
       layer: L1
@@ -7022,8 +7042,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:0f47b1625e56a13ce6e8a87b90139a18231fd76f56da787cd2b79f772d8dae97
-      lastVerified: '2026-06-15T00:26:26.317Z'
+      checksum: sha256:f2ba69b86236271970537e4284edbc819379337fed8fd2c8ff2c9a1ffa1b9bbf
+      lastVerified: '2026-06-16T19:50:23.591Z'
     index-strategy-tmpl:
       path: .sinapse-ai/product/templates/index-strategy-tmpl.yaml
       layer: L2
@@ -9612,8 +9632,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:57bcea17d4317083b6b22bae5bd1ce785d93eb904413aded287595038cb347e6
-      lastVerified: '2026-06-15T00:26:26.372Z'
+      checksum: sha256:653371d423b5f132bdedc5b80c3a2a82471bff1c147fea25ce52b4cd8bcd3b23
+      lastVerified: '2026-06-16T19:50:23.589Z'
     graph-dashboard:
       path: .sinapse-ai/core/doctor/checks/graph-dashboard.js
       layer: L1
@@ -15829,6 +15849,25 @@ entities:
         extensionPoints: []
       checksum: sha256:cfef97860788a119c44cbb18b4249ad538814f99a03b2ca13e66dd74aa8b5242
       lastVerified: '2026-06-15T00:26:26.497Z'
+    resolve:
+      path: .sinapse-ai/infrastructure/scripts/codex-parity/resolve.js
+      layer: L2
+      type: script
+      purpose: Entity at .sinapse-ai\infrastructure\scripts\codex-parity\resolve.js
+      keywords:
+        - resolve
+      usedBy:
+        - validate-codex-integration
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bc12b757b1d1e93ebaa02f08b197ee8ff9fc9895b51e84d196e662fa837a8550
+      lastVerified: '2026-06-17T08:20:38.213Z'
     index:
       path: .sinapse-ai/infrastructure/scripts/codex-skills-sync/index.js
       layer: L2
@@ -17285,8 +17324,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ad5245ead7243a39cd5116f44fcf1234ad54b016e365dfefa017764a76f4f3eb
-      lastVerified: '2026-06-15T00:26:26.516Z'
+      checksum: sha256:4e58f3753cdcd34465eeb70793034e71b0ae2f1061c2be92630ce74982ca5384
+      lastVerified: '2026-06-17T07:14:18.076Z'
     template-engine:
       path: .sinapse-ai/infrastructure/scripts/template-engine.js
       layer: L2
@@ -17576,8 +17615,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:278785952a4ef680bd969f8200ab4ce2ced949d0a59a4e7b361b5ae8595c56a4
-      lastVerified: '2026-06-15T00:26:26.520Z'
+      checksum: sha256:2c19c2b38d7fc44e1717b87101d7aac9e3803a0b538a4a8fa8ecb1324ef15744
+      lastVerified: '2026-06-17T08:20:38.371Z'
     validate-codex-integration:
       path: .sinapse-ai/infrastructure/scripts/validate-codex-integration.js
       layer: L2
@@ -17592,6 +17631,7 @@ entities:
         - validate-parity
       dependencies:
         - catalog
+        - resolve
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -17599,8 +17639,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:c553cc493ddbfecf41b865f8a1075df56b6500c3b2b315bae8b7e7bcec4db85a
-      lastVerified: '2026-06-15T00:26:26.521Z'
+      checksum: sha256:78fceff77e8b0d2493920b89fa5ded9010575191f60f7411d45432b3fc9698b8
+      lastVerified: '2026-06-17T08:20:38.372Z'
     validate-codex-sync:
       path: .sinapse-ai/infrastructure/scripts/validate-codex-sync.js
       layer: L2

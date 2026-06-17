@@ -7,6 +7,7 @@ const {
   loadCodexCatalogConfig,
   getConfiguredSkillIds,
 } = require('./codex-parity/catalog');
+const { resolveCatalog } = require('./codex-parity/resolve');
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -77,14 +78,45 @@ function validateCodexIntegration(options = {}) {
   const codexSkillsCount = countSkillFiles(resolved.skillsDir);
   const expectedSkillIds = getConfiguredSkillIds(config);
 
-  if (config.catalogMode !== 'expanded' && sourceCount > 0 && codexAgentsCount !== sourceCount) {
-    warnings.push(`Codex agent count differs from source (${codexAgentsCount}/${sourceCount})`);
+  // --- Behavioral resolution (anti-fachada) --------------------------------
+  // Open every Codex agent pointer and RESOLVE it against the real
+  // source-of-truth set. A present file is not parity; a resolving pointer is.
+  const catalog = resolveCatalog(resolved.projectRoot, {
+    canonicalAgentsDir: config.canonicalAgentsDir || '.sinapse-ai/development/agents',
+    codexAgentsDir: config.codexAgentsDir || '.codex/agents',
+    squadsDir: config.squadsDir || 'squads',
+  });
+
+  for (const broken of catalog.brokenPointers) {
+    errors.push(
+      `Broken Codex pointer: ${broken.id} -> ${broken.target || '(no target)'} (${broken.reason})`,
+    );
+  }
+
+  for (const orphan of catalog.orphans) {
+    errors.push(
+      `Orphan Codex agent: ${orphan.id} has no source-of-truth in the canonical agent set`,
+    );
+  }
+
+  // --- Count parity: MISMATCH is now an ERROR, not a soft warning ----------
+  // In expanded mode the Codex catalog is the full ecosystem (172), which is
+  // intentionally larger than the dev/core agents dir. Parity is measured
+  // against the resolvable source set, not the dev dir.
+  if (config.catalogMode === 'expanded') {
+    if (codexAgentsCount !== catalog.resolved.length) {
+      errors.push(
+        `Codex agent count mismatch: ${codexAgentsCount} catalog file(s) but only ${catalog.resolved.length} resolve cleanly`,
+      );
+    }
+  } else if (sourceCount > 0 && codexAgentsCount !== sourceCount) {
+    errors.push(`Codex agent count differs from source (${codexAgentsCount}/${sourceCount})`);
   }
 
   if (expectedSkillIds && codexSkillsCount !== expectedSkillIds.length) {
-    warnings.push(`Codex skill count differs from configured catalog (${codexSkillsCount}/${expectedSkillIds.length})`);
+    errors.push(`Codex skill count differs from configured catalog (${codexSkillsCount}/${expectedSkillIds.length})`);
   } else if (!expectedSkillIds && sourceCount > 0 && codexSkillsCount !== sourceCount) {
-    warnings.push(`Codex skill count differs from source (${codexSkillsCount}/${sourceCount})`);
+    errors.push(`Codex skill count differs from source (${codexSkillsCount}/${sourceCount})`);
   }
 
   return {
@@ -96,6 +128,10 @@ function validateCodexIntegration(options = {}) {
       codexAgents: codexAgentsCount,
       codexSkills: codexSkillsCount,
       expectedSkills: expectedSkillIds ? expectedSkillIds.length : sourceCount,
+      resolvedPointers: catalog.resolved.length,
+      brokenPointers: catalog.brokenPointers.length,
+      orphans: catalog.orphans.length,
+      sourceAgents: catalog.sourceCount,
     },
   };
 }
@@ -103,7 +139,7 @@ function validateCodexIntegration(options = {}) {
 function formatHumanReport(result) {
   if (result.ok) {
     const lines = [
-      `✅ Codex integration validation passed (agents: ${result.metrics.codexAgents}, skills: ${result.metrics.codexSkills})`,
+      `✅ Codex integration validation passed (agents: ${result.metrics.codexAgents} resolve, ${result.metrics.orphans} orphans, ${result.metrics.brokenPointers} broken pointers, skills: ${result.metrics.codexSkills})`,
     ];
     if (result.warnings.length > 0) {
       lines.push(...result.warnings.map((w) => `⚠️ ${w}`));
