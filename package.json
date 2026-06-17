@@ -23,11 +23,15 @@
     ".codex/command-registry.json",
     ".codex/delegation-matrix.json",
     ".codex/handoff-packet.schema.json",
+    ".codex/handoff-packet.parity.schema.json",
+    ".codex/handoff-packet.template.json",
+    ".codex/delegation-parity.json",
     ".codex/instructions.md",
     ".codex/agents/",
     ".codex/scripts/",
     ".codex/skills/",
     ".codex/tasks/",
+    "AGENTS.md",
     "squads/squad-*/**",
     "squads/claude-code-mastery/**",
     "sinapse/**",
@@ -117,7 +121,7 @@
     "brand": "node scripts/sinapse-patch.js",
     "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
     "setup": "node bin/postinstall.js",
-    "prepare": "husky"
+    "prepare": "node scripts/prepare-hooks.js"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
