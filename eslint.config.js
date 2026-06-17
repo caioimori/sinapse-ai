@@ -62,6 +62,9 @@ module.exports = [
       'pro/**',
       // Glue scripts
       'scripts/glue/**',
+      // Workflow scripts — ES modules (import/export), run by the Workflow runtime
+      '.claude/workflows/**',
+      '**/workflows/*.workflow.js',
     ],
   },
 
