@@ -1,3 +1,11 @@
+---
+task: gotchas
+responsavel: '@developer'
+entrada: 'Filtros opcionais (`--category`, `--severity`, `--unresolved`, `search {query}`)'
+saida: 'Lista/busca de gotchas conhecidos com workarounds'
+atomic_layer: Task
+---
+
 # Task: List Gotchas
 
 > **Command:** `*gotchas [options]`

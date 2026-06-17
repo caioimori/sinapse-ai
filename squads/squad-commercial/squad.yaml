@@ -23,8 +23,8 @@ metadata:
   templates_count: 6
   checklists_count: 3
   quality_target: "5.0/5.0 em todas as dimensoes"
-  total_files: 142
-  agents: 11
+  total_files: 135
+  agents: 10
   tasks: 85
   workflows: 0
   knowledge_bases: 22
@@ -290,4 +290,3 @@ components:
     - cs-revops-analyst.md
     - cs-sales-closer.md
     - cs-sales-enablement.md
-    - legal-chief.md

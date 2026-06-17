@@ -1,6 +1,6 @@
 ---
 name: sinapse-po
-description: Product Owner (Pax). Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions
+description: Product Owner (Axis). Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions
 ---
 
 # SINAPSE Product Owner Activator

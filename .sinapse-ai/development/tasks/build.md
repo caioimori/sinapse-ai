@@ -1,3 +1,11 @@
+---
+task: build
+responsavel: '@developer'
+entrada: '`story-id` + flags (`--dry-run`, `--no-merge`, `--no-qa`, `--verbose`, `--timeout`)'
+saida: 'Build autônomo completo + relatório em `plan/build-report-{story-id}.md`'
+atomic_layer: Task
+---
+
 # Task: Build (Autonomous)
 
 > **Command:** `*build {story-id}`

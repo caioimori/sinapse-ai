@@ -1000,92 +1000,20 @@ async function savePMConfig(pmTool, config, projectRoot) {
 }
 
 /**
- * Setup global statusline for Claude Code (legacy installer version)
- * Graceful skip: returns silently if user already has a statusLine configured.
+ * Setup global statusline for Claude Code (legacy installer version).
+ *
+ * Thin wrapper over the shared module (bin/lib/setup-statusline.js) so the
+ * legacy and wizard installers share ONE implementation. Installs:
+ *   - ~/.claude/statusline-script.js (graceful skip if user already has one)
+ *   - ~/.claude/hooks/track-agent.cjs        → UserPromptSubmit detector (.cjs, not .sh)
+ *   - ~/.claude/hooks/track-agent-clear.cjs  → Stop hook (clears session-cache)
+ *   - ~/.claude/session-cache/
+ * FAIL-SOFT: never throws — statusline is non-critical.
  * @param {string} sourceCoreDir - Path to installed .sinapse-ai directory
  */
 async function setupGlobalStatuslineLegacy(sourceCoreDir) {
-  const os = require('os');
-  const homeDir = os.homedir();
-  const globalSettingsPath = path.join(homeDir, '.claude', 'settings.json');
-
-  // Read existing global settings
-  let settings = {};
-  try {
-    if (fs.existsSync(globalSettingsPath)) {
-      settings = JSON.parse(fs.readFileSync(globalSettingsPath, 'utf8'));
-    }
-  } catch {
-    settings = {};
-  }
-
-  // GRACEFUL SKIP: User already has a statusLine
-  if (settings.statusLine) {
-    return;
-  }
-
-  // Source templates
-  const templatesDir = path.join(sourceCoreDir, 'product', 'templates', 'statusline');
-  const scriptSource = path.join(templatesDir, 'statusline-script.js');
-  const hookSource = path.join(templatesDir, 'track-agent.sh');
-
-  if (!fs.existsSync(scriptSource) || !fs.existsSync(hookSource)) {
-    return;
-  }
-
-  // Target paths
-  const scriptTarget = path.join(homeDir, '.claude', 'statusline-script.js');
-  const hookTarget = path.join(homeDir, '.claude', 'hooks', 'track-agent.sh');
-
-  try {
-    await fse.ensureDir(path.join(homeDir, '.claude', 'hooks'));
-    await fse.ensureDir(path.join(homeDir, '.claude', 'session-cache'));
-    await fse.copy(scriptSource, scriptTarget);
-    await fse.copy(hookSource, hookTarget);
-  } catch {
-    return;
-  }
-
-  // Add statusLine + hook to settings
-  const scriptPathEscaped = scriptTarget.replace(/\\/g, '\\\\');
-  settings.statusLine = {
-    type: 'command',
-    command: `node "${scriptPathEscaped}"`,
-  };
-
-  if (!settings.hooks) {
-    settings.hooks = {};
-  }
-  if (!Array.isArray(settings.hooks.UserPromptSubmit)) {
-    settings.hooks.UserPromptSubmit = [];
-  }
-
-  const hookPathEscaped = hookTarget.replace(/\\/g, '\\\\');
-  const alreadyHasTrackAgent = settings.hooks.UserPromptSubmit.some(entry => {
-    if (Array.isArray(entry.hooks)) {
-      return entry.hooks.some(h => h.command && h.command.includes('track-agent'));
-    }
-    return entry.command && entry.command.includes('track-agent');
-  });
-
-  if (!alreadyHasTrackAgent) {
-    settings.hooks.UserPromptSubmit.push({
-      matcher: '',
-      hooks: [
-        {
-          type: 'command',
-          command: `bash "${hookPathEscaped}"`,
-        },
-      ],
-    });
-  }
-
-  try {
-    await fse.ensureDir(path.dirname(globalSettingsPath));
-    await fse.writeFile(globalSettingsPath, JSON.stringify(settings, null, 2), 'utf8');
-  } catch {
-    // Silent failure — statusline is non-critical
-  }
+  const { setupStatusline } = require('./lib/setup-statusline');
+  await setupStatusline({ sourceCoreDir });
 }
 
 // Run installer with error handling

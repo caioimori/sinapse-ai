@@ -160,6 +160,8 @@ lcov-report/
 # SINAPSE temporary build/analysis files
 .sinapse/reports/
 .sinapse/temp-*.js
+# Generated audit reports (e.g. task audit) — regenerated on demand
+docs/reports/
 
 # Build outputs (generated from source)
 sinapse-ai/index.d.ts

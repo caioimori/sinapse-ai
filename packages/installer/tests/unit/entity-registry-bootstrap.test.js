@@ -103,13 +103,19 @@ describe('Entity Registry Bootstrap (Story INS-4.6)', () => {
       expect(hookContent).not.toContain('populate-entity-registry.js');
     });
 
-    test('ids-pre-push.js uses RegistryUpdater.processChanges (incremental)', () => {
+    test('ids-pre-push.js regenerates via the canonical populate() (not the incremental updater)', () => {
       const idsSource = fs.readFileSync(IDS_PRE_PUSH, 'utf8');
-      expect(idsSource).toContain('RegistryUpdater');
-      expect(idsSource).toContain('processChanges');
+      // Root-cause fix (f003c4e): the incremental RegistryUpdater emitted a
+      // divergent registry schema (categories-first, dropping the
+      // metadata/resolutionRate block) that flipped the whole ~30k-line
+      // registry on every push. Both IDS hooks now regenerate with the
+      // canonical deterministic populate-entity-registry.js — a fixed point
+      // that produces a byte-identical file when content is unchanged.
+      expect(idsSource).toContain('populate-entity-registry');
+      expect(idsSource).not.toContain('processChanges');
     });
 
-    test('bootstrap uses populate-entity-registry.js (full scan), distinct from incremental', () => {
+    test('bootstrap uses populate-entity-registry.js (full scan) and does not invoke the IDS hook directly', () => {
       // Wizard calls populate-entity-registry.js
       expect(wizardSource).toContain('populate-entity-registry.js');
       // Wizard does NOT call ids-pre-push.js

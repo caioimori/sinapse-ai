@@ -1,7 +1,25 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 18 squads, 189 agents, 1,213 tasks
+> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,410 task files, 1,348 resolvable via the parametric activator
+>
+> Codex resolves every agent and its real tasks at runtime from source (no frozen
+> snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
+> Counts are measured from disk — run `… resolve-codex-agent.js --stats` to verify.
+
+## SECURITY — NON-NEGOTIABLE (read this first)
+
+These rules are HARD CONSTRAINTS. They apply to every action you take, in any IDE. Some are enforced by a server-side gate or a git hook at commit time; the ones below exist because an agent can violate them at *runtime*, before any hook ever runs. Treat every line as a command, not a suggestion.
+
+1. **NEVER run destructive DDL/DML without explicit human approval.** `DROP`, `TRUNCATE`, `ALTER ... DROP`, or any `DELETE` / `UPDATE` without a `WHERE` clause is forbidden unless the user has approved that exact statement in this session. No "cleanup", no "reset", no "fresh start" shortcut. When in doubt, STOP and ask.
+
+2. **ALWAYS verify a package exists before installing it (anti-slopsquatting).** Before `npm install <pkg>` (or `yarn add` / `pnpm add`), run `npm view <pkg>` and confirm it is the real, intended package — correct name, real publisher, plausible download count and age. If `npm view` errors or the package looks invented/typosquatted, DO NOT install it. Never invent dependency names from memory.
+
+3. **NEVER modify framework-protected paths (L1/L2).** Do not create, edit, move, or delete anything under `.sinapse-ai/core/**`, `.sinapse-ai/constitution.md`, `bin/sinapse*.js`, or the L2 template trees (`.sinapse-ai/development/{tasks,templates,checklists,workflows}/`, `.sinapse-ai/infrastructure/`). These are extend-only via the proper workflow. Project work lives in L4 (`docs/stories/`, `packages/`, `squads/`, `tests/`).
+
+4. **NEVER write secrets to disk.** Do not put API keys, tokens, passwords, private keys, or DB connection strings with credentials into any tracked file. Real secrets go in `.env` (git-ignored); committed files use placeholders only (`.env.example`). The git pre-commit hook blocks staged secrets at commit time — but you must never write them in the first place; the hook is a backstop, not a license.
+
+> **Push to `main` is protected server-side (branch protection), not by a local hook.** A local hook can be skipped or absent; the server gate cannot. Never assume a green local run means you may push to `main` directly — go through a branch + PR.
 
 ## Project Context
 
@@ -21,11 +39,27 @@ SINAPSE is a meta-framework that orchestrates AI agents into specialized squads 
 bin/                      # CLI executables (sinapse.js, sinapse-init.js)
 docs/stories/             # Development stories (active/, completed/)
 packages/                 # Shared packages
-squads/                   # Squad expansions (19 domain squads)
+squads/                   # Squad expansions (17 domain squads)
 tests/                    # Test suites
 ```
 
 ## Agents
+
+The core SDC agents below are documented in full. They are NOT the whole roster:
+**every one of the 172 agents** (12 core + 160 squad specialists/orchestrators across
+17 squads) resolves by `@name` and so do their real tasks. Resolution is parametric —
+read from the source agent definitions at runtime, never from a frozen list:
+
+```bash
+node .codex/scripts/resolve-codex-agent.js <agent>            # agent + its resolvable tasks
+node .codex/scripts/resolve-codex-agent.js <agent> <command>  # resolve a specific task pointer
+node .codex/scripts/resolve-codex-agent.js --stats            # ecosystem counts (measured from disk)
+```
+
+Examples that resolve (no "Unknown Codex agent"): `@brand-orqx`, `@meta-ads-specialist`,
+`@cyber-orqx`, `@headline-specialist`, `@simon-sinek`, `@developer`. Squad specialists
+inherit their squad's task pool; orchestrators (`*-orqx`) govern their whole squad.
+Every task pointer the activator emits is verified to exist on disk before it is returned.
 
 ### @developer (Pixel)
 - **Role:** Full Stack Developer -- code implementation, debugging, refactoring
@@ -88,7 +122,7 @@ tests/                    # Test suites
 - **Constraints:** Design and specification only. Delegates implementation to @developer.
 
 ### @sinapse-orqx (Imperator)
-- **Role:** Supreme Ecosystem Orchestrator -- routes requests across 18 squads (189 agents)
+- **Role:** Supreme Ecosystem Orchestrator -- routes requests across 17 squads (172 agents)
 - **Capabilities:** Intelligent routing (direct to specialist or via orchestrator), cross-squad coordination, conflict resolution, strategic synthesis, framework governance
 - **Key Commands:** `*route`, `*plan`, `*status`, `*onboard`, `*council`
 - **Constraints:** Never executes domain work directly (Mandatory Delegation). Diagnoses, routes, and coordinates only.
@@ -156,4 +190,4 @@ Plus CodeRabbit automated review (0 CRITICAL issues required).
 | Git push/PR/release | @devops |
 | Epic orchestration | @project-lead |
 | Research/analysis | @analyst |
-| Domain expertise | @sinapse-orqx (routes to 18 squads) |
+| Domain expertise | @sinapse-orqx (routes to 17 squads) |

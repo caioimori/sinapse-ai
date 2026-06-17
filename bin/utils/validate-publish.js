@@ -75,6 +75,69 @@ try {
   passed = false;
 }
 
+// Check 5 (E9): Secret scan over the EXACT files that would be published.
+// Reuses the shared scanner core, scoped as a RELEASE gate (not the commit-time
+// diff scan): it skips vendored node_modules (a dependency's strings are not our
+// secret to gate on) and HARD-FAILS only on HIGH-CONFIDENCE key formats
+// (sk-proj / AKIA / ghp_ / private keys / real connection strings). The entropy
+// backstop and the low-confidence keyword heuristics (Hardcoded Password /
+// Bearer Token) are intentionally NOT release-blocking — over a whole package
+// they match documentation examples and minified vendor code, which would block
+// every release on noise. The git pre-commit hook keeps the stricter,
+// diff-scoped scan (entropy + low-confidence) for authored changes.
+console.log('');
+console.log('--- Secret Scan (E9, packaged files) ---\n');
+try {
+  const core = require(
+    path.join(PROJECT_ROOT, '.sinapse-ai', 'git-hooks', 'lib', 'secret-scanner-core.js'),
+  );
+  const { isScanExemptPath } = require(
+    path.join(PROJECT_ROOT, '.sinapse-ai', 'git-hooks', 'lib', 'staged-secret-scan.js'),
+  );
+  const lowConfidence = new Set(
+    (core.NAMED_PATTERNS || []).filter((p) => p.lowConfidence).map((p) => p.name),
+  );
+  const packJson = execSync('npm pack --dry-run --json', {
+    encoding: 'utf8',
+    cwd: PROJECT_ROOT,
+    timeout: 60000,
+    // npm writes notices to stderr and the JSON result to stdout; capture only stdout.
+    stdio: ['ignore', 'pipe', 'ignore'],
+    maxBuffer: 32 * 1024 * 1024,
+  });
+  const files = (JSON.parse(packJson)[0] || {}).files || [];
+  // Binary/asset extensions can't carry plaintext secrets and may blow up the reader.
+  const BINARY = /\.(png|jpe?g|gif|webp|ico|pdf|zip|gz|tgz|woff2?|ttf|eot|mp4|mp3|wasm|node)$/i;
+  const findings = [];
+  let scanned = 0;
+  for (const f of files) {
+    const rel = f.path;
+    if (!rel || BINARY.test(rel) || rel.includes('node_modules/') || isScanExemptPath(rel)) continue;
+    let content;
+    try {
+      content = fs.readFileSync(path.join(PROJECT_ROOT, rel), 'utf8');
+    } catch {
+      continue;
+    }
+    scanned += 1;
+    const hits = core
+      .scanContent(content, { filePath: rel, entropy: false })
+      .filter((h) => !lowConfidence.has(h.name));
+    if (hits.length > 0) findings.push({ file: rel, secrets: [...new Set(hits.map((h) => h.name))] });
+  }
+  if (findings.length > 0) {
+    console.error(`FAIL: ${findings.length} packaged file(s) contain high-confidence secrets — publish blocked:`);
+    for (const fnd of findings) console.error(`  - ${fnd.file}: ${fnd.secrets.join(', ')}`);
+    passed = false;
+  } else {
+    console.log(`PASS: no high-confidence secrets in ${scanned} packaged source files`);
+  }
+} catch (err) {
+  // Fail-closed: a broken secret scan must NOT let a publish through silently.
+  console.error(`FAIL: secret scan over package could not complete: ${err.message}`);
+  passed = false;
+}
+
 // Summary
 console.log('');
 if (passed) {

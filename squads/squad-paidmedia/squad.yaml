@@ -20,8 +20,8 @@ metadata:
   workflows_count: 5
   checklists_count: 4
   templates_count: 5
-  total_files: 135
-  agents: 10
+  total_files: 129
+  agents: 9
   tasks: 82
   workflows: 0
   knowledge_bases: 21
@@ -271,4 +271,3 @@ components:
     - performance-engineer.md
     - pm-creative-performance-analyst.md
     - pm-youtube-ads-specialist.md
-    - traffic-masters-chief.md

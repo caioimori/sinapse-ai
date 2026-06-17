@@ -20,6 +20,36 @@ Este arquivo define as instrucoes do projeto para o Codex CLI.
 - Atualize checklist e file list da story antes de concluir
 <!-- SINAPSE-MANAGED-END: quality -->
 
+<!-- SINAPSE-MANAGED-START: security -->
+## Security (NON-NEGOTIABLE)
+
+A seguranca do SINAPSE e em camadas. Nenhuma camada sozinha basta, e nenhuma garante
+paridade 1:1 entre IDEs — cada uma cobre o que as outras nao cobrem:
+
+1. **Git hook (pre-commit / pre-push)** — backstop IDE-agnostico. Roda no commit,
+   independente de qual IDE gerou o codigo (Codex ou Claude). Bloqueia segredos staged
+   e checagens deterministicas. So protege no momento do commit — nao impede o agente
+   de fazer algo destrutivo em runtime antes disso.
+2. **Instrucao forte (este arquivo + `AGENTS.md`)** — cobre o que o hook nao pega:
+   decisoes em runtime do agente, antes de qualquer commit.
+3. **CI / branch protection (server-side)** — `main` so recebe via branch + PR. O gate
+   roda no servidor; nao depende de hook local (que pode estar ausente ou ser pulado).
+
+Regras de runtime que VOCE deve seguir (o hook nao consegue garantir estas):
+
+- **NUNCA** rode DDL/DML destrutivo (`DROP`/`TRUNCATE`/`DELETE` ou `UPDATE` sem `WHERE`)
+  sem aprovacao humana explicita daquela instrucao.
+- **SEMPRE** rode `npm view <pkg>` antes de instalar uma dependencia (anti-slopsquatting).
+  Nunca invente nome de pacote.
+- **NUNCA** edite paths L1/L2 (`.sinapse-ai/core/**`, `bin/sinapse*.js`, arvores de template).
+- **NUNCA** escreva segredos em arquivo versionado — valores reais no `.env` (git-ignored),
+  placeholders no `.env.example`. O git hook bloqueia segredos staged no commit; a instrucao
+  forte impede voce de escreve-los antes.
+
+> Push para `main` e protegido server-side (branch protection), nao por hook local.
+> Green local nao autoriza push direto — sempre via branch + PR.
+<!-- SINAPSE-MANAGED-END: security -->
+
 <!-- SINAPSE-MANAGED-START: codebase -->
 ## Project Map
 

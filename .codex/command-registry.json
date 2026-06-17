@@ -13,7 +13,7 @@
           "resources": [
             ".codex/catalog.json",
             "AGENTS.md",
-            "docs/codex-integration-process.md"
+            "docs/framework/codex-parity/codex-integration-process.md"
           ]
         },
         "route": {
@@ -32,7 +32,7 @@
           "resources": [
             ".codex/catalog.json",
             ".codex/agents/snps-orqx.md",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "status": {
@@ -41,7 +41,7 @@
           "target": ".codex/tasks/status-sinapse-capabilities.md",
           "resources": [
             ".codex/catalog.json",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "brief": {
@@ -60,7 +60,7 @@
           "resources": [
             ".codex/catalog.json",
             ".codex/agents/snps-orqx.md",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "council": {
@@ -78,7 +78,7 @@
     "sinapse-pm": {
       "skillId": "sinapse-pm",
       "aliases": ["sinapse-pm", "pm", "project-lead"],
-      "sourceOfTruth": ".codex/agents/pm.md",
+      "sourceOfTruth": ".codex/agents/project-lead.md",
       "commands": {
         "create-prd": {
           "aliases": ["*create-prd"],
@@ -149,7 +149,7 @@
     "sinapse-po": {
       "skillId": "sinapse-po",
       "aliases": ["sinapse-po", "po", "product-lead"],
-      "sourceOfTruth": ".codex/agents/po.md",
+      "sourceOfTruth": ".codex/agents/product-lead.md",
       "commands": {
         "validate-story": {
           "aliases": ["*validate-story", "*validate-story-draft"],
@@ -229,7 +229,7 @@
     "sinapse-sm": {
       "skillId": "sinapse-sm",
       "aliases": ["sinapse-sm", "sm", "sprint-lead"],
-      "sourceOfTruth": ".codex/agents/sm.md",
+      "sourceOfTruth": ".codex/agents/sprint-lead.md",
       "commands": {
         "draft": {
           "aliases": ["*draft", "*create-story"],
@@ -253,7 +253,7 @@
     "sinapse-dev": {
       "skillId": "sinapse-dev",
       "aliases": ["sinapse-dev", "dev", "developer"],
-      "sourceOfTruth": ".codex/agents/dev.md",
+      "sourceOfTruth": ".codex/agents/developer.md",
       "commands": {
         "develop": {
           "aliases": ["*develop"],
@@ -350,7 +350,7 @@
     "sinapse-qa": {
       "skillId": "sinapse-qa",
       "aliases": ["sinapse-qa", "qa", "quality-gate"],
-      "sourceOfTruth": ".codex/agents/qa.md",
+      "sourceOfTruth": ".codex/agents/quality-gate.md",
       "commands": {
         "review-story": {
           "aliases": ["*review-story", "*review", "*code-review"],

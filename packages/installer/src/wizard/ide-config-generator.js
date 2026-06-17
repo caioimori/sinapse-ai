@@ -201,34 +201,13 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
 
   for (const file of agentFiles) {
     const sourcePath = path.join(sourceDir, file);
-    const agentName = file.replace('.md', '');
-
     // Only copy if source is a file (not directory)
     const stat = await fs.stat(sourcePath);
     if (stat.isFile()) {
-      if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
-        // GitHub Copilot: apply transformer for .agent.md format with YAML frontmatter
-        try {
-          const agentParser = require('../../../../.sinapse-ai/infrastructure/scripts/ide-sync/agent-parser');
-          const copilotTransformer = require('../../../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/github-copilot');
-          const agentData = agentParser.parseAgentFile(sourcePath);
-          const content = copilotTransformer.transform(agentData);
-          const filename = copilotTransformer.getFilename(agentData);
-          const targetPath = path.join(targetDir, filename);
-          await fs.writeFile(targetPath, content, 'utf8');
-          copiedFiles.push(targetPath);
-        } catch (transformError) {
-          // Fallback: copy raw file with .agent.md extension
-          const targetPath = path.join(targetDir, `${agentName}.agent.md`);
-          await fs.copy(sourcePath, targetPath);
-          copiedFiles.push(targetPath);
-        }
-      } else {
-        // Normal copy for other IDEs
-        const targetPath = path.join(targetDir, file);
-        await fs.copy(sourcePath, targetPath);
-        copiedFiles.push(targetPath);
-      }
+      // Copy agent file (Claude Code + Codex only — secondary IDE adapters removed)
+      const targetPath = path.join(targetDir, file);
+      await fs.copy(sourcePath, targetPath);
+      copiedFiles.push(targetPath);
     }
   }
 
@@ -657,6 +636,19 @@ const HOOK_EVENT_MAP = {
     event: 'Stop',
     matcher: null,
     timeout: 5,
+  },
+  // Statusline agent/squad tracker (Cluster D — feedback visual).
+  // Detector writes the per-cwd session-cache the statusline reads;
+  // clear wipes it when the session ends. FAIL-OPEN: both exit 0 on error.
+  'track-agent.cjs': {
+    event: 'UserPromptSubmit',
+    matcher: null,
+    timeout: 10,
+  },
+  'track-agent-clear.cjs': {
+    event: 'Stop',
+    matcher: null,
+    timeout: 10,
   },
 };
 

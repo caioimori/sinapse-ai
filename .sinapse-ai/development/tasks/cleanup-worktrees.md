@@ -1,3 +1,11 @@
+---
+task: cleanup-worktrees
+responsavel: '@developer'
+entrada: '`--days` — limite de idade em dias (default: 30)'
+saida: 'Worktrees obsoletas removidas com segurança + resumo da limpeza'
+atomic_layer: Task
+---
+
 # cleanup-worktrees
 
 Remove all stale git worktrees older than specified threshold.
@@ -37,4 +45,3 @@ Clean up abandoned worktrees to maintain repository hygiene.
 - `*list-worktrees` - List all worktrees
 - `*remove-worktree` - Remove single worktree
 - `*create-worktree` - Create new worktree
-

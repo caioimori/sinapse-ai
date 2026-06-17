@@ -4,8 +4,7 @@ const {
   resolveCodexDelegation,
 } = require('../../.codex/scripts/resolve-codex-delegation');
 
-// TODO: resolveCodexDelegation incomplete — re-enable when delegation routes are finalized
-describe.skip('Codex delegation smoke', () => {
+describe('Codex delegation smoke', () => {
   it('resolves representative validator-backed and shim routes from the real matrix', () => {
     const brandRoute = resolveCodexDelegation('brand-discovery');
     const launchRoute = resolveCodexDelegation('multi-domain-launch');

@@ -135,7 +135,7 @@ function runRouter() {
     }
     // eslint-disable-next-line no-fallthrough -- process.exit above terminates; Story 10.45 piggyback fix.
     case 'list':     cmdList(); break;
-    case 'status':   cmdStatus(); break;
+    case 'status':   cmdStatus({ watch: args.includes('--watch') }); break;
     case 'ideate': {
       // Wires the IdeationEngine (self-improvement analyzers) into the CLI.
       const { cmdIdeate } = require('./commands/ideate');

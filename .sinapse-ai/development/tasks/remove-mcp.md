@@ -1,3 +1,11 @@
+---
+task: remove-mcp
+responsavel: '@developer'
+entrada: '`server-name` — nome do servidor MCP a remover'
+saida: 'Servidor MCP removido do Docker MCP Toolkit (com confirmação)'
+atomic_layer: Task
+---
+
 # remove-mcp
 
 Remove an MCP server from Docker MCP Toolkit.
@@ -33,4 +41,3 @@ Disable and remove an MCP server from the toolkit configuration.
 
 - `*list-mcps` - List enabled MCPs
 - `*add-mcp` - Add MCP server
-

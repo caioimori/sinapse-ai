@@ -1,3 +1,11 @@
+---
+task: build-resume
+responsavel: '@developer'
+entrada: '`story-id` — build a retomar'
+saida: 'Build autônomo retomado a partir do último checkpoint'
+atomic_layer: Task
+---
+
 # Task: Build Resume
 
 > **Command:** `*build-resume {story-id}`

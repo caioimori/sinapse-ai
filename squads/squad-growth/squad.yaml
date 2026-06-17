@@ -22,7 +22,7 @@ metadata:
   templates_count: 6
   checklists_count: 3
   quality_target: "5.0/5.0 em todas as dimensoes"
-  total_files: 130
+  total_files: 124
   agents: 7
   tasks: 77
   workflows: 0

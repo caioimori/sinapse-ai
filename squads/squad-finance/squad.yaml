@@ -32,13 +32,19 @@ metadata:
   workflows_count: 4
   checklists_count: 3
   templates_count: 4
-  total_files: 102
+  total_files: 88
   preferences: 0
 
 # ══════════════════════════════════════════════════════════════════════════════
 # AGENTES — 8 ESPECIALISTAS
 # ══════════════════════════════════════════════════════════════════════════════
 
+  agents: 8
+  tasks: 45
+  workflows: 0
+  knowledge_bases: 21
+  checklists: 3
+  templates: 4
 agents:
   - id: finance-orqx
     name: Ledger

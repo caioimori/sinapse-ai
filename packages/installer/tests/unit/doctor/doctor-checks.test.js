@@ -12,6 +12,10 @@ const fs = require('fs');
 // Mock fs for controlled test scenarios
 jest.mock('fs');
 
+// Mock child_process — the git-hooks check reads core.hooksPath via execFileSync('git', ...)
+jest.mock('child_process');
+const { execFileSync } = require('child_process');
+
 const nodeVersionCheck = require('../../../../../.sinapse-ai/core/doctor/checks/node-version');
 const npmPackagesCheck = require('../../../../../.sinapse-ai/core/doctor/checks/npm-packages');
 const settingsJsonCheck = require('../../../../../.sinapse-ai/core/doctor/checks/settings-json');
@@ -222,14 +226,49 @@ describe('entity-registry check', () => {
 });
 
 describe('git-hooks check', () => {
-  it('should PASS when both hooks exist', async () => {
-    fs.existsSync.mockReturnValue(true);
+  // E8-SECURITY: the check now reads core.hooksPath via git and validates the
+  // managed `.sinapse-ai/git-hooks/` dir is populated (catches the inert-trap).
+  it('should PASS when managed hooksPath is populated (pre-commit + pre-push)', async () => {
+    execFileSync.mockReturnValue('.sinapse-ai/git-hooks\n');
+    fs.existsSync.mockReturnValue(true); // dir + pre-commit + pre-push all present
     const result = await gitHooksCheck.run(mockContext);
     expect(result.status).toBe('PASS');
+    expect(result.message).toContain('managed git guards active');
   });
 
-  it('should WARN when .husky directory missing', async () => {
+  it('should FAIL when core.hooksPath is set but the dir is MISSING (inert trap)', async () => {
+    execFileSync.mockReturnValue('.sinapse-ai/git-hooks\n');
+    fs.existsSync.mockReturnValue(false); // dir missing -> guards inert
+    const result = await gitHooksCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('MISSING');
+  });
+
+  it('should FAIL when hooksPath dir exists but has no pre-commit guard', async () => {
+    execFileSync.mockReturnValue('.sinapse-ai/git-hooks\n');
+    fs.existsSync.mockImplementation((p) => !String(p).endsWith('pre-commit')); // dir yes, pre-commit no
+    const result = await gitHooksCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('NO pre-commit');
+  });
+
+  it('should WARN when pre-commit present but pre-push missing', async () => {
+    execFileSync.mockReturnValue('.sinapse-ai/git-hooks\n');
+    fs.existsSync.mockImplementation((p) => !String(p).endsWith('pre-push')); // dir + pre-commit yes
+    const result = await gitHooksCheck.run(mockContext);
+    expect(result.status).toBe('WARN');
+  });
+
+  it('should FAIL when no core.hooksPath and no .husky fallback', async () => {
+    execFileSync.mockImplementation(() => { throw new Error('not a git repo'); });
     fs.existsSync.mockReturnValue(false);
+    const result = await gitHooksCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+  });
+
+  it('should WARN when husky present but core.hooksPath not consolidated', async () => {
+    execFileSync.mockImplementation(() => { throw new Error('hooksPath unset'); });
+    fs.existsSync.mockReturnValue(true); // .husky + expected hooks present
     const result = await gitHooksCheck.run(mockContext);
     expect(result.status).toBe('WARN');
   });

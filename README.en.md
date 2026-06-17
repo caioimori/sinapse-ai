@@ -19,9 +19,9 @@
 
 ## What is SINAPSE?
 
-SINAPSE is an open-source meta-framework that organizes **200 AI agents into 19 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 19 active hooks that block violations at runtime.
+SINAPSE is an open-source meta-framework that organizes **172 AI agents into 17 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 19 active hooks that block violations at runtime.
 
-The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. Each with its own knowledge base, workflows, and tasks -- totaling **1,237 executable tasks** ready to use.
+The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. Each with its own knowledge base, workflows, and tasks -- totaling **1,200 executable tasks** ready to use.
 
 Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Documentation-First** pipeline requires a story to be created and validated before any code is written. Quality gates run automatically before merge. Unauthorized agents are blocked from pushing. All via hooks that intercept operations in real time -- not after the fact.
 
@@ -31,7 +31,7 @@ Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Document
 
 Generative AI has a known problem: the more you ask of it, the worse it gets. A single assistant trying to do everything -- code, copy, branding, testing, deployment -- loses context, invents features, and suffers from context amnesia after just a few long iterations.
 
-SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 189 agents in 18 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
+SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 172 agents in 17 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
 
 The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 10 articles governs the framework, and 6 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
 
@@ -60,7 +60,7 @@ npx sinapse-ai doctor
 *help               # List available commands
 ```
 
-Done. You have 18 squads operating in your terminal.
+Done. You have 17 squads operating in your terminal.
 
 ---
 
@@ -238,32 +238,31 @@ The framework ensures no step is skipped. Each gate blocks automatically if the 
 
 ---
 
-## 19 Specialized Squads
+## 17 Specialized Squads
 
 Each squad is an autonomous team with its own orchestrator, specialist agents, knowledge base, tasks, and workflows.
 
 | Squad | Domain | Agents |
 |-------|--------|--------|
 | **squad-brand** | Brand strategy, archetypes, visual audit | 15 |
-| **squad-design** | Design systems, components, tokens, UI | 15 |
-| **squad-copy** | Persuasive copywriting, headlines, conversion | 14 |
+| **squad-design** | Design systems, components, tokens, UI, art direction, premium LP | 14 |
+| **squad-copy** | Persuasive copywriting, headlines, conversion | 13 |
 | **squad-council** | Strategic advisors (Munger, Dalio, Thiel, ...) | 11 |
-| **squad-storytelling** | Narrative, scripts, story frameworks | 11 |
-| **squad-commercial** | Sales, funnel, revenue, commercial pipeline | 11 |
-| **squad-paidmedia** | Meta Ads, Google Ads, campaigns, optimization | 10 |
-| **claude-code-mastery** | Advanced Claude Code, MCP, deep integration | 10 |
+| **squad-storytelling** | Narrative, scripts, story frameworks | 10 |
+| **squad-commercial** | Sales, funnel, revenue, commercial pipeline | 10 |
+| **squad-paidmedia** | Meta Ads, Google Ads, campaigns, optimization | 9 |
 | **squad-animations** | Motion design, CSS, particles, 3D | 9 |
 | **squad-cloning** | Cognitive cloning, mind synthesis, digital twins | 9 |
-| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 9 |
+| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 8 |
 | **squad-courses** | Courses, curricula, assessments, educational launch | 8 |
-| **squad-research** | Market analysis, competitive intelligence | 8 |
-| **claude-code-mastery** | Advanced Claude Code tool mastery | 8 |
+| **squad-research** | Market analysis, competitive intelligence | 7 |
+| **claude-code-mastery** | Advanced Claude Code, MCP, deep integration | 8 |
 | **squad-content** | Editorial governance, content strategy | 7 |
 | **squad-product** | Product discovery, strategy, operations | 7 |
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
-| **squad-finance** | Budget, pricing, profitability analysis | 5 |
+| **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 18 squads, 196 specialized agents, 1,213 tasks**
+**Total: 17 squads, 172 specialized agents, 1,200 tasks**
 
 Activate any squad via its orchestrator:
 
@@ -287,7 +286,7 @@ SINAPSE supports two IDEs with deep integrations:
 | **Claude Code** | `@agent-name` | Hooks, contextual rules, deny/allow, Chrome Brain |
 | **Codex CLI** | `/skills` or `$skill-name` | Native skills, multi-model, `codex exec` for CI/CD |
 
-Both IDEs have access to all 18 squads, 189 agents, workflows, and knowledge bases. The installer detects and configures automatically.
+Both IDEs have access to all 17 squads, 172 agents, workflows, and knowledge bases. The installer detects and configures automatically.
 
 ### Parity Table
 
@@ -445,7 +444,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 npx sinapse-ai install
 ```
 
-One command. 18 squads. 189 agents. Constitutional governance. All operating directly in the terminal.
+One command. 17 squads. 172 agents. Constitutional governance. All operating directly in the terminal.
 
 **[Full documentation](docs/guides/getting-started.md)** • **[Report issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
 

@@ -1,10 +1,19 @@
 /**
  * SINAPSE Task Audit Script
- * Audits all task markdown files across squads for structural compliance.
+ * Audits task markdown files for structural completeness across the whole framework.
+ *
+ * Scope: squad tasks (squads/<name>/tasks), the framework core tasks
+ * (.sinapse-ai/development/tasks) and the master-squad tasks (sinapse/tasks).
+ *
+ * The checks are FORMAT-AGNOSTIC: a task is credited for a trait whether it is
+ * declared in YAML frontmatter OR in a markdown section (## Metadata,
+ * ## Task Definition, ## Inputs, ## Steps, etc.). This measures real completeness
+ * instead of conformance to one rigid template — which is what produced thousands
+ * of false "critical" flags before.
  *
  * Usage: node scripts/audit-tasks.cjs [--fix] [--json]
- *   --fix   Add basic frontmatter to tasks missing it entirely
- *   --json  Output raw JSON instead of summary
+ *   --fix   Add basic frontmatter to tasks missing any structured header
+ *   --json  Output raw JSON instead of the summary
  */
 
 const fs = require('fs');
@@ -12,34 +21,63 @@ const path = require('path');
 const { glob } = require('glob');
 
 const ROOT = path.resolve(__dirname, '..');
-const SQUADS_DIR = path.join(ROOT, 'squads');
 const FIX_MODE = process.argv.includes('--fix');
 const JSON_MODE = process.argv.includes('--json');
 
-// ── Scoring weights ──────────────────────────────────────────────
+// Task sources scanned, in order. Paths are relative to ROOT.
+const SOURCE_PATTERNS = [
+  'squads/*/tasks/*.md',
+  '.sinapse-ai/development/tasks/*.md',
+  'sinapse/tasks/*.md',
+];
+
+// ── Scoring weights (sum = 100) ──────────────────────────────────
 const CHECKS = [
-  { id: 'has_frontmatter',    weight: 20, label: 'Has YAML frontmatter' },
-  { id: 'has_task_field',     weight: 15, label: 'Frontmatter has task: field' },
-  { id: 'has_responsavel',    weight: 10, label: 'Frontmatter has responsavel/responsible' },
-  { id: 'has_entrada',        weight: 10, label: 'Frontmatter has Entrada/input' },
-  { id: 'has_saida',          weight: 10, label: 'Frontmatter has Saida/output' },
-  { id: 'has_title',          weight: 10, label: 'Has # Task: or # title' },
-  { id: 'has_steps',          weight: 10, label: 'Has ## Steps or ## Description' },
-  { id: 'has_metadata',       weight: 5,  label: 'Has ## Metadata section' },
+  { id: 'has_header',         weight: 20, label: 'Structured header (frontmatter OR ## Metadata / ## Task Definition)' },
+  { id: 'has_identity',       weight: 10, label: 'Identifiable (task/id/name field OR # title)' },
+  { id: 'has_responsavel',    weight: 10, label: 'Owner declared (responsavel/agent field OR ## Agent / ## Owner)' },
+  { id: 'has_entrada',        weight: 10, label: 'Inputs declared (field OR ## Input / ## Entrada / ## Context)' },
+  { id: 'has_saida',          weight: 10, label: 'Outputs declared (field OR ## Output / ## Saida / ## Acceptance)' },
+  { id: 'has_title',          weight: 10, label: 'Has # title' },
+  { id: 'has_steps',          weight: 20, label: 'Has a process (## Steps/Process/Workflow/... OR numbered steps)' },
   { id: 'min_content_length', weight: 10, label: 'Content >= 200 chars' },
 ];
 
 const MAX_SCORE = CHECKS.reduce((s, c) => s + c.weight, 0);
 
-// ── Parse frontmatter ────────────────────────────────────────────
+// ── Detection helpers ────────────────────────────────────────────
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return null;
-  return match[1];
+  return match ? match[1] : null;
 }
 
+// True if the body has a `## Heading` whose text starts with one of `names`.
+function hasSection(body, names) {
+  const re = new RegExp('^#{2,4}\\s+(' + names.join('|') + ')(?:\\b|\\s|:|$)', 'mi');
+  return re.test(body);
+}
+
+// True if the frontmatter declares one of `fields` as a key.
+function fmHas(fm, fields) {
+  if (!fm) return false;
+  const re = new RegExp('^\\s*(' + fields.join('|') + ')\\s*:', 'mi');
+  return re.test(fm);
+}
+
+// True if the body contains a numbered procedure of at least 3 steps.
+function hasNumberedSteps(body) {
+  const m = body.match(/^\s*\d+[.)]\s+\S/gm);
+  return !!m && m.length >= 3;
+}
+
+const METADATA_SECTIONS = ['Metadata', 'Task Definition', 'Definição', 'Overview', 'Visão Geral'];
+const OWNER_SECTIONS = ['Agent', 'Owner', 'Responsável', 'Responsible', 'Persona', 'Executor'];
+const INPUT_SECTIONS = ['Input', 'Inputs', 'Entrada', 'Entradas', 'Context', 'Contexto', 'Prerequisites', 'Pré-requisitos', 'Pre-requisitos'];
+const OUTPUT_SECTIONS = ['Output', 'Outputs', 'Saída', 'Saida', 'Saídas', 'Saidas', 'Deliverable', 'Deliverables', 'Result', 'Results', 'Acceptance', 'Critérios', 'Criterios'];
+const STEP_SECTIONS = ['Steps', 'Step', 'Description', 'Etapas', 'Process', 'Processo', 'Workflow', 'Execution', 'Execução', 'Instructions', 'Instruções', 'Procedure', 'Activities', 'Activity', 'Phases', 'Fases', 'Fluxo', 'How', 'Como', 'Task Definition'];
+
 // ── Audit a single file ──────────────────────────────────────────
-function auditFile(filePath) {
+function auditFile(filePath, group) {
   const content = fs.readFileSync(filePath, 'utf-8');
   const filename = path.basename(filePath, '.md');
   const fm = parseFrontmatter(content);
@@ -48,57 +86,43 @@ function auditFile(filePath) {
   const results = {};
   const issues = [];
 
-  // 1. Has frontmatter
-  results.has_frontmatter = !!fm;
-  if (!fm) issues.push('Missing frontmatter entirely');
+  results.has_title = /^#\s+\S/m.test(body);
+  if (!results.has_title) issues.push('No # title');
 
-  // 2. task: field
-  results.has_task_field = fm ? /^task:/m.test(fm) : false;
-  if (!results.has_task_field && fm) issues.push('Missing task: field in frontmatter');
+  results.has_header = !!fm || hasSection(body, METADATA_SECTIONS);
+  if (!results.has_header) issues.push('No structured header (frontmatter or Metadata/Task Definition section)');
 
-  // 3. responsavel / responsible
-  results.has_responsavel = fm ? /^(responsavel|responsible):/m.test(fm) : false;
-  if (!results.has_responsavel && fm) issues.push('Missing responsavel/responsible field');
+  results.has_identity = fmHas(fm, ['task', 'id', 'name', 'slug', 'title']) || results.has_title;
+  if (!results.has_identity) issues.push('Not identifiable (no task/id/name field and no title)');
 
-  // 4. Entrada / input
-  results.has_entrada = fm ? /^(Entrada|input):/m.test(fm) : false;
-  if (!results.has_entrada && fm) issues.push('Missing Entrada/input section');
+  results.has_responsavel = fmHas(fm, ['responsavel', 'responsável', 'responsible', 'agent', 'owner', 'persona', 'executor']) || hasSection(body, OWNER_SECTIONS);
+  if (!results.has_responsavel) issues.push('No owner/agent declared');
 
-  // 5. Saida / output
-  results.has_saida = fm ? /^(Saida|output):/m.test(fm) : false;
-  if (!results.has_saida && fm) issues.push('Missing Saida/output section');
+  results.has_entrada = fmHas(fm, ['entrada', 'entradas', 'input', 'inputs', 'context', 'contexto', 'prerequisites']) || hasSection(body, INPUT_SECTIONS);
+  if (!results.has_entrada) issues.push('No inputs declared');
 
-  // 6. Title
-  results.has_title = /^#\s+.+/m.test(body);
-  if (!results.has_title) issues.push('Missing # title in body');
+  results.has_saida = fmHas(fm, ['saida', 'saída', 'saidas', 'output', 'outputs', 'deliverable', 'result', 'acceptance']) || hasSection(body, OUTPUT_SECTIONS);
+  if (!results.has_saida) issues.push('No outputs/acceptance declared');
 
-  // 7. Steps / Description
-  results.has_steps = /^##\s+(Steps|Description|Etapas)/mi.test(body);
-  if (!results.has_steps) issues.push('Missing ## Steps or ## Description');
+  results.has_steps = hasSection(body, STEP_SECTIONS) || hasNumberedSteps(body);
+  if (!results.has_steps) issues.push('No process (steps/workflow/numbered procedure)');
 
-  // 8. Metadata
-  results.has_metadata = /^##\s+Metadata/mi.test(body);
-  if (!results.has_metadata) issues.push('Missing ## Metadata section');
-
-  // 9. Content length
   results.min_content_length = content.length >= 200;
   if (!results.min_content_length) issues.push(`Content too short (${content.length} chars)`);
 
-  // Score
   let score = 0;
   for (const check of CHECKS) {
     if (results[check.id]) score += check.weight;
   }
   const pct = Math.round((score / MAX_SCORE) * 100);
 
-  return { file: filename, path: filePath, score: pct, results, issues };
+  return { file: filename, path: filePath, group, score: pct, results, issues };
 }
 
-// ── Fix: add frontmatter to files missing it ─────────────────────
+// ── Fix: add a minimal frontmatter to files lacking any header ────
 function fixFrontmatter(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8');
   const filename = path.basename(filePath, '.md');
-
   const frontmatter = [
     '---',
     `task: ${filename}`,
@@ -108,56 +132,64 @@ function fixFrontmatter(filePath) {
     '---',
     '',
   ].join('\n');
-
   fs.writeFileSync(filePath, frontmatter + content, 'utf-8');
-  return true;
+}
+
+// ── Group a file by its source location ──────────────────────────
+function groupFor(absPath) {
+  const rel = path.relative(ROOT, absPath).replace(/\\/g, '/');
+  if (rel.startsWith('squads/')) return rel.split('/')[1];
+  if (rel.startsWith('.sinapse-ai/development/tasks/')) return 'core/development';
+  if (rel.startsWith('sinapse/tasks/')) return 'sinapse-master';
+  return rel.split('/')[0];
 }
 
 // ── Main ─────────────────────────────────────────────────────────
 async function main() {
-  const pattern = path.join(SQUADS_DIR, '*/tasks/*.md').replace(/\\/g, '/');
-  const files = await glob(pattern);
+  let files = [];
+  for (const pattern of SOURCE_PATTERNS) {
+    const matched = await glob(pattern, { cwd: ROOT, absolute: true });
+    files = files.concat(matched);
+  }
+  // De-dupe (defensive) and sort for stable output.
+  files = Array.from(new Set(files)).sort();
 
   if (files.length === 0) {
     console.error('No task files found.');
     process.exit(1);
   }
 
-  const squadMap = {};
+  const groupMap = {};
   const allResults = [];
   let fixedCount = 0;
 
   for (const filePath of files) {
-    const rel = path.relative(SQUADS_DIR, filePath);
-    const squadName = rel.split(/[/\\]/)[0];
+    const group = groupFor(filePath);
+    if (!groupMap[group]) groupMap[group] = { tasks: [], totalScore: 0 };
 
-    if (!squadMap[squadName]) {
-      squadMap[squadName] = { tasks: [], totalScore: 0, issues: [] };
-    }
-
-    // Fix mode: add frontmatter before auditing
     if (FIX_MODE) {
       const content = fs.readFileSync(filePath, 'utf-8');
-      if (!content.startsWith('---')) {
+      const fm = parseFrontmatter(content);
+      if (!fm && !hasSection(content, METADATA_SECTIONS)) {
         fixFrontmatter(filePath);
         fixedCount++;
       }
     }
 
-    const result = auditFile(filePath);
-    squadMap[squadName].tasks.push(result);
-    squadMap[squadName].totalScore += result.score;
+    const result = auditFile(filePath, group);
+    groupMap[group].tasks.push(result);
+    groupMap[group].totalScore += result.score;
     allResults.push(result);
   }
 
   // ── Build report ───────────────────────────────────────────────
-  const squadSummaries = [];
-  for (const [name, data] of Object.entries(squadMap).sort((a, b) => a[0].localeCompare(b[0]))) {
+  const groupSummaries = [];
+  for (const [name, data] of Object.entries(groupMap).sort((a, b) => a[0].localeCompare(b[0]))) {
     const avg = Math.round(data.totalScore / data.tasks.length);
     const critical = data.tasks.filter(t => t.score < 50).length;
     const warning = data.tasks.filter(t => t.score >= 50 && t.score < 70).length;
-    squadSummaries.push({
-      squad: name,
+    groupSummaries.push({
+      group: name,
       taskCount: data.tasks.length,
       avgScore: avg,
       critical,
@@ -166,12 +198,9 @@ async function main() {
     });
   }
 
-  // Issue frequency
   const issueFreq = {};
   for (const r of allResults) {
-    for (const iss of r.issues) {
-      issueFreq[iss] = (issueFreq[iss] || 0) + 1;
-    }
+    for (const iss of r.issues) issueFreq[iss] = (issueFreq[iss] || 0) + 1;
   }
   const commonIssues = Object.entries(issueFreq)
     .sort((a, b) => b[1] - a[1])
@@ -183,42 +212,36 @@ async function main() {
   const report = {
     summary: {
       totalFiles: allResults.length,
-      totalSquads: squadSummaries.length,
+      totalGroups: groupSummaries.length,
       overallAvgScore: overallAvg,
       passingFiles: allResults.filter(r => r.score >= 70).length,
       warningFiles: allResults.filter(r => r.score >= 50 && r.score < 70).length,
       criticalFiles: allResults.filter(r => r.score < 50).length,
       fixedInThisRun: fixedCount,
     },
-    squadSummaries,
+    groupSummaries,
     commonIssues,
-    problemFiles: problemFiles.map(f => ({
-      file: f.file,
-      squad: path.relative(SQUADS_DIR, f.path).split(/[/\\]/)[0],
-      score: f.score,
-      issues: f.issues,
-    })),
+    problemFiles: problemFiles.map(f => ({ file: f.file, group: f.group, score: f.score, issues: f.issues })),
   };
 
   if (JSON_MODE) {
     console.log(JSON.stringify(report, null, 2));
   } else {
-    // Human-readable output
     console.log('\n=== SINAPSE Task Audit Report ===\n');
     console.log(`Total files: ${report.summary.totalFiles}`);
-    console.log(`Total squads: ${report.summary.totalSquads}`);
+    console.log(`Total groups: ${report.summary.totalGroups}`);
     console.log(`Overall avg score: ${report.summary.overallAvgScore}%`);
     console.log(`Passing (>=70): ${report.summary.passingFiles}`);
     console.log(`Warning (50-69): ${report.summary.warningFiles}`);
     console.log(`Critical (<50): ${report.summary.criticalFiles}`);
     if (fixedCount > 0) console.log(`Fixed (frontmatter added): ${fixedCount}`);
 
-    console.log('\n--- Squad Summary ---\n');
-    console.log('Squad'.padEnd(30) + 'Tasks'.padEnd(8) + 'Avg'.padEnd(6) + 'Crit'.padEnd(6) + 'Warn'.padEnd(6) + 'Pass');
+    console.log('\n--- Group Summary ---\n');
+    console.log('Group'.padEnd(30) + 'Tasks'.padEnd(8) + 'Avg'.padEnd(6) + 'Crit'.padEnd(6) + 'Warn'.padEnd(6) + 'Pass');
     console.log('-'.repeat(62));
-    for (const s of squadSummaries) {
+    for (const s of groupSummaries) {
       console.log(
-        s.squad.padEnd(30) +
+        s.group.padEnd(30) +
         String(s.taskCount).padEnd(8) +
         `${s.avgScore}%`.padEnd(6) +
         String(s.critical).padEnd(6) +
@@ -235,17 +258,15 @@ async function main() {
     if (problemFiles.length > 0) {
       console.log(`\n--- Problem Files (score < 70): ${problemFiles.length} files ---\n`);
       for (const f of problemFiles.slice(0, 50)) {
-        const squad = path.relative(SQUADS_DIR, f.path).split(/[/\\]/)[0];
-        console.log(`  [${f.score}%] ${squad}/${f.file}: ${f.issues.join('; ')}`);
+        console.log(`  [${f.score}%] ${f.group}/${f.file}: ${f.issues.join('; ')}`);
       }
-      if (problemFiles.length > 50) {
-        console.log(`  ... and ${problemFiles.length - 50} more`);
-      }
+      if (problemFiles.length > 50) console.log(`  ... and ${problemFiles.length - 50} more`);
     }
   }
 
-  // Write JSON for report generation
+  // Write JSON report (create the directory first — this used to crash with ENOENT).
   const jsonPath = path.join(ROOT, 'docs', 'reports', '9.3-task-audit.json');
+  fs.mkdirSync(path.dirname(jsonPath), { recursive: true });
   fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2), 'utf-8');
   console.log(`\nJSON saved to: ${jsonPath}`);
 }

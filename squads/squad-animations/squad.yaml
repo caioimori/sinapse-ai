@@ -20,7 +20,7 @@ metadata:
   workflows_count: 5
   checklists_count: 3
   templates_count: 5
-  total_files: 119
+  total_files: 114
   agents: 9
   tasks: 75
   workflows: 0

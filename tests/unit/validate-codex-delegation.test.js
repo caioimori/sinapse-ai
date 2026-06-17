@@ -8,8 +8,7 @@ const {
   validateCodexDelegation,
 } = require('../../.sinapse-ai/infrastructure/scripts/validate-codex-delegation');
 
-// TODO: buildHandoffPacket not yet exported — re-enable when delegation is complete
-describe.skip('validate-codex-delegation', () => {
+describe('validate-codex-delegation', () => {
   let tmpRoot;
 
   beforeEach(() => {
@@ -31,10 +30,12 @@ describe.skip('validate-codex-delegation', () => {
     write('.codex/agents/brand-orqx.md');
     write('.codex/agents/brand-strategist.md');
     write('.codex/command-registry.json', JSON.stringify({ version: 1, agents: {} }));
+    // Mirror the REAL production schema (.codex/handoff-packet.schema.json):
+    // additionalProperties allowed, required = the 5 core fields the packet must carry.
     write('.codex/handoff-packet.schema.json', JSON.stringify({
       type: 'object',
-      additionalProperties: false,
-      required: ['mission', 'phase', 'owner', 'classification', 'inputs', 'outputs', 'validators', 'sharedSurfaceRisk', 'nextHandoff', 'delegationChain'],
+      additionalProperties: true,
+      required: ['mission', 'owner', 'inputs', 'outputs', 'validators'],
       properties: {
         mission: { type: 'string' },
         phase: { type: 'string' },

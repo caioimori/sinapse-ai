@@ -6,10 +6,8 @@ const path = require('path');
 const Ajv2020 = require('ajv/dist/2020');
 const {
   loadDelegationMatrix,
-} = require(path.join(__dirname, '..', '..', '..', '.codex', 'scripts', 'resolve-codex-delegation'));
-const {
   buildHandoffPacket,
-} = require(path.join(__dirname, '..', '..', '..', '.codex', 'scripts', 'resolve-codex-delegation-parity'));
+} = require(path.join(__dirname, '..', '..', '..', '.codex', 'scripts', 'resolve-codex-delegation'));
 const {
   loadRegistry: loadCommandRegistryFile,
 } = require('./validate-codex-command-registry');
@@ -27,7 +25,6 @@ const REQUIRED_ORCHESTRATORS = Object.freeze([
   'paidmedia-orqx',
   'product-orqx',
   'research-orqx',
-  'claude-orqx',
   'council-orqx',
   'storytelling-orqx',
   'cyber-orqx',

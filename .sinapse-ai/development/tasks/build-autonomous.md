@@ -1,3 +1,11 @@
+---
+task: build-autonomous
+responsavel: '@developer'
+entrada: '`story-id` + opções (`--worktree`, `--timeout`, `--max-retries`)'
+saida: 'Subtasks executadas com retry/self-critique + estado de build + relatório'
+atomic_layer: Task
+---
+
 # Task: Build Autonomous
 
 > **Command:** `*build-autonomous {story-id}`
@@ -192,8 +200,10 @@ The AutonomousBuildLoop emits these events for monitoring:
 _Task file for Story 8.1 - Coder Agent Loop_
 
 ## Handoff
+
 next_agent: @quality-gate
 next_command: *review {story-id}
 condition: Autonomous build completed successfully
 alternatives:
-  - agent: @developer, command: *build-resume {story-id}, condition: Build failed, needs resume
+
+- agent: @developer, command: *build-resume {story-id}, condition: Build failed, needs resume

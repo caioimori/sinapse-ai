@@ -21,9 +21,9 @@
 
 ## O que e o SINAPSE?
 
-SINAPSE e um meta-framework open source que organiza **189 agentes de IA em 18 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 13 hooks ativos que bloqueiam violacoes em tempo de execucao.
+SINAPSE e um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro e governado por uma **Constitution com enforcement real** — 13 hooks ativos que bloqueiam violacoes em tempo de execucao.
 
-O conceito central e simples: em vez de um unico assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasao e conversao. Cada um com sua propria knowledge base, workflows e tasks — totalizando **1.213 tasks executaveis** prontas para uso, distribuidas pelos 18 squads.
+O conceito central e simples: em vez de um unico assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasao e conversao. Cada um com sua propria knowledge base, workflows e tasks — totalizando **1.200 tasks executaveis** prontas para uso, distribuidas pelos 17 squads.
 
 Diferente de ferramentas que apenas conversam com IA, o SINAPSE impoe disciplina. O pipeline **Documentation-First** exige que uma story seja criada e validada antes de qualquer linha de codigo. Quality gates rodam automaticamente antes de merge. Agentes nao autorizados sao bloqueados de fazer push. Tudo isso via hooks que interceptam operacoes em tempo real — nao depois.
 
@@ -33,7 +33,7 @@ Diferente de ferramentas que apenas conversam com IA, o SINAPSE impoe disciplina
 
 IA generativa tem um problema conhecido: quanto mais voce pede, pior fica. Um unico assistente tentando fazer tudo — codigo, copy, branding, testes, deploy — perde contexto, inventa features e sofre de context amnesia depois de poucas iteracoes longas.
 
-SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 189 agentes em 18 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
+SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 172 agentes em 17 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
 
 O diferencial nao e apenas quantidade de agentes. E **governanca real**: 13 hooks ativos interceptam operacoes em tempo de execucao, uma Constitution com 10 artigos rege o framework, e 6 desses artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas antes de executar, nao detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
 
@@ -67,7 +67,7 @@ Configuracao detalhada: [`docs/guides/grounding-setup.md`](docs/guides/grounding
 npx sinapse-ai install
 ```
 
-O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex), e instala os 18 squads automaticamente. Re-rodar o comando faz upsert idempotente — preserva suas customizacoes e so atualiza o que mudou.
+O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex), e instala os 17 squads automaticamente. Re-rodar o comando faz upsert idempotente — preserva suas customizacoes e so atualiza o que mudou.
 
 ### 2. Verifique
 
@@ -85,7 +85,7 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 *help               # Lista comandos disponiveis
 ```
 
-Pronto. Voce tem 18 squads operando no seu terminal.
+Pronto. Voce tem 17 squads operando no seu terminal.
 
 > **Nota sobre `npm install`:** A partir da v10.0.0-rc.4, o SINAPSE roda um postinstall automatico que sincroniza agents para o Claude Code, cria os diretorios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e executa um health check rapido. Para desabilitar (CI, pipelines avancadas), defina `SINAPSE_SKIP_POSTINSTALL=1` antes do `npm install`, ou rode `npm install --ignore-scripts` (comportamento nativo do npm — nenhum postinstall eh executado). Nesse caso, rode `sinapse doctor --fix` apos a instalacao para garantir que o ambiente esteja pronto.
 
@@ -279,32 +279,31 @@ O framework garante que nenhuma etapa seja pulada. Cada gate bloqueia automatica
 
 ---
 
-## 18 Squads Especializados
+## 17 Squads Especializados
 
 Cada squad e uma equipe autonoma com orquestrador, agentes especialistas, knowledge base, tasks e workflows proprios.
 
 | Squad | Dominio | Agentes |
 |-------|---------|---------|
 | **squad-brand** | Estrategia de marca, arquetipos, auditoria visual | 15 |
-| **squad-design** | Design systems, componentes, tokens, UI | 15 |
-| **squad-copy** | Copywriting persuasivo, headlines, conversao | 14 |
+| **squad-design** | Design systems, componentes, tokens, UI, art direction, LP premium | 14 |
+| **squad-copy** | Copywriting persuasivo, headlines, conversao | 13 |
 | **squad-council** | Advisors estrategicos (Munger, Dalio, Thiel, ...) | 11 |
-| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 11 |
-| **squad-commercial** | Vendas, funil, revenue, pipeline comercial | 11 |
-| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 10 |
-| **claude-code-mastery** | Claude Code avancado, MCP, integracao profunda | 10 |
+| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 10 |
+| **squad-commercial** | Vendas, funil, revenue, pipeline comercial | 10 |
+| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 9 |
 | **squad-animations** | Motion design, CSS, particulas, 3D | 9 |
 | **squad-cloning** | Clonagem cognitiva, mind synthesis, digital twins | 9 |
-| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 9 |
+| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 8 |
 | **squad-courses** | Cursos, curriculos, assessments, launch educacional | 8 |
-| **squad-research** | Market analysis, inteligencia competitiva | 8 |
-| **claude-code-mastery** | Dominio avancado do Claude Code como ferramenta | 8 |
+| **squad-research** | Market analysis, inteligencia competitiva | 7 |
+| **claude-code-mastery** | Claude Code avancado, MCP, integracao profunda | 8 |
 | **squad-content** | Governanca editorial, estrategia de conteudo | 7 |
 | **squad-product** | Product discovery, estrategia, operacoes | 7 |
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
-| **squad-finance** | Budget, pricing, profitability analysis | 5 |
+| **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 18 squads, 189 agentes especializados, 1.213 tasks**
+**Total: 17 squads, 172 agentes especializados, 1.200 tasks**
 
 Cada squad e ativado via seu orquestrador:
 
@@ -328,7 +327,7 @@ O SINAPSE suporta duas IDEs com integracoes profundas:
 | **Claude Code** | `@agent-name` | Hooks, rules contextuais, deny/allow, Chrome Brain |
 | **Codex CLI** | `/skills` ou `$skill-name` | Skills nativas, multi-model, `codex exec` para CI/CD |
 
-Ambas as IDEs tem acesso a todos os 18 squads, 189 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
+Ambas as IDEs tem acesso a todos os 17 squads, 172 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
 ### Tabela de Paridade
 
@@ -488,7 +487,7 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes completos.
 npx sinapse-ai install
 ```
 
-Um comando. 18 squads. 189 agentes. Governanca constitucional. Tudo operando direto no terminal.
+Um comando. 17 squads. 172 agentes. Governanca constitucional. Tudo operando direto no terminal.
 
 **[Documentacao completa](docs/guides/getting-started.md)** • **[Reportar issue](https://github.com/caioimori/sinapse-ai/issues)** • **[Discussions](https://github.com/caioimori/sinapse-ai/discussions)**
 

@@ -1,5 +1,6 @@
 # regenerate-orqx-stubs.ps1
-# Regenera os 22 stubs de orchestrators em ~/.claude/agents/*-orqx.md
+# Regenera os stubs de orchestrators em ~/.claude/agents/*-orqx.md
+# Ecossistema pos-fusao: 17 squads / 172 agentes / 1.200 tasks (squad-artdir fundido em squad-design)
 # Formato completo (39 linhas) com fix HALT → briefing-auto-orchestration
 
 $ErrorActionPreference = 'Stop'
@@ -7,7 +8,6 @@ $ErrorActionPreference = 'Stop'
 # Mapeamento orqx → squad (canonical em ~/.sinapse/{squad}/agents/{id}.md)
 $mapping = @(
     @{ id = 'animations-orqx'; squad = 'squad-animations' }
-    @{ id = 'artdir-orqx'; squad = 'squad-artdir' }
     @{ id = 'brand-orqx'; squad = 'squad-brand' }
     @{ id = 'claude-orqx'; squad = 'squad-claude' }
     @{ id = 'cloning-orqx'; squad = 'squad-cloning' }

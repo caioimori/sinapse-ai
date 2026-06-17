@@ -21,17 +21,12 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const { parseAllAgents } = require('./agent-parser');
+const { parseAllAgents, parseAgentFile } = require('./agent-parser');
 const { generateAllRedirects, writeRedirects } = require('./redirect-generator');
 const { validateAllIdes, formatValidationReport } = require('./validator');
-const { syncGeminiCommands, buildGeminiCommandFiles } = require('./gemini-commands');
 
-// Transformers
+// Transformers (Claude Code + Codex only — secondary IDE adapters removed)
 const claudeCodeTransformer = require('./transformers/claude-code');
-const cursorTransformer = require('./transformers/cursor');
-const antigravityTransformer = require('./transformers/antigravity');
-const githubCopilotTransformer = require('./transformers/github-copilot');
-const kimiTransformer = require(path.resolve(__dirname, 'transformers', 'kimi'));
 
 // ANSI colors for output
 const colors = {
@@ -63,35 +58,15 @@ function loadConfig(projectRoot) {
         path: '.claude/commands/SINAPSE/agents',
         format: 'full-markdown-yaml',
       },
+      // Post-E8: .codex is owned by the canonical Codex sync
+      // (sync-codex-local-first.js), which writes thin runtime pointers
+      // resolved at runtime by resolve-codex-agent.js. ide-sync drives
+      // claude-code only now; leaving this enabled would clobber those
+      // pointers with full agent bodies on a bare `sync:ide`.
       codex: {
-        enabled: true,
+        enabled: false,
         path: '.codex/agents',
         format: 'full-markdown-yaml',
-      },
-      gemini: {
-        enabled: true,
-        path: '.gemini/rules/SINAPSE/agents',
-        format: 'full-markdown-yaml',
-      },
-      'github-copilot': {
-        enabled: true,
-        path: '.github/agents',
-        format: 'github-copilot',
-      },
-      cursor: {
-        enabled: true,
-        path: '.cursor/rules/agents',
-        format: 'condensed-rules',
-      },
-      antigravity: {
-        enabled: true,
-        path: '.antigravity/rules/agents',
-        format: 'cursor-style',
-      },
-      kimi: {
-        enabled: true,
-        path: '.kimi/skills',
-        format: 'kimi-skill',
       },
     },
     redirects: {
@@ -131,10 +106,6 @@ function loadConfig(projectRoot) {
 function getTransformer(format) {
   const transformers = {
     'full-markdown-yaml': claudeCodeTransformer,
-    'condensed-rules': cursorTransformer,
-    'cursor-style': antigravityTransformer,
-    'github-copilot': githubCopilotTransformer,
-    'kimi-skill': kimiTransformer,
   };
 
   const transformer = transformers[format];
@@ -212,15 +183,13 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
 
   // Transform and write each agent
   for (const agent of agents) {
-    // Skip agents with fatal errors (no YAML block found or failed parse with no fallback)
-    if (agent.error && agent.error === 'Failed to parse YAML') {
-      result.errors.push({
-        agent: agent.id,
-        error: agent.error,
-      });
-      continue;
-    }
-    if (agent.error && agent.error === 'No YAML block found') {
+    // Skip only when there is no content at all to mirror. The claude-code
+    // transform is an identity copy of the raw file body, so an agent whose
+    // YAML block is missing/malformed but whose body exists can still be
+    // synced verbatim — e.g. the prose-format squad orqx
+    // (commercial/finance/paidmedia) pending standardization to the canonical
+    // fenced yaml block (E6). Genuinely empty/unreadable files are skipped.
+    if (agent.error && !agent.raw) {
       result.errors.push({
         agent: agent.id,
         error: agent.error,
@@ -276,6 +245,52 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
 }
 
 /**
+ * Collect squad orchestrator agents (squads/SQUAD/agents/*-orqx.md).
+ *
+ * Framework-core agents come from config.source
+ * (.sinapse-ai/development/agents). The 17 squad orchestrators live under
+ * squads/** and were never enumerated here — so the Claude IDE dir only ever
+ * received the 12 core agents, and the doctor ide-sync check (which expects
+ * core + orqx) rightly WARNed. This mirrors the discovery logic in
+ * core/doctor/checks/ide-sync.js so the two always agree. Filenames are the
+ * flat basename (e.g. brand-orqx.md), via the claude-code transformer's
+ * getFilename, even though the YAML id is "squad-brand/brand-orqx".
+ *
+ * @param {string} projectRoot - Project root directory
+ * @returns {object[]} - Parsed orqx agent data
+ */
+function collectSquadOrqxAgents(projectRoot) {
+  const squadsRoot = path.join(projectRoot, 'squads');
+  const out = [];
+  if (!fs.existsSync(squadsRoot)) return out;
+
+  let squadDirs = [];
+  try {
+    squadDirs = fs
+      .readdirSync(squadsRoot, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name);
+  } catch {
+    return out;
+  }
+
+  for (const squadName of squadDirs) {
+    const agentsDir = path.join(squadsRoot, squadName, 'agents');
+    if (!fs.existsSync(agentsDir)) continue;
+    let files = [];
+    try {
+      files = fs.readdirSync(agentsDir).filter((f) => f.endsWith('-orqx.md'));
+    } catch {
+      continue;
+    }
+    for (const file of files) {
+      out.push(parseAgentFile(path.join(agentsDir, file)));
+    }
+  }
+  return out;
+}
+
+/**
  * Execute sync command
  * @param {object} options - Command options
  */
@@ -301,7 +316,7 @@ async function commandSync(options) {
     console.log(`${colors.dim}Source: ${agentsDir}${colors.reset}`);
   }
 
-  const agents = parseAllAgents(agentsDir);
+  const agents = [...parseAllAgents(agentsDir), ...collectSquadOrqxAgents(projectRoot)];
   if (!options.quiet) {
     console.log(`${colors.dim}Found ${agents.length} agents${colors.reset}`);
     console.log('');
@@ -334,13 +349,7 @@ async function commandSync(options) {
 
     const result = syncIde(agents, ideConfig, ideName, projectRoot, options);
 
-    // Gemini CLI: also sync slash launcher command files (.gemini/commands/*.toml)
-    if (ideName === 'gemini') {
-      const geminiCommands = syncGeminiCommands(agents, projectRoot, options);
-      result.commandFiles = geminiCommands.files;
-    } else {
-      result.commandFiles = [];
-    }
+    result.commandFiles = [];
 
     results.push(result);
 
@@ -416,9 +425,9 @@ async function commandValidate(options) {
   console.log(`${colors.bright}${colors.blue}🔍 IDE Sync Validation${colors.reset}`);
   console.log('');
 
-  // Parse all agents
+  // Parse all agents (framework core + squad orchestrators)
   const agentsDir = path.join(projectRoot, config.source);
-  const agents = parseAllAgents(agentsDir);
+  const agents = [...parseAllAgents(agentsDir), ...collectSquadOrqxAgents(projectRoot)];
 
   // Build expected files for each IDE
   const ideConfigs = {};
@@ -473,18 +482,6 @@ async function commandValidate(options) {
       expectedFiles,
       targetDir: path.join(projectRoot, ideConfig.path),
     };
-
-    // Gemini CLI command launcher files are synced under .gemini/commands/*.toml
-    if (ideName === 'gemini') {
-      const commandFiles = buildGeminiCommandFiles(agents).map((entry) => ({
-        filename: entry.filename,
-        content: entry.content,
-      }));
-      ideConfigs['gemini-commands'] = {
-        expectedFiles: commandFiles,
-        targetDir: path.join(projectRoot, '.gemini', 'commands'),
-      };
-    }
   }
 
   // Validate

@@ -5,151 +5,187 @@ const fs = require('fs');
 const path = require('path');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
+const MATRIX_PATH = path.join('.codex', 'delegation-matrix.json');
 
 function loadDelegationMatrix(projectRoot = PROJECT_ROOT) {
-  const matrixPath = path.join(projectRoot, '.codex', 'delegation-matrix.json');
+  const matrixPath = path.join(projectRoot, MATRIX_PATH);
   const raw = fs.readFileSync(matrixPath, 'utf8');
   return JSON.parse(raw);
 }
 
-function normalizeAgentInput(value) {
-  return String(value || '').trim().replace(/^@/, '').toLowerCase();
-}
-
 function normalizeRouteInput(value) {
-  return String(value || '').trim().replace(/^\*/, '').toLowerCase();
+  return String(value || '')
+    .trim()
+    .replace(/^[@*]/, '')
+    .toLowerCase();
 }
 
-function collectAliases(routeId, routeSpec) {
+function normalizeActorInput(value) {
+  return String(value || '')
+    .trim()
+    .replace(/^@/, '')
+    .toLowerCase();
+}
+
+function collectRouteAliases(routeId, routeSpec) {
   return [routeId, ...(routeSpec.aliases || [])]
     .map((alias) => normalizeRouteInput(alias))
     .filter(Boolean);
 }
 
-function getSourceAgentConfig(matrix, agentInput) {
-  const normalized = normalizeAgentInput(agentInput);
-
-  if (['sinapse-orqx', 'imperator'].includes(normalized)) {
-    return {
-      sourceAgent: 'sinapse-orqx',
-      routes: {
-        ...(matrix.masterRoutes || {}),
-        ...(matrix.orqxRoutes || {}),
-      },
-    };
-  }
-
-  const matches = Object.entries(matrix.specialistRoutes || {})
-    .filter(([sourceAgentId, sourceSpec]) => {
-      const aliases = [sourceAgentId, ...(sourceSpec.aliases || [])]
-        .map((alias) => normalizeAgentInput(alias))
-        .filter(Boolean);
-      return aliases.includes(normalized);
-    });
-
-  if (matches.length > 1) {
-    throw new Error(`Ambiguous Codex delegation source "${agentInput}"`);
-  }
-
-  if (matches.length === 1) {
-    return {
-      sourceAgent: matches[0][0],
-      routes: matches[0][1].routes || {},
-    };
-  }
-
-  return null;
-}
-
-function resolveRoute(routes, routeInput) {
+function resolveDelegationRoute(routeInput, projectRoot = PROJECT_ROOT, matrix = loadDelegationMatrix(projectRoot)) {
   const normalized = normalizeRouteInput(routeInput);
-  const matches = Object.entries(routes || {})
-    .filter(([routeId, routeSpec]) => collectAliases(routeId, routeSpec).includes(normalized));
+  const matches = Object.entries(matrix.routes || {}).filter(([routeId, routeSpec]) =>
+    collectRouteAliases(routeId, routeSpec).includes(normalized),
+  );
 
   if (matches.length > 1) {
     throw new Error(`Ambiguous Codex delegation route "${routeInput}"`);
   }
 
   if (matches.length === 0) {
-    return null;
+    throw new Error(`Unknown Codex delegation route "${routeInput}"`);
   }
 
+  const [routeId, routeSpec] = matches[0];
+  return { routeId, routeSpec };
+}
+
+function resolveRouteRecord(routeInput, projectRoot = PROJECT_ROOT, matrix = loadDelegationMatrix(projectRoot)) {
+  if (
+    routeInput &&
+    typeof routeInput === 'object' &&
+    typeof routeInput.routeId === 'string' &&
+    routeInput.routeSpec &&
+    typeof routeInput.routeSpec === 'object'
+  ) {
+    return routeInput;
+  }
+
+  return resolveDelegationRoute(routeInput, projectRoot, matrix);
+}
+
+function routeMentionsSource(routeSpec, sourceInput) {
+  const normalizedSource = normalizeActorInput(sourceInput);
+  if (!normalizedSource) {
+    return true;
+  }
+
+  if (normalizeActorInput(routeSpec.owner) === normalizedSource) {
+    return true;
+  }
+
+  return (routeSpec.delegationChain || []).some(
+    (step) =>
+      normalizeActorInput(step.from) === normalizedSource ||
+      normalizeActorInput(step.to) === normalizedSource,
+  );
+}
+
+function buildHandoffPacket(routeInput, projectRoot = PROJECT_ROOT, matrix = loadDelegationMatrix(projectRoot)) {
+  const { routeId, routeSpec } = resolveRouteRecord(routeInput, projectRoot, matrix);
+  const chain = routeSpec.delegationChain || [];
+  // The next handoff is the immediate next actor the owner hands the work to,
+  // i.e. the target of the first delegation step.
+  const nextStep = chain[0] || null;
+
   return {
-    routeId: matches[0][0],
-    routeSpec: matches[0][1],
+    routeId,
+    mission: routeSpec.mission,
+    phase: matrix.phase || 'W5 / Delegation Matrix Parity',
+    owner: routeSpec.owner,
+    classification: routeSpec.classification,
+    summary: routeSpec.summary || '',
+    inputs: routeSpec.inputs || [],
+    outputs: routeSpec.outputs || [],
+    validators: routeSpec.validators || [],
+    sharedSurfaceRisk: routeSpec.sharedSurfaceRisk || 'low',
+    nextHandoff: {
+      to: nextStep?.to || routeSpec.owner,
+      artifact: routeSpec.outputs?.[0] || 'handoff-packet',
+    },
+    delegationChain: chain,
+    resources: routeSpec.resources || [],
+    notes: routeSpec.notes || [],
   };
 }
 
-function resolveCodexDelegation(agentInput, routeInput, projectRoot = PROJECT_ROOT) {
-  const matrix = loadDelegationMatrix(projectRoot);
-  const source = getSourceAgentConfig(matrix, agentInput);
-  if (!source) {
-    throw new Error(`Unknown Codex delegation source "${agentInput}"`);
-  }
+function resolveCodexDelegation(routeInput, projectRoot = PROJECT_ROOT, options = {}) {
+  const matrix = options.matrix || loadDelegationMatrix(projectRoot);
+  const { routeId, routeSpec } = resolveDelegationRoute(routeInput, projectRoot, matrix);
 
-  const route = resolveRoute(source.routes, routeInput);
-  if (!route) {
-    throw new Error(`Unknown Codex delegation route "${routeInput}" for source "${source.sourceAgent}"`);
+  if (options.source && !routeMentionsSource(routeSpec, options.source)) {
+    throw new Error(
+      `Codex delegation route "${routeId}" is not available from source "${options.source}"`,
+    );
   }
 
   return {
-    sourceAgent: source.sourceAgent,
-    routeId: route.routeId,
-    classification: route.routeSpec.classification,
-    target: route.routeSpec.target,
-    handoff: route.routeSpec.handoff || null,
-    sourceDocs: route.routeSpec.sourceDocs || [],
-    handoffSchemaPath: matrix.handoffSchemaPath,
-    handoffTemplatePath: matrix.handoffTemplatePath,
+    routeId,
+    owner: routeSpec.owner,
+    requestType: routeSpec.requestType,
+    classification: routeSpec.classification,
+    mission: routeSpec.mission,
+    summary: routeSpec.summary || '',
+    inputs: routeSpec.inputs || [],
+    outputs: routeSpec.outputs || [],
+    validators: routeSpec.validators || [],
+    sharedSurfaceRisk: routeSpec.sharedSurfaceRisk || 'low',
+    resources: routeSpec.resources || [],
+    delegationChain: routeSpec.delegationChain || [],
+    handoffPacket: buildHandoffPacket({ routeId, routeSpec }, projectRoot, matrix),
   };
 }
 
 function parseArgs(argv = process.argv.slice(2)) {
-  const args = argv.filter((arg) => !arg.startsWith('--'));
   const flags = new Set(argv.filter((arg) => arg.startsWith('--')));
+  const args = argv.filter((arg) => !arg.startsWith('--'));
+
   return {
-    agent: args[0],
-    route: args[1],
+    // Route is always the last positional. An optional leading positional is a
+    // source-agent filter, kept for backward compatibility with the legacy
+    // `<source> <route>` CLI shape.
+    source: args.length > 1 ? args[0] : null,
+    route: args.length > 1 ? args[1] : args[0],
     json: flags.has('--json'),
+    packet: flags.has('--packet'),
   };
 }
 
 function formatHumanResult(result) {
-  const lines = [
-    `Source: ${result.sourceAgent}`,
+  const nextHandoff = result.handoffPacket?.nextHandoff?.to || 'n/a';
+  const delegationPath = (result.delegationChain || [])
+    .map((step) => `${step.from} -> ${step.to}`)
+    .join(' | ');
+
+  return [
     `Route: ${result.routeId}`,
+    `Owner: ${result.owner}`,
+    `Request Type: ${result.requestType}`,
     `Classification: ${result.classification}`,
-    `Target Type: ${result.target.type}`,
-    `Target Agent: ${result.target.agentId}`,
-  ];
-
-  if (result.target.commandId) {
-    lines.push(`Target Command: ${result.target.commandId}`);
-  }
-  if (result.target.docPath) {
-    lines.push(`Target Doc: ${result.target.docPath}`);
-  }
-  if (result.target.taskPath) {
-    lines.push(`Target Task: ${result.target.taskPath}`);
-  }
-  if (result.handoff) {
-    lines.push(`Next Handoff: ${result.handoff.nextHandoff}`);
-  }
-
-  return lines.join('\n');
+    `Next Handoff: ${nextHandoff}`,
+    `Delegation Chain: ${delegationPath || 'n/a'}`,
+  ].join('\n');
 }
 
 function main() {
   const args = parseArgs();
-  if (!args.agent || !args.route) {
-    console.error('Usage: node .codex/scripts/resolve-codex-delegation.js <source-agent> <route> [--json]');
+  if (!args.route) {
+    console.error(
+      'Usage: node .codex/scripts/resolve-codex-delegation.js <route> [--json] [--packet]\n' +
+        '   or: node .codex/scripts/resolve-codex-delegation.js <source-agent> <route> [--json] [--packet]',
+    );
     process.exit(1);
   }
 
   try {
-    const result = resolveCodexDelegation(args.agent, args.route);
-    if (args.json) {
-      console.log(JSON.stringify(result, null, 2));
+    const result = resolveCodexDelegation(args.route, PROJECT_ROOT, {
+      source: args.source,
+    });
+    const payload = args.packet ? result.handoffPacket : result;
+
+    if (args.json || args.packet) {
+      console.log(JSON.stringify(payload, null, 2));
     } else {
       console.log(formatHumanResult(result));
     }
@@ -164,12 +200,15 @@ if (require.main === module) {
 }
 
 module.exports = {
+  MATRIX_PATH,
   loadDelegationMatrix,
-  normalizeAgentInput,
   normalizeRouteInput,
-  collectAliases,
-  getSourceAgentConfig,
-  resolveRoute,
+  normalizeActorInput,
+  collectRouteAliases,
+  resolveDelegationRoute,
+  resolveRouteRecord,
+  routeMentionsSource,
+  buildHandoffPacket,
   resolveCodexDelegation,
   parseArgs,
   formatHumanResult,

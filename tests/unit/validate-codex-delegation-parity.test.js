@@ -8,8 +8,7 @@ const {
   validateCodexDelegation,
 } = require('../../.sinapse-ai/infrastructure/scripts/validate-codex-delegation');
 
-// TODO: buildHandoffPacket not yet exported — re-enable when delegation parity is complete
-describe.skip('validate-codex-delegation-parity', () => {
+describe('validate-codex-delegation-parity', () => {
   let tmpRoot;
 
   beforeEach(() => {

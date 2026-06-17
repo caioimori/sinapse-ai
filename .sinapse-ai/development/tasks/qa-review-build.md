@@ -1,3 +1,11 @@
+---
+task: qa-review-build
+responsavel: '@quality-gate'
+entrada: '`storyId`, `spec.md`, `implementation.yaml`'
+saida: 'Relatório QA de 10 fases com sinal claro APPROVE/REJECT'
+atomic_layer: Task
+---
+
 # QA Review Build: 10-Phase Quality Assurance Review
 
 > **Phase:** QA Review
@@ -1222,3 +1230,13 @@ metadata:
     - quality-gate
     - automated-testing
 ```
+
+## Steps
+
+1. Carregar spec e implementação da story
+2. Validar implementação contra a spec
+3. Rodar testes automatizados (lint, unit, typecheck)
+4. Verificação de browser/banco quando aplicável
+5. Code review estruturado
+6. Checagem de regressões
+7. Emitir relatório com sinal APPROVE/REJECT
