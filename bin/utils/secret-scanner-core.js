@@ -61,8 +61,12 @@ const NAMED_PATTERNS = [
   { name: 'Generic Private Key', pattern: new RegExp(BEGIN + PK + END5) },
 
   // Connection Strings
-  { name: 'DB Connection String', pattern: /(?:postgres|mysql|mongodb|redis):\/\/[^:]+:[^@]+@[^/\s]+/i },
-  { name: 'Supabase DB URL', pattern: /postgresql:\/\/postgres\.[A-Za-z0-9]+:[^@]+@/i },
+  // user/password are restricted to non-whitespace so the negated classes can't
+  // span newlines and match a bogus region across a whole file (the host part of
+  // a URL followed by an unrelated colon and at-sign on later lines). Real
+  // credentials never contain whitespace, so true detection is unaffected.
+  { name: 'DB Connection String', pattern: /(?:postgres|mysql|mongodb|redis):\/\/[^:\s]+:[^@\s]+@[^/\s]+/i, credentialPlaceholderGated: true },
+  { name: 'Supabase DB URL', pattern: /postgresql:\/\/postgres\.[A-Za-z0-9]+:[^@\s]+@/i, credentialPlaceholderGated: true },
 
   // Generic Patterns (broader, lower confidence — placeholder-allowlisted)
   { name: 'Hardcoded Password', pattern: /(?:password|passwd|pwd)\s*[=:]\s*['"][^'"]{8,}['"]/i, lowConfidence: true },
@@ -176,6 +180,17 @@ function scanContent(content, options = {}) {
       // Isolate the value side of `key = "<value>"` / `Bearer <value>`.
       const valuePart = (matched.match(/(?:[=:]\s*['"]?|\s+)([^'"]+)['"]?\s*$/) || [null, matched])[1] || matched;
       if (isAllowlistPlaceholder(valuePart)) continue;
+    }
+
+    if (descriptor.credentialPlaceholderGated) {
+      // A connection string carries a structured user:password@host. When the
+      // password slot is a placeholder/interpolation (${VAR}, <pass>, a
+      // SCREAMING_SNAKE env-var name, your-password…) it is a template/example,
+      // NOT a leaked credential — and is the idiomatic, safe way to document
+      // one. A real leaked password (random/literal) is not allowlisted and is
+      // still flagged.
+      const cred = (matched.match(/:\/\/[^:/\s]+:([^@\s]+)@/) || [null, ''])[1];
+      if (cred && isAllowlistPlaceholder(cred)) continue;
     }
 
     if (descriptor.entropyGated) {

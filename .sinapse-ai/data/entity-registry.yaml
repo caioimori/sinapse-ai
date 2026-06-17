@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-17T18:47:32.600Z'
+  lastUpdated: '2026-06-17T19:03:15.397Z'
   entityCount: 810
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -831,8 +831,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:2b4e1d72abb938a05a35135fb93e18d53224bddf701161ded6830f22c48ffcd3
-      lastVerified: '2026-06-16T19:50:23.592Z'
+      checksum: sha256:ecf325fc29eb7ad8a89117deec91deae653e6d92bd2293e33a4979f582559893
+      lastVerified: '2026-06-17T19:03:15.213Z'
     staged-secret-scan:
       path: bin/utils/staged-secret-scan.js
       layer: L1
