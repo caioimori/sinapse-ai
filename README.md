@@ -287,21 +287,21 @@ Cada squad e uma equipe autonoma com orquestrador, agentes especialistas, knowle
 |-------|---------|---------|
 | **squad-brand** | Estrategia de marca, arquetipos, auditoria visual | 15 |
 | **squad-design** | Design systems, componentes, tokens, UI, art direction, LP premium | 14 |
-| **squad-copy** | Copywriting persuasivo, headlines, conversao | 14 |
+| **squad-copy** | Copywriting persuasivo, headlines, conversao | 13 |
 | **squad-council** | Advisors estrategicos (Munger, Dalio, Thiel, ...) | 11 |
-| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 11 |
-| **squad-commercial** | Vendas, funil, revenue, pipeline comercial | 11 |
-| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 10 |
+| **squad-storytelling** | Narrativa, roteiros, frameworks de historia | 10 |
+| **squad-commercial** | Vendas, funil, revenue, pipeline comercial | 10 |
+| **squad-paidmedia** | Meta Ads, Google Ads, campanhas, otimizacao | 9 |
 | **squad-animations** | Motion design, CSS, particulas, 3D | 9 |
 | **squad-cloning** | Clonagem cognitiva, mind synthesis, digital twins | 9 |
-| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 9 |
+| **squad-cybersecurity** | Threat intel, pentest, compliance, LGPD | 8 |
 | **squad-courses** | Cursos, curriculos, assessments, launch educacional | 8 |
-| **squad-research** | Market analysis, inteligencia competitiva | 8 |
+| **squad-research** | Market analysis, inteligencia competitiva | 7 |
 | **claude-code-mastery** | Claude Code avancado, MCP, integracao profunda | 8 |
 | **squad-content** | Governanca editorial, estrategia de conteudo | 7 |
 | **squad-product** | Product discovery, estrategia, operacoes | 7 |
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
-| **squad-finance** | Budget, pricing, profitability analysis | 5 |
+| **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
 **Total: 17 squads, 172 agentes especializados, 1.200 tasks**
 
