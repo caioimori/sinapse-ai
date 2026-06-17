@@ -47,8 +47,6 @@
     "docs/troubleshooting.md",
     "docs/ide-integration.md",
     "docs/agent-reference-guide.md",
-    "docs/codex-integration-process.md",
-    "docs/codex-parity-program.md",
     "docs/TELEMETRY.md",
     "README.md",
     "LICENSE"
@@ -106,6 +104,8 @@
     "validate:no-personal-leaks": "node scripts/validate-no-personal-leaks.js",
     "validate:orqx-discipline": "node scripts/validate-orqx-discipline.js",
     "validate:cross-refs": "node scripts/validate-cross-refs.js",
+    "validate:agents-md": "node scripts/validate-agents-md.js",
+    "validate:agents-md:fix": "node scripts/validate-agents-md.js --fix",
     "validate:all": "node scripts/validate-all.js",
     "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
     "validate:squad-yaml": "node scripts/sync-squad-yaml-components.js --check",

@@ -10,7 +10,7 @@ Resolve cross-squad conflicts or domain overlap without relying on shared-runtim
 
 ## Steps
 
-1. Read `.codex/catalog.json`, `.codex/agents/sinapse-orqx.md`, and `docs/codex-parity-program.md`.
+1. Read `.codex/catalog.json`, `.codex/agents/snps-orqx.md`, and `docs/framework/codex-parity/codex-parity-program.md`.
 2. Identify the squads, agents, or workflow surfaces in conflict.
 3. Separate the problem into:
    - ownership conflict

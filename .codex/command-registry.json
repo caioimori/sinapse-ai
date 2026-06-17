@@ -13,7 +13,7 @@
           "resources": [
             ".codex/catalog.json",
             "AGENTS.md",
-            "docs/codex-integration-process.md"
+            "docs/framework/codex-parity/codex-integration-process.md"
           ]
         },
         "route": {
@@ -32,7 +32,7 @@
           "resources": [
             ".codex/catalog.json",
             ".codex/agents/snps-orqx.md",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "status": {
@@ -41,7 +41,7 @@
           "target": ".codex/tasks/status-sinapse-capabilities.md",
           "resources": [
             ".codex/catalog.json",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "brief": {
@@ -60,7 +60,7 @@
           "resources": [
             ".codex/catalog.json",
             ".codex/agents/snps-orqx.md",
-            "docs/codex-parity-program.md"
+            "docs/framework/codex-parity/codex-parity-program.md"
           ]
         },
         "council": {

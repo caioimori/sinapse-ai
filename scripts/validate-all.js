@@ -50,6 +50,7 @@ const GUARDS = [
   { name: 'no-personal-leaks', script: 'validate:no-personal-leaks' },
   { name: 'orqx-discipline', script: 'validate:orqx-discipline' },
   { name: 'cross-refs', script: 'validate:cross-refs' },
+  { name: 'agents-md', script: 'validate:agents-md' },
   { name: 'manifest:parity', script: 'validate:manifest:parity' },
   { name: 'squad-yaml', script: 'validate:squad-yaml' },
   { name: 'squad-orqx', script: 'validate:squad-orqx' },
