@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-17T17:42:07.610Z'
-  entityCount: 811
+  lastUpdated: '2026-06-17T18:47:32.600Z'
+  entityCount: 810
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -568,27 +568,6 @@ entities:
         extensionPoints: []
       checksum: sha256:b2708f544b2fd2a5051cddb1e9523a43064b6d9c7d4a069b892193e78776700a
       lastVerified: '2026-06-15T01:36:42.617Z'
-    sinapse-graph:
-      path: bin/sinapse-graph.js
-      layer: L1
-      type: script
-      purpose: Entity at bin\sinapse-graph.js
-      keywords:
-        - sinapse
-        - graph
-      usedBy: []
-      dependencies:
-        - deprecation-warning
-        - cli
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:eaa333476e0a6afce2755c0e76fda390421d37a9852b504240f49e8b7faae3aa
-      lastVerified: '2026-06-15T01:36:42.618Z'
     sinapse-ids:
       path: bin/sinapse-ids.js
       layer: L1
@@ -705,7 +684,6 @@ entities:
         - warning
       usedBy:
         - sinapse
-        - sinapse-graph
         - sinapse-minimal
       dependencies: []
       externalDeps: []
@@ -912,8 +890,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:526309fd29e71d21723f89bffb0b2a06e840bd955e481f1a667df73240a91ccf
-      lastVerified: '2026-06-15T01:36:42.632Z'
+      checksum: sha256:c12ae025bf19b7ee0f57a2d028dbbe3ccf5b19de5756eb89055c1df0bf10a57b
+      lastVerified: '2026-06-17T18:42:04.720Z'
   tasks:
     add-mcp:
       path: .sinapse-ai/development/tasks/add-mcp.md
@@ -10409,7 +10387,6 @@ entities:
         - cli
       usedBy:
         - sinapse
-        - sinapse-graph
       dependencies:
         - code-intel-source
         - registry-source

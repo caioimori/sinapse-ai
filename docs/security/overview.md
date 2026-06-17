@@ -169,7 +169,7 @@ SINAPSE-AI uses 19 Claude Code hooks organized by trigger event:
 
 ### Design Principles
 
-1. **Fail-open** -- If a hook crashes or cannot parse input, it exits with code 0 (allow). This prevents hook bugs from blocking all development.
+1. **Fail-open for advisory hooks, fail-CLOSED for security guards** -- Advisory/observability hooks (validation, naming, capture) exit with code 0 (allow) if they crash or cannot parse input, so a hook bug never blocks all development. The **security guards are the deliberate exception**: the git pre-commit secret-scan, destructive-SQL guard, and framework-boundary guard fail-**closed** — if a guard cannot run, cannot read a staged file, or is uncertain, it **BLOCKS** the commit. A scanner that cannot run must never let a secret or a `DROP TABLE` through.
 2. **Fast** -- Each hook must complete in under 5 seconds.
 3. **Silent on success** -- Hooks only produce output when blocking or warning.
 4. **Deterministic** -- Same input always produces the same output.

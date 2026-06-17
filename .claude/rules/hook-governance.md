@@ -48,7 +48,7 @@ paths:
 
 ## Hook Design Principles
 
-1. **Fail-open** — If a hook crashes or can't parse input, exit 0 (allow)
+1. **Fail-open (advisory) / fail-CLOSED (security)** — Advisory hooks exit 0 (allow) if they crash or can't parse input, so a bug never blocks dev. The git **security guards** (secret-scan, destructive-SQL, framework-boundary) are the deliberate exception: they fail-**closed** — block the commit on any error or uncertainty.
 2. **Fast** — Each hook must complete in < 5 seconds
 3. **Silent on success** — Only output on block or warning
 4. **Deterministic** — Same input always produces same output
