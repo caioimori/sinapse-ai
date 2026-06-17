@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-17T08:20:38.537Z'
+  lastUpdated: '2026-06-17T17:06:26.708Z'
   entityCount: 811
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -15899,7 +15899,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:9eb2637a4f1f6edeabf358734b14e4c709bed37560f2e40aebf1ea3ef4572c3c
-      lastVerified: '2026-06-15T00:26:26.498Z'
+      lastVerified: '2026-06-17T17:06:26.662Z'
     validate:
       path: .sinapse-ai/infrastructure/scripts/codex-skills-sync/validate.js
       layer: L2

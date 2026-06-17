@@ -96,17 +96,19 @@ async function main() {
   }
 
   try {
-    const { RegistryUpdater } = require(path.resolve(REPO_ROOT, '.sinapse-ai/core/ids/registry-updater.js'));
-    const updater = new RegistryUpdater();
-    const result = await updater.processChanges(changes);
-
-    if (result.updated > 0) {
-      console.log(`[IDS-Hook] Registry updated: ${result.updated} entities processed.`);
-    }
-
-    if (result.errors.length > 0) {
-      console.warn(`[IDS-Hook] ${result.errors.length} errors during update.`);
-    }
+    // Use the canonical deterministic generator (populate-entity-registry.js),
+    // NOT the incremental RegistryUpdater. The updater emits a divergent schema
+    // (categories-first, dropping the metadata/resolutionRate block) which
+    // flipped the entire ~30k-line registry on every commit — the recurring
+    // drift. populate() is a fixed point: it preserves lastUpdated/lastVerified
+    // when content is unchanged, so an unchanged repo regenerates byte-identical
+    // (zero churn).
+    const { populate } = require(
+      path.resolve(REPO_ROOT, '.sinapse-ai/development/scripts/populate-entity-registry.js'),
+    );
+    const registry = populate();
+    const count = registry && registry.metadata ? registry.metadata.entityCount : 0;
+    console.log(`[IDS-Hook] Registry regenerated (canonical schema, ${count} entities).`);
   } catch (err) {
     // Post-commit hook should NEVER block workflow
     console.error(`[IDS-Hook] Registry update failed (non-blocking): ${err.message}`);

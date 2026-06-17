@@ -1364,7 +1364,7 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:bc7ca25cb68cd6d4e2c04f4161b3bddffeaa3110ad08189c0557a42d1977100c
+    hash: sha256:d1180e67a2475df7d46a7771662b6a796a714fea6e846c3cc87d4500d6a44229
     type: data
     size: 558796
   - path: data/learned-patterns.yaml
@@ -3436,9 +3436,9 @@ files:
     type: script
     size: 8847
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:2a391549dae66de9138f0ea060d5eb4c2dc5423f581bbf26cf315cc9408adebe
+    hash: sha256:b2cb08dc1d0e7c6c22436c11f073cdaae9516b28a55ad5a454412e87aaf59bba
     type: script
-    size: 15836
+    size: 18011
   - path: infrastructure/scripts/ide-sync/persona-renderer.js
     hash: sha256:44f76be1e48c4a6271d8c721687d8788d2317a1163d74731abfe97f36775334d
     type: script

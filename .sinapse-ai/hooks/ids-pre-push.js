@@ -105,13 +105,15 @@ async function main() {
   }
 
   try {
-    const { RegistryUpdater } = require(path.resolve(REPO_ROOT, '.sinapse-ai/core/ids/registry-updater.js'));
-    const updater = new RegistryUpdater();
-    const result = await updater.processChanges(changes);
-
-    if (result.updated > 0) {
-      console.log(`[IDS-Hook] Registry synced: ${result.updated} entities updated before push.`);
-    }
+    // Canonical deterministic generator (see ids-post-commit.js for why the
+    // incremental RegistryUpdater is NOT used: it emits a divergent schema that
+    // churned the whole registry). populate() is a fixed point.
+    const { populate } = require(
+      path.resolve(REPO_ROOT, '.sinapse-ai/development/scripts/populate-entity-registry.js'),
+    );
+    const registry = populate();
+    const count = registry && registry.metadata ? registry.metadata.entityCount : 0;
+    console.log(`[IDS-Hook] Registry synced before push (canonical, ${count} entities).`);
   } catch (err) {
     // Pre-push hook should warn but NOT block push
     console.warn(`[IDS-Hook] Registry sync failed (non-blocking): ${err.message}`);
