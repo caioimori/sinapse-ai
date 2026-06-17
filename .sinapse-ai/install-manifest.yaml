@@ -2048,9 +2048,9 @@ files:
     type: task
     size: 9966
   - path: development/tasks/build-autonomous.md
-    hash: sha256:56f8f1e1a5dc349d2361ea6d58ae4fd17c048a98e6a7672af390b2e0c31b7234
+    hash: sha256:e8dab3d13ae816a1543a220561024b57d692a39a316ce29efd1ca7c6405ec304
     type: task
-    size: 6546
+    size: 6544
   - path: development/tasks/build-component.md
     hash: sha256:ec675379f47ca3f749994b9f009309b9c1500e76e5e88c7206d8a8d942001f93
     type: task

@@ -202,8 +202,8 @@ _Task file for Story 8.1 - Coder Agent Loop_
 ## Handoff
 
 next_agent: @quality-gate
-next_command: \*review {story-id}
+next_command: *review {story-id}
 condition: Autonomous build completed successfully
 alternatives:
 
-- agent: @developer, command: \*build-resume {story-id}, condition: Build failed, needs resume
+- agent: @developer, command: *build-resume {story-id}, condition: Build failed, needs resume

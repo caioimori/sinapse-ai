@@ -165,6 +165,22 @@ module.exports = {
   verbose: true,
   roots: ['<rootDir>'],
   moduleDirectories: ['node_modules', '.'],
+
+  // A local `npm install` inside .sinapse-ai/ creates a nested (gitignored)
+  // .sinapse-ai/node_modules. Without this mapping, modules under .sinapse-ai/core/
+  // resolve their deps (glob, js-yaml, ...) from that nested path, while the test
+  // files resolve from the root node_modules. jest.mock() registers mocks by the
+  // RESOLVED absolute path, so the test's mock('glob') and the source-under-test's
+  // require('glob') point at two different files — the mock never intercepts, and
+  // ~170 tests fail LOCALLY with mocks that silently don't apply. CI never sees this
+  // (clean `npm ci`, no nested dir). Forcing these deps to a single canonical path
+  // (root node_modules) makes both sides resolve to the same module so mocks apply.
+  // All 13 nested deps also exist at the root. Production (`npx sinapse`) is
+  // unaffected — this mapping only applies in the jest test environment.
+  moduleNameMapper: {
+    '^(ajv|chalk|commander|cross-spawn|diff|execa|fast-glob|fs-extra|glob|highlight\\.js|inquirer|js-yaml|semver|tar)$':
+      '<rootDir>/node_modules/$1',
+  },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
 
   // Cross-platform config from REMOTE
