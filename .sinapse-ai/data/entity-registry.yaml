@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-17T17:06:26.708Z'
+  lastUpdated: '2026-06-17T17:42:07.610Z'
   entityCount: 811
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -14434,8 +14434,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:93287d3ec05bf9f3e89c3a10994c4fe270910d564d3632363c6ff569c0bb3344
-      lastVerified: '2026-06-16T06:09:14.832Z'
+      checksum: sha256:90bb4376f8ca2ab7bf2176ce51aeed9f04ab00ae14085be3ef7b82585f504193
+      lastVerified: '2026-06-17T17:42:07.543Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
