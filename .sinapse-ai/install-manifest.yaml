@@ -9,7 +9,7 @@
 #
 version: 1.8.0
 generator: scripts/generate-install-manifest.js
-file_count: 1179
+file_count: 1180
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1364,9 +1364,9 @@ files:
     type: data
     size: 9587
   - path: data/entity-registry.yaml
-    hash: sha256:00776e92f723650735df7996a6f58ae8a854571922bb8cebf30c2df07cd72b8a
+    hash: sha256:bc7ca25cb68cd6d4e2c04f4161b3bddffeaa3110ad08189c0557a42d1977100c
     type: data
-    size: 557886
+    size: 558796
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -3307,6 +3307,10 @@ files:
     hash: sha256:cfef97860788a119c44cbb18b4249ad538814f99a03b2ca13e66dd74aa8b5242
     type: script
     size: 3527
+  - path: infrastructure/scripts/codex-parity/resolve.js
+    hash: sha256:bc12b757b1d1e93ebaa02f08b197ee8ff9fc9895b51e84d196e662fa837a8550
+    type: script
+    size: 5003
   - path: infrastructure/scripts/codex-skills-sync/index.js
     hash: sha256:9eb2637a4f1f6edeabf358734b14e4c709bed37560f2e40aebf1ea3ef4572c3c
     type: script
@@ -3632,9 +3636,9 @@ files:
     type: script
     size: 22395
   - path: infrastructure/scripts/sync-codex-local-first.js
-    hash: sha256:ad5245ead7243a39cd5116f44fcf1234ad54b016e365dfefa017764a76f4f3eb
+    hash: sha256:4e58f3753cdcd34465eeb70793034e71b0ae2f1061c2be92630ce74982ca5384
     type: script
-    size: 4089
+    size: 9592
   - path: infrastructure/scripts/template-engine.js
     hash: sha256:b041c986d0a2dafcb4e53035b424bfcc63694ba3b31a3ad486852e3bb95f53b4
     type: script
@@ -3688,13 +3692,13 @@ files:
     type: script
     size: 7266
   - path: infrastructure/scripts/validate-codex-delegation.js
-    hash: sha256:278785952a4ef680bd969f8200ab4ce2ced949d0a59a4e7b361b5ae8595c56a4
+    hash: sha256:2c19c2b38d7fc44e1717b87101d7aac9e3803a0b538a4a8fa8ecb1324ef15744
     type: script
-    size: 9672
+    size: 9538
   - path: infrastructure/scripts/validate-codex-integration.js
-    hash: sha256:c553cc493ddbfecf41b865f8a1075df56b6500c3b2b315bae8b7e7bcec4db85a
+    hash: sha256:78fceff77e8b0d2493920b89fa5ded9010575191f60f7411d45432b3fc9698b8
     type: script
-    size: 4742
+    size: 6418
   - path: infrastructure/scripts/validate-codex-sync.js
     hash: sha256:31bcfc0cdf307e7c14064eaf0ddbf99a14344c21306937c9a7d9cc7ebba260f8
     type: script
