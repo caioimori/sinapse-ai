@@ -225,6 +225,7 @@ async function installSinapseCore(options = {}) {
   const {
     targetDir = process.cwd(),
     onProgress = null,
+    includeCodex = false,
   } = options;
 
   const result = {
@@ -280,6 +281,31 @@ async function installSinapseCore(options = {}) {
         if (success) {
           result.installedFiles.push(file);
         }
+      }
+    }
+
+    // Top-level payload dirs that live OUTSIDE .sinapse-ai (siblings at the
+    // package root), so the FOLDERS_TO_COPY loop above never reaches them:
+    //  - squads/ : the 17 domain squads (160 specialists + orchestrators).
+    //              Needed by BOTH IDEs — Claude syncs the squad orchestrators
+    //              into .claude/commands, and Codex resolves the full 172-agent
+    //              roster from here. Without it a project has only the 12 core
+    //              agents, contradicting the shipped AGENTS.md.
+    //  - .codex/ : Codex CLI payload (resolvers, tasks, JSON registries). Only
+    //              when the user selected Codex; agents + skills are then
+    //              regenerated from squads/ + core by sync-codex-local-first.js.
+    const pkgRoot = path.dirname(sourceDir);
+    const topLevelDirs = ['squads'];
+    if (includeCodex) topLevelDirs.push('.codex');
+    for (const dirName of topLevelDirs) {
+      const src = path.join(pkgRoot, dirName);
+      const dest = path.join(targetDir, dirName);
+      if (await fs.pathExists(src)) {
+        spinner.text = `Copying ${dirName}...`;
+        const copied = await copyDirectoryWithRootReplacement(src, dest, onProgress);
+        result.installedFiles.push(...copied.map((f) => path.join(dirName, f)));
+        if (dirName === '.codex') result.codexInstalledFiles = copied.length;
+        if (dirName === 'squads') result.squadsInstalledFiles = copied.length;
       }
     }
 

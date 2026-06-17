@@ -433,6 +433,16 @@ async function installGlobalAgents() {
 async function generateAgentsMd(targetDir = process.cwd()) {
   const agentsPath = path.join(targetDir, 'AGENTS.md');
   if (await fse.pathExists(agentsPath)) return false;
+  // Prefer the canonical, honest AGENTS.md shipped with the framework (single
+  // source of truth; its counts are verified against disk by validate:agents-md).
+  // Fall back to the minimal table only if the canonical copy is unavailable.
+  const canonicalAgentsMd = path.join(__dirname, '..', '..', '..', '..', 'AGENTS.md');
+  try {
+    if (await fse.pathExists(canonicalAgentsMd)) {
+      await fse.copy(canonicalAgentsMd, agentsPath);
+      return true;
+    }
+  } catch (_e) { /* fall through to minimal generation */ }
   const lines = [
     '# AGENTS.md', '', 'Universal agent reference for AI-powered development tools.', '',
     '## Available Agents', '', '| Agent | Persona | Scope |', '|-------|---------|-------|',
@@ -536,6 +546,7 @@ async function runWizard(options = {}) {
     try {
       sinapseCoreResult = await installSinapseCore({
         targetDir: process.cwd(),
+        includeCodex: (answers.selectedLLM || 'claude-code') !== 'claude-code',
         onProgress: (_status) => {
           // Silent progress - spinner handles feedback
         },
@@ -785,6 +796,28 @@ async function runWizard(options = {}) {
       answers.ideSyncValidation = 'skipped';
     } finally {
       process.chdir(savedCwd);
+    }
+
+    // Codex local-first sync: the ide-sync above drives claude-code only now,
+    // so .codex/agents + .codex/skills are regenerated here from the canonical
+    // source (the static .codex payload — scripts/tasks/JSONs — was already
+    // copied by installSinapseCore when Codex was selected). Codex installs only.
+    if (selectedLLM === 'codex' || selectedLLM === 'both') {
+      console.log('\n🔄 Running Codex local-first sync...');
+      const savedCwdCodex = process.cwd();
+      try {
+        const { syncCodexLocalFirst } = require('../../../../.sinapse-ai/infrastructure/scripts/sync-codex-local-first');
+        process.chdir(targetProjectRoot);
+        const codexResult = syncCodexLocalFirst({ projectRoot: targetProjectRoot, quiet: true });
+        answers.codexSyncStatus = codexResult.ok ? 'synced' : 'failed';
+        const m = codexResult.metrics || {};
+        console.log(`✅ Codex sync: ${codexResult.ok ? 'synced' : 'issues'} (${m.codexAgents || 0} agents, ${m.codexSkills || 0} skills)`);
+      } catch (codexErr) {
+        console.warn(`⚠️  Codex sync failed: ${codexErr.message} — run 'npm run sync:ide:codex' post-install`);
+        answers.codexSyncStatus = 'failed';
+      } finally {
+        process.chdir(savedCwdCodex);
+      }
     }
 
     // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
