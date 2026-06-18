@@ -1,7 +1,7 @@
 // bin/commands/install.js — `sinapse-ai install` (global) command + helpers.
 // Story GA-1.2 — extracted from bin/cli.js.
 
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { getLogger } = require('../../.sinapse-ai/core/logger');
@@ -893,11 +893,14 @@ function ensurePathWindows() {
       return;
     }
 
-    execSync(`setx PATH "${newPath}"`, { encoding: 'utf8', stdio: 'pipe' });
+    // execFileSync (no shell) — never interpolate the current PATH into a
+    // shell command string. A PATH value containing `"`/`&`/`^` would break
+    // the command or allow injection; passing args as an array avoids it.
+    execFileSync('setx', ['PATH', newPath], { encoding: 'utf8', stdio: 'pipe' });
     logger.always(`  ${GREEN}OK${NC} Added ~/bin to Windows User PATH`);
   } catch {
     try {
-      execSync(`setx PATH "%USERPROFILE%\\bin"`, { encoding: 'utf8', stdio: 'pipe' });
+      execFileSync('setx', ['PATH', '%USERPROFILE%\\bin'], { encoding: 'utf8', stdio: 'pipe' });
       logger.always(`  ${GREEN}OK${NC} Created Windows User PATH with ~/bin`);
     } catch {
       logger.always(`  ${YELLOW}WARN${NC} Could not modify PATH. Add manually: ${BIN_DIR}`);
