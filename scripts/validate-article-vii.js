@@ -31,6 +31,29 @@ const path = require('path');
 const { collectCounts } = require('./sync-counts.js');
 
 const ROOT = path.resolve(__dirname, '..');
+const CONSTITUTION = path.join(ROOT, '.sinapse-ai', 'constitution.md');
+
+/**
+ * Count Constitution articles + NON-NEGOTIABLE ones from the canonical source.
+ * Articles are `### <Roman>. <Title>` headings; NON-NEGOTIABLE ones carry the
+ * `(NON-NEGOTIABLE)` marker in the heading. This is what was drifting in the
+ * README ("10 articles" while the constitution had 11) with no guard — now there
+ * is one.
+ * @returns {{articles:number, nonNegotiable:number}}
+ */
+function collectConstitutionCounts() {
+  let articles = 0;
+  let nonNegotiable = 0;
+  try {
+    const md = fs.readFileSync(CONSTITUTION, 'utf8');
+    const headings = md.match(/^###\s+[IVXLC]+\.\s.*$/gm) || [];
+    articles = headings.length;
+    nonNegotiable = headings.filter((h) => /\(NON-NEGOTIABLE\)/.test(h)).length;
+  } catch {
+    // Missing/unreadable constitution → leave zeros; the guards below are no-ops.
+  }
+  return { articles, nonNegotiable };
+}
 
 const TARGETS = [
   { file: 'README.md', label: 'README PT' },
@@ -44,12 +67,14 @@ const TARGETS = [
  * Build the set of expected numeric tokens that MUST appear consistently.
  * Returns an object describing canonical counts and a regex helper.
  */
-function buildExpectations(counts) {
+function buildExpectations(counts, constitution = { articles: 0, nonNegotiable: 0 }) {
   return {
     squads: counts.squads,
     agents: counts.totalAgents,
     orqx: counts.totalOrqx,
     tasks: counts.tasks,
+    articles: constitution.articles,
+    nonNegotiable: constitution.nonNegotiable,
   };
 }
 
@@ -89,6 +114,39 @@ function findDrift(content, expected) {
     }
   }
 
+  // Constitution total articles: "<N> artigos"/"<N> articles" NOT immediately
+  // part of a NON-NEGOTIABLE clause, plus the shields.io badge
+  // "Constitution-<N>%20articles". Guards the exact drift that slipped through
+  // before (README said "10 articles" while the constitution had 11).
+  if (expected.articles) {
+    const artRe = /\b(\d{1,2})\s+(?:artigos|articles)\b(?![^.\n]{0,40}NON-NEGOTIABLE)/gi;
+    for (const m of content.matchAll(artRe)) {
+      const n = parseInt(m[1], 10);
+      if (n !== expected.articles && n >= 5) {
+        findings.push({ kind: 'articles', found: n, expected: expected.articles, snippet: m[0].trim() });
+      }
+    }
+    const badgeRe = /Constitution-(\d{1,2})%20articles/gi;
+    for (const m of content.matchAll(badgeRe)) {
+      const n = parseInt(m[1], 10);
+      if (n !== expected.articles) {
+        findings.push({ kind: 'articles (badge)', found: n, expected: expected.articles, snippet: m[0] });
+      }
+    }
+  }
+
+  // Constitution NON-NEGOTIABLE article count: "<N> (desses|of those) artigos
+  // sao/are NON-NEGOTIABLE".
+  if (expected.nonNegotiable) {
+    const nnRe = /\b(\d{1,2})\s+(?:(?:desses|de|of\s+those)\s+)?(?:artigos|articles)\s+(?:sao|são|are)\s+NON-NEGOTIABLE/gi;
+    for (const m of content.matchAll(nnRe)) {
+      const n = parseInt(m[1], 10);
+      if (n !== expected.nonNegotiable) {
+        findings.push({ kind: 'NON-NEGOTIABLE articles', found: n, expected: expected.nonNegotiable, snippet: m[0].trim() });
+      }
+    }
+  }
+
   return findings;
 }
 
@@ -112,14 +170,17 @@ function main() {
   const fixMode = args.includes('--fix');
 
   const counts = collectCounts();
-  const expected = buildExpectations(counts);
+  const constitution = collectConstitutionCounts();
+  const expected = buildExpectations(counts, constitution);
 
   console.log('Article VII (Metrics Accuracy) — validacao de drift');
   console.log('Numeros canonicos (de .sinapse-ai/constitution.md):');
-  console.log(`  squads  ${expected.squads}`);
-  console.log(`  agentes ${expected.agents}`);
-  console.log(`  orqx    ${expected.orqx}`);
-  console.log(`  tasks   ${expected.tasks}`);
+  console.log(`  squads          ${expected.squads}`);
+  console.log(`  agentes         ${expected.agents}`);
+  console.log(`  orqx            ${expected.orqx}`);
+  console.log(`  tasks           ${expected.tasks}`);
+  console.log(`  artigos         ${expected.articles}`);
+  console.log(`  NON-NEGOTIABLE  ${expected.nonNegotiable}`);
   console.log('');
 
   const allDrifts = [];
@@ -173,4 +234,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { findDrift, buildExpectations, TARGETS };
+module.exports = { findDrift, buildExpectations, collectConstitutionCounts, TARGETS };
