@@ -3,7 +3,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
 [![CI](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-11014%20passed-success)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
-[![Constitution](https://img.shields.io/badge/Constitution-10%20articles-blueviolet)](.sinapse-ai/constitution.md)
+[![Constitution](https://img.shields.io/badge/Constitution-11%20articles-blueviolet)](.sinapse-ai/constitution.md)
 
 ```
  ____  ___ _   _    _    ____  ____  _____
@@ -35,7 +35,7 @@ IA generativa tem um problema conhecido: quanto mais voce pede, pior fica. Um un
 
 SINAPSE resolve isso do jeito que times humanos resolvem: **especializacao coordenada**. Em vez de um generalista cansado, voce tem 172 agentes em 17 squads, cada um com papel definido, knowledge base propria e tasks executaveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem voce precisar decorar agent names ou comandos.
 
-O diferencial nao e apenas quantidade de agentes. E **governanca real**: 13 hooks ativos interceptam operacoes em tempo de execucao, uma Constitution com 10 artigos rege o framework, e 6 desses artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas antes de executar, nao detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
+O diferencial nao e apenas quantidade de agentes. E **governanca real**: 13 hooks ativos interceptam operacoes em tempo de execucao, uma Constitution com 11 artigos rege o framework, e 7 desses artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas antes de executar, nao detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
 
 ---
 
@@ -137,8 +137,6 @@ Cada release passa por uma matriz de instalacao de 27 combinacoes (3 OSes x 3 pa
 
 **Sobre Yarn v1 no Windows:** Yarn v1 (Classic) esta em modo manutencao desde 2020, com Yarn v2+ (Berry) como sucessor oficial. A combinacao Windows + Yarn v1 apresenta falhas de resolucao de wrapper que nao compensam investigar por ser ecossistema em declinio. Usuarios Windows em Yarn v1 devem migrar para Yarn v2+ (recomendado) ou usar npm/pnpm. macOS e Linux em Yarn v1 continuam suportados.
 
-Registro completo da decisao e resultados: [docs/audits/install-matrix-2026-04-16.md](docs/audits/install-matrix-2026-04-16.md).
-
 ### "Como atualizar sem perder minhas customizacoes?"
 
 ```bash
@@ -215,7 +213,7 @@ Deny rules em `.claude/settings.json` reforcam isso deterministicamente. **Updat
 
 ### Constitution
 
-O SINAPSE e governado por uma Constitution formal com 10 artigos e 13 hooks de enforcement:
+O SINAPSE e governado por uma Constitution formal com 11 artigos e 13 hooks de enforcement:
 
 | Artigo | Principio | Severidade |
 |--------|-----------|------------|
@@ -229,8 +227,9 @@ O SINAPSE e governado por uma Constitution formal com 10 artigos e 13 hooks de e
 | VIII | Mandatory Delegation | NON-NEGOTIABLE |
 | IX | Safe Collaboration | NON-NEGOTIABLE |
 | X | Security & Data Protection | NON-NEGOTIABLE |
+| XI | Conservative Default | MUST |
 
-6 artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas automaticamente antes de executar.
+7 artigos sao NON-NEGOTIABLE — violacoes sao bloqueadas automaticamente antes de executar.
 
 ---
 
