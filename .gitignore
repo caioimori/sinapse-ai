@@ -130,6 +130,11 @@ CLAUDE.md
 test-project-install/*
 sample-project/*
 
+# Test-generated temp dirs (left behind by integration/unit suites)
+.test-temp-integration/
+tests/unit/squad/temp-extend-test/
+tests/fixtures/test-project-bob/
+
 # Expansion Projects (separate from core SINAPSE-FULLSTACK)
 # These folders are from other projects and should NOT be in this repository
 .sinapse/                        # SINAPSE expansion project files
