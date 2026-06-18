@@ -715,6 +715,24 @@ describe('GreetingBuilder', () => {
       // unknown id falls back to generic
       expect(builder._getAgentAction('analyst', {})).toBe('continuar o trabalho');
     });
+
+    test('bob-mode PM gating works with the long runtime id (project-lead)', () => {
+      const cmds = [
+        { name: 'help', visibility: ['full', 'quick', 'key'], description: 'Show help' },
+      ];
+      // PM (long id project-lead) keeps full commands in bob mode
+      expect(
+        builder.filterCommandsByVisibility({ id: 'project-lead', commands: cmds }, 'new', 'bob'),
+      ).not.toHaveLength(0);
+      // non-PM (long id developer) is redirected -> empty command list in bob mode
+      expect(
+        builder.filterCommandsByVisibility({ id: 'developer', commands: cmds }, 'new', 'bob'),
+      ).toHaveLength(0);
+      // advanced mode is unaffected by id form
+      expect(
+        builder.filterCommandsByVisibility({ id: 'developer', commands: cmds }, 'new', 'advanced'),
+      ).not.toHaveLength(0);
+    });
   });
 });
 

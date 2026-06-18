@@ -141,7 +141,7 @@ class GreetingBuilder {
       // Check user preference (Story 6.1.4), now profile-aware (Story ACT-2)
       // Story ACT-2: PM agent bypasses bob mode preference restriction because
       // PM is the primary interface in bob mode and needs the full contextual greeting.
-      const preference = (userProfile === 'bob' && agent.id === 'pm')
+      const preference = (userProfile === 'bob' && this._normalizeAgentId(agent.id) === 'pm')
         ? this.preferenceManager.getPreference('advanced')
         : this.preferenceManager.getPreference(userProfile);
 
@@ -216,18 +216,18 @@ class GreetingBuilder {
 
     // 2. Role description (new session only, but skip in bob mode for non-PM)
     // Story ACT-7 AC3: References current story and branch when available
-    if (sessionType === 'new' && !(userProfile === 'bob' && agent.id !== 'pm')) {
+    if (sessionType === 'new' && !(userProfile === 'bob' && this._normalizeAgentId(agent.id) !== 'pm')) {
       sections.push(this.buildRoleDescription(agent, sectionContext));
     }
 
     // 3. Project status (if git configured, but skip in bob mode for non-PM)
     // Story ACT-7 AC4: Natural language narrative format
-    if (gitConfig.configured && projectStatus && !(userProfile === 'bob' && agent.id !== 'pm')) {
+    if (gitConfig.configured && projectStatus && !(userProfile === 'bob' && this._normalizeAgentId(agent.id) !== 'pm')) {
       sections.push(this.buildProjectStatus(projectStatus, sessionType, sectionContext));
     }
 
     // Story 10.3 - AC1, AC4: Bob mode redirect for non-PM agents
-    if (userProfile === 'bob' && agent.id !== 'pm') {
+    if (userProfile === 'bob' && this._normalizeAgentId(agent.id) !== 'pm') {
       // Show redirect message instead of normal content
       sections.push(this.buildBobModeRedirect(agent));
       return sections.filter(Boolean).join('\n\n');
@@ -1295,7 +1295,7 @@ Use \`@pm\` (Bob) para todas as interações. Bob vai orquestrar os outros agent
 
     // Story 10.3 - AC1, AC2: Profile-based filtering
     // If bob mode AND not PM agent: return empty (will show redirect message instead)
-    if (userProfile === 'bob' && agent.id !== 'pm') {
+    if (userProfile === 'bob' && this._normalizeAgentId(agent.id) !== 'pm') {
       return [];
     }
 
