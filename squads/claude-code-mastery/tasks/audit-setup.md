@@ -113,7 +113,7 @@ Score each item:
    - PreToolUse for Bash command validation
    - PreCompact for context preservation
    - Stop for session cleanup
-4. If SINAPSE project: check for Python hooks in `.sinapse-ai/monitor/hooks/`
+4. If SINAPSE project: check the SINAPSE hook system — runtime grounding hooks in `.sinapse-ai/hooks/` (wired via `.claude/settings.json`) and git hooks in `.sinapse-ai/git-hooks/` (`core.hooksPath`)
 
 ### Phase 5: List MCP Servers
 

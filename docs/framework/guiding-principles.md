@@ -22,9 +22,9 @@ Essa decisao nao e estetica --- e estrutural. Agentes de IA operam em terminais.
 
 **Por que artigos formais com enforcement automatico?**
 
-O SINAPSE possui 10 artigos constitucionais que governam o comportamento de todos os 186 agentes. Cada artigo tem severidade definida (NON-NEGOTIABLE ou MUST) e gates automaticos que bloqueiam violacoes deterministicamente.
+O SINAPSE possui 10 artigos constitucionais que governam o comportamento de todos os 172 agentes. Cada artigo tem severidade definida (NON-NEGOTIABLE ou MUST) e gates automaticos que bloqueiam violacoes deterministicamente.
 
-A alternativa --- guidelines aspiracionais --- falha em escala. Quando 186 agentes operam em 18 dominios, regras que dependem de "boa vontade" sao violadas silenciosamente. Gates automaticos (hooks pre-commit, pre-push, validacoes de story) garantem que violacoes sao detectadas e bloqueadas antes de causar dano.
+A alternativa --- guidelines aspiracionais --- falha em escala. Quando 172 agentes operam em 17 dominios, regras que dependem de "boa vontade" sao violadas silenciosamente. Gates automaticos (hooks pre-commit, pre-push, validacoes de story) garantem que violacoes sao detectadas e bloqueadas antes de causar dano.
 
 **Exemplo:** o hook `enforce-git-push-authority.sh` bloqueia qualquer agente que nao seja @devops (Pipeline) de executar `git push`. Nao e uma sugestao --- e um bloqueio deterministico.
 
@@ -66,9 +66,9 @@ A razao e separacao de responsabilidades em escala. Um orquestrador que "faz tud
 
 ## 5. Escala do Ecossistema de Agentes
 
-**Por que 186 agentes em 18 dominios?**
+**Por que 172 agentes em 17 dominios?**
 
-O SINAPSE nao e um agente generalista. E um ecossistema de 175 especialistas organizados em 18 squads tematicos. Cada agente tem persona, expertise e comandos especificos para seu dominio.
+O SINAPSE nao e um agente generalista. E um ecossistema de 160 especialistas organizados em 17 squads tematicos. Cada agente tem persona, expertise e comandos especificos para seu dominio.
 
 Essa arquitetura permite:
 
@@ -76,13 +76,13 @@ Essa arquitetura permite:
 - **Contexto otimizado:** cada agente carrega apenas as dependencias necessarias para seu dominio, preservando a janela de contexto para o trabalho real.
 - **Escalabilidade horizontal:** novos dominios sao adicionados como squads independentes, sem impactar o core.
 
-Os 12 agentes core cobrem o ciclo completo de desenvolvimento de software. Os 18 squads expandem para dominios como branding, growth, financeiro, cybersecurity e mais.
+Os 12 agentes core cobrem o ciclo completo de desenvolvimento de software. Os 17 squads expandem para dominios como branding, growth, financeiro, cybersecurity e mais.
 
 | Camada | Agentes | Funcao |
 |--------|---------|--------|
 | Core | 12 agentes | Desenvolvimento de software completo |
-| Squads | 163 agentes em 18 dominios | Especializacao por dominio |
-| Total | 186 agentes | Ecossistema completo |
+| Squads | 160 agentes em 17 dominios | Especializacao por dominio |
+| Total | 172 agentes | Ecossistema completo |
 
 > Constitution Art. VII --- metricas exatas, sempre sincronizadas
 
@@ -178,10 +178,10 @@ Isso garante que o framework mantem coerencia e qualidade mesmo com contribuicoe
 | Principio | Por que existe | Enforcement |
 |-----------|---------------|-------------|
 | CLI First | Agentes operam em terminais | Hook WARN |
-| Governanca Constitucional | 186 agentes precisam de regras deterministicas | 10 artigos + gates |
+| Governanca Constitucional | 172 agentes precisam de regras deterministicas | 10 artigos + gates |
 | Documentation-First | Codigo sem spec gera retrabalho | Hook BLOCK |
 | Delegacao Obrigatoria | Separacao de responsabilidades em escala | Hook BLOCK |
-| Ecossistema 175 Agentes | Especializacao profunda por dominio | Art. VII metricas |
+| Ecossistema 172 Agentes | Especializacao profunda por dominio | Art. VII metricas |
 | Hooks Deterministicos | Guidelines aspiracionais falham em escala | 5+ hooks ativos |
 | Colaboracao Segura | Usuarios nao sao git experts | Auto-branch/sync/PR |
 | Seguranca por Default | Licoes de vazamentos reais | 25 blockers |

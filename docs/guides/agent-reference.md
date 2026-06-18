@@ -1,7 +1,7 @@
 # Agent Reference — SINAPSE-AI
 
 > Reference for the **10 framework agents** ship-loaded by SINAPSE-AI.
-> For the wider squad agent universe (200 agents across 19 squads), see
+> For the wider squad agent universe (172 agents across 17 squads), see
 > the squads source-of-truth at `squads/` or run
 > `npx sinapse-ai list` after install.
 

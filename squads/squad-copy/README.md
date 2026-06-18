@@ -97,4 +97,4 @@ Este squad trabalha com o framework SINAPSE core:
 
 ---
 
-*Parte do ecossistema SINAPSE-AI — 18 squads, 186 agentes*
+*Parte do ecossistema SINAPSE-AI — 17 squads, 172 agentes*

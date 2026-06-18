@@ -63,7 +63,7 @@ Mapear contra a routing table:
 | Midia paga/ads | paid-media | pm | Apex | `/pm:agents:paidmedia-orqx` |
 | Produto/discovery | product-systems | product | Vector | `/product:agents:product-orqx` |
 | Pesquisa/competitivo | research-intelligence | research | Prism | `/research:agents:research-orqx` |
-| Claude Code/prompts | claude-mastery | claude | Orion | `/claude:agents:claude-orqx` |
+| Claude Code/prompts | claude-mastery | claude | Nexus | `/claude:agents:swarm-orqx` |
 | Estrategia/advisory | strategic-council | council | Zenith | `/council:agents:council-orqx` |
 | Narrativa/pitch | narrative-masters | narrative | Arc | `/narrative:agents:storytelling-orqx` |
 | Seguranca/compliance | cyber-defense | cyber | Fortress | `/cyber:agents:cyber-orqx` |

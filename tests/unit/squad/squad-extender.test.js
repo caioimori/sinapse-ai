@@ -14,8 +14,10 @@
  * @see Story SQS-11: Squad Analyze & Extend
  */
 
+const os = require('os');
 const path = require('path');
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const {
   SquadExtender,
   SquadExtenderError,
@@ -25,7 +27,9 @@ const {
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');
-const TEMP_PATH = path.join(__dirname, 'temp-extend-test');
+// Unique per-suite temp dir so the full `jest` run never has two suites racing on
+// a shared fixed directory.
+const TEMP_PATH = fsSync.mkdtempSync(path.join(os.tmpdir(), 'sinapse-squad-extender-'));
 
 describe('SquadExtender', () => {
   let extender;

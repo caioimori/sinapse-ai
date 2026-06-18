@@ -133,8 +133,9 @@
         "research-competitor-positioning"
       ]
     },
-    "claude-orqx": {
+    "swarm-orqx": {
       "aliases": [
+        "swarm-orqx",
         "claude-orqx",
         "claude"
       ],
@@ -421,14 +422,14 @@
         {
           "from": "sinapse-orqx",
           "fromType": "orqx",
-          "to": "claude-orqx",
+          "to": "swarm-orqx",
           "toType": "orqx",
           "path": ".codex/agents/swarm-orqx.md",
           "handoff": "delegate-to-squad",
           "reason": "Runtime and setup parity work belongs to the Claude mastery squad."
         },
         {
-          "from": "claude-orqx",
+          "from": "swarm-orqx",
           "fromType": "orqx",
           "to": "project-integrator",
           "toType": "specialist",

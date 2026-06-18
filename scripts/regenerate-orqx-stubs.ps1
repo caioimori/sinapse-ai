@@ -9,7 +9,6 @@ $ErrorActionPreference = 'Stop'
 $mapping = @(
     @{ id = 'animations-orqx'; squad = 'squad-animations' }
     @{ id = 'brand-orqx'; squad = 'squad-brand' }
-    @{ id = 'claude-orqx'; squad = 'squad-claude' }
     @{ id = 'cloning-orqx'; squad = 'squad-cloning' }
     @{ id = 'commercial-orqx'; squad = 'squad-commercial' }
     @{ id = 'content-orqx'; squad = 'squad-content' }

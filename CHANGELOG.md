@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] — 2026-06-17 — 🧭 Refino Macro (E1–E9) + Paridade Codex
+
+> **Refino macro do framework em 9 etapas.** Invocação unificada `@sinapse`/`@snps`; remoção dos editores extras (foco Claude + Codex); medidor de tasks honesto; instalação/update reais; fusão `squad-artdir`→`squad-design` + aposentadoria de 7 chiefs (→ 17 squads · 172 agentes · 1200 tasks); feedback visual de orquestração na statusline; trava de git reativada; paridade Codex de fachada para real; pente-fino de segurança.
+
+### Added
+
+- Invocação por `@sinapse` / `@snps` / `@sinapse-orqx` / `@snps-orqx` com stub rico do Imperator (diagnose → handoff → delegate).
+- Feedback visual de orquestração: statusline acende `Imperator` + `N especialistas`; `sinapse status --watch`.
+- `sinapse update` baixa e aplica a versão nova de verdade.
+- Entrega do runtime Codex (`.codex/` + `AGENTS.md`) ao projeto do usuário; resolução paramétrica dos 172 agentes.
+- Secret-scan no publish (`prepublishOnly`) + paridade travada das 2 cópias do scanner.
+
+### Fixed
+
+- Resolução de mock robusta a `node_modules` aninhado em `.sinapse-ai/` (testes locais deixam de falhar por mock que não intercepta).
+- `core.hooksPath` reapontado pela trava gerenciada no `npm install`.
+
+### Changed
+
+- Catálogo consolidado: **17 squads · 172 agentes · 18 orqx · 1200 tasks**.
+
 ## [1.8.0] — 2026-06-15 — ⚡ Orchestration, IDS & CLI Optimization
 
 > **Release de racionalizacao do core.** Deep-dive de 28 modulos + frentes especiais (plano P0–P3, verificacao adversarial): fecha gaps de cabeamento CLI (pipelines poderosos existiam mas nao tinham porta de entrada), torna o gerador de entity-registry deterministico, consolida duplicatas reais e cabeia tasks orfas — tudo sem corte de capacidade. Lei travada: potencializar, nao cortar.

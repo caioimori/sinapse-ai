@@ -125,6 +125,35 @@ model: opus
 
   describe('validateOrqxFile', () => {
     it('returns zero findings for a valid yaml-format file', () => {
+      // The temp file lives outside squads/, so the squad-prefixed expectedId can
+      // never be satisfied. Declare the id as the bare file-base ("test-orqx") —
+      // the documented tolerance (see validate-squad-orqx.js step 4) — so the
+      // hard id-mismatch check passes regardless of the temp dir path.
+      const filePath = makeTempFile(`# test-orqx
+\`\`\`yaml
+agent:
+  name: "Tester"
+  id: "test-orqx"
+  title: "Test Orchestrator"
+
+persona:
+  role: "Test role"
+\`\`\`
+`);
+      const findings = validateOrqxFile(filePath);
+      const errors = findings.filter((f) => f.level === 'error');
+      expect(errors).toEqual([]);
+    });
+
+    it('returns ERROR for a file with no identity marker', () => {
+      const filePath = makeTempFile('# Just a title\n\nNo identity.\n');
+      const findings = validateOrqxFile(filePath);
+      expect(findings.some((f) => f.level === 'error')).toBe(true);
+    });
+
+    it('returns ERROR (id-mismatch) when agent.id is neither the squad-prefixed nor the file-base id', () => {
+      // "test/test-orqx" matches neither "{squad}/test-orqx" (squad derived from the
+      // temp path) nor the bare file-base "test-orqx" → hard id-mismatch (E8).
       const filePath = makeTempFile(`# test-orqx
 \`\`\`yaml
 agent:
@@ -137,24 +166,15 @@ persona:
 \`\`\`
 `);
       const findings = validateOrqxFile(filePath);
-      // The id will mismatch the expected because the temp file is not under squads/
-      // but the validation is lenient — only warns on mismatch.
-      const errors = findings.filter((f) => f.level === 'error');
-      expect(errors).toEqual([]);
+      expect(findings.some((f) => f.rule === 'id-mismatch' && f.level === 'error')).toBe(true);
     });
 
-    it('returns ERROR for a file with no identity marker', () => {
-      const filePath = makeTempFile('# Just a title\n\nNo identity.\n');
-      const findings = validateOrqxFile(filePath);
-      expect(findings.some((f) => f.level === 'error')).toBe(true);
-    });
-
-    it('returns WARN for a valid file missing persona.role', () => {
+    it('returns ERROR for a valid file missing persona.role (persona-role is now a hard check, E8)', () => {
       const filePath = makeTempFile(`# Agent: Test
 - **ID:** test-orqx
 `);
       const findings = validateOrqxFile(filePath);
-      expect(findings.some((f) => f.rule === 'persona-role' && f.level === 'warn')).toBe(true);
+      expect(findings.some((f) => f.rule === 'persona-role' && f.level === 'error')).toBe(true);
     });
   });
 

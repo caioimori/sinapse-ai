@@ -3,6 +3,7 @@
  * Story 12.5: Session State Integration with Bob (AC8-11)
  */
 
+const os = require('os');
 const path = require('path');
 const fs = require('fs').promises;
 const fsSync = require('fs');
@@ -16,8 +17,9 @@ const {
   STALE_SNAPSHOT_DAYS,
 } = require('../../../.sinapse-ai/core/orchestration/data-lifecycle-manager');
 
-// Test fixtures
-const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-lifecycle');
+// Test fixtures — unique per-suite temp root so the full `jest` run never has two
+// suites racing on a shared fixed directory.
+const TEST_PROJECT_ROOT = fsSync.mkdtempSync(path.join(os.tmpdir(), 'sinapse-lifecycle-'));
 
 // Mock LockManager
 jest.mock('../../../.sinapse-ai/core/orchestration/lock-manager', () => {

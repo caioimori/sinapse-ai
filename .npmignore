@@ -9,3 +9,21 @@ docs/security-audit-report.md
 docs/research-synthesis*.md
 docs/mega-*.md
 docs/chrome-brain-*.md
+
+# ──────────────────────────────────────────────────────────────────────────
+# Tests must never ship in the published package. The auditoria-pos-190 found
+# ~36 test files leaking into the tarball via the `.sinapse-ai/**` and
+# `packages/installer/tests/**` allowlist entries. These add weight and expose
+# internal test scaffolding with zero runtime value.
+# ──────────────────────────────────────────────────────────────────────────
+**/__tests__/**
+**/tests/**
+**/*.test.js
+**/*.spec.js
+
+# EXCEPTION: scaffold templates under development/templates/ intentionally ship
+# example tests so generated projects/squads start with a test harness. These
+# are template payloads, NOT tests run against this package — keep them.
+# (`index.test.ts.hbs` is a Handlebars template, not a runnable .test.js; the
+#  squad-template example test is copied verbatim into new squads.)
+!.sinapse-ai/development/templates/**

@@ -1,7 +1,14 @@
 # Sub-Orqx 3-Level Pattern
 
-> **Status:** Documented pattern — intentional architectural choice.
-> **Scope:** Currently only `claude-code-mastery`. Do NOT normalize elsewhere without justification.
+> **Status:** SUPERSEDED (2026-05-15 squad rename). This document describes the
+> historical 3-level topology that existed BEFORE `claude-code-mastery` was
+> flattened. The former parent layer `claude-orqx` was retired (see
+> `squads/claude-code-mastery/_deprecated/`) and `swarm-orqx` (Nexus) was
+> promoted to be the squad orchestrator itself. The current topology for
+> `claude-code-mastery` is the standard 2-level model: `sinapse-orqx` →
+> `swarm-orqx` → specialists. The `tools-orqx` sub-layer and `db-sage` were
+> also deprecated. Retained for historical/architectural context only — do NOT
+> treat the diagrams below as current routing truth.
 > **Related:** Constitution Article XI (Conservative Default)
 
 ## Overview
@@ -21,18 +28,14 @@ sinapse-orqx (Imperator)
 ```
 sinapse-orqx (Imperator)
     |
-    +-- claude-orqx (squad orchestrator)
+    +-- swarm-orqx (squad orchestrator)   # historically: claude-orqx (retired)
             |
-            +-- swarm-orqx (sub-orchestrator for orchestration specialists)
-            |       |
-            |       +-- hooks-architect, mcp-integrator, config-engineer,
-            |           project-integrator, roadmap-sentinel
+            +-- (in the historical 3-level model, sub-orchestrators sat here:
+            |    swarm-orqx for orchestration specialists, tools-orqx for
+            |    tool-crafters — both since collapsed/retired)
             |
-            +-- tools-orqx (sub-orchestrator for tool-crafters)
-            |       |
-            |       +-- skill-craftsman, db-sage
-            |
-            +-- (direct specialists, when domain is narrow enough to skip sub-orqx)
+            +-- hooks-architect, mcp-integrator, config-engineer,
+                project-integrator, roadmap-sentinel, skill-craftsman
 ```
 
 ## Why This Exists
@@ -66,10 +69,9 @@ Only add a sub-orqx layer when ALL of these hold:
 ```
 User: "Configure hooks + MCP servers + settings for this project"
   -> sinapse-orqx
-  -> claude-orqx
-  -> swarm-orqx (detects multi-specialist parallel work)
+  -> swarm-orqx (squad orchestrator; detects multi-specialist parallel work)
   -> hooks-architect | mcp-integrator | config-engineer (parallel)
-  -> results merged back through swarm-orqx -> claude-orqx -> user
+  -> results merged back through swarm-orqx -> user
 ```
 
 ### tools-orqx routing
@@ -77,9 +79,9 @@ User: "Configure hooks + MCP servers + settings for this project"
 ```
 User: "Create a reusable skill for X and document the DB access pattern"
   -> sinapse-orqx
-  -> claude-orqx
-  -> tools-orqx (detects tool-crafting work)
-  -> skill-craftsman | db-sage (parallel or sequential depending on dependency)
+  -> swarm-orqx (squad orchestrator)
+  -> skill-craftsman (skill authoring; the former tools-orqx sub-layer and
+     db-sage are retired — DB work now routes via @data-engineer)
 ```
 
 ## Non-Normalization Rule

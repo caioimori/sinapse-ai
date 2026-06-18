@@ -17,7 +17,7 @@ workflow:
     - name: "Phase 1: Diagnose"
       description: Identify performance bottlenecks, context waste, and configuration issues
       agents:
-        - "@claude-orqx"
+        - "@swarm-orqx"
         - "@skill-craftsman"
       tasks:
         - diagnose
@@ -63,7 +63,7 @@ workflow:
       description: Validate optimizations in a sandbox before applying to production
       agents:
         - "@roadmap-sentinel"
-        - "@claude-orqx"
+        - "@swarm-orqx"
       tasks:
         - sandbox-setup
         - audit-setup
@@ -98,7 +98,7 @@ workflow:
     - name: "Phase 1: Diagnose"
       description: Identify performance bottlenecks, context waste, and configuration issues
       agents:
-        - "@claude-orqx"
+        - "@swarm-orqx"
         - "@skill-craftsman"
       tasks:
         - diagnose
@@ -144,7 +144,7 @@ workflow:
       description: Validate optimizations in a sandbox before applying to production
       agents:
         - "@roadmap-sentinel"
-        - "@claude-orqx"
+        - "@swarm-orqx"
       tasks:
         - sandbox-setup
         - audit-setup

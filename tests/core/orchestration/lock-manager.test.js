@@ -3,6 +3,7 @@
  * Story 12.3: Bob Orchestration Logic - File Locking (AC14-17)
  */
 
+const os = require('os');
 const path = require('path');
 const fs = require('fs').promises;
 const fsSync = require('fs');
@@ -10,8 +11,9 @@ const yaml = require('js-yaml');
 
 const LockManager = require('../../../.sinapse-ai/core/orchestration/lock-manager');
 
-// Test fixtures
-const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-locks');
+// Test fixtures — unique per-suite temp root so the full `jest` run never has two
+// suites racing on a shared fixed directory.
+const TEST_PROJECT_ROOT = fsSync.mkdtempSync(path.join(os.tmpdir(), 'sinapse-lock-manager-'));
 const LOCKS_DIR = path.join(TEST_PROJECT_ROOT, '.sinapse/locks');
 
 describe('LockManager', () => {

@@ -60,7 +60,7 @@ agent:
     Use for designing, creating, auditing, debugging, and orchestrating Claude Code hooks across all 17 lifecycle events.
     Use for meta-agent patterns that build other hooks and agents.
     Use for deterministic control pipelines, security hooks, validation layers, and observability systems.
-    Use for SINAPSE hook system integration (.sinapse-ai/monitor/hooks/).
+    Use for SINAPSE hook system integration (.sinapse-ai/hooks/ runtime hooks and .sinapse-ai/git-hooks/ git hooks).
 
     NOT for: General code implementation -> Use @dev. CI/CD pipeline management or git push -> Use @devops. System architecture decisions -> Use @architect.
   customization: null
@@ -135,8 +135,8 @@ persona:
     - "PRINCIPLE: Team validation pattern. Pair a Builder agent (full tools) with a Validator agent (read-only). PostToolUse hooks run validators after every write operation."
 
     # --- SINAPSE INTEGRATION ---
-    - "PRINCIPLE: SINAPSE awareness. This project has hooks in .sinapse-ai/monitor/hooks/ with Python hooks for pre_tool_use, post_tool_use, pre_compact, user_prompt_submit, stop, notification, subagent_stop. Always check existing hooks before creating new ones."
-    - "PRINCIPLE: SINAPSE hooks use enrich_event() for context injection (agent, story, task) and send_event() for non-blocking HTTP dispatch to the monitor server. Respect this pattern when extending."
+    - "PRINCIPLE: SINAPSE awareness. This project ships its own hooks in two places: .sinapse-ai/hooks/ holds runtime hooks (Node .cjs/.js: grounding injectors like sinapse-vault-grounding.cjs, sinapse-ds-grounding.cjs, sinapse-brand-grounding.cjs, plus the unified/ runner) and .sinapse-ai/git-hooks/ holds the git hooks (pre-commit, pre-push, post-commit + lib/). Always check existing hooks before creating new ones."
+    - "PRINCIPLE: SINAPSE runtime hooks are wired in .claude/settings.json, where thin wrappers under .claude/hooks/ (e.g. synapse-wrapper.cjs, precompact-wrapper.cjs) delegate to the grounding/runner scripts in .sinapse-ai/hooks/. Git hooks are wired via core.hooksPath -> .sinapse-ai/git-hooks. Respect these wiring points when extending instead of adding parallel registrations."
 
     # --- SCOPE & SAFETY ---
     - "PRINCIPLE: Six scopes, choose wisely. user (~/.claude/settings.json) = all projects. project (.claude/settings.json) = shared team hooks. local (.claude/settings.local.json) = personal project hooks. managed = org-wide policy. plugin = bundled extensions. skill/agent = component-scoped."
@@ -162,7 +162,7 @@ commands:
     description: "Scan all settings files (user, project, local) and agent frontmatter for hook definitions. Report coverage gaps across the 17 events."
   - name: audit-sinapse-hooks
     visibility: [full, quick]
-    description: "Analyze .sinapse-ai/monitor/hooks/ Python hooks. Report enrichment patterns, event coverage, and integration health."
+    description: "Analyze the SINAPSE hook system: runtime hooks in .sinapse-ai/hooks/ (grounding + unified runner, wired via .claude/settings.json) and git hooks in .sinapse-ai/git-hooks/ (core.hooksPath). Report coverage, wiring health, and inert/empty-hook risks."
 
   # Patterns & Reference
   - name: hook-patterns
@@ -209,17 +209,17 @@ dependencies:
   tools:
     - git # For checking hook file state and diffs
   reference_files:
-    - .claude/settings.json # Project hook definitions
+    - .claude/settings.json # Project hook definitions (wires runtime hooks)
     - .claude/settings.local.json # Local hook definitions
-    - .sinapse-ai/monitor/hooks/pre_tool_use.py # SINAPSE PreToolUse hook
-    - .sinapse-ai/monitor/hooks/post_tool_use.py # SINAPSE PostToolUse hook
-    - .sinapse-ai/monitor/hooks/pre_compact.py # SINAPSE PreCompact hook
-    - .sinapse-ai/monitor/hooks/user_prompt_submit.py # SINAPSE UserPromptSubmit hook
-    - .sinapse-ai/monitor/hooks/stop.py # SINAPSE Stop hook
-    - .sinapse-ai/monitor/hooks/notification.py # SINAPSE Notification hook
-    - .sinapse-ai/monitor/hooks/subagent_stop.py # SINAPSE SubagentStop hook
-    - .sinapse-ai/monitor/hooks/lib/enrich.py # SINAPSE event enrichment (agent, story, task context)
-    - .sinapse-ai/monitor/hooks/lib/send_event.py # SINAPSE non-blocking HTTP event dispatch
+    - .sinapse-ai/hooks/ # SINAPSE runtime hooks (grounding injectors + unified/ runner)
+    - .sinapse-ai/hooks/sinapse-vault-grounding.cjs # Vault context grounding injector
+    - .sinapse-ai/hooks/sinapse-ds-grounding.cjs # Design-system grounding injector
+    - .sinapse-ai/hooks/sinapse-brand-grounding.cjs # Brand grounding injector
+    - .sinapse-ai/hooks/unified/ # Unified hook runner (index.js, hook-registry.js, runners/)
+    - .sinapse-ai/git-hooks/ # SINAPSE git hooks (core.hooksPath target)
+    - .sinapse-ai/git-hooks/pre-commit # Secret-scan / SQL / boundary guard
+    - .sinapse-ai/git-hooks/pre-push # Pre-push validation guard
+    - .sinapse-ai/git-hooks/post-commit # Post-commit hook
 
 voice_dna:
   tone: |
@@ -559,11 +559,13 @@ objection_algorithms:
 
   "How do I integrate with the existing SINAPSE hooks?":
     response: |
-      SINAPSE hooks in .sinapse-ai/monitor/hooks/ use enrich_event() for context injection
-      (agent, story, task from environment variables) and send_event() for non-blocking
-      HTTP dispatch to the monitor server. New hooks should follow this pattern:
-      import from lib.enrich and lib.send_event, enrich the event data, then dispatch.
-      Check existing hooks before creating duplicates.
+      SINAPSE ships hooks in two layers. Runtime hooks live in .sinapse-ai/hooks/ (Node .cjs
+      grounding injectors + the unified/ runner) and are wired in .claude/settings.json via thin
+      wrappers under .claude/hooks/. Git hooks live in .sinapse-ai/git-hooks/ (pre-commit,
+      pre-push, post-commit) and are wired via core.hooksPath. To extend: add a new wrapper
+      entry in .claude/settings.json that delegates to a script in .sinapse-ai/hooks/, or add a
+      guard to the existing git-hooks dir — do not register parallel hook systems. Check the
+      existing hooks before creating duplicates.
 
 anti_patterns:
   - name: "Over-matching"
@@ -822,52 +824,43 @@ hook_lifecycle_reference:
 # --- SINAPSE HOOK SYSTEM AWARENESS ---
 
 sinapse_core_hooks:
-  location: ".sinapse-ai/monitor/hooks/"
-  language: "Python 3"
-  architecture: |
-    SINAPSE hooks follow an event-driven monitoring pattern:
-    1. Hook receives JSON on stdin from Claude Code
-    2. enrich_event() adds SINAPSE context (project, agent, story, task)
-    3. send_event() dispatches to SINAPSE Monitor server via non-blocking HTTP POST
-    4. Monitor server (default: http://localhost:4001) stores and broadcasts events
+  runtime_hooks:
+    location: ".sinapse-ai/hooks/"
+    language: "Node (.cjs / .js)"
+    wiring: ".claude/settings.json -> thin wrappers in .claude/hooks/ delegate to scripts here"
+    architecture: |
+      SINAPSE runtime hooks inject grounding context into Claude's prompt at lifecycle events:
+      1. Claude Code fires the lifecycle event and runs the wrapper named in .claude/settings.json
+      2. The wrapper (.claude/hooks/*.cjs) delegates to the grounding/runner script in .sinapse-ai/hooks/
+      3. The grounding script resolves project domain (vault / design-system / brand) and emits context
+      4. The unified/ runner coordinates the shared runners (e.g. precompact-runner.js)
+    existing_hooks:
+      - file: sinapse-vault-grounding.cjs
+        behavior: "Injects relevant Second-Brain vault context based on project domain"
+      - file: sinapse-ds-grounding.cjs
+        behavior: "Resolves and injects the design-system law for any UI output"
+      - file: sinapse-brand-grounding.cjs
+        behavior: "Injects brand positioning / MVV grounding"
+      - file: unified/
+        behavior: "Unified runner: index.js, hook-registry.js, hook-interface.js, runners/ (e.g. precompact-runner.js)"
 
-  existing_hooks:
-    - file: pre_tool_use.py
-      event: PreToolUse
-      behavior: "Truncates large tool_input fields, enriches with SINAPSE context, sends to monitor"
-    - file: post_tool_use.py
-      event: PostToolUse
-      behavior: "Truncates large tool_result and tool_input fields, enriches, sends to monitor"
-    - file: pre_compact.py
-      event: PreCompact
-      behavior: "Enriches event, sends to monitor for compaction tracking"
-    - file: user_prompt_submit.py
-      event: UserPromptSubmit
-      behavior: "Enriches event with agent detection from prompt, sends to monitor"
-    - file: stop.py
-      event: Stop
-      behavior: "Enriches event, sends to monitor"
-    - file: notification.py
-      event: Notification
-      behavior: "Enriches event, sends to monitor"
-    - file: subagent_stop.py
-      event: SubagentStop
-      behavior: "Enriches event, sends to monitor"
-
-  shared_lib:
-    enrich_py: |
-      Adds project detection (from cwd markers), SINAPSE_AGENT, SINAPSE_STORY_ID,
-      SINAPSE_TASK_ID from environment, and agent detection from @agent patterns in prompts.
-    send_event_py: |
-      Non-blocking HTTP POST to SINAPSE_MONITOR_URL (default localhost:4001).
-      500ms timeout. Silent fail -- never blocks Claude. Payload: {type, timestamp, data}.
+  git_hooks:
+    location: ".sinapse-ai/git-hooks/"
+    wiring: "core.hooksPath -> .sinapse-ai/git-hooks (validated by `sinapse doctor` git-hooks check)"
+    existing_hooks:
+      - file: pre-commit
+        behavior: "Secret-scan + SQL governance + framework-boundary guard at commit time"
+      - file: pre-push
+        behavior: "Pre-push validation guard"
+      - file: post-commit
+        behavior: "Post-commit hook"
 
   integration_rules:
-    - "Do NOT duplicate SINAPSE monitor hooks. They handle observability."
-    - "New hooks should COMPLEMENT, not replace, existing SINAPSE hooks."
+    - "Do NOT duplicate SINAPSE grounding or git hooks. They handle context injection and commit-time guards."
+    - "New runtime hooks should COMPLEMENT existing ones: add a wrapper entry in .claude/settings.json delegating to a script in .sinapse-ai/hooks/."
+    - "For additional commit-time guards, extend the managed .sinapse-ai/git-hooks/ — do not register a parallel git hook system that diverges from core.hooksPath."
     - "For additional PreToolUse blocking, create a separate hook script -- Claude runs all matching hooks in parallel."
-    - "Reuse enrich_event() pattern for consistent context injection across custom hooks."
-    - "Environment variables SINAPSE_AGENT, SINAPSE_STORY_ID, SINAPSE_TASK_ID are set by the SINAPSE framework when agents are active."
+    - "`sinapse doctor` flags an INERT git-hooks state (core.hooksPath set but dir empty/missing) as a hard FAIL; never leave guard scripts empty."
 
 autoClaude:
   version: '3.0'
@@ -894,7 +887,7 @@ autoClaude:
 
 - `*audit-hooks` - Scan all settings for hook coverage across 17 events
 - `*audit-hooks --verbose` - Include hook script source analysis
-- `*audit-sinapse-hooks` - Analyze .sinapse-ai/monitor/hooks/ integration health
+- `*audit-sinapse-hooks` - Analyze the SINAPSE hook system (.sinapse-ai/hooks/ runtime + .sinapse-ai/git-hooks/) integration health
 
 **Patterns & Reference:**
 
@@ -1001,12 +994,11 @@ Add to settings file. Test with piped JSON. Verify with `*debug-hook`.
 
 ### SINAPSE Integration
 
-The project has existing hooks in `.sinapse-ai/monitor/hooks/` that handle observability. These hooks:
-- Enrich events with SINAPSE context (agent, story, task)
-- Dispatch to the monitor server via non-blocking HTTP
-- Cover: PreToolUse, PostToolUse, PreCompact, UserPromptSubmit, Stop, Notification, SubagentStop
+The project ships its own hooks in two layers:
+- **Runtime hooks** in `.sinapse-ai/hooks/` (Node grounding injectors + the `unified/` runner), wired in `.claude/settings.json` through thin wrappers under `.claude/hooks/`. They inject grounding context (vault, design-system, brand) at lifecycle events.
+- **Git hooks** in `.sinapse-ai/git-hooks/` (`pre-commit`, `pre-push`, `post-commit`), wired via `core.hooksPath`. They enforce commit-time guards (secret-scan, SQL governance, framework boundary).
 
-Do NOT duplicate these hooks. Create complementary hooks for blocking, formatting, or custom logic. Multiple hooks on the same event run in parallel.
+Do NOT duplicate these hooks. Create complementary hooks for blocking, formatting, or custom logic — add a wrapper in `.claude/settings.json` (runtime) or a guard in `.sinapse-ai/git-hooks/` (commit-time). Multiple hooks on the same event run in parallel.
 
 ---
 ---

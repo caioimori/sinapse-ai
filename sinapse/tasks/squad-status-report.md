@@ -111,7 +111,7 @@ QUICK ACCESS — HOW TO INVOKE:
 /pm:agents:paidmedia-orqx               → Midia Paga
 /product:agents:product-orqx          → Produto
 /research:agents:research-orqx   → Pesquisa
-/claude:agents:claude-orqx           → Claude Mastery
+/claude:agents:swarm-orqx           → Claude Mastery
 /council:agents:council-orqx     → Conselho
 /narrative:agents:storytelling-orqx  → Narrativa
 /cyber:agents:cyber-orqx         → Seguranca

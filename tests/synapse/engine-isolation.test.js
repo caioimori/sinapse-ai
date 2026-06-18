@@ -7,104 +7,57 @@
  *   - errorDetails is serialized via serializeError (contains SNPS_ code).
  *   - Layers returning null with getLastError() are also recorded as 'error'.
  *
+ * Isolation strategy (deterministic across the full `jest` run):
+ *   The engine exposes a dependency-injection seam — `new SynapseEngine(path,
+ *   { layers: [...] })` uses the supplied layer instances verbatim instead of
+ *   loading L0-L7 from disk. We inject plain mock layers here. This removes ALL
+ *   dependence on `jest.mock` hoisting and module-cache ordering, which is why
+ *   the suite used to fail (5 tests) only when another file loaded the real
+ *   engine + real layers earlier in the same Jest worker. No `jest.mock`,
+ *   no `jest.resetModules`, no virtual modules — the test controls its own deps.
+ *
  * @module tests/synapse/engine-isolation
  */
+
+const { SynapseEngine, PipelineMetrics } = require('../../.sinapse-ai/core/synapse/engine');
 
 jest.setTimeout(30000);
 
 // ---------------------------------------------------------------------------
-// Mocks — must be set BEFORE require
+// Mock layers — injected directly via the engine's DI seam (no jest.mock).
+// Each exposes name / layer / _safeProcess, matching the LayerProcessor contract
+// the engine consumes. _safeProcess is the real public entry point the engine
+// calls, so a throwing _safeProcess here exercises the exact isolation path.
 // ---------------------------------------------------------------------------
 
-jest.mock('../../.sinapse-ai/core/synapse/context/context-tracker', () => ({
-  estimateContextPercent: jest.fn(() => 10),
-  calculateBracket: jest.fn(() => 'FRESH'),
-  getActiveLayers: jest.fn(() => ({ layers: [0, 1, 2], memoryHints: false, handoffWarning: false })),
-  getTokenBudget: jest.fn(() => 800),
-  needsMemoryHints: jest.fn(() => false),
-  needsHandoffWarning: jest.fn(() => false),
-}));
-
-jest.mock('../../.sinapse-ai/core/synapse/output/formatter', () => ({
-  formatSynapseRules: jest.fn(() => '<synapse-rules>\n</synapse-rules>'),
-}));
-
-jest.mock('../../.sinapse-ai/core/synapse/memory/memory-bridge', () => ({
-  MemoryBridge: jest.fn().mockImplementation(() => ({
-    getMemoryHints: jest.fn(() => Promise.resolve([])),
-  })),
-}));
-
-// L0 — healthy
-jest.mock('../../.sinapse-ai/core/synapse/layers/l0-constitution', () => {
-  return class MockL0 {
-    constructor() { this.name = 'constitution'; this.layer = 0; }
-    _safeProcess() { return { rules: ['CONST_RULE'], metadata: { layer: 0, source: 'constitution' } }; }
-  };
-}, { virtual: true });
-
-// L1 — throws
-jest.mock('../../.sinapse-ai/core/synapse/layers/l1-global', () => {
-  return class MockL1Throwing {
-    constructor() { this.name = 'global'; this.layer = 1; }
-    _safeProcess() { throw new Error('L1 exploded intentionally'); }
-  };
-}, { virtual: true });
-
-// L2 — healthy (must still run after L1 throws)
-jest.mock('../../.sinapse-ai/core/synapse/layers/l2-agent', () => {
-  return class MockL2 {
-    constructor() { this.name = 'agent'; this.layer = 2; }
-    _safeProcess() { return { rules: ['AGENT_RULE'], metadata: { layer: 2, source: 'agent' } }; }
-  };
-}, { virtual: true });
-
-// L3-L7 — not found (each must be its own jest.mock call — no out-of-scope vars)
-jest.mock('../../.sinapse-ai/core/synapse/layers/l3-workflow', () => {
-  const err = new Error("Cannot find module './layers/l3-workflow'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l4-task', () => {
-  const err = new Error("Cannot find module './layers/l4-task'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l5-squad', () => {
-  const err = new Error("Cannot find module './layers/l5-squad'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l6-keyword', () => {
-  const err = new Error("Cannot find module './layers/l6-keyword'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l7-star-command', () => {
-  const err = new Error("Cannot find module './layers/l7-star-command'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-// ---------------------------------------------------------------------------
-// Imports (after mocks)
-// ---------------------------------------------------------------------------
-
-// Re-required fresh before each test (below). A test running earlier in the same
-// Jest worker can otherwise leave the engine module cached with the REAL
-// context-tracker bound, so getActiveLayers() returns its real value and every
-// layer reports 'skipped' — cross-file module-cache pollution. resetModules()
-// rebuilds the registry so the hoisted mocks above always apply.
-let SynapseEngine, PipelineMetrics;
-
-beforeEach(() => {
-  jest.resetModules();
-  ({ SynapseEngine, PipelineMetrics } = require('../../.sinapse-ai/core/synapse/engine'));
-});
+function makeMockLayers() {
+  return [
+    // L0 — healthy
+    {
+      name: 'constitution',
+      layer: 0,
+      _safeProcess() {
+        return { rules: ['CONST_RULE'], metadata: { layer: 0, source: 'constitution' } };
+      },
+    },
+    // L1 — throws (must NOT abort the pipeline)
+    {
+      name: 'global',
+      layer: 1,
+      _safeProcess() {
+        throw new Error('L1 exploded intentionally');
+      },
+    },
+    // L2 — healthy (must still run AFTER L1 throws)
+    {
+      name: 'agent',
+      layer: 2,
+      _safeProcess() {
+        return { rules: ['AGENT_RULE'], metadata: { layer: 2, source: 'agent' } };
+      },
+    },
+  ];
+}
 
 // =============================================================================
 // Pipeline isolation — throwing layer
@@ -114,7 +67,7 @@ describe('SynapseEngine — per-layer isolation (PORT #11)', () => {
   let engine;
 
   beforeEach(() => {
-    engine = new SynapseEngine('/fake/.sinapse');
+    engine = new SynapseEngine('/fake/.sinapse', { layers: makeMockLayers() });
   });
 
   test('a throwing layer does NOT abort the pipeline — remaining layers still run', async () => {
@@ -161,6 +114,24 @@ describe('SynapseEngine — per-layer isolation (PORT #11)', () => {
     const { metrics } = await engine.process('test prompt', { prompt_count: 0 });
 
     expect(metrics.total_rules).toBe(2);
+  });
+
+  test('a layer returning null with getLastError() is recorded as error (not skipped)', async () => {
+    const nullWithError = {
+      name: 'global',
+      layer: 1,
+      _safeProcess() { return null; },
+      getLastError() { return new Error('layer self-reported failure'); },
+    };
+    const engineNull = new SynapseEngine('/fake/.sinapse', {
+      layers: [makeMockLayers()[0], nullWithError, makeMockLayers()[2]],
+    });
+
+    const { metrics } = await engineNull.process('test prompt', { prompt_count: 0 });
+
+    expect(metrics.per_layer.global.status).toBe('error');
+    expect(metrics.per_layer.global.error).toContain('layer self-reported failure');
+    expect(metrics.layers_errored).toBe(1);
   });
 });
 

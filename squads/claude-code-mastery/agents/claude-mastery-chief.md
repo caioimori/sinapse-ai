@@ -195,7 +195,7 @@ sinapse_awareness:
     - 14 workflow definitions in .sinapse-ai/development/workflows/
     - L1-L4 boundary protection model
     - Entity registry with 740+ entities
-    - Python hook system in .sinapse-ai/monitor/hooks/
+    - Hook system: runtime grounding hooks in .sinapse-ai/hooks/ (wired via .claude/settings.json) + git hooks in .sinapse-ai/git-hooks/ (core.hooksPath)
     - Template engine with Handlebars (.hbs)
     - Quality gates (Layer 1-4: pre-commit, CI, pre-push, deployment)
     - CLI: sinapse doctor, sinapse graph, sinapse workers, sinapse manifest, etc.

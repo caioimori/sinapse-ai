@@ -53,7 +53,7 @@ Localização: `.sinapse-ai/development/agents/`
 | squad-courses | `@courses-orqx` | Cursos, mentorias, lançamento |
 | squad-storytelling | `@storytelling-orqx` | Pitch, narrativa |
 | squad-council | `@council-orqx` | Conselho estratégico (mental models) |
-| claude-code-mastery | `@claude-orqx` | Claude Code mastery (hooks, MCP, skills) |
+| claude-code-mastery | `@swarm-orqx` | Claude Code mastery (hooks, MCP, skills) |
 
 ## Como descobrir agentes de um squad
 

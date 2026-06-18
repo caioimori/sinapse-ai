@@ -51,8 +51,8 @@ async function removeGitHooksConfig(projectDir = process.cwd()) {
 // Story 10.40 — Remove SINAPSE-authored orqx agents from a global agents dir.
 // Returns { removed: N } for reporting. Only touches files matching *-orqx.md
 // so we don't accidentally remove user-authored agents.
-// Audit 1 P0 (UN-1) — install writes ~200 agent files to ~/.claude/agents/ +
-// ~/.codex/agents/ but uninstall historically removed only `*-orqx.md` (~21
+// Audit 1 P0 (UN-1) — install writes ~170 agent files to ~/.claude/agents/ +
+// ~/.codex/agents/ but uninstall historically removed only `*-orqx.md` (~18
 // files). Files were left orphaned. Fix: install records every authored
 // filename in ~/.sinapse/installed-agents.json; uninstall reads that manifest
 // and removes only those files (preserving anything the user added by hand).

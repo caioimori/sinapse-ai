@@ -17,7 +17,7 @@
 | 9 | squad-paidmedia | pm | paidmedia-orqx (Apex) | `/pm:agents:paidmedia-orqx` |
 | 10 | squad-product | product | product-orqx (Vector) | `/product:agents:product-orqx` |
 | 11 | squad-research | research | research-orqx (Prism) | `/research:agents:research-orqx` |
-| 12 | claude-code-mastery | claude | claude-orqx (Orion) | `/claude:agents:claude-orqx` |
+| 12 | claude-code-mastery | claude | swarm-orqx (Nexus) | `/claude:agents:swarm-orqx` |
 | 13 | squad-council | council | council-orqx (Zenith) | `/council:agents:council-orqx` |
 | 14 | squad-storytelling | narrative | storytelling-orqx (Arc) | `/narrative:agents:storytelling-orqx` |
 | 15 | squad-cybersecurity | cyber | cyber-orqx (Fortress) | `/cyber:agents:cyber-orqx` |

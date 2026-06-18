@@ -320,14 +320,13 @@ function llmLabel(selectedLLM) {
 }
 
 /**
- * 19 orqx agent definitions to install globally.
+ * 18 orqx agent definitions to install globally (17 squad orqx + 1 master).
  * Each entry maps agent-id to its squad directory name.
  */
 const GLOBAL_AGENTS = [
   { id: 'sinapse-orqx', squad: 'sinapse' },
   { id: 'animations-orqx', squad: 'squad-animations' },
   { id: 'brand-orqx', squad: 'squad-brand' },
-  { id: 'claude-orqx', squad: 'squad-claude' },
   { id: 'cloning-orqx', squad: 'squad-cloning' },
   { id: 'commercial-orqx', squad: 'squad-commercial' },
   { id: 'content-orqx', squad: 'squad-content' },
@@ -342,7 +341,7 @@ const GLOBAL_AGENTS = [
   { id: 'product-orqx', squad: 'squad-product' },
   { id: 'research-orqx', squad: 'squad-research' },
   { id: 'storytelling-orqx', squad: 'squad-storytelling' },
-  { id: 'swarm-orqx', squad: 'squad-claude' },
+  { id: 'swarm-orqx', squad: 'claude-code-mastery' },
 ];
 
 /**
@@ -381,7 +380,7 @@ function buildAgentTemplate(agentId, squadName, homedir) {
 }
 
 /**
- * Install 19 global orqx agent definitions to ~/.claude/agents/
+ * Install 18 global orqx agent definitions to ~/.claude/agents/
  * Each file is a small markdown that points to the full agent definition
  * inside the user's ~/.sinapse/{squad}/ directory.
  *

@@ -158,27 +158,20 @@ describe('edmcp', () => {
   });
 
   describe('listMcps', () => {
-    it('should be tested in integration tests (requires Docker)', () => {
-      // Note: listMcps requires Docker to be running, so we test the parsing logic
-      // through parseMcpSource instead of the full function
-      expect(true).toBe(true);
-    });
+    // Pending: requires Docker running — cover in integration tests.
+    // Unit-level parsing is already covered via parseMcpSource above.
+    it.todo('listMcps should be covered in integration tests (requires Docker)');
   });
 
   describe('addMcp', () => {
-    it('should be tested in integration tests (requires Docker)', () => {
-      // Note: addMcp has complex Docker interactions that are better tested
-      // in integration tests. Unit tests focus on input parsing via parseMcpSource.
-      expect(true).toBe(true);
-    });
+    // Pending: complex Docker interactions — cover in integration tests.
+    // Unit-level input parsing is already covered via parseMcpSource above.
+    it.todo('addMcp should be covered in integration tests (requires Docker)');
   });
 
   describe('removeMcp', () => {
-    it('should be tested in integration tests (requires Docker)', () => {
-      // Note: removeMcp has complex Docker interactions that are better tested
-      // in integration tests.
-      expect(true).toBe(true);
-    });
+    // Pending: complex Docker interactions — cover in integration tests.
+    it.todo('removeMcp should be covered in integration tests (requires Docker)');
   });
 });
 
