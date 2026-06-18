@@ -791,6 +791,31 @@ class GreetingBuilder {
     };
   }
 
+  /**
+   * Normalize a canonical (long) agent id to the short token used by
+   * suggestion/action lookups.
+   *
+   * Runtime agents expose their long canonical id (e.g. `developer`,
+   * `quality-gate`) via frontmatter, while these lookups historically keyed
+   * off short aliases (`dev`, `qa`, ...). Without this normalization the
+   * switch/map below never match in production and every suggestion/action
+   * silently falls through to null/generic. Idempotent: a short id passed in
+   * is returned unchanged.
+   * @private
+   * @param {string} agentId
+   * @returns {string}
+   */
+  _normalizeAgentId(agentId) {
+    const LONG_TO_SHORT = {
+      developer: 'dev',
+      'quality-gate': 'qa',
+      'product-lead': 'po',
+      'project-lead': 'pm',
+      'sprint-lead': 'sm',
+    };
+    return LONG_TO_SHORT[agentId] || agentId;
+  }
+
   _getAgentAction(agentId, _storyContext) {
     const actions = {
       qa: 'revisar a qualidade dessa implementação',
@@ -800,10 +825,13 @@ class GreetingBuilder {
       sm: 'coordenar o desenvolvimento',
     };
 
-    return actions[agentId] || 'continuar o trabalho';
+    return actions[this._normalizeAgentId(agentId)] || 'continuar o trabalho';
   }
 
   _suggestCommand(agentId, prevAgentId, storyContext) {
+    agentId = this._normalizeAgentId(agentId);
+    prevAgentId = this._normalizeAgentId(prevAgentId);
+
     // Agent transition commands
     if (prevAgentId === 'dev' && agentId === 'qa') {
       return storyContext.storyFile ? `*review ${storyContext.storyFile}` : '*review';
