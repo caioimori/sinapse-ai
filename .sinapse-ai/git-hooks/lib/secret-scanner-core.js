@@ -69,7 +69,13 @@ const NAMED_PATTERNS = [
   { name: 'Supabase DB URL', pattern: /postgresql:\/\/postgres\.[A-Za-z0-9]+:[^@\s]+@/i, credentialPlaceholderGated: true },
 
   // Generic Patterns (broader, lower confidence — placeholder-allowlisted)
-  { name: 'Hardcoded Password', pattern: /(?:password|passwd|pwd)\s*[=:]\s*['"][^'"]{8,}['"]/i, lowConfidence: true },
+  // Value class excludes whitespace (same rationale as the connection strings
+  // above): real password values are space-free tokens. The old `[^'"]{8,}`
+  // matched human UI labels whose i18n key ends in "Password" followed by a
+  // sentence value, false-positiving on EVERY edit to a locale file. The
+  // whitespace-excluding class still catches space-free hardcoded passwords,
+  // including camelCase-keyed ones.
+  { name: 'Hardcoded Password', pattern: /(?:password|passwd|pwd)\s*[=:]\s*['"][^'"\s]{8,}['"]/i, lowConfidence: true },
   { name: 'Bearer Token', pattern: /[Bb]earer\s+[A-Za-z0-9_\-.]{20,}/, entropyGated: true, lowConfidence: true },
   { name: 'Basic Auth', pattern: /[Bb]asic\s+[A-Za-z0-9+/=]{20,}/, lowConfidence: true },
 

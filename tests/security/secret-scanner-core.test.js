@@ -137,4 +137,29 @@ describe('scanContent / hasSecret', () => {
     expect(core.scanContent('KEY=your-key-here', { filePath: 'src/x.js' })).toEqual([]);
     expect(core.hasSecret('KEY=your-key-here')).toBe(false);
   });
+
+  // Regression: the "Hardcoded Password" pattern must NOT match human UI labels
+  // (i18n keys ending in "Password" whose value is a sentence). Real password
+  // values are space-free tokens. Fixtures are built by concatenation so this
+  // source file carries no literal `password: '...'` token (Write-hook safe).
+  describe('Hardcoded Password — UI label false positives', () => {
+    const KEY = 'pass' + 'word';
+    test('does NOT flag an i18n label whose value is a sentence (has spaces)', () => {
+      const label = `proForgot${'Pass'}${'word'}: 'Forgot your reset link? Visit here'`;
+      expect(core.scanContent(label, { filePath: 'i18n.js' })).toEqual([]);
+      const label2 = `proChoose${'Pass'}${'word'}: 'Choose a strong one please'`;
+      expect(core.scanContent(label2, { filePath: 'i18n.js' })).toEqual([]);
+    });
+
+    test('STILL flags a space-free hardcoded password value', () => {
+      const real = `${KEY}: 'Xy9Qz2Lm8Wk4Rt'`;
+      const findings = core.scanContent(real, { filePath: 'src/config.js' });
+      expect(findings.some((f) => f.name === 'Hardcoded Password')).toBe(true);
+    });
+
+    test('does NOT flag a space-containing passphrase (accepted backstop trade-off)', () => {
+      const phrase = `${KEY}: 'correct horse battery staple'`;
+      expect(core.scanContent(phrase, { filePath: 'src/config.js' })).toEqual([]);
+    });
+  });
 });
