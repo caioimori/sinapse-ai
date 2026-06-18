@@ -495,6 +495,13 @@ describe('UAP Session Bridge — Metrics', () => {
 // =============================================================================
 
 describe('UAP Session Bridge — Timing Budget', () => {
+  // Wall-clock timing is unreliable on shared CI runners (observed 94ms for a
+  // ~1ms op → flaky red on every contributor's PR). Keep the tight target
+  // locally as a real perf guardrail; allow a generous ceiling on CI that
+  // still catches gross (10x+) regressions without flaking on runner jitter.
+  const BUDGET_MS = process.env.CI ? 250 : 20;
+  const REL_TOLERANCE_MS = process.env.CI ? 15 : 1;
+
   test('completes within 20ms budget on happy path (warm filesystem)', () => {
     const sessionsDir = path.join(tmpDir, '.synapse', 'sessions');
     fs.mkdirSync(sessionsDir, { recursive: true });
@@ -510,8 +517,8 @@ describe('UAP Session Bridge — Timing Budget', () => {
     callBridge(ctx, 'dev', 'full', metrics);
     const elapsed = Date.now() - start;
 
-    expect(elapsed).toBeLessThanOrEqual(20);
-    expect(metrics.loaders.synapseSession.duration).toBeLessThanOrEqual(20);
+    expect(elapsed).toBeLessThanOrEqual(BUDGET_MS);
+    expect(metrics.loaders.synapseSession.duration).toBeLessThanOrEqual(BUDGET_MS);
   });
 
   test('completes within 20ms on skip path', () => {
@@ -522,8 +529,8 @@ describe('UAP Session Bridge — Timing Budget', () => {
     callBridge(ctx, 'dev', 'full', metrics);
     const elapsed = Date.now() - start;
 
-    expect(elapsed).toBeLessThanOrEqual(20);
-    expect(metrics.loaders.synapseSession.duration).toBeLessThanOrEqual(20);
+    expect(elapsed).toBeLessThanOrEqual(BUDGET_MS);
+    expect(metrics.loaders.synapseSession.duration).toBeLessThanOrEqual(BUDGET_MS);
   });
 
   test('skip path is faster than write path', () => {
@@ -548,7 +555,7 @@ describe('UAP Session Bridge — Timing Budget', () => {
     fs.rmSync(skipCtx.projectRoot, { recursive: true, force: true });
 
     expect(skipMetrics.loaders.synapseSession.duration).toBeLessThanOrEqual(
-      writeMetrics.loaders.synapseSession.duration + 1 // +1ms tolerance
+      writeMetrics.loaders.synapseSession.duration + REL_TOLERANCE_MS
     );
   });
 });
