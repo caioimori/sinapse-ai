@@ -428,8 +428,12 @@ function installMcp(platform) {
     const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
     execSync(`${npmCmd} install -g dev-browser`, { stdio: 'pipe', timeout: 120000 });
     ok('dev-browser installed globally');
-  } catch (error) {
-    warn(`dev-browser install failed: ${error.message}. Manual install: npm install -g dev-browser`);
+  } catch {
+    // Optional dependency — never block install. Keep the message to ONE calm line
+    // (the raw npm/EPERM/EEXIST stderr is intentionally swallowed; it scares users and
+    // is not actionable). The MCP entry is still written below so a later manual
+    // `npm install -g dev-browser` activates it.
+    warn('dev-browser (navegador automatico opcional) nao instalado — segue normal. Opcional depois: npm install -g dev-browser');
     // Do NOT throw — continue with rest of install
   }
 

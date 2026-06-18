@@ -1128,8 +1128,10 @@ async function runWizard(options = {}) {
       console.log('Installation may be incomplete. Check logs in .sinapse/ directory.');
     }
 
-    // Chrome Brain: Auto-install browser automation capability
-    if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
+    // Chrome Brain: Auto-install browser automation capability.
+    // Skipped when the global installer (cmdInstallGlobal Phase 7) already ran it,
+    // to avoid a duplicate run + duplicate optional-dep warning.
+    if (!answers.skipChromeBrain && (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both')) {
       try {
         const chromeBrainPath = path.join(__dirname, '..', '..', '..', '..', 'bin', 'modules', 'chrome-brain-installer');
         const { detectChrome, installScripts, installHooks, installMcp, installKnowledgeBase } = require(chromeBrainPath);
@@ -1152,17 +1154,28 @@ async function runWizard(options = {}) {
       }
     }
 
-    // Apply SINAPSE branding to Claude Code CLI (so both `sinapse` and `claude` show SINAPSE branding)
+    // Apply SINAPSE branding to Claude Code CLI (so both `sinapse` and `claude` show SINAPSE branding).
+    // Pre-check that the Claude Code CLI is actually present: if it isn't, skip with ONE calm line
+    // instead of letting the patch script print a scary "[ERRO] ... CLI nao encontrado" + stack.
     if (answers.selectedLLM === 'claude-code' || answers.selectedLLM === 'both') {
+      const brandingPatchPath = path.join(__dirname, '..', '..', '..', '..', 'scripts', 'sinapse-patch.js');
+      let claudeCliPresent = false;
       try {
-        const brandingPatchPath = path.join(__dirname, '..', '..', '..', '..', 'scripts', 'sinapse-patch.js');
-        if (fse.existsSync(brandingPatchPath)) {
-          console.log('\n◆ Applying SINAPSE branding to Claude Code...\n');
-          execSync(`node "${brandingPatchPath}"`, { stdio: 'inherit' });
+        execSync(process.platform === 'win32' ? 'where claude' : 'command -v claude', { stdio: 'ignore' });
+        claudeCliPresent = true;
+      } catch {
+        claudeCliPresent = false;
+      }
+      if (!claudeCliPresent) {
+        console.log('ℹ️  Branding do Claude Code: pulado (Claude Code CLI nao detectado). Aplique depois com: sinapse brand');
+      } else if (fse.existsSync(brandingPatchPath)) {
+        try {
+          // stdio: 'pipe' (not 'inherit') so the patch's internal logs stay quiet on success.
+          execSync(`node "${brandingPatchPath}"`, { stdio: 'pipe' });
+          console.log('✅ Branding do Claude Code aplicado.');
+        } catch {
+          console.log('ℹ️  Branding do Claude Code: pulado. Aplique depois com: sinapse brand');
         }
-      } catch (error) {
-        console.log(`\n⚠️  Branding patch skipped: ${error.message}`);
-        console.log('   You can apply it later with: sinapse brand\n');
       }
     }
 
@@ -1211,12 +1224,17 @@ async function runWizard(options = {}) {
       answers.infraApplied = false;
     }
 
-    // Show completion with LLM label + honest dependency status
-    showCompletion({
-      llmLabel: llmLabel(answers.selectedLLM),
-      llmValue: answers.selectedLLM,
-      depsInstalled: answers.depsInstalled !== false,
-    });
+    // Show completion with LLM label + honest dependency status.
+    // Suppressed in quiet/embedded mode (cmdInstallGlobal calls the wizard with
+    // quiet: true and prints its OWN authoritative summary box afterwards) — printing
+    // both produced two completion screens with contradictory counts.
+    if (!options.quiet) {
+      showCompletion({
+        llmLabel: llmLabel(answers.selectedLLM),
+        llmValue: answers.selectedLLM,
+        depsInstalled: answers.depsInstalled !== false,
+      });
+    }
 
     return answers;
   } catch (error) {
