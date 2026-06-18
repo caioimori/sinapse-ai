@@ -73,6 +73,7 @@ USAGE:
   sinapse install                     # Install SINAPSE in current project
   sinapse init <name>                 # Create new project
   sinapse update                      # Update to latest version
+  sinapse uninstall                   # Remove SINAPSE from the project (--keep-data)
   sinapse brand                       # Re-apply SINAPSE branding (after Claude update)
   sinapse validate                    # Validate installation integrity
   sinapse info                        # Show system info
@@ -118,6 +119,25 @@ SERVICE DISCOVERY:
   sinapse workers search "json" --category=data
   sinapse workers search "transform" --tags=etl,data
   sinapse workers search "api" --format=json
+
+GENERATE & CREATE:
+  sinapse generate <prd|adr|story|epic|task>  # Generate a document from a template
+  sinapse create <agent|task|workflow>        # Scaffold a new framework component
+
+ORCHESTRATION:
+  sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
+  sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
+  sinapse mode [explore|ask|auto]           # Show or set the agent permission mode (--cycle)
+
+INTELLIGENCE & HEALTH:
+  sinapse health                            # Framework health analytics (--deep for full scan)
+  sinapse graph --deps                      # Dependency & stats dashboard (--format, --watch)
+  sinapse performance                       # Squad & agent performance ranking (--top N)
+  sinapse routing-intel analyze             # Routing intelligence analysis
+
+INTEGRATIONS & LICENSE:
+  sinapse mcp setup                         # Configure global MCP servers (setup/link/status/add)
+  sinapse pro status                        # SINAPSE Pro license (activate/status/deactivate/features)
 
 EXAMPLES:
   # Install in current directory
