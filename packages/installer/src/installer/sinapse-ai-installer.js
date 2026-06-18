@@ -141,8 +141,29 @@ async function generateVersionJson(options) {
  * @param {boolean} replaceRoot - Whether to replace {root} placeholders
  * @returns {Promise<boolean>} Success status
  */
-async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true) {
+/**
+ * Predicate: is this destination a user-owned L3 file that must survive a
+ * re-install? Matches the boundary contract (core-config.yaml + agent
+ * MEMORY.md are L3 "mutable / user-owned") and the README promise that
+ * re-running install is an idempotent upsert that preserves customizations.
+ * @param {string} destPath - Absolute destination path
+ * @returns {boolean}
+ */
+function isUserOwnedL3(destPath) {
+  const norm = String(destPath).replace(/\\/g, '/');
+  if (norm.endsWith('/.sinapse-ai/core-config.yaml')) return true;
+  if (/\/\.sinapse-ai\/development\/agents\/[^/]+\/MEMORY\.md$/.test(norm)) return true;
+  return false;
+}
+
+async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true, preserveExisting = null) {
   try {
+    // Preserve user-owned L3 files (core-config.yaml, agent MEMORY.md) when they
+    // already exist — a re-install must not silently wipe the user's config.
+    if (preserveExisting && preserveExisting(destPath) && await fs.pathExists(destPath)) {
+      return 'preserved';
+    }
+
     await fs.ensureDir(path.dirname(destPath));
 
     // Check if file needs {root} replacement (.md, .yaml, .yml)
@@ -171,7 +192,7 @@ async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = t
  * @param {Function} onProgress - Progress callback
  * @returns {Promise<string[]>} List of copied files (relative paths)
  */
-async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress = null) {
+async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress = null, preserveExisting = null) {
   const copiedFiles = [];
 
   if (!await fs.pathExists(sourceDir)) {
@@ -193,11 +214,13 @@ async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress =
     }
 
     if (item.isDirectory()) {
-      const subFiles = await copyDirectoryWithRootReplacement(sourcePath, destPath, onProgress);
+      const subFiles = await copyDirectoryWithRootReplacement(sourcePath, destPath, onProgress, preserveExisting);
       copiedFiles.push(...subFiles);
     } else {
-      const success = await copyFileWithRootReplacement(sourcePath, destPath);
-      if (success) {
+      const success = await copyFileWithRootReplacement(sourcePath, destPath, true, preserveExisting);
+      // Only count files actually written; 'preserved' (existing user-owned L3)
+      // and false (error) must not inflate the installed-files manifest.
+      if (success === true) {
         copiedFiles.push(path.relative(destDir, destPath));
         if (onProgress) {
           onProgress({ file: item.name, copied: true });
@@ -290,6 +313,7 @@ async function installSinapseCore(options = {}) {
           folderSource,
           folderDest,
           onProgress,
+          isUserOwnedL3,
         );
 
         if (copiedFiles.length > 0) {
@@ -306,8 +330,8 @@ async function installSinapseCore(options = {}) {
 
       if (await fs.pathExists(fileSource)) {
         spinner.text = `Copying ${file}...`;
-        const success = await copyFileWithRootReplacement(fileSource, fileDest);
-        if (success) {
+        const success = await copyFileWithRootReplacement(fileSource, fileDest, true, isUserOwnedL3);
+        if (success === true) {
           result.installedFiles.push(file);
         }
       }
@@ -495,6 +519,7 @@ module.exports = {
   getSinapseCoreSourcePath,
   copyFileWithRootReplacement,
   copyDirectoryWithRootReplacement,
+  isUserOwnedL3,
   generateVersionJson,
   generateFileHashes,
   deliverCodexRootFiles,
