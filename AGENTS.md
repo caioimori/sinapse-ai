@@ -46,8 +46,8 @@ tests/                    # Test suites
 ## Agents
 
 The core SDC agents below are documented in full. They are NOT the whole roster:
-**every one of the 172 agents** (12 core + 160 squad specialists/orchestrators across
-17 squads) resolves by `@name` and so do their real tasks. Resolution is parametric —
+**every one of the 172 agents** (12 core + 160 specialists/orchestrators distributed
+across 17 squads) resolves by `@name` and so do their real tasks. Resolution is parametric —
 read from the source agent definitions at runtime, never from a frozen list:
 
 ```bash

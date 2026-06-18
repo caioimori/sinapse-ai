@@ -12,7 +12,7 @@ const EventEmitter = require('events');
 const _path = require('path');
 const { runSafe } = require('../utils/spawn-safe');
 
-// epic: orchestration-consolidation, F2 — resolves any of the 189 agent ids to
+// epic: orchestration-consolidation, F2 — resolves any of the 172 agent ids to
 // its real persona on disk (squads/ + framework agents). Optional: degrades to a
 // generic prompt if the module is missing.
 let SquadAgentResolver;

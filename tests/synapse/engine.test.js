@@ -29,69 +29,25 @@ jest.mock('../../.sinapse-ai/core/synapse/output/formatter', () => ({
   formatSynapseRules: jest.fn(() => '<synapse-rules>\nmocked\n</synapse-rules>'),
 }));
 
-// Mock layer modules — provide fake layer classes
-const mockLayerModules = {};
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l0-constitution', () => {
-  const cls = class MockL0 {
-    constructor() { this.name = 'constitution'; this.layer = 0; this.timeout = 5; }
-    _safeProcess(ctx) { return { rules: ['ART.I: CLI First'], metadata: { layer: 0, source: 'constitution' } }; }
-  };
-  mockLayerModules.L0 = cls;
-  return cls;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l1-global', () => {
-  const cls = class MockL1 {
-    constructor() { this.name = 'global'; this.layer = 1; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Global rule 1'], metadata: { layer: 1, source: 'global' } }; }
-  };
-  mockLayerModules.L1 = cls;
-  return cls;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l2-agent', () => {
-  const cls = class MockL2 {
-    constructor() { this.name = 'agent'; this.layer = 2; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Agent rule 1'], metadata: { layer: 2, source: 'agent' } }; }
-  };
-  mockLayerModules.L2 = cls;
-  return cls;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l3-workflow', () => {
-  const cls = class MockL3 {
-    constructor() { this.name = 'workflow'; this.layer = 3; this.timeout = 10; }
-    _safeProcess(ctx) { return { rules: ['Workflow rule 1'], metadata: { layer: 3, source: 'workflow' } }; }
-  };
-  mockLayerModules.L3 = cls;
-  return cls;
-}, { virtual: true });
-
-// L4-L7: simulate missing modules (MODULE_NOT_FOUND with proper code)
-jest.mock('../../.sinapse-ai/core/synapse/layers/l4-task', () => {
-  const err = new Error("Cannot find module './layers/l4-task'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l5-squad', () => {
-  const err = new Error("Cannot find module './layers/l5-squad'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l6-keyword', () => {
-  const err = new Error("Cannot find module './layers/l6-keyword'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
-
-jest.mock('../../.sinapse-ai/core/synapse/layers/l7-star-command', () => {
-  const err = new Error("Cannot find module './layers/l7-star-command'");
-  err.code = 'MODULE_NOT_FOUND';
-  throw err;
-}, { virtual: true });
+// Layer instances are injected via the engine's dependency-injection seam
+// (`new SynapseEngine(path, { layers: [...] })`) instead of jest.mock'ing the
+// L0-L7 modules. The layer modules exist on disk, so a `jest.mock(..., {virtual:
+// true})` would silently fail to apply once another suite in the same worker
+// loaded the real engine + real layers first — that was the cross-file module
+// cache pollution that made this suite flaky. DI removes that dependence entirely.
+// Mirrors L0-L3 available, L4-L7 absent (matching the original mock topology).
+function makeEngineLayers() {
+  return [
+    { name: 'constitution', layer: 0, timeout: 5,
+      _safeProcess() { return { rules: ['ART.I: CLI First'], metadata: { layer: 0, source: 'constitution' } }; } },
+    { name: 'global', layer: 1, timeout: 10,
+      _safeProcess() { return { rules: ['Global rule 1'], metadata: { layer: 1, source: 'global' } }; } },
+    { name: 'agent', layer: 2, timeout: 10,
+      _safeProcess() { return { rules: ['Agent rule 1'], metadata: { layer: 2, source: 'agent' } }; } },
+    { name: 'workflow', layer: 3, timeout: 10,
+      _safeProcess() { return { rules: ['Workflow rule 1'], metadata: { layer: 3, source: 'workflow' } }; } },
+  ];
+}
 
 // Mock memory bridge (SYN-10)
 const mockGetMemoryHints = jest.fn(() => Promise.resolve([]));
@@ -230,23 +186,23 @@ describe('SynapseEngine', () => {
     mockGetMemoryHints.mockResolvedValue([]);
 
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-    engine = new SynapseEngine('/fake/.synapse', { manifest: {} });
+    engine = new SynapseEngine('/fake/.synapse', { manifest: {}, layers: makeEngineLayers() });
     warnSpy.mockRestore();
   });
 
   describe('constructor', () => {
     test('should store synapsePath and config', () => {
       expect(engine.synapsePath).toBe('/fake/.synapse');
-      expect(engine.config).toEqual({ manifest: {} });
+      expect(engine.config.manifest).toEqual({});
     });
 
     test('should instantiate available layers', () => {
-      // L0, L1, L2, L3 are mocked as available; L4-L7 throw
+      // L0-L3 injected as available (DI); L4-L7 absent.
       expect(engine.layers.length).toBeGreaterThanOrEqual(3);
     });
 
     test('should handle all layer modules failing gracefully', () => {
-      // This is tested implicitly — L4-L7 throw, engine still works
+      // L4-L7 absent — only L0-L3 present, engine still works.
       expect(engine.layers.length).toBeLessThanOrEqual(4);
     });
   });

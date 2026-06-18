@@ -72,6 +72,17 @@ const NAMED_PATTERNS = [
   { name: 'Hardcoded Password', pattern: /(?:password|passwd|pwd)\s*[=:]\s*['"][^'"]{8,}['"]/i, lowConfidence: true },
   { name: 'Bearer Token', pattern: /[Bb]earer\s+[A-Za-z0-9_\-.]{20,}/, entropyGated: true, lowConfidence: true },
   { name: 'Basic Auth', pattern: /[Bb]asic\s+[A-Za-z0-9+/=]{20,}/, lowConfidence: true },
+
+  // Long pure-hex runs (32–64 chars). The 16-symbol hex alphabet caps Shannon
+  // entropy at ~4.0, BELOW ENTROPY_THRESHOLD (4.5), so the generic entropy
+  // backstop never sees them — Twilio auth tokens (32-hex), webhook signing
+  // secrets and SHA-style 64-hex digests slip through. This explicit rule closes
+  // that gap. It is `hashContextGated`: a hex run sitting in an integrity /
+  // checksum / lockfile / git-sha context (covered by HASH_CONTEXT_PATTERN) is a
+  // legitimate hash, NOT a secret, and is allowlisted. `lowConfidence` keeps it
+  // OUT of the release publish gate (entropy:false there would otherwise match
+  // every documented digest); the diff-scoped commit hook still enforces it.
+  { name: 'Long Hex Token', pattern: /\b[a-f0-9]{32,64}\b/i, hashContextGated: true, lowConfidence: true },
 ];
 
 const PLACEHOLDER_TOKENS = [
@@ -100,19 +111,48 @@ const PLACEHOLDER_PATTERNS = [
 
 const EXAMPLE_HOST_PATTERN = /(?:example\.(?:com|org|net)|localhost|127\.0\.0\.1|host\b|your-host|placeholder)/i;
 
+// A keyword placeholder only allowlists when it DOMINATES the value: once every
+// placeholder occurrence is removed, the TOTAL alphanumeric length that remains
+// is too short to be a secret on its own (< ENTROPY_MIN_LEN). A bare
+// `lower.includes(token)` was a trivial bypass — ANY real secret that happened to
+// contain "abcdef" / "123456" / "example" anywhere in its body got silently
+// allowlisted (e.g. Xq9Zk2…abcdef…Fg5 passed). Measuring the *total* remainder
+// (not just the longest contiguous run) closes that hole even when the buried
+// placeholder splits the secret into two sub-threshold runs: the legitimate
+// cases (your-key-here, placeholder123456, test-key-example, CHANGEME) strip down
+// to nothing, while a 35-char random token minus a 6-char placeholder still has
+// ~29 alphanumeric chars left and is NOT allowlisted.
+function placeholderDominates(lower) {
+  let stripped = lower;
+  let matchedAny = false;
+  for (const token of PLACEHOLDER_TOKENS) {
+    if (stripped.includes(token)) {
+      matchedAny = true;
+      // Replace with a separator so adjacent runs aren't fused into a longer one.
+      stripped = stripped.split(token).join(' ');
+    }
+  }
+  if (!matchedAny) return false;
+  // Total alphanumeric chars left after removing every placeholder occurrence.
+  const remaining = (stripped.match(/[a-z0-9]/g) || []).length;
+  return remaining < ENTROPY_MIN_LEN;
+}
+
 function isAllowlistPlaceholder(value) {
   if (value === null || value === undefined) return false;
   const v = String(value).trim();
   if (v.length === 0) return true;
 
-  const lower = v.toLowerCase();
-  for (const token of PLACEHOLDER_TOKENS) {
-    if (lower.includes(token)) return true;
-  }
+  // Structural placeholders are always safe: <...>, [...], {token}, ${VAR},
+  // SCREAMING_SNAKE env-var names, and repeated single-symbol fillers.
   for (const re of PLACEHOLDER_PATTERNS) {
     if (re.test(v)) return true;
   }
   if (/^(.)\1{5,}$/.test(v)) return true; // repeated single char
+
+  // Keyword placeholders: word-boundary anchored + dominance, NOT raw includes().
+  if (placeholderDominates(v.toLowerCase())) return true;
+
   return false;
 }
 
@@ -202,6 +242,38 @@ function scanContent(content, options = {}) {
       // non-random fixtures (a single repeated char ~ 0.0, repeated words ~1.5)
       // while no longer dropping legitimately-shaped keys.
       if (shannonEntropy(tail) < 2.0) continue; // clearly non-random
+    }
+
+    if (descriptor.hashContextGated) {
+      // Long hex runs are flagged as suspected secrets (Twilio token, webhook
+      // signing secret, SHA-style digest) EXCEPT when they sit in an integrity /
+      // checksum / lockfile / git-sha context — those are legitimate hashes, not
+      // leaked credentials. Reuse HASH_CONTEXT_PATTERN over a window around the
+      // match so package-lock integrity:, "resolved" tarball #sha, "checksum",
+      // and 40/64-hex git shas are NOT false-positived. A fully repeated/obvious
+      // placeholder hex (deadbeef…, 000…) is also allowlisted.
+      if (isAllowlistPlaceholder(matched)) continue;
+      if (isLockfilePath(filePath)) continue;
+      // Canonical digest lengths — git SHA-1 (40) and SHA-256 (64) — are
+      // overwhelmingly legitimate hashes (commit refs, file checksums, content
+      // digests) and appear bare in changelogs/docs/lockfiles. Treating every
+      // isolated 40/64-hex run as a leak would false-positive on the entire git
+      // ecosystem, so these exact lengths are hash-shaped by default. The
+      // headline real-secret case (Twilio auth token = 32-hex) and other
+      // non-digest lengths (33–39, 41–63) are NOT standard digests and stay
+      // flagged. A leaked literal hash secret of EXACTLY 40/64 hex is the
+      // accepted blind spot of this length-based heuristic (documented tradeoff
+      // favouring zero false-positives on git/checksum hashes).
+      const hexLen = matched.length;
+      if (hexLen === 40 || hexLen === 64) continue;
+      // For non-canonical lengths, allowlist only when the SURROUNDING context
+      // carries a hash marker (integrity:, sha256-, "resolved", "checksum"). The
+      // window is widened on the left so a marker earlier on the line
+      // (e.g. `"resolved": "https://…/x.tgz#<hex>"`) is still seen.
+      const mIdx = text.indexOf(matched);
+      const before = text.slice(Math.max(0, mIdx - 64), mIdx);
+      const after = text.slice(mIdx + matched.length, mIdx + matched.length + 4);
+      if (HASH_CONTEXT_PATTERN.test(before + ' ' + after)) continue;
     }
 
     findings.push({ name: descriptor.name, redacted: redactMatch(matched), kind: 'pattern' });

@@ -9,12 +9,15 @@
  */
 
 const fs = require('fs-extra');
+const os = require('os');
 const path = require('path');
 const { generateIDEConfigs } = require('../../packages/installer/src/wizard/ide-config-generator');
 const { getIDEConfig, getIDEKeys } = require('../../packages/installer/src/config/ide-configs');
 
 describe('Wizard IDE Flow Integration', () => {
-  const testDir = path.join(__dirname, '..', '..', '.test-temp-integration');
+  // Unique per-suite temp dir so the full `jest` run never has two suites racing
+  // on a shared fixed directory.
+  const testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-wizard-ide-'));
 
   beforeEach(async () => {
     await fs.ensureDir(testDir);

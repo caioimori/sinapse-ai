@@ -28,6 +28,11 @@ function countMatching(dir, predicate) {
   let count = 0;
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
+    // Never count anything under a _deprecated/ folder — those entities are
+    // retired (e.g. squads/claude-code-mastery/_deprecated/claude-orqx.md).
+    if (entry.name === '_deprecated' || full.includes(`${path.sep}_deprecated${path.sep}`)) {
+      continue;
+    }
     if (entry.isDirectory()) {
       count += countMatching(full, predicate);
     } else if (predicate(full, entry.name)) {
@@ -52,8 +57,11 @@ function isTaskFile(fullPath, filename) {
   return fullPath.includes(`${path.sep}tasks${path.sep}`);
 }
 
-function isOrqxFile(_fullPath, filename) {
-  return filename.endsWith('-orqx.md');
+function isOrqxFile(fullPath, filename) {
+  // Only count orqx personas that live under a squad's agents/ directory.
+  // Guards against stray/retired orqx files outside the canonical location.
+  if (!filename.endsWith('-orqx.md')) return false;
+  return fullPath.includes(`${path.sep}agents${path.sep}`);
 }
 
 function countSquadDirs() {

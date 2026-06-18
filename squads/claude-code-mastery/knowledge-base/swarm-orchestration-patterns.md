@@ -6,7 +6,7 @@
 
 ## Orchestration Architecture Categories
 
-Multi-agent systems generally fall into a small number of architectural patterns. Understanding the tradeoffs between them informs how SINAPSE composes its 18 squads + 189 agents.
+Multi-agent systems generally fall into a small number of architectural patterns. Understanding the tradeoffs between them informs how SINAPSE composes its 17 squads + 172 agents.
 
 | Pattern | Architecture | Control Level | Ideal For |
 |---------|-------------|---------------|-----------|

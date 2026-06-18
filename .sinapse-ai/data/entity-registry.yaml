@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-17T19:03:15.397Z'
+  lastUpdated: '2026-06-18T05:22:03.289Z'
   entityCount: 810
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -238,8 +238,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:d06ce22670f135d81483da98314a2f2fb843b8eb85f13ba5d37c13629ef80848
-      lastVerified: '2026-06-15T01:36:42.600Z'
+      checksum: sha256:81710d210c261e3a9135411ce111bac5ef9965f78f4c4c8ab8ea1f41f150cea9
+      lastVerified: '2026-06-18T04:29:33.818Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -831,8 +831,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ecf325fc29eb7ad8a89117deec91deae653e6d92bd2293e33a4979f582559893
-      lastVerified: '2026-06-17T19:03:15.213Z'
+      checksum: sha256:6df52276cf16bcbca776e11dc4f90ca2594c5ed1f22dc1dd37a44262eccaaf54
+      lastVerified: '2026-06-18T04:25:38.106Z'
     staged-secret-scan:
       path: bin/utils/staged-secret-scan.js
       layer: L1
@@ -1457,8 +1457,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:56f8f1e1a5dc349d2361ea6d58ae4fd17c048a98e6a7672af390b2e0c31b7234
-      lastVerified: '2026-06-16T17:13:38.706Z'
+      checksum: sha256:e8dab3d13ae816a1543a220561024b57d692a39a316ce29efd1ca7c6405ec304
+      lastVerified: '2026-06-18T04:18:26.455Z'
     build-component:
       path: .sinapse-ai/development/tasks/build-component.md
       layer: L2
@@ -9610,8 +9610,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:653371d423b5f132bdedc5b80c3a2a82471bff1c147fea25ce52b4cd8bcd3b23
-      lastVerified: '2026-06-16T19:50:23.589Z'
+      checksum: sha256:353441b03a572d27e03f626ae31336aa526c3dcec780ca89433c6fabec05a723
+      lastVerified: '2026-06-18T04:42:18.034Z'
     graph-dashboard:
       path: .sinapse-ai/core/doctor/checks/graph-dashboard.js
       layer: L1
@@ -10336,8 +10336,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:19f050834b0c5faf69ac5ff8d448ab3a7af7109c82fd2cbb5299320b7e7b6e2b
-      lastVerified: '2026-06-15T00:26:26.381Z'
+      checksum: sha256:c291a8d9dea32273577b5c726626f4bc7a94b6aa67a52c9f312d6448ca6ab910
+      lastVerified: '2026-06-18T04:29:34.042Z'
     wave-executor:
       path: .sinapse-ai/core/execution/wave-executor.js
       layer: L1
@@ -14411,8 +14411,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:90bb4376f8ca2ab7bf2176ce51aeed9f04ab00ae14085be3ef7b82585f504193
-      lastVerified: '2026-06-17T17:42:07.543Z'
+      checksum: sha256:744ba24a08e6d294d93dff577d14185fa02b589f298049a734001f3b504daf82
+      lastVerified: '2026-06-18T05:22:03.153Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2

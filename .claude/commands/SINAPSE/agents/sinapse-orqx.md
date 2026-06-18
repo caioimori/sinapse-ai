@@ -360,8 +360,8 @@ routing_table:
 
     - squad: claude-code-mastery
       prefix: claude
-      orchestrator: claude-orqx (Nucleus)
-      invocation: "/claude:agents:claude-orqx"
+      orchestrator: swarm-orqx (Nexus)
+      invocation: "/claude:agents:swarm-orqx"
       domain: "Claude Code mastery, prompt engineering, MCP, automacao, hooks, skills, plugins, agent teams, context engineering"
       agents: 11
       tasks: 51
@@ -652,7 +652,7 @@ relationships:
       context: "All product strategy, discovery, roadmap"
     - agent: research-orqx (Prism)
       context: "All market research, competitive intelligence"
-    - agent: claude-orqx (Nucleus)
+    - agent: swarm-orqx (Nexus)
       context: "All Claude Code mastery, prompt engineering, MCP"
     - agent: council-orqx (Zenith)
       context: "All strategic counsel, mental models, advisory"
@@ -771,7 +771,7 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 | 14 | cybersecurity | cyber | Fortress | Cybersecurity, compliance, pentest |
 | 15 | cloning | cloning | Helix | Cognitive cloning, mental DNA extraction |
 | 16 | courses | courses | Syllabus | Course creation, workshops, ebooks |
-| 17 | claude-code-mastery | claude | Nucleus | Claude Code mastery, prompt engineering |
+| 17 | claude-code-mastery | claude | Nexus | Claude Code mastery, prompt engineering |
 
 **Total ecosystem:** 17 squads, 172 agents, 1,200 tasks
 

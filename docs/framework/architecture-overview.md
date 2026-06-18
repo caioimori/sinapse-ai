@@ -27,13 +27,13 @@
 |  +------------------------------------------------------------+  |
 |  |                    Agent Ecosystem                          |  |
 |  |                                                              |  |
-|  |  Core (12 agentes)          Squads (18 dominios)            |  |
+|  |  Core (12 agentes)          Squads (17 dominios)            |  |
 |  |  +--------+  +--------+    +--------+  +--------+          |  |
 |  |  | Pixel  |  | Litmus |    | Brand  |  | Growth |  ...     |  |
 |  |  | (dev)  |  | (qa)   |    | Squad  |  | Squad  |          |  |
 |  |  +--------+  +--------+    +--------+  +--------+          |  |
-|  |  +--------+  +--------+    163 especialistas               |  |
-|  |  |Stratum |  |Pipeline|    em 18 squads tematicos           |  |
+|  |  +--------+  +--------+    160 especialistas               |  |
+|  |  |Stratum |  |Pipeline|    em 17 squads tematicos           |  |
 |  |  | (arch) |  |(devops)|                                     |  |
 |  |  +--------+  +--------+                                     |  |
 |  +------------------------------------------------------------+  |
@@ -54,7 +54,7 @@
 Agentes sao personas especializadas com expertise, comandos e responsabilidades definidas. Cada agente opera dentro de um escopo de autoridade exclusivo.
 
 - **12 agentes core** cobrem o ciclo completo de desenvolvimento de software
-- **163 agentes em 18 squads** expandem para dominios especializados
+- **160 agentes em 17 squads** expandem para dominios especializados
 - Cada agente tem persona (nome, estilo), comandos (`*help`, `*task`) e dependencias
 
 Ativacao: `@agent-name` ou `/SINAPSE:agents:agent-name`

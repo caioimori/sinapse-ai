@@ -7,13 +7,6 @@
 
 const { BaseCheck, CheckSeverity, CheckDomain } = require('../../../.sinapse-ai/core/health-check/base-check');
 
-// Mock the built-in check modules to prevent loading real files
-jest.mock('../../../.sinapse-ai/core/health-check/checks/project', () => ({}), { virtual: true });
-jest.mock('../../../.sinapse-ai/core/health-check/checks/local', () => ({}), { virtual: true });
-jest.mock('../../../.sinapse-ai/core/health-check/checks/repository', () => ({}), { virtual: true });
-jest.mock('../../../.sinapse-ai/core/health-check/checks/deployment', () => ({}), { virtual: true });
-jest.mock('../../../.sinapse-ai/core/health-check/checks/services', () => ({}), { virtual: true });
-
 const CheckRegistry = require('../../../.sinapse-ai/core/health-check/check-registry');
 
 // Test check subclasses
@@ -50,6 +43,11 @@ describe('check-registry', () => {
 
   beforeEach(() => {
     registry = new CheckRegistry();
+    // The constructor auto-registers the real built-in checks. These tests assert
+    // on an empty registry (e.g. getStats total === 2 after registering exactly 2),
+    // so start from a clean slate deterministically — independent of whether the
+    // built-in check modules are present on disk in this environment.
+    registry.clear();
   });
 
   // ============================================================

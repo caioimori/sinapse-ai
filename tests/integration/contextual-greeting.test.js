@@ -19,32 +19,22 @@ describe('Contextual Greeting Integration Tests', () => {
   });
 
   describe('End-to-End Greeting Generation', () => {
-    test('should generate complete new session greeting', async () => {
-      // TODO: Full E2E test with real components
-      expect(true).toBe(true);
-    });
+    // Pending: full E2E test with real components
+    test.todo('should generate complete new session greeting');
 
-    test('should generate complete existing session greeting', async () => {
-      // TODO: Full E2E test
-      expect(true).toBe(true);
-    });
+    // Pending: full E2E test
+    test.todo('should generate complete existing session greeting');
 
-    test('should generate complete workflow session greeting', async () => {
-      // TODO: Full E2E test
-      expect(true).toBe(true);
-    });
+    // Pending: full E2E test
+    test.todo('should generate complete workflow session greeting');
   });
 
   describe('Backwards Compatibility', () => {
-    test('should work with agents without visibility metadata', async () => {
-      // TODO: Test old agent format
-      expect(true).toBe(true);
-    });
+    // Pending: test old agent format (agents without visibility metadata)
+    test.todo('should work with agents without visibility metadata');
 
-    test('should fallback gracefully on component failures', async () => {
-      // TODO: Test fallback scenarios
-      expect(true).toBe(true);
-    });
+    // Pending: test fallback scenarios on component failures
+    test.todo('should fallback gracefully on component failures');
   });
 });
 

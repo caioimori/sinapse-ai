@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 17 squads, 172 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -53,7 +53,13 @@
     "docs/agent-reference-guide.md",
     "docs/TELEMETRY.md",
     "README.md",
-    "LICENSE"
+    "CHANGELOG.md",
+    "LICENSE",
+    "!**/__tests__/**",
+    "!**/tests/**",
+    "!**/*.test.js",
+    "!**/*.spec.js",
+    ".sinapse-ai/development/templates/**"
   ],
   "scripts": {
     "format": "prettier --write \"**/*.md\"",

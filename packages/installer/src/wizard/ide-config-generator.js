@@ -929,7 +929,12 @@ async function linkGeminiExtension(projectRoot) {
     return { status: 'skipped', reason: 'manifest-not-found' };
   }
 
-  const versionCheck = spawnSync('gemini', ['--version'], { encoding: 'utf8' });
+  // On Windows, `gemini` is a .cmd/.ps1 shim — spawnSync without a shell throws
+  // EINVAL. Run through the shell on win32 so the shim resolves.
+  const versionCheck = spawnSync('gemini', ['--version'], {
+    encoding: 'utf8',
+    shell: process.platform === 'win32',
+  });
   if (versionCheck.status !== 0) {
     return { status: 'skipped', reason: 'gemini-cli-not-available' };
   }
@@ -938,6 +943,7 @@ async function linkGeminiExtension(projectRoot) {
     cwd: projectRoot,
     encoding: 'utf8',
     timeout: 30000,
+    shell: process.platform === 'win32',
   });
 
   if (linkResult.status === 0) {
@@ -952,6 +958,7 @@ async function linkGeminiExtension(projectRoot) {
       cwd: projectRoot,
       encoding: 'utf8',
       timeout: 30000,
+      shell: process.platform === 'win32',
     });
 
     if (uninstall.status !== 0) {
@@ -962,6 +969,7 @@ async function linkGeminiExtension(projectRoot) {
       cwd: projectRoot,
       encoding: 'utf8',
       timeout: 30000,
+      shell: process.platform === 'win32',
     });
 
     if (linkResult.status === 0) {

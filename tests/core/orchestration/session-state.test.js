@@ -3,6 +3,7 @@
  * Story 11.5: Projeto Bob - Session State Persistence
  */
 
+const os = require('os');
 const path = require('path');
 const fs = require('fs').promises;
 const fsSync = require('fs');
@@ -20,8 +21,9 @@ const {
   CRASH_THRESHOLD_MINUTES,
 } = require('../../../.sinapse-ai/core/orchestration/session-state');
 
-// Test fixtures
-const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project');
+// Test fixtures — unique per-suite temp root (os.tmpdir + random suffix) so the
+// full `jest` run never has two suites racing on a shared fixed directory.
+const TEST_PROJECT_ROOT = fsSync.mkdtempSync(path.join(os.tmpdir(), 'sinapse-session-state-'));
 const TEST_STATE_PATH = path.join(TEST_PROJECT_ROOT, 'docs/stories', SESSION_STATE_FILENAME);
 
 describe('SessionState', () => {
@@ -676,7 +678,7 @@ describe('SessionState', () => {
 });
 
 describe('SessionState Migration (ADR-011)', () => {
-  const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-migration-project');
+  const TEST_PROJECT_ROOT = fsSync.mkdtempSync(path.join(os.tmpdir(), 'sinapse-session-migration-'));
   const LEGACY_STATE_PATH = path.join(TEST_PROJECT_ROOT, '.sinapse/workflow-state');
 
   beforeEach(async () => {

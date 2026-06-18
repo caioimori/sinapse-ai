@@ -222,6 +222,13 @@ class SynapseEngine {
    * @param {object} [config={}] - Configuration from manifest / caller
    * @param {object} [config.manifest] - Parsed manifest object
    * @param {boolean} [config.devmode] - Enable DEVMODE debug output
+   * @param {Array<object>} [config.layers] - Optional pre-instantiated layer
+   *   instances (dependency injection). When provided, these are used verbatim
+   *   instead of loading + instantiating the L0-L7 modules from disk. Each
+   *   instance must expose `name`, `layer`, and `_safeProcess(context)`. This is
+   *   the seam used by tests to inject isolated mock layers without relying on
+   *   `jest.mock` hoisting or module-cache state. Production never passes this,
+   *   so default behavior is unchanged.
    */
   constructor(synapsePath, config = {}) {
     this.synapsePath = synapsePath;
@@ -232,6 +239,14 @@ class SynapseEngine {
 
     /** @type {MemoryBridge} Feature-gated MIS consumer (SYN-10) */
     this.memoryBridge = new MemoryBridge();
+
+    // Dependency injection seam: when caller supplies ready layer instances,
+    // use them directly and skip module loading entirely (production default
+    // = no config.layers → identical behavior to before).
+    if (Array.isArray(config.layers)) {
+      this.layers = config.layers.filter(Boolean);
+      return;
+    }
 
     for (const mod of LAYER_MODULES) {
       const LayerClass = loadLayerModule(mod.path);

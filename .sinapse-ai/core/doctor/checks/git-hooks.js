@@ -8,12 +8,23 @@
  * `.sinapse-ai/git-hooks` but that directory is EMPTY/MISSING — so every guard
  * is silently INERT and secrets/destructive SQL pass at commit time.
  *
+ * Beyond mere existence, this check also confirms the guard is PLAUSIBLE rather
+ * than a hollow shell:
+ *   1. core.hooksPath actually RESOLVES to the managed dir (.sinapse-ai/git-hooks).
+ *      A hooksPath pointing somewhere else means the framework backstop is not the
+ *      active hook system, even if some pre-commit exists there.
+ *   2. The pre-commit (and any present pre-push) guard is NON-EMPTY. A zero-byte /
+ *      whitespace-only hook file passes existsSync but runs nothing — the same
+ *      INERT trap with a file present to disguise it.
+ *
  * Verdicts:
- *   - FAIL: core.hooksPath is set but the dir is missing OR has no pre-commit
- *           (the inert-trap state — security off without anyone noticing).
- *   - WARN: no core.hooksPath set and no .husky fallback (hooks not installed).
- *   - PASS: managed hooksPath populated with pre-commit (and ideally pre-push),
- *           OR a husky fallback with the expected hooks exists.
+ *   - FAIL: core.hooksPath is set but the dir is missing, has no pre-commit, the
+ *           pre-commit is empty, OR hooksPath resolves outside the managed dir
+ *           (the inert-trap states — security off without anyone noticing).
+ *   - WARN: no core.hooksPath set and no .husky fallback (hooks not installed),
+ *           or pre-push present-but-empty / missing.
+ *   - PASS: managed hooksPath populated with a non-empty pre-commit (and ideally
+ *           pre-push), OR a husky fallback with the expected hooks exists.
  *
  * @module sinapse-ai/doctor/checks/git-hooks
  * @story INS-4.1, E8-SECURITY
@@ -46,6 +57,36 @@ function readHooksPath(projectRoot) {
   }
 }
 
+/**
+ * True when a hook file exists AND carries real (non-whitespace) content.
+ * A zero-byte / blank hook passes existsSync but executes nothing — the same
+ * INERT trap with a file present to disguise it.
+ * @param {string} hookFile absolute path
+ * @returns {boolean}
+ */
+function hasContent(hookFile) {
+  try {
+    return fs.readFileSync(hookFile, 'utf8').trim().length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * True when the configured hooksPath resolves to the managed git-hooks dir
+ * (.sinapse-ai/git-hooks), regardless of whether it was given as a relative or
+ * absolute path. If it points elsewhere, the framework backstop is not the
+ * active hook system even if some pre-commit happens to exist there.
+ * @param {string} projectRoot
+ * @param {string} hooksPath value from core.hooksPath
+ * @returns {boolean}
+ */
+function resolvesToManaged(projectRoot, hooksPath) {
+  const resolved = path.resolve(projectRoot, hooksPath);
+  const managed = path.resolve(projectRoot, MANAGED_HOOKS_DIR);
+  return resolved === managed;
+}
+
 async function run(context) {
   const projectRoot = context.projectRoot;
   const hooksPath = readHooksPath(projectRoot);
@@ -64,6 +105,17 @@ async function run(context) {
       };
     }
 
+    // hooksPath points at a real dir, but does it point at OUR managed dir? If it
+    // resolves elsewhere, the framework backstop is not the active hook system.
+    if (!resolvesToManaged(projectRoot, hooksPath)) {
+      return {
+        check: name,
+        status: 'FAIL',
+        message: `core.hooksPath -> "${hooksPath}" resolves OUTSIDE the managed dir (${MANAGED_HOOKS_DIR}). The framework's secret-scan/SQL/boundary guards are not the active hook system. Re-wire core.hooksPath to the managed dir.`,
+        fixCommand: 'sinapse init   # re-wires core.hooksPath to .sinapse-ai/git-hooks',
+      };
+    }
+
     if (!fs.existsSync(preCommit)) {
       return {
         check: name,
@@ -73,9 +125,22 @@ async function run(context) {
       };
     }
 
-    // Populated. Report which managed hooks are present.
-    const present = EXPECTED_MANAGED.filter((h) => fs.existsSync(path.join(hooksDirAbs, h)));
-    const missing = EXPECTED_MANAGED.filter((h) => !fs.existsSync(path.join(hooksDirAbs, h)));
+    // pre-commit exists but is empty/whitespace -> runs nothing -> still INERT.
+    if (!hasContent(preCommit)) {
+      return {
+        check: name,
+        status: 'FAIL',
+        message: `core.hooksPath -> "${hooksPath}" has a pre-commit file but it is EMPTY. The guard executes nothing — secret-scan/SQL/boundary are INERT despite the file being present.`,
+        fixCommand: 'sinapse init   # regenerates the managed pre-commit guard',
+      };
+    }
+
+    // Populated with a plausible (non-empty) pre-commit. Report present hooks,
+    // treating a present-but-empty hook as missing (it does nothing).
+    const present = EXPECTED_MANAGED.filter(
+      (h) => fs.existsSync(path.join(hooksDirAbs, h)) && hasContent(path.join(hooksDirAbs, h)),
+    );
+    const missing = EXPECTED_MANAGED.filter((h) => !present.includes(h));
 
     if (missing.length === 0) {
       return {
@@ -86,11 +151,12 @@ async function run(context) {
       };
     }
 
-    // pre-commit present (security backstop active) but pre-push missing -> WARN.
+    // pre-commit present and non-empty (security backstop active) but pre-push
+    // missing or empty -> WARN.
     return {
       check: name,
       status: 'WARN',
-      message: `managed pre-commit active at ${hooksPath}; missing: ${missing.join(', ')}`,
+      message: `managed pre-commit active at ${hooksPath}; missing/empty: ${missing.join(', ')}`,
       fixCommand: 'sinapse init   # writes the missing managed hook(s)',
     };
   }

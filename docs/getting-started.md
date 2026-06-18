@@ -65,4 +65,4 @@ npx sinapse-ai uninstall               # remove tudo
 
 ---
 
-*Próxima leitura sugerida: [Agent Reference Guide](agent-reference-guide.md) pra ver todos os 200 agentes disponíveis.*
+*Próxima leitura sugerida: [Agent Reference Guide](agent-reference-guide.md) pra ver todos os 172 agentes disponíveis.*

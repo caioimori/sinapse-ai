@@ -16,7 +16,7 @@ Examples:
 ### Pattern: /sinapse
 Show the available squads and how to activate them:
 
-**18 Squads Available:**
+**17 Squads Available:**
 | Squad | Comando | Foco |
 |-------|---------|------|
 | Brand | `@brand-orqx` | Estrategia de marca |
@@ -35,7 +35,7 @@ Show the available squads and how to activate them:
 | Courses | `@courses-orqx` | Producao educacional |
 | Cloning | `@cloning-orqx` | Clonagem cognitiva |
 | Council | `@council-orqx` | Advisors estrategicos |
-| Claude | `@claude-orqx` | Claude Code mastery |
+| Claude | `@swarm-orqx` | Claude Code mastery |
 
 **12 Core Development Agents:**
 | Agent | Comando | Funcao |

@@ -9,7 +9,6 @@ const SQUADS_DIR = path.join(__dirname, '../../squads');
 const ALL_EXPECTED_SQUADS = [
   'claude-code-mastery',
   'squad-animations',
-  'squad-artdir',
   'squad-brand',
   'squad-cloning',
   'squad-commercial',
@@ -34,7 +33,17 @@ const EXPECTED_SQUADS = ALL_EXPECTED_SQUADS.filter((s) =>
 
 const ALL_SQUADS_PRESENT = EXPECTED_SQUADS.length === ALL_EXPECTED_SQUADS.length;
 
-const EXPECTED_TOTAL_AGENTS = 177;
+// Squads listed in the manifest that are NOT on disk. A non-empty list means
+// the expected manifest above is STALE (e.g. it still references a removed
+// squad like the retired squad-artdir). That is manifest drift, not a minimal
+// install — it MUST fail loudly, never skip silently. A real minimal install
+// installs a *subset* of real squads; it never references a squad that no
+// longer exists in the repo.
+const PHANTOM_SQUADS = ALL_EXPECTED_SQUADS.filter(
+  (s) => !fs.existsSync(path.join(SQUADS_DIR, s)),
+);
+
+const EXPECTED_TOTAL_AGENTS = 160;
 
 // Skip if squads directory doesn't exist (CI or minimal install)
 const squadsExist = fs.existsSync(SQUADS_DIR);
@@ -264,7 +273,7 @@ describeIfSquads('Squad Agent Compatibility', () => {
     }
   });
 
-  // ─── 1. All 18 expected squads present ──────────────────────────────────
+  // ─── 1. All 17 expected squads present ──────────────────────────────────
 
   describe('Squad directory existence', () => {
     test('all expected squad directories exist', () => {
@@ -461,6 +470,14 @@ describeIfSquads('Squad Agent Compatibility', () => {
   // ─── 5. Ecosystem-wide uniqueness ──────────────────────────────────────
 
   describe('Ecosystem-wide validation', () => {
+    // Guard against a STALE manifest: every squad the test claims to expect
+    // must actually exist on disk. This fails loudly (never skips) so a
+    // removed squad left dangling in ALL_EXPECTED_SQUADS is caught
+    // immediately — see PHANTOM_SQUADS rationale above.
+    test('expected squad manifest has no phantom (removed) squads', () => {
+      expect(PHANTOM_SQUADS).toEqual([]);
+    });
+
     test('no duplicate agent IDs across all squads', () => {
       const idMap = new Map();
       const duplicates = [];
@@ -516,7 +533,11 @@ describeIfSquads('Squad Agent Compatibility', () => {
   });
 
   // ─── 6. Per-squad agent counts ─────────────────────────────────────────
-  // Only run exact count checks when all squads are present (local dev)
+  // Exact per-squad counts only run on a full install (all real squads on
+  // disk). They skip ONLY for a genuine minimal/partial install (a subset of
+  // real squads). Manifest drift — an expected squad that no longer exists —
+  // is caught loudly by the phantom-squads guard above, so a skip here can
+  // never mask a stale manifest.
 
   const describeIfAllSquads = ALL_SQUADS_PRESENT ? describe : describe.skip;
 
@@ -524,22 +545,21 @@ describeIfSquads('Squad Agent Compatibility', () => {
     const expectedCounts = {
       'claude-code-mastery': 8,
       'squad-animations': 9,
-      'squad-artdir': 14,
       'squad-brand': 15,
       'squad-cloning': 9,
-      'squad-commercial': 11,
+      'squad-commercial': 10,
       'squad-content': 7,
-      'squad-copy': 14,
+      'squad-copy': 13,
       'squad-council': 11,
       'squad-courses': 8,
-      'squad-cybersecurity': 9,
-      'squad-design': 11,
+      'squad-cybersecurity': 8,
+      'squad-design': 14,
       'squad-finance': 8,
       'squad-growth': 7,
-      'squad-paidmedia': 10,
+      'squad-paidmedia': 9,
       'squad-product': 7,
-      'squad-research': 8,
-      'squad-storytelling': 11,
+      'squad-research': 7,
+      'squad-storytelling': 10,
     };
 
     test.each(EXPECTED_SQUADS)(

@@ -331,7 +331,9 @@ function pickValidateScript() {
 const script = pickValidateScript();
 if (script) {
   const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-  const res = spawnSync(npmCmd, ['run', '--silent', script], { stdio: 'inherit', cwd: projectRoot });
+  // shell:true on Windows — spawning npm.cmd without it throws EINVAL (CVE-2024-27980 /
+  // Node DEP0190). Args are fixed/literal here, so there is no shell-injection surface.
+  const res = spawnSync(npmCmd, ['run', '--silent', script], { stdio: 'inherit', cwd: projectRoot, shell: process.platform === 'win32' });
   if (res.error) {
     process.stderr.write('SINAPSE pre-push: could not run "npm run ' + script + '" — blocking push (fail-closed).\\n');
     process.stderr.write('  ' + res.error.message + '\\n');

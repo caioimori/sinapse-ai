@@ -10,11 +10,16 @@
  *
  * Checks per orqx file:
  *   1. File exists at squads/{squad}/agents/{name}-orqx.md
- *   2. Contains a YAML code block with `agent:` mapping
- *   3. agent.name is a non-empty string
- *   4. agent.id is a non-empty string and matches `{squad}/{name}-orqx`
- *   5. agent.title is a non-empty string
- *   6. persona.role exists
+ *   2. Contains a recognized identity block (YAML / frontmatter / Markdown)
+ *   3. At least one of agent.name / agent.id / agent.title is present
+ *   4. agent.id (when declared) matches `{squad}/{name}-orqx` OR the bare
+ *      `{name}-orqx` file-base — anything else is a HARD ERROR (id-mismatch)
+ *   5. persona.role (or a Role/Papel section) exists — a missing role is a
+ *      HARD ERROR (persona-role)
+ *
+ * Rationale (E8 / auditoria-pos-190): id-mismatch and persona-role were
+ * previously `warn` only and never blocked, so a malformed orqx (wrong id /
+ * no role) passed the gate silently. They now block (exit 1).
  *
  * Squad-level checks:
  *   - Every directory under squads/ that has agents/ MUST have at least
@@ -193,22 +198,27 @@ function validateOrqxFile(filePath) {
     return findings;
   }
 
-  // ID match is a soft check — Markdown format often uses bare ID like
-  // "design-orqx" without the squad prefix. Warn but don't error.
+  // ID match is now a HARD check. The tolerance stays: an orqx may declare its id
+  // as the squad-prefixed "{squad}/{name}-orqx" OR the bare file-base "{name}-orqx"
+  // (Markdown format often omits the squad prefix). Anything else is a real
+  // divergence — a malformed orqx that would be reached under the wrong id — and
+  // is an ERROR, not a soft warning.
   if (data.agent.id && data.agent.id !== expectedId) {
     const fileBaseId = path.basename(filePath, '.md');
     if (data.agent.id !== fileBaseId) {
       findings.push({
-        level: 'warn',
+        level: 'error',
         rule: 'id-mismatch',
         message: `agent.id="${data.agent.id}" does not match "${expectedId}" or "${fileBaseId}"`,
       });
     }
   }
 
+  // persona.role is now REQUIRED. An orqx with no role declared is malformed —
+  // the orchestrator persona is undefined. ERROR, not warning.
   if (!data.persona || !data.persona.role) {
     findings.push({
-      level: 'warn',
+      level: 'error',
       rule: 'persona-role',
       message: 'persona.role / Role section is missing',
     });

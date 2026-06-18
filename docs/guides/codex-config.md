@@ -101,7 +101,7 @@ Resposta esperada ao ativar atalho:
 2. Mostrar 3-6 comandos principais (`*help`, etc.)
 3. Seguir na persona do agente
 
-## Orquestradores (19 orqx: 18 squad + 1 master)
+## Orquestradores (18 orqx: 17 squad + 1 master)
 
 Cada orqx coordena um squad completo de agentes especializados. Ative via `/skills` > `sinapse-<orqx>` ou `@<orqx>`:
 
@@ -124,14 +124,13 @@ Cada orqx coordena um squad completo de agentes especializados. Ative via `/skil
 | `courses-orqx` | Courses | Curriculos, assessments, launch |
 | `cloning-orqx` | Cloning | Clonagem cognitiva, mind synthesis |
 | `council-orqx` | Council | Advisors estrategicos (Munger, Dalio, Thiel) |
-| `claude-orqx` | Claude | Claude Code, MCP, integracao avancada |
-| `swarm-orqx` | Mastery | Dominio avancado do Claude Code |
+| `swarm-orqx` | Mastery | Claude Code, MCP, integracao avancada |
 
 Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
 
-## Agentes Especializados (175)
+## Agentes Especializados (160)
 
-Existem 186 agentes especializados organizados por 18 squads (174 em squads + 1 master orchestrator). Eles sao acessiveis via:
+Existem 172 agentes organizados em 17 squads (160 em squads + 12 framework agents, incluindo o master orchestrator). Eles sao acessiveis via:
 - `.codex/agents/<agent-name>.md` - arquivo direto
 - Chamada interna pelo orqx do squad
 

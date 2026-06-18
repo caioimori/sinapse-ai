@@ -16,7 +16,7 @@ workflow:
   phases:
     - name: "Phase 1: Audit"
       description: Assess the current state of Claude Code in the project
-      agent: "@claude-orqx"
+      agent: "@swarm-orqx"
       tasks:
         - audit-setup
       inputs:
@@ -70,7 +70,7 @@ workflow:
         on_fail: Debug connection/execution issues before proceeding
     - name: "Phase 4: Validate"
       description: Run comprehensive validation of the complete setup
-      agent: "@claude-orqx"
+      agent: "@swarm-orqx"
       tasks:
         - audit-setup
         - diagnose
@@ -86,7 +86,7 @@ workflow:
   sequence:
     - name: "Phase 1: Audit"
       description: Assess the current state of Claude Code in the project
-      agent: "@claude-orqx"
+      agent: "@swarm-orqx"
       tasks:
         - audit-setup
       inputs:
@@ -140,7 +140,7 @@ workflow:
         on_fail: Debug connection/execution issues before proceeding
     - name: "Phase 4: Validate"
       description: Run comprehensive validation of the complete setup
-      agent: "@claude-orqx"
+      agent: "@swarm-orqx"
       tasks:
         - audit-setup
         - diagnose
