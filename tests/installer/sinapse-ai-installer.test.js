@@ -11,6 +11,8 @@ const os = require('os');
 const {
   generateFileHashes,
   generateVersionJson,
+  isUserOwnedL3,
+  copyFileWithRootReplacement,
 } = require('../../packages/installer/src/installer/sinapse-ai-installer');
 
 describe('SINAPSE Core Installer - Version Tracking', () => {
@@ -169,6 +171,67 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
       expect(Object.keys(result.fileHashes)).toHaveLength(2);
       expect(result.fileHashes['agents/developer.md']).toBeDefined();
       expect(result.fileHashes['config.yaml']).toBeDefined();
+    });
+  });
+
+  // ===========================================================================
+  // Re-install preservation of user-owned L3 files (idempotent upsert).
+  // Regression guard: re-running install must NOT wipe core-config.yaml or
+  // agent MEMORY.md customizations (verified data-loss before this fix).
+  // ===========================================================================
+  describe('isUserOwnedL3 predicate', () => {
+    it('matches core-config.yaml at the .sinapse-ai root', () => {
+      expect(isUserOwnedL3('/proj/.sinapse-ai/core-config.yaml')).toBe(true);
+      expect(isUserOwnedL3('C:\\proj\\.sinapse-ai\\core-config.yaml')).toBe(true);
+    });
+
+    it('matches agent MEMORY.md under development/agents', () => {
+      expect(isUserOwnedL3('/proj/.sinapse-ai/development/agents/dev/MEMORY.md')).toBe(true);
+    });
+
+    it('does NOT match framework files (constitution, tasks, other yaml)', () => {
+      expect(isUserOwnedL3('/proj/.sinapse-ai/constitution.md')).toBe(false);
+      expect(isUserOwnedL3('/proj/.sinapse-ai/development/tasks/create-doc.md')).toBe(false);
+      expect(isUserOwnedL3('/proj/.sinapse-ai/data/tech-presets.yaml')).toBe(false);
+    });
+  });
+
+  describe('copyFileWithRootReplacement — L3 preservation', () => {
+    it('preserves an existing user-owned L3 file instead of overwriting', async () => {
+      const dest = path.join(tempDir, '.sinapse-ai', 'core-config.yaml');
+      const src = path.join(tempDir, 'src-core-config.yaml');
+      await fs.ensureDir(path.dirname(dest));
+      await fs.writeFile(dest, 'boundary:\n  frameworkProtection: false # USER_EDIT');
+      await fs.writeFile(src, 'boundary:\n  frameworkProtection: true # SHIPPED');
+
+      const result = await copyFileWithRootReplacement(src, dest, true, isUserOwnedL3);
+
+      expect(result).toBe('preserved');
+      expect(await fs.readFile(dest, 'utf8')).toContain('USER_EDIT');
+    });
+
+    it('still writes a framework file (predicate does not match)', async () => {
+      const dest = path.join(tempDir, '.sinapse-ai', 'constitution.md');
+      const src = path.join(tempDir, 'src-constitution.md');
+      await fs.ensureDir(path.dirname(dest));
+      await fs.writeFile(dest, 'OLD');
+      await fs.writeFile(src, 'FRESH');
+
+      const result = await copyFileWithRootReplacement(src, dest, true, isUserOwnedL3);
+
+      expect(result).toBe(true);
+      expect(await fs.readFile(dest, 'utf8')).toContain('FRESH');
+    });
+
+    it('writes a user-owned L3 file on FIRST install (dest does not exist yet)', async () => {
+      const dest = path.join(tempDir, '.sinapse-ai', 'core-config.yaml');
+      const src = path.join(tempDir, 'src-core-config.yaml');
+      await fs.writeFile(src, 'shipped: true');
+
+      const result = await copyFileWithRootReplacement(src, dest, true, isUserOwnedL3);
+
+      expect(result).toBe(true);
+      expect(await fs.readFile(dest, 'utf8')).toContain('shipped: true');
     });
   });
 });
