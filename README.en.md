@@ -33,7 +33,7 @@ Generative AI has a known problem: the more you ask of it, the worse it gets. A 
 
 SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 172 agents in 17 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
 
-The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 10 articles governs the framework, and 6 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
+The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 11 articles governs the framework, and 7 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
 
 ---
 
@@ -174,7 +174,7 @@ Deny rules in `.claude/settings.json` enforce this deterministically. **Framewor
 
 ### Constitution
 
-SINAPSE is governed by a formal Constitution with 10 articles and 19 enforcement hooks:
+SINAPSE is governed by a formal Constitution with 11 articles and 19 enforcement hooks:
 
 | Article | Principle | Severity |
 |---------|-----------|----------|
@@ -188,8 +188,9 @@ SINAPSE is governed by a formal Constitution with 10 articles and 19 enforcement
 | VIII | Mandatory Delegation | NON-NEGOTIABLE |
 | IX | Safe Collaboration | NON-NEGOTIABLE |
 | X | Security & Data Protection | NON-NEGOTIABLE |
+| XI | Conservative Default | MUST |
 
-6 articles are NON-NEGOTIABLE -- violations are automatically blocked before execution.
+7 articles are NON-NEGOTIABLE -- violations are automatically blocked before execution.
 
 ---
 
