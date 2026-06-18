@@ -478,6 +478,11 @@ async function cmdInstallGlobal(opts = {}) {
         quiet: true,
         language: language,
         selectedLLM: llmChoice,
+        // Phase 7 (above) already installed Chrome Brain globally — tell the wizard
+        // to skip its own copy so it doesn't run twice (duplicate output + duplicate
+        // optional-dep warning). The wizard still runs Chrome Brain when invoked
+        // standalone (no skip flag).
+        skipChromeBrain: true,
       });
       logger.always(`  ${GREEN}OK${NC} Project files installed (.sinapse-ai/, .claude/)`);
     } else {
