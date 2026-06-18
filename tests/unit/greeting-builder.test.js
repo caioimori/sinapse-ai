@@ -666,5 +666,73 @@ describe('GreetingBuilder', () => {
       expect(footer).toContain('*session-info');
     });
   });
+
+  // Regression: runtime agents expose long canonical ids (developer,
+  // quality-gate, ...) but suggestion/action lookups key off short aliases
+  // (dev, qa, ...). Without normalization these always returned null/generic
+  // in production, while short-id test mocks masked the bug.
+  describe('Agent id normalization (long canonical ids from runtime)', () => {
+    test('_normalizeAgentId maps long ids to short, idempotent and null-safe', () => {
+      expect(builder._normalizeAgentId('developer')).toBe('dev');
+      expect(builder._normalizeAgentId('quality-gate')).toBe('qa');
+      expect(builder._normalizeAgentId('product-lead')).toBe('po');
+      expect(builder._normalizeAgentId('project-lead')).toBe('pm');
+      expect(builder._normalizeAgentId('sprint-lead')).toBe('sm');
+      // idempotent for short ids and pass-through for unknown
+      expect(builder._normalizeAgentId('dev')).toBe('dev');
+      expect(builder._normalizeAgentId('analyst')).toBe('analyst');
+      expect(builder._normalizeAgentId(null)).toBeNull();
+    });
+
+    test('_suggestCommand fires for long-id agent transitions', () => {
+      expect(
+        builder._suggestCommand('quality-gate', 'developer', { storyFile: '1.1.story.md' }),
+      ).toBe('*review 1.1.story.md');
+      expect(builder._suggestCommand('developer', 'quality-gate', {})).toBe('*apply-qa-fixes');
+      expect(builder._suggestCommand('developer', 'product-lead', {})).toBe('*develop-yolo');
+    });
+
+    test('_suggestCommand fires role-based suggestions on cold start (no prev agent)', () => {
+      expect(builder._suggestCommand('quality-gate', null, { storyFile: 'x.md' })).toBe('*review x.md');
+      expect(builder._suggestCommand('developer', null, { hasStory: true })).toBe(
+        '*develop-yolo docs/stories/[story-path].md',
+      );
+      expect(builder._suggestCommand('project-lead', null, { storyId: 'EPIC-1' })).toBe(
+        '*sync-story EPIC-1',
+      );
+    });
+
+    test('_suggestCommand still works with short ids (back-compat)', () => {
+      expect(builder._suggestCommand('qa', 'dev', { storyFile: 'a.md' })).toBe('*review a.md');
+    });
+
+    test('_getAgentAction resolves contextual action for long ids', () => {
+      expect(builder._getAgentAction('developer', {})).toBe('implementar as funcionalidades');
+      expect(builder._getAgentAction('quality-gate', {})).toBe(
+        'revisar a qualidade dessa implementação',
+      );
+      expect(builder._getAgentAction('sprint-lead', {})).toBe('coordenar o desenvolvimento');
+      // unknown id falls back to generic
+      expect(builder._getAgentAction('analyst', {})).toBe('continuar o trabalho');
+    });
+
+    test('bob-mode PM gating works with the long runtime id (project-lead)', () => {
+      const cmds = [
+        { name: 'help', visibility: ['full', 'quick', 'key'], description: 'Show help' },
+      ];
+      // PM (long id project-lead) keeps full commands in bob mode
+      expect(
+        builder.filterCommandsByVisibility({ id: 'project-lead', commands: cmds }, 'new', 'bob'),
+      ).not.toHaveLength(0);
+      // non-PM (long id developer) is redirected -> empty command list in bob mode
+      expect(
+        builder.filterCommandsByVisibility({ id: 'developer', commands: cmds }, 'new', 'bob'),
+      ).toHaveLength(0);
+      // advanced mode is unaffected by id form
+      expect(
+        builder.filterCommandsByVisibility({ id: 'developer', commands: cmds }, 'new', 'advanced'),
+      ).not.toHaveLength(0);
+    });
+  });
 });
 
