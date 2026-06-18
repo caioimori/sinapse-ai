@@ -28,7 +28,41 @@ const args = process.argv.slice(2);
 const command = args[0];
 
 // Helper: Run initialization wizard
+/**
+ * Fail fast with an actionable message if the Node.js runtime is older than the
+ * `engines.node` requirement. Without this, an old Node gets a cryptic error
+ * deep inside the wizard (syntax/API failure) instead of a clear "upgrade Node"
+ * message at the door. Uses semver when available, else a major-version fallback
+ * so a missing dependency never blocks the check.
+ */
+function nodeSatisfies(currentVersion, required) {
+  // Major-version fallback (used if semver is unavailable in the runtime).
+  const m = String(required).match(/(\d+)/);
+  const minMajor = m ? parseInt(m[1], 10) : 18;
+  let satisfied = parseInt(String(currentVersion).replace(/^v/, '').split('.')[0], 10) >= minMajor;
+  try {
+    satisfied = require('semver').satisfies(currentVersion, required, { includePrerelease: true });
+  } catch {
+    // semver unavailable — keep the major-version fallback computed above.
+  }
+  return satisfied;
+}
+
+function checkNodePrerequisites() {
+  const required = (packageJson.engines && packageJson.engines.node) || '>=18.0.0';
+  if (!nodeSatisfies(process.version, required)) {
+    logger.error(`\n❌ Node.js ${process.version} does not meet SINAPSE's requirement (Node ${required}).`);
+    logger.error('   How to fix:');
+    logger.error('   1. Install the Node.js LTS from https://nodejs.org/');
+    logger.error('   2. Reopen your terminal and run the command again.\n');
+    process.exit(1);
+  }
+}
+
 async function runWizard(options = {}) {
+  // Prerequisite gate (Node version) before any install/init work.
+  checkNodePrerequisites();
+
   // Use the v4 wizard from packages/installer/src/wizard/index.js
   const wizardPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'wizard', 'index.js');
 
@@ -1383,8 +1417,13 @@ async function main() {
   }
 }
 
-// Execute main function
-main().catch((error) => {
-  logger.error('❌ Fatal error:', error.message);
-  process.exit(1);
-});
+// Execute main function (only when run directly, so the module can be required
+// in tests without launching the CLI).
+if (require.main === module) {
+  main().catch((error) => {
+    logger.error('❌ Fatal error:', error.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { nodeSatisfies };
