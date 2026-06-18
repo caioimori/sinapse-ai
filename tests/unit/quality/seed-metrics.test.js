@@ -68,13 +68,20 @@ describe('Seed Metrics Generator', () => {
 
     it('should include CodeRabbit metadata', () => {
       const runs = [];
-      for (let i = 0; i < 100; i++) {
+      // 1000 samples (not 100) so the proportion test is robust to variance:
+      // crActive ~ Bernoulli(0.95). With n=100 the count has sd ~2.2, so a
+      // tight absolute bound like ">85" sits in the tail and goes flaky in CI
+      // (observed: exactly 85). Mirror the pass-rate test pattern below:
+      // large sample + rate band well inside ~10 sd of the 0.95 mean.
+      for (let i = 0; i < 1000; i++) {
         runs.push(generateLayer2Run(new Date()));
       }
 
       const withCoderabbit = runs.filter((r) => r.metadata?.coderabbit !== null);
-      // CodeRabbit active 95% of time
-      expect(withCoderabbit.length).toBeGreaterThan(85);
+      const activeRate = withCoderabbit.length / runs.length;
+      // CodeRabbit active ~95% of time — allow generous statistical band.
+      expect(activeRate).toBeGreaterThan(0.9);
+      expect(activeRate).toBeLessThanOrEqual(1.0);
     });
 
     it('should include Quinn metadata', () => {
