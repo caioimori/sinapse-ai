@@ -168,12 +168,20 @@ function showCompletion(context = {}) {
     startCommand = t('startCommandClaude');
   }
 
+  // Honest completion: only claim "ready" when dependencies actually installed.
+  const depsInstalled = context.depsInstalled !== false;
+
   console.log('\n' + headings.divider());
   console.log('');
   console.log(status.success(t('completionInstalled')));
   console.log(status.success(`${llmLabel} ${t('completionConfigured')}`));
-  console.log(status.success(`200 ${t('completionAgents')}`));
-  console.log(status.success(`${t('completionReady')} ${startCommand}`));
+  console.log(status.success(`172 ${t('completionAgents')}`));
+  if (depsInstalled) {
+    console.log(status.success(`${t('completionReady')} ${startCommand}`));
+  } else {
+    console.log(status.warning(t('completionDepsMissing')));
+    console.log(status.info(`${t('completionReady')} ${startCommand}`));
+  }
   console.log('');
   console.log(headings.divider() + '\n');
 }
