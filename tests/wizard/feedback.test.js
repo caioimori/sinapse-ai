@@ -156,6 +156,26 @@ describe('feedback', () => {
       expect(console.log.mock.calls.length).toBeGreaterThan(1);
     });
 
+    test('showCompletion claims "ready" when deps installed', () => {
+      showCompletion({ depsInstalled: true });
+      const out = console.log.mock.calls.map((c) => String(c[0])).join('\n');
+      expect(out).not.toMatch(/npm install|nao foram|were not installed/i);
+    });
+
+    test('showCompletion warns honestly when deps were NOT installed', () => {
+      showCompletion({ depsInstalled: false });
+      const out = console.log.mock.calls.map((c) => String(c[0])).join('\n');
+      expect(out).toMatch(/npm install/);
+      expect(out).toMatch(/not installed|nao foram/i);
+    });
+
+    test('showCompletion reports the canonical agent count (not the stale 200)', () => {
+      showCompletion();
+      const out = console.log.mock.calls.map((c) => String(c[0])).join('\n');
+      expect(out).toContain('172');
+      expect(out).not.toContain('200');
+    });
+
     test('showSection displays section header', () => {
       showSection('Configuration');
       expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Configuration'));

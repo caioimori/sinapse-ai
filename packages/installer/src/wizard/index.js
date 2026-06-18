@@ -1211,8 +1211,12 @@ async function runWizard(options = {}) {
       answers.infraApplied = false;
     }
 
-    // Show completion with LLM label
-    showCompletion({ llmLabel: llmLabel(answers.selectedLLM), llmValue: answers.selectedLLM });
+    // Show completion with LLM label + honest dependency status
+    showCompletion({
+      llmLabel: llmLabel(answers.selectedLLM),
+      llmValue: answers.selectedLLM,
+      depsInstalled: answers.depsInstalled !== false,
+    });
 
     return answers;
   } catch (error) {
