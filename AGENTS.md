@@ -23,14 +23,14 @@ These rules are HARD CONSTRAINTS. They apply to every action you take, in any ID
 
 ## Project Context
 
-SINAPSE is a meta-framework that orchestrates AI agents into specialized squads for complex development workflows. It runs inside Claude Code and enforces a formal Constitution with 10 articles governing CLI-first architecture, agent authority, documentation-first development, security, and safe collaboration.
+SINAPSE is a meta-framework that orchestrates AI agents into specialized squads for complex development workflows. It runs inside Claude Code and enforces a formal Constitution with 11 articles governing CLI-first architecture, agent authority, documentation-first development, security, and safe collaboration.
 
 ### Architecture
 
 - **CLI First** -- All intelligence lives in the CLI. Dashboards observe, never control.
 - **4-Layer Boundary** -- L1 (core, immutable) / L2 (templates, extend-only) / L3 (config, mutable) / L4 (runtime, always modify).
 - **Documentation-First** -- No code without a validated story. Pipeline: Epic -> Story -> Validation -> Implementation.
-- **Constitution** -- 10 articles with automatic gates that block violations. See `.sinapse-ai/constitution.md`.
+- **Constitution** -- 11 articles with automatic gates that block violations. See `.sinapse-ai/constitution.md`.
 
 ### Project Structure
 
