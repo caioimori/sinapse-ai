@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-02T06:37:37.036Z",
-  "totalWorkers": 369,
+  "generated": "2026-06-19T20:32:21.238Z",
+  "totalWorkers": 373,
   "categories": {
     "checklist": {
       "count": 16,
@@ -11,7 +11,7 @@
       "description": "Quality validation checklists"
     },
     "script": {
-      "count": 108,
+      "count": 110,
       "subcategories": [
         "analysis",
         "configuration",
@@ -24,7 +24,7 @@
       "description": "JavaScript utility scripts"
     },
     "task": {
-      "count": 213,
+      "count": 215,
       "subcategories": [
         "analysis",
         "creation",
@@ -1966,7 +1966,7 @@
       }
     },
     {
-      "id": "index-script",
+      "id": "index-script-2",
       "name": "Index",
       "description": "Documentation Integrity System",
       "category": "script",
@@ -1996,7 +1996,7 @@
       }
     },
     {
-      "id": "index-script",
+      "id": "index-script-3",
       "name": "Index",
       "description": "DeepSeek Usage Tracker Proxy",
       "category": "script",
@@ -2402,6 +2402,37 @@
       }
     },
     {
+      "id": "persona-renderer",
+      "name": "Persona Renderer",
+      "description": "Persona Renderer — shared across IDE transformers (cursor, antigravity, github-copilot).",
+      "category": "script",
+      "subcategory": "utility",
+      "inputs": [],
+      "outputs": [],
+      "tags": [
+        "script",
+        "utility",
+        "persona",
+        "renderer"
+      ],
+      "path": ".sinapse-ai/infrastructure/scripts/ide-sync/persona-renderer.js",
+      "taskFormat": "SCRIPT",
+      "executorTypes": [
+        "CLI",
+        "Script"
+      ],
+      "performance": {
+        "avgDuration": "500ms",
+        "cacheable": true,
+        "parallelizable": true
+      },
+      "agents": [],
+      "metadata": {
+        "source": "infrastructure",
+        "addedVersion": "1.0.0"
+      }
+    },
+    {
       "id": "plan-tracker",
       "name": "Plan Tracker",
       "description": "SINAPSE Plan Progress Tracker",
@@ -2786,6 +2817,36 @@
       }
     },
     {
+      "id": "resolve",
+      "name": "Resolve",
+      "description": "Behavioral pointer/orphan resolver for the Codex catalog (anti-fachada).",
+      "category": "script",
+      "subcategory": "utility",
+      "inputs": [],
+      "outputs": [],
+      "tags": [
+        "script",
+        "utility",
+        "resolve"
+      ],
+      "path": ".sinapse-ai/infrastructure/scripts/codex-parity/resolve.js",
+      "taskFormat": "SCRIPT",
+      "executorTypes": [
+        "CLI",
+        "Script"
+      ],
+      "performance": {
+        "avgDuration": "500ms",
+        "cacheable": true,
+        "parallelizable": true
+      },
+      "agents": [],
+      "metadata": {
+        "source": "infrastructure",
+        "addedVersion": "1.0.0"
+      }
+    },
+    {
       "id": "rollback-manager",
       "name": "Rollback Manager",
       "description": "SINAPSE Rollback Manager",
@@ -3104,7 +3165,7 @@
     {
       "id": "sync-codex-local-first",
       "name": "Sync Codex Local First",
-      "description": "JavaScript utility script",
+      "description": "Build the canonical agent source map. Source of truth = framework core agents (canonicalAgentsDir, flat *.md) + every squad specialist/orchestrator under squads/<squad>/agents/*.md.",
       "category": "script",
       "subcategory": "utility",
       "inputs": [],
@@ -4478,7 +4539,7 @@
     {
       "id": "brownfield-create-story",
       "name": "Brownfield Create Story",
-      "description": "Choose your execution mode:",
+      "description": "> WHEN TO USE THIS TASK (vs create-brownfield-story.md):",
       "category": "task",
       "subcategory": "creation",
       "inputs": [],
@@ -4511,7 +4572,7 @@
     {
       "id": "build",
       "name": "Build",
-      "description": "> Command: build {story-id}",
+      "description": "task: build",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -4541,7 +4602,7 @@
     {
       "id": "build-autonomous",
       "name": "Build Autonomous",
-      "description": "> Command: build-autonomous {story-id}",
+      "description": "task: build-autonomous",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -4604,7 +4665,7 @@
     {
       "id": "build-resume",
       "name": "Build Resume",
-      "description": "> Command: build-resume {story-id}",
+      "description": "task: build-resume",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -4635,7 +4696,7 @@
     {
       "id": "build-status",
       "name": "Build Status",
-      "description": "> Command: build-status {story-id} or build-status --all",
+      "description": "task: build-status",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -4791,7 +4852,7 @@
     {
       "id": "cleanup-worktrees",
       "name": "Cleanup Worktrees",
-      "description": "Remove all stale git worktrees older than specified threshold.",
+      "description": "task: cleanup-worktrees",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -5009,7 +5070,7 @@
     {
       "id": "create-brownfield-story",
       "name": "Create Brownfield Story",
-      "description": "Choose your execution mode:",
+      "description": "> WHEN TO USE THIS TASK (vs brownfield-create-story.md):",
       "category": "task",
       "subcategory": "creation",
       "inputs": [],
@@ -5964,6 +6025,38 @@
       "agents": [
         "db-sage"
       ],
+      "metadata": {
+        "source": "development",
+        "addedVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "delegate-to-external-executor",
+      "name": "Delegate To External Executor",
+      "description": "Task: Delegate Implementation to External Executor",
+      "category": "task",
+      "subcategory": "general",
+      "inputs": [],
+      "outputs": [],
+      "tags": [
+        "task",
+        "general",
+        "delegate",
+        "external",
+        "executor"
+      ],
+      "path": ".sinapse-ai/development/tasks/delegate-to-external-executor.md",
+      "taskFormat": "TASK-FORMAT-V1",
+      "executorTypes": [
+        "Agent",
+        "Worker"
+      ],
+      "performance": {
+        "avgDuration": "1m",
+        "cacheable": false,
+        "parallelizable": false
+      },
+      "agents": [],
       "metadata": {
         "source": "development",
         "addedVersion": "1.0.0"
@@ -7011,7 +7104,7 @@
     {
       "id": "gotcha",
       "name": "Gotcha",
-      "description": "> Command: gotcha {title} - {description}",
+      "description": "task: gotcha",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -7041,7 +7134,7 @@
     {
       "id": "gotchas",
       "name": "Gotchas",
-      "description": "> Command: gotchas [options]",
+      "description": "task: gotchas",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -7102,7 +7195,7 @@
     {
       "id": "ids-health",
       "name": "Ids Health",
-      "description": "Run a self-healing health check on the IDS entity registry to detect and auto-fix data integrity issues.",
+      "description": "task: ids-health",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -7382,7 +7475,7 @@
     {
       "id": "list-mcps",
       "name": "List Mcps",
-      "description": "List currently enabled MCP servers and their available tools.",
+      "description": "task: list-mcps",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -7507,7 +7600,7 @@
     {
       "id": "merge-worktree",
       "name": "Merge Worktree",
-      "description": "Merge a worktree branch back to its base branch.",
+      "description": "task: merge-worktree",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -8338,6 +8431,37 @@
       }
     },
     {
+      "id": "push-and-pr",
+      "name": "Push And Pr",
+      "description": "task_id: push-and-pr",
+      "category": "task",
+      "subcategory": "general",
+      "inputs": [],
+      "outputs": [],
+      "tags": [
+        "task",
+        "general",
+        "push",
+        "and"
+      ],
+      "path": ".sinapse-ai/development/tasks/push-and-pr.md",
+      "taskFormat": "TASK-FORMAT-V1",
+      "executorTypes": [
+        "Agent",
+        "Worker"
+      ],
+      "performance": {
+        "avgDuration": "1m",
+        "cacheable": false,
+        "parallelizable": false
+      },
+      "agents": [],
+      "metadata": {
+        "source": "development",
+        "addedVersion": "1.0.0"
+      }
+    },
+    {
       "id": "qa-after-creation",
       "name": "Qa After Creation",
       "description": "Task ID: qa-after-creation",
@@ -8754,7 +8878,7 @@
     {
       "id": "qa-review-build",
       "name": "Qa Review Build",
-      "description": "> Phase: QA Review",
+      "description": "task: qa-review-build",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -9090,7 +9214,7 @@
     {
       "id": "remove-mcp",
       "name": "Remove Mcp",
-      "description": "Remove an MCP server from Docker MCP Toolkit.",
+      "description": "task: remove-mcp",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -9387,6 +9511,37 @@
         "scan"
       ],
       "path": ".sinapse-ai/development/tasks/security-scan.md",
+      "taskFormat": "TASK-FORMAT-V1",
+      "executorTypes": [
+        "Agent",
+        "Worker"
+      ],
+      "performance": {
+        "avgDuration": "1m",
+        "cacheable": false,
+        "parallelizable": false
+      },
+      "agents": [],
+      "metadata": {
+        "source": "development",
+        "addedVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "self-heal",
+      "name": "Self Heal",
+      "description": "task_id: self-heal",
+      "category": "task",
+      "subcategory": "general",
+      "inputs": [],
+      "outputs": [],
+      "tags": [
+        "task",
+        "general",
+        "self",
+        "heal"
+      ],
+      "path": ".sinapse-ai/development/tasks/self-heal.md",
       "taskFormat": "TASK-FORMAT-V1",
       "executorTypes": [
         "Agent",
@@ -10364,38 +10519,6 @@
       }
     },
     {
-      "id": "test-validation-task",
-      "name": "Test Validation Task",
-      "description": "Choose your execution mode:",
-      "category": "task",
-      "subcategory": "general",
-      "inputs": [],
-      "outputs": [],
-      "tags": [
-        "task",
-        "general",
-        "test",
-        "validation",
-        "testing"
-      ],
-      "path": ".sinapse-ai/development/tasks/test-validation-task.md",
-      "taskFormat": "TASK-FORMAT-V1",
-      "executorTypes": [
-        "Agent",
-        "Worker"
-      ],
-      "performance": {
-        "avgDuration": "1m",
-        "cacheable": false,
-        "parallelizable": false
-      },
-      "agents": [],
-      "metadata": {
-        "source": "development",
-        "addedVersion": "1.0.0"
-      }
-    },
-    {
       "id": "triage-github-issues",
       "name": "Triage Github Issues",
       "description": "Task: GitHub Issues Triage & Prioritization",
@@ -10493,7 +10616,7 @@
     {
       "id": "update-sinapse",
       "name": "Update Sinapse",
-      "description": "> Version: 4.0.0",
+      "description": "> Version: 5.2.0",
       "category": "task",
       "subcategory": "general",
       "inputs": [],
@@ -10655,7 +10778,7 @@
     {
       "id": "validate-agents",
       "name": "Validate Agents",
-      "description": "execution_mode: programmatic  # TOK-3: PTC-eligible — batch-scan all agent files in single Bash block",
+      "description": "task: validate-agents",
       "category": "task",
       "subcategory": "validation",
       "inputs": [],

@@ -1136,9 +1136,9 @@ files:
     type: core
     size: 8176
   - path: core/registry/build-registry.js
-    hash: sha256:4c9a2e686637a1050b9ffce349ca72957fcaa971d0c1f4a0eb4321d3c7159065
+    hash: sha256:b0e65b85380265d1db589d7e48e98e30b96f3da9af1a082f04aa794d9d412838
     type: core
-    size: 13190
+    size: 13749
   - path: core/registry/README.md
     hash: sha256:98219837cb84b58eaf9cea2acf95837c5860c3369ac35bb226b61a7137fa14b8
     type: core
@@ -1152,9 +1152,9 @@ files:
     type: core
     size: 5290
   - path: core/registry/service-registry.json
-    hash: sha256:1b0b8a0acd2de9372e63a72c56afe1723ace3ecd64d42af38028f060059c3926
+    hash: sha256:c5bdefcd333a9d9ffffb6cb810864fb986e45436120f53b8fc74fd52ab4448ed
     type: core
-    size: 289408
+    size: 292202
   - path: core/registry/squad-agent-resolver.js
     hash: sha256:04f7a4835f4a7d4430e2d495eb8e47af1d3f86158cb9de50797c85c7e4889d49
     type: core
