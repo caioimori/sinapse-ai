@@ -50,7 +50,7 @@ describe('IdeationEngine — cross-platform analyzers (no shell-out)', () => {
       [
         "const fs = require('fs');",
         'function load(p) { return fs.readFileSync(p); }',
-        'const danger = (s) => eval(s);', // eslint-disable-line no-eval
+        'const danger = (s) => eval(s);',  
         "const api_key = 'hardcoded-123';",
         'module.exports = { load, danger };',
       ].join('\n'),

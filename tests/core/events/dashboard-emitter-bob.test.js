@@ -199,7 +199,7 @@ describe('DashboardEmitter Bob-specific methods', () => {
         // picks up the env var set above.
         let SinkEmitter;
         jest.isolateModules(() => {
-          // eslint-disable-next-line global-require
+           
           ({ DashboardEmitter: SinkEmitter } = require('../../../.sinapse-ai/core/events/dashboard-emitter'));
         });
         SinkEmitter.instance = null;

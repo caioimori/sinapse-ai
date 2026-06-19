@@ -369,7 +369,7 @@ function buildAgentTemplate(agentId, squadName, homedir) {
     'ACTIVATION-NOTICE: This command activates an agent from sinapse.',
     '',
     `CRITICAL: Read the agent definition file at \`${agentDefPath}\` to understand your full operating parameters. Then:`,
-    `1. Adopt the persona defined in that file`,
+    '1. Adopt the persona defined in that file',
     `2. Load the squad manifest at \`${squadManifestPath}\` for context`,
     '3. Display a greeting showing your agent name, role, and available commands',
     '4. Briefing-on-activation check (this agent is an ORCHESTRATOR):',

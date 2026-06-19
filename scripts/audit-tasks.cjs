@@ -246,7 +246,7 @@ async function main() {
         `${s.avgScore}%`.padEnd(6) +
         String(s.critical).padEnd(6) +
         String(s.warning).padEnd(6) +
-        String(s.passing)
+        String(s.passing),
       );
     }
 

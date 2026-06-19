@@ -113,12 +113,12 @@ const describeIfSquads = squadsExist ? describe : describe.skip;
 
 const squadNames = squadsExist
   ? fs
-      .readdirSync(SQUADS_DIR)
-      .filter((d) => {
-        const fullPath = path.join(SQUADS_DIR, d);
-        return fs.statSync(fullPath).isDirectory();
-      })
-      .sort()
+    .readdirSync(SQUADS_DIR)
+    .filter((d) => {
+      const fullPath = path.join(SQUADS_DIR, d);
+      return fs.statSync(fullPath).isDirectory();
+    })
+    .sort()
   : [];
 
 // ─── Tests ──────────────────────────────────────────────────────────────────

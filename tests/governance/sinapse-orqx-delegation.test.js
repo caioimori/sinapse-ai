@@ -53,7 +53,7 @@ describe('sinapse-orqx delegation authority', () => {
       for (const phrase of forbiddenAuthorityPhrases) {
         expect(content).not.toContain(phrase);
       }
-    }
+    },
   );
 
   test('canonical snps-orqx agent defines routing and orchestration as its primary function', () => {

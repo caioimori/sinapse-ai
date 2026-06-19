@@ -23,9 +23,9 @@ function verifyInstall() {
   const logger = getLogger();
   const checks = [
     [fs.existsSync(SINAPSE_HOME), `${getSquads(SINAPSE_HOME).length} squads in ~/.sinapse/`],
-    [fs.existsSync(CLAUDE_COMMANDS_DIR), `Commands in ~/.claude/commands/SINAPSE/agents/`],
-    [fs.existsSync(path.join(BIN_DIR, 'sinapse')), `Launcher at ~/bin/sinapse`],
-    [fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md')), `squad-awareness.md`],
+    [fs.existsSync(CLAUDE_COMMANDS_DIR), 'Commands in ~/.claude/commands/SINAPSE/agents/'],
+    [fs.existsSync(path.join(BIN_DIR, 'sinapse')), 'Launcher at ~/bin/sinapse'],
+    [fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md')), 'squad-awareness.md'],
   ];
 
   for (const [ok, msg] of checks) {

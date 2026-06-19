@@ -194,9 +194,9 @@ function run() {
   for (const r of results) {
     const marker = r.status === 'updated' ? 'UPDATED'
       : r.status === 'needs-update' ? 'NEEDS UPDATE'
-      : r.status === 'drift' ? 'DRIFT'
-      : r.status === 'already-declared' ? 'ok'
-      : r.status.toUpperCase();
+        : r.status === 'drift' ? 'DRIFT'
+          : r.status === 'already-declared' ? 'ok'
+            : r.status.toUpperCase();
     console.log(`  ${marker.padEnd(14)} ${r.squadName} (${r.changes} agent(s))`);
     if (r.status === 'drift') {
       if (r.declaredOnly.length > 0) {

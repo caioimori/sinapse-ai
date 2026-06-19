@@ -229,19 +229,19 @@ function main() {
 
   // BLOCK — exit 2
   process.stderr.write(
-    `\nPERMISSION-MODE BLOCK [Explore / Read-Only]\n` +
+    '\nPERMISSION-MODE BLOCK [Explore / Read-Only]\n' +
     `Tool: ${toolName}  Operation: ${operation}${detail}\n` +
-    `\n` +
-    `The project is in Explore (read-only) mode. Write, Edit, and destructive\n` +
-    `Bash commands are not allowed in this mode.\n` +
-    `\n` +
-    `To enable writes, change the permission mode:\n` +
-    `  *mode ask    — confirm before each change\n` +
-    `  *mode auto   — full autonomy (no prompts)\n` +
-    `\n` +
-    `Or update .sinapse/config.yaml:\n` +
-    `  permissions:\n` +
-    `    mode: ask\n`,
+    '\n' +
+    'The project is in Explore (read-only) mode. Write, Edit, and destructive\n' +
+    'Bash commands are not allowed in this mode.\n' +
+    '\n' +
+    'To enable writes, change the permission mode:\n' +
+    '  *mode ask    — confirm before each change\n' +
+    '  *mode auto   — full autonomy (no prompts)\n' +
+    '\n' +
+    'Or update .sinapse/config.yaml:\n' +
+    '  permissions:\n' +
+    '    mode: ask\n',
   );
   process.exit(2);
 }

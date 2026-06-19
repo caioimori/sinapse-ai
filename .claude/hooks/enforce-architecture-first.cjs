@@ -133,10 +133,10 @@ function main() {
   const accepted = protection.docPatterns.map((d) => `  - ${d.replace('{name}', name)}`).join('\n');
 
   process.stderr.write(
-    `\nARCHITECTURE-FIRST BLOCK: Documentation required before code.\n` +
+    '\nARCHITECTURE-FIRST BLOCK: Documentation required before code.\n' +
     `File: ${rel}\n` +
     `Create one of:\n${accepted}\n` +
-    `Then retry the operation.\n`,
+    'Then retry the operation.\n',
   );
   process.exit(2);
 }

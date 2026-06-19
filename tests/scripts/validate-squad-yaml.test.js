@@ -177,7 +177,7 @@ describe('live squads — smoke test', () => {
 
   it('every squad has a squad.yaml file', () => {
     const missing = squads.filter(
-      (s) => !fs.existsSync(path.join(SQUADS_DIR, s, 'squad.yaml'))
+      (s) => !fs.existsSync(path.join(SQUADS_DIR, s, 'squad.yaml')),
     );
     expect(missing).toEqual([]);
   });

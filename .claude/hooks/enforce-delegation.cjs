@@ -158,10 +158,10 @@ function main() {
   const delegate = delegationMap[toolName] || '@developer';
 
   process.stderr.write(
-    `\nMANDATORY DELEGATION BLOCK (Constitution Article VIII)\n` +
+    '\nMANDATORY DELEGATION BLOCK (Constitution Article VIII)\n' +
     `Agent: ${agentId} (orchestrator)\n` +
     `Tool: ${toolName}\n` +
-    `Orchestrators NEVER execute domain work directly.\n` +
+    'Orchestrators NEVER execute domain work directly.\n' +
     `Delegate to ${delegate} for this operation.\n`,
   );
   process.exit(2);

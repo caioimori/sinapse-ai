@@ -181,12 +181,12 @@ function main() {
 
   // BLOCK
   process.stderr.write(
-    `\nDOCUMENTATION-FIRST BLOCK (Constitution Article III)\n` +
+    '\nDOCUMENTATION-FIRST BLOCK (Constitution Article III)\n' +
     `File: ${rel}\n` +
-    `No active story found with status >= Ready in docs/stories/.\n` +
-    `Create a story first: @sprint-lead *draft\n` +
-    `Then validate it: @product-lead *validate\n` +
-    `Only then can implementation proceed.\n`,
+    'No active story found with status >= Ready in docs/stories/.\n' +
+    'Create a story first: @sprint-lead *draft\n' +
+    'Then validate it: @product-lead *validate\n' +
+    'Only then can implementation proceed.\n',
   );
   process.exit(2);
 }

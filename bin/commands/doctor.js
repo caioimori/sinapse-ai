@@ -33,7 +33,7 @@ Exit codes (Story A.3):
   }
 
   const doctorModulePath = path.join(__dirname, '..', '..', '.sinapse-ai', 'core', 'doctor');
-  // eslint-disable-next-line global-require
+   
   const { runDoctorChecks, resolveExitCode } = require(doctorModulePath);
   const result = await runDoctorChecks({
     fix: Boolean(opts.fix),

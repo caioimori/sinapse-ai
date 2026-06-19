@@ -178,8 +178,8 @@ describe('Story 10.20 — install upsert', () => {
       const settingsPath = path.join(HOME, '.claude', 'settings.json');
       const metaExisted = fs.existsSync(metaPath);
       const settingsExisted = fs.existsSync(settingsPath);
-      let metaBackup = metaExisted ? fs.readFileSync(metaPath, 'utf8') : null;
-      let settingsBackup = settingsExisted ? fs.readFileSync(settingsPath, 'utf8') : null;
+      const metaBackup = metaExisted ? fs.readFileSync(metaPath, 'utf8') : null;
+      const settingsBackup = settingsExisted ? fs.readFileSync(settingsPath, 'utf8') : null;
 
       try {
         fs.mkdirSync(SINAPSE_HOME, { recursive: true });

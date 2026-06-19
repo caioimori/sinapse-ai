@@ -77,7 +77,7 @@ function main() {
   if (!fs.existsSync(AGENTS_MD)) fail('AGENTS.md not found at repo root');
 
   const stats = readStats();
-  let content = fs.readFileSync(AGENTS_MD, 'utf8');
+  const content = fs.readFileSync(AGENTS_MD, 'utf8');
 
   const mismatches = [];
   let fixed = content;

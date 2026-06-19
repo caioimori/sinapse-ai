@@ -19,7 +19,7 @@ if (require.main === module) {
   Promise.resolve()
     .then(() => wizard.runWizard())
     .catch((error) => {
-      // eslint-disable-next-line no-console
+       
       console.error('Installer failed:', error && error.message ? error.message : error);
       process.exit(1);
     });
