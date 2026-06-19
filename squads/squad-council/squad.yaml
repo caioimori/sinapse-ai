@@ -38,77 +38,133 @@ agents:
     icon: "🏛️"
     role: Strategic Council Orchestrator
     file: agents/council-orqx.md
-    tasks_count: 8
+    tasks:
+      - conduct-business-audit
+      - convene-council-session
+      - convene-panel
+      - diagnose-and-route
+      - evaluate-scaling-decision
+      - resolve-culture-crisis
+      - run-decision-framework
+      - synthesize-perspectives
 
   - id: ray-dalio
     name: Ray Dalio
     icon: "📐"
     role: Principles Architect & Systematic Decision-Making
     file: agents/ray-dalio.md
-    tasks_count: 6
+    tasks:
+      - apply-principles-framework
+      - believability-weighted-decisions
+      - decision-journal-system
+      - diagnose-root-cause
+      - principles-discovery-workshop
+      - radical-transparency-audit
 
   - id: charlie-munger
     name: Charlie Munger
     icon: "🧠"
     role: Multidisciplinary Thinker & Mental Models
     file: agents/charlie-munger.md
-    tasks_count: 6
+    tasks:
+      - apply-mental-models
+      - circle-of-competence-mapping
+      - evaluate-investment-thesis
+      - inversion-thinking-session
+      - mental-model-application
+      - multidisciplinary-analysis
 
   - id: naval-ravikant
     name: Naval Ravikant
     icon: "🧘"
     role: Philosopher-Investor & Wealth-Leverage Advisor
     file: agents/naval-ravikant.md
-    tasks_count: 6
+    tasks:
+      - analyze-leverage-strategy
+      - judgment-calibration-exercise
+      - leverage-stack-design
+      - productize-yourself-strategy
+      - productize-yourself
+      - specific-knowledge-audit
 
   - id: peter-thiel
     name: Peter Thiel
     icon: "♟️"
     role: Contrarian Strategist & Monopoly Thinker
     file: agents/peter-thiel.md
-    tasks_count: 6
+    tasks:
+      - assess-contrarian-thesis
+      - contrarian-truth-exercise
+      - definite-optimism-roadmap
+      - evaluate-zero-to-one
+      - monopoly-strategy-design
+      - zero-to-one-opportunity-scan
 
   - id: reid-hoffman
     name: Reid Hoffman
     icon: "🔗"
     role: Network Strategist & Blitzscaling Advisor
     file: agents/reid-hoffman.md
-    tasks_count: 6
+    tasks:
+      - alliance-framework-design
+      - assess-blitzscaling-readiness
+      - blitzscaling-readiness-assessment
+      - develop-abz-plan
+      - network-effects-analysis
+      - pivot-or-persevere-analysis
 
   - id: simon-sinek
     name: Simon Sinek
     icon: "⭕"
     role: Purpose-Driven Leadership & Infinite Mindset
     file: agents/simon-sinek.md
-    tasks_count: 4
+    tasks:
+      - discover-organizational-why
+      - find-your-why-workshop
+      - infinite-game-strategy
+      - trust-building-framework
 
   - id: brene-brown
     name: Brene Brown
     icon: "💛"
     role: Vulnerability, Courage & Empathic Leadership
     file: agents/brene-brown.md
-    tasks_count: 4
+    tasks:
+      - build-trust-assessment
+      - courage-culture-design
+      - rumble-conversation-guide
+      - vulnerability-leadership-workshop
 
   - id: patrick-lencioni
     name: Patrick Lencioni
     icon: "🏗️"
     role: Organizational Health & Team Dynamics
     file: agents/patrick-lencioni.md
-    tasks_count: 4
+    tasks:
+      - diagnose-team-dysfunction
+      - meeting-structure-overhaul
+      - organizational-clarity-check
+      - team-health-assessment
 
   - id: derek-sivers
     name: Derek Sivers
     icon: "🎯"
     role: Minimalist Founder & Simplicity Philosopher
     file: agents/derek-sivers.md
-    tasks_count: 3
+    tasks:
+      - apply-hell-yeah-filter
+      - hell-yes-or-no-prioritization
+      - simplification-audit
 
   - id: yvon-chouinard
     name: Yvon Chouinard
     icon: "🏔️"
     role: Purpose-Driven Business & Environmental Activism
     file: agents/yvon-chouinard.md
-    tasks_count: 3
+    tasks:
+      - assess-purpose-alignment
+      - purpose-profit-alignment
+      - responsible-growth-framework
 
 total_tasks: 56
 
