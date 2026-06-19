@@ -9,7 +9,7 @@
 #
 version: 1.9.0
 generator: scripts/generate-install-manifest.js
-file_count: 1180
+file_count: 1185
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -348,9 +348,9 @@ files:
     type: core
     size: 1581
   - path: core/doctor/checks/git-hooks.js
-    hash: sha256:353441b03a572d27e03f626ae31336aa526c3dcec780ca89433c6fabec05a723
+    hash: sha256:1d20455c435ccb0d9eefb3ad8fbe0edf4bfa8e9ba4e1b7c10e837ac9063c3479
     type: core
-    size: 8039
+    size: 8320
   - path: core/doctor/checks/graph-dashboard.js
     hash: sha256:6996b47faf1945ed27a24db2a0061c46f9fd0069b0c73a8af0f4b68d68142047
     type: core
@@ -1736,9 +1736,9 @@ files:
     type: script
     size: 11890
   - path: development/scripts/greeting-builder.js
-    hash: sha256:26f61c19a35c9e49c0ae8319d95f2f6ce957d16297d4c50f2e61f08193fb1e40
+    hash: sha256:293b89379a558837cfab65893130b638d6207079cde2d5252578089bb25732be
     type: script
-    size: 50235
+    size: 51322
   - path: development/scripts/greeting-config-cli.js
     hash: sha256:e3167244bc9c60843b0526f7f730e9e950e97c7b0b81b92f3ae3d19f93fc27e4
     type: script
@@ -4451,18 +4451,38 @@ files:
     hash: sha256:0953482dcf74679b91b08b257895ff78b5dbdeed3eb61129ab0bc607d2b25dcb
     type: script
     size: 3620
+  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js
+    hash: sha256:cdd728c5bf82a127271671719816fa1aaf215fce2b5d3cb7b241bd489f29e29c
+    type: script
+    size: 594851
+  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js.map
+    hash: sha256:e3a4cb09202d3618028f841424e2f2962c6974b08f78e6e4b23176b9a4e29dfb
+    type: script
+    size: 2521841
+  - path: scripts/diagnostics/health-dashboard/dist/assets/index-CAzIo_ei.css
+    hash: sha256:07fa5f6d6d74a8183343d2ce236484524487335dc24c85f7a782d716f691b77b
+    type: script
+    size: 20544
+  - path: scripts/diagnostics/health-dashboard/dist/favicon.svg
+    hash: sha256:bad3a2389b3ff29f3da8035020dd8362c2eba564b787b9bc9c4f1edddd0b7cd4
+    type: script
+    size: 474
+  - path: scripts/diagnostics/health-dashboard/dist/index.html
+    hash: sha256:4a1ab4115ec43d7e5ecd359a50fb10629075edb5fba7ae1034bb420d07b604d2
+    type: script
+    size: 475
   - path: scripts/diagnostics/health-dashboard/index.html
     hash: sha256:e3513b1c08a8dbc777532a84006bcb25015fb9b25b68a68f56af341465279845
     type: script
     size: 377
   - path: scripts/diagnostics/health-dashboard/package-lock.json
-    hash: sha256:af446a82b6f1e2815e7b4ccb4cc708dc2823ed0b7b37a64040c34ad0937bdabf
+    hash: sha256:536129100f871d154a3950e04a606f576d685b200ed1c5bf5779fae8c4ffa352
     type: script
-    size: 184365
+    size: 184649
   - path: scripts/diagnostics/health-dashboard/package.json
-    hash: sha256:bceff5a33e4bde3dc5cd5796ec2ac2150ca37a6a4b1964cd9c7f7314b7dd5e16
+    hash: sha256:1330f9075de40d434424592164950a8cbd196c10173631df1016abb3dbc5add4
     type: script
-    size: 566
+    size: 668
   - path: scripts/diagnostics/health-dashboard/public/favicon.svg
     hash: sha256:bad3a2389b3ff29f3da8035020dd8362c2eba564b787b9bc9c4f1edddd0b7cd4
     type: script
