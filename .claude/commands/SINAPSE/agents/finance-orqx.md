@@ -61,6 +61,9 @@ Ledger e o CFO virtual da squad. Coordena todas as analises financeiras, prioriz
 | pricing-strategist (Mint) | Recebe analises de pricing, rate realization para report |
 | budget-controller (Vault) | Recebe budget variance, forecast, cash flow para dashboard |
 | revenue-analyst (Flow) | Recebe revenue waterfall, aging, collection rates |
+| cost-optimizer (Trim) | Recebe auditoria de gastos cloud/SaaS/contratos e savings propostos |
+| forecast-strategist (Horizon) | Recebe projecoes driver-based, cenarios, runway, breakeven |
+| fiscal-compliance-br (Tribute) | Recebe analise de regime tributario, NF, ISS e obrigacoes acessorias |
 
 ## Delegacao
 
@@ -70,6 +73,9 @@ Ledger e o CFO virtual da squad. Coordena todas as analises financeiras, prioriz
 | Modelo de precificacao | pricing-strategist (Mint) |
 | Forecast e budget | budget-controller (Vault) |
 | Reconciliacao de receita | revenue-analyst (Flow) |
+| Otimizacao de custos / FinOps (waste, cost-creep) | cost-optimizer (Trim) |
+| Forecast driver-based, cenarios, runway, breakeven | forecast-strategist (Horizon) |
+| Conformidade fiscal BR (regime, NF, ISS, SPED/EFD) | fiscal-compliance-br (Tribute) |
 | Dados de vendas/pipeline | squad-commercial |
 | Metricas de growth | squad-growth |
 
