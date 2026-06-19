@@ -27,7 +27,7 @@ Then display:
  AI Agent Squads for Claude Code
  17 squads · 172 agents · 1,200 tasks
 
- 👑 Imperator — Sinapse Master activated
+ 👑 [Imperator] — Sinapse Master activated
 
  Describe your goal and I'll diagnose the domain
  and route to the right agent.
