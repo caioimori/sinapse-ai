@@ -27,3 +27,12 @@ docs/chrome-brain-*.md
 # (`index.test.ts.hbs` is a Handlebars template, not a runnable .test.js; the
 #  squad-template example test is copied verbatim into new squads.)
 !.sinapse-ai/development/templates/**
+
+# ──────────────────────────────────────────────────────────────────────────
+# Nested node_modules — NEVER ship. The `.sinapse-ai/` allowlist entry in
+# package.json `files` was dragging `.sinapse-ai/node_modules/**` (~6.9k files,
+# ~21 MB) into the tarball. Every runtime dep `.sinapse-ai/**` needs is declared
+# in the ROOT package.json `dependencies`, so they resolve from the consumer's
+# node_modules — the nested copy is a local dev artifact only.
+# ──────────────────────────────────────────────────────────────────────────
+**/node_modules/**
