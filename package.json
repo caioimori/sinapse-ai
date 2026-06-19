@@ -7,6 +7,17 @@
     "sinapse-ai": "bin/cli.js",
     "sinapse-delegate": "bin/sinapse-delegate.js"
   },
+  "main": ".sinapse-ai/index.js",
+  "module": ".sinapse-ai/index.esm.js",
+  "types": ".sinapse-ai/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.sinapse-ai/index.d.ts",
+      "default": "./.sinapse-ai/index.js"
+    },
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
   "preferGlobal": false,
   "workspaces": [
     "packages/*"
