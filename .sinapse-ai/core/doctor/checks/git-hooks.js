@@ -108,11 +108,14 @@ async function run(context) {
     // hooksPath points at a real dir, but does it point at OUR managed dir? If it
     // resolves elsewhere, the framework backstop is not the active hook system.
     if (!resolvesToManaged(projectRoot, hooksPath)) {
+      // The user runs their OWN hook system (husky/lefthook/custom). This is a
+      // legitimate brownfield setup, NOT a broken install — so WARN, not FAIL.
+      // The framework's secret-scan/SQL/boundary guards just aren't layered in.
       return {
         check: name,
-        status: 'FAIL',
-        message: `core.hooksPath -> "${hooksPath}" resolves OUTSIDE the managed dir (${MANAGED_HOOKS_DIR}). The framework's secret-scan/SQL/boundary guards are not the active hook system. Re-wire core.hooksPath to the managed dir.`,
-        fixCommand: 'sinapse init   # re-wires core.hooksPath to .sinapse-ai/git-hooks',
+        status: 'WARN',
+        message: `core.hooksPath -> "${hooksPath}" points at your own hook system (outside ${MANAGED_HOOKS_DIR}). That's fine — but the framework's secret-scan/SQL/boundary guards are not active. To layer them in, source ${MANAGED_HOOKS_DIR}/pre-commit from your own pre-commit, or re-wire core.hooksPath to ${MANAGED_HOOKS_DIR}.`,
+        fixCommand: null,
       };
     }
 

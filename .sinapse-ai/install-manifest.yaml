@@ -348,9 +348,9 @@ files:
     type: core
     size: 1581
   - path: core/doctor/checks/git-hooks.js
-    hash: sha256:353441b03a572d27e03f626ae31336aa526c3dcec780ca89433c6fabec05a723
+    hash: sha256:1d20455c435ccb0d9eefb3ad8fbe0edf4bfa8e9ba4e1b7c10e837ac9063c3479
     type: core
-    size: 8039
+    size: 8320
   - path: core/doctor/checks/graph-dashboard.js
     hash: sha256:6996b47faf1945ed27a24db2a0061c46f9fd0069b0c73a8af0f4b68d68142047
     type: core
