@@ -351,9 +351,9 @@ function mergeHooks() {
   const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
   const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const newHooks = {
-    SessionStart: [
-      { matcher: '', hooks: [{ type: 'command', command: ensureCmd, timeout: 15000 }] },
-    ],
+    // NO SessionStart hook on purpose — it popped a Chrome window on every boot.
+    // The lazy PreToolUse hook below launches Chrome only when a browser tool is
+    // actually called ("Chrome connection is guaranteed by PreToolUse hook").
     PreToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
