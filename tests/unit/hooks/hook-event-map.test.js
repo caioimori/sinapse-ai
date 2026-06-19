@@ -104,7 +104,7 @@ describe('HOOK_EVENT_MAP (Frente 4.3 — STREAM A entries)', () => {
       const postToolEntries = settings.hooks['PostToolUse'];
       const hasPostTool = postToolEntries.some(entry =>
         Array.isArray(entry.hooks) &&
-        entry.hooks.some(h => h.command && h.command.includes('telemetry-post-tool'))
+        entry.hooks.some(h => h.command && h.command.includes('telemetry-post-tool')),
       );
       expect(hasPostTool).toBe(true);
 
@@ -113,7 +113,7 @@ describe('HOOK_EVENT_MAP (Frente 4.3 — STREAM A entries)', () => {
       const stopEntries = settings.hooks['Stop'];
       const hasStop = stopEntries.some(entry =>
         Array.isArray(entry.hooks) &&
-        entry.hooks.some(h => h.command && h.command.includes('telemetry-stop'))
+        entry.hooks.some(h => h.command && h.command.includes('telemetry-stop')),
       );
       expect(hasStop).toBe(true);
 

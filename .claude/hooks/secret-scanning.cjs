@@ -131,14 +131,14 @@ function main() {
     return `  - ${f.name}: ${f.redacted}${ent}`;
   });
   process.stderr.write(
-    `\nSECRET SCANNING BLOCK: Potential secrets detected!\n` +
+    '\nSECRET SCANNING BLOCK: Potential secrets detected!\n' +
     `File: ${rel}\n` +
     `Found:\n${lines.join('\n')}\n` +
-    `\n` +
-    `DO NOT commit secrets to code. Instead:\n` +
-    `  - Use environment variables (.env) for local dev\n` +
-    `  - Use .env.example with placeholder values for templates\n` +
-    `  - Use secret managers for production (Supabase Vault, etc.)\n`,
+    '\n' +
+    'DO NOT commit secrets to code. Instead:\n' +
+    '  - Use environment variables (.env) for local dev\n' +
+    '  - Use .env.example with placeholder values for templates\n' +
+    '  - Use secret managers for production (Supabase Vault, etc.)\n',
   );
   process.exit(2);
 }

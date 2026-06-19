@@ -46,7 +46,7 @@ async function run(context) {
   const sinapseCorePackageJson = path.join(sinapseCoreDir, 'package.json');
   const sinapseCoreNodeModules = path.join(sinapseCoreDir, 'node_modules');
 
-  let unresolved = [];
+  const unresolved = [];
   let totalDeps = 0;
   let hasSinapseCorePkg = false;
 

@@ -130,12 +130,12 @@ const sinapseMasterAgentFiles = collectAgentFiles(SINAPSE_AGENTS_DIR);
 
 const squadNames = fs.existsSync(SQUADS_DIR)
   ? fs
-      .readdirSync(SQUADS_DIR)
-      .filter((d) => {
-        const fullPath = path.join(SQUADS_DIR, d);
-        return fs.statSync(fullPath).isDirectory();
-      })
-      .sort()
+    .readdirSync(SQUADS_DIR)
+    .filter((d) => {
+      const fullPath = path.join(SQUADS_DIR, d);
+      return fs.statSync(fullPath).isDirectory();
+    })
+    .sort()
   : [];
 
 const squadAgentMap = {};
@@ -209,7 +209,7 @@ describe('Agent Backward Compatibility', () => {
             agent.content.includes('orchestrat') ||
             agent.content.includes('route') ||
             agent.content.includes('diagnos') ||
-            agent.content.includes('delegate')
+            agent.content.includes('delegate'),
           ).toBe(true);
           return;
         }
@@ -232,7 +232,7 @@ describe('Agent Backward Compatibility', () => {
         if (agent.parsed && agent.parsed.relationships) {
           const rel = agent.parsed.relationships;
           expect(
-            rel.delegates_to !== undefined || rel.receives_from !== undefined
+            rel.delegates_to !== undefined || rel.receives_from !== undefined,
           ).toBe(true);
           return;
         }
@@ -436,20 +436,20 @@ describe('Agent Backward Compatibility', () => {
         sinapseMasterAgents: sinapseMasterAgentFiles.length,
         squadCount: squadNames.length,
         squadAgents: Object.fromEntries(
-          squadNames.map((s) => [s, squadAgentMap[s].length])
+          squadNames.map((s) => [s, squadAgentMap[s].length]),
         ),
         totalAgents,
       };
 
-      // eslint-disable-next-line no-console
+       
       console.log('\n--- Agent Ecosystem Summary ---');
-      // eslint-disable-next-line no-console
+       
       console.log(`Framework agents: ${summary.frameworkAgents}`);
-      // eslint-disable-next-line no-console
+       
       console.log(`Sinapse master agents: ${summary.sinapseMasterAgents}`);
-      // eslint-disable-next-line no-console
+       
       console.log(`Squads: ${summary.squadCount}`);
-      // eslint-disable-next-line no-console
+       
       console.log(`Total agents: ${summary.totalAgents}`);
 
       // Framework has 12 core agents. Tracked squads add more.

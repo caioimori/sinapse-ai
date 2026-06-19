@@ -36,7 +36,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     });
 
     test('uses npm pack --dry-run for file counting', () => {
-      expect(scriptSource).toContain("npm pack --dry-run");
+      expect(scriptSource).toContain('npm pack --dry-run');
     });
 
     test('error message includes file count on failure', () => {

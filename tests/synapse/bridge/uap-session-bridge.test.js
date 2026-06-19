@@ -260,7 +260,7 @@ describe('UAP Session Bridge — Error Handling', () => {
 
     expect(warnSpy).toHaveBeenCalledTimes(1);
     expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('[UnifiedActivationPipeline] SYNAPSE session write failed:')
+      expect.stringContaining('[UnifiedActivationPipeline] SYNAPSE session write failed:'),
     );
 
     warnSpy.mockRestore();
@@ -555,7 +555,7 @@ describe('UAP Session Bridge — Timing Budget', () => {
     fs.rmSync(skipCtx.projectRoot, { recursive: true, force: true });
 
     expect(skipMetrics.loaders.synapseSession.duration).toBeLessThanOrEqual(
-      writeMetrics.loaders.synapseSession.duration + REL_TOLERANCE_MS
+      writeMetrics.loaders.synapseSession.duration + REL_TOLERANCE_MS,
     );
   });
 });

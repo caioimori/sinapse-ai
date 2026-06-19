@@ -53,7 +53,7 @@ function buildEvaluatorWithFakeGate(gateResult) {
         timeoutMs: 2000,
       },
     },
-    {}
+    {},
   );
 
   // Inject a fake G1 gate that returns the desired result
@@ -141,7 +141,7 @@ describe('gate-evaluator telemetry emission (B.2)', () => {
     const { GateEvaluator } = require('../../.sinapse-ai/core/ids/gate-evaluator');
     const evaluator = new GateEvaluator(
       { gateEvaluation: { enabled: false } },
-      {}
+      {},
     );
 
     await evaluator.evaluateGatesForPhase('test_phase', {});
@@ -165,7 +165,7 @@ describe('DORA session counter contract (B.3 hook contract)', () => {
     const tools = ['Bash', 'Write', 'Edit'];
     const fileWriteTools = new Set(['Write', 'Edit', 'NotebookEdit']);
 
-    let state = { startedAt: Date.now(), toolExecutions: 0, filesModified: 0 };
+    const state = { startedAt: Date.now(), toolExecutions: 0, filesModified: 0 };
     for (const tool of tools) {
       state.toolExecutions += 1;
       if (fileWriteTools.has(tool)) state.filesModified += 1;

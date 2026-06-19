@@ -159,21 +159,21 @@ r('"Run /status in Claude Code to check your account."',
 r(/future Claude Code sessions/g, 'future SINAPSE CODE sessions', 'model switch');
 r(/Claude Code will automatically update/g, 'SINAPSE CODE will automatically update', 'auto-update');
 r('"Please install git and restart Claude Code."', '"Please install git and restart SINAPSE CODE."', 'git install');
-r("Claude is up to date!\n", "SINAPSE is up to date!\n", 'up to date');
-r("Claude is managed by winget.\n", "SINAPSE is managed by winget.\n", 'winget');
-r("Claude is managed by apk.\n", "SINAPSE is managed by apk.\n", 'apk');
-r("Claude is managed by a package manager.\n", "SINAPSE is managed by a package manager.\n", 'pkg manager');
-r("This tool allows Claude Code to read images", "This tool allows SINAPSE CODE to read images", 'read tool');
-r("Claude Code is a multimodal LLM", "SINAPSE CODE is a multimodal LLM", 'multimodal');
-r("Default permission mode when Claude Code needs access", "Default permission mode when SINAPSE CODE needs access", 'settings 1');
-r("JSON Schema reference for Claude Code settings", "JSON Schema reference for SINAPSE CODE settings", 'settings 2');
-r("Environment variables to set for Claude Code sessions", "Environment variables to set for SINAPSE CODE sessions", 'settings 3');
-r("standard Claude Code attribution", "standard SINAPSE CODE attribution", 'attribution');
-r("Override the default model used by Claude Code", "Override the default model used by SINAPSE CODE", 'model desc');
-r("Claude Code auto-stash", "SINAPSE CODE auto-stash", 'git stash');
-r("Claude Code was unable to find", "SINAPSE CODE was unable to find", 'win bash');
-r("Claude Code on Windows requires git-bash", "SINAPSE CODE on Windows requires git-bash", 'win git-bash');
-r("Cost of the Claude Code session", "Cost of the SINAPSE CODE session", 'cost counter');
+r('Claude is up to date!\n', 'SINAPSE is up to date!\n', 'up to date');
+r('Claude is managed by winget.\n', 'SINAPSE is managed by winget.\n', 'winget');
+r('Claude is managed by apk.\n', 'SINAPSE is managed by apk.\n', 'apk');
+r('Claude is managed by a package manager.\n', 'SINAPSE is managed by a package manager.\n', 'pkg manager');
+r('This tool allows Claude Code to read images', 'This tool allows SINAPSE CODE to read images', 'read tool');
+r('Claude Code is a multimodal LLM', 'SINAPSE CODE is a multimodal LLM', 'multimodal');
+r('Default permission mode when Claude Code needs access', 'Default permission mode when SINAPSE CODE needs access', 'settings 1');
+r('JSON Schema reference for Claude Code settings', 'JSON Schema reference for SINAPSE CODE settings', 'settings 2');
+r('Environment variables to set for Claude Code sessions', 'Environment variables to set for SINAPSE CODE sessions', 'settings 3');
+r('standard Claude Code attribution', 'standard SINAPSE CODE attribution', 'attribution');
+r('Override the default model used by Claude Code', 'Override the default model used by SINAPSE CODE', 'model desc');
+r('Claude Code auto-stash', 'SINAPSE CODE auto-stash', 'git stash');
+r('Claude Code was unable to find', 'SINAPSE CODE was unable to find', 'win bash');
+r('Claude Code on Windows requires git-bash', 'SINAPSE CODE on Windows requires git-bash', 'win git-bash');
+r('Cost of the Claude Code session', 'Cost of the SINAPSE CODE session', 'cost counter');
 
 // ═══════════════════════════════════════════════════
 // 4. LOGO — Substitui mascot Clawd por SINAPSE ASCII
@@ -182,24 +182,24 @@ r("Cost of the Claude Code session", "Cost of the SINAPSE CODE session", 'cost c
 console.log('[Logo]');
 
 const LOGO_LINES = [
-  "███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗",
-  "██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝",
-  "███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗  ",
-  "╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝  ",
-  "███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗",
-  "╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝",
+  '███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗',
+  '██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝',
+  '███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗  ',
+  '╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝  ',
+  '███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗',
+  '╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝',
 ];
 
-const newLogo = `function HV6(){let q=z6(2),P;if(q[0]===Symbol.for("react.memo_cache_sentinel")){let lines=[${LOGO_LINES.map(l => JSON.stringify(l)).join(",")}];P=i9.createElement(B,{flexDirection:"column",flexShrink:0},lines.map((l,i)=>i9.createElement(T,{key:i,color:"claude",wrap:"truncate"},l))),q[0]=P}else P=q[0];return P}`;
+const newLogo = `function HV6(){let q=z6(2),P;if(q[0]===Symbol.for("react.memo_cache_sentinel")){let lines=[${LOGO_LINES.map(l => JSON.stringify(l)).join(',')}];P=i9.createElement(B,{flexDirection:"column",flexShrink:0},lines.map((l,i)=>i9.createElement(T,{key:i,color:"claude",wrap:"truncate"},l))),q[0]=P}else P=q[0];return P}`;
 
 // Substitui HV6 (componente principal do mascot)
-const hv6Start = content.indexOf("function HV6(A){");
+const hv6Start = content.indexOf('function HV6(A){');
 if (hv6Start !== -1) {
   const hv6Area = content.substring(hv6Start);
   let depth = 0, endPos = -1;
-  for (let i = hv6Area.indexOf("{"); i < hv6Area.length; i++) {
-    if (hv6Area[i] === "{") depth++;
-    if (hv6Area[i] === "}") { depth--; if (depth === 0) { endPos = i + 1; break; } }
+  for (let i = hv6Area.indexOf('{'); i < hv6Area.length; i++) {
+    if (hv6Area[i] === '{') depth++;
+    if (hv6Area[i] === '}') { depth--; if (depth === 0) { endPos = i + 1; break; } }
   }
   if (endPos !== -1) {
     content = content.substring(0, hv6Start) + newLogo + content.substring(hv6Start + endPos);
@@ -209,16 +209,16 @@ if (hv6Start !== -1) {
 }
 
 // Substitui dKY (fallback Apple Terminal)
-const dkyStart = content.indexOf("function dKY(A){");
+const dkyStart = content.indexOf('function dKY(A){');
 if (dkyStart !== -1) {
   const dkyArea = content.substring(dkyStart);
   let depth = 0, endPos = -1;
-  for (let i = dkyArea.indexOf("{"); i < dkyArea.length; i++) {
-    if (dkyArea[i] === "{") depth++;
-    if (dkyArea[i] === "}") { depth--; if (depth === 0) { endPos = i + 1; break; } }
+  for (let i = dkyArea.indexOf('{'); i < dkyArea.length; i++) {
+    if (dkyArea[i] === '{') depth++;
+    if (dkyArea[i] === '}') { depth--; if (depth === 0) { endPos = i + 1; break; } }
   }
   if (endPos !== -1) {
-    const newDKY = newLogo.replace("HV6", "dKY");
+    const newDKY = newLogo.replace('HV6', 'dKY');
     content = content.substring(0, dkyStart) + newDKY + content.substring(dkyStart + endPos);
     changes++;
     console.log('  + dKY fallback -> SINAPSE logo');

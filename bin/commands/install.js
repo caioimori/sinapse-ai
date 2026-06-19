@@ -155,7 +155,7 @@ async function cmdInstallGlobal(opts = {}) {
   if (squads.length === 0) {
     logger.error(`${RED}Erro: nenhum diretório de squad encontrado no pacote.${NC}`);
     logger.error(`Tente reinstalar: ${CYAN}npm install -g sinapse-ai${NC}`);
-    logger.error(`Se persistir, abra um issue: https://github.com/caioimori/sinapse-ai/issues`);
+    logger.error('Se persistir, abra um issue: https://github.com/caioimori/sinapse-ai/issues');
     process.exit(1);
   }
 
@@ -622,13 +622,13 @@ function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, 
     ? `4. Briefing-on-activation check (this agent is an ORCHESTRATOR):
    - If user provided briefing/context with the activation → proceed IMMEDIATELY: absorb → diagnose → plan with phases + agents + handoffs → execute (YOLO). NEVER ask "do you want me to plan?".
    - If bare activation only → await briefing. On receipt, apply same flow automatically.`
-    : `4. HALT and await user input`;
+    : '4. HALT and await user input';
 
   const step6 = isOrchestrator
     ? `6. Briefing-on-activation check (ORCHESTRATOR):
    - If user provided briefing → proceed IMMEDIATELY: absorb → diagnose → plan → execute
    - If bare activation → await briefing, then plan automatically. NEVER ask "do you want me to plan?".`
-    : `6. HALT and await user input`;
+    : '6. HALT and await user input';
 
   // Frontmatter (name + description) is REQUIRED so the file resolves as a Claude Code
   // subagent (@id) — without it, @id matches nothing. The same file doubles as a slash
@@ -833,7 +833,7 @@ exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-orqx "$@"
 
   // Windows CMD launcher
   if (IS_WIN) {
-    const cmdLauncher = `@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-orqx %*\r\n`;
+    const cmdLauncher = '@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-orqx %*\r\n';
     fs.writeFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
     logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
   }

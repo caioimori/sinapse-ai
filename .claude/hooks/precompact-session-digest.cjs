@@ -99,9 +99,9 @@ async function main() {
       contextJson = '{}';
     }
     const inlineScript = [
-      `const ctx = JSON.parse(process.env.SINAPSE_HOOK_CONTEXT || '{}');`,
+      'const ctx = JSON.parse(process.env.SINAPSE_HOOK_CONTEXT || \'{}\');',
       `const { onPreCompact } = require(${JSON.stringify(runnerPath)});`,
-      `onPreCompact(ctx).catch(() => {});`,
+      'onPreCompact(ctx).catch(() => {});',
     ].join('\n');
     const child = spawn(process.execPath, ['-e', inlineScript], {
       detached: true,

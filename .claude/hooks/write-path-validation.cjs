@@ -120,11 +120,11 @@ function main() {
 
   // WARN only — never block
   process.stderr.write(
-    `\nPATH WARNING: Document may be in the wrong location.\n` +
+    '\nPATH WARNING: Document may be in the wrong location.\n' +
     `  File:     ${violation.currentPath}\n` +
     `  Expected: ${violation.expectedPath}\n` +
     `  Rule:     ${violation.description}\n` +
-    `  NOTE: This is a WARNING only — the operation will proceed.\n`,
+    '  NOTE: This is a WARNING only — the operation will proceed.\n',
   );
   process.exit(0);
 }

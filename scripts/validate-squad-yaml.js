@@ -87,8 +87,8 @@ function validateOne(squadName, schema, validator) {
       squadName,
       status: 'fail',
       errors: [
-        'Legacy nested format detected (top-level `squad:` wrapper). Migrate to flat schema: fields at root level.'
-      ]
+        'Legacy nested format detected (top-level `squad:` wrapper). Migrate to flat schema: fields at root level.',
+      ],
     };
   }
   const ok = validator(doc);
@@ -96,7 +96,7 @@ function validateOne(squadName, schema, validator) {
     return {
       squadName,
       status: 'fail',
-      errors: (validator.errors || []).map((e) => `${e.instancePath || '/'} ${e.message}`)
+      errors: (validator.errors || []).map((e) => `${e.instancePath || '/'} ${e.message}`),
     };
   }
 
@@ -139,9 +139,9 @@ function main() {
     for (const r of results) {
       const tag =
         r.status === 'ok' ? '\x1b[32mok\x1b[0m' :
-        r.status === 'warn' ? '\x1b[33mwarn\x1b[0m' :
-        r.status === 'missing' ? '\x1b[33mmissing\x1b[0m' :
-        '\x1b[31mfail\x1b[0m';
+          r.status === 'warn' ? '\x1b[33mwarn\x1b[0m' :
+            r.status === 'missing' ? '\x1b[33mmissing\x1b[0m' :
+              '\x1b[31mfail\x1b[0m';
       console.log(`  ${tag.padEnd(20)} ${r.squadName}`);
       for (const e of r.errors || []) console.log(`     - ${e}`);
       if (!STRICT) {

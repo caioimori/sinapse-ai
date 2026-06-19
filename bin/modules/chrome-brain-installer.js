@@ -201,7 +201,7 @@ if command -v taskkill &>/dev/null; then
 elif command -v pgrep &>/dev/null; then
   pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true
 fi`
-    : `pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true`;
+    : 'pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true';
 
   return `#!/bin/bash
 # Chrome Brain — chrome-ensure (auto-launch)
@@ -253,7 +253,7 @@ if command -v taskkill &>/dev/null; then
 elif command -v pgrep &>/dev/null; then
   pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true
 fi`
-    : `pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true`;
+    : 'pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true';
 
   return `#!/bin/bash
 # Chrome Brain — chrome-debug (manual launch)

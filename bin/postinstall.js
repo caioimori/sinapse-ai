@@ -485,7 +485,7 @@ function renderFinalSummary(opts = {}) {
   }
   lines.push('');
   if (isGlobal) {
-    lines.push(`Próximo passo:`);
+    lines.push('Próximo passo:');
     lines.push(`  cd ${c.cyan}seu-projeto${c.reset}`);
     lines.push(`  ${c.cyan}sinapse install${c.reset}`);
   } else {

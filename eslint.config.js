@@ -21,6 +21,8 @@ module.exports = [
       '**/build/**',
       '**/dist/**',
       '**/.next/**',
+      // Local reference clones (gitignored, not part of this published package)
+      'colaborator/**',
       // Dashboard has its own ESLint config
       'apps/dashboard/**',
       '**/.sinapse-ai/_legacy-v4.31.0/**',
