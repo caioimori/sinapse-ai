@@ -404,3 +404,8 @@ build/
 .claude/settings.local.json
 .sinapse/install-log.txt
 .npmrc
+
+# colaborator/ — pasta LOCAL de referência (clones de repositórios externos)
+# usada só para estudar/portar melhorias pro sinapse-ai. NUNCA versionada (cada
+# clone tem seu próprio .git) e NUNCA publicada no npm (fora do allowlist "files").
+colaborator/
