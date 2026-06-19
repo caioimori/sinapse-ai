@@ -377,12 +377,13 @@ function installHooks() {
   const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
   const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
   const hookDefs = {
-    // SessionStart: warm up Chrome before MCP attempts connection. Without this,
-    // chrome-devtools-mcp (--browser-url=...) fails at boot if Chrome isn't up
-    // yet and never reconnects — tools silently drop until Claude Code restart.
-    SessionStart: [
-      { matcher: '', hooks: [{ type: 'command', command: ensureCmd, timeout: 15000 }] },
-    ],
+    // NO SessionStart hook on purpose. Launching Chrome at every session start
+    // popped a browser window unprompted on boot (bad UX, esp. for new users).
+    // The lazy PreToolUse hook below already runs chrome-ensure right before any
+    // browser tool call, so Chrome is guaranteed up exactly when (and only when)
+    // it's needed — matching the documented design
+    // (templates/chrome-brain/rules/chrome-brain-autoload.md:
+    //  "Chrome connection is guaranteed by PreToolUse hook").
     PreToolUse: [
       { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
       { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
