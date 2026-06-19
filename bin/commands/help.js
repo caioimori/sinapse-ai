@@ -31,10 +31,9 @@ function cmdHelp() {
   logger.always(`  ${CYAN}sinapse --continue${NC}           Continua última sessão`);
   logger.always('');
   logger.always(`${BOLD}Agents:${NC}\n`);
-  logger.always(`  Invocação canônica:  ${CYAN}/SNPS:agents:{agent-id}${NC}`);
-  logger.always(`  Exemplo:             ${CYAN}/SNPS:agents:brand-orqx${NC}`);
-  logger.always(`  Master orchestrator: ${CYAN}@snps-orqx${NC} (alias: ${DIM}@sinapse-orqx${NC})`);
-  logger.always(`  ${DIM}Alias /SINAPSE:agents:* preservado até v1.3.0 (deprecação suave).${NC}`);
+  logger.always(`  Invocação canônica:  ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  logger.always(`  Exemplo:             ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  logger.always(`  Master orchestrator: ${CYAN}@sinapse-orqx${NC} (alias: ${DIM}@snps-orqx${NC})`);
   logger.always('');
   logger.always(`${BOLD}Ajuda extra:${NC}\n`);
   logger.always(`  Erros comuns + remediação: ${CYAN}docs/guides/cli-errors.md${NC}`);
