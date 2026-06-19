@@ -31,31 +31,11 @@ module.exports = {
     'tests/integration/windows/',
     // Node.js native test runner tests (use node:test module)
     'tests/installer/v21-path-validation.test.js',
-    // v2.1 Migration: Tests with removed common/utils modules (OSR-10 tech debt)
-    // These tests reference modules removed during v4.31.0 → v2.1 migration
-    'tests/tools/backward-compatibility.test.js',
-    'tests/tools/clickup-helpers.test.js',
-    'tests/tools/clickup-validators.test.js',
-    'tests/tools/google-workspace-helpers.test.js',
-    'tests/tools/google-workspace-validators.test.js',
-    'tests/tools/n8n-helpers.test.js',
-    'tests/tools/n8n-validators.test.js',
-    'tests/tools/schema-detection.test.js',
-    'tests/tools/supabase-helpers.test.js',
-    'tests/tools/supabase-validators.test.js',
-    'tests/tools/validation-performance.test.js',
-    'tests/tools/validators.test.js',
-    'tests/integration/tools-system.test.js',
-    'tests/unit/tool-helper-executor.test.js',
-    'tests/unit/tool-validation-helper.test.js',
-    'tests/unit/tool-resolver.test.js',
-    'tests/regression/tools-migration.test.js',
-    'tests/performance/tools-system-benchmark.test.js',
-    'tests/clickup/status-sync.test.js',
-    'tests/story-update-hook.test.js',
-    'tests/epic-verification.test.js',
-    'tests/e2e/story-creation-clickup.test.js',
-    'tests/installer/v21-structure.test.js',
+    // NOTE: The OSR-10 "tools-system" suites (tests/tools/**, tool-*, tools-system,
+    // clickup/story-clickup, v21-structure) were DELETED, not ignored: they tested the
+    // common/utils/** and tools/installer/lib/** subsystems removed in the v4.31→v2.1
+    // migration. Nothing points to that code anymore, so the tests were dead (not
+    // recoverable by path-rewrite). Removed in chore/remove-dead-tools-tests.
     // Squad template tests use ESM imports - run separately with --experimental-vm-modules
     '.sinapse-ai/development/templates/squad-template/tests/',
     // Manifest suites re-enabled (fix-registry-dedup-stale): they now act as the
