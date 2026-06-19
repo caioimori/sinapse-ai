@@ -112,13 +112,11 @@ function scanFile(filePath) {
 function run() {
   const orqxFiles = getTrackedAgents();
   let totalCommands = 0;
-  let totalForbidden = 0;
   const allViolations = [];
 
   for (const file of orqxFiles) {
     const { commands, violations } = scanFile(file);
     totalCommands += commands.length;
-    totalForbidden += violations.length;
     allViolations.push(...violations);
   }
 

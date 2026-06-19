@@ -182,7 +182,7 @@ function generateTemplateVariables(wizardState) {
  * @param {Object} ideConfig - IDE configuration object (optional, for special handling)
  * @returns {Promise<string[]>} List of copied files
  */
-async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
+async function copyAgentFiles(projectRoot, agentFolder, _ideConfig = null) {
   // v4: Agents are in development/agents/ (not root agents/)
   const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.sinapse-ai', 'development', 'agents');
   const targetDir = path.join(projectRoot, agentFolder);

@@ -13,10 +13,8 @@ const { spawnSync } = require('child_process');
 // Import dependencies with fallbacks
 const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let GotchasMemory;
-let gotchasMemoryLoadError = null;
 
 function recordGotchasMemoryLoadError(error) {
-  gotchasMemoryLoadError = error;
   if (process.env.SINAPSE_DEBUG) {
     console.warn(
       `[ideation-engine] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,

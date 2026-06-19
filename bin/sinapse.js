@@ -548,7 +548,7 @@ function findClaudeCliPath() {
   try {
     const npmRoot = execSync('npm root -g', { encoding: 'utf8' }).trim();
     candidates.unshift(path.join(npmRoot, '@anthropic-ai/claude-code/cli.js'));
-  } catch {}
+  } catch { /* npm root -g may be unavailable; fall through to other candidates */ }
   for (const p of candidates) {
     if (fs.existsSync(p)) return p;
   }

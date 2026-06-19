@@ -21,7 +21,6 @@
  */
 
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const { loadChecks } = require('./checks');
 const { formatText } = require('./formatters/text');

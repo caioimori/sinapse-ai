@@ -121,7 +121,6 @@ class ConstitutionConsistencyCheck extends BaseCheck {
       const generatedContent = fs.readFileSync(generatedPath, 'utf8');
 
       for (const article of EXPECTED_ARTICLES) {
-        const key = `CONSTITUTION_RULE_ART${EXPECTED_ARTICLES.indexOf(article) + 1}_0`;
         if (!generatedContent.includes(article.title)) {
           issues.push(`Generated constitution missing Article "${article.title}". Run generate-constitution.js`);
         }

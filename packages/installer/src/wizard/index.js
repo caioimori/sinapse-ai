@@ -15,14 +15,9 @@ const { execSync } = require('child_process');
 const { colors } = require('../utils/sinapse-colors');
 const {
   getLanguageQuestion,
-  getUserProfileQuestion,
   getLLMQuestion,
-  getProjectTypeQuestion,
-  getIDEQuestions,
-  getTechPresetQuestion,
 } = require('./questions');
-const { setLanguage, t, tf } = require('./i18n');
-const yaml = require('js-yaml');
+const { setLanguage, t } = require('./i18n');
 const { detectProjectTypeExtended } = require('../detection/detect-project-type');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
 const { generateIDEConfigs, showSuccessSummary, copySkillFiles, copyExtraCommandFiles } = require('./ide-config-generator');
@@ -46,38 +41,6 @@ const {
   installLLMRouting,
   isLLMRoutingInstalled,
 } = require('../../../../.sinapse-ai/infrastructure/scripts/llm-routing/install-llm-routing');
-
-/**
- * Check for existing user_profile in core-config.yaml (Story 10.2 - Idempotency)
- * Returns the existing profile if found, null otherwise
- *
- * @param {string} targetDir - Target directory to check
- * @returns {Promise<string|null>} Existing user profile or null
- */
-async function getExistingUserProfile(targetDir = process.cwd()) {
-  const coreConfigPath = path.join(targetDir, '.sinapse-ai', 'core-config.yaml');
-
-  try {
-    if (await fse.pathExists(coreConfigPath)) {
-      const content = await fse.readFile(coreConfigPath, 'utf8');
-      const config = yaml.load(content);
-
-      if (config && config.user_profile) {
-        // Validate the value
-        const validProfiles = ['bob', 'advanced'];
-        const normalizedProfile = String(config.user_profile).toLowerCase().trim();
-
-        if (validProfiles.includes(normalizedProfile)) {
-          return normalizedProfile;
-        }
-      }
-    }
-  } catch {
-    // Config doesn't exist or is invalid - will ask for profile
-  }
-
-  return null;
-}
 
 /**
  * Map wizard language code to Claude Code settings.json language name (Story ACT-12)
@@ -781,7 +744,7 @@ async function runWizard(options = {}) {
       try {
         await commandValidate({ quiet: true });
         answers.ideSyncValidation = 'pass';
-      } catch (validateError) {
+      } catch {
         answers.ideSyncValidation = 'drift';
       } finally {
         console.log = _origLog;

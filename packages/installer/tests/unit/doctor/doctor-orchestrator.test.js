@@ -132,8 +132,8 @@ describe('Doctor Orchestrator', () => {
     });
 
     afterEach(() => {
-      try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch {}
-      try { fs.rmSync(fakeHome, { recursive: true, force: true }); } catch {}
+      try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch { /* best-effort temp cleanup */ }
+      try { fs.rmSync(fakeHome, { recursive: true, force: true }); } catch { /* best-effort temp cleanup */ }
     });
 
     it('should return notInstalled=true when no SINAPSE markers exist', async () => {
