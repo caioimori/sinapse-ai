@@ -30,6 +30,9 @@ Revenue Cycle Orchestrator — coordena o sistema comercial completo, desde dema
 - Revenue analytics (→ Ledger)
 - Client success (→ Bond)
 - Sales methodology (→ Edge)
+- Lead generation (→ Magnet)
+- Sales closing (→ Close)
+- Business audit (→ Audit)
 
 ## Tasks (8)
 1. coordinate-revenue-cycle
@@ -52,7 +55,7 @@ Revenue Cycle Orchestrator — coordena o sistema comercial completo, desde dema
 
 | Workflow | Description | Agents Involved |
 |----------|-------------|-----------------|
-| `greenfield-commercial-system` | Build commercial system from scratch | All 11 agents |
+| `greenfield-commercial-system` | Build commercial system from scratch | All 9 specialists |
 | `pipeline-optimization` | Optimize existing pipeline metrics | Vault, Cascade, Ledger |
 | `deal-acceleration` | Accelerate specific deals through pipeline | Edge, Mint, Bond |
 | `quarterly-review` | Full commercial performance review | Pipeline + all agents |
@@ -69,9 +72,9 @@ Revenue Cycle Orchestrator — coordena o sistema comercial completo, desde dema
 | "revenue", "forecast", "MRR", "ARR" | @ledger (Revenue Analytics) | High |
 | "onboarding", "churn", "NPS", "retention" | @bond (Client Success) | High |
 | "sales methodology", "SPIN", "discovery" | @edge (Sales Method) | High |
-| "outbound", "prospecting", "cold email" | @outreach (Outbound) | High |
-| "social selling", "LinkedIn selling" | @signal-commercial (Social Selling) | High |
-| "competitive analysis", "win/loss" | @scout (Competitive Intel) | Medium |
+| "outbound", "prospecting", "lead gen", "cold email" | @magnet (Lead Generation) | High |
+| "closing", "negotiation", "objections", "deal review" | @close (Sales Closing) | High |
+| "win/loss", "business audit", "opportunity gaps" | @audit (Business Auditor) | Medium |
 
 ## Cross-Squad Handoffs
 
