@@ -89,34 +89,30 @@ module.exports = {
 
   // Coverage thresholds — RATCHET POLICY
   //
-  // These floors sit at the LOW end of the observed coverage swing (see below).
-  // The intent is to make coverage monotonically non-decreasing over time without
-  // false-failing a PR.
-  //
   // NEVER lower these floors without an explicit story justification.
   //
-  // ⚠️ COVERAGE IS NONDETERMINISTIC IN THIS REPO — DO NOT raise these floors to the
-  // "high" reading (story test-coverage-honest-ratchet, 2026-06-19).
-  // The same `npm run test:coverage` swings ~26% ↔ 37% between runs, IN CI, on the
-  // same commit. Empirically confirmed:
-  //   - main runs 27849649808 / 27849141825 (Node 24): stmts 36.86% · br 34.09% ·
-  //     fn 40.2% · ln 37.04%
-  //   - PR run 27850908885 (Node 24, same code + 5 extra deterministic suites):
-  //     stmts 26.58% · br 23.78% · fn 27.76% · ln 26.7%
-  // Both runs SKIP the exact same set (18 suites / 212 tests), so the swing is NOT
-  // skip-count variance — it is coverage-COLLECTION nondeterminism (suspected jest
-  // multi-worker: a heavy worker's coverage occasionally not aggregating). The old
-  // comment blamed "Node 24 skipped suites"; that rationale was wrong, but the LOW
-  // floors were the correct defensive choice and MUST stay until the collection
-  // nondeterminism is root-caused. floor = floor(low-swing − ~1pp).
+  // ⚠️ READ THIS BEFORE RAISING `global` (story test-coverage-threshold-semantics):
+  // Coverage in this repo is DETERMINISTIC (~37% all-files). An earlier story
+  // (#254) wrongly called it "nondeterministic, swinging 26%↔37%". That was a
+  // misread: jest reports TWO different numbers in every run and they were compared
+  // across runs as if they were the same metric. They are not:
   //
-  // FOLLOW-UP (the real coverage debt): root-cause the 11pp collection swing
-  // (jest maxWorkers / worker coverage aggregation), make it deterministic, THEN
-  // ratchet the floors up to the stable real number (~37% global, ~80% core/).
+  //   1. The text-summary / CI job summary (~37%) = coverage over ALL files.
+  //   2. The `global` threshold check (~26.5%) = coverage over all files EXCEPT
+  //      those matched by a path key below. Jest REMOVES path-keyed files from the
+  //      `global` bucket. Because `.sinapse-ai/core/` is ~80% covered and a large
+  //      chunk, "all minus core" drops to ~26.5%.
   //
-  // Note: .sinapse-ai/core/ held ~80% (its floors are unaffected by the global
-  // swing in every run observed) but is left at the conservative legacy floor for
-  // the same reason — no proof it can't swing once the root cause is understood.
+  // Verified (deterministic, identical across runs):
+  //   all files:    stmts 37.27% · br 34.43% · fn 40.65% · ln 37.47%
+  //   all − core/:  stmts 26.55% · br 23.80% · fn 27.80% · ln 26.68%  ← `global` sees this
+  //   core/ only:   stmts ~79%   · br ~69%    · fn ~80%    · ln ~80%
+  //
+  // So the `global` floors below protect NON-CORE code (real ~26.5%, floor ≈ real−1)
+  // and `.sinapse-ai/core/` is checked separately (real ~80%, floor ≈ real−1..2).
+  // DO NOT set `global` to 37 — that number is the blend, which no single threshold
+  // bucket actually measures; it would fail CI immediately (global sees ~26.5%).
+  // To raise a floor: `npm run test:coverage`, read the RIGHT bucket, bump to real−1.
   coverageThreshold: {
     global: {
       branches: 22,
@@ -125,7 +121,10 @@ module.exports = {
       statements: 24,
     },
     '.sinapse-ai/core/': {
-      lines: 45,
+      branches: 67,
+      functions: 79,
+      lines: 78,
+      statements: 78,
     },
   },
 
