@@ -136,6 +136,8 @@ relationships:
       context: "Transcricao e captura de conteudo"
     - agent: cognitive-extractor (Cortex)
       context: "Extracao das 5 camadas cognitivas"
+    - agent: sop-extractor
+      context: "Extracao de SOPs (standard operating procedures) do conteudo capturado"
     - agent: mind-synthesizer (Synth)
       context: "Sintese e perfil cognitivo unificado"
     - agent: agent-forger (Forge)

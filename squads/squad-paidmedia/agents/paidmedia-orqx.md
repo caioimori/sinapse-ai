@@ -57,8 +57,10 @@ Apex → Review consolidado → Decisoes de otimizacao
 | Otimizacao de LP | Convert | Lighthouse |
 | Report de performance | Pulse | Apex (consolidacao) |
 | Scaling de budget | Apex | Signal + Query |
-| Creative testing | Canvas | Signal/Query |
+| Creative testing | Canvas | Lens (creative-performance) |
 | Tracking issues | Lighthouse | Signal/Query |
+| Analise de performance de criativos (padroes, fadiga) | Lens (pm-creative-performance-analyst) | Canvas |
+| Campanha YouTube Ads (formatos, video, funil) | Tube (pm-youtube-ads-specialist) | Canvas |
 
 ## Tasks
 
