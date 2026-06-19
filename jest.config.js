@@ -58,9 +58,9 @@ module.exports = {
     'tests/installer/v21-structure.test.js',
     // Squad template tests use ESM imports - run separately with --experimental-vm-modules
     '.sinapse-ai/development/templates/squad-template/tests/',
-    // Manifest tests need manifest data alignment (OSR-10 tech debt)
-    'tests/unit/manifest/manifest-generator.test.js',
-    'tests/unit/manifest/manifest-validator.test.js',
+    // Manifest suites re-enabled (fix-registry-dedup-stale): they now act as the
+    // drift detector for service-registry.json — validateAll() fails CI on duplicate
+    // worker IDs or missing files, the exact defects this story fixed.
     // Performance tests are flaky on different hardware (OSR-10 tech debt)
     'tests/integration/install-transaction.test.js',
     // License tests require network/crypto resources unavailable in CI (pre-existing)

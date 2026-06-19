@@ -372,9 +372,19 @@ async function buildRegistry(baseDir = process.cwd()) {
       for (const file of files) {
         const worker = await buildWorkerEntry(file, source, baseDir);
 
-        // Ensure unique IDs
+        // Ensure unique IDs. First collision keeps the legacy `-{category}`
+        // suffix; further collisions (3+ files with the same basename in the
+        // same category, e.g. multiple `index.js`) append a numeric counter so
+        // every id is guaranteed unique — the previous code suffixed only once
+        // and never re-checked, so N>2 collisions all produced the same id.
         if (seenIds.has(worker.id)) {
-          worker.id = `${worker.id}-${source.category}`;
+          let candidate = `${worker.id}-${source.category}`;
+          let n = 2;
+          while (seenIds.has(candidate)) {
+            candidate = `${worker.id}-${source.category}-${n}`;
+            n++;
+          }
+          worker.id = candidate;
         }
         seenIds.add(worker.id);
 
