@@ -5,7 +5,18 @@
 
 'use strict';
 
+const path = require('path');
+const fs = require('fs');
+const yaml = require('js-yaml');
 const wis = require('../index');
+
+// Derive expected counts from the canonical source (workflow-patterns.yaml) so these
+// assertions don't go stale each time a workflow is added/removed.
+const PATTERNS = yaml.load(
+  fs.readFileSync(path.join(__dirname, '../../data/workflow-patterns.yaml'), 'utf8'),
+).workflows;
+const EXPECTED_WORKFLOW_COUNT = Object.keys(PATTERNS).length;
+const EXPECTED_WITH_TRANSITIONS = Object.values(PATTERNS).filter((w) => w.transitions).length;
 
 describe('Workflow Intelligence System Integration', () => {
   beforeEach(() => {
@@ -221,7 +232,7 @@ describe('Workflow Intelligence System Integration', () => {
 
     it('should expose getWorkflowNames function', () => {
       const names = wis.getWorkflowNames();
-      expect(names.length).toBe(10);
+      expect(names.length).toBe(EXPECTED_WORKFLOW_COUNT);
     });
 
     it('should expose getWorkflowsByAgent function', () => {
@@ -236,8 +247,8 @@ describe('Workflow Intelligence System Integration', () => {
 
     it('should expose getStats function', () => {
       const stats = wis.getStats();
-      expect(stats.totalWorkflows).toBe(10);
-      expect(stats.workflowsWithTransitions).toBe(10);
+      expect(stats.totalWorkflows).toBe(EXPECTED_WORKFLOW_COUNT);
+      expect(stats.workflowsWithTransitions).toBe(EXPECTED_WITH_TRANSITIONS);
     });
 
     it('should expose factory functions', () => {

@@ -45,8 +45,10 @@ module.exports = {
     'tests/integration/install-transaction.test.js',
     // License tests require network/crypto resources unavailable in CI (pre-existing)
     'tests/license/',
-    // Workflow intelligence tests - assertion count mismatches (pre-existing)
-    '.sinapse-ai/workflow-intelligence/__tests__/',
+    // NOTE: workflow-intelligence suite (204 tests) was RE-ENABLED in
+    // test-coverage-honest-ratchet. The old "assertion count mismatches" reason was a
+    // stale-count bug (registry grew 10→12 workflows); the 5 affected assertions now
+    // derive their expected count from workflow-patterns.yaml.
   ],
 
   // Coverage collection (Story TD-3: Updated paths)
@@ -85,48 +87,36 @@ module.exports = {
     '!.sinapse-ai/core/utils/**',
   ],
 
-  // Coverage thresholds — RATCHET POLICY (Story 10.19)
+  // Coverage thresholds — RATCHET POLICY
   //
-  // These floors track the current actual coverage MINUS a 1pp safety buffer.
-  // A 1pp regression still passes; a 2pp regression fails. The intent is to
-  // make coverage monotonically non-decreasing over time without forcing a
-  // PR to add tests just because of timing.
-  //
-  // To raise the floors:
-  //   1. npm run test:coverage
-  //   2. Read the actual numbers from coverage/lcov-report/index.html
-  //   3. Bump the values below to (actual - 1)
-  //   4. Document the bump in the relevant story's Change Log
+  // These floors sit at the LOW end of the observed coverage swing (see below).
+  // The intent is to make coverage monotonically non-decreasing over time without
+  // false-failing a PR.
   //
   // NEVER lower these floors without an explicit story justification.
   //
-  // Baseline captured 2026-04-13 on Story 10.19 (deterministic re-run after
-  // first reading was inflated by test pollution between runs):
-  //   statements 24.44% -> floor 23
-  //   branches   22.03% -> floor 21
-  //   functions  26.06% -> floor 25
-  //   lines      24.58% -> floor 23
+  // ⚠️ COVERAGE IS NONDETERMINISTIC IN THIS REPO — DO NOT raise these floors to the
+  // "high" reading (story test-coverage-honest-ratchet, 2026-06-19).
+  // The same `npm run test:coverage` swings ~26% ↔ 37% between runs, IN CI, on the
+  // same commit. Empirically confirmed:
+  //   - main runs 27849649808 / 27849141825 (Node 24): stmts 36.86% · br 34.09% ·
+  //     fn 40.2% · ln 37.04%
+  //   - PR run 27850908885 (Node 24, same code + 5 extra deterministic suites):
+  //     stmts 26.58% · br 23.78% · fn 27.76% · ln 26.7%
+  // Both runs SKIP the exact same set (18 suites / 212 tests), so the swing is NOT
+  // skip-count variance — it is coverage-COLLECTION nondeterminism (suspected jest
+  // multi-worker: a heavy worker's coverage occasionally not aggregating). The old
+  // comment blamed "Node 24 skipped suites"; that rationale was wrong, but the LOW
+  // floors were the correct defensive choice and MUST stay until the collection
+  // nondeterminism is root-caused. floor = floor(low-swing − ~1pp).
   //
-  // These floors are deliberately just above the legacy 19-22 floors so the
-  // ratchet starts from an honest, reproducible state. Raising them is
-  // future work for a follow-up story focused on test additions.
+  // FOLLOW-UP (the real coverage debt): root-cause the 11pp collection swing
+  // (jest maxWorkers / worker coverage aggregation), make it deterministic, THEN
+  // ratchet the floors up to the stable real number (~37% global, ~80% core/).
   //
-  // .sinapse-ai/core/ — kept at 38 (legacy floor, was already passing before
-  // this story; raising it requires a separate baseline-capture pass that
-  // this story explicitly leaves out of scope).
-  // Coverage ratchet — só sobe, nunca desce.
-  //
-  // Baseline 2026-05-05 (deep-audit), MENOR coverage observada entre Node 20/22/24:
-  //   - Node 20/22 (local): lines 35.95% · statements 35.84% · functions 38.77% · branches 33.21%
-  //   - Node 24 (CI):       lines 26.04% · statements 25.95% · functions 27.52% · branches 23.09%
-  //
-  // Diferenca = 24 test suites SKIPPED em Node 24 (compatibilidade incompleta).
-  // Threshold setado pra Node 24 (menor) - 1pp pra absorver flake.
-  // Story de follow-up: investigar suites skipped em Node 24 e habilitar.
-  // Quando isso for resolvido, threshold sobe pra ~34% (real Node 22).
-  //
-  // Bump anterior (2026-04-13): statements 23, branches 21, functions 25, lines 23.
-  // Novo (2026-05-05): +1pp em todas dimensoes — ratchet honesto vs CI real.
+  // Note: .sinapse-ai/core/ held ~80% (its floors are unaffected by the global
+  // swing in every run observed) but is left at the conservative legacy floor for
+  // the same reason — no proof it can't swing once the root cause is understood.
   coverageThreshold: {
     global: {
       branches: 22,
