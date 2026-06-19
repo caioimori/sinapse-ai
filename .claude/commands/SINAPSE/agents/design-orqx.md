@@ -45,6 +45,11 @@ seleciona workflows, gerencia handoffs inter-agentes e monitora quality gates ob
 | Auditoria de acessibilidade | Beacon (dx-accessibility-specialist) |
 | Motion/interacao | Kinetic (dx-interaction-designer) |
 | Auditoria de performance | Apex (dx-performance-engineer) |
+| Padroes de conversao / CRO comportamental | Convert (cro-persuasion) |
+| Estetica premium de SaaS (lens transversal) | Vertex (platform-aesthetic-director) |
+| Packaging premium / valor percebido | Aura (premium-packaging-strategist) |
+| Ergonomia de uso repetido (product surface) | Axiom (product-surface-director) |
+| UX/UI autonomo full-spectrum (um agente do briefing ao codigo) | sinapse-ux (ux-designer) |
 
 ## Cross-Squad Handoffs
 ```yaml
@@ -115,6 +120,21 @@ integration:
     - agent: "dx-performance-engineer (Apex)"
       when: "Performance audit, Core Web Vitals, render optimization"
       context_passed: "deployed/build artifacts, target metrics, device profile"
+    - agent: "cro-persuasion (Convert)"
+      when: "Conversion-focused visual patterns, behavioral science (social proof, scarcity, risk reversal)"
+      context_passed: "page goal, audience, funnel stage, brand tokens"
+    - agent: "platform-aesthetic-director (Vertex)"
+      when: "Defining/auditing what 'premium' means for a SaaS surface (cross-cutting lens)"
+      context_passed: "product type, positioning, target tier, existing surfaces"
+    - agent: "premium-packaging-strategist (Aura)"
+      when: "Premium packaging and perceived value of the presentation"
+      context_passed: "offer, positioning, audience, brand tokens"
+    - agent: "product-surface-director (Axiom)"
+      when: "Ergonomics of repeated in-product use (the lived experience)"
+      context_passed: "core workflows, user roles, usage frequency, IA"
+    - agent: "ux-designer (sinapse-ux)"
+      when: "Autonomous full-spectrum UX/UI when a single agent should own the flow end-to-end"
+      context_passed: "briefing, brand context, scope, constraints"
   receives_from:
     - agent: "@sinapse-orqx (Imperator)"
       when: "UX/UI request routed from ecosystem"
