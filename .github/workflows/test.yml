@@ -1,7 +1,9 @@
-name: Test
-# Story 6.1: Specialized testing (security, build, integration, performance)
-# Cross-platform compatibility testing moved to ci.yml
-# NOTE: Only runs on push to main (PRs use ci.yml for validation)
+name: Post-Merge Smoke & Build Checks
+# Story 6.1: Specialized post-merge checks (build artifacts, entry points, installer
+# packaging, integration smoke). Runs on push to main only.
+# NOTE: This is NOT the unit-test gate — the Jest suite (Node 20/22/24 + coverage)
+# runs on every PR via ci.yml. Renamed from "Test" to avoid implying it gates units.
+# Cross-platform compatibility testing also lives in ci.yml.
 
 on:
   push:
