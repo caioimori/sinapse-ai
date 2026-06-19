@@ -275,7 +275,7 @@ async function cmdInstallGlobal(opts = {}) {
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR)) {
       fs.unlinkSync(path.join(CLAUDE_COMMANDS_DIR, f));
     }
-  } catch {}
+  } catch { /* dir may not exist on a fresh install */ }
 
   const sinapseBase = toForwardSlash(SINAPSE_HOME);
   const writtenAgents = new Set();
@@ -754,7 +754,7 @@ See \`.claude/rules/squad-awareness.md\` for the full delegation map.
     try {
       const orqxFile = fs.readdirSync(sAgentsDir).find(f => f.endsWith('-orqx.md'));
       if (orqxFile) orqxName = orqxFile.replace('.md', '');
-    } catch {}
+    } catch { /* fall back to the derived orqx name */ }
     return `| ${s.name} | @${orqxName} | ${s.agents} agents, ${s.tasks} tasks |`;
   }).join('\n');
 
@@ -828,7 +828,7 @@ exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-orqx "$@"
 `;
   const bashPath = path.join(BIN_DIR, 'sinapse');
   fs.writeFileSync(bashPath, bashLauncher);
-  try { fs.chmodSync(bashPath, 0o755); } catch {}
+  try { fs.chmodSync(bashPath, 0o755); } catch { /* chmod is best-effort (no-op on non-POSIX) */ }
   logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse`);
 
   // Windows CMD launcher

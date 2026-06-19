@@ -183,7 +183,7 @@ function removeHooks(settingsPath, matchers) {
 function sanitizeChromePath(chromePath) {
   // Validate Chrome path contains only safe characters to prevent shell injection
   const sanitized = chromePath.replace(/\\/g, '/');
-  if (!/^[a-zA-Z0-9\s/\-_.:()\[\]]+$/.test(sanitized)) {
+  if (!/^[a-zA-Z0-9\s/\-_.:()[\]]+$/.test(sanitized)) {
     throw new Error(`Unsafe Chrome path detected: ${chromePath}`);
   }
   return sanitized;

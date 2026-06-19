@@ -95,7 +95,7 @@ const BLOCKED_PATTERNS = [
     suggestion: 'Use {REPO_ROOT} placeholder or relative paths',
   },
   {
-    pattern: /OneDrive[\\\/].*Caio[ ]?Imori/i,
+    pattern: /OneDrive[\\/].*Caio[ ]?Imori/i,
     description: 'OneDrive path containing maintainer name',
     suggestion: 'Remove or use {VAULT_ROOT} placeholder',
   },

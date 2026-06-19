@@ -212,9 +212,9 @@ files:
     type: core
     size: 5758
   - path: core/code-intel/helpers/devops-helper.js
-    hash: sha256:f36a4859a74de9158d0a17507ff81f23da7a7871f690299b77436f7b5b49ab87
+    hash: sha256:e8017237fb2db8b49ebd02a9114a93549fbf0683044d7ad1a8632106188495a9
     type: core
-    size: 5116
+    size: 5044
   - path: core/code-intel/helpers/planning-helper.js
     hash: sha256:9b37aa02b3b0a3cabb53e2c0e53f05e1db65490d1ac403088aefec977fd025f8
     type: core
@@ -380,9 +380,9 @@ files:
     type: core
     size: 3816
   - path: core/doctor/checks/rules-files.js
-    hash: sha256:16205df27fd9c8d73de42593429afbe6b2c4d70cca4bdde3a51b704f1d292e63
+    hash: sha256:773572637ba2758e6ea60910d86e9973bd261020b33b44da93f946f852715e91
     type: core
-    size: 1552
+    size: 1494
   - path: core/doctor/checks/settings-json.js
     hash: sha256:7ed4e501be86f1e306c6eeac97641bfc3efedb1d541bd5883ed10f8d3204fb19
     type: core
@@ -404,9 +404,9 @@ files:
     type: core
     size: 1807
   - path: core/doctor/index.js
-    hash: sha256:4a1e6dacba9c1fe7866b2b8a0041837a63acbe5c072185e9f73f809b94de22a6
+    hash: sha256:bf248cbf31e8411d91bc19a342f0e18263e701d738325cb9d619201292c7554c
     type: core
-    size: 8585
+    size: 8559
   - path: core/elicitation/agent-elicitation.js
     hash: sha256:92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81
     type: elicitation
@@ -516,9 +516,9 @@ files:
     type: core
     size: 484
   - path: core/graph-dashboard/cli.js
-    hash: sha256:127e41c209b74522ea47d73b25abe6151b6a91983a9adc8134374e897940b692
+    hash: sha256:491d199284d20ac61457632b2cd6890eaa2d18dab2f6d1577674f0854219f8bd
     type: core
-    size: 10301
+    size: 10302
   - path: core/graph-dashboard/data-sources/code-intel-source.js
     hash: sha256:90957f10067d26a41538574f4cf7397cef7bcf87c080fe27b96d91c244306f0c
     type: core
@@ -660,9 +660,9 @@ files:
     type: core
     size: 4734
   - path: core/health-check/checks/project/constitution-consistency.js
-    hash: sha256:e6d0320efb88db073f6f877bc63126a9825ce7a896f5629f81ac24394e96a3ec
+    hash: sha256:e5cf057d336421a3dbb46e8c7341915a638a4507c95a178f2484b7fb0129a32e
     type: core
-    size: 6044
+    size: 5956
   - path: core/health-check/checks/project/dependencies.js
     hash: sha256:f11f88666cfde93196d3ec81c59ba4956c75a097591d4a5cf0b2effd88db523d
     type: core
@@ -788,9 +788,9 @@ files:
     type: core
     size: 7763
   - path: core/ideation/ideation-engine.js
-    hash: sha256:eb9119085bfeb5eee344a8949b54f8375f85c50ee38818bd4b9aab299ad871e9
+    hash: sha256:a8f1efdf143c5bb91e8d2e983d820ddb0367b1404c86bbc2927fb136c9afd4f3
     type: core
-    size: 27450
+    size: 27381
   - path: core/ids/circuit-breaker.js
     hash: sha256:d9ff8c6e540902457b17aba668ff67c04d40564ed479993ad3c4807fb8c09c3f
     type: core
@@ -1280,9 +1280,9 @@ files:
     type: core
     size: 4673
   - path: core/synapse/layers/layer-processor.js
-    hash: sha256:a62e5743c17e25957193e5a47e927d426a4353e288f3c3e5c72cf0442079f54c
+    hash: sha256:57a514c7e03913d466d2058400229a8ffb4589e6ad7dcc03cbacd93a12df2ac6
     type: core
-    size: 2882
+    size: 2883
   - path: core/synapse/memory/memory-bridge.js
     hash: sha256:de1a42d258b4d23cca9ae9fcf53eb9b71df9dbf851741add3320deaf9d12abec
     type: core
@@ -1424,9 +1424,9 @@ files:
     type: data
     size: 7049
   - path: data/tok3-token-comparison.js
-    hash: sha256:91f8788e803bb93e56586a4a1aee1497b5ab4995c23c74350addfd214494d784
+    hash: sha256:87ab8a68bf6cd7e3fc54dbba60cbc56e3a490dde1dd805fd294a04c57f5dea1b
     type: data
-    size: 4623
+    size: 4488
   - path: data/tool-registry.yaml
     hash: sha256:929ee46a0020f6a87f3ce39294f76c14d7b05980e85ba7d1e548adce8a271213
     type: data
