@@ -39,7 +39,6 @@
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "glob": "^10.4.4",
-    "highlight.js": "^11.9.0",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
     "semver": "^7.7.2",
