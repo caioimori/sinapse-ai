@@ -18,6 +18,10 @@ module.exports = {
   // Ignore patterns - exclude incompatible test frameworks
   testPathIgnorePatterns: [
     '/node_modules/',
+    // Local reference clones (gitignored, not part of this package — present only on
+    // dev machines that cloned a reference repo under colaborator/). Absent in CI;
+    // excluding here makes local `npm test` match CI instead of running foreign suites.
+    '<rootDir>/colaborator/',
     // Pro submodule tests — run via pro-integration.yml CI workflow, not local npm test
     // Use anchored regex to only match the pro/ submodule dir, not tests/pro/
     '<rootDir>/pro/',
