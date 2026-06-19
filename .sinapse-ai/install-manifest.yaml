@@ -9,7 +9,7 @@
 #
 version: 1.9.0
 generator: scripts/generate-install-manifest.js
-file_count: 1185
+file_count: 1186
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -3171,6 +3171,10 @@ files:
     hash: sha256:54ab156d0149da43698c0b439e196a228c794441b20c78d26b9433a17a6e20f6
     type: elicitation
     size: 9678
+  - path: index.d.ts
+    hash: sha256:6257a6ba37bd5ec0ebbfe6b76f97f1926a504635988943d79a85ef6175629542
+    type: code
+    size: 981
   - path: index.esm.js
     hash: sha256:13e1784627956a59acfc3ca1cb2d0f74cbfbb38d3a7b77bf7615b74963366d11
     type: code
