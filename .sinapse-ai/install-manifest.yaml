@@ -1364,7 +1364,7 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:2287de6ef9ec9e862f5d69ba1a4c2e91d483e2b2181557d571e69899db6fd0cd
+    hash: sha256:13c3ab912671317d0ab887996ed9d4d013550ed13137c71b4b282cd465476079
     type: data
     size: 558183
   - path: data/learned-patterns.yaml
@@ -4680,9 +4680,9 @@ files:
     type: workflow-intelligence
     size: 10680
   - path: workflow-intelligence/__tests__/integration.test.js
-    hash: sha256:98cfc895d8fa493bdf4b901263fbbdc0a6f8a404cd78f5d33222d9862e53ae1d
+    hash: sha256:34421819f60f450e830508cebd16a25e72cbe225eade29abac8188e8a0ced6b2
     type: workflow-intelligence
-    size: 11102
+    size: 11695
   - path: workflow-intelligence/__tests__/suggestion-engine.test.js
     hash: sha256:4dd26f611a58c0bcd54dc69e1804efe103406ee0c0bda0880a4b39aecf540045
     type: workflow-intelligence
@@ -4692,9 +4692,9 @@ files:
     type: workflow-intelligence
     size: 15056
   - path: workflow-intelligence/__tests__/workflow-registry.test.js
-    hash: sha256:c895fec31e0863b168f2c576f467359630ccb66f09e05d2b0201c7864673ddd7
+    hash: sha256:d9488e420f584474de920e090068809a220db1bd1d49e96769f6fc3ed7a47dba
     type: workflow-intelligence
-    size: 9968
+    size: 10709
   - path: workflow-intelligence/engine/confidence-scorer.js
     hash: sha256:6312ad6707909d3177d8d96500dbb782be5662853cb73e52bb4da68b8cb0d883
     type: workflow-intelligence

@@ -45,8 +45,10 @@ module.exports = {
     'tests/integration/install-transaction.test.js',
     // License tests require network/crypto resources unavailable in CI (pre-existing)
     'tests/license/',
-    // Workflow intelligence tests - assertion count mismatches (pre-existing)
-    '.sinapse-ai/workflow-intelligence/__tests__/',
+    // NOTE: workflow-intelligence suite (204 tests) was RE-ENABLED in
+    // test-coverage-honest-ratchet. The old "assertion count mismatches" reason was a
+    // stale-count bug (registry grew 10→12 workflows); the 5 affected assertions now
+    // derive their expected count from workflow-patterns.yaml.
   ],
 
   // Coverage collection (Story TD-3: Updated paths)
@@ -85,9 +87,9 @@ module.exports = {
     '!.sinapse-ai/core/utils/**',
   ],
 
-  // Coverage thresholds — RATCHET POLICY (Story 10.19)
+  // Coverage thresholds — RATCHET POLICY
   //
-  // These floors track the current actual coverage MINUS a 1pp safety buffer.
+  // These floors track the current actual coverage MINUS a ~1pp safety buffer.
   // A 1pp regression still passes; a 2pp regression fails. The intent is to
   // make coverage monotonically non-decreasing over time without forcing a
   // PR to add tests just because of timing.
@@ -95,47 +97,45 @@ module.exports = {
   // To raise the floors:
   //   1. npm run test:coverage
   //   2. Read the actual numbers from coverage/lcov-report/index.html
-  //   3. Bump the values below to (actual - 1)
+  //   3. Bump the values below to floor(actual - 1)
   //   4. Document the bump in the relevant story's Change Log
   //
   // NEVER lower these floors without an explicit story justification.
   //
-  // Baseline captured 2026-04-13 on Story 10.19 (deterministic re-run after
-  // first reading was inflated by test pollution between runs):
-  //   statements 24.44% -> floor 23
-  //   branches   22.03% -> floor 21
-  //   functions  26.06% -> floor 25
-  //   lines      24.58% -> floor 23
+  // HONEST BASELINE 2026-06-19 (story test-coverage-honest-ratchet).
+  // The previous comment claimed Node 24 (CI) only covered ~26% vs ~36% local
+  // because of "24 suites SKIPPED em Node 24". That premise was DEBUNKED: the
+  // tools-system dead tests were deleted (PR #248/#252), the remaining skips are
+  // unconditional `describe.skip` (identical on every Node), and three back-to-back
+  // CI runs (Node 24, the lowest of the 20/22/24 matrix — e.g. run 27849649808)
+  // report a ROCK-STABLE (variance < 0.02pp):
+  //   statements 36.86% · branches 34.09% · functions 40.2% · lines 37.04%
+  // The old floors (22-26) were dishonest by ~12pp and let coverage regress
+  // silently. Re-baselined to the real CI numbers; floors = floor(CI - 1), with
+  // headroom from the now-re-enabled workflow-intelligence suite (which only adds
+  // coverage). .sinapse-ai/core/ floors come from a CI-matching local run
+  // (lines ~80% / stmts ~79% / funcs ~80% / branches ~69%).
   //
-  // These floors are deliberately just above the legacy 19-22 floors so the
-  // ratchet starts from an honest, reproducible state. Raising them is
-  // future work for a follow-up story focused on test additions.
-  //
-  // .sinapse-ai/core/ — kept at 38 (legacy floor, was already passing before
-  // this story; raising it requires a separate baseline-capture pass that
-  // this story explicitly leaves out of scope).
-  // Coverage ratchet — só sobe, nunca desce.
-  //
-  // Baseline 2026-05-05 (deep-audit), MENOR coverage observada entre Node 20/22/24:
-  //   - Node 20/22 (local): lines 35.95% · statements 35.84% · functions 38.77% · branches 33.21%
-  //   - Node 24 (CI):       lines 26.04% · statements 25.95% · functions 27.52% · branches 23.09%
-  //
-  // Diferenca = 24 test suites SKIPPED em Node 24 (compatibilidade incompleta).
-  // Threshold setado pra Node 24 (menor) - 1pp pra absorver flake.
-  // Story de follow-up: investigar suites skipped em Node 24 e habilitar.
-  // Quando isso for resolvido, threshold sobe pra ~34% (real Node 22).
-  //
-  // Bump anterior (2026-04-13): statements 23, branches 21, functions 25, lines 23.
-  // Novo (2026-05-05): +1pp em todas dimensoes — ratchet honesto vs CI real.
+  // CI IS AUTHORITATIVE — DO NOT calibrate floors from a local run. Local
+  // `npm run test:coverage` is NONDETERMINISTIC (swings ~26%↔37%): the nested
+  // .sinapse-ai/node_modules makes ~170 mocks silently fail on some dev machines,
+  // collapsing global coverage. CI (clean `npm ci`) does not have this and is
+  // stable. If a LOCAL run trips these thresholds, that's the local artifact, not
+  // a real regression — verify against the CI job before touching these numbers.
+  // (Note: .sinapse-ai/core/ held its floors even in the degenerate local run,
+  // confirming the core suites are deterministic.)
   coverageThreshold: {
     global: {
-      branches: 22,
-      functions: 26,
-      lines: 25,
-      statements: 24,
+      branches: 33,
+      functions: 39,
+      lines: 36,
+      statements: 36,
     },
     '.sinapse-ai/core/': {
-      lines: 45,
+      branches: 68,
+      functions: 79,
+      lines: 78,
+      statements: 78,
     },
   },
 
