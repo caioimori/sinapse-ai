@@ -1532,9 +1532,9 @@ files:
     type: agent
     size: 1369
   - path: development/agents/snps-orqx.md
-    hash: sha256:744ba24a08e6d294d93dff577d14185fa02b589f298049a734001f3b504daf82
+    hash: sha256:b356c7525128d99f708311e158455616341192afb151177a745361f1eece6fd7
     type: agent
-    size: 34545
+    size: 41030
   - path: development/agents/sprint-lead.md
     hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
     type: agent
