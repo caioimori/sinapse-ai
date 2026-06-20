@@ -13,8 +13,8 @@
  * the MIT `LICENSE` file (legal attribution requirement), the historical
  * process document `docs/research-synthesis-for-upgrade.md`, and a small set
  * of pre-existing upstream-attribution files inherited from the BMAD fork
- * lineage (flagged for future per-file review — see follow-up backlog in
- * `.sinapse-ai/internal/aiox-feature-map.md`).
+ * lineage (flagged for future per-file review — see the internal
+ * upstream-attribution follow-up backlog).
  *
  * === Source of truth: `git ls-files` (QA v1.1 fix) ===
  *
