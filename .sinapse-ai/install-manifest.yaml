@@ -2984,9 +2984,9 @@ files:
     type: template
     size: 2666
   - path: development/templates/sinapse-doc-template.md
-    hash: sha256:a31589a53c55e408f038b4a713942af1c327726a051485fc5e5a03eb2e4a179f
+    hash: sha256:867388ff8683a2b943b84411fd32cd546fd03f3265e33083a87a16bfb719606b
     type: template
-    size: 8277
+    size: 8060
   - path: development/templates/squad-template/agents/example-agent.yaml
     hash: sha256:b5dd44e677c1936797d19e53a9241798e148847310c02f2c26182a91a6183d42
     type: agent

@@ -55,17 +55,19 @@ function spawnAsync(command, options = {}) {
   });
 }
 
-// ASCII Art Banner (Clean blocky style like reference image)
-const BANNER = chalk.cyan(`
-  █████╗ ██╗ ██████╗ ███████╗      ███████╗██╗   ██╗██╗     ██╗     ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ██╔══██╗██║██╔═══██╗██╔════╝      ██╔════╝██║   ██║██║     ██║     ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
- ███████║██║██║   ██║███████╗█████╗█████╗  ██║   ██║██║     ██║     ███████╗   ██║   ███████║██║     █████╔╝
- ██╔══██║██║██║   ██║╚════██║╚════╝██╔══╝  ██║   ██║██║     ██║     ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
- ██║  ██║██║╚██████╔╝███████║      ██║     ╚██████╔╝███████╗███████╗███████║   ██║   ██║  ██║╚██████╗██║  ██╗
- ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚══════╝      ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+// ASCII Art Banner — canonical SNPS AI wordmark in white (matches bin/lib/header.js).
+// Kept in sync with the live banner so the legacy fallback installer never shows
+// off-brand art (this banner predated the SINAPSE rebrand).
+const BANNER = chalk.white.bold(`
+ ███████╗███╗   ██╗██████╗ ███████╗     █████╗ ██╗
+ ██╔════╝████╗  ██║██╔══██╗██╔════╝    ██╔══██╗██║
+ ███████╗██╔██╗ ██║██████╔╝███████╗    ███████║██║
+ ╚════██║██║╚██╗██║██╔═══╝ ╚════██║    ██╔══██║██║
+ ███████║██║ ╚████║██║     ███████║    ██║  ██║██║
+ ╚══════╝╚═╝  ╚═══╝╚═╝     ╚══════╝    ╚═╝  ╚═╝╚═╝
 `);
 
-const SUBTITLE = chalk.magenta('Universal AI Agent Framework for Any Domain');
+const SUBTITLE = chalk.dim('Seu copiloto de inteligencia artificial');
 // Read version from package.json dynamically
 const packageJsonVersion = require(path.join(__dirname, '..', 'package.json')).version;
 const VERSION = chalk.yellow(`Installer v${packageJsonVersion}`);

@@ -842,7 +842,7 @@ async function runWizard(options = {}) {
         projectType: answers.projectType || 'greenfield',
         selectedIDEs: answers.selectedIDEs || [],
         mcpServers: answers.mcpServers || [],
-        userProfile: answers.userProfile || 'advanced', // Story 10.2: User Profile
+        userProfile: answers.userProfile || 'bob', // Assisted-by-default (open-source p/ leigos); advanced é toggle opt-in pós-install
         skipPrompts: options.quiet || false, // Skip prompts in quiet mode
         forceMerge: options.forceMerge, // Story 9.4: Smart Merge support
         noMerge: options.noMerge, // Story 9.4: Smart Merge support
