@@ -67,6 +67,9 @@ const SCANNER_SOURCES = [
   { from: path.join(BIN_UTILS, 'staged-sql-guard.js'), to: 'staged-sql-guard.js' },
   // --- framework boundary guard (FASE C; respects boundary.frameworkProtection) ---
   { from: path.join(BIN_UTILS, 'framework-guard.js'), to: 'framework-guard.js' },
+  // --- protected-files guard (always-on; blocks deletion/untrack of committed
+  // critical files like service-registry.json — anti git-add-A-sweep) ---
+  { from: path.join(BIN_UTILS, 'staged-protected-files-guard.js'), to: 'staged-protected-files-guard.js' },
 ];
 
 /**
@@ -173,13 +176,15 @@ function copyScannerLib(hooksDir) {
 /**
  * Build the content of the managed `pre-commit` Node hook.
  *
- * The hook runs THREE bundled guards in sequence (each a standalone module
+ * The hook runs FOUR bundled guards in sequence (each a standalone module
  * under ./lib that exits non-zero on a finding), then chains to a pre-existing
  * husky hook:
  *   1. staged-secret-scan.js  — secret/.env/private-key/entropy leak (fail-CLOSED)
  *   2. staged-sql-guard.js     — destructive DDL/DML (DROP/TRUNCATE/DELETE-no-WHERE)
  *   3. framework-guard.js      — L1/L2 boundary (no-op unless boundary
  *                                .frameworkProtection is true in core-config.yaml)
+ *   4. staged-protected-files-guard.js — always-on; blocks deletion/untrack of
+ *                                committed critical files (e.g. service-registry.json)
  *
  * Each guard is spawned as a child Node process (cwd = project root, where git
  * already runs hooks) so it gets the same staged index and reuses its own
@@ -209,13 +214,15 @@ const { spawnSync } = require('child_process');
 const projectRoot = process.cwd();
 const libDir = path.join(__dirname, 'lib');
 
-// --- 1-3. SINAPSE staged guards (each fail-CLOSED) ---------------------------
-// Order: secret scan, then destructive-SQL guard, then framework-boundary guard.
+// --- 1-4. SINAPSE staged guards (each fail-CLOSED) ---------------------------
+// Order: secret scan, destructive-SQL guard, framework-boundary guard, then
+// protected-files guard (always-on anti-sweep; does NOT respect frameworkProtection).
 // framework-guard self-disables when boundary.frameworkProtection is false.
 const GUARDS = [
   { file: 'staged-secret-scan.js', label: 'Secret Scan' },
   { file: 'staged-sql-guard.js',   label: 'SQL Guard' },
   { file: 'framework-guard.js',    label: 'Framework Boundary' },
+  { file: 'staged-protected-files-guard.js', label: 'Protected Files' },
 ];
 
 for (const guard of GUARDS) {

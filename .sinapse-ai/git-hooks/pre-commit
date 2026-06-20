@@ -11,12 +11,14 @@ const projectRoot = process.cwd();
 const libDir = path.join(__dirname, 'lib');
 
 // --- 1-3. SINAPSE staged guards (each fail-CLOSED) ---------------------------
-// Order: secret scan, then destructive-SQL guard, then framework-boundary guard.
+// Order: secret scan, destructive-SQL guard, framework-boundary guard, then
+// protected-files guard (always-on anti-sweep; does NOT respect frameworkProtection).
 // framework-guard self-disables when boundary.frameworkProtection is false.
 const GUARDS = [
   { file: 'staged-secret-scan.js', label: 'Secret Scan' },
   { file: 'staged-sql-guard.js',   label: 'SQL Guard' },
   { file: 'framework-guard.js',    label: 'Framework Boundary' },
+  { file: 'staged-protected-files-guard.js', label: 'Protected Files' },
 ];
 
 for (const guard of GUARDS) {
