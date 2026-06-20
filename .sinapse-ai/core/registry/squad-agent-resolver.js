@@ -39,6 +39,9 @@ const ALIASES = {
   sm: 'sprint-lead',
   ux: 'ux-design-expert',
   'ux-expert': 'ux-design-expert',
+  // Imperator orchestrator ships as snps-orqx.md (SINAPSE canonical, @snps alias);
+  // 'sinapse-orqx' is the verbal/canonical reference that must resolve to that file.
+  'sinapse-orqx': 'snps-orqx',
 };
 
 class SquadAgentResolver {
@@ -251,3 +254,6 @@ class SquadAgentResolver {
 
 module.exports = SquadAgentResolver;
 module.exports.SquadAgentResolver = SquadAgentResolver;
+// Canonical short-form → file-id alias map. Single source of truth, consumed by the
+// activation pipeline (agent-config-loader) so '@dev' etc. load the real persona file.
+module.exports.ALIASES = ALIASES;

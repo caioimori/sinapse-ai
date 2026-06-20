@@ -12,6 +12,10 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { globalConfigCache } = require('../../core/config/config-cache');
 const { trackConfigLoad } = require('../../infrastructure/scripts/performance-tracker');
+// Canonical short-form → file-id alias map (single source of truth). Without this,
+// short ids like 'dev'/'qa'/'sinapse-orqx' resolve to '<id>.md' which does not exist
+// (files are developer.md / quality-gate.md / snps-orqx.md), degrading the greeting.
+const { ALIASES: AGENT_ID_ALIASES } = require('../../core/registry/squad-agent-resolver');
 
 /**
  * Agent configuration requirements cache
@@ -317,8 +321,10 @@ class AgentConfigLoader {
       }
     }
     
-    // Load from file
-    const agentPath = path.join(process.cwd(), '.sinapse-ai', 'development', 'agents', `${this.agentId}.md`);
+    // Load from file. Resolve short-form aliases (dev→developer, qa→quality-gate,
+    // sinapse-orqx→snps-orqx, ...) to the canonical file id before building the path.
+    const fileId = AGENT_ID_ALIASES[this.agentId] || this.agentId;
+    const agentPath = path.join(process.cwd(), '.sinapse-ai', 'development', 'agents', `${fileId}.md`);
     
     try {
       const content = await fs.readFile(agentPath, 'utf8');

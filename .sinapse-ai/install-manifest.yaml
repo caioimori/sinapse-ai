@@ -1156,9 +1156,9 @@ files:
     type: core
     size: 292202
   - path: core/registry/squad-agent-resolver.js
-    hash: sha256:04f7a4835f4a7d4430e2d495eb8e47af1d3f86158cb9de50797c85c7e4889d49
+    hash: sha256:74c4a1fafd2f60eb9db38e9fd82a03b74d47d4e563ccb754fe00824f519c84f8
     type: core
-    size: 8014
+    size: 8424
   - path: core/registry/validate-registry.js
     hash: sha256:8612f683f1b7ecd043a0342d05fbe434721b19568b6ff76a483a6de7aa830d5c
     type: core
@@ -1364,9 +1364,9 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:13c3ab912671317d0ab887996ed9d4d013550ed13137c71b4b282cd465476079
+    hash: sha256:2e38f3df7ca565065184fe32b8241a92baa403e71bec58c81048d7d817ff0922
     type: data
-    size: 558183
+    size: 558244
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1652,9 +1652,9 @@ files:
     type: script
     size: 7535
   - path: development/scripts/agent-config-loader.js
-    hash: sha256:4ca93e6babd60d872232445bc87fd87cf450202c93a2d087135786fb19656922
+    hash: sha256:e27095c228ce32d8b5a6f45c937a02242de97dd6ea42a0e8a52651d15962e31c
     type: script
-    size: 18369
+    size: 18933
   - path: development/scripts/agent-exit-hooks.js
     hash: sha256:e5b809fa700dad287341c318ef44b945dc24261445eba4bd20f97ac4e21b9480
     type: script
