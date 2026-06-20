@@ -35,6 +35,18 @@ const DATA_DIR = path.join(ROOT_DIR, 'development', 'data');
 const UTILS_DIR = path.join(ROOT_DIR, 'development', 'utils');
 const WORKFLOWS_DIR = path.join(ROOT_DIR, 'development', 'workflows');
 const SCRIPTS_DIR = path.join(ROOT_DIR, 'development', 'scripts');
+// Additional canonical homes — the framework stores agent artifacts across
+// development/, product/, data/ and infrastructure/, not only development/.
+const KNOWLEDGE_BASE_DIR = path.join(ROOT_DIR, 'development', 'knowledge-base');
+const PRODUCT_TEMPLATES_DIR = path.join(ROOT_DIR, 'product', 'templates');
+const PRODUCT_CHECKLISTS_DIR = path.join(ROOT_DIR, 'product', 'checklists');
+const PRODUCT_DATA_DIR = path.join(ROOT_DIR, 'product', 'data');
+const ROOT_DATA_DIR = path.join(ROOT_DIR, 'data');
+const INFRA_SCRIPTS_DIR = path.join(ROOT_DIR, 'infrastructure', 'scripts');
+const INFRA_SCHEMAS_DIR = path.join(ROOT_DIR, 'infrastructure', 'schemas');
+const SCHEMAS_DIR = path.join(ROOT_DIR, 'schemas');
+const CORE_EXECUTION_DIR = path.join(ROOT_DIR, 'core', 'execution');
+const CORE_MEMORY_DIR = path.join(ROOT_DIR, 'core', 'memory');
 
 // Commands that are allowed to be shared by multiple agents
 // These are utility/infrastructure commands, not domain-specific
@@ -187,14 +199,18 @@ async function validateDependencies(agents) {
   const errors = [];
   const warnings = [];
 
+  // Each dependency type resolves against one or more candidate directories —
+  // an artifact is considered present if it exists in ANY of them.
   const depDirs = {
-    tasks: TASKS_DIR,
-    templates: TEMPLATES_DIR,
-    checklists: CHECKLISTS_DIR,
-    data: DATA_DIR,
-    utils: UTILS_DIR,
-    workflows: WORKFLOWS_DIR,
-    scripts: SCRIPTS_DIR,
+    tasks: [TASKS_DIR],
+    templates: [TEMPLATES_DIR, PRODUCT_TEMPLATES_DIR],
+    checklists: [CHECKLISTS_DIR, PRODUCT_CHECKLISTS_DIR],
+    data: [DATA_DIR, ROOT_DATA_DIR, PRODUCT_DATA_DIR],
+    utils: [UTILS_DIR, SCRIPTS_DIR, INFRA_SCRIPTS_DIR, CORE_EXECUTION_DIR, CORE_MEMORY_DIR],
+    workflows: [WORKFLOWS_DIR],
+    scripts: [SCRIPTS_DIR, INFRA_SCRIPTS_DIR, CORE_EXECUTION_DIR, CORE_MEMORY_DIR],
+    knowledge_bases: [KNOWLEDGE_BASE_DIR],
+    schemas: [SCHEMAS_DIR, INFRA_SCHEMAS_DIR],
   };
 
   // Dependency types that are not file-based (external tools, integrations)
@@ -208,8 +224,8 @@ async function validateDependencies(agents) {
       if (skipDepTypes.has(depType)) continue;
       if (!Array.isArray(depList)) continue;
 
-      const depDir = depDirs[depType];
-      if (!depDir) {
+      const candidateDirs = depDirs[depType];
+      if (!candidateDirs) {
         warnings.push({
           type: 'UNKNOWN_DEP_TYPE',
           agent: agent.id,
@@ -219,9 +235,23 @@ async function validateDependencies(agents) {
         continue;
       }
 
-      for (const depFile of depList) {
-        const depPath = path.join(depDir, depFile);
-        const exists = await fileExists(depPath);
+      for (const depFile2 of depList) {
+        // Bare references (no extension) may be listed without their suffix —
+        // try the common framework extensions before declaring them missing.
+        const extCandidates = path.extname(depFile2)
+          ? ['']
+          : ['', '.js', '.cjs', '.md', '.yaml', '.yml'];
+
+        let exists = false;
+        for (const dir of candidateDirs) {
+          for (const ext of extCandidates) {
+            if (await fileExists(path.join(dir, depFile2 + ext))) {
+              exists = true;
+              break;
+            }
+          }
+          if (exists) break;
+        }
 
         if (!exists) {
           // Missing dependencies are warnings, not errors (pre-existing technical debt)
@@ -229,10 +259,10 @@ async function validateDependencies(agents) {
             type: 'MISSING_DEPENDENCY',
             agent: agent.id,
             depType,
-            depFile,
-            expectedPath: depPath,
-            message: `Missing dependency: @${agent.id} → ${depType}/${depFile}`,
-            suggestion: `Create the file at ${depPath} or remove from agent dependencies.`,
+            depFile: depFile2,
+            expectedPath: path.join(candidateDirs[0], depFile2),
+            message: `Missing dependency: @${agent.id} → ${depType}/${depFile2}`,
+            suggestion: `Create the file under one of [${candidateDirs.join(', ')}] or remove from agent dependencies.`,
           });
         }
       }
