@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.12.0] — 2026-06-20 — 🛡️ Hardening + Conformidade
+
+> Maior release de robustez do framework até aqui: ~1 mês de hardening (auditoria clínica de 8 frentes + conformidade às diretrizes) entregue de uma vez. Sem breaking changes — atualização segura via `npx sinapse-ai update`.
+
+### Added
+
+- **Guard anti-deleção de arquivos críticos** no pre-commit — bloqueia commits que removam/untrackeiem arquivos protegidos (ex.: `service-registry.json`). Sempre ativo, independe do modo contribuidor; bypass intencional via `--no-verify`.
+- **API programática** no root `package.json` (`main`/`module`/`types`/`exports`) + `index.d.ts` — o framework pode ser usado como biblioteca, não só CLI.
+
+### Fixed
+
+- **Ativação de agents**: 6 dos 12 agents core caíam num greeting degradado por falta de resolução de alias (`dev`→`developer`, `sinapse-orqx`→`snps-orqx`, etc.). Todos ativam 100% agora (papel + status + comandos).
+- **Instalação em Modo Assistido por padrão**: o instalador defaultava silenciosamente para avançado; agora entra assistido (para leigos), com o avançado disponível como toggle opt-in.
+- **Roteamento de squads**: religados ~16 especialistas órfãos em 5 squads, o squad comercial e as 56 tasks do conselho — nenhum agent perdido no roteamento.
+- **Identidade SINAPSE canônica**: Imperator unificado (3 fontes divergentes) + remoção de diretório de comandos stale.
+- **Integridade do registro**: dedup robusto de IDs + ressync do `service-registry` + detector de drift em CI.
+- **`doctor` honesto**: git-hooks reporta WARN (não FAIL) para quem tem hook system próprio.
+- **ide-sync**: resync de mirror `.claude` + conserto de YAML malformado.
+
+### Changed
+
+- **Pacote 23MB menor**: `node_modules` removidos do tarball + higiene de dependências de runtime.
+- **Cobertura de testes honesta**: suíte `workflow-intelligence` religada (+204 testes), semântica do `coverageThreshold` corrigida (o `global` do jest exclui chaves de path) e piso real do `core/` (~80%).
+- **Branding**: instalador legado rebrandado para o banner branco "SNPS AI" (sem resquícios off-brand).
+- **Qualidade**: lint 0 erros / 0 warnings; testes mortos do tools-system removidos; `colaborator/` fora do jest.
+- **Escopo**: idiomas apenas **PT + EN** (resíduo de espanhol removido); CLIs apenas **Claude Code + Codex**.
+
+### Security
+
+- `undici` (dev) atualizado para corrigir vulnerabilidade HIGH dev-only. **0 vulnerabilidades em produção.**
+
 ## [1.9.0] — 2026-06-17 — 🧭 Refino Macro (E1–E9) + Paridade Codex
 
 > **Refino macro do framework em 9 etapas.** Invocação unificada `@sinapse`/`@snps`; remoção dos editores extras (foco Claude + Codex); medidor de tasks honesto; instalação/update reais; fusão `squad-artdir`→`squad-design` + aposentadoria de 7 chiefs (→ 17 squads · 172 agentes · 1200 tasks); feedback visual de orquestração na statusline; trava de git reativada; paridade Codex de fachada para real; pente-fino de segurança.
