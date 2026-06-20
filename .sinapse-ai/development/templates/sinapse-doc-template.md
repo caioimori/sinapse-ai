@@ -65,7 +65,7 @@ _Last Updated: {{DATE}} | SINAPSE Framework Team_
 ```markdown
 # {{TITLE}}
 
-> **EN** | [PT](../pt/path/{{FILENAME}}) | [ES](../es/path/{{FILENAME}})
+> **EN** | [PT](../pt/path/{{FILENAME}})
 
 ---
 
@@ -169,7 +169,7 @@ _Last Updated: {{DATE}} | SINAPSE Framework Team_
 ```markdown
 # ADR-{{NUMBER}}: {{TITLE}}
 
-> **EN** | [PT](../../pt/architecture/adr/{{FILENAME}}) | [ES](../../es/architecture/adr/{{FILENAME}})
+> **EN** | [PT](../../pt/architecture/adr/{{FILENAME}})
 
 ---
 
@@ -224,7 +224,7 @@ _Decision made as part of {{STORY_ID}}._
 ```markdown
 # {{TITLE}} Guide
 
-> **EN** | [PT](../pt/guides/{{FILENAME}}) | [ES](../es/guides/{{FILENAME}})
+> **EN** | [PT](../pt/guides/{{FILENAME}})
 
 ---
 
@@ -311,7 +311,7 @@ _Last Updated: {{DATE}} | SINAPSE Framework Team_
 ```markdown
 # {{COMPONENT}} Reference
 
-> **EN** | [PT](../pt/reference/{{FILENAME}}) | [ES](../es/reference/{{FILENAME}})
+> **EN** | [PT](../pt/reference/{{FILENAME}})
 
 ---
 
@@ -396,7 +396,7 @@ docs/
 Always include the language navigation header:
 
 ```markdown
-> **EN** | [PT](../pt/path/file.md) | [ES](../es/path/file.md)
+> **EN** | [PT](../pt/path/file.md)
 ```
 
 ### Translation Notes
@@ -445,7 +445,7 @@ Always include the language navigation header:
 ```markdown
 # Creating Custom Agents
 
-> **EN** | [PT](../pt/guides/creating-agents.md) | [ES](../es/guides/creating-agents.md)
+> **EN** | [PT](../pt/guides/creating-agents.md)
 
 ---
 
