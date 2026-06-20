@@ -25,6 +25,7 @@ const SHARED = [
   'staged-secret-scan.js',
   'staged-sql-guard.js',
   'framework-guard.js',
+  'staged-protected-files-guard.js',
 ];
 
 describe('security guard parity — bin/utils vs .sinapse-ai/git-hooks/lib (E9)', () => {
