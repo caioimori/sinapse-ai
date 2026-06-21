@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-18T05:22:03.289Z'
-  entityCount: 810
+  lastUpdated: '2026-06-21T05:24:05.999Z'
+  entityCount: 811
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -83,8 +83,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ac9934829d3192a16ae0b47033f7194deb7ea2c8ad09076781de603724a27fe4
-      lastVerified: '2026-06-15T01:36:42.594Z'
+      checksum: sha256:7000bd11cbcfd8b96bbb800d74bdf68c869331692db04e7350d1f97ebca3839b
+      lastVerified: '2026-06-21T05:24:05.619Z'
     help:
       path: bin/commands/help.js
       layer: L1
@@ -105,8 +105,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:79b7f9531499f2ebb2efebff1e91434334064a78479397c3080af3380962cb4c
-      lastVerified: '2026-06-15T01:36:42.594Z'
+      checksum: sha256:d959fe749f9e0239d4295a6ec7cfda116a3e3438b101ecd3c348a13acef968bc
+      lastVerified: '2026-06-21T05:24:05.619Z'
     ideate:
       path: bin/commands/ideate.js
       layer: L1
@@ -164,8 +164,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:8464af9d0c6e4f576ad8ef9e8dce8af9d00ba8e8eb0ea989d2e49cb72e96d914
-      lastVerified: '2026-06-16T06:09:14.626Z'
+      checksum: sha256:e543d49945bc13d49cfe0d4edced86866a84aff7725a77bc4b946dfbde10c3ee
+      lastVerified: '2026-06-21T05:24:05.620Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -212,8 +212,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:a40e4f98aa319d5e8c9f94d37448fe95f67598848693a5f6db4158f675e8fdbe
-      lastVerified: '2026-06-16T17:13:38.678Z'
+      checksum: sha256:82ec537932c7b6c7e46c294ac4396c988bea43583a1f1f7a1886d2b13518dd55
+      lastVerified: '2026-06-21T05:24:05.621Z'
     uninstall:
       path: bin/commands/uninstall.js
       layer: L1
@@ -491,8 +491,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:f003104e0458a62c67413fe960a7d19cae8ea00547f3eb9fb898d0f5501e7345
-      lastVerified: '2026-06-15T01:36:42.612Z'
+      checksum: sha256:c1261659dd7f00f462a53696af866cb5b5a8bef12bab4f27a77725876adb7eec
+      lastVerified: '2026-06-21T05:24:05.624Z'
     env-config:
       path: bin/modules/env-config.js
       layer: L1
@@ -547,8 +547,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:0bcdaf5ef929dfae38bf2f080ab6fe8bef69081ab491239e264cf15f917895ee
-      lastVerified: '2026-06-15T01:36:42.615Z'
+      checksum: sha256:415f472e5ff5d61950e00e2bc9023c94476c49099fc8faaeed44ea309b77ccae
+      lastVerified: '2026-06-21T05:24:05.625Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1
@@ -607,8 +607,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:b64473255cf407925dd805ecfc1e5acb715d131e66e5fa7692261f48f1008c06
-      lastVerified: '2026-06-16T17:13:38.689Z'
+      checksum: sha256:0ae515465db7d650096643f63fd0c26cbcf6de6b47eefe81cda275aa3c3a0002
+      lastVerified: '2026-06-21T05:24:05.626Z'
     sinapse-minimal:
       path: bin/sinapse-minimal.js
       layer: L1
@@ -653,8 +653,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:2687d270771ed2c9ba1df903ca4585218b31f83d167208e589c6f379d17b90ee
-      lastVerified: '2026-06-16T06:09:14.632Z'
+      checksum: sha256:01cae0d9971b1acaec7e62025570cc5a629fe60e91d226fde6818bf359913c78
+      lastVerified: '2026-06-21T05:24:05.627Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
@@ -731,8 +731,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:bb4244dcccedbe80018f0ffc7c178f0af5e06d0647a952023b00d6d75abd5398
-      lastVerified: '2026-06-16T19:50:23.592Z'
+      checksum: sha256:4dbea5a072425ac0c23664e80a6bbb009a54ab0be4a2df76747d6bc99a1c39eb
+      lastVerified: '2026-06-21T05:24:05.628Z'
     git-branch-guard:
       path: bin/utils/git-branch-guard.js
       layer: L1
@@ -831,8 +831,29 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:6df52276cf16bcbca776e11dc4f90ca2594c5ed1f22dc1dd37a44262eccaaf54
-      lastVerified: '2026-06-18T04:25:38.106Z'
+      checksum: sha256:f221f41844640d26dca6c7ad2be1e833f5534ab0a9f343bf9c53d4c11da1265c
+      lastVerified: '2026-06-21T05:24:05.630Z'
+    staged-protected-files-guard:
+      path: bin/utils/staged-protected-files-guard.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\utils\staged-protected-files-guard.js
+      keywords:
+        - staged
+        - protected
+        - files
+        - guard
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:870c6bee1f9f40b9f7c13ad9fbb36e0279b37f19dc7d4da59708cffdfd8cb383
+      lastVerified: '2026-06-21T05:24:05.631Z'
     staged-secret-scan:
       path: bin/utils/staged-secret-scan.js
       layer: L1
@@ -4231,6 +4252,7 @@ entities:
       usedBy:
         - developer
         - product-lead
+        - quality-gate
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -7585,6 +7607,7 @@ entities:
       dependencies:
         - config-cache
         - performance-tracker
+        - squad-agent-resolver
         - config-resolver
       externalDeps: []
       plannedDeps: []
@@ -7593,8 +7616,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:4ca93e6babd60d872232445bc87fd87cf450202c93a2d087135786fb19656922
-      lastVerified: '2026-06-15T00:26:26.331Z'
+      checksum: sha256:e27095c228ce32d8b5a6f45c937a02242de97dd6ea42a0e8a52651d15962e31c
+      lastVerified: '2026-06-21T05:24:05.776Z'
     agent-exit-hooks:
       path: .sinapse-ai/development/scripts/agent-exit-hooks.js
       layer: L2
@@ -8042,8 +8065,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:26f61c19a35c9e49c0ae8319d95f2f6ce957d16297d4c50f2e61f08193fb1e40
-      lastVerified: '2026-06-15T00:26:26.337Z'
+      checksum: sha256:293b89379a558837cfab65893130b638d6207079cde2d5252578089bb25732be
+      lastVerified: '2026-06-21T05:24:05.781Z'
     greeting-config-cli:
       path: .sinapse-ai/development/scripts/greeting-config-cli.js
       layer: L2
@@ -9079,8 +9102,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:8581d4bcfb0b191940c645ae7198e276820c134372cfc7193b2ed7a3d8b5b7ba
-      lastVerified: '2026-06-15T00:26:26.366Z'
+      checksum: sha256:c7464066f3862b251e266c28ebd2945dc2d958997c020f5ce4121fb7cc2ca423
+      lastVerified: '2026-06-21T05:24:05.798Z'
     devops-helper:
       path: .sinapse-ai/core/code-intel/helpers/devops-helper.js
       layer: L1
@@ -9101,8 +9124,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f36a4859a74de9158d0a17507ff81f23da7a7871f690299b77436f7b5b49ab87
-      lastVerified: '2026-06-15T00:26:26.366Z'
+      checksum: sha256:e8017237fb2db8b49ebd02a9114a93549fbf0683044d7ad1a8632106188495a9
+      lastVerified: '2026-06-21T05:24:05.798Z'
     planning-helper:
       path: .sinapse-ai/core/code-intel/helpers/planning-helper.js
       layer: L1
@@ -9126,8 +9149,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:1544575d64fc29f53922f98ad1592f69c601154257110c481c7e99e60633421c
-      lastVerified: '2026-06-15T00:26:26.367Z'
+      checksum: sha256:9b37aa02b3b0a3cabb53e2c0e53f05e1db65490d1ac403088aefec977fd025f8
+      lastVerified: '2026-06-21T05:24:05.799Z'
     qa-helper:
       path: .sinapse-ai/core/code-intel/helpers/qa-helper.js
       layer: L1
@@ -9146,8 +9169,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:8e389a1ebb1ee1f9f9e22d1d74f1f86228b1494a832131f4b12d1eb553487e72
-      lastVerified: '2026-06-15T00:26:26.367Z'
+      checksum: sha256:852fa5c36260f7e89fd15dd5e4702f6e2eaae88bb4d8615f6a82b30ffdc88310
+      lastVerified: '2026-06-21T05:24:05.799Z'
     story-helper:
       path: .sinapse-ai/core/code-intel/helpers/story-helper.js
       layer: L1
@@ -9446,8 +9469,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:cd925eeeffe3b3af1c4df2a6f04518c920797c57033842e3ba5a37edaea96919
-      lastVerified: '2026-06-15T00:26:26.370Z'
+      checksum: sha256:bf453cb8203e0752bd41a25449b3883bb548e746edfb015c7969951a16b1f62a
+      lastVerified: '2026-06-21T05:24:05.802Z'
     agent-memory:
       path: .sinapse-ai/core/doctor/checks/agent-memory.js
       layer: L1
@@ -9610,8 +9633,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:353441b03a572d27e03f626ae31336aa526c3dcec780ca89433c6fabec05a723
-      lastVerified: '2026-06-18T04:42:18.034Z'
+      checksum: sha256:1d20455c435ccb0d9eefb3ad8fbe0edf4bfa8e9ba4e1b7c10e837ac9063c3479
+      lastVerified: '2026-06-21T05:24:05.803Z'
     graph-dashboard:
       path: .sinapse-ai/core/doctor/checks/graph-dashboard.js
       layer: L1
@@ -9726,8 +9749,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:b39b767646a65a387752071347fc4316cf5f63f3357915febf7079436e3e89af
-      lastVerified: '2026-06-15T00:26:26.373Z'
+      checksum: sha256:c523e6917373ae0080f98d81c52512c34ca11904339dd09656375bfff4a9075b
+      lastVerified: '2026-06-21T05:24:05.805Z'
     rules-files:
       path: .sinapse-ai/core/doctor/checks/rules-files.js
       layer: L1
@@ -9746,8 +9769,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:16205df27fd9c8d73de42593429afbe6b2c4d70cca4bdde3a51b704f1d292e63
-      lastVerified: '2026-06-15T00:26:26.374Z'
+      checksum: sha256:773572637ba2758e6ea60910d86e9973bd261020b33b44da93f946f852715e91
+      lastVerified: '2026-06-21T05:24:05.805Z'
     settings-json:
       path: .sinapse-ai/core/doctor/checks/settings-json.js
       layer: L1
@@ -10405,8 +10428,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:127e41c209b74522ea47d73b25abe6151b6a91983a9adc8134374e897940b692
-      lastVerified: '2026-06-15T00:26:26.382Z'
+      checksum: sha256:491d199284d20ac61457632b2cd6890eaa2d18dab2f6d1577674f0854219f8bd
+      lastVerified: '2026-06-21T05:24:05.813Z'
     code-intel-source:
       path: .sinapse-ai/core/graph-dashboard/data-sources/code-intel-source.js
       layer: L1
@@ -10428,8 +10451,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:ff8592e1d1b985b103f53e4e31cd10c3640524ef43c4a0689a44201754284b92
-      lastVerified: '2026-06-15T00:26:26.382Z'
+      checksum: sha256:90957f10067d26a41538574f4cf7397cef7bcf87c080fe27b96d91c244306f0c
+      lastVerified: '2026-06-21T05:24:05.813Z'
     metrics-source:
       path: .sinapse-ai/core/graph-dashboard/data-sources/metrics-source.js
       layer: L1
@@ -11443,8 +11466,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:eb9119085bfeb5eee344a8949b54f8375f85c50ee38818bd4b9aab299ad871e9
-      lastVerified: '2026-06-15T00:26:26.393Z'
+      checksum: sha256:a8f1efdf143c5bb91e8d2e983d820ddb0367b1404c86bbc2927fb136c9afd4f3
+      lastVerified: '2026-06-21T05:24:05.828Z'
     circuit-breaker:
       path: .sinapse-ai/core/ids/circuit-breaker.js
       layer: L1
@@ -11668,8 +11691,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:d05c0bc4766f5595cd4bd60d3d8d5cc4a6d98e041d8dd84bde795e8531785391
-      lastVerified: '2026-06-15T00:26:26.398Z'
+      checksum: sha256:0c8916f70a410a6aa08f789c58cf84dd4ba60845964a8454b074d367c03770a4
+      lastVerified: '2026-06-21T05:24:05.829Z'
     registry-healer:
       path: .sinapse-ai/core/ids/registry-healer.js
       layer: L1
@@ -12990,8 +13013,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4c9a2e686637a1050b9ffce349ca72957fcaa971d0c1f4a0eb4321d3c7159065
-      lastVerified: '2026-06-15T00:26:26.419Z'
+      checksum: sha256:b0e65b85380265d1db589d7e48e98e30b96f3da9af1a082f04aa794d9d412838
+      lastVerified: '2026-06-21T05:24:05.840Z'
     squad-agent-resolver:
       path: .sinapse-ai/core/registry/squad-agent-resolver.js
       layer: L1
@@ -13002,6 +13025,7 @@ entities:
         - agent
         - resolver
       usedBy:
+        - agent-config-loader
         - agents
         - subagent-dispatcher
       dependencies: []
@@ -13012,8 +13036,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:04f7a4835f4a7d4430e2d495eb8e47af1d3f86158cb9de50797c85c7e4889d49
-      lastVerified: '2026-06-15T00:26:26.419Z'
+      checksum: sha256:74c4a1fafd2f60eb9db38e9fd82a03b74d47d4e563ccb754fe00824f519c84f8
+      lastVerified: '2026-06-21T05:24:05.840Z'
     validate-registry:
       path: .sinapse-ai/core/registry/validate-registry.js
       layer: L1
@@ -13635,8 +13659,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a62e5743c17e25957193e5a47e927d426a4353e288f3c3e5c72cf0442079f54c
-      lastVerified: '2026-06-15T00:26:26.425Z'
+      checksum: sha256:57a514c7e03913d466d2058400229a8ffb4589e6ad7dcc03cbacd93a12df2ac6
+      lastVerified: '2026-06-21T05:24:05.843Z'
     memory-bridge:
       path: .sinapse-ai/core/synapse/memory/memory-bridge.js
       layer: L1
@@ -14270,8 +14294,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:710906315093f603a8744f5e9733bf8bdbd2641519a7d8181016457a474bb511
-      lastVerified: '2026-06-16T06:09:14.826Z'
+      checksum: sha256:81144f100a7ea8ef339a51691d32e7c480e24fef6ab4c3276e927568ba6ba0e4
+      lastVerified: '2026-06-21T05:24:05.860Z'
     product-lead:
       path: .sinapse-ai/development/agents/product-lead.md
       layer: L2
@@ -14355,6 +14379,7 @@ entities:
       dependencies:
         - qa-create-fix-request
         - qa-generate-tests
+        - po-manage-story-backlog
         - qa-nfr-assess
         - qa-gate
         - qa-review-build
@@ -14381,15 +14406,14 @@ entities:
       externalDeps:
         - coderabbit
         - git
-      plannedDeps:
-        - manage-story-backlog
+      plannedDeps: []
       lifecycle: experimental
       adaptability:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:e88d8f73c9d493be149eb0ca7b27d398c5a4039298499140bfa6ff1657a29a69
-      lastVerified: '2026-06-15T00:26:26.452Z'
+      checksum: sha256:bc99385b3aee34ed5234287f37b53dd57c1f59b7f4cf1bd401447da4562117d4
+      lastVerified: '2026-06-21T05:24:05.864Z'
     snps-orqx:
       path: .sinapse-ai/development/agents/snps-orqx.md
       layer: L2
@@ -14411,8 +14435,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:744ba24a08e6d294d93dff577d14185fa02b589f298049a734001f3b504daf82
-      lastVerified: '2026-06-18T05:22:03.153Z'
+      checksum: sha256:ac7f931f107fe2adc020ef26f8ea0e1aba57dd0ba3d02bbff3b92e3ca6466368
+      lastVerified: '2026-06-21T05:24:05.866Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
@@ -17526,8 +17550,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:f2717bb95c65e2ce061c311a44853ae209c1d10034696a38cffd3bc08bd061c6
-      lastVerified: '2026-06-15T00:26:26.519Z'
+      checksum: sha256:1fb818950cfa60c572cdc63b5f822ffe9b0a11d351d136f2373bffb24eef99e8
+      lastVerified: '2026-06-21T05:24:05.941Z'
     validate-claude-integration:
       path: .sinapse-ai/infrastructure/scripts/validate-claude-integration.js
       layer: L2

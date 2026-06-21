@@ -302,8 +302,12 @@ ideSync:
       enabled: true
       path: .claude/commands/SINAPSE/agents
       format: full-markdown-yaml
+    # Post-E8: .codex agents are thin runtime pointers owned by the canonical
+    # Codex sync (sync-codex-local-first.js) + resolve-codex-agent.js. ide-sync
+    # must NOT write full agent bodies here or it clobbers those pointers and
+    # breaks validate:codex-sync / validate:codex-integration. Keep disabled.
     codex:
-      enabled: true
+      enabled: false
       path: .codex/agents
       format: full-markdown-yaml
   redirects: {}

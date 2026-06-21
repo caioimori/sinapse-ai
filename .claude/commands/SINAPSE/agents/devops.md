@@ -304,7 +304,6 @@ dependencies:
   utils:
     - branch-manager # Manages git branch operations and workflows
     - repository-detector # Detect repository context dynamically
-    - gitignore-manager # Manage gitignore rules per mode
     - version-tracker # Track version history and semantic versioning
     - git-wrapper # Abstracts git command execution for consistency
   scripts:
