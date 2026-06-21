@@ -697,6 +697,10 @@ framework_compatibility:
       - "Sinapse own domain expertise: branding, content, copy, growth, finance, etc."
       - "No overlap — clear boundary between dev workflow and domain expertise"
       - "@sinapse-orqx can invoke any squad directly via /{prefix}:agents:{orchestrator}"
+
+autoClaude:
+  version: '3.0'
+  migratedAt: '2026-06-21T05:17:50.359Z'
 ```
 
 ---
