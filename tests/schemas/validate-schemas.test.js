@@ -19,9 +19,19 @@
  */
 
 const { execFileSync } = require('child_process');
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
+
+// Artifact validation (layer 3) scans docs/stories|epics|prd, which are
+// gitignored and therefore empty in CI but commonly populated on a developer's
+// machine. To keep this gate hermetic — asserting schema soundness, not the
+// state of someone's local working tree — point the validator at a throwaway
+// empty directory via its built-in `--artifacts=<dir>` flag. Behaviour in CI is
+// identical (artifacts were already a clean no-op there).
+let EMPTY_ARTIFACTS_DIR;
 
 function runNode(script, args = []) {
   try {
@@ -41,8 +51,18 @@ function runNode(script, args = []) {
 }
 
 describe('schema validation gate', () => {
+  beforeAll(() => {
+    EMPTY_ARTIFACTS_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-schemas-'));
+  });
+
+  afterAll(() => {
+    if (EMPTY_ARTIFACTS_DIR) {
+      fs.rmSync(EMPTY_ARTIFACTS_DIR, { recursive: true, force: true });
+    }
+  });
+
   test('meta-validation: every *.schema.json compiles, known kinds covered (exit 0)', () => {
-    const r = runNode('validate-schemas.js');
+    const r = runNode('validate-schemas.js', [`--artifacts=${EMPTY_ARTIFACTS_DIR}`]);
     expect(r.stdout).toMatch(/all schemas compile, all known kinds covered, all artifacts valid/);
     expect(r.stdout).toMatch(/schemas checked\s*:/);
     expect(r.stdout).toMatch(/kinds covered\s*:/);
@@ -50,7 +70,7 @@ describe('schema validation gate', () => {
   }, 30000);
 
   test('artifacts are a clean no-op when absent (skipped, not a failure)', () => {
-    const r = runNode('validate-schemas.js', ['--quiet']);
+    const r = runNode('validate-schemas.js', ['--quiet', `--artifacts=${EMPTY_ARTIFACTS_DIR}`]);
     expect(r.stdout).toMatch(/artifacts\s*:\s*0 artifacts found \(skipped\)/);
     expect(r.code).toBe(0);
   }, 30000);
