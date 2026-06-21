@@ -38,3 +38,39 @@
 <!-- Patterns no longer relevant — kept for history -->
 <!-- Format: - ~~{pattern}~~ | Archived: {YYYY-MM-DD} | Reason: {reason} -->
 
+## Municao: Engenharia de Software (kit Fase 4)
+
+Fonte completa: `engenharia-software/fase-4-agents/KIT-product-sprint.md` (repo github caioimori/engenharia-de-software). Principio-mestre: o artefato (story/board) e meio; o fim e entendimento compartilhado + comportamento medido. Lote pequeno e lei nuclear.
+
+### Principios nao-negociaveis
+- **Outcome over output.** Todo "so that" e resultado mensuravel, nunca tarefa/feature; roadmap = problemas/outcomes (Perri *Escaping the Build Trap* / Cagan *Inspired*).
+- **Slice vertical por outcome, walking skeleton primeiro.** End-to-end fino ANTES de feature horizontal; quebra com SPIDR (Spike/Path/Interface/Data/Rules) (Patton *User Story Mapping* / Cohn).
+- **Requisito = exemplo = teste.** Key examples concretos com contra-exemplo e edge case; sem fit criterion quantificado e opiniao (Adzic *Specification by Example* / Robertson-Volere).
+- **Story passa INVEST + 3C.** 3C = Card/Conversation/Confirmation (estrutura); INVEST = qualidade (Wake / Jeffries).
+- **Limitar WIP, nao maximizar ocupacao.** WIP = Throughput × Cycle Time (Lei de Little); lead time ∝ 1/(1−ρ); pull, nao push (Reinertsen / Anderson *Kanban*).
+- **MVP e experimento, nao versao pequena.** Cada fatia = giro Build-Measure-Learn com hipotese + actionable metric + pivot-or-persevere (Ries *Lean Startup*).
+- **Forecast probabilistico, nao promessa.** "X% ate Y" via throughput/Monte Carlo; velocity NUNCA como meta (Vacanti / Goodhart).
+- **Cerimonia calibrada por risco (Cynefin + Boehm-Turner).** Bug fix = YOLO; epic multi-story = pipeline completo (Snowden / Boehm-Turner).
+- **DoD como jidoka (stop-the-line).** Defeito para a linha; status nao avanca sem gate verde (Poppendieck / DevOps Handbook).
+- **Discovery e habito, nao fase.** OST vivo: >=3 solucoes por oportunidade, testa a assumption mais arriscada primeiro (Torres *Continuous Discovery Habits*).
+
+### Gates verificaveis (antes de Done)
+- [ ] "so that" e outcome mensuravel, nao verbo de implementacao
+- [ ] Fit criterion presente e quantificado (NFR sem numero = FAIL)
+- [ ] >=1 key example Given/When/Then + >=1 contra-exemplo/edge case
+- [ ] INVEST completo (item a item)
+- [ ] 3C presentes (Card + Conversation + Confirmation)
+- [ ] Rastreavel feature -> story -> exemplo -> teste
+- [ ] Cabe num lote pequeno (Small); senao dispara split via SPIDR
+- [ ] Fatiada por outcome end-to-end (rejeita slice so backend/so frontend)
+- [ ] Walking skeleton existe e veio antes de feature horizontal
+- [ ] MVP declarado como experimento (hipotese + metric + pivot)
+- [ ] WIP respeitado: max 1 InProgress por executor; PR/diff > 400 linhas = quebrar
+- [ ] Forecast em formato probabilistico ("X% ate Y"); data pontual = FAIL
+- [ ] Velocity NAO usada como meta (nem individual)
+- [ ] Complexidade classificada (Cynefin) e cerimonia calibrada (Boehm-Turner)
+- [ ] WSJF registrado para sequenciamento (CoD ÷ Job Size); ordem por HiPPO = FAIL
+
+### Loop operacional
+Classificar (Cynefin) -> descobrir (OST) -> mapear (Story Map) -> fatiar vertical (SPIDR) -> refinar (Example Mapping <30min) -> Gate A+B -> puxar sob WIP -> implementar lote pequeno (DoD jidoka) -> medir -> aprender (pivot/persevere) -> forecast Monte Carlo -> retro (1-3 kaizen + atualiza OST/CFD). Diagrama completo na secao "Loop operacional" do kit.
+

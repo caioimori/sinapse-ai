@@ -37,3 +37,39 @@
 <!-- Patterns no longer relevant — kept for history -->
 <!-- Format: - ~~{pattern}~~ | Archived: {YYYY-MM-DD} | Reason: {reason} -->
 
+## Municao: Engenharia de Software (kit Fase 4)
+
+Fonte completa: kit `KIT-product-sprint.md` em `engenharia-software/fase-4-agents/` (repo github caioimori/engenharia-de-software). Carregar pra detalhe; aqui so o essencial.
+
+### Principios nao-negociaveis
+- **Outcome over output** — todo "so that" e resultado mensuravel, nunca tarefa/feature; roadmap = problemas/outcomes (Perri *Escaping the Build Trap* / Cagan *Inspired*).
+- **Lote pequeno e lei nuclear** — reduzir o lote corta custo, risco, variabilidade e lead time de uma vez (Reinertsen *Product Development Flow*).
+- **Slice vertical por outcome** — walking skeleton end-to-end ANTES de qualquer feature horizontal; quebrar com SPIDR (Patton *User Story Mapping* / Cohn).
+- **Requisito = exemplo = teste** — criterio de aceite sao key examples concretos com contra-exemplo e edge case (Adzic *Specification by Example* / Example Mapping).
+- **Sem fit criterion, e opiniao** — todo requisito (esp. NFR) tem medida objetiva quantificada (Robertson/Volere).
+- **Story passa INVEST + 3C** — 3C = Card/Conversation/Confirmation (estrutura); INVEST = qualidade (Jeffries / Wake).
+- **Limitar WIP, nao ocupacao** — WIP = Throughput x Cycle Time (Lei de Little); lead time ∝ 1/(1−ρ), 100% ocupacao explode (Reinertsen / Vacanti).
+- **MVP = experimento** — hipotese + actionable metric + pivot-or-persevere; cada fatia = giro de Build-Measure-Learn (Ries *Lean Startup*).
+- **Forecast probabilistico** — "X% de chance ate Y" via throughput/Monte Carlo; velocity NUNCA como meta, nem individual (Vacanti / Goodhart).
+- **Cerimonia calibrada por risco** — Cynefin + Boehm-Turner (Size/Criticality/Dynamism/Personnel/Culture): bug fix = YOLO, epic = pipeline.
+
+### Gates verificaveis (antes de Done)
+- [ ] "so that" e outcome mensuravel, nao verbo de implementacao
+- [ ] fit criterion presente e quantificado (NFR sem numero = FAIL)
+- [ ] >=1 key example Given/When/Then + >=1 contra-exemplo/edge case
+- [ ] INVEST completo (cada item marcado)
+- [ ] 3C presentes (Card + Conversation registrada + Confirmation)
+- [ ] rastreavel feature->story->exemplo->teste
+- [ ] cabe num lote pequeno (Small); senao split por SPIDR
+- [ ] fatiada vertical por outcome (rejeita "so backend"/"so frontend")
+- [ ] walking skeleton existe e veio primeiro
+- [ ] WIP por coluna respeitado (max 1 InProgress por executor)
+- [ ] PR/diff > 400 linhas dispara split
+- [ ] 5 premissas da Lei de Little checadas antes de confiar em cycle time/throughput
+- [ ] forecast em formato probabilistico (data pontual-compromisso = FAIL)
+- [ ] DoD por coluna verde (jidoka/stop-the-line) antes de avancar status
+- [ ] WSJF (`CoD ÷ Job Size`) registrado pra sequenciamento; ordem por HiPPO = FAIL
+
+### Loop operacional
+Classificar (Cynefin) -> descobrir (OST, >=3 solucoes, testar assumption mais arriscada) -> mapear (Story Map) -> fatiar vertical (SPIDR) -> refinar (Example Mapping <30min) -> Gate A+B (Ready) -> puxar sob WIP -> implementar lote pequeno -> DoD jidoka -> medir actionable metric -> pivot-or-persevere -> forecast Monte Carlo -> retro (kaizen + OST + CFD). Diagrama mermaid completo na secao "## Loop operacional" do kit.
+

@@ -37,3 +37,38 @@
 ## Archived
 <!-- Patterns no longer relevant — kept for history -->
 <!-- Format: - ~~{pattern}~~ | Archived: {YYYY-MM-DD} | Reason: {reason} -->
+
+## Municao: Engenharia de Software (kit Fase 4)
+
+Fonte completa: `engenharia-software/fase-4-agents/` (KIT-architect, KIT-orquestrador, KIT-fundamentos-transversal) — repo github `caioimori/engenharia-de-software`. Esta secao e o destilado; consulte o kit pro detalhe.
+
+### Principios nao-negociaveis
+- **Tudo e trade-off (First Law).** Nunca "o melhor X"; sempre "X paga seu custo NESTE contexto porque..." (Richards & Ford, *Fundamentals of Software Architecture*).
+- **ASRs dirigem a estrutura, nao moda.** Top 3-7 atributos de qualidade, cada um como cenario mensuravel com SLO numerico (Bass/Clements/Kazman, SEI).
+- **Fronteira e linguistica (bounded context), nunca camada tecnica.** Mudanca de linguagem = boundary; duplicata de evento e pista, nao erro (Evans + Brandolini/EventStorming).
+- **Dependency Rule: dominio puro no nucleo;** DB/UI/framework/MCP/LLM sao detalhes na borda (R.C. Martin, *Clean Architecture*).
+- **Monolito modular primeiro;** distribua so o quantum com deploy/escala/time independentes + DevOps maduro — senao = distributed monolith (Newman, *Building Microservices*).
+- **Eventual por padrao em distribuido; ACID dentro do bounded context.** Outbox nunca dual-write; saga + compensacao + idempotencia; nunca 2PC default (*The Hard Parts*).
+- **Toda integracao externa:** timeout + circuit breaker + fallback; ACL valida output de LLM/API (Nygard, *Release It!*).
+- **ADR imutavel com consequencias NEGATIVAS + opcoes rejeitadas;** supersede, nunca edita (Nygard / MADR 4.0.0).
+- **Atributo critico vira fitness function no CI** (rules live in code) — Ford/Parsons/Kua, *Building Evolutionary Architectures*.
+- **Conway como design ativo:** topologia ANTES do enxame; carga cognitiva e o limite de fronteira; estrela nao malha (n(n-1)/2 persiste em tokens) — Conway + Skelton & Pais, *Team Topologies*.
+- **Agente = bounded context = interpretador eval/apply** sob leis de complexidade; delegue a algoritmo deterministico o que e exato e barato (Evans DDD Europe 2025 + SICP/CLRS).
+
+### Gates verificaveis (antes de Done)
+- [ ] Cynefin classificado (campo `complexity:` no artefato de decisao).
+- [ ] Cada boundary mapeia a um bounded context nomeado; zero fronteira por camada tecnica.
+- [ ] Monolito x distribuido justificado por ADR (quantum + DevOps maduro) ou default monolito.
+- [ ] ADR completo: Context, Options (incl. rejeitadas), Decision, Consequences com >=1 "Ruim:".
+- [ ] Cada ASR com `response measure`/SLO numerico (regex de unidade: ms, %, p\d+, req/s).
+- [ ] Dependency Rule verde no arch-linter (ArchUnit/dependency-cruiser); sem ciclos (`madge --circular` = 0).
+- [ ] 1 transacao = 1 agregado; refs entre agregados por ID.
+- [ ] Domain Events em PascalCase de negocio; zero "EntityUpdated"/"XxxChanged".
+- [ ] ACL presente em toda chamada externa (API/MCP/LLM); domain primitives validados por construcao.
+- [ ] Toda chamada externa com timeout + circuit breaker + fallback; write+publish via outbox; handlers idempotentes.
+- [ ] Fitness functions poucas, de alto sinal, verdes no CI; PR que muda boundary inclui ADR novo.
+- [ ] Fio de rastreabilidade intacto: outcome -> requisito(+fit criterion) -> ASR -> bounded context -> estilo -> ADR -> fitness function -> SLO.
+- [ ] (squad) Sem overlap de escopo entre agents; nao-stream-aligned < ~15%; handoff = contrato versionado valido; zero codinome/@agent/path interno no texto user-facing.
+
+### Loop operacional
+Loop mestre: Cynefin -> Entender(outcome+ASR) -> Modelar(bounded context) -> Escolher(estilo por trade-off) -> Avaliar(sensitivity/tradeoff points) -> Registrar(ADR) -> Proteger(fitness function) -> Validar(CI); cada gate bloqueia, loop evolutivo reentra quando o negocio muda. Detalhe + diagramas mermaid (L1-L7 e Loop mestre): `LOOPS-design-arquitetura-diagramas.md` e, pra squads, `LOOPS-onda-7-processo-pessoas-diagramas.md` (B1-B6).

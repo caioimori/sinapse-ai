@@ -15,3 +15,5 @@ These are the canonical locations — agents should read their memory on activat
 @import .sinapse-ai/development/agents/devops/MEMORY.md
 @import .sinapse-ai/development/agents/project-lead/MEMORY.md
 @import .sinapse-ai/development/agents/product-lead/MEMORY.md
+@import .sinapse-ai/development/agents/data-engineer/MEMORY.md
+@import .sinapse-ai/development/agents/sprint-lead/MEMORY.md
