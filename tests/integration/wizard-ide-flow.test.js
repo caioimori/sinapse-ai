@@ -27,7 +27,7 @@ describe('Wizard IDE Flow Integration', () => {
     await fs.remove(testDir);
   });
 
-  describe.skip('Full flow: select -> generate -> verify', () => {
+  describe('Full flow: select -> generate -> verify', () => {
     it('should complete flow for single IDE (Claude Code)', async () => {
       const wizardState = {
         projectType: 'greenfield',
@@ -90,7 +90,7 @@ describe('Wizard IDE Flow Integration', () => {
     });
   });
 
-  describe.skip('Directory structure', () => {
+  describe('Directory structure', () => {
     it('should create directories for IDEs that need them', async () => {
       const wizardState = {
         projectType: 'greenfield',
@@ -109,7 +109,7 @@ describe('Wizard IDE Flow Integration', () => {
     });
   });
 
-  describe.skip('Content and formatting', () => {
+  describe('Content and formatting', () => {
     it('should generate valid content from templates', async () => {
       const wizardState = {
         projectType: 'greenfield',

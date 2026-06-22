@@ -78,6 +78,8 @@ User briefing → @sprint-lead *draft → @product-lead *validate → @developer
 
 **Gate:** `dev-develop-story.md` - BLOCK se não houver story válida com status >= Ready
 
+> **Enforcement (honesto):** este gate é **client-side / processo (advisory)** — aplicado por hook local e pela disciplina dos agentes, não por checagem server-side no CI. É contornável (`--no-verify`, edição direta) e não bloqueia o merge no GitHub. Exceção formal: trabalho de governança do framework (@sinapse-orqx) opera acima da camada de story.
+
 **Rule file:** `.claude/rules/documentation-first.md`
 
 ---
@@ -108,7 +110,7 @@ Qualidade não é negociável. Todo código passa por múltiplos gates antes de 
 - MUST: `npm run lint` passa sem erros
 - MUST: `npm run typecheck` passa sem erros
 - MUST: `npm test` passa sem falhas
-- MUST: `npm run build` completa com sucesso
+- MUST: `npm run build` completa com sucesso **quando o projeto define um passo de build** (o framework SINAPSE é um CLI Node sem etapa de build — não há script `build`; `typecheck` cobre a verificação estática)
 - MUST: CodeRabbit não reporta issues CRITICAL
 - MUST: Story status é "Done" ou "Ready for Review"
 - SHOULD: Cobertura de testes não diminui
@@ -242,6 +244,8 @@ Usuários são product builders, não especialistas em git. Agentes DEVEM gerenc
 
 **Gate:** Hook `enforce-git-push-authority.sh` + branch protection no GitHub
 
+> **Enforcement (honesto):** o bloqueio *hard* é a **branch protection do GitHub** (server-side) — impede push direto em `main`, exigindo PR. O hook é **client-side (advisory)**: pode ser contornado (`--no-verify`, outro clone) e serve como guarda de conveniência. A exclusividade de *quem* abre PR/release (@devops) é convenção de processo, não bloqueio técnico.
+
 **Rule file:** `.claude/rules/safe-collaboration.md`
 
 ---
@@ -283,7 +287,7 @@ Todo projeto que manipula dados de usuarios DEVE seguir praticas de seguranca ri
 
 **Regras — Repositorio:**
 - MUST: Repositorios com codigo de producao DEVEM ser privados por padrao
-- MUST: Branch protection DEVE estar ativa em main (PR + approval)
+- MUST: Branch protection DEVE estar ativa em main (PR obrigatório). **Approval obrigatório em projetos colaborativos; no modo solo-maintainer o approval é opcional** (`required_approving_review_count: 0`) — o PR continua obrigatório e os status checks continuam bloqueantes (ver `safe-collaboration.md`, "Solo projects")
 - MUST: GitHub Secret Scanning DEVE estar habilitado
 - MUST: Dependabot DEVE estar configurado para alertas de seguranca
 - MUST: CODEOWNERS DEVE proteger arquivos criticos
