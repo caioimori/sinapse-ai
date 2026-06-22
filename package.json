@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "1.9.0",
+  "version": "1.12.2",
   "description": "SINAPSE AI: Framework de orquestracao de IA — 17 squads, 172 agentes especializados",
   "bin": {
     "sinapse": "bin/sinapse.js",
@@ -72,6 +72,9 @@
     "!**/tests/**",
     "!**/*.test.js",
     "!**/*.spec.js",
+    "!**/dist/**",
+    "!**/*.map",
+    "!**/*.zip",
     ".sinapse-ai/development/templates/**"
   ],
   "scripts": {
@@ -133,6 +136,7 @@
     "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
     "validate:squad-yaml": "node scripts/sync-squad-yaml-components.js --check",
     "validate:story-meta": "node scripts/validate-story-meta.js",
+    "validate:changelog": "node scripts/validate-changelog-tags.js",
     "validate:squad-orqx": "node scripts/validate-squad-orqx.js",
     "validate:release-readiness": "node scripts/release-readiness.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",

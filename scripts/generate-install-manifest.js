@@ -76,6 +76,12 @@ const EXCLUDE_PATTERNS = [
   /^docs\/template-syntax\.md$/,
   /^docs\/troubleshooting-guide\.md$/,
   /^docs\/session-update-pattern\.md$/,
+  // Agent memory files are L3-mutable (user/agent-edited per project, see
+  // CLAUDE.md L1-L4 boundary). Their hashes churn the committed manifest on
+  // every memory change with no drift-tracking value — the brownfield upgrader
+  // must never overwrite them anyway. Anchored to the canonical nested path so
+  // we don't accidentally exclude anything else named MEMORY.md.
+  /(^|\/)development\/agents\/[^/]+\/MEMORY\.md$/,
   // Gitignored generated files
   /data\/registry-update-log\.jsonl$/,
   /data\/registry-healing-log\.jsonl$/,

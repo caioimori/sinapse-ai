@@ -36,3 +36,16 @@ docs/chrome-brain-*.md
 # node_modules — the nested copy is a local dev artifact only.
 # ──────────────────────────────────────────────────────────────────────────
 **/node_modules/**
+
+# ──────────────────────────────────────────────────────────────────────────
+# Build artifacts & archives — NEVER ship. The Vite-built health dashboard was
+# dragging its `dist/` (a ~595 kB bundle + a ~2.5 MB `.js.map` sourcemap) into
+# the tarball, plus two doc `.zip` archives — ~3.2 MB of dead weight with ZERO
+# runtime value (nothing serves `health-dashboard/dist`; the live `graph`
+# dashboard is a different module). These are non-reproducible build outputs and
+# archives; the dashboard SOURCE (`health-dashboard/src/**`) still ships so the
+# bundle can always be rebuilt. Drop the built output, keep the source.
+# ──────────────────────────────────────────────────────────────────────────
+**/dist/**
+**/*.map
+**/*.zip
