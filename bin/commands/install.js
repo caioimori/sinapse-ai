@@ -22,7 +22,7 @@ const {
   NC,
 } = require('../lib/constants');
 const { header } = require('../lib/header');
-const { getSquads, getAgentFiles, extractAgentMeta } = require('../lib/squads');
+const { getSquads, getAgentFiles } = require('../lib/squads');
 const {
   copyDirSync,
   rmDirSync,
@@ -37,6 +37,12 @@ const {
 const { promptLlmChoice } = require('../lib/prompts');
 const { recordInstalledAgents } = require('./uninstall');
 const { verifyInstall } = require('./status');
+// generateCommandMd is re-exported below for backward-compat (update.js imports it
+// from ./install). regenerateAgentCommands is the shared Phase 2 helper.
+const {
+  generateCommandMd,
+  regenerateAgentCommands,
+} = require('../lib/command-generator');
 
 // ── Global Install ───────────────────────────────────────────────────────────
 
@@ -257,72 +263,14 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
   }
 
-  // Phase 2: Generate orqx commands
+  // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
-  fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
-
-  // Clear old commands
-  try {
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR)) {
-      fs.unlinkSync(path.join(CLAUDE_COMMANDS_DIR, f));
-    }
-  } catch { /* dir may not exist on a fresh install */ }
-
-  const sinapseBase = toForwardSlash(SINAPSE_HOME);
-  const writtenAgents = new Set();
-
-  // Generate commands for orqx agents from squads (dynamic paths, always correct)
-  for (const squad of squads) {
-    const squadPath = `${sinapseBase}/${squad.name}`;
-    const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
-    if (!fs.existsSync(agentsDir)) continue;
-
-    // agent-invocation fix: generate a command/subagent for EVERY agent (not only -orqx),
-    // so every specialist is invokable via @agent and /SINAPSE:agents:agent.
-    const squadAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'));
-    for (const file of squadAgents) {
-      const agentId = file.replace('.md', '');
-      const meta = extractAgentMeta(path.join(agentsDir, file));
-      const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`), cmdContent);
-      writtenAgents.add(file);
-    }
-  }
-
-  // Generate commands for sinapse/ orqx squad agents
-  if (fs.existsSync(sinapseMasterDest)) {
-    const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
-    if (fs.existsSync(masterAgentsDir)) {
-      for (const file of fs.readdirSync(masterAgentsDir).filter(f => f.endsWith('.md'))) {
-        if (writtenAgents.has(file)) continue;
-        const agentId = file.replace('.md', '');
-        const meta = extractAgentMeta(path.join(masterAgentsDir, file));
-        const squadPath = `${sinapseBase}/sinapse`;
-        const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file);
-        fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${agentId}.md`), cmdContent);
-        writtenAgents.add(file);
-      }
-    }
-  }
-
-  // Master entry points (@sinapse, @snps, @sinapse-orqx, @snps-orqx) → rich Imperator stub.
-  // Overwrites the generic command file for the orqx names and adds the short aliases the
-  // user actually types. All four carry the baked-in greeting + auto-plan mandate.
-  if (fs.existsSync(sinapseMasterDest)) {
-    const masterSquadPath = `${sinapseBase}/sinapse`;
-    const masterEntryPoints = [
-      ['sinapse-orqx', 'sinapse-orqx.md'],
-      ['snps-orqx', 'snps-orqx.md'],
-      ['sinapse', 'sinapse-orqx.md'],
-      ['snps', 'snps-orqx.md'],
-    ];
-    for (const [id, personaFile] of masterEntryPoints) {
-      const personaPath = `${masterSquadPath}/agents/${personaFile}`;
-      const stub = generateMasterStub(id, personaPath, masterSquadPath, squads);
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, `${id}.md`), stub);
-      writtenAgents.add(`${id}.md`);
-    }
-  }
+  const { writtenAgents } = regenerateAgentCommands({
+    sinapseHome: SINAPSE_HOME,
+    commandsDir: CLAUDE_COMMANDS_DIR,
+    squads,
+    sinapseMasterDest,
+  });
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
@@ -489,157 +437,13 @@ async function cmdInstallGlobal(opts = {}) {
   logger.always(`${GREEN}  SINAPSE AI installed successfully!${NC}`);
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   logger.always('');
-  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} command files${NC}`);
   logger.always(`  ${startCmd}`);
   logger.always('');
   logger.always(`  ${BOLD}Try an agent:${NC}`);
   logger.always(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
   logger.always(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   logger.always('');
-}
-
-// Rich Imperator stub for the master entry points (@sinapse, @snps, @sinapse-orqx,
-// @snps-orqx). The identity (ASCII greeting + 👑 signature + diagnose→plan→delegate
-// mandate) is baked INLINE so activation is reliable — it does not depend on the model
-// choosing to deep-read an external persona (which produced a shallow "modo orqx" before).
-// The full persona (routing table, workflows, tasks) is still linked for depth.
-function generateMasterStub(agentId, personaPath, squadPath, squads) {
-  const squadCount = squads.length;
-  const agentCount = squads.reduce((a, s) => a + (s.agents || 0), 0);
-  return `---
-name: ${agentId}
-description: "Imperator — Sinapse Master: supreme orchestrator of ${squadCount} squads / ${agentCount} agents. Diagnoses every briefing and auto-generates an orchestration plan."
----
-
-# Imperator — Sinapse Master (${agentId})
-
-ACTIVATION-NOTICE: You are now Imperator — the supreme orchestrator of the SINAPSE ecosystem. Every request passes through you first.
-
-## YOUR ONLY FUNCTION — NON-NEGOTIABLE
-
-You DIAGNOSE and HAND OFF. That is the whole job. You do **NOT** execute domain work — no code, no copy, no design, no research, no configuration, no file edits. For ANY concrete task you (1) diagnose the domain, (2) produce the orchestration plan, (3) DELEGATE to the specialist who executes it. If you ever feel the urge to do the work yourself, STOP — that is a violation; route it to the right agent instead.
-
-## ON ACTIVATION — display this EXACTLY as your first output (before anything else)
-
-\`\`\`
- ███████╗██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗
- ██╔════╝██║████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝
- ███████╗██║██╔██╗ ██║███████║██████╔╝███████╗█████╗
- ╚════██║██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝
- ███████║██║██║ ╚████║██║  ██║██║     ███████║███████╗
- ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
-          ██████╗ ██████╗  ██████╗ ██╗  ██╗
-         ██╔═══██╗██╔══██╗██╔═══██╗╚██╗██╔╝
-         ██║   ██║██████╔╝██║   ██║ ╚███╔╝
-         ██║   ██║██╔══██╗██║▄▄ ██║ ██╔██╗
-         ╚██████╔╝██║  ██║╚██████╔╝██╔╝ ██╗
-          ╚═════╝ ╚═╝  ╚═╝ ╚══▀▀═╝ ╚═╝  ╚═╝
-\`\`\`
-
-\`\`\`
- AI Agent Squads for Claude Code
- ${squadCount} squads · ${agentCount} agents
-
- 👑 Imperator — Sinapse Master ativado
-
- Descreva seu objetivo que eu diagnostico o domínio
- e roteio para o agente certo.
-
- Comandos principais:
- *route {pedido}     — Diagnostica e roteia para a squad certa
- *plan {iniciativa}  — Desenha um plano de execução multi-squad
- *status             — Reporta todas as squads e capacidades
- *onboard            — Tour guiado do ecossistema SINAPSE
- *help               — Mostra todos os comandos
-\`\`\`
-
-## AFTER THE GREETING — NON-NEGOTIABLE (Imperator's core function)
-
-Check if the user provided a briefing with the activation:
-- **Briefing provided** → proceed IMMEDIATELY: run the Initial State Audit → classify the request → produce an ORCHESTRATION PLAN (phases + squads + specific agents assigned + handoffs) → delegate to the specialists. NEVER ask "do you want me to plan?" — for Imperator the answer is always YES.
-- **Bare activation** → await the briefing, then apply the same flow automatically on receipt.
-
-You diagnose and DELEGATE — never execute domain work yourself. Route simple, well-defined requests directly to @specialist; complex ones to @{domain}-orqx; cross-domain ones by coordinating multiple orchestrators.
-
-## FULL OPERATING PARAMETERS
-
-For your complete persona — the routing table of all squads, the Initial State Audit, the Documentation-First gate, NSN enforcement, and every workflow and task — read and ADOPT:
-\`${personaPath}\`
-Tasks: \`${squadPath}/tasks/\` · Workflows: \`${squadPath}/workflows/\` · Manifest: \`${squadPath}/squad.yaml\`
-
-— Imperator, orchestrating SINAPSE
-`;
-}
-
-function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
-  // Detecta se é orquestrador: id termina em -orqx OU é Imperator (snps-orqx/sinapse-orqx)
-  // ou um dos apelidos curtos do master (sinapse/snps).
-  const isOrchestrator = /-orqx$/.test(agentId) || agentId === 'snps-orqx' || agentId === 'sinapse-orqx' || agentId === 'sinapse' || agentId === 'snps';
-
-  const step4 = isOrchestrator
-    ? `4. Briefing-on-activation check (this agent is an ORCHESTRATOR):
-   - If user provided briefing/context with the activation → proceed IMMEDIATELY: absorb → diagnose → plan with phases + agents + handoffs → execute (YOLO). NEVER ask "do you want me to plan?".
-   - If bare activation only → await briefing. On receipt, apply same flow automatically.`
-    : '4. HALT and await user input';
-
-  const step6 = isOrchestrator
-    ? `6. Briefing-on-activation check (ORCHESTRATOR):
-   - If user provided briefing → proceed IMMEDIATELY: absorb → diagnose → plan → execute
-   - If bare activation → await briefing, then plan automatically. NEVER ask "do you want me to plan?".`
-    : '6. HALT and await user input';
-
-  // Frontmatter (name + description) is REQUIRED so the file resolves as a Claude Code
-  // subagent (@id) — without it, @id matches nothing. The same file doubles as a slash
-  // command (/SINAPSE:agents:id); extra frontmatter is harmless there.
-  const fmDesc = (isOrchestrator
-    ? `${agentName || agentId} — orchestrator for ${squadName}; diagnoses, routes to specialists and auto-generates an orchestration plan`
-    : `${agentName || agentId} — ${squadName} specialist`).replace(/["\n\r]/g, ' ').trim();
-
-  return `---
-name: ${agentId}
-description: "${fmDesc}"
----
-
-# ${agentId}
-
-ACTIVATION-NOTICE: This command activates an agent from ${squadName}.
-
-CRITICAL: Read the agent definition file at \`${squadPath}/agents/${agentFile}\` to understand your full operating parameters. Then:
-1. Adopt the persona defined in that file (name: ${agentName}, icon: ${agentIcon})
-2. Load the squad manifest at \`${squadPath}/squad.yaml\` for context
-3. Display a greeting showing your agent name, role, and available commands
-${step4}
-
-## Agent Reference
-- **Agent ID:** ${agentId}
-- **Squad:** ${squadName}
-- **Definition:** \`${squadPath}/agents/${agentFile}\`
-- **Squad Manifest:** \`${squadPath}/squad.yaml\`
-- **Tasks:** \`${squadPath}/tasks/\`
-- **Knowledge Bases:** \`${squadPath}/knowledge-base/\`
-- **Workflows:** \`${squadPath}/workflows/\`
-
-## Activation Instructions
-1. Read the full agent definition: \`${squadPath}/agents/${agentFile}\`
-2. Adopt the persona (name, icon, communication style, principles)
-3. Show greeting: "{icon} {name} — {role} ativado"
-4. Show: "Squad: ${squadName} | Invoke: /SINAPSE:agents:${agentId}"
-5. List your key tasks from the agent definition
-${step6}
-
-## How to Execute Tasks
-When the user requests a task:
-1. Find the matching task in \`${squadPath}/tasks/\`
-2. Read the task file completely
-3. Execute following the task checklist step by step
-4. Consult knowledge bases in \`${squadPath}/knowledge-base/\` as needed
-
-## Cross-Squad Handoff
-If the task requires expertise outside this squad:
-1. Identify which squad covers the needed domain
-2. Recommend: /SINAPSE:agents:{appropriate-agent}
-3. Provide handoff context
-`;
 }
 
 function generateSquadAwareness(sinapseDir, squads) {

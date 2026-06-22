@@ -18,18 +18,18 @@ const {
   NC,
 } = require('../lib/constants');
 const { header } = require('../lib/header');
-const { getSquads, extractAgentMeta } = require('../lib/squads');
+const { getSquads } = require('../lib/squads');
 const {
   rmDirSync,
   syncDirSync,
-  toForwardSlash,
 } = require('../lib/fs-utils');
 const {
   detectExistingInstall,
   detectStaleness,
 } = require('../lib/detection');
 const { promptLlmChoice } = require('../lib/prompts');
-const { generateCommandMd, generateSquadAwareness } = require('./install');
+const { generateSquadAwareness } = require('./install');
+const { regenerateAgentCommands } = require('../lib/command-generator');
 const { execSync } = require('child_process');
 
 // Query the latest version published to npm. Returns null when npm is unreachable.
@@ -146,53 +146,24 @@ async function cmdUpdateGlobal() {
     logger.always(`  ${GREEN}OK${NC} sinapse (orqx)`);
   }
 
-  // Phase 2: Regenerate commands (reuse install logic)
+  // Phase 2: Regenerate commands — shared with `install` so `update` produces the
+  // SAME complete set (every specialist command + the rich master Imperator stubs),
+  // not just the `-orqx` subset it used to write.
   logger.always(`\n${CYAN}Phase 2:${NC} Regenerating commands`);
-  // Clear and regenerate
   rmDirSync(CLAUDE_COMMANDS_DIR);
-  fs.mkdirSync(CLAUDE_COMMANDS_DIR, { recursive: true });
-
-  const sinapseBase = toForwardSlash(SINAPSE_HOME);
-  const writtenAgents = new Set();
-
-  // Generate commands for orqx agents from squads (dynamic paths)
-  let totalAgents = 0;
-  for (const squad of squads) {
-    const agentsDir = path.join(SINAPSE_HOME, squad.name, 'agents');
-    if (!fs.existsSync(agentsDir)) continue;
-    const allAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'));
-    totalAgents += allAgents.length;
-    const orqxAgents = allAgents.filter(f => f.includes('-orqx'));
-    for (const file of orqxAgents) {
-      const agentId = file.replace('.md', '');
-      const meta = extractAgentMeta(path.join(agentsDir, file));
-      const squadPath = `${sinapseBase}/${squad.name}`;
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, file), generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file));
-      writtenAgents.add(file);
-    }
-  }
-
-  // Generate commands for sinapse/ orqx squad agents
-  const sinapseAgentsDir = path.join(SINAPSE_HOME, 'sinapse', 'agents');
-  if (fs.existsSync(sinapseAgentsDir)) {
-    const masterAgents = fs.readdirSync(sinapseAgentsDir).filter(f => f.endsWith('.md'));
-    totalAgents += masterAgents.length;
-    for (const file of masterAgents) {
-      if (writtenAgents.has(file)) continue;
-      const agentId = file.replace('.md', '');
-      const meta = extractAgentMeta(path.join(sinapseAgentsDir, file));
-      const squadPath = `${sinapseBase}/sinapse`;
-      fs.writeFileSync(path.join(CLAUDE_COMMANDS_DIR, file), generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file));
-      writtenAgents.add(file);
-    }
-  }
+  const { writtenAgents, totalAgents } = regenerateAgentCommands({
+    sinapseHome: SINAPSE_HOME,
+    commandsDir: CLAUDE_COMMANDS_DIR,
+    squads,
+    sinapseMasterDest: path.join(SINAPSE_HOME, 'sinapse'),
+  });
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     const globalAgentsDir = path.join(HOME, '.claude', 'agents');
     fs.mkdirSync(globalAgentsDir, { recursive: true });
-    // Copy orqx commands as global agents
+    // Copy all generated agent commands as global agents
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
     }
@@ -202,7 +173,7 @@ async function cmdUpdateGlobal() {
   if (llmChoice === 'codex' || llmChoice === 'both') {
     const codexAgentsDir = path.join(HOME, '.codex', 'agents');
     fs.mkdirSync(codexAgentsDir, { recursive: true });
-    // Generate orqx agents for Codex
+    // Copy all generated agent commands for Codex
     for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
       fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
     }
@@ -264,7 +235,7 @@ async function cmdUpdateGlobal() {
   logger.always(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   logger.always('');
-  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} command files${NC}`);
   logger.always(`  ${startCmd}`);
   logger.always('');
 }
