@@ -152,7 +152,6 @@ async function selectInstallationMode(detected, opts = {}) {
  * @param {string} [summary.language] - Language code (pt/en) or label
  * @param {string|string[]} [summary.ide] - IDE selection
  * @param {string} [summary.targetDir] - Target directory
- * @param {Object} [summary.grounding] - Grounding configuration (vault/DS/brand)
  * @param {Object} [opts]
  * @param {boolean} [opts.assumeYes=false] - Skip the confirmation prompt
  * @returns {Promise<boolean>} true if confirmed (or non-interactive), false to abort
@@ -165,14 +164,6 @@ async function confirmInstallSummary(summary, opts = {}) {
   if (summary.ide) {
     const ide = Array.isArray(summary.ide) ? summary.ide.join(', ') : summary.ide;
     console.log(`  IDE:       ${ide}`);
-  }
-  if (summary.grounding) {
-    const g = summary.grounding;
-    const parts = [];
-    if (g.vault) parts.push('vault');
-    if (g.designSystem) parts.push('design-system');
-    if (g.brand) parts.push('brand');
-    console.log(`  Grounding: ${parts.length ? parts.join(', ') : 'none'}`);
   }
   console.log('─────────────────────────\n');
 

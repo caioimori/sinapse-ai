@@ -30,7 +30,6 @@ const {
 } = require('../lib/detection');
 const { promptLlmChoice } = require('../lib/prompts');
 const { generateCommandMd, generateSquadAwareness } = require('./install');
-const { registerGroundingHooks, HOOK_FILENAMES } = require('../lib/register-grounding-hooks');
 const { execSync } = require('child_process');
 
 // Query the latest version published to npm. Returns null when npm is unreachable.
@@ -99,7 +98,7 @@ async function cmdUpdateGlobal() {
 
   // Welcome back screen
   logger.always(`${BOLD}  Que bom que voce voltou!${NC}`);
-  logger.always(`${DIM}  Atualizando SNPS AI: v${prevVer} -> v${VERSION}${NC}`);
+  logger.always(`${DIM}  Atualizando SINAPSE AI: v${prevVer} -> v${VERSION}${NC}`);
   logger.always('');
 
   // Story 10.40 — Staleness warning (installed vs executing version)
@@ -117,7 +116,7 @@ async function cmdUpdateGlobal() {
   const llmChoice = existing.llm || await promptLlmChoice();
 
   logger.always('');
-  logger.always(`${BOLD}Atualizando SNPS AI...${NC}\n`);
+  logger.always(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);
 
   const squadsDir = path.join(ROOT, 'squads');
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
@@ -235,36 +234,6 @@ async function cmdUpdateGlobal() {
   logger.always(`  ${CYAN}First installed:${NC} ${meta.installedAt}`);
   logger.always(`  ${CYAN}Last updated:${NC}    ${meta.updatedAt}`);
 
-  // Phase 3b — Story GA-1.6: ensure grounding hooks are present + registered.
-  if (llmChoice === 'claude-code' || llmChoice === 'both') {
-    try {
-      logger.always(`\n${CYAN}Phase 3b:${NC} Refreshing grounding hooks`);
-      const srcHooksDir = path.join(ROOT, '.sinapse-ai', 'hooks');
-      const destHooksDir = path.join(SINAPSE_HOME, 'hooks');
-      fs.mkdirSync(destHooksDir, { recursive: true });
-      let copied = 0;
-      for (const hookName of HOOK_FILENAMES) {
-        const src = path.join(srcHooksDir, hookName);
-        if (!fs.existsSync(src)) continue;
-        fs.copyFileSync(src, path.join(destHooksDir, hookName));
-        copied++;
-      }
-      const settingsPath = path.join(HOME, '.claude', 'settings.json');
-      const result = registerGroundingHooks({
-        settingsPath,
-        hooksDir: destHooksDir,
-        notify: (msg) => logger.always(`  ${DIM}${msg}${NC}`),
-      });
-      const summary = `${result.added.length} added, ${result.skipped.length} already present`;
-      logger.always(`  ${GREEN}OK${NC} ${copied} hook files refreshed — ${summary}`);
-      if (result.errors.length > 0) {
-        for (const err of result.errors) logger.always(`  ${YELLOW}WARN${NC} ${err}`);
-      }
-    } catch (error) {
-      logger.always(`  ${YELLOW}SKIP${NC} Grounding hooks: ${error.message}`);
-    }
-  }
-
   // Phase 4: Update project-local files (.sinapse-ai/, .claude/)
   logger.always(`\n${CYAN}Phase 4:${NC} Updating project files in current directory`);
   try {
@@ -292,7 +261,7 @@ async function cmdUpdateGlobal() {
 
   logger.always('');
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  logger.always(`${GREEN}  SNPS AI atualizado para v${VERSION}!${NC}`);
+  logger.always(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   logger.always('');
   logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} orqx commands${NC}`);

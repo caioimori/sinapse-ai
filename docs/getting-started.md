@@ -42,7 +42,6 @@ No prompt do Claude Code ou Codex:
 |---|---|
 | Entender filosofia do framework | [`README.md`](../README.md) |
 | Ver lista completa de agentes | [Agent Reference Guide](agent-reference-guide.md) |
-| Configurar grounding (vault, DS, brand) | [Grounding Setup](guides/grounding-setup.md) |
 | Resolver problema na instalação | [Troubleshooting](troubleshooting.md) |
 | Ver workflow de desenvolvimento | [`docs/sinapse-workflows/`](sinapse-workflows/) |
 | Contribuir | [`CONTRIBUTING.md`](../CONTRIBUTING.md) |

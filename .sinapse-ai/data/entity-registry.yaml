@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-21T05:24:05.999Z'
-  entityCount: 811
+  lastUpdated: '2026-06-22T02:41:18.583Z'
+  entityCount: 810
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -40,8 +40,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:52b9f4351e951350c5658bb036f49974df7bc3a5e0fdc7b5f8866c880f932d80
-      lastVerified: '2026-06-16T17:13:38.673Z'
+      checksum: sha256:68c4b6ad0d9eb7a32985daf5b654bd4e2921880b9889df91be2b7e2c813c77f7
+      lastVerified: '2026-06-22T02:41:18.145Z'
     agents:
       path: bin/commands/agents.js
       layer: L1
@@ -154,7 +154,6 @@ entities:
         - prompts
         - uninstall
         - status
-        - register-grounding-hooks
         - chrome-brain-installer
       externalDeps: []
       plannedDeps:
@@ -164,8 +163,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:e543d49945bc13d49cfe0d4edced86866a84aff7725a77bc4b946dfbde10c3ee
-      lastVerified: '2026-06-21T05:24:05.620Z'
+      checksum: sha256:a8708eb5d5f59170ff51fcf5488c85b62815add902865fa4be188a7a54fedcdd
+      lastVerified: '2026-06-22T02:41:18.150Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -257,7 +256,6 @@ entities:
         - detection
         - prompts
         - install
-        - register-grounding-hooks
       externalDeps: []
       plannedDeps:
         - logger
@@ -266,8 +264,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:83ebc6f5e09807dfe8c3da2d56c5c309b1d06dbeb7712d143c575d300199cb77
-      lastVerified: '2026-06-16T06:09:14.627Z'
+      checksum: sha256:a6b1105e9f8d3c452955377afcfb0d2d70e0a3e358e343389490891e4ff4f10e
+      lastVerified: '2026-06-22T02:41:18.151Z'
     constants:
       path: bin/lib/constants.js
       layer: L1
@@ -402,30 +400,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ad4190251d492e0f970131f36abc9b289f64e04e1f1440bc9fd20681a5dd9831
-      lastVerified: '2026-06-15T01:36:42.609Z'
-    register-grounding-hooks:
-      path: bin/lib/register-grounding-hooks.js
-      layer: L1
-      type: script
-      purpose: Entity at bin\lib\register-grounding-hooks.js
-      keywords:
-        - register
-        - grounding
-        - hooks
-      usedBy:
-        - install
-        - update
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: production
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:0856daf29e660ededff840173ba939b38967f525d1271635a671710d28de4e35
-      lastVerified: '2026-06-15T01:36:42.609Z'
+      checksum: sha256:dc7cc1109f2bbdb7b3c5927df0de2418925842bdacdc0ba82815bfa2783d0b42
+      lastVerified: '2026-06-22T02:41:18.152Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1
@@ -547,8 +523,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:415f472e5ff5d61950e00e2bc9023c94476c49099fc8faaeed44ea309b77ccae
-      lastVerified: '2026-06-21T05:24:05.625Z'
+      checksum: sha256:5b4f06a8c4eef9be52f5b13545f992403031aa58a8a62ce2454015f98cb1156f
+      lastVerified: '2026-06-22T02:41:18.155Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1

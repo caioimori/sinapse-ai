@@ -317,8 +317,8 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     const text = stripAnsi(captured.join(''));
     const lines = text.split('\n').filter((_, i, arr) => i < arr.length - 1); // drop trailing empty
 
-    // Line 1: "SNPS AI {version} instalado ✓"
-    expect(lines[0]).toMatch(/^SNPS AI .+ instalado ✓$/);
+    // Line 1: "SINAPSE AI {version} instalado ✓"
+    expect(lines[0]).toMatch(/^SINAPSE AI .+ instalado ✓$/);
     // Line 2: "{N} agents · {M} squads prontos" (or singular variants)
     expect(lines[1]).toMatch(/^\d+ agents? · \d+ squads? (prontos|pronto)$/);
     // Line 3: blank
@@ -329,8 +329,8 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     expect(lines[4]).toMatch(/^Começar:\s+@sinapse no Claude Code$/);
     // Line 6: blank
     expect(lines[5]).toBe('');
-    // Line 7: "Docs:    https://sinapse.club"
-    expect(lines[6]).toMatch(/^Docs:\s+https:\/\/sinapse\.club$/);
+    // Line 7: "Docs:    https://github.com/caioimori/sinapse-ai#readme"
+    expect(lines[6]).toMatch(/^Docs:\s+https:\/\/github\.com\/caioimori\/sinapse-ai#readme$/);
   });
 
   test('AC 5: firstRun=true adds welcome line as first line, still ≤ 8 lines', () => {
@@ -338,16 +338,16 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     expect(result.lineCount).toBeLessThanOrEqual(8);
 
     const text = stripAnsi(captured.join(''));
-    expect(text).toContain('Bem-vindo ao SNPS AI!');
+    expect(text).toContain('Bem-vindo ao SINAPSE AI!');
     // Welcome must be the first content line.
     const firstLine = text.split('\n')[0];
-    expect(firstLine).toMatch(/^Bem-vindo ao SNPS AI!/);
+    expect(firstLine).toMatch(/^Bem-vindo ao SINAPSE AI!/);
   });
 
   test('AC 5: firstRun=false does NOT show welcome line', () => {
     postinstall.renderFinalSummary({ firstRun: false });
     const text = stripAnsi(captured.join(''));
-    expect(text).not.toContain('Bem-vindo ao SNPS AI!');
+    expect(text).not.toContain('Bem-vindo ao SINAPSE AI!');
   });
 
   test('AC 6: copy is Portuguese and non-technical (no paths, no agent IDs)', () => {
@@ -357,7 +357,7 @@ describe('postinstall — renderFinalSummary() (Story B.1)', () => {
     expect(text).toMatch(/pronto/); // "prontos" or "pronto"
     // No filesystem paths, no agent IDs like "@developer".
     // Strip the allowed docs URL first, then assert no other URL-like content remains.
-    const withoutDocs = text.replace('https://sinapse.club', '');
+    const withoutDocs = text.replace('https://github.com/caioimori/sinapse-ai#readme', '');
     expect(withoutDocs).not.toMatch(/https?:\/\//);
     expect(text).not.toContain('node_modules');
     expect(text).not.toContain('.sinapse-ai/');
