@@ -457,7 +457,7 @@ async function runWizard(options = {}) {
 
     if (options.quiet) {
       // Quiet mode: Skip all prompts, use defaults
-      const language = options.language || 'en';
+      const language = options.language || 'pt';
       setLanguage(language);
       answers = {
         language,
