@@ -1,4 +1,3 @@
----
 # Agent: Mosaic 🧩
 
 ## Identity
