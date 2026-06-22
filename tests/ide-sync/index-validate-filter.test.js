@@ -8,7 +8,7 @@ const { commandValidate } = require('../../.sinapse-ai/infrastructure/scripts/id
 const { parseAllAgents } = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/agent-parser');
 const claudeTransformer = require('../../.sinapse-ai/infrastructure/scripts/ide-sync/transformers/claude-code');
 
-describe.skip('ide-sync commandValidate --ide filter', () => {
+describe('ide-sync commandValidate --ide filter', () => {
   let tmpRoot;
   let previousCwd;
 
