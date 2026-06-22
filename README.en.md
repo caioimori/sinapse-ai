@@ -391,7 +391,7 @@ npx sinapse-ai uninstall         # Remove the framework from the project
 
 # Diagnostics
 npx sinapse-ai status            # Installation state + list of squads
-npx sinapse-ai doctor            # 12 health checks against the environment
+npx sinapse-ai doctor            # 16 health checks against the environment
 npx sinapse-ai doctor --fix      # Auto-fix detected issues
 npx sinapse-ai doctor --json     # Machine-readable output for CI
 npx sinapse-ai doctor --dry-run  # Show what `--fix` would do without applying
