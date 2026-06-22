@@ -349,53 +349,6 @@ function buildQuestionSequence(_context = {}) {
 }
 
 /**
- * Story 10.47 — Grounding questions (vault / design system / brand)
- *
- * Each helper returns a single inquirer `input` question. An empty answer
- * means "skip" — the corresponding grounding section stays disabled and the
- * shipped hook is a no-op. Suffixed instruction in the message reinforces
- * that skipping activates the high-quality fallback.
- */
-
-function getVaultGroundingQuestion() {
-  return {
-    type: 'input',
-    name: 'vaultPath',
-    message: '📚 Vault de notas markdown — caminho absoluto, ou Enter pra pular:',
-    default: '',
-    filter: (value) => (typeof value === 'string' ? value.trim() : ''),
-  };
-}
-
-function getDesignSystemGroundingQuestion() {
-  return {
-    type: 'input',
-    name: 'designSystemPath',
-    message: '🎨 Design system / source-of-truth visual — caminho absoluto, ou Enter pra pular:',
-    default: '',
-    filter: (value) => (typeof value === 'string' ? value.trim() : ''),
-  };
-}
-
-function getBrandGroundingQuestion() {
-  return {
-    type: 'input',
-    name: 'brandbookPath',
-    message: '🪪 Brandbook do projeto — caminho absoluto, ou Enter pra pular:',
-    default: '',
-    filter: (value) => (typeof value === 'string' ? value.trim() : ''),
-  };
-}
-
-function getGroundingQuestions() {
-  return [
-    getVaultGroundingQuestion(),
-    getDesignSystemGroundingQuestion(),
-    getBrandGroundingQuestion(),
-  ];
-}
-
-/**
  * Get question by ID
  * Useful for testing individual questions
  *
@@ -426,9 +379,4 @@ module.exports = {
   getPackageManagerQuestion,
   buildQuestionSequence,
   getQuestionById,
-  // Story 10.47 — grounding (opt-in BYO)
-  getVaultGroundingQuestion,
-  getDesignSystemGroundingQuestion,
-  getBrandGroundingQuestion,
-  getGroundingQuestions,
 };

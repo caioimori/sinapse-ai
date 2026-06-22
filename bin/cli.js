@@ -40,10 +40,7 @@ const {
   detectInteractiveMode,
   isFirstRun,
 } = require('./lib/detection');
-const {
-  promptLlmChoice,
-  promptGroundingSections,
-} = require('./lib/prompts');
+const { promptLlmChoice } = require('./lib/prompts');
 const { header } = require('./lib/header');
 const { cmdHelp } = require('./commands/help');
 const { cmdStatus, cmdList } = require('./commands/status');
@@ -86,8 +83,6 @@ module.exports = {
   // Story 10.46 — exported for tests
   detectInteractiveMode,
   isFirstRun,
-  // Story 10.47 — exported for tests
-  promptGroundingSections,
 };
 
 if (require.main === module) {
@@ -187,7 +182,7 @@ function runRouter() {
       // Story 10.46 — friendly hint on bare `npx sinapse-ai` for a fresh machine.
       header();
       const { BOLD, DIM } = require('./lib/constants');
-      logger.always(`${BOLD}  Bem-vindo ao SNPS AI!${NC}`);
+      logger.always(`${BOLD}  Bem-vindo ao SINAPSE AI!${NC}`);
       logger.always(`${DIM}  Detectei que ainda nao ha instalacao nesta maquina.${NC}`);
       logger.always('');
       logger.always('  Pra comecar, rode:');

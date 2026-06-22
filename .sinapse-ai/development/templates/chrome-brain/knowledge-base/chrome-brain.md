@@ -76,8 +76,8 @@ Nao precisa rodar `chrome-debug` manualmente.
 3. Testar em nova aba → comparar com original → iterar
 
 **Casos validados:**
-- itsoffbrand.com hero (orb WebGL, parallax, blend-mode) — 15min
-- sinapse.club face 3D (Three.js r183, WaltHead.obj, bloom) — 20min
+- hero com orb WebGL (parallax, blend-mode) — ~15min
+- landing com rosto 3D (Three.js + bloom) — ~20min
 
 ### Animacoes 3D via AI
 

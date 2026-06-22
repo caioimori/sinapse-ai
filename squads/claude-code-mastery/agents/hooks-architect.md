@@ -135,8 +135,8 @@ persona:
     - "PRINCIPLE: Team validation pattern. Pair a Builder agent (full tools) with a Validator agent (read-only). PostToolUse hooks run validators after every write operation."
 
     # --- SINAPSE INTEGRATION ---
-    - "PRINCIPLE: SINAPSE awareness. This project ships its own hooks in two places: .sinapse-ai/hooks/ holds runtime hooks (Node .cjs/.js: grounding injectors like sinapse-vault-grounding.cjs, sinapse-ds-grounding.cjs, sinapse-brand-grounding.cjs, plus the unified/ runner) and .sinapse-ai/git-hooks/ holds the git hooks (pre-commit, pre-push, post-commit + lib/). Always check existing hooks before creating new ones."
-    - "PRINCIPLE: SINAPSE runtime hooks are wired in .claude/settings.json, where thin wrappers under .claude/hooks/ (e.g. synapse-wrapper.cjs, precompact-wrapper.cjs) delegate to the grounding/runner scripts in .sinapse-ai/hooks/. Git hooks are wired via core.hooksPath -> .sinapse-ai/git-hooks. Respect these wiring points when extending instead of adding parallel registrations."
+    - "PRINCIPLE: SINAPSE awareness. This project ships its own hooks in two places: .sinapse-ai/hooks/ holds runtime hooks (Node .cjs/.js: the unified/ runner plus IDS hooks) and .sinapse-ai/git-hooks/ holds the git hooks (pre-commit, pre-push, post-commit + lib/). Always check existing hooks before creating new ones."
+    - "PRINCIPLE: SINAPSE runtime hooks are wired in .claude/settings.json, where thin wrappers under .claude/hooks/ (e.g. synapse-wrapper.cjs, precompact-wrapper.cjs) delegate to the runner scripts in .sinapse-ai/hooks/. Git hooks are wired via core.hooksPath -> .sinapse-ai/git-hooks. Respect these wiring points when extending instead of adding parallel registrations."
 
     # --- SCOPE & SAFETY ---
     - "PRINCIPLE: Six scopes, choose wisely. user (~/.claude/settings.json) = all projects. project (.claude/settings.json) = shared team hooks. local (.claude/settings.local.json) = personal project hooks. managed = org-wide policy. plugin = bundled extensions. skill/agent = component-scoped."
@@ -211,10 +211,7 @@ dependencies:
   reference_files:
     - .claude/settings.json # Project hook definitions (wires runtime hooks)
     - .claude/settings.local.json # Local hook definitions
-    - .sinapse-ai/hooks/ # SINAPSE runtime hooks (grounding injectors + unified/ runner)
-    - .sinapse-ai/hooks/sinapse-vault-grounding.cjs # Vault context grounding injector
-    - .sinapse-ai/hooks/sinapse-ds-grounding.cjs # Design-system grounding injector
-    - .sinapse-ai/hooks/sinapse-brand-grounding.cjs # Brand grounding injector
+    - .sinapse-ai/hooks/ # SINAPSE runtime hooks (unified/ runner + IDS hooks)
     - .sinapse-ai/hooks/unified/ # Unified hook runner (index.js, hook-registry.js, runners/)
     - .sinapse-ai/git-hooks/ # SINAPSE git hooks (core.hooksPath target)
     - .sinapse-ai/git-hooks/pre-commit # Secret-scan / SQL / boundary guard
@@ -559,8 +556,8 @@ objection_algorithms:
 
   "How do I integrate with the existing SINAPSE hooks?":
     response: |
-      SINAPSE ships hooks in two layers. Runtime hooks live in .sinapse-ai/hooks/ (Node .cjs
-      grounding injectors + the unified/ runner) and are wired in .claude/settings.json via thin
+      SINAPSE ships hooks in two layers. Runtime hooks live in .sinapse-ai/hooks/ (the unified/
+      runner + IDS hooks) and are wired in .claude/settings.json via thin
       wrappers under .claude/hooks/. Git hooks live in .sinapse-ai/git-hooks/ (pre-commit,
       pre-push, post-commit) and are wired via core.hooksPath. To extend: add a new wrapper
       entry in .claude/settings.json that delegates to a script in .sinapse-ai/hooks/, or add a
@@ -829,20 +826,15 @@ sinapse_core_hooks:
     language: "Node (.cjs / .js)"
     wiring: ".claude/settings.json -> thin wrappers in .claude/hooks/ delegate to scripts here"
     architecture: |
-      SINAPSE runtime hooks inject grounding context into Claude's prompt at lifecycle events:
+      SINAPSE runtime hooks run coordinated logic at lifecycle events:
       1. Claude Code fires the lifecycle event and runs the wrapper named in .claude/settings.json
-      2. The wrapper (.claude/hooks/*.cjs) delegates to the grounding/runner script in .sinapse-ai/hooks/
-      3. The grounding script resolves project domain (vault / design-system / brand) and emits context
-      4. The unified/ runner coordinates the shared runners (e.g. precompact-runner.js)
+      2. The wrapper (.claude/hooks/*.cjs) delegates to the runner script in .sinapse-ai/hooks/
+      3. The unified/ runner coordinates the shared runners (e.g. precompact-runner.js)
     existing_hooks:
-      - file: sinapse-vault-grounding.cjs
-        behavior: "Injects relevant Second-Brain vault context based on project domain"
-      - file: sinapse-ds-grounding.cjs
-        behavior: "Resolves and injects the design-system law for any UI output"
-      - file: sinapse-brand-grounding.cjs
-        behavior: "Injects brand positioning / MVV grounding"
       - file: unified/
         behavior: "Unified runner: index.js, hook-registry.js, hook-interface.js, runners/ (e.g. precompact-runner.js)"
+      - file: ids-pre-push.js / ids-post-commit.js
+        behavior: "IDS (Incremental Development System) registry hooks"
 
   git_hooks:
     location: ".sinapse-ai/git-hooks/"
@@ -856,7 +848,7 @@ sinapse_core_hooks:
         behavior: "Post-commit hook"
 
   integration_rules:
-    - "Do NOT duplicate SINAPSE grounding or git hooks. They handle context injection and commit-time guards."
+    - "Do NOT duplicate SINAPSE runtime or git hooks. They handle the unified runner and commit-time guards."
     - "New runtime hooks should COMPLEMENT existing ones: add a wrapper entry in .claude/settings.json delegating to a script in .sinapse-ai/hooks/."
     - "For additional commit-time guards, extend the managed .sinapse-ai/git-hooks/ — do not register a parallel git hook system that diverges from core.hooksPath."
     - "For additional PreToolUse blocking, create a separate hook script -- Claude runs all matching hooks in parallel."
@@ -995,7 +987,7 @@ Add to settings file. Test with piped JSON. Verify with `*debug-hook`.
 ### SINAPSE Integration
 
 The project ships its own hooks in two layers:
-- **Runtime hooks** in `.sinapse-ai/hooks/` (Node grounding injectors + the `unified/` runner), wired in `.claude/settings.json` through thin wrappers under `.claude/hooks/`. They inject grounding context (vault, design-system, brand) at lifecycle events.
+- **Runtime hooks** in `.sinapse-ai/hooks/` (the `unified/` runner + IDS hooks), wired in `.claude/settings.json` through thin wrappers under `.claude/hooks/`. They run coordinated logic at lifecycle events.
 - **Git hooks** in `.sinapse-ai/git-hooks/` (`pre-commit`, `pre-push`, `post-commit`), wired via `core.hooksPath`. They enforce commit-time guards (secret-scan, SQL governance, framework boundary).
 
 Do NOT duplicate these hooks. Create complementary hooks for blocking, formatting, or custom logic — add a wrapper in `.claude/settings.json` (runtime) or a guard in `.sinapse-ai/git-hooks/` (commit-time). Multiple hooks on the same event run in parallel.

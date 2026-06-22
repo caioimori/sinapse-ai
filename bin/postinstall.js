@@ -340,7 +340,7 @@ function stepCreateRuntimeDirs() {
       fs.mkdirSync(dir, { recursive: true });
     } catch (err) {
       if (err.code === 'EACCES' || err.code === 'EPERM') {
-        warn(`Sem permissão para criar ${path.relative(PROJECT_ROOT, dir)} — SNPS AI vai tentar criar no primeiro uso.`);
+        warn(`Sem permissão para criar ${path.relative(PROJECT_ROOT, dir)} — SINAPSE AI vai tentar criar no primeiro uso.`);
         softFailures += 1;
         continue;
       }
@@ -439,7 +439,7 @@ function stepDoctor() {
  *   Teste:   sinapse doctor
  *   Começar: @sinapse no Claude Code
  *
- *   Docs:    https://sinapse.club
+ *   Docs:    https://github.com/caioimori/sinapse-ai#readme
  *
  * In --verbose mode the caller has already printed detailed step output, so we
  * still render the minimal summary at the end as a recap.
@@ -477,9 +477,9 @@ function renderFinalSummary(opts = {}) {
   const isGlobal = isGlobalInstall();
   const lines = [];
   if (firstRun) {
-    lines.push(`${c.bold}Bem-vindo ao SNPS AI!${c.reset} 🎉`);
+    lines.push(`${c.bold}Bem-vindo ao SINAPSE AI!${c.reset} 🎉`);
   }
-  lines.push(`${c.bold}SNPS AI ${version}${c.reset} instalado ${c.green}✓${c.reset}`);
+  lines.push(`${c.bold}SINAPSE AI ${version}${c.reset} instalado ${c.green}✓${c.reset}`);
   if (!isGlobal) {
     lines.push(`${c.dim}${agents} ${agentsWord} · ${squads} ${squadsWord} ${prontosWord}${c.reset}`);
   }
@@ -493,7 +493,7 @@ function renderFinalSummary(opts = {}) {
     lines.push(`Começar: ${c.cyan}@sinapse${c.reset} no Claude Code`);
   }
   lines.push('');
-  lines.push(`Docs:    ${c.dim}https://sinapse.club${c.reset}`);
+  lines.push(`Docs:    ${c.dim}https://github.com/caioimori/sinapse-ai#readme${c.reset}`);
 
   for (const line of lines) {
     process.stdout.write(`${line}\n`);
@@ -567,7 +567,7 @@ function main(argvOverride) {
     return 0;
   }
 
-  verboseLog(`${c.dim}SNPS AI postinstall — configurando ambiente...${c.reset}`);
+  verboseLog(`${c.dim}SINAPSE AI postinstall — configurando ambiente...${c.reset}`);
 
   const syncIde = stepSyncIde();
   if (syncIde.critical) {

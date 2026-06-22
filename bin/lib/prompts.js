@@ -1,9 +1,8 @@
-// bin/lib/prompts.js — interactive prompts (LLM, grounding, uninstall).
+// bin/lib/prompts.js — interactive prompts (LLM, uninstall).
 // Story GA-1.2 — extracted from bin/cli.js.
 
-const path = require('path');
 const { getLogger } = require('../../.sinapse-ai/core/logger');
-const { ROOT, CYAN, GREEN, BOLD, DIM, YELLOW, NC } = require('./constants');
+const { CYAN, GREEN, BOLD, DIM, YELLOW, NC } = require('./constants');
 const { detectInteractiveMode, warnNonInteractive } = require('./detection');
 
 /**
@@ -53,67 +52,6 @@ async function promptLlmChoice() {
   }
 }
 
-// Story 10.47 — collect optional grounding paths (vault / design system /
-// brand). Empty answers leave the section disabled and the shipped hook
-// stays a no-op. Reuses the multi-signal interactive detector from Story
-// 10.46 so CI / non-TTY runs skip silently with the consolidated warning
-// already emitted by lang/LLM helpers.
-async function promptGroundingSections({ isUpsert = false, reconfigure = false } = {}) {
-  const logger = getLogger();
-  const groundingConfig = require(path.join(
-    ROOT, 'packages', 'installer', 'src', 'wizard', 'grounding-config',
-  ));
-  const existing = groundingConfig.readGroundingConfig();
-  const pending = isUpsert && !reconfigure
-    ? groundingConfig.pendingGroundingSections(existing)
-    : { askVault: true, askDesignSystem: true, askBrand: true };
-
-  if (!pending.askVault && !pending.askDesignSystem && !pending.askBrand) {
-    return existing;
-  }
-
-  if (!detectInteractiveMode()) {
-    warnNonInteractive();
-    // Persist defaults so the file exists with a documented schema even on
-    // headless installs (helps users discover it later via `--reconfigure`).
-    const merged = groundingConfig.buildGroundingFromAnswers({}, existing);
-    groundingConfig.writeGroundingConfig(merged);
-    return merged;
-  }
-
-  const questions = require(path.join(
-    ROOT, 'packages', 'installer', 'src', 'wizard', 'questions',
-  ));
-  const inquirer = require('inquirer');
-
-  const ask = [];
-  if (pending.askVault) ask.push(questions.getVaultGroundingQuestion());
-  if (pending.askDesignSystem) ask.push(questions.getDesignSystemGroundingQuestion());
-  if (pending.askBrand) ask.push(questions.getBrandGroundingQuestion());
-
-  logger.always('');
-  logger.always(`${CYAN}Grounding semantico (opt-in):${NC}`);
-  logger.always(`${DIM}  Pular qualquer pergunta ativa o fallback generico do framework.${NC}`);
-
-  let answers = {};
-  try {
-    answers = await inquirer.prompt(ask);
-  } catch {
-    // Fallback: minimal readline loop if inquirer fails (e.g. exotic shells).
-    const readline = require('readline');
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-    const askLine = (msg) => new Promise((resolve) => rl.question(msg, resolve));
-    if (pending.askVault) answers.vaultPath = (await askLine('  Vault path (Enter pra pular): ')).trim();
-    if (pending.askDesignSystem) answers.designSystemPath = (await askLine('  Design system path (Enter pra pular): ')).trim();
-    if (pending.askBrand) answers.brandbookPath = (await askLine('  Brandbook path (Enter pra pular): ')).trim();
-    rl.close();
-  }
-
-  const merged = groundingConfig.buildGroundingFromAnswers(answers, existing);
-  groundingConfig.writeGroundingConfig(merged);
-  return merged;
-}
-
 // Story 10.40 — Confirmation prompt for destructive uninstall.
 // Returns true if user confirmed, false otherwise.
 async function confirmUninstall() {
@@ -130,6 +68,5 @@ async function confirmUninstall() {
 
 module.exports = {
   promptLlmChoice,
-  promptGroundingSections,
   confirmUninstall,
 };
