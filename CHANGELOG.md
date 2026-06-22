@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.13.0] — 2026-06-22 — 🧹 Limpeza profunda (varredura de 6 ondas) + munição de engenharia nos agents
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- Injeta munição de engenharia de software nos 8 agents técnicos (#264).
+
+### Bug Fixes
+
+- **Onda 1** — remove grounding público do install, corrige leaks pessoais, unifica wordmark "SINAPSE AI" (#266).
+- **Onda 2** — torna os portões do framework reais (cobertura honesta) (#267).
+- **Onda 3** — remove ~1.900 linhas de código morto (assistente "Pro") e conserta a regeneração de agents no `update` (#268).
+- **Onda 4** — pacote enxuto (dist/sourcemap/zips fora do npm), config de release e footprint honesto no README (#269).
+- **Onda 5 (segura)** — frontmatter de squad-product, hard-skip do Codex no ide-sync, gitignore defensivo (#270).
+- **test** — conserta `test:health-check` (mocha→jest) e remove `mocha` órfão (#274).
+- **release** — remove `@semantic-release/git` (incompatível com branch protection) (#276).
+
+### Refactoring
+
+- **Onda 5-pesada** — remove ~11.6k linhas de cluster git duplicado morto em `development/scripts` (#271).
+
+### Documentation
+
+- **Onda 6** — alinha a Constituição à realidade (build condicional, branch-protection solo, enforcement honesto) e religa 11 testes válidos (#272).
+- Conserta o doctor `constitution-consistency` (CLAUDE.md + AGENTS.md citam os 10 artigos canônicos) (#273).
+- README (PT+EN): badge de testes e contagem de health checks atualizados (#275).
+- Atualiza triagem Dependabot — undici (#265).
+
 ## [1.12.2] — 2026-06-21 — 🧹 Zera warnings de validação + conserta ponteiros Codex
 
 > Patch de higiene. Atualização segura via `npx sinapse-ai update`.
