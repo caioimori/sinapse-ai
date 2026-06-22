@@ -324,6 +324,21 @@ async function commandSync(options) {
 
   // Filter IDEs if --ide flag specified
   let targetIdes = Object.entries(config.targets);
+
+  // Hard-skip: ide-sync must NEVER write .codex. The Codex mirror is owned by the
+  // canonical Codex sync (sync-codex-local-first.js writes thin runtime pointers
+  // resolved by resolve-codex-agent.js). Letting ide-sync write it clobbers those
+  // pointers with full agent bodies. This is enforced in CODE — not just via the
+  // config `targets.codex.enabled: false` — so a stray config flip can't re-arm the
+  // foot-gun. To refresh .codex, run `npm run sync:codex`.
+  if (options.ide === 'codex') {
+    console.error(
+      `${colors.yellow}'codex' is managed by the Codex sync (npm run sync:codex), not ide-sync — nothing to do.${colors.reset}`
+    );
+    process.exit(0);
+  }
+  targetIdes = targetIdes.filter(([name]) => name !== 'codex');
+
   if (options.ide) {
     targetIdes = targetIdes.filter(([name]) => name === options.ide);
     if (targetIdes.length === 0) {

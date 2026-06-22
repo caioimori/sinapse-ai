@@ -137,6 +137,11 @@ tests/fixtures/test-project-bob/
 # These folders are from other projects and should NOT be in this repository
 .sinapse/                        # SINAPSE expansion project files
 .sinapse/project-status.yaml     # Project status cache (Story 6.1.2.4 - auto-generated)
+# Near-namesake runtime/scratch dirs — local artifacts, never tracked. Defensive
+# entries so a stray sync/scratch run can't re-introduce them to the repo.
+.synapse/                        # typo/near-namesake of .sinapse (runtime only)
+.sinapse-sessions/               # session scratch (was accidentally tracked once)
+proto-teste-sinapse/             # scratch/prototype dir
 sinapse-memory-layer-mvp/        # Separate memory layer project
 memory/                       # Memory squad
 performance/                  # Performance squad
