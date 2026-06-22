@@ -32,6 +32,20 @@
  *   - "Caio's Second Brain", "Caio's vault" — vault path references
  *   - "C:\\Users\\Caio Imori" — absolute paths
  *   - "OneDrive\\...\\Second-Brain" — vault path references
+ *
+ * SECOND CHECK — Conceptual leak guard (Wave 2):
+ * The literal "Caio" check above misses CONCEPTUAL internal leaks: the
+ * maintainer's private grounding mechanisms (vault-grounding, second-brain,
+ * brandbook) and the maintainer's BUSINESS CLIENT names (Módulo, Mindloop,
+ * Sayuri, Vascularte, itsoffbrand, sinapse.club). These are internal/business
+ * context and must NOT appear on the surfaces an external user actually sees:
+ * the installer, the CLI, and the public docs the npm package ships.
+ *
+ * This second check is SCOPED ONLY to user-facing surfaces (CONCEPT_SCOPES):
+ *   packages/installer/**, bin/**, README.md, docs/getting-started.md,
+ *   docs/pt/**, docs/en/**.
+ * It deliberately does NOT scan .sinapse-ai/development/**, squad agent files,
+ * or internal docs — those legitimately discuss framework concepts.
  */
 
 'use strict';
@@ -112,6 +126,107 @@ function isAllowed(filePath) {
   return ALLOWLIST_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 }
 
+// ---------------------------------------------------------------------------
+// SECOND CHECK — Conceptual leak guard (user-facing surfaces only).
+// ---------------------------------------------------------------------------
+
+// The ONLY surfaces an external user sees: the installer, the CLI, and the
+// public docs that ship in the npm package. A concept/business leak here is a
+// real leak. Everything else (framework internals, squad agents, internal
+// docs) is intentionally OUT of scope.
+const CONCEPT_FILE_SCOPES = new Set(['README.md', 'docs/getting-started.md']);
+const CONCEPT_PREFIX_SCOPES = ['packages/installer/', 'bin/', 'docs/pt/', 'docs/en/'];
+
+function isConceptScoped(filePath) {
+  const normalized = filePath.replace(/\\/g, '/');
+  if (CONCEPT_FILE_SCOPES.has(normalized)) return true;
+  return CONCEPT_PREFIX_SCOPES.some((prefix) => normalized.startsWith(prefix));
+}
+
+// Conceptual / business denylist. Each entry is paired with a friendly
+// description. Patterns are written to catch the INTERNAL token while avoiding
+// generic-word false positives:
+//   - "Módulo" alone is the generic Portuguese word for "module" (capitalized
+//     and accented in prose/headings: "Módulo Core", "Estrutura de Módulo"),
+//     so it CANNOT be used to identify the client. The maintainer's client
+//     "Colégio Módulo" is matched ONLY by its full, unambiguous name —
+//     "Colégio Módulo" / "Colegio Modulo".
+//   - The other client names (Mindloop, Sayuri, Vascularte, itsoffbrand) and
+//     the grounding concepts (vault-grounding, second-brain, brandbook) are
+//     distinctive enough to match as whole words.
+const CONCEPT_PATTERNS = [
+  {
+    pattern: /\bvault-grounding\b/i,
+    description: 'Internal grounding mechanism (vault-grounding) leaked to user-facing surface',
+    suggestion: 'Describe generically (e.g. "a session-start grounding hook") — do not name the private mechanism',
+  },
+  {
+    pattern: /\bsecond-brain\b/i,
+    description: "Maintainer's private knowledge base (Second-Brain) leaked to user-facing surface",
+    suggestion: 'Generalize to "external memory source (e.g. an Obsidian vault)"',
+  },
+  {
+    pattern: /\bbrandbook\b/i,
+    description: "Maintainer's internal design-system concept (brandbook) leaked to user-facing surface",
+    suggestion: 'Use a generic term like "design system" or "brand guidelines"',
+  },
+  {
+    pattern: /Col[ée]gio\s+M[óÓoO]dulo/,
+    description: "Maintainer's business client name (Colégio Módulo) leaked to user-facing surface",
+    suggestion: 'Remove the client name; use a neutral placeholder (e.g. "your client")',
+  },
+  {
+    pattern: /\bMindloop\b/i,
+    description: "Maintainer's business client name (Mindloop) leaked to user-facing surface",
+    suggestion: 'Remove the client name; use a neutral placeholder',
+  },
+  {
+    pattern: /\bSayuri\b/i,
+    description: "Maintainer's business client name (Sayuri) leaked to user-facing surface",
+    suggestion: 'Remove the client name; use a neutral placeholder',
+  },
+  {
+    pattern: /\bVascularte\b/i,
+    description: "Maintainer's business client name (Vascularte) leaked to user-facing surface",
+    suggestion: 'Remove the client name; use a neutral placeholder',
+  },
+  {
+    pattern: /\bitsoffbrand\b/i,
+    description: "Maintainer's business client name (itsoffbrand) leaked to user-facing surface",
+    suggestion: 'Remove the client name; use a neutral placeholder',
+  },
+  {
+    pattern: /\bsinapse\.club\b/i,
+    description: "Maintainer's internal/business property (sinapse.club) leaked to user-facing surface",
+    suggestion: 'Remove the internal domain reference',
+  },
+];
+
+function scanFileForConcepts(filePath) {
+  const fullPath = path.join(ROOT, filePath);
+  if (!fs.existsSync(fullPath)) return [];
+  const content = fs.readFileSync(fullPath, 'utf8');
+  const lines = content.split('\n');
+  const violations = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    for (const rule of CONCEPT_PATTERNS) {
+      const match = line.match(rule.pattern);
+      if (match) {
+        violations.push({
+          file: filePath,
+          line: i + 1,
+          match: match[0],
+          description: rule.description,
+          suggestion: rule.suggestion,
+          context: line.trim().slice(0, 120),
+        });
+      }
+    }
+  }
+  return violations;
+}
+
 function isTextFile(filePath) {
   const binaryExts = new Set([
     '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico',
@@ -157,43 +272,77 @@ function scanFile(filePath) {
 function run() {
   const files = getTrackedFiles();
   const allViolations = [];
+  const conceptViolations = [];
 
   for (const file of files) {
-    if (isAllowed(file)) continue;
     if (!isTextFile(file)) continue;
-    const violations = scanFile(file);
-    allViolations.push(...violations);
+
+    // CHECK 1 — operational personal references ("Caio" literals, paths).
+    // Scanned across the whole tree except the autorship/history allow-list.
+    if (!isAllowed(file)) {
+      allViolations.push(...scanFile(file));
+    }
+
+    // CHECK 2 — conceptual / business leaks, scoped ONLY to user-facing
+    // surfaces (installer, CLI, public docs the package ships).
+    if (isConceptScoped(file)) {
+      conceptViolations.push(...scanFileForConcepts(file));
+    }
   }
 
-  if (allViolations.length === 0) {
-    console.log('✅ no-personal-leaks: no operational personal references found.');
-    console.log(`   Scanned ${files.length} tracked files.`);
+  if (allViolations.length === 0 && conceptViolations.length === 0) {
+    console.log('✅ no-personal-leaks: no operational personal or conceptual references found.');
+    console.log(`   Scanned ${files.length} tracked files (concept guard scoped to user-facing surfaces).`);
     return 0;
   }
 
-  console.error('');
-  console.error('❌ no-personal-leaks: found operational personal references in framework code.');
-  console.error('');
-  console.error(`   ${allViolations.length} violation(s) across ${new Set(allViolations.map((v) => v.file)).size} file(s).`);
-  console.error('');
-  for (const v of allViolations) {
-    console.error(`  ${v.file}:${v.line}`);
-    console.error(`    Match:       "${v.match}"`);
-    console.error(`    Issue:       ${v.description}`);
-    console.error(`    Suggestion:  ${v.suggestion}`);
-    console.error(`    Context:     ${v.context}`);
+  if (allViolations.length > 0) {
+    console.error('');
+    console.error('❌ no-personal-leaks: found operational personal references in framework code.');
+    console.error('');
+    console.error(`   ${allViolations.length} violation(s) across ${new Set(allViolations.map((v) => v.file)).size} file(s).`);
+    console.error('');
+    for (const v of allViolations) {
+      console.error(`  ${v.file}:${v.line}`);
+      console.error(`    Match:       "${v.match}"`);
+      console.error(`    Issue:       ${v.description}`);
+      console.error(`    Suggestion:  ${v.suggestion}`);
+      console.error(`    Context:     ${v.context}`);
+      console.error('');
+    }
+    console.error('Why this matters:');
+    console.error('  SINAPSE-AI is a multi-tenant framework distributed via npm.');
+    console.error('  Personal/operational context belongs in ~/.claude/ (private),');
+    console.error('  not in the public framework code.');
+    console.error('');
+    console.error('Exempt locations (allowed):');
+    console.error('  README/CONTRIBUTING/LICENSE — author credit');
+    console.error('  CHANGELOG.md — historical record');
+    console.error('  docs/audits/, docs/epics/, docs/research/ — historical/archive');
     console.error('');
   }
-  console.error('Why this matters:');
-  console.error('  SINAPSE-AI is a multi-tenant framework distributed via npm.');
-  console.error('  Personal/operational context belongs in ~/.claude/ (private),');
-  console.error('  not in the public framework code.');
-  console.error('');
-  console.error('Exempt locations (allowed):');
-  console.error('  README/CONTRIBUTING/LICENSE — author credit');
-  console.error('  CHANGELOG.md — historical record');
-  console.error('  docs/audits/, docs/epics/, docs/research/ — historical/archive');
-  console.error('');
+
+  if (conceptViolations.length > 0) {
+    console.error('');
+    console.error('❌ no-personal-leaks (concept guard): found internal/business references on user-facing surfaces.');
+    console.error('');
+    console.error(`   ${conceptViolations.length} violation(s) across ${new Set(conceptViolations.map((v) => v.file)).size} file(s).`);
+    console.error('');
+    for (const v of conceptViolations) {
+      console.error(`  ${v.file}:${v.line}`);
+      console.error(`    Match:       "${v.match}"`);
+      console.error(`    Issue:       ${v.description}`);
+      console.error(`    Suggestion:  ${v.suggestion}`);
+      console.error(`    Context:     ${v.context}`);
+      console.error('');
+    }
+    console.error('Why this matters:');
+    console.error('  These surfaces (installer, CLI, public docs) are what an external');
+    console.error('  user actually sees. Internal grounding concepts and the maintainer\'s');
+    console.error('  business client names must never leak into them.');
+    console.error('');
+  }
+
   return 1;
 }
 
@@ -201,4 +350,11 @@ if (require.main === module) {
   process.exit(run());
 }
 
-module.exports = { run, BLOCKED_PATTERNS, isAllowed };
+module.exports = {
+  run,
+  BLOCKED_PATTERNS,
+  isAllowed,
+  CONCEPT_PATTERNS,
+  isConceptScoped,
+  scanFileForConcepts,
+};

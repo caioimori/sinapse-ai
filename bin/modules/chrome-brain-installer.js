@@ -140,7 +140,8 @@ function mergeHooks(settingsPath, hookDefs) {
     const existing = settings.hooks[hookType] || [];
     const newKeys = new Set(hookList.map(h => hookKey(h.matcher, h)));
     // Dedupe by (matcher + command) so SessionStart matcher="" doesn't
-    // collide with other modules' SessionStart hooks (e.g. vault-grounding).
+    // collide with other modules' SessionStart hooks (e.g. another
+    // session-start grounding hook).
     const filtered = existing.filter(e => !newKeys.has(hookKey(e.matcher, e)));
     filtered.push(...hookList);
     settings.hooks[hookType] = filtered;

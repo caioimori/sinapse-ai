@@ -28,6 +28,10 @@ const yaml = require('js-yaml');
 // Paths
 const ROOT_DIR = path.join(__dirname, '..', '..');
 const AGENTS_DIR = path.join(ROOT_DIR, 'development', 'agents');
+// Squad agents live in the repo root under squads/<squad>/agents/*.md.
+// ROOT_DIR is .sinapse-ai/; the repo root is one level up.
+const REPO_ROOT = path.join(ROOT_DIR, '..');
+const SQUADS_DIR = path.join(REPO_ROOT, 'squads');
 const TASKS_DIR = path.join(ROOT_DIR, 'development', 'tasks');
 const TEMPLATES_DIR = path.join(ROOT_DIR, 'development', 'templates');
 const CHECKLISTS_DIR = path.join(ROOT_DIR, 'development', 'checklists');
@@ -93,9 +97,10 @@ function extractYamlFromMarkdown(content) {
 }
 
 /**
- * Load all agent files
+ * Load the 12 CORE agents (development/agents/*.md).
+ * Core agents are held to the STRICT schema (problems -> errors).
  */
-async function loadAllAgents() {
+async function loadCoreAgents() {
   const agents = [];
 
   try {
@@ -115,6 +120,8 @@ async function loadAllAgents() {
             commands: parsed.commands || [],
             dependencies: parsed.dependencies || {},
             parsed,
+            isCore: true,
+            tier: 'core',
           });
         }
       }
@@ -124,6 +131,100 @@ async function loadAllAgents() {
   }
 
   return agents;
+}
+
+/**
+ * Load the SQUAD agents (squads/<squad>/agents/*.md).
+ *
+ * Non-breaking by design: squad agents carry KNOWN pre-existing debt (3
+ * different definition formats, malformed frontmatter, missing roster
+ * entries) that later waves will fix. Here they are classified as WARNINGS,
+ * never errors — the only thing that can ERROR is an unreadable file.
+ *
+ * Each record is tagged isCore:false so the validators downgrade their
+ * findings to warnings.
+ */
+async function loadSquadAgents() {
+  const agents = [];
+
+  let squadDirs;
+  try {
+    const entries = await fs.readdir(SQUADS_DIR, { withFileTypes: true });
+    squadDirs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
+  } catch {
+    // No squads/ dir (e.g. a stripped checkout) -> nothing to add, not fatal.
+    return agents;
+  }
+
+  for (const squad of squadDirs) {
+    const agentsDir = path.join(SQUADS_DIR, squad, 'agents');
+    let files;
+    try {
+      files = await fs.readdir(agentsDir);
+    } catch {
+      continue; // squad without an agents/ dir -> skip
+    }
+
+    for (const file of files) {
+      if (!file.endsWith('.md') || file.startsWith('_')) continue;
+      const filePath = path.join(agentsDir, file);
+
+      let content;
+      try {
+        content = await fs.readFile(filePath, 'utf-8');
+      } catch (error) {
+        // Unreadable file is the ONE critical issue allowed to error for squads.
+        agents.push({
+          file: `${squad}/agents/${file}`,
+          path: filePath,
+          id: file.replace('.md', ''),
+          name: undefined,
+          commands: [],
+          dependencies: {},
+          parsed: null,
+          isCore: false,
+          tier: 'squad',
+          squad,
+          readError: error.message,
+        });
+        continue;
+      }
+
+      let parsed = null;
+      try {
+        parsed = extractYamlFromMarkdown(content);
+      } catch {
+        // Malformed frontmatter -> parsed stays null; surfaced as a WARNING.
+        parsed = null;
+      }
+
+      const agentBlock = parsed && parsed.agent ? parsed.agent : {};
+      agents.push({
+        file: `${squad}/agents/${file}`,
+        path: filePath,
+        id: agentBlock.id || file.replace('.md', ''),
+        name: agentBlock.name,
+        commands: (parsed && parsed.commands) || [],
+        dependencies: (parsed && parsed.dependencies) || {},
+        parsed,
+        isCore: false,
+        tier: 'squad',
+        squad,
+        parseFailed: parsed === null,
+      });
+    }
+  }
+
+  return agents;
+}
+
+/**
+ * Load all agent files (core + squad).
+ */
+async function loadAllAgents() {
+  const core = await loadCoreAgents();
+  const squad = await loadSquadAgents();
+  return [...core, ...squad];
 }
 
 /**
@@ -171,21 +272,32 @@ function validateCommandUniqueness(agents) {
         agent: agent.id,
         file: agent.file,
         hasVisibility: cmd.visibility !== undefined,
+        isCore: agent.isCore === true,
       });
     }
   }
 
-  // Check for duplicates
+  // Check for duplicates.
+  // A collision is an ERROR only when it is entirely between CORE agents
+  // (the strict, long-standing guarantee). Any collision that involves a
+  // SQUAD agent is downgraded to a WARNING — squad agents carry pre-existing
+  // naming debt that later waves will reconcile, and they must not break CI.
   for (const [cmd, owners] of commandOwners) {
     if (owners.length > 1 && !SHARED_COMMANDS.has(cmd)) {
       const ownerList = owners.map((o) => `@${o.agent}`).join(', ');
-      errors.push({
+      const allCore = owners.every((o) => o.isCore);
+      const finding = {
         type: 'DUPLICATE_COMMAND',
         command: cmd,
         owners: owners.map((o) => o.agent),
         message: `Command "*${cmd}" has multiple owners: ${ownerList}`,
         suggestion: `Keep "*${cmd}" only in the primary owner agent and remove from others, or add to SHARED_COMMANDS if intentionally shared.`,
-      });
+      };
+      if (allCore) {
+        errors.push(finding);
+      } else {
+        warnings.push(finding);
+      }
     }
   }
 
@@ -282,9 +394,37 @@ function validateAgentFormat(agents) {
   for (const agent of agents) {
     const { parsed, file, id } = agent;
 
+    // SQUAD agents: known pre-existing debt. Every structural problem here is
+    // a WARNING (never an error) so the 160 squad agents never break CI. The
+    // single exception (unreadable file) is handled earlier in the loader.
+    // CORE agents keep the strict behavior — structural problems are errors.
+    const sink = agent.isCore ? errors : warnings;
+
+    // Unreadable file is the ONLY truly-critical squad issue -> error.
+    if (agent.readError) {
+      errors.push({
+        type: 'UNREADABLE_AGENT',
+        agent: id,
+        message: `Cannot read agent file ${file}: ${agent.readError}`,
+      });
+      continue;
+    }
+
+    // A squad agent whose YAML didn't parse at all -> one consolidated warning,
+    // then skip the field-by-field checks (parsed is null).
+    if (!parsed || !parsed.agent) {
+      warnings.push({
+        type: 'UNPARSEABLE_AGENT',
+        agent: id,
+        message: `Could not parse agent definition in ${file} (no agent block / malformed frontmatter) — squad debt, later wave`,
+        suggestion: 'Normalize the agent frontmatter to the standard schema (agent.id/name/title).',
+      });
+      continue;
+    }
+
     // Check required fields
     if (!parsed.agent.id) {
-      errors.push({
+      sink.push({
         type: 'MISSING_FIELD',
         agent: id,
         field: 'agent.id',
@@ -293,7 +433,7 @@ function validateAgentFormat(agents) {
     }
 
     if (!parsed.agent.name) {
-      errors.push({
+      sink.push({
         type: 'MISSING_FIELD',
         agent: id,
         field: 'agent.name',
@@ -302,7 +442,7 @@ function validateAgentFormat(agents) {
     }
 
     if (!parsed.agent.title) {
-      errors.push({
+      sink.push({
         type: 'MISSING_FIELD',
         agent: id,
         field: 'agent.title',
@@ -443,6 +583,10 @@ function formatResults(results, showSuggestions = false) {
   lines.push('  Summary');
   lines.push('━'.repeat(60));
   lines.push(`  Agents validated: ${summary.totalAgents}`);
+  if (summary.coreAgents !== undefined) {
+    lines.push(`    Core (strict):  ${summary.coreAgents}`);
+    lines.push(`    Squad (warn):   ${summary.squadAgents}`);
+  }
   lines.push(`  Errors: ${summary.totalErrors}`);
   lines.push(`  Warnings: ${summary.totalWarnings}`);
   lines.push('');
@@ -487,12 +631,17 @@ async function validateAgents(options = {}) {
     dependencyValidation.warnings.length +
     formatValidation.warnings.length;
 
+  const coreAgents = agents.filter((a) => a.isCore);
+  const squadAgents = agents.filter((a) => !a.isCore);
+
   const results = {
     commandValidation,
     dependencyValidation,
     formatValidation,
     summary: {
       totalAgents: agents.length,
+      coreAgents: coreAgents.length,
+      squadAgents: squadAgents.length,
       totalErrors,
       totalWarnings,
       valid: totalErrors === 0,
@@ -545,6 +694,8 @@ module.exports = {
   validateDependencies,
   validateAgentFormat,
   loadAllAgents,
+  loadCoreAgents,
+  loadSquadAgents,
 };
 
 // Run CLI if called directly

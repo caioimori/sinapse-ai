@@ -3664,9 +3664,9 @@ files:
     type: script
     size: 18249
   - path: infrastructure/scripts/validate-agents.js
-    hash: sha256:1fb818950cfa60c572cdc63b5f822ffe9b0a11d351d136f2373bffb24eef99e8
+    hash: sha256:62f4f46fa2117f633b96b42be5fcf0448cf56408998affee6728e798c8014733
     type: script
-    size: 16777
+    size: 21894
   - path: infrastructure/scripts/validate-claude-integration.js
     hash: sha256:fe5e85f257724ec86178d4ed0a4cc6ce4d98b5b093f707851852ae0d2469abad
     type: script

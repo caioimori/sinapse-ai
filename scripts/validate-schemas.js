@@ -23,10 +23,15 @@
  *      and report found/missing. A known kind with no schema -> violation.
  *
  *   3. ARTIFACT VALIDATION (no-op clean when absent): kind -> glob by CONVENTION
- *      (story -> docs/stories/ ** / *.story.md, epic -> docs/epics/ ** / *.md,
- *      prd -> docs/prd/ ** / *.md). docs/stories and docs/epics are gitignored,
- *      so in public CI there are 0 artifacts -> reported as skipped, NOT a
- *      failure. When artifacts ARE present, extract data via
+ *      (story -> docs/stories/ ** / *.story.md, epic -> docs/epics/ ** / *.epic.md,
+ *      prd -> docs/prd/ ** / *.md). By DEFAULT the artifact layer is GIT-SCOPED
+ *      (git ls-files): only TRACKED artifacts are validated, so the result is
+ *      hermetic — identical locally and in CI regardless of untracked local
+ *      drafts. docs/stories and docs/epics are gitignored, so in a clean public
+ *      checkout there are 0 tracked artifacts -> reported as skipped, NOT a
+ *      failure. The --artifacts <dir> flag overrides this with a filesystem walk
+ *      of <dir> (used by the jest wrapper / tests). When artifacts ARE present,
+ *      extract data via
  *      TemplateValidator.extractDataFromMarkdown (or frontmatter parse) and
  *      validate via TemplateValidator.validate(data, kind); each error is
  *      reported with the instancePath that formatErrors() already produces.
@@ -47,9 +52,10 @@
  *         with no fallback, etc).
  *
  * FLAGS:
- *   --artifacts <dir>   Use <dir> as the artifact root instead of the repo root
- *                       (used by the jest wrapper / for testing). Globs are
- *                       resolved relative to this root.
+ *   --artifacts <dir>   Use <dir> as the artifact root (filesystem walk) instead
+ *                       of the DEFAULT git-scoped scan of the repo. Used by the
+ *                       jest wrapper / for testing. Globs are resolved relative
+ *                       to this root.
  *   --quiet             Suppress the per-schema OK lines; still prints the
  *                       summary and every violation.
  *
@@ -97,7 +103,12 @@ const ARTIFACT_CONVENTIONS = [
 // ---------------------------------------------------------------------------
 
 function parseArgs(argv) {
-  const opts = { artifactsRoot: REPO_ROOT, quiet: false };
+  // artifactsExplicit: whether the caller passed --artifacts. When NOT passed,
+  // the artifact layer is GIT-SCOPED (tracked files only) so it is hermetic —
+  // identical locally and in CI, regardless of untracked local drafts. When
+  // passed (jest wrapper / tests), it falls back to filesystem walking of the
+  // given dir so tests can stage fixtures outside git.
+  const opts = { artifactsRoot: REPO_ROOT, quiet: false, artifactsExplicit: false };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === '--quiet') {
@@ -109,9 +120,11 @@ function parseArgs(argv) {
         process.exit(2);
       }
       opts.artifactsRoot = path.resolve(next);
+      opts.artifactsExplicit = true;
       i += 1;
     } else if (a.startsWith('--artifacts=')) {
       opts.artifactsRoot = path.resolve(a.slice('--artifacts='.length));
+      opts.artifactsExplicit = true;
     }
   }
   return opts;
@@ -338,6 +351,35 @@ async function kindCoverage() {
 // LAYER 3 — artifact validation by convention (no-op clean when absent).
 // ---------------------------------------------------------------------------
 
+/**
+ * Collect GIT-TRACKED artifacts under `relDir` (relative to REPO_ROOT) ending
+ * with `suffix`. Hermetic: docs/stories|epics|prd are gitignored, so untracked
+ * local drafts are invisible and the result is identical locally and in CI.
+ * Returns absolute paths. Falls back to [] (not the FS) when git is unavailable
+ * — keeping the default scope strictly git-defined.
+ */
+function collectTrackedArtifacts(relDir, suffix) {
+  const posixDir = relDir.split(path.sep).join('/');
+  try {
+    // Use the DIRECTORY pathspec (git recurses) + filter by suffix in JS. A
+    // glob like '<dir>/**' would match only NESTED files and MISS artifacts
+    // directly in <dir> (per git pathspec semantics).
+    const out = execFileSync('git', ['ls-files', '-z', posixDir], {
+      cwd: REPO_ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+    return out
+      .split('\0')
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .filter((l) => l.endsWith(suffix))
+      .map((l) => path.join(REPO_ROOT, l));
+  } catch {
+    return [];
+  }
+}
+
 /** Recursively collect files under `dir` ending with `suffix`. */
 function collectArtifacts(dir, suffix, acc) {
   let entries;
@@ -429,8 +471,11 @@ async function validateArtifacts(opts) {
   const summary = { kinds: {}, total: 0, valid: 0, invalid: 0 };
 
   for (const conv of ARTIFACT_CONVENTIONS) {
-    const root = path.join(opts.artifactsRoot, conv.dir);
-    const files = collectArtifacts(root, conv.suffix, []);
+    // Default (no --artifacts): GIT-SCOPED, hermetic. With --artifacts: walk the
+    // given dir on disk (tests stage fixtures outside git).
+    const files = opts.artifactsExplicit
+      ? collectArtifacts(path.join(opts.artifactsRoot, conv.dir), conv.suffix, [])
+      : collectTrackedArtifacts(conv.dir, conv.suffix);
     summary.kinds[conv.kind] = files.length;
     summary.total += files.length;
 
