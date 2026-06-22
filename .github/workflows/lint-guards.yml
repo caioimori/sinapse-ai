@@ -55,7 +55,30 @@ jobs:
       - name: Run all lint guards in parallel
         run: npm run validate:all
 
-  cross-ide-parity:
+  validate-agents:
+    name: Validate Agents (core strict + squad warn)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      # Validates ALL 172 agents: the 12 core agents under the STRICT schema
+      # (problems -> errors -> exit 1) and the 160 squad agents in
+      # warnings-only mode (known pre-existing debt later waves will fix).
+      # Squad warnings do NOT fail the build by design.
+      - name: Run agent consistency validator
+        run: npm run validate:agents
     name: Cross-IDE Parity (conditional)
     runs-on: ubuntu-latest
     steps:

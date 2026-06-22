@@ -2,12 +2,14 @@
 /**
  * validate-story-meta — Story 10.19
  *
- * LOCAL-ONLY validator for `docs/stories/*.story.md` files.
+ * Validator for `docs/stories/*.story.md` files.
  *
- * Why local-only:
- *   docs/stories/ is gitignored, so a CI checkout contains zero story
- *   files. Running this in CI would always be a no-op. Use it instead
- *   via `npm run validate:story-meta` and via lint-staged on commit.
+ * Scope (hermetic):
+ *   The DEFAULT scope is git-TRACKED story files only (`git ls-files`).
+ *   docs/stories/ is gitignored, so untracked local drafts are NOT scanned
+ *   by default — the result is deterministic and identical locally and in CI
+ *   (a clean checkout with no tracked stories is simply a no-op). Use
+ *   `--staged` to scope to staged stories (lint-staged on commit).
  *
  * What it checks:
  *   1. Files lack YAML frontmatter            -> WARN  (grandfathered)
@@ -63,12 +65,23 @@ function findStoryFiles(projectRoot, opts = {}) {
       .filter((line) => line.startsWith('docs/stories/') && line.endsWith('.story.md'))
       .map((rel) => path.join(projectRoot, rel));
   }
-  const dir = path.join(projectRoot, 'docs', 'stories');
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((name) => name.endsWith('.story.md'))
-    .map((name) => path.join(dir, name));
+  // Default scope: git-TRACKED story files only (hermetic — same result
+  // locally and in CI). docs/stories/ is gitignored, so untracked local drafts
+  // must NOT be scanned by default; only files actually committed are checked.
+  // This mirrors validate-no-personal-leaks.js (git ls-files as source of truth).
+  // NB: use the DIRECTORY pathspec ('docs/stories') and filter by suffix in JS.
+  // A glob like 'docs/stories/**/*.story.md' would (per git pathspec semantics)
+  // match only NESTED files and MISS stories directly in docs/stories/.
+  const result = spawnSync('git', ['ls-files', 'docs/stories'], {
+    cwd: projectRoot,
+    encoding: 'utf8',
+  });
+  if (result.status !== 0 || !result.stdout) return [];
+  return result.stdout
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.endsWith('.story.md'))
+    .map((rel) => path.join(projectRoot, rel));
 }
 
 function parseFrontmatter(content) {
@@ -224,7 +237,7 @@ function main() {
   if (files.length === 0) {
     if (!args.quiet) {
       console.log('=== validate-story-meta ===');
-      console.log('No story files found — skipping (this is expected in CI checkouts).');
+      console.log('No git-tracked story files found — skipping (untracked local drafts are not scanned by default).');
     }
     return 0;
   }

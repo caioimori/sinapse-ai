@@ -3,6 +3,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const { spawnSync } = require('child_process');
 const {
   parseArgs,
   findStoryFiles,
@@ -213,20 +214,51 @@ describe('validate-story-meta', () => {
     });
   });
 
-  describe('findStoryFiles', () => {
-    it('returns empty array when docs/stories/ does not exist', () => {
+  describe('findStoryFiles (default scope = git-tracked, hermetic)', () => {
+    // Initialize a real git repo and TRACK files so git ls-files sees them.
+    // The default scope is git-tracked-only (Wave 2), so untracked drafts must
+    // be invisible — this is exactly what makes the validator hermetic.
+    function makeGitProject() {
+      const { root, dir } = makeTempProject();
+      const git = (args) =>
+        spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+      git(['init', '-q']);
+      git(['config', 'user.email', 'test@example.com']);
+      git(['config', 'user.name', 'Test']);
+      git(['config', 'commit.gpgsign', 'false']);
+      return { root, dir, git };
+    }
+
+    function track(git, root, relPath) {
+      // docs/stories is gitignored in the real repo, so force-add to track.
+      git(['add', '-f', relPath]);
+    }
+
+    it('returns empty array outside a git repo / when nothing is tracked', () => {
       const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-storymeta-empty-'));
       expect(findStoryFiles(root)).toEqual([]);
     });
 
-    it('lists only .story.md files', () => {
-      const project = makeTempProject();
+    it('lists only tracked .story.md files (untracked drafts ignored)', () => {
+      const project = makeGitProject();
       writeStory(project.dir, '10.1-real.story.md', '# real');
       writeStory(project.dir, 'README.md', '# not a story');
       writeStory(project.dir, '10.2-also.story.md', '# also real');
+      // Track all three; only the .story.md ones should come back.
+      track(project.git, project.root, 'docs/stories/10.1-real.story.md');
+      track(project.git, project.root, 'docs/stories/README.md');
+      track(project.git, project.root, 'docs/stories/10.2-also.story.md');
+
       const files = findStoryFiles(project.root).sort();
       expect(files).toHaveLength(2);
       expect(files.every((f) => f.endsWith('.story.md'))).toBe(true);
+    });
+
+    it('does NOT scan untracked local drafts (hermetic default)', () => {
+      const project = makeGitProject();
+      writeStory(project.dir, '10.9-draft.story.md', '# untracked draft');
+      // Intentionally NOT tracked.
+      expect(findStoryFiles(project.root)).toEqual([]);
     });
   });
 
