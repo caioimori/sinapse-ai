@@ -67,7 +67,7 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 
 Pronto. Você tem 17 squads operando no seu terminal.
 
-> **Nota sobre `npm install`:** A partir da v10.0.0-rc.4, o SINAPSE roda um postinstall automático que sincroniza agents para o Claude Code, cria os diretórios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e executa um health check rápido. Para desabilitar (CI, pipelines avançadas), defina `SINAPSE_SKIP_POSTINSTALL=1` antes do `npm install`, ou rode `npm install --ignore-scripts` (comportamento nativo do npm — nenhum postinstall é executado). Nesse caso, rode `sinapse doctor --fix` após a instalação para garantir que o ambiente esteja pronto.
+> **Nota sobre `npm install`:** O SINAPSE roda um postinstall automático que sincroniza agents para o Claude Code, cria os diretórios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e executa um health check rápido. Para desabilitar (CI, pipelines avançadas), defina `SINAPSE_SKIP_POSTINSTALL=1` antes do `npm install`, ou rode `npm install --ignore-scripts` (comportamento nativo do npm — nenhum postinstall é executado). Nesse caso, rode `sinapse doctor --fix` após a instalação para garantir que o ambiente esteja pronto.
 
 ---
 
@@ -79,7 +79,7 @@ Toda primeira instalação levanta objeções. Todas legítimas. Respondidas aqu
 
 Não. Cada projeto tem seu próprio `.sinapse-ai/` — assim como tem seu próprio `package.json` ou `node_modules/`. E isso **não é desperdício, é isolamento**.
 
-Tamanho real: `.sinapse-ai/` pesa ~500KB. Vinte projetos = 10MB. Menor que um único `node_modules/` de um projeto Next.js típico (300MB+). O custo de espaço é marginal. O ganho de isolamento é essencial.
+Tamanho real: `.sinapse-ai/` pesa ~16MB. Vinte projetos ≈ 320MB — equivalente a um único `node_modules/` de um projeto Next.js típico (300MB+), só que distribuído entre vinte projetos isolados. O custo de espaço é marginal. O ganho de isolamento é essencial.
 
 ### "Por que não instalar uma vez global e pronto?"
 
@@ -93,7 +93,7 @@ Porque projetos open source precisam ser **autocontidos**. Quando você comparti
 
 | Aspecto | Global | Local (recomendado) |
 |---------|:------:|:-------------------:|
-| Espaço em disco | Menor (1 cópia) | Maior (~500KB/projeto) |
+| Espaço em disco | Menor (1 cópia) | Maior (~16MB/projeto) |
 | Versionamento per-project | Não | Sim |
 | Clone e funcionando | Não | Sim |
 | Rules customizadas por projeto | Não | Sim |

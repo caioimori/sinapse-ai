@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.12.2] — 2026-06-21 — 🧹 Zera warnings de validação + conserta ponteiros Codex
+
+> Patch de higiene. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **`validate:agents` 3 → 0 warnings**: artefatos residuais resolvidos em todos os homes canônicos.
+- **`ide-sync` clobberando ponteiros Codex**: o sync de IDE sobrescrevia os ponteiros `.codex` indevidamente — corrigido para tocar apenas o espelho `.claude`.
+
+## [1.12.1] — 2026-06-20 — 📝 Higiene de validação + ortografia do README
+
+> Patch de polimento. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **`validate-agents` 98 → 3 warnings**: resolução de artefatos em todos os homes canônicos.
+
+### Changed
+
+- **README**: ortografia PT-BR completa + contagem de hooks consistente.
+- **Guard de refs externas**: referência interna genericizada.
+
+### Documentation
+
+- Entrada da v1.12.0 (hardening + conformidade) adicionada ao changelog.
+
 ## [1.12.0] — 2026-06-20 — 🛡️ Hardening + Conformidade
 
 > Maior release de robustez do framework até aqui: ~1 mês de hardening (auditoria clínica de 8 frentes + conformidade às diretrizes) entregue de uma vez. Sem breaking changes — atualização segura via `npx sinapse-ai update`.
@@ -37,6 +63,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - `undici` (dev) atualizado para corrigir vulnerabilidade HIGH dev-only. **0 vulnerabilidades em produção.**
+
+## [1.11.3] — 2026-06-19 — 🌐 Chrome Brain não abre mais a cada sessão
+
+> Patch de UX. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **Chrome Brain**: removido o hook `SessionStart` que abria o browser em toda sessão.
+
+## [1.11.2] — 2026-06-18 — 🧼 Saída do install limpa
+
+> Patch de UX. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **Install**: saída limpa — sem dumps, sem duplicação, branding calmo.
+
+## [1.11.1] — 2026-06-18 — 🔧 Dependabot + ide-sync + greeting
+
+> Patch de manutenção. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **Greeting**: normalização de id longo do agente na sugestão de próximo-passo e no gating do modo assistido.
+- **ide-sync**: commit do espelho `.claude` (squad orqx) para destravar o gate de paridade.
+
+### Security
+
+- **Dependabot**: 9 alertas resolvidos (prod + dev) sem quebra de comportamento.
+
+## [1.11.0] — 2026-06-18 — 🚦 Pré-check de Node + mensagens honestas
+
+> Atualização segura via `npx sinapse-ai update`.
+
+### Added
+
+- **Pré-check de versão do Node** antes do install/init (falha rápido em runtime incompatível).
+
+### Fixed
+
+- **Install**: mensagem de conclusão honesta (deps instaladas + contagem real de agentes).
+- **Secret-scanner**: deixa de falso-positivar em labels de UI com a palavra "password".
+
+## [1.10.0] — 2026-06-18 — 🧭 CLI descobrível + guardas de drift
+
+> Atualização segura via `npx sinapse-ai update`.
+
+### Added
+
+- **`--help` completo**: todos os comandos do CLI ficam descobríveis, com guard de regressão.
+- **Guard do Artigo VII**: protege a contagem de artigos da Constitution contra drift.
+
+### Fixed
+
+- **Reinstall preserva arquivos L3 user-owned** (`core-config`, `MEMORY.md`).
+- **Segurança**: eliminada interpolação de shell no `setx PATH` do install (Windows); 2 vulns moderadas corrigidas (`js-yaml`, `tar`).
+
+### Changed
+
+- **README**: contagem da Constitution corrigida (10→11 artigos, 6→7 NON-NEGOTIABLE).
+
+### Tests
+
+- Flakiness eliminado nos testes de orçamento de tempo do UAP bridge e do seed-metrics.
+
+## [1.9.1] — 2026-06-18 — 🩹 Correções pós-1.9.0
+
+> Patch de correção da auditoria adversarial pós-1.9.0. Atualização segura via `npx sinapse-ai update`.
+
+### Fixed
+
+- **Release**: `@semantic-release/git` removido temporariamente (a branch protegida rejeitava o push direto na main).
+- Correções pontuais da auditoria adversarial pós-1.9.0.
 
 ## [1.9.0] — 2026-06-17 — 🧭 Refino Macro (E1–E9) + Paridade Codex
 
