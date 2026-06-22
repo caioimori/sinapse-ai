@@ -29,8 +29,19 @@ SINAPSE is a meta-framework that orchestrates AI agents into specialized squads 
 
 - **CLI First** -- All intelligence lives in the CLI. Dashboards observe, never control.
 - **4-Layer Boundary** -- L1 (core, immutable) / L2 (templates, extend-only) / L3 (config, mutable) / L4 (runtime, always modify).
-- **Documentation-First** -- No code without a validated story. Pipeline: Epic -> Story -> Validation -> Implementation.
-- **Constitution** -- 11 articles with automatic gates that block violations. See `.sinapse-ai/constitution.md`.
+- **Documentation-First Development** -- No code without a validated story. Pipeline: Epic -> Story -> Validation -> Implementation.
+- **Constitution** -- 11 articles with automatic gates that block violations (full text: `.sinapse-ai/constitution.md`):
+  - **I. CLI First** -- intelligence in the CLI; dashboards observe, never control.
+  - **II. Agent Authority** -- exclusive authorities (only @devops pushes/PRs/releases); no agent assumes another's role.
+  - **III. Documentation-First Development** -- no code without a validated story.
+  - **IV. No Invention** -- every spec statement traces to a requirement/research finding.
+  - **V. Quality First** -- lint, typecheck, tests and (when applicable) build must pass.
+  - **VI. Absolute Imports** -- prefer `@/` over relative paths.
+  - **VII. Ecosystem Metrics Accuracy** -- squad/agent counts must be exact across all docs.
+  - **VIII. Mandatory Delegation** -- orchestrators always delegate domain work to specialists.
+  - **IX. Safe Collaboration** -- branch + sync + secret-scan; never work directly on main.
+  - **X. Security & Data Protection** -- RLS, least privilege, secrets in env, LGPD compliance.
+  - **XI. Conservative Default** -- prefer the least-destructive action; deletions in protected paths need an explicit override.
 
 ### Project Structure
 

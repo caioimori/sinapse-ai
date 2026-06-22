@@ -8,11 +8,11 @@ Full doc: `.sinapse-ai/constitution.md`. Gates auto-block violations.
 |------|-----------|----------|
 | I | CLI First | NON-NEGOTIABLE |
 | II | Agent Authority | NON-NEGOTIABLE |
-| III | Documentation-First | NON-NEGOTIABLE |
+| III | Documentation-First Development | NON-NEGOTIABLE |
 | IV | No Invention | MUST |
 | V | Quality First | MUST |
 | VI | Absolute Imports | SHOULD |
-| VII | Metrics Accuracy | NON-NEGOTIABLE |
+| VII | Ecosystem Metrics Accuracy | NON-NEGOTIABLE |
 | VIII | Mandatory Delegation | NON-NEGOTIABLE |
 | IX | Safe Collaboration | NON-NEGOTIABLE |
 | X | Security & Data Protection | NON-NEGOTIABLE |
