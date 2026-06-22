@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
 [![CI](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-11014%20passed-success)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-11397%20passed-success)](https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml)
 [![Constitution](https://img.shields.io/badge/Constitution-11%20articles-blueviolet)](.sinapse-ai/constitution.md)
 
 ```
@@ -53,7 +53,7 @@ O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex) e instala os
 
 ```bash
 npx sinapse-ai status   # Lista de squads + agentes instalados
-npx sinapse-ai doctor   # 12 health checks contra o ambiente
+npx sinapse-ai doctor   # 16 health checks contra o ambiente
 ```
 
 Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
@@ -412,7 +412,7 @@ npx sinapse-ai uninstall         # Remove o framework do projeto
 
 # Diagnóstico
 npx sinapse-ai status            # Estado da instalação + lista de squads
-npx sinapse-ai doctor            # 12 health checks contra o ambiente
+npx sinapse-ai doctor            # 16 health checks contra o ambiente
 npx sinapse-ai doctor --fix      # Auto-corrige problemas detectados
 npx sinapse-ai doctor --json     # Saída machine-readable para CI
 npx sinapse-ai doctor --dry-run  # Mostra o que `--fix` faria sem aplicar
