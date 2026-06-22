@@ -9,7 +9,7 @@
 #
 version: 1.12.2
 generator: scripts/generate-install-manifest.js
-file_count: 1171
+file_count: 1152
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1603,10 +1603,6 @@ files:
     hash: sha256:e58ad5d52b329d335ee73245352ae545df19c8122e23f34750a6a75996ca9dc6
     type: script
     size: 5386
-  - path: development/scripts/approval-workflow.js
-    hash: sha256:3e0874ab55558dd39539dc1da7eea97c60f5797129165c385a01a699b1e98df0
-    type: script
-    size: 21560
   - path: development/scripts/audit-agent-config.js
     hash: sha256:fde7fba12b7b451109911d75ac7719c0c5f586bf81341fb0d79d4110be3750af
     type: script
@@ -1615,30 +1611,10 @@ files:
     hash: sha256:38cd58a782cc942481bcf1279bdb239c4ea760de0c6df7f5f09166110d6e8b19
     type: script
     size: 10019
-  - path: development/scripts/backup-manager.js
-    hash: sha256:04aee4ddce4943ae7457319cd57df9a4d592be641a007b79efde33273b0cdd90
-    type: script
-    size: 16666
   - path: development/scripts/batch-update-agents-session-context.js
     hash: sha256:5b301f24fd43c6054000cafae9e2457abd023aae1d80a6f65e43a1bf3ce07319
     type: script
     size: 2928
-  - path: development/scripts/branch-manager.js
-    hash: sha256:694c20fe8725e06e7f263a8d3ec19057aab1bfdf3820cf70c350e4c54523fffa
-    type: script
-    size: 11540
-  - path: development/scripts/code-quality-improver.js
-    hash: sha256:541d7028563a510020119967c3237dfcc84feb039d85bf790624a690c43c18e9
-    type: script
-    size: 40546
-  - path: development/scripts/commit-message-generator.js
-    hash: sha256:d97f1cac89c86dfc489a5327bf3e2583ebcceef3b090887002367ee440abcf33
-    type: script
-    size: 25379
-  - path: development/scripts/conflict-resolver.js
-    hash: sha256:f27bbf2ce203c74634064b5d369aa90d506b364cabf2a303c911a849218b5c5d
-    type: script
-    size: 19189
   - path: development/scripts/decision-context.js
     hash: sha256:e9bfb559fbd9732f5ba3d25564ddfaec41d7d6c3cc719ceba5c750a637df14dc
     type: script
@@ -1655,26 +1631,14 @@ files:
     hash: sha256:aaeefc65620010f8ad22213595c833228d1037d2775e96dd1708d198040ae6a7
     type: script
     size: 5137
-  - path: development/scripts/dependency-analyzer.js
-    hash: sha256:39880d23a840dcc06d2e235e5e04417b435497f87acae8a57104c130be74e718
-    type: script
-    size: 18035
   - path: development/scripts/dev-context-loader.js
     hash: sha256:6de474e8311aa8f7f19494b6bf81287592f8f577b0c1a345b2e1a28e94b28171
     type: script
     size: 8238
-  - path: development/scripts/diff-generator.js
-    hash: sha256:d55d4a61ad34053338b29ecfbcf1d2547980ba884318c0752f7a9e3b22389460
-    type: script
-    size: 10668
   - path: development/scripts/generate-greeting.js
     hash: sha256:052b669917fe0934942cc85f613af8fe7302a9b7d70187c9558337bef3f9ec92
     type: script
     size: 3221
-  - path: development/scripts/git-wrapper.js
-    hash: sha256:172aa10616b1fb98a685af9afa81c85b09db3546176dc4a83cfdb06ca1015588
-    type: script
-    size: 11890
   - path: development/scripts/greeting-builder.js
     hash: sha256:293b89379a558837cfab65893130b638d6207079cde2d5252578089bb25732be
     type: script
@@ -1703,34 +1667,14 @@ files:
     hash: sha256:d6f3a03f975b01e4bf86b185228833e965145e3be10ce8a1d4e6cfc54c85b3f4
     type: script
     size: 9455
-  - path: development/scripts/modification-validator.js
-    hash: sha256:0bce67d53b19243654626bf53d754019011e327d037fdc7ca06bb0e1e1889022
-    type: script
-    size: 16489
   - path: development/scripts/pattern-learner.js
     hash: sha256:8fc513199884abdc7ac011fac381ba1bb695d43fa7d08a655951bf55754749f4
     type: script
     size: 35071
-  - path: development/scripts/performance-analyzer.js
-    hash: sha256:a28eb3b242415f6bb4252c2b1579723cd8c6a5dbb59549783ef9150baaa259c4
-    type: script
-    size: 23414
   - path: development/scripts/populate-entity-registry.js
     hash: sha256:2232bebc783c13e222c7b80713eae016343406ab2a878b0c6950b0691202d8c1
     type: script
     size: 25928
-  - path: development/scripts/refactoring-suggester.js
-    hash: sha256:66bf0be38efb417619e652c690d41337202dae7defa454bec73b010b05bb6db4
-    type: script
-    size: 35228
-  - path: development/scripts/rollback-handler.js
-    hash: sha256:c79a84fa3b4bc86b6e26f994039555a854063c0f036b0b08d7ce2c32a2134c7e
-    type: script
-    size: 16563
-  - path: development/scripts/security-checker.js
-    hash: sha256:b1ccf2428b623bdb3bac364ed92092fe55a8ec8a4fb5f086a0ad1b140fe69d25
-    type: script
-    size: 9524
   - path: development/scripts/skill-validator.js
     hash: sha256:9e8decda5a7bf73f05772ba0a315931b55bc61e333efea16901c5170752fb297
     type: script
@@ -1799,26 +1743,10 @@ files:
     hash: sha256:c4c46498b93e3ddf268648735e8059edbc6c84b21ef7675ba1557fa8cc856bcb
     type: script
     size: 3986
-  - path: development/scripts/template-engine.js
-    hash: sha256:d4143c5ec5fb4238e4d86a7cdbae610787f7647117bd5ed76cf61cfd7792cdb7
-    type: script
-    size: 6961
-  - path: development/scripts/template-validator.js
-    hash: sha256:f08cc27cbcc2990df0eb48f0aa677f196949b5a6c82c1837d0fdff0c7684f39f
-    type: script
-    size: 8335
-  - path: development/scripts/test-generator.js
-    hash: sha256:55dc8708ad43492fa886dfb1bbb8f9c25138f49a1d4e3a310f30ee30574050aa
-    type: script
-    size: 24943
   - path: development/scripts/test-greeting-system.js
     hash: sha256:eb0379edc43f6a448138420cda25b1685caaa8e5d2884afee27766a525e92f5d
     type: script
     size: 5563
-  - path: development/scripts/transaction-manager.js
-    hash: sha256:4df7b626b5d29c0527e265451099e65ab2aa004534259cf094695f5d71eac620
-    type: script
-    size: 17614
   - path: development/scripts/unified-activation-pipeline.js
     hash: sha256:9ac8eabc4635500e9d10cebe52e2147f15366840b0a3f97313f17a61b95d1062
     type: script
@@ -1855,10 +1783,6 @@ files:
     hash: sha256:05226c7d3c27cf94ccd653686f3ce043c7b649fef753ce0f17ffb470cf01bd76
     type: script
     size: 25486
-  - path: development/scripts/yaml-validator.js
-    hash: sha256:b64ef84a6def84cc600aca2c04fedd1999be394cac017409231752ee9eb51f46
-    type: script
-    size: 10338
   - path: development/skills/captcha-handler.md
     hash: sha256:de3fcdf981a727a2b2efd532d4596bed50a0f2ba14c340bcd8b735ad7fab5876
     type: development
@@ -3380,9 +3304,9 @@ files:
     type: script
     size: 8847
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:b2cb08dc1d0e7c6c22436c11f073cdaae9516b28a55ad5a454412e87aaf59bba
+    hash: sha256:86578adee8ec6fd5cc7a38d70ea04984d4c7bdb717126c21e0cc32b044c4c5c9
     type: script
-    size: 18011
+    size: 18770
   - path: infrastructure/scripts/ide-sync/persona-renderer.js
     hash: sha256:44f76be1e48c4a6271d8c721687d8788d2317a1163d74731abfe97f36775334d
     type: script
