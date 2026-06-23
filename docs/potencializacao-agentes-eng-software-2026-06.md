@@ -102,4 +102,16 @@ Criar artefatos novos em `.sinapse-ai/development/{workflows,tasks}` é **evolu�
 
 ---
 
-*Documento gerado na execução autônoma de 2026-06-22. Entregue em PR para revisão.*
+## 6. Refino v2 — Fortificação individual por função (2026-06-23)
+
+Auditoria pré-merge revelou que a v1 era munição **genérica-por-squad** (agentes da mesma equipe idênticos; orquestradores com gates de execução). Corrigido com munição **individual por função**:
+
+- **172 agentes classificados** em 18 arquétipos de função (orquestrador, executor-código, arquiteto, frontend-ui, design-ux, motion, dados, devops-sre, segurança, qualidade, qualidade-editorial, produto-processo, skills-automação, pesquisa-análise, copy-escrita, brand-criativo, comercial-growth, storytelling, conselho-estratégico).
+- Cada agente: **núcleo anti-alucinação** (No Invention, saída de IA não-confiável, spec antes) + **munição da função** (destilada fiel dos kits) + **linha de congruência** amarrada à persona específica.
+- **162 agentes com v2** (marcador `ENG-GROUNDING:v2`); 10 framework mantêm a munição completa do PR #264.
+- **Verificação adversarial em 3 frentes** corrigiu, antes do commit: os 18 orquestradores → munição de COORDENAÇÃO (não execução; corrige `design-orqx` que tinha gates de frontend); 4 QA não-software (`content-governor`, `brand-auditor`, `copy-editor`, `fiscal-compliance-br`) → arquétipo "Qualidade Editorial"; bloco de storytelling generalizado (removido jargão interno).
+- Validação: `validate:agents` 0 errors · `validate:parity` 100% · `lint` OK · manifest válido.
+
+---
+
+*Documento gerado na execução autônoma de 2026-06-22, refino v2 em 2026-06-23. Entregue em PR para revisão.*
