@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-23T02:37:29.103Z'
+  lastUpdated: '2026-06-23T18:12:03.505Z'
   entityCount: 792
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -14070,8 +14070,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:ac7f931f107fe2adc020ef26f8ea0e1aba57dd0ba3d02bbff3b92e3ca6466368
-      lastVerified: '2026-06-21T05:24:05.866Z'
+      checksum: sha256:313fd53fcb43bec1a0e0e1dc90867c6a6b3643e08a9a41e32e2fa86e090ce8ae
+      lastVerified: '2026-06-23T18:12:03.446Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
@@ -14136,8 +14136,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:45326e5a21a8d0497f8164160c03db991ea8782300a8880ca46ec4df9835ac01
-      lastVerified: '2026-06-15T00:26:26.456Z'
+      checksum: sha256:80fc6cdfd6d7102803a5c477d576cbfadf96990ffd8f6c7246047603f2a80d33
+      lastVerified: '2026-06-23T18:12:03.447Z'
     ux-design-expert:
       path: .sinapse-ai/development/agents/ux-design-expert.md
       layer: L2

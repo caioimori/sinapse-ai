@@ -1344,7 +1344,7 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:18da8c5f6f0b2200a7ac5a9e78bae1787335d6ab2e9e70fcb65feb6c58dc0ddf
+    hash: sha256:8b5182998467ccf39613571300eb714e7bdd1f51e0f031582cadaf44fcdf555a
     type: data
     size: 547889
   - path: data/learned-patterns.yaml
@@ -1480,17 +1480,17 @@ files:
     type: agent
     size: 23745
   - path: development/agents/snps-orqx.md
-    hash: sha256:ac7f931f107fe2adc020ef26f8ea0e1aba57dd0ba3d02bbff3b92e3ca6466368
+    hash: sha256:313fd53fcb43bec1a0e0e1dc90867c6a6b3643e08a9a41e32e2fa86e090ce8ae
     type: agent
-    size: 41103
+    size: 42694
   - path: development/agents/sprint-lead.md
     hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
     type: agent
     size: 14441
   - path: development/agents/squad-creator.md
-    hash: sha256:45326e5a21a8d0497f8164160c03db991ea8782300a8880ca46ec4df9835ac01
+    hash: sha256:80fc6cdfd6d7102803a5c477d576cbfadf96990ffd8f6c7246047603f2a80d33
     type: agent
-    size: 16584
+    size: 18180
   - path: development/agents/ux-design-expert.md
     hash: sha256:ef221c2ce9dc7b808feab65d04c80e5d0186fe3343e079404d761b1d9ff056a2
     type: agent
