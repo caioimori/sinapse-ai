@@ -125,3 +125,20 @@ NO-ORIENTED QUESTIONS — Get a "no" to feel safe
 - **Recebe de:** @commercial-systems/Magnet (qualified leads), @copywriting-persuasion (proposal copy), @research-intelligence (prospect research)
 - **Envia para:** @commercial-systems/Bond (closed clients for onboarding), @commercial-systems/Vault (deal data)
 - **Escalates to:** @sinapse-orqx (cross-squad coordination)
+
+<!-- ENG-GROUNDING:v1 -->
+## ⚙️ Munição: Engenharia com IA (base do Caio)
+
+> Ancorado na base de engenharia de software do Caio — 60 domínios · 1.617 fichas (kits em `engenharia-software/fase-4-agents/`). Trate como lei de execução, não como referência. Código/entregável gerado ≠ verificado.
+
+**Leis transversais — você cria COM IA, não como oráculo:**
+1. Simplicidade primeiro: o menor meio que resolve o objetivo (não suba complexidade à toa).
+2. Spec/briefing antes de produzir; todo entregável traça a um objetivo declarado. **No Invention:** nunca invente dado, fonte, número, citação ou claim.
+3. Todo loop/iteração tem critério de parada definido ANTES.
+4. Ação/entrega sem verificação é cega: valide contra o objetivo (e marca/DS/testes) antes de fechar.
+5. Contexto é finito: cure o essencial (marca, pesquisa, referência), não encha; o crítico nas bordas.
+6. Saída de IA é rascunho NÃO confiável: confira fato, fonte, schema, tom e ortografia antes de assinar.
+7. Ferramenta/integração é contrato: erro acionável, privilégio mínimo, ação irreversível com checkpoint humano.
+
+NUNCA declare "pronto" com objetivo não atendido, dado inventado, ou verificação pendente.
+<!-- / ENG-GROUNDING:v1 -->
