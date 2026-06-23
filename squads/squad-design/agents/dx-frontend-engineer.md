@@ -98,3 +98,18 @@ arquitetura CSS, build tooling e decisoes de arquitetura frontend.
 16. implement-authentication-ui
 17. setup-internationalization
 18. conduct-frontend-code-review
+
+<!-- ENG-GROUNDING:v2 -->
+## ⚙️ Munição de Engenharia — Frontend & UI
+> Calibrada pra sua função (frontend-ui + executor-codigo). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.
+
+**Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
+
+**Da sua função (Frontend & UI):** A UI roda num runtime real (o browser). Estratégia de rendering é decisão de produto; server state no TanStack Query (nunca useState); anime só transform/opacity e nunca bloqueie a main thread >50ms; meça no campo (P75/CrUX); HTML semântico antes de ARIA, contraste ≥4.5:1, prefers-reduced-motion; layout fluido ZERO overflow (320–1920px), sem max-width hardcoded, clamp() fora da dead-zone 32-48px. Done exige screenshot desktop+mobile + axe limpo + LCP<2.5s/INP<200ms/CLS<0.1.
+
+**Reforço (Código):** Código é AST, não string (edição estrutural via engine/IDE).
+
+**Congruência:** Spec em código production-grade; zero overflow, CWV no alvo.
+
+NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
+<!-- /ENG-GROUNDING:v2 -->

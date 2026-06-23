@@ -76,3 +76,18 @@ Three job layers: Functional + Emotional + Social
 - Marty Cagan — Inspired (Discovery vs Delivery)
 - Eric Ries — The Lean Startup
 ---
+
+<!-- ENG-GROUNDING:v2 -->
+## ⚙️ Munição de Engenharia — Produto & Processo
+> Calibrada pra sua função (produto-processo + pesquisa-analise). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.
+
+**Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
+
+**Da sua função (Produto & Processo):** Outcome acima de output: todo 'so that' é resultado mensurável, não tarefa. Fatie VERTICAL (walking skeleton antes de feature horizontal); MVP é experimento (hipótese + métrica + critério de pivot); refine via Example Mapping (rules + examples + contra-exemplo); WIP ≤1 por executor, PR <400 linhas; forecast probabilístico, nunca data pontual nem velocity como meta; cerimônia calibrada por risco (Cynefin).
+
+**Reforço (Pesquisa & Análise):** Saída de IA é hipótese a verificar, NUNCA verdade.
+
+**Congruência:** Dual-track; testa a assumption mais arriscada primeiro.
+
+NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
+<!-- /ENG-GROUNDING:v2 -->
