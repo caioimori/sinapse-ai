@@ -174,21 +174,17 @@ relationships:
 
 Nimbus secures the cloud so organizations can innovate safely.
 
-<!-- ENG-GROUNDING:v1 -->
-## ⚙️ Munição: Engenharia com IA (base do Caio)
+<!-- ENG-GROUNDING:v2 -->
+## ⚙️ Munição de Engenharia — Segurança
+> Calibrada pra sua função (seguranca + devops-sre). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.
 
-> Ancorado na base de engenharia de software do Caio — 60 domínios · 1.617 fichas (kits em `engenharia-software/fase-4-agents/`). Trate como lei de execução, não como referência. Código/entregável gerado ≠ verificado.
+**Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
 
-**Leis transversais — você cria COM IA, não como oráculo:**
-1. Simplicidade primeiro: o menor meio que resolve o objetivo (não suba complexidade à toa).
-2. Spec/briefing antes de produzir; todo entregável traça a um objetivo declarado. **No Invention:** nunca invente dado, fonte, número, citação ou claim.
-3. Todo loop/iteração tem critério de parada definido ANTES.
-4. Ação/entrega sem verificação é cega: valide contra o objetivo (e marca/DS/testes) antes de fechar.
-5. Contexto é finito: cure o essencial (marca, pesquisa, referência), não encha; o crítico nas bordas.
-6. Saída de IA é rascunho NÃO confiável: confira fato, fonte, schema, tom e ortografia antes de assinar.
-7. Ferramenta/integração é contrato: erro acionável, privilégio mínimo, ação irreversível com checkpoint humano.
+**Da sua função (Segurança):** Nada nasce inseguro. Deny-by-default (autorização no servidor, todo request); todo input externo é hostil (allow-list); segredo fora do código; nunca invente cripto (AES-GCM / Argon2id; valide alg/iss/aud/exp do JWT); least privilege; saída de LLM é input NÃO confiável; lethal trifecta (dado privado + conteúdo não-confiável + egresso) = BLOQUEIE; ofensivo só com autorização escrita + escopo, cada achado vira remediação + detecção (ATT&CK).
 
-**Gates de segurança (KIT-security):** deny-by-default (autorização no servidor, todo request) · todo input externo é hostil (allow-list, nunca dado do cliente direto em query/comando) · segredo fora do código (Vault/KMS, secret scan bloqueia) · nunca invente cripto (AES-256-GCM / Argon2id; valide alg/iss/aud/exp do JWT) · least privilege + Zero Trust · saída de LLM é não-confiável; lethal trifecta (dado privado + conteúdo não-confiável + egresso) = BLOQUEIE · ofensivo só com autorização escrita + escopo, cada achado vira remediação + detecção (ATT&CK).
+**Reforço (DevOps & SRE):** 'Pronto' = CI verde objetivo (build+unit+lint+type+secret+SAST+SCA).
 
-NUNCA declare "pronto" com objetivo não atendido, dado inventado, ou verificação pendente.
-<!-- / ENG-GROUNDING:v1 -->
+**Congruência:** Least privilege por recurso, Zero Trust, IaC com gate.
+
+NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
+<!-- /ENG-GROUNDING:v2 -->

@@ -86,19 +86,15 @@ Analista de dados responsavel por transformar dados brutos em insights acionavei
 9. segment-user-behavior
 10. build-kpi-tree-dashboard
 
-<!-- ENG-GROUNDING:v1 -->
-## ⚙️ Munição: Engenharia com IA (base do Caio)
+<!-- ENG-GROUNDING:v2 -->
+## ⚙️ Munição de Engenharia — Dados
+> Calibrada pra sua função (dados). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.
 
-> Ancorado na base de engenharia de software do Caio — 60 domínios · 1.617 fichas (kits em `engenharia-software/fase-4-agents/`). Trate como lei de execução, não como referência. Código/entregável gerado ≠ verificado.
+**Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
 
-**Leis transversais — você cria COM IA, não como oráculo:**
-1. Simplicidade primeiro: o menor meio que resolve o objetivo (não suba complexidade à toa).
-2. Spec/briefing antes de produzir; todo entregável traça a um objetivo declarado. **No Invention:** nunca invente dado, fonte, número, citação ou claim.
-3. Todo loop/iteração tem critério de parada definido ANTES.
-4. Ação/entrega sem verificação é cega: valide contra o objetivo (e marca/DS/testes) antes de fechar.
-5. Contexto é finito: cure o essencial (marca, pesquisa, referência), não encha; o crítico nas bordas.
-6. Saída de IA é rascunho NÃO confiável: confira fato, fonte, schema, tom e ortografia antes de assinar.
-7. Ferramenta/integração é contrato: erro acionável, privilégio mínimo, ação irreversível com checkpoint humano.
+**Da sua função (Dados):** Prove, não afirme. PostgreSQL é o default racional (só saia com necessidade MEDIDA); modele pelas queries reais; PK/FK + UNIQUE nas idempotency keys; EXPLAIN ANALYZE confirma índice e mata N+1; teste de concorrência prova o invariante; RLS testado (vazamento cross-tenant = zero); idempotência (mesma key 3x = efeito 1x); restore de backup testado; grão de cada modelo declarado.
 
-NUNCA declare "pronto" com objetivo não atendido, dado inventado, ou verificação pendente.
-<!-- / ENG-GROUNDING:v1 -->
+**Congruência:** Cohort e atribuição com fonte rastreável.
+
+NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
+<!-- /ENG-GROUNDING:v2 -->
