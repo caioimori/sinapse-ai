@@ -4,8 +4,10 @@ workflow:
   version: "1.0"
   description: >-
     Pipeline completo que transforma requisitos informais em especificações
-    executáveis. Orquestra 5 fases: Gather → Assess → Research → Write → Critique.
-    Adapta as fases baseado na complexidade do requisito.
+    executáveis. Orquestra as fases: Gather → Assess → Research → Write → Clarify →
+    Critique → Plan → Analyze. Adapta as fases baseado na complexidade do requisito.
+    Clarify desambigua a spec antes do QA gate; Analyze faz a consistência cruzada
+    (read-only) antes da implementação.
 
     Part of the Auto-Claude ADE (Autonomous Development Engine) infrastructure.
 
@@ -52,9 +54,19 @@ workflow:
       phase: spec
 
     - event: command
+      command: "*clarify-spec"
+      action: run_phase
+      phase: clarify
+
+    - event: command
       command: "*critique-spec"
       action: run_phase
       phase: critique
+
+    - event: command
+      command: "*analyze-spec"
+      action: run_phase
+      phase: analyze
 
   # ═══════════════════════════════════════════════════════════════════════════════════
   #                              CONFIGURATION
@@ -86,15 +98,17 @@ workflow:
 
   phases:
     # SIMPLE: Minimal pipeline for straightforward tasks
+    # Includes clarify (cheap, avoids rework) but skips analyze.
     SIMPLE:
       description: "Tarefa direta, padrões existentes"
       steps:
         - gather
         - spec
+        - clarify
         - critique
       estimated_time: "30-60 min"
 
-    # STANDARD: Full pipeline for moderate complexity
+    # STANDARD: Full pipeline for moderate complexity (clarify + analyze)
     STANDARD:
       description: "Complexidade moderada, alguma pesquisa necessária"
       steps:
@@ -102,11 +116,13 @@ workflow:
         - assess
         - research
         - spec
+        - clarify
         - critique
         - plan
+        - analyze
       estimated_time: "2-4 hours"
 
-    # COMPLEX: Extended pipeline with revision loop
+    # COMPLEX: Extended pipeline with revision loop (clarify + analyze)
     COMPLEX:
       description: "Alta complexidade, múltiplas iterações"
       steps:
@@ -114,10 +130,12 @@ workflow:
         - assess
         - research
         - spec
+        - clarify
         - critique_1
         - revise
         - critique_2
         - plan
+        - analyze
       estimated_time: "4-8 hours"
       flags:
         - "Architectural review recommended"
@@ -293,11 +311,53 @@ workflow:
 
       on_success:
         log: "📝 Specification written: docs/stories/{storyId}/spec/spec.md"
-        next: critique
+        next: clarify
 
       on_failure:
         action: halt
         error: "Failed to write specification"
+
+    # ═════════════════════════════════════════════════════════════════════════════════
+    # PHASE 4b: CLARIFY SPECIFICATION
+    # ═════════════════════════════════════════════════════════════════════════════════
+
+    - step: clarify
+      phase: "4b"
+      phase_name: "Clarify Specification"
+      agent: pm
+
+      description: >-
+        Interactive ambiguity resolution BEFORE the QA gate. Scans the spec across a
+        9-category coverage taxonomy, asks at most 5 questions (one at a time, guided by
+        Impact × Uncertainty), and integrates each answer atomically into spec.md
+        (## Clarifications section). Reduces costly downstream rework.
+
+      task: spec-clarify.md
+
+      inputs:
+        storyId: "{storyId}"
+        spec: "docs/stories/{storyId}/spec/spec.md"
+        requirements: "docs/stories/{storyId}/spec/requirements.json"
+
+      outputs:
+        - spec.md (updated)
+
+      elicit: true  # Requires user interaction
+
+      gate: true  # Order gate: complete BEFORE plan
+      blocking: false  # Skippable with explicit rework-risk warning
+
+      on_success:
+        log: "💬 Clarification complete: {clarify.questionsAsked} questions resolved"
+        next: critique
+
+      on_skip:
+        log: "⚠️ Clarification skipped - downstream rework risk increases"
+        next: critique
+
+      on_failure:
+        action: continue
+        fallback: "Proceed to critique; flag open ambiguities as risks"
 
     # ═════════════════════════════════════════════════════════════════════════════════
     # PHASE 5: CRITIQUE SPECIFICATION
@@ -435,7 +495,50 @@ workflow:
 
       on_success:
         log: "📋 Implementation plan created"
-        complete: true
+        next: analyze
+
+    # ═════════════════════════════════════════════════════════════════════════════════
+    # PHASE 7: ANALYZE CROSS-CONSISTENCY (final, READ-ONLY)
+    # ═════════════════════════════════════════════════════════════════════════════════
+
+    - step: analyze
+      phase: 7
+      phase_name: "Analyze Cross-Consistency"
+      agent: qa
+
+      description: >-
+        READ-ONLY cross-consistency gate. Cross-references spec ↔ plan ↔ tasks ↔ constitution
+        in 6 detection passes (Duplication, Ambiguity, Underspecification, Constitution Alignment,
+        Coverage Gaps, Inconsistency) and emits a findings table + coverage metrics. Does not
+        modify any file. CRITICAL findings (any constitution conflict) block implementation.
+
+      condition: "complexity.result !== 'SIMPLE'"  # SIMPLE skips analyze
+
+      task: spec-analyze.md
+
+      inputs:
+        storyId: "{storyId}"
+        spec: "docs/stories/{storyId}/spec/spec.md"
+        plan: "docs/stories/{storyId}/spec/plan.json"
+        tasks: "docs/stories/{storyId}/spec/tasks.md"
+        constitution: ".sinapse-ai/constitution.md"
+
+      outputs:
+        - analyze-report.json
+
+      gate: true  # Blocking gate
+      read_only: true  # Never mutates artifacts
+
+      on_verdict:
+        PASS:
+          log: "✅ Analyze PASS (coverage: {analyze.metrics.coveragePct}%, 0 CRITICAL)"
+          action: continue
+          complete: true
+
+        BLOCKED:
+          log: "🛑 Analyze BLOCKED: {analyze.metrics.criticalCount} CRITICAL finding(s)"
+          action: halt
+          escalate_to: "@architect"
 
   # ═══════════════════════════════════════════════════════════════════════════════════
   #                              WORKFLOW COMPLETION
@@ -458,6 +561,7 @@ workflow:
          • docs/stories/{storyId}/spec/research.json
          • docs/stories/{storyId}/spec/spec.md
          • docs/stories/{storyId}/spec/critique.json
+         • docs/stories/{storyId}/spec/analyze-report.json
 
       📌 Next Steps:
          • Review spec.md
@@ -470,11 +574,13 @@ workflow:
       - research.json
       - spec.md
       - critique.json
+      - analyze-report.json
 
     next_steps:
       - "Review specification: docs/stories/{storyId}/spec/spec.md"
       - "Start development: @developer *develop {storyId}"
       - "View critique: docs/stories/{storyId}/spec/critique.json"
+      - "View analyze report: docs/stories/{storyId}/spec/analyze-report.json"
 
   # ═══════════════════════════════════════════════════════════════════════════════════
   #                              ERROR HANDLING
@@ -519,15 +625,21 @@ workflow:
         state: research_complete
       - after: spec
         state: spec_written
+      - after: clarify
+        state: clarification_complete
       - after: critique
         state: critique_complete
+      - after: plan
+        state: plan_complete
 
     resume_from:
       requirements_gathered: assess
       complexity_assessed: research
       research_complete: spec
-      spec_written: critique
+      spec_written: clarify
+      clarification_complete: critique
       critique_complete: plan
+      plan_complete: analyze
 
   # ═══════════════════════════════════════════════════════════════════════════════════
   #                              INTEGRATION
@@ -568,7 +680,9 @@ workflow:
       - spec-assess-complexity.md
       - spec-research-dependencies.md
       - spec-write-spec.md
+      - spec-clarify.md
       - spec-critique.md
+      - spec-analyze.md
     tags:
       - spec-pipeline
       - workflow
