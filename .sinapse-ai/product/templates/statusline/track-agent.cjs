@@ -33,6 +33,8 @@ const os = require('os');
 
 const MASTERS = new Set(['sinapse', 'snps', 'sinapse-orqx', 'snps-orqx']);
 const SPECIALIST_CAP = 6;
+const BADGE_TTL = 21600; // 6h — mirrors the statusline freshness window.
+const IMPERATOR_KEY = 'snps-orqx'; // badge key for the master / Imperator voice.
 
 // Identical to track-agent.sh and statusline-script.js.
 function simpleHash(str) {
@@ -132,6 +134,111 @@ function applyName(cache, name, ts) {
   }
 }
 
+// ── Badge injection ──────────────────────────────────────────────────────────
+// The detector also surfaces the speaking agent's public badge to the model via
+// the UserPromptSubmit `additionalContext` channel, so every response can open
+// with the right seal. Pure best-effort: any failure → no injection, never block.
+
+// Load ~/.claude/agent-badges.json and index by last path segment. Keys are
+// either bare ids ("developer") or "squad/id" ("squad-brand/brand-orqx"); the
+// session-cache only ever stores the bare id, so we index on the last segment.
+function loadBadges() {
+  try {
+    const p = path.join(os.homedir(), '.claude', 'agent-badges.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf8'));
+    if (!raw || typeof raw !== 'object') return null;
+    const byId = {};
+    for (const key of Object.keys(raw)) {
+      const v = raw[key];
+      if (!v || typeof v !== 'object' || !v.emoji || !v.name) continue;
+      byId[key.split('/').pop()] = v;
+    }
+    return Object.keys(byId).length ? byId : null;
+  } catch {
+    return null;
+  }
+}
+
+function fullBadge(b) {
+  return `▌ ${b.emoji} · SNPS · ${b.area || ''} · ${b.name}`.replace(/ ·  · /, ' · ');
+}
+function shortBadge(b) {
+  return `▌ ${b.emoji} ${b.name}`;
+}
+
+// Resolve the primary speaking voice. cache.role reflects the LAST classified
+// mention, so it doubles as the recency signal (imperator vs orqx vs specialist).
+function resolvePrimary(cache, byId) {
+  if (cache.role === 'imperator') return byId[IMPERATOR_KEY] || null;
+  if (cache.role === 'orqx' && cache.agent) {
+    return byId[`${cache.agent}-orqx`] || byId[cache.agent] || null;
+  }
+  if (cache.agent) return byId[cache.agent] || null;
+  if (cache.imperator && cache.imperator.active) return byId[IMPERATOR_KEY] || null;
+  return null;
+}
+
+// Build the additionalContext string, or null when no SINAPSE voice is active.
+function buildBadgeContext(cache) {
+  const byId = loadBadges();
+  if (!byId) return null;
+
+  const now = nowSec();
+  const primary = resolvePrimary(cache, byId);
+
+  // The specialist roster is only meaningful while the Imperator is coordinating
+  // a multi-agent orchestration; a plain specialist↔specialist switch shows just
+  // the active voice (no roster noise).
+  const imperatorActive =
+    cache.imperator && cache.imperator.active && now - (cache.imperator.ts || 0) < BADGE_TTL;
+  const specs = imperatorActive
+    ? (cache.specialists || [])
+        .filter((s) => s && s.id && s.id !== cache.agent && now - (s.ts || 0) < BADGE_TTL)
+        .map((s) => byId[s.id])
+        .filter(Boolean)
+    : [];
+
+  if (!primary && specs.length === 0) return null;
+
+  const lines = [];
+  lines.push('<sinapse-selo>');
+  lines.push('Identidade pública dos agentes SINAPSE. Aplique o protocolo de selo na sua resposta.');
+  lines.push('');
+  if (primary) {
+    lines.push(`Voz ativa → cheio: ${fullBadge(primary)}   curto: ${shortBadge(primary)}`);
+  }
+  if (specs.length) {
+    lines.push('Especialistas em jogo nesta orquestração:');
+    for (const b of specs) lines.push(`  • ${fullBadge(b)}   (curto: ${shortBadge(b)})`);
+  }
+  lines.push('');
+  lines.push('Protocolo (NON-NEGOTIABLE):');
+  lines.push('1. Abra a resposta com o selo do agente que está falando — 1ª linha, SÓ na troca de voz. Mesma voz em blocos seguidos não repete o selo.');
+  lines.push('2. Estreia da voz nesta conversa = selo CHEIO. Volta de uma voz já apresentada = selo CURTO.');
+  lines.push('3. Orquestrador (Imperator / -orqx): selo → apresenta o PLANO → ESPERA o "pode ir" do usuário → executa os handoffs (cada agente entra com seu selo) → consolida no fim.');
+  lines.push('4. O selo (emoji · SNPS · área · nome) É a identidade pública — nunca exponha @ids técnicos nem estrutura interna ao usuário.');
+  lines.push('</sinapse-selo>');
+
+  return lines.join('\n');
+}
+
+function emitBadge(cache) {
+  try {
+    const ctx = buildBadgeContext(cache);
+    if (!ctx) return;
+    process.stdout.write(
+      JSON.stringify({
+        hookSpecificOutput: {
+          hookEventName: 'UserPromptSubmit',
+          additionalContext: ctx,
+        },
+      })
+    );
+  } catch {
+    /* fail-soft: a badge is never worth blocking a prompt. */
+  }
+}
+
 function main() {
   const input = readStdin();
   if (!input) process.exit(0);
@@ -197,16 +304,19 @@ function main() {
     }
   }
 
-  if (!changed) process.exit(0);
-
-  cache.version = 2;
-  cache.updated = new Date().toISOString();
-
-  try {
-    fs.writeFileSync(cacheFile, JSON.stringify(cache));
-  } catch {
-    process.exit(0);
+  if (changed) {
+    cache.version = 2;
+    cache.updated = new Date().toISOString();
+    try {
+      fs.writeFileSync(cacheFile, JSON.stringify(cache));
+    } catch {
+      /* cache write is best-effort — still try to inject the badge below. */
+    }
   }
+
+  // Inject the active agent's badge even on continuation turns (no new mention
+  // keeps the same voice active). Fail-soft and silent when no voice is active.
+  emitBadge(cache);
 
   process.exit(0);
 }

@@ -21,6 +21,10 @@ When the user's prompt matches ANY of these patterns, Chrome Brain is active:
 4. Track screenshot count — max 15 per session
 5. Handoff results to domain squad when applicable
 
+## Janela fixa & login (uma vez)
+
+A automação roda numa **janela de Chrome dedicada e fixa** (perfil `~/.chrome-debug-profile`), separada do Chrome pessoal do usuário. Ela é lançada **só quando uma tarefa de browser precisa** e **nunca é morta enquanto saudável** (o `chrome-ensure` só relança se a porta estiver realmente fora do ar). Na primeira vez que uma tarefa acessar um site que exige login, o usuário loga **uma vez** nessa janela — o perfil persiste, então não precisa logar de novo. Para logar proativamente em todas as contas de uma vez: `sinapse chrome-brain login`.
+
 ## Auto-Learning — MANDATORY
 
 After completing ANY browser automation task, evaluate:

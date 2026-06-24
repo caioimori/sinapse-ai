@@ -23,7 +23,16 @@ const SCRIPTS_DIR = path.join(HOME, '.local', 'bin');
 const CLAUDE_SETTINGS = path.join(HOME, '.claude', 'settings.json');
 const CLAUDE_JSON = path.join(HOME, '.claude.json');
 
-const SCRIPTS = ['chrome-ensure', 'chrome-debug', 'chrome-brain-log'];
+// Node scripts shipped today — cross-platform, run hidden (no console window),
+// and never kill a healthy Chrome.
+const NODE_SCRIPTS = ['chrome-ensure.cjs', 'chrome-brain-log.cjs'];
+// Legacy bash scripts from older installs — proactively removed on (re)install
+// and uninstall so they stop popping console windows on Windows.
+const LEGACY_SCRIPTS = ['chrome-ensure', 'chrome-debug', 'chrome-brain-log'];
+// Pinned MCP version (no `@latest` drift).
+const MCP_CHROME_DEVTOOLS_VERSION = '1.4.0';
+// Runtime config the Node scripts read (chrome path, port, profile).
+const CHROME_BRAIN_CONFIG = path.join(SINAPSE_DIR, 'chrome-brain.json');
 
 const SQUAD_INTEGRATIONS = [
   'squad-animations', 'squad-design', 'squad-cloning', 'squad-claude',
@@ -178,165 +187,6 @@ function removeHooks(settingsPath, matchers) {
 }
 
 // ============================================================================
-// Script Generation (cross-platform)
-// ============================================================================
-
-function sanitizeChromePath(chromePath) {
-  // Validate Chrome path contains only safe characters to prevent shell injection
-  const sanitized = chromePath.replace(/\\/g, '/');
-  if (!/^[a-zA-Z0-9\s/\-_.:()[\]]+$/.test(sanitized)) {
-    throw new Error(`Unsafe Chrome path detected: ${chromePath}`);
-  }
-  return sanitized;
-}
-
-function generateChromeEnsure(chromePath, platform) {
-  const safePath = sanitizeChromePath(chromePath);
-  const chromeCmd = `"${safePath}"`;
-
-  // Platform-aware kill command: Windows Git Bash lacks pgrep, use taskkill
-  const killCmd = platform === 'windows'
-    ? `# Windows: use taskkill instead of pgrep (not available in Git Bash)
-if command -v taskkill &>/dev/null; then
-  tasklist /FI "IMAGENAME eq chrome.exe" /NH 2>/dev/null | grep -i "chrome-debug-profile" | awk '{print $2}' | while read pid; do taskkill /PID "$pid" /F 2>/dev/null; done
-elif command -v pgrep &>/dev/null; then
-  pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true
-fi`
-    : 'pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true';
-
-  return `#!/bin/bash
-# Chrome Brain — chrome-ensure (auto-launch)
-# Called by PreToolUse hook before any chrome-devtools or claude-in-chrome tool
-# Cross-platform: macOS, Linux, Windows Git Bash
-
-PORT="\${1:-9222}"
-CHROME_DEBUG_PROFILE="$HOME/.chrome-debug-profile"
-CDP="http://127.0.0.1:$PORT/json/version"
-
-# Fast path: check if already running (~50ms)
-if curl -sf "$CDP" -o /dev/null --max-time 1 2>/dev/null; then
-  exit 0
-fi
-
-# Kill stale debug profile instances only (never normal Chrome)
-${killCmd}
-sleep 1
-
-# Launch Chrome with debug flags
-${chromeCmd} \\
-  --remote-debugging-port="$PORT" \\
-  --user-data-dir="$CHROME_DEBUG_PROFILE" \\
-  --no-first-run \\
-  &>/dev/null &
-
-# Wait for startup (max 10 seconds)
-for i in $(seq 1 20); do
-  if curl -sf "$CDP" -o /dev/null --max-time 1 2>/dev/null; then
-    exit 0
-  fi
-  sleep 0.5
-done
-
-echo "BLOCKED: Chrome debug failed to start on port $PORT. Run 'chrome-debug' manually." >&2
-exit 1
-`;
-}
-
-function generateChromeDebug(chromePath, platform) {
-  const safePath = sanitizeChromePath(chromePath);
-  const chromeCmd = `"${safePath}"`;
-
-  // Platform-aware kill command: Windows Git Bash lacks pgrep, use taskkill
-  const killCmd = platform === 'windows'
-    ? `# Windows: use taskkill instead of pgrep (not available in Git Bash)
-if command -v taskkill &>/dev/null; then
-  tasklist /FI "IMAGENAME eq chrome.exe" /NH 2>/dev/null | grep -i "chrome-debug-profile" | awk '{print $2}' | while read pid; do taskkill /PID "$pid" /F 2>/dev/null; done
-elif command -v pgrep &>/dev/null; then
-  pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true
-fi`
-    : 'pgrep -f "user-data-dir=$CHROME_DEBUG_PROFILE" 2>/dev/null | xargs kill 2>/dev/null || true';
-
-  return `#!/bin/bash
-# Chrome Brain — chrome-debug (manual launch)
-# User runs this directly if auto-launch doesn't work
-
-PORT="\${1:-9222}"
-CHROME_DEBUG_PROFILE="$HOME/.chrome-debug-profile"
-
-# Check if already running
-if curl -s "http://127.0.0.1:$PORT/json/version" &>/dev/null; then
-  echo "Chrome debug already running on port $PORT"
-  exit 0
-fi
-
-# Kill only debug profile instances
-${killCmd}
-sleep 2
-
-echo "Launching Chrome with remote debugging on port $PORT..."
-
-${chromeCmd} \\
-  --remote-debugging-port="$PORT" \\
-  --user-data-dir="$CHROME_DEBUG_PROFILE" \\
-  --no-first-run \\
-  &>/dev/null &
-
-# Wait for startup
-for i in $(seq 1 15); do
-  if curl -s "http://127.0.0.1:$PORT/json/version" &>/dev/null; then
-    echo "Chrome ready on port $PORT"
-    exit 0
-  fi
-  sleep 1
-done
-
-echo "ERROR: Chrome failed to start with debugging"
-exit 1
-`;
-}
-
-function generateChromeBrainLog() {
-  return `#!/bin/bash
-# Chrome Brain — chrome-brain-log (session logger)
-# Called by PostToolUse hook after every chrome tool call
-# Tracks usage and warns about screenshot limits
-
-LOG_DIR="$HOME/.chrome-brain"
-TODAY=$(date +%Y%m%d)
-LOG_FILE="$LOG_DIR/session-$TODAY.log"
-COUNTER_FILE="$LOG_DIR/.screenshot-count"
-COUNTER_DATE_FILE="$LOG_DIR/.screenshot-date"
-mkdir -p "$LOG_DIR"
-
-# Reset counter daily
-LAST_DATE=$(cat "$COUNTER_DATE_FILE" 2>/dev/null || echo "")
-if [ "$LAST_DATE" != "$TODAY" ]; then
-  echo "0" > "$COUNTER_FILE"
-  echo "$TODAY" > "$COUNTER_DATE_FILE"
-fi
-
-TOOL_NAME="\${HOOK_TOOL_NAME:-unknown}"
-TIMESTAMP=$(date +%H:%M:%S)
-
-echo "$TIMESTAMP $TOOL_NAME" >> "$LOG_FILE"
-
-if echo "$TOOL_NAME" | grep -qE "take_screenshot|take_snapshot"; then
-  COUNT=$(cat "$COUNTER_FILE" 2>/dev/null || echo 0)
-  COUNT=$((COUNT + 1))
-  echo "$COUNT" > "$COUNTER_FILE"
-
-  if [ "$COUNT" -eq 12 ]; then
-    echo "WARNING: 12 screenshots in this session. Consider saving state and rotating." >&2
-  elif [ "$COUNT" -ge 15 ]; then
-    echo "CRITICAL: 15+ screenshots. Session at risk of exceeding 20MB API limit. Save state NOW." >&2
-  fi
-fi
-
-exit 0
-`;
-}
-
-// ============================================================================
 // Install
 // ============================================================================
 
@@ -349,57 +199,104 @@ function installScripts(chromePath, platform) {
 
   fs.mkdirSync(scriptsDir, { recursive: true });
 
-  const scripts = {
-    'chrome-ensure': generateChromeEnsure(chromePath, platform),
-    'chrome-debug': generateChromeDebug(chromePath, platform),
-    'chrome-brain-log': generateChromeBrainLog(),
-  };
-
-  for (const [name, content] of Object.entries(scripts)) {
-    const scriptPath = path.join(scriptsDir, name);
-    fs.writeFileSync(scriptPath, content, { encoding: 'utf8', mode: 0o755 });
-    try {
-      fs.chmodSync(scriptPath, 0o755);
-    } catch { /* Windows doesn't support chmod */ }
-    ok(`${name} created at ${scriptPath}`);
+  // Remove legacy extensionless bash scripts from older installs — on Windows
+  // they spawned a console window and could not run reliably.
+  for (const dir of [scriptsDir, SCRIPTS_DIR, path.join(SINAPSE_DIR, 'bin')]) {
+    for (const name of LEGACY_SCRIPTS) {
+      try {
+        const p = path.join(dir, name);
+        if (fs.existsSync(p)) fs.unlinkSync(p);
+      } catch { /* best-effort */ }
+    }
   }
 
-  // PATH check not needed — hooks use absolute paths (v7.4.7+)
+  // Copy the cross-platform Node scripts from the template package.
+  const templateDir = findTemplateDir();
+  const srcDir = templateDir ? path.join(templateDir, 'scripts') : null;
+  for (const name of NODE_SCRIPTS) {
+    const dest = path.join(scriptsDir, name);
+    const src = srcDir ? path.join(srcDir, name) : null;
+    if (src && fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      try { fs.chmodSync(dest, 0o755); } catch { /* no-op on Windows */ }
+      ok(`${name} -> ${dest}`);
+    } else {
+      warn(`${name} template not found — skipped`);
+    }
+  }
+
+  // Write the runtime config the Node scripts read.
+  const config = {
+    chromePath,
+    port: 9222,
+    profile: path.join(HOME, '.chrome-debug-profile'),
+  };
+  writeJson(CHROME_BRAIN_CONFIG, config);
+  ok(`config -> ${CHROME_BRAIN_CONFIG}`);
 
   return scriptsDir;
+}
+
+// Remove every legacy / duplicate Chrome Brain hook before re-adding the clean
+// canonical set. Self-healing: fixes installs that accumulated a SessionStart
+// auto-launch, extensionless bash commands, or duplicate regex matchers.
+function cleanLegacyChromeHooks(settingsPath) {
+  const settings = readJson(settingsPath);
+  if (!settings.hooks) return;
+  const isChromeCmd = (cmd) => /chrome-ensure|chrome-brain-log/i.test(cmd || '');
+  const isChromeMatcher = (m) => /chrome-devtools|claude-in-chrome|dev-browser/i.test(m || '');
+
+  for (const type of Object.keys(settings.hooks)) {
+    let arr = settings.hooks[type] || [];
+    if (type === 'SessionStart') {
+      // Strip ONLY chrome commands from SessionStart; keep co-located hooks.
+      arr = arr
+        .map((e) => {
+          if (Array.isArray(e.hooks)) e.hooks = e.hooks.filter((h) => !isChromeCmd(h && h.command));
+          return e;
+        })
+        .filter((e) => Array.isArray(e.hooks) && e.hooks.length > 0);
+    } else {
+      arr = arr.filter((e) => {
+        const cmd = e && e.hooks && e.hooks[0] && e.hooks[0].command;
+        if (isChromeCmd(cmd)) return false;
+        if ((type === 'PreToolUse' || type === 'PostToolUse') && isChromeMatcher(e.matcher)) return false;
+        return true;
+      });
+    }
+    if (arr.length === 0) delete settings.hooks[type];
+    else settings.hooks[type] = arr;
+  }
+  if (settings.hooks && Object.keys(settings.hooks).length === 0) delete settings.hooks;
+  writeJson(settingsPath, settings);
 }
 
 function installHooks() {
   step('Merging hooks into ~/.claude/settings.json...');
 
+  // 1) Clean any legacy / duplicate chrome hooks first (idempotent self-heal).
+  try { cleanLegacyChromeHooks(CLAUDE_SETTINGS); } catch { /* best-effort */ }
+
   const binDir = detectPlatform() === 'windows'
     ? path.join(SINAPSE_DIR, 'bin')
     : SCRIPTS_DIR;
-  const ensureCmd = path.join(binDir, 'chrome-ensure').replace(/\\/g, '/');
-  const logCmd = path.join(binDir, 'chrome-brain-log').replace(/\\/g, '/');
+  const ensure = path.join(binDir, 'chrome-ensure.cjs').replace(/\\/g, '/');
+  const log = path.join(binDir, 'chrome-brain-log.cjs').replace(/\\/g, '/');
+  const nodeCmd = (p) => `node "${p}"`;
+  const matchers = ['mcp__chrome-devtools__*', 'mcp__claude-in-chrome__*', 'mcp__dev-browser__*'];
+
+  // NO SessionStart hook on purpose — launching Chrome at every session start
+  // pops a window unprompted. The lazy PreToolUse hook below runs chrome-ensure
+  // only right before a browser tool call, so Chrome comes up exactly when (and
+  // only when) it is needed.
   const hookDefs = {
-    // NO SessionStart hook on purpose. Launching Chrome at every session start
-    // popped a browser window unprompted on boot (bad UX, esp. for new users).
-    // The lazy PreToolUse hook below already runs chrome-ensure right before any
-    // browser tool call, so Chrome is guaranteed up exactly when (and only when)
-    // it's needed — matching the documented design
-    // (templates/chrome-brain/rules/chrome-brain-autoload.md:
-    //  "Chrome connection is guaranteed by PreToolUse hook").
-    PreToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: ensureCmd }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: ensureCmd }] },
-      { matcher: 'mcp__dev-browser__*', hooks: [{ type: 'command', command: ensureCmd }] },
-    ],
-    PostToolUse: [
-      { matcher: 'mcp__chrome-devtools__*', hooks: [{ type: 'command', command: logCmd }] },
-      { matcher: 'mcp__claude-in-chrome__*', hooks: [{ type: 'command', command: logCmd }] },
-      { matcher: 'mcp__dev-browser__*', hooks: [{ type: 'command', command: logCmd }] },
-    ],
+    PreToolUse: matchers.map((m) => ({ matcher: m, hooks: [{ type: 'command', command: nodeCmd(ensure) }] })),
+    PostToolUse: matchers.map((m) => ({ matcher: m, hooks: [{ type: 'command', command: nodeCmd(log) }] })),
   };
 
   try {
     mergeHooks(CLAUDE_SETTINGS, hookDefs);
-    ok('Hooks merged into ~/.claude/settings.json');
+    ok('Hooks merged (lazy PreToolUse + PostToolUse, no SessionStart)');
   } catch (error) {
     fail(`Failed to merge hooks: ${error.message}`);
   }
@@ -411,16 +308,17 @@ function installMcp(platform) {
   const config = readJson(CLAUDE_JSON);
   if (!config.mcpServers) config.mcpServers = {};
 
-  // --- Chrome DevTools MCP ---
+  // --- Chrome DevTools MCP (pinned version — no @latest drift) ---
+  const cdpMcp = `chrome-devtools-mcp@${MCP_CHROME_DEVTOOLS_VERSION}`;
   if (platform === 'windows') {
     config.mcpServers['chrome-devtools'] = {
       command: 'cmd',
-      args: ['/c', 'npx', '-y', 'chrome-devtools-mcp@latest', '--browser-url=http://127.0.0.1:9222'],
+      args: ['/c', 'npx', '-y', cdpMcp, '--browser-url=http://127.0.0.1:9222'],
     };
   } else {
     config.mcpServers['chrome-devtools'] = {
       command: 'npx',
-      args: ['chrome-devtools-mcp@latest', '--browser-url=http://127.0.0.1:9222'],
+      args: ['-y', cdpMcp, '--browser-url=http://127.0.0.1:9222'],
     };
   }
 
@@ -600,9 +498,9 @@ function uninstallChromeBrain() {
 
   let removed = 0;
 
-  // Remove scripts
+  // Remove scripts (current Node + any legacy bash) + runtime config
   step('Removing scripts...');
-  for (const name of SCRIPTS) {
+  for (const name of [...NODE_SCRIPTS, ...LEGACY_SCRIPTS]) {
     for (const dir of [SCRIPTS_DIR, path.join(SINAPSE_DIR, 'bin')]) {
       const scriptPath = path.join(dir, name);
       if (fs.existsSync(scriptPath)) {
@@ -612,6 +510,13 @@ function uninstallChromeBrain() {
       }
     }
   }
+  try {
+    if (fs.existsSync(CHROME_BRAIN_CONFIG)) {
+      fs.unlinkSync(CHROME_BRAIN_CONFIG);
+      ok(`Removed ${CHROME_BRAIN_CONFIG}`);
+      removed++;
+    }
+  } catch { /* best-effort */ }
 
   // Remove hooks
   step('Removing hooks from settings...');
@@ -696,7 +601,7 @@ function getChromeBrainStatus() {
   }
 
   // Scripts
-  for (const name of SCRIPTS) {
+  for (const name of NODE_SCRIPTS) {
     total++;
     const scriptPath = path.join(SCRIPTS_DIR, name);
     const altPath = path.join(SINAPSE_DIR, 'bin', name);
@@ -886,12 +791,32 @@ async function runChromeBrain(subArgs) {
       getChromeBrainStatus();
       break;
 
+    case 'login': {
+      // Open the fixed-profile debug Chrome so the user logs into all accounts
+      // ONCE. The profile persists, so this never needs to be repeated.
+      const binDir = detectPlatform() === 'windows' ? path.join(SINAPSE_DIR, 'bin') : SCRIPTS_DIR;
+      const ensure = path.join(binDir, 'chrome-ensure.cjs');
+      console.log(`\n${bold(cyan('Chrome Brain — Login'))}`);
+      if (!fs.existsSync(ensure)) {
+        fail('chrome-ensure.cjs nao encontrado — rode `sinapse chrome-brain install` primeiro.');
+        break;
+      }
+      console.log('  Abrindo a janela fixa do Chrome Brain. Logue em todas as suas contas uma');
+      console.log('  vez — o perfil persiste, voce nao precisa logar de novo.\n');
+      const { spawn } = require('child_process');
+      const child = spawn(process.execPath, [ensure, '--visible'], { detached: true, stdio: 'ignore', windowsHide: true });
+      child.unref();
+      ok('Janela aberta (ou ja estava aberta).');
+      break;
+    }
+
     default:
       console.log(`
 ${bold('sinapse chrome-brain')} — Browser Automation Capability
 
 ${bold('USAGE:')}
   sinapse chrome-brain install     Install Chrome Brain (scripts, hooks, MCP, KB)
+  sinapse chrome-brain login       Open the fixed window to log into your accounts once
   sinapse chrome-brain uninstall   Remove Chrome Brain completely
   sinapse chrome-brain status      Check installation status
 

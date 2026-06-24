@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-23T18:12:03.505Z'
+  lastUpdated: '2026-06-24T13:49:06.535Z'
   entityCount: 792
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -163,8 +163,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cb629b45f43c34a8ba7eb4fefd1ed47f151b7ab172f799866b1a266148c89d24
-      lastVerified: '2026-06-23T02:37:28.903Z'
+      checksum: sha256:626521b1e3cdba60377871b0549a36c0da35ea5f57a9174df65273b5797508e2
+      lastVerified: '2026-06-24T05:00:49.158Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -407,8 +407,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:3f31509f446942a48eb62f52474823676b9b1572f08c505da70a80dacc7cc352
-      lastVerified: '2026-06-15T01:36:42.607Z'
+      checksum: sha256:46f58aab3365467fc31e44b4e5db321aded90de64aa1f81a96305bd65ad90061
+      lastVerified: '2026-06-24T05:00:49.160Z'
     prompts:
       path: bin/lib/prompts.js
       layer: L1
@@ -452,8 +452,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:5233a7b0ae9828eda7f64d4729f9ebc564793c3ffe38fb74bf4a3d07a6c61608
-      lastVerified: '2026-06-16T17:13:38.683Z'
+      checksum: sha256:05d5dc88053f5d675e58a68f268d53a2f1497eb13ae63ac21f73220ecadcaca4
+      lastVerified: '2026-06-24T05:00:49.161Z'
     squads:
       path: bin/lib/squads.js
       layer: L1
@@ -486,8 +486,6 @@ entities:
         - chrome
         - brain
         - installer
-        - chrome-ensure
-        - (auto-launch)
       usedBy:
         - cli
         - install
@@ -500,8 +498,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cac4b2b0088124c2e26f8b7bf073160ea0a73bf3942ae2fc6cce80c9707fa27b
-      lastVerified: '2026-06-23T02:37:28.905Z'
+      checksum: sha256:e1186d8324dd01d78a9f17c8a5015e51f661d952d70aa339464097e0f3d1fd97
+      lastVerified: '2026-06-24T13:49:06.202Z'
     env-config:
       path: bin/modules/env-config.js
       layer: L1

@@ -8,11 +8,15 @@ const {
 } = require('../../.sinapse-ai/core/logger');
 const { VERSION, WHITE, BOLD, DIM, NC } = require('./constants');
 
-function header() {
+function header(opts = {}) {
   const logger = getLogger();
-  // Story A.2 AC 7 — ASCII art only on --verbose / --debug OR first-run.
-  // Never in --quiet or --json mode.
-  if (!shouldShowHeader(logger)) return;
+  const force = !!opts.force;
+  // --json (machine output) and --quiet always suppress the banner.
+  if (!logger || logger.json || logger.threshold === 0 /* LEVELS.error */) return;
+  // Outside json/quiet: show on --verbose / --debug, on first run, OR when the
+  // caller forces it. The `install` command forces it so the brand banner is
+  // always visible at install time (Story A.2 AC 7 kept for non-forced paths).
+  if (!force && !shouldShowHeader(logger)) return;
   const W = `${WHITE}${BOLD}`;
   const lines = [
     '',
@@ -23,17 +27,17 @@ function header() {
     `${W} ███████║██║ ╚████║██║     ███████║    ██║  ██║██║${NC}`,
     `${W} ╚══════╝╚═╝  ╚═══╝╚═╝     ╚══════╝    ╚═╝  ╚═╝╚═╝${NC}`,
     '',
-    `${DIM} Seu copiloto de inteligencia artificial${NC}`,
-    `${DIM} v${VERSION}${NC}`,
+    `${DIM}   Orquestracao de inteligencia artificial · v${VERSION}${NC}`,
+    '',
+    `${DIM}   ┼${'─'.repeat(50)}┼${NC}`,
     '',
   ];
-  // Write directly to stdout so the header still shows on first-run even when
-  // the logger level is `warn` (default). `shouldShowHeader` is the single
-  // gate that decides whether we get here at all.
+  // Write directly to stdout so the header still shows even when the logger
+  // level is `warn` (default). The gates above decide whether we get here.
   for (const line of lines) {
     try { process.stdout.write(`${line}\n`); } catch { /* ignore */ }
   }
-  // Mark first-run done so subsequent runs stay clean unless --verbose.
+  // Mark first-run done so subsequent (non-forced) runs stay clean.
   markFirstRunDone();
 }
 
