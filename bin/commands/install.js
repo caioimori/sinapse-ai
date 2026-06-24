@@ -48,7 +48,7 @@ const {
 
 async function cmdInstallGlobal(opts = {}) {
   const logger = getLogger();
-  header();
+  header({ force: true });
 
   // Story 10.20 — Upsert detection
   const force = Boolean(opts.force);
@@ -82,41 +82,12 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`${DIM}  Language: ${label} (from saved config; pass --reconfigure to change)${NC}`);
   }
   if (!language) {
+    // Approved install redesign: Portuguese is the default and is NO longer
+    // prompted ("Idioma: Portugues (padrao)"). The resolved language is still
+    // saved to settings.language below and shown in the install preview. English
+    // stays available for power users via a pre-set settings.language=english.
     language = 'pt';
-    // Story 10.46 — multi-signal gate replaces the old `process.stdin.isTTY`
-    // check that silently defaulted to `pt` in Git Bash + Windows.
-    if (detectInteractiveMode()) {
-      try {
-        const inquirer = require('inquirer');
-        const langAnswer = await inquirer.prompt([{
-          type: 'list',
-          name: 'language',
-          message: 'Language / Idioma:',
-          choices: [
-            { name: 'Portugues', value: 'pt' },
-            { name: 'English', value: 'en' },
-          ],
-          default: 'pt',
-        }]);
-        language = langAnswer.language;
-      } catch {
-        // Fallback: readline
-        const readline = require('readline');
-        const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-        language = await new Promise((resolve) => {
-          logger.always(`  ${CYAN}Language / Idioma:${NC}`);
-          logger.always(`    ${GREEN}1${NC}) Portugues`);
-          logger.always(`    ${GREEN}2${NC}) English`);
-          rl.question(`  ${BOLD}[1/2]:${NC} `, (answer) => {
-            rl.close();
-            resolve((answer || '1').trim() === '2' ? 'en' : 'pt');
-          });
-        });
-      }
-    } else {
-      // Story 10.46 — surface the silent default so users on CI / pipes know.
-      warnNonInteractive();
-    }
+    if (!detectInteractiveMode()) warnNonInteractive();
   }
 
   // Save language to ~/.claude/settings.json
@@ -168,16 +139,23 @@ async function cmdInstallGlobal(opts = {}) {
     hookCount = fs.readdirSync(path.join(ROOT, '.claude', 'hooks')).filter(f => /\.(cjs|js|py|sh)$/.test(f)).length;
   } catch { /* hooks dir optional */ }
 
+  // Framed "o que será instalado" box (B&W). Rows are plain text so the width
+  // math stays correct — inline ANSI codes would break padEnd alignment.
+  const boxRows = [
+    `${squads.length} squads · ${agentTotal} agentes especializados`,
+    'Orquestrador master — @sinapse / @snps',
+  ];
+  if (hookCount) boxRows.push(`${hookCount} hooks de proteção + regras do framework`);
+  boxRows.push(`Editor(es): ${llmLabel}`);
+  boxRows.push(`Idioma: ${langLabelMap[language] || language}`);
+  boxRows.push(`Modo: ${isUpsert ? 'atualizar instalação existente' : 'instalação nova'}`);
+  boxRows.push('Destino: ~/.sinapse (núcleo) + ~/.claude/agents (agentes)');
+  const boxTitle = ' o que será instalado ';
+  const innerW = Math.max(boxTitle.length + 1, ...boxRows.map((r) => r.length + 1)) + 1;
   logger.always('');
-  logger.always(`${BOLD}──── O que será instalado ────${NC}`);
-  logger.always(`  ${BOLD}${squads.length}${NC} squads · ${BOLD}${agentTotal}${NC} agentes especializados`);
-  logger.always(`  Orquestrador master (Imperator) — chamável por ${CYAN}@sinapse${NC} / ${CYAN}@snps${NC}`);
-  if (hookCount) logger.always(`  ${hookCount} hooks de proteção + regras do framework`);
-  logger.always(`  Editor(es): ${BOLD}${llmLabel}${NC}`);
-  logger.always(`  Idioma: ${langLabelMap[language] || language}`);
-  logger.always(`  Modo: ${isUpsert ? 'atualizar instalação existente' : 'instalação nova'}`);
-  logger.always(`  Destino: ${DIM}~/.sinapse/${NC} (núcleo) + ${DIM}~/.claude/agents/${NC} (agentes)`);
-  logger.always(`${BOLD}──────────────────────────────${NC}`);
+  logger.always(`${DIM}  ┌─${boxTitle}${'─'.repeat(innerW - boxTitle.length - 1)}┐${NC}`);
+  for (const r of boxRows) logger.always(`${DIM}  │${NC} ${r.padEnd(innerW - 1)}${DIM}│${NC}`);
+  logger.always(`${DIM}  └${'─'.repeat(innerW)}┘${NC}`);
 
   if (detectInteractiveMode()) {
     const inquirer = require('inquirer');

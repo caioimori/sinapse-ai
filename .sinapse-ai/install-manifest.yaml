@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1152
+file_count: 1153
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1344,7 +1344,7 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:8b5182998467ccf39613571300eb714e7bdd1f51e0f031582cadaf44fcdf555a
+    hash: sha256:8d4c772da63812a17de228eba39b4e8c4aafed6266e7651579856c8d201c7f57
     type: data
     size: 547889
   - path: data/learned-patterns.yaml
@@ -4187,18 +4187,22 @@ files:
     hash: sha256:3f8bb48230df89cf987330f7c9aff19edbc35a65a9cbff799e28480155dd8919
     type: template
     size: 6764
-  - path: product/templates/statusline/statusline-script.js
-    hash: sha256:05945437a07c0156ff5bff3238ad8fc71728c591933db64fde94aa219d6f9146
+  - path: product/templates/statusline/agent-badges.json
+    hash: sha256:9a926dc37107a34880aef351f540f3425f1ec60e77870f7f319980ee53576ead
     type: template
-    size: 7530
+    size: 18475
+  - path: product/templates/statusline/statusline-script.js
+    hash: sha256:5860eecf6b02701666ff42f858bf25e3524f124210ef70d2b5243b829e893bb8
+    type: template
+    size: 8748
   - path: product/templates/statusline/track-agent-clear.cjs
     hash: sha256:3cda606de2463374e60440ba6cae9ca98e39b782b19c6ae39aa7569a1b211f09
     type: template
     size: 2137
   - path: product/templates/statusline/track-agent.cjs
-    hash: sha256:898d576f257734e9954e8949e5a4685f38167af0dcad986745b411a3b318559e
+    hash: sha256:0194c9a5750ed9e7a11fb5de21060021f64636f21e8b91039543abccaf6a4c86
     type: template
-    size: 6244
+    size: 10990
   - path: product/templates/story-tmpl.yaml
     hash: sha256:43a050de5ef51f53f890fd20f77ac567b297a40597f467b3bc6d00c8193c7fa6
     type: template

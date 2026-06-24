@@ -75,9 +75,16 @@ function buildStatusLine(data) {
 
   // 5 & 6. Agent & Squad (from session cache + API fallback)
   const cache = readSessionCache();
+  const badges = loadBadges();
+  const agentBadge = resolveBadge(cache, badges);
   const activeAgent = cache.agent || data.agent?.name || '';
   const activeSquad = cache.squad || '';
-  if (activeAgent) parts.push(`${cyan}\ud83e\udd16 ${activeAgent}${reset}`);
+  if (agentBadge) {
+    // Public badge: {emoji} {Name} (e.g. "\ud83d\udcbb Pixel") instead of the raw id.
+    parts.push(`${cyan}${agentBadge.emoji} ${agentBadge.name}${reset}`);
+  } else if (activeAgent) {
+    parts.push(`${cyan}\ud83e\udd16 ${activeAgent}${reset}`);
+  }
   if (activeSquad) parts.push(`${orange}\ud83c\udfaf ${activeSquad}${reset}`);
 
   // 6.5 Orchestration \u2014 Imperator + active specialists (TTL 6h)
@@ -90,7 +97,7 @@ function buildStatusLine(data) {
   }
   const ativos = (cache.specialists || []).filter(s => nowSec - s.ts < TTL);
   if (ativos.length > 0) {
-    parts.push(`${cyan}\ud83e\udded ${ativos.length} especialistas: ${ativos.map(s => s.id).join(', ')}${reset}`);
+    parts.push(`${cyan}\ud83e\udded ${ativos.length} especialistas: ${ativos.map(s => (badges && badges[s.id] ? badges[s.id].name : s.id)).join(', ')}${reset}`);
   }
 
   // 7. Project:Branch
@@ -167,6 +174,33 @@ function readSessionCache() {
     }
   } catch {}
   return { agent: '', squad: '', role: null, imperator: null, specialists: [] };
+}
+
+function loadBadges() {
+  // id -> {emoji, area, name}. Keys are bare ids or "squad/id"; index by the last
+  // segment to match what the session-cache stores. Best-effort — null on absence.
+  try {
+    const p = path.join(os.homedir(), '.claude', 'agent-badges.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf8'));
+    if (!raw || typeof raw !== 'object') return null;
+    const byId = {};
+    for (const key of Object.keys(raw)) {
+      const v = raw[key];
+      if (v && v.emoji && v.name) byId[key.split('/').pop()] = v;
+    }
+    return Object.keys(byId).length ? byId : null;
+  } catch {
+    return null;
+  }
+}
+
+function resolveBadge(cache, badges) {
+  if (!badges) return null;
+  if (cache.role === 'orqx' && cache.agent) {
+    return badges[`${cache.agent}-orqx`] || badges[cache.agent] || null;
+  }
+  if (cache.agent) return badges[cache.agent] || null;
+  return null;
 }
 
 function simpleHash(str) {

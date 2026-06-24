@@ -10,8 +10,9 @@
  *
  * What it installs:
  *   - ~/.claude/statusline-script.js          (renders the statusline)
- *   - ~/.claude/hooks/track-agent.cjs         (UserPromptSubmit detector — writes session-cache)
+ *   - ~/.claude/hooks/track-agent.cjs         (UserPromptSubmit detector — writes session-cache + injects the agent badge)
  *   - ~/.claude/hooks/track-agent-clear.cjs   (Stop hook — clears session-cache on session end)
+ *   - ~/.claude/agent-badges.json             (id -> {emoji, area, name} — read by the detector + statusline)
  *   - ~/.claude/session-cache/                (per-cwd cache directory)
  *   - settings.statusLine                     (graceful skip if already set)
  *   - settings.hooks.UserPromptSubmit → track-agent.cjs   (idempotent guard)
@@ -41,6 +42,7 @@ function resolveSources(sourceCoreDir) {
     script: path.join(templatesDir, 'statusline-script.js'),
     detector: path.join(templatesDir, 'track-agent.cjs'),
     clear: path.join(templatesDir, 'track-agent-clear.cjs'),
+    badges: path.join(templatesDir, 'agent-badges.json'),
   };
 }
 
@@ -120,6 +122,15 @@ async function setupStatusline(opts = {}) {
     if (hasClear) {
       await fse.copy(sources.clear, clearTarget);
       result.files.push(clearTarget);
+    }
+
+    // Agent badge map (id -> {emoji, area, name}). Read by the detector hook to
+    // inject the speaking agent's badge, and by the statusline to render it.
+    // Best-effort: a missing source never blocks the rest of the install.
+    if (await fse.pathExists(sources.badges)) {
+      const badgesTarget = path.join(claudeDir, 'agent-badges.json');
+      await fse.copy(sources.badges, badgesTarget);
+      result.files.push(badgesTarget);
     }
 
     // Read existing global settings (back-compat with any prior config).
