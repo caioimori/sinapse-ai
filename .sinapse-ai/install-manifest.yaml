@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1153
+file_count: 1155
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1344,9 +1344,9 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:8d4c772da63812a17de228eba39b4e8c4aafed6266e7651579856c8d201c7f57
+    hash: sha256:1754430439419493ac7b1c5a6c3473bfafb08a6f2bdb94826188f3dfcfb86849
     type: data
-    size: 547889
+    size: 547841
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -2708,9 +2708,13 @@ files:
     type: template
     size: 2048
   - path: development/templates/chrome-brain/rules/chrome-brain-autoload.md
-    hash: sha256:a3079e8e30f252f4a0da766b930bccc15d0288c3012482c0ad4901ccba27bc5d
+    hash: sha256:ff4eb0dfda916b7441e020ff722336c46d87ef47234f08cb2fef009cb5aaa467
     type: template
-    size: 1944
+    size: 2540
+  - path: development/templates/chrome-brain/scripts/chrome-brain-log.cjs
+    hash: sha256:baddce09225c16076a67afc0029e89dafcf9dcebbcef39a51c53dd9e63390710
+    type: template
+    size: 2268
   - path: development/templates/chrome-brain/scripts/chrome-brain-log.sh
     hash: sha256:d72c54d9b67745fac667f1fb05387f11b9bfc55b8bebb64cca67c9a44171d436
     type: template
@@ -2719,6 +2723,10 @@ files:
     hash: sha256:5907538f71757df0954533507e5efac4ebb4c18f92fb93cd305b61fa1c379809
     type: template
     size: 7207
+  - path: development/templates/chrome-brain/scripts/chrome-ensure.cjs
+    hash: sha256:7ff77f28a86fa655e89f292b6b5ebe51a20befb4faf7be99d221b338388472ba
+    type: template
+    size: 3578
   - path: development/templates/chrome-brain/scripts/chrome-ensure.sh
     hash: sha256:eab2018b622c8550381c6d4555f4496595859b98401dff63a3036abf8433ebfa
     type: template

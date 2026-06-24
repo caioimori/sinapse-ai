@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-24T05:00:49.424Z'
+  lastUpdated: '2026-06-24T13:49:06.535Z'
   entityCount: 792
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -486,8 +486,6 @@ entities:
         - chrome
         - brain
         - installer
-        - chrome-ensure
-        - (auto-launch)
       usedBy:
         - cli
         - install
@@ -500,8 +498,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cac4b2b0088124c2e26f8b7bf073160ea0a73bf3942ae2fc6cce80c9707fa27b
-      lastVerified: '2026-06-23T02:37:28.905Z'
+      checksum: sha256:e1186d8324dd01d78a9f17c8a5015e51f661d952d70aa339464097e0f3d1fd97
+      lastVerified: '2026-06-24T13:49:06.202Z'
     env-config:
       path: bin/modules/env-config.js
       layer: L1
