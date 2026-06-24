@@ -7,6 +7,11 @@
 
 ---
 
+> **Marking uncertainty:** For any point that is genuinely undefined, inline the marker
+> `[NEEDS CLARIFICATION: <the specific question>]` instead of guessing. Ceiling: **3 markers**.
+> If more than 3 are needed, the spec is too ambiguous to proceed — run the clarify gate
+> (`*clarify-spec {story-id}`) before continuing.
+
 ## 1. Overview
 
 ### 1.1 Summary
@@ -62,6 +67,19 @@
 
 - {{this}}
   {{/each}}
+
+### 2.5 Success Criteria
+
+> Measurable, **technology-agnostic** outcomes — describe the observable result, never the
+> implementation. No tool, framework, or library names here (e.g. "user completes checkout in
+> < 3s", not "Stripe call returns in < 3s").
+
+| ID     | Success Criterion                          | How it's measured |
+| ------ | ------------------------------------------ | ----------------- |
+
+{{#each success-criteria}}
+| {{id}} | {{criterion}} | {{measure}} |
+{{/each}}
 
 ---
 

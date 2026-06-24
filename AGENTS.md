@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,410 task files, 1,348 resolvable via the parametric activator
+> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,412 task files, 1,348 resolvable via the parametric activator
 >
 > Codex resolves every agent and its real tasks at runtime from source (no frozen
 > snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
