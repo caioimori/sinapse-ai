@@ -140,8 +140,8 @@ severity:
 
   rules:
     - 'Constitution conflict (pass-4) is ALWAYS CRITICAL — never downgraded, reinterpreted, or silently ignored.'
-    - 'Coverage gap on a P0/P1 requirement → escalate to CRITICAL.'
-    - 'Ambiguity / Underspecification default HIGH; cosmetic-only → LOW.'
+    - 'Coverage gap on a P0/P1 requirement -> escalate to CRITICAL.'
+    - 'Ambiguity / Underspecification default HIGH; cosmetic-only -> LOW.'
     - 'Duplication / Inconsistency default MEDIUM.'
 
   max_findings: 50
@@ -215,9 +215,10 @@ load:
 ```yaml
 build_matrix:
   action: map_requirements_to_tasks
-  process: 1. Extract FR-*, NFR-*, SC-* from spec.md
+  process: |
+    1. Extract FR-*, NFR-*, SC-* from spec.md
     2. Extract task IDs + their referenced requirement from tasks.md
-    3. Build a bidirectional map (requirement ↔ tasks)
+    3. Build a bidirectional map (requirement <-> tasks)
 ```
 
 ### Step 3: Run 6 Detection Passes
@@ -225,7 +226,8 @@ build_matrix:
 ```yaml
 run_passes:
   for_each: pass in [Duplication, Ambiguity, Underspecification, Constitution Alignment, Coverage Gaps, Inconsistency]
-  process: 1. Execute detection over the relevant artifact pair(s)
+  process: |
+    1. Execute detection over the relevant artifact pair(s)
     2. Record each finding (location, summary)
     3. Assign severity (constitution conflict ALWAYS CRITICAL)
     4. Cap total findings at 50

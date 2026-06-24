@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1155
+file_count: 1157
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1344,9 +1344,9 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:1754430439419493ac7b1c5a6c3473bfafb08a6f2bdb94826188f3dfcfb86849
+    hash: sha256:5afcfac2ecfcbda210a85f77a18829c23a0dd80a0be5fc42c5081d419a3ac73b
     type: data
-    size: 547841
+    size: 549348
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -2547,10 +2547,18 @@ files:
     hash: sha256:702907ff987ef8db70bc7dba93aadcf40ba9d080321f8305dad7f9e2de10d1b2
     type: task
     size: 18077
+  - path: development/tasks/spec-analyze.md
+    hash: sha256:5a73974cb88ca58274f907416839e8c864a3e35cf832668d3b2c582de3f6b26a
+    type: task
+    size: 11675
   - path: development/tasks/spec-assess-complexity.md
     hash: sha256:7ef9f00dad98113dcf6c273e0d56333aece4fa892c91fff8935d3c3c552748ae
     type: task
     size: 10451
+  - path: development/tasks/spec-clarify.md
+    hash: sha256:e4eee7ea80f146a697433462287aaff138536b148705337f2f32d66d2a83db5c
+    type: task
+    size: 8932
   - path: development/tasks/spec-critique.md
     hash: sha256:7d0243ab61b08e5c70fdd12ead90a2403b7dd3659ce3a68e54f4274b3347b07a
     type: task
@@ -2988,9 +2996,9 @@ files:
     type: workflow
     size: 2606
   - path: development/workflows/spec-pipeline.yaml
-    hash: sha256:890753d02dd6469441fe82a5eba0ecf48a3ac7969cfda3cd888c94cb74695c39
+    hash: sha256:d0da3844cdf7e71c59a13b22e6c715b23a0ae55337aaa6dfc7248de99bdc6ff4
     type: workflow
-    size: 23746
+    size: 28350
   - path: development/workflows/story-development-cycle.yaml
     hash: sha256:137fc6d2a7aedb50bbebfa045e877c382399604708ce03477f358f282b76727f
     type: workflow
@@ -4188,9 +4196,9 @@ files:
     type: template
     size: 16666
   - path: product/templates/spec-tmpl.md
-    hash: sha256:03a71c8a3758864c3d27e4f0865734d986f4259f64af477d9fa4244f8972c7eb
+    hash: sha256:58207c62ca73c18d9584232bc62ec43ee5f11dc4337d231eee5bf2cc87d15b78
     type: template
-    size: 3403
+    size: 4220
   - path: product/templates/state-persistence-tmpl.yaml
     hash: sha256:3f8bb48230df89cf987330f7c9aff19edbc35a65a9cbff799e28480155dd8919
     type: template

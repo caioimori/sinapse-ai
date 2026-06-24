@@ -162,7 +162,7 @@ integration:
   log_section:
     create_if_missing: '## Clarifications'
     subsection: '### Session {YYYY-MM-DD}'
-    entry_format: '- Q: {question} → A: {answer}'
+    entry_format: '- Q: {question} -> A: {answer}'
 
   apply_change:
     description: 'Apply the answer to the target section of the spec'
@@ -216,7 +216,8 @@ gate:
 scan:
   action: scan_spec_against_taxonomy
   for_each: category in taxonomy
-  process: 1. Read spec.md
+  process: |
+    1. Read spec.md
     2. Mark category Clear / Partial / Missing
     3. Note specific gap location (section)
 ```
@@ -226,9 +227,10 @@ scan:
 ```yaml
 select:
   action: rank_by_impact_uncertainty
-  process: 1. Build candidate questions from Partial/Missing categories
+  process: |
+    1. Build candidate questions from Partial/Missing categories
     2. Apply the materially-impacts filter (discard cosmetic)
-    3. Rank by Impact × Uncertainty
+    3. Rank by Impact x Uncertainty
     4. Cap the queue at 5
 ```
 
@@ -237,9 +239,10 @@ select:
 ```yaml
 ask_loop:
   for_each: question in selected (max 5)
-  process: 1. Ask ONE question (multiple-choice 2-5 opts w/ recommendation, OR short answer <=5 words)
+  process: |
+    1. Ask ONE question (multiple-choice 2-5 opts w/ recommendation, OR short answer <=5 words)
     2. Wait for the answer
-    3. Append `- Q: ... → A: ...` under `## Clarifications` / `### Session {date}`
+    3. Append `- Q: ... -> A: ...` under `## Clarifications` / `### Session {date}`
     4. Apply the answer to the target spec section
     5. Re-check stop criteria; break if met
 ```
@@ -249,7 +252,8 @@ ask_loop:
 ```yaml
 finalize:
   action: confirm_clarification_complete
-  process: 1. Ensure every asked question was both logged AND applied
+  process: |
+    1. Ensure every asked question was both logged AND applied
     2. Set clarificationComplete = true
     3. Hand off to critique
 ```
