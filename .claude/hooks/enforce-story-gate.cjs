@@ -109,8 +109,12 @@ function hasActiveStory(root) {
     for (const file of files) {
       try {
         const content = fs.readFileSync(file, 'utf8');
-        // Look for status field in YAML frontmatter or markdown
-        const statusMatch = content.match(/status:\s*["']?(\w[\w\s]*\w?)["']?/i);
+        // Look for status field in YAML frontmatter or markdown.
+        // Bounded capture (non-greedy + line-anchored): a greedy `[\w\s]*` used
+        // to cross the newline and swallow the next frontmatter key (e.g.
+        // `status: Ready\ntype: fix` → "readytypefix"), wrongly rejecting valid
+        // unquoted stories. Aligned with doc-first-resolver's matcher.
+        const statusMatch = content.match(/status:\s*["']?([A-Za-z][A-Za-z ]*?)["']?\s*(?:\r?\n|$)/i);
         if (statusMatch) {
           const status = statusMatch[1].toLowerCase().replace(/[\s_-]+/g, '');
           if (VALID_STATUSES.some((vs) => vs.replace(/[\s_-]+/g, '') === status)) {

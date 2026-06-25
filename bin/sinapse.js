@@ -161,6 +161,7 @@ GENERATE & CREATE:
 ORCHESTRATION:
   sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
   sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
+  sinapse route "<brief>"                   # Doc-first routing: type -> workflow -> what's missing
   sinapse mode [explore|ask|auto]           # Show or set the agent permission mode (--cycle)
 
 INTELLIGENCE & HEALTH:
@@ -1393,6 +1394,37 @@ async function main() {
         process.exit(exitCode);
       } catch (error) {
         logger.error(`❌ Orchestrate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'route': {
+      // Doc-first routing observability (READ-ONLY) — Art. I (CLI First).
+      // Usage: sinapse route "<brief>" [--type <project_type>]
+      // Shows, deterministically: project type → workflow → required upstream
+      // docs (which exist / which are missing) → whether the doc-first gate
+      // (PRD + epic + Ready story) is satisfied. Shares logic with the
+      // doc-first gate hook so the conversation and the gate never disagree.
+      try {
+        const { route: routeCmd } = require('../.sinapse-ai/core/orchestration/route-command');
+        const typeIdx = args.indexOf('--type');
+        const typeValueIdx = typeIdx !== -1 ? typeIdx + 1 : -1;
+        // The brief is every positional token after `route` joined back together
+        // (so an unquoted multi-word brief still works), minus flags/flag-values.
+        const brief = args
+          .slice(1)
+          .filter((a, i) => !a.startsWith('--') && i + 1 !== typeValueIdx)
+          .join(' ')
+          .trim();
+        const options = {
+          projectRoot: process.cwd(),
+          type: typeIdx !== -1 ? args[typeIdx + 1] : undefined,
+        };
+        const result = await routeCmd(brief, options);
+        process.exit(result && typeof result.exitCode === 'number' ? result.exitCode : 0);
+      } catch (error) {
+        logger.error(`❌ Route command error: ${error.message}`);
         process.exit(1);
       }
       break; // unreachable (both branches process.exit) — satisfies no-fallthrough

@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1163
+file_count: 1165
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -959,6 +959,10 @@ files:
     hash: sha256:14e91bfefde4f1ee9ecea1e2902bcc43a754719b1572d93f7d2ca357c87c8312
     type: core
     size: 10880
+  - path: core/orchestration/doc-first-resolver.js
+    hash: sha256:92a4170f3ed0b6b214608c80e17c8c6b1769a50b849532af4ae34db070a6931f
+    type: core
+    size: 14592
   - path: core/orchestration/epic-context-accumulator.js
     hash: sha256:9f38c7e3b4de7fbcfeae5fe1dc88aa3f0ae38667f1dc1da025519d40b3b9daa9
     type: core
@@ -1031,6 +1035,10 @@ files:
     hash: sha256:cfbf41b69336548b2fc4179a5513243491ca6eb501de3426f98254f118b074e7
     type: core
     size: 27167
+  - path: core/orchestration/route-command.js
+    hash: sha256:b7a5aa520936eb819d7b577fd7b15bcee8c7f8e9e147c6fa3db9fd12a493b7f3
+    type: core
+    size: 4766
   - path: core/orchestration/session-state.js
     hash: sha256:e4591fc968e8c2be07cc4572128415f3459eec75d831ba139d69faf9c7d9cacc
     type: core
@@ -1364,9 +1372,9 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:62b4371c6f4e3fe4668a115e3ac4fdf4c1eb5b3995a3d8e8e0b8f95446d10d87
+    hash: sha256:9f8ab1fd062c3d4ec2f17f1ce664fbceb5a40f356e4be340b1def175595249de
     type: data
-    size: 549348
+    size: 550671
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
