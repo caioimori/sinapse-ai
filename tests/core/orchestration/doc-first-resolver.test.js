@@ -11,6 +11,7 @@ const path = require('path');
 const {
   classifyProjectType,
   resolveDocFirstState,
+  assessProjectMaturity,
 } = require('../../../.sinapse-ai/core/orchestration/doc-first-resolver');
 
 function mkTmp() {
@@ -110,5 +111,32 @@ describe('resolveDocFirstState', () => {
     const brief = state.artifacts.find((a) => a.id === 'brief');
     expect(prd.exists).toBe(true);
     expect(brief.exists).toBe(false);
+  });
+});
+
+describe('assessProjectMaturity', () => {
+  it('marks an empty directory as greenfield', () => {
+    const m = assessProjectMaturity(mkTmp());
+    expect(m.isGreenfield).toBe(true);
+    expect(m.isFrameworkRepo).toBe(false);
+  });
+
+  it('marks a project with package.json as not greenfield', () => {
+    const root = mkTmp();
+    fs.writeFileSync(path.join(root, 'package.json'), '{"name":"client-app"}');
+    expect(assessProjectMaturity(root).isGreenfield).toBe(false);
+  });
+
+  it('marks a project with populated src/ as not greenfield', () => {
+    const root = mkTmp();
+    fs.mkdirSync(path.join(root, 'src'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'src', 'a.js'), 'x');
+    expect(assessProjectMaturity(root).isGreenfield).toBe(false);
+  });
+
+  it('identifies the framework\'s own repo by package.json name', () => {
+    const root = mkTmp();
+    fs.writeFileSync(path.join(root, 'package.json'), '{"name":"sinapse-ai"}');
+    expect(assessProjectMaturity(root).isFrameworkRepo).toBe(true);
   });
 });

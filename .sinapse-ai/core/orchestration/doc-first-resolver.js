@@ -112,6 +112,44 @@ const REQUIRED_ARTIFACTS_BY_WORKFLOW = Object.freeze({
 const LIGHT_TYPES = Object.freeze(['feature', 'fix', 'refactor']);
 
 // ═══════════════════════════════════════════════════════════════════════════════════
+//                              PROJECT MATURITY
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/** Directories whose presence (with real files) signals existing application code. */
+const CODE_DIRS = Object.freeze(['src', 'app', 'packages', 'components', 'pages', 'lib']);
+
+/**
+ * Assess project maturity for gate scoping. Two signals matter:
+ *
+ *   - isFrameworkRepo : this IS the SINAPSE framework's own repo (package.json
+ *                       name === 'sinapse-ai'). Framework development operates
+ *                       above the story layer (Constitution Art. III exception),
+ *                       so the doc-first gate must never block it.
+ *   - isGreenfield    : the project has no substantial application code yet — a
+ *                       brand-new project. The hard doc-first gate applies HERE
+ *                       (this is the "criar um site → straight to code" case).
+ *                       Existing projects defer to the lighter story-gate.
+ *
+ * @param {string} projectRoot
+ * @returns {{ isFrameworkRepo: boolean, isGreenfield: boolean }}
+ */
+function assessProjectMaturity(projectRoot) {
+  let isFrameworkRepo = false;
+  try {
+    const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
+    if (pkg && pkg.name === 'sinapse-ai') isFrameworkRepo = true;
+  } catch {
+    // no package.json — fine
+  }
+
+  const hasPkg = fileHasContent(path.join(projectRoot, 'package.json'));
+  const hasCode = CODE_DIRS.some((d) => dirHasAnyFile(path.join(projectRoot, d)));
+  const isGreenfield = !hasPkg && !hasCode;
+
+  return { isFrameworkRepo, isGreenfield };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
 //                              MINIMAL DOC-FIRST GATE
 // ═══════════════════════════════════════════════════════════════════════════════════
 
@@ -216,6 +254,7 @@ function resolveDocFirstState(opts = {}) {
     workflow,
     artifacts,
     gate: { prd, epic, readyStory, satisfied, missing },
+    maturity: assessProjectMaturity(projectRoot),
   };
 }
 
@@ -235,6 +274,15 @@ function fileHasContent(file) {
 function dirHasMarkdown(dir) {
   try {
     return fs.readdirSync(dir).some((f) => f.toLowerCase().endsWith('.md'));
+  } catch {
+    return false;
+  }
+}
+
+/** True if `dir` exists and contains at least one regular file (any depth-1 entry). */
+function dirHasAnyFile(dir) {
+  try {
+    return fs.readdirSync(dir, { withFileTypes: true }).some((e) => e.isFile() || e.isDirectory());
   } catch {
     return false;
   }
@@ -264,6 +312,7 @@ function walkMarkdown(dir, depth = 0) {
 module.exports = {
   classifyProjectType,
   resolveDocFirstState,
+  assessProjectMaturity,
   REQUIRED_ARTIFACTS_BY_WORKFLOW,
   TYPE_KEYWORDS,
   // re-exported for callers that want the raw map
