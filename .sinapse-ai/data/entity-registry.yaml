@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-24T15:49:40.486Z'
+  lastUpdated: '2026-06-25T14:35:17.113Z'
   entityCount: 794
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -1927,8 +1927,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:86d38d0a9872d7e1e57edb2aa2be1e8a74a9e5ff78b9047ab15bc463fcf1cad6
-      lastVerified: '2026-06-15T00:26:26.247Z'
+      checksum: sha256:c59435108b2a016040bafbcf6bbcf1a9ce3502446871ef5a3af908f38602cbfa
+      lastVerified: '2026-06-25T14:35:16.949Z'
     create-next-story:
       path: .sinapse-ai/development/tasks/create-next-story.md
       layer: L2
@@ -1966,8 +1966,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:8a42add94bb0e1233d6f47203786ff57ec53bac148be37ec6ac3ca2cb3e5e2b8
-      lastVerified: '2026-06-15T00:26:26.248Z'
+      checksum: sha256:5e3d0b592821b1136db7dcfa911ee5080055d76b2f390fe0497e8702b06f330d
+      lastVerified: '2026-06-25T14:35:16.949Z'
     create-service:
       path: .sinapse-ai/development/tasks/create-service.md
       layer: L2
@@ -5751,8 +5751,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:1a1b02926d2fc13d85caf9da0cbc84122cd4ec1e7ec8ec292b4d1cac190c70d3
-      lastVerified: '2026-06-15T00:26:26.299Z'
+      checksum: sha256:7ed12b65fca5657d218fbfaa40c0a05af5d3e14a17a332c089dd1147d7cb1ca9
+      lastVerified: '2026-06-25T14:35:16.977Z'
     spec-research-dependencies:
       path: .sinapse-ai/development/tasks/spec-research-dependencies.md
       layer: L2
@@ -7340,8 +7340,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:cc68f141e09386096f6add62717f63f0b56bb53f315eafcafc4bb649f151d25f
-      lastVerified: '2026-06-15T00:26:26.324Z'
+      checksum: sha256:ae365825677131fc9f5c6762c6a4a036be0737442bcbdb04cdbd4e3e3f547265
+      lastVerified: '2026-06-25T14:35:16.991Z'
     project-brief-tmpl:
       path: .sinapse-ai/product/templates/project-brief-tmpl.yaml
       layer: L2
@@ -15138,8 +15138,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:d0da3844cdf7e71c59a13b22e6c715b23a0ae55337aaa6dfc7248de99bdc6ff4
-      lastVerified: '2026-06-24T15:32:36.251Z'
+      checksum: sha256:fc739f0f5ec927ed9daecbd0fc74b68017ed548ce445c40b9b1ecd5f1ff2ff4b
+      lastVerified: '2026-06-25T14:35:17.067Z'
     story-development-cycle:
       path: .sinapse-ai/development/workflows/story-development-cycle.yaml
       layer: L2

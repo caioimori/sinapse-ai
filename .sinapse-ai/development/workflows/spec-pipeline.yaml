@@ -208,6 +208,7 @@ workflow:
 
       on_success:
         log: "✅ Requirements gathered: {requirements.functional.length} FR, {requirements.nonFunctional.length} NFR"
+        present_table: ".sinapse-ai/development/templates/approval-table.md"  # Render FR/NFR/CON as scannable approval tables, not just the count
         next: assess
 
       on_failure:

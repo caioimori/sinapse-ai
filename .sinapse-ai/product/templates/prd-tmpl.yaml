@@ -126,7 +126,9 @@ sections:
     title: Epic List
     instruction: |
       Present a high-level list of all epics for user approval. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
-      
+
+      PRESENTATION: Render the epic list as a scannable approval table per `.sinapse-ai/development/templates/approval-table.md` (Epic list schema: `| # | Epic | Goal (1 line) | Stories |`) BEFORE the 1-9 elicitation menu. Do not present epics as a count or plain prose.
+
       CRITICAL: Epics MUST be logically sequential following agile best practices:
       
       - Each epic should deliver a significant, end-to-end, fully deployable increment of testable functionality
@@ -147,7 +149,9 @@ sections:
     repeatable: true
     instruction: |
       After the epic list is approved, present each epic with all its stories and acceptance criteria as a complete review unit.
-      
+
+      PRESENTATION: For each epic, render its stories as a scannable approval table per `.sinapse-ai/development/templates/approval-table.md` (Epic detail schema: `| Story | As a … / I want … | ACs | Depends on |`) BEFORE the 1-9 elicitation menu, then the expanded goal and per-story detail.
+
       For each epic provide expanded goal (2-3 sentences describing the objective and value all the stories will achieve).
       
       CRITICAL STORY SEQUENCING REQUIREMENTS:
