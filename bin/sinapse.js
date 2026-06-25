@@ -161,6 +161,7 @@ GENERATE & CREATE:
 ORCHESTRATION:
   sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
   sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
+  sinapse route "<brief>"                   # Doc-first routing: type -> workflow -> what's missing
   sinapse mode [explore|ask|auto]           # Show or set the agent permission mode (--cycle)
 
 INTELLIGENCE & HEALTH:
