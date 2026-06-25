@@ -121,10 +121,12 @@ describe('assessProjectMaturity', () => {
     expect(m.isFrameworkRepo).toBe(false);
   });
 
-  it('marks a project with package.json as not greenfield', () => {
+  it('keeps a lone package.json (no code yet) as greenfield — closes the scaffold bypass', () => {
     const root = mkTmp();
     fs.writeFileSync(path.join(root, 'package.json'), '{"name":"client-app"}');
-    expect(assessProjectMaturity(root).isGreenfield).toBe(false);
+    // package.json alone must NOT disable the gate (it is an exempt file the
+    // scaffolder writes first); only real code dirs flip greenfield off.
+    expect(assessProjectMaturity(root).isGreenfield).toBe(true);
   });
 
   it('marks a project with populated src/ as not greenfield', () => {

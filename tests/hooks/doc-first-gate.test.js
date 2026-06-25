@@ -46,6 +46,13 @@ describe('doc-first-gate hook', () => {
     expect(exit).toBe(2);
   });
 
+  it('BLOCKS even after package.json was scaffolded (no code yet, no docs)', () => {
+    const root = mkTmp();
+    writeFile(root, 'package.json', '{"name":"new-site"}'); // scaffolded first (exempt file)
+    const exit = runHook(root, path.join(root, 'src', 'index.js'));
+    expect(exit).toBe(2); // the scaffold bypass must NOT open the gate
+  });
+
   it('ALLOWS when PRD + epic + Ready story all exist', () => {
     const root = mkTmp();
     writeFile(root, 'docs/prd.md', '# PRD');

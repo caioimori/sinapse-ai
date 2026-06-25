@@ -142,9 +142,11 @@ function assessProjectMaturity(projectRoot) {
     // no package.json — fine
   }
 
-  const hasPkg = fileHasContent(path.join(projectRoot, 'package.json'));
+  // Greenfield = no substantial application code yet. A lone package.json does
+  // NOT flip this off — otherwise scaffolding package.json first (an exempt
+  // file) would bypass the gate. Only populated code dirs count as "existing".
   const hasCode = CODE_DIRS.some((d) => dirHasAnyFile(path.join(projectRoot, d)));
-  const isGreenfield = !hasPkg && !hasCode;
+  const isGreenfield = !hasCode;
 
   return { isFrameworkRepo, isGreenfield };
 }

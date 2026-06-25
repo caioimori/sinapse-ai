@@ -539,6 +539,7 @@ async function copyClaudeHooksFolder(projectRoot) {
     'enforce-architecture-first.cjs',
     'enforce-delegation.cjs',
     'enforce-story-gate.cjs',
+    'doc-first-gate.cjs',
     'enforce-framework-boundary.cjs',
     'secret-scanning.cjs',
     'write-path-validation.cjs',
@@ -599,6 +600,11 @@ const HOOK_EVENT_MAP = {
     timeout: 5,
   },
   'enforce-story-gate.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  'doc-first-gate.cjs': {
     event: 'PreToolUse',
     matcher: 'Write|Edit',
     timeout: 5,
