@@ -1397,6 +1397,41 @@ async function main() {
       break; // unreachable (both branches process.exit) — satisfies no-fallthrough
     }
 
+    case 'atlas': {
+      // Framework Operating Atlas (CLI First — Art. I). Regenerates the living
+      // map of how SINAPSE works (routing, models, constitution, workflows,
+      // agents, squads) into docs/framework/atlas/ from disk, so counts are
+      // always exact (Art. VII). Usage: sinapse atlas
+      try {
+        const { generateAtlas } = require('../.sinapse-ai/core/atlas');
+        const res = generateAtlas({ root: process.cwd(), generatedAt: new Date().toISOString() });
+        const c = res.data.counts;
+        logger.info('🗺️  Framework Operating Atlas generated:');
+        logger.info(`   ${res.paths.md}   (LLM-readable)`);
+        logger.info(`   ${res.paths.html} (visual dashboard)`);
+        logger.info(`   ${res.paths.json} (data)`);
+        logger.info(
+          `   ${c.squads} squads · ${c.agentsTotal} agents · ${c.orqx} orchestrators · ` +
+            `${c.workflowsTotal} workflows · ${c.articles} articles · ${c.rules} rules`,
+        );
+        if (args.includes('--open')) {
+          const target = path.join(process.cwd(), res.paths.html);
+          const opener =
+            process.platform === 'win32' ? 'start' : process.platform === 'darwin' ? 'open' : 'xdg-open';
+          try {
+            spawnSync(opener, [target], { shell: process.platform === 'win32', stdio: 'ignore' });
+          } catch {
+            /* opening is best-effort */
+          }
+        }
+        process.exit(0);
+      } catch (error) {
+        logger.error(`❌ Atlas command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (process.exit above) — satisfies no-fallthrough
+    }
+
     case undefined:
       // No arguments - launch Claude Code with SINAPSE branding
       launchSinapse([]);
