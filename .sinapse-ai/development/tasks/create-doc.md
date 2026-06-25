@@ -238,7 +238,7 @@ If a YAML Template has not been provided, list all templates from .sinapse-ai/pr
 
 **YOU MUST:**
 
-1. Present section content
+1. Present section content. **If the section content is a list of artifacts (epics, requirements, stories, tasks, risks), render it as a scannable approval table FIRST, following `.sinapse-ai/development/templates/approval-table.md` (verdict header → table → decision prompt). Never report a list as a count or as prose when a table schema fits.**
 2. Provide detailed rationale (explain trade-offs, assumptions, decisions made)
 3. **STOP and present numbered options 1-9:**
    - **Option 1:** Always "Proceed to next section"

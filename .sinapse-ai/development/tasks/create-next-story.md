@@ -773,9 +773,8 @@ Use the primary agent from "Specialized Agent Assignment" to determine which sel
 - Ensure tasks align with both epic requirements and architecture constraints
 - Update status to "Draft" and save the story file
 - Execute `sinapse-ai/tasks/execute-checklist` `sinapse-ai/checklists/story-draft-checklist`
-- Provide summary to user including:
-  - Story created: `{devStoryLocation}/{epicNum}.{storyNum}.story.md`
-  - Status: Draft
+- Provide summary to user as a scannable **story approval table** per `.sinapse-ai/development/templates/approval-table.md` (Story summary schema: a `| Field | Value |` table + an `| AC# | Criterion | Tasks |` table), not a plain bullet list. The table MUST surface:
+  - Story created (path), Status (Draft), Acceptance count, Tasks count (linked to ACs), Dependencies
   - Key technical components included from architecture docs
   - Any deviations or conflicts noted between epic and architecture
   - Checklist Results

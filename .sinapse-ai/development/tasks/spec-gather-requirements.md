@@ -302,6 +302,17 @@ structuring:
 
 ---
 
+### Phase 5: Present for Approval
+
+After structuring `requirements.json`, present the gathered requirements back to the user as
+scannable **approval tables** following `.sinapse-ai/development/templates/approval-table.md`
+(Requirements schema) — one table for Functional (`| ID | Description | Priority | Source |`),
+one for Non-Functional (`| ID | Category | Requirement | Metric/Target |`), and one for
+Constraints when present. Lead with the verdict header (`── REQUIREMENTS REVIEW · {n} item(s) · status: DRAFT ──`).
+Do NOT report only the count (e.g. "8 FR, 3 NFR") — the user must see and approve the actual rows.
+
+---
+
 ## Output Schema
 
 ```json
