@@ -26,6 +26,8 @@ try {
   yaml = null;
 }
 
+const { FRAMEWORK_FLOWS } = require('./flows');
+
 // ───────────────────────────────────────────────────────────────────────────
 // Low-level fs helpers (defensive)
 // ───────────────────────────────────────────────────────────────────────────
@@ -264,6 +266,7 @@ function buildAtlasData(opts = {}) {
   return {
     generatedAt: opts.generatedAt || null,
     counts,
+    flows: FRAMEWORK_FLOWS,
     workflows,
     agents,
     squads,

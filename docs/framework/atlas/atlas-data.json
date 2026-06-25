@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T17:38:32.130Z",
+  "generatedAt": "2026-06-25T19:27:20.988Z",
   "counts": {
     "squads": 17,
     "agentsTotal": 172,
@@ -12,6 +12,44 @@
     "articles": 11,
     "rules": 22
   },
+  "flows": [
+    {
+      "id": "lifecycle",
+      "title": "End-to-end lifecycle",
+      "purpose": "The full spine a request travels: from briefing to shipped code, with the doc-first pipeline and gates in the middle.",
+      "mermaid": "flowchart TD\n    U[User briefing] --> C{Classify intent + project type}\n    C -->|new project| GF[Greenfield workflow]\n    C -->|existing project| BF[Brownfield discovery]\n    C -->|bug / tweak| SDC[Story dev cycle - YOLO]\n    GF --> DOC[Doc-first pipeline]\n    BF --> DOC\n    DOC --> PRD[PRD] --> EPIC[Epic] --> STORY[Story - validated >= Ready] --> SPEC[Spec]\n    SPEC --> GATE{{Doc-first gate}}\n    SDC --> GATE\n    GATE -->|missing docs| BLOCK[Blocked - produce docs first]\n    GATE -->|satisfied| IMPL[Implementation - @developer]\n    IMPL --> QA[QA gate + QA loop]\n    QA -->|pass| SHIP[Push / PR - @devops only]\n    QA -->|fail| IMPL"
+    },
+    {
+      "id": "agent-routing",
+      "title": "Agent routing (delegation)",
+      "purpose": "How a briefing reaches the right specialist. Orchestrators route and coordinate; they never execute domain work themselves (Article VIII).",
+      "mermaid": "sequenceDiagram\n    participant U as User\n    participant I as Imperator (master -orqx)\n    participant S as Squad -orqx\n    participant A as Specialist agent\n    U->>I: briefing (natural language)\n    I->>I: diagnose domain + project type\n    alt domain work\n        I->>S: delegate (announce plan, await go)\n        S->>A: route to specialist\n        A-->>S: artifact / result\n        S-->>I: consolidated\n    else framework dev\n        I->>A: route to framework agent (pm / architect / dev / qa)\n    end\n    I-->>U: business-language result (no internal jargon)"
+    },
+    {
+      "id": "model-routing",
+      "title": "Model routing (cheapest that solves it)",
+      "purpose": "How each task picks a model tier. Heavy thinking goes into the spec; execution then mostly reads a finished doc, so token economy is a consequence.",
+      "mermaid": "flowchart TD\n    T[Task] --> K{Kind?}\n    K -->|lint / rename / yaml / bulk| H[haiku - low effort]\n    K -->|feature from spec / review / bug / tests| SO[sonnet - high]\n    K -->|single-file / factual| SM[sonnet - medium]\n    K -->|cross-system arch / complex debug / multi-file| OP[opus - xhigh]\n    K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]\n    H --> SP{>= 8 tool calls or real fan-out?}\n    SO --> SP\n    SM --> SP\n    OP --> SP\n    OM --> SP\n    SP -->|yes| SUB[Spawn sub-agent]\n    SP -->|no| INLINE[Run inline]"
+    },
+    {
+      "id": "doc-first",
+      "title": "Doc-first enforcement",
+      "purpose": "What makes it impossible to start a new project without docs. The resolver answers what is missing; hooks block code writes until PRD + epic + story exist.",
+      "mermaid": "flowchart TD\n    W[Write/Edit a code file] --> EX{Exempt path or framework repo?}\n    EX -->|yes| ALLOW[Allow]\n    EX -->|no| RES[doc-first-resolver: type, workflow, gate]\n    RES --> GF{Greenfield + gate unsatisfied?}\n    GF -->|no| STORY{Ready story exists? - story-gate}\n    GF -->|yes, no PRD/epic/story| DENY[BLOCK - run greenfield flow first]\n    STORY -->|yes| ALLOW\n    STORY -->|no| DENY2[BLOCK - create a story]\n    DENY -.->|escape: SINAPSE_SKIP_DOCFIRST=1| ALLOW\n    OBS[\"sinapse route gives the same answer (observability)\"]:::note\n    RES -. shares logic .- OBS\n    classDef note fill:#1c1c1c,stroke:#555,color:#aaa"
+    },
+    {
+      "id": "constitution-gates",
+      "title": "Constitutional gates by phase",
+      "purpose": "Where each non-negotiable article fires across the lifecycle — the enforcement layer that blocks violations automatically.",
+      "mermaid": "flowchart LR\n    subgraph PLAN[Plan]\n      A3[III Documentation-First]\n      A4[IV No Invention]\n    end\n    subgraph BUILD[Build]\n      A6[VI Absolute Imports]\n      A8[VIII Mandatory Delegation]\n      A10[X Security & Data]\n    end\n    subgraph SHIP[Ship]\n      A2[II Agent Authority - devops only]\n      A5[V Quality First]\n      A9[IX Safe Collaboration]\n    end\n    subgraph ALWAYS[Cross-cutting]\n      A1[I CLI First]\n      A7[VII Metrics Accuracy]\n      A11[XI Conservative Default]\n    end\n    PLAN --> BUILD --> SHIP"
+    },
+    {
+      "id": "project-classification",
+      "title": "Project classification to workflow",
+      "purpose": "How intent maps to the right workflow: site/lp/app vs platform/saas vs api/service, greenfield vs brownfield, or a light fix.",
+      "mermaid": "flowchart TD\n    B[Briefing] --> N{New or existing?}\n    N -->|existing, unknown| BD[brownfield-discovery]\n    N -->|existing, known| FIX{Change size?}\n    N -->|new| TYPE{Project type?}\n    TYPE -->|site / lp / app| GUI[greenfield-ui]\n    TYPE -->|platform / saas| GFS[greenfield-fullstack]\n    TYPE -->|api / service| GSV[greenfield-service]\n    BD --> BTYPE{Type?}\n    BTYPE -->|ui| BUI[brownfield-ui]\n    BTYPE -->|fullstack| BFS[brownfield-fullstack]\n    BTYPE -->|service| BSV[brownfield-service]\n    FIX -->|bug / tweak| YOLO[SDC - YOLO]\n    FIX -->|feature| SDCI[SDC - interactive]\n    FIX -->|complex score >= 16| SPEC[Spec Pipeline first]"
+    }
+  ],
   "workflows": [
     {
       "id": "auto-worktree",
