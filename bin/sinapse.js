@@ -165,6 +165,7 @@ ORCHESTRATION:
 
 INTELLIGENCE & HEALTH:
   sinapse health                            # Framework health analytics (--deep for full scan)
+  sinapse atlas                             # Framework Operating Atlas — how it works (--open)
   sinapse graph --deps                      # Dependency & stats dashboard (--format, --watch)
   sinapse performance                       # Squad & agent performance ranking (--top N)
   sinapse routing-intel analyze             # Routing intelligence analysis
