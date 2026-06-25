@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1157
+file_count: 1158
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1344,7 +1344,7 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:5afcfac2ecfcbda210a85f77a18829c23a0dd80a0be5fc42c5081d419a3ac73b
+    hash: sha256:62b4371c6f4e3fe4668a115e3ac4fdf4c1eb5b3995a3d8e8e0b8f95446d10d87
     type: data
     size: 549348
   - path: data/learned-patterns.yaml
@@ -1980,13 +1980,13 @@ files:
     type: task
     size: 12499
   - path: development/tasks/create-doc.md
-    hash: sha256:86d38d0a9872d7e1e57edb2aa2be1e8a74a9e5ff78b9047ab15bc463fcf1cad6
+    hash: sha256:c59435108b2a016040bafbcf6bbcf1a9ce3502446871ef5a3af908f38602cbfa
     type: task
-    size: 10344
+    size: 10669
   - path: development/tasks/create-next-story.md
-    hash: sha256:8a42add94bb0e1233d6f47203786ff57ec53bac148be37ec6ac3ca2cb3e5e2b8
+    hash: sha256:5e3d0b592821b1136db7dcfa911ee5080055d76b2f390fe0497e8702b06f330d
     type: task
-    size: 30701
+    size: 30945
   - path: development/tasks/create-service.md
     hash: sha256:5ad5920b06934637f8057e53d5acdbb918c71cd7990bfea41177f74b09f82889
     type: task
@@ -2564,9 +2564,9 @@ files:
     type: task
     size: 13643
   - path: development/tasks/spec-gather-requirements.md
-    hash: sha256:1a1b02926d2fc13d85caf9da0cbc84122cd4ec1e7ec8ec292b4d1cac190c70d3
+    hash: sha256:7ed12b65fca5657d218fbfaa40c0a05af5d3e14a17a332c089dd1147d7cb1ca9
     type: task
-    size: 14542
+    size: 15182
   - path: development/tasks/spec-research-dependencies.md
     hash: sha256:28e087134ce19d2c9f3c422604f3414d25bda5f718e0daca7da8c4620f2f62e7
     type: task
@@ -2707,6 +2707,10 @@ files:
     hash: sha256:9887e0f126e9041f70b8809efd0a659a582d08bd2a5fdd14a0e858b84529d76e
     type: template
     size: 1106
+  - path: development/templates/approval-table.md
+    hash: sha256:847bca537a5790ba9e636703cf1e36cb6b3cd9d0b8640cee9689eb1ab136a3b0
+    type: template
+    size: 5172
   - path: development/templates/chrome-brain/knowledge-base/chrome-brain.md
     hash: sha256:4b73f2a5c680aa9260e7c66a0a222a6927a0032784ca803eb309816774a5de84
     type: template
@@ -2996,9 +3000,9 @@ files:
     type: workflow
     size: 2606
   - path: development/workflows/spec-pipeline.yaml
-    hash: sha256:d0da3844cdf7e71c59a13b22e6c715b23a0ae55337aaa6dfc7248de99bdc6ff4
+    hash: sha256:fc739f0f5ec927ed9daecbd0fc74b68017ed548ce445c40b9b1ecd5f1ff2ff4b
     type: workflow
-    size: 28350
+    size: 28497
   - path: development/workflows/story-development-cycle.yaml
     hash: sha256:137fc6d2a7aedb50bbebfa045e877c382399604708ce03477f358f282b76727f
     type: workflow
@@ -4160,9 +4164,9 @@ files:
     type: template
     size: 3430
   - path: product/templates/prd-tmpl.yaml
-    hash: sha256:cc68f141e09386096f6add62717f63f0b56bb53f315eafcafc4bb649f151d25f
+    hash: sha256:ae365825677131fc9f5c6762c6a4a036be0737442bcbdb04cdbd4e3e3f547265
     type: template
-    size: 11954
+    size: 12512
   - path: product/templates/prd-v2.0.hbs
     hash: sha256:efcdadfcd994d02cb04f61de67e4b42156e49b64e9374ad57037e60104297134
     type: template
