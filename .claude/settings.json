@@ -68,6 +68,11 @@
           },
           {
             "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/doc-first-gate.cjs\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "node \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/enforce-nsn-guard.cjs\"",
             "timeout": 5
           },

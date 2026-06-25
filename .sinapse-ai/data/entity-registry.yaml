@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-25T14:35:17.113Z'
-  entityCount: 794
+  lastUpdated: '2026-06-25T14:57:04.344Z'
+  entityCount: 796
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -650,6 +650,7 @@ entities:
         - chrome-brain-installer
         - cli
         - component-generator
+        - route-command
       externalDeps: []
       plannedDeps:
         - logger
@@ -660,8 +661,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:01cae0d9971b1acaec7e62025570cc5a629fe60e91d226fde6818bf359913c78
-      lastVerified: '2026-06-21T05:24:05.627Z'
+      checksum: sha256:5ee1c859ceedbbaa2cea1463677462985f1ce9472963d4b51589bdbfc5302395
+      lastVerified: '2026-06-25T14:57:04.173Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
@@ -11880,6 +11881,28 @@ entities:
         extensionPoints: []
       checksum: sha256:14e91bfefde4f1ee9ecea1e2902bcc43a754719b1572d93f7d2ca357c87c8312
       lastVerified: '2026-06-15T00:26:26.404Z'
+    doc-first-resolver:
+      path: .sinapse-ai/core/orchestration/doc-first-resolver.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\orchestration\doc-first-resolver.js
+      keywords:
+        - doc
+        - first
+        - resolver
+      usedBy:
+        - route-command
+      dependencies:
+        - greenfield-handler
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:e3c8c695ef0b4f268a3e02a0d4258fef1ae90aaec0b281ee8c5c5fb3bd475939
+      lastVerified: '2026-06-25T14:57:04.259Z'
     epic-context-accumulator:
       path: .sinapse-ai/core/orchestration/epic-context-accumulator.js
       layer: L1
@@ -12084,6 +12107,7 @@ entities:
         - handler
       usedBy:
         - bob-orchestrator
+        - doc-first-resolver
       dependencies:
         - workflow-executor
         - surface-checker
@@ -12190,6 +12214,27 @@ entities:
         extensionPoints: []
       checksum: sha256:cfbf41b69336548b2fc4179a5513243491ca6eb501de3426f98254f118b074e7
       lastVerified: '2026-06-15T00:26:26.411Z'
+    route-command:
+      path: .sinapse-ai/core/orchestration/route-command.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\orchestration\route-command.js
+      keywords:
+        - route
+        - command
+      usedBy:
+        - sinapse
+      dependencies:
+        - doc-first-resolver
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b7a5aa520936eb819d7b577fd7b15bcee8c7f8e9e147c6fa3db9fd12a493b7f3
+      lastVerified: '2026-06-25T14:57:04.262Z'
     session-state:
       path: .sinapse-ai/core/orchestration/session-state.js
       layer: L1
