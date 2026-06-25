@@ -27,6 +27,16 @@ function renderAtlasHtml(d) {
 
   const stat = (n, label) => `<div class="stat"><b>${n}</b><span>${label}</span></div>`;
 
+  const flowsSection = (d.flows || [])
+    .map(
+      (f) => `<h3 style="margin:1.6rem 0 .3rem">${esc(f.title)}</h3>
+    <p class="lead">${esc(f.purpose)}</p>
+    <div class="mermaid">
+${esc(f.mermaid)}
+    </div>`,
+    )
+    .join('\n');
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -111,6 +121,12 @@ flowchart TD
     </div>
   </section>
 
+  <section id="s-flows">
+    <h2>Framework flows</h2>
+    <p class="lead">How each mechanism of the framework runs — routing, models, doc-first enforcement, gates, project classification. The meta-workflows behind the machine.</p>
+    ${flowsSection}
+  </section>
+
   <section id="s-constitution"><h2>Constitution · ${c.articles} articles</h2><div id="t-constitution"></div></section>
   <section id="s-workflows"><h2>Workflows · ${c.workflowsTotal}</h2>
     <div class="ctrl"><input id="q-workflows" placeholder="search workflows…"><select id="f-workflows-src"><option value="">all sources</option><option value="framework">framework</option><option value="squad">squad</option></select></div>
@@ -125,14 +141,24 @@ flowchart TD
 <script id="atlas-data" type="application/json">${dataJson}</script>
 <script>
 const D = JSON.parse(document.getElementById('atlas-data').textContent);
-try{ mermaid.initialize({startOnLoad:true,theme:'dark',themeVariables:{background:'#121212',primaryColor:'#1c1c1c',primaryTextColor:'#f5f5f0',lineColor:'#555'}}); }catch(e){}
+// startOnLoad:false — Mermaid renders diagrams in display:none sections at zero
+// width. We render each section's diagrams the first time its tab is shown.
+try{ mermaid.initialize({startOnLoad:false,theme:'dark',themeVariables:{background:'#121212',primaryColor:'#1c1c1c',primaryTextColor:'#f5f5f0',lineColor:'#555'}}); }catch(e){}
+function renderDiagrams(sectionId){
+  try{
+    const nodes=[...document.querySelectorAll('#'+sectionId+' .mermaid:not([data-processed])')];
+    if(nodes.length&&window.mermaid&&mermaid.run) mermaid.run({nodes});
+  }catch(e){}
+}
 
-const TABS=[['s-model','Operating model'],['s-constitution','Constitution'],['s-workflows','Workflows'],['s-agents','Agents'],['s-squads','Squads'],['s-rules','Rules']];
+const TABS=[['s-model','Operating model'],['s-flows','Flows'],['s-constitution','Constitution'],['s-workflows','Workflows'],['s-agents','Agents'],['s-squads','Squads'],['s-rules','Rules']];
 const nav=document.getElementById('nav');
 TABS.forEach(([id,label],i)=>{const b=document.createElement('button');b.textContent=label;if(i===0)b.className='on';
   b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');};
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');
+    renderDiagrams(id);};
   nav.appendChild(b);});
+renderDiagrams('s-model'); // initial visible tab
 
 function tbl(cols,rows){return '<table><thead><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'+
   rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}

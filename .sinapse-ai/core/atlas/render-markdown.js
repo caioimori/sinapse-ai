@@ -224,6 +224,32 @@ Rules that make this deterministic, not improvised:
 }
 
 // ───────────────────────────────────────────────────────────────────────────
+// Framework flows (authored data → diagrams)
+// ───────────────────────────────────────────────────────────────────────────
+
+function frameworkFlows(d) {
+  const flows = d.flows || [];
+  if (!flows.length) return '';
+  const blocks = flows
+    .map(
+      (f) => `### ${f.title}
+
+${f.purpose}
+
+\`\`\`mermaid
+${f.mermaid}
+\`\`\``,
+    )
+    .join('\n\n');
+  return `## 2b. Framework flows — how each mechanism runs
+
+The meta-workflows of the framework itself (not the development workflows in
+\`docs/sinapse-workflows/\`). Each is a single diagram you can read at a glance.
+
+${blocks}`;
+}
+
+// ───────────────────────────────────────────────────────────────────────────
 // Public
 // ───────────────────────────────────────────────────────────────────────────
 
@@ -253,6 +279,10 @@ ${operatingModel(d)}
 ---
 
 ${routingDetail()}
+
+---
+
+${frameworkFlows(d)}
 
 ---
 

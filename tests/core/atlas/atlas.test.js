@@ -68,6 +68,36 @@ describe('buildAtlasData', () => {
   });
 });
 
+describe('framework flows', () => {
+  let d;
+  beforeAll(() => {
+    d = buildAtlasData({ root: ROOT });
+  });
+
+  it('includes the framework operating flows', () => {
+    expect(Array.isArray(d.flows)).toBe(true);
+    expect(d.flows.length).toBeGreaterThanOrEqual(5);
+    const ids = d.flows.map((f) => f.id);
+    expect(ids).toEqual(
+      expect.arrayContaining(['lifecycle', 'agent-routing', 'model-routing', 'doc-first']),
+    );
+  });
+
+  it('every flow has a title, purpose, and a mermaid diagram', () => {
+    for (const f of d.flows) {
+      expect(f.title).toBeTruthy();
+      expect(f.purpose).toBeTruthy();
+      expect(f.mermaid).toMatch(/flowchart|sequenceDiagram|graph/);
+    }
+  });
+
+  it('renders the flows section in the markdown atlas', () => {
+    const md = renderAtlasMarkdown(d);
+    expect(md).toContain('## 2b. Framework flows');
+    expect(md).toContain('```mermaid');
+  });
+});
+
 describe('renderAtlasMarkdown', () => {
   it('renders the 7 atlas sections with exact counts', () => {
     const d = buildAtlasData({ root: ROOT });

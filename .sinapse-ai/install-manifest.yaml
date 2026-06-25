@@ -9,7 +9,7 @@
 #
 version: 1.13.0
 generator: scripts/generate-install-manifest.js
-file_count: 1164
+file_count: 1165
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -196,21 +196,25 @@ files:
     type: config
     size: 12646
   - path: core/atlas/atlas-data.js
-    hash: sha256:38a7bb70624b64b59b1a55e6d6ae2ba41a8ed934bf02f07b23f9968fad673f1d
+    hash: sha256:ab6ef91bd2de1498dbe3892a80b5f18d67624db1fb2da74b0e53f83de902f383
     type: core
-    size: 11367
+    size: 11444
+  - path: core/atlas/flows.js
+    hash: sha256:87262484833afcce7b4f6f7791e21fc3a44395f2937c8ca1253d5df3d76f2add
+    type: core
+    size: 5947
   - path: core/atlas/index.js
     hash: sha256:ea1e47887854cf348cf29c99c6e5d6218d4e6e709db14a6caa0b289303200363
     type: core
     size: 2028
   - path: core/atlas/render-html.js
-    hash: sha256:f35941956b2670e78644ff25258dac0ebc22fbd202848489d3dc2220208ddca7
+    hash: sha256:d84e928fbaa7f20f4c253758af3af486805683b66027d38d682cc453a5f68a0c
     type: core
-    size: 10665
+    size: 11656
   - path: core/atlas/render-markdown.js
-    hash: sha256:7db4aec2ee44f9f51cd7489e15eb4f8c6b7b2ff7aa117dd2168e8ecf4f3c7a11
+    hash: sha256:6d379f52785f81a697ed7e7e4a673564492f58fd79ef9a915e22331a3fdde23a
     type: core
-    size: 11076
+    size: 12076
   - path: core/code-intel/code-intel-client.js
     hash: sha256:65f6c0f2bb639ff3080db3d85660e0b8097e5af7c60dc04f582ef20f42cc9cfc
     type: core
