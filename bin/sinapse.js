@@ -162,6 +162,7 @@ ORCHESTRATION:
   sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
   sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
   sinapse route "<brief>"                   # Doc-first routing: type -> workflow -> what's missing
+  sinapse build "<brief>"                    # Guided orchestration: RUN the route (--dry-run, --type)
   sinapse mode [explore|ask|auto]           # Show or set the agent permission mode (--cycle)
 
 INTELLIGENCE & HEALTH:
@@ -1425,6 +1426,37 @@ async function main() {
         process.exit(result && typeof result.exitCode === 'number' ? result.exitCode : 0);
       } catch (error) {
         logger.error(`❌ Route command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'build': {
+      // Guided orchestration — executable sibling of `route` (Art. I CLI First).
+      // Usage: sinapse build "<brief>" [--type <project_type>] [--dry-run]
+      // `route` SHOWS the doc-first decision; `build` RUNS it by driving the
+      // BobOrchestrator decision tree (brief -> project state -> greenfield /
+      // brownfield / existing handler) in guided mode, surfacing the next
+      // checkpoint instead of spawning agents headlessly. Shares the resolver
+      // with `route` so the two never disagree.
+      try {
+        const { build: buildCmd } = require('../.sinapse-ai/core/orchestration/build-command');
+        const typeIdx = args.indexOf('--type');
+        const typeValueIdx = typeIdx !== -1 ? typeIdx + 1 : -1;
+        const brief = args
+          .slice(1)
+          .filter((a, i) => !a.startsWith('--') && i + 1 !== typeValueIdx)
+          .join(' ')
+          .trim();
+        const options = {
+          projectRoot: process.cwd(),
+          type: typeIdx !== -1 ? args[typeIdx + 1] : undefined,
+          dryRun: args.includes('--dry-run'),
+        };
+        const result = await buildCmd(brief, options);
+        process.exit(result && typeof result.exitCode === 'number' ? result.exitCode : 0);
+      } catch (error) {
+        logger.error(`❌ Build command error: ${error.message}`);
         process.exit(1);
       }
       break; // unreachable (both branches process.exit) — satisfies no-fallthrough
