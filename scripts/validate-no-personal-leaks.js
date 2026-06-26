@@ -135,7 +135,15 @@ function isAllowed(filePath) {
 // real leak. Everything else (framework internals, squad agents, internal
 // docs) is intentionally OUT of scope.
 const CONCEPT_FILE_SCOPES = new Set(['README.md', 'docs/getting-started.md']);
-const CONCEPT_PREFIX_SCOPES = ['packages/installer/', 'bin/', 'docs/pt/', 'docs/en/'];
+// The atlas SOURCE (hand-authored "how SINAPSE works" flows/renderers) is a
+// public surface and must describe the framework generically — never naming the
+// maintainer's private grounding (Second Brain vault, personal/client DS). Only
+// the source is scoped here, NOT the generated output (docs/framework/atlas/*),
+// which aggregates squad/workflow descriptions that legitimately use generic
+// deliverable terms like "brandbook".
+const CONCEPT_PREFIX_SCOPES = [
+  'packages/installer/', 'bin/', 'docs/pt/', 'docs/en/', '.sinapse-ai/core/atlas/',
+];
 
 function isConceptScoped(filePath) {
   const normalized = filePath.replace(/\\/g, '/');
@@ -161,9 +169,9 @@ const CONCEPT_PATTERNS = [
     suggestion: 'Describe generically (e.g. "a session-start grounding hook") — do not name the private mechanism',
   },
   {
-    pattern: /\bsecond-brain\b/i,
-    description: "Maintainer's private knowledge base (Second-Brain) leaked to user-facing surface",
-    suggestion: 'Generalize to "external memory source (e.g. an Obsidian vault)"',
+    pattern: /\bsecond[ -]brain\b/i,
+    description: "Maintainer's private knowledge base (Second Brain) leaked to user-facing surface",
+    suggestion: 'Generalize to "knowledge base" / "external memory source" — do not name the private vault',
   },
   {
     pattern: /\bbrandbook\b/i,

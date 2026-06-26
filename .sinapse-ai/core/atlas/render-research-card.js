@@ -136,7 +136,7 @@ total_diagramas: ${flows.length}
 
 # LOOPS — Meta-fluxos do SINAPSE
 
-> Os ${flows.length} fluxos operacionais do framework SINAPSE em Mermaid — como ele funciona a cada pedido, prompt, execução e orquestração. Renderizam direto no GitHub/Obsidian.
+> Os ${flows.length} fluxos operacionais do framework SINAPSE em Mermaid — como ele funciona a cada pedido, prompt, execução e orquestração. Renderizam direto no GitHub.
 > Gerado por \`sinapse atlas --research-card\`; fonte única no próprio framework.
 
 ${blocks}

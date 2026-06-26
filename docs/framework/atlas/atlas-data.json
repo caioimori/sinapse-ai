@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T04:19:35.612Z",
+  "generatedAt": "2026-06-26T05:56:32.158Z",
   "counts": {
     "squads": 17,
     "agentsTotal": 172,
@@ -52,8 +52,8 @@
     {
       "id": "prompt-lifecycle",
       "title": "Every prompt (what fires on each message)",
-      "purpose": "What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of vault truth, design system, engineering laws and the active rules.",
-      "mermaid": "flowchart TD\n    P[User sends a prompt] --> H[UserPromptSubmit hooks fire]\n    H --> VG[Vault grounding - Second Brain truth by domain]\n    H --> DS[Design system grounding - DS resolver by cwd]\n    H --> EG[Engineering grounding - laws + KIT by topic]\n    H --> SG[Squad grounding - curated squad context]\n    H --> CR[Constitution + context bracket injected]\n    VG --> M[Model receives enriched context]\n    DS --> M\n    EG --> M\n    SG --> M\n    CR --> M\n    M --> ACT[Act: answer or route to specialist]"
+      "purpose": "What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of the project knowledge base, design system, engineering laws and the active rules.",
+      "mermaid": "flowchart TD\n    P[User sends a prompt] --> H[UserPromptSubmit hooks fire]\n    H --> VG[Knowledge grounding - project context by domain]\n    H --> DS[Design system grounding - DS resolver by cwd]\n    H --> EG[Engineering grounding - laws + KIT by topic]\n    H --> SG[Squad grounding - curated squad context]\n    H --> CR[Constitution + context bracket injected]\n    VG --> M[Model receives enriched context]\n    DS --> M\n    EG --> M\n    SG --> M\n    CR --> M\n    M --> ACT[Act: answer or route to specialist]"
     },
     {
       "id": "session-start",
@@ -83,7 +83,7 @@
       "id": "knowledge-memory",
       "title": "Knowledge & memory (how it stays current)",
       "purpose": "How the framework keeps itself grounded and self-documenting: grounding sources feed every turn, durable facts persist as memory hints, and the Atlas regenerates from disk so the map never drifts from reality.",
-      "mermaid": "flowchart TD\n    SRC[Grounding sources] --> VLT[Second Brain vault - source of truth]\n    SRC --> DSY[Design systems - ds-routing]\n    SRC --> ENG[Engineering research - 60 domains]\n    VLT --> TURN[Injected every turn]\n    DSY --> TURN\n    ENG --> TURN\n    MEM[Memory files - hints, not truth] --> VERIFY[Verify vs codebase before acting]\n    ATL[sinapse atlas] --> SCAN[Scan repo from disk - exact counts]\n    SCAN --> OUT[Regenerate map - md + html + json]\n    OUT --> NODRIFT[Single source, never drifts]"
+      "mermaid": "flowchart TD\n    SRC[Grounding sources] --> VLT[Knowledge base - project source of truth]\n    SRC --> DSY[Design systems - project DS]\n    SRC --> ENG[Engineering research - 60 domains]\n    VLT --> TURN[Injected every turn]\n    DSY --> TURN\n    ENG --> TURN\n    MEM[Memory files - hints, not truth] --> VERIFY[Verify vs codebase before acting]\n    ATL[sinapse atlas] --> SCAN[Scan repo from disk - exact counts]\n    SCAN --> OUT[Regenerate map - md + html + json]\n    OUT --> NODRIFT[Single source, never drifts]"
     }
   ],
   "workflows": [

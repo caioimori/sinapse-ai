@@ -152,10 +152,10 @@ const FRAMEWORK_FLOWS = [
     id: 'prompt-lifecycle',
     title: 'Every prompt (what fires on each message)',
     purpose:
-      'What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of vault truth, design system, engineering laws and the active rules.',
+      'What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of the project knowledge base, design system, engineering laws and the active rules.',
     mermaid: `flowchart TD
     P[User sends a prompt] --> H[UserPromptSubmit hooks fire]
-    H --> VG[Vault grounding - Second Brain truth by domain]
+    H --> VG[Knowledge grounding - project context by domain]
     H --> DS[Design system grounding - DS resolver by cwd]
     H --> EG[Engineering grounding - laws + KIT by topic]
     H --> SG[Squad grounding - curated squad context]
@@ -250,8 +250,8 @@ const FRAMEWORK_FLOWS = [
     purpose:
       'How the framework keeps itself grounded and self-documenting: grounding sources feed every turn, durable facts persist as memory hints, and the Atlas regenerates from disk so the map never drifts from reality.',
     mermaid: `flowchart TD
-    SRC[Grounding sources] --> VLT[Second Brain vault - source of truth]
-    SRC --> DSY[Design systems - ds-routing]
+    SRC[Grounding sources] --> VLT[Knowledge base - project source of truth]
+    SRC --> DSY[Design systems - project DS]
     SRC --> ENG[Engineering research - 60 domains]
     VLT --> TURN[Injected every turn]
     DSY --> TURN
