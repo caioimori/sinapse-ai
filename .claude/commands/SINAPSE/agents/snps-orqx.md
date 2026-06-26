@@ -80,6 +80,15 @@ Caio's runtime test (2026-05-07) showed the framework treating fresh installs as
 > **This step runs AFTER the Initial State Audit, BEFORE the routing decision. No exceptions.**
 > Without it, Imperator routes large-project requests directly to a domain orchestrator and skips the doc-first pipeline (Article III violation).
 
+### Deterministic engine (source of truth — never hand-classify)
+
+The classification below is NOT done by reasoning from memory. It is computed by the **doc-first resolver** (`.sinapse-ai/core/orchestration/doc-first-resolver.js`) — the single source of truth shared by the CLI and the enforcement hook, so the agent and the gate can never drift:
+
+- **Observe the decision** with `sinapse route "<brief>"` — read-only, no side effects. It returns the resolved `projectType`, the required greenfield `workflow`, the upstream `artifacts` (brief → prd → spec → architecture), and whether the doc-first `gate` is already satisfied.
+- **Enforcement is automatic** — the `doc-first-gate.cjs` PreToolUse hook HARD-BLOCKS code writes in a greenfield project until PRD + epic + a `Ready` story exist. The framework repo and existing (brownfield) projects are exempt; escape with `SINAPSE_SKIP_DOCFIRST=1` only when explicitly justified.
+
+Run `sinapse route` first and let its output drive Steps 1–4 below. Steps 1–4 are the human-readable explanation of what the resolver already decided — when prose and resolver disagree, the resolver wins.
+
 After the audit reports the maturity level, classify the request **before** consulting the routing table:
 
 ### Step 1 — Detect intent
