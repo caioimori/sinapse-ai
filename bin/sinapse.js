@@ -168,6 +168,7 @@ ORCHESTRATION:
 INTELLIGENCE & HEALTH:
   sinapse health                            # Framework health analytics (--deep for full scan)
   sinapse atlas                             # Framework Operating Atlas — how it works (--open)
+  sinapse atlas --research-card[=<dir>]     # Also emit the PT-BR case-study card + LOOPS
   sinapse graph --deps                      # Dependency & stats dashboard (--format, --watch)
   sinapse performance                       # Squad & agent performance ranking (--top N)
   sinapse routing-intel analyze             # Routing intelligence analysis
@@ -1479,6 +1480,26 @@ async function main() {
           `   ${c.squads} squads · ${c.agentsTotal} agents · ${c.orqx} orchestrators · ` +
             `${c.workflowsTotal} workflows · ${c.articles} articles · ${c.rules} rules`,
         );
+        // --research-card[=<dir>]: emit the SINAPSE case-study card + LOOPS file
+        // (PT-BR) from the SAME atlas data, in the engineering-software research
+        // template. Generic: writes to <dir> (default docs/framework/atlas/
+        // research-card/). Point it at an external research corpus to publish there.
+        const rcArg = args.find((a) => a === '--research-card' || a.startsWith('--research-card='));
+        if (rcArg) {
+          const { renderResearchCard } = require('../.sinapse-ai/core/atlas/render-research-card');
+          const dir = rcArg.includes('=')
+            ? rcArg.slice(rcArg.indexOf('=') + 1)
+            : path.join(process.cwd(), 'docs', 'framework', 'atlas', 'research-card');
+          const { card, loops } = renderResearchCard(res.data);
+          fs.mkdirSync(dir, { recursive: true });
+          const cardPath = path.join(dir, 'SINAPSE-FRAMEWORK.md');
+          const loopsPath = path.join(dir, 'LOOPS-sinapse-diagramas.md');
+          fs.writeFileSync(cardPath, card);
+          fs.writeFileSync(loopsPath, loops);
+          logger.info('📇 SINAPSE research card generated (PT-BR):');
+          logger.info(`   ${cardPath}`);
+          logger.info(`   ${loopsPath}`);
+        }
         if (args.includes('--open')) {
           const target = path.join(process.cwd(), res.paths.html);
           const opener =
