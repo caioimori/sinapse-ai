@@ -114,7 +114,7 @@ function buildLoops(data, pt) {
     .map((f, i) => {
       const t = pt[f.id] || { titulo: f.title, proposito: f.purpose, mermaid: f.mermaid };
       const mermaid = t.mermaid || f.mermaid;
-      return `## ${i + 1}. ${t.titulo}
+      return `## MF${i + 1} — ${t.titulo}
 
 > ${t.proposito}
 
