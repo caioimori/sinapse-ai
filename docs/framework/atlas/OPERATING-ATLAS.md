@@ -3,7 +3,7 @@
 > Single, generated map of how the SINAPSE framework works: routing, models,
 > constitution, workflows, agents, squads. Regenerate with `sinapse atlas`.
 > Counts are read from disk (Article VII — always exact).
-> Generated: 2026-06-25T19:27:20.988Z
+> Generated: 2026-06-26T04:19:35.612Z
 
 **At a glance:** 17 squads · 172 agents
 (12 framework + 160 squad) ·
@@ -235,6 +235,125 @@ flowchart TD
     FIX -->|bug / tweak| YOLO[SDC - YOLO]
     FIX -->|feature| SDCI[SDC - interactive]
     FIX -->|complex score >= 16| SPEC[Spec Pipeline first]
+```
+
+### Every prompt (what fires on each message)
+
+What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of vault truth, design system, engineering laws and the active rules.
+
+```mermaid
+flowchart TD
+    P[User sends a prompt] --> H[UserPromptSubmit hooks fire]
+    H --> VG[Vault grounding - Second Brain truth by domain]
+    H --> DS[Design system grounding - DS resolver by cwd]
+    H --> EG[Engineering grounding - laws + KIT by topic]
+    H --> SG[Squad grounding - curated squad context]
+    H --> CR[Constitution + context bracket injected]
+    VG --> M[Model receives enriched context]
+    DS --> M
+    EG --> M
+    SG --> M
+    CR --> M
+    M --> ACT[Act: answer or route to specialist]
+```
+
+### Every session (safe start)
+
+The safety net that runs before any work in a session: sync with remote, never touch main, audit what already exists so partial work is never overwritten (Safe Collaboration + Project Intelligence).
+
+```mermaid
+flowchart TD
+    S[Session starts] --> F[git fetch origin]
+    F --> SY{Local main behind?}
+    SY -->|yes, clean| PULL[Fast-forward pull]
+    SY -->|diverged| STOP[Stop - resolve safely]
+    PULL --> BR[Auto-create feature branch - user/type/desc]
+    STOP --> BR
+    BR --> AUD[Initial state audit - 8 dimensions]
+    AUD --> MAT{Maturity?}
+    MAT -->|empty| GREEN[Greenfield workflow]
+    MAT -->|partial| CONT[Continue - never overwrite]
+    MAT -->|mature| BROWN[Brownfield discovery]
+    MAT -->|sinapse-managed| RESUME[Resume active story - SDC]
+```
+
+### Every orchestration (plan + handoff)
+
+How control passes between agents without context bloat: the orchestrator plans then waits for go, and each agent switch compacts the previous persona into a tiny handoff artifact (~379 tokens) instead of carrying it all forward.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant O as Orchestrator
+    participant A1 as Agent A (outgoing)
+    participant A2 as Agent B (incoming)
+    O->>O: diagnose + build orchestration plan
+    O->>U: present plan
+    U-->>O: go
+    O->>A1: assign work (isolated, minimal context)
+    A1->>A1: write handoff artifact + scratchpad
+    A1-->>A2: handoff (story id, decisions, files, next action)
+    Note over A1,A2: full persona discarded, ~379 tok kept
+    A2->>A2: read scratchpad, continue
+    A2-->>O: distilled result
+    O-->>U: synthesis
+```
+
+### Every execution (story dev cycle)
+
+The story lifecycle once the doc-first gate is satisfied: draft to validated to implemented to reviewed to shipped, with CodeRabbit self-healing in dev and the QA loop before push (only @devops ships).
+
+```mermaid
+flowchart TD
+    D[Draft - sprint-lead] --> V{Validate - product-lead 10pt}
+    V -->|NO-GO| D
+    V -->|GO| R[Ready]
+    R --> IMP[InProgress - developer]
+    IMP --> CRB[CodeRabbit self-heal - max 2 iter]
+    CRB --> REV[InReview - quality-gate]
+    REV --> QL{QA loop verdict}
+    QL -->|FAIL| IMP
+    QL -->|CONCERNS| DOC[Document debt]
+    QL -->|PASS| PUSH[Push / PR - devops only]
+    DOC --> PUSH
+    PUSH --> DONE[Done]
+```
+
+### Security enforcement (cross-cutting)
+
+The always-on guardrails from commit to production: secrets never get committed, data access is least-privilege and parameterized, and nothing reaches main without a PR (Articles IX + X).
+
+```mermaid
+flowchart TD
+    C[Pre-commit] --> SS{Secret scan}
+    SS -->|secret found| BLK[Block - remove from staging]
+    SS -->|clean| CM[Commit]
+    CM --> MRG[Merge origin/main - resolve conflicts]
+    MRG --> PR[PR required - branch protection]
+    PR --> CHK{Status checks + review}
+    CHK -->|fail| FIXS[Return for fixes]
+    CHK -->|pass| SHIP[Merge]
+    DATA[Data layer] --> RLS[RLS on every user table]
+    DATA --> PAR[Parameterized queries only]
+    DATA --> ENV[Secrets in env, never in code]
+```
+
+### Knowledge & memory (how it stays current)
+
+How the framework keeps itself grounded and self-documenting: grounding sources feed every turn, durable facts persist as memory hints, and the Atlas regenerates from disk so the map never drifts from reality.
+
+```mermaid
+flowchart TD
+    SRC[Grounding sources] --> VLT[Second Brain vault - source of truth]
+    SRC --> DSY[Design systems - ds-routing]
+    SRC --> ENG[Engineering research - 60 domains]
+    VLT --> TURN[Injected every turn]
+    DSY --> TURN
+    ENG --> TURN
+    MEM[Memory files - hints, not truth] --> VERIFY[Verify vs codebase before acting]
+    ATL[sinapse atlas] --> SCAN[Scan repo from disk - exact counts]
+    SCAN --> OUT[Regenerate map - md + html + json]
+    OUT --> NODRIFT[Single source, never drifts]
 ```
 
 ---
