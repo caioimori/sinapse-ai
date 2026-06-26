@@ -3,7 +3,7 @@
 > Single, generated map of how the SINAPSE framework works: routing, models,
 > constitution, workflows, agents, squads. Regenerate with `sinapse atlas`.
 > Counts are read from disk (Article VII — always exact).
-> Generated: 2026-06-26T04:19:35.612Z
+> Generated: 2026-06-26T05:56:32.158Z
 
 **At a glance:** 17 squads · 172 agents
 (12 framework + 160 squad) ·
@@ -239,12 +239,12 @@ flowchart TD
 
 ### Every prompt (what fires on each message)
 
-What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of vault truth, design system, engineering laws and the active rules.
+What happens on every single user message before the model even answers: hooks inject grounding and the constitution, so each turn starts already aware of the project knowledge base, design system, engineering laws and the active rules.
 
 ```mermaid
 flowchart TD
     P[User sends a prompt] --> H[UserPromptSubmit hooks fire]
-    H --> VG[Vault grounding - Second Brain truth by domain]
+    H --> VG[Knowledge grounding - project context by domain]
     H --> DS[Design system grounding - DS resolver by cwd]
     H --> EG[Engineering grounding - laws + KIT by topic]
     H --> SG[Squad grounding - curated squad context]
@@ -344,8 +344,8 @@ How the framework keeps itself grounded and self-documenting: grounding sources 
 
 ```mermaid
 flowchart TD
-    SRC[Grounding sources] --> VLT[Second Brain vault - source of truth]
-    SRC --> DSY[Design systems - ds-routing]
+    SRC[Grounding sources] --> VLT[Knowledge base - project source of truth]
+    SRC --> DSY[Design systems - project DS]
     SRC --> ENG[Engineering research - 60 domains]
     VLT --> TURN[Injected every turn]
     DSY --> TURN

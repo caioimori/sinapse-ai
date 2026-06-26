@@ -144,10 +144,10 @@ const FRAMEWORK_FLOWS_PT = {
   'prompt-lifecycle': {
     titulo: 'Cada prompt (o que dispara em toda mensagem)',
     proposito:
-      'O que acontece em toda mensagem do usuário antes mesmo do modelo responder: hooks injetam grounding e a constituição, então cada turno já começa ciente da verdade do vault, do design system, das leis de engenharia e das regras ativas.',
+      'O que acontece em toda mensagem do usuário antes mesmo do modelo responder: hooks injetam grounding e a constituição, então cada turno já começa ciente da base de conhecimento do projeto, do design system, das leis de engenharia e das regras ativas.',
     mermaid: `flowchart TD
     P[Usuário envia um prompt] --> H[Hooks UserPromptSubmit disparam]
-    H --> VG[Grounding do vault - verdade do Second Brain por domínio]
+    H --> VG[Grounding de conhecimento - contexto do projeto por domínio]
     H --> DS[Grounding do design system - DS resolver por cwd]
     H --> EG[Grounding de engenharia - leis + KIT por tema]
     H --> SG[Grounding de squad - contexto curado da squad]
@@ -237,8 +237,8 @@ const FRAMEWORK_FLOWS_PT = {
     proposito:
       'Como o framework se mantém grounded e autodocumentado: fontes de grounding alimentam cada turno, fatos duráveis persistem como dicas de memória, e o Atlas se regenera do disco para o mapa nunca divergir da realidade.',
     mermaid: `flowchart TD
-    SRC[Fontes de grounding] --> VLT[Vault Second Brain - fonte da verdade]
-    SRC --> DSY[Design systems - ds-routing]
+    SRC[Fontes de grounding] --> VLT[Base de conhecimento - fonte de verdade do projeto]
+    SRC --> DSY[Design systems - DS do projeto]
     SRC --> ENG[Pesquisa de engenharia - 60 domínios]
     VLT --> TURN[Injetado a cada turno]
     DSY --> TURN
