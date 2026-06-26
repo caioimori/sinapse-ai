@@ -106,12 +106,14 @@ const BLOCKED_PATTERNS = [
   {
     pattern: /C:\\Users\\Caio[ ]?Imori/i,
     description: 'Absolute Windows path containing maintainer name',
-    suggestion: 'Use {REPO_ROOT} placeholder or relative paths',
+    suggestion: 'Use {REPO_ROOT} placeholder, process.cwd(), or relative paths',
+    always: true, // a hardcoded personal path is never acceptable — even in archive/allowlisted files
   },
   {
     pattern: /OneDrive[\\/].*Caio[ ]?Imori/i,
     description: 'OneDrive path containing maintainer name',
     suggestion: 'Remove or use {VAULT_ROOT} placeholder',
+    always: true, // a personal vault path is never acceptable anywhere
   },
   {
     pattern: /Caio can (reactivate|activate|approve|reject|merge|deploy)/i,
@@ -252,7 +254,7 @@ function getTrackedFiles() {
   return out.split('\n').filter(Boolean);
 }
 
-function scanFile(filePath) {
+function scanFile(filePath, rules = BLOCKED_PATTERNS) {
   const fullPath = path.join(ROOT, filePath);
   if (!fs.existsSync(fullPath)) return [];
   const content = fs.readFileSync(fullPath, 'utf8');
@@ -260,7 +262,7 @@ function scanFile(filePath) {
   const violations = [];
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    for (const rule of BLOCKED_PATTERNS) {
+    for (const rule of rules) {
       const match = line.match(rule.pattern);
       if (match) {
         violations.push({
@@ -286,9 +288,14 @@ function run() {
     if (!isTextFile(file)) continue;
 
     // CHECK 1 — operational personal references ("Caio" literals, paths).
-    // Scanned across the whole tree except the autorship/history allow-list.
+    // `always` patterns (hardcoded personal/vault paths) are checked on EVERY
+    // file — they are never acceptable, not even in archive/allowlisted docs.
+    // The remaining patterns are scanned across the tree except the
+    // authorship/history allow-list.
+    const alwaysRules = BLOCKED_PATTERNS.filter((r) => r.always);
+    allViolations.push(...scanFile(file, alwaysRules));
     if (!isAllowed(file)) {
-      allViolations.push(...scanFile(file));
+      allViolations.push(...scanFile(file, BLOCKED_PATTERNS.filter((r) => !r.always)));
     }
 
     // CHECK 2 — conceptual / business leaks, scoped ONLY to user-facing
