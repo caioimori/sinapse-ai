@@ -43,7 +43,7 @@ Quem entender antes, captura a vantagem. Cria urgencia sem ser explicitamente ur
 - "...enquanto a maioria ainda nao percebeu"
 - "...e por que os que entenderam primeiro nao voltam atras"
 
-## Padroes de Hook para Social (Soier-inspired)
+## Padroes de Hook para Social
 
 ### Para conteudo curto (Reels, Stories, Carrossel)
 
@@ -55,7 +55,7 @@ Quem entender antes, captura a vantagem. Cria urgencia sem ser explicitamente ur
 | **Mini-alerta** | "Se voce ainda faz [X] manualmente, leia isso." | Urgencia pratica |
 | **Numero concreto** | "Reduzi 40h/mes de operacao para 6h com este workflow." | Prova quantificavel |
 
-### Regras de compressao (Soier-inspired)
+### Regras de compressao
 
 - **Uma ideia por peca** — se precisa de "alem disso", e outra peca
 - **Hook entendido em 2 segundos** — se precisa reler, e longo demais

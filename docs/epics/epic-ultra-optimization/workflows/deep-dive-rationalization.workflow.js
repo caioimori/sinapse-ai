@@ -22,7 +22,7 @@ export const meta = {
   ],
 }
 
-const REPO = 'C:/Users/Caio Imori/Workspace/sinapse/sinapse-ai'
+const REPO = process.cwd()
 const MODULES = ['code-intel','config','docs','doctor','elicitation','errors','events','execution','external-executors','graph-dashboard','grounding','health-check','ideation','ids','logger','manifest','mcp','memory','migration','orchestration','permissions','quality-gates','registry','session','synapse','telemetry','ui','utils']
 
 // Retomada incremental: módulos/frentes já analisados entram via args e são pulados.
