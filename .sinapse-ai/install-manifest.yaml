@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.13.0
+version: 1.17.0
 generator: scripts/generate-install-manifest.js
-file_count: 1165
+file_count: 1168
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -199,10 +199,14 @@ files:
     hash: sha256:ab6ef91bd2de1498dbe3892a80b5f18d67624db1fb2da74b0e53f83de902f383
     type: core
     size: 11444
-  - path: core/atlas/flows.js
-    hash: sha256:87262484833afcce7b4f6f7791e21fc3a44395f2937c8ca1253d5df3d76f2add
+  - path: core/atlas/flows-pt.js
+    hash: sha256:8db1cd79a9b3abbbf666162405bc59b8bf1e81c523d7a2709434d91118f1d5e0
     type: core
-    size: 5947
+    size: 11499
+  - path: core/atlas/flows.js
+    hash: sha256:099392b58b9a8e2dfadb7e108949f19420acfde472406a94bd9c21e356615cab
+    type: core
+    size: 11033
   - path: core/atlas/index.js
     hash: sha256:ea1e47887854cf348cf29c99c6e5d6218d4e6e709db14a6caa0b289303200363
     type: core
@@ -215,6 +219,10 @@ files:
     hash: sha256:6d379f52785f81a697ed7e7e4a673564492f58fd79ef9a915e22331a3fdde23a
     type: core
     size: 12076
+  - path: core/atlas/render-research-card.js
+    hash: sha256:86086e58ea6e3f4a19229f7c755cb4072a8582e8de70e5610c58ea578276204e
+    type: core
+    size: 6069
   - path: core/code-intel/code-intel-client.js
     hash: sha256:65f6c0f2bb639ff3080db3d85660e0b8097e5af7c60dc04f582ef20f42cc9cfc
     type: core
@@ -935,6 +943,10 @@ files:
     hash: sha256:8ef9a6d27f9d1d4145fbbfb8657691582aaf0c348278edd638d55fd139edddd4
     type: core
     size: 28608
+  - path: core/orchestration/build-command.js
+    hash: sha256:b758cfc7c0fad3d0d875460630b9ac7b2c968b82cdec14e9885e0744ee7012d0
+    type: core
+    size: 5236
   - path: core/orchestration/checklist-runner.js
     hash: sha256:9bee322fb2572ef81361a3f695b2855f61d610739c612d8b6317cb1b5d6d84c9
     type: core
@@ -1508,9 +1520,9 @@ files:
     type: agent
     size: 23745
   - path: development/agents/snps-orqx.md
-    hash: sha256:313fd53fcb43bec1a0e0e1dc90867c6a6b3643e08a9a41e32e2fa86e090ce8ae
+    hash: sha256:18a195a4484b1b4b76d6a2fe71669b428e87336293a4c5764bc702249083e101
     type: agent
-    size: 42694
+    size: 43849
   - path: development/agents/sprint-lead.md
     hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
     type: agent
