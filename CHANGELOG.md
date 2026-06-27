@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.0] — 2026-06-27 — 🗺️ Atlas auto-documentado + motor doc-first religado + sweep de segurança
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- **doc-first** — tabelas de aprovação escaneáveis para PRD/épico/story/spec (#281).
+- **doc-first** — motor de roteamento + gate de enforcement (Camadas 1+2) (#282).
+- **atlas** — Framework Operating Atlas: mapa auto-documentado do framework (LLM + visual) (#283).
+- **atlas** — fluxos operacionais visuais de como o framework funciona (#284).
+- **orchestration** — `sinapse build` religa o motor BobOrchestrator ao CLI (#286).
+- **atlas** — fluxos completos do framework: 6 → 12 meta-workflows (#287).
+- **atlas** — research card PT-BR: SINAPSE como estudo de caso + LOOPS (#288).
+
+### Bug Fixes
+
+- **atlas** — headings do research-card no formato do parser do site (MF1 — …) (#289).
+- **atlas** — remove vazamento de vault pessoal do framework público + endurece guard (#290).
+- **security** — sweep profundo: remove leaks pessoais/cliente residuais + endurece guard (#291).
+
+### Documentation
+
+- **orqx** — alinha a prosa de bootstrap do Imperator ao motor doc-first resolver (#285).
+
+## [1.16.0] — 2026-06-25 — 🚦 Gates de clarify + analyze no Spec Pipeline
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- Adiciona gates de clarify e analyze ao Spec Pipeline (#280).
+
+## [1.15.0] — 2026-06-24 — 🌐 Chrome Brain nativo + selos de identidade na statusline
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- **chrome-brain** — scripts nativos em Node; não mata mais a janela boa; janela fixa + login.
+- **statusline** — selos de identidade de agente + banner de install.
+
+## [1.14.0] — 2026-06-24 — ⚙️ Munição de engenharia em 170 agentes
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- **agents** — potencializa 170 agentes com a base de engenharia de software (#278).
+
+### Maintenance
+
+- **release** — sincroniza main com a v1.13.0 publicada (package.json + CHANGELOG) (#277).
+
 ## [1.13.0] — 2026-06-22 — 🧹 Limpeza profunda (varredura de 6 ondas) + munição de engenharia nos agents
 
 > Minor release. Atualização segura via `npx sinapse-ai update`.
