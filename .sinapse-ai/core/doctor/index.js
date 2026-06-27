@@ -69,6 +69,27 @@ function detectInstallState(context) {
   return { installed: false };
 }
 
+/**
+ * Detect whether doctor is running inside the framework's OWN source repo,
+ * as opposed to a user project that installed SINAPSE. In the source repo the
+ * root package.json name is exactly 'sinapse-ai'. User projects have their own
+ * name (with sinapse-ai under node_modules), so this never false-positives for
+ * them.
+ *
+ * @param {string} projectRoot
+ * @returns {boolean}
+ */
+function detectFrameworkRepo(projectRoot) {
+  try {
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'),
+    );
+    return Boolean(pkg) && pkg.name === 'sinapse-ai';
+  } catch {
+    return false;
+  }
+}
+
 const VALID_ON_ERROR = new Set(['fail', 'warn', 'skip']);
 
 /**
@@ -134,6 +155,12 @@ async function runDoctorChecks(options = {}) {
     const context = {
       projectRoot,
       frameworkRoot: path.resolve(__dirname, '..', '..', '..'),
+      // True when doctor runs inside the framework's OWN source repo (vs a user
+      // install). In the source repo some install-time artifacts are absent BY
+      // DESIGN — deny rules are off for contributors (frameworkProtection:false),
+      // hooks live in gitignored settings.local.json, and CLAUDE.md is the dev
+      // variant. Context checks degrade WARN→INFO here to avoid false alarms.
+      isFrameworkRepo: detectFrameworkRepo(projectRoot),
       options: { fix, json, dryRun, quiet, deep, homeDir },
     };
 

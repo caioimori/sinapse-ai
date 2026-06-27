@@ -12,13 +12,15 @@ const fs = require('fs');
 
 const name = 'agent-memory';
 
+// Canonical SINAPSE agent ids (current naming, since v6.0.0).
+// These match the directory names under .sinapse-ai/development/agents/.
 const EXPECTED_AGENTS = [
-  'dev',
-  'qa',
+  'developer',
+  'quality-gate',
   'architect',
-  'pm',
-  'po',
-  'sm',
+  'project-lead',
+  'product-lead',
+  'sprint-lead',
   'analyst',
   'data-engineer',
   'ux',

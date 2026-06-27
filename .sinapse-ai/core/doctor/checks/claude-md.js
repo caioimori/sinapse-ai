@@ -45,6 +45,19 @@ async function run(context) {
     };
   }
 
+  // In the framework's own source repo, .claude/CLAUDE.md is the contributor
+  // variant (headings like "Framework Boundary", "Agents") rather than the
+  // install template (PT section titles). The content exists under different
+  // headings, so this is expected — surface as INFO, not WARN.
+  if (context.isFrameworkRepo) {
+    return {
+      check: name,
+      status: 'INFO',
+      message: `Dev CLAUDE.md variant — install-template sections not required in the source repo (${missingSections.join(', ')})`,
+      fixCommand: null,
+    };
+  }
+
   return {
     check: name,
     status: 'WARN',
