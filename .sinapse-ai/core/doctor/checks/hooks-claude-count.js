@@ -99,6 +99,17 @@ async function run(context) {
   }
 
   if (hookCount >= 2 && !registered) {
+    // In the framework's own source repo, settings.local.json is gitignored
+    // (per-machine) and hook registration is an install-time step. Hook files
+    // shipping unregistered is expected here — surface as INFO, not WARN.
+    if (context.isFrameworkRepo) {
+      return {
+        check: name,
+        status: 'INFO',
+        message: `${hookCount} hook files present — registration is install-time (settings.local.json is gitignored in the source repo)`,
+        fixCommand: null,
+      };
+    }
     return {
       check: name,
       status: 'WARN',

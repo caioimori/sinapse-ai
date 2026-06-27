@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-25T14:57:04.344Z'
-  entityCount: 796
+  lastUpdated: '2026-06-27T22:08:54.334Z'
+  entityCount: 803
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -651,18 +651,21 @@ entities:
         - cli
         - component-generator
         - route-command
+        - build-command
+        - render-research-card
       externalDeps: []
       plannedDeps:
         - logger
         - permissions
         - orchestration
+        - atlas
       lifecycle: experimental
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:5ee1c859ceedbbaa2cea1463677462985f1ce9472963d4b51589bdbfc5302395
-      lastVerified: '2026-06-25T14:57:04.173Z'
+      checksum: sha256:ca7b8f7826c1f482b49064b80527e826d69f3c4d8a9057a55f4670c66828efb2
+      lastVerified: '2026-06-27T21:56:17.123Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
@@ -8699,6 +8702,154 @@ entities:
       checksum: sha256:05226c7d3c27cf94ccd653686f3ce043c7b649fef753ce0f17ffb470cf01bd76
       lastVerified: '2026-06-15T00:26:26.350Z'
   modules:
+    atlas-data:
+      path: .sinapse-ai/core/atlas/atlas-data.js
+      layer: L1
+      type: module
+      purpose: ''''', type: '''', source, file: relFromRoot(file) };'
+      keywords:
+        - atlas
+        - data
+      usedBy:
+        - index
+      dependencies:
+        - flows
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ab6ef91bd2de1498dbe3892a80b5f18d67624db1fb2da74b0e53f83de902f383
+      lastVerified: '2026-06-27T21:56:17.283Z'
+    flows-pt:
+      path: .sinapse-ai/core/atlas/flows-pt.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\atlas\flows-pt.js
+      keywords:
+        - flows
+        - pt
+      usedBy:
+        - render-research-card
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8db1cd79a9b3abbbf666162405bc59b8bf1e81c523d7a2709434d91118f1d5e0
+      lastVerified: '2026-06-27T21:56:17.284Z'
+    flows:
+      path: .sinapse-ai/core/atlas/flows.js
+      layer: L1
+      type: module
+      purpose: string,mermaid:string}>} */
+      keywords:
+        - flows
+      usedBy:
+        - atlas-data
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:099392b58b9a8e2dfadb7e108949f19420acfde472406a94bd9c21e356615cab
+      lastVerified: '2026-06-27T21:56:17.284Z'
+    index:
+      path: .sinapse-ai/core/atlas/index.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\atlas\index.js
+      keywords:
+        - index
+      usedBy: []
+      dependencies:
+        - atlas-data
+        - render-markdown
+        - render-html
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ea1e47887854cf348cf29c99c6e5d6218d4e6e709db14a6caa0b289303200363
+      lastVerified: '2026-06-27T21:56:17.284Z'
+    render-html:
+      path: .sinapse-ai/core/atlas/render-html.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\atlas\render-html.js
+      keywords:
+        - render
+        - html
+      usedBy:
+        - index
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d84e928fbaa7f20f4c253758af3af486805683b66027d38d682cc453a5f68a0c
+      lastVerified: '2026-06-27T21:56:17.284Z'
+    render-markdown:
+      path: .sinapse-ai/core/atlas/render-markdown.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\atlas\render-markdown.js
+      keywords:
+        - render
+        - markdown
+      usedBy:
+        - index
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:6d379f52785f81a697ed7e7e4a673564492f58fd79ef9a915e22331a3fdde23a
+      lastVerified: '2026-06-27T21:56:17.285Z'
+    render-research-card:
+      path: .sinapse-ai/core/atlas/render-research-card.js
+      layer: L1
+      type: module
+      purpose: SINAPSE — Framework de Engenharia Orientada por IA
+      keywords:
+        - render
+        - research
+        - card
+        - sinapse
+        - framework
+        - engenharia
+        - orientada
+        - por
+      usedBy:
+        - sinapse
+      dependencies:
+        - flows-pt
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:86086e58ea6e3f4a19229f7c755cb4072a8582e8de70e5610c58ea578276204e
+      lastVerified: '2026-06-27T21:56:17.285Z'
     code-intel-client:
       path: .sinapse-ai/core/code-intel/code-intel-client.js
       layer: L1
@@ -8708,14 +8859,13 @@ entities:
         - code
         - intel
         - client
-      usedBy:
-        - index
+      usedBy: []
       dependencies:
         - code-graph-provider
         - registry-provider
       externalDeps: []
       plannedDeps: []
-      lifecycle: production
+      lifecycle: experimental
       adaptability:
         score: 0.4
         constraints: []
@@ -8731,12 +8881,11 @@ entities:
         - code
         - intel
         - enricher
-      usedBy:
-        - index
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
-      lifecycle: production
+      lifecycle: orphan
       adaptability:
         score: 0.4
         constraints: []
@@ -8891,29 +9040,6 @@ entities:
         extensionPoints: []
       checksum: sha256:8bbbaab68ced2861da3086cbbed786671675fe023c10dc15a3614d25cc8527c6
       lastVerified: '2026-06-15T00:26:26.368Z'
-    index:
-      path: .sinapse-ai/core/code-intel/index.js
-      layer: L1
-      type: module
-      purpose: Entity at .sinapse-ai\core\code-intel\index.js
-      keywords:
-        - index
-      usedBy: []
-      dependencies:
-        - code-intel-client
-        - code-intel-enricher
-        - provider-interface
-        - code-graph-provider
-        - registry-provider
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.4
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:3bdb4249b24866fd1d146ae812d5ad3aa9e5c0b2b5f1bba386939143878cc331
-      lastVerified: '2026-06-15T00:26:26.368Z'
     code-graph-provider:
       path: .sinapse-ai/core/code-intel/providers/code-graph-provider.js
       layer: L1
@@ -8925,7 +9051,6 @@ entities:
         - provider
       usedBy:
         - code-intel-client
-        - index
       dependencies:
         - provider-interface
       externalDeps: []
@@ -8947,7 +9072,6 @@ entities:
         - interface
       usedBy:
         - code-graph-provider
-        - index
         - registry-provider
       dependencies: []
       externalDeps: []
@@ -8970,7 +9094,6 @@ entities:
       usedBy:
         - code-intel-client
         - hook-runtime
-        - index
       dependencies:
         - provider-interface
       externalDeps: []
@@ -9169,8 +9292,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:adad35cd3995b813cb9d87fd617fbbe7784397edb0f58c3114511ba45bc76f19
-      lastVerified: '2026-06-15T00:26:26.370Z'
+      checksum: sha256:c9cf8cba49e8ade572d482ee383e0de4cdbea44c8e7150044f9211f39c381a3c
+      lastVerified: '2026-06-27T22:08:54.139Z'
     claude-md:
       path: .sinapse-ai/core/doctor/checks/claude-md.js
       layer: L1
@@ -9188,8 +9311,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c35202407eedc1835021e82642e64497345d66d83eb387e8ab693cdd3c3d2af5
-      lastVerified: '2026-06-15T00:26:26.371Z'
+      checksum: sha256:c9cda3a367f14ae8845b3c96f90497ee2a316afd6d0cfd0ae9abeb4e4461596a
+      lastVerified: '2026-06-27T22:08:54.140Z'
     code-intel:
       path: .sinapse-ai/core/doctor/checks/code-intel.js
       layer: L1
@@ -9352,8 +9475,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a57af232ba33178c0d581dc10588bfdc256c41db28c5d433b967ba952d10778f
-      lastVerified: '2026-06-15T00:26:26.372Z'
+      checksum: sha256:c62ee5b13d947c1ebde985e714a3d0a59d639d32f03f2bb01254131874388eaf
+      lastVerified: '2026-06-27T22:08:54.144Z'
     ide-sync:
       path: .sinapse-ai/core/doctor/checks/ide-sync.js
       layer: L1
@@ -9468,8 +9591,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:7ed4e501be86f1e306c6eeac97641bfc3efedb1d541bd5883ed10f8d3204fb19
-      lastVerified: '2026-06-15T00:26:26.374Z'
+      checksum: sha256:a0fbbca80185daa90a6847526d27dbdb9c0303fc86d891d6b1a03cc1c886d158
+      lastVerified: '2026-06-27T22:08:54.146Z'
     skills-count:
       path: .sinapse-ai/core/doctor/checks/skills-count.js
       layer: L1
@@ -11757,6 +11880,28 @@ entities:
         extensionPoints: []
       checksum: sha256:8ef9a6d27f9d1d4145fbbfb8657691582aaf0c348278edd638d55fd139edddd4
       lastVerified: '2026-06-16T06:09:14.791Z'
+    build-command:
+      path: .sinapse-ai/core/orchestration/build-command.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\orchestration\build-command.js
+      keywords:
+        - build
+        - command
+      usedBy:
+        - sinapse
+      dependencies:
+        - doc-first-resolver
+        - index
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b758cfc7c0fad3d0d875460630b9ac7b2c968b82cdec14e9885e0744ee7012d0
+      lastVerified: '2026-06-27T21:56:17.333Z'
     checklist-runner:
       path: .sinapse-ai/core/orchestration/checklist-runner.js
       layer: L1
@@ -11891,6 +12036,7 @@ entities:
         - first
         - resolver
       usedBy:
+        - build-command
         - route-command
       dependencies:
         - greenfield-handler
@@ -11901,8 +12047,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:e3c8c695ef0b4f268a3e02a0d4258fef1ae90aaec0b281ee8c5c5fb3bd475939
-      lastVerified: '2026-06-25T14:57:04.259Z'
+      checksum: sha256:92a4170f3ed0b6b214608c80e17c8c6b1769a50b849532af4ae34db070a6931f
+      lastVerified: '2026-06-27T21:56:17.335Z'
     epic-context-accumulator:
       path: .sinapse-ai/core/orchestration/epic-context-accumulator.js
       layer: L1
@@ -14163,8 +14309,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:313fd53fcb43bec1a0e0e1dc90867c6a6b3643e08a9a41e32e2fa86e090ce8ae
-      lastVerified: '2026-06-23T18:12:03.446Z'
+      checksum: sha256:18a195a4484b1b4b76d6a2fe71669b428e87336293a4c5764bc702249083e101
+      lastVerified: '2026-06-27T21:56:17.390Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
@@ -15610,6 +15756,7 @@ entities:
         - ${title}
         - activator
       usedBy:
+        - build-command
         - creation-helper
         - dev-helper
         - devops-helper

@@ -53,7 +53,7 @@ function isAlive(port) {
       (res) => {
         res.resume();
         resolve(res.statusCode === 200);
-      }
+      },
     );
     req.on('error', () => resolve(false));
     req.on('timeout', () => {

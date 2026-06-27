@@ -71,7 +71,7 @@ for (const line of fs.readFileSync(MANIFEST, 'utf8').split('\n')) {
 }
 
 let squadDirs = [];
-try { squadDirs = fs.readdirSync(SQUADS_DIR).filter((d) => fs.statSync(path.join(SQUADS_DIR, d)).isDirectory()); } catch {}
+try { squadDirs = fs.readdirSync(SQUADS_DIR).filter((d) => fs.statSync(path.join(SQUADS_DIR, d)).isDirectory()); } catch { /* SQUADS_DIR absent — no squads to badge */ }
 for (const squad of squadDirs) {
   const dir = path.join(SQUADS_DIR, squad, 'agents');
   let files = [];

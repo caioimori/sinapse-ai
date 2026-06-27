@@ -91,6 +91,17 @@ async function run(context) {
   const allowCount = allowRules.length;
 
   if (denyCount < 40) {
+    // In the framework's own source repo, boundary protection is OFF by design
+    // (core-config boundary.frameworkProtection:false) so contributors can edit
+    // core files — 0 deny rules is the expected, correct state here.
+    if (context.isFrameworkRepo) {
+      return {
+        check: name,
+        status: 'INFO',
+        message: `Deny rules off (${denyCount}) — expected in the framework source repo (frameworkProtection:false)`,
+        fixCommand: null,
+      };
+    }
     return {
       check: name,
       status: 'WARN',

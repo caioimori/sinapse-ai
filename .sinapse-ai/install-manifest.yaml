@@ -348,13 +348,13 @@ files:
     type: documentation
     size: 11580
   - path: core/doctor/checks/agent-memory.js
-    hash: sha256:adad35cd3995b813cb9d87fd617fbbe7784397edb0f58c3114511ba45bc76f19
+    hash: sha256:c9cf8cba49e8ade572d482ee383e0de4cdbea44c8e7150044f9211f39c381a3c
     type: core
-    size: 1555
+    size: 1744
   - path: core/doctor/checks/claude-md.js
-    hash: sha256:c35202407eedc1835021e82642e64497345d66d83eb387e8ab693cdd3c3d2af5
+    hash: sha256:c9cda3a367f14ae8845b3c96f90497ee2a316afd6d0cfd0ae9abeb4e4461596a
     type: core
-    size: 1312
+    size: 1867
   - path: core/doctor/checks/code-intel.js
     hash: sha256:92575328f8cf65e1a24d82eafa7225bf080a60a3aab8de60ddee1737196c0b70
     type: core
@@ -384,9 +384,9 @@ files:
     type: core
     size: 1202
   - path: core/doctor/checks/hooks-claude-count.js
-    hash: sha256:a57af232ba33178c0d581dc10588bfdc256c41db28c5d433b967ba952d10778f
+    hash: sha256:c62ee5b13d947c1ebde985e714a3d0a59d639d32f03f2bb01254131874388eaf
     type: core
-    size: 3529
+    size: 4038
   - path: core/doctor/checks/ide-sync.js
     hash: sha256:6ff4b422c03ef7f84b0e72ccbe97faf6324dee45da18cd878bfe5e91d00271b9
     type: core
@@ -412,9 +412,9 @@ files:
     type: core
     size: 1494
   - path: core/doctor/checks/settings-json.js
-    hash: sha256:7ed4e501be86f1e306c6eeac97641bfc3efedb1d541bd5883ed10f8d3204fb19
+    hash: sha256:a0fbbca80185daa90a6847526d27dbdb9c0303fc86d891d6b1a03cc1c886d158
     type: core
-    size: 3411
+    size: 3900
   - path: core/doctor/checks/skills-count.js
     hash: sha256:2ed67974d87e3b4e4efa84527061f824eb8c79dc3a5925adb149870c6c0faf3c
     type: core
@@ -432,9 +432,9 @@ files:
     type: core
     size: 1807
   - path: core/doctor/index.js
-    hash: sha256:bf248cbf31e8411d91bc19a342f0e18263e701d738325cb9d619201292c7554c
+    hash: sha256:7b097a59f21e572d99337013ad6f413a31bdc7ff9419481fe401fed482ddc2a1
     type: core
-    size: 8559
+    size: 9660
   - path: core/elicitation/agent-elicitation.js
     hash: sha256:92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81
     type: elicitation
@@ -1384,9 +1384,9 @@ files:
     type: data
     size: 9602
   - path: data/entity-registry.yaml
-    hash: sha256:9f8ab1fd062c3d4ec2f17f1ce664fbceb5a40f356e4be340b1def175595249de
+    hash: sha256:34d10d1728c0a54eabf31ace3db67b77868ae6a9bd470b4b3d6edebb9ebd13be
     type: data
-    size: 550671
+    size: 554797
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -2776,9 +2776,9 @@ files:
     type: template
     size: 7207
   - path: development/templates/chrome-brain/scripts/chrome-ensure.cjs
-    hash: sha256:7ff77f28a86fa655e89f292b6b5ebe51a20befb4faf7be99d221b338388472ba
+    hash: sha256:5aeecbf96aaf95c9e6b1241c5ef7cf3b846731939c0a06a1e1be243e71392460
     type: template
-    size: 3578
+    size: 3579
   - path: development/templates/chrome-brain/scripts/chrome-ensure.sh
     hash: sha256:eab2018b622c8550381c6d4555f4496595859b98401dff63a3036abf8433ebfa
     type: template
