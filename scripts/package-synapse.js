@@ -150,11 +150,20 @@ function main() {
   if (fs.existsSync(zipPath)) fs.unlinkSync(zipPath);
 
   try {
-    // Use PowerShell Compress-Archive on Windows
-    execFileSync('powershell', [
-      '-Command',
-      `Compress-Archive -Path '${OUT_DIR}\\*' -DestinationPath '${zipPath}' -Force`,
-    ], { stdio: 'inherit' });
+    if (process.platform === 'win32') {
+      // PowerShell Compress-Archive on Windows
+      execFileSync('powershell', [
+        '-Command',
+        `Compress-Archive -Path '${OUT_DIR}${path.sep}*' -DestinationPath '${zipPath}' -Force`,
+      ], { stdio: 'inherit' });
+    } else {
+      // `zip` is standard on macOS and most Linux; the surrounding catch degrades
+      // gracefully (keeps the unzipped dir) if it is not installed.
+      execFileSync('zip', ['-r', '-q', zipPath, path.basename(OUT_DIR)], {
+        cwd: path.dirname(OUT_DIR),
+        stdio: 'inherit',
+      });
+    }
     console.log(`\nZIP created: ${ZIP_NAME}`);
     console.log(`Size: ${(fs.statSync(zipPath).size / 1024).toFixed(1)} KB`);
   } catch (err) {

@@ -22,6 +22,28 @@ const path = require('path');
 
 const IS_WINDOWS = process.platform === 'win32';
 
+// On Windows the AV scanner, Windows Search indexer, or a concurrent reader can
+// hold a transient lock on the target, making unlink/rename throw EPERM/EBUSY
+// where POSIX would succeed. A short bounded retry clears virtually all of these.
+const TRANSIENT_LOCK_CODES = new Set(['EPERM', 'EBUSY', 'EACCES', 'ENOTEMPTY']);
+
+function sleepSync(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+function retrySync(fn, retries = 3, delayMs = 120) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return fn();
+    } catch (err) {
+      if (!TRANSIENT_LOCK_CODES.has(err.code) || attempt >= retries) {
+        throw err;
+      }
+      sleepSync(delayMs * (attempt + 1));
+    }
+  }
+}
+
 /**
  * Write data to a file atomically.
  *
@@ -49,18 +71,20 @@ function atomicWriteSync(filePath, data, encoding = 'utf8') {
 
     // Step 2: On Windows, unlink target first (rename won't overwrite)
     if (IS_WINDOWS) {
-      try {
-        fs.unlinkSync(filePath);
-      } catch (err) {
-        if (err.code !== 'ENOENT') {
-          throw err;
+      retrySync(() => {
+        try {
+          fs.unlinkSync(filePath);
+        } catch (err) {
+          if (err.code !== 'ENOENT') {
+            throw err;
+          }
+          // ENOENT = target doesn't exist yet, that's fine
         }
-        // ENOENT = target doesn't exist yet, that's fine
-      }
+      });
     }
 
-    // Step 3: Atomic rename
-    fs.renameSync(tmpPath, filePath);
+    // Step 3: Atomic rename (retried for transient Windows locks)
+    retrySync(() => fs.renameSync(tmpPath, filePath));
   } catch (error) {
     // Clean up tmp file on failure
     try {

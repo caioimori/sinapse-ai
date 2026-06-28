@@ -396,6 +396,25 @@ async function spawnInline(agent, task, options = {}) {
       });
     }, opts.timeout);
 
+    // Handle spawn failure (e.g. bash absent on Windows without Git Bash/WSL).
+    // Without an 'error' listener Node throws ENOENT as an uncaughtException and
+    // this Promise would never resolve (hang). pm.sh requires bash by design.
+    child.on('error', (err) => {
+      clearTimeout(timeoutId);
+      if (contextPath) {
+        fs.unlink(contextPath).catch(() => {});
+      }
+      resolve({
+        success: false,
+        output: '',
+        outputFile: '',
+        duration: Date.now() - startTime,
+        error: err.code === 'ENOENT'
+          ? 'bash nao encontrado (instale Git Bash ou WSL no Windows)'
+          : err.message,
+      });
+    });
+
     // Handle process completion
     child.on('close', async (code) => {
       clearTimeout(timeoutId);

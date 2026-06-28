@@ -20,6 +20,23 @@ const fsSync = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
+// On Windows a concurrent reader / AV / Search indexer can hold a transient lock
+// that makes fs.rename throw EPERM/EBUSY where POSIX would succeed. A short
+// bounded retry clears virtually all of these so persistence degrades gracefully.
+const TRANSIENT_LOCK_CODES = new Set(['EPERM', 'EBUSY', 'EACCES', 'ENOTEMPTY']);
+async function renameWithRetry(oldPath, newPath, retries = 3, delayMs = 120) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fs.rename(oldPath, newPath);
+    } catch (err) {
+      if (!TRANSIENT_LOCK_CODES.has(err.code) || attempt >= retries) {
+        throw err;
+      }
+      await new Promise((resolve) => setTimeout(resolve, delayMs * (attempt + 1)));
+    }
+  }
+}
+
 // Constants
 const SESSION_STATE_VERSION = '1.2';
 const SESSION_STATE_FILENAME = '.session-state.yaml';
@@ -729,7 +746,7 @@ O que você quer fazer?
       for (const file of stateFiles) {
         const oldPath = path.join(this.legacyStatePath, file);
         const newPath = path.join(this.legacyStatePath, `${file}.migrated`);
-        await fs.rename(oldPath, newPath);
+        await renameWithRetry(oldPath, newPath);
       }
 
       if (this.options.debug) {
@@ -775,7 +792,7 @@ O que você quer fazer?
     if (await this.exists()) {
       // Archive instead of delete
       const archivePath = `${this.stateFilePath}.discarded.${Date.now()}`;
-      await fs.rename(this.stateFilePath, archivePath);
+      await renameWithRetry(this.stateFilePath, archivePath);
 
       if (this.options.debug) {
         console.log(`[SessionState] Session archived to: ${archivePath}`);

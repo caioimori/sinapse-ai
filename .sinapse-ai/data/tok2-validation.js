@@ -142,7 +142,7 @@ function run() {
 
   check(17, 'No functional regression (MCP workflows still work)', () => {
     // MCP servers are still available via tool search — not removed
-    const mcpConfig = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, '.mcp.json'), 'utf8'));
+    const mcpConfig = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, '.mcp.json'), 'utf8').replace(/^\uFEFF/, ''));
     const servers = mcpConfig.mcpServers || {};
     // Verify essential servers are not disabled
     return !servers.nogic?.disabled && !servers['code-graph']?.disabled;

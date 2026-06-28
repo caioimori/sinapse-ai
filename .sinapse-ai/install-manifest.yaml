@@ -276,9 +276,9 @@ files:
     type: core
     size: 15622
   - path: core/code-intel/registry-syncer.js
-    hash: sha256:6791f60b65ed3aeb6d53e2ac942cf0f604577f15b78ae0ee34454abd2bcb67eb
+    hash: sha256:acef8a60679cdd3ca1dec970ae573991c09c2e5e27ba780796c5b6ecf2848032
     type: core
-    size: 13217
+    size: 13413
   - path: core/config/config-cache.js
     hash: sha256:19a1c2900dd5cc59ddece4303d272415683978e238feb6538e6b41c1eef456a1
     type: core
@@ -1052,9 +1052,9 @@ files:
     type: core
     size: 4766
   - path: core/orchestration/session-state.js
-    hash: sha256:e4591fc968e8c2be07cc4572128415f3459eec75d831ba139d69faf9c7d9cacc
+    hash: sha256:a4fddcb9eb120ec7a0367ffc07d05cfbf97aa2afc16cc2c18663cf6c3a0d4912
     type: core
-    size: 24785
+    size: 25511
   - path: core/orchestration/skill-dispatcher.js
     hash: sha256:321eee21d44c8c2548a4a989b4fd9bd13782dc95f917098d67c514e0886000f5
     type: core
@@ -1076,9 +1076,9 @@ files:
     type: core
     size: 16495
   - path: core/orchestration/terminal-spawner.js
-    hash: sha256:fb57780dbcf53c3dbe19e3de74c9f14ef1b0eede5e6125e8d0f41241005cf73d
+    hash: sha256:698bbf0df1d988b98be470528d8f3f261a0ffd6294150fdbb369af1e29ed7fde
     type: core
-    size: 31583
+    size: 32247
   - path: core/orchestration/workflow-executor.js
     hash: sha256:8da67cc080ffaf4c2f2fc724d700ecb27ca05430ef0cc50356d78979da9f85a6
     type: core
@@ -1328,9 +1328,9 @@ files:
     type: core
     size: 11186
   - path: core/synapse/utils/atomic-write.js
-    hash: sha256:1871f69a188e93f3605771a0088ba8eeb6c96af1d29e101f5bfa79da8ef170a6
+    hash: sha256:05da2e7727fff31621ff53c9edf9640c89814d2f6ba094fce1bcf2559ee75c84
     type: core
-    size: 2162
+    size: 2982
   - path: core/synapse/utils/paths.js
     hash: sha256:f4d91eb000e36212638fe799ccbc11cd1c0050baa9ce739ff4083b675d7be980
     type: core
@@ -1380,21 +1380,21 @@ files:
     type: data
     size: 10998
   - path: data/capability-detection.js
-    hash: sha256:e07f290c14bde93e62ac5397299467e6bd254074273f3fa0e66781ddcacabbe9
+    hash: sha256:4e49e38fba0051512e691dd1901b91f4a91ba73c1df20e4f7e76cdc000e4d7c0
     type: data
-    size: 9602
+    size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:34d10d1728c0a54eabf31ace3db67b77868ae6a9bd470b4b3d6edebb9ebd13be
+    hash: sha256:811a8e9ab579c22f55bbd5d0f10a1b6b1802e3a1f28cf10fef1fb6fb2b489463
     type: data
-    size: 554797
+    size: 554846
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
     size: 69
   - path: data/mcp-discipline.js
-    hash: sha256:190f41f65f0dc5396a08aced2e95412b11fd980f50b8484155bd002a37fba30d
+    hash: sha256:fa0876124f522dc9e2d1e7328cf72a3237656a625a2dce45bb76c13969018e16
     type: data
-    size: 5104
+    size: 5127
   - path: data/mcp-tool-examples.yaml
     hash: sha256:3753f43dd70db70b614e3a5286d8e67ed4eaab59bb19cc12dfe8573513298c17
     type: data
@@ -1440,9 +1440,9 @@ files:
     type: data
     size: 3406
   - path: data/tok2-validation.js
-    hash: sha256:7d98c9006e71a17b387cb0abc6f1b3bd98cd2b97b98c36596aa626b988de8807
+    hash: sha256:e0420bd67fb7656c900aac6a87184e1bdcbfe33e5c5438b0c73bc41e401cd85c
     type: data
-    size: 7049
+    size: 7072
   - path: data/tok3-token-comparison.js
     hash: sha256:87ab8a68bf6cd7e3fc54dbba60cbc56e3a490dde1dd805fd294a04c57f5dea1b
     type: data
@@ -3464,9 +3464,9 @@ files:
     type: script
     size: 13118
   - path: infrastructure/scripts/pattern-extractor.js
-    hash: sha256:4aad2c5036b081a4ba35f83a369da876926fcaa14a22be0177fd95d1aa7795bc
+    hash: sha256:45d2f1cb89f1775504e469f3f5e95395714f8e3a0774e6662c6840a0a215a66b
     type: script
-    size: 45058
+    size: 45419
   - path: infrastructure/scripts/performance-analyzer.js
     hash: sha256:ff90ddb6c6e91d193ef224e02aa893f18e02ead2e10bd376eb5776f9dc5f7206
     type: script
@@ -3592,9 +3592,9 @@ files:
     type: script
     size: 3744
   - path: infrastructure/scripts/test-utilities.js
-    hash: sha256:9d21c22f72bbf628640eae3d99c9424b95828a996115ed8b4d92c896e2501d34
+    hash: sha256:ea6d0a15a6dbdc1358b7b51bf144f515eae239512fc0bb24d0b2253586eddcb2
     type: script
-    size: 5866
+    size: 6545
   - path: infrastructure/scripts/tool-resolver.js
     hash: sha256:ecd80a34b6c2848b5d7fd9469c4236b435e6173e7e15c8c12ae12da013537487
     type: script
@@ -3604,9 +3604,9 @@ files:
     type: script
     size: 17625
   - path: infrastructure/scripts/usage-analytics.js
-    hash: sha256:4c22a7eeabcd91fe51921e2a559d5a28de7b1a2894d05be9b0f229137015787a
+    hash: sha256:d87ff786a64c038aa83f106f8a6e174df696b2beeb68b278747299d33dc0f84b
     type: script
-    size: 18249
+    size: 18473
   - path: infrastructure/scripts/validate-agents.js
     hash: sha256:62f4f46fa2117f633b96b42be5fcf0448cf56408998affee6728e798c8014733
     type: script
@@ -4252,9 +4252,9 @@ files:
     type: template
     size: 18475
   - path: product/templates/statusline/statusline-script.js
-    hash: sha256:5860eecf6b02701666ff42f858bf25e3524f124210ef70d2b5243b829e893bb8
+    hash: sha256:d9488a080a26c46e6fc48d649c6316f44041276583399e90b9446bbc804fed88
     type: template
-    size: 8748
+    size: 8957
   - path: product/templates/statusline/track-agent-clear.cjs
     hash: sha256:3cda606de2463374e60440ba6cae9ca98e39b782b19c6ae39aa7569a1b211f09
     type: template
