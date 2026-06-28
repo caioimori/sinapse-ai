@@ -8,7 +8,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
+// cross-spawn.sync resolves npm/npx to their Windows .cmd shims WITHOUT a shell.
+// Native spawnSync('npm.cmd', ...) without shell:true returns EINVAL on modern Node
+// (post CVE-2024-27980), silently no-op'ing the audit/madge checks on Windows.
+const crossSpawn = require('cross-spawn');
 
 // Import dependencies with fallbacks
 const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
@@ -622,10 +625,9 @@ class SecurityAnalyzer {
     const findings = [];
 
     try {
-      // spawnSync (no shell) — cross-platform; npm exits non-zero when vulns
-      // exist but still prints the JSON report to stdout, which is what we parse.
-      const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-      const audit = spawnSync(npmCmd, ['audit', '--json'], {
+      // cross-spawn.sync resolves npm's Windows shim without a shell; npm exits
+      // non-zero when vulns exist but still prints the JSON report to stdout.
+      const audit = crossSpawn.sync('npm', ['audit', '--json'], {
         cwd: this.rootPath,
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
@@ -866,9 +868,9 @@ class ArchitectureAnalyzer {
     const findings = [];
 
     try {
-      // Use madge if available (spawnSync, no shell — cross-platform).
-      const npxCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
-      const proc = spawnSync(npxCmd, ['madge', '--circular', '--warning', path.join(this.rootPath, 'src')], {
+      // cross-spawn.sync resolves npx's Windows shim without a shell (native
+      // spawnSync of npx.cmd without shell:true returns EINVAL on modern Node).
+      const proc = crossSpawn.sync('npx', ['madge', '--circular', '--warning', path.join(this.rootPath, 'src')], {
         encoding: 'utf8',
         timeout: 30000,
         windowsHide: true,

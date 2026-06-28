@@ -124,13 +124,15 @@ class FocusAreaRecommender {
 
     for (const file of changedFiles.slice(0, 20)) {
       try {
-        // Count commits touching this file in last 30 days
-        const commitCount = execSync(
-          `git log --oneline --since="30 days ago" -- "${file}" 2>/dev/null | wc -l`,
-          { encoding: 'utf8', timeout: 5000 },
-        ).trim();
+        // Count commits touching this file in last 30 days. No shell pipe
+        // (wc -l / 2>/dev/null) — those fail on Windows cmd; count lines in JS
+        // and suppress stderr via stdio so it stays cross-platform.
+        const commitOut = execSync(
+          `git log --oneline --since="30 days ago" -- "${file}"`,
+          { encoding: 'utf8', timeout: 5000, stdio: ['ignore', 'pipe', 'ignore'] },
+        );
 
-        const count = parseInt(commitCount, 10) || 0;
+        const count = commitOut.split('\n').filter(Boolean).length;
 
         if (count >= 5) {
           insights.hotspots.push({
@@ -140,11 +142,13 @@ class FocusAreaRecommender {
           });
         }
 
-        // Get unique contributors for this file
-        const authors = execSync(
-          `git log --format="%aN" --since="30 days ago" -- "${file}" 2>/dev/null | sort -u`,
-          { encoding: 'utf8', timeout: 5000 },
-        ).trim().split('\n').filter(Boolean);
+        // Get unique contributors for this file. Dedup in JS via Set instead of
+        // a `| sort -u` shell pipe (unavailable on Windows cmd).
+        const authorsOut = execSync(
+          `git log --format="%aN" --since="30 days ago" -- "${file}"`,
+          { encoding: 'utf8', timeout: 5000, stdio: ['ignore', 'pipe', 'ignore'] },
+        );
+        const authors = [...new Set(authorsOut.split('\n').map((s) => s.trim()).filter(Boolean))];
 
         for (const author of authors) {
           insights.contributors.set(author, (insights.contributors.get(author) || 0) + 1);

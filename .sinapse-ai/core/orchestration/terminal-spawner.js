@@ -772,7 +772,11 @@ function getSystemInfo() {
   // Get Docker version
   let dockerVersion = 'not installed';
   try {
-    dockerVersion = execSync('docker --version 2>/dev/null', { encoding: 'utf8' }).trim();
+    dockerVersion = execSync('docker --version', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      windowsHide: true,
+    }).trim();
   } catch {
     // Docker not available
   }

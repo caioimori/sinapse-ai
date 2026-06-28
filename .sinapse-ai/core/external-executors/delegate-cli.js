@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const { spawn, spawnSync } = require('child_process');
+const { spawnSync } = require('child_process');
+// cross-spawn resolves Windows .cmd/.bat/.ps1 shims (e.g. an npm-global `codex.cmd`)
+// that native child_process.spawn cannot launch without a shell — it throws ENOENT.
+// It preserves detached + stdio + env semantics, so background spawning is unchanged.
+const crossSpawn = require('cross-spawn');
 
 const DEFAULT_RUN_DIR = '.sinapse/external-runs';
 const SUPPORTED_SANDBOXES = new Set([
@@ -449,7 +453,7 @@ async function spawnExecutor(plan) {
   };
 
   try {
-    child = spawn(plan.command, plan.args, {
+    child = crossSpawn(plan.command, plan.args, {
       cwd: plan.options.workdir,
       detached: !plan.options.foreground,
       stdio: ['pipe', logFd, logFd],

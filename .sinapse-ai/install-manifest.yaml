@@ -348,9 +348,9 @@ files:
     type: documentation
     size: 11580
   - path: core/doctor/checks/agent-memory.js
-    hash: sha256:c9cf8cba49e8ade572d482ee383e0de4cdbea44c8e7150044f9211f39c381a3c
+    hash: sha256:0eaacbec38882749bbaf1e16e5a2f2c1c486596b416debdc780f77a7791a4124
     type: core
-    size: 1744
+    size: 1737
   - path: core/doctor/checks/claude-md.js
     hash: sha256:c9cda3a367f14ae8845b3c96f90497ee2a316afd6d0cfd0ae9abeb4e4461596a
     type: core
@@ -536,9 +536,9 @@ files:
     type: core
     size: 11268
   - path: core/external-executors/delegate-cli.js
-    hash: sha256:f9ba17ba23010e94f13c41182487fa2d71458331403bbb32e76e7859bcfc7275
+    hash: sha256:e56313ca703a4fccf64e0eec958ceb9f84e5d7a3f1c84c22b12375a9b5b58bc1
     type: core
-    size: 15087
+    size: 15388
   - path: core/external-executors/index.js
     hash: sha256:db61bee165e4a7dba3627275d52d6b162e3b2cbf47d31d88beb38682cb8352db
     type: core
@@ -796,9 +796,9 @@ files:
     type: core
     size: 7763
   - path: core/ideation/ideation-engine.js
-    hash: sha256:a8f1efdf143c5bb91e8d2e983d820ddb0367b1404c86bbc2927fb136c9afd4f3
+    hash: sha256:e4973a25c61101d278f102e4ed449421e50d876a274b2c4c2b150d00df97cb39
     type: core
-    size: 27381
+    size: 27573
   - path: core/ids/circuit-breaker.js
     hash: sha256:d9ff8c6e540902457b17aba668ff67c04d40564ed479993ad3c4807fb8c09c3f
     type: core
@@ -1076,9 +1076,9 @@ files:
     type: core
     size: 16495
   - path: core/orchestration/terminal-spawner.js
-    hash: sha256:e7695b311301e5df6ce27ff80b0d8fb5c8ae3b3657b9f8094eff3ef22e364691
+    hash: sha256:fb57780dbcf53c3dbe19e3de74c9f14ef1b0eede5e6125e8d0f41241005cf73d
     type: core
-    size: 31516
+    size: 31583
   - path: core/orchestration/workflow-executor.js
     hash: sha256:8da67cc080ffaf4c2f2fc724d700ecb27ca05430ef0cc50356d78979da9f85a6
     type: core
@@ -1112,9 +1112,9 @@ files:
     type: core
     size: 9004
   - path: core/quality-gates/focus-area-recommender.js
-    hash: sha256:4b2e7e432d2f491f339d30622c0f853b84bb4e6f4fa68876977c5c0807791f1a
+    hash: sha256:cda110b91a4e68e3c507fda947fbd48ddb22fed8b1104d8dcd88fd45d2cd98e6
     type: core
-    size: 14346
+    size: 14714
   - path: core/quality-gates/human-review-orchestrator.js
     hash: sha256:7f6ba8a63bda8e1619db65feb3d4656a575885347ee4982ec212e1aca8915a5f
     type: core
@@ -1156,9 +1156,9 @@ files:
     type: core
     size: 8176
   - path: core/registry/build-registry.js
-    hash: sha256:b0e65b85380265d1db589d7e48e98e30b96f3da9af1a082f04aa794d9d412838
+    hash: sha256:af19f04bc201bfc7b6540e1d3f7384441b29447e4a4354ecd6fe15765a171403
     type: core
-    size: 13749
+    size: 13867
   - path: core/registry/README.md
     hash: sha256:98219837cb84b58eaf9cea2acf95837c5860c3369ac35bb226b61a7137fa14b8
     type: core
@@ -3212,9 +3212,9 @@ files:
     type: script
     size: 16195
   - path: infrastructure/scripts/changelog-generator.js
-    hash: sha256:23dbd0d284f4d50bbf6d640d5551261bb6a5ca5cc6d270e8166c0c775b8f1ecc
+    hash: sha256:b8e32c70260f8a3401be1e3d8ab1f1fd175bce05a99abb5644c0862241abd863
     type: script
-    size: 15336
+    size: 15600
   - path: infrastructure/scripts/cicd-discovery.js
     hash: sha256:03645cc37ba842aac88bef0723abc39be0e80d3d1846d377be13d771d9cb175d
     type: script

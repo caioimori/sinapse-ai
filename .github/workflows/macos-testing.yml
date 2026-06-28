@@ -6,13 +6,17 @@ on:
   push:
     branches: [main]
     paths:
-      - 'installer/**'
+      - 'packages/installer/**'
+      - 'bin/**'
+      - 'scripts/**'
       - 'tests/macos/**'
       - '.github/workflows/macos-testing.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'installer/**'
+      - 'packages/installer/**'
+      - 'bin/**'
+      - 'scripts/**'
       - 'tests/macos/**'
   workflow_dispatch:
     inputs:

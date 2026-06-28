@@ -38,6 +38,17 @@ function runBash(script) {
   }
 
   const child = spawn('bash', ['-s'], { cwd: process.cwd(), stdio: ['pipe', 'inherit', 'inherit'] });
+  // These targets are .sh scripts that require bash by design. On Windows without
+  // Git Bash/WSL the spawn emits 'error' (ENOENT) — handle it with a friendly
+  // message instead of an unhandled exception + raw stack trace.
+  child.on('error', (err) => {
+    if (err && err.code === 'ENOENT') {
+      getLogger().error('Este comando precisa do bash. No Windows, instale o Git Bash (ou WSL) e tente de novo.');
+    } else {
+      getLogger().error(`Falha ao iniciar o bash: ${err.message}`);
+    }
+    process.exit(1);
+  });
   child.stdin.write(scriptContent);
   child.stdin.end();
   child.on('close', (code) => process.exit(code || 0));
