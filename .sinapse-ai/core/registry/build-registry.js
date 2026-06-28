@@ -23,8 +23,9 @@ const SCAN_SOURCES = [
     category: 'task',
     taskFormat: 'TASK-FORMAT-V1',
     subcategoryExtractor: (filePath) => {
-      const parts = filePath.split('/');
-      const filename = parts[parts.length - 1];
+      // path.basename is OS-agnostic; a raw glob result on Windows uses '\\',
+      // so split('/') would return the whole path and corrupt the subcategory.
+      const filename = path.basename(filePath);
       // Extract agent prefix (e.g., dev-, qa-, po-)
       const prefixMatch = filename.match(/^([a-z]+)-/);
       if (prefixMatch) {

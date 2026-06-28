@@ -684,6 +684,38 @@ jobs:
           npx sinapse-ai --help || echo "CLI help check skipped"
         continue-on-error: true
 
+  # Pre-merge cross-platform smoke — runs the full suite on macOS + Windows on
+  # EVERY PR so OS-only breakage (path separators, case-sensitivity,
+  # child_process/.cmd shims, shell pipelines) is caught BEFORE merge, not only
+  # by the post-merge `cross-platform` job. Kept to a single Node to cap cost;
+  # the main-push `cross-platform` job remains the full OS x Node backstop.
+  cross-platform-pr:
+    name: Cross-Platform PR Smoke (${{ matrix.os }})
+    needs: [changes, lint, typecheck]
+    if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.tests == 'true' || needs.changes.outputs.config == 'true' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
   # INS-4.12: Dependency graph validation — ensures .sinapse-ai/package.json is complete
   dependency-validation:
     name: Dependency Validation

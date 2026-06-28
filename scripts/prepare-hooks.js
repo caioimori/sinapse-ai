@@ -56,3 +56,22 @@ const managedReady = fs.existsSync(path.join(projectRoot, managedDir, 'pre-commi
 if (inGitWorkTree && managedReady) {
   runDirect('git', ['config', 'core.hooksPath', managedDir]);
 }
+
+// 3. On Unix, ensure the managed hook entrypoints are executable. Git SILENTLY
+//    ignores hooks that lack the +x bit, so without this the SINAPSE guards
+//    (secret scan, SQL guard, protected-files) would not run on macOS/Linux —
+//    they would only fire on Windows (which ignores the bit entirely). The
+//    tracked git mode is already 100755, but a Windows-side `npm pack` or a
+//    permissive checkout can drop it; this makes the executable bit deterministic.
+if (managedReady && !onWindows) {
+  for (const hook of ['pre-commit', 'pre-push', 'post-commit']) {
+    const hookPath = path.join(projectRoot, managedDir, hook);
+    try {
+      if (fs.existsSync(hookPath)) {
+        fs.chmodSync(hookPath, 0o755);
+      }
+    } catch {
+      // best-effort — never break `npm install` over a chmod
+    }
+  }
+}

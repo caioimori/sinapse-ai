@@ -110,9 +110,13 @@ class ChangelogGenerator {
    */
   async getLastReleaseTag() {
     try {
-      const tag = execSync('git describe --tags --abbrev=0 2>/dev/null', {
+      // Suppress stderr via stdio, not `2>/dev/null` — the redirect breaks the
+      // command on Windows cmd, which would wrongly fall through to the first
+      // commit and generate the changelog from the start of history.
+      const tag = execSync('git describe --tags --abbrev=0', {
         cwd: this.rootPath,
         encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
       }).trim();
       return tag;
     } catch {
