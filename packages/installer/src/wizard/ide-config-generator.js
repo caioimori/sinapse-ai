@@ -11,7 +11,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 const ora = require('ora');
-const { spawnSync } = require('child_process');
+// cross-spawn resolves gemini's Windows .cmd/.ps1 shim WITHOUT a shell and
+// escapes argv properly (CVE-2024-27980), so a path with spaces in extensionDir
+// stays intact — shell:true would split it and break the link silently.
+const crossSpawn = require('cross-spawn');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
@@ -937,19 +940,17 @@ async function linkGeminiExtension(projectRoot) {
 
   // On Windows, `gemini` is a .cmd/.ps1 shim — spawnSync without a shell throws
   // EINVAL. Run through the shell on win32 so the shim resolves.
-  const versionCheck = spawnSync('gemini', ['--version'], {
+  const versionCheck = crossSpawn.sync('gemini', ['--version'], {
     encoding: 'utf8',
-    shell: process.platform === 'win32',
   });
   if (versionCheck.status !== 0) {
     return { status: 'skipped', reason: 'gemini-cli-not-available' };
   }
 
-  let linkResult = spawnSync('gemini', ['extensions', 'link', extensionDir, '--consent'], {
+  let linkResult = crossSpawn.sync('gemini', ['extensions', 'link', extensionDir, '--consent'], {
     cwd: projectRoot,
     encoding: 'utf8',
     timeout: 30000,
-    shell: process.platform === 'win32',
   });
 
   if (linkResult.status === 0) {
@@ -960,22 +961,20 @@ async function linkGeminiExtension(projectRoot) {
 
   // When already installed, perform idempotent relink.
   if (output.includes('already installed')) {
-    const uninstall = spawnSync('gemini', ['extensions', 'uninstall', 'sinapse'], {
+    const uninstall = crossSpawn.sync('gemini', ['extensions', 'uninstall', 'sinapse'], {
       cwd: projectRoot,
       encoding: 'utf8',
       timeout: 30000,
-      shell: process.platform === 'win32',
     });
 
     if (uninstall.status !== 0) {
       return { status: 'skipped', reason: 'uninstall-failed' };
     }
 
-    linkResult = spawnSync('gemini', ['extensions', 'link', extensionDir, '--consent'], {
+    linkResult = crossSpawn.sync('gemini', ['extensions', 'link', extensionDir, '--consent'], {
       cwd: projectRoot,
       encoding: 'utf8',
       timeout: 30000,
-      shell: process.platform === 'win32',
     });
 
     if (linkResult.status === 0) {

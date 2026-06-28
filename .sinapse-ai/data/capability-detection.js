@@ -26,7 +26,7 @@ function detectToolSearch() {
   // Check Claude Code cached features for tool search availability
   const claudeJsonPath = path.join(os.homedir(), '.claude.json');
   try {
-    const config = JSON.parse(fs.readFileSync(claudeJsonPath, 'utf8'));
+    const config = JSON.parse(fs.readFileSync(claudeJsonPath, 'utf8').replace(/^\uFEFF/, ''));
     const features = config.cachedGrowthBookFeatures || {};
     return {
       available: features.tengu_mcp_tool_search === true,
@@ -54,7 +54,7 @@ function detectDeferLoading() {
 function detectProjectMcps() {
   const mcpJsonPath = path.join(PROJECT_ROOT, '.mcp.json');
   try {
-    const config = JSON.parse(fs.readFileSync(mcpJsonPath, 'utf8'));
+    const config = JSON.parse(fs.readFileSync(mcpJsonPath, 'utf8').replace(/^\uFEFF/, ''));
     const servers = config.mcpServers || {};
     return Object.entries(servers).map(([name, cfg]) => ({
       name,
@@ -96,7 +96,7 @@ function detectGlobalMcps() {
   // Detection: check ~/.claude/settings.json or known conventions
   const settingsPath = path.join(os.homedir(), '.claude', 'settings.json');
   try {
-    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8').replace(/^\uFEFF/, ''));
     if (settings.mcpServers) {
       for (const [name, cfg] of Object.entries(settings.mcpServers)) {
         servers.push({

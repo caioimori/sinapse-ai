@@ -215,11 +215,15 @@ function simpleHash(str) {
 
 function getGitInfo() {
   const result = { project: '', branch: '', filesChanged: 0 };
+  // stderr is suppressed via stdio, NOT `2>/dev/null` — on Windows cmd.exe treats
+  // /dev/null as a literal path and fails the redirect before git runs, so the
+  // statusline would lose project/branch/dirty-count on every refresh.
+  const gitOpts = { encoding: 'utf8', timeout: 3000, stdio: ['ignore', 'pipe', 'ignore'] };
   try {
-    const toplevel = execSync('git rev-parse --show-toplevel 2>/dev/null', { encoding: 'utf8', timeout: 3000 }).trim();
+    const toplevel = execSync('git rev-parse --show-toplevel', gitOpts).trim();
     result.project = path.basename(toplevel);
-    result.branch = execSync('git rev-parse --abbrev-ref HEAD 2>/dev/null', { encoding: 'utf8', timeout: 3000 }).trim();
-    const status = execSync('git status --porcelain 2>/dev/null', { encoding: 'utf8', timeout: 3000 }).trim();
+    result.branch = execSync('git rev-parse --abbrev-ref HEAD', gitOpts).trim();
+    const status = execSync('git status --porcelain', gitOpts).trim();
     if (status) {
       result.filesChanged = status.split('\n').filter(l => l.trim()).length;
     }

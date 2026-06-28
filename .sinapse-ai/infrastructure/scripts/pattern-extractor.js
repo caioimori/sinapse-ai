@@ -797,7 +797,12 @@ export function Button({ variant = 'primary', size = 'md', disabled, children }:
     const patterns = [];
     const seenPatterns = new Set();
 
-    const hookFiles = files.filter((f) => f.includes('/hooks/') || f.includes('use'));
+    // Normalize separators: the walk yields '\\' on Windows, so '/hooks/' would
+    // never match there and hook detection would silently diverge by OS.
+    const hookFiles = files.filter((f) => {
+      const n = f.replace(/\\/g, '/');
+      return n.includes('/hooks/') || n.includes('use');
+    });
 
     for (const file of hookFiles) {
       const content = await this.readFile(file);
@@ -1152,7 +1157,11 @@ describe('MyComponent', () => {
     const patterns = [];
     const seenPatterns = new Set();
 
-    const utilFiles = files.filter((f) => f.includes('/utils/') || f.includes('/lib/') || f.includes('/helpers/'));
+    // Normalize separators ('\\' on Windows) so the '/dir/' checks match cross-OS.
+    const utilFiles = files.filter((f) => {
+      const n = f.replace(/\\/g, '/');
+      return n.includes('/utils/') || n.includes('/lib/') || n.includes('/helpers/');
+    });
 
     for (const file of utilFiles) {
       const content = await this.readFile(file);

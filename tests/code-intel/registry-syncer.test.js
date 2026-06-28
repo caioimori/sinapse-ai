@@ -417,9 +417,11 @@ describe('RegistrySyncer', () => {
       const syncer = createSyncer();
       await syncer.sync({ full: true });
 
-      // writeFileSync should be called with .tmp extension
+      // writeFileSync should be called with a .tmp path. The canonical
+      // atomicWriteSync helper appends a unique per-PID suffix (.tmp.<pid>)
+      // to avoid collisions between concurrent writers, so match either form.
       const writeCall = fs.writeFileSync.mock.calls[0];
-      expect(writeCall[0]).toMatch(/\.tmp$/);
+      expect(writeCall[0]).toMatch(/\.tmp(\.\d+)?$/);
 
       // renameSync should be called to replace original
       expect(fs.renameSync).toHaveBeenCalledWith(

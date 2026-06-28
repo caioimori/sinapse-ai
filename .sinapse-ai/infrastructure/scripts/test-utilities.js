@@ -11,13 +11,40 @@
 
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
-const util = require('util');
-const execPromise = util.promisify(exec);
 
 const utilsDir = path.join(__dirname);
 let results = [];
 let utilities = [];
+
+/**
+ * Recursively count lines containing `needle` under `dir` (the cross-platform
+ * equivalent of `grep -r needle dir | wc -l`). Pure Node — no shell, no /bin/bash.
+ */
+function countMatchingLines(dir, needle) {
+  let count = 0;
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return 0;
+  }
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      count += countMatchingLines(full, needle);
+    } else if (entry.isFile()) {
+      try {
+        const content = fs.readFileSync(full, 'utf8');
+        for (const line of content.split('\n')) {
+          if (line.includes(needle)) count++;
+        }
+      } catch {
+        // binary or unreadable file — skip
+      }
+    }
+  }
+  return count;
+}
 
 /**
  * Count integration references for a utility
@@ -34,16 +61,10 @@ async function countIntegrationReferences(utilityName) {
 
   for (const dir of searchDirs) {
     if (!fs.existsSync(dir)) continue;
-
-    try {
-      const { stdout } = await execPromise(
-        `grep -r "${basename}" ${dir} 2>/dev/null | wc -l`,
-        { shell: '/bin/bash' },
-      );
-      totalCount += parseInt(stdout.trim()) || 0;
-    } catch {
-      // Directory doesn't exist or grep failed - not a problem
-    }
+    // Walk the tree in Node and count matching lines. Replaces a
+    // `grep -r ... | wc -l` shell pipeline hardcoded to `/bin/bash`, which does
+    // not exist on Windows (the call always failed there and returned 0).
+    totalCount += countMatchingLines(dir, basename);
   }
 
   return totalCount;

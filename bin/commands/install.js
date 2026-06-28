@@ -96,11 +96,19 @@ async function cmdInstallGlobal(opts = {}) {
   try {
     fs.mkdirSync(claudeSettingsDir, { recursive: true });
     let settings = {};
+    let parseFailed = false;
     if (fs.existsSync(claudeSettingsPath)) {
-      try { settings = JSON.parse(fs.readFileSync(claudeSettingsPath, 'utf8')); } catch { settings = {}; }
+      // Strip a UTF-8 BOM (common when the file was saved by a Windows editor)
+      // before parsing. On a GENUINE parse failure, do NOT fall through to
+      // overwriting with {} — that would wipe the user's existing hooks,
+      // permissions, mcpServers and statusline. Preserve their file instead.
+      const raw = fs.readFileSync(claudeSettingsPath, 'utf8').replace(/^\uFEFF/, '');
+      try { settings = JSON.parse(raw); } catch { parseFailed = true; }
     }
-    settings.language = language === 'pt' ? 'portuguese' : 'english';
-    fs.writeFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
+    if (!parseFailed) {
+      settings.language = language === 'pt' ? 'portuguese' : 'english';
+      fs.writeFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
+    }
   } catch { /* non-critical */ }
 
   // LLM selection (skipped in upsert mode if previous llm known)

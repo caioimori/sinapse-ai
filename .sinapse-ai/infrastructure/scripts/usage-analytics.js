@@ -607,11 +607,15 @@ class UsageAnalytics {
   }
 
   determineContextType(filePath) {
-    if (filePath.includes('/tests/')) return 'test';
-    if (filePath.includes('/docs/')) return 'documentation';
-    if (filePath.includes('/utils/')) return 'utility';
-    if (filePath.includes('/tasks/')) return 'task';
-    if (filePath.includes('/agents/')) return 'agent';
+    // Normalize '\\' -> '/' first: filePath comes from path.relative, which yields
+    // backslashes on Windows, so the '/segment/' checks would all miss there and
+    // every file would be classified 'general'.
+    const p = filePath.replace(/\\/g, '/');
+    if (p.includes('/tests/')) return 'test';
+    if (p.includes('/docs/')) return 'documentation';
+    if (p.includes('/utils/')) return 'utility';
+    if (p.includes('/tasks/')) return 'task';
+    if (p.includes('/agents/')) return 'agent';
     return 'general';
   }
 

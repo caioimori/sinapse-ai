@@ -33,7 +33,7 @@ function loadCapabilities() {
 
 function loadMcpConfig() {
   try {
-    return JSON.parse(fs.readFileSync(MCP_JSON_PATH, 'utf8'));
+    return JSON.parse(fs.readFileSync(MCP_JSON_PATH, 'utf8').replace(/^\uFEFF/, ''));
   } catch {
     console.error('❌ Could not read .mcp.json');
     process.exit(1);

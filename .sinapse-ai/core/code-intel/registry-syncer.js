@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const yaml = require('js-yaml');
 const { getClient, isCodeIntelAvailable } = require('../code-intel');
 const { RegistryLoader, DEFAULT_REGISTRY_PATH } = require('../ids/registry-loader');
+const { atomicWriteSync } = require('../synapse/utils/atomic-write');
 
 // Role inference from entity path (order matters: more specific patterns first)
 const ROLE_MAP = [
@@ -366,10 +367,11 @@ class RegistrySyncer {
    * @private
    */
   _atomicWrite(registryPath, registry) {
-    const tmpPath = registryPath + '.tmp';
     const content = yaml.dump(registry, { lineWidth: 120, noRefs: true });
-    fs.writeFileSync(tmpPath, content, 'utf8');
-    fs.renameSync(tmpPath, registryPath);
+    // Delegate to the canonical helper: it does unlink-first on Windows and
+    // retries the rename on transient EPERM/EBUSY locks (AV / Search indexer /
+    // concurrent readers) that POSIX never hits.
+    atomicWriteSync(registryPath, content, 'utf8');
   }
 
   /**
