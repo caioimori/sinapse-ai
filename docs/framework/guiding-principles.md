@@ -68,7 +68,7 @@ A razao e separacao de responsabilidades em escala. Um orquestrador que "faz tud
 
 **Por que 172 agentes em 17 dominios?**
 
-O SINAPSE nao e um agente generalista. E um ecossistema de 160 especialistas organizados em 17 squads tematicos. Cada agente tem persona, expertise e comandos especificos para seu dominio.
+O SINAPSE nao e um agente generalista. E um ecossistema de 172 agentes especializados — 12 core mais 160 distribuidos em 17 squads tematicos. Cada agente tem persona, expertise e comandos especificos para seu dominio.
 
 Essa arquitetura permite:
 

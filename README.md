@@ -21,7 +21,7 @@
 
 ## O que é o SINAPSE?
 
-SINAPSE é um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro é governado por uma **Constitution com enforcement real** — 19 hooks ativos que bloqueiam violações em tempo de execução.
+SINAPSE é um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro é governado por uma **Constitution com enforcement real** — 17 hooks ativos que bloqueiam violações em tempo de execução.
 
 O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.200 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
 
@@ -35,7 +35,7 @@ IA generativa tem um problema conhecido: quanto mais você pede, pior fica. Um �
 
 O SINAPSE resolve isso do jeito que times humanos resolvem: **especialização coordenada**. Em vez de um generalista cansado, você tem 172 agentes em 17 squads, cada um com papel definido, knowledge base própria e tasks executáveis. Um orquestrador roteia seu pedido para quem realmente sabe resolver — automaticamente, sem você precisar decorar nomes de agentes ou comandos.
 
-O diferencial não é apenas a quantidade de agentes. É **governança real**: 19 hooks ativos interceptam operações em tempo de execução, uma Constitution com 11 artigos rege o framework, e 7 desses artigos são NON-NEGOTIABLE — violações são bloqueadas antes de executar, não detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
+O diferencial não é apenas a quantidade de agentes. É **governança real**: 17 hooks ativos interceptam operações em tempo de execução, uma Constitution com 11 artigos rege o framework, e 7 desses artigos são NON-NEGOTIABLE — violações são bloqueadas antes de executar, não detectadas depois. **Velocidade com rigor, sem escolher entre os dois.**
 
 ---
 
@@ -193,7 +193,7 @@ Deny rules em `.claude/settings.json` reforçam isso deterministicamente. **O up
 
 ### Constitution
 
-O SINAPSE é governado por uma Constitution formal com 11 artigos e 19 hooks de enforcement:
+O SINAPSE é governado por uma Constitution formal com 11 artigos e 17 hooks de enforcement:
 
 | Artigo | Princípio | Severidade |
 |--------|-----------|------------|
@@ -354,7 +354,7 @@ Se você se identifica com o primeiro grupo, você está no lugar certo.
 
 ### Enforcement Constitucional
 
-O SINAPSE não apenas documenta regras — ele as impõe com **19 hooks ativos**:
+O SINAPSE não apenas documenta regras — ele as impõe com **17 hooks ativos**:
 
 - `enforce-git-push-authority.sh` — bloqueia push por agentes não autorizados
 - `enforce-story-gate.cjs` — bloqueia código sem story validada

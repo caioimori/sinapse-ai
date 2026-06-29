@@ -12,6 +12,19 @@ const { colors, status, headings } = require('../utils/sinapse-colors');
 const { t } = require('./i18n');
 
 /**
+ * Canonical ecosystem counts — single, documented source of truth.
+ *
+ * The numbers come from `scripts/sync-counts.js` (run `npm run sync:counts`):
+ * the total is 172 agents — 160 distributed across the 17 squads, plus 12
+ * framework core agents. Cross-document consistency is enforced by
+ * `npm run validate:article-vii` (Constitution Article VII — Metrics Accuracy).
+ *
+ * Do NOT inline these numbers elsewhere in this file — reference `ECOSYSTEM`
+ * so there is exactly one place to update when `sync:counts` changes.
+ */
+const ECOSYSTEM = Object.freeze({ squads: 17, agents: 172, tasks: '1,200' });
+
+/**
  * Create and start a spinner with SINAPSE styling
  *
  * @param {string} text - Spinner text
@@ -139,7 +152,7 @@ function showWelcome() {
   console.log(`  ${t('welcomeMessage')}`);
   console.log(`  ${t('welcomeSubtitle')}`);
   console.log('');
-  console.log('  17 squads · 172 agents · 1,200 tasks');
+  console.log(`  ${ECOSYSTEM.squads} squads · ${ECOSYSTEM.agents} agents · ${ECOSYSTEM.tasks} tasks`);
   console.log(`  ${t('welcomeDesc1')}`);
   console.log(`  ${t('welcomeDesc2')}`);
   console.log('');
@@ -158,6 +171,9 @@ function showWelcome() {
 function showCompletion(context = {}) {
   const llmLabel = context.llmLabel || 'Claude Code';
   const llmValue = context.llmValue || 'claude-code';
+  // Prefer a real count from the caller (manifest/registry) when provided;
+  // otherwise fall back to the canonical ECOSYSTEM total (never a magic literal).
+  const agentCount = context.agentCount || ECOSYSTEM.agents;
 
   let startCommand;
   if (llmValue === 'codex') {
@@ -175,7 +191,7 @@ function showCompletion(context = {}) {
   console.log('');
   console.log(status.success(t('completionInstalled')));
   console.log(status.success(`${llmLabel} ${t('completionConfigured')}`));
-  console.log(status.success(`172 ${t('completionAgents')}`));
+  console.log(status.success(`${agentCount} ${t('completionAgents')}`));
   if (depsInstalled) {
     console.log(status.success(`${t('completionReady')} ${startCommand}`));
   } else {

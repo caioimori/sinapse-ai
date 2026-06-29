@@ -19,7 +19,7 @@
 
 ## What is SINAPSE?
 
-SINAPSE is an open-source meta-framework that organizes **172 AI agents into 17 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 19 active hooks that block violations at runtime.
+SINAPSE is an open-source meta-framework that organizes **172 AI agents into 17 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 17 active hooks that block violations at runtime.
 
 The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. Each with its own knowledge base, workflows, and tasks -- totaling **1,200 executable tasks** ready to use.
 
@@ -33,7 +33,7 @@ Generative AI has a known problem: the more you ask of it, the worse it gets. A 
 
 SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 172 agents in 17 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
 
-The differential isn't just the quantity of agents. It's **real governance**: 19 active hooks intercept operations at runtime, a Constitution with 11 articles governs the framework, and 7 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
+The differential isn't just the quantity of agents. It's **real governance**: 17 active hooks intercept operations at runtime, a Constitution with 11 articles governs the framework, and 7 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
 
 ---
 
@@ -174,7 +174,7 @@ Deny rules in `.claude/settings.json` enforce this deterministically. **Framewor
 
 ### Constitution
 
-SINAPSE is governed by a formal Constitution with 11 articles and 19 enforcement hooks:
+SINAPSE is governed by a formal Constitution with 11 articles and 17 enforcement hooks:
 
 | Article | Principle | Severity |
 |---------|-----------|----------|
@@ -294,7 +294,7 @@ Both IDEs have access to all 17 squads, 172 agents, workflows, and knowledge bas
 | Feature | Claude Code | Codex CLI |
 |---------|:-----------:|:---------:|
 | Agent activation (@agent) | Full | Full |
-| Constitutional hooks (19) | Full | Partial (5) |
+| Constitutional hooks (17) | Full | Partial (5) |
 | Story-driven development | Full | Full |
 | Quality gates | Full | Full |
 | Delegation enforcement | Full | Partial |
@@ -335,7 +335,7 @@ If you identify with the first group, you're in the right place.
 
 ### Constitutional Enforcement
 
-SINAPSE doesn't just document rules -- it enforces them with **19 active hooks**:
+SINAPSE doesn't just document rules -- it enforces them with **17 active hooks**:
 
 - `enforce-git-push-authority.sh` -- blocks push by unauthorized agents
 - `enforce-story-gate.cjs` -- blocks code without a validated story

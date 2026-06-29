@@ -291,7 +291,7 @@ routing_table:
       orchestrator: copy-orqx (Quill)
       invocation: "/copywriting:agents:copy-orqx"
       domain: "Copywriting, persuasao, headlines, landing pages, email copy, ads copy"
-      agents: 12
+      agents: 13
       tasks: 81
       keywords: ["copy", "copywriting", "headline", "persuasao", "CTA", "landing page", "email", "anuncio", "ad copy", "sales page", "VSL", "script"]
 
@@ -318,7 +318,7 @@ routing_table:
       orchestrator: finance-orqx (Ledger)
       invocation: "/finance:agents:finance-orqx"
       domain: "Inteligencia financeira, pricing, P&L, budget, unit economics, financial modeling"
-      agents: 5
+      agents: 8
       tasks: 45
       keywords: ["financeiro", "finance", "pricing", "P&L", "budget", "unit economics", "modelo financeiro", "receita", "custo", "margem", "ROI", "CAC", "LTV"]
 
@@ -363,7 +363,7 @@ routing_table:
       orchestrator: swarm-orqx (Nexus)
       invocation: "/claude:agents:swarm-orqx"
       domain: "Claude Code mastery, prompt engineering, MCP, automacao, hooks, skills, plugins, agent teams, context engineering"
-      agents: 11
+      agents: 8
       tasks: 51
       keywords: ["Claude", "prompt", "MCP", "automacao", "agent", "squad", "Claude Code", "prompt engineering", "tool use", "workflow", "hooks", "skills", "plugins"]
 
@@ -399,7 +399,7 @@ routing_table:
       orchestrator: cloning-orqx (Helix)
       invocation: "/cloning:agents:cloning-orqx"
       domain: "Clonagem cognitiva, extracao de DNA mental, geracao de agentes a partir de mentes reais"
-      agents: 8
+      agents: 9
       tasks: 54
       keywords: ["clone", "clonagem", "extracao", "DNA cognitivo", "mental model", "heuristic", "transcricao", "Whisper", "cognitive profile", "mind", "mente"]
 
@@ -773,7 +773,7 @@ Imperator can provide ecosystem-wide insights by combining capabilities across s
 | 16 | cloning | cloning | Helix | Cognitive cloning, mental DNA extraction |
 | 17 | courses | courses | Syllabus | Course creation, workshops, ebooks |
 
-**Total ecosystem:** 17 squads, 172 agents, 1,200 tasks
+**Total ecosystem:** 17 squads, 172 agents (160 de squad + 12 core), 1,200 tasks
 
 ## Cross-Squad Handoffs
 - **Receives from:** Every squad (escalations, cross-squad requests)
