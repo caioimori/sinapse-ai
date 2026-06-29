@@ -385,6 +385,10 @@ describe('main', () => {
 
   afterEach(() => {
     cleanupTempDir(tempDir);
+    // main() sets process.exitCode=1 on its expected-error paths; reset it so a
+    // fully-passing run doesn't leak a non-zero exit to the jest process (which
+    // would fail CI despite 0 test failures).
+    process.exitCode = 0;
   });
 
   test('should generate constitution file from source', () => {
@@ -472,7 +476,7 @@ describe('main', () => {
 describe('integration: real constitution.md', () => {
   const realConstitutionPath = path.join(__dirname, '..', '..', '.sinapse-ai', 'constitution.md');
 
-  test('should parse real constitution.md with 6 articles', () => {
+  test('should parse real constitution.md with 11 articles', () => {
     // Skip if constitution.md doesn't exist (CI environment)
     if (!fs.existsSync(realConstitutionPath)) {
       return;
@@ -481,13 +485,14 @@ describe('integration: real constitution.md', () => {
     const content = fs.readFileSync(realConstitutionPath, 'utf8');
     const articles = parseConstitution(content);
 
-    expect(articles).toHaveLength(10);
+    expect(articles).toHaveLength(11);
     expect(articles[0].title).toBe('CLI First');
     expect(articles[5].title).toBe('Absolute Imports');
     expect(articles[6].title).toBe('Ecosystem Metrics Accuracy');
     expect(articles[7].title).toBe('Mandatory Delegation');
     expect(articles[8].title).toBe('Safe Collaboration');
     expect(articles[9].title).toBe('Security & Data Protection');
+    expect(articles[10].title).toBe('Conservative Default');
   });
 
   test('should generate valid constitution from real source', () => {
@@ -503,7 +508,7 @@ describe('integration: real constitution.md', () => {
       const result = main({ constitutionPath: realConstitutionPath, outputPath });
 
       expect(result.success).toBe(true);
-      expect(result.articles).toBe(10);
+      expect(result.articles).toBe(11);
 
       // Verify output is loadable by domain-loader
       const rules = loadDomainFile(outputPath);

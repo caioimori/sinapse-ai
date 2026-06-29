@@ -115,7 +115,7 @@ Qualidade não é negociável. Todo código passa por múltiplos gates antes de 
 - MUST: Story status é "Done" ou "Ready for Review"
 - SHOULD: Cobertura de testes não diminui
 
-**Gate:** `pre-push.md` - BLOCK se qualquer check falhar
+**Gate:** `.sinapse-ai/git-hooks/pre-push` - BLOCK se qualquer check falhar (executa `npm run validate:all`, fail-closed)
 
 ---
 
@@ -389,5 +389,5 @@ Resultado: nada foi fundido. Dual register preservado. Article XI formalizado pr
 
 ---
 
-*SINAPSE Constitution v1.0.0*
+*SINAPSE Constitution v2.2.0*
 *CLI First | Agent-Driven | Quality First*

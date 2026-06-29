@@ -54,6 +54,7 @@ const GUARDS = [
   { name: 'manifest:parity', script: 'validate:manifest:parity' },
   { name: 'squad-yaml', script: 'validate:squad-yaml' },
   { name: 'squad-orqx', script: 'validate:squad-orqx' },
+  { name: 'agent-codenames', script: 'validate:agent-codenames' },
 ];
 
 /**

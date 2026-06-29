@@ -5,9 +5,10 @@
 # and intelligent tool selection across agents, tasks, and squads.
 #
 # Consumer Module:
-#   This registry is loaded by `.sinapse-ai/core/registry/registry-loader.js`.
-#   Extend the existing loader to read `tool-registry.yaml` alongside
-#   `entity-registry.yaml`. Both follow the same L3 YAML conventions.
+#   This registry is loaded by `.sinapse-ai/data/capability-detection.js`
+#   (loadToolRegistry), which reads `tool-registry.yaml` to count and classify
+#   tools by tier/profile. Follows the same L3 YAML conventions as
+#   `entity-registry.yaml`.
 #
 # Fallback Behavior:
 #   If this file is missing or malformed, the system MUST continue without

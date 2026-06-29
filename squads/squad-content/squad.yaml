@@ -136,7 +136,7 @@ core_concepts:
       parte da mesma Espinha Dorsal — TESE (o que defende), MECANISMO (como funciona),
       PROVA (evidencia), DIRECAO (proximo passo). A Espinha Dorsal e format-agnostic:
       mesma espinha → carrossel, thread, reel, blog, newsletter.
-    agent: "content-engineer (Arc)"
+    agent: "content-engineer (Truss)"
     knowledge_base: "content-spine-engine.md"
 
   template_contract_system:
@@ -145,7 +145,7 @@ core_concepts:
       define: numero de blocos/slides, numero de campos textuais, limites de caracteres
       por campo (min/max), regras de formatacao, specs tecnicas. Contratos sao inviolaveis
       — AI DEVE respeitar limites. Versionados para acompanhar mudancas de plataforma.
-    agents: ["content-engineer (Arc)", "platform-specialist (Morph)", "content-governor (Index)"]
+    agents: ["content-engineer (Truss)", "platform-specialist (Morph)", "content-governor (Index)"]
     knowledge_base: "template-contract-system.md"
     template: "template-contract-registry-template.md"
 
@@ -158,7 +158,7 @@ components:
     - content-orqx.md      # Nexus — Conductor (5 tasks)
     - signal-intelligence.md       # Radar — Scout (9 tasks)
     - editorial-strategist.md      # North — Navigator (10 tasks)
-    - content-engineer.md          # Arc — Engineer (25 tasks)
+    - content-engineer.md          # Truss — Engineer (25 tasks)
     - platform-specialist.md       # Morph — Shapeshifter (15 tasks)
     - content-governor.md          # Index — Librarian (10 tasks)
     - content-analyst.md           # Lens — Analyst (11 tasks)
@@ -199,7 +199,7 @@ components:
     - balance-content-mix.md
     - define-content-kpis.md
 
-    # ── Content Engineer (Arc) — 25 tasks ──
+    # ── Content Engineer (Truss) — 25 tasks ──
     # Structure mode
     - design-content-spine.md
     - design-narrative-arc.md
@@ -285,7 +285,7 @@ components:
     - editorial-planning-cycle.yaml      # Planejamento editorial periodico
     - content-creation-cycle.yaml        # Criacao: brief → producao → QA → publicacao
     - content-audit-cycle.yaml           # Auditoria de qualidade e performance
-    - performance-feedback-loop.yaml     # Retroalimentacao sistemica Lens → Radar/North/Arc
+    - performance-feedback-loop.yaml     # Retroalimentacao sistemica Lens → Radar/North/Truss
     - onboarding-content-cycle.yaml      # Setup de cliente novo: Big Idea → primeiro sprint
 
 # ══════════════════════════════════════════════════════════════════════════════

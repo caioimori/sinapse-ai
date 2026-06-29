@@ -15,7 +15,7 @@ const path = require('path');
 const { BaseCheck, CheckSeverity, CheckDomain } = require('../../base-check');
 
 /**
- * Expected articles in Constitution v2.0.0
+ * Expected articles in Constitution v2.2.0
  * Source of truth: .sinapse-ai/constitution.md
  */
 const EXPECTED_ARTICLES = [
@@ -29,6 +29,7 @@ const EXPECTED_ARTICLES = [
   { number: 'VIII', title: 'Mandatory Delegation', severity: 'NON-NEGOTIABLE' },
   { number: 'IX', title: 'Safe Collaboration', severity: 'NON-NEGOTIABLE' },
   { number: 'X', title: 'Security & Data Protection', severity: 'NON-NEGOTIABLE' },
+  { number: 'XI', title: 'Conservative Default', severity: 'MUST' },
 ];
 
 /**

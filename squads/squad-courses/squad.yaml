@@ -129,7 +129,7 @@ agents:
       - create-progress-milestones
 
   - id: production-director
-    name: Lens
+    name: Slate
     file: agents/production-director.md
     role: "Video/audio production planner — scripts, shot lists, recording guides"
     tasks:
