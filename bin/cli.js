@@ -102,7 +102,7 @@ function runRouter() {
   const isReconfigure = args.includes('--reconfigure');
 
   switch (command) {
-    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { logger.error(`${RED}Erro ao instalar:${NC} ${e.message}`); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); }); break;
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { const { formatErrorMessage } = require('./utils/install-errors'); logger.error(formatErrorMessage(e)); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); }); break;
     case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(`${RED}Erro ao atualizar:${NC} ${e.message}`); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); });  break;
     case 'uninstall': {
       const isYes = args.includes('--yes') || args.includes('-y');

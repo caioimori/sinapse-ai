@@ -451,6 +451,82 @@ class WorkflowExecutor {
   }
 
   /**
+   * Loads and validates an arbitrary workflow definition by path and returns it
+   * as a structured handoff for the agent-driven steps it describes.
+   *
+   * This is the GENERIC counterpart to {@link WorkflowExecutor#execute}, which is
+   * specialized for the development-cycle (it reads story metadata and runs the
+   * six hardcoded dev-cycle phases in-process). Handlers that drive multi-agent
+   * workflows — e.g. the brownfield/greenfield handlers running
+   * brownfield-discovery.yaml — use this entry point; the per-step work is then
+   * carried out by the spawned agents the workflow assigns (orchestrate-then-handoff).
+   *
+   * Validation is REAL: a missing path, a missing file, malformed YAML, or an
+   * empty definition each surface as an honest `{ success: false, error }`. The
+   * method never fabricates step output.
+   *
+   * @param {string} workflowPath - Absolute path to the workflow YAML
+   * @param {Object} [options] - Execution context
+   * @param {string} [options.projectRoot] - Project root (defaults to this.projectRoot)
+   * @param {Object} [options.techStack] - Detected tech stack threaded into the returned context
+   * @returns {Promise<Object>} `{ success, workflowPath, workflow, steps, context }`
+   *   on success, or `{ success: false, error }` on a validation failure.
+   */
+  async executeWorkflow(workflowPath, options = {}) {
+    if (!workflowPath || typeof workflowPath !== 'string') {
+      return { success: false, error: 'workflowPath is required and must be a string' };
+    }
+
+    if (!fsSync.existsSync(workflowPath)) {
+      return { success: false, error: `Workflow file not found: ${workflowPath}` };
+    }
+
+    let definition;
+    try {
+      const content = await fs.readFile(workflowPath, 'utf8');
+      definition = yaml.load(content);
+    } catch (error) {
+      return { success: false, error: `Failed to parse workflow ${workflowPath}: ${error.message}` };
+    }
+
+    const workflow = definition && definition.workflow ? definition.workflow : definition;
+    if (!workflow || typeof workflow !== 'object') {
+      return { success: false, error: `Workflow definition is empty: ${workflowPath}` };
+    }
+
+    return {
+      success: true,
+      workflowPath,
+      workflow,
+      steps: WorkflowExecutor._extractStepIds(workflow),
+      context: {
+        projectRoot: options.projectRoot || this.projectRoot,
+        techStack: options.techStack || {},
+      },
+    };
+  }
+
+  /**
+   * Extracts ordered step identifiers from a workflow definition that may model
+   * its steps as a `sequence` list (brownfield/greenfield workflows) or a
+   * `phases` object map (development-cycle).
+   * @param {Object} workflow - The `workflow` node of a parsed definition
+   * @returns {string[]} Ordered step identifiers (empty array when none declared)
+   * @private
+   */
+  static _extractStepIds(workflow) {
+    if (workflow && Array.isArray(workflow.sequence)) {
+      return workflow.sequence.map(
+        (step, index) => (step && (step.step || step.id || step.name)) || `step_${index + 1}`,
+      );
+    }
+    if (workflow && workflow.phases && typeof workflow.phases === 'object') {
+      return Object.keys(workflow.phases);
+    }
+    return [];
+  }
+
+  /**
    * Executes a single workflow phase
    * @param {string} phaseId - Phase identifier
    * @param {string} storyPath - Path to story file

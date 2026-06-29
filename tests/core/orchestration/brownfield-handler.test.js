@@ -219,6 +219,25 @@ describe('BrownfieldHandler', () => {
   });
 
   // ═══════════════════════════════════════════════════════════════════════════════════
+  //                      AC3 CONTRACT: real WorkflowExecutor interface
+  // ═══════════════════════════════════════════════════════════════════════════════════
+
+  describe('AC3 contract: WorkflowExecutor interface', () => {
+    // Guards the runtime bug (AF-20260629 #31) where _executeDiscovery called a
+    // method the real WorkflowExecutor never defined — the unit mock above hid it,
+    // so brownfield discovery silently failed in production (TypeError → caught →
+    // brownfield_error). This asserts the method the handler depends on actually
+    // exists on the real class; it would have FAILED before executeWorkflow() was
+    // implemented.
+    test('real WorkflowExecutor defines executeWorkflow()', () => {
+      const {
+        WorkflowExecutor,
+      } = jest.requireActual('../../../.sinapse-ai/core/orchestration/workflow-executor');
+      expect(typeof WorkflowExecutor.prototype.executeWorkflow).toBe('function');
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════════════
   //                              AC3 Task 3.5: PHASE FAILURE HANDLING
   // ═══════════════════════════════════════════════════════════════════════════════════
 
@@ -476,6 +495,26 @@ describe('BrownfieldHandler', () => {
 
       expect(phaseStartHandler).toHaveBeenCalled();
       expect(phaseCompleteHandler).toHaveBeenCalled();
+    });
+
+    test('_onPhaseError should emit phaseError and surface retry/skip/abort options', async () => {
+      const phaseErrorHandler = jest.fn();
+      handler.on('phaseError', phaseErrorHandler);
+
+      const result = await handler._onPhaseError(
+        'system_documentation',
+        new Error('boom'),
+        {},
+      );
+
+      expect(phaseErrorHandler).toHaveBeenCalled();
+      expect(result.action).toBe('phase_failure');
+      expect(result.phase).toBe('system_documentation');
+      expect(result.options.map((o) => o.action)).toEqual([
+        PhaseFailureAction.RETRY,
+        PhaseFailureAction.SKIP,
+        PhaseFailureAction.ABORT,
+      ]);
     });
   });
 

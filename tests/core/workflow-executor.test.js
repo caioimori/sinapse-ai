@@ -145,6 +145,72 @@ describe('WorkflowExecutor', () => {
   });
 
   // ============================================
+  // executeWorkflow (generic workflow loader) Tests
+  // ============================================
+  describe('executeWorkflow (generic workflow loader)', () => {
+    test('returns an error when workflowPath is missing', async () => {
+      const executor = new WorkflowExecutor(projectRoot, { saveState: false });
+      const result = await executor.executeWorkflow();
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/workflowPath is required/);
+    });
+
+    test('returns an error when the workflow file does not exist', async () => {
+      const executor = new WorkflowExecutor(projectRoot, { saveState: false });
+      const result = await executor.executeWorkflow(path.join(tmpDir, 'missing.yaml'));
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/Workflow file not found/);
+    });
+
+    test('loads a sequence-based workflow and extracts its steps', async () => {
+      const wfPath = path.join(tmpDir, 'discovery.yaml');
+      await fs.writeFile(
+        wfPath,
+        [
+          'workflow:',
+          '  id: demo-discovery',
+          '  sequence:',
+          '    - step: system_documentation',
+          '    - step: database_documentation',
+          '',
+        ].join('\n'),
+      );
+
+      const executor = new WorkflowExecutor(projectRoot, { saveState: false });
+      const result = await executor.executeWorkflow(wfPath, { techStack: { framework: 'React' } });
+
+      expect(result.success).toBe(true);
+      expect(result.steps).toEqual(['system_documentation', 'database_documentation']);
+      expect(result.context.techStack).toEqual({ framework: 'React' });
+    });
+
+    test('extracts steps from a phases-based (object map) workflow', async () => {
+      const wfPath = path.join(tmpDir, 'phased.yaml');
+      await fs.writeFile(
+        wfPath,
+        ['workflow:', '  id: demo-phased', '  phases:', '    1_intake: {}', '    2_review: {}', ''].join('\n'),
+      );
+
+      const executor = new WorkflowExecutor(projectRoot, { saveState: false });
+      const result = await executor.executeWorkflow(wfPath);
+
+      expect(result.success).toBe(true);
+      expect(result.steps).toEqual(['1_intake', '2_review']);
+    });
+
+    test('reports an empty definition as a failure', async () => {
+      const wfPath = path.join(tmpDir, 'empty.yaml');
+      await fs.writeFile(wfPath, '# just a comment\n');
+
+      const executor = new WorkflowExecutor(projectRoot, { saveState: false });
+      const result = await executor.executeWorkflow(wfPath);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/empty/i);
+    });
+  });
+
+  // ============================================
   // Config Loading Tests
   // ============================================
   describe('Config Loading', () => {

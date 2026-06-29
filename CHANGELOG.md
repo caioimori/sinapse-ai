@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Bug Fixes
+
+- **cross-platform** — hardening Windows/macOS: exec bits, spawn de `.cmd` shims, shell pipelines e gate de CI pré-merge (#294).
+- **cross-platform** — hardening Windows/macOS (ondas 2+3): statusline git, normalização de paths, BOM em config e EPERM por file-locking (#295).
+- **cross-platform** — hardening onda 3: retry de file-locking no install/migração de MCP, BOM no config global e CRLF no doctor (#296).
+- **orchestration** — `BrownfieldHandler` chamava um método inexistente no `WorkflowExecutor`, fazendo a discovery brownfield falhar em silêncio; `executeWorkflow()` implementado e coberto por teste de contrato.
+- **installer** — falha de `install` agora exibe mensagem de erro classificada e acionável (permissão, disco, rede, etc.) em vez de texto genérico.
+
+### Documentation
+
+- **readme** — corrige a nota de `npm install`: o setup roda explicitamente via `npx sinapse-ai install` (ou `npm run setup`), não mais por um postinstall automático.
+
+### Maintenance
+
+- **ci** — release notes do workflow de publish apontam para o repositório correto (`caioimori/sinapse-ai`).
+- **audit** — auditoria clínica pré-divulgação em andamento: correções de runtime, instalador, documentação e precisão de métricas.
+
 ## [1.17.0] — 2026-06-27 — 🗺️ Atlas auto-documentado + motor doc-first religado + sweep de segurança
 
 > Minor release. Atualização segura via `npx sinapse-ai update`.
