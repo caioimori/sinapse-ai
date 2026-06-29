@@ -103,4 +103,4 @@ squads/{squad-name}/
 
 ---
 
-*172 agentes especializados. 1.200 tasks. 13 hooks ativos. 10 artigos constitucionais. Tudo direto no terminal.*
+*172 agentes especializados. 1.200 tasks. 17 hooks ativos. 11 artigos constitucionais. Tudo direto no terminal.*

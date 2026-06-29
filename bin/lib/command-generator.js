@@ -9,9 +9,34 @@
 const fs = require('fs');
 const path = require('path');
 
-const { SINAPSE_HOME, CLAUDE_COMMANDS_DIR } = require('./constants');
+const { SINAPSE_HOME, CLAUDE_COMMANDS_DIR, ROOT } = require('./constants');
 const { extractAgentMeta } = require('./squads');
 const { toForwardSlash } = require('./fs-utils');
+
+// Framework "core" agents (developer, architect, quality-gate, devops, …) live
+// OUTSIDE the squads/ tree, under .sinapse-ai/development/agents/*.md. `scripts/
+// sync-counts.js` calls these `frameworkAgents`; the canonical ecosystem total is
+// `squad agents + core agents` (160 + 12 = 172). We count them from the SAME source
+// sync-counts uses so the master-stub headline can never drift from README/persona
+// (Constitution Article VII). Fails open to 0 if the dir is unavailable.
+const CORE_AGENTS_DIR = path.join(ROOT, '.sinapse-ai', 'development', 'agents');
+
+function countCoreAgents(dir = CORE_AGENTS_DIR) {
+  try {
+    return fs
+      .readdirSync(dir, { withFileTypes: true })
+      .filter(
+        (d) =>
+          d.isFile() &&
+          d.name.endsWith('.md') &&
+          d.name !== 'MEMORY.md' &&
+          d.name !== 'README.md' &&
+          !d.name.startsWith('_'),
+      ).length;
+  } catch {
+    return 0;
+  }
+}
 
 /**
  * Rich Imperator stub for the master entry points (@sinapse, @snps, @sinapse-orqx,
@@ -22,7 +47,10 @@ const { toForwardSlash } = require('./fs-utils');
  */
 function generateMasterStub(agentId, personaPath, squadPath, squads) {
   const squadCount = squads.length;
-  const agentCount = squads.reduce((a, s) => a + (s.agents || 0), 0);
+  // Squad specialists + framework core agents = full ecosystem (160 + 12 = 172).
+  // Excluding core here was the Article VII drift: the stub showed 160 while
+  // README/persona declared 172.
+  const agentCount = squads.reduce((a, s) => a + (s.agents || 0), 0) + countCoreAgents();
   return `---
 name: ${agentId}
 description: "Imperator — Sinapse Master: supreme orchestrator of ${squadCount} squads / ${agentCount} agents. Diagnoses every briefing and auto-generates an orchestration plan."
@@ -258,4 +286,5 @@ module.exports = {
   generateCommandMd,
   generateMasterStub,
   regenerateAgentCommands,
+  countCoreAgents,
 };

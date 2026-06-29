@@ -55,6 +55,7 @@ Agentes sao personas especializadas com expertise, comandos e responsabilidades 
 
 - **12 agentes core** cobrem o ciclo completo de desenvolvimento de software
 - **160 agentes em 17 squads** expandem para dominios especializados
+- **172 agentes no total** (12 core + 160 squad) compoem o ecossistema completo
 - Cada agente tem persona (nome, estilo), comandos (`*help`, `*task`) e dependencias
 
 Ativacao: `@agent-name` ou `/SINAPSE:agents:agent-name`

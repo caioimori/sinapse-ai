@@ -148,7 +148,7 @@ Apenas `@devops` (Pipeline) pode executar `git push`. O hook `enforce-git-push-a
 
 ## Arquitetura de Hooks
 
-O SINAPSE-AI usa 19 hooks Claude Code organizados por evento de trigger:
+O SINAPSE-AI usa 17 hooks Claude Code organizados por evento de trigger:
 
 ### Mapa de Eventos dos Hooks
 
