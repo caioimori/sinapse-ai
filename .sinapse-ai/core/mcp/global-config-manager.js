@@ -181,7 +181,10 @@ function readGlobalConfig() {
   }
 
   try {
-    const content = fs.readFileSync(configPath, 'utf8');
+    // Strip a leading BOM: a global-config.json saved by a Windows editor
+    // (Notepad) starts with U+FEFF and would make JSON.parse throw, silently
+    // dropping the user's MCP global config via the catch below.
+    const content = fs.readFileSync(configPath, 'utf8').replace(/^\uFEFF/, '');
     return JSON.parse(content);
   } catch (error) {
     console.error(`Error reading global config: ${error.message}`);
