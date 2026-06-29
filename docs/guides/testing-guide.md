@@ -1,6 +1,6 @@
 # SINAPSE Testing Guide
 
-> **EN** | [PT](../pt/guides/testing-guide.md) | [ES](../es/guides/testing-guide.md)
+> **EN** | [PT](../pt/guides/testing-guide.md)
 
 ---
 

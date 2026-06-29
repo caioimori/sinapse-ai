@@ -6,7 +6,7 @@
 
 # Guia de Desinstalação
 
-> 🌐 [EN](../uninstallation.md) | **PT** | [ES](../es/uninstallation.md)
+> 🌐 [EN](../installation/uninstallation.md) | **PT**
 
 ---
 

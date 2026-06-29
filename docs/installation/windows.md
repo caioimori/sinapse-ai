@@ -1,6 +1,6 @@
 # Windows Installation Guide for SINAPSE
 
-> 🌐 [EN](windows.md) | [PT](../pt/installation/windows.md) | [ES](../es/installation/windows.md)
+> 🌐 [EN](windows.md) | [PT](../pt/installation/windows.md)
 
 ---
 
@@ -398,7 +398,7 @@ npx github:caioimori/sinapse-ai install
 
 ## Uninstallation
 
-See the complete [Uninstallation Guide](../uninstallation.md) for detailed steps.
+See the complete [Uninstallation Guide](./uninstallation.md) for detailed steps.
 
 Quick uninstall via PowerShell:
 

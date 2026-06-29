@@ -6,7 +6,7 @@
 
 # Template Engine v2.0
 
-> 🌐 [EN](../../guides/template-engine-v2.md) | **PT** | [ES](../../es/guides/template-engine-v2.md)
+> 🌐 [EN](../../guides/template-engine-v2.md) | **PT**
 
 ---
 

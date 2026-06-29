@@ -1,6 +1,6 @@
 # SINAPSE Git Workflow Guide
 
-> 🌐 **EN** | [PT](./pt/git-workflow-guide.md) | [ES](./es/git-workflow-guide.md)
+> 🌐 **EN** | [PT](./pt/git-workflow-guide.md)
 
 ---
 

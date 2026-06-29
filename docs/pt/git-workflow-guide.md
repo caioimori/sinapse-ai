@@ -6,7 +6,7 @@
 
 # Guia de Workflow Git do SINAPSE
 
-> 🌐 [EN](../git-workflow-guide.md) | **PT** | [ES](../es/git-workflow-guide.md)
+> 🌐 [EN](../guides/git-workflow-guide.md) | **PT**
 
 ---
 

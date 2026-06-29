@@ -2,7 +2,7 @@
 
 # Registro de Alteracoes
 
-> 🌐 [EN](../CHANGELOG.md) | **PT** | [ES](../es/CHANGELOG.md)
+> 🌐 [EN](../../CHANGELOG.md) | **PT**
 
 ---
 

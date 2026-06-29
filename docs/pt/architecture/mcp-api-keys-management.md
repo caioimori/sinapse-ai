@@ -1,6 +1,6 @@
 # Gerenciamento de Chaves de API MCP
 
-> 🌐 [EN](../../architecture/mcp-api-keys-management.md) | **PT** | [ES](../../es/architecture/mcp-api-keys-management.md)
+> 🌐 **PT**
 
 ---
 
@@ -89,8 +89,8 @@ Para desenvolvimento local ou configurações sem Docker:
 
 ```bash
 # ~/.zshrc ou ~/.bashrc
-export EXA_API_KEY="sua-chave-api-exa"
-export APIFY_API_TOKEN="seu-token-apify"
+export EXA_API_KEY="<sua-chave-api-exa>"
+export APIFY_API_TOKEN="<seu-token-apify>"
 ```
 
 ### Método 3: Arquivo .env do Projeto

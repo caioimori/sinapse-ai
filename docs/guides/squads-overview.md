@@ -183,19 +183,16 @@ tags:
 
 ### Installing Squads
 
-```bash
-# List available squads
-sinapse squads list
+Squads live in the project's `squads/` directory. Each squad is a self-contained
+folder with its own agents, tasks, and configuration, and is picked up
+automatically by the framework — no install step is required.
 
-# Download from official repository
-*download-squad etl-squad
+- **Add a squad** — place its folder under `squads/`.
+- **Create a squad** — use the `squad-creator` agent to scaffold a new one.
 
-# Download specific version
-*download-squad etl-squad@2.0.0
-
-# List local squads
-*list-squads
-```
+> **Roadmap:** remote squad distribution — browsing, downloading, and publishing
+> squads through a shared registry (Levels 2–3 above) — is planned but not yet
+> available. For now, squads are managed locally in `squads/`.
 
 ---
 
@@ -259,11 +256,11 @@ Use semantic versioning:
 | `*create-squad {name} --from-design`     | Create from design blueprint    |
 | `*validate-squad {name}`                 | Validate squad structure        |
 | `*list-squads`                           | List all local squads           |
-| `*download-squad {name}`                 | Download from repository        |
+| `*download-squad {name}`                 | Download from repository (roadmap) |
 | `*design-squad`                          | Design squad from documentation |
 | `*analyze-squad {name}`                  | Analyze squad structure         |
 | `*extend-squad {name}`                   | Add components to squad         |
-| `*publish-squad {path}`                  | Publish to repository           |
+| `*publish-squad {path}`                  | Publish to repository (roadmap) |
 
 ---
 

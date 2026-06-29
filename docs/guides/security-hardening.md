@@ -1,6 +1,6 @@
 # SINAPSE Security Hardening Guide
 
-> **EN** | [PT](../pt/guides/security-hardening.md) | [ES](../es/guides/security-hardening.md)
+> **EN** | [PT](../pt/guides/security-hardening.md)
 
 ---
 

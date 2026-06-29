@@ -6,7 +6,7 @@
 
 # Guia de Solução de Problemas do SINAPSE
 
-> 🌐 [EN](../troubleshooting.md) | **PT** | [ES](../es/troubleshooting.md)
+> 🌐 [EN](../troubleshooting.md) | **PT**
 
 ---
 

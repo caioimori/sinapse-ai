@@ -6,7 +6,7 @@
 
 # Guia do Sistema de Quality Gates SINAPSE
 
-> 🌐 [EN](../../guides/quality-gates.md) | **PT** | [ES](../../es/guides/quality-gates.md)
+> 🌐 [EN](../../guides/quality-gates.md) | **PT**
 
 ---
 

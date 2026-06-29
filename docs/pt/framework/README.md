@@ -6,7 +6,7 @@
 
 # Documentação do Framework SINAPSE
 
-> 🌐 [EN](../../framework/README.md) | **PT** | [ES](../../es/framework/README.md)
+> 🌐 [EN](../../framework/README.md) | **PT**
 
 ---
 

@@ -4,7 +4,7 @@
 > **Última Atualização:** 2026-01-29
 > **Status:** Padrão Oficial do Framework
 >
-> **PT** | [EN](../architecture/ade-architecture.md) | [ES](../es/architecture/ade-architecture.md)
+> **PT** | [EN](../architecture/ade-architecture.md)
 
 ---
 

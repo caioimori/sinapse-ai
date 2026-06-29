@@ -2,7 +2,7 @@
 
 # Especificação de Auto-Recuperação do HCS
 
-> 🌐 [EN](../../architecture/hcs-self-healing-spec.md) | **PT** | [ES](../../es/architecture/hcs-self-healing-spec.md)
+> 🌐 **PT**
 
 ---
 

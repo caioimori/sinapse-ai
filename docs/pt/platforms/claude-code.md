@@ -1,6 +1,6 @@
 # Guia SINAPSE para Claude Code
 
-> 🌐 [EN](../../platforms/claude-code.md) | **PT** | [ES](../../es/platforms/claude-code.md)
+> 🌐 **PT**
 
 ---
 
@@ -92,7 +92,7 @@ winget install Anthropic.ClaudeCode
 claude login
 
 # Ou definir a chave API diretamente
-export ANTHROPIC_API_KEY="sua-chave-api"
+export ANTHROPIC_API_KEY="<sua-chave-api>"
 ```
 
 ### Passo 3: Instalar o SINAPSE

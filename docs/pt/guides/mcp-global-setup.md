@@ -6,7 +6,7 @@
 
 # Guia de Configuração Global MCP do SINAPSE
 
-> 🌐 [EN](../../guides/mcp-global-setup.md) | **PT** | [ES](../../es/guides/mcp-global-setup.md)
+> 🌐 [EN](../../guides/mcp-global-setup.md) | **PT**
 
 ---
 

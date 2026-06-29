@@ -391,7 +391,7 @@ cat .sinapse-ai/development/workflows/{name}.yaml
 
 ## Documentacao Relacionada
 
-- [Diagrama de Workflow HybridOps](./hybridOps/workflow-diagram.md) - Padroes de colaboracao humano-agent
+- Diagrama de Workflow HybridOps - Padroes de colaboracao humano-agent
 - [Guia de Referencia de Agents](../agent-reference-guide.md) - Agents disponiveis e suas capacidades
 - [Desenvolvimento Orientado a Story](./user-guide.md#story-driven-development) - O workflow de story
 

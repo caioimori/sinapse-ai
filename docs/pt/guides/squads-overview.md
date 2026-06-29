@@ -189,19 +189,17 @@ tags:
 
 ### Instalando Squads
 
-```bash
-# Listar squads disponíveis
-sinapse squads list
+Os squads vivem no diretório `squads/` do projeto. Cada squad é uma pasta
+autocontida com seus próprios agentes, tasks e configuração, e é reconhecido
+automaticamente pelo framework — não há etapa de instalação.
 
-# Baixar do repositório oficial
-*download-squad etl-squad
+- **Adicionar um squad** — coloque a pasta dele em `squads/`.
+- **Criar um squad** — use o agente `squad-creator` para gerar um novo.
 
-# Baixar versão específica
-*download-squad etl-squad@2.0.0
-
-# Listar squads locais
-*list-squads
-```
+> **Roadmap:** a distribuição remota de squads — navegar, baixar e publicar
+> squads por um registro compartilhado (Níveis 2–3 acima) — está planejada, mas
+> ainda não disponível. Por enquanto, os squads são gerenciados localmente em
+> `squads/`.
 
 ---
 
@@ -265,11 +263,11 @@ Use versionamento semântico:
 | `*create-squad {name} --from-design`     | Criar a partir de blueprint de design   |
 | `*validate-squad {name}`                 | Validar estrutura do squad              |
 | `*list-squads`                           | Listar todos os squads locais           |
-| `*download-squad {name}`                 | Baixar do repositório                   |
+| `*download-squad {name}`                 | Baixar do repositório (roadmap)         |
 | `*design-squad`                          | Projetar squad a partir de documentação |
 | `*analyze-squad {name}`                  | Analisar estrutura do squad             |
 | `*extend-squad {name}`                   | Adicionar componentes ao squad          |
-| `*publish-squad {path}`                  | Publicar no repositório                 |
+| `*publish-squad {path}`                  | Publicar no repositório (roadmap)       |
 
 ---
 

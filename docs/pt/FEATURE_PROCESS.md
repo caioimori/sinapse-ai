@@ -6,7 +6,7 @@
 
 # Processo de Solicitação de Funcionalidades
 
-> 🌐 [EN](../feature-process.md) | **PT** | [ES](../es/feature-process.md)
+> 🌐 [EN](../framework/feature-process.md) | **PT**
 
 ---
 
@@ -96,4 +96,4 @@ Pergunte no GitHub Discussions ou Discord.
 
 ---
 
-_Veja também: [Community Handbook](../../COMMUNITY.md) | [Contributing Guide](../../CONTRIBUTING.md)_
+_Veja também: Community Handbook | [Contributing Guide](../../CONTRIBUTING.md)_

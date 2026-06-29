@@ -6,7 +6,7 @@
 
 # Funcionalidade de Status do Projeto - Guia do Usuário
 
-> 🌐 [EN](../../guides/project-status-feature.md) | **PT** | [ES](../../es/guides/project-status-feature.md)
+> 🌐 [EN](../../guides/project-status-feature.md) | **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Guia de Instalação Windows para SINAPSE
 
-> 🌐 [EN](../../installation/windows.md) | **PT** | [ES](../../es/installation/windows.md)
+> 🌐 [EN](../../installation/windows.md) | **PT**
 
 ---
 

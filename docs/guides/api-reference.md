@@ -1,6 +1,6 @@
 # SINAPSE API Reference
 
-> **EN** | [PT](../pt/guides/api-reference.md) | [ES](../es/guides/api-reference.md)
+> **EN** | [PT](../pt/guides/api-reference.md)
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Como Lançar uma Nova Versão
 
-> 🌐 [EN](../versioning-and-releases.md) | **PT** | [ES](../es/versioning-and-releases.md)
+> 🌐 [EN](../framework/versioning-and-releases.md) | **PT**
 
 ---
 

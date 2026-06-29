@@ -1,6 +1,6 @@
 # Guia do Sistema de Greeting Contextual
 
-> **EN** | [PT](../pt/guides/contextual-greeting-system-guide.md) | [ES](../es/guides/contextual-greeting-system-guide.md)
+> **EN** | [PT](../pt/guides/contextual-greeting-system-guide.md)
 
 ---
 

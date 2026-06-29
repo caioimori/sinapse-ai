@@ -368,7 +368,7 @@ tasks:
 ### Recursos para Squads
 
 - [Guia de Squads](docs/guides/squads-guide.md) -- Documentacao completa
-- [Template de Squad](templates/squad/) -- Comece de um template funcional
+- [Template de Squad](.sinapse-ai/development/templates/squad-template/) -- Comece de um template funcional
 - [Discussoes de Squads](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas) -- Compartilhe ideias
 
 ---
@@ -685,7 +685,7 @@ git submodule update --init pro
 ## Recursos Adicionais
 
 - [Guia de Squads](docs/guides/squads-guide.md) -- Criar equipes de agentes
-- [Arquitetura](docs/architecture/) -- Design do sistema
+- [Arquitetura](docs/framework/core-architecture.md) -- Design do sistema
 
 ---
 
