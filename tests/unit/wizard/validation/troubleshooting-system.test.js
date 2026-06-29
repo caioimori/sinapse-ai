@@ -205,7 +205,7 @@ describe('Troubleshooting System', () => {
 
       // Then
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('docs.SinapseAI.com'),
+        expect.stringContaining('github.com/caioimori/sinapse-ai'),
       );
     });
 

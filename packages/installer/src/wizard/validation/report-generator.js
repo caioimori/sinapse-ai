@@ -6,6 +6,7 @@
  */
 
 const chalk = require('chalk');
+const { t, tf } = require('../i18n');
 
 /**
  * Generate formatted validation report
@@ -19,18 +20,18 @@ async function generateReport(validationResults) {
   // Header
   lines.push('');
   lines.push(chalk.bold.cyan('═══════════════════════════════════════════════'));
-  lines.push(chalk.bold.cyan('🔍 Installation Validation Report'));
+  lines.push(chalk.bold.cyan('🔍 ' + t('reportTitle')));
   lines.push(chalk.bold.cyan('═══════════════════════════════════════════════'));
   lines.push('');
 
   // File Structure Section
   if (validationResults.components.files) {
     const fileResults = validationResults.components.files;
-    lines.push(formatComponentSection('IDE Configuration', fileResults, 'IDE Config'));
-    lines.push(formatComponentSection('Environment Configuration', fileResults, 'Environment'));
-    lines.push(formatComponentSection('Core Configuration', fileResults, 'Core Config'));
+    lines.push(formatComponentSection(t('reportIdeConfig'), fileResults, 'IDE Config'));
+    lines.push(formatComponentSection(t('reportEnvConfig'), fileResults, 'Environment'));
+    lines.push(formatComponentSection(t('reportCoreConfig'), fileResults, 'Core Config'));
     if (fileResults.checks.some((c) => c.component === 'MCP Config')) {
-      lines.push(formatComponentSection('MCP Configuration', fileResults, 'MCP Config'));
+      lines.push(formatComponentSection(t('reportMcpConfig'), fileResults, 'MCP Config'));
     }
   }
 
@@ -56,11 +57,11 @@ async function generateReport(validationResults) {
   );
   if (importantWarnings.length > 0) {
     lines.push('');
-    lines.push(chalk.bold.yellow(`⚠️  Warnings (${importantWarnings.length}):`));
+    lines.push(chalk.bold.yellow('⚠️  ' + tf('reportWarnings', { count: importantWarnings.length })));
     importantWarnings.forEach((warning) => {
       lines.push(chalk.yellow(`  - ${warning.message}`));
       if (warning.solution) {
-        lines.push(chalk.dim(`    Solution: ${warning.solution}`));
+        lines.push(chalk.dim('    ' + tf('reportSolution', { solution: warning.solution })));
       }
     });
   }
@@ -68,11 +69,11 @@ async function generateReport(validationResults) {
   // Errors Section
   if (validationResults.errors.length > 0) {
     lines.push('');
-    lines.push(chalk.bold.red(`❌ Errors (${validationResults.errors.length}):`));
+    lines.push(chalk.bold.red('❌ ' + tf('reportErrors', { count: validationResults.errors.length })));
     validationResults.errors.forEach((error) => {
       lines.push(chalk.red(`  - ${error.message}`));
       if (error.solution) {
-        lines.push(chalk.dim(`    Solution: ${error.solution}`));
+        lines.push(chalk.dim('    ' + tf('reportSolution', { solution: error.solution })));
       }
     });
   }
@@ -83,10 +84,10 @@ async function generateReport(validationResults) {
     validationResults.overallStatus === 'failed'
   ) {
     lines.push('');
-    lines.push(chalk.bold.red('❌ Next Steps:'));
-    lines.push(chalk.red('  1. Review errors above'));
-    lines.push(chalk.red('  2. Fix critical issues'));
-    lines.push(chalk.red('  3. Re-run installation: npx sinapse-ai@latest install'));
+    lines.push(chalk.bold.red('❌ ' + t('reportNextSteps')));
+    lines.push(chalk.red('  ' + t('reportNextStep1')));
+    lines.push(chalk.red('  ' + t('reportNextStep2')));
+    lines.push(chalk.red('  ' + t('reportNextStep3')));
   }
   // Success cases show completion message in showCompletion()
 
@@ -109,7 +110,7 @@ function formatComponentSection(title, componentResults, componentName) {
   const allSuccess = passed === total;
   const icon = allSuccess ? chalk.green('✅') : chalk.yellow('⚠️');
 
-  const lines = [`${icon} ${chalk.bold(title)}: ${passed}/${total} checks passed`];
+  const lines = [`${icon} ${chalk.bold(title)}: ${tf('reportChecksPassed', { passed, total })}`];
 
   // Only show individual checks if there are failures
   if (!allSuccess) {
@@ -134,7 +135,7 @@ function formatMCPSection(mcpResults) {
   const healthChecks = mcpResults.healthChecks;
 
   if (!healthChecks || healthChecks.length === 0) {
-    return chalk.dim('  MCPs not installed (skipped)\n');
+    return chalk.dim('  ' + t('reportMcpsNotInstalled') + '\n');
   }
 
   const totalMCPs = healthChecks.length;
@@ -150,7 +151,7 @@ function formatMCPSection(mcpResults) {
         : chalk.red('❌');
 
   const lines = [
-    `${icon} ${chalk.bold('MCP Installation')} (${healthyMCPs}/${totalMCPs} healthy${warningMCPs > 0 ? `, ${warningMCPs} warnings` : ''}${failedMCPs > 0 ? `, ${failedMCPs} failed` : ''})`,
+    `${icon} ${chalk.bold(t('reportMcpInstallation'))} (${healthyMCPs}/${totalMCPs} ${t('reportMcpHealthy')}${warningMCPs > 0 ? `, ${warningMCPs} ${t('reportMcpWarnings')}` : ''}${failedMCPs > 0 ? `, ${failedMCPs} ${t('reportMcpFailed')}` : ''})`,
   ];
 
   healthChecks.forEach((health) => {
@@ -198,7 +199,7 @@ function formatDependenciesSection(depsResults) {
   );
   const icon = allSuccess ? chalk.green('✅') : chalk.yellow('⚠️');
 
-  const lines = [`${icon} ${chalk.bold('Dependencies')}`];
+  const lines = [`${icon} ${chalk.bold(t('reportDependencies'))}`];
 
   depsResults.checks.forEach((check) => {
     let statusIcon, statusText;
@@ -237,20 +238,20 @@ function formatOverallStatus(validationResults) {
     case 'success':
     case 'warning':
       // Treat warnings as success - they're just informational
-      return chalk.bold.green('Overall Status: ✅ All checks passed!');
+      return chalk.bold.green(`${t('reportOverallStatus')}: ✅ ${t('reportAllPassed')}`);
 
     case 'partial':
       return chalk.bold.yellow(
-        `Overall Status: ⚠️  PARTIAL SUCCESS (${errorCount} issue${errorCount !== 1 ? 's' : ''} to review)`,
+        `${t('reportOverallStatus')}: ⚠️  ${tf('reportPartialSuccess', { count: errorCount })}`,
       );
 
     case 'failed':
       return chalk.bold.red(
-        `Overall Status: ❌ FAILED (${errorCount} error${errorCount !== 1 ? 's' : ''})`,
+        `${t('reportOverallStatus')}: ❌ ${tf('reportFailedStatus', { count: errorCount })}`,
       );
 
     default:
-      return chalk.bold.gray('Overall Status: ❓ UNKNOWN');
+      return chalk.bold.gray(`${t('reportOverallStatus')}: ❓ ${t('reportUnknownStatus')}`);
   }
 }
 

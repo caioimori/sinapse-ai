@@ -8,6 +8,12 @@
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 
+// Canonical repo + docs locations. The legacy `docs.SinapseAI.com` domain never
+// existed; every help link points at real, shipped docs in the GitHub repo
+// (see package.json "bugs"/"repository").
+const REPO_URL = 'https://github.com/caioimori/sinapse-ai';
+const DOCS_BASE = `${REPO_URL}/blob/main/docs`;
+
 /**
  * Troubleshooting database
  * Maps error codes to detailed troubleshooting information
@@ -25,7 +31,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Manually create .env from template: cp .env.example .env',
       'Check file permissions in project directory',
     ],
-    docs: 'https://docs.SinapseAI.com/installation/environment',
+    docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'critical',
   },
 
@@ -41,7 +47,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Check .sinapse-ai directory exists',
       'Manually create from template',
     ],
-    docs: 'https://docs.SinapseAI.com/configuration/core-config',
+    docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'high',
   },
 
@@ -60,7 +66,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Check MCP service status',
       'Verify npx can access package: npx -y [package-name] --version',
     ],
-    docs: 'https://docs.SinapseAI.com/mcps/troubleshooting',
+    docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'medium',
   },
 
@@ -79,7 +85,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Configure API keys in .env',
       'Delete .mcp.json and reinstall',
     ],
-    docs: 'https://docs.SinapseAI.com/mcps/troubleshooting',
+    docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'high',
   },
 
@@ -95,7 +101,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Copy from template: .env, node_modules, *.key, *.pem',
       'Initialize git if needed: git init',
     ],
-    docs: 'https://docs.SinapseAI.com/security/gitignore',
+    docs: `${DOCS_BASE}/security/security-best-practices.md`,
     priority: 'high',
   },
 
@@ -114,7 +120,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Try different package manager: yarn or pnpm',
       'Check disk space: df -h (Unix) or dir (Windows)',
     ],
-    docs: 'https://docs.SinapseAI.com/installation/dependencies',
+    docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'critical',
   },
 
@@ -131,7 +137,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Reinstall: npm install',
       'Try clean install: npm ci',
     ],
-    docs: 'https://docs.SinapseAI.com/installation/dependencies',
+    docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'high',
   },
 
@@ -161,7 +167,7 @@ const TROUBLESHOOTING_DATABASE = {
       'Run: chmod 600 .env',
       'Verify: ls -la .env',
     ],
-    docs: 'https://docs.SinapseAI.com/security/file-permissions',
+    docs: `${DOCS_BASE}/security/security-best-practices.md`,
     priority: 'medium',
   },
 };
@@ -244,15 +250,15 @@ async function offerTroubleshooting(errors) {
   if (openDocs) {
     console.log('');
     console.log(chalk.green('📚 Documentation:'));
-    console.log(chalk.green('  https://docs.SinapseAI.com/troubleshooting'));
+    console.log(chalk.green(`  ${DOCS_BASE}/troubleshooting.md`));
     console.log('');
   }
 
   // Offer support contact
   console.log('');
   console.log(chalk.bold('💬 Need Help?'));
-  console.log(chalk.dim('  - GitHub Issues: https://github.com/caioimori/sinapse/issues'));
-  console.log(chalk.dim('  - Documentation: https://docs.SinapseAI.com'));
+  console.log(chalk.dim(`  - GitHub Issues: ${REPO_URL}/issues`));
+  console.log(chalk.dim(`  - Documentation: ${DOCS_BASE}/troubleshooting.md`));
   console.log('');
 }
 
