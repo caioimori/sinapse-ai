@@ -940,9 +940,9 @@ files:
     type: core
     size: 8129
   - path: core/orchestration/brownfield-handler.js
-    hash: sha256:8ef9a6d27f9d1d4145fbbfb8657691582aaf0c348278edd638d55fd139edddd4
+    hash: sha256:d4ad190353fc751e874bad5b3013137dcccfc84100edd6cead80c8fa5e83af11
     type: core
-    size: 28608
+    size: 28745
   - path: core/orchestration/build-command.js
     hash: sha256:b758cfc7c0fad3d0d875460630b9ac7b2c968b82cdec14e9885e0744ee7012d0
     type: core
@@ -1080,9 +1080,9 @@ files:
     type: core
     size: 32247
   - path: core/orchestration/workflow-executor.js
-    hash: sha256:8da67cc080ffaf4c2f2fc724d700ecb27ca05430ef0cc50356d78979da9f85a6
+    hash: sha256:ba0fb3cdc3c6797c2f48178cb8aedbe4dae8eca865bdd20bd1abe559145addeb
     type: core
-    size: 38128
+    size: 41353
   - path: core/orchestration/workflow-orchestrator.js
     hash: sha256:6e97eec88c8261f15bad79c47b0eafcfe39fbda5c837e156fe803802c3a1c18f
     type: core
@@ -1384,9 +1384,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:c1c7883e9d4cbd9ce96cc575ca9ee5fa1a298c4cf75fdabd3cdcf0609190416f
+    hash: sha256:f66c792c6d210949e882ef9bfabbc4fac340a6397ccf39d8e3b281313b83d4db
     type: data
-    size: 554944
+    size: 554978
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
