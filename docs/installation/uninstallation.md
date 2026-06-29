@@ -1,6 +1,6 @@
 # Uninstallation Guide
 
-> 🌐 **EN** | [PT](./pt/uninstallation.md) | [ES](./es/uninstallation.md)
+> 🌐 **EN** | [PT](./pt/uninstallation.md)
 
 ---
 

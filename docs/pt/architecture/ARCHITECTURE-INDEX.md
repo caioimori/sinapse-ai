@@ -1,6 +1,6 @@
 # SINAPSE Architecture Documentation Index
 
-> 🌐 [EN](../../architecture/ARCHITECTURE-INDEX.md) | **PT** | [ES](../../es/architecture/ARCHITECTURE-INDEX.md)
+> 🌐 **PT**
 
 ---
 
@@ -41,7 +41,7 @@ docs/architecture/
 |----------|-------------|--------|
 | [High-Level Architecture](./high-level-architecture.md) | Overview of SINAPSE v4 architecture | ✅ Current |
 | [Module System](./module-system.md) | 4-module modular architecture | ✅ Current |
-| [Memory Layer](./memory-layer.md) | Memory system architecture | ✅ Current |
+| Memory Layer | Memory system architecture | ✅ Current |
 
 ### MCP & Integrations
 

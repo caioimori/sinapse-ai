@@ -1,6 +1,6 @@
 # Guia de Início Rápido SINAPSE v4
 
-> 🌐 [EN](../../installation/v4-quick-start.md) | **PT** | [ES](../../es/installation/v4-quick-start.md)
+> 🌐 [EN](../../installation/v4-quick-start.md) | **PT**
 
 ---
 

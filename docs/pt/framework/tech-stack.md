@@ -6,7 +6,7 @@
 
 # Stack de Tecnologia SINAPSE
 
-> 🌐 [EN](../../framework/tech-stack.md) | **PT** | [ES](../../es/framework/tech-stack.md)
+> 🌐 [EN](../../framework/tech-stack.md) | **PT**
 
 ---
 

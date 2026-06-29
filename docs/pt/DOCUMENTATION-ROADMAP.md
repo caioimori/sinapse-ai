@@ -6,7 +6,7 @@
 
 # Roadmap de Documentação SINAPSE
 
-> 🌐 [EN](../DOCUMENTATION-ROADMAP.md) | **PT**
+> 🌐 **PT**
 
 ---
 

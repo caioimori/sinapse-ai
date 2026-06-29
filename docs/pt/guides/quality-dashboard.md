@@ -6,7 +6,7 @@
 
 # Guia do Dashboard de Quality Gates
 
-> 🌐 [EN](../../guides/quality-dashboard.md) | **PT** | [ES](../../es/guides/quality-dashboard.md)
+> 🌐 [EN](../../guides/quality-dashboard.md) | **PT**
 
 ---
 

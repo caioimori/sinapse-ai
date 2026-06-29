@@ -419,7 +419,7 @@ Use docker-gateway apenas quando:
 - [Guia Desktop Commander MCP](./guides/mcp/desktop-commander.md)
 - [Guia de Configuração MCP Global](./guides/mcp-global-setup.md)
 - [Diagramas de Arquitetura MCP](./architecture/mcp-system-diagrams.md)
-- [Agente DevOps](../.sinapse-ai/development/agents/devops.md)
+- [Agente DevOps](../../.sinapse-ai/development/agents/devops.md)
 
 ---
 

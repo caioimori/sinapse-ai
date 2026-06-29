@@ -6,7 +6,7 @@
 
 # Documentação de Instalação do SINAPSE
 
-> 🌐 [EN](../../installation/README.md) | **PT** | [ES](../../es/installation/README.md)
+> 🌐 [EN](../../installation/README.md) | **PT**
 
 ---
 

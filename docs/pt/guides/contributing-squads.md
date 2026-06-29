@@ -6,7 +6,7 @@
 
 # Guia de Contribuição de Squads
 
-> 🌐 [EN](../../guides/contributing-squads.md) | **PT** | [ES](../../es/guides/contributing-squads.md)
+> 🌐 [EN](../../guides/contributing-squads.md) | **PT**
 
 ---
 

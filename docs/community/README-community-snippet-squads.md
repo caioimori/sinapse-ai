@@ -1,6 +1,6 @@
 # README Community Section - sinapse-squads
 
-> 🌐 **EN** | [PT](../pt/community/README-community-snippet-squads.md) | [ES](../es/community/README-community-snippet-squads.md)
+> 🌐 **EN** | [PT](../pt/community/README-community-snippet-squads.md)
 
 > **Purpose:** Copy this snippet into the README.md of `caioimori/sinapse-squads` repository.
 

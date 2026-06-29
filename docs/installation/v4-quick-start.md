@@ -1,6 +1,6 @@
 # SINAPSE v4 Quick Start Guide
 
-> 🌐 **EN** | [PT](../pt/installation/v4-quick-start.md) | [ES](../es/installation/v4-quick-start.md)
+> 🌐 **EN** | [PT](../pt/installation/v4-quick-start.md)
 
 **Version:** 2.1
 **Last Updated:** 2026-01-26

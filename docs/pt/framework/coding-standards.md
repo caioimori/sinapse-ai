@@ -6,7 +6,7 @@
 
 # Padrões de Código SINAPSE
 
-> 🌐 [EN](../../framework/coding-standards.md) | **PT** | [ES](../../es/framework/coding-standards.md)
+> 🌐 [EN](../../framework/coding-standards.md) | **PT**
 
 ---
 

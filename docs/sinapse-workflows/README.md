@@ -1,6 +1,6 @@
 # SINAPSE Workflows - Documentação Detalhada dos Workflows
 
-> 🌐 **PT** | [EN](../en/sinapse-workflows/README.md) | [ES](../es/sinapse-workflows/README.md) | [ZH](../zh/sinapse-workflows/README.md)
+> 🌐 **PT** | [EN](../en/sinapse-workflows/README.md) | [ZH](../zh/sinapse-workflows/README.md)
 
 ---
 

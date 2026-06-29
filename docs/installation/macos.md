@@ -1,6 +1,6 @@
 # macOS Installation Guide for SINAPSE
 
-> 🌐 **EN** | [PT](../pt/installation/macos.md) | [ES](../es/installation/macos.md)
+> 🌐 **EN** | [PT](../pt/installation/macos.md)
 
 ## Prerequisites
 

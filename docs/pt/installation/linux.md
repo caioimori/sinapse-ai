@@ -6,7 +6,7 @@
 
 # Guia de Instalação Linux para SINAPSE
 
-> 🌐 [EN](../../installation/linux.md) | **PT** | [ES](../../es/installation/linux.md)
+> 🌐 [EN](../../installation/linux.md) | **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Estrutura do Source Tree SINAPSE
 
-> 🌐 [EN](../../framework/source-tree.md) | **PT** | [ES](../../es/framework/source-tree.md)
+> 🌐 [EN](../../framework/source-tree.md) | **PT**
 
 ---
 

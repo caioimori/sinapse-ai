@@ -6,7 +6,7 @@
 
 # FAQ do SINAPSE
 
-> 🌐 [EN](../../installation/faq.md) | **PT** | [ES](../../es/installation/faq.md)
+> 🌐 [EN](../../installation/faq.md) | **PT**
 
 ---
 

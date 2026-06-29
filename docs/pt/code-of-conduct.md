@@ -1,6 +1,6 @@
 # Código de Conduta do Contributor Covenant
 
-> 🇺🇸 [English Version](CODE_OF_CONDUCT.md)
+> 🇺🇸 [English Version](../../CODE_OF_CONDUCT.md)
 
 ## Nosso Compromisso
 

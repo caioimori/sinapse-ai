@@ -2,7 +2,7 @@
 
 # Estrutura da Árvore de Código SINAPSE
 
-> 🌐 [EN](../../architecture/source-tree.md) | **PT** | [ES](../../es/architecture/source-tree.md)
+> 🌐 [EN](../../framework/source-tree.md) | **PT**
 
 ---
 

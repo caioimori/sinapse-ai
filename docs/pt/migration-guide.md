@@ -6,7 +6,7 @@
 
 # Guia de Atualização do SINAPSE
 
-> 🌐 [EN](../migration-guide.md) | **PT** | [ES](../es/migration-guide.md)
+> 🌐 **PT**
 
 ---
 

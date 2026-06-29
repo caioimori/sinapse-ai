@@ -27,7 +27,7 @@ spawn-eligible via the `Task` tool.
 
 ## Squad orqx (21)
 
-Each of the 19 squads ships a master orchestrator (`*-orqx`) plus
+Each of the 17 squads ships a master orchestrator (`*-orqx`) plus
 inner specialists. The orqx is the entry point — invoke it first
 and it routes intra-squad. Examples:
 

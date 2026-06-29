@@ -1,6 +1,6 @@
 # Linux Installation Guide for SINAPSE
 
-> 🌐 [EN](linux.md) | [PT](../pt/installation/linux.md) | [ES](../es/installation/linux.md)
+> 🌐 [EN](linux.md) | [PT](../pt/installation/linux.md)
 
 ---
 
@@ -355,7 +355,7 @@ The updater will:
 
 ## Uninstallation
 
-See the complete [Uninstallation Guide](../uninstallation.md) for detailed steps.
+See the complete [Uninstallation Guide](./uninstallation.md) for detailed steps.
 
 Quick uninstall:
 

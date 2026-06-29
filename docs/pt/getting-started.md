@@ -6,7 +6,7 @@
 
 # Começando com o SINAPSE
 
-> 🌐 [EN](../getting-started.md) | **PT** | [ES](../es/getting-started.md)
+> 🌐 [EN](../getting-started.md) | **PT**
 
 ---
 

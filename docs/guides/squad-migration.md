@@ -1,6 +1,6 @@
 # Squad Migration Guide
 
-> **EN** | [PT](../pt/guides/squad-migration.md) | [ES](../es/guides/squad-migration.md)
+> **EN** | [PT](../pt/guides/squad-migration.md)
 
 ---
 

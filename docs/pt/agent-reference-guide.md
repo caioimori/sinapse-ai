@@ -6,7 +6,7 @@
 
 # Guia de Referência dos Agentes PV do HybridOps
 
-> 🌐 [EN](../agent-reference-guide.md) | **PT** | [ES](../es/agent-reference-guide.md)
+> 🌐 [EN](../agent-reference-guide.md) | **PT**
 
 ---
 
@@ -551,8 +551,8 @@ Todos os agentes aplicam:
 
 ## Documentação Relacionada
 
-- [Diagrama de Workflow](../guides/hybridOps/workflow-diagram.md) - Representação visual do workflow de 9 fases
-- [Workflow YAML](../guides/hybridOps/brand-workflow.yaml) - Configuração de orquestração de workflow
+- Diagrama de Workflow - Representação visual do workflow de 9 fases
+- Workflow YAML - Configuração de orquestração de workflow
 
 ---
 

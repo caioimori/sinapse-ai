@@ -6,7 +6,7 @@
 
 # Guia de Seleção de Agentes
 
-> [EN](../../guides/agent-selection-guide.md) | **PT** | [ES](../../es/guides/agent-selection-guide.md)
+> [EN](../../guides/agent-selection-guide.md) | **PT**
 
 ---
 
@@ -288,7 +288,7 @@ Retries < 3? → @developer tenta com variação
 ## Documentação Completa
 
 - **[Guia Completo do ADE](./ade-guide.md)** - Tutorial completo do Autonomous Development Engine
-- **[Matriz de Responsabilidade de Agentes](../../architecture/agent-responsibility-matrix.md)** - Definições completas de limites
+- **[Matriz de Responsabilidade de Agentes](../architecture/agent-responsibility-matrix.md)** - Definições completas de limites
 
 ---
 

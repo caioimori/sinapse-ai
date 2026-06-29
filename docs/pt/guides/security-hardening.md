@@ -1,6 +1,6 @@
 # Guia de Hardening de Segurança do SINAPSE
 
-> [EN](../../guides/security-hardening.md) | **PT** | [ES](../../es/guides/security-hardening.md)
+> [EN](../../guides/security-hardening.md) | **PT**
 
 ---
 
@@ -1349,7 +1349,7 @@ Atualmente, o SINAPSE não possui um programa formal de bug bounty. No entanto, 
 
 ## Documentação Relacionada
 
-- [Melhores Práticas de Segurança](../../security-best-practices.md) - Diretrizes gerais de segurança
+- [Melhores Práticas de Segurança](../security-best-practices.md) - Diretrizes gerais de segurança
 - [Guia de Permission Modes](./permission-modes.md) - Controle de autonomia do agente
 - [Setup Global do MCP](./mcp-global-setup.md) - Configuração segura do MCP
 - [Quality Gates](./quality-gates.md) - Verificações de segurança no CI/CD

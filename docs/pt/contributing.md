@@ -337,8 +337,8 @@ tasks:
 
 ### Recursos para Squads
 
-- [Guia de Squads](docs/guides/squads-guide.md) - Documentacao completa
-- [Template de Squad](templates/squad/) - Comece de um template funcional
+- [Guia de Squads](guides/squads-guide.md) - Documentacao completa
+- [Template de Squad](../../.sinapse-ai/development/templates/squad-template/) - Comece de um template funcional
 - [Discussoes de Squads](https://github.com/caioimori/sinapse-ai/discussions/categories/ideas) - Compartilhe ideias
 
 ---
@@ -545,16 +545,16 @@ Correcoes comuns:
 
 - **GitHub Issues:** [Abra uma issue](https://github.com/caioimori/sinapse-ai/issues)
 - **Discussoes:** [Inicie uma discussao](https://github.com/caioimori/sinapse-ai/discussions)
-- **Comunidade:** [COMMUNITY-PT.md](COMMUNITY-PT.md)
+- **Comunidade:** COMMUNITY-PT.md
 
 ---
 
 ## Recursos Adicionais
 
-- [Guia da Comunidade](COMMUNITY-PT.md) - Como participar
-- [Guia de Squads](docs/guides/squads-guide.md) - Crie equipes de agents
-- [Arquitetura](docs/architecture/) - Design do sistema
-- [Roadmap](ROADMAP-PT.md) - Direcao do projeto
+- Guia da Comunidade - Como participar
+- [Guia de Squads](guides/squads-guide.md) - Crie equipes de agents
+- Arquitetura - Design do sistema
+- Roadmap - Direcao do projeto
 
 ---
 

@@ -7,7 +7,7 @@
 
 ---
 
-> **PT** | [EN](../../architecture/dashboard-architecture.md) | [ES](../architecture/dashboard-architecture.md)
+> **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Método SINAPSE: Arquitetura Central
 
-> 🌐 [EN](../core-architecture.md) | **PT** | [ES](../es/core-architecture.md)
+> 🌐 [EN](../framework/core-architecture.md) | **PT**
 
 ---
 

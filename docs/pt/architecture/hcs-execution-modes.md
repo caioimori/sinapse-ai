@@ -2,7 +2,7 @@
 
 # Especificação de Modos de Execução do HCS
 
-> 🌐 [EN](../../architecture/hcs-execution-modes.md) | **PT** | [ES](../../es/architecture/hcs-execution-modes.md)
+> 🌐 **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Guia de Roteamento de LLM
 
-> 🌐 [EN](../../guides/llm-routing.md) | **PT** | [ES](../../es/guides/llm-routing.md)
+> 🌐 [EN](../../guides/llm-routing.md) | **PT**
 
 ---
 

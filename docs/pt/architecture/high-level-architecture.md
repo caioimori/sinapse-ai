@@ -2,7 +2,7 @@
 
 # Arquitetura de Alto Nível do SINAPSE v4
 
-> 🌐 [EN](../../architecture/high-level-architecture.md) | **PT** | [ES](../../es/architecture/high-level-architecture.md)
+> 🌐 **PT**
 
 ---
 

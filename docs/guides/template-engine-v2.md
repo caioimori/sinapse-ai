@@ -1,6 +1,6 @@
 # Template Engine v2.0
 
-> **EN** | [PT](../pt/guides/template-engine-v2.md) | [ES](../es/guides/template-engine-v2.md)
+> **EN** | [PT](../pt/guides/template-engine-v2.md)
 
 ---
 

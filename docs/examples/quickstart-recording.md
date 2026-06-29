@@ -55,7 +55,7 @@ $ npx sinapse-ai install
 SINAPSE AI v10.0.0
 
 ✓ Agents copiados para ~/.sinapse
-✓ Squads sincronizados (19 squads · 210 agents)
+✓ Squads sincronizados (17 squads · 210 agents)
 ✓ Settings do Claude Code atualizados
 
 Pronto. Rode `claude` pra começar.

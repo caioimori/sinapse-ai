@@ -6,7 +6,7 @@
 
 # Guia de Desenvolvimento de Squads
 
-> 🌐 [EN](../../guides/squads-guide.md) | **PT** | [ES](../../es/guides/squads-guide.md)
+> 🌐 [EN](../../guides/squads-guide.md) | **PT**
 
 ---
 

@@ -46,7 +46,7 @@ Cada exemplo inclui comentarios explicando:
 
 ## Criando o Seu Proprio
 
-1. Comece com o [Template de Squad](../../../../templates/squad/)
+1. Comece com o [Template de Squad](../../../../.sinapse-ai/development/templates/squad-template/)
 2. Use estes exemplos como referencia para padroes
 3. Siga o [Guia de Squads](../squads-guide.md)
 

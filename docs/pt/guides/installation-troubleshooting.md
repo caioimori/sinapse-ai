@@ -6,7 +6,7 @@
 
 # Guia de Instalação e Solução de Problemas do SINAPSE
 
-> 🌐 [EN](../../guides/installation-troubleshooting.md) | **PT** | [ES](../../es/guides/installation-troubleshooting.md)
+> 🌐 [EN](../../guides/installation-troubleshooting.md) | **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Referência de Comandos do Meta-Agente
 
-> 🌐 [EN](../meta-agent-commands.md) | **PT** | [ES](../es/meta-agent-commands.md)
+> 🌐 [EN](../guides/meta-agent-commands.md) | **PT**
 
 ---
 

@@ -6,7 +6,7 @@
 
 # Especificação de Nomenclatura do SINAPSE
 
-> 🌐 [EN](../sinapse-nomenclature-specification.md) | **PT** | [ES](../es/sinapse-nomenclature-specification.md)
+> 🌐 **PT**
 
 ---
 
