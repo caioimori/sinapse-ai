@@ -1384,7 +1384,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:80005365934bb7e9783ea833d9d1bcd85faec81fe1e2e8232187dbfd529c9304
+    hash: sha256:c1c7883e9d4cbd9ce96cc575ca9ee5fa1a298c4cf75fdabd3cdcf0609190416f
     type: data
     size: 554944
   - path: data/learned-patterns.yaml
@@ -1520,9 +1520,9 @@ files:
     type: agent
     size: 23745
   - path: development/agents/snps-orqx.md
-    hash: sha256:18a195a4484b1b4b76d6a2fe71669b428e87336293a4c5764bc702249083e101
+    hash: sha256:e236af23b35763597525328603d610caed502a0ecf4de6aa249852ed584eec80
     type: agent
-    size: 43849
+    size: 43873
   - path: development/agents/sprint-lead.md
     hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
     type: agent
