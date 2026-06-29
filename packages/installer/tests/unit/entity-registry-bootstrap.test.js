@@ -35,13 +35,16 @@ describe('Entity Registry Bootstrap (Story INS-4.6)', () => {
   describe('AC1: Bootstrap called during install', () => {
     test('wizard calls populate-entity-registry.js', () => {
       expect(wizardSource).toContain('populate-entity-registry.js');
-      expect(wizardSource).toContain('Bootstrapping entity registry');
+      // Progress log is routed through i18n — assert the key, not the literal string.
+      expect(wizardSource).toContain('bootstrappingEntityRegistry');
     });
 
     test('bootstrap runs after .sinapse-ai/ copy (injection order)', () => {
-      const sinapseCoreIdx = wizardSource.indexOf('SINAPSE core installed');
-      const bootstrapIdx = wizardSource.indexOf('Bootstrapping entity registry');
-      const envConfigIdx = wizardSource.indexOf('Configuring environment');
+      // Progress logs routed through i18n; keys preserve source order
+      // (installingCore < bootstrappingEntityRegistry < configuringEnv).
+      const sinapseCoreIdx = wizardSource.indexOf('installingCore');
+      const bootstrapIdx = wizardSource.indexOf('bootstrappingEntityRegistry');
+      const envConfigIdx = wizardSource.indexOf('configuringEnv');
 
       // Bootstrap must come after sinapse-ai install
       expect(bootstrapIdx).toBeGreaterThan(sinapseCoreIdx);
