@@ -28,8 +28,11 @@ function checkBoundaryAlignment(context, denyRules) {
     return [];
   }
 
-  // Extract boundary.protected paths from YAML (simple line parsing)
-  const lines = content.split('\n');
+  // Extract boundary.protected paths from YAML (simple line parsing).
+  // Split on /\r?\n/ so a CRLF-saved core-config.yaml (Windows editors,
+  // core.autocrlf) does not leave a trailing \r that breaks the path regex
+  // below and silently empties protectedPaths (false-negative boundary check).
+  const lines = content.split(/\r?\n/);
   const protectedPaths = [];
   let inProtected = false;
 

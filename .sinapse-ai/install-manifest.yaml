@@ -412,9 +412,9 @@ files:
     type: core
     size: 1494
   - path: core/doctor/checks/settings-json.js
-    hash: sha256:a0fbbca80185daa90a6847526d27dbdb9c0303fc86d891d6b1a03cc1c886d158
+    hash: sha256:7111af8a314f2b132c1253fa10fff17cab7389ee7951ca17b5383bfe159a1f9b
     type: core
-    size: 3900
+    size: 4133
   - path: core/doctor/checks/skills-count.js
     hash: sha256:2ed67974d87e3b4e4efa84527061f824eb8c79dc3a5925adb149870c6c0faf3c
     type: core
@@ -888,13 +888,13 @@ files:
     type: core
     size: 11306
   - path: core/mcp/config-migrator.js
-    hash: sha256:ec6e1263b6cc0fb235432e995bbf868962d5d7be2fd4af541f0d907eae57cd0e
+    hash: sha256:9707d54038ee9899e9f87735989e462c3b017fe6275fc67edbec910b4edc4676
     type: core
-    size: 9870
+    size: 10207
   - path: core/mcp/global-config-manager.js
-    hash: sha256:c59a2f82241eefd5c67b83bea340197acf13066ad0a4a3e97e2597ab749813bc
+    hash: sha256:b6b6ea82a2e510e37163a845806f8d27647f72b97e4f6b2c3891cac974331a3b
     type: core
-    size: 8927
+    size: 9169
   - path: core/mcp/index.js
     hash: sha256:dde1c3defd5aeeac53fe8efd77f9273b257d477e32b13b3d47b4d4bfe842ed66
     type: core
@@ -904,9 +904,9 @@ files:
     type: core
     size: 3840
   - path: core/mcp/symlink-manager.js
-    hash: sha256:b41b1bb3d5418f136b6fc37e4fd204026c9a6ccc20927c53065e4d5354bb9504
+    hash: sha256:8d66c2e83266caff174722bd8e153d16687f6c0d0d260d5777f3dba1d1ae8745
     type: core
-    size: 10398
+    size: 10661
   - path: core/memory/__tests__/active-modules.verify.js
     hash: sha256:f9d19b7afe34a3855795bab464dc5a6d23c1926c5eed05192910f898d6bbefec
     type: core
@@ -1328,9 +1328,9 @@ files:
     type: core
     size: 11186
   - path: core/synapse/utils/atomic-write.js
-    hash: sha256:05da2e7727fff31621ff53c9edf9640c89814d2f6ba094fce1bcf2559ee75c84
+    hash: sha256:49d059eceff8053cf7d07fda44f1a399f4fffe2c033a548061fa6fe1a3c939a3
     type: core
-    size: 2982
+    size: 2995
   - path: core/synapse/utils/paths.js
     hash: sha256:f4d91eb000e36212638fe799ccbc11cd1c0050baa9ce739ff4083b675d7be980
     type: core
@@ -1384,9 +1384,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:811a8e9ab579c22f55bbd5d0f10a1b6b1802e3a1f28cf10fef1fb6fb2b489463
+    hash: sha256:80005365934bb7e9783ea833d9d1bcd85faec81fe1e2e8232187dbfd529c9304
     type: data
-    size: 554846
+    size: 554944
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data

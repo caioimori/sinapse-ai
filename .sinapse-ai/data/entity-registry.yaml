@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-28T23:34:42.478Z'
+  lastUpdated: '2026-06-29T01:56:43.091Z'
   entityCount: 803
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -9592,8 +9592,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a0fbbca80185daa90a6847526d27dbdb9c0303fc86d891d6b1a03cc1c886d158
-      lastVerified: '2026-06-27T22:08:54.146Z'
+      checksum: sha256:7111af8a314f2b132c1253fa10fff17cab7389ee7951ca17b5383bfe159a1f9b
+      lastVerified: '2026-06-29T01:56:42.980Z'
     skills-count:
       path: .sinapse-ai/core/doctor/checks/skills-count.js
       layer: L1
@@ -11663,6 +11663,7 @@ entities:
       dependencies:
         - global-config-manager
         - symlink-manager
+        - atomic-write
       externalDeps: []
       plannedDeps: []
       lifecycle: experimental
@@ -11670,8 +11671,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:ec6e1263b6cc0fb235432e995bbf868962d5d7be2fd4af541f0d907eae57cd0e
-      lastVerified: '2026-06-15T00:26:26.401Z'
+      checksum: sha256:9707d54038ee9899e9f87735989e462c3b017fe6275fc67edbec910b4edc4676
+      lastVerified: '2026-06-29T01:56:42.995Z'
     global-config-manager:
       path: .sinapse-ai/core/mcp/global-config-manager.js
       layer: L1
@@ -11692,8 +11693,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c59a2f82241eefd5c67b83bea340197acf13066ad0a4a3e97e2597ab749813bc
-      lastVerified: '2026-06-15T00:26:26.401Z'
+      checksum: sha256:b6b6ea82a2e510e37163a845806f8d27647f72b97e4f6b2c3891cac974331a3b
+      lastVerified: '2026-06-29T01:56:42.996Z'
     os-detector:
       path: .sinapse-ai/core/mcp/os-detector.js
       layer: L1
@@ -11727,6 +11728,7 @@ entities:
         - config-migrator
       dependencies:
         - os-detector
+        - atomic-write
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -11734,8 +11736,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:b41b1bb3d5418f136b6fc37e4fd204026c9a6ccc20927c53065e4d5354bb9504
-      lastVerified: '2026-06-15T00:26:26.401Z'
+      checksum: sha256:8d66c2e83266caff174722bd8e153d16687f6c0d0d260d5777f3dba1d1ae8745
+      lastVerified: '2026-06-29T01:56:42.996Z'
     active-modules.verify:
       path: .sinapse-ai/core/memory/__tests__/active-modules.verify.js
       layer: L1
@@ -13626,8 +13628,10 @@ entities:
         - atomic
         - write
       usedBy:
+        - config-migrator
         - context-detector
         - registry-syncer
+        - symlink-manager
         - unified-activation-pipeline
       dependencies: []
       externalDeps: []
@@ -13637,8 +13641,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:05da2e7727fff31621ff53c9edf9640c89814d2f6ba094fce1bcf2559ee75c84
-      lastVerified: '2026-06-28T23:34:42.393Z'
+      checksum: sha256:49d059eceff8053cf7d07fda44f1a399f4fffe2c033a548061fa6fe1a3c939a3
+      lastVerified: '2026-06-29T01:56:43.008Z'
     paths:
       path: .sinapse-ai/core/synapse/utils/paths.js
       layer: L1

@@ -19,6 +19,7 @@ const {
   createGlobalConfig,
 } = require('./global-config-manager');
 const { getProjectMcpPath, checkLinkStatus, LINK_STATUS, createLink } = require('./symlink-manager');
+const { retrySync } = require('../synapse/utils/atomic-write');
 
 /**
  * Migration options
@@ -267,7 +268,8 @@ function executeMigration(projectRoot = process.cwd(), option = MIGRATION_OPTION
       const backupPath = projectMcpPath + '.backup.' + Date.now();
 
       try {
-        fs.renameSync(projectMcpPath, backupPath);
+        // retrySync: transient EPERM/EBUSY from AV / Search indexer on Windows.
+        retrySync(() => fs.renameSync(projectMcpPath, backupPath));
         results.backupPath = backupPath;
       } catch (error) {
         results.errors.push(`Backup failed: ${error.message}`);
@@ -315,14 +317,15 @@ function restoreFromBackup(backupPath, projectRoot = process.cwd()) {
     if (fs.existsSync(projectMcpPath)) {
       const stats = fs.lstatSync(projectMcpPath);
       if (stats.isSymbolicLink()) {
-        fs.unlinkSync(projectMcpPath);
+        retrySync(() => fs.unlinkSync(projectMcpPath));
       } else {
-        fs.rmSync(projectMcpPath, { recursive: true });
+        retrySync(() => fs.rmSync(projectMcpPath, { recursive: true }));
       }
     }
 
-    // Restore backup
-    fs.renameSync(backupPath, projectMcpPath);
+    // Restore backup — retry transient Windows locks so a legit rollback
+    // isn't lost to a momentary AV/indexer handle on the config dir.
+    retrySync(() => fs.renameSync(backupPath, projectMcpPath));
 
     return { success: true, restored: projectMcpPath };
   } catch (error) {

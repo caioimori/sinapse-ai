@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { isWindows, getGlobalMcpDir, getLinkType } = require('./os-detector');
+const { retrySync } = require('../synapse/utils/atomic-write');
 
 /**
  * Link status types
@@ -284,7 +285,9 @@ function createLink(projectRoot = process.cwd(), options = {}) {
         const configFile = path.join(linkPath, 'global-config.json');
         if (fs.existsSync(configFile)) {
           const backupPath = linkPath + '.backup.' + Date.now();
-          fs.renameSync(linkPath, backupPath);
+          // retrySync: on Windows the rename of a dir held by AV / Search
+          // indexer / a concurrent reader throws transient EPERM/EBUSY.
+          retrySync(() => fs.renameSync(linkPath, backupPath));
           return {
             success: false,
             error: `Existing config backed up to ${backupPath}. Run with --migrate to merge configs.`,
@@ -293,10 +296,10 @@ function createLink(projectRoot = process.cwd(), options = {}) {
             backup: backupPath,
           };
         }
-        fs.rmSync(linkPath, { recursive: true });
+        retrySync(() => fs.rmSync(linkPath, { recursive: true }));
       } else {
         // Remove symlink/junction
-        fs.unlinkSync(linkPath);
+        retrySync(() => fs.unlinkSync(linkPath));
       }
     } catch (error) {
       return {

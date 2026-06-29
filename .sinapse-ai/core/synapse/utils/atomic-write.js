@@ -100,5 +100,6 @@ function atomicWriteSync(filePath, data, encoding = 'utf8') {
 
 module.exports = {
   atomicWriteSync,
+  retrySync,
 };
 
