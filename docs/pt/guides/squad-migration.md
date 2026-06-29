@@ -6,7 +6,7 @@
 
 # Guia de Migração de Squad
 
-> 🌐 [EN](../../guides/squad-migration.md) | **PT** | [ES](../../es/guides/squad-migration.md)
+> 🌐 [EN](../../guides/squad-migration.md) | **PT**
 
 ---
 

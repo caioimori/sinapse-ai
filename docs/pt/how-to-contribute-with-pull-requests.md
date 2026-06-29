@@ -2,7 +2,7 @@
 
 # Como Contribuir com Pull Requests
 
-> 🌐 [EN](../how-to-contribute-with-pull-requests.md) | **PT** | [ES](../es/how-to-contribute-with-pull-requests.md)
+> 🌐 **PT**
 
 ---
 

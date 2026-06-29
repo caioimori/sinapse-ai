@@ -1,6 +1,6 @@
 # Meta-Agent Commands Reference
 
-> 🌐 **EN** | [PT](./pt/meta-agent-commands.md) | [ES](./es/meta-agent-commands.md)
+> 🌐 **EN** | [PT](./pt/meta-agent-commands.md)
 
 ---
 

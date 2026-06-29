@@ -1,6 +1,6 @@
 # README Community Section - sinapse-ai
 
-> 🌐 **EN** | [PT](../pt/community/README-community-snippet-core.md) | [ES](../es/community/README-community-snippet-core.md)
+> 🌐 **EN** | [PT](../pt/community/README-community-snippet-core.md)
 
 > **Purpose:** Copy this snippet into the README.md of `caioimori/sinapse-ai` repository.
 

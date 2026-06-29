@@ -1,6 +1,6 @@
 # SINAPSE Service Discovery Guide
 
-> **EN** | [PT](../pt/guides/service-discovery.md) | [ES](../es/guides/service-discovery.md)
+> **EN** | [PT](../pt/guides/service-discovery.md)
 
 ---
 
@@ -131,25 +131,25 @@ const count = await registry.count();
 
 ## CLI Commands
 
-### `sinapse discover`
+### `sinapse workers search`
 
 Search for workers in the registry.
 
 ```bash
 # Search by text
-sinapse discover "create story"
+sinapse workers search "create story"
 
-# Search by category
-sinapse discover --category task
+# Filter by category
+sinapse workers search "story" --category=task
 
-# Search by tag
-sinapse discover --tag testing
+# Filter by tags (comma-separated)
+sinapse workers search "validation" --tags=schema,json
 
-# Search for agent
-sinapse discover --agent dev
+# Limit results
+sinapse workers search "story" --limit=5
 
-# Combine filters
-sinapse discover --category task --tag development --agent dev
+# JSON output
+sinapse workers search "api" --format=json
 ```
 
 **Output:**
@@ -215,22 +215,19 @@ Performance:
   Parallelizable: No
 ```
 
-### `sinapse list`
+### Listing workers by category
 
-List workers by category or agent.
+Use `sinapse workers search` with the `--category` filter to narrow results to a worker type.
 
 ```bash
-# List all tasks
-sinapse list tasks
+# Find tasks
+sinapse workers search "story" --category=task
 
-# List all templates
-sinapse list templates
+# Find templates
+sinapse workers search "template" --category=template
 
-# List workers for agent
-sinapse list --agent dev
-
-# List with pagination
-sinapse list tasks --page 1 --limit 20
+# Limit the number of results
+sinapse workers search "story" --category=task --limit=20
 ```
 
 ---

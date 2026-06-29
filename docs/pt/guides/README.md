@@ -6,7 +6,7 @@
 
 # Guias SINAPSE
 
-> 🌐 [EN](../../guides/README.md) | **PT** | [ES](../../es/guides/README.md)
+> 🌐 [EN](../../guides/README.md) | **PT**
 
 ---
 
@@ -58,7 +58,7 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 | ------------------------------------------------------------------------- | --------------------------------------- | ------ | ----------------------------- |
 | **[Arquitetura do Sistema de Módulos](../architecture/module-system.md)** | Arquitetura modular v4.2 (4 módulos)    | 15 min | Arquitetos, Desenvolvedores   |
 | **[Guia de Service Discovery](./service-discovery.md)**                   | Descoberta de workers e API do registro | 10 min | Desenvolvedores               |
-| **[Guia de Migração v2.0→v4.0.4](../../migration/migration-guide.md)**         | Instruções passo a passo de migração    | 20 min | Todos os usuários atualizando |
+| **Guia de Migração v2.0→v4.0.4**         | Instruções passo a passo de migração    | 20 min | Todos os usuários atualizando |
 
 ### Configuração do Sistema
 
@@ -83,7 +83,7 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 → [`service-discovery.md`](./service-discovery.md) (10 min)
 
 **...migrar de v2.0 para v4.0.4**
-→ [`migration-guide.md`](../../migration/migration-guide.md) (20 min)
+→ `migration-guide.md` (20 min)
 
 **...configurar quality gates**
 → [`quality-gates.md`](./quality-gates.md) (15 min)

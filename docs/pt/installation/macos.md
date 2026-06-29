@@ -6,7 +6,7 @@
 
 # Guia de Instalação para macOS - SINAPSE
 
-> 🌐 [EN](../../installation/macos.md) | **PT** | [ES](../../es/installation/macos.md)
+> 🌐 [EN](../../installation/macos.md) | **PT**
 
 ---
 

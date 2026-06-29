@@ -1,6 +1,6 @@
 # Development Setup Guide
 
-> **EN** | [PT](../pt/guides/development-setup.md) | [ES](../es/guides/development-setup.md)
+> **EN** | [PT](../pt/guides/development-setup.md)
 
 ---
 

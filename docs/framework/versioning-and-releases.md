@@ -1,6 +1,6 @@
 # How to Release a New Version
 
-> 🌐 **EN** | [PT](./pt/versioning-and-releases.md) | [ES](./es/versioning-and-releases.md)
+> 🌐 **EN** | [PT](./pt/versioning-and-releases.md)
 
 ---
 

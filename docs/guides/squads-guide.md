@@ -1,6 +1,6 @@
 # Squad Development Guide
 
-> **EN** | [PT](../pt/guides/squads-guide.md) | [ES](../es/guides/squads-guide.md)
+> **EN** | [PT](../pt/guides/squads-guide.md)
 
 ---
 

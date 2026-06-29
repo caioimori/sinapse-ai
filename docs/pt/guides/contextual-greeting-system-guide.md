@@ -6,7 +6,7 @@
 
 # Guia do Sistema de Greeting Contextual
 
-> 🌐 [EN](../../guides/contextual-greeting-system-guide.md) | **PT** | [ES](../../es/guides/contextual-greeting-system-guide.md)
+> 🌐 [EN](../../guides/contextual-greeting-system-guide.md) | **PT**
 
 ---
 

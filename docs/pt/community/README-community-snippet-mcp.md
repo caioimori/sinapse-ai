@@ -31,8 +31,8 @@ Para discussões, perguntas e interação com a comunidade, visite nosso hub cen
 
 ### Links Rápidos
 
-- [Setup do Docker MCP Toolkit](../../docker-mcp-setup.md)
-- [Presets Disponíveis](../../../presets/)
+- [Setup do Docker MCP Toolkit](../docker-mcp-setup.md)
+- [Presets Disponíveis](../../../.sinapse-ai/presets/)
 - [Guia de Integração com IDE](../../ide-integration.md)
 - [Guia de Troubleshooting](../../troubleshooting.md)
 

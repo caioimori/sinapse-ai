@@ -6,7 +6,7 @@
 
 # Guia de Otimização de Performance do SINAPSE
 
-> 🌐 [EN](../performance-tuning-guide.md) | **PT** | [ES](../es/performance-tuning-guide.md)
+> 🌐 **PT**
 
 ---
 

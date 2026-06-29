@@ -6,7 +6,7 @@
 
 # Melhores Práticas de Segurança do SINAPSE
 
-> 🌐 [EN](../security-best-practices.md) | **PT** | [ES](../es/security-best-practices.md)
+> 🌐 [EN](../security/security-best-practices.md) | **PT**
 
 ---
 
@@ -66,7 +66,7 @@ const auth = new AuthSystem({
 // Criar usuário com requisitos de senha forte
 await auth.createUser({
   username: 'admin',
-  password: 'SecureP@ssw0rd123!',
+  password: process.env.ADMIN_PASSWORD, // nunca faca hardcode — 12+ chars, maiusc/minusc, numero, simbolo
   email: 'admin@example.com',
   role: 'admin'
 });

@@ -1,6 +1,6 @@
 # SINAPSE Method: Core Architecture
 
-> 🌐 **EN** | [PT](./pt/core-architecture.md) | [ES](./es/core-architecture.md)
+> 🌐 **EN** | [PT](./pt/core-architecture.md)
 
 ---
 

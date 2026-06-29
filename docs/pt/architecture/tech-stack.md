@@ -2,7 +2,7 @@
 
 # Stack de Tecnologia SINAPSE
 
-> 🌐 [EN](../../architecture/tech-stack.md) | **PT** | [ES](../../es/architecture/tech-stack.md)
+> 🌐 [EN](../../framework/tech-stack.md) | **PT**
 
 ---
 

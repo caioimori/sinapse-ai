@@ -6,7 +6,7 @@
 
 # Guia de Instalação via NPX
 
-> 🌐 [EN](../npx-install.md) | **PT** | [ES](../es/npx-install.md)
+> 🌐 [EN](../installation/npx-install.md) | **PT**
 
 ---
 

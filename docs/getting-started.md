@@ -14,7 +14,7 @@
 npx sinapse-ai install
 ```
 
-O wizard detecta seu ambiente, escolhe IDE (Claude Code ou Codex), instala 19 squads e configura 13 hooks ativos automaticamente.
+O wizard detecta seu ambiente, escolhe IDE (Claude Code ou Codex), instala 17 squads e configura 13 hooks ativos automaticamente.
 
 ## Validar setup
 

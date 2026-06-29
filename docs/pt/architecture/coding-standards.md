@@ -2,7 +2,7 @@
 
 # Padrões de Codificação SINAPSE
 
-> 🌐 [EN](../../architecture/coding-standards.md) | **PT** | [ES](../../es/architecture/coding-standards.md)
+> 🌐 [EN](../../framework/coding-standards.md) | **PT**
 
 ---
 

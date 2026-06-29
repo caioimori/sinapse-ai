@@ -43,7 +43,7 @@ docs/
 - [Getting Started](./getting-started.md)
 - [Installation Guide](./installation/README.md)
 - [Agent Reference Guide](./agent-reference-guide.md)
-- [Constitution Compliance](./constitution-compliance.md)
+- [Constitution](../.sinapse-ai/constitution.md)
 - [Agent System Documentation](./sinapse-agent-flows/README.md)
 - [Workflow Documentation](./sinapse-workflows/README.md)
 - [Troubleshooting](./troubleshooting.md)

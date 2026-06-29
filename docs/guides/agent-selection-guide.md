@@ -1,6 +1,6 @@
 # Agent Selection Guide
 
-> **EN** | [PT](../pt/guides/agent-selection-guide.md) | [ES](../es/guides/agent-selection-guide.md)
+> **EN** | [PT](../pt/guides/agent-selection-guide.md)
 
 ---
 

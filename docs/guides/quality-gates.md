@@ -1,6 +1,6 @@
 # SINAPSE Quality Gate System Guide
 
-> **EN** | [PT](../pt/guides/quality-gates.md) | [ES](../es/guides/quality-gates.md)
+> **EN** | [PT](../pt/guides/quality-gates.md)
 
 ---
 

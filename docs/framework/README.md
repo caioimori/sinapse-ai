@@ -1,6 +1,6 @@
 # SINAPSE Framework Documentation
 
-> 🌐 **EN** | [PT](../pt/framework/README.md) | [ES](../es/framework/README.md)
+> 🌐 **EN** | [PT](../pt/framework/README.md)
 
 **Status:** Official Framework Standards
 **Created:** 2025-01-16 (Story 6.1.2.6)
