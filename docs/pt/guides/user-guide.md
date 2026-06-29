@@ -164,22 +164,29 @@ Workflows orquestram múltiplas tasks e agentes para operações complexas.
 
 ### Workflows Disponíveis
 
-| Workflow                 | Caso de Uso                | Agentes Envolvidos |
-| ------------------------ | -------------------------- | ------------------ |
-| `greenfield-fullstack`   | Novo projeto full-stack    | Todos os agentes   |
-| `brownfield-integration` | Adicionar SINAPSE a existente | dev, architect     |
-| `fork-join`              | Execução paralela de tasks | Múltiplos          |
-| `organizer-worker`       | Execução delegada          | po, dev            |
-| `data-pipeline`          | Workflows de ETL           | data-engineer, qa  |
+| Workflow                  | Caso de Uso                           |
+| ------------------------- | ------------------------------------- |
+| `greenfield-ui`           | Novo site / landing page / app        |
+| `greenfield-fullstack`    | Nova plataforma / SaaS                |
+| `greenfield-service`      | Nova API / serviço de backend         |
+| `brownfield-fullstack`    | Adicionar SINAPSE a projeto existente |
+| `spec-pipeline`           | Briefing complexo (spec primeiro)     |
+| `story-development-cycle` | Implementar uma única story           |
 
 ### Executando Workflows
 
-```bash
-# Iniciar um workflow
-sinapse workflow greenfield-fullstack
+Você não chama os workflows pelo nome — descreva o que quer e o SINAPSE escolhe
+o certo (greenfield vs brownfield, UI vs fullstack vs service).
 
-# Com parâmetros
-sinapse workflow brownfield-integration --target=./existing-project
+```bash
+# Descreva o projeto — o SINAPSE classifica e roda o workflow certo
+sinapse build "nova plataforma SaaS para gestão de academia"
+
+# Veja qual workflow um briefing dispararia (sem executar)
+sinapse route "adicionar dark mode na plataforma"
+
+# Rodar o ciclo de desenvolvimento de uma story existente
+sinapse orchestrate <story-id>
 ```
 
 ---
@@ -204,24 +211,24 @@ Um squad é um pacote autocontido contendo:
 ### Níveis de Distribuição
 
 ```
-Nível 1: LOCAL        --> ./squads/           (Privado)
-Nível 2: SINAPSE-SQUADS  --> github.com/SinapseAI (Público/Gratuito)
-Nível 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)
+Nível 1: LOCAL        --> ./squads/        (hoje — gerenciado no seu projeto)
+Nível 2: REGISTRY     --> compartilhamento (roadmap)
+Nível 3: MARKETPLACE  --> squads pagos     (roadmap)
 ```
 
 ### Usando Squads
 
+Os squads ficam no diretório `squads/` do seu projeto. Para adicionar um, coloque
+a pasta dele ali; para construir um novo, gere-o com o agente squad-creator:
+
 ```bash
-# Listar squads disponíveis
-sinapse squads list
-
-# Baixar um squad
-sinapse squads download etl-squad
-
 # Criar seu próprio squad
 @squad-creator
 *create-squad my-custom-squad
 ```
+
+> A distribuição remota de squads (navegar / baixar de um registro) está no
+> roadmap — hoje os squads são gerenciados diretamente em `squads/`.
 
 ### Squads Oficiais
 
@@ -430,11 +437,8 @@ Mantenha o contexto entre sessões:
 
 ### 5. Aproveite os Squads
 
-Não reinvente a roda - verifique se existem squads:
-
-```bash
-sinapse squads search {keyword}
-```
+Não reinvente a roda — explore os squads que já vêm em `squads/` antes de
+construir um agente novo do zero.
 
 ---
 

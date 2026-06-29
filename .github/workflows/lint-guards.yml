@@ -79,6 +79,8 @@ jobs:
       # Squad warnings do NOT fail the build by design.
       - name: Run agent consistency validator
         run: npm run validate:agents
+
+  cross-ide-parity:
     name: Cross-IDE Parity (conditional)
     runs-on: ubuntu-latest
     steps:

@@ -21,7 +21,7 @@ const TROUBLESHOOTING_DATABASE = {
       '.env accidentally deleted',
     ],
     solutions: [
-      'Re-run wizard: npx @caioimori/sinapse@latest init',
+      'Re-run wizard: npx sinapse-ai@latest install',
       'Manually create .env from template: cp .env.example .env',
       'Check file permissions in project directory',
     ],
@@ -37,7 +37,7 @@ const TROUBLESHOOTING_DATABASE = {
       'File creation failed',
     ],
     solutions: [
-      'Re-run wizard: npx @caioimori/sinapse@latest init',
+      'Re-run wizard: npx sinapse-ai@latest install',
       'Check .sinapse-ai directory exists',
       'Manually create from template',
     ],
