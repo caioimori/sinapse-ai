@@ -124,7 +124,7 @@ components:
     - brand-growth-strategist.md   # Catalyst — Alchemist (6 tasks) ★ NEW v3.0
     - brand-culture-architect.md   # Ethos — Purpose Guardian (8 tasks) ★ +3 v3.1
     - brand-identity-designer.md   # Iris — Artist (13 tasks) ★ +1 v3.2
-    - brand-creative-engineer.md   # Forge — Builder-Creator (12 tasks) ★ +1 v3.2
+    - brand-creative-engineer.md   # Ember — Builder-Creator (12 tasks) ★ +1 v3.2
     - brand-collateral-designer.md # Vellum — Craftsman (12 tasks) ★ +1 v3.1
     - brand-system-architect.md    # Grid — Architect (5 tasks)
     - brand-motion-vfx.md          # Flux — Animator (5 tasks)
@@ -194,7 +194,7 @@ components:
     - design-dynamic-identity-system.md   # ★ v3.1 — Generative/responsive identity
     - design-illustration-system.md      # ★ v3.2 — Brand illustration style, guidelines, AI prompting
 
-    # ── Creative Engineer (Forge) — 12 tasks ── ★ +1 v3.2
+    # ── Creative Engineer (Ember) — 12 tasks ── ★ +1 v3.2
     - create-svg-logo.md
     - create-icon-set.md
     - create-pattern.md
@@ -294,7 +294,7 @@ components:
     - gestalt-principles.md              # Gestalt aplicada a branding e design
     - photography-styles.md              # estilos fotograficos, iluminacao, composicao
 
-    # Creative Engineer (Forge) + Identity Designer (Iris)
+    # Creative Engineer (Ember) + Identity Designer (Iris)
     - prompt-engineering-visual.md        # templates de prompts por categoria de asset
     - 3d-render-styles.md               # estilos de render 3D, PBR materials
     - product-categories.md             # categorias de produto com specs de mockup
@@ -434,7 +434,7 @@ brand_value_tracker:
 # v3.2.0 (2026-03-13) — Illustration System, Characters & Auto-Learning
 #   +3 tasks:
 #     1. design-illustration-system.md (Iris) — Brand illustration style, AI prompting
-#     2. create-brand-characters.md (Forge) — Characters, avatars, mascots
+#     2. create-brand-characters.md (Ember) — Characters, avatars, mascots
 #     3. update-brand-preferences.md (Sentinel) — Auto-learning preference tracking
 #   +1 knowledge base:
 #     - illustration-styles.md — Styles, character design, AI gen, case studies
@@ -451,13 +451,13 @@ brand_value_tracker:
 #     1. define-brand-identity-prism.md (Athena) — Kapferer 6-facet Prism
 #     2. define-sensory-brand-strategy.md (Ethos) — Lindstrom multi-sensory
 #     3. define-cultural-adaptation-guidelines.md (Athena) — Hofstede/Meyer glocal
-#     4. create-digital-ad-templates.md (Forge) — All platform ad templates
+#     4. create-digital-ad-templates.md (Ember) — All platform ad templates
 #     5. design-dynamic-identity-system.md (Iris) — Generative/responsive identity
 #     6. create-brand-training-program.md (Ethos) — Training & certification
 #     7. define-ai-voice-guidelines.md (Athena) — AI/chatbot brand voice
 #     8. create-event-branding.md (Vellum) — Event branding system
 #     9. define-sustainability-branding.md (Ethos) — ESG anti-greenwashing
-#    10. create-creator-toolkit.md (Forge) — Creator/influencer toolkit
+#    10. create-creator-toolkit.md (Ember) — Creator/influencer toolkit
 #   +1 knowledge base:
 #     - cultural-brand-adaptation.md — Hofstede, Meyer, sensibilidades culturais
 #   Total: 78 → 88 tasks, 15 → 16 KBs, 117 → 128 files

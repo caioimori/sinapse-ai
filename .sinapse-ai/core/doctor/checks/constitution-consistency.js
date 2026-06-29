@@ -30,6 +30,7 @@ const KEY_ARTICLES = [
   'Mandatory Delegation',
   'Safe Collaboration',
   'Security & Data Protection',
+  'Conservative Default',
 ];
 
 /**

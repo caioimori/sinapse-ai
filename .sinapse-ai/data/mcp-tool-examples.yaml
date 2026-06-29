@@ -186,16 +186,16 @@ tools:
     essential: true
     note: "Essential Tier 3 — never disabled, gets examples despite ADR-5"
     examples:
-      - description: "Generate dependency graph for package"
+      - description: "Analyze dependencies for a module (dependency_analysis)"
         input:
-          scope: "packages/installer"
-          depth: 2
-        expected: "Returns dependency tree up to 2 levels deep"
-      - description: "Find circular dependencies"
+          tool: dependency_analysis
+          path: "packages/installer/src/index.js"
+        expected: "Returns the dependency graph (nodes + edges) for the module"
+      - description: "Find where a symbol is referenced (find_references)"
         input:
-          scope: "."
-          check: "circular"
-        expected: "Returns list of circular dependency chains if any"
+          tool: find_references
+          symbol: "generateSettingsJson"
+        expected: "Returns all files and locations that reference the symbol"
 
   # ---------------------------------------------------------------------------
   # 10. docker-gateway — MCP infrastructure (Tier 2, 1 profile + infra)

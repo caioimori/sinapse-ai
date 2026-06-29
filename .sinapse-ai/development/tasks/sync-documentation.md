@@ -223,7 +223,7 @@ acceptance-criteria:
 - execute-task.js:
     description: Generic task execution wrapper
     language: JavaScript
-    location: .sinapse-ai/scripts/execute-task.js
+    location: .sinapse-ai/core/execution/
 
 - documentation-synchronizer.js:
     description: Core documentation synchronization engine

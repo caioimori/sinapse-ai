@@ -144,11 +144,11 @@ acceptance-criteria:
 
 - **Tool:** task-runner
   - **Purpose:** Task execution and orchestration
-  - **Source:** .sinapse-ai/core/task-runner.js
+  - **Source:** .sinapse-ai/core/execution/
 
 - **Tool:** logger
   - **Purpose:** Execution logging and error tracking
-  - **Source:** .sinapse-ai/utils/logger.js
+  - **Source:** .sinapse-ai/core/execution/
 
 ---
 
@@ -159,7 +159,7 @@ acceptance-criteria:
 - **Script:** execute-task.js
   - **Purpose:** Generic task execution wrapper
   - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/execute-task.js
+  - **Location:** .sinapse-ai/core/execution/
 
 ---
 

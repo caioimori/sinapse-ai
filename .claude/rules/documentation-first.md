@@ -44,6 +44,12 @@ No implementation proceeds without ALL of these:
 
 **Attempting to write code without a valid story → BLOCKED.**
 
+## Enforcement model — floor-reactive by design (honest)
+
+Doc-first is enforced by a **deterministic reactive floor**, not by proactive prose: on a build request, `sinapse route` classifies the project type and **blocks** when the required artifacts are missing (story `Ready`; epic/PRD/architecture for large projects). This floor holds even if the agent forgets the rule, and it is covered by passing tests.
+
+Audit AF-20260629 **refuted** the earlier "prose without enforcement" hypothesis — the floor genuinely classifies and blocks. What is *not* wired into the prompt is the proactive **layer-2 conduction** (auto-walking the user through PRD → epic → story turn by turn). That layer is intentional **roadmap**, not a missing guardrail: no new always-on hook is added here by design (a reactive floor is lower-risk than a proactive prompt injector).
+
 ## Project Type Gate (NON-NEGOTIABLE)
 
 > **Why this exists:** A bare `epic + story` pipeline is necessary but not sufficient for **large projects**. A site, landing page, SaaS platform, mobile app, or backend service needs *upstream* artifacts (project brief, PRD, architecture, design spec) **before** stories can be written meaningfully. Without this gate, the framework writes stories from a vague verbal description and produces generic / off-brand output.

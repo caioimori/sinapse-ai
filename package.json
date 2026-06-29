@@ -138,6 +138,7 @@
     "validate:story-meta": "node scripts/validate-story-meta.js",
     "validate:changelog": "node scripts/validate-changelog-tags.js",
     "validate:squad-orqx": "node scripts/validate-squad-orqx.js",
+    "validate:agent-codenames": "node scripts/validate-agent-codenames.js",
     "validate:release-readiness": "node scripts/release-readiness.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "validate:publish": "node bin/utils/validate-publish.js",

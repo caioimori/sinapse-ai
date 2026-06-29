@@ -515,7 +515,7 @@ acceptance-criteria:
 - **Script:** execute-task.js
   - **Purpose:** Generic task execution wrapper
   - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/execute-task.js
+  - **Location:** .sinapse-ai/core/execution/
 
 ---
 
