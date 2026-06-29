@@ -67,7 +67,7 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 
 Pronto. Você tem 17 squads operando no seu terminal.
 
-> **Nota sobre `npm install`:** O SINAPSE roda um postinstall automático que sincroniza agents para o Claude Code, cria os diretórios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e executa um health check rápido. Para desabilitar (CI, pipelines avançadas), defina `SINAPSE_SKIP_POSTINSTALL=1` antes do `npm install`, ou rode `npm install --ignore-scripts` (comportamento nativo do npm — nenhum postinstall é executado). Nesse caso, rode `sinapse doctor --fix` após a instalação para garantir que o ambiente esteja pronto.
+> **Nota sobre `npm install`:** o SINAPSE **não** roda um postinstall automático. Por segurança de cadeia de suprimentos, nada é executado sozinho ao instalar o pacote via `npm install`. O setup — sincronizar agents para o Claude Code, criar os diretórios de runtime (`.sinapse/handoffs/`, `.sinapse/scratchpad/`) e rodar um health check rápido — acontece **explicitamente** quando você roda `npx sinapse-ai install` (ou `npm run setup`). Para pular o setup nessas execuções explícitas (CI, pipelines avançadas), defina `SINAPSE_SKIP_POSTINSTALL=1` — em CI ele já é pulado automaticamente. Depois, `npx sinapse-ai doctor --fix` garante que o ambiente esteja pronto.
 
 ---
 

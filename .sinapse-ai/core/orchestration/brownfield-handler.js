@@ -352,13 +352,14 @@ Quer que eu comece?`;
       // Record phase in session state
       await this._recordPhase(BrownfieldPhase.SYSTEM_DOCUMENTATION, context);
 
-      // Execute workflow
+      // Hand the discovery workflow to the executor. executeWorkflow() loads and
+      // validates the workflow definition and returns a structured handoff; the
+      // per-phase documentation is produced by the agents the workflow assigns.
+      // Progress for those agent steps is tracked via _onPhaseStart/_onPhaseComplete/
+      // _onPhaseError + handlePhaseFailureAction as the agents report in.
       const result = await workflowExecutor.executeWorkflow(this.workflowPath, {
         projectRoot: this.projectRoot,
         techStack: context.techStack || {},
-        onPhaseStart: (phase) => this._onPhaseStart(phase, context),
-        onPhaseComplete: (phase, output) => this._onPhaseComplete(phase, output, context),
-        onPhaseError: (phase, error) => this._onPhaseError(phase, error, context),
       });
 
       // Check if workflow completed successfully
