@@ -411,17 +411,32 @@ async function cmdInstallGlobal(opts = {}) {
   // Verify
   logger.always(`\n${CYAN}Verification:${NC}`);
   verifyInstall();
+  // Mirror verifyInstall()'s checks so the closing banner reflects what was just
+  // printed above: if any check failed (✗), show a warning banner instead of an
+  // unconditional success banner. The exit code is intentionally left unchanged —
+  // this only changes the message, not the process result.
+  const installVerified =
+    fs.existsSync(SINAPSE_HOME) &&
+    fs.existsSync(CLAUDE_COMMANDS_DIR) &&
+    fs.existsSync(path.join(BIN_DIR, 'sinapse')) &&
+    fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md'));
 
-  // Success message
+  // Closing banner (success vs. completed-with-warnings)
   let startCmd;
   if (llmChoice === 'codex') startCmd = `Run ${CYAN}codex${NC} to start`;
   else if (llmChoice === 'both') startCmd = `Run ${CYAN}sinapse${NC} or ${CYAN}codex${NC} to start`;
   else startCmd = `Run ${CYAN}sinapse${NC} to start Claude Code with all agents`;
 
   logger.always('');
-  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
-  logger.always(`${GREEN}  SINAPSE AI installed successfully!${NC}`);
-  logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  if (installVerified) {
+    logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+    logger.always(`${GREEN}  SINAPSE AI installed successfully!${NC}`);
+    logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
+  } else {
+    logger.always(`${YELLOW}══════════════════════════════════════════════════════════════${NC}`);
+    logger.always(`${YELLOW}  Instalação concluída com avisos — rode 'sinapse doctor' para detalhes.${NC}`);
+    logger.always(`${YELLOW}══════════════════════════════════════════════════════════════${NC}`);
+  }
   logger.always('');
   logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} command files${NC}`);
   logger.always(`  ${startCmd}`);

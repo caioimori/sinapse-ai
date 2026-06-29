@@ -503,7 +503,7 @@ async function runWizard(options = {}) {
     }
 
     // Story 1.4: Install SINAPSE core framework (agents, tasks, workflows, templates)
-    console.log('\n📦 Installing SINAPSE core framework...');
+    console.log('\n📦 ' + t('installingCore'));
     let sinapseCoreResult = null;
     try {
       sinapseCoreResult = await installSinapseCore({
@@ -530,7 +530,7 @@ async function runWizard(options = {}) {
     // Install global orqx agent definitions to ~/.claude/agents/ (only for Claude Code)
     const selectedLLM = answers.selectedLLM || 'claude-code';
     if (selectedLLM === 'claude-code' || selectedLLM === 'both') {
-      console.log('\n🤖 Installing global agent definitions...');
+      console.log('\n🤖 ' + t('installingGlobalAgents'));
       try {
         const globalAgentsResult = await installGlobalAgents();
         if (globalAgentsResult.success) {
@@ -546,7 +546,7 @@ async function runWizard(options = {}) {
         answers.globalAgentsInstalled = 0;
       }
     } else {
-      console.log('\n🤖 Skipping global Claude agents (Codex-only install)');
+      console.log('\n🤖 ' + t('skippingGlobalAgentsCodex'));
       answers.globalAgentsInstalled = 0;
     }
 
@@ -681,7 +681,7 @@ async function runWizard(options = {}) {
     }
 
     // Story INS-4.3: Wire settings.json boundary generator after .sinapse-ai/ copy
-    console.log('\n🔒 Generating boundary rules...');
+    console.log('\n🔒 ' + t('generatingBoundaryRules'));
     try {
       const settingsGenerator = require('../../../../.sinapse-ai/infrastructure/scripts/generate-settings-json');
       settingsGenerator.generate(process.cwd());
@@ -697,7 +697,7 @@ async function runWizard(options = {}) {
     }
 
     // Story INS-4.3: Copy skills (Gap #11)
-    console.log('\n📚 Copying skills...');
+    console.log('\n📚 ' + t('copyingSkills'));
     try {
       const skillsResult = await copySkillFiles(process.cwd());
       if (skillsResult.skipped) {
@@ -713,7 +713,7 @@ async function runWizard(options = {}) {
     }
 
     // Story INS-4.3: Copy extra commands (Gap #12)
-    console.log('\n📋 Copying extra commands...');
+    console.log('\n📋 ' + t('copyingExtraCommands'));
     try {
       const commandsResult = await copyExtraCommandFiles(process.cwd());
       if (commandsResult.skipped) {
@@ -729,7 +729,7 @@ async function runWizard(options = {}) {
     }
 
     // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
-    console.log('\n🔄 Running IDE sync...');
+    console.log('\n🔄 ' + t('runningIdeSync'));
     const targetProjectRoot = process.cwd();
     const savedCwd = process.cwd();
     try {
@@ -750,7 +750,7 @@ async function runWizard(options = {}) {
         console.log = _origLog;
       }
       if (answers.ideSyncValidation === 'drift') {
-        console.warn('⚠️  IDE sync validation: drift detected — run \'sinapse doctor --fix\' post-install');
+        console.warn('⚠️  ' + t('ideSyncDriftWarning'));
       }
     } catch (syncError) {
       console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'sinapse doctor --fix' post-install`);
@@ -765,7 +765,7 @@ async function runWizard(options = {}) {
     // source (the static .codex payload — scripts/tasks/JSONs — was already
     // copied by installSinapseCore when Codex was selected). Codex installs only.
     if (selectedLLM === 'codex' || selectedLLM === 'both') {
-      console.log('\n🔄 Running Codex local-first sync...');
+      console.log('\n🔄 ' + t('runningCodexSync'));
       const savedCwdCodex = process.cwd();
       try {
         const { syncCodexLocalFirst } = require('../../../../.sinapse-ai/infrastructure/scripts/sync-codex-local-first');
@@ -786,14 +786,14 @@ async function runWizard(options = {}) {
     // Story INS-4.12: Fix module resolution + bootstrap timing
     // Bootstrap runs AFTER .sinapse-ai deps are installed (sinapse-ai-installer.js:324-345)
     // NODE_PATH ensures spawned scripts can resolve packages from .sinapse-ai/node_modules/
-    console.log('\n📇 Bootstrapping entity registry...');
+    console.log('\n📇 ' + t('bootstrappingEntityRegistry'));
     try {
       const registryScript = path.join(process.cwd(), '.sinapse-ai', 'development', 'scripts', 'populate-entity-registry.js');
       if (fse.existsSync(registryScript)) {
         // INS-4.12 AC3: Guard — skip bootstrap if .sinapse-ai deps are not installed
         const sinapseCoreNodeModules = path.join(process.cwd(), '.sinapse-ai', 'node_modules');
         if (!fse.existsSync(sinapseCoreNodeModules)) {
-          console.warn('⚠️  .sinapse-ai/node_modules/ not found — skipping entity registry bootstrap');
+          console.warn('⚠️  ' + t('entityRegistrySkippedNoDeps'));
           console.warn('   Run: cd .sinapse-ai && npm install --production');
           answers.entityRegistryStatus = 'skipped-no-deps';
         } else {
@@ -834,7 +834,7 @@ async function runWizard(options = {}) {
     }
 
     // Story 1.6: Environment Configuration
-    console.log('\n📝 Configuring environment...');
+    console.log('\n📝 ' + t('configuringEnv'));
 
     try {
       const envResult = await configureEnvironment({
@@ -901,7 +901,7 @@ async function runWizard(options = {}) {
 
     if (!packageJsonExists) {
       // Greenfield project - no package.json, skip dependency installation
-      console.log('\n📦 Dependency installation...');
+      console.log('\n📦 ' + t('dependencyInstallation'));
       console.log('   ℹ️  No package.json found (greenfield project)');
       console.log('   💡 Dependencies will be installed when you add a package.json');
       answers.depsInstalled = true; // Mark as success since there's nothing to install
@@ -909,7 +909,7 @@ async function runWizard(options = {}) {
       answers.packageManager = detectPackageManager();
     } else {
       // Brownfield project or existing project - has package.json
-      console.log('\n📦 Installing dependencies...');
+      console.log('\n📦 ' + t('installingDeps'));
 
       // Auto-detect package manager (no longer asked as question)
       const detectedPM = detectPackageManager();
@@ -1015,7 +1015,7 @@ async function runWizard(options = {}) {
     // }
 
     // Story 6.7: LLM Routing Installation
-    console.log('\nInstalling LLM Routing commands...');
+    console.log('\n' + t('installingLlmRouting'));
     try {
       // Check if already installed
       if (isLLMRoutingInstalled()) {
@@ -1052,7 +1052,7 @@ async function runWizard(options = {}) {
     answers.proInstalled = false;
 
     // Story 1.8: Installation Validation
-    console.log('\n🔍 Validating installation...\n');
+    console.log('\n🔍 ' + t('validating') + '\n');
 
     try {
       const validation = await validateInstallation(

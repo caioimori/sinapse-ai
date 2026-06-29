@@ -4,10 +4,19 @@
  */
 
 const { generateReport } = require('../../../../packages/installer/src/wizard/validation/report-generator');
+const { setLanguage, getLanguage } = require('../../../../packages/installer/src/wizard/i18n');
 
 describe('Report Generator', () => {
+  let prevLang;
   beforeEach(() => {
     jest.clearAllMocks();
+    // Report strings are now i18n-routed (default PT). Pin EN so the assertions
+    // on English literals below stay deterministic regardless of host language.
+    prevLang = getLanguage();
+    setLanguage('en');
+  });
+  afterEach(() => {
+    setLanguage(prevLang);
   });
 
   describe('generateReport', () => {
