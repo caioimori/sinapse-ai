@@ -337,10 +337,12 @@ describe('Wizard Integration - Story 1.7', () => {
     it('should show installation progress messages', async () => {
       await runWizard();
 
+      // Progress messages are i18n-routed (wizard defaults to PT-BR). Assert on
+      // language-agnostic substrings so the test holds regardless of locale.
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Installing dependencies'),
+        expect.stringContaining('depend'),
       );
-      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('installed'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('SINAPSE core'));
     });
   });
 
