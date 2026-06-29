@@ -199,22 +199,29 @@ Workflows orchestrate multiple tasks and agents for complex operations.
 
 ### Available Workflows
 
-| Workflow                 | Use Case                | Agents Involved   |
-| ------------------------ | ----------------------- | ----------------- |
-| `greenfield-fullstack`   | New full-stack project  | All agents        |
-| `brownfield-integration` | Add SINAPSE to existing    | dev, architect    |
-| `fork-join`              | Parallel task execution | Multiple          |
-| `organizer-worker`       | Delegated execution     | po, dev           |
-| `data-pipeline`          | ETL workflows           | data-engineer, qa |
+| Workflow                  | Use Case                            |
+| ------------------------- | ----------------------------------- |
+| `greenfield-ui`           | New site / landing page / app       |
+| `greenfield-fullstack`    | New platform / SaaS                 |
+| `greenfield-service`      | New API / backend service           |
+| `brownfield-fullstack`    | Add SINAPSE to an existing project  |
+| `spec-pipeline`           | Complex briefing (spec first)       |
+| `story-development-cycle` | Implement a single story            |
 
-### Executing Workflows
+### Running a Workflow
+
+You don't invoke workflows by name — describe what you want and SINAPSE picks
+the right one (greenfield vs brownfield, UI vs fullstack vs service).
 
 ```bash
-# Start a workflow
-sinapse workflow greenfield-fullstack
+# Describe the project — SINAPSE classifies it and runs the right workflow
+sinapse build "new SaaS platform for gym management"
 
-# With parameters
-sinapse workflow brownfield-integration --target=./existing-project
+# Preview which workflow a briefing would trigger (without running it)
+sinapse route "add dark mode to the platform"
+
+# Run the development cycle for an existing story
+sinapse orchestrate <story-id>
 ```
 
 ---
@@ -239,24 +246,24 @@ A squad is a self-contained package containing:
 ### Distribution Levels
 
 ```
-Level 1: LOCAL        --> ./squads/           (Private)
-Level 2: SINAPSE-SQUADS  --> github.com/SinapseAI (Public/Free)
-Level 3: SINAPSE API   --> api.sinapse.ai      (Marketplace)
+Level 1: LOCAL        --> ./squads/      (today — managed in your project)
+Level 2: REGISTRY     --> remote sharing (roadmap)
+Level 3: MARKETPLACE  --> paid squads    (roadmap)
 ```
 
 ### Using Squads
 
+Squads live in the `squads/` directory of your project. To add one, drop its
+folder there; to build a new one, scaffold it with the squad-creator agent:
+
 ```bash
-# List available squads
-sinapse squads list
-
-# Download a squad
-sinapse squads download etl-squad
-
 # Create your own squad
 @squad-creator
 *create-squad my-custom-squad
 ```
+
+> Remote squad distribution (browse / download from a registry) is on the
+> roadmap — today squads are managed directly under `squads/`.
 
 ### Official Squads
 
@@ -467,11 +474,8 @@ Maintain context through sessions by:
 
 ### 5. Leverage Squads
 
-Don't reinvent the wheel - check for existing squads:
-
-```bash
-sinapse squads search {keyword}
-```
+Don't reinvent the wheel — browse the squads already shipped under `squads/`
+before building a new agent from scratch.
 
 ---
 
