@@ -6,6 +6,20 @@
 
 ---
 
+## Atualização 2026-06-30
+
+**Épico fechado — 7/7 frentes resolvidas.** Lançado junto como **v1.19.0** (CHANGELOG atualizado).
+
+- **3 PRs do motor mergeados na main nesta sessão:**
+  - **#307 (F4.1)** — planning real via `claude`: `generatePlan` planeja sobre a story completa e mata o stub; fallback honestamente marcado `degraded`/`stub`.
+  - **#308 (F5.1)** — gates com dentes: o gate `epic4_to_epic6` ganha o check `plan_is_real`, que BLOQUEIA plano degradado/ausente; score do gate ficou honesto (gate sem checks não recebe nota máxima).
+  - **#309 (F3.1)** — terminal-spawner silenciado em headless via guard consciente de capacidade (opção B do arquiteto). A suíte do motor saiu de timeout (2min) para **~5s**; **1210 testes verdes**.
+- **F0.1 fechada por design:** `frameworkProtection:false` é modo contribuidor deliberado (verificado 2026-06-11); projetos instalados recebem `true` via template; doctor espera `false` neste repo; `uninstall`-corrompe-git já corrigido no commit `82c048a`.
+- **F3 reframe:** a frente foi resolvida pela **opção B** (silenciar o spawner em headless), com a **remoção física da linhagem `pm.sh` adiada para STORY-F3C** (follow-up).
+- **Pendente honesto:** o checkpoint de reavaliação da aposta (seção 7 do README) — story real e2e via `orchestrate` medida contra o nativo — **ainda não foi medido**. Segue como follow-up obrigatório antes de dobrar (F6).
+
+---
+
 ## TL;DR (o que aconteceu e onde estamos)
 
 Foi feita uma **auditoria fria completa** do framework (`docs/audits/AUDIT-2026-06-04-cold-review.md`). Veredito: toolkit de prompts sólido + segurança forte, mas o **motor de orquestração autônoma (`sinapse orchestrate`) era teatro** — reportava `success: true` sem fazer trabalho. O Caio decidiu **APOSTAR** (consolidar o motor como diferencial), contra a recomendação da auditoria (que era cortar/híbrido).

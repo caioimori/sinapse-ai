@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.0] — 2026-06-30 — ⚙️ Motor de orquestração real (do teatro ao código)
+
+> Minor release. Atualização segura via `npx sinapse-ai update`.
+
+### Features
+
+- **orchestration** — `generatePlan` agora planeja via `claude` real sobre a story completa, em vez do stub anterior; quando o agente não está disponível, o fallback é honestamente marcado como `degraded`/`stub` (sem fabricar sucesso) (#307).
+- **orchestration** — o gate `epic4_to_epic6` ganha o check `plan_is_real`, que BLOQUEIA plano degradado ou ausente; o score do gate ficou honesto — gate sem checks não recebe mais nota máxima (#308).
+
 ### Bug Fixes
 
 - **cross-platform** — hardening Windows/macOS: exec bits, spawn de `.cmd` shims, shell pipelines e gate de CI pré-merge (#294).
@@ -14,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cross-platform** — hardening onda 3: retry de file-locking no install/migração de MCP, BOM no config global e CRLF no doctor (#296).
 - **orchestration** — `BrownfieldHandler` chamava um método inexistente no `WorkflowExecutor`, fazendo a discovery brownfield falhar em silêncio; `executeWorkflow()` implementado e coberto por teste de contrato.
 - **installer** — falha de `install` agora exibe mensagem de erro classificada e acionável (permissão, disco, rede, etc.) em vez de texto genérico.
+- **orchestration** — terminal-spawner em ambiente headless (CI/SSH/Docker/VSCode) não tenta mais `spawn(bash, pm.sh)`: guard consciente de capacidade que cai no fallback de "manual execution", eliminando ruído de teste e workers lentos — a suíte do motor caiu de timeout (2min) para ~5s (#309).
+- **installer** — rollback transacional em upgrades: se o upgrade falha no meio, o estado anterior é restaurado por inteiro (#306).
+- **perf** — perf-tests do squad tolerantes a carga: o orçamento de tempo deixa de gerar falsos negativos sob carga de CI (#303).
+- **tasks** — paths fabricados removidos dos rodapés de tasks (Tools/Scripts), com guard no validador para impedir reincidência (#304).
+- **orchestration** — espelho do orquestrador master sincronizado + invariante de contagem honesto (#305).
 
 ### Documentation
 
