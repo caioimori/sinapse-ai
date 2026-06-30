@@ -348,7 +348,7 @@ describe('BuildOrchestrator', () => {
   // ─────────────────────────────────────────────────────────────────────────────
 
   describe('generatePlan()', () => {
-    test('should generate plan from story file', async () => {
+    test('should generate plan from story file (degraded fallback under jest)', async () => {
       const storiesDir = path.join(testDir, 'docs', 'stories');
       fs.mkdirSync(storiesDir, { recursive: true });
       fs.writeFileSync(
@@ -366,6 +366,96 @@ describe('BuildOrchestrator', () => {
       expect(plan.storyId).toBe('gen-plan-story');
       expect(plan.phases[0].subtasks.length).toBe(2);
       expect(plan.phases[0].subtasks[0].description).toContain('First criteria');
+    });
+
+    // AC1: real planning path invokes claude and returns a rich, non-stub plan.
+    test('AC1: real path invokes claude and returns a rich plan with no stub mark', async () => {
+      const storiesDir = path.join(testDir, 'docs', 'stories');
+      fs.mkdirSync(storiesDir, { recursive: true });
+      const storyPath = path.join(storiesDir, 'real-plan-story.md');
+      fs.writeFileSync(storyPath, '# Story\n\nBuild a thing.\n\n- [ ] AC1: First criteria\n');
+
+      const richJson = JSON.stringify({
+        phases: [
+          {
+            id: 'phase-1',
+            name: 'Core',
+            subtasks: [
+              { id: '1.1', description: 'Do X', files: ['src/x.js'], verification: 'npm test' },
+              { id: '1.2', description: 'Do Y', files: ['src/y.js'], verification: 'npm run lint' },
+            ],
+          },
+        ],
+      });
+      const spy = jest
+        .spyOn(orchestrator, 'runClaudeCLI')
+        .mockResolvedValue({ stdout: '```json\n' + richJson + '\n```', stderr: '', code: 0 });
+
+      const prev = process.env.SINAPSE_REAL_DISPATCH;
+      process.env.SINAPSE_REAL_DISPATCH = '1';
+      try {
+        const ctx = { storyId: 'real-plan-story', storyPath, config: orchestrator.config };
+        const plan = await orchestrator.generatePlan(ctx);
+
+        expect(spy).toHaveBeenCalled();
+        expect(plan.degraded).toBeUndefined();
+        expect(plan.stub).toBeUndefined();
+        expect(plan.phases[0].subtasks.length).toBe(2);
+        expect(plan.phases[0].subtasks[0].files).toContain('src/x.js');
+        expect(plan.phases[0].subtasks[0].verification).toBe('npm test');
+      } finally {
+        if (prev === undefined) delete process.env.SINAPSE_REAL_DISPATCH;
+        else process.env.SINAPSE_REAL_DISPATCH = prev;
+        spy.mockRestore();
+      }
+    });
+
+    // AC2: without the env guard, must degrade honestly AND never spawn claude.
+    test('AC2: degraded fallback marks the plan and never spawns claude', async () => {
+      const storiesDir = path.join(testDir, 'docs', 'stories');
+      fs.mkdirSync(storiesDir, { recursive: true });
+      const storyPath = path.join(storiesDir, 'degraded-story.md');
+      fs.writeFileSync(
+        storyPath,
+        '# Story\n\n- [ ] AC1: First criteria\n- [ ] AC2: Second criteria\n',
+      );
+
+      const spy = jest.spyOn(orchestrator, 'runClaudeCLI').mockResolvedValue({ stdout: '{}' });
+      const prev = process.env.SINAPSE_REAL_DISPATCH;
+      delete process.env.SINAPSE_REAL_DISPATCH;
+      try {
+        const ctx = { storyId: 'degraded-story', storyPath, config: orchestrator.config };
+        const plan = await orchestrator.generatePlan(ctx);
+
+        expect(spy).not.toHaveBeenCalled();
+        expect(plan.degraded === true || plan.stub === true).toBe(true);
+        expect(plan.reason).toBeTruthy();
+        expect(plan.phases[0].subtasks.length).toBe(2);
+      } finally {
+        if (prev !== undefined) process.env.SINAPSE_REAL_DISPATCH = prev;
+        spy.mockRestore();
+      }
+    });
+
+    // AC3: missing file → explicit throw.
+    test('AC3: throws explicitly when the story file does not exist', async () => {
+      const ctx = {
+        storyId: 'ghost-story',
+        storyPath: path.join(testDir, 'docs', 'stories', 'does-not-exist.md'),
+        config: orchestrator.config,
+      };
+      await expect(orchestrator.generatePlan(ctx)).rejects.toThrow(/not found/i);
+    });
+
+    // AC3: empty / non-actionable story → explicit throw.
+    test('AC3: throws explicitly when the story has no actionable content', async () => {
+      const storiesDir = path.join(testDir, 'docs', 'stories');
+      fs.mkdirSync(storiesDir, { recursive: true });
+      const storyPath = path.join(storiesDir, 'empty-story.md');
+      fs.writeFileSync(storyPath, '# Title only\n');
+
+      const ctx = { storyId: 'empty-story', storyPath, config: orchestrator.config };
+      await expect(orchestrator.generatePlan(ctx)).rejects.toThrow(/actionable|empty/i);
     });
   });
 
