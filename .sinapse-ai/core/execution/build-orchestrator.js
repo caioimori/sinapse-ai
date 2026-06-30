@@ -227,6 +227,10 @@ class BuildOrchestrator extends EventEmitter {
         duration,
         phases: ctx.phases,
         reportPath: ctx.reportPath,
+        // F5 (epic: orchestration-consolidation): surface the real plan object so the
+        // quality gate can inspect its honesty (degraded/stub/subtasks). Without this
+        // the epic4_to_epic6 gate has nothing real to bite on.
+        plan: ctx.plan,
       };
     } catch (error) {
       ctx.errors.push(error);

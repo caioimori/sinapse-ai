@@ -54,7 +54,9 @@ const DEFAULT_GATE_CONFIG = {
     blocking: true,
     requireTests: true,
     minTestCoverage: 0,
-    checks: ['plan_complete', 'implementation_exists', 'no_critical_errors'],
+    // F5 (epic: orchestration-consolidation): `plan_is_real` gives this gate teeth —
+    // a degraded/stub/absent/subtask-less plan is BLOCKED, not waved through.
+    checks: ['plan_complete', 'plan_is_real', 'implementation_exists', 'no_critical_errors'],
   },
 };
 
@@ -148,11 +150,7 @@ class GateEvaluator {
       const checks = await this._runGateChecks(fromEpic, toEpic, epicResult, gateConfig);
       result.checks = checks;
 
-      // Calculate score
-      const passedChecks = checks.filter((c) => c.passed).length;
-      result.score = checks.length > 0 ? (passedChecks / checks.length) * 5 : 5;
-
-      // Collect issues
+      // Collect issues from failed checks
       result.issues = checks
         .filter((c) => !c.passed)
         .map((c) => ({
@@ -160,6 +158,22 @@ class GateEvaluator {
           message: c.message,
           severity: c.severity || 'medium',
         }));
+
+      // Calculate score — honesty invariant (F5, epic: orchestration-consolidation):
+      // a gate that evaluated ZERO checks verified NOTHING. It must NOT receive the
+      // max score (the old `: 5` was theater — an unconfigured gate always passed).
+      // Score 0 + an explicit issue so the verdict reflects "no real verification".
+      if (checks.length === 0) {
+        result.score = 0;
+        result.issues.push({
+          check: 'no_checks_evaluated',
+          message: 'Gate evaluated zero checks — nothing was actually verified',
+          severity: this.strictMode ? 'critical' : 'high',
+        });
+      } else {
+        const passedChecks = checks.filter((c) => c.passed).length;
+        result.score = (passedChecks / checks.length) * 5;
+      }
 
       // Determine verdict (AC2)
       result.verdict = this._determineVerdict(result, gateConfig);
@@ -279,11 +293,46 @@ class GateEvaluator {
         break;
 
       // Epic 4 checks
-      case 'plan_complete':
-        result.passed = !!epicResult.planPath || epicResult.planComplete === true;
+      case 'plan_complete': {
+        // F5: hardened but backward-compatible. When a real plan OBJECT is present
+        // (wired in via epic-4-executor), require real phases. When only a path/flag
+        // is present (legacy callers), keep the old signal so existing behavior holds.
+        const plan = epicResult.plan;
+        if (plan && typeof plan === 'object') {
+          result.passed = Array.isArray(plan.phases) && plan.phases.length > 0;
+        } else {
+          result.passed = !!epicResult.planPath || epicResult.planComplete === true;
+        }
         result.message = result.passed ? 'Implementation plan complete' : 'Plan not complete';
         result.severity = 'high';
         break;
+      }
+
+      case 'plan_is_real': {
+        // F5 (epic: orchestration-consolidation) — the gate's teeth. Honesty
+        // invariant: a degraded/stub/absent/subtask-less plan is NOT a real artifact
+        // and MUST block, not slip through. Critical severity → verdict BLOCKED.
+        const plan = epicResult.plan;
+        if (!plan || typeof plan !== 'object') {
+          result.passed = false;
+          result.message = 'No real plan object to inspect (plan absent)';
+        } else if (plan.degraded === true || plan.stub === true) {
+          result.passed = false;
+          result.message = `Plan is degraded/stub${plan.reason ? ` (${plan.reason})` : ''}`;
+        } else {
+          const phases = Array.isArray(plan.phases) ? plan.phases : [];
+          const subtaskCount = phases.reduce(
+            (n, p) => n + (Array.isArray(p.subtasks) ? p.subtasks.length : 0),
+            0,
+          );
+          result.passed = phases.length > 0 && subtaskCount > 0;
+          result.message = result.passed
+            ? `Plan is real (${phases.length} phase(s), ${subtaskCount} subtask(s))`
+            : 'Plan has no subtasks';
+        }
+        result.severity = 'critical';
+        break;
+      }
 
       case 'implementation_exists':
         result.passed = !!epicResult.implementationPath || epicResult.codeChanges?.length > 0;
@@ -342,7 +391,7 @@ class GateEvaluator {
       case 3:
         return ['spec_exists', 'complexity_assessed'];
       case 4:
-        return ['plan_complete', 'no_critical_errors'];
+        return ['plan_complete', 'plan_is_real', 'no_critical_errors'];
       case 6:
         return ['qa_report_exists', 'verdict_generated'];
       default:

@@ -115,6 +115,9 @@ class Epic4Executor extends EpicExecutor {
           return this._completeExecution({
             implementationPath: planPath,
             planPath,
+            // F5 (epic: orchestration-consolidation): propagate the real plan object
+            // so the downstream epic4_to_epic6 gate can verify it is not degraded/stub.
+            plan: buildResult.plan,
             build: buildResult,
             reportPath: buildResult.reportPath,
             phases: buildResult.phases,
