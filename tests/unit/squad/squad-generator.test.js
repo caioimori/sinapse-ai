@@ -18,6 +18,7 @@
 const path = require('path');
 const fs = require('fs').promises;
 const os = require('os');
+const { perfBudget } = require('../../helpers/perf-budget');
 const {
   SquadGenerator,
   SquadGeneratorError,
@@ -497,10 +498,9 @@ describe('SquadGenerator', () => {
   });
 
   describe('Performance', () => {
-    // Use more generous thresholds in CI environments
-    const isCI = process.env.CI === 'true';
-    const generateThreshold = isCI ? 5000 : 500;
-    const listThreshold = isCI ? 1000 : 100;
+    // Load-tolerant budgets — see tests/helpers/perf-budget.js
+    const generateThreshold = perfBudget(500);
+    const listThreshold = perfBudget(100);
 
     it('should generate squad within acceptable time', async () => {
       const start = Date.now();
