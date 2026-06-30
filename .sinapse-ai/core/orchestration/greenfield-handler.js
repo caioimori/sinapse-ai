@@ -624,62 +624,30 @@ class GreenfieldHandler extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Spawns an agent via TerminalSpawner (AC7) with ExecutorAssignment (AC6)
+   * Resolves agent execution to an honest manual hand-off (AC6 selection only).
+   *
+   * The legacy visual-terminal lineage (TerminalSpawner → pm.sh) was a verified stub that
+   * never invoked claude, so spawning it fabricated success in headless-with-bash. It has
+   * been removed (STORY-F3C); execution is now handed off honestly to the user. Routing to
+   * the canonical `dispatcher → claude` lineage is intentionally out of scope here.
    *
    * @param {string} agent - Agent ID (e.g., '@devops')
    * @param {string} task - Task to execute
    * @param {Object} spawnContext - Spawn context
-   * @returns {Promise<Object>} Spawn result
+   * @returns {Promise<Object>} Honest manual hand-off result
    * @private
    */
   async _spawnAgent(agent, task, spawnContext = {}) {
-    this._log(`Spawning ${agent} for ${task}`);
+    this._log(`Handing off ${agent} for ${task} (manual execution)`);
 
     this.emit('agentSpawn', { agent, task, context: spawnContext });
 
-    try {
-      // Try TerminalSpawner first (AC7)
-      const TerminalSpawner = require('./terminal-spawner');
-
-      if (TerminalSpawner.isSpawnerAvailable()) {
-        const agentId = agent.replace('@', '');
-        const result = await TerminalSpawner.spawnAgent(agentId, task, {
-          context: {
-            instructions: spawnContext.instructions || `Execute ${task}`,
-            creates: spawnContext.creates || [],
-            requires: spawnContext.requires || [],
-            metadata: spawnContext.previousResults || {},
-          },
-          timeout: 7200000, // 2 hours
-          debug: this.options.debug,
-        });
-
-        if (result.pid) {
-          this.emit('terminalSpawn', { agent, pid: result.pid, task });
-        }
-
-        return {
-          success: result.success !== false,
-          pid: result.pid,
-          output: result.output,
-          outputFile: result.outputFile,
-        };
-      }
-
-      // Fallback: Return instructions for manual execution
-      this._log(`TerminalSpawner not available, returning manual instructions for ${agent}`);
-      return {
-        success: true,
-        manual: true,
-        instructions: `Spawn ${agent} manually and execute: *${task}`,
-      };
-    } catch (error) {
-      this._log(`Failed to spawn ${agent}: ${error.message}`, 'error');
-      return {
-        success: false,
-        error: error.message,
-      };
-    }
+    // Honest hand-off: return instructions for manual execution (no fabricated success).
+    return {
+      success: true,
+      manual: true,
+      instructions: `Spawn ${agent} manually and execute: *${task}`,
+    };
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════

@@ -36,10 +36,6 @@ workflow:
     use_dynamic_executor: true
     executor_assignment_module: ".sinapse-ai/core/orchestration/executor-assignment.js"
 
-    # Terminal spawning from Story 11.2
-    use_terminal_spawning: true
-    terminal_spawner_module: ".sinapse-ai/core/orchestration/terminal-spawner.js"
-
     # Self-healing configuration
     self_healing:
       enabled: "${config.coderabbit_integration.enabled}"
@@ -122,9 +118,7 @@ workflow:
       task: "dev-develop-story"
       description: >-
         Executor dinâmico desenvolve a story baseado na atribuição.
-        Usa terminal spawning para contexto limpo (Story 11.2).
-
-      spawn_in_terminal: true  # Use TerminalSpawner
+        A execução do agente é entregue (hand-off manual honesto).
 
       inputs:
         - validated_story:
@@ -199,8 +193,6 @@ workflow:
         Quality gate executado por agente DIFERENTE do executor.
         Valida código, testes, arquitetura e padrões.
 
-      spawn_in_terminal: true  # Use TerminalSpawner
-
       inputs:
         - implementation:
             from: 2_development.implementation
@@ -237,8 +229,6 @@ workflow:
       description: >-
         DevOps executa push ao final de cada story aprovada.
         Cria PR automaticamente com referência à story.
-
-      spawn_in_terminal: true  # Use TerminalSpawner
 
       inputs:
         - reviewed_code:
@@ -510,7 +500,6 @@ metadata:
     - orchestration
     - development-cycle
     - dynamic-executor
-    - terminal-spawning
     - self-healing
     - checkpoint
 

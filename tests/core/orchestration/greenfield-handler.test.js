@@ -42,13 +42,6 @@ jest.mock('fs', () => ({
   mkdirSync: jest.fn(),
 }));
 
-// Mock terminal-spawner
-const mockTerminalSpawner = {
-  isSpawnerAvailable: jest.fn().mockReturnValue(false),
-  spawnAgent: jest.fn().mockResolvedValue({ success: true, pid: 1234 }),
-};
-jest.mock('../../../.sinapse-ai/core/orchestration/terminal-spawner', () => mockTerminalSpawner);
-
 // Mock dependencies
 const mockWorkflowExecutor = {
   executeWorkflow: jest.fn(),
@@ -76,10 +69,6 @@ describe('GreenfieldHandler', () => {
     fs.existsSync.mockReturnValue(false); // Greenfield = nothing exists
     mockSurfaceChecker.shouldSurface.mockReturnValue({ should_surface: true });
     mockSessionState.exists.mockResolvedValue(false);
-
-    // Reset terminal spawner mock to defaults
-    mockTerminalSpawner.isSpawnerAvailable.mockReturnValue(false);
-    mockTerminalSpawner.spawnAgent.mockResolvedValue({ success: true, pid: 1234 });
 
     handler = new GreenfieldHandler(TEST_PROJECT_ROOT, {
       debug: false,
@@ -287,16 +276,18 @@ describe('GreenfieldHandler', () => {
       expect(result.data.message).toContain('Artefatos de planejamento criados');
     });
 
-    test('should return failure on agent error', async () => {
-      // Make terminal spawner fail for first agent
-      mockTerminalSpawner.isSpawnerAvailable.mockReturnValue(true);
-      mockTerminalSpawner.spawnAgent.mockResolvedValue({ success: false, error: 'Agent failed' });
+    test('should hand off agents via honest manual fallback (no fabricated success)', async () => {
+      // STORY-F3C: the legacy TerminalSpawner/pm.sh stub was removed; _spawnAgent now
+      // returns an honest manual hand-off instead of fabricating success.
+      const spawnResult = await handler._spawnAgent('@analyst', 'research', {});
+      expect(spawnResult.success).toBe(true);
+      expect(spawnResult.manual).toBe(true);
+      expect(spawnResult.instructions).toContain('@analyst');
 
+      // Phase 1 still surfaces normally with the manual hand-off.
       const result = await handler._executePhase1({});
-
-      expect(result.action).toBe('greenfield_phase_failure');
-      expect(result.options).toHaveLength(3);
-      expect(result.options[0].action).toBe('retry');
+      expect(result.action).toBe('greenfield_surface');
+      expect(result.phase).toBe(GreenfieldPhase.DISCOVERY);
     });
   });
 

@@ -70,11 +70,6 @@ jest.mock('../../../.sinapse-ai/core/orchestration/executor-assignment', () => (
   DEFAULT_ASSIGNMENT: {},
 }));
 
-jest.mock('../../../.sinapse-ai/core/orchestration/terminal-spawner', () => ({
-  spawnAgent: jest.fn().mockResolvedValue({ success: true, output: 'done' }),
-  isSpawnerAvailable: jest.fn().mockReturnValue(true),
-}));
-
 jest.mock('../../../.sinapse-ai/core/orchestration/workflow-executor', () => {
   return {
     WorkflowExecutor: jest.fn().mockImplementation(() => ({

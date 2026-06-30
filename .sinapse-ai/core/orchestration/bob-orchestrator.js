@@ -10,8 +10,7 @@
  *
  * Integrates all Epic 11 modules:
  * - ExecutorAssignment (11.1) — agent selection
- * - TerminalSpawner (11.2) — agent spawning
- * - WorkflowExecutor (11.3) — development cycle
+ * - WorkflowExecutor (11.3) — development cycle (honest manual hand-off)
  * - SurfaceChecker (11.4) — human decision criteria
  * - SessionState (11.5) — session persistence
  *
@@ -1252,8 +1251,7 @@ class BobOrchestrator {
    *
    * Delegates to Epic 11 modules:
    * - ExecutorAssignment for agent selection (AC8)
-   * - TerminalSpawner for agent spawning (AC9)
-   * - WorkflowExecutor for development cycle (AC10)
+   * - WorkflowExecutor for development cycle, with honest manual hand-off (AC10)
    *
    * Story 12.5 AC5: Updates session state at each phase transition.
    *

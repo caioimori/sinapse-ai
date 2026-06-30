@@ -41,9 +41,6 @@ const cliCommands = require('./cli-commands');
 // Story 11.1: Executor Assignment (Projeto Bob)
 const ExecutorAssignment = require('./executor-assignment');
 
-// Story 11.2: Terminal Spawner (Projeto Bob)
-const TerminalSpawner = require('./terminal-spawner');
-
 // Story 11.3: Workflow Executor (Projeto Bob)
 const {
   WorkflowExecutor,
@@ -215,15 +212,6 @@ module.exports = {
   assignExecutorFromContent: ExecutorAssignment.assignExecutorFromContent,
   validateExecutorAssignment: ExecutorAssignment.validateExecutorAssignment,
   EXECUTOR_ASSIGNMENT_TABLE: ExecutorAssignment.EXECUTOR_ASSIGNMENT_TABLE,
-
-  // Story 11.2: Terminal Spawner (Projeto Bob)
-  TerminalSpawner,
-  spawnAgent: TerminalSpawner.spawnAgent,
-  createContextFile: TerminalSpawner.createContextFile,
-  pollForOutput: TerminalSpawner.pollForOutput,
-  isSpawnerAvailable: TerminalSpawner.isSpawnerAvailable,
-  getPlatform: TerminalSpawner.getPlatform,
-  cleanupOldFiles: TerminalSpawner.cleanupOldFiles,
 
   // Story 11.3: Workflow Executor (Projeto Bob)
   WorkflowExecutor,
