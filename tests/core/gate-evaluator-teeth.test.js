@@ -101,6 +101,44 @@ describe('Gate Evaluator teeth (Story F5) — blocks degraded/absent, approves r
     });
   });
 
+  describe('AC2 — gate never approves a result that itself signals failure (master/gate leak fix)', () => {
+    it('BLOCKS when the epic result is success:false', async () => {
+      const result = await evaluator.evaluate(4, 6, {
+        success: false,
+        plan: realPlan,
+        implementationPath: '/impl',
+      });
+      expect(result.verdict).toBe(GateVerdict.BLOCKED);
+      expect(result.verdict).not.toBe(GateVerdict.APPROVED);
+      const guard = result.checks.find((c) => c.name === 'result_not_failed');
+      expect(guard).toBeDefined();
+      expect(guard.passed).toBe(false);
+      expect(guard.severity).toBe('critical');
+    });
+
+    it('BLOCKS a QA report whose verdict is BLOCKED (reproduces the e2e: approved score 5.0)', async () => {
+      const result = await evaluator.evaluate(6, 7, {
+        reportPath: '/qa.md',
+        verdict: 'blocked',
+        qaReport: { verdict: 'BLOCKED' },
+      });
+      // Old behavior: qa_report_exists + verdict_generated both passed → score 5.0 → APPROVED.
+      expect(result.verdict).not.toBe(GateVerdict.APPROVED);
+      expect(result.verdict).toBe(GateVerdict.BLOCKED);
+    });
+
+    it('does NOT add the guard (nor inflate checks) for a sound result', async () => {
+      const result = await evaluator.evaluate(4, 6, {
+        plan: realPlan,
+        implementationPath: '/impl',
+        errors: [],
+      });
+      expect(result.checks.find((c) => c.name === 'result_not_failed')).toBeUndefined();
+      expect(result.verdict).toBe(GateVerdict.APPROVED);
+      expect(result.score).toBe(5);
+    });
+  });
+
   describe('AC3 — zero checks is honest (score 0, never max)', () => {
     it('a gate that runs zero checks scores 0 and does not approve', async () => {
       // An unconfigured transition (no DEFAULT config, no default checks) → 0 checks.
