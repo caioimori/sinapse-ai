@@ -20,7 +20,7 @@ After `qa-review-story.md` produces a PASS/CONCERNS verdict, automatically:
 
 - **Triggered by:** `development-cycle.yaml` Phase 5 (`5_push`)
 - **Pre-condition:** Story status `InReview`, QA verdict `PASS` or `CONCERNS`
-- **Spawn behavior:** `spawn_in_terminal: true` (uses TerminalSpawner if available)
+- **Execution:** handed off (manual) to @devops — the cycle does not invoke the agent in-process
 
 ## Inputs
 

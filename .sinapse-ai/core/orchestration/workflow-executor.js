@@ -23,9 +23,8 @@ const fsSync = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-// Import dependencies from Story 11.1, 11.2, and 11.5
+// Import dependencies from Story 11.1 and 11.5
 const ExecutorAssignment = require('./executor-assignment');
-const TerminalSpawner = require('./terminal-spawner');
 const { SessionState, ActionType } = require('./session-state');
 
 // IDS Gate Wiring: GateEvaluator wires the IDS verification gates into the
@@ -42,29 +41,6 @@ try {
 const DEFAULT_TIMEOUT_MS = 7200000; // 2 hours
 const CHECKPOINT_TIMEOUT_MS = 1800000; // 30 minutes
 const STATE_SAVE_INTERVAL_MS = 300000; // 5 minutes
-
-/**
- * Determines whether a REAL visual-terminal spawn can occur in the current environment.
- *
- * Combines the platform-support signal (`isSpawnerAvailable()`) with the stricter
- * real-terminal signal (`detectEnvironment().supportsVisualTerminal`). The latter returns
- * `false` in headless contexts (CI / SSH / Docker / VS Code integrated terminal) and `true`
- * only in a native terminal. Without this second check, `isSpawnerAvailable()` alone returns
- * `true` on CI / Windows-without-bash, causing `spawn('bash', [pm.sh])` to fail with ENOENT
- * (test noise) plus a slow subprocess. When this returns `false`, phases skip the spawn and
- * fall through to their existing "manual execution" fallback — no bash, no noise.
- *
- * Note: this intentionally does NOT change `TerminalSpawner.isSpawnerAvailable()` semantics
- * (Conservative Default — Article XI); the hardening lives at the call-sites only.
- *
- * @returns {boolean} True only when a native visual terminal spawn is safe to attempt.
- */
-function canSpawnVisualTerminal() {
-  return (
-    TerminalSpawner.isSpawnerAvailable() &&
-    TerminalSpawner.detectEnvironment().supportsVisualTerminal
-  );
-}
 
 /**
  * Workflow phase status
@@ -208,25 +184,6 @@ class WorkflowExecutor {
       } catch (error) {
         if (this.options.debug) {
           console.log(`[WorkflowExecutor] Agent spawn callback error: ${error.message}`);
-        }
-      }
-    }
-  }
-
-  /**
-   * Emits terminal spawn to all registered callbacks (Story 12.6)
-   * @param {string} agent - Agent ID
-   * @param {number} pid - Process ID
-   * @param {string} task - Task being executed
-   * @private
-   */
-  _emitTerminalSpawn(agent, pid, task) {
-    for (const callback of this._terminalSpawnCallbacks) {
-      try {
-        callback(agent, pid, task);
-      } catch (error) {
-        if (this.options.debug) {
-          console.log(`[WorkflowExecutor] Terminal spawn callback error: ${error.message}`);
         }
       }
     }
@@ -739,39 +696,8 @@ class WorkflowExecutor {
         }
       }
 
-      // Use terminal spawning (Story 11.2)
-      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
-        const context = {
-          story: storyPath,
-          files: [],
-          instructions: `Execute *develop for story: ${storyPath}`,
-          metadata: this.state.accumulatedContext,
-        };
-
-        const result = await TerminalSpawner.spawnAgent(agent.replace('@', ''), 'develop', {
-          context,
-          timeout: DEFAULT_TIMEOUT_MS,
-          debug: this.options.debug,
-        });
-
-        // Story 12.6: Emit terminal spawn for observability (AC1)
-        if (result.pid) {
-          this._emitTerminalSpawn(agent, result.pid, 'development');
-        }
-
-        return {
-          status: result.success ? PhaseStatus.COMPLETED : PhaseStatus.FAILED,
-          implementation: {
-            files_created: [],
-            files_modified: [],
-            tests_added: [],
-          },
-          output: result.output,
-          outputFile: result.outputFile,
-        };
-      }
-
-      // Fallback: Return pending for manual execution
+      // Honest fallback: the dev cycle does not invoke the agent in-process here;
+      // execution is handed off (manual) rather than fabricated by a stub.
       return {
         status: PhaseStatus.COMPLETED,
         implementation: {
@@ -779,7 +705,7 @@ class WorkflowExecutor {
           files_modified: [],
           tests_added: [],
         },
-        note: 'Terminal spawning not available, manual execution required',
+        note: 'Manual execution required',
       };
     } catch (error) {
       return {
@@ -1056,42 +982,7 @@ class WorkflowExecutor {
       // Story 12.6: Emit agent spawn for observability (AC1)
       this._emitAgentSpawn(agent, 'quality_gate');
 
-      // Use terminal spawning
-      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
-        const context = {
-          story: storyPath,
-          files: [],
-          instructions: `Execute quality review for story: ${storyPath}`,
-          metadata: {
-            executor: this.state.executor,
-            implementation: this.state.phaseResults['2_development']?.implementation,
-          },
-        };
-
-        const result = await TerminalSpawner.spawnAgent(agent.replace('@', ''), 'quality-review', {
-          context,
-          timeout: DEFAULT_TIMEOUT_MS / 4, // 30 minutes
-          debug: this.options.debug,
-        });
-
-        // Story 12.6: Emit terminal spawn for observability (AC1)
-        if (result.pid) {
-          this._emitTerminalSpawn(agent, result.pid, 'quality_gate');
-        }
-
-        return {
-          status: result.success ? PhaseStatus.COMPLETED : PhaseStatus.FAILED,
-          review_result: {
-            verdict: result.success ? 'APPROVED' : 'NEEDS_WORK',
-            score: result.success ? 90 : 60,
-            findings: [],
-            recommendations: [],
-          },
-          output: result.output,
-        };
-      }
-
-      // Fallback
+      // Honest fallback: the review is handed off (manual) rather than fabricated by a stub.
       return {
         status: PhaseStatus.COMPLETED,
         review_result: {
@@ -1100,7 +991,7 @@ class WorkflowExecutor {
           findings: [],
           recommendations: [],
         },
-        note: 'Terminal spawning not available, manual review required',
+        note: 'Manual review required',
       };
     } catch (error) {
       return {
@@ -1126,40 +1017,7 @@ class WorkflowExecutor {
       // Story 12.6: Emit agent spawn for observability (AC1)
       this._emitAgentSpawn(agent, 'push');
 
-      // Use terminal spawning
-      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
-        const context = {
-          story: storyPath,
-          files: [],
-          instructions: `Execute *pre-push and *push for story: ${storyPath}`,
-          metadata: {
-            review_result: this.state.phaseResults['4_quality_gate']?.review_result,
-          },
-        };
-
-        const result = await TerminalSpawner.spawnAgent(agent.replace('@', ''), 'push-and-pr', {
-          context,
-          timeout: DEFAULT_TIMEOUT_MS / 12, // 10 minutes
-          debug: this.options.debug,
-        });
-
-        // Story 12.6: Emit terminal spawn for observability (AC1)
-        if (result.pid) {
-          this._emitTerminalSpawn(agent, result.pid, 'push');
-        }
-
-        return {
-          status: result.success ? PhaseStatus.COMPLETED : PhaseStatus.FAILED,
-          push_result: {
-            commit_hash: '',
-            branch: 'main',
-          },
-          pr_url: '',
-          output: result.output,
-        };
-      }
-
-      // Fallback
+      // Honest fallback: the push is handed off (manual) rather than fabricated by a stub.
       return {
         status: PhaseStatus.COMPLETED,
         push_result: {
@@ -1167,7 +1025,7 @@ class WorkflowExecutor {
           branch: 'main',
         },
         pr_url: '',
-        note: 'Terminal spawning not available, manual push required',
+        note: 'Manual push required',
       };
     } catch (error) {
       return {

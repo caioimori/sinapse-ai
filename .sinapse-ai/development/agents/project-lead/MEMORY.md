@@ -21,7 +21,7 @@
 
 ### Bob Mode (user_profile=bob)
 - PM acts as orchestrator when `user_profile: bob`
-- Spawns other agents via TerminalSpawner
+- Hands off other agents honestly (manual hand-off — no fabricated execution)
 - Session state persistence in `.sinapse/bob-session/`
 
 ### Key Locations

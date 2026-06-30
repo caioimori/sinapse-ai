@@ -9,7 +9,7 @@
 #
 version: 1.19.0
 generator: scripts/generate-install-manifest.js
-file_count: 1168
+file_count: 1166
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -928,9 +928,9 @@ files:
     type: core
     size: 17581
   - path: core/orchestration/bob-orchestrator.js
-    hash: sha256:54ad95bdc7d088aab5e03a0fb0d2d3ea6b261f09cbecd66c13128421fdb90629
+    hash: sha256:5a217af9eac46432b851353129fe9fdb15f3b439e46ec843dfb59a79da0d1f86
     type: core
-    size: 47421
+    size: 47380
   - path: core/orchestration/bob-status-writer.js
     hash: sha256:7bbe95c493c44163546317479c5e330063e93a547ba60dfa27eddb2f85ba4489
     type: core
@@ -1020,13 +1020,13 @@ files:
     type: core
     size: 18312
   - path: core/orchestration/greenfield-handler.js
-    hash: sha256:33bb2c05c3aee3e02c247afd80e27051a8c0eeb9b32dd3c246d11d5db60773e6
+    hash: sha256:330be2c76c3eb5a9a1f1c975837308802b8fc6fb871f9b584787ae4e2aa8fcb1
     type: core
-    size: 40901
+    size: 40129
   - path: core/orchestration/index.js
-    hash: sha256:f9c384b2daf2c86edc7e9d600586707b82c0e8d2677cdad6cfd86d1e99a23e9a
+    hash: sha256:cc7252ff358565d802f786079f46fd1ffdc6ee4b19e94fd70441169b2a6ead13
     type: core
-    size: 9539
+    size: 9069
   - path: core/orchestration/lock-manager.js
     hash: sha256:b269b3c17d575f2dbca8e749585ad9133ab60dbfd7d74a85e6a776d2bb1909b4
     type: core
@@ -1075,14 +1075,10 @@ files:
     hash: sha256:69de9c5edfb42f0faf91def9d8e9d46237fce51baa22d9c2c7aa5e37999d6d2f
     type: core
     size: 16495
-  - path: core/orchestration/terminal-spawner.js
-    hash: sha256:698bbf0df1d988b98be470528d8f3f261a0ffd6294150fdbb369af1e29ed7fde
-    type: core
-    size: 32247
   - path: core/orchestration/workflow-executor.js
-    hash: sha256:ba0fb3cdc3c6797c2f48178cb8aedbe4dae8eca865bdd20bd1abe559145addeb
+    hash: sha256:c7aca8a292efcf20185cd30d6a582c6239a55a9871e4e63ed1c49a6aebf35f7a
     type: core
-    size: 41353
+    size: 37636
   - path: core/orchestration/workflow-orchestrator.js
     hash: sha256:6e97eec88c8261f15bad79c47b0eafcfe39fbda5c837e156fe803802c3a1c18f
     type: core
@@ -1384,9 +1380,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:80005365934bb7e9783ea833d9d1bcd85faec81fe1e2e8232187dbfd529c9304
+    hash: sha256:b02617f7a416a1b20f690293a2c15fa4d2d14a6963788e5935906f47e2fa05a7
     type: data
-    size: 554944
+    size: 549437
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -1512,9 +1508,9 @@ files:
     type: agent
     size: 16213
   - path: development/agents/project-lead.md
-    hash: sha256:be876cef505639e7cf4fdfd82028bb61be459f6a2fbca72ce8cb83836ef4c594
+    hash: sha256:571533353e320db3be8097960190b9e5fce6a876c58159886fd41ee11b745216
     type: agent
-    size: 18587
+    size: 18402
   - path: development/agents/quality-gate.md
     hash: sha256:bc99385b3aee34ed5234287f37b53dd57c1f59b7f4cf1bd401447da4562117d4
     type: agent
@@ -2420,9 +2416,9 @@ files:
     type: task
     size: 6511
   - path: development/tasks/push-and-pr.md
-    hash: sha256:0b2ce0445004d998afd5b7cb05cfccc1857ddf641c46b3af0d123ad56b01f6e4
+    hash: sha256:0f0698e39beba99b7bee88e391ba403323cd2aeea8661ec0eefc025faaa038e6
     type: task
-    size: 3077
+    size: 3092
   - path: development/tasks/qa-after-creation.md
     hash: sha256:5ed9bb8dbf76fbc7ed79e00423b70a6a8caf315d31ec580a5514f0f5a49173e8
     type: task
@@ -3008,9 +3004,9 @@ files:
     type: workflow
     size: 6949
   - path: development/workflows/development-cycle.yaml
-    hash: sha256:e0903d4d811660f3d7ed80a3e985dfed9a590d157c5bb592b812e4e30ecc0849
+    hash: sha256:a50a76f0dd6e1c84258f71412b4ba89d2846855f2d7e110b1fdd3e05dde5a8ae
     type: workflow
-    size: 15968
+    size: 15633
   - path: development/workflows/epic-orchestration.yaml
     hash: sha256:be5c5c28bb0fb41c6df383952d8aba9efb02dbf58e3521983f65a79212c38d84
     type: workflow
@@ -4567,10 +4563,6 @@ files:
     hash: sha256:ba1f1dece08387e385a8f71fc872fc9d62dc0a0cd45702b5135dc0d286aebd63
     type: script
     size: 9539
-  - path: scripts/pm.sh
-    hash: sha256:060c5ab9ee43372e2177353b2b6f54f036b7dd86122fc6e2dc6e91fb0e3ab6d2
-    type: script
-    size: 12644
   - path: scripts/README.md
     hash: sha256:d6961b96ff7163261d6f56f441f2fb0a35568d5e0034aa4bfecc9fe0993edfe1
     type: script

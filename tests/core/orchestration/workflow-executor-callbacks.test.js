@@ -177,29 +177,6 @@ workflow:
         }).not.toThrow();
       });
     });
-
-    describe('_emitTerminalSpawn', () => {
-      it('should call all registered callbacks with correct args', () => {
-        const callback = jest.fn();
-        executor.onTerminalSpawn(callback);
-
-        executor._emitTerminalSpawn('@dev', 12345, 'development');
-
-        expect(callback).toHaveBeenCalledWith('@dev', 12345, 'development');
-      });
-
-      it('should handle callback errors gracefully', () => {
-        const failingCallback = jest.fn(() => {
-          throw new Error('Callback error');
-        });
-
-        executor.onTerminalSpawn(failingCallback);
-
-        expect(() => {
-          executor._emitTerminalSpawn('@dev', 12345, 'development');
-        }).not.toThrow();
-      });
-    });
   });
 
   describe('Integration with Phase Execution', () => {
