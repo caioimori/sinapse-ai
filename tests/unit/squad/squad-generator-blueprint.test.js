@@ -22,6 +22,7 @@ const {
   SquadGeneratorError,
   GeneratorErrorCodes,
 } = require('../../../.sinapse-ai/development/scripts/squad');
+const { perfBudget } = require('../../helpers/perf-budget');
 
 describe('SquadGenerator Blueprint Methods', () => {
   let generator;
@@ -517,10 +518,9 @@ describe('SquadGenerator Blueprint Methods', () => {
   });
 
   describe('Performance', () => {
-    const isCI = process.env.CI === 'true';
-    const loadThreshold = isCI ? 500 : 50;
-    const validateThreshold = isCI ? 200 : 20;
-    const generateThreshold = isCI ? 5000 : 1000;
+    const loadThreshold = perfBudget(50);
+    const validateThreshold = perfBudget(20);
+    const generateThreshold = perfBudget(1000);
 
     it('should load blueprint within acceptable time', async () => {
       const blueprintPath = path.join(tempDir, 'perf-load.yaml');

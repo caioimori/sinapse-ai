@@ -17,6 +17,7 @@
 const path = require('path');
 const fs = require('fs').promises;
 const os = require('os');
+const { perfBudget } = require('../../helpers/perf-budget');
 const {
   SquadDesigner,
   SquadDesignerError,
@@ -754,9 +755,9 @@ The Order Management System handles customer orders from creation to fulfillment
   });
 
   describe('Performance', () => {
-    const isCI = process.env.CI === 'true';
-    const analyzeThreshold = isCI ? 2000 : 200;
-    const generateThreshold = isCI ? 1000 : 100;
+    // Load-tolerant budgets — see tests/helpers/perf-budget.js
+    const analyzeThreshold = perfBudget(200);
+    const generateThreshold = perfBudget(100);
 
     it('should analyze domain within acceptable time', () => {
       const docs = {
