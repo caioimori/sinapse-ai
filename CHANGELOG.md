@@ -570,6 +570,17 @@ npm install sinapse-ai@latest
   package.json and prints raw semver only — no banner, no ANSI — so scripts
   capture cleanly.
 - 5 contract tests in `tests/unit/cli-version-flag.test.js`.
+- `docs/glossary.md` with official SINAPSE taxonomy terms: `squad`, `flow-state`, `confidence gate`, `execution profile`.
+- `scripts/semantic-lint.js` for semantic terminology regression checks, plus `tests/unit/semantic-lint.test.js`.
+
+### Changed
+
+- CI now includes a `Semantic Lint` job (`npm run validate:semantic-lint`).
+- Pre-commit markdown pipeline now runs semantic lint through `lint-staged`.
+
+### Migration Notes
+
+- Deprecated terminology replacements: `expansion pack` -> `squad`, `permission mode` -> `execution profile`, `workflow state` -> `flow-state` (warning-level migration).
 
 ## [1.2.0] — 2026-05-04 — 🎉 GA Definitiva (versioning reset, branding SNPS AI)
 
@@ -1220,32 +1231,6 @@ warnings.
 - Pro wizard (`npx sinapse-ai install`) now auto-installs `@sinapse-fullstack/pro` package during Step 2, fixing "Pro package not found" error in greenfield and brownfield projects.
 - Greenfield projects without `package.json` now get `npm init -y` automatically before pro install.
 - Removed unused `headings` import in `pro-setup.js`.
-
-## [Unreleased]
-
-### Added
-
-- `docs/glossary.md` with official SINAPSE taxonomy terms:
-  - `squad`
-  - `flow-state`
-  - `confidence gate`
-  - `execution profile`
-- `scripts/semantic-lint.js` for semantic terminology regression checks.
-- `tests/unit/semantic-lint.test.js` for semantic lint rule validation.
-
-### Changed
-
-- CI now includes a `Semantic Lint` job (`npm run validate:semantic-lint`).
-- Pre-commit markdown pipeline now runs semantic lint through `lint-staged`.
-
-### Migration Notes
-
-- Deprecated terminology replacements:
-  - `expansion pack` -> `squad`
-  - `permission mode` -> `execution profile`
-  - `workflow state` -> `flow-state` (warning-level migration)
-
----
 
 ## [3.9.0] - 2025-12-26
 
