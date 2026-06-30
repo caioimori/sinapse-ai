@@ -310,7 +310,11 @@ ideSync:
       enabled: false
       path: .codex/agents
       format: full-markdown-yaml
-  redirects: {}
+  redirects:
+    # Master alias: o id-fonte canônico é snps-orqx; sinapse-orqx aponta para ele
+    # no espelho de dogfood (.claude/). No install o command-generator gera ambos
+    # como entry points full do Imperator — isto cobre só a paridade do repo.
+    sinapse-orqx: snps-orqx
   validation:
     strictMode: true
     failOnDrift: true
