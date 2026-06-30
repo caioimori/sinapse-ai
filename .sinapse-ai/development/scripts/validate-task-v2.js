@@ -3,7 +3,7 @@
 /**
  * Task Format V2.0 Validation Script
  * 
- * Validates task files against the V2.0 specification with 11 compliance rules.
+ * Validates task files against the V2.0 specification with 12 compliance rules.
  * 
  * Usage:
  *   node validate-task-v2.js <task-file>          # Validate single task
@@ -26,6 +26,58 @@ const colors = {
   cyan: '\x1b[36m',
   reset: '\x1b[0m',
 };
+
+// Repo root, resolved from this script's location (.sinapse-ai/development/scripts/).
+// Used by Rule 12 to verify that footer Source/Location pointers reference real files.
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
+
+const REPO_SCRIPT_PREFIX = /^(\.sinapse-ai|core|scripts|utils|bin)\//;
+const SCRIPT_EXT = /\.(js|cjs|ts)$/;
+
+/**
+ * Extract the candidate path token from a raw Source/Location value.
+ * Takes the first whitespace-delimited token, strips markdown backticks,
+ * a trailing :linenumber, and trailing punctuation.
+ */
+function extractRepoPathToken(rawValue) {
+  let v = String(rawValue).trim().split(/\s+/)[0];
+  v = v.replace(/^`+/, '').replace(/`+$/, '');
+  v = v.replace(/:\d+$/, '');
+  v = v.replace(/[)\].,;]+$/, '');
+  return v;
+}
+
+/**
+ * Scan only the `## Tools` / `## Scripts` footer sections (both the bold-prose
+ * `**Source:**`/`**Location:**` format and the YAML `source:`/`location:` format)
+ * and return any repo-script path (.js/.cjs/.ts under .sinapse-ai|core|scripts|utils|bin)
+ * that does NOT exist on disk. Prose command/code examples in other sections are ignored.
+ */
+function findMissingFooterScriptPaths(content) {
+  const lines = content.split(/\r?\n/);
+  const missing = [];
+  let inSection = false;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (/^##\s+(Tools|Scripts)\b/.test(trimmed)) {
+      inSection = true;
+      continue;
+    }
+    if (inSection && (/^##\s/.test(trimmed) || trimmed === '---')) {
+      inSection = false;
+    }
+    if (!inSection) continue;
+
+    let m = line.match(/\*\*(?:Source|Location):\*\*\s*(.+?)\s*$/);
+    if (!m) m = line.match(/^\s*(?:source|location):\s*(.+?)\s*$/);
+    if (!m) continue;
+
+    const token = extractRepoPathToken(m[1]);
+    if (!REPO_SCRIPT_PREFIX.test(token) || !SCRIPT_EXT.test(token)) continue;
+    if (!fs.existsSync(path.join(REPO_ROOT, token))) missing.push(token);
+  }
+  return missing;
+}
 
 /**
  * Validation rules for V2.0 compliance
@@ -142,6 +194,17 @@ const validationRules = [
     },
     message: 'Output template markers not found (Duration, Tokens, Metrics)',
   },
+  {
+    id: 12,
+    name: 'Tools/Scripts footer paths exist',
+    check: (content) => {
+      return findMissingFooterScriptPaths(content).length === 0;
+    },
+    message: (content) => {
+      const missing = findMissingFooterScriptPaths(content);
+      return `Tools/Scripts footer references non-existent repo file(s): ${missing.join(', ')}`;
+    },
+  },
 ];
 
 /**
@@ -176,7 +239,7 @@ function validateTask(filePath) {
         result.failed.push({
           id: rule.id,
           name: rule.name,
-          message: rule.message,
+          message: typeof rule.message === 'function' ? rule.message(content) : rule.message,
         });
         result.compliant = false;
       }
@@ -191,11 +254,11 @@ function validateTask(filePath) {
 }
 
 /**
- * Validate all tasks in .sinapse-ai/tasks/
+ * Validate all tasks in .sinapse-ai/development/tasks/
  * @returns {Object} Summary of validation results
  */
 function validateAllTasks() {
-  const tasksDir = path.join(process.cwd(), '.sinapse-ai', 'tasks');
+  const tasksDir = path.join(process.cwd(), '.sinapse-ai', 'development', 'tasks');
   
   if (!fs.existsSync(tasksDir)) {
     console.error(`${colors.red}✗ Tasks directory not found: ${tasksDir}${colors.reset}`);

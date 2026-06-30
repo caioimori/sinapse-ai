@@ -354,7 +354,7 @@ function main() {
     console.log('Usage: node migrate-task-to-v2.js <task-file>');
     console.log('');
     console.log('Example:');
-    console.log('  node migrate-task-to-v2.js .sinapse-ai/tasks/dev-develop-story.md');
+    console.log('  node migrate-task-to-v2.js .sinapse-ai/development/tasks/dev-develop-story.md');
     process.exit(0);
   }
 

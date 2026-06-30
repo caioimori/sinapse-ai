@@ -147,20 +147,13 @@ acceptance-criteria:
   - **Purpose:** File reading, modification, and backup
   - **Source:** Node.js fs module
 
-- **Tool:** ast-parser
-  - **Purpose:** Parse and modify code safely
-  - **Source:** .sinapse-ai/utils/ast-parser.js
-
 ---
 
 ## Scripts
 
 **Agent-specific code for this task:**
 
-- **Script:** modify-file.js
-  - **Purpose:** Safe file modification with backup
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/modify-file.js
+- N/A
 
 ---
 

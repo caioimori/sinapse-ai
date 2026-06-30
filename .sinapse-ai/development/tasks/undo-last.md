@@ -126,7 +126,7 @@ acceptance-criteria:
 
 - **Tool:** backup-manager
   - **Purpose:** Backup and restore operations
-  - **Source:** .sinapse-ai/utils/backup-manager.js
+  - **Source:** .sinapse-ai/infrastructure/scripts/backup-manager.js
 
 - **Tool:** version-control
   - **Purpose:** Git operations for rollback
@@ -138,10 +138,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** rollback-changes.js
-  - **Purpose:** Rollback to previous state
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/rollback-changes.js
+- N/A
 
 ---
 

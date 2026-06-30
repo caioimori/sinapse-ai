@@ -131,10 +131,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** analyze-codebase.js
-  - **Purpose:** Codebase analysis and reporting
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/analyze-codebase.js
+- N/A
 
 ---
 

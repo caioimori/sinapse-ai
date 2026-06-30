@@ -141,10 +141,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** generate-docs.js
-  - **Purpose:** Documentation generation from templates
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/generate-docs.js
+- N/A
 
 ---
 

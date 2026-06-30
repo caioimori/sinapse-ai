@@ -176,10 +176,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** parse-qa-report.js
-  - **Purpose:** Extract issues from QA report
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/development/scripts/parse-qa-report.js (optional)
+- N/A
 
 ---
 

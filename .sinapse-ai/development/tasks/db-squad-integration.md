@@ -135,20 +135,13 @@ acceptance-criteria:
   - **Purpose:** Neo4j database connection and query execution
   - **Source:** npm: neo4j-driver
 
-- **Tool:** query-validator
-  - **Purpose:** Cypher query syntax validation
-  - **Source:** .sinapse-ai/utils/db-query-validator.js
-
 ---
 
 ## Scripts
 
 **Agent-specific code for this task:**
 
-- **Script:** db-query.js
-  - **Purpose:** Execute Neo4j queries with error handling
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/db-query.js
+- N/A
 
 ---
 
