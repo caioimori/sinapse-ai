@@ -38,10 +38,18 @@ function validateClaudeIntegration(options = {}) {
     warnings.push(`Claude hooks dir not found yet: ${path.relative(projectRoot, hooksDir)}`);
   }
 
+  // The Claude mirror legitimately contains MORE files than the core source dir:
+  // ide-sync mirrors core agents (.sinapse-ai/development/agents) PLUS every squad
+  // -orqx PLUS redirect stubs. So an exact count match is the wrong invariant — it
+  // produced a spurious "30/12" warning. What matters here is that no core agent is
+  // missing; exact file-by-file parity (drift/orphaned) is covered by
+  // `npm run sync:ide:check`. We only flag an under-count.
   const sourceCount = countMarkdownFiles(sourceAgentsDir);
   const claudeCount = countMarkdownFiles(agentsDir);
-  if (sourceCount > 0 && claudeCount !== sourceCount) {
-    warnings.push(`Claude agent count differs from source (${claudeCount}/${sourceCount})`);
+  if (sourceCount > 0 && claudeCount < sourceCount) {
+    warnings.push(
+      `Claude mirror has fewer agents than core source (${claudeCount} < ${sourceCount}) — run \`npm run sync:ide\``,
+    );
   }
 
   return {
