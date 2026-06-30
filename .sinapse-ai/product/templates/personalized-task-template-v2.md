@@ -417,12 +417,14 @@ acceptance-criteria:
 
 ```yaml
 **Scripts:**
-- .sinapse-ai/scripts/dev-specific/test-runner.js:
+# Replace the placeholder paths below with the REAL path to each script that
+# actually exists in the repo. If the task has no agent-specific script, use `- N/A`.
+- {path/to/agent-specific-script.js}:
     description: Runs tests with coverage reporting specific to dev agent
     language: javascript
     version: 1.2.0
 
-- .sinapse-ai/scripts/qa-specific/regression-validator.js:
+- {path/to/another-agent-script.js}:
     description: QA-specific regression validation logic
     language: javascript
     version: 2.0.0

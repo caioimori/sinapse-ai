@@ -205,10 +205,6 @@ acceptance-criteria:
   - **Purpose:** Detect operating system and package manager
   - **Source:** Built-in (process.platform, uname)
 
-- **Tool:** cli-checker
-  - **Purpose:** Verify CLI installations and versions
-  - **Source:** .sinapse-ai/infrastructure/scripts/cli-checker.js
-
 - **Tool:** github-cli
   - **Purpose:** Repository creation and authentication
   - **Source:** .sinapse-ai/infrastructure/tools/cli/github-cli.yaml

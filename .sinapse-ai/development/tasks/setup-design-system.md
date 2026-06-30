@@ -120,13 +120,7 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** project-scaffolder
-  - **Purpose:** Generate project structure and config
-  - **Source:** .sinapse-ai/scripts/project-scaffolder.js
-
-- **Tool:** config-manager
-  - **Purpose:** Initialize configuration files
-  - **Source:** .sinapse-ai/utils/config-manager.js
+- N/A
 
 ---
 
@@ -134,10 +128,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** init-project.js
-  - **Purpose:** Project initialization workflow
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/init-project.js
+- N/A
 
 ---
 

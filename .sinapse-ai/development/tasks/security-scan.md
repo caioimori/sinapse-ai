@@ -270,10 +270,7 @@ acceptance-criteria:
 
 ```yaml
 **Scripts:**
-- security-scan.js:
-    description: Run security scans and generate reports
-    language: JavaScript
-    location: .sinapse-ai/scripts/security-scan.js
+- N/A
 ```
 
 ---

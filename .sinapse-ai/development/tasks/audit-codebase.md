@@ -131,10 +131,6 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** code-analyzer
-  - **Purpose:** Static code analysis and metrics
-  - **Source:** .sinapse-ai/utils/code-analyzer.js
-
 - **Tool:** file-system
   - **Purpose:** Recursive directory traversal
   - **Source:** Node.js fs module
@@ -145,10 +141,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** analyze-codebase.js
-  - **Purpose:** Codebase analysis and reporting
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/analyze-codebase.js
+- N/A
 
 ---
 

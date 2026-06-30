@@ -321,25 +321,10 @@ acceptance-criteria:
 
 ```yaml
 **Scripts:**
-- capability-analyzer.js:
-    description: Analyze current capabilities and identify improvements
-    language: JavaScript
-    location: .sinapse-ai/scripts/capability-analyzer.js
-
-- improvement-validator.js:
-    description: Validate improvement plans against safety rules
-    language: JavaScript
-    location: .sinapse-ai/scripts/improvement-validator.js
-
-- sandbox-tester.js:
-    description: Test improvements in isolated sandbox environment
-    language: JavaScript
-    location: .sinapse-ai/scripts/sandbox-tester.js
-
 - backup-manager.js:
     description: Manage backups and rollback operations
     language: JavaScript
-    location: .sinapse-ai/scripts/backup-manager.js
+    location: .sinapse-ai/infrastructure/scripts/backup-manager.js
 ```
 
 ---

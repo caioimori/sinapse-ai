@@ -123,13 +123,7 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** project-scaffolder
-  - **Purpose:** Generate project structure and config
-  - **Source:** .sinapse-ai/scripts/project-scaffolder.js
-
-- **Tool:** config-manager
-  - **Purpose:** Initialize configuration files
-  - **Source:** .sinapse-ai/utils/config-manager.js
+- N/A
 
 ---
 
