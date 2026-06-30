@@ -43,6 +43,11 @@ const {
   generateCommandMd,
   regenerateAgentCommands,
 } = require('../lib/command-generator');
+// Follow-up #13 — wire the transactional backup/rollback engine into the
+// installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
+// to its previous state instead of leaving ~/.sinapse half-updated.
+const { InstallTransaction } = require('../utils/install-transaction');
+const { formatRollbackMessage } = require('../utils/install-errors');
 
 // ── Global Install ───────────────────────────────────────────────────────────
 
@@ -201,123 +206,26 @@ async function cmdInstallGlobal(opts = {}) {
 
   logger.always(`\n${BOLD}Instalando SINAPSE AI globalmente...${NC}\n`);
 
-  // Phase 1: Copy squads to ~/.sinapse/
-  logger.always(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);
-  fs.mkdirSync(SINAPSE_HOME, { recursive: true });
-
-  const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
-  let totalAgents = 0;
-  const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
-  let squadsRefreshed = 0;
-  let squadsAdded = 0;
-  for (const squad of squads) {
-    const src = path.join(squadsSrcBase, squad.name);
-    const dest = path.join(SINAPSE_HOME, squad.name);
-    if (isUpsert) {
-      const existedBefore = fs.existsSync(dest);
-      const delta = syncDirSync(src, dest);
-      totalDelta.added += delta.added;
-      totalDelta.updated += delta.updated;
-      totalDelta.unchanged += delta.unchanged;
-      totalDelta.removed += delta.removed;
-      if (existedBefore) squadsRefreshed += 1; else squadsAdded += 1;
-      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
-    } else {
-      rmDirSync(dest);
-      copyDirSync(src, dest);
-      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
-    }
-    totalAgents += squad.agents;
-  }
-
-  // Copy sinapse/ orqx squad
-  const sinapseMasterSrc = path.join(ROOT, 'sinapse');
-  const sinapseMasterDest = path.join(SINAPSE_HOME, 'sinapse');
-  if (fs.existsSync(sinapseMasterSrc)) {
-    if (isUpsert) {
-      const delta = syncDirSync(sinapseMasterSrc, sinapseMasterDest);
-      totalDelta.added += delta.added;
-      totalDelta.updated += delta.updated;
-      totalDelta.unchanged += delta.unchanged;
-      totalDelta.removed += delta.removed;
-    } else {
-      rmDirSync(sinapseMasterDest);
-      copyDirSync(sinapseMasterSrc, sinapseMasterDest);
-    }
-    const masterAgents = getAgentFiles(sinapseMasterDest).length;
-    totalAgents += masterAgents;
-    logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
-  }
-
-  // Phase 2: Generate agent commands (shared with `update` via command-generator).
-  logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
-  const { writtenAgents } = regenerateAgentCommands({
-    sinapseHome: SINAPSE_HOME,
-    commandsDir: CLAUDE_COMMANDS_DIR,
-    squads,
-    sinapseMasterDest,
-  });
-  logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
-
-  // Phase 2b: Install global agents based on LLM choice
-  const installedAgentFilenames = new Set();
-  const installedIdes = [];
-  if (llmChoice === 'claude-code' || llmChoice === 'both') {
-    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
-    fs.mkdirSync(globalAgentsDir, { recursive: true });
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
-      installedAgentFilenames.add(f);
-    }
-    installedIdes.push('claude-code');
-    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
-  }
-
-  if (llmChoice === 'codex' || llmChoice === 'both') {
-    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
-    fs.mkdirSync(codexAgentsDir, { recursive: true });
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
-      installedAgentFilenames.add(f);
-    }
-    installedIdes.push('codex');
-    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
-  }
-
-  // Audit 1 P0 (UN-1) — record manifest so uninstall can remove every file
-  // we wrote (not just `*-orqx.md`). Idempotent: re-install overwrites.
-  recordInstalledAgents(installedAgentFilenames, installedIdes);
-
-  // Phase 3: Generate squad-awareness.md
-  logger.always(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
-  generateSquadAwareness(SINAPSE_HOME, squads);
-  logger.always(`  ${GREEN}OK${NC} squad-awareness.md`);
-
-  // Phase 4: Create launcher
-  logger.always(`\n${CYAN}Phase 4:${NC} Creating launcher`);
-  createLauncher();
-
-  // Phase 5: PATH management
-  logger.always(`\n${CYAN}Phase 5:${NC} Configuring PATH`);
-  ensurePath();
-
-  // Phase 6: Write metadata (Story 10.20 — preserve installedAt on upsert)
-  const nowIso = new Date().toISOString();
-  const meta = {
-    version: VERSION,
-    installedAt: isUpsert && existing.prevMeta && existing.prevMeta.installedAt
-      ? existing.prevMeta.installedAt
-      : nowIso,
-    squads: squads.length,
-    agents: totalAgents,
-    commands: writtenAgents.size,
-    llm: llmChoice,
-    platform: process.platform,
-  };
-  if (isUpsert) {
-    meta.updatedAt = nowIso;
-  }
-  fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
+  // ── Transactional safety net for the FATAL phases (1–6) ─────────────────────
+  // On an in-place UPGRADE (upsert) we snapshot the global paths these phases
+  // mutate BEFORE touching anything, so a mid-flight failure is rolled back to
+  // the previous install instead of leaving ~/.sinapse half-updated. A FRESH
+  // install skips the snapshot — a re-run (`install --force`) self-heals, so
+  // there's nothing to protect atomically. Phases 7/8/8b stay OUTSIDE the
+  // transaction on purpose: they already degrade gracefully (try/catch) and a
+  // project-wizard WARN must NOT revert an otherwise-good global install.
+  const tx = createInstallTransaction();
+  const txPaths = buildTransactionPaths(llmChoice);
+  const { writtenAgents, totalAgents, totalDelta, squadsRefreshed, squadsAdded, meta } =
+    await runFatalPhasesTransactional({
+      tx,
+      isUpsert,
+      paths: txPaths,
+      runPhases: () => installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, logger }),
+      // Re-throw happens inside the wrapper; this only renders the rollback
+      // banner. The CLI catch (bin/cli.js) then renders formatErrorMessage.
+      onRollback: (banner) => logger.error(banner),
+    });
 
   // Story 10.20 — Upsert summary block
   if (isUpsert) {
@@ -445,6 +353,243 @@ async function cmdInstallGlobal(opts = {}) {
   logger.always(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
   logger.always(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
   logger.always('');
+}
+
+// ── Transactional install helpers (follow-up #13) ────────────────────────────
+
+/**
+ * Build the InstallTransaction used to make an in-place upgrade atomic.
+ *
+ * Two deliberate overrides vs. the class defaults (which target process.cwd()):
+ *  - logFile → ~/.sinapse/.sinapse-install.log (this is a GLOBAL install; the
+ *    cwd is wherever the user happened to run `npx sinapse-ai install`).
+ *  - backupDir → ~/.sinapse-backup/<timestamp>, which MUST live OUTSIDE every
+ *    directory we snapshot. Putting it inside ~/.sinapse (or ~/.claude/...)
+ *    would make the recursive backup copy the snapshot into itself.
+ *
+ * @returns {InstallTransaction}
+ */
+function createInstallTransaction() {
+  // Same Windows-safe timestamp shape the class uses for its default backup dir.
+  const timestamp = new Date().toISOString()
+    .replace(/:/g, '-')
+    .replace(/\./g, '-')
+    .replace('T', '_');
+  return new InstallTransaction({
+    logFile: path.join(SINAPSE_HOME, '.sinapse-install.log'),
+    backupDir: path.join(HOME, '.sinapse-backup', timestamp),
+  });
+}
+
+/**
+ * Enumerate the GLOBAL paths the fatal phases (1–6) mutate, so an upgrade can
+ * snapshot them up-front. Only the dirs/files relevant to the selected IDE are
+ * listed; backupGlobalState() further skips any that don't exist yet.
+ *
+ * @param {string} llmChoice - 'claude-code' | 'codex' | 'both'
+ * @returns {{ dirs: string[], files: string[] }}
+ */
+function buildTransactionPaths(llmChoice) {
+  const dirs = [
+    SINAPSE_HOME,          // Phases 1, 3, 6 (+ installed-agents.json manifest)
+    CLAUDE_COMMANDS_DIR,   // Phase 2 — generated /SINAPSE:agents:* command files
+  ];
+  if (llmChoice === 'claude-code' || llmChoice === 'both') dirs.push(path.join(HOME, '.claude', 'agents'));
+  if (llmChoice === 'codex' || llmChoice === 'both') dirs.push(path.join(HOME, '.codex', 'agents'));
+  dirs.push(BIN_DIR);      // Phase 4 — launcher(s)
+
+  const files = [path.join(HOME, '.claude', 'settings.json')]; // language save
+  // Phase 5 appends the PATH export to a shell rc on POSIX. On Windows it writes
+  // the registry (HKCU\Environment) instead — that is NOT a file, so it cannot
+  // be captured/rolled back here (documented limitation).
+  if (!IS_WIN) {
+    for (const rc of ['.zshrc', '.bashrc', '.profile']) files.push(path.join(HOME, rc));
+  }
+  return { dirs, files };
+}
+
+/**
+ * Snapshot every existing global path before an upgrade mutates it.
+ *
+ * @param {InstallTransaction} tx
+ * @param {{ dirs?: string[], files?: string[] }} paths
+ */
+async function backupGlobalState(tx, paths = {}) {
+  for (const dir of paths.dirs || []) {
+    if (dir && fs.existsSync(dir)) await tx.backupDirectory(dir);
+  }
+  for (const file of paths.files || []) {
+    if (file && fs.existsSync(file)) await tx.backup(file);
+  }
+}
+
+/**
+ * Run the fatal install phases (1–6) under a transaction.
+ *
+ * UPGRADE (upsert=true): snapshot the global state, run the phases, and on
+ * success commit (drop the snapshot). On ANY failure, restore the snapshot,
+ * surface the rollback banner via `onRollback`, then RE-THROW so the CLI's
+ * existing catch still renders formatErrorMessage.
+ *
+ * FRESH (upsert=false): run the phases unwrapped — a fresh install is
+ * self-healing via `install --force`, so there is nothing to protect atomically
+ * and behavior stays byte-for-byte identical to before this safety net.
+ *
+ * @returns {Promise<*>} whatever `runPhases` returns (the phase result object)
+ */
+async function runFatalPhasesTransactional({ tx, isUpsert, paths, runPhases, onRollback }) {
+  if (!isUpsert) {
+    return runPhases();
+  }
+  await backupGlobalState(tx, paths);
+  let result;
+  try {
+    result = await runPhases();
+  } catch (err) {
+    const ok = await tx.rollback();
+    if (typeof onRollback === 'function') onRollback(formatRollbackMessage(ok));
+    throw err; // re-throw → bin/cli.js catch renders formatErrorMessage
+  }
+  await tx.commit();
+  return result;
+}
+
+/**
+ * The FATAL install phases (1–6): copy squads, generate + place agent commands,
+ * write squad-awareness rules, create the launcher, configure PATH, and write
+ * metadata.json. Extracted verbatim from cmdInstallGlobal so it can run inside
+ * runFatalPhasesTransactional(). Returns the values the caller needs for the
+ * upsert summary + closing banner.
+ *
+ * @param {Object} ctx
+ * @param {Array}  ctx.squads
+ * @param {string} ctx.squadsDir
+ * @param {boolean} ctx.isUpsert
+ * @param {string} ctx.llmChoice
+ * @param {Object} ctx.existing  - detectExistingInstall() result
+ * @param {Object} ctx.logger
+ * @returns {{ writtenAgents: Set, totalAgents: number, totalDelta: Object, squadsRefreshed: number, squadsAdded: number, meta: Object }}
+ */
+function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, logger }) {
+  // Phase 1: Copy squads to ~/.sinapse/
+  logger.always(`${CYAN}Phase 1:${NC} ${isUpsert ? 'Refreshing' : 'Copying'} squads to ~/.sinapse/`);
+  fs.mkdirSync(SINAPSE_HOME, { recursive: true });
+
+  const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
+  let totalAgents = 0;
+  const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
+  let squadsRefreshed = 0;
+  let squadsAdded = 0;
+  for (const squad of squads) {
+    const src = path.join(squadsSrcBase, squad.name);
+    const dest = path.join(SINAPSE_HOME, squad.name);
+    if (isUpsert) {
+      const existedBefore = fs.existsSync(dest);
+      const delta = syncDirSync(src, dest);
+      totalDelta.added += delta.added;
+      totalDelta.updated += delta.updated;
+      totalDelta.unchanged += delta.unchanged;
+      totalDelta.removed += delta.removed;
+      if (existedBefore) squadsRefreshed += 1; else squadsAdded += 1;
+      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${delta.added} added, ${delta.updated} updated, ${delta.unchanged} unchanged${delta.removed ? ', ' + delta.removed + ' removed' : ''})`);
+    } else {
+      rmDirSync(dest);
+      copyDirSync(src, dest);
+      logger.always(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
+    }
+    totalAgents += squad.agents;
+  }
+
+  // Copy sinapse/ orqx squad
+  const sinapseMasterSrc = path.join(ROOT, 'sinapse');
+  const sinapseMasterDest = path.join(SINAPSE_HOME, 'sinapse');
+  if (fs.existsSync(sinapseMasterSrc)) {
+    if (isUpsert) {
+      const delta = syncDirSync(sinapseMasterSrc, sinapseMasterDest);
+      totalDelta.added += delta.added;
+      totalDelta.updated += delta.updated;
+      totalDelta.unchanged += delta.unchanged;
+      totalDelta.removed += delta.removed;
+    } else {
+      rmDirSync(sinapseMasterDest);
+      copyDirSync(sinapseMasterSrc, sinapseMasterDest);
+    }
+    const masterAgents = getAgentFiles(sinapseMasterDest).length;
+    totalAgents += masterAgents;
+    logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
+  }
+
+  // Phase 2: Generate agent commands (shared with `update` via command-generator).
+  logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
+  const { writtenAgents } = regenerateAgentCommands({
+    sinapseHome: SINAPSE_HOME,
+    commandsDir: CLAUDE_COMMANDS_DIR,
+    squads,
+    sinapseMasterDest,
+  });
+  logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
+
+  // Phase 2b: Install global agents based on LLM choice
+  const installedAgentFilenames = new Set();
+  const installedIdes = [];
+  if (llmChoice === 'claude-code' || llmChoice === 'both') {
+    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
+    fs.mkdirSync(globalAgentsDir, { recursive: true });
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
+      installedAgentFilenames.add(f);
+    }
+    installedIdes.push('claude-code');
+    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
+  }
+
+  if (llmChoice === 'codex' || llmChoice === 'both') {
+    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
+    fs.mkdirSync(codexAgentsDir, { recursive: true });
+    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
+      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
+      installedAgentFilenames.add(f);
+    }
+    installedIdes.push('codex');
+    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
+  }
+
+  // Audit 1 P0 (UN-1) — record manifest so uninstall can remove every file
+  // we wrote (not just `*-orqx.md`). Idempotent: re-install overwrites.
+  recordInstalledAgents(installedAgentFilenames, installedIdes);
+
+  // Phase 3: Generate squad-awareness.md
+  logger.always(`\n${CYAN}Phase 3:${NC} Generating squad-awareness rules`);
+  generateSquadAwareness(SINAPSE_HOME, squads);
+  logger.always(`  ${GREEN}OK${NC} squad-awareness.md`);
+
+  // Phase 4: Create launcher
+  logger.always(`\n${CYAN}Phase 4:${NC} Creating launcher`);
+  createLauncher();
+
+  // Phase 5: PATH management
+  logger.always(`\n${CYAN}Phase 5:${NC} Configuring PATH`);
+  ensurePath();
+
+  // Phase 6: Write metadata (Story 10.20 — preserve installedAt on upsert)
+  const nowIso = new Date().toISOString();
+  const meta = {
+    version: VERSION,
+    installedAt: isUpsert && existing.prevMeta && existing.prevMeta.installedAt
+      ? existing.prevMeta.installedAt
+      : nowIso,
+    squads: squads.length,
+    agents: totalAgents,
+    commands: writtenAgents.size,
+    llm: llmChoice,
+    platform: process.platform,
+  };
+  if (isUpsert) {
+    meta.updatedAt = nowIso;
+  }
+  fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
+
+  return { writtenAgents, totalAgents, totalDelta, squadsRefreshed, squadsAdded, meta };
 }
 
 function generateSquadAwareness(sinapseDir, squads) {
@@ -684,4 +829,10 @@ module.exports = {
   ensurePath,
   ensurePathUnix,
   ensurePathWindows,
+  // Follow-up #13 — transactional upgrade helpers (exported for tests)
+  createInstallTransaction,
+  buildTransactionPaths,
+  backupGlobalState,
+  runFatalPhasesTransactional,
+  installFatalPhases,
 };
