@@ -137,20 +137,13 @@ acceptance-criteria:
   - **Purpose:** PostgreSQL database connection via Supabase client
   - **Source:** @supabase/supabase-js
 
-- **Tool:** query-validator
-  - **Purpose:** SQL query syntax validation
-  - **Source:** .sinapse-ai/utils/db-query-validator.js
-
 ---
 
 ## Scripts
 
 **Agent-specific code for this task:**
 
-- **Script:** db-query.js
-  - **Purpose:** Execute PostgreSQL queries with error handling via Supabase
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/db-query.js
+- N/A
 
 ---
 

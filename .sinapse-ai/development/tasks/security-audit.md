@@ -151,10 +151,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** security-scan.js
-  - **Purpose:** Run security scans and generate reports
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/security-scan.js
+- N/A
 
 ---
 

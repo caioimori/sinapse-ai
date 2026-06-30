@@ -147,7 +147,7 @@ acceptance-criteria:
 
 - **Tool:** component-generator
   - **Purpose:** Generate new components from templates
-  - **Source:** .sinapse-ai/scripts/component-generator.js
+  - **Source:** .sinapse-ai/infrastructure/scripts/component-generator.js
 
 - **Tool:** file-system
   - **Purpose:** File creation and validation
@@ -159,10 +159,7 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** create-component.js
-  - **Purpose:** Component creation workflow
-  - **Language:** JavaScript
-  - **Location:** .sinapse-ai/scripts/create-component.js
+- N/A
 
 ---
 
