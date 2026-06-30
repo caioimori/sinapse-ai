@@ -44,6 +44,29 @@ const CHECKPOINT_TIMEOUT_MS = 1800000; // 30 minutes
 const STATE_SAVE_INTERVAL_MS = 300000; // 5 minutes
 
 /**
+ * Determines whether a REAL visual-terminal spawn can occur in the current environment.
+ *
+ * Combines the platform-support signal (`isSpawnerAvailable()`) with the stricter
+ * real-terminal signal (`detectEnvironment().supportsVisualTerminal`). The latter returns
+ * `false` in headless contexts (CI / SSH / Docker / VS Code integrated terminal) and `true`
+ * only in a native terminal. Without this second check, `isSpawnerAvailable()` alone returns
+ * `true` on CI / Windows-without-bash, causing `spawn('bash', [pm.sh])` to fail with ENOENT
+ * (test noise) plus a slow subprocess. When this returns `false`, phases skip the spawn and
+ * fall through to their existing "manual execution" fallback — no bash, no noise.
+ *
+ * Note: this intentionally does NOT change `TerminalSpawner.isSpawnerAvailable()` semantics
+ * (Conservative Default — Article XI); the hardening lives at the call-sites only.
+ *
+ * @returns {boolean} True only when a native visual terminal spawn is safe to attempt.
+ */
+function canSpawnVisualTerminal() {
+  return (
+    TerminalSpawner.isSpawnerAvailable() &&
+    TerminalSpawner.detectEnvironment().supportsVisualTerminal
+  );
+}
+
+/**
  * Workflow phase status
  * @enum {string}
  */
@@ -717,7 +740,7 @@ class WorkflowExecutor {
       }
 
       // Use terminal spawning (Story 11.2)
-      if (phase.spawn_in_terminal && TerminalSpawner.isSpawnerAvailable()) {
+      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
         const context = {
           story: storyPath,
           files: [],
@@ -1034,7 +1057,7 @@ class WorkflowExecutor {
       this._emitAgentSpawn(agent, 'quality_gate');
 
       // Use terminal spawning
-      if (phase.spawn_in_terminal && TerminalSpawner.isSpawnerAvailable()) {
+      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
         const context = {
           story: storyPath,
           files: [],
@@ -1104,7 +1127,7 @@ class WorkflowExecutor {
       this._emitAgentSpawn(agent, 'push');
 
       // Use terminal spawning
-      if (phase.spawn_in_terminal && TerminalSpawner.isSpawnerAvailable()) {
+      if (phase.spawn_in_terminal && canSpawnVisualTerminal()) {
         const context = {
           story: storyPath,
           files: [],
