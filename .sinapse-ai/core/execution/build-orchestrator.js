@@ -850,18 +850,120 @@ The subtask is complete only when verification passes.
   }
 
   /**
-   * Generate implementation plan using Claude
+   * Whether real planning-via-agent (spawning `claude`) is allowed.
+   *
+   * Mirrors {@link EpicExecutor#_realExecutionAllowed}: returns false inside the
+   * jest runner unless `SINAPSE_REAL_DISPATCH=1`. This guard is CRITICAL — the
+   * `claude` CLI IS on the PATH in this repo, so without it a `generatePlan()`
+   * call under unit tests would spawn the real CLI, burn the user's tokens and be
+   * non-deterministic.
+   *
+   * Honesty invariant (epic: orchestration-consolidation, F4): no path returns a
+   * "real" plan without doing real work. When this returns false, the caller
+   * falls back to a deterministic plan explicitly marked degraded/stub — never a
+   * fabricated plan passed off as agent-generated.
+   *
+   * @returns {boolean}
+   * @private
    */
-  async generatePlan(ctx) {
-    // For now, return a basic plan structure
-    // In a full implementation, this would use Claude to analyze the story
-    // and generate a detailed implementation plan
+  _planningViaAgentAllowed() {
+    return (
+      process.env.JEST_WORKER_ID === undefined || process.env.SINAPSE_REAL_DISPATCH === '1'
+    );
+  }
 
-    const storyContent = fs.readFileSync(ctx.storyPath, 'utf-8');
+  /**
+   * Build the planning prompt sent to the `claude` CLI.
+   * Feeds the FULL story (prose + ACs) and asks for a structured JSON plan.
+   *
+   * @param {string} storyId
+   * @param {string} storyContent - Full raw story file content
+   * @returns {string}
+   */
+  buildPlanPrompt(storyId, storyContent) {
+    return `You are a senior engineer producing an implementation plan for a development story.
 
-    // Extract acceptance criteria
-    const acMatches = storyContent.match(/- \[ \] AC\d+:.*$/gm) || [];
+## Story (${storyId})
+${storyContent}
 
+## Task
+Analyze the FULL story above (prose AND acceptance criteria) and produce a structured implementation plan.
+
+Respond with ONLY a JSON object (optionally inside a \`\`\`json fenced block), no prose before or after, in EXACTLY this shape:
+
+{
+  "phases": [
+    {
+      "id": "phase-id",
+      "name": "Human-readable phase name",
+      "subtasks": [
+        {
+          "id": "1.1",
+          "description": "What to implement",
+          "files": ["path/to/file.js"],
+          "verification": "command or check that confirms this subtask is done"
+        }
+      ]
+    }
+  ]
+}
+
+Rules:
+- Break the work into logical phases, each with concrete subtasks.
+- Every subtask MUST have a stable id ("phase.subtask", e.g. "1.1"), a clear description, the files it will touch, and a verification step.
+- Ground every subtask in the story's acceptance criteria — do not invent scope.`;
+  }
+
+  /**
+   * Robustly parse a plan JSON object out of a raw `claude` response.
+   * Tolerates ```json fenced blocks and surrounding prose; returns null when no
+   * valid plan object can be extracted (caller then degrades honestly).
+   *
+   * @param {string} raw - Raw CLI stdout
+   * @returns {{phases: Array}|null}
+   */
+  parsePlanResponse(raw) {
+    if (!raw || typeof raw !== 'string') {
+      return null;
+    }
+    let text = raw.trim();
+
+    // Prefer a fenced ```json ... ``` block when present.
+    const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fenceMatch) {
+      text = fenceMatch[1].trim();
+    } else {
+      // Otherwise slice from the first `{` to the last `}` (drops surrounding prose).
+      const first = text.indexOf('{');
+      const last = text.lastIndexOf('}');
+      if (first !== -1 && last > first) {
+        text = text.slice(first, last + 1);
+      }
+    }
+
+    try {
+      const obj = JSON.parse(text);
+      if (!obj || typeof obj !== 'object' || !Array.isArray(obj.phases)) {
+        return null;
+      }
+      return obj;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Build a deterministic, HONESTLY-DEGRADED plan from the story's ACs via regex.
+   * Always marked `degraded: true` / `stub: true` with a `reason` so the engine
+   * never passes a fallback off as a real agent-generated plan (F4 invariant).
+   *
+   * @param {Object} ctx
+   * @param {string[]} acMatches - Pre-extracted `- [ ] ACn:` lines
+   * @param {string} reason - Why we degraded (for honest reporting)
+   * @returns {Object}
+   * @private
+   */
+  _degradedPlan(ctx, acMatches, reason) {
     const subtasks = acMatches.map((ac, i) => ({
       id: `1.${i + 1}`, // Format: phase.subtask (e.g., "1.1", "1.2")
       description: ac.replace(/- \[ \] AC\d+:\s*/, ''),
@@ -872,6 +974,9 @@ The subtask is complete only when verification passes.
     return {
       storyId: ctx.storyId,
       generatedAt: new Date().toISOString(),
+      degraded: true,
+      stub: true,
+      reason,
       phases: [
         {
           id: 'implementation',
@@ -880,6 +985,81 @@ The subtask is complete only when verification passes.
         },
       ],
     };
+  }
+
+  /**
+   * Generate an implementation plan from a story.
+   *
+   * Honesty invariant (epic: orchestration-consolidation, F4):
+   * - AC1: when real execution is allowed → invoke `claude` over the FULL story
+   *   and return a rich plan WITHOUT any stub/degraded mark.
+   * - AC2: when real execution is NOT allowed (jest w/o SINAPSE_REAL_DISPATCH),
+   *   claude is unavailable/fails, or the response can't be parsed → fall back to
+   *   the deterministic regex plan, marked `degraded:true`/`stub:true` + `reason`.
+   *   Never throws here; the pipeline proceeds with a degraded plan.
+   * - AC3: missing / empty / non-actionable story → throw explicitly.
+   *
+   * @param {Object} ctx - { storyId, storyPath, config, worktree? }
+   * @returns {Promise<Object>} Plan ({ phases, ... }); degraded plans are marked.
+   */
+  async generatePlan(ctx) {
+    // AC3: explicit failure when there is no usable story file.
+    if (!ctx || !ctx.storyPath || !fs.existsSync(ctx.storyPath)) {
+      throw new Error(
+        `generatePlan: story file not found (storyId=${ctx && ctx.storyId}, path=${ctx && ctx.storyPath})`,
+      );
+    }
+
+    const storyContent = fs.readFileSync(ctx.storyPath, 'utf-8');
+    const trimmed = storyContent.trim();
+
+    // Deterministic AC extraction — shared by both the real and fallback paths.
+    const acMatches = storyContent.match(/- \[ \] AC\d+:.*$/gm) || [];
+
+    // "Actionable" = has ACs OR meaningful prose (more than a bare heading).
+    const proseWithoutHeadings = trimmed
+      .split('\n')
+      .filter((line) => !line.trim().startsWith('#'))
+      .join('\n')
+      .trim();
+    const hasActionableContent = acMatches.length > 0 || proseWithoutHeadings.length >= 20;
+
+    // AC3: empty or non-actionable story → explicit error, never a silent empty plan.
+    if (trimmed.length === 0 || !hasActionableContent) {
+      throw new Error(
+        `generatePlan: story has no actionable content (storyId=${ctx.storyId}, path=${ctx.storyPath})`,
+      );
+    }
+
+    // AC1: real planning path — guarded against burning tokens under jest.
+    if (this._planningViaAgentAllowed()) {
+      try {
+        const prompt = this.buildPlanPrompt(ctx.storyId, storyContent);
+        const workDir = (ctx.worktree && ctx.worktree.path) || this.rootPath;
+        const cliResult = await this.runClaudeCLI(prompt, workDir, ctx.config || this.config);
+        const stdout =
+          typeof cliResult === 'string' ? cliResult : (cliResult && cliResult.stdout) || '';
+        const parsed = this.parsePlanResponse(stdout);
+
+        if (parsed && Array.isArray(parsed.phases) && parsed.phases.length > 0) {
+          // AC1: real plan — no stub/degraded mark.
+          return {
+            storyId: ctx.storyId,
+            generatedAt: new Date().toISOString(),
+            phases: parsed.phases,
+          };
+        }
+
+        // AC2: unparseable / empty agent response → honest degraded fallback.
+        return this._degradedPlan(ctx, acMatches, 'agent-response-unparseable');
+      } catch (err) {
+        // AC2: claude unavailable / spawn error / timeout → honest degraded fallback (no throw).
+        return this._degradedPlan(ctx, acMatches, `agent-invocation-failed: ${err.message}`);
+      }
+    }
+
+    // AC2: real planning disabled (jest without SINAPSE_REAL_DISPATCH) → honest degraded fallback.
+    return this._degradedPlan(ctx, acMatches, 'real-planning-disabled');
   }
 
   /**
