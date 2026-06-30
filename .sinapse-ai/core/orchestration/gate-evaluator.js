@@ -202,6 +202,22 @@ class GateEvaluator {
   async _runGateChecks(fromEpic, toEpic, epicResult, gateConfig) {
     const checks = [];
 
+    // Universal honesty guard (master/gate leak fix, epic: orchestration-consolidation):
+    // a gate must NEVER approve a result that itself signals failure. The e2e checkpoint
+    // caught the gate approving (score 5.0) a QA report whose verdict was BLOCKED, because
+    // the existence checks (qa_report_exists / verdict_generated) never inspected the VALUE.
+    // This runs on EVERY gate, but ONLY adds a (failing, critical) check when a real failure
+    // signal is present — so it never inflates an honest zero-check gate (F5 invariant).
+    const failureSignal = this._detectFailureSignal(epicResult);
+    if (failureSignal) {
+      checks.push({
+        name: 'result_not_failed',
+        passed: false,
+        message: failureSignal,
+        severity: 'critical',
+      });
+    }
+
     // Get check list for this gate
     const checkNames = gateConfig.checks || this._getDefaultChecks(fromEpic, toEpic);
 
@@ -252,6 +268,36 @@ class GateEvaluator {
     }
 
     return checks;
+  }
+
+  /**
+   * Detect whether an epic result itself signals failure (master/gate leak fix).
+   *
+   * Returns a human-readable reason string when the result is NOT sound, or null when
+   * no failure signal is present. Used by `_runGateChecks` to add a critical, blocking
+   * check so a gate can never APPROVE a failed/blocked upstream result.
+   *
+   * @param {Object} epicResult - Result from the source epic
+   * @returns {string|null} Failure reason, or null if the result shows no failure signal
+   * @private
+   */
+  _detectFailureSignal(epicResult) {
+    if (!epicResult || typeof epicResult !== 'object') {
+      return null;
+    }
+    if (epicResult.success === false || epicResult.status === 'failed') {
+      return 'Epic result signals failure (success:false / status:failed)';
+    }
+    const norm = (v) => (typeof v === 'string' ? v.toLowerCase() : null);
+    const verdict = norm(epicResult.verdict);
+    if (verdict === 'blocked' || verdict === 'failed') {
+      return `Epic verdict is "${epicResult.verdict}"`;
+    }
+    const qaVerdict = epicResult.qaReport ? norm(epicResult.qaReport.verdict) : null;
+    if (qaVerdict === 'blocked' || qaVerdict === 'failed') {
+      return `QA report verdict is "${epicResult.qaReport.verdict}"`;
+    }
+    return null;
   }
 
   /**

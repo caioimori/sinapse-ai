@@ -90,6 +90,66 @@ describe('Anti-Theater Suite (F7) — engine never fabricates success', () => {
     });
   });
 
+  describe('full pipeline with a REAL epic failure never lies green (master/gate leak fix)', () => {
+    // Reproduces the e2e checkpoint: a real epic that FAILS (not a stub) — executor
+    // returns { success:false, status:'failed' } WITHOUT throwing. The old code marked it
+    // COMPLETED, logged "completed successfully", returned success:true and exited 0.
+    test('a FAILED epic flips success:false, state ≠ COMPLETE, exit ≠ 0, and the gate does not approve', async () => {
+      const { OrchestratorState } = MasterOrchestrator;
+      const orchestrator = new MasterOrchestrator(tempDir, {
+        storyId: 'ANTITHEATER-FAIL-001',
+        autoRecovery: false,
+        maxRetries: 0,
+        // Real-success agent so Epic 3 produces a sound (non-stub) result and the
+        // pipeline actually advances to Epic 4 (where we inject the real failure).
+        invokeAgent: async () => ({ status: 'success', success: true, output: 'ok', filesModified: [] }),
+      });
+      await orchestrator.initialize();
+
+      // Force a REAL, non-stub success for Epic 3 and a REAL failure for Epic 4.
+      orchestrator.executors[3] = {
+        execute: async () => ({
+          success: true,
+          specPath: '/spec.md',
+          complexity: 'STANDARD',
+          requirements: ['r1'],
+        }),
+      };
+      orchestrator.executors[4] = {
+        execute: async () => ({
+          success: false,
+          status: 'failed',
+          error: 'real build failure (anti-theater)',
+        }),
+      };
+
+      const result = await orchestrator.executeFullPipeline();
+
+      // AC1: honest master — no fabricated green over a red epic.
+      expect(result.success).toBe(false);
+      expect(result.status).not.toBe(OrchestratorState.COMPLETE);
+      expect(orchestrator.state).not.toBe(OrchestratorState.COMPLETE);
+      expect(result.epics.failed).toContain(4);
+      // Epic 4 is recorded FAILED, never COMPLETED.
+      expect(orchestrator.executionState.epics[4].status).toBe('failed');
+
+      // AC3: exit code reflects the truth (cli-commands derives it from success/blocked).
+      const exitCode = result.success ? 0 : result.blocked ? 2 : 1;
+      expect(exitCode).not.toBe(0);
+
+      // AC2: a gate fed the failed epic result must NOT approve it.
+      const { GateEvaluator, GateVerdict } = require('../../.sinapse-ai/core/orchestration/gate-evaluator');
+      const gate = new GateEvaluator({ projectRoot: tempDir });
+      const gateResult = await gate.evaluate(4, 6, {
+        success: false,
+        status: 'failed',
+        error: 'real build failure (anti-theater)',
+      });
+      expect(gateResult.verdict).not.toBe(GateVerdict.APPROVED);
+      expect(gateResult.verdict).toBe(GateVerdict.BLOCKED);
+    });
+  });
+
   describe('real-dispatch guard is active in the test runner', () => {
     test('the default dispatch executor refuses to spawn claude under jest', async () => {
       // No SINAPSE_REAL_DISPATCH → the guard must block real spawning and return
