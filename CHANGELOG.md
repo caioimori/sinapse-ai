@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.1] — 2026-06-30 — 🔧 Motor honesto ponta-a-ponta + Windows-safe
+
+> Patch. Atualização segura via `npx sinapse-ai update`. Fecha 2 defeitos do motor expostos pelo checkpoint e2e do épico orchestration-consolidation.
+
+### Bug Fixes
+
+- **orchestration** — fecha o vazamento da invariante de honestidade no nível master/gate: um épico que falhava **retornando** `{success:false}` (sem lançar) escapava do `catch` e era marcado COMPLETED, fazendo o pipeline reportar `ORCHESTRATION COMPLETE` + exit 0 com zero trabalho; o gate de QA aprovava (score 5.0) um QA report `BLOCKED`. Agora o master marca FAILED, `finalize` exige zero falhas e o gate ganhou o check crítico `result_not_failed` (#314).
+- **orchestration** — corrige crash no Windows: `_createStubPlan` serializava o `specPath` Windows por template-string em YAML de aspas duplas (`\U` inválido), matando a fase de execução em ~4ms; agora usa `yaml.dump` (robusto a qualquer path) (#315).
+
+### Refactor
+
+- **engine** — F3C: aposenta a linhagem morta `terminal-spawner → pm.sh` (stub que nunca invocou claude), unificando no caminho canônico `dispatcher → claude` e fechando a DoD "3 linhagens viram 1" do épico; fallback honesto preservado, ~3.7k linhas de código morto removidas (#312).
+
+### Documentation
+
+- **epic** — relatório do checkpoint e2e "matar ou dobrar" (orchestrate vs nativo); veredito: híbrido com disciplina, re-medir com tarefa multi-story (#313).
+- **changelog** — consolida entrada `[Unreleased]` órfã na `[1.2.1]` (#311).
+
 ## [1.19.0] — 2026-06-30 — ⚙️ Motor de orquestração real (do teatro ao código)
 
 > Minor release. Atualização segura via `npx sinapse-ai update`.
