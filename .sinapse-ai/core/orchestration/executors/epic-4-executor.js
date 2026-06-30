@@ -13,6 +13,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const yaml = require('js-yaml');
 const EpicExecutor = require('./epic-executor');
 
 /**
@@ -215,44 +216,47 @@ class Epic4Executor extends EpicExecutor {
    * @private
    */
   async _createStubPlan(planPath, storyId, specPath) {
-    const stubPlan = `# Implementation Plan: ${storyId}
-# Generated: ${new Date().toISOString()}
+    const now = new Date().toISOString();
 
-metadata:
-  storyId: "${storyId}"
-  specPath: "${specPath || 'N/A'}"
-  status: draft
-  createdAt: "${new Date().toISOString()}"
+    // Build the plan as an object and serialize via yaml.dump. This is robust to
+    // any content — notably Windows absolute paths in `specPath`
+    // (e.g. "C:\Users\...\AppData\...") which, when hand-written into a
+    // double-quoted YAML scalar, contain invalid escape sequences (`\U`, `\A`)
+    // that make `yaml.load` throw and kill the whole build path on Windows.
+    // yaml.dump escapes/quotes correctly for any value (Story: FIX windows-path-yaml-plan).
+    const planObject = {
+      metadata: {
+        storyId,
+        specPath: specPath || 'N/A',
+        status: 'draft',
+        createdAt: now,
+      },
+      phases: [
+        {
+          phase: 1,
+          name: 'Setup',
+          subtasks: [{ id: '1.1', name: 'Initialize project structure', status: 'pending' }],
+        },
+        {
+          phase: 2,
+          name: 'Implementation',
+          subtasks: [{ id: '2.1', name: 'Implement core functionality', status: 'pending' }],
+        },
+        {
+          phase: 3,
+          name: 'Testing',
+          subtasks: [{ id: '3.1', name: 'Write tests', status: 'pending' }],
+        },
+        {
+          phase: 4,
+          name: 'Documentation',
+          subtasks: [{ id: '4.1', name: 'Update documentation', status: 'pending' }],
+        },
+      ],
+    };
 
-phases:
-  - phase: 1
-    name: Setup
-    subtasks:
-      - id: "1.1"
-        name: Initialize project structure
-        status: pending
-
-  - phase: 2
-    name: Implementation
-    subtasks:
-      - id: "2.1"
-        name: Implement core functionality
-        status: pending
-
-  - phase: 3
-    name: Testing
-    subtasks:
-      - id: "3.1"
-        name: Write tests
-        status: pending
-
-  - phase: 4
-    name: Documentation
-    subtasks:
-      - id: "4.1"
-        name: Update documentation
-        status: pending
-`;
+    const header = `# Implementation Plan: ${storyId}\n# Generated: ${now}\n\n`;
+    const stubPlan = header + yaml.dump(planObject, { lineWidth: -1, noRefs: true });
 
     await fs.ensureDir(path.dirname(planPath));
     await fs.writeFile(planPath, stubPlan);

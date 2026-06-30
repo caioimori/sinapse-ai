@@ -283,6 +283,46 @@ describe('Epic Executors (Story 0.3)', () => {
       );
       expect(await fs.pathExists(planPath)).toBe(true);
     });
+
+    // Regression: stub plan must survive a write→read round-trip with a Windows
+    // specPath. Pre-fix the YAML was hand-written into a double-quoted scalar, so
+    // `C:\Users\...` produced an invalid escape (`\U`) and yaml.load threw — killing
+    // the build path on Windows. (Story: FIX windows-path-yaml-plan, AC2)
+    it('should round-trip a Windows specPath through write→yaml.load without throwing (AC2)', async () => {
+      const yaml = require('js-yaml');
+      const winSpecPath = 'C:\\Users\\Caio Imori\\AppData\\Local\\Temp\\spec.md';
+      const planPath = path.join(tempDir, 'plan', 'win', 'implementation.yaml');
+
+      // Real write path.
+      await executor._createStubPlan(planPath, 'WIN-001', winSpecPath);
+
+      // Real read path (identical yaml.load call used by plan-tracker,
+      // build-orchestrator and autonomous-build-loop).
+      const raw = await fs.readFile(planPath, 'utf-8');
+      let plan;
+      expect(() => {
+        plan = yaml.load(raw);
+      }).not.toThrow();
+
+      expect(plan.metadata.specPath).toBe(winSpecPath);
+      expect(plan.metadata.storyId).toBe('WIN-001');
+      expect(plan.phases).toHaveLength(4);
+    });
+
+    // No regression for POSIX paths / N/A fallback. (AC3)
+    it('should round-trip a POSIX specPath and N/A fallback (AC3)', async () => {
+      const yaml = require('js-yaml');
+
+      const posixPath = path.join(tempDir, 'plan', 'posix', 'implementation.yaml');
+      await executor._createStubPlan(posixPath, 'POSIX-001', '/path/to/spec.md');
+      const posixPlan = yaml.load(await fs.readFile(posixPath, 'utf-8'));
+      expect(posixPlan.metadata.specPath).toBe('/path/to/spec.md');
+
+      const naPath = path.join(tempDir, 'plan', 'na', 'implementation.yaml');
+      await executor._createStubPlan(naPath, 'NA-001', null);
+      const naPlan = yaml.load(await fs.readFile(naPath, 'utf-8'));
+      expect(naPlan.metadata.specPath).toBe('N/A');
+    });
   });
 
   describe('Epic5Executor - Recovery System (AC4)', () => {

@@ -478,10 +478,15 @@ class MasterOrchestrator extends EventEmitter {
           } else {
             pipelineResult.epicsFailed.push(epicNum);
 
-            // In strict mode or if epic is critical, stop pipeline
+            // Honesty invariant (master/gate leak fix): ANY failed epic means the
+            // pipeline did not fully succeed — not only critical/strict ones. A
+            // non-critical failure (e.g. QA/Epic 6) must still flip success:false so
+            // finalize() never reports an overall green build over a red epic.
+            pipelineResult.success = false;
+
+            // In strict mode or if epic is critical, also STOP the pipeline now.
             if (this.strictGates || this._isEpicCritical(epicNum)) {
               this._log(`Critical epic ${epicNum} failed, halting pipeline`);
-              pipelineResult.success = false;
               break;
             }
           }
@@ -604,6 +609,45 @@ class MasterOrchestrator extends EventEmitter {
         orchestrator: this,
       });
 
+      // Honesty invariant (epic: orchestration-consolidation — master/gate leak fix):
+      // an executor may signal failure by RETURNING { success:false } / { status:'failed' }
+      // WITHOUT throwing. The old code fell straight through to "mark COMPLETED" + logged
+      // "completed successfully" + returned { success:true } for any non-stub result — so a
+      // failed epic leaked a green pipeline (the e2e "Epic 4 failed" → "Epic 4 completed
+      // successfully" → exit 0 symptom). The `catch` below only handles THROWN errors, so a
+      // returned failure must be detected explicitly here and treated as a real failure.
+      const isStubResult = result && result.status === 'stub';
+      const isFailedResult =
+        result && !isStubResult && (result.success === false || result.status === 'failed');
+
+      if (isFailedResult) {
+        this.executionState.epics[epicNum] = {
+          ...this.executionState.epics[epicNum],
+          status: EpicStatus.FAILED,
+          completedAt: new Date().toISOString(),
+          result,
+          errors: [
+            ...(this.executionState.epics[epicNum]?.errors || []),
+            {
+              message: result.error || `Epic ${epicNum} returned a non-success result`,
+              timestamp: new Date().toISOString(),
+            },
+          ],
+        };
+
+        await this._saveState();
+
+        this.emit('epicComplete', { epicNum, result, gateResult: null });
+        this.onEpicComplete(epicNum, result);
+
+        this._log(`Epic ${epicNum} failed (executor returned non-success result)`, {
+          level: 'error',
+          icon: '❌',
+        });
+
+        return { success: false, status: 'failed', epicNum, result };
+      }
+
       // Mark as completed
       this.executionState.epics[epicNum] = {
         ...this.executionState.epics[epicNum],
@@ -614,8 +658,8 @@ class MasterOrchestrator extends EventEmitter {
 
       // Evaluate quality gate (Story 0.6) - only in full pipeline mode
       // Skip gate evaluation if result is from stub executor
+      // (isStubResult already computed above with the failure-detection guard).
       let gateResult = null;
-      const isStubResult = result && result.status === 'stub';
       if (this._inFullPipeline && result && result.success !== false && !isStubResult) {
         gateResult = await this._evaluateGate(epicNum, result);
 
@@ -1486,13 +1530,25 @@ class MasterOrchestrator extends EventEmitter {
     const seconds = Math.floor((duration % 60000) / 1000);
 
     const hasStubs = pipelineResult.hasStubs || (pipelineResult.epicsStubbed || []).length > 0;
+    // Honesty invariant (master/gate leak fix): a pipeline with ANY failed epic, or a
+    // final state of BLOCKED/FAILED, can never report success:true — even if a stale
+    // optimistic flag survived. `blocked` is surfaced so the CLI shows BLOCKED (exit 2)
+    // instead of "ORCHESTRATION COMPLETE" / exit 0.
+    const hasFailures = (pipelineResult.epicsFailed || []).length > 0;
+    const blocked = this._state === OrchestratorState.BLOCKED;
     return {
       workflowId: this.executionState.workflowId,
       storyId: this.storyId,
       status: this._state,
+      blocked,
       // Honesty invariant (epic: orchestration-consolidation, F0a): a pipeline that ran
       // any epic in STUB mode did NOT really build anything — it must not report success:true.
-      success: (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) && !hasStubs,
+      // A failed epic or a non-COMPLETE terminal state is likewise never a success.
+      success:
+        (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) &&
+        !hasStubs &&
+        !hasFailures &&
+        !blocked,
       mode: hasStubs ? 'stub' : 'real',
       stubbedEpics: pipelineResult.epicsStubbed || [],
       ...(hasStubs
