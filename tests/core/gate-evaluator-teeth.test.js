@@ -89,6 +89,9 @@ describe('Gate Evaluator teeth (Story F5) — blocks degraded/absent, approves r
       const epicResult = {
         plan: realPlan,
         implementationPath: '/impl',
+        // epic: empty-build-honesty — real implementation now means real code files,
+        // not just an implementationPath. Supply the files the build actually touched.
+        codeChanges: ['src/feature.js', 'src/feature.test.js'],
         errors: [],
         // testResults omitted on purpose → requireTests check is skipped honestly.
       };
@@ -131,11 +134,93 @@ describe('Gate Evaluator teeth (Story F5) — blocks degraded/absent, approves r
       const result = await evaluator.evaluate(4, 6, {
         plan: realPlan,
         implementationPath: '/impl',
+        codeChanges: ['src/feature.js'],
         errors: [],
       });
       expect(result.checks.find((c) => c.name === 'result_not_failed')).toBeUndefined();
       expect(result.verdict).toBe(GateVerdict.APPROVED);
       expect(result.score).toBe(5);
+    });
+  });
+
+  // ─────────────────────────────────────────────────────────────────────────────────
+  // AC1/AC2/AC3 — empty-build honesty (multi-story measurement, 2026-06-30)
+  //
+  // The engine's honesty invariant is LAW: "no path reports success without real work."
+  // The measurement caught the epic4_to_epic6 gate APPROVING (score 5.0) a build that
+  // wrote ZERO code files — because `implementation_exists` trusted `implementationPath`,
+  // which epic-4 set to the PLAN path (always exists). These tests prove empty ≠ success:
+  // a "succeeded" build with no real files is BLOCKED, and a build with real files passes.
+  // ─────────────────────────────────────────────────────────────────────────────────
+  describe('empty-build honesty — implementation_exists has teeth', () => {
+    it('BLOCKS a "succeeded" build that wrote ZERO code files (only implementationPath=planPath)', async () => {
+      // Reproduces the exact defect: plan is real, no errors, but the only implementation
+      // signal is `implementationPath` pointing at the plan itself; codeChanges is empty.
+      const planPath = '/repo/docs/stories/EMPTY/plan/implementation.yaml';
+      const epicResult = {
+        plan: realPlan,
+        planPath,
+        implementationPath: planPath, // the misleading signal — a plan is not an implementation
+        codeChanges: [],
+        errors: [],
+      };
+      const result = await evaluator.evaluate(4, 6, epicResult);
+
+      expect(result.verdict).toBe(GateVerdict.BLOCKED);
+      expect(result.verdict).not.toBe(GateVerdict.APPROVED);
+      const implCheck = result.checks.find((c) => c.name === 'implementation_exists');
+      expect(implCheck).toBeDefined();
+      expect(implCheck.passed).toBe(false);
+      expect(implCheck.severity).toBe('critical');
+    });
+
+    it('does NOT count the plan path as implementation (codeChanges listing only the plan)', async () => {
+      const planPath = '/repo/docs/stories/EMPTY/plan/implementation.yaml';
+      const epicResult = {
+        plan: realPlan,
+        planPath,
+        // Even if the plan path leaks into codeChanges, it must be excluded.
+        codeChanges: [planPath],
+        errors: [],
+      };
+      const result = await evaluator.evaluate(4, 6, epicResult);
+
+      const implCheck = result.checks.find((c) => c.name === 'implementation_exists');
+      expect(implCheck.passed).toBe(false);
+      expect(result.verdict).toBe(GateVerdict.BLOCKED);
+    });
+
+    it('APPROVES a build that wrote REAL code files (implementation_exists passes)', async () => {
+      const planPath = '/repo/docs/stories/REAL/plan/implementation.yaml';
+      const epicResult = {
+        plan: realPlan,
+        planPath,
+        implementationPath: planPath,
+        // Real files the build actually touched (plan excluded automatically).
+        filesModified: ['src/gate.js', 'tests/gate.test.js'],
+        errors: [],
+      };
+      const result = await evaluator.evaluate(4, 6, epicResult);
+
+      const implCheck = result.checks.find((c) => c.name === 'implementation_exists');
+      expect(implCheck.passed).toBe(true);
+      expect(implCheck.message).toMatch(/2 code file/);
+      expect(result.verdict).toBe(GateVerdict.APPROVED);
+      expect(result.score).toBe(5);
+    });
+
+    it('reads real files nested under build.filesModified (BuildOrchestrator shape)', async () => {
+      const epicResult = {
+        plan: realPlan,
+        planPath: '/repo/plan.yaml',
+        build: { success: true, filesModified: ['src/only-here.js'] },
+        errors: [],
+      };
+      const result = await evaluator.evaluate(4, 6, epicResult);
+
+      const implCheck = result.checks.find((c) => c.name === 'implementation_exists');
+      expect(implCheck.passed).toBe(true);
+      expect(result.verdict).toBe(GateVerdict.APPROVED);
     });
   });
 

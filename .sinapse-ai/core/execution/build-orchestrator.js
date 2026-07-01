@@ -231,6 +231,11 @@ class BuildOrchestrator extends EventEmitter {
         // quality gate can inspect its honesty (degraded/stub/subtasks). Without this
         // the epic4_to_epic6 gate has nothing real to bite on.
         plan: ctx.plan,
+        // epic: empty-build-honesty — surface the REAL files the build wrote/modified
+        // (collected from the build loop's per-subtask results). Without this the
+        // downstream `implementation_exists` gate cannot tell a real build apart from
+        // an empty "success" that touched zero code files.
+        filesModified: this._collectModifiedFiles(ctx),
       };
     } catch (error) {
       ctx.errors.push(error);
@@ -261,6 +266,32 @@ class BuildOrchestrator extends EventEmitter {
     } finally {
       this.activeBuilds.delete(storyId);
     }
+  }
+
+  /**
+   * Collect the real files the build wrote/modified from the build-loop result.
+   *
+   * epic: empty-build-honesty — the per-subtask results carry `filesModified`
+   * (extracted from the agent output). This flattens + de-duplicates them into a
+   * single honest list. Returns [] when nothing was touched (an empty build), which
+   * is precisely the signal the `implementation_exists` gate needs to block.
+   *
+   * @param {Object} ctx - Build context ({ result: { results: [...] } })
+   * @returns {string[]} De-duplicated list of modified files
+   * @private
+   */
+  _collectModifiedFiles(ctx) {
+    const results = ctx && ctx.result && Array.isArray(ctx.result.results) ? ctx.result.results : [];
+    const files = [];
+    for (const r of results) {
+      const list = r && Array.isArray(r.filesModified) ? r.filesModified : [];
+      for (const f of list) {
+        if (typeof f === 'string' && f.trim() !== '' && !files.includes(f)) {
+          files.push(f);
+        }
+      }
+    }
+    return files;
   }
 
   /**

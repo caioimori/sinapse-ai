@@ -113,13 +113,23 @@ class Epic4Executor extends EpicExecutor {
       if (this._realExecutionAllowed()) {
         const buildResult = await this._executeViaBuildOrchestrator(storyId, context);
         if (buildResult && buildResult.success) {
+          // Honesty invariant (epic: empty-build-honesty): do NOT set
+          // `implementationPath = planPath`. A plan path ALWAYS exists and is NOT
+          // proof of implementation — the multi-story measurement caught the gate
+          // approving an empty build because of exactly this. Surface the REAL files
+          // the build touched so the epic4_to_epic6 gate can tell an implementation
+          // apart from an empty "success".
+          const codeChanges = Array.isArray(buildResult.filesModified)
+            ? buildResult.filesModified
+            : [];
           return this._completeExecution({
-            implementationPath: planPath,
             planPath,
             // F5 (epic: orchestration-consolidation): propagate the real plan object
             // so the downstream epic4_to_epic6 gate can verify it is not degraded/stub.
             plan: buildResult.plan,
             build: buildResult,
+            codeChanges,
+            filesModified: codeChanges,
             reportPath: buildResult.reportPath,
             phases: buildResult.phases,
           });
@@ -144,7 +154,10 @@ class Epic4Executor extends EpicExecutor {
       return this._stubExecution(
         'Epic 4 stub mode — real build is delegated to BuildOrchestrator outside the test runner',
         {
-          implementationPath: planPath,
+          // Honesty invariant (epic: empty-build-honesty): no `implementationPath`
+          // here — the plan path is not an implementation. The stub already reports
+          // success:false, and `codeChanges` carries whatever real files (if any)
+          // the subtasks touched.
           planPath,
           progress,
           subtaskResults,
