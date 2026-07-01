@@ -301,6 +301,69 @@ class GateEvaluator {
   }
 
   /**
+   * Collect the REAL code files an epic actually wrote/modified.
+   *
+   * Honesty invariant (epic: empty-build-honesty): a plan file is NOT an
+   * implementation. This gathers the concrete files touched from `codeChanges` /
+   * `filesModified` (and `build.filesModified` when the build result is nested),
+   * then EXCLUDES the plan artifact (`planPath` / `implementationPath`) so a build
+   * that only produced a plan yields an empty list — and the caller can block it.
+   *
+   * Entries may be strings or `{ path | file }` objects; blanks and duplicates are
+   * dropped. Returns a de-duplicated array of file paths (never the plan itself).
+   *
+   * @param {Object} epicResult - Result from the source epic
+   * @returns {string[]} Real implementation files (plan artifact excluded)
+   * @private
+   */
+  _collectImplementationFiles(epicResult) {
+    if (!epicResult || typeof epicResult !== 'object') {
+      return [];
+    }
+
+    const resolveSafe = (p) => {
+      try {
+        return path.resolve(p);
+      } catch {
+        return null;
+      }
+    };
+
+    // The plan artifact is explicitly NOT an implementation — exclude it.
+    const planPaths = new Set(
+      [epicResult.planPath, epicResult.implementationPath]
+        .filter((p) => typeof p === 'string' && p.trim() !== '')
+        .map(resolveSafe)
+        .filter(Boolean),
+    );
+
+    const raw = []
+      .concat(Array.isArray(epicResult.codeChanges) ? epicResult.codeChanges : [])
+      .concat(Array.isArray(epicResult.filesModified) ? epicResult.filesModified : [])
+      .concat(
+        epicResult.build && Array.isArray(epicResult.build.filesModified)
+          ? epicResult.build.filesModified
+          : [],
+      );
+
+    const files = [];
+    for (const entry of raw) {
+      const file = typeof entry === 'string' ? entry : entry && (entry.path || entry.file);
+      if (typeof file !== 'string' || file.trim() === '') {
+        continue;
+      }
+      const resolved = resolveSafe(file);
+      if (resolved && planPaths.has(resolved)) {
+        continue; // a plan path masquerading as a code change — not implementation
+      }
+      if (!files.includes(file)) {
+        files.push(file);
+      }
+    }
+    return files;
+  }
+
+  /**
    * Run a single check
    * @private
    */
@@ -380,11 +443,23 @@ class GateEvaluator {
         break;
       }
 
-      case 'implementation_exists':
-        result.passed = !!epicResult.implementationPath || epicResult.codeChanges?.length > 0;
-        result.message = result.passed ? 'Implementation exists' : 'No implementation found';
+      case 'implementation_exists': {
+        // Honesty invariant (epic: empty-build-honesty): "implementation exists"
+        // MUST mean real code was written — not merely that a PLAN file exists. The
+        // multi-story measurement (2026-06-30) caught this gate APPROVING (score 5.0)
+        // a build that wrote ZERO code files: the old check trusted
+        // `implementationPath`, but epic-4 set that to the PLAN path (which ALWAYS
+        // exists), so an empty build slipped through. Base the check on the real list
+        // of files touched by the build, excluding the plan artifact itself. Empty
+        // build → zero real files → critical fail → gate BLOCKS (empty ≠ success).
+        const files = this._collectImplementationFiles(epicResult);
+        result.passed = files.length > 0;
+        result.message = result.passed
+          ? `Implementation exists (${files.length} code file(s) changed)`
+          : 'No implementation found — build wrote zero code files (plan path is not implementation)';
         result.severity = 'critical';
         break;
+      }
 
       case 'no_critical_errors': {
         const criticalErrors = (epicResult.errors || []).filter((e) => e.severity === 'critical');
