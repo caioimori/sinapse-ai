@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.19.1
+version: 1.19.2
 generator: scripts/generate-install-manifest.js
 file_count: 1166
 files:
@@ -496,9 +496,9 @@ files:
     type: core
     size: 34059
   - path: core/execution/build-orchestrator.js
-    hash: sha256:ac8adfb8d5ef580641430735a7f351cf96d6bfe8608e8e45b92106ee0d412cb7
+    hash: sha256:6b1a213652493a7f453267d2f4f7937f5dac625cdfb95ca558747468922cb12f
     type: core
-    size: 39805
+    size: 41204
   - path: core/execution/build-state-manager.js
     hash: sha256:3b2fe56bf0e1a480f663a02afbb83c6d11cf89fb56815381c7ccafab948a63ae
     type: core
@@ -992,9 +992,9 @@ files:
     type: core
     size: 9463
   - path: core/orchestration/executors/epic-4-executor.js
-    hash: sha256:dbf091d97a91fa601268a9f61ba2b8d7f4ed9a42349123e02fc0898218069ead
+    hash: sha256:9aa50bd546d00d79e9ed2642377a66cdecef4f91c36440fde5ef617b18296226
     type: core
-    size: 10174
+    size: 11029
   - path: core/orchestration/executors/epic-5-executor.js
     hash: sha256:865224cd6cb1f80c1228e149349aea5c335440201c9047f849d2ec85b73d3f03
     type: core
@@ -1016,9 +1016,9 @@ files:
     type: core
     size: 10211
   - path: core/orchestration/gate-evaluator.js
-    hash: sha256:22ac74902559eed2d3a85733b84b6a5794998255a892d54319a5106e878aec46
+    hash: sha256:514c80ec7b305bf85d9816bca4ecdfc972faa84796a84794fef71d302a93f72b
     type: core
-    size: 20388
+    size: 23437
   - path: core/orchestration/greenfield-handler.js
     hash: sha256:330be2c76c3eb5a9a1f1c975837308802b8fc6fb871f9b584787ae4e2aa8fcb1
     type: core

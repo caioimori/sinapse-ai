@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.2] — 2026-07-01 — 🔒 Honestidade do gate (build vazio não passa) + aposta medida
+
+> Patch. Atualização segura via `npx sinapse-ai update`. Fecha o último furo de honestidade do motor achado ao medir a aposta de orquestração multi-story.
+
+### Bug Fixes
+
+- **orchestration** — o gate `epic4_to_epic6` aprovava (score 5.0) um build que não escreveu **nenhum arquivo**: o check `implementation_exists` aceitava `implementationPath`, que o epic-4 setava para o caminho do **plano** (sempre existe). Agora o check exige arquivos de código **reais** (`codeChanges` + `filesModified`, excluindo o plano) e bloqueia build vazio; o epic-4 não usa mais o `implementationPath` enganoso e o `BuildOrchestrator` expõe `filesModified` de verdade. Estende a invariante de honestidade — build "sucedido" sem arquivos ≠ sucesso (#317).
+
+### Documentation
+
+- **epic** — fecha o épico `orchestration-consolidation` com o **veredito medido do checkpoint "matar ou dobrar"**: HÍBRIDO. Na medição multi-story, o modo nativo entregou 3/3 stories em 64s e 1 chamada, enquanto o motor entregou 1/3 em ~13,5min (a coordenação multi-story corrompeu o estado entre stories). O motor é assumido como **assistente de story isolada** (spec + plano reais); a orquestração autônoma multi-story vira **limitação documentada** (`KNOWN-LIMITATIONS.md`), não promessa. Docs públicos já eram honestos (#318).
+
 ## [1.19.1] — 2026-06-30 — 🔧 Motor honesto ponta-a-ponta + Windows-safe
 
 > Patch. Atualização segura via `npx sinapse-ai update`. Fecha 2 defeitos do motor expostos pelo checkpoint e2e do épico orchestration-consolidation.
