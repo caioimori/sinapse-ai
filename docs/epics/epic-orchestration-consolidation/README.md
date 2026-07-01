@@ -1,8 +1,21 @@
 # Épico: Consolidação do Motor de Orquestração — "Do teatro ao real"
 
-> **Origem:** [Auditoria Fria 2026-06-04](../../audits/AUDIT-2026-06-04-cold-review.md) · Decisão de rumo: **APOSTAR** (caminho C).
-> **Status:** ✅ Concluído (2026-06-30) — 7/7 frentes resolvidas. Restam follow-ups explícitos: STORY-F3C (remoção da linhagem `pm.sh`) e o checkpoint de reavaliação da aposta (seção 7), ainda não medido.
+> **Origem:** [Auditoria Fria 2026-06-04](../../audits/AUDIT-2026-06-04-cold-review.md) · Decisão de rumo inicial: **APOSTAR** (caminho C).
+> **Status:** ✅ Frentes técnicas concluídas (7/7) · ⚖️ Checkpoint da aposta MEDIDO (2026-06-30) → veredito **HÍBRIDO** (ver seção 7 e [Estado final](#estado-final-2026-06-30--híbrido)). O motor é assumido como **assistente de story isolada** (spec + plano reais); a alegação de **orquestração autônoma multi-story foi medida e abandonada** (vira limitação documentada — ver [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md)).
 > **Owner:** framework governance.
+
+---
+
+## Estado final (2026-06-30) — Híbrido
+
+As frentes técnicas F0–F7 foram concluídas e o motor deixou de ser teatro: no caminho single-story ele invoca agentes reais e produz spec, plano e código reais, com invariantes de honestidade que impedem verde falso. **Mas o checkpoint "matar ou dobrar" (seção 7) foi finalmente medido** — e o veredito é **HÍBRIDO**, não "dobrar".
+
+- **O que o motor É:** um **assistente de story isolada**. Epic 3 (spec) e Epic 4 (plano) geram artefatos reais e de qualidade para 1 story; o build produz código correto. `sinapse orchestrate <story-id>` é confiável para **1 story**.
+- **O que o motor NÃO é (abandonado):** um **orquestrador autônomo multi-story**. Medido em 3 stories encadeadas, entregou 1/3, custou ~13× o tempo do nativo e sua coordenação **degradou** o resultado (contaminação de estado cross-story zerou as stories 2 e 3). Não há executor de DAG multi-story no CLI.
+- **Consequência prática:** multi-story sequencial **não é suportado** pelo motor; para isso, o caminho nativo (ou um wrapper fino por story) é mais correto, mais barato e mais portável.
+- **Dívida deliberadamente não paga:** os 2 bugs que quebram o multi-story (ver [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md)) **não serão corrigidos** — é um caminho abandonado, não vale investir.
+
+Detalhes e números: seção 7 e [CHECKPOINT-multistory-2026-06-30.md](CHECKPOINT-multistory-2026-06-30.md).
 
 ---
 
@@ -58,15 +71,21 @@ F0 (pré-flight)
 
 ## 6. Definição de pronto do épico ("feito de verdade")
 
-- [x] `sinapse orchestrate <story>` invoca agentes reais e produz código/testes reais — não stubs.
-- [x] Zero `return { success: true }` sem trabalho subjacente (lint anti-teatro verde no CI).
-- [ ] Um único caminho de execução (as 3 linhagens viram 1). — **parcial:** a linhagem `terminal-spawner → pm.sh` foi silenciada em headless (opção B, #309), mas ainda não removida; remoção fechada em STORY-F3C (follow-up).
+**O que É verdade (verificado):**
+
+- [x] `sinapse orchestrate <story>` invoca agentes reais e produz código/testes reais — não stubs. **(medido: verdadeiro para 1 story isolada — spec + plano + build reais, código correto.)**
+- [x] Epic 3 (spec) e Epic 4 (plano) produzem artefatos reais de qualidade para uma story isolada — spec preciso e AC-grounded, plano com subtasks e verificações executáveis (evidência no [checkpoint multi-story](CHECKPOINT-multistory-2026-06-30.md), seção "Quality of what the engine did produce").
+- [x] Zero `return { success: true }` sem trabalho subjacente (lint anti-teatro verde no CI). **(medido: as invariantes de honestidade seguraram — a story que falhou foi reportada `FAILED`, sem verde falso.)**
 - [x] Os 189 agentes de squad endereçáveis pelo motor.
 - [x] Pelo menos 1 gate capaz de bloquear de verdade num caso de teste.
 - [x] Suite E2E anti-teatro rodando como required check.
-- [ ] Claims do README/Constitution alinhados ao que o motor faz de fato. — em andamento (CHANGELOG e este épico atualizados nesta sessão; varredura completa de claims segue como follow-up).
 
-> **Pendente honesto (checkpoint da seção 7):** o "teste do caso real" — implementar uma story end-to-end via `orchestrate` e medir se o motor é **melhor / mais barato / mais portável** que rodar os mesmos agentes nativamente — **ainda NÃO foi medido**. Fica como follow-up obrigatório antes de dobrar a aposta (F6 + roadmap de orquestração como produto).
+**O que NÃO foi atingido / abandonado (decisão baseada em evidência — ver seção 7):**
+
+- [ ] **NÃO ATINGIDO / ABANDONADO — orquestração autônoma multi-story.** Medido em 3 stories encadeadas: entregou 1/3 (as stories 2 e 3 pularam toda implementação por contaminação de estado cross-story). Não há executor de DAG multi-story no CLI — `orchestrate` roda 1 story por processo; a ordenação é trabalho do operador. Assumido como **limitação documentada**, não promessa. Ver [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md).
+- [ ] **NÃO ATINGIDO — "melhor / mais barato / mais portável que nativo".** Medido: **pior** no caso multi-story — nativo entregou 3/3 stories, 9/9 testes, 1 call, 64s; o motor entregou 1/3 stories em ~13,5min e dezenas de calls. A camada de coordenação degradou o resultado em vez de agregar valor.
+- [ ] Um único caminho de execução (as 3 linhagens viram 1). — **parcial:** a linhagem `terminal-spawner → pm.sh` foi silenciada em headless (opção B, #309), mas ainda não removida; remoção fechada em STORY-F3C (follow-up).
+- [x] Claims do README/Constitution alinhados ao que o motor faz de fato — **verdadeiro após esta sessão.** Varredura ampla (README, `docs/`, constitution, AGENTS.md) confirmou que os docs públicos já eram modestos: o hero do README é "Squads de IA que constroem **com** você, não **para** você" e `orchestrate` é descrito como "ciclo de desenvolvimento de **uma** story" (singular). Nenhum overclaim de motor autônomo multi-story a corrigir; épico + KNOWN-LIMITATIONS registram a realidade medida.
 
 ## 7. Checkpoint de reavaliação da aposta (matar ou dobrar)
 
@@ -78,6 +97,24 @@ A aposta foi feita contra a recomendação da auditoria (que via competição co
 - **Não** → a aposta se converte no caminho híbrido (B) com o aprendizado pago. Sem vergonha — decisão baseada em evidência.
 
 Este checkpoint é a diferença entre apostar e apostar com disciplina.
+
+### ⚖️ Veredito final MEDIDO (2026-06-30) — **HÍBRIDO** (caminho B)
+
+O checkpoint foi rodado com dispatch real do `claude` CLI numa tarefa multi-story (3 stories encadeadas, com dependências reais 1→2→3), fora do repo do framework. Relatório completo: **[CHECKPOINT-multistory-2026-06-30.md](CHECKPOINT-multistory-2026-06-30.md)**.
+
+| Dimensão | Nativo (`claude` direto) | Motor (`orchestrate`) | Vencedor |
+|---|---|---|---|
+| Stories entregues | **3 / 3** | 1 / 3 | Nativo |
+| Testes | **9 pass / 0 fail** | 5 pass (só a story 1) | Nativo |
+| `claude` calls | **1** | dezenas | Nativo |
+| Wall time | **64 s** | ~13,5 min | Nativo |
+| Coordenação multi-story | n/a | **negativa** (sabotou) | Nativo |
+
+**A aposta foi medida e NÃO se sustenta para multi-story autônomo.** No terreno onde o motor deveria vencer, ele entregou **menos** e custou **muito mais**: um estado de build compartilhado e não escopado por story fez as stories 2 e 3 pularem toda a implementação (zero código), o loop de QA não conseguiu executar, e um gate aprovou um build vazio. A única vitória real: as **invariantes de honestidade seguraram** (a story que falhou foi reportada `FAILED`, sem verde falso).
+
+**A aposta SE sustenta para single-story:** o caminho spec → plano → build de uma story isolada é genuinamente bom (spec preciso, plano AC-grounded, código correto).
+
+**Decisão:** híbrido (caminho B). O motor é assumido como **assistente de story isolada** (Epic 3 spec + Epic 4 plano geram artefatos reais de qualidade). A alegação de **orquestração autônoma multi-story é abandonada** — vira limitação documentada ([KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md)), não promessa. Os 2 bugs multi-story que quebram o caminho abandonado **não serão corrigidos** (decisão consciente de não investir num caminho abandonado).
 
 ## 8. Fora de escopo deste épico
 
