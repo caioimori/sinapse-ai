@@ -496,9 +496,9 @@ files:
     type: core
     size: 34474
   - path: core/execution/build-orchestrator.js
-    hash: sha256:6b1a213652493a7f453267d2f4f7937f5dac625cdfb95ca558747468922cb12f
+    hash: sha256:56bbde48aaa4eb0de3ea7c95d5d1584a9ec8b753931097102fa696fb72d11848
     type: core
-    size: 41204
+    size: 43980
   - path: core/execution/build-state-manager.js
     hash: sha256:3b2fe56bf0e1a480f663a02afbb83c6d11cf89fb56815381c7ccafab948a63ae
     type: core
@@ -952,9 +952,9 @@ files:
     type: core
     size: 10096
   - path: core/orchestration/cli-commands.js
-    hash: sha256:880de23a9d5fa1564dc145106bf423ad1c64b05ab581c5c0ee1fa5ce48a30d71
+    hash: sha256:a3fc11597f2dd2098ffa0b30acbe283506c4e64132c198ddf5c233c9791ab2b0
     type: core
-    size: 19306
+    size: 23762
   - path: core/orchestration/condition-evaluator.js
     hash: sha256:c90c2b1506d72ce8c468b8b2b90cf4116fd1fc441eb591e8ce09dbcb75e28c00
     type: core
@@ -992,17 +992,17 @@ files:
     type: core
     size: 9463
   - path: core/orchestration/executors/epic-4-executor.js
-    hash: sha256:085c23f0265e4163ec66468d029b260cad64d5ed6a6be6a6c670bbdda58b4042
+    hash: sha256:ffb124ce4751d3b6189cf03210eac9ee93be3754b760cfdb0188880f03ed928f
     type: core
-    size: 11420
+    size: 11680
   - path: core/orchestration/executors/epic-5-executor.js
     hash: sha256:865224cd6cb1f80c1228e149349aea5c335440201c9047f849d2ec85b73d3f03
     type: core
     size: 8543
   - path: core/orchestration/executors/epic-6-executor.js
-    hash: sha256:0cd51d8989ac242b7c3da1ac149cc869827c777fe632bc22610921f31b25541c
+    hash: sha256:964e65e5ed622ed2325afc3e559150995ff28b246f148b14d1a8cc11ab9aaebe
     type: core
-    size: 12446
+    size: 14978
   - path: core/orchestration/executors/epic-executor.js
     hash: sha256:0c25d4799a6338252017d9deb2f73bbdbde58cd5f7bfe4ac0fccdc66fe0229d2
     type: core
@@ -1024,17 +1024,17 @@ files:
     type: core
     size: 40129
   - path: core/orchestration/index.js
-    hash: sha256:cc7252ff358565d802f786079f46fd1ffdc6ee4b19e94fd70441169b2a6ead13
+    hash: sha256:ee215f855804448dcb02375128f4ff1f39e6861f37d1762dde19c80e77b8f4a6
     type: core
-    size: 9069
+    size: 9205
   - path: core/orchestration/lock-manager.js
     hash: sha256:b269b3c17d575f2dbca8e749585ad9133ab60dbfd7d74a85e6a776d2bb1909b4
     type: core
     size: 8667
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:ef93435d1d13378a9d469ac8671de919e0918268471d818806899bd36d31c0ad
+    hash: sha256:fdd9c02dfb5752cca028b1fbc882e7c466c77296b2966296a888f862bbaa24f2
     type: core
-    size: 63249
+    size: 67636
   - path: core/orchestration/message-formatter.js
     hash: sha256:4683565c3da6d33fa5aeb4629dfa525f90715cb3b3cbbaa4c8a8d952766839d7
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:ede95e34835ca199968498a29a20f98aa09c1f96bb2c800c30362e6f242ccaa9
+    hash: sha256:4e1e7733a854d6f6309af0cadb4ad1248223a672797213a02c428b3819034225
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
