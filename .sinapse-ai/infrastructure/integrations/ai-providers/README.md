@@ -44,7 +44,7 @@ const provider = getProviderForTask('security');        // Returns Claude (deepe
 const { ClaudeProvider, GeminiProvider } = require('./ai-providers');
 
 // Claude
-const claude = new ClaudeProvider({ model: 'claude-3-5-sonnet' });
+const claude = new ClaudeProvider({ model: 'sonnet' }); // family alias — the CLI resolves the current version, never hardcode a dated snapshot id
 const response = await claude.execute('Explain this function');
 
 // Gemini with JSON output
@@ -78,7 +78,7 @@ ai_providers:
     complex_tasks: claude
 
 claude:
-  model: claude-3-5-sonnet
+  model: sonnet # family alias — the CLI resolves the current version, never hardcode a dated snapshot id
   timeout: 300000
 
 gemini:

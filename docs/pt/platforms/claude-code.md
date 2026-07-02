@@ -151,7 +151,7 @@ Este arquivo contém:
 export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Opcional
-export CLAUDE_MODEL="claude-sonnet-4-20250514"  # Modelo padrão
+export CLAUDE_MODEL="sonnet"  # Alias de família — o CLI resolve a versão atual (nunca fixe um id datado)
 export CLAUDE_MAX_TOKENS="8192"                 # Máximo de tokens de resposta
 export SINAPSE_DEBUG="true"                        # Habilitar log de debug
 ```
@@ -162,7 +162,7 @@ export SINAPSE_DEBUG="true"                        # Habilitar log de debug
 
 ```json
 {
-  "model": "claude-sonnet-4-20250514",
+  "model": "sonnet",
   "maxTokens": 8192,
   "permissions": {
     "allowedTools": ["Read", "Write", "Edit", "Bash", "Glob", "Grep"],

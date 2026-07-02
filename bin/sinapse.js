@@ -163,6 +163,9 @@ GENERATE & CREATE:
 ORCHESTRATION:
   sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
   sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
+                                             # Scope: 1 story per run — sequential multi-story in the
+                                             # same directory is not supported (measured limitation;
+                                             # see docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md)
   sinapse route "<brief>"                   # Doc-first routing: type -> workflow -> what's missing
   sinapse build "<brief>"                    # Guided orchestration: RUN the route (--dry-run, --type)
   sinapse mode [explore|ask|auto]           # Show or set the agent permission mode (--cycle)

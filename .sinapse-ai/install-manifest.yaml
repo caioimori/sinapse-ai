@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:d4197018ec5a68b823ac0949b066f3fa4ecb77079ec27a283d87a671bfa3c0d7
+    hash: sha256:59f6d47ce4b468c1390667833acc055e883ff88e641b21de2ebe7603d63f099c
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
@@ -3136,9 +3136,9 @@ files:
     type: infrastructure
     size: 964
   - path: infrastructure/integrations/ai-providers/README.md
-    hash: sha256:4c2fa2af53a3b21ccbbe62b0c6eaf1075dd58f0dc6a91ac3b5cc3fbf2e938465
+    hash: sha256:cda2b941b190dc24e1cb517922692c22e27895db89a43a2db192ae008aadd08f
     type: infrastructure
-    size: 2606
+    size: 2769
   - path: infrastructure/integrations/pm-adapters/clickup-adapter.js
     hash: sha256:7a37eb45be1ed599cac20ac415c9e824b2b2d2e7bfc1cba212b627114a3a49e1
     type: infrastructure

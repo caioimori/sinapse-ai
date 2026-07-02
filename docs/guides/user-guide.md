@@ -6,8 +6,8 @@
 
 Complete guide for using SINAPSE - the AI-Orchestrated System for Full Stack Development.
 
-**Version:** 2.1.0
-**Last Updated:** 2026-01-28
+**Version:** 1.19.2
+**Last Updated:** 2026-07-02
 
 ---
 
@@ -18,7 +18,7 @@ Complete guide for using SINAPSE - the AI-Orchestrated System for Full Stack Dev
 Before using SINAPSE, ensure you have:
 
 - **Node.js** version 18.0.0 or higher
-- **npm** version 8.0.0 or higher
+- **npm** version 9.0.0 or higher
 - **Git** for version control
 - An AI provider API key (Anthropic, OpenAI, or compatible)
 
@@ -43,7 +43,7 @@ cd my-project
 npx sinapse-ai agents list
 
 # Activate an agent
-@dev
+@developer
 
 # Get help
 *help
@@ -224,6 +224,20 @@ sinapse route "add dark mode to the platform"
 sinapse orchestrate <story-id>
 ```
 
+### Orchestrate — Supported Scope (Measured)
+
+`sinapse orchestrate` is reliable for **one story at a time**. Sequential
+multi-story orchestration in the same working directory is **not supported** —
+this was measured directly (native flow: 3/3 stories, 64s, 1 call; the
+orchestrate pipeline: 1/3 stories, ~13.5min, state leaked across stories) and
+the autonomous multi-story path was abandoned in favor of the native flow.
+Full write-up: [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
+| Use                                                   | Supported?                  |
+| ------------------------------------------------------ | ---------------------------- |
+| `orchestrate` for **1 story** (spec + plan + build)     | ✅ Yes, reliable              |
+| `orchestrate` for **multiple chained stories**          | ❌ No — use the native flow   |
+
 ---
 
 ## Squads
@@ -341,7 +355,7 @@ features:
 
 ai:
   provider: anthropic
-  model: claude-3-opus
+  model: opus # family alias (opus | sonnet | haiku) — the CLI resolves the current version; never hardcode a dated snapshot id
 
 environment: development
 ```
@@ -490,4 +504,4 @@ before building a new agent from scratch.
 
 ---
 
-_SINAPSE User Guide v4.2.11_
+_SINAPSE User Guide v1.19.2_
