@@ -34,11 +34,18 @@ const EXPECTED_ARTICLES = [
 
 /**
  * Files that MUST reference the Constitution articles
+ *
+ * Includes the install template (AF-20260702 item 1.7): the generated
+ * .claude/CLAUDE.md is a MERGE of this template into the user's file, so a
+ * stale/incomplete article table here regresses every fresh install even
+ * when the repo's own .claude/CLAUDE.md is correct. Without this entry the
+ * check was blind to drift in the template itself.
  */
 const CONSTITUTION_CONSUMERS = [
   { path: '.claude/CLAUDE.md', label: 'Project CLAUDE.md' },
   { path: 'AGENTS.md', label: 'AGENTS.md' },
   { path: '.synapse/constitution', label: 'Generated Constitution Domain' },
+  { path: '.sinapse-ai/product/templates/ide-rules/claude-rules.md', label: 'Install Template (claude-rules.md)' },
 ];
 
 /**
@@ -141,7 +148,11 @@ class ConstitutionConsistencyCheck extends BaseCheck {
     }
 
     if (issues.length <= 2) {
-      return this.warn(`${issues.length} minor consistency issue(s) found`, {
+      // BaseCheck exposes warning(), not warn() — this call previously threw
+      // "this.warn is not a function" any time exactly 1-2 issues were found
+      // (uncaught until AF-20260702 item 1.7 added a test that exercises
+      // this branch).
+      return this.warning(`${issues.length} minor consistency issue(s) found`, {
         details,
         recommendation: issues.join('; '),
       });

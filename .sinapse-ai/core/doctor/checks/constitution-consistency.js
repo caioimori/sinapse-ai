@@ -35,11 +35,18 @@ const KEY_ARTICLES = [
 
 /**
  * Files that should reference Constitution articles
+ *
+ * Includes the install template (AF-20260702 item 1.7): the generated
+ * .claude/CLAUDE.md is a MERGE of this template into the user's file, so a
+ * stale/incomplete article table here regresses every fresh install even
+ * when the repo's own .claude/CLAUDE.md is correct. Without this entry the
+ * check was blind to drift in the template itself.
  */
 const CONSUMER_FILES = [
   '.claude/CLAUDE.md',
   'AGENTS.md',
   '.synapse/constitution',
+  '.sinapse-ai/product/templates/ide-rules/claude-rules.md',
 ];
 
 /**
