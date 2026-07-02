@@ -2,11 +2,15 @@
  * Troubleshooting System
  * Task 1.8.6: Provides actionable troubleshooting for errors
  *
+ * Story onda2-p6 (AF-20260702 item 2.9) — migrated to i18n (PT+EN), following
+ * the pattern established in the sibling module report-generator.js (100% i18n).
+ *
  * @module wizard/validation/troubleshooting-system
  */
 
 const chalk = require('chalk');
 const inquirer = require('inquirer');
+const { t, tf, tList } = require('../i18n');
 
 // Canonical repo + docs locations. The legacy `docs.SinapseAI.com` domain never
 // existed; every help link points at real, shipped docs in the GitHub repo
@@ -16,157 +20,81 @@ const DOCS_BASE = `${REPO_URL}/blob/main/docs`;
 
 /**
  * Troubleshooting database
- * Maps error codes to detailed troubleshooting information
+ * Maps error codes to detailed troubleshooting information.
+ *
+ * `problemKey`/`causesKey`/`solutionsKey` point at i18n.js entries (resolved
+ * at display time via t()/tList(), so the active language always wins).
+ * `docs` and `priority` are not natural-language content — left as-is.
  */
 const TROUBLESHOOTING_DATABASE = {
   ENV_FILE_MISSING: {
-    problem: '.env file not found',
-    causes: [
-      'Environment configuration step failed',
-      'File creation permissions issue',
-      '.env accidentally deleted',
-    ],
-    solutions: [
-      'Re-run wizard: npx sinapse-ai@latest install',
-      'Manually create .env from template: cp .env.example .env',
-      'Check file permissions in project directory',
-    ],
+    problemKey: 'troubleshootEnvFileMissingProblem',
+    causesKey: 'troubleshootEnvFileMissingCauses',
+    solutionsKey: 'troubleshootEnvFileMissingSolutions',
     docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'critical',
   },
 
   CORE_CONFIG_MISSING: {
-    problem: 'core-config.yaml not found',
-    causes: [
-      'Environment configuration step failed',
-      '.sinapse-ai directory missing',
-      'File creation failed',
-    ],
-    solutions: [
-      'Re-run wizard: npx sinapse-ai@latest install',
-      'Check .sinapse-ai directory exists',
-      'Manually create from template',
-    ],
+    problemKey: 'troubleshootCoreConfigMissingProblem',
+    causesKey: 'troubleshootCoreConfigMissingCauses',
+    solutionsKey: 'troubleshootCoreConfigMissingSolutions',
     docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'high',
   },
 
   MCP_HEALTH_CHECK_FAILED: {
-    problem: 'MCP health check failed',
-    causes: [
-      'API key missing or invalid',
-      'Network connectivity issues',
-      'MCP service temporarily unavailable',
-      'Package not installed correctly',
-    ],
-    solutions: [
-      'Verify API key in .env file',
-      'Test network: curl https://api.service.com/health',
-      'Retry MCP installation: npm run install:mcps',
-      'Check MCP service status',
-      'Verify npx can access package: npx -y [package-name] --version',
-    ],
+    problemKey: 'troubleshootMcpHealthCheckFailedProblem',
+    causesKey: 'troubleshootMcpHealthCheckFailedCauses',
+    solutionsKey: 'troubleshootMcpHealthCheckFailedSolutions',
     docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'medium',
   },
 
   ALL_MCP_HEALTH_CHECKS_FAILED: {
-    problem: 'All MCP health checks failed',
-    causes: [
-      'Network connectivity issue',
-      'MCPs not installed correctly',
-      'Configuration file corrupted',
-      'API keys not configured',
-    ],
-    solutions: [
-      'Check internet connection',
-      'Re-run MCP installation',
-      'Verify .mcp.json syntax',
-      'Configure API keys in .env',
-      'Delete .mcp.json and reinstall',
-    ],
+    problemKey: 'troubleshootAllMcpHealthChecksFailedProblem',
+    causesKey: 'troubleshootAllMcpHealthChecksFailedCauses',
+    solutionsKey: 'troubleshootAllMcpHealthChecksFailedSolutions',
     docs: `${DOCS_BASE}/troubleshooting.md`,
     priority: 'high',
   },
 
   GITIGNORE_CRITICAL_MISSING: {
-    problem: '.gitignore missing critical entries',
-    causes: [
-      '.gitignore not created during setup',
-      '.gitignore manually edited incorrectly',
-      'Git not initialized',
-    ],
-    solutions: [
-      'Add missing entries to .gitignore',
-      'Copy from template: .env, node_modules, *.key, *.pem',
-      'Initialize git if needed: git init',
-    ],
+    problemKey: 'troubleshootGitignoreCriticalMissingProblem',
+    causesKey: 'troubleshootGitignoreCriticalMissingCauses',
+    solutionsKey: 'troubleshootGitignoreCriticalMissingSolutions',
     docs: `${DOCS_BASE}/security/security-best-practices.md`,
     priority: 'high',
   },
 
   DEPS_INSTALL_FAILED: {
-    problem: 'Dependencies installation failed',
-    causes: [
-      'Network connectivity issues',
-      'Package manager not installed',
-      'npm/yarn registry unavailable',
-      'Disk space insufficient',
-    ],
-    solutions: [
-      'Check internet connection',
-      'Verify package manager installed: npm --version',
-      'Clear cache: npm cache clean --force',
-      'Try different package manager: yarn or pnpm',
-      'Check disk space: df -h (Unix) or dir (Windows)',
-    ],
+    problemKey: 'troubleshootDepsInstallFailedProblem',
+    causesKey: 'troubleshootDepsInstallFailedCauses',
+    solutionsKey: 'troubleshootDepsInstallFailedSolutions',
     docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'critical',
   },
 
   CRITICAL_DEPS_MISSING: {
-    problem: 'Critical dependencies missing',
-    causes: [
-      'Dependency installation incomplete',
-      'node_modules corrupted',
-      'Package installation failed silently',
-    ],
-    solutions: [
-      'Delete node_modules: rm -rf node_modules',
-      'Delete lock file: rm package-lock.json',
-      'Reinstall: npm install',
-      'Try clean install: npm ci',
-    ],
+    problemKey: 'troubleshootCriticalDepsMissingProblem',
+    causesKey: 'troubleshootCriticalDepsMissingCauses',
+    solutionsKey: 'troubleshootCriticalDepsMissingSolutions',
     docs: `${DOCS_BASE}/installation/troubleshooting.md`,
     priority: 'high',
   },
 
   VULNERABILITIES_FOUND: {
-    problem: 'Security vulnerabilities found in dependencies',
-    causes: [
-      'Outdated packages with known vulnerabilities',
-      'Transitive dependencies with security issues',
-    ],
-    solutions: [
-      'Run: npm audit fix',
-      'Run: npm audit fix --force (if needed)',
-      'Update packages: npm update',
-      'Review: npm audit for details',
-    ],
+    problemKey: 'troubleshootVulnerabilitiesFoundProblem',
+    causesKey: 'troubleshootVulnerabilitiesFoundCauses',
+    solutionsKey: 'troubleshootVulnerabilitiesFoundSolutions',
     docs: 'https://docs.npmjs.com/cli/v8/commands/npm-audit',
     priority: 'medium',
   },
 
   ENV_PERMISSIONS_INSECURE: {
-    problem: '.env file permissions too permissive',
-    causes: [
-      'File created with default permissions',
-      'Permissions not set during installation',
-    ],
-    solutions: [
-      'Run: chmod 600 .env',
-      'Verify: ls -la .env',
-    ],
+    problemKey: 'troubleshootEnvPermissionsInsecureProblem',
+    causesKey: 'troubleshootEnvPermissionsInsecureCauses',
+    solutionsKey: 'troubleshootEnvPermissionsInsecureSolutions',
     docs: `${DOCS_BASE}/security/security-best-practices.md`,
     priority: 'medium',
   },
@@ -184,7 +112,7 @@ async function offerTroubleshooting(errors) {
 
   console.log('');
   console.log(chalk.bold.cyan('═══════════════════════════════════════════════'));
-  console.log(chalk.bold.cyan('🔧 Troubleshooting Guide'));
+  console.log(chalk.bold.cyan('🔧 ' + t('troubleshootGuideTitle')));
   console.log(chalk.bold.cyan('═══════════════════════════════════════════════'));
   console.log('');
 
@@ -223,18 +151,18 @@ async function offerTroubleshooting(errors) {
     {
       type: 'confirm',
       name: 'viewLogs',
-      message: 'Would you like to see installation logs for more details?',
+      message: t('troubleshootViewLogsPrompt'),
       default: false,
     },
   ]);
 
   if (viewLogs) {
     console.log('');
-    console.log(chalk.bold('📄 Installation Logs:'));
+    console.log(chalk.bold('📄 ' + t('troubleshootInstallationLogsTitle')));
     console.log(chalk.dim('  - .sinapse/install-log.txt'));
     console.log(chalk.dim('  - .sinapse/install-errors.log'));
     console.log('');
-    console.log(chalk.dim('View with: cat .sinapse/install-log.txt'));
+    console.log(chalk.dim(t('troubleshootViewWithCat')));
   }
 
   // Offer to open documentation
@@ -242,23 +170,23 @@ async function offerTroubleshooting(errors) {
     {
       type: 'confirm',
       name: 'openDocs',
-      message: 'Would you like to open the troubleshooting documentation?',
+      message: t('troubleshootOpenDocsPrompt'),
       default: false,
     },
   ]);
 
   if (openDocs) {
     console.log('');
-    console.log(chalk.green('📚 Documentation:'));
+    console.log(chalk.green('📚 ' + t('troubleshootDocumentationTitle')));
     console.log(chalk.green(`  ${DOCS_BASE}/troubleshooting.md`));
     console.log('');
   }
 
   // Offer support contact
   console.log('');
-  console.log(chalk.bold('💬 Need Help?'));
-  console.log(chalk.dim(`  - GitHub Issues: ${REPO_URL}/issues`));
-  console.log(chalk.dim(`  - Documentation: ${DOCS_BASE}/troubleshooting.md`));
+  console.log(chalk.bold('💬 ' + t('troubleshootNeedHelpTitle')));
+  console.log(chalk.dim(`  - ${tf('troubleshootGithubIssuesLine', { url: `${REPO_URL}/issues` })}`));
+  console.log(chalk.dim(`  - ${tf('troubleshootDocumentationLine', { url: `${DOCS_BASE}/troubleshooting.md` })}`));
   console.log('');
 }
 
@@ -274,12 +202,12 @@ function displayTroubleshooting(code, troubleshooting, errorInstances) {
     low: chalk.gray('⚪'),
   }[troubleshooting.priority] || '⚪';
 
-  console.log(chalk.bold(`${priorityIcon} ${troubleshooting.problem}`));
+  console.log(chalk.bold(`${priorityIcon} ${t(troubleshooting.problemKey)}`));
   console.log('');
 
   // Show affected items
   if (errorInstances.length > 1) {
-    console.log(chalk.dim(`Affected items (${errorInstances.length}):`));
+    console.log(chalk.dim(tf('troubleshootAffectedItems', { count: errorInstances.length })));
     errorInstances.slice(0, 3).forEach(err => {
       if (err.file) {
         console.log(chalk.dim(`  - ${err.file}`));
@@ -288,30 +216,31 @@ function displayTroubleshooting(code, troubleshooting, errorInstances) {
       }
     });
     if (errorInstances.length > 3) {
-      console.log(chalk.dim(`  ... and ${errorInstances.length - 3} more`));
+      console.log(chalk.dim(tf('troubleshootAndMore', { count: errorInstances.length - 3 })));
     }
     console.log('');
   }
 
   // Show causes
-  if (troubleshooting.causes && troubleshooting.causes.length > 0) {
-    console.log(chalk.bold('Possible Causes:'));
-    troubleshooting.causes.forEach((cause, i) => {
+  const causes = tList(troubleshooting.causesKey);
+  if (causes.length > 0) {
+    console.log(chalk.bold(t('troubleshootPossibleCauses')));
+    causes.forEach((cause, i) => {
       console.log(`  ${i + 1}. ${cause}`);
     });
     console.log('');
   }
 
   // Show solutions
-  console.log(chalk.bold.green('Solutions:'));
-  troubleshooting.solutions.forEach((solution, i) => {
+  console.log(chalk.bold.green(t('troubleshootSolutionsHeading')));
+  tList(troubleshooting.solutionsKey).forEach((solution, i) => {
     console.log(chalk.green(`  ${i + 1}. ${solution}`));
   });
   console.log('');
 
   // Show documentation link
   if (troubleshooting.docs) {
-    console.log(chalk.dim(`📖 Docs: ${troubleshooting.docs}`));
+    console.log(chalk.dim('📖 ' + tf('troubleshootDocsLine', { url: troubleshooting.docs })));
     console.log('');
   }
 
@@ -335,11 +264,11 @@ function displayGenericTroubleshooting(code, errorInstances) {
   });
 
   console.log('');
-  console.log(chalk.bold.green('General Solutions:'));
-  console.log(chalk.green('  1. Review error message above'));
-  console.log(chalk.green('  2. Check installation logs in .sinapse/'));
-  console.log(chalk.green('  3. Re-run installation'));
-  console.log(chalk.green('  4. Contact support if issue persists'));
+  console.log(chalk.bold.green(t('troubleshootGeneralSolutions')));
+  console.log(chalk.green('  ' + t('troubleshootGeneralSolution1')));
+  console.log(chalk.green('  ' + t('troubleshootGeneralSolution2')));
+  console.log(chalk.green('  ' + t('troubleshootGeneralSolution3')));
+  console.log(chalk.green('  ' + t('troubleshootGeneralSolution4')));
   console.log('');
 
   console.log(chalk.dim('─────────────────────────────────────────────────'));
