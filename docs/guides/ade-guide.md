@@ -2,13 +2,15 @@
 
 > **Versão:** 1.0.0
 > **Data:** 2026-01-29
-> **Status:** Production Ready ✅
+> **Status:** Assistente confiável de 1 story (medido) ⚠️ — multi-story não suportado
 
 ---
 
 ## O que é o ADE?
 
 O **SINAPSE Autonomous Development Engine (ADE)** é um sistema de desenvolvimento autônomo que transforma requisitos vagos em código funcional através de pipelines estruturados e agentes especializados.
+
+> **Escopo real (medido em 2026-06-30):** confiável para **1 story isolada** — gera spec (Epic 3) e plano (Epic 4) reais, e produz código correto para essa story. Orquestração autônoma de **múltiplas stories encadeadas** foi medida e **abandonada** (o caminho nativo venceu 3/3 stories vs 1/3 do motor). Detalhes: [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
 
 ### Características Principais
 
@@ -443,5 +445,5 @@ cat docs/stories/STORY-42/spec-critique.json
 
 ---
 
-_SINAPSE Autonomous Development Engine - Turning Ideas into Code Autonomously_
+_SINAPSE Autonomous Development Engine - Assistente confiável de spec a código, 1 story por vez_
 

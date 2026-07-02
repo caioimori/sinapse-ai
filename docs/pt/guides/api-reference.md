@@ -200,6 +200,8 @@ Execução de task com argumentos: { story: "story-1.2.3" }
 | `*build-status`     | `[--all]`    | Mostrar status do build                  |
 | `*build-log`        | `{story-id}` | Visualizar log de tentativas de build    |
 
+> **Escopo:** os comandos de build rodam **1 `{story-id}` por vez** — pipeline confiável de 1 story. Encadeamento multi-story não é suportado; ver [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
 **Qualidade & Débito:**
 
 | Comando           | Argumentos | Descrição                          |

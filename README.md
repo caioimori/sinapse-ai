@@ -423,6 +423,16 @@ npx sinapse-ai chrome-brain install   # Instala browser automation
 
 Todos os comandos são seguros para re-rodar. Para listar agentes ativos depois de instalar, abra o Claude Code ou o Codex CLI e digite `@` para autocompletar.
 
+### Orquestração (avançado)
+
+Além do CLI de instalação acima, o pacote expõe um binário separado (`sinapse`) com um motor de orquestração que gera spec, plano e código para uma story. **Escopo medido: executa 1 story por vez** — orquestração autônoma de múltiplas stories encadeadas foi testada e não é suportada (ver [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md)).
+
+```bash
+npx -p sinapse-ai sinapse route "<briefing>"       # Classifica o briefing -> workflow + o que falta
+npx -p sinapse-ai sinapse build "<briefing>"       # Roda o route de forma guiada (--dry-run, --type)
+npx -p sinapse-ai sinapse orchestrate <story-id>   # Gera spec + plano + build para UMA story (--status/--stop/--resume)
+```
+
 ---
 
 ## Contribuindo

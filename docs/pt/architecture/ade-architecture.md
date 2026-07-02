@@ -26,6 +26,8 @@
 
 O **Motor de Desenvolvimento Autônomo (ADE)** é a infraestrutura do SINAPSE para workflows de desenvolvimento autônomo. Ele permite que agentes de IA trabalhem de forma independente através de pipelines inteligentes, loops auto-recuperáveis e aprendizado persistente.
 
+> **Escopo real (medido em 2026-06-30):** confiável para **1 story isolada** (spec + plano + build). Orquestração autônoma de múltiplas stories encadeadas foi medida e abandonada em favor do caminho nativo — ver [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
 ### Capacidades Principais
 
 | Capacidade                   | Descrição                                | Épica |

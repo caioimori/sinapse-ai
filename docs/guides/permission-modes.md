@@ -205,6 +205,8 @@ The Autonomous Development Engine (ADE) respects permission modes:
 | **Ask**     | Batches operations for approval |
 | **Auto**    | Full autonomous execution       |
 
+> **Scope:** "Full autonomous execution" applies per story. Chained multi-story autonomy is not supported — see [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
 ### Batch Approval in Ask Mode
 
 When running autonomous workflows, operations are grouped:
