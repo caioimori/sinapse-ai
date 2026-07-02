@@ -9,7 +9,7 @@ atomic_layer: Task
 **Task ID:** create-team-topology
 **Version:** 1.0
 **Purpose:** Design and configure a multi-agent team with defined topology, roles, and communication patterns
-**Orchestrator:** @swarm-orqx (Nexus)
+**Orchestrator:** @swarm-orqx (Relay)
 **Mode:** Interactive (elicit: true)
 **Quality Standard:** Team topology tested with dry-run, all agents load successfully
 

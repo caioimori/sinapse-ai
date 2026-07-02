@@ -38,7 +38,7 @@ Checklist:
 | **Trigger** | Semanal (report rapido), mensal (deep dive), trimestral (analise completa) |
 | **Input** | Metricas de todas as plataformas, KPIs definidos, historico de performance |
 | **Output** | Report de performance com insights, tendencias e recomendacoes |
-| **Handoff** | → editorial-strategist (North) e content-orqx (Nexus) |
+| **Handoff** | → editorial-strategist (North) e content-orqx (Bulletin) |
 | **Complexity** | complex |
 
 ---
@@ -75,5 +75,5 @@ De top + bottom: quais insights geram acao? "Carrosseis educativos com hook de d
 handoff:
   artifact: "performance-report-{period}.md"
   context: "Performance: {N} pecas analisadas, top performer '{top}', {R} recomendacoes, KPIs {status}"
-  next: "editorial-strategist (North) para ajustar estrategia, content-orqx (Nexus) para proxima sprint"
+  next: "editorial-strategist (North) para ajustar estrategia, content-orqx (Bulletin) para proxima sprint"
 ```

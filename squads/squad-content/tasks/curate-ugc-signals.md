@@ -38,7 +38,7 @@ Checklist:
 | **Trigger** | Diario, integrado ao scan de sinais |
 | **Input** | Hashtags da marca, mentions, reviews, tags, reposts |
 | **Output** | UGC curado com classificacao de qualidade e potencial de amplificacao |
-| **Handoff** | → content-orqx (Nexus) para decisao de amplificacao |
+| **Handoff** | → content-orqx (Bulletin) para decisao de amplificacao |
 | **Complexity** | medium |
 
 ---
@@ -75,5 +75,5 @@ Resumo semanal: melhores UGCs por categoria, tendencias de criacao da audiencia,
 handoff:
   artifact: "ugc-curation-{date}.md"
   context: "UGC curado: {N} pecas, {R} para repost, {C} para co-criacao, sentimento {positivo/neutro/negativo}"
-  next: "content-orqx (Nexus) para decisao de amplificacao e flag-content-for-amplification"
+  next: "content-orqx (Bulletin) para decisao de amplificacao e flag-content-for-amplification"
 ```

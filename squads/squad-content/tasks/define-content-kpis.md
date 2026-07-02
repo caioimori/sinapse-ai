@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | editorial-strategist (North) |
-| **Co-agents** | content-analyst (Lens), content-orqx (Nexus) |
+| **Co-agents** | content-analyst (Lens), content-orqx (Bulletin) |
 | **Trigger** | Onboarding de novo cliente ou revisao trimestral |
 | **Input** | Objetivos de negocio, capacidade de medicao, plataformas ativas |
 | **Output** | Framework de KPIs com metricas, metas e frequencia de medicao |

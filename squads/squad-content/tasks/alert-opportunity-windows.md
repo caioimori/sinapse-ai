@@ -34,11 +34,11 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | signal-intelligence (Radar) |
-| **Co-agents** | content-orqx (Nexus) |
+| **Co-agents** | content-orqx (Bulletin) |
 | **Trigger** | Sinal HOT detectado com janela curta |
 | **Input** | Sinal classificado como HOT (SPV >= 4, janela < 24h) |
-| **Output** | Alerta formatado para Nexus com sinal, janela e recomendacao |
-| **Handoff** | → content-orqx (Nexus) para triage-urgent-signal |
+| **Output** | Alerta formatado para Bulletin com sinal, janela e recomendacao |
+| **Handoff** | → content-orqx (Bulletin) para triage-urgent-signal |
 | **Complexity** | simple |
 
 ---
@@ -57,8 +57,8 @@ Verificar: SPV >= 4? Janela < 24h? Conecta com pilares? Se todos sim: emitir ale
 ### Step 2: Formatar Alerta
 Alerta contém: sinal (1 frase), SPV score, janela estimada, pilar conectado, formato sugerido, angulo recomendado.
 
-### Step 3: Enviar para Nexus
-Entregar alerta para Nexus acionar triage-urgent-signal.
+### Step 3: Enviar para Bulletin
+Entregar alerta para Bulletin acionar triage-urgent-signal.
 
 ### Step 4: Handoff
 
@@ -66,5 +66,5 @@ Entregar alerta para Nexus acionar triage-urgent-signal.
 handoff:
   artifact: "opportunity-alert-{signal}.md"
   context: "Alerta HOT: {sinal}, SPV {score}, janela {horas}h"
-  next: "content-orqx (Nexus) para triage-urgent-signal"
+  next: "content-orqx (Bulletin) para triage-urgent-signal"
 ```

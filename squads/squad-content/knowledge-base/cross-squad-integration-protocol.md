@@ -23,7 +23,7 @@
 | **growth-analytics** | Dados de performance de conteudo, ROI | Lens (relatorio) |
 | **commercial-systems** | Conteudo de produto, cases, materiais de venda | Arc (produz) |
 | **community-engagement** | Conteudo para social, UGC curado, temas para comunidade | Arc + Morph (produzem) |
-| **copywriting-persuasion** | Briefs de conteudo que precisam de copy persuasiva | North (brief), Nexus (handoff) |
+| **copywriting-persuasion** | Briefs de conteudo que precisam de copy persuasiva | North (brief), Bulletin (handoff) |
 | **brand-system** | Feedback de campo sobre brand voice em acao | Lens (dados), Index (inconsistencias) |
 
 ---

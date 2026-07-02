@@ -79,7 +79,7 @@ Aplicar durante onboarding de novo cliente. Todos os items devem ser concluidos 
 
 - [ ] **Calendario editorial**: Primeiro mes planejado?
 - [ ] **Sprint 1**: Pecas definidas, briefs criados?
-- [ ] **Pipeline configurado**: Nexus orquestrando?
+- [ ] **Pipeline configurado**: Bulletin orquestrando?
 
 ---
 
@@ -100,5 +100,5 @@ Aplicar durante onboarding de novo cliente. Todos os items devem ser concluidos 
 
 ---
 
-*Checklist operado por: content-orqx (Nexus)*
+*Checklist operado por: content-orqx (Bulletin)*
 *Workflow de referencia: onboarding-content-cycle.yaml*

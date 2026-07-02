@@ -3,7 +3,7 @@
 > Single, generated map of how the SINAPSE framework works: routing, models,
 > constitution, workflows, agents, squads. Regenerate with `sinapse atlas`.
 > Counts are read from disk (Article VII — always exact).
-> Generated: 2026-06-26T05:56:32.158Z
+> Generated: 2026-07-02T20:32:01.986Z
 
 **At a glance:** 17 squads · 172 agents
 (12 framework + 160 squad) ·
@@ -488,13 +488,13 @@ squad workflows**. The 13 primary framework workflows have detailed docs in
 
 | Orchestrator | Persona | Squad | Role |
 |---|---|---|---|
-| `swarm-orqx` | Nexus | claude-code-mastery | Multi-Agent Systems Architect & Swarm Orchestration Specialist |
+| `swarm-orqx` | Relay | claude-code-mastery | Multi-Agent Systems Architect & Swarm Orchestration Specialist |
 | `snps-orqx` | Imperator | framework | Supreme Orchestrator of all 17 SINAPSE Squads (172 agents) |
 | `animations-orqx` | Kinetic | squad-animations | Animation Squad Orchestrator |
 | `squad-brand` | Meridian | squad-brand | Brand Squad Orchestrator — coordena os 14 agentes especialistas do squad |
 | `squad-cloning` | Helix | squad-cloning | Clone Pipeline Orchestrator — coordena o pipeline completo de clonagem cognitiva |
 | `commercial-orqx` | — | squad-commercial | Revenue Cycle Orchestrator |
-| `squad-content` | Nexus | squad-content | Content Pipeline Orchestrator — coordena todo o fluxo de deteccao, producao, publicacao e analise |
+| `squad-content` | Bulletin | squad-content | Content Pipeline Orchestrator — coordena todo o fluxo de deteccao, producao, publicacao e analise |
 | `squad-copy` | Quill Prime | squad-copy | Copy Squad Orchestrator — coordena os 12 agentes especialistas do squad |
 | `council-orqx` | Zenith | squad-council | Strategic Council Orchestrator & Wisdom Synthesizer |
 | `squad-courses` | Syllabus | squad-courses | Course Project Orchestrator — coordena o ciclo completo de criacao de cursos |

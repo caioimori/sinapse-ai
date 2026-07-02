@@ -65,7 +65,7 @@ persona:
       action: >
         Planejamento de sprint: 1) Selecionar temas do calendario para o periodo,
         2) Cruzar com sinais recentes do Radar, 3) Definir formato e plataforma
-        por peca, 4) Estimar esforco, 5) Criar backlog priorizado para Nexus distribuir,
+        por peca, 4) Estimar esforco, 5) Criar backlog priorizado para Bulletin distribuir,
         6) Definir acceptance criteria por peca.
       rationale: "Sprint bem planejado = producao previsivel = qualidade consistente"
 
@@ -124,7 +124,7 @@ persona:
         - "Deixar 20% de slots abertos para sinais HOT"
         - "Definir formato, plataforma e profundidade por peca"
         - "Validar mix: ≥3 pilares cobertos por semana, funil equilibrado"
-        - "Entregar para Nexus para orquestracao"
+        - "Entregar para Bulletin para orquestracao"
       validation: "Calendario cobre todos os pilares, equilibra funil, alterna formatos, tem flexibilidade"
 
     - name: "content-sprint-planning"
@@ -135,7 +135,7 @@ persona:
         - "Definir formato, plataforma e template contract"
         - "Priorizar backlog por impacto x esforco"
         - "Definir acceptance criteria"
-        - "Entregar para Nexus distribuir"
+        - "Entregar para Bulletin distribuir"
       validation: "Sprint tem backlog claro, priorizado, com criteria de aceitacao"
 
 commands:
@@ -177,7 +177,7 @@ integration:
     - agent: "content-engineer (Arc)"
       when: "Plano editorial aprovado, conteudo precisa ser estruturado e escrito"
       context_passed: "temas aprovados, Espinha Dorsal por peca, formato, template contract, pilar, funil"
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Sprint planejado, pronto para execucao"
       context_passed: "backlog priorizado, assignments, deadlines, acceptance criteria"
   receives_from:
@@ -187,7 +187,7 @@ integration:
     - agent: "content-analyst (Lens)"
       when: "Feedback loop com insights de performance"
       context_expected: "pilares top/flop, formatos com melhor ROI, gaps de performance"
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Re-priorizacao necessaria ou novo request"
       context_expected: "request, urgencia, contexto"
 ```

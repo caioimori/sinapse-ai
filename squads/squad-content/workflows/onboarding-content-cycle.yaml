@@ -1,7 +1,7 @@
 cadence: Uma vez por projeto (setup)
 estimated_duration: 2-5 dias
 orchestration:
-  coordinator: content-orqx (Nexus)
+  coordinator: content-orqx (Bulletin)
   deliverables:
     - Big Idea + Pilares + KPIs documentados
     - Signal sources configuradas
@@ -27,7 +27,7 @@ workflow:
   phases:
     - phase: 1
       name: Briefing & Brand Alignment
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks:
         - coordinate-cross-squad
       input: Briefing do cliente, contexto do projeto
@@ -116,7 +116,7 @@ workflow:
   sequence:
     - phase: 1
       name: Briefing & Brand Alignment
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks:
         - coordinate-cross-squad
       input: Briefing do cliente, contexto do projeto

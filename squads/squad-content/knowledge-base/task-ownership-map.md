@@ -1,7 +1,7 @@
 # Task Ownership Map — squad-content v2.0
 
 > **Status:** Canon (squad-content v2.0)
-> **Owner:** content-orqx (Nexus) — curator; all 7 agents contribute via audit
+> **Owner:** content-orqx (Bulletin) — curator; all 7 agents contribute via audit
 > **Created:** 2026-04-12 for Story fw-v2.4
 > **Source of truth:** Disk reality of `squads/squad-content/tasks/` at 2026-04-12 (90 task files)
 
@@ -33,7 +33,7 @@ A task can only have ONE primary. Up to TWO secondaries.
 
 ## 3. Full Ownership Matrix (90 tasks)
 
-### 3.1 Orchestrator — content-orqx (Nexus) — 5 primary tasks
+### 3.1 Orchestrator — content-orqx (Bulletin) — 5 primary tasks
 
 | Task | Primary | Secondary | Phase in loop |
 |------|---------|-----------|--------------|
@@ -176,7 +176,7 @@ Verification + Batch (2):
 
 | Agent | Primary Count | Phase Coverage | Load Category |
 |-------|--------------|----------------|---------------|
-| content-orqx (Nexus) | 5 | cross-phase | Coordinator (intentionally light) |
+| content-orqx (Bulletin) | 5 | cross-phase | Coordinator (intentionally light) |
 | signal-intelligence (Radar) | 10 | Phase 1 | Balanced |
 | editorial-strategist (North) | 10 | Pre-phase / Phase 6 | Balanced |
 | content-engineer (Arc) | 25 | Phase 2 | **OVER-LOADED** |
@@ -195,9 +195,9 @@ Arc carries 25 primary tasks — nearly 2x the next-heaviest agent. This is a le
 
 **Open question for a future story:** should Arc split into `structure-engineer` (design-* + structure-*) + `content-writer` (write-* family)? This is a candidate for fw-v3 or a dedicated refactoring story. Logged here, not executed here.
 
-### 5.2 content-orqx (Nexus) is intentionally light
+### 5.2 content-orqx (Bulletin) is intentionally light
 
-5 tasks is correct for the orchestrator — Nexus delegates and coordinates, never executes write-* or analyze-*. Any attempt to grow Nexus's primary count is a smell.
+5 tasks is correct for the orchestrator — Bulletin delegates and coordinates, never executes write-* or analyze-*. Any attempt to grow Bulletin's primary count is a smell.
 
 ### 5.3 Phase 6 (Retrofeed) is thin
 

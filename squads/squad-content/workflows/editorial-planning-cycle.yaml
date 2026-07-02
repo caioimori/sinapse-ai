@@ -1,7 +1,7 @@
 cadence: Semanal (sprint), Mensal (calendario), Trimestral (estrategia)
 estimated_duration: 2-4 horas
 orchestration:
-  coordinator: content-orqx (Nexus)
+  coordinator: content-orqx (Bulletin)
   cadence_options:
     weekly:
       focus: Sprint planning — temas da semana
@@ -75,7 +75,7 @@ workflow:
       conditional: Executar apenas se ha datas relevantes no periodo
     - phase: 4
       name: Approval Gate
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: Calendario/sprint finalizado
       output: Plano aprovado
@@ -125,7 +125,7 @@ workflow:
       conditional: Executar apenas se ha datas relevantes no periodo
     - phase: 4
       name: Approval Gate
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: Calendario/sprint finalizado
       output: Plano aprovado

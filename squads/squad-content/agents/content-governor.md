@@ -209,7 +209,7 @@ integration:
     - agent: "editorial-strategist (North)"
       when: "Auditoria identificou gaps de cobertura ou problemas sistêmicos"
       context_passed: "gaps identificados, padroes de rejeicao, recomendacoes de ajuste editorial"
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Conteudo aprovado ou rejeitado — status update"
       context_passed: "status de cada peca, scoring, timeline"
   receives_from:

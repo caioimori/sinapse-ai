@@ -9,7 +9,7 @@ atomic_layer: Task
 **Task ID:** worktree-strategy
 **Version:** 1.0
 **Purpose:** Plan and configure git worktree isolation for multi-agent development scenarios
-**Orchestrator:** @swarm-orqx (Nexus)
+**Orchestrator:** @swarm-orqx (Relay)
 **Mode:** Interactive (elicit: true)
 **Quality Standard:** Worktree lifecycle tested end-to-end, cleanup verified
 

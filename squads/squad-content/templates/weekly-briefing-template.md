@@ -7,7 +7,7 @@
 ## Briefing Semanal — Semana {N} ({data inicio} — {data fim})
 
 **Emitido por**: signal-intelligence (Radar)
-**Para**: editorial-strategist (North), content-orqx (Nexus)
+**Para**: editorial-strategist (North), content-orqx (Bulletin)
 
 ---
 

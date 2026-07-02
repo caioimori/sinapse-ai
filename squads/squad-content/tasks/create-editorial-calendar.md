@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | editorial-strategist (North) |
-| **Co-agents** | content-orqx (Nexus), platform-specialist (Morph) |
+| **Co-agents** | content-orqx (Bulletin), platform-specialist (Morph) |
 | **Trigger** | Apos definicao de pilares ou inicio de novo ciclo (mensal/trimestral) |
 | **Input** | Pilares editoriais, datas sazonais, frequencia por plataforma, capacidade de producao |
 | **Output** | Calendario editorial estruturado com slots, temas e distribuicao |

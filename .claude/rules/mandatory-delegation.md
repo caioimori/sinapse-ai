@@ -62,7 +62,7 @@ The orchestrator MUST still delegate. The correct response pattern is:
 | Midia paga, ads | @paidmedia-orqx (Apex) |
 | Produto, roadmap | @product-orqx (Vector) |
 | Pesquisa, inteligencia | @research-orqx (Prism) |
-| Claude Code mastery | @swarm-orqx (Nexus) |
+| Claude Code mastery | @swarm-orqx (Relay) |
 | Conselho estrategico | @council-orqx (Zenith) |
 | Storytelling, pitch | @storytelling-orqx (Arc) |
 | Cybersecurity | @cyber-orqx (Fortress) |

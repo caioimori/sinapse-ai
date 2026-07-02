@@ -33,7 +33,7 @@ Checklist:
 
 | Campo | Valor |
 |-------|-------|
-| **Agent** | content-orqx (Nexus) |
+| **Agent** | content-orqx (Bulletin) |
 | **Co-agents** | editorial-strategist (North) |
 | **Trigger** | Novo request de conteudo (interno ou externo) |
 | **Input** | Request com descricao, urgencia e contexto |

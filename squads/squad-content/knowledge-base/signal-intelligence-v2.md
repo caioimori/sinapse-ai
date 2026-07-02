@@ -1,7 +1,7 @@
 # Signal Intelligence v2 — 2026 Sources + Classification Canon
 
 > **Status:** Canon (squad-content v2.0) — ADDITIVE companion to `signal-detection-methods.md` v1
-> **Owner:** signal-intelligence (Radar) — primary; content-orqx (Nexus) — curator
+> **Owner:** signal-intelligence (Radar) — primary; content-orqx (Bulletin) — curator
 > **Created:** 2026-04-12 for Story fw-v2.4
 > **Explicit relationship:** Does NOT replace `signal-detection-methods.md`. v1 remains canonical for foundational definitions. v2 adds the 2026 source landscape, the signal classification taxonomy, routing rules and a quality-scoring model that did not exist in v1.
 

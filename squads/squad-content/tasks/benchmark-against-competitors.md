@@ -38,7 +38,7 @@ Checklist:
 | **Trigger** | Mensal ou trimestral |
 | **Input** | Dados proprios, dados publicos de concorrentes, relatorios do Radar |
 | **Output** | Benchmark comparativo com posicao relativa e oportunidades |
-| **Handoff** | → editorial-strategist (North), content-orqx (Nexus) |
+| **Handoff** | → editorial-strategist (North), content-orqx (Bulletin) |
 | **Complexity** | medium |
 
 ---

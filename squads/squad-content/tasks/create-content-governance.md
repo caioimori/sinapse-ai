@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | content-governor (Index) |
-| **Co-agents** | content-orqx (Nexus) |
+| **Co-agents** | content-orqx (Bulletin) |
 | **Trigger** | Setup de novo projeto ou revisao anual |
 | **Input** | Escopo do projeto, equipe, plataformas, regulacoes do setor |
 | **Output** | Documento de governanca com politicas, processos e responsabilidades |

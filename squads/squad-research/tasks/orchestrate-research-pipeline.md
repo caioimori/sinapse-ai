@@ -123,7 +123,7 @@ handoff:
       when: "Sintese final necessaria"
       artifact: "pesquisas individuais completadas"
   cross_squad:
-    - to: "content-intelligence/Nexus"
+    - to: "content-intelligence/Bulletin"
       when: "Insights para planejamento editorial"
       artifact: "research report formatado"
     - to: "brand-system/Meridian"

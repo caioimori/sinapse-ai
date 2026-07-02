@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | editorial-strategist (North) |
-| **Co-agents** | content-orqx (Nexus) |
+| **Co-agents** | content-orqx (Bulletin) |
 | **Trigger** | Onboarding de novo cliente ou revisao estrategica trimestral |
 | **Input** | Brand voice (do squad brand-system), posicionamento, publico-alvo, objetivos de negocio |
 | **Output** | Big Idea documentada com narrativa-mestre e territorios tematicos |

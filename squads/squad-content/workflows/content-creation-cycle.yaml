@@ -1,7 +1,7 @@
 cadence: Continuo — acionado por demanda
 estimated_duration: 1-4 horas (unitario) | 4-8 horas (batch)
 orchestration:
-  coordinator: content-orqx (Nexus)
+  coordinator: content-orqx (Bulletin)
   modes:
     single:
       description: Producao unitaria — 1 peca
@@ -79,7 +79,7 @@ workflow:
         - validate-content-compliance
     - phase: 5
       name: Publication
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: Conteudo aprovado
       output: Conteudo publicado
@@ -141,7 +141,7 @@ workflow:
         - validate-content-compliance
     - phase: 5
       name: Publication
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: Conteudo aprovado
       output: Conteudo publicado

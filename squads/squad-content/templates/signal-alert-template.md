@@ -56,7 +56,7 @@
 
 | Acao | Responsavel | Prazo |
 |------|------------|-------|
-| Aprovar/rejeitar sinal | Nexus | {imediato} |
+| Aprovar/rejeitar sinal | Bulletin | {imediato} |
 | Criar brief | Arc | {X horas} |
 | Produzir conteudo | Arc | {X horas} |
 | Adaptar plataforma | Morph | {X horas} |
@@ -66,4 +66,4 @@
 ---
 
 *Template operado por: signal-intelligence (Radar)*
-*Destinatario: content-orqx (Nexus)*
+*Destinatario: content-orqx (Bulletin)*

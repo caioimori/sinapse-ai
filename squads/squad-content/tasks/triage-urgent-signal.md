@@ -33,7 +33,7 @@ Checklist:
 
 | Campo | Valor |
 |-------|-------|
-| **Agent** | content-orqx (Nexus) |
+| **Agent** | content-orqx (Bulletin) |
 | **Co-agents** | signal-intelligence (Radar), content-engineer (Arc), content-governor (Index) |
 | **Trigger** | Alerta HOT do Radar com janela de oportunidade curta |
 | **Input** | Sinal HOT classificado com SPV >= 4, janela de oportunidade |

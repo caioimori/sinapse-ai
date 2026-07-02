@@ -38,7 +38,7 @@ Checklist:
 | **Trigger** | Pos-publicacao quando conteudo mostra sinais de performance acima da media |
 | **Input** | Metricas de performance inicial (primeiras 24-48h), benchmarks |
 | **Output** | Lista de conteudo flagged com recomendacao de amplificacao |
-| **Handoff** | → content-orqx (Nexus) para decisao de investimento |
+| **Handoff** | → content-orqx (Bulletin) para decisao de investimento |
 | **Complexity** | simple |
 
 ---
@@ -69,5 +69,5 @@ Para BOOST: estimativa de alcance adicional por investimento. Para REPOST: poten
 handoff:
   artifact: "amplification-flags-{date}.md"
   context: "Flagged: {N} pecas para amplificacao, tipos: {B} boost, {R} repost, {C} collab"
-  next: "content-orqx (Nexus) para decisao de investimento"
+  next: "content-orqx (Bulletin) para decisao de investimento"
 ```

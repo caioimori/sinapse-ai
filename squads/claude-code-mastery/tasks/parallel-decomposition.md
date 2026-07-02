@@ -9,7 +9,7 @@ atomic_layer: Task
 **Task ID:** parallel-decomposition
 **Version:** 1.0
 **Purpose:** Decompose a complex task into subtasks for parallel multi-agent execution
-**Orchestrator:** @swarm-orqx (Nexus)
+**Orchestrator:** @swarm-orqx (Relay)
 **Mode:** Interactive (elicit: true)
 **Quality Standard:** Dependency graph validated, no circular dependencies, merge strategy tested
 

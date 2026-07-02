@@ -64,7 +64,7 @@ Para cada sinal detectado: conecta com algum pilar editorial? E relevante para o
 Aplicar classificacao: HOT (janela < 24h, SPV alto), WARM (janela 7d, SPV moderado), COLD (evergreen, SPV baixo). Usar classify-signal-temperature se necessario.
 
 ### Step 5: Registrar e Encaminhar
-Registrar todos os sinais no log diario. Se HOT: alerta imediato para Nexus via alert-opportunity-windows.
+Registrar todos os sinais no log diario. Se HOT: alerta imediato para Bulletin via alert-opportunity-windows.
 
 ### Step 6: Handoff
 
@@ -72,5 +72,5 @@ Registrar todos os sinais no log diario. Se HOT: alerta imediato para Nexus via 
 handoff:
   artifact: "daily-signal-log-{date}.md"
   context: "Scan diario completo: {N} sinais detectados ({HOT}/{WARM}/{COLD})"
-  next: "content-orqx (Nexus) se HOT, acumular para curate-weekly-briefing se WARM"
+  next: "content-orqx (Bulletin) se HOT, acumular para curate-weekly-briefing se WARM"
 ```

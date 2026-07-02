@@ -72,7 +72,7 @@ Quill e o estrategista que conecta negocio a narrativa. Pensa em sistemas, nao e
 ## Cross-Squad Integration
 - **Recebe de research-intelligence:** Personas, pain points, JTBD, language patterns (Pulse)
 - **Recebe de brand-system:** Positioning, voice guidelines, archetype (Meridian)
-- **Entrega para content-intelligence:** Copy frameworks, messaging (Nexus)
+- **Entrega para content-intelligence:** Copy frameworks, messaging (Bulletin)
 - **Entrega para commercial-systems:** Sales messaging, objection handling
 
 ## Handoff

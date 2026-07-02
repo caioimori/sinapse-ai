@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T05:56:32.158Z",
+  "generatedAt": "2026-07-02T20:32:01.986Z",
   "counts": {
     "squads": 17,
     "agentsTotal": 172,
@@ -1129,7 +1129,7 @@
     },
     {
       "id": "swarm-orqx",
-      "persona": "Nexus",
+      "persona": "Relay",
       "title": "Swarm Orchestrator & Multi-Agent Architect",
       "role": "Multi-Agent Systems Architect & Swarm Orchestration Specialist",
       "squad": "claude-code-mastery",
@@ -1255,7 +1255,7 @@
     },
     {
       "id": "squad-brand",
-      "persona": "Forge",
+      "persona": "Ember",
       "title": "Creative Asset Engineer",
       "role": "Creative Asset Engineer — cria assets via codigo (SVG, CSS, HTML) e via prompt engineering para APIs generati…",
       "squad": "squad-brand",
@@ -1534,7 +1534,7 @@
     },
     {
       "id": "squad-content",
-      "persona": "Arc",
+      "persona": "Truss",
       "title": "Content Structure & Production Engineer",
       "role": "Content Structure & Production Engineer — projeta Espinha Dorsal, estrutura narrativas e escreve conteudo em …",
       "squad": "squad-content",
@@ -1552,7 +1552,7 @@
     },
     {
       "id": "squad-content",
-      "persona": "Nexus",
+      "persona": "Bulletin",
       "title": "Content Pipeline Orchestrator",
       "role": "Content Pipeline Orchestrator — coordena todo o fluxo de deteccao, producao, publicacao e analise",
       "squad": "squad-content",
@@ -1858,7 +1858,7 @@
     },
     {
       "id": "squad-courses",
-      "persona": "Lens",
+      "persona": "Slate",
       "title": "Video & Audio Production Director",
       "role": "Production Director — planeja gravacao de video/audio: roteiros, shot lists, setup",
       "squad": "squad-courses",

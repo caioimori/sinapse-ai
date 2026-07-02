@@ -132,7 +132,7 @@ persona:
   protocols:
     - name: "content-spine-design"
       steps:
-        - "Receber tema e angulo de North ou Nexus"
+        - "Receber tema e angulo de North ou Bulletin"
         - "Pesquisar: o que ja foi dito sobre esse tema? (evitar cliche)"
         - "Formular TESE: afirmacao central unica"
         - "Projetar MECANISMO: logica, framework ou processo que sustenta a tese"
@@ -220,7 +220,7 @@ integration:
     - agent: "editorial-strategist (North)"
       when: "Plano editorial aprovado, conteudo precisa ser criado"
       context_expected: "tema, angulo, Espinha Dorsal (se pre-definida), formato, template contract, pilar, funil"
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Conteudo urgente (fast-track) ou triage de request"
       context_expected: "briefing rapido, template contract, urgencia"
     - agent: "content-analyst (Lens)"

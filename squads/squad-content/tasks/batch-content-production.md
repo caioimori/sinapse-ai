@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | content-engineer (Arc) |
-| **Co-agents** | content-orqx (Nexus), platform-specialist (Morph) |
+| **Co-agents** | content-orqx (Bulletin), platform-specialist (Morph) |
 | **Trigger** | Sprint semanal ou producao em volume |
 | **Input** | Lista de briefs, Espinhas Dorsais pre-definidas, Template Contracts |
 | **Output** | Lote de pecas produzidas e validadas |

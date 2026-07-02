@@ -34,11 +34,11 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | content-analyst (Lens) |
-| **Co-agents** | content-orqx (Nexus) |
+| **Co-agents** | content-orqx (Bulletin) |
 | **Trigger** | Mensal ou trimestral |
 | **Input** | Custos de producao, metricas de conversao, dados de revenue |
 | **Output** | Report de ROI com custo por lead, custo por conversao, valor gerado |
-| **Handoff** | → content-orqx (Nexus), editorial-strategist (North) |
+| **Handoff** | → content-orqx (Bulletin), editorial-strategist (North) |
 | **Complexity** | complex |
 
 ---
@@ -72,5 +72,5 @@ ROI por formato (blog gera mais leads? Reels geram mais awareness?), ROI por pil
 handoff:
   artifact: "content-roi-{period}.md"
   context: "ROI: {X}%, CPL {valor}, revenue atribuida {valor}, melhor formato {formato}"
-  next: "content-orqx (Nexus) e editorial-strategist (North) para ajustar investimento"
+  next: "content-orqx (Bulletin) e editorial-strategist (North) para ajustar investimento"
 ```
