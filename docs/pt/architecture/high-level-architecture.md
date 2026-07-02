@@ -54,7 +54,7 @@
 │                                                                         │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
 │   │                        CLI / FERRAMENTAS                        │   │
-│   │  (sinapse agents, sinapse tasks, sinapse squads, sinapse workflow)          │   │
+│   │  (sinapse-ai agents, sinapse tasks, sinapse squads, sinapse workflow)       │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
 │                                │                                        │
 │          ┌────────────────────┼────────────────────┐                   │

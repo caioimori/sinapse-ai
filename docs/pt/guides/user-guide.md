@@ -12,8 +12,8 @@
 
 Guia completo para usar o SINAPSE - o Sistema Orquestrado por IA para Desenvolvimento Full Stack.
 
-**Versão:** 2.1.0
-**Última Atualização:** 2026-01-28
+**Versão:** 1.19.2
+**Última Atualização:** 2026-07-02
 
 ---
 
@@ -24,7 +24,7 @@ Guia completo para usar o SINAPSE - o Sistema Orquestrado por IA para Desenvolvi
 Antes de usar o SINAPSE, certifique-se de ter:
 
 - **Node.js** versão 18.0.0 ou superior
-- **npm** versão 8.0.0 ou superior
+- **npm** versão 9.0.0 ou superior
 - **Git** para controle de versão
 - Uma chave de API de provedor de IA (Anthropic, OpenAI ou compatível)
 
@@ -49,7 +49,7 @@ cd my-project
 npx sinapse-ai agents list
 
 # Ative um agente
-@dev
+@developer
 
 # Obtenha ajuda
 *help
@@ -189,6 +189,20 @@ sinapse route "adicionar dark mode na plataforma"
 sinapse orchestrate <story-id>
 ```
 
+### Orchestrate — Escopo Suportado (Medido)
+
+O `sinapse orchestrate` é confiável para **1 story por vez**. Orquestração
+autônoma de múltiplas stories encadeadas no mesmo diretório de trabalho **não é
+suportada** — isso foi medido diretamente (fluxo nativo: 3/3 stories, 64s, 1
+chamada; o pipeline orchestrate: 1/3 stories, ~13,5min, com contaminação de
+estado entre stories) e o caminho multi-story autônomo foi abandonado em favor
+do fluxo nativo. Detalhes completos: [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
+| Uso                                                  | Suportado?                  |
+| ------------------------------------------------------ | ---------------------------- |
+| `orchestrate` de **1 story** (spec + plano + build)     | ✅ Sim, confiável             |
+| `orchestrate` de **múltiplas stories** encadeadas       | ❌ Não — use o caminho nativo |
+
 ---
 
 ## Squads
@@ -304,7 +318,7 @@ features:
 
 ai:
   provider: anthropic
-  model: claude-3-opus
+  model: opus # alias de família (opus | sonnet | haiku) — o CLI resolve a versão atual; nunca fixe um id datado
 
 environment: development
 ```
@@ -453,5 +467,5 @@ construir um agente novo do zero.
 
 ---
 
-_Guia do Usuário SINAPSE v4.0_
+_Guia do Usuário SINAPSE v1.19.2_
 
