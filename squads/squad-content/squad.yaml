@@ -155,7 +155,7 @@ core_concepts:
 
 components:
   agents:
-    - content-orqx.md      # Nexus — Conductor (5 tasks)
+    - content-orqx.md      # Bulletin — Conductor (5 tasks)
     - signal-intelligence.md       # Radar — Scout (9 tasks)
     - editorial-strategist.md      # North — Navigator (10 tasks)
     - content-engineer.md          # Truss — Engineer (25 tasks)
@@ -168,7 +168,7 @@ components:
 # ══════════════════════════════════════════════════════════════════════════════
 
   tasks:
-    # ── Orchestrator (Nexus) — 5 tasks ──
+    # ── Orchestrator (Bulletin) — 5 tasks ──
     - orchestrate-content-pipeline.md
     - manage-content-sprint.md
     - coordinate-cross-squad.md

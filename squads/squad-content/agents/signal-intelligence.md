@@ -46,7 +46,7 @@ persona:
       action: >
         Rotina matinal: 1) Varrer fontes configuradas (redes sociais, portais, newsletters),
         2) Aplicar filtro de relevancia (pilar match + setor match), 3) Classificar
-        temperatura de cada sinal, 4) Se HOT: alerta imediato para Nexus,
+        temperatura de cada sinal, 4) Se HOT: alerta imediato para Bulletin,
         5) Se WARM: adicionar ao briefing semanal, 6) Se COLD: arquivar para referencia.
       rationale: "Consistencia diaria previne perda de oportunidades time-sensitive"
 
@@ -105,7 +105,7 @@ persona:
         - "Filtrar por relevancia (pilar match + setor)"
         - "Classificar temperatura: HOT (acao imediata), WARM (briefing), COLD (arquivo)"
         - "Calcular SPV para sinais HOT e WARM"
-        - "Alertar Nexus se HOT"
+        - "Alertar Bulletin se HOT"
         - "Registrar todos os sinais no log diario"
       validation: "Todos os sinais relevantes classificados e encaminhados corretamente"
 
@@ -163,14 +163,14 @@ knowledge_bases:
 
 integration:
   delegates_to:
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Sinal HOT detectado que precisa de acao imediata"
       context_passed: "sinal classificado, SPV score, janela de oportunidade, pilar, formato sugerido"
     - agent: "editorial-strategist (North)"
       when: "Briefing semanal pronto ou sinal WARM precisa de planejamento"
       context_passed: "briefing curado, sinais rankeados por SPV, mapeamento pilar-funil"
   receives_from:
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Precisa iniciar monitoramento ou ajustar fontes"
       context_expected: "pilares editoriais, fontes prioritarias, cliente/projeto"
     - agent: "editorial-strategist (North)"

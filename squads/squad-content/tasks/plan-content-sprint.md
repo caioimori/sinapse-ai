@@ -34,11 +34,11 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | editorial-strategist (North) |
-| **Co-agents** | content-orqx (Nexus), content-engineer (Arc) |
+| **Co-agents** | content-orqx (Bulletin), content-engineer (Arc) |
 | **Trigger** | Inicio de cada semana ou sprint |
 | **Input** | Calendario editorial, sinais da semana (Radar), capacidade disponivel |
 | **Output** | Sprint planejado com pecas atribuidas, prazos e prioridades |
-| **Handoff** | → content-orqx (Nexus) para orquestracao da producao |
+| **Handoff** | → content-orqx (Bulletin) para orquestracao da producao |
 | **Complexity** | medium |
 
 ---
@@ -72,5 +72,5 @@ Compilar sprint com: coluna backlog, em producao, em revisao, aprovado, publicad
 handoff:
   artifact: "content-sprint-{week}.md"
   context: "Sprint planejado: {N} pecas, {P} plataformas, {H} sinais incorporados, capacidade {X}%"
-  next: "content-orqx (Nexus) para iniciar producao e orquestrar pipeline"
+  next: "content-orqx (Bulletin) para iniciar producao e orquestrar pipeline"
 ```

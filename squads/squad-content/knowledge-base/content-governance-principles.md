@@ -31,7 +31,7 @@ Preferencias do cliente, padroes de performance e insights de audiencia sao docu
 
 ## Matriz RACI
 
-| Atividade | Arc (Produz) | Morph (Adapta) | Index (Valida) | Nexus (Orquestra) |
+| Atividade | Arc (Produz) | Morph (Adapta) | Index (Valida) | Bulletin (Orquestra) |
 |-----------|:-----------:|:--------------:|:--------------:|:-----------------:|
 | Produzir conteudo | R | C | I | A |
 | Adaptar por plataforma | C | R | I | A |
@@ -48,7 +48,7 @@ R=Responsible, A=Accountable, C=Consulted, I=Informed
 ```
 Nivel 1 (Padrao): Arc → Index (1 gate) → Publicacao
 Nivel 2 (Sensivel): Arc → Index → Review Adicional → Publicacao
-Nivel 3 (Crise): Arc → Index → Nexus → Stakeholder → Publicacao
+Nivel 3 (Crise): Arc → Index → Bulletin → Stakeholder → Publicacao
 ```
 
 ---

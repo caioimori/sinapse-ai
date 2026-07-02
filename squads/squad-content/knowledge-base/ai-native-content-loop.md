@@ -1,7 +1,7 @@
 # AI-Native Content Loop — Canon Playbook
 
 > **Status:** Canon (squad-content v2.0)
-> **Owner:** content-orqx (Nexus) with cross-agent collaboration
+> **Owner:** content-orqx (Bulletin) with cross-agent collaboration
 > **Created:** 2026-04-12 for Story fw-v2.4
 > **Relationship to existing KBs:** Builds on `content-spine-engine.md`, `ai-leverage-content-framework.md`, `content-measurement-framework.md` and `ai-content-production.md`. This KB is the **canonical end-to-end pipeline** — the other KBs are mechanisms inside phases of this loop.
 
@@ -95,7 +95,7 @@ The loop is **closed** on purpose. Phase 6 (Retrofeed) is what turns a one-shot 
 
 | Field | Value |
 |-------|-------|
-| **Lead agent** | `content-orqx` (Nexus) as coordinator; updates flow to Radar (signal tuning), North (pillar/calendar adjustment), Arc (prompt library update), Morph (template contract refinement), Index (preference log) |
+| **Lead agent** | `content-orqx` (Bulletin) as coordinator; updates flow to Radar (signal tuning), North (pillar/calendar adjustment), Arc (prompt library update), Morph (template contract refinement), Index (preference log) |
 | **Inputs** | Phase 5 performance dataset, hypotheses that produced each piece, prompt versions used |
 | **Outputs** | Updated signal-quality scoring weights, refined editorial pillars, refreshed AI prompt library, updated template contracts, updated preferences/ log for the client |
 | **Tool stack** | `generate-retrofeed-insights` task, preference log template, `ai-content-production.md` prompt library versioning |

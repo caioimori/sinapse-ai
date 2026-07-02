@@ -68,4 +68,4 @@ Aplicar apos planejamento editorial (North) e antes de iniciar producao (Arc). G
 
 ---
 
-*Checklist operado por: editorial-strategist (North) + content-orqx (Nexus)*
+*Checklist operado por: editorial-strategist (North) + content-orqx (Bulletin)*

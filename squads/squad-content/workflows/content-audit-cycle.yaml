@@ -1,7 +1,7 @@
 cadence: Trimestral
 estimated_duration: 4-8 horas
 orchestration:
-  coordinator: content-orqx (Nexus)
+  coordinator: content-orqx (Bulletin)
   deliverables:
     - content-audit-report.md (completo)
     - content-performance-report.md (metricas)

@@ -13,7 +13,7 @@
             ┌─────────┬───────┴───────┬──────────┐
             |         |               |          |
     ┌───────┴──┐  ┌───┴────┐  ┌──────┴───┐  ┌───┴──────┐
-    |  Latch   |  | Piper  |  |  Nexus   |  |  Sigil   |
+    |  Latch   |  | Piper  |  |  Relay   |  |  Sigil   |
     |  Hooks   |  |  MCP   |  |  Swarm   |  |  Config  |
     | Tier 1   |  | Tier 1 |  |  Tier 1  |  |  Tier 1  |
     └──────────┘  └────────┘  └──────────┘  └──────────┘
@@ -32,7 +32,7 @@
 | 0 | claude-mastery-chief | Orion | Original | 554 | Triage, routing, cross-cutting knowledge |
 | 1 | hooks-architect | Latch | disler (IndyDevDan) | 1,013 | 17 hook events, automation, damage control |
 | 1 | mcp-integrator | Piper | Peter Steinberger (@steipete) | 791 | MCP servers, tool discovery, context budget |
-| 1 | swarm-orqx | Nexus | Kieran Klaassen + Reuven Cohen | 1,008 | Agent teams, subagents, parallel execution |
+| 1 | swarm-orqx | Relay | Kieran Klaassen + Reuven Cohen | 1,008 | Agent teams, subagents, parallel execution |
 | 1 | config-engineer | Sigil | SuperClaude-Org | 663 | Settings, permissions, CLAUDE.md, sandbox |
 | 2 | skill-craftsman | Anvil | spec-driven agile-AI methodology | 1,046 | Skills, plugins, commands, context engineering |
 | 2 | project-integrator | Conduit | Daniel Miessler (PAI) | 959 | Project integration, CI/CD, SINAPSE bridge |
@@ -66,7 +66,7 @@ Or use the SINAPSE activation:
 |-------------------|-----------|-------------|
 | Hooks (17 events) | Latch | `*create-hook`, `*audit-hooks`, `*hook-patterns` |
 | MCP Integration | Piper | `*add-server`, `*audit-mcp`, `*create-mcp-server` |
-| Subagents & Teams | Nexus | `*create-agent`, `*create-team`, `*orchestrate` |
+| Subagents & Teams | Relay | `*create-agent`, `*create-team`, `*orchestrate` |
 | Settings & Permissions | Sigil | `*configure`, `*permission-strategy`, `*sandbox-setup` |
 | Skills & Plugins | Anvil | `*create-skill`, `*create-plugin`, `*context-strategy` |
 | Project Integration | Conduit | `*integrate-project`, `*brownfield-setup`, `*ci-cd-setup` |
@@ -94,9 +94,9 @@ This squad understands both Claude Code native capabilities AND the SINAPSE fram
 
 | SINAPSE Concept | Claude Code Equivalent | Bridge Agent |
 |-------------|----------------------|-------------|
-| Agents (@developer, @qa...) | Subagents (.claude/agents/) | Nexus |
+| Agents (@developer, @qa...) | Subagents (.claude/agents/) | Relay |
 | Tasks (.sinapse-ai/tasks/) | Skills (.claude/skills/) | Anvil |
-| Workflows | Multi-step sessions | Nexus + Orion |
+| Workflows | Multi-step sessions | Relay + Orion |
 | core-config.yaml | .claude/settings.json | Sigil |
 | Python hooks (monitor/) | Native hooks (command/http/prompt/agent) | Latch |
 | Quality gates | Hook-based validation | Latch + Sigil |
@@ -112,7 +112,7 @@ squads/claude-code-mastery/
 │   ├── claude-mastery-chief.md    # Tier 0: Orchestrator (Orion)
 │   ├── hooks-architect.md         # Tier 1: Hooks (Latch)
 │   ├── mcp-integrator.md          # Tier 1: MCP (Piper)
-│   ├── swarm-orqx.md      # Tier 1: Subagents/Teams (Nexus)
+│   ├── swarm-orqx.md      # Tier 1: Subagents/Teams (Relay)
 │   ├── config-engineer.md         # Tier 1: Settings/Config (Sigil)
 │   ├── skill-craftsman.md         # Tier 2: Skills/Plugins (Anvil)
 │   ├── project-integrator.md      # Tier 2: Integration (Conduit)

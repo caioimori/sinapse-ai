@@ -37,7 +37,7 @@ research_request:
 ### content-intelligence
 - **Precisa de:** Topicos prioritarios, dados de audiencia, tendencias de busca
 - **Formato:** Topic list com volume/relevancia + audience preference matrix
-- **Agentes que recebem:** Nexus (orchestrator), Radar (trend detector)
+- **Agentes que recebem:** Bulletin (orchestrator), Radar (trend detector)
 
 ### copywriting-persuasion
 - **Precisa de:** Pain points, JTBD, gatilhos emocionais, objecoes

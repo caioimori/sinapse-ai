@@ -33,7 +33,7 @@ Checklist:
 
 | Campo | Valor |
 |-------|-------|
-| **Agent** | content-orqx (Nexus) |
+| **Agent** | content-orqx (Bulletin) |
 | **Co-agents** | Todos os agentes do squad |
 | **Trigger** | Inicio de sprint ou novo projeto |
 | **Input** | Plano editorial de North, sinais do Radar, status do pipeline |
@@ -45,7 +45,7 @@ Checklist:
 
 ## Fundamentacao
 
-Orquestracao e o que transforma agentes individuais em sistema coeso. Sem coordenacao explicita, o pipeline fragmenta: Radar detecta sinais que North nao prioriza, Arc produz conteudo que Morph nao consegue adaptar a tempo, Index valida sem contexto. Nexus garante que o pipeline opere como unidade sincronizada, nao como colecao de agentes independentes. Referencia: Halvorson Content Strategy Quad — Workflow como uma das 4 dimensoes criticas.
+Orquestracao e o que transforma agentes individuais em sistema coeso. Sem coordenacao explicita, o pipeline fragmenta: Radar detecta sinais que North nao prioriza, Arc produz conteudo que Morph nao consegue adaptar a tempo, Index valida sem contexto. Bulletin garante que o pipeline opere como unidade sincronizada, nao como colecao de agentes independentes. Referencia: Halvorson Content Strategy Quad — Workflow como uma das 4 dimensoes criticas.
 
 ---
 

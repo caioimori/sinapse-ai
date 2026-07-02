@@ -33,7 +33,7 @@ Checklist:
 
 | Campo | Valor |
 |-------|-------|
-| **Agent** | content-orqx (Nexus) |
+| **Agent** | content-orqx (Bulletin) |
 | **Co-agents** | Agentes das squads parceiras |
 | **Trigger** | Necessidade de input cross-squad ou entrega de output |
 | **Input** | Necessidade identificada (brand guidelines, SEO data, copy optimization, etc.) |

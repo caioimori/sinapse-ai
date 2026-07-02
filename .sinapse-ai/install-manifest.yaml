@@ -364,9 +364,9 @@ files:
     type: core
     size: 1812
   - path: core/doctor/checks/constitution-consistency.js
-    hash: sha256:c4f27ffffabcc2377833abf1e4374366b5e78aa2ee31e7c1ad7050743cea0068
+    hash: sha256:0080eb0ea5eeb092c69ba2500c246048ebe3af67cd8434d3534d2b55968a62c6
     type: core
-    size: 3262
+    size: 3675
   - path: core/doctor/checks/core-config.js
     hash: sha256:77b3a167f52a6145aeaf83ac4ce558ec7b8efd66beccfa05ec106367315d7e9a
     type: core
@@ -668,9 +668,9 @@ files:
     type: core
     size: 4734
   - path: core/health-check/checks/project/constitution-consistency.js
-    hash: sha256:b629aa44a3e085b62a53edf689ae810a1c5acdb09a11f0cca51c9f7b12f9d8ae
+    hash: sha256:14f01551e686def31cfe53f64dbc94d726efaf6c0e3fef4d6cc70f72101fef62
     type: core
-    size: 6025
+    size: 6751
   - path: core/health-check/checks/project/dependencies.js
     hash: sha256:f11f88666cfde93196d3ec81c59ba4956c75a097591d4a5cf0b2effd88db523d
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:e1a8aa1dbf0eea987bb62078f0f49fb33412a75428d2bb03a19c92c0bbc5befd
+    hash: sha256:d4197018ec5a68b823ac0949b066f3fa4ecb77079ec27a283d87a671bfa3c0d7
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
@@ -1516,7 +1516,7 @@ files:
     type: agent
     size: 23745
   - path: development/agents/snps-orqx.md
-    hash: sha256:e236af23b35763597525328603d610caed502a0ecf4de6aa249852ed584eec80
+    hash: sha256:0ac5d15b04ca00119c8265516438672408d46b791c4c806f4c56a0accf572f62
     type: agent
     size: 43873
   - path: development/agents/sprint-lead.md
@@ -4144,9 +4144,9 @@ files:
     type: template
     size: 3692
   - path: product/templates/ide-rules/claude-rules.md
-    hash: sha256:819588040a8a7e0e90f49115c2ed4474db06cf6bba190671da6a67b15a4b0b88
+    hash: sha256:177065ef2e5b59e31211bb2ff879b590e6dfe84bc70af5ced96dd7695ec44d0a
     type: template
-    size: 13393
+    size: 5122
   - path: product/templates/ide-rules/codex-rules.md
     hash: sha256:f2ba69b86236271970537e4284edbc819379337fed8fd2c8ff2c9a1ffa1b9bbf
     type: template
@@ -4244,9 +4244,9 @@ files:
     type: template
     size: 6764
   - path: product/templates/statusline/agent-badges.json
-    hash: sha256:9a926dc37107a34880aef351f540f3425f1ec60e77870f7f319980ee53576ead
+    hash: sha256:99ec043c87068c6cf475c9a575bd62bc483f4cf0739785fe9bfcae2ee90aa543
     type: template
-    size: 18475
+    size: 18478
   - path: product/templates/statusline/statusline-script.js
     hash: sha256:d9488a080a26c46e6fc48d649c6316f44041276583399e90b9446bbc804fed88
     type: template

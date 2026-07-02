@@ -112,7 +112,7 @@ triage:
     subagents:
       keywords: [subagent, agent team, swarm, teammate, worktree, parallel, background agent, spawn, orchestrate, multi-agent, TeammateTool]
       route_to: swarm-orqx
-      persona: Nexus
+      persona: Relay
       icon: "\U0001F41D"
 
     config:
@@ -241,7 +241,7 @@ commands:
 
   - name: agents
     visibility: [full, quick]
-    description: "Route to swarm-orqx (Nexus) for subagent/team questions"
+    description: "Route to swarm-orqx (Relay) for subagent/team questions"
 
   - name: config
     visibility: [full, quick]
@@ -429,7 +429,7 @@ handoff_to:
 
   - agent: swarm-orqx
     when: "Subagent design, agent teams, parallel execution, worktrees"
-    persona: Nexus
+    persona: Relay
     activation: "@claude-code-mastery:swarm-orqx"
 
   - agent: config-engineer
@@ -482,7 +482,7 @@ autoClaude:
 
 - `*hooks` — Latch (hooks-architect)
 - `*mcp` — Piper (mcp-integrator)
-- `*agents` — Nexus (swarm-orqx)
+- `*agents` — Relay (swarm-orqx)
 - `*config` — Sigil (config-engineer)
 - `*skills` — Anvil (skill-craftsman)
 - `*integrate` — Conduit (project-integrator)
@@ -505,7 +505,7 @@ Type `*guide` for comprehensive usage instructions.
 |------|-------|---------|-------|------------|
 | Hookemote | hooks-architect | Latch | Hooks, automation, damage control | `@claude-code-mastery:hooks-architect` |
 | Plugemote | mcp-integrator | Piper | MCP servers, tool discovery, integration | `@claude-code-mastery:mcp-integrator` |
-| Beeemote | swarm-orqx | Nexus | Subagents, agent teams, parallel execution | `@claude-code-mastery:swarm-orqx` |
+| Beeemote | swarm-orqx | Relay | Subagents, agent teams, parallel execution | `@claude-code-mastery:swarm-orqx` |
 | Gearemote | config-engineer | Sigil | Settings, permissions, CLAUDE.md, sandbox | `@claude-code-mastery:config-engineer` |
 | Toolemote | skill-craftsman | Anvil | Skills, plugins, commands, context engineering | `@claude-code-mastery:skill-craftsman` |
 | Packageemote | project-integrator | Conduit | Project setup, CI/CD, SINAPSE integration | `@claude-code-mastery:project-integrator` |
@@ -527,7 +527,7 @@ full-spectrum expertise across every dimension of Claude Code.
 - **Setting up a new project** — Use `*setup-wizard`
 - **Deep hook automation** — Route to Latch with `*hooks`
 - **MCP server management** — Route to Piper with `*mcp`
-- **Multi-agent orchestration** — Route to Nexus with `*agents`
+- **Multi-agent orchestration** — Route to Relay with `*agents`
 - **Configuration optimization** — Route to Sigil with `*config`
 - **Skill/plugin creation** — Route to Anvil with `*skills`
 - **Project integration** — Route to Conduit with `*integrate`

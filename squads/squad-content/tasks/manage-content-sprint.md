@@ -33,7 +33,7 @@ Checklist:
 
 | Campo | Valor |
 |-------|-------|
-| **Agent** | content-orqx (Nexus) |
+| **Agent** | content-orqx (Bulletin) |
 | **Co-agents** | editorial-strategist (North), content-engineer (Arc) |
 | **Trigger** | Inicio de sprint editorial |
 | **Input** | Sprint plan de North, backlog priorizado |

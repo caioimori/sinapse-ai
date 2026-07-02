@@ -1,7 +1,7 @@
 cadence: Mensal
 estimated_duration: 2-4 horas
 orchestration:
-  coordinator: content-orqx (Nexus)
+  coordinator: content-orqx (Bulletin)
   metrics_tracked:
     - Signal-to-content conversion rate (sinais que viraram conteudo)
     - Content-to-performance hit rate (conteudo que atingiu KPI)
@@ -48,7 +48,7 @@ workflow:
       gate: Cada pacote tem >=3 insights acionaveis
     - phase: 3
       name: Insight Distribution
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: 3 pacotes de insights do Lens
       output: Insights distribuidos para Radar, North e Arc
@@ -106,7 +106,7 @@ workflow:
       gate: Cada pacote tem >=3 insights acionaveis
     - phase: 3
       name: Insight Distribution
-      agent: content-orqx (Nexus)
+      agent: content-orqx (Bulletin)
       tasks: []
       input: 3 pacotes de insights do Lens
       output: Insights distribuidos para Radar, North e Arc

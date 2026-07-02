@@ -15,7 +15,7 @@
 
 | Agente | Papel |
 |--------|-------|
-| Nexus (content-orqx) | Orquestrador — coordena pipeline de conteudo |
+| Bulletin (content-orqx) | Orquestrador — coordena pipeline de conteudo |
 | Radar (signal-intelligence) | Scout — deteccao de sinais e trending topics |
 | North (editorial-strategist) | Navegador — planejamento editorial estrategico |
 | Arc (content-engineer) | Engenheiro — producao de conteudo com Espinha Dorsal |

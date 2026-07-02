@@ -124,7 +124,7 @@ integration:
       when: "Trend analysis, scenario planning, weak signals"
       context_passed: "Setor, horizonte temporal, sinais ja detectados"
   receives_from:
-    - agent: "content-intelligence/Nexus"
+    - agent: "content-intelligence/Bulletin"
       when: "Sinal detectado que requer pesquisa profunda"
       context_expected: "Sinal, contexto, urgencia"
     - agent: "brand-system/Meridian"

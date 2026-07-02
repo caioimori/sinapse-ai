@@ -102,7 +102,7 @@ persona:
         2) Para Radar: quais SINAIS geraram conteudo top-performer? Quais falharam?
         3) Para North: quais PILARES e FORMATOS tem melhor ROI? Quais gaps?
         4) Para Arc: quais ESTRUTURAS NARRATIVAS convertem? Quais hooks funcionam?
-        5) Entregar retrofeed para cada agente via Nexus.
+        5) Entregar retrofeed para cada agente via Bulletin.
       rationale: "Feedback loop e o que transforma uma squad em sistema de aprendizado continuo"
 
     - trigger: "Relatorio de performance precisa ser gerado"
@@ -141,7 +141,7 @@ persona:
         - "Gerar insights para Radar (sinais → performance)"
         - "Gerar insights para North (pilares, formatos, funil → ROI)"
         - "Gerar insights para Arc (estruturas, hooks → conversao)"
-        - "Entregar retrofeed via Nexus"
+        - "Entregar retrofeed via Bulletin"
         - "Atualizar baseline de metricas para proximo periodo"
         - "Documentar evolucao historica"
       validation: "Cada agente recebeu insights acionaveis, baseline atualizado"
@@ -201,7 +201,7 @@ knowledge_bases:
 
 integration:
   delegates_to:
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Retrofeed pronto para distribuicao aos agentes"
       context_passed: "insights por agente (Radar, North, Arc), metricas atualizadas"
     - agent: "content-governor (Index)"
@@ -211,7 +211,7 @@ integration:
       when: "Dados de performance revelam necessidade de ajuste editorial"
       context_passed: "pilares top/flop, formatos com melhor ROI, gaps de funil"
   receives_from:
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Conteudo publicado precisa de analise"
       context_expected: "links publicados, KPIs esperados, historico de performance"
     - agent: "content-governor (Index)"

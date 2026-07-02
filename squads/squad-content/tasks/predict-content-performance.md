@@ -37,7 +37,7 @@ Checklist:
 | **Trigger** | Pre-publicacao (opcional, para priorizacao) |
 | **Input** | Conteudo finalizado, historico de performance, padroes identificados |
 | **Output** | Score preditivo com range estimado de performance |
-| **Handoff** | → content-orqx (Nexus) para priorizacao |
+| **Handoff** | → content-orqx (Bulletin) para priorizacao |
 | **Complexity** | medium |
 
 ---
@@ -68,5 +68,5 @@ Score 1-10 com confianca (alta, media, baixa). Range estimado: engagement rate e
 handoff:
   artifact: "performance-prediction-{peca}.md"
   context: "Previsao: score {score}/10, range {min}-{max}%, confianca {nivel}"
-  next: "content-orqx (Nexus) para priorizacao de publicacao e investimento"
+  next: "content-orqx (Bulletin) para priorizacao de publicacao e investimento"
 ```

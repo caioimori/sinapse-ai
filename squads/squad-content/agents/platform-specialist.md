@@ -201,7 +201,7 @@ integration:
     - agent: "content-engineer (Arc)"
       when: "Conteudo produzido precisa de adaptacao por plataforma"
       context_expected: "conteudo escrito, formato, Espinha Dorsal, template contract usado"
-    - agent: "content-orqx (Nexus)"
+    - agent: "content-orqx (Bulletin)"
       when: "Batch de adaptacao ou integracao de brand assets"
       context_expected: "lista de conteudos, plataformas-alvo, template contracts"
 ```

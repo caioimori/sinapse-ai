@@ -34,11 +34,11 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | content-analyst (Lens) |
-| **Co-agents** | content-orqx (Nexus) |
+| **Co-agents** | content-orqx (Bulletin) |
 | **Trigger** | Mensal (report padrao) ou sob demanda |
 | **Input** | Todas as metricas e analises do periodo |
 | **Output** | Relatorio executivo com metricas, insights e recomendacoes |
-| **Handoff** | → content-orqx (Nexus), stakeholders |
+| **Handoff** | → content-orqx (Bulletin), stakeholders |
 | **Complexity** | medium |
 
 ---
@@ -72,5 +72,5 @@ Executivos: 1 pagina de executive summary. Equipe operacional: detalhamento comp
 handoff:
   artifact: "content-report-{period}.md"
   context: "Report: {periodo}, {N} metricas, {D} destaques, {R} recomendacoes"
-  next: "content-orqx (Nexus) para distribuicao e stakeholders"
+  next: "content-orqx (Bulletin) para distribuicao e stakeholders"
 ```
