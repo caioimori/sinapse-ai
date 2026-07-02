@@ -10,12 +10,22 @@
 
 1. **Frase-gatilho do Caio:** *"quero voltar com a otimização do SINAPSE AI"*.
 2. **Antes de tudo:** o Caio troca o modelo da sessão pro Fable 5 com `/model fable` (ou `/model claude-fable-5`). Se não aparecer → CLI desatualizado (`claude-code update` / reinstalar via npm) ou conta sob zero-data-retention (o picker omite o Fable 5).
-3. **A IA lê este documento inteiro**, depois o `SESSION-HANDOFF.md` do épico de consolidação, depois decide o próximo passo pela §7.
+3. **A IA lê este documento inteiro** (a §0.5 abaixo tem o estado mais recente), depois `audits/AF-20260702-fable5-upgrade.md` (auditoria de re-baseline), depois decide o próximo passo pelos itens pendentes da Onda 2/3 do relatório.
 4. **Decisões já tomadas (não re-perguntar):**
    - Escopo: a ultra-otimização **engloba e turbina** o épico de consolidação + adiciona segurança/arquitetura/usabilidade.
    - Profundidade: **multi-agente exaustivo + verificação adversarial**.
-   - Modelo: **Fable 5** como motor principal (grátis no Max até **22/06/2026** — concentrar a fase pesada nessa janela).
-5. **Primeiro passo de execução:** §7 (validar a aposta do motor — checkpoint matar/dobrar). Gasta token real → pedir OK ao Caio antes.
+   - Modelo: Fable 5 foi o motor da fase pesada original (janela grátis 09-22/06/2026, já encerrada); sessões novas usam o modelo padrão vigente.
+5. **Primeiro passo de execução:** ~~§7 (validar a aposta do motor — checkpoint matar/dobrar)~~ **RESOLVIDO em 30/06/2026** — veredito **HÍBRIDO** (medido). O próximo passo real é continuar a **Onda 2** da auditoria AF-20260702 — ver §0.5.
+
+---
+
+## 0.5 Estado 2026-07-02 (re-baseline)
+
+- **Frente A fechada:** veredito **HÍBRIDO** (medido, 30/06/2026) — o motor é um assistente confiável de **1 story** (spec + plano reais; QA com ressalva no Windows); orquestração autônoma **multi-story** foi medida e abandonada. PRs #307-#319 (inclui release v1.19.2).
+- **Re-baseline:** `audits/AF-20260702-fable5-upgrade.md` re-verificou **94 claims** dos documentos-lastro contra a main atual — **49 resolved · 28 changed · 14 open · 3 unverifiable**.
+- **Onda 1 executada:** PRs #321-#325 (15/15 itens).
+- **Onda 2 em execução:** P1 mergeada (PR #326); esta story (Onda2-P2) cobre os itens 2.1 e 2.4 do relatório (docs).
+- **Para continuar:** ler `audits/AF-20260702-fable5-upgrade.md` §3 e seguir os itens restantes da Onda 2/3 — as seções §2 e §6 abaixo são registro histórico (pré-re-baseline).
 
 ---
 
@@ -28,6 +38,8 @@ Em 10/06/2026, o Caio pediu uma **ultra-otimização** com foco em qualidade, us
 ---
 
 ## 2. Estado atual (diagnóstico)
+
+> ⚠️ **[superado pelo re-baseline de 2026-07-02 — ver `audits/AF-20260702-fable5-upgrade.md` e §0.5 acima]** — diagnóstico da auditoria fria de 04/06/2026, mantido como registro histórico.
 
 ### Veredito da auditoria
 - Como *"Autonomous Development Engine"* (como se vende): **3/10**
@@ -110,6 +122,8 @@ Fontes: [Anthropic](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [
 ---
 
 ## 6. Plano de Ação (4 frentes)
+
+> ⚠️ **[superado pelo re-baseline de 2026-07-02 — ver `audits/AF-20260702-fable5-upgrade.md` e §0.5 acima]** — plano original de 10/06/2026, mantido como registro histórico. Frente A foi fechada (veredito HÍBRIDO); B/C/D foram parcialmente absorvidas pelas Ondas 1/2/3 do novo relatório.
 
 | Frente | Ataca | Itens concretos |
 |---|---|---|

@@ -211,6 +211,8 @@ O Autonomous Development Engine (ADE) respeita os modos de permissão:
 | **Perguntar** | Agrupa operações para aprovação   |
 | **Auto**      | Execução totalmente autônoma      |
 
+> **Escopo:** "Execução totalmente autônoma" vale por story. Orquestração autônoma de múltiplas stories encadeadas não é suportada — ver [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
 ### Aprovação em Lote no Modo Perguntar
 
 Ao executar workflows autônomos, operações são agrupadas:

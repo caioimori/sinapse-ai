@@ -741,7 +741,7 @@ outputs/                               # Runtime outputs (gitignored)
 
 ## Autonomous Development Engine (ADE)
 
-> **NEW in v3.0** - The ADE provides autonomous development capabilities through intelligent workflows, pattern learning, and self-healing loops.
+> **Added in v3.0** - The ADE provides structured workflows, pattern learning, and self-healing loops for development. **Measured scope:** reliable as a single-story assistant (spec + plan + build); autonomous multi-story orchestration was measured and abandoned in favor of the native flow — see [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
 
 ### ADE Architecture Overview
 

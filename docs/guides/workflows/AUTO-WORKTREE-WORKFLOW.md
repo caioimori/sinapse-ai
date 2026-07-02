@@ -9,14 +9,14 @@
 
 ## Visao Geral
 
-O **Auto-Worktree** e um workflow de automacao que cria e gerencia worktrees Git isoladas para desenvolvimento de stories. Faz parte da infraestrutura **Auto-Claude ADE** (Autonomous Development Engine), permitindo desenvolvimento paralelo de multiplas stories sem conflitos entre branches.
+O **Auto-Worktree** e um workflow de automacao que cria e gerencia worktrees Git isoladas para desenvolvimento de stories (isolamento real de branch por story, um recurso generico do Git). Faz parte da infraestrutura **Auto-Claude ADE** (Autonomous Development Engine). Nota de escopo: isso NAO e o mesmo que orquestracao autonoma multi-story — essa foi medida e abandonada (o pipeline `sinapse orchestrate` hoje nao usa esse isolamento). Detalhes: KNOWN-LIMITATIONS.md (https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
 
 ### Principais Beneficios
 
 | Beneficio | Descricao |
 |-----------|-----------|
 | **Isolamento** | Cada story trabalha em um diretorio e branch separados |
-| **Paralelismo** | Multiplas stories podem ser desenvolvidas simultaneamente |
+| **Paralelismo** | Multiplas stories podem ter worktrees isoladas ao mesmo tempo (isolamento manual/nativo — nao e orquestracao autonoma multi-story) |
 | **Automacao** | Worktrees sao criadas automaticamente ao iniciar uma story |
 | **Limpeza** | Worktrees obsoletas podem ser removidas automaticamente |
 

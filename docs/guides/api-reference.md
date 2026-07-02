@@ -200,6 +200,8 @@ Task execution with arguments: { story: "story-1.2.3" }
 | `*build-status`     | `[--all]`    | Show build status                  |
 | `*build-log`        | `{story-id}` | View build attempt log             |
 
+> **Scope:** build commands run **one `{story-id}` at a time** — a reliable single-story pipeline. Multi-story chaining is not supported; see [KNOWN-LIMITATIONS.md](https://github.com/caioimori/sinapse-ai/blob/main/docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
 **Quality & Debt:**
 
 | Command           | Arguments | Description                   |
