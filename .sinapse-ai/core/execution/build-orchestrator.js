@@ -77,6 +77,10 @@ const DEFAULT_CONFIG = {
   runQA: true,
   autoMerge: true,
   cleanupOnSuccess: true,
+  // Story onda2-p3: stop right after the REAL plan is generated (no build loop,
+  // no QA, no merge). Powers `sinapse plan` — the hybrid's measured value
+  // (spec + plan for ONE story) as its own product surface.
+  planOnly: false,
 
   // Execution
   maxIterations: 10,
@@ -183,13 +187,47 @@ class BuildOrchestrator extends EventEmitter {
       // Phase 1: Initialize
       await this.runPhase(ctx, Phase.INIT, () => this.phaseInit(ctx));
 
-      // Phase 2: Create worktree (optional)
-      if (config.useWorktree && WorktreeManager) {
+      // Phase 2: Create worktree (optional — never for plan-only runs, which
+      // read the story and write the plan but touch no code)
+      if (config.useWorktree && !config.planOnly && WorktreeManager) {
         await this.runPhase(ctx, Phase.WORKTREE, () => this.phaseWorktree(ctx));
       }
 
       // Phase 3: Load/Generate plan
       await this.runPhase(ctx, Phase.PLAN, () => this.phasePlan(ctx));
+
+      // Story onda2-p3 — plan-only phase limit (`sinapse plan`): stop right
+      // after the REAL plan. No build loop, no QA, no merge. The plan is
+      // persisted STORY-SCOPED (docs/stories/<id>/plan/implementation.yaml) —
+      // deliberately not the shared <root>/plan/ path, which is the measured
+      // cross-story contamination vector (see KNOWN-LIMITATIONS.md).
+      if (config.planOnly) {
+        const planPath = this.persistPlan(ctx);
+        await this.runPhase(ctx, Phase.REPORT, () => this.phaseReport(ctx));
+
+        const duration = Date.now() - startTime;
+        this.emit(OrchestratorEvent.BUILD_COMPLETED, {
+          storyId,
+          duration,
+          success: true,
+          report: ctx.reportPath,
+          planOnly: true,
+        });
+
+        return {
+          success: true,
+          planOnly: true,
+          storyId,
+          duration,
+          phases: ctx.phases,
+          reportPath: ctx.reportPath,
+          plan: ctx.plan,
+          planPath,
+          // Honest by construction: a plan-only run writes no implementation
+          // files — downstream gates must never read this as a real build.
+          filesModified: [],
+        };
+      }
 
       // Phase 4: Execute (the actual build) - THIS IS THE KEY PART
       await this.runPhase(ctx, Phase.EXECUTE, () => this.phaseExecute(ctx));
@@ -417,6 +455,39 @@ class BuildOrchestrator extends EventEmitter {
 
     ctx.plan = await this.generatePlan(ctx);
     return { source: 'generated', subtasks: ctx.plan.phases?.length || 0 };
+  }
+
+  /**
+   * Persist the generated plan as YAML, STORY-SCOPED
+   * (docs/stories/<storyId>/plan/implementation.yaml).
+   *
+   * Story onda2-p3: this is the durable artifact `sinapse plan` delivers. The
+   * story-scoped location is the canonical path Epic 4 already searches first
+   * (`_findOrCreatePlan`) — and deliberately NOT the shared `<root>/plan/`
+   * directory, whose non-scoped state is the measured cross-story contamination
+   * vector (KNOWN-LIMITATIONS.md, bug 1).
+   *
+   * @param {Object} ctx - Build context ({ storyId, config, plan })
+   * @returns {string} Absolute path of the persisted plan
+   */
+  persistPlan(ctx) {
+    const yaml = require('js-yaml');
+    const planPath = path.join(
+      this.rootPath,
+      ctx.config.storiesDir || DEFAULT_CONFIG.storiesDir,
+      ctx.storyId,
+      'plan',
+      'implementation.yaml',
+    );
+    fs.mkdirSync(path.dirname(planPath), { recursive: true });
+    const header = `# Implementation Plan: ${ctx.storyId}\n# Generated: ${new Date().toISOString()}\n\n`;
+    fs.writeFileSync(
+      planPath,
+      header + yaml.dump(ctx.plan || {}, { lineWidth: -1, noRefs: true }),
+      'utf-8',
+    );
+    ctx.planPath = planPath;
+    return planPath;
   }
 
   /**

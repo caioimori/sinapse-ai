@@ -29,6 +29,11 @@ const KNOWN_COMMANDS = [
   'ideate',
   'agents',
   'chrome-brain',
+  // Story onda2-p3 (audit AF-20260702 item 2.4) — the orchestration engine,
+  // reachable from the canonical binary users actually install.
+  'orchestrate',
+  'spec',
+  'plan',
   'help',
 ];
 const {
@@ -160,6 +165,30 @@ function runRouter() {
       cmdDoctor(doctorOpts).catch(e => { logger.error(`${RED}Erro no doctor:${NC} ${e.message}`); process.exit(1); });
       break;
     }
+    case 'orchestrate':
+    case 'spec':
+    case 'plan': {
+      // Story onda2-p3 (audit AF-20260702 item 2.4) — the orchestration engine
+      // (the one capability validated by the HYBRID verdict) was unreachable
+      // from the canonical binary: users who install as the README teaches
+      // (`npx sinapse-ai ...`) never discover bin/sinapse.js. Delegates via
+      // spawnSync to bin/sinapse.js, which owns the arg parsing — same
+      // single-source-of-truth pattern as `init` (cli→sinapse) and the
+      // S1/#321 `agents`/`ideate` delegation (sinapse→cli).
+      const { spawnSync } = require('child_process');
+      const result = spawnSync(
+        process.execPath,
+        [path.join(__dirname, 'sinapse.js'), ...args],
+        { stdio: 'inherit' },
+      );
+      if (result.error) {
+        logger.error(`${RED}Erro no ${command}:${NC} ${result.error.message}`);
+        logger.error(`Tente: ${CYAN}npx sinapse-ai ${command} --help${NC}`);
+        process.exit(1);
+      }
+      process.exit(result.status ?? 0);
+    }
+    // eslint-disable-next-line no-fallthrough -- process.exit above terminates; same pattern as `init`.
     case 'chrome-brain': {
     // Story 10.13 — chrome-brain is the canonical sub-capability for browser
     // automation. Delegating to the shared chrome-brain-installer module keeps

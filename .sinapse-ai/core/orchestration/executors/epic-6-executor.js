@@ -55,6 +55,12 @@ class Epic6Executor extends EpicExecutor {
   async execute(context) {
     this._startExecution();
 
+    // Story onda2-p3 (audit AF-20260702 item 2.2): collect review-agent
+    // INVOCATION failures (spawn/CLI errors — infrastructure) separately from
+    // review verdicts, so the final result can distinguish "QA could not run"
+    // from a real QA rejection.
+    this._invocationFailures = [];
+
     try {
       const { buildResult, testResults, codeChanges, storyId, techStack } = context;
 
@@ -113,10 +119,26 @@ class Epic6Executor extends EpicExecutor {
 
       // Honesty invariant (F0a/F7): a QA loop that only ran deterministic basic
       // checks did NOT really review the work — it must report STUB, not success.
+      // Story onda2-p3: when the stub is caused by a FAILED agent invocation
+      // (spawn error — e.g. nested `claude` exiting 0xC0000142 on Windows), mark
+      // it as an infrastructure failure so the pipeline verdict can distinguish
+      // "QA not executable here" from a real QA rejection.
       if (!anyRealReview) {
+        const invocationFailed =
+          Array.isArray(this._invocationFailures) && this._invocationFailures.length > 0;
         return this._stubExecution(
-          'QA ran deterministic basic checks only — no real review agent wired',
-          baseResult,
+          invocationFailed
+            ? 'QA could not run: review-agent invocation failed (infrastructure error, not a test rejection) — only deterministic basic checks ran'
+            : 'QA ran deterministic basic checks only — no real review agent wired',
+          {
+            ...baseResult,
+            ...(invocationFailed
+              ? {
+                  infrastructureFailure: true,
+                  infrastructureErrors: [...this._invocationFailures],
+                }
+              : {}),
+          },
         );
       }
 
@@ -145,6 +167,9 @@ class Epic6Executor extends EpicExecutor {
         const realReview = await this._reviewViaAgent(invokeAgent, context);
         if (realReview) return realReview;
       } catch (error) {
+        // Thrown invocation error = the review process itself could not run
+        // (spawn/CLI failure) — infrastructure, never a review verdict.
+        this._recordInvocationFailure(error.message);
         this._log(`Real review failed, falling back to basic checks: ${error.message}`, 'warn');
       }
     }
@@ -197,6 +222,13 @@ class Epic6Executor extends EpicExecutor {
 
     const output = result && (result.output || result.content);
     if (!result || result.success === false || !output || output.trim().length === 0) {
+      // The dispatcher reports spawn/CLI failures by RETURNING { success:false,
+      // error } (it does not throw) — e.g. "Claude CLI exited with code
+      // 3221225794" on Windows. Record it as an infrastructure failure so the
+      // verdict never confuses "QA could not run" with a QA rejection.
+      if (result && result.success === false && result.error) {
+        this._recordInvocationFailure(result.error);
+      }
       return null;
     }
 
@@ -208,6 +240,25 @@ class Epic6Executor extends EpicExecutor {
       raw: output,
       timestamp: new Date().toISOString(),
     };
+  }
+
+  /**
+   * Record a failed review-agent INVOCATION (spawn/CLI error).
+   *
+   * Story onda2-p3 (audit AF-20260702 item 2.2): this is the signal that lets
+   * the final pipeline verdict distinguish "QA could not run" (infrastructure —
+   * e.g. the nested `claude` spawn failing on Windows with exit 0xC0000142)
+   * from a real QA rejection, which always arrives as a review VERDICT
+   * (BLOCKED / NEEDS_REVISION), never through this path.
+   *
+   * @param {string} message - Invocation error message
+   * @private
+   */
+  _recordInvocationFailure(message) {
+    if (!Array.isArray(this._invocationFailures)) {
+      this._invocationFailures = [];
+    }
+    this._invocationFailures.push(String(message || 'unknown invocation failure'));
   }
 
   /**

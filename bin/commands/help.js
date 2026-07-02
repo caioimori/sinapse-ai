@@ -19,6 +19,11 @@ function cmdHelp() {
   logger.always('');
   logger.always(`  ${DIM}Funciona em CI / ambientes não-interativos (usa defaults sensatos).${NC}`);
   logger.always('');
+  logger.always(`${BOLD}Motor de orquestração (avançado — 1 story por vez):${NC}\n`);
+  logger.always(`  ${CYAN}npx sinapse-ai spec <story-id>${NC}        Gera a spec REAL de uma story (para antes de plano/build/QA)`);
+  logger.always(`  ${CYAN}npx sinapse-ai plan <story-id>${NC}        Spec + plano de implementação REAL (para antes de build/QA)`);
+  logger.always(`  ${CYAN}npx sinapse-ai orchestrate <story-id>${NC} Pipeline completo de 1 story (${DIM}--dry-run pra prever${NC})`);
+  logger.always('');
   logger.always(`${BOLD}Diagnóstico:${NC}\n`);
   logger.always(`  ${CYAN}npx sinapse-ai status${NC}           Mostra estado da instalação`);
   logger.always(`  ${CYAN}npx sinapse-ai doctor${NC}           Roda health checks (--fix --dry-run --json --deep)`);

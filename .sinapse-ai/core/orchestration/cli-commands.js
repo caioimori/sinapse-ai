@@ -52,6 +52,9 @@ try {
  * @param {number} [options.epic] - Start from specific epic (AC5)
  * @param {boolean} [options.dryRun] - Preview without execution (AC6)
  * @param {boolean} [options.strict] - Enable strict gate mode
+ * @param {'spec'|'plan'} [options.phaseLimit] - Stop after the given phase
+ *   (Story onda2-p3): 'spec' runs Epic 3 only; 'plan' runs Epics 3+4 with a
+ *   plan-only build. Both stop BEFORE build/QA.
  * @param {string} [options.projectRoot] - Project root path
  * @returns {Promise<Object>} Command result
  */
@@ -70,6 +73,16 @@ async function orchestrate(storyId, options = {}) {
   console.log(chalk.cyan.bold(`  🚀 SINAPSE Orchestrator: ${storyId}`));
   console.log(chalk.cyan('═══════════════════════════════════════════════════════════\n'));
 
+  if (options.phaseLimit) {
+    console.log(
+      chalk.yellow(
+        options.phaseLimit === 'spec'
+          ? '📝 Phase limit: SPEC — generates the real spec, stops before plan/build/QA.\n'
+          : '🗺️  Phase limit: PLAN — generates real spec + plan, stops before build/QA.\n',
+      ),
+    );
+  }
+
   // Dry run mode (AC6)
   if (options.dryRun) {
     return await orchestrateDryRun(storyId, options);
@@ -80,6 +93,7 @@ async function orchestrate(storyId, options = {}) {
       storyId,
       strictGates: options.strict ?? false,
       dashboardAutoUpdate: true,
+      phaseLimit: options.phaseLimit || null,
     });
 
     // Start dashboard
@@ -105,9 +119,14 @@ async function orchestrate(storyId, options = {}) {
     // Display final result
     displayResult(result);
 
+    // Phase-limited runs (Story onda2-p3): show where the real artifacts landed.
+    if (options.phaseLimit) {
+      displayPhaseArtifacts(result, options.phaseLimit);
+    }
+
     return {
       success: result.success,
-      exitCode: result.success ? 0 : result.blocked ? 2 : 1,
+      exitCode: computeExitCode(result),
       result,
     };
   } catch (error) {
@@ -117,6 +136,80 @@ async function orchestrate(storyId, options = {}) {
       exitCode: 1,
       error: error.message,
     };
+  }
+}
+
+/**
+ * Execute the spec phase only (Story onda2-p3, audit AF-20260702 item 2.3).
+ *
+ * Thin subcommand over the SAME pipeline as `orchestrate` — runs Epic 3 (Spec)
+ * and stops BEFORE plan/build/QA. This is the hybrid's measured value (a real,
+ * quality spec for ONE story) exposed as its own product surface.
+ *
+ * @param {string} storyId - Story ID
+ * @param {Object} options - Same options as orchestrate (minus phaseLimit)
+ * @returns {Promise<Object>} Command result
+ */
+async function spec(storyId, options = {}) {
+  return orchestrate(storyId, { ...options, phaseLimit: 'spec' });
+}
+
+/**
+ * Execute the spec + plan phases only (Story onda2-p3, audit AF-20260702 item 2.3).
+ *
+ * Thin subcommand over the SAME pipeline as `orchestrate` — runs Epic 3 (Spec)
+ * and Epic 4 in plan-only mode (real implementation plan, persisted
+ * story-scoped), and stops BEFORE build/QA.
+ *
+ * @param {string} storyId - Story ID
+ * @param {Object} options - Same options as orchestrate (minus phaseLimit)
+ * @returns {Promise<Object>} Command result
+ */
+async function plan(storyId, options = {}) {
+  return orchestrate(storyId, { ...options, phaseLimit: 'plan' });
+}
+
+/**
+ * Map a finalized pipeline result to a process exit code.
+ *
+ * Story onda2-p3 (audit AF-20260702 item 2.2): PASS_QA_SKIPPED exits 0 — a good
+ * build whose QA could not run for INFRASTRUCTURE reasons (nested `claude`
+ * spawn failing on Windows) must not exit as a failure; the warning carries the
+ * "QA not executed" caveat. Real failures stay 1, blocked stays 2.
+ *
+ * @param {Object} result - Finalized pipeline result
+ * @returns {number} Exit code
+ * @private
+ */
+function computeExitCode(result) {
+  if (result.success) return 0;
+  if (result.verdict === 'PASS_QA_SKIPPED') return 0;
+  return result.blocked ? 2 : 1;
+}
+
+/**
+ * Print the real artifacts a phase-limited run produced (spec/plan paths).
+ * @param {Object} result - Finalized pipeline result (carries state.epics)
+ * @param {'spec'|'plan'} phaseLimit
+ * @private
+ */
+function displayPhaseArtifacts(result, phaseLimit) {
+  const epics = result.state?.epics || {};
+  const specPath = epics[3]?.result?.specPath;
+  const planPath = epics[4]?.result?.planPath;
+
+  if (specPath) {
+    console.log(chalk.green(`📝 Spec: ${specPath}`));
+  }
+  if (phaseLimit === 'plan' && planPath) {
+    console.log(chalk.green(`🗺️  Plan: ${planPath}`));
+  }
+  if (specPath || (phaseLimit === 'plan' && planPath)) {
+    console.log(
+      chalk.gray(
+        `\nNext: review the artifact${phaseLimit === 'plan' ? 's' : ''}, then implement (natively or via sinapse orchestrate).\n`,
+      ),
+    );
   }
 }
 
@@ -143,10 +236,12 @@ async function orchestrateDryRun(storyId, options) {
   const epicConfig = orchestrator.constructor.EPIC_CONFIG;
   const startEpic = options.epic || 3;
 
-  // Use dynamic epic list from config (excludes onDemand epics like Epic 5)
+  // Use dynamic epic list from config (excludes onDemand epics like Epic 5).
+  // Phase-limited runs (Story onda2-p3) preview only their own sequence.
+  const allowedEpics = MasterOrchestrator.phaseLimitSequence(options.phaseLimit || null);
   const epicNums = Object.keys(epicConfig)
     .map(Number)
-    .filter((num) => !epicConfig[num].onDemand)
+    .filter((num) => !epicConfig[num].onDemand && allowedEpics.includes(num))
     .sort((a, b) => a - b);
 
   for (const epicNum of epicNums) {
@@ -420,7 +515,7 @@ async function orchestrateResume(storyId, options = {}) {
 
     return {
       success: result.success,
-      exitCode: result.success ? 0 : result.blocked ? 2 : 1,
+      exitCode: computeExitCode(result),
       result,
     };
   } catch (error) {
@@ -472,6 +567,11 @@ function displayResult(result) {
 
   if (result.success) {
     console.log(chalk.green.bold('  ✅ ORCHESTRATION COMPLETE'));
+  } else if (result.verdict === 'PASS_QA_SKIPPED') {
+    // Story onda2-p3 (audit AF-20260702 item 2.2): a good build whose QA could
+    // not execute (infrastructure — e.g. nested `claude` spawn failing on
+    // Windows) is NOT a failure. Never collapse it into FAILED.
+    console.log(chalk.yellow.bold('  ✅ BUILD OK — QA SKIPPED (infrastructure limitation)'));
   } else if (result.blocked) {
     console.log(chalk.red.bold('  🚫 ORCHESTRATION BLOCKED'));
   } else {
@@ -482,6 +582,13 @@ function displayResult(result) {
 
   console.log(chalk.gray(`\nDuration: ${result.duration || 'N/A'}`));
   console.log(chalk.gray(`Epics Executed: ${result.epics?.executed?.length || 0}`));
+
+  // Story onda2-p3 (audit AF-20260702 item 2.2): the pipeline's warning was
+  // computed but never shown — the one line that explains a red verdict (e.g.
+  // "QA ran in STUB mode") stayed hidden. Always surface it.
+  if (result.warning) {
+    console.log(chalk.yellow(`\n⚠️  ${result.warning}`));
+  }
 
   if (result.errors?.length > 0) {
     console.log(chalk.red(`\nErrors: ${result.errors.length}`));
@@ -570,12 +677,22 @@ module.exports = {
   orchestrateStop,
   orchestrateResume,
 
+  // Story onda2-p3: phase-limited subcommands (spec / spec+plan, no build/QA)
+  spec,
+  plan,
+
+  // Exported for tests (Story onda2-p3 — warning visibility + honest verdict)
+  displayResult,
+  computeExitCode,
+
   // Aliases for command parsing
   commands: {
     orchestrate: orchestrate,
     'orchestrate-status': orchestrateStatus,
     'orchestrate-stop': orchestrateStop,
     'orchestrate-resume': orchestrateResume,
+    spec: spec,
+    plan: plan,
   },
 };
 
