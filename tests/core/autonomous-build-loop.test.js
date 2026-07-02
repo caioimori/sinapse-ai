@@ -89,6 +89,13 @@ function createLoop(overrides = {}) {
     maxIterations: 3,
     selfCritiqueEnabled: false,
     verificationEnabled: false,
+    // Onda1-S1 (audit AF-20260702 item 1.12) — the loop's own default (no
+    // executor) is now an honest stub that always fails. Most fixtures in
+    // this file exist to test other behavior (events, report shape, loadPlan
+    // mechanics), so give them a trivial happy-path executor by default.
+    // Tests that specifically exercise the no-executor stub path pass
+    // `executor: undefined` to opt back out.
+    executor: async () => ({ success: true, filesModified: [] }),
     ...overrides,
   });
 }
@@ -486,14 +493,26 @@ describe('AutonomousBuildLoop', () => {
       );
     });
 
-    test('returns success without executor (default simulation)', async () => {
-      const loop = createLoop();
+    test('returns an honest failure via run() when no executor is configured', async () => {
+      // Onda1-S1 (audit AF-20260702 item 1.12) — the old default fabricated
+      // success:true with zero work done. It must now surface as a failure.
+      const loop = createLoop({ executor: undefined });
       const plan = createTestPlan(1);
-      // No executor set - uses default simulation
 
       const result = await loop.run('story-1', { plan, rootPath: tmpDir });
 
-      expect(result.success).toBe(true);
+      expect(result.success).toBe(false);
+    });
+
+    test('executeSubtask reports status:stub without executor (AC4)', async () => {
+      const loop = createLoop({ executor: undefined });
+      const subtask = { id: 'subtask-1', description: 'test', files: ['a.js'] };
+
+      const result = await loop.executeSubtask(subtask, 1);
+
+      expect(result.success).toBe(false);
+      expect(result.status).toBe('stub');
+      expect(result.stub).toBe(true);
     });
   });
 
