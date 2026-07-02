@@ -128,7 +128,10 @@ class Epic4Executor extends EpicExecutor {
             ? buildResult.filesModified
             : [];
           return this._completeExecution({
-            planPath,
+            // Story onda2-p3: a plan-only run persists the REAL plan story-scoped;
+            // prefer that path over the pre-created stub location.
+            planPath: buildResult.planPath || planPath,
+            ...(buildResult.planOnly === true ? { planOnly: true } : {}),
             // F5 (epic: orchestration-consolidation): propagate the real plan object
             // so the downstream epic4_to_epic6 gate can verify it is not degraded/stub.
             plan: buildResult.plan,

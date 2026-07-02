@@ -161,7 +161,12 @@ GENERATE & CREATE:
   sinapse create <agent|task|workflow>        # Scaffold a new framework component
 
 ORCHESTRATION:
+  sinapse spec <story-id>                   # Story assistant: generate the REAL spec for one story
+                                             # (stops before plan/build/QA)
+  sinapse plan <story-id>                   # Story assistant: real spec + implementation PLAN
+                                             # (stops before build/QA)
   sinapse orchestrate <story-id>            # Run the autonomous dev pipeline for a story
+  sinapse orchestrate <story-id> --dry-run  # Preview the pipeline (epics + tech stack), no execution
   sinapse orchestrate --status              # Show / --stop / --resume a running pipeline
                                              # Scope: 1 story per run — sequential multi-story in the
                                              # same directory is not supported (measured limitation;
@@ -1378,6 +1383,29 @@ async function main() {
       // Without this case the most powerful pipeline (executeFullPipeline) was
       // only reachable programmatically — violating Art. I (CLI First).
       try {
+        // Story onda2-p3 (AC2): `--help` answers with usage instead of failing
+        // on a missing story-id — also what `npx sinapse-ai orchestrate --help`
+        // reaches through the canonical binary's delegation.
+        if (args.includes('--help') || args.includes('-h')) {
+          logger.always(`Usage: sinapse orchestrate <story-id> [options]
+
+Runs the autonomous dev pipeline for ONE story: spec -> plan -> build -> QA.
+Scope: 1 story per run (multi-story chaining in the same directory is not
+supported — see docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).
+
+Options:
+  --dry-run     Preview the pipeline (epics + detected tech stack), no execution
+  --epic <N>    Start from a specific epic (3=Spec, 4=Plan/Build, 6=QA)
+  --strict      Fail on any gate failure
+  --status      Show pipeline status for the story
+  --stop        Stop a running pipeline
+  --resume      Resume a stopped pipeline
+
+Related:
+  sinapse spec <story-id>   Real spec only (stops before plan/build/QA)
+  sinapse plan <story-id>   Real spec + plan (stops before build/QA)`);
+          process.exit(0);
+        }
         const orchestration = require('../.sinapse-ai/core/orchestration');
         const epicIdx = args.indexOf('--epic');
         // The story-id is the first positional arg after `orchestrate` — i.e.
@@ -1415,6 +1443,63 @@ async function main() {
         process.exit(exitCode);
       } catch (error) {
         logger.error(`❌ Orchestrate command error: ${error.message}`);
+        process.exit(1);
+      }
+      break; // unreachable (both branches process.exit) — satisfies no-fallthrough
+    }
+
+    case 'spec':
+    case 'plan': {
+      // Story onda2-p3 (audit AF-20260702 item 2.3) — the hybrid's MEASURED
+      // value (real spec + real plan for ONE story) as first-class commands.
+      // Thin subcommands over the SAME orchestrate pipeline with a phase limit:
+      // `spec` stops after Epic 3; `plan` stops after Epic 4's plan phase —
+      // both stop BEFORE build/QA. No duplicated pipeline.
+      try {
+        if (args.includes('--help') || args.includes('-h')) {
+          logger.always(
+            command === 'spec'
+              ? `Usage: sinapse spec <story-id> [--dry-run]
+
+Generates the REAL specification (spec.md) for one story and stops there —
+no plan, no build, no QA. Same pipeline as \`sinapse orchestrate\`, limited to
+the spec phase. Artifact: docs/stories/<story-id>/spec.md
+
+Next step: sinapse plan <story-id>   (spec + implementation plan)`
+              : `Usage: sinapse plan <story-id> [--dry-run]
+
+Generates the REAL specification AND the implementation plan for one story,
+then stops — no build, no QA. Same pipeline as \`sinapse orchestrate\`, limited
+to the plan phase. Artifacts: docs/stories/<story-id>/spec.md and
+docs/stories/<story-id>/plan/implementation.yaml
+
+Next step: review the plan, then implement (natively or via sinapse orchestrate).`,
+          );
+          process.exit(0);
+        }
+
+        const orchestration = require('../.sinapse-ai/core/orchestration');
+        const storyId = args.slice(1).find((a) => !a.startsWith('--'));
+        const options = {
+          projectRoot: process.cwd(),
+          dryRun: args.includes('--dry-run'),
+          strict: args.includes('--strict'),
+        };
+
+        const result =
+          command === 'spec'
+            ? await orchestration.spec(storyId, options)
+            : await orchestration.plan(storyId, options);
+
+        const exitCode =
+          result && typeof result.exitCode === 'number'
+            ? result.exitCode
+            : result && result.success === false
+              ? 1
+              : 0;
+        process.exit(exitCode);
+      } catch (error) {
+        logger.error(`❌ ${command} command error: ${error.message}`);
         process.exit(1);
       }
       break; // unreachable (both branches process.exit) — satisfies no-fallthrough

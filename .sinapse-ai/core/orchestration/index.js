@@ -204,6 +204,9 @@ module.exports = {
   orchestrateStatus: cliCommands.orchestrateStatus,
   orchestrateStop: cliCommands.orchestrateStop,
   orchestrateResume: cliCommands.orchestrateResume,
+  // Story onda2-p3: phase-limited subcommands (real spec / spec+plan, no build/QA)
+  spec: cliCommands.spec,
+  plan: cliCommands.plan,
 
   // Story 11.1: Executor Assignment (Projeto Bob)
   ExecutorAssignment,

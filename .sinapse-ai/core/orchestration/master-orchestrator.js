@@ -166,6 +166,16 @@ class MasterOrchestrator extends EventEmitter {
     this.prdPath = options.prdPath || null;
     this.strictGates = options.strictGates ?? false;
 
+    // Story onda2-p3 (audit AF-20260702 item 2.3) — phase-limited runs expose the
+    // hybrid's MEASURED value (real spec + real plan for ONE story) as their own
+    // product surface: 'spec' runs Epic 3 only; 'plan' runs Epics 3+4 with a
+    // plan-only build. Both stop BEFORE build/QA. null = full pipeline.
+    const phaseLimit = options.phaseLimit || null;
+    if (phaseLimit !== null && !['spec', 'plan'].includes(phaseLimit)) {
+      throw new Error(`Invalid phaseLimit: ${phaseLimit} (expected 'spec' or 'plan')`);
+    }
+    this.phaseLimit = phaseLimit;
+
     // Callbacks
     this.onEpicStart = options.onEpicStart || this._defaultEpicStart.bind(this);
     this.onEpicComplete = options.onEpicComplete || this._defaultEpicComplete.bind(this);
@@ -444,9 +454,10 @@ class MasterOrchestrator extends EventEmitter {
     this._inFullPipeline = true;
 
     try {
-      // Execute epics in sequence: 3 → 4 → 6
+      // Execute epics in sequence: 3 → 4 → 6 — or a phase-limited prefix
+      // (Story onda2-p3): `sinapse spec` → [3], `sinapse plan` → [3, 4].
       // Note: Epic 5 (Recovery) is triggered on-demand, not sequentially
-      const epicSequence = [3, 4, 6];
+      const epicSequence = MasterOrchestrator.phaseLimitSequence(this.phaseLimit);
 
       for (const epicNum of epicSequence) {
         // Check if already completed (for resume scenarios)
@@ -563,6 +574,40 @@ class MasterOrchestrator extends EventEmitter {
     return [3, 4].includes(epicNum);
   }
 
+  /**
+   * Epic sequence for a given phase limit (Story onda2-p3).
+   *
+   * - 'spec' → [3]        (real spec only — stops before plan/build/QA)
+   * - 'plan' → [3, 4]     (spec + real plan; Epic 4 runs plan-only — stops before build/QA)
+   * - null   → [3, 4, 6]  (full pipeline)
+   *
+   * Single source of truth shared by the pipeline, the dry-run preview and the
+   * CLI so the sequence can never drift between them.
+   *
+   * @param {'spec'|'plan'|null} phaseLimit
+   * @returns {number[]} Epic sequence
+   */
+  static phaseLimitSequence(phaseLimit) {
+    if (phaseLimit === 'spec') return [3];
+    if (phaseLimit === 'plan') return [3, 4];
+    return [3, 4, 6];
+  }
+
+  /**
+   * Whether this epic is the LAST epic of a phase-limited run. The transition
+   * gate after it (e.g. epic4_to_epic6 with its `implementation_exists` check)
+   * guards an epic that will NOT run — evaluating it would wrongly block a
+   * spec/plan-only result that intentionally produced no implementation files.
+   * @param {number} epicNum
+   * @returns {boolean}
+   * @private
+   */
+  _isPhaseLimitTerminalEpic(epicNum) {
+    if (!this.phaseLimit) return false;
+    const seq = MasterOrchestrator.phaseLimitSequence(this.phaseLimit);
+    return epicNum === seq[seq.length - 1];
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════════════
   //                              SINGLE EPIC EXECUTION (AC4)
   // ═══════════════════════════════════════════════════════════════════════════════════
@@ -659,8 +704,18 @@ class MasterOrchestrator extends EventEmitter {
       // Evaluate quality gate (Story 0.6) - only in full pipeline mode
       // Skip gate evaluation if result is from stub executor
       // (isStubResult already computed above with the failure-detection guard).
+      // Story onda2-p3: also skip for the terminal epic of a phase-limited run —
+      // the transition gate guards an epic that will not execute (e.g. the
+      // epic4_to_epic6 `implementation_exists` check would wrongly block a
+      // plan-only result that intentionally wrote no implementation files).
       let gateResult = null;
-      if (this._inFullPipeline && result && result.success !== false && !isStubResult) {
+      if (
+        this._inFullPipeline &&
+        result &&
+        result.success !== false &&
+        !isStubResult &&
+        !this._isPhaseLimitTerminalEpic(epicNum)
+      ) {
         gateResult = await this._evaluateGate(epicNum, result);
 
         // Store gate result if exists
@@ -824,6 +879,10 @@ class MasterOrchestrator extends EventEmitter {
           spec: this.executionState.epics[3]?.result?.specPath,
           complexity: this.executionState.epics[3]?.result?.complexity,
           requirements: this.executionState.epics[3]?.result?.requirements,
+          // Story onda2-p3: `sinapse plan` limits Epic 4 to the REAL plan —
+          // the BuildOrchestrator stops right after its plan phase (no build
+          // loop, no QA, no merge).
+          ...(this.phaseLimit === 'plan' ? { buildOptions: { planOnly: true } } : {}),
         };
 
       case 5: // Recovery (on-demand)
@@ -1536,27 +1595,66 @@ class MasterOrchestrator extends EventEmitter {
     // instead of "ORCHESTRATION COMPLETE" / exit 0.
     const hasFailures = (pipelineResult.epicsFailed || []).length > 0;
     const blocked = this._state === OrchestratorState.BLOCKED;
+
+    // Honesty invariant (epic: orchestration-consolidation, F0a): a pipeline that ran
+    // any epic in STUB mode did NOT really build anything — it must not report success:true.
+    // A failed epic or a non-COMPLETE terminal state is likewise never a success.
+    const success =
+      (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) &&
+      !hasStubs &&
+      !hasFailures &&
+      !blocked;
+
+    // Story onda2-p3 (audit AF-20260702 item 2.2) — honest Windows verdict:
+    // when the build epics (3 + 4) really ran and the ONLY stub is the QA epic (6)
+    // because the review agent invocation itself failed (nested `claude` spawn —
+    // known Windows limitation, exit 0xC0000142 / STATUS_DLL_INIT_FAILED), the
+    // result is a GOOD build whose QA could not execute — infrastructure, not a
+    // test rejection. Distinguish it (PASS_QA_SKIPPED) instead of collapsing it
+    // into FAILED. `success` stays false (F0a: a stubbed QA is not a full pass);
+    // the verdict + warning carry the distinction to the user.
+    const stubbedList = pipelineResult.epicsStubbed || [];
+    const executedList = pipelineResult.epicsExecuted || [];
+    const qaInfraFailure =
+      this.executionState.epics?.[6]?.result?.infrastructureFailure === true;
+    const qaSkippedInfra =
+      hasStubs &&
+      !hasFailures &&
+      !blocked &&
+      stubbedList.length === 1 &&
+      stubbedList[0] === 6 &&
+      qaInfraFailure &&
+      [3, 4].every((num) => executedList.includes(num));
+
+    const verdict = success
+      ? 'PASS'
+      : qaSkippedInfra
+        ? 'PASS_QA_SKIPPED'
+        : blocked
+          ? 'BLOCKED'
+          : 'FAILED';
+
+    let warning;
+    if (qaSkippedInfra) {
+      warning =
+        'Build succeeded, but the QA step could not run in this environment: the nested review-agent spawn failed (known Windows limitation, exit 0xC0000142). The build output is real — review/QA it manually (see docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md).';
+    } else if (hasStubs) {
+      warning =
+        'Pipeline ran one or more epics in STUB mode — no real work was performed for those. This is not a successful build (see epic: orchestration-consolidation).';
+    }
+
     return {
       workflowId: this.executionState.workflowId,
       storyId: this.storyId,
       status: this._state,
       blocked,
-      // Honesty invariant (epic: orchestration-consolidation, F0a): a pipeline that ran
-      // any epic in STUB mode did NOT really build anything — it must not report success:true.
-      // A failed epic or a non-COMPLETE terminal state is likewise never a success.
-      success:
-        (pipelineResult.success ?? this._state === OrchestratorState.COMPLETE) &&
-        !hasStubs &&
-        !hasFailures &&
-        !blocked,
+      success,
+      verdict,
+      qaSkipped: qaSkippedInfra,
+      ...(this.phaseLimit ? { phaseLimit: this.phaseLimit } : {}),
       mode: hasStubs ? 'stub' : 'real',
-      stubbedEpics: pipelineResult.epicsStubbed || [],
-      ...(hasStubs
-        ? {
-            warning:
-              'Pipeline ran one or more epics in STUB mode — no real work was performed for those. This is not a successful build (see epic: orchestration-consolidation).',
-          }
-        : {}),
+      stubbedEpics: stubbedList,
+      ...(warning ? { warning } : {}),
       duration: `${minutes}m ${seconds}s`,
       durationMs: duration,
       techStack: TechStackDetector.getSummary(this.executionState.techStackProfile || {}),
