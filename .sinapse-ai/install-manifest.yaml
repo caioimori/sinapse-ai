@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:ceb2b6a63b5d668ddd336a83a1e3f995b613b9993d6370b2ea67e9cbf2079b42
+    hash: sha256:666eb309525f13b5ecdff1bfc659f73b7f74cd1a6898a27d2ef6d0f448e0f830
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
@@ -1632,9 +1632,9 @@ files:
     type: script
     size: 18933
   - path: development/scripts/agent-exit-hooks.js
-    hash: sha256:e5b809fa700dad287341c318ef44b945dc24261445eba4bd20f97ac4e21b9480
+    hash: sha256:57f1b68f92ae39c75843e19d9e2d8427e6afa2957cbfd2b71055b9273ea24e9a
     type: script
-    size: 3216
+    size: 3813
   - path: development/scripts/apply-inline-greeting-all-agents.js
     hash: sha256:e58ad5d52b329d335ee73245352ae545df19c8122e23f34750a6a75996ca9dc6
     type: script
@@ -4144,9 +4144,9 @@ files:
     type: template
     size: 3692
   - path: product/templates/ide-rules/claude-rules.md
-    hash: sha256:177065ef2e5b59e31211bb2ff879b590e6dfe84bc70af5ced96dd7695ec44d0a
+    hash: sha256:ca54301ac49f4c49cc2a1552469f131f7d2593946e8b04757578f231d06ba3dd
     type: template
-    size: 5122
+    size: 5343
   - path: product/templates/ide-rules/codex-rules.md
     hash: sha256:f2ba69b86236271970537e4284edbc819379337fed8fd2c8ff2c9a1ffa1b9bbf
     type: template
