@@ -11,6 +11,9 @@ const fs = require('fs');
 const os = require('os');
 const { execSync, spawnSync } = require('child_process');
 const { emitDeprecationWarning } = require('./utils/deprecation-warning');
+// Story onda2-p6 — shared, TTY-detection used by `init` to fall back to the
+// wizard's quiet/default path in non-interactive shells (see shouldRunInitQuiet below).
+const { detectInteractiveMode } = require('./lib/detection');
 
 // Story A.2 — unified logger. Levels: error/warn/info/debug.
 // Flags: --verbose, --debug, --quiet, --json. Default level: warn.
@@ -941,6 +944,26 @@ Examples:
 `);
 }
 
+/**
+ * Resolve whether `sinapse init` should run the wizard in quiet/default mode.
+ *
+ * Story onda2-p6 (bug found in S4): `install` already avoids crashing in a
+ * non-interactive shell because bin/commands/install.js passes `quiet: true`
+ * unconditionally to the wizard (language/LLM are resolved upstream via its
+ * own TTY-safe prompts). `init` had no such fallback — it called the wizard
+ * with no `quiet` flag at all, so a CI runner, piped stdin, or an AI agent
+ * invoking `npx sinapse-ai init` hit the wizard's language+LLM
+ * `inquirer.prompt()` and crashed with `ERR_USE_AFTER_CLOSE`. This mirrors
+ * install's fallback: no TTY -> quiet mode -> wizard uses its own defaults
+ * (pt + claude-code, see packages/installer/src/wizard/index.js).
+ *
+ * @param {boolean} [interactive] - Defaults to the real TTY/env/argv detection.
+ * @returns {boolean} true when the wizard should skip prompts and use defaults
+ */
+function shouldRunInitQuiet(interactive = detectInteractiveMode()) {
+  return !interactive;
+}
+
 async function initProject() {
   // 1. Parse ALL args after 'init'
   const initArgs = args.slice(1);
@@ -1033,6 +1056,9 @@ async function initProject() {
     template,
     skipInstall,
     force: isForce,
+    // Story onda2-p6 — fall back to quiet/default mode without a TTY (see
+    // shouldRunInitQuiet doc comment above for the crash this prevents).
+    quiet: shouldRunInitQuiet(),
   });
 }
 
@@ -1664,4 +1690,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { nodeSatisfies };
+module.exports = { nodeSatisfies, shouldRunInitQuiet };
