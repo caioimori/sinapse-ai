@@ -1192,9 +1192,9 @@ files:
     type: core
     size: 1014
   - path: core/synapse/context/context-tracker.js
-    hash: sha256:e9e893d45ea19bdfd68016ec9b4b00e0f9bf3d6133184d4d8a4fe75009e56a00
+    hash: sha256:5a62d37742dcf359d43caf9da3fae807d5356a3ab673dbbded9ded2eb8d3c3b9
     type: core
-    size: 10239
+    size: 14291
   - path: core/synapse/context/index.js
     hash: sha256:f0a1fe4d0215bc7089edac490604fc4a4007e1c9a446164deef231fbf6925cd0
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:4e1e7733a854d6f6309af0cadb4ad1248223a672797213a02c428b3819034225
+    hash: sha256:ceb2b6a63b5d668ddd336a83a1e3f995b613b9993d6370b2ea67e9cbf2079b42
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
@@ -4248,9 +4248,9 @@ files:
     type: template
     size: 18478
   - path: product/templates/statusline/statusline-script.js
-    hash: sha256:d9488a080a26c46e6fc48d649c6316f44041276583399e90b9446bbc804fed88
+    hash: sha256:5741f4de84bba45ab72ae9203c99cca5891be7d1081e8da74a8610d0a23b945c
     type: template
-    size: 8957
+    size: 9200
   - path: product/templates/statusline/track-agent-clear.cjs
     hash: sha256:3cda606de2463374e60440ba6cae9ca98e39b782b19c6ae39aa7569a1b211f09
     type: template

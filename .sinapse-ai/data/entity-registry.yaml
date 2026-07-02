@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T22:41:00.676Z'
+  lastUpdated: '2026-07-02T22:59:44.807Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -12805,8 +12805,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:e9e893d45ea19bdfd68016ec9b4b00e0f9bf3d6133184d4d8a4fe75009e56a00
-      lastVerified: '2026-07-02T19:52:02.662Z'
+      checksum: sha256:5a62d37742dcf359d43caf9da3fae807d5356a3ab673dbbded9ded2eb8d3c3b9
+      lastVerified: '2026-07-02T22:59:44.725Z'
     semantic-handshake-engine:
       path: .sinapse-ai/core/synapse/context/semantic-handshake-engine.js
       layer: L1
