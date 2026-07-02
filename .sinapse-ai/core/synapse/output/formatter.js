@@ -378,44 +378,65 @@ function formatSummary(results, _metrics) {
 // Token Budget Enforcement
 // ---------------------------------------------------------------------------
 
+/** Sections that are never removed by budget truncation. */
+const PROTECTED_SECTIONS = new Set(['CONTEXT_BRACKET', 'CONSTITUTION', 'AGENT']);
+
+/** Truncation priority: removed first when over budget. */
+const TRUNCATION_ORDER = [
+  'SUMMARY',
+  'KEYWORD',
+  'MEMORY_HINTS',
+  'SQUAD',
+  'STAR_COMMANDS',
+  'DEVMODE',
+  'TASK',
+  'WORKFLOW',
+];
+
 /**
  * Enforce a token budget by removing sections from the end.
  *
  * Truncation order (last removed first): SUMMARY, KEYWORD, SQUAD,
  * STAR_COMMANDS, TASK, WORKFLOW. CONSTITUTION and AGENT are never removed.
  *
+ * Story onda1-s2 (audit AF-20260702 item 1.6): the result is now a
+ * STRUCTURED object — overflow is signaled, never silent. When the
+ * PROTECTED sections alone exceed the budget, `overBudget` is true and
+ * formatSynapseRules() renders a visible [BUDGET OVERFLOW] warning; the
+ * engine also persists the signal in hook metrics.
+ *
  * @param {string[]} sections - Ordered section strings
  * @param {string[]} sectionIds - Corresponding section identifiers
  * @param {number} tokenBudget - Max tokens allowed
- * @returns {string[]} Filtered sections within budget
+ * @returns {{
+ *   sections: string[],
+ *   sectionIds: string[],
+ *   totalTokens: number,
+ *   tokenBudget: number,
+ *   overBudget: boolean,
+ *   removed: string[]
+ * }} Filtered sections + structured budget signal
  */
 function enforceTokenBudget(sections, sectionIds, tokenBudget) {
-  if (!tokenBudget || tokenBudget <= 0) {
-    return sections;
-  }
-
-  // Sections that should never be removed
-  const PROTECTED = new Set(['CONTEXT_BRACKET', 'CONSTITUTION', 'AGENT']);
-
-  // Truncation priority: remove from end first
-  const TRUNCATION_ORDER = [
-    'SUMMARY',
-    'KEYWORD',
-    'MEMORY_HINTS',
-    'SQUAD',
-    'STAR_COMMANDS',
-    'DEVMODE',
-    'TASK',
-    'WORKFLOW',
-  ];
-
   const result = [...sections];
   const ids = [...sectionIds];
+  const removed = [];
+
+  if (!tokenBudget || tokenBudget <= 0) {
+    return {
+      sections: result,
+      sectionIds: ids,
+      totalTokens: estimateTokens(result.join('\n\n')),
+      tokenBudget: 0,
+      overBudget: false,
+      removed,
+    };
+  }
 
   let totalTokens = estimateTokens(result.join('\n\n'));
 
   if (totalTokens <= tokenBudget) {
-    return result;
+    return { sections: result, sectionIds: ids, totalTokens, tokenBudget, overBudget: false, removed };
   }
 
   // Remove sections in truncation order
@@ -425,14 +446,22 @@ function enforceTokenBudget(sections, sectionIds, tokenBudget) {
     }
 
     const idx = ids.indexOf(sectionToRemove);
-    if (idx !== -1 && !PROTECTED.has(sectionToRemove)) {
+    if (idx !== -1 && !PROTECTED_SECTIONS.has(sectionToRemove)) {
       result.splice(idx, 1);
       ids.splice(idx, 1);
+      removed.push(sectionToRemove);
       totalTokens = estimateTokens(result.join('\n\n'));
     }
   }
 
-  return result;
+  return {
+    sections: result,
+    sectionIds: ids,
+    totalTokens,
+    tokenBudget,
+    overBudget: totalTokens > tokenBudget,
+    removed,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -544,8 +573,19 @@ function formatSynapseRules(results, bracket, contextPercent, session, devmode, 
     sectionIds.push('SUMMARY');
   }
 
-  // Token budget enforcement
-  const finalSections = enforceTokenBudget(sections, sectionIds, tokenBudget);
+  // Token budget enforcement (structured — Story onda1-s2)
+  const budgetResult = enforceTokenBudget(sections, sectionIds, tokenBudget);
+  const finalSections = [...budgetResult.sections];
+
+  // Budget overflow signal: when the PROTECTED sections alone exceed the
+  // bracket budget, say so IN the output — never silently over-deliver.
+  if (budgetResult.overBudget) {
+    finalSections.push(
+      '[BUDGET OVERFLOW]\n'
+      + `  WARN: emitted ~${budgetResult.totalTokens} tokens > budget ${budgetResult.tokenBudget} (${bracket}). `
+      + 'Protected sections (Constitution/Agent) alone exceed this bracket\'s token budget.',
+    );
+  }
 
   // Wrap in <synapse-rules> tags
   const body = finalSections.join('\n\n');

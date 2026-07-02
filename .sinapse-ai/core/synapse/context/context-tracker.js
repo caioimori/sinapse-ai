@@ -24,25 +24,44 @@ const path = require('path');
  * - DEPLETED: 25-40% remaining (reinforcement injection)
  * - CRITICAL: 0-25% remaining (warning + handoff prep)
  *
+ * Token budgets recalibrated by Story onda1-s2 (audit AF-20260702 item 1.6)
+ * to the REAL floors of the context-diet regime, measured 2026-07-02 with
+ * the real formatter against the real .synapse/constitution (96 rules):
+ *
+ * - Turn 1 (prompt_count=0 → always FRESH at ~100%): the FULL Constitution
+ *   is PROTECTED and measures 7,226 chars ≈ 1,807 tokens (section alone);
+ *   whole <synapse-rules> block ≈ 7,324 chars ≈ 1,831 tokens. FRESH=2000
+ *   covers this floor with headroom for CONTEXT rules / AGENT section.
+ *   (The old FRESH=800 was structurally unreachable — 2.3x over, silent.)
+ * - Turns 2+ (constitution emitted as reminder ≤ 1,000 chars ≈ ≤ 250
+ *   tokens): the PROTECTED floor drops to ~200-300 tokens. MODERATE /
+ *   DEPLETED / CRITICAL can only occur on turns 2+ (bracket is derived
+ *   from prompt_count), so they are sized for reminder + AGENT rules
+ *   (+ memory hints at DEPLETED+, + handoff warning at CRITICAL).
+ *
+ * Overflow is now SIGNALED (never silent) — see formatter.enforceTokenBudget()
+ * and the [BUDGET OVERFLOW] output marker + metrics.budget in engine.js.
+ *
  * @type {Object.<string, {min: number, max: number, tokenBudget: number}>}
  */
 const BRACKETS = {
-  FRESH:    { min: 60, max: 100, tokenBudget: 800 },
-  MODERATE: { min: 40, max: 60,  tokenBudget: 1500 },
-  DEPLETED: { min: 25, max: 40,  tokenBudget: 2000 },
-  CRITICAL: { min: 0,  max: 25,  tokenBudget: 2500 },
+  FRESH:    { min: 60, max: 100, tokenBudget: 2000 },
+  MODERATE: { min: 40, max: 60,  tokenBudget: 800 },
+  DEPLETED: { min: 25, max: 40,  tokenBudget: 1000 },
+  CRITICAL: { min: 0,  max: 25,  tokenBudget: 1200 },
 };
 
 /**
  * Token budget constants per bracket (shorthand access).
+ * Values mirror BRACKETS — see the measurement basis documented above.
  *
  * @type {Object.<string, number>}
  */
 const TOKEN_BUDGETS = {
-  FRESH: 800,
-  MODERATE: 1500,
-  DEPLETED: 2000,
-  CRITICAL: 2500,
+  FRESH: 2000,
+  MODERATE: 800,
+  DEPLETED: 1000,
+  CRITICAL: 1200,
 };
 
 /**

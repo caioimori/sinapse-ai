@@ -82,18 +82,25 @@ describe('LAYER_TO_SECTION', () => {
 // =============================================================================
 
 describe('enforceTokenBudget', () => {
+  // Story onda1-s2: enforceTokenBudget returns a STRUCTURED result
+  // ({ sections, sectionIds, totalTokens, tokenBudget, overBudget, removed })
+  // so overflow is signaled instead of silently swallowed.
   test('should return all sections when within budget', () => {
     const sections = ['short', 'text'];
     const ids = ['CONSTITUTION', 'AGENT'];
     const result = enforceTokenBudget(sections, ids, 1000);
-    expect(result).toEqual(sections);
+    expect(result.sections).toEqual(sections);
+    expect(result.sectionIds).toEqual(ids);
+    expect(result.overBudget).toBe(false);
+    expect(result.removed).toEqual([]);
   });
 
   test('should return all sections when no budget set', () => {
     const sections = ['a'.repeat(10000)];
     const ids = ['CONSTITUTION'];
     const result = enforceTokenBudget(sections, ids, 0);
-    expect(result).toEqual(sections);
+    expect(result.sections).toEqual(sections);
+    expect(result.overBudget).toBe(false);
   });
 
   test('should remove SUMMARY first when over budget', () => {
@@ -102,7 +109,8 @@ describe('enforceTokenBudget', () => {
     // Budget of 5 tokens → way too small for all sections
     const result = enforceTokenBudget(sections, ids, 5);
     // SUMMARY should be removed first
-    expect(result.length).toBeLessThan(sections.length);
+    expect(result.sections.length).toBeLessThan(sections.length);
+    expect(result.removed).toContain('SUMMARY');
   });
 
   test('should never remove CONTEXT_BRACKET', () => {
@@ -110,33 +118,51 @@ describe('enforceTokenBudget', () => {
     const ids = ['CONTEXT_BRACKET', 'SUMMARY'];
     const result = enforceTokenBudget(sections, ids, 1);
     // Even at tiny budget, CONTEXT_BRACKET should remain
-    const resultIds = ids.filter((_, i) => result.includes(sections[i]));
-    expect(result).toContain('bracket');
+    expect(result.sections).toContain('bracket');
   });
 
   test('should never remove CONSTITUTION', () => {
     const sections = ['constitution', 'keyword', 'summary'];
     const ids = ['CONSTITUTION', 'KEYWORD', 'SUMMARY'];
     const result = enforceTokenBudget(sections, ids, 5);
-    expect(result).toContain('constitution');
+    expect(result.sections).toContain('constitution');
   });
 
   test('should never remove AGENT', () => {
     const sections = ['agent', 'squad', 'summary'];
     const ids = ['AGENT', 'SQUAD', 'SUMMARY'];
     const result = enforceTokenBudget(sections, ids, 3);
-    expect(result).toContain('agent');
+    expect(result.sections).toContain('agent');
   });
 
   test('should remove sections in truncation order', () => {
-    const long = 'x'.repeat(200);
     const sections = ['c', 'a', 'w', 't', 's', 'k', 'sc', 'd', 'sum'];
     const ids = ['CONSTITUTION', 'AGENT', 'WORKFLOW', 'TASK', 'SQUAD', 'KEYWORD', 'STAR_COMMANDS', 'DEVMODE', 'SUMMARY'];
     // Budget that forces removal of several sections
     const result = enforceTokenBudget(sections, ids, 5);
     // Protected sections should survive
-    expect(result).toContain('c');  // CONSTITUTION
-    expect(result).toContain('a');  // AGENT
+    expect(result.sections).toContain('c');  // CONSTITUTION
+    expect(result.sections).toContain('a');  // AGENT
+  });
+
+  test('should flag overBudget when protected sections alone exceed the budget', () => {
+    const sections = ['x'.repeat(4000), 'y'.repeat(400), 'summary'];
+    const ids = ['CONSTITUTION', 'AGENT', 'SUMMARY'];
+    const result = enforceTokenBudget(sections, ids, 100);
+    // Only truncatable section (SUMMARY) is removed, still over budget
+    expect(result.removed).toEqual(['SUMMARY']);
+    expect(result.overBudget).toBe(true);
+    expect(result.totalTokens).toBeGreaterThan(100);
+    expect(result.tokenBudget).toBe(100);
+  });
+
+  test('should NOT flag overBudget when truncation brings output under budget', () => {
+    const sections = ['tiny', 'y'.repeat(4000)];
+    const ids = ['CONSTITUTION', 'SUMMARY'];
+    const result = enforceTokenBudget(sections, ids, 50);
+    expect(result.removed).toEqual(['SUMMARY']);
+    expect(result.overBudget).toBe(false);
+    expect(result.totalTokens).toBeLessThanOrEqual(50);
   });
 });
 
@@ -416,6 +442,25 @@ describe('formatSynapseRules', () => {
       const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 10, false);
       // Output should still be valid XML (wrapped)
       expect(xml).toContain('<synapse-rules>');
+    });
+
+    // Story onda1-s2 (AC4/AC5-e): overflow is signaled IN the output — never silent
+    test('should render [BUDGET OVERFLOW] warning when protected content exceeds the budget', () => {
+      const results = [
+        makeResult('constitution', ['R'.repeat(4000)]),
+      ];
+      // Constitution (PROTECTED) alone is ~1000 tokens > budget 100
+      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 100, false);
+      expect(xml).toContain('[BUDGET OVERFLOW]');
+      expect(xml).toContain('WARN:');
+      expect(xml).toContain('budget 100');
+      expect(xml).toContain('(FRESH)');
+    });
+
+    test('should NOT render [BUDGET OVERFLOW] when output fits the budget', () => {
+      const results = [makeResult('constitution', ['Rule 1'])];
+      const xml = formatSynapseRules(results, 'FRESH', 85, defaultSession, false, defaultMetrics, 2000, false);
+      expect(xml).not.toContain('[BUDGET OVERFLOW]');
     });
   });
 
