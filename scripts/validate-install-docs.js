@@ -13,9 +13,11 @@
  *   npx sinapse-ai install
  *   npx sinapse-ai update
  *   npx sinapse-ai uninstall
+ *   npx sinapse-ai agents
+ *   npx sinapse-ai ideate
  *
  * Non-canonical patterns the guard rejects in public docs:
- *   - `sinapse install|update|uninstall`  (missing the `-ai` suffix)
+ *   - `sinapse install|update|uninstall|agents|ideate`  (missing the `-ai` suffix)
  *   - `sinapse-minimal`                    (internal/legacy binary)
  *   - `sinapse-graph`                      (internal/legacy binary)
  *   - `install-squads.sh`                  (internal script, must not be exposed)
@@ -70,6 +72,19 @@ const FORBIDDEN_PATTERNS = [
     reason: 'Use `npx sinapse-ai uninstall` (the `sinapse uninstall` form is deprecated).',
   },
   {
+    // Onda1-S1 (audit AF-20260702 item 1.2) — `agents`/`ideate` are owned by
+    // bin/cli.js (the `sinapse-ai` binary); same canonical-prefix rule as
+    // install/update/uninstall above.
+    id: 'legacy-sinapse-agents',
+    regex: /\bsinapse\s+agents\b/,
+    reason: 'Use `npx sinapse-ai agents` (the `sinapse agents` form is not the canonical public entry point).',
+  },
+  {
+    id: 'legacy-sinapse-ideate',
+    regex: /\bsinapse\s+ideate\b/,
+    reason: 'Use `npx sinapse-ai ideate` (the `sinapse ideate` form is not the canonical public entry point).',
+  },
+  {
     id: 'sinapse-minimal-binary',
     regex: /\bsinapse-minimal\b/,
     reason: '`sinapse-minimal` is internal/deprecated. Use `npx sinapse-ai install`.',
@@ -113,8 +128,12 @@ const PUBLIC_DOC_DIRS = ['docs/installation'];
 
 /**
  * Additional top-level public doc files (relative to root).
+ *
+ * Onda1-S1 (audit AF-20260702 item 1.2) — the EN/PT user guides teach the
+ * Quick Start commands (including `agents`/`ideate`) and are exactly where
+ * the drift was found; bring them under the same guard as README.
  */
-const PUBLIC_DOC_FILES = ['README.md'];
+const PUBLIC_DOC_FILES = ['README.md', 'docs/guides/user-guide.md', 'docs/pt/guides/user-guide.md'];
 
 /**
  * Path fragments that identify historical / release notes. Any file whose
@@ -317,6 +336,8 @@ function formatReport(result) {
   lines.push('  npx sinapse-ai install');
   lines.push('  npx sinapse-ai update');
   lines.push('  npx sinapse-ai uninstall');
+  lines.push('  npx sinapse-ai agents');
+  lines.push('  npx sinapse-ai ideate');
   lines.push('');
   lines.push('Wrap developer-only mentions in an `### Internal (developer-only)` section to opt them out.');
   lines.push('');

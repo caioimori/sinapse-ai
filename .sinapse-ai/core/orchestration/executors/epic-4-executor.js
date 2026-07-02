@@ -36,7 +36,12 @@ class Epic4Executor extends EpicExecutor {
   _getPlanTracker() {
     if (!this._planTracker) {
       try {
-        const PlanTracker = require('../../infrastructure/scripts/plan-tracker');
+        // Path fix (audit AF-20260702 item 1.11): from executors/ this is 3
+        // levels up to .sinapse-ai/, not 2 — the old path resolved to the
+        // nonexistent core/infrastructure/. module.exports is an object, so
+        // the destructure is required too (a bare require(...) would have
+        // made `new PlanTracker(...)` explode on the exports object itself).
+        const { PlanTracker } = require('../../../infrastructure/scripts/plan-tracker');
         this._planTracker = PlanTracker;
       } catch (error) {
         this._log(`PlanTracker not available: ${error.message}`, 'warn');

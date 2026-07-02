@@ -112,6 +112,8 @@ USAGE:
   sinapse validate                    # Validate installation integrity
   sinapse info                        # Show system info
   sinapse doctor                      # Run diagnostics
+  sinapse agents list                 # List all framework agents (roster)
+  sinapse ideate                      # Run self-improvement analyzers (IdeationEngine)
   sinapse telemetry status            # Show telemetry state (disabled by default)
   sinapse telemetry enable            # Opt in to anonymized telemetry
   sinapse telemetry disable           # Opt out of telemetry
@@ -836,6 +838,20 @@ async function runUninstall(options = {}) {
     logger.always(`  ✓ Cleaned ${gitignoreResult.lines} SINAPSE entries from .gitignore`);
   }
 
+  // UNINSTALL-GIT-HOOKS (audit AF-20260702 item 1.3) — reset git core.hooksPath
+  // so future commits don't point at the just-removed .sinapse-ai/git-hooks
+  // dir. Reuses the exact helper bin/commands/uninstall.js already ships
+  // (parity fix) instead of duplicating the logic here.
+  const { removeGitHooksConfig } = require('./commands/uninstall');
+  const hooksResult = await removeGitHooksConfig(cwd);
+  if (!quiet) {
+    if (hooksResult.unset) {
+      logger.always('  ✓ Reset git core.hooksPath (was SINAPSE-managed)');
+    } else if (hooksResult.value) {
+      logger.always('  - git core.hooksPath kept (custom, not SINAPSE-managed)');
+    }
+  }
+
   // Summary
   if (!quiet) {
     logger.always('\n✅ SINAPSE has been uninstalled.');
@@ -1515,6 +1531,19 @@ async function main() {
         logger.error(`❌ Atlas command error: ${error.message}`);
         process.exit(1);
       }
+      break; // unreachable (process.exit above) — satisfies no-fallthrough
+    }
+
+    case 'agents':
+    case 'ideate': {
+      // `agents`/`ideate` are owned by bin/cli.js (SCHEMA-001 agent roster +
+      // IdeationEngine). Without this, an unknown command here fell through to
+      // launchSinapse and was silently passed as a raw prompt to Claude Code —
+      // same bug class the `ids:*` delegation below already fixes, so it's
+      // fixed the same way (spawnSync into the module that really owns it).
+      const cliBin = path.join(__dirname, 'cli.js');
+      const result = spawnSync(process.execPath, [cliBin, ...args], { stdio: 'inherit' });
+      process.exit(result.status === null ? 1 : result.status);
       break; // unreachable (process.exit above) — satisfies no-fallthrough
     }
 
