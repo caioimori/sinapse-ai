@@ -6,10 +6,13 @@
  * per bracket for the SynapseEngine orchestrator.
  *
  * Reads model context window from core-config.yaml → models.registry.
+ * Also exposes shouldCompact() — a dual-trigger (percent + absolute)
+ * compaction signal, independent of the bracket ladder above.
  *
  * @module core/synapse/context/context-tracker
- * @version 1.1.0
+ * @version 1.2.0
  * @created Story SYN-3 - Context Bracket Tracker
+ * @updated Story onda2-p4 - dual-trigger compaction signal (audit AF-20260702 item 2.12)
  */
 
 const fs = require('fs');
@@ -72,8 +75,21 @@ const TOKEN_BUDGETS = {
 const XML_SAFETY_MULTIPLIER = 1.2;
 
 /**
- * Default configuration values.
- * maxContext is the fallback when core-config.yaml is unavailable.
+ * Default configuration values — the FALLBACK only.
+ *
+ * The EFFECTIVE maxContext is derived from
+ * `models.registry[models.active].contextWindow` in core-config.yaml via
+ * getModelConfig() below (reused as-is by estimateContextPercent() and
+ * shouldCompact() — one read path, no duplication/cycle). These DEFAULTS
+ * apply only when the config file, the `models` section, or the active
+ * registry entry is missing/invalid.
+ *
+ * As of Story onda2-p4 (audit AF-20260702 item 2.12), that fallback path is
+ * still what REAL `npx sinapse-ai install` outputs hit: the shipped
+ * core-config.yaml template has no `models` section, so installed projects
+ * fall back to 200000 even when the user's actual model has a 1M window.
+ * Adding that section to the install template is a separate, deliberate
+ * decision (P8/DEC-01) — intentionally not part of this story.
  */
 const DEFAULTS = Object.freeze({
   avgTokensPerPrompt: 1500,
@@ -226,6 +242,75 @@ function estimateContextPercent(promptCount, options = {}) {
 }
 
 /**
+ * Absolute ceiling (tokens) of live conversation history before compaction
+ * is recommended — independent of window size.
+ *
+ * Story onda2-p4 (audit AF-20260702 item 2.12): a pure percentage trigger
+ * does not scale to 1M-token windows — 60% of a 1M window is 600,000
+ * tokens of live history, far past the point where instruction coherence
+ * degrades ("context amnesia", see .claude/rules/token-economy.md §1,
+ * measured/calibrated for the 200K window). This constant is the midpoint
+ * of the 150-180K range the audit recommended as the interim absolute cap
+ * while the 1M-window trigger itself remains pending real measurement.
+ *
+ * @type {number}
+ */
+const COMPACTION_ABSOLUTE_CEILING = 165000;
+
+/**
+ * Percentage of the active context window used before compaction is
+ * recommended — mirrors token-economy.md §1 ("Auto-compact: 60%").
+ *
+ * @type {number}
+ */
+const COMPACTION_PERCENT_TRIGGER = 0.6;
+
+/**
+ * Determine whether compaction is recommended right now.
+ *
+ * DUAL trigger (Story onda2-p4 / audit item 2.12): fires at whichever
+ * comes first — COMPACTION_PERCENT_TRIGGER (60%) of the active context
+ * window, or the absolute COMPACTION_ABSOLUTE_CEILING (~165K tokens of
+ * live history). Reads maxContext/avgTokensPerPrompt from getModelConfig()
+ * — the SAME registry-aware source estimateContextPercent() uses, no
+ * duplicate read path — overridable via options for testing.
+ *
+ * Equivalence at today's real windows: real installs fall back to the 200K
+ * DEFAULTS (see DEFAULTS above), where 60% of 200K is 120,000 tokens —
+ * always smaller than the 165K ceiling. The percent trigger always wins
+ * there, so behavior is IDENTICAL to the pre-existing 60%-of-window rule
+ * (zero regression). Above ~275K (COMPACTION_ABSOLUTE_CEILING /
+ * COMPACTION_PERCENT_TRIGGER) — e.g. the 1M registry entries — the
+ * absolute ceiling wins and compaction is recommended far earlier than a
+ * naive 60%-of-window rule would allow.
+ *
+ * @param {number} promptCount - Number of prompts in the current session
+ * @param {Object} [options={}] - Configuration options (override config values, mirrors estimateContextPercent)
+ * @param {number} [options.avgTokensPerPrompt] - Average tokens per prompt
+ * @param {number} [options.maxContext] - Maximum context window size in tokens
+ * @returns {boolean} True when compaction is recommended now
+ */
+function shouldCompact(promptCount, options = {}) {
+  const modelConfig = getModelConfig();
+  const {
+    avgTokensPerPrompt = modelConfig.avgTokensPerPrompt,
+    maxContext = modelConfig.maxContext,
+  } = options;
+
+  if (typeof promptCount !== 'number' || isNaN(promptCount) || promptCount < 0) {
+    return false;
+  }
+
+  if (maxContext <= 0) {
+    return true;
+  }
+
+  const usedTokens = promptCount * avgTokensPerPrompt * XML_SAFETY_MULTIPLIER;
+  const triggerTokens = Math.min(maxContext * COMPACTION_PERCENT_TRIGGER, COMPACTION_ABSOLUTE_CEILING);
+  return usedTokens >= triggerTokens;
+}
+
+/**
  * Get the maximum token budget for injection at the given bracket.
  *
  * @param {string} bracket - Bracket name ('FRESH' | 'MODERATE' | 'DEPLETED' | 'CRITICAL')
@@ -299,6 +384,7 @@ function resetModelConfigCache(basePath = null) {
 module.exports = {
   calculateBracket,
   estimateContextPercent,
+  shouldCompact,
   getTokenBudget,
   getActiveLayers,
   needsHandoffWarning,
@@ -309,5 +395,7 @@ module.exports = {
   TOKEN_BUDGETS,
   DEFAULTS,
   XML_SAFETY_MULTIPLIER,
+  COMPACTION_ABSOLUTE_CEILING,
+  COMPACTION_PERCENT_TRIGGER,
 };
 

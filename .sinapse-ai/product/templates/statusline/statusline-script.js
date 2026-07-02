@@ -39,7 +39,6 @@ function buildStatusLine(data) {
   const white = '\x1b[37m';
   const orange = '\x1b[38;5;208m';
   const boldBlue = `${bold}${blue}`;
-  const boldRed = `${bold}${red}`;
 
   const parts = [];
 
@@ -121,9 +120,12 @@ function buildStatusLine(data) {
     parts.push(`${white}\ud83d\udd22 ${msgCount}${reset}`);
   }
 
-  // 10. Alert >200k
+  // 10. Long-context boundary marker (>200k) \u2014 informational, not an error.
+  // Crossing 200k enters long-context/pricing territory for 1M-window
+  // models; expected behavior on large windows, not a danger signal.
+  // Re-signified by Story onda2-p4 (audit AF-20260702 item 2.12).
   if (data.exceeds_200k_tokens) {
-    parts.push(`${boldRed}\u26a0 >200k!${reset}`);
+    parts.push(`${cyan}\u2139 >200k long-context${reset}`);
   }
 
   return parts.join(' | ');
