@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T21:09:14.179Z'
+  lastUpdated: '2026-07-02T21:50:25.859Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -8554,8 +8554,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:8db1cd79a9b3abbbf666162405bc59b8bf1e81c523d7a2709434d91118f1d5e0
-      lastVerified: '2026-06-27T21:56:17.284Z'
+      checksum: sha256:12c9c4a90ab702decc9d3f35082bd45d10068810a269f8f3bd75b96c3663de50
+      lastVerified: '2026-07-02T21:50:25.756Z'
     flows:
       path: .sinapse-ai/core/atlas/flows.js
       layer: L1
@@ -8573,8 +8573,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:099392b58b9a8e2dfadb7e108949f19420acfde472406a94bd9c21e356615cab
-      lastVerified: '2026-06-27T21:56:17.284Z'
+      checksum: sha256:4bcb80b2eca132bd524ab3a2f0bcc02b61ab236ba7b679f8977cad9118d9ad6d
+      lastVerified: '2026-07-02T21:50:25.756Z'
     index:
       path: .sinapse-ai/core/atlas/index.js
       layer: L1
@@ -8634,8 +8634,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:6d379f52785f81a697ed7e7e4a673564492f58fd79ef9a915e22331a3fdde23a
-      lastVerified: '2026-06-27T21:56:17.285Z'
+      checksum: sha256:d47961e50745e31af483fc126fbb3fc3ec60e498ee2f086982b4af388c5257aa
+      lastVerified: '2026-07-02T21:50:25.756Z'
     render-research-card:
       path: .sinapse-ai/core/atlas/render-research-card.js
       layer: L1

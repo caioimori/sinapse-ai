@@ -200,13 +200,13 @@ files:
     type: core
     size: 11444
   - path: core/atlas/flows-pt.js
-    hash: sha256:8db1cd79a9b3abbbf666162405bc59b8bf1e81c523d7a2709434d91118f1d5e0
+    hash: sha256:12c9c4a90ab702decc9d3f35082bd45d10068810a269f8f3bd75b96c3663de50
     type: core
-    size: 11499
+    size: 11886
   - path: core/atlas/flows.js
-    hash: sha256:099392b58b9a8e2dfadb7e108949f19420acfde472406a94bd9c21e356615cab
+    hash: sha256:4bcb80b2eca132bd524ab3a2f0bcc02b61ab236ba7b679f8977cad9118d9ad6d
     type: core
-    size: 11033
+    size: 11485
   - path: core/atlas/index.js
     hash: sha256:ea1e47887854cf348cf29c99c6e5d6218d4e6e709db14a6caa0b289303200363
     type: core
@@ -216,9 +216,9 @@ files:
     type: core
     size: 11656
   - path: core/atlas/render-markdown.js
-    hash: sha256:6d379f52785f81a697ed7e7e4a673564492f58fd79ef9a915e22331a3fdde23a
+    hash: sha256:d47961e50745e31af483fc126fbb3fc3ec60e498ee2f086982b4af388c5257aa
     type: core
-    size: 12076
+    size: 12650
   - path: core/atlas/render-research-card.js
     hash: sha256:86086e58ea6e3f4a19229f7c755cb4072a8582e8de70e5610c58ea578276204e
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:59f6d47ce4b468c1390667833acc055e883ff88e641b21de2ebe7603d63f099c
+    hash: sha256:ede95e34835ca199968498a29a20f98aa09c1f96bb2c800c30362e6f242ccaa9
     type: data
     size: 549433
   - path: data/learned-patterns.yaml
