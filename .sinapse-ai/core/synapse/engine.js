@@ -25,6 +25,7 @@ const {
 const { buildLayerContext } = require('./context/context-builder');
 
 const { formatSynapseRules } = require('./output/formatter');
+const { estimateTokens } = require('./utils/tokens');
 const { MemoryBridge } = require('./memory/memory-bridge');
 
 // ---------------------------------------------------------------------------
@@ -383,9 +384,6 @@ class SynapseEngine {
     metrics.totalEnd = process.hrtime.bigint();
     const summary = metrics.getSummary();
 
-    // Persist hook metrics (fire-and-forget)
-    this._persistHookMetrics(summary, bracket, mergedConfig);
-
     // 4. Format output
     const xml = formatSynapseRules(
       results,
@@ -397,6 +395,21 @@ class SynapseEngine {
       tokenBudget,
       needsHandoffWarning(bracket),
     );
+
+    // Story onda1-s2: honest budget accounting — measure the EMITTED block
+    // against the bracket budget and expose it in metrics (never silent;
+    // the formatter also renders a [BUDGET OVERFLOW] marker in the output).
+    const emittedTokens = estimateTokens(xml);
+    summary.budget = {
+      bracket,
+      tokenBudget: typeof tokenBudget === 'number' && tokenBudget > 0 ? tokenBudget : null,
+      emittedTokens,
+      overBudget: typeof tokenBudget === 'number' && tokenBudget > 0 && emittedTokens > tokenBudget,
+    };
+
+    // Persist hook metrics (fire-and-forget) — after budget accounting so
+    // the persisted system log carries the overflow signal
+    this._persistHookMetrics(summary, bracket, mergedConfig);
 
     return { xml, metrics: summary, bracket };
   }
@@ -427,6 +440,8 @@ class SynapseEngine {
         layersSkipped: summary.layers_skipped,
         layersErrored: summary.layers_errored,
         totalRules: summary.total_rules,
+        // Story onda1-s2: budget overflow signal persisted in the system log
+        budget: summary.budget || null,
         perLayer: {},
         timestamp: new Date().toISOString(),
       };

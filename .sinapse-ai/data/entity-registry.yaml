@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T18:42:55.766Z'
+  lastUpdated: '2026-07-02T19:52:02.789Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -12805,8 +12805,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c9dae4f2e046590d48d2e03be894f437ff0257eb1a487cec3c4ebe773d33b1dc
-      lastVerified: '2026-06-15T00:26:26.420Z'
+      checksum: sha256:e9e893d45ea19bdfd68016ec9b4b00e0f9bf3d6133184d4d8a4fe75009e56a00
+      lastVerified: '2026-07-02T19:52:02.662Z'
     semantic-handshake-engine:
       path: .sinapse-ai/core/synapse/context/semantic-handshake-engine.js
       layer: L1
@@ -13148,8 +13148,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:0d042647a67f8f46073207627a582c6c24b5713f02beb0e86af6f231cc33c5eb
-      lastVerified: '2026-06-15T00:26:26.424Z'
+      checksum: sha256:fed18380663e3f18178b46d7e5ea8ce58214b9f8727d618475aeaf80e916fff4
+      lastVerified: '2026-07-02T19:52:02.665Z'
     l1-global:
       path: .sinapse-ai/core/synapse/layers/l1-global.js
       layer: L1
@@ -13385,8 +13385,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:73f96ff72cffed6d100afdceddf1371b0bd5909bd9e4f358df49f24eb58b0e36
-      lastVerified: '2026-06-15T00:26:26.426Z'
+      checksum: sha256:4f5217b2cc301c8ad0e0f371fc40a185a99a97d651b30c42435661d9c6ed19f4
+      lastVerified: '2026-07-02T19:52:02.667Z'
     generate-constitution:
       path: .sinapse-ai/core/synapse/scripts/generate-constitution.js
       layer: L1

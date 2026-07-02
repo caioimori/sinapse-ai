@@ -296,6 +296,31 @@ describe('SynapseEngine', () => {
     });
   });
 
+  describe('process() — budget accounting (Story onda1-s2)', () => {
+    test('should expose metrics.budget with emitted tokens vs bracket budget', async () => {
+      formatter.formatSynapseRules.mockReturnValueOnce('<synapse-rules>\nok\n</synapse-rules>');
+      const result = await engine.process('test', { prompt_count: 1 });
+
+      expect(result.metrics.budget).toBeDefined();
+      expect(result.metrics.budget.bracket).toBe('FRESH');
+      expect(result.metrics.budget.tokenBudget).toBe(800); // mocked getTokenBudget
+      expect(result.metrics.budget.emittedTokens).toBeGreaterThan(0);
+      expect(result.metrics.budget.overBudget).toBe(false);
+    });
+
+    test('should flag overBudget=true when emitted output exceeds the bracket budget', async () => {
+      // 4000 chars ≈ 1000 tokens > mocked budget of 100 — signal, never silent
+      formatter.formatSynapseRules.mockReturnValueOnce('X'.repeat(4000));
+      contextTracker.getTokenBudget.mockReturnValue(100);
+
+      const result = await engine.process('test', { prompt_count: 1 });
+
+      expect(result.metrics.budget.overBudget).toBe(true);
+      expect(result.metrics.budget.emittedTokens).toBeGreaterThan(100);
+      expect(result.metrics.budget.tokenBudget).toBe(100);
+    });
+  });
+
   describe('process() — fallback and edge cases', () => {
     test('should return empty xml when no results', async () => {
       // Make all layers return null

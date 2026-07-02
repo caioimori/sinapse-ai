@@ -1192,9 +1192,9 @@ files:
     type: core
     size: 1014
   - path: core/synapse/context/context-tracker.js
-    hash: sha256:c9dae4f2e046590d48d2e03be894f437ff0257eb1a487cec3c4ebe773d33b1dc
+    hash: sha256:e9e893d45ea19bdfd68016ec9b4b00e0f9bf3d6133184d4d8a4fe75009e56a00
     type: core
-    size: 9037
+    size: 10239
   - path: core/synapse/context/index.js
     hash: sha256:f0a1fe4d0215bc7089edac490604fc4a4007e1c9a446164deef231fbf6925cd0
     type: core
@@ -1260,13 +1260,13 @@ files:
     type: core
     size: 8123
   - path: core/synapse/engine.js
-    hash: sha256:04395397b60a8b7a30ac1677633b277077e94ed1250f3709e0c54f821deadef1
+    hash: sha256:fc4dd6d5af3c25efae53ac635f0174eef665906fca9ea4ea11c008cada44821d
     type: core
-    size: 15479
+    size: 16278
   - path: core/synapse/layers/l0-constitution.js
-    hash: sha256:0d042647a67f8f46073207627a582c6c24b5713f02beb0e86af6f231cc33c5eb
+    hash: sha256:fed18380663e3f18178b46d7e5ea8ce58214b9f8727d618475aeaf80e916fff4
     type: core
-    size: 2384
+    size: 9839
   - path: core/synapse/layers/l1-global.js
     hash: sha256:ca35159bc42405750f1555884c92bf903885f0bf0a7e95469418f7a2f0e8c680
     type: core
@@ -1308,9 +1308,9 @@ files:
     type: core
     size: 5533
   - path: core/synapse/output/formatter.js
-    hash: sha256:73f96ff72cffed6d100afdceddf1371b0bd5909bd9e4f358df49f24eb58b0e36
+    hash: sha256:4f5217b2cc301c8ad0e0f371fc40a185a99a97d651b30c42435661d9c6ed19f4
     type: core
-    size: 16419
+    size: 17924
   - path: core/synapse/runtime/hook-runtime.js
     hash: sha256:e8a41f68ae0cabd38f5527e86eeaceeb044df8200a8987bba922e5ca9c981699
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:9463f1fad01156b1f542da4cf40bc5c2d2a4e82b3df3ab823c1cb85e01d11bf8
+    hash: sha256:e1a8aa1dbf0eea987bb62078f0f49fb33412a75428d2bb03a19c92c0bbc5befd
     type: data
     size: 549433
   - path: data/learned-patterns.yaml

@@ -183,20 +183,23 @@ describe('estimateContextPercent', () => {
 // =============================================================================
 
 describe('getTokenBudget', () => {
-  test('should return 800 for FRESH', () => {
-    expect(getTokenBudget('FRESH')).toBe(800);
+  // Story onda1-s2: budgets recalibrated to the measured floors of the
+  // context-diet regime (turn 1 full Constitution ≈ 1,853 tokens → FRESH;
+  // turns 2+ reminder ≈ 217 tokens → MODERATE/DEPLETED/CRITICAL).
+  test('should return 2000 for FRESH (covers measured turn-1 floor ~1,853 tokens)', () => {
+    expect(getTokenBudget('FRESH')).toBe(2000);
   });
 
-  test('should return 1500 for MODERATE', () => {
-    expect(getTokenBudget('MODERATE')).toBe(1500);
+  test('should return 800 for MODERATE', () => {
+    expect(getTokenBudget('MODERATE')).toBe(800);
   });
 
-  test('should return 2000 for DEPLETED', () => {
-    expect(getTokenBudget('DEPLETED')).toBe(2000);
+  test('should return 1000 for DEPLETED', () => {
+    expect(getTokenBudget('DEPLETED')).toBe(1000);
   });
 
-  test('should return 2500 for CRITICAL', () => {
-    expect(getTokenBudget('CRITICAL')).toBe(2500);
+  test('should return 1200 for CRITICAL', () => {
+    expect(getTokenBudget('CRITICAL')).toBe(1200);
   });
 
   test('should return null for invalid bracket', () => {
@@ -337,11 +340,13 @@ describe('BRACKETS constant', () => {
     }
   });
 
-  test('should match DESIGN doc thresholds exactly', () => {
-    expect(BRACKETS.FRESH).toEqual({ min: 60, max: 100, tokenBudget: 800 });
-    expect(BRACKETS.MODERATE).toEqual({ min: 40, max: 60, tokenBudget: 1500 });
-    expect(BRACKETS.DEPLETED).toEqual({ min: 25, max: 40, tokenBudget: 2000 });
-    expect(BRACKETS.CRITICAL).toEqual({ min: 0, max: 25, tokenBudget: 2500 });
+  test('should match DESIGN doc thresholds + onda1-s2 recalibrated budgets exactly', () => {
+    // Thresholds (min/max) unchanged; budgets recalibrated by Story onda1-s2
+    // to the measured PROTECTED floors of the context-diet regime.
+    expect(BRACKETS.FRESH).toEqual({ min: 60, max: 100, tokenBudget: 2000 });
+    expect(BRACKETS.MODERATE).toEqual({ min: 40, max: 60, tokenBudget: 800 });
+    expect(BRACKETS.DEPLETED).toEqual({ min: 25, max: 40, tokenBudget: 1000 });
+    expect(BRACKETS.CRITICAL).toEqual({ min: 0, max: 25, tokenBudget: 1200 });
   });
 });
 
