@@ -192,9 +192,9 @@ files:
     type: cli
     size: 5908
   - path: core-config.yaml
-    hash: sha256:74bb1d9c7ced33f1242ff6199bc385c2aa5543694a1bd544b64a5ab89775019c
+    hash: sha256:3ab9c9a61ed541123178c1a13ea35dd12549de8fd5812ed2266a9ab77bfad5b4
     type: config
-    size: 12918
+    size: 13160
   - path: core/atlas/atlas-data.js
     hash: sha256:ab6ef91bd2de1498dbe3892a80b5f18d67624db1fb2da74b0e53f83de902f383
     type: core
