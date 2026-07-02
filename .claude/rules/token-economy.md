@@ -14,7 +14,7 @@
 | Manual `/compact` | Troca de agente; pós-leitura de arquivo grande |
 | Pre-agent-switch | Handoff artifact (~379 tok) via `agent-handoff.md` |
 
-60%: acima disso perde coerência sobre instruções iniciais ("context amnesia").
+60%: acima disso perde coerência sobre instruções iniciais ("context amnesia"). Medido/calibrado pra janela **200K**; pra janela **1M** (`models.registry`) o gatilho equivalente está **pendente de medição** — não fixar número novo sem medir primeiro (compactar cedo demais destrói contexto útil).
 
 ---
 
@@ -22,7 +22,7 @@
 
 **Regra zero:** Execute direto sempre que der. Sub-agente custa ~20K mínimo.
 
-**Opus 4.7:** Effort default `xhigh`. `thinking_budget` fixo NÃO suportado — adaptive.
+**Modelo frontier atual (família Opus/Fable):** Effort default `xhigh`.
 
 | Task | Modelo | Effort |
 |---|---|---|
@@ -38,7 +38,7 @@
 
 ---
 
-## 3. Subagent Threshold (Opus 4.7)
+## 3. Subagent Threshold (frontier atual)
 
 Spawn APENAS se: `>= 8 tool calls` previstos OU fan-out paralelo real. Abaixo → inline.
 
@@ -55,7 +55,6 @@ Spawn APENAS se: `>= 8 tool calls` previstos OU fan-out paralelo real. Abaixo �
 | Sub-agente pra task <8 tool calls | Inline |
 | Sequential reads independentes | Paralelo (uma mensagem, N calls) |
 | Cole payload bruto no raciocínio | Extrai só relevante |
-| `thinking_budget` fixo em 4.7 | Adaptive — não suportado |
 | Preamble ("Claro!", "Vou te ajudar...") | Ação direta |
 | Trailing summary ("Em resumo...") | Só próximo passo, 1 linha |
 | Narração de plano | Executa em paralelo |
@@ -121,7 +120,9 @@ Default: tabela ou bullet.
 
 ---
 
-## 8. Budget de Contexto (200K)
+## 8. Budget de Contexto — por janela
+
+### Janela 200K (medido)
 
 | Alocação | Target | % |
 |---|---:|---:|
@@ -132,6 +133,10 @@ Default: tabela ou bullet.
 | Safety buffer (compacta 60%) | ~40K | 20% |
 
 Working memory >80K = sinal pra compactar.
+
+### Janela 1M
+
+A mesma distribuição percentual escalaria proporcionalmente (ex.: working memory ~≤400K), mas o gatilho de compactação em si para a janela 1M está **pendente de medição** (ver §1) — não tratar os valores escalados como threshold validado antes de medir.
 
 ---
 
