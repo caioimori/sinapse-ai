@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-06-30T18:30:20.315Z'
+  lastUpdated: '2026-07-02T18:42:55.766Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -224,6 +224,7 @@ entities:
       usedBy:
         - cli
         - install
+        - sinapse
       dependencies:
         - constants
         - header
@@ -648,6 +649,7 @@ entities:
       dependencies:
         - deprecation-warning
         - index
+        - uninstall
         - chrome-brain-installer
         - cli
         - component-generator
@@ -665,8 +667,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ca7b8f7826c1f482b49064b80527e826d69f3c4d8a9057a55f4670c66828efb2
-      lastVerified: '2026-06-27T21:56:17.123Z'
+      checksum: sha256:0abc4586deabb5234fc0378d2f4413b046f5b103ec3a67f66d2247d34a22e526
+      lastVerified: '2026-07-02T18:42:55.524Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
@@ -9774,8 +9776,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f594984b52186fc65547130df0ec7041ff36eb6ae6ad4216a0c35dc2bd369331
-      lastVerified: '2026-06-15T00:26:26.378Z'
+      checksum: sha256:69a333609763a5745db9e4c29168ae448ae3bcf65c2907606d21565f02958a66
+      lastVerified: '2026-07-02T18:42:55.631Z'
     build-orchestrator:
       path: .sinapse-ai/core/execution/build-orchestrator.js
       layer: L1
@@ -9801,8 +9803,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:ac8adfb8d5ef580641430735a7f351cf96d6bfe8608e8e45b92106ee0d412cb7
-      lastVerified: '2026-06-30T18:30:20.164Z'
+      checksum: sha256:6b1a213652493a7f453267d2f4f7937f5dac625cdfb95ca558747468922cb12f
+      lastVerified: '2026-07-02T18:42:55.632Z'
     build-state-manager:
       path: .sinapse-ai/core/execution/build-state-manager.js
       layer: L1
@@ -11950,13 +11952,10 @@ entities:
       path: .sinapse-ai/core/orchestration/executors/epic-4-executor.js
       layer: L1
       type: module
-      purpose: 'Generated: ${new Date().toISOString()}'
+      purpose: Entity at .sinapse-ai\core\orchestration\executors\epic-4-executor.js
       keywords:
         - epic
         - executor
-        - 'generated:'
-        - ${new
-        - date().toisostring()}
       usedBy: []
       dependencies:
         - epic-executor
@@ -11970,8 +11969,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:31d038e4c6603749f61f75284aa626f871864c072aa9ec220a1798d125bbc62c
-      lastVerified: '2026-06-30T18:30:20.191Z'
+      checksum: sha256:085c23f0265e4163ec66468d029b260cad64d5ed6a6be6a6c670bbdda58b4042
+      lastVerified: '2026-07-02T18:42:55.654Z'
     epic-5-executor:
       path: .sinapse-ai/core/orchestration/executors/epic-5-executor.js
       layer: L1
@@ -12127,8 +12126,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:20187d7a36b06b3ad8667a51f0fe9b2e4c506c7c26f26f37d79ab397618442a1
-      lastVerified: '2026-06-16T06:09:14.797Z'
+      checksum: sha256:ef93435d1d13378a9d469ac8671de919e0918268471d818806899bd36d31c0ad
+      lastVerified: '2026-07-02T18:42:55.656Z'
     message-formatter:
       path: .sinapse-ai/core/orchestration/message-formatter.js
       layer: L1

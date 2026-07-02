@@ -535,8 +535,11 @@ class AutonomousBuildLoop extends EventEmitter {
       });
     }
 
-    // Default: simulate execution (for testing)
-    this.log(`Executing subtask ${subtask.id} (iteration ${iteration})`, 'info');
+    // Honesty invariant (epic: orchestration-consolidation, audit AF-20260702
+    // item 1.12) — no executor wired means no real work happened. Do NOT
+    // fabricate success; report a stub so callers never mistake "nothing ran"
+    // for real work (mirrors the same fix already applied to agent-invoker.js).
+    this.log(`No executor wired for subtask ${subtask.id} (iteration ${iteration}) — returning stub`, 'warn');
 
     // Check for verification command
     if (subtask.verification && this.config.verificationEnabled) {
@@ -550,8 +553,11 @@ class AutonomousBuildLoop extends EventEmitter {
     }
 
     return {
-      success: true,
-      filesModified: subtask.files || [],
+      success: false,
+      status: 'stub',
+      stub: true,
+      error: 'No executor wired into AutonomousBuildLoop — subtask not actually executed.',
+      filesModified: [],
     };
   }
 

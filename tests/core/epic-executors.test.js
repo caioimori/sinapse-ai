@@ -221,6 +221,26 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(executor.epicNum).toBe(4);
     });
 
+    it('should resolve the real PlanTracker class, not null (audit AF-20260702 item 1.11)', () => {
+      // Regression: the require path used to resolve to the nonexistent
+      // core/infrastructure/ (2 levels up instead of 3), so PlanTracker was
+      // always null here — silent degradation. module.exports is an object,
+      // so the fix also had to destructure `{ PlanTracker }`, not just fix
+      // the path (a bare require would make `new PlanTracker(...)` explode).
+      const PlanTracker = executor._getPlanTracker();
+
+      expect(PlanTracker).not.toBeNull();
+      expect(typeof PlanTracker).toBe('function');
+      expect(
+        () =>
+          new PlanTracker({
+            storyId: 'TEST-001',
+            planPath: path.join(tempDir, 'plan', 'x.yaml'),
+            rootPath: tempDir,
+          }),
+      ).not.toThrow();
+    });
+
     it('should run in STUB mode and report it honestly (subtasks/tests not wired yet)', async () => {
       // Honesty invariant (epic: orchestration-consolidation, F0a):
       // Epic 4 does not yet invoke real agents — it MUST report status:'stub',
