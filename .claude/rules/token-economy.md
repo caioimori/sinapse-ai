@@ -16,6 +16,8 @@
 
 60%: acima disso perde coerência sobre instruções iniciais ("context amnesia"). Medido/calibrado pra janela **200K**; pra janela **1M** (`models.registry`) o gatilho equivalente está **pendente de medição** — não fixar número novo sem medir primeiro (compactar cedo demais destrói contexto útil).
 
+**Nota (onda2-p4):** o trigger executável em código (`context-tracker.js: shouldCompact`) já é dual — dispara no MENOR entre 60% da janela e um teto absoluto de ~165K tokens de histórico vivo (interino, ponto médio da faixa 150-180K do item 2.12). Em janela 200K o resultado é idêntico ao de sempre (120K < 165K, zero regressão); o valor absoluto segue sujeito a recalibração quando a medição da janela 1M citada acima acontecer.
+
 ---
 
 ## 2. Model Routing (MUST)
