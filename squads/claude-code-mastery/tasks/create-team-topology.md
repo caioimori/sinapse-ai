@@ -230,11 +230,11 @@ team_topology_result:
   agents:
     - name: "{agent-1}"
       file: ".claude/agents/{agent-1}.md"
-      model: "sonnet-4"
+      model: "sonnet"
       role: "{responsibility}"
     - name: "{agent-2}"
       file: ".claude/agents/{agent-2}.md"
-      model: "haiku-4"
+      model: "haiku"
       role: "{responsibility}"
   communication:
     strategy: "{file-based|worktree|branch}"

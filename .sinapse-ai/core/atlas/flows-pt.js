@@ -10,6 +10,12 @@
  * Drift guard: a test asserts every id in FRAMEWORK_FLOWS has an entry here, so
  * adding a flow without translating it fails CI.
  *
+ * Sync note (AF-20260702 item 2.10, CONFIRMED): the 'model-routing' entry's
+ * tiers/efforts must stay consistent with `.claude/rules/token-economy.md` §2
+ * and flows.js/render-markdown.js — verified in sync as of that audit, hand-kept
+ * (no automated cross-check). Recommendation (deferred, Article XI sign-off):
+ * single `.sinapse-ai/data/*.yaml` source for all 3 renderers.
+ *
  * @module core/atlas/flows-pt
  */
 

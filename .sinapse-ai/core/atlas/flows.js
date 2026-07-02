@@ -11,6 +11,13 @@
  * is easy to extend. Mermaid is hand-written and kept simple (plain node labels,
  * no reserved chars) so it renders everywhere.
  *
+ * Sync note (AF-20260702 item 2.10, CONFIRMED): the 'model-routing' flow's
+ * tiers/efforts must stay consistent with `.claude/rules/token-economy.md` §2
+ * and render-markdown.js's modelRouting() table — verified in sync as of that
+ * audit, but hand-kept (no automated cross-check). Recommendation (deferred,
+ * Article XI sign-off): single `.sinapse-ai/data/*.yaml` source for all 3
+ * renderers (this file, flows-pt.js, render-markdown.js).
+ *
  * @module core/atlas/flows
  */
 

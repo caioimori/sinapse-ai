@@ -130,7 +130,7 @@ Needs: {context1}, {context2}
 ---
 name: {agent-name}
 description: {one-line description}
-model: {opus-4|sonnet-4|haiku-4}
+model: {opus|sonnet|haiku}
 allowed-tools:
   - Read
   - Write
@@ -215,9 +215,9 @@ Return your analysis as:
 
 | Model | Cost | Speed | Best For |
 |-------|------|-------|----------|
-| **claude-opus-4** | High | Slow | Complex analysis, architecture decisions, nuanced writing |
-| **claude-sonnet-4** | Medium | Medium | Standard tasks, code review, implementation |
-| **claude-haiku-4** | Low | Fast | Simple lookups, formatting, repetitive tasks |
+| **opus** | High | Slow | Complex analysis, architecture decisions, nuanced writing |
+| **sonnet** | Medium | Medium | Standard tasks, code review, implementation |
+| **haiku** | Low | Fast | Simple lookups, formatting, repetitive tasks |
 
 ### Decision Matrix
 
@@ -261,7 +261,7 @@ agent_definition_result:
   file: ".claude/agents/{name}.md"
   name: "{agent-name}"
   type: "{general|explore|plan}"
-  model: "{opus-4|sonnet-4|haiku-4}"
+  model: "{opus|sonnet|haiku}"
   tools_allowed: [...]
   test_results:
     - prompt: "Test prompt 1"

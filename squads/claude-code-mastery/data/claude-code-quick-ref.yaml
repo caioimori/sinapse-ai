@@ -291,7 +291,7 @@ keyboard_shortcuts:
 # ---------------------------------------------------------------------------
 cli_flags:
   - flag: "--model"
-    description: "Override model (e.g., claude-sonnet-4-20250514)"
+    description: "Override model by family (e.g., opus, sonnet, haiku — or a specific dated snapshot id)"
   - flag: "--agent"
     description: "Load custom agent from .md file"
   - flag: "--resume"

@@ -116,7 +116,7 @@ The fundamental agent loop is deliberately minimal (~20 lines). The 512,000 line
 
 - `MAX_INSTRUCTION_FILE_CHARS`: 4,000 characters per file
 - `MAX_TOTAL_INSTRUCTION_CHARS`: 12,000 characters total
-- `FRONTIER_MODEL_NAME`: "Opus 4.6"
+- `FRONTIER_MODEL_NAME`: current frontier model (Opus/Fable family — value rotates per release, see `.claude/rules/token-economy.md`)
 
 ### Cache Optimization Strategy
 
@@ -323,7 +323,7 @@ Managed > CLI flags > Local > Project > User > Defaults
 
 Evaluation: deny > ask > allow (first match wins).
 
-Auto mode: Requires Sonnet 4.6+, Team/Enterprise. Separate classifier reviews each action. Broad rules (`Bash(*)`) discarded; narrow rules (`Bash(npm test)`) kept.
+Auto mode: Requires a current-generation Sonnet (or newer), Team/Enterprise. Separate classifier reviews each action. Broad rules (`Bash(*)`) discarded; narrow rules (`Bash(npm test)`) kept.
 
 ---
 
@@ -665,7 +665,7 @@ Referenced 150+ times in source. Named after Ancient Greek "at the right time."
 
 ### ULTRAPLAN -- Remote Planning
 
-- Offloads complex planning to Cloud Container Runtime running Opus 4.6
+- Offloads complex planning to Cloud Container Runtime running the current frontier model
 - 30-minute planning window
 - Polls every 3 seconds with "teleport sentinel" result retrieval
 - Browser UI for live monitoring (approve/reject plan)
@@ -688,7 +688,7 @@ Notable runtime flags (GrowthBook, `tengu_` prefix): `tengu_anti_distill_fake_to
 |----------|---------|
 | Tengu | Claude Code (project codename) |
 | Capybara | New model family (possibly Mythos) |
-| Fennec | Opus 4.6 |
+| Fennec | Current frontier model (Opus/Fable family) |
 | Numbat | Unreleased model |
 | Penguin Mode | Fast Mode |
 | Chicago | Computer Use |
