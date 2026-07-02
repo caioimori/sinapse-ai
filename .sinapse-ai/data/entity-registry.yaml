@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T20:43:29.092Z'
+  lastUpdated: '2026-07-02T21:09:14.179Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -667,8 +667,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:0abc4586deabb5234fc0378d2f4413b046f5b103ec3a67f66d2247d34a22e526
-      lastVerified: '2026-07-02T18:42:55.524Z'
+      checksum: sha256:81a0637873046101b601ba6641cbf6deec18855e3a7c940293988a7268af2f3e
+      lastVerified: '2026-07-02T21:09:13.957Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
