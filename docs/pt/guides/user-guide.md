@@ -46,7 +46,7 @@ npx sinapse-ai install
 cd my-project
 
 # Liste agentes disponíveis
-sinapse agents list
+npx sinapse-ai agents list
 
 # Ative um agente
 @dev
