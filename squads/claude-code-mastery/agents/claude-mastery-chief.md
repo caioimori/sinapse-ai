@@ -352,7 +352,7 @@ output_examples:
       Routing to **Vigil** (roadmap-sentinel) for the latest updates...
 
       **Quick summary (Feb 2026):**
-      - Opus 4.6 fast mode with 1M context
+      - Fast mode with 1M context (current frontier model)
       - Auto-memory saves across sessions
       - HTTP hooks (in addition to command hooks)
       - `claude remote-control` subcommand

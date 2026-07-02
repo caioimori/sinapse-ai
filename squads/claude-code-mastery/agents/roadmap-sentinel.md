@@ -264,10 +264,10 @@ persona:
       claude_code: "v2.1.63 (latest stable)"
       agent_sdk_python: "v2.0.x"
       agent_sdk_typescript: "v2.0.x"
-      model_default: "Claude Opus 4.6"
-      model_fast: "Claude Opus 4.6 (fast mode -- same model, faster inference)"
+      model_default: "current frontier model (Opus/Fable family — see .claude/rules/token-economy.md)"
+      model_fast: "current frontier model, fast mode (same model, faster inference)"
       context_window: "200K standard, 1M beta"
-      max_output_tokens: "128K (doubled from 64K with Opus 4.6)"
+      max_output_tokens: "128K (doubled from 64K in a recent frontier upgrade)"
 
     feature_maturity:
       description: "Technology Radar categorization of Claude Code features"
@@ -595,19 +595,19 @@ output_examples:
       | Metric | Current | Latest | Status |
       |--------|---------|--------|--------|
       | Version | v2.1.50 | v2.1.63 | UPGRADE AVAILABLE |
-      | Model | Opus 4.6 | Opus 4.6 | CURRENT |
+      | Model | current frontier tier | current frontier tier | CURRENT |
       | Context | 200K | 1M (beta) | AVAILABLE |
 
       **Changes since v2.1.50 (13 versions):**
 
       | Type | Count | Notable |
       |------|-------|---------|
-      | Breaking | 1 | Sonnet 4.6 replaces Sonnet 4.5 as default |
+      | Breaking | 1 | Default sonnet tier bumped to next generation |
       | Features | 8 | Auto-memory, fast mode, HTTP hooks |
       | Fixes | 12 | Various stability improvements |
 
       **Migration notes:**
-      - If you pinned `ANTHROPIC_DEFAULT_SONNET_MODEL`, update to `claude-sonnet-4-6`
+      - If you pinned `ANTHROPIC_DEFAULT_SONNET_MODEL`, update to the current sonnet snapshot id (see `.claude/rules/token-economy.md` for the active family)
       - Auto-memory enabled by default — review via `/memory` command
       - New: HTTP hooks available as alternative to command hooks
 
@@ -868,7 +868,7 @@ The SDK provides programmatic access to Claude Code capabilities:
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 options = ClaudeAgentOptions(
-    model="claude-opus-4-6",
+    model="claude-opus",  # family alias — pin a dated snapshot per Anthropic's model docs if you need reproducibility
     max_budget_usd=5.0,
     tools=["bash", "read", "edit", "write"],
 )
@@ -882,7 +882,7 @@ async for message in query("Implement the login feature", options):
 import { query, ClaudeAgentOptions } from 'claude-agent-sdk';
 
 const options: ClaudeAgentOptions = {
-  model: 'claude-opus-4-6',
+  model: 'claude-opus', // family alias — pin a dated snapshot per Anthropic's model docs if you need reproducibility
   maxBudgetUsd: 5.0,
   tools: ['bash', 'read', 'edit', 'write'],
 };
@@ -903,7 +903,7 @@ Run `*sdk-guide` for comprehensive SDK documentation.
 | `CLAUDE_CODE_DISABLE_FAST_MODE` | Disable fast mode | enabled |
 | `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | Auto-compaction trigger (1-100) | ~95 |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Max output tokens | 32000 |
-| `ANTHROPIC_MODEL` | Override default model | opus-4-6 |
+| `ANTHROPIC_MODEL` | Override default model | opus (or a dated snapshot id) |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Model for subagents | default |
 
 ### Common Pitfalls

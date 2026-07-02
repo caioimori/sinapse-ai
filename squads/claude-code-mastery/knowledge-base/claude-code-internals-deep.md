@@ -139,7 +139,7 @@ Phase 12: MainRuntime — full runtime initialization
 **Constants:**
 - `MAX_INSTRUCTION_FILE_CHARS`: 4,000 characters per file
 - `MAX_TOTAL_INSTRUCTION_CHARS`: 12,000 characters total
-- `FRONTIER_MODEL_NAME`: "Opus 4.6"
+- `FRONTIER_MODEL_NAME`: current frontier model (Opus/Fable family — value rotates per release, see `.claude/rules/token-economy.md`)
 
 ### CLAUDE.md Hierarchy (4 scopes)
 
@@ -250,7 +250,7 @@ Section in CLAUDE.md that controls what to preserve:
 | `default` | Read only | Sensitive work |
 | `acceptEdits` | Read + edit | Iteration with gate on commands |
 | `plan` | Read, plan, explore | Design before modifying |
-| `auto` | Everything (with classifier) | Long tasks, Team/Enterprise (requires Sonnet 4.6+) |
+| `auto` | Everything (with classifier) | Long tasks, Team/Enterprise (requires current-generation Sonnet+) |
 | `bypassPermissions` | Everything, no checks | VM testing environments only |
 | `dontAsk` | Pre-approved only | Policy-driven lockdown |
 
@@ -470,7 +470,7 @@ Referenced 150+ times in source. Named after Ancient Greek "at the right time."
 
 ### ULTRAPLAN — Remote Planning
 
-- Offloads complex planning to Cloud Container Runtime running Opus 4.6
+- Offloads complex planning to Cloud Container Runtime running the current frontier model
 - **30-minute planning window**
 - Polls every 3 seconds with "teleport sentinel" result retrieval
 - Browser UI for live monitoring (approve/reject plan)
@@ -493,7 +493,7 @@ Referenced 150+ times in source. Named after Ancient Greek "at the right time."
 |----------|---------|
 | Tengu | Claude Code project codename |
 | Capybara | New model family (possibly "Mythos") |
-| Fennec | Opus 4.6 |
+| Fennec | Current frontier model (Opus/Fable family) |
 | Numbat | Unreleased model |
 | Penguin Mode | Fast Mode |
 | Chicago | Computer Use |
