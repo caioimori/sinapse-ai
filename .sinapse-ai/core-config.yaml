@@ -398,11 +398,18 @@ boundary:
 # Consumed by .sinapse-ai/core/synapse/context/context-tracker.js (getModelConfig).
 # active selects which registry entry drives estimateContextPercent.
 models:
-  active: claude-opus-4-8
+  active: claude-fable-5
   registry:
+    claude-fable-5:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 2000
     claude-opus-4-8:
       contextWindow: 1000000
       avgTokensPerPrompt: 2000
+    claude-sonnet-5:
+      # conservative default — verify against official docs before relying on 1M
+      contextWindow: 200000
+      avgTokensPerPrompt: 1500
     claude-sonnet-4-6:
       contextWindow: 1000000
       avgTokensPerPrompt: 1500

@@ -2,19 +2,24 @@
  * Tests for SYNAPSE Context Bracket Tracker — model-aware config (v1.1.0)
  *
  * Proves:
- *  (a) With models.active = claude-opus-4-8, estimateContextPercent uses the
+ *  (a) With models.active = claude-fable-5 (1M window, same shape as the prior
+ *      claude-opus-4-8 entry it replaced), estimateContextPercent uses the
  *      REAL 1M context window (not the legacy 200k default), so the same input
  *      reports a HIGHER % remaining (less depletion) than the old 200k math.
  *  (b) Graceful fallback to DEFAULTS (200k) when the models block / config file
  *      is absent — zero regression vs the pre-port pure-arithmetic behavior.
+ *  (c) The registry carries claude-fable-5 + claude-sonnet-5 and `active`
+ *      resolves to an existing entry (Story onda1-s3 — Fable 5 era registry).
  *
  * @module tests/synapse/context-tracker-model-aware
  * @story PORT #16a + #16b — context-tracker model-aware + models: in core-config
+ * @story onda1-s3 — registry na era Fable 5 (claude-fable-5 active, claude-sonnet-5 added)
  */
 
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const yaml = require('js-yaml');
 
 const {
   estimateContextPercent,
@@ -25,6 +30,12 @@ const {
 } = require('../../.sinapse-ai/core/synapse/context/context-tracker');
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
+
+/** Load and parse the real repo core-config.yaml (not a fixture). */
+function loadRealConfig() {
+  const configPath = path.join(REPO_ROOT, '.sinapse-ai', 'core-config.yaml');
+  return yaml.load(fs.readFileSync(configPath, 'utf8'));
+}
 
 /** Build a temp project root containing a .sinapse-ai/core-config.yaml. */
 function makeConfigRoot(yamlBody) {
@@ -41,10 +52,10 @@ afterEach(() => {
 });
 
 // =============================================================================
-// (a) Active model claude-opus-4-8 → 1M context window
+// (a) Active model claude-fable-5 → 1M context window
 // =============================================================================
 
-describe('model-aware: claude-opus-4-8 uses 1M context window', () => {
+describe('model-aware: claude-fable-5 (active) uses 1M context window', () => {
   beforeEach(() => resetModelConfigCache());
 
   test('getModelConfig reads the real repo core-config.yaml (1M / 2000)', () => {
@@ -79,6 +90,31 @@ describe('model-aware: claude-opus-4-8 uses 1M context window', () => {
     expect(at1M).toBeCloseTo(82, 5);
     // 200k: 100 - (100*1500*1.2/200000*100) = 100 - 90 = 10
     expect(at200k).toBeCloseTo(10, 5);
+  });
+});
+
+// =============================================================================
+// (c) Registry carries the Fable 5 era entries (Story onda1-s3)
+// =============================================================================
+
+describe('registry: Fable 5 era — active + sonnet-5 entry present', () => {
+  test('active points to claude-fable-5, an existing registry entry', () => {
+    const config = loadRealConfig();
+    expect(config.models.active).toBe('claude-fable-5');
+    expect(config.models.registry).toHaveProperty(config.models.active);
+  });
+
+  test('claude-fable-5 entry has a 1M context window', () => {
+    const config = loadRealConfig();
+    expect(config.models.registry['claude-fable-5'].contextWindow).toBe(1000000);
+  });
+
+  test('claude-sonnet-5 entry is present with a positive finite context window', () => {
+    const config = loadRealConfig();
+    const sonnet5 = config.models.registry['claude-sonnet-5'];
+    expect(sonnet5).toBeDefined();
+    expect(Number.isFinite(sonnet5.contextWindow)).toBe(true);
+    expect(sonnet5.contextWindow).toBeGreaterThan(0);
   });
 });
 
