@@ -212,6 +212,8 @@ Orquestradores (sinapse-orqx e todos os *-orqx) NUNCA executam trabalho de domí
 
 **Gate:** Qualquer resposta de orquestrador que contenha trabalho de domínio direto sem delegação é uma violação constitucional.
 
+> **Enforcement (honesto):** o bloqueio determinístico deste artigo vale hoje no **caminho autônomo** (pipeline/motor `sinapse orchestrate`) — o `SubagentDispatcher` grava `SINAPSE_ACTIVE_AGENT` no ambiente de cada agente que ele spawna, e `enforce-delegation.cjs` bloqueia Write/Edit/Bash de um `*-orqx` fora da exceção de governança. No **chat interativo** (humano digitando `@algum-orqx` na mesma sessão) não existe esse sinal de agente ativo — a delegação é **instrução de prompt** (reforçada por injeção de contexto), não bloqueio de hook; o hook fica fail-open por design (ver comentário em `enforce-delegation.cjs`). O que É bloqueio determinístico em QUALQUER modo, porque não depende de identidade de agente: `enforce-story-gate.cjs`/`doc-first-gate.cjs` (Art. III), `secret-scanning.cjs` (Art. X), `enforce-git-push-authority.sh` (Art. IX), `enforce-framework-boundary.cjs` (quando `frameworkProtection: true`), `verify-packages.cjs`, `sql-governance.py`, `mind-clone-governance.py`.
+
 **Rule file:** `.claude/rules/mandatory-delegation.md`
 
 ---

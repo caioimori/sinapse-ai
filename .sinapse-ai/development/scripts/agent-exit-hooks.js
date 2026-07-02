@@ -1,14 +1,23 @@
 /**
  * Agent Exit Hooks - Workflow Context Persistence
  *
- * INTEGRATION NOTE: This module defines the hook system.
- * Actual integration requires modifications to the agent activation framework
- * (not in scope for this story - see Story 6.1.6 for full agent framework integration)
+ * INTEGRATION NOTE: This module defines the hook system but is NOT wired into
+ * any live agent activation path — `registerHook()` below has zero call sites
+ * anywhere in the codebase, so `onCommandComplete()` never runs today
+ * (verified by grep, audit AF-20260702 item 2.5). This replaces a stale
+ * "see Story 6.1.6" pointer — 6.1.6 is the Output Formatter story and has
+ * nothing to do with agent framework integration.
+ *
+ * Downstream effect: the `.sinapse/session-state.json` → `{ lastAgent }`
+ * field this module would have written is never populated. That is why
+ * `enforce-delegation.cjs` no longer reads it as a fallback signal (removed
+ * as dead code in the same audit pass) — a reader with no writer is theater,
+ * not a real fallback.
  *
  * Hook Signature:
  *   onCommandComplete(agent, command, result, context)
  *
- * Purpose:
+ * Purpose (aspirational — not currently invoked by any code path):
  * - Save workflow state when commands complete successfully
  * - Persist context (story_path, branch, epic) to session-state.json
  * - Enable workflow navigation on subsequent agent activation

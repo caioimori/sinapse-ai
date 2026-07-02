@@ -2,7 +2,7 @@
 
 ## Constitution
 
-Full doc: `.sinapse-ai/constitution.md`. Gates auto-block violations.
+Full doc: `.sinapse-ai/constitution.md`. Gates block on the autonomous path; interactive delegation is prompt-level (hook list: Art. VIII).
 
 | Art. | Principle | Severity |
 |------|-----------|----------|
