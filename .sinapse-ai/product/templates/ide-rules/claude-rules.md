@@ -11,7 +11,7 @@ SINAPSE is a meta-framework that orchestrates AI agents to handle complex develo
 <!-- SINAPSE-MANAGED-START: constitution -->
 ## Constitution
 
-O SINAPSE possui uma **Constitution formal** com principios inegociaveis e gates automaticos (`.sinapse-ai/constitution.md`):
+O SINAPSE possui uma **Constitution formal** com principios inegociaveis (`.sinapse-ai/constitution.md`). Gates automaticos bloqueiam violacoes no caminho autonomo (pipeline/motor); no chat interativo a delegacao (Art. VIII) e instrucao de prompt, nao bloqueio de hook — ver Art. VIII na Constitution para a lista exata do que e deterministico.
 
 | Artigo | Principio | Severidade |
 |--------|-----------|------------|

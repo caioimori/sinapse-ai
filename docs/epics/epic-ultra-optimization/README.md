@@ -24,7 +24,7 @@
 - **Frente A fechada:** veredito **HÍBRIDO** (medido, 30/06/2026) — o motor é um assistente confiável de **1 story** (spec + plano reais; QA com ressalva no Windows); orquestração autônoma **multi-story** foi medida e abandonada. PRs #307-#319 (inclui release v1.19.2).
 - **Re-baseline:** `audits/AF-20260702-fable5-upgrade.md` re-verificou **94 claims** dos documentos-lastro contra a main atual — **49 resolved · 28 changed · 14 open · 3 unverifiable**.
 - **Onda 1 executada:** PRs #321-#325 (15/15 itens).
-- **Onda 2 em execução:** P1 mergeada (PR #326); esta story (Onda2-P2) cobre os itens 2.1 e 2.4 do relatório (docs).
+- **Onda 2 em execução:** P1-P4 mergeadas (PR #326 e seguintes — itens 2.1, 2.2, 2.3, 2.4, 2.12 do relatório); esta story (Onda2-P5) cobre os itens 2.5 (Art. VIII escopado ao caminho real — Constitution + CLAUDE.md + template) e 2.17 (status executável dos 15 workflows — ver [`docs/framework/workflow-engine-status.md`](../../framework/workflow-engine-status.md)).
 - **Para continuar:** ler `audits/AF-20260702-fable5-upgrade.md` §3 e seguir os itens restantes da Onda 2/3 — as seções §2 e §6 abaixo são registro histórico (pré-re-baseline).
 
 ---

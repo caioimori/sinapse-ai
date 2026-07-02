@@ -2,7 +2,7 @@
 
 ## Constitution
 
-Full doc: `.sinapse-ai/constitution.md`. Gates auto-block violations.
+Full doc: `.sinapse-ai/constitution.md`. Gates auto-block violations on the autonomous pipeline path; interactive chat delegation (Art. VIII) is prompt-level instruction, not hook-enforced — see Constitution Art. VIII for the exact deterministic-hook list.
 
 | Art. | Principle | Severity |
 |------|-----------|----------|

@@ -13,21 +13,24 @@
  *
  * Fail-open: if the active agent is unknown, allow (Hook Design Principle #1).
  *
- * Active-agent signal (first match wins):
- *   1. process.env.SINAPSE_ACTIVE_AGENT — explicit signal set by the
- *      orchestration layer when it activates/spawns an agent. This is the
- *      reliable channel; the session-state file is a secondary fallback.
- *   2. .sinapse/session-state.json → { lastAgent } — written by the session
- *      lifecycle when available.
- *   Neither present → unknown agent → fail-open (allow).
+ * Active-agent signal: process.env.SINAPSE_ACTIVE_AGENT, set by the
+ * orchestration layer (SubagentDispatcher) in the env of every agent it
+ * spawns. This is the ONLY signal this hook reads today — see the note on
+ * getActiveAgent() below for why the old session-state.json fallback is gone.
+ * No signal present → unknown agent → fail-open (allow).
  *
- * NOTE (audit 2026-06-11, Article VIII): the AUTONOMOUS path now populates the
- * signal — the SubagentDispatcher sets SINAPSE_ACTIVE_AGENT in the env of every
- * agent it spawns, so this hook enforces correctly when the engine spawns an
- * orchestrator. The INTERACTIVE path (a human typing `@some-orqx` in chat) is
- * intentionally NOT wired here: enforcing it would block a solo operator's own
- * edits, so it stays opt-in (set SINAPSE_ACTIVE_AGENT yourself, or add a
- * prompt-parsing writer) rather than changing chat behavior by default.
+ * Scope, stated honestly (audit AF-20260702 item 2.5 — supersedes and
+ * replaces the 2026-06-11 note this used to carry): the AUTONOMOUS path
+ * (pipeline/motor `sinapse orchestrate`) is genuinely closed — the
+ * SubagentDispatcher sets SINAPSE_ACTIVE_AGENT for every agent it spawns, so
+ * this hook blocks a spawned orchestrator for real. The INTERACTIVE path (a
+ * human typing `@some-orqx` in the same chat session) has no process
+ * boundary to attach an env var to, so nothing sets SINAPSE_ACTIVE_AGENT
+ * there — delegation in that path is enforced as a prompt instruction
+ * (Constitution Art. VIII text + rules injection), not a deterministic gate.
+ * Inferring the active agent from the last Task/slash-command in interactive
+ * chat is a real option but is new engineering, not a bug fix — tracked as
+ * an Onda 3 candidate, intentionally not built as part of this fix.
  *
  * Exception: sinapse-orqx is allowed Write/Edit in .sinapse-ai/ paths
  *            (framework governance — operates above the story layer).
@@ -36,7 +39,6 @@
  */
 
 const fs = require('fs');
-const path = require('path');
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -72,29 +74,23 @@ function relativize(filePath, root) {
 }
 
 /**
- * Resolve the active agent id. Explicit env signal wins; session-state file is
- * the fallback. Returns the agent ID string or null if unknown (fail-open).
- * @param {string} root - Project root
+ * Resolve the active agent id from the explicit orchestration-layer signal.
+ * Returns the agent ID string, or null if unknown (fail-open).
+ *
+ * History (audit AF-20260702, item 2.5): this used to also fall back to
+ * reading `.sinapse/session-state.json` → { lastAgent }. That fallback was
+ * removed as verified dead code: its only writer — `onCommandComplete()` in
+ * `.sinapse-ai/development/scripts/agent-exit-hooks.js` — is gated behind
+ * `registerHook(agentFramework)`, which has zero call sites anywhere in the
+ * codebase (grep-verified). A reader with no writer is theater, not a real
+ * fallback. If a real writer is ever wired up, add the fallback back
+ * alongside it — don't resurrect a reader that nothing feeds.
+ *
  * @returns {string|null}
  */
-function getActiveAgent(root) {
-  // 1. Explicit, reliable signal from the orchestration layer.
+function getActiveAgent() {
   const envAgent = (process.env.SINAPSE_ACTIVE_AGENT || '').trim();
-  if (envAgent) return envAgent;
-
-  // 2. Session-state file fallback. Validate the resolved path stays within the
-  //    project (defense-in-depth against a manipulated root — P2-003).
-  const sessionStatePath = path.join(root, '.sinapse', 'session-state.json');
-  const resolvedRoot = path.resolve(root);
-  if (!path.resolve(sessionStatePath).startsWith(resolvedRoot)) {
-    return null;
-  }
-  try {
-    const state = JSON.parse(fs.readFileSync(sessionStatePath, 'utf8'));
-    return state.lastAgent || null;
-  } catch {
-    return null; // fail-open
-  }
+  return envAgent || null;
 }
 
 function isOrchestrator(agentId) {
@@ -125,7 +121,7 @@ function main() {
   }
 
   const root = projectRoot();
-  const agentId = getActiveAgent(root);
+  const agentId = getActiveAgent();
 
   // If no agent tracked or not an orchestrator, allow
   if (!agentId || !isOrchestrator(agentId)) {
