@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T19:52:02.789Z'
+  lastUpdated: '2026-07-02T20:43:29.092Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -6886,8 +6886,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:819588040a8a7e0e90f49115c2ed4474db06cf6bba190671da6a67b15a4b0b88
-      lastVerified: '2026-06-15T00:26:26.317Z'
+      checksum: sha256:177065ef2e5b59e31211bb2ff879b590e6dfe84bc70af5ced96dd7695ec44d0a
+      lastVerified: '2026-07-02T20:43:28.942Z'
     codex-rules:
       path: .sinapse-ai/product/templates/ide-rules/codex-rules.md
       layer: L2
@@ -9193,8 +9193,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c4f27ffffabcc2377833abf1e4374366b5e78aa2ee31e7c1ad7050743cea0068
-      lastVerified: '2026-06-30T18:30:20.158Z'
+      checksum: sha256:0080eb0ea5eeb092c69ba2500c246048ebe3af67cd8434d3534d2b55968a62c6
+      lastVerified: '2026-07-02T20:43:28.965Z'
     core-config:
       path: .sinapse-ai/core/doctor/checks/core-config.js
       layer: L1
@@ -14102,8 +14102,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:e236af23b35763597525328603d610caed502a0ecf4de6aa249852ed584eec80
-      lastVerified: '2026-06-30T18:30:20.227Z'
+      checksum: sha256:0ac5d15b04ca00119c8265516438672408d46b791c4c806f4c56a0accf572f62
+      lastVerified: '2026-07-02T20:43:29.013Z'
     sprint-lead:
       path: .sinapse-ai/development/agents/sprint-lead.md
       layer: L2
