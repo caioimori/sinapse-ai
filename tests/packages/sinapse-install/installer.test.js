@@ -35,6 +35,11 @@ jest.mock('ora', () => {
     info: jest.fn().mockReturnThis(),
   }));
 });
+jest.mock('../../../packages/sinapse-install/src/utils/atomic-write', () => ({
+  atomicWriteFileSync: jest.fn(),
+}));
+
+const { atomicWriteFileSync } = require('../../../packages/sinapse-install/src/utils/atomic-write');
 
 const { execa } = require('execa');
 const { select, confirm } = require('@clack/prompts');
@@ -223,7 +228,7 @@ describe('installer', () => {
 
       // Then
       expect(fs.ensureDir).toHaveBeenCalled();
-      expect(fs.writeFile).toHaveBeenCalledWith(
+      expect(atomicWriteFileSync).toHaveBeenCalledWith(
         expect.stringContaining('user-config.yaml'),
         expect.stringContaining('user_profile: bob'),
         'utf8',
@@ -239,7 +244,7 @@ describe('installer', () => {
       await createUserConfigDirect(profile, mockLogger, false);
 
       // Then
-      expect(fs.writeFile).toHaveBeenCalledWith(
+      expect(atomicWriteFileSync).toHaveBeenCalledWith(
         expect.stringContaining('user-config.yaml'),
         expect.stringContaining('user_profile: advanced'),
         'utf8',
@@ -255,7 +260,7 @@ describe('installer', () => {
 
       // Then
       expect(mockLogger.action).toHaveBeenCalled();
-      expect(fs.writeFile).not.toHaveBeenCalled();
+      expect(atomicWriteFileSync).not.toHaveBeenCalled();
     });
 
     it('should preserve existing config and update profile', async () => {
@@ -268,7 +273,7 @@ describe('installer', () => {
       await createUserConfigDirect(profile, mockLogger, false);
 
       // Then
-      const writeCall = fs.writeFile.mock.calls[0];
+      const writeCall = atomicWriteFileSync.mock.calls[0];
       expect(writeCall[1]).toContain('user_profile: advanced');
     });
   });

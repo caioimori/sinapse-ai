@@ -18,6 +18,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const { promisify } = require('util');
 const chalk = require('chalk');
+const { atomicWriteFileSync } = require('../lib/fs-utils');
 
 const execAsync = promisify(exec);
 
@@ -322,12 +323,8 @@ async function addMCPToConfig(mcpId, config, configPath) {
   // Add new MCP config
   mcpConfig.mcpServers[mcpId] = config;
 
-  // Write updated config
-  await fse.writeFile(
-    configPath,
-    JSON.stringify(mcpConfig, null, 2) + '\n',
-    'utf8',
-  );
+  // Write updated config — atomic (tmp+rename): .mcp.json must never be torn
+  atomicWriteFileSync(configPath, JSON.stringify(mcpConfig, null, 2) + '\n', 'utf8');
 }
 
 /**

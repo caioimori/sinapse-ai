@@ -14,6 +14,7 @@ const { emitDeprecationWarning } = require('./utils/deprecation-warning');
 // Story onda2-p6 — shared, TTY-detection used by `init` to fall back to the
 // wizard's quiet/default path in non-interactive shells (see shouldRunInitQuiet below).
 const { detectInteractiveMode } = require('./lib/detection');
+const { atomicWriteFileSync } = require('./lib/fs-utils');
 
 // Story A.2 — unified logger. Levels: error/warn/info/debug.
 // Flags: --verbose, --debug, --quiet, --json. Default level: warn.
@@ -506,7 +507,8 @@ function cleanGitignore(gitignorePath) {
   }
 
   if (removedLines > 0) {
-    fs.writeFileSync(gitignorePath, newLines.join('\n'));
+    // Atomic (tmp+rename): never leave a half-written .gitignore
+    atomicWriteFileSync(gitignorePath, newLines.join('\n'));
     return { removed: true, lines: removedLines };
   }
   return { removed: false };

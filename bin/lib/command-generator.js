@@ -11,7 +11,7 @@ const path = require('path');
 
 const { SINAPSE_HOME, CLAUDE_COMMANDS_DIR, ROOT } = require('./constants');
 const { extractAgentMeta } = require('./squads');
-const { toForwardSlash } = require('./fs-utils');
+const { toForwardSlash, atomicWriteFileSync } = require('./fs-utils');
 
 // Framework "core" agents (developer, architect, quality-gate, devops, …) live
 // OUTSIDE the squads/ tree, under .sinapse-ai/development/agents/*.md. `scripts/
@@ -239,7 +239,7 @@ function regenerateAgentCommands(deps = {}) {
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
-      fs.writeFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
+      atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
       writtenAgents.add(file);
     }
   }
@@ -254,7 +254,7 @@ function regenerateAgentCommands(deps = {}) {
         const meta = extractAgentMeta(path.join(masterAgentsDir, file));
         const squadPath = `${sinapseBase}/sinapse`;
         const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file);
-        fs.writeFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
+        atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
         writtenAgents.add(file);
       }
     }
@@ -274,7 +274,7 @@ function regenerateAgentCommands(deps = {}) {
     for (const [id, personaFile] of masterEntryPoints) {
       const personaPath = `${masterSquadPath}/agents/${personaFile}`;
       const stub = generateMasterStub(id, personaPath, masterSquadPath, squads);
-      fs.writeFileSync(path.join(commandsDir, `${id}.md`), stub);
+      atomicWriteFileSync(path.join(commandsDir, `${id}.md`), stub);
       writtenAgents.add(`${id}.md`);
     }
   }

@@ -12,6 +12,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execSync } = require('child_process');
+const { atomicWriteFileSync } = require('../lib/fs-utils');
 
 // ============================================================================
 // Constants
@@ -134,7 +135,8 @@ function readJson(filePath) {
 function writeJson(filePath, data) {
   const dir = path.dirname(filePath);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
+  // Atomic (tmp+rename): these are user config files (settings.json, .mcp.json)
+  atomicWriteFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
 }
 
 function mergeHooks(settingsPath, hookDefs) {
@@ -432,7 +434,7 @@ function createMinimalKB() {
   fs.mkdirSync(kbDir, { recursive: true });
   const kbPath = path.join(kbDir, 'chrome-brain.md');
   if (!fs.existsSync(kbPath)) {
-    fs.writeFileSync(kbPath, [
+    atomicWriteFileSync(kbPath, [
       '# Chrome Brain — Browser Automation Capability',
       '',
       '> Cross-squad capability for browser automation.',
@@ -462,7 +464,7 @@ function createMinimalKB() {
   // Create claude-in-chrome.md KB (Story 7.4.2)
   const cicKbPath = path.join(kbDir, 'claude-in-chrome.md');
   if (!fs.existsSync(cicKbPath)) {
-    fs.writeFileSync(cicKbPath, [
+    atomicWriteFileSync(cicKbPath, [
       '# claude-in-chrome — Chrome Extension for Visual Browser Interaction',
       '',
       '> Manual install required. This extension cannot be auto-installed via CLI.',

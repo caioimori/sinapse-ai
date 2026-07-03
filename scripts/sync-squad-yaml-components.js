@@ -33,6 +33,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../.sinapse-ai/core/synapse/utils/atomic-write');
 
 const ROOT = path.resolve(__dirname, '..');
 const SQUADS_DIR = path.join(ROOT, 'squads');
@@ -168,7 +169,7 @@ function processSquad(squadName) {
   }
   const block = buildComponentsBlock(agents);
   const newContent = content.trimEnd() + '\n' + block;
-  fs.writeFileSync(yamlPath, newContent, 'utf8');
+  atomicWriteSync(yamlPath, newContent, 'utf8');
   return { squadName, status: 'updated', changes: agents.length };
 }
 

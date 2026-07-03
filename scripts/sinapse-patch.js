@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../.sinapse-ai/core/synapse/utils/atomic-write');
 const os = require('os');
 
 // ─────────────────────────────────────────────
@@ -228,7 +229,7 @@ if (dkyStart !== -1) {
 // ═══════════════════════════════════════════════════
 // SALVAR
 // ═══════════════════════════════════════════════════
-fs.writeFileSync(CLI_PATH, content, 'utf8');
+atomicWriteSync(CLI_PATH, content, 'utf8');
 
 console.log(`\n=== Patch aplicado com sucesso: ${changes} alteracoes ===`);
 console.log('');

@@ -19,6 +19,7 @@ const path = require('path');
 const os = require('os');
 const { execSync } = require('child_process');
 const { detectOS, OS_TYPE } = require('../os-detector');
+const { atomicWriteFileSync } = require('../utils/atomic-write');
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -339,7 +340,8 @@ function readJsonSafe(filePath) {
 function writeJson(filePath, data) {
   const dir = path.dirname(filePath);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
+  // Atomic (tmp+rename): these are user config files (settings.json, .mcp.json)
+  atomicWriteFileSync(filePath, JSON.stringify(data, null, 2) + '\n', 'utf8');
 }
 
 /**
@@ -755,7 +757,7 @@ function installChromeBrain(options = {}) {
         if (dryRun) {
           LOG.info(`[DRY-RUN] Would create ${filePath}`);
         } else {
-          fs.writeFileSync(filePath, content, 'utf8');
+          atomicWriteFileSync(filePath, content, 'utf8');
           // Make executable on Unix
           if (osInfo.type !== OS_TYPE.WINDOWS) {
             fs.chmodSync(filePath, 0o755);
@@ -848,7 +850,7 @@ function installChromeBrain(options = {}) {
           LOG.info(`[DRY-RUN] Would create ${file.label}`);
         } else {
           fs.mkdirSync(path.dirname(file.path), { recursive: true });
-          fs.writeFileSync(file.path, file.content, 'utf8');
+          atomicWriteFileSync(file.path, file.content, 'utf8');
           LOG.ok(file.label);
         }
       } catch (err) {

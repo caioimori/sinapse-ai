@@ -38,9 +38,13 @@ jest.mock('ora', () => {
     info: jest.fn().mockReturnThis(),
   }));
 });
+jest.mock('../../../packages/sinapse-install/src/utils/atomic-write', () => ({
+  atomicWriteFileSync: jest.fn(),
+}));
 
 const fs = require('fs-extra');
 const { execa, execaSync } = require('execa');
+const { atomicWriteFileSync } = require('../../../packages/sinapse-install/src/utils/atomic-write');
 
 const {
   InstallLogger,
@@ -239,7 +243,7 @@ describe('Edge Cases - Task 7.7', () => {
       permissionError.code = 'EPERM';
       fs.ensureDir.mockResolvedValue();
       fs.pathExists.mockResolvedValue(false);
-      fs.writeFile.mockRejectedValue(permissionError);
+      atomicWriteFileSync.mockImplementation(() => { throw permissionError; });
 
       const mockLogger = {
         action: jest.fn(),
@@ -312,7 +316,7 @@ describe('Edge Cases - Task 7.7', () => {
       // Given
       const noSpaceError = new Error('ENOSPC: no space left on device');
       noSpaceError.code = 'ENOSPC';
-      fs.writeFile.mockRejectedValue(noSpaceError);
+      atomicWriteFileSync.mockImplementation(() => { throw noSpaceError; });
       fs.ensureDir.mockResolvedValue();
       fs.pathExists.mockResolvedValue(false);
 
@@ -377,7 +381,7 @@ describe('Edge Cases - Task 7.7', () => {
       // Given
       const busyError = new Error('EBUSY: resource busy or locked');
       busyError.code = 'EBUSY';
-      fs.writeFile.mockRejectedValue(busyError);
+      atomicWriteFileSync.mockImplementation(() => { throw busyError; });
       fs.ensureDir.mockResolvedValue();
       fs.pathExists.mockResolvedValue(false);
 
@@ -397,7 +401,7 @@ describe('Edge Cases - Task 7.7', () => {
       fs.ensureDir.mockResolvedValue();
       fs.pathExists.mockResolvedValue(true);
       fs.readFile.mockResolvedValue('user_profile: advanced\n');
-      fs.writeFile.mockResolvedValue();
+      atomicWriteFileSync.mockImplementation(() => {});
 
       const mockLogger = {
         action: jest.fn(),
@@ -408,7 +412,7 @@ describe('Edge Cases - Task 7.7', () => {
       await createUserConfigDirect('bob', mockLogger, false);
 
       // Then - should succeed by updating existing config
-      expect(fs.writeFile).toHaveBeenCalled();
+      expect(atomicWriteFileSync).toHaveBeenCalled();
       expect(mockLogger.success).toHaveBeenCalled();
     });
   });

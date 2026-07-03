@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../.sinapse-ai/core/synapse/utils/atomic-write');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -85,7 +86,7 @@ function ensureNotice(filePath, realName) {
     next = notice + '\n\n' + content;
   }
 
-  fs.writeFileSync(filePath, next);
+  atomicWriteSync(filePath, next);
   return { status: 'inserted', filePath };
 }
 

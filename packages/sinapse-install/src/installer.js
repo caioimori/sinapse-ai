@@ -23,6 +23,7 @@ const { intro, outro, select, confirm, note, isCancel, cancel } = require('@clac
 const { execa } = require('execa');
 
 const { detectOS, getOSDisplayName } = require('./os-detector');
+const { atomicWriteFileSync } = require('./utils/atomic-write');
 const { checkAllDependencies, displayResults } = require('./dep-checker');
 
 /**
@@ -148,7 +149,8 @@ async function createUserConfigDirect(profile, logger, dryRun) {
 
   const yaml = require('js-yaml');
   const yamlContent = yaml.dump(config, { lineWidth: -1 });
-  await fs.writeFile(userConfigPath, yamlContent, 'utf8');
+  // Atomic (tmp+rename): user config must never be torn
+  atomicWriteFileSync(userConfigPath, yamlContent, 'utf8');
 
   logger.success(`User config created at ${userConfigPath}`);
 }

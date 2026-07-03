@@ -13,6 +13,7 @@ const path = require('path');
 const fse = require('fs-extra');
 const { execSync } = require('child_process');
 const { colors } = require('../utils/sinapse-colors');
+const { atomicWriteFileSync } = require('../utils/atomic-write');
 const {
   getLanguageQuestion,
   getLLMQuestion,
@@ -78,7 +79,8 @@ async function writeClaudeSettings(language, projectDir = process.cwd()) {
     const claudeLanguage = LANGUAGE_MAP[language] || language;
     settings.language = claudeLanguage;
 
-    await fse.writeFile(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf8');
+    // Atomic (tmp+rename): user settings.json must never be torn
+    atomicWriteFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf8');
     return true;
   } catch {
     // Non-blocking: language is a preference, not critical
@@ -366,7 +368,7 @@ async function installGlobalAgents() {
     try {
       const content = buildAgentTemplate(agent.id, agent.squad, homedir);
       const filePath = path.join(agentsDir, `${agent.id}.md`);
-      await fse.writeFile(filePath, content, 'utf8');
+      atomicWriteFileSync(filePath, content, 'utf8');
       count++;
     } catch (err) {
       errors.push(`${agent.id}: ${err.message}`);
@@ -650,7 +652,7 @@ async function runWizard(options = {}) {
                       '# User-Defined Preferred Patterns and Preferences',
                       '# User-Defined Preferred Patterns and Preferences' + activePresetSection,
                     );
-                    await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
+                    atomicWriteFileSync(techPrefsFile, techPrefsContent, 'utf8');
                   }
                 }
               }

@@ -97,6 +97,23 @@ function syncDirSync(src, dest, delta = { added: 0, updated: 0, unchanged: 0, re
   return delta;
 }
 
+// atomicWriteFileSync — Onda B2 (AF-20260703): tmp+rename via the canonical
+// core util so a crash or concurrent reader never sees a torn config file.
+// Fail-open: if the util can't be loaded, fall back to a plain write (the
+// pre-hardening behavior) rather than breaking the installer.
+let _atomicWriteSync = null;
+try {
+  _atomicWriteSync = require('../../.sinapse-ai/core/synapse/utils/atomic-write').atomicWriteSync;
+} catch { /* fallback below */ }
+
+function atomicWriteFileSync(filePath, data, encoding = 'utf8') {
+  if (_atomicWriteSync) {
+    _atomicWriteSync(filePath, data, encoding);
+  } else {
+    fs.writeFileSync(filePath, data, encoding);
+  }
+}
+
 function toForwardSlash(p) {
   return p.replace(/\\/g, '/');
 }
@@ -112,6 +129,7 @@ module.exports = {
   copyDirSync,
   rmDirSync,
   syncDirSync,
+  atomicWriteFileSync,
   toForwardSlash,
   toPosixPath,
 };

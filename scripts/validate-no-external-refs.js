@@ -240,21 +240,27 @@ function isBinaryFile(absPath) {
 function scanFile(rootDir, relPath) {
   if (isAllowListed(relPath)) return [];
   const absPath = path.join(rootDir, relPath);
-  let stat;
+
+  // Size cap and read share one fd, so the scanned bytes are the sized bytes.
+  let content;
+  let fd;
   try {
-    stat = fs.statSync(absPath);
+    fd = fs.openSync(absPath, 'r');
   } catch {
     return [];
   }
-  if (!stat.isFile()) return [];
-  if (stat.size > MAX_SCAN_BYTES) return [];
-  if (isBinaryFile(absPath)) return [];
-
-  let content;
   try {
-    content = fs.readFileSync(absPath, 'utf8');
+    const stat = fs.fstatSync(fd);
+    if (!stat.isFile()) return [];
+    if (stat.size > MAX_SCAN_BYTES) return [];
+    if (isBinaryFile(absPath)) return [];
+    const buf = Buffer.alloc(stat.size);
+    fs.readSync(fd, buf, 0, stat.size, 0);
+    content = buf.toString('utf8');
   } catch {
     return [];
+  } finally {
+    fs.closeSync(fd);
   }
 
   const lines = content.split(/\r?\n/);

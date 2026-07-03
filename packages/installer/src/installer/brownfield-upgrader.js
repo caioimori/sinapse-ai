@@ -12,6 +12,7 @@ const yaml = require('js-yaml');
 const semver = require('semver');
 const { hashFile, hashesMatch } = require('./file-hasher');
 const { YamlMerger } = require('../merger/strategies/yaml-merger.js');
+const { atomicWriteFileSync } = require('../utils/atomic-write');
 
 /**
  * Upgrade report structure
@@ -278,8 +279,8 @@ async function applyUpgrade(report, sourceDir, targetDir, options = {}) {
           const merger = new YamlMerger();
           const mergeResult = await merger.merge(sourceContent, targetContent);
 
-          // Write merged content
-          fs.writeFileSync(targetPath, mergeResult.content, 'utf8');
+          // Write merged content — atomic (tmp+rename); backup taken above
+          atomicWriteFileSync(targetPath, mergeResult.content, 'utf8');
 
           // Log conflict warnings
           const conflicts = mergeResult.changes.filter(c => c.type === 'conflict');
@@ -379,7 +380,8 @@ function updateInstalledManifest(targetDir, sourceManifest, sourcePackage) {
 `;
 
   fs.ensureDirSync(path.dirname(installedManifestPath));
-  fs.writeFileSync(installedManifestPath, header + yamlContent, 'utf8');
+  // Atomic (tmp+rename): the installed manifest drives future upgrades
+  atomicWriteFileSync(installedManifestPath, header + yamlContent, 'utf8');
 
   return installedManifestPath;
 }
