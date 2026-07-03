@@ -152,7 +152,61 @@ class GreenfieldHandler extends EventEmitter {
     // Phase progress tracking
     this.phaseProgress = {};
 
+    // Onda3-S2: cached read of workflow metadata (confirmation_required).
+    this._confirmationRequired = null;
+
     this._log('GreenfieldHandler initialized');
+  }
+
+  /**
+   * Reads `metadata.confirmation_required` from the resolved workflow YAML.
+   * Onda3-S2 (AF-20260702 item 3.4): the field used to be decorative — no code
+   * consumed it. Now `false` turns go_pause surfaces into auto-GO; `true` or
+   * any read/parse failure preserves the safe default (pause for the human).
+   *
+   * @returns {boolean} true = pause between phases (default), false = auto-GO
+   */
+  getConfirmationRequired() {
+    if (this._confirmationRequired !== null) return this._confirmationRequired;
+    let required = true;
+    try {
+      const yaml = require('js-yaml');
+      const raw = fs.readFileSync(this.workflowPath, 'utf8');
+      const parsed = yaml.load(raw);
+      if (parsed && parsed.metadata && parsed.metadata.confirmation_required === false) {
+        required = false;
+      }
+    } catch (error) {
+      this._log(`confirmation_required unreadable (default: true): ${error.message}`, 'warn');
+    }
+    this._confirmationRequired = required;
+    return required;
+  }
+
+  /**
+   * Deterministic artifact gate (Onda3-S2, AF-20260702 item 3.4).
+   * For every step that declares a file artifact (`creates` ending in .md),
+   * verifies the artifact exists on disk with content. Echoes the empty-build
+   * honesty fix: a phase does not advance on promises, only on artifacts.
+   *
+   * @param {Array<{agent: string, task: string, creates: ?string}>} sequence
+   * @returns {{passed: boolean, missing: Array<{agent: string, task: string, artifact: string}>, checked: number}}
+   */
+  evaluateArtifactGate(sequence) {
+    // Lazy require: doc-first-resolver imports constants from this module, so a
+    // top-level require here would create a load-order cycle with partial exports.
+    const { fileHasContent } = require('./doc-first-resolver');
+    const missing = [];
+    let checked = 0;
+    for (const step of sequence) {
+      if (!step.creates || !step.creates.endsWith('.md')) continue;
+      checked += 1;
+      const artifactPath = path.join(this.projectRoot, step.creates);
+      if (!fileHasContent(artifactPath)) {
+        missing.push({ agent: step.agent, task: step.task, artifact: step.creates });
+      }
+    }
+    return { passed: missing.length === 0, missing, checked };
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════
@@ -453,10 +507,45 @@ class GreenfieldHandler extends EventEmitter {
       }
     }
 
+    // Onda3-S2: deterministic artifact gate — the phase only completes when
+    // every declared artifact actually exists with content on disk.
+    const gate = this.evaluateArtifactGate(PHASE_1_SEQUENCE);
+    if (!gate.passed) {
+      this.phaseProgress[GreenfieldPhase.DISCOVERY] = {
+        status: 'gated',
+        endTime: Date.now(),
+        stepResults,
+        gate,
+      };
+      this.emit('phaseGated', { phase: GreenfieldPhase.DISCOVERY, gate, context });
+
+      const missingList = gate.missing
+        .map((m) => `  - ${m.artifact} (${m.agent} → *${m.task})`)
+        .join('\n');
+      return {
+        action: 'greenfield_gate_blocked',
+        phase: GreenfieldPhase.DISCOVERY,
+        nextPhase: 1,
+        data: {
+          gate: 'missing_artifact',
+          missing: gate.missing,
+          message:
+            'Gate de artefato: a Phase 1 não avança sem os artefatos no disco.\n' +
+            `Faltando:\n${missingList}\n\n` +
+            'Execute os agentes indicados (ou crie os documentos) e responda GO para revalidar.',
+          promptType: 'go_pause',
+          options: ['GO', 'PAUSE'],
+          resumeFromPhase: 1,
+          context: { ...context, phase1Results: stepResults },
+        },
+      };
+    }
+
     this.phaseProgress[GreenfieldPhase.DISCOVERY] = {
       status: 'complete',
       endTime: Date.now(),
       stepResults,
+      gate,
     };
 
     this.emit('phaseComplete', { phase: GreenfieldPhase.DISCOVERY, result: stepResults, context });
@@ -667,6 +756,14 @@ class GreenfieldHandler extends EventEmitter {
    * @private
    */
   _surfaceBetweenPhases(fromPhase, toPhase, surfaceConfig) {
+    // Onda3-S2: honor metadata.confirmation_required from the workflow YAML.
+    // Only go_pause surfaces auto-advance — text_input needs the human's words,
+    // and gate blocks never route through here.
+    if (surfaceConfig.promptType === 'go_pause' && this.getConfirmationRequired() === false) {
+      this._log(`confirmation_required=false — auto-GO Phase ${fromPhase} → ${toPhase}`);
+      return this._executeFromPhase(toPhase, surfaceConfig.context);
+    }
+
     const surfaceChecker = this._getSurfaceChecker();
 
     // Build options based on prompt type

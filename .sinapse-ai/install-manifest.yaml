@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.20.0
+version: 1.20.1
 generator: scripts/generate-install-manifest.js
 file_count: 1158
 files:
@@ -952,9 +952,9 @@ files:
     type: core
     size: 10880
   - path: core/orchestration/doc-first-resolver.js
-    hash: sha256:92a4170f3ed0b6b214608c80e17c8c6b1769a50b849532af4ae34db070a6931f
+    hash: sha256:e309338d1ca98d70953563a2cf92bae261264fac8001f389afdb7fbf968be353
     type: core
-    size: 14592
+    size: 14762
   - path: core/orchestration/epic-context-accumulator.js
     hash: sha256:9f38c7e3b4de7fbcfeae5fe1dc88aa3f0ae38667f1dc1da025519d40b3b9daa9
     type: core
@@ -1000,9 +1000,9 @@ files:
     type: core
     size: 23437
   - path: core/orchestration/greenfield-handler.js
-    hash: sha256:330be2c76c3eb5a9a1f1c975837308802b8fc6fb871f9b584787ae4e2aa8fcb1
+    hash: sha256:5f40108470bf2602e9ccb72c241ece5d1b9e801ba83e1864b8b1d5f34ae3e9e7
     type: core
-    size: 40129
+    size: 44211
   - path: core/orchestration/index.js
     hash: sha256:ee215f855804448dcb02375128f4ff1f39e6861f37d1762dde19c80e77b8f4a6
     type: core
@@ -1360,9 +1360,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:166203aac0d019e100aff6a79145b2e83cf6b31d7d69374ffdc019e463ebf384
+    hash: sha256:9ec29d517ec7a0305272461dbbc5b9862ca8ed5f8d6c5c3f0716a66bebbc80b3
     type: data
-    size: 557171
+    size: 557229
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data

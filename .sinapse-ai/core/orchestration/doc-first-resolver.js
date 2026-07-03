@@ -319,4 +319,7 @@ module.exports = {
   TYPE_KEYWORDS,
   // re-exported for callers that want the raw map
   GREENFIELD_WORKFLOW_BY_TYPE,
+  // Onda3-S2 (AF-20260702 item 3.4): exported so artifact gates share ONE
+  // definition of "artifact exists and is non-empty" instead of forking it.
+  fileHasContent,
 };
