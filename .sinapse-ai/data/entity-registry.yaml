@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T06:58:13.504Z'
+  lastUpdated: '2026-07-03T08:39:26.405Z'
   entityCount: 813
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -11739,6 +11739,7 @@ entities:
         - resolver
       usedBy:
         - build-command
+        - greenfield-handler
         - route-command
       dependencies:
         - greenfield-handler
@@ -11749,8 +11750,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:92a4170f3ed0b6b214608c80e17c8c6b1769a50b849532af4ae34db070a6931f
-      lastVerified: '2026-06-27T21:56:17.335Z'
+      checksum: sha256:e309338d1ca98d70953563a2cf92bae261264fac8001f389afdb7fbf968be353
+      lastVerified: '2026-07-03T08:39:26.307Z'
     epic-context-accumulator:
       path: .sinapse-ai/core/orchestration/epic-context-accumulator.js
       layer: L1
@@ -11954,6 +11955,7 @@ entities:
         - bob-orchestrator
         - doc-first-resolver
       dependencies:
+        - doc-first-resolver
         - workflow-executor
         - surface-checker
         - session-state
@@ -11964,8 +11966,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:330be2c76c3eb5a9a1f1c975837308802b8fc6fb871f9b584787ae4e2aa8fcb1
-      lastVerified: '2026-06-30T18:30:20.192Z'
+      checksum: sha256:5f40108470bf2602e9ccb72c241ece5d1b9e801ba83e1864b8b1d5f34ae3e9e7
+      lastVerified: '2026-07-03T08:39:26.309Z'
     lock-manager:
       path: .sinapse-ai/core/orchestration/lock-manager.js
       layer: L1
