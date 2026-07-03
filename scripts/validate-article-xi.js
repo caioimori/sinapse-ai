@@ -31,7 +31,7 @@
 'use strict';
 
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -61,9 +61,11 @@ function getBaseRef(args) {
   return 'main';
 }
 
-function gitExec(cmd) {
+// SECURITY: args go straight to git without a shell — baseRef comes from CLI
+// or GITHUB_BASE_REF and must never be interpolated into a shell string.
+function gitExec(args) {
   try {
-    return execSync(cmd, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
+    return execFileSync('git', args, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
   } catch (_err) {
     return null;
   }
@@ -78,14 +80,14 @@ function gitExec(cmd) {
  */
 function diffAgainstBase(baseRef) {
   // Try fetching first (CI may need it). Silent if it fails.
-  gitExec(`git fetch origin ${baseRef} --quiet`);
+  gitExec(['fetch', 'origin', baseRef, '--quiet']);
 
   // Use raw diff with --name-status -M (rename detection).
   const tripleDot = `origin/${baseRef}...HEAD`;
-  let raw = gitExec(`git diff --name-status -M ${tripleDot}`);
+  let raw = gitExec(['diff', '--name-status', '-M', tripleDot]);
   if (raw === null) {
     // Fallback: local base ref
-    raw = gitExec(`git diff --name-status -M ${baseRef}...HEAD`);
+    raw = gitExec(['diff', '--name-status', '-M', `${baseRef}...HEAD`]);
   }
   if (raw === null) {
     return { error: `nao foi possivel comparar com ${baseRef}`, deletions: [], renames: [] };
@@ -110,8 +112,8 @@ function diffAgainstBase(baseRef) {
 
 function getOverrideText(baseRef) {
   // Aggregate commit messages between base..HEAD + PR body.
-  const commitMsgs = gitExec(`git log --format=%B origin/${baseRef}..HEAD`)
-    || gitExec(`git log --format=%B ${baseRef}..HEAD`)
+  const commitMsgs = gitExec(['log', '--format=%B', `origin/${baseRef}..HEAD`])
+    || gitExec(['log', '--format=%B', `${baseRef}..HEAD`])
     || '';
   const prBody = process.env.GITHUB_PR_BODY || '';
   const forcedOverride = process.env.ARTICLE_XI_OVERRIDE || '';
