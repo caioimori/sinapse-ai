@@ -22,7 +22,6 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock optional modules to prevent constructor errors
-jest.mock('../../.sinapse-ai/workflow-intelligence/engine/wave-analyzer', () => null);
 jest.mock('../../.sinapse-ai/infrastructure/scripts/worktree-manager', () => { throw new Error('not available'); });
 jest.mock('../../.sinapse-ai/core/memory/gotchas-memory', () => { throw new Error('not available'); });
 

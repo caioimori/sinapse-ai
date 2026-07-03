@@ -172,11 +172,6 @@ commands:
     visibility: [full, quick]
     description: 'Create new service from Handlebars template (api-integration, utility, agent-tool)'
 
-  # Workflow Intelligence (WIS-4)
-  - name: waves
-    visibility: [full, quick]
-    description: 'Analyze workflow for parallel execution opportunities (--visual for ASCII art)'
-
   # Quality & Debt
   - name: apply-qa-fixes
     visibility: [quick, key]
@@ -243,7 +238,6 @@ dependencies:
     - dev-suggest-refactoring.md
     - sync-documentation.md
     - validate-next-story.md
-    - waves.md # WIS-4: Wave analysis for parallel execution
     # Build Recovery (Epic 8 - Story 8.4)
     - build-resume.md
     - build-status.md

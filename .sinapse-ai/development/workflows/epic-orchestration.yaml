@@ -320,7 +320,6 @@ metadata:
   tags:
     - epic-orchestration
     - parallel-execution
-    - wave-executor
     - quality-gates
     - worktree-isolation
     - reusable-template

@@ -752,8 +752,7 @@ outputs/                               # Runtime outputs (gitignored)
 │   ├── engine/                        # Core WIS engines
 │   │   ├── confidence-scorer.js       # Pattern confidence scoring
 │   │   ├── output-formatter.js        # Output formatting
-│   │   ├── suggestion-engine.js       # Intelligent suggestions
-│   │   └── wave-analyzer.js           # Wave pattern analysis
+│   │   └── suggestion-engine.js       # Intelligent suggestions
 │   ├── learning/                      # Machine learning components
 │   │   ├── capture-hook.js            # Pattern capture hooks
 │   │   ├── index.js                   # Learning module entry

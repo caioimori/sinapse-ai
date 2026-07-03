@@ -64,12 +64,18 @@ Registrados no checkpoint para completude; nenhum é corrigido aqui:
 waves: sem caminho de produção — decisão
 [DEC-02](../epic-ultra-optimization/decisions/DEC-02-workflow-intelligence.md)/[DEC-03](../epic-ultra-optimization/decisions/DEC-03-modulos-multi-story-orfaos.md).
 O `engine/wave-analyzer` de `.sinapse-ai/workflow-intelligence/` (análise de waves para
-execução paralela) só é consumido pelo `wave-executor`
-(`.sinapse-ai/core/execution/wave-executor.js`), que por sua vez não tem chamador de
-produção — nenhuma orquestração real usa análise de waves hoje. Split aprovado: o
-`wave-analyzer` segue o destino do cluster DEC-03 (reserva marcada); a metade
-`suggestion-engine`/`learning` (consumida por `*next`/`*patterns`, com consumidor real)
-fica intocada.
+execução paralela) só era consumido pelo `wave-executor`
+(`.sinapse-ai/core/execution/wave-executor.js`), que por sua vez não tinha chamador de
+produção — nenhuma orquestração real usa análise de waves.
+
+**Execução (2026-07-03, OK do dono):** o cluster multi-story órfão foi REMOVIDO —
+`wave-executor`, `parallel-monitor`, `context-injector`, `semantic-merge-engine` e o
+`parallel-executor` de `core/execution/` (não confundir com o homônimo VIVO de
+`core/orchestration/`), mais o `wave-analyzer` e a task `*waves` (superfície de comando
+dele). Permanecem como reserva marcada (`@abandoned-path`): `result-aggregator` (referência
+de design pro gate de wave do TOP-5) e `rate-limit-manager` (genérico) — o piloto do TOP-5
+da Onda 3 confirma ou libera a remoção deles. A metade `suggestion-engine`/`learning`
+(consumida por `*next`/`*patterns`, com consumidor real) ficou intocada.
 
 ## Resumo operacional
 

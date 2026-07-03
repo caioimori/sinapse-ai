@@ -75,7 +75,7 @@ Every task pointer the activator emits is verified to exist on disk before it is
 ### @developer (Pixel)
 - **Role:** Full Stack Developer -- code implementation, debugging, refactoring
 - **Capabilities:** Story-driven development (YOLO/Interactive/Pre-Flight modes), CodeRabbit self-healing (max 2 iterations), autonomous build with worktrees, gotchas memory, service scaffolding
-- **Key Commands:** `*develop`, `*build`, `*run-tests`, `*apply-qa-fixes`, `*create-service`, `*waves`
+- **Key Commands:** `*develop`, `*build`, `*run-tests`, `*apply-qa-fixes`, `*create-service`
 - **Constraints:** Cannot `git push` or create PRs (delegate to @devops). Cannot modify story AC/scope/title. Can only update File List, checkboxes, and Dev Agent Record sections.
 
 ### @architect (Stratum)

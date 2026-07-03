@@ -1,9 +1,11 @@
 # DEC-03 — 7 módulos multi-story órfãos em core/execution: veredito por módulo
 
 > Parecer de arquitetura · Story onda2-p8 · Item 2.8 do AF-20260702 · 2026-07-02
-> Status: **AGUARDA OK DO DONO** (Art. XI Conservative Default) — nenhuma deleção aqui.
-> Marcador aplicado: `@abandoned-path` no comentário de cabeçalho dos 7 (reversível,
-> zero mudança de comportamento; suítes dos 7 verdes após a marcação).
+> Status: **✅ EXECUTADA (2026-07-03)** — OK do dono ("faça pra finalizarmos 100% a
+> otimização", em resposta à fila que listava esta decisão). Story de execução:
+> `dec03-orphan-cluster-removal`. Removidos os 5 módulos com veredito de remoção +
+> wave-analyzer (split DEC-02) + task `*waves`; `result-aggregator` e
+> `rate-limit-manager` mantidos como reserva marcada condicionada ao piloto TOP-5.
 
 ## Contexto
 

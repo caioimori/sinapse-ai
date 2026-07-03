@@ -22,6 +22,9 @@ const SCAN_CONFIG = [
   { category: 'templates', basePath: '.sinapse-ai/product/templates', glob: '**/*.{yaml,yml,md}', type: 'template' },
   { category: 'scripts', basePath: '.sinapse-ai/development/scripts', glob: '**/*.{js,mjs}', type: 'script' },
   { category: 'modules', basePath: '.sinapse-ai/core', glob: '**/*.{js,mjs}', type: 'module' },
+  // DEC-02 (d): workflow-intelligence entra no registry com usedBy real
+  // (tasks *next/*patterns) — antes era um buraco (entidade inexistente).
+  { category: 'wis-modules', basePath: '.sinapse-ai/workflow-intelligence', glob: '**/*.{js,mjs}', type: 'module' },
   // Story A.4: restrict to top-level *.md so agent MEMORY.md files under
   // agents/{name}/MEMORY.md are NOT indexed as agents (they are memory, not
   // persona definitions). Without this restriction, `extractEntityId`
