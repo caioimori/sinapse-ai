@@ -24,7 +24,7 @@ const path = require('path');
 const fs = require('fs');
 const fse = require('fs-extra');
 const yaml = require('js-yaml');
-const { execSync, exec, spawn } = require('child_process');
+const { exec, spawn } = require('child_process');
 const { promisify } = require('util');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
@@ -830,7 +830,6 @@ See .sinapse-ai/user-guide.md for complete documentation.
   // INS-2 Performance: Add spinner for validation (AC9)
   const validationSpinner = ora('Validating installation integrity...').start();
 
-  let validationPassed = true;
   try {
     const { PostInstallValidator } = require('../packages/installer/src/installer/post-install-validator');
     const validator = new PostInstallValidator(context.projectRoot, context.frameworkLocation, {
@@ -851,7 +850,6 @@ See .sinapse-ai/user-guide.md for complete documentation.
       report.stats.missingFiles > 0 ||
       report.stats.corruptedFiles > 0
     ) {
-      validationPassed = false;
       validationSpinner.warn('Installation validation found issues:');
       console.log(chalk.dim(`   - Missing files: ${report.stats.missingFiles}`));
       console.log(chalk.dim(`   - Corrupted files: ${report.stats.corruptedFiles}`));
@@ -868,7 +866,6 @@ See .sinapse-ai/user-guide.md for complete documentation.
     // Log validation errors but don't fail installation
     // This allows installation to proceed even if validator module has issues
     // However, users should investigate validation errors manually
-    validationPassed = false;
     validationSpinner.warn('Post-installation validation encountered an error');
     console.log(chalk.dim(`   Error: ${validationError.message}`));
     if (process.env.DEBUG || process.env.SINAPSE_DEBUG) {

@@ -140,8 +140,9 @@ function parseMarkdownSections(content) {
       result.preamble.push(line);
     } else if (currentSection) {
       currentSection.lines.push(line);
-    } else if (!sinapseSection) {
-      // Content after an SINAPSE section but before next section
+    } else {
+      // Content after an SINAPSE section but before next section (sinapseSection
+      // is always null here — the in-section branch above `continue`s).
       // This shouldn't happen in well-formed files, but handle it
       result.preamble.push(line);
     }
