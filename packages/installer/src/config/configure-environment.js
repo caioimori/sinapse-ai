@@ -321,6 +321,12 @@ async function updateGitignore(targetDir) {
     'Build & Logs': ['dist/', 'build/', '*.log', 'logs/'],
     'IDE & OS': ['.DS_Store', 'Thumbs.db', '.idea/', '*.swp'],
     'SINAPSE Local': ['.sinapse-ai/local/', '.claude/settings.local.json', '.sinapse/install-log.txt'],
+    // Story onda2-p9 — context-engine runtime. The framework repo ignores the
+    // WHOLE .synapse/ (see its .gitignore): the constitution is regenerated
+    // from .sinapse-ai/constitution.md on every install, and sessions/ +
+    // metrics/ are per-machine runtime state. Installed projects replicate
+    // that intent — nothing under .synapse/ is meant to be versioned.
+    'SINAPSE Context Engine': ['.synapse/'],
   };
 
   const lines = gitignoreContent.split('\n').map(line => line.trim());

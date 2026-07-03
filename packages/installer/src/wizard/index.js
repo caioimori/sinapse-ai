@@ -32,6 +32,7 @@ const {
   installSinapseCore,
   hasPackageJson,
 } = require('../installer/sinapse-ai-installer');
+const { installSynapseRuntime } = require('../installer/synapse-runtime-installer');
 const {
   validateInstallation,
   displayValidationReport,
@@ -525,6 +526,31 @@ async function runWizard(options = {}) {
     } catch (error) {
       console.error('\n⚠️  SINAPSE core installation failed:', error.message);
       answers.sinapseCoreInstalled = false;
+    }
+
+    // Story onda2-p9 (DEC-01 option A): generate the .synapse/ context-engine
+    // runtime in the target project. The synapse-engine.cjs hook is copied +
+    // registered further down (generateIDEConfigs), but without .synapse/ it
+    // dies on the hook-runtime early-return and injects nothing. This step
+    // runs right after installSinapseCore because the generator reads the
+    // target's freshly copied .sinapse-ai/constitution.md.
+    // FAIL-OPEN: installSynapseRuntime never throws; on failure we warn and
+    // the install completes normally — without .synapse/ the hook silently
+    // returns null (engine dormant), which was the pre-P9 status quo.
+    console.log('\n🧠 ' + t('generatingSynapseRuntime'));
+    try {
+      const synapseResult = installSynapseRuntime({ targetDir: process.cwd() });
+      if (synapseResult.success) {
+        console.log(`✅ Context engine: .synapse/ ready (${synapseResult.articles} articles, ${synapseResult.rules} rules)`);
+      } else {
+        console.warn(`⚠️  ${t('synapseRuntimeFailed')}: ${synapseResult.error}`);
+      }
+      answers.synapseRuntimeInstalled = synapseResult.success;
+      answers.synapseRuntimeResult = synapseResult;
+    } catch (error) {
+      // Defense-in-depth: the module already fail-opens; never block install.
+      console.warn(`⚠️  ${t('synapseRuntimeFailed')}: ${error.message}`);
+      answers.synapseRuntimeInstalled = false;
     }
 
     // Install global orqx agent definitions to ~/.claude/agents/ (only for Claude Code)

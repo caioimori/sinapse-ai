@@ -361,6 +361,13 @@ function stepCreateRuntimeDirs() {
  * UserPromptSubmit context engine actually injects rules. Without this, the
  * engine is inert (the hook silently emits no context). Tolerant + non-critical:
  * the wrapper always exits 0 and the engine degrades gracefully if absent.
+ *
+ * NOTE (Story onda2-p9 / DEC-01 option A): user-facing installs now get
+ * .synapse/ from the CANONICAL path — packages/installer/src/installer/
+ * synapse-runtime-installer.js, wired into the wizard (covers `install` and
+ * `init`). This step remains for the repo-source `npm run setup` flow (it
+ * writes at PROJECT_ROOT, i.e. the package/repo itself — see DEC-01 evidence).
+ * Do NOT delete without a deliberate DEC-03-like decision.
  */
 function stepGenerateSynapse() {
   if (isGlobalInstall()) {

@@ -62,6 +62,8 @@ const TRANSLATIONS = {
     runningIdeSync: 'Running IDE sync...',
     runningCodexSync: 'Running Codex local-first sync...',
     bootstrappingEntityRegistry: 'Setting up entity registry...',
+    generatingSynapseRuntime: 'Preparing context engine (.synapse/)...',
+    synapseRuntimeFailed: 'Context engine generation failed (install continues; engine stays dormant)',
     installingLlmRouting: 'Installing LLM routing commands...',
     dependencyInstallation: 'Dependency installation...',
 
@@ -322,6 +324,8 @@ const TRANSLATIONS = {
     runningIdeSync: 'Sincronizando IDEs...',
     runningCodexSync: 'Sincronizando Codex (local-first)...',
     bootstrappingEntityRegistry: 'Preparando o registro de entidades...',
+    generatingSynapseRuntime: 'Preparando o motor de contexto (.synapse/)...',
+    synapseRuntimeFailed: 'Geração do motor de contexto falhou (instalação continua; motor fica inativo)',
     installingLlmRouting: 'Instalando comandos de roteamento de LLM...',
     dependencyInstallation: 'Instalação de dependências...',
 
