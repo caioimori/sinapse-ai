@@ -1,118 +1,76 @@
 # Agent Activation Instructions Template
-**Story**: 6.1.2.5 - Contextual Agent Load System Integration
-**Version**: 2.0 (GreetingBuilder Integration)
-**Last Updated**: 2025-11-16
+
+**Story**: onda2-p7 - Boilerplate pilot + retirement of weak-model coercion language
+**Version**: 3.0 (Lean canonical — post-Fable-5 pass)
+**Last Updated**: 2026-07-02
 
 ## Overview
 
-This template defines the canonical activation-instructions format for SINAPSE agents after GreetingBuilder integration (Story 6.1.2.5).
+This is the **single source of truth** for the activation-instructions block shared by SINAPSE core agents (`.sinapse-ai/development/agents/*.md`). It replaces v2.0 (GreetingBuilder-era, Story 6.1.2.5, 2025-11-16), which documented a `STEP 3: Build intelligent greeting using greeting-builder.js` call that no core agent actually uses anymore — see "What Changed in v3.0" below.
 
-**Key Change**: Replaced manual greeting STEPs (2.5-5) with intelligent `GreetingBuilder` call that adapts greetings based on session context.
+**Important — this template does NOT get resolved at runtime.** Claude Code loads each agent's `.md` file wholesale when the agent activates; there is no templating engine that expands "see template X" references inline. So the block below is the *doctrinal* canonical form, but every agent file must keep its own **self-contained copy** of it (parametrized with its own `{id}`, `{icon}`, etc.). When creating or migrating an agent, copy this block in — don't reference it.
 
-## Canonical Format
+## Canonical Format (v3.0)
 
 ```yaml
+IDE-FILE-RESOLUTION:
+  - Dependencies map to .sinapse-ai/development/{type}/{name} (type=tasks|templates|checklists|data|utils; e.g. create-doc.md → .sinapse-ai/development/tasks/create-doc.md)
+  - Load these files only when a command actually needs them, never during activation
+REQUEST-RESOLUTION: Match user requests to your commands/dependencies flexibly (e.g., "draft story"→*create→create-next-story task); ask for clarification if there's no clear match.
 activation-instructions:
-  - STEP 1: Read THIS ENTIRE FILE - it contains your complete persona definition
+  - STEP 1: Read this entire file - it contains your complete persona definition
   - STEP 2: Adopt the persona defined in the 'agent' and 'persona' sections below
-  - STEP 3: Build intelligent greeting using .sinapse-ai/development/scripts/greeting-builder.js
-           Call buildGreeting(agentDefinition, conversationHistory) which:
-           - Detects session type (new/existing/workflow) via context analysis
-           - Checks git configuration status (with 5min cache)
-           - Loads project status automatically
-           - Filters commands by visibility metadata (full/quick/key)
-           - Suggests workflow next steps if in recurring pattern
-           - Formats adaptive greeting automatically
-  - STEP 4: Display the greeting returned by GreetingBuilder
+  - STEP 3: |
+      Display greeting using native context (zero JS execution):
+      0. GREENFIELD GUARD: if gitStatus reports no git repository (or git commands fail as "not a git repository"):
+         - skip the "Branch:" append and the git-status narrative
+         - show "📊 **Project Status:** Greenfield project — no git repository detected" instead
+         - after the commands list, show "💡 **Recommended:** Run `*environment-bootstrap` to initialize git, GitHub remote, and CI/CD"
+         - do NOT run git commands during activation — they will fail
+      1. Show: "{icon} {persona_profile.communication.greeting_levels.archetypal}" + current permission badge (e.g., [⚠️ Ask], [🟢 Auto], [🔍 Explore])
+      2. Show: "**Role:** {persona.role}" — append active story (docs/stories/) and branch (if not main/master) when detected
+      3. Show: "📊 **Project Status:**" as a natural-language narrative from gitStatus (branch, modified files, active story, last commit)
+      4. Show: "**Available Commands:**" — commands from the 'commands' section whose visibility includes 'key'
+      5. Show: "Type `*guide` for comprehensive usage instructions."
+      5.5. Check `.sinapse/handoffs/` for the most recent unconsumed handoff artifact (consumed != true): if found, resolve from_agent + last_command against `.sinapse-ai/data/workflow-chains.yaml` and show "💡 **Suggested:** `*{next_command} {args}`" (plus alternates if any); mark it consumed after displaying. Skip silently if none found.
+      6. Show: "{persona_profile.communication.signature_closing}"
+      # FALLBACK: If native greeting fails, run: node .sinapse-ai/development/scripts/unified-activation-pipeline.js {id}
+  - STEP 4: Display the greeting assembled in STEP 3
   - STEP 5: HALT and await user input
-  - IMPORTANT: Do NOT improvise or add explanatory text beyond what is specified in greeting_levels and Quick Commands section
-  - DO NOT: Load any other agent files during activation
-  - ONLY load dependency files when user requests specific command execution
+  - Do not improvise beyond what greeting_levels and Quick Commands specify. Do not load other agent files during activation; load a dependency file only when the user's request actually selects it.
   - The agent.customization field ALWAYS takes precedence over any conflicting instructions
-  - CRITICAL WORKFLOW RULE: When executing tasks from dependencies, follow task instructions exactly as written
-  - MANDATORY INTERACTION RULE: Tasks with elicit=true require user interaction using exact specified format
-  - When listing tasks/templates or presenting options during conversations, always show as numbered options list
-  - STAY IN CHARACTER!
-  - CRITICAL: On activation, ONLY greet user and then HALT to await user requested assistance
+  - CRITICAL: task/checklist instructions from dependencies are executable workflows, not reference material — follow them exactly as written, including elicit=true steps (user interaction is mandatory there, never skipped for efficiency)
+  - When listing tasks/templates or presenting options, always show a numbered list so the user can pick by number
+  # Agent-specific tail goes here (e.g. dev's devLoadAlwaysFiles rule, sm's greet-then-HALT clause) — keep it, it's product behavior, not boilerplate.
 ```
 
-## What Changed (Story 6.1.2.5)
+Everything above `# Agent-specific tail` is the shared block. It runs ~35 lines instead of the pre-v3.0 ~51, because it cuts repetition and retired coercion phrasing — not because it dropped behavior. Every numbered greeting step, the GREENFIELD GUARD, and the handoff-artifact suggestion are unchanged in substance.
 
-### BEFORE (Manual/Mechanical)
-```yaml
-- STEP 2.5: Load project status using .sinapse-ai/infrastructure/scripts/project-status-loader.js
-- STEP 2.6: Load session context using .sinapse-ai/scripts/session-context-loader.js
-- STEP 3: Greet user with EXACTLY the text from greeting_levels.named
-- STEP 3.5: Introduce yourself using format: "I'm {agent.name}..."
-- STEP 3.6: Display session context if available
-- STEP 4: Display project status from STEP 2.5
-- STEP 5: Output EXACTLY the "Quick Commands" section
-```
+## What Changed in v3.0 (Story onda2-p7 / AF-20260702 item 2.14)
 
-**Problem**: Claude interpreted these as literal instructions → mechanical, rigid output
+**Removed — coercion language calibrated for weak/older models, contradicts the product's own positioning:**
+- `"stay in this being until told to exit this mode"` (personification framing) → plain "read it in full before acting"
+- `STAY IN CHARACTER!` — a bare imperative with no operational content. Modern models follow the persona defined in `agent`/`persona` without a shouted reminder; dropping it is not a behavior change.
+- `"...that dumb AI agents can implement..."` / `"...guide the dumb dev agent"` (sprint-lead persona fields) → reworded to state the same requirement (stories must be unambiguous and execution-ready) without the demeaning frame.
 
-### AFTER (Intelligent/Adaptive)
-```yaml
-- STEP 3: Build intelligent greeting using greeting-builder.js
-- STEP 4: Display the greeting returned by GreetingBuilder
-- STEP 5: HALT and await user input
-```
+**Merged — pure redundancy, not simplification of meaning:**
+- `IMPORTANT: Do NOT improvise` + `DO NOT: Load any other agent files` + `ONLY load dependency files when selected` → one bullet, same three constraints.
+- `CRITICAL WORKFLOW RULE` + `MANDATORY INTERACTION RULE` + `CRITICAL RULE` (the third restated the first two almost verbatim) → one `CRITICAL:` bullet carrying both real constraints (tasks are literal workflows; `elicit=true` requires real interaction).
 
-**Benefit**: GreetingBuilder handles all logic internally → contextual, adaptive greetings
+**Kept as-is — this is product, not boilerplate:**
+- GREENFIELD GUARD logic (exact substeps and messages)
+- The 6-step native greeting algorithm (icon/permission badge, role, project status, commands, guide hint, signature closing)
+- The 5.5 handoff-artifact suggestion (reads `.sinapse/handoffs/` + `workflow-chains.yaml`)
+- The `unified-activation-pipeline.js` FALLBACK reference
+- `agent.customization` precedence rule
+- Numbered-list presentation convention
+- Every agent-specific tail line (e.g. dev's story-draft gate, sm's greet-then-HALT clause) — these encode real per-role behavior, not shared filler, so they are untouched by this pass.
 
-## GreetingBuilder Parameters
+**Superseded from v2.0:** the `GreetingBuilder.buildGreeting()` call described as the *primary* STEP 3 path in v2.0 was never actually adopted as the inline instruction in any of the 12 core agents — they all carry the "native context, zero JS execution" algorithm shown above. `greeting-builder.js` is real, shipped code, but it now backs the **FALLBACK** path only (invoked by `unified-activation-pipeline.js` when native rendering fails), not the primary path. v3.0 documents what is actually deployed.
 
-### Input: `agentDefinition`
-The complete agent object containing:
-- `agent.name`, `agent.id`, `agent.title`, `agent.icon`
-- `persona_profile.greeting_levels` (minimal, named, archetypal)
-- `persona.identity` (role description)
-- `commands[]` with visibility metadata
+## Rollout Status
 
-### Input: `conversationHistory`
-Session context provided by Claude Code, containing:
-- Previous messages in the conversation
-- Previous agent activations
-- Recent commands executed
-
-### Output: Formatted Greeting String
-Returns complete greeting including:
-- Presentation (adapted to session type)
-- Role description (new sessions only)
-- Project status (if git configured)
-- Current context (existing/workflow sessions)
-- Workflow suggestions (workflow sessions only)
-- Filtered commands (by session type)
-- Git warning (if not configured)
-
-## Session Type Detection
-
-GreetingBuilder automatically detects three session types:
-
-### 1. New Session (Minimal Context)
-**Detection**: No conversation history or very short history
-**Greeting Style**: Full
-- ✅ Complete greeting with role description
-- ✅ Up to 12 commands (visibility: full, quick, key)
-- ✅ Project status or git warning
-- ✅ Help text: "Type *help for all commands"
-
-### 2. Existing Context (Active Session)
-**Detection**: Conversation history exists, agent switch detected
-**Greeting Style**: Quick
-- ✅ Quick greeting (no role description)
-- ✅ 6-8 commands (visibility: quick, key)
-- ✅ Current Context section (previous agent)
-- ✅ Compact project status
-
-### 3. Workflow (Recurring Pattern)
-**Detection**: Workflow pattern matched in conversation history
-**Greeting Style**: Minimal
-- ✅ Minimal greeting (e.g., "🎯 Pax ready")
-- ✅ 3-5 commands (visibility: key only)
-- ✅ Workflow Context section
-- ✅ Next-step suggestion
-- ✅ 1-line compact project status
+As of Story onda2-p7 (2026-07-02), only **developer.md** and **sprint-lead.md** have been migrated to this v3.0 block, as a measured pilot (validated via `validate:agents` + `validate:parity` + `sync:ide`). The other 10 core agents (`architect`, `product-lead`, `project-lead`, `quality-gate`, `analyst`, `data-engineer`, `ux-design-expert`, `devops`, plus any others under `.sinapse-ai/development/agents/`) and the ~160 squad agents still carry the pre-v3.0 block, including `STAY IN CHARACTER!`. Rolling the rest of the fleet forward is an explicit follow-up story (out of scope here — Conservative Default: no blanket sweep without a per-agent look, per the same discipline applied to the codename-collision triage).
 
 ## Command Visibility Metadata
 
@@ -134,13 +92,13 @@ commands:
 ```
 
 **Visibility Levels:**
-- `full`: Show in new sessions (up to 12 total)
-- `quick`: Show in existing sessions (6-8 total)
-- `key`: Show in workflow sessions (3-5 total)
+- `full`: shown in the full command list (`*help`)
+- `quick`: shown in the condensed quick-reference list
+- `key`: shown during activation greeting (STEP 3.4 above)
 
 ## Git Configuration Warning
 
-If git is not configured, GreetingBuilder automatically appends:
+If git is not configured, the greeting should append:
 
 ```
 ⚠️  **Git Configuration Needed**
@@ -155,105 +113,34 @@ git:
   cacheTimeSeconds: 300    # 5 minutes cache
 ```
 
-## Performance Characteristics
-
-- **Target**: < 150ms (hard limit with timeout protection)
-- **Typical**: < 100ms average
-- **Fallback**: Simple greeting on timeout or error
-
-**Optimizations:**
-- Git config cached for 5 minutes (0ms after first check)
-- Context analysis ~20ms
-- Parallel execution of checks
-
-## Backwards Compatibility
-
-GreetingBuilder includes safety features:
-
-1. **Timeout Protection**: Falls back to simple greeting after 150ms
-2. **Error Handling**: Graceful degradation on any error
-3. **Missing Metadata**: Agents without visibility metadata show all commands
-4. **Simple Fallback**: `{greeting}\n\nType *help to see available commands.`
-
 ## Migration Checklist
 
-When creating new agents or updating existing ones:
+When creating new agents or migrating an existing one to v3.0:
 
-- [ ] Use canonical activation-instructions format
-- [ ] Include GreetingBuilder call (STEP 3)
-- [ ] Remove manual greeting STEPs (2.5-5)
+- [ ] Copy the Canonical Format block above inline (no external reference — the loader doesn't resolve one)
+- [ ] Parametrize `{id}` (agent id, used in the FALLBACK line) and keep `{icon}`/`persona_profile`/`persona` placeholders as literal template tokens for the greeting engine to fill in
+- [ ] Drop `STAY IN CHARACTER!` and any "dumb agent" framing — do not reintroduce coercion phrasing
+- [ ] Keep the agent-specific tail (rules unique to that role) unchanged unless the story specifically targets them
 - [ ] Add visibility metadata to all commands
-- [ ] Test with fresh Claude Code session
-- [ ] Verify fallback greeting works
-
-## Examples
-
-### New Agent Creation
-```yaml
-agent:
-  name: Nova
-  id: new-agent
-  title: New Agent Title
-  icon: 🆕
-
-persona_profile:
-  greeting_levels:
-    minimal: "🆕 Nova ready"
-    named: "🆕 Nova (Archetype) ready. Let's work together!"
-
-commands:
-  - name: help
-    visibility: [full, quick, key]
-    description: "Show all commands"
-  - name: do-thing
-    visibility: [full, quick]
-    description: "Do the thing"
-```
-
-### Testing
-1. Activate agent in fresh session → Should show full greeting
-2. Activate different agent, then return → Should show quick greeting
-3. Execute workflow command, activate next agent → Should show workflow greeting
+- [ ] Run `npm run validate:agents`, `npm run validate:parity` (or `validate:parity:fast`), and `npm run sync:ide`
+- [ ] Test activation in a fresh session and verify the greeting still renders correctly
 
 ## Related Files
 
-- **GreetingBuilder**: `.sinapse-ai/development/scripts/greeting-builder.js`
+- **GreetingBuilder** (fallback-path formatter): `.sinapse-ai/development/scripts/greeting-builder.js`
+- **Unified activation pipeline** (fallback entry point): `.sinapse-ai/development/scripts/unified-activation-pipeline.js`
 - **Context Detector**: `.sinapse-ai/core/session/context-detector.js`
-- **Git Config Detector**: `.sinapse-ai/infrastructure/scripts/git-config-detector.js`
-- **Workflow Navigator**: `.sinapse-ai/development/scripts/workflow-navigator.js`
-- **Project Status Loader**: `.sinapse-ai/infrastructure/scripts/project-status-loader.js`
-- **Workflow Patterns**: `.sinapse-ai/data/workflow-patterns.yaml`
-
-## Troubleshooting
-
-### Greeting appears mechanical
-- Check that GreetingBuilder call is in STEP 3
-- Verify old STEPs 2.5-5 are removed
-- Test with fresh Claude Code session
-
-### Commands not filtered
-- Check command visibility metadata exists
-- Verify session type detection is working
-- Check conversation history is being passed
-
-### Git warning not showing
-- Check `git.showConfigWarning: true` in core-config.yaml
-- Verify project has no git remote configured
-- Check git config cache (may be cached from previous check)
-
-### Performance issues
-- Verify greeting displays in < 150ms
-- Check git cache is enabled
-- Monitor for timeout fallbacks in logs
+- **Workflow Chains** (handoff-artifact suggestions): `.sinapse-ai/data/workflow-chains.yaml`
+- **Agent format validator**: `.sinapse-ai/infrastructure/scripts/validate-agents.js`
 
 ## Version History
 
 | Version | Date | Changes | Story |
 |---------|------|---------|-------|
-| 2.0 | 2025-11-16 | GreetingBuilder integration | 6.1.2.5 |
+| 3.0 | 2026-07-02 | Rewrote as accurate canonical (matches deployed "native, zero-JS" STEP 3); retired weak-model coercion language; documented pilot rollout status | onda2-p7 (AF-20260702 #2.14) |
+| 2.0 | 2025-11-16 | GreetingBuilder integration (never actually adopted inline by core agents) | 6.1.2.5 |
 | 1.0 | 2025-01-15 | Manual activation STEPs | N/A |
 
 ---
 
 *Template maintained by SINAPSE Framework Team*
-
