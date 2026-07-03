@@ -1484,37 +1484,37 @@ files:
     type: development
     size: 5058
   - path: development/agents/analyst.md
-    hash: sha256:25c833e36babf8b227321d40105d069fca29e301a4ecedcd7a74ba8dace625b0
+    hash: sha256:17e4b47515862b1e2c44ab59085bac56cc505e10f0b6c8f1751b766f66ddfbec
     type: agent
-    size: 16361
+    size: 14918
   - path: development/agents/architect.md
-    hash: sha256:43fa59df34a2cd7cc68c8496da7b41d6f65fe0a7a05bd1c0cee2395c0ec5aedb
+    hash: sha256:b25f7a5d927b8645af278828d99af3b46e0d21b2d5dd443dbec0e8af2d195e1c
     type: agent
-    size: 25192
+    size: 23749
   - path: development/agents/data-engineer.md
-    hash: sha256:c411c75db1c8a67385af3ea1e46d862cfced843f38881004bca801b432f1b16a
+    hash: sha256:8f965782df49716c4d043327f8cdf430980794c0bd4984b1b3fc0dc774b2323c
     type: agent
-    size: 24405
+    size: 23210
   - path: development/agents/developer.md
     hash: sha256:2e1f50c1e08f36baa713a62c40f96932758d7969375efc133025ec4853fe8d43
     type: agent
     size: 28389
   - path: development/agents/devops.md
-    hash: sha256:81144f100a7ea8ef339a51691d32e7c480e24fef6ab4c3276e927568ba6ba0e4
+    hash: sha256:9c566f77c11e95edc5537e13c5f5fda65949c4cef6a1f142f81d7b35347b808b
     type: agent
-    size: 28149
+    size: 26954
   - path: development/agents/product-lead.md
-    hash: sha256:a6427801bc1ab8af034d7ca64a9992c918d340503e34105844c657f212b547e7
+    hash: sha256:a0d13d7e04c602000eae91dff54bf4030f11e29b4182e04c763c381086b9e7b7
     type: agent
-    size: 16213
+    size: 14770
   - path: development/agents/project-lead.md
-    hash: sha256:571533353e320db3be8097960190b9e5fce6a876c58159886fd41ee11b745216
+    hash: sha256:9dfb7b7a4c87ee992025764d1c976f3551a6302ac1493a4de98a8bb4c696b010
     type: agent
-    size: 18402
+    size: 16959
   - path: development/agents/quality-gate.md
-    hash: sha256:bc99385b3aee34ed5234287f37b53dd57c1f59b7f4cf1bd401447da4562117d4
+    hash: sha256:a2a4ec39d9d75b0f9872104157094f2846453c962974f551fee1d7a2dccfbec1
     type: agent
-    size: 23745
+    size: 22302
   - path: development/agents/snps-orqx.md
     hash: sha256:8e4145cdf25f57d366e0f6b3563e907c7a3ba8b2d6d3af0a6e573927f4a0321c
     type: agent
@@ -1524,13 +1524,13 @@ files:
     type: agent
     size: 13053
   - path: development/agents/squad-creator.md
-    hash: sha256:80fc6cdfd6d7102803a5c477d576cbfadf96990ffd8f6c7246047603f2a80d33
+    hash: sha256:aa5da75a12797fc06994dc254fc4a35e0eccbfe2f6891acfe5590c81bc019e02
     type: agent
-    size: 18180
+    size: 17296
   - path: development/agents/ux-design-expert.md
-    hash: sha256:ef221c2ce9dc7b808feab65d04c80e5d0186fe3343e079404d761b1d9ff056a2
+    hash: sha256:c012233be2311a30e2b25526a5e7079af830bb66c8cd51fd8a070754c1af2fb0
     type: agent
-    size: 21931
+    size: 21164
   - path: development/checklists/agent-quality-gate.md
     hash: sha256:511d05a2df0e59f3503d882f61131703a5fcecb47d75f99b392086fc3a663433
     type: checklist
@@ -4172,9 +4172,9 @@ files:
     type: template
     size: 14443
   - path: product/templates/personalized-agent-template.md
-    hash: sha256:efb347c5af607bf65e90e3ed10b8626ad560b91f593d52d3394d1263f23cde85
+    hash: sha256:3fbae9bacf8686c4a127ff90d036337ac24408ad6a75d7bf2a3c1be648d4c82c
     type: template
-    size: 9361
+    size: 9073
   - path: product/templates/personalized-checklist-template.md
     hash: sha256:4214899ef40e71ea7dc5ceb5feffd66fbf2eb9edce6032185eb6ba355fbbb96a
     type: template
