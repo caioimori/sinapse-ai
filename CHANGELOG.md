@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.20.1] — 2026-07-03 — 🛡️ Segurança em 3 ondas + ativação enxuta + corte do cluster órfão (DEC-03)
+
+> Patch. Atualização segura via `npx sinapse-ai update`. Fecha a execução da mesa de decisões da otimização: PRs #337–#344.
+
+### Bug Fixes
+
+- **security:** Onda A da triagem AF-20260703 — 4 fixes cirúrgicos: CodeQL volta a analisar `actions`, escape de HTML na fonte geradora do atlas, âncoras agrupadas no secret-scan (equivalência validada com 20.030 casos), sanitização de log no updater (#337)
+- **security:** Onda B1 — TOCTOU eliminado na cadeia de confiança do instalador (manifest-signature/file-hasher/post-install-validator em file descriptor único) + git sem shell no gate do Artigo XI (#340)
+- **security:** Onda B2 — escrita atômica (tmp+rename) em ~30 pontos/21 arquivos de todo o caminho de instalação (#341)
+
+### Maintenance
+
+- **security:** Onda C — higiene do code scanning (`paths-ignore` de testes fecha ~366 alertas de teste na análise da main) + 2 falso-positivos dismissados com evidência + os 5 únicos fixes de qualidade fora de testes (#339)
+- **agents:** rollout da ativação enxuta pós-piloto — 22 arquivos (9 núcleo + 8 mastery + 4 locais + template), −717/+374 linhas, zero coerção restante (#342)
+- **cleanup:** DEC-03 — remoção do cluster multi-story órfão (~4,4k linhas de código morto shipped: wave-executor, parallel-monitor, context-injector, semantic-merge-engine, parallel-executor de execution/, wave-analyzer + task `*waves`) com split DEC-02 preservando suggestion-engine/learning; registries e manifests regenerados (#344)
+
+### Documentation
+
+- **decisions:** mesa de decisões registra Ondas A/B/C de segurança, rollout da ativação enxuta e execução de DEC-02/DEC-03 (#338, #343)
+
 ## [1.20.0] — 2026-07-03 — 🧠 Ciclo Fable 5: dieta de contexto, spec/plan de 1ª classe, era de modelo sincronizada
 
 > Minor. Atualização segura via `npx sinapse-ai update`. Consolida o ciclo de upgrade Fable 5 (auditoria AF-20260702 → Onda 1 → Onda 2 → mesa de decisões): 15 PRs (#321–#335).
