@@ -123,7 +123,7 @@ describe('validate-article-iv (Article IV traceability)', () => {
     it('tolerates entries written as suffix (relative style)', () => {
       const { mapped } = matchFilesToStory(
         ['packages/installer/src/wizard/index.js'],
-        ['wizard/index.js']
+        ['wizard/index.js'],
       );
       expect(mapped).toEqual(['packages/installer/src/wizard/index.js']);
     });

@@ -145,7 +145,7 @@ function matchFilesToStory(changedProductFiles, fileListEntries) {
   for (const file of changedProductFiles) {
     const f = norm(file);
     const hit = entries.some(
-      (e) => e === f || f.startsWith(e.endsWith('/') ? e : `${e}/`) || f.endsWith(e)
+      (e) => e === f || f.startsWith(e.endsWith('/') ? e : `${e}/`) || f.endsWith(e),
     );
     (hit ? mapped : orphans).push(file);
   }
@@ -242,7 +242,7 @@ function main() {
 
   if (foundStories.length === 0) {
     console.log(
-      `ARTICLE_IV_SKIPPED: no referenced story found locally (refs: ${refs.join(', ')}).`
+      `ARTICLE_IV_SKIPPED: no referenced story found locally (refs: ${refs.join(', ')}).`,
     );
     process.exit(0);
   }
