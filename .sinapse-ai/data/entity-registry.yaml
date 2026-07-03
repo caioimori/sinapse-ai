@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T01:16:34.818Z'
+  lastUpdated: '2026-07-03T02:01:18.575Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -239,8 +239,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:81710d210c261e3a9135411ce111bac5ef9965f78f4c4c8ab8ea1f41f150cea9
-      lastVerified: '2026-06-18T04:29:33.818Z'
+      checksum: sha256:6d2ea0c99216d60e95a05b80145ab744d8b945aa4d8f2c67cf7ba219116fbf04
+      lastVerified: '2026-07-03T02:01:18.257Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -557,8 +557,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:5b4f06a8c4eef9be52f5b13545f992403031aa58a8a62ce2454015f98cb1156f
-      lastVerified: '2026-06-22T02:41:18.155Z'
+      checksum: sha256:4f90debf77331f102a564e5cebf84000cb65ac793e69ee90a51c60bb44b07151
+      lastVerified: '2026-07-03T02:01:18.258Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1
@@ -669,8 +669,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:82f839b438410a1091b5c3aeb7598b080b9cf7771cc796cbdf6927b59630ce9f
-      lastVerified: '2026-07-02T23:54:09.356Z'
+      checksum: sha256:3ee8a17c03de0013215627a8d9a1020d58301ae473ef8e017df929de5f7a8fe9
+      lastVerified: '2026-07-03T02:01:18.260Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1
