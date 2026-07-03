@@ -50,7 +50,9 @@ const SCANNER_SELF_FILES = new Set([
   'bin/utils/staged-secret-scan.js',
   '.claude/hooks/secret-scanning.cjs',
 ]);
-const TEST_FILE_PATTERN = /(^|\/)(tests?|__tests__)\/|\.(test|spec)\.[cm]?[jt]s$/i;
+// Each alternative carries its own anchors (grouped explicitly) so neither
+// branch can accidentally match a substring of the other's context.
+const TEST_FILE_PATTERN = /((^|\/)(tests?|__tests__)\/)|(\.(test|spec)\.[cm]?[jt]s$)/i;
 
 function isScanExemptPath(filePath) {
   const norm = String(filePath).replace(/\\/g, '/');
