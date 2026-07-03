@@ -16,13 +16,13 @@
 | Agente | Papel |
 |--------|-------|
 | Nexus (design-orqx) | Orquestrador — Digital Experience Orchestrator |
-| Compass (dx-ux-strategist) | UX Strategy & Research Lead |
-| Canvas (dx-ui-designer) | UI Design & Visual Systems Specialist |
-| Stratum (dx-design-system-architect) | Design System & Token Architecture Specialist |
+| Vantage (dx-ux-strategist) | UX Strategy & Research Lead |
+| Palette (dx-ui-designer) | UI Design & Visual Systems Specialist |
+| Lattice (dx-design-system-architect) | Design System & Token Architecture Specialist |
 | Scaffold (dx-frontend-engineer) | Frontend Architecture & Component Engineer |
-| Beacon (dx-accessibility-specialist) | Accessibility & Inclusive Design Expert |
-| Kinetic (dx-interaction-designer) | Interaction Design & Motion Systems Specialist |
-| Apex (dx-performance-engineer) | Web Performance Optimization Specialist |
+| Aperture (dx-accessibility-specialist) | Accessibility & Inclusive Design Expert |
+| Gesture (dx-interaction-designer) | Interaction Design & Motion Systems Specialist |
+| Velocity (dx-performance-engineer) | Web Performance Optimization Specialist |
 
 ## Ativacao
 

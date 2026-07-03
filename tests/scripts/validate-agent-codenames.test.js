@@ -16,6 +16,12 @@
  * retroactively fail CI over dozens of unrelated pre-existing collisions
  * this story never authorized touching), and (3) a real-repo regression
  * lock: after the fix, "Nexus" is no longer a blocking collision.
+ *
+ * Story onda2-p7 (2026-07-02) then triaged and resolved all 24 codenames
+ * this guard had surfaced as pending debt (Scope through Vertex — see the
+ * KNOWN_COLLISIONS_PENDING_TRIAGE comment in the source for the full verdict
+ * and rename map). The Set is empty again as a result; the mechanism itself
+ * stays wired for whatever the guard surfaces next.
  */
 
 const path = require('path');
@@ -120,19 +126,30 @@ describe('findCollisions — blocking vs. known-pending-triage split', () => {
   });
 
   test('a codename in KNOWN_COLLISIONS_PENDING_TRIAGE is reported but does not block', () => {
-    // Pick any real entry from the pending set so this test stays honest
-    // about what the shipped list actually contains.
-    const [sampleName] = [...KNOWN_COLLISIONS_PENDING_TRIAGE];
-    expect(sampleName).toBeTruthy();
-    const byName = new Map([[sampleName, toEntries(['x/one.md', 'y/two.md'], 'prose')]]);
-    const { blocking, pending } = findCollisions(byName);
-    expect(blocking).toHaveLength(0);
-    expect(pending).toHaveLength(1);
-    expect(pending[0].codename).toBe(sampleName);
+    // As of Story onda2-p7 the shipped Set is empty (every previously-known
+    // pending collision was triaged and resolved — see the source comment).
+    // Add a synthetic entry to exercise the mechanism itself without
+    // depending on production data being non-empty, then clean up.
+    const sampleName = '__test_pending_codename__';
+    expect(KNOWN_COLLISIONS_PENDING_TRIAGE.has(sampleName)).toBe(false);
+    KNOWN_COLLISIONS_PENDING_TRIAGE.add(sampleName);
+    try {
+      const byName = new Map([[sampleName, toEntries(['x/one.md', 'y/two.md'], 'prose')]]);
+      const { blocking, pending } = findCollisions(byName);
+      expect(blocking).toHaveLength(0);
+      expect(pending).toHaveLength(1);
+      expect(pending[0].codename).toBe(sampleName);
+    } finally {
+      KNOWN_COLLISIONS_PENDING_TRIAGE.delete(sampleName);
+    }
   });
 
   test('"Nexus" is NOT in the pending-triage list — it was actually fixed, not deferred', () => {
     expect(KNOWN_COLLISIONS_PENDING_TRIAGE.has('Nexus')).toBe(false);
+  });
+
+  test('KNOWN_COLLISIONS_PENDING_TRIAGE is empty — Story onda2-p7 resolved all 24 pending collisions', () => {
+    expect(KNOWN_COLLISIONS_PENDING_TRIAGE.size).toBe(0);
   });
 
   test('a unique codename (single file) is neither blocking nor pending', () => {

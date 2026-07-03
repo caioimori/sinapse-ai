@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** persuasion-psychologist (Nudge)
 - **Complexity:** STANDARD
 - **Depends on:** persuasion map, audiencia, jornada
-- **Feeds:** conversion-writer (Spark), long-form-writer (Saga)
+- **Feeds:** conversion-writer (Blitz), long-form-writer (Saga)
 
 ## Objetivo
 Desenhar a sequencia exata de triggers psicologicos para uma peca ou campanha especifica — definindo QUAL trigger, ONDE aplicar e com QUAL intensidade para maximizar conversao etica.

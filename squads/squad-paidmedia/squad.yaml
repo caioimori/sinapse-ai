@@ -43,7 +43,7 @@ agents:
       - manage-scaling-roadmap
 
   - id: meta-ads-specialist
-    name: Signal
+    name: Reach
     file: agents/meta-ads-specialist.md
     role: "Especialista Meta Ads — Facebook/Instagram campaigns, audiences, pixel/CAPI, creative testing"
     tasks:
@@ -83,7 +83,7 @@ agents:
       - analyze-keyword-search-terms
 
   - id: campaign-analyst
-    name: Pulse
+    name: Cadence
     file: agents/campaign-analyst.md
     role: "Analista de performance — reporting, attribution, analytics cross-channel, anomaly detection"
     tasks:
@@ -121,7 +121,7 @@ agents:
       - analyze-creative-performance
 
   - id: cro-specialist
-    name: Convert
+    name: Uplift
     file: agents/cro-specialist.md
     role: "Especialista CRO — form optimization, signup flows, onboarding, landing pages, A/B testing"
     tasks:
@@ -159,7 +159,7 @@ agents:
       - write-video-ad-script
 
   - id: pm-creative-performance-analyst
-    name: Lens
+    name: Focal
     file: agents/pm-creative-performance-analyst.md
     role: "Creative Performance Analyst — creative performance analysis, pattern identification, fatigue detection, testing insights"
     tasks:

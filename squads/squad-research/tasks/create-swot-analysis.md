@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** pesquisa de mercado + competitiva + audiencia completadas
 - **Feeds:** brand-system, commercial-systems, @pm
@@ -36,9 +36,9 @@ Checklist:
 Criar SWOT abrangente cruzando todos os inputs de pesquisa — com analise TOWS para gerar estrategias cruzadas (S×O, W×T, S×T, W×O).
 
 ## Entrada
-- Market analysis (Scope)
+- Market analysis (Sonar)
 - Competitive intelligence (Hawk)
-- Audience insights (Pulse)
+- Audience insights (Empath)
 - Trend forecasts (Horizon)
 - Deep research findings (Sage)
 
@@ -131,4 +131,4 @@ handoffs:
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

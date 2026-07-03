@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Kinetic (dx-interaction-designer)
+- **Agent:** Gesture (dx-interaction-designer)
 - **Complexity:** Standard
 
 ## Objetivo

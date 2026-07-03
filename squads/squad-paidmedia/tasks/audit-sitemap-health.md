@@ -9,7 +9,7 @@ elicit: false
 # Task: Audit Sitemap Health
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

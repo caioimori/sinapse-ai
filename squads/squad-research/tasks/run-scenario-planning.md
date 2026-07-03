@@ -38,7 +38,7 @@ Executar scenario planning completo usando metodo Schwartz — 2 incertezas crit
 ## Entrada
 - Analise PESTEL (macro forces)
 - Tendencias mapeadas (Horizon)
-- Market data (Scope)
+- Market data (Sonar)
 - Competitive landscape (Hawk)
 
 ## Passos

@@ -33,13 +33,13 @@ Checklist:
 - **Produces:** Product health dashboard, executive summary, action items
 
 ## Purpose
-Gerar relatório consolidado de saúde do produto combinando métricas de produto (Delta), status de delivery (Tempo), saúde do cliente (Proxy) e progresso estratégico (Charter).
+Gerar relatório consolidado de saúde do produto combinando métricas de produto (Delta), status de delivery (Metronome), saúde do cliente (Proxy) e progresso estratégico (Charter).
 
 ## Steps
 
 ### Step 1: Collect Metrics from Each Domain
 **Product (Delta):** Activation Rate, DAU/MAU, Feature Adoption, Retention D7/D30, NPS
-**Delivery (Tempo):** Sprint Velocity, Variance, Goal Completion, Bug Escape Rate, Tech Debt Ratio
+**Delivery (Metronome):** Sprint Velocity, Variance, Goal Completion, Bug Escape Rate, Tech Debt Ratio
 **Client (Proxy):** Satisfaction, Communication Cadence, Scope Changes, Relationship Temperature
 **Strategy (Charter):** OKR Progress, Roadmap Delivery, Discovery Pipeline, PMF Indicators
 

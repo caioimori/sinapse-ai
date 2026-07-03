@@ -27,10 +27,10 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** ad-copywriter (Spark)
+- **Agent:** ad-copywriter (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** copy brief, audiencia, plataforma(s), landing page definida
-- **Feeds:** paid-media squad, funnel-copywriter (Flow), copy-editor (Chisel)
+- **Feeds:** paid-media squad, funnel-copywriter (Chute), copy-editor (Chisel)
 
 ## Objetivo
 Criar pacote de variacoes de ad copy para Meta, Google, LinkedIn ou TikTok — com 40+ hooks, variacoes completas organizadas por angulo e formato, prontas para teste em escala. Volume + variedade = dados para otimizacao.
@@ -137,7 +137,7 @@ handoffs:
   - to: paid-media squad
     delivers: Ad copy variations organizadas por angulo e plataforma
     format: Spreadsheet com hooks, copies, e plano de teste
-  - to: funnel-copywriter (Flow)
+  - to: funnel-copywriter (Chute)
     delivers: Messaging e hooks para alinhamento com landing page
     format: Big Idea + top hooks + tom definido
 ```
@@ -161,4 +161,4 @@ handoffs:
 
 ---
 
-*Task operada por: ad-copywriter (Spark)*
+*Task operada por: ad-copywriter (Blitz)*

@@ -47,7 +47,7 @@ HOUR 0-4: TRIAGE
   □ CSM reviews full account history
   □ Identifies root cause hypothesis
   □ Escalates to CS Director
-  □ Notifies Pipeline (orchestrator)
+  □ Notifies Circuit (orchestrator)
 
 HOUR 4-8: INTERNAL ALIGNMENT
   □ CS Director reviews account

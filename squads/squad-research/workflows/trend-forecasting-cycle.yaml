@@ -94,7 +94,7 @@ workflow:
         criteria: 4 cenarios com narrativas e early indicators
     - id: synthesis
       name: 6. Trend Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - map-strategic-implications
@@ -195,7 +195,7 @@ workflow:
         criteria: 4 cenarios com narrativas e early indicators
     - id: synthesis
       name: 6. Trend Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - map-strategic-implications

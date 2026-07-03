@@ -100,7 +100,7 @@ PS — Reforco ou antecipacao do proximo email
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Emails de conversao para review de CTA
     format: Copy completa com intencao por email
   - to: persuasion-psychologist (Nudge)

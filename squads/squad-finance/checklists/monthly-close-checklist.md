@@ -46,7 +46,7 @@ used_by:
 - [ ] Pacing YTD atualizado
 - [ ] EAC projetado
 
-## 5. Pricing (Mint)
+## 5. Pricing (Markup)
 - [ ] Rate realization do mes calculada
 - [ ] Average deal size atualizado
 - [ ] Win rate atualizado (se dados disponiveis)

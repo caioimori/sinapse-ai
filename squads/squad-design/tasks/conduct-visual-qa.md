@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo

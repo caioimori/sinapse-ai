@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:a9c4078f0db9885680577732c258cd1ee833074c20f406c80b4607904f9c478e
+    hash: sha256:c421f5c62663c0cd585e8e8bf3dc90f1c44b20f675d73270851c299affaabe63
     type: data
     size: 549471
   - path: data/learned-patterns.yaml
@@ -1496,9 +1496,9 @@ files:
     type: agent
     size: 24405
   - path: development/agents/developer.md
-    hash: sha256:05e2e6362f95eb66c80e4f01dcb25232e283666c2195ec070e1bb59cc486ecb2
+    hash: sha256:2e1f50c1e08f36baa713a62c40f96932758d7969375efc133025ec4853fe8d43
     type: agent
-    size: 29832
+    size: 28389
   - path: development/agents/devops.md
     hash: sha256:81144f100a7ea8ef339a51691d32e7c480e24fef6ab4c3276e927568ba6ba0e4
     type: agent
@@ -1516,13 +1516,13 @@ files:
     type: agent
     size: 23745
   - path: development/agents/snps-orqx.md
-    hash: sha256:0ac5d15b04ca00119c8265516438672408d46b791c4c806f4c56a0accf572f62
+    hash: sha256:8e4145cdf25f57d366e0f6b3563e907c7a3ba8b2d6d3af0a6e573927f4a0321c
     type: agent
-    size: 43873
+    size: 43871
   - path: development/agents/sprint-lead.md
-    hash: sha256:572289b770cdbb0cff9ae2de4b2d19c38ce814fe978df397aa2794297f562c91
+    hash: sha256:df8dbd1de7b9c1238cbe3629d307563bbac1515869a5658dc7286b3dcbb55078
     type: agent
-    size: 14441
+    size: 13053
   - path: development/agents/squad-creator.md
     hash: sha256:80fc6cdfd6d7102803a5c477d576cbfadf96990ffd8f6c7246047603f2a80d33
     type: agent
@@ -3992,9 +3992,9 @@ files:
     type: template
     size: 3816
   - path: product/templates/activation-instructions-template.md
-    hash: sha256:1c97134346114eeb5669eb188990cf50e61588109f306bd139917f1d934d3a5e
+    hash: sha256:6a3e870e6525abd76ea655c7638afe95c4855b0aa53c9a86189cb99ee036e7d2
     type: template
-    size: 9098
+    size: 10768
   - path: product/templates/adr.hbs
     hash: sha256:7825131e30ee9f473e10258682981fd6cb7fb47e1c276ad79d3b777eaaecc62c
     type: template

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Pipeline (commercial-orqx)
+- **Agent:** Circuit (commercial-orqx)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -45,7 +45,7 @@ Criar brief comercial para cada novo cliente ou projeto — documento que alinha
 ```
 COMMERCIAL BRIEF — [Client/Project Name]
 Date: YYYY-MM-DD
-Owner: Pipeline (commercial-orqx)
+Owner: Circuit (commercial-orqx)
 
 1. CLIENT CONTEXT
    - Company:

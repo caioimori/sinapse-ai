@@ -119,7 +119,7 @@ Sustentavel? Sim/Nao (e por quanto tempo)
 | finance-orqx (Ledger) | Envia plano de otimizacao e tracking de saving para dashboard |
 | budget-controller (Vault) | Fornece input para vendor cost optimization; alinha com budget pacing |
 | profitability-analyst (Margin) | Recebe custos por cost-center para identificar concentracao de waste |
-| forecast-strategist (Horizon) | Fornece projecao de saving para forecast de despesa |
+| forecast-strategist (Runway) | Fornece projecao de saving para forecast de despesa |
 
 ## Delegacao
 
@@ -127,7 +127,7 @@ Sustentavel? Sim/Nao (e por quanto tempo)
 |-------------|-------------|
 | Margem por projeto/cliente | profitability-analyst (Margin) |
 | Budget e cash flow projetado | budget-controller (Vault) |
-| Modelagem de cenarios futuros | forecast-strategist (Horizon) |
+| Modelagem de cenarios futuros | forecast-strategist (Runway) |
 | Compliance tributario do contrato | fiscal-compliance-br (Tribute) |
 
 ## Quando Usar

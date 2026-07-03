@@ -84,8 +84,8 @@ Query e o especialista em Google Ads. Domina Search, Display, Shopping, Performa
 | analyze-keyword-search-terms | Analisar relacao keyword → search term para otimizacao |
 
 ## Interacoes
-- **Recebe de:** Apex (briefings, budget allocation), Canvas (ad copies), Lighthouse (tracking health), Convert (landing page data)
-- **Entrega para:** Pulse (dados de performance), Apex (reports de canal), Canvas (insights de ad copy performance)
+- **Recebe de:** Apex (briefings, budget allocation), Canvas (ad copies), Lighthouse (tracking health), Uplift (landing page data)
+- **Entrega para:** Cadence (dados de performance), Apex (reports de canal), Canvas (insights de ad copy performance)
 
 ## Quando Usar
 - Qualquer operacao especifica de Google Ads

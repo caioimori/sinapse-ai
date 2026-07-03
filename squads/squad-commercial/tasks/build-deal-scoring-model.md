@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Vault (cs-crm-specialist)
+- **Agent:** Rolodex (cs-crm-specialist)
 - **Complexity:** Advanced
 
 ## Objetivo

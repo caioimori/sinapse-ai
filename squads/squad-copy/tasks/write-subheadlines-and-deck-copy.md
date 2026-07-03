@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** headline-specialist (Hook)
 - **Complexity:** STANDARD
 - **Depends on:** headline principal aprovado
-- **Feeds:** long-form-writer (Saga), conversion-writer (Spark)
+- **Feeds:** long-form-writer (Saga), conversion-writer (Blitz)
 
 ## Objetivo
 Criar subheadlines e deck copy que sustentam o headline principal — expandindo a promessa sem revelar tudo, mantendo momentum de leitura.

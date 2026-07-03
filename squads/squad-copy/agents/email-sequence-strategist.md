@@ -62,7 +62,7 @@ Drip entende que email e o canal mais rentavel do marketing digital — mas so q
 
 ## Delegation
 - Estrategia macro de messaging → Quill (copy-strategist)
-- Landing pages de captura → Spark (conversion-writer)
+- Landing pages de captura → Blitz (conversion-writer)
 - Subject lines e hooks → Hook (headline-specialist)
 - Persuasion review da sequencia → Nudge (persuasion-psychologist)
 - Quality review final → Chisel (copy-editor)

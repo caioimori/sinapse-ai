@@ -1,7 +1,7 @@
 # Task: identify-website-animation
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens) | animations-orqx (Kinetic)
+- **Agent:** animation-interpreter (Decoder) | animations-orqx (Kinetic)
 - **Complexity:** Medium
 - **Dependencies:** Chrome DevTools MCP (or CDP via websockets)
 

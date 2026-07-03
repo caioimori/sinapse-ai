@@ -116,7 +116,7 @@ integration:
     - agent: "deep-researcher (Sage)"
       when: "Competidor precisa de deep dive em area especifica"
       context_passed: "Competidor, area de investigacao, dados ja coletados"
-    - agent: "data-synthesizer (Loom)"
+    - agent: "data-synthesizer (Braid)"
       when: "Analise competitiva completa precisa de dossie executivo"
       context_passed: "Dados competitivos, landscape, rankings"
   receives_from:

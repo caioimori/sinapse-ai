@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar a UI visual de landing pages de alta conversao — aplicar principios de visual hierarchy, scanning patterns e brand para criar paginas que guiam o usuario ate a acao desejada.
 
 ## Entrada
-- Wireframe brief (de Compass)
+- Wireframe brief (de Vantage)
 - Copy estruturada (de squad-copy)
 - Brand tokens e visual guidelines
 - Conversion goals
@@ -101,7 +101,7 @@ Projetar a UI visual de landing pages de alta conversao — aplicar principios d
 - CTA design system
 - Trust signal placement
 - Responsive adaptations
-- Handoff para Scaffold (build) e Apex (performance)
+- Handoff para Scaffold (build) e Velocity (performance)
 
 ## Validacao
 - [ ] Hero comunica value prop em 5 segundos

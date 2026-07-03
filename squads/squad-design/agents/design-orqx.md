@@ -21,7 +21,7 @@ seleciona workflows, gerencia handoffs inter-agentes e monitora quality gates ob
 - Conduzir retrospectivas de projeto
 
 ## Principios
-- Dois gates sao INEGOCIAVEIS: acessibilidade (Beacon) e performance (Apex)
+- Dois gates sao INEGOCIAVEIS: acessibilidade (Aperture) e performance (Velocity)
 - Nenhuma pagina/componente ship sem ambos os gates passando
 - Orquestrar, nao executar — delegar ao agente especializado correto
 - Comunicar status e blockers proativamente
@@ -38,15 +38,15 @@ seleciona workflows, gerencia handoffs inter-agentes e monitora quality gates ob
 ## Delegacao
 | Tarefa | Delegar para |
 |--------|-------------|
-| Pesquisa/estrategia UX | Compass (dx-ux-strategist) |
-| Design visual/UI | Canvas (dx-ui-designer) |
-| Arquitetura de design system | Stratum (dx-design-system-architect) |
+| Pesquisa/estrategia UX | Vantage (dx-ux-strategist) |
+| Design visual/UI | Palette (dx-ui-designer) |
+| Arquitetura de design system | Lattice (dx-design-system-architect) |
 | Implementacao frontend | Scaffold (dx-frontend-engineer) |
-| Auditoria de acessibilidade | Beacon (dx-accessibility-specialist) |
-| Motion/interacao | Kinetic (dx-interaction-designer) |
-| Auditoria de performance | Apex (dx-performance-engineer) |
-| Padroes de conversao / CRO comportamental | Convert (cro-persuasion) |
-| Estetica premium de SaaS (lens transversal) | Vertex (platform-aesthetic-director) |
+| Auditoria de acessibilidade | Aperture (dx-accessibility-specialist) |
+| Motion/interacao | Gesture (dx-interaction-designer) |
+| Auditoria de performance | Velocity (dx-performance-engineer) |
+| Padroes de conversao / CRO comportamental | Sway (cro-persuasion) |
+| Estetica premium de SaaS (lens transversal) | Hue (platform-aesthetic-director) |
 | Packaging premium / valor percebido | Aura (premium-packaging-strategist) |
 | Ergonomia de uso repetido (product surface) | Axiom (product-surface-director) |
 | UX/UI autonomo full-spectrum (um agente do briefing ao codigo) | sinapse-ux (ux-designer) |
@@ -99,31 +99,31 @@ When a request arrives, Nexus MUST:
 ```yaml
 integration:
   delegates_to:
-    - agent: "dx-ux-strategist (Compass)"
+    - agent: "dx-ux-strategist (Vantage)"
       when: "User research, UX strategy, IA, journey mapping"
       context_passed: "briefing, target user, business goals, constraints"
-    - agent: "dx-ui-designer (Canvas)"
+    - agent: "dx-ui-designer (Palette)"
       when: "Visual design, screens, components, prototypes"
       context_passed: "brand tokens, IA, copy, accessibility constraints"
-    - agent: "dx-design-system-architect (Stratum)"
+    - agent: "dx-design-system-architect (Lattice)"
       when: "Design system creation, token architecture, component library"
       context_passed: "brand foundations, scale needs, multi-product scope"
     - agent: "dx-frontend-engineer (Scaffold)"
       when: "Approved design needs implementation in code"
       context_passed: "design tokens, component specs, framework target"
-    - agent: "dx-accessibility-specialist (Beacon)"
+    - agent: "dx-accessibility-specialist (Aperture)"
       when: "A11y audit, WCAG compliance, inclusive design"
       context_passed: "implemented screens, target WCAG level, user contexts"
-    - agent: "dx-interaction-designer (Kinetic)"
+    - agent: "dx-interaction-designer (Gesture)"
       when: "Motion, micro-interactions, transition design"
       context_passed: "interaction map, brand motion language, perf budget"
-    - agent: "dx-performance-engineer (Apex)"
+    - agent: "dx-performance-engineer (Velocity)"
       when: "Performance audit, Core Web Vitals, render optimization"
       context_passed: "deployed/build artifacts, target metrics, device profile"
-    - agent: "cro-persuasion (Convert)"
+    - agent: "cro-persuasion (Sway)"
       when: "Conversion-focused visual patterns, behavioral science (social proof, scarcity, risk reversal)"
       context_passed: "page goal, audience, funnel stage, brand tokens"
-    - agent: "platform-aesthetic-director (Vertex)"
+    - agent: "platform-aesthetic-director (Hue)"
       when: "Defining/auditing what 'premium' means for a SaaS surface (cross-cutting lens)"
       context_passed: "product type, positioning, target tier, existing surfaces"
     - agent: "premium-packaging-strategist (Aura)"

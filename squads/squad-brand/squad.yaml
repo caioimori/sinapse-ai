@@ -229,7 +229,7 @@ components:
     - create-dark-mode.md
     - export-tokens.md
 
-    # ── Motion & VFX (Flux) — 5 tasks ──
+    # ── Motion & VFX (Ripple) — 5 tasks ──
     - define-motion-language.md
     - create-micro-interactions.md
     - create-page-transitions.md

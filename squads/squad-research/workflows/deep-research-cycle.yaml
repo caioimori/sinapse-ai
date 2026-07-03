@@ -81,7 +81,7 @@ workflow:
         criteria: Triangulacao completada, confidence levels atribuidos
     - id: synthesis
       name: 5. Synthesis & Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - generate-actionable-recommendations
@@ -170,7 +170,7 @@ workflow:
         criteria: Triangulacao completada, confidence levels atribuidos
     - id: synthesis
       name: 5. Synthesis & Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - generate-actionable-recommendations

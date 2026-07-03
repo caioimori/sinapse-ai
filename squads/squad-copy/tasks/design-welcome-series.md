@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** email-sequence-strategist (Drip)
 - **Complexity:** STANDARD
 - **Depends on:** lead magnet definido, audiencia, brand voice
-- **Feeds:** conversion-writer (Spark), copy-editor (Chisel)
+- **Feeds:** conversion-writer (Blitz), copy-editor (Chisel)
 
 ## Objetivo
 Criar welcome series que transforma novos subscribers em engajados e compradores. Os primeiros 5-7 emails definem a relacao — expectativas, valor, confianca e primeiro "sim" de compra. E a sequencia mais importante de qualquer email marketing.
@@ -90,7 +90,7 @@ handoffs:
   - to: brand-voice-writer (Tone)
     delivers: Welcome series para review de voz e tom
     format: Sequencia completa com notas de persona
-  - to: funnel-copywriter (Flow)
+  - to: funnel-copywriter (Chute)
     delivers: Welcome series integrada ao funil
     format: Sequencia com contexto de value ladder
 ```

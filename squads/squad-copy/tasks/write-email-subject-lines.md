@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** headline-specialist (Hook)
 - **Complexity:** STANDARD
 - **Depends on:** copy brief, email campaign objective
-- **Feeds:** conversion-writer (Spark)
+- **Feeds:** conversion-writer (Blitz)
 
 ## Objetivo
 Criar subject lines de email que maximizam open rate — combinando curiosidade, relevancia e urgencia dentro de 50 caracteres.

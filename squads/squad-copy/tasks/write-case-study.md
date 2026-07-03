@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** STANDARD
 - **Depends on:** dados do cliente, resultados, aprovacao
-- **Feeds:** conversion-writer (Spark), squad-content
+- **Feeds:** conversion-writer (Blitz), squad-content
 
 ## Objetivo
 Escrever case study que transforma resultados de clientes em narrativa persuasiva — provando valor atraves de historia, nao apenas dados. O case study e a ponte entre "promessa" e "prova".
@@ -127,7 +127,7 @@ Escrever case study que transforma resultados de clientes em narrativa persuasiv
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Case study para uso em LPs e emails
     format: Full case + mini case + quote cards
   - to: squad-content

@@ -43,7 +43,7 @@ used_by:
 - [ ] 3 cenarios revisados (pessimista, base, otimista)
 - [ ] EAC anual atualizado
 
-## 5. Pricing Review (Mint)
+## 5. Pricing Review (Markup)
 - [ ] Rate realization trimestral
 - [ ] Average deal size trend
 - [ ] Win rate por faixa de preco

@@ -41,7 +41,7 @@ workflow:
         criteria: Scope claro, perguntas definidas
     - id: persona-building
       name: 2. Persona Building
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - build-audience-persona
         - profile-ideal-customer
@@ -57,7 +57,7 @@ workflow:
         criteria: Personas com dados reais, nao fictícios
     - id: journey-mapping
       name: 3. Journey Mapping
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - map-audience-journey
         - map-pain-gain-matrix
@@ -71,7 +71,7 @@ workflow:
         criteria: Todos os stages cobertos, gaps identificados
     - id: jtbd-analysis
       name: 4. JTBD Analysis
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - conduct-jobs-to-be-done
         - analyze-audience-behavior
@@ -85,7 +85,7 @@ workflow:
         criteria: Jobs priorizados, outcomes mensuráveis
     - id: psychographic-profiling
       name: 5. Psychographic Profiling
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - analyze-audience-psychographics
         - segment-audience
@@ -100,7 +100,7 @@ workflow:
         criteria: Segmentos distintos, psychographics actionable
     - id: validation
       name: 6. Persona Validation
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - validate-persona-with-data
       inputs:
@@ -112,7 +112,7 @@ workflow:
         criteria: Validation score >= 70%
     - id: synthesis-delivery
       name: 7. Synthesis & Delivery
-      agent: data-synthesizer (Loom) → research-orqx (Prism)
+      agent: data-synthesizer (Braid) → research-orqx (Prism)
       tasks:
         - synthesize-research-report
         - coordinate-cross-squad-research
@@ -146,7 +146,7 @@ workflow:
         criteria: Scope claro, perguntas definidas
     - id: persona-building
       name: 2. Persona Building
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - build-audience-persona
         - profile-ideal-customer
@@ -162,7 +162,7 @@ workflow:
         criteria: Personas com dados reais, nao fictícios
     - id: journey-mapping
       name: 3. Journey Mapping
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - map-audience-journey
         - map-pain-gain-matrix
@@ -176,7 +176,7 @@ workflow:
         criteria: Todos os stages cobertos, gaps identificados
     - id: jtbd-analysis
       name: 4. JTBD Analysis
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - conduct-jobs-to-be-done
         - analyze-audience-behavior
@@ -190,7 +190,7 @@ workflow:
         criteria: Jobs priorizados, outcomes mensuráveis
     - id: psychographic-profiling
       name: 5. Psychographic Profiling
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - analyze-audience-psychographics
         - segment-audience
@@ -205,7 +205,7 @@ workflow:
         criteria: Segmentos distintos, psychographics actionable
     - id: validation
       name: 6. Persona Validation
-      agent: audience-intelligence (Pulse)
+      agent: audience-intelligence (Empath)
       tasks:
         - validate-persona-with-data
       inputs:
@@ -217,7 +217,7 @@ workflow:
         criteria: Validation score >= 70%
     - id: synthesis-delivery
       name: 7. Synthesis & Delivery
-      agent: data-synthesizer (Loom) → research-orqx (Prism)
+      agent: data-synthesizer (Braid) → research-orqx (Prism)
       tasks:
         - synthesize-research-report
         - coordinate-cross-squad-research

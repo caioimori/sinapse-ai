@@ -31,7 +31,7 @@ Checklist:
 - **Complexity:** Complex
 
 ## Objetivo
-Executar o gate de qualidade integrado do squad — consolidando resultados de accessibility (Beacon), performance (Apex) e quality checks dos demais agentes em um verdict unificado.
+Executar o gate de qualidade integrado do squad — consolidando resultados de accessibility (Aperture), performance (Velocity) e quality checks dos demais agentes em um verdict unificado.
 
 ## Entrada
 - Deliverables da fase atual do pipeline
@@ -55,14 +55,14 @@ Executar o gate de qualidade integrado do squad — consolidando resultados de a
 ### 2. Avaliar Gates Bloqueantes
 Os dois gates INEGOCIAVEIS:
 
-**Accessibility Gate (Beacon):**
+**Accessibility Gate (Aperture):**
 | Verdict | Criterio | Acao |
 |---------|----------|------|
 | PASS | 0 critical, 0 major, Lighthouse a11y >= 95 | Prosseguir |
 | CONDITIONAL | 0 critical, <= 3 major com remediation plan | Prosseguir com timeline |
 | FAIL | Qualquer critical OU > 3 major | BLOQUEAR entrega |
 
-**Performance Gate (Apex):**
+**Performance Gate (Velocity):**
 | Verdict | Criterio | Acao |
 |---------|----------|------|
 | CERTIFIED | LCP < 2.5s, INP < 200ms, CLS < 0.1 | Prosseguir |

@@ -9,7 +9,7 @@ elicit: false
 # Task: Calculate Sample Size
 
 ## Metadata
-- **Agent:** cro-specialist (Convert)
+- **Agent:** cro-specialist (Uplift)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

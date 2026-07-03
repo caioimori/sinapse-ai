@@ -36,7 +36,7 @@ Implementar padroes de error boundary robustos — capturar, reportar e recupera
 ## Entrada
 - Route structure
 - Error types do sistema
-- Empty/error state designs (de Canvas)
+- Empty/error state designs (de Palette)
 - Monitoring requirements
 
 ## Passos

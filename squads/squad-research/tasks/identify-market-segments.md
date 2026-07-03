@@ -27,10 +27,10 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** size-market-tam-sam-som
-- **Feeds:** segment-audience (Pulse), commercial-systems
+- **Feeds:** segment-audience (Empath), commercial-systems
 
 ## Objetivo
 Identificar e avaliar segmentos de mercado para determinar onde focar recursos e esforcos.
@@ -86,4 +86,4 @@ Identificar e avaliar segmentos de mercado para determinar onde focar recursos e
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

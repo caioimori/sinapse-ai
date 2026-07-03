@@ -20,7 +20,7 @@ Saida:
 # Task: Manage Pixel & CAPI Health
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

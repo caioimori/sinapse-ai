@@ -19,7 +19,7 @@ workflow:
   trigger: Necessidade de validacao, discovery ou avaliacao de UX
   phases:
     - name: "Phase 1: Research Planning"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       tasks:
         - plan-ux-research-sprint
       input:
@@ -37,7 +37,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 2: Research Execution"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 1
       tasks:
         - synthesize-user-research
@@ -59,7 +59,7 @@ workflow:
           - COMPLETE
           - NEED_MORE_DATA
     - name: "Phase 3: Synthesis"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 2
       tasks:
         - synthesize-user-research
@@ -80,7 +80,7 @@ workflow:
         verdict:
           - SYNTHESIS_COMPLETE
     - name: "Phase 4: Brief Generation"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 3
       tasks:
         - create-wireframe-brief
@@ -102,7 +102,7 @@ workflow:
   id: ux-research-sprint
   sequence:
     - name: "Phase 1: Research Planning"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       tasks:
         - plan-ux-research-sprint
       input:
@@ -120,7 +120,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 2: Research Execution"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 1
       tasks:
         - synthesize-user-research
@@ -142,7 +142,7 @@ workflow:
           - COMPLETE
           - NEED_MORE_DATA
     - name: "Phase 3: Synthesis"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 2
       tasks:
         - synthesize-user-research
@@ -163,7 +163,7 @@ workflow:
         verdict:
           - SYNTHESIS_COMPLETE
     - name: "Phase 4: Brief Generation"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       depends_on: Phase 3
       tasks:
         - create-wireframe-brief

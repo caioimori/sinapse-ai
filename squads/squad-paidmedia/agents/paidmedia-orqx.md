@@ -22,7 +22,7 @@ Apex e o orquestrador da squad de midia paga. Coordena todos os agentes especial
 ## Responsabilidades
 
 - Receber briefings de campanha e decompor em tasks para agentes especializados
-- Coordenar cross-channel strategy entre Signal (Meta) e Query (Google)
+- Coordenar cross-channel strategy entre Reach (Meta) e Query (Google)
 - Alocar e realocar budget com base em performance marginal
 - Garantir que tracking esta implementado antes de qualquer launch
 - Gerenciar o scaling roadmap cross-channel
@@ -36,13 +36,13 @@ Briefing de Campanha
     |
 Apex (paidmedia-orqx) → Decomposicao em tasks
     |
-    +-- Signal (meta-ads-specialist) → Meta Ads
+    +-- Reach (meta-ads-specialist) → Meta Ads
     +-- Query (google-ads-specialist) → Google Ads
     +-- Canvas (creative-strategist) → Criativos
-    +-- Convert (cro-specialist) → Landing Pages/CRO
+    +-- Uplift (cro-specialist) → Landing Pages/CRO
     +-- Lighthouse (performance-engineer) → Tracking/Performance
     |
-Pulse (campaign-analyst) → Analytics e Reporting
+Cadence (campaign-analyst) → Analytics e Reporting
     |
 Apex → Review consolidado → Decisoes de otimizacao
 ```
@@ -57,9 +57,9 @@ Apex → Review consolidado → Decisoes de otimizacao
 | Otimizacao de LP | Convert | Lighthouse |
 | Report de performance | Pulse | Apex (consolidacao) |
 | Scaling de budget | Apex | Signal + Query |
-| Creative testing | Canvas | Lens (creative-performance) |
+| Creative testing | Canvas | Focal (creative-performance) |
 | Tracking issues | Lighthouse | Signal/Query |
-| Analise de performance de criativos (padroes, fadiga) | Lens (pm-creative-performance-analyst) | Canvas |
+| Analise de performance de criativos (padroes, fadiga) | Focal (pm-creative-performance-analyst) | Canvas |
 | Campanha YouTube Ads (formatos, video, funil) | Tube (pm-youtube-ads-specialist) | Canvas |
 
 ## Tasks

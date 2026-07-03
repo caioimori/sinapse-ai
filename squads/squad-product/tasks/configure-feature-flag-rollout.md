@@ -26,7 +26,7 @@ Checklist:
 # Configure Feature Flag Rollout
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 1-2 hours
 - **Produces:** Feature flag configuration, rollout schedule, targeting rules, cleanup plan

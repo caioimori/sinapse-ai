@@ -26,7 +26,7 @@ Checklist:
 # Create Product Onboarding Runbook
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium
 - **Estimated Time:** 3-4 hours
 - **Produces:** PM onboarding runbook, learning path, checklist, 30-60-90 day plan
@@ -117,9 +117,9 @@ Criar runbook de onboarding para novos Product Managers que entram na agencia, g
 | Product strategy question | ps-product-strategist (Charter) | Async or scheduled |
 | Research methodology | ps-discovery-lead (Quorum) | Async or pair session |
 | Analytics help | ps-product-analyst (Delta) | Async or dashboard walkthrough |
-| Delivery/sprint question | ps-delivery-manager (Tempo) | Daily standup or async |
+| Delivery/sprint question | ps-delivery-manager (Metronome) | Daily standup or async |
 | Client situation advice | ps-client-product-manager (Proxy) | Immediate (Slack DM) |
-| Process/template question | ps-product-ops-specialist (Mosaic) | Async |
+| Process/template question | ps-product-ops-specialist (Cog) | Async |
 | Escalation | product-orqx (Vector) | Immediate |
 
 **Buddy System:**

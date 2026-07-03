@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** COMPLEX
 - **Depends on:** research data, copy brief, message hierarchy
-- **Feeds:** conversion-writer (Spark), squad-content
+- **Feeds:** conversion-writer (Blitz), squad-content
 
 ## Objetivo
 Escrever whitepaper que educa E persuade — posicionando a marca como autoridade enquanto guia o leitor ate a conclusao de que a solucao da marca e a melhor. Diferente de whitepaper academico: equilibra credibilidade com conversao.
@@ -157,7 +157,7 @@ Escrever whitepaper que educa E persuade — posicionando a marca como autoridad
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: LP copy para gate do whitepaper
     format: Landing page brief + key benefits
   - to: squad-content

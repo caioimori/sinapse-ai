@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** build-audience-persona
 - **Feeds:** content-intelligence/North, brand-system/Athena
@@ -94,4 +94,4 @@ Mapear o ecossistema completo da audiencia — onde vivem, quem influencia, que 
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

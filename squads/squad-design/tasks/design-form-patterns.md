@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -127,7 +127,7 @@ input_states:
 - Validation visual patterns
 - Help text guidelines
 - Submit flow specifications
-- Handoff para Scaffold (implementation) e Beacon (a11y review)
+- Handoff para Scaffold (implementation) e Aperture (a11y review)
 
 ## Validacao
 - [ ] Labels nunca substituidos por placeholders

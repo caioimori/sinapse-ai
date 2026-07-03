@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** persuasion-psychologist (Nudge)
 - **Complexity:** STANDARD
 - **Depends on:** pricing strategy, oferta, audiencia
-- **Feeds:** conversion-writer (Spark), copy-editor (Chisel)
+- **Feeds:** conversion-writer (Blitz), copy-editor (Chisel)
 
 ## Objetivo
 Otimizar como o preco e APRESENTADO (framing) — usando principios de pricing psychology para reduzir pain of paying e aumentar valor percebido sem alterar o preco real.
@@ -144,7 +144,7 @@ R$47/mes      | R$97/mes          | R$297/mes
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Pricing copy otimizada
     format: Copy por plano + anchoring + value framing
   - to: squad-design

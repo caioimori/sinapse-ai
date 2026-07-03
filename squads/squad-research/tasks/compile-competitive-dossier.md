@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** Hawk competitive tasks (map-competitive-landscape, analyze-competitor-strategy, etc.)
 - **Feeds:** commercial-systems, brand-system, @pm
@@ -111,4 +111,4 @@ handoffs:
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

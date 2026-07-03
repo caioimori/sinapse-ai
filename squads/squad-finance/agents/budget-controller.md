@@ -112,7 +112,7 @@ Alerta: < 3 meses
 |--------|----------------------|
 | finance-orqx (Ledger) | Envia budget variance, forecast e cash flow para dashboard |
 | profitability-analyst (Margin) | Recebe custos reais, fornece budget targets |
-| pricing-strategist (Mint) | Fornece forecast de receita para simulacoes de pricing |
+| pricing-strategist (Markup) | Fornece forecast de receita para simulacoes de pricing |
 | revenue-analyst (Flow) | Recebe dados de collection para cash flow |
 
 ## Quando Usar

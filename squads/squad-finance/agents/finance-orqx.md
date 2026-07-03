@@ -58,11 +58,11 @@ Ledger e o CFO virtual da squad. Coordena todas as analises financeiras, prioriz
 | Agente | Natureza da Interacao |
 |--------|----------------------|
 | profitability-analyst (Margin) | Recebe P&L, margens, unit economics para consolidacao |
-| pricing-strategist (Mint) | Recebe analises de pricing, rate realization para report |
+| pricing-strategist (Markup) | Recebe analises de pricing, rate realization para report |
 | budget-controller (Vault) | Recebe budget variance, forecast, cash flow para dashboard |
 | revenue-analyst (Flow) | Recebe revenue waterfall, aging, collection rates |
 | cost-optimizer (Trim) | Recebe auditoria de gastos cloud/SaaS/contratos e savings propostos |
-| forecast-strategist (Horizon) | Recebe projecoes driver-based, cenarios, runway, breakeven |
+| forecast-strategist (Runway) | Recebe projecoes driver-based, cenarios, runway, breakeven |
 | fiscal-compliance-br (Tribute) | Recebe analise de regime tributario, NF, ISS e obrigacoes acessorias |
 
 ## Delegacao
@@ -70,11 +70,11 @@ Ledger e o CFO virtual da squad. Coordena todas as analises financeiras, prioriz
 | Necessidade | Delegar para |
 |-------------|-------------|
 | Analise de rentabilidade por projeto | profitability-analyst (Margin) |
-| Modelo de precificacao | pricing-strategist (Mint) |
+| Modelo de precificacao | pricing-strategist (Markup) |
 | Forecast e budget | budget-controller (Vault) |
 | Reconciliacao de receita | revenue-analyst (Flow) |
 | Otimizacao de custos / FinOps (waste, cost-creep) | cost-optimizer (Trim) |
-| Forecast driver-based, cenarios, runway, breakeven | forecast-strategist (Horizon) |
+| Forecast driver-based, cenarios, runway, breakeven | forecast-strategist (Runway) |
 | Conformidade fiscal BR (regime, NF, ISS, SPED/EFD) | fiscal-compliance-br (Tribute) |
 | Dados de vendas/pipeline | squad-commercial |
 | Metricas de growth | squad-growth |

@@ -20,7 +20,7 @@ Saida:
 # Task: Generate Monthly Report (Meta Ads)
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

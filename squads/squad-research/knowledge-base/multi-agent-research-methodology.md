@@ -17,10 +17,10 @@ Um Second Brain agêntico ou pipeline de pesquisa profunda não é operado por u
 [Orquestrador Principal (research-orqx)]
   |
   |-- [deep-researcher (Sage)]     -- Pesquisa profunda, multi-fonte
-  |-- [audience-intelligence (Pulse)] -- JTBD, personas, comportamento
+  |-- [audience-intelligence (Empath)] -- JTBD, personas, comportamento
   |-- [competitive-intelligence (Hawk)] -- Análise competitiva, monitoring
-  |-- [market-analyst (Scope)]     -- TAM/SAM/SOM, industry analysis
-  |-- [data-synthesizer (Loom)]    -- Síntese, consolidação, report final
+  |-- [market-analyst (Sonar)]     -- TAM/SAM/SOM, industry analysis
+  |-- [data-synthesizer (Braid)]    -- Síntese, consolidação, report final
   |-- [trend-forecaster (Horizon)] -- Weak signals, cenários futuros
 ```
 

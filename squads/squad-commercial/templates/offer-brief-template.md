@@ -153,5 +153,5 @@
 |------|------|----------|------|
 | Offer Designer (Mint) | | ☐ | |
 | Sales Lead (Edge) | | ☐ | |
-| Revenue Lead (Ledger) | | ☐ | |
-| Orchestrator (Pipeline) | | ☐ | |
+| Revenue Lead (Turbine) | | ☐ | |
+| Orchestrator (Circuit) | | ☐ | |

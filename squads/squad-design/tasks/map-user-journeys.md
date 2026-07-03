@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -108,7 +108,7 @@ Verificar consistencia da experiencia entre:
 - Emotion curves
 - Opportunity map priorizado
 - Service blueprint (se aplicavel)
-- Handoff para Canvas (design) e Scaffold (implementacao)
+- Handoff para Palette (design) e Scaffold (implementacao)
 
 ## Validacao
 - [ ] Jornadas criticas mapeadas

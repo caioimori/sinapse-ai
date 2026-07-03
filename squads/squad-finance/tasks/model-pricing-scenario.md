@@ -35,7 +35,7 @@ Checklist:
 # Task: Model Pricing Scenario
 
 ## Metadata
-- **Agent:** pricing-strategist (Mint)
+- **Agent:** pricing-strategist (Markup)
 - **Squad:** squad-finance
 - **Complexity:** COMPLEX
 

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -118,7 +118,7 @@ Cada wireframe deve incluir:
 - Annotations de layout e hierarquia
 - Responsive behavior notes
 - Interaction notes
-- Handoff para Canvas (UI design)
+- Handoff para Palette (UI design)
 
 ## Validacao
 - [ ] Todos os page templates wireframed

@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** headline-specialist (Hook)
 - **Complexity:** STANDARD
 - **Depends on:** copy brief, brand voice
-- **Feeds:** conversion-writer (Spark), content-intelligence
+- **Feeds:** conversion-writer (Blitz), content-intelligence
 
 ## Objetivo
 Criar hooks para social media — a primeira linha que determina se alguem para o scroll. Platform-specific, attention-first.

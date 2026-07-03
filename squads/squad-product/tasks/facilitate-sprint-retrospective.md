@@ -26,7 +26,7 @@ Checklist:
 # Facilitate Sprint Retrospective
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 1-1.5 hours
 - **Produces:** Retrospective notes, action items, team health indicators, improvement commitments

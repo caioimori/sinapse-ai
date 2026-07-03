@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** direct-response-writer (Forge)
+- **Agent:** direct-response-writer (Torque)
 - **Complexity:** COMPLEX
 - **Depends on:** copy brief, message hierarchy, proof stack, mecanismo unico
 - **Feeds:** proof-architect (Evidence), copy-editor (Chisel)
@@ -109,7 +109,7 @@ handoffs:
   - to: proof-architect (Evidence)
     delivers: VSL script para verificacao de claims e provas
     format: Script com claims destacados
-  - to: funnel-copywriter (Flow)
+  - to: funnel-copywriter (Chute)
     delivers: VSL script para integracao na pagina de venda
     format: Script final com notas de producao
 ```
@@ -136,4 +136,4 @@ handoffs:
 
 ---
 
-*Task operada por: direct-response-writer (Forge)*
+*Task operada por: direct-response-writer (Torque)*

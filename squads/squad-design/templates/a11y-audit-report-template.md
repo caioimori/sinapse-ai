@@ -10,7 +10,7 @@ Template para relatorio de auditoria de acessibilidade. Preencher apos conduzir 
 | Campo | Valor |
 |-------|-------|
 | Projeto | |
-| Auditor | Beacon (dx-accessibility-specialist) |
+| Auditor | Aperture (dx-accessibility-specialist) |
 | Data do audit | |
 | Escopo | [Paginas / Componentes / Produto completo] |
 | Standard | WCAG 2.2 Level AA |

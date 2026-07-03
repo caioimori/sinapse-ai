@@ -15,11 +15,11 @@
 
 | Agente | Papel |
 |--------|-------|
-| Pipeline (commercial-orqx) | Orquestrador — Revenue Cycle Orchestrator |
-| Vault (cs-crm-specialist) | CRM & Pipeline Operations Specialist |
+| Circuit (commercial-orqx) | Orquestrador — Revenue Cycle Orchestrator |
+| Rolodex (cs-crm-specialist) | CRM & Pipeline Operations Specialist |
 | Cascade (cs-funnel-architect) | Funnel Architecture & Demand Generation |
 | Mint (cs-offer-designer) | Offer Architect & Pricing Strategist |
-| Ledger (cs-revops-analyst) | Revenue Operations & Analytics Lead |
+| Turbine (cs-revops-analyst) | Revenue Operations & Analytics Lead |
 | Bond (cs-client-success) | Client Success & Retention Strategist |
 | Edge (cs-sales-enablement) | Sales Methodology & Enablement Coach |
 

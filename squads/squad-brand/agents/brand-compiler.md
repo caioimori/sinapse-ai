@@ -208,7 +208,7 @@ integration:
     - agent: "brand-system-architect (Grid)"
       when: "Design system aprovado para inclusao"
       context_expected: "tokens, componentes, grid, dark mode, codigo"
-    - agent: "brand-motion-vfx (Flux)"
+    - agent: "brand-motion-vfx (Ripple)"
       when: "Motion system aprovado para inclusao"
       context_expected: "motion principles, animations, video templates, Lottie files"
     - agent: "brand-sonic-designer (Echo)"

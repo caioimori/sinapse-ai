@@ -135,21 +135,21 @@ agents:
     tasks_count: 8
 
   - id: dx-ux-strategist
-    name: Compass
+    name: Vantage
     icon: "🧭"
     archetype: Investigator
     role: UX Strategy & Research Lead
     tasks_count: 12
 
   - id: dx-ui-designer
-    name: Canvas
+    name: Palette
     icon: "🎨"
     archetype: Artist
     role: UI Design & Visual Systems Specialist
     tasks_count: 14
 
   - id: dx-design-system-architect
-    name: Stratum
+    name: Lattice
     icon: "🏛️"
     archetype: Architect
     role: Design System & Token Architecture Specialist
@@ -163,21 +163,21 @@ agents:
     tasks_count: 18
 
   - id: dx-accessibility-specialist
-    name: Beacon
+    name: Aperture
     icon: "♿"
     archetype: Guardian
     role: Accessibility & Inclusive Design Expert
     tasks_count: 10
 
   - id: dx-interaction-designer
-    name: Kinetic
+    name: Gesture
     icon: "✨"
     archetype: Animator
     role: Interaction Design & Motion Systems Specialist
     tasks_count: 12
 
   - id: dx-performance-engineer
-    name: Apex
+    name: Velocity
     icon: "⚡"
     archetype: Optimizer
     role: Web Performance Optimization Specialist

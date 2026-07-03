@@ -35,7 +35,7 @@ Implementar fluxos de autenticacao na UI — login, registro, reset de senha, pr
 
 ## Entrada
 - Auth provider (NextAuth, Supabase Auth, etc)
-- UI design specs (de Canvas)
+- UI design specs (de Palette)
 - Security requirements
 - A11y requirements
 

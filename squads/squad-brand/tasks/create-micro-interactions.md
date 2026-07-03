@@ -26,7 +26,7 @@ Checklist:
 # Task: create-micro-interactions
 
 ## Metadata
-- **Agent:** brand-motion-vfx (Flux)
+- **Agent:** brand-motion-vfx (Ripple)
 - **Squad:** squad-brand
 - **Trigger:** `*create-micro-interactions`
 - **Inputs:** Motion language, design system componentes, easing curves

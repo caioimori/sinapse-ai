@@ -11,7 +11,7 @@ Definir ANTES de implementar. Serve como contrato de performance que o CI/CD enf
 |-------|-------|
 | Projeto | |
 | Tipo de pagina | [Marketing / E-commerce / Dashboard / Blog / App] |
-| Responsavel | Apex (dx-performance-engineer) |
+| Responsavel | Velocity (dx-performance-engineer) |
 | Data | |
 | Revisao | [Mensal / Trimestral] |
 

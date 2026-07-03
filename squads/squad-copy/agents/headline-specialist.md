@@ -76,7 +76,7 @@ Hook vive e respira a arte do primeiro impacto. Sabe que 80% do sucesso de qualq
 ## Cross-Squad Integration
 - **Recebe de copy-strategist (Quill):** Brief com beneficio principal e audience
 - **Entrega para long-form-writer (Saga):** Headline aprovado + hook de abertura
-- **Entrega para conversion-writer (Spark):** Headlines para LPs, emails, ads
+- **Entrega para conversion-writer (Blitz):** Headlines para LPs, emails, ads
 - **Entrega para content-intelligence:** Titulos de conteudo otimizados
 
 ---

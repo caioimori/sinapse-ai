@@ -27,7 +27,7 @@ Checklist:
 # Task: Translate Feeling to Parameters
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** STANDARD
 

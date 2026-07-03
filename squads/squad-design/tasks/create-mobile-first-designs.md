@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar interfaces mobile-first — comecar pelo viewport mais restrito, progressivamente adicionando complexidade para viewports maiores.
 
 ## Entrada
-- Wireframes (de Compass)
+- Wireframes (de Vantage)
 - Grid system responsivo
 - Component library
 - Touch interaction patterns

@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** headline-specialist (Hook)
 - **Complexity:** STANDARD
 - **Depends on:** headlines scored e rankados
-- **Feeds:** growth-analytics, conversion-writer (Spark)
+- **Feeds:** growth-analytics, conversion-writer (Blitz)
 
 ## Objetivo
 Desenhar testes A/B de headlines com rigor estatistico — definindo hipotese, variantes, metricas e sample size para cada teste.

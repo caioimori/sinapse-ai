@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** dados de social listening
 - **Feeds:** build-audience-persona, content-intelligence/Radar
@@ -91,4 +91,4 @@ Sintetizar dados de social listening para extrair insights sobre percepcao, sent
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

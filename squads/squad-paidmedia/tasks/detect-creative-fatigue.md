@@ -20,7 +20,7 @@ Saida:
 # Task: Detect Creative Fatigue
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

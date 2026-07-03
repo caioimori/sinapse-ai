@@ -8,7 +8,7 @@ elicit: true
 Entrada:
   - campo: current_performance
     tipo: data
-    origem: "Pulse"
+    origem: "Cadence"
     obrigatorio: true
   - campo: scaling_target
     tipo: number

@@ -9,7 +9,7 @@ elicit: false
 # Task: Generate Search Performance Overview
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

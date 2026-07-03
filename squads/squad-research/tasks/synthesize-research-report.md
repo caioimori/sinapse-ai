@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** COMPLEX
 - **Depends on:** Todas as research tasks relevantes completadas
 - **Feeds:** Todos os squads, @project-lead, @architect
@@ -131,4 +131,4 @@ handoff:
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

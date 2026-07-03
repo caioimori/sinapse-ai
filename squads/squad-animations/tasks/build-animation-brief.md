@@ -27,7 +27,7 @@ Checklist:
 # Task: Build Animation Brief
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** HIGH
 

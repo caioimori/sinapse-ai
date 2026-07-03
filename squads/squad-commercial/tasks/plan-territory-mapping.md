@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Ledger (cs-revops-analyst)
+- **Agent:** Turbine (cs-revops-analyst)
 - **Complexity:** Standard
 
 ## Objetivo

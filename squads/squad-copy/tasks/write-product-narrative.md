@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** STANDARD
 - **Depends on:** product info, copy brief, brand voice
-- **Feeds:** conversion-writer (Spark), brand-voice-writer (Tone)
+- **Feeds:** conversion-writer (Blitz), brand-voice-writer (Tone)
 
 ## Objetivo
 Escrever narrativa de produto que transforma features em historia — fazendo o leitor SENTIR o valor antes de entende-lo racionalmente. O product narrative e a ponte entre "o que faz" e "por que importa".
@@ -137,7 +137,7 @@ Escrever narrativa de produto que transforma features em historia — fazendo o 
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Product narrative para uso em LPs
     format: Narrativa modular + feature→benefit→outcome map
   - to: brand-voice-writer (Tone)

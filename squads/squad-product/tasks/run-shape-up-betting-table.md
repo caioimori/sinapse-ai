@@ -26,7 +26,7 @@ Checklist:
 # Run Shape Up Betting Table
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 2-3 hours
 - **Produces:** Betting table decisions, cycle plan, shaped pitches evaluation, resource allocation

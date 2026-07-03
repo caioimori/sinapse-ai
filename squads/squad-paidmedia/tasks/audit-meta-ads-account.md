@@ -32,7 +32,7 @@ Checklist:
 # Task: Audit Meta Ads Account
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** HIGH
 

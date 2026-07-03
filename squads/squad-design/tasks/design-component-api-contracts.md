@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -35,8 +35,8 @@ Projetar contratos de API de componentes — definir props, variants, slots, eve
 
 ## Entrada
 - Component inventory
-- Visual design specs (de Canvas)
-- Accessibility requirements (de Beacon)
+- Visual design specs (de Palette)
+- Accessibility requirements (de Aperture)
 - Usage patterns observados
 
 ## Passos

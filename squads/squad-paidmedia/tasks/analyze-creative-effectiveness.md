@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-paidmedia
-- **Agent:** Lens (pm-creative-performance-analyst)
+- **Agent:** Focal (pm-creative-performance-analyst)
 - **Complexity:** Standard
 
 ## Objetivo

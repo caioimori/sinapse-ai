@@ -17,7 +17,7 @@ workflow:
   trigger: Cliente precisa de design system ou component library nova
   phases:
     - name: "Phase 1: Token Foundation"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       tasks:
         - define-token-taxonomy
         - create-primitive-tokens
@@ -44,8 +44,8 @@ workflow:
           - NEEDS_REVISION
     - name: "Phase 2: Component Inventory & API Design"
       agents:
-        - dx-design-system-architect (Stratum)
-        - dx-ui-designer (Canvas)
+        - dx-design-system-architect (Lattice)
+        - dx-ui-designer (Palette)
       depends_on: Phase 1
       execution: collaborative
       tasks:
@@ -94,7 +94,7 @@ workflow:
           - COMPLETE
           - NEEDS_WORK
     - name: "Phase 4: Accessibility Certification"
-      agent: dx-accessibility-specialist (Beacon)
+      agent: dx-accessibility-specialist (Aperture)
       depends_on: Phase 3
       tasks:
         - conduct-wcag-audit
@@ -118,7 +118,7 @@ workflow:
           - FAIL
         blocking: true
     - name: "Phase 5: Performance Baseline"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 4
       tasks:
         - analyze-javascript-bundles
@@ -136,7 +136,7 @@ workflow:
           - CERTIFIED
           - EXCEEDS_BUDGET
     - name: "Phase 6: Documentation & Delivery"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       depends_on: Phase 5
       tasks:
         - create-storybook-documentation-standards
@@ -158,7 +158,7 @@ workflow:
   id: design-system-build-cycle
   sequence:
     - name: "Phase 1: Token Foundation"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       tasks:
         - define-token-taxonomy
         - create-primitive-tokens
@@ -185,8 +185,8 @@ workflow:
           - NEEDS_REVISION
     - name: "Phase 2: Component Inventory & API Design"
       agents:
-        - dx-design-system-architect (Stratum)
-        - dx-ui-designer (Canvas)
+        - dx-design-system-architect (Lattice)
+        - dx-ui-designer (Palette)
       depends_on: Phase 1
       execution: collaborative
       tasks:
@@ -235,7 +235,7 @@ workflow:
           - COMPLETE
           - NEEDS_WORK
     - name: "Phase 4: Accessibility Certification"
-      agent: dx-accessibility-specialist (Beacon)
+      agent: dx-accessibility-specialist (Aperture)
       depends_on: Phase 3
       tasks:
         - conduct-wcag-audit
@@ -259,7 +259,7 @@ workflow:
           - FAIL
         blocking: true
     - name: "Phase 5: Performance Baseline"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 4
       tasks:
         - analyze-javascript-bundles
@@ -277,7 +277,7 @@ workflow:
           - CERTIFIED
           - EXCEEDS_BUDGET
     - name: "Phase 6: Documentation & Delivery"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       depends_on: Phase 5
       tasks:
         - create-storybook-documentation-standards

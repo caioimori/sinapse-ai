@@ -2,7 +2,7 @@
 
 > **Source:** MS-003 — Sales & Revenue Master System (2026-04-07)
 > **Research:** 55+ sources, verified by @research-orqx (Prism)
-> **Purpose:** Comprehensive reference for @commercial-orqx (Pipeline) and squad-commercial specialists
+> **Purpose:** Comprehensive reference for @commercial-orqx (Circuit) and squad-commercial specialists
 
 ---
 

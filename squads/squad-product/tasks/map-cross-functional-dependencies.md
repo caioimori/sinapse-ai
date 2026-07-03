@@ -26,7 +26,7 @@ Checklist:
 # Map Cross-Functional Dependencies
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 2-3 hours
 - **Produces:** Dependency map, critical path analysis, risk mitigation plan, coordination schedule

@@ -26,7 +26,7 @@ Checklist:
 # Standardize Cross-Client Metrics
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium-High
 - **Estimated Time:** 4-6 hours
 - **Produces:** Standard metric definitions, cross-client dashboard, benchmarking framework

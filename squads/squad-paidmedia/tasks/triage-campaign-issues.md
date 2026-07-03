@@ -57,7 +57,7 @@ Diagnosticar rapidamente problemas de performance de campanha, categorizar por s
    | Sem impressions | Budget, bid, audience, policy | Signal/Query |
    | Impressions sem clicks | Creative, targeting, placement | Canvas + Signal/Query |
    | Clicks sem conversoes | LP, tracking, offer, audience quality | Convert + Lighthouse |
-   | CPA alto subito | Competition, fatigue, tracking, sazonalidade | Pulse (diagnostico) |
+   | CPA alto subito | Competition, fatigue, tracking, sazonalidade | Cadence (diagnostico) |
    | Budget nao gastando | Bid baixo, audience pequena, policy | Signal/Query |
    | Tracking discrepancia | Pixel, CAPI, attribution, dedup | Lighthouse |
 

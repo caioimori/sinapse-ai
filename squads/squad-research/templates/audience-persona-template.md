@@ -2,7 +2,7 @@
 
 **Versao:** v1.0
 **Data:** [YYYY-MM-DD]
-**Autor:** audience-intelligence (Pulse)
+**Autor:** audience-intelligence (Empath)
 **Validada:** [Sim/Nao] — Confidence: [HIGH/MEDIUM/LOW]
 
 ---

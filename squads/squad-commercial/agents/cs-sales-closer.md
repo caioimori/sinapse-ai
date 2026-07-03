@@ -123,7 +123,7 @@ NO-ORIENTED QUESTIONS — Get a "no" to feel safe
 
 ## Cross-Squad Handoffs
 - **Recebe de:** @commercial-systems/Magnet (qualified leads), @copywriting-persuasion (proposal copy), @research-intelligence (prospect research)
-- **Envia para:** @commercial-systems/Bond (closed clients for onboarding), @commercial-systems/Vault (deal data)
+- **Envia para:** @commercial-systems/Bond (closed clients for onboarding), @commercial-systems/Rolodex (deal data)
 - **Escalates to:** @sinapse-orqx (cross-squad coordination)
 
 <!-- ENG-GROUNDING:v2 -->

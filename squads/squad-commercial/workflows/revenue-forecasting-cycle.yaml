@@ -1,4 +1,4 @@
-owner: commercial-orqx (Pipeline)
+owner: commercial-orqx (Circuit)
 frequency: monthly
 estimated_duration: 3-5 days
 quality_gates:
@@ -21,7 +21,7 @@ workflow:
   name: revenue-forecasting-cycle
   version: "1.0"
   description: |
-    Ciclo mensal de forecasting de receita — coleta, análise, projeção e apresentação. Combina dados de pipeline (Vault), unit economics (Ledger), e expansion (Bond).
+    Ciclo mensal de forecasting de receita — coleta, análise, projeção e apresentação. Combina dados de pipeline (Rolodex), unit economics (Turbine), e expansion (Bond).
   trigger: First business day of each month (or on-demand before board meeting)
   phases:
     - id: data-collection

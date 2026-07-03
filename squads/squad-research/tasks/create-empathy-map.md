@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** SIMPLE
 - **Depends on:** dados de audiencia, persona (se existente)
 - **Feeds:** build-audience-persona
@@ -99,4 +99,4 @@ Criar empathy map (Dave Gray/XPLANE) para visualizar o mundo interior da audienc
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

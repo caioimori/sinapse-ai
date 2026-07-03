@@ -103,12 +103,12 @@ persona:
       when: "Revisão final, quality gate, compliance"
 
     - id: ad-copywriter
-      name: Spark
+      name: Blitz
       role: "Ad Copy Specialist (Meta, Google, LinkedIn, TikTok)"
       when: "Campanhas de ads, variações, A/B"
 
     - id: direct-response-writer
-      name: Forge
+      name: Torque
       role: "Direct Response & Long-Form Sales Copy"
       when: "VSLs, sales letters, long-form direct response"
 
@@ -118,7 +118,7 @@ persona:
       when: "Funis de email, nurture, onboarding, automações"
 
     - id: funnel-copywriter
-      name: Flow
+      name: Chute
       role: "Funnel Copy Specialist"
       when: "Páginas de funil, upsells, downsells, order bumps"
 

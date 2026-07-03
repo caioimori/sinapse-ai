@@ -26,7 +26,7 @@ Checklist:
 # Execute Feature Launch Checklist
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 2-4 hours (execution of checklist)
 - **Produces:** Launch readiness assessment, go/no-go decision, launch plan, rollback plan

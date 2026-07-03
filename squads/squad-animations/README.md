@@ -16,7 +16,7 @@
 | Agente | Papel |
 |--------|-------|
 | Kinetic (animations-orqx) | Orquestrador — coordena agentes e gerencia pipeline de animacao |
-| Lens (animation-interpreter) | Interpreta prompts vagos e traduz em specs tecnicas de animacao |
+| Decoder (animation-interpreter) | Interpreta prompts vagos e traduz em specs tecnicas de animacao |
 | Vertex (threejs-architect) | Especialista Three.js — cenas 3D, materiais, cameras, iluminacao |
 | Fragment (shader-artist) | Artista de shaders — GLSL/WGSL, post-processing, efeitos visuais |
 | Flux (css-motion-artist) | Mestre CSS — animations, transitions, keyframes, SVG |

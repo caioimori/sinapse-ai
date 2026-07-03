@@ -161,13 +161,13 @@ agents:
     tasks_count: 9
 
   - id: ad-copywriter
-    name: Spark
+    name: Blitz
     icon: "⚡"
     archetype: Specialist
     role: Advertising Copy Specialist — short-form ad copy for Meta, Google, LinkedIn, TikTok
 
   - id: direct-response-writer
-    name: Forge
+    name: Torque
     icon: "🔥"
     archetype: Specialist
     role: Direct Response & Long-Form Sales Copy Specialist — sales pages, VSLs, sales letters
@@ -179,7 +179,7 @@ agents:
     role: Email Sequence & Automation Strategist — nurture sequences, launch sequences, re-engagement
 
   - id: funnel-copywriter
-    name: Flow
+    name: Chute
     icon: "🌊"
     archetype: Specialist
     role: Funnel Copy Specialist — copy for every funnel stage from ads to thank you page

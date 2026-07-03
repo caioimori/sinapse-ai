@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** deep-researcher (Sage)
 - **Complexity:** STANDARD
 - **Depends on:** conduct-deep-research ou multiplas fontes coletadas
-- **Feeds:** data-synthesizer (Loom)
+- **Feeds:** data-synthesizer (Braid)
 
 ## Objetivo
 Triangular e sintetizar informacoes de multiplas fontes, identificando convergencias, divergencias e gaps para construir visao consolidada.

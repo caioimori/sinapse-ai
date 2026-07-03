@@ -29,14 +29,14 @@ Checklist:
 - **Squad:** squad-research
 - **Agent:** trend-forecaster (Horizon)
 - **Complexity:** COMPLEX
-- **Depends on:** analyze-industry-trends (Scope)
+- **Depends on:** analyze-industry-trends (Sonar)
 - **Feeds:** todos os squads, @project-lead, @architect
 
 ## Objetivo
 Projetar tendencias da industria em horizontes de 1, 3 e 5 anos — categorizando por duracao e atribuindo confidence scoring por tendencia.
 
 ## Entrada
-- Analise de tendencias de industria (Scope)
+- Analise de tendencias de industria (Sonar)
 - Dados historicos do setor
 - Sinais fracos detectados
 - Macro forces (PESTEL)

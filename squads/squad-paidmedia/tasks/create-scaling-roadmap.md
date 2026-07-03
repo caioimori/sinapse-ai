@@ -24,7 +24,7 @@ Saida:
 # Task: Create Scaling Roadmap (Meta Ads)
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** HIGH
 

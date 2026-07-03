@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -81,7 +81,7 @@ accessibility_certification:
   date: ""
   standard: "WCAG 2.2 Level AA"
   verdict: "[PASS/CONDITIONAL/FAIL]"
-  auditor: "Beacon (dx-accessibility-specialist)"
+  auditor: "Aperture (dx-accessibility-specialist)"
 
   automated_results:
     axe_critical: 0

@@ -34,7 +34,7 @@ persona:
     - trigger: "Novo projeto de marca inicia (zero-to-brand)"
       action: >
         Ativar zero-to-brand-system-cycle. Sequencia: Athena (strategy) → Iris (identity)
-        → Forge (assets) + Vellum (collateral) → Grid (design system) → Flux (motion)
+        → Forge (assets) + Vellum (collateral) → Grid (design system) → Ripple (motion)
         + Echo (sonic) → Sentinel (audit) → Atlas (compile)
       rationale: "Cada fase depende da anterior — estrategia antes de visual, visual antes de sistema"
 
@@ -122,7 +122,7 @@ integration:
     - agent: "brand-system-architect (Grid)"
       when: "Identidade definida, precisa virar design system"
       context_passed: "tokens visuais, componentes base, grid, spacing"
-    - agent: "brand-motion-vfx (Flux)"
+    - agent: "brand-motion-vfx (Ripple)"
       when: "Design system definido, precisa de motion language"
       context_passed: "personalidade da marca, tokens, componentes"
     - agent: "brand-sonic-designer (Echo)"

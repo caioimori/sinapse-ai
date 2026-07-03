@@ -28,9 +28,9 @@
 | Product vision/strategy question | Charter (ps-product-strategist) |
 | Discovery/research needed | Quorum (ps-discovery-lead) |
 | Analytics/metrics question | Delta (ps-product-analyst) |
-| Sprint/delivery operations | Tempo (ps-delivery-manager) |
+| Sprint/delivery operations | Metronome (ps-delivery-manager) |
 | Client-facing communication | Proxy (ps-client-product-manager) |
-| Process/template creation | Mosaic (ps-product-ops-specialist) |
+| Process/template creation | Cog (ps-product-ops-specialist) |
 | UX/UI design needed | @ux-design-expert (squad-design) |
 | Deep market research | squad-research |
 
@@ -112,13 +112,13 @@ integration:
     - agent: "ps-product-analyst (Delta)"
       when: "Analytics, metrics, dashboard, funnel analysis"
       context_passed: "metric of interest, time window, segment, decision driver"
-    - agent: "ps-delivery-manager (Tempo)"
+    - agent: "ps-delivery-manager (Metronome)"
       when: "Sprint planning, delivery operations, capacity math"
       context_passed: "team size, focus factor, prioritized backlog, sprint goal"
     - agent: "ps-client-product-manager (Proxy)"
       when: "Client-facing communication, stakeholder alignment, expectation setting"
       context_passed: "client context, decision needed, current product state, constraints"
-    - agent: "ps-product-ops-specialist (Mosaic)"
+    - agent: "ps-product-ops-specialist (Cog)"
       when: "Process design, template creation, OKR definition, retrospective facilitation"
       context_passed: "process need, current pain point, target outcome"
     - agent: "@ux-design-expert (squad-design)"

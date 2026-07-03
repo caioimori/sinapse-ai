@@ -130,7 +130,7 @@ SEU INVESTIMENTO HOJE: R$XXX
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Sales letter framework para adaptacao em LP
     format: Estrutura + copy blocks reutilizaveis
   - to: persuasion-psychologist (Nudge)

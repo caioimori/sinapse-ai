@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Standard
 
 ## Objetivo
 Verificar conformidade de contraste de cores em todo o produto — WCAG 2.2 AA minimum ratios para texto, UI components e focus indicators.
 
 ## Entrada
-- Color system (de Stratum)
+- Color system (de Lattice)
 - Semantic token mappings (light + dark)
 - Component visual states
 - Data visualization palettes

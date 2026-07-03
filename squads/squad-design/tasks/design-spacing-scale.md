@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar a escala de spacing do design system — definir valores, naming e regras de uso que garantem consistencia espacial em todo o produto.
 
 ## Entrada
-- Grid system (de Canvas)
+- Grid system (de Palette)
 - Content density requirements
 - Typography scale (para harmonizar)
 - Platform conventions
@@ -148,7 +148,7 @@ Principio: **Lei da Proximidade (Gestalt)** — elementos mais proximos sao perc
 - Usage guidelines por contexto
 - Responsive adjustments
 - Token documentation
-- Handoff para Canvas (layouts) e Scaffold (implementation)
+- Handoff para Palette (layouts) e Scaffold (implementation)
 
 ## Validacao
 - [ ] Escala baseada em 4px

@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** proof-architect (Evidence)
 - **Complexity:** STANDARD
 - **Depends on:** copy brief, claims list, available proof assets
-- **Feeds:** direct-response-writer (Forge), funnel-copywriter (Flow), conversion-writer (Spark)
+- **Feeds:** direct-response-writer (Torque), funnel-copywriter (Chute), conversion-writer (Blitz)
 
 ## Objetivo
 Construir proof stack completo que torna cada claim do copy acreditavel e irrefutavel. Organizar provas em camadas seguindo a Proof Hierarchy de Bencivenga: demonstration > documentation > testimonials > credentials > data. O proof stack e a espinha dorsal da credibilidade de qualquer peca de copy.
@@ -113,10 +113,10 @@ CAMADA 5 — Data Proof
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: direct-response-writer (Forge)
+  - to: direct-response-writer (Torque)
     delivers: Proof stack organizado para integracao em sales copy
     format: Proofs mapeados por claim e posicao
-  - to: funnel-copywriter (Flow)
+  - to: funnel-copywriter (Chute)
     delivers: Proof blocks para cada etapa do funil
     format: Proofs segmentados por etapa (LP, upsell, checkout)
 ```

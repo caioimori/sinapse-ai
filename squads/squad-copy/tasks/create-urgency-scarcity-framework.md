@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** persuasion-psychologist (Nudge)
 - **Complexity:** STANDARD
 - **Depends on:** oferta, ciclo de venda, audiencia
-- **Feeds:** conversion-writer (Spark), todos os writers
+- **Feeds:** conversion-writer (Blitz), todos os writers
 
 ## Objetivo
 Criar framework de urgencia e escassez que acelera decisao de compra — usando APENAS triggers reais e verificaveis. A diferenca entre persuasao e manipulacao e a VERACIDADE.

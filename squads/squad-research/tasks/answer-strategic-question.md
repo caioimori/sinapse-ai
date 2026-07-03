@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** deep-researcher (Sage)
 - **Complexity:** STANDARD
 - **Depends on:** research brief
-- **Feeds:** Prism (para routing), Loom (para formatacao)
+- **Feeds:** Prism (para routing), Braid (para formatacao)
 
 ## Objetivo
 Responder pergunta estrategica especifica com pesquisa estruturada, entregando resposta acionavel no formato mais util para o decisor.

@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Complex
 
 ## Objetivo
 Projetar temas dark e light completos — mapear tokens semanticos para cada tema mantendo contraste, legibilidade e coerencia visual em ambos os modos.
 
 ## Entrada
-- Primitive color tokens (de Stratum)
+- Primitive color tokens (de Lattice)
 - Semantic token structure
 - Brand colors
 - WCAG 2.2 contrast requirements
@@ -142,7 +142,7 @@ theme_transition:
 - Contrast verification matrix
 - Transition specifications
 - Edge case documentation
-- Handoff para Stratum (token implementation) e Beacon (contrast verification)
+- Handoff para Lattice (token implementation) e Aperture (contrast verification)
 
 ## Validacao
 - [ ] Ambos os temas com contraste WCAG 2.2 AA

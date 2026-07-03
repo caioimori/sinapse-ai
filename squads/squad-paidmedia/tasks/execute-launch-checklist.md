@@ -20,7 +20,7 @@ Saida:
 # Task: Execute Launch Checklist
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

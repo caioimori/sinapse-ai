@@ -18,13 +18,13 @@ Entrada:
 Saida:
   - campo: budget_allocation
     tipo: document
-    destino: "Signal (implementacao)"
+    destino: "Reach (implementacao)"
 ---
 
 # Task: Allocate Meta Budget
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

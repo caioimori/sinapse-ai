@@ -18,7 +18,7 @@ workflow:
   trigger: Core Web Vitals falham ou regressao de performance detectada
   phases:
     - name: "Phase 1: Performance Audit"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       tasks:
         - audit-core-web-vitals
         - analyze-javascript-bundles
@@ -64,7 +64,7 @@ workflow:
           - IMPLEMENTED
           - PARTIAL
     - name: "Phase 3: Validation"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 2
       tasks:
         - audit-core-web-vitals
@@ -86,7 +86,7 @@ workflow:
         on_fail: Retorna para Phase 2 com fixes adicionais
     - name: "Phase 4: Prevention Setup"
       agents:
-        - dx-performance-engineer (Apex)
+        - dx-performance-engineer (Velocity)
         - dx-frontend-engineer (Scaffold)
       depends_on: Phase 3
       execution: collaborative
@@ -112,7 +112,7 @@ workflow:
   id: performance-remediation-cycle
   sequence:
     - name: "Phase 1: Performance Audit"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       tasks:
         - audit-core-web-vitals
         - analyze-javascript-bundles
@@ -158,7 +158,7 @@ workflow:
           - IMPLEMENTED
           - PARTIAL
     - name: "Phase 3: Validation"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 2
       tasks:
         - audit-core-web-vitals
@@ -180,7 +180,7 @@ workflow:
         on_fail: Retorna para Phase 2 com fixes adicionais
     - name: "Phase 4: Prevention Setup"
       agents:
-        - dx-performance-engineer (Apex)
+        - dx-performance-engineer (Velocity)
         - dx-frontend-engineer (Scaffold)
       depends_on: Phase 3
       execution: collaborative

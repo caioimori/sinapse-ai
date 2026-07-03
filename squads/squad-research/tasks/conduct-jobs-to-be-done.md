@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** COMPLEX
 - **Depends on:** dados de audiencia, entrevistas (ideal)
 - **Feeds:** build-audience-persona, copywriting-persuasion, commercial-systems
@@ -122,4 +122,4 @@ handoff:
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

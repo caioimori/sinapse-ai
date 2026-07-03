@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Standard
 
 ## Objetivo
 Garantir que todas as animacoes respeitam prefers-reduced-motion — usuarios com vestibular disorders ou motion sensitivity devem ter experiencia confortavel.
 
 ## Entrada
-- Motion specs (de Kinetic)
+- Motion specs (de Gesture)
 - Animation inventory
 - CSS/JS animations
 - Third-party animations
@@ -157,7 +157,7 @@ function App({ children }) {
 - JavaScript hook
 - Third-party adaptation guide
 - Testing checklist
-- Handoff para Kinetic (motion specs update)
+- Handoff para Gesture (motion specs update)
 
 ## Validacao
 - [ ] prefers-reduced-motion respected globalmente

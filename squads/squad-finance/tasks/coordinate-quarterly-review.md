@@ -26,7 +26,7 @@ Checklist:
   - "[ ] Profitability deep-dive (Margin)"
   - "[ ] Budget variance (Vault)"
   - "[ ] Forecast update (Vault)"
-  - "[ ] Pricing adjustment (Mint)"
+  - "[ ] Pricing adjustment (Markup)"
   - "[ ] Consolidar board report"
 ---
 
@@ -51,7 +51,7 @@ Coordenar review financeiro trimestral completo, acionando todos os agentes na s
 2. **Fase 2 — Profitability Deep-Dive (Margin):** P&L trimestral, top/bottom clients, unit economics
 3. **Fase 3 — Budget Variance (Vault):** orcado vs realizado, root cause de desvios
 4. **Fase 4 — Forecast Update (Vault):** atualizar rolling forecast com dados reais
-5. **Fase 5 — Pricing Adjustment (Mint):** rate realization, necessidade de ajustes
+5. **Fase 5 — Pricing Adjustment (Markup):** rate realization, necessidade de ajustes
 6. **Fase 6 — Board Report (Ledger):** consolidar tudo em report executivo
 
 ## Output

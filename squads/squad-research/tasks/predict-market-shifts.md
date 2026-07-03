@@ -37,7 +37,7 @@ Prever mudancas de mercado usando leading indicators — o que vai mudar, quando
 
 ## Entrada
 - Tendencias de industria (Horizon)
-- Market data (Scope)
+- Market data (Sonar)
 - Competitive landscape (Hawk)
 - Sinais fracos (Horizon)
 

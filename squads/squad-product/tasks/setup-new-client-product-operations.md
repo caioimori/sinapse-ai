@@ -26,7 +26,7 @@ Checklist:
 # Setup New Client Product Operations
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium-High
 - **Estimated Time:** 4-6 hours
 - **Produces:** Client operations setup, tool configuration, process onboarding, baseline metrics

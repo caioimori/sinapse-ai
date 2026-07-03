@@ -1,7 +1,7 @@
 # Market Analysis: [MERCADO/INDUSTRIA]
 
 **Data:** [YYYY-MM-DD]
-**Autor:** market-analyst (Scope) + data-synthesizer (Loom)
+**Autor:** market-analyst (Sonar) + data-synthesizer (Braid)
 **Confidence:** [HIGH | MEDIUM | LOW]
 **Versao:** v1.0
 

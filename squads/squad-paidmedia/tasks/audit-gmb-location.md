@@ -9,7 +9,7 @@ elicit: true
 # Task: Audit GMB Location
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

@@ -19,14 +19,14 @@
 | Quill (copy-strategist) | Copy Strategy Architect & Voice Director |
 | Hook (headline-specialist) | Headline & Hook Specialist |
 | Saga (long-form-writer) | Long-Form & Narrative Copywriter |
-| Spark (conversion-writer) | Conversion & Direct Response Copywriter |
+| Blitz (conversion-writer) | Conversion & Direct Response Copywriter |
 | Tone (brand-voice-writer) | Brand Voice & Tone Specialist |
 | Nudge (persuasion-psychologist) | Persuasion Psychology & Behavioral Copy |
 | Chisel (copy-editor) | Copy Editor, Reviewer & Quality Guardian |
-| Spark (ad-copywriter) | Advertising Copy Specialist — Meta, Google, LinkedIn, TikTok |
-| Forge (direct-response-writer) | Direct Response & Long-Form Sales Copy |
+| Blitz (ad-copywriter) | Advertising Copy Specialist — Meta, Google, LinkedIn, TikTok |
+| Torque (direct-response-writer) | Direct Response & Long-Form Sales Copy |
 | Drip (email-sequence-strategist) | Email Sequence & Automation Strategist |
-| Flow (funnel-copywriter) | Funnel Copy Specialist |
+| Chute (funnel-copywriter) | Funnel Copy Specialist |
 
 ## Ativacao
 

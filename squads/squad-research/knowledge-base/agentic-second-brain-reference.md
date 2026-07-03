@@ -541,5 +541,5 @@ vault/
 
 ---
 
-*Knowledge base compiled from research conducted by Scope (Research Analyst) -- SINAPSE Research Initiative*
+*Knowledge base compiled from research conducted by Sonar (Research Analyst) -- SINAPSE Research Initiative*
 *Research: MS-009 Agentic Second Brain Engineering | 67 sources | April 2026*

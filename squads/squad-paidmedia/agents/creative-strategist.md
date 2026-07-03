@@ -73,8 +73,8 @@ Canvas e o estrategista de criativos para ads. Gera briefs de criacao, escreve s
 | analyze-creative-performance | Analisar performance de criativos e extrair aprendizados |
 
 ## Interacoes
-- **Recebe de:** Apex (briefings de campanha), Signal (creative performance data Meta), Query (ad copy performance Google), Pulse (audience insights)
-- **Entrega para:** Signal (criativos para Meta), Query (ad copies para Google), Apex (creative pipeline status)
+- **Recebe de:** Apex (briefings de campanha), Reach (creative performance data Meta), Query (ad copy performance Google), Cadence (audience insights)
+- **Entrega para:** Reach (criativos para Meta), Query (ad copies para Google), Apex (creative pipeline status)
 
 ## Quando Usar
 - Criacao de briefs de criacao para campanhas

@@ -61,7 +61,7 @@ agents:
     tasks_count: 11
 
   - id: ps-delivery-manager
-    name: Tempo
+    name: Metronome
     icon: "⏱️"
     role: Delivery & Sprint Operations Manager
     file: agents/ps-delivery-manager.md
@@ -75,7 +75,7 @@ agents:
     tasks_count: 11
 
   - id: ps-product-ops-specialist
-    name: Mosaic
+    name: Cog
     icon: "🧩"
     role: Product Operations & Systems Specialist
     file: agents/ps-product-ops-specialist.md

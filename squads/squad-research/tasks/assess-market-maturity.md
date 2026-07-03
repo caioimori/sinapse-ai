@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** SIMPLE
 - **Depends on:** analyze-industry-trends
 - **Feeds:** evaluate-market-entry, forecast-market-growth
@@ -76,4 +76,4 @@ Classificar maturidade do mercado para calibrar estrategia — mercado nascente 
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

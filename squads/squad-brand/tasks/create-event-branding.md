@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | brand-collateral-designer (Vellum) |
-| **Co-agents** | brand-identity-designer (Iris) direção visual, brand-creative-engineer (Forge) assets, brand-motion-vfx (Flux) motion |
+| **Co-agents** | brand-identity-designer (Iris) direção visual, brand-creative-engineer (Forge) assets, brand-motion-vfx (Ripple) motion |
 | **Trigger** | Quando marca realiza eventos (conferências, workshops, meetups, feiras, lançamentos) |
 | **Input** | Brand guidelines completos, tipo de evento, público esperado |
 | **Output** | `event-branding-system.md` + templates |
@@ -177,7 +177,7 @@ handoff:
   context: "Sistema completo de event branding com touchpoints presenciais, digitais, sensoriais e timeline"
   also_to:
     - brand-creative-engineer (Forge): "Produzir assets de evento"
-    - brand-motion-vfx (Flux): "Motion assets para stream e palco"
+    - brand-motion-vfx (Ripple): "Motion assets para stream e palco"
     - brand-sonic-designer (Echo): "Audio para transições e ambientação"
   next: "Atlas inclui no brandbook como capítulo de Event Branding"
 ```

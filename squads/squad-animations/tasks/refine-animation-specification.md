@@ -29,7 +29,7 @@ Checklist:
 # Task: Refine Animation Specification
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** STANDARD
 

@@ -1,7 +1,7 @@
 # Community Platforms Engineering Reference
 
 > **Source:** MS-010 Forum & Community Platform Engineering Research
-> **Squad:** squad-research | **Agent:** @analyst (Scope)
+> **Squad:** squad-research | **Agent:** @analyst (Sonar)
 > **Last updated:** 2026-04-10
 > **Coverage:** 8 core systems, 9 platforms, 80+ sources
 

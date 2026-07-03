@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Ledger (cs-revops-analyst)
+- **Agent:** Turbine (cs-revops-analyst)
 - **Complexity:** Advanced
 
 ## Objetivo
@@ -54,7 +54,7 @@ Identificar e quantificar revenue leaks — areas onde receita potencial e perdi
 ### 2. Quantification Model
 | Leak | Volume | Avg Value | Recovery Rate | Annual Impact |
 |------|--------|----------|--------------|--------------|
-| Pipeline (unqualified deals reaching proposal) | deals | R$ | % | R$ |
+| Circuit (unqualified deals reaching proposal) | deals | R$ | % | R$ |
 | Pricing (discount without approval) | deals | R$ discount | % | R$ |
 | Contracting (missed price escalator) | contracts | R$ per | % | R$ |
 | Expansion (missed trigger) | accounts | R$ avg upsell | % | R$ |

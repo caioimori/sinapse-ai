@@ -26,7 +26,7 @@ Checklist:
 # Calculate Sprint Velocity
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Low-Medium
 - **Estimated Time:** 1-2 hours
 - **Produces:** Velocity report, trend analysis, capacity forecast, predictability metrics

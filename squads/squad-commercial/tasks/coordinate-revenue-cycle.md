@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Pipeline (commercial-orqx)
+- **Agent:** Circuit (commercial-orqx)
 - **Complexity:** Advanced
 
 ## Objetivo

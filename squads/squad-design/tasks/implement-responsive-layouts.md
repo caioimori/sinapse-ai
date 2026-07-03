@@ -34,7 +34,7 @@ Checklist:
 Implementar layouts responsivos em codigo — traduzir grid system e responsive specs em CSS/Tailwind funcional.
 
 ## Entrada
-- Grid system specification (de Canvas)
+- Grid system specification (de Palette)
 - Responsive design specs
 - Breakpoint definitions
 - Container query specs

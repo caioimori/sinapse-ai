@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** dados coletados
 - **Feeds:** content-intelligence, digital-experience
@@ -98,4 +98,4 @@ Criar visualizacoes de dados que comunicam findings de pesquisa com clareza — 
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

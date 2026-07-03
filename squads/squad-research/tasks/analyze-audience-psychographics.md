@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** dados de audiencia
 - **Feeds:** build-audience-persona, copywriting-persuasion
@@ -82,4 +82,4 @@ Analisar o perfil psicografico da audiencia — valores, crencas, motivacoes, me
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

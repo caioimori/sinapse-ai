@@ -27,10 +27,10 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** funnel-copywriter (Flow)
+- **Agent:** funnel-copywriter (Chute)
 - **Complexity:** COMPLEX
 - **Depends on:** copy brief, value ladder, offers definidas, funnel architecture
-- **Feeds:** ad-copywriter (Spark), email-sequence-strategist (Drip), copy-editor (Chisel)
+- **Feeds:** ad-copywriter (Blitz), email-sequence-strategist (Drip), copy-editor (Chisel)
 
 ## Objetivo
 Escrever copy para um funil completo — do ad ate o thank you page — com congruencia total de messaging. Cada etapa e um degrau na value ladder (Brunson) e o copy deve facilitar a ascensao natural do lead de um degrau para o proximo.
@@ -120,7 +120,7 @@ URGENCIA (opcional): "Disponivel por tempo limitado"
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: ad-copywriter (Spark)
+  - to: ad-copywriter (Blitz)
     delivers: Brief de messaging para ads alinhados ao funil
     format: Big Idea + hooks + tom + CTA
   - to: email-sequence-strategist (Drip)
@@ -154,4 +154,4 @@ handoffs:
 
 ---
 
-*Task operada por: funnel-copywriter (Flow)*
+*Task operada por: funnel-copywriter (Chute)*

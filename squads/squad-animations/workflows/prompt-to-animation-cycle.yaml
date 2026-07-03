@@ -28,7 +28,7 @@ workflow:
       quality_gate: "Brief tem: tipo, feeling, parametros tecnicos, agente recomendado, complexidade"
       notes: |
         CRITICO: Esta fase resolve a maior dor do usuario.
-        O animation-interpreter (Lens) recebe qualquer input:
+        O animation-interpreter (Decoder) recebe qualquer input:
         - Prompt vago ("quero algo legal no hero")
         - Briefing do site ("landing page de fintech premium")
         - Referencia ("tipo Apple mas mais colorido")
@@ -96,7 +96,7 @@ workflow:
       quality_gate: "Brief tem: tipo, feeling, parametros tecnicos, agente recomendado, complexidade"
       notes: |
         CRITICO: Esta fase resolve a maior dor do usuario.
-        O animation-interpreter (Lens) recebe qualquer input:
+        O animation-interpreter (Decoder) recebe qualquer input:
         - Prompt vago ("quero algo legal no hero")
         - Briefing do site ("landing page de fintech premium")
         - Referencia ("tipo Apple mas mais colorido")

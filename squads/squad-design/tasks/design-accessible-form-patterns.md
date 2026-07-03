@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar padroes de formulario acessiveis — garantir que todos os forms atendam WCAG 2.2 AA incluindo os novos criterios 3.3.7 e 3.3.8.
 
 ## Entrada
-- Form patterns (de Canvas)
+- Form patterns (de Palette)
 - Component library (de Scaffold)
 - WCAG 2.2 requirements
 

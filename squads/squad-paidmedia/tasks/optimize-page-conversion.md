@@ -9,7 +9,7 @@ elicit: true
 # Task: Optimize Page Conversion
 
 ## Metadata
-- **Agent:** cro-specialist (Convert)
+- **Agent:** cro-specialist (Uplift)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

@@ -143,7 +143,7 @@ handoffs:
   - to: todos os writers do squad
     delivers: Objection handler library
     format: Handlers por objecao em 4 versoes (long/med/short/micro)
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: FAQ copy e CTA micro-copy
     format: FAQ completa + friction reducers
 ```

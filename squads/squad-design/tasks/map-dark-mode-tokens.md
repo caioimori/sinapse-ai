@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -35,7 +35,7 @@ Mapear todos os semantic tokens para dark mode — criar o set completo de overr
 
 ## Entrada
 - Semantic tokens light mode (L2)
-- Dark mode design decisions (de Canvas)
+- Dark mode design decisions (de Palette)
 - WCAG 2.2 contrast requirements
 - Brand color adaptations
 
@@ -122,7 +122,7 @@ Para cada combinacao fg/bg no dark mode:
 - Contrast verification matrix
 - Shadow-to-surface mapping
 - Special case documentation
-- Handoff para Canvas (verification) e Scaffold (implementation)
+- Handoff para Palette (verification) e Scaffold (implementation)
 
 ## Validacao
 - [ ] TODOS os semantic tokens tem dark override

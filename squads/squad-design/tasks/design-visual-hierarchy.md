@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar a hierarquia visual do produto — garantir que a importancia relativa de cada elemento e comunicada visualmente de forma clara e intencional.
 
 ## Entrada
-- Content hierarchy (de Compass)
+- Content hierarchy (de Vantage)
 - Brand tokens (tipografia, cores)
 - Screen layouts
 - User scanning patterns

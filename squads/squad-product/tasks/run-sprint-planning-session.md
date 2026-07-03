@@ -26,7 +26,7 @@ Checklist:
 # Run Sprint Planning Session
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 2-3 hours (session) + 1h prep
 - **Produces:** Sprint backlog, sprint goal, capacity plan, commitment confirmation

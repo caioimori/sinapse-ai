@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** COMPLEX
 - **Depends on:** mercado definido
 - **Feeds:** evaluate-market-entry, commercial-systems, growth-analytics
@@ -118,4 +118,4 @@ handoff:
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

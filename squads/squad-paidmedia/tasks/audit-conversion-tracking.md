@@ -9,7 +9,7 @@ elicit: false
 # Task: Audit Conversion Tracking (LP)
 
 ## Metadata
-- **Agent:** cro-specialist (Convert)
+- **Agent:** cro-specialist (Uplift)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 
