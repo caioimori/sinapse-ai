@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T00:40:19.744Z'
+  lastUpdated: '2026-07-03T01:16:34.818Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -9853,8 +9853,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:b0032791337fd54bc48df48d3063e791cf501537e4b5f9efc37cf98e5064b0ad
-      lastVerified: '2026-06-15T00:26:26.379Z'
+      checksum: sha256:bc97b8e0ccddb6638e22bd5455c24676d5136b2d0e0fba76392f3665992adb73
+      lastVerified: '2026-07-03T01:16:34.726Z'
     parallel-executor:
       path: .sinapse-ai/core/execution/parallel-executor.js
       layer: L1
@@ -9873,8 +9873,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f5a68f60536ad6116ddc49e4d55ce5f1fc3b55c26ae27622b221e342b2ed37a3
-      lastVerified: '2026-06-15T00:26:26.379Z'
+      checksum: sha256:6bdc770710cd23f264b1eccfd0790037c0b3e71eeec83efd0d5a06b099df2322
+      lastVerified: '2026-07-03T01:16:34.726Z'
     parallel-monitor:
       path: .sinapse-ai/core/execution/parallel-monitor.js
       layer: L1
@@ -9892,8 +9892,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4b789fd8d6736ff794181be2069b972752649759cc33b69201bef2d8c41ec6b5
-      lastVerified: '2026-06-15T00:26:26.379Z'
+      checksum: sha256:9b9413fb4c42c236e2a7628201f705640c69dcf4643eedbcdc98ca49d403e755
+      lastVerified: '2026-07-03T01:16:34.727Z'
     rate-limit-manager:
       path: .sinapse-ai/core/execution/rate-limit-manager.js
       layer: L1
@@ -9913,8 +9913,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:efa2d9be66ccd78ffd44622c09325304e7d38847b1139c723f71a251dd84d2da
-      lastVerified: '2026-06-15T00:26:26.380Z'
+      checksum: sha256:0d9749bc1ac9b6ed99019af84340e87d2f99d37a3147144896c6ca09560bdbe0
+      lastVerified: '2026-07-03T01:16:34.727Z'
     result-aggregator:
       path: .sinapse-ai/core/execution/result-aggregator.js
       layer: L1
@@ -9932,8 +9932,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4d862ca2b5a7ea0f503d19cb93155da28c82cb6c80cacad484a7ed5ad22c50b0
-      lastVerified: '2026-06-15T00:26:26.380Z'
+      checksum: sha256:7d85df76eb252b098bfaf3ed5b7f07d408654a2d0ef9336c722fac1576355d81
+      lastVerified: '2026-07-03T01:16:34.727Z'
     semantic-merge-engine:
       path: .sinapse-ai/core/execution/semantic-merge-engine.js
       layer: L1
@@ -9953,8 +9953,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:39ab1acde2a88585fdee1e5307804eaf5886e3c20a771586846b5c25c9ee4356
-      lastVerified: '2026-06-15T00:26:26.381Z'
+      checksum: sha256:318cd9e23ac29a3beabc5d0bf98e87a1b7131bbca4e4c16cd13081be0297b857
+      lastVerified: '2026-07-03T01:16:34.727Z'
     subagent-dispatcher:
       path: .sinapse-ai/core/execution/subagent-dispatcher.js
       layer: L1
@@ -10000,8 +10000,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:49cc1b4712d13cb0638f514cc3b00fa0ab576737c942103fbf5d0931010727b7
-      lastVerified: '2026-06-15T00:26:26.381Z'
+      checksum: sha256:b747c77ac896813844c3f580e0c703f8dbf24159d2b528a816202178ebc0f37e
+      lastVerified: '2026-07-03T01:16:34.727Z'
     delegate-cli:
       path: .sinapse-ai/core/external-executors/delegate-cli.js
       layer: L1
