@@ -33,6 +33,17 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           queries: +security-and-quality
+          # Test files never ship and hold no externally-influenced input;
+          # keeping them out of the scan keeps the dashboard meaningful
+          # (triage AF-20260703 §6 Onda C: 366/429 alerts lived in tests).
+          config: |
+            paths-ignore:
+              - tests
+              - '**/__tests__'
+              - '**/*.test.js'
+              - '**/*.test.ts'
+              - '**/*.spec.js'
+              - '**/*.spec.ts'
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
