@@ -30,6 +30,7 @@
 const os = require('os');
 const path = require('path');
 const fse = require('fs-extra');
+const { atomicWriteFileSync } = require('./fs-utils');
 
 /**
  * Resolve the canonical source paths for the statusline templates.
@@ -182,7 +183,8 @@ async function setupStatusline(opts = {}) {
     }
 
     await fse.ensureDir(path.dirname(globalSettingsPath));
-    await fse.writeFile(globalSettingsPath, JSON.stringify(settings, null, 2), 'utf8');
+    // Atomic (tmp+rename): a crash mid-write must never leave a torn settings.json
+    atomicWriteFileSync(globalSettingsPath, JSON.stringify(settings, null, 2), 'utf8');
 
     result.installed = true;
     return result;

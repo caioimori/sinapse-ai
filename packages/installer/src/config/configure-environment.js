@@ -23,6 +23,7 @@ const {
   sanitizeInput,
 } = require('./validation/config-validator');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
+const { atomicWriteFileSync } = require('../utils/atomic-write');
 
 /**
  * Configure environment files (.env and core-config.yaml)
@@ -110,7 +111,8 @@ async function configureEnvironment(options = {}) {
       const merger = getMergeStrategy(envPath);
       const mergeResult = await merger.merge(existingContent, envContent);
 
-      await fs.writeFile(envPath, mergeResult.content, { encoding: 'utf8' });
+      // Atomic (tmp+rename): .env carries user secrets — never leave it torn
+      atomicWriteFileSync(envPath, mergeResult.content, 'utf8');
       results.envCreated = true;
 
       console.log('✅ Merged .env file');
@@ -119,8 +121,8 @@ async function configureEnvironment(options = {}) {
         console.log(`   ⚠️  Suggestions: ${mergeResult.stats.conflicts} (see comments in file)`);
       }
     } else {
-      // Create new or overwrite
-      await fs.writeFile(envPath, envContent, { encoding: 'utf8' });
+      // Create new or overwrite — atomic (tmp+rename)
+      atomicWriteFileSync(envPath, envContent, 'utf8');
       results.envCreated = true;
       console.log('✅ Created .env file');
     }
@@ -133,7 +135,7 @@ async function configureEnvironment(options = {}) {
     // Step 4: Generate and write .env.example
     const envExamplePath = path.join(targetDir, '.env.example');
     const envExampleContent = generateEnvExample();
-    await fs.writeFile(envExamplePath, envExampleContent, { encoding: 'utf8' });
+    atomicWriteFileSync(envExamplePath, envExampleContent, 'utf8');
     results.envExampleCreated = true;
     console.log('✅ Created .env.example file');
 
@@ -187,7 +189,7 @@ async function configureEnvironment(options = {}) {
       throw new Error('Generated core-config.yaml has invalid structure');
     }
 
-    await fs.writeFile(coreConfigPath, coreConfigContent, { encoding: 'utf8' });
+    atomicWriteFileSync(coreConfigPath, coreConfigContent, 'utf8');
     results.coreConfigCreated = true;
     console.log('✅ Created .sinapse-ai/core-config.yaml');
 
@@ -359,7 +361,7 @@ async function updateGitignore(targetDir) {
 
     newContent += '\n';
 
-    await fs.writeFile(gitignorePath, newContent, { encoding: 'utf8' });
+    atomicWriteFileSync(gitignorePath, newContent, 'utf8');
   }
 }
 

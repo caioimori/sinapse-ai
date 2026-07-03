@@ -45,6 +45,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { atomicWriteFileSync } = require('./lib/fs-utils');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
@@ -161,7 +162,7 @@ function markFirstRunDone() {
     }
     const flag = firstRunFlag();
     if (!fs.existsSync(flag)) {
-      fs.writeFileSync(flag, `${new Date().toISOString()}\n`, 'utf8');
+      atomicWriteFileSync(flag, `${new Date().toISOString()}\n`, 'utf8');
     }
     return true;
   } catch {

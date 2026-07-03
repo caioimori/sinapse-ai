@@ -25,6 +25,7 @@ const fs = require('fs');
 const fse = require('fs-extra');
 const yaml = require('js-yaml');
 const { exec, spawn } = require('child_process');
+const { atomicWriteFileSync } = require('./lib/fs-utils');
 const { promisify } = require('util');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
@@ -172,8 +173,8 @@ async function main() {
         author: '',
         license: 'ISC',
       };
-      // INS-2 Performance: Use async write instead of sync
-      await fse.writeFile(packageJsonPath, JSON.stringify(defaultPackage, null, 2));
+      // Atomic (tmp+rename): never leave a torn package.json
+      atomicWriteFileSync(packageJsonPath, JSON.stringify(defaultPackage, null, 2));
       console.log(chalk.green('✓') + ' package.json created');
     }
 
@@ -582,7 +583,8 @@ async function main() {
               const existing = await fse.readFile(targetRules, 'utf8');
               const incoming = await fse.readFile(sourceRules, 'utf8');
               const mergeResult = await markdownMerger.merge(existing, incoming);
-              await fse.writeFile(targetRules, mergeResult.content, 'utf8');
+              // Atomic (tmp+rename): merged user rules must never be half-written
+              atomicWriteFileSync(targetRules, mergeResult.content, 'utf8');
               console.log(
                 chalk.green('✓') +
                   ` ${ide.charAt(0).toUpperCase() + ide.slice(1)} rules merged (existing content preserved)`
@@ -969,8 +971,8 @@ async function updateGitIgnore(mode, projectRoot) {
 
     if (!hasFrameworkSection) {
       gitignore += frameworkRules.join('\n');
-      // INS-2 Performance: Use async write
-      await fse.writeFile(gitignorePath, gitignore);
+      // Atomic (tmp+rename): appended .gitignore must never be half-written
+      atomicWriteFileSync(gitignorePath, gitignore);
     }
   }
 }

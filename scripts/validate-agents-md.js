@@ -27,6 +27,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../.sinapse-ai/core/synapse/utils/atomic-write');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -113,7 +114,7 @@ function main() {
   }
 
   if (FIX) {
-    fs.writeFileSync(AGENTS_MD, fixed, 'utf8');
+    atomicWriteSync(AGENTS_MD, fixed, 'utf8');
     console.log('AGENTS.md count(s) rewritten to match disk:');
     for (const mm of mismatches) console.log(`  - ${mm}`);
     process.exit(0);

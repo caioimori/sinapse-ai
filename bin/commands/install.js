@@ -27,6 +27,7 @@ const {
   copyDirSync,
   rmDirSync,
   syncDirSync,
+  atomicWriteFileSync,
   toForwardSlash,
 } = require('../lib/fs-utils');
 const {
@@ -112,7 +113,7 @@ async function cmdInstallGlobal(opts = {}) {
     }
     if (!parseFailed) {
       settings.language = language === 'pt' ? 'portuguese' : 'english';
-      fs.writeFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
+      atomicWriteFileSync(claudeSettingsPath, JSON.stringify(settings, null, 2) + '\n');
     }
   } catch { /* non-critical */ }
 
@@ -587,7 +588,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   if (isUpsert) {
     meta.updatedAt = nowIso;
   }
-  fs.writeFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
+  atomicWriteFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
 
   return { writtenAgents, totalAgents, totalDelta, squadsRefreshed, squadsAdded, meta };
 }
@@ -735,14 +736,14 @@ function createLauncher() {
 exec claude --add-dir "${sinapsePathForBash}" --agent sinapse-orqx "$@"
 `;
   const bashPath = path.join(BIN_DIR, 'sinapse');
-  fs.writeFileSync(bashPath, bashLauncher);
+  atomicWriteFileSync(bashPath, bashLauncher);
   try { fs.chmodSync(bashPath, 0o755); } catch { /* chmod is best-effort (no-op on non-POSIX) */ }
   logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse`);
 
   // Windows CMD launcher
   if (IS_WIN) {
     const cmdLauncher = '@echo off\r\nclaude --add-dir "%USERPROFILE%\\.sinapse" --agent sinapse-orqx %*\r\n';
-    fs.writeFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
+    atomicWriteFileSync(path.join(BIN_DIR, 'sinapse.cmd'), cmdLauncher);
     logger.always(`  ${GREEN}OK${NC} ~/bin/sinapse.cmd`);
   }
 }
