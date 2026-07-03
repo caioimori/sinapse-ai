@@ -285,82 +285,94 @@ function signatureExists(manifestPath) {
  * @param {Object} [options.publicKey] - Override public key (testing only)
  * @returns {Object} { content: Buffer, verified: boolean, error: string|null }
  */
+/**
+ * Open + fstat + read on a SINGLE file descriptor.
+ *
+ * SECURITY [TOCTOU]: size check (DoS guard) and read happen on the same open
+ * fd, so a concurrent writer cannot swap the file between the check and the
+ * use — the buffer verified downstream is exactly the bytes that were sized.
+ *
+ * @param {string} filePath - File to read
+ * @param {number} maxSize - Maximum allowed size in bytes
+ * @param {string} label - Human label used in error messages (e.g. "Manifest file")
+ * @returns {{content: Buffer|null, error: string|null, missing: boolean}}
+ */
+function readFileCapped(filePath, maxSize, label) {
+  let fd;
+  try {
+    fd = fs.openSync(filePath, 'r');
+  } catch (error) {
+    return {
+      content: null,
+      error: `Cannot read ${label.toLowerCase()}: ${error.message}`,
+      missing: error.code === 'ENOENT',
+    };
+  }
+  try {
+    const stat = fs.fstatSync(fd);
+    if (stat.size > maxSize) {
+      return {
+        content: null,
+        error: `${label} exceeds maximum size (${maxSize} bytes)`,
+        missing: false,
+      };
+    }
+    const content = Buffer.alloc(stat.size);
+    fs.readSync(fd, content, 0, stat.size, 0);
+    return { content, error: null, missing: false };
+  } catch (error) {
+    return {
+      content: null,
+      error: `Cannot read ${label.toLowerCase()}: ${error.message}`,
+      missing: false,
+    };
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
 function loadAndVerifyManifest(manifestPath, options = {}) {
   const requireSignature = options.requireSignature !== false;
   const signaturePath = manifestPath + '.minisig';
 
-  // Check manifest exists
-  if (!fs.existsSync(manifestPath)) {
+  // SECURITY [DOS-1] + [TOCTOU]: size is validated on the same fd that is
+  // read, so the verified buffer cannot be swapped after the check.
+  const manifest = readFileCapped(manifestPath, SignatureLimits.MAX_MANIFEST_SIZE, 'Manifest file');
+  if (manifest.content === null) {
     return {
       content: null,
       verified: false,
-      error: 'Manifest file not found',
+      error: manifest.missing ? 'Manifest file not found' : manifest.error,
     };
   }
 
-  // SECURITY [DOS-1]: Check manifest file size BEFORE reading into memory
-  // This prevents DoS attacks via oversized manifest files
-  let manifestStat;
-  try {
-    manifestStat = fs.statSync(manifestPath);
-  } catch (error) {
-    return {
-      content: null,
-      verified: false,
-      error: `Cannot stat manifest file: ${error.message}`,
-    };
-  }
-
-  if (manifestStat.size > SignatureLimits.MAX_MANIFEST_SIZE) {
-    return {
-      content: null,
-      verified: false,
-      error: `Manifest file exceeds maximum size (${SignatureLimits.MAX_MANIFEST_SIZE} bytes)`,
-    };
-  }
-
-  // Check signature exists
-  if (!fs.existsSync(signaturePath)) {
-    if (requireSignature) {
+  // SECURITY [DOS-2] + [TOCTOU]: same single-fd pattern for the signature
+  const signature = readFileCapped(signaturePath, SignatureLimits.MAX_SIGNATURE_SIZE, 'Signature file');
+  if (signature.content === null) {
+    if (signature.missing) {
+      if (requireSignature) {
+        return {
+          content: null,
+          verified: false,
+          error: 'Manifest signature file not found (.minisig)',
+        };
+      }
+      // Allow unsigned in dev mode (requireSignature=false)
       return {
-        content: null,
+        content: manifest.content,
         verified: false,
-        error: 'Manifest signature file not found (.minisig)',
+        error: null,
       };
     }
-    // Allow unsigned in dev mode (requireSignature=false)
-    // Size already validated above
-    return {
-      content: fs.readFileSync(manifestPath),
-      verified: false,
-      error: null,
-    };
-  }
-
-  // SECURITY [DOS-2]: Check signature file size BEFORE reading
-  // Signature files should be small (~200 bytes typical)
-  let signatureStat;
-  try {
-    signatureStat = fs.statSync(signaturePath);
-  } catch (error) {
     return {
       content: null,
       verified: false,
-      error: `Cannot stat signature file: ${error.message}`,
+      error: signature.error,
     };
   }
 
-  if (signatureStat.size > SignatureLimits.MAX_SIGNATURE_SIZE) {
-    return {
-      content: null,
-      verified: false,
-      error: `Signature file exceeds maximum size (${SignatureLimits.MAX_SIGNATURE_SIZE} bytes)`,
-    };
-  }
-
-  // Load files - sizes validated above
-  const manifestContent = fs.readFileSync(manifestPath);
-  const signatureContent = fs.readFileSync(signaturePath, 'utf8');
+  const manifestContent = manifest.content;
+  const signatureContent = signature.content.toString('utf8');
 
   // Verify signature BEFORE any parsing
   const verifyResult = verifyManifestSignature(manifestContent, signatureContent, options);

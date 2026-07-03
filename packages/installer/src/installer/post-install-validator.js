@@ -456,21 +456,30 @@ class PostInstallValidator {
     // Development mode: signature not required (NOT for production)
     this.log('WARNING: Signature verification disabled - development mode only');
     try {
-      // SECURITY [DOS-3]: Check file size BEFORE reading into memory
-      const manifestStat = fs.statSync(manifestPath);
-      if (manifestStat.size > SecurityLimits.MAX_MANIFEST_SIZE) {
-        this.issues.push({
-          type: IssueType.INVALID_MANIFEST,
-          severity: Severity.CRITICAL,
-          message: 'Manifest file exceeds maximum size',
-          details: `Size: ${manifestStat.size} bytes, Max: ${SecurityLimits.MAX_MANIFEST_SIZE} bytes`,
-          remediation: 'Use a valid manifest file from the official source',
-          relativePath: null,
-        });
-        return null;
-      }
+      // SECURITY [DOS-3] + [TOCTOU]: fstat + read on the same open fd, so the
+      // size check and the parsed bytes refer to the same file version.
+      const fd = fs.openSync(manifestPath, 'r');
+      let content;
+      try {
+        const manifestStat = fs.fstatSync(fd);
+        if (manifestStat.size > SecurityLimits.MAX_MANIFEST_SIZE) {
+          this.issues.push({
+            type: IssueType.INVALID_MANIFEST,
+            severity: Severity.CRITICAL,
+            message: 'Manifest file exceeds maximum size',
+            details: `Size: ${manifestStat.size} bytes, Max: ${SecurityLimits.MAX_MANIFEST_SIZE} bytes`,
+            remediation: 'Use a valid manifest file from the official source',
+            relativePath: null,
+          });
+          return null;
+        }
 
-      const content = fs.readFileSync(manifestPath, 'utf8');
+        const buf = Buffer.alloc(manifestStat.size);
+        fs.readSync(fd, buf, 0, manifestStat.size, 0);
+        content = buf.toString('utf8');
+      } finally {
+        fs.closeSync(fd);
+      }
       return this.parseManifestContent(content);
     } catch (error) {
       this.issues.push({
