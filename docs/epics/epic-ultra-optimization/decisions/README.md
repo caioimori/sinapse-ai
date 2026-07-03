@@ -39,11 +39,23 @@
   sozinho), escape de HTML na fonte geradora do atlas (`render-html.js`, fecha
   #524-#528), âncoras agrupadas na `TEST_FILE_PATTERN` (#511, equivalência validada
   com 20.030 casos), strip de caracteres de controle no `log()` do updater (#32).
-  A limpeza dos 168 alertas de qualidade (também citada na Onda A do relatório)
-  ficou como follow-up próprio. Ondas B (escrita atômica/TOCTOU + execFileSync) e
-  C (dismissals/config CodeQL) seguem aguardando decisão do dono.
-- **Rollout da ativação enxuta pros ~170 agentes restantes** (pós-piloto Onda2-P7,
-  PR #332): aguarda avaliação do piloto pelo dono — fora do escopo destes pareceres.
+  **Ondas B e C ✅ EXECUTADAS (plano "ajuste tudo" aprovado pelo dono, 2026-07-03):**
+  Onda C (PR #339) — `paths-ignore` de tests no CodeQL (~366 alertas de teste fecham
+  na análise da main) + 2 falso-positivos dismissados com evidência (#515, #2) + os
+  únicos 5 alertas de qualidade FORA de tests corrigidos (a "limpeza de 168" colapsou:
+  163 eram de teste). Onda B em 2 PRs — B1 (#340) TOCTOU da cadeia de confiança
+  (manifest-signature/file-hasher/post-install-validator em fd único) + `execFileSync`
+  no gate XI; B2 (#341) escrita atômica tmp+rename em ~30 sites/21 arquivos do caminho
+  de instalação (reuso do util canônico; cópia autocontida só no pacote separado).
+  Pós-execução: painel deve estabilizar em ~unidades de alertas reais; sobras
+  aceitas-com-justificativa (#507 fechado pela B1; #511 fechado pela A).
+- **Rollout da ativação enxuta** (pós-piloto Onda2-P7, PR #332): ✅ EXECUTADO
+  (PR #342, 2026-07-03) — avaliação do piloto delegada pelo dono ("avalie você e
+  siga se tiver ok") e registrada na story `lean-activation-rollout`: gates verdes
+  na mesclagem + re-verificados, corte só de coerção, blocos funcionais intactos.
+  Medição que corrigiu o escopo: 152/160 agentes de squad já nasciam enxutos — o
+  rollout real foi 22 arquivos (9 núcleo + 8 mastery + 4 locais + template), não
+  "~170". −717/+374 linhas; zero coerção restante fora da doc do template.
 
 ## Como executar depois do OK
 
