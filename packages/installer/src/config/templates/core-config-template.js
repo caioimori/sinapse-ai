@@ -210,13 +210,55 @@ function generateCoreConfig(options = {}) {
   };
 
   // Convert to YAML with proper formatting
-  return yaml.dump(config, {
+  const dumped = yaml.dump(config, {
     indent: 2,
     lineWidth: 120,
     noRefs: true,
   });
+
+  // Story onda2-p9 (closes the P4/DEC-01 loose end): the `models` section is
+  // appended as a raw block (yaml.dump cannot emit comments) so installed
+  // projects stop falling back to the conservative 200000-token window when
+  // the active model actually has a 1M window. Values MIRROR the framework
+  // repo's core-config.yaml `models` section — never invent context windows.
+  return dumped + MODELS_SECTION;
 }
+
+/**
+ * `models` registry block for installed projects (Story onda2-p9, AC2).
+ *
+ * Consumed by .sinapse-ai/core/synapse/context/context-tracker.js
+ * (getModelConfig): `active` selects which registry entry drives
+ * estimateContextPercent/shouldCompact.
+ *
+ * MAINTENANCE: keep in sync with the framework repo's core-config.yaml
+ * `models:` section (source of truth). When the frontier model changes,
+ * update `active` + add the entry THERE first, then mirror here.
+ * Windows below are copied verbatim from that source — do not invent values.
+ *
+ * @constant {string}
+ */
+const MODELS_SECTION = `
+# Context-tracker dynamic model registry (mirrors the framework core-config.yaml).
+# Consumed by .sinapse-ai/core/synapse/context/context-tracker.js (getModelConfig):
+# 'active' selects which registry entry drives context estimation.
+# MAINTENANCE: keep in sync with the framework repo's core-config.yaml models
+# section. If this section (or the active entry) is missing/invalid, the
+# tracker falls back to a conservative 200000-token window (documented in
+# context-tracker.js DEFAULTS) — safe, but wrong for 1M-window models.
+models:
+  active: claude-fable-5
+  registry:
+    claude-fable-5:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 2000
+    claude-sonnet-5:
+      # conservative default — verify against official docs before relying on 1M
+      contextWindow: 200000
+      avgTokensPerPrompt: 1500
+`;
 
 module.exports = {
   generateCoreConfig,
+  MODELS_SECTION,
 };

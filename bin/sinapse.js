@@ -717,6 +717,11 @@ async function runUninstall(options = {}) {
   // Optionally remove .sinapse
   if (!keepData) {
     itemsToRemove.push({ path: '.sinapse', description: 'Project data and settings' });
+    // Story onda2-p9 — .synapse/ is the context-engine runtime (generated
+    // constitution + sessions/metrics). Grouped with project data for parity
+    // with .sinapse: removed by default, preserved under --keep-data.
+    // Regenerated automatically by any future `sinapse install`/`init`.
+    itemsToRemove.push({ path: '.synapse', description: 'Context engine runtime (constitution + sessions/metrics)' });
   }
 
   // Check what exists

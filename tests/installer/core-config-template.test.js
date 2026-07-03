@@ -54,5 +54,60 @@ describe('core-config-template', () => {
       expect(parsed.ide.selected).toContain('cursor');
     });
   });
+
+  describe('onda2-p9: models registry section (AC2)', () => {
+    test('includes a models section that parses as valid YAML', () => {
+      const output = generateCoreConfig();
+      const parsed = yaml.load(output);
+
+      expect(parsed.models).toBeDefined();
+      expect(parsed.models.active).toBe('claude-fable-5');
+      expect(parsed.models.registry).toBeDefined();
+    });
+
+    test('active entry mirrors the framework core-config (1M window — never invented)', () => {
+      const parsed = yaml.load(generateCoreConfig());
+      const active = parsed.models.registry[parsed.models.active];
+
+      expect(active).toBeDefined();
+      expect(active.contextWindow).toBe(1000000);
+      expect(active.avgTokensPerPrompt).toBe(2000);
+    });
+
+    test('ships a conservative fallback entry (200K, matching the source registry)', () => {
+      const parsed = yaml.load(generateCoreConfig());
+      const fallback = parsed.models.registry['claude-sonnet-5'];
+
+      expect(fallback).toBeDefined();
+      expect(fallback.contextWindow).toBe(200000);
+      expect(fallback.avgTokensPerPrompt).toBe(1500);
+    });
+
+    test('carries the maintenance comment (raw output)', () => {
+      const output = generateCoreConfig();
+      // Comment block survives because the section is appended raw
+      // (yaml.dump cannot emit comments).
+      expect(output).toContain('# Context-tracker dynamic model registry');
+      expect(output).toContain('keep in sync with the framework repo');
+      expect(output).toContain('falls back to a conservative 200000-token window');
+    });
+
+    test('models values match the SOURCE core-config.yaml registry (anti-drift)', () => {
+      const fs = require('fs');
+      const path = require('path');
+      const sourceConfig = yaml.load(
+        fs.readFileSync(path.resolve(__dirname, '..', '..', '.sinapse-ai', 'core-config.yaml'), 'utf8'),
+      );
+      const installed = yaml.load(generateCoreConfig());
+
+      // Every entry shipped in the installed template must exist in the source
+      // registry with IDENTICAL values (the story forbids inventing windows).
+      expect(sourceConfig.models).toBeDefined();
+      for (const [id, entry] of Object.entries(installed.models.registry)) {
+        expect(sourceConfig.models.registry[id]).toEqual(entry);
+      }
+      expect(sourceConfig.models.registry[installed.models.active]).toBeDefined();
+    });
+  });
 });
 
