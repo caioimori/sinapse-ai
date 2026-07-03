@@ -838,9 +838,6 @@ Provides the generic wave pattern that this task instantiates with project-speci
 ### po-epic-context.md
 Used by @product-lead during story validation to understand accumulated changes across the epic.
 
-### Wave Executor (wave-executor.js)
-The JS engine can be used for programmatic wave execution if available. This task provides the AI-driven alternative that works without code changes.
-
 ---
 
 ## Output Format
@@ -859,7 +856,6 @@ All actions produce structured output:
 - `*create-epic` - Create a new epic (PM)
 - `*epic-context` - Show accumulated epic context (PO)
 - `*run-workflow development-cycle` - Run single story cycle
-- `*waves` - Analyze wave structure of a workflow
 - `*status` - General workflow status
 
 ---

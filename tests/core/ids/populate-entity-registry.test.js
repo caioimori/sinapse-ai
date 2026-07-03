@@ -208,10 +208,11 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
   });
 
   describe('SCAN_CONFIG (NOG-16A AC1)', () => {
-    it('has 15 categories (10 existing + 4 new + bin)', () => {
-      expect(SCAN_CONFIG).toHaveLength(15);
+    it('has 16 categories (10 existing + 4 new + bin + wis-modules)', () => {
+      expect(SCAN_CONFIG).toHaveLength(16);
       const categories = SCAN_CONFIG.map((c) => c.category);
       expect(categories).toContain('bin');
+      expect(categories).toContain('wis-modules'); // DEC-02 (d)
       expect(categories).toContain('workflows');
       expect(categories).toContain('utils');
       expect(categories).toContain('tools');

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "generated": "2026-06-19T20:32:21.238Z",
-  "totalWorkers": 373,
+  "totalWorkers": 372,
   "categories": {
     "checklist": {
       "count": 16,
@@ -24,7 +24,7 @@
       "description": "JavaScript utility scripts"
     },
     "task": {
-      "count": 215,
+      "count": 214,
       "subcategories": [
         "analysis",
         "creation",
@@ -10917,36 +10917,6 @@
         "subtask"
       ],
       "path": ".sinapse-ai/development/tasks/verify-subtask.md",
-      "taskFormat": "TASK-FORMAT-V1",
-      "executorTypes": [
-        "Agent",
-        "Worker"
-      ],
-      "performance": {
-        "avgDuration": "1m",
-        "cacheable": false,
-        "parallelizable": false
-      },
-      "agents": [],
-      "metadata": {
-        "source": "development",
-        "addedVersion": "1.0.0"
-      }
-    },
-    {
-      "id": "waves",
-      "name": "Waves",
-      "description": "<!-- Story: WIS-4 - Wave Analysis Engine -->",
-      "category": "task",
-      "subcategory": "general",
-      "inputs": [],
-      "outputs": [],
-      "tags": [
-        "task",
-        "general",
-        "waves"
-      ],
-      "path": ".sinapse-ai/development/tasks/waves.md",
       "taskFormat": "TASK-FORMAT-V1",
       "executorTypes": [
         "Agent",

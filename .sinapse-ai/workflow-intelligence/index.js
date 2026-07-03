@@ -2,8 +2,7 @@
  * @module workflow-intelligence
  * @description Workflow Intelligence System (WIS) public API
  * @story WIS-2 - Workflow Registry Enhancement
- * @story WIS-4 - Wave Analysis Engine
- * @version 1.1.0
+ * @version 1.2.0
  *
  * @example
  * const wis = require('./.sinapse-ai/workflow-intelligence');
@@ -20,11 +19,6 @@
  *
  * // Get next steps for a state
  * const nextSteps = wis.getNextSteps('epic_creation', 'stories_created');
- *
- * // Analyze waves for parallel execution (WIS-4)
- * const waves = wis.analyzeWaves('story_development');
- * console.log(waves.waves); // Wave groupings
- * console.log(waves.criticalPath); // Critical path
  */
 
 'use strict';
@@ -48,14 +42,6 @@ const {
   SUGGESTION_CACHE_TTL,
   LOW_CONFIDENCE_THRESHOLD,
 } = require('./engine/suggestion-engine');
-
-const {
-  WaveAnalyzer,
-  CircularDependencyError,
-  createWaveAnalyzer,
-  analyzeWaves,
-  DEFAULT_TASK_DURATIONS,
-} = require('./engine/wave-analyzer');
 
 const outputFormatter = require('./engine/output-formatter');
 
@@ -297,9 +283,8 @@ module.exports = {
   invalidateCache,
   reset,
 
-  // Wave Analysis API (WIS-4)
-  analyzeWaves,
-  createWaveAnalyzer,
+  // Wave Analysis API (WIS-4) removida — DEC-02/DEC-03 (2026-07-03):
+  // wave-analyzer seguiu o destino do cluster multi-story órfão.
 
   // Pattern Learning API (WIS-5)
   learning: learningModule,
@@ -313,8 +298,6 @@ module.exports = {
   WorkflowRegistry,
   ConfidenceScorer,
   SuggestionEngine,
-  WaveAnalyzer,
-  CircularDependencyError,
 
   // Output formatting (for *next task)
   outputFormatter,
@@ -325,6 +308,5 @@ module.exports = {
   DEFAULT_PATTERNS_PATH,
   SUGGESTION_CACHE_TTL,
   LOW_CONFIDENCE_THRESHOLD,
-  DEFAULT_TASK_DURATIONS,
 };
 

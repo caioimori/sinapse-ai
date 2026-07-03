@@ -1,7 +1,10 @@
 # DEC-02 — workflow-intelligence: cabear, aposentar ou reserva marcada
 
 > Parecer de arquitetura · Story onda2-p8 · Item 2.7 do AF-20260702 · 2026-07-02
-> Status: **AGUARDA OK DO DONO** (Art. XI Conservative Default)
+> Status: **✅ EXECUTADA por completo (2026-07-03)** — parte documental no PR da mesa;
+> split de código junto do DEC-03 (story `dec03-orphan-cluster-removal`): wave-analyzer
+> removido com o cluster, suggestion-engine/learning intactos, entidade
+> `workflow-intelligence` criada no registry via scanner (item d).
 
 ## Contexto
 

@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,412 task files, 1,348 resolvable via the parametric activator
+> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,411 task files, 1,347 resolvable via the parametric activator
 >
 > Codex resolves every agent and its real tasks at runtime from source (no frozen
 > snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
@@ -75,7 +75,7 @@ Every task pointer the activator emits is verified to exist on disk before it is
 ### @developer (Pixel)
 - **Role:** Full Stack Developer -- code implementation, debugging, refactoring
 - **Capabilities:** Story-driven development (YOLO/Interactive/Pre-Flight modes), CodeRabbit self-healing (max 2 iterations), autonomous build with worktrees, gotchas memory, service scaffolding
-- **Key Commands:** `*develop`, `*build`, `*run-tests`, `*apply-qa-fixes`, `*create-service`, `*waves`
+- **Key Commands:** `*develop`, `*build`, `*run-tests`, `*apply-qa-fixes`, `*create-service`
 - **Constraints:** Cannot `git push` or create PRs (delegate to @devops). Cannot modify story AC/scope/title. Can only update File List, checkboxes, and Dev Agent Record sections.
 
 ### @architect (Stratum)
