@@ -5,6 +5,21 @@ a real `GateResult` (the exact output of `gate.verify(context)`) against a close
 set of deterministic predicates. No clock, no network, no LLM, no `eval()` —
 total determinism, fully Windows-native, zero new network dependencies.
 
+## Behavioral regression golden set (epic-gates/)
+
+`epic-gates/cases.json` + `scripts/eval-e2e.js` (`npm run eval:e2e`) travam o
+comportamento do GateEvaluator de ÉPICOS (orchestration) — a camada onde os bugs
+de 30/06 moravam (build vazio aprovado, plano stub, gate sem checks, sinal de
+falha ignorado). Roda dentro de `npm test` via `eval-harness.test.js`: regressão
+comportamental bloqueia merge.
+
+**Política (NON-NEGOTIABLE, AF-20260702 item 3.1):** todo bug COMPORTAMENTAL
+encontrado (em produção, em checkpoint medido ou em auditoria) vira caso
+permanente em `epic-gates/cases.json` — nunca só um fix + comentário. O caso
+nasce com a descrição do bug original e a expectativa que o teria pego.
+Medições de aposta (fan-out, waves, executores) seguem
+`epic-gates/PROTOCOL.md` — critério pré-registrado, dados brutos no checkpoint.
+
 > **Article XI (additive, non-breaking):** the harness only *reads* a
 > `GateResult`. It never mutates the result and never touches
 > `.sinapse-ai/core/ids/verification-gate.js` or any gate implementation.

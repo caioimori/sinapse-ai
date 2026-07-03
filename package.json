@@ -86,6 +86,7 @@
     "test:coverage": "jest --coverage",
     "test:health-check": "jest tests/health-check",
     "eval": "node scripts/eval-runner.js",
+    "eval:e2e": "node scripts/eval-e2e.js",
     "validate:evals": "node scripts/validate-evals.js",
     "validate:schemas": "node scripts/validate-schemas.js",
     "lint": "eslint . --cache --cache-location .eslintcache",

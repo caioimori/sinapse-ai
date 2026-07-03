@@ -53,4 +53,14 @@ describe('eval harness (Onda 6.1)', () => {
     expect(r.stdout).toMatch(/postgres-constraint-violated-by-sqlite/);
     expect(r.code).toBe(0);
   }, 30000);
+
+  // Onda3-S4 (AF-20260702 item 3.1): behavioral golden set of the EPIC gate
+  // evaluator — the layer where the 2026-06-30 bugs lived. A regression on any
+  // measured behavior (empty build approved, stub plan waved through, zero-check
+  // theater, ignored failure signal) now blocks merge via npm test.
+  test('eval:e2e: behavioral golden set of the epic GateEvaluator passes (exit 0)', () => {
+    const r = runNode('eval-e2e.js');
+    expect(r.stdout).toMatch(/all 6 behavioral cases passed/);
+    expect(r.code).toBe(0);
+  }, 30000);
 });

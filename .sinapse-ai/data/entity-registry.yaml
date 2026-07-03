@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T08:39:26.405Z'
-  entityCount: 813
+  lastUpdated: '2026-07-03T08:52:22.846Z'
+  entityCount: 814
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -11582,6 +11582,27 @@ entities:
         extensionPoints: []
       checksum: sha256:d4ad190353fc751e874bad5b3013137dcccfc84100edd6cead80c8fa5e83af11
       lastVerified: '2026-06-30T18:30:20.187Z'
+    brownfield-progress:
+      path: .sinapse-ai/core/orchestration/brownfield-progress.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\orchestration\brownfield-progress.js
+      keywords:
+        - brownfield
+        - progress
+      usedBy:
+        - workflow-executor
+      dependencies:
+        - doc-first-resolver
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:919fa899b32e584842f370df84cfefdc5d450136f13699c1916d82f3e1833b7d
+      lastVerified: '2026-07-03T08:52:22.751Z'
     build-command:
       path: .sinapse-ai/core/orchestration/build-command.js
       layer: L1
@@ -11738,6 +11759,7 @@ entities:
         - first
         - resolver
       usedBy:
+        - brownfield-progress
         - build-command
         - greenfield-handler
         - route-command
@@ -12249,6 +12271,7 @@ entities:
         - executor-assignment
         - session-state
         - gate-evaluator
+        - brownfield-progress
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -12256,8 +12279,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c7aca8a292efcf20185cd30d6a582c6239a55a9871e4e63ed1c49a6aebf35f7a
-      lastVerified: '2026-06-30T18:30:20.195Z'
+      checksum: sha256:aa21bf15ac3fec1170b6bf5a446051c93718c069b5afa44d75ed5557427597a6
+      lastVerified: '2026-07-03T08:52:22.755Z'
     workflow-orchestrator:
       path: .sinapse-ai/core/orchestration/workflow-orchestrator.js
       layer: L1
@@ -15061,8 +15084,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:6de267f13f4fd996450ed228ac6bb109d4d75f91eef515c946d5885e464f4fc9
-      lastVerified: '2026-06-15T00:26:26.478Z'
+      checksum: sha256:1cda821dcfd9dde90c00a9566588a6d5155d6265deaf926caf3477d9f8def921
+      lastVerified: '2026-07-03T08:52:22.790Z'
     brownfield-fullstack:
       path: .sinapse-ai/development/workflows/brownfield-fullstack.yaml
       layer: L2
