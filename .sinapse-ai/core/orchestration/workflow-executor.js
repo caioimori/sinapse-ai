@@ -474,7 +474,7 @@ class WorkflowExecutor {
       return { success: false, error: `Workflow definition is empty: ${workflowPath}` };
     }
 
-    return {
+    const result = {
       success: true,
       workflowPath,
       workflow,
@@ -484,6 +484,22 @@ class WorkflowExecutor {
         techStack: options.techStack || {},
       },
     };
+
+    // Onda3-S3 (AF-20260702 item 3.3): the brownfield handoff now carries
+    // deterministic state — phase progress measured from artifacts on disk and
+    // the Phase 7 QA gate parsed by code (with capped rework loop). Fail-open:
+    // enrichment errors degrade to the plain handoff, never to a crash.
+    if (workflow.id === 'brownfield-discovery') {
+      try {
+        const { resolveBrownfieldProgress, evaluateQaGate } = require('./brownfield-progress');
+        result.progress = resolveBrownfieldProgress(result.context.projectRoot, workflow);
+        result.qaGate = evaluateQaGate(result.context.projectRoot);
+      } catch (error) {
+        result.progressError = `brownfield progress unavailable: ${error.message}`;
+      }
+    }
+
+    return result;
   }
 
   /**
