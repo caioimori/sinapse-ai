@@ -9,7 +9,7 @@ elicit: false
 # Task: Analyze Conversion Funnel
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 
@@ -43,7 +43,7 @@ Analisar funil de conversao para identificar drop-offs e oportunidades de otimiz
 5. **Recomendacoes de otimizacao**
    - Cada bottleneck → agente responsavel
    - LP conversion rate baixo → Convert
-   - ATC to checkout drop → Convert (checkout UX)
+   - ATC to checkout drop → Uplift (checkout UX)
    - Low engagement → Canvas (creative relevance)
    - Mobile gap → Lighthouse (performance)
 

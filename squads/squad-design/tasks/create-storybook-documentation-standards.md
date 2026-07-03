@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo

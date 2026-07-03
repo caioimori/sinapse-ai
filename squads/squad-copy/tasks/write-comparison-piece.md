@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** STANDARD
 - **Depends on:** competitive analysis, product features, copy brief
-- **Feeds:** conversion-writer (Spark), squad-content
+- **Feeds:** conversion-writer (Blitz), squad-content
 
 ## Objetivo
 Escrever comparison piece (vs. page, alternative page) que posiciona a marca como melhor escolha — sendo honesto o suficiente para gerar confianca mas estrategico o suficiente para vencer.
@@ -147,7 +147,7 @@ Criterio fraco    | ✅     | ✅✅   | ⭐ (baixa)
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Comparison para conversao em LP
     format: Key differentiators + CTA copy
   - to: squad-research

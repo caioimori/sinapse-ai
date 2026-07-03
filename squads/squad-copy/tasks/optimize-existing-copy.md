@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** conversion-writer (Spark)
+- **Agent:** conversion-writer (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** copy existente, dados de performance, user feedback
 - **Feeds:** copy-editor (Chisel), squad-growth
@@ -158,4 +158,4 @@ handoffs:
 
 ---
 
-*Task operada por: conversion-writer (Spark)*
+*Task operada por: conversion-writer (Blitz)*

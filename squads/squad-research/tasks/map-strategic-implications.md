@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** pesquisas-chave completadas
 - **Feeds:** product-systems, commercial-systems, @architect
@@ -104,4 +104,4 @@ handoffs:
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

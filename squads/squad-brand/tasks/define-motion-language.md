@@ -26,7 +26,7 @@ Checklist:
 # Task: define-motion-language
 
 ## Metadata
-- **Agent:** brand-motion-vfx (Flux)
+- **Agent:** brand-motion-vfx (Ripple)
 - **Squad:** squad-brand
 - **Trigger:** `*define-motion-language`
 - **Inputs:** Personalidade da marca, design system tokens, componentes

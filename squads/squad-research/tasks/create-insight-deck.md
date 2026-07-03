@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** synthesize-research-report
 - **Feeds:** @project-lead, commercial-systems
@@ -96,4 +96,4 @@ Criar deck de apresentacao com insights de pesquisa — visual-first, um insight
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

@@ -9,7 +9,7 @@ elicit: true
 # Task: Analyze Landing Page
 
 ## Metadata
-- **Agent:** cro-specialist (Convert)
+- **Agent:** cro-specialist (Uplift)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Kinetic (dx-interaction-designer)
+- **Agent:** Gesture (dx-interaction-designer)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -35,9 +35,9 @@ Definir principios de motion design do produto — estabelecer guidelines de alt
 
 ## Entrada
 - Brand personality
-- UX principles (de Compass)
-- Performance budgets (de Apex)
-- Accessibility requirements (de Beacon)
+- UX principles (de Vantage)
+- Performance budgets (de Velocity)
+- Accessibility requirements (de Aperture)
 
 ## Passos
 

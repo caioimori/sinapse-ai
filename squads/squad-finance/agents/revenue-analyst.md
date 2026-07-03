@@ -113,7 +113,7 @@ Acoes por nivel:
 |--------|----------------------|
 | finance-orqx (Ledger) | Envia revenue waterfall, aging, collection rates |
 | profitability-analyst (Margin) | Fornece dados de receita para calculo de margem |
-| pricing-strategist (Mint) | Fornece rate realization data para otimizacao de pricing |
+| pricing-strategist (Markup) | Fornece rate realization data para otimizacao de pricing |
 | budget-controller (Vault) | Fornece dados de collection para cash flow forecast |
 
 ## Quando Usar

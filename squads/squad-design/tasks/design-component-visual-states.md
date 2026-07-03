@@ -27,17 +27,17 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar todos os estados visuais de cada componente — garantir que cada estado possivel e visualmente comunicado com clareza, consistencia e acessibilidade.
 
 ## Entrada
-- Component inventory (de Stratum)
+- Component inventory (de Lattice)
 - Brand tokens (cores, tipografia)
 - Accessibility requirements (WCAG 2.2)
-- Interaction patterns (de Kinetic)
+- Interaction patterns (de Gesture)
 
 ## Passos
 
@@ -121,7 +121,7 @@ Para cada componente, produzir um "state sheet" visual:
 - State sheets por componente
 - Token mapping por estado
 - Dark mode state variants
-- Handoff para Scaffold (implementation) e Beacon (a11y review)
+- Handoff para Scaffold (implementation) e Aperture (a11y review)
 
 ## Validacao
 - [ ] Todos os estados mapeados por componente

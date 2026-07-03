@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** dados de audiencia, psychographics
 - **Feeds:** build-audience-persona, content-intelligence/North
@@ -91,4 +91,4 @@ Segmentar audiencia em grupos acionaveis baseados em comportamento, necessidades
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** map-competitive-landscape (Hawk), size-market-tam-sam-som
 - **Feeds:** commercial-systems, analyze-competitor-pricing (Hawk)
@@ -86,4 +86,4 @@ Analisar o landscape de pricing do mercado como um todo (nao so competidores) pa
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

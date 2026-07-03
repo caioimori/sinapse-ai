@@ -34,8 +34,8 @@ Checklist:
 Implementar sistema de formularios completo — validacao, error handling, multi-step forms, accessibility e integracao com server actions.
 
 ## Entrada
-- Form patterns (de Canvas)
-- A11y requirements (de Beacon)
+- Form patterns (de Palette)
+- A11y requirements (de Aperture)
 - API integration patterns
 - Validation schemas
 

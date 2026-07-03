@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** mercado definido
 - **Feeds:** evaluate-market-entry, run-porter-five-forces (Hawk)
@@ -85,4 +85,4 @@ Avaliar cenario regulatorio do mercado — leis, regulacoes, compliance — que 
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

@@ -1,4 +1,4 @@
-owner: commercial-orqx (Pipeline)
+owner: commercial-orqx (Circuit)
 estimated_duration: 4-6 weeks
 quality_gates:
   - name: Offer Quality Gate
@@ -28,7 +28,7 @@ workflow:
   name: new-offer-launch
   version: "1.0"
   description: |
-    Workflow completo para lançamento de nova oferta — do design à ativação comercial. Integra Mint (design), Edge (enablement), Cascade (demand gen), Vault (CRM), e Ledger (tracking).
+    Workflow completo para lançamento de nova oferta — do design à ativação comercial. Integra Mint (design), Edge (enablement), Cascade (demand gen), Rolodex (CRM), e Turbine (tracking).
   trigger: New service or offer package ready for market launch
   phases:
     - id: offer-design

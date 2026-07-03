@@ -11,7 +11,7 @@ Preencher para CADA tela/componente entregue ao frontend. Garante que o desenvol
 |-------|-------|
 | Nome da tela/componente | |
 | Figma link | |
-| Designer | Canvas (dx-ui-designer) |
+| Designer | Palette (dx-ui-designer) |
 | Prioridade | [P0-Critical / P1-High / P2-Medium / P3-Low] |
 
 ## 2. Layout & Grid

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Pipeline (commercial-orqx)
+- **Agent:** Circuit (commercial-orqx)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -35,7 +35,7 @@ Conduzir retrospectiva comercial — analisar o que funcionou, o que nao funcion
 
 ## Entrada
 - Quarterly performance data
-- Win/loss analysis (Vault)
+- Win/loss analysis (Rolodex)
 - Churn post-mortems (Bond)
 - Agent feedback
 

@@ -16,14 +16,14 @@
 | Agente | Papel |
 |--------|-------|
 | Apex (paidmedia-orqx) | Orquestrador — coordena pipeline de campanhas e budget cross-channel |
-| Signal (meta-ads-specialist) | Meta Ads — Facebook/Instagram campaigns, audiences, pixel/CAPI |
+| Reach (meta-ads-specialist) | Meta Ads — Facebook/Instagram campaigns, audiences, pixel/CAPI |
 | Query (google-ads-specialist) | Google Ads — Search, Display, Shopping, Pmax, bidding |
-| Pulse (campaign-analyst) | Performance — reporting, attribution, anomaly detection |
+| Cadence (campaign-analyst) | Performance — reporting, attribution, anomaly detection |
 | Canvas (creative-strategist) | Criativos — briefs, video scripts, creative testing |
-| Convert (cro-specialist) | CRO — form optimization, landing pages, A/B testing |
+| Uplift (cro-specialist) | CRO — form optimization, landing pages, A/B testing |
 | Lighthouse (performance-engineer) | Performance — Core Web Vitals, PageSpeed, tracking health |
 | Tube (pm-youtube-ads-specialist) | YouTube Ads — video ad formats, audience targeting |
-| Lens (pm-creative-performance-analyst) | Creative Performance — pattern identification, fatigue detection |
+| Focal (pm-creative-performance-analyst) | Creative Performance — pattern identification, fatigue detection |
 
 ## Ativacao
 

@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** deep-researcher (Sage)
 - **Complexity:** COMPLEX
 - **Depends on:** conduct-deep-research
-- **Feeds:** Loom (para formatacao), Hawk (se competidor)
+- **Feeds:** Braid (para formatacao), Hawk (se competidor)
 
 ## Objetivo
 Criar dossie completo sobre entidade (empresa, pessoa, mercado, tecnologia), consolidando toda informacao relevante em documento de referencia.

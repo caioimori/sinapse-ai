@@ -112,7 +112,7 @@ commands:
 
 integration:
   delegates_to:
-    - agent: "data-synthesizer (Loom)"
+    - agent: "data-synthesizer (Braid)"
       when: "Dados coletados precisam de sintese narrativa"
       context_passed: "Dados brutos, fontes classificadas, insights iniciais"
     - agent: "trend-forecaster (Horizon)"
@@ -122,7 +122,7 @@ integration:
     - agent: "research-orqx (Prism)"
       when: "Nova demanda de pesquisa atribuida"
       context_expected: "Brief completo com pergunta, nivel, fontes sugeridas, deadline"
-    - agent: "audience-intelligence (Pulse)"
+    - agent: "audience-intelligence (Empath)"
       when: "Persona precisa de dados de mercado para validacao"
       context_expected: "Hipoteses sobre audiencia, dados a validar"
 ```

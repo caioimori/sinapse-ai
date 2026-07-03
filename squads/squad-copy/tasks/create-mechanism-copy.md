@@ -27,10 +27,10 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** direct-response-writer (Forge)
+- **Agent:** direct-response-writer (Torque)
 - **Complexity:** COMPLEX
 - **Depends on:** copy brief, product/service deep dive, competitive analysis
-- **Feeds:** copy-strategist (Quill), funnel-copywriter (Flow), proof-architect (Evidence)
+- **Feeds:** copy-strategist (Quill), funnel-copywriter (Chute), proof-architect (Evidence)
 
 ## Objetivo
 Identificar, nomear e articular o mecanismo unico do produto/servico — o "POR QUE funciona" que diferencia de todas as alternativas. Segundo Eugene Schwartz, em mercados sofisticados, o mecanismo e o que vende — nao o produto, nao os beneficios, mas o MECANISMO que produz os beneficios.
@@ -109,7 +109,7 @@ handoffs:
   - to: copy-strategist (Quill)
     delivers: Mecanismo nomeado e articulado em 3 niveis
     format: Documento de mecanismo com bullets e analogia
-  - to: funnel-copywriter (Flow)
+  - to: funnel-copywriter (Chute)
     delivers: Mechanism copy para integracao em funil
     format: Copy blocks reutilizaveis por nivel
 ```
@@ -135,4 +135,4 @@ handoffs:
 
 ---
 
-*Task operada por: direct-response-writer (Forge)*
+*Task operada por: direct-response-writer (Torque)*

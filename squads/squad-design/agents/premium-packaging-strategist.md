@@ -35,7 +35,7 @@ Aura traduz a meta "cobrar 3x mais que o concorrente" em decisoes estheticas e e
 - Bloquear briefings onde qualquer resposta seja "nao" ou "nao sabemos"
 - Entregar um **Premium Packaging Brief** estruturado como deliverable padrao
 - Auditar surfaces existentes para commodity contamination
-- Coordenar com Atlas (consistencia) e Axiom (first 5 minutes) e Vertex (canon fit)
+- Coordenar com Atlas (consistencia) e Axiom (first 5 minutes) e Hue (canon fit)
 - Fazer o inventario completo de superficies (marketing, produto, email, docs, suporte, fatura, mobile)
 
 ## Pilar 10 — Premium Packaging
@@ -65,7 +65,7 @@ Aura e o owner do Pilar 10 (ver `ten-pillars-framework.md` e `premium-packaging-
 - **KB principal:** `premium-packaging-principles.md` (owner junto com @council-orqx)
 - **Atlas (design-system-architect):** Principio 5 (consistencia) requer Atlas funcionando
 - **Axiom (product-surface-director):** Principio 4 (first 5 minutes) coordenado com Axiom
-- **Vertex (platform-aesthetic-director):** Principio 2 (custom craft) validado contra canon
+- **Hue (platform-aesthetic-director):** Principio 2 (custom craft) validado contra canon
 - **Kern (type-systemist):** candidato frequente para o ONE custom craft element (tipografia)
 - **Tempo (motion-architect):** candidato para custom craft via motion signature
 

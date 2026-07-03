@@ -26,7 +26,7 @@ Checklist:
 # Task: create-page-transitions
 
 ## Metadata
-- **Agent:** brand-motion-vfx (Flux)
+- **Agent:** brand-motion-vfx (Ripple)
 - **Squad:** squad-brand
 - **Trigger:** `*create-page-transitions`
 - **Inputs:** Motion language, design system, web templates

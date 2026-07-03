@@ -186,6 +186,6 @@ handoff:
   also_to:
     - brand-compiler (Atlas): "Incluir como capitulo 'Illustration System' no brandbook"
     - brand-auditor (Sentinel): "Adicionar check de consistencia de ilustracoes no audit"
-    - brand-motion-vfx (Flux): "Adaptar para animacao se aplicavel"
+    - brand-motion-vfx (Ripple): "Adaptar para animacao se aplicavel"
   next: "Forge produz primeiras ilustracoes. Atlas documenta no brandbook."
 ```

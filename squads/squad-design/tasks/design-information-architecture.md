@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -112,7 +112,7 @@ tree_test:
 - Content model
 - Labeling system
 - Tree test results (se executado)
-- Handoff para Canvas (layouts) e Scaffold (routing)
+- Handoff para Palette (layouts) e Scaffold (routing)
 
 ## Validacao
 - [ ] Sitemap cobre todas as paginas/features

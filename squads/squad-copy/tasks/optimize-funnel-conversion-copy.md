@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** funnel-copywriter (Flow)
+- **Agent:** funnel-copywriter (Chute)
 - **Complexity:** STANDARD
 - **Depends on:** funil existente, dados de conversao por etapa
 - **Feeds:** growth-analytics squad, paid-media squad, copy-strategist (Quill)
@@ -131,4 +131,4 @@ handoffs:
 
 ---
 
-*Task operada por: funnel-copywriter (Flow)*
+*Task operada por: funnel-copywriter (Chute)*

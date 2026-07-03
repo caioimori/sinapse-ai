@@ -3,7 +3,7 @@
 **Data:** [YYYY-MM-DD]
 **Versao:** v1.0
 **Proxima revisao:** [YYYY-MM-DD]
-**Autor:** competitive-intelligence (Hawk) + data-synthesizer (Loom)
+**Autor:** competitive-intelligence (Hawk) + data-synthesizer (Braid)
 
 ---
 

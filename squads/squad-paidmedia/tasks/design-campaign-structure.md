@@ -18,13 +18,13 @@ Entrada:
 Saida:
   - campo: campaign_structure
     tipo: document
-    destino: "Signal (implementacao)"
+    destino: "Reach (implementacao)"
 ---
 
 # Task: Design Campaign Structure
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

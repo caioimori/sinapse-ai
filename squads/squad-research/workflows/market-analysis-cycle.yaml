@@ -25,7 +25,7 @@ workflow:
   phases:
     - id: market-sizing
       name: 1. Market Sizing
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - size-market-tam-sam-som
       inputs:
@@ -39,7 +39,7 @@ workflow:
         criteria: Ambas metodologias aplicadas, delta <30%
     - id: segmentation
       name: 2. Market Segmentation
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - identify-market-segments
         - assess-market-maturity
@@ -53,7 +53,7 @@ workflow:
         criteria: Segmentos MECE, scoring justificado
     - id: industry-analysis
       name: 3. Industry & Value Chain Analysis
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - analyze-industry-trends
         - analyze-value-chain
@@ -68,7 +68,7 @@ workflow:
         criteria: Trends classificados, value chain completa
     - id: pricing-regulatory
       name: 4. Pricing & Regulatory Landscape
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - analyze-pricing-landscape
         - evaluate-regulatory-landscape
@@ -81,7 +81,7 @@ workflow:
         criteria: Pricing gaps identificados, regulatory risk classificado
     - id: opportunity-entry
       name: 5. Opportunity & Entry Assessment
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - map-market-opportunity
         - evaluate-market-entry
@@ -96,7 +96,7 @@ workflow:
         criteria: Decision clara com evidencia
     - id: synthesis
       name: 6. Market Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - create-executive-briefing
@@ -128,7 +128,7 @@ workflow:
   sequence:
     - id: market-sizing
       name: 1. Market Sizing
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - size-market-tam-sam-som
       inputs:
@@ -142,7 +142,7 @@ workflow:
         criteria: Ambas metodologias aplicadas, delta <30%
     - id: segmentation
       name: 2. Market Segmentation
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - identify-market-segments
         - assess-market-maturity
@@ -156,7 +156,7 @@ workflow:
         criteria: Segmentos MECE, scoring justificado
     - id: industry-analysis
       name: 3. Industry & Value Chain Analysis
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - analyze-industry-trends
         - analyze-value-chain
@@ -171,7 +171,7 @@ workflow:
         criteria: Trends classificados, value chain completa
     - id: pricing-regulatory
       name: 4. Pricing & Regulatory Landscape
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - analyze-pricing-landscape
         - evaluate-regulatory-landscape
@@ -184,7 +184,7 @@ workflow:
         criteria: Pricing gaps identificados, regulatory risk classificado
     - id: opportunity-entry
       name: 5. Opportunity & Entry Assessment
-      agent: market-analyst (Scope)
+      agent: market-analyst (Sonar)
       tasks:
         - map-market-opportunity
         - evaluate-market-entry
@@ -199,7 +199,7 @@ workflow:
         criteria: Decision clara com evidencia
     - id: synthesis
       name: 6. Market Report
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - synthesize-research-report
         - create-executive-briefing

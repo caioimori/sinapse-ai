@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** analyze-value-chain
 - **Feeds:** map-competitive-landscape (Hawk), evaluate-market-entry
@@ -88,4 +88,4 @@ Mapear ecossistema completo da industria — todos os players, relacoes, fluxos 
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

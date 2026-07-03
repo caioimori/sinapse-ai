@@ -18,8 +18,8 @@ workflow:
   phases:
     - name: "Phase 1: UX & Visual Design"
       agents:
-        - dx-ux-strategist (Compass)
-        - dx-ui-designer (Canvas)
+        - dx-ux-strategist (Vantage)
+        - dx-ui-designer (Palette)
       execution: concurrent
       tasks:
         compass:
@@ -49,7 +49,7 @@ workflow:
     - name: "Phase 2: Implementation + Motion"
       agents:
         - dx-frontend-engineer (Scaffold)
-        - dx-interaction-designer (Kinetic)
+        - dx-interaction-designer (Gesture)
       depends_on: Phase 1
       execution: collaborative
       tasks:
@@ -75,8 +75,8 @@ workflow:
           - NEEDS_WORK
     - name: "Phase 3: Dual QA Gate"
       agents:
-        - dx-accessibility-specialist (Beacon)
-        - dx-performance-engineer (Apex)
+        - dx-accessibility-specialist (Aperture)
+        - dx-performance-engineer (Velocity)
       depends_on: Phase 2
       execution: parallel
       tasks:
@@ -106,8 +106,8 @@ workflow:
   sequence:
     - name: "Phase 1: UX & Visual Design"
       agents:
-        - dx-ux-strategist (Compass)
-        - dx-ui-designer (Canvas)
+        - dx-ux-strategist (Vantage)
+        - dx-ui-designer (Palette)
       execution: concurrent
       tasks:
         compass:
@@ -137,7 +137,7 @@ workflow:
     - name: "Phase 2: Implementation + Motion"
       agents:
         - dx-frontend-engineer (Scaffold)
-        - dx-interaction-designer (Kinetic)
+        - dx-interaction-designer (Gesture)
       depends_on: Phase 1
       execution: collaborative
       tasks:
@@ -163,8 +163,8 @@ workflow:
           - NEEDS_WORK
     - name: "Phase 3: Dual QA Gate"
       agents:
-        - dx-accessibility-specialist (Beacon)
-        - dx-performance-engineer (Apex)
+        - dx-accessibility-specialist (Aperture)
+        - dx-performance-engineer (Velocity)
       depends_on: Phase 2
       execution: parallel
       tasks:

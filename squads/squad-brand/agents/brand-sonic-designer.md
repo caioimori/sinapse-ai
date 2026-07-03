@@ -170,7 +170,7 @@ integration:
       when: "Fase de sonic branding no ciclo de criacao"
       context_expected: "personalidade da marca, identidade visual definida, timing do projeto"
   collaborates_with:
-    - agent: "brand-motion-vfx (Flux)"
+    - agent: "brand-motion-vfx (Ripple)"
       when: "Video templates e animacoes precisam de audio-visual sync"
       context_shared: "timing de animacoes, pontos de sync, duracoes, personalidade"
 ```

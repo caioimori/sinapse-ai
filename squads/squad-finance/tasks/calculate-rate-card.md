@@ -31,7 +31,7 @@ Checklist:
 # Task: Calculate Rate Card
 
 ## Metadata
-- **Agent:** pricing-strategist (Mint)
+- **Agent:** pricing-strategist (Markup)
 - **Squad:** squad-finance
 - **Complexity:** MEDIUM
 

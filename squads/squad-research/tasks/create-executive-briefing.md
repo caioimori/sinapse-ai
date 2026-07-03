@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** synthesize-research-report
 - **Feeds:** @project-lead, commercial-systems
@@ -90,4 +90,4 @@ Criar briefing executivo de 2-3 paginas com foco em "So what?" — formato decis
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

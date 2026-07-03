@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** industria definida
 - **Feeds:** forecast-industry-trends (Horizon), content-intelligence/North
@@ -87,4 +87,4 @@ Analisar tendencias da industria para informar estrategia de negocio, identifica
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

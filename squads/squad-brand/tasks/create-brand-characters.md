@@ -38,7 +38,7 @@ Checklist:
 | **Trigger** | Quando marca precisa de personagem, mascote ou sistema de avatares |
 | **Input** | Illustration system (de Iris), brand personality, brand values, target audience, contextos de uso |
 | **Output** | `brand-characters/` (character sheets + assets exportados) |
-| **Handoff** | → brand-compiler (Atlas) para brandbook + brand-motion-vfx (Flux) para animacao |
+| **Handoff** | → brand-compiler (Atlas) para brandbook + brand-motion-vfx (Ripple) para animacao |
 | **Complexity** | complex |
 | **Referencias** | Duolingo (Duo), Mailchimp (Freddie), Headspace (characters), Slack (emoji characters), Reddit (Snoo), GitHub (Octocat), Discord (Clyde & Wumpus), M&Ms (characters) |
 
@@ -174,7 +174,7 @@ handoff:
   artifact: brand-characters/
   context: "Character system completo: profile, model sheet, expressoes, poses, guidelines, assets exportados"
   also_to:
-    - brand-motion-vfx (Flux): "Animar character — expressoes, transicoes, micro-interacoes"
+    - brand-motion-vfx (Ripple): "Animar character — expressoes, transicoes, micro-interacoes"
     - brand-identity-designer (Iris): "Validar consistencia com illustration system"
     - brand-collateral-designer (Vellum): "Integrar character em templates de colateral"
     - brand-auditor (Sentinel): "Adicionar character consistency check no audit"

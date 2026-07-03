@@ -26,7 +26,7 @@ Checklist:
 # Create Product Artifact Template
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Low-Medium
 - **Estimated Time:** 1-2 hours per template
 - **Produces:** Standardized product artifact templates, template library, usage guidelines

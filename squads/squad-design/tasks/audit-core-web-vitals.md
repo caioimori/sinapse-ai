@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Apex (dx-performance-engineer)
+- **Agent:** Velocity (dx-performance-engineer)
 - **Complexity:** Complex
 
 ## Objetivo

@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Kinetic (dx-interaction-designer)
+- **Agent:** Gesture (dx-interaction-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Especificar micro-interacoes para cada componente interativo — definir feedback visual e animado para hover, press, toggle e state changes.
 
 ## Entrada
-- Component visual states (de Canvas)
+- Component visual states (de Palette)
 - Duration scale e easing curves
 - Motion principles
 - Accessibility requirements

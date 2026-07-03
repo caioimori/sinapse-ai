@@ -20,7 +20,7 @@ Saida:
 # Task: Analyze Audience Performance
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -90,7 +90,7 @@ Alinhar hierarquia com:
 - Content hierarchy map por page template
 - Scanning pattern recommendations
 - Content block specifications
-- Handoff para Canvas (visual hierarchy) e squad-copy (copy structure)
+- Handoff para Palette (visual hierarchy) e squad-copy (copy structure)
 
 ## Validacao
 - [ ] Hierarquia definida para todos os templates

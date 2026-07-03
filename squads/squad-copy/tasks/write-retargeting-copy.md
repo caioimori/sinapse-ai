@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** conversion-writer (Spark)
+- **Agent:** conversion-writer (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** audience segments, ad platforms, original creative
 - **Feeds:** squad-growth
@@ -180,4 +180,4 @@ handoffs:
 
 ---
 
-*Task operada por: conversion-writer (Spark)*
+*Task operada por: conversion-writer (Blitz)*

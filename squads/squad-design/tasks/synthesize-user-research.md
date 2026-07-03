@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -109,7 +109,7 @@ research_synthesis:
 - Research synthesis report
 - Prioritized insight list
 - Design recommendations
-- Handoff para Canvas (visual design) e Stratum (system implications)
+- Handoff para Palette (visual design) e Lattice (system implications)
 
 ## Validacao
 - [ ] Todas as fontes de dados processadas

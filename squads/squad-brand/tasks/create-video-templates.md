@@ -26,7 +26,7 @@ Checklist:
 # Task: create-video-templates
 
 ## Metadata
-- **Agent:** brand-motion-vfx (Flux)
+- **Agent:** brand-motion-vfx (Ripple)
 - **Squad:** squad-brand
 - **Trigger:** `*create-video-templates`
 - **Inputs:** Motion language, visual identity, sonic identity de Echo

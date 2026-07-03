@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** data-synthesizer (Loom)
+- **Agent:** data-synthesizer (Braid)
 - **Complexity:** STANDARD
 - **Depends on:** dados de pesquisa disponiveis
 - **Feeds:** content-intelligence, copywriting-persuasion
@@ -92,4 +92,4 @@ Transformar dados brutos em narrativa compelling usando a estrutura de Duarte (w
 
 ---
 
-*Task operada por: data-synthesizer (Loom)*
+*Task operada por: data-synthesizer (Braid)*

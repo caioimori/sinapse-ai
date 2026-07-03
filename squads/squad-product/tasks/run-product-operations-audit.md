@@ -26,7 +26,7 @@ Checklist:
 # Run Product Operations Audit
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium-High
 - **Estimated Time:** 4-6 hours
 - **Produces:** Ops audit report, maturity assessment, improvement roadmap, efficiency metrics

@@ -128,16 +128,16 @@ EXPANSION PIPELINE:
 ### Cadence Matrix
 | Report | Frequency | Audience | Owner | Format |
 |--------|----------|---------|-------|--------|
-| Pipeline snapshot | Daily | Sales team | Vault (CRM) | CRM dashboard |
-| Activity report | Weekly | Sales manager | Vault (CRM) | Automated email |
-| Pipeline review | Weekly | Sales team + leadership | Pipeline (Orchestrator) | Meeting + deck |
-| Revenue report | Monthly | Leadership | Ledger (RevOps) | Dashboard + narrative |
-| Unit economics | Monthly | CFO, Head of Revenue | Ledger (RevOps) | Spreadsheet + analysis |
+| Pipeline snapshot | Daily | Sales team | Rolodex (CRM) | CRM dashboard |
+| Activity report | Weekly | Sales manager | Rolodex (CRM) | Automated email |
+| Pipeline review | Weekly | Sales team + leadership | Circuit (Orchestrator) | Meeting + deck |
+| Revenue report | Monthly | Leadership | Turbine (RevOps) | Dashboard + narrative |
+| Unit economics | Monthly | CFO, Head of Revenue | Turbine (RevOps) | Spreadsheet + analysis |
 | Client health | Monthly | CS team + leadership | Bond (CS) | Dashboard + report |
 | NPS report | Quarterly | All leadership | Bond (CS) | Report + action plan |
-| Forecast | Monthly | Board, leadership | Pipeline (Orchestrator) | Three-scenario model |
+| Forecast | Monthly | Board, leadership | Circuit (Orchestrator) | Three-scenario model |
 | QBR (per client) | Quarterly | Client + CS team | Bond (CS) | Custom deck |
-| Commercial review | Quarterly | Full commercial team | Pipeline (Orchestrator) | Full-day session |
+| Commercial review | Quarterly | Full commercial team | Circuit (Orchestrator) | Full-day session |
 
 ---
 

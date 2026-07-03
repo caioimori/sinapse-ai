@@ -27,7 +27,7 @@ Checklist:
 # Task: Cross-Reference Brand System
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** MEDIUM
 

@@ -71,7 +71,7 @@ NRR = (MRR_inicio + expansion - contraction - churn) / MRR_inicio × 100
 | Agente | Natureza da Interacao |
 |--------|----------------------|
 | finance-orqx (Ledger) | Envia P&L, margens e unit economics para consolidacao |
-| pricing-strategist (Mint) | Fornece cost-per-delivery para fundamentar pricing |
+| pricing-strategist (Markup) | Fornece cost-per-delivery para fundamentar pricing |
 | budget-controller (Vault) | Recebe budget targets, fornece actual costs |
 | revenue-analyst (Flow) | Recebe dados de receita para calculo de margens |
 

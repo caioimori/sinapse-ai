@@ -26,7 +26,7 @@ Checklist:
 # Create Product Playbook
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** High
 - **Estimated Time:** 8-12 hours
 - **Produces:** Comprehensive product playbook, operational guides, best practices library
@@ -42,7 +42,7 @@ PRODUCT PLAYBOOK
 ════════════════
 Version: [v1.0]
 Last Updated: [date]
-Owner: ps-product-ops-specialist (Mosaic)
+Owner: ps-product-ops-specialist (Cog)
 
 TABLE OF CONTENTS:
 1. How We Do Product Management

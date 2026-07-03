@@ -212,7 +212,7 @@ integration:
     - agent: "brand-collateral-designer (Vellum)"
       when: "Colateral criado, precisa de validacao"
       context_expected: "pecas, specs tecnicas, guidelines utilizadas"
-    - agent: "brand-motion-vfx (Flux)"
+    - agent: "brand-motion-vfx (Ripple)"
       when: "Motion system criado, precisa de validacao"
       context_expected: "motion principles, demos, performance metrics"
     - agent: "brand-sonic-designer (Echo)"

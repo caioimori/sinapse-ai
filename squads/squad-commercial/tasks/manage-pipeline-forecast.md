@@ -27,16 +27,16 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Pipeline (commercial-orqx)
+- **Agent:** Circuit (commercial-orqx)
 - **Complexity:** Advanced
 
 ## Objetivo
 Gerenciar forecast de pipeline — consolidar inputs de todos os agentes comerciais em projecao unica de revenue, com cenarios e nivel de confianca.
 
 ## Entrada
-- Pipeline data (Vault)
+- Pipeline data (Rolodex)
 - Retention/expansion forecast (Bond)
-- Revenue models (Ledger)
+- Revenue models (Turbine)
 - Deal review verdicts
 
 ## Passos

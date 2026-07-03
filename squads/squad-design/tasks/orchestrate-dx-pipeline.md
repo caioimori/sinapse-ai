@@ -71,8 +71,8 @@ Quando fases permitem paralelismo:
 
 ### 5. Monitorar Quality Gates
 Os dois gates INEGOCIAVEIS:
-- **Accessibility Gate (Beacon):** WCAG 2.2 AA — PASS/CONDITIONAL/FAIL
-- **Performance Gate (Apex):** CWV targets — CERTIFIED/EXCEEDS_BUDGET/FAIL
+- **Accessibility Gate (Aperture):** WCAG 2.2 AA — PASS/CONDITIONAL/FAIL
+- **Performance Gate (Velocity):** CWV targets — CERTIFIED/EXCEEDS_BUDGET/FAIL
 
 Ambos devem ser PASS/CERTIFIED para entrega.
 

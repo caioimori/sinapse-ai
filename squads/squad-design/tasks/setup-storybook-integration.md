@@ -36,7 +36,7 @@ Configurar Storybook como plataforma de documentacao e desenvolvimento de compon
 ## Entrada
 - Component library
 - Design tokens
-- Storybook documentation standards (de Stratum)
+- Storybook documentation standards (de Lattice)
 - CI/CD pipeline
 
 ## Passos

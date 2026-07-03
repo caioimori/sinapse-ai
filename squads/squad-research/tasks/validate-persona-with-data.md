@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** build-audience-persona
 - **Feeds:** persona versionada (v1.0 → v1.1+)
@@ -92,4 +92,4 @@ Validar persona construida contra dados reais para evoluir de hipotese (v1.0) pa
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

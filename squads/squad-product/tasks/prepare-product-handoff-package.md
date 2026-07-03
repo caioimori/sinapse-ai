@@ -54,7 +54,7 @@ Preparar pacote completo de handoff de produto para quando um cliente assume ges
 
 **Document 1: Product Backlog (Clean)**
 ```
-Owner: ps-delivery-manager (Tempo)
+Owner: ps-delivery-manager (Metronome)
 Contents:
   - All items prioritized (no orphan items)
   - Estimates for top 20 items
@@ -102,7 +102,7 @@ Status: [Ready / In Progress]
 
 **Document 5: Technical Debt Register**
 ```
-Owner: ps-delivery-manager (Tempo)
+Owner: ps-delivery-manager (Metronome)
 Contents:
   - All known tech debt items
   - Severity and priority
@@ -114,7 +114,7 @@ Status: [Ready / In Progress]
 
 **Document 6: Operations Runbook**
 ```
-Owner: ps-product-ops-specialist (Mosaic)
+Owner: ps-product-ops-specialist (Cog)
 Contents:
   - Release process
   - Monitoring and alerting setup
@@ -138,7 +138,7 @@ Status: [Ready / In Progress]
 
 **Document 8: Feature Flag Inventory**
 ```
-Owner: ps-delivery-manager (Tempo)
+Owner: ps-delivery-manager (Metronome)
 Contents:
   - All active feature flags
   - Purpose and target audience

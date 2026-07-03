@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** size-market-tam-sam-som, analyze-industry-trends
 - **Feeds:** evaluate-market-entry, commercial-systems
@@ -93,4 +93,4 @@ Projetar crescimento do mercado com cenarios (otimista, base, pessimista) e driv
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

@@ -26,7 +26,7 @@ Checklist:
 # Maintain Decision Log System
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Low-Medium
 - **Estimated Time:** 1 hour/week (ongoing maintenance)
 - **Produces:** Updated decision log, decision patterns analysis, governance compliance report

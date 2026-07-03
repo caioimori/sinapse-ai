@@ -27,14 +27,14 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Kinetic (dx-interaction-designer)
+- **Agent:** Gesture (dx-interaction-designer)
 - **Complexity:** Standard
 
 ## Objetivo
 Projetar animacoes de feedback — definir como o sistema comunica visualmente sucesso, erro, warning e progresso ao usuario.
 
 ## Entrada
-- Feedback states (de Canvas)
+- Feedback states (de Palette)
 - Toast/notification patterns
 - Motion tokens
 - A11y requirements

@@ -26,7 +26,7 @@ Checklist:
 # Scope Agency MVP
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium-High
 - **Estimated Time:** 3-4 hours
 - **Produces:** MVP scope document, feature matrix, timeline estimate, trade-off decisions

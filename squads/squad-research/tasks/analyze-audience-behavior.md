@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** dados de analytics/CRM
 - **Feeds:** segment-audience, build-audience-persona
@@ -87,4 +87,4 @@ Analisar padroes comportamentais da audiencia — como navegam, consomem, compra
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

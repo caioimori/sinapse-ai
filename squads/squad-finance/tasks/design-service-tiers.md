@@ -31,7 +31,7 @@ Checklist:
 # Task: Design Service Tiers
 
 ## Metadata
-- **Agent:** pricing-strategist (Mint)
+- **Agent:** pricing-strategist (Markup)
 - **Squad:** squad-finance
 - **Complexity:** COMPLEX
 

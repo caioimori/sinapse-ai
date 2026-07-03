@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** pergunta de pesquisa definida
 - **Feeds:** validate-persona-with-data, analyze-audience-psychographics
@@ -103,4 +103,4 @@ Desenhar survey de pesquisa com metodologia robusta — perguntas claras, escala
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** conversion-writer (Spark)
+- **Agent:** conversion-writer (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** product catalog, customer data, pricing strategy
 - **Feeds:** persuasion-psychologist (Nudge), squad-growth
@@ -189,4 +189,4 @@ handoffs:
 
 ---
 
-*Task operada por: conversion-writer (Spark)*
+*Task operada por: conversion-writer (Blitz)*

@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** COMPLEX
 - **Depends on:** size-market-tam-sam-som, map-competitive-landscape (Hawk)
 - **Feeds:** commercial-systems, brand-system
@@ -108,4 +108,4 @@ Avaliar viabilidade de entrada em novo mercado com analise completa: sizing, com
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

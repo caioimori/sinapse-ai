@@ -9,7 +9,7 @@ elicit: false
 # Task: Analyze Keyword Rankings
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

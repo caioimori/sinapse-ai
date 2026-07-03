@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Compass (dx-ux-strategist)
+- **Agent:** Vantage (dx-ux-strategist)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -115,7 +115,7 @@ Para cada step, definir o estado do sistema:
 - Step-by-step documentation
 - Error handling specifications
 - Edge case documentation
-- Handoff para Canvas (screen design) e Scaffold (implementation)
+- Handoff para Palette (screen design) e Scaffold (implementation)
 
 ## Validacao
 - [ ] Flows criticos mapeados

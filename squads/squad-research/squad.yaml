@@ -270,7 +270,7 @@ agents:
 
   # --- Audience Intelligence ---
   - id: audience-intelligence
-    name: Pulse
+    name: Empath
     file: agents/audience-intelligence.md
     role: "Audience Intelligence Empath"
     archetype: Empath
@@ -312,7 +312,7 @@ agents:
 
   # --- Market Analysis ---
   - id: market-analyst
-    name: Scope
+    name: Sonar
     file: agents/market-analyst.md
     role: "Market Analysis Strategist"
     archetype: Strategist
@@ -332,7 +332,7 @@ agents:
 
   # --- Data Synthesis ---
   - id: data-synthesizer
-    name: Loom
+    name: Braid
     file: agents/data-synthesizer.md
     role: "Data Synthesis Weaver"
     archetype: Weaver

@@ -74,7 +74,7 @@ agents:
       - run-monthly-p-and-l
 
   - id: pricing-strategist
-    name: Mint
+    name: Markup
     file: agents/pricing-strategist.md
     role: "Estrategista de precificacao — modelos de pricing, service tiers, value-based pricing, rate cards"
     tasks:
@@ -138,7 +138,7 @@ agents:
       - calculate-saving-roi
 
   - id: forecast-strategist
-    name: Horizon
+    name: Runway
     file: agents/forecast-strategist.md
     role: "Forecasting estrategico — driver-based, cenarios P10/P50/P90, sensitivity, runway, breakeven, unit economics"
     tasks:

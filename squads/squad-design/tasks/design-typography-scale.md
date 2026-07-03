@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -35,7 +35,7 @@ Projetar a escala tipografica do design system — definir type scale ratio, siz
 
 ## Entrada
 - Brand typography (fonts selecionadas)
-- Visual hierarchy decisions (de Canvas)
+- Visual hierarchy decisions (de Palette)
 - Accessibility requirements (min sizes)
 - Content types (long-form, UI, data)
 
@@ -168,7 +168,7 @@ type_scale:
 - Typography composites (W3C DTCG)
 - Fluid typography config (optional)
 - Measure guidelines
-- Handoff para Canvas (application) e Scaffold (implementation)
+- Handoff para Palette (application) e Scaffold (implementation)
 
 ## Validacao
 - [ ] Scale ratio consistente

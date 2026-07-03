@@ -10,7 +10,7 @@ Preencher ANTES de iniciar qualquer pesquisa UX. Define escopo, metodo, particip
 | Campo | Valor |
 |-------|-------|
 | Projeto | |
-| Pesquisador | Compass (dx-ux-strategist) |
+| Pesquisador | Vantage (dx-ux-strategist) |
 | Tipo | [Generativo / Avaliativo / Exploratorio] |
 | Data | |
 | Duracao estimada | |

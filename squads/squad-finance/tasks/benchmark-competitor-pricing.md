@@ -30,7 +30,7 @@ Checklist:
 # Task: Benchmark Competitor Pricing
 
 ## Metadata
-- **Agent:** pricing-strategist (Mint)
+- **Agent:** pricing-strategist (Markup)
 - **Squad:** squad-finance
 - **Complexity:** MEDIUM
 

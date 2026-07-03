@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** STANDARD
 - **Depends on:** entrevista com cliente, dados de resultado
-- **Feeds:** conversion-writer (Spark), headline-specialist (Hook)
+- **Feeds:** conversion-writer (Blitz), headline-specialist (Hook)
 
 ## Objetivo
 Criar customer story que emociona e convence — transformando a experiencia de um cliente em narrativa que prospects se identificam. Diferente de case study (data-driven), customer story e emotion-driven.
@@ -116,7 +116,7 @@ Toda boa customer story tem UM momento que muda tudo:
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Customer stories para uso em conversao
     format: Full story + testimonials extraidos
   - to: squad-content

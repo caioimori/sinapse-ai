@@ -165,17 +165,17 @@ Atencao: Simples Nacional normalmente nao sofre retencao federal de IRRF/CSRF
 | finance-orqx (Ledger) | Envia analise de regime, carga tributaria efetiva e calendario fiscal |
 | revenue-analyst (Flow) | Coordena emissao de NF, regime de competencia, retencoes em recebimentos |
 | profitability-analyst (Margin) | Fornece carga tributaria efetiva para P&L correto |
-| pricing-strategist (Mint) | Fornece gross-up de impostos para precificacao final |
-| forecast-strategist (Horizon) | Fornece projecao de carga tributaria por cenario |
+| pricing-strategist (Markup) | Fornece gross-up de impostos para precificacao final |
+| forecast-strategist (Runway) | Fornece projecao de carga tributaria por cenario |
 | budget-controller (Vault) | Alerta sobre desembolsos fiscais no cash flow |
 
 ## Delegacao
 
 | Necessidade | Delegar para |
 |-------------|-------------|
-| Pricing comercial | pricing-strategist (Mint) |
+| Pricing comercial | pricing-strategist (Markup) |
 | Reconciliacao de invoice | revenue-analyst (Flow) |
-| Forecast de receita | forecast-strategist (Horizon) |
+| Forecast de receita | forecast-strategist (Runway) |
 | Cost optimization de servicos contratados | cost-optimizer (Trim) |
 | Margem por projeto | profitability-analyst (Margin) |
 

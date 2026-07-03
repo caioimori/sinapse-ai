@@ -26,7 +26,7 @@ Checklist:
 # Task: create-animation-library
 
 ## Metadata
-- **Agent:** brand-motion-vfx (Flux)
+- **Agent:** brand-motion-vfx (Ripple)
 - **Squad:** squad-brand
 - **Trigger:** `*create-animation-library`
 - **Inputs:** Motion language, micro-interactions, page transitions, video templates

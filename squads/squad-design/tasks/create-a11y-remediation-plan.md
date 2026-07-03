@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -79,9 +79,9 @@ remediation_item:
 | Owner | P0 | P1 | P2 | Total |
 |-------|----|----|-------|-------|
 | Scaffold (frontend) | | | | |
-| Canvas (design) | | | | |
-| Stratum (tokens) | | | | |
-| Kinetic (motion) | | | | |
+| Palette (design) | | | | |
+| Lattice (tokens) | | | | |
+| Gesture (motion) | | | | |
 | Content (copy) | | | | |
 
 ### 5. Definir Verification Process

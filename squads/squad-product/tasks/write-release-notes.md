@@ -26,7 +26,7 @@ Checklist:
 # Write Release Notes
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Low-Medium
 - **Estimated Time:** 1-2 hours
 - **Produces:** Release notes (internal + external), changelog entry, stakeholder communication

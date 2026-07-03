@@ -17,10 +17,10 @@
 |--------|-------|
 | Prism (research-orqx) | Orquestrador — Research Operations Conductor |
 | Sage (deep-researcher) | Deep Research Scholar — pesquisa multi-fonte |
-| Pulse (audience-intelligence) | Audience Intelligence Empath — personas, JTBD |
+| Empath (audience-intelligence) | Audience Intelligence Empath — personas, JTBD |
 | Hawk (competitive-intelligence) | Competitive Intelligence Sentinel — analise competitiva |
-| Scope (market-analyst) | Market Analysis Strategist — TAM/SAM/SOM, tendencias |
-| Loom (data-synthesizer) | Data Synthesis Weaver — sintese e narrativa de dados |
+| Sonar (market-analyst) | Market Analysis Strategist — TAM/SAM/SOM, tendencias |
+| Braid (data-synthesizer) | Data Synthesis Weaver — sintese e narrativa de dados |
 | Horizon (trend-forecaster) | Trend Forecasting Oracle — cenarios e sinais fracos |
 
 ## Ativacao

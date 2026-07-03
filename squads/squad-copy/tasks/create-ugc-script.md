@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** ad-copywriter (Spark)
+- **Agent:** ad-copywriter (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** audiencia, produto, plataforma, UGC creator brief
 - **Feeds:** paid-media squad, growth-analytics squad
@@ -164,4 +164,4 @@ handoffs:
 
 ---
 
-*Task operada por: ad-copywriter (Spark)*
+*Task operada por: ad-copywriter (Blitz)*

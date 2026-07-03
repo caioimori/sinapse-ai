@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** competitive-intelligence (Hawk)
 - **Complexity:** COMPLEX
 - **Depends on:** map-competitive-landscape
-- **Feeds:** evaluate-market-entry (Scope), brand-system/Athena
+- **Feeds:** evaluate-market-entry (Sonar), brand-system/Athena
 
 ## Objetivo
 Conduzir analise Five Forces de Porter para avaliar atratividade estrutural de uma industria e poder de negociacao de cada forca.

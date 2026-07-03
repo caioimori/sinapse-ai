@@ -41,7 +41,7 @@ Cria templates de pagina web em HTML/CSS implementaveis, usando design system e 
 3. Criar Service/Product Page: hero, beneficios, detalhes, CTA
 4. Aplicar design system de Grid (tokens, componentes, grid)
 5. Responsivo mobile-first (mobile → tablet → desktop → wide)
-6. Incluir micro-interactions de Flux (hover, scroll reveal, transitions)
+6. Incluir micro-interactions de Ripple (hover, scroll reveal, transitions)
 7. Garantir acessibilidade (ARIA, keyboard nav, contrast)
 8. Otimizar performance (lazy loading, critical CSS)
 9. Documentar secoes customizaveis

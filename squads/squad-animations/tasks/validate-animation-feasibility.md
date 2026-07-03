@@ -27,7 +27,7 @@ Checklist:
 # Task: Validate Animation Feasibility
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** STANDARD
 

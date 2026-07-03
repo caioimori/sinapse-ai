@@ -9,7 +9,7 @@ elicit: true
 # Task: Design Progressive Profiling
 
 ## Metadata
-- **Agent:** cro-specialist (Convert)
+- **Agent:** cro-specialist (Uplift)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

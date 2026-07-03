@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** long-form-writer (Saga)
 - **Complexity:** COMPLEX
 - **Depends on:** copy brief, audience persona, message hierarchy
-- **Feeds:** conversion-writer (Spark), persuasion-psychologist (Nudge)
+- **Feeds:** conversion-writer (Blitz), persuasion-psychologist (Nudge)
 
 ## Objetivo
 Criar sequencia de emails de nurturing que move leads pelo funil — de awareness ate conversao — usando storytelling, educacao e persuasao progressiva. Cada email e um capitulo de uma narrativa maior.
@@ -162,7 +162,7 @@ PS
 ## Cross-Squad Handoff
 ```yaml
 handoffs:
-  - to: conversion-writer (Spark)
+  - to: conversion-writer (Blitz)
     delivers: Emails de conversao (ultimos da sequencia)
     format: Brief com contexto dos emails anteriores
   - to: persuasion-psychologist (Nudge)

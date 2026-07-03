@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Vault (cs-crm-specialist)
+- **Agent:** Rolodex (cs-crm-specialist)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -49,7 +49,7 @@ Construir dashboard de pipeline — visualizacao em tempo real de saude do pipel
 | Deal Flow | New vs moved vs closed (flow chart) | Managers |
 | Stage Health | Avg time in stage, conversion rates | Managers |
 | Rep Performance | Deals, value, activities per rep | Leadership |
-| Forecast Board | Commit/Best Case/Pipeline (stacked bar) | Leadership |
+| Forecast Board | Commit/Best Case/Circuit (stacked bar) | Leadership |
 | Activity Metrics | Calls, emails, meetings (trend line) | All |
 
 ### 2. Key Metrics

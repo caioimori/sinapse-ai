@@ -17,7 +17,7 @@
 |--------|-------|
 | Ledger (finance-orqx) | Orquestrador — coordena analises e gera reports executivos |
 | Margin (profitability-analyst) | Rentabilidade — P&L por projeto/cliente, cost-per-delivery, unit economics |
-| Mint (pricing-strategist) | Precificacao — modelos de pricing, service tiers, value-based pricing |
+| Markup (pricing-strategist) | Precificacao — modelos de pricing, service tiers, value-based pricing |
 | Vault (budget-controller) | Orcamento — forecasting, budget tracking, cost optimization |
 | Flow (revenue-analyst) | Receita — revenue recognition, invoicing, collection optimization |
 

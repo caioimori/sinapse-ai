@@ -27,16 +27,16 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Complex
 
 ## Objetivo
 Compor layouts de tela high-fidelity que traduzem wireframes em composicoes visuais finais — aplicando grid system, tipografia, cores e hierarquia visual.
 
 ## Entrada
-- Wireframe briefs (de Compass)
+- Wireframe briefs (de Vantage)
 - Brand tokens (de squad-brand)
-- Design system tokens (de Stratum)
+- Design system tokens (de Lattice)
 - Content hierarchy
 - Responsive requirements
 

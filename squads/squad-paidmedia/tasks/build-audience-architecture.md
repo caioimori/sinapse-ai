@@ -18,7 +18,7 @@ Entrada:
 Saida:
   - campo: audience_architecture
     tipo: document
-    destino: "Signal (implementacao)"
+    destino: "Reach (implementacao)"
 
 Checklist:
   - "[ ] Three-tier architecture definida (Cold/Warm/Hot)"
@@ -30,7 +30,7 @@ Checklist:
 # Task: Build Audience Architecture
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** HIGH
 

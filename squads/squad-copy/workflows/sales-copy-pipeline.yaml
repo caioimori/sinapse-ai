@@ -64,12 +64,12 @@ workflow:
       execution: PARALLEL
       streams:
         - stream: Launch Sequence
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - write-launch-sequence
             - write-landing-page-copy
         - stream: Conversion Assets
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - craft-cta-variations
             - write-upsell-copy
@@ -152,12 +152,12 @@ workflow:
       execution: PARALLEL
       streams:
         - stream: Launch Sequence
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - write-launch-sequence
             - write-landing-page-copy
         - stream: Conversion Assets
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - craft-cta-variations
             - write-upsell-copy

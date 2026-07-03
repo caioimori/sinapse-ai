@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** size-market-tam-sam-som, analyze-industry-trends
 - **Feeds:** evaluate-market-entry
@@ -90,4 +90,4 @@ Mapear oportunidades de mercado combinando sizing, trends, gaps e timing para id
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

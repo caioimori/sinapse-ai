@@ -65,7 +65,7 @@ Axiom e o owner do Pilar 8 (ver `ten-pillars-framework.md`). As 5 leis:
 
 - **squad-design (Nexus):** handoff de especificacoes de componentes logados
 - **squad-product (Vector):** recebe PRDs, personas, fluxo de uso diario
-- **squad-animations (Kinetic):** especifica motion proposital apenas (nao marketing flash)
+- **squad-animations (Gesture):** especifica motion proposital apenas (nao marketing flash)
 
 ## When to Activate
 

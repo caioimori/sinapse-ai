@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -152,7 +152,7 @@ Cores para graficos e data viz:
 - Contrast matrix
 - Data visualization palette
 - Accessibility verification report
-- Handoff para Canvas (application) e Beacon (verification)
+- Handoff para Palette (application) e Aperture (verification)
 
 ## Validacao
 - [ ] Todas as paletas com 11 steps

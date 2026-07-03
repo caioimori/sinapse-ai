@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Pipeline (commercial-orqx)
+- **Agent:** Circuit (commercial-orqx)
 - **Complexity:** Advanced
 
 ## Objetivo
@@ -35,8 +35,8 @@ Conduzir revisao trimestral completa do sistema comercial — performance de cad
 
 ## Entrada
 - Q-over-Q performance data
-- Pipeline reports (Vault)
-- Revenue metrics (Ledger)
+- Pipeline reports (Rolodex)
+- Revenue metrics (Turbine)
 - CS portfolio review (Bond)
 - Funnel metrics (Cascade)
 - Offer performance (Mint)

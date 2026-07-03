@@ -9,7 +9,7 @@ elicit: false
 # Task: Check Indexing Status
 
 ## Metadata
-- **Agent:** campaign-analyst (Pulse)
+- **Agent:** campaign-analyst (Cadence)
 - **Squad:** squad-paidmedia
 - **Complexity:** LOW
 

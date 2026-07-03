@@ -26,7 +26,7 @@ Checklist:
 # Audit Product Tool Stack
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium
 - **Estimated Time:** 3-4 hours
 - **Produces:** Tool stack audit, redundancy analysis, cost assessment, optimization recommendations

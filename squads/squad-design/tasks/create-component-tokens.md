@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -36,7 +36,7 @@ Criar o nivel L3 de design tokens — tokens especificos de componente que mapei
 ## Entrada
 - Semantic tokens (L2)
 - Component inventory
-- Component visual states (de Canvas)
+- Component visual states (de Palette)
 - Variant definitions
 
 ## Passos

@@ -26,7 +26,7 @@ Checklist:
 # Manage Sprint Capacity Planning
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 1-2 hours per sprint
 - **Produces:** Capacity plan, allocation matrix, availability calendar, utilization report

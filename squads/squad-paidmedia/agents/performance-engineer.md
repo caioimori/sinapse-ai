@@ -79,8 +79,8 @@ Lighthouse e o engenheiro de performance da squad. Especialista em Core Web Vita
 | audit-tag-manager-setup | Auditar setup de tag manager (GTM) e firing order |
 
 ## Interacoes
-- **Recebe de:** Apex (requests de audit), Signal (pixel issues Meta), Query (tracking issues Google), Convert (LP speed issues)
-- **Entrega para:** Apex (tracking health reports), Signal (pixel health status), Query (conversion tracking status), Convert (page speed data)
+- **Recebe de:** Apex (requests de audit), Reach (pixel issues Meta), Query (tracking issues Google), Uplift (LP speed issues)
+- **Entrega para:** Apex (tracking health reports), Reach (pixel health status), Query (conversion tracking status), Uplift (page speed data)
 
 ## Quando Usar
 - Pre-launch de campanha (validar tracking)

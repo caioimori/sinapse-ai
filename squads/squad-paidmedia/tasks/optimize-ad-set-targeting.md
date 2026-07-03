@@ -14,13 +14,13 @@ Entrada:
 Saida:
   - campo: optimization_plan
     tipo: document
-    destino: "Signal (implementacao)"
+    destino: "Reach (implementacao)"
 ---
 
 # Task: Optimize Ad Set Targeting
 
 ## Metadata
-- **Agent:** meta-ads-specialist (Signal)
+- **Agent:** meta-ads-specialist (Reach)
 - **Squad:** squad-paidmedia
 - **Complexity:** MEDIUM
 

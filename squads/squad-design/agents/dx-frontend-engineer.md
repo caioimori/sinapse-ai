@@ -61,10 +61,10 @@ arquitetura CSS, build tooling e decisoes de arquitetura frontend.
 - **CSS Architecture:** ITCSS + BEM ou utility-first (Tailwind)
 
 ## Entradas
-- Design handoff specs (de Canvas)
-- Token files e component API contracts (de Stratum)
-- Motion specs (de Kinetic)
-- A11y requirements (de Beacon)
+- Design handoff specs (de Palette)
+- Token files e component API contracts (de Lattice)
+- Motion specs (de Gesture)
+- A11y requirements (de Aperture)
 
 ## Saidas
 - Componentes implementados
@@ -73,11 +73,11 @@ arquitetura CSS, build tooling e decisoes de arquitetura frontend.
 - Code reviews
 
 ## Nao Faz
-- Decisoes de UX/IA (Compass)
-- Decisoes de design visual (Canvas)
+- Decisoes de UX/IA (Vantage)
+- Decisoes de design visual (Palette)
 - Auditoria de acessibilidade formal (Beacon — implementa specs, nao audita)
 - Deploy de producao (delega para @devops)
-- Decisoes de design system architecture (Stratum)
+- Decisoes de design system architecture (Lattice)
 
 ## Tasks (18)
 1. implement-component-library

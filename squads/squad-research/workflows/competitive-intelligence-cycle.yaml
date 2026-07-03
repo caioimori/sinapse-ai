@@ -95,7 +95,7 @@ workflow:
         criteria: Battle cards sales-ready, testados com equipe comercial
     - id: dossier-compilation
       name: 6. Competitive Dossier
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - compile-competitive-dossier
         - create-swot-analysis
@@ -197,7 +197,7 @@ workflow:
         criteria: Battle cards sales-ready, testados com equipe comercial
     - id: dossier-compilation
       name: 6. Competitive Dossier
-      agent: data-synthesizer (Loom)
+      agent: data-synthesizer (Braid)
       tasks:
         - compile-competitive-dossier
         - create-swot-analysis

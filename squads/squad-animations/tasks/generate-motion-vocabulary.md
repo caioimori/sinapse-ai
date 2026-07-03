@@ -26,7 +26,7 @@ Checklist:
 # Task: Generate Motion Vocabulary
 
 ## Metadata
-- **Agent:** animation-interpreter (Lens)
+- **Agent:** animation-interpreter (Decoder)
 - **Squad:** squad-animations
 - **Complexity:** MEDIUM
 

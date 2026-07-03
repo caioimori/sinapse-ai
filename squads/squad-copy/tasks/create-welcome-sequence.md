@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-copy
-- **Agent:** conversion-writer (Spark)
+- **Agent:** conversion-writer (Blitz)
 - **Complexity:** STANDARD
 - **Depends on:** produto/servico, onboarding flow, brand voice
 - **Feeds:** brand-voice-writer (Tone), squad-growth
@@ -226,4 +226,4 @@ handoffs:
 
 ---
 
-*Task operada por: conversion-writer (Spark)*
+*Task operada por: conversion-writer (Blitz)*

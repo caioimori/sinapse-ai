@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Kinetic (dx-interaction-designer)
+- **Agent:** Gesture (dx-interaction-designer)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -36,7 +36,7 @@ Criar design tokens de motion — consolidar duracoes, easing curves e demais va
 ## Entrada
 - Duration scale (de design-duration-scale)
 - Easing curve library (de create-easing-curve-library)
-- Token taxonomy (de Stratum)
+- Token taxonomy (de Lattice)
 - W3C DTCG spec
 
 ## Passos

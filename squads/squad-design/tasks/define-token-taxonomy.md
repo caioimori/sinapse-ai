@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -35,7 +35,7 @@ Definir a taxonomia de design tokens de 3 niveis — estabelecer naming conventi
 
 ## Entrada
 - Brand tokens (de squad-brand)
-- Visual design decisions (de Canvas)
+- Visual design decisions (de Palette)
 - Multi-brand requirements (se aplicavel)
 - Dark mode requirements
 - W3C DTCG spec reference

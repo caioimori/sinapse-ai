@@ -34,11 +34,11 @@ Checklist:
 Implementar a biblioteca de componentes em codigo — traduzir API contracts, visual specs e tokens em componentes React/TypeScript production-ready.
 
 ## Entrada
-- Component API contracts (de Stratum)
-- Visual states specs (de Canvas)
+- Component API contracts (de Lattice)
+- Visual states specs (de Palette)
 - Design tokens (CSS custom properties)
-- A11y requirements (de Beacon)
-- Motion specs (de Kinetic)
+- A11y requirements (de Aperture)
+- Motion specs (de Gesture)
 
 ## Passos
 

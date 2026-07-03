@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** deep-researcher (Sage)
 - **Complexity:** COMPLEX
 - **Depends on:** research brief (via Prism)
-- **Feeds:** data-synthesizer (Loom), squad solicitante
+- **Feeds:** data-synthesizer (Braid), squad solicitante
 
 ## Objetivo
 Conduzir pesquisa profunda multi-fonte sobre qualquer topico, entregando insights cristalizados com FINDING + IMPLICATION + RECOMMENDATION.

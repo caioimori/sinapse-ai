@@ -20,7 +20,7 @@ workflow:
   trigger: Produto/site novo do zero ou redesign completo
   phases:
     - name: "Phase 1: Discovery & UX Strategy"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       tasks:
         - synthesize-user-research
         - create-user-personas
@@ -45,7 +45,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 2: UI Design"
-      agent: dx-ui-designer (Canvas)
+      agent: dx-ui-designer (Palette)
       depends_on: Phase 1
       tasks:
         - compose-screen-layouts
@@ -73,7 +73,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 3: Design System Architecture"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       depends_on: Phase 2
       tasks:
         - define-token-taxonomy
@@ -100,7 +100,7 @@ workflow:
       agent: dx-frontend-engineer (Scaffold)
       depends_on: Phase 3
       parallel_support:
-        - agent: dx-interaction-designer (Kinetic)
+        - agent: dx-interaction-designer (Gesture)
           tasks:
             - define-motion-principles
             - create-easing-curve-library
@@ -119,7 +119,7 @@ workflow:
       input:
         - Design handoff specs (de Phase 2)
         - Token files + API contracts (de Phase 3)
-        - Motion specs (de Kinetic)
+        - Motion specs (de Gesture)
       output:
         - Componentes implementados
         - Paginas construidas
@@ -133,8 +133,8 @@ workflow:
           - NEEDS_WORK
     - name: "Phase 5: Accessibility + Motion QA"
       agents:
-        - dx-accessibility-specialist (Beacon)
-        - dx-interaction-designer (Kinetic)
+        - dx-accessibility-specialist (Aperture)
+        - dx-interaction-designer (Gesture)
       depends_on: Phase 4
       execution: parallel
       tasks:
@@ -162,7 +162,7 @@ workflow:
         blocking: true
         on_fail: Retorna para Phase 4 com prescricoes
     - name: "Phase 6: Performance Certification"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 5
       tasks:
         - audit-core-web-vitals
@@ -186,7 +186,7 @@ workflow:
   id: zero-to-digital-product-cycle
   sequence:
     - name: "Phase 1: Discovery & UX Strategy"
-      agent: dx-ux-strategist (Compass)
+      agent: dx-ux-strategist (Vantage)
       tasks:
         - synthesize-user-research
         - create-user-personas
@@ -211,7 +211,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 2: UI Design"
-      agent: dx-ui-designer (Canvas)
+      agent: dx-ui-designer (Palette)
       depends_on: Phase 1
       tasks:
         - compose-screen-layouts
@@ -239,7 +239,7 @@ workflow:
           - APPROVED
           - NEEDS_REVISION
     - name: "Phase 3: Design System Architecture"
-      agent: dx-design-system-architect (Stratum)
+      agent: dx-design-system-architect (Lattice)
       depends_on: Phase 2
       tasks:
         - define-token-taxonomy
@@ -266,7 +266,7 @@ workflow:
       agent: dx-frontend-engineer (Scaffold)
       depends_on: Phase 3
       parallel_support:
-        - agent: dx-interaction-designer (Kinetic)
+        - agent: dx-interaction-designer (Gesture)
           tasks:
             - define-motion-principles
             - create-easing-curve-library
@@ -285,7 +285,7 @@ workflow:
       input:
         - Design handoff specs (de Phase 2)
         - Token files + API contracts (de Phase 3)
-        - Motion specs (de Kinetic)
+        - Motion specs (de Gesture)
       output:
         - Componentes implementados
         - Paginas construidas
@@ -299,8 +299,8 @@ workflow:
           - NEEDS_WORK
     - name: "Phase 5: Accessibility + Motion QA"
       agents:
-        - dx-accessibility-specialist (Beacon)
-        - dx-interaction-designer (Kinetic)
+        - dx-accessibility-specialist (Aperture)
+        - dx-interaction-designer (Gesture)
       depends_on: Phase 4
       execution: parallel
       tasks:
@@ -328,7 +328,7 @@ workflow:
         blocking: true
         on_fail: Retorna para Phase 4 com prescricoes
     - name: "Phase 6: Performance Certification"
-      agent: dx-performance-engineer (Apex)
+      agent: dx-performance-engineer (Velocity)
       depends_on: Phase 5
       tasks:
         - audit-core-web-vitals

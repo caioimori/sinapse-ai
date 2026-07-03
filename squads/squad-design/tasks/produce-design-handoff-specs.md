@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Canvas (dx-ui-designer)
+- **Agent:** Palette (dx-ui-designer)
 - **Complexity:** Complex
 
 ## Objetivo
@@ -39,8 +39,8 @@ Produzir especificacoes de design handoff completas — documentar cada detalhe 
 - Grid system
 - Token mappings
 - Responsive behavior
-- Motion specs (de Kinetic)
-- Accessibility specs (de Beacon)
+- Motion specs (de Gesture)
+- Accessibility specs (de Aperture)
 
 ## Passos
 
@@ -51,7 +51,7 @@ Para cada pagina/template:
 design_handoff:
   page: ""
   last_updated: ""
-  designer: "Canvas"
+  designer: "Palette"
   status: "[ready/in-progress/needs-review]"
 
   specs:

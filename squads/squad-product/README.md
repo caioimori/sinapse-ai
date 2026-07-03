@@ -19,9 +19,9 @@
 | Charter (ps-product-strategist) | Product Strategy & Vision Lead |
 | Quorum (ps-discovery-lead) | Product Discovery & Validation Lead |
 | Delta (ps-product-analyst) | Product Analytics & Metrics Specialist |
-| Tempo (ps-delivery-manager) | Delivery & Sprint Operations Manager |
+| Metronome (ps-delivery-manager) | Delivery & Sprint Operations Manager |
 | Proxy (ps-client-product-manager) | Client-Facing Product Manager |
-| Mosaic (ps-product-ops-specialist) | Product Operations & Systems Specialist |
+| Cog (ps-product-ops-specialist) | Product Operations & Systems Specialist |
 
 ## Ativacao
 

@@ -50,11 +50,11 @@ workflow:
             - generate-headline-variations
             - craft-social-media-hooks
         - stream: Email Copy
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - create-email-campaign
         - stream: Ad Copy
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - write-ad-copy-social
         - stream: Long-form
@@ -112,11 +112,11 @@ workflow:
             - generate-headline-variations
             - craft-social-media-hooks
         - stream: Email Copy
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - create-email-campaign
         - stream: Ad Copy
-          agent: conversion-writer (Spark)
+          agent: conversion-writer (Blitz)
           tasks:
             - write-ad-copy-social
         - stream: Long-form

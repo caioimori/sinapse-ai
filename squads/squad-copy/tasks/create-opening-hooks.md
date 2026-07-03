@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** headline-specialist (Hook)
 - **Complexity:** STANDARD
 - **Depends on:** headline aprovado, copy brief
-- **Feeds:** long-form-writer (Saga), conversion-writer (Spark)
+- **Feeds:** long-form-writer (Saga), conversion-writer (Blitz)
 
 ## Objetivo
 Criar opening hooks — as primeiras 2-3 linhas que determinam se o leitor continua ou abandona. O hook e a ponte entre o headline e o body copy.

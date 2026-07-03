@@ -26,7 +26,7 @@ Checklist:
 # Document Product Process
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium
 - **Estimated Time:** 2-3 hours per process
 - **Produces:** Process documentation, flow diagrams, RACI matrix, process playbook

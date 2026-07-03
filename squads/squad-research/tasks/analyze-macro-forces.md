@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** trend-forecaster (Horizon)
 - **Complexity:** STANDARD
 - **Depends on:** mercado definido
-- **Feeds:** evaluate-market-entry (Scope), run-scenario-planning
+- **Feeds:** evaluate-market-entry (Sonar), run-scenario-planning
 
 ## Objetivo
 Executar analise PESTEL completa — mapeando forcas macro que impactam o mercado com score de impacto e velocidade por forca.

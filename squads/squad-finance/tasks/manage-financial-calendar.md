@@ -43,7 +43,7 @@ Gerenciar o calendario de entregas financeiras da squad, garantindo que todos os
    - D+1 a D+3: Coleta de dados (Flow)
    - D+3 a D+5: P&L e profitability (Margin)
    - D+5 a D+7: Budget review (Vault)
-   - D+7 a D+8: Pricing review (Mint)
+   - D+7 a D+8: Pricing review (Markup)
    - D+8 a D+10: Dashboard executivo (Ledger)
 2. **Definir cadencia trimestral:**
    - Semana 1: Analises individuais (todos os agentes)

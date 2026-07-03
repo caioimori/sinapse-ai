@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Beacon (dx-accessibility-specialist)
+- **Agent:** Aperture (dx-accessibility-specialist)
 - **Complexity:** Complex
 
 ## Objetivo

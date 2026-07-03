@@ -26,7 +26,7 @@ Checklist:
 # Build Product Knowledge Base
 
 ## Metadata
-- **Agent:** ps-product-ops-specialist (Mosaic)
+- **Agent:** ps-product-ops-specialist (Cog)
 - **Complexity:** Medium-High
 - **Estimated Time:** 6-8 hours (initial setup) + ongoing
 - **Produces:** Organized knowledge base, information architecture, maintenance plan

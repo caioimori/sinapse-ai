@@ -72,9 +72,9 @@ Evidence sabe que a diferenca entre copy que converte e copy que falha esta na P
 
 ## Delegation
 - Estrategia macro de messaging → Quill (copy-strategist)
-- Integracao de proofs em sales copy → Forge (direct-response-writer)
-- Integracao de proofs em landing pages → Spark (conversion-writer)
-- Integracao de proofs em funnels → Flow (funnel-copywriter)
+- Integracao de proofs em sales copy → Torque (direct-response-writer)
+- Integracao de proofs em landing pages → Blitz (conversion-writer)
+- Integracao de proofs em funnels → Chute (funnel-copywriter)
 - Persuasion review → Nudge (persuasion-psychologist)
 - Quality review final → Chisel (copy-editor)
 

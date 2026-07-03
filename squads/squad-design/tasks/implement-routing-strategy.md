@@ -34,7 +34,7 @@ Checklist:
 Implementar estrategia de routing — configurar rotas, layouts compartilhados, loading states, error boundaries e navegacao programatica.
 
 ## Entrada
-- Information architecture (de Compass)
+- Information architecture (de Vantage)
 - URL structure definida
 - SEO requirements
 - Authentication requirements

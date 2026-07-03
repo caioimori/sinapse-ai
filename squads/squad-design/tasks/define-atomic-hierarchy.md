@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-design
-- **Agent:** Stratum (dx-design-system-architect)
+- **Agent:** Lattice (dx-design-system-architect)
 - **Complexity:** Standard
 
 ## Objetivo
@@ -35,7 +35,7 @@ Definir a hierarquia atomica do design system usando Atomic Design (Brad Frost) 
 
 ## Entrada
 - Component inventory
-- UI designs (de Canvas)
+- UI designs (de Palette)
 - Usage patterns
 - Composition requirements
 

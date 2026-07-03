@@ -26,7 +26,7 @@ Checklist:
 # Triage Technical Debt Backlog
 
 ## Metadata
-- **Agent:** ps-delivery-manager (Tempo)
+- **Agent:** ps-delivery-manager (Metronome)
 - **Complexity:** Medium
 - **Estimated Time:** 2-3 hours
 - **Produces:** Prioritized tech debt backlog, severity classification, sprint allocation plan

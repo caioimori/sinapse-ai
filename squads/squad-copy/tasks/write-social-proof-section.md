@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** persuasion-psychologist (Nudge)
 - **Complexity:** STANDARD
 - **Depends on:** testimonials, dados, cases
-- **Feeds:** conversion-writer (Spark), long-form-writer (Saga)
+- **Feeds:** conversion-writer (Blitz), long-form-writer (Saga)
 
 ## Objetivo
 Escrever secoes de social proof que convertem — selecionando, formatando e posicionando provas sociais para maximizar credibilidade e reduzir resistencia a compra.

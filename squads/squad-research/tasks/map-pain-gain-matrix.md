@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** audience-intelligence (Pulse)
+- **Agent:** audience-intelligence (Empath)
 - **Complexity:** STANDARD
 - **Depends on:** dados de audiencia
 - **Feeds:** build-audience-persona, conduct-jobs-to-be-done
@@ -89,4 +89,4 @@ PAINS                          GAINS
 
 ---
 
-*Task operada por: audience-intelligence (Pulse)*
+*Task operada por: audience-intelligence (Empath)*

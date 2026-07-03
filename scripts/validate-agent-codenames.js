@@ -72,56 +72,45 @@ const ALLOWED_DUPLICATES = new Set(['Imperator']);
 // AF-20260702 #1.10 fixed two real blind spots: unquoted YAML `name:` and
 // prose-only persona declarations (e.g. `# Agent: {Name} — {Title}`, used
 // by several squads with no YAML persona block at all — squad-design's
-// dx-* roster in particular). Actually looking at every agent file with
-// both extraction paths surfaced this much wider set of pre-existing
-// codename collisions that NO version of this guard had ever seen before —
-// most because one or both sides only ever declared their codename in
-// prose, which nothing checked until now.
+// dx-* roster in particular). Looking at every agent file with both
+// extraction paths surfaced 24 pre-existing codename collisions (Scope
+// through Vertex) that NO version of this guard had ever seen before.
+// Story onda1-s5 fixed one instance ("Nexus") and deliberately deferred
+// these 24 to a follow-up triage (Onda 2) rather than blanket-rename
+// without individual review (Constitution Article XI — Conservative
+// Default).
 //
-// Story onda1-s5 (AF-20260702 item 1.10) authorized fixing exactly ONE of
-// these — "Nexus" (design-orqx keeps it; swarm-orqx and content-orqx were
-// renamed) — because that was the one instance the audit's adversarial
-// verification manually confirmed. Renaming the agents below was explicitly
-// OUT of this story's scope (see "Escopo OUT: Uniformização de schema dos
-// 189 agents (Onda 2)" in the story) — several span squads never touched by
-// this change, and blanket-renaming them here would be exactly the kind of
-// unreviewed, ungrounded cross-squad rename Constitution Article XI
-// (Conservative Default) warns against.
+// Story onda2-p7 (2026-07-02) did that triage. Verdict for all 24: every
+// single one was a REAL collision between independently-named, established
+// agents (never a detector false-positive, never genuinely ambiguous) — the
+// palette of short evocative one-word codenames is small enough that 18+
+// squads picked the same words independently. Winner kept by: (1) core
+// framework agent beats squad agent, (2) squad orchestrator beats squad
+// specialist (both cited in .sinapse-ai/development/agents/snps-orqx.md's
+// master delegation-matrix), (3) among two specialists, semantic fit to the
+// role + which squad already yielded more collisions elsewhere (kept
+// squad-design's fragmented dx-* roster internally consistent rather than
+// stranding 2 of 8 with stale names). All 27 renames (3 codenames were
+// 3-way collisions) shipped with every live reference updated — own file,
+// squad README, task "**Agent:**" headers, cross-agent handoff mentions,
+// squad.yaml, and the master delegation-matrix in snps-orqx.md — verified
+// by re-running this guard (0 blocking, 0 pending) plus a dedicated
+// anchored-reference sweep (codename+old-agent-id co-occurrence, checked
+// across the WHOLE repo, not just the renamed agent's home squad). Full
+// old->new map and per-item reasoning: story `docs/stories/story-o2p7-agents-piloto.md`.
 //
-// This list exists so the guard can ship as a REAL, enforceable CI/pre-push
-// gate today without retroactively blocking every future push over debt
-// nobody has triaged yet. It is deliberately NOT the same mechanism as
-// ALLOWED_DUPLICATES above (that Set means "intentional, correct design");
-// every entry here means "known bug, not yet fixed — see Onda 2 backlog".
-// Removing a name from this list (because it was actually fixed) is
-// encouraged; ADDING a name here to silence a *new* collision is not what
-// this list is for.
-const KNOWN_COLLISIONS_PENDING_TRIAGE = new Set([
-  'Scope', // .sinapse-ai/development/agents/analyst.md vs squads/squad-research/agents/market-analyst.md
-  'Loom', // .sinapse-ai/development/agents/squad-creator.md vs squads/squad-research/agents/data-synthesizer.md
-  'Apex', // squads/squad-design/agents/dx-performance-engineer.md vs squads/squad-paidmedia/agents/paidmedia-orqx.md
-  'Beacon', // .sinapse-ai/development/agents/project-lead.md vs squads/squad-design/agents/dx-accessibility-specialist.md
-  'Canvas', // squads/squad-design/agents/dx-ui-designer.md vs squads/squad-paidmedia/agents/creative-strategist.md
-  'Compass', // squads/squad-courses/agents/curriculum-designer.md vs squads/squad-design/agents/dx-ux-strategist.md
-  'Convert', // squads/squad-design, squad-growth, squad-paidmedia (cro-persuasion / ga-cro-specialist / cro-specialist)
-  'Flow', // squads/squad-copy/agents/funnel-copywriter.md vs squads/squad-finance/agents/revenue-analyst.md
-  'Flux', // squads/squad-animations/agents/css-motion-artist.md vs squads/squad-brand/agents/brand-motion-vfx.md
-  'Forge', // squads/squad-cloning/agents/agent-forger.md vs squads/squad-copy/agents/direct-response-writer.md
-  'Horizon', // squads/squad-finance/agents/forecast-strategist.md vs squads/squad-research/agents/trend-forecaster.md
-  'Kinetic', // squads/squad-animations/agents/animations-orqx.md vs squads/squad-design/agents/dx-interaction-designer.md
-  'Ledger', // squads/squad-commercial/agents/cs-revops-analyst.md vs squads/squad-finance/agents/finance-orqx.md
-  'Lens', // squads/squad-animations, squad-content, squad-paidmedia (animation-interpreter / content-analyst / pm-creative-performance-analyst)
-  'Mint', // squads/squad-commercial/agents/cs-offer-designer.md vs squads/squad-finance/agents/pricing-strategist.md
-  'Mosaic', // .sinapse-ai/development/agents/ux-design-expert.md vs squads/squad-product/agents/ps-product-ops-specialist.md
-  'Pipeline', // .sinapse-ai/development/agents/devops.md vs squads/squad-commercial/agents/commercial-orqx.md
-  'Pulse', // squads/squad-growth, squad-paidmedia, squad-research (ga-campaign-analyst / campaign-analyst / audience-intelligence)
-  'Signal', // squads/squad-growth/agents/ga-analytics-engineer.md vs squads/squad-paidmedia/agents/meta-ads-specialist.md
-  'Spark', // squads/squad-copy/agents/ad-copywriter.md vs squads/squad-copy/agents/conversion-writer.md
-  'Stratum', // .sinapse-ai/development/agents/architect.md vs squads/squad-design/agents/dx-design-system-architect.md
-  'Tempo', // squads/squad-animations/agents/motion-choreographer.md vs squads/squad-product/agents/ps-delivery-manager.md
-  'Vault', // squads/squad-commercial/agents/cs-crm-specialist.md vs squads/squad-finance/agents/budget-controller.md
-  'Vertex', // squads/squad-animations/agents/threejs-architect.md vs squads/squad-design/agents/platform-aesthetic-director.md
-]);
+// This Set is intentionally EMPTY right now — every previously-known
+// pending collision was triaged and resolved. It stays wired into
+// `findCollisions()` as a NON-BLOCKING lane for whatever the guard's
+// extraction next surfaces (e.g. if squad-content's task format is ever
+// scanned the same way, or a new squad ships with an un-checked codename).
+// It is deliberately NOT the same mechanism as ALLOWED_DUPLICATES above
+// (that Set means "intentional, correct design"); an entry here means
+// "known bug, not yet fixed". Removing a name because it was fixed is
+// encouraged; ADDING a name to silence a *new* collision is not what this
+// list is for — triage it (rename, or prove it's a detector false-positive)
+// the same way this story did.
+const KNOWN_COLLISIONS_PENDING_TRIAGE = new Set([]);
 
 // Non-agent markdown that may live in an agents/ dir.
 const SKIP_FILES = new Set(['README.md', 'MEMORY.md']);

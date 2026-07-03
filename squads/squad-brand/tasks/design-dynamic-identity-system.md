@@ -34,7 +34,7 @@ Checklist:
 | Campo | Valor |
 |-------|-------|
 | **Agent** | brand-identity-designer (Iris) |
-| **Co-agents** | brand-system-architect (Grid) tokens dinâmicos, brand-motion-vfx (Flux) animação generativa, brand-creative-engineer (Forge) implementação |
+| **Co-agents** | brand-system-architect (Grid) tokens dinâmicos, brand-motion-vfx (Ripple) animação generativa, brand-creative-engineer (Forge) implementação |
 | **Trigger** | Quando marca necessita identidade que muda/reage a contextos (digital-first, tech, cultura, eventos) |
 | **Input** | Logo system, paleta, tipografia, graphic vocabulary, motion language |
 | **Output** | `dynamic-identity-system.md` |
@@ -218,7 +218,7 @@ handoff:
   artifact: dynamic-identity-system.md
   context: "Sistema de identidade dinâmica com invariantes, variáveis, ranges e implementação técnica"
   also_to:
-    - brand-motion-vfx (Flux): "Integrar motion language com variações dinâmicas"
+    - brand-motion-vfx (Ripple): "Integrar motion language com variações dinâmicas"
     - brand-creative-engineer (Forge): "Implementar código generativo"
     - brand-compiler (Atlas): "Incluir como capítulo no brandbook"
   next: "Grid cria tokens dinâmicos, Flux anima variações, Atlas documenta"

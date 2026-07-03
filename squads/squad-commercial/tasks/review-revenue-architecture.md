@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-commercial
-- **Agent:** Ledger (cs-revops-analyst)
+- **Agent:** Turbine (cs-revops-analyst)
 - **Complexity:** Advanced
 
 ## Objetivo
@@ -67,7 +67,7 @@ Revisar arquitetura de revenue — avaliar o Bow Tie Funnel completo, alinhament
 ### 3. Revenue Leak Analysis (Clari Framework)
 | Leak Source | Estimated Impact | Detection Method | Fix |
 |-----------|-----------------|-----------------|-----|
-| Pipeline (poor qualification) | R$/quarter | Win rate by score | Better MEDDIC |
+| Circuit (poor qualification) | R$/quarter | Win rate by score | Better MEDDIC |
 | Pricing (unauthorized discounts) | R$/quarter | Price realization | Discount governance |
 | Contracting (missed escalators) | R$/quarter | Contract audit | Renewal automation |
 | Expansion (missed triggers) | R$/quarter | Health score + signals | Expansion playbooks |

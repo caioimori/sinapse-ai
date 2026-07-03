@@ -279,7 +279,7 @@ routing_table:
 
     - squad: squad-commercial
       prefix: commercial
-      orchestrator: commercial-orqx (Pipeline)
+      orchestrator: commercial-orqx (Circuit)
       invocation: "/commercial:agents:commercial-orqx"
       domain: "Vendas, CRM, pipeline, funnel, ofertas, pricing, revenue operations, client success"
       agents: 10
@@ -641,7 +641,7 @@ relationships:
   delegates_to:
     - agent: brand-orqx (Meridian)
       context: "All branding, identity, and brand system work"
-    - agent: commercial-orqx (Pipeline)
+    - agent: commercial-orqx (Circuit)
       context: "All commercial, sales, CRM, and revenue operations"
     - agent: content-orqx
       context: "All content strategy, editorial, and social media"

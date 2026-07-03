@@ -12,7 +12,7 @@ Entrada:
     obrigatorio: true
   - campo: performance_data
     tipo: data
-    origem: "Pulse"
+    origem: "Cadence"
     obrigatorio: true
 
 Saida:

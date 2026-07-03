@@ -34,14 +34,14 @@ metadata:
 
 agents:
   - id: commercial-orqx
-    name: Pipeline
+    name: Circuit
     icon: "🚀"
     role: Revenue Cycle Orchestrator
     file: agents/commercial-orqx.md
     tasks_count: 8
 
   - id: cs-crm-specialist
-    name: Vault
+    name: Rolodex
     icon: "🗄️"
     role: CRM & Pipeline Operations Specialist
     file: agents/cs-crm-specialist.md
@@ -62,7 +62,7 @@ agents:
     tasks_count: 10
 
   - id: cs-revops-analyst
-    name: Ledger
+    name: Turbine
     icon: "📊"
     role: Revenue Operations & Analytics Lead
     file: agents/cs-revops-analyst.md

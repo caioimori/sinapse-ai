@@ -42,7 +42,7 @@ agents:
       - generate-animation-report
 
   - id: animation-interpreter
-    name: Lens
+    name: Decoder
     file: agents/animation-interpreter.md
     role: "Interpreta prompts vagos e traduz em specs tecnicas precisas de animacao"
     tasks:

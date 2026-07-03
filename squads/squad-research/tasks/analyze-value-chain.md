@@ -27,7 +27,7 @@ Checklist:
 
 ## Metadata
 - **Squad:** squad-research
-- **Agent:** market-analyst (Scope)
+- **Agent:** market-analyst (Sonar)
 - **Complexity:** STANDARD
 - **Depends on:** industria definida
 - **Feeds:** identify-competitive-gaps (Hawk), brand-system
@@ -83,4 +83,4 @@ Analisar value chain da industria (Porter) para identificar onde valor e criado/
 
 ---
 
-*Task operada por: market-analyst (Scope)*
+*Task operada por: market-analyst (Sonar)*

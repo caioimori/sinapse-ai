@@ -30,7 +30,7 @@ Checklist:
 - **Agent:** competitive-intelligence (Hawk)
 - **Complexity:** STANDARD
 - **Depends on:** map-competitive-landscape
-- **Feeds:** commercial-systems, Scope (pricing landscape)
+- **Feeds:** commercial-systems, Sonar (pricing landscape)
 
 ## Objetivo
 Analisar estrategia de pricing dos competidores para informar precificacao propria e posicionamento de valor.
