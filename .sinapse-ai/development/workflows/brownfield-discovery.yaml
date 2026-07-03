@@ -17,6 +17,22 @@ workflow:
   metadata:
     elicit: true
     confirmation_required: true
+    # Onda3-S3 (AF-20260702 item 3.3): phases 1-3 are declared parallelizable —
+    # their artifacts are independent (system/db/frontend). Autonomous fan-out
+    # of these phases is GATED on a measured pilot (same pre-registered gate as
+    # epic waves — docs/epics/epic-onda3-estrutural/README.md): until a
+    # measurement shows fan-out beating sequential handoff, execution stays
+    # manual per-agent. Deterministic progress + the Phase 7 QA gate come from
+    # core/orchestration/brownfield-progress.js (attached to the executeWorkflow
+    # handoff): resume points and the APPROVED/NEEDS WORK loop (max 2 reworks,
+    # then escalate) are measured from disk, not from prose.
+    parallelizable_phases: [1, 2, 3]
+    qa_gate:
+      phase: 7
+      review_artifact: docs/reviews/qa-review.md
+      verdicts: [APPROVED, NEEDS_WORK]
+      max_rework_cycles: 2
+      evaluator: .sinapse-ai/core/orchestration/brownfield-progress.js
     action_types:
       task-reference: "Action references an existing task file in .sinapse-ai/development/tasks/"
       agent-command: "Action references an agent-level command (e.g., *create-front-end-spec)"
