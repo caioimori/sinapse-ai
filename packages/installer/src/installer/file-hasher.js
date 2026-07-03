@@ -62,24 +62,29 @@ function removeBOM(content) {
  * @throws {Error} - If file cannot be read
  */
 function hashFile(filePath) {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${filePath}`);
-  }
-
-  const stats = fs.statSync(filePath);
-  if (stats.isDirectory()) {
-    throw new Error(`Cannot hash directory: ${filePath}`);
+  // SECURITY [TOCTOU]: single read — the hashed bytes are exactly what was
+  // read, with no exists/stat/read window for a concurrent writer to exploit.
+  let raw;
+  try {
+    raw = fs.readFileSync(filePath);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`File not found: ${filePath}`);
+    }
+    if (error.code === 'EISDIR') {
+      throw new Error(`Cannot hash directory: ${filePath}`);
+    }
+    throw error;
   }
 
   let content;
 
   if (isBinaryFile(filePath)) {
     // Binary files: hash raw bytes
-    content = fs.readFileSync(filePath);
+    content = raw;
   } else {
     // Text files: normalize line endings and remove BOM
-    const rawContent = fs.readFileSync(filePath, 'utf8');
-    const withoutBOM = removeBOM(rawContent);
+    const withoutBOM = removeBOM(raw.toString('utf8'));
     const normalized = normalizeLineEndings(withoutBOM);
     content = Buffer.from(normalized, 'utf8');
   }
@@ -96,25 +101,28 @@ function hashFile(filePath) {
  * @throws {Error} - If file cannot be read
  */
 async function hashFileAsync(filePath) {
-  const exists = await fs.pathExists(filePath);
-  if (!exists) {
-    throw new Error(`File not found: ${filePath}`);
-  }
-
-  const stats = await fs.stat(filePath);
-  if (stats.isDirectory()) {
-    throw new Error(`Cannot hash directory: ${filePath}`);
+  // SECURITY [TOCTOU]: single read (see hashFile) — no exists/stat/read window.
+  let raw;
+  try {
+    raw = await fs.readFile(filePath);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`File not found: ${filePath}`);
+    }
+    if (error.code === 'EISDIR') {
+      throw new Error(`Cannot hash directory: ${filePath}`);
+    }
+    throw error;
   }
 
   let content;
 
   if (isBinaryFile(filePath)) {
     // Binary files: hash raw bytes
-    content = await fs.readFile(filePath);
+    content = raw;
   } else {
     // Text files: normalize line endings and remove BOM
-    const rawContent = await fs.readFile(filePath, 'utf8');
-    const withoutBOM = removeBOM(rawContent);
+    const withoutBOM = removeBOM(raw.toString('utf8'));
     const normalized = normalizeLineEndings(withoutBOM);
     content = Buffer.from(normalized, 'utf8');
   }
