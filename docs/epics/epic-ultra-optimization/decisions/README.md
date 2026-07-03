@@ -17,18 +17,24 @@
 
 ## MESA DE DECISÕES
 
-| DEC | Recomendação (1 frase) | O que aguarda OK do dono | Reversibilidade |
-|---|---|---|---|
-| **DEC-01** | Completar a ativação: installer cria `.synapse/` (constitution via gerador existente) + seção `models` no template — o hook já embarca e roda em toda instalação, hoje sempre no caminho morto. | Escolher A (ativar), B (descontinuar de vez, desregistrando o hook) ou C (opt-in); se A, autorizar story S no installer. | Total — A é 1 passo de geração fail-open; B/C revertem por config do installer. |
-| **DEC-02** | Não cabear ao CLI (reabriria a aposta multi-story medida e perdida); split: wave-analyzer segue o destino do cluster DEC-03, suggestion/learning fica (tem consumidor real via `*next`/`*patterns`). | Aprovar o split + a linha nova em KNOWN-LIMITATIONS ("waves: sem caminho de produção"). | Total — decisão documental; código intocado até a execução do DEC-03. |
-| **DEC-03** | 6 módulos como reserva-marcada (`@abandoned-path` aplicado) com remoção em lote condicionada ao OK; `parallel-executor` de `execution/` é o único REMOVER firme (referencia provider Gemini já removido — 45 menções; reserva ilusória). | Aprovar os 7 vereditos → 1 story de execução (remoções + manifest + registry fix + KNOWN-LIMITATIONS). | Total até a execução (marcador é comentário); após remoção, reversível por git revert. |
-| **DEC-04** | Nada a decidir AGORA: medição armada com critério pré-registrado — ≥95% das sessões reais em FRESH até **2026-07-30** → aposentar DEPLETED/CRITICAL + `SYNAPSE_LEGACY_MODE` (baseline 2026-07-02: 9/9 FRESH, 100%). | Só na apuração de 2026-07-30, com `node scripts/bracket-report.js` anexado. | Total — leitor é read-only; cortes futuros virão em stories próprias. |
-| **DEC-05** | Separar as 2 funções: manter o artifact/cadeia como sinal de workflow (consumo real em prosa + teste), aposentar a contabilidade de compaction 379tok/33% (0 artifacts em ~7 semanas; aritmética da era 200K). | Aprovar o diff proposto (no parecer, não aplicado) para `agent-handoff.md` + ajuste no `CLAUDE.md:89`. | Total — mudança é só de documentação/regra. |
+| DEC | Recomendação (1 frase) | O que aguarda OK do dono | Reversibilidade | Status |
+|---|---|---|---|---|
+| **DEC-01** | Completar a ativação: installer cria `.synapse/` (constitution via gerador existente) + seção `models` no template — o hook já embarca e roda em toda instalação, hoje sempre no caminho morto. | Escolher A (ativar), B (descontinuar de vez, desregistrando o hook) ou C (opt-in); se A, autorizar story S no installer. | Total — A é 1 passo de geração fail-open; B/C revertem por config do installer. | ✅ EXECUTADA (PR #334) |
+| **DEC-02** | Não cabear ao CLI (reabriria a aposta multi-story medida e perdida); split: wave-analyzer segue o destino do cluster DEC-03, suggestion/learning fica (tem consumidor real via `*next`/`*patterns`). | Aprovar o split + a linha nova em KNOWN-LIMITATIONS ("waves: sem caminho de produção"). | Total — decisão documental; código intocado até a execução do DEC-03. | ✅ Parte documental EXECUTADA (este PR) — split de código aguarda DEC-03 |
+| **DEC-03** | 6 módulos como reserva-marcada (`@abandoned-path` aplicado) com remoção em lote condicionada ao OK; `parallel-executor` de `execution/` é o único REMOVER firme (referencia provider Gemini já removido — 45 menções; reserva ilusória). | Aprovar os 7 vereditos → 1 story de execução (remoções + manifest + registry fix + KNOWN-LIMITATIONS). | Total até a execução (marcador é comentário); após remoção, reversível por git revert. | ⏳ Aguardando OK do dono |
+| **DEC-04** | Nada a decidir AGORA: medição armada com critério pré-registrado — ≥95% das sessões reais em FRESH até **2026-07-30** → aposentar DEPLETED/CRITICAL + `SYNAPSE_LEGACY_MODE` (baseline 2026-07-02: 9/9 FRESH, 100%). | Só na apuração de 2026-07-30, com `node scripts/bracket-report.js` anexado. | Total — leitor é read-only; cortes futuros virão em stories próprias. | ⏳ Aguardando apuração (2026-07-30) |
+| **DEC-05** | Separar as 2 funções: manter o artifact/cadeia como sinal de workflow (consumo real em prosa + teste), aposentar a contabilidade de compaction 379tok/33% (0 artifacts em ~7 semanas; aritmética da era 200K). | Aprovar o diff proposto (no parecer, não aplicado) para `agent-handoff.md` + ajuste no `CLAUDE.md:89`. | Total — mudança é só de documentação/regra. | ✅ EXECUTADA (este PR) |
 
 ## Decisões-irmãs já na mesa por outras vias
 
-- **Triagem dos 500+ alertas do code scanning** (achado da Onda2-P6): segue em story
-  própria com dono de segurança — fora do escopo destes pareceres.
+- **Triagem do code scanning** (achado da Onda2-P6, executada na story Onda2-P10):
+  concluída — [AF-20260703-code-scanning-triage.md](../../../../audits/AF-20260703-code-scanning-triage.md)
+  mede **429 alertas reais** (não "500+" como estimado), **zero crítico-real** no
+  modelo de ameaça de CLI local single-user (o único "high" citado nominalmente —
+  polynomial-redos — foi refutado por benchmark empírico), e um punhado de
+  MODERADOS baratos (TOCTOU no instalador, DOM-XSS no atlas interno, log-injection,
+  permissão de workflow) — plano de correção em 3 ondas dentro do relatório. Decisão
+  de execução das ondas segue fora do escopo destes pareceres.
 - **Rollout da ativação enxuta pros ~170 agentes restantes** (pós-piloto Onda2-P7,
   PR #332): aguarda avaliação do piloto pelo dono — fora do escopo destes pareceres.
 

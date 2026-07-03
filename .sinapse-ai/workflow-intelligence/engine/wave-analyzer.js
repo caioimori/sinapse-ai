@@ -4,6 +4,14 @@
  * @story WIS-4 - Wave Analysis Engine
  * @version 1.0.0
  *
+ * @remarks No reachable production caller (require-graph verified 2026-07-02): the only
+ * consumer is the orphaned `wave-executor` (.sinapse-ai/core/execution/wave-executor.js),
+ * which itself has zero callers outside its own test. Fate tied to the DEC-03 batch
+ * decision (reserve marcada) — see
+ * docs/epics/epic-ultra-optimization/decisions/DEC-02-workflow-intelligence.md.
+ * The sibling `suggestion-engine` + `learning/` half of this package is NOT affected —
+ * it has a real consumer via the `*next`/`*patterns` tasks.
+ *
  * @example
  * const { WaveAnalyzer } = require('./wave-analyzer');
  * const analyzer = new WaveAnalyzer();
