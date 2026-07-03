@@ -2,6 +2,8 @@
  * Rate Limit Manager
  * Story 11.3 - Enhanced Capabilities
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Handles API rate limits gracefully with exponential backoff,
  * preemptive throttling, and comprehensive metrics.
  */

@@ -504,37 +504,37 @@ files:
     type: core
     size: 53047
   - path: core/execution/context-injector.js
-    hash: sha256:b0032791337fd54bc48df48d3063e791cf501537e4b5f9efc37cf98e5064b0ad
+    hash: sha256:bc97b8e0ccddb6638e22bd5455c24676d5136b2d0e0fba76392f3665992adb73
     type: core
-    size: 14864
+    size: 14959
   - path: core/execution/parallel-executor.js
-    hash: sha256:f5a68f60536ad6116ddc49e4d55ce5f1fc3b55c26ae27622b221e342b2ed37a3
+    hash: sha256:6bdc770710cd23f264b1eccfd0790037c0b3e71eeec83efd0d5a06b099df2322
     type: core
-    size: 8399
+    size: 8494
   - path: core/execution/parallel-monitor.js
-    hash: sha256:4b789fd8d6736ff794181be2069b972752649759cc33b69201bef2d8c41ec6b5
+    hash: sha256:9b9413fb4c42c236e2a7628201f705640c69dcf4643eedbcdc98ca49d403e755
     type: core
-    size: 11591
+    size: 11686
   - path: core/execution/rate-limit-manager.js
-    hash: sha256:efa2d9be66ccd78ffd44622c09325304e7d38847b1139c723f71a251dd84d2da
+    hash: sha256:0d9749bc1ac9b6ed99019af84340e87d2f99d37a3147144896c6ca09560bdbe0
     type: core
-    size: 9034
+    size: 9129
   - path: core/execution/result-aggregator.js
-    hash: sha256:4d862ca2b5a7ea0f503d19cb93155da28c82cb6c80cacad484a7ed5ad22c50b0
+    hash: sha256:7d85df76eb252b098bfaf3ed5b7f07d408654a2d0ef9336c722fac1576355d81
     type: core
-    size: 14557
+    size: 14652
   - path: core/execution/semantic-merge-engine.js
-    hash: sha256:39ab1acde2a88585fdee1e5307804eaf5886e3c20a771586846b5c25c9ee4356
+    hash: sha256:318cd9e23ac29a3beabc5d0bf98e87a1b7131bbca4e4c16cd13081be0297b857
     type: core
-    size: 52328
+    size: 52423
   - path: core/execution/subagent-dispatcher.js
     hash: sha256:c291a8d9dea32273577b5c726626f4bc7a94b6aa67a52c9f312d6448ca6ab910
     type: core
     size: 32197
   - path: core/execution/wave-executor.js
-    hash: sha256:49cc1b4712d13cb0638f514cc3b00fa0ab576737c942103fbf5d0931010727b7
+    hash: sha256:b747c77ac896813844c3f580e0c703f8dbf24159d2b528a816202178ebc0f37e
     type: core
-    size: 11268
+    size: 11363
   - path: core/external-executors/delegate-cli.js
     hash: sha256:e56313ca703a4fccf64e0eec958ceb9f84e5d7a3f1c84c22b12375a9b5b58bc1
     type: core
@@ -1380,7 +1380,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:c421f5c62663c0cd585e8e8bf3dc90f1c44b20f675d73270851c299affaabe63
+    hash: sha256:8d97a2235f2ac3622d7858cb18ce78cf71311fcadf9519f792ae10ac9ef8b036
     type: data
     size: 549471
   - path: data/learned-patterns.yaml

@@ -2,6 +2,8 @@
  * Semantic Merge Engine
  * Story 8.3 - Enhanced Implementation
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * AI-powered semantic merge system for resolving conflicts between
  * parallel agent work. Analyzes code at semantic level (functions, imports,
  * classes) rather than line-by-line to enable intelligent merge resolution.

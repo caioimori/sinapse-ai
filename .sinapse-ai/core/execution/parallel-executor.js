@@ -2,6 +2,8 @@
  * Parallel Executor (PROVIDER-level)
  * Story GEMINI-INT.17 - Multi-Agent Parallel Execution
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Executes Claude and Gemini in parallel for improved quality and reliability.
  *
  * NOT a duplicate of `core/orchestration/parallel-executor.js` (audit 2026-06-11
