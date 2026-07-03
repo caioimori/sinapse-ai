@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-02T21:47:12.575Z",
+  "generatedAt": "2026-07-03T03:44:39.813Z",
   "counts": {
     "squads": 17,
     "agentsTotal": 172,
@@ -417,7 +417,7 @@
     {
       "id": "new-offer-launch",
       "name": "new-offer-launch",
-      "description": "Workflow completo para lançamento de nova oferta — do design à ativação comercial. Integra Mint (design), Edge (enablement), Cascade (demand gen), Vault (CRM),…",
+      "description": "Workflow completo para lançamento de nova oferta — do design à ativação comercial. Integra Mint (design), Edge (enablement), Cascade (demand gen), Rolodex (CRM…",
       "type": "",
       "source": "squad:squad-commercial",
       "file": "squads/squad-commercial/workflows/new-offer-launch.yaml",
@@ -435,7 +435,7 @@
     {
       "id": "revenue-forecasting-cycle",
       "name": "revenue-forecasting-cycle",
-      "description": "Ciclo mensal de forecasting de receita — coleta, análise, projeção e apresentação. Combina dados de pipeline (Vault), unit economics (Ledger), e expansion (Bon…",
+      "description": "Ciclo mensal de forecasting de receita — coleta, análise, projeção e apresentação. Combina dados de pipeline (Rolodex), unit economics (Turbine), e expansion (…",
       "type": "",
       "source": "squad:squad-commercial",
       "file": "squads/squad-commercial/workflows/revenue-forecasting-cycle.yaml",
@@ -1138,7 +1138,7 @@
     },
     {
       "id": "animation-interpreter",
-      "persona": "Lens",
+      "persona": "Decoder",
       "title": "Animation Intent Interpreter",
       "role": "Animation Intent Interpreter",
       "squad": "squad-animations",
@@ -1291,7 +1291,7 @@
     },
     {
       "id": "squad-brand",
-      "persona": "Flux",
+      "persona": "Ripple",
       "title": "Motion & VFX Designer",
       "role": "Motion & VFX Designer — linguagem de movimento, animacoes, video graphics e animation library",
       "squad": "squad-brand",
@@ -1948,7 +1948,7 @@
     },
     {
       "id": "cro-persuasion",
-      "persona": "Convert",
+      "persona": "Sway",
       "title": "CRO & Persuasion Specialist",
       "role": "CRO & Persuasion Specialist",
       "squad": "squad-design",
@@ -1975,7 +1975,7 @@
     },
     {
       "id": "dx-accessibility-specialist",
-      "persona": "Beacon",
+      "persona": "Aperture",
       "title": "Accessibility & Inclusive Design Expert",
       "role": "Accessibility & Inclusive Design Expert",
       "squad": "squad-design",
@@ -1984,7 +1984,7 @@
     },
     {
       "id": "dx-design-system-architect",
-      "persona": "Stratum",
+      "persona": "Lattice",
       "title": "Design System & Token Architecture Specialist",
       "role": "Design System & Token Architecture Specialist",
       "squad": "squad-design",
@@ -2002,7 +2002,7 @@
     },
     {
       "id": "dx-interaction-designer",
-      "persona": "Kinetic",
+      "persona": "Gesture",
       "title": "Interaction Design & Motion Systems Specialist",
       "role": "Interaction Design & Motion Systems Specialist",
       "squad": "squad-design",
@@ -2011,7 +2011,7 @@
     },
     {
       "id": "dx-performance-engineer",
-      "persona": "Apex",
+      "persona": "Velocity",
       "title": "Web Performance Optimization Specialist",
       "role": "Web Performance Optimization Specialist",
       "squad": "squad-design",
@@ -2020,7 +2020,7 @@
     },
     {
       "id": "dx-ui-designer",
-      "persona": "Canvas",
+      "persona": "Palette",
       "title": "UI Design & Visual Systems Specialist",
       "role": "UI Design & Visual Systems Specialist",
       "squad": "squad-design",
@@ -2029,7 +2029,7 @@
     },
     {
       "id": "dx-ux-strategist",
-      "persona": "Compass",
+      "persona": "Vantage",
       "title": "UX Strategy & Research Lead",
       "role": "UX Strategy & Research Lead",
       "squad": "squad-design",
@@ -2038,7 +2038,7 @@
     },
     {
       "id": "platform-aesthetic-director",
-      "persona": "Vertex",
+      "persona": "Hue",
       "title": "Platform Aesthetic Director",
       "role": "Platform Aesthetic Director",
       "squad": "squad-design",
@@ -2110,7 +2110,7 @@
     },
     {
       "id": "forecast-strategist",
-      "persona": "Horizon",
+      "persona": "Runway",
       "title": "Forecast Strategist",
       "role": "Forecast Strategist",
       "squad": "squad-finance",
@@ -2119,7 +2119,7 @@
     },
     {
       "id": "pricing-strategist",
-      "persona": "Mint",
+      "persona": "Markup",
       "title": "Pricing Strategist",
       "role": "Pricing Strategist",
       "squad": "squad-finance",
@@ -2209,7 +2209,7 @@
     },
     {
       "id": "campaign-analyst",
-      "persona": "Pulse",
+      "persona": "Cadence",
       "title": "Campaign Analyst",
       "role": "Campaign Analyst",
       "squad": "squad-paidmedia",
@@ -2227,7 +2227,7 @@
     },
     {
       "id": "cro-specialist",
-      "persona": "Convert",
+      "persona": "Uplift",
       "title": "CRO Specialist",
       "role": "CRO Specialist",
       "squad": "squad-paidmedia",
@@ -2245,7 +2245,7 @@
     },
     {
       "id": "meta-ads-specialist",
-      "persona": "Signal",
+      "persona": "Reach",
       "title": "Meta Ads Specialist",
       "role": "Meta Ads Specialist",
       "squad": "squad-paidmedia",
@@ -2272,7 +2272,7 @@
     },
     {
       "id": "pm-creative-performance-analyst",
-      "persona": "Lens",
+      "persona": "Focal",
       "title": "Creative Performance Analyst",
       "role": "Creative Performance Analyst",
       "squad": "squad-paidmedia",
@@ -2353,7 +2353,7 @@
     },
     {
       "id": "audience-intelligence",
-      "persona": "Pulse",
+      "persona": "Empath",
       "title": "Audience Intelligence Empath",
       "role": "Audience Intelligence Empath",
       "squad": "squad-research",
@@ -2371,7 +2371,7 @@
     },
     {
       "id": "data-synthesizer",
-      "persona": "Loom",
+      "persona": "Braid",
       "title": "Data Synthesis Weaver",
       "role": "Data Synthesis Weaver",
       "squad": "squad-research",
@@ -2389,7 +2389,7 @@
     },
     {
       "id": "market-analyst",
-      "persona": "Scope",
+      "persona": "Sonar",
       "title": "Market Analysis Strategist",
       "role": "Market Analysis Strategist",
       "squad": "squad-research",

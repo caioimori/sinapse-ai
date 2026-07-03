@@ -162,17 +162,19 @@ renderDiagrams('s-model'); // initial visible tab
 
 function tbl(cols,rows){return '<table><thead><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'+
   rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}
-const code=s=>'<code>'+(s||'')+'</code>';
-const sev=s=>'<span class="tag'+(/NON-NEGOTIABLE/.test(s)?' nn':'')+'">'+s+'</span>';
+// Data cells come from atlas-data.json (framework registry, mutable via PR) — escape before innerHTML.
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const code=s=>'<code>'+esc(s||'')+'</code>';
+const sev=s=>'<span class="tag'+(/NON-NEGOTIABLE/.test(s)?' nn':'')+'">'+esc(s)+'</span>';
 
 document.getElementById('t-constitution').innerHTML=tbl(['Art.','Principle','Severity'],
-  D.articles.map(a=>[a.number,a.title,sev(a.severity)]));
+  D.articles.map(a=>[esc(a.number),esc(a.title),sev(a.severity)]));
 
 document.getElementById('t-squads').innerHTML=tbl(['Squad','Name','Agents','Workflows','Orchestrators'],
-  D.squads.map(s=>[code(s.id),s.name,s.agents,s.workflows,(s.orqx||[]).map(code).join(' ')||'—']));
+  D.squads.map(s=>[code(s.id),esc(s.name),esc(s.agents),esc(s.workflows),(s.orqx||[]).map(code).join(' ')||'—']));
 
 document.getElementById('t-rules').innerHTML=tbl(['Rule','Governs'],
-  D.rules.map(r=>[code(r.id),r.title]));
+  D.rules.map(r=>[code(r.id),esc(r.title)]));
 
 // Workflows (search + source filter)
 function renderWorkflows(){
@@ -185,14 +187,14 @@ function renderWorkflows(){
   });
   document.getElementById('c-workflows').textContent=rows.length+' of '+D.workflows.length;
   document.getElementById('t-workflows').innerHTML=tbl(['Workflow','Source','Type','Description'],
-    rows.map(w=>[code(w.id),w.squad?code(w.squad):'<span class="tag">framework</span>',w.type||'—',w.description||'—']));
+    rows.map(w=>[code(w.id),w.squad?code(w.squad):'<span class="tag">framework</span>',esc(w.type||'—'),esc(w.description||'—')]));
 }
 ['q-workflows','f-workflows-src'].forEach(id=>document.getElementById(id).addEventListener('input',renderWorkflows));
 
 // Agents (search + squad filter + orqx toggle)
 const squads=[...new Set(D.agents.map(a=>a.squad))].sort();
 const sel=document.getElementById('f-agents-squad');
-sel.innerHTML='<option value="">all squads</option>'+squads.map(s=>'<option>'+s+'</option>').join('');
+sel.innerHTML='<option value="">all squads</option>'+squads.map(s=>'<option>'+esc(s)+'</option>').join('');
 function renderAgents(){
   const q=(document.getElementById('q-agents').value||'').toLowerCase();
   const sq=sel.value; const onlyOrqx=document.getElementById('f-agents-orqx').checked;
@@ -202,7 +204,7 @@ function renderAgents(){
   });
   document.getElementById('c-agents').textContent=rows.length+' of '+D.agents.length;
   document.getElementById('t-agents').innerHTML=tbl(['Agent','Persona','Squad','Role',''],
-    rows.map(a=>[code(a.id),a.persona||'—',code(a.squad),a.role||a.title||'—',a.isOrqx?'<span class="tag nn">orqx</span>':'']));
+    rows.map(a=>[code(a.id),esc(a.persona||'—'),code(a.squad),esc(a.role||a.title||'—'),a.isOrqx?'<span class="tag nn">orqx</span>':'']));
 }
 ['q-agents','f-agents-orqx'].forEach(id=>document.getElementById(id).addEventListener('input',renderAgents));
 sel.addEventListener('change',renderAgents);

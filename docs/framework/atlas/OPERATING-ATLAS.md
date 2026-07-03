@@ -3,7 +3,7 @@
 > Single, generated map of how the SINAPSE framework works: routing, models,
 > constitution, workflows, agents, squads. Regenerate with `sinapse atlas`.
 > Counts are read from disk (Article VII — always exact).
-> Generated: 2026-07-02T21:47:12.575Z
+> Generated: 2026-07-03T03:44:39.813Z
 
 **At a glance:** 17 squads · 172 agents
 (12 framework + 160 squad) ·

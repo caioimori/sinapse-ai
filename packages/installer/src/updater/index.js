@@ -780,11 +780,17 @@ class SINAPSEUpdater {
   /**
    * Log if verbose
    *
+   * Messages may interpolate error text or npm registry responses; control
+   * characters (ANSI escapes, CR) are stripped so external data cannot forge
+   * log lines in the user's terminal (CWE-117).
+   *
    * @param {string} message - Message
    */
   log(message) {
     if (this.options.verbose) {
-      console.log(`[SINAPSEUpdater] ${message}`);
+      // eslint-disable-next-line no-control-regex
+      const sanitized = String(message).replace(/[\x00-\x08\x0B-\x1F\x7F]/g, '');
+      console.log(`[SINAPSEUpdater] ${sanitized}`);
     }
   }
 }
