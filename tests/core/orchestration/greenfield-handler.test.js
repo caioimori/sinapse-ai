@@ -40,6 +40,8 @@ jest.mock('fs', () => ({
   readFileSync: jest.fn(),
   writeFileSync: jest.fn(),
   mkdirSync: jest.fn(),
+  // Onda3-S2: the artifact gate stats files via doc-first-resolver.fileHasContent
+  statSync: jest.fn(),
 }));
 
 // Mock dependencies
@@ -67,6 +69,13 @@ describe('GreenfieldHandler', () => {
 
     // Default mock implementations
     fs.existsSync.mockReturnValue(false); // Greenfield = nothing exists
+    // Onda3-S2 default: artifacts exist with content so pre-gate flows keep
+    // exercising their original paths; gate tests override to missing.
+    fs.statSync.mockReturnValue({ isFile: () => true, size: 128 });
+    // Workflow YAML unreadable by default → confirmation_required defaults true.
+    fs.readFileSync.mockImplementation(() => {
+      throw new Error('ENOENT');
+    });
     mockSurfaceChecker.shouldSurface.mockReturnValue({ should_surface: true });
     mockSessionState.exists.mockResolvedValue(false);
 
@@ -523,6 +532,137 @@ describe('GreenfieldHandler', () => {
       expect(summary).toContain('@analyst');
       expect(summary).toContain('docs/prd.md');
       expect(summary).not.toContain('@po'); // null creates filtered out
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════════════
+  //                    ARTIFACT GATE + CONFIRMATION_REQUIRED (Onda3-S2)
+  // ═══════════════════════════════════════════════════════════════════════════════════
+
+  describe('evaluateArtifactGate (Onda3-S2 AC2)', () => {
+    test('passes when every declared artifact exists with content', () => {
+      fs.statSync.mockReturnValue({ isFile: () => true, size: 42 });
+      const gate = handler.evaluateArtifactGate(PHASE_1_SEQUENCE);
+      expect(gate.passed).toBe(true);
+      expect(gate.missing).toEqual([]);
+      expect(gate.checked).toBe(4); // 5 steps, 1 with creates:null
+    });
+
+    test('fails listing every missing artifact', () => {
+      fs.statSync.mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      const gate = handler.evaluateArtifactGate(PHASE_1_SEQUENCE);
+      expect(gate.passed).toBe(false);
+      expect(gate.missing).toHaveLength(4);
+      expect(gate.missing[0]).toEqual({
+        agent: '@analyst',
+        task: 'project-brief',
+        artifact: 'docs/project-brief.md',
+      });
+    });
+
+    test('empty file counts as missing (size 0)', () => {
+      fs.statSync.mockReturnValue({ isFile: () => true, size: 0 });
+      const gate = handler.evaluateArtifactGate(PHASE_1_SEQUENCE);
+      expect(gate.passed).toBe(false);
+      expect(gate.missing).toHaveLength(4);
+    });
+  });
+
+  describe('Phase 1 artifact gate blocks silent advance (Onda3-S2 AC2)', () => {
+    test('returns greenfield_gate_blocked with missing list instead of surfacing to Phase 2', async () => {
+      fs.statSync.mockImplementation((p) => {
+        // Only the brief exists — prd/spec/architecture missing.
+        if (String(p).replace(/\\/g, '/').endsWith('docs/project-brief.md')) {
+          return { isFile: () => true, size: 100 };
+        }
+        throw new Error('ENOENT');
+      });
+
+      const result = await handler._executePhase1({ userGoal: 'test' });
+
+      expect(result.action).toBe('greenfield_gate_blocked');
+      expect(result.nextPhase).toBe(1);
+      expect(result.data.gate).toBe('missing_artifact');
+      expect(result.data.missing.map((m) => m.artifact)).toEqual([
+        'docs/prd.md',
+        'docs/front-end-spec.md',
+        'docs/fullstack-architecture.md',
+      ]);
+      expect(handler.phaseProgress[GreenfieldPhase.DISCOVERY].status).toBe('gated');
+    });
+
+    test('advances to the Phase 1 → 2 surface when all artifacts are on disk', async () => {
+      fs.statSync.mockReturnValue({ isFile: () => true, size: 100 });
+
+      const result = await handler._executePhase1({ userGoal: 'test' });
+
+      expect(result.action).toBe('greenfield_surface');
+      expect(result.nextPhase).toBe(2);
+      expect(handler.phaseProgress[GreenfieldPhase.DISCOVERY].status).toBe('complete');
+    });
+  });
+
+  describe('confirmation_required consumed from workflow YAML (Onda3-S2 AC3)', () => {
+    test('defaults to true when the YAML is unreadable', () => {
+      expect(handler.getConfirmationRequired()).toBe(true);
+    });
+
+    test('reads false from metadata and caches it', () => {
+      fs.readFileSync.mockReturnValue('metadata:\n  confirmation_required: false\n');
+      const h = new GreenfieldHandler(TEST_PROJECT_ROOT, {
+        surfaceChecker: mockSurfaceChecker,
+        sessionState: mockSessionState,
+      });
+      expect(h.getConfirmationRequired()).toBe(false);
+      fs.readFileSync.mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      expect(h.getConfirmationRequired()).toBe(false); // cached
+    });
+
+    test('true in metadata preserves the pause behavior', () => {
+      fs.readFileSync.mockReturnValue('metadata:\n  confirmation_required: true\n');
+      const h = new GreenfieldHandler(TEST_PROJECT_ROOT, {
+        surfaceChecker: mockSurfaceChecker,
+        sessionState: mockSessionState,
+      });
+      expect(h.getConfirmationRequired()).toBe(true);
+    });
+
+    test('confirmation_required=false turns the Phase 1 → 2 go_pause surface into auto-GO', async () => {
+      fs.statSync.mockReturnValue({ isFile: () => true, size: 100 });
+      fs.readFileSync.mockReturnValue('metadata:\n  confirmation_required: false\n');
+
+      const h = new GreenfieldHandler(TEST_PROJECT_ROOT, {
+        surfaceChecker: mockSurfaceChecker,
+        sessionState: mockSessionState,
+      });
+      const executeSpy = jest.spyOn(h, '_executeFromPhase').mockResolvedValue({ action: 'advanced' });
+
+      const result = await h._executePhase1({ userGoal: 'test' });
+
+      expect(executeSpy).toHaveBeenCalledWith(2, expect.any(Object));
+      expect(result).toEqual({ action: 'advanced' });
+    });
+
+    test('gate block is NEVER auto-advanced even with confirmation_required=false', async () => {
+      fs.statSync.mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      fs.readFileSync.mockReturnValue('metadata:\n  confirmation_required: false\n');
+
+      const h = new GreenfieldHandler(TEST_PROJECT_ROOT, {
+        surfaceChecker: mockSurfaceChecker,
+        sessionState: mockSessionState,
+      });
+      const executeSpy = jest.spyOn(h, '_executeFromPhase');
+
+      const result = await h._executePhase1({ userGoal: 'test' });
+
+      expect(result.action).toBe('greenfield_gate_blocked');
+      expect(executeSpy).not.toHaveBeenCalled();
     });
   });
 });
