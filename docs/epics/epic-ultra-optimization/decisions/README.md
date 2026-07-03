@@ -33,8 +33,15 @@
   modelo de ameaça de CLI local single-user (o único "high" citado nominalmente —
   polynomial-redos — foi refutado por benchmark empírico), e um punhado de
   MODERADOS baratos (TOCTOU no instalador, DOM-XSS no atlas interno, log-injection,
-  permissão de workflow) — plano de correção em 3 ondas dentro do relatório. Decisão
-  de execução das ondas segue fora do escopo destes pareceres.
+  permissão de workflow) — plano de correção em 3 ondas dentro do relatório.
+  **Onda A ✅ EXECUTADA (PR #337, 2026-07-03, OK do dono):** os 4 fixes cirúrgicos
+  de segurança — CodeQL volta a analisar `actions` (alerta #1 era obsoleto, fecha
+  sozinho), escape de HTML na fonte geradora do atlas (`render-html.js`, fecha
+  #524-#528), âncoras agrupadas na `TEST_FILE_PATTERN` (#511, equivalência validada
+  com 20.030 casos), strip de caracteres de controle no `log()` do updater (#32).
+  A limpeza dos 168 alertas de qualidade (também citada na Onda A do relatório)
+  ficou como follow-up próprio. Ondas B (escrita atômica/TOCTOU + execFileSync) e
+  C (dismissals/config CodeQL) seguem aguardando decisão do dono.
 - **Rollout da ativação enxuta pros ~170 agentes restantes** (pós-piloto Onda2-P7,
   PR #332): aguarda avaliação do piloto pelo dono — fora do escopo destes pareceres.
 
