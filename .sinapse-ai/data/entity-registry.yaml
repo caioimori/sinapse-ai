@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T08:52:22.846Z'
+  lastUpdated: '2026-07-03T09:35:03.324Z'
   entityCount: 814
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -2959,8 +2959,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:a505eb0429e05d6c38e0836d7d60e98815aa70f10c855c0936dfde6731682343
-      lastVerified: '2026-07-03T06:55:48.479Z'
+      checksum: sha256:222b56327fd175c90bea4c89e3a1b82e27e94c28085a74530489682483038edd
+      lastVerified: '2026-07-03T09:35:03.116Z'
     export-design-tokens-dtcg:
       path: .sinapse-ai/development/tasks/export-design-tokens-dtcg.md
       layer: L2
@@ -15231,8 +15231,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f795fafa52113f199a186bbb00624c1d93491363f5198d46b6793fb9fee63a5d
-      lastVerified: '2026-07-03T06:55:48.584Z'
+      checksum: sha256:fd22d105cfce45cf7202d947fcc145987ed07b8503ec8dfdd260fa5a43886345
+      lastVerified: '2026-07-03T09:35:03.241Z'
     fast-track:
       path: .sinapse-ai/development/workflows/fast-track.yaml
       layer: L2
