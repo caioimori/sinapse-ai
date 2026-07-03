@@ -1,0 +1,100 @@
+{
+  "suite": "epic-gates-behavioral",
+  "description": "Golden set comportamental do GateEvaluator de épicos (orchestration). Trava as regressões medidas no checkpoint de 2026-06-30: cada caso é um bug real que o gate deixou passar (ou o comportamento correto de controle). Story onda3-s4-behavioral-eval-regression (AF-20260702 item 3.1). Política: todo bug comportamental futuro vira caso permanente aqui.",
+  "cases": [
+    {
+      "id": "empty-build-blocks",
+      "description": "Bug 3 do checkpoint 30/06: build que escreveu ZERO código era APROVADO com score 5.0 porque implementationPath apontava pro PLANO. Um build vazio DEVE bloquear.",
+      "gate": { "from": 4, "to": 6 },
+      "epicResult": {
+        "success": true,
+        "planPath": "plan/build-state.json",
+        "implementationPath": "plan/build-state.json",
+        "plan": { "phases": [{ "id": 1, "subtasks": [{ "id": "1.1" }, { "id": "2.1" }] }] },
+        "codeChanges": ["plan/build-state.json"],
+        "errors": []
+      },
+      "expect": {
+        "verdict": "blocked",
+        "failedChecks": ["implementation_exists"],
+        "passedChecks": ["plan_complete", "plan_is_real", "no_critical_errors"]
+      }
+    },
+    {
+      "id": "stub-plan-blocks",
+      "description": "F5 (os dentes do gate): plano degraded/stub não é artefato real — DEVE bloquear mesmo com código escrito.",
+      "gate": { "from": 4, "to": 6 },
+      "epicResult": {
+        "success": true,
+        "plan": { "degraded": true, "stub": true, "reason": "claude unavailable" },
+        "codeChanges": ["src/store.js"],
+        "errors": []
+      },
+      "expect": {
+        "verdict": "blocked",
+        "failedChecks": ["plan_is_real", "plan_complete"],
+        "passedChecks": ["implementation_exists", "no_critical_errors"]
+      }
+    },
+    {
+      "id": "zero-checks-never-max-score",
+      "description": "Invariante F5: gate que avaliou ZERO checks não verificou NADA — score 0 + issue explícita, nunca o antigo teatro do score 5.",
+      "gate": { "from": 5, "to": 6 },
+      "epicResult": { "success": true },
+      "expect": {
+        "verdict": "needs_revision",
+        "scoreEquals": 0,
+        "issues": ["no_checks_evaluated"]
+      }
+    },
+    {
+      "id": "upstream-failure-blocks",
+      "description": "Fix do vazamento master/gate: resultado que SE DECLARA falho (success:false) nunca pode ser aprovado, mesmo com todos os artefatos presentes.",
+      "gate": { "from": 3, "to": 4 },
+      "epicResult": {
+        "success": false,
+        "specPath": "docs/stories/x/spec.md",
+        "complexity": "medium",
+        "requirements": ["FR-1"]
+      },
+      "expect": {
+        "verdict": "blocked",
+        "failedChecks": ["result_not_failed"],
+        "passedChecks": ["spec_exists", "complexity_assessed", "requirements_defined"]
+      }
+    },
+    {
+      "id": "qa-blocked-report-blocks",
+      "description": "Checkpoint e2e 30/06: gate aprovava (5.0) um QA report com verdict BLOCKED porque os checks de existência nunca olhavam o VALOR. O sinal de falha do qaReport DEVE bloquear.",
+      "gate": { "from": 4, "to": 6 },
+      "epicResult": {
+        "success": true,
+        "plan": { "phases": [{ "id": 1, "subtasks": [{ "id": "1.1" }] }] },
+        "codeChanges": ["src/store.js", "tests/store.test.js"],
+        "errors": [],
+        "qaReport": { "verdict": "BLOCKED" }
+      },
+      "expect": {
+        "verdict": "blocked",
+        "failedChecks": ["result_not_failed"]
+      }
+    },
+    {
+      "id": "real-build-approves-control",
+      "description": "Caso de controle: build real (plano com subtasks + arquivos de código de verdade + sem erros críticos) DEVE aprovar com score máximo — o gate não pode virar um bloqueador cego.",
+      "gate": { "from": 4, "to": 6 },
+      "epicResult": {
+        "success": true,
+        "planPath": "plan/build-state.json",
+        "plan": { "phases": [{ "id": 1, "subtasks": [{ "id": "1.1" }, { "id": "2.1" }] }] },
+        "codeChanges": ["src/url-codec.js", "src/store.js", "tests/store.test.js"],
+        "errors": []
+      },
+      "expect": {
+        "verdict": "approved",
+        "scoreEquals": 5,
+        "passedChecks": ["plan_complete", "plan_is_real", "implementation_exists", "no_critical_errors"]
+      }
+    }
+  ]
+}

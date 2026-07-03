@@ -146,7 +146,14 @@ function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
 }
 
-/** Discover gate folders under tests/evals/ (every dir except _lib / _*). */
+/**
+ * Suites that follow their OWN contract (not the IDS evals.json/triggers.json
+ * one) and have their own runner + jest wrapper. Onda3-S4: epic-gates uses
+ * cases.json validated by scripts/eval-e2e.js.
+ */
+const NON_IDS_SUITES = new Set(['epic-gates']);
+
+/** Discover gate folders under tests/evals/ (every dir except _lib / _* / non-IDS suites). */
 function discoverGateDirs() {
   let entries;
   try {
@@ -156,7 +163,7 @@ function discoverGateDirs() {
     process.exit(2);
   }
   return entries
-    .filter((d) => d.isDirectory() && !d.name.startsWith('_'))
+    .filter((d) => d.isDirectory() && !d.name.startsWith('_') && !NON_IDS_SUITES.has(d.name))
     .map((d) => path.join(EVALS_ROOT, d.name))
     .sort();
 }
