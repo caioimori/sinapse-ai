@@ -59,6 +59,18 @@ Registrados no checkpoint para completude; nenhum é corrigido aqui:
 - Selo de identidade interno do agente vazando no topo do `spec.md` gerado (violação de
   agent-output-format).
 
+## Nota relacionada — subsistema de waves (`workflow-intelligence`)
+
+waves: sem caminho de produção — decisão
+[DEC-02](../epic-ultra-optimization/decisions/DEC-02-workflow-intelligence.md)/[DEC-03](../epic-ultra-optimization/decisions/DEC-03-modulos-multi-story-orfaos.md).
+O `engine/wave-analyzer` de `.sinapse-ai/workflow-intelligence/` (análise de waves para
+execução paralela) só é consumido pelo `wave-executor`
+(`.sinapse-ai/core/execution/wave-executor.js`), que por sua vez não tem chamador de
+produção — nenhuma orquestração real usa análise de waves hoje. Split aprovado: o
+`wave-analyzer` segue o destino do cluster DEC-03 (reserva marcada); a metade
+`suggestion-engine`/`learning` (consumida por `*next`/`*patterns`, com consumidor real)
+fica intocada.
+
 ## Resumo operacional
 
 | Uso | Suportado? |

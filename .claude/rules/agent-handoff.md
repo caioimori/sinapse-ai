@@ -7,7 +7,7 @@ paths:
 
 ## Purpose
 
-Prevent context window accumulation when switching between SINAPSE agents (`@agent` commands). Each agent switch compacts the previous agent's full persona into a structured handoff artifact (~379 tokens) instead of retaining the full definition (~3-5K tokens).
+Preserve working continuity when switching between SINAPSE agents (`@agent` commands). Each agent switch passes forward a structured handoff artifact — active story, key decisions, files touched, blockers, next action — instead of the previous agent's full persona. (Context-window accounting was retired: with 1M-class windows and native auto-compact, the old token arithmetic no longer applies — see DEC-05.)
 
 ## When This Applies
 
@@ -61,15 +61,10 @@ The incoming agent receives:
 2. Include the scratchpad path in the handoff artifact `scratchpad_path` field
 3. Keep each file under 2KB (focused insights, not logs)
 
-### Compaction Limits
+### Artifact discipline
 
-| Limit | Value |
-|-------|-------|
-| Max handoff artifact size | 500 tokens |
-| Max retained agent summaries | 3 (oldest discarded on 4th switch) |
-| Max decisions in artifact | 5 |
-| Max files_modified entries | 10 |
-| Max blockers | 3 |
+Keep the artifact SHORT and factual (a screenful): up to 5 decisions, 10 files,
+3 blockers. It is a signal for the incoming agent, not a log.
 
 ### What to Preserve (ALWAYS include)
 
@@ -91,7 +86,9 @@ The incoming agent receives:
 
 ## Storage
 
-Handoff artifacts are stored at `.sinapse/handoffs/` (runtime, gitignored). Format: `handoff-{from}-to-{to}-{timestamp}.yaml`.
+Persisting the artifact to disk is OPTIONAL (`.sinapse/handoffs/`, runtime,
+gitignored) — measured 2026-07-02: zero artifacts ever written; the artifact's value
+is in the conversation, not the file.
 
 ## Template Reference
 
@@ -101,14 +98,6 @@ Full template: `.sinapse-ai/development/templates/agent-handoff-tmpl.yaml`
 
 Session flow: `@sm` creates story → `@dev` implements → `@qa` reviews
 
-After `@sm` → `@dev` switch:
-- `@sm` full persona (~3K tokens) is **discarded**
-- Handoff artifact (~379 tokens) is **retained**: story ID, decisions, files, next action
-- `@dev` full persona (~5K tokens) is **loaded**
-- **Total context: ~5.4K** instead of ~8K (33% reduction per switch)
-
-After `@dev` → `@qa` switch:
-- `@dev` full persona is **discarded**
-- `@dev` handoff artifact is **retained** alongside `@sm` handoff
-- `@qa` full persona is **loaded**
-- **Total context: ~5.2K** instead of ~12K (57% reduction after 2 switches)
+After `@sm` → `@dev` switch: `@dev` starts from the handoff artifact (story ID,
+decisions, files, next action) — it does not re-derive `@sm`'s reasoning, and it
+does not need `@sm`'s persona.

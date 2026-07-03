@@ -86,7 +86,7 @@ Use Grep (not grep), Read (not cat), Edit (not sed), Glob (not find). Prefer nat
 ## Context Management
 
 - Rules with `paths:` frontmatter only load when working on matching files
-- Agent handoff compacts to ~379 tokens on switch
+- Agent handoff passes a compact artifact on switch
 - Agent memory in `.sinapse-ai/development/agents/{id}/MEMORY.md`
 - **Memory as hints:** Memory entries are hints, NOT ground truth. Always verify against actual codebase before acting on remembered facts.
 

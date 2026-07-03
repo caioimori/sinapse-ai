@@ -4628,9 +4628,9 @@ files:
     type: workflow-intelligence
     size: 23448
   - path: workflow-intelligence/engine/wave-analyzer.js
-    hash: sha256:cc1eed3a397a9714d30eacfb8c9b9c5f6ae431e7aa2c3ec404967f691caed874
+    hash: sha256:bd2d551d933258f88de494b24e1c655105cebba5edd07cce8d7fe73d7549b600
     type: workflow-intelligence
-    size: 19798
+    size: 20336
   - path: workflow-intelligence/index.js
     hash: sha256:e015176daf9001d1d0fdc5533d4a503430ead07fe6eb8d68733530fceef39191
     type: workflow-intelligence
