@@ -91,6 +91,144 @@ const TRANSLATIONS = {
     reportFailedStatus: 'FAILED ({count} error(s))',
     reportUnknownStatus: 'UNKNOWN',
 
+    // Troubleshooting system (Story onda2-p6 — i18n migration, AF-20260702 item 2.9)
+    troubleshootGuideTitle: 'Troubleshooting Guide',
+    troubleshootAffectedItems: 'Affected items ({count}):',
+    troubleshootAndMore: '... and {count} more',
+    troubleshootPossibleCauses: 'Possible Causes:',
+    troubleshootSolutionsHeading: 'Solutions:',
+    troubleshootDocsLine: 'Docs: {url}',
+    troubleshootGeneralSolutions: 'General Solutions:',
+    troubleshootGeneralSolution1: '1. Review error message above',
+    troubleshootGeneralSolution2: '2. Check installation logs in .sinapse/',
+    troubleshootGeneralSolution3: '3. Re-run installation',
+    troubleshootGeneralSolution4: '4. Contact support if issue persists',
+    troubleshootViewLogsPrompt: 'Would you like to see installation logs for more details?',
+    troubleshootInstallationLogsTitle: 'Installation Logs:',
+    troubleshootViewWithCat: 'View with: cat .sinapse/install-log.txt',
+    troubleshootOpenDocsPrompt: 'Would you like to open the troubleshooting documentation?',
+    troubleshootDocumentationTitle: 'Documentation:',
+    troubleshootNeedHelpTitle: 'Need Help?',
+    troubleshootGithubIssuesLine: 'GitHub Issues: {url}',
+    troubleshootDocumentationLine: 'Documentation: {url}',
+
+    // Troubleshooting database — TROUBLESHOOTING_DATABASE entries (problem/causes/solutions)
+    troubleshootEnvFileMissingProblem: '.env file not found',
+    troubleshootEnvFileMissingCauses: [
+      'Environment configuration step failed',
+      'File creation permissions issue',
+      '.env accidentally deleted',
+    ],
+    troubleshootEnvFileMissingSolutions: [
+      'Re-run wizard: npx sinapse-ai@latest install',
+      'Manually create .env from template: cp .env.example .env',
+      'Check file permissions in project directory',
+    ],
+
+    troubleshootCoreConfigMissingProblem: 'core-config.yaml not found',
+    troubleshootCoreConfigMissingCauses: [
+      'Environment configuration step failed',
+      '.sinapse-ai directory missing',
+      'File creation failed',
+    ],
+    troubleshootCoreConfigMissingSolutions: [
+      'Re-run wizard: npx sinapse-ai@latest install',
+      'Check .sinapse-ai directory exists',
+      'Manually create from template',
+    ],
+
+    troubleshootMcpHealthCheckFailedProblem: 'MCP health check failed',
+    troubleshootMcpHealthCheckFailedCauses: [
+      'API key missing or invalid',
+      'Network connectivity issues',
+      'MCP service temporarily unavailable',
+      'Package not installed correctly',
+    ],
+    troubleshootMcpHealthCheckFailedSolutions: [
+      'Verify API key in .env file',
+      'Test network: curl https://api.service.com/health',
+      'Retry MCP installation: npm run install:mcps',
+      'Check MCP service status',
+      'Verify npx can access package: npx -y [package-name] --version',
+    ],
+
+    troubleshootAllMcpHealthChecksFailedProblem: 'All MCP health checks failed',
+    troubleshootAllMcpHealthChecksFailedCauses: [
+      'Network connectivity issue',
+      'MCPs not installed correctly',
+      'Configuration file corrupted',
+      'API keys not configured',
+    ],
+    troubleshootAllMcpHealthChecksFailedSolutions: [
+      'Check internet connection',
+      'Re-run MCP installation',
+      'Verify .mcp.json syntax',
+      'Configure API keys in .env',
+      'Delete .mcp.json and reinstall',
+    ],
+
+    troubleshootGitignoreCriticalMissingProblem: '.gitignore missing critical entries',
+    troubleshootGitignoreCriticalMissingCauses: [
+      '.gitignore not created during setup',
+      '.gitignore manually edited incorrectly',
+      'Git not initialized',
+    ],
+    troubleshootGitignoreCriticalMissingSolutions: [
+      'Add missing entries to .gitignore',
+      'Copy from template: .env, node_modules, *.key, *.pem',
+      'Initialize git if needed: git init',
+    ],
+
+    troubleshootDepsInstallFailedProblem: 'Dependencies installation failed',
+    troubleshootDepsInstallFailedCauses: [
+      'Network connectivity issues',
+      'Package manager not installed',
+      'npm/yarn registry unavailable',
+      'Disk space insufficient',
+    ],
+    troubleshootDepsInstallFailedSolutions: [
+      'Check internet connection',
+      'Verify package manager installed: npm --version',
+      'Clear cache: npm cache clean --force',
+      'Try different package manager: yarn or pnpm',
+      'Check disk space: df -h (Unix) or dir (Windows)',
+    ],
+
+    troubleshootCriticalDepsMissingProblem: 'Critical dependencies missing',
+    troubleshootCriticalDepsMissingCauses: [
+      'Dependency installation incomplete',
+      'node_modules corrupted',
+      'Package installation failed silently',
+    ],
+    troubleshootCriticalDepsMissingSolutions: [
+      'Delete node_modules: rm -rf node_modules',
+      'Delete lock file: rm package-lock.json',
+      'Reinstall: npm install',
+      'Try clean install: npm ci',
+    ],
+
+    troubleshootVulnerabilitiesFoundProblem: 'Security vulnerabilities found in dependencies',
+    troubleshootVulnerabilitiesFoundCauses: [
+      'Outdated packages with known vulnerabilities',
+      'Transitive dependencies with security issues',
+    ],
+    troubleshootVulnerabilitiesFoundSolutions: [
+      'Run: npm audit fix',
+      'Run: npm audit fix --force (if needed)',
+      'Update packages: npm update',
+      'Review: npm audit for details',
+    ],
+
+    troubleshootEnvPermissionsInsecureProblem: '.env file permissions too permissive',
+    troubleshootEnvPermissionsInsecureCauses: [
+      'File created with default permissions',
+      'Permissions not set during installation',
+    ],
+    troubleshootEnvPermissionsInsecureSolutions: [
+      'Run: chmod 600 .env',
+      'Verify: ls -la .env',
+    ],
+
     // Status
     success: 'Success',
     error: 'Error',
@@ -213,6 +351,144 @@ const TRANSLATIONS = {
     reportFailedStatus: 'FALHOU ({count} erro(s))',
     reportUnknownStatus: 'DESCONHECIDO',
 
+    // Troubleshooting system (Story onda2-p6 — i18n migration, AF-20260702 item 2.9)
+    troubleshootGuideTitle: 'Guia de Solução de Problemas',
+    troubleshootAffectedItems: 'Itens afetados ({count}):',
+    troubleshootAndMore: '... e mais {count}',
+    troubleshootPossibleCauses: 'Possíveis Causas:',
+    troubleshootSolutionsHeading: 'Soluções:',
+    troubleshootDocsLine: 'Documentação: {url}',
+    troubleshootGeneralSolutions: 'Soluções Gerais:',
+    troubleshootGeneralSolution1: '1. Revise a mensagem de erro acima',
+    troubleshootGeneralSolution2: '2. Verifique os logs de instalação em .sinapse/',
+    troubleshootGeneralSolution3: '3. Rode a instalação novamente',
+    troubleshootGeneralSolution4: '4. Contate o suporte se o problema persistir',
+    troubleshootViewLogsPrompt: 'Gostaria de ver os logs de instalação para mais detalhes?',
+    troubleshootInstallationLogsTitle: 'Logs de Instalação:',
+    troubleshootViewWithCat: 'Veja com: cat .sinapse/install-log.txt',
+    troubleshootOpenDocsPrompt: 'Gostaria de abrir a documentação de solução de problemas?',
+    troubleshootDocumentationTitle: 'Documentação:',
+    troubleshootNeedHelpTitle: 'Precisa de Ajuda?',
+    troubleshootGithubIssuesLine: 'Issues do GitHub: {url}',
+    troubleshootDocumentationLine: 'Documentação: {url}',
+
+    // Troubleshooting database — TROUBLESHOOTING_DATABASE entries (problem/causes/solutions)
+    troubleshootEnvFileMissingProblem: 'Arquivo .env não encontrado',
+    troubleshootEnvFileMissingCauses: [
+      'A etapa de configuração de ambiente falhou',
+      'Problema de permissão na criação do arquivo',
+      '.env foi apagado acidentalmente',
+    ],
+    troubleshootEnvFileMissingSolutions: [
+      'Rode o assistente novamente: npx sinapse-ai@latest install',
+      'Crie o .env manualmente a partir do modelo: cp .env.example .env',
+      'Verifique as permissões de arquivo no diretório do projeto',
+    ],
+
+    troubleshootCoreConfigMissingProblem: 'core-config.yaml não encontrado',
+    troubleshootCoreConfigMissingCauses: [
+      'A etapa de configuração de ambiente falhou',
+      'Diretório .sinapse-ai ausente',
+      'Falha na criação do arquivo',
+    ],
+    troubleshootCoreConfigMissingSolutions: [
+      'Rode o assistente novamente: npx sinapse-ai@latest install',
+      'Verifique se o diretório .sinapse-ai existe',
+      'Crie manualmente a partir do modelo',
+    ],
+
+    troubleshootMcpHealthCheckFailedProblem: 'Verificação de saúde do MCP falhou',
+    troubleshootMcpHealthCheckFailedCauses: [
+      'Chave de API ausente ou inválida',
+      'Problemas de conectividade de rede',
+      'Serviço MCP temporariamente indisponível',
+      'Pacote não instalado corretamente',
+    ],
+    troubleshootMcpHealthCheckFailedSolutions: [
+      'Verifique a chave de API no arquivo .env',
+      'Teste a rede: curl https://api.service.com/health',
+      'Tente instalar o MCP novamente: npm run install:mcps',
+      'Verifique o status do serviço MCP',
+      'Verifique se o npx consegue acessar o pacote: npx -y [package-name] --version',
+    ],
+
+    troubleshootAllMcpHealthChecksFailedProblem: 'Todas as verificações de saúde de MCP falharam',
+    troubleshootAllMcpHealthChecksFailedCauses: [
+      'Problema de conectividade de rede',
+      'MCPs não instalados corretamente',
+      'Arquivo de configuração corrompido',
+      'Chaves de API não configuradas',
+    ],
+    troubleshootAllMcpHealthChecksFailedSolutions: [
+      'Verifique a conexão com a internet',
+      'Rode a instalação do MCP novamente',
+      'Verifique a sintaxe do .mcp.json',
+      'Configure as chaves de API no .env',
+      'Apague o .mcp.json e reinstale',
+    ],
+
+    troubleshootGitignoreCriticalMissingProblem: '.gitignore sem entradas críticas',
+    troubleshootGitignoreCriticalMissingCauses: [
+      '.gitignore não foi criado durante a configuração',
+      '.gitignore editado manualmente de forma incorreta',
+      'Git não inicializado',
+    ],
+    troubleshootGitignoreCriticalMissingSolutions: [
+      'Adicione as entradas ausentes ao .gitignore',
+      'Copie do modelo: .env, node_modules, *.key, *.pem',
+      'Inicialize o git se necessário: git init',
+    ],
+
+    troubleshootDepsInstallFailedProblem: 'Falha na instalação de dependências',
+    troubleshootDepsInstallFailedCauses: [
+      'Problemas de conectividade de rede',
+      'Gerenciador de pacotes não instalado',
+      'Registro do npm/yarn indisponível',
+      'Espaço em disco insuficiente',
+    ],
+    troubleshootDepsInstallFailedSolutions: [
+      'Verifique a conexão com a internet',
+      'Verifique se o gerenciador de pacotes está instalado: npm --version',
+      'Limpe o cache: npm cache clean --force',
+      'Tente outro gerenciador de pacotes: yarn ou pnpm',
+      'Verifique o espaço em disco: df -h (Unix) ou dir (Windows)',
+    ],
+
+    troubleshootCriticalDepsMissingProblem: 'Dependências críticas ausentes',
+    troubleshootCriticalDepsMissingCauses: [
+      'Instalação de dependências incompleta',
+      'node_modules corrompido',
+      'Instalação de pacotes falhou silenciosamente',
+    ],
+    troubleshootCriticalDepsMissingSolutions: [
+      'Apague o node_modules: rm -rf node_modules',
+      'Apague o arquivo de lock: rm package-lock.json',
+      'Reinstale: npm install',
+      'Tente uma instalação limpa: npm ci',
+    ],
+
+    troubleshootVulnerabilitiesFoundProblem: 'Vulnerabilidades de segurança encontradas nas dependências',
+    troubleshootVulnerabilitiesFoundCauses: [
+      'Pacotes desatualizados com vulnerabilidades conhecidas',
+      'Dependências transitivas com problemas de segurança',
+    ],
+    troubleshootVulnerabilitiesFoundSolutions: [
+      'Rode: npm audit fix',
+      'Rode: npm audit fix --force (se necessário)',
+      'Atualize os pacotes: npm update',
+      'Revise os detalhes: npm audit',
+    ],
+
+    troubleshootEnvPermissionsInsecureProblem: 'Permissões do arquivo .env excessivamente permissivas',
+    troubleshootEnvPermissionsInsecureCauses: [
+      'Arquivo criado com permissões padrão',
+      'Permissões não definidas durante a instalação',
+    ],
+    troubleshootEnvPermissionsInsecureSolutions: [
+      'Rode: chmod 600 .env',
+      'Verifique: ls -la .env',
+    ],
+
     // Status
     success: 'Sucesso',
     error: 'Erro',
@@ -303,6 +579,19 @@ function tf(key, params = {}) {
 }
 
 /**
+ * Get a translated list (array of strings). Same fallback chain as t():
+ * current language -> English -> empty array (never the raw key, since a
+ * key isn't a sensible list to display).
+ *
+ * @param {string} key - Translation key whose value is an array
+ * @returns {string[]} Translated list
+ * @example tList('troubleshootEnvFileMissingCauses')
+ */
+function tList(key) {
+  return TRANSLATIONS[currentLanguage][key] || TRANSLATIONS['en'][key] || [];
+}
+
+/**
  * Get language selection choices
  * @returns {Array} Inquirer choices
  */
@@ -318,6 +607,7 @@ module.exports = {
   getLanguage,
   t,
   tf,
+  tList,
   getLanguageChoices,
   TRANSLATIONS,
 };

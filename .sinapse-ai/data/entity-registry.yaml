@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-02T23:20:49.293Z'
+  lastUpdated: '2026-07-02T23:54:09.563Z'
   entityCount: 802
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -328,6 +328,7 @@ entities:
         - cli
         - install
         - prompts
+        - sinapse
         - update
       dependencies:
         - constants
@@ -648,6 +649,7 @@ entities:
       usedBy: []
       dependencies:
         - deprecation-warning
+        - detection
         - index
         - uninstall
         - chrome-brain-installer
@@ -667,8 +669,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:68a5113f21535e15c9aac9cf2f46aa00ce9fbd9f2a6aee9dca45e261cfcded7e
-      lastVerified: '2026-07-02T22:41:00.494Z'
+      checksum: sha256:82f839b438410a1091b5c3aeb7598b080b9cf7771cc796cbdf6927b59630ce9f
+      lastVerified: '2026-07-02T23:54:09.356Z'
     collab-start:
       path: bin/utils/collab-start.js
       layer: L1

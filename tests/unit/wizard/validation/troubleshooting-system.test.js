@@ -5,21 +5,29 @@
 
 const inquirer = require('inquirer');
 const { offerTroubleshooting } = require('../../../../packages/installer/src/wizard/validation/troubleshooting-system');
+const { setLanguage, getLanguage } = require('../../../../packages/installer/src/wizard/i18n');
 
 // Mock inquirer
 jest.mock('inquirer');
 
 describe('Troubleshooting System', () => {
   let consoleLogSpy;
+  let prevLang;
 
   beforeEach(() => {
     jest.clearAllMocks();
     // Mock console.log to avoid test output noise
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    // Troubleshooting strings are now i18n-routed (default PT, Story onda2-p6).
+    // Pin EN so the assertions on English literals below stay deterministic
+    // regardless of host language — same pattern as report-generator.test.js.
+    prevLang = getLanguage();
+    setLanguage('en');
   });
 
   afterEach(() => {
     consoleLogSpy.mockRestore();
+    setLanguage(prevLang);
   });
 
   describe('offerTroubleshooting', () => {
