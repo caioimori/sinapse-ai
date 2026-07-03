@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.19.2
+version: 1.20.0
 generator: scripts/generate-install-manifest.js
 file_count: 1166
 files:
@@ -212,9 +212,9 @@ files:
     type: core
     size: 2028
   - path: core/atlas/render-html.js
-    hash: sha256:d84e928fbaa7f20f4c253758af3af486805683b66027d38d682cc453a5f68a0c
+    hash: sha256:630447429b4e0909637c85b6e6e1e92d1e6a49bae969e92ce4e00680fcfba528
     type: core
-    size: 11656
+    size: 11938
   - path: core/atlas/render-markdown.js
     hash: sha256:d47961e50745e31af483fc126fbb3fc3ec60e498ee2f086982b4af388c5257aa
     type: core
