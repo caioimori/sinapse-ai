@@ -835,6 +835,9 @@ Each story spawns the full development-cycle:
 ### epic-orchestration.yaml (template)
 Provides the generic wave pattern that this task instantiates with project-specific data from the EXECUTION.yaml.
 
+### Wave gate executável (scripts/wave-gate.js)
+Gate determinístico por wave: para cada diretório de story, verifica testes verdes E arquivos de produto realmente escritos (um plano não é implementação) → APPROVED/NEEDS_WORK com exit code. Uso: `node scripts/wave-gate.js --stories <dir1> <dir2> [--test-cmd "..."]`. **Nota de honestidade (medição 2026-07-03):** o wrapper autônomo de waves foi REPROVADO pelo protocolo pré-registrado (ver `docs/epics/epic-onda3-estrutural/CHECKPOINT-waves-2026-07-03.md`) — para multi-story prefira o caminho nativo; o gate permanece como utilitário de verificação por lote.
+
 ### po-epic-context.md
 Used by @product-lead during story validation to understand accumulated changes across the epic.
 

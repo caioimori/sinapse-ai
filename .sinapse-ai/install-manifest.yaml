@@ -2164,9 +2164,9 @@ files:
     type: task
     size: 8809
   - path: development/tasks/execute-epic-plan.md
-    hash: sha256:a505eb0429e05d6c38e0836d7d60e98815aa70f10c855c0936dfde6731682343
+    hash: sha256:222b56327fd175c90bea4c89e3a1b82e27e94c28085a74530489682483038edd
     type: task
-    size: 25478
+    size: 26107
   - path: development/tasks/export-design-tokens-dtcg.md
     hash: sha256:ce37d53f78d6ddab720e6d534d9da629497264ed72b620bc4ff1306ad0f6ffeb
     type: task
@@ -2988,9 +2988,9 @@ files:
     type: workflow
     size: 15633
   - path: development/workflows/epic-orchestration.yaml
-    hash: sha256:f795fafa52113f199a186bbb00624c1d93491363f5198d46b6793fb9fee63a5d
+    hash: sha256:fd22d105cfce45cf7202d947fcc145987ed07b8503ec8dfdd260fa5a43886345
     type: workflow
-    size: 16953
+    size: 17712
   - path: development/workflows/fast-track.yaml
     hash: sha256:1a4f5665af164b8c6425d2ff3c2e713ff8559a66066aa0c7cbd1c6773aaa8266
     type: workflow

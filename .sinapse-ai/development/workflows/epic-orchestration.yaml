@@ -35,6 +35,17 @@ workflow:
   metadata:
     elicit: true
     confirmation_required: true
+    # HONESTIDADE (Onda3-S5, medido 2026-07-03): este template descreve o
+    # PATTERN de waves, mas não existe executor de waves em produção — e o
+    # piloto medido (docs/epics/epic-onda3-estrutural/CHECKPOINT-waves-2026-07-03.md)
+    # REPROVOU o wrapper de waves pelo critério pré-registrado (empate em
+    # correctness, ~2x o custo vs caminho nativo). Para multi-story, use o
+    # caminho nativo. O gate determinístico de wave existe como utilitário
+    # standalone: scripts/wave-gate.js (testes verdes + arquivos realmente
+    # escritos, por story). Reabertura só via novo piloto pelo mesmo protocolo
+    # (tests/evals/epic-gates/PROTOCOL.md).
+    production_status: pattern-only-no-executor
+    wave_gate_utility: scripts/wave-gate.js
 
   # ═══════════════════════════════════════════════════════════════════════════════════
   #                              EXECUTION MODES
