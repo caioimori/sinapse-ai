@@ -28,3 +28,16 @@
 Cada story mergeada na main com testes/lint/typecheck verdes + este README atualizado
 com o resultado real de cada item (inclusive um eventual "medido e reprovado" no 3.5,
 que fecha o item por veredito, não por código shipped).
+
+## RESULTADO (2026-07-03 — épico executado em sessão única YOLO)
+
+| Story | Resultado |
+|---|---|
+| O3-S1 | ✅ ENTREGUE (PR #346) — `validate:article-iv` no pre-push (17 testes), warning na calibração, SKIP honesto onde stories não existem |
+| O3-S2 | ✅ ENTREGUE (PR #347) — gate de artefato na Phase 1 + `confirmation_required` consumido (55 testes do handler) |
+| O3-S3 | ✅ ENTREGUE (PR #348) — `brownfield-progress.js`: progresso medido do disco + gate QA Fase 7 em código com teto de 2 reworks (19 testes) |
+| O3-S4 | ✅ ENTREGUE (PR #349) — golden set `epic-gates` (6 casos) + `npm run eval:e2e` no gate de merge + PROTOCOL.md executável |
+| O3-S5 | ✅ FECHADA POR VEREDITO — wrapper de waves construído, MEDIDO e **reprovado pelo critério pré-registrado** ([checkpoint](CHECKPOINT-waves-2026-07-03.md): empate em correctness, ~2x custo vs nativo). `wave-gate.js` fica como utilitário standalone (8 testes); YAML/task ganharam nota de honestidade |
+
+O item 3.5 fechar com "não vira produto" É o sucesso do método: o gate de medição
+existiu exatamente pra impedir que a aposta perdedora virasse produto de novo.
