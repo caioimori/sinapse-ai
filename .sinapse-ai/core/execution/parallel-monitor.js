@@ -2,6 +2,8 @@
  * Parallel Execution Monitor
  * Story 10.6 - Parallel Agent Execution
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Provides real-time visibility into parallel executions
  * with CLI commands and dashboard integration.
  */

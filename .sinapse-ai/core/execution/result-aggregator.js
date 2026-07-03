@@ -2,6 +2,8 @@
  * Result Aggregator
  * Story 10.5 - Parallel Agent Execution
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Aggregates results from parallel task executions,
  * detects conflicts, and generates consolidated reports.
  */

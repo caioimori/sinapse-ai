@@ -2,6 +2,8 @@
  * Context Injector
  * Story 10.3 - Parallel Agent Execution
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Injects rich context into subagent prompts including:
  * - Project context
  * - Relevant files

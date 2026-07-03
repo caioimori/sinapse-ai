@@ -2,6 +2,8 @@
  * Wave Executor
  * Story 10.1 - Parallel Agent Execution
  *
+ * @abandoned-path — ver docs/epics/epic-ultra-optimization/decisions/DEC-03 (2026-07-02)
+ *
  * Executes task waves in parallel, leveraging the WaveAnalyzer
  * for dependency-aware scheduling.
  */
