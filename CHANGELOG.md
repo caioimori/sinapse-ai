@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.20.0] — 2026-07-03 — 🧠 Ciclo Fable 5: dieta de contexto, spec/plan de 1ª classe, era de modelo sincronizada
+
+> Minor. Atualização segura via `npx sinapse-ai update`. Consolida o ciclo de upgrade Fable 5 (auditoria AF-20260702 → Onda 1 → Onda 2 → mesa de decisões): 15 PRs (#321–#335).
+
+### Features
+
+- **cli** — `sinapse spec` e `sinapse plan` como comandos de 1ª classe + `orchestrate` no binário canônico + QA honesto no Windows (`PASS_QA_SKIPPED`, exit 0) (#328)
+- **installer** — motor de contexto ativo pós-install: `.synapse/` criado no caminho canônico + models no template; 2º prompt em diante entrega ~−88% de contexto injetado (#334)
+- **synapse** — dieta de contexto: Constitution completa só no 1º prompt (−90,5%/turno) + budgets honestos (#323)
+
+### Bug Fixes
+
+- **cli** — binário canônico honesto: `agents`/`ideate` reais, uninstall de hooksPath, PlanTracker, simulate stub (#321)
+- **context** — dual-trigger de compactação (60% OU 165K) + statusline re-significado pra era 1M (#329)
+- **models** — registry na era Fable 5 (`active: claude-fable-5`) + token-economy sem pin de versão (#322); varredura final de era — atlas sincronizado + squad mastery sem pins (#326)
+
+### Documentation
+
+- **honestidade** — Art. VIII escopado ao caminho real + `docs/framework/workflow-engine-status.md` com status executável dos workflows (#330)
+- **vitrine** — guides públicos no veredito híbrido do motor + README com motor real (#327); docs de vitrine imediata da Onda 1 (#325)
+- **decisions** — mesa de decisões da Onda 2 (5 pareceres) (#333); execução DEC-02/DEC-05 + triagem de segurança (429 alertas, zero crítico-real) (#335)
+
+### Maintenance
+
+- **agents** — piloto de ativação enxuta + 24 colisões de codinome resolvidas (27 renames, reversíveis) (#332)
+- **installer** — bilíngue (troubleshooting i18n) + init sem TTY não crasha (#331)
+- **template** — CLAUDE.md enxuto + guard de codinomes (Nexus→Relay/Bulletin) (#324)
+
 ## [1.19.2] — 2026-07-01 — 🔒 Honestidade do gate (build vazio não passa) + aposta medida
 
 > Patch. Atualização segura via `npx sinapse-ai update`. Fecha o último furo de honestidade do motor achado ao medir a aposta de orquestração multi-story.
