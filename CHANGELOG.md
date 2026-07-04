@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.21.0] — 2026-07-04 — 🏗️ Onda 3 estrutural: gates determinísticos em todos os fluxos + eval como gate de merge
+
+> Minor. Atualização segura via `npx sinapse-ai update`. Fecha a Onda 3 da auditoria AF-20260702 (épico `epic-onda3-estrutural`, PRs #346–#351) — do "otimizado" ao "robusto por design".
+
+### Features
+
+- **constitution:** Artigo IV (No Invention) ganha dente determinístico — `validate:article-iv` no pre-push rastreia arquivos de produto alterados contra o File List da story referenciada; órfão = warning na calibração, `--strict` promove a bloqueio. CI reporta SKIP explícito (stories são locais por design) (#346)
+- **orchestration:** Phase 1 do greenfield só avança com artefatos reais no disco (gate `fileHasContent` por estágio) + `metadata.confirmation_required` do YAML passa a ser consumido de verdade (`false` = auto-GO nas pausas go_pause) (#347)
+- **orchestration:** brownfield discovery com progresso determinístico (`brownfield-progress.js` mede as 10 fases pelos artefatos no disco, com ponto exato de retomada) + gate QA da Fase 7 avaliado em código (APPROVED/NEEDS WORK, máx 2 reworks → escalate) (#348)
+- **evals:** golden set comportamental permanente do gate de épicos (6 casos travando os bugs medidos em 30/06: build vazio, plano stub, zero-checks, sinal de falha ignorado) + `npm run eval:e2e` rodando dentro de `npm test` — regressão comportamental agora bloqueia merge. Protocolo de medição 2 braços promovido a doc executável (#349)
+- **orchestration:** `scripts/wave-gate.js` — gate determinístico por wave (testes verdes + arquivos realmente escritos). O wrapper autônomo de epic waves foi construído, MEDIDO pelo protocolo pré-registrado e **reprovado** (empate em correctness, ~2x custo vs caminho nativo) — não vira produto; o gate fica como utilitário standalone e os templates ganham nota de honestidade (#350)
+
+### Maintenance
+
+- manifests regenerados pós-consolidação da Onda 3; entidades novas registradas (#351)
+
 ## [1.20.1] — 2026-07-03 — 🛡️ Segurança em 3 ondas + ativação enxuta + corte do cluster órfão (DEC-03)
 
 > Patch. Atualização segura via `npx sinapse-ai update`. Fecha a execução da mesa de decisões da otimização: PRs #337–#344.
