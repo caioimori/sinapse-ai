@@ -82,8 +82,10 @@ defeito de código.
 
 ## Execução desta rodada
 
-- **Lote A (texto/vitrine/números)** — story `rodada2-lote-a-vitrine-numeros`: user-guide (personas/ids/versão, +espelhos), README (snps-orqx, contagem de hooks), doctor=16 em 4 fontes, story-tmpl des-datado, Co-Authored-By, ideation docstring, sinapse-minimal, Livro de Ouro, KNOWN-LIMITATIONS precisão, KB era-de-modelo (200K/Opus 4.6).
-- **Lote B (código/CI)** — story `rodada2-lote-b-codigo-ci`: guarda runtime no orchestrate, cross-platform-pr no gate de merge, buildOptions único, flags mortas removidas, @deprecated no barrel, comentário 189.
+- **Lote A (texto/vitrine/números)** — story `rodada2-lote-a-vitrine-numeros` · **PR #353 MERGED** (main `615aaf4d`): user-guide (personas/ids/versão, +espelhos), README (snps-orqx, contagem de hooks), doctor=16 em 4 fontes, story-tmpl des-datado, Co-Authored-By, ideation docstring, sinapse-minimal, Livro de Ouro, KNOWN-LIMITATIONS precisão, KB era-de-modelo (200K/Opus 4.6).
+- **Lote B (código/CI)** — story `rodada2-lote-b-codigo-ci` · **PR #354 MERGED** (main `ce18459d`): guarda runtime no orchestrate, cross-platform-pr no gate de merge, buildOptions único, flags mortas removidas (`Article XI override`), @deprecated no barrel, comentário 189.
+
+Ambos os PRs passaram por CI completo (suíte jest ~11.4k testes, lint 0/0, typecheck, cross-platform smoke). Stories locais → Done. Publicação npm dos lotes A+B fica pendente de "publica" explícito do Caio (seria um patch/minor novo sobre 1.21.0).
 
 ## Mesa (aguardam palavra do dono — nenhum é urgente)
 
