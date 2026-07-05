@@ -5,10 +5,11 @@
  *
  * REMOVED FROM PUBLIC SURFACE — Story 10.30 (Cycle 5)
  *
- * As of v10.0.0 this binary is no longer registered in package.json
- * `bin`, so `npm install -g sinapse-ai` does not install a
- * `sinapse-minimal` shim anymore. The file is kept in the repo for one
- * release cycle as a forwarder, then will be deleted entirely in v11.
+ * This binary is no longer registered in package.json `bin`, so
+ * `npm install -g sinapse-ai` does not install a `sinapse-minimal` shim
+ * anymore. The file is kept in the repo as a forwarder only, scheduled
+ * for physical removal in the next MAJOR release (the old "v10/v11"
+ * timeline predates the 1.x version reset and no longer applies).
  *
  * Originally deprecated in v3.11.1 (Story 10.13 added the deprecation
  * warning). The "minimal" install is no longer a real distinct mode —

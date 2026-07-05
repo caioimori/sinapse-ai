@@ -43,7 +43,7 @@ The context window is the scarcest resource in agentic systems. A well-designed 
 ### Token Budget Management
 
 ```
-TOTAL WINDOW: 200,000 tokens (example)
+TOTAL WINDOW: 200,000 tokens (example — current frontier windows reach 1M)
   |- System Prompt:      ~2,000 tokens (1%)
   |- Agent Persona:      ~1,500 tokens (0.75%)
   |- Memory Context:    ~50,000 tokens (25%)     ← MANAGED

@@ -185,7 +185,7 @@ Grep(pattern="TODO", head_limit=10)
 
 ## Quick Reference: Context Budget
 
-For a 200K token context window:
+For a 200K token context window (example — current frontier windows reach 1M; see token-economy rule):
 
 | Allocation | Tokens | % |
 |-----------|--------|---|

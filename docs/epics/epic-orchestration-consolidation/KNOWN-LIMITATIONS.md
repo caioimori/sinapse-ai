@@ -32,11 +32,16 @@ build da anterior e **pular toda a implementação** (zero código gerado).
 - **Evidência:** com a story 1 (`url-1-codec`) já concluída, as stories 2 e 3 carregaram
   `completedSubtasks: ["1.1","2.1","3.1","4.1"]`, logaram "Skipping completed subtask" e
   escreveram **zero** arquivos (`store.js` / validação nunca criados).
-- **Efeito colateral:** um gate (`epic4_to_epic6`) chegou a **aprovar um build vazio** (score
-  5.0) porque não checa se o build produziu/modificou arquivos.
+- **Efeito colateral — CORRIGIDO (fix #317, empty-build-honesty):** um gate
+  (`epic4_to_epic6`) chegou a **aprovar um build vazio** (score 5.0). Hoje o check
+  `implementation_exists` coleta os arquivos reais tocados e EXCLUI o artefato de plano
+  (`gate-evaluator.js:_collectImplementationFiles`) — build vazio → fail critical → BLOCKED.
+  Comportamento travado por eval de regressão (`tests/evals/epic-gates/`, caso
+  `empty-build-blocks`).
 - **Correção teórica (não aplicada):** escopar o estado por story
-  (ex.: `plan/<storyId>/build-state.json`) + adicionar precondição "o build escreveu arquivos?"
-  ao gate.
+  (ex.: `plan/<storyId>/build-state.json`). Scaffolding existe dormante
+  (`build-state-manager.js` aceita `storyId`), mas não está cabeado no
+  `build-orchestrator` — decisão consciente de não investir no caminho multi-story.
 
 ### 2. QA (Epic 6) falha ao spawnar `claude` aninhado no Windows (MAJOR)
 

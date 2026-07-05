@@ -12,7 +12,7 @@
 
 Guia completo para usar o SINAPSE - o Sistema Orquestrado por IA para Desenvolvimento Full Stack.
 
-**Versão:** 1.19.2
+**Versão:** 1.21.0
 **Última Atualização:** 2026-07-02
 
 ---
@@ -85,26 +85,26 @@ O SINAPSE inclui 11 agentes especializados, cada um com papel e personalidade di
 
 | Agente    | ID               | Arquétipo    | Responsabilidade          |
 | --------- | ---------------- | ------------ | ------------------------- |
-| **Dex**   | `@dev`           | Construtor   | Implementação de código   |
-| **Quinn** | `@qa`            | Guardião     | Garantia de qualidade     |
-| **Aria**  | `@architect`     | Arquiteto    | Arquitetura técnica       |
-| **Nova**  | `@po`            | Visionário   | Backlog do produto        |
-| **Kai**   | `@pm`            | Equilibrador | Estratégia do produto     |
-| **River** | `@sm`            | Facilitador  | Facilitação de processos  |
-| **Zara**  | `@analyst`       | Explorador   | Análise de negócios       |
-| **Dara**  | `@data-engineer` | Arquiteto    | Engenharia de dados       |
-| **Felix** | `@devops`        | Otimizador   | CI/CD e operações         |
-| **Uma**   | `@ux-expert`     | Criador      | Experiência do usuário    |
-| **Pax**   | `@sinapse-orqx`   | Orquestrador | Orquestração do framework |
+| **Pixel** | `@developer` | Construtor   | Implementação de código   |
+| **Litmus** | `@quality-gate` | Guardião     | Garantia de qualidade     |
+| **Stratum** | `@architect` | Arquiteto    | Arquitetura técnica       |
+| **Axis** | `@product-lead` | Visionário   | Backlog do produto        |
+| **Beacon** | `@project-lead` | Equilibrador | Estratégia do produto     |
+| **Sync** | `@sprint-lead` | Facilitador  | Facilitação de processos  |
+| **Scope** | `@analyst` | Explorador   | Análise de negócios       |
+| **Tensor** | `@data-engineer` | Arquiteto    | Engenharia de dados       |
+| **Pipeline** | `@devops` | Otimizador   | CI/CD e operações         |
+| **Mosaic** | `@ux-design-expert` | Criador      | Experiência do usuário    |
+| **Imperator** | `@snps-orqx` | Orquestrador | Orquestração do framework |
 
 ### Ativação de Agentes
 
 ```bash
 # Ative um agente usando sintaxe @
-@developer                # Ativar Dex (Desenvolvedor)
-@quality-gate                 # Ativar Quinn (QA)
-@architect          # Ativar Aria (Arquiteto)
-@sinapse-orqx        # Ativar Pax (Orquestrador)
+@developer                # Ativar Pixel (Desenvolvedor)
+@quality-gate                 # Ativar Litmus (QA)
+@architect          # Ativar Stratum (Arquiteto)
+@snps-orqx        # Ativar Imperator (Orquestrador)
 
 # Comandos de agente usam prefixo *
 *help               # Mostrar comandos disponíveis
@@ -418,7 +418,7 @@ sinapse rebuild
 Sempre crie uma story antes de implementar funcionalidades:
 
 ```bash
-@sinapse-orqx
+@snps-orqx
 *create-story
 ```
 
@@ -467,5 +467,5 @@ construir um agente novo do zero.
 
 ---
 
-_Guia do Usuário SINAPSE v1.19.2_
+_Guia do Usuário SINAPSE v1.21.0_
 

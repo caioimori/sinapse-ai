@@ -1,5 +1,9 @@
 # SINAPSE Framework - Livro de Ouro v4.2 (Complete)
 
+> **Nota histórica (2026-07-04):** este é um documento de VISÃO da era V2.x. A arquitetura de
+> pacotes com escopo `@sinapse/*` descrita aqui NUNCA foi publicada — o pacote real e único é
+> **`sinapse-ai`** no npm (`npx sinapse-ai install`). Mantido como registro de decisão/visão.
+
 ## O Sistema Operacional Definitivo para Orquestração de Agentes IA
 
 **Versão:** 2.1.0
@@ -606,10 +610,10 @@ npm install @sinapse/mcp-presets
 
 ```bash
 # New project (Greenfield)
-$ npx @caioimori/sinapse@latest init
+$ npx sinapse-ai install
 
 # Existing project (Brownfield)
-$ npx @caioimori/sinapse migrate v2.0-to-v4.0.4
+$ npx sinapse-ai update
 ```
 
 ### First Steps

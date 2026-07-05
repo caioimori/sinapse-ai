@@ -28,7 +28,7 @@ Constitution (Artigo X)
   |     +-- Tier 2: Bloqueadores de Compliance (LGPD)
   |     +-- Tier 3: Bloqueadores Operacionais
   |
-  +-- 19 Hooks Claude Code (aplicacao em tempo real)
+  +-- 20 Hooks Claude Code (aplicacao em tempo real)
   |     +-- Varredura de secrets
   |     +-- Governanca SQL
   |     +-- Gates de arquitetura primeiro
@@ -148,7 +148,7 @@ Apenas `@devops` (Pipeline) pode executar `git push`. O hook `enforce-git-push-a
 
 ## Arquitetura de Hooks
 
-O SINAPSE-AI usa 17 hooks Claude Code organizados por evento de trigger:
+O SINAPSE-AI usa 20 hooks Claude Code organizados por evento de trigger:
 
 ### Mapa de Eventos dos Hooks
 
