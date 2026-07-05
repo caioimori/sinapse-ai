@@ -6,7 +6,7 @@
 
 Complete guide for using SINAPSE - the AI-Orchestrated System for Full Stack Development.
 
-**Version:** 1.19.2
+**Version:** 1.21.0
 **Last Updated:** 2026-07-02
 
 ---
@@ -79,26 +79,26 @@ SINAPSE includes 11 specialized agents, each with a distinct role and personalit
 
 | Agent     | ID               | Archetype    | Responsibility          |
 | --------- | ---------------- | ------------ | ----------------------- |
-| **Dex**   | `@dev`           | Builder      | Code implementation     |
-| **Quinn** | `@qa`            | Guardian     | Quality assurance       |
-| **Aria**  | `@architect`     | Architect    | Technical architecture  |
-| **Nova**  | `@po`            | Visionary    | Product backlog         |
-| **Kai**   | `@pm`            | Balancer     | Product strategy        |
-| **River** | `@sm`            | Facilitator  | Process facilitation    |
-| **Zara**  | `@analyst`       | Explorer     | Business analysis       |
-| **Dara**  | `@data-engineer` | Architect    | Data engineering        |
-| **Felix** | `@devops`        | Optimizer    | CI/CD and operations    |
-| **Uma**   | `@ux-expert`     | Creator      | User experience         |
-| **Pax**   | `@sinapse-orqx`   | Orchestrator | Framework orchestration |
+| **Pixel** | `@developer` | Builder      | Code implementation     |
+| **Litmus** | `@quality-gate` | Guardian     | Quality assurance       |
+| **Stratum** | `@architect` | Architect    | Technical architecture  |
+| **Axis** | `@product-lead` | Visionary    | Product backlog         |
+| **Beacon** | `@project-lead` | Balancer     | Product strategy        |
+| **Sync** | `@sprint-lead` | Facilitator  | Process facilitation    |
+| **Scope** | `@analyst` | Explorer     | Business analysis       |
+| **Tensor** | `@data-engineer` | Architect    | Data engineering        |
+| **Pipeline** | `@devops` | Optimizer    | CI/CD and operations    |
+| **Mosaic** | `@ux-design-expert` | Creator      | User experience         |
+| **Imperator** | `@snps-orqx` | Orchestrator | Framework orchestration |
 
 ### Agent Activation
 
 ```bash
 # Activate an agent using @ syntax
-@developer                # Activate Dex (Developer)
-@quality-gate                 # Activate Quinn (QA)
-@architect          # Activate Aria (Architect)
-@sinapse-orqx        # Activate Pax (Orchestrator)
+@developer                # Activate Pixel (Developer)
+@quality-gate                 # Activate Litmus (QA)
+@architect          # Activate Stratum (Architect)
+@snps-orqx        # Activate Imperator (Orchestrator)
 
 # Agent commands use * prefix
 *help               # Show available commands
@@ -455,7 +455,7 @@ sinapse rebuild
 Always create a story before implementing features:
 
 ```bash
-@sinapse-orqx
+@snps-orqx
 *create-story
 ```
 
@@ -504,4 +504,4 @@ before building a new agent from scratch.
 
 ---
 
-_SINAPSE User Guide v1.19.2_
+_SINAPSE User Guide v1.21.0_

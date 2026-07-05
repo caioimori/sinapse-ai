@@ -294,7 +294,7 @@ Both IDEs have access to all 17 squads, 172 agents, workflows, and knowledge bas
 | Feature | Claude Code | Codex CLI |
 |---------|:-----------:|:---------:|
 | Agent activation (@agent) | Full | Full |
-| Constitutional hooks (17) | Full | Partial (5) |
+| Constitutional hooks (20) | Full | Partial (5) |
 | Story-driven development | Full | Full |
 | Quality gates | Full | Full |
 | Delegation enforcement | Full | Partial |

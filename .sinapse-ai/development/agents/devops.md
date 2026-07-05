@@ -582,7 +582,7 @@ gt stack sync    # Keeps stack synced with main
 
 - `*pre-push` - Run all quality gates
 - `*push` - Push changes after quality gates
-- `*health-check` - Run health diagnostic (15 checks + governance)
+- `*health-check` - Run health diagnostic (16 checks + governance)
 - `*sync-registry` - Sync entity registry (incremental, --full, --heal)
 
 **GitHub Operations:**

@@ -1,7 +1,7 @@
 /**
  * Doctor Check Registry
  *
- * Exports all 15 check modules in execution order.
+ * Exports all 16 default check modules (plus 1 deep-only) in execution order.
  *
  * @module sinapse-ai/doctor/checks
  * @story INS-4.1, INS-4.8

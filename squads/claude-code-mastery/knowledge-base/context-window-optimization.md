@@ -19,7 +19,7 @@ The context window is the scarcest resource in agentic systems. Every token has 
 ### Claude Code Session Anatomy
 
 ```
-TOTAL WINDOW: ~200,000 tokens (Sonnet/Opus)
+TOTAL WINDOW: ~200,000 tokens (example — current frontier windows reach 1M; see .claude/rules/token-economy.md)
   ├── System Prompt (static):   ~2,000 tokens (1%)       [CACHED]
   ├── CLAUDE.md hierarchy:      1-10,000 tokens (0.5-5%) [CACHED]
   ├── Rules files (loaded):     500-5,000 tokens (0.25-2.5%) [CACHED]
@@ -253,7 +253,7 @@ Parent system prompt (cached):
 For SINAPSE agents, recommended allocation:
 
 ```
-200K token session:
+200K-window session (example — current frontier windows reach 1M):
   Agent persona (CLAUDE.md + rules): ~5K (2.5%)
   HOT memory (current task): ~20K (10%)
   WARM memory (retrieved context): ~30K (15%)

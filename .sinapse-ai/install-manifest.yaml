@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.20.1
+version: 1.21.0
 generator: scripts/generate-install-manifest.js
 file_count: 1159
 files:
@@ -392,9 +392,9 @@ files:
     type: core
     size: 3671
   - path: core/doctor/checks/index.js
-    hash: sha256:898106a6aae49bdc7b4ca7518c8e7d2ba8d0614a8bfb7ecd7515862d8ed61764
+    hash: sha256:1bbf4cff649bbf88729c33df95391d342ebd7c0fa55082f7c2421c460f254659
     type: core
-    size: 1513
+    size: 1540
   - path: core/doctor/checks/manifest-version-parity.js
     hash: sha256:ffb698eed47364abccf28ce9d3a07529ac00096f6993a4d03359998b364e8329
     type: core
@@ -776,9 +776,9 @@ files:
     type: core
     size: 7763
   - path: core/ideation/ideation-engine.js
-    hash: sha256:e4973a25c61101d278f102e4ed449421e50d876a274b2c4c2b150d00df97cb39
+    hash: sha256:9fbbd66ea38bc08696e42abca30810ae55e3c80aca703ec2ab0f7657eb3566be
     type: core
-    size: 27573
+    size: 27657
   - path: core/ids/circuit-breaker.js
     hash: sha256:d9ff8c6e540902457b17aba668ff67c04d40564ed479993ad3c4807fb8c09c3f
     type: core
@@ -1364,7 +1364,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:c3e211656dbfb4dd5628e403728bc90ace0c1d2a1faa55385d60c8c873e46e08
+    hash: sha256:87e0464ae5a6130cc3f7389d994f9e46a5ca0cd736e842c03be117ebcfc47699
     type: data
     size: 557940
   - path: data/learned-patterns.yaml
@@ -1484,7 +1484,7 @@ files:
     type: agent
     size: 28149
   - path: development/agents/devops.md
-    hash: sha256:9c566f77c11e95edc5537e13c5f5fda65949c4cef6a1f142f81d7b35347b808b
+    hash: sha256:c0aa3c0b60809ef2fbbe4d7b27ae44e48817d5a7266b6c5d7d5f1d313329a2a0
     type: agent
     size: 26954
   - path: development/agents/product-lead.md
@@ -1596,9 +1596,9 @@ files:
     type: development
     size: 10414
   - path: development/knowledge-base/token-economy-guide.md
-    hash: sha256:cd92d1becb3ea5e728a041fef5d7b850e66996ce1d2222a1ff1604758867d948
+    hash: sha256:bb10715f48778453f5f44bb99244cc4c000de06117ef4e123fe5795a2d30887f
     type: development
-    size: 5932
+    size: 6004
   - path: development/README.md
     hash: sha256:cb3aa87366eba1adebeb1f033c62e3cfc2a65430dc456914808b2c108884ebf2
     type: development
@@ -2496,9 +2496,9 @@ files:
     type: task
     size: 8687
   - path: development/tasks/resolve-github-issue.md
-    hash: sha256:e4773924e8452f0d55712eca51ed1168c916f1864e1d2791830c926bfe9ae167
+    hash: sha256:288ab27dfcc8337e4502bfc4e713b03f39635bc3bdd25a78ff1c3953ac02e0a1
     type: task
-    size: 18286
+    size: 18277
   - path: development/tasks/review-contributor-pr.md
     hash: sha256:e5a4aabbb2d35bdbc8fd8c624df1c38bff3106eadb6d1b961143d27c8b139b57
     type: task
@@ -4240,9 +4240,9 @@ files:
     type: template
     size: 10990
   - path: product/templates/story-tmpl.yaml
-    hash: sha256:43a050de5ef51f53f890fd20f77ac567b297a40597f467b3bc6d00c8193c7fa6
+    hash: sha256:af24bf39ed706db9fca15dcc1bd3a0170c74e9956e3c2de58b221d4b28f14b9e
     type: template
-    size: 16686
+    size: 16725
   - path: product/templates/story.hbs
     hash: sha256:126c55c30e2e49816acc7c1712e71e7c26874b010edfe34e8d7890bac67095b2
     type: template

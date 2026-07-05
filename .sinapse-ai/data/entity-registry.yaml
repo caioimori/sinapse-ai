@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-03T09:35:03.324Z'
+  lastUpdated: '2026-07-05T02:51:22.584Z'
   entityCount: 814
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -649,8 +649,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:bf8fe3e86235e6971c44d2a3e9e1036f21c2d6653ac878af441097e8c3e8bd48
-      lastVerified: '2026-06-15T01:36:42.621Z'
+      checksum: sha256:14606597c434fdf064bd78d5eb904ef2d28ce0523e5431521fcdd9ea0753da56
+      lastVerified: '2026-07-05T02:51:22.240Z'
     sinapse:
       path: bin/sinapse.js
       layer: L1
@@ -5033,8 +5033,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:e4773924e8452f0d55712eca51ed1168c916f1864e1d2791830c926bfe9ae167
-      lastVerified: '2026-06-15T00:26:26.290Z'
+      checksum: sha256:288ab27dfcc8337e4502bfc4e713b03f39635bc3bdd25a78ff1c3953ac02e0a1
+      lastVerified: '2026-07-05T02:51:22.310Z'
     review-contributor-pr:
       path: .sinapse-ai/development/tasks/review-contributor-pr.md
       layer: L2
@@ -7328,8 +7328,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:43a050de5ef51f53f890fd20f77ac567b297a40597f467b3bc6d00c8193c7fa6
-      lastVerified: '2026-06-15T00:26:26.326Z'
+      checksum: sha256:af24bf39ed706db9fca15dcc1bd3a0170c74e9956e3c2de58b221d4b28f14b9e
+      lastVerified: '2026-07-05T02:51:22.342Z'
     task-execution-report:
       path: .sinapse-ai/product/templates/task-execution-report.md
       layer: L2
@@ -10974,8 +10974,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:e4973a25c61101d278f102e4ed449421e50d876a274b2c4c2b150d00df97cb39
-      lastVerified: '2026-06-28T23:34:42.375Z'
+      checksum: sha256:9fbbd66ea38bc08696e42abca30810ae55e3c80aca703ec2ab0f7657eb3566be
+      lastVerified: '2026-07-05T02:51:22.407Z'
     circuit-breaker:
       path: .sinapse-ai/core/ids/circuit-breaker.js
       layer: L1
@@ -14227,8 +14227,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:9c566f77c11e95edc5537e13c5f5fda65949c4cef6a1f142f81d7b35347b808b
-      lastVerified: '2026-07-03T06:55:48.571Z'
+      checksum: sha256:c0aa3c0b60809ef2fbbe4d7b27ae44e48817d5a7266b6c5d7d5f1d313329a2a0
+      lastVerified: '2026-07-05T02:51:22.469Z'
     product-lead:
       path: .sinapse-ai/development/agents/product-lead.md
       layer: L2

@@ -307,11 +307,11 @@ sections:
       - If there were important notes from previous story that are relevant to this one, include them here
       - Put enough information in this section so that the dev agent should NEVER need to read the architecture documents, these notes along with the tasks and subtasks must give the Dev Agent the complete context it needs to comprehend with the least amount of overhead the information to complete the story, meeting all AC and completing all tasks+subtasks
 
-      **Opus 4.7 Optimization — Upfront Spec Block (REQUIRED):**
+      **Frontier-Model Optimization — Upfront Spec Block (REQUIRED):**
       The Dev Notes MUST begin with an "Upfront Spec" structured block (see `upfront-spec` sub-section).
       This consolidates intent + constraints + AC summary + key file locations at the top of Dev Notes,
       so the developer agent loads the full problem specification in one read instead of discovering
-      it mid-implementation. Adaptive thinking in Opus 4.7 benefits strongly from upfront specification.
+      it mid-implementation. Adaptive thinking in frontier models (Opus/Fable family) benefits strongly from upfront specification.
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
@@ -322,7 +322,7 @@ sections:
           **REQUIRED — appears at the TOP of Dev Notes.**
 
           Consolidate the full problem specification in a single structured block, so the developer
-          agent has everything needed before making the first tool call. This is an Opus 4.7 best
+          agent has everything needed before making the first tool call. This is a frontier-model best
           practice: upfront specification reduces mid-task re-planning and improves adaptive thinking
           quality.
 
@@ -348,11 +348,11 @@ sections:
       - id: prompt-hints
         title: Prompt Hints by Story Type
         instruction: |
-          **Opus 4.7 Adaptive Thinking Hints (STRUCTURED FIELDS — survive YAML parse).**
+          **Adaptive Thinking Hints (STRUCTURED FIELDS — survive YAML parse).**
 
           Emit the appropriate hint based on story type classification. These are NOT comments —
           they are structured fields consumed by the developer agent at story load time to calibrate
-          thinking depth for Opus 4.7's adaptive reasoning.
+          thinking depth for the frontier model's adaptive reasoning.
 
           Story type classification:
           - `critical` → migration, security, architecture, data integrity, irreversible operations

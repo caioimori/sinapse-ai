@@ -5,7 +5,7 @@
 ## Comando padrão de diagnóstico
 
 ```bash
-npx sinapse-ai doctor          # roda 12 health checks
+npx sinapse-ai doctor          # roda 16 health checks
 npx sinapse-ai doctor --fix    # tenta corrigir o que estiver errado
 ```
 

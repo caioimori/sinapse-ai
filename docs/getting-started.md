@@ -20,7 +20,7 @@ O wizard detecta seu ambiente, escolhe IDE (Claude Code ou Codex), instala os 17
 
 ```bash
 npx sinapse-ai status   # squads + agentes instalados
-npx sinapse-ai doctor   # 12 health checks
+npx sinapse-ai doctor   # 16 health checks
 ```
 
 Se algo falhar: `npx sinapse-ai doctor --fix` corrige automaticamente.

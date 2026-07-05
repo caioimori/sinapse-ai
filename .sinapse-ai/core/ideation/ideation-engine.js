@@ -2,7 +2,8 @@
  * Ideation Engine
  * Story 11.1 - Enhanced Capabilities
  *
- * AI-powered analysis for codebase improvements.
+ * Heuristic static analysis for codebase improvements (pure-Node scanners: grep,
+ * line counts, npm audit, madge — no LLM calls).
  * Suggests optimizations for performance, security, code quality, and UX.
  */
 

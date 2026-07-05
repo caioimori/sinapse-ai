@@ -195,7 +195,7 @@ Every AI-assisted copy deliverable MUST record:
 
 1. **Gate used** — which of the 4 gates (Trust / Light / Heavy / Scrap)
 2. **Prompt template(s) used** — from the library in §6
-3. **Model used** — GPT-5, Claude Opus 4.6, Gemini 2.5 Pro, etc.
+3. **Model used** — e.g. GPT-5, Claude (Opus/Fable family), Gemini 2.5 Pro
 4. **Final edit depth** — rough % AI vs human in the shipped version
 5. **Conversion outcome** (if tracked) — linked to the attribution system
 

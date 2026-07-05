@@ -1,5 +1,8 @@
 # 📘 SINAPSE v2.2 - Livro de Ouro (Future Vision)
 
+> **Nota histórica (2026-07-04):** documento de VISÃO da era V2.x — o escopo `@sinapse/*` nunca
+> foi publicado; o pacote real é **`sinapse-ai`** (`npx sinapse-ai install`).
+
 **Version:** 2.2.0-with-memory-layer  
 **Date:** June 2026 (as-if-implemented)  
 **Status:** Production Release  
@@ -761,7 +764,7 @@ Features:
 1. ✅ Read this summary (done!)
 2. → Review [Memory Layer Architecture](#memory-layer)
 3. → Review [Agent Lightning Details](#agent-lightning)
-4. → Upgrade: `npx @caioimori/sinapse upgrade v2.2`
+4. → Upgrade: `npx sinapse-ai update`
 5. → Configure: `sinapse memory setup`
 6. → Enable: `sinapse lightning enable`
 
