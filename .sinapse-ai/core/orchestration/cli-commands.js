@@ -73,6 +73,14 @@ async function orchestrate(storyId, options = {}) {
   console.log(chalk.cyan.bold(`  🚀 SINAPSE Orchestrator: ${storyId}`));
   console.log(chalk.cyan('═══════════════════════════════════════════════════════════\n'));
 
+  // Measured-scope guard (AF-20260704 Lote B): the help text already states the
+  // 1-story-per-run limit, but nothing said it at runtime — where it matters.
+  console.log(
+    chalk.dim(
+      'Scope: 1 story per run — multi-story chaining is not supported (see KNOWN-LIMITATIONS.md).\n',
+    ),
+  );
+
   if (options.phaseLimit) {
     console.log(
       chalk.yellow(
@@ -107,6 +115,11 @@ async function orchestrate(storyId, options = {}) {
     // Start from specific epic (AC5)
     if (options.epic) {
       console.log(chalk.yellow(`Starting from Epic ${options.epic}...`));
+      console.log(
+        chalk.yellow(
+          '⚠️  --epic resumes THIS story from the given epic — it does not chain multiple stories.',
+        ),
+      );
       result = await orchestrator.resumeFromEpic(options.epic);
     } else {
       console.log(chalk.green('Starting full pipeline...'));

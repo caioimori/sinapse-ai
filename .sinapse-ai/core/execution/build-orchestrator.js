@@ -87,9 +87,10 @@ const DEFAULT_CONFIG = {
   globalTimeout: 45 * 60 * 1000, // 45 minutes
   subtaskTimeout: 10 * 60 * 1000, // 10 minutes per subtask
 
-  // Epic 10: Parallel Execution
-  parallelMode: false, // Enable wave-based parallel execution
-  maxParallel: 4, // Max concurrent tasks per wave
+  // NOTE: dead `parallelMode`/`maxParallel` flags lived here (Epic 10) — never
+  // read by this orchestrator (waves were measured and rejected; see
+  // docs/epics/epic-orchestration-consolidation/KNOWN-LIMITATIONS.md). Removed
+  // with `useSubagentDispatch` rationale below (AF-20260704 Lote B).
   // NOTE: a dead `useSubagentDispatch` flag lived here — it was never read.
   // Agent routing happens one level up: epic-4 delegates to this BuildOrchestrator,
   // which builds via executeSubtaskWithClaude. Removed to kill the false affordance

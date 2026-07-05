@@ -262,8 +262,8 @@ class SubagentDispatcher extends EventEmitter {
       return this.agentMapping[task.type.toLowerCase()];
     }
 
-    // F2: if the task names a real agent id directly (any of the 189 squad/
-    // framework personas), honor it instead of inferring a generic one.
+    // F2: if the task names a real agent id directly (any squad/framework
+    // persona known to the resolver), honor it instead of inferring a generic one.
     if (this.agentResolver && task.name && this.agentResolver.has(task.name)) {
       return `@${this.agentResolver.resolve(task.name).id}`;
     }

@@ -63,7 +63,7 @@ function scanWrittenFiles(dir, depth = 0) {
       if (EXCLUDED_DIRS.has(entry.name)) continue;
       out.push(
         ...scanWrittenFiles(path.join(dir, entry.name), depth + 1).map((f) =>
-          path.join(entry.name, f)
+          path.join(entry.name, f),
         ),
       );
       continue;
