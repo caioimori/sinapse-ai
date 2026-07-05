@@ -158,6 +158,8 @@ const {
 
 module.exports = {
   // Main orchestrators
+  // @deprecated WorkflowOrchestrator has no internal consumers (AF-20260704);
+  // kept exported because the barrel is public package API. Prefer MasterOrchestrator.
   WorkflowOrchestrator,
   MasterOrchestrator, // Epic 0: ADE Master Orchestrator
 
@@ -290,6 +292,9 @@ module.exports = {
   STALE_SNAPSHOT_DAYS,
 
   // Story 12.4: Epic Context Accumulator (Projeto Bob)
+  // @deprecated EpicContextAccumulator has no internal consumers (AF-20260704;
+  // multi-story orchestration was measured and rejected — see KNOWN-LIMITATIONS.md).
+  // Kept exported because the barrel is public package API.
   EpicContextAccumulator,
   createEpicContextAccumulator,
   CompressionLevel,

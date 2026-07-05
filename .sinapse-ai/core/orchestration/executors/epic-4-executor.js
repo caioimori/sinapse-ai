@@ -193,12 +193,14 @@ class Epic4Executor extends EpicExecutor {
   async _executeViaBuildOrchestrator(storyId, context) {
     try {
       const { BuildOrchestrator } = require('../../execution/build-orchestrator');
+      // buildOptions is passed once, via build() — which already merges it over
+      // the constructor config ({...this.config, ...options}). Passing it in both
+      // places (AF-20260704 Lote B) was redundant, not wrong.
       const builder = new BuildOrchestrator({
         rootPath: this.projectRoot,
         useWorktree: false,
         autoMerge: false,
         runQA: false,
-        ...(context.buildOptions || {}),
       });
       return await builder.build(storyId, context.buildOptions || {});
     } catch (err) {
