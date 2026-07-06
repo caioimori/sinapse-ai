@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-05T02:51:22.584Z'
-  entityCount: 814
+  lastUpdated: '2026-07-06T05:44:51.322Z'
+  entityCount: 815
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -9795,8 +9795,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:56bbde48aaa4eb0de3ea7c95d5d1584a9ec8b753931097102fa696fb72d11848
-      lastVerified: '2026-07-02T22:41:00.573Z'
+      checksum: sha256:d115167d203651b7288c1ee2f2a3b2d1bc0b09d624d8e7bd0123c27574890b53
+      lastVerified: '2026-07-06T05:44:51.104Z'
     build-state-manager:
       path: .sinapse-ai/core/execution/build-state-manager.js
       layer: L1
@@ -9886,8 +9886,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c291a8d9dea32273577b5c726626f4bc7a94b6aa67a52c9f312d6448ca6ab910
-      lastVerified: '2026-06-18T04:29:34.042Z'
+      checksum: sha256:d7c440006585bd750d88da6926a766055e4b5bcb01974f30b4fc1fe8812c91a5
+      lastVerified: '2026-07-06T05:44:51.106Z'
     delegate-cli:
       path: .sinapse-ai/core/external-executors/delegate-cli.js
       layer: L1
@@ -11663,8 +11663,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a3fc11597f2dd2098ffa0b30acbe283506c4e64132c198ddf5c233c9791ab2b0
-      lastVerified: '2026-07-02T22:41:00.588Z'
+      checksum: sha256:55fe402101964487a8ad91c99a3cf1f2af3832a58bda294244cf5abb46fd8654
+      lastVerified: '2026-07-06T05:44:51.134Z'
     condition-evaluator:
       path: .sinapse-ai/core/orchestration/condition-evaluator.js
       layer: L1
@@ -11753,7 +11753,7 @@ entities:
       path: .sinapse-ai/core/orchestration/doc-first-resolver.js
       layer: L1
       type: module
-      purpose: Entity at .sinapse-ai\core\orchestration\doc-first-resolver.js
+      purpose: /^#{1,4}\s*(description|descri[cç][aã]o)/im,
       keywords:
         - doc
         - first
@@ -11772,8 +11772,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:e309338d1ca98d70953563a2cf92bae261264fac8001f389afdb7fbf968be353
-      lastVerified: '2026-07-03T08:39:26.307Z'
+      checksum: sha256:70ed2b0522825e74cdd229ee2e5c9a3908a026f229a7803edfee9aa7c8a69ec5
+      lastVerified: '2026-07-06T05:44:51.137Z'
     epic-context-accumulator:
       path: .sinapse-ai/core/orchestration/epic-context-accumulator.js
       layer: L1
@@ -11848,6 +11848,7 @@ entities:
       usedBy: []
       dependencies:
         - epic-executor
+        - spec-complexity
       externalDeps: []
       plannedDeps: []
       lifecycle: experimental
@@ -11855,8 +11856,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:da06c2b492104e453a8b18b1333bd2fd24123efb4933ab623045bff657b6d1d2
-      lastVerified: '2026-06-15T00:26:26.405Z'
+      checksum: sha256:adbf4790f4381727be0a5e6842d05471f92bbf6475495a1241f8799a95559add
+      lastVerified: '2026-07-06T05:44:51.138Z'
     epic-4-executor:
       path: .sinapse-ai/core/orchestration/executors/epic-4-executor.js
       layer: L1
@@ -11878,8 +11879,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:ffb124ce4751d3b6189cf03210eac9ee93be3754b760cfdb0188880f03ed928f
-      lastVerified: '2026-07-02T22:41:00.590Z'
+      checksum: sha256:9cf89dad552b9ea369fd9274fe1d14d3860f5150154c73d30a7883c18ce89931
+      lastVerified: '2026-07-06T05:44:51.139Z'
     epic-5-executor:
       path: .sinapse-ai/core/orchestration/executors/epic-5-executor.js
       layer: L1
@@ -12168,6 +12169,26 @@ entities:
         extensionPoints: []
       checksum: sha256:321eee21d44c8c2548a4a989b4fd9bd13782dc95f917098d67c514e0886000f5
       lastVerified: '2026-06-15T00:26:26.411Z'
+    spec-complexity:
+      path: .sinapse-ai/core/orchestration/spec-complexity.js
+      layer: L1
+      type: module
+      purpose: Entity at .sinapse-ai\core\orchestration\spec-complexity.js
+      keywords:
+        - spec
+        - complexity
+      usedBy:
+        - epic-3-executor
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:98263efa7189b42e8747929886eddb84b047083369d5636a401141de5b13385a
+      lastVerified: '2026-07-06T05:44:51.145Z'
     subagent-prompt-builder:
       path: .sinapse-ai/core/orchestration/subagent-prompt-builder.js
       layer: L1
