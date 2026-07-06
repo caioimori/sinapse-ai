@@ -577,8 +577,8 @@ npm audit --ignore-advisories=ADVISORY_ID
 ### Documentacao SINAPSE
 
 - [Regras de Uso MCP](../../.claude/rules/mcp-usage.md)
-- [Operacoes N8N](../../.claude/rules/n8n-operations.md)
-- [Estrutura de Documentacao](../../.claude/rules/documentation-structure.md)
+- Operacoes N8N
+- Estrutura de Documentacao
 
 ### Documentacao Externa
 

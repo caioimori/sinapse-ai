@@ -3,8 +3,8 @@
 **Versao:** 2.1 (Target State — Core/Pro Split)
 **Ultima Atualizacao:** 2026-02-09
 **Autor:** @architect (Aria)
-**Epic:** [MIS — Memory Intelligence System](../stories/epics/epic-memory-intelligence-system/EPIC-MIS-INDEX.md)
-**Baseado Em:** [MIS-1 Investigation](../stories/epics/epic-memory-intelligence-system/story-mis-1-investigation.md)
+**Epic:** MIS — Memory Intelligence System
+**Baseado Em:** MIS-1 Investigation
 **Documento Atual:** [memory-system.md](memory-system.md) (estado atual v1.0)
 **Tags:** memory, intelligence, session-digest, progressive-retrieval, self-learning, attention-routing, core-pro-split
 
@@ -1059,14 +1059,14 @@ gantt
 | Recurso | Caminho |
 |---------|---------|
 | Estado Atual (v1.0) | [memory-system.md](memory-system.md) |
-| Epic MIS Index | [EPIC-MIS-INDEX.md](../stories/epics/epic-memory-intelligence-system/EPIC-MIS-INDEX.md) |
-| MIS-1 Investigation | [story-mis-1-investigation.md](../stories/epics/epic-memory-intelligence-system/story-mis-1-investigation.md) |
-| MIS-2 Dead Code Cleanup | [story-mis-2-dead-code-cleanup.md](../stories/epics/epic-memory-intelligence-system/story-mis-2-dead-code-cleanup.md) |
-| Epic PRO Architecture | [EPIC-PRO-INDEX.md](../stories/epics/epic-pro-sinapse-pro-architecture/EPIC-PRO-INDEX.md) |
-| ADR-PRO-001 Repository Strategy | [adr-pro-001-repository-strategy.md](../architecture/adr/adr-pro-001-repository-strategy.md) |
-| ADR-PRO-003 Feature Gating | [adr-pro-003-feature-gating-licensing.md](../architecture/adr/adr-pro-003-feature-gating-licensing.md) |
-| Pro Detector | [bin/utils/pro-detector.js](../../bin/utils/pro-detector.js) |
-| Feature Registry | [pro/feature-registry.yaml](../../pro/feature-registry.yaml) |
+| Epic MIS Index | EPIC-MIS-INDEX.md |
+| MIS-1 Investigation | story-mis-1-investigation.md |
+| MIS-2 Dead Code Cleanup | story-mis-2-dead-code-cleanup.md |
+| Epic PRO Architecture | EPIC-PRO-INDEX.md |
+| ADR-PRO-001 Repository Strategy | adr-pro-001-repository-strategy.md |
+| ADR-PRO-003 Feature Gating | adr-pro-003-feature-gating-licensing.md |
+| Pro Detector | bin/utils/pro-detector.js |
+| Feature Registry | pro/feature-registry.yaml |
 
 ---
 

@@ -228,9 +228,9 @@ cat ~/.claude.json  # For Claude Code
 
 ## Related Documentation
 
-- [Claude Code Guide](./pt/platforms/claude-code.md)
-- [Agent Selection Guide](./guides/agent-selection-guide.md)
-- [MCP Global Setup](./guides/mcp-global-setup.md)
+- [Claude Code Guide](../pt/platforms/claude-code.md)
+- [Agent Selection Guide](./agent-selection-guide.md)
+- [MCP Global Setup](./mcp-global-setup.md)
 
 ---
 

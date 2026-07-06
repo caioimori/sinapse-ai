@@ -45,7 +45,7 @@ Each example includes comments explaining:
 
 ## Creating Your Own
 
-1. Start with the [Squad Template](../../../templates/squad/)
+1. Start with the [Squad Template](../../../.sinapse-ai/development/templates/squad-template/)
 2. Reference these examples for patterns
 3. Follow the [Squads Guide](../squads-guide.md)
 

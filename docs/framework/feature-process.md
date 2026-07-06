@@ -17,13 +17,13 @@ Ideia → Discussao → Decisao → Story → Implementacao → Release
 ## Passo 1: Abra uma Discussion ou Issue
 
 **Para ideias e sugestoes:**
-- Abra uma [Discussion](../../discussions) na categoria **Ideas**
+- Abra uma [Discussion](https://github.com/caioimori/sinapse-ai/discussions) na categoria **Ideas**
 - Descreva o problema que a feature resolve
 - Proponha uma solucao (pode ser alto nivel)
 - Inclua exemplos de uso se possivel
 
 **Para bugs ou melhorias pontuais:**
-- Abra uma [Issue](../../issues) usando o template **Feature Request** ou **Bug Report**
+- Abra uma [Issue](https://github.com/caioimori/sinapse-ai/issues) usando o template **Feature Request** ou **Bug Report**
 - Preencha todos os campos do template
 
 ---
@@ -88,7 +88,7 @@ A implementacao segue o Story Development Cycle (SDC):
 @sprint-lead *draft → @product-lead *validate → @developer *develop → @quality-gate *qa-gate → @devops *push
 ```
 
-O contribuidor pode implementar a feature seguindo o [CONTRIBUTING.md](../CONTRIBUTING.md).
+O contribuidor pode implementar a feature seguindo o [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ---
 
@@ -155,8 +155,8 @@ Contribuidores cujas ideias sao implementadas recebem credito em:
 ## Perguntas?
 
 - Abra uma Discussion na categoria **Q&A**
-- Consulte o [Troubleshooting Guide](troubleshooting.md)
+- Consulte o [Troubleshooting Guide](../troubleshooting.md)
 
 ---
 
-_Veja tambem: [CONTRIBUTING.md](../CONTRIBUTING.md) | [Guiding Principles](guiding-principles.md) | [Code of Conduct](../CODE_OF_CONDUCT.md)_
+_Veja tambem: [CONTRIBUTING.md](../../CONTRIBUTING.md) | [Guiding Principles](guiding-principles.md) | [Code of Conduct](../../CODE_OF_CONDUCT.md)_

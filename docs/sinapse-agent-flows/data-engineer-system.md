@@ -767,7 +767,7 @@ Erro: Another migration is running
 
 ### Relacionados
 
-- [BACKLOG-MANAGEMENT-SYSTEM.md](../BACKLOG-MANAGEMENT-SYSTEM.md)
+- BACKLOG-MANAGEMENT-SYSTEM.md
 - [DEV-SYSTEM.md](DEV-SYSTEM.md)
 
 ---

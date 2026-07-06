@@ -279,4 +279,4 @@ O SDC Phase 3 suporta 3 modos. Escolha baseado na situacao:
 
 ---
 
-_Veja tambem: [Agent Reference](agent-reference.md) | [Architecture Overview](../architecture-overview.md) | [Story Lifecycle](./../CONTRIBUTING.md)_
+_Veja tambem: [Agent Reference](agent-reference.md) | [Architecture Overview](../framework/architecture-overview.md) | [Story Lifecycle](../../CONTRIBUTING.md)_

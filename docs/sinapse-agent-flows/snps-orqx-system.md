@@ -525,14 +525,14 @@ agent:
 
 ### Arquivos Core
 
-- [Agente sinapse-orqx](../../.sinapse-ai/development/agents/sinapse-orqx.md)
-- [Knowledge Base](../../.sinapse-ai/development/data/sinapse-kb.md)
+- [Agente sinapse-orqx](../../.sinapse-ai/development/agents/snps-orqx.md)
+- [Knowledge Base](../../.sinapse-ai/data/sinapse-kb.md)
 - [Guia do Usuario](../../.sinapse-ai/user-guide.md)
 
 ### Standards e Documentação
 
-- [SINAPSE Framework Master](../../.sinapse-ai/docs/standards/SINAPSE-FRAMEWORK-MASTER.md)
-- [SINAPSE Livro de Ouro](../../.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO.md)
+- SINAPSE Framework Master
+- [SINAPSE Livro de Ouro](../../.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO-V2.2-SUMMARY.md)
 - [Agent Personalization Standard](../../.sinapse-ai/docs/standards/AGENT-PERSONALIZATION-STANDARD-V1.md)
 
 ### Diretorio de Tasks

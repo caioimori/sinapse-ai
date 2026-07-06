@@ -1103,7 +1103,7 @@ node --inspect node_modules/.bin/jest
 ## Related Documentation
 
 - [User Guide](./user-guide.md) - End-user documentation
-- [Architecture Overview](../architecture/ARCHITECTURE-INDEX.md) - System design
+- [Architecture Overview](../pt/architecture/ARCHITECTURE-INDEX.md) - System design
 - [Contributing Squads](./contributing-squads.md) - Squad development
 - [Quality Gates Guide](./quality-gates.md) - Quality assurance
 - [MCP Global Setup](./mcp-global-setup.md) - MCP configuration

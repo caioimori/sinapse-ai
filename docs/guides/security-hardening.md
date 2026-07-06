@@ -1349,7 +1349,7 @@ Currently, SINAPSE does not have a formal bug bounty program. However, significa
 
 ## Related Documentation
 
-- [Security Best Practices](../security-best-practices.md) - General security guidelines
+- [Security Best Practices](../security/security-best-practices.md) - General security guidelines
 - [Permission Modes Guide](./permission-modes.md) - Agent autonomy control
 - [MCP Global Setup](./mcp-global-setup.md) - Secure MCP configuration
 - [Quality Gates](./quality-gates.md) - Security checks in CI/CD

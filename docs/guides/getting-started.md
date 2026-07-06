@@ -176,7 +176,7 @@ npx sinapse-ai info
 - **Explorar os squads** — `@snps-orqx *status` mostra todos os dominios disponiveis (alias `@sinapse-orqx` ate v1.3.0)
 - **Entender os workflows** — Leia `docs/guides/workflows-overview.md`
 - **Integracao com IDEs** — Veja [IDE Integration](./ide-integration.md) para Claude Code, Gemini CLI, Codex CLI, Cursor e GitHub Copilot
-- **Contribuir** — Leia [CONTRIBUTING.md](../CONTRIBUTING.md)
+- **Contribuir** — Leia [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ---
 

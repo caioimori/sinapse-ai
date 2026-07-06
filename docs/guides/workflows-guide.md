@@ -399,7 +399,7 @@ For complete documentation for each workflow, including detailed step-by-step gu
 
 ## Related Documentation
 
-- [HybridOps Workflow Diagram](./hybridOps/workflow-diagram.md) - Human-agent collaboration patterns
+- HybridOps Workflow Diagram - Human-agent collaboration patterns
 - [Agent Reference Guide](../agent-reference-guide.md) - Available agents and their capabilities
 - [Documentation-First Development](./user-guide.md#documentation-first-development) - The documentation pipeline
 

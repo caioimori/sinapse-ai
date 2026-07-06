@@ -2,7 +2,7 @@
 
 Migrate from monolithic `core-config.yaml` to the layered configuration hierarchy.
 
-**ADR:** [ADR-PRO-002 — Configuration Hierarchy](../architecture/adr/adr-pro-002-configuration-hierarchy.md)
+**ADR:** ADR-PRO-002 — Configuration Hierarchy
 **Story:** PRO-4 — Core-Config Split Implementation
 
 ---

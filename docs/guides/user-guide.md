@@ -153,7 +153,7 @@ Each command has exactly one authoritative agent owner. When multiple agents mig
 | `*develop`     | @developer       | Use @developer for implementation     |
 | `*review`      | @quality-gate        | Use @quality-gate for code review         |
 
-See the [Command Authority Matrix](../architecture/command-authority-matrix.md) for the complete mapping.
+See the Command Authority Matrix for the complete mapping.
 
 ---
 
@@ -436,13 +436,13 @@ sinapse rebuild
 
 1. **Quick Start** - Follow this guide to get up and running
 2. **Agent Reference** - Learn about each agent's capabilities: [Agent Reference Guide](../agent-reference-guide.md)
-3. **Architecture** - Understand the system: [Architecture Overview](../architecture/ARCHITECTURE-INDEX.md)
+3. **Architecture** - Understand the system: [Architecture Overview](../pt/architecture/ARCHITECTURE-INDEX.md)
 4. **Squads** - Extend functionality: [Squads Guide](./squads-guide.md)
 
 ### Advanced Topics
 
 - [Quality Gates Guide](./quality-gates.md)
-- [Multi-Repo Strategy](../architecture/multi-repo-strategy.md)
+- [Multi-Repo Strategy](../pt/architecture/multi-repo-strategy.md)
 - [MCP Integration](./mcp-global-setup.md)
 - [IDE Integration](../ide-integration.md)
 
@@ -498,7 +498,7 @@ before building a new agent from scratch.
 - [Getting Started](../getting-started.md)
 - [Installation Guide](../installation/README.md)
 - [Agent Reference Guide](../agent-reference-guide.md)
-- [Architecture Overview](../architecture/ARCHITECTURE-INDEX.md)
+- [Architecture Overview](../pt/architecture/ARCHITECTURE-INDEX.md)
 - [Squads Guide](./squads-guide.md)
 - [Troubleshooting](../troubleshooting.md)
 

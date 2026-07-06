@@ -1,6 +1,6 @@
 # SINAPSE Roadmap
 
-> 🇧🇷 [Versão em Português](ROADMAP-PT.md)
+> 🇧🇷 [Versão em Português](../pt/roadmap.md)
 
 This document outlines the planned development direction for SINAPSE.
 
@@ -89,15 +89,15 @@ Have a new idea? Open an [Idea Discussion](https://github.com/caioimori/sinapse-
 
 ### 3. Write an RFC
 
-For significant features that need detailed design, [submit an RFC](/.github/RFC_TEMPLATE.md) following our structured process.
+For significant features that need detailed design, [submit an RFC](../../.github/RFC_TEMPLATE.md) following our structured process.
 
 ### 4. Contribute Directly
 
-Found something you want to implement? Check our [Contributing Guide](CONTRIBUTING.md) and [Feature Process](docs/feature-process.md).
+Found something you want to implement? Check our [Contributing Guide](../../CONTRIBUTING.md) and [Feature Process](feature-process.md).
 
 ## Changelog
 
-For what's already shipped, see [CHANGELOG.md](CHANGELOG.md).
+For what's already shipped, see [CHANGELOG.md](../../CHANGELOG.md).
 
 ## Update Process
 

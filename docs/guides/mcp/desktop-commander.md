@@ -344,9 +344,9 @@ npm install -g @anthropic/desktop-commander@latest
 
 - [Docker Gateway Tutorial](./docker-gateway-tutorial.md)
 - [MCP Global Setup Guide](../mcp-global-setup.md)
-- [Docker MCP Setup](../../docker-mcp-setup.md)
+- [Docker MCP Setup](../docker-mcp-setup.md)
 - [MCP Usage Rules](../../../.claude/rules/mcp-usage.md)
-- [Agent Tool Integration](../../architecture/agent-tool-integration-guide.md)
+- [Agent Tool Integration](../../pt/architecture/agent-tool-integration-guide.md)
 
 ---
 

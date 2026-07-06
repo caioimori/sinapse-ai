@@ -74,7 +74,7 @@ Localizacao: `.sinapse-ai/development/tasks/`
 
 ### Workflows
 
-Workflows conectam tasks em sequencias. O SINAPSE tem 4 workflows primarios (detalhados em [workflows-overview.md](guides/workflows-overview.md)):
+Workflows conectam tasks em sequencias. O SINAPSE tem 4 workflows primarios (detalhados em [workflows-overview.md](../guides/workflows-overview.md)):
 
 1. **Story Development Cycle (SDC)** --- fluxo principal de desenvolvimento
 2. **QA Loop** --- ciclo iterativo de revisao-correcao
@@ -237,4 +237,4 @@ Cada etapa e rastreavel, documentada e verificavel. O sistema e desenhado para q
 
 ---
 
-_Veja tambem: [Agent Reference](guides/agent-reference.md) | [Workflows Overview](guides/workflows-overview.md) | [Guiding Principles](guiding-principles.md)_
+_Veja tambem: [Agent Reference](../guides/agent-reference.md) | [Workflows Overview](../guides/workflows-overview.md) | [Guiding Principles](guiding-principles.md)_

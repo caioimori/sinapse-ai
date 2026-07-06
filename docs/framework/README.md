@@ -83,9 +83,9 @@ For backward compatibility, framework docs remain accessible at **both** locatio
 
 ## 🔗 Related Documents
 
-- **Architecture Overview**: [`docs/architecture/`](../architecture/)
+- **Architecture Overview**: [`docs/architecture/`](../pt/architecture/)
 - **Installation Guide**: [`docs/installation/`](../installation/)
-- **Platform Guides**: [`docs/platforms/`](../platforms/)
+- **Platform Guides**: [`docs/platforms/`](../pt/platforms/)
 - **Architecture Decisions**: `docs/decisions/` *(coming soon)*
 - **Epic Planning**: `docs/epics/` *(coming soon)*
 

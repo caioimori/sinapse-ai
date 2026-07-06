@@ -1,6 +1,6 @@
 # SINAPSE-AI Security Guide
 
-> For vulnerability reporting, see [SECURITY.md](../SECURITY.md)
+> For vulnerability reporting, see [SECURITY.md](../../SECURITY.md)
 
 ---
 
@@ -204,7 +204,7 @@ SINAPSE-AI uses 17 Claude Code hooks organized by trigger event:
 
 ### For Production Deployments
 
-1. **Enable RLS on all tables** with user data (see [RLS Patterns](../.sinapse-ai/data/rls-security-patterns.md))
+1. **Enable RLS on all tables** with user data (see [RLS Patterns](../../.sinapse-ai/data/rls-security-patterns.md))
 2. **Never expose `service_role`** keys in frontend code
 3. **Configure CORS** with explicit origins (never use `origin: '*'` in production)
 4. **Add rate limiting** to all public API endpoints

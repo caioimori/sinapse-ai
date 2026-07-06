@@ -1,6 +1,6 @@
 # NPX Installation Guide
 
-> 🌐 **EN** | [PT](./pt/npx-install.md)
+> 🌐 **EN** | [PT](../pt/npx-install.md)
 
 ---
 

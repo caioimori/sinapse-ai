@@ -796,7 +796,7 @@ Os handoff prompts facilitam a transicao entre agentes:
 ### Documentacao Relacionada
 
 - [SINAPSE Knowledge Base](../../../.sinapse-ai/data/sinapse-kb.md) - Base de conhecimento do framework
-- [Technical Preferences](../../../.sinapse-ai/development/data/technical-preferences.md) - Preferencias tecnicas do projeto
+- [Technical Preferences](../../../.sinapse-ai/data/technical-preferences.md) - Preferencias tecnicas do projeto
 - [IDE Development Workflow](../../../.sinapse-ai/data/sinapse-kb.md#IDE-Development-Workflow) - Fluxo de desenvolvimento no IDE
 
 ---
