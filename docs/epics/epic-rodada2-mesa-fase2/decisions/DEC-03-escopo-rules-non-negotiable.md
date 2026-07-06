@@ -1,7 +1,8 @@
 # DEC-03 — Escopo por path das rules NON-NEGOTIABLE situacionais
 
-**Status:** Aceito (provisório — Conservative Default; híbrido recomendado aguarda go explícito do dono)
-**Data:** 2026-07-06
+**Status:** Aceito — **híbrido (opção C) EXECUTADO** com go explícito do dono
+("Pode ir sempre na melhor decisão", 2026-07-06) · Story `mesa2-rules-hybrid`
+**Data:** 2026-07-06 (provisório conservador → executado no mesmo dia após o go)
 **Item da Mesa:** #6 — "escopar por path as 4 rules situacionais (~625 linhas/prompt)"
 **Evidência:** `audits/AF-20260704-rodada2-verificacao.md` §Mediums — "7 rules sempre-ativas com
 conteúdo situacional; 4 escopáveis ~625 linhas, 3 genuinamente globais; tensão com NON-NEGOTIABLE".
@@ -45,19 +46,23 @@ Não é defeito de código — é um trade-off de política. Por isso não é ex
   `paths:`. Corta a maior parte das ~625 linhas SEM perder enforcement — o gate segue sempre carregado,
   só o detalhe carrega no trabalho correspondente. Honra os dois NON-NEGOTIABLE.
 
-## Decisão (provisória)
+## Decisão
 
-**Manter as 7 sempre-ativas (opção A) por ora** — Conservative Default (Art. XI): com o dono ausente
-e tratando-se de mudança em enforcement de regra NON-NEGOTIABLE, em dúvida se **mantém**. Nenhuma
-mudança de comportamento neste PR.
+**Opção C (híbrido) — executada.** Registrada primeiro como provisória-conservadora (opção A,
+Conservative Default, dono ausente); no mesmo dia o dono deu o go explícito ("Pode ir sempre na
+melhor decisão visando qualidade, performance e economia de token") e o híbrido foi implementado
+via story `mesa2-rules-hybrid`:
 
-**Recomendação registrada:** a opção **C (híbrido)** é o caminho preferido de resolução — é a única
-que honra token-economy e enforcement ao mesmo tempo. Como refatora regras NON-NEGOTIABLE, exige
-**go explícito do dono** (não é ação autônoma). Quando o Caio aprovar, o híbrido vira story própria
-(doc-first, cada rule verificada), separando core (always-on) de detalhe (path-scoped).
+- Cada uma das 4 rules situacionais virou **core curto sempre-ativo** (a lei + gates + anti-patterns
+  núcleo — enforcement 100% preservado) + **companion** `<rule>-reference.md` com o detalhe
+  operacional, escopado por `paths:` (formato das 15 rules já escopadas).
+- Zero conteúdo deletado — apenas movido; redação dos cores é destilação fiel (Art. IV).
+- Resultado medido: always-on das 7 rules caiu de **~856 → 445 linhas/prompt (−48%)**; nos 4
+  refatorados, 625 → 210 (−66%).
+- Verificação adversarial por workflow: zero-perda normativa + enforcement no core + formato paths.
 
 ## Consequências
 
-- Zero regressão agora; a análise fica documentada para a decisão informada do dono.
-- Item 6 da Mesa sai como **resolvido-provisório** (decisão conservadora + recomendação pendente de go),
-  não como mudança executada.
+- Economia recorrente de contexto em todo prompt fora dos paths, sem nenhum MUST/gate sair do always-on.
+- Companions são artefato distribuído (npm `files` inclui `.claude/rules/`) — instalam junto.
+- Item 6 da Mesa sai como **FECHADO (executado)**.
