@@ -12,6 +12,7 @@ const {
   classifyProjectType,
   resolveDocFirstState,
   assessProjectMaturity,
+  storyHasSubstance,
 } = require('../../../.sinapse-ai/core/orchestration/doc-first-resolver');
 
 function mkTmp() {
@@ -76,19 +77,67 @@ describe('resolveDocFirstState', () => {
     expect(state.gate.missing).toEqual(['story (status >= Ready)']);
   });
 
-  it('satisfies the gate when PRD + epic + a Ready story all exist', () => {
+  // A substantive Ready story: sections + an AC + a traceability signal.
+  const SUBSTANTIVE_STORY = [
+    '---',
+    'status: "Ready"',
+    'type: feature',
+    '---',
+    '# Story 1.1',
+    '',
+    '**Evidência:** audit AF-1',
+    '',
+    '## Descrição',
+    'Faz X porque Y.',
+    '',
+    '## Acceptance Criteria',
+    '- [ ] AC1: Given A, When B, Then C.',
+    '',
+    '## Escopo',
+    '**IN:** X. **OUT:** Y.',
+    '',
+  ].join('\n');
+
+  it('satisfies the gate when PRD + epic + a substantive Ready story all exist', () => {
     const root = mkTmp();
     fs.mkdirSync(path.join(root, 'docs', 'epics'), { recursive: true });
     fs.mkdirSync(path.join(root, 'docs', 'stories'), { recursive: true });
     fs.writeFileSync(path.join(root, 'docs', 'prd.md'), '# PRD\nreal content');
     fs.writeFileSync(path.join(root, 'docs', 'epics', 'epic-1.md'), '# Epic 1');
-    fs.writeFileSync(
-      path.join(root, 'docs', 'stories', '1.1.story.md'),
-      '---\nstatus: "Ready"\ntype: feature\n---\n# Story',
-    );
+    fs.writeFileSync(path.join(root, 'docs', 'stories', '1.1.story.md'), SUBSTANTIVE_STORY);
     const state = resolveDocFirstState({ projectRoot: root, brief: 'criar um site' });
     expect(state.gate.satisfied).toBe(true);
+    expect(state.gate.substance).toBe(true);
     expect(state.gate.missing).toEqual([]);
+    expect(state.gate.concerns).toEqual([]);
+  });
+
+  it('M2: blocks a Ready story that lacks substance (empty body)', () => {
+    const root = mkTmp();
+    fs.mkdirSync(path.join(root, 'docs', 'stories'), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, 'docs', 'stories', '1.1.story.md'),
+      '---\nstatus: "Ready"\n---\n# Story',
+    );
+    const state = resolveDocFirstState({ projectRoot: root, brief: 'corrige o bug' });
+    expect(state.gate.readyStory).toBe(true);
+    expect(state.gate.substance).toBe(false);
+    expect(state.gate.satisfied).toBe(false);
+    expect(state.gate.missing.some((m) => m.startsWith('story substance'))).toBe(true);
+  });
+
+  it('M2: flags missing traceability as a non-blocking concern', () => {
+    const root = mkTmp();
+    fs.mkdirSync(path.join(root, 'docs', 'stories'), { recursive: true });
+    // Substantive (sections + AC) but no evidence/requirement reference.
+    fs.writeFileSync(
+      path.join(root, 'docs', 'stories', '1.1.story.md'),
+      '---\nstatus: "Ready"\n---\n# T\n\n## Descrição\nfaz\n\n## Acceptance Criteria\n- [ ] faz algo concreto\n\n## Escopo\nin',
+    );
+    const state = resolveDocFirstState({ projectRoot: root, brief: 'corrige o bug' });
+    expect(state.gate.substance).toBe(true);
+    expect(state.gate.satisfied).toBe(true); // concern does not block
+    expect(state.gate.concerns.length).toBeGreaterThan(0);
   });
 
   it('does NOT count a Draft story as Ready', () => {
@@ -111,6 +160,37 @@ describe('resolveDocFirstState', () => {
     const brief = state.artifacts.find((a) => a.id === 'brief');
     expect(prd.exists).toBe(true);
     expect(brief.exists).toBe(false);
+  });
+});
+
+describe('storyHasSubstance (M2)', () => {
+  function tmpStory(content) {
+    const dir = mkTmp();
+    const f = path.join(dir, 's.md');
+    fs.writeFileSync(f, content);
+    return f;
+  }
+
+  it('reports every missing required section', () => {
+    const v = storyHasSubstance(tmpStory('# Only a title'));
+    expect(v.ok).toBe(false);
+    expect(v.missingSections).toEqual(
+      expect.arrayContaining(['Descrição/Description', 'Acceptance Criteria', 'Escopo/Scope']),
+    );
+  });
+
+  it('accepts a Given/When/Then AC without a checkbox', () => {
+    const v = storyHasSubstance(
+      tmpStory('# T\n## Description\nx\n## Acceptance Criteria\nGiven a, when b, then c.\n## Scope\nin'),
+    );
+    expect(v.ok).toBe(true);
+    expect(v.hasAcItem).toBe(true);
+  });
+
+  it('degrades open (never blocks) on a read error', () => {
+    const v = storyHasSubstance(path.join(mkTmp(), 'does-not-exist.md'));
+    expect(v.ok).toBe(true);
+    expect(v.degraded).toBe(true);
   });
 });
 

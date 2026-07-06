@@ -956,9 +956,9 @@ files:
     type: core
     size: 10880
   - path: core/orchestration/doc-first-resolver.js
-    hash: sha256:e309338d1ca98d70953563a2cf92bae261264fac8001f389afdb7fbf968be353
+    hash: sha256:70ed2b0522825e74cdd229ee2e5c9a3908a026f229a7803edfee9aa7c8a69ec5
     type: core
-    size: 14762
+    size: 19360
   - path: core/orchestration/epic-context-accumulator.js
     hash: sha256:9f38c7e3b4de7fbcfeae5fe1dc88aa3f0ae38667f1dc1da025519d40b3b9daa9
     type: core
@@ -1364,7 +1364,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:5da1abb082e4586d9d8972be8fa1d0616014dc2f74cb49a36c5e0e1bf13c7561
+    hash: sha256:87e0464ae5a6130cc3f7389d994f9e46a5ca0cd736e842c03be117ebcfc47699
     type: data
     size: 557940
   - path: data/learned-patterns.yaml

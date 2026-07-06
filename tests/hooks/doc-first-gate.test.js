@@ -53,13 +53,27 @@ describe('doc-first-gate hook', () => {
     expect(exit).toBe(2); // the scaffold bypass must NOT open the gate
   });
 
-  it('ALLOWS when PRD + epic + Ready story all exist', () => {
+  it('ALLOWS when PRD + epic + a substantive Ready story all exist', () => {
+    const root = mkTmp();
+    writeFile(root, 'docs/prd.md', '# PRD');
+    writeFile(root, 'docs/epics/e1.md', '# Epic 1');
+    // M2: the Ready story must carry substance (sections + an AC), not just status.
+    writeFile(
+      root,
+      'docs/stories/1.1.md',
+      '---\nstatus: "Ready"\n---\n# S\n\n**Evidência:** audit\n\n## Descrição\nx\n\n## Acceptance Criteria\n- [ ] AC1: Given a, When b, Then c\n\n## Escopo\nin',
+    );
+    const exit = runHook(root, path.join(root, 'src', 'index.js'));
+    expect(exit).toBe(0);
+  });
+
+  it('M2: BLOCKS a Ready story that lacks substance (status set, empty body)', () => {
     const root = mkTmp();
     writeFile(root, 'docs/prd.md', '# PRD');
     writeFile(root, 'docs/epics/e1.md', '# Epic 1');
     writeFile(root, 'docs/stories/1.1.md', '---\nstatus: "Ready"\n---\n# S');
     const exit = runHook(root, path.join(root, 'src', 'index.js'));
-    expect(exit).toBe(0);
+    expect(exit).toBe(2);
   });
 
   it('ALLOWS (defers to story-gate) on an existing project with code/package.json', () => {
