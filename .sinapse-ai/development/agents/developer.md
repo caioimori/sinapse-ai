@@ -279,11 +279,9 @@ dependencies:
 
   coderabbit_integration:
     enabled: true
-    installation_mode: wsl
-    wsl_config:
-      distribution: Ubuntu
-      installation_path: ~/.local/bin/coderabbit
-      working_directory: ${PROJECT_ROOT}
+    # CodeRabbit mechanics (WSL execution, timeout, commands, report location) are
+    # single-sourced in .sinapse-ai/core-config.yaml + .claude/rules/coderabbit-integration.md.
+    # Only this agent's review focus/policy lives here — see Story rodada2-m6.
     usage:
       - Pre-commit quality check - run before marking story complete
       - Catch issues early - find bugs, security issues, code smells during development
@@ -330,25 +328,6 @@ dependencies:
         - HALT and report to user
         - DO NOT mark story complete
 
-    commands:
-      dev_pre_commit_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
-    execution_guidelines: |
-      CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
-
-      **How to Execute:**
-      1. Use 'wsl bash -c' wrapper for all commands
-      2. Navigate to project directory in WSL path format (/mnt/c/...)
-      3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
-
-      **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
-
-      **Self-Healing:** Max 2 iterations for CRITICAL issues only
-
-      **Error Handling:**
-      - If "coderabbit: command not found" → verify wsl_config.installation_path
-      - If timeout → increase timeout, review is still processing
-      - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
-    report_location: docs/qa/coderabbit-reports/
     integration_point: 'Part of story completion workflow in develop-story.md'
 
   decision_logging:

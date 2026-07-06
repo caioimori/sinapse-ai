@@ -1,6 +1,6 @@
 # Épico: Rodada 2 — Mesa de otimizações atacáveis (AF-20260704)
 
-**Status:** In Progress
+**Status:** Done (6/6 stories) — M1 #357 · M2 #358 · M3 #359 · M4 #360 · M5 #361 · M6 (este PR)
 **Origem:** Mesa de decisões da 2ª rodada de verificação da auditoria Fable 5
 (`audits/AF-20260704-rodada2-verificacao.md`, §Mesa) + item de backlog G8.
 **Autorização:** Caio, 2026-07-05 (YOLO doc-first; publicação segue gate próprio).

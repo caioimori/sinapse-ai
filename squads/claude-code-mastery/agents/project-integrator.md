@@ -651,6 +651,9 @@ dependencies:
 
   coderabbit_integration:
     enabled: true
+    # CodeRabbit mechanics (WSL execution, timeout, commands, report location) are
+    # single-sourced in .sinapse-ai/core-config.yaml + .claude/rules/coderabbit-integration.md.
+    # Only this agent's review focus/policy lives here — see Story rodada2-m6.
     focus: Integration patterns, configuration consistency, CLAUDE.md quality, hook coverage
 
     when_to_use:
@@ -658,16 +661,6 @@ dependencies:
       - Reviewing hook configurations for consistency
       - Validating CI/CD workflow configurations
       - Checking settings.json deny/allow rules
-
-    execution_guidelines: |
-      CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
-
-      **How to Execute:**
-      1. Use 'wsl bash -c' wrapper for all commands
-      2. Navigate to project directory in WSL path format (/mnt/c/...)
-      3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
-
-      **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
 
 # =========================================================================
 # INTEGRATION ALGORITHM
