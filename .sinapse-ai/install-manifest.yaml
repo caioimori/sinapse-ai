@@ -192,9 +192,9 @@ files:
     type: cli
     size: 5908
   - path: core-config.yaml
-    hash: sha256:3ab9c9a61ed541123178c1a13ea35dd12549de8fd5812ed2266a9ab77bfad5b4
+    hash: sha256:cf8a5e6baaff0c26eaeebcdb876f6f329278e81e6b5448499b622c47772c3bf1
     type: config
-    size: 13160
+    size: 15012
   - path: core/atlas/atlas-data.js
     hash: sha256:ab6ef91bd2de1498dbe3892a80b5f18d67624db1fb2da74b0e53f83de902f383
     type: core
@@ -1476,21 +1476,21 @@ files:
     type: agent
     size: 14918
   - path: development/agents/architect.md
-    hash: sha256:b25f7a5d927b8645af278828d99af3b46e0d21b2d5dd443dbec0e8af2d195e1c
+    hash: sha256:eb26e12277ff48e41af5147a72bed8ddf96139546b07a9c75b29970edb7a912b
     type: agent
-    size: 23749
+    size: 23345
   - path: development/agents/data-engineer.md
-    hash: sha256:8f965782df49716c4d043327f8cdf430980794c0bd4984b1b3fc0dc774b2323c
+    hash: sha256:de529096dfe0e8b1cb05f664e0caa9e58b7a941bb497580cd8a4bb51d0756867
     type: agent
-    size: 23210
+    size: 22822
   - path: development/agents/developer.md
-    hash: sha256:da98be997a4b86f96b8c4f822ae189dcd4d2698d19609c6d1d2b7a56d879eeb8
+    hash: sha256:5de86f5515bf49214328bd32983bba73e7789c0864e66b18af51d2534213a199
     type: agent
-    size: 28149
+    size: 27322
   - path: development/agents/devops.md
-    hash: sha256:c0aa3c0b60809ef2fbbe4d7b27ae44e48817d5a7266b6c5d7d5f1d313329a2a0
+    hash: sha256:e3a95759b775fdf27934fe5b2a6448b7eb1c98904c2a974c3db20dd7859e8e02
     type: agent
-    size: 26954
+    size: 25968
   - path: development/agents/product-lead.md
     hash: sha256:a0d13d7e04c602000eae91dff54bf4030f11e29b4182e04c763c381086b9e7b7
     type: agent
@@ -1500,9 +1500,9 @@ files:
     type: agent
     size: 16959
   - path: development/agents/quality-gate.md
-    hash: sha256:a2a4ec39d9d75b0f9872104157094f2846453c962974f551fee1d7a2dccfbec1
+    hash: sha256:0d1dadd456826d1604d9009d12549bd0bb0b9e289775c791ad5d3094c5a8a388
     type: agent
-    size: 22302
+    size: 21342
   - path: development/agents/snps-orqx.md
     hash: sha256:8e4145cdf25f57d366e0f6b3563e907c7a3ba8b2d6d3af0a6e573927f4a0321c
     type: agent
@@ -4244,9 +4244,9 @@ files:
     type: template
     size: 10990
   - path: product/templates/story-tmpl.yaml
-    hash: sha256:af24bf39ed706db9fca15dcc1bd3a0170c74e9956e3c2de58b221d4b28f14b9e
+    hash: sha256:3dbcd522e69b86715f32eaf0cd13ce3a2631b5d2fc4f068c33df9593b6dbbfc2
     type: template
-    size: 16725
+    size: 17050
   - path: product/templates/story.hbs
     hash: sha256:126c55c30e2e49816acc7c1712e71e7c26874b010edfe34e8d7890bac67095b2
     type: template
