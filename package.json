@@ -134,6 +134,7 @@
     "validate:cross-refs": "node scripts/validate-cross-refs.js",
     "validate:agents-md": "node scripts/validate-agents-md.js",
     "validate:agents-md:fix": "node scripts/validate-agents-md.js --fix",
+    "validate:tool-descriptions": "node scripts/validate-tool-descriptions.js",
     "validate:all": "node scripts/validate-all.js",
     "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
     "validate:squad-yaml": "node scripts/sync-squad-yaml-components.js --check",
