@@ -9,7 +9,7 @@
 #
 version: 1.21.0
 generator: scripts/generate-install-manifest.js
-file_count: 1159
+file_count: 1160
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -972,9 +972,9 @@ files:
     type: core
     size: 11379
   - path: core/orchestration/executors/epic-3-executor.js
-    hash: sha256:da06c2b492104e453a8b18b1333bd2fd24123efb4933ab623045bff657b6d1d2
+    hash: sha256:adbf4790f4381727be0a5e6842d05471f92bbf6475495a1241f8799a95559add
     type: core
-    size: 9463
+    size: 10209
   - path: core/orchestration/executors/epic-4-executor.js
     hash: sha256:9cf89dad552b9ea369fd9274fe1d14d3860f5150154c73d30a7883c18ce89931
     type: core
@@ -1043,6 +1043,10 @@ files:
     hash: sha256:321eee21d44c8c2548a4a989b4fd9bd13782dc95f917098d67c514e0886000f5
     type: core
     size: 10564
+  - path: core/orchestration/spec-complexity.js
+    hash: sha256:98263efa7189b42e8747929886eddb84b047083369d5636a401141de5b13385a
+    type: core
+    size: 4631
   - path: core/orchestration/subagent-prompt-builder.js
     hash: sha256:1b566f9cdd35df9ab33e13f36adb4e356c538665421637b2f4e57fc32bb67483
     type: core
@@ -1364,9 +1368,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:87e0464ae5a6130cc3f7389d994f9e46a5ca0cd736e842c03be117ebcfc47699
+    hash: sha256:796711f3a98f8285d3692298cd13045c5bedefe85baa76b759ac2f8a45d111ff
     type: data
-    size: 557940
+    size: 558557
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
