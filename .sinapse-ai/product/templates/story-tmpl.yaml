@@ -97,7 +97,12 @@ sections:
   - id: acceptance-criteria
     title: Acceptance Criteria
     type: numbered-list
-    instruction: Copy the acceptance criteria numbered list from the epic file
+    instruction: >-
+      Write each acceptance criterion in executable Given/When/Then form, tracing
+      to the epic's numbered ACs. Example: "AC1: Given <context/state>, When
+      <action>, Then <observable outcome>." GWT is the preferred format
+      (story-lifecycle.md) — `npm run validate:story-acs` flags non-GWT ACs as
+      advisory. Free-form ACs remain valid but should be the exception.
     elicit: true
     owner: scrum-master
     editors: [scrum-master]
