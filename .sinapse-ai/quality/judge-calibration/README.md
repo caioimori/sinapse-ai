@@ -49,14 +49,24 @@ platforms — see the executor's Windows note). It is therefore a **documented p
 not a CI gate:
 
 1. Take the `scenario` behind each golden case (the code change + test state that would produce
-   such a review), feed it to the real `@quality-gate` agent.
-2. Compare the agent's emitted verdict to the golden `expected`.
+   such a review) from `scenarios.json`, feed it to the real `@quality-gate` judge.
+2. Compare the agent's emitted verdict (extracted with the production `_parseVerdict`) to the
+   golden `expected`.
 3. Track agreement over time. Target: **≥ 90%** agreement on the golden scenarios; below that, the
    judge prompt/rubric needs work.
 
+### Latest measurement
+
+**First recorded run — 2026-07-06: 40/42 = 95.2% agreement** (13/14 scenarios majority-correct;
+**perfect 15/15 on all CRITICAL/blocking cases**). Above the 90% target; the single divergence is a
+known-ambiguous MEDIUM-vs-HIGH severity boundary, not a systematic gap. Full breakdown, confusion
+matrix, and divergence analysis in [`calibration-log.md`](./calibration-log.md).
+
 > **Honesty note.** v1 does not auto-calibrate the LLM's judgment — it locks the deterministic seam
 > and provides the human baseline + procedure for the semantic layer. Do not claim the LLM judge is
-> "calibrated" from a green CI alone.
+> "calibrated" from a green CI alone. The v2 number above is a point-in-time live measurement, not a
+> CI-enforced guarantee; re-run periodically (labels are law — a systematic miss becomes rubric work,
+> never a label edit).
 
 ## Feedback loop
 

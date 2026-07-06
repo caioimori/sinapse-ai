@@ -1,0 +1,90 @@
+{
+  "description": "Semantic golden set for LLM-judge calibration v2 (Story mesa2-judge-calibration-v2-run). Each case is a review SCENARIO (story + code changes + test state) with the verdict a competent human reviewer — applying the framework's severity policy (CRITICAL → blocked; HIGH/fixable issues → needs_revision; clean → approved) — considers correct. The live procedure feeds each scenario to the real LLM judge (executor prompt contract), extracts the verdict with the production _parseVerdict, and compares against these labels. Labels are law: a systematic judge miss becomes rubric analysis in calibration-log.md, never a label adjustment to inflate agreement.",
+  "severity_policy": "APPROVED = no CRITICAL/HIGH issues, ACs met, tests green. NEEDS_REVISION = fixable issues (missing tests, coverage drop, unmet AC, failing tests). BLOCKED = critical issues (security vulnerability, data exposure, destructive operation without safeguards).",
+  "cases": [
+    {
+      "id": "clean-approve",
+      "expected": "approved",
+      "rationale": "Everything a reviewer checks is green — nothing to fix.",
+      "scenario": "Story 'user-profile-page' with 3 ACs (render profile data, handle missing avatar, unit tests for both). Diff: 2 new components + 1 test file. All 3 ACs implemented and traceable. CI: 214/214 tests pass, lint clean, typecheck clean. No security-sensitive surface touched. Code follows existing project patterns."
+    },
+    {
+      "id": "small-fix-with-regression-test",
+      "expected": "approved",
+      "rationale": "Root cause fixed with a regression test covering it — the ideal bug-fix shape.",
+      "scenario": "Bug-fix story: date parser crashed on single-digit months. Diff: 1-line fix in parseDate() plus a new regression test that reproduces the original crash input and passes. Full suite green (1,102/1,102). No other files touched."
+    },
+    {
+      "id": "docs-only-clean",
+      "expected": "approved",
+      "rationale": "Documentation-only change with valid links and no runtime surface.",
+      "scenario": "Story 'update-install-guide': diff touches only README.md and docs/installation/guide.md — fixes 4 outdated CLI flag names and adds a troubleshooting section. Link checker passes, markdown lint passes. No code files changed, test suite untouched and green."
+    },
+    {
+      "id": "stable-refactor",
+      "expected": "approved",
+      "rationale": "Behavior-preserving refactor: interfaces stable, tests prove no regression.",
+      "scenario": "Refactor story: extract duplicated pagination logic from 3 API handlers into a shared helper. Public interfaces unchanged (verified by unchanged integration tests). All 890 tests pass unmodified. Coverage steady at 84%. Diff is -120/+45 lines."
+    },
+    {
+      "id": "sql-injection",
+      "expected": "blocked",
+      "rationale": "SQL built by string concatenation from user input — critical injection vulnerability.",
+      "scenario": "Story 'search-endpoint': new GET /search builds its query as \"SELECT * FROM products WHERE name LIKE '%\" + req.query.q + \"%'\" — user input concatenated directly into SQL, no parameterization. Tests pass (16/16) because none exercise malicious input. Everything else in the diff is fine."
+    },
+    {
+      "id": "hardcoded-secret",
+      "expected": "blocked",
+      "rationale": "Plaintext credential committed to the repository — critical exposure.",
+      "scenario": "Story 'payment-webhook': the diff hardcodes a live Stripe secret key (a real 'sk_live_'-prefixed production credential, redacted here as <STRIPE_LIVE_KEY>) directly in src/payments/webhook.js instead of reading it from environment variables. The webhook logic itself is correct and its 8 tests pass."
+    },
+    {
+      "id": "rls-dropped",
+      "expected": "blocked",
+      "rationale": "Migration removes row-level security from a user-data table — critical data exposure.",
+      "scenario": "Story 'fix-orders-query-perf': to make a slow query faster, the migration includes ALTER TABLE orders DISABLE ROW LEVEL SECURITY; and drops the tenant-isolation policy. Query benchmarks improve 40x. All existing tests pass because the test suite runs as service role."
+    },
+    {
+      "id": "praise-worthy-but-auth-bypass",
+      "expected": "blocked",
+      "rationale": "Elegant code cannot outweigh an authentication bypass — a blocker dominates praise.",
+      "scenario": "Story 'admin-dashboard': beautifully structured code, clean componentization, 96% coverage on the new module. However, the /api/admin/* routes check authorization via a client-supplied header ('x-is-admin: true') with no server-side session validation — any user can set the header and access admin endpoints."
+    },
+    {
+      "id": "destructive-migration-no-safeguard",
+      "expected": "blocked",
+      "rationale": "DROP TABLE without safeguards or rollback in a production migration — critical destructive operation.",
+      "scenario": "Story 'remove-legacy-cart': migration runs DROP TABLE legacy_cart; directly — no IF EXISTS, no backup step, no rollback script, and the table still has 12k rows referenced by an archived-orders report job. Code changes removing the ORM model are otherwise clean and tests pass."
+    },
+    {
+      "id": "missing-error-branch-tests",
+      "expected": "needs_revision",
+      "rationale": "Correct logic but the error path is untested — fixable gap, not a blocker.",
+      "scenario": "Story 'csv-import': the happy path is implemented correctly and covered by 6 tests. The error branch (malformed row → collect error and continue) is implemented but has zero test coverage; the try/catch was never exercised by any test. No security issues. Lint/typecheck clean."
+    },
+    {
+      "id": "coverage-drop-new-module",
+      "expected": "needs_revision",
+      "rationale": "New module lands with far lower coverage than the project floor — fix before merge.",
+      "scenario": "Story 'notifications-service': the new src/notifications/ module lands with 31% line coverage while the project enforces a soft floor of 75%. The 4 tests that exist pass; core send/retry logic is untested. Functionality demoed manually and works. No security-sensitive code."
+    },
+    {
+      "id": "failing-tests-on-ci",
+      "expected": "needs_revision",
+      "rationale": "Red suite means not done — but failures are ordinary logic bugs, fixable, not a security block.",
+      "scenario": "Story 'timezone-support': implementation is complete per ACs, but CI shows 3 failing tests in date-formatting for UTC-negative offsets (off-by-one on the day boundary). No security surface. The other 428 tests pass."
+    },
+    {
+      "id": "unmet-acceptance-criterion",
+      "expected": "needs_revision",
+      "rationale": "Green tests do not compensate for a story AC that was never implemented.",
+      "scenario": "Story 'export-report' has 3 ACs: (1) export CSV, (2) export PDF, (3) email the file. The diff implements CSV and PDF with passing tests (22/22 green), but AC3 (email delivery) is entirely absent — no code, no test, not mentioned in the PR. No defects in what exists."
+    },
+    {
+      "id": "stale-todo-and-debug-logs",
+      "expected": "needs_revision",
+      "rationale": "Functional but ships debug noise and unresolved TODOs in the changed lines — clean up before merge.",
+      "scenario": "Story 'checkout-flow': implementation meets all ACs and 34 tests pass. The diff, however, leaves 6 console.log('DEBUG cart=', cart) statements in the payment path and 2 'TODO: handle 3DS fallback properly' comments on code that currently throws a generic error for that case. No security issues."
+    }
+  ]
+}
