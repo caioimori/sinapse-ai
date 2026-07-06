@@ -123,11 +123,10 @@ Os 5 itens restantes (decision-gated ou build próprio) migraram para o épico
 | 10 — aliases LiteLLM | **FECHADO**: aceito como infra legada | ADR `DEC-02-litellm-aliases-legado` |
 | 3 — ACs em GWT | **FECHADO**: template GWT + guard advisory | story `mesa2-acs-gwt-guard` → PR #364 |
 | 2 — calibração do juiz LLM | **FECHADO**: golden set + harness (gate 100%, 3/3 SOUND) | story `mesa2-llm-judge-calibration` → PR #365 |
-| 6 — escopo por path das rules NON-NEGOTIABLE | **RESOLVIDO-PROVISÓRIO**: mantém sempre-on (Conservative Default); híbrido recomendado aguarda go do dono | ADR `DEC-03` |
+| 6 — escopo por path das rules NON-NEGOTIABLE | **FECHADO (executado)**: híbrido core+companion com go explícito do dono — always-on 856→445 linhas (−48%), enforcement 100% no core | ADR `DEC-03` + story `mesa2-rules-hybrid` |
 
-**Fase 2 fechada:** os 5 itens desfechados — 4 executados (ADR-01/02 + PRs #363/#364/#365) e o 5º
-(constitucional) resolvido conservadoramente com análise completa em ADR-03, pendente apenas de
-decisão explícita do dono para o híbrido. Épico `epic-rodada2-mesa-fase2` = Done.
+**Fase 2 fechada (5/5 executados):** ADR-01/02 (#363) · ACs-GWT (#364) · juiz-LLM (#365) ·
+híbrido das rules (DEC-03 executado após go do dono). Épico `epic-rodada2-mesa-fase2` = Done.
 
 ---
 *4 frentes de verificação adversarial · 2026-07-04 · evidências completas nos laudos das frentes (transcritos nos PRs do ciclo).*
