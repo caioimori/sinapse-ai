@@ -199,6 +199,66 @@ function storyStatusIsReady(file) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════════
+//                    SPEC SUBSTANCE (AF-20260704 M2)
+// ═══════════════════════════════════════════════════════════════════════════════════
+// A story can be `Ready` yet empty. The status gate alone lets a substanceless
+// story unlock implementation, which violates No Invention (Art. IV). These checks
+// verify the story actually carries the required sections + at least one acceptance
+// criterion, and flag missing traceability as a (non-blocking) concern.
+
+const STORY_SECTION_PATTERNS = Object.freeze({
+  acceptanceCriteria: /^#{1,4}\s*(acceptance criteria|crit[eé]rios? de aceita)/im,
+  scope: /^#{1,4}\s*(scope|escopo)/im,
+  description: /^#{1,4}\s*(description|descri[cç][aã]o)/im,
+});
+/** A markdown checkbox item with real content. */
+const AC_CHECKBOX = /^\s*[-*]\s*\[[ xX]\]\s+\S/m;
+/** A Given/When/Then triple (executable AC form). */
+const AC_GWT = /given[\s\S]{0,120}when[\s\S]{0,120}then/i;
+/** Signals that the story traces to evidence/requirement (No Invention). */
+const AC_TRACEABILITY = /(evid[eê]ncia|\bFR-\d|\bNFR-\d|\bCON-\d|\bAC\d|\bepic\b|\bstory\b|audit)/i;
+
+/**
+ * Inspect a story file for substance (required sections + ≥1 acceptance criterion).
+ * Never throws — a read error degrades open (warn-and-proceed), so a filesystem
+ * hiccup can never block development (circuit-breaker principle).
+ * @param {string} file
+ * @returns {{ok:boolean, missingSections:string[], hasAcItem:boolean, hasTraceability:boolean, degraded?:boolean}}
+ */
+function storyHasSubstance(file) {
+  let content;
+  try {
+    content = fs.readFileSync(file, 'utf8');
+  } catch {
+    return { ok: true, missingSections: [], hasAcItem: true, hasTraceability: true, degraded: true };
+  }
+  const missingSections = [];
+  if (!STORY_SECTION_PATTERNS.description.test(content)) missingSections.push('Descrição/Description');
+  if (!STORY_SECTION_PATTERNS.acceptanceCriteria.test(content)) missingSections.push('Acceptance Criteria');
+  if (!STORY_SECTION_PATTERNS.scope.test(content)) missingSections.push('Escopo/Scope');
+  const hasAcItem = AC_CHECKBOX.test(content) || AC_GWT.test(content);
+  const hasTraceability = AC_TRACEABILITY.test(content);
+  const ok = missingSections.length === 0 && hasAcItem;
+  return { ok, missingSections, hasAcItem, hasTraceability };
+}
+
+/**
+ * Substance verdict across a project's Ready stories. A project satisfies the
+ * substance gate when AT LEAST ONE Ready story is substantive (mirrors how
+ * `hasReadyStory` treats "some Ready story exists"). Returns the best verdict.
+ * @param {string} projectRoot
+ */
+function readyStorySubstance(projectRoot) {
+  const dir = path.join(projectRoot, 'docs', 'stories');
+  const readyFiles = walkMarkdown(dir).filter((f) => storyStatusIsReady(f));
+  if (readyFiles.length === 0) {
+    return { ok: false, missingSections: [], hasAcItem: false, hasTraceability: false, noReadyStory: true };
+  }
+  const verdicts = readyFiles.map(storyHasSubstance);
+  return verdicts.find((v) => v.ok) || verdicts[0];
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
 //                              MAIN RESOLVER
 // ═══════════════════════════════════════════════════════════════════════════════════
 
@@ -237,16 +297,36 @@ function resolveDocFirstState(opts = {}) {
   const prd = hasPrd(projectRoot);
   const epic = hasEpic(projectRoot);
   const readyStory = hasReadyStory(projectRoot);
+  // M2: a Ready story must also carry substance (sections + ≥1 AC). Evaluated
+  // only when a Ready story exists, so this never changes the "no story" message.
+  const substance = readyStory
+    ? readyStorySubstance(projectRoot)
+    : { ok: false, missingSections: [], hasAcItem: false, hasTraceability: false };
 
   // Light types ride on an existing project: the minimal gate is "a Ready story"
   // (the existing story-gate). Full projects additionally need PRD + epic.
   const missing = [];
-  if (!readyStory) missing.push('story (status >= Ready)');
+  if (!readyStory) {
+    missing.push('story (status >= Ready)');
+  } else if (!substance.ok) {
+    // Block: a Ready story without required sections / any AC is not implementable.
+    const lack = substance.missingSections.length
+      ? substance.missingSections.join(', ')
+      : 'nenhum acceptance criterion';
+    missing.push(`story substance (falta: ${lack})`);
+  }
   if (!isLightType) {
     if (!prd) missing.push('PRD (docs/prd.md)');
     if (!epic) missing.push('epic (docs/epics/)');
   }
   const satisfied = missing.length === 0;
+
+  // Non-blocking concerns (Art. IV No Invention): a substantive story that lacks
+  // any traceability signal to evidence/requirement is flagged, not blocked.
+  const concerns = [];
+  if (readyStory && substance.ok && !substance.hasTraceability) {
+    concerns.push('story sem rastreabilidade explícita (Art. IV) — cite evidência/requisito/AC');
+  }
 
   return {
     brief,
@@ -255,7 +335,15 @@ function resolveDocFirstState(opts = {}) {
     isLightType,
     workflow,
     artifacts,
-    gate: { prd, epic, readyStory, satisfied, missing },
+    gate: {
+      prd,
+      epic,
+      readyStory,
+      substance: substance.ok,
+      satisfied,
+      missing,
+      concerns,
+    },
     maturity: assessProjectMaturity(projectRoot),
   };
 }
@@ -315,6 +403,9 @@ module.exports = {
   classifyProjectType,
   resolveDocFirstState,
   assessProjectMaturity,
+  // M2 (AF-20260704): spec substance checks, exported for reuse + testing.
+  storyHasSubstance,
+  readyStorySubstance,
   REQUIRED_ARTIFACTS_BY_WORKFLOW,
   TYPE_KEYWORDS,
   // re-exported for callers that want the raw map
