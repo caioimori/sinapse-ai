@@ -1,6 +1,6 @@
 # Épico: Rodada 2 — Mesa fase 2 (itens decision-gated + builds residuais)
 
-**Status:** In Progress
+**Status:** Done (4 executados + item 5 resolvido-provisório) — ADR-01/02, PRs #363/#364/#365, ADR-03
 **Origem:** os 5 itens da Mesa (`audits/AF-20260704-rodada2-verificacao.md`) que ficaram
 **fora** do épico `epic-rodada2-mesa` por dependerem de decisão do dono ou de build próprio.
 **Autorização:** Caio, 2026-07-06 ("go na ordem sequencial ideal, qualidade/performance/token").
@@ -16,9 +16,9 @@ decisão. Restaram 5, ordenados aqui por custo × risco × valor (a ordem ideal 
 |-------|--------------|----------|---------|
 | 1 | Frota de auditoria como produto | decisão (parecer: NÃO) | ADR-01 |
 | 2 | Aliases datados no LiteLLM (`.docker`) | infra legada | ADR-02 |
-| 3 | ACs em formato executável (GWT) | guard advisory | story `mesa2-acs-gwt-guard` |
-| 4 | Calibração do juiz LLM (golden set) | build | story `mesa2-llm-judge-calibration` |
-| 5 | Escopo por path das rules NON-NEGOTIABLE situacionais | **decisão constitucional** | ADR-03 (aguarda palavra do dono) |
+| 3 | ACs em formato executável (GWT) | guard advisory | story `mesa2-acs-gwt-guard` → PR #364 ✅ |
+| 4 | Calibração do juiz LLM (golden set) | build | story `mesa2-llm-judge-calibration` → PR #365 ✅ |
+| 5 | Escopo por path das rules NON-NEGOTIABLE situacionais | **decisão constitucional** | ADR-03 — resolvido-provisório (mantém sempre-on por Conservative Default; híbrido recomendado aguarda go do dono) |
 
 ## Critério de pronto do épico
 

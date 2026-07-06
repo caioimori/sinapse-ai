@@ -121,9 +121,13 @@ Os 5 itens restantes (decision-gated ou build próprio) migraram para o épico
 |------|----------|----------|
 | 1 — frota como produto | **FECHADO**: não produtizar | ADR `DEC-01-frota-nao-produtizar` |
 | 10 — aliases LiteLLM | **FECHADO**: aceito como infra legada | ADR `DEC-02-litellm-aliases-legado` |
-| 3 — ACs em GWT | em execução (guard advisory) | story `mesa2-acs-gwt-guard` |
-| 2 — calibração do juiz LLM | em execução (golden set + harness) | story `mesa2-llm-judge-calibration` |
-| 6 — escopo por path das rules NON-NEGOTIABLE | **aguarda decisão do dono** (tensão constitucional) | ADR `DEC-03` (pendente) |
+| 3 — ACs em GWT | **FECHADO**: template GWT + guard advisory | story `mesa2-acs-gwt-guard` → PR #364 |
+| 2 — calibração do juiz LLM | **FECHADO**: golden set + harness (gate 100%, 3/3 SOUND) | story `mesa2-llm-judge-calibration` → PR #365 |
+| 6 — escopo por path das rules NON-NEGOTIABLE | **RESOLVIDO-PROVISÓRIO**: mantém sempre-on (Conservative Default); híbrido recomendado aguarda go do dono | ADR `DEC-03` |
+
+**Fase 2 fechada:** os 5 itens desfechados — 4 executados (ADR-01/02 + PRs #363/#364/#365) e o 5º
+(constitucional) resolvido conservadoramente com análise completa em ADR-03, pendente apenas de
+decisão explícita do dono para o híbrido. Épico `epic-rodada2-mesa-fase2` = Done.
 
 ---
 *4 frentes de verificação adversarial · 2026-07-04 · evidências completas nos laudos das frentes (transcritos nos PRs do ciclo).*
