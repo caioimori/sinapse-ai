@@ -14,6 +14,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const EpicExecutor = require('./epic-executor');
+const { classifyComplexity } = require('../spec-complexity');
 
 /**
  * Spec Pipeline phases
@@ -131,14 +132,26 @@ class Epic3Executor extends EpicExecutor {
       this._addArtifact('spec', specPath);
 
       // Collect complexity and requirements from phases
-      const complexity = phaseResults['assess-complexity']?.complexity || 'STANDARD';
+      const assess = phaseResults['assess-complexity'] || {};
+      const complexity = assess.complexity || 'STANDARD';
       const requirements = phaseResults['gather-requirements']?.requirements || [];
+
+      // M4 (AF-20260704 #9b): turn the COMPLEX≥16 rule from prose into a
+      // deterministic classification. Prefer the numeric dimension score when the
+      // assess phase provides one; otherwise fall back to the level string.
+      const classification = classifyComplexity(
+        typeof assess.score === 'number' ? assess.score : assess.dimensions || complexity,
+      );
 
       // Honesty invariant (epic: orchestration-consolidation, F0a):
       // if the spec was auto-stubbed (no real agent ran), report STUB, not success.
       const specResult = {
         specPath,
-        complexity,
+        complexity: classification.level,
+        complexityScore: classification.score,
+        requiresRevisionCycle: classification.requiresRevisionCycle,
+        requiresFullSpecPipeline: classification.requiresFullSpecPipeline,
+        specPipelinePhases: classification.phases,
         requirements,
         phases: Object.keys(phaseResults),
       };
