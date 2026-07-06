@@ -14,6 +14,12 @@ model_list:
   # Claude mappings -> DeepSeek (for cost optimization)
   # NOTE: These aliases route Claude model names to DeepSeek for ~99% cost savings
   # Users calling these model names will receive DeepSeek responses
+  #
+  # LEGACY (see docs/epics/epic-rodada2-mesa-fase2/decisions/DEC-02-litellm-aliases-legado.md):
+  # The intercepted model_name keys below are dated (claude-3-5-*) and kept AS-IS on purpose.
+  # Do NOT rename them — the key is the caller's entry contract and renaming breaks consumers.
+  # Not extended to current models (opus-4-8 / sonnet-5) to avoid silently routing frontier
+  # calls to DeepSeek. Revisit only if this cost-optimization docker env is reactivated.
   - model_name: "claude-3-5-sonnet-20241022"
     litellm_params:
       model: "deepseek/deepseek-chat"

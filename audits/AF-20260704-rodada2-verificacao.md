@@ -114,8 +114,16 @@ foram executados doc-first (épico → story Ready → implementação → verif
 | M5 | CLAUDE.md ⇄ AGENTS.md fonte única (item 7) | `rodada2-m5-claude-agents-single-source` | #361 |
 | M6 | Dedup CodeRabbit WSL single-source (item 5) | `rodada2-m6-coderabbit-dedup` | #362 |
 
-Itens da Mesa que **permanecem** aguardando decisão do dono (fora do épico): 1 (frota como produto),
-2 (calibração do juiz LLM), 3 (ACs em GWT), 6 (escopo por path das rules NON-NEGOTIABLE), 10 (aliases LiteLLM).
+Os 5 itens restantes (decision-gated ou build próprio) migraram para o épico
+`epic-rodada2-mesa-fase2` e estão sendo desfechados na ordem ideal (custo × risco × valor):
+
+| Item | Desfecho | Artefato |
+|------|----------|----------|
+| 1 — frota como produto | **FECHADO**: não produtizar | ADR `DEC-01-frota-nao-produtizar` |
+| 10 — aliases LiteLLM | **FECHADO**: aceito como infra legada | ADR `DEC-02-litellm-aliases-legado` |
+| 3 — ACs em GWT | em execução (guard advisory) | story `mesa2-acs-gwt-guard` |
+| 2 — calibração do juiz LLM | em execução (golden set + harness) | story `mesa2-llm-judge-calibration` |
+| 6 — escopo por path das rules NON-NEGOTIABLE | **aguarda decisão do dono** (tensão constitucional) | ADR `DEC-03` (pendente) |
 
 ---
 *4 frentes de verificação adversarial · 2026-07-04 · evidências completas nos laudos das frentes (transcritos nos PRs do ciclo).*
