@@ -809,7 +809,7 @@ npm test -- tests/squads/my-squad/
 - [TASK-FORMAT-SPECIFICATION-V1](../../.sinapse-ai/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
 - [Contributing Squads Guide](./contributing-squads.md)
 - [Squad Migration Guide](./squad-migration.md)
-- [Squads API Reference](../api/squads-api.md)
+- Squads API Reference
 - [@squad-creator Agent](../../.sinapse-ai/development/agents/squad-creator.md)
 - [sinapse-squads Repository](https://github.com/caioimori/sinapse-squads)
 

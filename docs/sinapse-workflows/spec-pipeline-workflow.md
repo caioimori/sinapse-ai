@@ -965,9 +965,9 @@ flowchart TB
 
 ### 10.3 Documentação Relacionada
 
-- [Workflows YAML Guide](../workflows-yaml-guide.md)
-- [SINAPSE Documentation Index](../SINAPSE-DOCUMENTATION-INDEX.md)
-- [Backlog Management System](../BACKLOG-MANAGEMENT-SYSTEM.md)
+- Workflows YAML Guide
+- SINAPSE Documentation Index
+- Backlog Management System
 
 ### 10.4 Commands Rapidos
 

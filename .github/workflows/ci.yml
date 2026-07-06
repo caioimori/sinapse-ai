@@ -439,7 +439,7 @@ jobs:
         run: |
           python scripts/check-markdown-links.py 2>&1 | tee links-report.txt
           BROKEN=$(grep -oP 'Broken links \(ACTION: mark coming soon\): \K\d+' links-report.txt || echo 0)
-          BASELINE=523  # captured 2026-05-05 in deep-audit
+          BASELINE=0  # AF-20260704 M1: sweep zerou os 121 quebrados (2026-07-06); mantém 0
           echo ""
           echo "=== Markdown Links Monitor ==="
           echo "Current broken: $BROKEN"

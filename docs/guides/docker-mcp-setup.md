@@ -415,11 +415,11 @@ Only use docker-gateway when:
 
 ## Related Documentation
 
-- [Docker Gateway Tutorial](./guides/mcp/docker-gateway-tutorial.md)
-- [Desktop Commander MCP Guide](./guides/mcp/desktop-commander.md)
-- [MCP Global Setup Guide](./guides/mcp-global-setup.md)
-- [MCP Architecture Diagrams](./architecture/mcp-system-diagrams.md)
-- [DevOps Agent](../.sinapse-ai/development/agents/devops.md)
+- [Docker Gateway Tutorial](./mcp/docker-gateway-tutorial.md)
+- [Desktop Commander MCP Guide](./mcp/desktop-commander.md)
+- [MCP Global Setup Guide](./mcp-global-setup.md)
+- MCP Architecture Diagrams
+- [DevOps Agent](../../.sinapse-ai/development/agents/devops.md)
 
 ---
 

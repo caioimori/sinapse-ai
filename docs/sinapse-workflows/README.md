@@ -1,6 +1,6 @@
 # SINAPSE Workflows - Documentação Detalhada dos Workflows
 
-> 🌐 **PT** | [EN](../en/sinapse-workflows/README.md) | [ZH](../zh/sinapse-workflows/README.md)
+> 🌐 **PT** | EN | ZH
 
 ---
 
@@ -228,7 +228,7 @@ flowchart TD
 |--------------|-------------|-----------|
 | Workflows Guide | [docs/guides/workflows-guide.md](../guides/workflows-guide.md) | Guia geral |
 | Agent Flows | [docs/sinapse-agent-flows/](../sinapse-agent-flows/) | Detalhes de agentes |
-| Meta-Agent Commands | [docs/meta-agent-commands.md](../meta-agent-commands.md) | Referência rápida |
+| Meta-Agent Commands | [docs/pt/meta-agent-commands.md](../pt/meta-agent-commands.md) | Referência rápida |
 
 ---
 

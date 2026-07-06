@@ -826,9 +826,9 @@ cat docs/stories/{story-file}.md | grep "status:"
 
 ### Documentação Adicional
 
-- [Guia de Workflows YAML](../workflows-yaml-guide.md)
-- [Guia de Squads](../squads-user-guide.md)
-- [Framework de Priorizacao](../PRIORITIZATION-FRAMEWORK.md)
+- Guia de Workflows YAML
+- Guia de Squads
+- Framework de Priorizacao
 
 ---
 

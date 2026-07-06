@@ -185,5 +185,5 @@ Check that the IDE is enabled in `active_ides` section.
 
 - [Squads Overview](./squads-overview.md)
 - [Agent Reference](../agent-reference-guide.md)
-- [SINAPSE Architecture](../core-architecture.md)
+- [SINAPSE Architecture](../framework/core-architecture.md)
 

@@ -460,10 +460,10 @@ dependencies:
 - [Workflow: brownfield-fullstack.yaml](../../.sinapse-ai/development/workflows/brownfield-fullstack.yaml)
 
 ### Configuracao
-- [Core Config](../.sinapse-ai/core-config.yaml)
+- [Core Config](../../.sinapse-ai/core-config.yaml)
 
 ### Documentação Relacionada
-- [Backlog Management System](../BACKLOG-MANAGEMENT-SYSTEM.md)
+- Backlog Management System
 
 ---
 

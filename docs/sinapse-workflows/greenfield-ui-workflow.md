@@ -906,8 +906,8 @@ flowchart TD
 
 ### Documentação Relacionada
 
-- [SINAPSE Knowledge Base](.sinapse-ai/data/sinapse-kb.md) - Base de conhecimento central
-- [Brownfield Workflow](./BROWNFIELD-WORKFLOW.md) - Workflow para projetos existentes (se disponível)
+- [SINAPSE Knowledge Base](../../.sinapse-ai/data/sinapse-kb.md) - Base de conhecimento central
+- Brownfield Workflow - Workflow para projetos existentes (se disponível)
 
 ---
 

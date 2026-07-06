@@ -621,7 +621,7 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 
 ### Documentos Relacionados
 
-- [BACKLOG-MANAGEMENT-SYSTEM.md](../guides/BACKLOG-MANAGEMENT-SYSTEM.md)
+- BACKLOG-MANAGEMENT-SYSTEM.md
 
 ---
 

@@ -1,6 +1,6 @@
 # SINAPSE Security Best Practices
 
-> 🌐 **EN** | [PT](./pt/security-best-practices.md)
+> 🌐 **EN** | [PT](../pt/security-best-practices.md)
 
 ---
 

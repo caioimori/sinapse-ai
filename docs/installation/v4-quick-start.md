@@ -210,7 +210,7 @@ your-project/
 ## Next Steps
 
 1. **Read the full guide:** [Getting Started](../getting-started.md)
-2. **Understand the architecture:** [Core Architecture](../core-architecture.md)
+2. **Understand the architecture:** [Core Architecture](../framework/core-architecture.md)
 3. **Learn about agents:** [Agent Definitions](../../.sinapse-ai/development/agents/)
 4. **Join the community:** [Discord](https://discord.gg/gk8jAdXWmj)
 

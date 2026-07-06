@@ -23,7 +23,7 @@ This directory contains comprehensive runtime execution trace documentation for 
 | @architect | Aria (Visionary) | 21 | Direct | [architect-execution-trace.md](./architect-execution-trace.md) |
 | @developer | Dex (Builder) | 36 | Direct | [dev-execution-trace.md](./dev-execution-trace.md) |
 | @quality-gate | Quinn (Guardian) | 25 | Direct | [qa-execution-trace.md](./qa-execution-trace.md) |
-| @sinapse-orqx | Nova (Orchestrator) | 33 | Direct | [sinapse-orqx-execution-trace.md](./sinapse-orqx-execution-trace.md) |
+| @sinapse-orqx | Nova (Orchestrator) | 33 | Direct | [snps-orqx-execution-trace.md](./snps-orqx-execution-trace.md) |
 | @devops | Gage (Pipeline) | 30 | CLI Wrapper | [devops-execution-trace.md](./devops-execution-trace.md) |
 | @data-engineer | Dara (Architect) | 27 | CLI Wrapper | [data-engineer-execution-trace.md](./data-engineer-execution-trace.md) |
 | @ux-design-expert | Uma (Harmonizer) | 24 | CLI Wrapper | [ux-design-expert-execution-trace.md](./ux-design-expert-execution-trace.md) |

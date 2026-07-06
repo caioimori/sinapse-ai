@@ -282,7 +282,7 @@ Retries < 3? → @developer retry with variation
 ## Full Documentation
 
 - **[ADE Complete Guide](./ade-guide.md)** - Full tutorial for Autonomous Development Engine
-- **[Agent Responsibility Matrix](../architecture/agent-responsibility-matrix.md)** - Complete boundary definitions
+- **Agent Responsibility Matrix** - Complete boundary definitions
 
 ---
 

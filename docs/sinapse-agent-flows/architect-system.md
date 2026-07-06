@@ -699,7 +699,7 @@ Ative @github-devops para operacoes de push:
 
 ### Agentes Colaboradores
 
-- [@db-sage](../../.sinapse-ai/development/agents/db-sage.md) - Arquitetura de dados
+- [@db-sage](../../squads/claude-code-mastery/_deprecated/db-sage.md) - Arquitetura de dados
 - [@ux-design-expert](../../.sinapse-ai/development/agents/ux-design-expert.md) - Arquitetura frontend
 - [@pm](../../.sinapse-ai/development/agents/project-lead.md) - Requisitos e PRD
 - [@devops](../../.sinapse-ai/development/agents/devops.md) - Git push e infraestrutura

@@ -883,9 +883,9 @@ flowchart TD
 
 ### Documentacao Relacionada
 
-- [ADR-025: Estrutura de Documentacao](../../architecture/ADR-025-DOCUMENTATION-STRUCTURE.md)
-- [Guia de Workflows SINAPSE](../SINAPSE-WORKFLOWS-GUIDE.md)
-- [Padrao de Stories](../templates/STORY-TEMPLATE.md)
+- ADR-025: Estrutura de Documentacao
+- Guia de Workflows SINAPSE
+- Padrao de Stories
 
 ---
 

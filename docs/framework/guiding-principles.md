@@ -169,7 +169,7 @@ O SINAPSE e distribuido sob licenca MIT --- qualquer pessoa pode usar, modificar
 
 Isso garante que o framework mantem coerencia e qualidade mesmo com contribuicoes externas.
 
-> Processo de contribuicao: [CONTRIBUTING.md](../CONTRIBUTING.md)
+> Processo de contribuicao: [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ---
 

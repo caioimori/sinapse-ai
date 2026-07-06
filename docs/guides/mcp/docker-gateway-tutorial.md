@@ -329,7 +329,7 @@ echo "~/.docker/mcp/" >> ~/.gitignore_global
 
 - [Desktop Commander MCP Guide](./desktop-commander.md)
 - [MCP Global Setup Guide](../mcp-global-setup.md)
-- [Docker MCP Setup](../../docker-mcp-setup.md)
+- [Docker MCP Setup](../docker-mcp-setup.md)
 
 ---
 

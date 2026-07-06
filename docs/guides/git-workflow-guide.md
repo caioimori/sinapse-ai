@@ -1,6 +1,6 @@
 # SINAPSE Git Workflow Guide
 
-> 🌐 **EN** | [PT](./pt/git-workflow-guide.md)
+> 🌐 **EN** | [PT](../pt/git-workflow-guide.md)
 
 ---
 
@@ -978,8 +978,8 @@ strategy:
 
 ## References
 
-- **SINAPSE Validator:** [.sinapse-ai/utils/sinapse-validator.js](../.sinapse-ai/utils/sinapse-validator.js)
-- **CI Workflow:** [.github/workflows/ci.yml](../.github/workflows/ci.yml)
+- **SINAPSE Validator:** [.sinapse-ai/utils/sinapse-validator.js](../../.sinapse-ai/utils/sinapse-validator.js)
+- **CI Workflow:** [.github/workflows/ci.yml](../../.github/workflows/ci.yml)
 
 ---
 

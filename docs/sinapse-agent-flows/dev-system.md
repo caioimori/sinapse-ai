@@ -548,7 +548,7 @@ O @developer deve **HALT** e perguntar ao usuario quando:
 - [greenfield-fullstack.yaml](../../.sinapse-ai/development/workflows/greenfield-fullstack.yaml)
 
 ### Relacionados
-- [BACKLOG-MANAGEMENT-SYSTEM.md](../BACKLOG-MANAGEMENT-SYSTEM.md)
+- BACKLOG-MANAGEMENT-SYSTEM.md
 
 ---
 
