@@ -57,6 +57,9 @@ const GUARDS = [
   { name: 'agent-codenames', script: 'validate:agent-codenames' },
   { name: 'tool-descriptions', script: 'validate:tool-descriptions' },
   { name: 'constitution', script: 'validate:constitution' },
+  // ACs in Given/When/Then — WARN-only (exits 0 unless STORY_ACS_STRICT=1) and
+  // a no-op PASS in CI where docs/stories/ (gitignored) is absent.
+  { name: 'story-acs', script: 'validate:story-acs' },
   // Article IV traceability — WARN-only during calibration: the script itself
   // exits 0 on orphans unless ARTICLE_IV_STRICT=1 (see validate-article-iv.js).
   { name: 'article-iv', script: 'validate:article-iv' },
