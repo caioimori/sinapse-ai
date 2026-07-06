@@ -56,6 +56,7 @@ const GUARDS = [
   { name: 'squad-orqx', script: 'validate:squad-orqx' },
   { name: 'agent-codenames', script: 'validate:agent-codenames' },
   { name: 'tool-descriptions', script: 'validate:tool-descriptions' },
+  { name: 'constitution', script: 'validate:constitution' },
   // Article IV traceability — WARN-only during calibration: the script itself
   // exits 0 on orphans unless ARTICLE_IV_STRICT=1 (see validate-article-iv.js).
   { name: 'article-iv', script: 'validate:article-iv' },
