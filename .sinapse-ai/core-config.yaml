@@ -193,6 +193,12 @@ github:
     draft_by_default: false
   semantic_release:
     enabled: true
+# ── CodeRabbit integration — SINGLE SOURCE OF TRUTH ──────────────────────────
+# This section (machine config) + .claude/rules/coderabbit-integration.md
+# (auto-loaded, human-readable) are the ONE canonical source for WSL execution
+# mechanics, self-healing thresholds, canonical review commands and report
+# location. Agents REFERENCE this — they must NOT copy the mechanics into their
+# own definitions. (Dedup: Story rodada2-m6-coderabbit-dedup.)
 coderabbit_integration:
   enabled: true
   installation_mode: wsl
@@ -213,11 +219,35 @@ coderabbit_integration:
   graceful_degradation:
     skip_if_not_installed: true
     fallback_message: 'CodeRabbit CLI not found. Skipping automated review. Install via: pip install coderabbit-cli'
+  # Canonical review commands (referenced by all agents; keyed by intent, not by agent).
   commands:
+    review_uncommitted: |
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+    review_committed_base_main: |
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+    review_against_main: |
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only --base main'
+    review_committed: |
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed'
+    # Back-compat aliases (previous key names):
     qa_pre_review_uncommitted: |
       wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
     qa_story_review_committed: |
       wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+  execution_guidelines: |
+    CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
+
+    **How to Execute:**
+    1. Use 'wsl bash -c' wrapper for all commands
+    2. Navigate to project directory in WSL path format (/mnt/c/...)
+    3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
+
+    **Timeout:** dev/pre-push 15 min (900000ms); full QA review 30 min (1800000ms) — reviews take 7-30 min.
+
+    **Error Handling:**
+    - If "coderabbit: command not found" → verify installation in WSL (wsl_config.installation_path)
+    - If timeout → increase timeout, review is still processing
+    - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
   report_location: docs/qa/coderabbit-reports/
 squads:
   templateLocation: templates/squad

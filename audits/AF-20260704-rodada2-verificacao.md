@@ -100,5 +100,22 @@ Ambos os PRs passaram por CI completo (suíte jest ~11.4k testes, lint 0/0, type
 9. **Lint de descrição de tools** e **cerimônia COMPLEX>=16 em código** — stories próprias.
 10. **Aliases datados no LiteLLM** (.docker) — renomear quebra consumidores; decidir se moderniza ou aceita como infra legada.
 
+## Execução da Mesa — épico `rodada2-mesa` (6 itens atacáveis) ✅ FECHADO
+
+Os 6 itens código/docs, reversíveis via PR e sem dependência de decisão de produto/constitucional,
+foram executados doc-first (épico → story Ready → implementação → verificação adversarial → PR):
+
+| # | Item da Mesa | Story | PR |
+|---|--------------|-------|----|
+| M1 | Sweep de links quebrados + `docs/architecture` fantasma (itens 8) | `rodada2-m1-link-sweep` | #357 |
+| M2 | Check de substância do spec no gate (item 4) | `rodada2-m2-spec-substance-gate` | #358 |
+| M3 | Lint de descrição de tools (item 9a) | `rodada2-m3-tool-description-lint` | #359 |
+| M4 | Cerimônia COMPLEX≥16 em código (item 9b) | `rodada2-m4-complex-ceremony-code` | #360 |
+| M5 | CLAUDE.md ⇄ AGENTS.md fonte única (item 7) | `rodada2-m5-claude-agents-single-source` | #361 |
+| M6 | Dedup CodeRabbit WSL single-source (item 5) | `rodada2-m6-coderabbit-dedup` | #362 |
+
+Itens da Mesa que **permanecem** aguardando decisão do dono (fora do épico): 1 (frota como produto),
+2 (calibração do juiz LLM), 3 (ACs em GWT), 6 (escopo por path das rules NON-NEGOTIABLE), 10 (aliases LiteLLM).
+
 ---
 *4 frentes de verificação adversarial · 2026-07-04 · evidências completas nos laudos das frentes (transcritos nos PRs do ciclo).*

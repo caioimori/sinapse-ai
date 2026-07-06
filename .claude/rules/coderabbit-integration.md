@@ -9,6 +9,12 @@ paths:
 
 # CodeRabbit Integration — Detailed Rules
 
+> **Single source of truth.** This rule (auto-loaded) plus the machine config in
+> `.sinapse-ai/core-config.yaml` (`coderabbit_integration`) are the ONE canonical
+> definition of the CodeRabbit integration — WSL execution mechanics, self-healing
+> thresholds, review commands, severity handling and report location. Agents
+> **reference** this; they must not copy the mechanics into their own definitions.
+
 ## Self-Healing Configuration
 
 ### Dev Phase (@developer — Story Development Cycle Phase 3)

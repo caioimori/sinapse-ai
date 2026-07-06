@@ -255,6 +255,9 @@ usage_tips:
 
 coderabbit_integration:
   enabled: true
+  # CodeRabbit mechanics (WSL execution, timeout, commands, report location) are
+  # single-sourced in .sinapse-ai/core-config.yaml + .claude/rules/coderabbit-integration.md.
+  # Only this agent's review focus/policy lives here — see Story rodada2-m6.
   focus: SQL quality, schema design, query performance, RLS security, migration safety
 
   when_to_use:
@@ -316,21 +319,6 @@ coderabbit_integration:
     4. HIGH issues require mitigation plan or rollback script
     5. Document all MEDIUM/HIGH issues in migration notes
     6. Update database-best-practices.md with patterns found
-
-  execution_guidelines: |
-    CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
-
-    **How to Execute:**
-    1. Use 'wsl bash -c' wrapper for all commands
-    2. Navigate to project directory in WSL path format (/mnt/c/...)
-    3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
-
-    **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
-
-    **Error Handling:**
-    - If "coderabbit: command not found" → verify installation in WSL
-    - If timeout → increase timeout, review is still processing
-    - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
 
   database_patterns_to_check:
     security:
