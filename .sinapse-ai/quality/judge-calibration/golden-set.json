@@ -1,0 +1,105 @@
+{
+  "$schema": "./golden-set.schema.md",
+  "description": "Human-labeled golden set for LLM-judge verdict calibration (Story mesa2-llm-judge-calibration, AF-20260704 Mesa #2). Each case is a realistic @quality-gate review OUTPUT and the verdict a human considers CORRECT for it. The harness runs the REAL Epic6Executor._parseVerdict over each output and must agree 100% — a disagreement means either the parser regressed or a label is wrong; both demand action.",
+  "verdicts": ["approved", "needs_revision", "blocked"],
+  "cases": [
+    {
+      "id": "clear-approve-explicit",
+      "output": "All acceptance criteria met, tests green, no security concerns.\nVERDICT: APPROVED",
+      "expected": "approved",
+      "rationale": "Explicit approving verdict line with clean review.",
+      "source": "synthetic"
+    },
+    {
+      "id": "clear-block-explicit",
+      "output": "Critical: SQL built via string interpolation in user path — injection risk.\nVERDICT: BLOCKED",
+      "expected": "blocked",
+      "rationale": "Explicit blocking verdict; critical security defect.",
+      "source": "synthetic"
+    },
+    {
+      "id": "needs-revision-explicit",
+      "output": "Logic is correct but missing tests for the error branch and a stale comment.\nVERDICT: NEEDS_REVISION",
+      "expected": "needs_revision",
+      "rationale": "Explicit needs-revision; minor, fixable issues.",
+      "source": "synthetic"
+    },
+    {
+      "id": "needs-revision-spaced",
+      "output": "Coverage dipped on the new module.\nVERDICT: NEEDS REVISION",
+      "expected": "needs_revision",
+      "rationale": "Verdict written with a space instead of underscore — still a needs-revision.",
+      "source": "synthetic"
+    },
+    {
+      "id": "lowercase-prose-verdict",
+      "output": "looks good to me, ship it. verdict: approved",
+      "expected": "approved",
+      "rationale": "Case-insensitive extraction: a lowercase verdict line still means approved.",
+      "source": "synthetic"
+    },
+    {
+      "id": "verdict-with-trailing-text",
+      "output": "Solid refactor, interfaces stable.\nVERDICT: APPROVED — nice work on the edge cases.",
+      "expected": "approved",
+      "rationale": "Trailing prose after the verdict token must not change the decision.",
+      "source": "synthetic"
+    },
+    {
+      "id": "conflicting-praise-but-blocked",
+      "output": "Great structure overall and readable code. However VERDICT: BLOCKED because auth is bypassable.",
+      "expected": "blocked",
+      "rationale": "When an explicit verdict is present it is authoritative, even amid praise.",
+      "source": "synthetic"
+    },
+    {
+      "id": "no-verdict-prose-blocked",
+      "output": "This change is BLOCKED: it drops the RLS policy on a public table.",
+      "expected": "blocked",
+      "rationale": "No verdict line, but an unambiguous block signal in prose → block.",
+      "source": "synthetic"
+    },
+    {
+      "id": "no-verdict-prose-approved",
+      "output": "Everything checks out and it is APPROVED for merge.",
+      "expected": "approved",
+      "rationale": "No verdict line, unambiguous approval word → approved.",
+      "source": "synthetic"
+    },
+    {
+      "id": "no-verdict-ambiguous-concerns",
+      "output": "The reviewer raised a few concerns worth discussing before we proceed.",
+      "expected": "needs_revision",
+      "rationale": "No verdict and no clear approve/block signal → safe non-approving default.",
+      "source": "synthetic"
+    },
+    {
+      "id": "empty-output",
+      "output": "   ",
+      "expected": "needs_revision",
+      "rationale": "Nothing to go on must never be read as approval.",
+      "source": "synthetic"
+    },
+    {
+      "id": "no-verdict-both-words-block-wins",
+      "output": "Parts look approved, but this is blocked by a missing migration rollback.",
+      "expected": "blocked",
+      "rationale": "With no verdict line and both signals, a block must dominate — you do not ship over an unresolved blocker.",
+      "source": "synthetic"
+    },
+    {
+      "id": "hyphenated-needs-revision-defaults-safe",
+      "output": "Tighten the naming.\nVERDICT: NEEDS-REVISION",
+      "expected": "needs_revision",
+      "rationale": "A hyphenated token is not matched as an explicit verdict, but the safe default lands on the same human-intended needs-revision.",
+      "source": "synthetic"
+    },
+    {
+      "id": "multiline-review-then-approve",
+      "output": "Reviewed correctness, tests, and NFRs.\n- Correctness: traces to all ACs.\n- Tests: added for the new branch.\n- Security: input validated.\nNo blocking issues found.\nVERDICT: APPROVED",
+      "expected": "approved",
+      "rationale": "Realistic multi-line review ending in an approving verdict.",
+      "source": "synthetic"
+    }
+  ]
+}

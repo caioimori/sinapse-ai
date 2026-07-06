@@ -136,6 +136,7 @@
     "validate:agents-md:fix": "node scripts/validate-agents-md.js --fix",
     "validate:tool-descriptions": "node scripts/validate-tool-descriptions.js",
     "validate:story-acs": "node scripts/validate-story-acs.js",
+    "calibrate:judge": "node scripts/calibrate-judge.js",
     "validate:constitution": "node scripts/validate-constitution.js",
     "validate:all": "node scripts/validate-all.js",
     "sync:squad-yaml": "node scripts/sync-squad-yaml-components.js",
