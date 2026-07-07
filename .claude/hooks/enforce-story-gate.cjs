@@ -24,17 +24,33 @@ const path = require('path');
 // Configuration
 // ---------------------------------------------------------------------------
 
-/** Paths that require an active story before code changes. */
+/**
+ * Code directories (fast path). Expanded beyond the original 8 to cover common
+ * back-end / full-stack layouts. NOTE: this is no longer the ONLY signal — any
+ * code file (by extension) in a non-exempt, non-config location is also gated
+ * (see isCodePath), so this list is a fast-path, not a hole-prone allowlist.
+ */
 const CODE_PATHS = [
-  'packages/', 'src/', 'app/', 'lib/', 'bin/',
+  'packages/', 'src/', 'app/', 'apps/', 'lib/', 'bin/',
   'components/', 'pages/', 'api/', 'services/',
+  'server/', 'client/', 'backend/', 'frontend/', 'functions/',
+  'worker/', 'workers/', 'routes/', 'controllers/', 'models/',
+  'handlers/', 'middleware/', 'hooks/', 'stores/', 'store/',
+  'features/', 'modules/', 'domain/', 'views/', 'screens/',
+  'contexts/', 'providers/', 'utils/', 'helpers/', 'cmd/',
+  'internal/', 'pkg/',
 ];
+
+/** Code file extensions — catches code in ANY non-exempt, non-config location. */
+const CODE_EXT = /\.(m?[jt]sx?|cjs|vue|svelte|astro|py|go|rs|java|rb|php|swift|kt|kts|c|cc|cpp|h|hpp|cs|scala|ex|exs|clj|dart)$/i;
 
 /** Paths always exempt from story requirement. */
 const EXEMPT_PATHS = [
   '.claude/', '.sinapse-ai/', '.sinapse/', '.sinapse-custom/',
   'docs/', 'tests/', '__tests__/', 'test/',
   'node_modules/', '.git/', 'squads/', 'outputs/',
+  // Build outputs / generated — never gated.
+  '.next/', 'dist/', 'build/', 'out/', 'coverage/', '.vercel/', '.turbo/', '.cache/',
 ];
 
 /** Config files always exempt. */
@@ -48,6 +64,29 @@ const EXEMPT_FILES = [
   'tailwind.config.js', 'tailwind.config.ts',
   'postcss.config.js', 'postcss.config.cjs',
 ];
+
+/**
+ * Config-like files exempt by PATTERN in ANY folder (so the extension-based
+ * detection never over-blocks tooling config): `*.config.{js,ts,mjs,cjs}`,
+ * `*.d.ts` type decls, and dotfile rc configs (`.eslintrc.json`, `.prettierrc.cjs`).
+ */
+function isConfigLike(rel) {
+  const base = path.basename(rel);
+  return (
+    /\.config\.[cm]?[jt]s$/i.test(base) ||
+    /\.d\.ts$/i.test(base) ||
+    /^\.[a-z0-9_-]+rc(\.[a-z]+)?$/i.test(base)
+  );
+}
+
+/** True if this project IS the SINAPSE framework's own repo (Art. III exception). */
+function isFrameworkRepo(root) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).name === 'sinapse-ai';
+  } catch {
+    return false;
+  }
+}
 
 /** Story statuses that allow implementation. */
 const VALID_STATUSES = ['ready', 'inprogress', 'in progress', 'in_progress', 'inreview', 'in review', 'in_review', 'done'];
@@ -76,7 +115,13 @@ function isExempt(rel) {
 }
 
 function isCodePath(rel) {
-  return CODE_PATHS.some((cp) => rel.startsWith(cp));
+  // Config-like files are never gated, even inside code dirs.
+  if (isConfigLike(rel)) return false;
+  // Fast path: known code directory.
+  if (CODE_PATHS.some((cp) => rel.startsWith(cp))) return true;
+  // Catch-all: a code file (by extension) anywhere non-exempt, non-config —
+  // this is what closes the "code in server/ or root escapes the gate" hole.
+  return CODE_EXT.test(rel);
 }
 
 /**
@@ -179,6 +224,11 @@ function main() {
 
   // Only enforce on code paths
   if (!isCodePath(rel)) process.exit(0);
+
+  // Framework's own repo operates above the story layer (Art. III exception) —
+  // mirror doc-first-gate. The expanded detection now reaches scripts/ etc., so
+  // without this the framework's own development would be over-blocked.
+  if (isFrameworkRepo(root)) process.exit(0);
 
   // Check for active story
   if (hasActiveStory(root)) process.exit(0);
