@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.22.0] — 2026-07-07 — 🎛️ Mesa AF-20260704: guards doc-first + economia de contexto + calibração do juiz
+
+> Minor. Atualização segura via `npx sinapse-ai update`. Executa integralmente a Mesa da rodada 2 (épicos `epic-rodada2-mesa` + `epic-rodada2-mesa-fase2`, PRs #357–#368) — dos guards de qualidade ao contexto enxuto, tudo com verificação adversarial.
+
+### Features
+
+- **gate:** verificação de substância do spec no gate doc-first — passa de "arquivo existe" para conteúdo real (#358)
+- **gate:** check de fonte única CLAUDE.md ⇄ AGENTS.md no gate de PR (#361)
+- **lint:** guard de descrição de ferramentas/comandos — descrição vaga/vazia degrada roteamento, agora barrada (#359)
+- **lint:** ACs nascem em Given/When/Then executável (template) + guard advisory `validate:story-acs` (#364)
+- **spec:** cerimônia COMPLEX≥16 do spec-pipeline aplicada em código, não só em prosa (#360)
+- **quality:** calibração do juiz LLM — golden set determinístico (gate 100% em CI) + primeira medição semântica **95,2%** juiz-vs-humano, 15/15 nos casos críticos (#365, #368)
+
+### Refactoring
+
+- **rules:** híbrido core+companion nas 4 rules NON-NEGOTIABLE situacionais — a lei fica sempre-ativa, o detalhe carrega por path. Contexto fixo de regras **−48%** (856→445 linhas/prompt), enforcement preservado (#367)
+- **agents:** dedup da integração CodeRabbit para fonte única — −140 linhas de config duplicada em 6 agentes (#362)
+
+### Documentation
+
+- **links:** zera 121 links markdown quebrados (#357)
+- **decisões:** 3 ADRs de governança (frota como ferramenta interna, aliases LiteLLM legados, escopo das rules) + fundação dos épicos da Mesa (#356, #363, #366)
+
 ## [1.21.0] — 2026-07-04 — 🏗️ Onda 3 estrutural: gates determinísticos em todos os fluxos + eval como gate de merge
 
 > Minor. Atualização segura via `npx sinapse-ai update`. Fecha a Onda 3 da auditoria AF-20260702 (épico `epic-onda3-estrutural`, PRs #346–#351) — do "otimizado" ao "robusto por design".
