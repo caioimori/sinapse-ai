@@ -115,4 +115,36 @@ describe('doc-first-gate hook', () => {
     const root = mkTmp();
     expect(runHook(root, path.join(root, 'src', 'index.js'), { tool: 'Read' })).toBe(0);
   });
+
+  // ── Coverage gap (story mesa2-docfirst-gate-coverage) ──────────────────────
+  describe('expanded code detection (beyond the original 8 dirs)', () => {
+    it('BLOCKS code in back-end dirs outside the old allowlist (server/, functions/, worker/)', () => {
+      const root = mkTmp();
+      expect(runHook(root, path.join(root, 'server', 'api.ts'))).toBe(2);
+      expect(runHook(root, path.join(root, 'functions', 'handler.js'))).toBe(2);
+      expect(runHook(root, path.join(root, 'worker', 'job.py'))).toBe(2);
+    });
+
+    it('BLOCKS a code file at the project ROOT (no folder at all)', () => {
+      const root = mkTmp();
+      expect(runHook(root, path.join(root, 'index.ts'))).toBe(2);
+      expect(runHook(root, path.join(root, 'main.go'))).toBe(2);
+    });
+
+    it('ALLOWS config-like files anywhere (*.config.*, *.d.ts, .*rc)', () => {
+      const root = mkTmp();
+      expect(runHook(root, path.join(root, 'vitest.config.ts'))).toBe(0);
+      expect(runHook(root, path.join(root, 'src', 'app.config.mjs'))).toBe(0);
+      expect(runHook(root, path.join(root, 'types', 'global.d.ts'))).toBe(0);
+      expect(runHook(root, path.join(root, '.eslintrc.cjs'))).toBe(0);
+    });
+
+    it('ALLOWS build-output dirs (.next/, dist/, coverage/, .vercel/)', () => {
+      const root = mkTmp();
+      expect(runHook(root, path.join(root, '.next', 'server', 'x.js'))).toBe(0);
+      expect(runHook(root, path.join(root, 'dist', 'bundle.js'))).toBe(0);
+      expect(runHook(root, path.join(root, 'coverage', 'lcov.js'))).toBe(0);
+      expect(runHook(root, path.join(root, '.vercel', 'output', 'fn.js'))).toBe(0);
+    });
+  });
 });

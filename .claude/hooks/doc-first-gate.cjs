@@ -30,17 +30,30 @@
 const fs = require('fs');
 const path = require('path');
 
-/** Paths that require doc-first before code changes (mirror enforce-story-gate). */
+/** Code directories (fast path) — mirror enforce-story-gate. Expanded beyond the
+ *  original 8 to cover common back-end/full-stack layouts; combined with CODE_EXT
+ *  below so code in ANY non-exempt, non-config location is gated. */
 const CODE_PATHS = [
-  'packages/', 'src/', 'app/', 'lib/', 'bin/',
+  'packages/', 'src/', 'app/', 'apps/', 'lib/', 'bin/',
   'components/', 'pages/', 'api/', 'services/',
+  'server/', 'client/', 'backend/', 'frontend/', 'functions/',
+  'worker/', 'workers/', 'routes/', 'controllers/', 'models/',
+  'handlers/', 'middleware/', 'hooks/', 'stores/', 'store/',
+  'features/', 'modules/', 'domain/', 'views/', 'screens/',
+  'contexts/', 'providers/', 'utils/', 'helpers/', 'cmd/',
+  'internal/', 'pkg/',
 ];
+
+/** Code file extensions — catches code in ANY non-exempt, non-config location. */
+const CODE_EXT = /\.(m?[jt]sx?|cjs|vue|svelte|astro|py|go|rs|java|rb|php|swift|kt|kts|c|cc|cpp|h|hpp|cs|scala|ex|exs|clj|dart)$/i;
 
 /** Paths always exempt. */
 const EXEMPT_PATHS = [
   '.claude/', '.sinapse-ai/', '.sinapse/', '.sinapse-custom/',
   'docs/', 'tests/', '__tests__/', 'test/',
   'node_modules/', '.git/', 'squads/', 'outputs/',
+  // Build outputs / generated — never gated.
+  '.next/', 'dist/', 'build/', 'out/', 'coverage/', '.vercel/', '.turbo/', '.cache/',
 ];
 
 /** Config files always exempt (scaffolding a project is allowed pre-docs). */
@@ -73,8 +86,24 @@ function isExempt(rel) {
   return EXEMPT_PATHS.some((ep) => rel.startsWith(ep));
 }
 
+/**
+ * Config-like files exempt by PATTERN in ANY folder (so extension-based detection
+ * never over-blocks tooling config): `*.config.{js,ts,mjs,cjs}`, `*.d.ts`, and
+ * dotfile rc configs (`.eslintrc.json`, `.prettierrc.cjs`).
+ */
+function isConfigLike(rel) {
+  const base = path.basename(rel);
+  return (
+    /\.config\.[cm]?[jt]s$/i.test(base) ||
+    /\.d\.ts$/i.test(base) ||
+    /^\.[a-z0-9_-]+rc(\.[a-z]+)?$/i.test(base)
+  );
+}
+
 function isCodePath(rel) {
-  return CODE_PATHS.some((cp) => rel.startsWith(cp));
+  if (isConfigLike(rel)) return false;
+  if (CODE_PATHS.some((cp) => rel.startsWith(cp))) return true;
+  return CODE_EXT.test(rel);
 }
 
 function main() {
