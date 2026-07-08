@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.23.0] — 2026-07-08 — 🛡️ Gates doc-first cobrem código em qualquer pasta
+
+> Minor. Atualização segura via `npx sinapse-ai update`. Fecha a brecha de cobertura dos gates doc-first: a detecção deixa de depender de uma allowlist de 8 pastas e passa a valer por extensão de código em qualquer lugar do projeto.
+
+### Features
+
+- **gate:** amplia cobertura dos gates doc-first pra código em qualquer pasta — detecção por (pasta de código expandida OU extensão de código), isentando config-by-pattern (`*.config.*`, `*.d.ts`, `.*rc`) e build outputs (`.next/`, `dist/`, `coverage/`, `.vercel/`); exceção `isFrameworkRepo` no story gate (Art. III); +25 testes, fail-open preservado (#370, #371)
+
 ## [1.22.0] — 2026-07-07 — 🎛️ Mesa AF-20260704: guards doc-first + economia de contexto + calibração do juiz
 
 > Minor. Atualização segura via `npx sinapse-ai update`. Executa integralmente a Mesa da rodada 2 (épicos `epic-rodada2-mesa` + `epic-rodada2-mesa-fase2`, PRs #357–#368) — dos guards de qualidade ao contexto enxuto, tudo com verificação adversarial.
