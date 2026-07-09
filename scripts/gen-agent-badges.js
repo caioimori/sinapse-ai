@@ -96,8 +96,24 @@ for (const b of badges) if (!b.icon) { b.icon = squadIcon[b.squad] || '◆'; b.h
 // The badge uses only the FIRST name (never the full name).
 for (const b of badges) b.name = b.name.split(/\s+/)[0];
 
+// Some source .md files carry the emoji as a LITERAL escape sequence
+// ("\U0001F9E0" as text). Decode at generation time so every consumer
+// (statusline, selo block) receives the real glyph — never garbage.
+function decodeEmoji(e) {
+  if (typeof e !== 'string' || !e) return e;
+  if (!e.includes('\\u') && !e.includes('\\U')) return e;
+  try {
+    const decoded = e
+      .replace(/\\U([0-9A-Fa-f]{8})/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+      .replace(/\\u([0-9A-Fa-f]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+    return decoded || e;
+  } catch {
+    return e;
+  }
+}
+
 const out = {};
-for (const b of badges) out[b.id] = { emoji: b.icon, area: b.area, name: b.name };
+for (const b of badges) out[b.id] = { emoji: decodeEmoji(b.icon), area: b.area, name: b.name };
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2));
 
 const generic = badges.filter((b) => b.icon === '◆').length;

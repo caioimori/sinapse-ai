@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.23.0
+version: 1.24.0
 generator: scripts/generate-install-manifest.js
 file_count: 1161
 files:
@@ -1368,7 +1368,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:a2a926099e73c24d895657dda4f7650168661c0ce53f218c7eed2546179d1fa8
+    hash: sha256:4da795f0c48efdb220f5fba360a0ee5537a6664b612db4692db94319c1f5c402
     type: data
     size: 558557
   - path: data/learned-patterns.yaml
@@ -4228,9 +4228,9 @@ files:
     type: template
     size: 6764
   - path: product/templates/statusline/agent-badges.json
-    hash: sha256:99ec043c87068c6cf475c9a575bd62bc483f4cf0739785fe9bfcae2ee90aa543
+    hash: sha256:09e2e107a313c1082ecd79ef7696c37cfa1d443065c34585c5f1436d5965f7f9
     type: template
-    size: 18478
+    size: 18445
   - path: product/templates/statusline/statusline-script.js
     hash: sha256:5741f4de84bba45ab72ae9203c99cca5891be7d1081e8da74a8610d0a23b945c
     type: template
