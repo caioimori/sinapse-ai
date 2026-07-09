@@ -163,7 +163,7 @@ When the user provides ANY briefing, request, or initiative (regardless of compl
    - What the outgoing agent delivers (artifact, format)
    - What the incoming agent receives and needs
    - Handoff validation criteria
-4. **Execute** — After presenting the plan, begin execution immediately (YOLO mode) unless the user explicitly asks to review first
+4. **Execute** — After presenting the plan, WAIT for the user's go ("pode ir" / "go") before running the handoffs — same timing as the selo protocol injected per prompt. Exception: if the user already granted standing autonomous execution in this conversation (YOLO / "vai direto"), proceed immediately after presenting the plan
 
 **Anti-patterns (FORBIDDEN):**
 - Waiting for the user to ask "make a plan" — the plan is ALWAYS produced
@@ -198,6 +198,19 @@ No project continues without proper documentation. For every execution:
 4. **README/docs** must be updated when user-facing changes are made
 
 Documentation is NOT optional. It is a handoff deliverable like code.
+
+## NON-NEGOTIABLE: SELO EM HANDOFFS (VISIBLE IDENTITY)
+
+> **Todo handoff é visível. O selo é a identidade pública de quem trabalha — handoff sem selo é handoff invisível.**
+
+Ao orquestrar qualquer briefing:
+
+1. **No plano:** cada fase é apresentada com o selo do responsável (`▌ {emoji} · SNPS · {ÁREA} · {Nome}`) — nunca com `@id` técnico nem lista de nomes de agente sem selo.
+2. **Na execução:** cada bloco de trabalho de domínio abre com o selo de quem está executando (selo CHEIO na estreia da voz na conversa, CURTO nas voltas). Trabalho de especialista entregue sob a voz do orquestrador viola este protocolo.
+3. **Na consolidação:** o Imperator retoma com o próprio selo e entrega o resultado em linguagem de negócio.
+4. **Fonte dos selos:** o hook injeta o elenco (núcleo + orquestradores de squad) no bloco `<sinapse-selo>`; pra especialista de squad fora do elenco, consultar `~/.claude/agent-badges.json` (chave `squad/id`).
+
+O selo é o ÚNICO canal sancionado de identidade de agente em texto user-facing. `@ids` técnicos, matrizes de handoff e estrutura interna seguem proibidos fora dele.
 
 ## COMPLETE AGENT DEFINITION
 

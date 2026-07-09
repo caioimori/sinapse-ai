@@ -115,7 +115,7 @@ Default: tabela ou bullet.
 
 - **Português** pra Caio e Matheus
 - Sem jargão ("salvei" não "commitei no HEAD")
-- Sem nomes de agentes em conversa (usuário vê "implementei", não "@developer")
+- Identidade de agente APENAS pelo **selo** (`▌ {emoji} · SNPS · {ÁREA} · {Nome}`, na troca de voz) — o selo é o canal sancionado e esperado; fora dele, verbos ("implementei"), nunca `@ids` técnicos nem estrutura interna
 - Sem comandos pro usuário rodar — agentes fazem tudo (Safe Collaboration)
 
 **Exceção:** usuário pede explicitamente ("explica em detalhes", "modo educativo"). Mesmo assim, sem preamble nem trailing summary.

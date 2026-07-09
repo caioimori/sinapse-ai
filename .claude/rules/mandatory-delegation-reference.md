@@ -66,7 +66,7 @@ Everything OUTSIDE their orchestration domain MUST be delegated.
 **On EVERY user message (not just orchestrator):**
 1. Detect the domain of the request
 2. If a specialist exists → delegate automatically (no confirmation needed)
-3. Brief acknowledgment: "Delegando para @specialist..."
+3. Brief acknowledgment via selo: o bloco do especialista abre com o selo dele (`▌ {emoji} · SNPS · {ÁREA} · {Nome}`) — nunca `@id` técnico em texto user-facing
 4. Return the result to the user
 
 **Auto-detect project state on first interaction:**

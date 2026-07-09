@@ -16,6 +16,12 @@
  *   - /squad:cmd         -> sets squad (when not :agents:)
  *   - *exit / *reset     -> clears agent/squad/role/specialists + imperator.active
  *
+ * Badge injection (selo):
+ *   - Primary voice has a 6h freshness TTL (voiceTs) — no more ghost voices
+ *     leaking across sessions.
+ *   - With the Imperator active, the block also ships the handoff CAST (core
+ *     agents + squad orchestrators) so auto-routed voices can stamp their seal.
+ *
  * Writes the per-CWD cache to:
  *   ~/.claude/session-cache/{simpleHash(cwd)}.json   (Session-Cache v2 shape)
  *
@@ -68,6 +74,7 @@ function normalizeCache(raw) {
     role: null,
     imperator: { active: false, ts: 0 },
     specialists: [],
+    voiceTs: 0,
     updated: '',
   };
   if (!raw || typeof raw !== 'object') return base;
@@ -75,6 +82,17 @@ function normalizeCache(raw) {
   base.agent = typeof raw.agent === 'string' ? raw.agent : '';
   base.squad = typeof raw.squad === 'string' ? raw.squad : '';
   base.role = typeof raw.role === 'string' ? raw.role : null;
+  base.voiceTs = Number.isFinite(raw.voiceTs) && raw.voiceTs > 0 ? raw.voiceTs : 0;
+  base.updated = typeof raw.updated === 'string' ? raw.updated : '';
+  // One-time migration for legacy caches (written before voiceTs existed):
+  // freeze the voice-freshness point at the cache's ORIGINAL last-activity
+  // time. This runs at READ time, before any writer refreshes `updated`, and
+  // the migrated value persists on the next write — so `updated` refreshes
+  // (Stop hook, delegation tracker, /squad:cmd) can never resurrect a ghost.
+  if (!base.voiceTs && base.updated) {
+    const parsed = Date.parse(base.updated);
+    if (Number.isFinite(parsed)) base.voiceTs = Math.floor(parsed / 1000);
+  }
 
   if (raw.imperator && typeof raw.imperator === 'object') {
     base.imperator = {
@@ -101,6 +119,9 @@ function normalizeCache(raw) {
 function applyName(cache, name, ts) {
   if (!name) return;
   const lower = name.toLowerCase();
+
+  // Any explicit mention renews the primary-voice freshness window (TTL below).
+  cache.voiceTs = ts;
 
   if (MASTERS.has(lower)) {
     // Master -> imperator. Does NOT enter specialists.
@@ -142,18 +163,42 @@ function applyName(cache, name, ts) {
 // Load ~/.claude/agent-badges.json and index by last path segment. Keys are
 // either bare ids ("developer") or "squad/id" ("squad-brand/brand-orqx"); the
 // session-cache only ever stores the bare id, so we index on the last segment.
+// Also derives the handoff CAST (core agents + squad orchestrators) so the
+// model can stamp the seal of any agent it routes to — auto-routing means the
+// user never types those @ids, so the roster can't come from the prompt.
+// A few badge entries carry double-escaped emoji ("\\U0001F9E0" as literal
+// text). Decode them for display; garbage never reaches the user's selo.
+function fixEmoji(e) {
+  if (typeof e !== 'string' || !e) return '◆';
+  if (!e.includes('\\u') && !e.includes('\\U')) return e;
+  try {
+    const decoded = e
+      .replace(/\\U([0-9A-Fa-f]{8})/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+      .replace(/\\u([0-9A-Fa-f]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+    return decoded || '◆';
+  } catch {
+    return '◆';
+  }
+}
+
 function loadBadges() {
   try {
     const p = path.join(os.homedir(), '.claude', 'agent-badges.json');
     const raw = JSON.parse(fs.readFileSync(p, 'utf8'));
     if (!raw || typeof raw !== 'object') return null;
     const byId = {};
+    const core = [];
+    const orqx = [];
     for (const key of Object.keys(raw)) {
       const v = raw[key];
       if (!v || typeof v !== 'object' || !v.emoji || !v.name) continue;
-      byId[key.split('/').pop()] = v;
+      const id = key.split('/').pop();
+      const b = { emoji: fixEmoji(v.emoji), area: v.area, name: v.name };
+      byId[id] = b;
+      if (!key.includes('/')) core.push({ id, b });
+      else if (id.endsWith('-orqx')) orqx.push({ id, b });
     }
-    return Object.keys(byId).length ? byId : null;
+    return Object.keys(byId).length ? { byId, core, orqx } : null;
   } catch {
     return null;
   }
@@ -178,20 +223,35 @@ function resolvePrimary(cache, byId) {
   return null;
 }
 
+// Freshness of the primary voice: an explicit mention within BADGE_TTL keeps
+// the voice alive; older than that → the voice expired. Kills ghost voices
+// that used to leak across sessions (the primary voice had no TTL at all).
+// voiceTs is the SINGLE source here — legacy caches are migrated at read time
+// by normalizeCache (frozen at their original `updated`), so a `updated`
+// refresh by any writer can never resurrect an expired voice.
+function voiceIsFresh(cache, now) {
+  const ts = Number.isFinite(cache.voiceTs) && cache.voiceTs > 0 ? cache.voiceTs : 0;
+  return ts > 0 && now - ts < BADGE_TTL;
+}
+
 // Build the additionalContext string, or null when no SINAPSE voice is active.
 function buildBadgeContext(cache) {
-  const byId = loadBadges();
-  if (!byId) return null;
+  const badges = loadBadges();
+  if (!badges) return null;
+  const byId = badges.byId;
 
   const now = nowSec();
-  const primary = resolvePrimary(cache, byId);
+  const primary = voiceIsFresh(cache, now) ? resolvePrimary(cache, byId) : null;
 
   // The specialist roster is only meaningful while the Imperator is coordinating
   // a multi-agent orchestration; a plain specialist↔specialist switch shows just
-  // the active voice (no roster noise).
+  // the active voice (no roster noise). `imperator.active` is turn-scoped (the
+  // Stop hook lowers it), so cross-turn orchestration is detected by the ROLE,
+  // which survives turns and expires with the voice TTL.
   const imperatorActive =
     cache.imperator && cache.imperator.active && now - (cache.imperator.ts || 0) < BADGE_TTL;
-  const specs = imperatorActive
+  const imperatorLeading = imperatorActive || (cache.role === 'imperator' && !!primary);
+  const specs = imperatorLeading
     ? (cache.specialists || [])
         .filter((s) => s && s.id && s.id !== cache.agent && now - (s.ts || 0) < BADGE_TTL)
         .map((s) => byId[s.id])
@@ -210,6 +270,32 @@ function buildBadgeContext(cache) {
   if (specs.length) {
     lines.push('Especialistas em jogo nesta orquestração:');
     for (const b of specs) lines.push(`  • ${fullBadge(b)}   (curto: ${shortBadge(b)})`);
+  }
+  // With the Imperator coordinating, ship the handoff cast (core + squad
+  // orchestrators) so every voice the plan routes to can enter with its own
+  // seal — auto-routing means these ids never appear in the user's prompt.
+  if (imperatorLeading && (badges.core.length || badges.orqx.length)) {
+    const cast = badges.core.filter((e) => e.id !== IMPERATOR_KEY).concat(badges.orqx);
+    const castLines = cast.map(
+      (e) => `  ${e.id} → ${e.b.emoji} · ${e.b.area || '—'} · ${e.b.name}`
+    );
+    // Hard budget: the whole <sinapse-selo> block stays ≤ 2500 chars even as
+    // squads grow. RESERVE covers the protocol tail pushed after this section.
+    const RESERVE = 900;
+    let room = 2500 - RESERVE - lines.join('\n').length;
+    const kept = [];
+    for (const l of castLines) {
+      if (room - (l.length + 1) < 0) break;
+      kept.push(l);
+      room -= l.length + 1;
+    }
+    lines.push('');
+    lines.push('Elenco pra handoffs — cada voz entra com o selo `▌ {emoji} · SNPS · {área} · {nome}`:');
+    lines.push(...kept);
+    if (kept.length < castLines.length) {
+      lines.push(`  … +${castLines.length - kept.length} no arquivo abaixo`);
+    }
+    lines.push('  (especialista de squad fora do elenco: chave "squad/id" em ~/.claude/agent-badges.json)');
   }
   lines.push('');
   lines.push('Protocolo (NON-NEGOTIABLE):');
@@ -278,6 +364,7 @@ function main() {
     cache.role = null;
     cache.specialists = [];
     cache.imperator = { active: false, ts: cache.imperator.ts || 0 };
+    cache.voiceTs = 0;
     changed = true;
   } else {
     // /ns:agents:name  (e.g. /SINAPSE:agents:developer) -> classify as @name.

@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.21.0
+version: 1.23.0
 generator: scripts/generate-install-manifest.js
-file_count: 1160
+file_count: 1161
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1368,7 +1368,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:4da795f0c48efdb220f5fba360a0ee5537a6664b612db4692db94319c1f5c402
+    hash: sha256:a2a926099e73c24d895657dda4f7650168661c0ce53f218c7eed2546179d1fa8
     type: data
     size: 558557
   - path: data/learned-patterns.yaml
@@ -1504,9 +1504,9 @@ files:
     type: agent
     size: 21342
   - path: development/agents/snps-orqx.md
-    hash: sha256:8e4145cdf25f57d366e0f6b3563e907c7a3ba8b2d6d3af0a6e573927f4a0321c
+    hash: sha256:d557a1c47a3bc82efdcbf799ca4363ea19a1883244edc5557474625315cb6fe8
     type: agent
-    size: 43871
+    size: 45205
   - path: development/agents/sprint-lead.md
     hash: sha256:df8dbd1de7b9c1238cbe3629d307563bbac1515869a5658dc7286b3dcbb55078
     type: agent
@@ -4236,13 +4236,17 @@ files:
     type: template
     size: 9200
   - path: product/templates/statusline/track-agent-clear.cjs
-    hash: sha256:3cda606de2463374e60440ba6cae9ca98e39b782b19c6ae39aa7569a1b211f09
+    hash: sha256:1258406127c7f3c66f2b17e9a25d26c725a7112443a1a17127a6f29b831c3f4f
     type: template
-    size: 2137
+    size: 3171
   - path: product/templates/statusline/track-agent.cjs
-    hash: sha256:0194c9a5750ed9e7a11fb5de21060021f64636f21e8b91039543abccaf6a4c86
+    hash: sha256:b8ab372aba97c4c3d82d78b5130eb44f47ffe8e74b925fe7ef75f5fb4393519a
     type: template
-    size: 10990
+    size: 15433
+  - path: product/templates/statusline/track-delegation.cjs
+    hash: sha256:17dc12b0ee286c752cddf6186cee6f25d19c1a59f3769090fa061a32d796c187
+    type: template
+    size: 5265
   - path: product/templates/story-tmpl.yaml
     hash: sha256:3dbcd522e69b86715f32eaf0cd13ce3a2631b5d2fc4f068c33df9593b6dbbfc2
     type: template

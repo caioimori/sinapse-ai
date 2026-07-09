@@ -659,6 +659,14 @@ const HOOK_EVENT_MAP = {
     matcher: null,
     timeout: 10,
   },
+  // Delegation tracker — registers each real Task-tool delegation in the
+  // session-cache so auto-routed specialists surface in the badge context.
+  // Observer-only, fail-open (always exit 0).
+  'track-delegation.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Task',
+    timeout: 5,
+  },
 };
 
 /** Default event config for unmapped hooks (backwards compatible). */
