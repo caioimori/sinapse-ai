@@ -76,8 +76,11 @@ describe('selo/handoff visibility (track-agent trio)', () => {
   let cacheFile;
 
   beforeEach(() => {
-    home = fs.mkdtempSync(path.join(os.tmpdir(), 'selo-home-'));
-    work = fs.mkdtempSync(path.join(os.tmpdir(), 'selo-work-'));
+    // realpathSync: on macOS os.tmpdir() is a symlink (/var → /private/var);
+    // the spawned hook hashes its OWN process.cwd() (the real path), so the
+    // test must hash the same string or it looks for the wrong cache file.
+    home = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'selo-home-')));
+    work = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'selo-work-')));
     fs.mkdirSync(path.join(home, '.claude', 'session-cache'), { recursive: true });
     fs.writeFileSync(
       path.join(home, '.claude', 'agent-badges.json'),
