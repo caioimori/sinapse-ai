@@ -62,7 +62,7 @@ When ANY user message arrives, classify and route:
 When routing between agents/squads:
 1. **Never ask permission** — just route
 2. **Provide context** — pass the user's original request + project state
-3. **Confirm briefly** — "Delegando para @specialist que e o expert nisso."
+3. **Confirm via selo** — o bloco do especialista abre com o selo dele (`▌ {emoji} · SNPS · {ÁREA} · {Nome}`); nunca `@id` técnico em texto user-facing
 4. **Return result** — bring the deliverable back to the user
 
 ## Brownfield Auto-Behavior

@@ -5,8 +5,10 @@
  * Called via Claude Code Stop hook (when the assistant turn ends).
  *
  * Soft-clears the per-CWD session cache at end of turn:
- *   - specialists[] -> []          (no longer "active" specialists)
- *   - imperator.active -> false    (imperator no longer active)
+ *   - imperator.active -> false    (turn-scoped flag; role survives)
+ *   - PRESERVES specialists[]       (orchestration cast spans turns — the 6h
+ *     TTL in track-agent.cjs/statusline handles expiry; wiping per turn made
+ *     cross-turn delegation tracking impossible)
  *   - PRESERVES squad and agent     (last-known, for statusline back-compat)
  *   - regrava updated (ISO)
  *
@@ -49,7 +51,19 @@ function main() {
 
   if (!raw || typeof raw !== 'object') process.exit(0);
 
+  // Freeze the voice-freshness point BEFORE refreshing `updated` below.
+  // Legacy caches (pre-voiceTs) inherit their ORIGINAL last-activity time —
+  // without this, every Stop would refresh `updated` and resurrect expired
+  // ("ghost") voices on the next prompt, defeating the voice TTL.
+  let voiceTs = Number.isFinite(raw.voiceTs) && raw.voiceTs > 0 ? raw.voiceTs : 0;
+  if (!voiceTs && typeof raw.updated === 'string' && raw.updated) {
+    const parsed = Date.parse(raw.updated);
+    if (Number.isFinite(parsed)) voiceTs = Math.floor(parsed / 1000);
+  }
+
   // Build a v2 cache preserving squad + agent, clearing the active layers.
+  // voiceTs is preserved so the primary voice keeps its 6h freshness window
+  // across turns of the same session (track-agent.cjs enforces the TTL).
   const cache = {
     version: 2,
     agent: typeof raw.agent === 'string' ? raw.agent : '',
@@ -59,7 +73,12 @@ function main() {
       active: false,
       ts: raw.imperator && Number.isFinite(raw.imperator.ts) ? raw.imperator.ts : 0,
     },
-    specialists: [],
+    specialists: Array.isArray(raw.specialists)
+      ? raw.specialists.filter(
+          (s) => s && typeof s === 'object' && typeof s.id === 'string' && s.id
+        )
+      : [],
+    voiceTs,
     updated: new Date().toISOString(),
   };
 

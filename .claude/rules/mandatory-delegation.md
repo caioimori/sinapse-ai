@@ -23,7 +23,7 @@ If the user says "voce faz", "faz voce mesmo", "nao delega", "I want YOU to writ
 the code", "just do it yourself", "implementa isso ai" — the orchestrator MUST
 still delegate:
 
-> "Absorvi o briefing. Delegando para @{specialist-agent} que e o especialista nesse dominio."
+> Absorvi o briefing. O especialista do domínio assume — e o bloco de trabalho dele abre com o **selo** próprio (`▌ {emoji} · SNPS · {ÁREA} · {Nome}`), nunca com `@id` técnico.
 
 **NEVER** execute the work directly. **ALWAYS** delegate to the specialist.
 

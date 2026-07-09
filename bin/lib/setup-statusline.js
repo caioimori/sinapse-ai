@@ -12,11 +12,13 @@
  *   - ~/.claude/statusline-script.js          (renders the statusline)
  *   - ~/.claude/hooks/track-agent.cjs         (UserPromptSubmit detector — writes session-cache + injects the agent badge)
  *   - ~/.claude/hooks/track-agent-clear.cjs   (Stop hook — clears session-cache on session end)
+ *   - ~/.claude/hooks/track-delegation.cjs    (PreToolUse[Task] — registers real delegations in the cast)
  *   - ~/.claude/agent-badges.json             (id -> {emoji, area, name} — read by the detector + statusline)
  *   - ~/.claude/session-cache/                (per-cwd cache directory)
  *   - settings.statusLine                     (graceful skip if already set)
  *   - settings.hooks.UserPromptSubmit → track-agent.cjs   (idempotent guard)
  *   - settings.hooks.Stop            → track-agent-clear.cjs (idempotent guard)
+ *   - settings.hooks.PreToolUse[Task] → track-delegation.cjs (idempotent guard)
  *
  * Design notes:
  *   - FAIL-SOFT: statusline is non-critical. Any unexpected error returns a
@@ -43,6 +45,7 @@ function resolveSources(sourceCoreDir) {
     script: path.join(templatesDir, 'statusline-script.js'),
     detector: path.join(templatesDir, 'track-agent.cjs'),
     clear: path.join(templatesDir, 'track-agent-clear.cjs'),
+    delegation: path.join(templatesDir, 'track-delegation.cjs'),
     badges: path.join(templatesDir, 'agent-badges.json'),
   };
 }
@@ -77,7 +80,7 @@ function nodeCommand(targetPath) {
  * @param {string} [opts.sourceCoreDir] Absolute path to the installed `.sinapse-ai` directory.
  *   Defaults to the repo's `.sinapse-ai` relative to this module (`../../.sinapse-ai`).
  * @param {string} [opts.homeDir] Override the home directory (testing). Defaults to os.homedir().
- * @returns {Promise<{installed:boolean, reason?:string, statusLineSet:boolean, detectorHook:boolean, clearHook:boolean, files:string[]}>}
+ * @returns {Promise<{installed:boolean, reason?:string, statusLineSet:boolean, detectorHook:boolean, clearHook:boolean, delegationHook:boolean, files:string[]}>}
  */
 async function setupStatusline(opts = {}) {
   const result = {
@@ -85,6 +88,7 @@ async function setupStatusline(opts = {}) {
     statusLineSet: false,
     detectorHook: false,
     clearHook: false,
+    delegationHook: false,
     files: [],
   };
 
@@ -102,6 +106,7 @@ async function setupStatusline(opts = {}) {
       return result;
     }
     const hasClear = await fse.pathExists(sources.clear);
+    const hasDelegation = await fse.pathExists(sources.delegation);
 
     const claudeDir = path.join(homeDir, '.claude');
     const hooksDir = path.join(claudeDir, 'hooks');
@@ -110,6 +115,7 @@ async function setupStatusline(opts = {}) {
     const scriptTarget = path.join(claudeDir, 'statusline-script.js');
     const detectorTarget = path.join(hooksDir, 'track-agent.cjs');
     const clearTarget = path.join(hooksDir, 'track-agent-clear.cjs');
+    const delegationTarget = path.join(hooksDir, 'track-delegation.cjs');
 
     // Ensure directories (hooks + session-cache the trackers write to).
     await fse.ensureDir(hooksDir);
@@ -123,6 +129,10 @@ async function setupStatusline(opts = {}) {
     if (hasClear) {
       await fse.copy(sources.clear, clearTarget);
       result.files.push(clearTarget);
+    }
+    if (hasDelegation) {
+      await fse.copy(sources.delegation, delegationTarget);
+      result.files.push(delegationTarget);
     }
 
     // Agent badge map (id -> {emoji, area, name}). Read by the detector hook to
@@ -153,16 +163,25 @@ async function setupStatusline(opts = {}) {
       result.statusLineSet = true;
     }
 
-    // Hooks — register the .cjs detector (UserPromptSubmit) + clear (Stop), idempotently.
+    // Hooks — register the .cjs detector (UserPromptSubmit) + clear (Stop) +
+    // delegation tracker (PreToolUse[Task]), idempotently.
     if (!settings.hooks || typeof settings.hooks !== 'object') {
       settings.hooks = {};
     }
 
-    if (!Array.isArray(settings.hooks.UserPromptSubmit)) {
-      settings.hooks.UserPromptSubmit = [];
-    }
-    if (!hasHookCommand(settings.hooks.UserPromptSubmit, 'track-agent.cjs')) {
-      settings.hooks.UserPromptSubmit.push({
+    // PRESERVATION GUARD: if the user's settings carry an event in a legacy /
+    // hand-written NON-ARRAY shape, we must not clobber it (that would destroy
+    // their hooks). Skip registration for that event instead — never destroy.
+    const eventArray = (event) => {
+      if (settings.hooks[event] === undefined || settings.hooks[event] === null) {
+        settings.hooks[event] = [];
+      }
+      return Array.isArray(settings.hooks[event]) ? settings.hooks[event] : null;
+    };
+
+    const upsArr = eventArray('UserPromptSubmit');
+    if (upsArr && !hasHookCommand(upsArr, 'track-agent.cjs')) {
+      upsArr.push({
         matcher: '',
         hooks: [{ type: 'command', command: nodeCommand(detectorTarget), timeout: 10 }],
       });
@@ -170,15 +189,27 @@ async function setupStatusline(opts = {}) {
     }
 
     if (hasClear) {
-      if (!Array.isArray(settings.hooks.Stop)) {
-        settings.hooks.Stop = [];
-      }
-      if (!hasHookCommand(settings.hooks.Stop, 'track-agent-clear.cjs')) {
-        settings.hooks.Stop.push({
+      const stopArr = eventArray('Stop');
+      if (stopArr && !hasHookCommand(stopArr, 'track-agent-clear.cjs')) {
+        stopArr.push({
           matcher: '',
           hooks: [{ type: 'command', command: nodeCommand(clearTarget), timeout: 10 }],
         });
         result.clearHook = true;
+      }
+    }
+
+    // Delegation tracker — PreToolUse on the Task tool: registers each real
+    // (programmatic) delegation in the session-cache so auto-routed specialists
+    // surface in the badge context and statusline. Observer-only, fail-open.
+    if (hasDelegation) {
+      const preArr = eventArray('PreToolUse');
+      if (preArr && !hasHookCommand(preArr, 'track-delegation.cjs')) {
+        preArr.push({
+          matcher: 'Task',
+          hooks: [{ type: 'command', command: nodeCommand(delegationTarget), timeout: 5 }],
+        });
+        result.delegationHook = true;
       }
     }
 
