@@ -60,37 +60,37 @@
     "name": "Mosaic"
   },
   "claude-code-mastery/claude-mastery-chief": {
-    "emoji": "\\U0001F9E0",
+    "emoji": "🧠",
     "area": "CLAUDE",
     "name": "Orion"
   },
   "claude-code-mastery/config-engineer": {
-    "emoji": "\\u2699\\uFE0F",
+    "emoji": "⚙️",
     "area": "CLAUDE",
     "name": "Sigil"
   },
   "claude-code-mastery/hooks-architect": {
-    "emoji": "\\U0001F3A3",
+    "emoji": "🎣",
     "area": "CLAUDE",
     "name": "Latch"
   },
   "claude-code-mastery/mcp-integrator": {
-    "emoji": "\\U0001F50C",
+    "emoji": "🔌",
     "area": "CLAUDE",
     "name": "Piper"
   },
   "claude-code-mastery/project-integrator": {
-    "emoji": "\\U0001F6E0\\uFE0F",
+    "emoji": "🛠️",
     "area": "CLAUDE",
     "name": "Conduit"
   },
   "claude-code-mastery/roadmap-sentinel": {
-    "emoji": "\\U0001F9ED",
+    "emoji": "🧭",
     "area": "CLAUDE",
     "name": "Vigil"
   },
   "claude-code-mastery/skill-craftsman": {
-    "emoji": "\\u2728",
+    "emoji": "✨",
     "area": "CLAUDE",
     "name": "Anvil"
   },
@@ -102,7 +102,7 @@
   "squad-animations/animation-interpreter": {
     "emoji": "🔮",
     "area": "MOTION",
-    "name": "Lens"
+    "name": "Decoder"
   },
   "squad-animations/animation-performance-engineer": {
     "emoji": "⚡",
@@ -167,7 +167,7 @@
   "squad-brand/brand-creative-engineer": {
     "emoji": "🔥",
     "area": "BRAND",
-    "name": "Forge"
+    "name": "Ember"
   },
   "squad-brand/brand-culture-architect": {
     "emoji": "🧬",
@@ -187,7 +187,7 @@
   "squad-brand/brand-motion-vfx": {
     "emoji": "✨",
     "area": "BRAND",
-    "name": "Flux"
+    "name": "Ripple"
   },
   "squad-brand/brand-naming-specialist": {
     "emoji": "🏷️",
@@ -267,7 +267,7 @@
   "squad-commercial/commercial-orqx": {
     "emoji": "🚀",
     "area": "VENDAS",
-    "name": "Pipeline"
+    "name": "Circuit"
   },
   "squad-commercial/cs-business-auditor": {
     "emoji": "🔬",
@@ -282,7 +282,7 @@
   "squad-commercial/cs-crm-specialist": {
     "emoji": "🗄️",
     "area": "VENDAS",
-    "name": "Vault"
+    "name": "Rolodex"
   },
   "squad-commercial/cs-funnel-architect": {
     "emoji": "🌊",
@@ -302,7 +302,7 @@
   "squad-commercial/cs-revops-analyst": {
     "emoji": "📊",
     "area": "VENDAS",
-    "name": "Ledger"
+    "name": "Turbine"
   },
   "squad-commercial/cs-sales-closer": {
     "emoji": "🎯",
@@ -322,7 +322,7 @@
   "squad-content/content-engineer": {
     "emoji": "⚡",
     "area": "CONTENT",
-    "name": "Arc"
+    "name": "Truss"
   },
   "squad-content/content-governor": {
     "emoji": "📋",
@@ -352,7 +352,7 @@
   "squad-copy/ad-copywriter": {
     "emoji": "⚡",
     "area": "COPY",
-    "name": "Spark"
+    "name": "Blitz"
   },
   "squad-copy/brand-voice-writer": {
     "emoji": "🎵",
@@ -382,7 +382,7 @@
   "squad-copy/direct-response-writer": {
     "emoji": "🔥",
     "area": "COPY",
-    "name": "Forge"
+    "name": "Torque"
   },
   "squad-copy/email-sequence-strategist": {
     "emoji": "📧",
@@ -392,7 +392,7 @@
   "squad-copy/funnel-copywriter": {
     "emoji": "🌊",
     "area": "COPY",
-    "name": "Flow"
+    "name": "Chute"
   },
   "squad-copy/headline-specialist": {
     "emoji": "🎣",
@@ -502,7 +502,7 @@
   "squad-courses/production-director": {
     "emoji": "🎬",
     "area": "COURSES",
-    "name": "Lens"
+    "name": "Slate"
   },
   "squad-courses/slide-designer": {
     "emoji": "🎨",
@@ -552,7 +552,7 @@
   "squad-design/cro-persuasion": {
     "emoji": "🎯",
     "area": "DESIGN",
-    "name": "Convert"
+    "name": "Sway"
   },
   "squad-design/design-orqx": {
     "emoji": "🎯",
@@ -567,12 +567,12 @@
   "squad-design/dx-accessibility-specialist": {
     "emoji": "♿",
     "area": "DESIGN",
-    "name": "Beacon"
+    "name": "Aperture"
   },
   "squad-design/dx-design-system-architect": {
     "emoji": "🏛️",
     "area": "DESIGN",
-    "name": "Stratum"
+    "name": "Lattice"
   },
   "squad-design/dx-frontend-engineer": {
     "emoji": "🔧",
@@ -582,27 +582,27 @@
   "squad-design/dx-interaction-designer": {
     "emoji": "✨",
     "area": "DESIGN",
-    "name": "Kinetic"
+    "name": "Gesture"
   },
   "squad-design/dx-performance-engineer": {
     "emoji": "⚡",
     "area": "DESIGN",
-    "name": "Apex"
+    "name": "Velocity"
   },
   "squad-design/dx-ui-designer": {
     "emoji": "🎨",
     "area": "DESIGN",
-    "name": "Canvas"
+    "name": "Palette"
   },
   "squad-design/dx-ux-strategist": {
     "emoji": "🧭",
     "area": "DESIGN",
-    "name": "Compass"
+    "name": "Vantage"
   },
   "squad-design/platform-aesthetic-director": {
     "emoji": "🎯",
     "area": "DESIGN",
-    "name": "Vertex"
+    "name": "Hue"
   },
   "squad-design/premium-packaging-strategist": {
     "emoji": "🎯",
@@ -642,12 +642,12 @@
   "squad-finance/forecast-strategist": {
     "emoji": "🔭",
     "area": "FINANCE",
-    "name": "Horizon"
+    "name": "Runway"
   },
   "squad-finance/pricing-strategist": {
     "emoji": "💰",
     "area": "FINANCE",
-    "name": "Mint"
+    "name": "Markup"
   },
   "squad-finance/profitability-analyst": {
     "emoji": "📈",
@@ -697,7 +697,7 @@
   "squad-paidmedia/campaign-analyst": {
     "emoji": "📊",
     "area": "ADS",
-    "name": "Pulse"
+    "name": "Cadence"
   },
   "squad-paidmedia/creative-strategist": {
     "emoji": "🎨",
@@ -707,7 +707,7 @@
   "squad-paidmedia/cro-specialist": {
     "emoji": "🔄",
     "area": "ADS",
-    "name": "Convert"
+    "name": "Uplift"
   },
   "squad-paidmedia/google-ads-specialist": {
     "emoji": "🔍",
@@ -717,7 +717,7 @@
   "squad-paidmedia/meta-ads-specialist": {
     "emoji": "📡",
     "area": "ADS",
-    "name": "Signal"
+    "name": "Reach"
   },
   "squad-paidmedia/paidmedia-orqx": {
     "emoji": "🎯",
@@ -732,7 +732,7 @@
   "squad-paidmedia/pm-creative-performance-analyst": {
     "emoji": "📊",
     "area": "ADS",
-    "name": "Lens"
+    "name": "Focal"
   },
   "squad-paidmedia/pm-youtube-ads-specialist": {
     "emoji": "🎬",
@@ -752,7 +752,7 @@
   "squad-product/ps-delivery-manager": {
     "emoji": "⏱️",
     "area": "PRODUCT",
-    "name": "Tempo"
+    "name": "Metronome"
   },
   "squad-product/ps-discovery-lead": {
     "emoji": "🔬",
@@ -767,7 +767,7 @@
   "squad-product/ps-product-ops-specialist": {
     "emoji": "🧩",
     "area": "PRODUCT",
-    "name": "Mosaic"
+    "name": "Cog"
   },
   "squad-product/ps-product-strategist": {
     "emoji": "📐",
@@ -777,7 +777,7 @@
   "squad-research/audience-intelligence": {
     "emoji": "💓",
     "area": "RESEARCH",
-    "name": "Pulse"
+    "name": "Empath"
   },
   "squad-research/competitive-intelligence": {
     "emoji": "🦅",
@@ -787,7 +787,7 @@
   "squad-research/data-synthesizer": {
     "emoji": "🧶",
     "area": "RESEARCH",
-    "name": "Loom"
+    "name": "Braid"
   },
   "squad-research/deep-researcher": {
     "emoji": "📚",
@@ -797,7 +797,7 @@
   "squad-research/market-analyst": {
     "emoji": "🔭",
     "area": "RESEARCH",
-    "name": "Scope"
+    "name": "Sonar"
   },
   "squad-research/research-orqx": {
     "emoji": "🔮",
