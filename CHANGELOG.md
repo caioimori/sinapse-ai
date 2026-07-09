@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.24.0] — 2026-07-09 — 🎭 Handoffs visíveis: selo de cada agente na orquestração
+
+> Minor. Atualização segura via `npx sinapse-ai update`. Fecha as 4 causas dos handoffs invisíveis ("nunca vejo o nome dos outros agentes"): a identidade pública dos especialistas agora chega ao modelo e aparece na conversa.
+
+### Features
+
+- **selo:** elenco de selos (core + orquestradores de squad) injetado quando o Imperator lidera, com teto auto-aplicado ≤2500 chars e emoji double-escaped decodificado; TTL de 6h na voz primária mata a voz fantasma entre sessões, com migração de caches legados congelada anti-ressurreição (validada por verificação adversarial + teste de regressão) (#373)
+- **selo:** hook novo `track-delegation.cjs` (PreToolUse[Task]) rastreia delegações reais no session-cache — só ids com badge, masters excluídos, observer-only fail-open, escrita atômica; o Stop hook passa a preservar o elenco entre turnos (#373)
+- **installer:** setup do statusline copia/registra o hook novo com guarda de preservação — settings legado não-array nunca é sobrescrito (3 eventos) (#373)
+
+### Documentation
+
+- **rules:** selo vira o canal único de identidade de agente — fim do "Delegando para @id" e do "sem nomes de agentes" (token-economy §7, mandatory-delegation, squad-awareness); seção NON-NEGOTIABLE de selo em handoffs no orquestrador mestre + timing plano→"pode ir" reconciliado (#373)
+
 ## [1.23.0] — 2026-07-08 — 🛡️ Gates doc-first cobrem código em qualquer pasta
 
 > Minor. Atualização segura via `npx sinapse-ai update`. Fecha a brecha de cobertura dos gates doc-first: a detecção deixa de depender de uma allowlist de 8 pastas e passa a valer por extensão de código em qualquer lugar do projeto.
