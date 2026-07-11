@@ -63,7 +63,7 @@ describe('model-routing single source (AF-20260702 item 2.10)', () => {
   test('rule §2 table matches the source: same (model, effort) pairs in the same order', () => {
     // Rule rows look like: | Task label | **opus** | `xhigh` |
     const ruleRows = [...rule.matchAll(/^\|[^|]+\|\s*\*\*(opus|sonnet|haiku)\*\*\s*\|\s*`?(xhigh|max|high|medium|low)`?\s*\|/gm)].map(
-      (m) => ({ model: m[1], effort: m[2] })
+      (m) => ({ model: m[1], effort: m[2] }),
     );
     const sourceRows = routing.tiers.map((t) => ({ model: t.model, effort: t.effort }));
     expect(ruleRows).toEqual(sourceRows);
