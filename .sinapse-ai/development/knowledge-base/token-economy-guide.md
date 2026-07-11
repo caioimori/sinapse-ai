@@ -61,16 +61,17 @@
 
 ## Model Routing Table
 
-| Task Type | Recommended Model | Rationale |
-|-----------|------------------|-----------|
-| Architecture decisions | Opus | Needs deep reasoning |
-| Code implementation | Opus / Sonnet | Opus for complex, Sonnet for routine |
-| Code review | Sonnet | Pattern matching, fast feedback |
-| Research / analysis | Opus | Multi-source synthesis |
-| Documentation | Sonnet | Structured output, fast |
-| Quick Q&A / lookups | Haiku | Minimal context needed |
-| Sub-agent workers | Haiku / Sonnet | Cost-effective for scoped tasks |
-| Bulk file processing | Haiku | High throughput, low cost |
+Aligned with the routing law (`.claude/rules/token-economy.md` §2) and its executable source (`.sinapse-ai/data/model-routing.yaml` — consumed by the atlas renderers, drift-guarded by tests/core/atlas-model-routing.test.js):
+
+| Task Type | Model | Effort | Rationale |
+|-----------|-------|--------|-----------|
+| Cross-system architecture, complex debug, multi-file refactor | Opus | xhigh | Needs deep reasoning across boundaries |
+| Spec Pipeline COMPLEX (score >= 16) | Opus | max | Highest-stakes planning — the ONLY max case |
+| Feature from spec, code review, bug fix, tests, stories | Sonnet | high | Executes against a finished document |
+| Single-file analysis, factual question | Sonnet | medium | Scoped context, moderate reasoning |
+| Lint, rename, YAML, lookup, bulk | Haiku | low | High throughput, minimal reasoning |
+
+Default effort for the frontier family is `xhigh`. When in doubt, drop a tier and escalate only on failure — never `max` outside COMPLEX.
 
 ---
 
@@ -178,7 +179,7 @@ Grep(pattern="TODO", head_limit=10)
 | Full agent persona on every switch | ~3-5K per switch | Use handoff protocol |
 | Unbounded grep results | ~5-10K | Use head_limit |
 | Re-reading files after edit | ~2-5K | Edit tool confirms success |
-| Spawning sub-agents for simple tasks | ~20K minimum | Do inline if <5 tool calls |
+| Spawning sub-agents for simple tasks | ~20K minimum | Do inline if <8 tool calls (spawn only for >=8 or real fan-out) |
 | Not compacting before long tasks | Gradual degradation | Compact at 60% |
 
 ---

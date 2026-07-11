@@ -11,7 +11,8 @@
 user_profile: "bob"
 
 # Default AI model for agent operations
-default_model: "claude-sonnet"
+# Must be a valid id from core-config.yaml models.registry
+default_model: "claude-sonnet-5"
 
 # Default language for agent responses
 default_language: "pt-BR"

@@ -9,7 +9,7 @@
 #
 version: 1.24.0
 generator: scripts/generate-install-manifest.js
-file_count: 1161
+file_count: 1163
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -200,25 +200,29 @@ files:
     type: core
     size: 11444
   - path: core/atlas/flows-pt.js
-    hash: sha256:12c9c4a90ab702decc9d3f35082bd45d10068810a269f8f3bd75b96c3663de50
+    hash: sha256:79a40835e04e901b68ce3f71a440d7a4ebc7e02fe2619835a8dc3dbe967f1289
     type: core
-    size: 11886
+    size: 11388
   - path: core/atlas/flows.js
-    hash: sha256:4bcb80b2eca132bd524ab3a2f0bcc02b61ab236ba7b679f8977cad9118d9ad6d
+    hash: sha256:83ff122b030ac963ace0c344f3b1b497e25263a912c063a8bdc8643342cfd06c
     type: core
-    size: 11485
+    size: 10995
   - path: core/atlas/index.js
     hash: sha256:ea1e47887854cf348cf29c99c6e5d6218d4e6e709db14a6caa0b289303200363
     type: core
     size: 2028
+  - path: core/atlas/model-routing.js
+    hash: sha256:f3c0ac212433b1826f8653e11ee97021c34e52d488e2d838ce89525b55ea0904
+    type: core
+    size: 3913
   - path: core/atlas/render-html.js
     hash: sha256:630447429b4e0909637c85b6e6e1e92d1e6a49bae969e92ce4e00680fcfba528
     type: core
     size: 11938
   - path: core/atlas/render-markdown.js
-    hash: sha256:d47961e50745e31af483fc126fbb3fc3ec60e498ee2f086982b4af388c5257aa
+    hash: sha256:7f3306279320b6751e8c30edccba5dfee561f649ae5ca60fa3d1154809c8eee9
     type: core
-    size: 12650
+    size: 12385
   - path: core/atlas/render-research-card.js
     hash: sha256:86086e58ea6e3f4a19229f7c755cb4072a8582e8de70e5610c58ea578276204e
     type: core
@@ -324,9 +328,9 @@ files:
     type: core
     size: 2225
   - path: core/config/templates/user-config.yaml
-    hash: sha256:4da0e29fa2aad5d2dcc83c25f3dbecb00ed2de932166d39f1311b19ae862710d
+    hash: sha256:5b1d385179f8d572f52270e1f0a220d3ef0bef98d3d68c1349d84f17767c4215
     type: template
-    size: 728
+    size: 789
   - path: core/docs/component-creation-guide.md
     hash: sha256:9f25621ed3ebb88c931f82f9827abb3eecb65fe02c8637e46dff6c987793793b
     type: documentation
@@ -1383,6 +1387,10 @@ files:
     hash: sha256:96e23f764b551b5e14782713ab01f6741f9b83e09c4f98158f41e8be09b9af84
     type: data
     size: 9392
+  - path: data/model-routing.yaml
+    hash: sha256:59f9dd97591b48c9b40e6f3cd24b277a6ed3d620e51fe6bc04a0dbce17af90ff
+    type: data
+    size: 2930
   - path: data/rls-security-patterns.md
     hash: sha256:ae42a553bb0d783746fc0d97214becf4696b4ecaec714e9302a10e417c39a7bb
     type: data
@@ -1600,9 +1608,9 @@ files:
     type: development
     size: 10414
   - path: development/knowledge-base/token-economy-guide.md
-    hash: sha256:bb10715f48778453f5f44bb99244cc4c000de06117ef4e123fe5795a2d30887f
+    hash: sha256:72eb197b8437067a1bbdcfb930e39fe711f5c5796c0903bb5addab52d1db6d2e
     type: development
-    size: 6004
+    size: 6435
   - path: development/README.md
     hash: sha256:cb3aa87366eba1adebeb1f033c62e3cfc2a65430dc456914808b2c108884ebf2
     type: development

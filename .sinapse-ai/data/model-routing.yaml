@@ -1,0 +1,73 @@
+# ============================================================
+# Model + Effort Routing — single executable source of truth
+# ============================================================
+# Mirrors the law in prose: .claude/rules/token-economy.md §2 (task tiers,
+# default effort) and §3 (subagent threshold). Consumed by the three atlas
+# renderers via core/atlas/model-routing.js: the markdown table
+# (render-markdown.js) and the EN/PT mermaid flows (flows.js / flows-pt.js).
+# A consistency test (tests/core/atlas-model-routing.test.js) compares this
+# file against the rule so drift fails CI — closing the deferred
+# recommendation of audit AF-20260702 item 2.10.
+#
+# Field guide per tier:
+#   table_en / table_pt   — full task-class label (markdown tables)
+#   flow_branch_en / _pt  — short branch label (mermaid decision edge)
+#   flow_node_en / _pt    — mermaid node text ("model - effort" wording)
+#   flow_id               — stable mermaid node id
+
+default_effort: xhigh
+
+subagent_threshold:
+  min_tool_calls: 8
+  rule: "spawn a sub-agent ONLY for >= 8 predicted tool calls or real parallel fan-out; otherwise run inline"
+
+tiers:
+  - flow_id: OP
+    model: opus
+    effort: xhigh
+    table_en: "Cross-system architecture, complex debug, multi-file refactor"
+    table_pt: "Arquitetura cross-system, debug complexo, refactor multi-file"
+    flow_branch_en: "cross-system arch / complex debug / multi-file"
+    flow_branch_pt: "arquitetura cross-system / debug complexo"
+    flow_node_en: "opus - xhigh"
+    flow_node_pt: "opus - xhigh"
+
+  - flow_id: OM
+    model: opus
+    effort: max
+    table_en: "Spec Pipeline COMPLEX (score >= 16)"
+    table_pt: "Spec Pipeline COMPLEX (score >= 16)"
+    flow_branch_en: "Spec Pipeline COMPLEX score >= 16"
+    flow_branch_pt: "Spec Pipeline COMPLEX score >= 16"
+    flow_node_en: "opus - max"
+    flow_node_pt: "opus - max"
+
+  - flow_id: SO
+    model: sonnet
+    effort: high
+    table_en: "Feature from spec, code review, bug fix, tests, stories"
+    table_pt: "Feature do spec, code review, bug fix, testes, stories"
+    flow_branch_en: "feature from spec / review / bug / tests"
+    flow_branch_pt: "feature da spec / review / bug / testes"
+    flow_node_en: "sonnet - high"
+    flow_node_pt: "sonnet - alto"
+
+  - flow_id: SM
+    model: sonnet
+    effort: medium
+    table_en: "Single-file analysis, factual question"
+    table_pt: "Análise single-file, pergunta factual"
+    flow_branch_en: "single-file / factual"
+    flow_branch_pt: "arquivo único / factual"
+    flow_node_en: "sonnet - medium"
+    flow_node_pt: "sonnet - médio"
+
+  - flow_id: H
+    model: haiku
+    effort: low
+    table_en: "Lint, rename, YAML, lookup, bulk"
+    table_pt: "Lint, rename, YAML, lookup, bulk"
+    flow_branch_en: "lint / rename / yaml / bulk"
+    flow_branch_pt: "lint / rename / yaml / massa"
+    flow_node_en: "haiku - low effort"
+    flow_node_pt: "haiku - esforço baixo"

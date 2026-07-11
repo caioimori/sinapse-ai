@@ -11,17 +11,19 @@
  * is easy to extend. Mermaid is hand-written and kept simple (plain node labels,
  * no reserved chars) so it renders everywhere.
  *
- * Sync note (AF-20260702 item 2.10, CONFIRMED): the 'model-routing' flow's
- * tiers/efforts must stay consistent with `.claude/rules/token-economy.md` §2
- * and render-markdown.js's modelRouting() table — verified in sync as of that
- * audit, but hand-kept (no automated cross-check). Recommendation (deferred,
- * Article XI sign-off): single `.sinapse-ai/data/*.yaml` source for all 3
- * renderers (this file, flows-pt.js, render-markdown.js).
+ * Single source (AF-20260702 item 2.10 — executed): the 'model-routing' flow
+ * is rendered from `.sinapse-ai/data/model-routing.yaml` via ./model-routing,
+ * the same source behind render-markdown.js's table and flows-pt.js, so the
+ * three renderers can no longer drift. Consistency with the prose law
+ * (`.claude/rules/token-economy.md` §2) is asserted by
+ * tests/core/atlas-model-routing.test.js.
  *
  * @module core/atlas/flows
  */
 
 'use strict';
+
+const { routingFlowMermaid } = require('./model-routing');
 
 /** @type {Array<{id:string,title:string,purpose:string,mermaid:string}>} */
 const FRAMEWORK_FLOWS = [
@@ -73,20 +75,7 @@ const FRAMEWORK_FLOWS = [
     title: 'Model routing (cheapest that solves it)',
     purpose:
       'How each task picks a model tier. Heavy thinking goes into the spec; execution then mostly reads a finished doc, so token economy is a consequence.',
-    mermaid: `flowchart TD
-    T[Task] --> K{Kind?}
-    K -->|lint / rename / yaml / bulk| H[haiku - low effort]
-    K -->|feature from spec / review / bug / tests| SO[sonnet - high]
-    K -->|single-file / factual| SM[sonnet - medium]
-    K -->|cross-system arch / complex debug / multi-file| OP[opus - xhigh]
-    K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]
-    H --> SP{>= 8 tool calls or real fan-out?}
-    SO --> SP
-    SM --> SP
-    OP --> SP
-    OM --> SP
-    SP -->|yes| SUB[Spawn sub-agent]
-    SP -->|no| INLINE[Run inline]`,
+    mermaid: routingFlowMermaid('en'),
   },
   {
     id: 'doc-first',
