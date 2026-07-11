@@ -6,12 +6,13 @@ framework_version: 1.24.0
 source_backlog:
   - "AF-20260702-fable5-upgrade.md §6 (lacunas 5 e 6 do critic)"
   - "AF-20260704-rodada2-verificacao.md:78-79 (G5 e G6 ABERTOS)"
-method: "G5: leitura integral dos LOOPS da onda 8 da base de pesquisa + cruzamento com a malha de evals do produto (agente leitor dedicado). G6: instalação real de teste (npm pack 1.24.0 → pasta isolada → wizard quiet selectedLLM=both) + 8 asserts de paridade + validate-parity oficial DENTRO da instalação."
+method: "G5: leitura integral dos LOOPS da onda 8 da base de pesquisa + cruzamento com a malha de evals do produto (agente leitor dedicado). G6: instalação real de teste (npm pack 1.24.0 → pasta isolada → wizard quiet selectedLLM=both) + 9 asserts de paridade (contados individualmente) + validate-parity oficial DENTRO da instalação."
 verdict:
   g5: FECHADO (com correção de premissa)
   g6: FECHADO (medição feita; 1 achado real registrado)
 counts:
-  g6_asserts_pass: 7
+  g6_asserts_total: 9
+  g6_asserts_pass: 8
   g6_asserts_fail: 1
   new_findings: 3
 ---
@@ -23,7 +24,7 @@ counts:
 | Item | Pergunta do critic | Resultado |
 |---|---|---|
 | G5 | A pesquisa prescreve o eval de regressão comportamental que falta no produto (item 3.1)? | **FECHADO** — prescreve (W13, literal), e o produto JÁ institucionalizou o núcleo; premissa do intervalo estava errada |
-| G6 | A paridade multi-IDE se sustenta numa instalação real? | **FECHADO** — 7/8 asserts PASS (pointers 172/172, colisão Nexus resolvida); 1 achado real: payload Codex referencia recursos não instalados |
+| G6 | A paridade multi-IDE se sustenta numa instalação real? | **FECHADO** — 8/9 asserts PASS, contados individualmente (pointers 172/172, colisão Nexus resolvida); 1 achado real: payload Codex referencia recursos não instalados |
 
 ---
 
@@ -76,7 +77,7 @@ A lacuna **não é da pesquisa** (W13-W15 cobrem o tema) e **não está mais abe
 | a1 | `.claude/CLAUDE.md` existe | **PASS** | — |
 | a2 | Espelho Claude populado | **PASS** | 30 arquivos em `.claude/commands/SINAPSE/agents` (12 core + 17 squad-orqx + 1 redirect — commandSync completo, acima do mínimo 12) |
 | b1 | Pointers Codex | **PASS** | exatamente 172 em `.codex/agents` |
-| b2-b4 | `instructions.md`, `delegation-matrix.json`, `AGENTS.md` raiz | **PASS** | — |
+| b2-b4 | `instructions.md`, `delegation-matrix.json`, `AGENTS.md` raiz (3 asserts individuais) | **PASS** | — |
 | c | **Todo pointer resolve** (modo de falha que o dogfood do repo não detecta) | **PASS** | 172/172 apontam pra arquivos existentes na instalação; 0 quebrados; 0 corpos sobrescritos (design pós-E8 íntegro) |
 | e | Colisão de codinome "Nexus" | **PASS (resolvida)** | Só 2 arquivos citam Nexus no espelho: design-orqx (codinome próprio legítimo) e snps-orqx (citação na matriz). swarm-orqx e content-orqx chegam renomeados (Relay/Bulletin) — a colisão tripla do item 1.10 não existe mais nos mirrors reais |
 | d | `validate-parity --fast` DENTRO da instalação | **FAIL (achado real)** | ver abaixo |
