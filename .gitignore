@@ -115,6 +115,7 @@ CLAUDE.md
 !.claude/settings.json
 !.claude/hooks/
 !.claude/skills/
+!.claude/workflows/
 
 # AI Session Artifacts (Story 6.1.2.6 - Decision Logging)
 # Auto-generated decision logs from yolo mode executions
