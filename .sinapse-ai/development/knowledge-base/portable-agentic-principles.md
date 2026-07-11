@@ -33,7 +33,7 @@ The engine changes. The operating system does not.
 
 **SINAPSE today.** Workflow phases with limits, the QA loop's bounded retry, and gate verdicts (PASS/CONCERNS/FAIL) that end cycles decisively.
 
-**Portable to any LLM.** Every provider offers function calling in a loop; the brakes are always YOUR code: max iterations, wall-clock timeout, and an explicit done-predicate checked outside the model. Irreversible actions get a human checkpoint before the loop may proceed.
+**Portable to any LLM.** The loop, the brakes and the done-predicate live in YOUR harness, not in any provider feature: max iterations, wall-clock timeout, and an explicit done-check evaluated outside the model. Native function calling is one adapter for the act step when available — a text-only model with structured replies parsed by the harness runs the same loop. Irreversible actions get a human checkpoint before the loop may proceed.
 
 ## 2. Spec before execution
 
@@ -63,7 +63,7 @@ The engine changes. The operating system does not.
 
 **SINAPSE today.** The tool registry with usage priority, and a lint guard that validates tool descriptions. Agents prefer native tools over shell equivalents by rule.
 
-**Portable to any LLM.** Every serious provider supports function/tool calling (OpenAI-style tools, Gemini function declarations, Claude tools). Port the discipline, not the syntax: one sentence of purpose + one of constraints per tool; errors that state what to do next; least agency (only the tools the task needs).
+**Portable to any LLM.** Most providers ship native function/tool calling (OpenAI-style tools, Gemini function declarations, Claude tools); where it is absent, the same contract holds over structured text replies parsed by the harness. Port the discipline, not the syntax: one sentence of purpose + one of constraints per tool; errors that state what to do next; least agency (only the tools the task needs).
 
 ## 5. Verification is built in
 
@@ -113,7 +113,7 @@ The engine changes. The operating system does not.
 
 **SINAPSE today.** The token-economy §2 routing table (task class → model → effort, with the subagent threshold), the executable models registry (context windows driving compaction), and the statusline announcing the active model.
 
-**Portable to any LLM.** Every provider ships tiers (mini/standard/pro equivalents) and most expose a reasoning-depth control. Encode a task-class → (tier, depth) table as DATA consumed by your runtime, not prose repeated in prompts — when in doubt, start one tier lower and escalate on failure.
+**Portable to any LLM.** Every provider ships tiers (mini/standard/pro equivalents) and most expose a reasoning-depth control. Encode a task-class → (tier, depth) table as DATA consumed by your runtime, not prose repeated in prompts. Make the table risk-aware: for low-stakes work, when in doubt start one tier lower and escalate on failure; high-impact or irreversible tasks go straight to the frontier tier at full deliberation. Fall back by provider capability, never by defaulting downward.
 
 ## 10. Grounding beats memory
 
@@ -129,15 +129,16 @@ The engine changes. The operating system does not.
 
 ## 11. Porting checklist — minimum harness for any LLM
 
-Eight steps, in dependency order. Each maps to the principles above.
+Nine steps, in dependency order. Each maps to the principles above.
 
 1. **Write the spec gate** (P2): no execution without a written objective + acceptance criteria.
 2. **Define few, contract-clean tools** (P4) with actionable errors.
 3. **Wrap the loop with brakes** (P1): max iterations, timeout, done-predicate, human checkpoint for irreversible actions.
 4. **Add interceptors** (P7): validate every model-initiated action before it runs; block on violation.
 5. **Validate every output** (P5): schema first, then content; production failures become regression evals.
-6. **Externalize memory** (P6): versioned files; recalled facts are hypotheses.
-7. **Route by task class** (P9): tier + reasoning depth as a data table.
-8. **Ground mutable facts** (P10) and **fan out wide work** (P8) with distilled, verified synthesis.
+6. **Budget the context** (P3): curate the minimum sufficient facts per call, cap tool output, and compact before the window degrades.
+7. **Externalize memory** (P6): versioned files; recalled facts are hypotheses.
+8. **Route by task class and risk** (P9): tier + reasoning depth as a data table.
+9. **Ground mutable facts** (P10) and **fan out wide work** (P8) with distilled, verified synthesis.
 
-A harness with these eight properties makes a mid-tier model reliable and a frontier model formidable. Skipping them makes even the best model an eloquent liability.
+A harness with these nine properties makes a mid-tier model reliable and a frontier model formidable. Skipping them makes even the best model an eloquent liability.

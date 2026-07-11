@@ -1592,9 +1592,9 @@ files:
     type: development
     size: 7789
   - path: development/knowledge-base/portable-agentic-principles.md
-    hash: sha256:9e2df0c5e7872a3331799466b029a44d08d10c7620fac43893e06f50d6a8968c
+    hash: sha256:a21a415f8d584fb4c51f4069d9097c29f8b6f6d684ed968e534490aa1d0bcf4d
     type: development
-    size: 13164
+    size: 13763
   - path: development/knowledge-base/security-pre-deploy-checklist.md
     hash: sha256:e7e358db9cfd2fe91ec80efbecc6f9825cbab6f64df58b8302d6813ecdcb7dc3
     type: development
