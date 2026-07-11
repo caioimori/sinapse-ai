@@ -59,7 +59,11 @@ const perDocRaw = await pipeline(
   (docPath) => agent(
     `Você é um verificador de baseline. Documento-lastro: ${docPath}.\n${CONTEXT}\nTarefas:\n1. Leia o documento e extraia TODOS os claims verificáveis (achados, pendências, números, afirmações de estado — ignore prosa opinativa sem fato).\n2. Verifique CADA claim contra a main atual: resolved (foi resolvido/não existe mais), changed (o fato mudou de forma — descreva), open (segue exatamente como descrito), unverifiable (não dá pra verificar sem executar algo com efeito colateral — diga o porquê).\n3. Preserve a severidade original quando o doc declarar.\nRetorne via StructuredOutput.`,
     { label: `claims:${String(docPath).split('/').pop()}`, phase: 'Claims', schema: CLAIMS_SCHEMA }
-  )
+  ),
+  // Saída de LLM é input não confiável (princípio 5): o doc de cada resultado vem do
+  // path CONHECIDO do closure, nunca do eco do agente (que pode normalizar/truncar e
+  // corromper silenciosamente o placar por documento).
+  (rep, docPath) => (rep ? { ...rep, doc: docPath } : null)
 )
 
 const perDoc = perDocRaw.filter(Boolean)
