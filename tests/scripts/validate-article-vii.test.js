@@ -85,6 +85,29 @@ describe('validate-article-vii — Constitution counts', () => {
       });
     });
 
+    it('bounds the resolver execution and exposes a testable timeout option', () => {
+      const calls = [];
+      const stats = JSON.stringify({
+        squadTaskFiles: 1201,
+        devTaskFiles: 211,
+        totalTaskFiles: 1412,
+        resolvableTaskPointers: 1348,
+      });
+      const execute = (...args) => {
+        calls.push(args);
+        return stats;
+      };
+
+      collectRuntimeTaskCounts({ execFileSync: execute });
+      collectRuntimeTaskCounts({ execFileSync: execute, timeoutMs: 250 });
+
+      expect(calls[0][2]).toEqual(expect.objectContaining({ timeout: 10_000 }));
+      expect(calls[1][2]).toEqual(expect.objectContaining({ timeout: 250 }));
+      expect(() => collectRuntimeTaskCounts({ timeoutMs: 0 })).toThrow(
+        'timeout must be a positive integer',
+      );
+    });
+
     it('fails closed when the parametric resolver cannot execute', () => {
       expect(() => collectRuntimeTaskCounts({
         execFileSync: () => { throw new Error('offline'); },
@@ -190,6 +213,32 @@ describe('validate-article-vii — Constitution counts', () => {
       expect(findDrift('17 active hooks', expected)).toEqual(expect.arrayContaining([
         expect.objectContaining({ kind: 'Claude hook registrations', found: 17, expected: 20 }),
       ]));
+    });
+
+    it.each([
+      ['19 Claude Code hook registrations', 'Claude hook registrations', 19, 20],
+      ['19 registered Claude Code hooks', 'Claude hook registrations', 19, 20],
+      ['19 hooks registrados', 'Claude hook registrations', 19, 20],
+      ['8 Codex lifecycle events', 'Codex hook events', 8, 9],
+      ['8 eventos de lifecycle', 'Codex hook events', 8, 9],
+    ])('flags provider drift in prose: %s', (claim, kind, found, wanted) => {
+      expect(findDrift(claim, expected)).toEqual(expect.arrayContaining([
+        expect.objectContaining({ kind, found, expected: wanted }),
+      ]));
+    });
+
+    it.each([
+      '20 Claude Code hook registrations',
+      '20 registered Claude Code hooks',
+      '20 hooks registrados',
+      '9 Codex lifecycle events',
+      '9 eventos de lifecycle',
+    ])('accepts current provider prose: %s', (claim) => {
+      expect(findDrift(claim, expected)).toHaveLength(0);
+    });
+
+    it('ignores unrelated registered git hook counts', () => {
+      expect(findDrift('5 registered git hooks', expected)).toHaveLength(0);
     });
 
     it('accepts the English provider table labels', () => {

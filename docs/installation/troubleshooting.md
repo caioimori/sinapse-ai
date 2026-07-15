@@ -570,9 +570,10 @@ nvm use 16
 
 **Solution:**
 
-1. Check IDE version is compatible
-2. For Claude Code: Native agent files should be in `.claude/agents/`; `.claude/commands/` is only for slash commands
-3. Restart IDE after installation
+1. Check that the provider version is compatible.
+2. For Claude Code, native agents should be in `.claude/agents/`.
+3. For Codex, check `.codex/agents/` and `.agents/skills/`.
+4. Restart the provider after installation.
 
 ---
 

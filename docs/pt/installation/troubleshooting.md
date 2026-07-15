@@ -576,10 +576,10 @@ nvm use 16
 
 **Solução:**
 
-1. Verifique se a versão da IDE é compatível
-2. Para Cursor: Certifique-se que os arquivos têm extensão `.mdc`
-3. Para Claude Code: Agentes nativos devem estar em `.claude/agents/`; `.claude/commands/` serve apenas para slash commands
-4. Reinicie a IDE após a instalação
+1. Verifique se a versão do provedor é compatível.
+2. Para Claude Code, os agentes nativos devem estar em `.claude/agents/`.
+3. Para Codex, verifique `.codex/agents/` e `.agents/skills/`.
+4. Reinicie o provedor após a instalação.
 
 ---
 
@@ -700,7 +700,7 @@ ls -la .sinapse-ai/
 - SO: [Windows 11 / macOS 14 / Ubuntu 22.04]
 - Versão Node.js: [saída de `node --version`]
 - Versão npm: [saída de `npm --version`]
-- IDE: [Claude Code / Cursor / etc.]
+- Provedor: [Claude Code / Codex CLI]
 
 **Passos para Reproduzir:**
 1. [Primeiro passo]

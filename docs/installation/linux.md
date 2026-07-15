@@ -180,8 +180,9 @@ The installer automatically:
 
 - ✅ Detects your Linux distribution and applies optimizations
 - ✅ Creates necessary directories with proper Unix permissions (755/644)
-- ✅ Configures IDE paths for Linux:
-  - Claude: `~/.claude/`
+- ✅ Configures provider adapters in the project:
+  - Claude Code agents: `.claude/agents/`
+  - Codex agents and skills: `.codex/agents/` and `.agents/skills/`
 - ✅ Sets up shell scripts with Unix line endings (LF)
 - ✅ Respects XDG Base Directory specification
 - ✅ Handles symbolic links properly
@@ -190,16 +191,15 @@ The installer automatically:
 
 ## IDE-Specific Setup
 
-### Claude Code (CLI)
+### Claude Code
 
-1. Install Claude Code:
+1. Agent adapters are installed in `.claude/agents/`.
+2. Use `@developer` or another canonical agent ID to activate an agent.
 
-   ```bash
-   npm install -g @anthropic-ai/claude-code
-   ```
+### Codex
 
-2. Commands are installed to `.claude/commands/SINAPSE/`
-3. Use `/agent-name` to activate agents
+1. Agent descriptors are installed in `.codex/agents/`, with skills in `.agents/skills/`.
+2. Use `$snps` for routing or `$sinapse-agent developer` for direct activation.
 
 ---
 
@@ -360,11 +360,8 @@ See the complete [Uninstallation Guide](./uninstallation.md) for detailed steps.
 Quick uninstall:
 
 ```bash
-# Remove SINAPSE from a project
-rm -rf .sinapse-ai .claude/commands/SINAPSE
-
-# Remove global installation
-rm -rf ~/.sinapse-ai-source ~/.npm-global/lib/node_modules/@sinapse
+# Remove SINAPSE through the package-managed uninstaller
+npx sinapse-ai uninstall
 ```
 
 ---

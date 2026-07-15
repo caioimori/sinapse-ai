@@ -64,7 +64,7 @@ If your goal is to get started as fast as possible:
 ```yaml
 config_file: .claude/CLAUDE.md
 agent_folder: .claude/agents
-activation: @agent-name
+activation: '@agent-name'
 format: full-markdown-yaml
 mcp_support: native
 special_features:

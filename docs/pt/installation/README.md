@@ -88,8 +88,6 @@ npx sinapse-ai install --force-upgrade
 | -------------- | ------------------- |
 | Claude Code    | `@developer`, `@quality-gate`, etc. |
 | Codex CLI      | `$snps` ou `$sinapse-agent <id>` |
-| Gemini CLI     | Menção no prompt    |
-| GitHub Copilot | Modos de chat       |
 
 ---
 

@@ -81,6 +81,7 @@ describe('validate-install-docs', () => {
           'Contact the GitHub team @dev-platform for support.',
           'Use @developer in Claude Code and $sinapse-agent developer in Codex.',
           'Inspect both .codex/agents/ and .agents/skills/ adapter paths.',
+          'The `.claude/commands/` directory is not the Claude agent surface.',
           '```',
           '',
         ].join('\n'),
@@ -114,6 +115,22 @@ describe('validate-install-docs', () => {
           '',
         ].join('\n'),
       );
+      writeDoc(
+        root,
+        'docs/installation/CHANGELOG.md',
+        [
+          '# Historical release notes',
+          '',
+          'Gemini CLI | Full Support',
+          'Cursor was supported by this historical release.',
+          'The old installer accepted `--ide cursor` and wrote `.cursor/rules/`.',
+          'Claude Code used `.claude/commands/` for agent configuration.',
+          'Agents were activated with `/agent-name`.',
+          '```bash',
+          '```',
+          '',
+        ].join('\n'),
+      );
     });
 
     afterAll(() => cleanup(root));
@@ -131,6 +148,12 @@ describe('validate-install-docs', () => {
       // if the allow-list is broken this would produce a violation.
       const result = validateInstallDocs(root);
       expect(result.violations).toEqual([]);
+    });
+
+    test('does not flag provider drift preserved in historical release notes', () => {
+      const result = validateInstallDocs(root);
+      expect(result.violations).toEqual([]);
+      expect(result.scanned.some((file) => file.endsWith('CHANGELOG.md'))).toBe(false);
     });
   });
 
@@ -156,6 +179,12 @@ describe('validate-install-docs', () => {
           'Run `*init-project-status` after activation.',
           'Install the SINAPSE-FullStack framework.',
           'Greeting: Dex (Builder) ready.',
+          'The developer agent (Dex) will activate.',
+          '| **Gemini CLI** | Full Support | Prompt mention |',
+          'Run `npx sinapse-ai install --ide cursor`.',
+          'Cursor rules live in `.cursor/rules/`.',
+          'Claude Code uses `.claude/commands/` for agent configuration.',
+          'Activate an agent with `/agent-name`.',
           '',
         ].join('\n'),
       );
@@ -182,6 +211,12 @@ describe('validate-install-docs', () => {
           'unresolvable-init-project-status',
           'legacy-sinapse-fullstack-name',
           'legacy-developer-codename',
+          'unsupported-provider-full-support',
+          'unsupported-cursor-provider',
+          'legacy-cursor-install-option',
+          'legacy-cursor-rules-path',
+          'claude-commands-as-agent-config',
+          'legacy-agent-name-slash-activation',
         ]),
       );
     });
@@ -197,6 +232,31 @@ describe('validate-install-docs', () => {
         expect(typeof v.reason).toBe('string');
         expect(typeof v.snippet).toBe('string');
       }
+    });
+  });
+
+  describe('legacy developer persona fixture', () => {
+    let root;
+
+    beforeAll(() => {
+      root = makeTmpRoot('developer-persona');
+      writeDoc(
+        root,
+        'docs/installation/developer.md',
+        '# Activation\n\nActivation: @developer (Dex)\n',
+      );
+    });
+
+    afterAll(() => cleanup(root));
+
+    test('flags the retired codename after the canonical developer ID', () => {
+      const result = validateInstallDocs(root);
+      expect(result.violations).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          ruleId: 'legacy-developer-codename',
+          snippet: expect.stringContaining('@developer (Dex)'),
+        }),
+      ]));
     });
   });
 

@@ -274,13 +274,17 @@ Each squad is an autonomous team with its own orchestrator, specialist agents, k
 
 **Total: 17 squads, 172 specialized agents, and 1,412 task files** (**1,201 squad tasks + 211 development tasks; 1,348 resolvable pointers**)
 
-Activate any squad via its orchestrator:
+Activate any squad via its orchestrator using the provider-native syntax:
 
-```
+```text
+# Claude Code
 @brand-orqx         # Brand squad
 @copy-orqx          # Copy squad
-@cyber-orqx         # Cybersecurity squad
-@research-orqx      # Research squad
+
+# Codex
+$sinapse-agent brand-orqx
+$sinapse-agent copy-orqx
+$snps               # Route through the primary orchestrator
 ```
 
 The orchestrator receives your request and automatically delegates to the right specialist within the squad.

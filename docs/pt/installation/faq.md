@@ -83,11 +83,11 @@ npx sinapse-ai install
 O instalador irá:
 
 - Criar o diretório `.sinapse-ai/` (arquivos do framework)
-- Criar configuração de IDE (`.claude/`, `.cursor/`, etc.)
+- Criar adapters do Claude Code e Codex (`.claude/`, `.codex/` e `.agents/skills/`)
 - NÃO modificar seu código-fonte existente
 - NÃO sobrescrever documentação existente a menos que você escolha
 
-**Importante:** Se você tiver um diretório `.claude/` ou `.cursor/` existente, o instalador perguntará antes de modificar.
+**Importante:** Diretórios existentes dos provedores são reconciliados de forma conservadora; mantenha arquivos customizados fora dos nomes gerenciados pelo framework.
 
 ---
 
@@ -114,29 +114,26 @@ Fatores que afetam o tempo de instalação:
 
 **Resposta:** O SINAPSE cria a seguinte estrutura:
 
-```
+```text
 your-project/
-├── .sinapse-ai/                 # Core do framework (200+ arquivos)
-│   ├── agents/                 # 11+ definições de agentes
-│   ├── tasks/                  # 60+ workflows de tarefas
-│   ├── templates/              # 20+ templates de documentos
-│   ├── checklists/             # Checklists de validação
-│   ├── scripts/                # Scripts utilitários
-│   └── core-config.yaml        # Configuração do framework
+├── .sinapse-ai/                 # Runtime, configuração e assets de desenvolvimento
+│   └── core-config.yaml         # Configuração do framework
 │
 ├── .claude/                    # Claude Code (se selecionado)
-│   └── agents/                    # Agentes nativos do Claude
+│   ├── agents/                 # Adapters de agentes nativos do Claude
+│   └── skills/                 # Skills do Claude Code
 │
-├── .cursor/                    # Cursor (se selecionado)
-│   └── rules/                  # Regras de agentes
+├── .codex/                     # Codex (se selecionado)
+│   └── agents/                 # Descritores de agentes nativos do Codex
+│
+├── .agents/skills/             # Skills SINAPSE compatíveis com Codex
 │
 ├── docs/                       # Estrutura de documentação
 │   ├── stories/                # Stories de desenvolvimento
 │   ├── architecture/           # Docs de arquitetura
 │   └── prd/                    # Requisitos de produto
 │
-└── Squads/            # (se instalado)
-    └── squad-brand/             # Pack HybridOps
+└── squads/                      # 17 squads e seus assets
 ```
 
 ---
@@ -231,7 +228,7 @@ mv .sinapse-ai.backup .sinapse-ai
 npx sinapse-ai install
 
 # Empacotar para uso offline
-tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/ .cursor/
+tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/ .codex/ .agents/ squads/
 ```
 
 **Na máquina air-gapped:**
@@ -262,7 +259,7 @@ tar -xzvf sinapse-offline.tar.gz
    # Instalar e empacotar
    npx sinapse-ai install
    cd your-project
-   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ .cursor/ docs/
+   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ .codex/ .agents/ squads/ docs/
    ```
 
 2. **Transferir o arquivo** via USB, transferência segura, etc.
@@ -288,34 +285,21 @@ tar -xzvf sinapse-offline.tar.gz
 | ------------------ | -------------- | ------------------- |
 | **Claude Code**    | Suporte Completo | `@developer`, `@quality-gate`, etc. |
 | **Codex CLI**      | Suporte Completo | `$snps` ou `$sinapse-agent <id>` |
-| **Gemini CLI**     | Suporte Completo | Menção no prompt    |
-| **GitHub Copilot** | Suporte Completo | Modos de chat       |
-
-**Adicionar suporte para uma nova IDE:** Abra uma issue no GitHub com a especificação de agentes/regras da IDE.
 
 ---
 
 ### Q12: Posso configurar o SINAPSE para múltiplas IDEs?
 
-**Resposta:** Sim! Selecione múltiplas IDEs durante a instalação:
+**Resposta:** Sim. Claude Code e Codex podem usar a mesma instalação canônica
+do SINAPSE. Execute `npx sinapse-ai install`; o instalador gera os adapters
+nativos de cada provedor:
 
-**Interativo:**
+- Agentes do Claude Code: `.claude/agents/`
+- Agentes do Codex: `.codex/agents/`
+- Skills do Codex: `.agents/skills/`
 
-```
-? Which IDE(s) do you want to configure?
-❯ ◉ Cursor
-  ◉ Claude Code
-```
-
-**Linha de comando:**
-
-```bash
-```
-
-Cada IDE recebe seu próprio diretório de configuração:
-
-- `.cursor/rules/` para Cursor
-- `.claude/commands/` para Claude Code
+Ative com `@developer` no Claude Code ou `$sinapse-agent developer` no Codex.
+Use `$snps` no Codex quando quiser que o orquestrador principal roteie o pedido.
 
 ---
 
@@ -330,8 +314,8 @@ Se `.sinapse-ai/` está commitado no seu repositório:
 git clone your-repo
 cd your-repo
 
-# Opcionalmente configurar a IDE preferida
-npx sinapse-ai install --ide cursor
+# Gerar ou reconciliar os adapters do Claude Code e Codex
+npx sinapse-ai install
 ```
 
 Se `.sinapse-ai/` não está commitado:
@@ -350,21 +334,27 @@ npx sinapse-ai install
 
 ### Q14: Quais agentes estão incluídos?
 
-**Resposta:** O SINAPSE inclui 11+ agentes especializados:
+**Resposta:** O SINAPSE inclui **172 agentes em 17 squads**. A camada de squads
+reúne 160 membros e a camada do framework reúne 12. O conjunto do framework é:
 
-| Agente          | Papel                    | Melhor Para                           |
-| --------------- | ------------------------ | ------------------------------------- |
-| `dev`           | Desenvolvedor Full-Stack | Implementação de código, debugging    |
-| `qa`            | Engenheiro de QA         | Testes, code review                   |
-| `architect`     | Arquiteto de Sistema     | Design, decisões de arquitetura       |
-| `pm`            | Gerente de Projeto       | Planejamento, acompanhamento          |
-| `po`            | Product Owner            | Backlog, requisitos                   |
-| `sm`            | Scrum Master             | Facilitação, gestão de sprints        |
-| `analyst`       | Analista de Negócios     | Análise de requisitos                 |
-| `ux-expert`     | Designer UX              | Design de experiência do usuário      |
-| `data-engineer` | Engenheiro de Dados      | Pipelines de dados, ETL               |
-| `devops`        | Engenheiro DevOps        | CI/CD, deployment                     |
-| `db-sage`       | Arquiteto de Banco       | Design de schema, queries             |
+| Agente | Persona | Papel |
+| ------ | ------- | ----- |
+| `snps-orqx` | Imperator | Orquestrador principal cross-squad |
+| `developer` | Pixel | Implementação full-stack e debugging |
+| `quality-gate` | Litmus | Testes, revisão e quality gates |
+| `architect` | Stratum | Arquitetura e decisões de tecnologia |
+| `project-lead` | Beacon | Product management e epics |
+| `product-lead` | Axis | Validação de stories e priorização |
+| `sprint-lead` | Sync | Criação de stories e facilitação de sprints |
+| `analyst` | Scope | Pesquisa e análise de negócios |
+| `data-engineer` | Tensor | Database design, migrations e RLS |
+| `ux-design-expert` | Mosaic | UX/UI e design systems |
+| `devops` | Pipeline | CI/CD, autoridade exclusiva de push e releases |
+| `squad-creator` | Loom | Criação e extensão de squads |
+
+No Claude Code, ative um agente com `@agent-id`. No Codex, use `$snps` para
+roteamento ou `$sinapse-agent agent-id` para ativação direta. Os dois provedores
+resolvem as mesmas fontes canônicas de agentes e tasks.
 
 ---
 

@@ -109,7 +109,7 @@ Digite *help para ver comandos disponíveis.
 
 ## Passo 4: Explorar Agentes Disponíveis
 
-| Agente              | Ativação             | Propósito                          |
+| Ativação            | Papel                | Propósito                          |
 | ------------------- | -------------------- | ---------------------------------- |
 | `@developer` (Pixel)     | Desenvolvimento    | Implementação de código, debugging |
 | `@quality-gate` (Litmus) | Qualidade          | Testes e validação                 |
@@ -122,11 +122,11 @@ Digite *help para ver comandos disponíveis.
 
 ### Exemplo: Ativar Agente Desenvolvedor
 
-```
+```text
 @developer
 ```
 
-O agente desenvolvedor (Dex) será ativado com uma saudação mostrando:
+O agente desenvolvedor (Pixel) será ativado com uma saudação mostrando:
 
 - Status do projeto
 - Comandos rápidos
@@ -232,9 +232,9 @@ npm cache clean --force
 
 ### Agente não responde
 
-1. Certifique-se de estar em uma IDE com IA (Cursor, VS Code com Claude, etc.) ou Claude Code CLI
-2. Verifique se está usando sintaxe correta: `@nome-do-agente`
-3. Verifique se o arquivo do agente existe: `ls .sinapse-ai/development/agents/`
+1. Certifique-se de estar usando Claude Code ou Codex CLI.
+2. No Claude Code, use `@developer`; no Codex, use `$sinapse-agent developer` ou `$snps`.
+3. Verifique `.claude/agents/` para Claude Code ou `.codex/agents/` e `.agents/skills/` para Codex.
 
 ### Erros de permissão
 

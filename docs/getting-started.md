@@ -69,7 +69,7 @@ npx sinapse-ai uninstall               # remove tudo
 ## Conceitos chave (em 30 segundos)
 
 - **Squad**: equipe de agentes especializados (ex: squad-design tem 15 agentes de design/UX)
-- **Agente**: persona de IA com expertise e comandos específicos (`@developer` no Claude Code; `$sinapse-agent developer` no Codex)
+- **Agente**: persona de IA com especialização e comandos específicos (`@developer` no Claude Code; `$sinapse-agent developer` no Codex)
 - **Hook**: enforcement runtime que bloqueia violações da Constitution (ex: PR sem story)
 - **Constitution**: 11 artigos que governam o framework (ver `.sinapse-ai/constitution.md`)
 - **Story**: arquivo `.md` que documenta requisitos antes do código (Documentation-First)

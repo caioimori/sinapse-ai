@@ -35,7 +35,7 @@ Isso fornece contexto imediato sobre seu trabalho sem precisar executar manualme
 Quando você ativa um agente (`@developer` no Claude Code ou
 `$sinapse-agent developer` no Codex), você verá:
 
-```
+```text
 Pixel the Builder ready to innovate!
 
 Current Project Status:

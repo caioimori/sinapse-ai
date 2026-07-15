@@ -86,11 +86,16 @@ const TARGETS = [
 function collectRuntimeTaskCounts(options = {}) {
   const execute = options.execFileSync || execFileSync;
   const resolverPath = options.resolverPath || CODEX_RESOLVER;
+  const timeout = options.timeoutMs ?? 10_000;
+  if (!Number.isInteger(timeout) || timeout <= 0) {
+    throw new Error('parametric resolver timeout must be a positive integer');
+  }
   let raw;
   try {
     raw = execute(process.execPath, [resolverPath, '--stats'], {
       cwd: ROOT,
       encoding: 'utf8',
+      timeout,
     });
   } catch (error) {
     throw new Error(`cannot execute the parametric resolver: ${error.message}`);
@@ -321,7 +326,7 @@ function findDrift(content, expected, options = {}) {
       if (wanted && found !== wanted) findings.push({ kind, found, expected: wanted, snippet: hooksClaim[0] });
     }
   }
-  const hookProseRe = /(?<![\d.,])(\d{1,3})\s+(?:(?:active|registered|enforcement)\s+)?hooks\b/gi;
+  const hookProseRe = /(?<![\d.,])(\d{1,3})\s+(?:Claude\s+Code\s+hook\s+registrations?|hooks?\s+(?:registrados?|ativos?)|(?:(?:active|registered|enforcement)\s+)(?:(?:Claude(?:\s+Code)?|native(?:\s+Claude(?:\s+Code)?)?)\s+)?hooks|hooks)\b/gi;
   for (const claim of content.matchAll(hookProseRe)) {
     const found = Number(claim[1]);
     if (expected.claudeHooks && found !== expected.claudeHooks) {
@@ -329,6 +334,18 @@ function findDrift(content, expected, options = {}) {
         kind: 'Claude hook registrations',
         found,
         expected: expected.claudeHooks,
+        snippet: claim[0],
+      });
+    }
+  }
+  const codexLifecycleProseRe = /(?<![\d.,])(\d{1,3})\s+(?:(?:Codex\s+)?lifecycle\s+events?|eventos\s+de\s+lifecycle)\b/gi;
+  for (const claim of content.matchAll(codexLifecycleProseRe)) {
+    const found = Number(claim[1]);
+    if (expected.codexHookEvents && found !== expected.codexHookEvents) {
+      findings.push({
+        kind: 'Codex hook events',
+        found,
+        expected: expected.codexHookEvents,
         snippet: claim[0],
       });
     }

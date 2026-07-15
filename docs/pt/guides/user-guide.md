@@ -348,16 +348,15 @@ NODE_ENV=development
 SINAPSE_DEBUG=false
 ```
 
-### Integração com IDE
+### Integração com Provedores
 
-O SINAPSE suporta múltiplas IDEs. A configuração é sincronizada entre:
+O SINAPSE sincroniza os mesmos agentes canônicos para os dois provedores suportados:
 
-- Claude Code (`.claude/`)
-- Cursor (`.cursor/`)
-- VS Code (`.vscode/`)
+- Agentes do Claude Code: `.claude/agents/` (ative com `@developer`)
+- Agentes e skills do Codex: `.codex/agents/` e `.agents/skills/` (ative com `$snps` ou `$sinapse-agent developer`)
 
 ```bash
-# Sincronizar agentes para sua IDE
+# Sincronizar adapters do Claude Code e Codex
 npm run sync:ide
 ```
 

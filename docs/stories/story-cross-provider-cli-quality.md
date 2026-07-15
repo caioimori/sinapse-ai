@@ -171,13 +171,30 @@ para suas capacidades nativas.
   measured adapter paths; tests verify representative `.claude/agents/sinapse-*`
   and `.codex/agents/*.{toml,md}` files exist.
 - Project-status greeting examples now use the canonical `Pixel the Builder`
-  persona in EN/PT; the public-doc regression scanner rejects `Dex (Builder)`.
+  persona in EN/PT; the public-doc regression scanner rejects `Dex (Builder)`
+  and contextual standalone `(Dex)` references to the developer persona,
+  including the explicit `@developer (Dex)` form.
+- README squad activation examples now show provider-native Claude Code and
+  Codex syntax. EN/PT FAQs describe the current adapter paths and the measured
+  172-agent/17-squad catalog instead of legacy aliases and `11+` counts.
+- EN/PT installation FAQs, platform guides, troubleshooting and user guides now
+  document only the supported Claude Code/Codex surfaces. Current docs no longer
+  advertise Cursor, Gemini CLI or GitHub Copilot adapters, retired slash-agent
+  aliases, `.cursor/rules/` or `.claude/commands/` as an agent path.
+- Runtime metric collection limits the parametric resolver to 10 seconds by
+  default and exposes a validated timeout option for deterministic tests.
+- Article VII prose guards cover Claude Code hook registrations and Codex
+  lifecycle-event claims in English and Portuguese, with current and stale
+  regression fixtures for both providers.
 - Provider evidence: 172 agents in both adapters; 36 Claude skills; 37 Codex
   skills; 20 Claude hook registrations; 9 Codex lifecycle events through the
   compatibility bridge.
-- Validation: 25 focused tests passed; `validate:article-vii`, `validate:docs`,
-  `validate:providers` and `validate:codex-native` passed. `npm pack --dry-run`
-  includes all five corrected public documents.
+- Validation: 39 focused tests passed; ESLint, `validate:article-vii`,
+  `validate:docs`, `validate:providers`, `validate:codex-native`,
+  `validate:parity` and all 13 `validate:all` guards passed. `npm pack --dry-run`
+  produced 4,341 entries and includes all 24 shipped docs/scripts changed in
+  this review slice; the implementation story and test sources are intentionally
+  excluded from the public tarball.
 
 ### Slice file list
 
@@ -193,12 +210,18 @@ para suas capacidades nativas.
 - `docs/pt/guides/project-status-feature.md`
 - `docs/installation/README.md`
 - `docs/installation/faq.md`
+- `docs/installation/linux.md`
+- `docs/installation/macos.md`
 - `docs/installation/troubleshooting.md`
 - `docs/installation/v4-quick-start.md`
+- `docs/installation/windows.md`
 - `docs/pt/installation/README.md`
 - `docs/pt/installation/faq.md`
+- `docs/pt/installation/linux.md`
+- `docs/pt/installation/macos.md`
 - `docs/pt/installation/troubleshooting.md`
 - `docs/pt/installation/v4-quick-start.md`
+- `docs/pt/installation/windows.md`
 - `scripts/validate-article-vii.js`
 - `scripts/validate-install-docs.js`
 - `tests/scripts/validate-article-vii.test.js`

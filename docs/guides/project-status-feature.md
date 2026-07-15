@@ -29,7 +29,7 @@ This gives you immediate context about your work without manually running `git s
 When you activate an agent (`@developer` in Claude Code or
 `$sinapse-agent developer` in Codex), you'll see:
 
-```
+```text
 💻 Pixel the Builder ready to innovate!
 
 Current Project Status:

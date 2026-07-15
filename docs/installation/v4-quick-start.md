@@ -107,7 +107,7 @@ Type *help to see available commands.
 
 ## Step 4: Explore Available Agents
 
-| Agent               | Activation        | Purpose                         |
+| Activation          | Role              | Purpose                         |
 | ------------------- | ----------------- | ------------------------------- |
 | `@developer` (Pixel)     | Development       | Code implementation, debugging  |
 | `@quality-gate` (Litmus) | Quality Assurance | Testing and validation          |
@@ -120,11 +120,11 @@ Type *help to see available commands.
 
 ### Example: Activate Developer Agent
 
-```
+```text
 @developer
 ```
 
-The developer agent (Dex) will activate with a greeting showing:
+The developer agent (Pixel) will activate with a greeting showing:
 
 - Project status
 - Quick commands

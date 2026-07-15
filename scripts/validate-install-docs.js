@@ -153,8 +153,38 @@ const FORBIDDEN_PATTERNS = [
   },
   {
     id: 'legacy-developer-codename',
-    regex: /\bDex\s*(?:\(|the\s+)Builder\b/i,
+    regex: /(?:\bDex\s*(?:\(|the\s+)Builder\b|\b(?:developer agent|agente desenvolvedor)\s*\(\s*Dex\s*\)|@developer\s*\(\s*Dex\s*\))/i,
     reason: 'The current developer persona is Pixel the Builder.',
+  },
+  {
+    id: 'unsupported-provider-full-support',
+    regex: /\b(?:Gemini\s+CLI|GitHub\s+Copilot)\b/i,
+    reason: 'Current public installation support is limited to Claude Code and Codex.',
+  },
+  {
+    id: 'unsupported-cursor-provider',
+    regex: /\bCursor\b/i,
+    reason: 'Current public installation support is limited to Claude Code and Codex.',
+  },
+  {
+    id: 'legacy-cursor-install-option',
+    regex: /--ide\s+cursor\b/i,
+    reason: 'The current installer generates Claude Code and Codex adapters; do not document the retired Cursor selector.',
+  },
+  {
+    id: 'legacy-cursor-rules-path',
+    regex: /\.cursor[\\/]rules[\\/]/i,
+    reason: 'Current provider adapter paths are `.claude/agents/`, `.codex/agents/`, and `.agents/skills/`.',
+  },
+  {
+    id: 'claude-commands-as-agent-config',
+    regex: /(?:\.claude[\\/]commands[\\/](?:SINAPSE[\\/]|[^\n]{0,60}(?:agent\s+configuration|configura(?:ç|c)ão\s+de\s+agentes|para\s+Claude\s+Code))|Claude\s+Code\s+(?:uses|usa)[^\n]{0,60}\.claude[\\/]commands[\\/])/i,
+    reason: 'Claude Code agent adapters live in `.claude/agents/`; `.claude/commands/` is not the agent configuration path.',
+  },
+  {
+    id: 'legacy-agent-name-slash-activation',
+    regex: /\/(?:agent-name|nome-do-agente)\b/i,
+    reason: 'Use `@agent-id` in Claude Code or `$sinapse-agent <id>` in Codex.',
   },
 ];
 

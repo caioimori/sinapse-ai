@@ -296,13 +296,17 @@ Cada squad é uma equipe autônoma com orquestrador, agentes especialistas, know
 
 **Total: 17 squads, 172 agentes especializados e 1.412 task files** (**1.201 squad tasks + 211 development tasks; 1.348 ponteiros resolvíveis**)
 
-Cada squad é ativado via seu orquestrador:
+Cada squad é ativado via seu orquestrador, com a sintaxe nativa do provedor:
 
-```
+```text
+# Claude Code
 @brand-orqx         # Squad de brand
 @copy-orqx          # Squad de copy
-@cyber-orqx         # Squad de cybersecurity
-@research-orqx      # Squad de research
+
+# Codex
+$sinapse-agent brand-orqx
+$sinapse-agent copy-orqx
+$snps               # Roteamento pelo orquestrador principal
 ```
 
 O orquestrador recebe seu pedido e delega automaticamente ao especialista correto dentro do squad.

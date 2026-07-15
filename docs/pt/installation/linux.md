@@ -161,9 +161,9 @@ O instalador automaticamente:
 
 - ✅ Detecta sua distribuição Linux e aplica otimizações
 - ✅ Cria diretórios necessários com permissões Unix apropriadas (755/644)
-- ✅ Configura caminhos de IDE para Linux:
-  - Cursor: `~/.config/Cursor/`
-  - Claude: `~/.claude/`
+- ✅ Configura adapters dos provedores no projeto:
+  - Agentes do Claude Code: `.claude/agents/`
+  - Agentes e skills do Codex: `.codex/agents/` e `.agents/skills/`
 - ✅ Configura scripts shell com terminações de linha Unix (LF)
 - ✅ Respeita a especificação XDG Base Directory
 - ✅ Lida com links simbólicos corretamente
@@ -172,33 +172,15 @@ O instalador automaticamente:
 
 ## Configuração Específica por IDE
 
-### Cursor
+### Claude Code
 
-1. Instale o Cursor: Baixe de [cursor.sh](https://cursor.sh/)
+1. Os adapters de agentes são instalados em `.claude/agents/`.
+2. Use `@developer` ou outro ID canônico para ativar um agente.
 
-   ```bash
-   # Método AppImage
-   chmod +x cursor-*.AppImage
-   ./cursor-*.AppImage
-   ```
+### Codex
 
-2. Regras da IDE são instaladas em `.cursor/rules/`
-3. Atalho de teclado: `Ctrl+L` para abrir chat
-4. Use `@nome-do-agente` para ativar agentes
-
-### Claude Code (CLI)
-
-1. Instale o Claude Code:
-
-   ```bash
-   npm install -g @anthropic-ai/claude-code
-   ```
-
-2. Comandos são instalados em `.claude/commands/SINAPSE/`
-3. Use `/nome-do-agente` para ativar agentes
-
-
-3. Use `@nome-do-agente` para ativar agentes
+1. Os descritores são instalados em `.codex/agents/`, com skills em `.agents/skills/`.
+2. Use `$snps` para roteamento ou `$sinapse-agent developer` para ativação direta.
 
 ---
 

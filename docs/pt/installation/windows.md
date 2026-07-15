@@ -141,8 +141,8 @@ O instalador automaticamente:
 - ✅ Detecta Windows e aplica configurações específicas da plataforma
 - ✅ Cria diretórios necessários com permissões apropriadas
 - ✅ Configura caminhos de IDE para localizações Windows:
-  - Cursor: `%APPDATA%\Cursor\`
-  - Claude: `%USERPROFILE%\.claude\`
+  - Agentes do Claude Code: `.claude\agents\`
+  - Agentes e skills do Codex: `.codex\agents\` e `.agents\skills\`
 - ✅ Lida com separadores de caminho Windows (barras invertidas)
 - ✅ Configura terminações de linha corretamente (CRLF para batch, LF para scripts)
 - ✅ Configura scripts npm compatíveis com cmd.exe e PowerShell
@@ -151,28 +151,15 @@ O instalador automaticamente:
 
 ## Configuração Específica por IDE
 
-### Cursor
+### Claude Code
 
-1. Baixe de [cursor.sh](https://cursor.sh/)
-2. Execute o instalador
-3. Regras da IDE são instaladas em `.cursor\rules\`
-4. Atalho de teclado: `Ctrl+L` para abrir chat
-5. Use `@nome-do-agente` para ativar agentes
+1. Os adapters de agentes são instalados em `.claude\agents\`.
+2. Use `@developer` ou outro ID canônico para ativar um agente.
 
-### Claude Code (CLI)
+### Codex
 
-1. Instale o Claude Code:
-
-   ```powershell
-   npm install -g @anthropic-ai/claude-code
-   ```
-
-2. Comandos são instalados em `.claude\commands\SINAPSE\`
-3. Use `/nome-do-agente` para ativar agentes
-
-
-2. Execute o instalador
-4. Use `@nome-do-agente` para ativar agentes
+1. Os descritores são instalados em `.codex\agents\`, com skills em `.agents\skills\`.
+2. Use `$snps` para roteamento ou `$sinapse-agent developer` para ativação direta.
 
 ---
 
