@@ -49,6 +49,7 @@ const {
   regenerateAgentCommands,
 } = require('../lib/command-generator');
 const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
+const { assertProviderAdapterParity } = require('../lib/provider-parity');
 // Follow-up #13 — wire the transactional backup/rollback engine into the
 // installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
 // to its previous state instead of leaving ~/.sinapse half-updated.
@@ -559,7 +560,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
-  const { writtenAgents } = regenerateAgentCommands({
+  const { writtenAgents, totalAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
     commandsDir: commandStagingDir,
     squads,
@@ -570,7 +571,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
-  const activeAgentCount = Math.max(globalAdapters.claude.length, globalAdapters.codex.length);
+  const activeAgentCount = assertProviderAdapterParity(llmChoice, globalAdapters, totalAgents);
   const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   const installedIdes = [];
   if (globalAdapters.claude.length) installedIdes.push('claude-code');

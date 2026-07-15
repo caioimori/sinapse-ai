@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T07:09:56.477Z'
-  entityCount: 816
+  lastUpdated: '2026-07-15T08:12:47.889Z'
+  entityCount: 817
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -154,6 +154,7 @@ entities:
         - status
         - command-generator
         - global-provider-adapters
+        - provider-parity
         - install-transaction
         - install-errors
         - chrome-brain-installer
@@ -165,8 +166,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:dc2908556ec047aafa6fc4f9f0c7e94ba50ffef65e5d00a2ff3a7b87caa4d095
-      lastVerified: '2026-07-15T05:31:13.267Z'
+      checksum: sha256:1f385982ca84a8232f3f6b1fce4257ca3971a5fd24830b5389477f9a5a8e943a
+      lastVerified: '2026-07-15T08:12:47.676Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -204,6 +205,7 @@ entities:
         - constants
         - header
         - squads
+        - uninstall
         - observability-panel
       externalDeps: []
       plannedDeps:
@@ -213,8 +215,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:b1e4c5c3303d7df656372b4659bc04b5b404655c1ba054ff94c0f50e7f0ab5ae
-      lastVerified: '2026-07-15T04:28:12.371Z'
+      checksum: sha256:9f1b50e9b2669eb854a49b338498c79826212ef001fa38ced894dfecc4d949de
+      lastVerified: '2026-07-15T07:51:17.101Z'
     uninstall:
       path: bin/commands/uninstall.js
       layer: L1
@@ -226,6 +228,7 @@ entities:
         - cli
         - install
         - sinapse
+        - status
         - update
       dependencies:
         - constants
@@ -242,8 +245,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:83f11e05840c20f1e1800b765288c7bfe2dae6282d53ea574b5141b266bcd692
-      lastVerified: '2026-07-15T06:51:49.970Z'
+      checksum: sha256:4c00ffd877937802996d93723879bf80a5b831c4152efa9c5dd848e6a33acf89
+      lastVerified: '2026-07-15T08:12:47.677Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -264,6 +267,7 @@ entities:
         - uninstall
         - command-generator
         - global-provider-adapters
+        - provider-parity
       externalDeps: []
       plannedDeps:
         - logger
@@ -272,8 +276,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:77ebc744237cfab9f316e066519efc345566a5f48b3ba752691c6512d62f5dfb
-      lastVerified: '2026-07-15T05:31:13.268Z'
+      checksum: sha256:b51998a172a91e134330847185c078d317ed9be2da6746de3af18d209b7e08d9
+      lastVerified: '2026-07-15T08:12:47.677Z'
     command-generator:
       path: bin/lib/command-generator.js
       layer: L1
@@ -471,6 +475,27 @@ entities:
         extensionPoints: []
       checksum: sha256:dc7cc1109f2bbdb7b3c5927df0de2418925842bdacdc0ba82815bfa2783d0b42
       lastVerified: '2026-06-22T02:41:18.152Z'
+    provider-parity:
+      path: bin/lib/provider-parity.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\provider-parity.js
+      keywords:
+        - provider
+        - parity
+      usedBy:
+        - install
+        - update
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:87e033616096550d0810520b39bde8d956c7a7ef97f4631ce74bfddc2642d406
+      lastVerified: '2026-07-15T08:12:47.678Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1
@@ -595,8 +620,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:691f5a35e7a4ee2a4b8a73c1acc581c945a9be2935ac7b2159b446d98959f4d0
-      lastVerified: '2026-07-15T04:28:12.375Z'
+      checksum: sha256:4d180833ee2ac17bd378755e27a79dca0f559783a99aad830c14d3071c14f754
+      lastVerified: '2026-07-15T07:51:17.104Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1

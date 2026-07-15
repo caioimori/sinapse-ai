@@ -67,6 +67,18 @@ describe('global provider lifecycle', () => {
     expect(fs.existsSync(path.join(codexDir, 'developer.md'))).toBe(false);
   });
 
+  test('reconciliation preserves a digest-mismatched v2 artifact even when its marker remains', () => {
+    const claudeDir = path.join(root, '.claude', 'agents');
+    fs.mkdirSync(claudeDir, { recursive: true });
+    const claudeAgent = path.join(claudeDir, 'developer.md');
+    fs.writeFileSync(claudeAgent, '<!-- SINAPSE-MANAGED:global-agent -->\noriginal');
+    recordInstalledAgents(['developer.md'], ['claude-code'], root);
+    fs.appendFileSync(claudeAgent, '\nuser edit');
+
+    expect(reconcileInstalledAgents(root, new Set(['developer.toml'])).removed).toBe(0);
+    expect(fs.readFileSync(claudeAgent, 'utf8')).toContain('user edit');
+  });
+
   test('managed artifact detection rejects empty provider directories', () => {
     fs.mkdirSync(path.join(root, '.claude', 'agents'), { recursive: true });
     expect(hasManagedInstalledAgents(root)).toBe(false);

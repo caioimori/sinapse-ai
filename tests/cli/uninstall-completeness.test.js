@@ -10,6 +10,7 @@
 'use strict';
 
 const fs = require('fs');
+const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
 
@@ -22,6 +23,7 @@ const {
 } = cli;
 
 let tmpAgentsDir;
+let tmpHome;
 let backupManifest;
 let manifestExisted;
 
@@ -29,8 +31,14 @@ function writeStub(dir, name, body = `---\nname: ${name.replace(/\.md$/, '')}\n-
   fs.writeFileSync(path.join(dir, name), body);
 }
 
+function sha256(filePath) {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
+
 beforeEach(() => {
-  tmpAgentsDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-uninstall-'));
+  tmpHome = fs.mkdtempSync(path.join(os.tmpdir(), 'sinapse-uninstall-'));
+  tmpAgentsDir = path.join(tmpHome, '.claude', 'agents');
+  fs.mkdirSync(tmpAgentsDir, { recursive: true });
   manifestExisted = fs.existsSync(INSTALLED_AGENTS_MANIFEST);
   if (manifestExisted) {
     backupManifest = fs.readFileSync(INSTALLED_AGENTS_MANIFEST, 'utf8');
@@ -39,7 +47,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  try { fs.rmSync(tmpAgentsDir, { recursive: true, force: true }); } catch { /* ignore */ }
+  try { fs.rmSync(tmpHome, { recursive: true, force: true }); } catch { /* ignore */ }
   if (fs.existsSync(INSTALLED_AGENTS_MANIFEST)) fs.rmSync(INSTALLED_AGENTS_MANIFEST);
   if (manifestExisted && backupManifest !== undefined) {
     fs.mkdirSync(path.dirname(INSTALLED_AGENTS_MANIFEST), { recursive: true });
@@ -54,9 +62,9 @@ describe('removeInstalledAgentsFrom — manifest-aware path', () => {
     writeStub(tmpAgentsDir, 'analyst.md');
     writeStub(tmpAgentsDir, 'user-custom.md'); // user-added, not in manifest
 
-    recordInstalledAgents(['foo-orqx.md', 'developer.md', 'analyst.md'], ['claude-code']);
+    recordInstalledAgents(['foo-orqx.md', 'developer.md', 'analyst.md'], ['claude-code'], tmpHome);
 
-    const result = removeInstalledAgentsFrom(tmpAgentsDir);
+    const result = removeInstalledAgentsFrom(tmpAgentsDir, readInstalledAgentsManifest(tmpHome));
 
     expect(result.removed).toBe(3);
     expect(result.existed).toBe(true);
@@ -75,20 +83,67 @@ describe('removeInstalledAgentsFrom — manifest-aware path', () => {
 
   test('skips manifest entries whose files are absent (idempotent rerun)', () => {
     writeStub(tmpAgentsDir, 'a.md');
-    recordInstalledAgents(['a.md', 'b.md', 'c.md'], ['claude-code']);
+    recordInstalledAgents(['a.md', 'b.md', 'c.md'], ['claude-code'], tmpHome);
+    const manifest = readInstalledAgentsManifest(tmpHome);
 
-    const first = removeInstalledAgentsFrom(tmpAgentsDir);
+    const first = removeInstalledAgentsFrom(tmpAgentsDir, manifest);
     expect(first.removed).toBe(1);
 
-    const second = removeInstalledAgentsFrom(tmpAgentsDir);
+    const second = removeInstalledAgentsFrom(tmpAgentsDir, manifest);
     expect(second.removed).toBe(0); // already gone
+  });
+
+  test('uses provider-qualified artifacts when providers share a filename', () => {
+    const codexDir = path.join(tmpHome, '.codex', 'agents');
+    fs.mkdirSync(codexDir, { recursive: true });
+    const claudePath = path.join(tmpAgentsDir, 'developer.md');
+    const codexPath = path.join(codexDir, 'developer.md');
+    fs.writeFileSync(claudePath, '<!-- SINAPSE-MANAGED:global-agent -->\nClaude');
+    fs.writeFileSync(codexPath, '<!-- SINAPSE-MANAGED:global-agent -->\nCodex legacy');
+    const manifest = {
+      version: 2,
+      filenames: ['developer.md'],
+      artifacts: [
+        { provider: 'claude-code', filename: 'developer.md', sha256: sha256(claudePath) },
+        { provider: 'codex', filename: 'developer.md', sha256: sha256(codexPath) },
+      ],
+    };
+
+    expect(removeInstalledAgentsFrom(tmpAgentsDir, manifest).removed).toBe(1);
+    expect(fs.existsSync(claudePath)).toBe(false);
+    expect(fs.existsSync(codexPath)).toBe(true);
+    expect(removeInstalledAgentsFrom(codexDir, manifest).removed).toBe(1);
+  });
+
+  test('preserves an edited v2 artifact even when the ownership marker remains', () => {
+    const agentPath = path.join(tmpAgentsDir, 'developer.md');
+    fs.writeFileSync(agentPath, '<!-- SINAPSE-MANAGED:global-agent -->\noriginal');
+    recordInstalledAgents(['developer.md'], ['claude-code'], tmpHome);
+    const manifest = readInstalledAgentsManifest(tmpHome);
+    fs.appendFileSync(agentPath, '\nuser edit');
+
+    expect(removeInstalledAgentsFrom(tmpAgentsDir, manifest).removed).toBe(0);
+    expect(fs.readFileSync(agentPath, 'utf8')).toContain('user edit');
+  });
+
+  test('does not use marker fallback for a v2 artifact without a digest', () => {
+    const agentPath = path.join(tmpAgentsDir, 'developer.md');
+    fs.writeFileSync(agentPath, '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    const manifest = {
+      version: 2,
+      filenames: ['developer.md'],
+      artifacts: [{ provider: 'claude-code', filename: 'developer.md', sha256: null }],
+    };
+
+    expect(removeInstalledAgentsFrom(tmpAgentsDir, manifest).removed).toBe(0);
+    expect(fs.existsSync(agentPath)).toBe(true);
   });
 });
 
 describe('removeInstalledAgentsFrom — fallback for pre-manifest installs', () => {
   test('removes *-orqx.md files via heuristic when manifest absent', () => {
-    writeStub(tmpAgentsDir, 'design-orqx.md');
-    writeStub(tmpAgentsDir, 'copy-orqx.md');
+    writeStub(tmpAgentsDir, 'design-orqx.md', '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    writeStub(tmpAgentsDir, 'copy-orqx.md', '<!-- SINAPSE-MANAGED:global-agent -->\n');
     writeStub(tmpAgentsDir, 'unrelated.md');
 
     // No manifest → fallback path
@@ -100,14 +155,14 @@ describe('removeInstalledAgentsFrom — fallback for pre-manifest installs', () 
     expect(fs.existsSync(path.join(tmpAgentsDir, 'unrelated.md'))).toBe(true);
   });
 
-  test('removes files with `name: sinapse-*` frontmatter via heuristic', () => {
+  test('preserves files that only resemble legacy agents without an ownership marker', () => {
     writeStub(tmpAgentsDir, 'analyst.md', '---\nname: sinapse-analyst\n---\n');
     writeStub(tmpAgentsDir, 'random.md', '---\nname: my-custom\n---\n');
 
     const result = removeInstalledAgentsFrom(tmpAgentsDir);
 
-    expect(result.removed).toBe(1);
-    expect(fs.existsSync(path.join(tmpAgentsDir, 'analyst.md'))).toBe(false);
+    expect(result.removed).toBe(0);
+    expect(fs.existsSync(path.join(tmpAgentsDir, 'analyst.md'))).toBe(true);
     expect(fs.existsSync(path.join(tmpAgentsDir, 'random.md'))).toBe(true);
   });
 });
@@ -149,9 +204,9 @@ describe('Audit 1 P0 regression — uninstall removes ~200 agent files, not just
       filenames.push(name);
       writeStub(tmpAgentsDir, name);
     }
-    recordInstalledAgents(filenames, ['claude-code', 'codex']);
+    recordInstalledAgents(filenames, ['claude-code'], tmpHome);
 
-    const result = removeInstalledAgentsFrom(tmpAgentsDir);
+    const result = removeInstalledAgentsFrom(tmpAgentsDir, readInstalledAgentsManifest(tmpHome));
 
     expect(result.removed).toBe(200);
     expect(fs.readdirSync(tmpAgentsDir).filter((f) => f.endsWith('.md')).length).toBe(0);

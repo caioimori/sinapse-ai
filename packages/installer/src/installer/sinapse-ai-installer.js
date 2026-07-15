@@ -86,6 +86,10 @@ function getClaudeHookName(command) {
   return match ? match[1] : null;
 }
 
+function getClaudeHookRegistrationKey(event, matcher, hookName) {
+  return JSON.stringify([event, matcher ?? null, hookName]);
+}
+
 /** Merge shipped SINAPSE hook registrations without replacing user settings. */
 async function reconcileClaudeHookSettings(packageRoot, targetDir) {
   const sourcePath = path.join(packageRoot, '.claude', 'settings.json');
@@ -119,25 +123,29 @@ async function reconcileClaudeHookSettings(packageRoot, targetDir) {
       // ignore it while retaining its contents and merge into settings.local.
     }
   }
-  const registered = new Set(
-    existingSettings
-      .flatMap((settings) => Object.values(settings.hooks || {}))
-      .flatMap((groups) => Array.isArray(groups) ? groups : [])
-      .flatMap((group) => Array.isArray(group.hooks) ? group.hooks : [])
-      .map((hook) => getClaudeHookName(hook.command))
-      .filter(Boolean),
-  );
+  const registered = new Set();
+  for (const settings of existingSettings) {
+    for (const [event, groups] of Object.entries(settings.hooks || {})) {
+      for (const group of Array.isArray(groups) ? groups : []) {
+        for (const hook of Array.isArray(group.hooks) ? group.hooks : []) {
+          const hookName = getClaudeHookName(hook.command);
+          if (hookName) registered.add(getClaudeHookRegistrationKey(event, group.matcher, hookName));
+        }
+      }
+    }
+  }
 
   for (const [event, groups] of Object.entries(source.hooks || {})) {
     if (!Array.isArray(target.hooks[event])) target.hooks[event] = [];
     for (const group of groups || []) {
       for (const hook of group.hooks || []) {
         const hookName = getClaudeHookName(hook.command);
-        if (!hookName || registered.has(hookName)) continue;
+        const registrationKey = getClaudeHookRegistrationKey(event, group.matcher, hookName);
+        if (!hookName || registered.has(registrationKey)) continue;
         const registration = { hooks: [hook] };
         if (group.matcher) registration.matcher = group.matcher;
         target.hooks[event].push(registration);
-        registered.add(hookName);
+        registered.add(registrationKey);
       }
     }
   }

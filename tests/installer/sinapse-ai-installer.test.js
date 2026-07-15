@@ -198,6 +198,31 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
   });
 
   describe('reconcileClaudeHookSettings', () => {
+    it('deduplicates hook registrations by event, matcher and hook name', async () => {
+      const packageRoot = path.join(tempDir, 'package');
+      const targetDir = path.join(tempDir, 'project');
+      const hook = { command: 'node .claude/hooks/shared.cjs' };
+      await fs.outputJson(path.join(packageRoot, '.claude', 'settings.json'), {
+        hooks: {
+          PreToolUse: [
+            { matcher: 'Bash', hooks: [hook] },
+            { matcher: 'Write', hooks: [hook] },
+          ],
+          PostToolUse: [{ matcher: 'Bash', hooks: [hook] }],
+        },
+      });
+      await fs.outputJson(path.join(targetDir, '.claude', 'settings.local.json'), {
+        hooks: { PreToolUse: [{ matcher: 'Bash', hooks: [hook] }] },
+      });
+
+      await reconcileClaudeHookSettings(packageRoot, targetDir);
+      const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
+      expect(settings.hooks.PreToolUse).toHaveLength(2);
+      expect(settings.hooks.PostToolUse).toHaveLength(1);
+      expect(settings.hooks.PreToolUse.map((group) => group.matcher).sort())
+        .toEqual(['Bash', 'Write']);
+    });
+
     it('ignores malformed project settings while preserving them and writing local hooks', async () => {
       const packageRoot = path.join(tempDir, 'package');
       const targetDir = path.join(tempDir, 'project');

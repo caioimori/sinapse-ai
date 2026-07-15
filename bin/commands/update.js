@@ -36,6 +36,7 @@ const {
 } = require('./uninstall');
 const { regenerateAgentCommands } = require('../lib/command-generator');
 const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
+const { assertProviderAdapterParity } = require('../lib/provider-parity');
 const { execSync } = require('child_process');
 
 // Query the latest version published to npm. Returns null when npm is unreachable.
@@ -58,18 +59,6 @@ function isNewerVersion(candidate, current) {
   } catch {
     return candidate !== current;
   }
-}
-
-function assertProviderAdapterParity(llmChoice, adapters, canonicalCount) {
-  const providerCounts = [];
-  if (llmChoice === 'claude-code' || llmChoice === 'both') providerCounts.push(['Claude Code', adapters.claude.length]);
-  if (llmChoice === 'codex' || llmChoice === 'both') providerCounts.push(['Codex', adapters.codex.length]);
-  const divergent = providerCounts.filter(([, count]) => count !== canonicalCount);
-  if (divergent.length) {
-    const details = divergent.map(([provider, count]) => `${provider}: ${count}/${canonicalCount}`).join(', ');
-    throw new Error(`Provider adapter parity failed (${details})`);
-  }
-  return canonicalCount;
 }
 
 async function cmdUpdateGlobal() {
