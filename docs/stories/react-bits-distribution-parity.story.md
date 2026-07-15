@@ -94,6 +94,12 @@ npm pack --dry-run
 - Date: 2026-07-15
 - Reviewer: Quality Gate (Litmus)
 - Verdict: **PASS**
-- Evidence: focused global/project/upgrade tests, provider and Codex validators,
-  resolver, manifest, squad validation and packed tarball install all passed.
+- Evidence: `npm run lint` completed with 0 errors (29 pre-existing warnings),
+  `npm run typecheck`, `npm run validate:parity`, `npm run validate:providers`,
+  `npm run validate:codex-native`, `npm run validate:squad-orqx`, and the 41 focused
+  React Bits/install/provider tests all passed. `npm pack --dry-run` produced the
+  package payload with the React Bits skill and nine-file corpus. `npm run validate:paths`
+  passed. The CI manifest gate passed; the local standalone manifest check correctly
+  reports only the pre-existing, unstaged `data/entity-registry.yaml` modification,
+  which is excluded from this work and preserved unchanged.
 - Release evidence remains pending under DevOps authority.

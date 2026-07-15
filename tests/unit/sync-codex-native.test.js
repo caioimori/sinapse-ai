@@ -8,6 +8,7 @@ const {
   collectNativeAgentDefinitions,
   extractSourceDescription,
   NATIVE_WORKFLOW_SKILLS,
+  readCodexCatalog,
   syncCodexNativeAgents,
 } = require('../../.codex/scripts/sync-codex-native');
 const {
@@ -183,6 +184,17 @@ describe('sync-codex-native', () => {
         ['---', 'description: |', '  Native frontmatter agent description.', '---'].join('\n'),
       ),
     ).toBe('Native frontmatter agent description.');
+  });
+
+  it('rejects catalog skill IDs that could escape the native skills root', () => {
+    const fixture = createFixtureProject();
+    tempProjects.push(fixture.projectRoot);
+    const catalogPath = path.join(fixture.projectRoot, '.codex', 'catalog.json');
+    const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+    catalog.expectedSkillIds = ['../../outside'];
+    fs.writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+    expect(() => readCodexCatalog(fixture.projectRoot)).toThrow('unsafe skill ID');
   });
 
   it('exposes the supreme orchestrator alias without changing its filename', () => {

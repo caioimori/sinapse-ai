@@ -34,6 +34,10 @@ function isPathInside(parentPath, candidatePath) {
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 
+function isSafeSkillId(skillId) {
+  return typeof skillId === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(skillId);
+}
+
 function readCanonicalSource(projectRoot, sourcePath) {
   if (!sourcePath) {
     throw new Error('Codex agent pointer does not declare a canonical source');
@@ -328,6 +332,14 @@ function readCodexCatalog(projectRoot = PROJECT_ROOT) {
   }
   if (typeof catalog.genericAgentSkillId !== 'string' || !catalog.genericAgentSkillId.trim()) {
     throw new Error('Codex catalog does not declare genericAgentSkillId');
+  }
+  const catalogSkillIds = [
+    ...catalog.expectedSkillIds,
+    ...catalog.publicAliasSkillIds,
+    catalog.genericAgentSkillId,
+  ];
+  if (catalogSkillIds.some((skillId) => !isSafeSkillId(skillId))) {
+    throw new Error('Codex catalog contains an unsafe skill ID');
   }
   return catalog;
 }

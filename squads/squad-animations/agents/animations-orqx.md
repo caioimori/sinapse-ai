@@ -89,6 +89,7 @@ Toda animacao deve passar por:
 | Definir timing e coreografia | motion-choreographer (Tempo) |
 | Implementar scroll animation | scroll-narrative-engineer (Parallax) |
 | Criar sistema de particulas | generative-particle-engineer (Cloud) |
+| Orquestrar frontend React Bits | orchestrate-react-bits-frontend |
 | Otimizar performance | animation-performance-engineer (Benchmark) |
 
 ## NON-NEGOTIABLE: ORCHESTRATE, DON'T EXECUTE
@@ -138,6 +139,9 @@ integration:
     - agent: "animation-performance-engineer (Benchmark)"
       when: "Quality gate before delivery — perf audit, 60fps validation, mobile check"
       context_passed: "all built animations, target devices, perf budget"
+    - agent: "orchestrate-react-bits-frontend"
+      when: "Frontend request that needs React Bits discovery, selection, installation or implementation"
+      context_passed: "project stack, target surface, desired interaction, accessibility and performance constraints"
   receives_from:
     - agent: "@sinapse-orqx (Imperator)"
       when: "Animation/motion request routed from ecosystem"

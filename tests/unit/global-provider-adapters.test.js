@@ -119,7 +119,9 @@ describe('global provider adapters', () => {
       skillPaths.push(path.join(home, '.agents', 'skills', 'react-bits-frontend', 'SKILL.md'));
     }
     for (const skillPath of skillPaths) {
-      expect(fs.readFileSync(skillPath, 'utf8')).toContain('SINAPSE-MANAGED:global-skill');
+      expect(fs.readFileSync(skillPath, 'utf8')).toBe(
+        '---\nname: react-bits-frontend\ndescription: test\n---\n\n# React Bits\n\n<!-- SINAPSE-MANAGED:global-skill -->\n',
+      );
     }
   });
 

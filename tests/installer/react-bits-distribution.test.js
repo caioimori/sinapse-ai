@@ -11,6 +11,15 @@ const {
   hasCompleteReactBitsCorpus,
 } = require('../../packages/installer/src/installer/react-bits-corpus');
 
+function writeCompleteCorpus(root, content = '# React Bits\n') {
+  const corpus = path.join(root, REACT_BITS_CORPUS_RELATIVE_PATH);
+  fs.mkdirSync(corpus, { recursive: true });
+  for (const file of REQUIRED_REACT_BITS_CORPUS_FILES) {
+    fs.writeFileSync(path.join(corpus, file), content);
+  }
+  return corpus;
+}
+
 describe('React Bits corpus distribution', () => {
   let root;
 
@@ -23,7 +32,7 @@ describe('React Bits corpus distribution', () => {
   test('copies the managed corpus recursively without deleting destination-only files', () => {
     const source = path.join(root, 'package');
     const destination = path.join(root, 'global-home');
-    const corpus = path.join(source, REACT_BITS_CORPUS_RELATIVE_PATH);
+    const corpus = writeCompleteCorpus(source);
     fs.mkdirSync(path.join(corpus, 'nested'), { recursive: true });
     fs.writeFileSync(path.join(corpus, 'index.md'), '# React Bits\n');
     fs.writeFileSync(path.join(corpus, 'nested', 'catalog.json'), '{}\n');
@@ -42,6 +51,18 @@ describe('React Bits corpus distribution', () => {
       .toBe('# React Bits\n');
   });
 
+  test('rejects an incomplete source corpus before writing a destination', () => {
+    const source = path.join(root, 'package');
+    const destination = path.join(root, 'global-home');
+    const corpus = path.join(source, REACT_BITS_CORPUS_RELATIVE_PATH);
+    fs.mkdirSync(corpus, { recursive: true });
+    fs.writeFileSync(path.join(corpus, 'index.md'), '# React Bits\n');
+
+    expect(() => copyReactBitsCorpusSync(source, destination))
+      .toThrow(/Incomplete React Bits corpus source: animations\.md/);
+    expect(fs.existsSync(path.join(destination, REACT_BITS_CORPUS_RELATIVE_PATH))).toBe(false);
+  });
+
   test('requires all nine canonical corpus files before discovery can use a location', () => {
     const corpus = path.join(root, REACT_BITS_CORPUS_RELATIVE_PATH);
     fs.mkdirSync(corpus, { recursive: true });
@@ -53,5 +74,9 @@ describe('React Bits corpus distribution', () => {
 
     expect(REQUIRED_REACT_BITS_CORPUS_FILES).toHaveLength(9);
     expect(hasCompleteReactBitsCorpus(root)).toBe(true);
+
+    fs.rmSync(path.join(corpus, 'animations.md'));
+    fs.mkdirSync(path.join(corpus, 'animations.md'));
+    expect(hasCompleteReactBitsCorpus(root)).toBe(false);
   });
 });

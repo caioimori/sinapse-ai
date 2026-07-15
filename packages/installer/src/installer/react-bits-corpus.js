@@ -17,13 +17,28 @@ const REQUIRED_REACT_BITS_CORPUS_FILES = Object.freeze([
   'text-animations.md',
 ]);
 
+function isRegularFile(filePath) {
+  try {
+    return fs.lstatSync(filePath).isFile();
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+}
+
 function listFilesRecursively(directory, root = directory) {
   if (!fs.existsSync(directory)) return [];
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const sourcePath = path.join(directory, entry.name);
     if (entry.isDirectory()) return listFilesRecursively(sourcePath, root);
-    return entry.isFile() ? [path.relative(root, sourcePath)] : [];
+    return isRegularFile(sourcePath) ? [path.relative(root, sourcePath)] : [];
   });
+}
+
+function getMissingReactBitsCorpusFiles(root) {
+  return REQUIRED_REACT_BITS_CORPUS_FILES.filter((file) => !isRegularFile(
+    path.join(root, REACT_BITS_CORPUS_RELATIVE_PATH, file),
+  ));
 }
 
 /**
@@ -34,6 +49,10 @@ function listFilesRecursively(directory, root = directory) {
 function copyReactBitsCorpusSync(sourceRoot, destinationRoot) {
   const source = path.join(sourceRoot, REACT_BITS_CORPUS_RELATIVE_PATH);
   const destination = path.join(destinationRoot, REACT_BITS_CORPUS_RELATIVE_PATH);
+  const missingFiles = getMissingReactBitsCorpusFiles(sourceRoot);
+  if (missingFiles.length > 0) {
+    throw new Error(`Incomplete React Bits corpus source: ${missingFiles.join(', ')}`);
+  }
   const files = listFilesRecursively(source);
   for (const relativePath of files) {
     const target = path.join(destination, relativePath);
@@ -44,9 +63,7 @@ function copyReactBitsCorpusSync(sourceRoot, destinationRoot) {
 }
 
 function hasCompleteReactBitsCorpus(root) {
-  return REQUIRED_REACT_BITS_CORPUS_FILES.every((file) => fs.existsSync(
-    path.join(root, REACT_BITS_CORPUS_RELATIVE_PATH, file),
-  ));
+  return getMissingReactBitsCorpusFiles(root).length === 0;
 }
 
 /** Copy the corpus plus its canonical skill into a global SINAPSE home. */
@@ -64,7 +81,9 @@ module.exports = {
   REACT_BITS_CORPUS_RELATIVE_PATH,
   REACT_BITS_SKILL_RELATIVE_PATH,
   REQUIRED_REACT_BITS_CORPUS_FILES,
+  isRegularFile,
   listFilesRecursively,
+  getMissingReactBitsCorpusFiles,
   copyReactBitsCorpusSync,
   copyReactBitsCapabilitySync,
   hasCompleteReactBitsCorpus,

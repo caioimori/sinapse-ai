@@ -11,11 +11,12 @@ const {
   syncCodexNativeAgents,
 } = require('../.codex/scripts/sync-codex-native');
 const { resolveCodexAgent } = require('../.codex/scripts/resolve-codex-agent');
+const { GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS } = require('../bin/lib/provider-contract');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const CLAUDE_AGENTS_DIR = '.claude/agents';
 const CLAUDE_SKILLS_DIR = '.claude/skills';
-const SUPPLEMENTAL_PROVIDER_SKILL_IDS = ['react-bits-frontend'];
+const SUPPLEMENTAL_PROVIDER_SKILL_IDS = GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS;
 
 function writeFileAtomically(filePath, content) {
   const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
