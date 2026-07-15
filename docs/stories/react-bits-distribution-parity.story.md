@@ -1,7 +1,7 @@
 ---
 id: react-bits-distribution-parity
 type: feature
-status: InReview
+status: Done
 epic: frontend-capability-expansion
 owner: devops
 executor: developer
@@ -17,7 +17,7 @@ created: 2026-07-15
 
 ## Status
 
-InReview
+Done
 
 ## Story
 
@@ -61,7 +61,7 @@ quality gate accepts package-install evidence.
 - [x] T3. Make corpus discovery deterministic and document the installed contract.
 - [x] T4. Expose React Bits from `animations-orqx` and reconcile squad inventory.
 - [x] T5. Extend validators and isolated tarball clean/upgrade coverage.
-- [ ] T6. Run QA, package evidence and DevOps review; record release evidence after publication.
+- [x] T6. Run QA, package evidence and DevOps review; record release evidence after publication.
 
 ## Validation Record
 
@@ -102,4 +102,13 @@ npm pack --dry-run
   passed. The CI manifest gate passed; the local standalone manifest check correctly
   reports only the pre-existing, unstaged `data/entity-registry.yaml` modification,
   which is excluded from this work and preserved unchanged.
-- Release evidence remains pending under DevOps authority.
+- Release evidence: PR #387 merged through protected GitHub flow at commit
+  `a757d09068748d5fbf0f0483ea4d79e9cde7de88`. Semantic Release run
+  `29441675524` published `sinapse-ai@1.26.0`; npm reports
+  `sha512-NXP+LBqTYm7lER+Zxz4trnKfMA0tn+itJfQ2EQ3ybYIGuATd7fBnxlw1w4haPZ3mIaBvVEwoVgqTblWgJtoHhA==`.
+- Registry smoke: isolated project upgrades `1.25.3 -> 1.26.0` passed for
+  Claude (`37/0` skills), Codex (`0/37`) and both (`37/37`), with nine corpus
+  files in each project. Isolated `--global-only` upgrades passed for the same
+  modes with six provider skills each (the five global aliases plus React Bits),
+  the nine-file corpus, and the animations task, knowledge base and orchestrator
+  route present under `~/.sinapse`.
