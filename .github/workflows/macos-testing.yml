@@ -43,7 +43,7 @@ jobs:
   # Job 1: Intel Mac Testing
   test-intel-mac:
     name: Test on macOS Intel (x86_64)
-    runs-on: macos-13  # Intel runner
+    runs-on: macos-15-intel
     timeout-minutes: 30
 
     steps:
@@ -310,4 +310,3 @@ jobs:
           name: performance-comparison
           path: perf-comparison.md
           retention-days: 90
-

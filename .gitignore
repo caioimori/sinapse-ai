@@ -115,6 +115,8 @@ CLAUDE.md
 !.claude/settings.json
 !.claude/hooks/
 !.claude/skills/
+!.claude/agents/
+!.claude/skill-manifest.json
 
 # AI Session Artifacts (Story 6.1.2.6 - Decision Logging)
 # Auto-generated decision logs from yolo mode executions
@@ -381,16 +383,23 @@ scripts/glue/
 # Framework skills are tracked (exception added at line ~92)
 # Runtime/user skills are ignored by .claude/skills/* pattern below
 .claude/skills/*
+!.claude/skills/*/
+!.claude/skills/*/SKILL.md
 !.claude/skills/db-review.md
 !.claude/skills/test-guard.md
 !.claude/skills/story-update.md
 !.claude/skills/component-check.md
 !.claude/skills/api-review.md
 .claude/templates/
-.claude/agents/
+.claude/agents/*
+!.claude/agents/sinapse-*.md
 .claude/agent-memory/
 .claude/setup/
 docs/guides/sinapse-workflows/
+!docs/stories/
+docs/stories/*
+!docs/stories/story-cross-provider-cli-quality.md
+!docs/stories/story-engineering-applicability-advisory-baseline.md
 
 
 # Dependencies (SINAPSE)

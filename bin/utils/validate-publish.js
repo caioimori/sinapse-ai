@@ -15,31 +15,64 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync, execSync } = require('child_process');
 
 const PROJECT_ROOT = path.join(__dirname, '..', '..');
 const MIN_FILE_COUNT = 50;
+
+function isNewerVersion(candidate, current) {
+  const left = String(candidate).replace(/^v/, '').split(/[.-]/).slice(0, 3).map(Number);
+  const right = String(current).replace(/^v/, '').split(/[.-]/).slice(0, 3).map(Number);
+  for (let i = 0; i < 3; i += 1) {
+    const delta = (left[i] || 0) - (right[i] || 0);
+    if (delta !== 0) return delta > 0;
+  }
+  return false;
+}
 
 let passed = true;
 let fileCount = 0;
 
 console.log('--- Publish Safety Gate (INS-4.10) ---\n');
 
+// Check 0: npm never accepts re-publishing an existing version. Surface the
+// collision before the expensive package scan so release readiness stays
+// honest and operators know that a semantic version bump is still required.
+try {
+  const localVersion = require(path.join(PROJECT_ROOT, 'package.json')).version;
+  const npmCli = process.env.npm_execpath;
+  const npmExecutable = npmCli ? process.execPath : (process.platform === 'win32' ? 'npm.cmd' : 'npm');
+  const npmArgs = npmCli
+    ? [npmCli, 'view', 'sinapse-ai', 'version']
+    : ['view', 'sinapse-ai', 'version'];
+  const publishedVersion = execFileSync(npmExecutable, npmArgs, {
+    encoding: 'utf8',
+    cwd: PROJECT_ROOT,
+    timeout: 15000,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  }).trim();
+  if (!isNewerVersion(localVersion, publishedVersion)) {
+    console.error(`FAIL: local version ${localVersion} is not newer than npm latest ${publishedVersion}.`);
+    console.error('  A semantic version bump is required before publishing.');
+    passed = false;
+  } else {
+    console.log(`PASS: local version ${localVersion} is newer than npm latest ${publishedVersion}`);
+  }
+} catch (err) {
+  console.error(`FAIL: could not verify the npm version boundary: ${err.message}`);
+  passed = false;
+}
+
 // Check 1: File count threshold via npm pack --dry-run
 try {
-  const packOutput = execSync('npm pack --dry-run 2>&1', {
+  const packOutput = execSync('npm pack --dry-run --json', {
     encoding: 'utf8',
     cwd: PROJECT_ROOT,
     timeout: 30000,
+    stdio: ['ignore', 'pipe', 'ignore'],
+    maxBuffer: 32 * 1024 * 1024,
   });
-  // npm pack --dry-run outputs lines starting with "npm notice" for each file
-  const fileLines = packOutput.split('\n').filter(line =>
-    line.includes('npm notice') && !line.includes('Tarball') && !line.includes('name:') &&
-    !line.includes('version:') && !line.includes('filename:') && !line.includes('package size:') &&
-    !line.includes('unpacked size:') && !line.includes('shasum:') && !line.includes('integrity:') &&
-    !line.includes('total files:'),
-  );
-  fileCount = fileLines.length;
+  fileCount = ((JSON.parse(packOutput)[0] || {}).files || []).length;
 
   if (fileCount < MIN_FILE_COUNT) {
     console.error(`FAIL: Package has only ${fileCount} files, expected >= ${MIN_FILE_COUNT}.`);

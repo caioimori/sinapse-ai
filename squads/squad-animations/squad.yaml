@@ -15,16 +15,16 @@ metadata:
   updated_at: "2026-03-15"
   created_by: "squad-creator (Craft)"
   agents_count: 9
-  tasks_count: 75
-  knowledge_bases_count: 14
+  tasks_count: 76
+  knowledge_bases_count: 16
   workflows_count: 5
   checklists_count: 3
   templates_count: 5
-  total_files: 114
+  total_files: 116
   agents: 9
-  tasks: 75
+  tasks: 76
   workflows: 0
-  knowledge_bases: 15
+  knowledge_bases: 16
   checklists: 3
   templates: 5
   preferences: 0
@@ -40,6 +40,7 @@ agents:
       - review-animation-quality
       - manage-animation-pipeline
       - generate-animation-report
+      - orchestrate-react-bits-frontend
 
   - id: animation-interpreter
     name: Decoder
@@ -205,6 +206,10 @@ knowledge_bases:
   - name: unicorn-studio-pipeline
     file: knowledge-base/unicorn-studio-pipeline.md
     description: "Pipeline programatico Unicorn Studio — JSON templates, endpoints publicos, image swap, brand-aware parameters, SDK integration"
+
+  - name: react-bits-operational-guide
+    file: knowledge-base/react-bits-operational-guide.md
+    description: "Roteamento e guardrails para selecionar, instalar, adaptar, combinar e auditar componentes React Bits"
 
 workflows:
   - name: prompt-to-animation-cycle

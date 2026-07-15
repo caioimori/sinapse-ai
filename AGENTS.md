@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 17 squads · 172 agents (all `@`-resolvable in Codex) · 1,411 task files, 1,347 resolvable via the parametric activator
+> 17 squads · 172 native Codex agents · 1,412 task files, 1,348 resolvable via the parametric activator
 >
 > Codex resolves every agent and its real tasks at runtime from source (no frozen
 > snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
@@ -30,6 +30,7 @@ SINAPSE is a meta-framework that orchestrates AI agents into specialized squads 
 - **CLI First** -- All intelligence lives in the CLI. Dashboards observe, never control.
 - **4-Layer Boundary** -- L1 (core, immutable) / L2 (templates, extend-only) / L3 (config, mutable) / L4 (runtime, always modify).
 - **Documentation-First Development** -- No code without a validated story. Pipeline: Epic -> Story -> Validation -> Implementation.
+- **Engineering Applicability** -- Classify greenfield/brownfield, surfaces and risk before selecting workflows. Follow `docs/framework/software-engineering-applicability.md`; legacy `optional` QA flags do not waive the mandatory baseline.
 - **Constitution** -- 11 articles with automatic gates that block violations (full text: `.sinapse-ai/constitution.md`):
   - **I. CLI First** -- intelligence in the CLI; dashboards observe, never control.
   - **II. Agent Authority** -- exclusive authorities (only @devops pushes/PRs/releases); no agent assumes another's role.
@@ -58,7 +59,7 @@ tests/                    # Test suites
 
 The core SDC agents below are documented in full. They are NOT the whole roster:
 **every one of the 172 agents** (12 core + 160 specialists/orchestrators distributed
-across 17 squads) resolves by `@name` and so do their real tasks. Resolution is parametric —
+across 17 squads) resolves through `$sinapse-agent <id>` and the native Codex agent catalog, as do their real tasks. Resolution is parametric —
 read from the source agent definitions at runtime, never from a frozen list:
 
 ```bash
@@ -67,8 +68,8 @@ node .codex/scripts/resolve-codex-agent.js <agent> <command>  # resolve a specif
 node .codex/scripts/resolve-codex-agent.js --stats            # ecosystem counts (measured from disk)
 ```
 
-Examples that resolve (no "Unknown Codex agent"): `@brand-orqx`, `@meta-ads-specialist`,
-`@cyber-orqx`, `@headline-specialist`, `@simon-sinek`, `@developer`. Squad specialists
+Examples that resolve: `$sinapse-agent brand-orqx`, `$sinapse-agent meta-ads-specialist`,
+`$sinapse-agent cyber-orqx`, `$sinapse-agent headline-specialist`, `$sinapse-agent simon-sinek`, and `$sinapse-agent developer`. Squad specialists
 inherit their squad's task pool; orchestrators (`*-orqx`) govern their whole squad.
 Every task pointer the activator emits is verified to exist on disk before it is returned.
 

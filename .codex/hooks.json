@@ -1,0 +1,123 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(?:startup|resume|clear|compact)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" SessionStart",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') SessionStart\"",
+            "timeout": 5,
+            "statusMessage": "Loading SINAPSE authority context"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" SubagentStart",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') SubagentStart\"",
+            "timeout": 5,
+            "statusMessage": "Loading SINAPSE subagent authority"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" SubagentStop",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') SubagentStop\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" UserPromptSubmit",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') UserPromptSubmit\"",
+            "timeout": 10,
+            "statusMessage": "Loading SINAPSE context"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(?:Bash|apply_patch|Write|Edit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" PreToolUse",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') PreToolUse\"",
+            "timeout": 30,
+            "statusMessage": "Checking SINAPSE safety gates"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "^(?:Bash|apply_patch|Write|Edit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" PermissionRequest",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') PermissionRequest\"",
+            "timeout": 30,
+            "statusMessage": "Checking SINAPSE approval policy"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^(?:Bash|apply_patch|Write|Edit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" PostToolUse",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') PostToolUse\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "^(?:manual|auto)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" PreCompact",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') PreCompact\"",
+            "timeout": 10,
+            "statusMessage": "Saving SINAPSE session context"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/claude-compat.cjs\" Stop",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& node (Join-Path (& git rev-parse --show-toplevel) '.codex/hooks/claude-compat.cjs') Stop\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

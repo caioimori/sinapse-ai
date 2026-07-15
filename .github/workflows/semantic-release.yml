@@ -11,8 +11,8 @@ name: Semantic Release
 # 4. Creates git tag, GitHub release, publishes to npm
 #
 # ALTERNATIVE: Manual tag push
-# 1. Create tag locally: git tag v4.0.0
-# 2. Push tag: git push origin v4.0.0
+# 1. Create tag locally: git tag 4.0.0
+# 2. Push tag: git push origin 4.0.0
 # 3. release.yml triggers → creates GitHub release
 # 4. npm-publish.yml triggers → publishes to npm
 #
@@ -96,7 +96,7 @@ jobs:
           echo "🔍 Checking for reachable version tags from HEAD..."
 
           REACHABLE_TAGS=""
-          for tag in $(git tag -l 'v*' | sort -V); do
+          for tag in $(git tag -l | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+([.-].*)?$' | sort -V); do
             if git merge-base --is-ancestor "$tag" HEAD 2>/dev/null; then
               REACHABLE_TAGS="$REACHABLE_TAGS $tag"
               echo "  ✅ $tag is reachable"
@@ -115,8 +115,8 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "**Recommended action:** Create a baseline tag manually:" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-            echo "git tag v${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
-            echo "git push origin v${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
+            echo "git tag ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
+            echo "git push origin ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
             # Fail if not dry-run to prevent version regression
@@ -180,4 +180,3 @@ jobs:
           echo "Semantic release completed successfully." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Check the [Releases page](https://github.com/${{ github.repository }}/releases) for the new version." >> $GITHUB_STEP_SUMMARY
-

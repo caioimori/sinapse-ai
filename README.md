@@ -23,7 +23,7 @@
 
 SINAPSE é um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro é governado por uma **Constitution com enforcement real** — 20 hooks registrados que bloqueiam violações em tempo de execução.
 
-O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.200 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
+O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.201 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
 
 Diferente de ferramentas que apenas conversam com IA, o SINAPSE impõe disciplina. O pipeline **Documentation-First** exige que uma story seja criada e validada antes de qualquer linha de código. Quality gates rodam automaticamente antes de merge. Agentes não autorizados são bloqueados de fazer push. Tudo isso via hooks que interceptam operações em tempo real — não depois.
 
@@ -41,10 +41,13 @@ O diferencial não é apenas a quantidade de agentes. É **governança real**: 2
 
 ## Quick Start
 
+> Use `@latest` nos comandos publicos para evitar que o cache do `npx` execute
+> uma versao anterior durante instalacoes e atualizacoes.
+
 ### 1. Instale
 
 ```bash
-npx sinapse-ai install
+npx sinapse-ai@latest install
 ```
 
 O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex) e instala os 17 squads automaticamente. Re-rodar o comando faz upsert idempotente — preserva suas customizações e só atualiza o que mudou.
@@ -52,8 +55,8 @@ O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex) e instala os
 ### 2. Verifique
 
 ```bash
-npx sinapse-ai status   # Lista de squads + agentes instalados
-npx sinapse-ai doctor   # 16 health checks contra o ambiente
+npx sinapse-ai@latest status   # Lista de squads + agentes instalados
+npx sinapse-ai@latest doctor   # 16 health checks contra o ambiente
 ```
 
 Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
@@ -120,7 +123,7 @@ Cada release passa por uma matriz de instalação de 27 combinações (3 OSes ×
 ### "Como atualizar sem perder minhas customizações?"
 
 ```bash
-npx sinapse-ai update
+npx sinapse-ai@latest update
 ```
 
 O update é **idempotente por design**. L1 (framework core) e L2 (templates) são atualizados. L3 (configuração) e L4 (suas stories, packages, customizações) **nunca são tocados**. Você pode rodar `update` quantas vezes quiser, inclusive após customizar rules localmente. Nada se perde.
@@ -282,7 +285,7 @@ Cada squad é uma equipe autônoma com orquestrador, agentes especialistas, know
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 17 squads, 172 agentes especializados, 1.200 tasks**
+**Total: 17 squads, 172 agentes especializados, 1.201 tasks**
 
 Cada squad é ativado via seu orquestrador:
 
@@ -303,8 +306,8 @@ O SINAPSE suporta duas IDEs com integrações profundas:
 
 | IDE | Ativação | Destaques |
 |-----|----------|-----------|
-| **Claude Code** | `@agent-name` | Hooks, rules contextuais, deny/allow, Chrome Brain |
-| **Codex CLI** | `/skills` ou `$skill-name` | Skills nativas, multi-model, `codex exec` para CI/CD |
+| **Claude Code** | `@agent-name` ou `/skill-name` | Subagentes e skills nativos, hooks e rules contextuais |
+| **Codex CLI** | `$snps` ou `$sinapse-agent agent-id` | Agentes TOML, skills nativas e `codex exec` para CI/CD |
 
 Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
@@ -312,7 +315,7 @@ Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowled
 
 | Funcionalidade | Claude Code | Codex CLI |
 |---------------|:-----------:|:---------:|
-| Ativação de agentes (@agent) | Completo | Completo |
+| Ativação dos 172 agentes | `@agent-name` | `$sinapse-agent agent-id` |
 | Hooks constitucionais (20) | Completo | Parcial (5) |
 | Story-driven development | Completo | Completo |
 | Quality gates | Completo | Completo |
@@ -401,6 +404,18 @@ Pre-commit e pre-push hooks validam automaticamente antes de cada operação.
 
 ## CLI Reference
 
+Comandos deterministas para o pacote publico:
+
+```bash
+# Projeto novo ou existente
+npx sinapse-ai@latest install
+npx sinapse-ai@latest update
+
+# Instalacao global existente
+npm install -g sinapse-ai@latest
+sinapse-ai update
+```
+
 A superfície pública é proposital — quatro comandos canônicos de lifecycle, dois diagnósticos, um sub-comando avançado.
 
 ```bash
@@ -421,7 +436,7 @@ npx sinapse-ai doctor --dry-run  # Mostra o que `--fix` faria sem aplicar
 npx sinapse-ai chrome-brain install   # Instala browser automation
 ```
 
-Todos os comandos são seguros para re-rodar. Para listar agentes ativos depois de instalar, abra o Claude Code ou o Codex CLI e digite `@` para autocompletar.
+Todos os comandos são seguros para re-rodar. No Claude Code, digite `@` para selecionar um subagente ou use `/snps`. No Codex, use `$snps` para o orquestrador supremo e `$sinapse-agent <id>` para qualquer agente do catálogo.
 
 ### Orquestração (avançado)
 

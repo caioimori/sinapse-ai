@@ -5,6 +5,7 @@
   "codexAgentsDir": ".codex/agents",
   "skillsDir": ".codex/skills",
   "expectedSkillIds": [
+    "sinapse-agent",
     "sinapse-analyst",
     "sinapse-animations",
     "sinapse-architect",
@@ -23,6 +24,7 @@
     "sinapse-devops",
     "sinapse-finance",
     "sinapse-growth",
+    "sinapse-loop",
     "sinapse-orqx",
     "sinapse-paidmedia",
     "sinapse-pm",
@@ -31,11 +33,18 @@
     "sinapse-qa",
     "sinapse-research",
     "sinapse-sm",
+    "sinapse-spec-driven",
     "sinapse-squad-creator",
     "sinapse-storytelling",
     "sinapse-swarm",
     "sinapse-ux-design-expert"
   ],
+  "publicAliasSkillIds": [
+    "snps",
+    "sinapse",
+    "snps-orqx"
+  ],
+  "genericAgentSkillId": "sinapse-agent",
   "generatedSkillMap": {
     "analyst": {
       "skillId": "sinapse-analyst"
@@ -65,10 +74,10 @@
       "skillId": "sinapse-qa",
       "greetingAgentId": "qa"
     },
-    "sinapse-orqx": {
+    "snps-orqx": {
       "skillId": "sinapse-orqx",
       "sourceOfTruth": ".codex/agents/snps-orqx.md",
-      "canonicalReference": ".sinapse-ai/development/agents/sinapse-orqx.md",
+      "canonicalReference": ".sinapse-ai/development/agents/snps-orqx.md",
       "greetingScript": ".codex/scripts/generate-codex-greeting.js"
     },
     "sprint-lead": {
@@ -104,9 +113,12 @@
       "agentId": "devops",
       "filename": "devops.md"
     },
+    "sinapse-loop": {
+      "workflowOnly": true
+    },
     "sinapse-orqx": {
-      "agentId": "sinapse-orqx",
-      "filename": "sinapse-orqx.md"
+      "agentId": "snps-orqx",
+      "filename": "snps-orqx.md"
     },
     "sinapse-po": {
       "agentId": "product-lead",
@@ -127,6 +139,9 @@
       "agentId": "sprint-lead",
       "filename": "sprint-lead.md",
       "greetingAgentId": "sm"
+    },
+    "sinapse-spec-driven": {
+      "workflowOnly": true
     },
     "sinapse-squad-creator": {
       "agentId": "squad-creator",

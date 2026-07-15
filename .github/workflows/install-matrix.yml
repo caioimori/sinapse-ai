@@ -20,6 +20,12 @@ on:
       - 'package-lock.json'
       - 'CHANGELOG.md'
       - 'bin/**'
+      - 'packages/installer/**'
+      - '.agents/**'
+      - '.claude/**'
+      - '.codex/**'
+      - 'scripts/sync-provider-adapters.js'
+      - 'scripts/validate-provider-adapters.js'
       - '.sinapse-ai/install-manifest.yaml'
       - '.github/workflows/install-matrix.yml'
     types: [opened, synchronize, reopened, labeled]
@@ -119,7 +125,7 @@ jobs:
       # ----------------------------------------------------------------
       - name: Install pnpm
         if: matrix.pm == 'pnpm'
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
           version: 9
 
@@ -180,18 +186,84 @@ jobs:
             echo "::error title=Matrix cell FAIL::$COMBO"
           fi
 
+  provider-install-matrix:
+    name: Provider payload / ${{ matrix.provider }}
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        provider: [claude-code, codex, both]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Pack and install candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm pkg delete scripts.prepare
+          npm pack --ignore-scripts --silent >/dev/null
+          TARBALL=$(pwd)/$(ls sinapse-ai-*.tgz | head -n1)
+          TEST_DIR="$RUNNER_TEMP/provider-${{ matrix.provider }}"
+          mkdir -p "$TEST_DIR/project"
+          cd "$TEST_DIR"
+          npm init -y >/dev/null
+          npm install "$TARBALL" --ignore-scripts --no-audit --no-fund >/dev/null
+          node "$GITHUB_WORKSPACE/.github/workflows/install-matrix/run-provider-mode.js" \
+            "${{ matrix.provider }}" "$TEST_DIR/project" "$TEST_DIR/node_modules/sinapse-ai"
+
+  provider-upgrade-matrix:
+    name: Public latest upgrade / ${{ matrix.provider }}
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        provider: [claude-code, codex, both]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install public latest, then upgrade from candidate tarball
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm pkg delete scripts.prepare
+          npm pack --ignore-scripts --silent >/dev/null
+          TARBALL=$(pwd)/$(ls sinapse-ai-*.tgz | head -n1)
+          TEST_DIR="$RUNNER_TEMP/upgrade-${{ matrix.provider }}"
+          mkdir -p "$TEST_DIR/project" "$TEST_DIR/host"
+          cd "$TEST_DIR/host"
+          npm init -y >/dev/null
+          npm install sinapse-ai@latest --ignore-scripts --no-audit --no-fund >/dev/null
+          node -e "require('./node_modules/sinapse-ai/packages/installer/src/installer/sinapse-ai-installer').installSinapseCore({targetDir:process.argv[1]}).then(r=>{if(!r.success)process.exit(1)})" "$TEST_DIR/project"
+          npm install "$TARBALL" --ignore-scripts --no-audit --no-fund >/dev/null
+          node "$GITHUB_WORKSPACE/.github/workflows/install-matrix/run-provider-mode.js" \
+            "${{ matrix.provider }}" "$TEST_DIR/project" "$TEST_DIR/host/node_modules/sinapse-ai"
+
   summary:
-    name: Gate Summary (24 combos)
-    needs: install-matrix
+    name: Gate Summary (24 combos + 3 clean + 3 upgrades)
+    needs: [install-matrix, provider-install-matrix, provider-upgrade-matrix]
     if: always() && needs.install-matrix.result != 'skipped'
     runs-on: ubuntu-latest
     steps:
       - name: Evaluate gate
         run: |
           RESULT="${{ needs.install-matrix.result }}"
+          PROVIDERS="${{ needs.provider-install-matrix.result }}"
+          UPGRADES="${{ needs.provider-upgrade-matrix.result }}"
           echo "Install Matrix aggregate result: $RESULT"
-          if [ "$RESULT" != "success" ]; then
+          echo "Provider Matrix aggregate result: $PROVIDERS"
+          echo "Provider Upgrade aggregate result: $UPGRADES"
+          if [ "$RESULT" != "success" ] || [ "$PROVIDERS" != "success" ] || [ "$UPGRADES" != "success" ]; then
             echo "::error title=Install Matrix GATE FAIL::One or more required combos failed. rc CANNOT be promoted to latest until all 24 required combos pass. (3 Yarn v1 Windows combos are excluded as platform exception — see docs/audits/install-matrix-2026-04-16.md.)"
             exit 1
           fi
-          echo "::notice title=Install Matrix GATE PASS::All 24 required combos PASS. rc may be promoted to latest. (Windows + Yarn v1 combos are excluded as platform exception.)"
+          echo "::notice title=Install Matrix GATE PASS::All 24 required combos, 3 clean provider installs, and 3 public-latest upgrades PASS. rc may be promoted to latest."

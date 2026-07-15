@@ -48,6 +48,9 @@ const GATES = [
   { id: 'parity', name: 'Cross-IDE parity (10.18)', cmd: ['npm', 'run', 'validate:parity', '--silent'] },
   { id: 'manifest', name: 'Install manifest', cmd: ['npm', 'run', 'validate:manifest', '--silent'] },
   { id: 'install-docs', name: 'Install docs', cmd: ['npm', 'run', 'validate:docs', '--silent'] },
+  { id: 'providers', name: 'Native providers', cmd: ['npm', 'run', 'validate:providers', '--silent'] },
+  { id: 'engineering', name: 'Engineering applicability', cmd: ['npm', 'run', 'validate:engineering-applicability', '--silent'] },
+  { id: 'publish', name: 'Publish safety', cmd: ['npm', 'run', 'validate:publish', '--silent'] },
 ];
 
 function parseArgs(argv = process.argv.slice(2)) {
@@ -60,10 +63,13 @@ function parseArgs(argv = process.argv.slice(2)) {
 
 function runGate(gate) {
   const start = Date.now();
-  const result = spawnSync(gate.cmd[0], gate.cmd.slice(1), {
+  const npmCli = gate.cmd[0] === 'npm' ? process.env.npm_execpath : null;
+  const executable = npmCli ? process.execPath : gate.cmd[0];
+  const args = npmCli ? [npmCli, ...gate.cmd.slice(1)] : gate.cmd.slice(1);
+  const result = spawnSync(executable, args, {
     cwd: PROJECT_ROOT,
     encoding: 'utf8',
-    shell: process.platform === 'win32',
+    shell: false,
   });
   const elapsed = Date.now() - start;
   return {
@@ -72,7 +78,7 @@ function runGate(gate) {
     status: result.status === 0 ? 'PASS' : 'FAIL',
     exitCode: result.status,
     elapsedMs: elapsed,
-    stderr: result.stderr ? result.stderr.split('\n').slice(-5).join('\n') : '',
+    stderr: result.stderr ? result.stderr.split('\n').slice(-5).join('\n') : (result.error?.message || ''),
   };
 }
 

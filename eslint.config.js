@@ -144,6 +144,14 @@ module.exports = [
     },
   },
 
+  // Native ESM scripts use .mjs regardless of the package-level CommonJS mode.
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      sourceType: 'module',
+    },
+  },
+
   // TypeScript files configuration
   {
     files: ['**/*.ts', '**/*.tsx'],

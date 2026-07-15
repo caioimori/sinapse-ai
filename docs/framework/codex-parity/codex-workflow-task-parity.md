@@ -10,7 +10,7 @@ The Codex workflow bridge now lives in:
 
 - `.codex/command-registry.json`
 
-This registry is the Codex-only contract for the critical workflow path:
+This registry is the deterministic Codex contract for the critical workflow path:
 
 - `sinapse-orqx`
 - `sinapse-pm`
@@ -18,6 +18,12 @@ This registry is the Codex-only contract for the critical workflow path:
 - `sinapse-sm`
 - `sinapse-dev`
 - `sinapse-qa`
+- `sinapse-architect`
+- `sinapse-analyst`
+- `sinapse-devops`
+
+Agents and commands outside this curated path fall through to the parametric
+resolver, which reads their real source definitions and task dependencies.
 
 For each agent, it maps:
 
@@ -44,11 +50,14 @@ This is especially useful in Codex when a command exists in the agent persona bu
 Critical workflow coverage now includes:
 
 - Imperator: `onboard`, `route`, `plan`, `status`, `brief`, `resolve`, `council`
-- PM: `create-prd`, `create-brownfield-prd`, `create-epic`, `create-story`, `research`, `execute-epic`, `gather-requirements`, `write-spec`, `shard-prd`
+- PM: `create-prd`, `create-brownfield-prd`, `create-epic`, `create-story`, `research`, `execute-epic`, `gather-requirements`, `write-spec`, `clarify-spec`, `create-spec`, `shard-prd`
 - PO: `validate-story`, `validate-story-draft`, `backlog-review`, `backlog-prioritize`, `backlog-schedule`, `close-story`, `execute-checklist-po`, `sync-story`, `pull-story`, `stories-index`
 - SM: `draft`, `story-checklist`
 - Developer: `develop`, `run-tests`, `apply-qa-fixes`, `execute-subtask`, `verify-subtask`, `backlog-debt`, build commands
-- QA: `review`/`review-story`/`code-review`, `gate`, `review-build`, `create-fix-request`, `test-design`, `run-tests`, `nfr-assess`, `validate-libraries`, `security-check`, `validate-migrations`, `evidence-check`, `false-positive-check`, `console-check`
+- Architect: `assess-complexity`, `create-plan`, `create-context`
+- Analyst: `research-deps`
+- QA: `review`/`review-story`/`code-review`, `gate`, `critique-spec`, `analyze-spec`, `review-build`, `create-fix-request`, `test-design`, `run-tests`, `nfr-assess`, `validate-libraries`, `security-check`, `validate-migrations`, `evidence-check`, `false-positive-check`, `console-check`
+- DevOps: `pre-push`, `push`, `create-pr`
 
 ## Validation
 
@@ -56,6 +65,7 @@ The registry is enforced by:
 
 - `npm run validate:codex-commands`
 - `npm run validate:codex-sync`
+- `npm run validate:codex-native`
 
 The validator checks that:
 
@@ -80,8 +90,12 @@ Because the shared `sinapse-orqx` runtime is still partially broken upstream, Co
 
 These keep the workflow Codex-only and avoid risky shared-runtime edits.
 
-## Current Limit
+## Current Coverage
 
-This layer solves deterministic command discovery and routing for the critical workflow path.
-It does not yet provide full specialist coverage across all 178 agents, and it does not replace MCP parity.
-Direct specialist routing from `.codex/agents` should still be treated as exploratory unless the path is covered by the command registry and its validators.
+The curated registry provides deterministic mappings for the critical delivery
+path, while the parametric resolver and native TOML adapters cover all 172 current
+agents. Spec, plan, and orchestrate preparation is resolved from canonical task
+and workflow files by `.codex/scripts/resolve-codex-workflow.js`.
+
+MCP capabilities remain separate from agent and workflow parity. Provider output
+can differ, but authority, source artifacts, gates, and delivery order are shared.

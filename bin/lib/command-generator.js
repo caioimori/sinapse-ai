@@ -116,7 +116,7 @@ Tasks: \`${squadPath}/tasks/\` · Workflows: \`${squadPath}/workflows/\` · Mani
 `;
 }
 
-function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile) {
+function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, agentFile, options = {}) {
   // Detecta se é orquestrador: id termina em -orqx OU é Imperator (snps-orqx/sinapse-orqx)
   // ou um dos apelidos curtos do master (sinapse/snps).
   const isOrchestrator = /-orqx$/.test(agentId) || agentId === 'snps-orqx' || agentId === 'sinapse-orqx' || agentId === 'sinapse' || agentId === 'snps';
@@ -139,6 +139,12 @@ function generateCommandMd(agentId, agentName, agentIcon, squadName, squadPath, 
   const fmDesc = (isOrchestrator
     ? `${agentName || agentId} — orchestrator for ${squadName}; diagnoses, routes to specialists and auto-generates an orchestration plan`
     : `${agentName || agentId} — ${squadName} specialist`).replace(/["\n\r]/g, ' ').trim();
+  const manifestActivation = options.hasManifest === false
+    ? '2. Use the installed core development module as canonical context'
+    : `2. Load the squad manifest at \`${squadPath}/squad.yaml\` for context`;
+  const manifestReference = options.hasManifest === false
+    ? `- **Canonical module:** \`${squadPath}/\``
+    : `- **Squad Manifest:** \`${squadPath}/squad.yaml\``;
 
   return `---
 name: ${agentId}
@@ -151,7 +157,7 @@ ACTIVATION-NOTICE: This command activates an agent from ${squadName}.
 
 CRITICAL: Read the agent definition file at \`${squadPath}/agents/${agentFile}\` to understand your full operating parameters. Then:
 1. Adopt the persona defined in that file (name: ${agentName}, icon: ${agentIcon})
-2. Load the squad manifest at \`${squadPath}/squad.yaml\` for context
+${manifestActivation}
 3. Display a greeting showing your agent name, role, and available commands
 ${step4}
 
@@ -159,7 +165,7 @@ ${step4}
 - **Agent ID:** ${agentId}
 - **Squad:** ${squadName}
 - **Definition:** \`${squadPath}/agents/${agentFile}\`
-- **Squad Manifest:** \`${squadPath}/squad.yaml\`
+${manifestReference}
 - **Tasks:** \`${squadPath}/tasks/\`
 - **Knowledge Bases:** \`${squadPath}/knowledge-base/\`
 - **Workflows:** \`${squadPath}/workflows/\`
@@ -209,6 +215,7 @@ function regenerateAgentCommands(deps = {}) {
     commandsDir = CLAUDE_COMMANDS_DIR,
     squads,
     sinapseMasterDest = path.join(sinapseHome, 'sinapse'),
+    coreDevelopmentDest = path.join(sinapseHome, 'core'),
   } = deps;
 
   if (!Array.isArray(squads)) {
@@ -239,6 +246,21 @@ function regenerateAgentCommands(deps = {}) {
       const agentId = file.replace('.md', '');
       const meta = extractAgentMeta(path.join(agentsDir, file));
       const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
+      atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
+      writtenAgents.add(file);
+    }
+  }
+
+  // Core agents are mirrored by the global installer so definitions and tasks
+  // remain resolvable after the npm process exits.
+  const coreAgentsDir = path.join(coreDevelopmentDest, 'agents');
+  if (fs.existsSync(coreAgentsDir)) {
+    const coreBase = toForwardSlash(coreDevelopmentDest);
+    for (const file of fs.readdirSync(coreAgentsDir).filter(f => f.endsWith('.md'))) {
+      if (file === 'README.md' || file === 'MEMORY.md' || file.startsWith('_') || writtenAgents.has(file)) continue;
+      const agentId = file.replace('.md', '');
+      const meta = extractAgentMeta(path.join(coreAgentsDir, file));
+      const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'core', coreBase, file, { hasManifest: false });
       atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
       writtenAgents.add(file);
     }

@@ -22,7 +22,7 @@ const { t } = require('./i18n');
  * Do NOT inline these numbers elsewhere in this file — reference `ECOSYSTEM`
  * so there is exactly one place to update when `sync:counts` changes.
  */
-const ECOSYSTEM = Object.freeze({ squads: 17, agents: 172, tasks: '1,200' });
+const ECOSYSTEM = Object.freeze({ squads: 17, agents: 172, tasks: '1,411' });
 
 /**
  * Create and start a spinner with SINAPSE styling

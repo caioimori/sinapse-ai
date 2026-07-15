@@ -82,12 +82,12 @@ function readInstalledAgentsManifest() {
   }
 }
 
-function removeInstalledAgentsFrom(dir) {
+function removeInstalledAgentsFrom(dir, manifestOverride = null) {
   if (!fs.existsSync(dir)) return { removed: 0, existed: false };
   let removed = 0;
   let candidates;
 
-  const manifest = readInstalledAgentsManifest();
+  const manifest = manifestOverride || readInstalledAgentsManifest();
   if (manifest && Array.isArray(manifest.filenames)) {
     // Manifest path — surgical removal of exactly what install wrote.
     candidates = manifest.filenames;
@@ -97,6 +97,9 @@ function removeInstalledAgentsFrom(dir) {
     // `-orqx.md`, OR start with `name: sinapse-` in their frontmatter.
     try {
       candidates = fs.readdirSync(dir).filter((f) => {
+        if (f.endsWith('.toml')) {
+          try { return /SINAPSE/i.test(fs.readFileSync(path.join(dir, f), 'utf8').slice(0, 4000)); } catch { return false; }
+        }
         if (!f.endsWith('.md')) return false;
         if (/-orqx\.md$/.test(f)) return true;
         try {
@@ -123,6 +126,46 @@ function removeInstalledAgentsFrom(dir) {
 // to `removeInstalledAgentsFrom` (delegates to the manifest-aware path).
 function removeOrqxAgentsFrom(dir) {
   return removeInstalledAgentsFrom(dir);
+}
+
+const MANAGED_GLOBAL_SKILL_IDS = ['snps', 'sinapse', 'snps-orqx', 'sinapse-agent'];
+const MANAGED_GLOBAL_SKILL_MARKER = 'SINAPSE-MANAGED:global-skill';
+
+function removeManagedGlobalSkills(home = HOME) {
+  let removed = 0;
+  for (const skillId of MANAGED_GLOBAL_SKILL_IDS) {
+    const skillDir = path.join(home, '.agents', 'skills', skillId);
+    const skillPath = path.join(skillDir, 'SKILL.md');
+    if (!fs.existsSync(skillPath)) continue;
+    try {
+      const content = fs.readFileSync(skillPath, 'utf8');
+      if (!content.includes(MANAGED_GLOBAL_SKILL_MARKER)) continue;
+      fs.unlinkSync(skillPath);
+      if (fs.readdirSync(skillDir).length === 0) fs.rmdirSync(skillDir);
+      removed++;
+    } catch { /* best-effort */ }
+  }
+  return { removed };
+}
+
+function reconcileInstalledAgents(home, desiredFilenames) {
+  const manifest = readInstalledAgentsManifest();
+  if (!manifest) return { removed: 0 };
+  const desired = new Set(desiredFilenames);
+  let removed = 0;
+  for (const filename of manifest.filenames) {
+    if (desired.has(filename)) continue;
+    const providerDir = filename.endsWith('.toml')
+      ? path.join(home, '.codex', 'agents')
+      : path.join(home, '.claude', 'agents');
+    const filepath = path.join(providerDir, filename);
+    if (!fs.existsSync(filepath)) continue;
+    try {
+      fs.unlinkSync(filepath);
+      removed++;
+    } catch { /* best-effort */ }
+  }
+  return { removed };
 }
 
 // Story 10.40 — Strip SINAPSE-owned keys from ~/.claude/settings.json without
@@ -176,6 +219,7 @@ async function cmdUninstall(opts = {}) {
   }
 
   logger.always(`${BOLD}Uninstalling Sinapse...${NC}\n`);
+  const installedAgentsManifest = readInstalledAgentsManifest();
 
   // Paths that are fully SINAPSE-owned (directory or launcher file)
   const ownedItems = [
@@ -210,7 +254,7 @@ async function cmdUninstall(opts = {}) {
   const claudeAgentsDir = path.join(HOME, '.claude', 'agents');
   const codexAgentsDir = path.join(HOME, '.codex', 'agents');
 
-  const claudeRemoved = removeInstalledAgentsFrom(claudeAgentsDir);
+  const claudeRemoved = removeInstalledAgentsFrom(claudeAgentsDir, installedAgentsManifest);
   if (!claudeRemoved.existed) {
     logger.always(`  ${YELLOW}-${NC} ~/.claude/agents/ SINAPSE files (dir not found)`);
   } else if (claudeRemoved.removed === 0) {
@@ -219,7 +263,7 @@ async function cmdUninstall(opts = {}) {
     logger.always(`  ${GREEN}✓${NC} Removed ~/.claude/agents/ SINAPSE files (${claudeRemoved.removed} files)`);
   }
 
-  const codexRemoved = removeInstalledAgentsFrom(codexAgentsDir);
+  const codexRemoved = removeInstalledAgentsFrom(codexAgentsDir, installedAgentsManifest);
   if (!codexRemoved.existed) {
     logger.always(`  ${YELLOW}-${NC} ~/.codex/agents/ SINAPSE files (dir not found)`);
   } else if (codexRemoved.removed === 0) {
@@ -229,6 +273,13 @@ async function cmdUninstall(opts = {}) {
   }
 
   // Story 10.40 — clean SINAPSE-owned keys from ~/.claude/settings.json
+  const skillsRemoved = removeManagedGlobalSkills(HOME);
+  if (skillsRemoved.removed > 0) {
+    logger.always(`  ${GREEN}OK${NC} Removed global SINAPSE skills (${skillsRemoved.removed})`);
+  } else {
+    logger.always(`  ${YELLOW}-${NC} Global SINAPSE skills (none present)`);
+  }
+
   const settingsPath = path.join(HOME, '.claude', 'settings.json');
   const settingsClean = cleanClaudeSettingsJson(settingsPath);
   if (settingsClean.touched) {
@@ -259,6 +310,8 @@ module.exports = {
   readInstalledAgentsManifest,
   removeInstalledAgentsFrom,
   removeOrqxAgentsFrom,
+  removeManagedGlobalSkills,
+  reconcileInstalledAgents,
   cleanClaudeSettingsJson,
   removeGitHooksConfig,
   INSTALLED_AGENTS_MANIFEST,

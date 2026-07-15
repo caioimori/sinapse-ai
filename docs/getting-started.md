@@ -11,7 +11,7 @@
 ## Instalação em 1 comando
 
 ```bash
-npx sinapse-ai install
+npx sinapse-ai@latest install
 ```
 
 O wizard detecta seu ambiente, escolhe IDE (Claude Code ou Codex), instala os 17 squads e configura os hooks essenciais automaticamente.
@@ -48,8 +48,12 @@ No prompt do Claude Code ou Codex:
 
 ## Reinstalar / atualizar
 
+Use sempre `@latest` para evitar uma versao antiga mantida no cache do `npx`.
+Em instalacoes globais, execute `npm install -g sinapse-ai@latest` antes de
+`sinapse-ai update`.
+
 ```bash
-npx sinapse-ai install --reconfigure   # reconfigura tudo
+npx sinapse-ai@latest install --reconfigure   # reconfigura tudo
 npx sinapse-ai update                  # atualiza versão sem perder customizações
 npx sinapse-ai uninstall               # remove tudo
 ```

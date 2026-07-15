@@ -8,7 +8,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const os = require('os');
 
-const { SINAPSEUpdater, UpdateStatus, formatCheckResult, formatUpdateResult } = require('../../packages/installer/src/updater');
+const { SINAPSEUpdater, UpdateStatus, formatCheckResult, formatUpdateResult, sanitizeLogText } = require('../../packages/installer/src/updater');
 
 describe('SINAPSEUpdater', () => {
   let tempDir;
@@ -60,6 +60,24 @@ describe('SINAPSEUpdater', () => {
       expect(u.options.force).toBe(true);
       expect(u.options.preserveAll).toBe(false);
       expect(u.options.timeout).toBe(60000);
+    });
+  });
+
+  describe('logging', () => {
+    it('keeps untrusted messages on a single terminal line', () => {
+      const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+      const verboseUpdater = new SINAPSEUpdater(tempDir, { verbose: true });
+
+      verboseUpdater.log('registry error\r\n[FORGED] ok\u001b[31m');
+
+      expect(logSpy).toHaveBeenCalledTimes(1);
+      expect(logSpy.mock.calls[0][0]).not.toMatch(/[\r\n]/);
+      expect(logSpy.mock.calls[0][0]).not.toContain('\u001b');
+      logSpy.mockRestore();
+    });
+
+    it('sanitizes Unicode line separators', () => {
+      expect(sanitizeLogText('one\u2028two\u2029three')).toBe('one two three');
     });
   });
 
@@ -314,4 +332,3 @@ describe('formatUpdateResult', () => {
     expect(output).toContain('Connection timeout');
   });
 });
-

@@ -29,7 +29,13 @@ const {
 } = require('../lib/detection');
 const { promptLlmChoice } = require('../lib/prompts');
 const { generateSquadAwareness } = require('./install');
+const {
+  recordInstalledAgents,
+  reconcileInstalledAgents,
+  removeManagedGlobalSkills,
+} = require('./uninstall');
 const { regenerateAgentCommands } = require('../lib/command-generator');
+const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
 const { execSync } = require('child_process');
 
 // Query the latest version published to npm. Returns null when npm is unreachable.
@@ -146,39 +152,44 @@ async function cmdUpdateGlobal() {
     logger.always(`  ${GREEN}OK${NC} sinapse (orqx)`);
   }
 
+  const coreDevelopmentSrc = path.join(ROOT, '.sinapse-ai', 'development');
+  const coreDevelopmentDest = path.join(SINAPSE_HOME, 'core');
+  if (fs.existsSync(coreDevelopmentSrc)) {
+    const delta = syncDirSync(coreDevelopmentSrc, coreDevelopmentDest);
+    totalDelta.added += delta.added;
+    totalDelta.updated += delta.updated;
+    totalDelta.unchanged += delta.unchanged;
+    totalDelta.removed += delta.removed;
+    logger.always(`  ${GREEN}OK${NC} core development`);
+  }
+
   // Phase 2: Regenerate commands — shared with `install` so `update` produces the
   // SAME complete set (every specialist command + the rich master Imperator stubs),
   // not just the `-orqx` subset it used to write.
   logger.always(`\n${CYAN}Phase 2:${NC} Regenerating commands`);
-  rmDirSync(CLAUDE_COMMANDS_DIR);
+  const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
+  rmDirSync(commandStagingDir);
   const { writtenAgents, totalAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
-    commandsDir: CLAUDE_COMMANDS_DIR,
+    commandsDir: commandStagingDir,
     squads,
     sinapseMasterDest: path.join(SINAPSE_HOME, 'sinapse'),
+    coreDevelopmentDest,
   });
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
-  if (llmChoice === 'claude-code' || llmChoice === 'both') {
-    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
-    fs.mkdirSync(globalAgentsDir, { recursive: true });
-    // Copy all generated agent commands as global agents
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
-    }
-    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
-  }
+  const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  if (globalAdapters.claude.length) logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${globalAdapters.claude.length})`);
+  if (globalAdapters.codex.length) logger.always(`  ${GREEN}OK${NC} Codex global agents (${globalAdapters.codex.length} TOML, ${globalAdapters.skills.length} skills)`);
 
-  if (llmChoice === 'codex' || llmChoice === 'both') {
-    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
-    fs.mkdirSync(codexAgentsDir, { recursive: true });
-    // Copy all generated agent commands for Codex
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
-    }
-    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
-  }
+  const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
+  reconcileInstalledAgents(HOME, installedAgentFilenames);
+  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME);
+  const installedIdes = [];
+  if (globalAdapters.claude.length) installedIdes.push('claude-code');
+  if (globalAdapters.codex.length) installedIdes.push('codex');
+  recordInstalledAgents(installedAgentFilenames, installedIdes);
 
   // Phase 3: Regenerate awareness
   logger.always(`\n${CYAN}Phase 3:${NC} Updating squad-awareness`);

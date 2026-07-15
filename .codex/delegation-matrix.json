@@ -137,7 +137,8 @@
       "aliases": [
         "swarm-orqx",
         "claude-orqx",
-        "claude"
+        "claude",
+        "swarm"
       ],
       "sourceOfTruth": ".codex/agents/swarm-orqx.md",
       "approvedRoutes": [
@@ -182,14 +183,6 @@
         "courses"
       ],
       "sourceOfTruth": ".codex/agents/courses-orqx.md",
-      "approvedRoutes": []
-    },
-    "swarm-orqx": {
-      "aliases": [
-        "swarm-orqx",
-        "swarm"
-      ],
-      "sourceOfTruth": ".codex/agents/swarm-orqx.md",
       "approvedRoutes": []
     }
   },
@@ -238,6 +231,14 @@
       ],
       "sourceOfTruth": ".codex/agents/quality-gate.md",
       "registryAgentId": "sinapse-qa"
+    },
+    "sinapse-devops": {
+      "aliases": [
+        "sinapse-devops",
+        "devops"
+      ],
+      "sourceOfTruth": ".codex/agents/devops.md",
+      "registryAgentId": "sinapse-devops"
     }
   },
   "routes": {
@@ -563,7 +564,7 @@
       "owner": "sinapse-orqx",
       "requestType": "framework-workflow",
       "classification": "validator-backed",
-      "mission": "Run the canonical PM -> PO -> SM -> Dev -> QA delivery chain inside Codex with validator-backed command resolution.",
+      "mission": "Run the canonical PM -> SM -> PO -> Dev -> QA -> DevOps delivery chain inside Codex with validator-backed command resolution.",
       "summary": "Framework delivery route using the Codex command registry as the handoff resolver.",
       "inputs": [
         "initiative-brief",
@@ -571,7 +572,8 @@
         "quality-bar"
       ],
       "outputs": [
-        "qa-gate-decision"
+        "qa-gate-decision",
+        "devops-push-preparation"
       ],
       "validators": [
         "npm run validate:codex-commands",
@@ -585,7 +587,8 @@
         ".sinapse-ai/development/tasks/validate-next-story.md",
         ".sinapse-ai/development/tasks/create-next-story.md",
         ".sinapse-ai/development/tasks/dev-develop-story.md",
-        ".sinapse-ai/development/tasks/qa-gate.md"
+        ".sinapse-ai/development/tasks/qa-gate.md",
+        ".sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md"
       ],
       "delegationChain": [
         {
@@ -602,27 +605,27 @@
         {
           "from": "sinapse-pm",
           "fromType": "framework-agent",
-          "to": "sinapse-po",
-          "toType": "framework-agent",
-          "path": ".codex/agents/product-lead.md",
-          "resolver": "command-registry",
-          "command": "validate-story",
-          "handoff": "validate-backlog-readiness",
-          "reason": "PO validates readiness and acceptance quality before drafting."
-        },
-        {
-          "from": "sinapse-po",
-          "fromType": "framework-agent",
           "to": "sinapse-sm",
           "toType": "framework-agent",
           "path": ".codex/agents/sprint-lead.md",
           "resolver": "command-registry",
           "command": "draft",
           "handoff": "draft-implementation-story",
-          "reason": "SM drafts the executable story from validated requirements."
+          "reason": "SM drafts the executable story from the product scope."
         },
         {
           "from": "sinapse-sm",
+          "fromType": "framework-agent",
+          "to": "sinapse-po",
+          "toType": "framework-agent",
+          "path": ".codex/agents/product-lead.md",
+          "resolver": "command-registry",
+          "command": "validate-story",
+          "handoff": "validate-backlog-readiness",
+          "reason": "PO validates story readiness and acceptance quality before implementation."
+        },
+        {
+          "from": "sinapse-po",
           "fromType": "framework-agent",
           "to": "sinapse-dev",
           "toType": "framework-agent",
@@ -641,7 +644,18 @@
           "resolver": "command-registry",
           "command": "gate",
           "handoff": "issue-quality-gate",
-          "reason": "QA closes the chain with the gate decision."
+          "reason": "QA issues the required quality gate decision."
+        },
+        {
+          "from": "sinapse-qa",
+          "fromType": "framework-agent",
+          "to": "sinapse-devops",
+          "toType": "framework-agent",
+          "path": ".codex/agents/devops.md",
+          "resolver": "command-registry",
+          "command": "push",
+          "handoff": "prepare-authorized-push",
+          "reason": "DevOps holds exclusive authority for final push preparation and execution."
         }
       ]
     }
