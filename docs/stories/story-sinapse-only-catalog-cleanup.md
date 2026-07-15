@@ -1,5 +1,5 @@
 ---
-status: InReview
+status: Done
 owner: sprint-lead
 executor: developer
 quality_gate: quality-gate
@@ -115,7 +115,7 @@ customizacoes ou criar logica operacional concorrente nos adapters.
 - [x] **AC12 - Boundary.** Given o diff final, when o boundary test roda, then
   nenhum arquivo protegido L1/L2, constituicao, infraestrutura protegida ou
   `bin/sinapse*.js` foi criado, alterado, movido ou removido.
-- [ ] **AC13 - Publicacao verificavel.** Given AC1-AC12 concluidos, Quality Gate
+- [x] **AC13 - Publicacao verificavel.** Given AC1-AC12 concluidos, Quality Gate
   em PASS, release readiness aprovado e versao publica disponivel, when `@devops`
   executa a publicacao autorizada, then `sinapse-ai` e publicado com acesso
   publico, `npm view sinapse-ai version` corresponde a versao esperada e smoke
@@ -144,7 +144,7 @@ customizacoes ou criar logica operacional concorrente nos adapters.
   install/update isolados para Codex-only, Claude-only e ambos.
 - [x] **T9 - Quality Gate:** rodar lint, typecheck, testes, build aplicavel,
   validators de paridade/boundary e registrar evidencias sem operacao remota.
-- [ ] **T10 - Release:** delegar exclusivamente a `@devops` o pre-push, PR,
+- [x] **T10 - Release:** delegar exclusivamente a `@devops` o pre-push, PR,
   merge e publish; verificar versao, integridade, `npm latest` e smoke tests
   instalados diretamente do registry.
 
@@ -239,6 +239,14 @@ customizacoes ou criar logica operacional concorrente nos adapters.
   a repeticao final excedeu 10 minutos por handles assincronos preexistentes, sem
   reportar falha, risco residual registrado pelo Quality Gate.
 - Boundary: `git diff --check` passou e nenhum path L1/L2 protegido foi alterado.
+- Release protegida: PR #382 mesclada em `main` no commit
+  `7a5659f3f0639d8a97921329b3bdb043c28ab19b`; workflow Semantic Release
+  `29401991831` concluido com sucesso e release GitHub `1.25.1` publicada.
+- Registry npm: `sinapse-ai@1.25.1` publico e `latest`, integridade
+  `sha512-cgYScqJak/UDCAtMESdulGjXn2zAoX1B6IEMpBdGH36fFr87uSCpoBqSx4lwRB4TBnZrGjNviUBkeJS+4/LwaQ==`.
+- Smokes do registry: clean install e update `1.25.0 -> 1.25.1` aprovados em
+  Claude-only (`172 agents`, `36 skills`), Codex-only (`172 agents`, `37 skills`)
+  e ambos (`172/172 agents`, `36/37 skills`), sempre com providers isolados.
 
 ### File List
 
