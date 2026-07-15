@@ -58,6 +58,10 @@ const ROOT_FILES_TO_COPY = [
   'working-in-the-brownfield.md',
 ];
 
+/** Project-local Codex payloads copied only when Codex support is selected. */
+const CODEX_TOP_LEVEL_DIRS = ['.agents', '.codex'];
+const CLAUDE_SUPPORT_DIRS = ['.claude/hooks', '.claude/rules'];
+
 /**
  * Replace {root} placeholder in file content
  * @param {string} content - File content
@@ -116,6 +120,7 @@ async function generateVersionJson(options) {
     version,
     installedFiles,
     mode = 'project-development',
+    providers = [],
   } = options;
 
   const fileHashes = await generateFileHashes(targetSinapseCore, installedFiles);
@@ -124,6 +129,7 @@ async function generateVersionJson(options) {
     version,
     installedAt: new Date().toISOString(),
     mode,
+    providers: [...new Set(providers)].sort(),
     fileHashes,
     customized: [],
   };
@@ -154,6 +160,19 @@ function isUserOwnedL3(destPath) {
   if (norm.endsWith('/.sinapse-ai/core-config.yaml')) return true;
   if (/\/\.sinapse-ai\/development\/agents\/[^/]+\/MEMORY\.md$/.test(norm)) return true;
   return false;
+}
+
+function isUserOwnedCodexConfig(destPath) {
+  const norm = String(destPath).replace(/\\/g, '/');
+  if (norm.endsWith('/.codex/config.toml') || norm.endsWith('/.codex/hooks.json')) return true;
+  if (/\/\.agents\/skills\/[^/]+\/SKILL\.md$/.test(norm)) {
+    const compatibilityPath = destPath.replace(
+      `${path.sep}.agents${path.sep}skills${path.sep}`,
+      `${path.sep}.codex${path.sep}skills${path.sep}`,
+    );
+    if (!fs.existsSync(destPath) && fs.existsSync(compatibilityPath)) return true;
+  }
+  return /\/(?:\.codex|\.agents)\/skills\/[^/]+\/SKILL\.md$/.test(norm);
 }
 
 async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true, preserveExisting = null) {
@@ -232,6 +251,43 @@ async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress =
   return copiedFiles;
 }
 
+async function deliverClaudeNativeAdapters(pkgRoot, targetDir, options = {}) {
+  const overwriteManaged = options.overwriteManaged === true;
+  const delivered = { agents: [], skills: [], manifest: null };
+  const sourceAgents = path.join(pkgRoot, '.claude', 'agents');
+  if (await fs.pathExists(sourceAgents)) {
+    for (const file of (await fs.readdir(sourceAgents)).filter((name) => /^sinapse-.+\.md$/.test(name))) {
+      const destination = path.join(targetDir, '.claude', 'agents', file);
+      if (!overwriteManaged && await fs.pathExists(destination)) continue;
+      if (await copyFileWithRootReplacement(path.join(sourceAgents, file), destination, true)) {
+        delivered.agents.push(path.join('.claude', 'agents', file));
+      }
+    }
+  }
+
+  const sourceSkills = path.join(pkgRoot, '.claude', 'skills');
+  if (await fs.pathExists(sourceSkills)) {
+    const entries = await fs.readdir(sourceSkills, { withFileTypes: true });
+    for (const entry of entries.filter((item) => item.isDirectory())) {
+      const source = path.join(sourceSkills, entry.name, 'SKILL.md');
+      if (!await fs.pathExists(source)) continue;
+      const relativePath = path.join('.claude', 'skills', entry.name, 'SKILL.md');
+      const destination = path.join(targetDir, relativePath);
+      if (!overwriteManaged && await fs.pathExists(destination)) continue;
+      if (await copyFileWithRootReplacement(source, destination, true)) delivered.skills.push(relativePath);
+    }
+  }
+  const manifestSource = path.join(pkgRoot, '.claude', 'skill-manifest.json');
+  if (await fs.pathExists(manifestSource)) {
+    const relativePath = path.join('.claude', 'skill-manifest.json');
+    const destination = path.join(targetDir, relativePath);
+    if ((overwriteManaged || !await fs.pathExists(destination)) && await copyFileWithRootReplacement(manifestSource, destination, true)) {
+      delivered.manifest = relativePath;
+    }
+  }
+  return delivered;
+}
+
 /**
  * Codex CLI context files that live at the package ROOT (not under .codex/ or
  * .sinapse-ai/), so the directory-copy loops never reach them. AGENTS.md is the
@@ -278,6 +334,8 @@ async function installSinapseCore(options = {}) {
     targetDir = process.cwd(),
     onProgress = null,
     includeCodex = false,
+    includeClaude = false,
+    overwriteManagedAdapters = false,
   } = options;
 
   const result = {
@@ -349,16 +407,39 @@ async function installSinapseCore(options = {}) {
     //              regenerated from squads/ + core by sync-codex-local-first.js.
     const pkgRoot = path.dirname(sourceDir);
     const topLevelDirs = ['squads'];
-    if (includeCodex) topLevelDirs.push('.codex');
+    if (includeCodex) topLevelDirs.push(...CODEX_TOP_LEVEL_DIRS);
+    if (includeClaude) topLevelDirs.push(...CLAUDE_SUPPORT_DIRS);
     for (const dirName of topLevelDirs) {
       const src = path.join(pkgRoot, dirName);
       const dest = path.join(targetDir, dirName);
       if (await fs.pathExists(src)) {
         spinner.text = `Copying ${dirName}...`;
-        const copied = await copyDirectoryWithRootReplacement(src, dest, onProgress);
+        const preserveExisting = dirName === '.codex' || dirName === '.agents'
+          ? isUserOwnedCodexConfig
+          : null;
+        const copied = await copyDirectoryWithRootReplacement(
+          src,
+          dest,
+          onProgress,
+          preserveExisting,
+        );
         result.installedFiles.push(...copied.map((f) => path.join(dirName, f)));
         if (dirName === '.codex') result.codexInstalledFiles = copied.length;
+        if (dirName === '.agents') result.codexNativeSkillFiles = copied.length;
         if (dirName === 'squads') result.squadsInstalledFiles = copied.length;
+      }
+    }
+
+    if (includeClaude) {
+      const claude = await deliverClaudeNativeAdapters(pkgRoot, targetDir, { overwriteManaged: overwriteManagedAdapters });
+      result.claudeNativeAgentFiles = claude.agents.length;
+      result.claudeNativeSkillFiles = claude.skills.length;
+      result.installedFiles.push(...claude.agents, ...claude.skills);
+      if (claude.manifest) result.installedFiles.push(claude.manifest);
+      const claudeContextSource = path.join(pkgRoot, '.claude', 'CLAUDE.md');
+      const claudeContextDest = path.join(targetDir, '.claude', 'CLAUDE.md');
+      if (await fs.pathExists(claudeContextSource) && await copyFileWithRootReplacement(claudeContextSource, claudeContextDest, true)) {
+        result.installedFiles.push(path.join('.claude', 'CLAUDE.md'));
       }
     }
 
@@ -399,6 +480,7 @@ async function installSinapseCore(options = {}) {
       version: packageVersion,
       installedFiles: result.installedFiles,
       mode: 'project-development',
+      providers: [includeClaude && 'claude-code', includeCodex && 'codex'].filter(Boolean),
     });
     result.versionInfo = versionInfo;
 
@@ -523,7 +605,10 @@ module.exports = {
   generateVersionJson,
   generateFileHashes,
   deliverCodexRootFiles,
+  deliverClaudeNativeAdapters,
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
   CODEX_ROOT_FILES,
+  CODEX_TOP_LEVEL_DIRS,
+  CLAUDE_SUPPORT_DIRS,
 };

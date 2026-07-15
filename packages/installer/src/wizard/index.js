@@ -88,6 +88,11 @@ async function writeClaudeSettings(language, projectDir = process.cwd()) {
   }
 }
 
+async function writeProviderLanguageSettings({ selectedLLM, language, projectDir = process.cwd() }) {
+  if (!language || !shouldConfigureClaude(selectedLLM)) return false;
+  return writeClaudeSettings(language, projectDir);
+}
+
 /** Detect system locale and return wizard language code. */
 function detectSystemLocale() {
   try {
@@ -283,6 +288,14 @@ function llmLabel(selectedLLM) {
     default:
       return 'Claude Code';
   }
+}
+
+function shouldConfigureClaude(selectedLLM) {
+  return selectedLLM === 'claude-code' || selectedLLM === 'both';
+}
+
+function shouldConfigureCodex(selectedLLM) {
+  return selectedLLM === 'codex' || selectedLLM === 'both';
 }
 
 /**
@@ -512,6 +525,7 @@ async function runWizard(options = {}) {
       sinapseCoreResult = await installSinapseCore({
         targetDir: process.cwd(),
         includeCodex: (answers.selectedLLM || 'claude-code') !== 'claude-code',
+        includeClaude: (answers.selectedLLM || 'claude-code') !== 'codex',
         onProgress: (_status) => {
           // Silent progress - spinner handles feedback
         },
@@ -557,7 +571,8 @@ async function runWizard(options = {}) {
 
     // Install global orqx agent definitions to ~/.claude/agents/ (only for Claude Code)
     const selectedLLM = answers.selectedLLM || 'claude-code';
-    if (selectedLLM === 'claude-code' || selectedLLM === 'both') {
+    const targetProjectRoot = process.cwd();
+    if (shouldConfigureClaude(selectedLLM)) {
       console.log('\n🤖 ' + t('installingGlobalAgents'));
       try {
         const globalAgentsResult = await installGlobalAgents();
@@ -708,100 +723,106 @@ async function runWizard(options = {}) {
       // Legacy per-squad IDE copy path removed; sync pipeline handles IDE propagation.
     }
 
+    if (shouldConfigureClaude(selectedLLM)) {
     // Story INS-4.3: Wire settings.json boundary generator after .sinapse-ai/ copy
-    console.log('\n🔒 ' + t('generatingBoundaryRules'));
-    try {
-      const settingsGenerator = require('../../../../.sinapse-ai/infrastructure/scripts/generate-settings-json');
-      settingsGenerator.generate(process.cwd());
-      const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
-      const settingsParsed = JSON.parse(settingsContent);
-      const denyCount = (settingsParsed.permissions && settingsParsed.permissions.deny) ? settingsParsed.permissions.deny.length : 0;
-      console.log(`✅ settings.json: generated (${denyCount} deny rules)`);
-      answers.settingsGenerated = true;
-      answers.settingsDenyCount = denyCount;
-    } catch (error) {
-      console.warn(`⚠️  settings.json generation failed: ${error.message} — run 'sinapse doctor --fix' post-install`);
-      answers.settingsGenerated = false;
-    }
-
-    // Story INS-4.3: Copy skills (Gap #11)
-    console.log('\n📚 ' + t('copyingSkills'));
-    try {
-      const skillsResult = await copySkillFiles(process.cwd());
-      if (skillsResult.skipped) {
-        console.log('   ℹ️  Skills: source not found (skipped)');
-      } else {
-        console.log(`✅ Skills: ${skillsResult.count} copied`);
-      }
-      answers.skillsCopied = skillsResult.count;
-      answers.skillsSkipped = skillsResult.skipped;
-    } catch (error) {
-      console.warn(`⚠️  Skills copy failed: ${error.message}`);
-      answers.skillsCopied = 0;
-    }
-
-    // Story INS-4.3: Copy extra commands (Gap #12)
-    console.log('\n📋 ' + t('copyingExtraCommands'));
-    try {
-      const commandsResult = await copyExtraCommandFiles(process.cwd());
-      if (commandsResult.skipped) {
-        console.log('   ℹ️  Extra commands: source not found (skipped)');
-      } else {
-        console.log(`✅ Commands: ${commandsResult.count} extras copied`);
-      }
-      answers.extraCommandsCopied = commandsResult.count;
-      answers.extraCommandsSkipped = commandsResult.skipped;
-    } catch (error) {
-      console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
-      answers.extraCommandsCopied = 0;
-    }
-
-    // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
-    console.log('\n🔄 ' + t('runningIdeSync'));
-    const targetProjectRoot = process.cwd();
-    const savedCwd = process.cwd();
-    try {
-      process.chdir(targetProjectRoot);
-      await commandSync({ quiet: true });
-      answers.ideSyncStatus = 'synced';
-      console.log('✅ IDE sync: synced');
-
-      // Validate sync output (commandValidate does not support quiet — suppress its console output)
-      const _origLog = console.log;
-      console.log = () => {};
+      console.log('\n🔒 ' + t('generatingBoundaryRules'));
       try {
-        await commandValidate({ quiet: true });
-        answers.ideSyncValidation = 'pass';
-      } catch {
-        answers.ideSyncValidation = 'drift';
+        const settingsGenerator = require('../../../../.sinapse-ai/infrastructure/scripts/generate-settings-json');
+        settingsGenerator.generate(process.cwd());
+        const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
+        const settingsParsed = JSON.parse(settingsContent);
+        const denyCount = (settingsParsed.permissions && settingsParsed.permissions.deny) ? settingsParsed.permissions.deny.length : 0;
+        console.log(`✅ settings.json: generated (${denyCount} deny rules)`);
+        answers.settingsGenerated = true;
+        answers.settingsDenyCount = denyCount;
+      } catch (error) {
+        console.warn(`⚠️  settings.json generation failed: ${error.message} — run 'sinapse doctor --fix' post-install`);
+        answers.settingsGenerated = false;
+      }
+
+      // Story INS-4.3: Copy skills (Gap #11)
+      console.log('\n📚 ' + t('copyingSkills'));
+      try {
+        const skillsResult = await copySkillFiles(process.cwd());
+        if (skillsResult.skipped) {
+          console.log('   ℹ️  Skills: source not found (skipped)');
+        } else {
+          console.log(`✅ Skills: ${skillsResult.count} copied`);
+        }
+        answers.skillsCopied = skillsResult.count;
+        answers.skillsSkipped = skillsResult.skipped;
+      } catch (error) {
+        console.warn(`⚠️  Skills copy failed: ${error.message}`);
+        answers.skillsCopied = 0;
+      }
+
+      // Story INS-4.3: Copy extra commands (Gap #12)
+      console.log('\n📋 ' + t('copyingExtraCommands'));
+      try {
+        const commandsResult = await copyExtraCommandFiles(process.cwd());
+        if (commandsResult.skipped) {
+          console.log('   ℹ️  Extra commands: source not found (skipped)');
+        } else {
+          console.log(`✅ Commands: ${commandsResult.count} extras copied`);
+        }
+        answers.extraCommandsCopied = commandsResult.count;
+        answers.extraCommandsSkipped = commandsResult.skipped;
+      } catch (error) {
+        console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
+        answers.extraCommandsCopied = 0;
+      }
+
+      // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
+      console.log('\n🔄 ' + t('runningIdeSync'));
+      const savedCwd = process.cwd();
+      try {
+        process.chdir(targetProjectRoot);
+        await commandSync({ quiet: true });
+        answers.ideSyncStatus = 'synced';
+        console.log('✅ IDE sync: synced');
+
+        // Validate sync output (commandValidate does not support quiet — suppress its console output)
+        const _origLog = console.log;
+        console.log = () => {};
+        try {
+          await commandValidate({ quiet: true });
+          answers.ideSyncValidation = 'pass';
+        } catch {
+          answers.ideSyncValidation = 'drift';
+        } finally {
+          console.log = _origLog;
+        }
+        if (answers.ideSyncValidation === 'drift') {
+          console.warn('⚠️  ' + t('ideSyncDriftWarning'));
+        }
+      } catch (syncError) {
+        console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'sinapse doctor --fix' post-install`);
+        answers.ideSyncStatus = 'failed';
+        answers.ideSyncValidation = 'skipped';
       } finally {
-        console.log = _origLog;
+        process.chdir(savedCwd);
       }
-      if (answers.ideSyncValidation === 'drift') {
-        console.warn('⚠️  ' + t('ideSyncDriftWarning'));
-      }
-    } catch (syncError) {
-      console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'sinapse doctor --fix' post-install`);
-      answers.ideSyncStatus = 'failed';
-      answers.ideSyncValidation = 'skipped';
-    } finally {
-      process.chdir(savedCwd);
+
     }
 
     // Codex local-first sync: the ide-sync above drives claude-code only now,
     // so .codex/agents + .codex/skills are regenerated here from the canonical
     // source (the static .codex payload — scripts/tasks/JSONs — was already
     // copied by installSinapseCore when Codex was selected). Codex installs only.
-    if (selectedLLM === 'codex' || selectedLLM === 'both') {
+    if (shouldConfigureCodex(selectedLLM)) {
       console.log('\n🔄 ' + t('runningCodexSync'));
       const savedCwdCodex = process.cwd();
       try {
         const { syncCodexLocalFirst } = require('../../../../.sinapse-ai/infrastructure/scripts/sync-codex-local-first');
+        const { syncCodexNativeAgents } = require('../../../../.codex/scripts/sync-codex-native');
         process.chdir(targetProjectRoot);
         const codexResult = syncCodexLocalFirst({ projectRoot: targetProjectRoot, quiet: true });
+        const nativeResult = codexResult.ok
+          ? syncCodexNativeAgents(targetProjectRoot)
+          : { total: 0 };
         answers.codexSyncStatus = codexResult.ok ? 'synced' : 'failed';
         const m = codexResult.metrics || {};
-        console.log(`✅ Codex sync: ${codexResult.ok ? 'synced' : 'issues'} (${m.codexAgents || 0} agents, ${m.codexSkills || 0} skills)`);
+        console.log(`✅ Codex sync: ${codexResult.ok ? 'synced' : 'issues'} (${m.codexAgents || 0} adapters, ${nativeResult.total || 0} native agents, ${m.codexSkills || 0} compatibility skills)`);
       } catch (codexErr) {
         console.warn(`⚠️  Codex sync failed: ${codexErr.message} — run 'npm run sync:ide:codex' post-install`);
         answers.codexSyncStatus = 'failed';
@@ -877,8 +898,11 @@ async function runWizard(options = {}) {
       });
 
       // Story ACT-12: Write language to Claude Code settings.json
-      if (answers.language) {
-        const langWritten = await writeClaudeSettings(answers.language);
+      if (answers.language && shouldConfigureClaude(selectedLLM)) {
+        const langWritten = await writeProviderLanguageSettings({
+          selectedLLM,
+          language: answers.language,
+        });
         if (langWritten) {
           console.log('  - Language written to .claude/settings.json');
         } else {
@@ -1266,6 +1290,7 @@ module.exports = {
   // Exported for testing
   _testing: {
     writeClaudeSettings,
+    writeProviderLanguageSettings,
     getExistingLanguage,
     LANGUAGE_MAP,
     detectProjectType,
@@ -1274,6 +1299,8 @@ module.exports = {
     detectSystemLocale,
     llmToIDEs,
     llmLabel,
+    shouldConfigureClaude,
+    shouldConfigureCodex,
     installGlobalAgents,
     buildAgentTemplate,
     generateAgentsMd,

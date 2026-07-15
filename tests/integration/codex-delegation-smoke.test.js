@@ -21,10 +21,11 @@ describe('Codex delegation smoke', () => {
     expect(frameworkRoute.classification).toBe('validator-backed');
     expect(frameworkRoute.delegationChain.map((step) => step.to)).toEqual([
       'sinapse-pm',
-      'sinapse-po',
       'sinapse-sm',
+      'sinapse-po',
       'sinapse-dev',
       'sinapse-qa',
+      'sinapse-devops',
     ]);
   });
 });

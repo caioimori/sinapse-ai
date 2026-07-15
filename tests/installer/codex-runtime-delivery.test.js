@@ -14,6 +14,7 @@ const os = require('os');
 const {
   deliverCodexRootFiles,
   CODEX_ROOT_FILES,
+  CODEX_TOP_LEVEL_DIRS,
 } = require('../../packages/installer/src/installer/sinapse-ai-installer');
 
 const REPO_ROOT = path.join(__dirname, '..', '..');
@@ -29,6 +30,12 @@ describe('Codex runtime delivery', () => {
     it('files[] includes the previously-missing .codex artifacts', () => {
       expect(pkg.files).toEqual(
         expect.arrayContaining([
+          '.codex/config.toml',
+          '.codex/hooks.json',
+          '.codex/hooks/',
+          '.codex/agents/',
+          '.codex/scripts/',
+          '.agents/skills/',
           '.codex/delegation-parity.json',
           '.codex/handoff-packet.parity.schema.json',
           '.codex/handoff-packet.template.json',
@@ -39,12 +46,22 @@ describe('Codex runtime delivery', () => {
     it('the declared artifacts actually exist on disk (manifest is honest)', () => {
       for (const rel of [
         'AGENTS.md',
+        '.codex/config.toml',
+        '.codex/hooks.json',
+        '.codex/hooks/claude-compat.cjs',
+        '.codex/agents/developer.toml',
+        '.codex/scripts/sinapse-codex.js',
+        '.agents/skills/sinapse-orqx/SKILL.md',
         '.codex/delegation-parity.json',
         '.codex/handoff-packet.parity.schema.json',
         '.codex/handoff-packet.template.json',
       ]) {
         expect(fs.existsSync(path.join(REPO_ROOT, rel))).toBe(true);
       }
+    });
+
+    it('installer declares both Codex configuration and native skill payloads', () => {
+      expect(CODEX_TOP_LEVEL_DIRS).toEqual(['.agents', '.codex']);
     });
   });
 

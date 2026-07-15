@@ -36,7 +36,11 @@ const {
   warnNonInteractive,
 } = require('../lib/detection');
 const { promptLlmChoice } = require('../lib/prompts');
-const { recordInstalledAgents } = require('./uninstall');
+const {
+  recordInstalledAgents,
+  reconcileInstalledAgents,
+  removeManagedGlobalSkills,
+} = require('./uninstall');
 const { verifyInstall } = require('./status');
 // generateCommandMd is re-exported below for backward-compat (update.js imports it
 // from ./install). regenerateAgentCommands is the shared Phase 2 helper.
@@ -44,6 +48,7 @@ const {
   generateCommandMd,
   regenerateAgentCommands,
 } = require('../lib/command-generator');
+const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
 // Follow-up #13 — wire the transactional backup/rollback engine into the
 // installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
 // to its previous state instead of leaving ~/.sinapse half-updated.
@@ -300,19 +305,10 @@ async function cmdInstallGlobal(opts = {}) {
   // greeting on @sinapse/@snps/-orqx). Re-copy the generated command files LAST so the
   // rich, frontmatter'd stubs are always the final word. Idempotent.
   try {
-    const reTargets = [];
-    if (llmChoice === 'claude-code' || llmChoice === 'both') reTargets.push(path.join(HOME, '.claude', 'agents'));
-    if (llmChoice === 'codex' || llmChoice === 'both') reTargets.push(path.join(HOME, '.codex', 'agents'));
-    if (reTargets.length && fs.existsSync(CLAUDE_COMMANDS_DIR)) {
-      const cmdFiles = fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'));
-      for (const dir of reTargets) {
-        fs.mkdirSync(dir, { recursive: true });
-        for (const f of cmdFiles) {
-          fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(dir, f));
-        }
-      }
-      logger.always(`  ${GREEN}OK${NC} Global agents reconciled (${cmdFiles.length} files — rich stubs authoritative)`);
-    }
+    const commandsDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
+    const reconciled = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir });
+    const total = reconciled.claude.length + reconciled.codex.length + reconciled.skills.length;
+    if (total) logger.always(`  ${GREEN}OK${NC} Global provider adapters reconciled (${total} artifacts)`);
   } catch (e) {
     logger.always(`  ${YELLOW}WARN${NC} Global agent reconciliation: ${e.message}`);
   }
@@ -324,9 +320,14 @@ async function cmdInstallGlobal(opts = {}) {
   // printed above: if any check failed (✗), show a warning banner instead of an
   // unconditional success banner. The exit code is intentionally left unchanged —
   // this only changes the message, not the process result.
+  const verificationCommandsDir = getGlobalCommandStagingDir({
+    llmChoice,
+    sinapseHome: SINAPSE_HOME,
+    claudeCommandsDir: CLAUDE_COMMANDS_DIR,
+  });
   const installVerified =
     fs.existsSync(SINAPSE_HOME) &&
-    fs.existsSync(CLAUDE_COMMANDS_DIR) &&
+    fs.existsSync(verificationCommandsDir) &&
     fs.existsSync(path.join(BIN_DIR, 'sinapse')) &&
     fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md'));
 
@@ -351,8 +352,13 @@ async function cmdInstallGlobal(opts = {}) {
   logger.always(`  ${startCmd}`);
   logger.always('');
   logger.always(`  ${BOLD}Try an agent:${NC}`);
-  logger.always(`    ${CYAN}/SINAPSE:agents:sinapse-orqx${NC}`);
-  logger.always(`    ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  if (llmChoice === 'codex') {
+    logger.always(`    ${CYAN}$snps${NC}`);
+    logger.always(`    ${CYAN}$sinapse-agent brand-orqx${NC}`);
+  } else {
+    logger.always(`    ${CYAN}@sinapse-orqx${NC}`);
+    logger.always(`    ${CYAN}@brand-orqx${NC}`);
+  }
   logger.always('');
 }
 
@@ -396,7 +402,10 @@ function buildTransactionPaths(llmChoice) {
     CLAUDE_COMMANDS_DIR,   // Phase 2 — generated /SINAPSE:agents:* command files
   ];
   if (llmChoice === 'claude-code' || llmChoice === 'both') dirs.push(path.join(HOME, '.claude', 'agents'));
-  if (llmChoice === 'codex' || llmChoice === 'both') dirs.push(path.join(HOME, '.codex', 'agents'));
+  if (llmChoice === 'codex' || llmChoice === 'both') {
+    dirs.push(path.join(HOME, '.codex', 'agents'));
+    dirs.push(path.join(HOME, '.agents', 'skills'));
+  }
   dirs.push(BIN_DIR);      // Phase 4 — launcher(s)
 
   const files = [path.join(HOME, '.claude', 'settings.json')]; // language save
@@ -520,43 +529,49 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
     logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
   }
 
+  const coreDevelopmentSrc = path.join(ROOT, '.sinapse-ai', 'development');
+  const coreDevelopmentDest = path.join(SINAPSE_HOME, 'core');
+  if (fs.existsSync(coreDevelopmentSrc)) {
+    if (isUpsert) {
+      const delta = syncDirSync(coreDevelopmentSrc, coreDevelopmentDest);
+      totalDelta.added += delta.added;
+      totalDelta.updated += delta.updated;
+      totalDelta.unchanged += delta.unchanged;
+      totalDelta.removed += delta.removed;
+    } else {
+      rmDirSync(coreDevelopmentDest);
+      copyDirSync(coreDevelopmentSrc, coreDevelopmentDest);
+    }
+    const coreAgents = getAgentFiles(coreDevelopmentDest).length;
+    totalAgents += coreAgents;
+    logger.always(`  ${GREEN}OK${NC} core development (${coreAgents} agents)`);
+  }
+
   // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
+  const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
   const { writtenAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
-    commandsDir: CLAUDE_COMMANDS_DIR,
+    commandsDir: commandStagingDir,
     squads,
     sinapseMasterDest,
+    coreDevelopmentDest,
   });
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
-  const installedAgentFilenames = new Set();
+  const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   const installedIdes = [];
-  if (llmChoice === 'claude-code' || llmChoice === 'both') {
-    const globalAgentsDir = path.join(HOME, '.claude', 'agents');
-    fs.mkdirSync(globalAgentsDir, { recursive: true });
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(globalAgentsDir, f));
-      installedAgentFilenames.add(f);
-    }
-    installedIdes.push('claude-code');
-    logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${writtenAgents.size})`);
-  }
-
-  if (llmChoice === 'codex' || llmChoice === 'both') {
-    const codexAgentsDir = path.join(HOME, '.codex', 'agents');
-    fs.mkdirSync(codexAgentsDir, { recursive: true });
-    for (const f of fs.readdirSync(CLAUDE_COMMANDS_DIR).filter(f => f.endsWith('.md'))) {
-      fs.copyFileSync(path.join(CLAUDE_COMMANDS_DIR, f), path.join(codexAgentsDir, f));
-      installedAgentFilenames.add(f);
-    }
-    installedIdes.push('codex');
-    logger.always(`  ${GREEN}OK${NC} Codex global agents (${writtenAgents.size})`);
-  }
+  if (globalAdapters.claude.length) installedIdes.push('claude-code');
+  if (globalAdapters.codex.length) installedIdes.push('codex');
+  if (globalAdapters.claude.length) logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${globalAdapters.claude.length})`);
+  if (globalAdapters.codex.length) logger.always(`  ${GREEN}OK${NC} Codex global agents (${globalAdapters.codex.length} TOML, ${globalAdapters.skills.length} skills)`);
 
   // Audit 1 P0 (UN-1) — record manifest so uninstall can remove every file
   // we wrote (not just `*-orqx.md`). Idempotent: re-install overwrites.
+  reconcileInstalledAgents(HOME, installedAgentFilenames);
+  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME);
   recordInstalledAgents(installedAgentFilenames, installedIdes);
 
   // Phase 3: Generate squad-awareness.md

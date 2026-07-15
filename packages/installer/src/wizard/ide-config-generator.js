@@ -544,6 +544,9 @@ async function copyClaudeHooksFolder(projectRoot) {
     'enforce-story-gate.cjs',
     'doc-first-gate.cjs',
     'enforce-framework-boundary.cjs',
+    'enforce-permission-mode.cjs',
+    'enforce-nsn-guard.cjs',
+    'verify-packages.cjs',
     'secret-scanning.cjs',
     'write-path-validation.cjs',
     // Frente 4.3 — DORA + OTel telemetry hooks (STREAM A)
@@ -618,6 +621,21 @@ const HOOK_EVENT_MAP = {
     event: 'PreToolUse',
     matcher: 'Write|Edit',
     timeout: 5,
+  },
+  'enforce-permission-mode.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit|Bash',
+    timeout: 5,
+  },
+  'enforce-nsn-guard.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 5,
+  },
+  'verify-packages.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Bash',
+    timeout: 10,
   },
   'write-path-validation.cjs': {
     event: 'PreToolUse',

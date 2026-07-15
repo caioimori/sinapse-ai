@@ -136,6 +136,23 @@
           "target": ".sinapse-ai/development/tasks/spec-write-spec.md",
           "resources": []
         },
+        "clarify-spec": {
+          "aliases": ["*clarify-spec"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-clarify.md",
+          "resources": []
+        },
+        "create-spec": {
+          "aliases": ["*create-spec", "*spec"],
+          "kind": "workflow",
+          "target": ".sinapse-ai/development/workflows/spec-pipeline.yaml",
+          "resources": [
+            ".sinapse-ai/development/tasks/spec-gather-requirements.md",
+            ".sinapse-ai/development/tasks/spec-write-spec.md",
+            ".sinapse-ai/development/tasks/spec-clarify.md",
+            ".sinapse-ai/development/tasks/spec-critique.md"
+          ]
+        },
         "shard-prd": {
           "aliases": ["*shard-prd"],
           "kind": "task",
@@ -143,6 +160,44 @@
           "resources": [
             ".sinapse-ai/product/templates/prd-tmpl.yaml"
           ]
+        }
+      }
+    },
+    "sinapse-architect": {
+      "skillId": "sinapse-architect",
+      "aliases": ["sinapse-architect", "architect"],
+      "sourceOfTruth": ".codex/agents/architect.md",
+      "commands": {
+        "assess-complexity": {
+          "aliases": ["*assess-complexity"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-assess-complexity.md",
+          "resources": []
+        },
+        "create-plan": {
+          "aliases": ["*create-plan", "*plan"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/plan-create-implementation.md",
+          "resources": []
+        },
+        "create-context": {
+          "aliases": ["*create-context"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/plan-create-context.md",
+          "resources": []
+        }
+      }
+    },
+    "sinapse-analyst": {
+      "skillId": "sinapse-analyst",
+      "aliases": ["sinapse-analyst", "analyst"],
+      "sourceOfTruth": ".codex/agents/analyst.md",
+      "commands": {
+        "research-deps": {
+          "aliases": ["*research-deps", "*research-dependencies"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-research-dependencies.md",
+          "resources": []
         }
       }
     },
@@ -429,10 +484,49 @@
           "target": ".sinapse-ai/development/tasks/qa-test-design.md",
           "resources": []
         },
+        "critique-spec": {
+          "aliases": ["*critique-spec"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-critique.md",
+          "resources": []
+        },
+        "analyze-spec": {
+          "aliases": ["*analyze-spec"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/spec-analyze.md",
+          "resources": []
+        },
         "run-tests": {
           "aliases": ["*run-tests"],
           "kind": "task",
           "target": ".sinapse-ai/development/tasks/qa-run-tests.md",
+          "resources": []
+        }
+      }
+    },
+    "sinapse-devops": {
+      "skillId": "sinapse-devops",
+      "aliases": ["sinapse-devops", "devops"],
+      "sourceOfTruth": ".codex/agents/devops.md",
+      "commands": {
+        "pre-push": {
+          "aliases": ["*pre-push"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md",
+          "resources": []
+        },
+        "push": {
+          "aliases": ["*push"],
+          "kind": "authority-command",
+          "target": ".sinapse-ai/development/agents/devops.md",
+          "resources": [
+            ".sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md"
+          ]
+        },
+        "create-pr": {
+          "aliases": ["*create-pr"],
+          "kind": "task",
+          "target": ".sinapse-ai/development/tasks/github-devops-github-pr-automation.md",
           "resources": []
         }
       }

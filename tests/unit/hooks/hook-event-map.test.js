@@ -40,6 +40,16 @@ beforeAll(() => {
   copyClaudeHooksFolder       = mod.copyClaudeHooksFolder;
 });
 
+describe('portable Claude security guards', () => {
+  test.each([
+    ['enforce-permission-mode.cjs', 'Write|Edit|Bash', 5],
+    ['enforce-nsn-guard.cjs', 'Write|Edit', 5],
+    ['verify-packages.cjs', 'Bash', 10],
+  ])('%s is registered as a PreToolUse guard', (file, matcher, timeout) => {
+    expect(HOOK_EVENT_MAP[file]).toEqual({ event: 'PreToolUse', matcher, timeout });
+  });
+});
+
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------

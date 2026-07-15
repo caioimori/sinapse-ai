@@ -20,10 +20,11 @@ const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
 const https = require('https');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const { hashFile, hashesMatch } = require('../installer/file-hasher');
 const { PostInstallValidator, formatReport: formatValidationReport } = require('../installer/post-install-validator');
 const { _testing: { installGlobalAgents } } = require('../wizard/index');
+const { installSinapseCore } = require('../installer/sinapse-ai-installer');
 
 /**
  * Update status types
@@ -601,20 +602,35 @@ class SINAPSEUpdater {
 
     try {
       // Use npm to update the package
-      const cmd = `npm install sinapse-ai@${targetVersion} --save-exact`;
-      this.log(`Running: ${cmd}`);
+      const packageSpec = `sinapse-ai@${targetVersion}`;
+      this.log(`Running: npm install ${packageSpec} --save-exact`);
 
-      execSync(cmd, {
+      execFileSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['install', packageSpec, '--save-exact'], {
         cwd: this.projectRoot,
         stdio: this.options.verbose ? 'inherit' : 'pipe',
         timeout: 120000, // 2 minutes
       });
 
-      result.success = true;
-      result.filesUpdated = 1; // At least package updated
+      const recordedProviders = Array.isArray(this.versionInfo?.providers)
+        ? this.versionInfo.providers
+        : [];
+      const includeClaude = recordedProviders.length > 0
+        ? recordedProviders.includes('claude-code')
+        : fs.existsSync(path.join(this.projectRoot, '.claude', 'skill-manifest.json'));
+      const includeCodex = recordedProviders.length > 0
+        ? recordedProviders.includes('codex')
+        : fs.existsSync(path.join(this.projectRoot, '.codex', 'catalog.json'))
+          && fs.existsSync(path.join(this.projectRoot, '.agents', 'skills', 'sinapse-agent', 'SKILL.md'));
+      const delivery = await installSinapseCore({
+        targetDir: this.projectRoot,
+        includeClaude,
+        includeCodex,
+        overwriteManagedAdapters: true,
+      });
+      if (!delivery.success) throw new Error(`Framework payload reconciliation failed: ${delivery.errors.join('; ')}`);
 
-      // TODO: Copy new files from node_modules to .sinapse-ai
-      // preserving customizedFiles
+      result.success = true;
+      result.filesUpdated = 1 + delivery.installedFiles.length;
 
       return result;
     } catch (error) {
@@ -637,6 +653,7 @@ class SINAPSEUpdater {
       installedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       mode: this.versionInfo?.mode || 'project-development',
+      providers: Array.isArray(this.versionInfo?.providers) ? this.versionInfo.providers : [],
       fileHashes: {}, // Will be populated by file copy
     };
 
@@ -921,4 +938,3 @@ module.exports = {
   formatCheckResult,
   formatUpdateResult,
 };
-

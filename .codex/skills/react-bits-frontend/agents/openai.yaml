@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Bits Frontend"
+  short_description: "Seleciona e integra React Bits com qualidade"
+  default_prompt: "Use $react-bits-frontend para escolher e implementar o melhor componente React Bits nesta interface."

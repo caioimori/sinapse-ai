@@ -38,13 +38,13 @@ This directory contains comprehensive installation and setup documentation for S
 ### New Installation
 
 ```bash
-npx sinapse-ai install
+npx sinapse-ai@latest install
 ```
 
 ### Upgrading
 
 ```bash
-npx sinapse-ai install --force-upgrade
+npx sinapse-ai@latest update
 ```
 
 ### Having Issues?

@@ -3,6 +3,7 @@
   "phase": "W5 / Delegation Matrix Parity",
   "matrixMode": "codex-only",
   "handoffSchema": ".codex/handoff-packet.parity.schema.json",
+  "handoffTemplatePath": ".codex/handoff-packet.template.json",
   "routingClasses": [
     "validator-backed",
     "codex-only-shim",
@@ -136,7 +137,8 @@
       "aliases": [
         "swarm-orqx",
         "claude-orqx",
-        "claude"
+        "claude",
+        "swarm"
       ],
       "sourceOfTruth": ".codex/agents/swarm-orqx.md",
       "approvedRoutes": [
@@ -181,14 +183,6 @@
         "courses"
       ],
       "sourceOfTruth": ".codex/agents/courses-orqx.md",
-      "approvedRoutes": []
-    },
-    "swarm-orqx": {
-      "aliases": [
-        "swarm-orqx",
-        "swarm"
-      ],
-      "sourceOfTruth": ".codex/agents/swarm-orqx.md",
       "approvedRoutes": []
     }
   },
@@ -237,6 +231,14 @@
       ],
       "sourceOfTruth": ".codex/agents/quality-gate.md",
       "registryAgentId": "sinapse-qa"
+    },
+    "sinapse-devops": {
+      "aliases": [
+        "sinapse-devops",
+        "devops"
+      ],
+      "sourceOfTruth": ".codex/agents/devops.md",
+      "registryAgentId": "sinapse-devops"
     }
   },
   "routes": {
@@ -415,7 +417,7 @@
       "resources": [
         ".codex/agents/swarm-orqx.md",
         ".codex/agents/project-integrator.md",
-        "squads/squad-claude/tasks/claude-code-project-setup.md"
+        "squads/claude-code-mastery/tasks/claude-code-project-setup.md"
       ],
       "delegationChain": [
         {
@@ -433,7 +435,7 @@
           "to": "project-integrator",
           "toType": "specialist",
           "path": ".codex/agents/project-integrator.md",
-          "task": "squads/squad-claude/tasks/claude-code-project-setup.md",
+          "task": "squads/claude-code-mastery/tasks/claude-code-project-setup.md",
           "handoff": "execute-squad-task",
           "reason": "Project integrator owns the setup implementation workflow for Codex/Claude integration."
         }
@@ -448,7 +450,7 @@
       "requestType": "single-domain",
       "classification": "exploratory",
       "mission": "Route competitor positioning analysis into the research squad with an explicit shared-surface review stop.",
-      "summary": "Exploratory route that touches shared Claude artifacts for advanced analysis.",
+      "summary": "Exploratory route that touches shared analysis artifacts for advanced positioning work.",
       "inputs": [
         "research-brief",
         "market-context",
@@ -465,11 +467,10 @@
       "resources": [
         ".codex/agents/research-orqx.md",
         ".codex/agents/competitive-intelligence.md",
-        ".claude/agents/data-chief.md",
         "squads/squad-research/tasks/analyze-competitor-positioning.md"
       ],
       "notes": [
-        "Exploratory means the path is documented and validated, but any change to shared Claude surfaces still requires explicit review."
+        "Exploratory means the path is documented and validated, but any change to shared analysis surfaces still requires explicit review."
       ],
       "delegationChain": [
         {
@@ -489,16 +490,7 @@
           "path": ".codex/agents/competitive-intelligence.md",
           "task": "squads/squad-research/tasks/analyze-competitor-positioning.md",
           "handoff": "execute-squad-task",
-          "reason": "Competitive intelligence owns the positioning analysis workflow."
-        },
-        {
-          "from": "competitive-intelligence",
-          "fromType": "specialist",
-          "to": "data-chief",
-          "toType": "specialist",
-          "path": ".claude/agents/data-chief.md",
-          "handoff": "shared-surface-review",
-          "reason": "This escalation exists only as an exploratory review stop because it touches shared Claude artifacts."
+          "reason": "Competitive intelligence owns the positioning analysis workflow and flags shared-surface risk for review."
         }
       ]
     },
@@ -532,7 +524,7 @@
         ".codex/agents/product-orqx.md",
         ".codex/agents/copy-orqx.md",
         ".codex/agents/paidmedia-orqx.md",
-        "docs/codex-total-parity-orchestration-plan.md"
+        "docs/framework/codex-parity/codex-total-parity-orchestration-plan.md"
       ],
       "delegationChain": [
         {
@@ -572,7 +564,7 @@
       "owner": "sinapse-orqx",
       "requestType": "framework-workflow",
       "classification": "validator-backed",
-      "mission": "Run the canonical PM -> PO -> SM -> Dev -> QA delivery chain inside Codex with validator-backed command resolution.",
+      "mission": "Run the canonical PM -> SM -> PO -> Dev -> QA -> DevOps delivery chain inside Codex with validator-backed command resolution.",
       "summary": "Framework delivery route using the Codex command registry as the handoff resolver.",
       "inputs": [
         "initiative-brief",
@@ -580,7 +572,8 @@
         "quality-bar"
       ],
       "outputs": [
-        "qa-gate-decision"
+        "qa-gate-decision",
+        "devops-push-preparation"
       ],
       "validators": [
         "npm run validate:codex-commands",
@@ -594,7 +587,8 @@
         ".sinapse-ai/development/tasks/validate-next-story.md",
         ".sinapse-ai/development/tasks/create-next-story.md",
         ".sinapse-ai/development/tasks/dev-develop-story.md",
-        ".sinapse-ai/development/tasks/qa-gate.md"
+        ".sinapse-ai/development/tasks/qa-gate.md",
+        ".sinapse-ai/development/tasks/github-devops-pre-push-quality-gate.md"
       ],
       "delegationChain": [
         {
@@ -611,27 +605,27 @@
         {
           "from": "sinapse-pm",
           "fromType": "framework-agent",
-          "to": "sinapse-po",
-          "toType": "framework-agent",
-          "path": ".codex/agents/product-lead.md",
-          "resolver": "command-registry",
-          "command": "validate-story",
-          "handoff": "validate-backlog-readiness",
-          "reason": "PO validates readiness and acceptance quality before drafting."
-        },
-        {
-          "from": "sinapse-po",
-          "fromType": "framework-agent",
           "to": "sinapse-sm",
           "toType": "framework-agent",
           "path": ".codex/agents/sprint-lead.md",
           "resolver": "command-registry",
           "command": "draft",
           "handoff": "draft-implementation-story",
-          "reason": "SM drafts the executable story from validated requirements."
+          "reason": "SM drafts the executable story from the product scope."
         },
         {
           "from": "sinapse-sm",
+          "fromType": "framework-agent",
+          "to": "sinapse-po",
+          "toType": "framework-agent",
+          "path": ".codex/agents/product-lead.md",
+          "resolver": "command-registry",
+          "command": "validate-story",
+          "handoff": "validate-backlog-readiness",
+          "reason": "PO validates story readiness and acceptance quality before implementation."
+        },
+        {
+          "from": "sinapse-po",
           "fromType": "framework-agent",
           "to": "sinapse-dev",
           "toType": "framework-agent",
@@ -650,7 +644,18 @@
           "resolver": "command-registry",
           "command": "gate",
           "handoff": "issue-quality-gate",
-          "reason": "QA closes the chain with the gate decision."
+          "reason": "QA issues the required quality gate decision."
+        },
+        {
+          "from": "sinapse-qa",
+          "fromType": "framework-agent",
+          "to": "sinapse-devops",
+          "toType": "framework-agent",
+          "path": ".codex/agents/devops.md",
+          "resolver": "command-registry",
+          "command": "push",
+          "handoff": "prepare-authorized-push",
+          "reason": "DevOps holds exclusive authority for final push preparation and execution."
         }
       ]
     }

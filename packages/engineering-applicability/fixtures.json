@@ -1,0 +1,52 @@
+{
+  "greenfield-web-low": {
+    "schemaVersion": "1.0.0",
+    "projectType": "greenfield",
+    "surfaces": ["frontend", "api"],
+    "changeKind": "feature",
+    "dataClasses": ["public"],
+    "deploymentTargets": ["web", "cloud"],
+    "reversibility": "reversible",
+    "risk": { "security": "low", "privacy": "low", "availability": "low" }
+  },
+  "greenfield-data-high": {
+    "schemaVersion": "1.0.0",
+    "projectType": "greenfield",
+    "surfaces": ["database", "api"],
+    "changeKind": "feature",
+    "dataClasses": ["personal"],
+    "deploymentTargets": ["cloud"],
+    "reversibility": "conditional",
+    "risk": { "security": "high", "privacy": "high", "availability": "medium" }
+  },
+  "brownfield-ui-low": {
+    "schemaVersion": "1.0.0",
+    "projectType": "brownfield",
+    "surfaces": ["frontend"],
+    "changeKind": "fix",
+    "dataClasses": ["public"],
+    "deploymentTargets": ["web"],
+    "reversibility": "reversible",
+    "risk": { "security": "low", "privacy": "low", "availability": "low" }
+  },
+  "brownfield-service-high": {
+    "schemaVersion": "1.0.0",
+    "projectType": "brownfield",
+    "surfaces": ["api", "database"],
+    "changeKind": "migration",
+    "dataClasses": ["personal"],
+    "deploymentTargets": ["cloud"],
+    "reversibility": "irreversible",
+    "risk": { "security": "high", "privacy": "high", "availability": "high" }
+  },
+  "unknown-surface": {
+    "schemaVersion": "1.0.0",
+    "projectType": "brownfield",
+    "surfaces": ["quantum-ui"],
+    "changeKind": "feature",
+    "dataClasses": ["public"],
+    "deploymentTargets": ["cloud"],
+    "reversibility": "reversible",
+    "risk": { "security": "low", "privacy": "low", "availability": "low" }
+  }
+}

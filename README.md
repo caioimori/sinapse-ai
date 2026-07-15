@@ -41,10 +41,13 @@ O diferencial não é apenas a quantidade de agentes. É **governança real**: 2
 
 ## Quick Start
 
+> Use `@latest` nos comandos publicos para evitar que o cache do `npx` execute
+> uma versao anterior durante instalacoes e atualizacoes.
+
 ### 1. Instale
 
 ```bash
-npx sinapse-ai install
+npx sinapse-ai@latest install
 ```
 
 O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex) e instala os 17 squads automaticamente. Re-rodar o comando faz upsert idempotente — preserva suas customizações e só atualiza o que mudou.
@@ -52,8 +55,8 @@ O wizard detecta seu ambiente, escolhe a IDE (Claude Code ou Codex) e instala os
 ### 2. Verifique
 
 ```bash
-npx sinapse-ai status   # Lista de squads + agentes instalados
-npx sinapse-ai doctor   # 16 health checks contra o ambiente
+npx sinapse-ai@latest status   # Lista de squads + agentes instalados
+npx sinapse-ai@latest doctor   # 16 health checks contra o ambiente
 ```
 
 Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
@@ -120,7 +123,7 @@ Cada release passa por uma matriz de instalação de 27 combinações (3 OSes ×
 ### "Como atualizar sem perder minhas customizações?"
 
 ```bash
-npx sinapse-ai update
+npx sinapse-ai@latest update
 ```
 
 O update é **idempotente por design**. L1 (framework core) e L2 (templates) são atualizados. L3 (configuração) e L4 (suas stories, packages, customizações) **nunca são tocados**. Você pode rodar `update` quantas vezes quiser, inclusive após customizar rules localmente. Nada se perde.
@@ -303,8 +306,8 @@ O SINAPSE suporta duas IDEs com integrações profundas:
 
 | IDE | Ativação | Destaques |
 |-----|----------|-----------|
-| **Claude Code** | `@agent-name` | Hooks, rules contextuais, deny/allow, Chrome Brain |
-| **Codex CLI** | `/skills` ou `$skill-name` | Skills nativas, multi-model, `codex exec` para CI/CD |
+| **Claude Code** | `@agent-name` ou `/skill-name` | Subagentes e skills nativos, hooks e rules contextuais |
+| **Codex CLI** | `$snps` ou `$sinapse-agent agent-id` | Agentes TOML, skills nativas e `codex exec` para CI/CD |
 
 Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
@@ -312,7 +315,7 @@ Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowled
 
 | Funcionalidade | Claude Code | Codex CLI |
 |---------------|:-----------:|:---------:|
-| Ativação de agentes (@agent) | Completo | Completo |
+| Ativação dos 172 agentes | `@agent-name` | `$sinapse-agent agent-id` |
 | Hooks constitucionais (20) | Completo | Parcial (5) |
 | Story-driven development | Completo | Completo |
 | Quality gates | Completo | Completo |
@@ -401,6 +404,18 @@ Pre-commit e pre-push hooks validam automaticamente antes de cada operação.
 
 ## CLI Reference
 
+Comandos deterministas para o pacote publico:
+
+```bash
+# Projeto novo ou existente
+npx sinapse-ai@latest install
+npx sinapse-ai@latest update
+
+# Instalacao global existente
+npm install -g sinapse-ai@latest
+sinapse-ai update
+```
+
 A superfície pública é proposital — quatro comandos canônicos de lifecycle, dois diagnósticos, um sub-comando avançado.
 
 ```bash
@@ -421,7 +436,7 @@ npx sinapse-ai doctor --dry-run  # Mostra o que `--fix` faria sem aplicar
 npx sinapse-ai chrome-brain install   # Instala browser automation
 ```
 
-Todos os comandos são seguros para re-rodar. Para listar agentes ativos depois de instalar, abra o Claude Code ou o Codex CLI e digite `@` para autocompletar.
+Todos os comandos são seguros para re-rodar. No Claude Code, digite `@` para selecionar um subagente ou use `/snps`. No Codex, use `$snps` para o orquestrador supremo e `$sinapse-agent <id>` para qualquer agente do catálogo.
 
 ### Orquestração (avançado)
 
