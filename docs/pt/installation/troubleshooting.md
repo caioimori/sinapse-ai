@@ -545,7 +545,8 @@ nvm use 16
 
 ### Problema 20: "Agents not appearing in IDE"
 
-**Sintomas:** Comandos de agentes (`/dev`, `@dev`) não funcionam após instalação.
+**Sintomas:** A ativação nativa (`@developer` no Claude Code ou
+`$sinapse-agent developer` no Codex) não funciona após a instalação.
 
 **Solução:**
 
@@ -556,8 +557,9 @@ nvm use 16
    # Claude Code
    ls .claude/agents/
 
-   # Cursor
-   ls .cursor/rules/
+   # Codex
+   ls .codex/agents/
+   ls .agents/skills/
    ```
 
 3. Verifique se as configurações da IDE permitem comandos customizados

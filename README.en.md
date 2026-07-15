@@ -19,9 +19,9 @@
 
 ## What is SINAPSE?
 
-SINAPSE is an open-source meta-framework that organizes **172 AI agents into 17 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 17 active hooks that block violations at runtime.
+SINAPSE is an open-source meta-framework that organizes **172 AI agents into 17 specialized squads**, operating directly in the terminal via Claude Code or Codex CLI. Each agent has a defined role, each squad masters a discipline, and the entire system is governed by a **Constitution with real enforcement** -- 20 registered Claude Code hooks and 9 Codex lifecycle events through the compatibility bridge.
 
-The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. Each with its own knowledge base, workflows, and tasks -- totaling **1,200 executable tasks** ready to use.
+The core concept is simple: instead of a single AI assistant trying to do everything, SINAPSE structures work into specialized teams. A branding squad handles visual identity. A cybersecurity squad handles compliance and pentesting. A copywriting squad handles persuasion and conversion. The runtime measures **1,412 task files**: **1,201 squad tasks** and **211 development tasks**. Of those files, **1,348 pointers are resolvable** by real agents.
 
 Unlike tools that just chat with AI, SINAPSE enforces discipline. The **Documentation-First** pipeline requires a story to be created and validated before any code is written. Quality gates run automatically before merge. Unauthorized agents are blocked from pushing. All via hooks that intercept operations in real time -- not after the fact.
 
@@ -33,7 +33,7 @@ Generative AI has a known problem: the more you ask of it, the worse it gets. A 
 
 SINAPSE solves this the way human teams solve it: **coordinated specialization**. Instead of one tired generalist, you have 172 agents in 17 squads, each with a defined role, its own knowledge base, and executable tasks. An orchestrator routes your request to whoever actually knows how to solve it -- automatically, without you needing to memorize agent names or commands.
 
-The differential isn't just the quantity of agents. It's **real governance**: 17 active hooks intercept operations at runtime, a Constitution with 11 articles governs the framework, and 7 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
+The differential isn't just the quantity of agents. It's **real governance**: 20 Claude Code hook registrations and 9 Codex lifecycle events intercept operations at runtime, a Constitution with 11 articles governs the framework, and 7 of those articles are NON-NEGOTIABLE -- violations are blocked before execution, not detected afterwards. **Speed with rigor, without choosing between the two.**
 
 ---
 
@@ -55,9 +55,18 @@ npx sinapse-ai doctor
 
 ### 3. Activate your first agent
 
+Claude Code:
+
+```text
+@developer
+*help
 ```
-@developer          # Activate the development agent
-*help               # List available commands
+
+Codex:
+
+```text
+$snps
+$sinapse-agent developer
 ```
 
 Done. You have 17 squads operating in your terminal.
@@ -174,7 +183,7 @@ Deny rules in `.claude/settings.json` enforce this deterministically. **Framewor
 
 ### Constitution
 
-SINAPSE is governed by a formal Constitution with 11 articles and 17 enforcement hooks:
+SINAPSE is governed by a formal Constitution with 11 articles and provider-specific enforcement surfaces: 20 Claude Code hook registrations and 9 Codex lifecycle events.
 
 | Article | Principle | Severity |
 |---------|-----------|----------|
@@ -213,7 +222,7 @@ SINAPSE includes 12 core agents covering the complete development cycle:
 | `devops` | **Pipeline** | CI/CD, git push (exclusive), releases |
 | `squad-creator` | **Loom** | New squad creation |
 
-Activate any agent with `@agent-name` and use `*help` to see its commands.
+In Claude Code, activate an agent with `@agent-name` and use `*help` to see its commands. In Codex, start with `$snps` for routing or use `$sinapse-agent agent-id` for direct activation.
 
 ### Development Workflow
 
@@ -263,7 +272,7 @@ Each squad is an autonomous team with its own orchestrator, specialist agents, k
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 17 squads, 172 specialized agents, 1,201 tasks**
+**Total: 17 squads, 172 specialized agents, and 1,412 task files** (**1,201 squad tasks + 211 development tasks; 1,348 resolvable pointers**)
 
 Activate any squad via its orchestrator:
 
@@ -285,27 +294,22 @@ SINAPSE supports two IDEs with deep integrations:
 | IDE | Activation | Highlights |
 |-----|------------|------------|
 | **Claude Code** | `@agent-name` | Hooks, contextual rules, deny/allow, Chrome Brain |
-| **Codex CLI** | `/skills` or `$skill-name` | Native skills, multi-model, `codex exec` for CI/CD |
+| **Codex CLI** | `$snps` or `$sinapse-agent agent-id` | Native skills, multi-model, `codex exec` for CI/CD |
 
 Both IDEs have access to all 17 squads, 172 agents, workflows, and knowledge bases. The installer detects and configures automatically.
 
 ### Parity Table
 
-| Feature | Claude Code | Codex CLI |
-|---------|:-----------:|:---------:|
-| Agent activation (@agent) | Full | Full |
-| Constitutional hooks (20) | Full | Partial (5) |
-| Story-driven development | Full | Full |
-| Quality gates | Full | Full |
-| Delegation enforcement | Full | Partial |
-| Secret scanning | Full | Manual |
-| CodeRabbit integration | Full | N/A |
-| Skills system | Full | Commands |
-| MCP servers | Full | N/A |
-| Terminal Bus | Full | N/A |
+| Measured surface | Claude Code | Codex CLI |
+|------------------|:-----------:|:---------:|
+| Native agents | 172 | 172 |
+| Direct activation | `@agent-name` | `$sinapse-agent agent-id` |
+| Primary routing | `@sinapse-orqx` | `$snps` |
+| Installed skills | 36 | 37 |
+| Registered hooks | 20 native registrations | 9 lifecycle events through the bridge |
+| Validation source | `npm run validate:providers` | `npm run validate:codex-native` |
 
-**Claude Code** for the most integrated and automated experience.
-**Codex CLI** for model flexibility and CI/CD automation.
+Both providers resolve the same agents, tasks, workflows, and knowledge bases. Their activation and hook surfaces are different native adapters validated independently by the parity gate.
 
 ---
 
@@ -335,7 +339,7 @@ If you identify with the first group, you're in the right place.
 
 ### Constitutional Enforcement
 
-SINAPSE doesn't just document rules -- it enforces them with **17 active hooks**:
+SINAPSE doesn't just document rules -- Claude Code uses **20 registered hooks**, while Codex exposes **9 lifecycle events** through the compatibility bridge:
 
 - `enforce-git-push-authority.sh` -- blocks push by unauthorized agents
 - `enforce-story-gate.cjs` -- blocks code without a validated story
@@ -400,7 +404,7 @@ npx sinapse-ai doctor --dry-run  # Show what `--fix` would do without applying
 npx sinapse-ai chrome-brain install   # Install browser automation
 ```
 
-All commands are safe to re-run. To list active agents after installing, open Claude Code or Codex CLI and type `@` to autocomplete.
+All commands are safe to re-run. After installing, use `@agent-name` in Claude Code or `$snps` / `$sinapse-agent agent-id` in Codex.
 
 ---
 

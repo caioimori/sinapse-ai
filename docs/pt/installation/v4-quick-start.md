@@ -111,19 +111,19 @@ Digite *help para ver comandos disponíveis.
 
 | Agente              | Ativação             | Propósito                          |
 | ------------------- | -------------------- | ---------------------------------- |
-| `@dev` (Dex)        | Desenvolvimento      | Implementação de código, debugging |
-| `@qa` (Quinn)       | Qualidade            | Testes e validação                 |
-| `@architect` (Aria) | Arquitetura          | Design de sistema e documentação   |
-| `@pm` (Sage)        | Product Manager      | Requisitos e planejamento          |
-| `@devops` (Gage)    | DevOps               | Git push, criação de PR, CI/CD     |
-| `@po` (Maven)       | Product Owner        | Criação de stories e backlog       |
-| `@sm` (River)       | Scrum Master         | Gerenciamento de sprint            |
-| `@analyst` (Nova)   | Analista de Negócios | Análise de requisitos              |
+| `@developer` (Pixel)     | Desenvolvimento    | Implementação de código, debugging |
+| `@quality-gate` (Litmus) | Qualidade          | Testes e validação                 |
+| `@architect` (Stratum)   | Arquitetura        | Design de sistema e documentação   |
+| `@project-lead` (Beacon) | Product Manager    | Requisitos e planejamento          |
+| `@devops` (Pipeline)     | DevOps             | Git push, criação de PR, CI/CD     |
+| `@product-lead` (Axis)   | Product Owner      | Validação de stories e backlog     |
+| `@sprint-lead` (Sync)    | Scrum Master       | Gerenciamento de sprint            |
+| `@analyst` (Scope)       | Analista de Negócios | Análise de requisitos            |
 
 ### Exemplo: Ativar Agente Desenvolvedor
 
 ```
-@dev
+@developer
 ```
 
 O agente desenvolvedor (Dex) será ativado com uma saudação mostrando:
@@ -190,7 +190,7 @@ seu-projeto/
 │   │   └── quality-gates/         # Camadas de validação de qualidade
 │   ├── development/               # Assets de desenvolvimento
 │   │   ├── agents/                # Definições de agentes (12 agentes)
-│   │   ├── tasks/                 # Workflows de tarefas (~140 tarefas)
+│   │   ├── tasks/                 # Workflows de development (211 development tasks)
 │   │   └── workflows/             # Workflows multi-etapa
 │   ├── product/                   # Assets de produto
 │   │   ├── templates/             # Templates de documentos

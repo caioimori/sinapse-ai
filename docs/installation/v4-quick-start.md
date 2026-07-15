@@ -109,19 +109,19 @@ Type *help to see available commands.
 
 | Agent               | Activation        | Purpose                         |
 | ------------------- | ----------------- | ------------------------------- |
-| `@dev` (Dex)        | Development       | Code implementation, debugging  |
-| `@qa` (Quinn)       | Quality Assurance | Testing and validation          |
-| `@architect` (Aria) | Architecture      | System design and documentation |
-| `@pm` (Sage)        | Product Manager   | Requirements and planning       |
-| `@devops` (Gage)    | DevOps            | Git push, PR creation, CI/CD    |
-| `@po` (Maven)       | Product Owner     | Story creation and backlog      |
-| `@sm` (River)       | Scrum Master      | Sprint management               |
-| `@analyst` (Nova)   | Business Analyst  | Requirements analysis           |
+| `@developer` (Pixel)     | Development       | Code implementation, debugging  |
+| `@quality-gate` (Litmus) | Quality Assurance | Testing and validation          |
+| `@architect` (Stratum)   | Architecture      | System design and documentation |
+| `@project-lead` (Beacon) | Product Manager   | Requirements and planning       |
+| `@devops` (Pipeline)     | DevOps            | Git push, PR creation, CI/CD    |
+| `@product-lead` (Axis)   | Product Owner     | Story validation and backlog    |
+| `@sprint-lead` (Sync)    | Scrum Master      | Sprint management               |
+| `@analyst` (Scope)       | Business Analyst  | Requirements analysis           |
 
 ### Example: Activate Developer Agent
 
 ```
-@dev
+@developer
 ```
 
 The developer agent (Dex) will activate with a greeting showing:
@@ -188,7 +188,7 @@ your-project/
 │   │   └── quality-gates/         # Quality validation layers
 │   ├── development/               # Development assets
 │   │   ├── agents/                # Agent definitions (12 agents)
-│   │   ├── tasks/                 # Task workflows (~140 tasks)
+│   │   ├── tasks/                 # Development workflows (211 development tasks)
 │   │   └── workflows/             # Multi-step workflows
 │   ├── product/                   # Product assets
 │   │   ├── templates/             # Document templates

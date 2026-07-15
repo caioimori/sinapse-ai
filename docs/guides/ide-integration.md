@@ -19,40 +19,39 @@ SINAPSE supports the following AI-powered development platforms:
 
 | IDE/CLI | Overall Status | How to Activate an Agent | Auto-Checks Before/After Actions |
 | --- | --- | --- | --- |
-| Claude Code | Works | `/agent-name` commands | Works (full) |
-| Codex CLI | Limited | `/skills` then `sinapse-<agent-id>` | Limited (some checks need manual sync) |
+| Claude Code | Works | `@agent-name` | 20 native hook registrations |
+| Codex CLI | Works | `$snps` or `$sinapse-agent <id>` | 9 lifecycle events through the bridge |
 
 Legend:
-- `Works`: fully recommended for new users.
-- `Limited`: usable with the documented workaround.
+- `Works`: supported by provider-native adapters and release validators.
 
-### What You Lose Without Full Auto-Checks
+### Provider-Native Differences
 
-Some IDEs run automatic checks before and after each action (e.g., validating context, enforcing rules). Where this is not available, you compensate manually:
+Both providers expose native lifecycle surfaces. Their registration models differ, so parity is measured semantically instead of by requiring identical hook files:
 
-| IDE | Auto-Check Level | What Is Reduced | How to Compensate |
-| --- | --- | --- | --- |
-| Claude Code | Full | Nothing | Built-in checks handle everything |
-| Codex CLI | Partial | Less automatic session tracking; some pre/post-action checks need manual trigger | Use `AGENTS.md` + `/skills` + sync/validation scripts |
+| Measured surface | Claude Code | Codex CLI |
+| --- | --- | --- |
+| Native agents | 172 | 172 |
+| Installed skills | 36 | 37 |
+| Registered hooks | 20 native registrations | 9 lifecycle events through the bridge |
+| Activation | `@agent-name` | `$snps` or `$sinapse-agent <id>` |
 
 ### Beginner Decision Guide
 
 If your goal is to get started as fast as possible:
 
-1. **Best option:** Use `Claude Code` -- it has the most automation and fewest manual steps.
-2. **Good option:** Use `Codex CLI` if you prefer a terminal-first workflow and can follow the `/skills` activation flow.
+1. Use **Claude Code** when you want its native `@agent-name` interaction.
+2. Use **Codex CLI** when you want `$snps`, direct parametric activation and its terminal-first workflow.
 
 ### Practical Consequences by Capability
 
 - **Session tracking** (automatic start/end detection):
-  - Automatic on Claude Code.
-  - Manual or partial on Codex CLI.
+  - Registered through native lifecycle adapters on both providers.
 - **Pre/post-action guardrails** (checks that run before and after each tool use):
-  - Full on Claude Code.
-  - Partial on Codex CLI (run sync scripts to compensate).
+  - Claude Code uses native hook registrations.
+  - Codex maps native lifecycle events through the compatibility bridge.
 - **Automatic audit trail** (record of what happened in each session):
-  - Richest on Claude Code.
-  - Reduced on Codex CLI (compensate with manual logging or validator output).
+  - Provider-specific telemetry uses the same canonical SINAPSE governance sources.
 
 ---
 
@@ -60,12 +59,12 @@ If your goal is to get started as fast as possible:
 
 ### Claude Code
 
-**Recommendation Level:** Best SINAPSE integration
+**Recommendation Level:** Native SINAPSE integration
 
 ```yaml
 config_file: .claude/CLAUDE.md
 agent_folder: .claude/agents
-activation: /agent-name (slash commands)
+activation: @agent-name
 format: full-markdown-yaml
 mcp_support: native
 special_features:
@@ -79,7 +78,7 @@ special_features:
 **Setup:**
 
 1. SINAPSE automatically creates `.claude/` directory on init
-2. Agents are available as slash commands: `/dev`, `/qa`, `/architect`
+2. Agents are available through `@developer`, `@quality-gate`, `@architect`, etc.
 3. Configure MCP servers in `~/.claude.json`
 
 **Configuration:**
@@ -107,7 +106,7 @@ format: markdown
 mcp_support: native via Codex tooling
 special_features:
   - AGENTS.md project instructions
-  - /skills activators (sinapse-<agent-id>)
+  - $snps and $sinapse-agent <id> activators
   - Strong CLI workflow support
   - Easy integration with repository scripts
   - Notify command plus emerging tool hooks in recent Codex releases
@@ -118,7 +117,7 @@ special_features:
 1. Keep `AGENTS.md` at repository root
 2. Run `npm run sync:ide:codex` to sync auxiliary agent files
 3. Run `npm run sync:skills:codex` to generate project-local skills in `.agents/skills`
-4. Use `/skills` and choose `sinapse-architect`, `sinapse-dev`, etc.
+4. Use `$snps` or `$sinapse-agent architect`, `$sinapse-agent developer`, etc.
 5. Use `npm run sync:skills:codex:global` only when you explicitly want global installation
 
 **Configuration:**

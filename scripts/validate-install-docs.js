@@ -116,6 +116,46 @@ const FORBIDDEN_PATTERNS = [
     reason:
       'Internal script — must be invoked internally by `npx sinapse-ai install`, never shown as a user-facing command.',
   },
+  {
+    id: 'legacy-codex-skills-flow',
+    regex: /(?:(?<![.:\w])codex\b[^\n]{0,80}(?<![A-Za-z0-9._-])\/skills\b|(?<![A-Za-z0-9._-])\/skills\b[^\n]{0,40}(?:flow|activation|ativacao|ativação|activate|ativar|agent))/i,
+    reason: 'Codex activation uses `$snps` or `$sinapse-agent <id>`, not `/skills`.',
+  },
+  {
+    id: 'legacy-custom-agent-slash-command',
+    regex: /\/my-agent\b/,
+    reason: 'Do not document `/my-agent`; use the provider-native SINAPSE activator.',
+  },
+  {
+    id: 'legacy-dev-slash-activation',
+    regex: /(?:^\s*\/dev\s*$|(?:activate|ativar|activation|ativacao|ativação|agent commands?|comandos? de agentes)[^\n]{0,80}\/dev\b)/i,
+    reason: 'Use `@developer` in Claude Code or `$sinapse-agent developer` in Codex.',
+  },
+  {
+    id: 'legacy-dev-at-activation',
+    regex: /(?:^\s*(?:\|\s*)?`?@dev\b|(?:activate|ativar|activation|ativacao|ativação|agent commands?|comandos? de agentes)[^\n]{0,80}@dev\b)/i,
+    reason: 'Use `@developer`; the short `@dev` activation is obsolete.',
+  },
+  {
+    id: 'legacy-codex-at-activation',
+    regex: /codex[^\n]{0,100}(?:activate|ativar|activation|ativacao|ativação|shortcut|atalho|use)[^\n]{0,50}@(?:<[^>]+>|[a-z][\w-]*)/i,
+    reason: 'Codex activation uses `$snps` or `$sinapse-agent <id>`, not `@agent`.',
+  },
+  {
+    id: 'unresolvable-init-project-status',
+    regex: /\*init-project-status\b/i,
+    reason: '`init-project-status` has no public resolvable task pointer; project status loads automatically.',
+  },
+  {
+    id: 'legacy-sinapse-fullstack-name',
+    regex: /\bSINAPSE-FullStack\b/i,
+    reason: 'The current public framework name is SINAPSE AI.',
+  },
+  {
+    id: 'legacy-developer-codename',
+    regex: /\bDex\s*(?:\(|the\s+)Builder\b/i,
+    reason: 'The current developer persona is Pixel the Builder.',
+  },
 ];
 
 // ── Paths ────────────────────────────────────────────────────────────────────
@@ -124,7 +164,7 @@ const FORBIDDEN_PATTERNS = [
  * Directories whose `.md` files are public user-facing installation docs.
  * Everything in these trees is scanned.
  */
-const PUBLIC_DOC_DIRS = ['docs/installation'];
+const PUBLIC_DOC_DIRS = ['docs/installation', 'docs/pt/installation'];
 
 /**
  * Additional top-level public doc files (relative to root).
@@ -133,7 +173,18 @@ const PUBLIC_DOC_DIRS = ['docs/installation'];
  * Quick Start commands (including `agents`/`ideate`) and are exactly where
  * the drift was found; bring them under the same guard as README.
  */
-const PUBLIC_DOC_FILES = ['README.md', 'docs/guides/user-guide.md', 'docs/pt/guides/user-guide.md'];
+const PUBLIC_DOC_FILES = [
+  'README.md',
+  'README.en.md',
+  'docs/getting-started.md',
+  'docs/troubleshooting.md',
+  'docs/guides/user-guide.md',
+  'docs/pt/guides/user-guide.md',
+  'docs/guides/codex-config.md',
+  'docs/guides/ide-integration.md',
+  'docs/guides/project-status-feature.md',
+  'docs/pt/guides/project-status-feature.md',
+];
 
 /**
  * Path fragments that identify historical / release notes. Any file whose
@@ -276,7 +327,10 @@ function scanFile(rootDir, relPath) {
     if (allowed.has(i)) continue;
     const line = lines[i];
     for (const rule of FORBIDDEN_PATTERNS) {
-      const match = line.match(rule.regex);
+      const candidate = rule.id === 'legacy-codex-skills-flow'
+        ? line.replace(/https?:\/\/[^\s)>]+/gi, (url) => ' '.repeat(url.length))
+        : line;
+      const match = candidate.match(rule.regex);
       if (match) {
         violations.push({
           file: relPath,

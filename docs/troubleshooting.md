@@ -40,10 +40,11 @@ npx sinapse-ai install --target "C:\Users\My User\projeto"
 
 ## Problemas de ativação de agentes
 
-### `@developer` não ativa
-1. Verifique IDE detectada: `cat .claude/settings.json` (Claude Code) ou `cat .codex/instructions.md` (Codex)
-2. Re-sincronize: `npx sinapse-ai install --reconfigure`
-3. Reinicie o IDE
+### O agente não ativa
+1. Confirme a sintaxe do provider: `@developer` no Claude Code; `$snps` ou `$sinapse-agent developer` no Codex.
+2. Verifique a configuração instalada: `.claude/settings.json` no Claude Code ou `.codex/config.toml` no Codex.
+3. Re-sincronize: `npx sinapse-ai@latest install --reconfigure`.
+4. Reinicie o provider.
 
 ### Agente ativa mas sem comandos
 ```bash
@@ -59,12 +60,13 @@ Cheque qual hook bloqueou (mensagem de erro tem o nome). Exemplos:
 - **enforce-git-push-authority**: só `@devops` pode push. Delegue: `@devops *push`.
 - **secret-scanning**: detectou secret. Verifique e remova OU mova pra `.env` (gitignored).
 
-Lista completa de hooks: `.claude/hooks/README.md`.
+Claude Code registra 20 hooks em `.claude/settings.json`. Codex registra 9 eventos
+de lifecycle em `.codex/hooks.json` e os encaminha pelo bridge de compatibilidade.
 
 ### Hook não está rodando
 ```bash
-cat .claude/settings.json | grep hooks    # confirma registro
-ls .claude/hooks/                          # confirma arquivo existe
+cat .claude/settings.json | grep hooks    # Claude Code: confirma registro
+cat .codex/hooks.json                     # Codex: confirma eventos registrados
 ```
 
 ## Problemas de CI

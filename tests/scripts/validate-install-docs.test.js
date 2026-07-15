@@ -19,6 +19,8 @@ const {
   computeAllowedLineSet,
 } = require('../../scripts/validate-install-docs');
 
+const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
+
 function makeTmpRoot(label) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), `sinapse-validate-docs-${label}-`));
   fs.mkdirSync(path.join(root, 'docs', 'installation'), { recursive: true });
@@ -40,6 +42,21 @@ function cleanup(root) {
 }
 
 describe('validate-install-docs', () => {
+  describe('documented provider adapters', () => {
+    test('representative Claude and Codex adapter paths exist', () => {
+      for (const id of ['developer', 'brand-orqx']) {
+        expect(fs.existsSync(path.join(PROJECT_ROOT, '.claude', 'agents', `sinapse-${id}.md`))).toBe(true);
+        expect(fs.existsSync(path.join(PROJECT_ROOT, '.codex', 'agents', `${id}.toml`))).toBe(true);
+        expect(fs.existsSync(path.join(PROJECT_ROOT, '.codex', 'agents', `${id}.md`))).toBe(true);
+      }
+
+      const pkg = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, 'package.json'), 'utf8'));
+      expect(pkg.scripts).toHaveProperty('sync:ide:claude');
+      expect(pkg.scripts).toHaveProperty('sync:ide:codex');
+      expect(pkg.scripts).not.toHaveProperty('sync:ide:gemini');
+    });
+  });
+
   describe('clean fixture', () => {
     let root;
 
@@ -57,6 +74,13 @@ describe('validate-install-docs', () => {
           'npx sinapse-ai install',
           'npx sinapse-ai update',
           'npx sinapse-ai uninstall',
+          'A Linux path such as `/dev/null` is not an agent command.',
+          'Claude documentation may link to https://example.com/skills.',
+          'Codex docs live at https://example.com/codex/skills.',
+          'Claude Code may mention `/skills` as a literal reference.',
+          'Contact the GitHub team @dev-platform for support.',
+          'Use @developer in Claude Code and $sinapse-agent developer in Codex.',
+          'Inspect both .codex/agents/ and .agents/skills/ adapter paths.',
           '```',
           '',
         ].join('\n'),
@@ -80,6 +104,8 @@ describe('validate-install-docs', () => {
           '',
           '```bash',
           './scripts/install-chrome-brain.sh',
+          '/dev',
+          '@dev',
           '```',
           '',
           '## Next section',
@@ -122,6 +148,14 @@ describe('validate-install-docs', () => {
           'Run `sinapse install` to set up the framework.',
           'Then run `sinapse-minimal` for a lightweight mode.',
           'Power users can invoke `./scripts/install-squads.sh` directly.',
+          'In Codex, open the `/skills` flow.',
+          'Activate a custom agent with `/my-agent`.',
+          'Activate the developer with `/dev`.',
+          'Agent commands (`@dev`) are obsolete.',
+          'In Codex, activate @architect.',
+          'Run `*init-project-status` after activation.',
+          'Install the SINAPSE-FullStack framework.',
+          'Greeting: Dex (Builder) ready.',
           '',
         ].join('\n'),
       );
@@ -140,6 +174,14 @@ describe('validate-install-docs', () => {
           'legacy-sinapse-install',
           'sinapse-minimal-binary',
           'install-squads-script',
+          'legacy-codex-skills-flow',
+          'legacy-custom-agent-slash-command',
+          'legacy-dev-slash-activation',
+          'legacy-dev-at-activation',
+          'legacy-codex-at-activation',
+          'unresolvable-init-project-status',
+          'legacy-sinapse-fullstack-name',
+          'legacy-developer-codename',
         ]),
       );
     });

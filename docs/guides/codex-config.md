@@ -41,9 +41,9 @@ npm test
 
 - Sincronizar regras/agentes: `npm run sync:ide`
 - Validar drift: `npm run sync:ide:check`
-- Rodar paridade multi-IDE (Claude/Codex/Gemini): `npm run validate:parity`
+- Rodar paridade Claude/Codex: `npm run validate:parity`
 - Sync Claude Code: `npm run sync:ide:claude`
-- Sincronizar Gemini CLI: `npm run sync:ide:gemini`
+- Sincronizar Codex: `npm run sync:ide:codex`
 - Validar Codex sync/integration: `npm run validate:codex-sync`; `npm run validate:codex-integration`
 - Validar command/task registry do Codex: `npm run validate:codex-commands`
 - Validar matriz de delegacao do Codex: `npm run validate:codex-delegation`
@@ -74,36 +74,18 @@ Quando um orqx no Codex precisar decidir um handoff:
 
 No Codex, nao trate handoffs exploratorios como se fossem caminhos garantidos pelo validator.
 
-## Agent Shortcuts (Codex)
+## Ativacao de agentes (Codex)
 
-Preferencia de ativacao no Codex CLI:
-1. Use `/skills` e selecione `sinapse-<agent-id>` vindo de `.agents/skills` (ex.: `sinapse-architect`)
-2. Se preferir, use os atalhos abaixo (`@architect`, `/architect`, etc.)
-
-Quando a mensagem do usuario for um atalho de agente, carregue o arquivo correspondente em `.sinapse-ai/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate receber `*exit`.
-
-Atalhos aceitos por agente (nome completo + alias):
-- `@sinapse-orqx` -> `.sinapse-ai/development/agents/sinapse-orqx.md`
-- `@developer` ou `@dev` -> `.sinapse-ai/development/agents/developer.md`
-- `@quality-gate` ou `@qa` -> `.sinapse-ai/development/agents/quality-gate.md`
-- `@project-lead` ou `@pm` -> `.sinapse-ai/development/agents/project-lead.md`
-- `@product-lead` ou `@po` -> `.sinapse-ai/development/agents/product-lead.md`
-- `@sprint-lead` ou `@sm` -> `.sinapse-ai/development/agents/sprint-lead.md`
-- `@analyst` -> `.sinapse-ai/development/agents/analyst.md`
-- `@architect` -> `.sinapse-ai/development/agents/architect.md`
-- `@data-engineer` -> `.sinapse-ai/development/agents/data-engineer.md`
-- `@devops` -> `.sinapse-ai/development/agents/devops.md`
-- `@squad-creator` -> `.sinapse-ai/development/agents/squad-creator.md`
-- `@ux-design-expert` -> `.sinapse-ai/development/agents/ux-design-expert.md`
-
-Resposta esperada ao ativar atalho:
-1. Confirmar agente ativado
-2. Mostrar 3-6 comandos principais (`*help`, etc.)
-3. Seguir na persona do agente
+- Use `$snps` para roteamento pelo orquestrador principal.
+- Use `$sinapse-agent <agent-id>` para ativacao direta, por exemplo
+  `$sinapse-agent developer` ou `$sinapse-agent architect`.
+- O ativador parametrico resolve a fonte canonica e apenas tasks existentes;
+  nao interprete `@agent`, slash commands ou aliases curtos como ativacao Codex.
 
 ## Orquestradores (18 orqx: 17 squad + 1 master)
 
-Cada orqx coordena um squad completo de agentes especializados. Ative via `/skills` > `sinapse-<orqx>` ou `@<orqx>`:
+Cada orqx coordena um squad completo de agentes especializados. Use `$snps` para
+roteamento ou `$sinapse-agent <orqx-id>` para ativacao direta:
 
 | Orqx | Squad | Foco |
 |------|-------|------|
@@ -126,12 +108,14 @@ Cada orqx coordena um squad completo de agentes especializados. Ative via `/skil
 | `council-orqx` | Council | Advisors estrategicos (Munger, Dalio, Thiel) |
 | `swarm-orqx` | Mastery | Claude Code, MCP, integracao avancada |
 
-Agents de arquivo: `.codex/agents/<orqx>.md` ou `.claude/agents/<orqx>.md`
+Adapters de arquivo: `.claude/agents/sinapse-<orqx-id>.md` no Claude Code e
+`.codex/agents/<orqx-id>.toml` (com companion `.md`) no Codex.
 
 ## Agentes Especializados (160)
 
 Existem 172 agentes organizados em 17 squads (160 em squads + 12 framework agents, incluindo o master orchestrator). Eles sao acessiveis via:
-- `.codex/agents/<agent-name>.md` - arquivo direto
+- `.claude/agents/sinapse-<agent-id>.md` - agent nativo do Claude Code
+- `.codex/agents/<agent-id>.toml` e `.codex/agents/<agent-id>.md` - adapters Codex
 - Chamada interna pelo orqx do squad
 
 Exemplos: `brand-strategist`, `ad-copywriter`, `penetration-tester`, `content-writer`, `ga-analytics-engineer`, etc.

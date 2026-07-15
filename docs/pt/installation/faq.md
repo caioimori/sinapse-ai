@@ -286,8 +286,8 @@ tar -xzvf sinapse-offline.tar.gz
 
 | IDE                | Status         | Ativação de Agentes |
 | ------------------ | -------------- | ------------------- |
-| **Claude Code**    | Suporte Completo | `/dev`, `/qa`, etc. |
-| **Cursor**         | Suporte Completo | `@dev`, `@qa`, etc. |
+| **Claude Code**    | Suporte Completo | `@developer`, `@quality-gate`, etc. |
+| **Codex CLI**      | Suporte Completo | `$snps` ou `$sinapse-agent <id>` |
 | **Gemini CLI**     | Suporte Completo | Menção no prompt    |
 | **GitHub Copilot** | Suporte Completo | Modos de chat       |
 
@@ -370,35 +370,10 @@ npx sinapse-ai install
 
 ### Q15: Como crio um agente customizado?
 
-**Resposta:**
-
-1. **Copie um agente existente:**
-
-   ```bash
-   cp .sinapse-ai/agents/developer.md .sinapse-ai/agents/my-agent.md
-   ```
-
-2. **Edite o frontmatter YAML:**
-
-   ```yaml
-   agent:
-     name: MyAgent
-     id: my-agent
-     title: My Custom Agent
-     icon: 🔧
-
-   persona:
-     role: Expert in [your domain]
-     style: [communication style]
-   ```
-
-3. **Adicione à configuração da IDE:**
-
-   ```bash
-   npx sinapse-ai install --ide claude-code
-   ```
-
-4. **Ative:** `/my-agent` ou `@my-agent`
+**Resposta:** Mantenha os agentes do framework imutáveis e crie extensões pelo
+workflow de squads. No Claude Code, ative `@squad-creator`; no Codex, use
+`$sinapse-agent squad-creator`. Depois de validar a definição, execute
+`npx sinapse-ai@latest install --reconfigure` para regenerar os adapters.
 
 ---
 
@@ -411,10 +386,10 @@ npx sinapse-ai install
 - Registra todas as decisões em `.ai/decision-log-{story-id}.md`
 - Pode ser parado a qualquer momento
 
-**Habilitar yolo mode:**
+**Habilitar yolo mode:** Ative `@developer` no Claude Code ou
+`$sinapse-agent developer` no Codex e execute:
 
-```bash
-/dev
+```text
 *develop-yolo docs/stories/your-story.md
 ```
 

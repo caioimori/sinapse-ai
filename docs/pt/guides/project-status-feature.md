@@ -32,10 +32,11 @@ Isso fornece contexto imediato sobre seu trabalho sem precisar executar manualme
 
 ## Exemplo de Exibição
 
-Quando você ativa um agente (ex: `/dev`), você verá:
+Quando você ativa um agente (`@developer` no Claude Code ou
+`$sinapse-agent developer` no Codex), você verá:
 
 ```
-Dex (Builder) ready. Let's build something great!
+Pixel the Builder ready to innovate!
 
 Current Project Status:
   - Branch: main
@@ -52,24 +53,15 @@ Type *help to see available commands!
 ### Pré-requisitos
 
 - **Repositório Git** - Projeto deve ser inicializado com `git init`
-- **Framework SINAPSE-FullStack** instalado
+- **Framework SINAPSE AI** instalado
 - **Node.js 18+** com pacotes necessários
 
 ### Configuração Inicial
 
-Execute o comando de inicialização via agente @devops:
-
-```bash
-/devops
-*init-project-status
-```
-
-Isso irá:
-1. Detectar seu repositório git
-2. Habilitar `projectStatus` no `core-config.yaml`
-3. Criar arquivo de cache `.sinapse/project-status.yaml`
-4. Adicionar arquivo de cache ao `.gitignore`
-5. Testar a exibição do status
+Nenhum comando de agente é necessário. Nas instalações atuais, `projectStatus`
+fica habilitado em `.sinapse-ai/core-config.yaml` e carrega automaticamente na
+ativação dos agentes. O loader detecta o repositório Git e mantém
+`.sinapse/project-status.yaml` como cache de runtime.
 
 **Configuração Manual Alternativa:**
 
@@ -219,19 +211,24 @@ Mostra apenas stories com status: `InProgress` ou `In Progress`.
 
 ## Agentes Afetados
 
-Todos os 11 agentes SINAPSE exibem status do projeto:
+O SINAPSE inclui 172 agentes especializados em 17 squads. O status de projeto
+é uma capacidade compartilhada do framework; a lista abaixo é o subconjunto
+core de desenvolvimento, não o catálogo completo:
 
-1. **@dev** (Dex - Builder)
-2. **@po** (Pax - Balancer)
-3. **@qa** (Quinn - Guardian)
-4. **@sm** (River - Facilitator)
-5. **@pm** (Morgan - Strategist)
-6. **@architect** (Aria - Visionary)
-7. **@analyst** (Atlas - Decoder)
-8. **@devops** (Gage - Operator)
-9. **@data-engineer** (Dara - Sage)
-10. **@ux-design-expert** (Uma - Empathizer)
-11. **@sinapse-orqx** (Orion - Orchestrator)
+1. `developer` (Pixel)
+2. `product-lead` (Axis)
+3. `quality-gate` (Litmus)
+4. `sprint-lead` (Sync)
+5. `project-lead` (Beacon)
+6. `architect` (Stratum)
+7. `analyst` (Scope)
+8. `devops` (Pipeline)
+9. `data-engineer` (Tensor)
+10. `ux-design-expert` (Mosaic)
+11. `snps-orqx` (Imperator)
+
+Ative esses IDs com `@agent-id` no Claude Code ou `$sinapse-agent agent-id` no
+Codex; para roteamento principal no Codex, use `$snps`.
 
 ---
 
@@ -247,12 +244,9 @@ Todos os 11 agentes SINAPSE exibem status do projeto:
 3. O arquivo `.sinapse-ai/infrastructure/scripts/project-status-loader.js` existe?
 4. Há erros na saída de ativação do agente?
 
-**Solução:**
-```bash
-# Re-run initialization
-/devops
-*init-project-status
-```
+**Solução:** Execute `npx sinapse-ai@latest doctor`, confirme as verificações
+acima e reinicie a sessão do provider. O status recarrega automaticamente; não
+existe task pointer público `init-project-status` no Codex.
 
 ### Dados de Status Desatualizados
 
@@ -368,27 +362,14 @@ await clearCache();
 
 ### Remoção Completa
 
-Para remover completamente a funcionalidade:
+Não apague scripts, testes ou tasks do framework. Desabilite a funcionalidade
+em `.sinapse-ai/core-config.yaml` e remova somente o cache de runtime:
 
 ```bash
-# Remove script
-rm .sinapse-ai/infrastructure/scripts/project-status-loader.js
-
-# Remove task
-rm .sinapse-ai/tasks/init-project-status.md
-
-# Remove cache
 rm .sinapse/project-status.yaml
-
-# Remove tests
-rm .sinapse-ai/infrastructure/scripts/__tests__/project-status-loader.test.js
-
-# Remove config section from core-config.yaml
-# (manually edit file)
-
-# Revert agent files to pre-6.1.2.4 state
-git revert <commit-hash>
 ```
+
+Defina `projectStatus.enabled: false`; os arquivos protegidos permanecem instalados.
 
 ---
 
@@ -463,7 +444,7 @@ R: Sim, todos os agentes usam o mesmo arquivo de cache (`.sinapse/project-status
 - **Story:** `docs/stories/sinapse migration/story-6.1.2.4-project-status-context.md`
 - **Config:** `.sinapse-ai/core-config.yaml` (seção projectStatus)
 - **Script:** `.sinapse-ai/infrastructure/scripts/project-status-loader.js`
-- **Task de Init:** `.sinapse-ai/tasks/init-project-status.md`
+- **Inicialização:** automática quando `projectStatus.enabled` está habilitado
 - **Testes:** `.sinapse-ai/infrastructure/scripts/__tests__/project-status-loader.test.js`
 
 ---
@@ -471,4 +452,3 @@ R: Sim, todos os agentes usam o mesmo arquivo de cache (`.sinapse/project-status
 **Versão:** 1.0
 **Status:** Pronto para Produção
 **Última Atualização:** 2025-01-14
-
