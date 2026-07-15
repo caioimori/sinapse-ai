@@ -91,6 +91,32 @@ describe('global provider adapters', () => {
     expect(result.skills).not.toContain('snps');
   });
 
+  test('updates an existing managed skill atomically', () => {
+    const skillPath = path.join(home, '.agents', 'skills', 'snps', 'SKILL.md');
+    fs.mkdirSync(path.dirname(skillPath), { recursive: true });
+    fs.writeFileSync(skillPath, '<!-- SINAPSE-MANAGED:global-skill -->\nold\n');
+
+    const result = deliverGlobalProviderAdapters({ llmChoice: 'codex', home, commandsDir });
+
+    expect(result.skills).toContain('snps');
+    expect(fs.readFileSync(skillPath, 'utf8')).toContain('# SINAPSE Global Orchestrator');
+    expect(fs.readdirSync(path.dirname(skillPath)).filter((name) => name.endsWith('.tmp'))).toEqual([]);
+  });
+
+  test('does not follow a user-owned skill symlink', () => {
+    if (process.platform === 'win32') return;
+    const targetPath = path.join(root, 'user-skill.md');
+    const skillPath = path.join(home, '.agents', 'skills', 'snps', 'SKILL.md');
+    fs.mkdirSync(path.dirname(skillPath), { recursive: true });
+    fs.writeFileSync(targetPath, '<!-- SINAPSE-MANAGED:global-skill -->\nuser target\n');
+    fs.symlinkSync(targetPath, skillPath);
+
+    const result = deliverGlobalProviderAdapters({ llmChoice: 'codex', home, commandsDir });
+
+    expect(result.skills).not.toContain('snps');
+    expect(fs.readFileSync(targetPath, 'utf8')).toContain('user target');
+  });
+
   test('global command generation includes mirrored core agents', () => {
     const coreDir = path.join(root, 'core');
     const agentDir = path.join(coreDir, 'agents');

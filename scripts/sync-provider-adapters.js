@@ -16,11 +16,35 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 const CLAUDE_AGENTS_DIR = '.claude/agents';
 const CLAUDE_SKILLS_DIR = '.claude/skills';
 
+function writeFileAtomically(filePath, content) {
+  const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  let handle;
+  try {
+    handle = fs.openSync(temporaryPath, 'wx', 0o600);
+    fs.writeFileSync(handle, content, 'utf8');
+    fs.fsyncSync(handle);
+    fs.closeSync(handle);
+    handle = undefined;
+    fs.renameSync(temporaryPath, filePath);
+  } finally {
+    if (handle !== undefined) fs.closeSync(handle);
+    try { fs.unlinkSync(temporaryPath); } catch { /* already published or cleanup is best-effort */ }
+  }
+}
+
 function writeFileIfChanged(filePath, content) {
-  if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf8') === content) return 'unchanged';
-  const status = fs.existsSync(filePath) ? 'updated' : 'created';
+  let existing = null;
+  try {
+    existing = fs.readFileSync(filePath, 'utf8');
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  if (existing !== null && existing.replace(/\r\n/g, '\n') === content.replace(/\r\n/g, '\n')) {
+    return 'unchanged';
+  }
+  const status = existing === null ? 'created' : 'updated';
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, content, 'utf8');
+  writeFileAtomically(filePath, content);
   return status;
 }
 

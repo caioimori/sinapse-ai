@@ -195,8 +195,10 @@ echo "[check2] @developer file exists: $([ $CHECK2 -eq 0 ] && echo PASS || echo 
 # This is EXPECTED — doctor correctly detects the missing setup.
 #
 # What the matrix validates: the doctor command itself runs and
-# produces a structured report (exit 0/1/2). Only exit 3
-# (internal runner crash) indicates a real packaging problem.
+# produces a structured report (exit 0/1/2), or exit 4 when the framework is
+# installed as a package but has not been initialized in the empty test dir.
+# Only exit 3 (internal runner crash) or an unknown code indicates a packaging
+# problem.
 # ------------------------------------------------------------
 CHECK3=1
 DOCTOR_EXIT=255
@@ -204,7 +206,7 @@ set +e
 eval "$SINAPSE_INVOKE doctor --quiet" >/dev/null 2>&1
 DOCTOR_EXIT=$?
 set -e 2>/dev/null || true
-if [ "$DOCTOR_EXIT" -le 2 ]; then
+if [ "$DOCTOR_EXIT" -le 2 ] || [ "$DOCTOR_EXIT" -eq 4 ]; then
   CHECK3=0
 fi
 echo "[check3] sinapse doctor exit: $DOCTOR_EXIT ($([ $CHECK3 -eq 0 ] && echo PASS || echo FAIL))"

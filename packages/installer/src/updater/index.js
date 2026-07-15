@@ -781,14 +781,14 @@ class SINAPSEUpdater {
       const installResult = await installGlobalAgents();
       result.installed = installResult.count;
       if (installResult.errors.length > 0) {
-        console.log(`  Agent install warnings: ${installResult.errors.join(', ')}`);
+        console.log(`  Agent install warnings: ${sanitizeLogText(installResult.errors.join(', '))}`);
       }
 
       result.migrated = true;
       console.log(`  v6 migration complete: ${result.removed} removed, ${result.installed} installed`);
     } catch (error) {
       // Migration errors should not block the update
-      console.log(`  v6 migration warning: ${error.message}`);
+      console.log(`  v6 migration warning: ${sanitizeLogText(error.message)}`);
     }
 
     return result;
@@ -805,11 +805,15 @@ class SINAPSEUpdater {
    */
   log(message) {
     if (this.options.verbose) {
-      // eslint-disable-next-line no-control-regex
-      const sanitized = String(message).replace(/[\x00-\x08\x0B-\x1F\x7F]/g, '');
+      const sanitized = sanitizeLogText(message);
       console.log(`[SINAPSEUpdater] ${sanitized}`);
     }
   }
+}
+
+function sanitizeLogText(value) {
+  // eslint-disable-next-line no-control-regex
+  return String(value).replace(/[\x00-\x1F\x7F\u2028\u2029]/g, ' ');
 }
 
 /**
@@ -937,4 +941,5 @@ module.exports = {
   FileAction,
   formatCheckResult,
   formatUpdateResult,
+  sanitizeLogText,
 };

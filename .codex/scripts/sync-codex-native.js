@@ -296,11 +296,20 @@ function collectNativeAgentDefinitions(projectRoot = PROJECT_ROOT) {
 }
 
 function writeFileIfChanged(filePath, content) {
-  if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf8') === content) {
+  let existing = null;
+  try {
+    existing = fs.readFileSync(filePath, 'utf8');
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+
+  // Git may check text files out as CRLF on Windows while generators emit LF.
+  // Treat newline-only differences as identical so repeated syncs are stable.
+  if (existing !== null && existing.replace(/\r\n/g, '\n') === content.replace(/\r\n/g, '\n')) {
     return 'unchanged';
   }
 
-  const status = fs.existsSync(filePath) ? 'updated' : 'created';
+  const status = existing === null ? 'created' : 'updated';
   fs.writeFileSync(filePath, content, 'utf8');
   return status;
 }

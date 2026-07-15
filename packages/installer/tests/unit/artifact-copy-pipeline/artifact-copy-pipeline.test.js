@@ -195,10 +195,27 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
 
     test('covers all known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(15);
-      expect(keys).toContain('synapse-engine.cjs');
-      expect(keys).toContain('code-intel-pretool.cjs');
-      expect(keys).toContain('precompact-session-digest.cjs');
+      expect(keys).toEqual(expect.arrayContaining([
+        'synapse-engine.cjs',
+        'code-intel-pretool.cjs',
+        'precompact-session-digest.cjs',
+        'enforce-architecture-first.cjs',
+        'enforce-story-gate.cjs',
+        'doc-first-gate.cjs',
+        'enforce-framework-boundary.cjs',
+        'enforce-permission-mode.cjs',
+        'enforce-nsn-guard.cjs',
+        'verify-packages.cjs',
+        'write-path-validation.cjs',
+        'enforce-delegation.cjs',
+        'secret-scanning.cjs',
+        'telemetry-post-tool.cjs',
+        'telemetry-stop.cjs',
+        'track-agent.cjs',
+        'track-agent-clear.cjs',
+        'track-delegation.cjs',
+      ]));
+      expect(keys).toHaveLength(18);
       expect(keys).toContain('enforce-architecture-first.cjs');
       expect(keys).toContain('enforce-story-gate.cjs');
       expect(keys).toContain('doc-first-gate.cjs');

@@ -35,6 +35,59 @@ function renderGlobalSkill(skillId) {
   ].join('\n');
 }
 
+function writeFileAtomically(filePath, content) {
+  const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  let handle;
+  try {
+    handle = fs.openSync(temporaryPath, 'wx', 0o600);
+    fs.writeFileSync(handle, content, 'utf8');
+    fs.fsyncSync(handle);
+    fs.closeSync(handle);
+    handle = undefined;
+    fs.renameSync(temporaryPath, filePath);
+  } finally {
+    if (handle !== undefined) fs.closeSync(handle);
+    try { fs.unlinkSync(temporaryPath); } catch { /* already published or cleanup is best-effort */ }
+  }
+}
+
+function writeGlobalSkillIfManaged(skillPath, content) {
+  fs.mkdirSync(path.dirname(skillPath), { recursive: true });
+
+  let handle;
+  try {
+    const noFollow = fs.constants.O_NOFOLLOW || 0;
+    handle = fs.openSync(skillPath, fs.constants.O_RDONLY | noFollow);
+  } catch (error) {
+    if (error.code === 'ELOOP') return false;
+    if (error.code !== 'ENOENT') throw error;
+    try {
+      handle = fs.openSync(skillPath, 'wx');
+    } catch (createError) {
+      if (createError.code === 'EEXIST') return writeGlobalSkillIfManaged(skillPath, content);
+      throw createError;
+    }
+    try {
+      fs.writeFileSync(handle, content, 'utf8');
+      return true;
+    } finally {
+      fs.closeSync(handle);
+    }
+  }
+
+  try {
+    if (!fs.fstatSync(handle).isFile()) return false;
+    const existing = fs.readFileSync(handle, 'utf8');
+    if (!existing.includes('SINAPSE-MANAGED:global-skill')) return false;
+    fs.closeSync(handle);
+    handle = undefined;
+    writeFileAtomically(skillPath, content);
+    return true;
+  } finally {
+    if (handle !== undefined) fs.closeSync(handle);
+  }
+}
+
 function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir }) {
   const commandFiles = fs.existsSync(commandsDir)
     ? fs.readdirSync(commandsDir).filter((file) => file.endsWith('.md')).sort()
@@ -65,11 +118,8 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir }) {
     const skillsRoot = path.join(home, '.agents', 'skills');
     for (const skillId of ['snps', 'sinapse', 'snps-orqx', 'sinapse-agent']) {
       const skillDir = path.join(skillsRoot, skillId);
-      fs.mkdirSync(skillDir, { recursive: true });
       const skillPath = path.join(skillDir, 'SKILL.md');
-      const existing = fs.existsSync(skillPath) ? fs.readFileSync(skillPath, 'utf8') : null;
-      if (existing === null || existing.includes('SINAPSE-MANAGED:global-skill')) {
-        fs.writeFileSync(skillPath, renderGlobalSkill(skillId), 'utf8');
+      if (writeGlobalSkillIfManaged(skillPath, renderGlobalSkill(skillId))) {
         written.skills.push(skillId);
       }
     }
@@ -83,4 +133,4 @@ function getGlobalCommandStagingDir({ llmChoice, sinapseHome, claudeCommandsDir 
     : claudeCommandsDir;
 }
 
-module.exports = { parseAgentMarkdown, renderCodexToml, renderGlobalSkill, deliverGlobalProviderAdapters, getGlobalCommandStagingDir };
+module.exports = { parseAgentMarkdown, renderCodexToml, renderGlobalSkill, writeGlobalSkillIfManaged, deliverGlobalProviderAdapters, getGlobalCommandStagingDir };
