@@ -234,8 +234,9 @@ customizacoes ou criar logica operacional concorrente nos adapters.
   settings Claude registrado e superficies legadas ausentes.
 - Gates: lint sem erros (29 warnings preexistentes), typecheck, paridade,
   referencias externas, manifesto e release readiness aprovados (12/12).
-- Validacao pos-correcoes: release readiness executou lint e typecheck em PASS;
-  a suite completa final passou com 422 suites e 11.671 testes, zero falhas.
+- Validacao depois das correcoes: release readiness executou lint e typecheck
+  em PASS; a execucao completa final passou com 422 grupos de testes e 11.671
+  testes, zero falhas.
   O projeto e um framework CLI e nao define script `build`, portanto o gate de
   build e nao aplicavel. O unico gate de publish safety que falha apos a release
   e a protecao esperada contra republicar `1.25.1` sobre o mesmo `npm latest`;
