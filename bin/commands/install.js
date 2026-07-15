@@ -560,7 +560,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
-  const { writtenAgents, totalAgents } = regenerateAgentCommands({
+  const { writtenAgents, canonicalAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
     commandsDir: commandStagingDir,
     squads,
@@ -571,7 +571,11 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
-  const activeAgentCount = assertProviderAdapterParity(llmChoice, globalAdapters, totalAgents);
+  const activeAgentCount = assertProviderAdapterParity(
+    llmChoice,
+    globalAdapters,
+    canonicalAgents,
+  );
   const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   const installedIdes = [];
   if (globalAdapters.claude.length) installedIdes.push('claude-code');

@@ -20,6 +20,7 @@ const { toForwardSlash, atomicWriteFileSync } = require('./fs-utils');
 // sync-counts uses so the master-stub headline can never drift from README/persona
 // (Constitution Article VII). Fails open to 0 if the dir is unavailable.
 const CORE_AGENTS_DIR = path.join(ROOT, '.sinapse-ai', 'development', 'agents');
+const { MASTER_ALIAS_ENTRY_POINTS } = require('./provider-contract');
 
 function countCoreAgents(dir = CORE_AGENTS_DIR) {
   try {
@@ -207,7 +208,7 @@ If the task requires expertise outside this squad:
  * @param {string} [deps.commandsDir] - Target commands dir.
  * @param {Array}  deps.squads - Squad descriptors ({ name, agents, ... }).
  * @param {string} [deps.sinapseMasterDest] - Path to the installed sinapse/ master squad.
- * @returns {{ writtenAgents: Set<string>, totalAgents: number }}
+ * @returns {{ writtenAgents: Set<string>, canonicalAgents: Array<{ id: string, file: string, origin: string }>, aliasEntryPoints: string[], totalAgents: number }}
  */
 function regenerateAgentCommands(deps = {}) {
   const {
@@ -222,20 +223,21 @@ function regenerateAgentCommands(deps = {}) {
     throw new Error('regenerateAgentCommands: `squads` array is required');
   }
 
-  fs.mkdirSync(commandsDir, { recursive: true });
-
-  // Clear old commands (dir may not exist on a fresh install — guarded).
-  try {
-    for (const f of fs.readdirSync(commandsDir)) {
-      fs.unlinkSync(path.join(commandsDir, f));
-    }
-  } catch { /* dir may not exist yet */ }
-
   const sinapseBase = toForwardSlash(sinapseHome);
   const writtenAgents = new Set();
+  const catalogById = new Map();
+  const definitions = [];
 
-  // 1. A command/subagent for EVERY agent (not only -orqx), so every specialist
-  //    is invokable via @agent and /SINAPSE:agents:agent.
+  function registerDefinition(definition) {
+    const previous = catalogById.get(definition.id);
+    if (previous) {
+      throw new Error(`Duplicate canonical agent ID "${definition.id}" from ${previous.origin} and ${definition.origin}`);
+    }
+    catalogById.set(definition.id, definition);
+    definitions.push(definition);
+  }
+
+  // Inventory every canonical definition before clearing or writing commands.
   for (const squad of squads) {
     const squadPath = `${sinapseBase}/${squad.name}`;
     const agentsDir = path.join(sinapseHome, squad.name, 'agents');
@@ -244,10 +246,14 @@ function regenerateAgentCommands(deps = {}) {
     const squadAgents = fs.readdirSync(agentsDir).filter(f => f.endsWith('.md'));
     for (const file of squadAgents) {
       const agentId = file.replace('.md', '');
-      const meta = extractAgentMeta(path.join(agentsDir, file));
-      const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, squad.name, squadPath, file);
-      atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
-      writtenAgents.add(file);
+      registerDefinition({
+        id: agentId,
+        file,
+        origin: path.join(agentsDir, file),
+        squadName: squad.name,
+        squadPath,
+        hasManifest: true,
+      });
     }
   }
 
@@ -257,29 +263,37 @@ function regenerateAgentCommands(deps = {}) {
   if (fs.existsSync(coreAgentsDir)) {
     const coreBase = toForwardSlash(coreDevelopmentDest);
     for (const file of fs.readdirSync(coreAgentsDir).filter(f => f.endsWith('.md'))) {
-      if (file === 'README.md' || file === 'MEMORY.md' || file.startsWith('_') || writtenAgents.has(file)) continue;
+      if (file === 'README.md' || file === 'MEMORY.md' || file.startsWith('_')) continue;
       const agentId = file.replace('.md', '');
-      const meta = extractAgentMeta(path.join(coreAgentsDir, file));
-      const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'core', coreBase, file, { hasManifest: false });
-      atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
-      writtenAgents.add(file);
+      registerDefinition({
+        id: agentId,
+        file,
+        origin: path.join(coreAgentsDir, file),
+        squadName: 'core',
+        squadPath: coreBase,
+        hasManifest: false,
+      });
     }
   }
 
-  // 2. Commands for sinapse/ master squad agents.
-  if (fs.existsSync(sinapseMasterDest)) {
-    const masterAgentsDir = path.join(sinapseMasterDest, 'agents');
-    if (fs.existsSync(masterAgentsDir)) {
-      for (const file of fs.readdirSync(masterAgentsDir).filter(f => f.endsWith('.md'))) {
-        if (writtenAgents.has(file)) continue;
-        const agentId = file.replace('.md', '');
-        const meta = extractAgentMeta(path.join(masterAgentsDir, file));
-        const squadPath = `${sinapseBase}/sinapse`;
-        const cmdContent = generateCommandMd(agentId, meta.name, meta.icon, 'sinapse', squadPath, file);
-        atomicWriteFileSync(path.join(commandsDir, `${agentId}.md`), cmdContent);
-        writtenAgents.add(file);
-      }
-    }
+  fs.mkdirSync(commandsDir, { recursive: true });
+  for (const file of fs.readdirSync(commandsDir)) {
+    fs.unlinkSync(path.join(commandsDir, file));
+  }
+
+  for (const definition of definitions) {
+    const meta = extractAgentMeta(definition.origin);
+    const cmdContent = generateCommandMd(
+      definition.id,
+      meta.name,
+      meta.icon,
+      definition.squadName,
+      definition.squadPath,
+      definition.file,
+      { hasManifest: definition.hasManifest },
+    );
+    atomicWriteFileSync(path.join(commandsDir, definition.file), cmdContent);
+    writtenAgents.add(definition.file);
   }
 
   // 3. Master entry points (@sinapse, @snps, @sinapse-orqx, @snps-orqx) → rich
@@ -301,7 +315,16 @@ function regenerateAgentCommands(deps = {}) {
     }
   }
 
-  return { writtenAgents, totalAgents: writtenAgents.size };
+  const aliasEntryPoints = [...MASTER_ALIAS_ENTRY_POINTS]
+    .filter((id) => writtenAgents.has(`${id}.md`));
+  const canonicalAgents = definitions.map(({ id, file, origin }) => ({ id, file, origin }));
+
+  return {
+    writtenAgents,
+    canonicalAgents,
+    aliasEntryPoints,
+    totalAgents: canonicalAgents.length,
+  };
 }
 
 module.exports = {
@@ -309,4 +332,5 @@ module.exports = {
   generateMasterStub,
   regenerateAgentCommands,
   countCoreAgents,
+  MASTER_ALIAS_ENTRY_POINTS,
 };
