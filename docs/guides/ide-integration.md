@@ -32,7 +32,7 @@ Both providers expose native lifecycle surfaces. Their registration models diffe
 | Measured surface | Claude Code | Codex CLI |
 | --- | --- | --- |
 | Native agents | 172 | 172 |
-| Installed skills | 36 | 37 |
+| Installed skills | 37 | 37 |
 | Registered hooks | 20 native registrations | 9 lifecycle events through the bridge |
 | Activation | `@agent-name` | `$snps` or `$sinapse-agent <id>` |
 

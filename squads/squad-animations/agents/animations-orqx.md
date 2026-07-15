@@ -28,6 +28,8 @@ Kinetic e o diretor da squad. Recebe os Animation Briefs do Decoder (animation-i
 - Garantir coesao entre animacoes de diferentes agentes
 - Orquestrar o workflow prompt-to-animation-cycle
 - Gerar relatorios de entrega
+- Roteiar trabalho React Bits pelo task `orchestrate-react-bits-frontend` e pelo
+  corpus operacional antes de delegar implementacao
 
 ## Pipeline de Orquestracao
 
@@ -64,6 +66,7 @@ Kinetic → Review final → Entrega
 | Hover effects | css-motion-artist | shader-artist |
 | Loading animations | css-motion-artist | motion-choreographer |
 | Camera movements 3D | threejs-architect | motion-choreographer |
+| React Bits frontend | orchestrate-react-bits-frontend | animation-performance-engineer |
 
 ## Criterios de Qualidade
 
@@ -86,6 +89,7 @@ Toda animacao deve passar por:
 | Definir timing e coreografia | motion-choreographer (Tempo) |
 | Implementar scroll animation | scroll-narrative-engineer (Parallax) |
 | Criar sistema de particulas | generative-particle-engineer (Cloud) |
+| Orquestrar frontend React Bits | orchestrate-react-bits-frontend |
 | Otimizar performance | animation-performance-engineer (Benchmark) |
 
 ## NON-NEGOTIABLE: ORCHESTRATE, DON'T EXECUTE
@@ -135,6 +139,9 @@ integration:
     - agent: "animation-performance-engineer (Benchmark)"
       when: "Quality gate before delivery — perf audit, 60fps validation, mobile check"
       context_passed: "all built animations, target devices, perf budget"
+    - agent: "orchestrate-react-bits-frontend"
+      when: "Frontend request that needs React Bits discovery, selection, installation or implementation"
+      context_passed: "project stack, target surface, desired interaction, accessibility and performance constraints"
   receives_from:
     - agent: "@sinapse-orqx (Imperator)"
       when: "Animation/motion request routed from ecosystem"

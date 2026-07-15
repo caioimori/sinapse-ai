@@ -20,10 +20,10 @@ describe('cross-provider native adapters', () => {
     const first = syncClaudeNative(PROJECT_ROOT);
     const second = syncClaudeNative(PROJECT_ROOT);
     expect(first.agents.total).toBe(172);
-    expect(first.skills.total).toBe(36);
+    expect(first.skills.total).toBe(37);
     expect(second).toMatchObject({
       agents: { updated: 0, unchanged: 172 },
-      skills: { updated: 0, unchanged: 36 },
+      skills: { updated: 0, unchanged: 37 },
     });
     expect(validateClaudeNative(PROJECT_ROOT)).toMatchObject({ ok: true, errors: [] });
   });

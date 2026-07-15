@@ -36,6 +36,10 @@ const {
 } = require('./uninstall');
 const { regenerateAgentCommands } = require('../lib/command-generator');
 const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
+const {
+  copyReactBitsCapabilitySync,
+  REACT_BITS_SKILL_RELATIVE_PATH,
+} = require('../../packages/installer/src/installer/react-bits-corpus');
 const { assertProviderAdapterParity } = require('../lib/provider-parity');
 const { execSync } = require('child_process');
 
@@ -164,6 +168,9 @@ async function cmdUpdateGlobal() {
     logger.always(`  ${GREEN}OK${NC} core development`);
   }
 
+  const reactBits = copyReactBitsCapabilitySync(ROOT, SINAPSE_HOME);
+  if (reactBits.files.length) logger.always(`  ${GREEN}OK${NC} React Bits corpus (${reactBits.files.length} files)`);
+
   // Phase 2: Regenerate commands — shared with `install` so `update` produces the
   // SAME complete set (every specialist command + the rich master Imperator stubs),
   // not just the `-orqx` subset it used to write.
@@ -180,7 +187,12 @@ async function cmdUpdateGlobal() {
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
-  const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  const globalAdapters = deliverGlobalProviderAdapters({
+    llmChoice,
+    home: HOME,
+    commandsDir: commandStagingDir,
+    reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+  });
   const activeAgentCount = assertProviderAdapterParity(
     llmChoice,
     globalAdapters,

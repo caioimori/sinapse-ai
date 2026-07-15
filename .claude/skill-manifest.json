@@ -1,6 +1,7 @@
 {
   "version": 1,
   "skillIds": [
+    "react-bits-frontend",
     "sinapse",
     "sinapse-agent",
     "sinapse-analyst",

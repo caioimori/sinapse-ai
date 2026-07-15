@@ -68,6 +68,8 @@ describe('Codex native clean-project installation', () => {
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'snps', 'SKILL.md'))).toBe(true);
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'sinapse', 'SKILL.md'))).toBe(true);
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'sinapse-agent', 'SKILL.md'))).toBe(true);
+      expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'react-bits-frontend', 'SKILL.md'))).toBe(true);
+      expect(await fs.pathExists(path.join(targetDir, 'docs', 'framework', 'react-bits', 'index.md'))).toBe(true);
       expect(await fs.pathExists(path.join(fakeHome, '.codex'))).toBe(false);
 
       const customSkill = path.join(targetDir, '.agents', 'skills', 'user-custom', 'SKILL.md');

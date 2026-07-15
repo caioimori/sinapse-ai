@@ -8,6 +8,11 @@ const yaml = require('js-yaml');
 const legacyClaudeCommandHashes = require('../packages/installer/src/migrations/legacy-claude-agent-command-hashes.json');
 
 const { validateNativeCodex } = require('../.codex/scripts/validate-codex-native');
+const {
+  REACT_BITS_CORPUS_RELATIVE_PATH,
+  REQUIRED_REACT_BITS_CORPUS_FILES,
+  hasCompleteReactBitsCorpus,
+} = require('../packages/installer/src/installer/react-bits-corpus');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
@@ -125,9 +130,12 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
   try {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     expectedSkills = (manifest.skillIds || []).map((skillId) => ({ skillId }));
-    if (expectedSkills.length !== 36) errors.push(`Claude skill manifest must contain 36 IDs, found ${expectedSkills.length}`);
+    if (expectedSkills.length !== 37) errors.push(`Claude skill manifest must contain 37 IDs, found ${expectedSkills.length}`);
     for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx', 'sinapse-agent']) {
       if (!manifest.skillIds.includes(alias)) errors.push(`Claude skill manifest is missing public alias ${alias}`);
+    }
+    if (!manifest.skillIds.includes('react-bits-frontend')) {
+      errors.push('Claude skill manifest is missing react-bits-frontend');
     }
   } catch (error) {
     errors.push(`Claude skill manifest: ${error.message}`);
@@ -209,6 +217,17 @@ function validateProviderAdapters(projectRoot = PROJECT_ROOT) {
     if (!pkg.files.includes(entry)) errors.push(`package.json files[] is missing ${entry}`);
   }
   if (pkg.files.includes('.codex/skills/')) errors.push('package.json must not publish the legacy .codex/skills root');
+  if (!hasCompleteReactBitsCorpus(projectRoot)) {
+    errors.push(`React Bits corpus is incomplete: expected ${REQUIRED_REACT_BITS_CORPUS_FILES.length} files under ${REACT_BITS_CORPUS_RELATIVE_PATH}`);
+  }
+  for (const relativePath of [
+    path.join('.agents', 'skills', 'react-bits-frontend', 'SKILL.md'),
+    path.join('.claude', 'skills', 'react-bits-frontend', 'SKILL.md'),
+  ]) {
+    if (!fs.existsSync(path.join(projectRoot, relativePath))) {
+      errors.push(`React Bits provider skill is missing: ${relativePath}`);
+    }
+  }
   return {
     ok: errors.length === 0,
     errors,
@@ -240,4 +259,5 @@ module.exports = {
   validateClaudeHookSettings,
   validateClaudeNative,
   validateProviderAdapters,
+  REQUIRED_REACT_BITS_CORPUS_FILES,
 };

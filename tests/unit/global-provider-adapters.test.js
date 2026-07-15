@@ -100,6 +100,31 @@ describe('global provider adapters', () => {
     expect(fs.existsSync(path.join(home, '.codex', 'agents', `${SUPREME_PUBLIC_ID}.md`))).toBe(false);
   });
 
+  test.each(['claude-code', 'codex', 'both'])('delivers the React Bits skill for %s when capability source is supplied', (llmChoice) => {
+    const source = path.join(root, '.sinapse', '.agents', 'skills', 'react-bits-frontend', 'SKILL.md');
+    fs.mkdirSync(path.dirname(source), { recursive: true });
+    fs.writeFileSync(source, '---\nname: react-bits-frontend\ndescription: test\n---\n\n# React Bits\n');
+
+    const result = deliverGlobalProviderAdapters({
+      llmChoice, home, commandsDir, reactBitsSkillPath: source,
+    });
+
+    const skillPaths = [];
+    if (llmChoice === 'claude-code' || llmChoice === 'both') {
+      expect(result.claudeAvailableSkills).toContain('react-bits-frontend');
+      skillPaths.push(path.join(home, '.claude', 'skills', 'react-bits-frontend', 'SKILL.md'));
+    }
+    if (llmChoice === 'codex' || llmChoice === 'both') {
+      expect(result.availableSkills).toContain('react-bits-frontend');
+      skillPaths.push(path.join(home, '.agents', 'skills', 'react-bits-frontend', 'SKILL.md'));
+    }
+    for (const skillPath of skillPaths) {
+      expect(fs.readFileSync(skillPath, 'utf8')).toBe(
+        '---\nname: react-bits-frontend\ndescription: test\n---\n\n# React Bits\n\n<!-- SINAPSE-MANAGED:global-skill -->\n',
+      );
+    }
+  });
+
   test('keeps supreme aliases as skills instead of duplicate global agents', () => {
     writeCommand(commandsDir, SUPREME_ORCHESTRATOR_ID);
     writeCommand(commandsDir, 'sinapse');

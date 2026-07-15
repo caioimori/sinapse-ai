@@ -85,7 +85,7 @@ describe('dual CLI clean-install matrix', () => {
           path.join(path.dirname(legacyClaudeAgent), 'user-custom.md'),
         )).toBe(true);
         expect(installed.claudeNativeAgentFiles).toBe(172);
-        expect(installed.claudeNativeSkillFiles).toBe(36);
+        expect(installed.claudeNativeSkillFiles).toBe(37);
         const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
         expect(settings.language).toBe('Portuguese');
         expect(JSON.stringify(settings)).toContain('custom-hook.cjs');

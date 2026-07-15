@@ -331,7 +331,7 @@ Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowled
 | Agentes nativos | 172 | 172 |
 | Ativação direta | `@agent-name` | `$sinapse-agent agent-id` |
 | Roteamento principal | `@sinapse-orqx` | `$snps` |
-| Skills instaladas | 36 | 37 |
+| Skills instaladas | 37 | 37 |
 | Hooks registrados | 20 registros nativos | 9 eventos de lifecycle via bridge |
 | Fonte de validação | `npm run validate:providers` | `npm run validate:codex-native` |
 

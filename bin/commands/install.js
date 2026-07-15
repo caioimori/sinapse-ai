@@ -50,6 +50,10 @@ const {
 } = require('../lib/command-generator');
 const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
 const { assertProviderAdapterParity } = require('../lib/provider-parity');
+const {
+  copyReactBitsCapabilitySync,
+  REACT_BITS_SKILL_RELATIVE_PATH,
+} = require('../../packages/installer/src/installer/react-bits-corpus');
 // Follow-up #13 — wire the transactional backup/rollback engine into the
 // installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
 // to its previous state instead of leaving ~/.sinapse half-updated.
@@ -317,7 +321,12 @@ async function cmdInstallGlobal(opts = {}) {
   // rich, frontmatter'd stubs are always the final word. Idempotent.
   try {
     const commandsDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
-    const reconciled = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir });
+    const reconciled = deliverGlobalProviderAdapters({
+      llmChoice,
+      home: HOME,
+      commandsDir,
+      reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+    });
     const total = reconciled.claude.length + reconciled.codex.length + reconciled.skills.length;
     if (total) logger.always(`  ${GREEN}OK${NC} Global provider adapters reconciled (${total} artifacts)`);
   } catch (e) {
@@ -557,6 +566,9 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
     logger.always(`  ${GREEN}OK${NC} core development (${coreAgents} agents)`);
   }
 
+  const reactBits = copyReactBitsCapabilitySync(ROOT, SINAPSE_HOME);
+  if (reactBits.files.length) logger.always(`  ${GREEN}OK${NC} React Bits corpus (${reactBits.files.length} files)`);
+
   // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
@@ -570,7 +582,12 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
-  const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  const globalAdapters = deliverGlobalProviderAdapters({
+    llmChoice,
+    home: HOME,
+    commandsDir: commandStagingDir,
+    reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+  });
   const activeAgentCount = assertProviderAdapterParity(
     llmChoice,
     globalAdapters,

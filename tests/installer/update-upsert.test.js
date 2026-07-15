@@ -19,6 +19,7 @@ const path = require('path');
 const cli = require('../../bin/cli');
 const { assertProviderAdapterParity } = require('../../bin/commands/update');
 const { GLOBAL_PROVIDER_SKILL_IDS } = require('../../bin/lib/provider-contract');
+const { REQUIRED_GLOBAL_PROVIDER_SKILL_IDS } = require('../../bin/lib/provider-parity');
 
 const canonicalAgents = Array.from({ length: 172 }, (_, index) => `agent-${index}.md`);
 
@@ -34,19 +35,28 @@ describe('Story 10.22 — update upsert', () => {
     it('uses the canonical count when every selected provider matches', () => {
       expect(assertProviderAdapterParity('both', {
         claude: [...canonicalAgents],
-        claudeAvailableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        claudeAvailableSkills: REQUIRED_GLOBAL_PROVIDER_SKILL_IDS,
         codex: canonicalAgents.map((file) => file.replace(/\.md$/, '.toml')),
-        availableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        availableSkills: REQUIRED_GLOBAL_PROVIDER_SKILL_IDS,
       }, canonicalAgents)).toBe(172);
     });
 
     it('fails instead of masking a divergent provider with Math.max', () => {
       expect(() => assertProviderAdapterParity('both', {
         claude: [...canonicalAgents],
-        claudeAvailableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        claudeAvailableSkills: REQUIRED_GLOBAL_PROVIDER_SKILL_IDS,
         codex: canonicalAgents.slice(0, -1).map((file) => file.replace(/\.md$/, '.toml')),
-        availableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        availableSkills: REQUIRED_GLOBAL_PROVIDER_SKILL_IDS,
       }, canonicalAgents)).toThrow('Codex: 171/172');
+    });
+
+    it('fails when React Bits is absent from an otherwise complete provider inventory', () => {
+      expect(() => assertProviderAdapterParity('both', {
+        claude: [...canonicalAgents],
+        claudeAvailableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        codex: canonicalAgents.map((file) => file.replace(/\.md$/, '.toml')),
+        availableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+      }, canonicalAgents)).toThrow('react-bits-frontend');
     });
   });
 
