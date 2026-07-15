@@ -227,17 +227,19 @@ customizacoes ou criar logica operacional concorrente nos adapters.
 - Tasks: 1.412 arquivos; 14 slugs repetidos permanecem namespaced e possuem
   conteudo distinto, portanto nao constituem duplicidade operacional.
 - Tarball `sinapse-ai-1.25.1.tgz`: 4.340 entradas, 172 agents Claude, 172 agents
-  Codex, 37 skills nativas, zero `.codex/skills`, zero commands Claude legados e
-  zero residuos externos.
-- Smoke isolado do tarball: Claude-only `172/0`, Codex-only `0/172 + 37 skills`,
-  ambos `172/172 + 37 skills`; settings Claude registrado e superficies legadas
-  ausentes.
+  Codex, 36 skill adapters Claude e 37 skills nativas Codex, zero
+  `.codex/skills`, zero commands Claude legados e zero residuos externos.
+- Smoke isolado do tarball: Claude-only `172 agents + 36 skills`, Codex-only
+  `172 agents + 37 skills`, ambos `172/172 agents + 36/37 skills` por provider;
+  settings Claude registrado e superficies legadas ausentes.
 - Gates: lint sem erros (29 warnings preexistentes), typecheck, paridade,
   referencias externas, manifesto e release readiness aprovados (12/12).
-- Testes focados finais: 2 suites, 8 testes, todos aprovados. A suite completa
-  ja estava verde antes da correcao localizada final (421 suites, 11.637 testes);
-  a repeticao final excedeu 10 minutos por handles assincronos preexistentes, sem
-  reportar falha, risco residual registrado pelo Quality Gate.
+- Validacao pos-correcoes: release readiness executou lint e typecheck em PASS;
+  a suite completa final passou com 422 suites e 11.671 testes, zero falhas.
+  O projeto e um framework CLI e nao define script `build`, portanto o gate de
+  build e nao aplicavel. O unico gate de publish safety que falha apos a release
+  e a protecao esperada contra republicar `1.25.1` sobre o mesmo `npm latest`;
+  antes da publicacao, release readiness passou 12/12.
 - Boundary: `git diff --check` passou e nenhum path L1/L2 protegido foi alterado.
 - Release protegida: PR #382 mesclada em `main` no commit
   `7a5659f3f0639d8a97921329b3bdb043c28ab19b`; workflow Semantic Release
@@ -245,8 +247,9 @@ customizacoes ou criar logica operacional concorrente nos adapters.
 - Registry npm: `sinapse-ai@1.25.1` publico e `latest`, integridade
   `sha512-cgYScqJak/UDCAtMESdulGjXn2zAoX1B6IEMpBdGH36fFr87uSCpoBqSx4lwRB4TBnZrGjNviUBkeJS+4/LwaQ==`.
 - Smokes do registry: clean install e update `1.25.0 -> 1.25.1` aprovados em
-  Claude-only (`172 agents`, `36 skills`), Codex-only (`172 agents`, `37 skills`)
-  e ambos (`172/172 agents`, `36/37 skills`), sempre com providers isolados.
+  Claude-only (`172 agents`, `36 skill adapters Claude`), Codex-only
+  (`172 agents`, `37 skills nativas Codex`) e ambos (`172/172 agents`, com os
+  respectivos `36/37` por provider), sempre com providers isolados.
 
 ### File List
 
