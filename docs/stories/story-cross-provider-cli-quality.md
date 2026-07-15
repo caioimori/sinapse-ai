@@ -1,5 +1,5 @@
 ---
-status: Ready
+status: InProgress
 owner: sprint-lead
 executor: developer
 quality_gate: quality-gate
@@ -139,3 +139,90 @@ para suas capacidades nativas.
 - Authority: PASS - Sprint Lead especifica, Developer implementa, Quality Gate
   valida e somente DevOps pode executar operacoes remotas autorizadas.
 - Handoff: `@developer *develop docs/stories/story-cross-provider-cli-quality.md`.
+
+## Implementation record - public docs activation slice (2026-07-15)
+
+- Claude Code activation is documented with `@agent-name`; Codex activation is
+  documented with `$snps` or `$sinapse-agent <id>` in the public quickstart,
+  troubleshooting, installation index and FAQ.
+- README task metrics now come from the parametric runtime: 1,201 squad tasks,
+  211 development tasks, 1,412 task files and 1,348 resolvable pointers.
+- Article VII validates all four task scopes plus the 36/37 skill and 20/9 hook
+  surfaces, requires the complete breakdown in the public README and fails
+  closed when runtime/provider metrics are unavailable or malformed.
+- The install-doc validator scans EN and PT installation trees, rejects legacy
+  `/dev`, `@dev`, `/my-agent` and contextual Codex `/skills` activation while
+  preserving legitimate URLs (including `/codex/skills`), `/dev/null`, Claude
+  references and internal notes.
+- The English README mirrors the PT task/provider metrics and activation syntax.
+  EN/PT user guides declare the complete 172-agent/17-squad runtime and identify
+  their core-agent tables as excerpts rather than the full catalog.
+- Runtime task collection rejects zero inventories and reconciles
+  `squadTaskFiles` against the independent `sync-counts` squad total.
+- Current Codex configuration, IDE integration and project-status guides now use
+  only provider-native activation. The IDE guide publishes the measured
+  172-agent, 36/37-skill and 20/9-hook surfaces; project-status guides identify
+  their 11 listed core agents as a subset of the 172-agent catalog.
+- Project status is documented as automatic observability: the unsupported
+  `init-project-status` command flow and destructive protected-file removal were
+  removed from EN/PT mirrors. The public scanner blocks that command and the
+  retired `SINAPSE-FullStack` name.
+- Codex configuration references only real Claude/Codex sync scripts and the
+  measured adapter paths; tests verify representative `.claude/agents/sinapse-*`
+  and `.codex/agents/*.{toml,md}` files exist.
+- Project-status greeting examples now use the canonical `Pixel the Builder`
+  persona in EN/PT; the public-doc regression scanner rejects `Dex (Builder)`
+  and contextual standalone `(Dex)` references to the developer persona,
+  including the explicit `@developer (Dex)` form.
+- README squad activation examples now show provider-native Claude Code and
+  Codex syntax. EN/PT FAQs describe the current adapter paths and the measured
+  172-agent/17-squad catalog instead of legacy aliases and `11+` counts.
+- EN/PT installation FAQs, platform guides, troubleshooting and user guides now
+  document only the supported Claude Code/Codex surfaces. Current docs no longer
+  advertise Cursor, Gemini CLI or GitHub Copilot adapters, retired slash-agent
+  aliases, `.cursor/rules/` or `.claude/commands/` as an agent path.
+- Runtime metric collection limits the parametric resolver to 10 seconds by
+  default and exposes a validated timeout option for deterministic tests.
+- Article VII prose guards cover Claude Code hook registrations and Codex
+  lifecycle-event claims in English and Portuguese, with current and stale
+  regression fixtures for both providers.
+- Provider evidence: 172 agents in both adapters; 36 Claude skills; 37 Codex
+  skills; 20 Claude hook registrations; 9 Codex lifecycle events through the
+  compatibility bridge.
+- Validation: 39 focused tests passed; ESLint, `validate:article-vii`,
+  `validate:docs`, `validate:providers`, `validate:codex-native`,
+  `validate:parity` and all 13 `validate:all` guards passed. `npm pack --dry-run`
+  produced 4,341 entries and includes all 26 shipped docs/scripts changed in
+  this review slice; the implementation story and test sources are intentionally
+  excluded from the public tarball.
+
+### Slice file list
+
+- `README.md`
+- `README.en.md`
+- `docs/getting-started.md`
+- `docs/troubleshooting.md`
+- `docs/guides/user-guide.md`
+- `docs/pt/guides/user-guide.md`
+- `docs/guides/codex-config.md`
+- `docs/guides/ide-integration.md`
+- `docs/guides/project-status-feature.md`
+- `docs/pt/guides/project-status-feature.md`
+- `docs/installation/README.md`
+- `docs/installation/faq.md`
+- `docs/installation/linux.md`
+- `docs/installation/macos.md`
+- `docs/installation/troubleshooting.md`
+- `docs/installation/v4-quick-start.md`
+- `docs/installation/windows.md`
+- `docs/pt/installation/README.md`
+- `docs/pt/installation/faq.md`
+- `docs/pt/installation/linux.md`
+- `docs/pt/installation/macos.md`
+- `docs/pt/installation/troubleshooting.md`
+- `docs/pt/installation/v4-quick-start.md`
+- `docs/pt/installation/windows.md`
+- `scripts/validate-article-vii.js`
+- `scripts/validate-install-docs.js`
+- `tests/scripts/validate-article-vii.test.js`
+- `tests/scripts/validate-install-docs.test.js`

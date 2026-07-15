@@ -545,7 +545,8 @@ nvm use 16
 
 ### Problema 20: "Agents not appearing in IDE"
 
-**Sintomas:** Comandos de agentes (`/dev`, `@dev`) não funcionam após instalação.
+**Sintomas:** A ativação nativa (`@developer` no Claude Code ou
+`$sinapse-agent developer` no Codex) não funciona após a instalação.
 
 **Solução:**
 
@@ -556,8 +557,9 @@ nvm use 16
    # Claude Code
    ls .claude/agents/
 
-   # Cursor
-   ls .cursor/rules/
+   # Codex
+   ls .codex/agents/
+   ls .agents/skills/
    ```
 
 3. Verifique se as configurações da IDE permitem comandos customizados
@@ -574,10 +576,10 @@ nvm use 16
 
 **Solução:**
 
-1. Verifique se a versão da IDE é compatível
-2. Para Cursor: Certifique-se que os arquivos têm extensão `.mdc`
-3. Para Claude Code: Agentes nativos devem estar em `.claude/agents/`; `.claude/commands/` serve apenas para slash commands
-4. Reinicie a IDE após a instalação
+1. Verifique se a versão do provedor é compatível.
+2. Para Claude Code, os agentes nativos devem estar em `.claude/agents/`.
+3. Para Codex, verifique `.codex/agents/` e `.agents/skills/`.
+4. Reinicie o provedor após a instalação.
 
 ---
 
@@ -698,7 +700,7 @@ ls -la .sinapse-ai/
 - SO: [Windows 11 / macOS 14 / Ubuntu 22.04]
 - Versão Node.js: [saída de `node --version`]
 - Versão npm: [saída de `npm --version`]
-- IDE: [Claude Code / Cursor / etc.]
+- Provedor: [Claude Code / Codex CLI]
 
 **Passos para Reproduzir:**
 1. [Primeiro passo]

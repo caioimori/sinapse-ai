@@ -27,14 +27,22 @@ Se algo falhar: `npx sinapse-ai doctor --fix` corrige automaticamente.
 
 ## Ativar primeiro agente
 
-No prompt do Claude Code ou Codex:
+No Claude Code:
 
-```
+```text
 @developer
 *help
 ```
 
-`@developer` ativa o agente de implementação. `*help` lista comandos disponíveis.
+No Codex, use o roteador ou a ativação direta:
+
+```text
+$snps
+$sinapse-agent developer
+```
+
+`@developer` e `*help` pertencem à superfície do Claude Code. No Codex, `$snps`
+roteia a solicitação e `$sinapse-agent developer` ativa o agente de implementação.
 
 ## Próximos passos
 
@@ -61,9 +69,9 @@ npx sinapse-ai uninstall               # remove tudo
 ## Conceitos chave (em 30 segundos)
 
 - **Squad**: equipe de agentes especializados (ex: squad-design tem 15 agentes de design/UX)
-- **Agente**: persona de IA com expertise e comandos específicos (`@developer`, `@architect`, etc.)
+- **Agente**: persona de IA com especialização e comandos específicos (`@developer` no Claude Code; `$sinapse-agent developer` no Codex)
 - **Hook**: enforcement runtime que bloqueia violações da Constitution (ex: PR sem story)
-- **Constitution**: 10 artigos que governam o framework (ver `.sinapse-ai/constitution.md`)
+- **Constitution**: 11 artigos que governam o framework (ver `.sinapse-ai/constitution.md`)
 - **Story**: arquivo `.md` que documenta requisitos antes do código (Documentation-First)
 
 ---

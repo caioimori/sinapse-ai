@@ -155,8 +155,9 @@ The installer automatically:
 
 - ✅ Detects Windows and applies platform-specific configurations
 - ✅ Creates necessary directories with proper permissions
-- ✅ Configures IDE paths for Windows locations:
-  - Claude: `%USERPROFILE%\.claude\`
+- ✅ Configures provider adapters in the project:
+  - Claude Code agents: `.claude\agents\`
+  - Codex agents and skills: `.codex\agents\` and `.agents\skills\`
 - ✅ Handles Windows path separators (backslashes)
 - ✅ Configures line endings correctly (CRLF for batch, LF for scripts)
 - ✅ Sets up npm scripts compatible with cmd.exe and PowerShell
@@ -165,16 +166,15 @@ The installer automatically:
 
 ## IDE-Specific Setup
 
-### Claude Code (CLI)
+### Claude Code
 
-1. Install Claude Code:
+1. Agent adapters are installed in `.claude\agents\`.
+2. Use `@developer` or another canonical agent ID to activate an agent.
 
-   ```powershell
-   npm install -g @anthropic-ai/claude-code
-   ```
+### Codex
 
-2. Commands are installed to `.claude\commands\SINAPSE\`
-3. Use `/agent-name` to activate agents
+1. Agent descriptors are installed in `.codex\agents\`, with skills in `.agents\skills\`.
+2. Use `$snps` for routing or `$sinapse-agent developer` for direct activation.
 
 ---
 
@@ -403,12 +403,8 @@ See the complete [Uninstallation Guide](./uninstallation.md) for detailed steps.
 Quick uninstall via PowerShell:
 
 ```powershell
-# Remove SINAPSE from project
-Remove-Item -Recurse -Force .sinapse-ai
-Remove-Item -Recurse -Force .claude\commands\SINAPSE
-
-# Remove global npm packages
-npm uninstall -g @sinapse/sinapse
+# Remove SINAPSE through the package-managed uninstaller
+npx sinapse-ai uninstall
 ```
 
 ---

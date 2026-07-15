@@ -75,11 +75,11 @@ npx sinapse-ai install
 The installer will:
 
 - Create `.sinapse-ai/` directory (framework files)
-- Create IDE configuration (`.claude/`, etc.)
+- Create Claude Code and Codex adapters (`.claude/`, `.codex/`, and `.agents/skills/`)
 - NOT modify your existing source code
 - NOT overwrite existing documentation unless you choose to
 
-**Important:** If you have an existing `.claude/` directory, the installer will ask before modifying.
+**Important:** Existing provider directories are reconciled conservatively; keep custom files outside framework-managed adapter names.
 
 ---
 
@@ -106,26 +106,26 @@ Factors affecting installation time:
 
 **Answer:** SINAPSE creates the following structure:
 
-```
+```text
 your-project/
-├── .sinapse-ai/                 # Framework core (200+ files)
-│   ├── agents/                 # 11+ agent definitions
-│   ├── tasks/                  # 60+ task workflows
-│   ├── templates/              # 20+ document templates
-│   ├── checklists/             # Validation checklists
-│   ├── scripts/                # Utility scripts
-│   └── core-config.yaml        # Framework configuration
+├── .sinapse-ai/                 # Runtime, configuration, and development assets
+│   └── core-config.yaml         # Framework configuration
 │
 ├── .claude/                    # Claude Code (if selected)
-│   └── agents/                    # Native Claude agents
+│   ├── agents/                 # Native Claude agent adapters
+│   └── skills/                 # Claude Code skills
+│
+├── .codex/                     # Codex (if selected)
+│   └── agents/                 # Native Codex agent descriptors
+│
+├── .agents/skills/             # Codex-compatible SINAPSE skills
 │
 ├── docs/                       # Documentation structure
 │   ├── stories/                # Development stories
 │   ├── architecture/           # Architecture docs
 │   └── prd/                    # Product requirements
 │
-└── Squads/            # (if installed)
-    └── squad-brand/             # HybridOps pack
+└── squads/                      # 17 squad definitions and their assets
 ```
 
 ---
@@ -219,8 +219,19 @@ mv .sinapse-ai.backup .sinapse-ai
 # Install once with internet
 npx sinapse-ai install
 
-# Package for offline use
-tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/
+# Package every available component (macOS, Linux, or Git Bash)
+set --
+for path in .sinapse-ai .claude .codex .agents squads; do
+  [ ! -e "$path" ] || set -- "$@" "$path"
+done
+tar -czvf sinapse-offline.tar.gz "$@"
+```
+
+```powershell
+# PowerShell: omit provider directories that are not installed
+$paths = @('.sinapse-ai', '.claude', '.codex', '.agents', 'squads') |
+  Where-Object { Test-Path -LiteralPath $_ }
+tar -czvf sinapse-offline.tar.gz $paths
 ```
 
 **On air-gapped machine:**
@@ -251,7 +262,20 @@ tar -xzvf sinapse-offline.tar.gz
    # Install and package
    npx sinapse-ai install
    cd your-project
-   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ docs/
+
+   # Include every component that exists (macOS, Linux, or Git Bash)
+   set --
+   for path in .sinapse-ai .claude .codex .agents squads docs; do
+     [ ! -e "$path" ] || set -- "$@" "$path"
+   done
+   tar -czvf sinapse-transfer.tar.gz "$@"
+   ```
+
+   ```powershell
+   # PowerShell equivalent
+   $paths = @('.sinapse-ai', '.claude', '.codex', '.agents', 'squads', 'docs') |
+     Where-Object { Test-Path -LiteralPath $_ }
+   tar -czvf sinapse-transfer.tar.gz $paths
    ```
 
 2. **Transfer the archive** via USB, secure transfer, etc.
@@ -273,18 +297,26 @@ tar -xzvf sinapse-offline.tar.gz
 
 **Answer:**
 
-| IDE             | Status       | Agent Activation    |
-| --------------- | ------------ | ------------------- |
-| **Claude Code** | Full Support | `/dev`, `/qa`, etc. |
-| **Codex CLI**   | Limited      | `/skills` flow      |
+| IDE             | Status       | Agent Activation                    |
+| --------------- | ------------ | ----------------------------------- |
+| **Claude Code** | Full Support | `@developer`, `@quality-gate`, etc. |
+| **Codex CLI**   | Full Support | `$snps` or `$sinapse-agent <id>`    |
 
 ---
 
 ### Q12: Can I configure SINAPSE for multiple IDEs?
 
-**Answer:** Yes! Select multiple IDEs during installation:
+**Answer:** Yes. Claude Code and Codex can use the same canonical SINAPSE
+installation. Run `npx sinapse-ai install`; the installer generates the
+provider-native adapters:
 
-The installer configures supported IDEs automatically. Claude Code uses `.claude/commands/` for agent configuration.
+- Claude Code agents: `.claude/agents/`
+- Codex agents: `.codex/agents/`
+- Codex skills: `.agents/skills/`
+
+Activate with `@developer` in Claude Code or `$sinapse-agent developer` in
+Codex. Use `$snps` in Codex when you want the primary orchestrator to route the
+request.
 
 ---
 
@@ -299,7 +331,7 @@ If `.sinapse-ai/` is committed to your repository:
 git clone your-repo
 cd your-repo
 
-# Optionally configure their preferred IDE
+# Generate or reconcile the Claude Code and Codex adapters
 npx sinapse-ai install
 ```
 
@@ -319,55 +351,37 @@ npx sinapse-ai install
 
 ### Q14: What agents are included?
 
-**Answer:** SINAPSE includes 11+ specialized agents:
+**Answer:** SINAPSE includes **172 agents across 17 squads**. The squad layer
+contains 160 members, and the framework layer contains 12. The framework set is:
 
-| Agent           | Role                 | Best For                        |
-| --------------- | -------------------- | ------------------------------- |
-| `dev`           | Full-Stack Developer | Code implementation, debugging  |
-| `qa`            | QA Engineer          | Testing, code review            |
-| `architect`     | System Architect     | Design, architecture decisions  |
-| `pm`            | Project Manager      | Planning, tracking              |
-| `po`            | Product Owner        | Backlog, requirements           |
-| `sm`            | Scrum Master         | Facilitation, sprint management |
-| `analyst`       | Business Analyst     | Requirements analysis           |
-| `ux-expert`     | UX Designer          | User experience design          |
-| `data-engineer` | Data Engineer        | Data pipelines, ETL             |
-| `devops`        | DevOps Engineer      | CI/CD, deployment               |
-| `db-sage`       | Database Architect   | Schema design, queries          |
+| Agent | Persona | Role |
+| ----- | ------- | ---- |
+| `snps-orqx` | Imperator | Primary cross-squad orchestrator |
+| `developer` | Pixel | Full-stack implementation and debugging |
+| `quality-gate` | Litmus | Testing, review, and quality gates |
+| `architect` | Stratum | System architecture and technology decisions |
+| `project-lead` | Beacon | Product management and epics |
+| `product-lead` | Axis | Story validation and prioritization |
+| `sprint-lead` | Sync | Story creation and sprint facilitation |
+| `analyst` | Scope | Research and business analysis |
+| `data-engineer` | Tensor | Database design, migrations, and RLS |
+| `ux-design-expert` | Mosaic | UX/UI and design systems |
+| `devops` | Pipeline | CI/CD, exclusive push authority, and releases |
+| `squad-creator` | Loom | Squad creation and extension |
+
+In Claude Code, activate an agent with `@agent-id`. In Codex, use `$snps` for
+routing or `$sinapse-agent agent-id` for direct activation. Both providers
+resolve the same canonical agent and task sources.
 
 ---
 
 ### Q15: How do I create a custom agent?
 
-**Answer:**
-
-1. **Copy an existing agent:**
-
-   ```bash
-   cp .sinapse-ai/agents/developer.md .sinapse-ai/agents/my-agent.md
-   ```
-
-2. **Edit the YAML frontmatter:**
-
-   ```yaml
-   agent:
-     name: MyAgent
-     id: my-agent
-     title: My Custom Agent
-     icon: 🔧
-
-   persona:
-     role: Expert in [your domain]
-     style: [communication style]
-   ```
-
-3. **Add to IDE configuration:**
-
-   ```bash
-   npx sinapse-ai install --ide claude-code
-   ```
-
-4. **Activate:** `/my-agent` or `@my-agent`
+**Answer:** Keep framework agents immutable and create extensions through the
+squad workflow. In Claude Code, activate `@squad-creator`; in Codex, use
+`$sinapse-agent squad-creator`. After the squad definition is validated, run
+`npx sinapse-ai@latest install --reconfigure` to regenerate the selected provider
+adapters from the canonical source.
 
 ---
 
@@ -380,10 +394,10 @@ npx sinapse-ai install
 - Logs all decisions in `.ai/decision-log-{story-id}.md`
 - Can be stopped at any time
 
-**Enable yolo mode:**
+**Enable yolo mode:** Activate `@developer` in Claude Code or
+`$sinapse-agent developer` in Codex, then run:
 
-```bash
-/dev
+```text
 *develop-yolo docs/stories/your-story.md
 ```
 

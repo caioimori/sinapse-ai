@@ -48,12 +48,14 @@ cd my-project
 # Liste agentes disponíveis
 npx sinapse-ai agents list
 
-# Ative um agente
+# Claude Code: ative um agente
 @developer
 
 # Obtenha ajuda
 *help
 ```
+
+No Codex, use `$snps` para roteamento ou `$sinapse-agent developer` para ativação direta.
 
 ---
 
@@ -72,7 +74,7 @@ O SINAPSE fornece estrutura orquestrada enquanto permite flexibilidade na comuni
 
 | Desenvolvimento Tradicional com IA | SINAPSE                                        |
 | ---------------------------------- | ------------------------------------------- |
-| Agentes descoordenados             | 11 agentes especializados com papéis claros |
+| Agentes descoordenados             | 172 agentes especializados em 17 squads     |
 | Resultados inconsistentes          | Workflows estruturados com quality gates    |
 | Contexto perdido entre sessões     | Memória persistente e aprendizado           |
 | Reinventando a roda                | Tasks, workflows e squads reutilizáveis     |
@@ -81,7 +83,10 @@ O SINAPSE fornece estrutura orquestrada enquanto permite flexibilidade na comuni
 
 ## Agentes
 
-O SINAPSE inclui 11 agentes especializados, cada um com papel e personalidade distintos:
+O SINAPSE inclui 172 agentes especializados em 17 squads. A tabela abaixo destaca os agentes core de desenvolvimento:
+
+Os IDs da tabela usam a sintaxe `@agent-name` do Claude Code. No Codex, use
+`$sinapse-agent agent-id`; para o orquestrador principal, use `$snps`.
 
 | Agente    | ID               | Arquétipo    | Responsabilidade          |
 | --------- | ---------------- | ------------ | ------------------------- |
@@ -100,7 +105,7 @@ O SINAPSE inclui 11 agentes especializados, cada um com papel e personalidade di
 ### Ativação de Agentes
 
 ```bash
-# Ative um agente usando sintaxe @
+# Claude Code: ative um agente usando sintaxe @
 @developer                # Ativar Pixel (Desenvolvedor)
 @quality-gate                 # Ativar Litmus (QA)
 @architect          # Ativar Stratum (Arquiteto)
@@ -110,6 +115,13 @@ O SINAPSE inclui 11 agentes especializados, cada um com papel e personalidade di
 *help               # Mostrar comandos disponíveis
 *task <name>        # Executar task específica
 *exit               # Desativar agente
+```
+
+Ativação no Codex:
+
+```text
+$snps
+$sinapse-agent developer
 ```
 
 ### Contexto do Agente
@@ -336,16 +348,15 @@ NODE_ENV=development
 SINAPSE_DEBUG=false
 ```
 
-### Integração com IDE
+### Integração com Provedores
 
-O SINAPSE suporta múltiplas IDEs. A configuração é sincronizada entre:
+O SINAPSE sincroniza os mesmos agentes canônicos para os dois provedores suportados:
 
-- Claude Code (`.claude/`)
-- Cursor (`.cursor/`)
-- VS Code (`.vscode/`)
+- Agentes do Claude Code: `.claude/agents/` (ative com `@developer`)
+- Agentes e skills do Codex: `.codex/agents/` e `.agents/skills/` (ative com `$snps` ou `$sinapse-agent developer`)
 
 ```bash
-# Sincronizar agentes para sua IDE
+# Sincronizar adapters do Claude Code e Codex
 npm run sync:ide
 ```
 
@@ -468,4 +479,3 @@ construir um agente novo do zero.
 ---
 
 _Guia do Usuário SINAPSE v1.21.0_
-

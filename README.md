@@ -23,7 +23,7 @@
 
 SINAPSE é um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro é governado por uma **Constitution com enforcement real** — 20 hooks registrados que bloqueiam violações em tempo de execução.
 
-O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.201 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
+O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks. O runtime mede **1.412 task files**: **1.201 squad tasks** nos 17 squads e **211 development tasks**. Desses arquivos, **1.348 são resolvíveis** pelos ponteiros reais dos agentes.
 
 Diferente de ferramentas que apenas conversam com IA, o SINAPSE impõe disciplina. O pipeline **Documentation-First** exige que uma story seja criada e validada antes de qualquer linha de código. Quality gates rodam automaticamente antes de merge. Agentes não autorizados são bloqueados de fazer push. Tudo isso via hooks que interceptam operações em tempo real — não depois.
 
@@ -63,9 +63,18 @@ Se algo estiver fora do lugar, `doctor --fix` corrige automaticamente.
 
 ### 3. Ative seu primeiro agente
 
+Claude Code:
+
+```text
+@developer
+*help
 ```
-@developer          # Ativa o agente de desenvolvimento
-*help               # Lista comandos disponíveis
+
+Codex:
+
+```text
+$snps
+$sinapse-agent developer
 ```
 
 Pronto. Você tem 17 squads operando no seu terminal.
@@ -235,7 +244,7 @@ O SINAPSE inclui 12 agentes core que cobrem o ciclo completo de desenvolvimento:
 | `devops` | **Pipeline** | CI/CD, git push (exclusivo), releases |
 | `squad-creator` | **Loom** | Criação de novos squads |
 
-Ative qualquer agente com `@agent-name` e use `*help` para ver seus comandos.
+No Claude Code, ative um agente com `@agent-name` e use `*help` para ver seus comandos. No Codex, comece com `$snps` para roteamento ou use `$sinapse-agent agent-id` para ativação direta.
 
 ### Workflow de Desenvolvimento
 
@@ -285,15 +294,19 @@ Cada squad é uma equipe autônoma com orquestrador, agentes especialistas, know
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 17 squads, 172 agentes especializados, 1.201 tasks**
+**Total: 17 squads, 172 agentes especializados e 1.412 task files** (**1.201 squad tasks + 211 development tasks; 1.348 ponteiros resolvíveis**)
 
-Cada squad é ativado via seu orquestrador:
+Cada squad é ativado via seu orquestrador, com a sintaxe nativa do provedor:
 
-```
+```text
+# Claude Code
 @brand-orqx         # Squad de brand
 @copy-orqx          # Squad de copy
-@cyber-orqx         # Squad de cybersecurity
-@research-orqx      # Squad de research
+
+# Codex
+$sinapse-agent brand-orqx
+$sinapse-agent copy-orqx
+$snps               # Roteamento pelo orquestrador principal
 ```
 
 O orquestrador recebe seu pedido e delega automaticamente ao especialista correto dentro do squad.
@@ -306,28 +319,23 @@ O SINAPSE suporta duas IDEs com integrações profundas:
 
 | IDE | Ativação | Destaques |
 |-----|----------|-----------|
-| **Claude Code** | `@agent-name` ou `/skill-name` | Subagentes e skills nativos, hooks e rules contextuais |
+| **Claude Code** | `@agent-name` | Subagentes e skills nativos, hooks e rules contextuais |
 | **Codex CLI** | `$snps` ou `$sinapse-agent agent-id` | Agentes TOML, skills nativas e `codex exec` para CI/CD |
 
 Ambas as IDEs têm acesso a todos os 17 squads, 172 agentes, workflows e knowledge bases. O installer detecta e configura automaticamente.
 
 ### Tabela de Paridade
 
-| Funcionalidade | Claude Code | Codex CLI |
-|---------------|:-----------:|:---------:|
-| Ativação dos 172 agentes | `@agent-name` | `$sinapse-agent agent-id` |
-| Hooks constitucionais (20) | Completo | Parcial (5) |
-| Story-driven development | Completo | Completo |
-| Quality gates | Completo | Completo |
-| Enforcement de delegação | Completo | Parcial |
-| Secret scanning | Completo | Manual |
-| Integração CodeRabbit | Completo | N/A |
-| Sistema de skills | Completo | Comandos |
-| MCP servers | Completo | N/A |
-| Terminal Bus | Completo | N/A |
+| Superfície medida | Claude Code | Codex CLI |
+|-------------------|:-----------:|:---------:|
+| Agentes nativos | 172 | 172 |
+| Ativação direta | `@agent-name` | `$sinapse-agent agent-id` |
+| Roteamento principal | `@sinapse-orqx` | `$snps` |
+| Skills instaladas | 36 | 37 |
+| Hooks registrados | 20 registros nativos | 9 eventos de lifecycle via bridge |
+| Fonte de validação | `npm run validate:providers` | `npm run validate:codex-native` |
 
-**Claude Code** para a experiência mais integrada e automatizada.
-**Codex CLI** para flexibilidade de modelo e automação CI/CD.
+Os dois providers resolvem os mesmos agents, tasks, workflows e knowledge bases. As superfícies de ativação e hooks são adapters nativos diferentes e são validadas separadamente pelo gate de paridade.
 
 ---
 

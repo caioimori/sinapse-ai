@@ -81,27 +81,23 @@ O instalador automaticamente:
 
 - Detecta o macOS e aplica configurações específicas da plataforma
 - Cria os diretórios necessários com permissões apropriadas
-- Configura caminhos de IDE para localizações do macOS:
-  - Cursor: `~/Library/Application Support/Cursor/`
-  - Claude: `~/.claude/`
+- Configura adapters dos provedores no projeto:
+  - Agentes do Claude Code: `.claude/agents/`
+  - Agentes e skills do Codex: `.codex/agents/` e `.agents/skills/`
 - Configura scripts shell com terminações de linha Unix
 - Lida adequadamente com sistemas de arquivos case-sensitive
 
 ## Configuração Específica por IDE
 
-### Cursor
-
-1. As regras da IDE são instaladas em `.cursor/rules/`
-2. Atalho de teclado: `Cmd+L` para abrir o chat
-3. Use `@agent-name` para ativar agentes
-
 ### Claude Code
 
-1. Os comandos são instalados em `.claude/commands/SINAPSE/`
-2. Use `/agent-name` para ativar agentes
+1. Os adapters de agentes são instalados em `.claude/agents/`.
+2. Use `@developer` ou outro ID canônico para ativar um agente.
 
+### Codex
 
-2. Use `@agent-name` para ativar agentes
+1. Os descritores são instalados em `.codex/agents/`, com skills em `.agents/skills/`.
+2. Use `$snps` para roteamento ou `$sinapse-agent developer` para ativação direta.
 
 ## Solução de Problemas
 

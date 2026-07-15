@@ -76,10 +76,10 @@ npx sinapse-ai@latest update
 
 ## Supported IDEs
 
-| IDE         | Agent Activation    |
-| ----------- | ------------------- |
-| Claude Code | `/dev`, `/qa`, etc. |
-| Codex CLI   | `/skills` flow      |
+| IDE         | Agent Activation                    |
+| ----------- | ----------------------------------- |
+| Claude Code | `@developer`, `@quality-gate`, etc. |
+| Codex CLI   | `$snps` or `$sinapse-agent <id>`    |
 
 ---
 

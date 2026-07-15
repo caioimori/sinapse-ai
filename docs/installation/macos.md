@@ -73,8 +73,9 @@ The installer automatically:
 
 - ✅ Detects macOS and applies platform-specific configurations
 - ✅ Creates necessary directories with proper permissions
-- ✅ Configures IDE paths for macOS locations:
-  - Claude: `~/.claude/`
+- ✅ Configures provider adapters in the project:
+  - Claude Code agents: `.claude/agents/`
+  - Codex agents and skills: `.codex/agents/` and `.agents/skills/`
 - ✅ Sets up shell scripts with Unix line endings
 - ✅ Handles case-sensitive filesystems properly
 
@@ -82,8 +83,13 @@ The installer automatically:
 
 ### Claude Code
 
-1. Commands are installed to `.claude/commands/SINAPSE/`
-2. Use `/agent-name` to activate agents
+1. Agent adapters are installed in `.claude/agents/`.
+2. Use `@developer` or another canonical agent ID to activate an agent.
+
+### Codex
+
+1. Agent descriptors are installed in `.codex/agents/`, with skills in `.agents/skills/`.
+2. Use `$snps` for routing or `$sinapse-agent developer` for direct activation.
 
 ## Troubleshooting
 

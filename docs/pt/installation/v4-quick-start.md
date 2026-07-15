@@ -109,24 +109,24 @@ Digite *help para ver comandos disponíveis.
 
 ## Passo 4: Explorar Agentes Disponíveis
 
-| Agente              | Ativação             | Propósito                          |
+| Ativação            | Papel                | Propósito                          |
 | ------------------- | -------------------- | ---------------------------------- |
-| `@dev` (Dex)        | Desenvolvimento      | Implementação de código, debugging |
-| `@qa` (Quinn)       | Qualidade            | Testes e validação                 |
-| `@architect` (Aria) | Arquitetura          | Design de sistema e documentação   |
-| `@pm` (Sage)        | Product Manager      | Requisitos e planejamento          |
-| `@devops` (Gage)    | DevOps               | Git push, criação de PR, CI/CD     |
-| `@po` (Maven)       | Product Owner        | Criação de stories e backlog       |
-| `@sm` (River)       | Scrum Master         | Gerenciamento de sprint            |
-| `@analyst` (Nova)   | Analista de Negócios | Análise de requisitos              |
+| `@developer` (Pixel)     | Desenvolvimento    | Implementação de código, debugging |
+| `@quality-gate` (Litmus) | Qualidade          | Testes e validação                 |
+| `@architect` (Stratum)   | Arquitetura        | Design de sistema e documentação   |
+| `@project-lead` (Beacon) | Product Manager    | Requisitos e planejamento          |
+| `@devops` (Pipeline)     | DevOps             | Git push, criação de PR, CI/CD     |
+| `@product-lead` (Axis)   | Product Owner      | Validação de stories e backlog     |
+| `@sprint-lead` (Sync)    | Scrum Master       | Gerenciamento de sprint            |
+| `@analyst` (Scope)       | Analista de Negócios | Análise de requisitos            |
 
 ### Exemplo: Ativar Agente Desenvolvedor
 
-```
-@dev
+```text
+@developer
 ```
 
-O agente desenvolvedor (Dex) será ativado com uma saudação mostrando:
+O agente desenvolvedor (Pixel) será ativado com uma saudação mostrando:
 
 - Status do projeto
 - Comandos rápidos
@@ -190,7 +190,7 @@ seu-projeto/
 │   │   └── quality-gates/         # Camadas de validação de qualidade
 │   ├── development/               # Assets de desenvolvimento
 │   │   ├── agents/                # Definições de agentes (12 agentes)
-│   │   ├── tasks/                 # Workflows de tarefas (~140 tarefas)
+│   │   ├── tasks/                 # Workflows de development (211 development tasks)
 │   │   └── workflows/             # Workflows multi-etapa
 │   ├── product/                   # Assets de produto
 │   │   ├── templates/             # Templates de documentos
@@ -232,9 +232,9 @@ npm cache clean --force
 
 ### Agente não responde
 
-1. Certifique-se de estar em uma IDE com IA (Cursor, VS Code com Claude, etc.) ou Claude Code CLI
-2. Verifique se está usando sintaxe correta: `@nome-do-agente`
-3. Verifique se o arquivo do agente existe: `ls .sinapse-ai/development/agents/`
+1. Certifique-se de estar usando Claude Code ou Codex CLI.
+2. No Claude Code, use `@developer`; no Codex, use `$sinapse-agent developer` ou `$snps`.
+3. Verifique `.claude/agents/` para Claude Code ou `.codex/agents/` e `.agents/skills/` para Codex.
 
 ### Erros de permissão
 
