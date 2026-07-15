@@ -1,5 +1,5 @@
 ---
-status: InReview
+status: Done
 owner: sprint-lead
 executor: developer
 quality_gate: quality-gate
@@ -104,7 +104,7 @@ sem listas ou targets literais divergentes.
   skills `$`, aliases e lifecycle events Codex sao resolvidos, then o catalogo
   permanece completo, sem regressao, duplicidade ou dependencia dos adapters
   Claude Code.
-- [ ] **AC6 - Clean install e upgrade reais.** Given diretorios temporarios fora
+- [x] **AC6 - Clean install e upgrade reais.** Given diretorios temporarios fora
   do repositorio, when o candidato e instalado do tarball e depois `1.25.3` e
   instalado/atualizado diretamente do npm registry, then clean install e upgrade
   concluem com exit code zero, passam a paridade e sao idempotentes na segunda
@@ -118,7 +118,7 @@ sem listas ou targets literais divergentes.
   rodam, then todos passam, as metricas do Article VII permanecem 172 agentes
   canonicos por provider e nenhum path protegido L1/L2, constituicao,
   infraestrutura protegida ou `bin/sinapse*.js` foi alterado.
-- [ ] **AC9 - Release 1.25.3 verificavel.** Given AC1-AC8 e Quality Gate em PASS,
+- [x] **AC9 - Release 1.25.3 verificavel.** Given AC1-AC8 e Quality Gate em PASS,
   when `@devops` publica o patch autorizado, then `npm view sinapse-ai version`
   retorna `1.25.3`, a integridade publica e registrada e smokes de clean install
   e upgrade executados do registry passam para Claude Code e Codex.
@@ -131,7 +131,7 @@ sem listas ou targets literais divergentes.
 - [x] Endurecer writes e deletes globais contra symlink/junction/TOCTOU.
 - [x] Cobrir install, update, providers isolados, pacote e boundary.
 - [x] Executar lint, typecheck, testes focados e validadores de paridade.
-- [ ] Publicar `1.25.3` via semantic-release depois do merge e fechar AC9 com
+- [x] Publicar `1.25.3` via semantic-release depois do merge e fechar AC9 com
   smokes do registry.
 
 ## Fora de escopo
@@ -273,6 +273,22 @@ Story checklist concluido; pronta para implementacao por `@developer`:
 ### Change Log
 
 - 2026-07-15: Implemented and validated the installer provider-parity hotfix.
+- 2026-07-15: Released `1.25.3`, verified registry integrity and completed clean,
+  upgrade and idempotence smokes for Claude Code, Codex and both providers.
+
+### Release closure record
+
+- Release authority: `@devops`.
+- PR: `#385`, merged on 2026-07-15 at commit `4c5c9fb1`.
+- Quality gates: 79 checks SUCCESS, 2 SKIPPED; CodeRabbit APPROVED and CodeQL
+  green.
+- npm: `latest` and `version` resolve to `1.25.3`; integrity
+  `sha512-PA6k3JQeW9Ek7x9AsW+cVT1EKPFn3RJ4LYiR72gjedcuAQ/ucIn9HX2zCrVtkUBklLurroIm5zF/M7KAh9RU6w==`.
+- GitHub release: `https://github.com/caioimori/sinapse-ai/releases/tag/1.25.3`.
+- Registry smokes: clean install 3/3, upgrade `1.25.2 -> 1.25.3` 3/3 and
+  idempotence rerun 6/6, all passing.
+- Installed inventories: Claude Code 172 agents and 36 skills; Codex 172 agents
+  and 37 skills; combined-provider installation passed.
 
 ### Product Owner validation
 
