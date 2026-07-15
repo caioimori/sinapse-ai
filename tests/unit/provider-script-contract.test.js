@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const pkg = require('../../package.json');
 
 describe('provider validation script contract', () => {
@@ -19,5 +21,20 @@ describe('provider validation script contract', () => {
     expect(pkg.scripts['sync:skills:codex']).toContain('.codex/scripts/sync-codex-native.js');
     expect(pkg.scripts['sync:skills:codex:global']).toContain('--llm=codex --global-only');
     expect(pkg.scripts['sync:skills:codex:global']).not.toContain('codex-skills-sync');
+  });
+
+  test('install matrix derives the Codex skill count from the candidate payload', () => {
+    const script = fs.readFileSync(path.join(
+      __dirname,
+      '..',
+      '..',
+      '.github',
+      'workflows',
+      'install-matrix',
+      'run-provider-mode.js',
+    ), 'utf8');
+
+    expect(script).toContain("path.join(packageRoot, '.agents', 'skills')");
+    expect(script).not.toMatch(/expectedCodexSkills\s*=\s*includeCodex\s*\?\s*\d+/);
   });
 });

@@ -35,7 +35,9 @@ function count(dir, matcher) {
   const expectedClaude = includeClaude ? 172 : 0;
   const expectedClaudeSkills = includeClaude ? 36 : 0;
   const expectedCodex = includeCodex ? 172 : 0;
-  const expectedCodexSkills = includeCodex ? 36 : 0;
+  const expectedCodexSkills = includeCodex
+    ? count(path.join(packageRoot, '.agents', 'skills'), (entry) => entry.isDirectory())
+    : 0;
   const expectedProviders = [includeClaude && 'claude-code', includeCodex && 'codex'].filter(Boolean).sort();
   if (!result.success || metrics.claudeAgents !== expectedClaude || metrics.claudeSkills !== expectedClaudeSkills
     || metrics.codexAgents !== expectedCodex || metrics.codexSkills !== expectedCodexSkills
