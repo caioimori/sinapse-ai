@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T03:11:31.074Z'
-  entityCount: 816
+  lastUpdated: '2026-07-15T08:35:27.084Z'
+  entityCount: 817
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -41,8 +41,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:f66f076d3c8bead4fa1193fe027582c0487019e363bd37012db6a6cc1d90ab6d
-      lastVerified: '2026-07-02T22:41:00.485Z'
+      checksum: sha256:cbde468c6a5d8c09667d54ba512489023d422a1e843a3256c2e722f29ab26bc8
+      lastVerified: '2026-07-15T04:47:59.892Z'
     agents:
       path: bin/commands/agents.js
       layer: L1
@@ -106,8 +106,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:af615f80ca758541b8ede2af086aead94b99f194336459529ab3876186462a3d
-      lastVerified: '2026-07-02T22:41:00.486Z'
+      checksum: sha256:eacc95a711bcbbd840a0a52b11bc1724b9a13282af3f914f938c9a55b2797a72
+      lastVerified: '2026-07-15T04:28:12.370Z'
     ideate:
       path: bin/commands/ideate.js
       layer: L1
@@ -154,6 +154,7 @@ entities:
         - status
         - command-generator
         - global-provider-adapters
+        - provider-parity
         - install-transaction
         - install-errors
         - chrome-brain-installer
@@ -165,8 +166,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:d410cc6498c4906818d29c86c4ee7c6a28d76283bd2071be218088540a879b0f
-      lastVerified: '2026-07-15T02:37:43.454Z'
+      checksum: sha256:1f385982ca84a8232f3f6b1fce4257ca3971a5fd24830b5389477f9a5a8e943a
+      lastVerified: '2026-07-15T08:12:47.676Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -204,6 +205,7 @@ entities:
         - constants
         - header
         - squads
+        - uninstall
         - observability-panel
       externalDeps: []
       plannedDeps:
@@ -213,8 +215,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:82ec537932c7b6c7e46c294ac4396c988bea43583a1f1f7a1886d2b13518dd55
-      lastVerified: '2026-06-21T05:24:05.621Z'
+      checksum: sha256:9f1b50e9b2669eb854a49b338498c79826212ef001fa38ced894dfecc4d949de
+      lastVerified: '2026-07-15T07:51:17.101Z'
     uninstall:
       path: bin/commands/uninstall.js
       layer: L1
@@ -226,6 +228,7 @@ entities:
         - cli
         - install
         - sinapse
+        - status
         - update
       dependencies:
         - constants
@@ -235,14 +238,15 @@ entities:
         - spawn-safe
       externalDeps: []
       plannedDeps:
+        - legacy-claude-agent-command-hashes
         - logger
       lifecycle: production
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1116a6ee85257c1ad26c9d7de4b24b681c1045c19d09f0572be57e77b3053b77
-      lastVerified: '2026-07-15T02:37:43.455Z'
+      checksum: sha256:a97ad181e34f7cc3af15be278826a32400c59faeb6d8bd914dfdaea7dc0f00c6
+      lastVerified: '2026-07-15T08:35:26.856Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -263,6 +267,7 @@ entities:
         - uninstall
         - command-generator
         - global-provider-adapters
+        - provider-parity
       externalDeps: []
       plannedDeps:
         - logger
@@ -271,8 +276,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1cc8b0622d9d0137feb4c7e1f93c7303a98d7e5b696b8c995495d75dff815a09
-      lastVerified: '2026-07-15T02:37:43.455Z'
+      checksum: sha256:b51998a172a91e134330847185c078d317ed9be2da6746de3af18d209b7e08d9
+      lastVerified: '2026-07-15T08:12:47.677Z'
     command-generator:
       path: bin/lib/command-generator.js
       layer: L1
@@ -416,8 +421,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:289930cccfb6aca324bf6f460f9cfe2ebda6fcc6ee1f54d7ee3cfcfbbe86e5c1
-      lastVerified: '2026-07-15T03:11:30.770Z'
+      checksum: sha256:d28b19935a9c75408df9da7430fc3ca9568bdea0cfc1ae3c01d0025ad19fc2a3
+      lastVerified: '2026-07-15T07:09:56.286Z'
     header:
       path: bin/lib/header.js
       layer: L1
@@ -470,6 +475,27 @@ entities:
         extensionPoints: []
       checksum: sha256:dc7cc1109f2bbdb7b3c5927df0de2418925842bdacdc0ba82815bfa2783d0b42
       lastVerified: '2026-06-22T02:41:18.152Z'
+    provider-parity:
+      path: bin/lib/provider-parity.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\provider-parity.js
+      keywords:
+        - provider
+        - parity
+      usedBy:
+        - install
+        - update
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:592206326a2a3c5a3d89068d9ef065d698562aef40e6096d971fb793cea11c97
+      lastVerified: '2026-07-15T08:35:26.859Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1
@@ -594,8 +620,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:7d7af407aecf1704b20d248edc724fa9482cff291743543bf3f6e57336fa9a55
-      lastVerified: '2026-07-03T06:55:48.457Z'
+      checksum: sha256:4d180833ee2ac17bd378755e27a79dca0f559783a99aad830c14d3071c14f754
+      lastVerified: '2026-07-15T07:51:17.104Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1

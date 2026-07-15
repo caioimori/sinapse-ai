@@ -17,12 +17,29 @@ const os = require('os');
 const path = require('path');
 
 const cli = require('../../bin/cli');
+const { assertProviderAdapterParity } = require('../../bin/commands/update');
 
 describe('Story 10.22 — update upsert', () => {
   describe('shared helper contract', () => {
     it('exposes syncDirSync and detectExistingInstall (used by cmdUpdateGlobal)', () => {
       expect(typeof cli.syncDirSync).toBe('function');
       expect(typeof cli.detectExistingInstall).toBe('function');
+    });
+  });
+
+  describe('provider parity', () => {
+    it('uses the canonical count when every selected provider matches', () => {
+      expect(assertProviderAdapterParity('both', {
+        claude: new Array(172),
+        codex: new Array(172),
+      }, 172)).toBe(172);
+    });
+
+    it('fails instead of masking a divergent provider with Math.max', () => {
+      expect(() => assertProviderAdapterParity('both', {
+        claude: new Array(172),
+        codex: new Array(171),
+      }, 172)).toThrow('Codex: 171/172');
     });
   });
 

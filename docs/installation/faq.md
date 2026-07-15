@@ -117,7 +117,7 @@ your-project/
 │   └── core-config.yaml        # Framework configuration
 │
 ├── .claude/                    # Claude Code (if selected)
-│   └── commands/SINAPSE/agents/   # Agent slash commands
+│   └── agents/                    # Native Claude agents
 │
 ├── docs/                       # Documentation structure
 │   ├── stories/                # Development stories

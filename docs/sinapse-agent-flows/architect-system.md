@@ -56,7 +56,7 @@ O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Tech
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/architect.md` | Definição core do agente Architect |
-| `.claude/commands/SINAPSE/agents/architect.md` | Comando Claude Code para ativar @architect |
+| `.claude/agents/architect.md` | Comando Claude Code para ativar @architect |
 
 ### Arquivos de Templates do @architect
 

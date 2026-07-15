@@ -353,7 +353,7 @@ Example: `sinapse-claude:claude-code-audit`
 | Platform | Support | Notes |
 |----------|---------|-------|
 | Claude Code | Full | Native marketplace |
-| Codex | Full | `.codex/skills/` directory |
+| Codex | Full | `.agents/skills/` directory |
 | Gemini CLI | Full | Standard SKILL.md |
 | Cursor | Full | Marketplace |
 | VS Code | Full | Extension integration |

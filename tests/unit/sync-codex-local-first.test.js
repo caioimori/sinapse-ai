@@ -63,15 +63,15 @@ describe('sync-codex-local-first', () => {
       'utf8',
     );
 
-    fs.mkdirSync(path.join(tmpRoot, '.codex', 'skills', 'sinapse-brand'), { recursive: true });
-    fs.writeFileSync(path.join(tmpRoot, '.codex', 'skills', 'sinapse-brand', 'SKILL.md'), '# brand', 'utf8');
+    fs.mkdirSync(path.join(tmpRoot, '.agents', 'skills', 'sinapse-brand'), { recursive: true });
+    fs.writeFileSync(path.join(tmpRoot, '.agents', 'skills', 'sinapse-brand', 'SKILL.md'), '# brand', 'utf8');
     fs.writeFileSync(
       path.join(tmpRoot, '.codex', 'catalog.json'),
       JSON.stringify({
         version: 1,
         catalogMode: 'expanded',
         codexAgentsDir: '.codex/agents',
-        skillsDir: '.codex/skills',
+        skillsDir: '.agents/skills',
         canonicalAgentsDir: '.sinapse-ai/development/agents',
       }),
       'utf8',

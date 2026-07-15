@@ -7,7 +7,7 @@ const path = require('path');
 const {
   REQUIRED_COMMAND_COVERAGE,
   validateCodexCommandRegistry,
-} = require('../../.sinapse-ai/infrastructure/scripts/validate-codex-command-registry');
+} = require('../../scripts/validate-codex-command-registry');
 
 describe('validate-codex-command-registry', () => {
   let tmpRoot;
@@ -28,7 +28,7 @@ describe('validate-codex-command-registry', () => {
   }
 
   it('passes when registry targets and resources exist', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');
     write('.sinapse-ai/development/tasks/dev-develop-story.md');
     write('.sinapse-ai/product/checklists/story-dod-checklist.md');
@@ -63,7 +63,7 @@ describe('validate-codex-command-registry', () => {
   });
 
   it('fails when a command target is missing', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');
     write(
       '.codex/command-registry.json',
@@ -94,8 +94,36 @@ describe('validate-codex-command-registry', () => {
     expect(result.errors.some((error) => error.includes('missing target'))).toBe(true);
   });
 
+  it('rejects missing and out-of-root registry paths', () => {
+    write('.agents/skills/sinapse-dev/SKILL.md');
+    write('.codex/command-registry.json', JSON.stringify({
+      version: 1,
+      agents: {
+        'sinapse-dev': {
+          skillId: 'sinapse-dev',
+          commands: {
+            develop: {
+              kind: 'task',
+              target: '../outside-task.md',
+              resources: [''],
+            },
+          },
+        },
+      },
+    }));
+
+    const result = validateCodexCommandRegistry({
+      projectRoot: tmpRoot,
+      requiredCoverage: devCoverage,
+    });
+
+    expect(result.errors).toContain('sinapse-dev: invalid or missing source of truth');
+    expect(result.errors).toContain('sinapse-dev.develop: invalid or missing target');
+    expect(result.errors).toContain('sinapse-dev.develop: invalid or missing resource');
+  });
+
   it('fails when a declared resource is missing', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');
     write('.sinapse-ai/development/tasks/dev-develop-story.md');
     write(
@@ -160,7 +188,7 @@ describe('validate-codex-command-registry', () => {
   });
 
   it('fails when required coverage is missing', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');
     write('.sinapse-ai/development/tasks/dev-develop-story.md');
     write(
@@ -193,8 +221,8 @@ describe('validate-codex-command-registry', () => {
   });
 
   it('fails when agent aliases collide', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
-    write('.codex/skills/sinapse-qa/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-qa/SKILL.md');
     write('.codex/agents/dev.md');
     write('.codex/agents/qa.md');
     write('.sinapse-ai/development/tasks/dev-develop-story.md');
@@ -245,7 +273,7 @@ describe('validate-codex-command-registry', () => {
   });
 
   it('fails when command aliases collide inside an agent', () => {
-    write('.codex/skills/sinapse-dev/SKILL.md');
+    write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');
     write('.sinapse-ai/development/tasks/dev-develop-story.md');
     write('.sinapse-ai/development/tasks/qa-run-tests.md');

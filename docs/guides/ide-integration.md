@@ -64,7 +64,7 @@ If your goal is to get started as fast as possible:
 
 ```yaml
 config_file: .claude/CLAUDE.md
-agent_folder: .claude/commands/SINAPSE/agents
+agent_folder: .claude/agents
 activation: /agent-name (slash commands)
 format: full-markdown-yaml
 mcp_support: native
@@ -89,7 +89,7 @@ special_features:
 npm run sync:ide
 
 # Verify setup
-ls -la .claude/commands/SINAPSE/agents/
+ls -la .claude/agents/
 ```
 
 ---
@@ -102,7 +102,7 @@ ls -la .claude/commands/SINAPSE/agents/
 config_file: AGENTS.md
 agent_folder: .codex/agents
 activation: terminal instructions
-skills_folder: .codex/skills (source), ~/.codex/skills (Codex menu)
+skills_folder: .agents/skills (single native source)
 format: markdown
 mcp_support: native via Codex tooling
 special_features:
@@ -117,7 +117,7 @@ special_features:
 
 1. Keep `AGENTS.md` at repository root
 2. Run `npm run sync:ide:codex` to sync auxiliary agent files
-3. Run `npm run sync:skills:codex` to generate project-local skills in `.codex/skills`
+3. Run `npm run sync:skills:codex` to generate project-local skills in `.agents/skills`
 4. Use `/skills` and choose `sinapse-architect`, `sinapse-dev`, etc.
 5. Use `npm run sync:skills:codex:global` only when you explicitly want global installation
 
@@ -132,7 +132,7 @@ npm run validate:codex-integration
 npm run validate:codex-skills
 
 # Verify setup
-ls -la AGENTS.md .codex/agents/ .codex/skills/
+ls -la AGENTS.md .codex/agents/ .agents/skills/
 ```
 
 ---
@@ -194,7 +194,7 @@ npm run sync:ide
 npm run sync:ide:check
 
 # Check platform-specific directory
-ls .claude/commands/SINAPSE/agents/       # Claude Code
+ls .claude/agents/       # Claude Code
 ```
 
 ### Sync Conflicts

@@ -56,7 +56,7 @@ O agente Analyst e projetado para:
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/analyst.md` | Definição core do agente Analyst |
-| `.claude/commands/SINAPSE/agents/analyst.md` | Comando Claude Code para ativar @analyst |
+| `.claude/agents/analyst.md` | Comando Claude Code para ativar @analyst |
 
 ### Tasks do Analyst
 

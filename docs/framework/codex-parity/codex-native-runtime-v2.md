@@ -20,9 +20,9 @@ $sinapse-agent meta-ads-specialist
 ```
 
 `.codex/catalog.json` is the registry for this Codex activation surface. The
-native `.agents/skills` tree is mirrored to `.codex/skills` for compatibility
-with older Codex builds. Clean installs and upgrades reconcile managed files
-idempotently without deleting valid user-owned skills.
+native `.agents/skills` tree is the single Codex discovery surface. Clean
+installs and upgrades remove byte-identical legacy mirrors and quarantine
+divergent managed copies outside discovered skill roots without deleting them.
 
 The default tier deliberately exposes aliases, core agents, orchestrators and
 the parametric activator, not one selector entry per specialist. Users who need
@@ -89,9 +89,9 @@ Current Codex skill entrypoints live under `.agents/skills/`:
 - `sinapse-spec-driven` prepares PRD, Epic, Story, Spec, and Plan delivery.
 - `sinapse-loop` runs an explicitly requested bounded correction loop.
 
-Equivalent `.codex/skills/` copies are compatibility entrypoints for existing
-installations. New Codex discovery should use `.agents/skills/`; both locations
-resolve the same canonical SINAPSE sources.
+Legacy `.codex/skills/sinapse-*` copies are migration inputs only. They are not
+generated or shipped. `.agents/skills/` is the only active Codex skill root for
+SINAPSE.
 
 ## Hook and apply_patch bridge
 
@@ -205,8 +205,8 @@ npm run validate:codex-skills
 npx jest tests/integration/codex-native-golden-journey.test.js --runInBand
 ```
 
-`validate:codex-native` checks project TOML, 1:1 native-agent parity, native and
-compatibility skills, command targets, delegation equivalence, hooks, and the
+`validate:codex-native` checks project TOML, 1:1 native-agent parity, the unique
+native skill root, command targets, delegation equivalence, hooks, and the
 absence of nested Claude/Codex execution. `validate:codex-sync` runs both the
 legacy synchronization validator and the stricter native validator.
 

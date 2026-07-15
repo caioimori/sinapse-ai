@@ -219,6 +219,7 @@ describe('Follow-up #13 — installer upgrade rollback wiring', () => {
     // IDE-specific agent dirs are only snapshotted when that IDE is selected.
     const claude = buildTransactionPaths('claude-code');
     expect(claude.dirs).toContain(path.join(home, '.claude', 'agents'));
+    expect(claude.dirs).toContain(path.join(home, '.agents', 'skills'));
     expect(claude.dirs).not.toContain(path.join(home, '.codex', 'agents'));
 
     const codex = buildTransactionPaths('codex');

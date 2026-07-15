@@ -548,7 +548,7 @@ nvm use 16
 
    ```bash
    # Claude Code
-   ls .claude/commands/SINAPSE/agents/
+   ls .claude/agents/
    ```
 
 3. Check IDE settings allow custom commands
@@ -566,7 +566,7 @@ nvm use 16
 **Solution:**
 
 1. Check IDE version is compatible
-2. For Claude Code: Files should be in `.claude/commands/`
+2. For Claude Code: Native agent files should be in `.claude/agents/`; `.claude/commands/` is only for slash commands
 3. Restart IDE after installation
 
 ---

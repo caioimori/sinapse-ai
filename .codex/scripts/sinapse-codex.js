@@ -82,10 +82,6 @@ function buildDoctorReport(projectRoot = PROJECT_ROOT) {
       projectRoot,
       `.agents/skills/${skillId}/SKILL.md`,
     ),
-    legacy: relativeFileExists(
-      projectRoot,
-      `.codex/skills/${skillId}/SKILL.md`,
-    ),
   }));
   const delegationEquivalent =
     JSON.stringify(delegationMatrix) === JSON.stringify(delegationParity);
@@ -97,7 +93,6 @@ function buildDoctorReport(projectRoot = PROJECT_ROOT) {
     delegationEquivalent,
     nativeAgentParity: agentSurfaces.markdown === agentSurfaces.toml,
     nativeWorkflowSkills: skills.every((skill) => skill.native),
-    legacyWorkflowSkills: skills.every((skill) => skill.legacy),
     workflowResolver: relativeFileExists(
       projectRoot,
       '.codex/scripts/resolve-codex-workflow.js',

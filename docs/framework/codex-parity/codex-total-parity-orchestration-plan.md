@@ -252,7 +252,7 @@ Mitigation:
 ### Risk 2 - Catalog/Skill Drift
 
 Risk:
-Expanded `.codex/agents`, `.codex/skills`, and command/delegation registries can drift apart.
+Expanded `.codex/agents`, `.agents/skills`, and command/delegation registries can drift apart.
 
 Mitigation:
 

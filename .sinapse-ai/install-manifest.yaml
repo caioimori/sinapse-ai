@@ -7,7 +7,7 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.25.0
+version: 1.25.1
 generator: scripts/generate-install-manifest.js
 file_count: 1161
 files:
@@ -1368,9 +1368,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:67f0f15427e7a10e10dc4a535fa3b46f3cb3628d1104d029e8ec49daf8f84113
+    hash: sha256:ed0919b2bc3479beb4e46d3ccfbbbda66e46161c7eebc9018b9f0c8e5278d7f1
     type: data
-    size: 559287
+    size: 559991
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data

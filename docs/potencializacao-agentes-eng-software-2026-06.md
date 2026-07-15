@@ -27,8 +27,8 @@
 | `.sinapse-ai/development/agents/<id>.md` | **Fonte** framework (definição) | L1/L2 — não tocar | 12 agentes |
 | `.sinapse-ai/development/agents/<id>/MEMORY.md` | **Fonte** framework (memória) | **L3 — editável** | canal de potencialização |
 | `squads/<squad>/agents/<id>.md` | **Fonte** squad (definição) | L4 — editável | 160 agentes |
-| `.claude/commands/SINAPSE/agents/` | Espelho IDE (gerado por `sync:ide`) | gerado — não editar | full markdown |
-| `.codex/agents/`, `.codex/skills/` | Espelho IDE (redirects) | gerado — não editar | apontam pra fonte |
+| `.claude/agents/` | Espelho IDE (gerado por `sync:ide`) | gerado — não editar | full markdown |
+| `.codex/agents/`, `.agents/skills/` | Adapters e skills nativas | gerado — não editar | apontam pra fonte |
 
 ### 2.2 Sincronização e validação (o que não pode quebrar)
 

@@ -39,7 +39,7 @@ Este sistema implementa a **arquitetura task-first** do SINAPSE, onde tasks sao 
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/squad-creator.md` | Definição core do agente Squad Creator |
-| `.claude/commands/SINAPSE/agents/squad-creator.md` | Comando Claude Code para ativar @squad-creator |
+| `.claude/agents/squad-creator.md` | Comando Claude Code para ativar @squad-creator |
 
 ### Arquivos de Tasks do @squad-creator
 
@@ -668,7 +668,7 @@ flowchart LR
 - [Script: squad-validator.js](../../.sinapse-ai/development/scripts/squad/squad-validator.js)
 - [Schema: squad-schema.json](../../.sinapse-ai/schemas/squad-schema.json)
 - [Agent: squad-creator.md](../../.sinapse-ai/development/agents/squad-creator.md)
-- [Command: squad-creator.md](../../.claude/commands/SINAPSE/agents/squad-creator.md)
+- [Command: squad-creator.md](../../.claude/agents/squad-creator.md)
 
 ---
 

@@ -45,15 +45,64 @@ function writeSessionState(root, state) {
   );
 }
 
+function toBashPath(filePath, runtime = 'wsl', platform = process.platform) {
+  if (platform !== 'win32') return filePath;
+  const normalized = filePath.replace(/\\/g, '/');
+  const match = normalized.match(/^([A-Za-z]):\/(.*)$/);
+  if (!match) return normalized;
+  const drive = match[1].toLowerCase();
+  return runtime === 'msys'
+    ? `/${drive}/${match[2]}`
+    : `/mnt/${drive}/${match[2]}`;
+}
+
+function quoteBash(value) {
+  const escapedSingleQuote = String.fromCharCode(39, 34, 39, 34, 39);
+  return `'${value.replace(/'/g, escapedSingleQuote)}'`;
+}
+
+const bashPathCache = new Map();
+let bashRuntime;
+
+function getBashRuntime() {
+  if (bashRuntime) return bashRuntime;
+  const probe = spawnSync('bash', ['-c', 'uname -s'], { encoding: 'utf8' });
+  bashRuntime = /^(MINGW|MSYS|CYGWIN)/i.test(probe.stdout.trim()) ? 'msys' : 'wsl';
+  return bashRuntime;
+}
+
+function toRuntimeBashPath(filePath) {
+  if (process.platform !== 'win32') return filePath;
+  if (bashPathCache.has(filePath)) return bashPathCache.get(filePath);
+
+  const converted = spawnSync('bash', ['-c', `cygpath -u ${quoteBash(filePath)}`], {
+    encoding: 'utf8',
+  });
+  const resolved = converted.status === 0 && converted.stdout.trim()
+    ? converted.stdout.trim()
+    : toBashPath(filePath, getBashRuntime());
+  bashPathCache.set(filePath, resolved);
+  return resolved;
+}
+
 function runHook({ command, projectRoot }) {
   const input = JSON.stringify({
     tool_name: 'Bash',
     tool_input: { command },
   });
 
-  const result = spawnSync('bash', [HOOK_PATH], {
+  const bashArgs = process.platform === 'win32'
+    ? [
+      '-c',
+      `export CLAUDE_PROJECT_DIR=${quoteBash(toRuntimeBashPath(projectRoot))}; `
+        + `exec ${quoteBash(toRuntimeBashPath(HOOK_PATH))}`,
+    ]
+    : [HOOK_PATH];
+  const result = spawnSync('bash', bashArgs, {
     input,
-    env: { ...process.env, CLAUDE_PROJECT_DIR: projectRoot },
+    env: process.platform === 'win32'
+      ? process.env
+      : { ...process.env, CLAUDE_PROJECT_DIR: projectRoot },
     encoding: 'utf8',
   });
 
@@ -205,5 +254,17 @@ describe('enforce-git-push-authority.sh — agent detection (Story 10.15)', () =
       expect(res.status).toBe(0);
       expect(isDenied(res.stdout)).toBe(false);
     });
+  });
+});
+
+describe('Windows bash path fallback', () => {
+  const testPath = 'C:\\Users\\Example\\project';
+
+  test('uses the MSYS drive mount when cygpath is unavailable in Git Bash', () => {
+    expect(toBashPath(testPath, 'msys', 'win32')).toBe('/c/Users/Example/project');
+  });
+
+  test('uses the WSL drive mount outside MSYS', () => {
+    expect(toBashPath(testPath, 'wsl', 'win32')).toBe('/mnt/c/Users/Example/project');
   });
 });

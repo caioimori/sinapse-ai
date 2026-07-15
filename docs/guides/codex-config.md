@@ -48,7 +48,7 @@ npm test
 - Validar command/task registry do Codex: `npm run validate:codex-commands`
 - Validar matriz de delegacao do Codex: `npm run validate:codex-delegation`
 - Gerar skills locais do Codex: `npm run sync:skills:codex`
-- Este repositorio usa **local-first**: prefira `.codex/skills` versionado no projeto
+- Este repositorio usa **local-first**: `.agents/skills` e a unica raiz de skills SINAPSE versionada no projeto
 - Use `sync:skills:codex:global` apenas para testes fora deste repo
 
 ## Command Resolution (Codex)
@@ -77,7 +77,7 @@ No Codex, nao trate handoffs exploratorios como se fossem caminhos garantidos pe
 ## Agent Shortcuts (Codex)
 
 Preferencia de ativacao no Codex CLI:
-1. Use `/skills` e selecione `sinapse-<agent-id>` vindo de `.codex/skills` (ex.: `sinapse-architect`)
+1. Use `/skills` e selecione `sinapse-<agent-id>` vindo de `.agents/skills` (ex.: `sinapse-architect`)
 2. Se preferir, use os atalhos abaixo (`@architect`, `/architect`, etc.)
 
 Quando a mensagem do usuario for um atalho de agente, carregue o arquivo correspondente em `.sinapse-ai/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate receber `*exit`.

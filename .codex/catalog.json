@@ -3,7 +3,7 @@
   "catalogMode": "expanded",
   "canonicalAgentsDir": ".sinapse-ai/development/agents",
   "codexAgentsDir": ".codex/agents",
-  "skillsDir": ".codex/skills",
+  "skillsDir": ".agents/skills",
   "expectedSkillIds": [
     "sinapse-agent",
     "sinapse-analyst",

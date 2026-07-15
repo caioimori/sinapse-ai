@@ -49,6 +49,7 @@ const {
   regenerateAgentCommands,
 } = require('../lib/command-generator');
 const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir } = require('../lib/global-provider-adapters');
+const { assertProviderAdapterParity } = require('../lib/provider-parity');
 // Follow-up #13 — wire the transactional backup/rollback engine into the
 // installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
 // to its previous state instead of leaving ~/.sinapse half-updated.
@@ -64,6 +65,11 @@ async function cmdInstallGlobal(opts = {}) {
   // Story 10.20 — Upsert detection
   const force = Boolean(opts.force);
   const reconfigure = Boolean(opts.reconfigure);
+  const globalOnly = Boolean(opts.globalOnly);
+  const requestedLlm = opts.llm || null;
+  if (requestedLlm && !['claude-code', 'codex', 'both'].includes(requestedLlm)) {
+    throw new Error(`Invalid --llm value: ${requestedLlm}. Use claude-code, codex, or both.`);
+  }
   const existing = force ? { upsert: false } : detectExistingInstall();
   const isUpsert = existing.upsert;
 
@@ -126,7 +132,9 @@ async function cmdInstallGlobal(opts = {}) {
   // Story 10.35: --reconfigure forces prompt even in upsert mode
   let llmChoice;
   let llmWasReused = false;
-  if (isUpsert && !reconfigure && existing.llm) {
+  if (requestedLlm) {
+    llmChoice = requestedLlm;
+  } else if (isUpsert && !reconfigure && existing.llm) {
     llmChoice = existing.llm;
     llmWasReused = true;
     const ideLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
@@ -222,7 +230,7 @@ async function cmdInstallGlobal(opts = {}) {
   // project-wizard WARN must NOT revert an otherwise-good global install.
   const tx = createInstallTransaction();
   const txPaths = buildTransactionPaths(llmChoice);
-  const { writtenAgents, totalAgents, totalDelta, squadsRefreshed, squadsAdded, meta } =
+  const { activeAgentCount, totalDelta, squadsRefreshed, squadsAdded, meta } =
     await runFatalPhasesTransactional({
       tx,
       isUpsert,
@@ -269,7 +277,10 @@ async function cmdInstallGlobal(opts = {}) {
 
   // Phase 8: Install project-local files (.sinapse-ai/, .claude/, .env)
   logger.always(`\n${CYAN}Phase 8:${NC} Installing project files in current directory`);
-  try {
+  const skipProjectInstall = globalOnly || path.resolve(process.cwd()) === path.resolve(ROOT);
+  if (skipProjectInstall) {
+    logger.always(`  ${YELLOW}SKIP${NC} Project files (${globalOnly ? '--global-only' : 'source checkout detected'})`);
+  } else try {
     const wizardPath = path.join(ROOT, 'packages', 'installer', 'src', 'wizard', 'index.js');
     if (fs.existsSync(wizardPath)) {
       const { runWizard: executeWizard } = require(wizardPath);
@@ -348,7 +359,7 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`${YELLOW}══════════════════════════════════════════════════════════════${NC}`);
   }
   logger.always('');
-  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} command files${NC}`);
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${activeAgentCount} agents${NC} | ${BOLD}${activeAgentCount} native adapters${NC}`);
   logger.always(`  ${startCmd}`);
   logger.always('');
   logger.always(`  ${BOLD}Try an agent:${NC}`);
@@ -402,6 +413,9 @@ function buildTransactionPaths(llmChoice) {
     CLAUDE_COMMANDS_DIR,   // Phase 2 — generated /SINAPSE:agents:* command files
   ];
   if (llmChoice === 'claude-code' || llmChoice === 'both') dirs.push(path.join(HOME, '.claude', 'agents'));
+  // A Claude-only provider switch removes stale Codex aliases during the fatal
+  // phases, so that cleanup must be covered by the same upgrade rollback.
+  if (llmChoice === 'claude-code') dirs.push(path.join(HOME, '.agents', 'skills'));
   if (llmChoice === 'codex' || llmChoice === 'both') {
     dirs.push(path.join(HOME, '.codex', 'agents'));
     dirs.push(path.join(HOME, '.agents', 'skills'));
@@ -478,7 +492,7 @@ async function runFatalPhasesTransactional({ tx, isUpsert, paths, runPhases, onR
  * @param {string} ctx.llmChoice
  * @param {Object} ctx.existing  - detectExistingInstall() result
  * @param {Object} ctx.logger
- * @returns {{ writtenAgents: Set, totalAgents: number, totalDelta: Object, squadsRefreshed: number, squadsAdded: number, meta: Object }}
+ * @returns {{ writtenAgents: Set, activeAgentCount: number, totalDelta: Object, squadsRefreshed: number, squadsAdded: number, meta: Object }}
  */
 function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, logger }) {
   // Phase 1: Copy squads to ~/.sinapse/
@@ -486,7 +500,6 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   fs.mkdirSync(SINAPSE_HOME, { recursive: true });
 
   const squadsSrcBase = fs.existsSync(squadsDir) ? squadsDir : ROOT;
-  let totalAgents = 0;
   const totalDelta = { added: 0, updated: 0, unchanged: 0, removed: 0 };
   let squadsRefreshed = 0;
   let squadsAdded = 0;
@@ -507,7 +520,6 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
       copyDirSync(src, dest);
       logger.always(`  ${GREEN}OK${NC} ${squad.name} (${squad.agents} agents)`);
     }
-    totalAgents += squad.agents;
   }
 
   // Copy sinapse/ orqx squad
@@ -525,7 +537,6 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
       copyDirSync(sinapseMasterSrc, sinapseMasterDest);
     }
     const masterAgents = getAgentFiles(sinapseMasterDest).length;
-    totalAgents += masterAgents;
     logger.always(`  ${GREEN}OK${NC} sinapse (master, ${masterAgents} agents)`);
   }
 
@@ -543,14 +554,13 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
       copyDirSync(coreDevelopmentSrc, coreDevelopmentDest);
     }
     const coreAgents = getAgentFiles(coreDevelopmentDest).length;
-    totalAgents += coreAgents;
     logger.always(`  ${GREEN}OK${NC} core development (${coreAgents} agents)`);
   }
 
   // Phase 2: Generate agent commands (shared with `update` via command-generator).
   logger.always(`\n${CYAN}Phase 2:${NC} Generating agent commands`);
   const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
-  const { writtenAgents } = regenerateAgentCommands({
+  const { writtenAgents, totalAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
     commandsDir: commandStagingDir,
     squads,
@@ -561,6 +571,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  const activeAgentCount = assertProviderAdapterParity(llmChoice, globalAdapters, totalAgents);
   const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   const installedIdes = [];
   if (globalAdapters.claude.length) installedIdes.push('claude-code');
@@ -571,7 +582,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   // Audit 1 P0 (UN-1) — record manifest so uninstall can remove every file
   // we wrote (not just `*-orqx.md`). Idempotent: re-install overwrites.
   reconcileInstalledAgents(HOME, installedAgentFilenames);
-  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME);
+  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME, { providers: ['codex'] });
   recordInstalledAgents(installedAgentFilenames, installedIdes);
 
   // Phase 3: Generate squad-awareness.md
@@ -595,8 +606,8 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
       ? existing.prevMeta.installedAt
       : nowIso,
     squads: squads.length,
-    agents: totalAgents,
-    commands: writtenAgents.size,
+    agents: activeAgentCount,
+    commands: activeAgentCount,
     llm: llmChoice,
     platform: process.platform,
   };
@@ -605,7 +616,7 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   }
   atomicWriteFileSync(path.join(SINAPSE_HOME, 'metadata.json'), JSON.stringify(meta, null, 2));
 
-  return { writtenAgents, totalAgents, totalDelta, squadsRefreshed, squadsAdded, meta };
+  return { writtenAgents, activeAgentCount, totalDelta, squadsRefreshed, squadsAdded, meta };
 }
 
 function generateSquadAwareness(sinapseDir, squads) {

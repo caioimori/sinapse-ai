@@ -26,6 +26,24 @@ const { PostInstallValidator, formatReport: formatValidationReport } = require('
 const { _testing: { installGlobalAgents } } = require('../wizard/index');
 const { installSinapseCore } = require('../installer/sinapse-ai-installer');
 
+function detectInstalledProviders(projectRoot, recordedProviders = []) {
+  if (recordedProviders.length > 0) {
+    return {
+      includeClaude: recordedProviders.includes('claude-code'),
+      includeCodex: recordedProviders.includes('codex'),
+    };
+  }
+  const includeClaude = fs.existsSync(path.join(projectRoot, '.claude', 'skill-manifest.json'));
+  const hasCodexCatalog = fs.existsSync(path.join(projectRoot, '.codex', 'catalog.json'));
+  const hasNativeActivator = fs.existsSync(
+    path.join(projectRoot, '.agents', 'skills', 'sinapse-agent', 'SKILL.md'),
+  );
+  const hasLegacyActivator = fs.existsSync(
+    path.join(projectRoot, '.codex', 'skills', 'sinapse-agent', 'SKILL.md'),
+  );
+  return { includeClaude, includeCodex: hasCodexCatalog && (hasNativeActivator || hasLegacyActivator) };
+}
+
 /**
  * Update status types
  * @enum {string}
@@ -614,13 +632,10 @@ class SINAPSEUpdater {
       const recordedProviders = Array.isArray(this.versionInfo?.providers)
         ? this.versionInfo.providers
         : [];
-      const includeClaude = recordedProviders.length > 0
-        ? recordedProviders.includes('claude-code')
-        : fs.existsSync(path.join(this.projectRoot, '.claude', 'skill-manifest.json'));
-      const includeCodex = recordedProviders.length > 0
-        ? recordedProviders.includes('codex')
-        : fs.existsSync(path.join(this.projectRoot, '.codex', 'catalog.json'))
-          && fs.existsSync(path.join(this.projectRoot, '.agents', 'skills', 'sinapse-agent', 'SKILL.md'));
+      const { includeClaude, includeCodex } = detectInstalledProviders(
+        this.projectRoot,
+        recordedProviders,
+      );
       const delivery = await installSinapseCore({
         targetDir: this.projectRoot,
         includeClaude,
@@ -631,6 +646,7 @@ class SINAPSEUpdater {
 
       result.success = true;
       result.filesUpdated = 1 + delivery.installedFiles.length;
+      result.codexLegacySkillReconciliation = delivery.codexLegacySkillReconciliation || null;
 
       return result;
     } catch (error) {
@@ -942,4 +958,5 @@ module.exports = {
   formatCheckResult,
   formatUpdateResult,
   sanitizeLogText,
+  detectInstalledProviders,
 };

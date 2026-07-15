@@ -198,7 +198,7 @@ your-project/
 │       ├── integrations/          # PM tool adapters
 │       └── templates/             # Config templates
 ├── .claude/                       # Claude Code configuration
-│   ├── commands/SINAPSE/agents/      # Agent skills
+│   ├── agents/                       # Native Claude agents
 │   └── rules/                     # Agent rules
 ├── docs/                          # Documentation
 │   └── stories/                   # Development stories

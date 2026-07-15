@@ -60,7 +60,7 @@ O **@sinapse-orqx** (Orion - The Orchestrator) e o meta-agente principal do fram
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/sinapse-orqx.md` | Definição completa do agente (persona, comandos, dependencias) |
-| `.claude/commands/SINAPSE/agents/sinapse-orqx.md` | Comando Claude Code para ativar @sinapse-orqx |
+| `.claude/agents/sinapse-orqx.md` | Comando Claude Code para ativar @sinapse-orqx |
 
 ### Arquivos de Templates do @sinapse-orqx
 

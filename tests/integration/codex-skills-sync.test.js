@@ -23,8 +23,8 @@ describe('Codex Skills Sync', () => {
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   });
 
-  it('generates one SKILL.md per SINAPSE agent in local .codex/skills', () => {
-    const localSkillsDir = path.join(tmpRoot, '.codex', 'skills');
+  it('generates one SKILL.md per SINAPSE agent in local .agents/skills', () => {
+    const localSkillsDir = path.join(tmpRoot, '.agents', 'skills');
     const result = syncSkills({
       sourceDir: path.join(process.cwd(), '.sinapse-ai', 'development', 'agents'),
       localSkillsDir,
@@ -43,8 +43,8 @@ describe('Codex Skills Sync', () => {
   });
 
   it('supports global installation path when --global mode is enabled', () => {
-    const localSkillsDir = path.join(tmpRoot, '.codex', 'skills');
-    const globalSkillsDir = path.join(tmpRoot, '.codex-home', 'skills');
+    const localSkillsDir = path.join(tmpRoot, '.agents', 'skills');
+    const globalSkillsDir = path.join(tmpRoot, '.agents-home', 'skills');
 
     const result = syncSkills({
       sourceDir: path.join(process.cwd(), '.sinapse-ai', 'development', 'agents'),
@@ -60,8 +60,8 @@ describe('Codex Skills Sync', () => {
   });
 
   it('treats globalOnly as global output and skips local writes', () => {
-    const localSkillsDir = path.join(tmpRoot, '.codex', 'skills');
-    const globalSkillsDir = path.join(tmpRoot, '.codex-home', 'skills');
+    const localSkillsDir = path.join(tmpRoot, '.agents', 'skills');
+    const globalSkillsDir = path.join(tmpRoot, '.agents-home', 'skills');
 
     const result = syncSkills({
       sourceDir: path.join(process.cwd(), '.sinapse-ai', 'development', 'agents'),

@@ -536,6 +536,10 @@ async function runWizard(options = {}) {
         const installed = pillars.filter(p => sinapseCoreResult.installedFolders.includes(p));
         const aux = sinapseCoreResult.installedFolders.filter(f => !pillars.includes(f));
         console.log(`✅ SINAPSE core: ${sinapseCoreResult.installedFiles.length} files (${installed.length} pillars, ${aux.length} modules)`);
+        const cleanup = sinapseCoreResult.codexLegacySkillReconciliation;
+        if (cleanup && (cleanup.removed || cleanup.migrated || cleanup.quarantined || cleanup.ambiguous.length)) {
+          console.log(`SINAPSE Codex skill cleanup: ${cleanup.removed} removed, ${cleanup.migrated} migrated, ${cleanup.quarantined} quarantined, ${cleanup.ambiguous.length} ambiguous`);
+        }
       }
       answers.sinapseCoreInstalled = true;
       answers.sinapseCoreResult = sinapseCoreResult;
@@ -806,7 +810,7 @@ async function runWizard(options = {}) {
     }
 
     // Codex local-first sync: the ide-sync above drives claude-code only now,
-    // so .codex/agents + .codex/skills are regenerated here from the canonical
+    // so .codex/agents + .agents/skills are regenerated here from the canonical
     // source (the static .codex payload — scripts/tasks/JSONs — was already
     // copied by installSinapseCore when Codex was selected). Codex installs only.
     if (shouldConfigureCodex(selectedLLM)) {
@@ -822,7 +826,7 @@ async function runWizard(options = {}) {
           : { total: 0 };
         answers.codexSyncStatus = codexResult.ok ? 'synced' : 'failed';
         const m = codexResult.metrics || {};
-        console.log(`✅ Codex sync: ${codexResult.ok ? 'synced' : 'issues'} (${m.codexAgents || 0} adapters, ${nativeResult.total || 0} native agents, ${m.codexSkills || 0} compatibility skills)`);
+        console.log(`✅ Codex sync: ${codexResult.ok ? 'synced' : 'issues'} (${m.codexAgents || 0} adapters, ${nativeResult.total || 0} native agents, ${m.codexSkills || 0} native skills)`);
       } catch (codexErr) {
         console.warn(`⚠️  Codex sync failed: ${codexErr.message} — run 'npm run sync:ide:codex' post-install`);
         answers.codexSyncStatus = 'failed';

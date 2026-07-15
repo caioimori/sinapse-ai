@@ -43,7 +43,7 @@ O agente **@sprint-lead (River)** e o Scrum Master tecnico do SINAPSE, especiali
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/sprint-lead.md` | Definição core do agente SM |
-| `.claude/commands/SINAPSE/agents/sprint-lead.md` | Comando Claude Code para ativar @sprint-lead |
+| `.claude/agents/sprint-lead.md` | Comando Claude Code para ativar @sprint-lead |
 | `.cursor/rules/sm.md` | Regras para Cursor IDE |
 | `.cursor/rules/sm.mdc` | Regras compiladas para Cursor |
 

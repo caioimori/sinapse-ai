@@ -9,9 +9,28 @@
  */
 
 const fs = require('fs-extra');
+const nativeFs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
+
+const NOFOLLOW_READ_FLAGS = nativeFs.constants.O_RDONLY | (nativeFs.constants.O_NOFOLLOW || 0);
+
+async function readRegularFileNoFollow(filePath) {
+  let handle;
+  try {
+    handle = await nativeFs.promises.open(filePath, NOFOLLOW_READ_FLAGS);
+    const stat = await handle.stat();
+    if (!stat.isFile()) return null;
+    return await handle.readFile();
+  } catch (error) {
+    if (['ENOENT', 'ELOOP', 'EISDIR'].includes(error.code)) return null;
+    throw error;
+  } finally {
+    if (handle) await handle.close();
+  }
+}
 
 /**
  * Get the path to the source .sinapse-ai directory in the package
@@ -61,6 +80,82 @@ const ROOT_FILES_TO_COPY = [
 /** Project-local Codex payloads copied only when Codex support is selected. */
 const CODEX_TOP_LEVEL_DIRS = ['.agents', '.codex'];
 const CLAUDE_SUPPORT_DIRS = ['.claude/hooks', '.claude/rules'];
+
+function getClaudeHookName(command) {
+  const match = String(command || '').replace(/\\/g, '/').match(/\.claude\/hooks\/([^"'\s]+)/);
+  return match ? match[1] : null;
+}
+
+function getClaudeHookRegistrationKey(event, matcher, hookName) {
+  return JSON.stringify([event, matcher ?? null, hookName]);
+}
+
+/** Merge shipped SINAPSE hook registrations without replacing user settings. */
+async function reconcileClaudeHookSettings(packageRoot, targetDir) {
+  const sourcePath = path.join(packageRoot, '.claude', 'settings.json');
+  if (!await fs.pathExists(sourcePath)) return null;
+
+  const targetPath = path.join(targetDir, '.claude', 'settings.local.json');
+  const source = await fs.readJson(sourcePath);
+  let target = {};
+  if (await fs.pathExists(targetPath)) {
+    try {
+      target = await fs.readJson(targetPath);
+    } catch (_error) {
+      // Preserve malformed user settings verbatim. The installer must not turn
+      // a recoverable configuration problem into data loss or a failed install.
+      return null;
+    }
+  }
+  if (!target || typeof target !== 'object' || Array.isArray(target)) return null;
+  if (!target.hooks || typeof target.hooks !== 'object' || Array.isArray(target.hooks)) {
+    target.hooks = {};
+  }
+
+  const existingSettings = [target];
+  const projectSettingsPath = path.join(targetDir, '.claude', 'settings.json');
+  if (await fs.pathExists(projectSettingsPath)) {
+    try {
+      const projectSettings = await fs.readJson(projectSettingsPath);
+      if (projectSettings && typeof projectSettings === 'object' && !Array.isArray(projectSettings)) {
+        existingSettings.push(projectSettings);
+      }
+    } catch (_error) {
+      // An invalid sibling settings file cannot provide reliable registrations;
+      // ignore it while retaining its contents and merge into settings.local.
+    }
+  }
+  const registered = new Set();
+  for (const settings of existingSettings) {
+    for (const [event, groups] of Object.entries(settings.hooks || {})) {
+      for (const group of Array.isArray(groups) ? groups : []) {
+        for (const hook of Array.isArray(group.hooks) ? group.hooks : []) {
+          const hookName = getClaudeHookName(hook.command);
+          if (hookName) registered.add(getClaudeHookRegistrationKey(event, group.matcher, hookName));
+        }
+      }
+    }
+  }
+
+  for (const [event, groups] of Object.entries(source.hooks || {})) {
+    if (!Array.isArray(target.hooks[event])) target.hooks[event] = [];
+    for (const group of groups || []) {
+      for (const hook of group.hooks || []) {
+        const hookName = getClaudeHookName(hook.command);
+        const registrationKey = getClaudeHookRegistrationKey(event, group.matcher, hookName);
+        if (!hookName || registered.has(registrationKey)) continue;
+        const registration = { hooks: [hook] };
+        if (group.matcher) registration.matcher = group.matcher;
+        target.hooks[event].push(registration);
+        registered.add(registrationKey);
+      }
+    }
+  }
+
+  await fs.ensureDir(path.dirname(targetPath));
+  await fs.writeJson(targetPath, target, { spaces: 2 });
+  return path.join('.claude', 'settings.local.json');
+}
 
 /**
  * Replace {root} placeholder in file content
@@ -121,9 +216,22 @@ async function generateVersionJson(options) {
     installedFiles,
     mode = 'project-development',
     providers = [],
+    targetDir = path.dirname(targetSinapseCore),
+    providerFiles = [],
+    providerSourceRoot = targetDir,
   } = options;
 
   const fileHashes = await generateFileHashes(targetSinapseCore, installedFiles);
+  const providerFileHashes = {};
+  for (const relativePath of providerFiles) {
+    const sourcePath = path.join(providerSourceRoot, relativePath);
+    const sourceContent = await readRegularFileNoFollow(sourcePath);
+    if (sourceContent !== null) {
+      const installedContent = replaceRootPlaceholder(sourceContent.toString('utf8'));
+      const digest = crypto.createHash('sha256').update(installedContent).digest('hex');
+      providerFileHashes[relativePath.replace(/\\/g, '/')] = `sha256:${digest}`;
+    }
+  }
 
   const versionJson = {
     version,
@@ -131,6 +239,7 @@ async function generateVersionJson(options) {
     mode,
     providers: [...new Set(providers)].sort(),
     fileHashes,
+    providerFileHashes,
     customized: [],
   };
 
@@ -162,17 +271,158 @@ function isUserOwnedL3(destPath) {
   return false;
 }
 
-function isUserOwnedCodexConfig(destPath) {
-  const norm = String(destPath).replace(/\\/g, '/');
-  if (norm.endsWith('/.codex/config.toml') || norm.endsWith('/.codex/hooks.json')) return true;
-  if (/\/\.agents\/skills\/[^/]+\/SKILL\.md$/.test(norm)) {
-    const compatibilityPath = destPath.replace(
-      `${path.sep}.agents${path.sep}skills${path.sep}`,
-      `${path.sep}.codex${path.sep}skills${path.sep}`,
+function getManagedCodexSkillPaths(packageRoot) {
+  const catalog = fs.readJsonSync(path.join(packageRoot, '.codex', 'catalog.json'));
+  return [...new Set([
+    ...(catalog.expectedSkillIds || []),
+    ...(catalog.publicAliasSkillIds || []),
+    catalog.genericAgentSkillId,
+  ].filter(Boolean))]
+    .sort()
+    .map((skillId) => path.posix.join('.agents', 'skills', skillId, 'SKILL.md'));
+}
+
+function createCodexPreservePredicate(targetDir, packageRoot, previousProviderHashes = {}) {
+  const legacyRegistry = fs.readJsonSync(path.join(
+    packageRoot,
+    'packages',
+    'installer',
+    'src',
+    'migrations',
+    'legacy-codex-native-skill-hashes.json',
+  ));
+  return (destPath) => {
+    const normalized = String(destPath).replace(/\\/g, '/');
+    if (normalized.endsWith('/.codex/config.toml') || normalized.endsWith('/.codex/hooks.json')) return true;
+    if (!/\/(?:\.codex|\.agents)\/skills\/[^/]+\/SKILL\.md$/.test(normalized)) return false;
+    if (!fs.existsSync(destPath)) return false;
+    const relativePath = path.relative(targetDir, destPath).replace(/\\/g, '/');
+    const digest = hashFile(destPath);
+    const previous = String(previousProviderHashes[relativePath] || '').replace(/^sha256:/, '');
+    const legacyHashes = legacyRegistry.files[relativePath] || [];
+    return digest !== previous && !legacyHashes.includes(digest);
+  };
+}
+
+async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
+  const catalogPath = path.join(packageRoot, '.codex', 'catalog.json');
+  if (!await fs.pathExists(catalogPath)) return { removed: 0, migrated: 0, quarantined: 0, ambiguous: [] };
+
+  const catalog = await fs.readJson(catalogPath);
+  const managedIds = [...new Set([
+    ...(catalog.expectedSkillIds || []),
+    ...(catalog.publicAliasSkillIds || []),
+    catalog.genericAgentSkillId,
+  ].filter((id) => /^[a-z0-9][a-z0-9-]*$/.test(String(id))))].sort();
+  const result = { removed: 0, migrated: 0, quarantined: 0, ambiguous: [] };
+
+  for (const skillId of managedIds) {
+    const legacyPath = path.join(targetDir, '.codex', 'skills', skillId, 'SKILL.md');
+    if (!await fs.pathExists(legacyPath)) continue;
+    const legacyContent = await readRegularFileNoFollow(legacyPath);
+    if (legacyContent === null) {
+      result.ambiguous.push(path.relative(targetDir, legacyPath));
+      continue;
+    }
+
+    const nativePath = path.join(targetDir, '.agents', 'skills', skillId, 'SKILL.md');
+    if (!await fs.pathExists(nativePath)) {
+      await fs.ensureDir(path.dirname(nativePath));
+      try {
+        await fs.writeFile(nativePath, legacyContent, { flag: 'wx' });
+      } catch (error) {
+        if (error.code === 'EEXIST') {
+          result.ambiguous.push(path.relative(targetDir, legacyPath));
+          continue;
+        }
+        throw error;
+      }
+      await fs.remove(legacyPath);
+      if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+        await fs.remove(path.dirname(legacyPath));
+      }
+      result.migrated += 1;
+      continue;
+    }
+
+    const nativeContent = await readRegularFileNoFollow(nativePath);
+    if (nativeContent === null) {
+      result.ambiguous.push(path.relative(targetDir, legacyPath));
+      continue;
+    }
+    if (legacyContent.equals(nativeContent)) {
+      await fs.remove(legacyPath);
+      if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+        await fs.remove(path.dirname(legacyPath));
+      }
+      result.removed += 1;
+      continue;
+    }
+
+    const digest = crypto.createHash('sha256').update(legacyContent).digest('hex').slice(0, 12);
+    const quarantinePath = path.join(
+      targetDir,
+      '.sinapse-ai',
+      'migrations',
+      'codex-skills',
+      `${skillId}.${digest}.legacy.md`,
     );
-    if (!fs.existsSync(destPath) && fs.existsSync(compatibilityPath)) return true;
+    await fs.ensureDir(path.dirname(quarantinePath));
+    try {
+      await fs.writeFile(quarantinePath, legacyContent, { flag: 'wx' });
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+      const quarantinedContent = await readRegularFileNoFollow(quarantinePath);
+      if (quarantinedContent === null || !quarantinedContent.equals(legacyContent)) {
+        result.ambiguous.push(path.relative(targetDir, legacyPath));
+        continue;
+      }
+    }
+    await fs.remove(legacyPath);
+    if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+      await fs.remove(path.dirname(legacyPath));
+    }
+    result.quarantined += 1;
   }
-  return /\/(?:\.codex|\.agents)\/skills\/[^/]+\/SKILL\.md$/.test(norm);
+
+  return result;
+}
+
+async function reconcileLegacyClaudeAgentCommands(targetDir, packageRoot = path.join(__dirname, '..', '..', '..', '..')) {
+  const legacyDir = path.join(targetDir, '.claude', 'commands', 'SINAPSE', 'agents');
+  const result = { removed: 0, preserved: 0, ambiguous: [] };
+  if (!await fs.pathExists(legacyDir)) return result;
+
+  const registryPath = path.join(
+    packageRoot,
+    'packages',
+    'installer',
+    'src',
+    'migrations',
+    'legacy-claude-agent-command-hashes.json',
+  );
+  const registry = await fs.readJson(registryPath);
+  for (const entry of await fs.readdir(legacyDir, { withFileTypes: true })) {
+    const filePath = path.join(legacyDir, entry.name);
+    if (!entry.isFile()) {
+      result.preserved += 1;
+      result.ambiguous.push(path.relative(targetDir, filePath));
+      continue;
+    }
+    const content = await fs.readFile(filePath);
+    const digest = crypto.createHash('sha256').update(content).digest('hex');
+    const knownHashes = registry.files[entry.name] || [];
+    const isMarked = content.includes(Buffer.from('SINAPSE-MANAGED:claude-command'));
+    if (knownHashes.includes(digest) || isMarked) {
+      await fs.remove(filePath);
+      result.removed += 1;
+    } else {
+      result.preserved += 1;
+      result.ambiguous.push(path.relative(targetDir, filePath));
+    }
+  }
+  if ((await fs.readdir(legacyDir)).length === 0) await fs.remove(legacyDir);
+  return result;
 }
 
 async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true, preserveExisting = null) {
@@ -350,6 +600,15 @@ async function installSinapseCore(options = {}) {
   try {
     const sourceDir = getSinapseCoreSourcePath();
     const targetSinapseCore = path.join(targetDir, '.sinapse-ai');
+    const previousVersionPath = path.join(targetSinapseCore, 'version.json');
+    let previousProviderHashes = {};
+    if (await fs.pathExists(previousVersionPath)) {
+      try {
+        previousProviderHashes = (await fs.readJson(previousVersionPath)).providerFileHashes || {};
+      } catch (_error) {
+        previousProviderHashes = {};
+      }
+    }
 
     // Check if source exists
     if (!await fs.pathExists(sourceDir)) {
@@ -415,7 +674,7 @@ async function installSinapseCore(options = {}) {
       if (await fs.pathExists(src)) {
         spinner.text = `Copying ${dirName}...`;
         const preserveExisting = dirName === '.codex' || dirName === '.agents'
-          ? isUserOwnedCodexConfig
+          ? createCodexPreservePredicate(targetDir, pkgRoot, previousProviderHashes)
           : null;
         const copied = await copyDirectoryWithRootReplacement(
           src,
@@ -431,6 +690,7 @@ async function installSinapseCore(options = {}) {
     }
 
     if (includeClaude) {
+      result.claudeLegacyAgentCommandReconciliation = await reconcileLegacyClaudeAgentCommands(targetDir, pkgRoot);
       const claude = await deliverClaudeNativeAdapters(pkgRoot, targetDir, { overwriteManaged: overwriteManagedAdapters });
       result.claudeNativeAgentFiles = claude.agents.length;
       result.claudeNativeSkillFiles = claude.skills.length;
@@ -441,6 +701,8 @@ async function installSinapseCore(options = {}) {
       if (await fs.pathExists(claudeContextSource) && await copyFileWithRootReplacement(claudeContextSource, claudeContextDest, true)) {
         result.installedFiles.push(path.join('.claude', 'CLAUDE.md'));
       }
+      const claudeSettings = await reconcileClaudeHookSettings(pkgRoot, targetDir);
+      if (claudeSettings) result.installedFiles.push(claudeSettings);
     }
 
     // AGENTS.md is the Codex CLI's default context file (Imperator greeting +
@@ -455,6 +717,7 @@ async function installSinapseCore(options = {}) {
         result.installedFiles.push('AGENTS.md');
         result.agentsMdInstalled = true;
       }
+      result.codexLegacySkillReconciliation = await reconcileLegacyCodexSkills(targetDir, pkgRoot);
     }
 
     // Create install manifest
@@ -481,6 +744,9 @@ async function installSinapseCore(options = {}) {
       installedFiles: result.installedFiles,
       mode: 'project-development',
       providers: [includeClaude && 'claude-code', includeCodex && 'codex'].filter(Boolean),
+      targetDir,
+      providerFiles: includeCodex ? getManagedCodexSkillPaths(pkgRoot) : [],
+      providerSourceRoot: pkgRoot,
     });
     result.versionInfo = versionInfo;
 
@@ -602,10 +868,16 @@ module.exports = {
   copyFileWithRootReplacement,
   copyDirectoryWithRootReplacement,
   isUserOwnedL3,
+  createCodexPreservePredicate,
+  getManagedCodexSkillPaths,
+  reconcileLegacyCodexSkills,
+  reconcileLegacyClaudeAgentCommands,
   generateVersionJson,
   generateFileHashes,
   deliverCodexRootFiles,
   deliverClaudeNativeAdapters,
+  getClaudeHookName,
+  reconcileClaudeHookSettings,
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
   CODEX_ROOT_FILES,

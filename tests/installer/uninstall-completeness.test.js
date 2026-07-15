@@ -30,8 +30,8 @@ describe('Story 10.40 — removeOrqxAgentsFrom()', () => {
 
   test('removes only *-orqx.md files, leaves user-authored alone', () => {
     const dir = makeTempDir();
-    fs.writeFileSync(path.join(dir, 'brand-orqx.md'), 'agent');
-    fs.writeFileSync(path.join(dir, 'commercial-orqx.md'), 'agent');
+    fs.writeFileSync(path.join(dir, 'brand-orqx.md'), '<!-- SINAPSE-MANAGED:global-agent -->\nagent');
+    fs.writeFileSync(path.join(dir, 'commercial-orqx.md'), '<!-- SINAPSE-MANAGED:global-agent -->\nagent');
     fs.writeFileSync(path.join(dir, 'my-custom-agent.md'), 'mine');
     fs.writeFileSync(path.join(dir, 'README.md'), 'docs');
 

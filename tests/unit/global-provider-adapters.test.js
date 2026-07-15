@@ -38,14 +38,28 @@ describe('global provider adapters', () => {
     const result = deliverGlobalProviderAdapters({ llmChoice: 'claude-code', home, commandsDir });
 
     expect(result.claude).toHaveLength(2);
+    expect(result.claudeSkills).toEqual(['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent']);
     expect(fs.existsSync(path.join(home, '.claude', 'agents', 'developer.md'))).toBe(true);
+    expect(fs.readFileSync(path.join(home, '.claude', 'agents', 'developer.md'), 'utf8'))
+      .toContain('SINAPSE-MANAGED:global-agent');
     expect(fs.existsSync(path.join(home, '.codex'))).toBe(false);
     expect(fs.existsSync(path.join(home, '.agents'))).toBe(false);
+    for (const id of result.claudeSkills) {
+      expect(fs.existsSync(path.join(home, '.claude', 'skills', id, 'SKILL.md'))).toBe(true);
+    }
   });
 
   test('codex-only stages generated commands outside Claude directories', () => {
     expect(getGlobalCommandStagingDir({
       llmChoice: 'codex',
+      sinapseHome: path.join(home, '.sinapse'),
+      claudeCommandsDir: path.join(home, '.claude', 'commands', 'SINAPSE', 'agents'),
+    })).toBe(path.join(home, '.sinapse', '.generated', 'agents'));
+  });
+
+  test.each(['claude-code', 'both'])('%s also stages outside active Claude commands', (llmChoice) => {
+    expect(getGlobalCommandStagingDir({
+      llmChoice,
       sinapseHome: path.join(home, '.sinapse'),
       claudeCommandsDir: path.join(home, '.claude', 'commands', 'SINAPSE', 'agents'),
     })).toBe(path.join(home, '.sinapse', '.generated', 'agents'));
@@ -60,7 +74,7 @@ describe('global provider adapters', () => {
     const toml = fs.readFileSync(path.join(staleDir, 'developer.toml'), 'utf8');
 
     expect(result.codex).toHaveLength(2);
-    expect(result.skills).toEqual(['snps', 'sinapse', 'snps-orqx', 'sinapse-agent']);
+    expect(result.skills).toEqual(['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent']);
     expect(toml).toContain('name = "developer"');
     expect(toml).toContain('description = "developer specialist"');
     expect(fs.existsSync(path.join(staleDir, 'developer.md'))).toBe(false);
@@ -78,6 +92,48 @@ describe('global provider adapters', () => {
     expect(fs.existsSync(path.join(home, '.claude', 'agents', 'sinapse-orqx.md'))).toBe(true);
     expect(fs.existsSync(path.join(home, '.codex', 'agents', 'sinapse-orqx.toml'))).toBe(true);
     expect(fs.existsSync(path.join(home, '.codex', 'agents', 'sinapse-orqx.md'))).toBe(false);
+  });
+
+  test('keeps supreme aliases as skills instead of duplicate global agents', () => {
+    writeCommand(commandsDir, 'snps-orqx');
+    writeCommand(commandsDir, 'sinapse');
+    writeCommand(commandsDir, 'snps');
+
+    const result = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir });
+
+    expect(result.claude).toEqual(['developer.md', 'snps-orqx.md']);
+    expect(result.codex).toEqual(['developer.toml', 'snps-orqx.toml']);
+    expect(result.claudeSkills).toEqual(['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent']);
+    expect(fs.existsSync(path.join(home, '.claude', 'agents', 'sinapse.md'))).toBe(false);
+    expect(fs.existsSync(path.join(home, '.claude', 'agents', 'snps.md'))).toBe(false);
+    expect(fs.readFileSync(path.join(home, '.claude', 'agents', 'snps-orqx.md'), 'utf8'))
+      .toMatch(/^name: sinapse-orqx$/m);
+    expect(fs.readFileSync(path.join(home, '.claude', 'skills', 'snps', 'SKILL.md'), 'utf8'))
+      .toContain('sinapse-orqx');
+  });
+
+  test('removes stale managed adapters and preserves custom global agents', () => {
+    const claudeAgents = path.join(home, '.claude', 'agents');
+    const codexAgents = path.join(home, '.codex', 'agents');
+    fs.mkdirSync(claudeAgents, { recursive: true });
+    fs.mkdirSync(codexAgents, { recursive: true });
+    fs.writeFileSync(path.join(claudeAgents, 'stale.md'), '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    fs.writeFileSync(path.join(claudeAgents, 'legacy-stale.md'), [
+      'ACTIVATION-NOTICE: This command activates an agent from sinapse.',
+      'Read C:\\Users\\test\\.sinapse\\sinapse\\agents\\legacy-stale.md',
+      'Load the squad manifest',
+    ].join('\n'));
+    fs.writeFileSync(path.join(claudeAgents, 'custom.md'), '# custom\n');
+    fs.writeFileSync(path.join(codexAgents, 'stale.toml'), '# SINAPSE-MANAGED:global-agent\n');
+    fs.writeFileSync(path.join(codexAgents, 'custom.toml'), 'name = "custom"\n');
+
+    deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir });
+
+    expect(fs.existsSync(path.join(claudeAgents, 'stale.md'))).toBe(false);
+    expect(fs.existsSync(path.join(claudeAgents, 'legacy-stale.md'))).toBe(false);
+    expect(fs.existsSync(path.join(codexAgents, 'stale.toml'))).toBe(false);
+    expect(fs.existsSync(path.join(claudeAgents, 'custom.md'))).toBe(true);
+    expect(fs.existsSync(path.join(codexAgents, 'custom.toml'))).toBe(true);
   });
 
   test('preserves a user-owned global skill with the same ID', () => {

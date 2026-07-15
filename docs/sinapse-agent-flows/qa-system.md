@@ -64,7 +64,7 @@ O agente **@quality-gate (Quinn)** e o Test Architect & Quality Advisor do SINAP
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/quality-gate.md` | Definição completa do agente QA |
-| `.claude/commands/SINAPSE/agents/quality-gate.md` | Comando Claude Code para ativar @quality-gate |
+| `.claude/agents/quality-gate.md` | Comando Claude Code para ativar @quality-gate |
 
 ### Arquivos de Workflow
 

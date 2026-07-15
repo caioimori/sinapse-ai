@@ -9,7 +9,7 @@ O Codex hoje e alvo de primeira classe no SINAPSE:
 
 - `AGENTS.md` como contrato operacional do projeto no Codex
 - suporte oficial no installer/sync (`codex` em `ide-configs`)
-- skills nativas via `.codex/skills` com estrategia local-first
+- skills nativas via `.agents/skills` com estrategia local-first e raiz unica
 - pipeline canonico de greeting/ativacao compartilhado
 - validadores dedicados para detectar drift rapidamente
 - suporte a notify command e hooks de ferramenta em releases recentes do Codex CLI
@@ -44,7 +44,7 @@ Regra prática para iniciantes:
 ### Artefatos Codex no projeto
 
 - Agentes auxiliares: `.codex/agents/`
-- Skills locais: `.codex/skills/sinapse-*/SKILL.md`
+- Skills locais: `.agents/skills/sinapse-*/SKILL.md`
 
 ## Fluxo Operacional Recomendado
 
@@ -65,8 +65,8 @@ Fallback: atalhos definidos em `AGENTS.md` (`@architect`, `/architect`, etc.).
 
 Este repositorio usa local-first para skills:
 
-- preferir `.codex/skills` versionado no projeto
-- evitar duplicar com `~/.codex/skills`
+- preferir `.agents/skills` versionado no projeto
+- nao gerar espelhos SINAPSE em `.codex/skills` ou `~/.codex/skills`
 - usar `npm run sync:skills:codex:global` apenas quando quiser instalacao global explicitamente
 
 Isso evita menu duplicado no `/skills` e reduz drift entre equipe/CI.
@@ -97,7 +97,7 @@ Criterio de sucesso:
 
 - `AGENTS.md` presente e coerente
 - `.codex/agents/*.md` existente
-- `.codex/skills/sinapse-*/SKILL.md` existente
+- `.agents/skills/sinapse-*/SKILL.md` existente
 - validadores sem erro
 
 ## Recursos Recentes do Codex (SINAPSE 4.0)
@@ -130,7 +130,7 @@ Mitigacao operacional no SINAPSE:
 ### Skills duplicadas no `/skills`
 
 Causa tipica:
-- artefatos duplicados entre `.codex/skills` e `~/.codex/skills`
+- artefatos SINAPSE duplicados entre raizes de skills descobertas pelo Codex
 
 Correcao:
 - manter local-first neste repo
@@ -168,4 +168,3 @@ Se houver divergencia entre estes documentos, a ordem de verdade para operacao d
 2. scripts reais em `package.json`
 3. este documento
 4. docs de overview
-

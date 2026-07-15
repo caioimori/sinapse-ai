@@ -200,7 +200,7 @@ seu-projeto/
 │       ├── integrations/          # Adaptadores de PM tools
 │       └── templates/             # Templates de configuração
 ├── .claude/                       # Configuração Claude Code
-│   ├── commands/SINAPSE/agents/      # Skills de agentes
+│   ├── agents/                       # Agentes nativos do Claude
 │   └── rules/                     # Regras de agentes
 ├── docs/                          # Documentação
 │   └── stories/                   # Stories de desenvolvimento
@@ -267,4 +267,3 @@ git clone https://github.com/caioimori/sinapse-ai.git
 ---
 
 **Bem-vindo ao SINAPSE! Bom coding!**
-

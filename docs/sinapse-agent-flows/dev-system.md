@@ -55,7 +55,7 @@ O agente **@developer (Dex)** e o Full Stack Developer do SINAPSE, responsavel p
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/developer.md` | Definição core do agente @developer (persona, comandos, workflows) |
-| `.claude/commands/SINAPSE/agents/developer.md` | Comando Claude Code para ativar @developer |
+| `.claude/agents/developer.md` | Comando Claude Code para ativar @developer |
 
 ### Arquivos de Checklists Usados pelo @dev
 
