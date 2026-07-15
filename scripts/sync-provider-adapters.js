@@ -15,6 +15,7 @@ const { resolveCodexAgent } = require('../.codex/scripts/resolve-codex-agent');
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const CLAUDE_AGENTS_DIR = '.claude/agents';
 const CLAUDE_SKILLS_DIR = '.claude/skills';
+const SUPPLEMENTAL_PROVIDER_SKILL_IDS = ['react-bits-frontend'];
 
 function writeFileAtomically(filePath, content) {
   const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
@@ -136,11 +137,13 @@ function collectClaudeSkills(projectRoot = PROJECT_ROOT) {
     catalog.genericAgentSkillId,
   ])].sort();
 
-  return skillIds.map((skillId) => {
+  return [...new Set([...skillIds, ...SUPPLEMENTAL_PROVIDER_SKILL_IDS])].sort().map((skillId) => {
     const nativePath = path.join(projectRoot, '.agents', 'skills', skillId, 'SKILL.md');
     const metadata = parseSkillMetadata(fs.readFileSync(nativePath, 'utf8'));
     let content;
-    if (skillId === catalog.genericAgentSkillId) {
+    if (SUPPLEMENTAL_PROVIDER_SKILL_IDS.includes(skillId)) {
+      content = fs.readFileSync(nativePath, 'utf8');
+    } else if (skillId === catalog.genericAgentSkillId) {
       content = renderClaudeGenericSkill(skillId, metadata.description);
     } else if (skillId === 'sinapse-loop' || skillId === 'sinapse-spec-driven') {
       content = renderClaudeWorkflowSkill(skillId, metadata.description);
@@ -195,6 +198,7 @@ if (require.main === module) main();
 module.exports = {
   CLAUDE_AGENTS_DIR,
   CLAUDE_SKILLS_DIR,
+  SUPPLEMENTAL_PROVIDER_SKILL_IDS,
   claudeAgentFileName,
   renderClaudeAgent,
   collectClaudeSkills,

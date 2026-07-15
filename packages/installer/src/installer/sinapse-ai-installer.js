@@ -14,6 +14,7 @@ const path = require('path');
 const crypto = require('crypto');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
+const { copyReactBitsCorpusSync } = require('./react-bits-corpus');
 
 const NOFOLLOW_READ_FLAGS = nativeFs.constants.O_RDONLY | (nativeFs.constants.O_NOFOLLOW || 0);
 
@@ -705,6 +706,13 @@ async function installSinapseCore(options = {}) {
       if (claudeSettings) result.installedFiles.push(claudeSettings);
     }
 
+    if (includeClaude || includeCodex) {
+      spinner.text = 'Copying React Bits corpus...';
+      const corpusFiles = copyReactBitsCorpusSync(pkgRoot, targetDir);
+      result.reactBitsCorpusFiles = corpusFiles.length;
+      result.installedFiles.push(...corpusFiles);
+    }
+
     // AGENTS.md is the Codex CLI's default context file (Imperator greeting +
     // the full agent roster). It lives at the package ROOT (not under .codex/ or
     // .sinapse-ai/), so neither loop above reaches it. Without it, a Codex user's
@@ -878,6 +886,7 @@ module.exports = {
   deliverClaudeNativeAdapters,
   getClaudeHookName,
   reconcileClaudeHookSettings,
+  copyReactBitsCorpusSync,
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
   CODEX_ROOT_FILES,

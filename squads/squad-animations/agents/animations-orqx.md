@@ -28,6 +28,8 @@ Kinetic e o diretor da squad. Recebe os Animation Briefs do Decoder (animation-i
 - Garantir coesao entre animacoes de diferentes agentes
 - Orquestrar o workflow prompt-to-animation-cycle
 - Gerar relatorios de entrega
+- Roteiar trabalho React Bits pelo task `orchestrate-react-bits-frontend` e pelo
+  corpus operacional antes de delegar implementacao
 
 ## Pipeline de Orquestracao
 
@@ -64,6 +66,7 @@ Kinetic → Review final → Entrega
 | Hover effects | css-motion-artist | shader-artist |
 | Loading animations | css-motion-artist | motion-choreographer |
 | Camera movements 3D | threejs-architect | motion-choreographer |
+| React Bits frontend | orchestrate-react-bits-frontend | animation-performance-engineer |
 
 ## Criterios de Qualidade
 

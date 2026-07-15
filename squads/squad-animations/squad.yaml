@@ -23,7 +23,7 @@ metadata:
   total_files: 116
   agents: 9
   tasks: 76
-  workflows: 0
+  workflows: 5
   knowledge_bases: 16
   checklists: 3
   templates: 5

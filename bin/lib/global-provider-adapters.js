@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const {
   MASTER_ALIAS_ENTRY_POINTS,
   GLOBAL_PROVIDER_SKILL_IDS,
+  GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS,
   SUPREME_ORCHESTRATOR_ID,
   SUPREME_PUBLIC_ID,
 } = require('./provider-contract');
@@ -102,7 +103,11 @@ function markGlobalAgent(markdown, fileName = '') {
   return `${content.trimEnd()}\n\n<!-- SINAPSE-MANAGED:global-agent -->\n`;
 }
 
-function renderGlobalSkill(skillId) {
+function renderGlobalSkill(skillId, sourceContent = null) {
+  if (skillId === 'react-bits-frontend') {
+    if (!sourceContent) throw new Error('React Bits global skill source is required');
+    return `${String(sourceContent).trimEnd()}\n\n<!-- SINAPSE-MANAGED:global-skill -->\n`;
+  }
   const generic = skillId === 'sinapse-agent';
   return [
     '---',
@@ -264,9 +269,9 @@ function writeGlobalSkillIfManaged(skillPath, content, home = path.dirname(skill
   }
 }
 
-function isValidGlobalSkill(skillId, skillPath) {
+function isValidGlobalSkill(skillId, skillPath, sourceContent = null) {
   const content = readRegularFileNoFollowSync(skillPath, 'utf8');
-  return content !== null && content === renderGlobalSkill(skillId);
+  return content !== null && content === renderGlobalSkill(skillId, sourceContent);
 }
 
 function removeStaleManagedAgents(targetDir, expectedFiles, extension, options = {}) {
@@ -318,7 +323,7 @@ function removeManagedFileWithBinding(home, filePath, beforeDelete) {
   }
 }
 
-function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, testHooks = {} }) {
+function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBitsSkillPath, testHooks = {} }) {
   let commandFiles = fs.existsSync(commandsDir)
     ? fs.readdirSync(commandsDir).filter((file) => file.endsWith('.md')).sort()
     : [];
@@ -334,6 +339,13 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, testHooks
     skills: [],
     availableSkills: [],
   };
+  let reactBitsSkillContent = null;
+  const providerSkillIds = [...GLOBAL_PROVIDER_SKILL_IDS];
+  if (reactBitsSkillPath) {
+    reactBitsSkillContent = readRegularFileNoFollowSync(reactBitsSkillPath, 'utf8');
+    if (reactBitsSkillContent === null) throw new Error(`React Bits global skill is missing: ${reactBitsSkillPath}`);
+    providerSkillIds.push(...GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS);
+  }
 
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     const targetDir = path.join(home, '.claude', 'agents');
@@ -345,12 +357,12 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, testHooks
       written.claude.push(file);
     }
     const skillsRoot = path.join(home, '.claude', 'skills');
-    for (const skillId of GLOBAL_PROVIDER_SKILL_IDS) {
+    for (const skillId of providerSkillIds) {
       const skillPath = path.join(skillsRoot, skillId, 'SKILL.md');
-      if (writeGlobalSkillIfManaged(skillPath, renderGlobalSkill(skillId), home, { beforePublish: testHooks.beforeSkillPublish })) {
+      if (writeGlobalSkillIfManaged(skillPath, renderGlobalSkill(skillId, reactBitsSkillContent), home, { beforePublish: testHooks.beforeSkillPublish })) {
         written.claudeSkills.push(skillId);
       }
-      if (isValidGlobalSkill(skillId, skillPath)) written.claudeAvailableSkills.push(skillId);
+      if (isValidGlobalSkill(skillId, skillPath, reactBitsSkillContent)) written.claudeAvailableSkills.push(skillId);
     }
   }
   if (llmChoice === 'codex' || llmChoice === 'both') {
@@ -373,13 +385,13 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, testHooks
       written.codex.push(tomlName);
     }
     const skillsRoot = path.join(home, '.agents', 'skills');
-    for (const skillId of GLOBAL_PROVIDER_SKILL_IDS) {
+    for (const skillId of providerSkillIds) {
       const skillDir = path.join(skillsRoot, skillId);
       const skillPath = path.join(skillDir, 'SKILL.md');
-      if (writeGlobalSkillIfManaged(skillPath, renderGlobalSkill(skillId), home, { beforePublish: testHooks.beforeSkillPublish })) {
+      if (writeGlobalSkillIfManaged(skillPath, renderGlobalSkill(skillId, reactBitsSkillContent), home, { beforePublish: testHooks.beforeSkillPublish })) {
         written.skills.push(skillId);
       }
-      if (isValidGlobalSkill(skillId, skillPath)) written.availableSkills.push(skillId);
+      if (isValidGlobalSkill(skillId, skillPath, reactBitsSkillContent)) written.availableSkills.push(skillId);
     }
   }
   return written;

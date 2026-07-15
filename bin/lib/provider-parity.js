@@ -3,7 +3,13 @@
 const {
   CANONICAL_AGENT_COUNT,
   GLOBAL_PROVIDER_SKILL_IDS,
+  GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS,
 } = require('./provider-contract');
+
+const REQUIRED_GLOBAL_PROVIDER_SKILL_IDS = Object.freeze([
+  ...GLOBAL_PROVIDER_SKILL_IDS,
+  ...GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS,
+]);
 
 function normalizeCanonicalCatalog(canonicalCatalog, extension) {
   if (!canonicalCatalog || typeof canonicalCatalog === 'number') {
@@ -55,14 +61,14 @@ function assertProviderAdapterParity(llmChoice, adapters, canonicalCatalog) {
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     problems.push(...describeCatalogDivergence('Claude Code', adapters.claude, claudeCatalog));
     const claudeSkills = new Set(adapters.claudeAvailableSkills || adapters.claudeSkills || []);
-    const missingAliases = GLOBAL_PROVIDER_SKILL_IDS.filter((alias) => !claudeSkills.has(alias));
-    if (missingAliases.length) problems.push(`Claude Code alias skills missing: ${missingAliases.join(', ')}`);
+    const missingSkills = REQUIRED_GLOBAL_PROVIDER_SKILL_IDS.filter((skillId) => !claudeSkills.has(skillId));
+    if (missingSkills.length) problems.push(`Claude Code global skills missing: ${missingSkills.join(', ')}`);
   }
   if (llmChoice === 'codex' || llmChoice === 'both') {
     problems.push(...describeCatalogDivergence('Codex', adapters.codex, codexCatalog));
     const codexSkills = new Set(adapters.availableSkills || adapters.skills || []);
-    const missingAliases = GLOBAL_PROVIDER_SKILL_IDS.filter((alias) => !codexSkills.has(alias));
-    if (missingAliases.length) problems.push(`Codex alias skills missing: ${missingAliases.join(', ')}`);
+    const missingSkills = REQUIRED_GLOBAL_PROVIDER_SKILL_IDS.filter((skillId) => !codexSkills.has(skillId));
+    if (missingSkills.length) problems.push(`Codex global skills missing: ${missingSkills.join(', ')}`);
   }
   if (problems.length) {
     throw new Error(`Provider adapter parity failed (${problems.join('; ')})`);
@@ -70,4 +76,4 @@ function assertProviderAdapterParity(llmChoice, adapters, canonicalCatalog) {
   return claudeCatalog.count;
 }
 
-module.exports = { assertProviderAdapterParity };
+module.exports = { assertProviderAdapterParity, REQUIRED_GLOBAL_PROVIDER_SKILL_IDS };

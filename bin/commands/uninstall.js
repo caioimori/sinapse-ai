@@ -170,7 +170,7 @@ function removeOrqxAgentsFrom(dir) {
   return removeInstalledAgentsFrom(dir);
 }
 
-const MANAGED_GLOBAL_SKILL_IDS = ['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent'];
+const MANAGED_GLOBAL_SKILL_IDS = ['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent', 'react-bits-frontend'];
 const MANAGED_GLOBAL_SKILL_MARKER = 'SINAPSE-MANAGED:global-skill';
 
 function removeManagedGlobalSkills(home = HOME, options = {}) {
