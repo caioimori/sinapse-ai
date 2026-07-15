@@ -1368,7 +1368,7 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:a2912203e0eed0340d0c2066bc72dbc45c92f6d293cafb0db6eb47cbbc0c3e04
+    hash: sha256:32a8bffbf51e0e6f85e4743c7a0f1ad72691e06ba0d41f97400d6b85e367adb5
     type: data
     size: 559332
   - path: data/learned-patterns.yaml

@@ -57,6 +57,22 @@ function quoteBash(value) {
   return `'${value.replace(/'/g, escapedSingleQuote)}'`;
 }
 
+const bashPathCache = new Map();
+
+function toRuntimeBashPath(filePath) {
+  if (process.platform !== 'win32') return filePath;
+  if (bashPathCache.has(filePath)) return bashPathCache.get(filePath);
+
+  const converted = spawnSync('bash', ['-c', `cygpath -u ${quoteBash(filePath)}`], {
+    encoding: 'utf8',
+  });
+  const resolved = converted.status === 0 && converted.stdout.trim()
+    ? converted.stdout.trim()
+    : toBashPath(filePath);
+  bashPathCache.set(filePath, resolved);
+  return resolved;
+}
+
 function runHook({ command, projectRoot }) {
   const input = JSON.stringify({
     tool_name: 'Bash',
@@ -66,8 +82,8 @@ function runHook({ command, projectRoot }) {
   const bashArgs = process.platform === 'win32'
     ? [
       '-c',
-      `export CLAUDE_PROJECT_DIR=${quoteBash(toBashPath(projectRoot))}; `
-        + `exec ${quoteBash(toBashPath(HOOK_PATH))}`,
+      `export CLAUDE_PROJECT_DIR=${quoteBash(toRuntimeBashPath(projectRoot))}; `
+        + `exec ${quoteBash(toRuntimeBashPath(HOOK_PATH))}`,
     ]
     : [HOOK_PATH];
   const result = spawnSync('bash', bashArgs, {
