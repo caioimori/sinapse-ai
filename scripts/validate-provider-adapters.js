@@ -41,32 +41,38 @@ function validateClaudeHookSettings(projectRoot) {
   for (const settingsPath of settingsPaths) {
     try {
       const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
-      commands.push(...Object.values(settings.hooks || {})
-        .flatMap((groups) => groups || [])
-        .flatMap((group) => group.hooks || [])
-        .map((hook) => ({
-          command: String(hook.command || ''),
-          source: path.relative(projectRoot, settingsPath),
-        })));
+      for (const [event, groups] of Object.entries(settings.hooks || {})) {
+        for (const group of groups || []) {
+          commands.push(...(group.hooks || []).map((hook) => ({
+            command: String(hook.command || ''),
+            event,
+            matcher: group.matcher ?? null,
+            source: path.relative(projectRoot, settingsPath),
+          })));
+        }
+      }
     } catch (error) {
       errors.push(`Claude hook settings (${path.relative(projectRoot, settingsPath)}): ${error.message}`);
     }
   }
   const registered = new Set();
+  const registeredHookNames = new Set();
   for (const entry of commands) {
     const match = entry.command.replace(/\\/g, '/').match(/\.claude\/hooks\/([^"'\s]+)/);
     if (!match) continue;
-    if (registered.has(match[1])) {
-      errors.push(`Claude hook is registered more than once across settings: ${match[1]} (${entry.source})`);
+    const registrationKey = JSON.stringify([entry.event, entry.matcher, match[1]]);
+    if (registered.has(registrationKey)) {
+      errors.push(`Claude hook is registered more than once for the same event and matcher: ${match[1]} (${entry.source})`);
       continue;
     }
-    registered.add(match[1]);
+    registered.add(registrationKey);
+    registeredHookNames.add(match[1]);
     if (!fs.existsSync(path.join(projectRoot, '.claude', 'hooks', match[1]))) {
       errors.push(`Claude settings points to missing hook: .claude/hooks/${match[1]}`);
     }
   }
   for (const hook of REQUIRED_CLAUDE_HOOKS) {
-    if (!registered.has(hook)) errors.push(`Claude governance hook is not registered: ${hook}`);
+    if (!registeredHookNames.has(hook)) errors.push(`Claude governance hook is not registered: ${hook}`);
   }
   return errors;
 }

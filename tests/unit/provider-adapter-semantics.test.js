@@ -68,8 +68,26 @@ describe('Claude provider semantic contracts', () => {
     write('.claude/settings.local.json', JSON.stringify(settings));
 
     expect(validateClaudeHookSettings(root).some((error) => error.startsWith(
-      'Claude hook is registered more than once across settings: doc-first-gate.cjs',
+      'Claude hook is registered more than once for the same event and matcher: doc-first-gate.cjs',
     ))).toBe(true);
+  });
+
+  test('accepts the same hook under distinct events or matchers', () => {
+    write(path.join('.claude', 'hooks', 'doc-first-gate.cjs'));
+    write('.claude/settings.json', JSON.stringify({
+      hooks: {
+        PreToolUse: [{ matcher: 'Bash', hooks: [{ command: 'node .claude/hooks/doc-first-gate.cjs' }] }],
+      },
+    }));
+    write('.claude/settings.local.json', JSON.stringify({
+      hooks: {
+        PreToolUse: [{ matcher: 'Write|Edit', hooks: [{ command: 'node .claude/hooks/doc-first-gate.cjs' }] }],
+        PostToolUse: [{ matcher: 'Bash', hooks: [{ command: 'node .claude/hooks/doc-first-gate.cjs' }] }],
+      },
+    }));
+
+    expect(validateClaudeHookSettings(root).filter((error) => error.includes('registered more than once')))
+      .toEqual([]);
   });
 
   test('rejects a public alias with a divergent canonical target', () => {

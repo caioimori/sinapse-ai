@@ -89,13 +89,20 @@ describe('dual CLI clean-install matrix', () => {
         const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
         expect(settings.language).toBe('Portuguese');
         expect(JSON.stringify(settings)).toContain('custom-hook.cjs');
-        expect(JSON.stringify(settings)).not.toContain('doc-first-gate.cjs');
+        expect(settings.hooks.PreToolUse).toEqual(expect.arrayContaining([
+          expect.objectContaining({
+            matcher: 'Write|Edit',
+            hooks: [expect.objectContaining({
+              command: expect.stringContaining('doc-first-gate.cjs'),
+            })],
+          }),
+        ]));
         const combinedSettings = [
           await fs.readJson(path.join(targetDir, '.claude', 'settings.json')),
           settings,
         ];
         const docFirstRegistrations = JSON.stringify(combinedSettings).match(/doc-first-gate\.cjs/g) || [];
-        expect(docFirstRegistrations).toHaveLength(1);
+        expect(docFirstRegistrations).toHaveLength(2);
         expect(validateClaudeNative(targetDir).ok).toBe(true);
         await fs.remove(path.join(targetDir, '.claude', 'hooks', 'doc-first-gate.cjs'));
         expect(validateClaudeNative(targetDir).errors).toContain(
