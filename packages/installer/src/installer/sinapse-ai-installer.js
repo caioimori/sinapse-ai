@@ -9,10 +9,28 @@
  */
 
 const fs = require('fs-extra');
+const nativeFs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
+
+const NOFOLLOW_READ_FLAGS = nativeFs.constants.O_RDONLY | (nativeFs.constants.O_NOFOLLOW || 0);
+
+async function readRegularFileNoFollow(filePath) {
+  let handle;
+  try {
+    handle = await nativeFs.promises.open(filePath, NOFOLLOW_READ_FLAGS);
+    const stat = await handle.stat();
+    if (!stat.isFile()) return null;
+    return await handle.readFile();
+  } catch (error) {
+    if (['ENOENT', 'ELOOP', 'EISDIR'].includes(error.code)) return null;
+    throw error;
+  } finally {
+    if (handle) await handle.close();
+  }
+}
 
 /**
  * Get the path to the source .sinapse-ai directory in the package
@@ -273,8 +291,8 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
   for (const skillId of managedIds) {
     const legacyPath = path.join(targetDir, '.codex', 'skills', skillId, 'SKILL.md');
     if (!await fs.pathExists(legacyPath)) continue;
-    const legacyStat = await fs.lstat(legacyPath);
-    if (!legacyStat.isFile()) {
+    const legacyContent = await readRegularFileNoFollow(legacyPath);
+    if (legacyContent === null) {
       result.ambiguous.push(path.relative(targetDir, legacyPath));
       continue;
     }
@@ -288,15 +306,11 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
       continue;
     }
 
-    const nativeStat = await fs.lstat(nativePath);
-    if (!nativeStat.isFile()) {
+    const nativeContent = await readRegularFileNoFollow(nativePath);
+    if (nativeContent === null) {
       result.ambiguous.push(path.relative(targetDir, legacyPath));
       continue;
     }
-    const [legacyContent, nativeContent] = await Promise.all([
-      fs.readFile(legacyPath),
-      fs.readFile(nativePath),
-    ]);
     if (legacyContent.equals(nativeContent)) {
       await fs.remove(path.dirname(legacyPath));
       result.removed += 1;

@@ -3,6 +3,22 @@
 const fs = require('fs');
 const path = require('path');
 
+const NOFOLLOW_READ_FLAGS = fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0);
+
+function readRegularFileNoFollowSync(filePath, encoding = null) {
+  let handle;
+  try {
+    handle = fs.openSync(filePath, NOFOLLOW_READ_FLAGS);
+    if (!fs.fstatSync(handle).isFile()) return null;
+    return fs.readFileSync(handle, encoding || undefined);
+  } catch (error) {
+    if (['ENOENT', 'ELOOP', 'EISDIR'].includes(error.code)) return null;
+    throw error;
+  } finally {
+    if (handle !== undefined) fs.closeSync(handle);
+  }
+}
+
 function parseAgentMarkdown(content, fallbackName) {
   const name = content.match(/^name:\s*([^\r\n]+)$/m)?.[1]?.trim() || fallbackName;
   const raw = content.match(/^description:\s*(.+)$/m)?.[1]?.trim() || `SINAPSE ${name} agent`;
@@ -104,8 +120,8 @@ function removeStaleManagedAgents(targetDir, expectedFiles, extension) {
   for (const file of fs.readdirSync(targetDir).filter((name) => name.endsWith(extension))) {
     if (expected.has(file)) continue;
     const filePath = path.join(targetDir, file);
-    if (!fs.statSync(filePath).isFile()) continue;
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = readRegularFileNoFollowSync(filePath, 'utf8');
+    if (content === null) continue;
     const explicitlyManaged = content.includes('SINAPSE-MANAGED:global-agent');
     const legacyManaged = content.includes('ACTIVATION-NOTICE: This command activates an agent from sinapse.')
       && /\.sinapse[\\/]sinapse[\\/]agents[\\/]/.test(content)
