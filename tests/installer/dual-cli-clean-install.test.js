@@ -112,4 +112,26 @@ describe('dual CLI clean-install matrix', () => {
       await fs.remove(tempRoot);
     }
   });
+
+  test('preserves malformed Claude settings instead of aborting installation', async () => {
+    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-claude-malformed-'));
+    const targetDir = path.join(tempRoot, 'project');
+    const settingsPath = path.join(targetDir, '.claude', 'settings.local.json');
+    const malformed = '{ "hooks": invalid user content';
+    await fs.outputFile(settingsPath, malformed, 'utf8');
+    const execSpy = jest.spyOn(childProcess, 'exec').mockImplementation(
+      (_command, _options, callback) => {
+        callback(null, '', '');
+        return { kill: jest.fn() };
+      },
+    );
+    try {
+      const installed = await installSinapseCore({ targetDir, includeClaude: true });
+      expect(installed.success).toBe(true);
+      expect(await fs.readFile(settingsPath, 'utf8')).toBe(malformed);
+    } finally {
+      execSpy.mockRestore();
+      await fs.remove(tempRoot);
+    }
+  });
 });

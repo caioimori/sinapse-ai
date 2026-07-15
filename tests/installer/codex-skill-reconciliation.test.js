@@ -37,31 +37,40 @@ describe('legacy Codex skill reconciliation', () => {
   test('removes byte-identical managed mirrors and leaves unrelated skills alone', async () => {
     const legacy = await writeSkill('.codex/skills', 'sinapse-dev', 'same\n');
     await writeSkill('.agents/skills', 'sinapse-dev', 'same\n');
+    const sibling = path.join(path.dirname(legacy), 'notes.md');
+    await fs.writeFile(sibling, 'keep me\n', 'utf8');
     const unrelated = await writeSkill('.codex/skills', 'user-skill', 'user\n');
 
     await expect(reconcileLegacyCodexSkills(targetDir, packageRoot))
       .resolves.toMatchObject({ removed: 1, migrated: 0, quarantined: 0, ambiguous: [] });
     expect(await fs.pathExists(legacy)).toBe(false);
+    expect(await fs.readFile(sibling, 'utf8')).toBe('keep me\n');
     expect(await fs.pathExists(unrelated)).toBe(true);
   });
 
   test('moves a legacy-only customization into the native root', async () => {
     const legacy = await writeSkill('.codex/skills', 'snps', 'custom\n');
+    const sibling = path.join(path.dirname(legacy), 'assets.json');
+    await fs.writeJson(sibling, { custom: true });
     const native = path.join(targetDir, '.agents', 'skills', 'snps', 'SKILL.md');
 
     await expect(reconcileLegacyCodexSkills(targetDir, packageRoot))
       .resolves.toMatchObject({ removed: 0, migrated: 1, quarantined: 0, ambiguous: [] });
     expect(await fs.pathExists(legacy)).toBe(false);
+    expect(await fs.readJson(sibling)).toEqual({ custom: true });
     expect(await fs.readFile(native, 'utf8')).toBe('custom\n');
   });
 
   test('quarantines divergent legacy content outside discovered skill roots', async () => {
     const legacy = await writeSkill('.codex/skills', 'sinapse-agent', 'legacy custom\n');
+    const sibling = path.join(path.dirname(legacy), 'README.md');
+    await fs.writeFile(sibling, 'user documentation\n', 'utf8');
     await writeSkill('.agents/skills', 'sinapse-agent', 'native custom\n');
 
     await expect(reconcileLegacyCodexSkills(targetDir, packageRoot))
       .resolves.toMatchObject({ removed: 0, migrated: 0, quarantined: 1, ambiguous: [] });
     expect(await fs.pathExists(legacy)).toBe(false);
+    expect(await fs.readFile(sibling, 'utf8')).toBe('user documentation\n');
     const quarantineDir = path.join(targetDir, '.sinapse-ai', 'migrations', 'codex-skills');
     const quarantined = await fs.readdir(quarantineDir);
     expect(quarantined).toHaveLength(1);

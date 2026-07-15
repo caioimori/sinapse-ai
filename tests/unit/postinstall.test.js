@@ -106,7 +106,7 @@ describe('postinstall — stepSyncIde()', () => {
     expect(spawnSync).toHaveBeenCalledTimes(1);
     const [cmd, args] = spawnSync.mock.calls[0];
     expect(cmd).toBe('npm');
-    expect(args).toEqual(expect.arrayContaining(['run', 'sync:providers', '--silent']));
+    expect(args).toEqual(['run', 'sync:providers', '--silent']);
     expect(result).toEqual({ ok: true, critical: false });
   });
 

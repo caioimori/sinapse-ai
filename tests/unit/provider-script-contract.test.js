@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const pkg = require('../../package.json');
+const pkg = require('package.json');
 
 describe('provider validation script contract', () => {
   test('public gates validate native surfaces instead of retired mirrors', () => {
@@ -17,6 +17,7 @@ describe('provider validation script contract', () => {
       expect(pkg.scripts[name]).not.toMatch(/validate-claude-integration|validate-codex-sync|codex-skills-sync\/validate|validate-parity\.js/);
     }
     expect(pkg.scripts['validate:parity']).toContain('validate-provider-adapters.js');
+    expect(pkg.scripts['validate:parity']).toContain('.codex/scripts/validate-codex-native.js');
     expect(pkg.scripts['validate:codex-sync']).toContain('validate-codex-native.js');
     expect(pkg.scripts['sync:skills:codex']).toContain('.codex/scripts/sync-codex-native.js');
     expect(pkg.scripts['sync:skills:codex:global']).toContain('--llm=codex --global-only');

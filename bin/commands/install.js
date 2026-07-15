@@ -412,6 +412,9 @@ function buildTransactionPaths(llmChoice) {
     CLAUDE_COMMANDS_DIR,   // Phase 2 — generated /SINAPSE:agents:* command files
   ];
   if (llmChoice === 'claude-code' || llmChoice === 'both') dirs.push(path.join(HOME, '.claude', 'agents'));
+  // A Claude-only provider switch removes stale Codex aliases during the fatal
+  // phases, so that cleanup must be covered by the same upgrade rollback.
+  if (llmChoice === 'claude-code') dirs.push(path.join(HOME, '.agents', 'skills'));
   if (llmChoice === 'codex' || llmChoice === 'both') {
     dirs.push(path.join(HOME, '.codex', 'agents'));
     dirs.push(path.join(HOME, '.agents', 'skills'));

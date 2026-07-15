@@ -60,6 +60,18 @@ function isNewerVersion(candidate, current) {
   }
 }
 
+function assertProviderAdapterParity(llmChoice, adapters, canonicalCount) {
+  const providerCounts = [];
+  if (llmChoice === 'claude-code' || llmChoice === 'both') providerCounts.push(['Claude Code', adapters.claude.length]);
+  if (llmChoice === 'codex' || llmChoice === 'both') providerCounts.push(['Codex', adapters.codex.length]);
+  const divergent = providerCounts.filter(([, count]) => count !== canonicalCount);
+  if (divergent.length) {
+    const details = divergent.map(([provider, count]) => `${provider}: ${count}/${canonicalCount}`).join(', ');
+    throw new Error(`Provider adapter parity failed (${details})`);
+  }
+  return canonicalCount;
+}
+
 async function cmdUpdateGlobal() {
   const logger = getLogger();
   header();
@@ -180,13 +192,14 @@ async function cmdUpdateGlobal() {
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
-  const activeAgentCount = Math.max(globalAdapters.claude.length, globalAdapters.codex.length);
+  const activeAgentCount = assertProviderAdapterParity(llmChoice, globalAdapters, totalAgents);
   if (globalAdapters.claude.length) logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${globalAdapters.claude.length})`);
   if (globalAdapters.codex.length) logger.always(`  ${GREEN}OK${NC} Codex global agents (${globalAdapters.codex.length} TOML, ${globalAdapters.skills.length} skills)`);
 
   const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   reconcileInstalledAgents(HOME, installedAgentFilenames);
   if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME, { providers: ['codex'] });
+  if (llmChoice === 'codex') removeManagedGlobalSkills(HOME, { providers: ['claude-code'] });
   const installedIdes = [];
   if (globalAdapters.claude.length) installedIdes.push('claude-code');
   if (globalAdapters.codex.length) installedIdes.push('codex');
@@ -253,4 +266,4 @@ async function cmdUpdateGlobal() {
   logger.always('');
 }
 
-module.exports = { cmdUpdateGlobal };
+module.exports = { cmdUpdateGlobal, assertProviderAdapterParity };

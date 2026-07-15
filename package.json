@@ -134,7 +134,7 @@
     "sync:skills:codex:global": "node bin/cli.js install --llm=codex --global-only",
     "validate:codex-skills": "node .codex/scripts/validate-codex-native.js",
     "validate:paths": "node .sinapse-ai/infrastructure/scripts/validate-paths.js",
-    "validate:parity": "node scripts/validate-provider-adapters.js && node scripts/validate-codex-command-registry.js && node .sinapse-ai/infrastructure/scripts/validate-codex-integration.js && node .sinapse-ai/infrastructure/scripts/validate-codex-delegation.js && node .sinapse-ai/infrastructure/scripts/validate-paths.js",
+    "validate:parity": "node scripts/validate-provider-adapters.js && node .codex/scripts/validate-codex-native.js && node scripts/validate-codex-command-registry.js && node .sinapse-ai/infrastructure/scripts/validate-codex-integration.js && node .sinapse-ai/infrastructure/scripts/validate-codex-delegation.js && node .sinapse-ai/infrastructure/scripts/validate-paths.js",
     "validate:parity:fast": "node scripts/validate-provider-adapters.js && node scripts/validate-codex-command-registry.js",
     "collab:adopt": "node bin/utils/collab-start.js --adopt-current",
     "collab:check": "node bin/utils/collab-start.js --check",

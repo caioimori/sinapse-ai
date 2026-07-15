@@ -5,6 +5,7 @@
  */
 
 const path = require('path');
+const crypto = require('crypto');
 const fs = require('fs-extra');
 const os = require('os');
 
@@ -13,6 +14,7 @@ const {
   generateVersionJson,
   isUserOwnedL3,
   copyFileWithRootReplacement,
+  reconcileClaudeHookSettings,
 } = require('../../packages/installer/src/installer/sinapse-ai-installer');
 
 describe('SINAPSE Core Installer - Version Tracking', () => {
@@ -172,6 +174,58 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
       expect(result.fileHashes['agents/developer.md']).toBeDefined();
       expect(result.fileHashes['config.yaml']).toBeDefined();
     });
+
+    it('hashes provider files after applying installer placeholders', async () => {
+      const sinapseCoreDir = path.join(tempDir, '.sinapse-ai');
+      const providerRoot = path.join(tempDir, 'package');
+      const relativePath = path.join('.agents', 'skills', 'test', 'SKILL.md');
+      await fs.outputFile(path.join(providerRoot, relativePath), 'Read {root}/guide.md\n');
+
+      const result = await generateVersionJson({
+        targetSinapseCore: sinapseCoreDir,
+        version: '1.0.0',
+        installedFiles: [],
+        providerFiles: [relativePath],
+        providerSourceRoot: providerRoot,
+      });
+      const expected = crypto.createHash('sha256')
+        .update('Read .sinapse-ai/guide.md\n')
+        .digest('hex');
+
+      expect(result.providerFileHashes[relativePath.replace(/\\/g, '/')])
+        .toBe(`sha256:${expected}`);
+    });
+  });
+
+  describe('reconcileClaudeHookSettings', () => {
+    it('ignores malformed project settings while preserving them and writing local hooks', async () => {
+      const packageRoot = path.join(tempDir, 'package');
+      const targetDir = path.join(tempDir, 'project');
+      const malformed = '{ "hooks": broken';
+      await fs.outputJson(path.join(packageRoot, '.claude', 'settings.json'), {
+        hooks: {
+          PreToolUse: [{ hooks: [{ command: 'node .claude/hooks/doc-first-gate.cjs' }] }],
+        },
+      });
+      await fs.outputFile(path.join(targetDir, '.claude', 'settings.json'), malformed, 'utf8');
+
+      await expect(reconcileClaudeHookSettings(packageRoot, targetDir))
+        .resolves.toBe(path.join('.claude', 'settings.local.json'));
+      expect(await fs.readFile(path.join(targetDir, '.claude', 'settings.json'), 'utf8'))
+        .toBe(malformed);
+      expect(await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json')))
+        .toMatchObject({ hooks: { PreToolUse: expect.any(Array) } });
+    });
+
+    it('preserves a structurally invalid settings.local file without overwriting it', async () => {
+      const packageRoot = path.join(tempDir, 'package');
+      const targetDir = path.join(tempDir, 'project');
+      await fs.outputJson(path.join(packageRoot, '.claude', 'settings.json'), { hooks: {} });
+      await fs.outputJson(path.join(targetDir, '.claude', 'settings.local.json'), []);
+
+      await expect(reconcileClaudeHookSettings(packageRoot, targetDir)).resolves.toBeNull();
+      expect(await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'))).toEqual([]);
+    });
   });
 
   // ===========================================================================
@@ -235,4 +289,3 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
     });
   });
 });
-

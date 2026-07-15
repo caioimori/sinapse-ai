@@ -6,6 +6,14 @@ const path = require('path');
 
 const legacy = require('../.sinapse-ai/infrastructure/scripts/validate-codex-command-registry');
 
+function resolveRegistryPath(projectRoot, declaredPath) {
+  if (typeof declaredPath !== 'string' || !declaredPath.trim() || path.isAbsolute(declaredPath)) return null;
+  const resolved = path.resolve(projectRoot, declaredPath);
+  const relative = path.relative(path.resolve(projectRoot), resolved);
+  if (relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) return null;
+  return resolved;
+}
+
 function validateCodexCommandRegistry(options = {}) {
   const projectRoot = options.projectRoot || process.cwd();
   const { registryPath, registry, error } = legacy.loadRegistry(projectRoot);
@@ -24,8 +32,10 @@ function validateCodexCommandRegistry(options = {}) {
       errors.push(`${agentId}: missing skill file ${path.relative(projectRoot, skillPath)}`);
     }
 
-    const sourceOfTruth = path.join(projectRoot, agentSpec.sourceOfTruth || '');
-    if (!fs.existsSync(sourceOfTruth)) {
+    const sourceOfTruth = resolveRegistryPath(projectRoot, agentSpec.sourceOfTruth);
+    if (!sourceOfTruth) {
+      errors.push(`${agentId}: invalid or missing source of truth`);
+    } else if (!fs.existsSync(sourceOfTruth)) {
       errors.push(`${agentId}: missing source of truth ${path.relative(projectRoot, sourceOfTruth)}`);
     }
 
@@ -38,13 +48,17 @@ function validateCodexCommandRegistry(options = {}) {
     const seenCommandAliases = new Map();
     for (const [commandId, commandSpec] of Object.entries(agentSpec.commands || {})) {
       commandCount += 1;
-      const targetPath = path.join(projectRoot, commandSpec.target || '');
-      if (!fs.existsSync(targetPath)) {
+      const targetPath = resolveRegistryPath(projectRoot, commandSpec.target);
+      if (!targetPath) {
+        errors.push(`${agentId}.${commandId}: invalid or missing target`);
+      } else if (!fs.existsSync(targetPath)) {
         errors.push(`${agentId}.${commandId}: missing target ${path.relative(projectRoot, targetPath)}`);
       }
       for (const resource of commandSpec.resources || []) {
-        const resourcePath = path.join(projectRoot, resource);
-        if (!fs.existsSync(resourcePath)) {
+        const resourcePath = resolveRegistryPath(projectRoot, resource);
+        if (!resourcePath) {
+          errors.push(`${agentId}.${commandId}: invalid or missing resource`);
+        } else if (!fs.existsSync(resourcePath)) {
           errors.push(`${agentId}.${commandId}: missing resource ${path.relative(projectRoot, resourcePath)}`);
         }
       }
@@ -82,5 +96,6 @@ if (require.main === module) main();
 
 module.exports = {
   ...legacy,
+  resolveRegistryPath,
   validateCodexCommandRegistry,
 };

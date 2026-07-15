@@ -94,6 +94,34 @@ describe('validate-codex-command-registry', () => {
     expect(result.errors.some((error) => error.includes('missing target'))).toBe(true);
   });
 
+  it('rejects missing and out-of-root registry paths', () => {
+    write('.agents/skills/sinapse-dev/SKILL.md');
+    write('.codex/command-registry.json', JSON.stringify({
+      version: 1,
+      agents: {
+        'sinapse-dev': {
+          skillId: 'sinapse-dev',
+          commands: {
+            develop: {
+              kind: 'task',
+              target: '../outside-task.md',
+              resources: [''],
+            },
+          },
+        },
+      },
+    }));
+
+    const result = validateCodexCommandRegistry({
+      projectRoot: tmpRoot,
+      requiredCoverage: devCoverage,
+    });
+
+    expect(result.errors).toContain('sinapse-dev: invalid or missing source of truth');
+    expect(result.errors).toContain('sinapse-dev.develop: invalid or missing target');
+    expect(result.errors).toContain('sinapse-dev.develop: invalid or missing resource');
+  });
+
   it('fails when a declared resource is missing', () => {
     write('.agents/skills/sinapse-dev/SKILL.md');
     write('.codex/agents/dev.md');

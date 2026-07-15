@@ -17,7 +17,7 @@
  *
  * Execution order (see Story A.1 AC 4):
  *   1. env guard (SINAPSE_SKIP_POSTINSTALL / CI)
- *   2. npm run sync:ide -- --ide claude-code
+ *   2. npm run sync:providers
  *   3. mkdir -p .sinapse/handoffs
  *   4. mkdir -p .sinapse/scratchpad
  *   5. sinapse doctor --quiet (exit code 2 = abort, 0/1 = OK)
@@ -30,7 +30,7 @@
  *
  * Exit codes:
  *   0  success OR non-critical warning (framework operational)
- *   2  critical failure (sync:ide failed, or doctor exit >= 2)
+ *   2  critical failure (provider sync failed, or doctor exit >= 2)
  *
  * Note: exit 1 is NOT used. npm treats any non-zero postinstall exit as
  * `command failed`, which scares users when the install is actually operational.
@@ -273,7 +273,7 @@ function run(command, args, opts = {}) {
  * Detect if we're running inside a global npm install.
  * Global installs land in /usr/local/lib/node_modules (Mac/Linux) or
  * %APPDATA%\npm\node_modules (Windows). Agent sync to those paths is pointless
- * — sync:ide must run inside a real project (per-project install).
+ * — sync:providers must run inside a real project (per-project install).
  */
 function isGlobalInstall() {
   if (process.env.npm_config_global === 'true') return true;
@@ -296,17 +296,17 @@ function isGlobalInstall() {
  */
 function stepSyncIde() {
   if (isGlobalInstall()) {
-    verboseLog(`${c.dim}sync:ide pulado (install global — rode 'sinapse install' no seu projeto)${c.reset}`);
+    verboseLog(`${c.dim}sync:providers pulado (install global — rode 'sinapse install' no seu projeto)${c.reset}`);
     return { ok: true, critical: false, skipped: true };
   }
-  verboseLog(`${c.cyan}›${c.reset} Sincronizando agents para Claude Code...`);
+  verboseLog(`${c.cyan}›${c.reset} Sincronizando adapters para Claude Code e Codex...`);
   const result = run('npm', ['run', 'sync:providers', '--silent']);
   if (result.error) {
     if (result.error.code === 'EACCES' || result.error.code === 'EPERM') {
       warn("Sem permissão pra sincronizar agents. Rode 'sinapse install' dentro do seu projeto.");
       return { ok: false, critical: false };
     }
-    warn(`sync:ide falhou ao iniciar: ${result.error.message} — rode 'sinapse install' no projeto pra completar.`);
+    warn(`sync:providers falhou ao iniciar: ${result.error.message} — rode 'sinapse install' no projeto pra completar.`);
     return { ok: false, critical: false };
   }
   if (result.status !== 0) {
@@ -315,7 +315,7 @@ function stepSyncIde() {
       warn("Sem permissão pra sincronizar agents (npm global sem write). Rode 'sinapse install' no seu projeto.");
       return { ok: false, critical: false };
     }
-    warn(`sync:ide saiu com código ${result.status} — rode 'sinapse install' no projeto pra completar.`);
+    warn(`sync:providers saiu com código ${result.status} — rode 'sinapse install' no projeto pra completar.`);
     return { ok: false, critical: false };
   }
   verboseLog(`${c.green}✓${c.reset} Agents sincronizados`);
@@ -380,7 +380,7 @@ function stepGenerateSynapse() {
     return { ok: true, critical: false, skipped: true };
   }
   // Run in-process (not a subprocess) — faster, and keeps the shared run()
-  // sequence (sync:ide → doctor) intact for callers/tests. The wrapper's
+  // sequence (sync:providers → doctor) intact for callers/tests. The wrapper's
   // generate() is tolerant and never throws; preserve our own exit code since
   // the underlying generator sets process.exitCode=1 on a miss.
   const savedExit = process.exitCode;

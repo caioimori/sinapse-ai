@@ -95,14 +95,29 @@ async function reconcileClaudeHookSettings(packageRoot, targetDir) {
   const source = await fs.readJson(sourcePath);
   let target = {};
   if (await fs.pathExists(targetPath)) {
-    target = await fs.readJson(targetPath);
+    try {
+      target = await fs.readJson(targetPath);
+    } catch (_error) {
+      // Preserve malformed user settings verbatim. The installer must not turn
+      // a recoverable configuration problem into data loss or a failed install.
+      return null;
+    }
   }
+  if (!target || typeof target !== 'object' || Array.isArray(target)) return null;
   if (!target.hooks || typeof target.hooks !== 'object') target.hooks = {};
 
   const existingSettings = [target];
   const projectSettingsPath = path.join(targetDir, '.claude', 'settings.json');
   if (await fs.pathExists(projectSettingsPath)) {
-    existingSettings.push(await fs.readJson(projectSettingsPath));
+    try {
+      const projectSettings = await fs.readJson(projectSettingsPath);
+      if (projectSettings && typeof projectSettings === 'object' && !Array.isArray(projectSettings)) {
+        existingSettings.push(projectSettings);
+      }
+    } catch (_error) {
+      // An invalid sibling settings file cannot provide reliable registrations;
+      // ignore it while retaining its contents and merge into settings.local.
+    }
   }
   const registered = new Set(
     existingSettings
@@ -200,8 +215,11 @@ async function generateVersionJson(options) {
   const providerFileHashes = {};
   for (const relativePath of providerFiles) {
     const sourcePath = path.join(providerSourceRoot, relativePath);
-    if (await fs.pathExists(sourcePath) && (await fs.stat(sourcePath)).isFile()) {
-      providerFileHashes[relativePath.replace(/\\/g, '/')] = `sha256:${hashFile(sourcePath)}`;
+    const sourceContent = await readRegularFileNoFollow(sourcePath);
+    if (sourceContent !== null) {
+      const installedContent = replaceRootPlaceholder(sourceContent.toString('utf8'));
+      const digest = crypto.createHash('sha256').update(installedContent).digest('hex');
+      providerFileHashes[relativePath.replace(/\\/g, '/')] = `sha256:${digest}`;
     }
   }
 
@@ -300,8 +318,19 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
     const nativePath = path.join(targetDir, '.agents', 'skills', skillId, 'SKILL.md');
     if (!await fs.pathExists(nativePath)) {
       await fs.ensureDir(path.dirname(nativePath));
-      await fs.move(legacyPath, nativePath, { overwrite: false });
-      await fs.remove(path.dirname(legacyPath));
+      try {
+        await fs.writeFile(nativePath, legacyContent, { flag: 'wx' });
+      } catch (error) {
+        if (error.code === 'EEXIST') {
+          result.ambiguous.push(path.relative(targetDir, legacyPath));
+          continue;
+        }
+        throw error;
+      }
+      await fs.remove(legacyPath);
+      if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+        await fs.remove(path.dirname(legacyPath));
+      }
       result.migrated += 1;
       continue;
     }
@@ -312,7 +341,10 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
       continue;
     }
     if (legacyContent.equals(nativeContent)) {
-      await fs.remove(path.dirname(legacyPath));
+      await fs.remove(legacyPath);
+      if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+        await fs.remove(path.dirname(legacyPath));
+      }
       result.removed += 1;
       continue;
     }
@@ -331,7 +363,10 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
       result.ambiguous.push(path.relative(targetDir, legacyPath));
       continue;
     }
-    await fs.remove(path.dirname(legacyPath));
+    await fs.remove(legacyPath);
+    if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {
+      await fs.remove(path.dirname(legacyPath));
+    }
     result.quarantined += 1;
   }
 

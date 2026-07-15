@@ -60,22 +60,54 @@ async function removeGitHooksConfig(projectDir = process.cwd()) {
 // and removes only those files (preserving anything the user added by hand).
 const INSTALLED_AGENTS_MANIFEST = path.join(SINAPSE_HOME, 'installed-agents.json');
 
-function recordInstalledAgents(filenames, ides) {
+function installedAgentsManifestPath(home = HOME) {
+  return home === HOME
+    ? INSTALLED_AGENTS_MANIFEST
+    : path.join(home, '.sinapse', 'installed-agents.json');
+}
+
+function digestFile(filePath) {
   try {
-    fs.mkdirSync(SINAPSE_HOME, { recursive: true });
-    fs.writeFileSync(INSTALLED_AGENTS_MANIFEST, JSON.stringify({
-      version: 1,
+    return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+  } catch {
+    return null;
+  }
+}
+
+function providerAgentPath(home, provider, filename) {
+  const providerDir = provider === 'codex'
+    ? path.join(home, '.codex', 'agents')
+    : path.join(home, '.claude', 'agents');
+  return path.join(providerDir, filename);
+}
+
+function recordInstalledAgents(filenames, ides, home = HOME) {
+  try {
+    const manifestPath = installedAgentsManifestPath(home);
+    fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+    const artifacts = [...filenames].map((filename) => {
+      const provider = filename.endsWith('.toml') ? 'codex' : 'claude-code';
+      return {
+        provider,
+        filename,
+        sha256: digestFile(providerAgentPath(home, provider, filename)),
+      };
+    });
+    fs.writeFileSync(manifestPath, JSON.stringify({
+      version: 2,
       timestamp: new Date().toISOString(),
       ides,
       filenames: [...filenames].sort(),
+      artifacts: artifacts.sort((a, b) => `${a.provider}/${a.filename}`.localeCompare(`${b.provider}/${b.filename}`)),
     }, null, 2));
   } catch { /* non-critical */ }
 }
 
-function readInstalledAgentsManifest() {
+function readInstalledAgentsManifest(home = HOME) {
   try {
-    if (!fs.existsSync(INSTALLED_AGENTS_MANIFEST)) return null;
-    const raw = fs.readFileSync(INSTALLED_AGENTS_MANIFEST, 'utf8');
+    const manifestPath = installedAgentsManifestPath(home);
+    if (!fs.existsSync(manifestPath)) return null;
+    const raw = fs.readFileSync(manifestPath, 'utf8');
     const parsed = JSON.parse(raw);
     if (!parsed || !Array.isArray(parsed.filenames)) return null;
     return parsed;
@@ -157,36 +189,50 @@ function removeManagedGlobalSkills(home = HOME, options = {}) {
 }
 
 function reconcileInstalledAgents(home, desiredFilenames) {
-  const manifest = readInstalledAgentsManifest();
+  const manifest = readInstalledAgentsManifest(home);
   const desired = new Set(desiredFilenames);
+  const desiredByProvider = {
+    'claude-code': new Set([...desired].filter((name) => name.endsWith('.md'))),
+    codex: new Set([...desired].filter((name) => name.endsWith('.toml'))),
+  };
   let removed = 0;
-  const manifestOwned = new Set(manifest?.filenames || []);
-  for (const filename of manifestOwned) {
-    if (desired.has(filename)) continue;
-    const providerDir = filename.endsWith('.toml')
-      ? path.join(home, '.codex', 'agents')
-      : path.join(home, '.claude', 'agents');
-    const filepath = path.join(providerDir, filename);
+  const legacyArtifacts = (manifest?.filenames || []).map((filename) => ({
+    provider: filename.endsWith('.toml') ? 'codex' : 'claude-code',
+    filename,
+    sha256: null,
+  }));
+  const manifestArtifacts = Array.isArray(manifest?.artifacts) ? manifest.artifacts : legacyArtifacts;
+  const manifestOwned = new Set(manifestArtifacts.map(({ provider, filename }) => `${provider}/${filename}`));
+  const managedMarker = 'SINAPSE-MANAGED:global-agent';
+  for (const { provider, filename, sha256 } of manifestArtifacts) {
+    if (!desiredByProvider[provider] || desiredByProvider[provider].has(filename)) continue;
+    const filepath = providerAgentPath(home, provider, filename);
     if (!fs.existsSync(filepath)) continue;
     try {
+      const content = fs.readFileSync(filepath, 'utf8');
+      const digestMatches = Boolean(sha256) && digestFile(filepath) === sha256;
+      if (!digestMatches && !content.includes(managedMarker)) continue;
       fs.unlinkSync(filepath);
       removed++;
     } catch { /* best-effort */ }
   }
 
-  const managedMarker = 'SINAPSE-MANAGED:global-agent';
-  for (const [providerDir, extension] of [
-    [path.join(home, '.claude', 'agents'), '.md'],
-    [path.join(home, '.codex', 'agents'), '.toml'],
-    [path.join(home, '.codex', 'agents'), '.md'],
+  for (const [provider, providerDir, extension] of [
+    ['claude-code', path.join(home, '.claude', 'agents'), '.md'],
+    ['codex', path.join(home, '.codex', 'agents'), '.toml'],
+    ['codex', path.join(home, '.codex', 'agents'), '.md'],
   ]) {
     if (!fs.existsSync(providerDir)) continue;
     for (const filename of fs.readdirSync(providerDir).filter((name) => name.endsWith(extension))) {
-      if (desired.has(filename)) continue;
+      if (desiredByProvider[provider].has(filename)) continue;
       const filepath = path.join(providerDir, filename);
       try {
         const content = fs.readFileSync(filepath, 'utf8');
-        if (!manifestOwned.has(filename) && !content.includes(managedMarker)) continue;
+        if (!manifestOwned.has(`${provider}/${filename}`) && !content.includes(managedMarker)) continue;
+        // A manifest entry alone is not proof of current ownership: users can
+        // replace a formerly managed file. Only marked artifacts reach this
+        // sweep; exact recorded content was handled by the digest path above.
+        if (!content.includes(managedMarker)) continue;
         fs.unlinkSync(filepath);
         removed++;
       } catch { /* best-effort */ }
@@ -232,6 +278,27 @@ function reconcileInstalledAgents(home, desiredFilenames) {
     legacyCommandsRemoved,
     legacyCommandsPreserved,
   };
+}
+
+function hasManagedInstalledAgents(home = HOME) {
+  const manifest = readInstalledAgentsManifest(home);
+  const artifacts = Array.isArray(manifest?.artifacts)
+    ? manifest.artifacts
+    : (manifest?.filenames || []).map((filename) => ({
+      provider: filename.endsWith('.toml') ? 'codex' : 'claude-code',
+      filename,
+      sha256: null,
+    }));
+  return artifacts.some(({ provider, filename, sha256 }) => {
+    const filePath = providerAgentPath(home, provider, filename);
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      return content.includes('SINAPSE-MANAGED:global-agent')
+        || (Boolean(sha256) && digestFile(filePath) === sha256);
+    } catch {
+      return false;
+    }
+  });
 }
 
 // Story 10.40 — Strip SINAPSE-owned keys from ~/.claude/settings.json without
@@ -378,6 +445,7 @@ module.exports = {
   removeOrqxAgentsFrom,
   removeManagedGlobalSkills,
   reconcileInstalledAgents,
+  hasManagedInstalledAgents,
   cleanClaudeSettingsJson,
   removeGitHooksConfig,
   INSTALLED_AGENTS_MANIFEST,

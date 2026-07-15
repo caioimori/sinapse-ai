@@ -10,6 +10,7 @@ const {
   recordInstalledAgents,
   reconcileInstalledAgents,
   removeManagedGlobalSkills,
+  hasManagedInstalledAgents,
 } = require('../../bin/commands/uninstall');
 
 describe('global provider lifecycle', () => {
@@ -38,12 +39,42 @@ describe('global provider lifecycle', () => {
     fs.mkdirSync(claudeDir, { recursive: true });
     fs.writeFileSync(path.join(claudeDir, 'developer.md'), 'managed');
     fs.writeFileSync(path.join(claudeDir, 'user-custom.md'), 'user');
-    recordInstalledAgents(['developer.md'], ['claude-code']);
+    recordInstalledAgents(['developer.md'], ['claude-code'], root);
 
     expect(reconcileInstalledAgents(root, new Set(['developer.toml'])).removed).toBe(1);
     expect(fs.existsSync(path.join(claudeDir, 'developer.md'))).toBe(false);
     expect(fs.existsSync(path.join(claudeDir, 'user-custom.md'))).toBe(true);
-    expect(readInstalledAgentsManifest().filenames).toEqual(['developer.md']);
+    expect(readInstalledAgentsManifest(root).filenames).toEqual(['developer.md']);
+  });
+
+  test('provider-qualified reconciliation preserves an edited Claude collision and removes stale Codex markdown', () => {
+    const claudeDir = path.join(root, '.claude', 'agents');
+    const codexDir = path.join(root, '.codex', 'agents');
+    fs.mkdirSync(claudeDir, { recursive: true });
+    fs.mkdirSync(codexDir, { recursive: true });
+    const claudeAgent = path.join(claudeDir, 'developer.md');
+    fs.writeFileSync(claudeAgent, '<!-- SINAPSE-MANAGED:global-agent -->\noriginal');
+    recordInstalledAgents(['developer.md'], ['claude-code'], root);
+
+    fs.writeFileSync(claudeAgent, '# User replacement without ownership marker\n');
+    fs.writeFileSync(
+      path.join(codexDir, 'developer.md'),
+      '<!-- SINAPSE-MANAGED:global-agent -->\nstale legacy Codex markdown',
+    );
+
+    expect(reconcileInstalledAgents(root, new Set(['developer.md'])).removed).toBe(1);
+    expect(fs.readFileSync(claudeAgent, 'utf8')).toContain('User replacement');
+    expect(fs.existsSync(path.join(codexDir, 'developer.md'))).toBe(false);
+  });
+
+  test('managed artifact detection rejects empty provider directories', () => {
+    fs.mkdirSync(path.join(root, '.claude', 'agents'), { recursive: true });
+    expect(hasManagedInstalledAgents(root)).toBe(false);
+
+    const agentPath = path.join(root, '.claude', 'agents', 'developer.md');
+    fs.writeFileSync(agentPath, '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    recordInstalledAgents(['developer.md'], ['claude-code'], root);
+    expect(hasManagedInstalledAgents(root)).toBe(true);
   });
 
   test('reconciliation removes marked stale adapters and the legacy Claude command surface', () => {

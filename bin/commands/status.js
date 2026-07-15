@@ -18,14 +18,13 @@ const {
 } = require('../lib/constants');
 const { header } = require('../lib/header');
 const { getSquads } = require('../lib/squads');
+const { hasManagedInstalledAgents } = require('./uninstall');
 
 function verifyInstall() {
   const logger = getLogger();
-  const claudeAgentsDir = path.join(HOME, '.claude', 'agents');
-  const codexAgentsDir = path.join(HOME, '.codex', 'agents');
   const checks = [
     [fs.existsSync(SINAPSE_HOME), `${getSquads(SINAPSE_HOME).length} squads in ~/.sinapse/`],
-    [fs.existsSync(claudeAgentsDir) || fs.existsSync(codexAgentsDir), 'Native provider agents installed'],
+    [hasManagedInstalledAgents(HOME), 'Native provider agents installed'],
     [fs.existsSync(path.join(BIN_DIR, 'sinapse')), 'Launcher at ~/bin/sinapse'],
     [fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md')), 'squad-awareness.md'],
   ];

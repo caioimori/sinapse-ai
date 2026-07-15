@@ -80,11 +80,31 @@ describe('Claude provider semantic contracts', () => {
     for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx']) {
       write(path.join('.claude', 'skills', alias, 'SKILL.md'), canonical);
     }
+    write(
+      path.join('.claude', 'skills', 'sinapse-agent', 'SKILL.md'),
+      '# SINAPSE Parametric Agent Activator for Claude Code\nUse `.claude/agents/sinapse-*.md`.\n',
+    );
     write(path.join('.claude', 'skills', 'snps', 'SKILL.md'), '# divergent target\n');
 
     expect(validateClaudeAliasTargets(root)).toContain(
       path.join('.claude', 'skills', 'snps', 'SKILL.md')
-        + ' does not resolve to canonical sinapse-orqx',
+        + ' does not resolve to its canonical target',
+    );
+  });
+
+  test('rejects a divergent parametric sinapse-agent alias', () => {
+    const canonical = [
+      '# SINAPSE Claude Activation: sinapse-orqx',
+      'Read `.sinapse-ai/development/agents/snps-orqx.md`.',
+    ].join('\n');
+    for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx']) {
+      write(path.join('.claude', 'skills', alias, 'SKILL.md'), canonical);
+    }
+    write(path.join('.claude', 'skills', 'sinapse-agent', 'SKILL.md'), '# wrong target\n');
+
+    expect(validateClaudeAliasTargets(root)).toContain(
+      path.join('.claude', 'skills', 'sinapse-agent', 'SKILL.md')
+        + ' does not resolve to its canonical target',
     );
   });
 });

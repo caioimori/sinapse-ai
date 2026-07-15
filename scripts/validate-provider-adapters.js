@@ -73,13 +73,19 @@ function validateClaudeHookSettings(projectRoot) {
 
 function validateClaudeAliasTargets(projectRoot) {
   const errors = [];
-  for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx']) {
+  const aliases = {
+    sinapse: ['# SINAPSE Claude Activation: sinapse-orqx', 'development/agents/snps-orqx.md'],
+    'sinapse-orqx': ['# SINAPSE Claude Activation: sinapse-orqx', 'development/agents/snps-orqx.md'],
+    snps: ['# SINAPSE Claude Activation: sinapse-orqx', 'development/agents/snps-orqx.md'],
+    'snps-orqx': ['# SINAPSE Claude Activation: sinapse-orqx', 'development/agents/snps-orqx.md'],
+    'sinapse-agent': ['# SINAPSE Parametric Agent Activator for Claude Code', '.claude/agents/sinapse-'],
+  };
+  for (const [alias, [heading, canonicalTarget]] of Object.entries(aliases)) {
     const relativePath = path.join('.claude', 'skills', alias, 'SKILL.md');
     try {
       const content = fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
-      if (!/^# SINAPSE Claude Activation: sinapse-orqx$/m.test(content)
-        || !content.includes('development/agents/snps-orqx.md')) {
-        errors.push(`${relativePath} does not resolve to canonical sinapse-orqx`);
+      if (!content.includes(heading) || !content.includes(canonicalTarget)) {
+        errors.push(`${relativePath} does not resolve to its canonical target`);
       }
     } catch (error) {
       errors.push(`${relativePath}: ${error.message}`);
