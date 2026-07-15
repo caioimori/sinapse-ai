@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir, readRegularFileNoFollowSync, removeStaleManagedAgents } = require('../../bin/lib/global-provider-adapters');
+const { deliverGlobalProviderAdapters, getGlobalCommandStagingDir, readRegularFileNoFollowSync, removeStaleManagedAgents, writeFileAtomically } = require('../../bin/lib/global-provider-adapters');
 const { regenerateAgentCommands } = require('../../bin/lib/command-generator');
 const {
   GLOBAL_PROVIDER_SKILL_IDS,
@@ -193,6 +193,35 @@ describe('global provider adapters', () => {
     expect(result.skills).toContain('snps');
     expect(fs.readFileSync(skillPath, 'utf8')).toContain('# SINAPSE Global Orchestrator');
     expect(fs.readdirSync(path.dirname(skillPath)).filter((name) => name.endsWith('.tmp'))).toEqual([]);
+  });
+
+  test.each(['write', 'fsync'])('removes the temporary file when atomic %s fails before publish', (failurePoint) => {
+    const targetDir = path.join(home, '.agents', 'skills', 'failure-test');
+    const targetPath = path.join(targetDir, 'SKILL.md');
+    const outsidePath = path.join(root, 'outside-owned.md');
+    fs.mkdirSync(targetDir, { recursive: true });
+    fs.writeFileSync(outsidePath, 'outside-owned\n');
+
+    const originalWriteFileSync = fs.writeFileSync;
+    const spy = failurePoint === 'write'
+      ? jest.spyOn(fs, 'writeFileSync').mockImplementation((file, ...args) => {
+        if (typeof file === 'number') throw new Error('simulated atomic write failure');
+        return Reflect.apply(originalWriteFileSync, fs, [file, ...args]);
+      })
+      : jest.spyOn(fs, 'fsyncSync').mockImplementation(() => {
+        throw new Error('simulated atomic fsync failure');
+      });
+
+    try {
+      expect(() => writeFileAtomically(targetPath, 'managed\n', home))
+        .toThrow(`simulated atomic ${failurePoint} failure`);
+    } finally {
+      spy.mockRestore();
+    }
+
+    expect(fs.existsSync(targetPath)).toBe(false);
+    expect(fs.readdirSync(targetDir).filter((name) => name.endsWith('.tmp'))).toEqual([]);
+    expect(fs.readFileSync(outsidePath, 'utf8')).toBe('outside-owned\n');
   });
 
   test('does not follow a user-owned skill symlink', () => {

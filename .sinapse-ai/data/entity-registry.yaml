@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T13:41:11.889Z'
+  lastUpdated: '2026-07-15T14:12:33.529Z'
   entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -423,8 +423,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:8bd5f876922f0663685d2697d15925989fcecdc5c9c774b80afe1c4dec1322db
-      lastVerified: '2026-07-15T13:41:11.704Z'
+      checksum: sha256:fc43cdb6c3748ddbb6042ba7e2c73d7cae0ba9ace0c4b3ad7132741f066a5bd4
+      lastVerified: '2026-07-15T14:12:33.356Z'
     header:
       path: bin/lib/header.js
       layer: L1

@@ -181,10 +181,10 @@ function writeFileAtomically(filePath, content, home = path.dirname(filePath), o
   let temporaryExists = false;
   try {
     handle = fs.openSync(temporaryPath, 'wx', 0o600);
+    temporaryIdentity = fs.fstatSync(handle);
     temporaryExists = true;
     fs.writeFileSync(handle, content, 'utf8');
     fs.fsyncSync(handle);
-    temporaryIdentity = fs.fstatSync(handle);
     fs.closeSync(handle);
     handle = undefined;
     if (typeof options.beforePublish === 'function') {
