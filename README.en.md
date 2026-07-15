@@ -309,7 +309,7 @@ Both IDEs have access to all 17 squads, 172 agents, workflows, and knowledge bas
 | Native agents | 172 | 172 |
 | Direct activation | `@agent-name` | `$sinapse-agent agent-id` |
 | Primary routing | `@sinapse-orqx` | `$snps` |
-| Installed skills | 36 | 37 |
+| Installed skills | 37 | 37 |
 | Registered hooks | 20 native registrations | 9 lifecycle events through the bridge |
 | Validation source | `npm run validate:providers` | `npm run validate:codex-native` |
 
