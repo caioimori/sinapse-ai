@@ -263,7 +263,7 @@ Each squad is an autonomous team with its own orchestrator, specialist agents, k
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 17 squads, 172 specialized agents, 1,200 tasks**
+**Total: 17 squads, 172 specialized agents, 1,201 tasks**
 
 Activate any squad via its orchestrator:
 

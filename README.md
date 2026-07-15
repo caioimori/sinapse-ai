@@ -23,7 +23,7 @@
 
 SINAPSE é um meta-framework open source que organiza **172 agentes de IA em 17 squads especializados**, operando direto no terminal via Claude Code ou Codex CLI. Cada agente tem um papel definido, cada squad domina uma disciplina, e o sistema inteiro é governado por uma **Constitution com enforcement real** — 20 hooks registrados que bloqueiam violações em tempo de execução.
 
-O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.200 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
+O conceito central é simples: em vez de um único assistente de IA tentando fazer tudo, o SINAPSE estrutura o trabalho em equipes especializadas. Um squad de branding cuida da identidade visual. Um squad de cybersecurity cuida de compliance e pentest. Um squad de copywriting cuida de persuasão e conversão. Cada um com sua própria knowledge base, workflows e tasks — totalizando **1.201 tasks executáveis** prontas para uso, distribuídas pelos 17 squads.
 
 Diferente de ferramentas que apenas conversam com IA, o SINAPSE impõe disciplina. O pipeline **Documentation-First** exige que uma story seja criada e validada antes de qualquer linha de código. Quality gates rodam automaticamente antes de merge. Agentes não autorizados são bloqueados de fazer push. Tudo isso via hooks que interceptam operações em tempo real — não depois.
 
@@ -285,7 +285,7 @@ Cada squad é uma equipe autônoma com orquestrador, agentes especialistas, know
 | **squad-growth** | Analytics, CRO, SEO, growth hacking | 7 |
 | **squad-finance** | Budget, pricing, profitability analysis | 8 |
 
-**Total: 17 squads, 172 agentes especializados, 1.200 tasks**
+**Total: 17 squads, 172 agentes especializados, 1.201 tasks**
 
 Cada squad é ativado via seu orquestrador:
 
