@@ -170,7 +170,7 @@ async function cmdUpdateGlobal() {
   logger.always(`\n${CYAN}Phase 2:${NC} Regenerating commands`);
   const commandStagingDir = getGlobalCommandStagingDir({ llmChoice, sinapseHome: SINAPSE_HOME, claudeCommandsDir: CLAUDE_COMMANDS_DIR });
   rmDirSync(commandStagingDir);
-  const { writtenAgents, totalAgents } = regenerateAgentCommands({
+  const { writtenAgents, canonicalAgents, totalAgents } = regenerateAgentCommands({
     sinapseHome: SINAPSE_HOME,
     commandsDir: commandStagingDir,
     squads,
@@ -181,7 +181,11 @@ async function cmdUpdateGlobal() {
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
-  const activeAgentCount = assertProviderAdapterParity(llmChoice, globalAdapters, totalAgents);
+  const activeAgentCount = assertProviderAdapterParity(
+    llmChoice,
+    globalAdapters,
+    canonicalAgents,
+  );
   if (globalAdapters.claude.length) logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${globalAdapters.claude.length})`);
   if (globalAdapters.codex.length) logger.always(`  ${GREEN}OK${NC} Codex global agents (${globalAdapters.codex.length} TOML, ${globalAdapters.skills.length} skills)`);
 

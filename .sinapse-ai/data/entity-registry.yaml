@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T08:35:27.084Z'
-  entityCount: 817
+  lastUpdated: '2026-07-15T14:30:07.448Z'
+  entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -166,8 +166,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1f385982ca84a8232f3f6b1fce4257ca3971a5fd24830b5389477f9a5a8e943a
-      lastVerified: '2026-07-15T08:12:47.676Z'
+      checksum: sha256:86db5a2578b6a0b4849fde4e0f4a197a41560a3a213b247f0edd8522d857ffea
+      lastVerified: '2026-07-15T13:41:11.702Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -276,8 +276,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:b51998a172a91e134330847185c078d317ed9be2da6746de3af18d209b7e08d9
-      lastVerified: '2026-07-15T08:12:47.677Z'
+      checksum: sha256:05056e197ecb29e6f63a1d86d9d77d944e3083021bf632b48a76eb4cb2223b95
+      lastVerified: '2026-07-15T13:41:11.703Z'
     command-generator:
       path: bin/lib/command-generator.js
       layer: L1
@@ -299,6 +299,7 @@ entities:
         - constants
         - squads
         - fs-utils
+        - provider-contract
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -306,8 +307,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:ed3f86d0349e4a709240728c0872bf44c3ebb2f1b8f3522c83e2f43c9b8c5647
-      lastVerified: '2026-07-15T02:37:43.455Z'
+      checksum: sha256:837f10f3ce227b1f3ff9b3d4c9e824e8928cd67ec07b0dcebd78e85468eed003
+      lastVerified: '2026-07-15T13:41:11.703Z'
     constants:
       path: bin/lib/constants.js
       layer: L1
@@ -413,7 +414,8 @@ entities:
       usedBy:
         - install
         - update
-      dependencies: []
+      dependencies:
+        - provider-contract
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -421,8 +423,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:d28b19935a9c75408df9da7430fc3ca9568bdea0cfc1ae3c01d0025ad19fc2a3
-      lastVerified: '2026-07-15T07:09:56.286Z'
+      checksum: sha256:898fbe5a00cf1bb77bc8e8a34ee40337145912374a2e809789a02d5345fdd679
+      lastVerified: '2026-07-15T14:30:07.273Z'
     header:
       path: bin/lib/header.js
       layer: L1
@@ -475,6 +477,28 @@ entities:
         extensionPoints: []
       checksum: sha256:dc7cc1109f2bbdb7b3c5927df0de2418925842bdacdc0ba82815bfa2783d0b42
       lastVerified: '2026-06-22T02:41:18.152Z'
+    provider-contract:
+      path: bin/lib/provider-contract.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\provider-contract.js
+      keywords:
+        - provider
+        - contract
+      usedBy:
+        - command-generator
+        - global-provider-adapters
+        - provider-parity
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a18d271a73b2f371213af4d9503e302e9237920057afd521b723c96efd28fda0
+      lastVerified: '2026-07-15T13:41:11.704Z'
     provider-parity:
       path: bin/lib/provider-parity.js
       layer: L1
@@ -486,7 +510,8 @@ entities:
       usedBy:
         - install
         - update
-      dependencies: []
+      dependencies:
+        - provider-contract
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -494,8 +519,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:592206326a2a3c5a3d89068d9ef065d698562aef40e6096d971fb793cea11c97
-      lastVerified: '2026-07-15T08:35:26.859Z'
+      checksum: sha256:5f0ff4517425fef01683f035afef1d139aede2fe47956773a398e7c761ace42d
+      lastVerified: '2026-07-15T13:41:11.704Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1

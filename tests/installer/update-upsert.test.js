@@ -18,6 +18,9 @@ const path = require('path');
 
 const cli = require('../../bin/cli');
 const { assertProviderAdapterParity } = require('../../bin/commands/update');
+const { GLOBAL_PROVIDER_SKILL_IDS } = require('../../bin/lib/provider-contract');
+
+const canonicalAgents = Array.from({ length: 172 }, (_, index) => `agent-${index}.md`);
 
 describe('Story 10.22 — update upsert', () => {
   describe('shared helper contract', () => {
@@ -30,16 +33,20 @@ describe('Story 10.22 — update upsert', () => {
   describe('provider parity', () => {
     it('uses the canonical count when every selected provider matches', () => {
       expect(assertProviderAdapterParity('both', {
-        claude: new Array(172),
-        codex: new Array(172),
-      }, 172)).toBe(172);
+        claude: [...canonicalAgents],
+        claudeAvailableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        codex: canonicalAgents.map((file) => file.replace(/\.md$/, '.toml')),
+        availableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+      }, canonicalAgents)).toBe(172);
     });
 
     it('fails instead of masking a divergent provider with Math.max', () => {
       expect(() => assertProviderAdapterParity('both', {
-        claude: new Array(172),
-        codex: new Array(171),
-      }, 172)).toThrow('Codex: 171/172');
+        claude: [...canonicalAgents],
+        claudeAvailableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+        codex: canonicalAgents.slice(0, -1).map((file) => file.replace(/\.md$/, '.toml')),
+        availableSkills: GLOBAL_PROVIDER_SKILL_IDS,
+      }, canonicalAgents)).toThrow('Codex: 171/172');
     });
   });
 

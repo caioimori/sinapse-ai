@@ -1,0 +1,23 @@
+'use strict';
+
+const CANONICAL_AGENT_COUNT = 172;
+const SUPREME_ORCHESTRATOR_ID = 'snps-orqx';
+const SUPREME_PUBLIC_ID = SUPREME_ORCHESTRATOR_ID.replace(/^snps/, 'sinapse');
+const MASTER_ALIAS_ENTRY_POINTS = Object.freeze([
+  SUPREME_PUBLIC_ID.replace(/-orqx$/, ''),
+  SUPREME_PUBLIC_ID,
+  SUPREME_ORCHESTRATOR_ID.replace(/-orqx$/, ''),
+]);
+const GLOBAL_PROVIDER_SKILL_IDS = Object.freeze([
+  ...MASTER_ALIAS_ENTRY_POINTS,
+  SUPREME_ORCHESTRATOR_ID,
+  'sinapse-agent',
+]);
+
+module.exports = {
+  CANONICAL_AGENT_COUNT,
+  SUPREME_ORCHESTRATOR_ID,
+  SUPREME_PUBLIC_ID,
+  MASTER_ALIAS_ENTRY_POINTS,
+  GLOBAL_PROVIDER_SKILL_IDS,
+};
