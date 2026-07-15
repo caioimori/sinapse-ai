@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T08:12:47.889Z'
+  lastUpdated: '2026-07-15T08:35:27.084Z'
   entityCount: 817
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -245,8 +245,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:4c00ffd877937802996d93723879bf80a5b831c4152efa9c5dd848e6a33acf89
-      lastVerified: '2026-07-15T08:12:47.677Z'
+      checksum: sha256:a97ad181e34f7cc3af15be278826a32400c59faeb6d8bd914dfdaea7dc0f00c6
+      lastVerified: '2026-07-15T08:35:26.856Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -494,8 +494,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:87e033616096550d0810520b39bde8d956c7a7ef97f4631ce74bfddc2642d406
-      lastVerified: '2026-07-15T08:12:47.678Z'
+      checksum: sha256:592206326a2a3c5a3d89068d9ef065d698562aef40e6096d971fb793cea11c97
+      lastVerified: '2026-07-15T08:35:26.859Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1

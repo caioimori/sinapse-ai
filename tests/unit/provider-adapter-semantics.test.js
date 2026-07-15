@@ -35,7 +35,7 @@ describe('Claude provider semantic contracts', () => {
     write('.claude/settings.json', JSON.stringify({ hooks: {} }));
 
     expect(validateClaudeHookSettings(root)).toContain(
-      'Claude governance hook is not registered: doc-first-gate.cjs',
+      'Claude governance hook is not registered at PreToolUse/Write|Edit: doc-first-gate.cjs',
     );
   });
 
@@ -47,18 +47,46 @@ describe('Claude provider semantic contracts', () => {
 
   test('aggregates hook registrations across both Claude settings files', () => {
     const hooks = [
-      'doc-first-gate.cjs',
-      'enforce-delegation.cjs',
-      'enforce-framework-boundary.cjs',
-      'enforce-git-push-authority.sh',
-      'verify-packages.cjs',
+      ['Write|Edit', 'doc-first-gate.cjs'],
+      ['Write|Edit|Bash', 'enforce-delegation.cjs'],
+      ['Write|Edit', 'enforce-framework-boundary.cjs'],
+      ['Bash', 'enforce-git-push-authority.sh'],
+      ['Bash', 'verify-packages.cjs'],
     ];
-    for (const hook of hooks) write(path.join('.claude', 'hooks', hook));
-    const registration = (hook) => ({ hooks: [{ command: `node .claude/hooks/${hook}` }] });
+    for (const [, hook] of hooks) write(path.join('.claude', 'hooks', hook));
+    const registration = ([matcher, hook]) => ({
+      matcher,
+      hooks: [{ command: `node .claude/hooks/${hook}` }],
+    });
     write('.claude/settings.json', JSON.stringify({ hooks: { PreToolUse: hooks.slice(0, 2).map(registration) } }));
     write('.claude/settings.local.json', JSON.stringify({ hooks: { PreToolUse: hooks.slice(2).map(registration) } }));
 
     expect(validateClaudeHookSettings(root)).toEqual([]);
+  });
+
+  test('rejects governance hooks registered under the wrong event or matcher', () => {
+    const hooks = [
+      ['PostToolUse', 'Write|Edit', 'doc-first-gate.cjs'],
+      ['PreToolUse', 'Bash', 'enforce-delegation.cjs'],
+      ['PreToolUse', 'Write|Edit', 'enforce-framework-boundary.cjs'],
+      ['PreToolUse', 'Bash', 'enforce-git-push-authority.sh'],
+      ['PreToolUse', 'Bash', 'verify-packages.cjs'],
+    ];
+    for (const [, , hook] of hooks) write(path.join('.claude', 'hooks', hook));
+    const settings = { hooks: {} };
+    for (const [event, matcher, hook] of hooks) {
+      if (!settings.hooks[event]) settings.hooks[event] = [];
+      settings.hooks[event].push({ matcher, hooks: [{ command: `node .claude/hooks/${hook}` }] });
+    }
+    write('.claude/settings.json', JSON.stringify(settings));
+
+    const errors = validateClaudeHookSettings(root);
+    expect(errors).toContain(
+      'Claude governance hook is not registered at PreToolUse/Write|Edit: doc-first-gate.cjs',
+    );
+    expect(errors).toContain(
+      'Claude governance hook is not registered at PreToolUse/Write|Edit|Bash: enforce-delegation.cjs',
+    );
   });
 
   test('rejects duplicate hook registrations across Claude settings files', () => {

@@ -20,11 +20,11 @@ function parseFrontmatter(content) {
 }
 
 const REQUIRED_CLAUDE_HOOKS = [
-  'doc-first-gate.cjs',
-  'enforce-delegation.cjs',
-  'enforce-framework-boundary.cjs',
-  'enforce-git-push-authority.sh',
-  'verify-packages.cjs',
+  { event: 'PreToolUse', matcher: 'Write|Edit', filename: 'doc-first-gate.cjs' },
+  { event: 'PreToolUse', matcher: 'Write|Edit|Bash', filename: 'enforce-delegation.cjs' },
+  { event: 'PreToolUse', matcher: 'Write|Edit', filename: 'enforce-framework-boundary.cjs' },
+  { event: 'PreToolUse', matcher: 'Bash', filename: 'enforce-git-push-authority.sh' },
+  { event: 'PreToolUse', matcher: 'Bash', filename: 'verify-packages.cjs' },
 ];
 
 function validateClaudeHookSettings(projectRoot) {
@@ -56,7 +56,6 @@ function validateClaudeHookSettings(projectRoot) {
     }
   }
   const registered = new Set();
-  const registeredHookNames = new Set();
   for (const entry of commands) {
     const match = entry.command.replace(/\\/g, '/').match(/\.claude\/hooks\/([^"'\s]+)/);
     if (!match) continue;
@@ -66,13 +65,15 @@ function validateClaudeHookSettings(projectRoot) {
       continue;
     }
     registered.add(registrationKey);
-    registeredHookNames.add(match[1]);
     if (!fs.existsSync(path.join(projectRoot, '.claude', 'hooks', match[1]))) {
       errors.push(`Claude settings points to missing hook: .claude/hooks/${match[1]}`);
     }
   }
   for (const hook of REQUIRED_CLAUDE_HOOKS) {
-    if (!registeredHookNames.has(hook)) errors.push(`Claude governance hook is not registered: ${hook}`);
+    const requiredKey = JSON.stringify([hook.event, hook.matcher, hook.filename]);
+    if (!registered.has(requiredKey)) {
+      errors.push(`Claude governance hook is not registered at ${hook.event}/${hook.matcher}: ${hook.filename}`);
+    }
   }
   return errors;
 }
@@ -178,7 +179,9 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
 
   const hooksDir = path.join(projectRoot, '.claude', 'hooks');
   for (const hook of REQUIRED_CLAUDE_HOOKS) {
-    if (!fs.existsSync(path.join(hooksDir, hook))) errors.push(`Missing Claude governance hook: .claude/hooks/${hook}`);
+    if (!fs.existsSync(path.join(hooksDir, hook.filename))) {
+      errors.push(`Missing Claude governance hook: .claude/hooks/${hook.filename}`);
+    }
   }
   errors.push(...validateClaudeHookSettings(projectRoot));
   errors.push(...validateClaudeAliasTargets(projectRoot));

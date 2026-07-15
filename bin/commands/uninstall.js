@@ -267,8 +267,7 @@ function reconcileInstalledAgents(home, desiredFilenames) {
         const content = fs.readFileSync(filePath);
         const digest = crypto.createHash('sha256').update(content).digest('hex');
         const knownHashes = legacyClaudeCommandHashes.files[entry.name] || [];
-        if (!knownHashes.includes(digest)
-          && !content.includes(Buffer.from('SINAPSE-MANAGED:claude-command'))) {
+        if (!knownHashes.includes(digest)) {
           legacyCommandsPreserved++;
           continue;
         }
@@ -295,6 +294,23 @@ function reconcileInstalledAgents(home, desiredFilenames) {
 
 function hasManagedInstalledAgents(home = HOME) {
   const manifest = readInstalledAgentsManifest(home);
+  if (!manifest) {
+    for (const [providerDir, extensions] of [
+      [path.join(home, '.claude', 'agents'), new Set(['.md'])],
+      [path.join(home, '.codex', 'agents'), new Set(['.toml', '.md'])],
+    ]) {
+      try {
+        for (const filename of fs.readdirSync(providerDir)) {
+          if (!extensions.has(path.extname(filename))) continue;
+          try {
+            const content = fs.readFileSync(path.join(providerDir, filename), 'utf8');
+            if (content.includes('SINAPSE-MANAGED:global-agent')) return true;
+          } catch { /* unreadable or non-regular entries are not evidence */ }
+        }
+      } catch { /* missing or unreadable provider dir */ }
+    }
+    return false;
+  }
   const versioned = Array.isArray(manifest?.artifacts);
   const artifacts = versioned
     ? manifest.artifacts

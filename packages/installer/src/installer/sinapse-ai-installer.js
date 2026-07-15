@@ -108,7 +108,9 @@ async function reconcileClaudeHookSettings(packageRoot, targetDir) {
     }
   }
   if (!target || typeof target !== 'object' || Array.isArray(target)) return null;
-  if (!target.hooks || typeof target.hooks !== 'object') target.hooks = {};
+  if (!target.hooks || typeof target.hooks !== 'object' || Array.isArray(target.hooks)) {
+    target.hooks = {};
+  }
 
   const existingSettings = [target];
   const projectSettingsPath = path.join(targetDir, '.claude', 'settings.json');
@@ -366,10 +368,15 @@ async function reconcileLegacyCodexSkills(targetDir, packageRoot) {
       `${skillId}.${digest}.legacy.md`,
     );
     await fs.ensureDir(path.dirname(quarantinePath));
-    if (!await fs.pathExists(quarantinePath)) await fs.copyFile(legacyPath, quarantinePath);
-    else if (!(await fs.readFile(quarantinePath)).equals(legacyContent)) {
-      result.ambiguous.push(path.relative(targetDir, legacyPath));
-      continue;
+    try {
+      await fs.writeFile(quarantinePath, legacyContent, { flag: 'wx' });
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+      const quarantinedContent = await readRegularFileNoFollow(quarantinePath);
+      if (quarantinedContent === null || !quarantinedContent.equals(legacyContent)) {
+        result.ambiguous.push(path.relative(targetDir, legacyPath));
+        continue;
+      }
     }
     await fs.remove(legacyPath);
     if ((await fs.readdir(path.dirname(legacyPath))).length === 0) {

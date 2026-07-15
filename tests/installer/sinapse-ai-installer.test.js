@@ -198,6 +198,26 @@ describe('SINAPSE Core Installer - Version Tracking', () => {
   });
 
   describe('reconcileClaudeHookSettings', () => {
+    it('normalizes an array-shaped hooks value before merging registrations', async () => {
+      const packageRoot = path.join(tempDir, 'package');
+      const targetDir = path.join(tempDir, 'project');
+      await fs.outputJson(path.join(packageRoot, '.claude', 'settings.json'), {
+        hooks: {
+          PreToolUse: [{ matcher: 'Bash', hooks: [{ command: 'node .claude/hooks/check.cjs' }] }],
+        },
+      });
+      await fs.outputJson(path.join(targetDir, '.claude', 'settings.local.json'), {
+        language: 'pt-BR',
+        hooks: [],
+      });
+
+      await reconcileClaudeHookSettings(packageRoot, targetDir);
+      const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
+      expect(settings.language).toBe('pt-BR');
+      expect(Array.isArray(settings.hooks)).toBe(false);
+      expect(settings.hooks.PreToolUse).toHaveLength(1);
+    });
+
     it('deduplicates hook registrations by event, matcher and hook name', async () => {
       const packageRoot = path.join(tempDir, 'package');
       const targetDir = path.join(tempDir, 'project');

@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs-extra');
+const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
 
@@ -76,5 +77,46 @@ describe('legacy Codex skill reconciliation', () => {
     expect(quarantined).toHaveLength(1);
     expect(await fs.readFile(path.join(quarantineDir, quarantined[0]), 'utf8'))
       .toBe('legacy custom\n');
+  });
+
+  test('accepts an exclusively-created quarantine collision with identical content', async () => {
+    const content = 'legacy custom\n';
+    const legacy = await writeSkill('.codex/skills', 'sinapse-agent', content);
+    await writeSkill('.agents/skills', 'sinapse-agent', 'native custom\n');
+    const digest = crypto.createHash('sha256').update(content).digest('hex').slice(0, 12);
+    const quarantinePath = path.join(
+      targetDir,
+      '.sinapse-ai',
+      'migrations',
+      'codex-skills',
+      `sinapse-agent.${digest}.legacy.md`,
+    );
+    await fs.outputFile(quarantinePath, content);
+
+    await expect(reconcileLegacyCodexSkills(targetDir, packageRoot))
+      .resolves.toMatchObject({ quarantined: 1, ambiguous: [] });
+    expect(await fs.pathExists(legacy)).toBe(false);
+    expect(await fs.readFile(quarantinePath, 'utf8')).toBe(content);
+  });
+
+  test('preserves the legacy source when an exclusive quarantine collision differs', async () => {
+    const content = 'legacy custom\n';
+    const legacy = await writeSkill('.codex/skills', 'sinapse-agent', content);
+    await writeSkill('.agents/skills', 'sinapse-agent', 'native custom\n');
+    const digest = crypto.createHash('sha256').update(content).digest('hex').slice(0, 12);
+    const quarantinePath = path.join(
+      targetDir,
+      '.sinapse-ai',
+      'migrations',
+      'codex-skills',
+      `sinapse-agent.${digest}.legacy.md`,
+    );
+    await fs.outputFile(quarantinePath, 'collision content\n');
+
+    const result = await reconcileLegacyCodexSkills(targetDir, packageRoot);
+    expect(result).toMatchObject({ quarantined: 0 });
+    expect(result.ambiguous).toContain(path.relative(targetDir, legacy));
+    expect(await fs.readFile(legacy, 'utf8')).toBe(content);
+    expect(await fs.readFile(quarantinePath, 'utf8')).toBe('collision content\n');
   });
 });

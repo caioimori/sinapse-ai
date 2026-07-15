@@ -1,6 +1,9 @@
 'use strict';
 
 function assertProviderAdapterParity(llmChoice, adapters, canonicalCount) {
+  if (!['claude-code', 'codex', 'both'].includes(llmChoice)) {
+    throw new Error(`Invalid LLM choice for provider parity: ${llmChoice}`);
+  }
   const providerCounts = [];
   if (llmChoice === 'claude-code' || llmChoice === 'both') {
     providerCounts.push(['Claude Code', adapters.claude.length]);

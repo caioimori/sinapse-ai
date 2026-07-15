@@ -1,8 +1,10 @@
 'use strict';
 
 const fs = require('fs');
+const crypto = require('crypto');
 const os = require('os');
 const path = require('path');
+const legacyClaudeCommandHashes = require('../../packages/installer/src/migrations/legacy-claude-agent-command-hashes.json');
 
 const {
   INSTALLED_AGENTS_MANIFEST,
@@ -89,6 +91,19 @@ describe('global provider lifecycle', () => {
     expect(hasManagedInstalledAgents(root)).toBe(true);
   });
 
+  test('managed artifact detection scans provider markers when the manifest is missing', () => {
+    const claudeDir = path.join(root, '.claude', 'agents');
+    const codexDir = path.join(root, '.codex', 'agents');
+    fs.mkdirSync(claudeDir, { recursive: true });
+    fs.mkdirSync(codexDir, { recursive: true });
+    fs.mkdirSync(path.join(claudeDir, 'unreadable.md'));
+    fs.writeFileSync(path.join(claudeDir, 'custom.md'), '# user agent\n');
+    expect(hasManagedInstalledAgents(root)).toBe(false);
+
+    fs.writeFileSync(path.join(codexDir, 'developer.toml'), 'SINAPSE-MANAGED:global-agent\n');
+    expect(hasManagedInstalledAgents(root)).toBe(true);
+  });
+
   test('reconciliation removes marked stale adapters and the legacy Claude command surface', () => {
     const claudeDir = path.join(root, '.claude', 'agents');
     const codexDir = path.join(root, '.codex', 'agents');
@@ -100,13 +115,18 @@ describe('global provider lifecycle', () => {
     fs.writeFileSync(path.join(claudeDir, 'user.md'), '# User agent\n');
     fs.writeFileSync(path.join(codexDir, 'stale.md'), '<!-- SINAPSE-MANAGED:global-agent -->\n');
     fs.writeFileSync(path.join(codexDir, 'user.md'), '# User adapter\n');
-    fs.writeFileSync(
-      path.join(legacyCommands, 'developer.md'),
-      '<!-- SINAPSE-MANAGED:claude-command -->\n',
-    );
+    const legacyContent = '<!-- SINAPSE-MANAGED:claude-command -->\nknown fixture';
+    fs.writeFileSync(path.join(legacyCommands, 'developer.md'), legacyContent);
+    const digest = crypto.createHash('sha256').update(legacyContent).digest('hex');
+    legacyClaudeCommandHashes.files['developer.md'].push(digest);
     fs.writeFileSync(path.join(legacyCommands, 'user-custom.md'), '# user custom\n');
 
-    const result = reconcileInstalledAgents(root, new Set());
+    let result;
+    try {
+      result = reconcileInstalledAgents(root, new Set());
+    } finally {
+      legacyClaudeCommandHashes.files['developer.md'].pop();
+    }
 
     expect(result).toMatchObject({
       removed: 2,
@@ -120,6 +140,18 @@ describe('global provider lifecycle', () => {
     expect(fs.existsSync(path.join(codexDir, 'user.md'))).toBe(true);
     expect(fs.existsSync(path.join(legacyCommands, 'developer.md'))).toBe(false);
     expect(fs.existsSync(path.join(legacyCommands, 'user-custom.md'))).toBe(true);
+  });
+
+  test('legacy Claude command cleanup preserves edited marker-bearing content with an unknown digest', () => {
+    const legacyCommands = path.join(root, '.claude', 'commands', 'SINAPSE', 'agents');
+    fs.mkdirSync(legacyCommands, { recursive: true });
+    const commandPath = path.join(legacyCommands, 'developer.md');
+    fs.writeFileSync(commandPath, '<!-- SINAPSE-MANAGED:claude-command -->\nuser edit');
+
+    const result = reconcileInstalledAgents(root, new Set());
+    expect(result.legacyCommandsRemoved).toBe(0);
+    expect(result.legacyCommandsPreserved).toBe(1);
+    expect(fs.existsSync(commandPath)).toBe(true);
   });
 
   test('managed skill cleanup preserves user-owned collisions', () => {
