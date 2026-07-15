@@ -180,12 +180,13 @@ async function cmdUpdateGlobal() {
 
   // Phase 2b: Install global agents based on LLM choice
   const globalAdapters = deliverGlobalProviderAdapters({ llmChoice, home: HOME, commandsDir: commandStagingDir });
+  const activeAgentCount = Math.max(globalAdapters.claude.length, globalAdapters.codex.length);
   if (globalAdapters.claude.length) logger.always(`  ${GREEN}OK${NC} Claude Code global agents (${globalAdapters.claude.length})`);
   if (globalAdapters.codex.length) logger.always(`  ${GREEN}OK${NC} Codex global agents (${globalAdapters.codex.length} TOML, ${globalAdapters.skills.length} skills)`);
 
   const installedAgentFilenames = new Set([...globalAdapters.claude, ...globalAdapters.codex]);
   reconcileInstalledAgents(HOME, installedAgentFilenames);
-  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME);
+  if (llmChoice === 'claude-code') removeManagedGlobalSkills(HOME, { providers: ['codex'] });
   const installedIdes = [];
   if (globalAdapters.claude.length) installedIdes.push('claude-code');
   if (globalAdapters.codex.length) installedIdes.push('codex');
@@ -203,7 +204,8 @@ async function cmdUpdateGlobal() {
   meta.updatedAt = new Date().toISOString();
   meta.version = VERSION;
   meta.squads = squads.length;
-  meta.commands = writtenAgents.size;
+  meta.agents = activeAgentCount;
+  meta.commands = activeAgentCount;
   meta.llm = llmChoice;
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
 
@@ -246,7 +248,7 @@ async function cmdUpdateGlobal() {
   logger.always(`${GREEN}  SINAPSE AI atualizado para v${VERSION}!${NC}`);
   logger.always(`${GREEN}══════════════════════════════════════════════════════════════${NC}`);
   logger.always('');
-  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${totalAgents} agents${NC} | ${BOLD}${writtenAgents.size} command files${NC}`);
+  logger.always(`  ${BOLD}${squads.length} squads${NC} | ${BOLD}${activeAgentCount} agents${NC} | ${BOLD}${activeAgentCount} native adapters${NC}`);
   logger.always(`  ${startCmd}`);
   logger.always('');
 }

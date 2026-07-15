@@ -118,7 +118,7 @@ Requirements:
 ### Codex Skill Export Layer
 
 Purpose:
-Generate `.codex/skills` from the real Codex catalog, not from an incomplete upstream subset.
+Generate `.agents/skills` from the real Codex catalog, not from an incomplete upstream subset.
 
 Requirements:
 
@@ -222,7 +222,7 @@ Ensure all needed orqx and key framework agents are available through Codex skil
 
 Focus:
 
-- local-first `.codex/skills`
+- local-first `.agents/skills`
 - full orqx coverage
 - clean validation
 - no duplicate global/local skill confusion
@@ -492,7 +492,7 @@ Map the real Codex catalog, its upstreams, and current drift.
 Outputs:
 
 - inventory of `.codex/agents`
-- inventory of `.codex/skills`
+- inventory of `.agents/skills`
 - inventory of canonical sync sources
 - gap matrix between exported Codex artifacts and official sync assumptions
 
@@ -526,7 +526,7 @@ Outputs:
 
 - skill coverage matrix
 - export rules for orqx and core agents
-- clean local-first `.codex/skills` state
+- clean local-first `.agents/skills` state
 
 Success checks:
 

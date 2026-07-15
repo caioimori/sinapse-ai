@@ -400,6 +400,7 @@ docs/guides/sinapse-workflows/
 docs/stories/*
 !docs/stories/story-cross-provider-cli-quality.md
 !docs/stories/story-engineering-applicability-advisory-baseline.md
+!docs/stories/story-sinapse-only-catalog-cleanup.md
 
 
 # Dependencies (SINAPSE)

@@ -27,7 +27,10 @@ describe('validate-claude-integration', () => {
   it('passes when required Claude files exist', () => {
     write(path.join(tmpRoot, '.claude', 'CLAUDE.md'), '# rules');
     write(path.join(tmpRoot, '.claude', 'hooks', 'hook.js'), '');
-    write(path.join(tmpRoot, '.claude', 'commands', 'SINAPSE', 'agents', 'dev.md'), '# dev');
+    write(
+      path.join(tmpRoot, '.claude', 'commands', 'SINAPSE', 'agents', 'dev.md'),
+      '<!-- SINAPSE-MANAGED:claude-command -->\n# dev',
+    );
     write(path.join(tmpRoot, '.sinapse-ai', 'development', 'agents', 'dev.md'), '# dev');
 
     const result = validateClaudeIntegration({ projectRoot: tmpRoot });
@@ -41,5 +44,4 @@ describe('validate-claude-integration', () => {
     expect(result.errors.some((e) => e.includes('Missing Claude agents dir'))).toBe(true);
   });
 });
-
 

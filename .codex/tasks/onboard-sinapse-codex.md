@@ -15,7 +15,7 @@ Guide the user through the real Codex operating surface for SINAPSE in this repo
    - `/skills` -> `sinapse-<agent>`
    - `@agent` aliases from `AGENTS.md`
 3. Explain the two Codex layers:
-   - `.codex/skills` for activation
+   - `.agents/skills` for activation
    - `.codex/agents` for expanded catalog and specialist context
 4. Explain the validated operator commands:
    - `npm run sync:ide:codex`

@@ -3,7 +3,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const yaml = require('js-yaml');
+const legacyClaudeCommandHashes = require('../packages/installer/src/migrations/legacy-claude-agent-command-hashes.json');
 
 const { validateNativeCodex } = require('../.codex/scripts/validate-codex-native');
 
@@ -17,8 +19,90 @@ function parseFrontmatter(content) {
   return metadata;
 }
 
+const REQUIRED_CLAUDE_HOOKS = [
+  'doc-first-gate.cjs',
+  'enforce-delegation.cjs',
+  'enforce-framework-boundary.cjs',
+  'enforce-git-push-authority.sh',
+  'verify-packages.cjs',
+];
+
+function validateClaudeHookSettings(projectRoot) {
+  const errors = [];
+  const settingsCandidates = [
+    path.join(projectRoot, '.claude', 'settings.json'),
+    path.join(projectRoot, '.claude', 'settings.local.json'),
+  ];
+  const settingsPaths = settingsCandidates.filter((candidate) => fs.existsSync(candidate));
+  if (settingsPaths.length === 0) {
+    return ['Claude hook settings are missing: expected .claude/settings.json or .claude/settings.local.json'];
+  }
+  const commands = [];
+  for (const settingsPath of settingsPaths) {
+    try {
+      const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+      commands.push(...Object.values(settings.hooks || {})
+        .flatMap((groups) => groups || [])
+        .flatMap((group) => group.hooks || [])
+        .map((hook) => ({
+          command: String(hook.command || ''),
+          source: path.relative(projectRoot, settingsPath),
+        })));
+    } catch (error) {
+      errors.push(`Claude hook settings (${path.relative(projectRoot, settingsPath)}): ${error.message}`);
+    }
+  }
+  const registered = new Set();
+  for (const entry of commands) {
+    const match = entry.command.replace(/\\/g, '/').match(/\.claude\/hooks\/([^"'\s]+)/);
+    if (!match) continue;
+    if (registered.has(match[1])) {
+      errors.push(`Claude hook is registered more than once across settings: ${match[1]} (${entry.source})`);
+      continue;
+    }
+    registered.add(match[1]);
+    if (!fs.existsSync(path.join(projectRoot, '.claude', 'hooks', match[1]))) {
+      errors.push(`Claude settings points to missing hook: .claude/hooks/${match[1]}`);
+    }
+  }
+  for (const hook of REQUIRED_CLAUDE_HOOKS) {
+    if (!registered.has(hook)) errors.push(`Claude governance hook is not registered: ${hook}`);
+  }
+  return errors;
+}
+
+function validateClaudeAliasTargets(projectRoot) {
+  const errors = [];
+  for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx']) {
+    const relativePath = path.join('.claude', 'skills', alias, 'SKILL.md');
+    try {
+      const content = fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
+      if (!/^# SINAPSE Claude Activation: sinapse-orqx$/m.test(content)
+        || !content.includes('development/agents/snps-orqx.md')) {
+        errors.push(`${relativePath} does not resolve to canonical sinapse-orqx`);
+      }
+    } catch (error) {
+      errors.push(`${relativePath}: ${error.message}`);
+    }
+  }
+  return errors;
+}
+
 function validateClaudeNative(projectRoot = PROJECT_ROOT) {
   const errors = [];
+  const legacyCommandsDir = path.join(projectRoot, '.claude', 'commands', 'SINAPSE', 'agents');
+  if (fs.existsSync(legacyCommandsDir)) {
+    const legacyCommands = fs.readdirSync(legacyCommandsDir).filter((file) => file.endsWith('.md'));
+    const managedLegacyCommands = legacyCommands.filter((file) => {
+      const content = fs.readFileSync(path.join(legacyCommandsDir, file));
+      const digest = crypto.createHash('sha256').update(content).digest('hex');
+      return (legacyClaudeCommandHashes.files[file] || []).includes(digest)
+        || content.includes(Buffer.from('SINAPSE-MANAGED:claude-command'));
+    });
+    if (managedLegacyCommands.length > 0) {
+      errors.push(`Legacy Claude agent command surface contains ${managedLegacyCommands.length} managed duplicates`);
+    }
+  }
   const agentsDir = path.join(projectRoot, '.claude', 'agents');
   const agentFiles = fs.existsSync(agentsDir)
     ? fs.readdirSync(agentsDir).filter((file) => /^sinapse-.+\.md$/.test(file)).sort()
@@ -29,6 +113,9 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     expectedSkills = (manifest.skillIds || []).map((skillId) => ({ skillId }));
     if (expectedSkills.length !== 36) errors.push(`Claude skill manifest must contain 36 IDs, found ${expectedSkills.length}`);
+    for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx', 'sinapse-agent']) {
+      if (!manifest.skillIds.includes(alias)) errors.push(`Claude skill manifest is missing public alias ${alias}`);
+    }
   } catch (error) {
     errors.push(`Claude skill manifest: ${error.message}`);
   }
@@ -77,6 +164,13 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
     if (!claudeNames.has(name)) errors.push(`Claude native inventory is missing ${name}`);
   }
 
+  const hooksDir = path.join(projectRoot, '.claude', 'hooks');
+  for (const hook of REQUIRED_CLAUDE_HOOKS) {
+    if (!fs.existsSync(path.join(hooksDir, hook))) errors.push(`Missing Claude governance hook: .claude/hooks/${hook}`);
+  }
+  errors.push(...validateClaudeHookSettings(projectRoot));
+  errors.push(...validateClaudeAliasTargets(projectRoot));
+
   return {
     ok: errors.length === 0,
     errors,
@@ -99,6 +193,7 @@ function validateProviderAdapters(projectRoot = PROJECT_ROOT) {
   for (const entry of ['.claude/agents/', '.claude/skills/', '.agents/skills/', '.codex/agents/']) {
     if (!pkg.files.includes(entry)) errors.push(`package.json files[] is missing ${entry}`);
   }
+  if (pkg.files.includes('.codex/skills/')) errors.push('package.json must not publish the legacy .codex/skills root');
   return {
     ok: errors.length === 0,
     errors,
@@ -124,4 +219,10 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { parseFrontmatter, validateClaudeNative, validateProviderAdapters };
+module.exports = {
+  parseFrontmatter,
+  validateClaudeAliasTargets,
+  validateClaudeHookSettings,
+  validateClaudeNative,
+  validateProviderAdapters,
+};

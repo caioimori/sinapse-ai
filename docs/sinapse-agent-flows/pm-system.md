@@ -41,7 +41,7 @@ O agente PM e projetado para:
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/project-lead.md` | Definição core do agente PM |
-| `.claude/commands/SINAPSE/agents/project-lead.md` | Comando Claude Code para ativar @project-lead |
+| `.claude/agents/project-lead.md` | Comando Claude Code para ativar @project-lead |
 
 ### Tasks do @pm
 

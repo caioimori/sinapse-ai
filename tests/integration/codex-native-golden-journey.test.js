@@ -163,7 +163,9 @@ describe('Codex native golden preparation journey', () => {
 
     for (const skillId of managedSkillIds) {
       expectProjectFile(path.join('.agents', 'skills', skillId, 'SKILL.md'));
-      expectProjectFile(path.join('.codex', 'skills', skillId, 'SKILL.md'));
+      expect(fs.existsSync(
+        path.join(PROJECT_ROOT, '.codex', 'skills', skillId, 'SKILL.md'),
+      )).toBe(false);
     }
     for (const alias of catalog.publicAliasSkillIds) {
       const content = fs.readFileSync(

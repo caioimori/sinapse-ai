@@ -81,6 +81,7 @@ describe('IDE Configs', () => {
     it('should have correct agent folder paths', () => {
       expect(IDE_CONFIGS['claude-code'].agentFolder).toContain('.claude');
       expect(IDE_CONFIGS['claude-code'].agentFolder).toContain('agents');
+      expect(IDE_CONFIGS['claude-code'].agentFolder).not.toContain('commands');
       expect(IDE_CONFIGS.codex.agentFolder).toContain('.codex');
       expect(IDE_CONFIGS.codex.agentFolder).toContain('agents');
     });

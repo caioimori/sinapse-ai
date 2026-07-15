@@ -5,7 +5,7 @@
 | IDE | Status | Instructions File | Delegation | Skills |
 |-----|--------|------------------|------------|--------|
 | Claude Code | Works | `.claude/CLAUDE.md` | `.claude/rules/mandatory-delegation.md` | `.claude/commands/` |
-| Codex CLI | Limited | `.codex/instructions.md` | `.codex/delegation-matrix.json` | `.codex/skills/` |
+| Codex CLI | Native | `AGENTS.md` | `.codex/delegation-matrix.json` | `.agents/skills/` |
 
 ## Parity Requirements
 
@@ -19,7 +19,7 @@
 - instructions.md with agent activation rules
 - Delegation matrix in `.codex/delegation-matrix.json`
 - Delegation parity in `.codex/delegation-parity.json`
-- Skills in `.codex/skills/`
+- Skills in `.agents/skills/`
 - Agents in `.codex/agents/`
 
 ## Cross-IDE Contracts

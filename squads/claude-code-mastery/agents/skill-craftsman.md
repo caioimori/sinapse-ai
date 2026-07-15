@@ -484,7 +484,7 @@ dependencies:
 
       sinapse_mapping: |
         SINAPSE tasks (.sinapse-ai/development/tasks/) map to Claude Code skills (.claude/skills/)
-        SINAPSE agents (.claude/commands/SINAPSE/agents/) map to Claude Code subagents (.claude/agents/)
+        SINAPSE agents (.claude/agents/) map to Claude Code subagents (.claude/agents/)
         SINAPSE workflows map to Claude Code command sequences
         SINAPSE checklists map to skill validation steps
         SINAPSE templates map to skill supporting files (templates/)
@@ -1119,7 +1119,7 @@ Type `*help` to see all commands, or `*guide` for detailed usage.
 | SINAPSE Concept | Claude Code Equivalent |
 |-------------|----------------------|
 | Task (`.sinapse-ai/development/tasks/`) | Skill (`.claude/skills/`) |
-| Agent (`.claude/commands/SINAPSE/agents/`) | Subagent (`.claude/agents/`) |
+| Agent (`.claude/agents/`) | Subagent (`.claude/agents/`) |
 | Workflow | Command sequence / Skill chain |
 | Checklist | Skill validation steps |
 | Template | Skill supporting file |

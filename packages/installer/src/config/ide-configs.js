@@ -38,7 +38,7 @@ const IDE_CONFIGS = {
     requiresDirectory: true,
     format: 'text',
     recommended: true,
-    agentFolder: path.join('.claude', 'commands', 'SINAPSE', 'agents'),
+    agentFolder: path.join('.claude', 'agents'),
   },
   codex: {
     name: 'Codex CLI',

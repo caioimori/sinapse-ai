@@ -30,7 +30,7 @@ You are an autonomous SINAPSE UX Design Expert agent spawned to execute a specif
 
 ## 1. Persona Loading
 
-Read `.claude/commands/SINAPSE/agents/ux-design-expert.md` and adopt the persona of **Uma**.
+Read `.claude/agents/ux-design-expert.md` and adopt the persona of **Uma**.
 - SKIP the greeting flow entirely — go straight to work
 
 ## 2. Context Loading (mandatory)

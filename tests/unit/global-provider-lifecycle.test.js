@@ -46,6 +46,39 @@ describe('global provider lifecycle', () => {
     expect(readInstalledAgentsManifest().filenames).toEqual(['developer.md']);
   });
 
+  test('reconciliation removes marked stale adapters and the legacy Claude command surface', () => {
+    const claudeDir = path.join(root, '.claude', 'agents');
+    const codexDir = path.join(root, '.codex', 'agents');
+    const legacyCommands = path.join(root, '.claude', 'commands', 'SINAPSE', 'agents');
+    fs.mkdirSync(claudeDir, { recursive: true });
+    fs.mkdirSync(codexDir, { recursive: true });
+    fs.mkdirSync(legacyCommands, { recursive: true });
+    fs.writeFileSync(path.join(claudeDir, 'stale.md'), '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    fs.writeFileSync(path.join(claudeDir, 'user.md'), '# User agent\n');
+    fs.writeFileSync(path.join(codexDir, 'stale.md'), '<!-- SINAPSE-MANAGED:global-agent -->\n');
+    fs.writeFileSync(path.join(codexDir, 'user.md'), '# User adapter\n');
+    fs.writeFileSync(
+      path.join(legacyCommands, 'developer.md'),
+      '<!-- SINAPSE-MANAGED:claude-command -->\n',
+    );
+    fs.writeFileSync(path.join(legacyCommands, 'user-custom.md'), '# user custom\n');
+
+    const result = reconcileInstalledAgents(root, new Set());
+
+    expect(result).toMatchObject({
+      removed: 2,
+      legacyCommandDirectoryRemoved: false,
+      legacyCommandsRemoved: 1,
+      legacyCommandsPreserved: 1,
+    });
+    expect(fs.existsSync(path.join(claudeDir, 'stale.md'))).toBe(false);
+    expect(fs.existsSync(path.join(codexDir, 'stale.md'))).toBe(false);
+    expect(fs.existsSync(path.join(claudeDir, 'user.md'))).toBe(true);
+    expect(fs.existsSync(path.join(codexDir, 'user.md'))).toBe(true);
+    expect(fs.existsSync(path.join(legacyCommands, 'developer.md'))).toBe(false);
+    expect(fs.existsSync(path.join(legacyCommands, 'user-custom.md'))).toBe(true);
+  });
+
   test('managed skill cleanup preserves user-owned collisions', () => {
     const managed = path.join(root, '.agents', 'skills', 'sinapse', 'SKILL.md');
     const user = path.join(root, '.agents', 'skills', 'snps', 'SKILL.md');
@@ -53,9 +86,34 @@ describe('global provider lifecycle', () => {
     fs.mkdirSync(path.dirname(user), { recursive: true });
     fs.writeFileSync(managed, '<!-- SINAPSE-MANAGED:global-skill -->\n');
     fs.writeFileSync(user, '# User skill\n');
+    const claudeManaged = path.join(root, '.claude', 'skills', 'snps', 'SKILL.md');
+    fs.mkdirSync(path.dirname(claudeManaged), { recursive: true });
+    fs.writeFileSync(claudeManaged, '<!-- SINAPSE-MANAGED:global-skill -->\n');
 
-    expect(removeManagedGlobalSkills(root).removed).toBe(1);
+    expect(removeManagedGlobalSkills(root).removed).toBe(2);
     expect(fs.existsSync(managed)).toBe(false);
     expect(fs.existsSync(user)).toBe(true);
+    expect(fs.existsSync(claudeManaged)).toBe(false);
+  });
+
+  test('provider switch cleanup removes Codex skills without deleting Claude aliases', () => {
+    const aliases = ['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent'];
+    for (const alias of aliases) {
+      for (const providerRoot of ['.agents', '.claude']) {
+        const skillPath = path.join(root, providerRoot, 'skills', alias, 'SKILL.md');
+        fs.mkdirSync(path.dirname(skillPath), { recursive: true });
+        fs.writeFileSync(skillPath, '<!-- SINAPSE-MANAGED:global-skill -->\n');
+      }
+    }
+
+    expect(removeManagedGlobalSkills(root, { providers: ['codex'] }).removed).toBe(5);
+    for (const alias of aliases) {
+      expect(fs.existsSync(path.join(root, '.agents', 'skills', alias, 'SKILL.md'))).toBe(false);
+      expect(fs.existsSync(path.join(root, '.claude', 'skills', alias, 'SKILL.md'))).toBe(true);
+    }
+    expect(removeManagedGlobalSkills(root).removed).toBe(5);
+    for (const alias of aliases) {
+      expect(fs.existsSync(path.join(root, '.claude', 'skills', alias, 'SKILL.md'))).toBe(false);
+    }
   });
 });

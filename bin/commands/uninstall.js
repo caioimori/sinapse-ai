@@ -3,6 +3,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const legacyClaudeCommandHashes = require('../../packages/installer/src/migrations/legacy-claude-agent-command-hashes.json');
 const { getLogger } = require('../../.sinapse-ai/core/logger');
 const {
   HOME,
@@ -128,32 +130,38 @@ function removeOrqxAgentsFrom(dir) {
   return removeInstalledAgentsFrom(dir);
 }
 
-const MANAGED_GLOBAL_SKILL_IDS = ['snps', 'sinapse', 'snps-orqx', 'sinapse-agent'];
+const MANAGED_GLOBAL_SKILL_IDS = ['snps', 'sinapse', 'snps-orqx', 'sinapse-orqx', 'sinapse-agent'];
 const MANAGED_GLOBAL_SKILL_MARKER = 'SINAPSE-MANAGED:global-skill';
 
-function removeManagedGlobalSkills(home = HOME) {
+function removeManagedGlobalSkills(home = HOME, options = {}) {
   let removed = 0;
-  for (const skillId of MANAGED_GLOBAL_SKILL_IDS) {
-    const skillDir = path.join(home, '.agents', 'skills', skillId);
-    const skillPath = path.join(skillDir, 'SKILL.md');
-    if (!fs.existsSync(skillPath)) continue;
-    try {
-      const content = fs.readFileSync(skillPath, 'utf8');
-      if (!content.includes(MANAGED_GLOBAL_SKILL_MARKER)) continue;
-      fs.unlinkSync(skillPath);
-      if (fs.readdirSync(skillDir).length === 0) fs.rmdirSync(skillDir);
-      removed++;
-    } catch { /* best-effort */ }
+  const providers = options.providers || ['codex', 'claude-code'];
+  const skillRoots = [];
+  if (providers.includes('codex')) skillRoots.push(path.join(home, '.agents', 'skills'));
+  if (providers.includes('claude-code')) skillRoots.push(path.join(home, '.claude', 'skills'));
+  for (const skillsRoot of skillRoots) {
+    for (const skillId of MANAGED_GLOBAL_SKILL_IDS) {
+      const skillDir = path.join(skillsRoot, skillId);
+      const skillPath = path.join(skillDir, 'SKILL.md');
+      if (!fs.existsSync(skillPath)) continue;
+      try {
+        const content = fs.readFileSync(skillPath, 'utf8');
+        if (!content.includes(MANAGED_GLOBAL_SKILL_MARKER)) continue;
+        fs.unlinkSync(skillPath);
+        if (fs.readdirSync(skillDir).length === 0) fs.rmdirSync(skillDir);
+        removed++;
+      } catch { /* best-effort */ }
+    }
   }
   return { removed };
 }
 
 function reconcileInstalledAgents(home, desiredFilenames) {
   const manifest = readInstalledAgentsManifest();
-  if (!manifest) return { removed: 0 };
   const desired = new Set(desiredFilenames);
   let removed = 0;
-  for (const filename of manifest.filenames) {
+  const manifestOwned = new Set(manifest?.filenames || []);
+  for (const filename of manifestOwned) {
     if (desired.has(filename)) continue;
     const providerDir = filename.endsWith('.toml')
       ? path.join(home, '.codex', 'agents')
@@ -165,7 +173,65 @@ function reconcileInstalledAgents(home, desiredFilenames) {
       removed++;
     } catch { /* best-effort */ }
   }
-  return { removed };
+
+  const managedMarker = 'SINAPSE-MANAGED:global-agent';
+  for (const [providerDir, extension] of [
+    [path.join(home, '.claude', 'agents'), '.md'],
+    [path.join(home, '.codex', 'agents'), '.toml'],
+    [path.join(home, '.codex', 'agents'), '.md'],
+  ]) {
+    if (!fs.existsSync(providerDir)) continue;
+    for (const filename of fs.readdirSync(providerDir).filter((name) => name.endsWith(extension))) {
+      if (desired.has(filename)) continue;
+      const filepath = path.join(providerDir, filename);
+      try {
+        const content = fs.readFileSync(filepath, 'utf8');
+        if (!manifestOwned.has(filename) && !content.includes(managedMarker)) continue;
+        fs.unlinkSync(filepath);
+        removed++;
+      } catch { /* best-effort */ }
+    }
+  }
+
+  const legacyCommands = path.join(home, '.claude', 'commands', 'SINAPSE', 'agents');
+  let legacyCommandDirectoryRemoved = false;
+  let legacyCommandsRemoved = 0;
+  let legacyCommandsPreserved = 0;
+  if (fs.existsSync(legacyCommands)) {
+    for (const entry of fs.readdirSync(legacyCommands, { withFileTypes: true })) {
+      const filePath = path.join(legacyCommands, entry.name);
+      if (!entry.isFile()) {
+        legacyCommandsPreserved++;
+        continue;
+      }
+      try {
+        const content = fs.readFileSync(filePath);
+        const digest = crypto.createHash('sha256').update(content).digest('hex');
+        const knownHashes = legacyClaudeCommandHashes.files[entry.name] || [];
+        if (!knownHashes.includes(digest)
+          && !content.includes(Buffer.from('SINAPSE-MANAGED:claude-command'))) {
+          legacyCommandsPreserved++;
+          continue;
+        }
+        fs.unlinkSync(filePath);
+        legacyCommandsRemoved++;
+      } catch {
+        legacyCommandsPreserved++;
+      }
+    }
+    try {
+      if (fs.readdirSync(legacyCommands).length === 0) {
+        fs.rmdirSync(legacyCommands);
+        legacyCommandDirectoryRemoved = true;
+      }
+    } catch { /* best-effort */ }
+  }
+  return {
+    removed,
+    legacyCommandDirectoryRemoved,
+    legacyCommandsRemoved,
+    legacyCommandsPreserved,
+  };
 }
 
 // Story 10.40 — Strip SINAPSE-owned keys from ~/.claude/settings.json without

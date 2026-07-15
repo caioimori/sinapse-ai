@@ -3,8 +3,8 @@
 
 /**
  * Generate native Codex custom-agent adapters from the existing Markdown
- * pointers and restore authoritative native workflow skills after the legacy
- * Codex sync. Canonical agent definitions remain in `.sinapse-ai/` and
+ * pointers and maintain the authoritative native skill catalog. Canonical
+ * agent definitions remain in `.sinapse-ai/` and
  * `squads/`; generated files only teach Codex how to activate them.
  */
 
@@ -15,7 +15,6 @@ const { PROJECT_ROOT, loadCodexAgentIndex } = require('./resolve-codex-agent');
 
 const CODEX_AGENTS_DIR = '.codex/agents';
 const NATIVE_SKILLS_DIR = '.agents/skills';
-const COMPATIBILITY_SKILLS_DIR = '.codex/skills';
 const NATIVE_WORKFLOW_SKILLS = Object.freeze([
   'sinapse-orqx',
   'sinapse-spec-driven',
@@ -438,12 +437,7 @@ function collectCodexActivationSkills(projectRoot = PROJECT_ROOT, options = {}) 
       continue;
     }
 
-    const relativePath = `${COMPATIBILITY_SKILLS_DIR}/${skillId}/SKILL.md`;
-    const sourcePath = path.resolve(root, relativePath);
-    if (!isPathInside(root, sourcePath) || !fs.existsSync(sourcePath)) {
-      throw new Error(`Missing catalog activation skill: ${relativePath}`);
-    }
-    skills.push({ skillId, relativePath, content: fs.readFileSync(sourcePath, 'utf8') });
+    throw new Error(`Missing native catalog activation skill: ${nativeRelativePath}`);
   }
 
   for (const skillId of catalog.publicAliasSkillIds) {
@@ -483,7 +477,7 @@ function syncNativeActivationSkills(projectRoot, skills = collectCodexActivation
     created: 0,
     updated: 0,
     unchanged: 0,
-    sourceDir: COMPATIBILITY_SKILLS_DIR,
+    sourceDir: NATIVE_SKILLS_DIR,
     outputDir: normalizePath(path.relative(projectRoot, outputDir)),
   };
 
@@ -516,33 +510,9 @@ function collectNativeWorkflowSkills(projectRoot = PROJECT_ROOT) {
   });
 }
 
-function syncCodexWorkflowSkills(projectRoot, skills = collectNativeWorkflowSkills(projectRoot)) {
-  const outputDir = path.join(projectRoot, COMPATIBILITY_SKILLS_DIR);
-  const summary = {
-    total: skills.length,
-    created: 0,
-    updated: 0,
-    unchanged: 0,
-    sourceDir: NATIVE_SKILLS_DIR,
-    outputDir: normalizePath(path.relative(projectRoot, outputDir)),
-  };
-
-  for (const skill of skills) {
-    const skillDir = path.join(outputDir, skill.skillId);
-    fs.mkdirSync(skillDir, { recursive: true });
-    const status = writeFileIfChanged(path.join(skillDir, 'SKILL.md'), skill.content);
-    summary[status] += 1;
-  }
-
-  return summary;
-}
-
 function syncCodexNativeAgents(projectRoot = PROJECT_ROOT, options = {}) {
   const definitions = collectNativeAgentDefinitions(projectRoot);
   const activationSkills = collectCodexActivationSkills(projectRoot, options);
-  const compatibilitySkills = options.expandedSkills === true
-    ? collectCodexActivationSkills(projectRoot)
-    : activationSkills;
   const outputDir = path.join(projectRoot, CODEX_AGENTS_DIR);
   fs.mkdirSync(outputDir, { recursive: true });
 
@@ -562,7 +532,6 @@ function syncCodexNativeAgents(projectRoot = PROJECT_ROOT, options = {}) {
 
   summary.nativeSkills = syncNativeActivationSkills(projectRoot, activationSkills);
   summary.activationMode = options.expandedSkills === true ? 'expanded' : 'tiered';
-  summary.skills = syncCodexWorkflowSkills(projectRoot, compatibilitySkills);
 
   return summary;
 }
@@ -585,7 +554,6 @@ if (require.main === module) {
 module.exports = {
   CODEX_AGENTS_DIR,
   NATIVE_SKILLS_DIR,
-  COMPATIBILITY_SKILLS_DIR,
   NATIVE_WORKFLOW_SKILLS,
   CODEX_CATALOG_PATH,
   SUPREME_ORCHESTRATOR_ID,
@@ -609,6 +577,5 @@ module.exports = {
   renderExpandedAgentSkill,
   collectCodexActivationSkills,
   syncNativeActivationSkills,
-  syncCodexWorkflowSkills,
   syncCodexNativeAgents,
 };

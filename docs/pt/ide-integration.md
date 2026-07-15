@@ -61,7 +61,7 @@ O SINAPSE suporta 5 plataformas de desenvolvimento com IA. Escolha a que melhor 
 
 ```yaml
 config_file: .claude/CLAUDE.md
-agent_folder: .claude/commands/SINAPSE/agents
+agent_folder: .claude/agents
 activation: /agent-name (slash commands)
 format: full-markdown-yaml
 mcp_support: native
@@ -86,7 +86,7 @@ special_features:
 npm run sync:ide
 
 # Verificar configuração
-ls -la .claude/commands/SINAPSE/agents/
+ls -la .claude/agents/
 ```
 
 ---
@@ -99,7 +99,7 @@ ls -la .claude/commands/SINAPSE/agents/
 config_file: AGENTS.md
 agent_folder: .codex/agents
 activation: /skills + atalhos AGENTS.md
-skills_folder: .codex/skills (local), ~/.codex/skills (global)
+skills_folder: .agents/skills (fonte nativa unica)
 format: markdown
 mcp_support: nativo via Codex
 special_features:
@@ -120,7 +120,7 @@ special_features:
 ```bash
 npm run sync:ide:codex
 npm run sync:skills:codex
-ls -la AGENTS.md .codex/agents/ .codex/skills/
+ls -la AGENTS.md .codex/agents/ .agents/skills/
 ```
 
 ---
@@ -298,7 +298,7 @@ npm run sync:ide:check
 
 # Verificar diretório específico da plataforma
 ls .cursor/rules/  # Para Cursor
-ls .claude/commands/SINAPSE/agents/  # Para Claude Code
+ls .claude/agents/  # Para Claude Code
 ```
 
 ### Conflitos de Sincronização
@@ -367,7 +367,7 @@ cp -r .cursor/rules/ ./rules-backup/
 npm run sync:ide
 
 # Verificar migração
-diff -r ./rules-backup/ .claude/commands/SINAPSE/agents/
+diff -r ./rules-backup/ .claude/agents/
 ```
 
 ### De Claude Code para Cursor

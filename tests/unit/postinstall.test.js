@@ -100,13 +100,13 @@ describe('postinstall — stepSyncIde()', () => {
     spawnSync.mockReset();
   });
 
-  test('calls npm run sync:ide with --ide claude-code', () => {
+  test('calls the provider-neutral sync command', () => {
     spawnSync.mockReturnValue({ status: 0, error: null });
     const result = postinstall.stepSyncIde();
     expect(spawnSync).toHaveBeenCalledTimes(1);
     const [cmd, args] = spawnSync.mock.calls[0];
     expect(cmd).toBe('npm');
-    expect(args).toEqual(expect.arrayContaining(['run', 'sync:ide', '--ide', 'claude-code']));
+    expect(args).toEqual(expect.arrayContaining(['run', 'sync:providers', '--silent']));
     expect(result).toEqual({ ok: true, critical: false });
   });
 
@@ -510,4 +510,3 @@ describe('postinstall — first-run flag (Story B.1)', () => {
     expect(fs.existsSync(path.join(tmpHome, '.sinapse', '.first-run-done'))).toBe(true);
   });
 });
-

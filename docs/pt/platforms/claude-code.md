@@ -403,7 +403,7 @@ O Claude Code mostra status em tempo real:
 flowchart LR
     Source["SINAPSE Core<br/>.sinapse-ai/development/agents"] --> Parser["Parser de Agente"]
     Parser --> Transform["Transformador Claude"]
-    Transform --> Output[".claude/commands/SINAPSE/agents"]
+    Transform --> Output[".claude/agents"]
 ```
 
 ### Comandos de Sincronização
@@ -450,7 +450,7 @@ activation: /dev
 
 Quando conflitos ocorrem:
 
-1. Alterações locais são salvas em `.claude/commands/SINAPSE/agents/.backup/`
+1. Alterações locais são salvas em `.claude/agents/.backup/`
 2. Sync solicita resolução
 3. Escolha: manter local, usar remoto ou mesclar
 
@@ -524,7 +524,7 @@ Error: Unknown command '/xyz'
 npm run sync:ide
 
 # Verificar se o agente existe
-ls .claude/commands/SINAPSE/agents/
+ls .claude/agents/
 ```
 
 #### Permissão de Ferramenta Negada
@@ -588,7 +588,7 @@ R: Simplesmente use o comando slash para o agente desejado: `/dev`, `/qa`, etc.
 R: Sim, através do Task tool que pode criar subagentes.
 
 **P: Onde as definições de agentes são armazenadas?**
-R: Em `.claude/commands/SINAPSE/agents/` após a sincronização.
+R: Em `.claude/agents/` após a sincronização.
 
 **P: Com que frequência devo sincronizar agentes?**
 R: Após atualizar o SINAPSE ou quando agentes são modificados no core.

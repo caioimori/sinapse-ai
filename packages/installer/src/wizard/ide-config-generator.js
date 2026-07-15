@@ -18,6 +18,7 @@ const crossSpawn = require('cross-spawn');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
+const { reconcileLegacyClaudeAgentCommands } = require('../installer/sinapse-ai-installer');
 
 /**
  * Render template with variables
@@ -373,6 +374,9 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
         // Copy agent files to IDE-specific agent folder
         if (ide.agentFolder) {
+          if (ideKey === 'claude-code') {
+            await reconcileLegacyClaudeAgentCommands(projectRoot);
+          }
           spinner.start(`Copying agents to ${ide.agentFolder}...`);
           const agentFiles = await copyAgentFiles(projectRoot, ide.agentFolder, ide);
           createdFiles.push(...agentFiles);

@@ -89,7 +89,7 @@ O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer 
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/data-engineer.md` | Definição core do agente @data-engineer (persona, comandos, workflows) |
-| `.claude/commands/SINAPSE/agents/data-engineer.md` | Comando Claude Code para ativar @data-engineer |
+| `.claude/agents/data-engineer.md` | Comando Claude Code para ativar @data-engineer |
 
 ### Arquivos de Templates SQL
 

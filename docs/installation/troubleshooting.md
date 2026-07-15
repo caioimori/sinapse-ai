@@ -548,7 +548,7 @@ nvm use 16
 
    ```bash
    # Claude Code
-   ls .claude/commands/SINAPSE/agents/
+   ls .claude/agents/
    ```
 
 3. Check IDE settings allow custom commands

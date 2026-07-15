@@ -81,14 +81,10 @@ function createFixtureProject() {
     fs.mkdirSync(skillDir, { recursive: true });
     fs.writeFileSync(path.join(skillDir, 'SKILL.md'), content);
   }
-
-  const staleCompatibilityDir = path.join(projectRoot, '.codex', 'skills', 'sinapse-orqx');
-  fs.mkdirSync(staleCompatibilityDir, { recursive: true });
-  fs.writeFileSync(path.join(staleCompatibilityDir, 'SKILL.md'), 'legacy generated content\n');
-  const promotedSkillDir = path.join(projectRoot, '.codex', 'skills', 'sinapse-dev');
-  fs.mkdirSync(promotedSkillDir, { recursive: true });
+  const developerSkillDir = path.join(projectRoot, '.agents', 'skills', 'sinapse-dev');
+  fs.mkdirSync(developerSkillDir, { recursive: true });
   fs.writeFileSync(
-    path.join(promotedSkillDir, 'SKILL.md'),
+    path.join(developerSkillDir, 'SKILL.md'),
     ['---', 'name: sinapse-dev', 'description: Native developer activator.', '---', ''].join('\n'),
   );
 
@@ -135,10 +131,8 @@ describe('sync-codex-native', () => {
 
     expect(first).toMatchObject({ total: 2, created: 2, updated: 0, unchanged: 0 });
     expect(second).toMatchObject({ total: 2, created: 0, updated: 0, unchanged: 2 });
-    expect(first.nativeSkills).toMatchObject({ total: 8, created: 5, updated: 0, unchanged: 3 });
-    expect(first.skills).toMatchObject({ total: 8, created: 6, updated: 1, unchanged: 1 });
+    expect(first.nativeSkills).toMatchObject({ total: 8, created: 4, updated: 0, unchanged: 4 });
     expect(second.nativeSkills).toMatchObject({ total: 8, created: 0, updated: 0, unchanged: 8 });
-    expect(second.skills).toMatchObject({ total: 8, created: 0, updated: 0, unchanged: 8 });
     for (const id of Object.keys(fixture.pointers)) {
       expect(fs.readFileSync(path.join(fixture.agentsDir, `${id}.md`), 'utf8')).toBe(
         markdownBefore[id],
@@ -150,10 +144,12 @@ describe('sync-codex-native', () => {
     for (const [skillId, content] of Object.entries(fixture.workflowSkills)) {
       expect(
         fs.readFileSync(
-          path.join(fixture.projectRoot, '.codex', 'skills', skillId, 'SKILL.md'),
+          path.join(fixture.projectRoot, '.agents', 'skills', skillId, 'SKILL.md'),
           'utf8',
         ),
       ).toBe(content);
+      expect(fs.existsSync(path.join(fixture.projectRoot, '.codex', 'skills', skillId, 'SKILL.md')))
+        .toBe(false);
     }
     for (const skillId of ['snps', 'sinapse', 'snps-orqx', 'sinapse-agent', 'sinapse-dev']) {
       expect(
@@ -262,17 +258,15 @@ describe('sync-codex-native', () => {
     expect(config).not.toMatch(/reasoning_effort/);
   });
 
-  it('keeps compatibility workflow skills identical to native entrypoints', () => {
+  it('keeps workflow skills only in the native discovery root', () => {
     for (const skillId of NATIVE_WORKFLOW_SKILLS) {
       const nativeSkill = fs.readFileSync(
         path.join(PROJECT_ROOT, '.agents', 'skills', skillId, 'SKILL.md'),
         'utf8',
       );
-      const compatibilitySkill = fs.readFileSync(
-        path.join(PROJECT_ROOT, '.codex', 'skills', skillId, 'SKILL.md'),
-        'utf8',
-      );
-      expect(compatibilitySkill).toBe(nativeSkill);
+      expect(nativeSkill).toContain(`name: ${skillId}`);
+      expect(fs.existsSync(path.join(PROJECT_ROOT, '.codex', 'skills', skillId, 'SKILL.md')))
+        .toBe(false);
     }
   });
 
@@ -307,7 +301,6 @@ describe('sync-codex-native', () => {
 
     expect(summary.activationMode).toBe('expanded');
     expect(summary.nativeSkills.total).toBe(10);
-    expect(summary.skills.total).toBe(8);
     expect(
       fs.existsSync(path.join(
         fixture.projectRoot,

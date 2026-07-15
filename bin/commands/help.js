@@ -13,6 +13,7 @@ function cmdHelp() {
   logger.always(`  ${CYAN}npx sinapse-ai install${NC}               Instala SINAPSE (idempotente — re-runs são upserts)`);
   logger.always(`  ${CYAN}npx sinapse-ai install --force${NC}       Reinstala do zero, mesmo se já instalado`);
   logger.always(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-pergunta idioma/LLM sem apagar instalação`);
+  logger.always(`  ${CYAN}npx sinapse-ai install --llm=both --global-only${NC} Instala Claude + Codex sem alterar o projeto atual`);
   logger.always(`  ${CYAN}npx sinapse-ai update${NC}           Atualiza SINAPSE para a última versão`);
   logger.always(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE globalmente (pede confirmação)`);
   logger.always(`  ${CYAN}npx sinapse-ai uninstall --yes${NC}  Remove SINAPSE globalmente (sem prompt — exigido em CI)`);
@@ -36,8 +37,8 @@ function cmdHelp() {
   logger.always(`  ${CYAN}sinapse --continue${NC}           Continua última sessão`);
   logger.always('');
   logger.always(`${BOLD}Agents:${NC}\n`);
-  logger.always(`  Invocação canônica:  ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
-  logger.always(`  Exemplo:             ${CYAN}/SINAPSE:agents:brand-orqx${NC}`);
+  logger.always(`  Invocação canônica:  ${CYAN}$sinapse-agent <agent-id>${NC}`);
+  logger.always(`  Exemplo:             ${CYAN}$sinapse-agent brand-orqx${NC}`);
   logger.always(`  Master orchestrator: ${CYAN}@sinapse-orqx${NC} (alias: ${DIM}@snps-orqx${NC})`);
   logger.always('');
   logger.always(`${BOLD}Ajuda extra:${NC}\n`);

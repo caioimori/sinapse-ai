@@ -205,19 +205,17 @@ describe('Codex native runtime preparation', () => {
       .toBe(PROJECT_ROOT);
   });
 
-  test('workflow skills are valid, unique, native, and legacy-compatible', () => {
+  test('workflow skills are valid, unique, and exposed only through the native root', () => {
     const skillIds = ['sinapse-orqx', 'sinapse-spec-driven', 'sinapse-loop'];
     const names = [];
 
     for (const skillId of skillIds) {
-      const legacyPath = `.codex/skills/${skillId}/SKILL.md`;
       const nativePath = `.agents/skills/${skillId}/SKILL.md`;
-      const legacy = parseSkill(legacyPath);
       const native = parseSkill(nativePath);
       names.push(native.metadata.name);
-      expect(legacy.metadata.name).toBe(skillId);
       expect(native.metadata.name).toBe(skillId);
-      expect(native.content).toBe(legacy.content);
+      expect(fs.existsSync(path.join(PROJECT_ROOT, '.codex', 'skills', skillId, 'SKILL.md')))
+        .toBe(false);
     }
 
     expect(new Set(names).size).toBe(skillIds.length);

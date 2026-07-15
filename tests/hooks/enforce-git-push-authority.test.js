@@ -45,15 +45,36 @@ function writeSessionState(root, state) {
   );
 }
 
+function toBashPath(filePath) {
+  if (process.platform !== 'win32') return filePath;
+  const normalized = filePath.replace(/\\/g, '/');
+  const match = normalized.match(/^([A-Za-z]):\/(.*)$/);
+  return match ? `/mnt/${match[1].toLowerCase()}/${match[2]}` : normalized;
+}
+
+function quoteBash(value) {
+  const escapedSingleQuote = String.fromCharCode(39, 34, 39, 34, 39);
+  return `'${value.replace(/'/g, escapedSingleQuote)}'`;
+}
+
 function runHook({ command, projectRoot }) {
   const input = JSON.stringify({
     tool_name: 'Bash',
     tool_input: { command },
   });
 
-  const result = spawnSync('bash', [HOOK_PATH], {
+  const bashArgs = process.platform === 'win32'
+    ? [
+      '-c',
+      `export CLAUDE_PROJECT_DIR=${quoteBash(toBashPath(projectRoot))}; `
+        + `exec ${quoteBash(toBashPath(HOOK_PATH))}`,
+    ]
+    : [HOOK_PATH];
+  const result = spawnSync('bash', bashArgs, {
     input,
-    env: { ...process.env, CLAUDE_PROJECT_DIR: projectRoot },
+    env: process.platform === 'win32'
+      ? process.env
+      : { ...process.env, CLAUDE_PROJECT_DIR: projectRoot },
     encoding: 'utf8',
   });
 

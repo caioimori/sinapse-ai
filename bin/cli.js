@@ -96,6 +96,10 @@ if (require.main === module) {
 
 function runRouter() {
   const args = process.argv.slice(2);
+  if (args[0] === 'install' && (args.includes('--help') || args.includes('-h'))) {
+    cmdHelp();
+    return;
+  }
   // Story 10.46 — empty invocation on a fresh machine routes to a first-run
   // hint instead of the bare help screen, so new users discover `install`.
   let command = args[0];
@@ -105,9 +109,12 @@ function runRouter() {
   const isLocal = args.includes('--local');
   const isForce = args.includes('--force');
   const isReconfigure = args.includes('--reconfigure');
+  const isGlobalOnly = args.includes('--global-only');
+  const llmFlag = args.find((arg) => arg.startsWith('--llm='));
+  const requestedLlm = llmFlag ? llmFlag.slice('--llm='.length) : null;
 
   switch (command) {
-    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure }).catch(e => { const { formatErrorMessage } = require('./utils/install-errors'); logger.error(formatErrorMessage(e)); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); }); break;
+    case 'install':  isLocal ? cmdInstallLocal() : cmdInstallGlobal({ force: isForce, reconfigure: isReconfigure, globalOnly: isGlobalOnly, llm: requestedLlm }).catch(e => { const { formatErrorMessage } = require('./utils/install-errors'); logger.error(formatErrorMessage(e)); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); }); break;
     case 'update':   isLocal ? cmdUpdateLocal()  : cmdUpdateGlobal().catch(e => { logger.error(`${RED}Erro ao atualizar:${NC} ${e.message}`); logger.error(`Tente: ${CYAN}npx sinapse-ai doctor${NC}`); process.exit(1); });  break;
     case 'uninstall': {
       const isYes = args.includes('--yes') || args.includes('-y');

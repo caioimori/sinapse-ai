@@ -88,7 +88,7 @@ flowchart TB
 | Arquivo | Propósito |
 |---------|-----------|
 | `.sinapse-ai/development/agents/ux-design-expert.md` | Definição completa do agente (persona, comandos, workflows) |
-| `.claude/commands/SINAPSE/agents/ux-design-expert.md` | Comando Claude Code para ativar @ux-design-expert |
+| `.claude/agents/ux-design-expert.md` | Comando Claude Code para ativar @ux-design-expert |
 
 ### Tasks por Fase
 

@@ -225,7 +225,7 @@ sinapse-ai/
 │       └── checklists/            # Checklists de produto
 │
 ├── .claude/                       # Configuração do Claude Code
-│   ├── commands/SINAPSE/agents/      # Comandos de skill dos agentes
+│   ├── agents/                       # Agentes nativos do Claude
 │   ├── hooks/                     # Hooks de governança
 │   └── rules/                     # Regras de comportamento da IA
 │
@@ -1112,4 +1112,3 @@ node --inspect node_modules/.bin/jest
 
 _SINAPSE Development Setup Guide v1.0.0_
 _Última Atualização: 2026-01-29_
-

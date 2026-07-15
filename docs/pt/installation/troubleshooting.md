@@ -554,7 +554,7 @@ nvm use 16
 
    ```bash
    # Claude Code
-   ls .claude/commands/SINAPSE/agents/
+   ls .claude/agents/
 
    # Cursor
    ls .cursor/rules/

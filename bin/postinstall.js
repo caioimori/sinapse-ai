@@ -287,8 +287,8 @@ function isGlobalInstall() {
 }
 
 /**
- * Step 1: sync:ide --ide claude-code.
- * Copies agent definitions to .claude/commands/SINAPSE/agents/ so Claude Code can resolve @developer, etc.
+ * Step 1: synchronize native Claude and Codex provider adapters.
+ * Writes Claude agents to .claude/agents and Codex skills to .agents/skills.
  *
  * Skipped on global installs (no project to sync to). EACCES is treated as a
  * non-critical warning — the user can run `sinapse install` inside their project
@@ -300,7 +300,7 @@ function stepSyncIde() {
     return { ok: true, critical: false, skipped: true };
   }
   verboseLog(`${c.cyan}›${c.reset} Sincronizando agents para Claude Code...`);
-  const result = run('npm', ['run', 'sync:ide', '--silent', '--', '--ide', 'claude-code', '--quiet']);
+  const result = run('npm', ['run', 'sync:providers', '--silent']);
   if (result.error) {
     if (result.error.code === 'EACCES' || result.error.code === 'EPERM') {
       warn("Sem permissão pra sincronizar agents. Rode 'sinapse install' dentro do seu projeto.");

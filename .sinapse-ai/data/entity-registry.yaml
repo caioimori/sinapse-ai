@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T03:11:31.074Z'
+  lastUpdated: '2026-07-15T06:51:50.185Z'
   entityCount: 816
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -41,8 +41,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:f66f076d3c8bead4fa1193fe027582c0487019e363bd37012db6a6cc1d90ab6d
-      lastVerified: '2026-07-02T22:41:00.485Z'
+      checksum: sha256:cbde468c6a5d8c09667d54ba512489023d422a1e843a3256c2e722f29ab26bc8
+      lastVerified: '2026-07-15T04:47:59.892Z'
     agents:
       path: bin/commands/agents.js
       layer: L1
@@ -106,8 +106,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:af615f80ca758541b8ede2af086aead94b99f194336459529ab3876186462a3d
-      lastVerified: '2026-07-02T22:41:00.486Z'
+      checksum: sha256:eacc95a711bcbbd840a0a52b11bc1724b9a13282af3f914f938c9a55b2797a72
+      lastVerified: '2026-07-15T04:28:12.370Z'
     ideate:
       path: bin/commands/ideate.js
       layer: L1
@@ -165,8 +165,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:d410cc6498c4906818d29c86c4ee7c6a28d76283bd2071be218088540a879b0f
-      lastVerified: '2026-07-15T02:37:43.454Z'
+      checksum: sha256:dc2908556ec047aafa6fc4f9f0c7e94ba50ffef65e5d00a2ff3a7b87caa4d095
+      lastVerified: '2026-07-15T05:31:13.267Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -213,8 +213,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:82ec537932c7b6c7e46c294ac4396c988bea43583a1f1f7a1886d2b13518dd55
-      lastVerified: '2026-06-21T05:24:05.621Z'
+      checksum: sha256:b1e4c5c3303d7df656372b4659bc04b5b404655c1ba054ff94c0f50e7f0ab5ae
+      lastVerified: '2026-07-15T04:28:12.371Z'
     uninstall:
       path: bin/commands/uninstall.js
       layer: L1
@@ -235,14 +235,15 @@ entities:
         - spawn-safe
       externalDeps: []
       plannedDeps:
+        - legacy-claude-agent-command-hashes
         - logger
       lifecycle: production
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1116a6ee85257c1ad26c9d7de4b24b681c1045c19d09f0572be57e77b3053b77
-      lastVerified: '2026-07-15T02:37:43.455Z'
+      checksum: sha256:83f11e05840c20f1e1800b765288c7bfe2dae6282d53ea574b5141b266bcd692
+      lastVerified: '2026-07-15T06:51:49.970Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -271,8 +272,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1cc8b0622d9d0137feb4c7e1f93c7303a98d7e5b696b8c995495d75dff815a09
-      lastVerified: '2026-07-15T02:37:43.455Z'
+      checksum: sha256:77ebc744237cfab9f316e066519efc345566a5f48b3ba752691c6512d62f5dfb
+      lastVerified: '2026-07-15T05:31:13.268Z'
     command-generator:
       path: bin/lib/command-generator.js
       layer: L1
@@ -416,8 +417,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:289930cccfb6aca324bf6f460f9cfe2ebda6fcc6ee1f54d7ee3cfcfbbe86e5c1
-      lastVerified: '2026-07-15T03:11:30.770Z'
+      checksum: sha256:aa1cb5c8ddf06ebcde68748be147c9ed2204311701505c58bcb3b0291778b4da
+      lastVerified: '2026-07-15T06:51:49.972Z'
     header:
       path: bin/lib/header.js
       layer: L1
@@ -594,8 +595,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:7d7af407aecf1704b20d248edc724fa9482cff291743543bf3f6e57336fa9a55
-      lastVerified: '2026-07-03T06:55:48.457Z'
+      checksum: sha256:691f5a35e7a4ee2a4b8a73c1acc581c945a9be2935ac7b2159b446d98959f4d0
+      lastVerified: '2026-07-15T04:28:12.375Z'
     sinapse-delegate:
       path: bin/sinapse-delegate.js
       layer: L1

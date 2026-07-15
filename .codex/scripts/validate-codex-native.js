@@ -133,7 +133,6 @@ function validateNativeCodex(projectRoot = PROJECT_ROOT) {
   const metrics = {
     markdownAgents: 0,
     nativeAgents: 0,
-    compatibilitySkills: 0,
     nativeSkills: 0,
     commands: 0,
   };
@@ -195,33 +194,24 @@ function validateNativeCodex(projectRoot = PROJECT_ROOT) {
   }
   check(nativeNames.has('sinapse-orqx'), 'Native supreme orchestrator must be named sinapse-orqx');
 
-  const skillIdsByRoot = {};
-  for (const [label, relativeRoot] of [['Compatibility skill', '.codex/skills'], ['Native skill', '.agents/skills']]) {
-    const files = collectSkillFiles(path.join(projectRoot, relativeRoot));
-    skillIdsByRoot[relativeRoot] = new Set(files.map((file) => path.basename(path.dirname(file))));
-    if (label === 'Compatibility skill') metrics.compatibilitySkills = files.length;
-    else metrics.nativeSkills = files.length;
-    for (const file of files) capture(`${label} ${path.relative(projectRoot, file)}`, () => {
-      const metadata = parseSkillFrontmatter(file);
-      check(metadata.name === path.basename(path.dirname(file)),
-        `${path.relative(projectRoot, file)} frontmatter name must match its directory`);
-      return metadata;
-    });
-  }
+  const nativeSkillRoot = '.agents/skills';
+  const nativeSkillFiles = collectSkillFiles(path.join(projectRoot, nativeSkillRoot));
+  const nativeSkillIds = new Set(nativeSkillFiles.map((file) => path.basename(path.dirname(file))));
+  metrics.nativeSkills = nativeSkillFiles.length;
+  for (const file of nativeSkillFiles) capture(`Native skill ${path.relative(projectRoot, file)}`, () => {
+    const metadata = parseSkillFrontmatter(file);
+    check(metadata.name === path.basename(path.dirname(file)),
+      `${path.relative(projectRoot, file)} frontmatter name must match its directory`);
+    return metadata;
+  });
   const catalog = capture('Codex activation catalog', () => readCodexCatalog(projectRoot));
   if (catalog) {
     const managedSkillIds = getManagedActivationSkillIds(catalog);
     for (const skillId of managedSkillIds) {
-      check(skillIdsByRoot['.agents/skills'].has(skillId),
+      check(nativeSkillIds.has(skillId),
         `Missing native activation skill .agents/skills/${skillId}/SKILL.md`);
-      check(skillIdsByRoot['.codex/skills'].has(skillId),
-        `Missing compatibility activation skill .codex/skills/${skillId}/SKILL.md`);
-      const nativePath = path.join(projectRoot, '.agents', 'skills', skillId, 'SKILL.md');
-      const compatibilityPath = path.join(projectRoot, '.codex', 'skills', skillId, 'SKILL.md');
-      if (fs.existsSync(nativePath) && fs.existsSync(compatibilityPath)) {
-        check(fs.readFileSync(nativePath, 'utf8') === fs.readFileSync(compatibilityPath, 'utf8'),
-          `Native and compatibility activation skill differ: ${skillId}`);
-      }
+      check(!fs.existsSync(path.join(projectRoot, '.codex', 'skills', skillId, 'SKILL.md')),
+        `Duplicate managed Codex skill surface: ${skillId} exists in both .agents/skills and .codex/skills`);
     }
   }
 

@@ -5,9 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const { getLogger } = require('../../.sinapse-ai/core/logger');
 const {
+  HOME,
   ROOT,
   SINAPSE_HOME,
-  CLAUDE_COMMANDS_DIR,
   BIN_DIR,
   CYAN,
   GREEN,
@@ -21,9 +21,11 @@ const { getSquads } = require('../lib/squads');
 
 function verifyInstall() {
   const logger = getLogger();
+  const claudeAgentsDir = path.join(HOME, '.claude', 'agents');
+  const codexAgentsDir = path.join(HOME, '.codex', 'agents');
   const checks = [
     [fs.existsSync(SINAPSE_HOME), `${getSquads(SINAPSE_HOME).length} squads in ~/.sinapse/`],
-    [fs.existsSync(CLAUDE_COMMANDS_DIR), 'Commands in ~/.claude/commands/SINAPSE/agents/'],
+    [fs.existsSync(claudeAgentsDir) || fs.existsSync(codexAgentsDir), 'Native provider agents installed'],
     [fs.existsSync(path.join(BIN_DIR, 'sinapse')), 'Launcher at ~/bin/sinapse'],
     [fs.existsSync(path.join(SINAPSE_HOME, '.claude', 'rules', 'squad-awareness.md')), 'squad-awareness.md'],
   ];
@@ -52,7 +54,7 @@ function cmdList() {
 
   logger.always('');
   logger.always(`  ${BOLD}Total: ${GREEN}${totalAgents} agents${NC} | ${YELLOW}${totalTasks} tasks${NC}`);
-  logger.always(`  ${BOLD}Invoke: ${CYAN}/SINAPSE:agents:{agent-id}${NC}`);
+  logger.always(`  ${BOLD}Invoke: ${CYAN}$sinapse-agent <agent-id>${NC}`);
   logger.always('');
 }
 

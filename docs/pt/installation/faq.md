@@ -125,7 +125,7 @@ your-project/
 │   └── core-config.yaml        # Configuração do framework
 │
 ├── .claude/                    # Claude Code (se selecionado)
-│   └── commands/SINAPSE/agents/   # Comandos slash de agentes
+│   └── agents/                    # Agentes nativos do Claude
 │
 ├── .cursor/                    # Cursor (se selecionado)
 │   └── rules/                  # Regras de agentes
