@@ -192,7 +192,7 @@ para suas capacidades nativas.
 - Validation: 39 focused tests passed; ESLint, `validate:article-vii`,
   `validate:docs`, `validate:providers`, `validate:codex-native`,
   `validate:parity` and all 13 `validate:all` guards passed. `npm pack --dry-run`
-  produced 4,341 entries and includes all 24 shipped docs/scripts changed in
+  produced 4,341 entries and includes all 26 shipped docs/scripts changed in
   this review slice; the implementation story and test sources are intentionally
   excluded from the public tarball.
 

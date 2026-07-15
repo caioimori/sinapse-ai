@@ -219,8 +219,19 @@ mv .sinapse-ai.backup .sinapse-ai
 # Install once with internet
 npx sinapse-ai install
 
-# Package for offline use
-tar -czvf sinapse-offline.tar.gz .sinapse-ai/ .claude/ .codex/ .agents/ squads/
+# Package every available component (macOS, Linux, or Git Bash)
+set --
+for path in .sinapse-ai .claude .codex .agents squads; do
+  [ ! -e "$path" ] || set -- "$@" "$path"
+done
+tar -czvf sinapse-offline.tar.gz "$@"
+```
+
+```powershell
+# PowerShell: omit provider directories that are not installed
+$paths = @('.sinapse-ai', '.claude', '.codex', '.agents', 'squads') |
+  Where-Object { Test-Path -LiteralPath $_ }
+tar -czvf sinapse-offline.tar.gz $paths
 ```
 
 **On air-gapped machine:**
@@ -251,7 +262,20 @@ tar -xzvf sinapse-offline.tar.gz
    # Install and package
    npx sinapse-ai install
    cd your-project
-   tar -czvf sinapse-transfer.tar.gz .sinapse-ai/ .claude/ .codex/ .agents/ squads/ docs/
+
+   # Include every component that exists (macOS, Linux, or Git Bash)
+   set --
+   for path in .sinapse-ai .claude .codex .agents squads docs; do
+     [ ! -e "$path" ] || set -- "$@" "$path"
+   done
+   tar -czvf sinapse-transfer.tar.gz "$@"
+   ```
+
+   ```powershell
+   # PowerShell equivalent
+   $paths = @('.sinapse-ai', '.claude', '.codex', '.agents', 'squads', 'docs') |
+     Where-Object { Test-Path -LiteralPath $_ }
+   tar -czvf sinapse-transfer.tar.gz $paths
    ```
 
 2. **Transfer the archive** via USB, secure transfer, etc.
