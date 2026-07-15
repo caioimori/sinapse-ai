@@ -61,15 +61,11 @@ function assertSafeFileWithinHome(home, filePath) {
 function readRegularFileNoFollowSync(filePath, encoding = null) {
   let handle;
   try {
-    const before = fs.lstatSync(filePath);
-    if (before.isSymbolicLink() || !before.isFile()) return null;
-    fs.realpathSync.native(filePath);
     handle = fs.openSync(filePath, NOFOLLOW_READ_FLAGS);
     const opened = fs.fstatSync(handle);
     const after = fs.lstatSync(filePath);
     if (!opened.isFile() || after.isSymbolicLink() || !after.isFile()) return null;
-    if (before.dev !== opened.dev || before.ino !== opened.ino
-      || after.dev !== opened.dev || after.ino !== opened.ino) return null;
+    if (after.dev !== opened.dev || after.ino !== opened.ino) return null;
     return fs.readFileSync(handle, encoding || undefined);
   } catch (error) {
     if (['ENOENT', 'ELOOP', 'EISDIR', 'EINVAL', 'UNKNOWN'].includes(error.code)) return null;

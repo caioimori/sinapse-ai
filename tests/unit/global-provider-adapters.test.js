@@ -239,7 +239,7 @@ describe('global provider adapters', () => {
     expect(fs.readFileSync(targetPath, 'utf8')).toContain('user target');
   });
 
-  test('rejects a file link by lstat before open when O_NOFOLLOW cannot protect Windows', () => {
+  test('rejects a file link after open when O_NOFOLLOW cannot protect Windows', () => {
     const candidate = path.join(root, 'candidate.md');
     fs.writeFileSync(candidate, 'target\n');
     const originalLstat = fs.lstatSync;
@@ -252,10 +252,31 @@ describe('global provider adapters', () => {
     const open = jest.spyOn(fs, 'openSync');
 
     expect(readRegularFileNoFollowSync(candidate, 'utf8')).toBeNull();
-    expect(open).not.toHaveBeenCalledWith(candidate, expect.anything());
+    expect(open).toHaveBeenCalledWith(candidate, expect.anything());
 
     open.mockRestore();
     lstat.mockRestore();
+  });
+
+  test('rejects a path whose identity differs from the opened file', () => {
+    const candidate = path.join(root, 'candidate.md');
+    fs.writeFileSync(candidate, 'target\n');
+    const stat = fs.lstatSync(candidate);
+    const lstat = jest.spyOn(fs, 'lstatSync').mockReturnValue({
+      dev: `different-${stat.dev}`,
+      ino: stat.ino,
+      isSymbolicLink: () => false,
+      isFile: () => true,
+    });
+    const read = jest.spyOn(fs, 'readFileSync');
+
+    try {
+      expect(readRegularFileNoFollowSync(candidate, 'utf8')).toBeNull();
+      expect(read).not.toHaveBeenCalled();
+    } finally {
+      read.mockRestore();
+      lstat.mockRestore();
+    }
   });
 
   test('rejects a provider directory junction or symlink that escapes HOME', () => {
