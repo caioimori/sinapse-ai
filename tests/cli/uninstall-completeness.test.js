@@ -118,9 +118,13 @@ describe('recordInstalledAgents + readInstalledAgentsManifest', () => {
     const manifest = readInstalledAgentsManifest();
 
     expect(manifest).not.toBeNull();
-    expect(manifest.version).toBe(1);
+    expect(manifest.version).toBe(2);
     expect(manifest.filenames).toEqual(['x.md', 'y.md']);
     expect(manifest.ides).toEqual(['claude-code']);
+    expect(manifest.artifacts).toEqual([
+      { provider: 'claude-code', filename: 'x.md', sha256: null },
+      { provider: 'claude-code', filename: 'y.md', sha256: null },
+    ]);
     expect(typeof manifest.timestamp).toBe('string');
   });
 
