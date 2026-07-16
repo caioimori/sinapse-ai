@@ -64,8 +64,8 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
 
 ## Updated Dependency Evidence
 
-As 12 familias abaixo receberam novos pins. O inventario total de 16 refs
-unicas tambem conta `init`, `autobuild` e `analyze` do CodeQL separadamente,
+As 12 famílias abaixo receberam novos pins. O inventário total de 16 refs
+únicas também conta `init`, `autobuild` e `analyze` do CodeQL separadamente,
 além de `actions/first-interaction` e `actions/labeler`, que já estavam atuais.
 
 | Action | Release | Immutable SHA |
