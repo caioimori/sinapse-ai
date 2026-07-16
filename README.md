@@ -1,6 +1,11 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/caioimori/sinapse-ai/main/docs/assets/sinapse-ai-github-hero.png" alt="SINAPSE AI - sistema governado de agentes para Claude Code e Codex" width="100%">
-</p>
+<pre align="center">
+ ███████╗███╗   ██╗██████╗ ███████╗     █████╗ ██╗
+ ██╔════╝████╗  ██║██╔══██╗██╔════╝    ██╔══██╗██║
+ ███████╗██╔██╗ ██║██████╔╝███████╗    ███████║██║
+ ╚════██║██║╚██╗██║██╔═══╝ ╚════██║    ██╔══██║██║
+ ███████║██║ ╚████║██║     ███████║    ██║  ██║██║
+ ╚══════╝╚═╝  ╚═══╝╚═╝     ╚══════╝    ╚═╝  ╚═╝╚═╝
+</pre>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/sinapse-ai"><img src="https://img.shields.io/npm/v/sinapse-ai?style=flat-square&color=00B894&label=npm" alt="Versão npm"></a>
