@@ -4,7 +4,7 @@
 
 ## Pré-requisitos
 
-- **Node.js** ≥ 18 (LTS recomendado)
+- **Node.js** ≥ 18 (Node 22 LTS recomendado)
 - **Claude Code** ou **Codex CLI** instalado
 - **Git** (pra colaboração)
 
