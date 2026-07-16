@@ -1,5 +1,5 @@
 ---
-status: InProgress
+status: InReview
 owner: sprint-lead
 executor: developer
 quality_gate: quality-gate
@@ -11,7 +11,7 @@ target_release: next
 
 ## Status
 
-InProgress
+InReview
 
 ## Story
 
@@ -41,7 +41,7 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
   e executado, Then ele encontra 0 links quebrados.
 - [x] AC5: Given os workflows ativos, When YAML, pinning e scripts v9 sao
   validados, Then todos passam sem referencia mutavel ou incompatibilidade.
-- [ ] AC6: Given o PR pronto, When release-readiness, CI e CodeQL terminam,
+- [x] AC6: Given o PR pronto, When release-readiness, CI e CodeQL terminam,
   Then todos passam antes da integracao.
 - [x] AC7: Given o checkout original e os paths protegidos, When o diff e
   auditado, Then nenhum deles recebe alteracao desta story.
@@ -92,6 +92,8 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
   13/13 guards e release-readiness 11/11.
 - O modo estrito de acceptance criteria passou 81/81 criterios em formato
   Given/When/Then, eliminando os 21 avisos legados deste ciclo.
+- O PR remoto aprovou CodeRabbit, CodeQL v4, cobertura, Jest 20/24, macOS Intel
+  e Apple Silicon, smoke macOS e smoke Windows, alem de todos os gates menores.
 
 ## File List
 
