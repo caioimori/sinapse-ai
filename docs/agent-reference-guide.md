@@ -43,8 +43,8 @@ activation only when the responsible role is already clear.
 | Squad Creator | `@squad-creator` | `$sinapse-agent squad-creator` | Squad design and validation |
 | Supreme Orchestrator | `@sinapse-orqx` | `$snps` | Cross-squad routing |
 
-Agent authority remains exclusive. In particular, only DevOps may push, open a
-pull request, or execute a release.
+Agent authority remains exclusive. In particular, only DevOps may push, open or
+merge a pull request, or execute a release.
 
 ## Discover every agent and task
 

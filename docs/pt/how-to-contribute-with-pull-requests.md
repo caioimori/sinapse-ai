@@ -7,7 +7,8 @@ Não envie mudanças diretamente para `main` e não crie tags de release.
 
 1. Abra ou localize uma issue que descreva o problema.
 2. Faça fork de [caioimori/sinapse-ai](https://github.com/caioimori/sinapse-ai).
-3. Sincronize seu fork com `origin/main`.
+3. Adicione o repositório canônico como `upstream` e sincronize seu fork com
+   `upstream/main`.
 4. Crie uma branch curta, por exemplo `dev/fix/provider-detection` ou
    `dev/docs/install-guide`.
 5. Implemente uma mudança coerente e execute os gates aplicáveis.

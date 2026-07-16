@@ -8,6 +8,7 @@
 
 const assert = require('assert');
 const path = require('path');
+const { generateGreeting } = require('../../.sinapse-ai/development/scripts/generate-greeting');
 
 // Mock session context
 const mockSessionContext = {
@@ -57,11 +58,10 @@ describe('generate-greeting.js', () => {
     it('should complete scheduled greeting work within the pipeline timeout budget', async () => {
       const pipelineTimeoutBudgetMs = 500;
       const startTime = Date.now();
-      
-      // Simulate greeting generation
-      await new Promise(resolve => setTimeout(resolve, 50));
-      
+      const greeting = await generateGreeting('quality-gate');
       const duration = Date.now() - startTime;
+      assert.strictEqual(typeof greeting, 'string');
+      assert.ok(greeting.length > 0, 'Production greeting should not be empty');
       assert.ok(
         duration < pipelineTimeoutBudgetMs,
         `Scheduled greeting work took ${duration}ms, pipeline budget is <${pipelineTimeoutBudgetMs}ms`,
@@ -200,4 +200,3 @@ if (require.main === module) {
 module.exports = {
   generateFallbackGreeting,
 };
-

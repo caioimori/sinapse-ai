@@ -3,7 +3,7 @@
 > This filename is retained for existing links. It documents the current
 > public CLI, not a separate v4 installer.
 >
-> [Portugues](../pt/installation/v4-quick-start.md)
+> [Português](../pt/installation/v4-quick-start.md)
 
 ## Requirements
 

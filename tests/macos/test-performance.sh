@@ -62,9 +62,15 @@ if (( CLI_SECONDS > MAX_CLI_SECONDS )); then
 fi
 log "[PASS] Version and help: ${CLI_SECONDS}s"
 
-PUBLISHED_VERSION="$(npm view sinapse-ai version --silent)"
-[[ -n "$PUBLISHED_VERSION" ]] || fail "npm registry did not return sinapse-ai version."
-log "[PASS] npm registry package exists: sinapse-ai@$PUBLISHED_VERSION"
+if [[ "${SINAPSE_VALIDATE_PUBLIC_RELEASE:-false}" == "true" ]]; then
+  if ! PUBLISHED_VERSION="$(npm view sinapse-ai version --silent 2>/dev/null)"; then
+    fail "npm registry request for sinapse-ai failed."
+  fi
+  [[ -n "$PUBLISHED_VERSION" ]] || fail "npm registry did not return sinapse-ai version."
+  log "[PASS] npm registry package exists: sinapse-ai@$PUBLISHED_VERSION"
+else
+  log "[SKIP] Public npm registry check (set SINAPSE_VALIDATE_PUBLIC_RELEASE=true to enable)."
+fi
 
 log "[INFO] CPU cores: $(sysctl -n hw.ncpu)"
 log "[INFO] Memory bytes: $(sysctl -n hw.memsize)"

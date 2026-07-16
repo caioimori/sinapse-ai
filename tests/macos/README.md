@@ -32,6 +32,13 @@ tests/macos/run-all-tests.sh --test AC1
 tests/macos/run-all-tests.sh --test AC8
 ```
 
+The performance test stays local by default. Enable its release-only npm
+registry assertion explicitly:
+
+```bash
+SINAPSE_VALIDATE_PUBLIC_RELEASE=true tests/macos/test-performance.sh
+```
+
 The architecture-specific wrappers fail when executed on the wrong runner. The
 master runner skips the incompatible architecture automatically.
 

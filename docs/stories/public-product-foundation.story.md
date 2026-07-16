@@ -90,6 +90,8 @@ depender de conhecimento interno dos mantenedores.
 - Gates finais: docs 28/28, Article VII, paridade, 13/13 guards, lint sem erros,
   typecheck, actionlint 1.7.12, 26/26 YAMLs parseados e 9/9 suites com 224/224
   testes afetados aprovados.
+- O follow-up final do CodeRabbit passou 3/3 suites e 22/22 testes focados, além
+  de `bash -n` no teste de performance macOS e nova validação dos Articles IV/VII.
 - A suíte completa concluiu 423 suites e 11.730 testes aprovados; 16 suites e
   176 testes foram ignorados de forma declarada, com 8 itens `todo`. O Jest
   manteve o aviso conhecido de um worker encerrado de forma forçada, sem alterar
