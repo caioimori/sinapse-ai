@@ -23,8 +23,8 @@ jobs:
       - name: Welcome first-time contributors
         uses: actions/first-interaction@1c4688942c71f71d4f5502a26ea67c331730fa4d # v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: |
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: |
             Obrigado por abrir sua primeira issue no SINAPSE AI.
 
             **O que acontece agora?**
@@ -38,7 +38,7 @@ jobs:
 
             **Quer contribuir?** Confira issues com label `good first issue`.
 
-          pr-message: |
+          pr_message: |
             Obrigado pelo seu primeiro pull request no SINAPSE AI.
 
             **Checklist de revisão:**

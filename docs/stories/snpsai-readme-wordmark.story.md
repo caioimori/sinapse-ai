@@ -25,6 +25,8 @@ produto sem uma ilustracao generica ou uma reinterpretacao da identidade.
   canonico definido em `bin/lib/header.js`.
 - Remover do repositorio o hero generico que deixou de representar o produto.
 - Preservar badges, navegacao, proposta de valor e paridade entre idiomas.
+- Corrigir os nomes de inputs incompativeis encontrados no workflow publico de
+  boas-vindas durante a validacao do PR.
 
 ## Acceptance Criteria
 
@@ -37,6 +39,8 @@ produto sem uma ilustracao generica ou uma reinterpretacao da identidade.
   passam antes da entrega.
 - [x] AC6: Nenhum path protegido L1/L2 ou alteracao preexistente do worktree
   original e modificado.
+- [x] AC7: O workflow `welcome` usa os inputs documentados pela action pinada e
+  nao falha ao receber uma nova issue ou um novo pull request.
 
 ## Out of scope
 
@@ -51,6 +55,7 @@ produto sem uma ilustracao generica ou uma reinterpretacao da identidade.
 2. Confirmar a ausencia de referencias ao hero removido nas superficies de
    entrada publica.
 3. Executar os gates de documentacao, Articles IV/VII e qualidade aplicaveis.
+4. Validar o YAML do workflow e comprovar a execucao remota no PR.
 
 ## Dev Agent Record
 
@@ -62,10 +67,13 @@ produto sem uma ilustracao generica ou uma reinterpretacao da identidade.
 - Gates aprovados: wordmark 6/6, docs 28/28, Article VII, 13/13 guards e
   release-readiness 11/11. O lint terminou sem erros; warnings preexistentes
   permaneceram fora do escopo.
+- A primeira execucao remota revelou os inputs legados com hifen no workflow
+  `welcome`; os tres nomes foram atualizados para a interface da action v3.
 
 ## File List
 
 - `README.md`
 - `README.en.md`
+- `.github/workflows/welcome.yml`
 - `docs/assets/sinapse-ai-github-hero.png` (deleted)
 - `docs/stories/snpsai-readme-wordmark.story.md`
