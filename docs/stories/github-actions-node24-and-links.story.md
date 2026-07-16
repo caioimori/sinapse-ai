@@ -24,7 +24,8 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
 - Atualizar actions ativas para as releases oficiais mais recentes verificadas
   em 2026-07-16, sempre com SHA imutavel e major version documentada.
 - Migrar CodeQL para v4 e actions JavaScript elegiveis para Node 24.
-- Corrigir os tres links quebrados reportados pela CI em 343 arquivos Markdown.
+- Corrigir os tres links quebrados reportados pela varredura inicial da CI em
+  343 arquivos Markdown.
 - Normalizar os criterios legados das tres stories recentes que ainda geravam
   avisos no validador Given/When/Then.
 - Preservar workflows `.disabled` como historico inativo.
@@ -61,7 +62,11 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
 3. Parsear YAML, validar SHA pinning e executar os gates do framework.
 4. Abrir PR, aguardar a matriz completa e validar os workflows em `main`.
 
-## Dependency Evidence
+## Updated Dependency Evidence
+
+As 12 familias abaixo receberam novos pins. O inventario total de 16 refs
+unicas tambem conta `init`, `autobuild` e `analyze` do CodeQL separadamente,
+além de `actions/first-interaction` e `actions/labeler`, que já estavam atuais.
 
 | Action | Release | Immutable SHA |
 |---|---:|---|
@@ -83,7 +88,7 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
 - Releases e SHAs consultados diretamente nos repositorios oficiais das
   actions antes da edicao.
 - Trabalho realizado em worktree isolado baseado no merge `641554cf`.
-- Metadados oficiais confirmaram 16 actions unicas ativas como `node24` ou
+- Metadados oficiais confirmaram 16 refs de actions unicas ativas como `node24` ou
   `composite`; os 108 usos permanecem fixados a SHAs de 40 caracteres.
 - Os inputs `with:` de 108/108 steps foram comparados aos metadados dos novos
   SHAs, sem chave removida ou input obrigatorio ausente.
@@ -92,8 +97,8 @@ seguro, confiavel e livre de alertas operacionais conhecidos.
   13/13 guards e release-readiness 11/11.
 - O modo estrito de acceptance criteria passou 81/81 criterios em formato
   Given/When/Then, eliminando os 21 avisos legados deste ciclo.
-- O PR remoto aprovou CodeRabbit, CodeQL v4, cobertura, Jest 20/24, macOS Intel
-  e Apple Silicon, smoke macOS e smoke Windows, alem de todos os gates menores.
+- O PR remoto aprovou CodeQL v4, cobertura, Jest 20/24, macOS Intel e Apple
+  Silicon, os smokes de macOS e Windows, além de todos os gates menores.
 
 ## File List
 
