@@ -29,6 +29,7 @@
  *   node scripts/release-readiness.js
  *   node scripts/release-readiness.js --json
  *   node scripts/release-readiness.js --quiet
+ *   node scripts/release-readiness.js --skip-publish
  */
 
 'use strict';
@@ -58,6 +59,7 @@ function parseArgs(argv = process.argv.slice(2)) {
   return {
     json: args.has('--json'),
     quiet: args.has('--quiet') || args.has('-q'),
+    skipPublish: args.has('--skip-publish'),
   };
 }
 
@@ -136,7 +138,10 @@ function main(argv = process.argv.slice(2)) {
     console.log('Running all release gates (this can take a few minutes)...');
     console.log('');
   }
-  const results = runAllGates();
+  const gates = args.skipPublish
+    ? GATES.filter((gate) => gate.id !== 'publish')
+    : GATES;
+  const results = runAllGates(gates);
   const summary = summarize(results);
 
   if (args.json) {

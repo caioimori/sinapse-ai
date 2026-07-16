@@ -65,11 +65,11 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
   });
 
   describe('AC3: CI integration', () => {
-    test('npm-publish.yml includes publish safety gate step', () => {
-      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'npm-publish.yml');
+    test('semantic-release.yml includes publish safety gate step', () => {
+      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'semantic-release.yml');
       const workflow = fs.readFileSync(workflowPath, 'utf8');
       expect(workflow).toContain('Publish safety gate (INS-4.10)');
-      expect(workflow).toContain('node bin/utils/validate-publish.js');
+      expect(workflow).toContain('npm run validate:publish');
     });
   });
 

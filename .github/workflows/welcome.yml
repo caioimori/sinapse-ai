@@ -21,15 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Welcome first-time contributors
-        uses: actions/first-interaction@v1
+        uses: actions/first-interaction@fb2402657b4a28582200150d0a145671d0e50597 # v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            Obrigado por abrir sua primeira issue no SINAPSE-AI!
+            Obrigado por abrir sua primeira issue no SINAPSE AI.
 
             **O que acontece agora?**
-            - Um maintainer vai fazer a triagem e adicionar labels apropriadas
-            - Vamos responder o mais rapido possivel
+            - Um maintainer vai validar reproducao, escopo e prioridade
+            - Perguntas de uso podem ser movidas para Discussions
             - Participe das [Discussoes da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
 
             **Recursos uteis:**
@@ -39,20 +39,20 @@ jobs:
             **Quer contribuir?** Confira issues com label `good first issue`.
 
           pr-message: |
-            Obrigado pelo seu primeiro PR no SINAPSE-AI!
+            Obrigado pelo seu primeiro pull request no SINAPSE AI.
 
             **Checklist de revisao:**
             - [ ] `npm run lint` passa sem erros
             - [ ] `npm run typecheck` passa sem erros
             - [ ] `npm test` passa sem falhas
-            - [ ] Commits seguem Conventional Commits (feat:, fix:, docs:, etc.)
-            - [ ] PR template preenchido completamente
+            - [ ] Titulo segue Conventional Commits (feat:, fix:, docs:, etc.)
+            - [ ] Story e evidencia de validacao estao atualizadas quando aplicavel
 
             Um maintainer vai revisar em breve.
 
       - name: Add triage label to new issues
         if: github.event_name == 'issues'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const labels = await github.rest.issues.listLabelsOnIssue({
@@ -61,15 +61,23 @@ jobs:
               issue_number: context.issue.number
             });
 
-            const hasTriageLabel = labels.data.some(label =>
-              label.name === 'status: needs-triage'
-            );
+            const labelName = 'status: needs-triage';
+            const hasTriageLabel = labels.data.some(label => label.name === labelName);
 
             if (!hasTriageLabel) {
-              await github.rest.issues.addLabels({
+              const repoLabels = await github.rest.issues.listLabelsForRepo({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: ['status: needs-triage']
+                per_page: 100
               });
+              if (repoLabels.data.some(label => label.name === labelName)) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  labels: [labelName]
+                });
+              } else {
+                core.notice(`Label '${labelName}' is not configured; triage continues without it.`);
+              }
             }

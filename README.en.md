@@ -1,151 +1,192 @@
 <p align="center">
-  <a href="https://www.npmjs.com/package/sinapse-ai"><img src="https://img.shields.io/npm/v/sinapse-ai?color=00B894&label=npm" alt="npm version"></a>
-  <a href="https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml"><img src="https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0EA5E9.svg" alt="MIT license"></a>
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/node-%3E%3D18-22C55E.svg" alt="Node 18 or newer"></a>
+  <img src="https://raw.githubusercontent.com/caioimori/sinapse-ai/main/docs/assets/sinapse-ai-github-hero.png" alt="SINAPSE AI - governed agent system for Claude Code and Codex" width="100%">
 </p>
-
-<h1 align="center">SINAPSE AI</h1>
-
-<p align="center"><strong>A governed AI team for Claude Code and Codex.</strong></p>
 
 <p align="center">
-  17 squads · 172 agents · 1,412 task files · 1,348 resolvable pointers
+  <a href="https://www.npmjs.com/package/sinapse-ai"><img src="https://img.shields.io/npm/v/sinapse-ai?style=flat-square&color=00B894&label=npm" alt="npm version"></a>
+  <a href="https://github.com/caioimori/sinapse-ai/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/caioimori/sinapse-ai/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
+  <a href="https://www.npmjs.com/package/sinapse-ai"><img src="https://img.shields.io/npm/dm/sinapse-ai?style=flat-square&color=0EA5E9" alt="Monthly downloads"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111827?style=flat-square" alt="MIT license"></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/node-%3E%3D18-22C55E?style=flat-square" alt="Node 18 or newer"></a>
 </p>
 
-<p align="center"><a href="README.md">Portugues</a> · <a href="docs/getting-started.md">Documentation</a> · <a href="https://www.npmjs.com/package/sinapse-ai">npm</a> · <a href="https://github.com/caioimori/sinapse-ai/issues">Issues</a></p>
+<p align="center">
+  <strong>Orchestrate specialized work. Keep engineering under control.</strong>
+</p>
+
+<p align="center">
+  17 squads &middot; 172 agents &middot; Claude Code + Codex &middot; 11 governance articles
+</p>
+
+<p align="center">
+  <a href="README.md">Portugues</a> &middot;
+  <a href="docs/getting-started.md">Getting started</a> &middot;
+  <a href="https://www.npmjs.com/package/sinapse-ai">npm</a> &middot;
+  <a href="https://github.com/caioimori/sinapse-ai/discussions">Discussions</a>
+</p>
 
 ---
 
-```text
-     S I N A P S E
-  specialized work, one governed system
-```
+SINAPSE AI is an orchestration framework that installs agents, skills, rules,
+and quality gates directly into your project. Claude Code and Codex work from
+the same catalog, engineering process, and explicit authority model.
 
-SINAPSE organizes product, engineering, design, growth, security, and operations
-work through coordinated specialists. It does not replace your LLM: it installs
-the agent, skill, rule, and quality-gate layer that makes Claude Code and Codex
-consistent inside a project.
+It does not replace your CLI or LLM. It turns an AI session into an auditable
+delivery system: brief, routing, story, implementation, QA, and delivery.
 
-## Start with one command
+## Install in 30 seconds
 
-From your project directory, run:
+From your project directory:
 
 ```bash
 npx sinapse-ai@latest install
 ```
 
-This is the canonical path for fresh or unconfigured projects. With no flags,
-it configures **Claude Code and Codex**. Re-runs preserve the saved provider
-and project-owned content. To intentionally install one provider only, use
-`--llm=claude-code` or `--llm=codex`; use `--reconfigure` to change an existing selection.
+With no flags, a fresh installation configures **Claude Code and Codex**.
+Running it again preserves the saved selection and project-owned content.
 
-```text
-install -> native agents and skills -> rules and hooks -> ready project
-```
+Then activate the orchestrator:
 
-| After installation | Claude Code | Codex |
-|---|---|---|
-| Orchestrator | `@sinapse-orqx` | `$snps` |
-| Specialist | `@developer` | `$sinapse-agent developer` |
-| Reconfigure providers | `npx sinapse-ai@latest install --reconfigure` | same command |
+| Claude Code | Codex |
+|---|---|
+| `@sinapse-orqx` | `$snps` |
 
-## What ships with the project
+Or call a specialist directly:
 
-| Surface | Claude Code | Codex |
-|---|:---:|:---:|
-| Canonical agents | 172 | 172 |
-| Installed skills | 37 | 37 |
-| Registered hooks | 20 native registrations | 9 lifecycle events |
-| React Bits | Skill plus 9-file corpus | Skill plus 9-file corpus |
+| Claude Code | Codex |
+|---|---|
+| `@developer` | `$sinapse-agent developer` |
 
-The catalog contains 17 squads and 172 specialized agents. The runtime measures
-1,201 squad tasks, 211 development tasks, 1,412 task files, and 1,348 pointers resolvable
-at runtime. React Bits is included as a frontend capability with a searchable
-snapshot of 139 components and performance, accessibility, and reduced-motion
-guidance.
+> Requirements: Node.js 18+, npm 9+, and at least one supported CLI.
 
-## How work flows
+## From request to delivery
 
 ```mermaid
 flowchart LR
   A[Brief] --> B[Orchestrator]
   B --> C[Specialist]
-  C --> D[Ready story]
+  C --> D[Validated story]
   D --> E[Implementation]
   E --> F[QA and gates]
-  F --> G[Delivery]
+  F --> G[PR and delivery]
 ```
 
-The framework applies an 11-article Constitution: documentation before code,
-clear authority per agent, security, quality, and safe collaboration. The
-orchestrator routes, specialists execute, and the process leaves evidence.
+```text
+You: "Audit this checkout flow and fix the risks you find."
 
-## Essential commands
+SINAPSE
+  -> classifies project, surface, and risk
+  -> routes architecture, product, development, and QA
+  -> requires a ready story before implementation
+  -> validates tests, security, and provider parity
+  -> delivers evidence, not just an answer
+```
+
+## Why SINAPSE
+
+### Executable governance
+
+The 11-article Constitution defines story-first delivery, role authority,
+quality, security, collaboration, and conservative defaults. Hooks and
+validators turn those rules into enforceable gates.
+
+### Claude Code + Codex parity
+
+The canonical catalog generates native surfaces for both CLIs. Adapters are
+checked for drift: the provider can change while the operating contract remains.
+
+### Coordinated specialization
+
+Seventeen squads cover engineering, product, design, security, growth, content,
+finance, and operations. Orchestrators route; specialists execute within clear
+boundaries.
+
+## What gets installed
+
+| Capability | Claude Code | Codex |
+|---|:---:|:---:|
+| 172-agent catalog | Yes | Yes |
+| Installed skills | 37 | 37 |
+| Native rules and instructions | Yes | Yes |
+| Registered hooks | 20 native registrations | 9 lifecycle events |
+| Tasks and knowledge bases | Shared | Shared |
+| React Bits frontend capability | Skill + corpus | Skill + corpus |
+
+Counts are measured from the repository. Verify the current state with:
+
+The current inventory contains **1,201 squad tasks**, **211 development tasks**,
+**1,412 task files**, and **1,348 pointers resolvable** at runtime.
 
 ```bash
-# Install or synchronize both providers in the current project
-npx sinapse-ai@latest install
+node .codex/scripts/resolve-codex-agent.js --stats
+npm run validate:parity
+```
 
-# Update an installation without losing project customizations
+## Use cases
+
+- **New products:** discovery, architecture, stories, implementation, and QA gates.
+- **Brownfield systems:** debt and risk diagnosis before incremental changes.
+- **Frontend:** design systems, accessibility, React Bits, and reduced-motion support.
+- **Security:** threat modeling, secret validation, RLS, and pre-deploy review.
+- **Operations:** GitHub Flow, CI, releases, documentation, and traceability.
+
+## Safe operations
+
+```bash
+# Update an installation while preserving project customizations
 npx sinapse-ai@latest update
 
-# Diagnose and fix the environment
+# Diagnose the environment
+npx sinapse-ai@latest doctor
+
+# Apply safe fixes found by the diagnostic
 npx sinapse-ai@latest doctor --fix
 
-# Show the installed surface
+# Inspect the installed surface
 npx sinapse-ai@latest status
 ```
 
-`install --force` reinstalls managed surfaces. `install --reconfigure` opens
-provider selection only in interactive terminals; non-interactive runs use both.
-`install --global-only` configures only global adapters and does not change the
-current project.
+Use `install --llm=claude-code` or `install --llm=codex` only for a deliberately
+restricted installation. Use `install --reconfigure` to change an existing
+selection and `install --force` to refresh managed surfaces.
 
-## Architecture that respects the project
+## Ownership architecture
 
 | Layer | Responsibility | Policy |
 |---|---|---|
 | L1 | Framework core | Immutable |
 | L2 | Templates and workflows | Extend-only |
 | L3 | Configuration | Mutable with guardrails |
-| L4 | Stories, packages, squads, and tests | Always project-owned |
+| L4 | Stories, packages, squads, and tests | Project-owned |
 
-Updates refresh managed content and preserve local work. Gates also prevent
-unauthorized pushes, code writes without a validated story, unsafe SQL, and
-Claude/Codex drift.
-
-## Who it is for
-
-- Teams that want specialized AI without losing traceability.
-- Projects that need the same contract in Claude Code and Codex.
-- Product work that values story-first development, QA, security, and gradual delivery.
-- Builders who prefer clear commands over a pile of improvised prompts.
+Updates refresh managed surfaces without treating project code as disposable.
+See the [installation and update policy](docs/installation/README.md).
 
 ## Documentation
 
-| Topic | Link |
+| Journey | Document |
 |---|---|
-| Getting started | [docs/getting-started.md](docs/getting-started.md) |
-| Claude Code and Codex integration | [docs/guides/ide-integration.md](docs/guides/ide-integration.md) |
-| Engineering workflows | [docs/framework/software-engineering-applicability.md](docs/framework/software-engineering-applicability.md) |
-| Agent reference | [docs/agent-reference-guide.md](docs/agent-reference-guide.md) |
-| React Bits | [docs/framework/react-bits/index.md](docs/framework/react-bits/index.md) |
-| Security | [SECURITY.md](SECURITY.md) |
-| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Install and route the first request | [Getting started](docs/getting-started.md) |
+| Select an engineering workflow | [Engineering applicability](docs/framework/software-engineering-applicability.md) |
+| Integrate Claude Code and Codex | [Provider integration](docs/guides/ide-integration.md) |
+| Find agents and commands | [Agent reference](docs/agent-reference-guide.md) |
+| Use React Bits intentionally | [React Bits](docs/framework/react-bits/index.md) |
+| Contribute through the GitFlow | [Contributing](CONTRIBUTING.md) |
+| Report vulnerabilities | [Security](SECURITY.md) |
+| Get help | [Support](SUPPORT.md) |
 
-## Contributing
+## Product and community
 
-```bash
-git clone https://github.com/caioimori/sinapse-ai.git
-cd sinapse-ai
-npm install
-npm test
-```
+- [Roadmap](ROADMAP.md): public direction without artificial delivery promises.
+- [Governance](GOVERNANCE.md): decisions, roles, and change policy.
+- [Discussions](https://github.com/caioimori/sinapse-ai/discussions): questions and open proposals.
+- [Issues](https://github.com/caioimori/sinapse-ai/issues): reproducible bugs and traceable work.
+- [Changelog](CHANGELOG.md): release history.
 
-Open a branch, keep the story and gates current, then submit a pull request.
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete process.
+Contributions use short-lived branches, pull requests, stories when applicable,
+and automated gates. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+Distributed under the [MIT License](LICENSE). Derived-work attributions and
+trademark notices are documented in [NOTICE.md](NOTICE.md).

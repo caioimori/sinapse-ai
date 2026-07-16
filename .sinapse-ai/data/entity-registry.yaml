@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-15T14:30:07.448Z'
+  lastUpdated: '2026-07-16T15:38:46.751Z'
   entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -161,13 +161,14 @@ entities:
       externalDeps: []
       plannedDeps:
         - logger
+        - react-bits-corpus
       lifecycle: production
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:86db5a2578b6a0b4849fde4e0f4a197a41560a3a213b247f0edd8522d857ffea
-      lastVerified: '2026-07-15T13:41:11.702Z'
+      checksum: sha256:b40997fc8541879d30dddcdbd84b56368594212dc28d0ddf41ebf23a64775cfb
+      lastVerified: '2026-07-16T15:13:55.334Z'
     local:
       path: bin/commands/local.js
       layer: L1
@@ -245,8 +246,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:a97ad181e34f7cc3af15be278826a32400c59faeb6d8bd914dfdaea7dc0f00c6
-      lastVerified: '2026-07-15T08:35:26.856Z'
+      checksum: sha256:fd99a90128d11d21920520866bf0da181c1fe101842aeea3ee85a42553b1cb67
+      lastVerified: '2026-07-16T15:13:55.334Z'
     update:
       path: bin/commands/update.js
       layer: L1
@@ -262,7 +263,6 @@ entities:
         - squads
         - fs-utils
         - detection
-        - prompts
         - install
         - uninstall
         - command-generator
@@ -271,13 +271,14 @@ entities:
       externalDeps: []
       plannedDeps:
         - logger
+        - react-bits-corpus
       lifecycle: production
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:05056e197ecb29e6f63a1d86d9d77d944e3083021bf632b48a76eb4cb2223b95
-      lastVerified: '2026-07-15T13:41:11.703Z'
+      checksum: sha256:b9e5be05ed1a0c876cce359d6fbd553e2cd60a1006a960fd690feff41ee6145e
+      lastVerified: '2026-07-16T15:13:55.335Z'
     command-generator:
       path: bin/lib/command-generator.js
       layer: L1
@@ -349,8 +350,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:5e030cef7b85e23faa4a27d075236cfca98e4938c6255fc6148e775ab791980f
-      lastVerified: '2026-06-15T01:36:42.604Z'
+      checksum: sha256:ae693cfcc6d824113b645d187130137b59fce43d03a8e0d8456b048a7ea00f71
+      lastVerified: '2026-07-16T15:13:55.335Z'
     fs-utils:
       path: bin/lib/fs-utils.js
       layer: L1
@@ -423,8 +424,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:898fbe5a00cf1bb77bc8e8a34ee40337145912374a2e809789a02d5345fdd679
-      lastVerified: '2026-07-15T14:30:07.273Z'
+      checksum: sha256:8ef8c460a68eda6cc43a191b6a2cffaec6fd4bcf71d7804fb6c478edc4c9603e
+      lastVerified: '2026-07-16T15:13:55.336Z'
     header:
       path: bin/lib/header.js
       layer: L1
@@ -463,7 +464,6 @@ entities:
         - cli
         - install
         - uninstall
-        - update
       dependencies:
         - constants
         - detection
@@ -475,8 +475,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:dc7cc1109f2bbdb7b3c5927df0de2418925842bdacdc0ba82815bfa2783d0b42
-      lastVerified: '2026-06-22T02:41:18.152Z'
+      checksum: sha256:abcfd0b24989d8f81cf8dab8676ec02a0b239b5c4c0f6985992f6159619bbf3e
+      lastVerified: '2026-07-16T15:13:55.336Z'
     provider-contract:
       path: bin/lib/provider-contract.js
       layer: L1
@@ -497,8 +497,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:a18d271a73b2f371213af4d9503e302e9237920057afd521b723c96efd28fda0
-      lastVerified: '2026-07-15T13:41:11.704Z'
+      checksum: sha256:32deb78d9b3459a724dca95576f632544c4756584665037e29b87f537e3aa5a0
+      lastVerified: '2026-07-16T15:13:55.336Z'
     provider-parity:
       path: bin/lib/provider-parity.js
       layer: L1
@@ -519,8 +519,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:5f0ff4517425fef01683f035afef1d139aede2fe47956773a398e7c761ace42d
-      lastVerified: '2026-07-15T13:41:11.704Z'
+      checksum: sha256:5cde5d57e940a8ddf62142639a8c08231dae0fc44aeb18bb1a7e2210a5b3003c
+      lastVerified: '2026-07-16T15:13:55.336Z'
     setup-statusline:
       path: bin/lib/setup-statusline.js
       layer: L1
@@ -981,8 +981,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:549484de6a79a508b381a51a5b4abd304ba693fae3aad3f7ad67fd914e5eda39
-      lastVerified: '2026-07-03T06:55:48.460Z'
+      checksum: sha256:e6e70fd670d73efaba03af9f1bad8e75fcbe359214827cdd5fdc2a6f59d4aed7
+      lastVerified: '2026-07-16T15:38:46.480Z'
     staged-sql-guard:
       path: bin/utils/staged-sql-guard.js
       layer: L1

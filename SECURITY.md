@@ -1,82 +1,86 @@
 # Security Policy
 
-## Supported Versions
+Security reports are handled privately and with the minimum disclosure required
+to reproduce, assess, and fix the issue.
 
-| Version           | Channel  | Supported |
-|-------------------|----------|-----------|
-| 10.0.0-rc.x       | `rc`     | Yes (pre-GA, security fixes only) |
-| 9.x (last GA)     | `latest` | Yes (until v1.0.0 GA promotion)   |
-| 8.x and earlier   | —        | No                                |
+## Supported versions
 
-After v1.0.0 GA promotion, the policy becomes:
-- v1.x: latest minor receives security fixes
-- < v1.0: no support
+| Release line | Security support |
+|---|---|
+| Latest version published to the npm `latest` channel | Supported |
+| Older releases and prerelease channels | Upgrade required before support |
 
-## Reporting a Vulnerability
+The current public version is shown on the
+[npm package page](https://www.npmjs.com/package/sinapse-ai). Security fixes are
+released on the latest stable line; maintainers may backport a fix when the
+impact and adoption justify it, but no backport is guaranteed.
 
-We take security seriously. If you discover a security vulnerability in SINAPSE-AI, please report it responsibly.
+## Report a vulnerability
 
-### Preferred Method
+Use
+[GitHub Private Vulnerability Reporting](https://github.com/caioimori/sinapse-ai/security/advisories/new).
+Do not open a public issue, discussion, or pull request for a vulnerability that
+has not been coordinated.
 
-Use [GitHub Security Advisories](https://github.com/caioimori/sinapse-ai/security/advisories/new) to report vulnerabilities privately.
+Include, when available:
 
-### Alternative Method
+- affected version, operating system, Node.js version, and provider;
+- a minimal reproduction or proof of concept;
+- expected and observed behavior;
+- impact, attack prerequisites, and affected data;
+- suggested remediation or mitigations.
 
-If you cannot use Security Advisories, open a private issue or contact the maintainers directly.
+Remove real secrets, personal data, customer data, and destructive payloads from
+the report. A redacted reproduction is preferable to production evidence.
 
-### Response Timeline
+## Response targets
 
-- **Acknowledgment:** Within 48 hours
-- **Initial Assessment:** Within 5 business days
-- **Resolution (Critical):** Within 30 days
-- **Resolution (High):** Within 60 days
-- **Resolution (Medium/Low):** Next release cycle
+| Stage | Target |
+|---|---|
+| Acknowledgement | 2 business days |
+| Initial severity assessment | 5 business days |
+| Remediation plan for confirmed critical/high issues | 10 business days |
+| Coordinated disclosure | After a fix or mitigation is available |
 
-### Safe Harbor
-
-We support responsible security research. If you follow responsible disclosure practices, we will not pursue legal action against you.
-
-We consider security research conducted in accordance with this policy to be:
-
-- Authorized concerning any applicable anti-hacking laws
-- Authorized concerning any relevant anti-circumvention laws
-- Exempt from restrictions in our Terms of Service that would interfere with conducting security research
-
-### What to Include
-
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact assessment
-- Suggested fix (if any)
-
-## Security Architecture
-
-SINAPSE-AI implements a multi-layer security model:
-
-### Constitutional Enforcement (Article X)
-
-- 25 pre-deploy security blockers across 3 tiers
-- LGPD compliance controls
-- Based on OWASP Top 10, NIST CSF 2.0, CIS Controls v8
-
-### Hook-Based Real-Time Protection
-
-- 19 active Claude Code hooks enforcing security rules
-- Secret scanning (20+ patterns: AWS, Stripe, SSH keys, etc.)
-- SQL injection prevention
-- Git push authority control
-- Architecture-first enforcement
-
-### Quality Gates
-
-- 3-layer quality pipeline (pre-commit, PR automation, human review)
-- CodeRabbit integration for automated code review
-- Mandatory story validation before code changes
+Targets are not a guarantee. Complexity, upstream dependencies, and reporter
+coordination may change the timeline. We will keep the reporter informed when a
+confirmed issue exceeds a target.
 
 ## Scope
 
-This policy applies to the `sinapse-ai` npm package and the `caioimori/sinapse-ai` GitHub repository.
+This policy covers:
 
----
+- the `sinapse-ai` package published on npm;
+- this repository and its GitHub Actions;
+- the Claude Code and Codex adapters installed by the package;
+- the installer, updater, hooks, validators, and generated manifests.
 
-*Last updated: 2026-05-02*
+Third-party CLIs, models, package registries, React Bits source code, and user
+projects are outside our ownership. Reports showing that SINAPSE exposes or
+misconfigures those systems remain in scope.
+
+## Security model
+
+SINAPSE uses defense in depth:
+
+- protected framework layers and conservative file operations;
+- secret scanning and dependency review in development workflows;
+- story, authority, provider-parity, and release-readiness gates;
+- explicit rules for destructive database operations and credential handling;
+- isolated installation tests across supported providers and platforms.
+
+Controls reduce risk; they do not make generated code automatically secure.
+Users remain responsible for reviewing changes, managing credentials, enabling
+database policies, and validating production deployments.
+
+## Safe harbor
+
+We support good-faith security research performed to improve the project. When
+you respect privacy, avoid unnecessary disruption, use the private reporting
+channel, and give us reasonable time to remediate, we will not pursue action
+against you for the research itself.
+
+This safe-harbor statement does not authorize access to third-party data,
+service degradation, social engineering, persistence, or destruction.
+
+Last reviewed: 2026-07-16.

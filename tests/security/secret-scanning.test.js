@@ -362,6 +362,7 @@ describe('Staged scanner — shared core + back-compat exports', () => {
     expect(typeof staged.findSecretMatches).toBe('function');
     expect(typeof staged.scanStagedFiles).toBe('function');
     expect(typeof staged.isBlockedEnvFile).toBe('function');
+    expect(typeof staged.isBinaryContent).toBe('function');
   });
 
   test('findSecretMatches detects a real key and skips a placeholder', () => {
@@ -374,5 +375,21 @@ describe('Staged scanner — shared core + back-compat exports', () => {
     expect(staged.isBlockedEnvFile('config/.env.production')).toBe(true);
     expect(staged.isBlockedEnvFile('.env.example')).toBe(false);
     expect(staged.isBlockedEnvFile('.env.template')).toBe(false);
+  });
+
+  test('binary detection skips compressed image bytes but still scans textual files', () => {
+    const png = Buffer.from([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+      0x00, 0xff, 0x92, 0x17, 0x03, 0xe8,
+    ]);
+    expect(staged.isBinaryContent(png)).toBe(true);
+    expect(staged.isBinaryContent(Buffer.from('const token = process.env.TOKEN;'))).toBe(false);
+  });
+
+  test('a text file renamed with a binary extension remains scannable', () => {
+    const disguisedText = Buffer.from('AKIA1234567890ABCDEF');
+    expect(staged.isBinaryContent(disguisedText)).toBe(false);
+    expect(staged.findSecretMatches(disguisedText.toString('utf8'), 'leak.png').length)
+      .toBeGreaterThan(0);
   });
 });

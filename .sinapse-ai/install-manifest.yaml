@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.25.1
+version: 1.27.0
 generator: scripts/generate-install-manifest.js
-file_count: 1161
+file_count: 1156
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1368,9 +1368,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:08edc9d3cde1bf956cce462004670a3d2924a691a16c27bdfd2bf1ce4de037f8
+    hash: sha256:331ade27b1f89e7a8e8f31554eaebaf56dbb0df49d2f339620efc857ef4e90c6
     type: data
-    size: 560701
+    size: 560722
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -4367,26 +4367,6 @@ files:
     hash: sha256:0953482dcf74679b91b08b257895ff78b5dbdeed3eb61129ab0bc607d2b25dcb
     type: script
     size: 3620
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js
-    hash: sha256:cdd728c5bf82a127271671719816fa1aaf215fce2b5d3cb7b241bd489f29e29c
-    type: script
-    size: 594851
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js.map
-    hash: sha256:e3a4cb09202d3618028f841424e2f2962c6974b08f78e6e4b23176b9a4e29dfb
-    type: script
-    size: 2521841
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-CAzIo_ei.css
-    hash: sha256:07fa5f6d6d74a8183343d2ce236484524487335dc24c85f7a782d716f691b77b
-    type: script
-    size: 20544
-  - path: scripts/diagnostics/health-dashboard/dist/favicon.svg
-    hash: sha256:bad3a2389b3ff29f3da8035020dd8362c2eba564b787b9bc9c4f1edddd0b7cd4
-    type: script
-    size: 474
-  - path: scripts/diagnostics/health-dashboard/dist/index.html
-    hash: sha256:4a1ab4115ec43d7e5ecd359a50fb10629075edb5fba7ae1034bb420d07b604d2
-    type: script
-    size: 475
   - path: scripts/diagnostics/health-dashboard/index.html
     hash: sha256:e3513b1c08a8dbc777532a84006bcb25015fb9b25b68a68f56af341465279845
     type: script

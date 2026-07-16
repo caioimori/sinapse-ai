@@ -1,73 +1,45 @@
-name: Test Coverage
-description: Propose new test coverage for existing modules
-title: "[Test]: "
+name: Test coverage proposal
+description: Identify behavior that needs stronger automated evidence
+title: "test: "
 labels: ["type: test", "status: needs-triage"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Use this template to propose test coverage for sinapse-ai modules.
-        Related to [Issue #52](https://github.com/SinapseAI/sinapse-ai/issues/52) (global test coverage improvement).
-
   - type: textarea
-    id: modules
+    id: risk
     attributes:
-      label: Modules to Test
-      description: List the modules/files that need test coverage.
-      placeholder: |
-        - `.sinapse-ai/core/orchestration/agent-invoker.js`
-        - `.sinapse-ai/core/orchestration/gate-evaluator.js`
+      label: Untested behavior and risk
+      description: What can regress, and what user or release surface is affected?
     validations:
       required: true
-
   - type: textarea
-    id: test-scope
+    id: scope
     attributes:
-      label: Test Scope
-      description: What types of tests are needed? (unit, integration, e2e)
-      placeholder: |
-        - Unit tests for public API methods
-        - Edge cases for error handling
-        - Integration with dependent modules
+      label: Proposed coverage
+      description: List unit, integration, isolated-install, or end-to-end scenarios.
     validations:
       required: true
-
-  - type: input
-    id: test-count
+  - type: textarea
+    id: evidence
     attributes:
-      label: Estimated Test Count
-      placeholder: "e.g., 4 test files, ~50 tests"
-
+      label: Current evidence
+      description: Link existing tests, coverage output, issue, or failure.
   - type: dropdown
-    id: area
+    id: provider
     attributes:
-      label: Area
+      label: Provider scope
       options:
-        - "Core (.sinapse-ai/core/)"
-        - "Health Check (.sinapse-ai/core/health-check/)"
-        - "Orchestration (.sinapse-ai/core/orchestration/)"
-        - "Config (.sinapse-ai/core/config/)"
-        - "SYNAPSE"
-        - "CLI / Installer"
-        - "Infrastructure"
-        - "Other"
+        - Claude Code and Codex
+        - Claude Code
+        - Codex
+        - Provider-independent
     validations:
       required: true
-
-  - type: input
-    id: related-issue
-    attributes:
-      label: Related Issue
-      description: Link to the parent issue if applicable.
-      placeholder: "#52"
-
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: "I have verified these modules lack test coverage"
+        - label: I verified the behavior is not already covered.
           required: true
-        - label: "Tests will use Jest (project standard)"
+        - label: The proposed tests assert behavior, not only file existence.
           required: true
-        - label: "I can contribute the implementation"
+        - label: I can contribute the tests.

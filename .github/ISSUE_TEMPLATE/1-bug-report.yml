@@ -1,116 +1,96 @@
-name: Relatorio de Bug
-description: Reportar um bug no SINAPSE-AI
-title: "[Bug]: "
-labels: ["bug", "triage"]
+name: Bug report
+description: Report reproducible SINAPSE AI behavior that is incorrect
+title: "bug: "
+labels: ["bug", "status: needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Obrigado por dedicar seu tempo para reportar um bug! Preencha as informacoes abaixo para nos ajudar a investigar.
-
+        Do not include tokens, customer data, or undisclosed vulnerabilities. Report security issues through GitHub Private Vulnerability Reporting.
   - type: textarea
-    id: description
+    id: problem
     attributes:
-      label: Descricao do Bug
-      description: Uma descricao clara e concisa do bug.
-      placeholder: Descreva o bug...
+      label: Problem
+      description: What happened, and what impact does it have?
     validations:
       required: true
-
   - type: textarea
-    id: steps
+    id: reproduce
     attributes:
-      label: Passos para Reproduzir
-      description: Descreva passo a passo como reproduzir o problema.
+      label: Minimal reproduction
+      description: Provide the smallest sequence that consistently reproduces the problem.
       value: |
         1.
         2.
         3.
     validations:
       required: true
-
   - type: textarea
     id: expected
     attributes:
-      label: Comportamento Esperado
-      description: O que voce esperava que acontecesse.
+      label: Expected behavior
     validations:
       required: true
-
   - type: textarea
-    id: actual
+    id: diagnostics
     attributes:
-      label: Comportamento Atual
-      description: O que realmente aconteceu.
+      label: Diagnostics
+      description: Paste redacted output from `npx sinapse-ai@latest status` and `npx sinapse-ai@latest doctor`.
+      render: shell
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider
+      options:
+        - Claude Code and Codex
+        - Claude Code
+        - Codex
+        - Not provider-specific
     validations:
       required: true
-
-  - type: textarea
-    id: error-output
-    attributes:
-      label: Saida de Erro
-      description: Cole mensagens de erro ou stack traces.
-      render: bash
-
   - type: dropdown
     id: area
     attributes:
-      label: Area Afetada
+      label: Area
       options:
-        - "Core Framework (.sinapse-ai/core/)"
-        - "Installer (packages/installer/)"
-        - "CLI (bin/)"
-        - "SYNAPSE Context Engine"
-        - "Health Check System"
-        - "Agentes (.sinapse-ai/development/agents/)"
-        - "Tasks (.sinapse-ai/development/tasks/)"
-        - "Documentacao"
-        - "CI/CD / GitHub Actions"
-        - "Outro"
+        - Installer or updater
+        - CLI
+        - Agents, skills, or tasks
+        - Provider parity
+        - GitHub Actions or release
+        - Documentation
+        - Other
     validations:
       required: true
-
   - type: input
     id: version
     attributes:
-      label: Versao do SINAPSE
-      description: "Execute `npx sinapse-ai info` para encontrar sua versao."
-      placeholder: "ex: 7.7.11"
+      label: SINAPSE AI version
+      description: Use the version shown by `npx sinapse-ai@latest status` or the npm package version.
+      placeholder: "1.27.0"
     validations:
       required: true
-
-  - type: dropdown
-    id: os
-    attributes:
-      label: Sistema Operacional
-      options:
-        - "Windows 11"
-        - "Windows 10"
-        - "macOS (Apple Silicon)"
-        - "macOS (Intel)"
-        - "Ubuntu / Debian"
-        - "Outro Linux"
-    validations:
-      required: true
-
   - type: input
-    id: node-version
+    id: environment
     attributes:
-      label: Versao do Node.js
-      placeholder: "ex: 22.21.0"
-
+      label: Environment
+      description: Operating system, Node.js version, npm version, and shell.
+      placeholder: "Windows 11, Node.js 22.17.0, npm 10.9.2, PowerShell 7"
+    validations:
+      required: true
   - type: textarea
-    id: screenshots
+    id: logs
     attributes:
-      label: Screenshots (opcional)
-      description: Arraste e solte imagens que ajudem a ilustrar o problema.
-
+      label: Redacted logs
+      render: shell
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: "Busquei issues existentes para evitar duplicatas"
+        - label: I searched existing issues and discussions.
           required: true
-        - label: "Testei com a versao mais recente"
-        - label: "Consigo reproduzir este problema consistentemente"
+        - label: I reproduced this with the latest public version.
+          required: true
+        - label: I removed secrets, private paths, and customer data.
+          required: true

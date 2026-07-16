@@ -475,12 +475,10 @@ describe('AgentExecutor', () => {
 #### semantic-release (^25.0.2)
 
 **Purpose:** Automated semantic versioning and releases
-**Usage:** Automatic NPM publishing, changelog generation
+**Usage:** Conventional Commit analysis, npm publishing, and GitHub Releases
 
-**Plugins:**
-
-- `@semantic-release/changelog` (^6.0.3) - Generate CHANGELOG.md
-- `@semantic-release/git` (^10.0.1) - Commit release assets
+Version and changelog files are prepared in a normal pull request before the
+protected publish job runs. See [the release process](../guides/release-process.md).
 
 ```json
 {
@@ -489,9 +487,8 @@ describe('AgentExecutor', () => {
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      "@semantic-release/github"
     ]
   }
 }

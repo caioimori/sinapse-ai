@@ -1,8 +1,5 @@
 {
-  "branches": [
-    "main",
-    { "name": "next", "prerelease": "rc", "channel": "rc" }
-  ],
+  "branches": ["main"],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
       "preset": "conventionalcommits",
@@ -30,9 +27,6 @@
           { "type": "style", "hidden": true }
         ]
       }
-    }],
-    ["@semantic-release/changelog", {
-      "changelogFile": "CHANGELOG.md"
     }],
     ["@semantic-release/npm", {
       "npmPublish": true

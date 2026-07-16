@@ -1,49 +1,20 @@
-## Task Contribution
+## Task contribution
 
-<!-- Thank you for contributing a task to SINAPSE! Please fill out this template. -->
+- Task ID and file:
+- Owning agent or squad:
+- Trigger and expected deliverable:
 
-### Task Information
+## Contract
 
-- **Task Name:** <!-- e.g., db-validate-kiss -->
-- **Task File:** <!-- e.g., .sinapse-ai/development/tasks/db-validate-kiss.md -->
-- **Related Agent(s):** <!-- e.g., @data-engineer -->
+Describe inputs, outputs, elicitation points, failure handling, and dependencies.
 
-### Changes Made
+- [ ] The task has one clear responsibility.
+- [ ] Referenced files and dependencies exist.
+- [ ] Failure and recovery behavior are explicit.
+- [ ] Claude Code and Codex resolve the task equivalently.
+- [ ] Tests and example usage cover the contract.
+- [ ] Relevant validators pass.
 
-- [ ] New task definition
-- [ ] Updated existing task
-- [ ] New elicitation points added
-- [ ] Dependencies updated
+Related issue/story:
 
-### Description
-
-<!-- Describe what this task does and when it should be used -->
-
-### Checklist
-
-#### Required
-
-- [ ] Task follows SINAPSE task format
-- [ ] Elicitation points are clear and actionable
-- [ ] Deliverables are well-defined
-- [ ] Error handling guidance included
-- [ ] Referenced dependencies exist in the codebase
-- [ ] Local validation passes (`npm run lint && npm run typecheck`)
-
-#### Recommended
-
-- [ ] Example workflow provided
-- [ ] Documentation updated
-
-### Testing
-
-<!-- Describe how you tested this task -->
-
-### Related Issues
-
-<!-- Link to related issues: Fixes #123, Relates to #456 -->
-
----
-
-_By submitting this PR, I confirm I have read the [Contribution Guidelines](../../CONTRIBUTING.md) and [External Contribution Guide](../../docs/guides/external-contribution-guide.md)_
-
+By submitting this PR, I agree to [CONTRIBUTING.md](../../CONTRIBUTING.md).

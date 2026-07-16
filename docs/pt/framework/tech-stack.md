@@ -487,8 +487,7 @@ describe('AgentExecutor', () => {
 
 **Plugins:**
 
-- `@semantic-release/changelog` (^6.0.3) - Gerar CHANGELOG.md
-- `@semantic-release/git` (^10.0.1) - Commit de assets de release
+- Versao e changelog sao preparados em uma PR antes do publish protegido.
 
 ```json
 {
@@ -497,9 +496,8 @@ describe('AgentExecutor', () => {
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      "@semantic-release/github"
     ]
   }
 }

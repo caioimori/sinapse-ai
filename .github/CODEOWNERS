@@ -1,33 +1,34 @@
-# SINAPSE Code Owners
-#
-# Co-maintainers: Caio (@caioimori) and Soier (@Matheus-soier).
-# Both have equal authority to review, approve, and merge PRs.
-# Required approving reviews on main = 0 (trust + CI gates).
-# Code owners are listed for OPTIONAL review attribution and external contributor PRs.
-
-# Default — both co-maintainers
+# Default maintainers
 * @caioimori @Matheus-soier
 
-# Framework core
-.sinapse-ai/core/ @caioimori @Matheus-soier
-.sinapse-ai/constitution.md @caioimori @Matheus-soier
-bin/ @caioimori @Matheus-soier
+# Protected framework and executable entry points
+/.sinapse-ai/core/ @caioimori @Matheus-soier
+/.sinapse-ai/constitution.md @caioimori @Matheus-soier
+/.sinapse-ai/development/ @caioimori @Matheus-soier
+/.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
+/bin/ @caioimori @Matheus-soier
 
-# Framework templates
-.sinapse-ai/development/ @caioimori @Matheus-soier
-.sinapse-ai/infrastructure/ @caioimori @Matheus-soier
+# Provider surfaces and domain catalog
+/.agents/ @caioimori @Matheus-soier
+/.claude/ @caioimori @Matheus-soier
+/.codex/ @caioimori @Matheus-soier
+/squads/ @caioimori @Matheus-soier
 
-# Security-sensitive paths
-.claude/ @caioimori @Matheus-soier
-SECURITY.md @caioimori @Matheus-soier
+# Supply chain, release, security, and automation
+/.github/ @caioimori @Matheus-soier
+/scripts/ @caioimori @Matheus-soier
+/packages/ @caioimori @Matheus-soier
+/package.json @caioimori @Matheus-soier
+/package-lock.json @caioimori @Matheus-soier
+/.releaserc.json @caioimori @Matheus-soier
+/SECURITY.md @caioimori @Matheus-soier
+/LICENSE @caioimori @Matheus-soier
+/NOTICE.md @caioimori @Matheus-soier
 
-# CI/CD and infrastructure
-.github/ @caioimori @Matheus-soier
-packages/ @caioimori @Matheus-soier
-
-# Configuration files
-package.json @caioimori @Matheus-soier
-.env* @caioimori @Matheus-soier
-
-# Documentation
-docs/ @caioimori @Matheus-soier
+# Public product and documentation
+/README.md @caioimori @Matheus-soier
+/README.en.md @caioimori @Matheus-soier
+/CONTRIBUTING.md @caioimori @Matheus-soier
+/GOVERNANCE.md @caioimori @Matheus-soier
+/ROADMAP.md @caioimori @Matheus-soier
+/docs/ @caioimori @Matheus-soier

@@ -1,114 +1,48 @@
 ---
-name: Proposta de Squad
-about: Propor um novo Squad para o ecossistema SINAPSE-AI
-title: '[Squad] '
-labels: ['squad-proposal']
+name: Squad proposal
+about: Propose a non-overlapping domain squad for the SINAPSE ecosystem
+title: 'feat(squad): '
+labels: ['squad-proposal', 'status: needs-triage']
 assignees: ''
 ---
 
-## Proposta de Squad
+## Problem and domain
 
-### Informacoes do Squad
+Describe the users, jobs, and evidence that justify a dedicated squad.
 
-- **Nome do Squad:** (ex: `meu-dominio-squad`)
-- **Titulo Curto:** (ex: "Meu Dominio Squad - Equipe de IA Especializada")
-- **Versao:** 1.0.0
-- **Autor:** (Seu nome/organizacao)
+## Boundary
 
-### Descricao
+- Proposed squad ID:
+- Existing squads reviewed:
+- Authority this squad owns:
+- Authority it must not own:
 
-Uma descricao clara e concisa do que este Squad faz e qual dominio ele cobre.
+## Proposed catalog
 
-> Squads do SINAPSE-AI sao equipes modulares de agentes de IA que trabalham juntos para realizar tarefas especializadas.
+| Agent ID | Role | Distinct authority | Primary tasks |
+|---|---|---|---|
+| `example-specialist` |  |  |  |
 
-### Proposito
+## Workflows and integration
 
-Qual problema este squad resolve? Qual dominio ou caso de uso ele endereca?
+Describe routing, handoffs, dependencies, security implications, and failure
+modes. Include at least two concrete end-to-end use cases.
 
-### Estrutura Proposta
+## Provider experience
 
-**Agentes:** (Liste os agentes propostos neste squad)
-
-- `@agente-1` - Proposito e expertise
-- `@agente-2` - Proposito e expertise
-
-**Tasks:** (Liste as tasks propostas)
-
-- `*task-1` - Proposito do workflow
-- `*task-2` - Proposito do workflow
-
-**Templates:** (Liste os templates propostos)
-
-- `template-1-tmpl.yaml` - Proposito
-
-**Checklists:** (Liste os checklists propostos)
-
-- `checklist-1-checklist.md` - Proposito
-
-### Pontos de Integracao
-
-Como este squad se integra com:
-
-- Core do SINAPSE-AI (sinapse-ai)?
-- Outros squads existentes?
-- Servicos/APIs externos?
-
-### Casos de Uso
-
-Forneca 2-3 casos de uso concretos:
-
-1. Caso de uso 1
-2. Caso de uso 2
-3. Caso de uso 3
-
-### Exemplo de Workflow
-
-```bash
-# Exemplo de como usuarios usariam este squad
-@meu-dominio-squad:agente-1
-*task-1 --option valor
+```text
+Claude Code: @example-specialist
+Codex:       $sinapse-agent example-specialist
 ```
 
-### Dependencias
+## Distribution
 
-- **Core Framework:** Versao minima do sinapse-ai necessaria?
-- **Outros Squads:** Alguma dependencia de outros Squads do SINAPSE?
-- **Servicos Externos:** Alguma API key ou servico externo necessario?
+- [ ] Canonical `squad.yaml` is planned.
+- [ ] Every task pointer will resolve on disk.
+- [ ] Claude Code and Codex surfaces will be generated and validated.
+- [ ] Tests, README, examples, license, and maintenance ownership are defined.
+- [ ] The proposal does not require secrets or a proprietary dependency to load.
 
-### Licenca e Distribuicao
+## Maintainer
 
-- [ ] Este squad sera open-source (MIT)
-- [ ] Este squad requer licenca proprietaria
-- [ ] Este squad sera contribuido pela comunidade
-
-### Plano de Documentacao
-
-- [ ] README.md com exemplos de uso
-- [ ] Documentacao de cada agente
-- [ ] Documentacao de workflow de tasks
-- [ ] Guia de integracao com squads existentes
-
-### Checklist
-
-- [ ] Squad segue a estrutura do SINAPSE (`{squad}/agents/`, `{squad}/tasks/`, etc.)
-- [ ] Todos os agentes seguem a convencao de nomenclatura (`{agent-name}.md`)
-- [ ] Todas as tasks tem frontmatter YAML correto
-- [ ] Manifesto pack.yaml esta incluido
-- [ ] Documentacao esta completa
-- [ ] Exemplos sao fornecidos
-- [ ] Sem dependencias rigidas em repos privados
-
-### Informacoes do Contribuidor
-
-- **Disposto a manter:** [ ] Sim [ ] Nao
-- **Pode fornecer suporte:** [ ] Sim [ ] Nao
-- **Disponivel para review:** [ ] Sim [ ] Nao
-
-### Relacionados
-
-- Issues ou discussoes relacionadas
-- Squads similares para referencia
-
----
-
-**Nota:** Todas as propostas de squad sao revisadas pelos maintainers. Squads aprovados podem ser incluidos no repositorio oficial.
+State who will maintain the squad and how compatibility issues will be handled.

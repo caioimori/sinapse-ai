@@ -1,0 +1,63 @@
+name: Release Preparation
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: release-preparation-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    name: Prepare Release PR
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Validate release readiness
+        run: npm run validate:release-readiness -- --skip-publish
+
+      - name: Prepare version and changelog
+        run: node scripts/prepare-release.mjs
+
+      - name: Create release pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if git diff --quiet -- package.json package-lock.json CHANGELOG.md; then
+            echo "No releasable commits found."
+            exit 0
+          fi
+
+          VERSION=$(node -p "require('./package.json').version")
+          BRANCH="release/${VERSION}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add package.json package-lock.json CHANGELOG.md
+          git commit -m "chore(release): prepare ${VERSION}"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --base "${{ github.ref_name }}" \
+            --head "$BRANCH" \
+            --title "chore(release): prepare ${VERSION}" \
+            --body "Prepares version and changelog for the canonical semantic release. Publication remains a separate, protected DevOps action."

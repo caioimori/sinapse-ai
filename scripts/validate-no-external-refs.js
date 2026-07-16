@@ -10,7 +10,7 @@
  *
  * The guard keeps the SINAPSE codebase in a 100% authorial voice: the only
  * places in the entire repo where competitive names may legally appear are
- * the MIT `LICENSE` file (legal attribution requirement), the historical
+ * the `NOTICE.md` file (legal attribution requirement), the historical
  * process document `docs/research-synthesis-for-upgrade.md`, and a small set
  * of pre-existing upstream-attribution files inherited from the BMAD fork
  * lineage (flagged for future per-file review — see the internal
@@ -55,7 +55,7 @@
  *   Match: <text>
  *
  *   Fix: Remove the reference. This repo uses authorial SINAPSE voice only.
- *   Only LICENSE may contain these references (legal requirement).
+ *   Only NOTICE.md may contain these references (legal requirement).
  *
  * Usage:
  *   node scripts/validate-no-external-refs.js [--root <dir>]
@@ -94,7 +94,7 @@ const PERSONA_LEAK_REGEX = /\b(sally|winston|sarah)\s*(?:\(@|,?\s*\(?@)(architec
  * Hardcoded allow-list. Every entry is a POSIX-style path relative to the
  * repo root. These paths are skipped by the scanner.
  *
- *   - LICENSE: MIT attribution may legally require naming upstream authors.
+ *   - NOTICE.md: legal attribution may require naming upstream authors.
  *   - docs/research-synthesis-for-upgrade.md: historical process document.
  *   - squads/claude-code-mastery/agents/skill-craftsman.md: PERMANENT.
  *     The agent's documented purpose is to study and adapt external
@@ -108,7 +108,7 @@ const PERSONA_LEAK_REGEX = /\b(sally|winston|sarah)\s*(?:\(@|,?\s*\(?@)(architec
  * forbidden literal should fail the validator loudly.
  */
 const HARDCODED_ALLOW_LIST = [
-  'LICENSE', // MIT legal requirement
+  'NOTICE.md', // Legal attribution requirement
   'docs/research-synthesis-for-upgrade.md', // Historical process doc
 
   // ── The validator itself + its tests ─────────────────────────────────
@@ -323,7 +323,7 @@ function formatViolation(v) {
     'Match: ' + v.match,
     '',
     'Fix: Remove the reference. This repo uses authorial SINAPSE voice only.',
-    'Only LICENSE may contain these references (legal requirement).',
+    'Only NOTICE.md may contain these references (legal requirement).',
     '',
   ].join('\n');
 }
@@ -366,7 +366,7 @@ function printUsage() {
       'Usage: node scripts/validate-no-external-refs.js [--root <dir>]',
       '',
       'Scans the repo for any competitive framework reference and fails if',
-      'any match is found outside the hardcoded allow-list (LICENSE, historical',
+      'any match is found outside the hardcoded allow-list (NOTICE.md, historical',
       'process doc, pre-existing upstream fork attribution). Uses `git ls-files`',
       'as the source of truth so only publishable tracked files are scanned.',
       '',

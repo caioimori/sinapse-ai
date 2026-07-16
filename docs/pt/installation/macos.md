@@ -1,185 +1,19 @@
-<!--
-  Tradução: PT-BR
-  Original: /docs/en/installation/macos.md
-  Última sincronização: 2026-01-26
--->
+# Instalacao no macOS
 
-# Guia de Instalação para macOS - SINAPSE
+Requisitos: macOS suportado em Apple Silicon ou Intel, Node.js 18+, npm 9+, Git
+e pelo menos uma CLI suportada. Node.js 22 LTS e recomendado.
 
-> 🌐 [EN](../../installation/macos.md) | **PT**
-
----
-
-## Pré-requisitos
-
-### 1. Node.js (v20 ou superior)
-
-Instale o Node.js usando um dos seguintes métodos:
-
-**Opção A: Usando Homebrew (Recomendado)**
+Na raiz do projeto:
 
 ```bash
-# Instale o Homebrew se ainda não estiver instalado
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Instale o Node.js
-brew install node
+node --version
+npm --version
+npx sinapse-ai@latest install
+npx sinapse-ai@latest status
+npx sinapse-ai@latest doctor
 ```
 
-**Opção B: Usando o instalador oficial**
-Baixe em [nodejs.org](https://nodejs.org/)
-
-**Opção C: Usando Node Version Manager (nvm)**
-
-```bash
-# Instale o nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# Instale o Node.js
-nvm install 20
-nvm use 20
-```
-
-### 2. GitHub CLI
-
-Instale o GitHub CLI para colaboração em equipe:
-
-**Usando Homebrew (Recomendado)**
-
-```bash
-brew install gh
-```
-
-**Usando MacPorts**
-
-```bash
-sudo port install gh
-```
-
-**Usando o instalador oficial**
-Baixe em [cli.github.com](https://cli.github.com/)
-
-## Instalação
-
-### Instalação Rápida
-
-1. Abra o Terminal
-2. Navegue até o diretório do seu projeto:
-
-   ```bash
-   cd ~/path/to/your/project
-   ```
-
-3. Execute o instalador:
-   ```bash
-   npx github:caioimori/sinapse-ai install
-   ```
-
-### O Que o Instalador Faz
-
-O instalador automaticamente:
-
-- Detecta o macOS e aplica configurações específicas da plataforma
-- Cria os diretórios necessários com permissões apropriadas
-- Configura adapters dos provedores no projeto:
-  - Agentes do Claude Code: `.claude/agents/`
-  - Agentes e skills do Codex: `.codex/agents/` e `.agents/skills/`
-- Configura scripts shell com terminações de linha Unix
-- Lida adequadamente com sistemas de arquivos case-sensitive
-
-## Configuração Específica por IDE
-
-### Claude Code
-
-1. Os adapters de agentes são instalados em `.claude/agents/`.
-2. Use `@developer` ou outro ID canônico para ativar um agente.
-
-### Codex
-
-1. Os descritores são instalados em `.codex/agents/`, com skills em `.agents/skills/`.
-2. Use `$snps` para roteamento ou `$sinapse-agent developer` para ativação direta.
-
-## Solução de Problemas
-
-### Problemas de Permissão
-
-Se você encontrar erros de permissão:
-
-```bash
-# Corrigir permissões do npm
-sudo chown -R $(whoami) ~/.npm
-
-# Corrigir permissões do projeto
-sudo chown -R $(whoami) .sinapse-ai
-```
-
-### Autenticação do GitHub CLI
-
-Após instalar o GitHub CLI:
-
-```bash
-# Autenticar no GitHub
-gh auth login
-
-# Escolha o método de autenticação (navegador web recomendado)
-```
-
-### Problemas de Path
-
-Se os comandos não forem encontrados:
-
-```bash
-# Adicione ao ~/.zshrc ou ~/.bash_profile
-export PATH="/usr/local/bin:$PATH"
-
-# Recarregue a configuração do shell
-source ~/.zshrc  # ou source ~/.bash_profile
-```
-
-### Case Sensitivity
-
-Os sistemas de arquivos do macOS podem ser case-insensitive por padrão. Se você tiver problemas:
-
-1. Verifique seu sistema de arquivos:
-
-   ```bash
-   diskutil info / | grep "File System"
-   ```
-
-2. O SINAPSE lida automaticamente com sistemas de arquivos case-sensitive e case-insensitive
-
-## Atualização
-
-Para atualizar uma instalação existente:
-
-```bash
-npx github:caioimori/sinapse-ai install
-```
-
-O atualizador irá:
-
-- Detectar sua instalação existente
-- Fazer backup de quaisquer customizações
-- Atualizar apenas os arquivos alterados
-- Preservar suas configurações
-
-## Próximos Passos
-
-1. Configure sua IDE (veja configuração específica por IDE acima)
-2. Execute `*help` no seu agente de IA para ver os comandos disponíveis
-3. Comece com o [Guia do Usuário](../../guides/user-guide.md)
-4. Junte-se à nossa [Comunidade Discord](https://discord.gg/gk8jAdXWmj) para obter ajuda
-
-## Requisitos de Sistema
-
-- macOS 10.15 (Catalina) ou posterior
-- 4GB RAM mínimo (8GB recomendado)
-- 500MB de espaço livre em disco
-- Conexão com a internet para pacotes npm
-
-## Recursos Adicionais
-
-- [README Principal](../../README.md)
-- [Guia do Usuário](../../guides/user-guide.md)
-- [Guia de Solução de Problemas](../troubleshooting.md)
-- [Comunidade Discord](https://discord.gg/gk8jAdXWmj)
+Nenhuma flag de arquitetura e necessaria. O padrao configura Claude Code e
+Codex. Nao use `sudo` para contornar uma instalacao incorreta de Node/npm;
+corrija a instalacao ou a propriedade do projeto. Consulte a
+[solucao de problemas](troubleshooting.md).

@@ -1,8 +1,11 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
-  - name: Discussoes
-    url: https://github.com/caioimori/sinapse-ai/discussions
-    about: Perguntas gerais, ideias e conversas sobre SINAPSE-AI
-  - name: Documentacao
+  - name: Questions and support
+    url: https://github.com/caioimori/sinapse-ai/discussions/categories/q-a
+    about: Ask setup, usage, and architecture questions.
+  - name: Security vulnerability
+    url: https://github.com/caioimori/sinapse-ai/security/advisories/new
+    about: Report vulnerabilities privately. Never disclose them in a public issue.
+  - name: Documentation
     url: https://github.com/caioimori/sinapse-ai/tree/main/docs
-    about: Consulte nossa documentacao antes de abrir uma issue
+    about: Browse installation, provider, workflow, and troubleshooting guides.

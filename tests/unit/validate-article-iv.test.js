@@ -78,6 +78,11 @@ describe('validate-article-iv (Article IV traceability)', () => {
       const story = '## File List\n- scripts\\validate-article-iv.js';
       expect(extractFileList(story)).toEqual(['scripts/validate-article-iv.js']);
     });
+
+    it('removes Markdown code formatting from paths', () => {
+      const story = '## File List\n- `scripts/validate-article-iv.js`';
+      expect(extractFileList(story)).toEqual(['scripts/validate-article-iv.js']);
+    });
   });
 
   describe('isProductFile', () => {
