@@ -10,8 +10,7 @@
  * (and a clear, grep-friendly report) if drift is detected.
  *
  * Canonical commands (the ONLY public entry points):
- *   npx sinapse-ai install
- *   npx sinapse-ai update
+ *   npx sinapse-ai install  (new installs and idempotent updates)
  *   npx sinapse-ai uninstall
  *   npx sinapse-ai agents
  *   npx sinapse-ai ideate
@@ -57,6 +56,11 @@ const path = require('path');
  */
 const FORBIDDEN_PATTERNS = [
   {
+    id: 'legacy-public-update-command',
+    regex: /\bnpx\s+sinapse-ai(?:@latest)?\s+update\b/,
+    reason: 'Re-run `npx sinapse-ai@latest install`; it is the canonical idempotent update path.',
+  },
+  {
     id: 'legacy-sinapse-install',
     regex: /\bsinapse\s+install\b/,
     reason: 'Use `npx sinapse-ai install` (the `sinapse install` form is deprecated).',
@@ -64,7 +68,7 @@ const FORBIDDEN_PATTERNS = [
   {
     id: 'legacy-sinapse-update',
     regex: /\bsinapse\s+update\b/,
-    reason: 'Use `npx sinapse-ai update` (the `sinapse update` form is deprecated).',
+    reason: 'Use `npx sinapse-ai@latest install` (the installer handles idempotent updates).',
   },
   {
     id: 'legacy-sinapse-uninstall',
@@ -102,7 +106,7 @@ const FORBIDDEN_PATTERNS = [
   {
     id: 'update-squads-script',
     regex: /\bupdate-squads\.sh\b/,
-    reason: 'Internal script — do not expose in public docs. It runs under `npx sinapse-ai update`.',
+    reason: 'Internal script — do not expose in public docs. Updates run through `npx sinapse-ai@latest install`.',
   },
   {
     id: 'install-chrome-brain-script',
@@ -402,8 +406,8 @@ function formatReport(result) {
   lines.push(`Scanned ${result.scanned.length} public install doc(s).`);
   if (result.ok) {
     lines.push('');
-    lines.push('OK — no drift detected. Every public doc uses the canonical');
-    lines.push('`npx sinapse-ai install | update | uninstall` commands.');
+    lines.push('OK — no drift detected. Public documentation follows');
+    lines.push('the idempotent `npx sinapse-ai@latest install` contract.');
     lines.push('');
     return lines.join('\n');
   }
@@ -417,9 +421,8 @@ function formatReport(result) {
     lines.push('');
   }
   lines.push('Canonical commands:');
-  lines.push('  npx sinapse-ai install');
-  lines.push('  npx sinapse-ai update');
-  lines.push('  npx sinapse-ai uninstall');
+  lines.push('  npx sinapse-ai@latest install');
+  lines.push('  npx sinapse-ai@latest uninstall');
   lines.push('  npx sinapse-ai agents');
   lines.push('  npx sinapse-ai ideate');
   lines.push('');
@@ -449,7 +452,7 @@ function printUsage() {
       'Usage: node scripts/validate-install-docs.js [--root <dir>]',
       '',
       'Validates that user-facing install docs reference only the canonical',
-      '`npx sinapse-ai install | update | uninstall` commands.',
+      'idempotent `npx sinapse-ai@latest install` contract.',
       '',
       'Options:',
       '  --root, -r <dir>   Root directory to scan (defaults to cwd).',

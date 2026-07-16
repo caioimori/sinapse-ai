@@ -6,10 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Mostre o que Voce Construiu
-        Construiu algo com SINAPSE-AI? Compartilhe com a comunidade!
+        ## Mostre o que Você Construiu
+        Construiu algo com SINAPSE AI? Compartilhe com a comunidade.
 
-        Adoramos ver o que voce criou. Seu projeto pode inspirar outros!
+        Queremos conhecer o que você criou. Seu projeto pode inspirar outros.
 
   - type: input
     id: project-name
@@ -23,12 +23,12 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Descricao
+      label: Descrição
       description: Conte-nos sobre seu projeto
       placeholder: |
         O que seu projeto faz?
         Qual problema ele resolve?
-        Para quem ele e feito?
+        Para quem ele é feito?
     validations:
       required: true
 
@@ -52,7 +52,7 @@ body:
     id: features
     attributes:
       label: Funcionalidades Principais
-      description: Quais sao as principais funcionalidades do seu projeto?
+      description: Quais são as principais funcionalidades do seu projeto?
       placeholder: |
         - Funcionalidade 1
         - Funcionalidade 2
@@ -61,15 +61,15 @@ body:
   - type: textarea
     id: code-snippet
     attributes:
-      label: Trecho de Codigo (opcional)
-      description: Compartilhe um trecho de codigo interessante
+      label: Trecho de Código (opcional)
+      description: Compartilhe um trecho de código relevante
       render: javascript
 
   - type: input
     id: link
     attributes:
       label: Link do Projeto (opcional)
-      description: Repositorio GitHub, demo ou website
+      description: Repositório GitHub, demo ou site
       placeholder: https://github.com/username/projeto
 
   - type: textarea
@@ -81,8 +81,8 @@ body:
   - type: textarea
     id: lessons-learned
     attributes:
-      label: Licoes Aprendidas (opcional)
-      description: O que voce aprendeu construindo isso?
+      label: Lições Aprendidas (opcional)
+      description: O que você aprendeu construindo isso?
       placeholder: |
         - Dica 1
         - Desafio que superei
@@ -92,4 +92,4 @@ body:
     attributes:
       value: |
         ---
-        **Obrigado por compartilhar!** Sua contribuicao ajuda a comunidade SINAPSE-AI a crescer.
+        **Obrigado por compartilhar.** Sua contribuição ajuda a comunidade SINAPSE AI a crescer.

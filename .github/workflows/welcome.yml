@@ -21,38 +21,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Welcome first-time contributors
-        uses: actions/first-interaction@v1
+        uses: actions/first-interaction@1c4688942c71f71d4f5502a26ea67c331730fa4d # v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            Obrigado por abrir sua primeira issue no SINAPSE-AI!
+            Obrigado por abrir sua primeira issue no SINAPSE AI.
 
             **O que acontece agora?**
-            - Um maintainer vai fazer a triagem e adicionar labels apropriadas
-            - Vamos responder o mais rapido possivel
-            - Participe das [Discussoes da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
+            - Um maintainer vai validar reprodução, escopo e prioridade
+            - Perguntas de uso podem ser movidas para Discussions
+            - Participe das [Discussões da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
 
-            **Recursos uteis:**
-            - [Guia de Contribuicao](https://github.com/caioimori/sinapse-ai/blob/main/CONTRIBUTING.md)
-            - [Documentacao](https://github.com/caioimori/sinapse-ai/tree/main/docs)
+            **Recursos úteis:**
+            - [Guia de Contribuição](https://github.com/caioimori/sinapse-ai/blob/main/CONTRIBUTING.md)
+            - [Documentação](https://github.com/caioimori/sinapse-ai/tree/main/docs)
 
             **Quer contribuir?** Confira issues com label `good first issue`.
 
           pr-message: |
-            Obrigado pelo seu primeiro PR no SINAPSE-AI!
+            Obrigado pelo seu primeiro pull request no SINAPSE AI.
 
-            **Checklist de revisao:**
+            **Checklist de revisão:**
             - [ ] `npm run lint` passa sem erros
             - [ ] `npm run typecheck` passa sem erros
             - [ ] `npm test` passa sem falhas
-            - [ ] Commits seguem Conventional Commits (feat:, fix:, docs:, etc.)
-            - [ ] PR template preenchido completamente
+            - [ ] Título segue Conventional Commits (`feat:`, `fix:`, `docs:`, etc.)
+            - [ ] Story e evidência de validação estão atualizadas quando aplicável
 
             Um maintainer vai revisar em breve.
 
       - name: Add triage label to new issues
         if: github.event_name == 'issues'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const labels = await github.rest.issues.listLabelsOnIssue({
@@ -61,15 +61,23 @@ jobs:
               issue_number: context.issue.number
             });
 
-            const hasTriageLabel = labels.data.some(label =>
-              label.name === 'status: needs-triage'
-            );
+            const LABEL_NAME = 'status: needs-triage';
+            const hasTriageLabel = labels.data.some(label => label.name === LABEL_NAME);
 
             if (!hasTriageLabel) {
-              await github.rest.issues.addLabels({
+              const repoLabels = await github.rest.issues.listLabelsForRepo({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: ['status: needs-triage']
+                per_page: 100
               });
+              if (repoLabels.data.some(label => label.name === LABEL_NAME)) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  labels: [LABEL_NAME]
+                });
+              } else {
+                core.notice(`Label '${LABEL_NAME}' is not configured; triage continues without it.`);
+              }
             }

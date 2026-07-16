@@ -1,71 +1,37 @@
-## Resumo
-<!-- Descreva brevemente o que essa PR faz (1-3 frases) -->
+## Problem
 
-## Story
-<!-- OBRIGATORIO: Link para a story associada -->
-**Story:** `docs/stories/__.story.md`
+<!-- What user or engineering problem does this solve? Link the issue/story. -->
 
-<!--
-Article XI override (opcional — apenas se este PR DELETA arquivos em paths protegidos:
-.sinapse-ai/development/agents/, squads/*/agents/, squads/*/tasks/,
-squads/*/knowledge-base/, bin/, .claude/hooks/).
+## Solution
 
-Se aplicavel, descomente UMA das linhas abaixo com a justificativa:
--->
-<!-- Article XI override: <razao concreta da deletion — ex: agente movido pra legacy/, KB obsoleta substituida por X> -->
+<!-- Describe the approach, important tradeoffs, and intentionally excluded work. -->
 
-## Tipo de Mudanca
-<!-- Marque o que se aplica -->
-- [ ] Bug fix (correcao que nao quebra funcionalidade existente)
-- [ ] Nova feature (funcionalidade nova)
-- [ ] Breaking change (mudanca que quebra compatibilidade)
-- [ ] Documentacao
-- [ ] Refatoracao
-- [ ] Teste
-- [ ] Infraestrutura / CI/CD
+## Scope
 
-## Escopo
-- [ ] Core framework (.sinapse-ai/)
-- [ ] Squads / Agents
-- [ ] Packages / Installer
-- [ ] Documentacao (docs/)
-- [ ] CI/CD (.github/)
-- [ ] Hooks / Rules (.claude/)
+- Providers: <!-- Claude Code / Codex / both / not applicable -->
+- Platforms: <!-- Windows / Linux / macOS / not applicable -->
+- Ownership layers: <!-- L1 / L2 / L3 / L4 -->
+- Story: <!-- docs/stories/... or explain why not applicable -->
 
-## Como Testar
-<!-- Passos para validar as mudancas -->
-1.
-2.
-3.
+## Evidence
 
----
+<!-- List exact validation commands and their results. Add screenshots for visible changes. -->
 
-## Quality Gates
+```text
+npm run lint
+npm run typecheck
+npm test
+```
 
-| Gate | Status |
-|------|--------|
-| `npm run lint` | :question: |
-| `npm run typecheck` | :question: |
-| `npm test` | :question: |
-| Coverage | :question: |
-| CodeRabbit | :question: |
+## Risk and rollback
 
-## Security Checklist
-- [ ] Revisei o codigo para vulnerabilidades (injection, XSS, path traversal)
-- [ ] Nenhuma issue de seguranca nova introduzida
-- [ ] Nenhum dado sensivel exposto (API keys, tokens, passwords, .env)
+<!-- Compatibility, security, migration, data, release, and rollback considerations. -->
 
-## CodeRabbit Review
-- [ ] Nenhum finding CRITICAL
-- [ ] Findings HIGH foram endereacados ou justificados
-- [ ] Sugestoes de melhoria consideradas
+## Checklist
 
-## Art. X Reminder
-> Antes de merge para producao, verifique os [25 deployment blockers](../.claude/rules/security-data-protection.md) (Tier 1: absolutos, Tier 2: compliance LGPD, Tier 3: operacionais).
-
-## Checklist Final
-- [ ] Testei localmente (todos os quality gates passam)
-- [ ] Story atualizada com progresso e File List
-- [ ] Nao modifiquei .sinapse-ai/core/ sem aprovacao do @architect (Stratum)
-- [ ] Sem senhas, tokens ou chaves no codigo
-- [ ] PR title segue Conventional Commits (`feat:`, `fix:`, `docs:`, etc.)
+- [ ] PR title follows `type: description [Story X.Y]` for implementation changes.
+- [ ] The change is focused and the story/file list is current when applicable.
+- [ ] Claude Code and Codex remain equivalent, or the intentional difference is documented.
+- [ ] No secrets, customer data, or destructive operations are included.
+- [ ] Tests and public documentation cover changed behavior.
+- [ ] Review conversations are resolved before merge.

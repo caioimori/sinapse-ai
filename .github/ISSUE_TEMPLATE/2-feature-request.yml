@@ -1,77 +1,60 @@
-name: Solicitacao de Feature
-description: Sugerir uma nova funcionalidade ou melhoria para o SINAPSE-AI
-title: "[Feature]: "
-labels: ["enhancement"]
+name: Feature request
+description: Propose a capability from a concrete user problem
+title: "feat: "
+labels: ["enhancement", "status: needs-triage"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Obrigado por sugerir uma feature! Descreva sua ideia claramente para que possamos avaliar.
-
-  - type: textarea
-    id: description
-    attributes:
-      label: Descricao da Feature
-      description: Uma descricao clara e concisa da funcionalidade.
-      placeholder: Descreva a feature...
-    validations:
-      required: true
-
   - type: textarea
     id: problem
     attributes:
-      label: Problema que Resolve
-      description: Qual problema esta feature resolve? Qual caso de uso ela habilita?
-      placeholder: "Sua solicitacao esta relacionada a um problema? Descreva..."
+      label: Problem and user
+      description: Who has the problem, what are they trying to do, and what evidence supports it?
     validations:
       required: true
-
   - type: textarea
-    id: solution
+    id: outcome
     attributes:
-      label: Solucao Proposta (opcional)
-      description: Como esta feature deveria funcionar? Qual API ou interface voce esperaria?
-
+      label: Desired outcome
+      description: Describe observable success without prescribing implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Optional API, workflow, or interaction proposal.
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternativas Consideradas (opcional)
-      description: Outras abordagens que voce considerou ou workarounds existentes.
-
+      label: Alternatives and workarounds
   - type: dropdown
-    id: area
+    id: providers
     attributes:
-      label: Area / Pacote
-      description: Em qual parte do SINAPSE-AI esta feature deveria pertencer?
+      label: Provider scope
       options:
-        - "Core Framework (.sinapse-ai/core/)"
-        - "Installer (packages/installer/)"
-        - "CLI (bin/)"
-        - "SYNAPSE Context Engine"
-        - "Health Check System"
-        - "Sistema de Agentes (.sinapse-ai/development/agents/)"
-        - "Sistema de Tasks (.sinapse-ai/development/tasks/)"
-        - "Memory / Knowledge Base"
-        - "Documentacao"
-        - "Novo pacote / modulo"
+        - Claude Code and Codex
+        - Claude Code only
+        - Codex only
+        - Provider-independent
     validations:
       required: true
-
-  - type: checkboxes
-    id: contribution
+  - type: dropdown
+    id: compatibility
     attributes:
-      label: Contribuicao da Comunidade
+      label: Compatibility impact
       options:
-        - label: "Estou disposto a contribuir com a implementacao desta feature"
-        - label: "Posso ajudar com documentacao"
-        - label: "Posso ajudar com testes"
-
+        - Additive
+        - Behavior change
+        - Breaking or migration required
+        - Unknown
+    validations:
+      required: true
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: "Busquei issues e feature requests existentes"
+        - label: I searched existing issues, discussions, and the roadmap.
           required: true
-        - label: "Forneci um caso de uso claro para esta feature"
+        - label: I described a user problem and an observable outcome.
           required: true
+        - label: I can help with implementation, tests, or documentation.

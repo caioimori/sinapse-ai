@@ -1,250 +1,46 @@
-# Contributing Squads Guide
+# Contributing a Squad
 
-> **EN** | [PT](../pt/guides/contributing-squads.md)
+Squads are contributed to this repository under `squads/`. There is no separate
+official squad marketplace or distribution repository in the current public
+product contract.
 
----
+## Before implementation
 
-How to contribute squads to the SINAPSE ecosystem.
+Open the squad proposal issue template and document:
 
-## Overview
+- user problem and domain evidence;
+- non-overlapping authority;
+- proposed agents, tasks, and workflows;
+- Claude Code and Codex experience;
+- maintenance, security, dependencies, and license.
 
-There are two ways to share your squad with the community:
+## Required structure
 
-1. **sinapse-squads Repository** - Free, open-source squads on GitHub
-2. **SINAPSE Marketplace** - Premium squads via SINAPSE API
-
-## Quality Standards
-
-All contributed squads must meet these standards:
-
-### Required
-
-| Requirement | Description |
-|-------------|-------------|
-| **Valid manifest** | `squad.yaml` passes JSON Schema validation |
-| **Documentation** | README.md with usage instructions |
-| **License** | Open source license (MIT, Apache 2.0, etc.) |
-| **SINAPSE compatibility** | `sinapse.minVersion: "2.1.0"` or higher |
-| **Task-first architecture** | Tasks as primary entry points |
-
-### Recommended
-
-| Recommendation | Description |
-|----------------|-------------|
-| **Examples** | Usage examples in README |
-| **Tests** | Unit tests for critical functionality |
-| **Changelog** | Version history documentation |
-| **Troubleshooting** | Common issues and solutions |
-
-## Naming Conventions
-
-### Squad Names
-
-- Use `kebab-case`: `my-awesome-squad`
-- Be descriptive: `etl-data-pipeline` not `data1`
-- Avoid generic names: `helper-squad` is too vague
-- No version numbers in name: `my-squad` not `my-squad-v2`
-
-### Prefix (slashPrefix)
-
-The `slashPrefix` in `squad.yaml` determines command prefixes:
-
-```yaml
-slashPrefix: etl  # Commands become *etl-extract, *etl-transform
+```text
+squads/squad-example/
+  squad.yaml
+  README.md
+  agents/
+  tasks/
+  workflows/      # when needed
+  knowledge-base/ # when needed
+  tests/          # when needed
 ```
 
-Choose a unique, short prefix (2-5 characters).
+`squad.yaml` is canonical. Every declared file and task pointer must exist.
+Provider adapters are generated from canonical definitions and must not be
+maintained by hand.
 
-## Manifest Requirements
-
-### Required Fields
-
-```yaml
-# These fields are REQUIRED
-name: my-squad
-version: 1.0.0              # Semantic versioning
-description: Clear description of what this squad does
-
-sinapse:
-  minVersion: "2.1.0"
-  type: squad
-
-components:
-  agents: []                # At least one agent OR task
-  tasks: []
-```
-
-### Recommended Fields
-
-```yaml
-# These fields are RECOMMENDED
-author: Your Name <email@example.com>
-license: MIT
-slashPrefix: my
-
-tags:
-  - relevant
-  - keywords
-
-dependencies:
-  node: []
-  python: []
-  squads: []
-```
-
-## Documentation Requirements
-
-### README.md Structure
-
-```markdown
-# Squad Name
-
-Brief description (1-2 sentences).
-
-## Installation
-
-How to install/add this squad.
-
-## Usage
-
-Basic usage examples.
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| *cmd1 | What it does |
-| *cmd2 | What it does |
-
-## Configuration
-
-Any configuration options.
-
-## Examples
-
-Detailed usage examples.
-
-## Troubleshooting
-
-Common issues and solutions.
-
-## License
-
-License information.
-```
-
-## Publishing to sinapse-squads
-
-### Prerequisites
-
-1. GitHub account
-2. Squad validated: `*validate-squad --strict`
-3. Unique squad name (check existing squads)
-
-### Steps
+## Validation
 
 ```bash
-# 1. Validate your squad
-@squad-creator
-*validate-squad my-squad --strict
-
-# 2. Publish (creates PR)
-*publish-squad ./squads/my-squad
+npm run validate:squad-schema:strict
+npm run validate:squad-yaml
+npm run sync:providers
+npm run validate:parity
+node .codex/scripts/resolve-codex-agent.js --stats
 ```
 
-This will:
-1. Fork `caioimori/sinapse-squads` (if needed)
-2. Create branch with your squad
-3. Open PR for review
-
-### Review Process
-
-1. **Automated checks** - Schema validation, structure check
-2. **Maintainer review** - Code review, quality check
-3. **Merge** - Squad added to registry
-
-Timeline: Usually 2-5 business days.
-
-## Publishing to SINAPSE Marketplace
-
-### Prerequisites
-
-1. SINAPSE account
-2. API token configured
-3. Squad validated
-
-### Steps
-
-```bash
-# 1. Configure token
-export SINAPSE_API_TOKEN="your-token"
-
-# 2. Sync to marketplace
-@squad-creator
-*sync-squad-sinapse ./squads/my-squad --public
-```
-
-### Visibility Options
-
-| Flag | Effect |
-|------|--------|
-| `--private` | Only visible to your workspace |
-| `--public` | Visible to everyone |
-
-## Updating Published Squads
-
-### Version Bumping
-
-Follow semantic versioning:
-
-- **MAJOR** (1.0.0 → 2.0.0): Breaking changes
-- **MINOR** (1.0.0 → 1.1.0): New features, backward compatible
-- **PATCH** (1.0.0 → 1.0.1): Bug fixes
-
-### Update Process
-
-```bash
-# 1. Update version in squad.yaml
-# 2. Update CHANGELOG.md
-# 3. Validate
-*validate-squad my-squad --strict
-
-# 4. Re-publish
-*publish-squad ./squads/my-squad
-# or
-*sync-squad-sinapse ./squads/my-squad
-```
-
-## Code of Conduct
-
-### Do
-
-- Provide clear, accurate documentation
-- Test your squad before publishing
-- Respond to issues and feedback
-- Keep dependencies minimal
-- Follow SINAPSE conventions
-
-### Don't
-
-- Include malicious code
-- Store credentials in code
-- Copy others' work without attribution
-- Use offensive names or content
-- Spam the registry with test squads
-
-## Getting Help
-
-- **Questions**: [GitHub Discussions](https://github.com/caioimori/sinapse-ai/discussions)
-- **Issues**: [Issue Tracker](https://github.com/caioimori/sinapse-ai/issues)
-- **Guidelines**: This document
-
-## Related Resources
-
-- [Squad Development Guide](./squads-guide.md)
-- [Squad Migration Guide](./squad-migration.md)
-- [sinapse-squads Repository](https://github.com/caioimori/sinapse-squads)
-
----
-
-**Version:** 1.0.0 | **Updated:** 2025-12-26 | **Story:** SQS-8
+Include a README, activation examples for both providers, tests, dependency and
+secret requirements, compatibility notes, and a maintainer. Follow
+[CONTRIBUTING.md](../../CONTRIBUTING.md) and the squad pull-request template.

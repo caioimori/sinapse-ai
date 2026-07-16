@@ -8,9 +8,8 @@ name: Lint Guards
 #
 # Two jobs:
 #   1. lint-guards          — runs scripts/validate-all.js (6 guards in parallel)
-#   2. cross-ide-parity     — runs validate:parity:fast (only when an agent
-#                              file actually changed, matching the pre-push
-#                              short-circuit)
+#   2. cross-ide-parity     — runs validate:parity:fast when canonical agents,
+#                              squad agents, or provider adapters change
 #
 # Both block merge on failure (status checks). They are intentionally
 # fast (typical run < 90s including npm ci) so they don't slow down PRs.
@@ -39,12 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -60,12 +60,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -85,8 +86,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           # Need full history for the path-based filter on PRs
           fetch-depth: 0
 
@@ -101,17 +103,17 @@ jobs:
           # On pushes to main, diff against the previous commit so we still
           # short-circuit when a non-agent change lands.
           if [ "$EVENT_NAME" = "pull_request" ]; then
-            git fetch --no-tags --depth=50 origin "$BASE_REF" 2>/dev/null || true
+            git fetch --no-tags --depth=50 origin "$BASE_REF"
             base="origin/$BASE_REF"
             range="$base...HEAD"
           else
             range="HEAD~1...HEAD"
           fi
 
-          if git diff --name-only "$range" 2>/dev/null \
-             | grep -q '^\.sinapse-ai/development/agents/'; then
+          if git diff --name-only "$range" \
+             | grep -Eq '^(\.sinapse-ai/development/agents/|squads/[^/]+/agents/|\.agents/skills/|\.claude/(agents|skills|rules|hooks)/|\.codex/(agents|tasks|hooks|scripts)/)'; then
             echo "needs_check=true" >> "$GITHUB_OUTPUT"
-            echo "Agent files changed - will run parity check."
+            echo "Canonical or provider surface changed - will run parity check."
           else
             echo "needs_check=false" >> "$GITHUB_OUTPUT"
             echo "No agent files changed - skipping parity check."
@@ -119,7 +121,7 @@ jobs:
 
       - name: Setup Node.js
         if: steps.detect.outputs.needs_check == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'

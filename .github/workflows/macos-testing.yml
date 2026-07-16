@@ -18,19 +18,8 @@ on:
       - 'bin/**'
       - 'scripts/**'
       - 'tests/macos/**'
+      - '.github/workflows/macos-testing.yml'
   workflow_dispatch:
-    inputs:
-      test_suite:
-        description: 'Test suite to run'
-        required: false
-        default: 'all'
-        type: choice
-        options:
-          - all
-          - installation
-          - compatibility
-          - performance
-          - security
 
 concurrency:
   group: macos-testing-${{ github.event.pull_request.number || github.ref }}
@@ -48,10 +37,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -75,7 +66,7 @@ jobs:
       - name: Run Intel-specific tests
         run: |
           cd tests/macos
-          ./test-intel-installation.sh || true
+          ./test-intel-installation.sh
 
       - name: Run compatibility tests
         run: |
@@ -102,7 +93,7 @@ jobs:
 
       - name: Upload test logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: test-logs-intel
           path: /tmp/sinapse-test-*.log
@@ -116,10 +107,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -145,7 +138,7 @@ jobs:
       - name: Run Apple Silicon-specific tests
         run: |
           cd tests/macos
-          ./test-apple-silicon-installation.sh || true
+          ./test-apple-silicon-installation.sh
 
       - name: Run compatibility tests
         run: |
@@ -177,7 +170,7 @@ jobs:
 
       - name: Upload test logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: test-logs-apple-silicon
           path: /tmp/sinapse-test-*.log
@@ -191,10 +184,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
 
@@ -208,7 +203,7 @@ jobs:
 
       - name: Upload test logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: test-logs-error-recovery
           path: /tmp/sinapse-test-*.log
@@ -217,7 +212,7 @@ jobs:
   # Job 4: Generate Test Report
   generate-report:
     name: Generate Test Report
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     needs: [test-intel-mac, test-apple-silicon, test-error-recovery]
     if: always()
     permissions:
@@ -225,11 +220,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Download all test logs
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           path: test-results/
 
@@ -253,60 +245,61 @@ jobs:
           cat test-summary.md
 
       - name: Upload test summary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: test-summary
           path: test-summary.md
           retention-days: 90
 
       - name: Comment PR with results
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == false }}
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const fs = require('fs');
+            const marker = '<!-- sinapse-macos-results -->';
             const summary = fs.readFileSync('test-summary.md', 'utf8');
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const body = `${marker}\n${summary}`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: summary
+              issue_number: context.issue.number,
+              per_page: 100,
             });
+            const current = comments.find((item) =>
+              item.user.type === 'Bot' && item.body.includes(marker)
+            );
+            if (current) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: current.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            }
 
-  # Job 5: Performance Comparison
-  performance-comparison:
-    name: Compare Intel vs Apple Silicon Performance
-    runs-on: macos-latest
-    needs: [test-intel-mac, test-apple-silicon]
+  macos-gate:
+    name: macOS Validation Gate
+    runs-on: ubuntu-latest
+    needs: [test-intel-mac, test-apple-silicon, test-error-recovery]
     if: always()
-
+    env:
+      INTEL_RESULT: ${{ needs.test-intel-mac.result }}
+      ARM_RESULT: ${{ needs.test-apple-silicon.result }}
+      RECOVERY_RESULT: ${{ needs.test-error-recovery.result }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Download test logs
-        uses: actions/download-artifact@v4
-        with:
-          path: test-results/
-
-      - name: Analyze performance metrics
+      - name: Require all macOS validations
+        shell: bash
         run: |
-          echo "# Performance Comparison Report" > perf-comparison.md
-          echo "" >> perf-comparison.md
-          echo "## Installation Performance" >> perf-comparison.md
-          echo "" >> perf-comparison.md
-          echo "| Metric | Intel | Apple Silicon |" >> perf-comparison.md
-          echo "|--------|-------|---------------|" >> perf-comparison.md
-          echo "| Installation Time | TBD | TBD |" >> perf-comparison.md
-          echo "| Health Check Time | TBD | TBD |" >> perf-comparison.md
-          echo "| CLI Response Time | TBD | TBD |" >> perf-comparison.md
-          echo "" >> perf-comparison.md
-          echo "*Note: Metrics extracted from test logs*" >> perf-comparison.md
-
-      - name: Upload performance report
-        uses: actions/upload-artifact@v4
-        with:
-          name: performance-comparison
-          path: perf-comparison.md
-          retention-days: 90
+          printf 'Intel: %s\nApple Silicon: %s\nRecovery: %s\n' \
+            "$INTEL_RESULT" "$ARM_RESULT" "$RECOVERY_RESULT"
+          test "$INTEL_RESULT" = success
+          test "$ARM_RESULT" = success
+          test "$RECOVERY_RESULT" = success

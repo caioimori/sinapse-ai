@@ -1,99 +1,50 @@
-# SINAPSE Documentation
+# SINAPSE AI Documentation
 
-> 🌐 **EN** | [PT](./pt/README.md)
+This index is organized by user journey. English is the canonical documentation
+language for new public guides; Portuguese coverage is maintained for the core
+installation and operating paths. Translation coverage is not yet complete.
 
-> **AI-Orchestrated System for Full-Stack Development**
+## Start here
 
----
+| Goal | Document |
+|---|---|
+| Install SINAPSE in a project | [Getting started](getting-started.md) |
+| Understand updates and ownership | [Installation and updates](installation/README.md) |
+| Fix an installation problem | [Troubleshooting](installation/troubleshooting.md) |
+| Configure Claude Code and Codex | [Provider integration](guides/ide-integration.md) |
+| Find an agent or command | [Agent reference](agent-reference-guide.md) |
 
-## 🌐 Select Language / Selecione o Idioma
+## Build with the framework
 
-| Language       | Status      | Link                                                    |
-| -------------- | ----------- | ------------------------------------------------------- |
-| **English**    | ✅ Complete | [📖 English Documentation](./getting-started.md)        |
-| **Português**  | ✅ Complete | [📖 Documentação em Português](./pt/getting-started.md) |
+| Goal | Document |
+|---|---|
+| Select the correct engineering workflow | [Engineering applicability](framework/software-engineering-applicability.md) |
+| Understand the delivery lifecycle | [Workflow catalog](sinapse-workflows/README.md) |
+| Understand agent routing | [Agent flows](sinapse-agent-flows/README.md) |
+| Use React Bits | [React Bits capability](framework/react-bits/index.md) |
+| Create or extend a squad | [Contributing squads](guides/contributing-squads.md) |
 
----
+## Operate and contribute
 
-## 📚 Documentation Structure
+| Goal | Document |
+|---|---|
+| Work through branches and pull requests | [GitHub Flow](guides/gitflow.md) |
+| Understand the release pipeline | [Release process](guides/release-process.md) |
+| Contribute to the repository | [Contributing](../CONTRIBUTING.md) |
+| Report a vulnerability | [Security](../SECURITY.md) |
+| Get support | [Support](../SUPPORT.md) |
+| Review product direction | [Roadmap](../ROADMAP.md) |
 
-```text
-docs/
-├── getting-started.md         # English (root)
-├── troubleshooting.md         # English (root)
-├── agent-reference-guide.md   # English (root)
-├── guides/                    # English
-├── installation/              # English
-├── framework/                 # English
-├── sinapse-agent-flows/       # Detailed agent documentation
-├── sinapse-workflows/         # Detailed workflow documentation
-│
-└── pt/                        # Português (translations)
-    ├── getting-started.md
-    ├── guides/
-    └── ...
-```
+## Portuguese
 
----
+- [Primeiros passos](pt/getting-started.md)
+- [Instalação](pt/installation/README.md)
+- [Referência de agentes](pt/agent-reference-guide.md)
+- [Solução de problemas](pt/installation/troubleshooting.md)
 
-## 🚀 Quick Links
+Older specifications, reports, and research remain available in their existing
+directories. A document outside this curated index may describe historical
+behavior; validate commands against the current CLI before using it operationally.
 
-### English
-
-- [Getting Started](./getting-started.md)
-- [Installation Guide](./installation/README.md)
-- [Agent Reference Guide](./agent-reference-guide.md)
-- [Constitution](../.sinapse-ai/constitution.md)
-- [Agent System Documentation](./sinapse-agent-flows/README.md)
-- [Workflow Documentation](./sinapse-workflows/README.md)
-- [Troubleshooting](./troubleshooting.md)
-
-### Português
-
-- [Começando](./pt/getting-started.md)
-- [Guia de Instalação](./pt/installation/README.md)
-- [Visão Geral da Arquitetura](./pt/architecture/ARCHITECTURE-INDEX.md)
-- [Referência de Agentes](./pt/agent-reference-guide.md)
-- [Documentação do Sistema de Agentes](./sinapse-agent-flows/README.md)
-- [Documentação de Workflows](./sinapse-workflows/README.md)
-- [Solução de Problemas](./pt/troubleshooting.md)
-
----
-
-## 🤝 Contributing to Documentation
-
-### For Translators
-
-We follow industry-standard i18n practices:
-
-1. English content lives in the root (`docs/`)
-2. Portuguese translations go in `docs/pt/`
-3. File structure mirrors the English version
-4. Add translation header to each file:
-   ```markdown
-   <!--
-     Translation: PT
-     Original: /docs/[filename].md
-     Last sync: YYYY-MM-DD
-   -->
-   ```
-
-### Translation Status
-
-| Section         | EN  | PT  |
-| --------------- | --- | --- |
-| Getting Started | ✅  | ✅  |
-| Guides          | ✅  | ✅  |
-| Installation    | ✅  | ✅  |
-| Architecture    | ✅  | ✅  |
-| Framework       | ✅  | ✅  |
-
----
-
-## 📄 License
-
-This documentation is part of SINAPSE, licensed under [MIT License](../LICENSE).
-
----
-
-_SINAPSE - Orchestrating AI for Better Software Development_
+Documentation changes follow [CONTRIBUTING.md](../CONTRIBUTING.md) and are
+distributed under the repository [MIT License](../LICENSE).

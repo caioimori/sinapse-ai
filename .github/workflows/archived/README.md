@@ -1,24 +1,17 @@
-# Archived GitHub Workflows
+# Archived Workflows
 
-Workflows preservados aqui (com extensão `.disabled` pra GitHub Actions ignorar) ao invés de deletar — preserva history + permite reativação fácil se necessário.
+Files in this directory use the `.disabled` suffix and cannot be executed by
+GitHub Actions. They are retained only for audit history.
 
-## Por que arquivamos
+| Workflow | Reason archived |
+|---|---|
+| `issue-labeler.yml.disabled` | Replaced by the active path labeler |
+| `publish-pro.yml.disabled` | Removed private distribution path |
+| `pro-integration.yml.disabled` | Repository has no active Pro submodule or credential |
+| `release.yml.disabled` | Legacy tag-driven GitHub Release writer |
+| `npm-publish.yml.disabled` | Legacy second npm publisher |
 
-Cada workflow aqui foi auditado e identificado como **zumbi** (zero runs num período relevante) OU **dead concept** (referente a feature deprecated).
-
-## Como reativar
-
-```bash
-git mv .github/workflows/archived/{name}.yml.disabled .github/workflows/{name}.yml
-```
-
-## Lista atual
-
-| Workflow | Razão | Auditoria |
-|---|---|---|
-| `issue-labeler.yml.disabled` | 0 runs em 60+ dias (Stowaway Audit 2026-05-06) | `docs/audits/2026-05-06-stowaway-audit.md` |
-| `publish-pro.yml.disabled` | Feature PRO removida (2026-05-06 PR #166) | `docs/audits/2026-05-06-stowaway-audit.md` + master audit |
-
-## Quando deletar definitivo
-
-Após 6 meses sem reativação + sem references no repo, considerar `git rm`. Por enquanto, manter preserva trilha de decisão.
+The canonical release path is documented in
+[../README.md](../README.md). Re-enabling an archived publisher requires a
+governance decision, threat review, and proof that only one workflow can write a
+given package version or release tag.

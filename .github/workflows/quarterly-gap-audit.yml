@@ -17,10 +17,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
 
@@ -71,6 +73,12 @@ jobs:
           echo "**Audit Date:** $(date -u +%Y-%m-%d)" >> audit-report.md
           echo "**Commit:** ${{ github.sha }}" >> audit-report.md
 
+          echo "" >> audit-report.md
+          echo "### Canonical resolver stats" >> audit-report.md
+          echo '```text' >> audit-report.md
+          node .codex/scripts/resolve-codex-agent.js --stats >> audit-report.md
+          echo '```' >> audit-report.md
+
       - name: Check for orphaned references
         run: |
           echo "" >> audit-report.md
@@ -103,17 +111,26 @@ jobs:
           echo "" >> audit-report.md
           echo "## Manifest Validation" >> audit-report.md
           echo "" >> audit-report.md
-          npm run validate:manifest 2>&1 | tail -5 >> audit-report.md || echo "Manifest validation failed" >> audit-report.md
+          npm run validate:manifest > manifest-validation.log 2>&1
+          tail -20 manifest-validation.log >> audit-report.md
+
+      - name: Run provider parity validation
+        run: |
+          echo "" >> audit-report.md
+          echo "## Claude Code / Codex Parity" >> audit-report.md
+          echo "" >> audit-report.md
+          npm run validate:parity > provider-parity.log 2>&1
+          tail -20 provider-parity.log >> audit-report.md
 
       - name: Upload audit report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: quarterly-gap-audit-${{ github.run_number }}
           path: audit-report.md
 
       - name: Create issue with findings
         if: github.event_name == 'schedule'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const fs = require('fs');
@@ -125,6 +142,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `[Audit] Gap Audit Q${quarter} ${year}`,
-              body: `# Quarterly Architecture Gap Audit\n\n${report}\n\n---\n*Generated automatically by quarterly-gap-audit workflow*`,
-              labels: ['audit', 'architecture']
+              body: `# Quarterly Architecture Gap Audit\n\n${report}\n\n---\n*Generated automatically by quarterly-gap-audit workflow*`
             });

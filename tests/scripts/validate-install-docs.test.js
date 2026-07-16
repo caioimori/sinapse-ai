@@ -72,7 +72,7 @@ describe('validate-install-docs', () => {
           '',
           '```bash',
           'npx sinapse-ai install',
-          'npx sinapse-ai update',
+          'npx sinapse-ai doctor',
           'npx sinapse-ai uninstall',
           'A Linux path such as `/dev/null` is not an agent command.',
           'Claude documentation may link to https://example.com/skills.',
@@ -169,6 +169,7 @@ describe('validate-install-docs', () => {
           '# Bad doc',
           '',
           'Run `sinapse install` to set up the framework.',
+          'Then run `npx sinapse-ai@latest update`.',
           'Then run `sinapse-minimal` for a lightweight mode.',
           'Power users can invoke `./scripts/install-squads.sh` directly.',
           'In Codex, open the `/skills` flow.',
@@ -201,6 +202,7 @@ describe('validate-install-docs', () => {
       expect(ruleIds).toEqual(
         expect.arrayContaining([
           'legacy-sinapse-install',
+          'legacy-public-update-command',
           'sinapse-minimal-binary',
           'install-squads-script',
           'legacy-codex-skills-flow',

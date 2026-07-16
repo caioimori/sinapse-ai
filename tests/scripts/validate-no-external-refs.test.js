@@ -156,7 +156,7 @@ describe('validate-no-external-refs', () => {
         'Fix: Remove the reference. This repo uses authorial SINAPSE voice only.',
       );
       expect(formatted).toContain(
-        'Only LICENSE may contain these references (legal requirement).',
+        'Only NOTICE.md may contain these references (legal requirement).',
       );
     });
   });
@@ -185,16 +185,16 @@ describe('validate-no-external-refs', () => {
   });
 
   // ─────────────────────────────────────────────────────────────────────────
-  describe('LICENSE allow-list', () => {
+  describe('NOTICE.md allow-list', () => {
     let root;
 
     beforeAll(() => {
       root = makeTmpRoot('license');
       initGit(root);
-      // LICENSE is allow-listed — having a forbidden term here MUST NOT fail.
+      // NOTICE.md is allow-listed — legal attribution here MUST NOT fail.
       writeFile(
         root,
-        'LICENSE',
+        'NOTICE.md',
         [
           'MIT License',
           '',
@@ -202,12 +202,12 @@ describe('validate-no-external-refs', () => {
           '',
         ].join('\n'),
       );
-      gitAdd(root, 'LICENSE');
+      gitAdd(root, 'NOTICE.md');
     });
 
     afterAll(() => cleanup(root));
 
-    test('LICENSE with a forbidden term does not trigger a violation', () => {
+    test('NOTICE.md with a forbidden term does not trigger a violation', () => {
       const result = validateNoExternalRefs(root);
       expect(result.ok).toBe(true);
       expect(result.violations).toEqual([]);
@@ -425,8 +425,9 @@ describe('validate-no-external-refs', () => {
 
   // ─────────────────────────────────────────────────────────────────────────
   describe('isAllowListed unit', () => {
-    test('LICENSE is allow-listed', () => {
-      expect(isAllowListed('LICENSE')).toBe(true);
+    test('NOTICE.md is allow-listed and LICENSE is scanned', () => {
+      expect(isAllowListed('NOTICE.md')).toBe(true);
+      expect(isAllowListed('LICENSE')).toBe(false);
     });
 
     test('historical doc is allow-listed', () => {

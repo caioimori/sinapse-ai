@@ -1,79 +1,94 @@
-# Getting Started — SINAPSE-AI
+# Getting Started
 
-> Guia mínimo pra colocar o SINAPSE rodando em qualquer projeto. Tempo: 2 minutos.
+Install SINAPSE AI in an existing or new project and route the first request in
+a few steps.
 
-## Pré-requisitos
+> [Português](pt/getting-started.md)
 
-- **Node.js** ≥ 18 (Node 22 LTS recomendado)
-- **Claude Code** ou **Codex CLI** instalado
-- **Git** (pra colaboração)
+## Requirements
 
-## Instalação em 1 comando
+- Node.js 18 or newer (Node.js 22 LTS recommended)
+- npm 9 or newer
+- Claude Code, Codex, or both
+- Git for repository workflows
+
+## Install
+
+Run this command from the project directory:
 
 ```bash
 npx sinapse-ai@latest install
 ```
 
-O wizard detecta seu ambiente e, em instalações novas ou sem provider salvo, instala Claude Code e Codex por padrão, além dos 17 squads e hooks essenciais. Instalações existentes preservam o provider salvo; use `--reconfigure` para alterá-lo. Use `--llm=claude-code` ou `--llm=codex` somente quando quiser limitar a instalação a um provider.
+On a fresh project, the no-flag path installs native integration for **Claude
+Code and Codex**. Re-running the command preserves the saved provider selection
+and project-owned content.
 
-## Validar setup
+Use an explicit provider only when the project should be restricted:
 
 ```bash
-npx sinapse-ai status   # squads + agentes instalados
-npx sinapse-ai doctor   # 16 health checks
+npx sinapse-ai@latest install --llm=claude-code
+npx sinapse-ai@latest install --llm=codex
 ```
 
-Se algo falhar: `npx sinapse-ai doctor --fix` corrige automaticamente.
+Use `--reconfigure` to change a saved selection.
 
-## Ativar primeiro agente
+## Verify
 
-No Claude Code:
+```bash
+npx sinapse-ai@latest status
+npx sinapse-ai@latest doctor
+```
+
+If the diagnostic finds a repairable configuration problem:
+
+```bash
+npx sinapse-ai@latest doctor --fix
+```
+
+## Route the first request
+
+Claude Code:
 
 ```text
-@developer
-*help
+@sinapse-orqx
+Plan and implement a small authenticated API change.
 ```
 
-No Codex, use o roteador ou a ativação direta:
+Codex:
 
 ```text
 $snps
-$sinapse-agent developer
+Plan and implement a small authenticated API change.
 ```
 
-`@developer` e `*help` pertencem à superfície do Claude Code. No Codex, `$snps`
-roteia a solicitação e `$sinapse-agent developer` ativa o agente de implementação.
+Direct specialist activation:
 
-## Próximos passos
+| Role | Claude Code | Codex |
+|---|---|---|
+| Developer | `@developer` | `$sinapse-agent developer` |
+| Architect | `@architect` | `$sinapse-agent architect` |
+| QA | `@quality-gate` | `$sinapse-agent quality-gate` |
 
-| Quero... | Onde |
-|---|---|
-| Entender filosofia do framework | [`README.md`](../README.md) |
-| Ver lista completa de agentes | [Agent Reference Guide](agent-reference-guide.md) |
-| Resolver problema na instalação | [Troubleshooting](troubleshooting.md) |
-| Ver workflow de desenvolvimento | [`docs/sinapse-workflows/`](sinapse-workflows/) |
-| Contribuir | [`CONTRIBUTING.md`](../CONTRIBUTING.md) |
+The orchestrator classifies the request and delegates domain work. Code changes
+normally require a ready story before implementation.
 
-## Reinstalar / atualizar
-
-Use sempre `@latest` para evitar uma versao antiga mantida no cache do `npx`.
-Em instalacoes globais, execute `npm install -g sinapse-ai@latest` antes de
-`sinapse-ai update`.
+## Update safely
 
 ```bash
-npx sinapse-ai@latest install --reconfigure   # reconfigura tudo
-npx sinapse-ai update                  # atualiza versão sem perder customizações
-npx sinapse-ai uninstall               # remove tudo
+npx sinapse-ai@latest install
 ```
 
-## Conceitos chave (em 30 segundos)
+The idempotent installer detects an existing installation, refreshes
+framework-managed files, and preserves project-owned content. Review the
+resulting diff before committing. Use `install --force` only when deliberately
+refreshing the managed installation.
 
-- **Squad**: equipe de agentes especializados (ex: squad-design tem 15 agentes de design/UX)
-- **Agente**: persona de IA com especialização e comandos específicos (`@developer` no Claude Code; `$sinapse-agent developer` no Codex)
-- **Hook**: enforcement runtime que bloqueia violações da Constitution (ex: PR sem story)
-- **Constitution**: 11 artigos que governam o framework (ver `.sinapse-ai/constitution.md`)
-- **Story**: arquivo `.md` que documenta requisitos antes do código (Documentation-First)
+## Next steps
 
----
-
-*Próxima leitura sugerida: [Agent Reference Guide](agent-reference-guide.md) pra ver todos os 172 agentes disponíveis.*
+- [Choose the engineering workflow](framework/software-engineering-applicability.md)
+- [Understand installation ownership](installation/README.md)
+- [Browse agents](agent-reference-guide.md)
+- [Integrate providers](guides/ide-integration.md)
+- [Troubleshoot](troubleshooting.md)
+- [Get support](../SUPPORT.md)

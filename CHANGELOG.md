@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.27.0] - 2026-07-16
+
+### Features
+
+- Default fresh installations to both Claude Code and Codex while preserving
+  explicit and previously saved provider selections.
+
+### Bug Fixes
+
+- Harden canonical installation behavior and review guidance.
+
+### Documentation
+
+- Recommend supported Node.js LTS releases and record React Bits distribution
+  evidence.
+
+## [1.26.0] - 2026-07-15
+
+### Features
+
+- Deliver the React Bits capability, searchable corpus, animation squad, and
+  provider-native skills across Claude Code and Codex.
+
+### Bug Fixes
+
+- Harden React Bits corpus delivery and align public provider metrics.
+
+## [1.25.3] - 2026-07-15
+
+### Bug Fixes
+
+- Restore installer provider-adapter parity.
+
+## [1.25.2] - 2026-07-15
+
+### Bug Fixes
+
+- Align and harden public Claude Code and Codex guidance.
+
 ## [1.24.0] — 2026-07-09 — 🎭 Handoffs visíveis: selo de cada agente na orquestração
 
 > Minor. Atualização segura via `npx sinapse-ai update`. Fecha as 4 causas dos handoffs invisíveis ("nunca vejo o nome dos outros agentes"): a identidade pública dos especialistas agora chega ao modelo e aparece na conversa.

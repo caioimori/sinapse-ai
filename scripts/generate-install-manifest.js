@@ -46,7 +46,6 @@ const FOLDERS_TO_COPY = [
 const ROOT_FILES_TO_COPY = [
   'index.js',
   'index.esm.js',
-  'index.d.ts',
   'core-config.yaml',
   'package.json',
   'user-guide.md',
@@ -243,7 +242,7 @@ async function generateManifest() {
   // Add root files
   for (const file of ROOT_FILES_TO_COPY) {
     const filePath = path.join(sinapseCoreDir, file);
-    if (fs.existsSync(filePath)) {
+    if (!shouldExclude(file) && fs.existsSync(filePath)) {
       allFiles.push(filePath);
     }
   }
@@ -375,6 +374,7 @@ module.exports = {
   writeManifest,
   getFileType,
   scanDirectory,
+  shouldExclude,
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
 };

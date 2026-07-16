@@ -1,98 +1,59 @@
-# SINAPSE Installation Documentation
+# Installation and Updates
 
-> 🌐 **EN** | [PT](../pt/installation/README.md)
-
-**Version:** 2.1.0
-**Last Updated:** 2025-01-24
-
----
-
-## Overview
-
-This directory contains comprehensive installation and setup documentation for SINAPSE.
-
----
-
-## Documentation Index
-
-### Platform-Specific Guides
-
-| Platform       | Guide                                      | Status      |
-| -------------- | ------------------------------------------ | ----------- |
-| 🍎 **macOS**   | [macOS Installation Guide](./macos.md)     | ✅ Complete |
-| 🐧 **Linux**   | [Linux Installation Guide](./linux.md)     | ✅ Complete |
-| 🪟 **Windows** | [Windows Installation Guide](./windows.md) | ✅ Complete |
-
-### General Documentation
-
-| Document                                    | Description                 | Audience  |
-| ------------------------------------------- | --------------------------- | --------- |
-| [Quick Start (v4)](./v4-quick-start.md) | Fast setup for new users    | Beginners |
-| [Troubleshooting](./troubleshooting.md)     | Common issues and solutions | All users |
-| [FAQ](./faq.md)                             | Frequently asked questions  | All users |
-
----
-
-## Quick Links
-
-### New Installation
+The canonical installation path for new and existing projects is:
 
 ```bash
 npx sinapse-ai@latest install
 ```
 
-### Upgrading
+Run it from the project directory. With no flags, a fresh installation configures
+Claude Code and Codex. Re-runs preserve the saved provider selection and
+project-owned content.
+
+## Requirements
+
+- Node.js 18 or newer; Node.js 22 LTS is recommended.
+- npm 9 or newer.
+- Claude Code, Codex, or both.
+- Git for collaboration and review.
+
+## Provider selection
 
 ```bash
-npx sinapse-ai@latest update
+# Fresh default: both providers
+npx sinapse-ai@latest install
+
+# Deliberately restrict a project
+npx sinapse-ai@latest install --llm=claude-code
+npx sinapse-ai@latest install --llm=codex
+
+# Change a saved provider selection
+npx sinapse-ai@latest install --reconfigure
 ```
 
-### Having Issues?
+## Ownership and updates
 
-1. Check [Troubleshooting Guide](./troubleshooting.md)
-2. Search [FAQ](./faq.md)
-3. Open a [GitHub Issue](https://github.com/caioimori/sinapse-ai/issues)
+The installer distinguishes framework-managed files from project-owned files.
+Re-running `install` refreshes the managed surface; it does not treat
+application code, stories, packages, tests, or custom squads as disposable.
 
----
+```bash
+npx sinapse-ai@latest install
+npx sinapse-ai@latest status
+npx sinapse-ai@latest doctor
+```
 
-## Prerequisites
+Review the diff after every installation. `install --force` is for a
+deliberate managed-surface refresh, not routine upgrades.
 
-- Node.js 18.0.0+
-- npm 9.0.0+
-- Git 2.30+
+## Platform guides
 
----
+- [Windows](windows.md)
+- [macOS](macos.md)
+- [Linux](linux.md)
+- [npx behavior](npx-install.md)
+- [Troubleshooting](troubleshooting.md)
+- [Uninstallation](uninstallation.md)
 
-## Supported Platforms
-
-| Platform      | Status       |
-| ------------- | ------------ |
-| Windows 10/11 | Full Support |
-| macOS 12+     | Full Support |
-| Ubuntu 20.04+ | Full Support |
-| Debian 11+    | Full Support |
-
----
-
-## Supported IDEs
-
-| IDE         | Agent Activation                    |
-| ----------- | ----------------------------------- |
-| Claude Code | `@developer`, `@quality-gate`, etc. |
-| Codex CLI   | `$snps` or `$sinapse-agent <id>`    |
-
----
-
-## Related Documentation
-
-- [Coding Standards](../framework/coding-standards.md)
-- [Tech Stack](../framework/tech-stack.md)
-- [Architecture](../framework/core-architecture.md)
-- [Changelog](../../CHANGELOG.md)
-
----
-
-## Support
-
-- **GitHub Issues**: [sinapse-ai/issues](https://github.com/caioimori/sinapse-ai/issues)
-- **Documentation**: [docs/](../)
+Platform guides supplement this contract. The canonical `@latest install` path
+and current CLI help remain the source of truth for provider options.

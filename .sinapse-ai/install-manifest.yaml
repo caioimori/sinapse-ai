@@ -7,9 +7,9 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 1.25.1
+version: 1.27.0
 generator: scripts/generate-install-manifest.js
-file_count: 1161
+file_count: 1155
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1368,9 +1368,9 @@ files:
     type: data
     size: 9671
   - path: data/entity-registry.yaml
-    hash: sha256:08edc9d3cde1bf956cce462004670a3d2924a691a16c27bdfd2bf1ce4de037f8
+    hash: sha256:17d239b2aac22db1005e85b17bcdd73fda7a9631b0b3b17548a8a47340929b24
     type: data
-    size: 560701
+    size: 560741
   - path: data/learned-patterns.yaml
     hash: sha256:1a4cd045c087b9dfd7046ff1464a9d2edb85fba77cf0b6fba14f4bb9004c741e
     type: data
@@ -3075,10 +3075,6 @@ files:
     hash: sha256:54ab156d0149da43698c0b439e196a228c794441b20c78d26b9433a17a6e20f6
     type: elicitation
     size: 9678
-  - path: index.d.ts
-    hash: sha256:6257a6ba37bd5ec0ebbfe6b76f97f1926a504635988943d79a85ef6175629542
-    type: code
-    size: 981
   - path: index.esm.js
     hash: sha256:13e1784627956a59acfc3ca1cb2d0f74cbfbb38d3a7b77bf7615b74963366d11
     type: code
@@ -4367,26 +4363,6 @@ files:
     hash: sha256:0953482dcf74679b91b08b257895ff78b5dbdeed3eb61129ab0bc607d2b25dcb
     type: script
     size: 3620
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js
-    hash: sha256:cdd728c5bf82a127271671719816fa1aaf215fce2b5d3cb7b241bd489f29e29c
-    type: script
-    size: 594851
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-Bohy_Ua2.js.map
-    hash: sha256:e3a4cb09202d3618028f841424e2f2962c6974b08f78e6e4b23176b9a4e29dfb
-    type: script
-    size: 2521841
-  - path: scripts/diagnostics/health-dashboard/dist/assets/index-CAzIo_ei.css
-    hash: sha256:07fa5f6d6d74a8183343d2ce236484524487335dc24c85f7a782d716f691b77b
-    type: script
-    size: 20544
-  - path: scripts/diagnostics/health-dashboard/dist/favicon.svg
-    hash: sha256:bad3a2389b3ff29f3da8035020dd8362c2eba564b787b9bc9c4f1edddd0b7cd4
-    type: script
-    size: 474
-  - path: scripts/diagnostics/health-dashboard/dist/index.html
-    hash: sha256:4a1ab4115ec43d7e5ecd359a50fb10629075edb5fba7ae1034bb420d07b604d2
-    type: script
-    size: 475
   - path: scripts/diagnostics/health-dashboard/index.html
     hash: sha256:e3513b1c08a8dbc777532a84006bcb25015fb9b25b68a68f56af341465279845
     type: script
@@ -4592,9 +4568,9 @@ files:
     type: workflow-intelligence
     size: 11695
   - path: workflow-intelligence/__tests__/suggestion-engine.test.js
-    hash: sha256:4dd26f611a58c0bcd54dc69e1804efe103406ee0c0bda0880a4b39aecf540045
+    hash: sha256:1ada0dfe83d80f280adc9eb4c402bb7deecf072ca07782acebfd12377d2cd9a8
     type: workflow-intelligence
-    size: 12789
+    size: 12738
   - path: workflow-intelligence/__tests__/workflow-registry.test.js
     hash: sha256:d9488e420f584474de920e090068809a220db1bd1d49e96769f6fc3ed7a47dba
     type: workflow-intelligence

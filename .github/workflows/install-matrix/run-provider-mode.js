@@ -33,7 +33,9 @@ function count(dir, matcher) {
   console.log(JSON.stringify(metrics));
 
   const expectedClaude = includeClaude ? 172 : 0;
-  const expectedClaudeSkills = includeClaude ? 36 : 0;
+  const expectedClaudeSkills = includeClaude
+    ? count(path.join(packageRoot, '.claude', 'skills'), (entry) => entry.isDirectory())
+    : 0;
   const expectedCodex = includeCodex ? 172 : 0;
   const expectedCodexSkills = includeCodex
     ? count(path.join(packageRoot, '.agents', 'skills'), (entry) => entry.isDirectory())

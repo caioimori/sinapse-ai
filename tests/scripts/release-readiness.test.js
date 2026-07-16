@@ -34,7 +34,9 @@ describe('Story 10.29 — release-readiness', () => {
       expect(parseArgs(['--json']).json).toBe(true);
       expect(parseArgs(['--quiet']).quiet).toBe(true);
       expect(parseArgs(['-q']).quiet).toBe(true);
+      expect(parseArgs(['--skip-publish']).skipPublish).toBe(true);
       expect(parseArgs([]).json).toBe(false);
+      expect(parseArgs([]).skipPublish).toBe(false);
     });
   });
 

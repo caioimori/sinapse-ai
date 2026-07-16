@@ -1,289 +1,69 @@
-# macOS Testing Suite for SINAPSE
-**Story 1.10b - macOS Testing & Validation**
+# macOS validation
 
-Comprehensive test automation framework for validating SINAPSE installation on macOS (Intel and Apple Silicon).
+This suite validates the package produced by the current commit on native Intel
+and Apple Silicon GitHub runners. Installation tests never fetch an unreviewed
+`latest` build: they pack the checked-out repository, install that tarball in a
+temporary project, and isolate `HOME` and the npm cache.
 
----
+## CI matrix
 
-## 🚀 Quick Start
+| Runner | Architecture | Primary smoke test |
+|---|---|---|
+| `macos-15-intel` | `x86_64` | `test-intel-installation.sh` |
+| `macos-14` | `arm64` | `test-apple-silicon-installation.sh` |
 
-### Run All Tests
+The workflow also checks shell compatibility, paths, line endings, permissions,
+package-manager behavior, performance, security, and rollback behavior. See
+[macos-testing.yml](../../.github/workflows/macos-testing.yml).
 
-```bash
-cd tests/macos
-chmod +x *.sh
-./run-all-tests.sh
-```
+## Run locally
 
-### Run Specific Test
-
-```bash
-./test-intel-installation.sh        # AC1: Intel Mac
-./test-apple-silicon-installation.sh # AC2: Apple Silicon
-./test-shell-compatibility.sh       # AC3: Bash/Zsh
-# ... etc
-```
-
----
-
-## 📦 What's Included
-
-### Test Scripts (10 files)
-
-| Script | AC | Description | Duration |
-|--------|----|---------|----|
-| `test-intel-installation.sh` | AC1 | Intel Mac installation validation | ~10 min |
-| `test-apple-silicon-installation.sh` | AC2 | Apple Silicon (M1/M2/M3) validation | ~10 min |
-| `test-shell-compatibility.sh` | AC3 | Bash/Zsh shell compatibility | ~5 min |
-| `test-path-handling.sh` | AC4 | Path handling & symlinks | ~3 min |
-| `test-line-endings.sh` | AC5 | LF line ending verification | ~2 min |
-| `test-permissions.sh` | AC6 | File permission validation | ~3 min |
-| `test-homebrew-integration.sh` | AC7 | Homebrew & package managers | ~5 min |
-| `test-performance.sh` | AC8 | Performance benchmarks | ~10 min |
-| `test-security.sh` | AC9 | Security compliance (Gatekeeper, TCC, SIP) | ~5 min |
-| `test-error-recovery.sh` | AC10 | Error handling & rollback | ~10 min |
-
-**Total estimated time:** ~63 minutes
-
-### Test Infrastructure
-
-- **`run-all-tests.sh`** - Master test runner
-  - Executes all tests in sequence
-  - Generates comprehensive report
-  - Skips architecture-incompatible tests automatically
-  - Outputs color-coded results
-
-### Documentation
-
-- **`MANUAL-TESTING-GUIDE.md`** - Complete manual testing guide
-  - Step-by-step procedures
-  - Troubleshooting section
-  - Issue reporting template
-
----
-
-## 🎯 Test Coverage
-
-### Acceptance Criteria Coverage: 100%
-
-- ✅ **AC1:** Intel Mac installation support
-- ✅ **AC2:** Apple Silicon (M1/M2/M3) support
-- ✅ **AC3:** Shell compatibility (Bash & Zsh)
-- ✅ **AC4:** Path handling (forward slashes, tilde, symlinks)
-- ✅ **AC5:** Line endings (LF not CRLF)
-- ✅ **AC6:** File permissions (executable scripts, correct ownership)
-- ✅ **AC7:** Package manager integration (Homebrew, npm, yarn, pnpm)
-- ✅ **AC8:** Performance benchmarks (installation < 5min, health check < 10s)
-- ✅ **AC9:** Security compliance (Gatekeeper, code signing, TCC permissions)
-- ✅ **AC10:** Error recovery (rollback, error messages, system info logging)
-
----
-
-## 🔧 Prerequisites
-
-### System Requirements
-
-- **macOS Version:** 10.15 (Catalina) or newer
-- **Architecture:** Intel (x86_64) or Apple Silicon (arm64)
-- **Node.js:** Version 18+
-- **npm:** Included with Node.js
-- **Bash/Zsh:** Pre-installed on macOS
-
-### Optional
-
-- **Homebrew:** For package management tests
-- **Git:** For line ending tests
-
----
-
-## 📊 Test Output
-
-Each test produces:
-
-1. **Console Output:**
-   - Color-coded results (green = pass, red = fail, yellow = skip)
-   - Real-time progress indicators
-   - Summary statistics
-
-2. **Log Files:**
-   - Location: `/tmp/sinapse-test-*.log`
-   - Timestamped filenames
-   - Complete system information
-   - Detailed test results
-
-3. **Summary Report:**
-   - Total tests run
-   - Pass/fail/skip counts
-   - Overall status (PASS/FAIL)
-
----
-
-## 🤖 CI/CD Integration
-
-### GitHub Actions Workflow
-
-Location: `.github/workflows/macos-testing.yml`
-
-**Features:**
-- Parallel execution on Intel (macos-13) and Apple Silicon (macos-14) runners
-- Automated test reporting
-- Artifact collection (logs, summaries)
-- PR comment integration
-- Performance comparison between architectures
-
-**Triggers:**
-- Push to `main` or `develop`
-- Pull requests
-- Manual workflow dispatch
-
----
-
-## 📖 Usage Examples
-
-### Run All Tests with Report
-
-```bash
-./run-all-tests.sh
-# View report at: /tmp/sinapse-macos-test-report-*.txt
-```
-
-### Run Specific AC Test
-
-```bash
-./run-all-tests.sh --test AC1
-./run-all-tests.sh --test AC8
-```
-
-### Check Test Help
-
-```bash
-./run-all-tests.sh --help
-```
-
-### Manual Test Execution
-
-Follow the guide:
-```bash
-open MANUAL-TESTING-GUIDE.md
-# Or: cat MANUAL-TESTING-GUIDE.md
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Tests Not Executable
+On macOS:
 
 ```bash
 chmod +x tests/macos/*.sh
+tests/macos/run-all-tests.sh
 ```
 
-### Architecture Mismatch
-
-Some tests automatically skip on incompatible architectures:
-- `test-intel-installation.sh` - Skips on Apple Silicon
-- `test-apple-silicon-installation.sh` - Skips on Intel
-
-This is **expected behavior**.
-
-### Permission Denied
+Run one acceptance criterion:
 
 ```bash
-# Run tests from your home directory or user-writable location
-cd ~/path/to/sinapse-ai/tests/macos
-./run-all-tests.sh
+tests/macos/run-all-tests.sh --test AC1
+tests/macos/run-all-tests.sh --test AC8
 ```
 
-### Missing Dependencies
-
-Install required tools:
-```bash
-# Homebrew (optional but recommended)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Node.js 18+
-brew install node@20
-# Or download from: https://nodejs.org/
-```
-
----
-
-## 📝 Reporting Issues
-
-### Information to Include
-
-1. **System Information:**
-   ```bash
-   sw_vers && uname -a && node --version
-   ```
-
-2. **Test Logs:**
-   - Attach all `/tmp/sinapse-test-*.log` files
-
-3. **Test Output:**
-   - Copy complete console output
-
-4. **Steps to Reproduce:**
-   - Exact commands run
-   - Environment details
-
-### Create Issue
-
-Use format:
-```
-Title: [Story 1.10b] Test Failure: AC# - Description
-Labels: testing, macos
-Body: [Include above information]
-```
-
----
-
-## 🔬 Test Architecture
-
-### Design Principles
-
-1. **Modular:** Each AC has standalone test script
-2. **Non-Destructive:** Tests don't break existing installations
-3. **Portable:** Zero external dependencies beyond macOS + Node.js
-4. **Comprehensive:** Every AC validated with multiple checks
-5. **Automated:** Can run in CI/CD or manually
-6. **Cross-Architecture:** Automatically adapts to Intel/ARM
-
-### Script Structure
-
-Each test script follows this pattern:
+The performance test stays local by default. Enable its release-only npm
+registry assertion explicitly:
 
 ```bash
-#!/bin/bash
-# Header: AC description
-set -euo pipefail
-
-# Colors and logging setup
-# Utility functions (log_info, pass_test, fail_test)
-# Test prerequisites check
-# Individual test functions
-# Main execution
+SINAPSE_VALIDATE_PUBLIC_RELEASE=true tests/macos/test-performance.sh
 ```
 
----
+The architecture-specific wrappers fail when executed on the wrong runner. The
+master runner skips the incompatible architecture automatically.
 
-## 📚 Additional Resources
+## Installation contract
 
-- **Story Document:** `docs/stories/v2.1/sprint-1/story-1.10b-macos-testing.md`
-- **Manual Guide:** `MANUAL-TESTING-GUIDE.md`
-- **CI/CD Workflow:** `.github/workflows/macos-testing.yml`
+The shared smoke test asserts that the local tarball:
 
----
+1. installs with npm without lifecycle scripts;
+2. completes `sinapse-ai install` in a temporary project;
+3. creates Claude Code and Codex integration surfaces;
+4. reports its version and help without errors; and
+5. does not write into the runner's real home directory.
 
-## ✅ Story Status
+For public installation and updates, users run:
 
-**Current Status:** InProgress
-**Implementation:** Complete (tests created, not yet executed on macOS)
-**Next Steps:** Execute tests on actual macOS systems (Intel and Apple Silicon)
+```bash
+npx sinapse-ai@latest install
+```
 
----
+## Evidence
 
-**Created by:** Quinn (QA Guardian) 🛡️
-**Date:** 2025-01-23
-**Version:** 1.0
+Scripts write timestamped logs under `/tmp/sinapse-test-*.log`. The GitHub
+workflow uploads them as artifacts and publishes a compact architecture summary
+on pull requests.
 
+For a release candidate, follow the
+[manual verification guide](MANUAL-TESTING-GUIDE.md) and attach only redacted
+logs to an issue or release record.

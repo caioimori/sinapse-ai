@@ -119,7 +119,14 @@ function extractFileList(storyContent) {
     const bullet = line.trim().match(/^[-*]\s+(.*)$/);
     if (!bullet) continue;
     const token = bullet[1].trim().split(/\s+/)[0];
-    if (token) entries.push(token.replace(/\\/g, '/').replace(/[,;]$/, ''));
+    if (token) {
+      entries.push(
+        token
+          .replace(/[,;]$/, '')
+          .replace(/^`+|`+$/g, '')
+          .replace(/\\/g, '/'),
+      );
+    }
   }
   return entries;
 }

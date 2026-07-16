@@ -71,13 +71,12 @@ describe('Onboarding smoke flow (SINAPSE-DIFF-4.0.5)', () => {
     const gettingStarted = await fs.readFile(path.join(repoRoot, 'docs', 'guides', 'getting-started.md'), 'utf8');
 
     // The public PT-BR README owns the canonical first-value path.
-    expect(readme).toContain('Comece com um comando');
+    expect(readme).toContain('Instale com um comando');
     expect(readme).toContain('npx sinapse-ai@latest install');
 
-    expect(gettingStarted).toContain('first-value');
-    expect(gettingStarted).toContain('Instalacao');
-    expect(gettingStarted).toContain('*help');
-    expect(gettingStarted).toContain('PASS');
+    expect(gettingStarted).toContain('npx sinapse-ai@latest install');
+    expect(gettingStarted).toContain('@sinapse-orqx');
+    expect(gettingStarted).toContain('$snps');
   });
 
   it('validates first-value activation signal and timing budget', () => {

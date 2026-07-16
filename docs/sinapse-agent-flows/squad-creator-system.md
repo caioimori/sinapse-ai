@@ -668,7 +668,7 @@ flowchart LR
 - [Script: squad-validator.js](../../.sinapse-ai/development/scripts/squad/squad-validator.js)
 - [Schema: squad-schema.json](../../.sinapse-ai/schemas/squad-schema.json)
 - [Agent: squad-creator.md](../../.sinapse-ai/development/agents/squad-creator.md)
-- [Command: squad-creator.md](../../.claude/agents/squad-creator.md)
+- [Claude adapter: sinapse-squad-creator.md](../../.claude/agents/sinapse-squad-creator.md)
 
 ---
 
@@ -696,4 +696,3 @@ flowchart LR
 ---
 
 *-- Craft, sempre estruturando*
-

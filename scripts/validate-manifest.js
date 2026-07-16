@@ -24,6 +24,7 @@ const {
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
   getFileType,
+  shouldExclude,
 } = require('./generate-install-manifest');
 
 /**
@@ -71,7 +72,7 @@ function getCurrentFiles() {
   // Add root files
   for (const file of ROOT_FILES_TO_COPY) {
     const filePath = path.join(sinapseCoreDir, file);
-    if (fs.existsSync(filePath)) {
+    if (!shouldExclude(file) && fs.existsSync(filePath)) {
       allFiles.push(filePath);
     }
   }
@@ -96,9 +97,12 @@ function getCurrentFiles() {
 
 /**
  * Validate manifest against current filesystem
+ * @param {Object} [options] - Optional testable inputs
+ * @param {Object} [options.manifest] - Manifest object to validate
+ * @param {Map<string, Object>} [options.currentFiles] - Current framework files
  * @returns {ValidationResult} - Validation results
  */
-function validateManifest() {
+function validateManifest(options = {}) {
   const result = {
     valid: true,
     newFiles: [],
@@ -108,7 +112,7 @@ function validateManifest() {
   };
 
   // Load manifest
-  const manifest = loadManifest();
+  const manifest = options.manifest ?? loadManifest();
   if (!manifest) {
     result.valid = false;
     result.errors.push('install-manifest.yaml not found');
@@ -122,7 +126,7 @@ function validateManifest() {
   }
 
   // Get current files
-  const currentFiles = getCurrentFiles();
+  const currentFiles = options.currentFiles ?? getCurrentFiles();
 
   // Build set of manifest paths
   const manifestPaths = new Set();
@@ -130,6 +134,12 @@ function validateManifest() {
 
   for (const entry of manifest.files) {
     const normalizedPath = entry.path.replace(/\\/g, '/');
+
+    if (shouldExclude(normalizedPath)) {
+      result.valid = false;
+      result.errors.push(`Manifest includes excluded path: ${normalizedPath}`);
+    }
+
     manifestPaths.add(normalizedPath);
     manifestMap.set(normalizedPath, entry);
   }

@@ -1,187 +1,38 @@
-# NPX Installation Guide
+# Using npx
 
-> 🌐 **EN** | [PT](../pt/npx-install.md)
-
----
-
-## Overview
-
-SINAPSE can be installed via NPX for quick setup without global installation. This guide covers proper usage and troubleshooting for NPX-based installations.
-
-## Quick Start
-
-### Correct Usage
-
-Always run `npx sinapse-ai install` **from your project directory**:
+`npx` runs the public package without requiring a permanent global installation.
 
 ```bash
-# Navigate to your project first
-cd /path/to/your/project
-
-# Then run the installer
-npx sinapse-ai install
+cd /path/to/project
+npx sinapse-ai@latest install
 ```
 
-### ⚠️ Common Mistake
+Always include `@latest` for installation and update operations so an older npx
+cache entry does not silently select stale framework code.
 
-**DO NOT** run the installer from your home directory or arbitrary locations:
+## Fresh and existing projects
+
+The same command supports both. The installer detects existing managed state,
+preserves project-owned content, and reuses a saved provider choice.
 
 ```bash
-# ❌ INCORRECT - Will fail with NPX temporary directory error
-cd ~
-npx sinapse-ai install
+# Change provider selection intentionally
+npx sinapse-ai@latest install --reconfigure
 
-# ✅ CORRECT - Navigate to project first
-cd ~/my-project
-npx sinapse-ai install
+# Refresh only managed surfaces intentionally
+npx sinapse-ai@latest install --force
 ```
 
-## Why This Matters
+Do not run installation from a home directory or npm's temporary package cache.
+The current working directory is the target project.
 
-NPX executes packages in **temporary directories** (e.g., `/private/var/folders/.../npx-xxx/` on macOS). When SINAPSE runs from these temporary locations, it cannot:
+## Deterministic reproduction
 
-- Detect your IDE configuration correctly
-- Install files to the right project directory
-- Set up IDE integrations properly
-
-## NPX Temporary Directory Detection
-
-As of version 4.31.1, SINAPSE automatically detects when it's running from an NPX temporary directory and displays a helpful error message:
-
-```
-⚠️  NPX Temporary Directory Detected
-
-NPX executes in a temporary directory, which prevents
-SINAPSE from detecting your IDE correctly.
-
-Solution:
-  cd /path/to/your/project
-  npx sinapse-ai install
-
-See: https://sinapse-ai.dev/docs/npx-install
-```
-
-## Installation Steps
-
-### Step 1: Navigate to Project
+For a bug reproduction, replace `latest` with an exact published version:
 
 ```bash
-cd /path/to/your/project
+npx sinapse-ai@1.27.0 install
 ```
 
-Your project directory should contain:
-- Package management files (`package.json`, etc.)
-- Source code directories
-
-### Step 2: Run Installer
-
-```bash
-npx sinapse-ai install
-```
-
-### Step 3: Follow Interactive Prompts
-
-The installer will ask you to:
-1. Confirm installation directory (should be current directory)
-2. Select components to install (Core + Squads)
-3. Configure IDE integrations
-4. Set up documentation organization
-
-## Platform-Specific Notes
-
-### macOS
-
-NPX temporary directories typically appear at:
-- `/private/var/folders/[hash]/T/npx-[random]/`
-- `/Users/[user]/.npm/_npx/[hash]/`
-
-SINAPSE detects these patterns and prevents incorrect installation.
-
-### Linux
-
-Similar temporary directory patterns:
-- `/tmp/npx-[random]/`
-- `~/.npm/_npx/[hash]/`
-
-### Windows
-
-Windows users typically don't encounter this issue, but similar detection patterns apply:
-- `%TEMP%\npx-[random]\`
-- `%APPDATA%\npm-cache\_npx\`
-
-## Troubleshooting
-
-### Error: "NPX Temporary Directory Detected"
-
-**Cause**: You're running the installer from your home directory or another non-project location.
-
-**Solution**:
-1. Navigate to your actual project directory:
-   ```bash
-   cd /path/to/your/actual/project
-   ```
-2. Re-run the installer:
-   ```bash
-   npx sinapse-ai install
-   ```
-
-### Wrong Installation Directory
-
-If the installer asks for a directory path:
-- ✅ Use `.` (current directory) if you're already in your project
-- ✅ Provide absolute path to your project: `/Users/you/projects/my-app`
-- ❌ Don't use `~` or relative paths that point outside your project
-
-### IDE Not Detected
-
-If your IDE isn't detected after installation:
-1. Verify you ran the installer from the correct project directory
-3. Re-run the installer and manually select your IDE
-
-## Alternative: Global Installation
-
-If you prefer not to use NPX, you can install globally:
-
-```bash
-npm install -g sinapse-ai
-cd /path/to/your/project
-sinapse-ai install
-```
-
-## Technical Details
-
-### Defense in Depth Architecture
-
-SINAPSE v4.31.1+ implements two-layer detection:
-
-1. **PRIMARY Layer** (`tools/sinapse-npx-wrapper.js`):
-   - Checks `__dirname` (where NPX extracts the package)
-   - Uses regex patterns for macOS temp paths
-   - Early exit before delegation to CLI
-
-2. **SECONDARY Layer** (`tools/installer/bin/sinapse.js`):
-   - Fallback check using `process.cwd()`
-   - Validates at start of install command
-   - Provides redundancy if wrapper bypassed
-
-### Detection Patterns
-
-```javascript
-const patterns = [
-  /\/private\/var\/folders\/.*\/npx-/,  // macOS temp
-  /\/\.npm\/_npx\//                      // NPX cache
-];
-```
-
-## Support
-
-For additional help:
-- GitHub Issues: https://github.com/SinapseAIinc/sinapse-ai/issues
-- Documentation: https://sinapse-ai.dev/docs
-- Story Reference: 2.3 - NPX Installation Context Detection
-
----
-
-**Version**: 4.31.1+
-**Last Updated**: 2025-10-22
-**Applies To**: macOS (primary), Linux/Windows (detection available)
+Use exact versions only for diagnostics or controlled CI. Normal users should
+return to `@latest` after reproducing the issue.

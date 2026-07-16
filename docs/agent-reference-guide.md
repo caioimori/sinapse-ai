@@ -1,106 +1,83 @@
-# Agent Reference Guide — SINAPSE-AI
+# Agent Reference
 
-> Referência rápida dos **172 agentes** organizados em **17 squads** + **12 framework agents**. Total: 1.200 tasks executáveis.
+> **English** | [Português](pt/agent-reference-guide.md)
 
-## Como invocar
+SINAPSE includes **172 specialized agents**: **12 framework roles** and **160
+specialists in the squad layer** across **17 squads**. The ecosystem includes
+**18 orchestrators**: one supreme
+orchestrator and one orchestrator per squad.
 
-```
-@<agent-name>
-*<command>
-```
+The task inventory currently contains **1,201 squad tasks**, **211 development
+tasks**, **1,412 task files**, and **1,348 pointers resolvable** by the
+Codex runtime. These numbers are measured from source and validated in CI.
 
-Exemplos:
-- `@developer` → ativa agente de implementação
-- `@architect` → ativa agente de arquitetura
-- `*help` → lista comandos do agente ativo
+| Provider surface | Claude Code | Codex |
+|---|:---:|:---:|
+| Installed skills | 37 | 37 |
+| Registered hooks | 20 native registrations | 9 lifecycle events |
 
-## Framework Agents (12) — Workflow de Desenvolvimento
+## Start with the orchestrator
 
-Localização: `.sinapse-ai/development/agents/`
+| Provider | Activation |
+|---|---|
+| Claude Code | `@sinapse-orqx` |
+| Codex | `$snps` |
 
-| Agente | Persona | Domínio |
-|---|---|---|
-| `@developer` | Pixel | Implementação de código |
-| `@architect` | Stratum | Arquitetura de sistemas |
-| `@product-lead` | Axis | Validação de stories (PO) |
-| `@project-lead` | Beacon | Orquestração de epics (PM) |
-| `@sprint-lead` | Sync | Criação de stories (SM) |
-| `@quality-gate` | Litmus | Testes + quality gates (QA) |
-| `@analyst` | Scope | Pesquisa + análise |
-| `@data-engineer` | Tensor | Database + queries |
-| `@ux-design-expert` | Mosaic | UX/UI + design system |
-| `@devops` | Pipeline | CI/CD + push EXCLUSIVE |
-| `@squad-creator` | — | Cria squads customizados |
-| `@snps-orqx` | Imperator | Master orchestrator |
+The orchestrator classifies the request and delegates execution. Use a direct
+activation only when the responsible role is already clear.
 
-## Squad Orchestrators (17) — Especialistas por Domínio
+## Framework agents
 
-| Squad | Orchestrator | Domínio principal |
-|---|---|---|
-| squad-brand | `@brand-orqx` | Branding, identidade visual, MVV |
-| squad-copy | `@copy-orqx` | Copywriting, persuasão, ads |
-| squad-content | `@content-orqx` | Conteúdo, editorial, SEO |
-| squad-design | `@design-orqx` | Design system, UI, wireframes, art direction (LP/site/premium) |
-| squad-animations | `@animations-orqx` | Motion, GSAP, Three.js, shaders |
-| squad-product | `@product-orqx` | Product discovery, roadmap |
-| squad-commercial | `@commercial-orqx` | Vendas, CRM, funil |
-| squad-finance | `@finance-orqx` | Pricing, P&L, projeções |
-| squad-growth | `@growth-orqx` | SEO, analytics, CRO |
-| squad-paidmedia | `@paidmedia-orqx` | Meta, Google, TikTok ads |
-| squad-cybersecurity | `@cyber-orqx` | Pentest, LGPD, compliance |
-| squad-research | `@research-orqx` | Pesquisa profunda, MS |
-| squad-cloning | `@cloning-orqx` | Clonagem cognitiva (DNA) |
-| squad-courses | `@courses-orqx` | Cursos, mentorias, lançamento |
-| squad-storytelling | `@storytelling-orqx` | Pitch, narrativa |
-| squad-council | `@council-orqx` | Conselho estratégico (mental models) |
-| claude-code-mastery | `@swarm-orqx` | Claude Code mastery (hooks, MCP, skills) |
+| Role | Claude Code | Codex | Authority |
+|---|---|---|---|
+| Developer | `@developer` | `$sinapse-agent developer` | Implementation and fixes |
+| Architect | `@architect` | `$sinapse-agent architect` | System architecture |
+| Quality Gate | `@quality-gate` | `$sinapse-agent quality-gate` | Testing and gate decisions |
+| DevOps | `@devops` | `$sinapse-agent devops` | Push, pull requests, and releases |
+| Sprint Lead | `@sprint-lead` | `$sinapse-agent sprint-lead` | Story drafting |
+| Product Lead | `@product-lead` | `$sinapse-agent product-lead` | Story validation and backlog |
+| Project Lead | `@project-lead` | `$sinapse-agent project-lead` | Product requirements and epics |
+| Analyst | `@analyst` | `$sinapse-agent analyst` | Research and analysis |
+| Data Engineer | `@data-engineer` | `$sinapse-agent data-engineer` | Data architecture and migrations |
+| UX Design Expert | `@ux-design-expert` | `$sinapse-agent ux-design-expert` | UX, UI, and accessibility |
+| Squad Creator | `@squad-creator` | `$sinapse-agent squad-creator` | Squad design and validation |
+| Supreme Orchestrator | `@sinapse-orqx` | `$snps` | Cross-squad routing |
 
-## Como descobrir agentes de um squad
+Agent authority remains exclusive. In particular, only DevOps may push, open or
+merge a pull request, or execute a release.
 
-```
-@<squad>-orqx
-*help
-```
+## Discover every agent and task
 
-Ou liste arquivos:
+The complete catalog is resolved from source at runtime, so this document does
+not maintain a second list that can drift.
 
 ```bash
-ls squads/squad-design/agents/    # 15 agentes do squad-design
-ls squads/squad-brand/agents/     # 15 agentes do squad-brand
+# Exact ecosystem counts
+node .codex/scripts/resolve-codex-agent.js --stats
+
+# Agent definition and every task it can resolve
+node .codex/scripts/resolve-codex-agent.js <agent-id>
+
+# A specific command or task pointer
+node .codex/scripts/resolve-codex-agent.js <agent-id> <command>
 ```
 
-## Auto-routing
+Examples:
 
-Você **não precisa** decorar agent names. Mande seu pedido em linguagem natural — o framework roteia automaticamente:
-
-| Você diz | Sistema delega pra |
-|---|---|
-| "cria um headline pra LP" | `@copy-orqx` → headline-specialist |
-| "audita a marca X" | `@brand-orqx` → brand-auditor |
-| "implementa essa feature" | `@sprint-lead` (cria story) → `@developer` |
-| "faz deploy" | `@devops` (exclusive) |
-
-Detalhes em [`.claude/rules/squad-awareness.md`](../.claude/rules/squad-awareness.md).
-
-## Estrutura interna de cada squad
-
-```
-squads/{squad-name}/
-├── squad.yaml                  # metadata + dependencies
-├── agents/                     # personas (.md)
-├── tasks/                      # workflows executáveis
-└── knowledge-base/             # KB própria do squad
+```bash
+node .codex/scripts/resolve-codex-agent.js brand-orqx
+node .codex/scripts/resolve-codex-agent.js meta-ads-specialist
+node .codex/scripts/resolve-codex-agent.js developer develop
 ```
 
-## Mais informação
+## Operating contract
 
-| Tema | Onde |
-|---|---|
-| Como criar agente novo | [`CONTRIBUTING.md`](../CONTRIBUTING.md) |
-| Como criar squad novo | `@squad-creator *help` |
-| Workflow Story Development Cycle | [`docs/sinapse-workflows/story-development-cycle-workflow.md`](sinapse-workflows/story-development-cycle-workflow.md) |
-| Constitution (10 artigos) | [`.sinapse-ai/constitution.md`](../.sinapse-ai/constitution.md) |
+- Orchestrators route and coordinate; specialists execute.
+- Code implementation normally starts from a validated story.
+- Claude Code and Codex resolve the same canonical agent and task sources.
+- Agent definitions live in `.sinapse-ai/development/agents/` and `squads/`.
+- Provider adapters are validated with `npm run validate:parity`.
 
----
-
-*172 agentes especializados. 1.200 tasks. 17 hooks ativos. 11 artigos constitucionais. Tudo direto no terminal.*
+Continue with [Getting Started](getting-started.md), the
+[workflow catalog](sinapse-workflows/README.md), or the
+[squads overview](guides/squads-overview.md).

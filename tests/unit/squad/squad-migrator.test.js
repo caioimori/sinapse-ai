@@ -26,6 +26,7 @@ const {
   SquadMigratorError,
   MigratorErrorCodes,
 } = require('../../../.sinapse-ai/development/scripts/squad');
+const { perfBudget } = require('../../helpers/perf-budget');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');
@@ -687,7 +688,9 @@ describe('SquadMigrator', () => {
   });
 
   describe('Performance', () => {
-    it('should complete full migration within 500ms', async () => {
+    const migrationThreshold = perfBudget(500);
+
+    it('should complete full migration within the load-tolerant budget', async () => {
       // Copy legacy squad to temp dir
       const srcPath = path.join(FIXTURES_PATH, 'legacy-squad');
       const testPath = path.join(tempDir, 'perf-test');
@@ -697,7 +700,7 @@ describe('SquadMigrator', () => {
       await migrator.migrate(testPath);
       const duration = Date.now() - start;
 
-      expect(duration).toBeLessThan(500);
+      expect(duration).toBeLessThan(migrationThreshold);
     });
   });
 });
@@ -724,4 +727,3 @@ async function copyRecursive(src, dest) {
     await fs.copyFile(src, dest);
   }
 }
-

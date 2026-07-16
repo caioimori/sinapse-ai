@@ -12,16 +12,18 @@ jobs:
   size-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - name: Check PR size
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        shell: bash
         run: |
-          ADDITIONS=$(gh pr view ${{ github.event.pull_request.number }} --json additions -q '.additions')
-          DELETIONS=$(gh pr view ${{ github.event.pull_request.number }} --json deletions -q '.deletions')
+          ADDITIONS=$(gh pr view "$PR_NUMBER" --json additions -q '.additions')
+          DELETIONS=$(gh pr view "$PR_NUMBER" --json deletions -q '.deletions')
           TOTAL=$((ADDITIONS + DELETIONS))
-          echo "PR #${{ github.event.pull_request.number }}: +$ADDITIONS -$DELETIONS ($TOTAL total)"
+          echo "PR #${PR_NUMBER}: +$ADDITIONS -$DELETIONS ($TOTAL total)"
 
           if [ "$ADDITIONS" -gt 400 ]; then
             echo "::notice::Large PR ($ADDITIONS additions). Consider splitting for faster review."
           fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
