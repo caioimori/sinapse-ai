@@ -70,8 +70,9 @@ describe('Onboarding smoke flow (SINAPSE-DIFF-4.0.5)', () => {
     const readme = await fs.readFile(path.join(repoRoot, 'README.md'), 'utf8');
     const gettingStarted = await fs.readFile(path.join(repoRoot, 'docs', 'guides', 'getting-started.md'), 'utf8');
 
-    expect(readme).toContain('Quick Start');
-    expect(readme).toContain('npx sinapse-ai install');
+    // The public PT-BR README owns the canonical first-value path.
+    expect(readme).toContain('Comece com um comando');
+    expect(readme).toContain('npx sinapse-ai@latest install');
 
     expect(gettingStarted).toContain('first-value');
     expect(gettingStarted).toContain('Instalacao');
