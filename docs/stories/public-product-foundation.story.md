@@ -92,6 +92,9 @@ depender de conhecimento interno dos mantenedores.
   testes afetados aprovados.
 - O follow-up final do CodeRabbit passou 3/3 suites e 22/22 testes focados, além
   de `bash -n` no teste de performance macOS e nova validação dos Articles IV/VII.
+- A repetição remota expôs um teste legado de wall clock do `SquadMigrator` que
+  oscilou para 509 ms contra 500 ms. Ele passou a usar o helper canônico
+  `perfBudget(500)`, preservando o orçamento nominal e tolerando carga de runner.
 - A suíte completa concluiu 423 suites e 11.730 testes aprovados; 16 suites e
   176 testes foram ignorados de forma declarada, com 8 itens `todo`. O Jest
   manteve o aviso conhecido de um worker encerrado de forma forçada, sem alterar
@@ -248,6 +251,7 @@ depender de conhecimento interno dos mantenedores.
 - `tests/security/secret-scanning.test.js`
 - `tests/unit/validate-article-iv.test.js`
 - `tests/unit/generate-greeting.test.js`
+- `tests/unit/squad/squad-migrator.test.js`
 - `tests/scripts/release-readiness.test.js`
 - `tests/scripts/validate-install-docs.test.js`
 - `tests/scripts/validate-no-external-refs.test.js`

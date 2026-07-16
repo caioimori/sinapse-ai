@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-16T16:51:06.855Z'
+  lastUpdated: '2026-07-16T17:41:11.649Z'
   entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -106,8 +106,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:1231de67f3595ef73e8f27cc44d7928d2d2d02ef4732ad8d6022cf27d089d3a1
-      lastVerified: '2026-07-16T16:11:53.221Z'
+      checksum: sha256:54b4954f492027e240ffb5e038a3b39b98d2eeefb74e6f0b0376c226565b7c9e
+      lastVerified: '2026-07-16T17:41:11.340Z'
     ideate:
       path: bin/commands/ideate.js
       layer: L1
