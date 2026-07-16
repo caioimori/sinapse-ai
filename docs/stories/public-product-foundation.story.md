@@ -88,14 +88,14 @@ depender de conhecimento interno dos mantenedores.
   37 skills por provider; React Bits e squad de animacoes foram encontrados no
   pacote gerado.
 - Gates finais: docs 28/28, Article VII, paridade, 13/13 guards, lint sem erros,
-  typecheck, actionlint 1.7.12, 26/26 YAMLs parseados e 9/9 suites com 224/224
+  typecheck, actionlint 1.7.12, 26/26 YAMLs parseados e 9/9 suítes com 224/224
   testes afetados aprovados.
-- O follow-up final do CodeRabbit passou 3/3 suites e 22/22 testes focados, além
-  de `bash -n` no teste de performance macOS e nova validação dos Articles IV/VII.
+- O acompanhamento final do CodeRabbit passou 3/3 suítes e 22/22 testes focados, além
+  de `bash -n` no teste de desempenho do macOS e nova validação dos Articles IV/VII.
 - A repetição remota expôs um teste legado de wall clock do `SquadMigrator` que
   oscilou para 509 ms contra 500 ms. Ele passou a usar o helper canônico
   `perfBudget(500)`, preservando o orçamento nominal e tolerando carga de runner.
-- A suíte completa concluiu 423 suites e 11.730 testes aprovados; 16 suites e
+- A suíte completa concluiu 423 suítes e 11.730 testes aprovados; 16 suítes e
   176 testes foram ignorados de forma declarada, com 8 itens `todo`. O Jest
   manteve o aviso conhecido de um worker encerrado de forma forçada, sem alterar
   o exit code verde.

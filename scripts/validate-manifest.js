@@ -97,9 +97,12 @@ function getCurrentFiles() {
 
 /**
  * Validate manifest against current filesystem
+ * @param {Object} [options] - Optional testable inputs
+ * @param {Object} [options.manifest] - Manifest object to validate
+ * @param {Map<string, Object>} [options.currentFiles] - Current framework files
  * @returns {ValidationResult} - Validation results
  */
-function validateManifest() {
+function validateManifest(options = {}) {
   const result = {
     valid: true,
     newFiles: [],
@@ -109,7 +112,7 @@ function validateManifest() {
   };
 
   // Load manifest
-  const manifest = loadManifest();
+  const manifest = options.manifest ?? loadManifest();
   if (!manifest) {
     result.valid = false;
     result.errors.push('install-manifest.yaml not found');
@@ -123,7 +126,7 @@ function validateManifest() {
   }
 
   // Get current files
-  const currentFiles = getCurrentFiles();
+  const currentFiles = options.currentFiles ?? getCurrentFiles();
 
   // Build set of manifest paths
   const manifestPaths = new Set();

@@ -14,6 +14,7 @@ const {
   FOLDERS_TO_COPY,
   ROOT_FILES_TO_COPY,
 } = require('../../scripts/generate-install-manifest');
+const { validateManifest } = require('../../scripts/validate-manifest');
 
 describe('generate-install-manifest', () => {
   describe('FOLDERS_TO_COPY', () => {
@@ -198,6 +199,20 @@ describe('generate-install-manifest', () => {
       const excludedPaths = manifest.files.map(file => file.path).filter(shouldExclude);
 
       expect(excludedPaths).toEqual([]);
+    });
+  });
+
+  describe('validateManifest', () => {
+    it('should reject a manifest fixture containing an excluded path', () => {
+      const result = validateManifest({
+        manifest: {
+          files: [{ path: 'index.d.ts', hash: 'sha256:fixture' }],
+        },
+        currentFiles: new Map(),
+      });
+
+      expect(result.valid).toBe(false);
+      expect(result.errors).toContain('Manifest includes excluded path: index.d.ts');
     });
   });
 });
