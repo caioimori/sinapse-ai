@@ -1,7 +1,5 @@
 # Comunidade SINAPSE
 
-> 🇺🇸 [English Version](COMMUNITY.md)
-
 Bem-vindo à comunidade SINAPSE!
 
 Estamos construindo o futuro do desenvolvimento orquestrado por IA juntos.

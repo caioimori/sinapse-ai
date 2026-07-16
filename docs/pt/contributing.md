@@ -1,6 +1,6 @@
 # Contribuindo para o SINAPSE
 
-> **[English Version](CONTRIBUTING.md)**
+> **[English Version](../../CONTRIBUTING.md)**
 
 Bem-vindo ao SINAPSE! Obrigado pelo seu interesse em contribuir. Este guia vai ajuda-lo a entender nosso fluxo de trabalho, processo de contribuicao e como submeter suas alteracoes.
 
@@ -559,4 +559,3 @@ Correcoes comuns:
 ---
 
 **Obrigado por contribuir para o SINAPSE!**
-

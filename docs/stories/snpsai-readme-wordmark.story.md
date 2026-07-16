@@ -30,17 +30,20 @@ produto sem uma ilustracao generica ou uma reinterpretacao da identidade.
 
 ## Acceptance Criteria
 
-- [x] AC1: `README.md` e `README.en.md` exibem exatamente as seis linhas do
-  wordmark `SNPS AI` usado pelo instalador.
-- [x] AC2: Nenhum README referencia imagem gerada ou hero generico.
-- [x] AC3: O ativo `docs/assets/sinapse-ai-github-hero.png` e removido.
-- [x] AC4: Badges, links e comandos de instalacao permanecem inalterados.
-- [x] AC5: Validacoes de Markdown, documentacao, rastreabilidade e metricas
-  passam antes da entrega.
-- [x] AC6: Nenhum path protegido L1/L2 ou alteracao preexistente do worktree
-  original e modificado.
-- [x] AC7: O workflow `welcome` usa os inputs documentados pela action pinada e
-  nao falha ao receber uma nova issue ou um novo pull request.
+- [x] AC1: Given `README.md` e `README.en.md`, When o topo e comparado ao
+  instalador, Then as seis linhas do wordmark `SNPS AI` sao identicas.
+- [x] AC2: Given os READMEs publicos, When suas midias sao inspecionadas, Then
+  nenhuma imagem gerada ou hero generico e referenciado.
+- [x] AC3: Given o ativo rejeitado, When `main` e consultada, Then
+  `docs/assets/sinapse-ai-github-hero.png` nao existe.
+- [x] AC4: Given a troca do wordmark, When o restante dos READMEs e comparado,
+  Then badges, links e comandos de instalacao permanecem inalterados.
+- [x] AC5: Given a mudanca documental, When os gates aplicaveis sao executados,
+  Then Markdown, rastreabilidade e metricas passam.
+- [x] AC6: Given o checkout original e os paths L1/L2, When o diff e auditado,
+  Then nenhuma alteracao preexistente ou protegida e modificada.
+- [x] AC7: Given o workflow `welcome`, When uma issue ou um PR e aberto, Then a
+  action pinada recebe os inputs documentados sem falhar.
 
 ## Out of scope
 
