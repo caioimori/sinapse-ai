@@ -7,7 +7,8 @@
  * without wiping existing install artifacts.
  */
 
-const { detectExistingInstall, promptLlmChoice } = require('../../bin/cli');
+const { resolveLlmChoice } = require('../../bin/commands/install');
+const { promptLlmChoice } = require('../../bin/lib/prompts');
 
 describe('Story 10.35 — Install --reconfigure flag', () => {
   let originalIsTTY;
@@ -57,24 +58,43 @@ describe('Story 10.35 — Install --reconfigure flag', () => {
   });
 
   describe('skip logic — LLM selection', () => {
-    /**
-     * Standard installs are deterministic and provision both providers; only
-     * explicit reconfiguration opens a provider prompt.
-     */
-    function shouldPromptLlmChoice({ reconfigure }) {
-      return Boolean(reconfigure);
-    }
-
-    test('upsert without reconfigure preserves the saved provider without prompting', () => {
-      expect(shouldPromptLlmChoice({ isUpsert: true, reconfigure: false, existingLlm: 'claude-code' })).toBe(false);
+    test('an explicit provider flag wins over saved configuration', async () => {
+      const prompt = jest.fn();
+      await expect(resolveLlmChoice({
+        requestedLlm: 'codex',
+        isUpsert: true,
+        existingLlm: 'claude-code',
+        prompt,
+      })).resolves.toBe('codex');
+      expect(prompt).not.toHaveBeenCalled();
     });
 
-    test('upsert with reconfigure opens the LLM prompt', () => {
-      expect(shouldPromptLlmChoice({ isUpsert: true, reconfigure: true, existingLlm: 'claude-code' })).toBe(true);
+    test('upsert without reconfigure preserves the saved provider without prompting', async () => {
+      const prompt = jest.fn();
+      await expect(resolveLlmChoice({
+        isUpsert: true,
+        existingLlm: 'claude-code',
+        prompt,
+      })).resolves.toBe('claude-code');
+      expect(prompt).not.toHaveBeenCalled();
     });
 
-    test('fresh install defaults to both providers without a prompt', () => {
-      expect(shouldPromptLlmChoice({ isUpsert: false, reconfigure: false, existingLlm: null })).toBe(false);
+    test('reconfigure opens the production prompt even with a saved provider', async () => {
+      const prompt = jest.fn().mockResolvedValue('codex');
+      await expect(resolveLlmChoice({
+        isUpsert: true,
+        reconfigure: true,
+        existingLlm: 'claude-code',
+        prompt,
+      })).resolves.toBe('codex');
+      expect(prompt).toHaveBeenCalledTimes(1);
+    });
+
+    test('fresh and legacy-unconfigured installs default to both without prompting', async () => {
+      const prompt = jest.fn();
+      await expect(resolveLlmChoice({ prompt })).resolves.toBe('both');
+      await expect(resolveLlmChoice({ isUpsert: true, prompt })).resolves.toBe('both');
+      expect(prompt).not.toHaveBeenCalled();
     });
   });
 

@@ -35,10 +35,10 @@ From your project directory, run:
 npx sinapse-ai@latest install
 ```
 
-This is the canonical path for both fresh and existing projects. With no flags,
-it configures **Claude Code and Codex**. Re-runs are idempotent upserts that
-preserve project-owned content. To intentionally install one provider only, use
-`--llm=claude-code` or `--llm=codex`.
+This is the canonical path for fresh or unconfigured projects. With no flags,
+it configures **Claude Code and Codex**. Re-runs preserve the saved provider
+and project-owned content. To intentionally install one provider only, use
+`--llm=claude-code` or `--llm=codex`; use `--reconfigure` to change an existing selection.
 
 ```text
 install -> native agents and skills -> rules and hooks -> ready project
@@ -98,8 +98,9 @@ npx sinapse-ai@latest status
 ```
 
 `install --force` reinstalls managed surfaces. `install --reconfigure` opens
-provider selection. `install --global-only` configures only global adapters and
-does not change the current project.
+provider selection only in interactive terminals; non-interactive runs use both.
+`install --global-only` configures only global adapters and does not change the
+current project.
 
 ## Architecture that respects the project
 

@@ -14,7 +14,7 @@ const os = require('os');
 const fs = require('fs');
 const fse = require('fs-extra');
 
-const { promptLlmChoice } = require('../../bin/cli');
+const { promptLlmChoice } = require('../../bin/lib/prompts');
 const { promptFileExists } = require('../../packages/installer/src/wizard/ide-config-generator');
 
 describe('Story 10.33 — Install non-TTY handling', () => {

@@ -134,19 +134,17 @@ async function cmdInstallGlobal(opts = {}) {
 
   // LLM selection (skipped in upsert mode if previous llm known)
   // Story 10.35: --reconfigure forces prompt even in upsert mode
-  let llmChoice;
-  let llmWasReused = false;
-  if (requestedLlm) {
-    llmChoice = requestedLlm;
-  } else if (isUpsert && !reconfigure && existing.llm) {
-    llmChoice = existing.llm;
-    llmWasReused = true;
+  const llmChoice = await resolveLlmChoice({
+    requestedLlm,
+    isUpsert,
+    reconfigure,
+    existingLlm: existing.llm,
+  });
+  const llmWasReused = Boolean(isUpsert && !reconfigure && !requestedLlm && existing.llm);
+  if (llmWasReused) {
     const ideLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
     logger.always(`${DIM}  IDE: ${ideLabel} (from saved config; pass --reconfigure to change)${NC}`);
-  } else if (reconfigure) {
-    llmChoice = await promptLlmChoice();
-  } else {
-    llmChoice = 'both';
+  } else if (!requestedLlm && !reconfigure) {
     logger.always(`${DIM}  IDE: Claude Code + Codex (padrao; use --llm para limitar)${NC}`);
   }
   if (languageWasReused || llmWasReused) logger.always('');
@@ -383,6 +381,24 @@ async function cmdInstallGlobal(opts = {}) {
     logger.always(`    ${CYAN}@brand-orqx${NC}`);
   }
   logger.always('');
+}
+
+/**
+ * Resolves provider selection independently of filesystem writes and prompts.
+ * Explicit flags win; existing configured installs remain stable until the
+ * user reconfigures them; fresh or legacy-unconfigured installs use both.
+ */
+async function resolveLlmChoice({
+  requestedLlm = null,
+  isUpsert = false,
+  reconfigure = false,
+  existingLlm = null,
+  prompt = promptLlmChoice,
+} = {}) {
+  if (requestedLlm) return requestedLlm;
+  if (isUpsert && !reconfigure && existingLlm) return existingLlm;
+  if (reconfigure) return prompt();
+  return 'both';
 }
 
 // ── Transactional install helpers (follow-up #13) ────────────────────────────
@@ -874,6 +890,7 @@ function ensurePathWindows() {
 
 module.exports = {
   cmdInstallGlobal,
+  resolveLlmChoice,
   generateCommandMd,
   generateSquadAwareness,
   createLauncher,

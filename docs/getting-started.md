@@ -4,7 +4,7 @@
 
 ## Pré-requisitos
 
-- **Node.js** ≥ 20 (LTS recomendado)
+- **Node.js** ≥ 18 (LTS recomendado)
 - **Claude Code** ou **Codex CLI** instalado
 - **Git** (pra colaboração)
 
@@ -14,7 +14,7 @@
 npx sinapse-ai@latest install
 ```
 
-O wizard detecta seu ambiente, instala Claude Code e Codex por padrao, instala os 17 squads e configura os hooks essenciais automaticamente. Use `--llm=claude-code` ou `--llm=codex` somente quando quiser limitar a instalacao a um provider.
+O wizard detecta seu ambiente e, em instalações novas ou sem provider salvo, instala Claude Code e Codex por padrão, além dos 17 squads e hooks essenciais. Instalações existentes preservam o provider salvo; use `--reconfigure` para alterá-lo. Use `--llm=claude-code` ou `--llm=codex` somente quando quiser limitar a instalação a um provider.
 
 ## Validar setup
 
