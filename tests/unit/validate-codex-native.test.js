@@ -22,8 +22,8 @@ describe('validate-codex-native', () => {
           'max_depth = 1',
           '[features]',
           'hooks = true',
-        ].join('\n')
-      )
+        ].join('\n'),
+      ),
     ).toEqual({
       name: 'reviewer',
       description: 'Review changes',
@@ -49,7 +49,7 @@ describe('validate-codex-native', () => {
         ok: true,
         errors: [],
         metrics: expect.objectContaining({ nativeAgents: 172 }),
-      })
+      }),
     );
   });
 });

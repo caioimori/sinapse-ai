@@ -19,7 +19,7 @@ const os = require('os');
 const path = require('path');
 
 const TEMPLATES = path.join(
-  __dirname, '..', '..', '.sinapse-ai', 'product', 'templates', 'statusline'
+  __dirname, '..', '..', '.sinapse-ai', 'product', 'templates', 'statusline',
 );
 const TRACK_AGENT = path.join(TEMPLATES, 'track-agent.cjs');
 const TRACK_DELEGATION = path.join(TEMPLATES, 'track-delegation.cjs');
@@ -84,7 +84,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     fs.mkdirSync(path.join(home, '.claude', 'session-cache'), { recursive: true });
     fs.writeFileSync(
       path.join(home, '.claude', 'agent-badges.json'),
-      JSON.stringify(BADGES_FIXTURE)
+      JSON.stringify(BADGES_FIXTURE),
     );
     cacheFile = path.join(home, '.claude', 'session-cache', `${simpleHash(work)}.json`);
   });
@@ -204,7 +204,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     });
     // Turn 1: stale → suppressed.
     expect(
-      extractContext(runHook(TRACK_AGENT, { prompt: 'oi' }, { home, cwd: work }).stdout)
+      extractContext(runHook(TRACK_AGENT, { prompt: 'oi' }, { home, cwd: work }).stdout),
     ).toBeNull();
     // Stop hook refreshes `updated` — the freshness point must stay frozen.
     spawnSync(process.execPath, [TRACK_CLEAR], {
@@ -215,16 +215,16 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     });
     // Turn 2 (the old resurrection path): must remain dead.
     expect(
-      extractContext(runHook(TRACK_AGENT, { prompt: 'e agora' }, { home, cwd: work }).stdout)
+      extractContext(runHook(TRACK_AGENT, { prompt: 'e agora' }, { home, cwd: work }).stdout),
     ).toBeNull();
     // Delegation writes must not resurrect it either.
     runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'brand-auditor' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     expect(
-      extractContext(runHook(TRACK_AGENT, { prompt: 'segue' }, { home, cwd: work }).stdout)
+      extractContext(runHook(TRACK_AGENT, { prompt: 'segue' }, { home, cwd: work }).stdout),
     ).toBeNull();
   });
 
@@ -247,7 +247,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     const cache = readCache();
     expect(cache.voiceTs).toBeGreaterThan(0); // frozen at original activity time
     expect(
-      extractContext(runHook(TRACK_AGENT, { prompt: 'oi' }, { home, cwd: work }).stdout)
+      extractContext(runHook(TRACK_AGENT, { prompt: 'oi' }, { home, cwd: work }).stdout),
     ).toContain('Pixel');
   });
 
@@ -277,7 +277,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'brand-auditor' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     const res = runHook(TRACK_AGENT, { prompt: 'segue' }, { home, cwd: work });
     const ctx = extractContext(res.stdout);
@@ -289,7 +289,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     let res = runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'general-purpose' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     expect(res.status).toBe(0);
     expect(fs.existsSync(cacheFile)).toBe(false);
@@ -297,7 +297,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     res = runHook(
       TRACK_DELEGATION,
       { tool_name: 'Write', tool_input: { file_path: 'x.js' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     expect(res.status).toBe(0);
     expect(fs.existsSync(cacheFile)).toBe(false);
@@ -307,7 +307,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     const res = runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'snps-orqx' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     expect(res.status).toBe(0);
     expect(fs.existsSync(cacheFile)).toBe(false);
@@ -318,10 +318,10 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'config-engineer' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     const ctx = extractContext(
-      runHook(TRACK_AGENT, { prompt: 'segue' }, { home, cwd: work }).stdout
+      runHook(TRACK_AGENT, { prompt: 'segue' }, { home, cwd: work }).stdout,
     );
     expect(ctx).toContain('🧠'); // decoded from \U0001F9E0
     expect(ctx).not.toContain('\\U0001F9E0');
@@ -333,7 +333,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'developer' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     const after = readCache();
     expect(after.role).toBe(before.role);
@@ -347,7 +347,7 @@ describe('selo/handoff visibility (track-agent trio)', () => {
     runHook(
       TRACK_DELEGATION,
       { tool_name: 'Task', tool_input: { subagent_type: 'developer' } },
-      { home, cwd: work }
+      { home, cwd: work },
     );
     const res = spawnSync(process.execPath, [TRACK_CLEAR], {
       cwd: work,

@@ -768,7 +768,7 @@ Erro: Another migration is running
 ### Relacionados
 
 - BACKLOG-MANAGEMENT-SYSTEM.md
-- [DEV-SYSTEM.md](DEV-SYSTEM.md)
+- [dev-system.md](dev-system.md)
 
 ---
 
@@ -799,4 +799,3 @@ Erro: Another migration is running
 ---
 
 *-- Dara, arquitetando dados*
-

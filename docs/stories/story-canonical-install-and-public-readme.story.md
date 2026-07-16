@@ -33,18 +33,18 @@ desatualizada ou uma primeira impressao confusa.
 
 ## Acceptance Criteria
 
-- [x] Sem flags, uma nova instalacao resolve `both`; Claude e Codex recebem
-  suas superficies nativas completas.
-- [x] Em ambiente nao interativo, o default tambem e `both` e nenhum prompt e
-  aberto.
-- [x] Flags de provider e configuracao existente continuam sendo respeitadas;
-  `--reconfigure` permite alterar a selecao conscientemente.
-- [x] Os READMEs PT-BR e EN apresentam o mesmo contrato publico: comando
-  canonico, 17 squads, 172 agentes, 1.412 task files, 1.348 pointers
-  resolviveis, 37 skills por provider e React Bits.
-- [x] Nenhum README raiz recomenda comandos sem `@latest` para instalacao ou update.
-- [x] Testes focados, lint, typecheck, validadores de documentacao e paridade
-  passam; paths protegidos permanecem sem alteracao.
+- [x] Given uma nova instalacao sem flags, When o provider e resolvido, Then
+  `both` instala as superficies nativas completas de Claude e Codex.
+- [x] Given um ambiente nao interativo, When a instalacao roda sem flags, Then
+  o default e `both` e nenhum prompt e aberto.
+- [x] Given flags ou configuracao existente, When a selecao e resolvida, Then
+  ela e respeitada e `--reconfigure` permite uma mudanca consciente.
+- [x] Given os READMEs PT-BR e EN, When o contrato publico e comparado, Then
+  comando, metricas, skills e React Bits permanecem equivalentes.
+- [x] Given os READMEs raiz, When comandos de instalacao e update sao auditados,
+  Then nenhum deles omite `@latest`.
+- [x] Given a implementacao concluida, When os gates aplicaveis sao executados,
+  Then testes, lint, typecheck, docs e paridade passam sem alterar paths protegidos.
 
 ## Out of scope
 

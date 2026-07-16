@@ -21,7 +21,7 @@ if (!existsSync(join(repo, '.git')) || !existsSync(infoPath)) {
 
 const sha = execFileSync('git', ['-C', repo, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 const commitDate = execFileSync('git', ['-C', repo, 'show', '-s', '--format=%cI', 'HEAD'], {
-  encoding: 'utf8'
+  encoding: 'utf8',
 }).trim();
 const { componentMetadata, VARIANTS } = await import(`${pathToFileURL(infoPath).href}?sha=${sha}`);
 
@@ -34,7 +34,7 @@ const categorySlugs = {
   Animations: 'animations',
   TextAnimations: 'text-animations',
   Components: 'components',
-  Backgrounds: 'backgrounds'
+  Backgrounds: 'backgrounds',
 };
 
 const walk = directory =>
@@ -60,7 +60,7 @@ for (const path of codeMetadataFiles) {
 const findComponentDirectory = (category, name) => {
   const root = join(repo, 'src', 'ts-default', category);
   const match = readdirSync(root, { withFileTypes: true }).find(
-    entry => entry.isDirectory() && entry.name.toLowerCase() === name.toLowerCase()
+    entry => entry.isDirectory() && entry.name.toLowerCase() === name.toLowerCase(),
   );
   if (!match) throw new Error(`Missing TS source directory for ${category}/${name}`);
   return join(root, match.name);
@@ -68,7 +68,7 @@ const findComponentDirectory = (category, name) => {
 
 const extractProps = source => {
   const blocks = [];
-  const declarations = /(?:type|interface)\s+\w*Props\w*(?:\s+extends[^\{]+)?\s*(?:=\s*)?\{/g;
+  const declarations = /(?:type|interface)\s+\w*Props\w*(?:\s+extends[^{]+)?\s*(?:=\s*)?\{/g;
   for (const match of source.matchAll(declarations)) {
     let depth = 1;
     let cursor = match.index + match[0].length;
@@ -102,7 +102,7 @@ const entries = Object.entries(componentMetadata).map(([key, metadata]) => {
   const demoProps = [...demo.matchAll(/\bname\s*:\s*['"]([^'"]+)['"]/g)].map(match => match[1]);
   const props = [...new Set(demoProps.length ? demoProps : extractProps(source))];
   const code = codeMetadata.get(key.toLowerCase()) || codeMetadata.get(
-    `${metadata.category}/${basename(directory)}`.toLowerCase()
+    `${metadata.category}/${basename(directory)}`.toLowerCase(),
   );
   if (!code) throw new Error(`Missing code metadata for ${key}`);
 
@@ -110,7 +110,7 @@ const entries = Object.entries(componentMetadata).map(([key, metadata]) => {
     'JS-CSS': { root: 'content', extension: 'jsx' },
     'JS-TW': { root: 'tailwind', extension: 'jsx' },
     'TS-CSS': { root: 'ts-default', extension: 'tsx' },
-    'TS-TW': { root: 'ts-tailwind', extension: 'tsx' }
+    'TS-TW': { root: 'ts-tailwind', extension: 'tsx' },
   };
   const declaredVariants = metadata.variants || VARIANTS;
   const variants = Object.fromEntries(declaredVariants.map(variant => {
@@ -125,7 +125,7 @@ const entries = Object.entries(componentMetadata).map(([key, metadata]) => {
       sourceBytes,
       functional: sourceBytes > 0,
       dependencies: registry.dependencies || [],
-      registryDependencies: registry.registryDependencies || []
+      registryDependencies: registry.registryDependencies || [],
     }];
   }));
 
@@ -137,7 +137,7 @@ const entries = Object.entries(componentMetadata).map(([key, metadata]) => {
     props,
     variants,
     sourceDirectory: basename(directory),
-    sourceFile
+    sourceFile,
   };
 });
 
@@ -152,7 +152,7 @@ for (const category of categories) {
     'Cada item abaixo aponta para a documentacao e para o codigo TypeScript/CSS oficial fixado no commit pesquisado.',
     '',
     '| Componente | O que faz | Dependencias | Props publicas | Variantes |',
-    '|---|---|---|---|---|'
+    '|---|---|---|---|---|',
   ];
 
   for (const entry of list) {
@@ -164,7 +164,7 @@ for (const category of categories) {
       .join(', ');
     const dependencies = entry.dependencies.length ? entry.dependencies.join(' ') : 'none';
     lines.push(
-      `| ${label} | ${escapeCell(entry.description)} | \`${escapeCell(dependencies)}\` | ${escapeCell(props)} | ${variantStatus} |`
+      `| ${label} | ${escapeCell(entry.description)} | \`${escapeCell(dependencies)}\` | ${escapeCell(props)} | ${variantStatus} |`,
     );
   }
 
@@ -198,7 +198,7 @@ const summary = {
   registryItems: entries.reduce((total, entry) => total + Object.keys(entry.variants).length, 0),
   documentedProps: entries.reduce((total, entry) => total + entry.props.length, 0),
   incompleteVariants,
-  dependencies: Object.fromEntries([...dependencyCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])))
+  dependencies: Object.fromEntries([...dependencyCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))),
 };
 writeFileSync(join(output, 'catalog-summary.json'), `${JSON.stringify(summary, null, 2)}\n`);
 writeFileSync(join(output, 'inventory.json'), `${JSON.stringify({ ...summary, components: entries }, null, 2)}\n`);

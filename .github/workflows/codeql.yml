@@ -26,12 +26,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@641a925cfafe92d0fdf8b239ba4053e3f8d99d6d # v3
+        uses: github/codeql-action/init@7188fc363630916deb702c7fdcf4e481b751f97a # v4
         with:
           languages: ${{ matrix.language }}
           queries: +security-and-quality
@@ -48,9 +48,9 @@ jobs:
               - '**/*.spec.ts'
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@641a925cfafe92d0fdf8b239ba4053e3f8d99d6d # v3
+        uses: github/codeql-action/autobuild@7188fc363630916deb702c7fdcf4e481b751f97a # v4
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@641a925cfafe92d0fdf8b239ba4053e3f8d99d6d # v3
+        uses: github/codeql-action/analyze@7188fc363630916deb702c7fdcf4e481b751f97a # v4
         with:
           category: "/language:${{ matrix.language }}"

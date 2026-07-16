@@ -33,22 +33,23 @@ depender de conhecimento interno dos mantenedores.
 
 ## Acceptance Criteria
 
-- [x] AC1: README PT-BR e EN apresentam a mesma proposta de valor, instalação
-  canônica, arquitetura, capacidades, prova de qualidade e navegação pública.
-- [x] AC2: Claims públicos usam as métricas medidas do framework e o comando
-  `npx sinapse-ai@latest install`.
-- [x] AC3: `SECURITY.md`, `CONTRIBUTING.md`, suporte e governança descrevem o estado
-  atual do produto, sem versões ou processos históricos apresentados como atuais.
-- [x] AC4: Issue/PR templates e documentação de workflows orientam contribuidores
-  externos sem depender de regras internas ou links inexistentes.
-- [x] AC5: GitFlows possuem responsabilidades claras para CI, PR, release e publish,
-  com permissões mínimas e sem duplicação funcional injustificada.
-- [x] AC6: Metadados do repositório no GitHub refletem 17 squads, 172 agentes,
-  Claude Code + Codex e a instalação canônica.
-- [x] AC7: Links, Markdown, Articles IV/VII, paridade, lint, typecheck e testes aplicáveis
-  passam antes da entrega.
-- [x] AC8: Nenhuma alteração preexistente do worktree original e nenhum path L1/L2
-  protegido são modificados.
+- [x] AC1: Given os READMEs PT-BR e EN, When suas entradas publicas sao
+  comparadas, Then proposta de valor, arquitetura, capacidades, prova de
+  qualidade e navegacao permanecem equivalentes.
+- [x] AC2: Given os claims publicos, When suas fontes sao medidas, Then eles
+  usam as metricas reais e o comando `npx sinapse-ai@latest install`.
+- [x] AC3: Given `SECURITY.md`, `CONTRIBUTING.md`, suporte e governanca, When o
+  conteudo e auditado, Then apenas o estado atual do produto e apresentado.
+- [x] AC4: Given templates e workflows publicos, When um contribuidor externo
+  os utiliza, Then nenhuma regra interna ou link inexistente e necessario.
+- [x] AC5: Given os GitFlows ativos, When responsabilidades e permissoes sao
+  auditadas, Then nao existe duplicacao funcional injustificada.
+- [x] AC6: Given os metadados do GitHub, When comparados ao framework, Then
+  refletem 17 squads, 172 agentes, Claude Code + Codex e a instalacao canonica.
+- [x] AC7: Given a superficie alterada, When os gates aplicaveis sao executados,
+  Then links, Markdown, Articles IV/VII, paridade, lint, typecheck e testes passam.
+- [x] AC8: Given o worktree original e os paths L1/L2, When o diff e auditado,
+  Then nenhuma alteracao preexistente ou protegida e modificada.
 
 ## Out of scope
 
