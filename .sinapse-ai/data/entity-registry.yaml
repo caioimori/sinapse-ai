@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-16T17:41:11.649Z'
+  lastUpdated: '2026-07-16T18:20:58.711Z'
   entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -13693,14 +13693,15 @@ entities:
       dependencies:
         - suggestion-engine
       externalDeps: []
-      plannedDeps: []
+      plannedDeps:
+        - perf-budget
       lifecycle: experimental
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4dd26f611a58c0bcd54dc69e1804efe103406ee0c0bda0880a4b39aecf540045
-      lastVerified: '2026-07-03T06:56:39.031Z'
+      checksum: sha256:1ada0dfe83d80f280adc9eb4c402bb7deecf072ca07782acebfd12377d2cd9a8
+      lastVerified: '2026-07-16T18:20:58.579Z'
     workflow-registry.test:
       path: .sinapse-ai/workflow-intelligence/__tests__/workflow-registry.test.js
       layer: L4
