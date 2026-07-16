@@ -9,7 +9,7 @@
 #
 version: 1.25.1
 generator: scripts/generate-install-manifest.js
-file_count: 1161
+file_count: 1162
 files:
   - path: cli/commands/config/index.js
     hash: sha256:bfa83cb1dc111b0b30dd298dc0abc2150b73f939b6cd4458effa8e6d407bc9e2
@@ -1591,6 +1591,10 @@ files:
     hash: sha256:f6250764865bcfc3bfed6bd2b34763d9a5b5c72f522dec251e706534a808c217
     type: development
     size: 7789
+  - path: development/knowledge-base/portable-agentic-principles.md
+    hash: sha256:a21a415f8d584fb4c51f4069d9097c29f8b6f6d684ed968e534490aa1d0bcf4d
+    type: development
+    size: 13763
   - path: development/knowledge-base/security-pre-deploy-checklist.md
     hash: sha256:e7e358db9cfd2fe91ec80efbecc6f9825cbab6f64df58b8302d6813ecdcb7dc3
     type: development
