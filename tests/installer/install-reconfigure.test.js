@@ -58,38 +58,38 @@ describe('Story 10.35 — Install --reconfigure flag', () => {
 
   describe('skip logic — LLM selection', () => {
     /**
-     * Mirrors the condition at bin/cli.js (Story 10.35):
-     *   const llmChoice = (isUpsert && !reconfigure && existing.llm) ? existing.llm : await promptLlmChoice();
+     * Standard installs are deterministic and provision both providers; only
+     * explicit reconfiguration opens a provider prompt.
      */
-    function shouldSkipLlmPrompt({ isUpsert, reconfigure, existingLlm }) {
-      return Boolean(isUpsert && !reconfigure && existingLlm);
+    function shouldPromptLlmChoice({ reconfigure }) {
+      return Boolean(reconfigure);
     }
 
-    test('upsert without reconfigure — skips LLM prompt (fast path)', () => {
-      expect(shouldSkipLlmPrompt({ isUpsert: true, reconfigure: false, existingLlm: 'claude-code' })).toBe(true);
+    test('upsert without reconfigure preserves the saved provider without prompting', () => {
+      expect(shouldPromptLlmChoice({ isUpsert: true, reconfigure: false, existingLlm: 'claude-code' })).toBe(false);
     });
 
-    test('upsert WITH reconfigure — does NOT skip LLM prompt', () => {
-      expect(shouldSkipLlmPrompt({ isUpsert: true, reconfigure: true, existingLlm: 'claude-code' })).toBe(false);
+    test('upsert with reconfigure opens the LLM prompt', () => {
+      expect(shouldPromptLlmChoice({ isUpsert: true, reconfigure: true, existingLlm: 'claude-code' })).toBe(true);
     });
 
-    test('fresh install — does NOT skip LLM prompt', () => {
-      expect(shouldSkipLlmPrompt({ isUpsert: false, reconfigure: false, existingLlm: null })).toBe(false);
+    test('fresh install defaults to both providers without a prompt', () => {
+      expect(shouldPromptLlmChoice({ isUpsert: false, reconfigure: false, existingLlm: null })).toBe(false);
     });
   });
 
   describe('non-TTY guard still applies in reconfigure mode', () => {
-    test('promptLlmChoice returns claude-code default in non-TTY even when reconfigure is intended', async () => {
+    test('promptLlmChoice returns both default in non-TTY even when reconfigure is intended', async () => {
       process.stdin.isTTY = false;
       // reconfigure flag forces the call to promptLlmChoice() — but TTY guard inside still returns default
       const result = await promptLlmChoice();
-      expect(result).toBe('claude-code');
+      expect(result).toBe('both');
     });
 
-    test('promptLlmChoice returns claude-code default when isTTY is undefined', async () => {
+    test('promptLlmChoice returns both default when isTTY is undefined', async () => {
       delete process.stdin.isTTY;
       const result = await promptLlmChoice();
-      expect(result).toBe('claude-code');
+      expect(result).toBe('both');
     });
   });
 });

@@ -14,7 +14,7 @@
 npx sinapse-ai@latest install
 ```
 
-O wizard detecta seu ambiente, escolhe IDE (Claude Code ou Codex), instala os 17 squads e configura os hooks essenciais automaticamente.
+O wizard detecta seu ambiente, instala Claude Code e Codex por padrao, instala os 17 squads e configura os hooks essenciais automaticamente. Use `--llm=claude-code` ou `--llm=codex` somente quando quiser limitar a instalacao a um provider.
 
 ## Validar setup
 

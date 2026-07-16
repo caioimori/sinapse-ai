@@ -143,8 +143,11 @@ async function cmdInstallGlobal(opts = {}) {
     llmWasReused = true;
     const ideLabel = Array.isArray(llmChoice) ? llmChoice.join(', ') : String(llmChoice);
     logger.always(`${DIM}  IDE: ${ideLabel} (from saved config; pass --reconfigure to change)${NC}`);
-  } else {
+  } else if (reconfigure) {
     llmChoice = await promptLlmChoice();
+  } else {
+    llmChoice = 'both';
+    logger.always(`${DIM}  IDE: Claude Code + Codex (padrao; use --llm para limitar)${NC}`);
   }
   if (languageWasReused || llmWasReused) logger.always('');
 

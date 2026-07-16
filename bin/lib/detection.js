@@ -82,7 +82,7 @@ function warnNonInteractive() {
   nonInteractiveWarned = true;
   // stderr so it never pollutes stdout consumers (CI logs, pipes).
   process.stderr.write(
-    `${YELLOW}INFO${NC} ambiente nao-interativo detectado, usando defaults pt + claude-code ` +
+    `${YELLOW}INFO${NC} ambiente nao-interativo detectado, usando defaults pt + Claude Code + Codex ` +
     `${DIM}(use --interactive pra forcar prompts)${NC}\n`,
   );
 }

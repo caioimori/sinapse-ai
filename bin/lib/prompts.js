@@ -15,7 +15,7 @@ async function promptLlmChoice() {
   // check that silently skipped this prompt in Git Bash + Windows.
   if (!detectInteractiveMode()) {
     warnNonInteractive();
-    return 'claude-code';
+    return 'both';
   }
   try {
     const inquirer = require('inquirer');
@@ -24,11 +24,11 @@ async function promptLlmChoice() {
       name: 'llms',
       message: 'Escolha sua LLM (espaco seleciona, enter confirma):',
       choices: [
-        { name: 'Claude Code (Recomendado)', value: 'claude-code', checked: true },
-        { name: 'Codex CLI', value: 'codex' },
+        { name: 'Claude Code', value: 'claude-code', checked: true },
+        { name: 'Codex CLI', value: 'codex', checked: true },
       ],
     }]);
-    if (llms.length === 0) return 'claude-code'; // default if none selected
+    if (llms.length === 0) return 'both'; // default if none selected
     if (llms.length === 2) return 'both';
     return llms[0];
   } catch {
@@ -37,16 +37,16 @@ async function promptLlmChoice() {
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
     return new Promise((resolve) => {
       logger.always(`${CYAN}  Escolha sua LLM:${NC}`);
-      logger.always(`    ${GREEN}1${NC}) Claude Code ${DIM}(Recomendado)${NC}`);
+      logger.always(`    ${GREEN}1${NC}) Claude Code`);
       logger.always(`    ${GREEN}2${NC}) Codex CLI`);
-      logger.always(`    ${GREEN}3${NC}) Ambos`);
+      logger.always(`    ${GREEN}3${NC}) Ambos ${DIM}(Recomendado)${NC}`);
       logger.always('');
       rl.question(`  ${BOLD}Opcao [1/2/3]:${NC} `, (answer) => {
         rl.close();
-        const choice = (answer || '1').trim();
+        const choice = (answer || '3').trim();
         if (choice === '2') resolve('codex');
-        else if (choice === '3') resolve('both');
-        else resolve('claude-code');
+        else if (choice === '1') resolve('claude-code');
+        else resolve('both');
       });
     });
   }
