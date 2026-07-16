@@ -27,7 +27,6 @@ const {
   detectExistingInstall,
   detectStaleness,
 } = require('../lib/detection');
-const { promptLlmChoice } = require('../lib/prompts');
 const { generateSquadAwareness } = require('./install');
 const {
   recordInstalledAgents,
@@ -122,9 +121,12 @@ async function cmdUpdateGlobal() {
     logger.always('');
   }
 
-  // Story 10.22 — skip LLM prompt when previous llm known. To re-prompt,
-  // run `npx sinapse-ai install --force`.
-  const llmChoice = existing.llm || await promptLlmChoice();
+  // Story 10.22 — preserve the saved provider selection. To choose again,
+  // run `npx sinapse-ai@latest install --reconfigure`.
+  const llmChoice = existing.llm || 'both';
+  if (!existing.llm) {
+    logger.always(`${DIM}  IDE: Claude Code + Codex (padrao para instalacoes legadas sem provider salvo)${NC}`);
+  }
 
   logger.always('');
   logger.always(`${BOLD}Atualizando SINAPSE AI...${NC}\n`);

@@ -5,7 +5,7 @@
  * stdin is not a TTY (CI, Docker, scripts, AI agents).
  *
  * Coverage:
- * - promptLlmChoice() returns 'claude-code' default without prompting
+ * - promptLlmChoice() returns 'both' default without prompting
  * - promptFileExists() returns computed defaultChoice without prompting
  */
 
@@ -14,7 +14,7 @@ const os = require('os');
 const fs = require('fs');
 const fse = require('fs-extra');
 
-const { promptLlmChoice } = require('../../bin/cli');
+const { promptLlmChoice } = require('../../bin/lib/prompts');
 const { promptFileExists } = require('../../packages/installer/src/wizard/ide-config-generator');
 
 describe('Story 10.33 — Install non-TTY handling', () => {
@@ -33,20 +33,20 @@ describe('Story 10.33 — Install non-TTY handling', () => {
   });
 
   describe('promptLlmChoice()', () => {
-    test('returns claude-code default when stdin.isTTY is false', async () => {
+    test('returns both default when stdin.isTTY is false', async () => {
       process.stdin.isTTY = false;
 
       const result = await promptLlmChoice();
 
-      expect(result).toBe('claude-code');
+      expect(result).toBe('both');
     });
 
-    test('returns claude-code default when stdin.isTTY is undefined', async () => {
+    test('returns both default when stdin.isTTY is undefined', async () => {
       delete process.stdin.isTTY;
 
       const result = await promptLlmChoice();
 
-      expect(result).toBe('claude-code');
+      expect(result).toBe('both');
     });
 
     test('does not throw ERR_USE_AFTER_CLOSE in non-TTY mode', async () => {
