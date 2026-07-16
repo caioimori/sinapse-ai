@@ -1,7 +1,7 @@
-# Instalacao no Windows
+# Instalação no Windows
 
 Requisitos: Windows 10 ou 11, Node.js 18+, npm 9+, Git e pelo menos uma CLI
-suportada. Node.js 22 LTS e recomendado.
+suportada. Node.js 22 LTS é recomendado.
 
 Na raiz do projeto, pelo PowerShell:
 
@@ -11,14 +11,14 @@ npm --version
 npx sinapse-ai@latest install
 ```
 
-O padrao configura Claude Code e Codex. Se uma politica bloquear `npx.ps1`, use
-`npx.cmd sinapse-ai@latest install` sem enfraquecer a politica global de
-execucao.
+O padrão configura Claude Code e Codex. Se uma política bloquear `npx.ps1`, use
+`npx.cmd sinapse-ai@latest install` sem enfraquecer a política global de
+execução.
 
 ```powershell
 npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-Caminhos com espacos sao suportados. Consulte a
-[solucao de problemas](troubleshooting.md) antes de forcar ou remover arquivos.
+Caminhos com espaços são suportados. Consulte a
+[solução de problemas](troubleshooting.md) antes de forçar ou remover arquivos.

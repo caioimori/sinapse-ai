@@ -10,6 +10,7 @@ on:
       - '.sinapse-ai/core/orchestration/**'
       - '.sinapse-ai/core/events/**'
       - 'tests/core/orchestration/**'
+      - '.github/workflows/bob-integration.yml'
 
 concurrency:
   group: bob-integration-${{ github.event.pull_request.number }}
@@ -30,6 +31,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -79,6 +82,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4

@@ -54,6 +54,7 @@ const SCANNER_SELF_FILES = new Set([
 // branch can accidentally match a substring of the other's context.
 const TEST_FILE_PATTERN = /((^|\/)(tests?|__tests__)\/)|(\.(test|spec)\.[cm]?[jt]s$)/i;
 const BINARY_SAMPLE_SIZE = 8 * 1024;
+const MIN_PRINTABLE_SECRET_RUN = 8;
 
 function isBinaryContent(content) {
   const buffer = Buffer.isBuffer(content)
@@ -71,6 +72,39 @@ function isBinaryContent(content) {
   }
 
   return controlBytes / sample.length > 0.1;
+}
+
+function extractPrintableStrings(content) {
+  const buffer = Buffer.isBuffer(content)
+    ? content
+    : Buffer.from(String(content), 'utf8');
+  const strings = [];
+  let run = [];
+
+  const flush = () => {
+    if (run.length >= MIN_PRINTABLE_SECRET_RUN) {
+      strings.push(Buffer.from(run).toString('ascii'));
+    }
+    run = [];
+  };
+
+  for (const byte of buffer) {
+    if (byte >= 0x20 && byte <= 0x7e) {
+      run.push(byte);
+    } else {
+      flush();
+    }
+  }
+  flush();
+  return strings.join('\n');
+}
+
+function scanBufferContent(content, filePath) {
+  const binary = isBinaryContent(content);
+  const text = binary
+    ? extractPrintableStrings(content)
+    : content.toString('utf8');
+  return scanContent(text, { filePath, entropy: !binary });
 }
 
 function isScanExemptPath(filePath) {
@@ -113,8 +147,9 @@ function readStagedFile(filePath) {
   });
 }
 
-function scanStagedFiles(files) {
+function scanStagedFiles(files, options = {}) {
   const findings = [];
+  const readFile = options.readStagedFile || readStagedFile;
 
   for (const filePath of files) {
     // A non-safe .env file is blocked outright (its values are real by design).
@@ -130,19 +165,13 @@ function scanStagedFiles(files) {
 
     let content;
     try {
-      content = readStagedFile(filePath);
+      content = readFile(filePath);
     } catch {
-      // Could not read the staged blob (binary, deleted-then-readded race, etc.)
-      // — skip silently; binary/secret content of unreadable blobs is rare and
-      // the named .env rule above already covers the common dotfile leak.
+      findings.push({ filePath, reason: 'staged blob unreadable (scan blocked)', redacted: null });
       continue;
     }
 
-    if (isBinaryContent(content)) {
-      continue;
-    }
-
-    const matches = scanContent(content.toString('utf8'), { filePath });
+    const matches = scanBufferContent(content, filePath);
     for (const match of matches) {
       findings.push({ filePath, reason: match.name, redacted: match.redacted, entropy: match.entropy });
     }
@@ -194,6 +223,8 @@ module.exports = {
   getStagedFiles,
   isBlockedEnvFile,
   isBinaryContent,
+  extractPrintableStrings,
+  scanBufferContent,
   isScanExemptPath,
   scanStagedFiles,
   redactMatch,

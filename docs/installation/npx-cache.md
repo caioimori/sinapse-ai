@@ -8,11 +8,22 @@ npm view sinapse-ai version
 npx sinapse-ai@latest status
 ```
 
-Then retry with a clean temporary cache:
+Then retry with a clean temporary cache.
+
+macOS or Linux:
 
 ```bash
 npm cache verify
+npm_config_cache="$(mktemp -d)" npx --yes sinapse-ai@latest status
+```
+
+Windows PowerShell:
+
+```powershell
+npm cache verify
+$env:npm_config_cache = Join-Path ([IO.Path]::GetTempPath()) "sinapse-npx-$([guid]::NewGuid())"
 npx --yes sinapse-ai@latest status
+Remove-Item Env:npm_config_cache
 ```
 
 For a deterministic reproduction, use the exact published version:

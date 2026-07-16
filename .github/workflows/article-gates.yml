@@ -33,6 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           fetch-depth: 1
 
       - name: Setup Node.js
@@ -54,6 +55,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           fetch-depth: 1
 
       - name: Setup Node.js
@@ -76,6 +78,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Node.js

@@ -82,12 +82,26 @@ jobs:
         shell: bash
         run: |
           VERSION=$(node -p "require('./package.json').version")
+          PUBLISHED_VERSION=""
+          for ATTEMPT in $(seq 1 12); do
+            PUBLISHED_VERSION=$(npm view "sinapse-ai@${VERSION}" version 2>/dev/null || true)
+            if [ "$PUBLISHED_VERSION" = "$VERSION" ]; then
+              break
+            fi
+            echo "Waiting for npm registry propagation (${ATTEMPT}/12)..."
+            sleep $((ATTEMPT * 5))
+          done
+          if [ "$PUBLISHED_VERSION" != "$VERSION" ]; then
+            echo "sinapse-ai@${VERSION} was not observable in the npm registry after polling."
+            exit 1
+          fi
+
           ROOT=$(mktemp -d)
           mkdir -p "$ROOT/project" "$ROOT/home" "$ROOT/cache"
           cd "$ROOT/project"
           HOME="$ROOT/home" \
           npm_config_cache="$ROOT/cache" \
-          CI=1 \
+          CI=true \
           npx --yes "sinapse-ai@${VERSION}" install
           test -f .claude/CLAUDE.md
           test -f AGENTS.md
@@ -95,9 +109,13 @@ jobs:
 
       - name: Summary
         if: ${{ always() }}
+        env:
+          RELEASE_BRANCH: ${{ github.ref_name }}
+          RELEASE_DRY_RUN: ${{ inputs.dry_run }}
+          RELEASE_COMMIT: ${{ github.sha }}
         run: |
           echo "## Semantic Release" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Branch: \`${{ github.ref_name }}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "Dry run: \`${{ inputs.dry_run }}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Branch: \`$RELEASE_BRANCH\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Dry run: \`$RELEASE_DRY_RUN\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit: \`$RELEASE_COMMIT\`" >> "$GITHUB_STEP_SUMMARY"

@@ -68,8 +68,11 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     test('semantic-release.yml includes publish safety gate step', () => {
       const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'semantic-release.yml');
       const workflow = fs.readFileSync(workflowPath, 'utf8');
-      expect(workflow).toContain('Publish safety gate (INS-4.10)');
-      expect(workflow).toContain('npm run validate:publish');
+      const gateStep = workflow.match(
+        /- name: Publish safety gate \(INS-4\.10\)[\s\S]*?(?=\n\s+- name:|$)/,
+      );
+      expect(gateStep).not.toBeNull();
+      expect(gateStep[0]).toContain('run: npm run validate:publish');
     });
   });
 

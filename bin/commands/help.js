@@ -10,11 +10,10 @@ function cmdHelp() {
   header();
   logger.always(`${BOLD}Comandos:${NC}\n`);
   logger.always(`  ${CYAN}npx sinapse-ai init <nome>${NC}           Cria um novo projeto SINAPSE (greenfield)`);
-  logger.always(`  ${CYAN}npx sinapse-ai install${NC}               Instala SINAPSE (idempotente — re-runs são upserts)`);
+  logger.always(`  ${CYAN}npx sinapse-ai install${NC}               Instala ou atualiza (idempotente — re-runs são upserts)`);
   logger.always(`  ${CYAN}npx sinapse-ai install --force${NC}       Reinstala do zero, mesmo se já instalado`);
   logger.always(`  ${CYAN}npx sinapse-ai install --reconfigure${NC} Re-pergunta idioma/LLM sem apagar instalação`);
   logger.always(`  ${CYAN}npx sinapse-ai install --llm=both --global-only${NC} Instala Claude + Codex sem alterar o projeto atual`);
-  logger.always(`  ${CYAN}npx sinapse-ai update${NC}           Atualiza SINAPSE para a última versão`);
   logger.always(`  ${CYAN}npx sinapse-ai uninstall${NC}        Remove SINAPSE globalmente (pede confirmação)`);
   logger.always(`  ${CYAN}npx sinapse-ai uninstall --yes${NC}  Remove SINAPSE globalmente (sem prompt — exigido em CI)`);
   logger.always('');

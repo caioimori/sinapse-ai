@@ -1,4 +1,4 @@
-# Solucao de Problemas de Instalacao
+# Solução de Problemas de Instalação
 
 Comece por:
 
@@ -10,11 +10,11 @@ npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-Execute a instalacao a partir da raiz do projeto. Para trocar um provider salvo,
-use `install --reconfigure`. Para uma instalacao parcial, preserve o projeto,
-revise `git status` e use `doctor --fix` antes de uma renovacao com
+Execute a instalação a partir da raiz do projeto. Para trocar um provider salvo,
+use `install --reconfigure`. Para uma instalação parcial, preserve o projeto,
+revise `git status` e use `doctor --fix` antes de uma renovação com
 `install --force`.
 
-Nao use `sudo`, scripts remotos via pipe ou exclusao manual ampla como primeira
-resposta. Consulte o [guia canonico](../../installation/troubleshooting.md) e
+Não use `sudo`, scripts remotos via pipe ou exclusão manual ampla como primeira
+resposta. Consulte o [guia canônico](../../installation/troubleshooting.md) e
 [SUPPORT.md](../../../SUPPORT.md).

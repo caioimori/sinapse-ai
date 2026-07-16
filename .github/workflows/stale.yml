@@ -19,7 +19,7 @@ jobs:
           days-before-issue-stale: 30
           days-before-issue-close: 7
           stale-issue-label: 'status: stale'
-          stale-issue-message: 'Esta issue esta inativa ha 30 dias. Sera fechada em 7 dias se nao houver atividade.'
+          stale-issue-message: 'Esta issue está inativa há 30 dias. Será fechada em 7 dias se não houver atividade.'
           close-issue-message: |
             Esta issue foi fechada automaticamente por inatividade.
             Se ainda for relevante, reabra com contexto adicional.
@@ -29,7 +29,7 @@ jobs:
           days-before-pr-stale: 45
           days-before-pr-close: -1
           stale-pr-label: 'status: stale'
-          stale-pr-message: 'Este PR esta inativo ha 45 dias. Considere atualizar ou fechar.'
+          stale-pr-message: 'Este PR está inativo há 45 dias. Considere atualizar ou fechar.'
 
           # Exemptions
           exempt-issue-labels: 'priority: P1,priority: P2,status: in-progress,status: confirmed'

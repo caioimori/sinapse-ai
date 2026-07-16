@@ -34,16 +34,16 @@ npx sinapse-ai@latest install --reconfigure
 ## Ownership and updates
 
 The installer distinguishes framework-managed files from project-owned files.
-`update` refreshes the managed surface; it does not treat application code,
-stories, packages, tests, or custom squads as disposable.
+Re-running `install` refreshes the managed surface; it does not treat
+application code, stories, packages, tests, or custom squads as disposable.
 
 ```bash
-npx sinapse-ai@latest update
+npx sinapse-ai@latest install
 npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-Review the diff after every installation or update. `install --force` is for a
+Review the diff after every installation. `install --force` is for a
 deliberate managed-surface refresh, not routine upgrades.
 
 ## Platform guides
@@ -56,4 +56,4 @@ deliberate managed-surface refresh, not routine upgrades.
 - [Uninstallation](uninstallation.md)
 
 Platform guides supplement this contract. The canonical `@latest install` path
-and current CLI help remain the source of truth for provider and update options.
+and current CLI help remain the source of truth for provider options.

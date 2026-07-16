@@ -28,10 +28,11 @@ Framework-managed files are refreshed while project-owned content is preserved.
 ## How do I update?
 
 ```bash
-npx sinapse-ai@latest update
+npx sinapse-ai@latest install
 ```
 
-Do not manually copy files from the npm cache or another project.
+The command is idempotent and detects the existing installation. Do not
+manually copy files from the npm cache or another project.
 
 ## How do I verify the installation?
 

@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">Portugues</a> &middot;
+  <a href="README.md">Português</a> &middot;
   <a href="docs/getting-started.md">Getting started</a> &middot;
   <a href="https://www.npmjs.com/package/sinapse-ai">npm</a> &middot;
   <a href="https://github.com/caioimori/sinapse-ai/discussions">Discussions</a>
@@ -34,7 +34,7 @@ the same catalog, engineering process, and explicit authority model.
 It does not replace your CLI or LLM. It turns an AI session into an auditable
 delivery system: brief, routing, story, implementation, QA, and delivery.
 
-## Install in 30 seconds
+## Install with one command
 
 From your project directory:
 
@@ -112,10 +112,10 @@ boundaries.
 | Tasks and knowledge bases | Shared | Shared |
 | React Bits frontend capability | Skill + corpus | Skill + corpus |
 
-Counts are measured from the repository. Verify the current state with:
-
 The current inventory contains **1,201 squad tasks**, **211 development tasks**,
 **1,412 task files**, and **1,348 pointers resolvable** at runtime.
+
+These counts are measured from the repository. Verify the current state with:
 
 ```bash
 node .codex/scripts/resolve-codex-agent.js --stats
@@ -133,8 +133,8 @@ npm run validate:parity
 ## Safe operations
 
 ```bash
-# Update an installation while preserving project customizations
-npx sinapse-ai@latest update
+# Install or update while preserving project customizations
+npx sinapse-ai@latest install
 
 # Diagnose the environment
 npx sinapse-ai@latest doctor
@@ -159,8 +159,8 @@ selection and `install --force` to refresh managed surfaces.
 | L3 | Configuration | Mutable with guardrails |
 | L4 | Stories, packages, squads, and tests | Project-owned |
 
-Updates refresh managed surfaces without treating project code as disposable.
-See the [installation and update policy](docs/installation/README.md).
+Re-runs refresh managed surfaces without treating project code as disposable.
+See the [installation policy](docs/installation/README.md).
 
 ## Documentation
 

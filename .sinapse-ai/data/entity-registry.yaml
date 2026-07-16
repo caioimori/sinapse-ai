@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-16T15:38:46.751Z'
+  lastUpdated: '2026-07-16T16:51:06.855Z'
   entityCount: 818
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -106,8 +106,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:eacc95a711bcbbd840a0a52b11bc1724b9a13282af3f914f938c9a55b2797a72
-      lastVerified: '2026-07-15T04:28:12.370Z'
+      checksum: sha256:1231de67f3595ef73e8f27cc44d7928d2d2d02ef4732ad8d6022cf27d089d3a1
+      lastVerified: '2026-07-16T16:11:53.221Z'
     ideate:
       path: bin/commands/ideate.js
       layer: L1
@@ -981,8 +981,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:e6e70fd670d73efaba03af9f1bad8e75fcbe359214827cdd5fdc2a6f59d4aed7
-      lastVerified: '2026-07-16T15:38:46.480Z'
+      checksum: sha256:4bae97bdc37744b0abd8019339299fb0a2aa00c1c25a8f980addb8a3194cc570
+      lastVerified: '2026-07-16T16:51:06.567Z'
     staged-sql-guard:
       path: bin/utils/staged-sql-guard.js
       layer: L1

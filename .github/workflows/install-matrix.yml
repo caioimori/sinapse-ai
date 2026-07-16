@@ -63,7 +63,7 @@ jobs:
           LABEL_MATCH="${{ contains(github.event.pull_request.labels.*.name, 'release') }}"
           if [ "$EVENT" = "workflow_dispatch" ] || [ "$LABEL_MATCH" = "true" ]; then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "::notice title=Install Matrix::Running full 27-combo matrix (release gate)"
+            echo "::notice title=Install Matrix::Running full 24-combo matrix (release gate)"
           else
             echo "should_run=false" >> $GITHUB_OUTPUT
             echo "::notice title=Install Matrix::Skipped (not a release PR). Add the 'release' label to run."
@@ -96,6 +96,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -132,7 +134,9 @@ jobs:
       - name: Install yarn (classic)
         if: matrix.pm == 'yarn'
         shell: bash
-        run: npm install -g yarn@1
+        run: |
+          test "$(npm view yarn@1.22.22 version)" = "1.22.22"
+          npm install --global yarn@1.22.22
 
       # ----------------------------------------------------------------
       # Create an isolated install directory so nothing from the repo
@@ -198,6 +202,8 @@ jobs:
         provider: [claude-code, codex, both]
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -228,6 +234,8 @@ jobs:
         provider: [claude-code, codex, both]
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}

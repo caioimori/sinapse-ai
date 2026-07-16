@@ -5,24 +5,24 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Faca sua Pergunta
-        Tem uma duvida sobre o SINAPSE-AI? Pergunte aqui e a comunidade vai ajudar!
+        ## Faça sua Pergunta
+        Tem uma dúvida sobre o SINAPSE AI? Pergunte aqui e a comunidade poderá ajudar.
 
         **Antes de postar:**
-        - Verifique discussoes e documentacao existentes
+        - Verifique discussões e a documentação existente
         - Busque perguntas similares
-        - Inclua exemplos de codigo relevantes
+        - Inclua exemplos de código relevantes
 
   - type: dropdown
     id: question-type
     attributes:
       label: Tipo de Pergunta
-      description: Que tipo de ajuda voce precisa?
+      description: Que tipo de ajuda você precisa?
       options:
-        - Como eu faco...? (Pergunta de uso)
+        - Como eu faço...? (Pergunta de uso)
         - Por que...? (Entender comportamento)
-        - Qual a melhor forma de...? (Boas praticas)
-        - E possivel...? (Pergunta sobre capacidade)
+        - Qual a melhor forma de...? (Boas práticas)
+        - É possível...? (Pergunta sobre capacidade)
         - Outro
     validations:
       required: true
@@ -31,13 +31,13 @@ body:
     id: question
     attributes:
       label: Sua Pergunta
-      description: Seja o mais especifico possivel
+      description: Seja o mais específico possível
       placeholder: |
         Descreva sua pergunta em detalhes...
 
         Inclua:
-        - O que voce esta tentando fazer
-        - O que voce ja tentou
+        - O que você está tentando fazer
+        - O que você já tentou
         - Mensagens de erro ou comportamento inesperado
     validations:
       required: true
@@ -45,23 +45,23 @@ body:
   - type: textarea
     id: code-example
     attributes:
-      label: Exemplo de Codigo (se aplicavel)
-      description: Compartilhe codigo relevante para nos ajudar a entender sua pergunta
+      label: Exemplo de Código (se aplicável)
+      description: Compartilhe código relevante para nos ajudar a entender sua pergunta
       render: javascript
 
   - type: textarea
     id: context
     attributes:
       label: Contexto Adicional
-      description: Qualquer informacao relevante adicional
+      description: Qualquer informação adicional relevante
       placeholder: |
         - SO: Windows/macOS/Linux
-        - Versao do Node.js:
-        - Versao do SINAPSE:
+        - Versão do Node.js:
+        - Versão do SINAPSE:
         - IDE: Claude Code/Codex/Outro
 
   - type: markdown
     attributes:
       value: |
         ---
-        **Dica:** Perguntas marcadas como respondidas ajudam futuros usuarios! Se sua pergunta for resolvida, marque a melhor resposta.
+        **Dica:** Perguntas marcadas como respondidas ajudam futuros usuários. Se sua pergunta for resolvida, marque a melhor resposta.

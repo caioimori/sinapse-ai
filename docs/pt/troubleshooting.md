@@ -1,7 +1,7 @@
-# Solucao de problemas
+# Solução de problemas
 
-O guia mantido esta em
-[Solucao de problemas de instalacao](installation/troubleshooting.md).
+O guia mantido está em
+[Solução de problemas de instalação](installation/troubleshooting.md).
 
 Comece pela raiz do projeto:
 
@@ -13,6 +13,6 @@ npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-Nao use `sudo`, scripts remotos via pipe ou exclusao ampla como primeira
-resposta. Preserve o projeto, revise `git status` e envie apenas diagnosticos
+Não use `sudo`, scripts remotos via pipe ou exclusão ampla como primeira
+resposta. Preserve o projeto, revise `git status` e envie apenas diagnósticos
 sem secrets ou dados privados ao pedir suporte.

@@ -41,6 +41,7 @@ jobs:
       - name: Create release pull request
         env:
           GH_TOKEN: ${{ github.token }}
+          BASE_REF: ${{ github.ref_name }}
         shell: bash
         run: |
           if git diff --quiet -- package.json package-lock.json CHANGELOG.md; then
@@ -50,14 +51,33 @@ jobs:
 
           VERSION=$(node -p "require('./package.json').version")
           BRANCH="release/${VERSION}"
+
+          EXISTING_PR=$(gh pr list \
+            --head "$BRANCH" \
+            --state open \
+            --json url \
+            --jq '.[0].url')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr edit "$EXISTING_PR" --add-label release
+            echo "Release PR already exists: $EXISTING_PR"
+            exit 0
+          fi
+
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "Remote branch $BRANCH exists without an open pull request; refusing to overwrite it."
+            exit 1
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$BRANCH"
           git add package.json package-lock.json CHANGELOG.md
           git commit -m "chore(release): prepare ${VERSION}"
           git push --set-upstream origin "$BRANCH"
-          gh pr create \
-            --base "${{ github.ref_name }}" \
+          PR_URL=$(gh pr create \
+            --base "$BASE_REF" \
             --head "$BRANCH" \
             --title "chore(release): prepare ${VERSION}" \
-            --body "Prepares version and changelog for the canonical semantic release. Publication remains a separate, protected DevOps action."
+            --body "Prepares version and changelog for the canonical semantic release. Publication remains a separate, protected DevOps action.")
+          gh pr edit "$PR_URL" --add-label release
+          echo "Release PR ready: $PR_URL"

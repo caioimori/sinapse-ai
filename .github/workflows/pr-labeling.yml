@@ -17,7 +17,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Label PR based on files changed
-        uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4
+        uses: actions/labeler@b8dd2d9be0f68b860e7dae5dae7d772984eacd6d # v6
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler.yml
@@ -45,5 +45,4 @@ jobs:
                 labels: ['needs-po-review']
               });
             }
-
 

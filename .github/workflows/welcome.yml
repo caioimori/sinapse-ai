@@ -21,32 +21,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Welcome first-time contributors
-        uses: actions/first-interaction@fb2402657b4a28582200150d0a145671d0e50597 # v1
+        uses: actions/first-interaction@1c4688942c71f71d4f5502a26ea67c331730fa4d # v3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
             Obrigado por abrir sua primeira issue no SINAPSE AI.
 
             **O que acontece agora?**
-            - Um maintainer vai validar reproducao, escopo e prioridade
+            - Um maintainer vai validar reprodução, escopo e prioridade
             - Perguntas de uso podem ser movidas para Discussions
-            - Participe das [Discussoes da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
+            - Participe das [Discussões da Comunidade](https://github.com/caioimori/sinapse-ai/discussions)
 
-            **Recursos uteis:**
-            - [Guia de Contribuicao](https://github.com/caioimori/sinapse-ai/blob/main/CONTRIBUTING.md)
-            - [Documentacao](https://github.com/caioimori/sinapse-ai/tree/main/docs)
+            **Recursos úteis:**
+            - [Guia de Contribuição](https://github.com/caioimori/sinapse-ai/blob/main/CONTRIBUTING.md)
+            - [Documentação](https://github.com/caioimori/sinapse-ai/tree/main/docs)
 
             **Quer contribuir?** Confira issues com label `good first issue`.
 
           pr-message: |
             Obrigado pelo seu primeiro pull request no SINAPSE AI.
 
-            **Checklist de revisao:**
+            **Checklist de revisão:**
             - [ ] `npm run lint` passa sem erros
             - [ ] `npm run typecheck` passa sem erros
             - [ ] `npm test` passa sem falhas
-            - [ ] Titulo segue Conventional Commits (feat:, fix:, docs:, etc.)
-            - [ ] Story e evidencia de validacao estao atualizadas quando aplicavel
+            - [ ] Título segue Conventional Commits (`feat:`, `fix:`, `docs:`, etc.)
+            - [ ] Story e evidência de validação estão atualizadas quando aplicável
 
             Um maintainer vai revisar em breve.
 
@@ -61,8 +61,8 @@ jobs:
               issue_number: context.issue.number
             });
 
-            const labelName = 'status: needs-triage';
-            const hasTriageLabel = labels.data.some(label => label.name === labelName);
+            const LABEL_NAME = 'status: needs-triage';
+            const hasTriageLabel = labels.data.some(label => label.name === LABEL_NAME);
 
             if (!hasTriageLabel) {
               const repoLabels = await github.rest.issues.listLabelsForRepo({
@@ -70,14 +70,14 @@ jobs:
                 repo: context.repo.repo,
                 per_page: 100
               });
-              if (repoLabels.data.some(label => label.name === labelName)) {
+              if (repoLabels.data.some(label => label.name === LABEL_NAME)) {
                 await github.rest.issues.addLabels({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.issue.number,
-                  labels: [labelName]
+                  labels: [LABEL_NAME]
                 });
               } else {
-                core.notice(`Label '${labelName}' is not configured; triage continues without it.`);
+                core.notice(`Label '${LABEL_NAME}' is not configured; triage continues without it.`);
               }
             }

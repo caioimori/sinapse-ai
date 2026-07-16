@@ -1,7 +1,7 @@
-# Instalacao no Linux
+# Instalação no Linux
 
-Requisitos: distribuicao x64 ou arm64 mantida, Node.js 18+, npm 9+, Git e pelo
-menos uma CLI suportada. Node.js 22 LTS e recomendado.
+Requisitos: distribuição x64 ou arm64 mantida, Node.js 18+, npm 9+, Git e pelo
+menos uma CLI suportada. Node.js 22 LTS é recomendado.
 
 Na raiz do projeto:
 
@@ -13,6 +13,6 @@ npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-O diretorio do projeto precisa ser gravavel pelo usuario atual. Nao execute o
-instalador com `sudo`; corrija a propriedade ou a instalacao de Node/npm.
-Consulte a [solucao de problemas](troubleshooting.md).
+O diretório do projeto precisa ser gravável pelo usuário atual. Não execute o
+instalador com `sudo`; corrija a propriedade ou a instalação de Node/npm.
+Consulte a [solução de problemas](troubleshooting.md).

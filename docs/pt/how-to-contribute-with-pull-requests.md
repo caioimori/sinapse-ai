@@ -1,18 +1,18 @@
 # Como contribuir com pull requests
 
-Todas as contribuicoes seguem GitHub Flow e tem `main` como branch de destino.
-Nao envie mudancas diretamente para `main` e nao crie tags de release.
+Todas as contribuições seguem GitHub Flow e têm `main` como branch de destino.
+Não envie mudanças diretamente para `main` e não crie tags de release.
 
 ## Fluxo
 
 1. Abra ou localize uma issue que descreva o problema.
-2. Faca fork de [caioimori/sinapse-ai](https://github.com/caioimori/sinapse-ai).
+2. Faça fork de [caioimori/sinapse-ai](https://github.com/caioimori/sinapse-ai).
 3. Sincronize seu fork com `origin/main`.
-4. Crie uma branch curta, por exemplo `fix/provider-detection` ou
-   `docs/install-guide`.
-5. Implemente uma mudanca coerente e execute os gates aplicaveis.
+4. Crie uma branch curta, por exemplo `dev/fix/provider-detection` ou
+   `dev/docs/install-guide`.
+5. Implemente uma mudança coerente e execute os gates aplicáveis.
 6. Envie a branch ao seu fork e abra um PR contra `caioimori/sinapse-ai:main`.
-7. Preencha o template, resolva as conversas e aguarde os checks obrigatorios.
+7. Preencha o template, resolva as conversas e aguarde os checks obrigatórios.
 
 ## Antes do PR
 
@@ -24,13 +24,13 @@ npm test
 npm run validate:all
 ```
 
-Mudancas no instalador ou nos providers tambem devem passar paridade e uma
-instalacao isolada. Nunca inclua secrets, dados de clientes ou detalhes de uma
-vulnerabilidade ainda nao divulgada em issues ou PRs publicos.
+Mudanças no instalador ou nos providers também devem passar paridade e uma
+instalação isolada. Nunca inclua secrets, dados de clientes ou detalhes de uma
+vulnerabilidade ainda não divulgada em issues ou PRs públicos.
 
-## Referencias
+## Referências
 
-- [Guia de contribuicao](../../CONTRIBUTING.md)
+- [Guia de contribuição](../../CONTRIBUTING.md)
 - [GitHub Flow](../guides/gitflow.md)
-- [Politica de seguranca](../../SECURITY.md)
+- [Política de segurança](../../SECURITY.md)
 - [Suporte](../../SUPPORT.md)

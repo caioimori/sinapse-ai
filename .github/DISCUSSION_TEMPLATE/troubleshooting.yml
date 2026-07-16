@@ -6,20 +6,20 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Solucao de Problemas
+        ## Solução de Problemas
         Encontrou um problema? Vamos resolver juntos!
 
-        **Nota:** Se voce confirmou que e um bug, por favor [abra uma issue](https://github.com/caioimori/sinapse-ai/issues/new/choose).
+        **Nota:** Se você confirmou que é um bug, [abra uma issue](https://github.com/caioimori/sinapse-ai/issues/new/choose).
 
   - type: textarea
     id: problem
     attributes:
-      label: O que esta acontecendo?
-      description: Descreva o problema que voce esta enfrentando
+      label: O que está acontecendo?
+      description: Descreva o problema que você está enfrentando
       placeholder: |
-        Descreva o que esta dando errado...
+        Descreva o que está dando errado...
 
-        - O que voce estava tentando fazer?
+        - O que você estava tentando fazer?
         - O que aconteceu em vez disso?
         - Alguma mensagem de erro?
     validations:
@@ -28,7 +28,7 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: O que voce esperava?
+      label: O que você esperava?
       description: O que deveria ter acontecido?
 
   - type: textarea
@@ -44,14 +44,14 @@ body:
   - type: textarea
     id: code
     attributes:
-      label: Codigo / Configuracao
-      description: Compartilhe codigo ou configuracao relevante
+      label: Código / Configuração
+      description: Compartilhe código ou configuração relevante
       render: javascript
 
   - type: textarea
     id: error
     attributes:
-      label: Saida de Erro
+      label: Saída de Erro
       description: Mensagens de erro ou stack traces
       render: shell
 
@@ -59,11 +59,11 @@ body:
     id: environment
     attributes:
       label: Ambiente
-      description: Informacoes do seu sistema
+      description: Informações do seu sistema
       placeholder: |
         - SO: Windows 11 / macOS / Ubuntu
         - Node.js: v20.x
-        - SINAPSE versao: x.x.x
+        - SINAPSE versão: x.x.x
         - IDE: Claude Code / Codex / Outro
     validations:
       required: true
@@ -71,24 +71,24 @@ body:
   - type: textarea
     id: tried
     attributes:
-      label: O que voce ja tentou?
-      description: Liste solucoes que voce ja tentou
+      label: O que você já tentou?
+      description: Liste soluções que você já tentou
       placeholder: |
         - Tentei reiniciar...
         - Limpei cache...
-        - Consultei documentacao...
+        - Consultei a documentação...
 
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: Busquei discussoes existentes sobre problemas similares
-        - label: Consultei a documentacao
-        - label: Tentei com a versao mais recente
+        - label: Busquei discussões existentes sobre problemas similares
+        - label: Consultei a documentação
+        - label: Tentei com a versão mais recente
 
   - type: markdown
     attributes:
       value: |
         ---
-        **Dica:** Quanto mais detalhes voce fornecer, mais rapido podemos ajudar! Se isso se confirmar como um bug, um maintainer ajudara voce a abrir uma issue.
+        **Dica:** Quanto mais detalhes você fornecer, mais rápido poderemos ajudar. Se isso se confirmar como um bug, um maintainer ajudará você a abrir uma issue.

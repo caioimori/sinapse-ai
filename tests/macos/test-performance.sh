@@ -1,180 +1,71 @@
 #!/bin/bash
-# Test Script: AC8 - Performance Benchmarks
-# Story: 1.10b - macOS Testing & Validation
-
 set -euo pipefail
 
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-TEST_NAME="AC8: Performance"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOG_FILE="/tmp/sinapse-test-perf-$(date +%Y%m%d-%H%M%S).log"
+WORK_ROOT="$(mktemp -d)"
+MAX_INSTALL_SECONDS=300
+MAX_CLI_SECONDS=5
 
-log_info() { echo -e "${GREEN}[INFO]${NC} $1" | tee -a "$LOG_FILE"; }
-log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1" | tee -a "$LOG_FILE"; }
-pass_test() { echo -e "${GREEN}[PASS]${NC} $1" | tee -a "$LOG_FILE"; }
-fail_test() { echo -e "${RED}[FAIL]${NC} $1" | tee -a "$LOG_FILE"; exit 1; }
+cleanup() {
+  rm -rf "$WORK_ROOT"
+}
+trap cleanup EXIT
 
-# Performance thresholds (in seconds)
-MAX_INSTALL_TIME=300  # 5 minutes
-MAX_HEALTH_CHECK=10   # 10 seconds
-MAX_MCP_INSTALL=60    # 1 minute per MCP
-
-test_full_installation_time() {
-    log_info "Test 1: Measuring full installation time..."
-
-    START_TIME=$(date +%s)
-
-    log_info "Starting SINAPSE installation (this will take a few minutes)..."
-    log_warning "This test requires manual interaction during installation"
-
-    # Note: Actual installation would happen here
-    # For testing purposes, we'll simulate timing
-    log_info "Simulating installation... (in real test, run: npx @sinapse/sinapse@latest init)"
-
-    # In actual test, measure real installation:
-    # if npx @sinapse/sinapse@latest init; then
-    #     END_TIME=$(date +%s)
-    #     DURATION=$((END_TIME - START_TIME))
-    #     ...
-    # fi
-
-    log_info "Installation timing would be measured here"
-    log_info "Expected: < $MAX_INSTALL_TIME seconds (5 minutes)"
+log() {
+  printf '%s\n' "$1" | tee -a "$LOG_FILE"
 }
 
-test_mcp_health_check_time() {
-    log_info "Test 2: Measuring health check performance..."
-
-    if ! command -v sinapse &> /dev/null; then
-        log_warning "SINAPSE not installed, skipping performance test"
-        return
-    fi
-
-    START_TIME=$(date +%s)
-    sinapse health &> /dev/null || true
-    END_TIME=$(date +%s)
-
-    DURATION=$((END_TIME - START_TIME))
-    log_info "Health check completed in $DURATION seconds"
-
-    if [[ $DURATION -le $MAX_HEALTH_CHECK ]]; then
-        pass_test "Health check completed in acceptable time ($DURATION s <= $MAX_HEALTH_CHECK s)"
-    else
-        fail_test "Health check too slow: $DURATION s (max: $MAX_HEALTH_CHECK s)"
-    fi
+fail() {
+  log "[FAIL] $1"
+  exit 1
 }
 
-test_cli_response_time() {
-    log_info "Test 3: Measuring CLI command response times..."
+[[ "$(uname -s)" == "Darwin" ]] || fail "This test requires macOS."
+command -v node >/dev/null || fail "Node.js is required."
+command -v npm >/dev/null || fail "npm is required."
 
-    if ! command -v sinapse &> /dev/null; then
-        log_warning "SINAPSE not installed, skipping CLI performance test"
-        return
-    fi
+log "[INFO] Platform: $(sw_vers -productVersion) $(uname -m)"
+log "[INFO] Runtime: Node $(node --version), npm $(npm --version)"
 
-    # Test --version speed
-    START=$(date +%s%N 2>/dev/null || date +%s)
-    sinapse --version &> /dev/null || true
-    END=$(date +%s%N 2>/dev/null || date +%s)
+TARBALL_NAME="$(cd "$REPO_ROOT" && npm pack --ignore-scripts --silent --pack-destination "$WORK_ROOT" | tail -n 1)"
+TARBALL="$WORK_ROOT/$TARBALL_NAME"
+[[ -f "$TARBALL" ]] || fail "npm pack did not produce a tarball."
 
-    if command -v bc &> /dev/null && [[ "$START" != "$END" ]]; then
-        DURATION=$(echo "scale=3; ($END - $START) / 1000000" | bc)
-        log_info "sinapse --version: ${DURATION}ms"
+PROJECT_DIR="$WORK_ROOT/project"
+HOME_DIR="$WORK_ROOT/home"
+CACHE_DIR="$WORK_ROOT/cache"
+mkdir -p "$PROJECT_DIR" "$HOME_DIR" "$CACHE_DIR"
 
-        if (( $(echo "$DURATION < 1000" | bc -l) )); then
-            pass_test "CLI command responds quickly (<1s)"
-        fi
-    else
-        log_info "Install 'bc' for millisecond precision timing"
-    fi
-}
+cd "$PROJECT_DIR"
+npm init --yes >/dev/null
 
-test_network_operations() {
-    log_info "Test 4: Testing network operation timeouts and retries..."
+INSTALL_STARTED="$(date +%s)"
+npm install "$TARBALL" --ignore-scripts --no-audit --no-fund >/dev/null
+HOME="$HOME_DIR" npm_config_cache="$CACHE_DIR" CI=true \
+  ./node_modules/.bin/sinapse-ai install >/dev/null
+INSTALL_SECONDS=$(( $(date +%s) - INSTALL_STARTED ))
 
-    # Test npm registry connectivity
-    START_TIME=$(date +%s)
+if (( INSTALL_SECONDS > MAX_INSTALL_SECONDS )); then
+  fail "Local package installation took ${INSTALL_SECONDS}s; limit is ${MAX_INSTALL_SECONDS}s."
+fi
+log "[PASS] Local package installation: ${INSTALL_SECONDS}s"
 
-    if npm view @sinapse/sinapse version &> /dev/null; then
-        END_TIME=$(date +%s)
-        DURATION=$((END_TIME - START_TIME))
+CLI_STARTED="$(date +%s)"
+./node_modules/.bin/sinapse-ai --version >/dev/null
+./node_modules/.bin/sinapse-ai --help >/dev/null
+CLI_SECONDS=$(( $(date +%s) - CLI_STARTED ))
 
-        log_info "npm registry lookup: $DURATION seconds"
+if (( CLI_SECONDS > MAX_CLI_SECONDS )); then
+  fail "Version and help took ${CLI_SECONDS}s; limit is ${MAX_CLI_SECONDS}s."
+fi
+log "[PASS] Version and help: ${CLI_SECONDS}s"
 
-        if [[ $DURATION -le 10 ]]; then
-            pass_test "Network operations complete within timeout"
-        else
-            log_warning "Network operations slow: $DURATION s"
-        fi
-    else
-        log_warning "Cannot reach npm registry (check connectivity)"
-    fi
-}
+PUBLISHED_VERSION="$(npm view sinapse-ai version --silent)"
+[[ -n "$PUBLISHED_VERSION" ]] || fail "npm registry did not return sinapse-ai version."
+log "[PASS] npm registry package exists: sinapse-ai@$PUBLISHED_VERSION"
 
-test_system_resources() {
-    log_info "Test 5: Checking system resource usage..."
-
-    # Get CPU info
-    CPU_COUNT=$(sysctl -n hw.ncpu)
-    log_info "CPU cores: $CPU_COUNT"
-
-    # Get memory
-    MEMORY_GB=$(sysctl -n hw.memsize | awk '{printf "%.1f", $1/1024/1024/1024}')
-    log_info "Total memory: ${MEMORY_GB}GB"
-
-    # Get disk space
-    DISK_AVAIL=$(df -h "$HOME" | tail -1 | awk '{print $4}')
-    log_info "Disk space available: $DISK_AVAIL"
-
-    # Check if system meets minimum requirements
-    if [[ $CPU_COUNT -ge 2 ]] && (( $(echo "$MEMORY_GB >= 4" | bc -l) )); then
-        pass_test "System resources adequate for SINAPSE"
-    else
-        log_warning "System resources may be insufficient"
-    fi
-}
-
-test_architecture_performance() {
-    log_info "Test 6: Architecture-specific performance..."
-
-    ARCH=$(uname -m)
-    log_info "Architecture: $ARCH"
-
-    # Get chip info
-    CHIP=$(sysctl -n machdep.cpu.brand_string)
-    log_info "Chip: $CHIP"
-
-    # For Apple Silicon, check if running native vs Rosetta
-    if [[ "$ARCH" == "arm64" ]]; then
-        NODE_ARCH=$(file "$(which node)")
-
-        if echo "$NODE_ARCH" | grep -q "arm64"; then
-            pass_test "Running native ARM binaries (optimal performance)"
-        elif echo "$NODE_ARCH" | grep -q "x86_64"; then
-            log_warning "Running under Rosetta (reduced performance expected)"
-            pass_test "Rosetta compatibility confirmed (acceptable fallback)"
-        fi
-    fi
-}
-
-main() {
-    log_info "========================================="
-    log_info "Starting $TEST_NAME"
-    log_info "Performance thresholds:"
-    log_info "  - Full installation: < 5 minutes"
-    log_info "  - Health check: < 10 seconds"
-    log_info "  - MCP installation: < 1 minute each"
-    log_info "========================================="
-
-    test_full_installation_time
-    test_mcp_health_check_time
-    test_cli_response_time
-    test_network_operations
-    test_system_resources
-    test_architecture_performance
-
-    log_info "========================================="
-    log_info "Performance tests completed! ✅"
-    log_info "========================================="
-}
-
-main "$@"
+log "[INFO] CPU cores: $(sysctl -n hw.ncpu)"
+log "[INFO] Memory bytes: $(sysctl -n hw.memsize)"
+log "[PASS] Performance validation completed."

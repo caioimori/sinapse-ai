@@ -40,7 +40,7 @@ const { version, notes } = result.nextRelease;
 const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 const packageLock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
 const changelog = fs.readFileSync(changelogPath, 'utf8');
-const escapedVersion = version.replaceAll('.', '\\.');
+const escapedVersion = version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const changelogHasVersion = new RegExp(`^## \\[${escapedVersion}\\]`, 'm').test(changelog);
 const versionMatches =
   packageJson.version === version &&

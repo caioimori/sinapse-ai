@@ -1,9 +1,9 @@
 # Getting Started
 
 Install SINAPSE AI in an existing or new project and route the first request in
-about two minutes.
+a few steps.
 
-> [Portugues](pt/getting-started.md)
+> [Português](pt/getting-started.md)
 
 ## Requirements
 
@@ -76,12 +76,13 @@ normally require a ready story before implementation.
 ## Update safely
 
 ```bash
-npx sinapse-ai@latest update
+npx sinapse-ai@latest install
 ```
 
-The updater refreshes framework-managed files and preserves project-owned
-content. Review the resulting diff before committing. Use `install --force`
-only when deliberately refreshing the managed installation.
+The idempotent installer detects an existing installation, refreshes
+framework-managed files, and preserves project-owned content. Review the
+resulting diff before committing. Use `install --force` only when deliberately
+refreshing the managed installation.
 
 ## Next steps
 

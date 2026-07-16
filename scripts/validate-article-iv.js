@@ -122,9 +122,9 @@ function extractFileList(storyContent) {
     if (token) {
       entries.push(
         token
+          .replace(/[,;]$/, '')
           .replace(/^`+|`+$/g, '')
-          .replace(/\\/g, '/')
-          .replace(/[,;]$/, ''),
+          .replace(/\\/g, '/'),
       );
     }
   }

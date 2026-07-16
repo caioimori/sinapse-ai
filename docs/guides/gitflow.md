@@ -11,7 +11,7 @@ issue / story
   -> create short-lived branch
   -> implement and validate
   -> open pull request
-  -> automated gates + CODEOWNERS review
+  -> automated gates + maintainer review when required
   -> resolve conversations
   -> squash merge
   -> delete branch
@@ -19,15 +19,15 @@ issue / story
 
 ## Branch names
 
-Use `<type>/<slug>` for human contributions and `<actor>/<type>/<slug>` for
-managed AI sessions:
+Use `<owner>/<type>/<slug>`. The approved owner prefix is `caio`, `soier`, or
+`dev`; provider names may appear after the owner prefix when useful:
 
 ```text
-feat/provider-diagnostics
-fix/update-preserves-skills
-docs/public-install-guide
-codex/docs/public-product-surface
-claude/fix/codex-parity
+dev/feat/provider-diagnostics
+dev/fix/update-preserves-skills
+dev/docs/public-install-guide
+caio/codex/public-product-surface
+soier/claude/codex-parity
 ```
 
 Allowed types normally follow Conventional Commits: `feat`, `fix`, `docs`,
@@ -37,7 +37,9 @@ Allowed types normally follow Conventional Commits: `feat`, `fix`, `docs`,
 
 - Link the issue or story when one exists.
 - Keep one coherent change per PR.
-- Use a Conventional Commit title; squash merge turns it into the final commit.
+- Use `type: description [Story X.Y]` for implementation PRs; squash merge turns
+  the title into the final commit. Validated documentation-only work may omit the
+  story reference.
 - Do not rewrite shared history after review begins without notifying reviewers.
 - Resolve review conversations and rerun invalidated gates.
 - Never place secrets, customer data, or undisclosed vulnerabilities in a PR.

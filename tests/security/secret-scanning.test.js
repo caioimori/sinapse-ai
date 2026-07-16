@@ -363,6 +363,8 @@ describe('Staged scanner — shared core + back-compat exports', () => {
     expect(typeof staged.scanStagedFiles).toBe('function');
     expect(typeof staged.isBlockedEnvFile).toBe('function');
     expect(typeof staged.isBinaryContent).toBe('function');
+    expect(typeof staged.extractPrintableStrings).toBe('function');
+    expect(typeof staged.scanBufferContent).toBe('function');
   });
 
   test('findSecretMatches detects a real key and skips a placeholder', () => {
@@ -391,5 +393,34 @@ describe('Staged scanner — shared core + back-compat exports', () => {
     expect(staged.isBinaryContent(disguisedText)).toBe(false);
     expect(staged.findSecretMatches(disguisedText.toString('utf8'), 'leak.png').length)
       .toBeGreaterThan(0);
+  });
+
+  test('a binary blob with an embedded deterministic credential is blocked', () => {
+    const binaryWithSecret = Buffer.concat([
+      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x00, 0xff]),
+      Buffer.from('AKIA1234567890ABCDEF'),
+      Buffer.from([0x00, 0x92, 0xe8]),
+    ]);
+    const findings = staged.scanStagedFiles(['assets/leak.png'], {
+      readStagedFile: () => binaryWithSecret,
+    });
+    expect(findings.some((finding) => finding.reason === 'AWS Access Key')).toBe(true);
+  });
+
+  test('ordinary binary image bytes do not trigger entropy findings', () => {
+    const png = Buffer.from([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+      0x00, 0xff, 0x92, 0x17, 0x03, 0xe8,
+    ]);
+    expect(staged.scanStagedFiles(['assets/image.png'], {
+      readStagedFile: () => png,
+    })).toEqual([]);
+  });
+
+  test('a disguised text blob is scanned through the staged-file integration', () => {
+    const findings = staged.scanStagedFiles(['assets/leak.png'], {
+      readStagedFile: () => Buffer.from('AKIA1234567890ABCDEF'),
+    });
+    expect(findings.some((finding) => finding.reason === 'AWS Access Key')).toBe(true);
   });
 });

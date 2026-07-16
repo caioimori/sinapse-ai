@@ -1,6 +1,6 @@
-# Guia do Usuario
+# Guia do Usuário
 
-O SINAPSE inclui 172 agentes especializados em 17 squads de dominio.
+O SINAPSE inclui 172 agentes especializados em 17 squads de domínio.
 
 ```bash
 npx sinapse-ai@latest install
@@ -8,12 +8,12 @@ npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-| Intencao | Claude Code | Codex |
+| Intenção | Claude Code | Codex |
 |---|---|---|
-| Rotear uma solicitacao | `@sinapse-orqx` | `$snps` |
+| Rotear uma solicitação | `@sinapse-orqx` | `$snps` |
 | Desenvolvimento direto | `@developer` | `$sinapse-agent developer` |
 | QA direto | `@quality-gate` | `$sinapse-agent quality-gate` |
 
 Continue em [Primeiros passos](../getting-started.md),
-[Referencia de agentes](../agent-reference-guide.md) e
+[Referência de agentes](../agent-reference-guide.md) e
 [Suporte](../../../SUPPORT.md).

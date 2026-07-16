@@ -1,6 +1,6 @@
-# FAQ de Instalacao
+# FAQ de Instalação
 
-## Qual e o comando recomendado?
+## Qual é o comando recomendado?
 
 ```bash
 npx sinapse-ai@latest install
@@ -8,14 +8,16 @@ npx sinapse-ai@latest install
 
 ## O comando sem flags instala os dois providers?
 
-Sim, em uma instalacao nova. Projetos existentes preservam a selecao salva; use
-`--reconfigure` para troca-la.
+Sim, em uma instalação nova. Projetos existentes preservam a seleção salva; use
+`--reconfigure` para trocá-la.
 
 ## Como atualizar?
 
 ```bash
-npx sinapse-ai@latest update
+npx sinapse-ai@latest install
 ```
+
+O comando é idempotente e detecta a instalação existente.
 
 ## Como validar?
 
@@ -24,9 +26,9 @@ npx sinapse-ai@latest status
 npx sinapse-ai@latest doctor
 ```
 
-## Existe marketplace ou repositorio oficial separado de squads?
+## Existe marketplace ou repositório oficial separado de squads?
 
-Nao no contrato publico atual. Os 17 squads incluidos sao distribuidos pelo
-pacote `sinapse-ai` e validados neste repositorio.
+Não no contrato público atual. Os 17 squads incluídos são distribuídos pelo
+pacote `sinapse-ai` e validados neste repositório.
 
-Veja o [FAQ canonico](../../installation/faq.md) e [SUPPORT.md](../../../SUPPORT.md).
+Veja o [FAQ canônico](../../installation/faq.md) e [SUPPORT.md](../../../SUPPORT.md).

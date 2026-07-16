@@ -38,9 +38,9 @@ installation and operating paths. Translation coverage is not yet complete.
 ## Portuguese
 
 - [Primeiros passos](pt/getting-started.md)
-- [Instalacao](pt/installation/README.md)
-- [Referencia de agentes](pt/agent-reference-guide.md)
-- [Solucao de problemas](pt/installation/troubleshooting.md)
+- [Instalação](pt/installation/README.md)
+- [Referência de agentes](pt/agent-reference-guide.md)
+- [Solução de problemas](pt/installation/troubleshooting.md)
 
 Older specifications, reports, and research remain available in their existing
 directories. A document outside this curated index may describe historical

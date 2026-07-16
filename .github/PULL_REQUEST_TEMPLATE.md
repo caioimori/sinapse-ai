@@ -29,14 +29,9 @@ npm test
 
 ## Checklist
 
-- [ ] PR title follows Conventional Commits.
+- [ ] PR title follows `type: description [Story X.Y]` for implementation changes.
 - [ ] The change is focused and the story/file list is current when applicable.
 - [ ] Claude Code and Codex remain equivalent, or the intentional difference is documented.
 - [ ] No secrets, customer data, or destructive operations are included.
 - [ ] Tests and public documentation cover changed behavior.
 - [ ] Review conversations are resolved before merge.
-
-<!--
-For an authorized deletion from a protected path, include exactly one explicit line:
-Article XI override: <concrete reason and replacement/rollback>
--->

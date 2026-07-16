@@ -1,10 +1,10 @@
 # Contribuindo com Squads
 
-Squads publicos sao contribuidos neste repositorio, em `squads/`. Nao existe um
-marketplace ou repositorio oficial separado no contrato atual.
+Squads públicos são contribuídos neste repositório, em `squads/`. Não existe um
+marketplace ou repositório oficial separado no contrato atual.
 
-Antes de implementar, abra uma proposta com problema, dominio, autoridade nao
-sobreposta, agentes, tasks, providers, seguranca e mantenedor. Depois valide:
+Antes de implementar, abra uma proposta com problema, domínio, autoridade não
+sobreposta, agentes, tasks, providers, segurança e mantenedor. Depois valide:
 
 ```bash
 npm run validate:squad-schema:strict
@@ -13,4 +13,4 @@ npm run sync:providers
 npm run validate:parity
 ```
 
-Veja o [guia canonico](../../guides/contributing-squads.md).
+Veja o [guia canônico](../../guides/contributing-squads.md).

@@ -1,13 +1,16 @@
 # Release Process
 
-SINAPSE AI has one release writer: the `Semantic Release` GitHub Actions
-workflow. Legacy tag-driven publishers are archived and must not be re-enabled
-without a governance decision.
+SINAPSE AI has one two-phase release path. `Release Preparation` computes the
+version and commits `package.json`, `package-lock.json`, and `CHANGELOG.md` in a
+reviewable PR. The protected `Semantic Release` workflow publishes the prepared
+state to npm and GitHub. Legacy tag-driven publishers are archived and must not
+be re-enabled without a governance decision.
 
 ## Preconditions
 
 - Release changes are merged to protected `main` through a pull request.
-- Required checks and CODEOWNERS review are complete.
+- Required checks, review conversations, and any required maintainer review are
+  complete.
 - The package passes release readiness, provider parity, and isolated install
   validation.
 - npm and GitHub credentials are available only to the protected release job.

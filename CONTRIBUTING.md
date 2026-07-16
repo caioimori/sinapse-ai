@@ -54,16 +54,16 @@ issue or discussion
 Recommended branch names:
 
 ```text
-feat/<short-description>
-fix/<short-description>
-docs/<short-description>
-chore/<short-description>
-codex/<type>/<short-description>
-claude/<type>/<short-description>
+dev/feat/<short-description>
+dev/fix/<short-description>
+dev/docs/<short-description>
+caio/<type>/<short-description>
+soier/<type>/<short-description>
 ```
 
-Maintainers may use a personal prefix such as `caio/` or `soier/`. Do not work
-directly on `main`, force-push a shared branch, or mix unrelated changes.
+The required owner prefix is `caio`, `soier`, or `dev`; provider and change type
+belong after that prefix. Do not work directly on `main`, force-push a shared
+branch, or mix unrelated changes.
 
 The detailed model is in [docs/guides/gitflow.md](docs/guides/gitflow.md).
 
@@ -137,16 +137,20 @@ must state:
 - screenshots for visible UI or documentation changes;
 - linked issue/story when applicable.
 
-Use a Conventional Commit title because pull requests are squash-merged:
+Use a Conventional Commit title because pull requests are squash-merged.
+Implementation changes require a story reference:
 
 ```text
-feat: add provider-aware installation summary
-fix: preserve Codex skills during update
-docs: rebuild the public product surface
+feat: add provider-aware installation summary [Story 2.1]
+fix: preserve Codex skills during update [Story 2.2]
 ```
 
+A story reference is optional only for a validated documentation-only change,
+for example `docs: rebuild the public product surface`.
+
 Breaking changes use `!` or a `BREAKING CHANGE:` footer. Review conversations
-must be resolved before merge. CODEOWNERS review is required for owned surfaces.
+must be resolved before merge. Maintainer review applies whenever repository
+ownership or branch-protection rules require it.
 
 ## Agent, task, and squad contributions
 
