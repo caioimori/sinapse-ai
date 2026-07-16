@@ -7,6 +7,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const { perfBudget } = require('../../../tests/helpers/perf-budget');
 
 // Mock dependencies before requiring SuggestionEngine
 jest.mock('../../core/session/context-loader', () => {
@@ -399,7 +400,7 @@ describe('SuggestionEngine Performance', () => {
     await engine.suggestNext(context);
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(100);
+    expect(duration).toBeLessThan(perfBudget(100));
   });
 
   it('should complete buildContext within 50ms', async () => {
@@ -407,10 +408,10 @@ describe('SuggestionEngine Performance', () => {
     await engine.buildContext({});
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(50);
+    expect(duration).toBeLessThan(perfBudget(50));
   });
 
-  it('should be faster on cache hit', async () => {
+  it('should complete cache hits within the nominal latency budget', async () => {
     const context = {
       agentId: 'dev',
       lastCommand: 'develop',
@@ -420,19 +421,13 @@ describe('SuggestionEngine Performance', () => {
       projectState: {},
     };
 
-    // Cold start
-    const start1 = Date.now();
+    // Prime the cache; cache reuse itself is asserted in the functional suite.
     await engine.suggestNext(context);
-    const coldDuration = Date.now() - start1;
 
-    // Warm cache
-    const start2 = Date.now();
+    const start = Date.now();
     await engine.suggestNext(context);
-    const warmDuration = Date.now() - start2;
+    const warmDuration = Date.now() - start;
 
-    // Allow 5ms tolerance for timing noise (Date.now() has ~1ms resolution)
-    // In CI environments, timing can be inconsistent
-    expect(warmDuration).toBeLessThanOrEqual(coldDuration + 5);
+    expect(warmDuration).toBeLessThan(perfBudget(10));
   });
 });
-

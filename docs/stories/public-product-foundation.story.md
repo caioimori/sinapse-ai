@@ -95,6 +95,9 @@ depender de conhecimento interno dos mantenedores.
 - A repetição remota expôs um teste legado de wall clock do `SquadMigrator` que
   oscilou para 509 ms contra 500 ms. Ele passou a usar o helper canônico
   `perfBudget(500)`, preservando o orçamento nominal e tolerando carga de runner.
+- O smoke de macOS revelou a mesma fragilidade na comparação entre cache frio e
+  quente do `SuggestionEngine`; o teste funcional de cache foi preservado e o
+  bloco de desempenho passou a usar os budgets canônicos de 100, 50 e 10 ms.
 - A suíte completa concluiu 423 suítes e 11.730 testes aprovados; 16 suítes e
   176 testes foram ignorados de forma declarada, com 8 itens `todo`. O Jest
   manteve o aviso conhecido de um worker encerrado de forma forçada, sem alterar
@@ -167,6 +170,7 @@ depender de conhecimento interno dos mantenedores.
 - `.sinapse-ai/data/entity-registry.yaml`
 - `.sinapse-ai/git-hooks/lib/staged-secret-scan.js`
 - `.sinapse-ai/install-manifest.yaml`
+- `.sinapse-ai/workflow-intelligence/__tests__/suggestion-engine.test.js`
 - `bin/commands/help.js`
 - `bin/utils/staged-secret-scan.js`
 - `CHANGELOG.md`

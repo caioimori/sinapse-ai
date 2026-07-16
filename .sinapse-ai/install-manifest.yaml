@@ -4568,9 +4568,9 @@ files:
     type: workflow-intelligence
     size: 11695
   - path: workflow-intelligence/__tests__/suggestion-engine.test.js
-    hash: sha256:4dd26f611a58c0bcd54dc69e1804efe103406ee0c0bda0880a4b39aecf540045
+    hash: sha256:1ada0dfe83d80f280adc9eb4c402bb7deecf072ca07782acebfd12377d2cd9a8
     type: workflow-intelligence
-    size: 12789
+    size: 12738
   - path: workflow-intelligence/__tests__/workflow-registry.test.js
     hash: sha256:d9488e420f584474de920e090068809a220db1bd1d49e96769f6fc3ed7a47dba
     type: workflow-intelligence
