@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T03:44:39.813Z",
+  "generatedAt": null,
   "counts": {
     "squads": 17,
     "agentsTotal": 172,
@@ -10,7 +10,7 @@
     "frameworkWorkflows": 15,
     "squadWorkflows": 83,
     "articles": 11,
-    "rules": 22
+    "rules": 26
   },
   "flows": [
     {
@@ -29,7 +29,7 @@
       "id": "model-routing",
       "title": "Model routing (cheapest that solves it)",
       "purpose": "How each task picks a model tier. Heavy thinking goes into the spec; execution then mostly reads a finished doc, so token economy is a consequence.",
-      "mermaid": "flowchart TD\n    T[Task] --> K{Kind?}\n    K -->|lint / rename / yaml / bulk| H[haiku - low effort]\n    K -->|feature from spec / review / bug / tests| SO[sonnet - high]\n    K -->|single-file / factual| SM[sonnet - medium]\n    K -->|cross-system arch / complex debug / multi-file| OP[opus - xhigh]\n    K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]\n    H --> SP{>= 8 tool calls or real fan-out?}\n    SO --> SP\n    SM --> SP\n    OP --> SP\n    OM --> SP\n    SP -->|yes| SUB[Spawn sub-agent]\n    SP -->|no| INLINE[Run inline]"
+      "mermaid": "flowchart TD\n    T[Task] --> K{Kind?}\n    K -->|cross-system arch / complex debug / multi-file| OP[opus - xhigh]\n    K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]\n    K -->|feature from spec / review / bug / tests| SO[sonnet - high]\n    K -->|single-file / factual| SM[sonnet - medium]\n    K -->|lint / rename / yaml / bulk| H[haiku - low effort]\n    OP --> SP{>= 8 tool calls or real fan-out?}\n    OM --> SP\n    SO --> SP\n    SM --> SP\n    H --> SP\n    SP -->|yes| SUB[Spawn sub-agent]\n    SP -->|no| INLINE[Run inline]"
     },
     {
       "id": "doc-first",
@@ -2739,6 +2739,10 @@
       "title": "Cross-Squad Routing Rules"
     },
     {
+      "id": "documentation-first-reference",
+      "title": "Documentation-First — Operational Reference"
+    },
+    {
       "id": "documentation-first",
       "title": "Documentation-First Development"
     },
@@ -2749,6 +2753,10 @@
     {
       "id": "ids-principles",
       "title": "IDS Principles — Detailed Rules"
+    },
+    {
+      "id": "mandatory-delegation-reference",
+      "title": "Mandatory Delegation — Operational Reference"
     },
     {
       "id": "mandatory-delegation",
@@ -2763,12 +2771,20 @@
       "title": "NSN Mode — Never Say Never"
     },
     {
+      "id": "project-intelligence-reference",
+      "title": "Project Intelligence — Operational Reference"
+    },
+    {
       "id": "project-intelligence",
       "title": "Project Intelligence — Auto-Detection"
     },
     {
       "id": "response-format",
       "title": "Response Format"
+    },
+    {
+      "id": "safe-collaboration-reference",
+      "title": "Safe Collaboration — Operational Reference"
     },
     {
       "id": "safe-collaboration",

@@ -3,13 +3,12 @@
 > Single, generated map of how the SINAPSE framework works: routing, models,
 > constitution, workflows, agents, squads. Regenerate with `sinapse atlas`.
 > Counts are read from disk (Article VII — always exact).
-> Generated: 2026-07-03T03:44:39.813Z
 
 **At a glance:** 17 squads · 172 agents
 (12 framework + 160 squad) ·
 18 orchestrators · 98 workflows
 (15 framework + 83 squad) ·
-11 constitutional articles · 22 rules.
+11 constitutional articles · 26 rules.
 
 ---
 
@@ -153,16 +152,16 @@ How each task picks a model tier. Heavy thinking goes into the spec; execution t
 ```mermaid
 flowchart TD
     T[Task] --> K{Kind?}
-    K -->|lint / rename / yaml / bulk| H[haiku - low effort]
-    K -->|feature from spec / review / bug / tests| SO[sonnet - high]
-    K -->|single-file / factual| SM[sonnet - medium]
     K -->|cross-system arch / complex debug / multi-file| OP[opus - xhigh]
     K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]
-    H --> SP{>= 8 tool calls or real fan-out?}
+    K -->|feature from spec / review / bug / tests| SO[sonnet - high]
+    K -->|single-file / factual| SM[sonnet - medium]
+    K -->|lint / rename / yaml / bulk| H[haiku - low effort]
+    OP --> SP{>= 8 tool calls or real fan-out?}
+    OM --> SP
     SO --> SP
     SM --> SP
-    OP --> SP
-    OM --> SP
+    H --> SP
     SP -->|yes| SUB[Spawn sub-agent]
     SP -->|no| INLINE[Run inline]
 ```
@@ -387,18 +386,19 @@ PRD/spec, so execution mostly *reads a finished document* instead of reasoning.
 | Task | Model | Effort |
 |---|---|---|
 | Cross-system architecture, complex debug, multi-file refactor | **opus** | xhigh |
-| Spec Pipeline COMPLEX (score ≥ 16) | **opus** | max |
+| Spec Pipeline COMPLEX (score >= 16) | **opus** | max |
 | Feature from spec, code review, bug fix, tests, stories | **sonnet** | high |
 | Single-file analysis, factual question | **sonnet** | medium |
 | Lint, rename, YAML, lookup, bulk | **haiku** | low |
 
 Rule of thumb: when in doubt, drop a tier and escalate only on failure. A
 sub-agent is only spawned for real parallel fan-out (≥ 8 tool calls), otherwise
-work runs inline. *(Source of truth: `.claude/rules/token-economy.md`.)*
+work runs inline. *(Sources of truth: `.claude/rules/token-economy.md` §2 +
+`.sinapse-ai/data/model-routing.yaml`.)*
 
 ---
 
-## 5. Non-negotiable rules (22)
+## 5. Non-negotiable rules (26)
 
 Loaded automatically by the harness. *(Source: `.claude/rules/`.)*
 
@@ -409,14 +409,18 @@ Loaded automatically by the harness. *(Source: `.claude/rules/`.)*
 | `agent-memory-imports` | Agent Memory Imports |
 | `coderabbit-integration` | CodeRabbit Integration — Detailed Rules |
 | `cross-squad-routing` | Cross-Squad Routing Rules |
+| `documentation-first-reference` | Documentation-First — Operational Reference |
 | `documentation-first` | Documentation-First Development |
 | `hook-governance` | Hook Governance Rules |
 | `ids-principles` | IDS Principles — Detailed Rules |
+| `mandatory-delegation-reference` | Mandatory Delegation — Operational Reference |
 | `mandatory-delegation` | Mandatory Delegation |
 | `mcp-usage` | MCP Server Usage Rules - SINAPSE Architecture |
 | `nsn-mode` | NSN Mode — Never Say Never |
+| `project-intelligence-reference` | Project Intelligence — Operational Reference |
 | `project-intelligence` | Project Intelligence — Auto-Detection |
 | `response-format` | Response Format |
+| `safe-collaboration-reference` | Safe Collaboration — Operational Reference |
 | `safe-collaboration` | Safe Collaboration — Git Safety Net |
 | `security-data-protection` | Security & Data Protection |
 | `security-scanning` | Security Scanning Rules |

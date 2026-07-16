@@ -10,16 +10,18 @@
  * Drift guard: a test asserts every id in FRAMEWORK_FLOWS has an entry here, so
  * adding a flow without translating it fails CI.
  *
- * Sync note (AF-20260702 item 2.10, CONFIRMED): the 'model-routing' entry's
- * tiers/efforts must stay consistent with `.claude/rules/token-economy.md` §2
- * and flows.js/render-markdown.js — verified in sync as of that audit, hand-kept
- * (no automated cross-check). Recommendation (deferred, Article XI sign-off):
- * single `.sinapse-ai/data/*.yaml` source for all 3 renderers.
+ * Single source (AF-20260702 item 2.10 — executed): the 'model-routing' entry
+ * is rendered from `.sinapse-ai/data/model-routing.yaml` via ./model-routing
+ * (same source as flows.js and render-markdown.js). Consistency with the prose
+ * law (`.claude/rules/token-economy.md` §2) is asserted by
+ * tests/core/atlas-model-routing.test.js.
  *
  * @module core/atlas/flows-pt
  */
 
 'use strict';
+
+const { routingFlowMermaid } = require('./model-routing');
 
 /** @type {Record<string,{titulo:string,proposito:string,mermaid:string}>} */
 const FRAMEWORK_FLOWS_PT = {
@@ -68,20 +70,7 @@ const FRAMEWORK_FLOWS_PT = {
     titulo: 'Roteamento de modelo (o mais barato que resolve)',
     proposito:
       'Como cada tarefa escolhe o tier de modelo. O raciocínio pesado vai pra spec; a execução depois quase só lê um doc pronto, então economia de token é consequência.',
-    mermaid: `flowchart TD
-    T[Tarefa] --> K{Tipo?}
-    K -->|lint / rename / yaml / massa| H[haiku - esforço baixo]
-    K -->|feature da spec / review / bug / testes| SO[sonnet - alto]
-    K -->|arquivo único / factual| SM[sonnet - médio]
-    K -->|arquitetura cross-system / debug complexo| OP[opus - xhigh]
-    K -->|Spec Pipeline COMPLEX score >= 16| OM[opus - max]
-    H --> SP{>= 8 tool calls ou fan-out real?}
-    SO --> SP
-    SM --> SP
-    OP --> SP
-    OM --> SP
-    SP -->|sim| SUB[Spawna sub-agente]
-    SP -->|não| INLINE[Roda inline]`,
+    mermaid: routingFlowMermaid('pt'),
   },
   'doc-first': {
     titulo: 'Enforcement doc-first',
