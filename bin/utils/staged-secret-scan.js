@@ -49,6 +49,12 @@ const SCANNER_SELF_FILES = new Set([
   'bin/utils/secret-scanner-core.js',
   'bin/utils/staged-secret-scan.js',
   '.claude/hooks/secret-scanning.cjs',
+  // Same two files as distributed into a consumer project. Without these the
+  // self-exemption only resolves inside this repository, and the guard can block
+  // a consumer from committing the scanner itself — whose regexes embed token
+  // shapes by definition.
+  '.sinapse-ai/git-hooks/lib/secret-scanner-core.js',
+  '.sinapse-ai/git-hooks/lib/staged-secret-scan.js',
 ]);
 // Each alternative carries its own anchors (grouped explicitly) so neither
 // branch can accidentally match a substring of the other's context.

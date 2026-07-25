@@ -163,3 +163,73 @@ describe('scanContent / hasSecret', () => {
     });
   });
 });
+
+// Story: story-secret-scanner-accuracy.
+// Fixtures are built by concatenation so this source file carries no literal
+// credential token — same convention as the UI-label suite above.
+describe('descriptive credential placeholders', () => {
+  const KEY = 'pass' + 'word';
+
+  test.each([
+    'secure-' + 'password',
+    'your-' + 'password' + '-here',
+    'db_' + 'password',
+    'my-' + 'secret' + '-token',
+  ])('treats the documentation value "%s" as a placeholder', (value) => {
+    expect(core.isAllowlistPlaceholder(value)).toBe(true);
+  });
+
+  test.each([
+    'Kq7mZ9xL2vRt8pWn',
+    'P@ssw0rd-' + 'secret',
+  ])('does NOT allowlist "%s" (digit, uppercase or symbol present)', (value) => {
+    expect(core.isAllowlistPlaceholder(value)).toBe(false);
+  });
+
+  // `mypassword` is already in the inherited PLACEHOLDER_TOKENS list, so this
+  // value was allowlisted before this change too. Asserted here to record the
+  // existing behaviour rather than imply the new rule introduced it.
+  test('inherited token behaviour is unchanged', () => {
+    expect(core.isAllowlistPlaceholder('My' + 'Password' + '123')).toBe(true);
+  });
+
+  test("the framework's own Supabase auth example does not block a commit", () => {
+    const example = `await supabase.auth.signUp({ email: 'user@example.com', ${KEY}: 'secure-${KEY}' })`;
+    expect(core.scanContent(example, { filePath: 'product/data/supabase-patterns.md' })).toEqual([]);
+  });
+});
+
+describe('every occurrence of a named pattern is examined', () => {
+  // Split prefixes: no contiguous key literal in this source file.
+  const AWS_A = 'AKIA' + '7G4Q2XV9PLZK3MWB';
+  const AWS_B = 'AKIA' + 'QQ3ZL8FN2RTVCXWD';
+
+  test('two distinct keys in one file produce two findings', () => {
+    const findings = core.scanContent(`a = "${AWS_A}"\nb = "${AWS_B}"`, { filePath: 'src/x.js' });
+    expect(findings.filter((f) => f.name === 'AWS Access Key')).toHaveLength(2);
+  });
+
+  test('the same literal repeated is reported once', () => {
+    const findings = core.scanContent(`a = "${AWS_A}"\nb = "${AWS_A}"`, { filePath: 'src/x.js' });
+    expect(findings.filter((f) => f.name === 'AWS Access Key')).toHaveLength(1);
+  });
+
+  // The regression that motivated this story. It only shows up on a GATED
+  // descriptor: the structural patterns above are conclusive and never hit a
+  // `continue`, so they keep working either way. `Hardcoded Password` is
+  // lowConfidence, so with a single `.match()` a placeholder in the first
+  // occurrence hit `continue`, abandoned the descriptor entirely, and the real
+  // password further down was never examined — a false negative.
+  test('a real secret is still found when a placeholder comes first', () => {
+    const KEY = 'pass' + 'word';
+    const content = `${KEY}: 'your-key-here'\n\n${KEY}: 'Xy9Qz2Lm8Wk4Rt'`;
+    const findings = core.scanContent(content, { filePath: 'src/config.js' });
+    expect(findings.some((f) => f.name === 'Hardcoded Password')).toBe(true);
+  });
+
+  test('legitimate hashes stay ignored even with several occurrences', () => {
+    const sha = 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3';
+    const other = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
+    expect(core.scanContent(`${sha}\n${other}`, { filePath: 'CHANGELOG.md' })).toEqual([]);
+  });
+});
