@@ -113,6 +113,23 @@ const PLACEHOLDER_PATTERNS = [
   // all-caps secrets (e.g. AWS access keys) are NOT allowlisted by this rule.
   /^[A-Z][A-Z0-9]*_[A-Z0-9_]*$/,
   /^(x+|y+|z+|n+|0+|a+|\.+|-+|_+|\*+)$/i, // xxxx, 0000, ----, ....
+  // Descriptive credential placeholder: a value built ONLY from lowercase words
+  // joined by - or _, where one of the words is the credential noun itself
+  // (secure-password, your-password-here, db_password, my-secret-token).
+  // Documentation writes credentials this way; real secrets do not.
+  //
+  // A token catalogue cannot keep up here: `your-key`, `your-secret`,
+  // `your-token` and `your-api` were listed, but every password spelling was
+  // missing — so the framework's own Supabase auth example blocked its own
+  // commit, and the only practical escape was `--no-verify`, which disables
+  // the whole guard rather than the one false finding.
+  //
+  // Deliberately narrow: any digit, uppercase letter or symbol disqualifies the
+  // value, so MyPassword123, P@ssw0rd-secret and Kq7mZ9xL2vRt8pWn stay flagged.
+  // Accepted blind spot: an all-lowercase dictionary passphrase that happens to
+  // contain the credential noun (open-secret-door) is allowlisted — by shape
+  // alone it is indistinguishable from documentation.
+  /^(?:[a-z]+[-_])*(?:password|passwd|senha|secret|credential|apikey)(?:[-_][a-z]+)*$/,
 ];
 
 const EXAMPLE_HOST_PATTERN = /(?:example\.(?:com|org|net)|localhost|127\.0\.0\.1|host\b|your-host|placeholder)/i;
@@ -202,6 +219,11 @@ function redactMatch(value, keep = 4) {
   return prefix + '...[REDACTED ' + (v.length - keep) + ' chars]';
 }
 
+/** Same pattern, guaranteed global — so `exec` can walk every occurrence. */
+function withGlobalFlag(flags) {
+  return flags.includes('g') ? flags : flags + 'g';
+}
+
 function scanContent(content, options = {}) {
   const text = String(content == null ? '' : content);
   const filePath = options.filePath || '';
@@ -218,71 +240,93 @@ function scanContent(content, options = {}) {
   //    (password/secret assignments, Bearer/Basic headers) get the placeholder
   //    allowlist, applied to the captured *value* portion.
   for (const descriptor of NAMED_PATTERNS) {
-    const m = text.match(descriptor.pattern);
-    if (!m) continue;
-    const matched = m[0];
+    // Descriptors are authored without /g so a plain `.match()` can expose
+    // capture groups; scan with a global clone so EVERY occurrence is examined.
+    //
+    // With only the first match, the `continue` in the gates below skipped the
+    // whole descriptor: when the first hit was a legitimate placeholder, a real
+    // secret further down the same file was never examined at all. That is a
+    // false negative, not merely an incomplete report.
+    const scanner = new RegExp(descriptor.pattern.source, withGlobalFlag(descriptor.pattern.flags));
+    const seenValues = new Set();
+    let m;
 
-    if (descriptor.lowConfidence) {
-      // Isolate the value side of `key = "<value>"` / `Bearer <value>`.
-      const valuePart = (matched.match(/(?:[=:]\s*['"]?|\s+)([^'"]+)['"]?\s*$/) || [null, matched])[1] || matched;
-      if (isAllowlistPlaceholder(valuePart)) continue;
+    while ((m = scanner.exec(text)) !== null) {
+      const matched = m[0];
+      // A zero-length match never advances lastIndex — guard against a spin.
+      if (matched.length === 0) {
+        scanner.lastIndex += 1;
+        continue;
+      }
+      // The same literal repeated is one finding; distinct values are separate.
+      if (seenValues.has(matched)) continue;
+      seenValues.add(matched);
+
+      if (descriptor.lowConfidence) {
+        // Isolate the value side of `key = "<value>"` / `Bearer <value>`.
+        const valuePart = (matched.match(/(?:[=:]\s*['"]?|\s+)([^'"]+)['"]?\s*$/) || [null, matched])[1] || matched;
+        if (isAllowlistPlaceholder(valuePart)) continue;
+      }
+
+      if (descriptor.credentialPlaceholderGated) {
+        // A connection string carries a structured user:password@host. When the
+        // password slot is a placeholder/interpolation (${VAR}, <pass>, a
+        // SCREAMING_SNAKE env-var name, your-password…) it is a template/example,
+        // NOT a leaked credential — and is the idiomatic, safe way to document
+        // one. A real leaked password (random/literal) is not allowlisted and is
+        // still flagged.
+        const cred = (matched.match(/:\/\/[^:/\s]+:([^@\s]+)@/) || [null, ''])[1];
+        if (cred && isAllowlistPlaceholder(cred)) continue;
+      }
+
+      if (descriptor.entropyGated) {
+        const tail = (matched.match(/[A-Za-z0-9_\-/+=]{16,}$/) || [matched])[0];
+        if (isAllowlistPlaceholder(tail)) continue;
+        // Threshold lowered 2.5 -> 2.0: a short real token (e.g. a 20-char legacy
+        // key with a narrow alphabet) can dip just under 2.5 and would have been a
+        // false-NEGATIVE (leaked secret allowed through). 2.0 still rejects obvious
+        // non-random fixtures (a single repeated char ~ 0.0, repeated words ~1.5)
+        // while no longer dropping legitimately-shaped keys.
+        if (shannonEntropy(tail) < 2.0) continue; // clearly non-random
+      }
+
+      if (descriptor.hashContextGated) {
+        // Long hex runs are flagged as suspected secrets (Twilio token, webhook
+        // signing secret, SHA-style digest) EXCEPT when they sit in an integrity /
+        // checksum / lockfile / git-sha context — those are legitimate hashes, not
+        // leaked credentials. Reuse HASH_CONTEXT_PATTERN over a window around the
+        // match so package-lock integrity:, "resolved" tarball #sha, "checksum",
+        // and 40/64-hex git shas are NOT false-positived. A fully repeated/obvious
+        // placeholder hex (deadbeef…, 000…) is also allowlisted.
+        if (isAllowlistPlaceholder(matched)) continue;
+        if (isLockfilePath(filePath)) continue;
+        // Canonical digest lengths — git SHA-1 (40) and SHA-256 (64) — are
+        // overwhelmingly legitimate hashes (commit refs, file checksums, content
+        // digests) and appear bare in changelogs/docs/lockfiles. Treating every
+        // isolated 40/64-hex run as a leak would false-positive on the entire git
+        // ecosystem, so these exact lengths are hash-shaped by default. The
+        // headline real-secret case (Twilio auth token = 32-hex) and other
+        // non-digest lengths (33–39, 41–63) are NOT standard digests and stay
+        // flagged. A leaked literal hash secret of EXACTLY 40/64 hex is the
+        // accepted blind spot of this length-based heuristic (documented tradeoff
+        // favouring zero false-positives on git/checksum hashes).
+        const hexLen = matched.length;
+        if (hexLen === 40 || hexLen === 64) continue;
+        // For non-canonical lengths, allowlist only when the SURROUNDING context
+        // carries a hash marker (integrity:, sha256-, "resolved", "checksum"). The
+        // window is widened on the left so a marker earlier on the line
+        // (e.g. `"resolved": "https://…/x.tgz#<hex>"`) is still seen.
+        // Position of THIS match. `text.indexOf(matched)` returned the first
+        // occurrence of the string, which stops being the current match as soon
+        // as the loop above examines more than one.
+        const mIdx = m.index;
+        const before = text.slice(Math.max(0, mIdx - 64), mIdx);
+        const after = text.slice(mIdx + matched.length, mIdx + matched.length + 4);
+        if (HASH_CONTEXT_PATTERN.test(before + ' ' + after)) continue;
+      }
+
+      findings.push({ name: descriptor.name, redacted: redactMatch(matched), kind: 'pattern' });
     }
-
-    if (descriptor.credentialPlaceholderGated) {
-      // A connection string carries a structured user:password@host. When the
-      // password slot is a placeholder/interpolation (${VAR}, <pass>, a
-      // SCREAMING_SNAKE env-var name, your-password…) it is a template/example,
-      // NOT a leaked credential — and is the idiomatic, safe way to document
-      // one. A real leaked password (random/literal) is not allowlisted and is
-      // still flagged.
-      const cred = (matched.match(/:\/\/[^:/\s]+:([^@\s]+)@/) || [null, ''])[1];
-      if (cred && isAllowlistPlaceholder(cred)) continue;
-    }
-
-    if (descriptor.entropyGated) {
-      const tail = (matched.match(/[A-Za-z0-9_\-/+=]{16,}$/) || [matched])[0];
-      if (isAllowlistPlaceholder(tail)) continue;
-      // Threshold lowered 2.5 -> 2.0: a short real token (e.g. a 20-char legacy
-      // key with a narrow alphabet) can dip just under 2.5 and would have been a
-      // false-NEGATIVE (leaked secret allowed through). 2.0 still rejects obvious
-      // non-random fixtures (a single repeated char ~ 0.0, repeated words ~1.5)
-      // while no longer dropping legitimately-shaped keys.
-      if (shannonEntropy(tail) < 2.0) continue; // clearly non-random
-    }
-
-    if (descriptor.hashContextGated) {
-      // Long hex runs are flagged as suspected secrets (Twilio token, webhook
-      // signing secret, SHA-style digest) EXCEPT when they sit in an integrity /
-      // checksum / lockfile / git-sha context — those are legitimate hashes, not
-      // leaked credentials. Reuse HASH_CONTEXT_PATTERN over a window around the
-      // match so package-lock integrity:, "resolved" tarball #sha, "checksum",
-      // and 40/64-hex git shas are NOT false-positived. A fully repeated/obvious
-      // placeholder hex (deadbeef…, 000…) is also allowlisted.
-      if (isAllowlistPlaceholder(matched)) continue;
-      if (isLockfilePath(filePath)) continue;
-      // Canonical digest lengths — git SHA-1 (40) and SHA-256 (64) — are
-      // overwhelmingly legitimate hashes (commit refs, file checksums, content
-      // digests) and appear bare in changelogs/docs/lockfiles. Treating every
-      // isolated 40/64-hex run as a leak would false-positive on the entire git
-      // ecosystem, so these exact lengths are hash-shaped by default. The
-      // headline real-secret case (Twilio auth token = 32-hex) and other
-      // non-digest lengths (33–39, 41–63) are NOT standard digests and stay
-      // flagged. A leaked literal hash secret of EXACTLY 40/64 hex is the
-      // accepted blind spot of this length-based heuristic (documented tradeoff
-      // favouring zero false-positives on git/checksum hashes).
-      const hexLen = matched.length;
-      if (hexLen === 40 || hexLen === 64) continue;
-      // For non-canonical lengths, allowlist only when the SURROUNDING context
-      // carries a hash marker (integrity:, sha256-, "resolved", "checksum"). The
-      // window is widened on the left so a marker earlier on the line
-      // (e.g. `"resolved": "https://…/x.tgz#<hex>"`) is still seen.
-      const mIdx = text.indexOf(matched);
-      const before = text.slice(Math.max(0, mIdx - 64), mIdx);
-      const after = text.slice(mIdx + matched.length, mIdx + matched.length + 4);
-      if (HASH_CONTEXT_PATTERN.test(before + ' ' + after)) continue;
-    }
-
-    findings.push({ name: descriptor.name, redacted: redactMatch(matched), kind: 'pattern' });
   }
 
   // 2) Generic high-entropy detector (beyond named patterns)
