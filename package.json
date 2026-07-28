@@ -95,6 +95,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:actions-cost-policy": "node scripts/test-actions-cost-policy.mjs",
     "test:health-check": "jest tests/health-check",
     "eval": "node scripts/eval-runner.js",
     "eval:e2e": "node scripts/eval-e2e.js",

@@ -1,25 +1,15 @@
 name: macOS Testing & Validation
+run-name: macOS Testing — ${{ inputs.candidate_sha }}
 # Story 1.10b - Automated macOS testing across Intel and Apple Silicon
 # Story 6.1 - Added concurrency, normalized branches
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'packages/installer/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'tests/macos/**'
-      - '.github/workflows/macos-testing.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'packages/installer/**'
-      - 'bin/**'
-      - 'scripts/**'
-      - 'tests/macos/**'
-      - '.github/workflows/macos-testing.yml'
   workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Exact 40-character commit SHA to validate
+        required: true
+        type: string
 
 concurrency:
   group: macos-testing-${{ github.event.pull_request.number || github.ref }}
@@ -28,10 +18,37 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  TESTED_HEAD_SHA: ${{ inputs.candidate_sha }}
+
 jobs:
+  validate-candidate:
+    name: Validate macOS candidate SHA
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require exact dispatch SHA
+        shell: bash
+        env:
+          DISPATCH_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$TESTED_HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$TESTED_HEAD_SHA" = "$DISPATCH_SHA"
+
+      - name: Checkout exact candidate
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
+          persist-credentials: false
+
+      - name: Verify checked-out candidate
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$TESTED_HEAD_SHA"
+
   # Job 1: Intel Mac Testing
   test-intel-mac:
     name: Test on macOS Intel (x86_64)
+    needs: validate-candidate
     runs-on: macos-15-intel
     timeout-minutes: 30
 
@@ -39,6 +56,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
 
       - name: Setup Node.js
@@ -95,13 +113,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: test-logs-intel
+          name: test-logs-intel-${{ github.sha }}
           path: /tmp/sinapse-test-*.log
           retention-days: 30
 
   # Job 2: Apple Silicon Testing
   test-apple-silicon:
     name: Test on macOS Apple Silicon (arm64)
+    needs: validate-candidate
     runs-on: macos-14  # M1 runner
     timeout-minutes: 30
 
@@ -109,6 +128,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
 
       - name: Setup Node.js
@@ -172,13 +192,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: test-logs-apple-silicon
+          name: test-logs-apple-silicon-${{ github.sha }}
           path: /tmp/sinapse-test-*.log
           retention-days: 30
 
   # Job 3: Error Recovery Testing
   test-error-recovery:
     name: Test Error Recovery & Rollback
+    needs: validate-candidate
     runs-on: macos-latest
     timeout-minutes: 15
 
@@ -186,6 +207,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
 
       - name: Setup Node.js
@@ -205,7 +227,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: test-logs-error-recovery
+          name: test-logs-error-recovery-${{ github.sha }}
           path: /tmp/sinapse-test-*.log
           retention-days: 30
 
@@ -247,7 +269,7 @@ jobs:
       - name: Upload test summary
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: test-summary
+          name: test-summary-${{ github.sha }}
           path: test-summary.md
           retention-days: 90
 
@@ -298,6 +320,7 @@ jobs:
       - name: Require all macOS validations
         shell: bash
         run: |
+          printf 'Tested head SHA: %s\n' "$TESTED_HEAD_SHA"
           printf 'Intel: %s\nApple Silicon: %s\nRecovery: %s\n' \
             "$INTEL_RESULT" "$ARM_RESULT" "$RECOVERY_RESULT"
           test "$INTEL_RESULT" = success

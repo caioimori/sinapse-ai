@@ -1,4 +1,5 @@
 name: Install Matrix (A.5 Gate)
+run-name: Install Matrix — ${{ github.event.pull_request.head.sha || inputs.candidate_sha }}
 # Story A.5 - Windows Wrapper & Cross-Platform Test Matrix
 # Runs the 24-combo install validation grid:
 #   (Windows 11 / macOS latest / Ubuntu 22.04) x (npm / pnpm / yarn) x (global / npx+dlx / local)
@@ -14,23 +15,14 @@ on:
   pull_request:
     branches:
       - main
-    # Release PRs trigger this by label OR by touching packaging files.
-    paths:
-      - 'package.json'
-      - 'package-lock.json'
-      - 'CHANGELOG.md'
-      - 'bin/**'
-      - 'packages/installer/**'
-      - '.agents/**'
-      - '.claude/**'
-      - '.codex/**'
-      - 'scripts/sync-provider-adapters.js'
-      - 'scripts/validate-provider-adapters.js'
-      - '.sinapse-ai/install-manifest.yaml'
-      - '.github/workflows/install-matrix.yml'
-    types: [opened, synchronize, reopened, labeled]
+    types: [labeled]
   # Allow manual dispatch for ad-hoc runs by @devops
   workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Exact 40-character commit SHA to validate
+        required: true
+        type: string
 
 concurrency:
   group: install-matrix-${{ github.event.pull_request.number || github.ref }}
@@ -41,6 +33,7 @@ permissions:
 
 env:
   NODE_VERSION: '20'
+  TESTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || inputs.candidate_sha }}
   # The package no longer ships an npm `postinstall` hook (removed 2026-06 for
   # supply-chain safety; setup is explicit via `npx sinapse-ai install`). This
   # var only affects the opt-in `npm run setup` path now.
@@ -49,30 +42,36 @@ env:
   HUSKY: '0'
 
 jobs:
-  # Gate via label: only runs the full matrix when the PR has the `release` label
-  # OR when dispatched manually. This keeps regular PRs fast.
-  gate:
-    name: Gate (release label check)
+  validate-candidate:
+    name: Validate Install Matrix candidate SHA
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'release'
     runs-on: ubuntu-latest
-    outputs:
-      should_run: ${{ steps.decide.outputs.should_run }}
     steps:
-      - id: decide
+      - name: Require exact candidate SHA
+        shell: bash
+        env:
+          DISPATCH_SHA: ${{ github.sha }}
         run: |
-          EVENT="${{ github.event_name }}"
-          LABEL_MATCH="${{ contains(github.event.pull_request.labels.*.name, 'release') }}"
-          if [ "$EVENT" = "workflow_dispatch" ] || [ "$LABEL_MATCH" = "true" ]; then
-            echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "::notice title=Install Matrix::Running full 24-combo matrix (release gate)"
-          else
-            echo "should_run=false" >> $GITHUB_OUTPUT
-            echo "::notice title=Install Matrix::Skipped (not a release PR). Add the 'release' label to run."
+          set -euo pipefail
+          [[ "$TESTED_HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            test "$TESTED_HEAD_SHA" = "$DISPATCH_SHA"
           fi
+
+      - name: Checkout exact candidate
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
+          persist-credentials: false
+
+      - name: Verify checked-out candidate
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$TESTED_HEAD_SHA"
 
   install-matrix:
     name: ${{ matrix.os }} / ${{ matrix.pm }} / ${{ matrix.method }}
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
+    needs: validate-candidate
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'release'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
@@ -97,6 +96,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
 
       - name: Setup Node.js
@@ -192,8 +192,8 @@ jobs:
 
   provider-install-matrix:
     name: Provider payload / ${{ matrix.provider }}
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
+    needs: validate-candidate
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'release'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
@@ -203,6 +203,7 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
@@ -224,8 +225,8 @@ jobs:
 
   provider-upgrade-matrix:
     name: Public latest upgrade / ${{ matrix.provider }}
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
+    needs: validate-candidate
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'release'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -235,6 +236,7 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          ref: ${{ env.TESTED_HEAD_SHA }}
           persist-credentials: false
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
@@ -258,12 +260,16 @@ jobs:
 
   summary:
     name: Gate Summary (24 combos + 3 clean + 3 upgrades)
-    needs: [install-matrix, provider-install-matrix, provider-upgrade-matrix]
-    if: always() && needs.install-matrix.result != 'skipped'
+    needs: [validate-candidate, install-matrix, provider-install-matrix, provider-upgrade-matrix]
+    if: always() && (github.event_name == 'workflow_dispatch' || github.event.label.name == 'release')
     runs-on: ubuntu-latest
     steps:
       - name: Evaluate gate
         run: |
+          echo "Tested head SHA: $TESTED_HEAD_SHA"
+          echo "## Install Matrix evidence" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Tested head SHA: \`$TESTED_HEAD_SHA\`" >> "$GITHUB_STEP_SUMMARY"
           RESULT="${{ needs.install-matrix.result }}"
           PROVIDERS="${{ needs.provider-install-matrix.result }}"
           UPGRADES="${{ needs.provider-upgrade-matrix.result }}"
