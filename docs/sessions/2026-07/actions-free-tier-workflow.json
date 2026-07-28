@@ -1,0 +1,226 @@
+{
+  "workflow_id": "WF-20260728-actions-free-tier-cost-control",
+  "mode": "change",
+  "complexity": "complicated",
+  "outcome": "Prevent ordinary pull requests from creating macOS Testing or Install Matrix jobs while preserving explicit release-candidate coverage and blocking publication unless both compatibility gates are green for the exact release SHA.",
+  "scope": "Change macos-testing.yml and install-matrix.yml triggers and SHA evidence; add only the approved fail-closed compatibility-check step and checks:read permission to semantic-release.yml; add one deterministic policy test and package script; update the Actions runbook and reproducible evidence. No remote mutation, release, push, PR, protected-path edit, branch-protection edit, or other release-flow edit.",
+  "inputs": [
+    "Validated Ready story docs/stories/active/story-github-actions-free-tier-cost-control.md",
+    "Current workflow YAML and branch-protection observations recorded in the story",
+    "Baseline SHA-256 hashes for seven byte-for-byte invariant workflows and the pre-gate semantic-release.yml"
+  ],
+  "outputs": [
+    "Manual-only macOS Testing workflow with SHA-bound evidence",
+    "Install Matrix triggered only by workflow_dispatch or pull_request:labeled with release-label job guards and SHA-bound evidence",
+    "Semantic Release compatibility gate that queries check-runs for the exact release SHA and fails closed",
+    "Deterministic policy fitness test and operational documentation",
+    "Validation and cost evidence in this session record"
+  ],
+  "acceptance": [
+    "Ordinary opened, synchronized, and reopened pull requests create no runs or jobs for the two expensive workflows",
+    "Explicit dispatch and release-label events retain three macOS validations, 24 install combinations, three clean installs, and three upgrades",
+    "Required candidate_sha inputs, dispatch-ref equality, and checked-out HEAD equality bind evidence to the tested commit",
+    "Seven workflows remain byte-for-byte invariant; semantic-release.yml differs only by checks:read and the approved compatibility gate; required Article VII, VIII, XI job names remain",
+    "Release fails on API error, missing, pending, unsuccessful, or other-SHA Install Matrix/macOS gate evidence",
+    "YAML parsing, immutable action pins, focused policy tests, lint, typecheck, and proportional regression tests pass"
+  ],
+  "architecture": {
+    "bounded_contexts": [
+      "GitHub Actions trigger policy",
+      "Release-candidate evidence",
+      "Deterministic repository fitness checks"
+    ],
+    "asrs": [
+      "Zero automatic macOS or Install Matrix jobs for ordinary pull-request activity",
+      "All release-candidate evidence is attributable to the exact tested SHA",
+      "Invariant workflow content is byte-for-byte protected"
+    ],
+    "decision": "Keep the existing workflow boundaries. Restrict triggers, require exact candidate SHAs, remove the always-created Install Matrix gate job, enforce release-label eligibility directly on every retained matrix/summary job, and place the final compatibility check immediately after checkout in the canonical Semantic Release workflow.",
+    "rejected_options": [
+      "Consolidating Article VII, VIII, or XI jobs because their names are required branch-protection contexts",
+      "Editing CodeQL filters because the validated story makes codeql.yml byte-for-byte invariant",
+      "Disabling or deleting cosmetic workflow files because remote state changes are outside authority",
+      "Putting the publication gate in Release Preparation because it would check the pre-release PR creation commit rather than the exact commit being published"
+    ],
+    "risks": [
+      "GitHub pull_request:labeled cannot filter the label value at trigger level; non-release labels can create a workflow run, but every job is guarded and remains skipped",
+      "Manual dispatch must select a ref resolving to the required candidate_sha; mismatches fail before expensive runners start",
+      "Check-run names are an API contract: renaming either compatibility gate requires a coordinated fitness-test and release-gate change",
+      "Local policy tests cannot prove remote branch-protection or check-runs API conclusions until a PR and dispatches exist"
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "Capture immutable workflow hashes and read-only cost baseline.",
+      "owner": "developer",
+      "command_or_tool": "Get-FileHash and read-only gh api",
+      "inputs": [
+        "Seven invariant workflow files plus the pre-gate Semantic Release baseline",
+        "GitHub Actions API access when available"
+      ],
+      "outputs": [
+        "Recorded SHA-256 baseline and API availability notes"
+      ],
+      "depends_on": [],
+      "timeout_ms": 120000,
+      "max_attempts": 2,
+      "acceptance": [
+        "No billing claim is inferred from raw job duration"
+      ],
+      "rollback": "Not applicable; read-only evidence capture.",
+      "human_checkpoint": "not_applicable"
+    },
+    {
+      "task_id": "T02",
+      "objective": "Restrict expensive workflow triggers, bind evidence to a required exact candidate SHA, and add the canonical fail-closed publication gate.",
+      "owner": "developer",
+      "command_or_tool": "apply_patch",
+      "inputs": [
+        "macos-testing.yml",
+        "install-matrix.yml",
+        "semantic-release.yml"
+      ],
+      "outputs": [
+        "Updated workflow contracts and exact-SHA publication gate"
+      ],
+      "depends_on": [
+        "T01"
+      ],
+      "timeout_ms": 180000,
+      "max_attempts": 2,
+      "acceptance": [
+        "macOS is dispatch-only, Install Matrix has no ordinary-PR gate job, invalid/stale SHA input fails closed, and Semantic Release requires both exact-SHA compatibility checks"
+      ],
+      "rollback": "Block publication and revert the two trigger contracts plus only the approved checks:read and compatibility-gate insertion in semantic-release.yml.",
+      "human_checkpoint": "not_applicable"
+    },
+    {
+      "task_id": "T03",
+      "objective": "Implement deterministic event, label, SHA, coverage, pin, and invariant fitness checks.",
+      "owner": "developer",
+      "command_or_tool": "node scripts/test-actions-cost-policy.mjs",
+      "inputs": [
+        "Updated workflows",
+        "Recorded invariant hashes"
+      ],
+      "outputs": [
+        "Executable policy test and package script"
+      ],
+      "depends_on": [
+        "T02"
+      ],
+      "timeout_ms": 300000,
+      "max_attempts": 3,
+      "acceptance": [
+        "The test fails on ordinary-PR jobs, missing/invalid/stale SHA evidence, release-gate weakening, coverage loss, mutable pins, invariant drift, or Semantic Release changes outside the approved gate"
+      ],
+      "rollback": "Revert the test together with the workflow trigger changes.",
+      "human_checkpoint": "not_applicable"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Document dispatch, release-label, SHA renewal, measurement, authority, and rollback procedures.",
+      "owner": "developer",
+      "command_or_tool": "apply_patch .github/workflows/README.md",
+      "inputs": [
+        "Implemented workflow contract",
+        "Story remote-state observations"
+      ],
+      "outputs": [
+        "Updated GitHub Actions runbook"
+      ],
+      "depends_on": [
+        "T02"
+      ],
+      "timeout_ms": 120000,
+      "max_attempts": 2,
+      "acceptance": [
+        "Exactly four cosmetic workflows are documented as disabled_manually on 2026-07-28 and only DevOps may change remote state"
+      ],
+      "rollback": "Revert the cost-control runbook section with the workflow rollback.",
+      "human_checkpoint": "not_applicable"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Run proportional validation and record limitations without claiming remote proof.",
+      "owner": "developer",
+      "command_or_tool": "npm scripts, YAML parser, git diff, CodeRabbit when available",
+      "inputs": [
+        "All story-owned changes"
+      ],
+      "outputs": [
+        "Reproducible validation evidence and story Dev Agent Record"
+      ],
+      "depends_on": [
+        "T03",
+        "T04"
+      ],
+      "timeout_ms": 1800000,
+      "max_attempts": 3,
+      "acceptance": [
+        "Focused and proportional gates pass, build is recorded as not applicable, and remote PR/dispatch validation remains explicitly pending"
+      ],
+      "rollback": "Block publication, restore the two original workflow triggers and remove only the approved Semantic Release compatibility gate after three failed implementation attempts, then report the blocker.",
+      "human_checkpoint": "not_applicable"
+    }
+  ],
+  "evidence": {
+    "created_at": "2026-07-28",
+    "branch": "codex/chore/actions-free-tier",
+    "base_commit": "91b6d10edf5944f71d1987226a24f3a225218a5e",
+    "baseline_window": {
+      "from": "2026-06-28",
+      "to": "2026-07-28",
+      "macos_testing_runs": 117,
+      "macos_testing_jobs": 495,
+      "install_matrix_runs": 117,
+      "install_matrix_jobs": "not_collected_within_bounded_api_timeout",
+      "runner_minutes": "not_exposed_by_the_queried_billing_endpoint",
+      "billable_minutes": "not_exposed_by_the_queried_billing_endpoint",
+      "billing_endpoint_result": "HTTP 404",
+      "interpretation": "Run and job counts are operational baseline data. Raw started_at-to-completed_at duration was deliberately not reported as runner or billable minutes."
+    },
+    "remote_observation": {
+      "repository": "caioimori/sinapse-ai",
+      "visibility": "PUBLIC",
+      "required_status_checks_strict": true,
+      "required_status_checks": [
+        "Validation Summary",
+        "Article VII (Metrics Accuracy)",
+        "Article VIII (Mandatory Delegation)",
+        "Article XI (Conservative Default)"
+      ],
+      "compatibility_check_names_confirmed_from_successful_run_jobs": [
+        "Gate Summary (24 combos + 3 clean + 3 upgrades)",
+        "macOS Validation Gate"
+      ],
+      "disabled_manually": [
+        "PR Labeling",
+        "Manage Stale Issues",
+        "Welcome New Contributors",
+        "PR Size Check"
+      ],
+      "observed_at": "2026-07-28",
+      "mutation_performed": false
+    },
+    "minimum_ordinary_pr_reduction": {
+      "jobs": 4,
+      "composition": "Three dedicated macOS runner jobs plus the former Install Matrix gate job; dependent report/gate jobs are additional avoided jobs.",
+      "billing_claim": false
+    },
+    "validation": {
+      "architecture_first": "passed",
+      "focused_policy": "passed",
+      "yaml": "passed_16_active_workflow_files_33_assertions",
+      "pins": "passed_by_fitness_test",
+      "lint": "passed_scripts_test_actions_cost_policy_mjs",
+      "typecheck": "passed",
+      "regression": "passed_tests_ci_github_workflows_syntax_33_tests",
+      "invariant_diff": "passed_seven_workflows_unchanged_and_semantic_release_delta_limited_to_approved_gate",
+      "coderabbit": "unavailable_in_wsl",
+      "build": "not_applicable_no_script",
+      "remote_pr_and_dispatch": "pending_devops"
+    }
+  }
+}

@@ -95,6 +95,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:actions-cost-policy": "node scripts/test-actions-cost-policy.mjs",
     "test:health-check": "jest tests/health-check",
     "eval": "node scripts/eval-runner.js",
     "eval:e2e": "node scripts/eval-e2e.js",
@@ -184,11 +185,11 @@
     "fs-extra": "^11.3.2",
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.0",
     "ora": "^5.4.1",
     "proper-lockfile": "^4.1.2",
     "semver": "^7.7.2",
-    "tar": "^7.5.13",
+    "tar": "^7.5.22",
     "yaml": "^2.8.3"
   },
   "keywords": [
@@ -258,10 +259,10 @@
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
     "brace-expansion": "^5.0.6",
-    "fast-uri": "^3.1.2",
+    "fast-uri": "^3.1.4",
     "ip-address": "^10.1.1",
     "@babel/core": "^7.29.6",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.3.0"
   },
   "directories": {
     "doc": "docs",
