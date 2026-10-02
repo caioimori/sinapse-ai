@@ -2,6 +2,14 @@
 
 ## Atualização operacional vigente — 2026-10-02
 
+O [lote TypeSafe/Mobbin](typesafe-mobbin-verification.md) aplicou a skill oficial instalada, observou dez julgamentos Jev reais e consolidou oito inferências para cinco comandos de design/frontend. A interface própria passou em 66 checks do autor e 54 independentes, inclusive estados alterados no mobile.
+
+Opus foi corrigido para aprendizado de mercado: nove fontes oficiais, nove mecanismos e 36 critérios propostos, sem API. O piloto pelo console Jev está concluído; credencial local permanece pendente somente para automação de serviço.
+
+As capturas e o overlay Mobbin ficam privados no projeto. A política pessoal foi atualizada com 262 hashes e 172 definições conferidos. Não houve publicação, promoção de expertise ou remoção de pastas; pendências vigentes estão no [handoff](HANDOFF.md).
+
+## Atualização operacional anterior — histórico
+
 O [contrato operacional](OPERATIONAL-SPEC.md) e seu [workflow](operational-workflow.json) avançaram as pendências: painel SINAPSE compreensível, 35 funções/51 comandos com contratos revisados, seis tarefas de design novas e extensão pessoal instalada com readback. Os 172 agentes e os arquivos originais foram preservados.
 
 A [comparação cega de seis pares](paired-interface-results.md) observou quatro preferências pelo contexto aprimorado e dois empates, com 225 verificações efetivas. O desvio de 11,038s do baseline e os limites de desktop/mobile permanecem expostos; nenhuma promoção ou conclusão causal.

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-02",
-    "scope": "Atualização operacional local; extensão pessoal instalada",
+    "scope": "TypeSafe instalado; Jev observado; transferência de interface local",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -13,7 +13,7 @@
     "validatedExperts": 0
   },
   "deployment": {
-    "local": "324 testes e exemplos verificados",
+    "local": "49 regressões nesta onda; 66 verificações na nova interface",
     "installed": "Extensão pessoal: 35 funções / 51 comandos",
     "published": "Integração remota pendente"
   },
@@ -148,23 +148,23 @@
     {
       "id": "jev",
       "title": "Piloto Jev",
-      "description": "Conectar a credencial com segurança e executar o piloto já autorizado, com teto total de US$ 0,05 e uma tentativa por grupo.",
-      "status": "Acesso pendente",
-      "detail": "Zero chamadas e zero custo de API observados."
+      "description": "Skill oficial instalada. Um lote real de dez julgamentos foi executado no playground autenticado e conferido; a integração automática por API ainda depende de credencial local.",
+      "status": "Piloto observado",
+      "detail": "2.094 tokens de entrada; custo calculado US$0,000087948; nenhuma repetição paga."
     },
     {
       "id": "opus",
       "title": "Opus 5.5",
-      "description": "Claude está autenticado, mas Opus 5.5 ainda precisa de execução e comparação em ambiente compatível antes de alterar a política de modelos.",
-      "status": "Execução pendente",
-      "detail": "Login confirmado; execução de Opus não comprovada."
+      "description": "Pesquisa de mercado com nove fontes oficiais e nove mecanismos propostos para briefing, contexto, ferramentas e avaliação. O escopo não exige execução da API Anthropic.",
+      "status": "Pesquisa concluída",
+      "detail": "Aprendizado documental; nenhum benchmark entre modelos alegado."
     },
     {
       "id": "mobbin",
       "title": "Referências Mobbin",
-      "description": "Restabelecer a sessão para novas consultas. Capturas anteriores foram preservadas e não comprovam acesso atual.",
-      "status": "Autenticação pendente",
-      "detail": "Nenhuma nova inspeção nesta onda."
+      "description": "Sessão autenticada observada: 22 telas em dois fluxos de filtros e colunas. Oito mecanismos revisados e consolidados na biblioteca privada do projeto; cinco comandos recuperam regras pertinentes.",
+      "status": "8 mecanismos consolidados",
+      "detail": "Seis inferências visuais e duas transferências locais. 66 verificações do autor e 54 independentes; fonte original/backend sem execução."
     },
     {
       "id": "av",
@@ -199,7 +199,7 @@
       "title": "Uso e distribuição",
       "description": "Extensão pessoal conferida em Codex e Claude, disponível pela skill sinapse-expert-runtime em um contexto novo. Integração ao projeto principal e publicação permanecem pendentes.",
       "status": "Extensão instalada",
-      "detail": "51 contextos, 262 arquivos e 460 entradas preservadas conferidos; ativação nativa ainda não observada."
+      "detail": "Política pessoal atualizada e 262 hashes conferidos. Mobbin privado permanece no projeto; ativação nativa ainda não observada."
     }
   ],
   "squads": [
@@ -640,6 +640,19 @@
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/paired-interface-results.md"
+      ]
+    },
+    {
+      "id": "typesafe-mobbin",
+      "title": "TypeSafe, Jev e transferência Mobbin",
+      "summary": "Skill oficial instalada; dez julgamentos reais; 22 estados observados.",
+      "paragraphs": [
+        "Jev avaliou descrições próprias em um lote autenticado, com modelo e uso observados. O controle de custo, hashes, regras e revisão independente continuam determinísticos. Opus permanece aprendizado de mercado, sem API.",
+        "Uma nova interface própria, em /transfer-filter/, aplica inclusão/exclusão, rascunho, cancelamento, recuperação e preferência de colunas. Seus 66 checks incluem os estados alterados no celular; a referência original e a implementação local têm escopos de evidência distintos."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.md",
+        "examples/framework-quality/transfer-filter/index.html"
       ]
     }
   ]

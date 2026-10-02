@@ -1,4 +1,36 @@
-# Checkpoint operacional — estado vigente
+# Checkpoint TypeSafe e Mobbin — estado vigente
+
+Começar pela [verificação desta onda](typesafe-mobbin-verification.md). Worktree isolado, branch codex/feat/framework-evolution-20261002; base 3ff6f73686f230b62e84d0e384145b83cc9910ef. Os checkpoints abaixo são históricos; pendências antigas de login/Jev/Opus não representam o estado atual.
+
+## Resultado vigente
+
+- Skill oficial TypeSafe instalada uma vez para Codex, via skills CLI 1.7.0 e fonte MIT fixada. Conteúdo equivale ao upstream após normalizar CRLF/LF; 12.049 arquivos preexistentes de skills preservados por hash.
+- Jev: um lote real, dez julgamentos, resposta jev-1.13.0, uso 2.094/371 tokens e custo calculado US$0,000087948. Reserva anterior à chamada, cache/ledger duráveis, sem repetição paga; console observado, API automática ainda sem credencial local.
+- Opus: nove fontes oficiais, nove mecanismos e 36 critérios propostos. Somente aprendizado de mercado; nenhuma API Anthropic, comparação executada ou exigência de credencial Opus.
+- Mobbin autenticado: 22 capturas Square inspecionadas em dois fluxos. Oito mecanismos revisados e consolidados como inferências privadas: seis visuais e dois com transferência experimental em interface própria. Original não executado; sem promoção de expertise.
+- [Interface própria de filtros](http://127.0.0.1:4179/transfer-filter/): 66 checks do autor, 54 independentes, estados alterados em 1440/390/320px e zero overflow. Corrige perda de negação observada na referência; dados fictícios, colunas persistem só no navegador.
+- Cinco comandos de design/frontend recuperam regras pertinentes, máximo 10.082/12.000 caracteres. Overlay tem nove entradas, preservando a decisão própria anterior; replay adiciona zero. Biblioteca/capturas permanecem privadas neste projeto, fora de Git/npm/HOME.
+- Extensão pessoal recebeu somente a política pública atualizada: 262 hashes e 172 definições conferidos, TypeSafe íntegro. Descoberta em contexto novo e execução nativa continuam distintas; não afirmar ativação de persona por montar contexto.
+
+## Prova e limites
+
+49/49 regressões em quatro suites, zero skips; lint/typecheck, paridade/172 agentes, manifest e protocolo Ajv passaram. Os receipts vermelhos de lint, leitura imediata de foco e readback de consolidação permanecem preservados; correções e limites estão na verificação.
+
+Projeto original: branch/SHA e 191 entradas preservados, zero diferenças de hashes/status. Zero mudanças em caminhos protegidos, remoção funcional, Docker, WSL, push, PR ou publicação. [Painel local](http://127.0.0.1:4179/) mantém todos os exemplos anteriores.
+
+## Pendências reais
+
+1. Credencial local segura para API Jev automática; o piloto de console está concluído. Plano original de 224 perguntas/18 grupos ainda offline, sem nova cobrança.
+2. Ampliar Mobbin nas demais famílias por falhas reais, fontes e transferência independente. Este lote cobre filtros, estados e colunas; não absorveu a coleção completa.
+3. Revisar 137 funções e 88 referências candidatas. Contagem, referência ou material ingerido não provam especialista mundial; todos os perfis conservam lacunas.
+4. Completar percepção audiovisual contínua e replay mobile dos seis pares anteriores. A nova interface testa seus próprios estados, sem validar retroativamente os pares.
+5. Observar ativação nativa, integrar ao projeto principal e obter revisão remota. Nenhuma publicação ocorreu; preservar o original e o fluxo próprio de release.
+
+Próxima execução: escolher falha/competência e comando exato, usar o runtime deste worktree para a biblioteca privada, preservar os limites de contexto e separar fonte observada, inferência, entrega local e publicação.
+
+---
+
+# Checkpoint operacional anterior — histórico
 
 Começar pela [verificação operacional](operational-verification.md), [plano](PLAN.md) e [receipt da instalação](personal-distribution.json). Branch local `codex/feat/framework-evolution-20261002`; base desta retomada `dfb44cda9df00868295ee7dde1ba74441d66e9de`. Os checkpoints anteriores abaixo são históricos.
 

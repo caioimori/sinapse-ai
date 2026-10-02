@@ -5878,12 +5878,25 @@
   },
   "execution": {
     "called": false,
-    "status": "blocked-missing-service-credential",
+    "status": "api-batch-blocked-missing-credential-console-pilot-completed",
     "spendUsd": 0,
     "checked": [
       "TYPESAFE_API_KEY/JEV_API_KEY process environment",
       "Known original/worktree env files and relevant configured connectors"
     ],
-    "reason": "No authorized Jev service key available; do not create a key or subscription by inference"
+    "reason": "Original224question API batch not executed. Separate10question console pilot completed within same USD0.05 authorization without creating a key."
+  },
+  "consolePilot": {
+    "called": true,
+    "attempts": 1,
+    "questions": 10,
+    "inputTokens": 2094,
+    "outputTokens": 371,
+    "model": "jev-1.13.0",
+    "actualUsd": 0.000087948,
+    "transport": "authenticated-console-playground",
+    "receipt": "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.json",
+    "costBasis": "Observed usage multiplied by official input rate; not invoice readback",
+    "apiIntegration": false
   }
 }

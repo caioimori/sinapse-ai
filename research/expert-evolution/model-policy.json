@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-10-02T09:30:22.879Z",
   "reviewExpiresAt": "2026-11-01T09:30:22.879Z",
-  "selectionPolicy": "Native availability permits use within existing authority; expertise promotion and replacement of a benchmarked baseline require independent task evaluation. Published API availability never proves account access.",
+  "selectionPolicy": "Native availability permits use within existing authority; expertise promotion and replacement of a benchmarked baseline require independent task evaluation. Published API availability never proves account access. Opus is documentary market learning only in this evolution, per explicit user clarification.",
   "models": [
     {
       "id": "gpt-6.1-sol",
@@ -56,7 +56,7 @@
       "id": "claude-opus-5-5",
       "provider": "anthropic-api",
       "status": "published",
-      "role": "Candidate for independent creative and adversarial comparisons after real account availability is confirmed",
+      "role": "Market learning from official documentation only; no Anthropic API or inference required in this evolution",
       "availability": {
         "validated": false,
         "checkedAt": "2026-10-02T09:30:22.879Z",
@@ -71,11 +71,16 @@
         "passed": false,
         "localBenchmark": false,
         "evidence": [
-          "No authenticated local Opus 5.5 benchmark or delivery comparison"
-        ]
+          "Documentary market learning only: docs/framework/expert-evolution-2026-10/market-model-learning.json",
+          "No task execution or measured comparison requested for Opus"
+        ],
+        "status": "out-of-scope-execution"
       },
-      "apiId": "claude-opus-5-5",
-      "contextPolicy": "Large context is capacity, not an instruction to load the corpus. Apply selective retrieval and evidence locators."
+      "apiId": null,
+      "contextPolicy": "Large context is capacity, not an instruction to load the corpus. Apply selective retrieval and evidence locators.",
+      "scope": "market-learning-only",
+      "operationalUse": false,
+      "apiIdNote": "User clarified market research only on 2026-10-02; no execution credential or API comparison is requested"
     },
     {
       "id": "jev-1.13.0",
@@ -85,7 +90,7 @@
       "availability": {
         "validated": false,
         "checkedAt": "2026-10-02T09:30:22.879Z",
-        "method": "Official documentation read; no authorized service credential found in the checked environment and known local env files",
+        "method": "Authenticated console playground responded with Jev1.13.0; no service API credential configured, no native-model availability receipt",
         "evidence": [
           "https://docs.typesafe.ai/models",
           "docs/framework/evolution-2026-10/verification.md"
@@ -95,11 +100,20 @@
         "passed": false,
         "localBenchmark": false,
         "evidence": [
-          "Payload execution tested offline; no live model call made"
+          "Schema-valid real console response to10atomicjudgments; no held-out task-quality evaluation or model promotion"
         ]
       },
       "apiId": "jev-1.13.0",
-      "contextPolicy": "Versioned atomic questions, evidence IDs, schema validation, reserved shared budget before every attempt, bounded requests and separate human authority."
+      "contextPolicy": "Versioned atomic questions, evidence IDs, schema validation, reserved shared budget before every attempt, bounded requests and separate human authority.",
+      "accessObservation": {
+        "transport": "authenticated-console-playground",
+        "reportedModel": "jev-1.13.0",
+        "requests": 1,
+        "questions": 10,
+        "checkedAt": "2026-10-02T17:20:58.336Z",
+        "apiIntegration": false,
+        "receipt": "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.json"
+      }
     }
   ],
   "futureModels": {
