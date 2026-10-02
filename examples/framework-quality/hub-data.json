@@ -1,0 +1,646 @@
+{
+  "schemaVersion": 1,
+  "snapshot": {
+    "date": "2026-10-02",
+    "scope": "Atualização operacional local; extensão pessoal instalada",
+    "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
+  },
+  "metrics": {
+    "squads": 17,
+    "agents": 172,
+    "reviewedFunctions": 35,
+    "reviewedCommands": 51,
+    "validatedExperts": 0
+  },
+  "deployment": {
+    "local": "324 testes e exemplos verificados",
+    "installed": "Extensão pessoal: 35 funções / 51 comandos",
+    "published": "Integração remota pendente"
+  },
+  "deliverables": [
+    {
+      "id": "frontend",
+      "label": "Frontend",
+      "title": "Uma interface que funciona.",
+      "description": "Do problema do usuário ao layout, aos componentes e à revisão em desktop e celular.",
+      "agentId": "dx-frontend-engineer",
+      "command": "implement-responsive-layouts",
+      "exampleUrl": "ui/index.html",
+      "exampleLabel": "Ver exemplo de interface",
+      "steps": [
+        [
+          "Definir experiência",
+          "Objetivo, hierarquia, conteúdo e estados antes do código."
+        ],
+        [
+          "Construir a interface",
+          "Layout adaptável, componentes, teclado e limites de responsabilidade."
+        ],
+        [
+          "Conferir o resultado",
+          "Screenshots, navegação, foco e ausência de rolagem lateral."
+        ]
+      ],
+      "gap": "O exemplo passa verificações locais. Ainda não prova qualidade de um novo produto, backend real ou uso em produção."
+    },
+    {
+      "id": "motion",
+      "label": "Motion",
+      "title": "Movimento com intenção.",
+      "description": "Explicar uma ação ou processo, com ritmo, controle e alternativa acessível.",
+      "agentId": "css-motion-artist",
+      "command": "create-css-animation",
+      "exampleUrl": "motion/index.html",
+      "exampleLabel": "Ver exemplo de motion",
+      "steps": [
+        [
+          "Definir a intenção",
+          "Gatilho, estado final e função de cada movimento."
+        ],
+        [
+          "Produzir e controlar",
+          "Pausa, interrupção, reinício e preferência de movimento reduzido."
+        ],
+        [
+          "Observar a reprodução",
+          "Conferir o movimento contínuo e a legibilidade, além dos estados capturados."
+        ]
+      ],
+      "gap": "Estados e comportamento foram testados. Reprodução contínua e qualidade percebida ainda exigem revisão completa."
+    },
+    {
+      "id": "reel",
+      "label": "Reel / vídeo",
+      "title": "Um vídeo do início ao fim.",
+      "description": "Unir roteiro, planejamento visual, produção, trilha e revisão do arquivo exportado.",
+      "agentId": "production-director",
+      "command": "write-video-script",
+      "exampleUrl": "media/index.html#reel-title",
+      "exampleLabel": "Ver Reel de 18 segundos",
+      "steps": [
+        [
+          "Construir o roteiro",
+          "Mensagem, progressão, cenas e duração precisam servir ao público."
+        ],
+        [
+          "Produzir o material",
+          "Render, legendas, formato, direitos dos assets e áudio são etapas separadas."
+        ],
+        [
+          "Revisar o vídeo inteiro",
+          "Ouvir a trilha e observar ritmo, transições e clareza na reprodução contínua."
+        ]
+      ],
+      "gap": "A função revisada resolve o roteiro. O Reel exportado não recebeu nota audiovisual total, pois áudio e reprodução contínua não foram percebidos integralmente."
+    },
+    {
+      "id": "carrossel",
+      "label": "Carrossel",
+      "title": "Uma ideia por página.",
+      "description": "Planejar a progressão editorial e transformá-la em páginas legíveis, com identidade e exportação.",
+      "agentId": "content-engineer",
+      "command": "structure-carousel-progression",
+      "exampleUrl": "media/index.html#carousel-title",
+      "exampleLabel": "Ver carrossel de cinco páginas",
+      "steps": [
+        [
+          "Organizar a progressão",
+          "Abertura, sequência e conclusão têm papéis claros."
+        ],
+        [
+          "Desenhar as páginas",
+          "Composição, hierarquia, contraste e leitura no celular."
+        ],
+        [
+          "Revisar e exportar",
+          "Conferir imagens finais, texto equivalente e fontes editáveis."
+        ]
+      ],
+      "gap": "O exemplo foi exportado e revisado por IA. A nota 91/100 não comprova aprovação humana nem desempenho de uma campanha."
+    },
+    {
+      "id": "anuncio",
+      "label": "Anúncio",
+      "title": "Uma mensagem com hipótese.",
+      "description": "Criar variações de copy fundamentadas no público, na oferta e em uma prova verificável.",
+      "agentId": "ad-copywriter",
+      "command": "write-ad-copy-variations",
+      "exampleUrl": "#pendencias",
+      "exampleLabel": "Ver validações pendentes",
+      "steps": [
+        [
+          "Definir oferta e público",
+          "Uma promessa defensável e uma ação concreta."
+        ],
+        [
+          "Produzir as variações",
+          "Mudar um elemento com propósito, mantendo voz e evidência."
+        ],
+        [
+          "Testar a hipótese",
+          "Comparar criativos com métrica, janela e público definidos."
+        ]
+      ],
+      "gap": "Esta trilha cobre copy publicitária. Ainda não há exemplo final de anúncio, campanha publicada ou ganho de conversão comprovado."
+    }
+  ],
+  "pending": [
+    {
+      "id": "jev",
+      "title": "Piloto Jev",
+      "description": "Conectar a credencial com segurança e executar o piloto já autorizado, com teto total de US$ 0,05 e uma tentativa por grupo.",
+      "status": "Acesso pendente",
+      "detail": "Zero chamadas e zero custo de API observados."
+    },
+    {
+      "id": "opus",
+      "title": "Opus 5.5",
+      "description": "Claude está autenticado, mas Opus 5.5 ainda precisa de execução e comparação em ambiente compatível antes de alterar a política de modelos.",
+      "status": "Execução pendente",
+      "detail": "Login confirmado; execução de Opus não comprovada."
+    },
+    {
+      "id": "mobbin",
+      "title": "Referências Mobbin",
+      "description": "Restabelecer a sessão para novas consultas. Capturas anteriores foram preservadas e não comprovam acesso atual.",
+      "status": "Autenticação pendente",
+      "detail": "Nenhuma nova inspeção nesta onda."
+    },
+    {
+      "id": "av",
+      "title": "Revisão audiovisual",
+      "description": "Ouvir o áudio e observar motion e vídeo continuamente, no arquivo final. Encoding e amostras de frames não substituem essa revisão.",
+      "status": "Percepção pendente",
+      "detail": "Reel sem nota audiovisual total."
+    },
+    {
+      "id": "expertise",
+      "title": "Especialização",
+      "description": "Revisar as funções restantes, aprofundar as 88 referências candidatas e comprovar transferência em outra tarefa antes de validar cada agente.",
+      "status": "Expansão pendente",
+      "detail": "137 funções sem contrato revisado; zero especialistas validados."
+    },
+    {
+      "id": "causal",
+      "title": "Ganho de qualidade",
+      "description": "A revisão cega dos seis pares preferiu o contexto aprimorado em quatro casos, com dois empates. Um lote não comprova ganho causal ou qualidade de todos os agentes.",
+      "status": "Comparação concluída",
+      "detail": "225 checks; sem crítico confirmado. Replay completo dos estados mobile pendente; baseline excedeu o teto em 11,038s."
+    },
+    {
+      "id": "folders",
+      "title": "Organização de pastas",
+      "description": "Os 14 grupos foram auditados. Seus consumidores e usos distintos justificam conservar os arquivos; o painel organiza a navegação por responsabilidade.",
+      "status": "Auditoria concluída",
+      "detail": "14 grupos preservados; nenhuma remoção ou mudança de pasta."
+    },
+    {
+      "id": "distribution",
+      "title": "Uso e distribuição",
+      "description": "Extensão pessoal conferida em Codex e Claude, disponível pela skill sinapse-expert-runtime em um contexto novo. Integração ao projeto principal e publicação permanecem pendentes.",
+      "status": "Extensão instalada",
+      "detail": "51 contextos, 262 arquivos e 460 entradas preservadas conferidos; ativação nativa ainda não observada."
+    }
+  ],
+  "squads": [
+    {
+      "id": "squad-design",
+      "name": "Design e frontend",
+      "description": "Experiência, interfaces e componentes",
+      "keywords": [
+        "ui",
+        "ux",
+        "frontend",
+        "site"
+      ],
+      "agents": [
+        "cro-persuasion",
+        "design-orqx",
+        "design-system",
+        "dx-accessibility-specialist",
+        "dx-design-system-architect",
+        "dx-frontend-engineer",
+        "dx-interaction-designer",
+        "dx-performance-engineer",
+        "dx-ui-designer",
+        "dx-ux-strategist",
+        "platform-aesthetic-director",
+        "premium-packaging-strategist",
+        "product-surface-director",
+        "ux-designer"
+      ],
+      "taskCount": 101,
+      "knowledgeCount": 19
+    },
+    {
+      "id": "squad-animations",
+      "name": "Animações e motion",
+      "description": "Movimento web, Three.js e shaders",
+      "keywords": [
+        "video",
+        "vídeo",
+        "motion"
+      ],
+      "agents": [
+        "animation-interpreter",
+        "animation-performance-engineer",
+        "animations-orqx",
+        "css-motion-artist",
+        "generative-particle-engineer",
+        "motion-choreographer",
+        "scroll-narrative-engineer",
+        "shader-artist",
+        "threejs-architect"
+      ],
+      "taskCount": 76,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-brand",
+      "name": "Branding",
+      "description": "Estratégia, identidade e sistema de marca",
+      "keywords": [],
+      "agents": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskCount": 97,
+      "knowledgeCount": 30
+    },
+    {
+      "id": "squad-content",
+      "name": "Conteúdo",
+      "description": "Editorial, social e carrosséis",
+      "keywords": [
+        "carousel"
+      ],
+      "agents": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskCount": 90,
+      "knowledgeCount": 32
+    },
+    {
+      "id": "squad-copy",
+      "name": "Copywriting",
+      "description": "Mensagens, anúncios e persuasão",
+      "keywords": [
+        "texto",
+        "ads"
+      ],
+      "agents": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskCount": 81,
+      "knowledgeCount": 24
+    },
+    {
+      "id": "squad-courses",
+      "name": "Cursos e produção",
+      "description": "Ensino, roteiros e planejamento de vídeo",
+      "keywords": [
+        "reel",
+        "vídeo"
+      ],
+      "agents": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskCount": 59,
+      "knowledgeCount": 13
+    },
+    {
+      "id": "squad-storytelling",
+      "name": "Storytelling",
+      "description": "Narrativas, apresentações e pitch",
+      "keywords": [
+        "roteiro"
+      ],
+      "agents": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskCount": 47,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-research",
+      "name": "Pesquisa",
+      "description": "Fontes, audiência e inteligência",
+      "keywords": [],
+      "agents": [
+        "audience-intelligence",
+        "competitive-intelligence",
+        "data-synthesizer",
+        "deep-researcher",
+        "market-analyst",
+        "research-orqx",
+        "trend-forecaster"
+      ],
+      "taskCount": 72,
+      "knowledgeCount": 26
+    },
+    {
+      "id": "squad-cloning",
+      "name": "Clonagem cognitiva",
+      "description": "Fontes, extração e conhecimento revisável",
+      "keywords": [
+        "especialização"
+      ],
+      "agents": [
+        "agent-forger",
+        "cloning-orqx",
+        "cognitive-extractor",
+        "content-capturer",
+        "kb-architect",
+        "mind-synthesizer",
+        "sop-extractor",
+        "source-hunter",
+        "squad-assembler"
+      ],
+      "taskCount": 54,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-product",
+      "name": "Produto",
+      "description": "Discovery, estratégia e entrega",
+      "keywords": [],
+      "agents": [
+        "product-orqx",
+        "ps-client-product-manager",
+        "ps-delivery-manager",
+        "ps-discovery-lead",
+        "ps-product-analyst",
+        "ps-product-ops-specialist",
+        "ps-product-strategist"
+      ],
+      "taskCount": 75,
+      "knowledgeCount": 15
+    },
+    {
+      "id": "squad-commercial",
+      "name": "Comercial",
+      "description": "Vendas, ofertas e relacionamento",
+      "keywords": [
+        "crm"
+      ],
+      "agents": [
+        "commercial-orqx",
+        "cs-business-auditor",
+        "cs-client-success",
+        "cs-crm-specialist",
+        "cs-funnel-architect",
+        "cs-lead-generation-strategist",
+        "cs-offer-designer",
+        "cs-revops-analyst",
+        "cs-sales-closer",
+        "cs-sales-enablement"
+      ],
+      "taskCount": 85,
+      "knowledgeCount": 22
+    },
+    {
+      "id": "squad-growth",
+      "name": "Growth",
+      "description": "Aquisição orgânica, SEO e análise",
+      "keywords": [],
+      "agents": [
+        "ga-analytics-engineer",
+        "ga-campaign-analyst",
+        "ga-cro-specialist",
+        "ga-data-analyst",
+        "ga-growth-hacker",
+        "ga-seo-strategist",
+        "growth-orqx"
+      ],
+      "taskCount": 77,
+      "knowledgeCount": 22
+    },
+    {
+      "id": "squad-paidmedia",
+      "name": "Mídia paga",
+      "description": "Criativos, campanhas e performance",
+      "keywords": [
+        "anuncio",
+        "anúncio",
+        "ads"
+      ],
+      "agents": [
+        "campaign-analyst",
+        "creative-strategist",
+        "cro-specialist",
+        "google-ads-specialist",
+        "meta-ads-specialist",
+        "paidmedia-orqx",
+        "performance-engineer",
+        "pm-creative-performance-analyst",
+        "pm-youtube-ads-specialist"
+      ],
+      "taskCount": 82,
+      "knowledgeCount": 21
+    },
+    {
+      "id": "squad-finance",
+      "name": "Finanças",
+      "description": "Margem, orçamento e previsibilidade",
+      "keywords": [],
+      "agents": [
+        "budget-controller",
+        "cost-optimizer",
+        "finance-orqx",
+        "fiscal-compliance-br",
+        "forecast-strategist",
+        "pricing-strategist",
+        "profitability-analyst",
+        "revenue-analyst"
+      ],
+      "taskCount": 45,
+      "knowledgeCount": 21
+    },
+    {
+      "id": "squad-cybersecurity",
+      "name": "Segurança",
+      "description": "Proteção, análise e conformidade",
+      "keywords": [],
+      "agents": [
+        "cloud-security-engineer",
+        "compliance-officer",
+        "cyber-orqx",
+        "incident-responder",
+        "network-security-engineer",
+        "penetration-tester",
+        "soc-analyst",
+        "threat-analyst"
+      ],
+      "taskCount": 53,
+      "knowledgeCount": 14
+    },
+    {
+      "id": "squad-council",
+      "name": "Conselho estratégico",
+      "description": "Decisões e modelos mentais",
+      "keywords": [],
+      "agents": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskCount": 56,
+      "knowledgeCount": 11
+    },
+    {
+      "id": "claude-code-mastery",
+      "name": "Ferramentas e orquestração",
+      "description": "Contexto, integrações e fluxo multiagente",
+      "keywords": [
+        "swarm",
+        "claude",
+        "mcp"
+      ],
+      "agents": [
+        "claude-mastery-chief",
+        "config-engineer",
+        "hooks-architect",
+        "mcp-integrator",
+        "project-integrator",
+        "roadmap-sentinel",
+        "skill-craftsman",
+        "swarm-orqx"
+      ],
+      "taskCount": 51,
+      "knowledgeCount": 14
+    }
+  ],
+  "evidence": [
+    {
+      "id": "local-tests",
+      "title": "Testes do framework",
+      "summary": "324/324 testes em 22 suites; lint, typecheck e paridade aprovados.",
+      "paragraphs": [
+        "A coorte final passou em 211,484 segundos. Foram verificadas resolução dos 172 agentes, recuperação por tarefa, bindings, instalação em fixture, transações, modelos e privacidade.",
+        "A execução anterior encontrou uma expectativa antiga de contagem após as seis tarefas novas. O teste e a linha de inventário foram corrigidos; os 324 testes passaram na repetição completa. Teste técnico não é nota criativa."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/operational-verification.md"
+      ]
+    },
+    {
+      "id": "contracts",
+      "title": "Funções e comandos revisados",
+      "summary": "35 funções e 51 comandos vinculados a tarefas canônicas.",
+      "paragraphs": [
+        "Seis tarefas de design foram completadas: componentes, wireframe, padrões CRO, curadoria de referências, packaging e superfície de produto. Critérios e autoridade acompanham cada comando; aliases foram preservados.",
+        "Dois desvios de conteúdo foram corrigidos: análise já abre sua tarefa de conteúdo, e calendário abre sua tarefa editorial. Contrato revisado não comprova execução especializada; 137 funções e 88 referências continuam candidatas."
+      ],
+      "sources": [
+        "research/expert-evolution/task-bindings.json",
+        "docs/framework/expert-evolution-2026-10/design-task-completion.md"
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "Interface, motion, Reel e carrossel",
+      "summary": "Quatro exemplos próprios, com escopo de revisão separado.",
+      "paragraphs": [
+        "UI e carrossel receberam 91/100 em review independente de IA. Motion recebeu 91 apenas nos estados e amostras vistos. Os 23 checks locais de UI e motion passaram em 1440, 390 e 320px, sem overflow observado.",
+        "Áudio e reprodução contínua permanecem com ressalvas. O Reel de 18 segundos não tem nota audiovisual total; nenhuma aprovação humana ou expertise foi inferida."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
+        "examples/framework-quality/README.md"
+      ]
+    },
+    {
+      "id": "knowledge",
+      "title": "Conhecimento e fonte",
+      "summary": "67 fontes públicas, 112 heurísticas e lacunas preservadas.",
+      "paragraphs": [
+        "O corpus tem 67 fontes e 112 heurísticas. O programa de especialização lista 90 referências: duas lidas e 88 candidatas. Todos os 172 agentes mantêm lacuna de cobertura.",
+        "A extração persistente foi exercitada com uma decisão técnica própria revisada. Não significa que livros, mil horas de conteúdo ou todos os especialistas foram absorvidos."
+      ],
+      "sources": [
+        "research/expert-evolution/source-program.json",
+        "docs/framework/expert-evolution-2026-10/HANDOFF.md"
+      ]
+    },
+    {
+      "id": "upstream",
+      "title": "Atualização pública e preservação",
+      "summary": "Versão pública v5.4.1 conferida; atualização seletiva.",
+      "paragraphs": [
+        "O upstream público foi reconferido em 02.10.2026 no SHA 4ef6530ff03b83aea953e4a426f95e012b8b70c5. A atualização foi auditada por compatibilidade, com 37 integrações proprietárias excluídas.",
+        "O checkout original com 191 alterações foi preservado. Nenhum caminho protegido, dado privado, serviço de produção ou conteúdo funcional foi removido; não houve merge integral do core."
+      ],
+      "sources": [
+        "research/expert-evolution/audit-upstream-recheck.json",
+        "docs/framework/expert-evolution-2026-10/audited-verification.md"
+      ]
+    },
+    {
+      "id": "paired",
+      "title": "Seis pares de interfaces",
+      "summary": "Quatro preferências pelo contexto aprimorado, dois empates.",
+      "paragraphs": [
+        "12 interfaces próprias passaram 225 verificações efetivas, com revisão independente cega, 36 capturas iniciais e 13 de estado. As notas pertencem aos artefatos deste lote.",
+        "Uma geração por caso conserva variação estocástica. A duração do baseline ultrapassou o teto em 11,038 segundos; os estados alterados não foram todos repetidos no mobile. Sem prova causal, comparação Opus/Jev ou validação de expertise."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/paired-interface-results.md"
+      ]
+    }
+  ]
+}

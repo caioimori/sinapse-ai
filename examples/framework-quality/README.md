@@ -1,8 +1,38 @@
-# Lume — fixtures próprias
+# SINAPSE — painel de evolução e exemplos próprios
+
+`index.html` é a entrada SINAPSE em PT-BR. Explica o estado real, as prioridades, as cinco trilhas de entregáveis, as oito pendências, as 17 squads e os limites da evidência. Os quatro exemplos Lume permanecem na seção **Exemplos de teste**, com seus links e fontes preservados.
+
+## Painel de evolução
+
+Iniciar o servidor local de leitura com `node examples/framework-quality/serve.cjs --port=4179` e abrir `http://127.0.0.1:4179/`. O painel é navegação informativa: selecionar uma trilha não executa agentes, instala extensões ou publica mudanças.
+
+`hub-data.json` é um snapshot versionado do checkpoint auditado de 02.10.2026. Contagens e estados precisam de readback antes de atualização; disponibilidade de modelo ou login não equivale a execução comprovada. As evidências aparecem na própria página, com localização dos registros como texto, sem links que escapem do servidor local.
+
+O painel usa a lei monocromática do Brandbook SINAPSE: Bone/Vanta, tipografia com dois pesos, grain, layout assimétrico, foco visível e preferência de movimento reduzido. Sora, Inter e JetBrains Mono são usados se presentes no sistema; há fallback nativo e nenhum download de fonte.
+
+Busca por squad/agente com normalização de acentos, limpeza e estado vazio; trilhas com seleção anunciada; squads/evidências em disclosures nativos acessíveis. Falha de carregamento conserva a visão geral e os exemplos, com retry limitado por timeout de cinco segundos.
+
+QA do painel usa Playwright/Chromium já disponíveis, headless, sem instalação nem acesso externo:
+
+```powershell
+node examples/framework-quality/verify-hub.cjs --cycle=1
+```
+
+O script limita ciclos a 1–3, preserva evidência anterior, testa 1440/390/320px, busca/vazio/limpeza, seleção das cinco trilhas, expansão por teclado, âncoras e links locais, reduced-motion e erro/retry. Capturas e receipt ficam em `output/hub-cycle-N/`, ignorados pelo Git. O servidor de QA fica em loopback e é encerrado ao terminar.
+
+Ciclo 1 do painel: 27 checks passaram em 12,124 segundos, sem falhas. Capturas desktop/390/320 foram produzidas; desktop e 390 foram vistos e a junção de duas frases no estado mobile foi corrigida em seguida.
+
+Ciclo 2 do painel: 27 checks passaram em 10,336 segundos, sem falhas, com overflow zero em 1440/390/320px. A captura desktop completa e o viewport 390 foram vistos, incluindo a correção do texto mobile. [Receipt](output/hub-cycle-2/receipt.json). Evidência pertence aos hashes do snapshot registrado.
+
+Ciclo 3: 27 checks funcionais passaram em 13,524 segundos. Após finalizar o dataset e corrigir dois títulos de autoria, readback separado conferiu métricas 35/51, três estados de distribuição, oito itens e seis evidências em 1440/390/320 com overflow zero. HTML/CSS/JS/verificador permanecem idênticos aos hashes do ciclo 3; dataset e capturas finais estão no receipt do readback, sem inferir que o ciclo 3 viu dados posteriores.
+
+Estado vigente: 324/324 testes do framework, extensão pessoal de 35 funções/51 comandos instalada com hashes e configurações preservados. Entrada opt-in pela skill `sinapse-expert-runtime` em contexto novo; ativação nativa e publicação são etapas distintas. [Verificação operacional](../../docs/framework/expert-evolution-2026-10/operational-verification.md).
+
+## Lume — fixtures próprias
 
 Brief congelado: [AUDITED-SPEC](../../docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md). Marca fictícia, tipografia do sistema, assets próprios e projetos em memória. Fonte editável; sem dependência instalada, dados de cliente, persistência ou publicação.
 
-Abrir `index.html` em navegador oferece o painel e o storyboard. A receita de QA inicia servidor temporário exclusivamente em loopback e encerra browser/servidor ao terminar; headless, sem janela. O índice não significa aprovação visual.
+O índice SINAPSE oferece acesso ao painel e storyboard Lume. A receita de QA dos exemplos inicia servidor temporário exclusivamente em loopback e encerra browser/servidor ao terminar; headless, sem janela. O índice não significa aprovação visual.
 
 ## Receita nativa
 

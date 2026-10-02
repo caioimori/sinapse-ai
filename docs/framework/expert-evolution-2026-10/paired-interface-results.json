@@ -1,0 +1,811 @@
+{
+  "schemaVersion": 1,
+  "status": "independently-reviewed-bounded",
+  "unblindedAt": "2026-10-02T16:17:35.906Z",
+  "scope": "Six fictional interface pairs; one generation per case/condition; independent blind artifact review. No global, causal or model promotion.",
+  "reservedProtocolSha256": "3fcf5bc393b67be863768517c5071322a0cf9214249bc32162ba9678e1dac909",
+  "reviewSha256": "6eb61d1a765eec07cf8a52b4ebe315f69ea366491d4b461e252b7751c057b7e5",
+  "reservationSnapshot": "generationStarted=false belongs to the immutable pre-dispatch input manifest; both conditions were subsequently generated and reviewed.",
+  "model": "Same native parent model inherited by both generators, without override or external model API call; current native Sol6.1 availability recorded separately.",
+  "inputs": {
+    "common-brief.json": {
+      "sha256": "25dcd1b9692ddf8f4e97b1c335a9c53406e9ed9c5b78c6f96fca0eb8f19f427d",
+      "chars": 2436
+    },
+    "baseline-context.json": {
+      "sha256": "b22317918088e999c591ca69fd2557b5fa27a5870f95a88ff74fa803b1c9477b",
+      "chars": 9666
+    },
+    "enriched-context.json": {
+      "sha256": "66dd7fb9794513dc9d965c0789b672ba6ff9e0889705e82a9c7ff72d5360ae1e",
+      "chars": 11302
+    }
+  },
+  "outputs": 12,
+  "preferences": {
+    "enriched": 4,
+    "baseline": 0,
+    "tie": 2
+  },
+  "generationBudget": {
+    "plannedSeconds": 900,
+    "baselineActualSeconds": 911.038,
+    "enrichedActualSeconds": 852.33,
+    "deviation": "Baseline exceeded the planned budget by11.038seconds. Original outputs retained; this is not a strict equal-time experiment."
+  },
+  "reviewEvidence": {
+    "effectiveChecksPassed": 225,
+    "criticalFailuresObserved": [],
+    "initialScreenshots": 36,
+    "stateScreenshots": 13,
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "unchangedHtmlHashes": 12,
+    "falsePositiveAudit": {
+      "initialAlerts": 3,
+      "confirmedDefects": 0,
+      "reason": "Focus indicator on parent focus-within; matchMedia event asynchronous delivery",
+      "evidence": "evidence/supplemental-evidence.json"
+    },
+    "skips": [
+      {
+        "test": "Mobile replay of every changed functional state",
+        "reason": "Bounded single-pass review/time budget; baseline three-width coverage completed"
+      },
+      {
+        "test": "Screen reader and cross-browser",
+        "reason": "Outside bounded Chromium local review"
+      }
+    ]
+  },
+  "pairs": [
+    {
+      "id": "case-01",
+      "preference": "enriched",
+      "reason": "Revisão modal e resumo de data/duração mais concreto, com percurso mobile mais compacto; ambos completam o fluxo.",
+      "confidence": "moderate",
+      "scores": {
+        "enriched": {
+          "total": 98,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Três horários; revisão modal precede confirmação local; segunda escolha atualiza resumo.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-left",
+                "evidence/case-01-left-1440.png",
+                "evidence/case-01-left-390.png",
+                "evidence/case-01-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Trocar horário preserva controle; nenhum envio externo observado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-left",
+                "evidence/case-01-left-1440.png",
+                "evidence/case-01-left-390.png",
+                "evidence/case-01-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 19,
+              "observation": "Rádio/Enter funcionam; foco de modal e retorno explícitos; etapas posteriores anunciadas por status.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-left",
+                "evidence/case-01-left-1440.png",
+                "evidence/case-01-left-390.png",
+                "evidence/case-01-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 20,
+              "observation": "Data fictícia e duração no resumo; confirmação local inequívoca.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-left",
+                "evidence/case-01-left-1440.png",
+                "evidence/case-01-left-390.png",
+                "evidence/case-01-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 19,
+              "observation": "Hierarquia compacta e resumo alinhado; mobile mantém os três horários e ação em sequência.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-left",
+                "evidence/case-01-left-1440.png",
+                "evidence/case-01-left-390.png",
+                "evidence/case-01-left-320.png"
+              ]
+            }
+          },
+          "sha256": "9e6c380f7520f0ede4773b561afc82a4d89b40a5646904ba798b846ffb343d60",
+          "criticalFailures": []
+        },
+        "baseline": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Três horários; revisão e confirmação local operantes; troca reflete horário correto.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-right",
+                "evidence/case-01-right-1440.png",
+                "evidence/case-01-right-390.png",
+                "evidence/case-01-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Controle de revisão reaparece após trocar; seleção preservada.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-right",
+                "evidence/case-01-right-1440.png",
+                "evidence/case-01-right-390.png",
+                "evidence/case-01-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Foco vai para confirmar/trocar e retorna ao rádio; três larguras sem overflow inicial.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-right",
+                "evidence/case-01-right-1440.png",
+                "evidence/case-01-right-390.png",
+                "evidence/case-01-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Etapas numeradas; data expressa apenas como terça fictícia, menos concreta.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-right",
+                "evidence/case-01-right-1440.png",
+                "evidence/case-01-right-390.png",
+                "evidence/case-01-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Cartões legíveis; no320px o título usa três linhas e aumenta deslocamento vertical até os horários.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-01-right",
+                "evidence/case-01-right-1440.png",
+                "evidence/case-01-right-390.png",
+                "evidence/case-01-right-320.png"
+              ]
+            }
+          },
+          "sha256": "de321d41db9ec2f0e54919b899b29049743b7b7f72743338dc142c530e6bf784",
+          "criticalFailures": []
+        }
+      }
+    },
+    {
+      "id": "case-02",
+      "preference": "enriched",
+      "reason": "Seleção acima dos cards e contagens nos filtros reduzem deslocamento para conferir estado no mobile; vantagem pequena.",
+      "confidence": "moderate",
+      "scores": {
+        "enriched": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Estados confirmada/pendente/conflitante e filtros operantes; bloqueios com motivos.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-left",
+                "evidence/case-02-left-1440.png",
+                "evidence/case-02-left-390.png",
+                "evidence/case-02-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Seleção e filtro persistem após detalhe/voltar; bloqueados não substituem escolha autorizada.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-left",
+                "evidence/case-02-left-1440.png",
+                "evidence/case-02-left-390.png",
+                "evidence/case-02-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 19,
+              "observation": "Enter funciona; título de detalhe e botão original recebem foco; nomes de abrir detalhes repetem-se por card.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-left",
+                "evidence/case-02-left-1440.png",
+                "evidence/case-02-left-390.png",
+                "evidence/case-02-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 20,
+              "observation": "Contagem em cada filtro e seleção antes dos cards facilitam conferir o estado no mobile.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-left",
+                "evidence/case-02-left-1440.png",
+                "evidence/case-02-left-390.png",
+                "evidence/case-02-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Três artes originais coerentes; compactas e legíveis nas três larguras; metadados pequenos.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-left",
+                "evidence/case-02-left-1440.png",
+                "evidence/case-02-left-390.png",
+                "evidence/case-02-left-320.png"
+              ]
+            }
+          },
+          "sha256": "11bd3d8e97bd97779575d15049017d0bc08099fe33f5534d844ff08ba50f6202",
+          "criticalFailures": []
+        },
+        "baseline": {
+          "total": 96,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Três estados, filtros e uso autorizado operantes; pendente e conflito desabilitados.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-right",
+                "evidence/case-02-right-1440.png",
+                "evidence/case-02-right-390.png",
+                "evidence/case-02-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Voltar preserva filtro e referência; tentativa de item bloqueado mantém seleção anterior.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-right",
+                "evidence/case-02-right-1440.png",
+                "evidence/case-02-right-390.png",
+                "evidence/case-02-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 19,
+              "observation": "Teclado percorre filtros/detalhes; foco retorna ao card; nomes de ver detalhes repetem-se.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-right",
+                "evidence/case-02-right-1440.png",
+                "evidence/case-02-right-390.png",
+                "evidence/case-02-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Razões de bloqueio específicas; seleção aparece após todos os cards na visão mobile.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-right",
+                "evidence/case-02-right-1440.png",
+                "evidence/case-02-right-390.png",
+                "evidence/case-02-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Artes e cartões consistentes; seção de seleção abaixo dos três cards prolonga conferência no celular.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-02-right",
+                "evidence/case-02-right-1440.png",
+                "evidence/case-02-right-390.png",
+                "evidence/case-02-right-320.png"
+              ]
+            }
+          },
+          "sha256": "f70a045a09ddaa0f10da01b89328163a05f4dce9da471f157042e4fe2f7609a4",
+          "criticalFailures": []
+        }
+      }
+    },
+    {
+      "id": "case-03",
+      "preference": "tie",
+      "reason": "Ambos cumprem requisitos; objetivo livre/resumo lado a lado e objetivo predefinido/resumo separado têm trade-offs sem vencedor sólido.",
+      "confidence": "no decisive preference",
+      "scores": {
+        "baseline": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Obrigatórios validados; ausência de prova destacada; resumo local gerado e atualizado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-left",
+                "evidence/case-03-left-1440.png",
+                "evidence/case-03-left-390.png",
+                "evidence/case-03-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Erro de objetivo conserva audiência/afirmação; editar mantém valores; prova nova remove aviso.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-left",
+                "evidence/case-03-left-1440.png",
+                "evidence/case-03-left-390.png",
+                "evidence/case-03-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Inputs associados a labels e erros; foco no primeiro inválido e título do resumo; três larguras sem overflow.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-left",
+                "evidence/case-03-left-1440.png",
+                "evidence/case-03-left-390.png",
+                "evidence/case-03-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Objetivo livre permite formular ação própria; aviso de resumo desatualizado previne confusão ao editar.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-left",
+                "evidence/case-03-left-1440.png",
+                "evidence/case-03-left-390.png",
+                "evidence/case-03-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Formulário limpo; painel vazio de resumo ocupa espaço adicional no mobile antes da geração.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-left",
+                "evidence/case-03-left-1440.png",
+                "evidence/case-03-left-390.png",
+                "evidence/case-03-left-320.png"
+              ]
+            }
+          },
+          "sha256": "4b394b6783680078ff9347d1ba7b8d64f14d2de4ca1293dcd1163e69a9b50513",
+          "criticalFailures": []
+        },
+        "enriched": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Validação e resumo local operantes; aviso explícito quando a prova está ausente.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-right",
+                "evidence/case-03-right-1440.png",
+                "evidence/case-03-right-390.png",
+                "evidence/case-03-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Corrigir objetivo e editar mantêm campos; gerar nova versão reflete prova.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-right",
+                "evidence/case-03-right-1440.png",
+                "evidence/case-03-right-390.png",
+                "evidence/case-03-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Labels/erros associados; foco no inválido, resumo e audiência ao editar; sem overflow inicial.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-right",
+                "evidence/case-03-right-1440.png",
+                "evidence/case-03-right-390.png",
+                "evidence/case-03-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Objetivos predefinidos simplificam decisão, porém limitam formulação; tela de resumo claramente separada.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-right",
+                "evidence/case-03-right-1440.png",
+                "evidence/case-03-right-390.png",
+                "evidence/case-03-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Boa hierarquia com formas originais; bloco editorial adicional prolonga página no mobile sem participar da ação.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-03-right",
+                "evidence/case-03-right-1440.png",
+                "evidence/case-03-right-390.png",
+                "evidence/case-03-right-320.png"
+              ]
+            }
+          },
+          "sha256": "e2aa73873fb6def52619e18a91f8a7514bb4b2d1c4afc59c845ae1a915a29886",
+          "criticalFailures": []
+        }
+      }
+    },
+    {
+      "id": "case-04",
+      "preference": "enriched",
+      "reason": "Controles têm nomes acessíveis específicos e manifesto pode ser revisto localmente; o par mostra melhor a lista antes de exportar.",
+      "confidence": "moderate",
+      "scores": {
+        "enriched": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Quatro assets; busca/tipo, vazio/limpar, seleção e manifesto baixado com nome correto.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-left",
+                "evidence/case-04-left-1440.png",
+                "evidence/case-04-left-390.png",
+                "evidence/case-04-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Filtros não perdem seleção; desmarcar corrige contagem; zero desabilita exportar; manifesto também consultável na página.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-left",
+                "evidence/case-04-left-1440.png",
+                "evidence/case-04-left-390.png",
+                "evidence/case-04-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Checkboxes têm nomes acessíveis específicos por asset; teclado opera busca, filtros, seleção e exportação.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-left",
+                "evidence/case-04-left-1440.png",
+                "evidence/case-04-left-390.png",
+                "evidence/case-04-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Direito pendente explícito; exportação local; contagem exata. Não mostra lista nominal da seleção antes de exportar.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-left",
+                "evidence/case-04-left-1440.png",
+                "evidence/case-04-left-390.png",
+                "evidence/case-04-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 18,
+              "observation": "Quatro cards em linha no desktop preservam visão global; nome longo quebra sem overflow, porém metadados são pequenos.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-left",
+                "evidence/case-04-left-1440.png",
+                "evidence/case-04-left-390.png",
+                "evidence/case-04-left-320.png"
+              ]
+            }
+          },
+          "sha256": "0e11558d3ce5feb652485fcb5f6ede13ad8a873aea2fa507836d8f236619ff12",
+          "criticalFailures": []
+        },
+        "baseline": {
+          "total": 93,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Quatro assets; filtros e download JSON corretos; pendente excluído do manifesto.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-right",
+                "evidence/case-04-right-1440.png",
+                "evidence/case-04-right-390.png",
+                "evidence/case-04-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Limpar restaura quatro cards e conserva seleção; desmarcar/zero atualizam total e estado do botão.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-right",
+                "evidence/case-04-right-1440.png",
+                "evidence/case-04-right-390.png",
+                "evidence/case-04-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 17,
+              "observation": "Checkboxes autorizados repetem nome acessível \"Selecionar asset\", sem nome de asset ligado ao controle; teclado ainda opera o fluxo.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-right",
+                "evidence/case-04-right-1440.png",
+                "evidence/case-04-right-390.png",
+                "evidence/case-04-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Lista nominal antes de exportar ajuda conferir; explicação de direito pendente e conteúdo JSON clara.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-right",
+                "evidence/case-04-right-1440.png",
+                "evidence/case-04-right-390.png",
+                "evidence/case-04-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 17,
+              "observation": "Dois cards por linha no desktop e arte grande aumentam comprimento;320/390px passam sem overflow, inclusive título longo.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-04-right",
+                "evidence/case-04-right-1440.png",
+                "evidence/case-04-right-390.png",
+                "evidence/case-04-right-320.png"
+              ]
+            }
+          },
+          "sha256": "569df36034b02cc02d2e1daf4a81a77340178ae239a15080f2c5c4ac3df6c895",
+          "criticalFailures": []
+        }
+      }
+    },
+    {
+      "id": "case-05",
+      "preference": "tie",
+      "reason": "Mesma exatidão e recuperação; um prioriza campos/ações no mobile, outro limites e foco no resultado.",
+      "confidence": "no decisive preference",
+      "scores": {
+        "enriched": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Zero/fração/faixa/vazio rejeitados;8×30=240,1×1=1,20×120=2400; unidade explícita.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-left",
+                "evidence/case-05-left-1440.png",
+                "evidence/case-05-left-390.png",
+                "evidence/case-05-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Limpar apaga campos/resultado;2×7 recalcula14; editar invalida total anterior.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-left",
+                "evidence/case-05-left-1440.png",
+                "evidence/case-05-left-390.png",
+                "evidence/case-05-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 19,
+              "observation": "Foco visível no contêiner focus-within; status anuncia cálculo, sem deslocar foco para o resultado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-left",
+                "evidence/case-05-left-1440.png",
+                "evidence/case-05-left-390.png",
+                "evidence/case-05-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Fórmula e limites explícitos; texto secundário de limites menor que no par.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-left",
+                "evidence/case-05-left-1440.png",
+                "evidence/case-05-left-390.png",
+                "evidence/case-05-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 19,
+              "observation": "Entradas amplas e ações empilhadas evitam rótulo quebrado no mobile; painel ilustrado equilibrado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-left",
+                "evidence/case-05-left-1440.png",
+                "evidence/case-05-left-390.png",
+                "evidence/case-05-left-320.png"
+              ]
+            }
+          },
+          "sha256": "61b9662af3c7b29b60a990a3b723754b5f3d953f3312fef77e562ddd955be728",
+          "criticalFailures": []
+        },
+        "baseline": {
+          "total": 97,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Zero/fração/faixa/vazio rejeitados; cálculos extremos e intermediários exatos com minutos.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-right",
+                "evidence/case-05-right-1440.png",
+                "evidence/case-05-right-390.png",
+                "evidence/case-05-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Limpar/recalcular operantes; resultado anterior oculto ao alterar parâmetro.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-right",
+                "evidence/case-05-right-1440.png",
+                "evidence/case-05-right-390.png",
+                "evidence/case-05-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Labels, erros e foco no título do resultado; controle numérico nativo; sem overflow inicial.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-right",
+                "evidence/case-05-right-1440.png",
+                "evidence/case-05-right-390.png",
+                "evidence/case-05-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 20,
+              "observation": "Limites legíveis; sem preço ou promessa de produtividade; unidade do total explícita.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-right",
+                "evidence/case-05-right-1440.png",
+                "evidence/case-05-right-390.png",
+                "evidence/case-05-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 17,
+              "observation": "Desktop limpo; botões lado a lado quebram \"Calcular estimativa\" no mobile e painel vazio deixa espaço vertical grande.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-05-right",
+                "evidence/case-05-right-1440.png",
+                "evidence/case-05-right-390.png",
+                "evidence/case-05-right-320.png"
+              ]
+            }
+          },
+          "sha256": "752a1f4549333394c6893ff7975f92c034bcd6fecf6f0b9691a7a5872ba44030",
+          "criticalFailures": []
+        }
+      }
+    },
+    {
+      "id": "case-06",
+      "preference": "enriched",
+      "reason": "Etapas e controles mais compactos no mobile, com progresso explícito; o par oferece melhor foco após transição.",
+      "confidence": "moderate",
+      "scores": {
+        "enriched": {
+          "total": 98,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Avançar percorre Definir/Criar/Conferir; pausa congela progresso; final bloqueia novo avanço.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-left",
+                "evidence/case-06-left-1440.png",
+                "evidence/case-06-left-390.png",
+                "evidence/case-06-left-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Reiniciar em transição permanece Definir após1,75s; reduced motion troca imediatamente; mudança dinâmica verificada após entrega do evento.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-left",
+                "evidence/case-06-left-1440.png",
+                "evidence/case-06-left-390.png",
+                "evidence/case-06-left-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 19,
+              "observation": "Progressbar semântico e aria-current; status anuncia etapas, porém foco não é movido ao conteúdo após a transição.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-left",
+                "evidence/case-06-left-1440.png",
+                "evidence/case-06-left-390.png",
+                "evidence/case-06-left-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 20,
+              "observation": "Número, etapa, checklist e percentagem expressam o processo;1,6s explicitados; sem autoplay observado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-left",
+                "evidence/case-06-left-1440.png",
+                "evidence/case-06-left-390.png",
+                "evidence/case-06-left-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 19,
+              "observation": "Três etapas compactas no mobile; conteúdo e arte equilibrados; controles de ação/pause/reset agrupados.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-left",
+                "evidence/case-06-left-1440.png",
+                "evidence/case-06-left-390.png",
+                "evidence/case-06-left-320.png"
+              ]
+            }
+          },
+          "sha256": "45c36cca0de32091009ecfdf58867f6db235a8d5841aa1535c6303d23e351cf9",
+          "criticalFailures": []
+        },
+        "baseline": {
+          "total": 96,
+          "dimensions": {
+            "task-completion20": {
+              "score": 20,
+              "observation": "Três etapas completas, pausa e conclusão funcionam; nenhum autoplay observado.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-right",
+                "evidence/case-06-right-1440.png",
+                "evidence/case-06-right-390.png",
+                "evidence/case-06-right-320.png"
+              ]
+            },
+            "state-recovery20": {
+              "score": 20,
+              "observation": "Reset durante transição conserva início; reduced motion preserva copy e etapa; mudança dinâmica concluída após evento.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-right",
+                "evidence/case-06-right-1440.png",
+                "evidence/case-06-right-390.png",
+                "evidence/case-06-right-320.png"
+              ]
+            },
+            "keyboard-and-responsive20": {
+              "score": 20,
+              "observation": "Foco no título ao concluir e em avançar ao reiniciar; progresso visual não tem role progressbar, mas status/aria-current informam etapa.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-right",
+                "evidence/case-06-right-1440.png",
+                "evidence/case-06-right-390.png",
+                "evidence/case-06-right-320.png"
+              ]
+            },
+            "clarity20": {
+              "score": 19,
+              "observation": "Transição de900ms no código; estágio textual e estado final claros; sem percentagem exibida.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-right",
+                "evidence/case-06-right-1440.png",
+                "evidence/case-06-right-390.png",
+                "evidence/case-06-right-320.png"
+              ]
+            },
+            "visual-coherence20": {
+              "score": 17,
+              "observation": "Etapas verticais, arte e cópia tornam o mobile mais longo; arte e paleta são coerentes, sem overflow.",
+              "evidence": [
+                "evidence/raw-evidence.json#case-06-right",
+                "evidence/case-06-right-1440.png",
+                "evidence/case-06-right-390.png",
+                "evidence/case-06-right-320.png"
+              ]
+            }
+          },
+          "sha256": "d3bc1c27099f1be983972fad6052608ad09f0a4470acf612d678162dc4dae625",
+          "criticalFailures": []
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Chromium only; fictional local artifacts, no backend, remote user or real scheduling tested",
+    "Three widths; screenshots sampled initial state plus required functional states",
+    "No causal attribution, author/model/expertise or aggregate-framework approval",
+    "Functional scenarios executed at1440px. Initial responsive layouts measured/visually inspected at390px and320px; every changed-state mobile layout was not replayed.",
+    "Keyboard uses Chromium Enter/Space/Tab probes; no screen-reader, full WCAG audit, zoom200%, Safari or Firefox test.",
+    "Contrast and timing are observed, not audited with dedicated contrast/performance tooling.",
+    "Static shapes and layout coherence judged from screenshots; screenshot capture is not aesthetic approval.",
+    "One generation per case; stochastic variation and different context sizes/content cannot isolate the mechanism.",
+    "The frozen enriched context predates the new35-function/51-command contracts and their personal installation.",
+    "No Opus/Jev or native-provider activation comparison; no audiovisual/reel/carousel expertise conclusion.",
+    "No reuse or extraction of rules from these reserved benchmark outputs in this wave."
+  ]
+}

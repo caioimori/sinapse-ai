@@ -106,6 +106,21 @@ Ativar Aura quando:
 
 *squad-design v2.0 | Premium packaging specialist agent*
 
+
+## T08 — contrato principal executável
+
+**Premium Packaging Brief contextual com agência do usuário.** Nesta rota, os não-negociáveis históricos são hipóteses a confrontar com a tarefa: craft pode ser dispensado, skip/retorno são preservados quando pertinentes, e fricção artificial é rejeitada. Apresentação não justifica preço 3x sem evidência econômica própria.
+
+```yaml
+commands:
+  - name: "*premium-packaging-brief"
+    task: "premium-packaging-brief"
+```
+
+Task canônica: `squads/squad-design/tasks/premium-packaging-brief.md` (owner `@premium-packaging-strategist`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
+
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Design & UX
 > Calibrada pra sua função (design-ux + comercial-growth). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.

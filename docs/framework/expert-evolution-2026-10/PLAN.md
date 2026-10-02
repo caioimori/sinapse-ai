@@ -1,5 +1,16 @@
 # Plano de evolução dos especialistas
 
+## Atualização operacional vigente — 2026-10-02
+
+O [contrato operacional](OPERATIONAL-SPEC.md) e seu [workflow](operational-workflow.json) avançaram as pendências: painel SINAPSE compreensível, 35 funções/51 comandos com contratos revisados, seis tarefas de design novas e extensão pessoal instalada com readback. Os 172 agentes e os arquivos originais foram preservados.
+
+A [comparação cega de seis pares](paired-interface-results.md) observou quatro preferências pelo contexto aprimorado e dois empates, com 225 verificações efetivas. O desvio de 11,038s do baseline e os limites de desktop/mobile permanecem expostos; nenhuma promoção ou conclusão causal.
+
+A [auditoria de pastas](operational-folder-audit.md) conservou os 14 clusters por consumidores distintos. A [distribuição pessoal](personal-distribution.md) documenta 51 contextos completos, backup/CAS/readback e descoberta da nova skill em contexto novo. [Serviços](operational-services.md) distingue acesso, login e execução real.
+
+A sequência abaixo conserva a auditoria anterior como histórico; os estados desta retomada estão no [handoff](HANDOFF.md) e na verificação operacional. O próximo avanço depende de competência e falha observada, não de volume de material ou de uma contagem de agentes.
+
+
 ## Decisão corrigida após auditoria
 
 Priorizar entregáveis e competências com falhas observadas, com até três famílias ativas. Corrigir contratos, recuperação, custo e rollback antes de ampliar o acervo. Contagens são inventário; qualidade exige produto final e evidência independente.

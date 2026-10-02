@@ -254,6 +254,48 @@ function extractTaskSlugs(sourceText) {
 }
 
 /**
+ * A public command may deliberately retain a short/legacy name while pointing
+ * to a different task. Only an explicit task field in that command's canonical
+ * YAML entry grants this alias; titles, list position and lexical similarity do
+ * not. The caller verifies the real squad task and its declared owner.
+ */
+function extractDeclaredCommandBindings(sourceText) {
+  const bindings = [];
+  let inCommands = false;
+  let command = null;
+  let declared = false;
+  for (const line of (sourceText || '').split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (/^commands:\s*$/.test(line)) {
+      inCommands = true;
+      command = null;
+      continue;
+    }
+    if (!inCommands) continue;
+    if (trimmed && !/^\s/.test(line)) {
+      inCommands = false;
+      command = null;
+      continue;
+    }
+    const name = trimmed.match(/^-\s+name:\s*["']?\*([a-z0-9][a-z0-9-]*)["']?\s*$/i);
+    if (name) {
+      command = name[1].toLowerCase();
+      declared = false;
+      continue;
+    }
+    if (!/^task\s*:/.test(trimmed)) continue;
+    const task = trimmed.match(/^task:\s*(?:"([a-z0-9][a-z0-9-]*)"|'([a-z0-9][a-z0-9-]*)'|([a-z0-9][a-z0-9-]*))\s*(?:#.*)?$/i);
+    if (!command || declared || !task) throw new Error('Invalid explicit canonical command task');
+    bindings.push({command, task: (task[1] || task[2] || task[3]).toLowerCase()});
+    declared = true;
+  }
+  if (new Set(bindings.map(binding => binding.command)).size !== bindings.length) {
+    throw new Error('Duplicate explicit canonical command');
+  }
+  return bindings;
+}
+
+/**
  * Discover real tasks for an agent: intersect declared slugs with existing
  * task files. Orchestrators expose every squad task. Specialists fall back to
  * the full squad task pool only when no exact task matched — so no agent is
@@ -278,7 +320,36 @@ function resolveAgentTasks(entry, projectRoot = PROJECT_ROOT) {
   const resolved = [];
   const seen = new Set();
 
+  // This extension is squad-local. Core definitions retain their existing
+  // dependency/task syntax and curated command registry unchanged.
+  const explicit = entry.squad && entry.squad !== 'core'
+    ? extractDeclaredCommandBindings(sourceText)
+    : [];
+  const explicitAliases = new Set(explicit.map(binding => binding.command));
+  const explicitCommands = new Map();
+  for (const binding of explicit) {
+    if (!entry.squad) throw new Error(`Explicit command task requires a squad owner: ${entry.id}`);
+    const rel = `${squadBase}/tasks/${binding.task}.md`;
+    const taskSource = fileExists(projectRoot, rel) ? readFileSafe(projectRoot, rel) : null;
+    const owner = taskSource?.match(/^responsavel:\s*["']?@([a-z0-9][a-z0-9-]*)["']?\s*$/im)?.[1];
+    const taskId = taskSource?.match(/^task:\s*["']?([a-z0-9][a-z0-9-]*)["']?\s*$/im)?.[1];
+    if (!taskSource || owner !== entry.id || taskId !== binding.task) {
+      throw new Error(`Invalid explicit command task/owner for ${entry.id}:${binding.command}`);
+    }
+    for (const command of new Set([binding.command, binding.task])) {
+      if (explicitCommands.has(command) && explicitCommands.get(command) !== rel) {
+        throw new Error(`Ambiguous explicit command task for ${entry.id}:${command}`);
+      }
+      if (!explicitCommands.has(command)) {
+        resolved.push({command, target: rel, kind: 'task', scope: 'declared-binding'});
+        explicitCommands.set(command, rel);
+      }
+    }
+    seen.add(rel);
+  }
+
   for (const slug of declared) {
+    if (explicitAliases.has(slug) || explicitCommands.has(slug)) continue;
     for (const dir of taskDirs) {
       const rel = `${dir}/${slug}.md`;
       if (!seen.has(rel) && fileExists(projectRoot, rel)) {
@@ -505,6 +576,7 @@ module.exports = {
   loadCodexAgentIndex,
   resolveAgentId,
   extractTaskSlugs,
+  extractDeclaredCommandBindings,
   resolveAgentTasks,
   resolveCodexAgent,
   resolveCodexAgentCommand,

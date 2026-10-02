@@ -57,7 +57,10 @@ describe('framework evolution distribution into isolated destinations', () => {
     expect(query(script, 'ad-copywriter', 'write-ad-copy-variations').capsule.task.target).toBe('squad-copy/tasks/write-ad-copy-variations.md');
     const expertise = require('../../scripts/expert-evolution/expertise.cjs');
     const installedProgram = expertise.loadProgram(installed);
-    expect(installedProgram.bindings.bindings).toHaveLength(18);
+    expect(installedProgram.bindings.bindings).toEqual(bindings.map(binding => ({
+      ...binding,
+      taskPath: installedPath(binding.taskPath),
+    })));
     expect(expertise.validateTaskBindings(installedProgram, {root:installed})).toEqual({valid:true,errors:[]});
     for(const binding of bindings){
       const relative=installedPath(binding.taskPath);

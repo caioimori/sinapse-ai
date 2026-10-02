@@ -1,4 +1,36 @@
-# Checkpoint auditado — estado vigente
+# Checkpoint operacional — estado vigente
+
+Começar pela [verificação operacional](operational-verification.md), [plano](PLAN.md) e [receipt da instalação](personal-distribution.json). Branch local `codex/feat/framework-evolution-20261002`; base desta retomada `dfb44cda9df00868295ee7dde1ba74441d66e9de`. Os checkpoints anteriores abaixo são históricos.
+
+## Resultado vigente
+
+- Painel SINAPSE em PT-BR: prioridades, cinco trilhas, squads, evidências e próximos passos; os quatro exemplos Lume permanecem acessíveis. Preview local em http://127.0.0.1:4179/; é navegação informativa.
+- 35 funções/51 comandos com contratos revisados; seis tarefas de design novas. Conteúdo/análise e calendário editorial resolvem as tarefas corretas. 172 agentes preservados; inventário 1.418 tasks/1.354 alcançáveis.
+- Extensão pessoal instalada em Codex/Claude por `sinapse-expert-runtime`: 51 contextos ≤9.091/12.000 chars, 262 hashes de payload, 172 canônicas e 460 entradas pessoais conferidas. Backup/journal completo, lock liberado. Entrada opt-in; descoberta em contexto novo e execução nativa são etapas distintas.
+- 12 interfaces próprias em comparação cega: quatro preferências pelo contexto aprimorado e dois empates; 225 verificações efetivas, sem crítico confirmado. Desvio de 11,038s no baseline e replay incompleto de estados mobile expostos; sem ganho causal ou promoção.
+- Auditoria dos 14 clusters de pastas: consumidores distintos justificam preservação. Nenhum conteúdo funcional apagado, movido ou consolidado por mera igualdade de bytes.
+
+## Verificação e preservação
+
+Coorte final **324/324 em 22 suites**, zero skips, 211,484s. Lint/typecheck, paridade/172 agentes, 17/17 YAML, manifest, story/workflow e guards são registrados na verificação. As falhas anteriores e os dois P2 de instalação corrigidos ficam explícitos; não ocultar receipts vermelhos.
+
+Painel: 27 checks funcionais; readback do dataset final em 1440/390/320 com zero overflow. Desktop/390 inspecionados; aba HTTP do aplicativo recarregada com métricas e estados vigentes. Outputs de QA, biblioteca, contextos e planos pessoais permanecem ignorados.
+
+Original: mesma branch/SHA e 191 entradas, zero diferença de hash/status. Zero paths protegidos alterados, Docker, WSL, push, PR, CI remoto ou publicação nesta retomada. Empacotamento somente dry-run, sem dados privados/output.
+
+## Pendências e próxima execução
+
+1. GM não identificado nas abas conectadas; endereço solicitado ainda ausente. Jev sem credencial identificada, piloto autorizado USD0.05 não executado e zero chamadas/custo. Usar fluxo seguro; não pedir segredo no chat nem forçar retry de cobrança incerta.
+2. Claude autenticado por status local; Opus 5.5 sem execução/benchmark no ambiente compatível. Mobbin sem nova sessão observada; receipts/capturas anteriores preservados e sem redistribuição.
+3. 137 funções e 88 referências candidatas exigem fonte observada, competência delimitada e entregável reservado independente. Zero especialista mundial validado; contagem ou referência não é material absorvido.
+4. Completar revisão audiovisual contínua e replay dos estados das interfaces no mobile. Ativação nativa instalada precisa de prova própria; não confundir montagem determinística de contexto com execução da persona.
+5. Integração ao projeto principal/revisão remota permanece pendente. Preservar o original e os controles; publicação exige seu fluxo autorizado e readback ao vivo.
+
+Para a extensão instalada, resolver identidade/comando, recuperar contexto pela skill adicional e verificar tarefa/critério antes de executar. Para aquisição, seguir propose/review/consolidate/plan com CAS, fonte/direitos/locator e gate independente; não reutilizar outputs reservados do benchmark como regra nesta onda.
+
+---
+
+# Checkpoint auditado anterior — histórico preservado
 
 Começar por [plano corrigido](PLAN.md), [verificação auditada](audited-verification.md) e [QA independente](audited-quality-review.md). Branch local `codex/feat/framework-evolution-20261002`, worktree `framework-evolution/sinapse-ai`; base desta auditoria `47f421cb1d813875504815734acd15562bbeca01`. O checkpoint anterior abaixo permanece histórico.
 

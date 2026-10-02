@@ -495,6 +495,1128 @@
         "rationale": "UGC peer-proof is separate from headline variations.",
         "status": "semantic-reviewed-not-evaluated"
       }
+    },
+    {
+      "agentId": "editorial-strategist",
+      "command": "create-editorial-calendar",
+      "sourceSha256": "cae1d0d657c9056668023588eecf2c12870bcbc55549e7b59141496b3704a840",
+      "taskPath": "squads/squad-content/tasks/create-editorial-calendar.md",
+      "taskSha256": "b9edfdbd039489d42e3ce9da4f009673252e08f073f62d832f45e5e3217bbc00",
+      "competencyIds": [
+        "capacity-bound-editorial-calendar"
+      ],
+      "deliverableIds": [
+        "editorial-calendar"
+      ],
+      "requiredCriterionIds": [
+        "calendar-trace",
+        "calendar-capacity",
+        "calendar-measure"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar calendario editorial",
+        "rationale": "North plans editorial distribution; task example cadences are choices to validate, not universal posting requirements.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Approved pillars, seasonal dates, Reel/carousel platforms, real production capacity and measurement definitions.",
+        "output": "Dated slots with pillar/funnel/theme, owners, production lead time, flex capacity and tracking.",
+        "negative": {
+          "input": "Daily Reels planned despite one weekly production slot and unverified holiday date.",
+          "expected": "Reject capacity/date conflict; reduce or defer slots and preserve explicit review before publication."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "editorial-strategist",
+      "command": "create-calendar",
+      "sourceSha256": "cae1d0d657c9056668023588eecf2c12870bcbc55549e7b59141496b3704a840",
+      "taskPath": "squads/squad-content/tasks/create-editorial-calendar.md",
+      "taskSha256": "b9edfdbd039489d42e3ce9da4f009673252e08f073f62d832f45e5e3217bbc00",
+      "competencyIds": [
+        "capacity-bound-editorial-calendar"
+      ],
+      "deliverableIds": [
+        "editorial-calendar"
+      ],
+      "requiredCriterionIds": [
+        "calendar-trace",
+        "calendar-capacity",
+        "calendar-measure"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar calendario editorial",
+        "rationale": "North plans editorial distribution; task example cadences are choices to validate, not universal posting requirements.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Approved pillars, seasonal dates, Reel/carousel platforms, real production capacity and measurement definitions.",
+        "output": "Dated slots with pillar/funnel/theme, owners, production lead time, flex capacity and tracking.",
+        "negative": {
+          "input": "Daily Reels planned despite one weekly production slot and unverified holiday date.",
+          "expected": "Reject capacity/date conflict; reduce or defer slots and preserve explicit review before publication."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "content-analyst",
+      "command": "analyze-content-performance",
+      "sourceSha256": "037a9ae535728eb10e150a396641156ca7a391e3565ffe9b7027ed6f32e82685",
+      "taskPath": "squads/squad-content/tasks/analyze-content-performance.md",
+      "taskSha256": "9474df3f0e083c6f7e304680a59f44485a7e774a80a753ed783daf513f841fab",
+      "competencyIds": [
+        "content-metric-interpretation"
+      ],
+      "deliverableIds": [
+        "content-performance-report"
+      ],
+      "requiredCriterionIds": [
+        "analytics-definition",
+        "analytics-comparison",
+        "analytics-action"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Analisar performance de conteudo publicado",
+        "rationale": "Lens analyses editorial metrics; SQL query optimisation is another domain and correlation does not establish format causality.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Actual platform metrics, content IDs, KPI definitions, time window, denominators and comparable history.",
+        "output": "Metric/source table, KPI comparisons, grounded patterns, uncertainty and next-cycle test recommendations.",
+        "negative": {
+          "input": "Five high-spend Reels vs unpaid carousels; raw impressions used to claim threefold causal format gain.",
+          "expected": "Reject causal comparison; separate spend/population/denominator and propose controlled follow-up."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "content-analyst",
+      "command": "analyze-performance",
+      "sourceSha256": "037a9ae535728eb10e150a396641156ca7a391e3565ffe9b7027ed6f32e82685",
+      "taskPath": "squads/squad-content/tasks/analyze-content-performance.md",
+      "taskSha256": "9474df3f0e083c6f7e304680a59f44485a7e774a80a753ed783daf513f841fab",
+      "competencyIds": [
+        "content-metric-interpretation"
+      ],
+      "deliverableIds": [
+        "content-performance-report"
+      ],
+      "requiredCriterionIds": [
+        "analytics-definition",
+        "analytics-comparison",
+        "analytics-action"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Analisar performance de conteudo publicado",
+        "rationale": "Lens analyses editorial metrics; SQL query optimisation is another domain and correlation does not establish format causality.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Actual platform metrics, content IDs, KPI definitions, time window, denominators and comparable history.",
+        "output": "Metric/source table, KPI comparisons, grounded patterns, uncertainty and next-cycle test recommendations.",
+        "negative": {
+          "input": "Five high-spend Reels vs unpaid carousels; raw impressions used to claim threefold causal format gain.",
+          "expected": "Reject causal comparison; separate spend/population/denominator and propose controlled follow-up."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-accessibility-specialist",
+      "command": "conduct-wcag-audit",
+      "sourceSha256": "7cc3aa83e69caf624bfde269e963d9a2691c0b5ecc4110fb5a3a8162932a8f23",
+      "taskPath": "squads/squad-design/tasks/conduct-wcag-audit.md",
+      "taskSha256": "20004a7dfbcf68446630c8cb22393e74cfe6870822c13e0f2ce1686529bbd123",
+      "competencyIds": [
+        "scoped-accessibility-audit"
+      ],
+      "deliverableIds": [
+        "accessibility-audit"
+      ],
+      "requiredCriterionIds": [
+        "a11y-scope",
+        "a11y-observation",
+        "a11y-verdict"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Conduzir auditorias WCAG 2.2",
+        "rationale": "Aperture audits and prescribes; implementation remains Scaffold's responsibility.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Implemented pages/components, declared flows, WCAG target and test environment.",
+        "output": "Criterion matrix, findings, remediation owners and scoped verdict.",
+        "negative": {
+          "input": "Axe passes but dialog traps focus and no screen-reader run exists.",
+          "expected": "FAIL for trap; AT unverified; no complete compliance verdict."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-design-system-architect",
+      "command": "define-token-taxonomy",
+      "sourceSha256": "880602cac7e1e1c298386e977f70d430577149bfd17d81c57e76e3a139c20187",
+      "taskPath": "squads/squad-design/tasks/define-token-taxonomy.md",
+      "taskSha256": "4a689ab6ad8f7e8e2b558acb1e37a4754895237de15b6530e52444f0346facf3",
+      "competencyIds": [
+        "token-reference-contract"
+      ],
+      "deliverableIds": [
+        "token-taxonomy"
+      ],
+      "requiredCriterionIds": [
+        "tokens-chain",
+        "tokens-consumers",
+        "tokens-boundary"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Definir taxonomia de tokens",
+        "rationale": "Lattice governs token/API architecture, not visual decisions or component implementation.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Approved brand tokens, visual specs, existing token consumers and theme requirements.",
+        "output": "Versioned taxonomy, names, reference rules and handoff; implementation deferred.",
+        "negative": {
+          "input": "Component token points at a missing semantic token in dark mode.",
+          "expected": "Reject the reference chain and expose affected consumers before handoff."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-interaction-designer",
+      "command": "spec-micro-interactions",
+      "sourceSha256": "39303731055234af215924295b53ba670275d5ff37ba71133528ba8c3f13f371",
+      "taskPath": "squads/squad-design/tasks/spec-micro-interactions.md",
+      "taskSha256": "fd757c93a45f07f518af0efcf068655c8e020e3a4bbce953133edc224408b17f",
+      "competencyIds": [
+        "interaction-state-specification"
+      ],
+      "deliverableIds": [
+        "micro-interaction-spec"
+      ],
+      "requiredCriterionIds": [
+        "interaction-state",
+        "interaction-control",
+        "interaction-boundary"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Especificar micro-interacoes por componente",
+        "rationale": "Gesture specifies product motion; brand motion and formal accessibility review remain separate.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Visual states, motion tokens, triggers, product purpose and accessibility constraints.",
+        "output": "State/trigger spec, timings, interruption behavior, reduced alternative and implementer handoff.",
+        "negative": {
+          "input": "Modal dismissed halfway through entrance; reduce preference changes at runtime.",
+          "expected": "Deterministic closed state and returned focus; essential status retained without decorative motion."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-performance-engineer",
+      "command": "audit-core-web-vitals",
+      "sourceSha256": "265b6d15a97a59d80caaab5699672c8a74a2961d8f419509bca6ae9a022a8324",
+      "taskPath": "squads/squad-design/tasks/audit-core-web-vitals.md",
+      "taskSha256": "7eaf2b290bd5b21f2bdbf940ebd2a04fefac7afbd47b54af655285120671d263",
+      "competencyIds": [
+        "scoped-web-performance-audit"
+      ],
+      "deliverableIds": [
+        "web-performance-audit"
+      ],
+      "requiredCriterionIds": [
+        "webperf-environment",
+        "webperf-evidence",
+        "webperf-remediation"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Auditar Core Web Vitals",
+        "rationale": "Velocity measures and prescribes; lab fixture and aggregate score do not establish field p75.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Exact URL/build, user interactions, device/network targets, budgets and field data if available.",
+        "output": "Per-URL measured results, bottleneck evidence, remediation owners and limits.",
+        "negative": {
+          "input": "Single Lighthouse run, no user interaction or field data, label says all users meet INP p75.",
+          "expected": "Reject certification; report lab-only evidence and missing field/interaction data."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-ui-designer",
+      "command": "compose-screen-layouts",
+      "sourceSha256": "4a136f171dd0feb4d258ee2d9fe8c11fa8a5a9e32f5c0ed222ad6385d813e1bc",
+      "taskPath": "squads/squad-design/tasks/compose-screen-layouts.md",
+      "taskSha256": "61d347ac7f2675eebfa86939d5846e1e71348d0ddd2e33f6afcae0190887137e",
+      "competencyIds": [
+        "responsive-visual-composition"
+      ],
+      "deliverableIds": [
+        "screen-composition"
+      ],
+      "requiredCriterionIds": [
+        "ui-hierarchy",
+        "ui-responsive",
+        "ui-handoff"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Compor layouts de tela",
+        "rationale": "Palette composes UI; does not invent brand foundations or claim implemented behavior.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Wireframe brief, approved copy, brand/DS tokens, content hierarchy and responsive constraints.",
+        "output": "Screen designs, visual states, grid/reflow notes and implementation handoff.",
+        "negative": {
+          "input": "Long project title and empty/error states at 390px with desktop-only sidebar.",
+          "expected": "Expose overflow/content loss; adapt hierarchy and provide explicit state/reflow rules."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "dx-ux-strategist",
+      "command": "create-wireframe-brief",
+      "sourceSha256": "63eb60bce9e62c84c7f63f6decd06ac8512c3f1a322764ce7b323be88e0aab47",
+      "taskPath": "squads/squad-design/tasks/create-wireframe-brief.md",
+      "taskSha256": "fc556845e4a93d9734c4fe1e51e7d573d46ccaaca0af4dbff22c932ccffdab64",
+      "competencyIds": [
+        "evidence-grounded-wireframe-brief"
+      ],
+      "deliverableIds": [
+        "wireframe-brief"
+      ],
+      "requiredCriterionIds": [
+        "ux-evidence",
+        "ux-flow",
+        "ux-boundary"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar wireframe briefs estrategicos",
+        "rationale": "Vantage defines structure/brief; task wording mentioning detailed wireframes does not expand role into visual design.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "IA, user flows, evidence-backed scenarios, content hierarchy and business constraints.",
+        "output": "Structural briefs by template, annotations, assumptions, responsive notes and UI handoff.",
+        "negative": {
+          "input": "Brief requires account recovery but available flow omits failure/back navigation; no persona research.",
+          "expected": "Expose flow gap and persona assumption; no invented test success or visual implementation."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "design-orqx",
+      "command": "orchestrate-dx-pipeline",
+      "sourceSha256": "0026addbb050a68b7f9c4d50323c0a3f9a8f22cb605fab0af649c4c39dd2aa6d",
+      "taskPath": "squads/squad-design/tasks/orchestrate-dx-pipeline.md",
+      "taskSha256": "00b07d762870d4b50190e8d2f4b6ae42a7340c3f40b4e3582233a5fb0f2d8b30",
+      "competencyIds": [
+        "design-pipeline-coordination"
+      ],
+      "deliverableIds": [
+        "design-delivery-plan"
+      ],
+      "requiredCriterionIds": [
+        "dx-route",
+        "dx-gates",
+        "dx-authority"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Sequenciar agentes e gerenciar handoffs",
+        "rationale": "Nexus coordinates specialists; canonical output calling a pipeline successful is contingent on actual receipts.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Selected workflow, DX brief, assets, authority, dependencies and specialist status.",
+        "output": "Assignments, verified handoffs, scoped gate receipts and unresolved blockers.",
+        "negative": {
+          "input": "UI complete but keyboard gate failed and performance evidence absent.",
+          "expected": "Block progression, delegate remediation and report the missing receipts."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "animation-interpreter",
+      "command": "build-animation-brief",
+      "sourceSha256": "377c3251eb1bc811ff2629d58100b8edf43d76505d340ebc9028374348c7bcf8",
+      "taskPath": "squads/squad-animations/tasks/build-animation-brief.md",
+      "taskSha256": "5ac04bc978e17b0e1caa3b41126ae71470a4f487d5e26bcedd387659be06a15f",
+      "competencyIds": [
+        "executable-motion-brief"
+      ],
+      "deliverableIds": [
+        "animation-brief"
+      ],
+      "requiredCriterionIds": [
+        "brief-intent",
+        "brief-parameters",
+        "brief-executor"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Gerar Animation Briefs completos",
+        "rationale": "Decoder interprets into a brief and delegates implementation; subjective adjectives are assumptions to test.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Raw request, extracted intent, surface/brand context, device constraints and authorized references.",
+        "output": "Purpose, from/to parameters, triggers, fallback, assets and actual executor/task.",
+        "negative": {
+          "input": "Request says elegant but gives no assets/device; proposed shader has unknown license and no fallback.",
+          "expected": "Mark inferences and missing rights; constrain or defer implementation without claiming observed reference."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "motion-choreographer",
+      "command": "design-animation-timing",
+      "sourceSha256": "561db1633ac969b55e43e00e31364e2ae64566b5e723e24ed49f029b4143bb04",
+      "taskPath": "squads/squad-animations/tasks/design-animation-timing.md",
+      "taskSha256": "f24b5bc735652554915e2cec9eb8b9ad7aa5ed48f9a599157480dcda7a2bfa26",
+      "competencyIds": [
+        "motion-timing-choreography"
+      ],
+      "deliverableIds": [
+        "motion-timing-spec"
+      ],
+      "requiredCriterionIds": [
+        "timing-units",
+        "timing-interrupt",
+        "timing-observation"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Design de timing",
+        "rationale": "Tempo specifies choreography; source duration tables are starting hypotheses rather than universal rules.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Animation brief, element list, interaction frequency and perception/accessibility constraints.",
+        "output": "Per-element durations/easing/delays, sequence bounds and alternative timing.",
+        "negative": {
+          "input": "Ten elements stagger indefinitely; final CTA delayed and focus invisible until animation ends.",
+          "expected": "Reject timing/control conflict; essential focus immediate and bounded sequence with reduced alternative."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "scroll-narrative-engineer",
+      "command": "implement-scroll-animation",
+      "sourceSha256": "e6507f4f103c3e36b2d6f530861600d5c99733b4605f42afe006f5a4bd9e4771",
+      "taskPath": "squads/squad-animations/tasks/implement-scroll-animation.md",
+      "taskSha256": "14170be5a2eb04e9df93390bc0bfdfdf0c7a94f79c5226e04bc025edb6c7e6ea",
+      "competencyIds": [
+        "owned-scroll-animation-lifecycle"
+      ],
+      "deliverableIds": [
+        "scroll-motion-implementation"
+      ],
+      "requiredCriterionIds": [
+        "scroll-control",
+        "scroll-ownership",
+        "scroll-measure"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Implementar scroll-driven animations",
+        "rationale": "Parallax implements scroll behavior; universal getAll().kill() snippets must not destroy other owners' triggers.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Scroll spec, real layout, selected stack, device/input targets and ownership boundary.",
+        "output": "Configured animation, native/reduced fallback, teardown and reproducible interaction evidence.",
+        "negative": {
+          "input": "Another feature owns a ScrollTrigger; current animation unmounts during scroll.",
+          "expected": "Only current owner cleaned; foreign trigger survives and content remains reachable."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "shader-artist",
+      "command": "create-custom-shader",
+      "sourceSha256": "b6b873e08d33ddae1d46e8f85de4ad2ee43f221f95ca0e7c9cfd1f5212c46883",
+      "taskPath": "squads/squad-animations/tasks/create-custom-shader.md",
+      "taskSha256": "97ec0e9528a16e687581089f733b24d9a3340c80f35bd48b64f14732538ea0d6",
+      "competencyIds": [
+        "scoped-shader-interface"
+      ],
+      "deliverableIds": [
+        "shader-implementation"
+      ],
+      "requiredCriterionIds": [
+        "shader-interface",
+        "shader-fallback",
+        "shader-lifecycle"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar ShaderMaterial",
+        "rationale": "Fragment owns shader effects; scene setup and independent target performance remain delegated.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Effect specification, configured scene, uniform ranges, texture rights and actual GPU target.",
+        "output": "Compiled shader/interface, bounded parameters, scoped lifecycle and unsupported-context fallback.",
+        "negative": {
+          "input": "Shader fails compile or WebGL context is lost while shared texture belongs to another feature.",
+          "expected": "Readable fallback; diagnostic exposed; shared texture not disposed."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "generative-particle-engineer",
+      "command": "create-particle-system",
+      "sourceSha256": "54b7d95120f569db9ebc82945b3cad6bc0e623ba3316da1823be1e4b99f5547d",
+      "taskPath": "squads/squad-animations/tasks/create-particle-system.md",
+      "taskSha256": "22b9467daee3bf85102eefb2c33e838611220821ef3cb727837582ae9fba91c0",
+      "competencyIds": [
+        "bounded-particle-lifecycle"
+      ],
+      "deliverableIds": [
+        "particle-implementation"
+      ],
+      "requiredCriterionIds": [
+        "particles-bound",
+        "particles-target",
+        "particles-owned"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Sistemas de particulas",
+        "rationale": "Cloud owns generative system; source count tables and million-particle statements cannot establish observed capacity.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Particle brief, finite count/memory budget, seed/data rights, scene and target devices.",
+        "output": "Emitter/forces, bounded pooling, pause/reduced behavior, teardown and target evidence.",
+        "negative": {
+          "input": "Emitter receives infinite rate/negative lifetime, then remounts with a borrowed texture.",
+          "expected": "Reject invalid input; bounded pool and owned teardown leave shared resources intact."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "animations-orqx",
+      "command": "orchestrate-animation-project",
+      "sourceSha256": "d0981964a64342e77e02204a9800d2523bdab4ea5e4fdcec049196a92a33ca8a",
+      "taskPath": "squads/squad-animations/tasks/orchestrate-animation-project.md",
+      "taskSha256": "c97175c46240a4df8791da0869932e3692629aa1a8dab8184030a92843f2a881",
+      "competencyIds": [
+        "motion-pipeline-coordination"
+      ],
+      "deliverableIds": [
+        "animation-delivery-plan"
+      ],
+      "requiredCriterionIds": [
+        "motion-route",
+        "motion-gates",
+        "motion-authority"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Decompor animacoes complexas",
+        "rationale": "Kinetic coordinates implementation and review; award-quality language is not an observed result.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Executable animation brief, authorized assets, target context and specialist availability.",
+        "output": "Real executor/task assignments, bounded dependencies, gate receipts and blockers.",
+        "negative": {
+          "input": "Shader target device absent, only sampled frames, proposed final cinematic PASS.",
+          "expected": "Report unavailable continuous/device review, delegate remaining gates and block unsupported final claim."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "platform-specialist",
+      "command": "register-template-contract",
+      "sourceSha256": "50068f135f1a9d6e31e7cfe983645c9d9a7a2667991f09aebb19dc31df4fd144",
+      "taskPath": "squads/squad-content/tasks/register-template-contract.md",
+      "taskSha256": "9aa89766d9b3af8032608d26e5742387c996b69e3490e9904e703619d7866509",
+      "competencyIds": [
+        "versioned-template-contract"
+      ],
+      "deliverableIds": [
+        "content-template-contract"
+      ],
+      "requiredCriterionIds": [
+        "template-fields",
+        "template-source",
+        "template-enforcement"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Template Contract System",
+        "rationale": "Morph formalizes template constraints; registration does not prove enforcement or published content.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Approved carousel/Reel template, platform, fields, visual assets and dated technical specifications.",
+        "output": "Versioned contract with field/slide bounds, required assets, hard gates and validator handoff.",
+        "negative": {
+          "input": "Carousel contains an extra slide, missing mandatory proof field and stale platform specs.",
+          "expected": "Hard fail required/count violations; expose stale-spec gap without automatic publication."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "platform-specialist",
+      "command": "adapt-for-instagram-reels",
+      "sourceSha256": "50068f135f1a9d6e31e7cfe983645c9d9a7a2667991f09aebb19dc31df4fd144",
+      "taskPath": "squads/squad-content/tasks/adapt-for-instagram-reels.md",
+      "taskSha256": "ec841eafb8d4e31e0f4806e59bc52109f17c121f18401bec30c550b4bb205a23",
+      "competencyIds": [
+        "native-reel-adaptation"
+      ],
+      "deliverableIds": [
+        "reel-adaptation"
+      ],
+      "requiredCriterionIds": [
+        "reel-contract",
+        "reel-message",
+        "reel-limits"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Adaptar conteudo para plataforma especifica",
+        "rationale": "Morph adapts a supplied script; task recommendations about trending audio and retention are hypotheses, not algorithm guarantees.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "reel",
+        "input": "Approved script/message, versioned Reel contract, licensed assets/audio and current platform evidence.",
+        "output": "Adapted script, overlay/caption plan, format/audio choices and governor handoff.",
+        "negative": {
+          "input": "Trending track lacks reuse rights and key instruction exists only in audio.",
+          "expected": "Reject unauthorized track and add equivalent readable information; distribution gain remains unproven."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "content-governor",
+      "command": "validate-content-quality",
+      "sourceSha256": "a2ee49155439a10d6eafe5344edd838058ea38f81d6546d541886cbf34ae6590",
+      "taskPath": "squads/squad-content/tasks/validate-content-quality.md",
+      "taskSha256": "51ffe03898b8a058b84113ed5d60d8aca72a367cfe41b7dbd2e5ecb7b575097f",
+      "competencyIds": [
+        "evidence-bound-content-quality-gate"
+      ],
+      "deliverableIds": [
+        "content-quality-review"
+      ],
+      "requiredCriterionIds": [
+        "content-trace",
+        "content-protected",
+        "content-observed"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "QA pre-publicacao",
+        "rationale": "Index audits, does not create or publish; numeric average cannot override template, factual or rights failures.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Finished carousel/Reel, brief, template version, claims/assets provenance and observed review channels.",
+        "output": "Criterion findings, protected pass/fail, correction handoff and unobserved-media limits.",
+        "negative": {
+          "input": "Average score is nine but testimonial is invented and audio was never heard.",
+          "expected": "FAIL unsupported proof; audiovisual review incomplete; no automatic publication."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "signal-intelligence",
+      "command": "curate-weekly-briefing",
+      "sourceSha256": "aa25ed8e42dee44c34d63a32d0332fdc39e855830e4e505bdb6462888aa74de0",
+      "taskPath": "squads/squad-content/tasks/curate-weekly-briefing.md",
+      "taskSha256": "23dbda0830cd10244202ec4505031c5a21b67d68126d73f4554fafb17929be72",
+      "competencyIds": [
+        "grounded-editorial-signal-curation"
+      ],
+      "deliverableIds": [
+        "editorial-signal-brief"
+      ],
+      "requiredCriterionIds": [
+        "signal-source",
+        "signal-fit",
+        "signal-uncertainty"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Compilar briefing semanal de sinais",
+        "rationale": "Radar curates signals for production; viral scores are estimates and do not establish audience performance.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Dated daily signal logs, source locators, pillar/funnel constraints and available formats.",
+        "output": "Deduplicated priorities, evidence, uncertainty and suggested format/template handoff.",
+        "negative": {
+          "input": "Three reposts repeat one stale claim; no original source or fit to current pillar.",
+          "expected": "One uncertain lineage, no independent corroboration claim; defer or reject editorial recommendation."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "content-orqx",
+      "command": "orchestrate-content-pipeline",
+      "sourceSha256": "39d511f53ec47b77190a4c3bffd569afc00343c38851b9fbca4244f0f8f1c28f",
+      "taskPath": "squads/squad-content/tasks/orchestrate-content-pipeline.md",
+      "taskSha256": "06ee73468d32955283457e235389da1af269d3e32a638fbdf7e378cdb26199dc",
+      "competencyIds": [
+        "content-pipeline-coordination"
+      ],
+      "deliverableIds": [
+        "content-delivery-plan"
+      ],
+      "requiredCriterionIds": [
+        "content-route",
+        "content-gates",
+        "content-authority"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Pipeline visibility",
+        "rationale": "Bulletin coordinates specialists; workflow publication stage does not grant external sending authority.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "carousel",
+        "input": "Editorial plan/signals, current work status, capacity, template versions and brand assets.",
+        "output": "Owned assignments, dependency/status records, QA receipts and unresolved blockers.",
+        "negative": {
+          "input": "Carousel enters publication queue with failed rights gate and client-local preference.",
+          "expected": "Blocked publication status; correction assigned and preference stays local/candidate."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "brand-creative-engineer",
+      "command": "create-icon-set",
+      "sourceSha256": "98c0fcbda9b8d0483bdda4061094c9a32d06f854658b1a6355e269ba0c1ea389",
+      "taskPath": "squads/squad-brand/tasks/create-icon-set.md",
+      "taskSha256": "06a480ada29334816f33cf27878130721d0f93606a71266abf322d21a999fef3",
+      "competencyIds": [
+        "editable-brand-icon-system"
+      ],
+      "deliverableIds": [
+        "brand-icon-set"
+      ],
+      "requiredCriterionIds": [
+        "icons-geometry",
+        "icons-brand",
+        "icons-preserve"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar set de icones SVG",
+        "rationale": "Ember creates code-based brand assets; a source nickname mismatch does not change canonical agent identity.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Approved guidelines/palette, existing icon inventory, permitted new assets and usage sizes.",
+        "output": "Editable SVGs/sprite, fallbacks, semantic-use guide and small-size visual evidence.",
+        "negative": {
+          "input": "Icon includes script/external fetch or duplicate symbol ID and obscures status at 16px.",
+          "expected": "Reject unsafe/colliding asset and require legible status plus integration guidance."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "brand-motion-vfx",
+      "command": "create-video-templates",
+      "sourceSha256": "fa52e46f0d3c874ddf70aff08719c19bf55041e0fdb65608fd5fb2bcb8b2e1cf",
+      "taskPath": "squads/squad-brand/tasks/create-video-templates.md",
+      "taskSha256": "c0263eeb943d4df5126926f5835ca23f05fd8b6bbcd63c7713c508c121ac0d4e",
+      "competencyIds": [
+        "editable-branded-video-template"
+      ],
+      "deliverableIds": [
+        "brand-video-template"
+      ],
+      "requiredCriterionIds": [
+        "video-editable",
+        "video-sync",
+        "video-brand"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar templates de video",
+        "rationale": "Ripple creates reusable branded graphics; fixed intro lengths, export claims and 50ms offsets require context and observation.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "reel",
+        "input": "Approved motion/visual/sonic identity, Reel brief, duration, rights and available export tools.",
+        "output": "Requested editable templates, format manifest, timeline/sync points and missing-tool gaps.",
+        "negative": {
+          "input": "Only MP4 exists but manifest claims editable AE/CSS/Lottie and perfectly heard sync.",
+          "expected": "Reject export/observation claims; report actual files, missing editable formats and unobserved audio."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "brand-sonic-designer",
+      "command": "create-audio-beds",
+      "sourceSha256": "33ebd50d9e10bcd02dc5c625fe32db0c279d2137e807df41d8c689d10ce7383d",
+      "taskPath": "squads/squad-brand/tasks/create-audio-beds.md",
+      "taskSha256": "91c4189bd1d8341122fb4a96daae15b9498de69a890eabe728b6cb5d5559e57c",
+      "competencyIds": [
+        "licensed-audio-bed-production"
+      ],
+      "deliverableIds": [
+        "brand-audio-bed"
+      ],
+      "requiredCriterionIds": [
+        "audio-rights",
+        "audio-technical",
+        "audio-perception"
+      ],
+      "review": {
+        "method": "Compare canonical responsibility, exact task owner, real input and output. Resolver/file existence alone is insufficient; no positional or title mapping.",
+        "locator": "Criar background music loops",
+        "rationale": "Echo designs audio beds; codec/RMS/LUFS and music theory tags cannot prove heard quality, seamlessness or voice clarity.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "reel",
+        "input": "Sonic identity, Reel context/duration, voice mix, authorized sound sources and output formats.",
+        "output": "Actual masters/variants, rights manifest, mix metrics and available listening/device evidence.",
+        "negative": {
+          "input": "Decoded waveform is valid but no listening occurred; voice is masked or boundary clicks.",
+          "expected": "Technical-only result, audible quality unverified/failed when heard; no total audiovisual score."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "design-system",
+      "command": "build-component",
+      "sourceSha256": "bafb0397367bba3d4dd104c6aa4c8080c13704438bcc5adfe8b2efe69ae9e084",
+      "taskPath": "squads/squad-design/tasks/build-component.md",
+      "taskSha256": "5dc061598baf7eb4b419bbc4ebcfd92235cf28954b255d52612e8c2f8992fda1",
+      "competencyIds": [
+        "bounded-component-implementation"
+      ],
+      "deliverableIds": [
+        "design-system-component"
+      ],
+      "requiredCriterionIds": [
+        "component-reuse",
+        "component-behavior",
+        "component-reflow"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Componente delimitado com API, tokens e comportamento verificável",
+        "rationale": "The canonical build mission owns component implementation; this task narrows it to reuse, API compatibility and observed behavior, without global migration.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Component brief, permitted files, actual stack/inventory, approved tokens, API, state and accessibility requirements.",
+        "output": "Implemented or extended component, API/state matrix, examples, interaction checks and desktop/390px evidence.",
+        "negative": {
+          "input": "Equivalent button exists; proposed global token change and long text overflow at 390px.",
+          "expected": "Reuse/extend, reject out-of-scope tokens and correct reflow before acceptance."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "design-system",
+      "command": "build",
+      "sourceSha256": "bafb0397367bba3d4dd104c6aa4c8080c13704438bcc5adfe8b2efe69ae9e084",
+      "taskPath": "squads/squad-design/tasks/build-component.md",
+      "taskSha256": "5dc061598baf7eb4b419bbc4ebcfd92235cf28954b255d52612e8c2f8992fda1",
+      "competencyIds": [
+        "bounded-component-implementation"
+      ],
+      "deliverableIds": [
+        "design-system-component"
+      ],
+      "requiredCriterionIds": [
+        "component-reuse",
+        "component-behavior",
+        "component-reflow"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Componente delimitado com API, tokens e comportamento verificável",
+        "rationale": "The canonical build mission owns component implementation; this task narrows it to reuse, API compatibility and observed behavior, without global migration.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Component brief, permitted files, actual stack/inventory, approved tokens, API, state and accessibility requirements.",
+        "output": "Implemented or extended component, API/state matrix, examples, interaction checks and desktop/390px evidence.",
+        "negative": {
+          "input": "Equivalent button exists; proposed global token change and long text overflow at 390px.",
+          "expected": "Reuse/extend, reject out-of-scope tokens and correct reflow before acceptance."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "ux-designer",
+      "command": "ux-create-wireframe",
+      "sourceSha256": "5b81f3e926095256d4066e5db76b8f569a1388b6ffcc64488b620847bb899a58",
+      "taskPath": "squads/squad-design/tasks/ux-create-wireframe.md",
+      "taskSha256": "ba732cd16c9da66fd0e6742895be17ac89d2bddad8438fe37030a356f875ea53",
+      "competencyIds": [
+        "task-grounded-wireframing"
+      ],
+      "deliverableIds": [
+        "annotated-task-wireframe"
+      ],
+      "requiredCriterionIds": [
+        "wireframe-task",
+        "wireframe-states",
+        "wireframe-reflow"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Wireframe orientado à tarefa com estados e hipóteses rastreáveis",
+        "rationale": "The existing wireframe mission belongs to this UX wrapper; the new squad task replaces its missing development pointer without inventing research or runtime proof.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "User/task brief, available research with source, approved content, existing flow/components and responsive/state requirements.",
+        "output": "Annotated desktop/390px wireframes, task/state walkthrough, explicit assumptions and independent validation plan.",
+        "negative": {
+          "input": "Submission error, 120-character title and unauthorized user at 390px.",
+          "expected": "Plan data-preserving recovery, readable reflow and access-denied state without inventing restricted data or RLS tests."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "ux-designer",
+      "command": "wireframe",
+      "sourceSha256": "5b81f3e926095256d4066e5db76b8f569a1388b6ffcc64488b620847bb899a58",
+      "taskPath": "squads/squad-design/tasks/ux-create-wireframe.md",
+      "taskSha256": "ba732cd16c9da66fd0e6742895be17ac89d2bddad8438fe37030a356f875ea53",
+      "competencyIds": [
+        "task-grounded-wireframing"
+      ],
+      "deliverableIds": [
+        "annotated-task-wireframe"
+      ],
+      "requiredCriterionIds": [
+        "wireframe-task",
+        "wireframe-states",
+        "wireframe-reflow"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Wireframe orientado à tarefa com estados e hipóteses rastreáveis",
+        "rationale": "The existing wireframe mission belongs to this UX wrapper; the new squad task replaces its missing development pointer without inventing research or runtime proof.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "User/task brief, available research with source, approved content, existing flow/components and responsive/state requirements.",
+        "output": "Annotated desktop/390px wireframes, task/state walkthrough, explicit assumptions and independent validation plan.",
+        "negative": {
+          "input": "Submission error, 120-character title and unauthorized user at 390px.",
+          "expected": "Plan data-preserving recovery, readable reflow and access-denied state without inventing restricted data or RLS tests."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "cro-persuasion",
+      "command": "create-cro-patterns",
+      "sourceSha256": "0f667f6c4dc65384efab7b2e4b2aa6fdeffe9656d27dcee85f7bdd88db484a10",
+      "taskPath": "squads/squad-design/tasks/create-cro-patterns.md",
+      "taskSha256": "684cf472199ae51fec078a9432e2471de6c695273fa83cb473aa463bd2edc7e7",
+      "competencyIds": [
+        "ethical-conversion-pattern-specification"
+      ],
+      "deliverableIds": [
+        "integrity-cro-pattern-map"
+      ],
+      "requiredCriterionIds": [
+        "cro-integrity",
+        "cro-usability",
+        "cro-measurement"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "CRO Patterns Map com integridade e hipóteses mensuráveis",
+        "rationale": "Sway owns visual conversion patterns and their hypotheses; specification does not prove causal lift, invent social evidence or alter commercial conditions.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Task/conversion brief, real offer/claims with authorized source, analytics definitions, content, tokens and accessibility requirements.",
+        "output": "Pattern map with evidence-bound claims, state/interaction specifications, hypotheses, control and guardrail measurement plan.",
+        "negative": {
+          "input": "Resetting timer, unlicensed testimonial, unsupported popular badge and preselected consent.",
+          "expected": "Reject misleading/coercive elements and retain an informative alternative and equivalent refusal."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "platform-aesthetic-director",
+      "command": "consult-canon",
+      "sourceSha256": "3257fe444cd21a744b7c46e36d8b1cf6c4e97d06921bf7c2b8b93cc5bc81a443",
+      "taskPath": "squads/squad-design/tasks/consult-canon.md",
+      "taskSha256": "2eed9f5dd7fa07de58d0700363c3972160efef3aa1132196934e9e562f430757",
+      "competencyIds": [
+        "contextual-reference-curation"
+      ],
+      "deliverableIds": [
+        "category-reference-dossier"
+      ],
+      "requiredCriterionIds": [
+        "canon-provenance",
+        "canon-transfer",
+        "canon-boundary"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Curadoria de referências com mecanismo, procedência e exceção",
+        "rationale": "Hue curates and decomposes references for category fit; a named KB or Mobbin URL neither proves access nor grants implementation or final approval.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Category/task/brand brief, actual authorized corpus or primary URLs, observed version/access and curation constraints.",
+        "output": "Reference dossier with observed locators/version, relevant decomposition, mechanisms/exceptions, fit/rejection and downstream handoff.",
+        "negative": {
+          "input": "Unattributed dark dev-tool screenshot for a readable light-brand bank product, inaccessible behind login.",
+          "expected": "Mark missing access/provenance, reject copied palette and return verified alternative or explicit gap."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "premium-packaging-strategist",
+      "command": "premium-packaging-brief",
+      "sourceSha256": "95f11bdbf4ad08b7beb138fcde30a0bc52c9becbfdb451d80df935a43e84f47a",
+      "taskPath": "squads/squad-design/tasks/premium-packaging-brief.md",
+      "taskSha256": "59964b6586e7cbae73b9f53eab2aef731dfad74a711a96231b8313e5ab9e5215",
+      "competencyIds": [
+        "contextual-premium-presentation"
+      ],
+      "deliverableIds": [
+        "contextual-packaging-brief"
+      ],
+      "requiredCriterionIds": [
+        "packaging-fit",
+        "packaging-consistency",
+        "packaging-agency"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Premium Packaging Brief contextual com agência do usuário",
+        "rationale": "Aura owns packaging briefs and consistency; legacy 3x/friction/craft assertions become contextual hypotheses, while pricing and willingness-to-pay require separate evidence.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Declared positioning, user task, actual surface inventory, approved brand/tokens/assets, cost/accessibility limits and observed first-use evidence.",
+        "output": "Presentation brief with real surface inventory, proposed craft/direction, consistency/first-use decisions, exceptions and independent validation plan.",
+        "negative": {
+          "input": "Justify 3x solely with visuals, block skip for exclusivity, and assume a nonexistent invoice.",
+          "expected": "Reject economic causality and coercive friction, preserve task/skip and document absent surface."
+        },
+        "evaluation": "pending"
+      }
+    },
+    {
+      "agentId": "product-surface-director",
+      "command": "design-product-surface",
+      "sourceSha256": "1ec199f6cce53c202603347f8efd45daf8b76281f0cbc889736a12862d3da4fc",
+      "taskPath": "squads/squad-design/tasks/design-product-surface.md",
+      "taskSha256": "711392b5274b7c6a4bd7ea150c9b4d54e7523b943f38b2d4ba624b59a1cd3f19",
+      "competencyIds": [
+        "state-aware-product-surface-specification"
+      ],
+      "deliverableIds": [
+        "product-surface-state-brief"
+      ],
+      "requiredCriterionIds": [
+        "surface-task",
+        "surface-state-safety",
+        "surface-reflow"
+      ],
+      "review": {
+        "method": "Exact canonical command task declaration, task owner, domain responsibility, real input/output and contextual negative case; no position/title/keyword inference.",
+        "locator": "Art direction de superfície logada com estados seguros e ergonomia",
+        "rationale": "Axiom owns logged-surface art direction; it specifies state-safe ergonomics and density, without implementing permissions or inferring retention from aesthetics.",
+        "status": "semantic-reviewed-not-evaluated"
+      },
+      "contract": {
+        "family": "ui-motion",
+        "input": "Surface/user-role/task brief, real or marked-fixture content, permission/data requirements, existing tokens and required modes/reflow/states.",
+        "output": "Annotated surface composition, density/state/recovery/permission matrix, keyboard/motion/reflow rules and bounded implementation handoff.",
+        "negative": {
+          "input": "Long-name table, edit conflict and unauthorized user at 390px; request restricted data and unsolicited dark mode.",
+          "expected": "Use safe denial/conflict recovery, readable reflow and brief-required modes without claiming tested RLS."
+        },
+        "evaluation": "pending"
+      }
     }
   ]
 }

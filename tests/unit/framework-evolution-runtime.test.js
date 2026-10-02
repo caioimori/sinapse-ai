@@ -11,8 +11,10 @@ const root = path.resolve(__dirname, '../..');
 describe('framework evolution runtime integration', () => {
   test('all canonical agents and squads are inventoried without counting task blocks as commands', () => {
     const result = inventory(root);
-    expect(result.counts).toMatchObject({ agents: 172, sourceAgents: 172, squads: 17, resolvableAgents: 172, tasks: 1412, legacyReachableTasks: 1348 });
-    expect(result.counts.reachableTasks).toBeGreaterThanOrEqual(1348);
+    expect(result.counts).toMatchObject({ agents: 172, sourceAgents: 172, squads: 17, resolvableAgents: 172, tasks: 1418, legacyReachableTasks: 1354 });
+    expect(result.counts.reachableTasks).toBeGreaterThanOrEqual(1354);
+    const reachableTargets = result.agents.flatMap(agent => agent.resolvedTasks.map(task => task.target));
+    expect(reachableTargets).toEqual(expect.arrayContaining(['build-component', 'ux-create-wireframe', 'create-cro-patterns', 'consult-canon', 'premium-packaging-brief', 'design-product-surface'].map(task => `squads/squad-design/tasks/${task}.md`)));
     expect(result.gaps.missingSources).toEqual([]);
     expect(result.assets.taskSupportFiles.some((file) => file.endsWith('context-loading.md'))).toBe(true);
     expect(result.gaps.tasksWithoutAgentCommand.length).toBeLessThanOrEqual(64);

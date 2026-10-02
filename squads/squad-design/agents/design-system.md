@@ -55,7 +55,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | Mission Keyword | Task File | Description |
 |----------------|-----------|-------------|
 | `setup` | `setup-design-system.md` | Initialize design system structure |
-| `build` | `build-component.md` | Generate production-ready component |
+| `build` | `squads/squad-design/tasks/build-component.md` | Generate production-ready component |
 | `compose` | `compose-molecule.md` | Build molecule from atoms |
 | `extend` | `extend-pattern.md` | Add variant to existing component |
 | `document` | `generate-documentation.md` | Generate pattern library docs |
@@ -208,6 +208,21 @@ Persist state to `.state.yaml`:
 - ALWAYS write .state.yaml after every command
 - ALWAYS target >80% pattern reduction
 - ALWAYS validate WCAG AA minimum
+
+
+## T08 — contrato principal executável
+
+**Componente delimitado com API, tokens e comportamento verificável.** Nesta rota, as métricas legadas de redução/ROI são hipóteses a medir, nunca metas obrigatórias ou resultado produzido. Usar stack, tokens e componentes existentes; mudanças globais dependem de escopo próprio.
+
+```yaml
+commands:
+  - name: "*build"
+    task: "build-component"
+```
+
+Task canônica: `squads/squad-design/tasks/build-component.md` (owner `@design-system`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
 
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Arquitetura

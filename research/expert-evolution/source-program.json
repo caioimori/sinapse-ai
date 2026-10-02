@@ -1578,11 +1578,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "executable-motion-brief: primary mechanism, condition, exception and negative case for animation-interpreter"
+      ],
+      "requiredDeliverables": [
+        "Motion intent and execution brief"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Decoder — Animation Intent Interpreter e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "executable-motion-brief",
+          "status": "pending",
+          "query": "executable-motion-brief: primary mechanism, condition, exception and negative case for animation-interpreter",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -1807,11 +1818,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "motion-pipeline-coordination: primary mechanism, condition, exception and negative case for animations-orqx"
+      ],
+      "requiredDeliverables": [
+        "Animation assignments, dependencies and review gates"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Kinetic — Animation Squad Orchestrator e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "motion-pipeline-coordination",
+          "status": "pending",
+          "query": "motion-pipeline-coordination: primary mechanism, condition, exception and negative case for animations-orqx",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -2684,11 +2706,22 @@
         "squad-brand-method",
         "squad-brand-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "editable-brand-icon-system: primary mechanism, condition, exception and negative case for brand-creative-engineer"
+      ],
+      "requiredDeliverables": [
+        "Editable SVG icon set and integration guide"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Creative Asset Engineer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "editable-brand-icon-system",
+          "status": "pending",
+          "query": "editable-brand-icon-system: primary mechanism, condition, exception and negative case for brand-creative-engineer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -3057,11 +3090,22 @@
         "squad-brand-docs",
         "adobe-edit"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "editable-branded-video-template: primary mechanism, condition, exception and negative case for brand-motion-vfx"
+      ],
+      "requiredDeliverables": [
+        "Editable video template and sync handoff"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Motion & VFX Designer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "editable-branded-video-template",
+          "status": "pending",
+          "query": "editable-branded-video-template: primary mechanism, condition, exception and negative case for brand-motion-vfx",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -3482,11 +3526,22 @@
         "squad-brand-docs",
         "adobe-edit"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "licensed-audio-bed-production: primary mechanism, condition, exception and negative case for brand-sonic-designer"
+      ],
+      "requiredDeliverables": [
+        "Audio bed masters, rights and listening review"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Sonic Brand Designer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "licensed-audio-bed-production",
+          "status": "pending",
+          "query": "licensed-audio-bed-production: primary mechanism, condition, exception and negative case for brand-sonic-designer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -5021,11 +5076,22 @@
         "squad-content-docs",
         "adobe-edit"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "content-metric-interpretation: primary mechanism, condition, exception and negative case for content-analyst"
+      ],
+      "requiredDeliverables": [
+        "Source-bound Reel/carousel performance analysis"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Content Performance Analyst e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "content-metric-interpretation",
+          "status": "pending",
+          "query": "content-metric-interpretation: primary mechanism, condition, exception and negative case for content-analyst",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -5400,11 +5466,22 @@
         "squad-content-docs",
         "adobe-edit"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "evidence-bound-content-quality-gate: primary mechanism, condition, exception and negative case for content-governor"
+      ],
+      "requiredDeliverables": [
+        "Content quality findings and protected gates"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Content Quality Governor & Curator e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "evidence-bound-content-quality-gate",
+          "status": "pending",
+          "query": "evidence-bound-content-quality-gate: primary mechanism, condition, exception and negative case for content-governor",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -5517,11 +5594,22 @@
         "squad-content-docs",
         "adobe-edit"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "content-pipeline-coordination: primary mechanism, condition, exception and negative case for content-orqx"
+      ],
+      "requiredDeliverables": [
+        "Content assignments, versioned handoffs and QA state"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Content Pipeline Orchestrator e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "content-pipeline-coordination",
+          "status": "pending",
+          "query": "content-pipeline-coordination: primary mechanism, condition, exception and negative case for content-orqx",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -6524,11 +6612,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "ethical-conversion-pattern-specification: primary mechanism, condition, exception and negative case for cro-persuasion"
+      ],
+      "requiredDeliverables": [
+        "CRO pattern map with integrity and measurement plan"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Sway — CRO & Persuasion Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "ethical-conversion-pattern-specification",
+          "status": "pending",
+          "query": "ethical-conversion-pattern-specification: primary mechanism, condition, exception and negative case for cro-persuasion",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -8084,11 +8183,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "design-pipeline-coordination: primary mechanism, condition, exception and negative case for design-orqx"
+      ],
+      "requiredDeliverables": [
+        "Design pipeline assignments and gate receipts"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Nexus — Digital Experience Orchestrator e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "design-pipeline-coordination",
+          "status": "pending",
+          "query": "design-pipeline-coordination: primary mechanism, condition, exception and negative case for design-orqx",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -8187,11 +8297,22 @@
         "squad-design-docs",
         "read-react"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "bounded-component-implementation: primary mechanism, condition, exception and negative case for design-system"
+      ],
+      "requiredDeliverables": [
+        "Bounded reusable component and verified states"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Design System (Brad Frost) - Autonomous Agent e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "bounded-component-implementation",
+          "status": "pending",
+          "query": "bounded-component-implementation: primary mechanism, condition, exception and negative case for design-system",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -8554,11 +8675,22 @@
         "squad-design-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "scoped-accessibility-audit: primary mechanism, condition, exception and negative case for dx-accessibility-specialist"
+      ],
+      "requiredDeliverables": [
+        "Scoped accessibility audit and remediation"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Aperture — Accessibility & Inclusive Design Expert e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "scoped-accessibility-audit",
+          "status": "pending",
+          "query": "scoped-accessibility-audit: primary mechanism, condition, exception and negative case for dx-accessibility-specialist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -8672,11 +8804,22 @@
         "squad-design-docs",
         "read-react"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "token-reference-contract: primary mechanism, condition, exception and negative case for dx-design-system-architect"
+      ],
+      "requiredDeliverables": [
+        "Token taxonomy and consumer contract"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Lattice — Design System & Token Architecture Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "token-reference-contract",
+          "status": "pending",
+          "query": "token-reference-contract: primary mechanism, condition, exception and negative case for dx-design-system-architect",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -8965,11 +9108,22 @@
         "squad-design-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "interaction-state-specification: primary mechanism, condition, exception and negative case for dx-interaction-designer"
+      ],
+      "requiredDeliverables": [
+        "Component interaction and interruption specification"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Gesture — Interaction Design & Motion Systems Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "interaction-state-specification",
+          "status": "pending",
+          "query": "interaction-state-specification: primary mechanism, condition, exception and negative case for dx-interaction-designer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -9082,11 +9236,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "scoped-web-performance-audit: primary mechanism, condition, exception and negative case for dx-performance-engineer"
+      ],
+      "requiredDeliverables": [
+        "Reproducible web performance diagnosis"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Velocity — Web Performance Optimization Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "scoped-web-performance-audit",
+          "status": "pending",
+          "query": "scoped-web-performance-audit: primary mechanism, condition, exception and negative case for dx-performance-engineer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -9193,11 +9358,22 @@
         "squad-design-docs",
         "read-react"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "responsive-visual-composition: primary mechanism, condition, exception and negative case for dx-ui-designer"
+      ],
+      "requiredDeliverables": [
+        "Responsive screen composition and handoff"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Palette — UI Design & Visual Systems Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "responsive-visual-composition",
+          "status": "pending",
+          "query": "responsive-visual-composition: primary mechanism, condition, exception and negative case for dx-ui-designer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -9310,11 +9486,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "evidence-grounded-wireframe-brief: primary mechanism, condition, exception and negative case for dx-ux-strategist"
+      ],
+      "requiredDeliverables": [
+        "Structural wireframe brief grounded in user flow"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Vantage — UX Strategy & Research Lead e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "evidence-grounded-wireframe-brief",
+          "status": "pending",
+          "query": "evidence-grounded-wireframe-brief: primary mechanism, condition, exception and negative case for dx-ux-strategist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -9420,11 +9607,22 @@
         "squad-content-method",
         "squad-content-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "capacity-bound-editorial-calendar: primary mechanism, condition, exception and negative case for editorial-strategist"
+      ],
+      "requiredDeliverables": [
+        "Capacity-aware Reel/carousel editorial calendar"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Editorial Strategy Navigator e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "capacity-bound-editorial-calendar",
+          "status": "pending",
+          "query": "capacity-bound-editorial-calendar: primary mechanism, condition, exception and negative case for editorial-strategist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -10653,11 +10851,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "bounded-particle-lifecycle: primary mechanism, condition, exception and negative case for generative-particle-engineer"
+      ],
+      "requiredDeliverables": [
+        "Bounded particle emitter and lifecycle"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Cloud — Generative & Particle Engineer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "bounded-particle-lifecycle",
+          "status": "pending",
+          "query": "bounded-particle-lifecycle: primary mechanism, condition, exception and negative case for generative-particle-engineer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -12412,11 +12621,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "motion-timing-choreography: primary mechanism, condition, exception and negative case for motion-choreographer"
+      ],
+      "requiredDeliverables": [
+        "Timing and reduced-motion specification"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Tempo — Motion Choreographer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "motion-timing-choreography",
+          "status": "pending",
+          "query": "motion-timing-choreography: primary mechanism, condition, exception and negative case for motion-choreographer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -13639,11 +13859,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "contextual-reference-curation: primary mechanism, condition, exception and negative case for platform-aesthetic-director"
+      ],
+      "requiredDeliverables": [
+        "Source-bound category reference dossier"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Hue — Platform Aesthetic Director e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "contextual-reference-curation",
+          "status": "pending",
+          "query": "contextual-reference-curation: primary mechanism, condition, exception and negative case for platform-aesthetic-director",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -13720,11 +13951,30 @@
         "squad-content-method",
         "squad-content-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "versioned-template-contract: primary mechanism, condition, exception and negative case for platform-specialist",
+        "native-reel-adaptation: primary mechanism, condition, exception and negative case for platform-specialist"
+      ],
+      "requiredDeliverables": [
+        "Versioned content template and validation rules",
+        "Reel script adaptation and platform contract"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Platform Adaptation & Template Contract Specialist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "versioned-template-contract",
+          "status": "pending",
+          "query": "versioned-template-contract: primary mechanism, condition, exception and negative case for platform-specialist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        },
+        {
+          "competency": "native-reel-adaptation",
+          "status": "pending",
+          "query": "native-reel-adaptation: primary mechanism, condition, exception and negative case for platform-specialist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -14049,11 +14299,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "contextual-premium-presentation: primary mechanism, condition, exception and negative case for premium-packaging-strategist"
+      ],
+      "requiredDeliverables": [
+        "Contextual multi-surface packaging brief"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Aura — Premium Packaging Strategist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "contextual-premium-presentation",
+          "status": "pending",
+          "query": "contextual-premium-presentation: primary mechanism, condition, exception and negative case for premium-packaging-strategist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -14402,11 +14663,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "state-aware-product-surface-specification: primary mechanism, condition, exception and negative case for product-surface-director"
+      ],
+      "requiredDeliverables": [
+        "Task and state-aware product surface brief"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Axiom — Product Surface Director e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "state-aware-product-surface-specification",
+          "status": "pending",
+          "query": "state-aware-product-surface-specification: primary mechanism, condition, exception and negative case for product-surface-director",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -16183,11 +16455,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "owned-scroll-animation-lifecycle: primary mechanism, condition, exception and negative case for scroll-narrative-engineer"
+      ],
+      "requiredDeliverables": [
+        "Scroll motion with scoped lifecycle and fallback"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Parallax — Scroll Narrative Engineer e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "owned-scroll-animation-lifecycle",
+          "status": "pending",
+          "query": "owned-scroll-animation-lifecycle: primary mechanism, condition, exception and negative case for scroll-narrative-engineer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -16275,11 +16558,22 @@
         "squad-animations-docs",
         "read-motion"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "scoped-shader-interface: primary mechanism, condition, exception and negative case for shader-artist"
+      ],
+      "requiredDeliverables": [
+        "Shader code, uniforms and fallback"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Fragment — Shader Artist e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "scoped-shader-interface",
+          "status": "pending",
+          "query": "scoped-shader-interface: primary mechanism, condition, exception and negative case for shader-artist",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -16366,11 +16660,22 @@
         "squad-content-method",
         "squad-content-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "grounded-editorial-signal-curation: primary mechanism, condition, exception and negative case for signal-intelligence"
+      ],
+      "requiredDeliverables": [
+        "Source-grounded signal brief for Reel/carousel"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para Signal Intelligence Analyst e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "grounded-editorial-signal-curation",
+          "status": "pending",
+          "query": "grounded-editorial-signal-curation: primary mechanism, condition, exception and negative case for signal-intelligence",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. Principal semantic mapping grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [
@@ -18049,11 +18354,22 @@
         "squad-design-method",
         "squad-design-docs"
       ],
-      "searchQueries": [],
-      "requiredDeliverables": [],
-      "state": "binding-review-gap",
+      "searchQueries": [
+        "task-grounded-wireframing: primary mechanism, condition, exception and negative case for ux-designer"
+      ],
+      "requiredDeliverables": [
+        "Task-grounded wireframe and state handoff"
+      ],
+      "state": "semantic-contract-reviewed-evidence-pending",
       "next": "Capturar duas fontes primárias específicas para SINAPSE UX Design Expert - Autonomous Agent e suas exceções; comparar em caso reservado por entregável",
-      "competencyAcquisition": [],
+      "competencyAcquisition": [
+        {
+          "competency": "task-grounded-wireframing",
+          "status": "pending",
+          "query": "task-grounded-wireframing: primary mechanism, condition, exception and negative case for ux-designer",
+          "acceptance": "Capture authorized primary evidence with locator, exceptions and independently observed positive/negative/conflict cases. A new executable principal task grants no expertise."
+        }
+      ],
       "candidateAcquisition": {
         "status": "unreviewed",
         "competencyAcquisition": [

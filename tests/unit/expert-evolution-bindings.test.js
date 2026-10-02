@@ -59,8 +59,13 @@ test('CSS binding excludes WebGL and specialist mismatch does not borrow supplem
   const other=k.retrieveKnowledge({agentId:'animation-interpreter',task:{command:'create-css-animation'},brief:'CSS hover transform'});
   expect(other.items).toEqual([]);
 });
-test('known metadata/slogan candidates are excluded and their correction is explicit',()=>{
+test('known metadata/slogan candidates stay historical after a new task contract is reviewed',()=>{
   const p=e.loadProgram();for(const id of ['design-system','roadmap-sentinel','platform-aesthetic-director']){
-    const a=p.profiles.profiles.find(a=>a.agentId===id);expect(a.competencies).toEqual([]);expect(a.deliverables).toEqual([]);expect(a.candidateContracts.semanticCorrection.reason).toBeTruthy();
+    const a=p.profiles.profiles.find(a=>a.agentId===id);expect(a.candidateContracts.semanticCorrection.reason).toBeTruthy();
+    expect(a.candidateContracts.status).toBe('unreviewed');
+    for(const legacy of a.candidateContracts.competencies) expect(a.competencies).not.toContain(legacy);
+    for(const legacy of a.candidateContracts.deliverables) expect(a.deliverables.map(d=>d.id)).not.toContain(legacy.id);
+    if(!a.contractReviewed){expect(a.competencies).toEqual([]);expect(a.deliverables).toEqual([]);}
+    expect(a.validatedExpertise).toBe(false);
   }
 });

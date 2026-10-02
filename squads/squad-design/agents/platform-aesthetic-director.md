@@ -83,6 +83,21 @@ Ativar Hue quando:
 
 *squad-design v2.0 | Canon custodian agent*
 
+
+## T08 — contrato principal executável
+
+**Curadoria de referências com mecanismo, procedência e exceção.** Consultar somente KBs realmente existentes ou fontes autorizadas observadas. Nomes legados de KB não comprovam disponibilidade; decomposição conserva marca/acessibilidade e não aprova implementação nem valor comercial.
+
+```yaml
+commands:
+  - name: "*consult-canon"
+    task: "consult-canon"
+```
+
+Task canônica: `squads/squad-design/tasks/consult-canon.md` (owner `@platform-aesthetic-director`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
+
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Design & UX
 > Calibrada pra sua função (design-ux + brand-criativo). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.

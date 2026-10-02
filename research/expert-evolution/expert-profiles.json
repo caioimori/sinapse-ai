@@ -459,9 +459,44 @@
         "sha256": "377c3251eb1bc811ff2629d58100b8edf43d76505d340ebc9028374348c7bcf8",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "executable-motion-brief"
+      ],
+      "deliverables": [
+        {
+          "id": "animation-brief",
+          "name": "Motion intent and execution brief",
+          "competency": "executable-motion-brief",
+          "criteria": [
+            {
+              "id": "brief-intent",
+              "check": "Distinguish observed request/reference from inference; connect motion to purpose and target surface.",
+              "method": "Intent-to-spec trace",
+              "critical": true
+            },
+            {
+              "id": "brief-parameters",
+              "check": "Declare states, timing units, triggers, interruptions and reduced alternative preserving information.",
+              "method": "Parameter/state walkthrough",
+              "critical": true
+            },
+            {
+              "id": "brief-executor",
+              "check": "Resolve chosen task/executor, asset rights and declared budget; unavailable inputs remain blockers.",
+              "method": "Resolver and dependency review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Gerar Animation Briefs completos",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "build-animation-brief"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -484,12 +519,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "animation-interpreter-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "animation-interpreter-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "animation-interpreter-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -609,13 +644,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/animation-interpreter.md",
         "responsibilities": "- Interpretar prompts de animacao do usuario (vagos ou detalhados)\n- Traduzir descricoes subjetivas (\"elegante\", \"magnetico\", \"fluido\") em parametros tecnicos\n- Cross-referenciar com Brand System para alinhar animacoes com identidade visual\n- Analisar animacoes de referencia (URLs, videos, descricoes) e extrair parametros\n- Gerar Animation Briefs completos com specs tecnicas\n- Criar storyboards textuais de animacoes complexas\n- Validar se a animacao especificada e tecnicamente viavel\n- Refinar specs iterativamente com feedback do usuario",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "build-animation-brief"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -844,9 +889,44 @@
         "sha256": "d0981964a64342e77e02204a9800d2523bdab4ea5e4fdcec049196a92a33ca8a",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "motion-pipeline-coordination"
+      ],
+      "deliverables": [
+        {
+          "id": "animation-delivery-plan",
+          "name": "Animation assignments, dependencies and review gates",
+          "competency": "motion-pipeline-coordination",
+          "criteria": [
+            {
+              "id": "motion-route",
+              "check": "Resolve each executor/task from actual role and dependency; vague requests go to interpreter first.",
+              "method": "Routing/dependency review",
+              "critical": true
+            },
+            {
+              "id": "motion-gates",
+              "check": "Observe declared visual/technical/accessibility/performance scope; missing playback/device proof stays unverified.",
+              "method": "Artifact and receipt readback",
+              "critical": true
+            },
+            {
+              "id": "motion-authority",
+              "check": "Bound independent assignments and iterations; orchestrator writes no domain animation code and authorizes no publish.",
+              "method": "Ownership/action audit",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Decompor animacoes complexas",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "orchestrate-animation-project"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -865,12 +945,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "animations-orqx-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "animations-orqx-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "animations-orqx-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -966,13 +1046,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/animations-orqx.md",
         "responsibilities": "- Receber Animation Briefs do animation-interpreter (Decoder)\n- Decompor animacoes complexas em sub-tasks para agentes especializados\n- Coordenar entregas entre multiplos agentes quando a animacao envolve varias tecnologias\n- Revisar qualidade do output de cada agente\n- Garantir coesao entre animacoes de diferentes agentes\n- Orquestrar o workflow prompt-to-animation-cycle\n- Gerar relatorios de entrega\n- Roteiar trabalho React Bits pelo task `orchestrate-react-bits-frontend` e pelo\n  corpus operacional antes de delegar implementacao",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "orchestrate-animation-project"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -1982,9 +2072,44 @@
         "sha256": "98c0fcbda9b8d0483bdda4061094c9a32d06f854658b1a6355e269ba0c1ea389",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "editable-brand-icon-system"
+      ],
+      "deliverables": [
+        {
+          "id": "brand-icon-set",
+          "name": "Editable SVG icon set and integration guide",
+          "competency": "editable-brand-icon-system",
+          "criteria": [
+            {
+              "id": "icons-geometry",
+              "check": "Validate SVG/viewBox/symbol IDs, consistent stroke/style and legibility at requested small sizes.",
+              "method": "Parse and rendered contact sheet",
+              "critical": true
+            },
+            {
+              "id": "icons-brand",
+              "check": "Use approved brand primitives and attributable asset rights; document accessible/decorative integration semantics.",
+              "method": "Guideline and usage review",
+              "critical": true
+            },
+            {
+              "id": "icons-preserve",
+              "check": "Preserve functioning inventory; reject unsafe active SVG/external resources and verify sprite references.",
+              "method": "Unsafe SVG and broken-symbol negative case",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar set de icones SVG",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-icon-set"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -2003,12 +2128,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "brand-creative-engineer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "brand-creative-engineer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "brand-creative-engineer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -2114,13 +2239,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-brand/agents/brand-creative-engineer.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "create-icon-set"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -2500,9 +2635,44 @@
         "sha256": "fa52e46f0d3c874ddf70aff08719c19bf55041e0fdb65608fd5fb2bcb8b2e1cf",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "editable-branded-video-template"
+      ],
+      "deliverables": [
+        {
+          "id": "brand-video-template",
+          "name": "Editable video template and sync handoff",
+          "competency": "editable-branded-video-template",
+          "criteria": [
+            {
+              "id": "video-editable",
+              "check": "Map requested template blocks/exports to editable files and declared duration; unavailable formats remain gaps.",
+              "method": "File/readback and timeline inspection",
+              "critical": true
+            },
+            {
+              "id": "video-sync",
+              "check": "Document actual visual/audio cues and review complete playback when perceptually available; no universal sync offset.",
+              "method": "Playback and cue observation receipt",
+              "critical": true
+            },
+            {
+              "id": "video-brand",
+              "check": "Preserve brand/rights, caption safe areas and readable timing; sampled frames alone prove no audiovisual PASS.",
+              "method": "Frame/rights and channel-limit review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar templates de video",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-video-templates"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -2525,12 +2695,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "brand-motion-vfx-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "brand-motion-vfx-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "brand-motion-vfx-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -2636,13 +2806,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-brand/agents/brand-motion-vfx.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "reel"
+        ],
+        "commands": [
+          "create-video-templates"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -3024,9 +3204,44 @@
         "sha256": "33ebd50d9e10bcd02dc5c625fe32db0c279d2137e807df41d8c689d10ce7383d",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "licensed-audio-bed-production"
+      ],
+      "deliverables": [
+        {
+          "id": "brand-audio-bed",
+          "name": "Audio bed masters, rights and listening review",
+          "competency": "licensed-audio-bed-production",
+          "criteria": [
+            {
+              "id": "audio-rights",
+              "check": "Trace sound/source rights, authored scope and actual duration/format variants; no unmade collection claim.",
+              "method": "Rights and file manifest readback",
+              "critical": true
+            },
+            {
+              "id": "audio-technical",
+              "check": "Measure declared mix/codec/clipping and loop boundaries; numerical levels alone do not establish audibility.",
+              "method": "Decode and mix/loop probes",
+              "critical": true
+            },
+            {
+              "id": "audio-perception",
+              "check": "Listen to full bed and voice/device context before seamlessness, intelligibility or artistic PASS; unavailable listening stays unverified.",
+              "method": "Full listening/channel receipt",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar background music loops",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-audio-beds"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -3053,12 +3268,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "brand-sonic-designer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "brand-sonic-designer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "brand-sonic-designer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -3164,13 +3379,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-brand/agents/brand-sonic-designer.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "reel"
+        ],
+        "commands": [
+          "create-audio-beds"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -5081,12 +5306,48 @@
       "mission": "Content Performance Analyst — mede performance, identifica padroes, gera insights preditivos e retroalimenta o sistema",
       "canonical": {
         "path": "squads/squad-content/agents/content-analyst.md",
-        "sha256": "bb5d449473f92d75e0edcec83e6f0b639fd1cda0ce1cb2978f69a3e5bcb05fb7",
+        "sha256": "037a9ae535728eb10e150a396641156ca7a391e3565ffe9b7027ed6f32e82685",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "content-metric-interpretation"
+      ],
+      "deliverables": [
+        {
+          "id": "content-performance-report",
+          "name": "Source-bound Reel/carousel performance analysis",
+          "competency": "content-metric-interpretation",
+          "criteria": [
+            {
+              "id": "analytics-definition",
+              "check": "Pin source, content IDs, window, unit, denominator and deduplication before comparing platform metrics.",
+              "method": "Data definition and readback",
+              "critical": true
+            },
+            {
+              "id": "analytics-comparison",
+              "check": "Compare like populations/windows and expose missing data; distinguish correlation and selection bias from causality.",
+              "method": "Comparable-cohort review",
+              "critical": true
+            },
+            {
+              "id": "analytics-action",
+              "check": "Tie recommendations to observed patterns and bounded tests; no invented ROI, causal gain or reserved experiment result.",
+              "method": "Evidence-to-recommendation trace",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Analisar performance de conteudo publicado",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "analyze-content-performance",
+        "analyze-performance"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -5109,12 +5370,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "content-analyst-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "content-analyst-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "content-analyst-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -5220,13 +5481,24 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/content-analyst.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel"
+        ],
+        "commands": [
+          "analyze-content-performance",
+          "analyze-performance"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -5569,9 +5841,44 @@
         "sha256": "a2ee49155439a10d6eafe5344edd838058ea38f81d6546d541886cbf34ae6590",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "evidence-bound-content-quality-gate"
+      ],
+      "deliverables": [
+        {
+          "id": "content-quality-review",
+          "name": "Content quality findings and protected gates",
+          "competency": "evidence-bound-content-quality-gate",
+          "criteria": [
+            {
+              "id": "content-trace",
+              "check": "Trace message, proof, direction and originality to brief and attributable sources; invented proof is blocked.",
+              "method": "Claim/source/artifact review",
+              "critical": true
+            },
+            {
+              "id": "content-protected",
+              "check": "Required fields, asset rights and factual accuracy fail independently of average quality score.",
+              "method": "Protected-gate negative fixtures",
+              "critical": true
+            },
+            {
+              "id": "content-observed",
+              "check": "Review readable artifact and available channels; unheard audio/unseen continuity prevents audiovisual total or publish approval.",
+              "method": "Observation-channel receipt",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "QA pre-publicacao",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "validate-content-quality"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -5594,12 +5901,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "content-governor-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "content-governor-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "content-governor-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -5705,13 +6012,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/content-governor.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel"
+        ],
+        "commands": [
+          "validate-content-quality"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -5724,9 +6041,44 @@
         "sha256": "39d511f53ec47b77190a4c3bffd569afc00343c38851b9fbca4244f0f8f1c28f",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "content-pipeline-coordination"
+      ],
+      "deliverables": [
+        {
+          "id": "content-delivery-plan",
+          "name": "Content assignments, versioned handoffs and QA state",
+          "competency": "content-pipeline-coordination",
+          "criteria": [
+            {
+              "id": "content-route",
+              "check": "Assign real tasks with required inputs, template version, owner/capacity and bounded dependencies.",
+              "method": "Resolver and handoff review",
+              "critical": true
+            },
+            {
+              "id": "content-gates",
+              "check": "Record observed production/QA status; missing assets or protected failures block subsequent phases.",
+              "method": "Artifact and gate readback",
+              "critical": true
+            },
+            {
+              "id": "content-authority",
+              "check": "Orchestrator creates no domain content; no publish/send or automatic global learning from project feedback.",
+              "method": "Action and scope audit",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Pipeline visibility",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "orchestrate-content-pipeline"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -5745,12 +6097,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "content-orqx-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "content-orqx-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "content-orqx-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -5832,13 +6184,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/content-orqx.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel"
+        ],
+        "commands": [
+          "orchestrate-content-pipeline"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -7044,12 +7406,47 @@
       "mission": "Sway projeta padroes visuais de conversao fundamentados em ciencia comportamental. Nao \"decora\" CTAs — engenharia o contexto visual que torna a conversao a escolha natural. Domina comparison tables, social proof, live activity, multiple CTAs, sticky bars, progress forms, risk reversal e scarcity. Todo padrao tem hipotese de impacto mensuravel.",
       "canonical": {
         "path": "squads/squad-design/agents/cro-persuasion.md",
-        "sha256": "ce02241393c26a6853d5a7a619e64b5c0f724f97c81a3cbca4bc4757d957ce39",
+        "sha256": "0f667f6c4dc65384efab7b2e4b2aa6fdeffe9656d27dcee85f7bdd88db484a10",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "ethical-conversion-pattern-specification"
+      ],
+      "deliverables": [
+        {
+          "id": "integrity-cro-pattern-map",
+          "name": "CRO pattern map with integrity and measurement plan",
+          "competency": "ethical-conversion-pattern-specification",
+          "criteria": [
+            {
+              "id": "cro-integrity",
+              "check": "Ground every price/proof/urgency/guarantee in authorized evidence; preserve informed comparison and consent.",
+              "method": "Claim trace and adversarial review",
+              "critical": true
+            },
+            {
+              "id": "cro-usability",
+              "check": "Specify keyboard, decline/return and unobstructed 390px reading; expose absent runtime checks.",
+              "method": "State and handoff inspection",
+              "critical": true
+            },
+            {
+              "id": "cro-measurement",
+              "check": "Define hypothesis/control, event/window/unit/denominator and guardrails or explicit gaps; no causal gain claim.",
+              "method": "Experiment plan review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "CRO Patterns Map com integridade e hipóteses mensuráveis",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-cro-patterns"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -7064,12 +7461,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "cro-persuasion-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "cro-persuasion-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "cro-persuasion-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -7165,13 +7562,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/cro-persuasion.md",
         "responsibilities": "- Projetar padroes visuais de conversao para landing pages\n- Criar comparison tables que enquadram a favor\n- Implementar social proof visual (logos, testimonials, counters, UGC)\n- Projetar sticky bars e floating CTAs\n- Criar progress forms multi-step\n- Aplicar scarcity e urgency com integridade\n- Mapear e resolver objecoes via risk reversal\n- Produzir CRO Patterns Map com hipotese de impacto",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "create-cro-patterns"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -9610,9 +10017,44 @@
         "sha256": "0026addbb050a68b7f9c4d50323c0a3f9a8f22cb605fab0af649c4c39dd2aa6d",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "design-pipeline-coordination"
+      ],
+      "deliverables": [
+        {
+          "id": "design-delivery-plan",
+          "name": "Design pipeline assignments and gate receipts",
+          "competency": "design-pipeline-coordination",
+          "criteria": [
+            {
+              "id": "dx-route",
+              "check": "Assign real specialists/tasks by role with input/output dependencies, ownership and bounded loops.",
+              "method": "Resolver and dependency check",
+              "critical": true
+            },
+            {
+              "id": "dx-gates",
+              "check": "Require observed accessibility/performance receipts; absent or failed gates block delivery progression.",
+              "method": "Gate and artifact readback",
+              "critical": true
+            },
+            {
+              "id": "dx-authority",
+              "check": "Orchestrator creates no domain code/design and no unapproved publish; preserve concurrent work.",
+              "method": "Ownership and action audit",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Sequenciar agentes e gerenciar handoffs",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "orchestrate-dx-pipeline"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -9627,12 +10069,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "design-orqx-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "design-orqx-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "design-orqx-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -9730,13 +10172,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/design-orqx.md",
         "responsibilities": "- Classificar projetos (new build vs redesign vs optimization vs component work)\n- Selecionar workflow adequado para cada projeto\n- Sequenciar agentes e gerenciar handoffs\n- Monitorar quality gates (a11y + performance)\n- Gerenciar handoffs cross-squad\n- Conduzir retrospectivas de projeto",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "orchestrate-dx-pipeline"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -9746,12 +10198,48 @@
       "mission": "Design System (Brad Frost) - Autonomous Agent",
       "canonical": {
         "path": "squads/squad-design/agents/design-system.md",
-        "sha256": "eca6cb44b7982c43d33bc1254aae54de79795e797713e2db604de094e1080a4f",
+        "sha256": "bafb0397367bba3d4dd104c6aa4c8080c13704438bcc5adfe8b2efe69ae9e084",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "bounded-component-implementation"
+      ],
+      "deliverables": [
+        {
+          "id": "design-system-component",
+          "name": "Bounded reusable component and verified states",
+          "competency": "bounded-component-implementation",
+          "criteria": [
+            {
+              "id": "component-reuse",
+              "check": "Trace reuse/extension to inventory and consumers; preserve approved tokens and API compatibility.",
+              "method": "Diff and composition review",
+              "critical": true
+            },
+            {
+              "id": "component-behavior",
+              "check": "Verify required states, keyboard/focus/name and reduced-motion information in actual interaction.",
+              "method": "Interaction checks and state matrix",
+              "critical": true
+            },
+            {
+              "id": "component-reflow",
+              "check": "Observe desktop/390px with long text/error without page overflow or lost essential content.",
+              "method": "Screenshots and overflow inspection",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Componente delimitado com API, tokens e comportamento verificável",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "build-component",
+        "build"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -9770,12 +10258,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "design-system-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "design-system-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "design-system-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -9838,13 +10326,24 @@
         },
         "rejectionReason": "metric is a table attribute, not a competency. Mission Router supplies declared task outputs; arbitrary metric targets remain source claims."
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/design-system.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "build-component",
+          "build"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -10238,9 +10737,44 @@
         "sha256": "7cc3aa83e69caf624bfde269e963d9a2691c0b5ecc4110fb5a3a8162932a8f23",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "scoped-accessibility-audit"
+      ],
+      "deliverables": [
+        {
+          "id": "accessibility-audit",
+          "name": "Scoped accessibility audit and remediation",
+          "competency": "scoped-accessibility-audit",
+          "criteria": [
+            {
+              "id": "a11y-scope",
+              "check": "List criterion ID, level, applicability and source/version; no blanket count or legal compliance claim.",
+              "method": "Matrix and source review",
+              "critical": true
+            },
+            {
+              "id": "a11y-observation",
+              "check": "Observe keyboard/focus/reflow and real assistive technology; mark unavailable checks unverified.",
+              "method": "Flow recordings and AT log",
+              "critical": true
+            },
+            {
+              "id": "a11y-verdict",
+              "check": "Block critical failures; automated score cannot replace missing manual evidence or authorize publish.",
+              "method": "Negative keyboard-trap case",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Conduzir auditorias WCAG 2.2",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "conduct-wcag-audit"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -10263,12 +10797,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-accessibility-specialist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-accessibility-specialist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-accessibility-specialist-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -10390,13 +10924,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-accessibility-specialist.md",
         "responsibilities": "- Conduzir auditorias WCAG 2.2 (automated + manual)\n- Revisar implementacao de ARIA patterns\n- Testar navegacao por teclado\n- Verificar contraste de cores (WCAG + APCA)\n- Projetar gerenciamento de foco\n- Criar specs de compatibilidade com screen readers\n- Definir padroes de formularios acessiveis\n- Implementar suporte a reduced-motion\n- Criar planos de remediacao de a11y\n- Certificar compliance de acessibilidade",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "conduct-wcag-audit"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -10409,9 +10953,44 @@
         "sha256": "880602cac7e1e1c298386e977f70d430577149bfd17d81c57e76e3a139c20187",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "token-reference-contract"
+      ],
+      "deliverables": [
+        {
+          "id": "token-taxonomy",
+          "name": "Token taxonomy and consumer contract",
+          "competency": "token-reference-contract",
+          "criteria": [
+            {
+              "id": "tokens-chain",
+              "check": "Resolve declared primitive/semantic/component references without cycles, dangling names or ambiguous types.",
+              "method": "Reference graph validation",
+              "critical": true
+            },
+            {
+              "id": "tokens-consumers",
+              "check": "Document names, theme overrides, exports and breaking-change impact on actual consumers.",
+              "method": "Consumer and theme matrix",
+              "critical": true
+            },
+            {
+              "id": "tokens-boundary",
+              "check": "Preserve approved brand values and existing consumers; no automatic migration or implementation claim.",
+              "method": "Before/after compatibility review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Definir taxonomia de tokens",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "define-token-taxonomy"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -10434,12 +11013,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-design-system-architect-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-design-system-architect-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-design-system-architect-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -10565,13 +11144,23 @@
           "reason": "Output/responsibility relationships must be explicit by meaning; array position has no contractual authority."
         }
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-design-system-architect.md",
         "responsibilities": "- Definir taxonomia de tokens (Primitive → Semantic → Component)\n- Criar e manter tokens primitivos, semanticos e de componente\n- Projetar arquitetura de multi-brand theming\n- Mapear tokens para dark mode\n- Projetar contratos de API de componentes\n- Definir hierarquia Atomic Design (atoms → molecules → organisms)\n- Estabelecer padroes de documentacao Storybook\n- Configurar pipeline de exportacao de tokens (CSS/JSON/Tailwind/SCSS)\n- Governar evolucao do design system\n- Auditar saude do design system",
         "outputs": "- Token taxonomy document\n- Token files (JSON/CSS/SCSS/Tailwind)\n- Component API contracts\n- Storybook documentation standards\n- Design system health reports"
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "define-token-taxonomy"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -10899,9 +11488,44 @@
         "sha256": "39303731055234af215924295b53ba670275d5ff37ba71133528ba8c3f13f371",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "interaction-state-specification"
+      ],
+      "deliverables": [
+        {
+          "id": "micro-interaction-spec",
+          "name": "Component interaction and interruption specification",
+          "competency": "interaction-state-specification",
+          "criteria": [
+            {
+              "id": "interaction-state",
+              "check": "Define trigger, state change, feedback, timing units and final state for each included component.",
+              "method": "State-transition table",
+              "critical": true
+            },
+            {
+              "id": "interaction-control",
+              "check": "Specify interruption, repeated activation and reduced-motion path preserving information and focus.",
+              "method": "Replay and interruption scenarios",
+              "critical": true
+            },
+            {
+              "id": "interaction-boundary",
+              "check": "Document implementation handoff and measured-budget acceptance; spec or transform choice alone proves no FPS.",
+              "method": "Spec-to-implementation trace",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Especificar micro-interacoes por componente",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "spec-micro-interactions"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -10924,12 +11548,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-interaction-designer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-interaction-designer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-interaction-designer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -11051,13 +11675,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-interaction-designer.md",
         "responsibilities": "- Definir principios de motion para o produto\n- Criar biblioteca de easing curves\n- Projetar escala de duracao (micro 100ms → macro 800ms)\n- Especificar micro-interacoes por componente\n- Projetar transicoes de pagina\n- Criar padroes de animacao de scroll\n- Coreografar loading states\n- Especificar interacoes de gesto (touch/drag)\n- Criar motion tokens\n- Projetar animacoes de feedback\n- Documentar sistema de motion\n- Auditar performance de motion",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "spec-micro-interactions"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -11070,9 +11704,44 @@
         "sha256": "265b6d15a97a59d80caaab5699672c8a74a2961d8f419509bca6ae9a022a8324",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "scoped-web-performance-audit"
+      ],
+      "deliverables": [
+        {
+          "id": "web-performance-audit",
+          "name": "Reproducible web performance diagnosis",
+          "competency": "scoped-web-performance-audit",
+          "criteria": [
+            {
+              "id": "webperf-environment",
+              "check": "Pin URL/build, device, network, interactions and repeated measurement conditions.",
+              "method": "Trace and environment receipt",
+              "critical": true
+            },
+            {
+              "id": "webperf-evidence",
+              "check": "Separate lab observations from real field distributions; mark unavailable INP/field evidence unverified.",
+              "method": "Metric/source/unit matrix",
+              "critical": true
+            },
+            {
+              "id": "webperf-remediation",
+              "check": "Tie bottlenecks and proposed fixes to traces; certify only declared measured scope, never publish by score.",
+              "method": "Same-input before/after comparison",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Auditar Core Web Vitals",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "audit-core-web-vitals"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -11091,12 +11760,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-performance-engineer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-performance-engineer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-performance-engineer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -11218,13 +11887,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-performance-engineer.md",
         "responsibilities": "- Auditar Core Web Vitals (LCP, INP, CLS)\n- Definir performance budgets por tipo de pagina\n- Otimizar pipeline de imagens (WebP/AVIF, srcset, lazy loading)\n- Analisar JavaScript bundles (splitting, tree-shaking)\n- Extrair CSS critico\n- Otimizar carregamento de fontes\n- Configurar estrategia de CDN\n- Configurar gates de performance em CI\n- Governar scripts de terceiros\n- Eliminar recursos render-blocking\n- Monitorar regressoes de performance",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "audit-core-web-vitals"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -11237,9 +11916,44 @@
         "sha256": "4a136f171dd0feb4d258ee2d9fe8c11fa8a5a9e32f5c0ed222ad6385d813e1bc",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "responsive-visual-composition"
+      ],
+      "deliverables": [
+        {
+          "id": "screen-composition",
+          "name": "Responsive screen composition and handoff",
+          "competency": "responsive-visual-composition",
+          "criteria": [
+            {
+              "id": "ui-hierarchy",
+              "check": "Trace hierarchy, grouping, typography and spacing to task and approved brand tokens.",
+              "method": "Independent visual/spec review",
+              "critical": true
+            },
+            {
+              "id": "ui-responsive",
+              "check": "Review desktop and 390px reflow, content order, long text and included empty/error/focus states.",
+              "method": "Screenshots and state matrix",
+              "critical": true
+            },
+            {
+              "id": "ui-handoff",
+              "check": "Specify states and responsive rules without overflow or hidden essential content; design is not runtime proof.",
+              "method": "Handoff and overflow inspection",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Compor layouts de tela",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "compose-screen-layouts"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -11262,12 +11976,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-ui-designer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-ui-designer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-ui-designer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -11393,13 +12107,23 @@
           "reason": "Output/responsibility relationships must be explicit by meaning; array position has no contractual authority."
         }
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-ui-designer.md",
         "responsibilities": "- Compor layouts de tela com hierarquia visual clara\n- Projetar sistemas de grid responsivos\n- Criar estados visuais de componentes (default, hover, active, focus, disabled, error)\n- Definir temas light/dark\n- Projetar sistemas de icones\n- Definir estilo de ilustracao\n- Produzir specs de design handoff\n- Projetar padroes de formularios\n- Criar estados vazios e de erro\n- Conduzir QA visual",
         "outputs": "- Screen designs (Figma)\n- Component visual specs\n- Responsive grid specs\n- Design handoff documents\n- Visual QA reports"
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "compose-screen-layouts"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -11412,9 +12136,44 @@
         "sha256": "63eb60bce9e62c84c7f63f6decd06ac8512c3f1a322764ce7b323be88e0aab47",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "evidence-grounded-wireframe-brief"
+      ],
+      "deliverables": [
+        {
+          "id": "wireframe-brief",
+          "name": "Structural wireframe brief grounded in user flow",
+          "competency": "evidence-grounded-wireframe-brief",
+          "criteria": [
+            {
+              "id": "ux-evidence",
+              "check": "Trace scenario, user need and priority to supplied research; label unsupported personas/assumptions.",
+              "method": "Evidence and assumption ledger",
+              "critical": true
+            },
+            {
+              "id": "ux-flow",
+              "check": "Map template regions, content slots, action/results, reflow and failure recovery to the supplied IA.",
+              "method": "Flow-to-brief walkthrough",
+              "critical": true
+            },
+            {
+              "id": "ux-boundary",
+              "check": "Keep visual/token/code decisions delegated; no invented research or usability validation result.",
+              "method": "Brief scope and negative review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar wireframe briefs estrategicos",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-wireframe-brief"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -11433,12 +12192,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "dx-ux-strategist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "dx-ux-strategist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "dx-ux-strategist-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -11560,13 +12319,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/dx-ux-strategist.md",
         "responsibilities": "- Sintetizar pesquisa de usuario (qualitativa e quantitativa)\n- Criar personas baseadas em dados\n- Mapear jornadas do usuario com pain points e oportunidades\n- Projetar arquitetura de informacao (IA)\n- Criar wireframe briefs estrategicos (nao wireframes detalhados)\n- Conduzir reviews de usabilidade (heuristicas de Nielsen)\n- Definir hierarquia de conteudo\n- Validar UX com testes\n- Analise competitiva de UX",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "create-wireframe-brief"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -11576,12 +12345,48 @@
       "mission": "Editorial Strategy Navigator — define o DNA editorial: Big Idea, pilares, funil, calendario, KPIs",
       "canonical": {
         "path": "squads/squad-content/agents/editorial-strategist.md",
-        "sha256": "3b0c0f0b2461a6dd479feb79fbf116bf9c26a8d35e83b525e5832ef69d48ec20",
+        "sha256": "cae1d0d657c9056668023588eecf2c12870bcbc55549e7b59141496b3704a840",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "capacity-bound-editorial-calendar"
+      ],
+      "deliverables": [
+        {
+          "id": "editorial-calendar",
+          "name": "Capacity-aware Reel/carousel editorial calendar",
+          "competency": "capacity-bound-editorial-calendar",
+          "criteria": [
+            {
+              "id": "calendar-trace",
+              "check": "Map slots to supplied pillars, audience/funnel and dated events; label unsupported themes and timing assumptions.",
+              "method": "Slot/brief/date trace",
+              "critical": true
+            },
+            {
+              "id": "calendar-capacity",
+              "check": "Fit deadlines, dependencies, review and flex slots to actual capacity without inventing approvals or reach.",
+              "method": "Capacity and lead-time check",
+              "critical": true
+            },
+            {
+              "id": "calendar-measure",
+              "check": "Define tracking window/unit and owners; a calendar plans production and authorizes no automatic posting.",
+              "method": "Tracking and authority review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar calendario editorial",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-editorial-calendar",
+        "create-calendar"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -11600,12 +12405,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "editorial-strategist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "editorial-strategist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "editorial-strategist-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -11711,13 +12516,24 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/editorial-strategist.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel"
+        ],
+        "commands": [
+          "create-editorial-calendar",
+          "create-calendar"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -13215,9 +14031,44 @@
         "sha256": "54b7d95120f569db9ebc82945b3cad6bc0e623ba3316da1823be1e4b99f5547d",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "bounded-particle-lifecycle"
+      ],
+      "deliverables": [
+        {
+          "id": "particle-implementation",
+          "name": "Bounded particle emitter and lifecycle",
+          "competency": "bounded-particle-lifecycle",
+          "criteria": [
+            {
+              "id": "particles-bound",
+              "check": "Finite validated limits, reproducible seed and spawn/recycle invariants prevent unbounded growth or invalid values.",
+              "method": "Count/lifetime/invalid-input probes",
+              "critical": true
+            },
+            {
+              "id": "particles-target",
+              "check": "Choose rendering by measured target budget; pause/reduced fallback preserves information, no universal scale/FPS claim.",
+              "method": "Environment and trace receipt",
+              "critical": true
+            },
+            {
+              "id": "particles-owned",
+              "check": "Repeated lifecycle releases owned geometry/material/FBO/listeners and preserves borrowed scene resources.",
+              "method": "Lifecycle and shared-resource negative case",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Sistemas de particulas",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-particle-system"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -13240,12 +14091,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "generative-particle-engineer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "generative-particle-engineer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "generative-particle-engineer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -13365,13 +14216,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/generative-particle-engineer.md",
         "responsibilities": "- Sistemas de particulas (atracoes, repulsoes, forcefields)\n- GPGPU particle systems via FBO (Frame Buffer Object) textures\n- Animacao de Point Cloud Data (.pcd, .ply, .xyz, .las)\n- Transicoes point cloud ↔ mesh (reconstrucao progressiva)\n- Flow fields e vector fields\n- Flocking systems (boids algorithm — separation, alignment, cohesion)\n- Noise-based visualizations (Perlin, Simplex, Worley, curl noise)\n- Arte generativa (L-systems, fractals, voronoi, reaction-diffusion)\n- Simulacao fisica (gravidade, vento, turbulencia, springs)\n- Visualizacao de dados 3D (data-driven particles)\n- Metaballs e marching cubes\n- Cellular automata",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "create-particle-system"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -15554,9 +16415,44 @@
         "sha256": "561db1633ac969b55e43e00e31364e2ae64566b5e723e24ed49f029b4143bb04",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "motion-timing-choreography"
+      ],
+      "deliverables": [
+        {
+          "id": "motion-timing-spec",
+          "name": "Timing and reduced-motion specification",
+          "competency": "motion-timing-choreography",
+          "criteria": [
+            {
+              "id": "timing-units",
+              "check": "Declare units, starts/ends, easing and total duration consistently with the interaction purpose.",
+              "method": "Timeline arithmetic and spec review",
+              "critical": true
+            },
+            {
+              "id": "timing-interrupt",
+              "check": "Specify repeated activation/interruption and reduced path; avoid delaying essential focus or status.",
+              "method": "State/interruption scenarios",
+              "critical": true
+            },
+            {
+              "id": "timing-observation",
+              "check": "Distinguish designed timing from observed rhythm; independent playback review is required for perception.",
+              "method": "Spec and playback receipt comparison",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Design de timing",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "design-animation-timing"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -15579,12 +16475,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "motion-choreographer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "motion-choreographer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "motion-choreographer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -15704,13 +16600,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/motion-choreographer.md",
         "responsibilities": "- Design de timing para todas as animacoes da squad\n- Criacao de easing curves customizadas (cubic-bezier, spring physics)\n- Coreografia de stagger sequences (delays calculados para ritmo perfeito)\n- Aplicacao dos 12 principios Disney em contexto web\n- Design de animacoes de entrada e saida para componentes\n- Criacao de sistemas de animacao (design tokens de motion)\n- Definicao de motion guidelines para projetos\n- Consultoria de timing para outros agentes",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "design-animation-timing"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -17130,12 +18036,47 @@
       "mission": "Hue e o curador do canon de art direction de SaaS — owner da base `saas-art-direction-canon.md`. Previne a contaminacao por aesthetica comoditizada. Antes de qualquer novo briefing de plataforma, Hue consulta as 6 referencias canonicas (Linear, Vercel, Stripe, Framer, Arc, Raycast) e extrai o DNA mais relevante para o caso. Hue nao implementa — ele e a lente pela qual Canvas, Axiom, Atlas e Aura tomam decisoes informadas. Re-benchmarka trimestralmente porque aesthetica drifta.",
       "canonical": {
         "path": "squads/squad-design/agents/platform-aesthetic-director.md",
-        "sha256": "ed594ecb28fb9cf256a1c767c4bb5b2ab0c78c217be329eb6e1a72117af95427",
+        "sha256": "3257fe444cd21a744b7c46e36d8b1cf6c4e97d06921bf7c2b8b93cc5bc81a443",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "contextual-reference-curation"
+      ],
+      "deliverables": [
+        {
+          "id": "category-reference-dossier",
+          "name": "Source-bound category reference dossier",
+          "competency": "contextual-reference-curation",
+          "criteria": [
+            {
+              "id": "canon-provenance",
+              "check": "Locate reference/version, actual observed scope and access/rights status; unseen material stays candidate.",
+              "method": "Source readback",
+              "critical": true
+            },
+            {
+              "id": "canon-transfer",
+              "check": "Tie mechanisms and exceptions to task/brand with a counterexample and reasoned rejection.",
+              "method": "Fit and alternative review",
+              "critical": true
+            },
+            {
+              "id": "canon-boundary",
+              "check": "Preserve brand/accessibility in handoff without copying or asserting price, conversion or runtime approval.",
+              "method": "Authority and downstream review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Curadoria de referências com mecanismo, procedência e exceção",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "consult-canon"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -17150,12 +18091,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "platform-aesthetic-director-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "platform-aesthetic-director-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "platform-aesthetic-director-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -17266,13 +18207,23 @@
         },
         "rejectionReason": "Hue curates references and decomposes mechanisms; source maintenance actions are not final product implementation or approval."
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/platform-aesthetic-director.md",
         "responsibilities": "- Manter o canon `saas-art-direction-canon.md` atualizado (6 refs minimas, re-benchmark trimestral)\n- Consultar a KB em todo briefing de plataforma e retornar as referencias mais relevantes para o caso\n- Decompor qualquer referencia nova em 5 dimensoes (Visual DNA, Hero pattern, Design system, Pricing, Onboarding)\n- Extrair principios cross-ref do canon e alimentar Aura\n- Avaliar moodboards, templates e stock pela adequação, procedência e licença; recusar uso sem direitos ou aplicação que contradiz o brief\n- Identificar o encaixe de categoria (um dev tool precisa de shader no hero? Um fintech precisa de trust-light?)\n- Manter relatorio trimestral de drift aesthetico das 6 refs canonicas (o que mudou em Linear desde a ultima analise?)",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "consult-canon"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -17285,9 +18236,76 @@
         "sha256": "50068f135f1a9d6e31e7cfe983645c9d9a7a2667991f09aebb19dc31df4fd144",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "versioned-template-contract",
+        "native-reel-adaptation"
+      ],
+      "deliverables": [
+        {
+          "id": "content-template-contract",
+          "name": "Versioned content template and validation rules",
+          "competency": "versioned-template-contract",
+          "criteria": [
+            {
+              "id": "template-fields",
+              "check": "Declare unique ID/version, required fields, count and character bounds, order, dimensions and assets.",
+              "method": "Contract schema and boundary cases",
+              "critical": true
+            },
+            {
+              "id": "template-source",
+              "check": "Pin source/date of platform limits and rights; distinguish supplied brief choices from universal platform rules.",
+              "method": "Provenance/spec review",
+              "critical": true
+            },
+            {
+              "id": "template-enforcement",
+              "check": "Define hard/soft failures and test missing/overflow fields before claiming enforcement or allowing handoff.",
+              "method": "Positive/boundary/negative fixtures",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Template Contract System",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        },
+        {
+          "id": "reel-adaptation",
+          "name": "Reel script adaptation and platform contract",
+          "competency": "native-reel-adaptation",
+          "criteria": [
+            {
+              "id": "reel-contract",
+              "check": "Match declared format/duration/field limits and device safe zones to the dated template and supplied brief.",
+              "method": "Template and rendered-frame review",
+              "critical": true
+            },
+            {
+              "id": "reel-message",
+              "check": "Preserve factual message and mute comprehension; caption timing/contrast and audio rights remain traceable.",
+              "method": "Script/overlay/rights walkthrough",
+              "critical": true
+            },
+            {
+              "id": "reel-limits",
+              "check": "No promised reach/retention from trend choice; adaptation is not render, heard-audio review or publish approval.",
+              "method": "Negative claim and handoff review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Adaptar conteudo para plataforma especifica",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "register-template-contract",
+        "adapt-for-instagram-reels"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -17306,12 +18324,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "platform-specialist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "platform-specialist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "platform-specialist-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -17417,13 +18435,25 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/platform-specialist.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel",
+          "reel"
+        ],
+        "commands": [
+          "register-template-contract",
+          "adapt-for-instagram-reels"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -17739,12 +18769,47 @@
       "mission": "Aura traduz a meta \"cobrar 3x mais que o concorrente\" em decisoes estheticas e experienciais concretas. Toda superficie deve sinalizar premium. Toda interacao deve merecer o price tag. Nao vende \"beleza\" — vende a choreographia consistente de restricao, craft custom, friccao estrategica, teatro de primeiro uso, e consistencia multi-surface. Aura e o agente que mais frequentemente bloqueia briefings: se o cliente quer cobrar premium mas nao aceita NENHUM dos 5 principios, Aura escalona.",
       "canonical": {
         "path": "squads/squad-design/agents/premium-packaging-strategist.md",
-        "sha256": "9cbb0aed5786d04282f5b00c115d7e0c89ae6cabfcf4529fecadfa54dc16365a",
+        "sha256": "95f11bdbf4ad08b7beb138fcde30a0bc52c9becbfdb451d80df935a43e84f47a",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "contextual-premium-presentation"
+      ],
+      "deliverables": [
+        {
+          "id": "contextual-packaging-brief",
+          "name": "Contextual multi-surface packaging brief",
+          "competency": "contextual-premium-presentation",
+          "criteria": [
+            {
+              "id": "packaging-fit",
+              "check": "Tie direction/craft to positioning/task with cost, alternative and exception; invent no attribute or price gain.",
+              "method": "Brief trace review",
+              "critical": true
+            },
+            {
+              "id": "packaging-consistency",
+              "check": "Distinguish present/absent surfaces and connect approved tokens/brand rules to decisions and owners.",
+              "method": "Consistency matrix and handoff",
+              "critical": true
+            },
+            {
+              "id": "packaging-agency",
+              "check": "Keep pertinent access/skip/return and accessible recovery; reject artificial friction or assumed economic lift.",
+              "method": "Adversarial first-use walkthrough",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Premium Packaging Brief contextual com agência do usuário",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "premium-packaging-brief"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -17759,12 +18824,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "premium-packaging-strategist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "premium-packaging-strategist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "premium-packaging-strategist-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -17860,13 +18925,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/premium-packaging-strategist.md",
         "responsibilities": "- Receber briefings que reivindicam posicionamento premium\n- Aplicar os 5 principios nao-negociaveis (ver `premium-packaging-principles.md`)\n- Fazer as 5 perguntas diagnosticas em todo briefing:\n  1. Qual e o ONE custom craft element?\n  2. Onde esta a friccao estrategica no funil?\n  3. Qual a choreographia dos primeiros 5 minutos?\n  4. Existe design system multi-surface?\n  5. A fatura PDF e os emails transacionais casam com a qualidade do site?\n- Bloquear briefings onde qualquer resposta seja \"nao\" ou \"nao sabemos\"\n- Entregar um **Premium Packaging Brief** estruturado como deliverable padrao\n- Auditar surfaces existentes para commodity contamination\n- Coordenar com Atlas (consistencia) e Axiom (first 5 minutes) e Hue (canon fit)\n- Fazer o inventario completo de superficies (marketing, produto, email, docs, suporte, fatura, mobile)",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "premium-packaging-brief"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -18266,12 +19341,47 @@
       "mission": "Axiom e o especialista em art direction de superficies de produto logado — dashboards, settings, empty states, data tables, modais, notificacoes. Enquanto a maioria do squad-design v1.0 foi desenhado para converter visitantes em LPs, Axiom foi criado para reter usuarios que veem o produto 100+ vezes por mes. A aesthetica muda: primeiro-impacto -> ergonomia cognitiva diaria.",
       "canonical": {
         "path": "squads/squad-design/agents/product-surface-director.md",
-        "sha256": "eacb00c6f53600b844311f946a2ea8c6971e846802038826da55f5298c95b97a",
+        "sha256": "1ec199f6cce53c202603347f8efd45daf8b76281f0cbc889736a12862d3da4fc",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "state-aware-product-surface-specification"
+      ],
+      "deliverables": [
+        {
+          "id": "product-surface-state-brief",
+          "name": "Task and state-aware product surface brief",
+          "competency": "state-aware-product-surface-specification",
+          "criteria": [
+            {
+              "id": "surface-task",
+              "check": "Trace zones/density/actions to role/task and tokens; impose no generic KPI or theme requirement.",
+              "method": "Task walkthrough and requirement trace",
+              "critical": true
+            },
+            {
+              "id": "surface-state-safety",
+              "check": "Specify error/empty/loading/conflict/denial recovery without restricted data; design is not auth/RLS proof.",
+              "method": "State matrix and adversarial review",
+              "critical": true
+            },
+            {
+              "id": "surface-reflow",
+              "check": "Preserve content/feedback across desktop/390px, long text, keyboard and required modes; disclose runtime/AT limits.",
+              "method": "Design or observed interaction/capture review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Art direction de superfície logada com estados seguros e ergonomia",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "design-product-surface"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -18286,12 +19396,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "product-surface-director-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "product-surface-director-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "product-surface-director-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -18387,13 +19497,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/product-surface-director.md",
         "responsibilities": "- Receber briefings de produtos logados / SaaS / dashboards / plataformas\n- Definir as zonas cognitivas de cada surface (top bar, conteudo primario, painel lateral, toasts, modais, empty states)\n- Especificar densidade alvo por surface (dashboard alta, settings baixa, etc)\n- Desenhar empty states intencionais para cada tela principal\n- Garantir paridade real entre dark mode e light mode (nao retrofit de 80%)\n- Definir choreography de onboarding (primeiros 5 minutos)\n- Validar que atalhos de teclado sao visiveis e ensinam velocidade\n- Auditar surfaces existentes para identificar ornamentacao vestigial de LP que precisa ser removida",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "design-product-surface"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -20714,9 +21834,44 @@
         "sha256": "e6507f4f103c3e36b2d6f530861600d5c99733b4605f42afe006f5a4bd9e4771",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "owned-scroll-animation-lifecycle"
+      ],
+      "deliverables": [
+        {
+          "id": "scroll-motion-implementation",
+          "name": "Scroll motion with scoped lifecycle and fallback",
+          "competency": "owned-scroll-animation-lifecycle",
+          "criteria": [
+            {
+              "id": "scroll-control",
+              "check": "Preserve native wheel/touch/keyboard control and essential content without JS or reduced motion.",
+              "method": "Desktop/mobile and fallback flows",
+              "critical": true
+            },
+            {
+              "id": "scroll-ownership",
+              "check": "One owned clock/scroll integration; repeated setup/teardown removes only owned triggers/listeners/resources.",
+              "method": "Lifecycle and foreign-trigger negative case",
+              "critical": true
+            },
+            {
+              "id": "scroll-measure",
+              "check": "Measure declared target and layout/reflow effects; emulation or composited properties prove no physical FPS.",
+              "method": "Trace and environment receipt",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Implementar scroll-driven animations",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "implement-scroll-animation"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -20739,12 +21894,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "scroll-narrative-engineer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "scroll-narrative-engineer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "scroll-narrative-engineer-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -20864,13 +22019,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/scroll-narrative-engineer.md",
         "responsibilities": "- Implementar scroll-driven animations com GSAP ScrollTrigger\n- Smooth scrolling com Lenis (sucessor do Locomotive Scroll)\n- Parallax layering (2D e 3D)\n- Pinned sections com animacao baseada em progresso\n- Horizontal scroll sections\n- Scroll storytelling (narrativa linear via scroll)\n- Text reveal no scroll (word-by-word, line-by-line, character)\n- Page transitions (Barba.js, Swup, View Transitions API)\n- Scroll progress indicators\n- Scroll-linked video playback (Apple-style)\n- Scroll velocity effects",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "implement-scroll-animation"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -20883,9 +22048,44 @@
         "sha256": "b6b873e08d33ddae1d46e8f85de4ad2ee43f221f95ca0e7c9cfd1f5212c46883",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "scoped-shader-interface"
+      ],
+      "deliverables": [
+        {
+          "id": "shader-implementation",
+          "name": "Shader code, uniforms and fallback",
+          "competency": "scoped-shader-interface",
+          "criteria": [
+            {
+              "id": "shader-interface",
+              "check": "Compile on declared context, capture diagnostics and document uniform types/ranges, resolution and color assumptions.",
+              "method": "Compile log and parameter probe",
+              "critical": true
+            },
+            {
+              "id": "shader-fallback",
+              "check": "Context loss/unsupported GPU/reduced motion preserves essential content with bounded fallback.",
+              "method": "Context-loss and unsupported negative case",
+              "critical": true
+            },
+            {
+              "id": "shader-lifecycle",
+              "check": "Dispose only owned resources/listeners; measure actual target before FPS or universal precision claims.",
+              "method": "Lifecycle and target trace",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Criar ShaderMaterial",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "create-custom-shader"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -20908,12 +22108,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "shader-artist-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "shader-artist-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "shader-artist-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -21033,13 +22233,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-animations/agents/shader-artist.md",
         "responsibilities": "- Criar ShaderMaterial e RawShaderMaterial customizados para Three.js\n- Implementar post-processing chains (EffectComposer, custom passes)\n- Efeitos de noise (Perlin, Simplex, Worley, FBM) para texturas organicas\n- Distorcao de imagem (displacement maps, mouse-driven, scroll-driven)\n- Transicao entre texturas/cenas via shaders\n- Efeitos de imagem (grayscale, duotone, RGB shift, pixelation)\n- Ray marching para formas 3D procedurais\n- Signed Distance Functions (SDF) para tipografia e formas\n- GPGPU com textures de posicao para particulas massivas\n- Otimizacao de shaders (evitar branching, minimizar texture lookups)",
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "create-custom-shader"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -21052,9 +22262,44 @@
         "sha256": "aa25ed8e42dee44c34d63a32d0332fdc39e855830e4e505bdb6462888aa74de0",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "grounded-editorial-signal-curation"
+      ],
+      "deliverables": [
+        {
+          "id": "editorial-signal-brief",
+          "name": "Source-grounded signal brief for Reel/carousel",
+          "competency": "grounded-editorial-signal-curation",
+          "criteria": [
+            {
+              "id": "signal-source",
+              "check": "Keep source locator/date, observed signal and duplicate lineage; separate claim from inference.",
+              "method": "Source and deduplication review",
+              "critical": true
+            },
+            {
+              "id": "signal-fit",
+              "check": "Map each chosen signal to declared pillar/audience and Reel/carousel purpose; unsupported fit stays explicit.",
+              "method": "Brief-to-pillar trace",
+              "critical": true
+            },
+            {
+              "id": "signal-uncertainty",
+              "check": "Mark priority/viral potential as hypothesis; unavailable sources and rights cannot become fabricated proof.",
+              "method": "Stale/conflicting-source negative case",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Compilar briefing semanal de sinais",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "curate-weekly-briefing"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -21073,12 +22318,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "signal-intelligence-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "signal-intelligence-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "signal-intelligence-other-commands-gap",
+          "reason": "Principal contract only; other role commands and source acquisition remain unreviewed."
         }
       ],
       "evolution": {
@@ -21184,13 +22429,23 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-content/agents/signal-intelligence.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "carousel"
+        ],
+        "commands": [
+          "curate-weekly-briefing"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
@@ -23287,12 +24542,48 @@
       "mission": "SINAPSE UX Design Expert - Autonomous Agent",
       "canonical": {
         "path": "squads/squad-design/agents/ux-designer.md",
-        "sha256": "1f22d43ba8e7a9d13007f3d009ddffcc1197aebb62ae03c679bb65c3e92583c9",
+        "sha256": "5b81f3e926095256d4066e5db76b8f569a1388b6ffcc64488b620847bb899a58",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
-      "competencies": [],
-      "deliverables": [],
-      "taskExamples": [],
+      "competencies": [
+        "task-grounded-wireframing"
+      ],
+      "deliverables": [
+        {
+          "id": "annotated-task-wireframe",
+          "name": "Task-grounded wireframe and state handoff",
+          "competency": "task-grounded-wireframing",
+          "criteria": [
+            {
+              "id": "wireframe-task",
+              "check": "Trace regions/actions to task evidence or marked hypotheses; make main action and recovery identifiable.",
+              "method": "Brief walkthrough",
+              "critical": true
+            },
+            {
+              "id": "wireframe-states",
+              "check": "Specify pertinent success/empty/loading/error/permission states and recovery without security claims.",
+              "method": "State matrix and negative walkthrough",
+              "critical": true
+            },
+            {
+              "id": "wireframe-reflow",
+              "check": "Preserve reading/focus order and long content at desktop/390px; distinguish drawing from runtime proof.",
+              "method": "Reflow and handoff review",
+              "critical": true
+            }
+          ],
+          "declaredScope": {
+            "locator": "Wireframe orientado à tarefa com estados e hipóteses rastreáveis",
+            "status": "declared"
+          },
+          "reviewStatus": "semantic-reviewed-not-evaluated"
+        }
+      ],
+      "taskExamples": [
+        "ux-create-wireframe",
+        "wireframe"
+      ],
       "priority": "P1",
       "references": [
         {
@@ -23307,12 +24598,12 @@
       "status": "planned",
       "gaps": [
         {
-          "id": "ux-designer-binding-gap",
-          "reason": "Task/competency/deliverable binding awaits semantic review; load canonical source."
-        },
-        {
           "id": "ux-designer-evaluation-gap",
           "reason": "No independent artifact evaluation establishes specialist expertise."
+        },
+        {
+          "id": "ux-designer-other-commands-gap",
+          "reason": "Principal task only; other commands, source acquisition and legacy suggestions remain unreviewed."
         }
       ],
       "evolution": {
@@ -23386,13 +24677,24 @@
           }
         ]
       },
-      "contractReviewed": false,
+      "contractReviewed": true,
       "validatedExpertise": false,
       "declaredResponsibilities": {
         "status": "declared-not-evaluated",
         "locator": "squads/squad-design/agents/ux-designer.md",
         "responsibilities": null,
         "outputs": null
+      },
+      "contractReviewScope": {
+        "status": "principal-tasks-only",
+        "families": [
+          "ui-motion"
+        ],
+        "commands": [
+          "ux-create-wireframe",
+          "wireframe"
+        ],
+        "artifactEvaluation": "pending"
       }
     },
     {
