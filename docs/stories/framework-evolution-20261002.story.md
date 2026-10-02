@@ -90,6 +90,7 @@ não fazem parte desta alteração local.
 - .agents/skills/sinapse-agent/SKILL.md
 - bin/lib/framework-evolution-delivery.js
 - bin/lib/global-provider-adapters.js
+- .sinapse-ai/data/entity-registry.yaml — índice derivado pelo post-commit existente
 - packages/installer/src/installer/sinapse-ai-installer.js
 - package.json
 - package-lock.json

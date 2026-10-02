@@ -38,6 +38,11 @@ Os 151 testes da coorte principal passaram. A revisão final também passou
 27 testes da regra de proveniência e repetiu os 22 testes de conhecimento.
 Não somar contagens sobrepostas. Comandos e limites: [verification.md](verification.md).
 
+O post-commit existente atualizou o [índice de entidades](../../../.sinapse-ai/data/entity-registry.yaml)
+para 819 entradas, incluindo a nova biblioteca de delivery e seus vínculos.
+QA conferiu o diff, a contagem e os dois hashes alterados; 14 testes de schema
+passaram. Os demais 817 hashes não foram revalidados nessa conferência delimitada.
+
 ## Decisões preservadas
 
 Fonte canônica e paths protegidos não foram alterados. A versão do fork não

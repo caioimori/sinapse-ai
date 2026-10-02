@@ -62,6 +62,19 @@ Os 20 links locais de seis documentos conferiram sem destino ausente.
 Nova leitura dos 191 arquivos originais confirmou zero diferenças; a branch
 continha 213 arquivos alterados e zero alterações em paths protegidos.
 
+O commit local foi aceito pelos hooks existentes de segredos, SQL, fronteiras
+e arquivos protegidos. Seu post-commit atualizou o índice derivado para 819
+entidades. QA conferiu por RegistryLoader a contagem, estrutura, diff restrito
+e SHA-256 das duas bibliotecas alteradas; os demais 817 hashes não foram revalidados.
+
+Uma suite adicional passou 14/14 testes: entity-registry-schema. Ela usa fixtures;
+a leitura do índice atual foi uma verificação independente. Esse efeito derivado
+foi preservado e incluído no checkpoint, totalizando 214 arquivos alterados na entrega.
+
+```powershell
+node node_modules/jest/bin/jest.js tests/core/ids/entity-registry-schema.test.js --runInBand --silent
+```
+
 ## Comandos dos gates
 
 ```powershell
