@@ -1,4 +1,36 @@
-# Checkpoint TypeSafe e Mobbin — estado vigente
+# Checkpoint navegação e créditos — estado vigente
+
+Começar pelo [aprendizado de navegação](navigation-learning.md) e pelo [receipt estruturado](navigation-learning.json). Worktree isolado e branch codex/feat/framework-evolution-20261002; base f7a88a031936765e942a21eb6358fe7018d68163. Checkpoints abaixo são históricos preservados.
+
+## Resultado vigente
+
+- [Interface própria de manutenção](http://127.0.0.1:4179/transfer-navigation/): lista, detalhe, Resumo/Histórico, retorno com seleção/foco, entrada direta segura, não encontrado/negado distintos, criação, cancelamento, validação, erro recuperável e sucesso. Dados fictícios, somente memória; recarregar restaura seis registros.
+- Dois fluxos Square, oito posições Mobbin inspecionadas: identidade contextual, detalhe progressivo e confirmação com destino. Capturas e notas saneadas privadas; sequência editorial não prova execução original. Retorno, mobile, teclado e erros foram testados somente na transferência própria.
+- Três aprovações independentes no escopo technical-fixture, nove entradas anteriores intactas e doze entradas privadas totais. CAS/readback/replay zero; cinco comandos e três consultas dirigidas recuperam regras completas até 8.496/12.000 caracteres. Nenhuma promoção ou execução nativa alegada.
+- Jev: um lote novo de nove julgamentos, uma tentativa, jev-1.13.0, 2.281/381 tokens; custo calculado US$0,000095802. Duas execuções acumuladas, 19 julgamentos e US$0,00018375 calculado; reserva acumulada US$0,005376/0,05, restante US$0,044624. Console US$3,92 arredondado; sem conciliação de fatura.
+- Reserva anterior, dois caches/ledger completos e replays sem transporte pago. Sete respostas novas abaixo do limiar ilustrativo receberam revisão; nenhuma aprovação automática, recarga, assinatura ou credencial nova. Opus permanece aprendizado de mercado, sem chamada.
+
+## Prova e limites
+
+81 verificações do autor e 141 independentes; 33/45 screenshots em 1440/390/320, zero overflow. Oito capturas da fonte e 29 pixels da fixture inspecionados pelo revisor. Três ciclos por equipe; falhas de foco e validação corrigidas, receipts vermelhos/rejeição inicial preservados.
+
+49/49 regressões em quatro suites, zero skips; lint, typecheck, paridade/172 agentes e manifest passaram. Fonte HTML final 1da8bd3c51d5ac37723215962402b598d072999a62c049550efc7d09d12d2e60. Capturas/reviews/cache/contextos ficam no projeto privado, fora de Git/npm/HOME.
+
+Original continua na branch/SHA anterior com 191 entradas e zero diferença de hash/status. Sem paths protegidos, remoção funcional, push, PR, publicação, Docker ou WSL. Painel e exemplos anteriores preservados; servidor local 4179 continua ativo.
+
+## Pendências reais
+
+1. Integração ao projeto principal e revisão remota; esta entrega continua isolada e local.
+2. Ativação nativa e acesso à biblioteca privada em contexto novo; a extensão pessoal não recebeu este corpus.
+3. Revisão das 137 funções e 88 referências candidatas; novas famílias Mobbin devem partir de falhas e transferência independente. Perfis conservam lacunas.
+4. Percepção audiovisual contínua e replay mobile dos seis pares anteriores; esta fixture não valida retroativamente os pares.
+5. Credencial local segura para API Jev automática, somente se necessária. Console já executa lotes delimitados; plano original de 224 perguntas/18 grupos segue offline, sem retry pago.
+
+Próxima execução: escolher competência/comando por falha real, usar fonte observada e teste independente, preservar teto compartilhado e bloquear repetição de estados pendentes/incertos. Não promover mecanismos pela contagem ou pelo julgamento Jev isolado.
+
+---
+
+# Checkpoint TypeSafe e Mobbin — histórico
 
 Começar pela [verificação desta onda](typesafe-mobbin-verification.md). Worktree isolado, branch codex/feat/framework-evolution-20261002; base 3ff6f73686f230b62e84d0e384145b83cc9910ef. Os checkpoints abaixo são históricos; pendências antigas de login/Jev/Opus não representam o estado atual.
 

@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "kind": "navigation-observed-learning-summary",
+  "status": "locally-verified-bounded",
+  "observedAt": "2026-10-02T18:53:00.612Z",
+  "scope": {
+    "observedFlows": 2,
+    "observedScreens": 8,
+    "observationLevel": "viewer-order-only",
+    "executedSourceControls": 0,
+    "jevCalls": 1,
+    "heldOutEvaluations": 0,
+    "expertisePromotion": false
+  },
+  "references": [
+    {
+      "url": "https://mobbin.com/flows/b06c58ee-7c2b-4217-b6ae-83c46f00113d",
+      "observedPositions": 3,
+      "sourceVersionPin": "69ee0358-d2d4-5c51-9c1e-3ed9f5ee59da"
+    },
+    {
+      "url": "https://mobbin.com/flows/6b32676f-8c1a-4e0b-946a-4eda544977e4",
+      "observedPositions": 5,
+      "sourceVersionPin": "69ee0358-d2d4-5c51-9c1e-3ed9f5ee59da"
+    }
+  ],
+  "privacy": {
+    "screenshots": "private-ignored",
+    "publicArtifacts": "own-generalized-rules-and-source-links-only",
+    "mediaRedistributionAuthorized": false,
+    "sourceIdentifiersTranscribed": false
+  },
+  "mechanisms": [
+    {
+      "id": "navigation20261002-contextual-record-identity-v1",
+      "title": "Identidade do registro e origem reconhecível",
+      "status": "inferred",
+      "condition": "Uma lista permite abrir um registro autorizado e a pessoa precisa reconhecer qual registro está vendo e de onde veio.",
+      "action": "Manter identificação inequívoca do registro e referência à seção de origem. No produto próprio, definir retorno à lista, origem confiável e restauração de contexto; entrada direta deve ter destino interno seguro.",
+      "rationale": "As posições detail-01/02 conservam a lista e mostram a linha correspondente ao título do painel. Isso fundamenta orientação visual; retorno, rota, filtros e foco são contratos propostos para o destino.",
+      "exceptions": [
+        "Em entrada direta sem origem confiável, usar a lista interna canônica; não executar um destino arbitrário recebido pela URL.",
+        "Em tela estreita ou contexto extenso, usar página própria com identificação e retorno explícitos; não exigir lista e painel simultâneos."
+      ],
+      "counterexamples": [
+        "Abrir Record A com título de Record B, ou enviar o retorno a uma origem não confiável, quebra o contrato de orientação."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Entrada pela lista mantém identidade, pesquisa e filtro ao retornar; foco retorna ao registro quando a origem é conhecida.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "Entrada direta e origem inválida usam destino interno seguro e tratam registro ausente ou negado em estados distintos.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "Identificação, destino e conteúdo continuam utilizáveis em 1440, 390 e 320px sem rolagem horizontal.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        },
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewer": "independent-quality-gate",
+        "evidenceScope": "technical-fixture",
+        "receiptSha256": "c6f7fa4edb03c553853e617823dda91f87a4cbb4b1a44603e9f1388a8032ea0c",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "navigation20261002-progressive-record-detail-v1",
+      "title": "Detalhe progressivo sem perder a identidade",
+      "status": "inferred",
+      "condition": "Um detalhe de registro contém informações secundárias que não precisam disputar espaço com o resumo, mas devem continuar acessíveis.",
+      "action": "Mostrar o resumo e expor informação secundária por controle explícito e reversível ou seção identificada. Conservar a identidade do registro e o estado do detalhe ao alternar; campos críticos permanecem visíveis.",
+      "rationale": "detail-02 apresenta resumo e controle de expansão; detail-03 acrescenta campos secundários e controle de recolher sem trocar o título. Seções e acessibilidade do produto próprio ainda exigem verificação.",
+      "exceptions": [
+        "Campos necessários à decisão atual ou ao diagnóstico de erro não podem depender de uma expansão oculta.",
+        "Ao usar seções em vez de expansão, comunicar a seção ativa e manter identidade e retorno; a referência não prova comportamento de tabs."
+      ],
+      "counterexamples": [
+        "Ocultar um campo crítico ou trocar o registro ao expandir transfere o esforço de navegação para adivinhação."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Alternar informação secundária conserva a identidade e oferece forma explícita de voltar ao resumo.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "O controle expõe estado acessível e funciona por teclado sem perda de foco ou conteúdo.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "Resumo, seção ativa e campos críticos são identificáveis nos três tamanhos sem depender de overflow horizontal.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        },
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewer": "independent-quality-gate",
+        "evidenceScope": "technical-fixture",
+        "receiptSha256": "d16164bb887fbbbbcd5941b328e3ae6b835d8e5574071b0816486c23cec36890",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "navigation20261002-creation-stable-outcome-v1",
+      "title": "Criação com confirmação e destino verificável",
+      "status": "inferred",
+      "condition": "A pessoa conclui uma criação e precisa reconhecer o resultado além de uma mensagem transitória.",
+      "action": "Após sucesso confirmado no escopo declarado, mostrar confirmação e um destino estável que identifique o registro criado. Distinguir criação, validação, cancelamento e falha; no erro próprio conservar os valores para correção ou nova tentativa.",
+      "rationale": "create-01/03 mostram entrada e edição; create-04 apresenta Record A na lista com confirmação, e create-05 mantém uma lista sem toast. A segunda linha tem ação intermediária não mostrada; as imagens não provam backend ou persistência.",
+      "exceptions": [
+        "Em falha, cancelamento ou validação incompleta, não mostrar sucesso nem criar registro; o destino deve explicar a recuperação.",
+        "Em demonstração local, informar o limite de armazenamento; uma linha em memória ou no navegador não prova persistência em servidor."
+      ],
+      "counterexamples": [
+        "Um toast de sucesso sem registro correspondente, ou um cancelamento que cria silenciosamente o registro, viola a confirmação."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Sucesso próprio cria uma única identidade e permite encontrá-la no detalhe e na lista no escopo de armazenamento declarado.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "Cancelamento explícito não cria registro; erro recuperável conserva os campos e não anuncia sucesso.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        },
+        {
+          "assertion": "Validação, cancelamento, erro e sucesso são reconhecíveis por teclado e nos três tamanhos.",
+          "status": "observed-local-pass",
+          "evidenceScope": "technical-fixture"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        },
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewer": "independent-quality-gate",
+        "evidenceScope": "technical-fixture",
+        "receiptSha256": "4b2663f209e2b6793792455b448ee1aa088958083f61581f2f43e4b0c4585fac",
+        "expertisePromotion": false
+      }
+    }
+  ],
+  "factInferenceBoundary": {
+    "facts": "Only pixels of eight stored Mobbin viewer captures were inspected; ordering is editorial, not executed source interaction.",
+    "inference": "Conditions, actions, exceptions and implementation contracts are proposed for an authored local fixture.",
+    "notObserved": [
+      "source-browser-history",
+      "source-return",
+      "source-controls-executed",
+      "source-backend",
+      "source-persistence",
+      "source-keyboard",
+      "source-focus",
+      "source-mobile",
+      "source-cancel",
+      "source-error",
+      "source-motion-timing"
+    ],
+    "localExtensions": [
+      "safe-direct-entry-return",
+      "list-search-filter-focus-restoration",
+      "not-found-versus-denied",
+      "cancel-confirmation",
+      "recoverable-error-preserving-input",
+      "authored-local-create-outcome"
+    ],
+    "review": "awaiting-independent-review",
+    "heldOutEvaluation": "not-run",
+    "expertisePromotion": false
+  },
+  "integration": {
+    "packagePath": "output/navigation-20261002/curation/candidates-package.json",
+    "sourceUnits": 3,
+    "maxUnitChars": 4719,
+    "sourceVersion": "46e09633e3cc948c9e3f8f05a871185c9a0fcbd85387ba7ce68dbd54f64003c2",
+    "bindingResolution": "all-five-exact-bindings-resolved",
+    "candidateRefsPersisted": true,
+    "overlayChangedByCurator": false
+  },
+  "transfer": {
+    "artifact": "http://127.0.0.1:4179/transfer-navigation/",
+    "status": "pending-independent-verification",
+    "originalSourceExecuted": false,
+    "backend": false,
+    "causalGain": false
+  },
+  "jev": {
+    "called": true,
+    "attempts": 1,
+    "questions": 9,
+    "model": "jev-1.13.0",
+    "requestId": "playground_19d7479b4d23b7449c78af0296484605305",
+    "usage": {
+      "input_tokens": 2281,
+      "output_tokens": 381
+    },
+    "calculatedThisBatchUsd": 0.000095802,
+    "calculatedTotalUsd": 0.00018375,
+    "reservedTotalUsd": 0.005376,
+    "authorizedUsd": 0.05,
+    "remainingReservationUsd": 0.044624,
+    "displayedBalanceUsd": 3.92,
+    "balancePrecisionDecimals": 2,
+    "invoiceReconciled": false,
+    "cacheKey": "0ba95bb06cae6002b44423af6ecc1db69ed4dee97d4c344a602d5595787a8242",
+    "pendingReceipts": 0,
+    "uncertainReceipts": 0,
+    "cacheReplayTransportCalls": 0,
+    "manualReviewRequired": [
+      "support_creation",
+      "support_return",
+      "support_cancel",
+      "support_error",
+      "support_mobile",
+      "support_persistence",
+      "support_second_record"
+    ],
+    "automaticApproval": false,
+    "sourceDescriptionsOnly": true,
+    "pricingSource": "https://docs.typesafe.ai/models",
+    "cookbookSource": "https://docs.typesafe.ai/cookbooks/citation_check"
+  },
+  "runtime": {
+    "schemaVersion": 1,
+    "status": "offline-assembly-verified",
+    "contexts": [
+      {
+        "agentId": "dx-ux-strategist",
+        "command": "create-wireframe-brief",
+        "contextChars": 7939,
+        "knowledgeChars": 3740,
+        "selectedMechanisms": [
+          "curated-navigation20261002-creation-stable-outcome-v1"
+        ],
+        "coverage": "gap",
+        "modelExecuted": false
+      },
+      {
+        "agentId": "dx-ui-designer",
+        "command": "compose-screen-layouts",
+        "contextChars": 8013,
+        "knowledgeChars": 3734,
+        "selectedMechanisms": [
+          "curated-navigation20261002-creation-stable-outcome-v1"
+        ],
+        "coverage": "gap",
+        "modelExecuted": false
+      },
+      {
+        "agentId": "dx-interaction-designer",
+        "command": "spec-micro-interactions",
+        "contextChars": 8248,
+        "knowledgeChars": 3762,
+        "selectedMechanisms": [
+          "curated-navigation20261002-creation-stable-outcome-v1"
+        ],
+        "coverage": "gap",
+        "modelExecuted": false
+      },
+      {
+        "agentId": "dx-frontend-engineer",
+        "command": "implement-component-library",
+        "contextChars": 8414,
+        "knowledgeChars": 3757,
+        "selectedMechanisms": [
+          "curated-navigation20261002-creation-stable-outcome-v1"
+        ],
+        "coverage": "gap",
+        "modelExecuted": false
+      },
+      {
+        "agentId": "product-surface-director",
+        "command": "design-product-surface",
+        "contextChars": 8172,
+        "knowledgeChars": 3767,
+        "selectedMechanisms": [
+          "curated-navigation20261002-creation-stable-outcome-v1"
+        ],
+        "coverage": "gap",
+        "modelExecuted": false
+      }
+    ],
+    "expertisePromotion": false,
+    "privateProjectOnly": true,
+    "targeted": [
+      {
+        "id": "navigation20261002-contextual-record-identity-v1",
+        "contextChars": 8395,
+        "selected": true,
+        "sourceEvidence": [
+          {
+            "sourceId": "navigation20261002-square-own-observations",
+            "locator": "navigation20261002-contextual-record-identity-v1; viewer positions detail-01,detail-02",
+            "excerpt": "Notas próprias de observação estática saneada."
+          }
+        ],
+        "completeExceptions": true,
+        "modelExecuted": false
+      },
+      {
+        "id": "navigation20261002-progressive-record-detail-v1",
+        "contextChars": 8369,
+        "selected": true,
+        "sourceEvidence": [
+          {
+            "sourceId": "navigation20261002-square-own-observations",
+            "locator": "navigation20261002-progressive-record-detail-v1; viewer positions detail-02,detail-03",
+            "excerpt": "Notas próprias de observação estática saneada."
+          }
+        ],
+        "completeExceptions": true,
+        "modelExecuted": false
+      },
+      {
+        "id": "navigation20261002-creation-stable-outcome-v1",
+        "contextChars": 8496,
+        "selected": true,
+        "sourceEvidence": [
+          {
+            "sourceId": "navigation20261002-square-own-observations",
+            "locator": "navigation20261002-creation-stable-outcome-v1; viewer positions create-01,create-02,create-03,create-04,create-05",
+            "excerpt": "Notas próprias de observação estática saneada."
+          }
+        ],
+        "completeExceptions": true,
+        "modelExecuted": false
+      }
+    ],
+    "maxContextChars": 8496,
+    "maxAllowedChars": 12000,
+    "modelExecuted": false
+  },
+  "sourceHead": "f7a88a031936765e942a21eb6358fe7018d68163",
+  "acquisition": {
+    "completeOwnNotes": 3,
+    "maxUnitChars": 4719,
+    "totalChars": 11026,
+    "sourceVersion": "46e09633e3cc948c9e3f8f05a871185c9a0fcbd85387ba7ce68dbd54f64003c2",
+    "sourcePixelInspections": 8
+  },
+  "fixture": {
+    "url": "http://127.0.0.1:4179/transfer-navigation/",
+    "data": "fictional-memory-only",
+    "authorChecks": 81,
+    "independentChecks": 141,
+    "authorScreenshots": 33,
+    "independentScreenshots": 45,
+    "independentSourcePixelInspections": 8,
+    "independentFixturePixelInspections": 29,
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "horizontalOverflowObserved": 0,
+    "sourceHashes": {
+      "index.html": "1da8bd3c51d5ac37723215962402b598d072999a62c049550efc7d09d12d2e60",
+      "verify.cjs": "92e6df024dcd77801d228873f46bed2765a6de462b96165447dd92124ce70d63"
+    },
+    "authorCycles": 3,
+    "independentCycles": 3,
+    "initialFailuresPreserved": [
+      "modal Shift+Tab focus escape",
+      "stale validation messages after input corrected"
+    ],
+    "correctionsIndependentlyVerified": true,
+    "serverPersistenceVerified": false,
+    "sourceApplicationExecuted": false
+  },
+  "consolidation": {
+    "schemaVersion": 1,
+    "observedAt": "2026-10-02T18:49:20.030Z",
+    "beforeEntries": 9,
+    "afterEntries": 12,
+    "priorEntriesPreserved": true,
+    "overlaySha256": "4abc203e28dbfa48ba27fe82c4cc15c65aa46b7e854fad8170b7ac5490f288f8",
+    "operations": [
+      {
+        "id": "navigation20261002-contextual-record-identity-v1",
+        "added": 1,
+        "readback": true,
+        "replayAdded": 0,
+        "evidenceScope": "technical-fixture"
+      },
+      {
+        "id": "navigation20261002-progressive-record-detail-v1",
+        "added": 1,
+        "readback": true,
+        "replayAdded": 0,
+        "evidenceScope": "technical-fixture"
+      },
+      {
+        "id": "navigation20261002-creation-stable-outcome-v1",
+        "added": 1,
+        "readback": true,
+        "replayAdded": 0,
+        "evidenceScope": "technical-fixture"
+      }
+    ],
+    "expertisePromotion": false
+  },
+  "regression": {
+    "suites": 4,
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 46.317
+  },
+  "checks": {
+    "lint": "passed; generated private output excluded",
+    "typecheck": "passed",
+    "parity": "passed 172 agents",
+    "manifest": "passed",
+    "build": "not applicable: static HTML and Node verifier",
+    "storyPrivacyAndPack": "passed:11 storymeta,139 AC/17 files,5226 tracked privacy scan,7 staged files,zero secrets/protected/private,4446 pack files with zero private paths",
+    "packPrivacy": {
+      "mode": "dry-run-only-ignore-scripts",
+      "files": 4446,
+      "privateOrSecretPaths": 0,
+      "published": false
+    },
+    "diffCheck": "passed"
+  },
+  "preservation": {
+    "schemaVersion": 1,
+    "observedAt": "2026-10-02T18:50:04.707Z",
+    "original": {
+      "branch": "codex/feat/canonical-install-readme",
+      "head": "693e9d0f9819cd700eae45734da41b055063fa5b",
+      "dirtyEntries": 191,
+      "baselineEntries": 191,
+      "hashOrStatusMismatches": [],
+      "preserved": true
+    },
+    "protectedFiles": [],
+    "privateTracked": [],
+    "push": false,
+    "published": false,
+    "ok": true
+  },
+  "history": {
+    "rejectedInitialCreationReview": 1,
+    "initialRedQaRetained": true,
+    "heldOutPriorPairsReused": false
+  },
+  "limitations": [
+    "Original application behavior, backend persistence, source keyboard/mobile and causal quality gain are unverified.",
+    "Jev weak support and unsupported claims received independent review; typed output and confidence do not establish truth.",
+    "Twelve reviewed private entries remain in this project, outside Git/npm/HOME. All expert profiles retain coverage gaps.",
+    "Native agent execution, broader 137 function candidates and 88 references, continuous audiovisual review and original integration remain pending.",
+    "No push, remote PR, publication, recarga, new credential, functional deletion, Docker or WSL."
+  ],
+  "evidenceReceipts": [
+    {
+      "path": "examples/framework-quality/output/navigation-20261002/author/cycle-3/receipt.json",
+      "sha256": "b38cc726e2fa5c3cb0f5635cc281a0a68ece614e8a6ecfaf2af1fe2f0abd1e88"
+    },
+    {
+      "path": "output/navigation-20261002/independent/cycle-3/report.json",
+      "sha256": "39d03ef68cf4ec5ac3ecee9a08755618c71d4ede5f19c36b1bcf90fcbb28b5b4"
+    },
+    {
+      "path": "output/navigation-20261002/independent/review-references.json",
+      "sha256": "72c09d958707a6d25994eeecfac7ebc51c01d06f288ae3917a53fa4b73cd45e4"
+    },
+    {
+      "path": "output/navigation-20261002/independent/final-pixel-inspection.json",
+      "sha256": "c0801312ede23c0b0b51ce006b886830a4a32a7e5f01369d93b06b294f06bff5"
+    },
+    {
+      "path": "output/navigation-20261002/curation/verification.json",
+      "sha256": "57791cf781b1c8ba6587add4b0492ba6b2638bdb47a3b865e8459596e574bb0d"
+    },
+    {
+      "path": "output/navigation-20261002/jev-execution.json",
+      "sha256": "83289c8cc7070aa697e5745f0e40bbead7ab0aacb55fd77c79d055df30625551"
+    },
+    {
+      "path": "output/navigation-20261002/budget-audit.json",
+      "sha256": "fa24607da2f87233496903808f194612f812b443dacb734c1c9d2dd82cfadfac"
+    },
+    {
+      "path": "output/navigation-20261002/consolidation.json",
+      "sha256": "6a68ed97eb41ce13dfe9655279e51561c3eed568cd06449e736a96af6125f267"
+    },
+    {
+      "path": "output/navigation-20261002/context-readback.json",
+      "sha256": "368dc7aa03bf2943f568d3690987770f70656f42fc59b32abea1de3c35d97315"
+    },
+    {
+      "path": "output/navigation-20261002/targeted-runtime.json",
+      "sha256": "f1545fc2a4c356473c3389acf7ac736422534bcf7aefc142cd7501811a9a7360"
+    },
+    {
+      "path": "output/navigation-20261002/regression.json",
+      "sha256": "ea4f9c06b589cb23b28a39db092ca0efda3e4b52ea907c3e5853600f957efc71"
+    },
+    {
+      "path": "output/navigation-20261002/preservation.json",
+      "sha256": "04e29a483da7e4982f83b87d36c0662352c133b8e024606267d1bce797eb9a3e"
+    }
+  ]
+}
