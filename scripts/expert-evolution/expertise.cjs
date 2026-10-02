@@ -21,7 +21,7 @@ function confined(root, relative) {
   return target;
 }
 function loadProgram(root = DEFAULT_ROOT) {
-  return {profiles: read(confined(root, 'research/expert-evolution/expert-profiles.json')), useCases: read(confined(root, 'research/expert-evolution/jev-use-cases.json')), sources: read(confined(root, 'research/expert-evolution/source-program.json'))};
+  return {profiles: read(confined(root, 'research/expert-evolution/expert-profiles.json')), useCases: read(confined(root, 'research/expert-evolution/jev-use-cases.json')), sources: read(confined(root, 'research/expert-evolution/source-program.json')), bindings: read(confined(root, 'research/expert-evolution/task-bindings.json'))};
 }
 function validateProgram(program, {root = DEFAULT_ROOT, agentId} = {}) {
   const errors = [];
@@ -45,7 +45,7 @@ function validateProgram(program, {root = DEFAULT_ROOT, agentId} = {}) {
       if (ref.status === 'READ' && (!text(ref.locator) || !text(ref.readAt) || !text(ref.excerpt) || hash(ref.excerpt) !== ref.contentSha256)) errors.push('Read evidence missing ' + ref.id);
     }
     for (const p of profiles) {
-      if (((agentId===undefined || p.agentId===agentId) && (!index[p.agentId] || p.squad !== index[p.agentId]?.squad || p.canonical.path !== index[p.agentId]?.sourcePath)) || !text(p.mission) || !Array.isArray(p.competencies) || p.competencies.length < 2 || !Array.isArray(p.deliverables) || !p.deliverables.length || !Array.isArray(p.gaps) || !p.gaps.length || p.status !== 'planned') errors.push('Invalid profile ' + p.agentId);
+      if (((agentId===undefined || p.agentId===agentId) && (!index[p.agentId] || p.squad !== index[p.agentId]?.squad || p.canonical.path !== index[p.agentId]?.sourcePath)) || !text(p.mission) || !Array.isArray(p.competencies) || p.competencies.some(c=>!slug(c)) || !Array.isArray(p.deliverables) || !Array.isArray(p.gaps) || !p.gaps.length || p.status !== 'planned' || p.validatedExpertise!==false || typeof p.contractReviewed!=='boolean' || (!p.contractReviewed && (p.competencies.length || p.deliverables.length)) || p.candidateContracts?.status!=='unreviewed') errors.push('Invalid profile ' + p.agentId);
       if ((agentId===undefined || p.agentId===agentId) && p.canonical && hash(fs.readFileSync(confined(root, p.canonical.path), 'utf8')) !== p.canonical.sha256) errors.push('Stale canonical profile ' + p.agentId);
       for (const d of p.deliverables || []) if (!text(d.name) || !Array.isArray(d.criteria) || d.criteria.length < 2 || d.criteria.some(c => !text(c.check) || !text(c.method))) errors.push('Missing deliverable criteria ' + p.agentId);
       for (const r of p.references || []) if (!refIds.has(r.referenceId) || !text(r.methodFit)) errors.push('Missing profile reference ' + p.agentId);
@@ -59,8 +59,41 @@ function validateProgram(program, {root = DEFAULT_ROOT, agentId} = {}) {
       caseIds.add(c.id);
     }
     for (const squad of squads) if (cases.filter(c => c.squad === squad).length < 2) errors.push('Jev cases missing ' + squad);
+    errors.push(...validateTaskBindings(program,{root,agentId}).errors);
   } catch (error) { errors.push(error.message); }
   return {valid: errors.length === 0, errors};
+}
+function validateTaskBindings(program, {root = DEFAULT_ROOT, agentId} = {}) {
+  const errors=[];
+  try {
+    if(program.bindings?.schemaVersion!==1 || !Array.isArray(program.bindings.bindings)) throw new Error('Invalid task bindings schema');
+    const seen=new Set(), resolve=require('../../.codex/scripts/resolve-codex-command.js').resolveCodexCommand;
+    for(const b of program.bindings.bindings){
+      const key=b.agentId+':'+b.command, p=program.profiles.profiles.find(p=>p.agentId===b.agentId);
+      if(!slug(b.agentId)||!slug(b.command)||seen.has(key)||!p?.contractReviewed||b.sourceSha256!==p.canonical.sha256||b.review?.status!=='semantic-reviewed-not-evaluated'||!text(b.review?.rationale)||!text(b.review?.locator)) throw new Error('Invalid semantic binding '+key);
+      seen.add(key);
+      for(const list of ['competencyIds','deliverableIds','requiredCriterionIds']) if(!Array.isArray(b[list])||!b[list].length||new Set(b[list]).size!==b[list].length||b[list].some(v=>!slug(v))) throw new Error('Invalid binding IDs '+key);
+      const ds=p.deliverables.filter(d=>b.deliverableIds.includes(d.id)), criteria=ds.flatMap(d=>d.criteria);
+      if(b.competencyIds.some(c=>!p.competencies.includes(c))||ds.length!==b.deliverableIds.length||ds.some(d=>!b.competencyIds.includes(d.competency))||b.requiredCriterionIds.some(c=>!criteria.some(x=>x.id===c))||criteria.some(c=>c.critical&&!b.requiredCriterionIds.includes(c.id))) throw new Error('Binding contract mismatch '+key);
+      if(agentId===undefined || b.agentId===agentId){
+        const command=resolve(b.agentId,b.command,root);
+        if(command.target!==b.taskPath || hash(fs.readFileSync(confined(root,b.taskPath),'utf8'))!==b.taskSha256) throw new Error('Stale task binding '+key);
+        const canonical=fs.readFileSync(confined(root,p.canonical.path),'utf8');
+        if(hash(canonical)!==b.sourceSha256||!canonical.includes(b.review.locator)) throw new Error('Stale canonical binding '+key);
+      }
+    }
+  } catch(error){errors.push(error.message);}
+  return {valid:errors.length===0,errors};
+}
+function resolveTaskBinding({root=DEFAULT_ROOT,agentId,command,program}={}) {
+  if(!slug(agentId)||typeof command!=='string'||!/^[*/]?[a-z0-9][a-z0-9-]*$/.test(command)) return null;
+  program=program||loadProgram(root);
+  const checked=validateTaskBindings(program,{root,agentId});
+  if(!checked.valid) throw new Error('Invalid task bindings: '+checked.errors.join('; '));
+  return program.bindings.bindings.find(b=>b.agentId===agentId&&b.command===command.replace(/^[*/]/,''))||null;
+}
+function selectProtectedCriteria(profile,binding){
+  return profile.deliverables.filter(d=>binding.deliverableIds.includes(d.id)).map(d=>({...d,criteria:d.criteria.filter(c=>binding.requiredCriterionIds.includes(c.id)||c.critical)}));
 }
 function bounded(value, maxChars) {
   if (!Number.isSafeInteger(maxChars) || maxChars < 256 || maxChars > 64000) throw new Error('Invalid JSON character budget');
@@ -76,19 +109,31 @@ function getProfile({root = DEFAULT_ROOT, agentId, maxChars = 12000, compact = f
   if (!checked.valid) throw new Error('Invalid expertise program: ' + checked.errors.join('; '));
   if (task !== undefined && (!task || typeof task!=='object' || Object.keys(task).some(k=>!['command','title','text'].includes(k)) || Object.entries(task).some(([k,v])=>typeof v!=='string'||v.length>({command:128,title:512,text:4000}[k])))) throw new Error('Invalid bounded task context');
   if (typeof compact !== 'boolean') throw new Error('Invalid compact flag');
-  if (!compact) return bounded(profile, maxChars);
-  const normalize=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ');
-  const tokens=[...new Set(normalize(Object.values(task||{}).join(' ')).split(' ').filter(s=>s.length>3))];
-  const score=value=>tokens.reduce((sum,token)=>sum+(normalize(JSON.stringify(value)).includes(token)?1:0),0);
-  const ordered=list=>list.map((value,index)=>({value,index,score:score(value)})).sort((a,b)=>b.score-a.score||a.index-b.index).map(v=>v.value);
-  const refs=profile.references.map(r=>{const source=program.sources.references.find(s=>s.id===r.referenceId);return {referenceId:r.referenceId,status:source.status,url:source.url,methodFit:r.methodFit,...(source.status==='READ'?{locator:source.locator,contentSha256:source.contentSha256}:{})};}).sort((a,b)=>(a.status==='READ'?-1:0)-(b.status==='READ'?-1:0));
-  const result={schemaVersion:1,agentId:profile.agentId,squad:profile.squad,title:profile.title,mission:profile.mission,canonical:profile.canonical,status:'planned',priority:profile.priority,validatedExpertise:false,competencies:ordered(profile.competencies).slice(0,2),deliverables:ordered(profile.deliverables).slice(0,1),references:refs.slice(0,2),gaps:profile.gaps.map(g=>({id:g.id,reason:g.reason})),omissions:['Additional competencies, deliverables and references; full profile remains canonical in expert-profiles.json'],taskRelevance:tokens.length?(score(profile)>0?'lexical-match':'no-lexical-match'):'unfiltered'};
-  const fits=()=>JSON.stringify(result).length<=maxChars;
-  if (!fits()) {delete result.mission;result.omissions.push('Full mission omitted; title identifies canonical function');}
-  if (!fits()) {result.references=result.references.slice(0,1);result.omissions.push('Additional reference');}
-  if (!fits()) {result.deliverables=result.deliverables.map(d=>({id:d.id,name:d.name,competency:d.competency,criteria:d.criteria.slice(0,2)}));result.omissions.push('Additional deliverable criteria');}
+  if (!compact) {
+    const {candidateContracts: _candidateContracts, declaredResponsibilities: _declaredResponsibilities, ...publicProfile}=profile;
+    return bounded({...publicProfile,candidateContracts:{status:'unreviewed',pointer:'research/expert-evolution/expert-profiles.json',canonicalPointer:profile.canonical.path}},Math.min(maxChars,12000));
+  }
+  if(maxChars>3000) maxChars=3000;
+  const binding=resolveTaskBinding({root,agentId,command:task?.command,program});
+  const result={schemaVersion:1,agentId:profile.agentId,squad:profile.squad,canonical:profile.canonical,status:'planned',validatedExpertise:false,competencies:[],deliverables:[],references:[],criteriaComplete:false,omittedCriterionIds:[],selectionEvidence:{status:binding?'bound':'gap',command:task?.command||null},gaps:profile.gaps.map(g=>({id:g.id,reason:g.reason})),omissions:[]};
+  if(!binding){result.gaps.push({id:'unmatched-task',reason:'No reviewed task binding; load canonical source and exact task. Candidate contracts are not runtime supplements.'});return bounded(result,maxChars);}
+  result.competencies=[...binding.competencyIds];
+  result.deliverables=selectProtectedCriteria(profile,binding);
+  result.criteriaComplete=true;
+  result.selectionEvidence={status:'bound',command:binding.command,sourceSha256:binding.sourceSha256,taskSha256:binding.taskSha256,taskPath:binding.taskPath,reviewStatus:binding.review.status};
+  const relevantRefs=profile.references.map(r=>{const source=program.sources.references.find(s=>s.id===r.referenceId);return {referenceId:r.referenceId,status:source.status,rights:source.rights,url:source.url,...(source.status==='READ'?{locator:source.locator,contentSha256:source.contentSha256}:{locator:null})};});
+  // Candidate references are acquisition pointers, never proof of expertise.
+  for(const ref of relevantRefs.sort((a,b)=>(a.status==='READ'?-1:0)-(b.status==='READ'?-1:0))){if(result.references.length===2)break;result.references.push(ref);if(JSON.stringify(result).length>maxChars){result.references.pop();break;}}
+  if(JSON.stringify(result).length>maxChars){
+    result.deliverables=[];result.competencies=[];result.references=[];result.criteriaComplete=false;
+    result.omittedCriterionIds=[...binding.requiredCriterionIds];
+    result.selectionEvidence.status='deferred-budget';
+    result.omissions=['All required criteria deferred together; load research/expert-evolution/expert-profiles.json and task-bindings.json before execution.'];
+    result.gaps.push({id:'required-criteria-budget',reason:'Minimum protected contract cannot fit; no partial or complete-criteria claim.'});
+  }
   return bounded(result,maxChars);
 }
+
 function validateSource(source, maxSegmentChars) {
   const safe=(value, seen=new Set())=>{
     if (value===null || typeof value==='string' || typeof value==='boolean' || (typeof value==='number' && Number.isFinite(value))) return;
@@ -187,12 +232,39 @@ function planUseCase({root = DEFAULT_ROOT, useCaseId, evidenceIds, caseContext, 
   bounded(payload,maxChars);
   return {...jev.plan(payload),useCaseId,evaluation:c.evaluation,promotion:'candidate-only; explicit evidence and held-out evaluation required'};
 }
-function assessPromotion({profile, evaluation, evidence} = {}) {
+function assessPromotion({root = DEFAULT_ROOT, profile, evaluation, evidence} = {}) {
+  if(!profile?.contractReviewed || !Array.isArray(profile.competencies) || !profile.competencies.length) throw new Error('Promotion requires a reviewed nonempty competency contract; gap profiles are ineligible');
   if (!profile || !text(profile.agentId) || !Array.isArray(profile.competencies) || !evaluation || evaluation.agentId !== profile.agentId || evaluation.heldOut !== true || evaluation.independent !== true || evaluation.passed !== true || !text(evaluation.receiptId) || !text(evaluation.reviewer) || evaluation.reviewer === evaluation.executor || !text(evaluation.executor) || !/^[a-f0-9]{64}$/.test(evaluation.corpusSha256) || !text(evaluation.model) || !Array.isArray(evaluation.caseIds) || evaluation.caseIds.length < 2 || new Set(evaluation.caseIds).size !== evaluation.caseIds.length || !Array.isArray(evaluation.competencyResults) || !Array.isArray(evidence) || evidence.length < 2 || new Set(evidence.map(e=>e.id)).size < 2 || new Set(evidence.map(e=>e.contentSha256)).size < 2 || evidence.some(e=>e.status!=='READ'|| !text(e.id)|| !text(e.locator)||!text(e.excerpt)|| hash(e.excerpt)!==e.contentSha256)) throw new Error('Promotion requires grounded READ evidence and independent per-competency held-out evaluation receipt');
   for (const competency of profile.competencies) {
     const result=evaluation.competencyResults.find(r=>r.competency===competency);
     if (!result || result.passed!==true || !Array.isArray(result.evidenceIds) || result.evidenceIds.length<2 || new Set(result.evidenceIds).size<2 || result.evidenceIds.some(id=>!evidence.some(e=>e.id===id)) || !Array.isArray(result.caseIds) || result.caseIds.length<2 || result.caseIds.some(id=>!evaluation.caseIds.includes(id)) || !text(result.negativeCaseId) || !result.caseIds.includes(result.negativeCaseId)) throw new Error('Missing grounded evaluation for competency');
   }
+  // Metadata booleans/IDs do not establish observation. Pin a resolvable artifact
+  // receipt and verify every case's independently observed protected criteria.
+  const resolve = ref => {
+    if (!ref || !text(ref.path) || path.isAbsolute(ref.path) || ref.path.includes('\\') || ref.path.split('/').some(p=>!p||p==='.'||p==='..') || !/^[a-f0-9]{64}$/.test(ref.sha256 || '')) throw new Error('Promotion requires a resolvable typed artifact receipt');
+    const bytes = fs.readFileSync(confined(root,ref.path));
+    if(hash(bytes)!==ref.sha256) throw new Error('Promotion artifact/source hash mismatch');
+    return bytes;
+  };
+  for(const source of evidence) if(!resolve(source.sourceRef).toString('utf8').includes(source.excerpt)) throw new Error('Promotion source file does not contain grounded excerpt');
+  const receipt=JSON.parse(resolve(evaluation.artifactReceipt).toString('utf8'));
+  const checked=require('./model-policy.cjs').validateArtifactEvaluation(receipt,{root,modelId:evaluation.model,taskFamily:evaluation.taskFamily,corpusSha256:evaluation.corpusSha256});
+  if (!checked.valid || receipt.agentId!==profile.agentId || receipt.executor!==evaluation.executor || receipt.reviewer!==evaluation.reviewer || receipt.reviewer.trim().toLowerCase()===receipt.executor.trim().toLowerCase() || !['technical-fixture','observed-local-artifact'].includes(receipt.evidenceScope)) throw new Error('Promotion requires observed independent artifact evidence: '+checked.errors.join('; '));
+  const binding=resolveTaskBinding({root,agentId:profile.agentId,command:evaluation.taskCommand});
+  if(!binding || profile.competencies.some(competency=>!binding.competencyIds.includes(competency)) || receipt.taskCommand!==binding.command || receipt.sourceCanonicalSha256!==binding.sourceSha256 || receipt.taskSha256!==binding.taskSha256) throw new Error('Promotion requires exact canonical task/competency binding');
+  const critical=profile.deliverables.flatMap(d=>d.criteria.filter(c=>c.critical).map(c=>c.id));
+  if(!critical.length) throw new Error('Promotion requires explicit protected critical gates');
+  const observedCases=[];
+  for(const artifactCase of receipt.cases){
+    const observed=JSON.parse(resolve(artifactCase.review).toString('utf8'));
+    resolve(artifactCase.artifact);
+    if(observed.schemaVersion!==1 || observed.kind!=='competency-artifact-observation' || !text(artifactCase.id) || !evaluation.caseIds.includes(artifactCase.id) || observed.caseId!==artifactCase.id || observed.caseKind!==artifactCase.kind || observed.observer!==receipt.reviewer || observed.author!==receipt.executor || observed.artifactSha256!==artifactCase.artifact.sha256 || observed.agentId!==profile.agentId || observed.modelId!==evaluation.model || observed.taskFamily!==evaluation.taskFamily || observed.corpusSha256!==evaluation.corpusSha256 || !Array.isArray(observed.sourceSha256s) || evidence.some(s=>!observed.sourceSha256s.includes(s.contentSha256)) || !Array.isArray(observed.competencyIds) || !Array.isArray(observed.criticalGates) || !['assertion','expected','actual','interpretation'].every(k=>text(observed[k])) || !['positive','negative','conflict'].includes(artifactCase.kind)) throw new Error('Promotion observation lacks artifact/source/scope binding');
+    const allowed=artifactCase.kind==='positive'?['supported']:artifactCase.kind==='negative'?['outside-condition','controlled-failure']:['resolved-exception','none-observed'];
+    if(!allowed.includes(observed.outcome) || critical.some(id=>!observed.criticalGates.some(g=>g.criterionId===id && text(g.observed) && text(g.method) && allowed.includes(g.outcome)))) throw new Error('Promotion negative/conflict or incomplete critical gates');
+    observedCases.push(observed);
+  }
+  for(const result of evaluation.competencyResults) for(const kind of ['positive','negative','conflict']) if(!observedCases.some(o=>o.caseKind===kind && o.competencyIds.includes(result.competency) && result.caseIds.includes(o.caseId) && (kind!=='negative'||o.caseId===result.negativeCaseId))) throw new Error('Missing observed positive/negative/conflict competency evidence');
   return {agentId:profile.agentId,eligibleForReview:true,promoted:false,evaluationReceipt:evaluation.receiptId};
 }
 if (require.main === module) {
@@ -209,4 +281,4 @@ if (require.main === module) {
     console.log(JSON.stringify(result,null,args.includes('--json')?0:2));
   } catch(error) {console.error(error.message);process.exitCode=1;}
 }
-module.exports={loadProgram,validateProgram,getProfile,ingest,planUseCase,assessPromotion};
+module.exports={loadProgram,validateProgram,validateTaskBindings,resolveTaskBinding,selectProtectedCriteria,getProfile,ingest,planUseCase,assessPromotion};

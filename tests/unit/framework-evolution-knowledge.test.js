@@ -16,7 +16,8 @@ describe('grounded knowledge corpus', () => {
     expect(corpus.competencies.agents.every(a => a.coverage === 'gap')).toBe(true);
     for (const a of corpus.competencies.agents) {
       const result = k.retrieveKnowledge({agentId: a.agentId});
-      expect(result.items.length).toBeGreaterThan(0);
+      expect(result.items).toEqual([]);
+      expect(result.selectionEvidence.status).toBe('gap');
       expect(JSON.stringify(result).length).toBe(result.charsUsed);
       expect(result.charsUsed).toBeLessThanOrEqual(6000);
     }
@@ -51,8 +52,8 @@ describe('grounded knowledge corpus', () => {
   });
   test('same agent retrieves distinct knowledge for rendering stalls and VRAM tasks', () => {
     const common={agentId:'threejs-architect',maxItems:1};
-    const stalls=k.retrieveKnowledge({...common,task:{command:'fix-main-thread-stalls',title:'WebGL consultas síncronas readPixels bloqueando thread'}});
-    const memory=k.retrieveKnowledge({...common,task:{command:'optimize-vram-budget',title:'VRAM por pixel, DPR e buffer para partículas'}});
+    const stalls=k.retrieveKnowledge({...common,task:{command:'optimize-threejs-scene',title:'Scene optimization'},brief:'WebGL consultas síncronas readPixels bloqueando thread'});
+    const memory=k.retrieveKnowledge({...common,task:{command:'optimize-threejs-scene',title:'Scene optimization'},brief:'VRAM por pixel, DPR e buffer para partículas'});
     expect(stalls.items[0].id).toBe('h-webgl-main-thread');
     expect(memory.items[0].id).toBe('h-webgl-resource-budget');
     const absent=k.retrieveKnowledge({...common,task:{title:'xylophone zebras'}});
@@ -69,6 +70,11 @@ describe('grounded knowledge corpus', () => {
   });
 });
 describe('Jev offline and paid guardrails', () => {
+  let fixtureDirectories;
+  beforeEach(()=>{fixtureDirectories=[];});
+  afterEach(()=>{for(const directory of fixtureDirectories)fs.rmSync(directory,{recursive:true,force:true});});
+  function fixtureCache(){const directory=fs.mkdtempSync(path.join(os.tmpdir(),'jev durable fixture '));fixtureDirectories.push(directory);return j.createFileCache(directory);}
+  function mockLedger(options){const cache=fixtureCache();return j.createDurableLedger({...options,directory:cache.directory});}
   test('offline prepares contextual batch without a transport call', async () => {
     const transport = jest.fn();
     expect((await j.execute(payload, {transport})).called).toBe(false);
@@ -125,7 +131,7 @@ describe('Jev offline and paid guardrails', () => {
   });
   test('budget reserves before every attempt and prevents the next retry', async () => {
     const perAttempt = j.plan(payload).reservedUsdPerAttempt;
-    const ledger = j.createLedger({authorizedUsd: perAttempt, authorizationId: 'test-fixture-only'});
+    const ledger = mockLedger({authorizedUsd: perAttempt, authorizationId: 'test-fixture-only'});
     const transport = jest.fn(async () => {
       expect(ledger.reservedUsd).toBe(perAttempt);
       return {ok: false, status: 429, headers: {get: () => '0'}};
@@ -134,23 +140,23 @@ describe('Jev offline and paid guardrails', () => {
     expect(transport).toHaveBeenCalledTimes(1);
   });
   test('valid response caches by payload/model/pricing and malformed cache rejects', async () => {
-    const ledger = j.createLedger({authorizedUsd: 1, authorizationId: 'test-fixture-only'}), cache = new Map(), transport = jest.fn(http);
+    const ledger = mockLedger({authorizedUsd: 1, authorizationId: 'test-fixture-only'}), cache = fixtureCache(), transport = jest.fn(http);
     const opts = {offline: false, authorized: true, apiKey: 'fixture', ledger, cache, transport};
     expect((await j.execute(payload, opts)).mode).toBe('live');
     expect((await j.execute(payload, opts)).mode).toBe('cache');
     expect(transport).toHaveBeenCalledTimes(1);
     expect(j.plan({...payload, state: 'changed'}).cacheKey).not.toBe(j.plan(payload).cacheKey);
-    cache.set(j.plan(payload).cacheKey, {});
+    fs.writeFileSync(path.join(cache.directory,j.plan(payload).cacheKey+'.json'),'{}');
     await expect(j.execute(payload, opts)).rejects.toThrow();
     const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'jev-cache-test-'));
     try { const fileCache = j.createFileCache(directory); fileCache.set(j.plan(payload).cacheKey, response); expect(fileCache.get(j.plan(payload).cacheKey)).toEqual(response); expect(() => fileCache.get('../unsafe')).toThrow(); }
     finally { fs.rmSync(directory, {recursive: true, force: true}); }
   });
   test('total timeout bounds a hanging transport, retries are zero by default', async () => {
-    const ledger = j.createLedger({authorizedUsd: 1, authorizationId: 'test-fixture-only'});
+    const ledger = mockLedger({authorizedUsd: 1, authorizationId: 'test-fixture-only'});
     await expect(j.execute(payload, {offline: false, authorized: true, apiKey: 'fixture', ledger, timeoutMs: 20, transport: () => new Promise(() => {})})).rejects.toThrow('timeout');
     const transport = jest.fn(async () => ({ok: false, status: 529}));
-    await expect(j.execute(payload, {offline: false, authorized: true, apiKey: 'fixture', ledger, transport})).rejects.toThrow('529');
+    await expect(j.execute({...payload,state:'separate known HTTP failure'}, {offline: false, authorized: true, apiKey: 'fixture', ledger, transport})).rejects.toThrow('529');
     expect(transport).toHaveBeenCalledTimes(1);
   });
   test('unsupported questions/models reject before budget, cache or transport', async () => {
@@ -162,14 +168,14 @@ describe('Jev offline and paid guardrails', () => {
   });
   test('oversized unknown top-level field rejects before budget, cache and fetch', async () => {
     const invalid={...payload,extra:'x'.repeat(1000000)};
-    const transport=jest.fn(),cache={get:jest.fn(),set:jest.fn()},ledger=j.createLedger({authorizedUsd:1,authorizationId:'test-only'});
+    const transport=jest.fn(),cache={get:jest.fn(),set:jest.fn()},ledger=mockLedger({authorizedUsd:1,authorizationId:'test-only'});
     await expect(j.execute(invalid,{offline:false,authorized:true,apiKey:'fixture',ledger,cache,transport})).rejects.toThrow('Unsupported Jev payload field');
     expect(ledger.reservedUsd).toBe(0); expect(cache.get).not.toHaveBeenCalled(); expect(transport).not.toHaveBeenCalled();
     expect(()=>j.plan(invalid)).toThrow('Unsupported Jev payload field');
   });
   test('unsupported vendor question options reject before any effect', async () => {
     const invalid={...payload,questions:{support:{...payload.questions.support,debug:true}}};
-    const transport=jest.fn(),ledger=j.createLedger({authorizedUsd:1,authorizationId:'test-only'});
+    const transport=jest.fn(),ledger=mockLedger({authorizedUsd:1,authorizationId:'test-only'});
     await expect(j.execute(invalid,{offline:false,authorized:true,apiKey:'fixture',ledger,transport})).rejects.toThrow('Unsupported Jev question field');
     expect(ledger.reservedUsd).toBe(0); expect(transport).not.toHaveBeenCalled();
   });
@@ -194,7 +200,7 @@ describe('Jev offline and paid guardrails', () => {
   });
   test('caller mutation between retries cannot change admitted body or key', async () => {
     const mutable=structuredClone(payload), originalBody=JSON.stringify(mutable), originalKey=j.plan(mutable).cacheKey, bodies=[];
-    const ledger=j.createLedger({authorizedUsd:1,authorizationId:'test-only'});
+    const ledger=mockLedger({authorizedUsd:1,authorizationId:'test-only'});
     const transport=jest.fn(async (_,options)=>{
       bodies.push(options.body);
       if(bodies.length===1){mutable.state='x'.repeat(1000000);mutable.questions.support.instructions='changed';return{ok:false,status:429,headers:{get:()=> '0'}};}
@@ -205,7 +211,7 @@ describe('Jev offline and paid guardrails', () => {
     expect(ledger.reservedUsd).toBeCloseTo(j.plan(payload).reservedUsdPerAttempt*2);
   });
   test('concurrent attempts share an atomic ceiling before awaiting transport', async () => {
-    const ledger=j.createLedger({authorizedUsd:j.plan(payload).reservedUsdPerAttempt,authorizationId:'test-only'});
+    const ledger=mockLedger({authorizedUsd:j.plan(payload).reservedUsdPerAttempt,authorizationId:'test-only'});
     const transport=jest.fn(async()=>{await new Promise(resolve=>setTimeout(resolve,5));return http();});
     const options={offline:false,authorized:true,apiKey:'fixture',ledger,transport};
     const results=await Promise.allSettled([j.execute(payload,options),j.execute({...payload,state:'second request'},options)]);
@@ -216,12 +222,13 @@ describe('Jev offline and paid guardrails', () => {
   test('contextual cached answers with wrong rubric fail closed without fetch', async () => {
     const p={model:j.MODEL,state:'state',questions:{c:{type:'choice',instructions:'pick',criteria:{yes:'supported',no:'unsupported'}}}};
     const tampered={model:j.MODEL,answers:{c:{type:'choice',choice:'yes',confidence:0.5,probabilities:{yes:0.25,no:0.75}}},usage:{input_tokens:10,output_tokens:1}};
-    const transport=jest.fn(),cache=new Map([[j.plan(p).cacheKey,tampered]]),ledger=j.createLedger({authorizedUsd:1,authorizationId:'test-only'});
+    const transport=jest.fn(),cache=fixtureCache(),ledger=mockLedger({authorizedUsd:1,authorizationId:'test-only'});
+    cache.set(j.plan(p).cacheKey,tampered);
     await expect(j.execute(p,{offline:false,authorized:true,apiKey:'fixture',ledger,cache,transport})).rejects.toThrow();
     expect(transport).not.toHaveBeenCalled(); expect(ledger.reservedUsd).toBe(0);
   });
   test('timeout applies to response body as well as initial fetch', async () => {
-    const ledger=j.createLedger({authorizedUsd:1,authorizationId:'test-only'});
+    const ledger=mockLedger({authorizedUsd:1,authorizationId:'test-only'});
     await expect(j.execute(payload,{offline:false,authorized:true,apiKey:'fixture',ledger,timeoutMs:20,transport:async()=>({ok:true,status:200,json:()=>new Promise(()=>{})})})).rejects.toThrow('timeout');
   });
 });

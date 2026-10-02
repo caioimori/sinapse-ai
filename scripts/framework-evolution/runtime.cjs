@@ -21,17 +21,18 @@ function containedFile(root, relative) {
   return absolute;
 }
 
-function buildRuntimeContext({ root = repoRoot, agentId, task, competencies = [], maxChars = 12000, knowledgeMaxChars = 6000, model = 'gpt-6.1-sol' } = {}) {
+function buildRuntimeContext({ root = repoRoot, agentId, task, brief = '', competencies = [], maxChars = 12000, knowledgeMaxChars = 6000, model = 'gpt-6.1-sol' } = {}) {
+  if(typeof brief!=='string'||brief.length>4000||brief.includes('\u0000')) throw new Error('Invalid bounded user brief (0..4000 characters)');
   if (!Number.isSafeInteger(maxChars) || maxChars < 2000 || maxChars > 12000) throw new Error('Invalid context budget (2000..12000)');
   if (!Number.isSafeInteger(knowledgeMaxChars) || knowledgeMaxChars < 1 || knowledgeMaxChars > Math.min(maxChars, 6000)) throw new Error('Invalid knowledge budget');
-  const expertPayload = ['scripts/expert-evolution/expertise.cjs','scripts/expert-evolution/model-policy.cjs','scripts/framework-evolution/jev.cjs',...['expert-profiles','source-program','jev-use-cases','model-policy'].map(name => `research/expert-evolution/${name}.json`)];
+  const expertPayload = ['scripts/expert-evolution/expertise.cjs','scripts/expert-evolution/model-policy.cjs','scripts/framework-evolution/jev.cjs',...['expert-profiles','source-program','jev-use-cases','model-policy','task-bindings'].map(name => `research/expert-evolution/${name}.json`)];
   const availability = expertPayload.map(relative => fs.existsSync(path.join(root, relative)));
   const withExpertise = availability.some(Boolean);
   if (withExpertise && !availability.every(Boolean)) throw new Error('Partial expert evolution installation');
   if (withExpertise) {
     expertPayload.forEach(relative => containedFile(root, relative));
     const policy = require('../expert-evolution/model-policy.cjs');
-    const selected = policy.assessModel(policy.loadPolicy(root), model);
+    const selected = policy.assessModel(policy.loadPolicy(root), model, {root});
     if (!selected.allowed) throw new Error(`Model policy blocked: ${selected.reasons.join('; ')}`);
   } else if (model !== 'gpt-6.1-sol') throw new Error('Unsupported requested model');
   if (typeof agentId !== 'string' || !/^@?[a-z0-9][a-z0-9-]*$/i.test(agentId)) throw new Error('Invalid agent ID');
@@ -46,9 +47,9 @@ function buildRuntimeContext({ root = repoRoot, agentId, task, competencies = []
   const taskTitle = taskText.match(/^#{1,6}\s+(.+)$/m)?.[1] || command.commandId;
   const taskPointer = agent.tasks.find((entry) => entry.command === command.commandId) || { scope: command.resolvedBy === 'registry' ? 'registry' : 'declared' };
   const capsule = { agentId: agent.agentId, squad: agent.squad, model, task: { command: command.commandId, target: command.target, scope: taskPointer.scope }, sourceOfTruth: agent.sourceOfTruth, canonicalSha256: crypto.createHash('sha256').update(text).digest('hex'), pointer: agent.pointer, authority: 'Routing metadata only. Read the canonical definition and exact task before execution; existing story, security, delegation and human approval gates retain authority.', fallback: taskPointer.scope === 'squad-pool' };
-  const knowledge = require('./knowledge.cjs').retrieveKnowledge({ root, agentId: agent.agentId, squad: agent.squad, competencies, task: { command: command.commandId, title: taskTitle, text: taskText }, maxItems: 3, maxChars: knowledgeMaxChars });
+  const knowledge = require('./knowledge.cjs').retrieveKnowledge({ root, agentId: agent.agentId, squad: agent.squad, competencies, brief, task: { command: command.commandId, title: taskTitle, text: taskText }, maxItems: 3, maxChars: knowledgeMaxChars });
   const profile = withExpertise ? require('../expert-evolution/expertise.cjs').getProfile({root, agentId:agent.agentId, maxChars:Math.min(3000, maxChars - 1000), compact:true, task:{command:command.commandId,title:taskTitle,text:taskText}}) : null;
-  const payload = { schemaVersion: 1, capsule, knowledge, ...(profile ? {profile} : {}), sources: [agent.sourceOfTruth, agent.pointer, command.target], gaps: [...(knowledge.gaps || []), ...(profile ? ['Expert program coverage is planned; source inventory does not establish validated expertise.'] : []), ...(capsule.fallback ? ['Task is exposed by squad pool fallback, not explicitly bound to this specialist.'] : [])], charsUsed: 0, maxChars, limits: ['Offline assembly only; no model execution or global settings change.', 'Structural assembly is not proof of behavioral improvement.'] };
+  const payload = { schemaVersion: 1, capsule, brief, knowledge, ...(profile ? {profile} : {}), sources: [agent.sourceOfTruth, agent.pointer, command.target], gaps: [...(knowledge.gaps || []), ...(profile ? ['Expert program coverage is planned; source inventory does not establish validated expertise.'] : []), ...(capsule.fallback ? ['Task is exposed by squad pool fallback; semantic binding status is separately explicit.'] : [])], charsUsed: 0, maxChars, limits: ['Offline assembly only; no model execution or global settings change.', 'Structural assembly is not proof of behavioral improvement.'] };
   for (let iteration = 0; iteration < 4; iteration++) {
     const length = JSON.stringify(payload).length;
     if (length === payload.charsUsed) break;
@@ -63,7 +64,7 @@ function parseArgs(args) {
   for (let i = 1; i < args.length; i++) {
     const flag = args[i];
     if (flag === '--json') continue;
-    const key = { '--task': 'task', '--max-chars': 'maxChars', '--knowledge-max-chars': 'knowledgeMaxChars', '--model': 'model' }[flag];
+    const key = { '--task': 'task', '--brief': 'brief', '--max-chars': 'maxChars', '--knowledge-max-chars': 'knowledgeMaxChars', '--model': 'model' }[flag];
     if (!key || !args[i + 1] || args[i + 1].startsWith('--')) throw new Error(`Invalid option ${flag}`);
     options[key] = key.includes('Chars') ? Number(args[++i]) : args[++i];
   }

@@ -14,9 +14,28 @@
         "checkedAt": "2026-10-02T09:30:22.879Z",
         "method": "Native enabled model catalog, configured current model and successful explicit-model subagent execution",
         "evidence": [
-          "https://learn.chatgpt.com/docs/app-server#message-schema",
-          "Native subagents priority_expertise, framework_catalog and expert_runtime started with gpt-6.1-sol in this execution"
-        ]
+          {
+            "path": "research/expert-evolution/benchmark-protocol.json",
+            "sha256": "909a46da5adad0f9102ea4c9182fe03dd553b08938e25f6e9f964222f2ed4dc1"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-baseline-output.json",
+            "sha256": "9ce13afe2b765af872bca743e6aabc4c3de44256ef7e7896f2005becc646f7da"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-enriched-output.json",
+            "sha256": "fa66e24e250cdb43df8feff0f089c7a7657829c2ab6c15fbe67722d0db6b0e9c"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-results.json",
+            "sha256": "e6bb3c4cc73b252558b0fa774838e3b3f40e6b3df292e16c8d061e25746837e8"
+          }
+        ],
+        "expiresAt": "2026-11-01T09:30:22.879Z",
+        "receipt": {
+          "path": "research/expert-evolution/native-availability-receipt.json",
+          "sha256": "d7241c97e69aa1b4a50e5966a4aa0a47080a6a93ccd1dc99ee91db94f6ca4887"
+        }
       },
       "evaluation": {
         "passed": false,
@@ -30,7 +49,8 @@
       },
       "apiId": null,
       "apiIdNote": "This is the native Codex model ID. No public API alias is inferred.",
-      "contextPolicy": "Retrieve task-relevant bounded evidence; the full serialized capsule, including profile, must remain within the measured runtime budget."
+      "contextPolicy": "Retrieve task-relevant bounded evidence; the full serialized capsule, including profile, must remain within the measured runtime budget.",
+      "accountScope": "current-codex-session"
     },
     {
       "id": "claude-opus-5-5",

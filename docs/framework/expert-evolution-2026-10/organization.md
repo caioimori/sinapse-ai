@@ -210,3 +210,19 @@ O developer verificou classificação, consumidores, ordem/hash reproduzível,
 raiz Git nativa Windows, traversal e symlinks. Paridade e fixtures de instalação
 passaram; a [verificação final](verification.md) registra a coorte integrada e
 a preservação. Nenhuma instalação no perfil pessoal ou publicação é inferida.
+
+## Entrada pelo entregável — T05
+
+`node scripts/expert-evolution/catalog.cjs deliverable <termo>` resolve frontend,
+motion, Reel, carrossel e anúncio sem exigir o ID do agente. Aliases incluem
+interface, animação, vídeo, carousel e ads. O índice é
+`research/expert-evolution/deliverable-index.json`.
+
+Cada consulta confere o resolver canônico e o binding semântico, conserva path e
+hash da tarefa e apresenta a lacuna daquele entregável. Anúncio/copy é a quinta
+necessidade assumida para esta navegação; ela pode ser renomeada sem alterar as
+outras quatro. Roteamento não equivale a expertise ou aprovação do produto.
+
+A biblioteca ignorada e o ciclo de feedback estão descritos em
+[persistent-learning.md](persistent-learning.md). Nenhum arquivo foi movido ou
+removido, e a aquisição mantém no máximo três famílias ativas.

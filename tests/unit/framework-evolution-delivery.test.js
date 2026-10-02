@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const crypto = require('node:crypto');
-const { deliverFrameworkEvolution, installedPath, PAYLOAD, EXPERT_PAYLOAD } = require('../../bin/lib/framework-evolution-delivery');
+const { deliverFrameworkEvolution, installedPath, PAYLOAD, EXPERT_PAYLOAD, OPTIONAL_EXPERT_PAYLOAD } = require('../../bin/lib/framework-evolution-delivery');
 const { deliverGlobalProviderAdapters } = require('../../bin/lib/global-provider-adapters');
 const { inventory } = require('../../scripts/framework-evolution/inventory.cjs');
 const root = path.resolve(__dirname, '../..');
@@ -23,14 +23,25 @@ describe('framework evolution distribution into isolated destinations', () => {
     return JSON.parse(execFileSync(process.execPath, [script, agent, '--task', task, '--json'], { encoding: 'utf8' }));
   }
   test('real global adapter delivery makes an executable confined runtime with spaced HOME and receipt', () => {
+    const packageFixture=path.join(temporary,'frozen package');
+    const index=require('../../.codex/scripts/resolve-codex-agent.js').loadCodexAgentIndex(root);
+    const bindings=JSON.parse(fs.readFileSync(path.join(root,'research/expert-evolution/task-bindings.json'))).bindings;
+    const native=JSON.parse(fs.readFileSync(path.join(root,'research/expert-evolution/native-availability-receipt.json')));
+    const registry=JSON.parse(fs.readFileSync(path.join(root,'.codex/command-registry.json')));
+    const assets=[...PAYLOAD,...EXPERT_PAYLOAD,...OPTIONAL_EXPERT_PAYLOAD,'.codex/scripts/resolve-codex-agent.js','.codex/scripts/resolve-codex-command.js','.codex/command-registry.json','research/expert-evolution/native-availability-receipt.json',...native.evidence.map(ref=>ref.path),...Object.values(index).flatMap(entry=>[entry.pointerPath,entry.sourcePath]),...bindings.map(binding=>binding.taskPath),...Object.values(registry.agents).flatMap(agent=>Object.values(agent.commands).filter(command=>command.target.startsWith('.codex/tasks/')).map(command=>command.target)),'.sinapse-ai/development/tasks/dev-develop-story.md'];
+    for(const relative of new Set(assets))copy(relative,path.join(packageFixture,relative));
     const home = path.join(temporary, 'home with spaces');
     const installed = path.join(home, '.sinapse');
     const commandDir = path.join(installed, '.generated/agents');
-    for (const source of inventory(root).assets.sourceAgents) copy(source, path.join(installed, installedPath(source)));
+    for (const source of inventory(root).assets.sourceAgents) {
+      const destination=path.join(installed,installedPath(source));
+      fs.mkdirSync(path.dirname(destination),{recursive:true});
+      fs.copyFileSync(path.join(packageFixture,source),destination);
+    }
     for (const source of ['.sinapse-ai/development/tasks/dev-develop-story.md', 'squads/squad-copy/tasks/write-ad-copy-variations.md']) copy(source, path.join(installed, installedPath(source)));
     fs.mkdirSync(commandDir, { recursive: true });
     for (const id of ['developer', 'ad-copywriter', 'snps-orqx']) fs.writeFileSync(path.join(commandDir, `${id}.md`), `---\nname: ${id}\ndescription: Canonical test stub\n---\nRead canonical source.\n`);
-    const delivered = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir: commandDir });
+    const delivered = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir: commandDir,frameworkEvolutionPackageRoot:packageFixture });
     expect(delivered.frameworkEvolution.status).toBe('delivered');
     for (const entry of delivered.frameworkEvolution.files) expect(digest(fs.readFileSync(path.join(installed, entry.path)))).toBe(entry.sha256);
     const toml = fs.readFileSync(path.join(home, '.codex/agents/developer.toml'), 'utf8');
@@ -44,17 +55,31 @@ describe('framework evolution distribution into isolated destinations', () => {
     const script = path.join(installed, 'scripts/framework-evolution/runtime.cjs');
     expect(query(script, 'developer', 'dev-develop-story').capsule.sourceOfTruth).toBe('core/agents/developer.md');
     expect(query(script, 'ad-copywriter', 'write-ad-copy-variations').capsule.task.target).toBe('squad-copy/tasks/write-ad-copy-variations.md');
+    const expertise = require('../../scripts/expert-evolution/expertise.cjs');
+    const installedProgram = expertise.loadProgram(installed);
+    expect(installedProgram.bindings.bindings).toHaveLength(18);
+    expect(expertise.validateTaskBindings(installedProgram, {root:installed})).toEqual({valid:true,errors:[]});
+    for(const binding of bindings){
+      const relative=installedPath(binding.taskPath);
+      expect(fs.readFileSync(path.join(installed,relative))).toEqual(fs.readFileSync(path.join(packageFixture,binding.taskPath)));
+      expect(delivered.frameworkEvolution.files).toContainEqual({path:relative,sha256:binding.taskSha256});
+    }
+    expect(query(script, 'ad-copywriter', 'create-ugc-script').profile.selectionEvidence.status).toBe('bound');
+    expect(query(script, 'dx-frontend-engineer', 'implement-component-library').profile.selectionEvidence.status).toBe('bound');
+    expect(()=>query(script,'ad-copywriter','invented-task')).toThrow();
     expect(query(script, 'sinapse-orqx', 'route').capsule.agentId).toBe('snps-orqx');
-    const second = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir: commandDir });
+    const second = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir: commandDir,frameworkEvolutionPackageRoot:packageFixture });
     expect(second.frameworkEvolution.changedFiles).toBe(0);
     fs.appendFileSync(path.join(installed, 'scripts/framework-evolution/runtime.cjs'), '\n// user edit\n');
-    expect(() => deliverFrameworkEvolution({ packageRoot: root, targetRoot: installed, layout: 'global' })).toThrow('Preserving modified');
+    expect(() => deliverFrameworkEvolution({ packageRoot: packageFixture, targetRoot: installed, layout: 'global' })).toThrow('Preserving modified');
   });
   test('project payload delivery runs against the existing project canonical layout', () => {
     const project = path.join(temporary, 'project');
     for (const source of ['.codex/scripts/resolve-codex-agent.js', '.codex/scripts/resolve-codex-command.js', '.codex/command-registry.json', '.codex/agents/developer.md', '.sinapse-ai/development/agents/developer.md', '.sinapse-ai/development/tasks/dev-develop-story.md']) copy(source, path.join(project, source));
     const delivered = deliverFrameworkEvolution({ packageRoot: root, targetRoot: project });
-    expect(delivered.files).toHaveLength(PAYLOAD.length + EXPERT_PAYLOAD.length);
+    const native=JSON.parse(fs.readFileSync(path.join(root,'research/expert-evolution/native-availability-receipt.json')));
+    const expected=[...PAYLOAD,...EXPERT_PAYLOAD,...OPTIONAL_EXPERT_PAYLOAD.filter(relative=>fs.existsSync(path.join(root,relative))),'research/expert-evolution/native-availability-receipt.json',...native.evidence.map(ref=>ref.path)];
+    expect(delivered.files.map(entry=>entry.path).sort()).toEqual([...new Set(expected)].sort());
     const context = query(path.join(project, 'scripts/framework-evolution/runtime.cjs'), 'developer', 'dev-develop-story');
     expect(context.charsUsed).toBeLessThanOrEqual(context.maxChars);
     expect(context.capsule.sourceOfTruth).toBe('.sinapse-ai/development/agents/developer.md');

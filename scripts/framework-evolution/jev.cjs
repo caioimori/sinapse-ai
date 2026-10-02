@@ -111,13 +111,112 @@ function createLedger({authorizedUsd, authorizationId} = {}) {
     reservedUsd += usd; return reservedUsd;
   }, get reservedUsd() { return reservedUsd; }};
 }
+const flights = new Map();
+const digest = value => crypto.createHash('sha256').update(value).digest('hex');
+function regularRead(file) {
+  if (!fs.existsSync(file)) return null;
+  if (fs.lstatSync(file).isSymbolicLink() || !fs.statSync(file).isFile()) throw new Error('Unsafe Jev storage file');
+  return fs.readFileSync(file);
+}
+function storageRoot(directory) {
+  const requested = path.resolve(directory);
+  for (let cursor = requested; cursor !== path.dirname(cursor); cursor = path.dirname(cursor)) if (fs.lstatSync(cursor).isSymbolicLink()) throw new Error('Unsafe Jev storage ancestor');
+  return fs.realpathSync(requested);
+}
+function persist(file, value) {
+  const temp = `${file}.${crypto.randomUUID()}.tmp`;
+  const fd = fs.openSync(temp, 'wx', 0o600);
+  try { fs.writeFileSync(fd, JSON.stringify(value)); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
+  try { if (fs.existsSync(file)) regularRead(file); fs.renameSync(temp, file); } finally { if (fs.existsSync(temp)) fs.unlinkSync(temp); }
+}
+function takeLock(file) {
+  const token = JSON.stringify({pid:process.pid,nonce:crypto.randomUUID()});
+  try { fs.writeFileSync(file, token, {flag:'wx',mode:0o600}); }
+  catch (error) {
+    if (error.code !== 'EEXIST') throw error;
+    const old = regularRead(file), owner = JSON.parse(old);
+    let alive = true;
+    try { process.kill(owner.pid, 0); } catch (probe) { if (probe.code === 'ESRCH') alive = false; }
+    if (!alive && regularRead(file)?.equals(old)) { fs.unlinkSync(file); return takeLock(file); }
+    return null;
+  }
+  return () => { if (regularRead(file)?.toString() === token) fs.unlinkSync(file); };
+}
+function createDurableLedger({directory, authorizedUsd, authorizationId} = {}) {
+  createLedger({authorizedUsd,authorizationId});
+  const base = storageRoot(directory), file = path.join(base, `authorization-${digest(authorizationId)}.json`);
+  function read() {
+    const bytes = regularRead(file);
+    const state = bytes ? JSON.parse(bytes) : {schemaVersion:1,authorizationId,authorizedUsd,reservedUsd:0,entries:{}};
+    if (state.schemaVersion !== 1 || state.authorizationId !== authorizationId || state.authorizedUsd !== authorizedUsd || !Number.isFinite(state.reservedUsd) || state.reservedUsd < 0 || state.reservedUsd > authorizedUsd + Number.EPSILON || !object(state.entries)) throw new Error('Invalid/conflicting durable Jev authorization');
+    return state;
+  }
+  function update(fn) {
+    const release = takeLock(`${file}.lock`);
+    if (!release) throw new Error('Durable Jev authorization busy; no attempt admitted');
+    try { const state = read(); const result = fn(state); persist(file,state); return result; } finally { release(); }
+  }
+  function reserveInto(state, usd) {
+    if (!Number.isFinite(usd) || usd <= 0 || state.reservedUsd + usd > authorizedUsd + Number.EPSILON) throw new Error('Jev budget exhausted before attempt');
+    state.reservedUsd += usd;
+    return state.reservedUsd;
+  }
+  function assertKey(key){if(!/^[a-f0-9]{64}$/.test(key))throw new Error('Invalid extraction receipt key');}
+  read();
+  return {durable:true, directory:base, authorizationId, authorizedUsd,
+    reserve(usd) { return update(state => reserveInto(state,usd)); },
+    begin(key, usd) {
+      assertKey(key);
+      let blocked;
+      const result = update(state => {
+        const prior = state.entries[key];
+        if (prior && ['pending','charge-uncertain','failed','completed'].includes(prior.status)) {
+          if (prior.status === 'pending') prior.status = 'charge-uncertain';
+          blocked = `Jev ${prior.status} receipt blocks automatic retry`;
+          return null;
+        }
+        reserveInto(state,usd);
+        state.entries[key] = {schemaVersion:1,cacheKey:key,model:MODEL,status:'pending',reservedUsd:usd,startedAt:new Date().toISOString()};
+        return state.entries[key];
+      });
+      if (blocked) throw new Error(blocked);
+      return result;
+    },
+    finish(key, status, extra = {}) { return update(state => {
+      assertKey(key);
+      if(!['completed','failed','charge-uncertain','retry-admitted'].includes(status))throw new Error('Invalid extraction receipt status');
+      if (!state.entries[key]) throw new Error('Missing Jev write-ahead receipt');
+      Object.assign(state.entries[key],extra,{status,finishedAt:new Date().toISOString()});
+      return state.entries[key];
+    }); },
+    getReceipt(key) { assertKey(key);return read().entries[key]; },
+    get reservedUsd() { return read().reservedUsd; }};
+}
+async function runSingleFlight(key, operation) {
+  if (flights.has(key)) return flights.get(key);
+  const promise = Promise.resolve().then(operation);
+  flights.set(key,promise);
+  try { return await promise; } finally { if (flights.get(key) === promise) flights.delete(key); }
+}
+function validateExtractionReceipt(receipt, payload, cacheKey = plan(payload).cacheKey) {
+  if (!object(receipt) || receipt.schemaVersion !== 1 || receipt.cacheKey !== cacheKey || receipt.model !== payload.model || !['pending','completed','failed','charge-uncertain'].includes(receipt.status) || !Number.isFinite(receipt.reservedUsd) || receipt.reservedUsd < 0) throw new Error('Invalid extraction receipt');
+  if (receipt.status === 'completed') {
+    validateResponse(receipt.response,payload);
+    const actual = receipt.response.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
+    if (receipt.actualUsd !== actual || actual > receipt.reservedUsd) throw new Error('Invalid extraction billing receipt');
+  }
+  return receipt;
+}
 // Caller owns persistence/retention. Keys never contain request text or secrets.
 function createFileCache(directory) {
-  const base = fs.realpathSync(directory);
+  const base = storageRoot(directory);
   const file = key => { if (!/^[a-f0-9]{64}$/.test(key)) throw new Error('Invalid cache key'); return path.join(base, `${key}.json`); };
-  return {get(key) { const target = file(key); if (!fs.existsSync(target)) return undefined; if (fs.lstatSync(target).isSymbolicLink()) throw new Error('Cache symlink rejected'); return JSON.parse(fs.readFileSync(target, 'utf8')); }, set(key, value) { const target = file(key); fs.writeFileSync(target, JSON.stringify(value), {flag: 'wx', mode: 0o600}); }};
+  return {durable:true,directory:base,
+    get(key) { const bytes = regularRead(file(key)); return bytes ? JSON.parse(bytes) : undefined; },
+    set(key,value) { const target=file(key),prior=regularRead(target); if(prior){if(canonical(JSON.parse(prior))!==canonical(value))throw new Error('Conflicting Jev cache receipt');return;} persist(target,value); },
+    async lock(key, timeoutMs) { const started=Date.now(); let release; while(!(release=takeLock(`${file(key)}.lock`))){if(Date.now()-started>=timeoutMs)throw new Error('Jev cache single-flight timeout');await new Promise(resolve=>setTimeout(resolve,10));}return release; }};
 }
-async function execute(payload, {offline = true, authorized = false, apiKey, ledger, cache = new Map(), maxAttempts = 1, timeoutMs = 10000, transport = globalThis.fetch} = {}) {
+async function execute(payload, {offline = true, authorized = false, apiKey, ledger, cache, maxAttempts = 1, timeoutMs = 10000, transport = globalThis.fetch} = {}) {
   validatePayload(payload);
   payload = JSON.parse(JSON.stringify(payload));
   const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
@@ -126,36 +225,57 @@ async function execute(payload, {offline = true, authorized = false, apiKey, led
   if (offline) return prepared;
   if (authorized !== true || !validText(apiKey) || !ledger || typeof ledger.reserve !== 'function') throw new Error('Paid Jev execution requires explicit authorization, key and budget ledger');
   if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60000 || typeof transport !== 'function') throw new Error('Invalid Jev timeout/transport');
-  const cached = cache.get(prepared.cacheKey);
-  if (cached) return {mode: 'cache', called: false, response: validateResponse(cached, payload), cacheKey: prepared.cacheKey};
-  const started = Date.now();
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    const remaining = timeoutMs - (Date.now() - started);
-    if (remaining <= 0) throw new Error('Jev total timeout');
-    ledger.reserve(prepared.reservedUsdPerAttempt); // No refund: even failed attempts may have been charged.
-    const controller = new AbortController();
-    let timer;
-    const timedOut = new Promise((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(new Error('Jev total timeout')); }, remaining); });
+  if (!cache && ledger.durable) cache = createFileCache(ledger.directory);
+  if (!ledger.durable || !cache?.durable) throw new Error('Paid live Jev requires durable ledger and cache');
+  const namespace = ledger.durable ? `${ledger.directory}:${ledger.authorizationId}` : ledger;
+  if (!ledger.durable && !ledger.flightId) Object.defineProperty(ledger,'flightId',{value:crypto.randomUUID()});
+  return runSingleFlight(`${typeof namespace === 'string' ? namespace : ledger.flightId}:${prepared.cacheKey}`, async () => {
+    const release = cache.lock ? await cache.lock(prepared.cacheKey,timeoutMs) : () => {};
     try {
-      const response = await Promise.race([transport('https://api.typesafe.ai/v1/systemone', {method: 'POST', headers: {'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}`}, body: JSON.stringify(payload), signal: controller.signal}), timedOut]);
-      if (!response.ok) {
-        if (![429, 529].includes(response.status) || attempt === maxAttempts) throw new Error(`Jev HTTP ${response.status}`);
-        // No hidden retry; bounded delay consumes the same total deadline.
-        const retryHeader = response.headers?.get('retry-after');
-        const seconds = retryHeader === null || retryHeader === undefined ? 2 ** (attempt - 1) : Number(retryHeader);
-        if (!Number.isFinite(seconds) || seconds < 0 || Date.now() - started + seconds * 1000 >= timeoutMs) throw new Error('Jev retry exceeds total timeout');
-        await Promise.race([new Promise(resolve => setTimeout(resolve, seconds * 1000)), timedOut]);
-        continue;
+      const cached = cache.get(prepared.cacheKey);
+      if (cached) {
+        const value = cached.schemaVersion === 1 ? validateExtractionReceipt(cached,payload).response : validateResponse(cached,payload);
+        if (cached.schemaVersion === 1 && cached.status !== 'completed') throw new Error('Incomplete Jev cache receipt');
+        return {mode:'cache',called:false,response:value,cacheKey:prepared.cacheKey};
       }
-      const raw = await Promise.race([response.json(), timedOut]);
-      const validated = validateResponse(raw, payload);
-      const actualUsd = validated.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
-      if (actualUsd > prepared.reservedUsdPerAttempt) throw new Error('Jev usage exceeds reservation');
-      cache.set(prepared.cacheKey, validated);
-      return {mode: 'live', called: true, attempts: attempt, actualUsd, reservedUsd: ledger.reservedUsd, response: validated, cacheKey: prepared.cacheKey};
-    } finally { clearTimeout(timer); }
-  }
-  throw new Error('Jev attempts exhausted');
+      const started = Date.now();
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        const remaining = timeoutMs - (Date.now() - started);
+        if (remaining <= 0) throw new Error('Jev total timeout');
+        if (ledger.durable) ledger.begin(prepared.cacheKey,prepared.reservedUsdPerAttempt);
+        else ledger.reserve(prepared.reservedUsdPerAttempt); // Never refund a possibly charged attempt.
+        const controller = new AbortController();
+        let timer;
+        const timedOut = new Promise((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(new Error('Jev total timeout')); }, remaining); });
+        try {
+          const response = await Promise.race([transport('https://api.typesafe.ai/v1/systemone', {method: 'POST', headers: {'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}`}, body: JSON.stringify(payload), signal: controller.signal}), timedOut]);
+          if (!response.ok) {
+            if (ledger.durable) ledger.finish(prepared.cacheKey,'failed',{httpStatus:response.status});
+            if (![429, 529].includes(response.status) || attempt === maxAttempts) throw new Error(`Jev HTTP ${response.status}`);
+            // No hidden retry; bounded delay consumes the same total deadline.
+            const retryHeader = response.headers?.get('retry-after');
+            const seconds = retryHeader === null || retryHeader === undefined ? 2 ** (attempt - 1) : Number(retryHeader);
+            if (!Number.isFinite(seconds) || seconds < 0 || Date.now() - started + seconds * 1000 >= timeoutMs) throw new Error('Jev retry exceeds total timeout');
+            await Promise.race([new Promise(resolve => setTimeout(resolve, seconds * 1000)), timedOut]);
+            if (ledger.durable) ledger.finish(prepared.cacheKey,'retry-admitted');
+            continue;
+          }
+          const raw = await Promise.race([response.json(), timedOut]);
+          const validated = validateResponse(raw, payload);
+          const actualUsd = validated.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
+          if (actualUsd > prepared.reservedUsdPerAttempt) throw new Error('Jev usage exceeds reservation');
+          const receipt = {schemaVersion:1,status:'completed',cacheKey:prepared.cacheKey,model:MODEL,reservedUsd:prepared.reservedUsdPerAttempt,actualUsd,response:validated};
+          cache.set(prepared.cacheKey, cache.durable ? validateExtractionReceipt(receipt,payload) : validated);
+          if (ledger.durable) ledger.finish(prepared.cacheKey,'completed',{actualUsd});
+          return {mode: 'live', called: true, attempts: attempt, actualUsd, reservedUsd: ledger.reservedUsd, response: validated, cacheKey: prepared.cacheKey};
+        } catch (error) {
+          if (ledger.durable && ledger.getReceipt(prepared.cacheKey)?.status === 'pending') ledger.finish(prepared.cacheKey,'charge-uncertain');
+          throw error;
+        } finally { clearTimeout(timer); }
+      }
+      throw new Error('Jev attempts exhausted');
+    } finally { release(); }
+  });
 }
 if (require.main === module) {
   try {
@@ -167,4 +287,4 @@ if (require.main === module) {
     process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
   } catch (error) { process.stderr.write(`${error.message}\n`); process.exitCode = 1; }
 }
-module.exports = {MODEL, PRICING, validatePayload, validateResponse, plan, planBatch, createLedger, createFileCache, execute};
+module.exports = {MODEL, PRICING, validatePayload, validateResponse, plan, planBatch, createLedger, createDurableLedger, createFileCache, runSingleFlight, validateExtractionReceipt, execute};

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T10:41:03Z",
+  "method": "GitHub public REST readonly; web tool inaccessible, native REST fallback observed",
+  "repository": "https://github.com/SynkraAI/aiox-core",
+  "release": {
+    "tag": "v5.4.1",
+    "publishedAt": "2026-08-15T18:02:15Z",
+    "url": "https://github.com/SynkraAI/aiox-core/releases/tag/v5.4.1"
+  },
+  "head": {
+    "sha": "4ef6530ff03b83aea953e4a426f95e012b8b70c5",
+    "committedAt": "2026-08-15T18:08:09Z",
+    "url": "https://github.com/SynkraAI/aiox-core/commit/4ef6530ff03b83aea953e4a426f95e012b8b70c5"
+  },
+  "matchesPriorPinnedSnapshot": true,
+  "newUpstreamDelta": false,
+  "scope": "No upstream installer executed and no protected/proprietary code imported"
+}

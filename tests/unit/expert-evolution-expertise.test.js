@@ -8,7 +8,7 @@ const j=require('../../scripts/framework-evolution/jev.cjs');
 const hash=text=>crypto.createHash('sha256').update(text).digest('hex');
 let root;
 const source=()=>({id:'licensed-sample',title:'Owned interview',kind:'text',provenance:{uri:'urn:sinapse:sample',capturedAt:'2026-10-02',capturedBy:'fixture-author',locator:'pages 1-2'},rights:{authorized:true,basis:'owned',evidence:'Author-created fixture'},units:[{locator:'page 1',text:'A contextual decision with an explicit exception. '.repeat(60)}]});
-beforeEach(()=>{root=fs.mkdtempSync(path.join(os.tmpdir(),'expert-evolution-'));fs.mkdirSync(path.join(root,'research/expert-evolution'),{recursive:true});for(const f of ['expert-profiles.json','source-program.json','jev-use-cases.json'])fs.copyFileSync(path.join(__dirname,'../../research/expert-evolution',f),path.join(root,'research/expert-evolution',f));});
+beforeEach(()=>{root=fs.mkdtempSync(path.join(os.tmpdir(),'expert-evolution-'));fs.mkdirSync(path.join(root,'research/expert-evolution'),{recursive:true});for(const f of ['expert-profiles.json','source-program.json','jev-use-cases.json','task-bindings.json'])fs.copyFileSync(path.join(__dirname,'../../research/expert-evolution',f),path.join(root,'research/expert-evolution',f));});
 afterEach(()=>fs.rmSync(root,{recursive:true,force:true}));
 test('172 canonical profiles and 17 squads have differentiated missions, outputs, criteria and source programs',()=>{
   const p=e.loadProgram();expect(e.validateProgram(p)).toEqual({valid:true,errors:[]});
@@ -76,7 +76,7 @@ test('tampered segment, undocumented use case and absent case context fail befor
 test('promotion requires independent held-out per-competency evidence; eligibility never mutates profile',()=>{
   const profile=e.getProfile({agentId:'dx-frontend-engineer'}),evidence=['a','b'].map(id=>({id,status:'READ',locator:'section '+id,excerpt:'Original authorized evidence '+id,contentSha256:hash('Original authorized evidence '+id)}));
   const evaluation={agentId:profile.agentId,independent:true,heldOut:true,passed:true,receiptId:'review-1',reviewer:'independent-reviewer',executor:'implementation-author',model:j.MODEL,corpusSha256:'a'.repeat(64),caseIds:['positive','negative'],competencyResults:profile.competencies.map(competency=>({competency,passed:true,evidenceIds:['a','b'],caseIds:['positive','negative'],negativeCaseId:'negative'}))};
-  expect(e.assessPromotion({profile,evidence,evaluation})).toMatchObject({eligibleForReview:true,promoted:false});expect(profile.status).toBe('planned');
+  expect(()=>e.assessPromotion({profile,evidence,evaluation})).toThrow('resolvable typed artifact receipt');expect(profile.status).toBe('planned');
   expect(()=>e.assessPromotion({profile,evidence,evaluation:{...evaluation,independent:false}})).toThrow();expect(()=>e.assessPromotion({profile,evidence,evaluation:{...evaluation,competencyResults:[]}})).toThrow('competency');expect(()=>e.assessPromotion({profile,evidence:evidence.slice(0,1),evaluation})).toThrow();
 });
 test('ingest rejects active writer locks and reconstructs bounded Unicode chunks without loss',()=>{
@@ -95,7 +95,7 @@ test('unsafe numeric metadata and absent per-competency negative evaluation reje
 });
 test('compact runtime profile preserves gaps and read/candidate boundaries within complete JSON budget',()=>{
   const architecture=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'setup-frontend-architecture',title:'Frontend architecture documentation',text:'architecture routing boundaries'}});
-  const storybook=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'setup-storybook',title:'Storybook stories',text:'Storybook isolation'}});
+  const storybook=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'setup-storybook-integration',title:'Storybook stories',text:'Storybook isolation'}});
   expect(JSON.stringify(architecture).length).toBeLessThanOrEqual(3000);expect(architecture.validatedExpertise).toBe(false);expect(architecture.status).toBe('planned');expect(architecture.gaps).toHaveLength(2);
   expect(architecture.deliverables[0].id).not.toBe(storybook.deliverables[0].id);expect(architecture.references.some(r=>r.status==='READ'&&r.contentSha256)).toBe(true);
   expect(()=>e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:256})).toThrow('Complete JSON');

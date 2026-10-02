@@ -161,6 +161,23 @@ function queryAgent(catalog, id) {
 }
 function querySquad(catalog, id) { const squad = catalog.squads.find(entry => entry.id === id); if (!squad) throw new Error(`Unknown squad: ${id}`); return squad; }
 function queryPaths(catalog, responsibility) { if (!RESPONSIBILITIES.includes(responsibility)) throw new Error(`Unknown responsibility: ${responsibility}`); return catalog.files.filter(file => file.responsibility === responsibility); }
+function queryDeliverable(term, {root = ROOT} = {}) {
+  const index = JSON.parse(fs.readFileSync(safeFile(root, 'research/expert-evolution/deliverable-index.json'), 'utf8'));
+  if (index.schemaVersion !== 1 || index.status !== 'navigation-not-expertise' || !Array.isArray(index.deliverables)) throw new Error('Invalid deliverable navigation index');
+  const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  const seen = new Map();
+  for (const item of index.deliverables) {
+    if (!item.id || !item.family || !item.gap || !Array.isArray(item.aliases)) throw new Error('Incomplete deliverable navigation');
+    for (const key of [item.id, ...item.aliases]) { const normalized = normalize(key); if (seen.has(normalized) && seen.get(normalized) !== item.id) throw new Error('Duplicate deliverable alias'); seen.set(normalized,item.id); }
+  }
+  const selected = index.deliverables.filter(item => [item.id, ...item.aliases].some(key => normalize(key) === normalize(term)));
+  if (selected.length !== 1) throw new Error(`Unknown or ambiguous deliverable: ${term}`);
+  const item = selected[0];
+  const resolved = require('../../.codex/scripts/resolve-codex-command.js').resolveCodexCommand(item.agentId,item.command,root);
+  const binding = require('./expertise.cjs').resolveTaskBinding({root,agentId:item.agentId,command:item.command});
+  if (!binding || resolved.agentId !== item.agentId || resolved.target !== binding.taskPath) throw new Error('Deliverable does not match exact canonical task binding');
+  return {...item,status:'resolved-navigation',canonical:{agentId:resolved.agentId,sourceOfTruth:resolved.sourceOfTruth,taskPath:resolved.target,taskSha256:binding.taskSha256,competencyIds:binding.competencyIds,deliverableIds:binding.deliverableIds},expertisePromotion:false};
+}
 function main(args = process.argv.slice(2), root = ROOT) {
   const command = args[0] || 'summary';
   const options = {root,include:[]};
@@ -173,13 +190,14 @@ function main(args = process.argv.slice(2), root = ROOT) {
     else if (!flag.startsWith('--') && !subject) subject = flag;
     else throw new Error(`Unknown option: ${flag}`);
   }
-  const catalog = refresh || options.include.length ? buildCatalog(options) : loadCatalog(options);
+  const catalog = command === 'deliverable' ? null : refresh || options.include.length ? buildCatalog(options) : loadCatalog(options);
   let result;
   if (command === 'validate') result = validateCatalog(catalog,{root});
   else if (command === 'summary') result = {schemaVersion:1,scope:catalog.scope,counts:catalog.counts,limits:catalog.limits};
   else if (command === 'agent') result = queryAgent(catalog,subject);
   else if (command === 'squad') result = querySquad(catalog,subject);
   else if (command === 'paths') result = queryPaths(catalog,options.responsibility);
+  else if (command === 'deliverable') result = queryDeliverable(subject,{root});
   else throw new Error('Usage: catalog.cjs summary|agent <id>|squad <id>|paths --responsibility <class>|validate [--source <path>] [--include <path>] [--refresh]');
   if (['agent','squad','paths'].includes(command)) {
     const selected = command === 'agent' ? [result.sourcePath,result.pointerPath,...result.adapters] : command === 'squad' ? [result.manifest,...result.knowledgePaths,...result.taskPaths,...result.workflowPaths] : result.map(file => file.path);
@@ -190,4 +208,4 @@ function main(args = process.argv.slice(2), root = ROOT) {
   return result;
 }
 if (require.main === module) { try { main(); } catch(error) { process.stderr.write(`${error.message}\n`); process.exitCode = 1; } }
-module.exports = {classifyPath,buildCatalog,validateCatalog,queryAgent,querySquad,queryPaths,loadCatalog,safeFile,exactRoot,main};
+module.exports = {classifyPath,buildCatalog,validateCatalog,queryAgent,querySquad,queryPaths,queryDeliverable,loadCatalog,safeFile,exactRoot,main};

@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "reviewScope": "Explicit reviewed priority contracts; no universal expertise claim",
+  "bindings": [
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "implement-component-library",
+      "sourceSha256": "a24905a9ab9b973f7bf3390ef36533dc45875d23e2f57993b0818638a06eb6e8",
+      "taskPath": "squads/squad-design/tasks/implement-component-library.md",
+      "taskSha256": "0db00a400efb6782bd190ab8c6afaa5c749b6501daa5fbc4fa79b042727cf847",
+      "competencyIds": [
+        "component-context",
+        "intrinsic-layout",
+        "logical-properties",
+        "flow-focus-contract",
+        "client-boundary",
+        "react-synchronization"
+      ],
+      "deliverableIds": [
+        "frontend-components"
+      ],
+      "requiredCriterionIds": [
+        "frontend-components-responsive",
+        "frontend-components-keyboard",
+        "frontend-components-boundary",
+        "frontend-components-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Implementar component library",
+        "rationale": "Components and modal behavior belong to implementation; formal accessibility audit remains delegated.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "implement-responsive-layouts",
+      "sourceSha256": "a24905a9ab9b973f7bf3390ef36533dc45875d23e2f57993b0818638a06eb6e8",
+      "taskPath": "squads/squad-design/tasks/implement-responsive-layouts.md",
+      "taskSha256": "4cf9456df0801e729a334bc1d470609e24375d7e4723d0f7ec41cfeac86adb8e",
+      "competencyIds": [
+        "component-context",
+        "intrinsic-layout",
+        "logical-properties",
+        "flow-focus-contract",
+        "client-boundary",
+        "react-synchronization"
+      ],
+      "deliverableIds": [
+        "frontend-components"
+      ],
+      "requiredCriterionIds": [
+        "frontend-components-responsive",
+        "frontend-components-keyboard",
+        "frontend-components-boundary",
+        "frontend-components-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Implementar component library",
+        "rationale": "Components and modal behavior belong to implementation; formal accessibility audit remains delegated.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "setup-storybook-integration",
+      "sourceSha256": "a24905a9ab9b973f7bf3390ef36533dc45875d23e2f57993b0818638a06eb6e8",
+      "taskPath": "squads/squad-design/tasks/setup-storybook-integration.md",
+      "taskSha256": "244d4fffecc6bc2e401a49196d54705f4d367738bbf378a7c93861b2e45e8d7e",
+      "competencyIds": [
+        "component-context"
+      ],
+      "deliverableIds": [
+        "frontend-storybook"
+      ],
+      "requiredCriterionIds": [
+        "frontend-storybook-isolation",
+        "frontend-storybook-states",
+        "frontend-storybook-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Setup Storybook",
+        "rationale": "Storybook maps to component isolation and stories, not architecture configuration.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "setup-frontend-architecture",
+      "sourceSha256": "a24905a9ab9b973f7bf3390ef36533dc45875d23e2f57993b0818638a06eb6e8",
+      "taskPath": "squads/squad-design/tasks/setup-frontend-architecture.md",
+      "taskSha256": "20eb13d98884fbf010fc6e61983048d1a19dbf0cc8de900687c79f5675e40ef9",
+      "competencyIds": [
+        "client-boundary"
+      ],
+      "deliverableIds": [
+        "frontend-architecture"
+      ],
+      "requiredCriterionIds": [
+        "frontend-architecture-boundaries",
+        "frontend-architecture-trace",
+        "frontend-architecture-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Configurar arquitetura frontend",
+        "rationale": "Architecture documentation maps to architecture decisions, not build tooling.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "configure-build-tooling",
+      "sourceSha256": "a24905a9ab9b973f7bf3390ef36533dc45875d23e2f57993b0818638a06eb6e8",
+      "taskPath": "squads/squad-design/tasks/configure-build-tooling.md",
+      "taskSha256": "9f37dd8945e6d4bd404ca65dc101f50b33608949416f039d2912cd2daf2ccb6e",
+      "competencyIds": [
+        "client-boundary"
+      ],
+      "deliverableIds": [
+        "frontend-build"
+      ],
+      "requiredCriterionIds": [
+        "frontend-build-build",
+        "frontend-build-bundle",
+        "frontend-build-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Configurar build tooling",
+        "rationale": "Build setup is distinct from architecture and Storybook stories.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "css-motion-artist",
+      "command": "create-css-animation",
+      "sourceSha256": "5acfb9cb35fe7f7a476cff0e7e43eee493189827b7a2a15a386d6221f65e0a98",
+      "taskPath": "squads/squad-animations/tasks/create-css-animation.md",
+      "taskSha256": "15a70d4be6c3059adb983ba1716882a4c214ef2a4e8bc8920ba092f5203db1d2",
+      "competencyIds": [
+        "reduced-motion-runtime",
+        "render-pipeline",
+        "layer-lifecycle",
+        "animation-scope",
+        "autoplay-control"
+      ],
+      "deliverableIds": [
+        "css-motion"
+      ],
+      "requiredCriterionIds": [
+        "css-motion-reduced",
+        "css-motion-lifecycle",
+        "css-motion-measure",
+        "css-motion-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Micro-Interactions",
+        "rationale": "CSS interaction and reduced-motion; WebGL-only diagnostics are excluded.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "css-motion-artist",
+      "command": "build-micro-interaction",
+      "sourceSha256": "5acfb9cb35fe7f7a476cff0e7e43eee493189827b7a2a15a386d6221f65e0a98",
+      "taskPath": "squads/squad-animations/tasks/build-micro-interaction.md",
+      "taskSha256": "f1715848e84991264802729f27d10f6bea5a57dbf10bb4c327de2171c5d3904f",
+      "competencyIds": [
+        "reduced-motion-runtime",
+        "render-pipeline",
+        "layer-lifecycle",
+        "animation-scope",
+        "autoplay-control"
+      ],
+      "deliverableIds": [
+        "css-motion"
+      ],
+      "requiredCriterionIds": [
+        "css-motion-reduced",
+        "css-motion-lifecycle",
+        "css-motion-measure",
+        "css-motion-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Micro-Interactions",
+        "rationale": "CSS interaction and reduced-motion; WebGL-only diagnostics are excluded.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "css-motion-artist",
+      "command": "ensure-animation-accessibility",
+      "sourceSha256": "5acfb9cb35fe7f7a476cff0e7e43eee493189827b7a2a15a386d6221f65e0a98",
+      "taskPath": "squads/squad-animations/tasks/ensure-animation-accessibility.md",
+      "taskSha256": "2983d71d4ccda4781fffa163655b1c2d7014c8f991d97bd66f78afd2d0cb964d",
+      "competencyIds": [
+        "reduced-motion-runtime",
+        "render-pipeline",
+        "layer-lifecycle",
+        "animation-scope",
+        "autoplay-control"
+      ],
+      "deliverableIds": [
+        "css-motion"
+      ],
+      "requiredCriterionIds": [
+        "css-motion-reduced",
+        "css-motion-lifecycle",
+        "css-motion-measure",
+        "css-motion-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Micro-Interactions",
+        "rationale": "CSS interaction and reduced-motion; WebGL-only diagnostics are excluded.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "animation-performance-engineer",
+      "command": "audit-animation-performance",
+      "sourceSha256": "eb758b1519555a2f6e32d1d7dd58974b6aa850c97a3a3ba88c4b4ad562a3e8b6",
+      "taskPath": "squads/squad-animations/tasks/audit-animation-performance.md",
+      "taskSha256": "9e8c63e458bf570024674bddd1a3ab10f1e6cd84246bbaefe2eb863f0a77c4e0",
+      "competencyIds": [
+        "reduced-motion-runtime",
+        "render-pipeline",
+        "device-validation",
+        "event-loop",
+        "animation-lifecycle",
+        "autoplay-control"
+      ],
+      "deliverableIds": [
+        "motion-performance"
+      ],
+      "requiredCriterionIds": [
+        "motion-performance-reduced",
+        "motion-performance-profile",
+        "motion-performance-cleanup",
+        "motion-performance-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Auditoria de performance",
+        "rationale": "Performance diagnosis and accessibility are reviewed; source numeric targets are not universal guarantees.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "animation-performance-engineer",
+      "command": "ensure-animation-accessibility",
+      "sourceSha256": "eb758b1519555a2f6e32d1d7dd58974b6aa850c97a3a3ba88c4b4ad562a3e8b6",
+      "taskPath": "squads/squad-animations/tasks/ensure-animation-accessibility.md",
+      "taskSha256": "2983d71d4ccda4781fffa163655b1c2d7014c8f991d97bd66f78afd2d0cb964d",
+      "competencyIds": [
+        "reduced-motion-runtime",
+        "render-pipeline",
+        "device-validation",
+        "event-loop",
+        "animation-lifecycle",
+        "autoplay-control"
+      ],
+      "deliverableIds": [
+        "motion-performance"
+      ],
+      "requiredCriterionIds": [
+        "motion-performance-reduced",
+        "motion-performance-profile",
+        "motion-performance-cleanup",
+        "motion-performance-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Auditoria de performance",
+        "rationale": "Performance diagnosis and accessibility are reviewed; source numeric targets are not universal guarantees.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "threejs-architect",
+      "command": "setup-threejs-scene",
+      "sourceSha256": "2931f7051e9f4c3e9ab00a45448440dde594921e9d274dfb149e252b7d420eca",
+      "taskPath": "squads/squad-animations/tasks/setup-threejs-scene.md",
+      "taskSha256": "9a426f3fdb378ed09b64bb0d93e09ce5e764966cdf59d0bc09273c2c615f41ce",
+      "competencyIds": [
+        "webgl-main-thread",
+        "webgl-resource-budget",
+        "resource-ownership"
+      ],
+      "deliverableIds": [
+        "threejs-scene"
+      ],
+      "requiredCriterionIds": [
+        "threejs-scene-resources",
+        "threejs-scene-trace",
+        "threejs-scene-fallback",
+        "threejs-scene-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Three.js",
+        "rationale": "WebGL supplements remain confined to a Three.js scene task.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "threejs-architect",
+      "command": "optimize-threejs-scene",
+      "sourceSha256": "2931f7051e9f4c3e9ab00a45448440dde594921e9d274dfb149e252b7d420eca",
+      "taskPath": "squads/squad-animations/tasks/optimize-threejs-scene.md",
+      "taskSha256": "c78846663db0b89628e9bf7ab91dec4c149e09f0128c3cc1471e96cf08b692ad",
+      "competencyIds": [
+        "webgl-main-thread",
+        "webgl-resource-budget",
+        "resource-ownership"
+      ],
+      "deliverableIds": [
+        "threejs-scene"
+      ],
+      "requiredCriterionIds": [
+        "threejs-scene-resources",
+        "threejs-scene-trace",
+        "threejs-scene-fallback",
+        "threejs-scene-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Three.js",
+        "rationale": "WebGL supplements remain confined to a Three.js scene task.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "production-director",
+      "command": "write-video-script",
+      "sourceSha256": "89f08557f91ed8a5de5168df163a0c7bba56845faa3e5716fc77c79325db57f9",
+      "taskPath": "squads/squad-courses/tasks/write-video-script.md",
+      "taskSha256": "5f76ac528cb59a08defce41a660bc034db195c73a3c20d8c1c7900bb329a50f3",
+      "competencyIds": [
+        "shot-dialogue-mapping",
+        "editing-coverage",
+        "caption-fidelity",
+        "audio-information"
+      ],
+      "deliverableIds": [
+        "video-production"
+      ],
+      "requiredCriterionIds": [
+        "video-production-continuity",
+        "video-production-rights",
+        "video-production-accessibility",
+        "video-production-vertical",
+        "video-production-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Escrever roteiro de video",
+        "rationale": "Script/shot tasks prepare video production; a vertical brief narrows output without inventing a render task.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "production-director",
+      "command": "create-shot-list",
+      "sourceSha256": "89f08557f91ed8a5de5168df163a0c7bba56845faa3e5716fc77c79325db57f9",
+      "taskPath": "squads/squad-courses/tasks/create-shot-list.md",
+      "taskSha256": "5936641919d770b66a2fe55e875dda2b65f4038c1fd804abd676a3a445be1323",
+      "competencyIds": [
+        "shot-dialogue-mapping",
+        "editing-coverage",
+        "caption-fidelity",
+        "audio-information"
+      ],
+      "deliverableIds": [
+        "video-production"
+      ],
+      "requiredCriterionIds": [
+        "video-production-continuity",
+        "video-production-rights",
+        "video-production-accessibility",
+        "video-production-vertical",
+        "video-production-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "Escrever roteiro de video",
+        "rationale": "Script/shot tasks prepare video production; a vertical brief narrows output without inventing a render task.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "content-engineer",
+      "command": "structure-carousel-progression",
+      "sourceSha256": "69fe5d09ba2ffd94f93084079ae1d969e5bc2df0899d618a1645d3631d21d979",
+      "taskPath": "squads/squad-content/tasks/structure-carousel-progression.md",
+      "taskSha256": "9e12b1768dee40347bd0ed4051e1a7c22c93f5766adea300dbba9dd8833a156c",
+      "competencyIds": [
+        "multimodal-content",
+        "information-hierarchy",
+        "accessible-content"
+      ],
+      "deliverableIds": [
+        "carousel-content"
+      ],
+      "requiredCriterionIds": [
+        "carousel-content-sequence",
+        "carousel-content-readability",
+        "carousel-content-rights",
+        "carousel-content-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "carrossel",
+        "rationale": "Carousel progression/content is declared; export/render evidence remains an execution obligation.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "content-engineer",
+      "command": "write-carousel-content",
+      "sourceSha256": "69fe5d09ba2ffd94f93084079ae1d969e5bc2df0899d618a1645d3631d21d979",
+      "taskPath": "squads/squad-content/tasks/write-carousel-content.md",
+      "taskSha256": "f0b126b9bc2a86f45aea59b524a7cdb510df4c371cab26df2087888b8df05246",
+      "competencyIds": [
+        "multimodal-content",
+        "information-hierarchy",
+        "accessible-content"
+      ],
+      "deliverableIds": [
+        "carousel-content"
+      ],
+      "requiredCriterionIds": [
+        "carousel-content-sequence",
+        "carousel-content-readability",
+        "carousel-content-rights",
+        "carousel-content-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "carrossel",
+        "rationale": "Carousel progression/content is declared; export/render evidence remains an execution obligation.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "ad-copywriter",
+      "command": "write-ad-copy-variations",
+      "sourceSha256": "6647cf33bb4277c862a758ecd54b397c16f8b06daa557e3dd96f7540403edaac",
+      "taskPath": "squads/squad-copy/tasks/write-ad-copy-variations.md",
+      "taskSha256": "4222325637e44af0bd5e82831c8e6e692ee051f10de5e9a47316a9ead29a2c5e",
+      "competencyIds": [
+        "headline",
+        "call-to-action"
+      ],
+      "deliverableIds": [
+        "ad-variations"
+      ],
+      "requiredCriterionIds": [
+        "ad-variations-message",
+        "ad-variations-claims",
+        "ad-variations-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "ad copy",
+        "rationale": "Distinct ad variation task uses message/action mechanisms.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    },
+    {
+      "agentId": "ad-copywriter",
+      "command": "create-ugc-script",
+      "sourceSha256": "6647cf33bb4277c862a758ecd54b397c16f8b06daa557e3dd96f7540403edaac",
+      "taskPath": "squads/squad-copy/tasks/create-ugc-script.md",
+      "taskSha256": "b113742b1067ac60889139d12e7ec6ab26671f48532519fb8ba699f4eb65e161",
+      "competencyIds": [
+        "social-proof"
+      ],
+      "deliverableIds": [
+        "ugc-script"
+      ],
+      "requiredCriterionIds": [
+        "ugc-script-proof",
+        "ugc-script-script",
+        "ugc-script-authority"
+      ],
+      "review": {
+        "method": "Canonical responsibility/task/output compared by meaning; no positional inference",
+        "locator": "ad copy",
+        "rationale": "UGC peer-proof is separate from headline variations.",
+        "status": "semantic-reviewed-not-evaluated"
+      }
+    }
+  ]
+}

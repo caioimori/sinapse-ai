@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lume — um projeto, três decisões</title>
+  <link rel="stylesheet" href="../shared.css">
+  <style>
+    .media-shell { max-width: 1200px; margin: auto; padding: 32px clamp(20px, 5vw, 72px) 80px; }
+    .media-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .media-header a { font-size: 14px; }
+    .media-intro { padding: 48px 0 40px; max-width: 680px; }
+    .media-intro h1 { font-size: clamp(38px, 6vw, 64px); }
+    .media-intro p { color: var(--muted); }
+    .reel-section { display: grid; grid-template-columns: minmax(0, 390px) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; border-top: 1px solid var(--ink); padding: 32px 0 48px; }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+    .media-copy h2 { font-size: 32px; margin-top: 0; }
+    .media-copy p, .media-copy li { color: var(--muted); font-size: 15px; line-height: 1.65; }
+    .media-copy ol { padding-left: 24px; }
+    .media-copy li { margin: 14px 0; }
+    .media-copy strong { color: var(--ink); }
+    .audio-label { display: block; margin: 28px 0 12px; font-size: 13px; }
+    audio { max-width: 100%; width: 100%; }
+    .carousel-section { border-top: 1px solid var(--ink); padding-top: 28px; }
+    .carousel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    .carousel-heading h2 { margin: 0; font-size: 32px; }
+    .carousel-heading p { font-size: 13px; color: var(--muted); }
+    .pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+    figure { min-width: 0; margin: 0; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+    figcaption { padding-top: 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .equivalent { padding: 36px 0; margin-top: 48px; border-top: 1px solid var(--line); }
+    .equivalent h3 { font-size: 18px; margin: 28px 0 8px; }
+    .equivalent p { color: var(--muted); max-width: 66ch; }
+    .media-footer { padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.65; }
+    @media (max-width: 680px) {
+      .media-shell { padding-top: 24px; }
+      .media-header a { font-size: 12px; }
+      .media-intro { padding: 32px 0; }
+      .reel-section { grid-template-columns: minmax(0, 1fr); }
+      .pages { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .carousel-heading { display: block; }
+      .carousel-heading p { margin: 12px 0 0; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#conteudo" class="skip">Ir para o conteúdo</a>
+  <div class="media-shell">
+    <header class="media-header">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>Lume</a>
+      <a href="../index.html">Voltar ao estúdio</a>
+    </header>
+    <main id="conteudo">
+      <div class="media-intro">
+        <span class="eyebrow">Um projeto. Três decisões.</span>
+        <h1>Criar começa<br>com uma decisão.</h1>
+        <p>Planejar → Produzir → Revisar.<br>Uma ideia ganha forma quando cada etapa tem uma intenção.</p>
+      </div>
+      <section class="reel-section" aria-labelledby="reel-title">
+        <video controls preload="metadata" playsinline poster="../output/media/attempt-002/reel-frame-00.png" aria-label="Lume: Planejar, Produzir e Revisar, em 18 segundos" aria-describedby="reel-text">
+          <source src="../output/media/attempt-002/lume-reel.mp4" type="video/mp4">
+          <track src="captions.vtt" kind="captions" srclang="pt-BR" label="Português — texto e sons">
+          Seu navegador não reproduz vídeo. <a href="../output/media/attempt-002/lume-reel.mp4">Baixar o Reel</a>.
+        </video>
+        <div class="media-copy" id="reel-text">
+          <span class="eyebrow">O ciclo em movimento</span>
+          <h2 id="reel-title">Um projeto.<br>Três decisões.</h2>
+          <p>Geometria, texto e uma trilha tonal original contam a mesma história. Ative as legendas no player para acompanhar o texto e os sons.</p>
+          <ol>
+            <li><strong>0–3 s · Um projeto. Três decisões.</strong><br>Planejar → Produzir → Revisar. As etapas se ligam às ações Definir, Organizar e Conferir.</li>
+            <li><strong>3–7 s · Planejar. Defina a ideia.</strong><br>Escolha uma mensagem central. Uma ficha destaca a intenção antes do formato.</li>
+            <li><strong>7–11 s · Produzir. Dê forma à mensagem.</strong><br>Texto, imagem e ritmo na mesma direção. Os três elementos se alinham em um storyboard.</li>
+            <li><strong>11–15 s · Revisar. Confira a peça inteira.</strong><br>Mensagem. Leitura. Sequência. Uma moldura e três marcas indicam a revisão.</li>
+            <li><strong>15–18 s · Volte à ideia. Ajuste a peça.</strong><br>Planejar → Produzir → Revisar. A linha retorna à primeira etapa.</li>
+          </ol>
+          <label class="audio-label" for="review-audio">Ouça a trilha: acorde suave e pulsos nas mudanças de cena, sem voz.</label>
+          <audio id="review-audio" controls preload="metadata" src="../output/media/attempt-002/lume-sound.wav">Áudio indisponível.</audio>
+        </div>
+      </section>
+      <section class="carousel-section" aria-labelledby="carousel-title">
+        <div class="carousel-heading"><h2 id="carousel-title">Uma ideia por página.</h2><p>01–05 · O ciclo Lume</p></div>
+        <div class="pages">
+          <figure><a href="../output/media/attempt-002/carousel-01.png"><img width="1080" height="1350" src="../output/media/attempt-002/carousel-01.png" alt="Criar começa com uma decisão. Planejar, Produzir e Revisar aparecem em três etapas ligadas às ações Definir, Organizar e Conferir."></a><figcaption>01 / 05 · Criar começa com uma decisão.</figcaption></figure>
+          <figure><a href="../output/media/attempt-002/carousel-02.png"><img width="1080" height="1350" loading="lazy" src="../output/media/attempt-002/carousel-02.png" alt="Defina a ideia antes do formato. Uma ficha pergunta o que comunicar; um campo cobalto destaca Uma mensagem central."></a><figcaption>02 / 05 · Primeiro, a intenção.</figcaption></figure>
+          <figure><a href="../output/media/attempt-002/carousel-03.png"><img width="1080" height="1350" loading="lazy" src="../output/media/attempt-002/carousel-03.png" alt="Dê forma ao que foi definido. Texto, Imagem e Ritmo se alinham em um storyboard ligado pela legenda A mesma ideia."></a><figcaption>03 / 05 · Uma ideia ganha forma.</figcaption></figure>
+          <figure><a href="../output/media/attempt-002/carousel-04.png"><img width="1080" height="1350" loading="lazy" src="../output/media/attempt-002/carousel-04.png" alt="Confira o que a peça comunica. Uma moldura envolve a composição e três marcas indicam mensagem, leitura e sequência."></a><figcaption>04 / 05 · Observe a peça inteira.</figcaption></figure>
+          <figure><a href="../output/media/attempt-002/carousel-05.png"><img width="1080" height="1350" loading="lazy" src="../output/media/attempt-002/carousel-05.png" alt="Volte à ideia. Ajuste a peça. Uma linha retorna de Revisar a Planejar com a indicação Ajustar a peça."></a><figcaption>05 / 05 · Feche o ciclo.</figcaption></figure>
+        </div>
+      </section>
+      <section class="equivalent" aria-labelledby="text-title">
+        <h2 id="text-title">Carrossel em texto</h2>
+        <h3>1 de 5 · Criar começa com uma decisão.</h3><p>Planejar → Produzir → Revisar. Três etapas apresentam o ciclo Lume e suas ações: Definir, Organizar e Conferir.</p>
+        <h3>2 de 5 · Defina a ideia antes do formato.</h3><p>O que a peça precisa comunicar? Escolha uma mensagem central. Uma ficha destaca a intenção antes do formato.</p>
+        <h3>3 de 5 · Dê forma ao que foi definido.</h3><p>Organize texto, imagem e ritmo em torno da mesma ideia. Texto, Imagem e Ritmo se alinham em um storyboard com a legenda A mesma ideia.</p>
+        <h3>4 de 5 · Confira o que a peça comunica.</h3><p>A mensagem está clara? O texto é legível? A sequência faz sentido? Uma moldura e três marcas orientam a revisão.</p>
+        <h3>5 de 5 · Volte à ideia. Ajuste a peça.</h3><p>Planejar → Produzir → Revisar. Uma revisão pode abrir um novo plano. A linha retorna à primeira etapa com a indicação Ajustar a peça.</p>
+      </section>
+    </main>
+    <footer class="media-footer">Lume é um estúdio fictício. Geometria e áudio originais, produzidos localmente. Sem fala humana ou demonstração de produto real.</footer>
+  </div>
+</body>
+</html>

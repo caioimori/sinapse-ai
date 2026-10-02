@@ -1,4 +1,39 @@
-# Checkpoint da especialização
+# Checkpoint auditado — estado vigente
+
+Começar por [plano corrigido](PLAN.md), [verificação auditada](audited-verification.md) e [QA independente](audited-quality-review.md). Branch local `codex/feat/framework-evolution-20261002`, worktree `framework-evolution/sinapse-ai`; base desta auditoria `47f421cb1d813875504815734acd15562bbeca01`. O checkpoint anterior abaixo permanece histórico.
+
+## Resultado atual
+
+- 172 agentes preservados; sete funções/18 comandos têm bindings revisados. Declarações restantes conservadas como candidatas; zero promoção de expertise.
+- Recuperação por tarefa/brief, critérios completos ou lacuna; limites 12.000/6.000/3.000. Adapters locais Codex/Claude atualizados, sem instalação pessoal.
+- Jev com ledger/cache duráveis e write-ahead semântico; crash/cobrança incerta bloqueiam retry. Bundle transacional com CAS/readback/recovery e 17 targets dos 18 bindings.
+- Quatro exemplos Lume exportados: UI, motion web, Reel 18s e cinco páginas. UI/carrossel 91 em review de IA; áudio/reprodução contínua CONCERNS, Reel sem nota audiovisual total.
+- Captura própria → review independente → uma entrada privada persistida; replay adiciona zero. Runtime ligado ao comando recupera offline; corpus público 67/112 intacto, todos coverage=gap.
+- Navegação por frontend/motion/Reel/carrossel/anúncio e feedback por competência, com três famílias ativas. Nenhuma pasta funcional movida ou removida.
+
+## Prova e limites
+
+Coorte final **229/229 testes em 18 suites**, 127,289 s; lint/typecheck separados, paridade e 17/17 YAML aprovados. Suite adicional do guard de proveniência: 27/27. Falhas iniciais estão expostas na verificação; não foram omitidas ou transformadas em aprovação.
+
+Checkout original: mesma branch/SHA, 191 entradas e zero divergência. Zero paths protegidos, dados privados/output em Git/npm e gasto de API. Empacotamento somente dry-run. Sem push, PR, CI remoto, deploy, atualização de HOME, Docker ou WSL.
+
+Jev: piloto já autorizado US$ 0,05, uma tentativa/grupo; credencial não encontrada. Opus 5.5 sem execução autenticada. Mobbin: receipts anteriores preservados; OAuth atual indisponível, sem nova inspeção ou redistribuição de assets.
+
+Os quatro exemplos não comprovam ganho causal, transferência ou especialização mundial. A maioria dos contratos/referências continua candidata. Não promover agente/modelo a partir de disponibilidade, contagem ou fixture técnica.
+
+## Retomada
+
+1. Abrir o preview local com `node examples/framework-quality/serve.cjs --port=4179`; o painel contém os quatro produtos. Receitas/limites em [README dos exemplos](../../../examples/framework-quality/README.md).
+2. Usar `node scripts/expert-evolution/catalog.cjs deliverable frontend` (ou motion/reel/carrossel/anuncio). Ler fonte canônica/tarefa antes da execução; navegação não altera autoridade.
+3. Biblioteca privada em `research/expert-evolution/library/`; não publicar, empacotar ou reutilizar entre clientes. O mecanismo próprio é uma decisão técnica pura, sem alegação de DOM.
+4. Para novo material autorizado: `extraction.cjs propose|review|consolidate|plan <input.json>` é dry-run por padrão; persistir exige gate independente e CAS. Não apagar admissão pendente para forçar retry pago.
+5. Expandir aquisição somente por falha observada e teste de transferência; observar áudio/reprodução contínua em capacidade compatível. Não repetir o benchmark escrito antigo como ganho novo.
+
+Salvo como checkpoint local. [Story auditada](../../stories/audited-evolution-20261002.story.md) e [workflow](audited-workflow.json) conservam o contrato e o estado. Mudanças de dados privados não exigem repetir a coorte pública se as fontes permanecerem congeladas; readback/retrieval/privacidade continuam necessários.
+
+---
+
+# Checkpoint anterior da especialização — histórico preservado
 
 ## Estado
 

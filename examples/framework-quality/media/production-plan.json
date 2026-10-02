@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "production-planning-only",
+  "brief": "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md",
+  "story": "docs/stories/audited-evolution-20261002.story.md",
+  "brand": "Lume",
+  "concept": "Um projeto, três decisões: definir a ideia, dar forma e conferir a mensagem.",
+  "tokenSource": "examples/framework-quality/shared.css",
+  "tokens": {
+    "paper": "#f7f5ef", "surface": "#fffdf8", "ink": "#252824",
+    "muted": "#62665f", "line": "#d9ddd3", "accent": "#2248bd",
+    "accentSoft": "#e8edfc", "success": "#315742", "radius": 14, "space": 8
+  },
+  "typography": {
+    "family": "Segoe UI",
+    "fontCandidates": ["C:/Windows/Fonts/segoeui.ttf", "C:/Windows/Fonts/segoeuib.ttf"],
+    "fontFallback": "System sans-serif available on the rendering host; record actual font and hash.",
+    "carousel": {"headingPx": 88, "bodyPx": 48, "labelPx": 36, "lineHeight": 1.16},
+    "reel": {"headingPx": 96, "bodyPx": 48, "labelPx": 36, "lineHeight": 1.16},
+    "rules": "Measure all text boxes with actual font. Wrap authored heading lines explicitly. Do not truncate. No external fonts."
+  },
+  "ownership": {
+    "planner": "production-director",
+    "renderer": "developer assigned by root after T03 confirmation",
+    "reviewer": "independent downstream reviewer; not the author",
+    "allowedPaths": ["examples/framework-quality/media/", "examples/framework-quality/output/media/", "docs/framework/expert-evolution-2026-10/media-execution.md"]
+  },
+  "assets": [
+    {"id": "idea-grid", "kind": "original geometric vector", "description": "Three offset outlined rectangles; one cobalt circle selects an idea.", "origin": "authored from primitives in this plan", "rights": "original fixture; no third-party asset"},
+    {"id": "production-stack", "kind": "original geometric vector", "description": "Three editorial cards align into a single upright composition; cobalt panel anchors the stack.", "origin": "authored from primitives in this plan", "rights": "original fixture; no third-party asset"},
+    {"id": "review-frame", "kind": "original geometric vector", "description": "Outlined card within an inset frame; three cobalt marks identify completed review points.", "origin": "authored from primitives in this plan", "rights": "original fixture; no third-party asset"},
+    {"id": "cycle-line", "kind": "original geometric vector", "description": "Three labeled circular nodes joined by lines and a return arc; no downloaded icon.", "origin": "authored from primitives in this plan", "rights": "original fixture; no third-party asset"},
+    {"id": "lume-sound", "kind": "local synthesized audio", "description": "Soft sine pad and short pitched pulses at scene boundaries; no speech or sampled recording.", "origin": "deterministic local oscillator synthesis specified below", "rights": "original fixture; no third-party asset"}
+  ],
+  "carousel": {
+    "width": 1080, "height": 1350, "pages": 5,
+    "safeTextBox": {"x": 88, "y": 80, "width": 904, "height": 1170},
+    "layout": {
+      "masthead": {"x": 88, "y": 80, "text": "Lume", "size": 40},
+      "edition": {"x": 88, "y": 158, "size": 36},
+      "heading": {"x": 88, "y": 240, "width": 904, "size": 88},
+      "body": {"x": 88, "y": 500, "width": 880, "size": 48},
+      "graphic": {"x": 88, "y": 720, "width": 904, "height": 360},
+      "footer": {"x": 88, "y": 1190, "size": 36},
+      "footerRule": {"x": 88, "y": 1158, "width": 904}
+    },
+    "slides": [
+      {"page": 1, "edition": "UM PROJETO. TRÊS DECISÕES.", "headingLines": ["Criar começa", "com uma decisão."], "bodyLines": ["Planejar → Produzir → Revisar"], "graphic": "cycle-line", "footer": "01 / 05 · O ciclo Lume", "alt": "Capa marfim com o título Criar começa com uma decisão e três nós conectados: Planejar, Produzir e Revisar."},
+      {"page": 2, "edition": "01 · PLANEJAR", "headingLines": ["Defina a ideia", "antes do formato."], "bodyLines": ["O que a peça precisa comunicar?", "Escolha uma mensagem central."], "graphic": "idea-grid", "footer": "02 / 05 · Primeiro, a intenção", "alt": "Três cartões geométricos representam ideias possíveis. Um círculo cobalto destaca a ideia escolhida."},
+      {"page": 3, "edition": "02 · PRODUZIR", "headingLines": ["Dê forma ao que", "foi definido."], "bodyLines": ["Organize texto, imagem e ritmo", "em torno da mesma ideia."], "graphic": "production-stack", "footer": "03 / 05 · Uma ideia ganha forma", "alt": "Três cartões se alinham em uma composição organizada; um painel cobalto destaca o elemento principal."},
+      {"page": 4, "edition": "03 · REVISAR", "headingLines": ["Confira o que", "a peça comunica."], "bodyLines": ["A mensagem está clara?", "O texto é legível?", "A sequência faz sentido?"], "graphic": "review-frame", "footer": "04 / 05 · Observe a peça inteira", "alt": "Uma composição está dentro de uma moldura de revisão com três marcas: mensagem, leitura e sequência."},
+      {"page": 5, "edition": "FECHE O CICLO", "headingLines": ["Volte à ideia.", "Ajuste a peça."], "bodyLines": ["Planejar → Produzir → Revisar", "Uma revisão pode abrir um novo plano."], "graphic": "cycle-line", "footer": "05 / 05 · Lume", "alt": "Os três nós Planejar, Produzir e Revisar retornam à primeira etapa por uma linha curva, mostrando um ciclo de ajuste."}
+    ],
+    "exports": {"pages": "carousel-01.png … carousel-05.png", "contact": "carousel-contact.png", "mobile": "carousel-mobile-390.png", "editable": "carousel-01.svg … carousel-05.svg", "text": "../../media/text.md"},
+    "contactLayout": "All five pages, ordered, thumbnails at least 390 px wide with their page numbers visible. Save full-size pages separately.",
+    "mobilePreview": "Stack all five pages scaled to 390 px width. No cropping. Inspect the 390 px artifact, not only the full-size PNGs."
+  },
+  "reel": {
+    "width": 1080, "height": 1920, "seconds": 18, "fps": 30, "frames": 540,
+    "safeTextBox": {"x": 96, "y": 240, "width": 888, "height": 1296},
+    "layout": {"brandY": 248, "eyebrowY": 352, "headingY": 456, "bodyY": 724, "graphicY": 968, "graphicHeight": 330, "stepLabelY": 1392, "footerY": 1490},
+    "timeline": [
+      {"id": "open", "start": 0, "end": 3, "headingLines": ["Um projeto.", "Três decisões."], "bodyLines": ["Planejar → Produzir → Revisar"], "graphic": "cycle-line", "motion": "Cobalt first node enters over 0.4 s; line grows toward next two nodes. Heading remains still after 0.35 s.", "cutAtEnd": true},
+      {"id": "plan", "start": 3, "end": 7, "eyebrow": "01 · PLANEJAR", "headingLines": ["Defina", "a ideia."], "bodyLines": ["Escolha uma mensagem central."], "graphic": "idea-grid", "motion": "Three cards shift by at most 32 px during first 0.5 s, then selected circle settles. Last 3.5 s holds for reading.", "cutAtEnd": true},
+      {"id": "produce", "start": 7, "end": 11, "eyebrow": "02 · PRODUZIR", "headingLines": ["Dê forma", "à mensagem."], "bodyLines": ["Texto, imagem e ritmo", "na mesma direção."], "graphic": "production-stack", "motion": "Cards align over first 0.6 s; main cobalt panel expands horizontally within the graphic box only. Last 3.4 s holds.", "cutAtEnd": true},
+      {"id": "review", "start": 11, "end": 15, "eyebrow": "03 · REVISAR", "headingLines": ["Confira", "a peça inteira."], "bodyLines": ["Mensagem. Leitura. Sequência."], "graphic": "review-frame", "motion": "Inset frame appears over 0.4 s. Three original line marks appear sequentially at 11.5, 11.9 and 12.3 s. Hold after 12.6 s.", "cutAtEnd": true},
+      {"id": "close", "start": 15, "end": 18, "headingLines": ["Volte à ideia.", "Ajuste a peça."], "bodyLines": ["Planejar → Produzir → Revisar"], "graphic": "cycle-line", "motion": "Return arc completes during first 0.6 s. Stable closing frame from 15.6 s to end.", "cutAtEnd": false}
+    ],
+    "motionRules": "Deterministic frame index. No random particles, flashes, clocks or render-time network. No text movement during reading holds. Frame 539 keeps final state; no black tail.",
+    "audio": {
+      "sampleRate": 48000, "channels": 2, "sourceFormat": "PCM WAV", "outputCodec": "AAC",
+      "pad": {"frequenciesHz": [130.8128, 196, 261.6256], "peakAmplitudeEach": 0.016, "fadeInSeconds": 0.35, "fadeOutSeconds": 0.55},
+      "pulses": [
+        {"at": 0.35, "frequencyHz": 392}, {"at": 3, "frequencyHz": 440},
+        {"at": 7, "frequencyHz": 523.2511}, {"at": 11, "frequencyHz": 587.3295},
+        {"at": 15, "frequencyHz": 659.2551}
+      ],
+      "pulseSeconds": 0.28, "pulsePeakAmplitude": 0.12,
+      "envelope": "Smooth 15 ms attack, exponential release, no discontinuous splice. Same signal on both stereo channels is acceptable; record it as dual mono.",
+      "mixIntent": "Soft tonal continuity and one audible scene cue per boundary, no speech. Measure output peak/RMS and inspect/listen before approval.",
+      "coverage": "Voice, human dialogue, speech intelligibility and lip sync are not assessed. Metrics do not prove subjective audio quality."
+    },
+    "exports": {"master": "lume-reel.mp4", "soundSource": "lume-sound.wav", "captions": "captions.vtt", "frames": "reel-frame-00.png … reel-frame-17.png", "contact": "reel-contact.png", "mobile": "reel-mobile-390.png"},
+    "codec": {"video": "H.264", "pixelFormat": "yuv420p", "audio": "AAC", "container": "MP4", "fastStart": true},
+    "sampling": "At minimum 0, 1.5, 3.5, 5, 7.5, 9, 11.5, 13, 15.5 and 17.5 s, plus frames immediately before/after each cut. Extract from encoded master."
+  },
+  "nativeRecipe": {
+    "stage": "Prepare declarative sources now; execute only after root confirms T03.",
+    "implementation": "Developer authors tracked deterministic renderer using existing bundled Python/Pillow and native ffmpeg. Do not install, call a paid provider or fetch assets.",
+    "carousel": "Draw vector geometry and text from this data, save editable SVG + five RGB PNGs at exact size, then assemble contact and 390 px previews.",
+    "reel": "Draw frame-indexed vector frames; synthesize WAV from declared oscillators; encode 540 frames at 30 fps with original audio; extract sampling frames from the master.",
+    "pathRule": "Tracked recipe/code lives under media/. Rendered files, frames, receipts and previews live under ignored output/media/. Never touch shared.css or the parent index.",
+    "timeoutSecondsPerAttempt": 180, "maxCreationCheckCorrectionCycles": 3,
+    "rollback": "Preserve failed outputs/receipts with attempt IDs. Correct only owned files. Do not delete or revert work by other agents."
+  },
+  "receiptRequired": [
+    "actualToolVersions", "actualFontPathAndSha256", "briefSha256", "sourceSha256",
+    "outputPathAndSha256", "dimensions", "duration", "frameCount", "fps", "codec", "pixelFormat",
+    "audioCodec", "audioChannels", "audioSampleRate", "audioRms", "audioPeak", "fullDecodeResult",
+    "sampledFramePaths", "textBounds", "preview390Paths", "creationAttempt", "elapsedSeconds",
+    "observedPixels", "observedAudioOrNotObserved", "independentReviewer", "failuresAndSkips"
+  ],
+  "acceptance": "Technical receipt plus separate actual pixel/audio observation. No aesthetic self-score or 90/100 claim. No promotion of framework expertise, user approval or published status.",
+  "planningLimits": "No rendering executed by production-director. This packet is an input to native executable implementation, not proof of final quality."
+}

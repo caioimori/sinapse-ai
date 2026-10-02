@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "receiptType": "native-model-availability",
+  "provider": "codex-native",
+  "modelId": "gpt-6.1-sol",
+  "accountScope": "current-codex-session",
+  "origin": "local-native-execution-record",
+  "scope": "native-use-within-existing-authority",
+  "checkedAt": "2026-10-02T09:30:22.879Z",
+  "expiresAt": "2026-11-01T09:30:22.879Z",
+  "promotion": false,
+  "observation": "Local records from the earlier native generator wave; this is a typed index of existing evidence, not a new authenticated probe or API authorization.",
+  "evidence": [
+    {
+      "path": "research/expert-evolution/benchmark-protocol.json",
+      "sha256": "909a46da5adad0f9102ea4c9182fe03dd553b08938e25f6e9f964222f2ed4dc1"
+    },
+    {
+      "path": "research/expert-evolution/benchmark-baseline-output.json",
+      "sha256": "9ce13afe2b765af872bca743e6aabc4c3de44256ef7e7896f2005becc646f7da"
+    },
+    {
+      "path": "research/expert-evolution/benchmark-enriched-output.json",
+      "sha256": "fa66e24e250cdb43df8feff0f089c7a7657829c2ab6c15fbe67722d0db6b0e9c"
+    },
+    {
+      "path": "research/expert-evolution/benchmark-results.json",
+      "sha256": "e6bb3c4cc73b252558b0fa774838e3b3f40e6b3df292e16c8d061e25746837e8"
+    }
+  ]
+}

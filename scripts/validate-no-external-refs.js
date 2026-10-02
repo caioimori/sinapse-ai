@@ -149,6 +149,9 @@ const HARDCODED_ALLOW_LIST = [
 // product voice. Exact files only; runtime, generated agents and personas remain
 // guarded. Unlike historical exemptions, these files still undergo persona checks.
 const UPSTREAM_PROVENANCE_FILES = new Set([
+  // Authorized audited-evolution story: exact read-only version/SHA/URL receipt.
+  // Persona checks still apply; no runtime or product-voice exemption.
+  'research/expert-evolution/audit-upstream-recheck.json',
   'docs/framework/evolution-2026-10/README.md',
   'docs/framework/evolution-2026-10/SPEC.md',
   'docs/framework/evolution-2026-10/upstream.json',

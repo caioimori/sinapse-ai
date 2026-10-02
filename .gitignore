@@ -424,3 +424,6 @@ build/
 # usada só para estudar/portar melhorias pro sinapse-ai. NUNCA versionada (cada
 # clone tem seu próprio .git) e NUNCA publicada no npm (fora do allowlist "files").
 colaborator/
+
+# Capturas, revisão e deltas privados: persistência local, fora de Git/npm.
+research/expert-evolution/library/

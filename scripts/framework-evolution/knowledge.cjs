@@ -7,7 +7,7 @@ const hash = text => crypto.createHash('sha256').update(text, 'utf8').digest('he
 const text = value => typeof value === 'string' && value.trim().length > 0;
 const strings = value => Array.isArray(value) && value.every(text);
 const id = value => text(value) && /^[a-z0-9][a-z0-9-]*$/.test(value);
-const STOP_WORDS = new Set('para pelo pela pelos pelas quando como mais uma umas uns com sem antes depois sobre esta este isto que the and for from with without into should must will task tarefa action acao regra execute executar generate gerar build criar'.split(' '));
+const STOP_WORDS = new Set('estado state status evidencia evidence prova criterio criteria tarefa task para pelo pela pelos pelas quando como mais uma umas uns com sem antes depois sobre esta este isto que the and for from with without into should must will action acao regra execute executar generate gerar build criar'.split(' '));
 const SYNONYMS = [['budget','orcamento','custo','cost'],['source','sources','fonte','fontes'],['evidence','evidencia','prova'],['memory','memoria'],['taxonomy','taxonomia'],['animation','animacao','motion','movimento'],['cash','caixa'],['feedback','retorno'],['learning','aprendizagem','ensino'],['state','estado','status'],['performance','desempenho'],['research','pesquisa'],['recognition','reconhecimento'],['claim','claims','promessa','promessas'],['error','errors','erro','erros']];
 function tokens(value) {
   const words = String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(word => word.length > 2 && !STOP_WORDS.has(word));
@@ -18,7 +18,7 @@ function tokens(value) {
 function taskScore(task, heuristic) {
   const terms = tokens([heuristic.id, ...heuristic.competencies, ...(heuristic.taskTags || []), ...heuristic.evidence.map(e => e.sourceId), heuristic.condition, heuristic.action, heuristic.rationale].join(' '));
   let score = 0;
-  for (const [field, weight] of [['command', 4], ['title', 3], ['text', 1]]) for (const word of tokens(task[field])) if (terms.has(word)) score += weight;
+  for (const [field, weight] of [['brief', 16], ['command', 4], ['title', 3], ['text', 1]]) for (const word of tokens(task[field])) if (terms.has(word)) score += weight;
   return score;
 }
 function loadCorpus(root = DEFAULT_ROOT) {
@@ -84,15 +84,19 @@ function validateCorpus(corpus) {
   }
   return {valid: errors.length === 0, errors};
 }
-function retrieveKnowledge({root = DEFAULT_ROOT, agentId, squad, competencies = [], maxItems = 3, maxChars = 6000, task} = {}) {
+function retrieveKnowledge({root = DEFAULT_ROOT, agentId, squad, competencies = [], maxItems = 3, maxChars = 6000, task, brief = ''} = {}) {
   if (agentId !== undefined && !id(agentId)) throw new Error('Invalid agent ID');
   if (squad !== undefined && !id(squad)) throw new Error('Invalid squad ID');
   if (!agentId && !squad) throw new Error('Agent or squad required');
-  if (!strings(competencies) || !Number.isSafeInteger(maxItems) || maxItems < 1 || maxItems > 100 || !Number.isSafeInteger(maxChars) || maxChars < 128 || maxChars > 100000) throw new Error('Invalid knowledge budget/filter');
+  if (!strings(competencies) || !Number.isSafeInteger(maxItems) || maxItems < 1 || maxItems > 100 || !Number.isSafeInteger(maxChars) || maxChars < 128 || maxChars > 6000) throw new Error('Invalid knowledge budget/filter');
+  if(typeof brief!=='string'||brief.length>4000) throw new Error('Invalid bounded user brief');
   if (task !== undefined && (!task || typeof task !== 'object' || Array.isArray(task) || Object.keys(task).some(key => !['command','title','text'].includes(key)) || Object.entries(task).some(([key,value]) => typeof value !== 'string' || value.length > ({command:128,title:512,text:4000})[key]))) throw new Error('Invalid bounded task metadata');
   const corpus = loadCorpus(root);
   const validation = validateCorpus(corpus);
   if (!validation.valid) throw new Error(`Invalid corpus: ${validation.errors.join('; ')}`);
+  // Legacy installs without a private overlay never need the extraction module.
+  const overlayPath = path.join(root, 'research/expert-evolution/library/overlay.json');
+  const reviewedOverlay = fs.existsSync(overlayPath) ? require('../expert-evolution/extraction.cjs').readOverlay(root) : [];
   const agent = corpus.competencies.agents.find(a => a.agentId === agentId);
   if (agentId && !agent) throw new Error('Unknown agent');
   if (agent && squad && agent.squad !== squad) throw new Error('Agent/squad mismatch');
@@ -100,10 +104,17 @@ function retrieveKnowledge({root = DEFAULT_ROOT, agentId, squad, competencies = 
   if (!corpus.competencies.agents.some(a => a.squad === resolvedSquad)) throw new Error('Unknown squad');
   const result = {schemaVersion: 1, agentId: agentId || null, squad: resolvedSquad, coverage: agent?.coverage || 'gap', items: [], charsUsed: 0, maxChars, gaps: []};
   if (result.coverage === 'gap') result.gaps.push(agent?.gapReason || 'Specialist/domain coverage is incomplete; source coverage does not establish performance.');
-  const eligible = corpus.heuristics.heuristics.filter(h => h.squad === resolvedSquad && (!agent || h.consumers.includes(agentId)) && (!competencies.length || h.competencies.some(c => competencies.includes(c))) && (!task || taskScore(task,h) > 0)).sort((a, b) => (task ? taskScore(task,b) - taskScore(task,a) : 0) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const binding=task && agentId && fs.existsSync(path.join(root,'research/expert-evolution/task-bindings.json')) ? require('../expert-evolution/expertise.cjs').resolveTaskBinding({root,agentId,command:task.command}) : null;
+  result.selectionEvidence={status:binding?'bound':'gap',command:task?.command||null};
+  result.canonicalPointer=agent?.specializationCompetencies?.find(c=>c.groundedIn)?.groundedIn||null;
+  const boundCompetencies=binding?.competencyIds.filter(c=>!competencies.length||competencies.includes(c))||[];
+  const rankingTask={...task,brief};
+  // Lexical ranking is only a tie-break inside an explicit semantic contract.
+  const eligible = binding ? [...corpus.heuristics.heuristics, ...reviewedOverlay.filter(h => h.bindings.some(b => b.agentId === agentId && b.command === binding.command && b.competencyIds.some(c => boundCompetencies.includes(c))))].filter(h => h.squad === resolvedSquad && h.consumers.includes(agentId) && h.status!=='hypothesis' && h.competencies.some(c => boundCompetencies.includes(c))).sort((a, b) => taskScore(rankingTask,b)-taskScore(rankingTask,a) || a.id.localeCompare(b.id)) : [];
+  if(!binding) result.gaps.push('No reviewed task binding; load canonical pointer. Unmatched/unfiltered knowledge is omitted.');
   if (task && !eligible.length) result.gaps.push('No task-relevant evidence found; generic squad knowledge was omitted.');
   for (const h of eligible) {
-    const item = {...h, sources: h.evidence.map(e => corpus.sources.sources.find(s => s.id === e.sourceId))};
+    const item = {...h, sources: h.sources || h.evidence.map(e => corpus.sources.sources.find(s => s.id === e.sourceId))};
     result.items.push(item);
     if (JSON.stringify(result).length + 12 > maxChars) { result.items.pop(); break; }
     if (result.items.length === maxItems) break;
