@@ -85,13 +85,13 @@ describe('Jev offline and paid guardrails', () => {
     const corpusIds = k.loadCorpus().heuristics.heuristics.map(h => h.id).sort();
     const mappedIds = batch.plans.flatMap(p => p.questionMap.map(m => m.heuristicId)).sort();
     expect(mappedIds).toEqual(corpusIds);
-    expect(new Set(mappedIds).size).toBe(67);
+    expect(new Set(mappedIds).size).toBe(corpusIds.length);
     const saved = JSON.parse(fs.readFileSync(path.join(__dirname, '../../research/framework-evolution/plan-batch.json'), 'utf8'));
     expect(saved.plans).toEqual(batch.plans);
     expect(saved.receipt.actualCalls).toBe(0);
     expect(saved.receipt.actualSpendUsd).toBe(0);
-    expect(batch.heuristicCount).toBe(67);
-    expect(batch.questionCount).toBe(134);
+    expect(batch.heuristicCount).toBe(corpusIds.length);
+    expect(batch.questionCount).toBe(corpusIds.length * 2);
     expect(batch.maximumUsd).toBeCloseTo(0.048384, 8);
     for (const prepared of batch.plans) {
       expect(prepared.admission.stateBytes + prepared.admission.longestQuestionBytes + 4096).toBeLessThanOrEqual(32000);

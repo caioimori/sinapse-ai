@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "model": "gpt-6.1-sol",
+  "method": "Independent reviewer, case-wise randomized variant labels, separate fresh generators; labels revealed only after review",
+  "scores": {
+    "baseline": 18,
+    "enriched": 20
+  },
+  "maximumPerVariant": 20,
+  "preferences": {
+    "baseline": 0,
+    "enriched": 9,
+    "tie": 1
+  },
+  "criticalFailures": [
+    {
+      "caseId": "priority-case-modal-focus",
+      "variant": "baseline",
+      "score": 1,
+      "reason": "A cobre contenção e retorno, mas fechamento por teclado genérico não especifica Escape exigido no caso reservado."
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "priority-case-client-brand",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A explicita aliases, tipos, estados reais e origem autorizada.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B cobre identidade, temas, estados e validação com cliente.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": "A",
+      "reason": "Ambas preservam marca e verificação; A acrescenta integridade de aliases e tipos."
+    },
+    {
+      "caseId": "priority-case-modal-focus",
+      "criticality": "critical",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 1,
+          "reason": "A cobre contenção e retorno, mas fechamento por teclado genérico não especifica Escape exigido no caso reservado.",
+          "falseClaim": false,
+          "variant": "baseline"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B cobre Escape, ciclo de foco, nome, aria-modal coerente e acionador removido.",
+          "falseClaim": false,
+          "variant": "enriched"
+        }
+      ],
+      "preferredLabel": "B",
+      "reason": "B atende explicitamente Escape, contenção, retorno lógico e verificação assistiva."
+    },
+    {
+      "caseId": "priority-case-compositor-jank",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A exige perfil, camadas, memória e comparação; não presume causa GPU.",
+          "falseClaim": false,
+          "variant": "baseline"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B exige trace e comparação no aparelho, hint delimitado e liberação de recursos.",
+          "falseClaim": false,
+          "variant": "enriched"
+        }
+      ],
+      "preferredLabel": "B",
+      "reason": "Ambas rejeitam promoção indiscriminada; B liga hint e cleanup à causa medida."
+    },
+    {
+      "caseId": "priority-case-reduced-motion",
+      "criticality": "critical",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A propõe variante estática, reprodução voluntária com controle e verificação ao alternar preferência.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B desativa parallax/autoplay e preserva informação e conclusão; removido autoplay, pausa deixa de ser requisito dessa variante.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": "A",
+      "reason": "Ambas removem os mecanismos automáticos; A detalha cancelamento e feedback preservado."
+    },
+    {
+      "caseId": "priority-case-react-server-boundary",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A deriva subtotal, isola interatividade e testa mudanças de props e bundle.",
+          "falseClaim": false,
+          "variant": "baseline"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B preserva fronteira mínima, distingue imports de children e verifica dados, segredo e subtotal.",
+          "falseClaim": false,
+          "variant": "enriched"
+        }
+      ],
+      "preferredLabel": "B",
+      "reason": "B explicita composição server por children e dados serializados sem exagerar a fronteira."
+    },
+    {
+      "caseId": "priority-case-accessible-carousel",
+      "criticality": "critical",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A oferece clique/teclado sem drag, pausa ao foco, foco oculto e verificação assistiva.",
+          "falseClaim": false,
+          "variant": "baseline"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B cobre operação sem arraste, controle nomeado, pausa foco/hover e retomada explícita.",
+          "falseClaim": false,
+          "variant": "enriched"
+        }
+      ],
+      "preferredLabel": "B",
+      "reason": "B detalha toque simples, hover e retomada explícita; ambas atendem o núcleo crítico."
+    },
+    {
+      "caseId": "priority-case-video-broll-proof",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A exige modelo/SKU, direitos, mapa fala/plano e revisão do arquivo final com legendas.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B retém publicação, mapeia takes e claims exatos e revisa vídeo e legendas.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": "A",
+      "reason": "A transforma correspondência fala/plano e claims em matriz verificável com timecodes."
+    },
+    {
+      "caseId": "priority-case-hooks-retention",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A retira promessa universal, define comparação e denominadores e não generaliza orientação TikTok.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B exige prova, janela/público e replicação; evita vencedor por um pico e preserva incerteza.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": "A",
+      "reason": "A explicita limite de transferência de anúncios e contexto da curva, sem alegar causalidade."
+    },
+    {
+      "caseId": "priority-case-carousel-density",
+      "criticality": "high",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A verifica leitura no celular, tese/mecanismo e texto equivalente com CTA coerente.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 1,
+          "reason": "B corrige legibilidade/progressão/CTA, mas omite equivalente textual acessível.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": "A",
+      "reason": "A inclui equivalente textual acessível; B não atende essa parte da decisão reservada."
+    },
+    {
+      "caseId": "priority-case-mobbin-access",
+      "criticality": "critical",
+      "outputs": [
+        {
+          "label": "A",
+          "score": 2,
+          "reason": "A preserva escopo estático e limites de licença; número de capturas é afirmação atribuída ao material anexado, sem verificação independente neste arquivo cego.",
+          "falseClaim": false,
+          "variant": "enriched"
+        },
+        {
+          "label": "B",
+          "score": 2,
+          "reason": "B pede inventário reproduzível, distingue observação e artefato próprio e não presume direito por acesso pago.",
+          "falseClaim": false,
+          "variant": "baseline"
+        }
+      ],
+      "preferredLabel": null,
+      "reason": "Ambas corrigem leitura e contagem, separam acesso de licença e suspendem redistribuição sem inventar permissão."
+    }
+  ],
+  "promotion": false,
+  "scope": "10 bounded paper decision scenarios; no rendered UI/video, Opus/Jev or all172competencies benchmark",
+  "limitations": [
+    "One generation per case/variant, no statistical or causal improvement estimate",
+    "Labels hidden but wording/evidence may allow inference",
+    "Knowledge and added profile vary together, so effects are not attributable to one component"
+  ]
+}

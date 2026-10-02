@@ -1,0 +1,2593 @@
+{
+  "schemaVersion": 1,
+  "scope": "priority-design-frontend-motion-video-reels-carousels",
+  "readAt": "2026-10-02",
+  "sources": [
+    {
+      "id": "priority-dtcg",
+      "url": "https://www.designtokens.org/tr/2025.10/format/",
+      "title": "Design Tokens Format Module 2025.10",
+      "authority": "Design Tokens Community Group",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Status; 3.8 Alias; 5.2.2 Type",
+      "excerpt": "Tools MUST NOT attempt to guess the type",
+      "contentSha256": "8a8a1094bd8a809136ba18f56937d879762236800270b9277f7cce73b32c7dcd",
+      "claims": [
+        "Formato de intercâmbio usa tipos explícitos ou herdados e referências. Documento estável do Community Group não é W3C Standard. Modelo de três camadas é decisão organizacional."
+      ],
+      "licenseNote": "W3C Community Final Specification Agreement; excerto breve, sem reproduzir especificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-atomic",
+      "url": "https://atomicdesign.bradfrost.com/chapter-2/",
+      "title": "Atomic Design — Chapter 2",
+      "authority": "Brad Frost, autor",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "The atomic design methodology; Templates; Pages",
+      "excerpt": "Atomic design is not a linear process",
+      "contentSha256": "6eace709fbd75dc6305c18150fe4c1e2a717b7240c2a4d1972fa7e4a27973deb",
+      "claims": [
+        "Partes e páginas devem ser avaliadas conjuntamente. Conteúdo real, títulos extensos, estados vazios e permissões revelam falhas da biblioteca; as cinco etapas não impõem processo linear."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-signifiers",
+      "url": "https://jnd.org/signifiers-not-affordances/",
+      "title": "Signifiers, not affordances",
+      "authority": "Don Norman, versão do autor de ACM Interactions 2008",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Signifiers, Not Affordances; exemplos de plataforma",
+      "excerpt": "Designers need to provide these clues.",
+      "contentSha256": "fa5513e9adf3a8bf0afec7318505645e318ddffee18e3293c7784be322c0e1ad",
+      "claims": [
+        "Pistas perceptíveis comunicam possibilidades e estado. Sinais sociais e incidentais têm confiabilidade contextual; pista não é prova automática da condição representada."
+      ],
+      "licenseNote": "Versão do autor com restrição de redistribuição não comercial; apenas excerto breve e análise original; não republicar artigo.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-rams",
+      "url": "https://www.vitsoe.com/us/about/good-design",
+      "title": "Ten principles for good design",
+      "authority": "Dieter Rams, princípios publicados por Vitsœ",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Principles 2, 4, 6, 10",
+      "excerpt": "Good design makes a product understandable",
+      "contentSha256": "0e6e8b8ae8b2e7f9f36b7175ba7cfcef627a3fd269905d8092fa06c46a591b9a",
+      "claims": [
+        "Utilidade, compreensão e honestidade são critérios de design. A aplicação de princípios de produto físico a software/copy é inferida; minimalismo não elimina informação necessária."
+      ],
+      "licenseNote": "Página declara CC BY-NC-ND 4.0 para compartilhamento dos princípios; análise original, excerto mínimo, sem adaptação/reprodução integral.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-boxes",
+      "url": "https://every-layout.dev/rudiments/boxes/",
+      "title": "Every Layout — Boxes",
+      "authority": "Heydon Pickering e Andy Bell, autores",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Logical properties; Content in boxes; box-sizing",
+      "excerpt": "The web is responsive largely by default.",
+      "contentSha256": "8de341daaf15e0857da86a9b11ac43322df5d9eaeeede4f73f735f96baf2a9e8",
+      "claims": [
+        "Conteúdo define dimensões naturalmente; restrições rígidas podem quebrar adaptação. Propriedades lógicas acompanham direção/escrita. border-box torna dimensões prescritas previsíveis; não garante ausência de overflow."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-transitions",
+      "url": "https://www.joshwcomeau.com/animation/css-transitions/",
+      "title": "An Interactive Guide to CSS Transitions",
+      "authority": "Josh W. Comeau, autor",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Performance; Hardware Acceleration; Action-driven motion",
+      "excerpt": "Be intentional about where you use it.",
+      "contentSha256": "ef9c20070233207d0a1ff2200fde838a973bc99427d1d01614dcd8f41d34423e",
+      "claims": [
+        "Propriedades têm custos diferentes; teste no dispositivo menos potente atendido. Promoção GPU custa memória. Entrada e saída podem ter timings diferentes; valores do exemplo não são universais."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-event-loop",
+      "url": "https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/",
+      "title": "Tasks, microtasks, queues and schedules",
+      "authority": "Jake Archibald, autor",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Why this happens; In summary",
+      "excerpt": "Between tasks, the browser may render updates.",
+      "contentSha256": "f85214e5bbd32b949525857f5e3fe4d9b9317a81266c32858b548251dffd9a4f",
+      "claims": [
+        "Microtasks são drenadas antes da próxima task, inclusive novas microtasks. Tasks oferecem oportunidade de render. Relatos de bugs de browsers de 2015 não provam estado atual."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-dialog",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "title": "APG Dialog (Modal) Pattern",
+      "authority": "W3C WAI APG",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Keyboard Interaction; Notes; Roles States and Properties",
+      "excerpt": "Escape: Closes the dialog.",
+      "contentSha256": "6827700fa06b46bb6d657c7771dca8e6ab4db96dcb9e70bb69400e01e02b716a",
+      "claims": [
+        "Modal contém sequência de Tab, foco inicial contextual e retorno lógico. aria-modal só corresponde à modalidade quando interação externa realmente é impedida. Nome acessível é necessário."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-carousel",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/",
+      "title": "APG Carousel Pattern",
+      "authority": "W3C WAI APG",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "About This Pattern; Keyboard Interaction; Basic carousel elements",
+      "excerpt": "Stops rotating when keyboard focus enters the carousel.",
+      "contentSha256": "10f9af266ed9475c5e992178535e55bd4ff71fb0d67c633b8ceebf585e61baa4",
+      "claims": [
+        "Rotação automática exige controle, pausa em foco e hover e retomada explícita após foco. Controles precisam nomes claros; slides fora da apresentação não podem confundir navegação assistiva."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-drag",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
+      "title": "Understanding 2.5.7 Dragging Movements",
+      "authority": "W3C AG Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Success Criterion; Intent; Relationship to keyboard",
+      "excerpt": "provide a simple pointer alternative",
+      "contentSha256": "029a4044996ec798c1e3af0cbf26ff9d94f9583bb099967beb1616a7ce43e981",
+      "claims": [
+        "Operação de drag criada pelo autor necessita alternativa de ponteiro simples sem arrastar, salvo exceções. Equivalência por teclado sozinha não satisfaz o requisito; rolagem nativa do navegador é distinta."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-contrast",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "title": "Understanding 1.4.3 Contrast (Minimum)",
+      "authority": "W3C AG Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Success Criterion; Intent",
+      "excerpt": "contrast ratio of at least 4.5:1",
+      "contentSha256": "976361f15e9abc10ad43ab8e72660067adb3937a6e95b12efc67112b4fb42e61",
+      "claims": [
+        "Texto comum exige contraste 4,5:1; texto grande, 3:1. Logos, decoração e controles inativos têm exceções; exceção não recomenda baixa legibilidade em conteúdo crítico."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-reduced",
+      "url": "https://motion.dev/docs/react-use-reduced-motion",
+      "title": "useReducedMotion",
+      "authority": "Motion documentation",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "useReducedMotion; Usage",
+      "excerpt": "Adapt or disable animations",
+      "contentSha256": "9117f249565ef1e05566c0b19799bd99ad539c694db3422eb9ef698a2dc2119c",
+      "claims": [
+        "Hook acompanha preferência e mudanças. Exemplos substituem deslocamento por opacidade, desativam parallax e autoplay. Aplicação geral fora de Motion deve consultar preferência no runtime utilizado."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-gsap-context",
+      "url": "https://gsap.com/docs/v3/GSAP/gsap.context%28%29/",
+      "title": "gsap.context()",
+      "authority": "GSAP official docs",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Scoping selector text; Adding to a Context; Cleanup; Caveats",
+      "excerpt": "A Context is simply for reverting/killing",
+      "contentSha256": "b2467e5a953fee76575075dfd342c37b5eb1632dd29babe37115065b10ff64f2",
+      "claims": [
+        "Context coleta animações e ScrollTriggers criados no escopo e permite revert; pode conter cleanup customizado. Callbacks tardios precisam registro; context não substitui timeline para controle."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-three-cleanup",
+      "url": "https://threejs.org/manual/pages/cleanup.html",
+      "title": "Three.js Cleanup",
+      "authority": "Three.js official manual",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Cleanup; ResourceTracker",
+      "excerpt": "calling the dispose function",
+      "contentSha256": "0f69ab2919406cce163b6624b5aad968f5aa6c0c900a54225747c84180d7f371",
+      "claims": [
+        "Geometrias, texturas e materiais WebGL exigem liberação explícita ao final do uso. Remover mesh da cena não libera sozinho todos os recursos; rastrear ownership evita descarte de recursos compartilhados."
+      ],
+      "licenseNote": "Three.js official manual; excerto breve; não copiar exemplos completos, verificar licença antes de reutilizar código.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-animation-pipeline",
+      "url": "https://web.dev/articles/animations-guide",
+      "title": "How to create high-performance CSS animations",
+      "authority": "Kayce Basques e Rachel Andrew, web.dev",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Avoid properties that trigger layout or paint; Debug; Composite",
+      "excerpt": "Use DevTools to check which stage",
+      "contentSha256": "218d68455471129f78e0d88461b1c01c069e06993421b3943f53b3b62b90591d",
+      "claims": [
+        "Preferir transform/opacity quando viável; outras propriedades exigem avaliação de layout/paint. DevTools, frames e paint profiler ajudam diagnosticar. will-change é otimização seletiva após problema."
+      ],
+      "licenseNote": "CC BY 4.0 texto; Apache 2.0 exemplos; excerto mínimo e paráfrase.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-will-change",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/will-change",
+      "title": "will-change CSS property",
+      "authority": "MDN contributors, documentação primária",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Description; Guidelines",
+      "excerpt": "Don't use it to anticipate performance problems.",
+      "contentSha256": "243a8efc923a6c807f5ed70bed0c4c6132526a8bc959c4954d365f5586e69c48",
+      "claims": [
+        "Hint não é garantia de aceleração. Uso amplo/permanente aumenta memória e complexidade; aplicar antes da mudança e retirar depois, somente com problema observado."
+      ],
+      "licenseNote": "MDN documentation CC BY-SA; excerto breve e análise original.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-next-boundary",
+      "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components",
+      "title": "Server and Client Components",
+      "authority": "Next.js official docs",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "When to use; Reducing JS bundle size; Interleaving",
+      "excerpt": "To reduce the size of your client JavaScript bundles",
+      "contentSha256": "b0f5d0303e2c931f6b65cd5c8d0f263f755e7bd166e41539bd31ac324053df3e",
+      "claims": [
+        "Diretiva delimita grafo de módulos cliente; fronteiras menores reduzem JS. Conteúdo server pode ser passado como children. Documentação corrente deve ser confrontada com a versão instalada."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-react-effects",
+      "url": "https://react.dev/learn/you-might-not-need-an-effect",
+      "title": "You Might Not Need an Effect",
+      "authority": "React official docs",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Introduction; How to remove unnecessary Effects",
+      "excerpt": "you shouldn’t need an Effect.",
+      "contentSha256": "7e61bf4bebfcd4eef3e80a93a4f6dd05027ce3ff3197a00fbc2446fbe5428769",
+      "claims": [
+        "Derivar dados na renderização evita ciclos redundantes. Eventos ficam em handlers; Effects sincronizam sistemas externos. Frameworks podem oferecer data fetching mais eficiente que Effect manual."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-youtube-retention",
+      "url": "https://support.google.com/youtube/answer/9314415",
+      "title": "Measure key moments for audience retention",
+      "authority": "YouTube official help",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Understand key moments; Intros; Spikes; Segments",
+      "excerpt": "Your content isn’t clear",
+      "contentSha256": "d48c84296332ec67f23b69a4dfc4d9b2a4359fa23b3e4881af614d8b60bd72a2",
+      "claims": [
+        "Picos podem representar replay, compartilhamento ou confusão; quedas indicam salto/saída. Comparações consideram duração e segmentos. Diagnóstico de YouTube não prova causalidade nem regra universal de Reel."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-tiktok-codes",
+      "url": "https://ads.tiktok.com/business/en-US/creative-codes",
+      "title": "TikTok Creative Codes",
+      "authority": "TikTok for Business",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "3 Be production-principled; 4 Structure; 6 Sound",
+      "excerpt": "hook, body, close",
+      "contentSha256": "26a19ceee2ea1075bc5d7c2a8ccacb911a86f377de47f04691755453fe96e37e",
+      "claims": [
+        "Recomendação publicitária orienta formato vertical, área livre para UI, estrutura de abertura/conteúdo/fechamento e som. Claims de lift da plataforma não garantem desempenho orgânico ou de cliente."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-broll",
+      "url": "https://www.adobe.com/creativecloud/video/discover/b-roll.html",
+      "title": "What is B-roll footage and why is it important?",
+      "authority": "Adobe; entrevistas Hiroshi Hara e Mike Leonard",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "How to shoot B-roll; Make a shot list; Slow down",
+      "excerpt": "Plan ahead with a shot list",
+      "contentSha256": "53979b817650d70ca600f94a336dd3c681c0fe9f3c95022efb86b1fd1a595eeb",
+      "claims": [
+        "Planos complementares podem estabelecer contexto, unir cortes e apoiar fala. Shot list e tomadas suficientemente longas ampliam opções de edição. Orientação e entrevista não provam efeito causal em retenção."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-captions",
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "title": "Captions/Subtitles",
+      "authority": "W3C WAI",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Introduction; Need Captions; Automatic Captions are Not Sufficient",
+      "excerpt": "Usually they need significant editing.",
+      "contentSha256": "fad3aae37fca7000df484f5e77c95c6edeeb0c6bc28507a19a49bbe5c617b7c1",
+      "claims": [
+        "Legendas representam fala e sons necessários sincronizados. Saída automática exige confirmação de precisão e geralmente edição; áudio relevante difere de música decorativa e vídeo sem áudio."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-images-text",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html",
+      "title": "Understanding 1.4.5 Images of Text",
+      "authority": "W3C AG Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Success Criterion; Intent; text provided alongside image",
+      "excerpt": "Use text instead of pictures of text.",
+      "contentSha256": "be36749b4de082ded87ccdcf87771597d8e22b77849bca1b9b941008a85d9396",
+      "claims": [
+        "Texto real facilita adaptação visual. Existem exceções, como logos e apresentação essencial. Texto equivalente acompanha imagem; aplicar princípio a carrossel social é inferência, não laudo WCAG da rede."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-pause",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html",
+      "title": "Understanding 2.2.2 Pause Stop Hide",
+      "authority": "W3C AG Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Success Criterion; Intent; real-time status",
+      "excerpt": "Let users control content changes",
+      "contentSha256": "e84863173fc2dd9917d592f06a0ac8dc082e9f680e26abb65ba5b97537116e7d",
+      "claims": [
+        "Movimento automático paralelo por mais de cinco segundos exige pausa/stop/hide salvo essencial. Atualização automática não tem exceção de cinco segundos. Retomada de status ao vivo deve evitar informação enganosa."
+      ],
+      "licenseNote": "W3C permissive license/WAI terms; excerto breve e paráfrase; Understanding/APG são orientação informativa, não certificação.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-disclosure",
+      "url": "https://www.nngroup.com/articles/progressive-disclosure/",
+      "title": "Progressive Disclosure",
+      "authority": "Jakob Nielsen, NN/g",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Progressive disclosure; Implementation; Staged Disclosure",
+      "excerpt": "show users only a few",
+      "contentSha256": "45fafb5801fd60e92e7470892265ad01e291ced858a143645b3c4fd272d45fd1",
+      "claims": [
+        "Opções frequentes vêm primeiro; recursos especializados aparecem por pedido com rótulo claro. Dados de uso precisam observação para interpretar demanda; múltiplos níveis podem desorientar."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-inp",
+      "url": "https://web.dev/articles/inp",
+      "title": "Interaction to Next Paint (INP)",
+      "authority": "Jeremy Wagner e Barry Pollard, web.dev",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Good INP; What is INP; Measure in field and lab",
+      "excerpt": "the time that the next paint is being blocked",
+      "contentSha256": "5900b6373ca5fe09eb30e1f29259b22d18fd0cef335a2afc2a364aecb80383b9",
+      "claims": [
+        "INP avalia resposta a clique/toque/tecla, não duração completa de operação assíncrona. p75 de campo segmentado orienta avaliação; laboratório depende dos fluxos executados, TBT não substitui INP."
+      ],
+      "licenseNote": "CC BY 4.0 texto; Apache 2.0 exemplos; excerto mínimo e paráfrase.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-typography",
+      "url": "https://practicaltypography.com/summary-of-key-rules.html",
+      "title": "Summary of key rules",
+      "authority": "Matthew Butterick, autor",
+      "readAt": "2026-10-02",
+      "readScope": "Seções indicadas efetivamente lidas via web nesta execução. SHA-256 cobre somente o excerto retido, não o documento completo.",
+      "locator": "Rules 1–4, 8, 10, 11",
+      "excerpt": "Summary of key rules",
+      "contentSha256": "fe20417fd1f501bef8f29cf3f1bfefb55328ccd808004d8858e69872fdbebc73",
+      "claims": [
+        "Tamanho, entrelinha, medida e fonte precisam avaliação conjunta. Faixas numéricas e preferências de fonte são orientações do autor, não regra universal de cliente ou acessibilidade."
+      ],
+      "licenseNote": "Copyright titular; excerto breve e paráfrase original; não autoriza reproduzir obra ou mídia.",
+      "credibilityTier": "primary",
+      "biasNote": "Orientação da instituição/autoria; aplicação ao contexto do cliente exige teste."
+    },
+    {
+      "id": "priority-mobbin-browserbase",
+      "url": "https://mobbin.com/screens/751c482f-9ff7-4fec-9a57-db1422cfd3a6",
+      "title": "Browserbase — Session table",
+      "authority": "Mobbin authenticated official MCP; original product capture",
+      "readAt": "2026-10-02T09:12:07.945Z",
+      "readScope": "Uma captura estática realmente lida via view_image; não testou fluxo, teclado, backend, mobile ou eficácia. SHA principal cobre excerto retido.",
+      "locator": "Status filter chip, reset and table columns",
+      "excerpt": "Clear filters",
+      "contentSha256": "7179ea0035fca783ec62b7185659b68c75f2a7c12b909306a57183dc9b3fa44b",
+      "claims": [
+        "Filtro ativo com remoção, menu de critérios e colunas de estado/duração/região são visíveis; comportamento não foi exercitado."
+      ],
+      "licenseNote": "Prévia nativa MCP para inspeção autorizada. Não redistribuir mídia premium; somente observações próprias e URL canônica. Ausência de ai_usage_notice não concede licença geral.",
+      "credibilityTier": "primary-observation",
+      "biasNote": "Padrão de outro produto; utilidade depende do cliente.",
+      "nativeEvidence": {
+        "receipt": "research/expert-evolution/mobbin-table-receipt.json",
+        "tool": "search_screens",
+        "mode": "standard",
+        "screenId": "751c482f-9ff7-4fec-9a57-db1422cfd3a6",
+        "imageFileName": "table-1.jpg",
+        "imageRead": true,
+        "imageSha256": "af613a8f2a63a437669cd1b13b2e0b272eb5429bade1d1c67aae1b4029dadb23",
+        "taskIntent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+        "outputDestination": "doc",
+        "aiUsageNoticeReturned": false
+      }
+    },
+    {
+      "id": "priority-mobbin-doordash",
+      "url": "https://mobbin.com/screens/5b7f8ac3-1059-401f-a3ee-88e553391166",
+      "title": "DoorDash Merchant — Campaigns table",
+      "authority": "Mobbin authenticated official MCP; original product capture",
+      "readAt": "2026-10-02T09:12:07.945Z",
+      "readScope": "Uma captura estática realmente lida via view_image; não testou fluxo, teclado, backend, mobile ou eficácia. SHA principal cobre excerto retido.",
+      "locator": "Campaign filters, status column, row actions and page actions",
+      "excerpt": "Campaigns",
+      "contentSha256": "30e9a089397b25b0b83545562dd8010a20d27d10f9ec2bd2e3c89b97810c0806",
+      "claims": [
+        "Estados usam texto e ícone; filtros e ações de linha/página aparecem separados. Imagem não prova nome acessível ou resultado."
+      ],
+      "licenseNote": "Prévia nativa MCP para inspeção autorizada. Não redistribuir mídia premium; somente observações próprias e URL canônica. Ausência de ai_usage_notice não concede licença geral.",
+      "credibilityTier": "primary-observation",
+      "biasNote": "Padrão de outro produto; utilidade depende do cliente.",
+      "nativeEvidence": {
+        "receipt": "research/expert-evolution/mobbin-table-receipt.json",
+        "tool": "search_screens",
+        "mode": "standard",
+        "screenId": "5b7f8ac3-1059-401f-a3ee-88e553391166",
+        "imageFileName": "table-2.jpg",
+        "imageRead": true,
+        "imageSha256": "be5488e8c5f0d2c4ab45e6e710181b345fbfa377faeaf610385dd16ab3f72ffe",
+        "taskIntent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+        "outputDestination": "doc",
+        "aiUsageNoticeReturned": false
+      }
+    },
+    {
+      "id": "priority-mobbin-square",
+      "url": "https://mobbin.com/screens/e89ef674-df07-4351-901a-7ca09689a46e",
+      "title": "Square — Payment details prerequisite",
+      "authority": "Mobbin authenticated official MCP; original product capture",
+      "readAt": "2026-10-02T09:13:22.267Z",
+      "readScope": "Uma captura estática realmente lida via view_image; não testou fluxo, teclado, backend, mobile ou eficácia. SHA principal cobre excerto retido.",
+      "locator": "Payment methods prerequisite notice and completion action",
+      "excerpt": "Finish onboarding",
+      "contentSha256": "33c8bb80c9d8ea3920eda6d7ed94d579df0880f407d8c3cd4b8e2a37fc272e1c",
+      "claims": [
+        "Aviso liga indisponibilidade de métodos de pagamento ao cadastro pendente e apresenta ação para concluir pré-requisito."
+      ],
+      "licenseNote": "Prévia nativa MCP para inspeção autorizada. Não redistribuir mídia premium; somente observações próprias e URL canônica. Ausência de ai_usage_notice não concede licença geral.",
+      "credibilityTier": "primary-observation",
+      "biasNote": "Padrão de outro produto; utilidade depende do cliente.",
+      "nativeEvidence": {
+        "receipt": "research/expert-evolution/mobbin-checkout-receipt.json",
+        "tool": "search_screens",
+        "mode": "standard",
+        "screenId": "e89ef674-df07-4351-901a-7ca09689a46e",
+        "imageFileName": "checkout-1.jpg",
+        "imageRead": true,
+        "imageSha256": "c4529a999ce8a5cfcae9b184c5ad326df571eb10a33a991927eb5d72f3e7cd48",
+        "taskIntent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+        "outputDestination": "doc",
+        "aiUsageNoticeReturned": false
+      }
+    },
+    {
+      "id": "priority-mobbin-getyourguide",
+      "url": "https://mobbin.com/screens/344b84fb-4aa5-45c6-9d32-38fa6f94a1aa",
+      "title": "GetYourGuide — Checkout payment and summary",
+      "authority": "Mobbin authenticated official MCP; original product capture",
+      "readAt": "2026-10-02T09:13:22.267Z",
+      "readScope": "Uma captura estática realmente lida via view_image; não testou fluxo, teclado, backend, mobile ou eficácia. SHA principal cobre excerto retido.",
+      "locator": "Payment options, reservation timer and visible order summary",
+      "excerpt": "Order summary",
+      "contentSha256": "6c200a8a390e2b618fe06d74e80dcc18e84963a37f87e1fd4945f63bce2b9170",
+      "claims": [
+        "Pagamento imediato/posterior, métodos, total com taxas e resumo são visíveis. Timer é padrão observado, não recomendação de pressão artificial; erros inline não aparecem."
+      ],
+      "licenseNote": "Prévia nativa MCP para inspeção autorizada. Não redistribuir mídia premium; somente observações próprias e URL canônica. Ausência de ai_usage_notice não concede licença geral.",
+      "credibilityTier": "primary-observation",
+      "biasNote": "Padrão de outro produto; utilidade depende do cliente.",
+      "nativeEvidence": {
+        "receipt": "research/expert-evolution/mobbin-checkout-receipt.json",
+        "tool": "search_screens",
+        "mode": "standard",
+        "screenId": "344b84fb-4aa5-45c6-9d32-38fa6f94a1aa",
+        "imageFileName": "checkout-2.jpg",
+        "imageRead": true,
+        "imageSha256": "7d804380142674a371d4187d02d2b15b0db8811857b5e3336607f5c88953a59b",
+        "taskIntent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+        "outputDestination": "doc",
+        "aiUsageNoticeReturned": false
+      }
+    },
+    {
+      "id": "priority-mobbin-ahead",
+      "url": "https://mobbin.com/flows/3ae2e6e9-0ad0-4cf8-b496-e511d37d9939",
+      "title": "Ahead — Completing account setup, selective sample",
+      "authority": "Mobbin authenticated official MCP; original Ahead captures",
+      "readAt": "2026-10-02T09:13:24.835Z",
+      "readScope": "Apenas 5 de 22 posições lidas visualmente: 1,6,12,17,22. Não representa leitura integral nem prova privacidade, scoring, saúde ou resultado.",
+      "locator": "Flow positions 1,6,12,17,22 of 22; personalization, progress, choices, journeys, completion",
+      "excerpt": "Pick your journeys",
+      "contentSha256": "71d3a9b598fb4ead816f1f4bceaa3c9ea129bf8a1657e8c6c68cfcd2c592609d",
+      "claims": [
+        "A amostra alterna propósito, progresso, opções pessoais, seleção de jornadas e conclusão. Percentuais e declarações de privacidade são copy observada, não fatos verificados."
+      ],
+      "licenseNote": "Prévia nativa MCP para inspeção autorizada. Não redistribuir imagens premium; registrar amostra e URL canônica.",
+      "credibilityTier": "primary-observation",
+      "biasNote": "A amostra omite 17 telas; não inferir sequência completa ou eficácia.",
+      "nativeEvidence": {
+        "receipt": "research/expert-evolution/mobbin-onboarding-receipt.json",
+        "tool": "search_flows",
+        "flowId": "3ae2e6e9-0ad0-4cf8-b496-e511d37d9939",
+        "screenCount": 22,
+        "readPositions": [
+          1,
+          6,
+          12,
+          17,
+          22
+        ],
+        "imageFiles": [
+          "onboarding-2.jpg",
+          "onboarding-4.jpg",
+          "onboarding-6.jpg",
+          "onboarding-8.jpg",
+          "onboarding-10.jpg"
+        ],
+        "imageReads": true,
+        "imageSha256": [
+          {
+            "file": "onboarding-2.jpg",
+            "sha256": "3884bbe7dfd2f94e0509a0595d75506ab0efe8e4b4ff73351e162859ce910844"
+          },
+          {
+            "file": "onboarding-4.jpg",
+            "sha256": "c8d559de14e21c8bdd23145f6c8b8eedf5cb8e85c8e19530af78853c17f6e62b"
+          },
+          {
+            "file": "onboarding-6.jpg",
+            "sha256": "4e9798e0726d48019db59a0d9b24d6a89a7f6994868553bd89ec282ed3fc14f0"
+          },
+          {
+            "file": "onboarding-8.jpg",
+            "sha256": "48a16824779be7b9fa226609606e0409c9924c3be9ac43042e6e65bed91f6fd5"
+          },
+          {
+            "file": "onboarding-10.jpg",
+            "sha256": "aadbca364847e2122ba658cf076825c4e21906f1468878dae7f6b0c3d12945ac"
+          }
+        ],
+        "taskIntent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+        "outputDestination": "doc",
+        "aiUsageNoticeReturned": false
+      }
+    }
+  ],
+  "heuristics": [
+    {
+      "id": "priority-token-types",
+      "squad": "squad-design",
+      "mission": "Intercambiar tokens sem ambiguidade.",
+      "competencies": [
+        "inclusive-components",
+        "token-type-integrity",
+        "specialist-dx-design-system-architect"
+      ],
+      "condition": "Ao exportar biblioteca entre ferramentas.",
+      "action": "Validar tipo explícito ou herdado e valores; rejeitar tipos indeterminados; preservar extensões desconhecidas.",
+      "rationale": "Formato consistente reduz interpretações divergentes.",
+      "exceptions": [
+        "DTCG é relatório de Community Group, não W3C Standard."
+      ],
+      "counterexamples": [
+        "Nome color-brand não autoriza inferir tipo pelo grupo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-dtcg",
+          "locator": "Status; 3.8 Alias; 5.2.2 Type",
+          "section": "Status; 3.8 Alias; 5.2.2 Type",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-design-system-architect"
+      ],
+      "taskTags": [
+        "define-token-taxonomy",
+        "configure-token-export-pipeline"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-token-alias-boundary",
+      "squad": "squad-design",
+      "mission": "Preservar identidade por marca.",
+      "competencies": [
+        "inclusive-components",
+        "token-alias-contract",
+        "specialist-dx-design-system-architect"
+      ],
+      "condition": "Ao modelar temas e semântica compartilhada.",
+      "action": "Separar decisões de marca de nomes funcionais, validar referências e exportações por tema autorizado.",
+      "rationale": "Aliases desacoplam nome funcional do valor.",
+      "exceptions": [
+        "Três camadas são opção arquitetural, não imposição da especificação."
+      ],
+      "counterexamples": [
+        "Copiar paleta SINAPSE para cliente não é multi-brand validado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-dtcg",
+          "locator": "Status; 3.8 Alias; 5.2.2 Type",
+          "section": "Status; 3.8 Alias; 5.2.2 Type",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-design-system-architect"
+      ],
+      "taskTags": [
+        "create-semantic-tokens",
+        "design-multi-brand-theming"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-parts-and-pages",
+      "squad": "squad-design",
+      "mission": "Compor biblioteca eficaz em produto real.",
+      "competencies": [
+        "inclusive-components",
+        "component-context",
+        "specialist-dx-design-system-architect",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao aprovar componentes isolados.",
+      "action": "Avaliar componentes também em páginas com conteúdo representativo; ajustar partes quando composição falhar.",
+      "rationale": "Partes e experiência completa se influenciam.",
+      "exceptions": [
+        "Não exigir sequência rígida átomo até página."
+      ],
+      "counterexamples": [
+        "Storybook bonito com página quebrada não prova sistema eficaz."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-atomic",
+          "locator": "The atomic design methodology; Templates; Pages",
+          "section": "The atomic design methodology; Templates; Pages",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-design-system-architect",
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "implement-component-library",
+        "design-component-api-contracts"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-content-variants",
+      "squad": "squad-design",
+      "mission": "Resistir a variação real de conteúdo.",
+      "competencies": [
+        "inclusive-components",
+        "content-resilience",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao especificar templates e responsividade.",
+      "action": "Exercitar títulos longos, vazio, quantidades extremas e permissões; definir wrapping/truncation coerentes.",
+      "rationale": "Variações revelam limites escondidos pelo placeholder.",
+      "exceptions": [
+        "Truncamento pode servir prévia com acesso ao conteúdo completo."
+      ],
+      "counterexamples": [
+        "Título de três linhas pode exigir revisão do componente."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-atomic",
+          "locator": "The atomic design methodology; Templates; Pages",
+          "section": "The atomic design methodology; Templates; Pages",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "compose-screen-layouts",
+        "conduct-visual-qa"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-action-signifiers",
+      "squad": "squad-design",
+      "mission": "Tornar ações e estados compreensíveis.",
+      "competencies": [
+        "interaction-recovery",
+        "perceivable-action",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao usar gesto, ícone ou botão sem rótulo.",
+      "action": "Fornecer pistas perceptíveis de ação e estado; confirmar interpretação com usuários do contexto.",
+      "rationale": "Possibilidade técnica não garante descoberta.",
+      "exceptions": [
+        "Convenções dependem de cultura e familiaridade."
+      ],
+      "counterexamples": [
+        "Área clicável sem pista pode permanecer ignorada."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-signifiers",
+          "locator": "Signifiers, Not Affordances; exemplos de plataforma",
+          "section": "Signifiers, Not Affordances; exemplos de plataforma",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "spec-gesture-interactions",
+        "spec-micro-interactions"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-usefulness-before-decoration",
+      "squad": "squad-design",
+      "mission": "Servir a tarefa com composição premium.",
+      "competencies": [
+        "problem-before-solution",
+        "visual-purpose",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao acrescentar efeito ou ornamentação.",
+      "action": "Explicitar utilidade, compreensão e benefício visual; avaliar se o efeito prejudica tarefa, marca ou leitura.",
+      "rationale": "Qualidade estética participa da utilidade.",
+      "exceptions": [
+        "Princípios de produto físico exigem adaptação a software."
+      ],
+      "counterexamples": [
+        "Remover rótulos essenciais por minimalismo reduz compreensão."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-rams",
+          "locator": "Principles 2, 4, 6, 10",
+          "section": "Principles 2, 4, 6, 10",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "design-visual-hierarchy",
+        "compose-screen-layouts"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-honest-hook",
+      "squad": "squad-copy",
+      "mission": "Capturar interesse sem promessa enganosa.",
+      "competencies": [
+        "persuasion-grounding",
+        "headline",
+        "specialist-headline-specialist"
+      ],
+      "condition": "Ao transformar benefício em abertura.",
+      "action": "Vincular promessa ao conteúdo e à prova disponível; reduzir precisão artificial sem suporte.",
+      "rationale": "Design honesto não exagera potência ou valor.",
+      "exceptions": [
+        "Regra editorial inferida, não orientação jurídica."
+      ],
+      "counterexamples": [
+        "Resultado em sete dias sem prova não vira verdade por headline específico."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-rams",
+          "locator": "Principles 2, 4, 6, 10",
+          "section": "Principles 2, 4, 6, 10",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "headline-specialist"
+      ],
+      "taskTags": [
+        "create-opening-hooks",
+        "craft-social-media-hooks"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-intrinsic-layout",
+      "squad": "squad-design",
+      "mission": "Adaptar layout ao conteúdo.",
+      "competencies": [
+        "inclusive-components",
+        "intrinsic-layout",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao receber composição fixa de tela.",
+      "action": "Deixar conteúdo crescer e quebrar linhas; restringir dimensões com justificativa e testar zoom/tela estreita.",
+      "rationale": "Conteúdo dinâmico altera formato das caixas.",
+      "exceptions": [
+        "Crop de mídia e caixas medidas podem ser intencionais."
+      ],
+      "counterexamples": [
+        "Altura rígida pode cortar texto traduzido."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-boxes",
+          "locator": "Logical properties; Content in boxes; box-sizing",
+          "section": "Logical properties; Content in boxes; box-sizing",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "implement-responsive-layouts",
+        "setup-frontend-architecture"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-logical-spacing",
+      "squad": "squad-design",
+      "mission": "Preservar layout entre direções de escrita.",
+      "competencies": [
+        "inclusive-components",
+        "logical-properties",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao implementar espaçamento dependente de texto.",
+      "action": "Usar e verificar propriedades lógicas de margem/padding; considerar box-sizing nas dimensões prescritas.",
+      "rationale": "Direções inline/block seguem o idioma.",
+      "exceptions": [
+        "Posição física pode ser correta para coordenada de imagem."
+      ],
+      "counterexamples": [
+        "margin-right pode afastar ícone do texto em RTL."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-boxes",
+          "locator": "Logical properties; Content in boxes; box-sizing",
+          "section": "Logical properties; Content in boxes; box-sizing",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "setup-internationalization",
+        "implement-responsive-layouts"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-type-coupling",
+      "squad": "squad-design",
+      "mission": "Ajustar tipografia ao uso real.",
+      "competencies": [
+        "inclusive-components",
+        "typographic-readability",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao escolher fonte, tamanho e medida.",
+      "action": "Avaliar fonte, tamanho, entrelinha e comprimento juntos no conteúdo e tamanho final; respeitar identidade do cliente.",
+      "rationale": "Legibilidade não depende apenas do tamanho.",
+      "exceptions": [
+        "Faixas de Butterick são referências, não gate universal."
+      ],
+      "counterexamples": [
+        "45–90 caracteres não é medida obrigatória em botão."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-typography",
+          "locator": "Rules 1–4, 8, 10, 11",
+          "section": "Rules 1–4, 8, 10, 11",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "design-visual-hierarchy",
+        "produce-design-handoff-specs"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-carousel-reading-size",
+      "squad": "squad-content",
+      "mission": "Produzir carrossel legível em consumo real.",
+      "competencies": [
+        "information-hierarchy",
+        "multimodal-content",
+        "specialist-content-engineer",
+        "specialist-platform-specialist"
+      ],
+      "condition": "Ao encaixar copy em campos limitados.",
+      "action": "Conferir hierarquia, densidade e leitura no tamanho final; ajustar blocos sem romper tese e progressão.",
+      "rationale": "Contagem de caracteres não comprova legibilidade.",
+      "exceptions": [
+        "Tipografia de web/print é aplicada a social por inferência."
+      ],
+      "counterexamples": [
+        "Texto cabe no campo mas fica ilegível no celular."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-typography",
+          "locator": "Rules 1–4, 8, 10, 11",
+          "section": "Rules 1–4, 8, 10, 11",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-engineer",
+        "platform-specialist"
+      ],
+      "taskTags": [
+        "carousel",
+        "structure-carousel",
+        "template-contract"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-modal-focus",
+      "squad": "squad-design",
+      "mission": "Preservar orientação durante modal.",
+      "competencies": [
+        "inclusive-components",
+        "flow-focus-contract",
+        "specialist-dx-accessibility-specialist",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao abrir e fechar diálogo modal.",
+      "action": "Definir foco inicial contextual, ciclo Tab, Escape e retorno lógico; testar teclado e leitura assistiva.",
+      "rationale": "Foco comunica entrada e saída do contexto.",
+      "exceptions": [
+        "Conteúdo extenso pode começar no título; acionador removido exige destino alternativo."
+      ],
+      "counterexamples": [
+        "Focar primeiro botão pode ocultar o início da mensagem."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-dialog",
+          "locator": "Keyboard Interaction; Notes; Roles States and Properties",
+          "section": "Keyboard Interaction; Notes; Roles States and Properties",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-accessibility-specialist",
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "design-focus-management",
+        "test-keyboard-navigation"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-modal-semantics",
+      "squad": "squad-design",
+      "mission": "Alinhar semântica e comportamento modal.",
+      "competencies": [
+        "inclusive-components",
+        "modal-semantics",
+        "specialist-dx-accessibility-specialist"
+      ],
+      "condition": "Ao marcar aria-modal e descrição.",
+      "action": "Exigir nome acessível e fundo realmente inerte; evitar descrição monolítica para conteúdo estruturado.",
+      "rationale": "ARIA incorreta pode esconder contexto utilizável.",
+      "exceptions": [
+        "aria-describedby ajuda descrições curtas e simples."
+      ],
+      "counterexamples": [
+        "aria-modal true com fundo clicável cria modalidades contraditórias."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-dialog",
+          "locator": "Keyboard Interaction; Notes; Roles States and Properties",
+          "section": "Keyboard Interaction; Notes; Roles States and Properties",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-accessibility-specialist"
+      ],
+      "taskTags": [
+        "review-aria-patterns",
+        "create-screen-reader-specs"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-carousel-rotation-control",
+      "squad": "squad-design",
+      "mission": "Devolver controle de rotação ao usuário.",
+      "competencies": [
+        "inclusive-components",
+        "carousel-control",
+        "specialist-dx-accessibility-specialist",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao projetar carrossel com autoplay.",
+      "action": "Oferecer stop/start, parar em foco e hover e não retomar após foco sem pedido explícito; testar sequência.",
+      "rationale": "Mudança inesperada desorienta leitura e navegação.",
+      "exceptions": [
+        "Carrossel estático dispensa controle de autoplay."
+      ],
+      "counterexamples": [
+        "Pausar só enquanto há foco restringe uso da página."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-carousel",
+          "locator": "About This Pattern; Keyboard Interaction; Basic carousel elements",
+          "section": "About This Pattern; Keyboard Interaction; Basic carousel elements",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-accessibility-specialist",
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "review-aria-patterns",
+        "spec-gesture-interactions"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-carousel-state-labels",
+      "squad": "squad-design",
+      "mission": "Identificar conteúdo e controles do carrossel.",
+      "competencies": [
+        "inclusive-components",
+        "carousel-state-contract",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao desenhar navegação entre slides.",
+      "action": "Nomear controles pela ação, indicar slide e impedir conteúdo não apresentado de confundir navegação; alinhar foco e live region.",
+      "rationale": "Mudança de slide precisa contexto interpretável.",
+      "exceptions": [
+        "Tablist e grupo de botões têm contratos diferentes."
+      ],
+      "counterexamples": [
+        "Dez indicadores focáveis podem sobrecarregar a sequência."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-carousel",
+          "locator": "About This Pattern; Keyboard Interaction; Basic carousel elements",
+          "section": "About This Pattern; Keyboard Interaction; Basic carousel elements",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "spec-micro-interactions",
+        "design-feedback-animations"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-drag-pointer-alternative",
+      "squad": "squad-design",
+      "mission": "Oferecer operação equivalente sem arrastar.",
+      "competencies": [
+        "inclusive-components",
+        "drag-alternative",
+        "specialist-dx-accessibility-specialist",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao implementar drag controlado pelo autor.",
+      "action": "Adicionar alternativa de clique/toque simples, além de teclado; confirmar equivalência da tarefa.",
+      "rationale": "Teclado e ponteiro sem drag são requisitos independentes.",
+      "exceptions": [
+        "Drag essencial e rolagem nativa têm exceções."
+      ],
+      "counterexamples": [
+        "Setas só no teclado não ajudam usuário de toque."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-drag",
+          "locator": "Success Criterion; Intent; Relationship to keyboard",
+          "section": "Success Criterion; Intent; Relationship to keyboard",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-accessibility-specialist",
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "spec-gesture-interactions",
+        "conduct-wcag-audit"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-contrast-by-role",
+      "squad": "squad-design",
+      "mission": "Manter leitura em cores da marca.",
+      "competencies": [
+        "inclusive-components",
+        "contrast-role",
+        "specialist-dx-accessibility-specialist",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao aprovar combinações de texto e fundo.",
+      "action": "Medir contraste nos estados reais: 4,5:1 comum e 3:1 grande; documentar exceções corretamente.",
+      "rationale": "Contraste mede relação, não cor isolada.",
+      "exceptions": [
+        "Logos e controles inativos têm exceções específicas."
+      ],
+      "counterexamples": [
+        "Paleta aprovada não comprova contraste de texto sobre fotografia."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-contrast",
+          "locator": "Success Criterion; Intent",
+          "section": "Success Criterion; Intent",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-accessibility-specialist",
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "verify-color-contrast",
+        "design-component-visual-states"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-progressive-disclosure",
+      "squad": "squad-design",
+      "mission": "Reduzir complexidade sem esconder trabalho necessário.",
+      "competencies": [
+        "problem-before-solution",
+        "progressive-disclosure",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao reorganizar superfície com muitas opções.",
+      "action": "Priorizar operações frequentes e revelar especializadas por pedido com rótulo previsível; verificar tarefas reais.",
+      "rationale": "Primeiro nível concentra decisões relevantes.",
+      "exceptions": [
+        "Recursos avançados podem ser frequentes em outro público."
+      ],
+      "counterexamples": [
+        "Ocultar campo obrigatório em Avançado cria fricção."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-disclosure",
+          "locator": "Progressive disclosure; Implementation; Staged Disclosure",
+          "section": "Progressive disclosure; Implementation; Staged Disclosure",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "spec-micro-interactions",
+        "create-motion-documentation"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-motion-alternative",
+      "squad": "squad-animations",
+      "mission": "Preservar informação com menor movimento.",
+      "competencies": [
+        "motion-control",
+        "reduced-motion-runtime",
+        "specialist-css-motion-artist",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao usar parallax, deslocamento ou vídeo de fundo.",
+      "action": "Consultar preferência no runtime, substituir movimento vestibular e responder a mudanças; verificar JS e CSS.",
+      "rationale": "Redução CSS não controla sozinha todos os runtimes.",
+      "exceptions": [
+        "Movimento essencial exige justificativa e alternativa viável."
+      ],
+      "counterexamples": [
+        "Duração global quase zero pode manter loop de vídeo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-reduced",
+          "locator": "useReducedMotion; Usage",
+          "section": "useReducedMotion; Usage",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "css-motion-artist",
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "reduced-motion",
+        "animation",
+        "parallax"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-compositor-choice",
+      "squad": "squad-animations",
+      "mission": "Escolher propriedade pelo custo e efeito.",
+      "competencies": [
+        "motion-control",
+        "render-pipeline",
+        "specialist-css-motion-artist"
+      ],
+      "condition": "Ao projetar animação visual.",
+      "action": "Preferir transform/opacity quando produzem o efeito; para layout/paint necessário, limitar escopo e medir custo.",
+      "rationale": "Etapas anteriores aumentam trabalho por frame.",
+      "exceptions": [
+        "Mudança real de layout pode ser funcionalmente necessária."
+      ],
+      "counterexamples": [
+        "Proibir height sempre pode impedir accordion correto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-animation-pipeline",
+          "locator": "Avoid properties that trigger layout or paint; Debug; Composite",
+          "section": "Avoid properties that trigger layout or paint; Debug; Composite",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "css-motion-artist"
+      ],
+      "taskTags": [
+        "css-animation",
+        "layout-animation"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-trace-before-fps-claim",
+      "squad": "squad-animations",
+      "mission": "Diagnosticar jank com evidência.",
+      "competencies": [
+        "webgl-main-thread",
+        "render-pipeline",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao observar frames perdidos ou repaint.",
+      "action": "Registrar trace representativo, verificar layout/paint/camadas e comparar antes/depois; declarar hardware e fluxo.",
+      "rationale": "Propriedade barata não garante frame estável.",
+      "exceptions": [
+        "Orçamentos dependem de dispositivo e refresh rate."
+      ],
+      "counterexamples": [
+        "60fps na máquina do autor não prova celular."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-animation-pipeline",
+          "locator": "Avoid properties that trigger layout or paint; Debug; Composite",
+          "section": "Avoid properties that trigger layout or paint; Debug; Composite",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "animation-performance",
+        "profiling",
+        "paint"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-layer-hint-budget",
+      "squad": "squad-animations",
+      "mission": "Evitar promoção GPU excessiva.",
+      "competencies": [
+        "webgl-resource-budget",
+        "layer-lifecycle",
+        "specialist-animation-performance-engineer",
+        "specialist-css-motion-artist"
+      ],
+      "condition": "Ao considerar will-change para problema existente.",
+      "action": "Aplicar seletivamente antes da mudança e retirar depois; medir memória, stacking context e desempenho.",
+      "rationale": "Hint amplo/permanente pode piorar desempenho.",
+      "exceptions": [
+        "Conteúdo complexo prestes a mudar pode justificar hint persistente delimitado."
+      ],
+      "counterexamples": [
+        "Adicionar hint a milhares de cards não garante fluidez."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-will-change",
+          "locator": "Description; Guidelines",
+          "section": "Description; Guidelines",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-performance-engineer",
+        "css-motion-artist"
+      ],
+      "taskTags": [
+        "will-change",
+        "gpu",
+        "animation-performance"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-lowest-target-device",
+      "squad": "squad-animations",
+      "mission": "Validar motion no público atendido.",
+      "competencies": [
+        "webgl-resource-budget",
+        "device-validation",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao aceitar resultado do computador de desenvolvimento.",
+      "action": "Testar dispositivo menos potente relevante; analisar custo e efeito de promoção GPU, ajustar qualidade por medição.",
+      "rationale": "Hardware do autor mascara restrições do usuário.",
+      "exceptions": [
+        "Emulação não substitui todos os testes de GPU."
+      ],
+      "counterexamples": [
+        "Transform pode custar memória suficiente para degradar experiência."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-transitions",
+          "locator": "Performance; Hardware Acceleration; Action-driven motion",
+          "section": "Performance; Hardware Acceleration; Action-driven motion",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "animation-performance",
+        "mobile-performance"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-gsap-selector-scope",
+      "squad": "squad-animations",
+      "mission": "Isolar animações entre instâncias.",
+      "competencies": [
+        "motion-control",
+        "animation-scope",
+        "specialist-css-motion-artist"
+      ],
+      "condition": "Ao criar GSAP em componente reutilizável.",
+      "action": "Delimitar seletores por elemento/ref usando context; registrar animações de callbacks tardios no mesmo ciclo.",
+      "rationale": "Escopo reduz interferência e permite coletar recursos.",
+      "exceptions": [
+        "Recursos globais deliberados exigem ownership separado."
+      ],
+      "counterexamples": [
+        "Seletor .card global anima cards de outro componente."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-gsap-context",
+          "locator": "Scoping selector text; Adding to a Context; Cleanup; Caveats",
+          "section": "Scoping selector text; Adding to a Context; Cleanup; Caveats",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "css-motion-artist"
+      ],
+      "taskTags": [
+        "gsap",
+        "component-animation"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-gsap-teardown",
+      "squad": "squad-animations",
+      "mission": "Encerrar trabalho após saída do componente.",
+      "competencies": [
+        "motion-control",
+        "animation-lifecycle",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao desmontar ou reconstruir animações GSAP.",
+      "action": "Reverter context e limpar listeners externos; testar ciclos montar/desmontar sem multiplicação de triggers.",
+      "rationale": "Coleta de contexto não gerencia todo recurso externo.",
+      "exceptions": [
+        "Timeline controla playback; context gerencia escopo/limpeza."
+      ],
+      "counterexamples": [
+        "kill isolado pode deixar estilos ou listener externo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-gsap-context",
+          "locator": "Scoping selector text; Adding to a Context; Cleanup; Caveats",
+          "section": "Scoping selector text; Adding to a Context; Cleanup; Caveats",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "gsap",
+        "cleanup",
+        "animation-performance"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-webgl-resource-ownership",
+      "squad": "squad-animations",
+      "mission": "Liberar recursos sem quebrar compartilhamento.",
+      "competencies": [
+        "webgl-resource-budget",
+        "resource-ownership",
+        "specialist-threejs-architect"
+      ],
+      "condition": "Ao substituir cena ou modelo.",
+      "action": "Rastrear texturas, materiais e geometrias próprios; dispose ao fim do uso e remover objetos; verificar ciclos.",
+      "rationale": "Coleta JavaScript não libera automaticamente recursos WebGL.",
+      "exceptions": [
+        "Recurso ainda compartilhado precisa preservar consumidores."
+      ],
+      "counterexamples": [
+        "Remover mesh não descarta toda memória GPU."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-three-cleanup",
+          "locator": "Cleanup; ResourceTracker",
+          "section": "Cleanup; ResourceTracker",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "threejs-architect"
+      ],
+      "taskTags": [
+        "threejs",
+        "scene",
+        "cleanup"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-microtask-yield-boundary",
+      "squad": "squad-animations",
+      "mission": "Permitir resposta durante cálculo.",
+      "competencies": [
+        "webgl-main-thread",
+        "event-loop",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao fatiar cálculo com Promise resolvida.",
+      "action": "Não confundir microtask com oportunidade garantida de paint; usar mecanismo de agendamento adequado e medir input/render.",
+      "rationale": "Microtasks adicionais são drenadas antes da próxima task.",
+      "exceptions": [
+        "Artigo de 2015 não prova bugs atuais de browsers."
+      ],
+      "counterexamples": [
+        "await Promise.resolve repetido pode continuar bloqueando paint."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-event-loop",
+          "locator": "Why this happens; In summary",
+          "section": "Why this happens; In summary",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "animation-performance",
+        "main-thread",
+        "scheduling"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-autoplay-pause-mechanism",
+      "squad": "squad-animations",
+      "mission": "Controlar movimento automático paralelo.",
+      "competencies": [
+        "motion-control",
+        "autoplay-control",
+        "specialist-css-motion-artist",
+        "specialist-animation-performance-engineer"
+      ],
+      "condition": "Ao manter conteúdo automático em loop.",
+      "action": "Aplicar pausa/stop/hide quando critério se aplica; para atualização automática considerar controle de frequência.",
+      "rationale": "Movimento paralelo pode distrair e impedir leitura.",
+      "exceptions": [
+        "Movimento essencial ou isolado de preload tem exceções."
+      ],
+      "counterexamples": [
+        "Pausa apenas por hover não atende todos os usuários."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-pause",
+          "locator": "Success Criterion; Intent; real-time status",
+          "section": "Success Criterion; Intent; real-time status",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "css-motion-artist",
+        "animation-performance-engineer"
+      ],
+      "taskTags": [
+        "autoplay",
+        "accessibility",
+        "motion"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-client-boundary-size",
+      "squad": "squad-design",
+      "mission": "Conter custo de interatividade.",
+      "competencies": [
+        "inclusive-components",
+        "client-boundary",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao marcar layout com use client.",
+      "action": "Isolar módulos interativos menores, mapear grafo cliente e dados serializados; comparar bundle e fluxo.",
+      "rationale": "Diretiva amplia grafo cliente a imports.",
+      "exceptions": [
+        "Server children podem ser compostos dentro de shell cliente."
+      ],
+      "counterexamples": [
+        "Provider não exige importar todo catálogo no cliente."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-next-boundary",
+          "locator": "When to use; Reducing JS bundle size; Interleaving",
+          "section": "When to use; Reducing JS bundle size; Interleaving",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "implement-server-components",
+        "analyze-javascript-bundles"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-derive-before-effect",
+      "squad": "squad-design",
+      "mission": "Evitar ciclos redundantes e estado divergente.",
+      "competencies": [
+        "inclusive-components",
+        "react-synchronization",
+        "specialist-dx-frontend-engineer"
+      ],
+      "condition": "Ao calcular dados a partir de props/state.",
+      "action": "Derivar dados puros na renderização; tratar eventos em handlers e Effects na sincronização externa.",
+      "rationale": "Espelhamento via Effect cria passes desnecessários.",
+      "exceptions": [
+        "Player, listener ou conexão externa pode justificar Effect com cleanup."
+      ],
+      "counterexamples": [
+        "Subtotal espelhado pode ficar temporariamente desatualizado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-react-effects",
+          "locator": "Introduction; How to remove unnecessary Effects",
+          "section": "Introduction; How to remove unnecessary Effects",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-frontend-engineer"
+      ],
+      "taskTags": [
+        "setup-state-management",
+        "create-data-fetching-patterns"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-inp-field-scope",
+      "squad": "squad-design",
+      "mission": "Avaliar resposta de interações reais.",
+      "competencies": [
+        "inclusive-components",
+        "interaction-latency",
+        "specialist-dx-performance-engineer"
+      ],
+      "condition": "Ao aceitar score de performance.",
+      "action": "Analisar p75 de campo separado por dispositivo; reproduzir fluxos em laboratório e registrar ausência de dados.",
+      "rationale": "INP mede paint de clique/toque/tecla, não fetch completo.",
+      "exceptions": [
+        "Laboratório informa somente interações executadas."
+      ],
+      "counterexamples": [
+        "TBT baixo ou hover suave não comprova INP."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-inp",
+          "locator": "Good INP; What is INP; Measure in field and lab",
+          "section": "Good INP; What is INP; Measure in field and lab",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-performance-engineer"
+      ],
+      "taskTags": [
+        "audit-core-web-vitals",
+        "monitor-performance-regression"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-async-feedback",
+      "squad": "squad-design",
+      "mission": "Comunicar progresso sem falsa conclusão.",
+      "competencies": [
+        "interaction-recovery",
+        "interaction-feedback",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao iniciar operação lenta.",
+      "action": "Apresentar feedback inicial prontamente e distinguir processamento de sucesso confirmado; medir a primeira resposta.",
+      "rationale": "Feedback visual reduz percepção de travamento.",
+      "exceptions": [
+        "Resultado final continua dependente da operação real."
+      ],
+      "counterexamples": [
+        "Spinner rápido não significa compra aprovada."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-inp",
+          "locator": "Good INP; What is INP; Measure in field and lab",
+          "section": "Good INP; What is INP; Measure in field and lab",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "design-loading-choreography",
+        "design-feedback-animations"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-retention-ambiguity",
+      "squad": "squad-content",
+      "mission": "Interpretar narrativa por sinais observados.",
+      "competencies": [
+        "credibility",
+        "multimodal-content",
+        "retention-diagnosis",
+        "specialist-content-engineer"
+      ],
+      "condition": "Ao analisar picos ou quedas de vídeo.",
+      "action": "Relacionar trecho, fala e edição; tratar pico como hipótese de interesse/replay/confusão e verificar segmentos comparáveis.",
+      "rationale": "Métrica isolada admite causas distintas.",
+      "exceptions": [
+        "Disponibilidade do relatório varia por vídeo/plataforma."
+      ],
+      "counterexamples": [
+        "Pico não comprova hook vencedor ou conversão."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-youtube-retention",
+          "locator": "Understand key moments; Intros; Spikes; Segments",
+          "section": "Understand key moments; Intros; Spikes; Segments",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-engineer"
+      ],
+      "taskTags": [
+        "reel",
+        "video",
+        "retention",
+        "content-analysis"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-opening-expectation",
+      "squad": "squad-copy",
+      "mission": "Alinhar primeira promessa à entrega.",
+      "competencies": [
+        "headline",
+        "persuasion-grounding",
+        "specialist-headline-specialist"
+      ],
+      "condition": "Ao avaliar abertura de vídeo.",
+      "action": "Comparar título/capa com abertura e conteúdo; experimentar versões sem alterar promessa factual e medir contexto.",
+      "rationale": "Expectativa atendida ajuda interpretar retenção.",
+      "exceptions": [
+        "Diagnóstico de intro YouTube não fixa três segundos para todo formato."
+      ],
+      "counterexamples": [
+        "Clickbait pode elevar entrada e derrubar permanência."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-youtube-retention",
+          "locator": "Understand key moments; Intros; Spikes; Segments",
+          "section": "Understand key moments; Intros; Spikes; Segments",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "headline-specialist"
+      ],
+      "taskTags": [
+        "create-opening-hooks",
+        "write-video-podcast-titles"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-vertical-safe-area",
+      "squad": "squad-content",
+      "mission": "Preservar conteúdo essencial no feed.",
+      "competencies": [
+        "multimodal-content",
+        "platform-native-specs",
+        "specialist-platform-specialist"
+      ],
+      "condition": "Ao adaptar vídeo vertical publicitário.",
+      "action": "Validar enquadramento e área livre da UI da plataforma atual; conferir legendas e CTA no preview final.",
+      "rationale": "Interface pode cobrir mensagem e produto.",
+      "exceptions": [
+        "9:16 é orientação desta fonte para TikTok ads."
+      ],
+      "counterexamples": [
+        "Exportar vertical não garante texto fora dos botões."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-tiktok-codes",
+          "locator": "3 Be production-principled; 4 Structure; 6 Sound",
+          "section": "3 Be production-principled; 4 Structure; 6 Sound",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "platform-specialist"
+      ],
+      "taskTags": [
+        "adapt-content",
+        "reel",
+        "video",
+        "template-contract"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-hook-body-close",
+      "squad": "squad-content",
+      "mission": "Conduzir atenção a mensagem e ação.",
+      "competencies": [
+        "editorial-structure",
+        "multimodal-content",
+        "specialist-content-engineer"
+      ],
+      "condition": "Ao estruturar vídeo curto comercial.",
+      "action": "Experimentar abertura, mensagem e fechamento contextual; preservar voz da marca e testar outcome.",
+      "rationale": "Estrutura organiza funções da narrativa.",
+      "exceptions": [
+        "Conselho para anúncios TikTok; aplicação a orgânico/Reels é hipótese."
+      ],
+      "counterexamples": [
+        "Transições estimulantes podem distrair da prova."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-tiktok-codes",
+          "locator": "3 Be production-principled; 4 Structure; 6 Sound",
+          "section": "3 Be production-principled; 4 Structure; 6 Sound",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-engineer"
+      ],
+      "taskTags": [
+        "video",
+        "reel",
+        "design-hook",
+        "write-content"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-dialogue-shot-map",
+      "squad": "squad-courses",
+      "mission": "Planejar imagens que apoiam a fala.",
+      "competencies": [
+        "instruction-alignment",
+        "shot-dialogue-mapping",
+        "specialist-production-director"
+      ],
+      "condition": "Ao preparar gravação com b-roll.",
+      "action": "Mapear planos a falas e função narrativa; prever equipamento/contexto e confirmar mídia/produto autorizado.",
+      "rationale": "Shot list reduz falta de cobertura na edição.",
+      "exceptions": [
+        "Plano ilustrativo precisa não fingir prova factual."
+      ],
+      "counterexamples": [
+        "B-roll de modelo distinto pode contradizer demonstração."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-broll",
+          "locator": "How to shoot B-roll; Make a shot list; Slow down",
+          "section": "How to shoot B-roll; Make a shot list; Slow down",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "production-director"
+      ],
+      "taskTags": [
+        "shot-list",
+        "video-script",
+        "production"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-editorial-handle",
+      "squad": "squad-courses",
+      "mission": "Preservar opções de ritmo na edição.",
+      "competencies": [
+        "instruction-alignment",
+        "editing-coverage",
+        "specialist-production-director"
+      ],
+      "condition": "Ao captar tomadas complementares.",
+      "action": "Gravar duração suficiente e variações para encaixar diálogo/cortes; conferir contribuição narrativa de cada plano.",
+      "rationale": "Tomada curta pode inviabilizar montagem.",
+      "exceptions": [
+        "Contagem sugerida pelo entrevistado não define duração final."
+      ],
+      "counterexamples": [
+        "Plano bonito sem cobertura temporal não resolve corte."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-broll",
+          "locator": "How to shoot B-roll; Make a shot list; Slow down",
+          "section": "How to shoot B-roll; Make a shot list; Slow down",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "production-director"
+      ],
+      "taskTags": [
+        "recording",
+        "shot-list",
+        "production"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-caption-fidelity",
+      "squad": "squad-courses",
+      "mission": "Preservar sentido falado sem áudio.",
+      "competencies": [
+        "instruction-alignment",
+        "caption-fidelity",
+        "specialist-production-director"
+      ],
+      "condition": "Ao gerar legendas automaticamente.",
+      "action": "Revisar palavras, sincronização, falantes e termos críticos; comparar com áudio antes de finalizar.",
+      "rationale": "Erro de negação ou número pode inverter sentido.",
+      "exceptions": [
+        "Automação é ponto de partida, precisa confirmação de precisão."
+      ],
+      "counterexamples": [
+        "Legenda gerada sem revisão não comprova acessibilidade."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-captions",
+          "locator": "Introduction; Need Captions; Automatic Captions are Not Sufficient",
+          "section": "Introduction; Need Captions; Automatic Captions are Not Sufficient",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "production-director"
+      ],
+      "taskTags": [
+        "video",
+        "production",
+        "captions"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-non-speech-caption",
+      "squad": "squad-courses",
+      "mission": "Transmitir sons necessários ao entendimento.",
+      "competencies": [
+        "instruction-alignment",
+        "audio-information",
+        "specialist-production-director"
+      ],
+      "condition": "Ao legendar vídeo com áudio informativo.",
+      "action": "Incluir sons não verbais e identificação relevantes; avaliar contraste/posição junto ao vídeo.",
+      "rationale": "Fala não contém toda informação sonora.",
+      "exceptions": [
+        "Música decorativa ou vídeo sem áudio têm necessidades diferentes."
+      ],
+      "counterexamples": [
+        "Transcrição das palavras pode omitir alarme importante."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-captions",
+          "locator": "Introduction; Need Captions; Automatic Captions are Not Sufficient",
+          "section": "Introduction; Need Captions; Automatic Captions are Not Sufficient",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "production-director"
+      ],
+      "taskTags": [
+        "audio",
+        "video",
+        "captions",
+        "production"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-social-text-equivalent",
+      "squad": "squad-content",
+      "mission": "Permitir acesso ao conteúdo além dos pixels.",
+      "competencies": [
+        "information-hierarchy",
+        "multimodal-content",
+        "accessible-content",
+        "specialist-content-engineer",
+        "specialist-platform-specialist"
+      ],
+      "condition": "Ao publicar informação textual em carrossel social.",
+      "action": "Oferecer texto equivalente acessível no recurso viável e testar leitura final; preferir texto real em páginas próprias.",
+      "rationale": "Imagem impede ajustes de fonte e apresentação.",
+      "exceptions": [
+        "Logos/apresentação essencial têm exceções; rede social exige avaliação própria."
+      ],
+      "counterexamples": [
+        "Caption só com CTA não equivale ao conteúdo de dez slides."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-images-text",
+          "locator": "Success Criterion; Intent; text provided alongside image",
+          "section": "Success Criterion; Intent; text provided alongside image",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-engineer",
+        "platform-specialist"
+      ],
+      "taskTags": [
+        "carousel",
+        "caption",
+        "template-contract",
+        "accessibility"
+      ],
+      "verificationRequired": "Aplicar ao artefato real e avaliar decisão/contraexemplo; fonte lida não comprova execução competente."
+    },
+    {
+      "id": "priority-visible-table-state",
+      "squad": "squad-design",
+      "mission": "Tornar consulta e ação auditáveis.",
+      "competencies": [
+        "inclusive-components",
+        "table-query-state",
+        "specialist-dx-interaction-designer",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao desenhar tabelas operacionais com filtros e estados.",
+      "action": "Expor filtros ativos e forma de limpar; diferenciar ações da linha/página; combinar texto/ícone com cor; validar consultas vazias e foco.",
+      "rationale": "As duas referências tornam critérios e escopo das ações visíveis.",
+      "exceptions": [
+        "Filtro fixo por política pode não ser removível; comunicar restrição."
+      ],
+      "counterexamples": [
+        "Copiar chips sem refletir a consulta real ou usar somente cor de estado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-mobbin-browserbase",
+          "locator": "Status filter chip, reset and table columns",
+          "section": "Status filter chip, reset and table columns",
+          "excerpt": "",
+          "referenceOnly": true
+        },
+        {
+          "sourceId": "priority-mobbin-doordash",
+          "locator": "Campaign filters, status column, row actions and page actions",
+          "section": "Campaign filters, status column, row actions and page actions",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer",
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "design-data-table",
+        "evaluate-interface"
+      ],
+      "verificationRequired": "Solução original alinhada à marca do cliente; testar comportamento, teclado e casos adversos. Captura não comprova competência."
+    },
+    {
+      "id": "priority-payment-prerequisite",
+      "squad": "squad-design",
+      "mission": "Explicar o bloqueio acionável.",
+      "competencies": [
+        "inclusive-components",
+        "prerequisite-recovery",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Quando funcionalidade exige cadastro ou habilitação.",
+      "action": "Indicar pré-requisito e caminho acessível para resolvê-lo; verificar estado real e preservar contexto ao retornar.",
+      "rationale": "Square vincula restrição a próximo passo.",
+      "exceptions": [
+        "Não mostrar habilitação inexistente ou esconder restrição definitiva."
+      ],
+      "counterexamples": [
+        "Botão cinza sem explicação ou prometer habilitação automática não confirmada."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-mobbin-square",
+          "locator": "Payment methods prerequisite notice and completion action",
+          "section": "Payment methods prerequisite notice and completion action",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "design-checkout",
+        "design-error-states"
+      ],
+      "verificationRequired": "Solução original alinhada à marca do cliente; testar comportamento, teclado e casos adversos. Captura não comprova competência."
+    },
+    {
+      "id": "priority-checkout-review",
+      "squad": "squad-design",
+      "mission": "Permitir decisão informada no pagamento.",
+      "competencies": [
+        "inclusive-components",
+        "checkout-review-state",
+        "specialist-dx-interaction-designer",
+        "specialist-dx-ui-designer"
+      ],
+      "condition": "Ao escolher método e momento do pagamento.",
+      "action": "Manter total, taxas, item e termos verificáveis junto da decisão; distinguir pagamento posterior e confirmar condições; justificar timers com expiração real.",
+      "rationale": "Resumo visível evita depender da memória das etapas anteriores.",
+      "exceptions": [
+        "No móvel, expansão acessível pode revelar resumo; testar descoberta."
+      ],
+      "counterexamples": [
+        "Imitar contador sem reserva real ou esconder custo até confirmação."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-mobbin-getyourguide",
+          "locator": "Payment options, reservation timer and visible order summary",
+          "section": "Payment options, reservation timer and visible order summary",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer",
+        "dx-ui-designer"
+      ],
+      "taskTags": [
+        "design-checkout",
+        "evaluate-interface"
+      ],
+      "verificationRequired": "Solução original alinhada à marca do cliente; testar comportamento, teclado e casos adversos. Captura não comprova competência."
+    },
+    {
+      "id": "priority-onboarding-purpose",
+      "squad": "squad-design",
+      "mission": "Conectar perguntas à entrega do produto.",
+      "competencies": [
+        "inclusive-components",
+        "onboarding-purpose",
+        "specialist-dx-interaction-designer"
+      ],
+      "condition": "Ao solicitar escolhas para personalizar onboarding.",
+      "action": "Explicar propósito, oferecer opção fiel ao usuário e progresso verdadeiro; pedir dados necessários; revisar claims de privacidade e pontuação.",
+      "rationale": "A amostra Ahead ilustra propósito e opções; não prova funcionamento.",
+      "exceptions": [
+        "Fluxo curto pode dispensar barra; não extrapolar 5 telas a 22."
+      ],
+      "counterexamples": [
+        "Inventar afinidade numérica ou impor dor a usuário que está bem."
+      ],
+      "evidence": [
+        {
+          "sourceId": "priority-mobbin-ahead",
+          "locator": "Flow positions 1,6,12,17,22 of 22; personalization, progress, choices, journeys, completion",
+          "section": "Flow positions 1,6,12,17,22 of 22; personalization, progress, choices, journeys, completion",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dx-interaction-designer"
+      ],
+      "taskTags": [
+        "design-onboarding",
+        "evaluate-interface"
+      ],
+      "verificationRequired": "Solução original alinhada à marca do cliente; testar comportamento, teclado e casos adversos. Captura não comprova competência."
+    }
+  ],
+  "expertReferences": [
+    {
+      "id": "brad-frost",
+      "name": "Brad Frost",
+      "work": "Atomic Design",
+      "status": "read",
+      "sourceIds": [
+        "priority-atomic"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "don-norman",
+      "name": "Don Norman",
+      "work": "Signifiers, not affordances",
+      "status": "read",
+      "sourceIds": [
+        "priority-signifiers"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "dieter-rams",
+      "name": "Dieter Rams",
+      "work": "Ten principles for good design",
+      "status": "read",
+      "sourceIds": [
+        "priority-rams"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "heydon-pickering",
+      "name": "Heydon Pickering",
+      "work": "Every Layout — Boxes",
+      "status": "read",
+      "sourceIds": [
+        "priority-boxes"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "andy-bell",
+      "name": "Andy Bell",
+      "work": "Every Layout — Boxes",
+      "status": "read",
+      "sourceIds": [
+        "priority-boxes"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "josh-comeau",
+      "name": "Josh W. Comeau",
+      "work": "An Interactive Guide to CSS Transitions",
+      "status": "read",
+      "sourceIds": [
+        "priority-transitions"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "jake-archibald",
+      "name": "Jake Archibald",
+      "work": "Tasks, microtasks, queues and schedules",
+      "status": "read",
+      "sourceIds": [
+        "priority-event-loop"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "matthew-butterick",
+      "name": "Matthew Butterick",
+      "work": "Practical Typography",
+      "status": "read",
+      "sourceIds": [
+        "priority-typography"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "jakob-nielsen",
+      "name": "Jakob Nielsen",
+      "work": "Progressive Disclosure",
+      "status": "read",
+      "sourceIds": [
+        "priority-disclosure"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "rachel-andrew",
+      "name": "Rachel Andrew",
+      "work": "How to create high-performance CSS animations",
+      "status": "read",
+      "sourceIds": [
+        "priority-animation-pipeline"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "hiroshi-hara",
+      "name": "Hiroshi Hara",
+      "work": "B-roll interview, Adobe",
+      "status": "read",
+      "sourceIds": [
+        "priority-broll"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "mike-leonard",
+      "name": "Mike Leonard",
+      "work": "B-roll interview, Adobe",
+      "status": "read",
+      "sourceIds": [
+        "priority-broll"
+      ],
+      "scope": "Somente seções citadas desta fonte; leitura não implica domínio da obra completa.",
+      "trainingStatus": "reference-not-clone",
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "val-head",
+      "name": "Val Head",
+      "work": "Designing safer web animation for motion sensitivity",
+      "url": "https://valhead.com/2017/02/23/designing-safer-web-animation-for-motion-sensitivity/",
+      "status": "candidate",
+      "reason": "A URL candidata não foi acessível na tentativa; nenhum conteúdo atribuído.",
+      "sourceIds": [],
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "walter-murch",
+      "name": "Walter Murch",
+      "work": "In the Blink of an Eye",
+      "status": "candidate",
+      "reason": "Obra candidata para decisões de montagem; não foi obtida/lida nesta rodada.",
+      "sourceIds": [],
+      "evaluationStatus": "not-evaluated"
+    },
+    {
+      "id": "mobbin-pattern-library",
+      "name": "Mobbin",
+      "work": "Screens and user flows",
+      "url": "https://mobbin.com/discover/apps/web",
+      "status": "read",
+      "reason": "MCP oficial autenticado e nove prévias realmente inspecionadas.",
+      "sourceIds": [
+        "priority-mobbin-browserbase",
+        "priority-mobbin-doordash",
+        "priority-mobbin-square",
+        "priority-mobbin-getyourguide",
+        "priority-mobbin-ahead"
+      ],
+      "evaluationStatus": "not-evaluated",
+      "scope": "4 telas web; Ahead iOS posições1/6/12/17/22 de22, nunca fluxo completo.",
+      "trainingStatus": "reference-not-clone"
+    }
+  ],
+  "caseFile": "research/expert-evolution/priority-cases.json",
+  "qualification": {
+    "coverage": "gap",
+    "reason": "Fontes lidas e heurísticas inferidas; casos reservados aguardam execução independente. Nenhum agente ou clone é promovido a verified.",
+    "evaluationStatus": "reserved-unrun"
+  },
+  "mobbin": {
+    "connectionStatus": "initialized-and-listed-authenticated",
+    "visualReadStatus": "partial-static-read",
+    "screensRead": 4,
+    "flowsSampled": 1,
+    "flowPositionsRead": [
+      1,
+      6,
+      12,
+      17,
+      22
+    ],
+    "flowScreenCount": 22,
+    "receiptFiles": [
+      "mobbin-connection.json",
+      "mobbin-table-receipt.json",
+      "mobbin-checkout-receipt.json",
+      "mobbin-onboarding-receipt.json"
+    ],
+    "limitations": [
+      "Sem runtime/keyboard/backend/mobile ou eficácia verificados.",
+      "Resultados checkout não mostraram erros inline buscados.",
+      "Não redistribuir mídia premium; links canônicos e observações próprias."
+    ]
+  },
+  "provenancePolicy": {
+    "hashScope": "Exact retained excerpt UTF-8 only",
+    "maxQuoteWordsPerSource": 25,
+    "maxDerivedWordsPerPage": 200,
+    "republication": "No full articles, no premium screenshots retained in this pack"
+  },
+  "limits": {
+    "researchIterations": 4,
+    "maxIterations": 5,
+    "maxAttemptsPerSource": 2,
+    "networkTimeoutMs": 60000,
+    "noSpend": true
+  }
+}

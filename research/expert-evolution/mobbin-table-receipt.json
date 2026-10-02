@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-02T09:12:07.945Z",
+  "endpoint": "https://api.mobbin.com/mcp",
+  "name": "search_screens",
+  "arguments": {
+    "query": "Dashboard data table with search, status filters and row actions",
+    "platform": "web",
+    "mode": "standard",
+    "limit": 2,
+    "image_format": "jpg",
+    "task_intent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+    "output_destination": "doc"
+  },
+  "status": "returned",
+  "content": [
+    {
+      "type": "image",
+      "mimeType": "image/jpeg",
+      "sha256": "af613a8f2a63a437669cd1b13b2e0b272eb5429bade1d1c67aae1b4029dadb23",
+      "scope": "Inline MCP inspection preview only; pixels retained outside repository; no exported asset",
+      "readBy": "priority_expertise",
+      "readScope": "Returned screen preview"
+    },
+    {
+      "type": "image",
+      "mimeType": "image/jpeg",
+      "sha256": "be5488e8c5f0d2c4ab45e6e710181b345fbfa377faeaf610385dd16ab3f72ffe",
+      "scope": "Inline MCP inspection preview only; pixels retained outside repository; no exported asset",
+      "readBy": "priority_expertise",
+      "readScope": "Returned screen preview"
+    }
+  ],
+  "structuredContent": {
+    "query": "Dashboard data table with search, status filters and row actions",
+    "screens": [
+      {
+        "id": "751c482f-9ff7-4fec-9a57-db1422cfd3a6",
+        "mobbin_url": "https://mobbin.com/screens/751c482f-9ff7-4fec-9a57-db1422cfd3a6",
+        "app_name": "Browserbase",
+        "platform": "web"
+      },
+      {
+        "id": "5b7f8ac3-1059-401f-a3ee-88e553391166",
+        "mobbin_url": "https://mobbin.com/screens/5b7f8ac3-1059-401f-a3ee-88e553391166",
+        "app_name": "DoorDash Merchant",
+        "platform": "web"
+      }
+    ]
+  },
+  "limit": "Images are inspection previews, not exported report assets; no performance claim.",
+  "previewShaCoverage": "Exact image bytes read for inspection; not the full/high-resolution document"
+}

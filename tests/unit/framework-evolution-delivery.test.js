@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const crypto = require('node:crypto');
-const { deliverFrameworkEvolution, installedPath, PAYLOAD } = require('../../bin/lib/framework-evolution-delivery');
+const { deliverFrameworkEvolution, installedPath, PAYLOAD, EXPERT_PAYLOAD } = require('../../bin/lib/framework-evolution-delivery');
 const { deliverGlobalProviderAdapters } = require('../../bin/lib/global-provider-adapters');
 const { inventory } = require('../../scripts/framework-evolution/inventory.cjs');
 const root = path.resolve(__dirname, '../..');
@@ -54,10 +54,12 @@ describe('framework evolution distribution into isolated destinations', () => {
     const project = path.join(temporary, 'project');
     for (const source of ['.codex/scripts/resolve-codex-agent.js', '.codex/scripts/resolve-codex-command.js', '.codex/command-registry.json', '.codex/agents/developer.md', '.sinapse-ai/development/agents/developer.md', '.sinapse-ai/development/tasks/dev-develop-story.md']) copy(source, path.join(project, source));
     const delivered = deliverFrameworkEvolution({ packageRoot: root, targetRoot: project });
-    expect(delivered.files).toHaveLength(5);
+    expect(delivered.files).toHaveLength(PAYLOAD.length + EXPERT_PAYLOAD.length);
     const context = query(path.join(project, 'scripts/framework-evolution/runtime.cjs'), 'developer', 'dev-develop-story');
     expect(context.charsUsed).toBeLessThanOrEqual(context.maxChars);
     expect(context.capsule.sourceOfTruth).toBe('.sinapse-ai/development/agents/developer.md');
+    expect(context.profile.agentId).toBe('developer');
+    expect(context.profile.validatedExpertise).toBe(false);
     expect(deliverFrameworkEvolution({ packageRoot: root, targetRoot: project }).changedFiles).toBe(0);
   });
   test('the public project installer delivers and executes the runtime without external dependency calls', async () => {

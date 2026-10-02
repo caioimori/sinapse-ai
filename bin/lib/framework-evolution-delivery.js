@@ -5,6 +5,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const DEFAULT_PACKAGE_ROOT = path.resolve(__dirname, '../..');
 const PAYLOAD = ['scripts/framework-evolution/runtime.cjs', 'scripts/framework-evolution/knowledge.cjs', ...['sources', 'heuristics', 'competencies'].map((name) => `research/framework-evolution/${name}.json`)];
+const EXPERT_PAYLOAD = ['scripts/expert-evolution/expertise.cjs', 'scripts/expert-evolution/model-policy.cjs', 'scripts/framework-evolution/jev.cjs', ...['expert-profiles', 'source-program', 'jev-use-cases', 'model-policy'].map(name => `research/expert-evolution/${name}.json`)];
 const RECEIPT = '.framework-evolution-delivery.json';
 const hash = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const inside = (base, target) => { const relative = path.relative(base, target); return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative)); };
@@ -24,7 +25,12 @@ function safeDirectory(root, directory) {
 }
 
 function sourceFile(root, relative) {
-  const resolved = fs.realpathSync(path.join(root, relative));
+  let current = root;
+  for (const segment of relative.split('/')) {
+    current = path.join(current, segment);
+    if (fs.lstatSync(current).isSymbolicLink()) throw new Error(`Unsafe evolution source symlink: ${relative}`);
+  }
+  const resolved = fs.realpathSync(current);
   if (!inside(fs.realpathSync(root), resolved) || !fs.statSync(resolved).isFile()) throw new Error(`Unsafe evolution source: ${relative}`);
   return fs.readFileSync(resolved);
 }
@@ -38,13 +44,34 @@ function deliverFrameworkEvolution({ packageRoot = DEFAULT_PACKAGE_ROOT, targetR
   packageRoot = path.resolve(packageRoot);
   targetRoot = path.resolve(targetRoot);
   const availability = PAYLOAD.map((relative) => fs.existsSync(path.join(packageRoot, relative)));
-  if (availability.every((present) => !present)) return { schemaVersion: 1, status: 'absent', files: [] };
+  const expertAvailability = EXPERT_PAYLOAD.map(relative => fs.existsSync(path.join(packageRoot, relative)));
+  if (availability.every((present) => !present)) {
+    if (expertAvailability.some(Boolean)) throw new Error('Partial expert evolution package');
+    return { schemaVersion: 1, status: 'absent', files: [] };
+  }
   if (!availability.every(Boolean)) throw new Error('Partial framework evolution package');
   const payload = new Map(PAYLOAD.map((relative) => [relative, sourceFile(packageRoot, relative)]));
+  if (expertAvailability.some(Boolean) && !expertAvailability.every(Boolean)) throw new Error('Partial expert evolution package');
+  if (expertAvailability.every(Boolean)) {
+    const expertise = require(path.join(packageRoot, 'scripts/expert-evolution/expertise.cjs'));
+    const program = expertise.loadProgram(packageRoot);
+    const checked = expertise.validateProgram(program, {root:packageRoot});
+    if (!checked.valid) throw new Error(`Invalid expert program: ${checked.errors.join('; ')}`);
+    const policy = require(path.join(packageRoot, 'scripts/expert-evolution/model-policy.cjs'));
+    const models = policy.validatePolicy(policy.loadPolicy(packageRoot));
+    if (!models.valid) throw new Error(`Invalid model policy: ${models.errors.join('; ')}`);
+    for (const relative of EXPERT_PAYLOAD) payload.set(relative, sourceFile(packageRoot, relative));
+  }
   const knowledge = require(path.join(packageRoot, 'scripts/framework-evolution/knowledge.cjs'));
   const validation = knowledge.validateCorpus(knowledge.loadCorpus(packageRoot));
   if (!validation.valid) throw new Error(`Invalid evolution corpus: ${validation.errors.join('; ')}`);
   if (layout === 'global') {
+    const profilePath = 'research/expert-evolution/expert-profiles.json';
+    if (payload.has(profilePath)) {
+      const profiles = JSON.parse(payload.get(profilePath));
+      for (const profile of profiles.profiles) profile.canonical.path = installedPath(profile.canonical.path);
+      payload.set(profilePath, Buffer.from(JSON.stringify(profiles, null, 2) + '\n'));
+    }
     for (const name of ['resolve-codex-agent.js', 'resolve-codex-command.js']) payload.set(`.codex/scripts/${name}`, sourceFile(packageRoot, `.codex/scripts/${name}`));
     const registry = JSON.parse(sourceFile(packageRoot, '.codex/command-registry.json'));
     for (const spec of Object.values(registry.agents)) {
@@ -103,7 +130,7 @@ function globalEvolutionInstruction(home, agentId) {
   const script = path.join(path.resolve(home), '.sinapse/scripts/framework-evolution/runtime.cjs');
   const agent = agentId === 'snps-orqx' ? 'sinapse-orqx' : agentId;
   const quotedScript = `'${script.replace(/'/g, process.platform === 'win32' ? "''" : "'\"'\"'")}'`;
-  return `For a resolved task only, run node ${quotedScript} ${agent} --task <command> --json --max-chars 12000 --knowledge-max-chars 6000. Use cited supplemental knowledge while preserving canonical authority and gates; retrieval failure blocks that task. Do not retrieve during greeting or cold activation.`;
+  return `For a resolved task only, run node ${quotedScript} ${agent} --task <command> --json --max-chars 12000 --knowledge-max-chars 6000. Use cited supplemental knowledge and the optional task-relevant expert profile while preserving canonical authority and gates; planned program coverage is not validated expertise. The complete JSON stays within 12000 characters and knowledge within 6000; partial expertise installation or retrieval failure blocks that task. Do not retrieve during greeting or cold activation.`;
 }
 
-module.exports = { deliverFrameworkEvolution, globalEvolutionInstruction, PAYLOAD, installedPath };
+module.exports = { deliverFrameworkEvolution, globalEvolutionInstruction, PAYLOAD, EXPERT_PAYLOAD, installedPath };

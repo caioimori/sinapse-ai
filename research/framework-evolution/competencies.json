@@ -196,7 +196,15 @@
         "motion-control",
         "webgl-main-thread",
         "webgl-resource-budget",
-        "specialist-animation-performance-engineer"
+        "specialist-animation-performance-engineer",
+        "reduced-motion-runtime",
+        "specialist-css-motion-artist",
+        "render-pipeline",
+        "layer-lifecycle",
+        "device-validation",
+        "animation-lifecycle",
+        "event-loop",
+        "autoplay-control"
       ],
       "domainCompetencies": [
         "motion-control",
@@ -213,12 +221,26 @@
       ],
       "sourceIds": [
         "motion-accessibility",
-        "webgl-practices"
+        "webgl-practices",
+        "priority-reduced",
+        "priority-animation-pipeline",
+        "priority-will-change",
+        "priority-transitions",
+        "priority-gsap-context",
+        "priority-event-loop",
+        "priority-pause"
       ],
       "heuristicIds": [
         "h-motion-control",
         "h-webgl-main-thread",
-        "h-webgl-resource-budget"
+        "h-webgl-resource-budget",
+        "priority-motion-alternative",
+        "priority-trace-before-fps-claim",
+        "priority-layer-hint-budget",
+        "priority-lowest-target-device",
+        "priority-gsap-teardown",
+        "priority-microtask-yield-boundary",
+        "priority-autoplay-pause-mechanism"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de animation performance engineer, nem benchmark reservado dessa especialização.",
@@ -2072,7 +2094,10 @@
         "information-hierarchy",
         "mental-model",
         "multimodal-content",
-        "specialist-content-engineer"
+        "specialist-content-engineer",
+        "specialist-platform-specialist",
+        "retention-diagnosis",
+        "accessible-content"
       ],
       "domainCompetencies": [
         "editorial-originality",
@@ -2093,14 +2118,22 @@
       "sourceIds": [
         "helpful-content",
         "web-reading",
-        "cdc-communication"
+        "cdc-communication",
+        "priority-typography",
+        "priority-youtube-retention",
+        "priority-tiktok-codes",
+        "priority-images-text"
       ],
       "heuristicIds": [
         "h-editorial-originality",
         "business-scan-structure",
         "business-claim-density",
         "business-progressive-detail",
-        "business-visual-text-agreement"
+        "business-visual-text-agreement",
+        "priority-carousel-reading-size",
+        "priority-retention-ambiguity",
+        "priority-hook-body-close",
+        "priority-social-text-equivalent"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de Content Structure & Production Engineer, nem benchmark reservado dessa especialização.",
@@ -3189,7 +3222,13 @@
         "motion-control",
         "webgl-main-thread",
         "webgl-resource-budget",
-        "specialist-css-motion-artist"
+        "specialist-css-motion-artist",
+        "reduced-motion-runtime",
+        "specialist-animation-performance-engineer",
+        "render-pipeline",
+        "layer-lifecycle",
+        "animation-scope",
+        "autoplay-control"
       ],
       "domainCompetencies": [
         "motion-control",
@@ -3206,12 +3245,22 @@
       ],
       "sourceIds": [
         "motion-accessibility",
-        "webgl-practices"
+        "webgl-practices",
+        "priority-reduced",
+        "priority-animation-pipeline",
+        "priority-will-change",
+        "priority-gsap-context",
+        "priority-pause"
       ],
       "heuristicIds": [
         "h-motion-control",
         "h-webgl-main-thread",
-        "h-webgl-resource-budget"
+        "h-webgl-resource-budget",
+        "priority-motion-alternative",
+        "priority-compositor-choice",
+        "priority-layer-hint-budget",
+        "priority-gsap-selector-scope",
+        "priority-autoplay-pause-mechanism"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de css motion artist, nem benchmark reservado dessa especialização.",
@@ -3803,7 +3852,15 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-accessibility-specialist"
+        "specialist-dx-accessibility-specialist",
+        "flow-focus-contract",
+        "specialist-dx-frontend-engineer",
+        "modal-semantics",
+        "carousel-control",
+        "specialist-dx-interaction-designer",
+        "drag-alternative",
+        "contrast-role",
+        "specialist-dx-ui-designer"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -3821,12 +3878,21 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-dialog",
+        "priority-carousel",
+        "priority-drag",
+        "priority-contrast"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-modal-focus",
+        "priority-modal-semantics",
+        "priority-carousel-rotation-control",
+        "priority-drag-pointer-alternative",
+        "priority-contrast-by-role"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de accessibility specialist, nem benchmark reservado dessa especialização.",
@@ -3848,7 +3914,11 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-design-system-architect"
+        "specialist-dx-design-system-architect",
+        "token-type-integrity",
+        "token-alias-contract",
+        "component-context",
+        "specialist-dx-frontend-engineer"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -3866,12 +3936,17 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-dtcg",
+        "priority-atomic"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-token-types",
+        "priority-token-alias-boundary",
+        "priority-parts-and-pages"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de design system architect, nem benchmark reservado dessa especialização.",
@@ -3893,7 +3968,15 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-frontend-engineer"
+        "specialist-dx-frontend-engineer",
+        "component-context",
+        "specialist-dx-design-system-architect",
+        "intrinsic-layout",
+        "logical-properties",
+        "flow-focus-contract",
+        "specialist-dx-accessibility-specialist",
+        "client-boundary",
+        "react-synchronization"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -3911,12 +3994,23 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-atomic",
+        "priority-boxes",
+        "priority-dialog",
+        "priority-next-boundary",
+        "priority-react-effects"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-parts-and-pages",
+        "priority-intrinsic-layout",
+        "priority-logical-spacing",
+        "priority-modal-focus",
+        "priority-client-boundary-size",
+        "priority-derive-before-effect"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de frontend engineer, nem benchmark reservado dessa especialização.",
@@ -3938,7 +4032,19 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-interaction-designer"
+        "specialist-dx-interaction-designer",
+        "perceivable-action",
+        "carousel-control",
+        "specialist-dx-accessibility-specialist",
+        "carousel-state-contract",
+        "drag-alternative",
+        "progressive-disclosure",
+        "interaction-feedback",
+        "table-query-state",
+        "specialist-dx-ui-designer",
+        "prerequisite-recovery",
+        "checkout-review-state",
+        "onboarding-purpose"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -3956,12 +4062,32 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-signifiers",
+        "priority-carousel",
+        "priority-drag",
+        "priority-disclosure",
+        "priority-inp",
+        "priority-mobbin-browserbase",
+        "priority-mobbin-doordash",
+        "priority-mobbin-square",
+        "priority-mobbin-getyourguide",
+        "priority-mobbin-ahead"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-action-signifiers",
+        "priority-carousel-rotation-control",
+        "priority-carousel-state-labels",
+        "priority-drag-pointer-alternative",
+        "priority-progressive-disclosure",
+        "priority-async-feedback",
+        "priority-visible-table-state",
+        "priority-payment-prerequisite",
+        "priority-checkout-review",
+        "priority-onboarding-purpose"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de interaction designer, nem benchmark reservado dessa especialização.",
@@ -3983,7 +4109,8 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-performance-engineer"
+        "specialist-dx-performance-engineer",
+        "interaction-latency"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -4001,12 +4128,14 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-inp"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-inp-field-scope"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de performance engineer, nem benchmark reservado dessa especialização.",
@@ -4028,7 +4157,15 @@
         "inclusive-components",
         "problem-before-solution",
         "interaction-recovery",
-        "specialist-dx-ui-designer"
+        "specialist-dx-ui-designer",
+        "content-resilience",
+        "visual-purpose",
+        "typographic-readability",
+        "contrast-role",
+        "specialist-dx-accessibility-specialist",
+        "table-query-state",
+        "specialist-dx-interaction-designer",
+        "checkout-review-state"
       ],
       "domainCompetencies": [
         "inclusive-components",
@@ -4046,12 +4183,25 @@
       "sourceIds": [
         "web-accessibility",
         "user-needs",
-        "ux-heuristics"
+        "ux-heuristics",
+        "priority-atomic",
+        "priority-rams",
+        "priority-typography",
+        "priority-contrast",
+        "priority-mobbin-browserbase",
+        "priority-mobbin-doordash",
+        "priority-mobbin-getyourguide"
       ],
       "heuristicIds": [
         "h-inclusive-components",
         "h-problem-before-solution",
-        "h-interaction-recovery"
+        "h-interaction-recovery",
+        "priority-content-variants",
+        "priority-usefulness-before-decoration",
+        "priority-type-coupling",
+        "priority-contrast-by-role",
+        "priority-visible-table-state",
+        "priority-checkout-review"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de ui designer, nem benchmark reservado dessa especialização.",
@@ -4836,14 +4986,18 @@
       "sourceIds": [
         "claims-evidence",
         "cialdini-persuasion",
-        "cdc-communication"
+        "cdc-communication",
+        "priority-rams",
+        "priority-youtube-retention"
       ],
       "heuristicIds": [
         "h-persuasion-grounding",
         "business-peer-proof",
         "business-voluntary-step",
         "business-mechanism-selection",
-        "business-one-message-action"
+        "business-one-message-action",
+        "priority-honest-hook",
+        "priority-opening-expectation"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de headline specialist, nem benchmark reservado dessa especialização.",
@@ -6194,7 +6348,10 @@
         "information-hierarchy",
         "mental-model",
         "multimodal-content",
-        "specialist-platform-specialist"
+        "specialist-platform-specialist",
+        "specialist-content-engineer",
+        "platform-native-specs",
+        "accessible-content"
       ],
       "domainCompetencies": [
         "editorial-originality",
@@ -6215,14 +6372,20 @@
       "sourceIds": [
         "helpful-content",
         "web-reading",
-        "cdc-communication"
+        "cdc-communication",
+        "priority-typography",
+        "priority-tiktok-codes",
+        "priority-images-text"
       ],
       "heuristicIds": [
         "h-editorial-originality",
         "business-scan-structure",
         "business-claim-density",
         "business-progressive-detail",
-        "business-visual-text-agreement"
+        "business-visual-text-agreement",
+        "priority-carousel-reading-size",
+        "priority-vertical-safe-area",
+        "priority-social-text-equivalent"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de Platform Adaptation & Template Contract Specialist, nem benchmark reservado dessa especialização.",
@@ -6560,7 +6723,11 @@
         "mental-model",
         "practice-feedback",
         "metacognition",
-        "specialist-production-director"
+        "specialist-production-director",
+        "shot-dialogue-mapping",
+        "editing-coverage",
+        "caption-fidelity",
+        "audio-information"
       ],
       "domainCompetencies": [
         "instruction-alignment",
@@ -6580,14 +6747,20 @@
       ],
       "sourceIds": [
         "learning-alignment",
-        "cmu-learning"
+        "cmu-learning",
+        "priority-broll",
+        "priority-captions"
       ],
       "heuristicIds": [
         "h-instruction-alignment",
         "business-prior-diagnostic",
         "business-mastery-transfer",
         "business-feedback-loop",
-        "business-self-monitoring"
+        "business-self-monitoring",
+        "priority-dialogue-shot-map",
+        "priority-editorial-handle",
+        "priority-caption-fidelity",
+        "priority-non-speech-caption"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de Video & Audio Production Director, nem benchmark reservado dessa especialização.",
@@ -8093,7 +8266,8 @@
         "motion-control",
         "webgl-main-thread",
         "webgl-resource-budget",
-        "specialist-threejs-architect"
+        "specialist-threejs-architect",
+        "resource-ownership"
       ],
       "domainCompetencies": [
         "motion-control",
@@ -8110,12 +8284,14 @@
       ],
       "sourceIds": [
         "motion-accessibility",
-        "webgl-practices"
+        "webgl-practices",
+        "priority-three-cleanup"
       ],
       "heuristicIds": [
         "h-motion-control",
         "h-webgl-main-thread",
-        "h-webgl-resource-budget"
+        "h-webgl-resource-budget",
+        "priority-webgl-resource-ownership"
       ],
       "coverage": "gap",
       "gapReason": "Há heurísticas iniciais do domínio, mas não há extração validada de técnicas, decisões e exceções específicas de threejs architect, nem benchmark reservado dessa especialização.",
