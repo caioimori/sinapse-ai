@@ -42,6 +42,9 @@ O post-commit existente atualizou o [índice de entidades](../../../.sinapse-ai/
 para 819 entradas, incluindo a nova biblioteca de delivery e seus vínculos.
 QA conferiu o diff, a contagem e os dois hashes alterados; 14 testes de schema
 passaram. Os demais 817 hashes não foram revalidados nessa conferência delimitada.
+O hook também reconciliou somente o hash e tamanho desse índice no
+[manifesto de instalação](../../../.sinapse-ai/install-manifest.yaml).
+`validate-manifest` confirmou que o manifesto está válido e atualizado.
 
 ## Decisões preservadas
 

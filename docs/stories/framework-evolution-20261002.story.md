@@ -91,6 +91,7 @@ não fazem parte desta alteração local.
 - bin/lib/framework-evolution-delivery.js
 - bin/lib/global-provider-adapters.js
 - .sinapse-ai/data/entity-registry.yaml — índice derivado pelo post-commit existente
+- .sinapse-ai/install-manifest.yaml — hash e tamanho do índice reconciliados pelo hook
 - packages/installer/src/installer/sinapse-ai-installer.js
 - package.json
 - package-lock.json

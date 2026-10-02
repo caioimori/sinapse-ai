@@ -69,7 +69,9 @@ e SHA-256 das duas bibliotecas alteradas; os demais 817 hashes não foram revali
 
 Uma suite adicional passou 14/14 testes: entity-registry-schema. Ela usa fixtures;
 a leitura do índice atual foi uma verificação independente. Esse efeito derivado
-foi preservado e incluído no checkpoint, totalizando 214 arquivos alterados na entrega.
+foi preservado e incluído no checkpoint. O post-commit seguinte reconciliou somente
+hash e tamanho do índice no install-manifest; validate-manifest passou, resolvendo
+o alerta anterior. A entrega contém 215 arquivos alterados, incluindo os dois índices.
 
 ```powershell
 node node_modules/jest/bin/jest.js tests/core/ids/entity-registry-schema.test.js --runInBand --silent
@@ -87,6 +89,7 @@ node scripts/framework-evolution/knowledge.cjs validate --json
 node scripts/validate-story-meta.js --staged
 node scripts/validate-story-acs.js
 node scripts/validate-install-docs.js
+node scripts/validate-manifest.js
 node scripts/validate-no-personal-leaks.js
 node scripts/validate-no-external-refs.js
 node bin/utils/staged-secret-scan.js
