@@ -1,0 +1,17 @@
+{
+  "workflow_id": "WF-20261002-framework-evolution",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Modernização local verificável, compatível com upstream e conhecimento por competência",
+  "scope": "Extensões aditivas permitidas, pesquisa pública, sem pagamento/publicação/instalação global",
+  "inputs": ["SINAPSE origin/main 842eeabc4e9fe39d42f1119c9dc85a8a1e70cbc5", "SPEC.md", "AIOX e TypeSafe oficiais", "checkout original preservado"],
+  "outputs": ["recibo upstream", "inventário e correções", "corpus e recuperador", "testes e handoff"],
+  "acceptance": ["story Ready validada", "proveniência e gaps explícitos", "testes/gates com evidência", "nenhum path protegido modificado"],
+  "tasks": [
+    {"task_id":"T01","objective":"Isolar e validar contratos","owner":"sinapse-orqx","depends_on":[],"command_or_tool":"git worktree + story validator + architecture validator","timeout_ms":120000,"max_attempts":2,"inputs":["remoto e dirty checkout"],"outputs":["branch isolada e Ready story"],"acceptance":["checkout original intacto; validators aprovados"],"rollback":"Preservar checkout original e recuperar worktree pelo snapshot"},
+    {"task_id":"T02","objective":"Auditar upstream e preparar importação compatível","owner":"deep-researcher","depends_on":["T01"],"parallel_group":"audit-build","command_or_tool":"GitHub oficial, web, upstream-audit.cjs","max_iterations":5,"max_attempts":2,"inputs":["Ready story e árvore upstream pública"],"outputs":["upstream.md e recibo reproduzível"],"acceptance":["SHA/licença/datas/deltas e decisões de port grounded"],"rollback":"Reverter somente arquivos novos de ownership upstream"},
+    {"task_id":"T03","objective":"Construir conhecimento e Jev controlado","owner":"kb-architect","depends_on":["T01"],"parallel_group":"audit-build","command_or_tool":"fontes primárias, knowledge.cjs, jev.cjs e testes","max_iterations":5,"max_attempts":2,"inputs":["Ready story e fontes lidas"],"outputs":["corpus schemas v1 e recuperador"],"acceptance":["17 squads mapeadas; evidência/citação; offline default; reserva antes de cada tentativa"],"rollback":"Reverter somente corpus/scripts novos desta ownership"},
+    {"task_id":"T04","objective":"Auditar runtime e integrar recuperação de conhecimento","owner":"developer","depends_on":["T01"],"parallel_group":"audit-build","command_or_tool":"inventário determinístico, resolver, testes","max_iterations":5,"max_attempts":2,"inputs":["Ready story, runtime atual, contrato knowledge"],"outputs":["inventário, gargalos e adapter de runtime"],"acceptance":["todos agentes cobertos por inventário; correções com prova; paths protegidos preservados"],"rollback":"Reverter exclusivamente novos arquivos e diff autorizado do adapter"},
+    {"task_id":"T05","objective":"Integrar e comprovar o estado entregue","owner":"quality-gate","depends_on":["T02","T03","T04"],"command_or_tool":"jest, eslint, tsc, parity, story, secret/protected-path checks","timeout_ms":600000,"max_attempts":3,"inputs":["entregas das três frentes"],"outputs":["relatório e handoff com limites"],"acceptance":["testes relevantes aprovados; gates preexistentes distinguidos; sem alegar melhoria não medida"],"rollback":"Manter branch revisável e registrar qualquer gate vermelho"}
+  ]
+}

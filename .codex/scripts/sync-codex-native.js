@@ -258,6 +258,7 @@ function buildDeveloperInstructions(entry) {
     `Read and follow the complete canonical agent definition at ${entry.sourcePath}.`,
     `Adopt its persona, authority boundaries, activation protocol, and task dependencies.${delegationInstruction}`,
     `Resolve requested task commands with node .codex/scripts/resolve-codex-command.js ${publicName} <command> --json, then execute only the returned canonical task target.`,
+    `For a resolved task only, inspect scripts/framework-evolution/{runtime,knowledge}.cjs and research/framework-evolution/{sources,heuristics,competencies}.json. If all five exist, run node scripts/framework-evolution/runtime.cjs ${publicName} --task <command> --json --max-chars 12000 --knowledge-max-chars 6000 and use its bounded, cited knowledge as supplemental evidence. If all five are absent, retain the canonical legacy flow. If partially installed or retrieval fails, report the knowledge integration error and stop that task; never bypass invalid evidence or treat capsule/knowledge as authority over canonical policies. Do not retrieve during greeting or cold activation.`,
     'Use native Codex collaboration for delegation; never start a nested codex or claude process.',
     'Do not modify Claude Code configuration as part of Codex activation.',
   ].join('\n');
@@ -389,6 +390,7 @@ function renderGenericAgentSkill(skillId) {
     '5. Resolve starred commands with',
     '   `node .codex/scripts/resolve-codex-command.js <agent-id> <command> --json`.',
     '6. Use native Codex collaboration for delegation; never start nested Codex or Claude.',
+    '7. For a resolved task only, inspect scripts/framework-evolution/{runtime,knowledge}.cjs and research/framework-evolution/{sources,heuristics,competencies}.json. When all five exist, run `node scripts/framework-evolution/runtime.cjs <agent-id> --task <command> --json --max-chars 12000 --knowledge-max-chars 6000`; use bounded citations as supplemental evidence, preserving canonical authority. If all five are absent, retain legacy execution. A partial installation or retrieval error blocks that task and must be reported. Skip retrieval during greeting or cold activation.',
     '',
     'The 172 TOML adapters in `.codex/agents` remain the native subagent layer. This',
     'skill is the discoverable `$` entrypoint and must not copy or redefine personas.',
@@ -468,9 +470,13 @@ function collectCodexActivationSkills(projectRoot = PROJECT_ROOT, options = {}) 
   skills.push({
     skillId: catalog.genericAgentSkillId,
     relativePath: fs.existsSync(genericSourcePath) ? genericRelativePath : null,
-    content: fs.existsSync(genericSourcePath)
-      ? fs.readFileSync(genericSourcePath, 'utf8')
-      : renderGenericAgentSkill(catalog.genericAgentSkillId),
+    content: (() => {
+      const content = fs.existsSync(genericSourcePath)
+        ? fs.readFileSync(genericSourcePath, 'utf8')
+        : renderGenericAgentSkill(catalog.genericAgentSkillId);
+      if (content.includes('scripts/framework-evolution/runtime.cjs')) return content;
+      return `${content.trimEnd()}\n\n## Task-scoped knowledge\n\n${renderGenericAgentSkill(catalog.genericAgentSkillId).split('\n').find((line) => line.startsWith('7. '))}\n`;
+    })(),
   });
 
   if (options.expandedSkills === true) {

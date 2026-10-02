@@ -1,0 +1,2782 @@
+{
+  "schemaVersion": 1,
+  "heuristics": [
+    {
+      "id": "h-positioning-evidence",
+      "squad": "squad-brand",
+      "competencies": [
+        "positioning-evidence"
+      ],
+      "condition": "Ao definir diferenciação de marca",
+      "action": "Mapear segmento, alternativas indiretas e vantagem competitiva observável antes de escolher a promessa.",
+      "rationale": "Diferenciação precisa representar mercado e valor ao cliente.",
+      "exceptions": [
+        "Aplicação ao branding é inferida; a fonte trata de planos de negócios."
+      ],
+      "counterexamples": [
+        "Um logo distinto pode coexistir com proposta indistinta."
+      ],
+      "evidence": [
+        {
+          "sourceId": "business-plan",
+          "locator": "Calculate your startup costs / Getting started",
+          "section": "Calculate your startup costs / Getting started",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "positioning-evidence"
+      ]
+    },
+    {
+      "id": "h-brand-claims",
+      "squad": "squad-brand",
+      "competencies": [
+        "brand-claims"
+      ],
+      "condition": "Ao converter posicionamento em promessa pública",
+      "action": "Revisar significado explícito e implícito e anexar prova às promessas objetivas.",
+      "rationale": "Uma frase de marca pode comunicar promessa factual implicitamente.",
+      "exceptions": [
+        "Regra FTC é americana; validação jurídica brasileira não está coberta."
+      ],
+      "counterexamples": [
+        "Garantia de reembolso não comprova eficácia."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claims-evidence",
+          "locator": "What truth-in-advertising rules apply to advertisers?",
+          "section": "What truth-in-advertising rules apply to advertisers?",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "brand-claims"
+      ]
+    },
+    {
+      "id": "h-sales-economics",
+      "squad": "squad-commercial",
+      "competencies": [
+        "sales-economics"
+      ],
+      "condition": "Ao projetar metas e ofertas",
+      "action": "Calcular contribuição unitária e ponto de equilíbrio com custos fixos e variáveis documentados.",
+      "rationale": "Volume vendido sem margem pode ampliar perdas.",
+      "exceptions": [
+        "Mix de produtos exige contribuição ponderada; tributos brasileiros estão fora do corpus."
+      ],
+      "counterexamples": [
+        "Margem negativa não admite ponto de equilíbrio positivo pela fórmula simples."
+      ],
+      "evidence": [
+        {
+          "sourceId": "business-plan",
+          "locator": "Calculate your startup costs / Getting started",
+          "section": "Calculate your startup costs / Getting started",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "commercial-orqx",
+        "cs-business-auditor",
+        "cs-client-success",
+        "cs-crm-specialist",
+        "cs-funnel-architect",
+        "cs-lead-generation-strategist",
+        "cs-offer-designer",
+        "cs-revops-analyst",
+        "cs-sales-closer",
+        "cs-sales-enablement"
+      ],
+      "taskTags": [
+        "sales-economics"
+      ]
+    },
+    {
+      "id": "h-sales-claims",
+      "squad": "squad-commercial",
+      "competencies": [
+        "sales-claims"
+      ],
+      "condition": "Ao escrever proposta comercial",
+      "action": "Separar benefícios estimados e comprovados e registrar evidência anterior à divulgação.",
+      "rationale": "Promessas comerciais materiais alteram decisões de compra.",
+      "exceptions": [
+        "Aplicação a propostas é inferida e não parecer jurídico local."
+      ],
+      "counterexamples": [
+        "Depoimento isolado não sustenta ganho universal."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claims-evidence",
+          "locator": "What truth-in-advertising rules apply to advertisers?",
+          "section": "What truth-in-advertising rules apply to advertisers?",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "commercial-orqx",
+        "cs-business-auditor",
+        "cs-client-success",
+        "cs-crm-specialist",
+        "cs-funnel-architect",
+        "cs-lead-generation-strategist",
+        "cs-offer-designer",
+        "cs-revops-analyst",
+        "cs-sales-closer",
+        "cs-sales-enablement"
+      ],
+      "taskTags": [
+        "sales-claims"
+      ]
+    },
+    {
+      "id": "h-editorial-originality",
+      "squad": "squad-content",
+      "competencies": [
+        "editorial-originality"
+      ],
+      "condition": "Ao decidir publicar conteúdo derivado",
+      "action": "Adicionar análise própria e verificar se o público termina com sua necessidade resolvida.",
+      "rationale": "Reescrever fontes sem valor adicional não atende o propósito editorial.",
+      "exceptions": [
+        "A fonte é Search; transferência a redes sociais é inferida."
+      ],
+      "counterexamples": [
+        "Mais palavras não provam utilidade nem há word count preferencial."
+      ],
+      "evidence": [
+        {
+          "sourceId": "helpful-content",
+          "locator": "Content and quality questions",
+          "section": "Content and quality questions",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskTags": [
+        "editorial-originality"
+      ]
+    },
+    {
+      "id": "h-persuasion-grounding",
+      "squad": "squad-copy",
+      "competencies": [
+        "persuasion-grounding"
+      ],
+      "condition": "Ao escrever headlines ou benefícios",
+      "action": "Checar também o que um leitor razoável concluirá por inferência e impedir promessa sem comprovação.",
+      "rationale": "Copy pode enganar mesmo sem afirmação literal falsa.",
+      "exceptions": [
+        "Ficção claramente identificada e opinião subjetiva exigem tratamento distinto; jurisdição US."
+      ],
+      "counterexamples": [
+        "Omitir condição material pode tornar uma promessa enganosa."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claims-evidence",
+          "locator": "What truth-in-advertising rules apply to advertisers?",
+          "section": "What truth-in-advertising rules apply to advertisers?",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskTags": [
+        "persuasion-grounding"
+      ]
+    },
+    {
+      "id": "h-motion-control",
+      "squad": "squad-animations",
+      "competencies": [
+        "motion-control"
+      ],
+      "condition": "Quando interação dispara movimento decorativo",
+      "action": "Respeitar preferência por movimento reduzido e oferecer desligamento de movimento não essencial.",
+      "rationale": "Reações vestibulares podem tornar efeitos prejudiciais.",
+      "exceptions": [
+        "Movimento essencial à informação ou função é exceção; critério AAA."
+      ],
+      "counterexamples": [
+        "Preview de animação em editor pode precisar de movimento essencial."
+      ],
+      "evidence": [
+        {
+          "sourceId": "motion-accessibility",
+          "locator": "Success Criterion (SC)",
+          "section": "Success Criterion (SC)",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-interpreter",
+        "animation-performance-engineer",
+        "animations-orqx",
+        "css-motion-artist",
+        "generative-particle-engineer",
+        "motion-choreographer",
+        "scroll-narrative-engineer",
+        "shader-artist",
+        "threejs-architect"
+      ],
+      "taskTags": [
+        "motion-control"
+      ]
+    },
+    {
+      "id": "h-inclusive-components",
+      "squad": "squad-design",
+      "competencies": [
+        "inclusive-components"
+      ],
+      "condition": "Ao desenhar imagens, tabelas ou formulários",
+      "action": "Relacionar cada componente a critérios acessíveis e verificar resultado com usuários e testes aplicáveis.",
+      "rationale": "Aplicar um exemplo não demonstra conformidade integral.",
+      "exceptions": [
+        "Tutoriais abrangem níveis distintos e não são certificação."
+      ],
+      "counterexamples": [
+        "Uma página pode ter alt correto e falhar no teclado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "web-accessibility",
+          "locator": "Relationship to WCAG",
+          "section": "Relationship to WCAG",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cro-persuasion",
+        "design-orqx",
+        "design-system",
+        "dx-accessibility-specialist",
+        "dx-design-system-architect",
+        "dx-frontend-engineer",
+        "dx-interaction-designer",
+        "dx-performance-engineer",
+        "dx-ui-designer",
+        "dx-ux-strategist",
+        "platform-aesthetic-director",
+        "premium-packaging-strategist",
+        "product-surface-director",
+        "ux-designer"
+      ],
+      "taskTags": [
+        "accessibility",
+        "acessibilidade",
+        "forms",
+        "labels",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "h-problem-before-solution",
+      "squad": "squad-design",
+      "competencies": [
+        "problem-before-solution"
+      ],
+      "condition": "Antes de escolher interface ou fluxo",
+      "action": "Registrar necessidade na linguagem do usuário e testá-la com observação ou entrevista.",
+      "rationale": "Uma sugestão interna não prova que a solução é necessária.",
+      "exceptions": [
+        "Orientação vem de serviços públicos; extrapolação comercial é inferida."
+      ],
+      "counterexamples": [
+        "Preciso de lembrete não significa preciso de email."
+      ],
+      "evidence": [
+        {
+          "sourceId": "user-needs",
+          "locator": "Researching users and their needs",
+          "section": "Researching users and their needs",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cro-persuasion",
+        "design-orqx",
+        "design-system",
+        "dx-accessibility-specialist",
+        "dx-design-system-architect",
+        "dx-frontend-engineer",
+        "dx-interaction-designer",
+        "dx-performance-engineer",
+        "dx-ui-designer",
+        "dx-ux-strategist",
+        "platform-aesthetic-director",
+        "premium-packaging-strategist",
+        "product-surface-director",
+        "ux-designer"
+      ],
+      "taskTags": [
+        "problem-before-solution"
+      ]
+    },
+    {
+      "id": "h-break-even",
+      "squad": "squad-finance",
+      "competencies": [
+        "break-even"
+      ],
+      "condition": "Ao avaliar viabilidade",
+      "action": "Calcular custos fixos divididos pela contribuição unitária e registrar unidade, período e premissas.",
+      "rationale": "Equilíbrio expressa relação entre custo total e receita total.",
+      "exceptions": [
+        "Exige contribuição positiva e custos comparáveis; projeção não é resultado contábil."
+      ],
+      "counterexamples": [
+        "Misturar custo mensal e preço anual produz meta inválida."
+      ],
+      "evidence": [
+        {
+          "sourceId": "business-plan",
+          "locator": "Calculate your startup costs / Getting started",
+          "section": "Calculate your startup costs / Getting started",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "budget-controller",
+        "cost-optimizer",
+        "finance-orqx",
+        "fiscal-compliance-br",
+        "forecast-strategist",
+        "pricing-strategist",
+        "profitability-analyst",
+        "revenue-analyst"
+      ],
+      "taskTags": [
+        "break-even"
+      ]
+    },
+    {
+      "id": "h-search-originality",
+      "squad": "squad-growth",
+      "competencies": [
+        "search-originality"
+      ],
+      "condition": "Quando conteúdo é planejado para aquisição orgânica",
+      "action": "Priorizar público, experiência própria e ganho informacional; usar SEO para facilitar descoberta.",
+      "rationale": "A fonte distingue conteúdo útil de produção para manipular ranking.",
+      "exceptions": [
+        "E-E-A-T não é fator isolado; crescimento precisa avaliação própria."
+      ],
+      "counterexamples": [
+        "Atualizar data sem mudar conteúdo não demonstra frescor."
+      ],
+      "evidence": [
+        {
+          "sourceId": "helpful-content",
+          "locator": "Content and quality questions",
+          "section": "Content and quality questions",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ga-analytics-engineer",
+        "ga-campaign-analyst",
+        "ga-cro-specialist",
+        "ga-data-analyst",
+        "ga-growth-hacker",
+        "ga-seo-strategist",
+        "growth-orqx"
+      ],
+      "taskTags": [
+        "search-originality"
+      ]
+    },
+    {
+      "id": "h-quality-diagnostic",
+      "squad": "squad-paidmedia",
+      "competencies": [
+        "quality-diagnostic"
+      ],
+      "condition": "Ao interpretar Quality Score",
+      "action": "Usar componentes para diagnosticar relevância e landing page; avaliar resultados comerciais separadamente.",
+      "rationale": "Quality Score não é KPI nem entrada direta do leilão.",
+      "exceptions": [
+        "Restrito a campanhas Search Google; não aplicar a Meta ou TikTok."
+      ],
+      "counterexamples": [
+        "Somar Quality Scores entre palavras-chave cria métrica sem unidade válida."
+      ],
+      "evidence": [
+        {
+          "sourceId": "ads-quality",
+          "locator": "Good to know about Quality Score",
+          "section": "Good to know about Quality Score",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "campaign-analyst",
+        "creative-strategist",
+        "cro-specialist",
+        "google-ads-specialist",
+        "meta-ads-specialist",
+        "paidmedia-orqx",
+        "performance-engineer",
+        "pm-creative-performance-analyst",
+        "pm-youtube-ads-specialist"
+      ],
+      "taskTags": [
+        "quality-diagnostic"
+      ]
+    },
+    {
+      "id": "h-ad-evidence",
+      "squad": "squad-paidmedia",
+      "competencies": [
+        "ad-evidence"
+      ],
+      "condition": "Antes de divulgar anúncio",
+      "action": "Vincular promessas materiais à evidência e revisar omissões e implicações.",
+      "rationale": "Evidência deve existir antes da divulgação.",
+      "exceptions": [
+        "Regras US; jurisdição brasileira necessita fonte própria."
+      ],
+      "counterexamples": [
+        "Dinheiro de volta não elimina necessidade de comprovar promessa."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claims-evidence",
+          "locator": "What truth-in-advertising rules apply to advertisers?",
+          "section": "What truth-in-advertising rules apply to advertisers?",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "campaign-analyst",
+        "creative-strategist",
+        "cro-specialist",
+        "google-ads-specialist",
+        "meta-ads-specialist",
+        "paidmedia-orqx",
+        "performance-engineer",
+        "pm-creative-performance-analyst",
+        "pm-youtube-ads-specialist"
+      ],
+      "taskTags": [
+        "ad-evidence"
+      ]
+    },
+    {
+      "id": "h-discovery-assumptions",
+      "squad": "squad-product",
+      "competencies": [
+        "discovery-assumptions"
+      ],
+      "condition": "Ao priorizar solução solicitada por stakeholders",
+      "action": "Separar problema de solução e validar necessidade com usuários reais, inclusive quem tem dificuldades.",
+      "rationale": "Necessidades sustentadas em pesquisa reduzem decisão por opinião interna.",
+      "exceptions": [
+        "Emergência pode exigir mitigação provisória documentada."
+      ],
+      "counterexamples": [
+        "Feature pedida pelo stakeholder pode não resolver o problema do usuário."
+      ],
+      "evidence": [
+        {
+          "sourceId": "user-needs",
+          "locator": "Researching users and their needs",
+          "section": "Researching users and their needs",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "product-orqx",
+        "ps-client-product-manager",
+        "ps-delivery-manager",
+        "ps-discovery-lead",
+        "ps-product-analyst",
+        "ps-product-ops-specialist",
+        "ps-product-strategist"
+      ],
+      "taskTags": [
+        "discovery-assumptions"
+      ]
+    },
+    {
+      "id": "h-provenance-chain",
+      "squad": "squad-research",
+      "competencies": [
+        "provenance-chain"
+      ],
+      "condition": "Ao consolidar conclusão a partir de fontes",
+      "action": "Registrar fonte, transformação, agente responsável e locator para cada afirmação.",
+      "rationale": "Proveniência permite avaliar qualidade e confiabilidade.",
+      "exceptions": [
+        "PROV overview é não normativo; rastreio não garante verdade."
+      ],
+      "counterexamples": [
+        "Uma cadeia perfeitamente rastreável pode preservar informação falsa."
+      ],
+      "evidence": [
+        {
+          "sourceId": "provenance",
+          "locator": "Abstract",
+          "section": "Abstract",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "audience-intelligence",
+        "competitive-intelligence",
+        "data-synthesizer",
+        "deep-researcher",
+        "market-analyst",
+        "research-orqx",
+        "trend-forecaster"
+      ],
+      "taskTags": [
+        "provenance-chain"
+      ]
+    },
+    {
+      "id": "h-research-assumptions",
+      "squad": "squad-research",
+      "competencies": [
+        "research-assumptions"
+      ],
+      "condition": "Ao sintetizar sugestões e entrevistas",
+      "action": "Separar opinião interna, observação direta e inferência e buscar grupos que falham no serviço atual.",
+      "rationale": "Amostra somente de usuários típicos omite necessidades relevantes.",
+      "exceptions": [
+        "Fonte trata de pesquisa de serviços públicos; não define tamanho amostral universal."
+      ],
+      "counterexamples": [
+        "Entrevistar apenas stakeholders não valida demanda."
+      ],
+      "evidence": [
+        {
+          "sourceId": "user-needs",
+          "locator": "Researching users and their needs",
+          "section": "Researching users and their needs",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "audience-intelligence",
+        "competitive-intelligence",
+        "data-synthesizer",
+        "deep-researcher",
+        "market-analyst",
+        "research-orqx",
+        "trend-forecaster"
+      ],
+      "taskTags": [
+        "research-assumptions"
+      ]
+    },
+    {
+      "id": "h-strategic-economics",
+      "squad": "squad-council",
+      "competencies": [
+        "strategic-economics"
+      ],
+      "condition": "Ao aconselhar expansão ou novo negócio",
+      "action": "Comparar demanda, alternativas, custos, contribuição e necessidade de capital com premissas explícitas.",
+      "rationale": "Viabilidade depende de mercado e economia do negócio.",
+      "exceptions": [
+        "Não replica modelos mentais de membros do council; isso permanece lacuna."
+      ],
+      "counterexamples": [
+        "Uma ideia atraente pode consumir caixa antes de equilibrar receita."
+      ],
+      "evidence": [
+        {
+          "sourceId": "business-plan",
+          "locator": "Calculate your startup costs / Getting started",
+          "section": "Calculate your startup costs / Getting started",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskTags": [
+        "strategic-economics"
+      ]
+    },
+    {
+      "id": "h-narrative-truth",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "narrative-truth"
+      ],
+      "condition": "Ao narrar caso comercial ou pitch com resultados",
+      "action": "Separar fato, dramatização e estimativa; comprovar resultados materiais antes de narrar.",
+      "rationale": "A narrativa pode implicar eficácia sem explicitá-la.",
+      "exceptions": [
+        "Heurística inferida; não constitui corpus Campbell, Harmon ou Snyder."
+      ],
+      "counterexamples": [
+        "Caso de um cliente não prova causalidade ou resultado universal."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claims-evidence",
+          "locator": "What truth-in-advertising rules apply to advertisers?",
+          "section": "What truth-in-advertising rules apply to advertisers?",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskTags": [
+        "narrative-truth"
+      ]
+    },
+    {
+      "id": "h-security-awareness",
+      "squad": "squad-cybersecurity",
+      "competencies": [
+        "security-awareness"
+      ],
+      "condition": "Ao confiar em extensão ou servidor MCP",
+      "action": "Revisar permissões, proveniência e enforcement técnico em vez de inferir auditoria por listagem.",
+      "rationale": "Conector listado não foi necessariamente auditado pelo provedor.",
+      "exceptions": [
+        "Documentação é Claude Code; configurações reais do Codex exigem validação própria."
+      ],
+      "counterexamples": [
+        "Regra textual de negar URL não equivale a isolamento de rede."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claude-security",
+          "locator": "MCP security",
+          "section": "MCP security",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cloud-security-engineer",
+        "compliance-officer",
+        "cyber-orqx",
+        "incident-responder",
+        "network-security-engineer",
+        "penetration-tester",
+        "soc-analyst",
+        "threat-analyst"
+      ],
+      "taskTags": [
+        "security-awareness"
+      ]
+    },
+    {
+      "id": "h-risk-awareness",
+      "squad": "squad-cybersecurity",
+      "competencies": [
+        "risk-awareness"
+      ],
+      "condition": "Ao aceitar relatório de segurança derivado",
+      "action": "Preservar ferramenta, entrada e transformação como proveniência e verificar achados no sistema alvo.",
+      "rationale": "Origem rastreável ajuda auditoria mas não prova exploração nem ausência de risco.",
+      "exceptions": [
+        "Heurística inferida; pentest e LGPD aprofundados permanecem lacuna."
+      ],
+      "counterexamples": [
+        "Relatório com referências corretas pode trazer falso positivo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "provenance",
+          "locator": "Abstract",
+          "section": "Abstract",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cloud-security-engineer",
+        "compliance-officer",
+        "cyber-orqx",
+        "incident-responder",
+        "network-security-engineer",
+        "penetration-tester",
+        "soc-analyst",
+        "threat-analyst"
+      ],
+      "taskTags": [
+        "risk-awareness"
+      ]
+    },
+    {
+      "id": "h-kb-lineage",
+      "squad": "squad-cloning",
+      "competencies": [
+        "kb-lineage"
+      ],
+      "condition": "Ao consolidar conhecimento extraído",
+      "action": "Vincular heurística a evidência, locator e transformação; preservar status inferido e contradições.",
+      "rationale": "Rastreabilidade protege distinção entre fonte e interpretação.",
+      "exceptions": [
+        "Proveniência não comprova eficácia do clone."
+      ],
+      "counterexamples": [
+        "Texto bem citado ainda pode interpretar mal o contexto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "provenance",
+          "locator": "Abstract",
+          "section": "Abstract",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "agent-forger",
+        "cloning-orqx",
+        "cognitive-extractor",
+        "content-capturer",
+        "kb-architect",
+        "mind-synthesizer",
+        "sop-extractor",
+        "source-hunter",
+        "squad-assembler"
+      ],
+      "taskTags": [
+        "taxonomy",
+        "taxonomia",
+        "knowledge-base",
+        "cross-reference",
+        "capture",
+        "extract"
+      ]
+    },
+    {
+      "id": "h-jev-extraction-boundary",
+      "squad": "squad-cloning",
+      "competencies": [
+        "jev-extraction-boundary"
+      ],
+      "condition": "Ao triar conteúdo com Jev",
+      "action": "Transformar mídia em texto verificado, fixar modelo e guardar resultado persistente antes de síntese.",
+      "rationale": "Jev aceita texto e avaliações atômicas; não ingere mídia bruta.",
+      "exceptions": [
+        "Qualidade em português precisa avaliação reservada; preço e limites mudam."
+      ],
+      "counterexamples": [
+        "Classificação semântica não substitui geração de roteiro."
+      ],
+      "evidence": [
+        {
+          "sourceId": "jev-models",
+          "locator": "Current models",
+          "section": "Current models",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "agent-forger",
+        "cloning-orqx",
+        "cognitive-extractor",
+        "content-capturer",
+        "kb-architect",
+        "mind-synthesizer",
+        "sop-extractor",
+        "source-hunter",
+        "squad-assembler"
+      ],
+      "taskTags": [
+        "classify",
+        "classification",
+        "assign-content-class",
+        "capture",
+        "extract"
+      ]
+    },
+    {
+      "id": "h-instruction-alignment",
+      "squad": "squad-courses",
+      "competencies": [
+        "instruction-alignment"
+      ],
+      "condition": "Ao criar curso ou avaliação",
+      "action": "Definir comportamento mensurável, alinhar prática e avaliação e decompor habilidades complexas.",
+      "rationale": "Nota pode não representar domínio quando avaliação e objetivo divergem.",
+      "exceptions": [
+        "Objetivos afetivos exigem operacionalização própria."
+      ],
+      "counterexamples": [
+        "Prova de memorização não demonstra capacidade de aplicar."
+      ],
+      "evidence": [
+        {
+          "sourceId": "learning-alignment",
+          "locator": "Learning objectives should be measurable",
+          "section": "Learning objectives should be measurable",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskTags": [
+        "instruction-alignment"
+      ]
+    },
+    {
+      "id": "h-permission-audit",
+      "squad": "claude-code-mastery",
+      "competencies": [
+        "permission-audit"
+      ],
+      "condition": "Ao configurar automação Claude",
+      "action": "Verificar permission mode, escopo MCP e isolamento de filesystem/rede em configuração real.",
+      "rationale": "Limites de comandos aprovados não garantem limites de sistema operacional.",
+      "exceptions": [
+        "Não iniciar processo Claude nesta integração; documentação de fornecedor não comprova instalação."
+      ],
+      "counterexamples": [
+        "Comando Bash aprovado pode operar além do diretório inicial."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claude-security",
+          "locator": "MCP security",
+          "section": "MCP security",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "claude-mastery-chief",
+        "config-engineer",
+        "hooks-architect",
+        "mcp-integrator",
+        "project-integrator",
+        "roadmap-sentinel",
+        "skill-craftsman",
+        "swarm-orqx"
+      ],
+      "taskTags": [
+        "permission-audit"
+      ]
+    },
+    {
+      "id": "h-grounded-orchestration",
+      "squad": "core",
+      "competencies": [
+        "grounded-orchestration"
+      ],
+      "condition": "Ao rotear e integrar entregas",
+      "action": "Manter origem, ownership e evidência de cada resultado; verificar transformação antes do consumo.",
+      "rationale": "Orquestração precisa preservar relação entre dado e produção.",
+      "exceptions": [
+        "Heurística inferida; arquitetura e testes especializados não cobertos."
+      ],
+      "counterexamples": [
+        "Resposta de sucesso da ferramenta não prova outcome do usuário."
+      ],
+      "evidence": [
+        {
+          "sourceId": "provenance",
+          "locator": "Abstract",
+          "section": "Abstract",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "analyst",
+        "architect",
+        "data-engineer",
+        "developer",
+        "devops",
+        "product-lead",
+        "project-lead",
+        "quality-gate",
+        "snps-orqx",
+        "sprint-lead",
+        "squad-creator",
+        "ux-design-expert"
+      ],
+      "taskTags": [
+        "grounded-orchestration"
+      ]
+    },
+    {
+      "id": "h-crm-funnel-state",
+      "squad": "squad-commercial",
+      "competencies": [
+        "crm-funnel-state"
+      ],
+      "condition": "Ao construir KPI de funil e passagem marketing-vendas",
+      "action": "Separar lifecycle stage, lead status e deal; definir eventos de entrada/saída e verificar se latest/cumulative inclui o período atual antes de calcular velocidade.",
+      "rationale": "Campos diferentes representam etapas e unidades diferentes; média de tempos que exclui estágio corrente distorce previsão.",
+      "exceptions": [
+        "Comportamento citado é HubSpot; mapear eventos reais Kommo ou outro CRM antes de reaplicar."
+      ],
+      "counterexamples": [
+        "SQL não é venda fechada; latest não equivale ao tempo desde a entrada atual."
+      ],
+      "evidence": [
+        {
+          "sourceId": "crm-lifecycle",
+          "locator": "Understand lifecycle stages / lifecycle stage calculated properties",
+          "section": "Understand lifecycle stages / lifecycle stage calculated properties",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "commercial-orqx",
+        "cs-business-auditor",
+        "cs-client-success",
+        "cs-crm-specialist",
+        "cs-funnel-architect",
+        "cs-lead-generation-strategist",
+        "cs-offer-designer",
+        "cs-revops-analyst",
+        "cs-sales-closer",
+        "cs-sales-enablement"
+      ],
+      "taskTags": [
+        "crm-funnel-state"
+      ]
+    },
+    {
+      "id": "h-webgl-main-thread",
+      "squad": "squad-animations",
+      "competencies": [
+        "webgl-main-thread"
+      ],
+      "condition": "Quando efeitos WebGL causam travamento da interface",
+      "action": "Tirar consultas síncronas GPU e readPixels do loop de render; medir stalls e usar leitura assíncrona quando necessário.",
+      "rationale": "Sincronização GPU/CPU pode bloquear toda a página, incluindo scroll.",
+      "exceptions": [
+        "Queries de diagnóstico em desenvolvimento diferem de hot path de produção."
+      ],
+      "counterexamples": [
+        "Otimizar somente shaders não resolve stall causado por getParameter a cada frame."
+      ],
+      "evidence": [
+        {
+          "sourceId": "webgl-practices",
+          "locator": "Avoid blocking API calls / Batch draw calls / per-pixel VRAM budget",
+          "section": "Avoid blocking API calls / Batch draw calls / per-pixel VRAM budget",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-interpreter",
+        "animation-performance-engineer",
+        "animations-orqx",
+        "css-motion-artist",
+        "generative-particle-engineer",
+        "motion-choreographer",
+        "scroll-narrative-engineer",
+        "shader-artist",
+        "threejs-architect"
+      ],
+      "taskTags": [
+        "WebGL",
+        "shader",
+        "render",
+        "animation",
+        "Three.js"
+      ]
+    },
+    {
+      "id": "h-webgl-resource-budget",
+      "squad": "squad-animations",
+      "competencies": [
+        "webgl-resource-budget"
+      ],
+      "condition": "Ao escalar partículas e fundos WebGL a telas de alta densidade",
+      "action": "Estimar VRAM por pixel incluindo DPR, agrupar draws e ajustar buffer/render scale com medição de qualidade e frame time.",
+      "rationale": "Memória e draw-call overhead escalam com recursos e resolução; buffer menor troca fidelidade por velocidade.",
+      "exceptions": [
+        "Não usar um orçamento universal entre dispositivos sem recalibrar; recursos sem extensão precisam fallback."
+      ],
+      "counterexamples": [
+        "Dobrar DPR quadruplica pixels e pode estourar VRAM embora CSS size permaneça igual."
+      ],
+      "evidence": [
+        {
+          "sourceId": "webgl-practices",
+          "locator": "Avoid blocking API calls / Batch draw calls / per-pixel VRAM budget",
+          "section": "Avoid blocking API calls / Batch draw calls / per-pixel VRAM budget",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "animation-interpreter",
+        "animation-performance-engineer",
+        "animations-orqx",
+        "css-motion-artist",
+        "generative-particle-engineer",
+        "motion-choreographer",
+        "scroll-narrative-engineer",
+        "shader-artist",
+        "threejs-architect"
+      ],
+      "taskTags": [
+        "VRAM",
+        "DPR",
+        "particles",
+        "particle",
+        "Three.js",
+        "performance"
+      ]
+    },
+    {
+      "id": "h-interaction-recovery",
+      "squad": "squad-design",
+      "competencies": [
+        "interaction-recovery"
+      ],
+      "condition": "Quando usuário lança ação errada ou aguarda resposta",
+      "action": "Exibir status próximo à ação e oferecer saída/cancelamento ou undo claramente nomeado; validar termos com o usuário.",
+      "rationale": "Feedback, familiaridade e controle reduzem ambiguidade e erros de navegação.",
+      "exceptions": [
+        "Undo só existe quando a operação permite reversão; transação irreversível precisa alternativa própria."
+      ],
+      "counterexamples": [
+        "Toast genérico de sucesso não mostra o que foi salvo nem permite corrigir o registro errado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "ux-heuristics",
+          "locator": "Heuristics 1–4 and 8",
+          "section": "Heuristics 1–4 and 8",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cro-persuasion",
+        "design-orqx",
+        "design-system",
+        "dx-accessibility-specialist",
+        "dx-design-system-architect",
+        "dx-frontend-engineer",
+        "dx-interaction-designer",
+        "dx-performance-engineer",
+        "dx-ui-designer",
+        "dx-ux-strategist",
+        "platform-aesthetic-director",
+        "premium-packaging-strategist",
+        "product-surface-director",
+        "ux-designer"
+      ],
+      "taskTags": [
+        "interaction-recovery"
+      ]
+    },
+    {
+      "id": "h-profit-cash-reconciliation",
+      "squad": "squad-finance",
+      "competencies": [
+        "profit-cash-reconciliation"
+      ],
+      "condition": "Ao avaliar saúde financeira de negócio lucrativo",
+      "action": "Conciliar lucro com fluxo de caixa; explicitar depreciação, variação de capital de giro, investimento e financiamento por período.",
+      "rationale": "Lucro contábil e dinheiro disponível respondem perguntas diferentes.",
+      "exceptions": [
+        "US guide não substitui CPC/IFRS ou regra fiscal brasileira; obter demonstrações reais."
+      ],
+      "counterexamples": [
+        "Vendas a prazo podem elevar lucro e deixar caixa insuficiente para pagar fornecedores."
+      ],
+      "evidence": [
+        {
+          "sourceId": "financial-statements",
+          "locator": "Cash Flow Statements / Read the Footnotes",
+          "section": "Cash Flow Statements / Read the Footnotes",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "budget-controller",
+        "cost-optimizer",
+        "finance-orqx",
+        "fiscal-compliance-br",
+        "forecast-strategist",
+        "pricing-strategist",
+        "profitability-analyst",
+        "revenue-analyst"
+      ],
+      "taskTags": [
+        "profit-cash-reconciliation"
+      ]
+    },
+    {
+      "id": "h-financial-notes",
+      "squad": "squad-finance",
+      "competencies": [
+        "financial-notes"
+      ],
+      "condition": "Ao comparar indicadores financeiros entre períodos ou empresas",
+      "action": "Verificar notas, práticas contábeis e unidade; comparar margem operacional sobre receita líquida e capital de giro com mesma base.",
+      "rationale": "Políticas e diferenças de setor alteram significado de um ratio.",
+      "exceptions": [
+        "Aplicação de US financial statements a PME exige adaptar plano de contas."
+      ],
+      "counterexamples": [
+        "Razão aparentemente melhor pode vir de mudança contábil ou denominador incompatível."
+      ],
+      "evidence": [
+        {
+          "sourceId": "financial-statements",
+          "locator": "Cash Flow Statements / Read the Footnotes",
+          "section": "Cash Flow Statements / Read the Footnotes",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "budget-controller",
+        "cost-optimizer",
+        "finance-orqx",
+        "fiscal-compliance-br",
+        "forecast-strategist",
+        "pricing-strategist",
+        "profitability-analyst",
+        "revenue-analyst"
+      ],
+      "taskTags": [
+        "financial-notes"
+      ]
+    },
+    {
+      "id": "h-crawl-render-visibility",
+      "squad": "squad-growth",
+      "competencies": [
+        "crawl-render-visibility"
+      ],
+      "condition": "Quando página publicada não aparece ou é mal interpretada na busca",
+      "action": "Inspecionar URL e recursos renderizados, links de descoberta e canonical antes de multiplicar conteúdo; observar janela compatível com recrawl.",
+      "rationale": "Crawler precisa enxergar conteúdo e acessar recursos; publicação não garante indexação.",
+      "exceptions": [
+        "site: não enumera todo índice; SEO não promete primeiro lugar nem prazo fixo."
+      ],
+      "counterexamples": [
+        "HTML200 com conteúdo principal inacessível ao crawler não comprova indexação."
+      ],
+      "evidence": [
+        {
+          "sourceId": "seo-starter",
+          "locator": "Crawling / canonicalization / impact / links",
+          "section": "Crawling / canonicalization / impact / links",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ga-analytics-engineer",
+        "ga-campaign-analyst",
+        "ga-cro-specialist",
+        "ga-data-analyst",
+        "ga-growth-hacker",
+        "ga-seo-strategist",
+        "growth-orqx"
+      ],
+      "taskTags": [
+        "crawl-render-visibility"
+      ]
+    },
+    {
+      "id": "h-canonical-duplicate-management",
+      "squad": "squad-growth",
+      "competencies": [
+        "canonical-duplicate-management"
+      ],
+      "condition": "Quando múltiplas URLs oferecem o mesmo conteúdo",
+      "action": "Selecionar versão preferida conforme intenção e aplicar redirect quando adequado ou rel=canonical, verificando o que o crawler lê.",
+      "rationale": "Duplicatas podem dispersar descoberta e confundir usuário sem serem automaticamente spam.",
+      "exceptions": [
+        "Não apagar conteúdo útil; canonical é sinal, não garantia de seleção final."
+      ],
+      "counterexamples": [
+        "URL com parâmetros pode continuar necessária para aplicação mesmo quando outra é preferida na busca."
+      ],
+      "evidence": [
+        {
+          "sourceId": "seo-starter",
+          "locator": "Crawling / canonicalization / impact / links",
+          "section": "Crawling / canonicalization / impact / links",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ga-analytics-engineer",
+        "ga-campaign-analyst",
+        "ga-cro-specialist",
+        "ga-data-analyst",
+        "ga-growth-hacker",
+        "ga-seo-strategist",
+        "growth-orqx"
+      ],
+      "taskTags": [
+        "canonical-duplicate-management"
+      ]
+    },
+    {
+      "id": "h-experiment-randomization",
+      "squad": "squad-paidmedia",
+      "competencies": [
+        "experiment-randomization"
+      ],
+      "condition": "Ao comparar variantes de campanha Search",
+      "action": "Fixar hipótese, métricas, janela e split; escolher cookie para manter usuário na mesma condição e registrar mudanças em base/variante.",
+      "rationale": "Randomização por busca pode expor o mesmo usuário aos dois tratamentos; mudanças simultâneas dificultam interpretação.",
+      "exceptions": [
+        "Disponibilidade e elegibilidade dependem do tipo de campanha; não executar ou alterar anúncio sem autorização."
+      ],
+      "counterexamples": [
+        "Melhora após trocar público, lance e criativo juntos não identifica contribuição de cada ajuste."
+      ],
+      "evidence": [
+        {
+          "sourceId": "ads-experiments",
+          "locator": "Things to note about custom experiments / Keep in mind",
+          "section": "Things to note about custom experiments / Keep in mind",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "campaign-analyst",
+        "creative-strategist",
+        "cro-specialist",
+        "google-ads-specialist",
+        "meta-ads-specialist",
+        "paidmedia-orqx",
+        "performance-engineer",
+        "pm-creative-performance-analyst",
+        "pm-youtube-ads-specialist"
+      ],
+      "taskTags": [
+        "experiment-randomization"
+      ]
+    },
+    {
+      "id": "h-delivery-impact-distinction",
+      "squad": "squad-product",
+      "competencies": [
+        "delivery-impact-distinction"
+      ],
+      "condition": "Ao declarar sucesso de feature ou piloto",
+      "action": "Definir medida de entrega, outcome atribuível e custo-benefício antes do piloto; verificar implementação e efeito separadamente.",
+      "rationale": "Feature entregue corretamente pode não gerar o outcome previsto.",
+      "exceptions": [
+        "Transferência de avaliação pública a produto é inferida; contrafactual exige desenho adequado."
+      ],
+      "counterexamples": [
+        "Número de features entregues não demonstra aumento causado em retenção."
+      ],
+      "evidence": [
+        {
+          "sourceId": "evaluation-magenta",
+          "locator": "Executive summary / 1 Why how and when to evaluate",
+          "section": "Executive summary / 1 Why how and when to evaluate",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "product-orqx",
+        "ps-client-product-manager",
+        "ps-delivery-manager",
+        "ps-discovery-lead",
+        "ps-product-analyst",
+        "ps-product-ops-specialist",
+        "ps-product-strategist"
+      ],
+      "taskTags": [
+        "delivery-impact-distinction"
+      ]
+    },
+    {
+      "id": "h-feedback-language",
+      "squad": "squad-product",
+      "competencies": [
+        "feedback-language"
+      ],
+      "condition": "Ao especificar estados e ações de produto",
+      "action": "Nomear transições na linguagem do usuário e mostrar status real com próximo passo; prever cancelamento e recuperação.",
+      "rationale": "Usuário decide pela informação visível e pelo modelo mental familiar.",
+      "exceptions": [
+        "Transações irrevogáveis não permitem undo fictício; feedback precisa resultado confirmado."
+      ],
+      "counterexamples": [
+        "Salvar silenciosamente em backend sem readback pode induzir falsa certeza do usuário."
+      ],
+      "evidence": [
+        {
+          "sourceId": "ux-heuristics",
+          "locator": "Heuristics 1–4 and 8",
+          "section": "Heuristics 1–4 and 8",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "product-orqx",
+        "ps-client-product-manager",
+        "ps-delivery-manager",
+        "ps-discovery-lead",
+        "ps-product-analyst",
+        "ps-product-ops-specialist",
+        "ps-product-strategist"
+      ],
+      "taskTags": [
+        "feedback-language"
+      ]
+    },
+    {
+      "id": "h-evaluation-attribution",
+      "squad": "squad-research",
+      "competencies": [
+        "evaluation-attribution"
+      ],
+      "condition": "Quando análise compara resultado antes e depois de intervenção",
+      "action": "Separar avaliação de processo, impacto e valor pelo custo; planejar coleta e grupos/contrafactual antes da mudança.",
+      "rationale": "Monitoramento descreve trajetória; avaliação de impacto exige considerar atribuição e alternativas.",
+      "exceptions": [
+        "Intervenções públicas e produto têm contextos diferentes; inferência precisa desenho específico."
+      ],
+      "counterexamples": [
+        "Sazonalidade ou mudança simultânea de público pode explicar resultado sem efeito da intervenção."
+      ],
+      "evidence": [
+        {
+          "sourceId": "evaluation-magenta",
+          "locator": "Executive summary / 1 Why how and when to evaluate",
+          "section": "Executive summary / 1 Why how and when to evaluate",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "audience-intelligence",
+        "competitive-intelligence",
+        "data-synthesizer",
+        "deep-researcher",
+        "market-analyst",
+        "research-orqx",
+        "trend-forecaster"
+      ],
+      "taskTags": [
+        "evaluation-attribution"
+      ]
+    },
+    {
+      "id": "h-semantic-allowlist",
+      "squad": "squad-cybersecurity",
+      "competencies": [
+        "semantic-allowlist"
+      ],
+      "condition": "Ao consumir entrada externa ou saída de modelo",
+      "action": "Validar schema, ranges e regras do negócio no servidor antes de persistir ou agir; usar allowlist para opções fechadas e defesas específicas SQL/XSS.",
+      "rationale": "Entrada estruturalmente correta pode violar a regra do domínio; denylist pode ser burlada e rejeitar Unicode legítimo.",
+      "exceptions": [
+        "Allowlist de caracteres não é a defesa principal para texto livre contra XSS; encoding depende do contexto."
+      ],
+      "counterexamples": [
+        "JSON válido com data final anterior à inicial passa sintaxe e falha semântica."
+      ],
+      "evidence": [
+        {
+          "sourceId": "input-validation",
+          "locator": "Goals / Strategies / Allowlist vs Denylist / Server-side",
+          "section": "Goals / Strategies / Allowlist vs Denylist / Server-side",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "cloud-security-engineer",
+        "compliance-officer",
+        "cyber-orqx",
+        "incident-responder",
+        "network-security-engineer",
+        "penetration-tester",
+        "soc-analyst",
+        "threat-analyst"
+      ],
+      "taskTags": [
+        "semantic-allowlist"
+      ]
+    },
+    {
+      "id": "h-confidence-calibration",
+      "squad": "squad-cloning",
+      "competencies": [
+        "confidence-calibration"
+      ],
+      "condition": "Quando extração semântica produz confiança alta",
+      "action": "Calibrar thresholds por tarefa e custo do erro com casos reservados; conservar distribuição e status sem promover fonte por confiança.",
+      "rationale": "Probabilidade/certeza do modelo não comprova fidelidade à fonte ou resultado do clone.",
+      "exceptions": [
+        "Noul fornece p sem confidence separado; outras medidas podem ser mais adequadas."
+      ],
+      "counterexamples": [
+        "Confiança elevada em regra do domínio errado continua interpretação incorreta."
+      ],
+      "evidence": [
+        {
+          "sourceId": "jev-confidence",
+          "locator": "Thresholds scale with risk",
+          "section": "Thresholds scale with risk",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "agent-forger",
+        "cloning-orqx",
+        "cognitive-extractor",
+        "content-capturer",
+        "kb-architect",
+        "mind-synthesizer",
+        "sop-extractor",
+        "source-hunter",
+        "squad-assembler"
+      ],
+      "taskTags": [
+        "confidence",
+        "calculate-confidence-score",
+        "evaluate",
+        "validation"
+      ]
+    },
+    {
+      "id": "h-context-not-enforcement",
+      "squad": "claude-code-mastery",
+      "competencies": [
+        "context-not-enforcement"
+      ],
+      "condition": "Ao transformar regras persistentes em automação",
+      "action": "Reservar contexto para orientação e aplicar limites por hooks/permissões/isolamento verificáveis; mover procedimentos específicos para skills ou regras por path.",
+      "rationale": "Instruções lidas pelo modelo não impedem tecnicamente uma ação.",
+      "exceptions": [
+        "Documentação refere-se ao Claude atual; controles Codex exigem integração própria."
+      ],
+      "counterexamples": [
+        "CLAUDE.md com proibição não equivale a sandbox de filesystem."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claude-memory",
+          "locator": "CLAUDE.md vs auto memory / How it works",
+          "section": "CLAUDE.md vs auto memory / How it works",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "claude-mastery-chief",
+        "config-engineer",
+        "hooks-architect",
+        "mcp-integrator",
+        "project-integrator",
+        "roadmap-sentinel",
+        "skill-craftsman",
+        "swarm-orqx"
+      ],
+      "taskTags": [
+        "context-not-enforcement"
+      ]
+    },
+    {
+      "id": "h-memory-selective-loading",
+      "squad": "claude-code-mastery",
+      "competencies": [
+        "memory-selective-loading"
+      ],
+      "condition": "Ao crescer memória de projeto",
+      "action": "Manter índice curto com links e recuperar tópicos sob demanda; testar limites e escopo entre worktrees e agentes.",
+      "rationale": "Contexto inicial pode cortar conhecimento silenciosamente além do limite.",
+      "exceptions": [
+        "200linhas/25KB são comportamento documentado do Claude; não transferir ao Codex como regra universal."
+      ],
+      "counterexamples": [
+        "Arquivo salvo com sucesso não prova que todas linhas carregarão na próxima sessão."
+      ],
+      "evidence": [
+        {
+          "sourceId": "claude-memory",
+          "locator": "CLAUDE.md vs auto memory / How it works",
+          "section": "CLAUDE.md vs auto memory / How it works",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "claude-mastery-chief",
+        "config-engineer",
+        "hooks-architect",
+        "mcp-integrator",
+        "project-integrator",
+        "roadmap-sentinel",
+        "skill-craftsman",
+        "swarm-orqx"
+      ],
+      "taskTags": [
+        "memory-selective-loading"
+      ]
+    },
+    {
+      "id": "h-service-signals",
+      "squad": "core",
+      "competencies": [
+        "service-signals"
+      ],
+      "condition": "Ao definir aceitação operacional",
+      "action": "Medir latência de sucesso e de falha, tráfego, erros e saturação; usar histogramas para cauda e unidade por janela.",
+      "rationale": "Média e HTTP status sozinhos podem esconder experiência ruim.",
+      "exceptions": [
+        "Adaptar sinal à função do serviço; não criar telemetria indiscriminada para tarefa pequena."
+      ],
+      "counterexamples": [
+        "Erro500 muito rápido melhora média de latência enquanto serviço piora."
+      ],
+      "evidence": [
+        {
+          "sourceId": "sre-monitoring",
+          "locator": "The Four Golden Signals / Black-box monitoring",
+          "section": "The Four Golden Signals / Black-box monitoring",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "analyst",
+        "architect",
+        "data-engineer",
+        "developer",
+        "devops",
+        "product-lead",
+        "project-lead",
+        "quality-gate",
+        "snps-orqx",
+        "sprint-lead",
+        "squad-creator",
+        "ux-design-expert"
+      ],
+      "taskTags": [
+        "service-signals"
+      ]
+    },
+    {
+      "id": "h-outcome-probe",
+      "squad": "core",
+      "competencies": [
+        "outcome-probe"
+      ],
+      "condition": "Ao concluir release ou correção funcional",
+      "action": "Combinar verificação externa do comportamento esperado com instrumentação interna para explicar falhas; alertar por sintoma útil e contexto.",
+      "rationale": "HTTP200 pode servir conteúdo errado; monitoramento interno e externo respondem questões complementares.",
+      "exceptions": [
+        "Enforcement de produto e SLO devem preceder alertas; ruído tem custo."
+      ],
+      "counterexamples": [
+        "Health200 não comprova que usuário conclui checkout ou salva registro."
+      ],
+      "evidence": [
+        {
+          "sourceId": "sre-monitoring",
+          "locator": "The Four Golden Signals / Black-box monitoring",
+          "section": "The Four Golden Signals / Black-box monitoring",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "analyst",
+        "architect",
+        "data-engineer",
+        "developer",
+        "devops",
+        "product-lead",
+        "project-lead",
+        "quality-gate",
+        "snps-orqx",
+        "sprint-lead",
+        "squad-creator",
+        "ux-design-expert"
+      ],
+      "taskTags": [
+        "outcome-probe"
+      ]
+    },
+    {
+      "id": "business-asset-grid",
+      "squad": "squad-brand",
+      "competencies": [
+        "distinctive-assets",
+        "mental-model"
+      ],
+      "condition": "Antes de escolher um sinal de marca.",
+      "action": "Meça reconhecimento e atribuição exclusiva; classifique usar, investir, evitar ou testar.",
+      "rationale": "Reconhecido não implica exclusivo.",
+      "exceptions": [
+        "Sem amostra real, mantenha classificação provisória."
+      ],
+      "counterexamples": [
+        "Uma cor famosa que lembra concorrente."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "Distinctive Asset Grid; paragraphs fame/uniqueness and consistency",
+          "section": "Distinctive Asset Grid",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "distinctive-assets",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-identity-continuity",
+      "squad": "squad-brand",
+      "competencies": [
+        "brand-refresh"
+      ],
+      "condition": "Redesign solicitado por desgaste interno.",
+      "action": "Teste reconhecimento antes/depois e preserve sinais fortes.",
+      "rationale": "Mudança pode destruir memória acumulada.",
+      "exceptions": [
+        "Sinal associado a dano reputacional exige investigação."
+      ],
+      "counterexamples": [
+        "Equipe cansada do logo não prova consumidor cansado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "Distinctive Asset Grid; paragraphs fame/uniqueness and consistency",
+          "section": "History; consistency",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "brand-refresh"
+      ]
+    },
+    {
+      "id": "business-cue-rehearsal",
+      "squad": "squad-brand",
+      "competencies": [
+        "sonic-branding",
+        "brand-memory"
+      ],
+      "condition": "Marca nova sem reconhecimento.",
+      "action": "Repita sinais identificáveis em contextos de compra; verifique associação.",
+      "rationale": "Contexto e repetição favorecem recuperação.",
+      "exceptions": [
+        "Exposição sem atribuição pode reforçar rival."
+      ],
+      "counterexamples": [
+        "Jingle lembrado sem marca."
+      ],
+      "evidence": [
+        {
+          "sourceId": "budiu-recognition",
+          "locator": "Recognition vs. Recall; Promote Recognition",
+          "section": "Practice; Recency; Context",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "sonic-branding",
+        "brand-memory"
+      ]
+    },
+    {
+      "id": "business-attribution-audit",
+      "squad": "squad-brand",
+      "competencies": [
+        "brand-system"
+      ],
+      "condition": "Produção multicanal inconsistente.",
+      "action": "Audite aplicação dos mesmos sinais e teste atribuição sem nome.",
+      "rationale": "Consistência dá oportunidade de construir associação.",
+      "exceptions": [
+        "Adaptar formato mantendo sinal identificável."
+      ],
+      "counterexamples": [
+        "Template bonito sem reconhecimento."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "Distinctive Asset Grid; paragraphs fame/uniqueness and consistency",
+          "section": "Final thought consistency",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskTags": [
+        "brand-system"
+      ]
+    },
+    {
+      "id": "business-peer-proof",
+      "squad": "squad-copy",
+      "competencies": [
+        "social-proof"
+      ],
+      "condition": "Leitor inseguro com a oferta.",
+      "action": "Use evidência de clientes comparáveis com contexto verificável.",
+      "rationale": "Similaridade torna prova pertinente.",
+      "exceptions": [
+        "Sem caso comparável, explique limite da prova."
+      ],
+      "counterexamples": [
+        "Celebridade genérica para decisão técnica."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Social Proof; Authority; Consistency; Reciprocity",
+          "section": "Social Proof",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskTags": [
+        "social-proof"
+      ]
+    },
+    {
+      "id": "business-voluntary-step",
+      "squad": "squad-copy",
+      "competencies": [
+        "commitment"
+      ],
+      "condition": "Ação final exige compromisso elevado.",
+      "action": "Ofereça pequeno passo voluntário ligado ao objetivo declarado.",
+      "rationale": "Continuidade pode facilitar adesão.",
+      "exceptions": [
+        "Não usar compromisso antigo contra escolha atual."
+      ],
+      "counterexamples": [
+        "Aceitar newsletter tratado como aceitar compra."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Social Proof; Authority; Consistency; Reciprocity",
+          "section": "Consistency",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskTags": [
+        "commitment"
+      ]
+    },
+    {
+      "id": "business-mechanism-selection",
+      "squad": "squad-copy",
+      "competencies": [
+        "persuasion",
+        "mental-model"
+      ],
+      "condition": "Texto acumula gatilhos sem diagnóstico.",
+      "action": "Escolha mecanismo pela objeção: dúvida exige prova; conhecimento exige credencial; confiança exige ajuda útil.",
+      "rationale": "Mecanismos resolvem problemas diferentes.",
+      "exceptions": [
+        "Teste a hipótese de objeção com leitores."
+      ],
+      "counterexamples": [
+        "Escassez adicionada quando problema é credibilidade."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Social Proof; Authority; Consistency; Reciprocity",
+          "section": "Reciprocity; Authority; Social Proof",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskTags": [
+        "persuasion",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-one-message-action",
+      "squad": "squad-copy",
+      "competencies": [
+        "headline",
+        "call-to-action"
+      ],
+      "condition": "Mensagem com múltiplas promessas.",
+      "action": "Escolha uma ideia principal e uma ação que a concretize.",
+      "rationale": "Prioridade torna o próximo passo legível.",
+      "exceptions": [
+        "Comparação pode exigir mais de uma alternativa."
+      ],
+      "counterexamples": [
+        "Título promete economia; botão leva a manifesto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Main message; visuals; action; numbers",
+          "section": "Main message; action",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskTags": [
+        "headline",
+        "call-to-action"
+      ]
+    },
+    {
+      "id": "business-scan-structure",
+      "squad": "squad-content",
+      "competencies": [
+        "editorial-structure"
+      ],
+      "condition": "Leitor busca resposta em página.",
+      "action": "Abra com conclusão; subtítulos informativos e uma ideia por parágrafo.",
+      "rationale": "Escaneamento orienta estrutura.",
+      "exceptions": [
+        "Narrativa literária deliberada segue objetivo diferente."
+      ],
+      "counterexamples": [
+        "Título espirituoso sem indicar conteúdo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "web-reading",
+          "locator": "Scannable text; Measuring the Effect of Improved Web Writing",
+          "section": "Scannable text",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskTags": [
+        "editorial-structure"
+      ]
+    },
+    {
+      "id": "business-claim-density",
+      "squad": "squad-content",
+      "competencies": [
+        "credibility"
+      ],
+      "condition": "Texto depende de superlativos.",
+      "action": "Troque adjetivos por fatos relevantes com fontes e unidades.",
+      "rationale": "Hipérbole cria trabalho de filtragem.",
+      "exceptions": [
+        "Humor pode usar exagero reconhecível."
+      ],
+      "counterexamples": [
+        "Melhor solução sem critério."
+      ],
+      "evidence": [
+        {
+          "sourceId": "web-reading",
+          "locator": "Scannable text; Measuring the Effect of Improved Web Writing",
+          "section": "Objective language comparison",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskTags": [
+        "credibility"
+      ]
+    },
+    {
+      "id": "business-progressive-detail",
+      "squad": "squad-content",
+      "competencies": [
+        "information-hierarchy",
+        "mental-model"
+      ],
+      "condition": "Acervo maior que a necessidade imediata.",
+      "action": "Entregue essencial para a ação; ofereça caminho para aprofundar.",
+      "rationale": "Hierarquia reduz sobrecarga.",
+      "exceptions": [
+        "Instrução crítica não pode ficar escondida."
+      ],
+      "counterexamples": [
+        "FAQ indispensável atrás de link inacessível."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Main message; visuals; action; numbers",
+          "section": "Present information; important main message",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskTags": [
+        "information-hierarchy",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-visual-text-agreement",
+      "squad": "squad-content",
+      "competencies": [
+        "multimodal-content"
+      ],
+      "condition": "Conteúdo mistura imagem e texto.",
+      "action": "Confira se ambos comunicam mesma ideia; inclua legenda interpretativa.",
+      "rationale": "Visuais ambíguos podem inverter mensagem.",
+      "exceptions": [
+        "Contraste artístico explícito pode ser intencional."
+      ],
+      "counterexamples": [
+        "Gráfico cumulativo usado como taxa mensal."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Main message; visuals; action; numbers",
+          "section": "Visuals and captions",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskTags": [
+        "multimodal-content"
+      ]
+    },
+    {
+      "id": "business-causal-spine",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "narrative-causality"
+      ],
+      "condition": "Roteiro é sequência de episódios.",
+      "action": "Ligue decisão, consequência e transformação; revise cenas sem efeito no todo.",
+      "rationale": "Uma pessoa não garante unidade de ação.",
+      "exceptions": [
+        "Mosaico experimental pode usar outra lógica."
+      ],
+      "counterexamples": [
+        "E então repetido sem por causa disso."
+      ],
+      "evidence": [
+        {
+          "sourceId": "poetics",
+          "locator": "Part VIII unity; Part IX causality; Part X reversal",
+          "section": "Parts VIII-X",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskTags": [
+        "narrative-causality"
+      ]
+    },
+    {
+      "id": "business-earned-reversal",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "plot-reversal"
+      ],
+      "condition": "Virada parece arbitrária.",
+      "action": "Plante informação e decisões que tornam virada provável dentro da história.",
+      "rationale": "Reversão deriva da estrutura anterior.",
+      "exceptions": [
+        "Surrealismo deliberado não busca plausibilidade convencional."
+      ],
+      "counterexamples": [
+        "Salvador externo resolve conflito sem preparação."
+      ],
+      "evidence": [
+        {
+          "sourceId": "poetics",
+          "locator": "Part VIII unity; Part IX causality; Part X reversal",
+          "section": "Parts X-XI",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskTags": [
+        "plot-reversal"
+      ]
+    },
+    {
+      "id": "business-sparkline",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "presentation",
+        "mental-model"
+      ],
+      "condition": "Pitch descreve funcionalidades.",
+      "action": "Alterne situação atual e futuro possível com evidência da ponte.",
+      "rationale": "Contraste explicita transformação.",
+      "exceptions": [
+        "Incidente urgente pode exigir decisão direta."
+      ],
+      "counterexamples": [
+        "Futuro desejável sem mecanismo plausível."
+      ],
+      "evidence": [
+        {
+          "sourceId": "duarte-sales-story",
+          "locator": "Think about stories; Rank objections; Formulate responses",
+          "section": "Tension and release",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskTags": [
+        "presentation",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-objection-scenes",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "sales-story"
+      ],
+      "condition": "Narrativa não remove dúvida do comprador.",
+      "action": "Ordene obstáculos por impacto; responda com evidência e confirme compreensão.",
+      "rationale": "A história precisa mover decisão específica.",
+      "exceptions": [
+        "Objeção hipotética deve ser validada."
+      ],
+      "counterexamples": [
+        "Origem da empresa ocupa deck inteiro."
+      ],
+      "evidence": [
+        {
+          "sourceId": "duarte-sales-story",
+          "locator": "Think about stories; Rank objections; Formulate responses",
+          "section": "Rank objections; Formulate responses",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskTags": [
+        "sales-story"
+      ]
+    },
+    {
+      "id": "business-focus-threshold",
+      "squad": "squad-council",
+      "competencies": [
+        "opportunity-cost"
+      ],
+      "condition": "Decisor sobrecarregado com projetos opcionais.",
+      "action": "Compare nova frente à melhor atual; exija entusiasmo e capacidade antes de aceitar.",
+      "rationale": "Recusar protege investimento concentrado.",
+      "exceptions": [
+        "Deveres e sobrevivência não dependem de entusiasmo."
+      ],
+      "counterexamples": [
+        "Pessoa sem oportunidades rejeita aprendizado básico."
+      ],
+      "evidence": [
+        {
+          "sourceId": "sivers-focus",
+          "locator": "Opening condition; reply to Kevin; reply on duty",
+          "section": "Opening condition; duty reply",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskTags": [
+        "opportunity-cost"
+      ]
+    },
+    {
+      "id": "business-domain-believability",
+      "squad": "squad-council",
+      "competencies": [
+        "decision-quality",
+        "mental-model"
+      ],
+      "condition": "Conselho diverge sobre decisão.",
+      "action": "Pese experiência específica e explicação causal; documente evidência de cada opinião.",
+      "rationale": "Credibilidade depende do domínio.",
+      "exceptions": [
+        "Regime novo pode tornar histórico pouco transferível."
+      ],
+      "counterexamples": [
+        "Prestígio financeiro decide pedagogia."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Track record and causal explanation; disagreement process",
+          "section": "Track record and causal explanation",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskTags": [
+        "decision-quality",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-independent-disagreement",
+      "squad": "squad-council",
+      "competencies": [
+        "decision-process"
+      ],
+      "condition": "Autoridade domina discussão.",
+      "action": "Colete razões independentes antes da conversa; explicite divergência e responsável final.",
+      "rationale": "Discussão precisa confrontar causas.",
+      "exceptions": [
+        "Emergência limita deliberação."
+      ],
+      "counterexamples": [
+        "Consenso após líder anunciar resposta."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Track record and causal explanation; disagreement process",
+          "section": "Independent thinking; disagreement",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskTags": [
+        "decision-process"
+      ]
+    },
+    {
+      "id": "business-causal-accountability",
+      "squad": "squad-council",
+      "competencies": [
+        "strategic-advice"
+      ],
+      "condition": "Recomendação baseada em reputação.",
+      "action": "Exija mecanismo, casos relevantes e condição que mudaria o conselho.",
+      "rationale": "Explicação permite contestação.",
+      "exceptions": [
+        "Dados confidenciais podem exigir evidência restrita."
+      ],
+      "counterexamples": [
+        "Conselheiro famoso sem raciocínio verificável."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Track record and causal explanation; disagreement process",
+          "section": "Objective trusted criteria; override",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskTags": [
+        "strategic-advice"
+      ]
+    },
+    {
+      "id": "business-prior-diagnostic",
+      "squad": "squad-courses",
+      "competencies": [
+        "instructional-design"
+      ],
+      "condition": "Curso inicia com conceitos pré-requisitos.",
+      "action": "Use tarefa diagnóstica; corrija erro e ative conhecimento útil.",
+      "rationale": "Base errada pode impedir aprendizagem.",
+      "exceptions": [
+        "Diagnóstico não deve excluir sem alternativa."
+      ],
+      "counterexamples": [
+        "Avançado assume conceito básico correto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principles 1, 4, 5 and 7",
+          "section": "Principle 1",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskTags": [
+        "instructional-design"
+      ]
+    },
+    {
+      "id": "business-mastery-transfer",
+      "squad": "squad-courses",
+      "competencies": [
+        "mastery",
+        "mental-model"
+      ],
+      "condition": "Aluno sabe partes mas falha na prática.",
+      "action": "Treine componentes, integração e escolha de aplicação em caso novo.",
+      "rationale": "Masteria inclui saber quando aplicar.",
+      "exceptions": [
+        "Especialista pode dispensar treino isolado."
+      ],
+      "counterexamples": [
+        "Quiz de definição usado como prova profissional."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principles 1, 4, 5 and 7",
+          "section": "Principle 4",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskTags": [
+        "mastery",
+        "mental-model"
+      ]
+    },
+    {
+      "id": "business-feedback-loop",
+      "squad": "squad-courses",
+      "competencies": [
+        "practice-feedback"
+      ],
+      "condition": "Exercício recebe apenas nota.",
+      "action": "Defina critério e desafio adequado; devolva feedback acionável enquanto permite revisão.",
+      "rationale": "Feedback liga prática à meta.",
+      "exceptions": [
+        "Avaliação somativa pode limitar nova tentativa."
+      ],
+      "counterexamples": [
+        "Parabéns sem indicar correção."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principles 1, 4, 5 and 7",
+          "section": "Principle 5",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskTags": [
+        "practice-feedback"
+      ]
+    },
+    {
+      "id": "business-self-monitoring",
+      "squad": "squad-courses",
+      "competencies": [
+        "metacognition"
+      ],
+      "condition": "Aluno repete estratégia ineficaz.",
+      "action": "Peça planejamento, monitoramento e reflexão sobre erro e próxima mudança.",
+      "rationale": "Autogestão exige prática explícita.",
+      "exceptions": [
+        "Novato precisa roteiro e modelo inicial."
+      ],
+      "counterexamples": [
+        "Diário reflexivo sem relação com desempenho."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principles 1, 4, 5 and 7",
+          "section": "Principle 7",
+          "excerpt": "",
+          "referenceOnly": true
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskTags": [
+        "metacognition"
+      ]
+    }
+  ]
+}

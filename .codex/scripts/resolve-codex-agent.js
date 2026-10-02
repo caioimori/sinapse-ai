@@ -268,10 +268,12 @@ function resolveAgentTasks(entry, projectRoot = PROJECT_ROOT) {
   const declared = extractTaskSlugs(sourceText);
 
   const taskDirs = [];
+  const installedLayout = !fs.existsSync(path.join(projectRoot, DEV_TASKS_DIR)) && fs.existsSync(path.join(projectRoot, 'core/tasks'));
+  const squadBase = installedLayout ? entry.squad : `${SQUADS_DIR}/${entry.squad}`;
   if (entry.squad) {
-    taskDirs.push(`${SQUADS_DIR}/${entry.squad}/tasks`);
+    taskDirs.push(`${squadBase}/tasks`);
   }
-  taskDirs.push(DEV_TASKS_DIR);
+  taskDirs.push(installedLayout ? 'core/tasks' : DEV_TASKS_DIR);
 
   const resolved = [];
   const seen = new Set();
@@ -292,7 +294,7 @@ function resolveAgentTasks(entry, projectRoot = PROJECT_ROOT) {
     entry.squad && (isOrchestrator || resolved.length === 0);
 
   if (shouldExposeSquadPool) {
-    const dir = path.join(projectRoot, `${SQUADS_DIR}/${entry.squad}/tasks`);
+    const dir = path.join(projectRoot, `${squadBase}/tasks`);
     let files = [];
     try {
       files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
@@ -301,7 +303,7 @@ function resolveAgentTasks(entry, projectRoot = PROJECT_ROOT) {
     }
     for (const f of files) {
       const slug = f.replace(/\.md$/, '');
-      const rel = `${SQUADS_DIR}/${entry.squad}/tasks/${f}`;
+      const rel = `${squadBase}/tasks/${f}`;
       if (!seen.has(rel)) {
         resolved.push({
           command: slug,

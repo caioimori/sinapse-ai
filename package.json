@@ -26,6 +26,9 @@
   "files": [
     "bin/",
     "scripts/",
+    "research/framework-evolution/sources.json",
+    "research/framework-evolution/heuristics.json",
+    "research/framework-evolution/competencies.json",
     "packages/",
     ".sinapse-ai/",
     "!.sinapse-ai/node_modules",
@@ -185,7 +188,7 @@
     "fs-extra": "^11.3.2",
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^4.3.2",
     "ora": "^5.4.1",
     "proper-lockfile": "^4.1.2",
     "semver": "^7.7.2",
@@ -259,10 +262,10 @@
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
     "brace-expansion": "^5.0.6",
-    "fast-uri": "^3.1.4",
+    "fast-uri": "^3.1.8",
     "ip-address": "^10.1.1",
     "@babel/core": "^7.29.6",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.2"
   },
   "directories": {
     "doc": "docs",

@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "user-needs",
+      "url": "https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs",
+      "title": "Learning about users and their needs",
+      "authority": "GOV.UK Government Digital Service",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Researching users and their needs",
+      "contentSha256": "b698c4ee268eda03f12c791e33a004a11a773c4d18394312b77384af89e61d90",
+      "excerpt": "Treat any opinions or suggestions that do not come from users as assumptions",
+      "claims": [
+        "Opiniões de partes internas são hipóteses; entrevistas, observação e evidência existente ajudam a validar necessidades; soluções devem permanecer distintas do problema."
+      ],
+      "licenseNote": "OGL v3.0; short excerpt and original paraphrase."
+    },
+    {
+      "id": "helpful-content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "title": "Creating helpful reliable people-first content",
+      "authority": "Google Search Central",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Content and quality questions",
+      "contentSha256": "b00f719400f27d693cd89437a3a7e56831fd3f0b0bfd4e675cf29fd0a9b0f17f",
+      "excerpt": "Does the content provide original information, reporting, research, or analysis?",
+      "claims": [
+        "Conteúdo útil acrescenta análise original, autoria verificável e resolve a necessidade do público. E-E-A-T não é um fator de ranking isolado."
+      ],
+      "licenseNote": "CC BY 4.0; short excerpt and original paraphrase."
+    },
+    {
+      "id": "ads-quality",
+      "url": "https://support.google.com/google-ads/answer/6167118",
+      "title": "About Quality Score for Search campaigns",
+      "authority": "Google Ads",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Good to know about Quality Score",
+      "contentSha256": "a3101e3ee4c076fa82054aaa073ee803778b0c37d9732c5ada71e202d18a6c29",
+      "excerpt": "Quality Score is not a key performance indicator",
+      "claims": [
+        "Quality Score é diagnóstico por palavra-chave; não entra diretamente no leilão. CTR esperado, relevância e experiência da landing page compõem o diagnóstico."
+      ],
+      "licenseNote": "Public documentation; short excerpt only; no republication."
+    },
+    {
+      "id": "business-plan",
+      "url": "https://www.sba.gov/counseling/plan-your-business/",
+      "title": "Plan your business",
+      "authority": "US Small Business Administration",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Calculate your startup costs / Getting started",
+      "contentSha256": "3ab00e4ebf75a723aeb863addf00e874ce7c90baa1cbe22a1f5b68085893a1ac",
+      "excerpt": "Fixed Costs ÷ (Price – Variable Costs) = Break-Even Point in Units",
+      "claims": [
+        "Separar custos fixos, variáveis e despesas únicas de recorrentes. Ponto de equilíbrio é estimativa; planos lean e tradicionais atendem necessidades distintas."
+      ],
+      "licenseNote": "US federal guidance; short excerpt and original paraphrase."
+    },
+    {
+      "id": "motion-accessibility",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
+      "title": "Understanding SC 2.3.3 Animation from Interactions",
+      "authority": "W3C Accessibility Guidelines Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Success Criterion (SC)",
+      "contentSha256": "a3beb1806c619818847b7646e43788acf3aa4f646ec9f68d2d3109279412c162",
+      "excerpt": "Motion animation triggered by interaction can be disabled",
+      "claims": [
+        "Movimento não essencial disparado por interação deve poder ser desligado. Movimento essencial é exceção. Critério AAA; orientação não equivale a certificação WCAG."
+      ],
+      "licenseNote": "W3C permissive use; short excerpt and original paraphrase."
+    },
+    {
+      "id": "learning-alignment",
+      "url": "https://www.cmu.edu/teaching/designteach/design/learningobjectives.html",
+      "title": "Articulate Your Learning Objectives",
+      "authority": "Carnegie Mellon Eberly Center",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Learning objectives should be measurable",
+      "contentSha256": "39efc6d57beda3b18fb18b532411625ebd0828ebfc57ced441606fb8a56b0530",
+      "excerpt": "Learning objectives should be measurable.",
+      "claims": [
+        "Objetivos, avaliação e atividades precisam estar alinhados. Decompor habilidades e usar verbos observáveis permite avaliar a aprendizagem."
+      ],
+      "licenseNote": "restricted-reference: CC BY-NC-SA 4.0 source; no full text, images or licensed teaching material redistributed. Original factual paraphrase plus brief attributed quote only; obtain legal review before commercial reuse of source material."
+    },
+    {
+      "id": "claude-security",
+      "url": "https://code.claude.com/docs/en/security",
+      "title": "Security",
+      "authority": "Anthropic Claude Code documentation",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "MCP security",
+      "contentSha256": "dffa494ba4e38ee98f3b8d028052d1e06087bcd9fea2659045f217d338aca4ff",
+      "excerpt": "Anthropic reviews connectors against its listing criteria",
+      "claims": [
+        "Revisar permissões e escopos de MCP; uma revisão de listagem não é auditoria de segurança. Sandbox fornece limites que prompts e regras textuais não garantem."
+      ],
+      "licenseNote": "Public documentation; short excerpt and original paraphrase."
+    },
+    {
+      "id": "provenance",
+      "url": "https://www.w3.org/TR/prov-overview/",
+      "title": "PROV-Overview",
+      "authority": "W3C PROV Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Abstract",
+      "contentSha256": "ff98b6cee64a55de22b52fb251b3d6278d484fb6aeb8cbfbef7cb5dd2b5295b0",
+      "excerpt": "Provenance is information about entities, activities, and people involved in producing a piece of data",
+      "claims": [
+        "PROV registra entidades, atividades e responsáveis para avaliar confiabilidade; o overview é nota não normativa, não prova de veracidade dos dados."
+      ],
+      "licenseNote": "W3C document use; short excerpt and original paraphrase."
+    },
+    {
+      "id": "claims-evidence",
+      "url": "https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business",
+      "title": "Advertising FAQs A Guide for Small Business",
+      "authority": "US Federal Trade Commission",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "What truth-in-advertising rules apply to advertisers?",
+      "contentSha256": "1054ad8087b78c6081f513f05092ae44574a9b88c6a935bc4640836fe7a5fda9",
+      "excerpt": "Advertisers must have evidence to back up their claims",
+      "claims": [
+        "Promessas explícitas e implícitas precisam de evidência antes da divulgação. Garantia de devolução e depoimentos não substituem evidência objetiva exigida."
+      ],
+      "licenseNote": "US government guidance; short excerpt; applicability is US, not Brazilian legal advice."
+    },
+    {
+      "id": "web-accessibility",
+      "url": "https://www.w3.org/WAI/tutorials/",
+      "title": "WAI Tutorials",
+      "authority": "W3C Education and Outreach Working Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Relationship to WCAG",
+      "contentSha256": "0bbddfc3ca02991b224acf3d674c4cd5b0917b6ff1bb6755af74c5b205d0bcfa",
+      "excerpt": "These tutorials provide best-practice guidance on implementing accessibility in different situations.",
+      "claims": [
+        "Guias relacionam exemplos de imagens, tabelas, formulários e estruturas a critérios WCAG. Conformidade exige avaliar critérios aplicáveis, não apenas aplicar um exemplo."
+      ],
+      "licenseNote": "W3C permissive use; short excerpt and original paraphrase."
+    },
+    {
+      "id": "jev-models",
+      "url": "https://docs.typesafe.ai/models",
+      "title": "Models",
+      "authority": "TypeSafe AI",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Current models",
+      "contentSha256": "cc51b094aa9f95fade17277fae0d3a52af7b08711a76291af7b87f768343b9fd",
+      "excerpt": "Text only. String, JSON object, or array of text values.",
+      "claims": [
+        "jev-1.13.0: US$0.042/M tokens de entrada, saída gratuita, 100K tokens/s, 40 req/s; 64k total, 32k estado + maior pergunta; limites podem mudar."
+      ],
+      "licenseNote": "Public documentation; short excerpt and original paraphrase."
+    },
+    {
+      "id": "jev-confidence",
+      "url": "https://docs.typesafe.ai/confidence",
+      "title": "Confidence",
+      "authority": "TypeSafe AI",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Thresholds scale with risk",
+      "contentSha256": "8db2fb06b2663d3c3d766e47c9954d2476393b90e2c86fcf39f47b82e229a750",
+      "excerpt": "The correct threshold values depend on your domain",
+      "claims": [
+        "Confiança resume uma distribuição e não prova acerto. Calibrar thresholds em dados reservados do domínio; Noul não retorna confidence separado."
+      ],
+      "licenseNote": "Public documentation; short excerpt and original paraphrase."
+    },
+    {
+      "id": "jev-api",
+      "url": "https://docs.typesafe.ai/api",
+      "title": "API reference",
+      "authority": "TypeSafe AI",
+      "readAt": "2026-10-02",
+      "readScope": "Selected section read via web in this execution; hash covers exact retained excerpt only, not full document.",
+      "locator": "Response body",
+      "contentSha256": "89937fcb864b5237bf375b84776e687527ef9b3fe9d02e88db7cea9bbbd4914f",
+      "excerpt": "One answer per question, returned under the same ids you provided.",
+      "claims": [
+        "HTTP POST /v1/systemone usa state/model/questions; responde model/answers/usage. Validar tipos, chaves e probabilidades; SDK retries não devem esconder custo."
+      ],
+      "licenseNote": "Public documentation; short excerpt and original paraphrase."
+    },
+    {
+      "id": "financial-statements",
+      "url": "https://www.sec.gov/about/reports-publications/investorpubsbegfinstmtguide",
+      "title": "Beginners Guide to Financial Statements",
+      "authority": "US SEC Office of Investor Education",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Cash Flow Statements / Read the Footnotes",
+      "contentSha256": "dd1eb8e7f92d6ec5288ff6c6cb640e08ecfa628b6a1e5817dbd28f66a61761cb",
+      "excerpt": "a cash flow statement can tell you whether the company generated cash",
+      "claims": [
+        "DRE mede resultados do período; balanço é posição; fluxo mostra caixa. Conciliar itens sem caixa, investimento e financiamento. Notas explicitam práticas contábeis; indicadores dependem do setor."
+      ],
+      "licenseNote": "Federal guidance; short excerpt only."
+    },
+    {
+      "id": "poetics",
+      "url": "https://classics.mit.edu/Aristotle/poetics.1.1.html",
+      "title": "Poetics Section 1",
+      "authority": "Aristotle; translated by S H Butcher, MIT Internet Classics Archive",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only. Additional selected sections read by delegated researcher; does not claim whole-book coverage.",
+      "locator": "Part VIII unity; Part IX causality; Part X reversal",
+      "contentSha256": "87f5b77022d30bdef4f1364850601233c19c51845ddce78cdeaed28751969986",
+      "excerpt": "if any one of them is displaced or removed, the whole will be disjointed and disturbed.",
+      "claims": [
+        "Enredo deve ligar ações por probabilidade ou necessidade; unidade não significa somente um protagonista. Escolhas revelam caráter; espetáculo não substitui estrutura. Aplicação comercial é inferência, não regra universal.",
+        "Unity concerns one connected action rather than every event in a protagonist's life."
+      ],
+      "licenseNote": "Ancient text and historic translation; only short excerpt, no edition republication."
+    },
+    {
+      "id": "webgl-practices",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices",
+      "title": "WebGL best practices",
+      "authority": "Mozilla MDN WebGL contributors",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Avoid blocking API calls / Batch draw calls / per-pixel VRAM budget",
+      "contentSha256": "939033a8c97f81ef451bf2d27dc271f542cc8ceaa3b7e778091259ce6ebf43a0",
+      "excerpt": "Avoid blocking API calls in production",
+      "claims": [
+        "getError/getParameter/readPixels podem bloquear o main thread. Agrupar draws reduz overhead. Budget de VRAM por pixel depende de resolução e DPR; extensões precisam fallback. Menor buffer troca qualidade por velocidade."
+      ],
+      "licenseNote": "MDN CC BY-SA documentation; original paraphrase and short excerpt."
+    },
+    {
+      "id": "brand-experience",
+      "url": "https://www.nngroup.com/articles/brand-experience-ux/",
+      "title": "Brand Is Experience in the Digital Age",
+      "authority": "Kate Kaplan Nielsen Norman Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Components of Brand: Visuals, Tone, and Actions",
+      "contentSha256": "a205cea5235166c57fc43f93936f8e04ef49ff9bd409fd356aa45b9b5b4c6734",
+      "excerpt": "visuals, tone, and behavior",
+      "claims": [
+        "Marca é percepção acumulada de experiências. Visuais, tom e comportamento precisam coerência; interface e atendimento podem contradizer promessa visual. É síntese conceitual da autora, não estimativa causal de vendas."
+      ],
+      "licenseNote": "Copyright NN/g; short excerpt only, original paraphrase."
+    },
+    {
+      "id": "berkshire-mistakes",
+      "url": "https://www.berkshirehathaway.com/letters/2024ltr.pdf",
+      "title": "Berkshire Hathaway 2024 shareholder letter",
+      "authority": "Warren Buffett Berkshire Hathaway",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "page 1 Mistakes – Yes, We Make Them at Berkshire",
+      "contentSha256": "643754b6bb146eda01b2edc0bc4bec4906c45dd4fe48705d2fb208f5b54e49f9",
+      "excerpt": "The cardinal sin is delaying the correction of mistakes",
+      "claims": [
+        "Buffett diferencia erro de alocação de capital e de avaliação de gestores; recomenda corrigir erros sem adiar e relatar eventos bons e ruins. Carta anual oferece perspectiva de um investidor, não regra comprovada universal."
+      ],
+      "licenseNote": "Copyright Berkshire; short excerpt only, no full letter copied."
+    },
+    {
+      "id": "claude-memory",
+      "url": "https://code.claude.com/docs/en/memory",
+      "title": "How Claude remembers your project",
+      "authority": "Anthropic Claude Code",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "CLAUDE.md vs auto memory / How it works",
+      "contentSha256": "d0266c4b3a105cf7397c58c5ae71e03795a1d438832be27518df0764c6ca0ed0",
+      "excerpt": "context, not enforced configuration",
+      "claims": [
+        "CLAUDE.md e auto memory são contexto, não enforcement. Memória carrega primeiras 200 linhas ou 25KB; detalhes sob demanda; instruções pontuais vão a regras por path/skills. Ferramentas e runtime podem mudar."
+      ],
+      "licenseNote": "Public vendor documentation; short quote, original paraphrase."
+    },
+    {
+      "id": "ads-experiments",
+      "url": "https://support.google.com/google-ads/answer/6261395",
+      "title": "Set up a custom experiment",
+      "authority": "Google Ads",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Things to note about custom experiments / Keep in mind",
+      "contentSha256": "543e72769b182d34dd6db65f3635ab085a535a01fe23560b65ac11ed6c204c44",
+      "excerpt": "may make it harder to interpret your results",
+      "claims": [
+        "Search permite split por cookie ou busca; cookie mantém usuário numa condição. Alterar base ou variante durante experimento compromete interpretação; métricas e janela precisam ser definidas. Não extrapolar disponibilidade a App/Shopping."
+      ],
+      "licenseNote": "Public vendor documentation; short quote, original paraphrase."
+    },
+    {
+      "id": "input-validation",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+      "title": "Input Validation Cheat Sheet",
+      "authority": "OWASP Cheat Sheet Series",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Goals / Strategies / Allowlist vs Denylist / Server-side",
+      "contentSha256": "e770dcbd7f0c0baa7948efcd6a824af5eb9ef7fd80df6d5b5a16f4f5ee5199a1",
+      "excerpt": "Input validation should be applied at both syntactic and semantic levels",
+      "claims": [
+        "Validar todas entradas não confiáveis cedo, no servidor, por sintaxe e significado do domínio. Preferir allowlist; não substituir parametrização SQL e encoding XSS por filtro de caracteres. Unicode legítimo não é ataque."
+      ],
+      "licenseNote": "OWASP CC BY-SA 4.0; short excerpt, original paraphrase."
+    },
+    {
+      "id": "web-reading",
+      "url": "https://www.nngroup.com/articles/how-users-read-on-the-web/",
+      "title": "How Users Read on the Web",
+      "authority": "Jakob Nielsen Nielsen Norman Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only. Additional selected sections read by delegated researcher; does not claim whole-book coverage.",
+      "locator": "Scannable text; Measuring the Effect of Improved Web Writing",
+      "contentSha256": "81b123ba64e73c717965fae94be77afd6ab9d9b582ead43b150a6a4da1b34731",
+      "excerpt": "one idea per paragraph",
+      "claims": [
+        "Pesquisa histórica observou leitura por varredura e melhor usabilidade com concisão, escaneabilidade e objetividade. Abrir pela conclusão, subtítulos significativos e uma ideia por parágrafo. Números de 1997 não são previsão de conversão atual.",
+        "Concise, scannable and objective versions improved usability in this study; percentages are study-bound."
+      ],
+      "licenseNote": "Copyright NN/g; short quote only, original paraphrase."
+    },
+    {
+      "id": "ux-heuristics",
+      "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+      "title": "10 Usability Heuristics for User Interface Design",
+      "authority": "Jakob Nielsen Nielsen Norman Group",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Heuristics 1–4 and 8",
+      "contentSha256": "15604798573b615c92d911f2696c0702bd56c8c4e43f7cf39bd6ec9132487795",
+      "excerpt": "Visibility of System Status",
+      "claims": [
+        "Feedback de status, linguagem familiar, saída/cancelamento, consistência e foco no essencial orientam interação. São heurísticas gerais, não guideline específico nem certificado de usabilidade."
+      ],
+      "licenseNote": "Copyright NN/g; short quote only, original paraphrase."
+    },
+    {
+      "id": "sre-monitoring",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "title": "Monitoring Distributed Systems",
+      "authority": "Google SRE book authors",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "The Four Golden Signals / Black-box monitoring",
+      "contentSha256": "f68d70eb29a0dd4c7313750f86a257e5455ddf1bd28f0660ee80603bfd3fedc9",
+      "excerpt": "latency, traffic, errors, and saturation",
+      "claims": [
+        "Medir latência, tráfego, erros e saturação; distinguir resposta rápida que falha da latência de sucesso. HTTP200 com conteúdo errado exige teste end-to-end; instrumentação interna explica causa. Alertas ruidosos podem atrasar reação."
+      ],
+      "licenseNote": "Google/OReilly online book; short excerpt only, original paraphrase, no chapter copied."
+    },
+    {
+      "id": "crm-lifecycle",
+      "url": "https://knowledge.hubspot.com/records/use-lifecycle-stages",
+      "title": "Use contact and company lifecycle stages",
+      "authority": "HubSpot product documentation",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Understand lifecycle stages / lifecycle stage calculated properties",
+      "contentSha256": "9cae155d53f607f93256703e25ff0bc1e1f058bbc390c2be8835333a87a14c53",
+      "excerpt": "Latest time in [stage]",
+      "claims": [
+        "Estágio lifecycle e lead status são campos diferentes. Automação default avança estágio; retorno exige limpeza explícita. Tempo latest e cumulative podem omitir tempo atual e têm condições de assinatura; verificar cálculo antes do KPI."
+      ],
+      "licenseNote": "Public vendor documentation; short quote, original paraphrase."
+    },
+    {
+      "id": "seo-starter",
+      "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+      "title": "SEO Starter Guide",
+      "authority": "Google Search Central",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Crawling / canonicalization / impact / links",
+      "contentSha256": "1c9d71b1ea52767f986de5d06c86465a5856a028f5790387aee20ed449b019c4",
+      "excerpt": "Google primarily finds pages through links",
+      "claims": [
+        "Google precisa acessar recursos da página; links e sitemap auxiliam descoberta sem garantia de indexação. Duplicatas não são automaticamente spam. Consolidar URL preferida por redirect ou canonical conforme caso; mudanças levam tempos distintos."
+      ],
+      "licenseNote": "CC BY 4.0 Google documentation; short quote, original paraphrase."
+    },
+    {
+      "id": "evaluation-magenta",
+      "url": "https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html",
+      "title": "Magenta Book guidance on evaluation",
+      "authority": "HM Treasury Evaluation Task Force",
+      "readAt": "2026-10-02",
+      "readScope": "Selected sections read via official web page in this execution; SHA256 covers retained excerpt only.",
+      "locator": "Executive summary / 1 Why how and when to evaluate",
+      "contentSha256": "cf54062b4016c36b813e73b18f0d0bca0d9f1146faa5c0c38c2a4419219d5d96",
+      "excerpt": "process, impact and value for money evaluations",
+      "claims": [
+        "Avaliação de processo verifica entrega; impacto examina mudanças atribuíveis; value for money compara custo e benefício. Planejar medição e pilotos desde o desenho; monitoramento isolado não demonstra causalidade."
+      ],
+      "licenseNote": "OGL v3.0; selected HTML sections, not entire160pagebook."
+    },
+    {
+      "id": "romaniuk-distinction",
+      "url": "https://marketingscience.info/news-and-insights/brands-of-distinction",
+      "title": "Brands of Distinction",
+      "authority": "Jenni Romaniuk / Ehrenberg-Bass, primary researcher institutional essay",
+      "readAt": "2026-10-02",
+      "readScope": "Article body lines 138-161; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Distinctive Asset Grid; paragraphs fame/uniqueness and consistency",
+      "contentSha256": "388141b233857a4b845c120d68a44183a4518be4cfb109ec797cf2ac2fbe8579",
+      "excerpt": "All new assets start with low uniqueness and fame.",
+      "claims": [
+        "The grid distinguishes recognition from exclusive attribution; existing assets need measurement before redesign."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cialdini-persuasion",
+      "url": "https://www.influenceatwork.com/7-principles-of-persuasion/",
+      "title": "The Science of Persuasion",
+      "authority": "Robert Cialdini / Influence at Work, author-owned public explanation",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 102-164, reciprocity through social proof; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Social Proof; Authority; Consistency; Reciprocity",
+      "contentSha256": "8e779a0579867e770ac4c6fa394aafe298c43eb0f67f6ecea28564d5993d12b4",
+      "excerpt": "Especially when they are uncertain, people will look to the actions and behaviors of others to determine their own.",
+      "claims": [
+        "Comparable peers, credible expertise and voluntary commitments are distinct mechanisms; illustrative study lifts are not forecast conversion rates."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cdc-communication",
+      "url": "https://www.cdc.gov/ccindex/widget.html",
+      "title": "CDC Clear Communication Index",
+      "authority": "CDC, original public communication assessment tool",
+      "readAt": "2026-10-02",
+      "readScope": "Tips body lines 357-577; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Main message; visuals; action; numbers",
+      "contentSha256": "92d41c5e961b8aaf850a0dba9ad76929232409e18f5c598478c6bd6a270dc976",
+      "excerpt": "Make sure the words and visuals in the material convey the same message and reinforce each other.",
+      "claims": [
+        "The tool prioritizes one main message, actionable instructions and supported numbers."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "budiu-recognition",
+      "url": "https://www.nngroup.com/articles/recognition-and-recall/",
+      "title": "Memory Recognition and Recall in User Interfaces",
+      "authority": "Raluca Budiu / NNGroup, author explanation grounded in memory research",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 61-142; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Recognition vs. Recall; Promote Recognition",
+      "contentSha256": "086110c2a8610b5fa8d1b81b40122826ef378a6ccb9721c61da6f36fa03272a8",
+      "excerpt": "Recognition is easier than recall because it involves more cues",
+      "claims": [
+        "Contextual cues support memory retrieval; labels and contextual guidance reduce recall burden."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "duarte-sales-story",
+      "url": "https://www.duarte.com/blog/overcome-sales-objections-with-the-power-of-story/",
+      "title": "Overcome sales objections with the power of story",
+      "authority": "Dave DeFranco / Duarte, method owner's official operational guidance",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 62-104; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Think about stories; Rank objections; Formulate responses",
+      "contentSha256": "3b8187dfcb13f90b2c1029542902b4c5e61de7dd37f470decc6cfe3610dd9ee8",
+      "excerpt": "Ask them to confirm that their objection has been addressed.",
+      "claims": [
+        "The Sparkline contrasts present and possible states; objections should be specific, ranked and answered with evidence."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "sivers-focus",
+      "url": "https://sive.rs/hellyeah",
+      "title": "No yes. Either HELL YEAH or no.",
+      "authority": "Derek Sivers, author-owned essay",
+      "readAt": "2026-10-02",
+      "readScope": "Author body lines 7-16; author replies lines 121 and 180; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Opening condition; reply to Kevin; reply on duty",
+      "contentSha256": "086369a4ed6a231e026b7a7dc01de57d34cf4682c2c07a399d9662921b5bcc8b",
+      "excerpt": "Use this rule if you’re often over-committed or too scattered.",
+      "claims": [
+        "The rule is conditional on overcommitment and author acknowledges duties as an exception."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "dalio-believability",
+      "url": "https://www.principles.com/principles/633d5d13-8610-425f-ad62-cd62347d9165",
+      "title": "Believability Weight Your Decision Making",
+      "authority": "Ray Dalio, official author-published book principle",
+      "readAt": "2026-10-02",
+      "readScope": "Work Principle body lines 17-26; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Track record and causal explanation; disagreement process",
+      "contentSha256": "7a91b39c667417520d81ae22fef390426042d651cb989a2d2ad38bc081a7a266",
+      "excerpt": "the criteria for establishing believability must be objective and trusted by everybody.",
+      "claims": [
+        "Relevant repeated success and causal explanation support credibility; disagreements must be worked through before override."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cmu-learning",
+      "url": "https://www.cmu.edu/teaching/principles/learning.html",
+      "title": "Learning Principles",
+      "authority": "CMU Eberly Center, institutional synthesis with primary bibliography; secondary research synthesis explicitly",
+      "readAt": "2026-10-02",
+      "readScope": "Seven principles body lines 13-33; bibliography inspected; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Principles 1, 4, 5 and 7",
+      "contentSha256": "2fa0c96d37354229896be4d2c333c025151a893dca59b15f817eee7e50f0947c",
+      "excerpt": "Goal-directed practice coupled with targeted feedback enhances the quality of students’ learning.",
+      "claims": [
+        "Prior knowledge may hinder learning; mastery requires components plus integration and transfer; feedback must target performance criteria."
+      ],
+      "licenseNote": "restricted-reference: CC BY-NC-SA 4.0 source; no full text, images or licensed teaching material redistributed. Original factual paraphrase plus brief attributed quote only; obtain legal review before commercial reuse of source material."
+    }
+  ]
+}

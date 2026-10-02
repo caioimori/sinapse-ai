@@ -144,6 +144,23 @@ const HARDCODED_ALLOW_LIST = [
   '.sinapse-ai/docs/standards/SINAPSE-LIVRO-DE-OURO-V2.1-COMPLETE.md',
 ];
 
+// User-directed upstream research, authorized by the Ready framework-evolution
+// story (2026-10-02): preserve source URLs, SHA and license provenance outside
+// product voice. Exact files only; runtime, generated agents and personas remain
+// guarded. Unlike historical exemptions, these files still undergo persona checks.
+const UPSTREAM_PROVENANCE_FILES = new Set([
+  'docs/framework/evolution-2026-10/README.md',
+  'docs/framework/evolution-2026-10/SPEC.md',
+  'docs/framework/evolution-2026-10/upstream.json',
+  'docs/framework/evolution-2026-10/upstream.md',
+  'docs/framework/evolution-2026-10/workflow.json',
+  'docs/framework/evolution-2026-10/HANDOFF.md',
+  'docs/framework/evolution-2026-10/verification.md',
+  'docs/stories/framework-evolution-20261002.story.md',
+  'scripts/framework-evolution/upstream-audit.cjs',
+  'tests/unit/framework-evolution-upstream.test.js',
+]);
+
 /**
  * File extensions we treat as binary and never scan. A line-by-line regex
  * scan on binary content is slow, noisy, and can produce false positives
@@ -239,6 +256,7 @@ function isBinaryFile(absPath) {
  */
 function scanFile(rootDir, relPath) {
   if (isAllowListed(relPath)) return [];
+  const provenanceFile = UPSTREAM_PROVENANCE_FILES.has(relPath.replace(/\\/g, '/'));
   const absPath = path.join(rootDir, relPath);
 
   // Size cap and read share one fd, so the scanned bytes are the sized bytes.
@@ -270,7 +288,7 @@ function scanFile(rootDir, relPath) {
     // Reset regex state for each line; /g keeps lastIndex sticky.
     FORBIDDEN_REGEX.lastIndex = 0;
     let match;
-    while ((match = FORBIDDEN_REGEX.exec(line)) !== null) {
+    while (!provenanceFile && (match = FORBIDDEN_REGEX.exec(line)) !== null) {
       violations.push({
         file: relPath,
         line: i + 1,
