@@ -11,8 +11,8 @@ const root = path.resolve(__dirname, '../..');
 describe('framework evolution runtime integration', () => {
   test('all canonical agents and squads are inventoried without counting task blocks as commands', () => {
     const result = inventory(root);
-    expect(result.counts).toMatchObject({ agents: 172, sourceAgents: 172, squads: 17, resolvableAgents: 172, tasks: 1418, legacyReachableTasks: 1354 });
-    expect(result.counts.reachableTasks).toBeGreaterThanOrEqual(1354);
+    expect(result.counts).toMatchObject({ agents: 172, sourceAgents: 172, squads: 17, resolvableAgents: 172, tasks: 1460, legacyReachableTasks: 1396 });
+    expect(result.counts.reachableTasks).toBeGreaterThanOrEqual(1396);
     const reachableTargets = result.agents.flatMap(agent => agent.resolvedTasks.map(task => task.target));
     expect(reachableTargets).toEqual(expect.arrayContaining(['build-component', 'ux-create-wireframe', 'create-cro-patterns', 'consult-canon', 'premium-packaging-brief', 'design-product-surface'].map(task => `squads/squad-design/tasks/${task}.md`)));
     expect(result.gaps.missingSources).toEqual([]);
@@ -24,11 +24,15 @@ describe('framework evolution runtime integration', () => {
   });
   test('all 172 agents receive cited bounded task-first context and retain coverage gaps', () => {
     for (const agent of inventory(root).agents) {
-      const task = agent.id === 'snps-orqx' ? 'route' : agent.resolvedTasks[0].command;
+      const contract = require('../../scripts/expert-evolution/operational.cjs').loadContracts(root).contracts.find(c=>c.agentId===agent.id);
+      const eligible = contract.tasks.find(t=>t.authority.executionAuthorized || contract.role==='orchestrator');
+      expect(eligible).toBeDefined();
+      const task = eligible.command;
       const context = buildRuntimeContext({ root, agentId: agent.id, task });
       expect(context.capsule.agentId).toBe(agent.id);
       expect(context.charsUsed).toBe(JSON.stringify(context).length);
       expect(context.charsUsed).toBeLessThanOrEqual(12000);
+      expect(context.operational.task.authority.executionAuthorized || contract.role==='orchestrator').toBe(true);
       expect(context.knowledge.charsUsed).toBeLessThanOrEqual(6000);
       expect(context.knowledge.coverage).toBe('gap');
       expect(context.capsule.canonicalSha256).toMatch(/^[a-f0-9]{64}$/);

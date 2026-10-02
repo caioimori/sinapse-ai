@@ -1,4 +1,4 @@
-/* global document:readonly, location:readonly */
+/* global document:readonly, location:readonly, window:readonly */
 'use strict';
 const projects = [
   { id: '01', title: 'Caderno de ideias', category: 'Editorial', description: 'Uma coleção de referências para transformar ideias soltas em uma direção clara.', status: 'Planejar' },
@@ -7,11 +7,26 @@ const projects = [
 ];
 const byId = (id) => document.getElementById(id);
 const dialog = byId('details');
+const toast = byId('toast');
 let activeProject = null;
 let returnFocus = null;
 let previousChange = null;
 let hasError = new URLSearchParams(location.search).get('scenario') === 'error';
 function announce(text) { byId('announcement').textContent = text; }
+function preserveToastClearance() {
+  const toastBounds = toast.getBoundingClientRect();
+  const clearance = toast.hidden ? 0 : toastBounds.height + Number.parseFloat(window.getComputedStyle(toast).bottom) + 8;
+  document.documentElement.style.setProperty('--toast-clearance', `${clearance}px`);
+  const focused = document.activeElement;
+  if (toast.hidden || dialog.open || !focused || toast.contains(focused)) return;
+  const focusBounds = focused.getBoundingClientRect();
+  const overlaps = focusBounds.right > toastBounds.left && focusBounds.left < toastBounds.right
+    && focusBounds.bottom > toastBounds.top - 8 && focusBounds.top < toastBounds.bottom + 8;
+  // Viewport scrolling rounds fractional offsets; preserve the whole focus outline gap.
+  if (overlaps) window.scrollBy({ top: Math.ceil(focusBounds.bottom - (toastBounds.top - 8)), left: 0, behavior: 'instant' });
+}
+document.addEventListener('focusin', preserveToastClearance);
+window.addEventListener('resize', preserveToastClearance);
 function render() {
   const query = byId('search').value.trim().toLocaleLowerCase('pt-BR');
   const visible = projects.filter((project) => `${project.title} ${project.category}`.toLocaleLowerCase('pt-BR').includes(query));
@@ -57,14 +72,14 @@ byId('details-form').addEventListener('submit', (event) => {
     previousChange = { id: activeProject.id, status: activeProject.status };
     activeProject.status = newStatus;
     byId('toast-text').textContent = `Etapa alterada para ${newStatus}.`;
-    byId('toast').hidden = false; announce(`Projeto ${activeProject.title}: etapa alterada para ${newStatus}. Você pode desfazer.`);
+    toast.hidden = false; preserveToastClearance(); announce(`Projeto ${activeProject.title}: etapa alterada para ${newStatus}. Você pode desfazer.`);
   }
   render(); dialog.close();
 });
 byId('undo').addEventListener('click', () => {
   if (!previousChange) return;
   const project = projects.find((item) => item.id === previousChange.id);
-  project.status = previousChange.status; previousChange = null; byId('toast').hidden = true;
+  project.status = previousChange.status; previousChange = null; toast.hidden = true; preserveToastClearance();
   render(); document.querySelector(`[data-project="${project.id}"]`)?.focus(); announce(`Alteração desfeita. ${project.title} voltou à etapa ${project.status}.`);
 });
 byId('search').addEventListener('input', () => { render(); announce(byId('count').textContent); });

@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > SINAPSE AI -- AI-Orchestrated System for Full Stack Development
-> 17 squads · 172 native Codex agents · 1,418 task files, 1,354 resolvable via the parametric activator
+> 17 squads · 172 native Codex agents · 1,460 task files, 1,396 resolvable via the parametric activator
 >
 > Codex resolves every agent and its real tasks at runtime from source (no frozen
 > snapshot): `node .codex/scripts/resolve-codex-agent.js <agent> [command]`.
@@ -72,6 +72,7 @@ Examples that resolve: `$sinapse-agent brand-orqx`, `$sinapse-agent meta-ads-spe
 `$sinapse-agent cyber-orqx`, `$sinapse-agent headline-specialist`, `$sinapse-agent simon-sinek`, and `$sinapse-agent developer`. Squad specialists
 inherit their squad's task pool; orchestrators (`*-orqx`) govern their whole squad.
 Every task pointer the activator emits is verified to exist on disk before it is returned.
+Pool discovery does not grant execution authority: consult the operational contract and delegate tasks owned by another specialist. See `docs/framework/codex-runtime-reference.md`.
 
 ### @developer (Pixel)
 - **Role:** Full Stack Developer -- code implementation, debugging, refactoring

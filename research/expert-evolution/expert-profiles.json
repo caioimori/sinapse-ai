@@ -6472,7 +6472,7 @@
       "mission": "Copy Editor, Reviewer & Quality Guardian — a ultima linha de defesa antes do copy ir ao mundo. Refina, corta, aprimora. \"Kill your darlings\" e seu mantra. Garante clareza, impacto e voice compliance em cada peca.",
       "canonical": {
         "path": "squads/squad-copy/agents/copy-editor.md",
-        "sha256": "2d1fcf36319e6a674ec38900f8988b13e8f00ace2e232e5b6a913a26564ed8e4",
+        "sha256": "608b07f3cfd57a1ac6ecc9b6169d2b5ca17ced6adb661181dca0dbcd35e78182",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
       "competencies": [],
@@ -12948,7 +12948,7 @@
       "mission": "Runway e o especialista em forecasting da squad. Constroi modelos de projecao de receita e custos baseados em drivers de negocio (nao em wishful thinking), gera cenarios otimista/base/pessimista, calcula runway e breakeven, e expoe sensibilidades atraves de what-if. Output sempre em formato consumivel (tabela markdown ou planilha-style).",
       "canonical": {
         "path": "squads/squad-finance/agents/forecast-strategist.md",
-        "sha256": "2766e70d4ce73171745f3ec7d03289273d7a81c35aeccabda96ed31e8e677919",
+        "sha256": "ee689c1cde8d944e3ee8a4afaa01f54b2d0d60b0b3eeb247699ece9bff635ec1",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
       "competencies": [],
@@ -21693,7 +21693,7 @@
       "mission": "Claude Code Roadmap Sentinel & Plan-First Development Strategist",
       "canonical": {
         "path": "squads/claude-code-mastery/agents/roadmap-sentinel.md",
-        "sha256": "34ced4e9deebaf7c78af216d230e094e886f445937f819274caedea7c96b3970",
+        "sha256": "7299ae7ca8dac29161e594ef6fd348615213827e72df9980536d3df37b938e79",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
       "competencies": [],
@@ -23102,7 +23102,7 @@
       "mission": "📋 @sop-extractor - SOP Extraction Specialist",
       "canonical": {
         "path": "squads/squad-cloning/agents/sop-extractor.md",
-        "sha256": "32382863302b01eb0d87a0a111ff0e7a54bfb01349c02832305c61077ac45872",
+        "sha256": "ede58c10508187392c01b7910f73e3ed4e0b13261ffa13a7a6c4a565d52f38d9",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
       "competencies": [],
@@ -24704,7 +24704,7 @@
       "mission": "Founder of Patagonia, Environmental Activist & Anti-Growth Philosopher",
       "canonical": {
         "path": "squads/squad-council/agents/yvon-chouinard.md",
-        "sha256": "d35787b429f2cccb3a4b654d9c065576c5d2daef34121373db1c48585e0bb026",
+        "sha256": "3f69ed0ca6c660120f84ce10f5e793debb03648d2ef0eaa6e39f4e7d8d09e63e",
         "scope": "Local agent definition; frameworks and capabilities declared, not externally validated"
       },
       "competencies": [],

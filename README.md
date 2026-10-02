@@ -112,14 +112,15 @@ limites claros.
 | Capacidade | Claude Code | Codex |
 |---|:---:|:---:|
 | Catálogo de 172 agentes | Sim | Sim |
-| Skills instaladas | 37 | 37 |
+| Skills centrais | 37 | 37 |
+| Contexto privado por projeto | Extensão opt-in | Extensão opt-in |
 | Regras e instruções nativas | Sim | Sim |
 | Hooks registrados | 20 registros | 9 eventos |
 | Tasks e knowledge bases | Compartilhadas | Compartilhadas |
 | React Bits para frontend | Skill + corpus | Skill + corpus |
 
-O inventário atual contém **1.201 squad tasks**, **211 development tasks**,
-**1.412 task files** e **1.348 ponteiros resolvíveis** em runtime.
+O inventário atual contém **1.249 squad tasks**, **211 development tasks**,
+**1.460 task files** e **1.396 ponteiros resolvíveis** em runtime.
 
 Esses números são medidos a partir do repositório. Verifique o estado atual com:
 

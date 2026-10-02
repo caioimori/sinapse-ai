@@ -6,7 +6,8 @@ test('negative controls never receive unrelated supplements',()=>{
   const profile=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'unrelated',text:'banana'}});
   expect(profile.deliverables).toEqual([]); expect(profile.selectionEvidence.status).toBe('gap');
   for(const text of ['estado','evidência']) expect(k.retrieveKnowledge({agentId:'dx-frontend-engineer',task:{text}}).items).toEqual([]);
-  expect(r.buildRuntimeContext({agentId:'css-motion-artist',task:'analyze-reference-animation',brief:'CSS estado evidência'}).knowledge.items).toEqual([]);
+  expect(k.retrieveKnowledge({agentId:'css-motion-artist',task:{command:'analyze-reference-animation'},brief:'CSS estado evidência'}).items).toEqual([]);
+  expect(()=>r.buildRuntimeContext({agentId:'css-motion-artist',task:'analyze-reference-animation',brief:'CSS estado evidência'})).toThrow('Task authority requires delegation: css-motion-artist:analyze-reference-animation -> animation-interpreter');
 });
 test('Storybook binding is explicit and independent of profile order',()=>{
   const program=e.loadProgram();expect(e.validateTaskBindings(program,{root:process.cwd()})).toEqual({valid:true,errors:[]});

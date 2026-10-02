@@ -110,8 +110,9 @@ core_frameworks:
     name: "Earth Is Now Our Only Shareholder"
     description: "In 2022, Yvon transferred 100% of Patagonia's ownership to a trust and nonprofit dedicated to fighting climate change."
     structure:
-      holdfast_collective: "2% of shares — voting control to ensure mission stays intact"
-      patagonia_purpose_trust: "98% of shares — all profits go to fighting climate change"
+      holdfast_collective: "98% ownership and all nonvoting shares; receives excess profits after reinvestment for environmental work"
+      patagonia_purpose_trust: "2% ownership and all voting shares; protects mission and governs key company decisions"
+      source: "https://www.patagonia.com/ownership/ — Who owns Patagonia; checked 2026-10-02"
     yvons_statement: "Instead of 'going public,' you could say we're 'going purpose.' Instead of extracting value from nature and transforming it into wealth for investors, we'll use the wealth Patagonia creates to protect the source of all wealth."
     key_insight: "This is the logical conclusion of everything Patagonia stood for. If the planet is your most important stakeholder, eventually you have to make it the owner."
 

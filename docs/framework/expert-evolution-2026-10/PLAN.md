@@ -1,6 +1,18 @@
 # Plano de evolução dos especialistas
 
-## Atualização operacional vigente — 2026-10-02
+## Fechamento operacional vigente — 2026-10-02
+
+Os 172 agentes e as 17 squads agora têm autoridade operacional derivada da fonte canônica, com 2.640 contratos de tarefas. Foram criadas 42 tarefas próprias ausentes; tarefas de colegas exigem delegação. Cobertura operacional permanece distinta dos 35 perfis de expertise e 51 bindings revisados.
+
+A extensão `sinapse-project-expert` compartilha o mesmo contexto offline entre Codex e Claude Code, somente nos projetos vinculados. Congela fontes e referências privadas, mantém limites 12.000/6.000/3.000, verifica hashes e rosters e bloqueia vínculos adulterados. Instalação e readback finais ficam na [verificação do fechamento](CLOSEOUT-VERIFICATION.md).
+
+A auditoria corrigiu a autoridade de tarefas, aliases, fontes com títulos incorretos, os papéis de Holdfast/Purpose e cenários financeiros apresentados como percentis sem distribuição. AIOX permanece na versão oficial 5.4.1 observada nesta execução; não existe atualização nova do upstream a incorporar neste fechamento.
+
+O replay atual passou nos 12 artefatos pareados e nos exemplos Lume, incluindo foco/Desfazer após redimensionar para 390/320px. Decodificação integral de 18s é prova técnica; audição e revisão audiovisual percebida permanecem separadas. Sem nova chamada Jev, recarga ou API Anthropic.
+
+O [handoff](HANDOFF.md) contém o estado vigente, a instalação e os limites. Referências candidatas e planos antigos abaixo são histórico: não comprovam leitura integral, expertise mundial, inferência nativa ou ganho causal.
+
+## Atualização operacional anterior — histórico TypeSafe/Mobbin
 
 O [lote TypeSafe/Mobbin](typesafe-mobbin-verification.md) aplicou a skill oficial instalada, observou dez julgamentos Jev reais e consolidou oito inferências para cinco comandos de design/frontend. A interface própria passou em 66 checks do autor e 54 independentes, inclusive estados alterados no mobile.
 

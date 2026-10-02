@@ -171,16 +171,17 @@
     },
     {
       "id": "squad-council-method",
-      "title": "Thinking, Fast and Slow",
+      "title": "Maps of Bounded Rationality: A Perspective on Intuitive Judgment and Choice — Nobel Lecture (2002)",
       "url": "https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/",
       "author": "Daniel Kahneman",
-      "kind": "book-or-author",
+      "kind": "documentation",
       "status": "CANDIDATE",
       "rights": "Reference-only candidate. Check lawful access, quotation and reuse terms before capture.",
       "acquisition": {
         "action": "Read relevant primary sections; capture authorized excerpts/transcripts with provenance and locators; seek counterexample",
-        "query": "Daniel Kahneman Thinking, Fast and Slow Base rates, vieses e limites de julgamento",
-        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence"
+        "query": "Maps of Bounded Rationality: A Perspective on Intuitive Judgment and Choice — Nobel Lecture (2002) Daniel Kahneman",
+        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence",
+        "note": "Lecture page returned 403; officialPDF search verifies title. This is not Thinking Fast and Slow."
       }
     },
     {
@@ -367,16 +368,17 @@
     },
     {
       "id": "squad-research-method",
-      "title": "Experimental and Quasi-Experimental Designs for Research",
+      "title": "The Magenta Book — Central Government guidance on evaluation",
       "url": "https://www.gov.uk/government/publications/the-magenta-book",
-      "author": "Donald T. Campbell e Julian C. Stanley",
-      "kind": "book-or-author",
+      "author": "HM Treasury and Evaluation Task Force",
+      "kind": "documentation",
       "status": "CANDIDATE",
       "rights": "Reference-only candidate. Check lawful access, quotation and reuse terms before capture.",
       "acquisition": {
         "action": "Read relevant primary sections; capture authorized excerpts/transcripts with provenance and locators; seek counterexample",
-        "query": "Donald T. Campbell e Julian C. Stanley Experimental and Quasi-Experimental Designs for Research Validade e desenho de evidência causal",
-        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence"
+        "query": "The Magenta Book — Central Government guidance on evaluation HM Treasury and Evaluation Task Force",
+        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence",
+        "note": "This is not the Campbell quasi-experimental textbook. Whole 160 page PDF was not read."
       }
     },
     {
@@ -451,16 +453,17 @@
     },
     {
       "id": "claude-code-mastery-method",
-      "title": "Claude Code documentation",
+      "title": "Claude Code documentation — Overview",
       "url": "https://code.claude.com/docs/en/overview",
       "author": "Anthropic",
-      "kind": "book-or-author",
+      "kind": "documentation",
       "status": "CANDIDATE",
       "rights": "Reference-only candidate. Check lawful access, quotation and reuse terms before capture.",
       "acquisition": {
         "action": "Read relevant primary sections; capture authorized excerpts/transcripts with provenance and locators; seek counterexample",
-        "query": "Anthropic Claude Code documentation Workflows e permissões conforme runtime atual",
-        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence"
+        "query": "Claude Code documentation — Overview Anthropic",
+        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence",
+        "note": "Official documentation, not a book."
       }
     },
     {
@@ -641,14 +644,15 @@
       "id": "dx-frontend-engineer-specific",
       "title": "Thinking in React",
       "url": "https://react.dev/learn/thinking-in-react",
-      "author": "React maintainers",
-      "kind": "book-or-author",
+      "author": "React documentation",
+      "kind": "documentation",
       "status": "CANDIDATE",
       "rights": "Reference-only candidate. Check lawful access, quotation and reuse terms before capture.",
       "acquisition": {
         "action": "Read relevant primary sections; capture authorized excerpts/transcripts with provenance and locators; seek counterexample",
-        "query": "React maintainers Thinking in React Hierarquia de componentes e estado mínimo",
-        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence"
+        "query": "Thinking in React React documentation",
+        "acceptance": "Two contextual mechanisms, exceptions, contradictory evidence and held-out task evaluation; candidate does not prove competence",
+        "note": "Duplicate URL of existing read-react; do not copy READ status unless evidence scope/locators/hash transfer explicitly verified."
       }
     },
     {

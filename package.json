@@ -35,6 +35,7 @@
     "research/expert-evolution/model-policy.json",
     "research/expert-evolution/native-availability-receipt.json",
     "research/expert-evolution/task-bindings.json",
+    "research/expert-evolution/operational-contracts.json",
     "research/expert-evolution/deliverable-index.json",
     "research/expert-evolution/benchmark-protocol.json",
     "research/expert-evolution/benchmark-results.json",

@@ -360,7 +360,7 @@ function resolveAgentTasks(entry, projectRoot = PROJECT_ROOT) {
     }
   }
 
-  const isOrchestrator = /-orqx$/.test(entry.id);
+  const isOrchestrator = /-orqx$/.test(entry.id) || /^ {2}title:\s*.*\bOrchestrator\b/m.test(sourceText || '');
   const shouldExposeSquadPool =
     entry.squad && (isOrchestrator || resolved.length === 0);
 
@@ -404,7 +404,7 @@ function resolveCodexAgent(agentInput, projectRoot = PROJECT_ROOT) {
     squad: entry.squad,
     sourceOfTruth: entry.sourcePath,
     pointer: entry.pointerPath,
-    isOrchestrator: /-orqx$/.test(entry.id),
+    isOrchestrator: /-orqx$/.test(entry.id) || /^ {2}title:\s*.*\bOrchestrator\b/m.test(readFileSafe(projectRoot,entry.sourcePath) || ''),
     taskCount: tasks.length,
     tasks,
   };

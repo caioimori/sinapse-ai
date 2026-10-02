@@ -1,4 +1,38 @@
-# Checkpoint navegação e créditos — estado vigente
+# Fechamento operacional entre provedores — estado vigente
+
+Começar pela [verificação](CLOSEOUT-VERIFICATION.md), pelo [runtime](../codex-runtime-reference.md) e pela [story](../../stories/cross-provider-closeout-20261002.story.md). Branch `codex/feat/framework-evolution-20261002`, worktree `framework-evolution/sinapse-ai`; base desta onda `30577ce6eb0ca448b7112d8b6d6e457936182a90`. Preservar os checkpoints históricos abaixo; este estado os substitui para decisões atuais.
+
+## Resultado verificado
+
+- 172 contratos operacionais/17 squads/2.640 memberships; tarefas de colegas exigem delegação. Criadas 42 tarefas: 30 Finance, 11 Claude Code mastery e uma SOP. Descoberta legada permanece distinta: 171 agentes com tasks, 1.460 arquivos/1.396 alcançáveis; os 64 gaps anteriores não receberam aliases inventados.
+- Expertise: 35 perfis/51 bindings revisados, 2 referências READ e 88 CANDIDATE. Quatro títulos/tipos, papéis Holdfast/Purpose e cenários financeiros foram corrigidos com proveniência; nenhuma promoção mundial nem nova leitura integral.
+- `sinapse-project-expert` instalada como entrada adicional em Codex e Claude Code. Snapshot definitivo: 2.095 pins, nove destinos novos; transação `4a7c01b2-ca7a-476b-ab15-2fbd29eef317`. Readback: 20/20 design + 12/12 autoridade, paridade entre provedores e 18 rejeições seguras. Contexto offline, sem escolher modelo nem alegar inferência nativa.
+- Pares 459/459, Lume 84/84 e feedback/foco 411/411 em 1440/390/320; painel final 416/416, 12 capturas, zero overflow/erros. Lume é marca fictícia de teste. Reel decodificado integralmente: 18s/540 quadros; player observado até 12,769s. A sessão não recebe áudio, portanto a audição continua sem prova.
+- AIOX oficial continua 5.4.1, sem novo release observado. Nenhuma nova chamada paga Jev nesta onda; acumulado calculado US$0,00018375, reserva US$0,005376/0,05. Sem recarga, API Anthropic, publicação, remoção funcional, Docker ou WSL.
+
+## Provas e preservação
+
+Agregação da última execução por arquivo: **276/276 testes em 18 suites**, zero pendências. Coortes repetidas não são somadas; os vermelhos anteriores permanecem. A tentativa de suite ampla foi interrompida e não possui aprovação geral. Dois casos antigos foram reparados sem relaxar autoridade; whitespace em 12 tarefas/35 memberships teve equivalência provada e 72/72 testes pertinentes.
+
+Lint aplicável passou excluindo somente os artefatos privados antigos `output/navigation-20261002/**`; configuração do produto preservada. Typecheck, paridade 38/38, registry 9/66, manifest, workflow/story, guards e scan de 5.284 arquivos tiveram passagem observada. Protected paths e conteúdo funcional ficaram intactos; pacote somente dry-run, sem publicação.
+
+Original: 191 entradas anteriores preservadas; 193 atuais, apenas duas novas skills. Os 262 payloads antigos permanecem iguais. Comparação pessoal: 12.693/12.697 entradas iguais; quatro mudanças fora do write set foram preservadas, com hashes/horários e sem atribuição de autor não observado.
+
+Receipts, capturas, contextos, logs e rollback permanecem privados em `examples/framework-quality/output/closeout-20261002/`. Os 14 clusters/34 arquivos de organização conservam consumidores distintos; usar o catálogo e a documentação vigente, sem apagar ou fundir pastas por semelhança.
+
+## Uso e continuidade
+
+No Codex ou Claude Code, pedir: **“Use sinapse-project-expert com dx-ui-designer, tarefa compose-screen-layouts, para [objetivo]”**. A extensão lê canônico/tarefa/conhecimento da fonte aprovada e produz somente no projeto ativo vinculado. Não exige chave nova, terminal manual nem gasto Jev.
+
+Manter a worktree-fonte e o corpus privado. O registry valida inputs/rosters; mudar bytes, remover a fonte ou ampliar raízes exige refresh/migração com nova verificação. Um commit com os mesmos bytes preserva a ligação; sourceHead registra proveniência, não igualdade obrigatória com HEAD atual. Inputs congelados permanecem somente leitura no contrato; output novo fora deles é permitido na raiz ativa.
+
+O escopo operacional local/pessoal desta onda foi concluído. Continuam lacunas de competência: 137 funções e 88 candidatas requerem materiais autorizados, leitura rastreada e avaliação independente; futuras famílias Mobbin seguem falhas reais. Inferência nativa e percepção audiovisual contínua exigem observação própria. Publicação remota não ocorreu; credencial API Jev é opcional para automação futura.
+
+[Preview local](http://127.0.0.1:4179/#pendencias). O histórico Git identifica o fechamento pelo assunto **Finalize cross-provider framework evolution**; receipts finais de staging, pacote e readback após commit ficam no diretório privado desta onda.
+
+---
+
+# Checkpoint navegação e créditos — histórico
 
 Começar pelo [aprendizado de navegação](navigation-learning.md) e pelo [receipt estruturado](navigation-learning.json). Worktree isolado e branch codex/feat/framework-evolution-20261002; base f7a88a031936765e942a21eb6358fe7018d68163. Checkpoints abaixo são históricos preservados.
 

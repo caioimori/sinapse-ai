@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-02",
-    "scope": "TypeSafe instalado; Jev observado; transferência de interface local",
+    "scope": "Fechamento operacional local e pessoal; instalação Codex e Claude Code verificada com contexto offline",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -10,12 +10,19 @@
     "agents": 172,
     "reviewedFunctions": 35,
     "reviewedCommands": 51,
-    "validatedExperts": 0
+    "validatedExperts": 0,
+    "operationalProfiles": 172,
+    "commandRecords": 2640,
+    "newOwnedTasks": 42,
+    "curatedMechanisms": 12,
+    "providerSkills": 38,
+    "readReferences": 2,
+    "candidateReferences": 88
   },
   "deployment": {
-    "local": "49 regressões nesta onda; 66 verificações na nova interface",
-    "installed": "Extensão pessoal: 35 funções / 51 comandos",
-    "published": "Integração remota pendente"
+    "local": "172 contratos operacionais; pares e Lume verificados em desktop e celular",
+    "installed": "Instalação verificada — Codex e Claude Code; contexto offline",
+    "published": "Entrega local e pessoal; sem PR ou publicação nesta onda"
   },
   "deliverables": [
     {
@@ -66,7 +73,7 @@
           "Conferir o movimento contínuo e a legibilidade, além dos estados capturados."
         ]
       ],
-      "gap": "Estados e comportamento foram testados. Reprodução contínua e qualidade percebida ainda exigem revisão completa."
+      "gap": "Estados, controles, reflow e movimento reduzido passaram no replay atual. A revisão técnica delimita seu alcance; qualidade criativa global continua sem validação."
     },
     {
       "id": "reel",
@@ -91,7 +98,7 @@
           "Ouvir a trilha e observar ritmo, transições e clareza na reprodução contínua."
         ]
       ],
-      "gap": "A função revisada resolve o roteiro. O Reel exportado não recebeu nota audiovisual total, pois áudio e reprodução contínua não foram percebidos integralmente."
+      "gap": "A função revisada resolve o roteiro. O Reel de 18 segundos ainda depende de audição humana da trilha; não recebeu aprovação audiovisual total."
     },
     {
       "id": "carrossel",
@@ -116,7 +123,7 @@
           "Conferir imagens finais, texto equivalente e fontes editáveis."
         ]
       ],
-      "gap": "O exemplo foi exportado e revisado por IA. A nota 91/100 não comprova aprovação humana nem desempenho de uma campanha."
+      "gap": "As cinco páginas finais e a leitura no celular foram revisadas nesta onda. A nota histórica de IA 91/100 conserva seu alcance; sem aprovação humana ou ganho de campanha comprovado."
     },
     {
       "id": "anuncio",
@@ -147,10 +154,10 @@
   "pending": [
     {
       "id": "jev",
-      "title": "Piloto Jev",
-      "description": "Skill oficial instalada. Um lote real de dez julgamentos foi executado no playground autenticado e conferido; a integração automática por API ainda depende de credencial local.",
-      "status": "Piloto observado",
-      "detail": "2.094 tokens de entrada; custo calculado US$0,000087948; nenhuma repetição paga."
+      "title": "Jev e créditos",
+      "description": "Skill oficial instalada e dois lotes reais observados. Nenhuma chamada paga foi feita nesta onda; uma integração automática por API continua opcional e depende de credencial local.",
+      "status": "Controle de custo conferido",
+      "detail": "Total calculado US$0,00018375; teto US$0,05; reserva US$0,005376. O cálculo não é uma fatura."
     },
     {
       "id": "opus",
@@ -162,30 +169,30 @@
     {
       "id": "mobbin",
       "title": "Referências Mobbin",
-      "description": "Sessão autenticada observada: 22 telas em dois fluxos de filtros e colunas. Oito mecanismos revisados e consolidados na biblioteca privada do projeto; cinco comandos recuperam regras pertinentes.",
-      "status": "8 mecanismos consolidados",
-      "detail": "Seis inferências visuais e duas transferências locais. 66 verificações do autor e 54 independentes; fonte original/backend sem execução."
+      "description": "Referências autenticadas de filtros, colunas, detalhes e criação alimentaram mecanismos revisados e transferências próprias. A biblioteca aprovada permanece privada e vinculada ao projeto autorizado.",
+      "status": "Curadoria e transferência conferidas",
+      "detail": "12 mecanismos privados curados no total, com fontes e limites registrados. Referência visual não comprova backend."
     },
     {
       "id": "av",
       "title": "Revisão audiovisual",
-      "description": "Ouvir o áudio e observar motion e vídeo continuamente, no arquivo final. Encoding e amostras de frames não substituem essa revisão.",
-      "status": "Percepção pendente",
-      "detail": "Reel sem nota audiovisual total."
+      "description": "Lume e motion passaram no replay atual. O Reel de 18 segundos foi inteiramente decodificado; a reprodução observada é parcial e a audição humana da trilha permanece pendente.",
+      "status": "Audição humana pendente",
+      "detail": "18 segundos e 540 quadros decodificados. Player observado até 12,769 segundos; sem áudio ouvido ou aprovação audiovisual total."
     },
     {
       "id": "expertise",
       "title": "Especialização",
-      "description": "Revisar as funções restantes, aprofundar as 88 referências candidatas e comprovar transferência em outra tarefa antes de validar cada agente.",
-      "status": "Expansão pendente",
-      "detail": "137 funções sem contrato revisado; zero especialistas validados."
+      "description": "Os 172 agentes têm contrato operacional. A especialização tem 35 perfis e 51 vínculos revisados; aprofundar as fontes candidatas e comprovar transferência continua sendo parte da pesquisa.",
+      "status": "Operação completa; expertise parcial",
+      "detail": "2 referências lidas, 88 candidatas e zero especialistas com validação global."
     },
     {
       "id": "causal",
       "title": "Ganho de qualidade",
-      "description": "A revisão cega dos seis pares preferiu o contexto aprimorado em quatro casos, com dois empates. Um lote não comprova ganho causal ou qualidade de todos os agentes.",
-      "status": "Comparação concluída",
-      "detail": "225 checks; sem crítico confirmado. Replay completo dos estados mobile pendente; baseline excedeu o teto em 11,038s."
+      "description": "As 12 interfaces dos seis pares passaram no replay atual em desktop e celular. A revisão cega histórica preferiu o contexto aprimorado em quatro casos, com dois empates; um lote não comprova ganho causal.",
+      "status": "Replay técnico concluído",
+      "detail": "459 verificações em 1440, 390 e 320px. O baseline original excedeu o teto em 11,038 segundos; a ressalva foi preservada."
     },
     {
       "id": "folders",
@@ -197,9 +204,9 @@
     {
       "id": "distribution",
       "title": "Uso e distribuição",
-      "description": "Extensão pessoal conferida em Codex e Claude, disponível pela skill sinapse-expert-runtime em um contexto novo. Integração ao projeto principal e publicação permanecem pendentes.",
-      "status": "Extensão instalada",
-      "detail": "Política pessoal atualizada e 262 hashes conferidos. Mobbin privado permanece no projeto; ativação nativa ainda não observada."
+      "description": "A extensão opt-in sinapse-project-expert foi instalada e conferida localmente no Codex e no Claude Code. O vínculo privado separa a fonte de leitura do projeto ativo autorizado para execução.",
+      "status": "Instalação local e pessoal verificada",
+      "detail": "38 skills por ambiente: 37 do núcleo + 1 opt-in. Contexto offline conferido: 20/20 montagens de design e 12/12 checks de autoridade. Sem inferência nativa, PR ou publicação nesta onda."
     }
   ],
   "squads": [
@@ -569,10 +576,11 @@
     {
       "id": "local-tests",
       "title": "Testes do framework",
-      "summary": "324/324 testes em 22 suites; lint, typecheck e paridade aprovados.",
+      "summary": "Contratos operacionais e verificações específicas por domínio.",
       "paragraphs": [
-        "A coorte final passou em 211,484 segundos. Foram verificadas resolução dos 172 agentes, recuperação por tarefa, bindings, instalação em fixture, transações, modelos e privacidade.",
-        "A execução anterior encontrou uma expectativa antiga de contagem após as seis tarefas novas. O teste e a linha de inventário foram corrigidos; os 324 testes passaram na repetição completa. Teste técnico não é nota criativa."
+        "O fechamento cobre contratos dos 172 agentes, registros de comando e tarefas próprias. Resolução, autoridade, contexto, isolamento e instalação recebem checks específicos; os gates finais desta onda conservam evidências próprias.",
+        "O replay das 12 interfaces passou 459 verificações; Lume e motion passaram 84; a revisão independente final do toast passou 411. Esses resultados descrevem as sequências exercitadas, sem uma nota criativa global.",
+        "A instalação local e pessoal passou 20/20 montagens de design e 12/12 checks de autoridade, com paridade entre os provedores, 2.095 referências congeladas e contextos de até 11.836 dos 12.000 caracteres. Dezoito requisições inválidas foram rejeitadas; não houve inferência nativa."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/operational-verification.md"
@@ -580,11 +588,11 @@
     },
     {
       "id": "contracts",
-      "title": "Funções e comandos revisados",
-      "summary": "35 funções e 51 comandos vinculados a tarefas canônicas.",
+      "title": "Operação e expertise",
+      "summary": "172 contratos operacionais; 35 perfis e 51 vínculos de expertise.",
       "paragraphs": [
-        "Seis tarefas de design foram completadas: componentes, wireframe, padrões CRO, curadoria de referências, packaging e superfície de produto. Critérios e autoridade acompanham cada comando; aliases foram preservados.",
-        "Dois desvios de conteúdo foram corrigidos: análise já abre sua tarefa de conteúdo, e calendário abre sua tarefa editorial. Contrato revisado não comprova execução especializada; 137 funções e 88 referências continuam candidatas."
+        "Os 172 contratos registram 2.640 comandos com escopo verificável. Foram criadas 42 tarefas próprias que faltavam; responsabilidade, dependência e delegação permanecem separadas. Um pool de squad não concede autoridade a todos os agentes.",
+        "A revisão de expertise cobre 35 perfis e 51 vínculos. O programa mantém 2 referências lidas e 88 candidatas; validade de fonte, transferência e qualidade especializada ainda precisam de comprovação por tarefa."
       ],
       "sources": [
         "research/expert-evolution/task-bindings.json",
@@ -594,10 +602,11 @@
     {
       "id": "creative",
       "title": "Interface, motion, Reel e carrossel",
-      "summary": "Quatro exemplos próprios, com escopo de revisão separado.",
+      "summary": "Lume: 84 checks; toast: 411 checks independentes finais.",
       "paragraphs": [
-        "UI e carrossel receberam 91/100 em review independente de IA. Motion recebeu 91 apenas nos estados e amostras vistos. Os 23 checks locais de UI e motion passaram em 1440, 390 e 320px, sem overflow observado.",
-        "Áudio e reprodução contínua permanecem com ressalvas. O Reel de 18 segundos não tem nota audiovisual total; nenhuma aprovação humana ou expertise foi inferida."
+        "O replay atual de Lume cobre 1440, 390 e 320px, estados, teclado, movimento reduzido e ciclos de interrupção. O toast que encobria o foco no celular foi corrigido e passou em revisão independente dos bytes finais.",
+        "As cinco páginas finais do carrossel e sua leitura no celular foram inspecionadas. Audição humana da trilha do Reel de 18 segundos permanece pendente; sem aprovação audiovisual total ou de expertise.",
+        "FFmpeg decodificou integralmente 18 segundos e 540 quadros. O player foi observado até 12,769 segundos; reprodução parcial e decodificação não comprovam percepção audiovisual completa."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
@@ -607,10 +616,10 @@
     {
       "id": "knowledge",
       "title": "Conhecimento e fonte",
-      "summary": "67 fontes públicas, 112 heurísticas e lacunas preservadas.",
+      "summary": "12 mecanismos privados curados; 2 fontes lidas e 88 candidatas.",
       "paragraphs": [
-        "O corpus tem 67 fontes e 112 heurísticas. O programa de especialização lista 90 referências: duas lidas e 88 candidatas. Todos os 172 agentes mantêm lacuna de cobertura.",
-        "A extração persistente foi exercitada com uma decisão técnica própria revisada. Não significa que livros, mil horas de conteúdo ou todos os especialistas foram absorvidos."
+        "A biblioteca privada contém 12 mecanismos curados, com origem, revisão e contexto de aplicação. O corpus público existente mantém 67 fontes e 112 heurísticas; o programa de especialização conserva 90 referências, sendo 2 lidas e 88 candidatas.",
+        "A extração persistente e a transferência foram exercitadas em tarefas delimitadas. Esse acervo não comprova absorção integral de livros, milhares de horas ou validação mundial dos especialistas."
       ],
       "sources": [
         "research/expert-evolution/source-program.json",
@@ -620,9 +629,9 @@
     {
       "id": "upstream",
       "title": "Atualização pública e preservação",
-      "summary": "Versão pública v5.4.1 conferida; atualização seletiva.",
+      "summary": "AIOX público v5.4.1 revalidado; nenhum update posterior confirmado.",
       "paragraphs": [
-        "O upstream público foi reconferido em 02.10.2026 no SHA 4ef6530ff03b83aea953e4a426f95e012b8b70c5. A atualização foi auditada por compatibilidade, com 37 integrações proprietárias excluídas.",
+        "A versão pública AIOX v5.4.1 foi revalidada nesta onda, sem novo update confirmado. A atualização seletiva foi auditada por compatibilidade; as 37 integrações proprietárias continuam excluídas.",
         "O checkout original com 191 alterações foi preservado. Nenhum caminho protegido, dado privado, serviço de produção ou conteúdo funcional foi removido; não houve merge integral do core."
       ],
       "sources": [
@@ -633,10 +642,10 @@
     {
       "id": "paired",
       "title": "Seis pares de interfaces",
-      "summary": "Quatro preferências pelo contexto aprimorado, dois empates.",
+      "summary": "12 interfaces; 459 verificações atuais em três larguras.",
       "paragraphs": [
-        "12 interfaces próprias passaram 225 verificações efetivas, com revisão independente cega, 36 capturas iniciais e 13 de estado. As notas pertencem aos artefatos deste lote.",
-        "Uma geração por caso conserva variação estocástica. A duração do baseline ultrapassou o teto em 11,038 segundos; os estados alterados não foram todos repetidos no mobile. Sem prova causal, comparação Opus/Jev ou validação de expertise."
+        "As 12 interfaces dos seis pares passaram no replay atual, com 459 verificações em 1440, 390 e 320px. Seus estados alterados foram repetidos no celular; os artefatos e a preferência da revisão cega histórica foram preservados.",
+        "Uma geração por caso conserva variação estocástica. O baseline original ultrapassou o teto em 11,038 segundos; a duração não foi corrigida retrospectivamente. O lote permanece sem prova causal, comparação Opus/Jev ou validação de expertise."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/paired-interface-results.md"
@@ -645,10 +654,10 @@
     {
       "id": "typesafe-mobbin",
       "title": "TypeSafe, Jev e transferência Mobbin",
-      "summary": "Skill oficial instalada; dez julgamentos reais; 22 estados observados.",
+      "summary": "Skill oficial instalada; dois lotes Jev; transferência local revisada.",
       "paragraphs": [
-        "Jev avaliou descrições próprias em um lote autenticado, com modelo e uso observados. O controle de custo, hashes, regras e revisão independente continuam determinísticos. Opus permanece aprendizado de mercado, sem API.",
-        "Uma nova interface própria, em /transfer-filter/, aplica inclusão/exclusão, rascunho, cancelamento, recuperação e preferência de colunas. Seus 66 checks incluem os estados alterados no celular; a referência original e a implementação local têm escopos de evidência distintos."
+        "Dois lotes Jev autenticados foram observados anteriormente. O total calculado é US$0,00018375, com teto de US$0,05 e reserva de US$0,005376; nenhuma chamada paga foi feita nesta onda. Opus continua restrito a aprendizado de mercado.",
+        "As interfaces próprias /transfer-filter/ e /transfer-navigation/ exercitam filtros, detalhes, retorno e criação com revisão local. Referências Mobbin, inferências e comportamento da implementação continuam registrados com escopos de evidência distintos."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.md",

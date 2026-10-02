@@ -41,7 +41,13 @@ describe('explicit priority contracts without expertise promotion', () => {
     for (const previous of [completion.baseline.historicalReceipt, completion.baseline.historicalMarkdown]) {
       expect(digest(fs.readFileSync(path.join(root, previous.path)))).toBe(previous.sha256);
     }
-    expect(digest(JSON.stringify(current.sources.references))).toBe(completion.baseline.sourcesSha256);
+    const amendment=read('docs/framework/expert-evolution-2026-10/closeout-source-corrections.json');
+    expect(amendment.changes).toHaveLength(4);
+    expect(digest(JSON.stringify(current.sources.references))).toBe(amendment.currentReferencesSha256);
+    for(const change of amendment.changes){expect(change.before.status).toBe('CANDIDATE');expect(change.after.status).toBe('CANDIDATE');expect(change.before.url).toBe(change.after.url);expect(current.sources.references.find(r=>r.id===change.id)).toEqual(change.after);}
+    const historical=current.sources.references.map(ref=>amendment.changes.find(c=>c.id===ref.id)?.before||ref);
+    expect(digest(JSON.stringify(historical))).toBe(completion.baseline.sourcesSha256);
+    expect(amendment.baselineReferencesSha256).toBe(completion.baseline.sourcesSha256);
   });
 
   test.each([...review.contracts, ...completion.contracts].map(contract => [contract.agentId, contract.command, contract]))(

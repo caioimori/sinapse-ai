@@ -15,7 +15,8 @@
   background: var(--paper);
 }
 * { box-sizing: border-box; }
-body { margin: 0; }
+html { scroll-padding-block-end: var(--toast-clearance, 0px); }
+body { margin: 0; padding-block-end: var(--toast-clearance, 0px); }
 button, input, select { font: inherit; }
 button, a, input, select { -webkit-tap-highlight-color: transparent; }
 button, a { touch-action: manipulation; }
@@ -66,7 +67,7 @@ dialog h2 { margin: 12px 0; font-size: 30px; overflow-wrap: anywhere; }
 dialog p { color: var(--muted); margin-bottom: 24px; }
 .dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .toast { position: fixed; right: 24px; bottom: 24px; padding: 16px 20px; border-radius: 10px; background: var(--ink); color: white; display: flex; gap: 18px; align-items: center; width: min(440px, calc(100% - 32px)); box-shadow: 0 8px 24px #25282422; z-index: 5; }
-.toast button { background: transparent; border: none; color: #fff; text-decoration: underline; padding: 8px; font-weight: 600; }
+.toast button { background: transparent; border: none; color: #fff; text-decoration: underline; min-height: 44px; padding: 8px; font-weight: 600; }
 [hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .storyboard { padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); max-width: 940px; }
