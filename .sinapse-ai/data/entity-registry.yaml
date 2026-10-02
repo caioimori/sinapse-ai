@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-10-02T08:24:30.427Z'
+  lastUpdated: '2026-10-02T09:56:37.369Z'
   entityCount: 819
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -372,8 +372,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:feefa51a192339777891b4cd905f315ff614601b7552eccdb3d9b988b2a3a996
-      lastVerified: '2026-10-02T08:24:29.181Z'
+      checksum: sha256:947e70b2c63f1ef0bf9437ccab7cc29427517673afa6147eef8d106fc298db8e
+      lastVerified: '2026-10-02T09:56:35.512Z'
     fs-utils:
       path: bin/lib/fs-utils.js
       layer: L1
