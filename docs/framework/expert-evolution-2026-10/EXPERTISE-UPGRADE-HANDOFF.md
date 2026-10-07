@@ -46,7 +46,9 @@ No HEAD `2600dc51`, Article VII falhou por contagens antigas em cinco documentos
 
 Security Audit apontou quatro vulnerabilidades HIGH em produção na cadeia braces/chokidar/micromatch/fast-glob, advisory `GHSA-vfj7-8cjw-p6xm` com nenhum fix disponível no relatório observado. Não houve atualização automática/forçada de dependências. Acompanhamento: cloud-security-engineer/developer em frente própria; merge e produção não foram realizados.
 
-Compatibility Parity Gate falhou por contagem configurada de skills Codex 34/33. Fonte/runtime/config/CI congelados foram preservados; paridade focal de adapters 172/38 e recuperação pessoal observada são provas de outro escopo. Acompanhamento: quality-gate/devops para reconciliar a configuração sem mudar hooks ou mascarar o guard.
+Compatibility Parity Gate falhou por contagem configurada de skills Codex 34/33. Causa: `.codex/catalog.json.expectedSkillIds` tinha 33 IDs e faltava somente a skill legítima `sinapse-project-expert`; o inventário observa 34 diretórios `sinapse-*`, além de quatro skills/aliases de outro prefixo. O metadado estava fora dos pins vivos; acrescentado somente esse ID, sem alterar validator/CI/runtime.
+
+`validate-codex-integration.js` e `npm run validate:parity` passaram após a correção: 172 agentes resolvidos, zero órfãos/pointers quebrados, 34 IDs SINAPSE e 38 skills totais nos dois provedores. Ambos os vínculos reais e sourceHead `5f4b7e41` continuaram válidos. Acompanhamento quality-gate/devops: confirmar a nova CI remota; nenhuma alteração de fonte congelada foi necessária.
 
 Logs desses dois jobs foram lidos por `gh api` e preservados privados; a leitura por `gh run --log-failed` não estava disponível enquanto o workflow completo rodava. Demais checks ainda estavam em execução; não declarar CI integral verde.
 
