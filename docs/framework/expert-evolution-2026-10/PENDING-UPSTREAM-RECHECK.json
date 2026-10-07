@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "scope": "Current public release and registry metadata; no full upstream import or protected-path change",
+  "canonicalRecord": {
+    "path": "research/expert-evolution/audit-upstream-recheck.json",
+    "jsonPointer": "/rechecks/0",
+    "sha256": "82cf3f6c572c246a369f80b47ab207e883562080d07727104100b4de978f45c4",
+    "hashEncoding": "UTF-8 JSON.stringify(record, null, 2) followed by newline"
+  },
+  "observedDate": "2026-10-07",
+  "recordedAt": "2026-10-07T20:29:10.164Z",
+  "newPublicReleaseObserved": false,
+  "protectedPathsChanged": false,
+  "limitation": "Metadata confirms the public release, not equality of the SINAPSE fork or adoption of all upstream code. Web preview of these API endpoints failed; native official metadata queries succeeded."
+}

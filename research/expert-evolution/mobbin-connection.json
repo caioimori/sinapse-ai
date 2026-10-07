@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-02T09:04:50.848Z",
+  "endpoint": "https://api.mobbin.com/mcp",
+  "authorization": "existing-authorized-MCP-cache; no credential retained",
+  "status": "initialized-and-listed",
+  "protocol": "2025-06-18",
+  "serverInfo": {
+    "name": "mobbin",
+    "version": "1.0.0"
+  },
+  "tools": [
+    {
+      "name": "search_screens",
+      "description": "Search Mobbin for UI screens using natural language. Returns matching screens with inline images and metadata. Examine the returned images to understand each screen's actual content — do not describe or summarize screens based solely on metadata. Each screen has a `mobbin_url` — the canonical Mobbin link for that screen. When you present results to the user, ALWAYS cite each screen you mention as a markdown link to its `mobbin_url` so the user can open it on Mobbin. Inline images are low-res previews for you to read, not for the user. Each result's `image_url` is the high-resolution image. Whenever the user wants to save, export, embed, or paste a result (files, Figma, Notion, docs, slides), download it from `image_url` instead of reusing the inline preview. Image URLs expire after 30 days, so download the file rather than linking to it; link to `mobbin_url` when citing. If the result contains `ai_usage_notice`, show its markdown to the user word for word, as its own block after the results, keeping its formatting and line breaks. Do not paraphrase, shorten, or merge it with other text. On hosts that support MCP Apps, also renders an interactive gallery of the results.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Describe one screen in plain language — the UI elements you'd see and how they relate. Be specific; detail helps. Good: \"login screen with biometric authentication\", \"checkout page with promo code field and Apple Pay button\". Avoid: combining multiple screens/intents (search separately), negations (\"without ads\"), vague style words (\"modern\", \"clean\"), disconnected keyword lists. Name a specific app to filter results to it (e.g. \"Spotify now-playing screen\"). Do not include platform (ios/web) — use the dedicated parameter."
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "ios",
+              "web"
+            ],
+            "description": "Platform to search"
+          },
+          "mode": {
+            "default": "deep",
+            "description": "Search mode. \"standard\" returns results with low latency. \"deep\" uses an AI-powered pipeline that interprets intent and scores each candidate for relevance, keeping the strong matches — ideal for nuanced queries. \"fast\" is a deprecated alias for \"standard\" and will be removed in a future version — use \"standard\" instead.",
+            "type": "string",
+            "enum": [
+              "deep",
+              "standard",
+              "fast"
+            ]
+          },
+          "exclude_screen_ids": {
+            "description": "Screen IDs to exclude from results",
+            "default": [],
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            }
+          },
+          "limit": {
+            "default": 20,
+            "description": "Maximum number of screens to return. Higher number of screens returned causes increased context usage.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30
+          },
+          "image_format": {
+            "default": "webp",
+            "description": "Image format. Use jpg if your client does not support webp.",
+            "type": "string",
+            "enum": [
+              "webp",
+              "jpg"
+            ]
+          },
+          "task_intent": {
+            "description": "One short sentence summarizing the user's overall task. Helps return more relevant results. Write it in English even when the conversation is in another language. MUST be the same across all calls for the same task. Do NOT include verbatim user messages, conversation history, file contents, or personal data.",
+            "type": "string"
+          },
+          "output_destination": {
+            "description": "What you will do with the results after this call. Choose by what gets made with the results, not by the search itself. When the request does not say, go by where you are running: a coding agent in a repository means `code`, a design tool means `design_tool`, a plain chat host means `chat`. Helps return results in the form the workflow needs. `code`: implement or change UI in a codebase or coded prototype, e.g. React, Swift, HTML/CSS, v0, Lovable. `design_tool`: recreate or put results on a design canvas, e.g. Figma, Paper, Pen.dev, MagicPath. `doc`: write a report, PRD, spec, audit or slides, e.g. in Notion, Google Docs or Slides. `reference_library`: only when saving is the ask: the user wants the results kept for later in a folder, notes or a Mobbin collection. Looking things up to build, design or write from is NOT this. `chat`: only answer in the conversation; the user has not asked you to build, design, write or save anything. `other`: an unlisted destination, none of the above, e.g. posting the results to Slack or email. MUST be the same across all calls for the same task.",
+            "type": "string",
+            "enum": [
+              "code",
+              "design_tool",
+              "doc",
+              "reference_library",
+              "chat",
+              "other"
+            ]
+          },
+          "output_tool": {
+            "description": "The product the results go into next, if known, e.g. Figma, Paper, Notion. Product name only. When the results go into more than one product, name the one the user asked for first. Not the search source: Mobbin only when the results go back to Mobbin. Omit when unknown. MUST be the same across all calls for the same task.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "platform"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "search_flows",
+      "description": "Search Mobbin for multi-step user flows (e.g. onboarding, checkout) using natural language. Returns evenly-spaced preview images inline along with metadata for each flow, including per-screen previews. Examine the returned images to understand each flow's actual content — do not describe screens based solely on metadata. Inline images are low-res previews for you to read, not for the user. Each result's `image_url` is the high-resolution image. Whenever the user wants to save, export, embed, or paste a result (files, Figma, Notion, docs, slides), download it from `image_url` instead of reusing the inline preview. Image URLs expire after 30 days, so download the file rather than linking to it; link to `mobbin_url` when citing. On hosts that support MCP Apps, also renders an interactive gallery of the results.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Describe one user journey in plain language — the steps and what you'd see along the way. Be specific; detail helps. Good: \"onboarding with personalization steps\", \"checkout with payment method selection\". Avoid: combining multiple flows (search separately), negations, vague style words, disconnected keyword lists. Name a specific app to filter results to it (e.g. \"Duolingo onboarding\"). Do not include platform (ios/web) — use the dedicated parameter."
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "ios",
+              "web"
+            ],
+            "description": "Platform to search."
+          },
+          "limit": {
+            "default": 5,
+            "description": "Maximum number of flows to return. Lower limits are recommended to manage context size.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "page": {
+            "default": 1,
+            "description": "Page number for paginating through results. Maximum 20.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "image_format": {
+            "default": "webp",
+            "description": "Image format. Use jpg if your client does not support webp.",
+            "type": "string",
+            "enum": [
+              "webp",
+              "jpg"
+            ]
+          },
+          "task_intent": {
+            "description": "One short sentence summarizing the user's overall task. Helps return more relevant results. Write it in English even when the conversation is in another language. MUST be the same across all calls for the same task. Do NOT include verbatim user messages, conversation history, file contents, or personal data.",
+            "type": "string"
+          },
+          "output_destination": {
+            "description": "What you will do with the results after this call. Choose by what gets made with the results, not by the search itself. When the request does not say, go by where you are running: a coding agent in a repository means `code`, a design tool means `design_tool`, a plain chat host means `chat`. Helps return results in the form the workflow needs. `code`: implement or change UI in a codebase or coded prototype, e.g. React, Swift, HTML/CSS, v0, Lovable. `design_tool`: recreate or put results on a design canvas, e.g. Figma, Paper, Pen.dev, MagicPath. `doc`: write a report, PRD, spec, audit or slides, e.g. in Notion, Google Docs or Slides. `reference_library`: only when saving is the ask: the user wants the results kept for later in a folder, notes or a Mobbin collection. Looking things up to build, design or write from is NOT this. `chat`: only answer in the conversation; the user has not asked you to build, design, write or save anything. `other`: an unlisted destination, none of the above, e.g. posting the results to Slack or email. MUST be the same across all calls for the same task.",
+            "type": "string",
+            "enum": [
+              "code",
+              "design_tool",
+              "doc",
+              "reference_library",
+              "chat",
+              "other"
+            ]
+          },
+          "output_tool": {
+            "description": "The product the results go into next, if known, e.g. Figma, Paper, Notion. Product name only. When the results go into more than one product, name the one the user asked for first. Not the search source: Mobbin only when the results go back to Mobbin. Omit when unknown. MUST be the same across all calls for the same task.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "platform"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "search_sections",
+      "description": "Search Mobbin for website sections (e.g. About, Pricing, Footer) using natural language. Returns section images inline along with metadata. Examine the returned images to understand each section's actual content — do not describe or summarize sections based solely on metadata. Inline images are low-res previews for you to read, not for the user. Each result's `image_url` is the high-resolution image. Whenever the user wants to save, export, embed, or paste a result (files, Figma, Notion, docs, slides), download it from `image_url` instead of reusing the inline preview. Image URLs expire after 30 days, so download the file rather than linking to it; link to `mobbin_url` when citing. On hosts that support MCP Apps, also renders an interactive gallery of the results.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Describe one website section in plain language — the content and elements you'd see. Be specific; detail helps. Good: \"pricing page with plan comparison table\", \"hero section with signup form\". Avoid: combining multiple sections (search separately), negations, vague style words, disconnected keyword lists."
+          },
+          "limit": {
+            "default": 20,
+            "description": "Maximum number of sections to return. Higher number of sections returned causes increased context usage.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30
+          },
+          "page": {
+            "default": 1,
+            "description": "Page number for paginating through results.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "image_format": {
+            "default": "webp",
+            "description": "Image format. Use jpg if your client does not support webp.",
+            "type": "string",
+            "enum": [
+              "webp",
+              "jpg"
+            ]
+          },
+          "task_intent": {
+            "description": "One short sentence summarizing the user's overall task. Helps return more relevant results. Write it in English even when the conversation is in another language. MUST be the same across all calls for the same task. Do NOT include verbatim user messages, conversation history, file contents, or personal data.",
+            "type": "string"
+          },
+          "output_destination": {
+            "description": "What you will do with the results after this call. Choose by what gets made with the results, not by the search itself. When the request does not say, go by where you are running: a coding agent in a repository means `code`, a design tool means `design_tool`, a plain chat host means `chat`. Helps return results in the form the workflow needs. `code`: implement or change UI in a codebase or coded prototype, e.g. React, Swift, HTML/CSS, v0, Lovable. `design_tool`: recreate or put results on a design canvas, e.g. Figma, Paper, Pen.dev, MagicPath. `doc`: write a report, PRD, spec, audit or slides, e.g. in Notion, Google Docs or Slides. `reference_library`: only when saving is the ask: the user wants the results kept for later in a folder, notes or a Mobbin collection. Looking things up to build, design or write from is NOT this. `chat`: only answer in the conversation; the user has not asked you to build, design, write or save anything. `other`: an unlisted destination, none of the above, e.g. posting the results to Slack or email. MUST be the same across all calls for the same task.",
+            "type": "string",
+            "enum": [
+              "code",
+              "design_tool",
+              "doc",
+              "reference_library",
+              "chat",
+              "other"
+            ]
+          },
+          "output_tool": {
+            "description": "The product the results go into next, if known, e.g. Figma, Paper, Notion. Product name only. When the results go into more than one product, name the one the user asked for first. Not the search source: Mobbin only when the results go back to Mobbin. Omit when unknown. MUST be the same across all calls for the same task.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

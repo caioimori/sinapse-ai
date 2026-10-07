@@ -1,0 +1,159 @@
+{
+  "workflow_id": "WF-20261002-expert-evolution",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Especialização e curadoria executáveis para 172 agentes, prioridade criativa e navegação unificada preservando compatibilidade",
+  "scope": "Extensões permitidas, correção de contexto em agente de squad, pesquisa primária e piloto Jev até USD 0.05; sem remoção/publicação/instalação global",
+  "inputs": [
+    "SPEC.md",
+    "handoff da evolução anterior",
+    "catálogo canônico 17/172",
+    "autorização YOLO 2026-10-02"
+  ],
+  "outputs": [
+    "plano por agente/squad",
+    "pacote de design/frontend/motion/media",
+    "pipeline de curadoria e Jev",
+    "mapa de organização",
+    "política de modelos",
+    "QA e handoff"
+  ],
+  "acceptance": [
+    "story Ready validada",
+    "IDs e referências grounded",
+    "fontes lidas separadas de candidatas",
+    "testes e limites observados",
+    "preservação de caminhos e conteúdo"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "Definir contratos e preservar estado",
+      "owner": "sinapse-orqx",
+      "depends_on": [],
+      "command_or_tool": "spec, story, architecture validator, git status",
+      "timeout_ms": 120000,
+      "max_attempts": 2,
+      "inputs": [
+        "handoff e autorização"
+      ],
+      "outputs": [
+        "Ready story e contrato válido"
+      ],
+      "acceptance": [
+        "branch isolada correta; contexto e gates explícitos"
+      ],
+      "rollback": "Preservar commits anteriores e manter alterações desta etapa isoladas"
+    },
+    {
+      "task_id": "T02",
+      "objective": "Aprofundar prioridades criativas",
+      "owner": "dx-design-system-architect",
+      "depends_on": [
+        "T01"
+      ],
+      "parallel_group": "expertise-build",
+      "command_or_tool": "fontes primárias, pacote de conhecimento e casos reservados",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "Ready story, catálogo, marca e prioridade"
+      ],
+      "outputs": [
+        "priority-pack.json e prioridade.md"
+      ],
+      "acceptance": [
+        "técnicas específicas por função com evidência; Mobbin atual verificado ou bloqueio"
+      ],
+      "rollback": "Reverter somente arquivos novos dessa ownership"
+    },
+    {
+      "task_id": "T03",
+      "objective": "Construir expertise, curadoria e oportunidades Jev",
+      "owner": "kb-architect",
+      "depends_on": [
+        "T01"
+      ],
+      "parallel_group": "expertise-build",
+      "command_or_tool": "perfis canônicos, curation CLI e testes",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "Ready story, competências atuais e fontes públicas"
+      ],
+      "outputs": [
+        "172 perfis, 17 mapas Jev, pipeline e testes"
+      ],
+      "acceptance": [
+        "sem qualificação inventada; segmentos e promoção com fonte/eval; código conserva regras"
+      ],
+      "rollback": "Reverter exclusivamente arquivos novos dessa ownership"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Organizar navegação e medir ruído",
+      "owner": "architect",
+      "depends_on": [
+        "T01"
+      ],
+      "parallel_group": "expertise-build",
+      "command_or_tool": "git tracked inventory, hashes, consumers and architect data contract",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "Ready story e raiz Git exata"
+      ],
+      "outputs": [
+        "mapa completo e contrato de catálogo de fonte/compatibilidade para implementação pelo developer"
+      ],
+      "acceptance": [
+        "cada arquivo classificado uma vez; duplicidade não prova inutilidade; sem delete/move"
+      ],
+      "rollback": "Reverter exclusivamente catálogo novo; fontes preservadas"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Integrar políticas, runtime e piloto autorizado",
+      "owner": "developer",
+      "depends_on": [
+        "T02",
+        "T03",
+        "T04"
+      ],
+      "command_or_tool": "modelo disponível, retrieval, Jev ledger, testes",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "pacotes revisados e credencial se presente"
+      ],
+      "outputs": [
+        "integração compatível e recibos offline/live honestos"
+      ],
+      "acceptance": [
+        "contexto medido; IDs de modelo grounded; Jev reserva USD 0.05; gaps não promovidos"
+      ],
+      "rollback": "Restaurar somente diff autorizado, conservar receipts e resultados anteriores"
+    },
+    {
+      "task_id": "T06",
+      "objective": "Verificar, registrar e salvar checkpoint",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T05"
+      ],
+      "command_or_tool": "jest, lint, typecheck, parity, manifest, story, secret/protected checks",
+      "timeout_ms": 600000,
+      "max_attempts": 3,
+      "inputs": [
+        "entrega integrada"
+      ],
+      "outputs": [
+        "QA, plano com estados e handoff"
+      ],
+      "acceptance": [
+        "evidência reproduzível; nenhuma alegação de 100% ou ganho não medido; original preservado"
+      ],
+      "rollback": "Manter branch revisável e explicitar qualquer gate vermelho"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "caseId": "F079-N",
+  "mode": "static-own-render-no-build",
+  "entry": "runner.html",
+  "modules": [
+    "card-picker.mjs",
+    "fixtures.mjs",
+    "card-picker.stories.js"
+  ],
+  "css": "tokens.css",
+  "localBuildAuthorized": false,
+  "installationAuthorized": false,
+  "existingApplicationStack": "UNVERIFIED_NOT_EXPOSED",
+  "developmentCommand": "Serve artifact v1 directory with an existing authorized HTTP server; do not install a server",
+  "buildCommand": "UNVERIFIED: run the existing project build command in existing remote CI after config/version locator is supplied",
+  "remoteCI": {
+    "locator": null,
+    "status": "UNVERIFIED"
+  },
+  "budget": {
+    "initialJSGzipBytes": 307200,
+    "initialCSSGzipBytes": 51200
+  },
+  "comparison": {
+    "sameInputsRequired": true,
+    "baseline": null,
+    "status": "UNVERIFIED"
+  },
+  "sourceMaps": "No transpiled bundle produced; production hidden source-map policy requires actual build config"
+}

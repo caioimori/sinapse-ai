@@ -1,0 +1,40 @@
+{
+  "caseId": "F009-N",
+  "kind": "native-arithmetic-only",
+  "synthetic": true,
+  "counts": {
+    "invited": 300,
+    "responded": 60,
+    "nonrespondents": 240,
+    "tutorial": 18,
+    "comparison": 12,
+    "neither": 30
+  },
+  "rates": {
+    "responseRate": 0.2,
+    "nonresponseRate": 0.8,
+    "amongRespondents": {
+      "tutorial": 0.3,
+      "comparison": 0.2,
+      "neither": 0.5
+    },
+    "observedSelectionsAmongInvited": {
+      "tutorial": 0.06,
+      "comparison": 0.04,
+      "neither": 0.1
+    },
+    "amongFormatChoosers": {
+      "denominator": 30,
+      "tutorial": 0.6,
+      "comparison": 0.4
+    }
+  },
+  "checks": {
+    "respondentPartitionSum": 60,
+    "allInvitedPartitionSum": 300
+  },
+  "limits": [
+    "Arithmetic on supplied synthetic aggregates only.",
+    "No raw response audit, population estimation, field survey or behavioral experiment executed."
+  ]
+}

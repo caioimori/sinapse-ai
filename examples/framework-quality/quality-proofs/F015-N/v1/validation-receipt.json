@@ -1,0 +1,112 @@
+{
+  "caseId": "F015-N",
+  "method": "Native .NET XmlReader/XmlDocument, DTD prohibited, resolver null; strict SVG element/attribute allowlist and local-reference probes",
+  "observedAtUtc": "2026-10-07T22:45:49.4935944Z",
+  "individualIcons": [
+    {
+      "file": "icons/salvar.svg",
+      "sha256": "60369307c9bf793bc742810624cd4cb4c42f0219ce0dad253d655a7b40fee2c4",
+      "xml": {
+        "xmlParsed": true,
+        "ids": [],
+        "localReferences": [],
+        "elementCount": 4
+      }
+    },
+    {
+      "file": "icons/voltar.svg",
+      "sha256": "0f6d79db17245e10b71a3f3e4f934d4ce92e54c792952d8c481c559e34453621",
+      "xml": {
+        "xmlParsed": true,
+        "ids": [],
+        "localReferences": [],
+        "elementCount": 3
+      }
+    },
+    {
+      "file": "icons/alerta.svg",
+      "sha256": "983f5532f300766d55fd5f72f06ee34e005939bf9e92715f747de3526befb5f7",
+      "xml": {
+        "xmlParsed": true,
+        "ids": [],
+        "localReferences": [],
+        "elementCount": 4
+      }
+    }
+  ],
+  "sprite": {
+    "file": "icons/sprite.svg",
+    "sha256": "b106ab0f4ec1ef844a41fa808b90a7427bd56eed8e956bdc9dd462a61a1a9280",
+    "inspection": {
+      "xmlParsed": true,
+      "ids": [
+        "f015n-v1-salvar",
+        "f015n-v1-voltar",
+        "f015n-v1-alerta"
+      ],
+      "localReferences": [],
+      "elementCount": 12
+    }
+  },
+  "preview": {
+    "file": "preview.html",
+    "referenceCount": 15,
+    "allReferencesResolveInDocument": true,
+    "uniqueSymbolDefinitions": 3,
+    "twoCompositionsShareOneSprite": true,
+    "sizes": [
+      16,
+      24,
+      32
+    ],
+    "consumerSemantics": "Authored hidden SVGs in named controls and role=img standalone; AT unverified"
+  },
+  "negativeCases": [
+    {
+      "case": "activeElement",
+      "input": "<svg xmlns=\"http://www.w3.org/2000/svg\"><script>alert(1)</script></svg>",
+      "rejected": true,
+      "reason": "Unsafe or unsupported element"
+    },
+    {
+      "case": "activeAttribute",
+      "input": "<svg xmlns=\"http://www.w3.org/2000/svg\" onload=\"alert(1)\"></svg>",
+      "rejected": true,
+      "reason": "Unsafe or unsupported attribute"
+    },
+    {
+      "case": "externalResource",
+      "input": "<svg xmlns=\"http://www.w3.org/2000/svg\"><use href=\"https://example.invalid/icon.svg#save\"/></svg>",
+      "rejected": true,
+      "reason": "External or active reference"
+    },
+    {
+      "case": "brokenSymbol",
+      "input": "<svg xmlns=\"http://www.w3.org/2000/svg\"><use href=\"#missing\"/></svg>",
+      "rejected": true,
+      "reason": "Broken local reference"
+    },
+    {
+      "case": "duplicateId",
+      "input": "<svg xmlns=\"http://www.w3.org/2000/svg\"><symbol id=\"dup\" viewBox=\"0 0 24 24\"/><symbol id=\"dup\" viewBox=\"0 0 24 24\"/></svg>",
+      "rejected": true,
+      "reason": "Duplicate ID"
+    },
+    {
+      "case": "dtdEntity",
+      "input": "<!DOCTYPE svg [<!ENTITY x SYSTEM \"file:///denied\">]><svg xmlns=\"http://www.w3.org/2000/svg\">&x;</svg>",
+      "rejected": true,
+      "reason": "Exception calling \"Load\" with \"1\" argument(s): \"For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.\""
+    }
+  ],
+  "existingInventoryModified": false,
+  "limits": [
+    "No rendered capture",
+    "16px recognition and optical weight UNVERIFIED",
+    "Brand token numeric values and contrast UNVERIFIED",
+    "PNG exports UNVERIFIED",
+    "Accessibility tree and assistive technology UNVERIFIED",
+    "No build, network or external effects"
+  ],
+  "qualityVerdict": null
+}

@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-02T15:28:29.865Z",
+  "head": "dfb44cda9df00868295ee7dde1ba74441d66e9de",
+  "scope": "exact-worktree-current-files",
+  "baselineClusters": 14,
+  "files": 34,
+  "removed": 0,
+  "moved": 0,
+  "clusters": [
+    {
+      "id": 1,
+      "paths": [
+        {
+          "path": ".agents/skills/react-bits-frontend/SKILL.md",
+          "sha256": "e584e98f95d0ed8d7703a53ef8e006a702c8fb3a3f3efca3f31bd1d73666c77c"
+        },
+        {
+          "path": ".claude/skills/react-bits-frontend/SKILL.md",
+          "sha256": "e584e98f95d0ed8d7703a53ef8e006a702c8fb3a3f3efca3f31bd1d73666c77c"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 2,
+      "paths": [
+        {
+          "path": ".codex/delegation-matrix.json",
+          "sha256": "e8c5eb1bf2f0568d453cbe5fb5e28a3b4cce99f2a93028b52f36bc5e7246268c"
+        },
+        {
+          "path": ".codex/delegation-parity.json",
+          "sha256": "e8c5eb1bf2f0568d453cbe5fb5e28a3b4cce99f2a93028b52f36bc5e7246268c"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 3,
+      "paths": [
+        {
+          "path": ".sinapse-ai/core/elicitation/agent-elicitation.js",
+          "sha256": "92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81"
+        },
+        {
+          "path": ".sinapse-ai/elicitation/agent-elicitation.js",
+          "sha256": "92abc291cecff9b8bb9153d5fbac84ad5217cff4d0d01e0495785a939334cd81"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 4,
+      "paths": [
+        {
+          "path": ".sinapse-ai/core/elicitation/task-elicitation.js",
+          "sha256": "fa80775a58edfb83abe8cc91e37f351830024e870168e5c12728b29f516fe94c"
+        },
+        {
+          "path": ".sinapse-ai/elicitation/task-elicitation.js",
+          "sha256": "fa80775a58edfb83abe8cc91e37f351830024e870168e5c12728b29f516fe94c"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 5,
+      "paths": [
+        {
+          "path": ".sinapse-ai/git-hooks/lib/framework-guard.js",
+          "sha256": "4dbea5a072425ac0c23664e80a6bbb009a54ab0be4a2df76747d6bc99a1c39eb"
+        },
+        {
+          "path": "bin/utils/framework-guard.js",
+          "sha256": "4dbea5a072425ac0c23664e80a6bbb009a54ab0be4a2df76747d6bc99a1c39eb"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 6,
+      "paths": [
+        {
+          "path": ".sinapse-ai/git-hooks/lib/secret-scanner-core.js",
+          "sha256": "f221f41844640d26dca6c7ad2be1e833f5534ab0a9f343bf9c53d4c11da1265c"
+        },
+        {
+          "path": "bin/utils/secret-scanner-core.js",
+          "sha256": "f221f41844640d26dca6c7ad2be1e833f5534ab0a9f343bf9c53d4c11da1265c"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 7,
+      "paths": [
+        {
+          "path": ".sinapse-ai/git-hooks/lib/staged-protected-files-guard.js",
+          "sha256": "870c6bee1f9f40b9f7c13ad9fbb36e0279b37f19dc7d4da59708cffdfd8cb383"
+        },
+        {
+          "path": "bin/utils/staged-protected-files-guard.js",
+          "sha256": "870c6bee1f9f40b9f7c13ad9fbb36e0279b37f19dc7d4da59708cffdfd8cb383"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 8,
+      "paths": [
+        {
+          "path": ".sinapse-ai/git-hooks/lib/staged-secret-scan.js",
+          "sha256": "4bae97bdc37744b0abd8019339299fb0a2aa00c1c25a8f980addb8a3194cc570"
+        },
+        {
+          "path": "bin/utils/staged-secret-scan.js",
+          "sha256": "4bae97bdc37744b0abd8019339299fb0a2aa00c1c25a8f980addb8a3194cc570"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 9,
+      "paths": [
+        {
+          "path": ".sinapse-ai/git-hooks/lib/staged-sql-guard.js",
+          "sha256": "8cdf4ea05744168eabea3ff1db1e0710cdffa00fe4acb11b50bbbc535d360f4e"
+        },
+        {
+          "path": "bin/utils/staged-sql-guard.js",
+          "sha256": "8cdf4ea05744168eabea3ff1db1e0710cdffa00fe4acb11b50bbbc535d360f4e"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 10,
+      "paths": [
+        {
+          "path": "audits/archived/.gitkeep",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "audits/promoted/.gitkeep",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "governance/proposals/archive/.gitkeep",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 11,
+      "paths": [
+        {
+          "path": "docs/guides/agents/traces/00-shared-activation-pipeline.md",
+          "sha256": "865198619958d6a659a090e554f22af2986deda46a9c8f41ff29038ab566792a"
+        },
+        {
+          "path": "docs/guides/agents/traces/00-shared-activation-pipeline.v1-act8.md",
+          "sha256": "865198619958d6a659a090e554f22af2986deda46a9c8f41ff29038ab566792a"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 12,
+      "paths": [
+        {
+          "path": "sinapse/agents/sinapse-orqx.md",
+          "sha256": "31a5db865451c56f79190ef760643c20e0e7862be6d2b777498817c5b9822317"
+        },
+        {
+          "path": "sinapse/agents/snps-orqx.md",
+          "sha256": "31a5db865451c56f79190ef760643c20e0e7862be6d2b777498817c5b9822317"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 13,
+      "paths": [
+        {
+          "path": "squads/squad-council/preferences/README.md",
+          "sha256": "db085ffd3c34a091ac9263bd83e5a6a0c8d0b7d166ffa44f69a4406c8ac14e4d"
+        },
+        {
+          "path": "squads/squad-cybersecurity/preferences/README.md",
+          "sha256": "db085ffd3c34a091ac9263bd83e5a6a0c8d0b7d166ffa44f69a4406c8ac14e4d"
+        },
+        {
+          "path": "squads/squad-finance/preferences/README.md",
+          "sha256": "db085ffd3c34a091ac9263bd83e5a6a0c8d0b7d166ffa44f69a4406c8ac14e4d"
+        },
+        {
+          "path": "squads/squad-paidmedia/preferences/README.md",
+          "sha256": "db085ffd3c34a091ac9263bd83e5a6a0c8d0b7d166ffa44f69a4406c8ac14e4d"
+        },
+        {
+          "path": "squads/squad-storytelling/preferences/README.md",
+          "sha256": "db085ffd3c34a091ac9263bd83e5a6a0c8d0b7d166ffa44f69a4406c8ac14e4d"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    },
+    {
+      "id": 14,
+      "paths": [
+        {
+          "path": "tests/unit/squad/fixtures/empty-manifest-squad/squad.yaml",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "tests/unit/squad/fixtures/empty-tasks-squad/tasks/.gitkeep",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "tests/unit/squad/fixtures/missing-files-squad/agents/.gitkeep",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "tests/unit/squad/fixtures/missing-files-squad/tasks/.gitkeep",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        }
+      ],
+      "identicalNow": true,
+      "decision": "preserve",
+      "basis": "operational-folder-audit.md",
+      "consumerCoverage": "observed-static-or-distribution-boundary; external/dynamic unknown"
+    }
+  ]
+}

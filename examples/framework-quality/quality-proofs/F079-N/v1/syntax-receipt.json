@@ -1,0 +1,27 @@
+{
+  "caseId": "F079-N",
+  "checks": [
+    {
+      "file": "card-picker.mjs",
+      "command": "node --check card-picker.mjs",
+      "exitCode": 0,
+      "stderr": "",
+      "scope": "syntax only; no DOM/runtime/typecheck/build"
+    },
+    {
+      "file": "fixtures.mjs",
+      "command": "node --check fixtures.mjs",
+      "exitCode": 0,
+      "stderr": "",
+      "scope": "syntax only; no DOM/runtime/typecheck/build"
+    },
+    {
+      "file": "card-picker.stories.js",
+      "command": "node --check card-picker.stories.js",
+      "exitCode": 1,
+      "stderr": "(node:34232) Warning: Failed to load the ES module: C:\\Users\\Caio Imori\\.codex\\worktrees\\framework-quality-full\\sinapse-ai\\examples\\framework-quality\\output\\quality-full-20261007\\native-evaluation\\actor-work\\F079-N\\card-picker.stories.js. Make sure to set \"type\": \"module\" in the nearest package.json file or use the .mjs extension.\n(Use `node --trace-warnings ...` to show where the warning was created)\nC:\\Users\\Caio Imori\\.codex\\worktrees\\framework-quality-full\\sinapse-ai\\examples\\framework-quality\\output\\quality-full-20261007\\native-evaluation\\actor-work\\F079-N\\card-picker.stories.js:1\r\nimport {CardPicker} from './card-picker.mjs';import {fixtures} from './fixtures.mjs';export default {title:'Components/CardPicker',component:CardPicker,parameters:{tokens:'./tokens.css',fixtureOnly:true}};const render=(args)=>{const host=document.createElement('div');const selected=document.createElement('p');selected.setAttribute('role','status');const picker=CardPicker({...args,onSelect:card=>{selected.textContent='Selecionado: '+card.id},onRetry:()=>{picker.update(fixtures.loading);queueMicrotask(()=>picker.update(fixtures.default))}});host.append(picker,selected);return host};export const Default={args:fixtures.default,render};export const Loading={args:fixtures.loading,render};export const Empty={args:fixtures.empty,render};export const Error={args:fixtures.error,render};export const LongContent={args:fixtures.long,render};export const Denial={args:fixtures.denial,render};export const Modal={args:fixtures.default,render:args=>{const host=render(args);queueMicrotask(()=>host.querySelector('section').open());return host}};\r\n^^^^^^\r\n\r\nSyntaxError: Cannot use import statement outside a module\r\n    at wrapSafe (node:internal/modules/cjs/loader:1735:18)\r\n    at checkSyntax (node:internal/main/check_syntax:76:3)\r\n\r\nNode.js v24.13.1",
+      "scope": "syntax only; no DOM/runtime/typecheck/build"
+    }
+  ],
+  "execution": "native syntax probes only"
+}

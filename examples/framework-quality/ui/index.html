@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lume — Projetos</title><link rel="stylesheet" href="../shared.css"><script src="app.js" defer></script></head>
+<body>
+<a class="skip" href="#main">Pular para os projetos</a>
+<div class="shell">
+  <aside class="rail"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span>lume</a><nav aria-label="Seções"><a href="index.html" aria-current="page">Projetos</a><a href="../motion/index.html">Processo</a></nav><p class="rail-note">Estúdio de planejamento<br>Marca e projetos fictícios.</p></aside>
+  <main class="main" id="main">
+    <div class="topline"><span class="eyebrow">Seu espaço de criação</span><span>03 projetos · Lume</span></div>
+    <header class="intro"><span class="eyebrow">Clareza para o próximo passo</span><h1>Boas ideias.<br>Projetos em movimento.</h1><p>Do primeiro rascunho à última revisão, encontre o que importa e siga com foco.</p></header>
+    <div class="toolbar"><label class="field search-field" for="search">Buscar projeto<input type="search" id="search" placeholder="Nome ou assunto" autocomplete="off"></label><button class="button" id="refresh" type="button">Atualizar lista</button></div>
+    <p class="count" id="count">3 projetos no seu espaço</p>
+    <div class="projects" id="projects"></div>
+    <div class="empty" id="empty" hidden><h2>Nenhum projeto encontrado.</h2><p>Tente outro nome ou volte à sua lista completa.</p><button class="button" id="clear" type="button">Limpar busca</button></div>
+    <div class="error" id="error" hidden><h2>A lista não pôde ser atualizada.</h2><p>Seus projetos continuam preservados. Tente carregar novamente.</p><button class="button primary" id="retry" type="button">Tentar novamente</button></div>
+    <p class="footer-note">Um espaço para planejar, produzir e revisar.</p>
+  </main>
+</div>
+<dialog id="details" aria-labelledby="detail-title"><form id="details-form"><span class="eyebrow" id="detail-category"></span><h2 id="detail-title"></h2><p id="detail-description"></p><label class="field" for="detail-status">Etapa do projeto<select id="detail-status"><option>Planejar</option><option>Produzir</option><option>Revisar</option></select></label><div class="dialog-actions"><button class="button" id="cancel" type="button">Cancelar</button><button class="button primary" type="submit">Salvar etapa</button></div></form></dialog>
+<div class="toast" id="toast" hidden><span id="toast-text"></span><button id="undo" type="button">Desfazer</button></div>
+<p class="sr-only" role="status" aria-live="polite" id="announcement"></p>
+</body></html>

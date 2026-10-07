@@ -26,6 +26,22 @@
   "files": [
     "bin/",
     "scripts/",
+    "research/framework-evolution/sources.json",
+    "research/framework-evolution/heuristics.json",
+    "research/framework-evolution/competencies.json",
+    "research/expert-evolution/expert-profiles.json",
+    "research/expert-evolution/source-program.json",
+    "research/expert-evolution/jev-use-cases.json",
+    "research/expert-evolution/model-policy.json",
+    "research/expert-evolution/native-availability-receipt.json",
+    "research/expert-evolution/task-bindings.json",
+    "research/expert-evolution/operational-contracts.json",
+    "research/expert-evolution/deliverable-index.json",
+    "research/expert-evolution/benchmark-protocol.json",
+    "research/expert-evolution/benchmark-results.json",
+    "research/expert-evolution/benchmark-baseline-output.json",
+    "research/expert-evolution/benchmark-enriched-output.json",
+    "research/expert-evolution/competence-runtime.json",
     "packages/",
     ".sinapse-ai/",
     "!.sinapse-ai/node_modules",
@@ -86,7 +102,8 @@
     "!**/dist/**",
     "!**/*.map",
     "!**/*.zip",
-    ".sinapse-ai/development/templates/**"
+    ".sinapse-ai/development/templates/**",
+    "vendor/braces-depth-guard/"
   ],
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
@@ -185,12 +202,13 @@
     "fs-extra": "^11.3.2",
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^4.3.2",
     "ora": "^5.4.1",
     "proper-lockfile": "^4.1.2",
     "semver": "^7.7.2",
     "tar": "^7.5.22",
-    "yaml": "^2.8.3"
+    "yaml": "^2.8.3",
+    "braces": "file:vendor/braces-depth-guard"
   },
   "keywords": [
     "ai-agents",
@@ -236,7 +254,8 @@
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "semantic-release": "^25.0.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "npm": "file:vendor/npm-security-refresh/npm-security-refresh-11.19.1-sinapse.1.tgz"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts}": [
@@ -258,11 +277,21 @@
     "diff": "^5.2.0",
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
-    "brace-expansion": "^5.0.6",
-    "fast-uri": "^3.1.4",
-    "ip-address": "^10.1.1",
+    "brace-expansion": "5.0.12",
+    "fast-uri": "^3.1.8",
+    "ip-address": "10.7.3",
     "@babel/core": "^7.29.6",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.2",
+    "braces": "$braces",
+    "npm": "$npm",
+    "baseline-browser-mapping": "2.11.0",
+    "browserslist": "4.28.7",
+    "@actions/http-client": {
+      "undici": "6.28.1"
+    },
+    "@semantic-release/github": {
+      "undici": "7.29.1"
+    }
   },
   "directories": {
     "doc": "docs",

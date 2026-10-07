@@ -1,0 +1,15 @@
+# F079-N — implementação sintética delimitada
+
+Handoff observado: CardPicker com API onSelect, rotas /lista e /detalhe, cliente só na interação, tokens Vanta/White. Não há módulos reais, versões instaladas, valores oficiais além dos nomes dos tokens, story validada ou CI remoto expostos. O artefato é uma fixture isolada; não altera projeto de produção nem substitui stack.
+
+Correspondência: card-picker.mjs implementa CardPicker({cards,state,onSelect,onRetry}); onSelect recebe {id,title}, premissa reversível porque payload literal não foi fornecido. fixtures.mjs é dado público sintético. card-picker.stories.js é CSF com imports do componente real e fixtures, sem duplicar render. runner.html exporta execução estática própria; não representa servidor oficial Storybook. tokens.css usa Vanta preto/White branco como mapeamento provisório, medidas próprias de fixture; fidelidade a tokens de produção UNVERIFIED.
+
+Integração desejada: /lista e /detalhe são hosts server-side com leitura/autorização no servidor e só DTO público serializável. Host monta o componente em ilha cliente e resolve onSelect localmente; não serializa callback servidor nem importa credenciais. O HTML ilustra rotas por query; não comprova router do aplicativo. Segredos, service_role e dados privados ausentes da fixture.
+
+Trade-off: dialog nativo preserva semântica/modalidade e diminui dependências; suporta foco inicial, ciclo Tab/Shift+Tab, Escape e retorno. Compatibilidade e tecnologias assistivas exigem execução real. CSS intrínseco/propriedades lógicas evita larguras rígidas; conteúdo longo não é cortado. Não esconder overflow para simular conformidade. Preferir biblioteca do projeto se contrato comprovado exigir.
+
+Sem instalação, build local, publicação ou remoção. Falha observada: record-exposure inicialmente recebeu caminho relativo completo e o ledger tentou prefixá-lo duas vezes; recuperação com exposure-ack.json relativo ao diretório privado. Nenhum conteúdo foi removido. Reviewer independente mantém autoridade sobre verdicts.
+
+Provas a executar pelo root: servir v1 em HTTP e capturar runner.html?story=Default e LongContent e Modal em 1440x900 e 390x844; medir fixtureMeasure antes/depois de abrir e fechar; exigir scrollWidth<=innerWidth. Abrir via Tab+Enter, verificar foco contido por Tab e Shift+Tab, Escape e retorno ao botão exato; selecionar e conferir callback; Error -> retry -> loading -> ready; Loading, Empty, Denial não oferecem seleção. Abrir Modal via script somente como variante complementar, não prova de abertura por teclado.
+
+CI: executar os comandos do aplicativo somente no CI remoto existente e autorizado após obter locator/config/versões; registrar job ID, SHA, exit, logs e bundle antes/depois com mesmas entradas. Não há acesso/locator nesta exposição. AT e percepção visual continuam UNVERIFIED. Não inferir CWV de campo, build, segurança real ou expertise validada desta fixture.

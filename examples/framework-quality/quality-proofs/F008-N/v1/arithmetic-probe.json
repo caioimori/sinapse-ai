@@ -1,0 +1,33 @@
+{
+  "caseId": "F008-N",
+  "method": "Native Node arithmetic, directCost/units and multiplication reversal. No student or reviewer judgment executed.",
+  "rows": [
+    {
+      "label": "brief-case",
+      "revenue": 1440,
+      "directCost": 900,
+      "units": 12,
+      "expectedUnitCost": 75,
+      "calculatedUnitCost": 75,
+      "reconstructedCost": 900,
+      "costRevenueRatio": 0.625,
+      "expectedMatches": true
+    },
+    {
+      "label": "designer-authored-retry",
+      "revenue": 1920,
+      "directCost": 960,
+      "units": 16,
+      "expectedUnitCost": 60,
+      "calculatedUnitCost": 60,
+      "reconstructedCost": 960,
+      "costRevenueRatio": 0.5,
+      "expectedMatches": true
+    }
+  ],
+  "observationLimits": [
+    "Only numeric calculations observed; rubric examples are authored applications of stated rules, not independent evaluation.",
+    "Learner performance, transfer, rater reliability, perceived accessibility and psychometric validity UNVERIFIED."
+  ],
+  "externalEffectsObserved": false
+}

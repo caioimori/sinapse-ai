@@ -1,0 +1,86 @@
+{
+  "caseId": "F007-N",
+  "deliverable": "architect-analyze-impact",
+  "status": "PROPOSAL_ONLY",
+  "scope": "Análise arquitetural sintética; nenhum SQL, implementação, delegação executada ou efeito externo.",
+  "grounding": {
+    "facts": ["Reservas recebe retries com o mesmo eventId.", "Estoque e cobrança pertencem a domínios distintos.", "1% de duplicatas aciona rollback.", "Proposta apenas; nenhuma ação de produção autorizada."],
+    "caseLocator": "generation-cases/F007-N.json#/case/facts",
+    "taskLocator": "sources/c27b2e642b66968e772b23afd3f2e71aed1612d235a5df7bb1a1468bf82bf37b.json#/text:Purpose, Parameters, Validation Rules",
+    "authorityLocator": "sources/eb26e12277ff48e41af5147a72bed8ddf96139546b07a9c75b29970edb7a912b.json#/text:persona.responsibility_boundaries",
+    "knowledgeStatus": "contexts/architect.json#/capsules/0/profile: planned; validatedExpertise=false. Heurísticas INFERRED, não prova externa ou experiência validada."
+  },
+  "decision": {
+    "recommendation": "Preservar três limites de domínio e integrar por contratos idempotentes. Separação lógica não obriga três serviços físicos.",
+    "default": "Se a topologia ainda não existe, propor monólito modular inicialmente; se já há serviços, preservar a topologia até obter evidência de impacto.",
+    "alternative": "Distribuir cada domínio só quando houver necessidade comprovada de deploy, escala, equipe ou isolamento independente; nenhuma dessas necessidades foi fornecida.",
+    "negativeConsequence": "Integração entre domínios exige estados intermediários, reconciliação e compensações; perde-se a expectativa de uma transação única sobre estoque e cobrança.",
+    "requiresImplementationApproval": true
+  },
+  "domainBoundaries": [
+    {"domain": "Reservas", "owns": "Intenção de reserva, identidade da operação e estado do fluxo.", "contract": "Solicita retenção de estoque e cobrança; recebe resultados correlacionados. Não escreve no estado privado dos outros domínios."},
+    {"domain": "Estoque", "owns": "Disponibilidade e retenção/liberação de unidades.", "contract": "Aceita comandos de reservar/liberar correlacionados à reserva e devolve resultado; só este domínio decide se há disponibilidade."},
+    {"domain": "Cobrança", "owns": "Estado e identidade da operação financeira e reconciliação com eventual provedor.", "contract": "Aceita cobrar/consultar/compensar correlacionados à reserva; só este domínio decide o estado financeiro. Timeout não prova falha de cobrança."}
+  ],
+  "integrationProposal": {
+    "messageFields": ["eventId", "reservationId", "operation", "contractVersion", "payload", "correlationId"],
+    "flow": "Reservas solicita retenção; após confirmação solicita cobrança; após resultado financeiro confirmado conclui a reserva. Resultado incerto mantém o fluxo pendente para reconciliação, sem nova cobrança com chave diferente.",
+    "ownership": "Resultados têm eventId próprio e correlationId da reserva; comandos derivados usam identificador determinístico da operação original e destino. Cada domínio mantém seu contrato e sua máquina de estados.",
+    "delivery": "Propor entrega ao menos uma vez e consumidores idempotentes. Atomicidade entre resultado local e intenção de publicação é requisito para data-engineer/developer avaliar, não garantia observada.",
+    "failure": "Cobrança recusada pode solicitar liberação idempotente da retenção; cobrança incerta exige consulta/reconciliação. Compensação financeira necessita autorização própria e não será executada neste caso."
+  },
+  "idempotency": {
+    "scope": "Chave lógica proposta: domínio receptor + operation + eventId; incluir tenant somente se multitenancy for confirmado. eventId deve permanecer estável nos retries, com escopo/unicidade definidos no contrato.",
+    "payload": "Associar uma impressão digital estável do payload à chave; mesma chave com payload diferente é conflito, não nova operação financeira ou de estoque.",
+    "completedRetry": "Mesma chave e mesmo payload devolvem o resultado já registrado sem repetir retenção, cobrança ou publicação lógica.",
+    "concurrentRetry": "A tomada da operação deve ser durável e atômica no domínio proprietário; apenas um executor realiza o efeito. Concorrentes observam resultado ou estado em processamento.",
+    "crashRecovery": "Persistir estado em processamento e resultado durável; queda após efeito e antes de confirmação requer reconciliação. Não usar cache volátil como única proteção.",
+    "externalCharge": "Se houver provedor financeiro, reutilizar chave estável aceita por ele e consultar o resultado após timeout; proteção local isolada não garante efeito único externo.",
+    "retention": "Reter a memória de deduplicação por pelo menos o horizonte máximo de retry/replay e reconciliação; duração não foi fornecida. Replays após expiração exigem política explícita, nunca cobrança automática por perda de memória.",
+    "invariants": ["No máximo uma retenção efetiva por operação lógica.", "No máximo uma cobrança efetiva por operação lógica.", "Todo resultado permite correlacionar reserva, chave e estado final/pendente."]
+  },
+  "impactAnalysis": {
+    "depth": "medium conceitual, proposta; não rastreamento de repositório real",
+    "modificationType": "modify proposto, a confirmar",
+    "componentPath": null,
+    "dependencyChain": "Retry -> ingresso de Reservas -> comandos para Estoque/Cobrança -> resposta/reconciliação -> estado da reserva. Uma falha de deduplicação pode repetir efeitos e propagar inconsistência.",
+    "affectedDomains": ["Reservas", "Estoque", "Cobrança"],
+    "affectedComponentCount": null,
+    "observedPropagationDepth": null,
+    "riskAssessment": "Risco proposto alto: efeitos financeiros/estoque duplicados, corrida entre retries e recuperação incompleta. Frequência, impacto real e componentes afetados não foram observados.",
+    "canonicalRuntime": "UNTESTED: falta component-path e parametrização confirmada. O trecho canônico deixa propagationPredictor=null, sua inicialização está comentada como arquivada e predictChangePropagation chama esse objeto. Não executar nem declarar sucesso do task-runner; registrar para o responsável pelo framework, sem reparar fonte protegida."
+  },
+  "rollbackTrigger": {
+    "literalThreshold": "1% de duplicatas aciona rollback; manter o limiar fornecido.",
+    "ambiguity": "O caso não define se duplicata significa entrega repetida ou efeito repetido, nem janela/denominador. Não há medição fornecida nem autorização de rollback.",
+    "proposedOperationalDefinition": "Para aprovação: D = operações lógicas distintas com efeito repetido confirmado em qualquer domínio; N = operações lógicas distintas avaliadas na mesma coorte. Taxa = 100*D/N. Contar cada operação uma vez, mesmo que vários retries repitam o efeito.",
+    "proposedWindow": "Janela móvel de 15 minutos, calculada a cada minuto, com N>=1000; valores são premissas propostas, não fatos aprovados. Com N=0 não calcular; com N<1000 registrar amostra insuficiente e escalar duplicatas confirmadas, sem concluir segurança.",
+    "trigger": "Na definição proposta, taxa >=1% dispara solicitação de rollback; D=10 e N=1000 atinge o limiar; D=9 e N=1000 não o atinge. Não aguardar um segundo período acima do limiar.",
+    "retryTelemetry": "Medir também entregas repetidas pelo mesmo eventId / total de entregas. Não confundir retry esperado com efeito duplicado. Se o dono confirmar que o 1% se refere a entregas, aplicar 100*entregas_repetidas/entregas_totais com a janela acordada; não substituir silenciosamente essa política.",
+    "proposalActions": ["Alertar responsável e preservar evidências correlacionadas sem segredos.", "Conter novas operações afetadas conforme política aprovada.", "Solicitar retorno à versão anterior conhecida via devops, com aprovação do Caio para este lote.", "Separar rollback de código de reparação de dados; conferir compatibilidade do estado durável e preservar histórico de idempotência.", "Reconciliar estados e encaminhar compensações autorizadas; rollback não desfaz cobrança já realizada."],
+    "resumeCriteria": "Proposta para aprovação: versões compatíveis, reconciliação das operações afetadas e duas janelas completas abaixo de 1%, com amostra mínima e nenhum efeito duplicado pendente. Nenhuma dessas evidências existe neste caso."
+  },
+  "handoffContracts": [
+    {"owner": "data-engineer", "input": "Limites, invariantes, chaves lógicas e horizonte de replay a confirmar.", "output": "Projeto de persistência, atomicidade, isolamento, retenção e recuperação por domínio; nenhuma definição de tabelas/índices/SQL pelo architect.", "status": "ROUTE_ONLY_NOT_DISPATCHED"},
+    {"owner": "developer", "input": "Contratos acima e story não-Draft validada antes de código.", "output": "Implementação respeitando os domínios e testes de retry/concorrência/crash com dados isolados.", "status": "ROUTE_ONLY_NOT_DISPATCHED"},
+    {"owner": "quality-gate", "input": "Artefato, definição aprovada do KPI e execução futura dos cenários.", "output": "Avaliação independente e evidência; o architect não atribui PASS.", "status": "ROUTE_ONLY_NOT_DISPATCHED"},
+    {"owner": "devops", "input": "Versão anterior, compatibilidade e aprovação de publicação/rollback específica.", "output": "Plano operacional e rollback autorizado; sem push, PR, deploy ou reversão nesta execução.", "status": "ROUTE_ONLY_NOT_DISPATCHED"}
+  ],
+  "verificationToExecute": [
+    {"scenario": "Retry sequencial com mesmo eventId/payload", "expected": "Mesmo resultado e exatamente um efeito por domínio", "status": "UNTESTED"},
+    {"scenario": "Retries concorrentes", "expected": "Uma execução efetiva; demais recebem estado/resultado consistente", "status": "UNTESTED"},
+    {"scenario": "Mesmo eventId com payload diferente", "expected": "Conflito rastreável e nenhum segundo efeito", "status": "UNTESTED"},
+    {"scenario": "Queda após cobrança e antes de confirmação", "expected": "Reconciliação encontra cobrança anterior; sem nova cobrança", "status": "UNTESTED"},
+    {"scenario": "Replay no limite de retenção", "expected": "Política explícita impede repetição de efeito", "status": "UNTESTED"},
+    {"scenario": "10/1000 versus 9/1000 e amostra insuficiente", "expected": "Gatilho >=1% somente conforme métrica aprovada; falta de amostra não vira verde", "status": "UNTESTED"},
+    {"scenario": "Rollback com operação financeira já concluída", "expected": "Histórico preservado, compatibilidade conferida e compensação separadamente autorizada", "status": "UNTESTED"}
+  ],
+  "requirementLocators": {
+    "R1": ["#/domainBoundaries", "#/integrationProposal", "#/decision"],
+    "R2": ["#/idempotency", "#/verificationToExecute"],
+    "R3": ["#/rollbackTrigger"],
+    "R4": ["#/scope", "#/handoffContracts", "#/impactAnalysis/canonicalRuntime"]
+  },
+  "evidenceLimits": ["Fontes inteiras recebidas; a prova de registro do harness não avalia semântica.", "Artefato documental concreto; não implementação nem execução do serviço.", "Sem acesso ao código do serviço, banco, provedor, logs ou topologia.", "Grounding, execução e qualidade de domínio devem ser avaliados separadamente.", "Runtime, persistência, concorrência, rollback e competência validada permanecem UNVERIFIED; dispositivos, percepção e AT não são exigidos por este briefing e não foram observados."],
+  "externalEffectsObserved": false
+}

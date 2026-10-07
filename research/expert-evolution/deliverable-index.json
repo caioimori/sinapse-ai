@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "status": "navigation-not-expertise",
+  "deliverables": [
+    {"id":"frontend","aliases":["ui","interface","site"],"family":"frontend","agentId":"dx-frontend-engineer","command":"implement-responsive-layouts","gap":"Evidence is task-bound; navigation does not establish aesthetic or production quality."},
+    {"id":"motion","aliases":["animation","animacao","animação","web-motion"],"family":"motion","agentId":"css-motion-artist","command":"create-css-animation","gap":"Device, interruption and reduced-motion require artifact observation."},
+    {"id":"reel","aliases":["video","vídeo","reels"],"family":"video","agentId":"production-director","command":"write-video-script","gap":"Script contract resolves; render, media rights, audio and final pixels need separate execution and review."},
+    {"id":"carrossel","aliases":["carousel","slides"],"family":"carousel","agentId":"content-engineer","command":"structure-carousel-progression","gap":"Progression contract resolves; final design/export/accessibility require observation."},
+    {"id":"anuncio","aliases":["anúncio","ads","copy","advertisement"],"family":"advertising","agentId":"ad-copywriter","command":"write-ad-copy-variations","gap":"The fifth need is advertising copy, a navigation assumption; conversion and transfer are not established."}
+  ],
+  "limits":["Maximum three active acquisition families; navigation creates no acquisition.","Canonical IDs and exact task bindings are resolved at query time.","Private captures, feedback and reviewed overlays remain outside this public index."]
+}

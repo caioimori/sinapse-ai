@@ -1,0 +1,15 @@
+{
+  "workflow_id": "WF-20261007-expertise-security-hardening",
+  "mode": "change",
+  "complexity": "complicated",
+  "outcome": "Rejeitar dois bypasses Windows e limitar resposta remota sem invalidar a instalação ativa",
+  "scope": "Somente novo worktree e três módulos autorizados; sem HOME real, API paga, CI ou dependências",
+  "inputs": ["PREPARADA devops fee0eb5a", "Accepted story", "Triagem e sete probes Windows"],
+  "outputs": ["Leitura estável", "Allowlist snapshot QA", "Resposta Jev limitada", "Testes e freeze"],
+  "acceptance": ["AC1-AC4 da story Accepted", "172 contextos e 582 critérios preservados"],
+  "tasks": [
+    {"task_id":"T01","objective":"Fixar escopo e validar workflow antes do código","owner":"developer","depends_on":[],"command_or_tool":"node C:/Users/Caio Imori/.codex/scripts/validate-architecture-first.cjs docs/framework/expert-evolution-2026-10/security-hardening-workflow.json --json","timeout_ms":10000,"max_attempts":2,"inputs":["PREPARADA","Triagem"],"outputs":["Story Accepted","Spec","Workflow válido"],"acceptance":["Validador ok antes do patch"],"rollback":"Preservar worktree e fonte instalada; registrar bloqueio"},
+    {"task_id":"T02","objective":"Implementar os três contratos limitados e seus negativos","owner":"developer","depends_on":["T01"],"command_or_tool":"apply_patch nos três módulos e novo teste focal","timeout_ms":900000,"max_attempts":2,"inputs":["Story Accepted","Workflow válido","Shape Jev real sem conteúdo"],"outputs":["Patch","Negativos Windows e MockResponse"],"acceptance":["Não ler externo","Limite antes do parse","Hash e parse do mesmo Buffer"],"rollback":"Conservar alterações isoladas e a instalação antiga; não aplicar CAS"},
+    {"task_id":"T03","objective":"Comprovar limites e congelar o write set para devops","owner":"developer","depends_on":["T02"],"command_or_tool":"Lint focal; gate min-gb4 para Jest focal e matriz172 installed-scratch","timeout_ms":1200000,"max_attempts":2,"inputs":["Patch isolado","Baseline privado conferido"],"outputs":["Receipts focais","Matriz172","Freeze de hashes"],"acceptance":["582 critérios","Authority completa","12000/6000/3000","Nenhuma mutação na fonte instalada"],"rollback":"Manter fonte anterior ativa e reportar verificação ausente"}
+  ]
+}

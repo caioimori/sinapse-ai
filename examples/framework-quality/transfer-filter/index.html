@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Fornecedores · SINAPSE</title>
+  <style>
+    :root{--paper:#f5f5f0;--white:#fff;--ink:#141713;--muted:#62665f;--line:#d9ddd4;--soft:#e9ece4;--accent:#285848;--accent-soft:#e4eee8;--danger:#a33a32;--focus:#1a6eaa;--space:24px;--radius:6px;--font:"Segoe UI",Arial,sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--font)}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer;color:inherit}button:disabled{cursor:default}a{color:inherit;text-underline-offset:4px}h1,h2,h3,p{margin:0}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}[hidden]{display:none!important}
+    .app{min-height:100dvh;display:grid;grid-template-columns:204px minmax(0,1fr)}.sidebar{border-right:1px solid var(--line);padding:30px 20px;display:flex;flex-direction:column;gap:40px}.logo{font-size:20px;letter-spacing:-.05em;font-weight:650;text-decoration:none}.eyebrow{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}.logo small{display:block;font-size:9px;letter-spacing:.14em;font-weight:400;margin-top:3px}.navigation{display:grid;gap:6px}.navigation a{display:block;padding:11px 12px;border-radius:var(--radius);text-decoration:none;font-size:13px}.navigation a[aria-current]{background:var(--soft);font-weight:600}.sidebar-note{margin-top:auto;color:var(--muted);font-size:11px;max-width:22ch}
+    .workspace{padding:30px 34px 18px;min-width:0;max-width:1700px}.breadcrumb{font-size:11px;color:var(--muted);display:flex;gap:10px;align-items:center}.breadcrumb span:last-child{color:var(--ink)}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-top:26px}.heading h1{font-size:34px;line-height:1.2;letter-spacing:-.045em;font-weight:550}.heading p{color:var(--muted);font-size:12px;margin-top:8px}.workspace-mark{font-size:11px;white-space:nowrap;display:flex;align-items:center;gap:6px}.workspace-mark::before{content:"";width:7px;height:7px;background:var(--accent);border-radius:50%}
+    .toolbar{display:flex;gap:10px;margin-top:28px;align-items:center;flex-wrap:wrap}.search{flex:1;min-width:170px;position:relative;max-width:420px}.search label{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}.search input{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);width:100%;height:42px;padding:10px 13px;color:var(--ink)}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:var(--radius);min-height:42px;padding:9px 14px;background:var(--white);font-size:12px;font-weight:550;text-decoration:none}.button:hover{background:var(--soft)}.button.primary{background:var(--accent);color:var(--white);border-color:var(--accent)}.button.primary:hover{background:#204639}.button.quiet{background:transparent}.button[aria-expanded="true"]{border-color:var(--accent)}.filter-icon{display:block;width:14px;height:14px}.badge{background:var(--accent-soft);color:var(--accent);font-size:10px;border-radius:3px;min-width:18px;padding:1px 4px}.view-tools{display:flex;gap:10px;margin-left:auto}
+    .recap{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:14px;min-height:31px}.recap-label{font-size:11px;color:var(--muted);margin-right:3px}.filter-chip{border:1px solid var(--line);background:var(--soft);font-size:11px;border-radius:4px;min-height:30px;padding:5px 9px;white-space:normal;text-align:left}.filter-chip.negative{border-color:#b5c4b9;background:var(--accent-soft)}.text-button{border:0;background:none;padding:6px 4px;color:var(--muted);font-size:11px;text-decoration:underline;text-underline-offset:3px}
+    .content{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;margin-top:20px}.list-area{min-width:0}.list-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px;font-size:11px;color:var(--muted)}.list-meta strong{font-weight:550;color:var(--ink)}.table-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--white)}table{border-collapse:collapse;width:100%;table-layout:fixed;text-align:left}th{height:40px;background:#f0f2eb;color:var(--muted);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}th,td{padding:11px 12px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}th:first-child,td:first-child{width:30%}td{font-size:11px}tbody tr:last-child td{border-bottom:0}tbody tr[data-selected="true"]{background:#f1f6f2}.supplier-button{border:0;padding:0;background:transparent;text-align:left;font-weight:550;font-size:12px;display:block}.supplier-button:hover{text-decoration:underline;text-underline-offset:3px}.identity-id{display:block;color:var(--muted);font-size:10px;margin-top:3px}.status{display:inline-flex;align-items:center;gap:5px;line-height:1.4}.status::before{content:"";width:5px;height:5px;border-radius:50%;flex-shrink:0;background:var(--accent)}.status.attention::before{background:#a46f14}.status.waiting::before{background:#808b7b}.mobile-label{display:none}
+    .context{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:20px;height:fit-content;margin-top:27px}.context-top{display:flex;justify-content:space-between;align-items:start;gap:12px}.avatar{width:38px;height:38px;border:1px solid var(--line);border-radius:6px;background:var(--soft);display:grid;place-items:center;font-size:12px;font-weight:550}.context h2{font-size:17px;line-height:1.3;letter-spacing:-.02em;margin-top:16px;font-weight:550}.context .sub{font-size:11px;color:var(--muted);margin-top:4px}.detail-list{margin:20px 0 0;display:grid;gap:15px}.detail-list div{display:grid;gap:2px}.detail-list dt{color:var(--muted);font-size:10px}.detail-list dd{margin:0;font-size:12px}.context-note{border-top:1px solid var(--line);padding-top:15px;margin-top:20px;font-size:11px;color:var(--muted)}.context-note strong{font-weight:550;color:var(--ink);display:block;margin-bottom:5px}
+    .state{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:38px 22px;text-align:center}.state .state-symbol{border:1px solid var(--line);width:38px;height:38px;display:grid;place-items:center;border-radius:50%;margin:0 auto 15px;font-size:18px}.state h2{font-size:18px;font-weight:550;letter-spacing:-.02em}.state p{font-size:12px;color:var(--muted);max-width:42ch;margin:9px auto 18px}.state.error .state-symbol{border-color:#e0b9b4;color:var(--danger)}.footer{border-top:1px solid var(--line);display:flex;gap:14px;justify-content:space-between;align-items:start;margin-top:30px;padding-top:16px;font-size:10px;color:var(--muted)}.footer p{max-width:70ch}.footer details{flex-shrink:0}.footer summary{cursor:pointer}.footer details button{margin-top:8px;display:block;font-size:10px}
+    dialog{border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);padding:0;width:min(480px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 16px 60px #13171324}dialog::backdrop{background:#161b174c}.dialog-head{padding:23px 24px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:start;gap:14px}.dialog-head h2{font-size:21px;letter-spacing:-.035em;font-weight:550}.dialog-head p{font-size:11px;color:var(--muted);margin-top:5px}.icon-button{border:0;background:transparent;border-radius:4px;font-size:20px;line-height:1;min-height:32px;min-width:32px;padding:5px}.icon-button:hover{background:var(--soft)}.dialog-body{padding:20px 24px}.dialog-body fieldset{border:0;padding:0;margin:0 0 22px;min-width:0}.dialog-body legend{font-weight:550;font-size:12px;margin-bottom:12px}.operator-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:11px}.operator-row select{padding:7px 10px;background:var(--paper);border:1px solid var(--line);border-radius:4px;min-height:36px;color:var(--ink);max-width:100%}.choice-list{display:grid;gap:2px}.choice{display:flex;align-items:center;gap:10px;min-height:38px;font-size:12px;cursor:pointer}.choice input{width:16px;height:16px;margin:0;accent-color:var(--accent)}.choice .choice-description{margin-left:auto;font-size:10px;color:var(--muted)}.choice.parent{border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:7px;font-weight:550}.choice small{font-size:10px;color:var(--muted);font-weight:400;margin-left:auto}.draft-preview{padding:12px;background:var(--paper);border-radius:4px;font-size:11px;color:var(--muted);line-height:1.6}.draft-preview strong{color:var(--ink);font-weight:550}.dialog-footer{border-top:1px solid var(--line);padding:15px 24px;display:flex;justify-content:flex-end;gap:9px;background:var(--white);position:sticky;bottom:0}.columns-dialog{width:min(340px,calc(100% - 32px))}.columns-dialog .dialog-body{padding-block:15px}.required{opacity:.75}
+    @media(max-width:1200px){.app{grid-template-columns:175px minmax(0,1fr)}.sidebar{padding-inline:15px}.workspace{padding-inline:24px}.content{grid-template-columns:minmax(0,1fr) 220px;gap:16px}th,td{padding-inline:9px}.context{padding:16px}}
+    @media(max-width:1050px){.content{grid-template-columns:minmax(0,1fr)}.context{margin-top:0;display:grid;grid-template-columns:1fr 1.3fr;gap:0 25px}.context-top{grid-column:1}.context h2{grid-column:1}.context>.sub{grid-column:1}.detail-list{grid-column:2;grid-row:1/5;grid-template-columns:1fr 1fr;margin-top:0}.context-note{grid-column:1/-1;margin-top:18px}.workspace-mark{display:none}}
+    @media(max-width:740px){.app{display:block}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:15px 20px;display:flex;flex-direction:row;justify-content:space-between;gap:16px;align-items:center}.logo{font-size:18px}.logo small{font-size:8px}.navigation{display:block}.navigation a{padding:9px;font-size:11px}.navigation a:not([aria-current]){display:none}.sidebar-note{display:none}.workspace{padding:22px 20px 18px}.heading{margin-top:19px}.heading h1{font-size:31px}.heading p{font-size:11px;max-width:32ch}.toolbar{margin-top:23px;gap:8px}.search{min-width:100%;max-width:none}.view-tools{margin-left:0;gap:8px}.button{min-height:42px;padding-inline:12px}.recap{margin-top:12px;align-items:start}.recap-label{width:100%;margin-bottom:1px}.content{margin-top:16px}.list-meta{font-size:10px}.table-wrap{border:0;background:transparent;overflow:visible}table,tbody,tr,td{display:block;width:100%}thead{display:none}tbody{display:grid;gap:10px}tr{border:1px solid var(--line);border-radius:var(--radius);padding:13px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}tbody tr[data-selected="true"]{border-color:#9eafa1;background:#f1f6f2}td{padding:0;border:0;font-size:11px;min-width:0}td:first-child{width:100%;grid-column:1/-1;border-bottom:1px solid var(--line);padding-bottom:11px}.supplier-button{font-size:13px}.identity-id{font-size:10px}.mobile-label{display:block;font-size:9px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}.context{display:block;padding:18px;margin-top:3px}.context h2{margin-top:13px}.detail-list{display:grid;grid-template-columns:1fr 1fr;margin-top:18px}.context-note{margin-top:18px}.footer{display:block;font-size:10px;margin-top:24px}.footer details{margin-top:13px}dialog{max-height:calc(100dvh - 24px);width:calc(100% - 24px);border-radius:8px}.dialog-head{padding:19px 18px 14px}.dialog-body{padding:17px 18px}.dialog-footer{padding:13px 18px}.dialog-body fieldset{margin-bottom:18px}.dialog-head h2{font-size:20px}.columns-dialog{width:calc(100% - 24px);max-width:340px}.choice{min-height:40px}.draft-preview{font-size:10px}.state{padding:32px 17px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" aria-label="Navegação principal">
+    <a class="logo" href="/">SINAPSE<small>LABORATÓRIO DE INTERFACES</small></a>
+    <nav class="navigation"><a href="/">Visão do framework</a><a href="#main" aria-current="page">Fornecedores</a></nav>
+    <p class="sidebar-note">Organize parceiros e acompanhe o próximo passo de cada entrega.</p>
+  </aside>
+  <main class="workspace" id="main">
+    <div class="breadcrumb"><span>Operação</span><span aria-hidden="true">/</span><span>Suprimentos</span></div>
+    <header class="heading"><div><h1>Fornecedores</h1><p>Uma visão clara de quem entrega o quê.</p></div><span class="workspace-mark">Equipe de produção</span></header>
+    <div class="toolbar">
+      <div class="search"><label for="search">Buscar fornecedor</label><input id="search" type="search" placeholder="Buscar fornecedor..." autocomplete="off"></div>
+      <div class="view-tools">
+        <button class="button" id="filter-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"><svg class="filter-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>Filtros <span class="badge" id="filter-count" hidden>0</span></button>
+        <button class="button" id="columns-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">Colunas</button>
+      </div>
+    </div>
+    <div class="recap" id="recap" aria-label="Filtros aplicados"></div>
+    <div class="content">
+      <section class="list-area" aria-label="Lista de fornecedores">
+        <div class="list-meta"><span><strong id="result-count">8</strong> fornecedores</span><span id="result-note">Todos os parceiros</span></div>
+        <div class="table-wrap" id="table-wrap"><table><thead><tr id="table-head"></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="state" id="empty-state" hidden><span class="state-symbol" aria-hidden="true">∅</span><h2>Nenhum fornecedor encontrado</h2><p>Os critérios aplicados não combinam com os parceiros desta lista. Limpe os filtros para recomeçar.</p><button class="button" type="button" id="empty-reset">Limpar filtros e busca</button></div>
+        <div class="state error" id="error-state" hidden><span class="state-symbol" aria-hidden="true">!</span><h2>Não foi possível mostrar a lista</h2><p>Esta é uma falha de demonstração. Seus filtros continuam salvos nesta sessão.</p><button class="button" type="button" id="retry">Tentar novamente</button></div>
+        <p class="eyebrow" id="announcement" role="status" aria-live="polite" style="margin-top:10px;letter-spacing:0;text-transform:none"></p>
+      </section>
+      <aside class="context" id="context" aria-label="Detalhes do fornecedor"></aside>
+    </div>
+    <footer class="footer"><p>Exemplo local com oito fornecedores fictícios. Preferências de colunas ficam apenas neste navegador; nenhuma informação é enviada.</p><details><summary>Estados do exemplo</summary><button class="text-button" id="simulate-error" type="button">Exibir erro de demonstração</button></details></footer>
+  </main>
+</div>
+<dialog id="filter-dialog" aria-labelledby="filter-title" aria-describedby="filter-description">
+  <div class="dialog-head"><div><h2 id="filter-title">Filtrar fornecedores</h2><p id="filter-description">A lista muda somente ao aplicar os filtros.</p></div><button type="button" class="icon-button" id="filter-close" aria-label="Fechar filtros">×</button></div>
+  <form id="filter-form">
+    <div class="dialog-body">
+      <fieldset><legend>Canal de atendimento</legend><div class="operator-row"><label for="channel-operator">O canal</label><select id="channel-operator"><option value="include">É um dos selecionados</option><option value="exclude">Não é nenhum dos selecionados</option></select></div><div class="choice-list" id="channel-choices"></div></fieldset>
+      <fieldset><legend>Categoria</legend><label class="choice parent"><input type="checkbox" id="category-all"><span>Todas as categorias</span><small id="category-selected"></small></label><div class="choice-list" id="category-choices"></div></fieldset>
+      <p class="draft-preview" id="draft-preview"></p>
+    </div>
+    <div class="dialog-footer"><button class="button quiet" type="button" id="filter-cancel">Cancelar</button><button class="button primary" type="submit" id="apply-filters">Aplicar filtros</button></div>
+  </form>
+</dialog>
+<dialog id="columns-dialog" class="columns-dialog" aria-labelledby="columns-title" aria-describedby="columns-description">
+  <div class="dialog-head"><div><h2 id="columns-title">Colunas</h2><p id="columns-description">As alterações aparecem na hora.</p></div><button class="icon-button" type="button" id="columns-close" aria-label="Fechar colunas">×</button></div>
+  <div class="dialog-body" id="column-choices"></div>
+</dialog>
+<noscript><p style="padding:20px">Ative JavaScript para usar os filtros deste exemplo local.</p></noscript>
+<script>
+'use strict';
+(() => {
+  const categories = ['Serviços', 'Produtos', 'Logística'];
+  const channels = ['Direto', 'Site', 'Marketplace'];
+  const columns = [{ id:'identity', label:'Fornecedor', required:true }, { id:'category', label:'Categoria' }, { id:'channel', label:'Canal' }, { id:'owner', label:'Responsável' }, { id:'status', label:'Situação' }];
+  const suppliers = [
+    { id:'F-001', name:'Aurora Studio', initials:'AS', category:'Serviços', channel:'Direto', owner:'Lia', status:'Em dia', next:'Revisar a apresentação', note:'Alinhar a primeira proposta antes da próxima reunião.' },
+    { id:'F-002', name:'Norte Entregas', initials:'NE', category:'Logística', channel:'Site', owner:'Ivo', status:'Atenção', next:'Confirmar a coleta', note:'Confirmar a janela de recebimento com a equipe de produção.' },
+    { id:'F-003', name:'Papel & Forma', initials:'PF', category:'Produtos', channel:'Marketplace', owner:'Lia', status:'Aguardando', next:'Receber as amostras', note:'Comparar acabamentos após a chegada das amostras.' },
+    { id:'F-004', name:'Oficina Lume', initials:'OL', category:'Serviços', channel:'Site', owner:'Bia', status:'Em dia', next:'Aprovar o orçamento', note:'O escopo está organizado por entregável.' },
+    { id:'F-005', name:'Linha Clara', initials:'LC', category:'Produtos', channel:'Direto', owner:'Ivo', status:'Em dia', next:'Separar os materiais', note:'A próxima entrega depende da conferência de quantidades.' },
+    { id:'F-006', name:'Casa Prisma', initials:'CP', category:'Serviços', channel:'Marketplace', owner:'Bia', status:'Aguardando', next:'Alinhar o briefing', note:'Definir os critérios de aprovação antes de iniciar.' },
+    { id:'F-007', name:'Rota Sul', initials:'RS', category:'Logística', channel:'Direto', owner:'Lia', status:'Em dia', next:'Agendar a entrega', note:'Compartilhar o horário de chegada com a recepção.' },
+    { id:'F-008', name:'Ateliê Vértice', initials:'AV', category:'Produtos', channel:'Site', owner:'Bia', status:'Atenção', next:'Conferir a embalagem', note:'Verificar as medidas antes de fechar o pedido.' }
+  ];
+  const el = id => document.getElementById(id);
+  const defaultFilters = () => ({ operator:'include', channels:[], categories:[...categories] });
+  const clone = value => JSON.parse(JSON.stringify(value));
+  let applied = defaultFilters(); let draft = null; let selectedId = suppliers[0].id; let error = false;
+  let visibleColumns = columns.map(column => column.id);
+  const preferenceKey = 'sinapse-transfer-filter.columns.v1';
+  try { const saved = JSON.parse(localStorage.getItem(preferenceKey)); if(Array.isArray(saved)) visibleColumns = ['identity', ...columns.filter(column => !column.required && saved.includes(column.id)).map(column => column.id)]; } catch { /* The list works even when browser storage is unavailable. */ }
+  const matches = (supplier, filters) => {
+    const channelMatch = filters.channels.length === 0 || (filters.operator === 'exclude' ? !filters.channels.includes(supplier.channel) : filters.channels.includes(supplier.channel));
+    return channelMatch && filters.categories.includes(supplier.category);
+  };
+  const isRestrictedCategory = filters => filters.categories.length !== categories.length;
+  const filterCount = filters => Number(filters.channels.length > 0) + Number(isRestrictedCategory(filters));
+  function summaries(filters) {
+    const result = [];
+    if(filters.channels.length) result.push({ text:`Canal ${filters.operator === 'exclude' ? 'não é' : 'é'}: ${filters.channels.join(', ')}`, negative:filters.operator === 'exclude' });
+    if(isRestrictedCategory(filters)) result.push({ text:`Categoria: ${filters.categories.length ? filters.categories.join(', ') : 'nenhuma selecionada'}`, negative:false });
+    return result;
+  }
+  function renderRecap() {
+    el('recap').replaceChildren();
+    const recap = summaries(applied);
+    if(!recap.length) { const label = document.createElement('span'); label.className = 'recap-label'; label.textContent = 'Sem filtros aplicados'; el('recap').append(label); }
+    else {
+      const label = document.createElement('span'); label.className = 'recap-label'; label.textContent = 'Aplicados'; el('recap').append(label);
+      recap.forEach(item => { const button = document.createElement('button'); button.type = 'button'; button.className = `filter-chip${item.negative ? ' negative' : ''}`; button.textContent = item.text; button.addEventListener('click', openFilters); el('recap').append(button); });
+      const reset = document.createElement('button'); reset.type = 'button'; reset.className = 'text-button'; reset.textContent = 'Limpar filtros'; reset.id = 'recap-reset'; reset.addEventListener('click', resetFilters); el('recap').append(reset);
+    }
+    const count = filterCount(applied); el('filter-count').textContent = String(count); el('filter-count').hidden = count === 0;
+  }
+  function renderContext(supplier) {
+    el('context').replaceChildren(); el('context').hidden = !supplier || error;
+    if(!supplier || error) return;
+    const top = document.createElement('div'); top.className = 'context-top';
+    const avatar = document.createElement('span'); avatar.className = 'avatar'; avatar.textContent = supplier.initials; avatar.setAttribute('aria-hidden','true');
+    const tag = document.createElement('span'); tag.className = 'eyebrow'; tag.textContent = 'Visão do parceiro'; top.append(avatar, tag);
+    const title = document.createElement('h2'); title.textContent = supplier.name;
+    const sub = document.createElement('p'); sub.className = 'sub'; sub.textContent = `${supplier.id} · ${supplier.category}`;
+    const details = document.createElement('dl'); details.className = 'detail-list';
+    [['Canal',supplier.channel],['Responsável',supplier.owner],['Situação',supplier.status],['Próximo passo',supplier.next]].forEach(([label,value]) => {const wrapper = document.createElement('div'); const dt = document.createElement('dt'); dt.textContent = label; const dd = document.createElement('dd'); dd.textContent = value; wrapper.append(dt,dd); details.append(wrapper);});
+    const note = document.createElement('p'); note.className = 'context-note'; const strong = document.createElement('strong'); strong.textContent = 'Nota da equipe'; note.append(strong,document.createTextNode(supplier.note));
+    el('context').append(top,title,sub,details,note);
+  }
+  function render() {
+    const query = el('search').value.trim().toLocaleLowerCase('pt-BR');
+    const filtered = suppliers.filter(supplier => matches(supplier,applied) && (!query || `${supplier.name} ${supplier.id}`.toLocaleLowerCase('pt-BR').includes(query)));
+    el('result-count').textContent = error ? '—' : String(filtered.length);
+    el('result-note').textContent = error ? 'Lista indisponível' : (filterCount(applied) || query ? 'Critérios aplicados' : 'Todos os parceiros');
+    el('table-wrap').hidden = error || filtered.length === 0; el('empty-state').hidden = error || filtered.length > 0; el('error-state').hidden = !error;
+    el('table-head').replaceChildren(); el('rows').replaceChildren();
+    columns.filter(column => visibleColumns.includes(column.id)).forEach(column => { const th = document.createElement('th'); th.scope = 'col'; th.textContent = column.label; th.dataset.column = column.id; el('table-head').append(th); });
+    if(!filtered.some(supplier => supplier.id === selectedId)) selectedId = filtered[0]?.id || null;
+    filtered.forEach(supplier => {
+      const tr = document.createElement('tr'); tr.dataset.id = supplier.id; tr.dataset.selected = String(supplier.id === selectedId);
+      columns.filter(column => visibleColumns.includes(column.id)).forEach(column => {
+        const td = document.createElement('td'); td.dataset.column = column.id;
+        if(column.required) {
+          const button = document.createElement('button'); button.type = 'button'; button.className = 'supplier-button'; button.textContent = supplier.name; button.setAttribute('aria-label', `Ver ${supplier.name}`); button.setAttribute('aria-pressed',String(supplier.id === selectedId)); button.addEventListener('click',() => {selectedId=supplier.id; render(); el('rows').querySelector(`[data-id="${supplier.id}"] button`)?.focus();});
+          const id = document.createElement('span'); id.className = 'identity-id'; id.textContent = supplier.id; td.append(button,id);
+        } else {
+          const label = document.createElement('span'); label.className = 'mobile-label'; label.textContent = column.label;
+          const value = document.createElement('span'); value.textContent = supplier[column.id];
+          if(column.id === 'status') value.className = `status${supplier.status === 'Atenção' ? ' attention' : supplier.status === 'Aguardando' ? ' waiting' : ''}`;
+          td.append(label,value);
+        }
+        tr.append(td);
+      }); el('rows').append(tr);
+    });
+    renderContext(filtered.find(supplier => supplier.id === selectedId)); renderRecap();
+    el('announcement').textContent = error ? 'Erro de demonstração. Tente novamente.' : `${filtered.length} fornecedores na lista.`;
+  }
+  function updateDraft() {
+    draft.operator = el('channel-operator').value;
+    draft.channels = channels.filter((channel,index) => el(`channel-${index}`).checked);
+    draft.categories = categories.filter((category,index) => el(`category-${index}`).checked);
+    const all = el('category-all'); all.checked = draft.categories.length === categories.length; all.indeterminate = draft.categories.length > 0 && draft.categories.length < categories.length; all.setAttribute('aria-checked',all.indeterminate ? 'mixed' : String(all.checked));
+    el('category-selected').textContent = `${draft.categories.length} de ${categories.length}`;
+    const recap = summaries(draft).map(item => item.text).join(' · ') || 'Todos os canais e categorias';
+    el('draft-preview').replaceChildren(); const strong = document.createElement('strong'); strong.textContent = 'Ao aplicar: '; el('draft-preview').append(strong,document.createTextNode(`${recap}. ${suppliers.filter(supplier => matches(supplier,draft)).length} fornecedores antes da busca.`));
+  }
+  function openFilters() {
+    draft = clone(applied); el('channel-operator').value = draft.operator;
+    channels.forEach((channel,index) => {el(`channel-${index}`).checked = draft.channels.includes(channel);});
+    categories.forEach((category,index) => {el(`category-${index}`).checked = draft.categories.includes(category);});
+    updateDraft(); el('filter-trigger').setAttribute('aria-expanded','true'); el('filter-dialog').showModal(); el('channel-operator').focus();
+  }
+  function closeFilters() { el('filter-dialog').close(); }
+  function resetFilters() { applied = defaultFilters(); el('search').value=''; error=false; render(); el('filter-trigger').focus(); }
+  channels.forEach((channel,index) => { const label=document.createElement('label'); label.className='choice'; const input=document.createElement('input'); input.type='checkbox'; input.id=`channel-${index}`; input.addEventListener('change',updateDraft); const text=document.createElement('span'); text.textContent=channel; label.append(input,text); el('channel-choices').append(label); });
+  categories.forEach((category,index) => { const label=document.createElement('label'); label.className='choice'; const input=document.createElement('input'); input.type='checkbox'; input.id=`category-${index}`; input.addEventListener('change',updateDraft); const text=document.createElement('span'); text.textContent=category; const count=document.createElement('span'); count.className='choice-description'; count.textContent=String(suppliers.filter(supplier => supplier.category === category).length); label.append(input,text,count); el('category-choices').append(label); });
+  el('category-all').addEventListener('change', event => {categories.forEach((category,index) => {el(`category-${index}`).checked = event.target.checked;}); updateDraft();});
+  el('channel-operator').addEventListener('change',updateDraft);
+  el('filter-form').addEventListener('submit',event => {event.preventDefault(); updateDraft(); applied=clone(draft); error=false; render(); closeFilters();});
+  el('filter-trigger').addEventListener('click',openFilters); ['filter-close','filter-cancel'].forEach(id => el(id).addEventListener('click',closeFilters));
+  el('filter-dialog').addEventListener('close',() => {draft=null; el('filter-trigger').setAttribute('aria-expanded','false'); el('filter-trigger').focus();});
+  columns.forEach(column => {
+    const label=document.createElement('label'); label.className=`choice${column.required ? ' required' : ''}`; const input=document.createElement('input'); input.type='checkbox'; input.id=`column-${column.id}`; input.checked=visibleColumns.includes(column.id); input.disabled=Boolean(column.required); const text=document.createElement('span'); text.textContent=column.label; label.append(input,text);
+    if(column.required) {const hint=document.createElement('small'); hint.textContent='Obrigatória'; label.append(hint);}
+    input.addEventListener('change',() => {visibleColumns=columns.filter(item => item.required || el(`column-${item.id}`).checked).map(item => item.id); try {localStorage.setItem(preferenceKey,JSON.stringify(visibleColumns));} catch {el('columns-description').textContent='Alteradas nesta sessão. O navegador não permitiu salvar.';} render();}); el('column-choices').append(label);
+  });
+  el('columns-trigger').addEventListener('click',() => {el('columns-trigger').setAttribute('aria-expanded','true'); el('columns-dialog').showModal(); el('column-category').focus();});
+  el('columns-close').addEventListener('click',() => el('columns-dialog').close());
+  el('columns-dialog').addEventListener('close',() => {el('columns-trigger').setAttribute('aria-expanded','false'); el('columns-trigger').focus();});
+  el('search').addEventListener('input',render); el('empty-reset').addEventListener('click',resetFilters);
+  el('simulate-error').addEventListener('click',() => {error=true; render(); el('retry').focus();});
+  el('retry').addEventListener('click',() => {error=false; render(); el('filter-trigger').focus();});
+  render();
+})();
+</script>
+</body>
+</html>

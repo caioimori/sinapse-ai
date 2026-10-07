@@ -79,7 +79,9 @@ Chisel acredita que great copy is REWRITTEN, not written. O primeiro draft e arg
 | PROOF | Precisa de evidencia/dado |
 | CTA | CTA fraco ou ausente |
 
-## Tasks (9)
+## Tasks (10)
+
+- conduct-copy-audit
 1. edit-copy-strategic-review
 2. edit-copy-persuasion-review
 3. edit-copy-voice-compliance

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "model": "gpt-6.1-sol",
+  "variant": "scopebounded-input",
+  "decisions": [
+    {
+      "caseId": "priority-case-client-brand",
+      "decision": "Preservar a identidade do cliente. Premium deve resultar de hierarquia, legibilidade, consistência, acabamento e experiência, não da substituição de marca. Propor tokens primitivos derivados da identidade aprovada, tokens semânticos para funções e tokens de componentes para aplicações específicas; permitir temas sem acoplar o produto à SINAPSE. Ajustes de cores e tipografia exigem fundamento e aprovação do cliente. Há gap de evidência especializada no pacote: esta proposta é uma hipótese profissional, não uma conclusão validada sobre a marca ou o público de saúde.",
+      "evidenceNeeded": ["Comparar manual de marca aprovado, tokens atuais e proposta, registrando a origem de cada mudança.", "Verificar contraste, legibilidade e consistência dos componentes em estados e temas distintos.", "Apresentar telas representativas ao cliente e observar tarefas com usuários para avaliar percepção e uso."],
+      "exception": "Uma identidade nova ou co-branding explicitamente aprovado pode alterar cores e tipografia; o pedido premium isolado não constitui essa autorização."
+    },
+    {
+      "caseId": "priority-case-modal-focus",
+      "decision": "Bloquear a aprovação do modal até corrigir o teclado. Definir foco inicial adequado, manter Tab e Shift+Tab dentro do diálogo, impedir interação com o fundo e devolver foco ao acionador ao fechar. Oferecer fechamento por teclado e controle com nome acessível; fornecer nome e semântica de diálogo coerentes com seu comportamento. A evidência fornecida sustenta avaliação por critérios aplicáveis, mas não documenta o padrão específico nem certifica conformidade. A aparência não resolve essas falhas; verificar o fluxo inteiro antes de liberar.",
+      "evidenceNeeded": ["Executar sequência reproduzível de abrir, Tab, Shift+Tab e fechar, registrando o elemento focado em cada etapa.", "Verificar navegação e anúncio do diálogo com leitor de tela e interação bloqueada no fundo.", "Testar fechamento quando o acionador ainda existe e quando foi removido pelo fluxo."],
+      "exception": "Se o acionador deixar de existir ou o fluxo avançar, retornar o foco a um destino lógico documentado; um diálogo não modal requer outro comportamento."
+    },
+    {
+      "caseId": "priority-case-compositor-jank",
+      "decision": "Rejeitar will-change permanente nos 2.000 cards. Transform não garante fluidez: excesso de camadas, memória, trabalho de JavaScript ou renderização pode provocar jank. Primeiro identificar o gargalo; então limitar animações aos elementos visíveis, reduzir trabalho por frame e considerar virtualização. Usar will-change apenas em poucos elementos, próximo da animação, removendo depois, se medições demonstrarem ganho. Incluir preferência por movimento reduzido. O pacote aborda controle de movimento e WebGL, mas falta evidência específica sobre composição CSS neste cenário; não atribuir a causa à GPU sem perfil.",
+      "evidenceNeeded": ["Capturar perfil no celular representativo, incluindo frames, tarefas longas, pintura, camadas e memória.", "Comparar cenário original, promoção limitada e redução de elementos animados com o mesmo dispositivo e interação.", "Verificar estabilidade após scroll prolongado e comportamento com movimento reduzido."],
+      "exception": "Promoção persistente de poucos elementos continuamente animados pode ser justificável quando o perfil comprovar benefício e custo de memória aceitável."
+    },
+    {
+      "caseId": "priority-case-reduced-motion",
+      "decision": "Zerar durações CSS não cobre parallax JavaScript nem vídeo. Definir uma variante sem movimento decorativo: desativar o parallax e seus ciclos, manter posições estáveis e substituir o vídeo automático por imagem ou reprodução solicitada. Observar a preferência também no JavaScript e reagir a mudanças durante a sessão. Preservar informação e funcionalidade com estados estáticos, sem depender do término de uma animação para concluir operações. Há gap completo de evidência específica no pacote; a decisão requer validação dos mecanismos reais de movimento.",
+      "evidenceNeeded": ["Inventariar os responsáveis por movimento no hero: CSS, timers, requestAnimationFrame, eventos de scroll e vídeo.", "Testar a preferência ativada antes de carregar e alterada durante a sessão, verificando ausência de parallax e autoplay.", "Verificar que conteúdo, controles e conclusão de transições funcionam na variante estática."],
+      "exception": "Movimento indispensável à compreensão pode permanecer com justificativa e controle apropriados; decoração de hero não demonstra essa necessidade."
+    },
+    {
+      "caseId": "priority-case-react-server-boundary",
+      "decision": "Manter a estrutura estática no servidor e limitar use client aos componentes que realmente exigem interação, estado ou APIs do navegador. Calcular subtotal diretamente dos dados atuais durante a renderização, evitando Effect e estado duplicado. Usar props como fonte de verdade; se houver edição local, definir explicitamente inicialização e política de reset, sem espelhamento automático. Antes de mudar a fronteira, conferir dependências e passagem de dados. O pacote não oferece evidência especializada: faltam código, framework e medições para afirmar impacto no bundle ou comportamento.",
+      "evidenceNeeded": ["Mapear imports e necessidades de interação do layout e componentes para localizar a menor fronteira cliente.", "Verificar subtotal após mudanças em quantidade, preço e props, sem renderização intermediária desatualizada.", "Comparar bundle e hidratação antes e depois, verificando build, navegação e ausência de divergência entre servidor e cliente."],
+      "exception": "Effects são adequados para sincronização com sistemas externos; estado de edição independente das props pode ser necessário com uma política explícita."
+    },
+    {
+      "caseId": "priority-case-accessible-carousel",
+      "decision": "Bloquear aprovação enquanto o carrossel depender exclusivamente de drag. Acrescentar controles anterior/próximo e pausar/reproduzir operáveis por teclado e clique, com nomes acessíveis. Interromper rotação ao receber foco e não retomá-la automaticamente contra a intenção do usuário. Remover slides invisíveis da navegação e exposição acessível sem esconder o foco ativo; identificar posição e mudanças de modo compreensível. Há gap de evidência específica no pacote, portanto estes critérios precisam ser confrontados com a implementação e o padrão acessível aplicável.",
+      "evidenceNeeded": ["Percorrer todo o carrossel somente com teclado, incluindo pausa, troca e saída, verificando foco visível.", "Verificar que slides ocultos não recebem foco nem são anunciados como conteúdo atual.", "Testar entrada de foco durante autoplay, retomada explícita e anúncios com leitor de tela."],
+      "exception": "Drag pode permanecer como interação adicional; conteúdo inteiramente visível sem rotação não exige a mesma gestão de slides ocultos."
+    },
+    {
+      "caseId": "priority-case-video-broll-proof",
+      "decision": "Reter o Reel para revisão. Substituir b-roll pelo modelo anunciado ou por imagens neutras que não atribuam características de outro produto. Revisar legendas contra áudio e roteiro, corrigindo termos, números, sincronização e leitura. Vincular cada claim técnico a documentação ou demonstração verificável; retirar ou reformular o que não puder ser sustentado. Conferir identificação do produto e direitos de uso dos materiais. A evidência fornecida é sobre aprendizagem, não produção audiovisual: há gap para respaldar critérios específicos, e nenhum claim do produto está comprovado no input.",
+      "evidenceNeeded": ["Relacionar cada take ao modelo e à origem autorizada do arquivo.", "Construir matriz de claims com texto, unidade, condição e fonte técnica do modelo exato.", "Revisar o vídeo completo com áudio e legendas, registrando correções de transcrição e sincronização."],
+      "exception": "Material de outro modelo só pode ilustrar comparação explicitamente identificada e comprovada, sem sugerir que representa o produto ofertado."
+    },
+    {
+      "caseId": "priority-case-hooks-retention",
+      "decision": "Retirar a promessa de dobrar receita em sete dias enquanto não houver prova pertinente. Reescrever o hook com benefício verificável ou problema concreto, entregando no conteúdo o que a abertura promete. Não declarar vencedor a partir de um pico de views em um único post. Definir objetivo, janela, público e métricas antes de comparar variantes; observar retenção, conclusão e ação desejada em exposições comparáveis e replicadas. A evidência fornecida sustenta objetividade, mas não prova resultados comerciais nem oferece método validado de experimento para este caso.",
+      "evidenceNeeded": ["Solicitar evidência da promessa com definição de receita, período, população, condições e representatividade.", "Comparar curvas de retenção, conclusão e conversão com denominadores e janelas iguais.", "Repetir variantes em condições comparáveis, registrando distribuição, tamanho da amostra e incerteza."],
+      "exception": "Um caso real documentado pode ser citado como caso delimitado, sem transformá-lo em garantia; exploração inicial pode orientar novos testes sem declarar vencedor."
+    },
+    {
+      "caseId": "priority-case-carousel-density",
+      "decision": "Refazer a estrutura em torno de uma tese central e uma progressão compreensível: problema, explicação, evidência ou exemplo e ação aplicável. Cada slide deve avançar o argumento, não introduzir uma tese isolada. Reduzir texto, aumentar legibilidade e hierarquia, dividindo slides quando necessário; contagem de caracteres é apenas uma restrição. Substituir CTA genérico por ação específica ligada ao benefício entregue. As fontes fornecidas sustentam concisão e utilidade, mas sua transferência a carrosséis sociais é inferida; faltam evidências de leitura e resposta deste público.",
+      "evidenceNeeded": ["Examinar os slides no tamanho real de exibição em celular e verificar leitura sem ampliação.", "Pedir a leitores representativos que expliquem tese, relação entre slides e ação final após percorrer o material.", "Comparar retenção por slide e ação desejada com versão anterior em condições e janela documentadas."],
+      "exception": "Um carrossel deliberadamente organizado como lista pode ter itens independentes, desde que a promessa e o critério comum fiquem claros."
+    },
+    {
+      "caseId": "priority-case-mobbin-access",
+      "decision": "Corrigir a declaração para refletir somente o que foi efetivamente acessado e observado. Página pública não prova análise de cinquenta fluxos premium. Solicitar registro dos fluxos, telas, contexto e critérios antes de aceitar essa conclusão. Suspender incorporação dos prints à biblioteca do cliente até esclarecer licença e permissão de reutilização; trabalhar provisoriamente com links e sínteses próprias do material acessível. Há gap completo de evidência especializada e faltam termos, permissões e registro de análise; não presumir acesso ou direito de redistribuição.",
+      "evidenceNeeded": ["Conferir inventário dos fluxos analisados com links, datas, cobertura e observações reproduzíveis.", "Verificar termos e licença aplicáveis ao acesso e ao uso de screenshots em biblioteca de cliente.", "Registrar origem e autorização de cada imagem e separar referências de artefatos próprios."],
+      "exception": "Screenshots podem ser reutilizados quando a permissão aplicável cobrir expressamente esse destino; acesso pago por si só não demonstra direito de redistribuição."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "caseId": "F015-N",
+  "task": "create-icon-set",
+  "originalGeometry": true,
+  "assetRights": {
+    "basis": "Caso sintético de uso autorizado e geometria original nesta execução",
+    "externalAssetReuse": false
+  },
+  "tokens": [
+    {
+      "name": "Vanta",
+      "css": "--Vanta",
+      "approvedValue": null,
+      "previewOnly": "CanvasText",
+      "status": "UNVERIFIED_VALUE"
+    },
+    {
+      "name": "White",
+      "css": "--White",
+      "approvedValue": null,
+      "previewOnly": "Canvas",
+      "status": "UNVERIFIED_VALUE"
+    }
+  ],
+  "typography": {
+    "brandFont": null,
+    "previewOnly": "system-ui",
+    "status": "UNVERIFIED_BRAND_FONT"
+  },
+  "sources": [
+    {
+      "path": "squads/squad-brand/agents/brand-creative-engineer.md",
+      "sha256": "98c0fcbda9b8d0483bdda4061094c9a32d06f854658b1a6355e269ba0c1ea389",
+      "basis": "complete frozen exposure"
+    },
+    {
+      "path": "squads/squad-brand/tasks/create-icon-set.md",
+      "sha256": "06a480ada29334816f33cf27878130721d0f93606a71266abf322d21a999fef3",
+      "basis": "complete frozen exposure"
+    },
+    {
+      "path": "generation-cases/F015-N.json",
+      "sha256": "298b7e3f9a377bdb50b1d014c68bfdc614350dfeaa7f076f64701dd7d7f96557",
+      "basis": "literal synthetic brief"
+    }
+  ],
+  "supplementalReferences": [
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/symbol",
+      "locator": "Description, viewBox, preserveAspectRatio and use example; lines 183-261",
+      "status": "FROZEN_AUTHORED_PARAPHRASE_ONLY_LIVE_UNVERIFIED"
+    },
+    {
+      "url": "https://storybook.js.org/docs/writing-stories",
+      "locator": "Rendered state and args; lines 124-132, 388-403",
+      "status": "FROZEN_AUTHORED_PARAPHRASE_ONLY_LIVE_UNVERIFIED"
+    }
+  ],
+  "context": {
+    "validatedExpertise": false,
+    "status": "planned",
+    "executionObserved": false,
+    "knowledgeCoverage": "gap"
+  },
+  "renderProofRequested": {
+    "locator": "preview.html",
+    "sizes": [
+      16,
+      24,
+      32
+    ],
+    "viewportWidths": [
+      390,
+      1440
+    ],
+    "twoCompositions": true,
+    "status": "UNVERIFIED"
+  }
+}

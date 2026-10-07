@@ -1,0 +1,16 @@
+{
+  "caseId": "F006-N",
+  "probe": "JSON readback + dependency traversal of authored routing contract",
+  "artifactSha256": "c47260765012cd5c93bf37c8243fe6bef3e6a40593241e849bf951c73c82e560",
+  "artifactBytes": 14611,
+  "observedChecks": {
+    "jsonParse": true,
+    "uniqueAssignmentIds": true,
+    "allDependencyIdsExist": true,
+    "acyclicDependencies": true,
+    "assignmentCount": 9,
+    "maxIterations": 2
+  },
+  "scopeLimit": "Structural contract probe only; no runtime/render/AT/device/perceptual/build evidence; no quality verdict.",
+  "externalEffectsObserved": false
+}

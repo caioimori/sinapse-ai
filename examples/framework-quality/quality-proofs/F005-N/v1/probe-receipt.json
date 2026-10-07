@@ -1,0 +1,280 @@
+{
+  "caseId": "F005-N",
+  "probe": "Node VM fake DOM behavior; NOT browser/device/perception/performance/AT proof",
+  "assertions": "All assertions completed",
+  "checks": [
+    {
+      "width": 1440,
+      "cycle": 0,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 1,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 2,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 3,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 4,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 5,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 6,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 7,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 8,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycle": 9,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 1440,
+      "cycles": 10,
+      "simulatedFrameSamples": 3610
+    },
+    {
+      "width": 390,
+      "cycle": 0,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 1,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 2,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 3,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 4,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 5,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 6,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 7,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 8,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycle": 9,
+      "owned": {
+        "ownedRaf": 0,
+        "ownedListeners": 0,
+        "ownedTimers": 0,
+        "ownedContexts": 0,
+        "ownedTimelines": 0,
+        "borrowedMediaDisposed": false
+      },
+      "observed": "pause/resume, finite complete, preference during execution, no automatic resume, hidden pause, restart, double dispose; borrowed listeners preserved"
+    },
+    {
+      "width": 390,
+      "cycles": 10,
+      "simulatedFrameSamples": 3610
+    }
+  ],
+  "render": "UNVERIFIED",
+  "performance": "UNVERIFIED",
+  "assistiveTechnology": "UNVERIFIED"
+}

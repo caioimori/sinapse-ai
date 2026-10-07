@@ -454,7 +454,18 @@ commands:
     description: "Exit roadmap-sentinel mode"
 
 dependencies:
-  tasks: []
+  tasks:
+    - update-knowledge.md
+    - check-updates.md
+    - feature-radar.md
+    - what-changed.md
+    - plan-first.md
+    - adoption-strategy.md
+    - migration-guide.md
+    - readiness-check.md
+    - velocity-audit.md
+    - sdk-guide.md
+    - ecosystem-map.md
   checklists:
     - change-checklist.md
     - pre-push-checklist.md

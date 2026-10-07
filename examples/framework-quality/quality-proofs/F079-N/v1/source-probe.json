@@ -1,0 +1,44 @@
+{
+  "caseId": "F079-N",
+  "kind": "native-source-only",
+  "sourceMeasurements": {
+    "tokens.css": {
+      "bytes": 1656,
+      "gzipBytes": 653
+    },
+    "fixtures.mjs": {
+      "bytes": 587,
+      "gzipBytes": 348
+    },
+    "card-picker.mjs": {
+      "bytes": 2789,
+      "gzipBytes": 1079
+    },
+    "card-picker.stories.js": {
+      "bytes": 1041,
+      "gzipBytes": 443
+    },
+    "runner.html": {
+      "bytes": 1538,
+      "gzipBytes": 777
+    },
+    "architecture.md": {
+      "bytes": 2996,
+      "gzipBytes": 1598
+    },
+    "build-config.json": {
+      "bytes": 980,
+      "gzipBytes": 534
+    }
+  },
+  "baseline": null,
+  "bundleComparison": "UNVERIFIED: gzip of authored source is not a built bundle",
+  "runtimeScreenshots": "UNVERIFIED",
+  "keyboard": "UNVERIFIED",
+  "officialStorybook": "UNVERIFIED",
+  "remoteCI": "UNVERIFIED",
+  "assistiveTechnology": "UNVERIFIED",
+  "perception": "UNVERIFIED",
+  "tokenFidelity": "UNVERIFIED: Vanta/White exact production token file absent",
+  "externalEffectsObserved": false
+}

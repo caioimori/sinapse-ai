@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "scope": "One approved native Claude Code source-grounded synthetic textual SOP inspection; not all172 agents",
+  "status": "PASS_BOUNDED_NATIVE_CLAUDE_TEXTUAL_INSPECTION",
+  "caseId": "SOP-QUALITY-01",
+  "agentId": "sop-extractor",
+  "task": "extract-grounded-sop",
+  "execution": {
+    "cli": "Claude Code",
+    "cliVersion": "2.1.293",
+    "requestedModel": "sonnet",
+    "reportedModel": "claude-sonnet-5-5",
+    "reportedProvider": "firstParty",
+    "configuredEffort": "high",
+    "startedAt": "2026-10-07T21:34:45.434Z",
+    "endedAt": "2026-10-07T21:34:54.798Z",
+    "elapsedMs": 9364,
+    "exitCode": 0,
+    "terminalSubtype": "success",
+    "completeResponseReceived": true,
+    "attempts": 1,
+    "turns": 1,
+    "retry": false,
+    "toolsConfigured": 0,
+    "toolUses": 0,
+    "mcpConfigured": 0,
+    "extraJevCalls": 0,
+    "opusApiCalls": 0,
+    "hooksDisabled": false,
+    "settingsChanges": 0,
+    "externalEffectsObserved": false
+  },
+  "inputIntegrity": {
+    "stdinBytes": 16733,
+    "savedEnvelopeBytes": 16734,
+    "savedEnvelopeAddsExactlyOneFinalLf": true,
+    "stdinSha256": "2c4e637b9e8be81373b4fbe35fa453da3f732f843da87a53111a1c832652488c",
+    "completeExposureIndependentlyVerified": true,
+    "sources": [
+      {
+        "path": ".claude/agents/sinapse-sop-extractor.md",
+        "sha256": "6a64c7dfa85c56052107becc150f62e87c79fe85b39c2caeb62d6b64bb683fed"
+      },
+      {
+        "path": "squads/squad-cloning/agents/sop-extractor.md",
+        "sha256": "ede58c10508187392c01b7910f73e3ed4e0b13261ffa13a7a6c4a565d52f38d9"
+      },
+      {
+        "path": "squads/squad-cloning/tasks/extract-grounded-sop.md",
+        "sha256": "677ebd065c6f8c9cd811737c3c02e5eae1e5adb602af23cb5f3b149ae47dba53"
+      }
+    ],
+    "threeSourceHashesIndependentlyMatched": true,
+    "rawEnvelopePublished": false
+  },
+  "outputIntegrity": {
+    "characters": 873,
+    "bytes": 896,
+    "sha256": "57b3fccc9fb61784ad164a15afe844a995d8a1ef8d7be4230a9c48d097ec4c28",
+    "schemaValid": true,
+    "independentlyParsed": true
+  },
+  "response": {
+    "caseId": "SOP-QUALITY-01",
+    "agentId": "sop-extractor",
+    "task": "extract-grounded-sop",
+    "steps": [
+      {
+        "action": "Trigger: quando o roteiro entra em revisão, o editor confere o SKU antes de validar o texto.",
+        "sourceIds": [
+          "E1"
+        ]
+      },
+      {
+        "action": "Se o SKU for divergente, devolver o roteiro ao redator, sem validar o texto.",
+        "sourceIds": [
+          "E2"
+        ]
+      },
+      {
+        "action": "Se o SKU corresponder, permitir marcar a revisão como concluída.",
+        "sourceIds": [
+          "E3"
+        ]
+      }
+    ],
+    "veto": "Não validar o texto com SKU divergente (E2). Revisão concluída não equivale a publicação: a publicação não foi autorizada (E3) e este SOP não a autoriza.",
+    "gaps": [
+      "Prazo/SLA ausente na fonte: não registrado nem inferido.",
+      "Fonte não define como o SKU é conferido nem qual é a referência correta.",
+      "Fonte não diz o que ocorre após o retorno ao redator (reenvio, nova revisão) nem quem autoriza a publicação."
+    ],
+    "externalEffectsObserved": false
+  },
+  "independentReview": {
+    "verdict": "PASS_BOUNDED_NATIVE_CLAUDE_TEXTUAL_INSPECTION",
+    "caseEvidence": {
+      "E1": "Step1 retains review trigger, editor and SKU check before text validation.",
+      "E2": "Step2 returns divergentSKU to writer without validation; explicit veto preserves this boundary.",
+      "E3": "Step3 permits marking review complete for correspondingSKU; veto explicitly refuses unauthorized publication.",
+      "missingSla": "Gap explicitly says source has no deadline/SLA; no deadline was invented.",
+      "extraGaps": "Unknown SKU reference, review repetition and publication owner are labeled gaps, not inserted procedure steps.",
+      "schema": "Exactly requested top-level fields; steps/action/sourceIds valid; externalEffectsObserved=false."
+    },
+    "sourceGroundingIds": [
+      "E1",
+      "E2",
+      "E3"
+    ],
+    "skuDivergenceVetoPreserved": true,
+    "unauthorizedPublicationVetoPreserved": true,
+    "missingSlaNotInvented": true,
+    "authorityPreserved": true,
+    "payloadAndAnswerHashesMatched": true,
+    "sourceReceiptSha256": "5ffed7b563351f124dc3c133028af9ed16719c2e0cf9476b1b47d47964738d21",
+    "reviewReceiptSha256": "cd569fec9242d9eec6a127178ab7e28ddad13e430f2e554c772c0c10cc9f9b31"
+  },
+  "cost": {
+    "basis": "list estimate reported by the CLI, not an invoice or confirmed incremental charge",
+    "estimatedListUsd": 0.22873,
+    "requestedEstimateUsd": 0.35,
+    "budgetHardGuarantee": false,
+    "billingConfirmed": false,
+    "cacheOptimizationClaim": false
+  },
+  "historicalAttempt": {
+    "scope": "Previous pending-closeout wave; retained as historical evidence",
+    "reportedModel": "claude-sonnet-5-5",
+    "status": "BUDGET_LIMIT_NO_RESPONSE",
+    "attempts": 1,
+    "listEstimateUsd": 0.213404,
+    "billingConfirmed": false
+  },
+  "limits": [
+    "One source-grounded synthetic textualSOP decision; not172 Claude agents or production effects",
+    "Configured effort is observed in recorded arguments, not an independent measurement of backend reasoning",
+    "No review of raw hook bodies/account context and no independent assertion of every possible hook sideeffect",
+    "T04 can close received-decision/complete-exposure requirement only; no performance/cost optimization claim",
+    "One new call; the prior unsuccessful attempt remains separately historical",
+    "Reported model/provider and configured effort do not independently certify backend reasoning",
+    "No all172 Claude execution, global expertise promotion, cache reduction or performance optimization claim"
+  ]
+}

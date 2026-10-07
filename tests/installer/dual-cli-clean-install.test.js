@@ -20,7 +20,7 @@ describe('dual CLI clean-install matrix', () => {
   ];
 
   test.each(cases)('%s installs only its selected native surfaces', async (_mode, includeClaude, includeCodex) => {
-    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-dual-cli-'));
+    const tempRoot = fs.realpathSync.native(await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-dual-cli-')));
     const targetDir = path.join(tempRoot, 'project');
     await fs.ensureDir(targetDir);
     const legacyClaudeAgent = path.join(
@@ -85,7 +85,9 @@ describe('dual CLI clean-install matrix', () => {
           path.join(path.dirname(legacyClaudeAgent), 'user-custom.md'),
         )).toBe(true);
         expect(installed.claudeNativeAgentFiles).toBe(172);
-        expect(installed.claudeNativeSkillFiles).toBe(37);
+        // Project expert is the 38th activation skill, delivered to both CLIs.
+        expect(installed.claudeNativeSkillFiles).toBe(38);
+        expect(await fs.pathExists(path.join(targetDir, '.claude', 'skills', 'sinapse-project-expert', 'SKILL.md'))).toBe(true);
         const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
         expect(settings.language).toBe('Portuguese');
         expect(JSON.stringify(settings)).toContain('custom-hook.cjs');
@@ -103,7 +105,20 @@ describe('dual CLI clean-install matrix', () => {
         ];
         const docFirstRegistrations = JSON.stringify(combinedSettings).match(/doc-first-gate\.cjs/g) || [];
         expect(docFirstRegistrations).toHaveLength(2);
-        expect(validateClaudeNative(targetDir).ok).toBe(true);
+        const validation=validateClaudeNative(targetDir);
+        expect(validation.errors).toEqual([]);
+        expect(validation.ok).toBe(true);
+        if(includeCodex){
+          const counterpart=path.join(targetDir,'.agents','skills','sinapse-project-expert','SKILL.md');
+          const original=await fs.readFile(counterpart);
+          try{
+            await fs.writeFile(counterpart,'concurrent different skill bytes');
+            expect(validateClaudeNative(targetDir).errors).toContain('Optional project skill lacks provider parity: sinapse-project-expert');
+            await fs.remove(counterpart);
+            expect(validateClaudeNative(targetDir).errors).toContain('Optional project skill lacks provider parity: sinapse-project-expert');
+          }finally{await fs.writeFile(counterpart,original);}
+          expect(validateClaudeNative(targetDir).errors).toEqual([]);
+        }
         await fs.remove(path.join(targetDir, '.claude', 'hooks', 'doc-first-gate.cjs'));
         expect(validateClaudeNative(targetDir).errors).toContain(
           'Missing Claude governance hook: .claude/hooks/doc-first-gate.cjs',
@@ -121,7 +136,7 @@ describe('dual CLI clean-install matrix', () => {
   });
 
   test('preserves malformed Claude settings instead of aborting installation', async () => {
-    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-claude-malformed-'));
+    const tempRoot = fs.realpathSync.native(await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-claude-malformed-')));
     const targetDir = path.join(tempRoot, 'project');
     const settingsPath = path.join(targetDir, '.claude', 'settings.local.json');
     const malformed = '{ "hooks": invalid user content';

@@ -1,0 +1,738 @@
+{
+  "schemaVersion": 1,
+  "receiptType": "independent-bounded-quality-review",
+  "reviewer": "quality-gate",
+  "author": false,
+  "iteration": 3,
+  "maxIterations": 3,
+  "status": "CONCERNS-audiovisual-capability",
+  "scope": "local-synthetic-fixtures-and-focused-code-review",
+  "story": "docs/stories/audited-evolution-20261002.story.md",
+  "spec": "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md",
+  "rubric": {
+    "dimensions": [
+      "brief-fit",
+      "hierarchy-legibility",
+      "composition-distinctiveness",
+      "continuity-rhythm-interaction",
+      "finish"
+    ],
+    "maxPerDimension": 20,
+    "target": 90,
+    "minimumDimension": 15,
+    "criticalFailuresCannotBeCompensated": true,
+    "weightedAuditProposalApplied": false
+  },
+  "humanApproval": false,
+  "expertisePromotion": false,
+  "observedStructure": {
+    "profiles": 172,
+    "contractReviewed": 7,
+    "bindings": 18,
+    "validatedExpertise": 0
+  },
+  "capabilities": {
+    "actualPixelsViewed": true,
+    "continuousVideoPlayback": false,
+    "audioHeard": false,
+    "audioToolResult": "audio content omitted because you do not support audio input",
+    "audioScore": null,
+    "voiceDialogueInBrief": false
+  },
+  "artifacts": [
+    {
+      "id": "ui",
+      "cycle": 3,
+      "scores": [
+        19,
+        19,
+        17,
+        18,
+        18
+      ],
+      "total": 91,
+      "status": "PASS-bounded",
+      "independentlyOperatedBrowser": false,
+      "evidence": [
+        "ui-1440.png",
+        "ui-390.png",
+        "ui-390-dialog.png",
+        "ui-390-empty.png",
+        "ui-390-error.png"
+      ],
+      "basis": "Physically viewed pixels; interaction source inspected; behavior checks attributed to author",
+      "criticalVisualFailuresObserved": []
+    },
+    {
+      "id": "motion",
+      "cycle": 3,
+      "scores": [
+        19,
+        19,
+        18,
+        17,
+        18
+      ],
+      "total": 91,
+      "status": "CONCERNS-fullmotion-unobserved",
+      "evidence": [
+        "motion-1440.png",
+        "motion-normal-end.png",
+        "output/review/motion-normal-contact.png",
+        "output/review/motion-reduced-contact.png"
+      ],
+      "sampling": {
+        "fps": 2,
+        "order": "left-to-right then top-to-bottom",
+        "normalDurationSeconds": 6.8,
+        "reducedDurationSeconds": 4.6
+      },
+      "traceActions": [
+        "call@178 pause one active animation",
+        "call@198 final step no active animation",
+        "call@214 reset no animation",
+        "call@226 runtime reduced commits step 2",
+        "call@238 and call@328 unmounted zero listeners/animations"
+      ],
+      "basis": "Sampled pixels and author-generated raw trace independently read; continuous smoothness unobserved",
+      "criticalVisualFailuresObserved": []
+    },
+    {
+      "id": "carousel",
+      "attempt": 2,
+      "scores": [
+        19,
+        18,
+        18,
+        18,
+        18
+      ],
+      "total": 91,
+      "status": "PASS-bounded",
+      "evidence": [
+        "carousel-01.png",
+        "carousel-02.png",
+        "carousel-03.png",
+        "carousel-04.png",
+        "carousel-05.png",
+        "carousel-contact.png",
+        "carousel-mobile-390.png"
+      ],
+      "basis": "All five actual exports/contact/mobile physically viewed: worksheet defines central message, Texto/Imagem/Ritmo link same idea, review mock and named adjustment loop carry message; frozen weights and unchanged other dimensions",
+      "criticalVisualFailuresObserved": []
+    },
+    {
+      "id": "reel",
+      "attempt": 2,
+      "scores": [
+        19,
+        18,
+        18,
+        null,
+        null
+      ],
+      "total": null,
+      "status": "CONCERNS-audio-and-continuousmotion-unobserved",
+      "evidence": [
+        "reel-mobile-390.png",
+        "output/review/reel-attempt-002-decoded-contact.png"
+      ],
+      "sampling": {
+        "independentDecodedFps": 1,
+        "observedSeconds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "basis": "New master changed; independently decoded and physically viewed 0..17-second samples. Functional new visuals read coherently; no audio/fullmotion rating",
+      "criticalVisualFailuresObserved": []
+    }
+  ],
+  "technicalReadback": {
+    "uiMotionReceipt": "examples/framework-quality/output/cycle-3/receipt.json",
+    "uiMotionOutputHashesRecomputed": 24,
+    "uiMotionHashMismatches": [],
+    "mediaReceipt": "examples/framework-quality/output/media/attempt-002/receipt.json",
+    "mediaOutputHashesRecomputed": 31,
+    "mediaHashMismatches": [],
+    "independentMasterProbe": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 540,
+      "durationSeconds": 18,
+      "audioDurationSeconds": 18
+    },
+    "targetedTests": {
+      "suites": 3,
+      "passed": 30,
+      "failed": 0,
+      "source": "existing author tests independently run",
+      "names": [
+        "framework-evolution-reliability",
+        "expert-evolution-bindings",
+        "expert-evolution-model-policy"
+      ]
+    },
+    "targetedAdditionalTests": {
+      "suites": 2,
+      "passed": 24,
+      "failed": 0,
+      "names": [
+        "expert-evolution-observed-review",
+        "expert-evolution-persistent-learning"
+      ],
+      "scope": "Disposable controlled fixtures; author tests independently executed"
+    },
+    "postRenderAmendment": {
+      "historicalReceiptsRecomputed": 5,
+      "currentModifiedSourceHashesRecomputed": 4,
+      "normalizedASTsIndependentlyRecomputed": 4,
+      "parserVersion": "7.29.7",
+      "mismatches": [],
+      "summaryCurrentSourcesAndOutputsRecomputed": true,
+      "scope": "Historical execution records preserved; later documentation and lint deltas explicitly separate"
+    },
+    "preservation": {
+      "evidenceOwner": "root",
+      "reviewMethod": "Receipt read and pinned by independent SHA; full original audit not repeated",
+      "originalEntries": 191,
+      "preserved": true,
+      "protectedFiles": 0,
+      "privateTracked": 0
+    },
+    "semanticExtractionCAS": {
+      "source": "scripts/expert-evolution/extraction.cjs",
+      "lines": [
+        184,
+        210
+      ],
+      "testFile": "tests/unit/expert-evolution-persistent-learning.test.js",
+      "independentlyPassed": 4,
+      "intentionallySkippedByNameFilter": 23,
+      "transport": "mock-only",
+      "cases": [
+        "different payload same semantic tuple",
+        "failed transport restart blocks retry",
+        "actual child process crash blocks retry",
+        "concurrent receipt writer preserved by CAS"
+      ],
+      "fullCohortRerun": false,
+      "newBlocker": false
+    },
+    "integratedCohort": {
+      "executionOwner": "root",
+      "reviewMethod": "Actual results JSON read and hash independently recalculated; execution not repeated",
+      "path": "examples/framework-quality/output/verification/integrated-tests.json",
+      "sha256": "766fe031d0a455f3603d437dd8796fc79a2ac639d219385fe68053502c15ad4d",
+      "success": true,
+      "suites": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "tests": {
+        "total": 229,
+        "passed": 229,
+        "failed": 0
+      },
+      "scope": "18 scoped integration/regression suites; not universal framework quality"
+    }
+  },
+  "findings": [
+    {
+      "id": "RT06-QA-01",
+      "severity": "HIGH",
+      "status": "closed-independent-repro-rejected",
+      "file": "scripts/expert-evolution/model-policy.cjs",
+      "line": 38,
+      "reproduction": "validateArtifactEvaluation accepts same hashed AUDITED-SPEC.md as every artifact/review, executor author and reviewer Author-space, with no typed observations; returned valid:true",
+      "requiredFix": "Shared strict typed observation validation and normalized distinct identities; bind source/artifact/model/task/corpus/case and critical outcomes",
+      "readback": "Same forged document/normalized-author reproduction now returns valid:false; strict typed source/corpus/task/criteria/case gates observed"
+    },
+    {
+      "id": "VIS-01",
+      "severity": "MEDIUM",
+      "status": "closed-attempt-002-pixels",
+      "artifact": "carousel",
+      "score": 89,
+      "revisedScore": 91
+    },
+    {
+      "id": "CAP-01",
+      "severity": "CONCERNS",
+      "status": "capability-unavailable",
+      "audioScore": null,
+      "continuousVideoPlayback": false
+    },
+    {
+      "id": "C03-QA",
+      "severity": "INFO",
+      "status": "closed-independent-private-CAS-and-runtime-readback"
+    },
+    {
+      "id": "VIS-02",
+      "severity": "MEDIUM",
+      "status": "closed-accessible-equivalent-matches-pixels",
+      "file": "examples/framework-quality/media/text.md"
+    },
+    {
+      "id": "PROV-01",
+      "severity": "MEDIUM",
+      "status": "closed-amendments-independent-hash-and-AST-readback",
+      "files": [
+        "examples/framework-quality/media/index.html",
+        "examples/framework-quality/media/text.md"
+      ],
+      "outputHashesStillMatch": true
+    }
+  ],
+  "limits": [
+    "No human calibration or user approval",
+    "No field metrics/physical mobile GPU/backend/RLS/conversion verification",
+    "Source/hash/test validity does not establish aesthetic quality",
+    "No paid calls or actual Jev provider verification",
+    "No all-172 expertise, exponential growth, causal uplift or held-out transfer claim",
+    "No deployment or personal installation",
+    "No implementation fixes by reviewer"
+  ],
+  "provenance": {
+    "report": "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
+    "outputDirectories": {
+      "uiMotion": "examples/framework-quality/output/cycle-3",
+      "media": "examples/framework-quality/output/media/attempt-002",
+      "independentDerivatives": "examples/framework-quality/output/review"
+    },
+    "hashSnapshots": {
+      "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md": "d6bd8da3116cffb156c6e9c44753a39cf83eaf951a6bb8d0e136022db0698971",
+      "docs/stories/audited-evolution-20261002.story.md": "7d5e380f8fb423c59e72e3d8a92bcf6a8586cae54848480fc7e16e0976291d57",
+      "examples/framework-quality/output/cycle-3/receipt.json": "676dc2b00c0934297d7e21d4ddb9503e647f6cef7205b96c50d253f105ab6824",
+      "examples/framework-quality/output/media/attempt-002/receipt.json": "e96810e8e39575cef9993deb29c22f91120d46a6105327ef19bbdbb46dcfb2ad",
+      "examples/framework-quality/media/text.md": "8d961f7cf30bd04cde932d63f78a1de12488728ecd6c46007976ecfe86252554"
+    },
+    "reviewedCodeHashes": {
+      "scripts/framework-evolution/runtime.cjs": "c5e0a02b9b47438a2c8e8d6c433a91e4a3201f7ed89abc5fdaf033f9c4b7b18f",
+      "scripts/framework-evolution/knowledge.cjs": "c3d2a15c1af4fb0f10d1bdf5272b3e9b4ffe0341188c3f2e8eb2a10c51430726",
+      "scripts/expert-evolution/expertise.cjs": "0728059f2716bca662fe03ddd9ec71e5e63457c41a58a795f4dc70cdfacc2ddb",
+      "scripts/framework-evolution/jev.cjs": "6336d2d8a35d9abfde0f933e784de311c050cb9a22d6a4acecd3c2cfb6922357",
+      "bin/lib/framework-evolution-delivery.js": "7abd10d69795d1c4a4d14dd40a41b04ae2022d5075ad939b7af6c134f443309b",
+      "scripts/expert-evolution/model-policy.cjs": "c1181fb1ca9f7f9604b6f095f94a300bb2face155ac54af82696e5a702d62f36",
+      "scripts/expert-evolution/extraction.cjs": "8cc44566a9bb6dfbcd49b3e780d94fff416c7e77426102f7794480c01d7f081a"
+    },
+    "outputHashSnapshots": {
+      "examples/framework-quality/output/cycle-3/motion-1440.png": "2df7ff7286c70bbe8981e448ec57dbe18c6caf00e584b602782fde2145325f75",
+      "examples/framework-quality/output/cycle-3/motion-320.png": "bc3ec01a29c505447d5f739fa8f0feffdf7aa313b0da28f3862fda105ac64e90",
+      "examples/framework-quality/output/cycle-3/motion-normal-browser-trace.zip": "d42325f2fc3b0703dd32abbdf5122e3e14dae9ec381e9e8cc0fa3561ecdebfe7",
+      "examples/framework-quality/output/cycle-3/motion-normal-cpu-trace.json": "c4d37795d0dc78db62746cc4b32ce5b25592da98a47a67aa3c6efd3baddcad2a",
+      "examples/framework-quality/output/cycle-3/motion-normal-end.png": "cc9a6c0e240ab37db8597e26f216d7bb1f40b8865fb93a95fdd45a6efd839261",
+      "examples/framework-quality/output/cycle-3/motion-normal-start.png": "472e80bc69c81140ab87acff6bf1d478154f27df4ead90ceac1447f384c51b88",
+      "examples/framework-quality/output/cycle-3/motion-normal.webm": "e77881e6f5ef5bafd38fa11e13934b47d8cb95b2ed3a8f274521e4c391a93aec",
+      "examples/framework-quality/output/cycle-3/motion-reduced-browser-trace.zip": "d22fe73c8ac5afb341ccd11c3ba3bc3ffa193c8976d57df1166c9b4c7f8f2725",
+      "examples/framework-quality/output/cycle-3/motion-reduced-cpu-trace.json": "e9b411b9e32e5dafc8222909894e74fc612b2f287742b8fa3f1270656bbc27e3",
+      "examples/framework-quality/output/cycle-3/motion-reduced-end.png": "fdedc913f2131a64d938c0bc3df10567b2f8d5e6f69d2ab241f29d02100d1aa8",
+      "examples/framework-quality/output/cycle-3/motion-reduced-start.png": "359ff3a5147e62a8b6fb94f979876b08d93485bf5f50c4787694452038f4c4f9",
+      "examples/framework-quality/output/cycle-3/motion-reduced.webm": "7ad152940a3d3ec7af19855645cc8b2f0903a2b070d54de0278cf942e8882439",
+      "examples/framework-quality/output/cycle-3/ui-1440-dialog.png": "58946eaf5ede4d8e3da2c126c328477634914bff837a0693b26e9d15ad201feb",
+      "examples/framework-quality/output/cycle-3/ui-1440-empty.png": "60a289362248dac17b1863098cdcc48ac32b30f14cecd9dad6b96beada92f12a",
+      "examples/framework-quality/output/cycle-3/ui-1440-error.png": "1f58831b6e9fd081b205fdcdb4a70e76d03084d605b0ea84a17f317390c5a007",
+      "examples/framework-quality/output/cycle-3/ui-1440.png": "8226080ca5edd6b3917f950a1376c93c6d0f623d0819ea3dfec6e2b4d6135d12",
+      "examples/framework-quality/output/cycle-3/ui-320-dialog.png": "2a1b5af673aa391be45ca06fffc13a94f3a61fc4b7a70dcb7e872387ae14ae9f",
+      "examples/framework-quality/output/cycle-3/ui-320-empty.png": "29eba162b14c7bf0287e0e83dfd64f8453dd6e7f2c9e909d05d65d06c5083624",
+      "examples/framework-quality/output/cycle-3/ui-320-error.png": "958e8c4bb6f177a95f8a1a051eb7a8c01d4299a6fb883a0d9827db01baa23e05",
+      "examples/framework-quality/output/cycle-3/ui-320.png": "2dc0226767498720e30b77b96fd8d309cd7dcee7eff7a66c3e5e93a03b6be0b0",
+      "examples/framework-quality/output/cycle-3/ui-390-dialog.png": "d6aed892211c8a2ac17e67ae6464dd684985a84d970a1ffc16b7c37c15668e86",
+      "examples/framework-quality/output/cycle-3/ui-390-empty.png": "8e7844309e932ed1e58d1755061730558a2a0737d033bf02afe09847467c263c",
+      "examples/framework-quality/output/cycle-3/ui-390-error.png": "83e58c6ccc878e280cf3cb88dc80fae051b812264859dec15ec98591a58ebe68",
+      "examples/framework-quality/output/cycle-3/ui-390.png": "2cf9a184a18fb4cdf872de86bae330cb7571021ed1f347e25e4f0d562520c9b9",
+      "examples/framework-quality/output/media/attempt-002/carousel-01.png": "c8fb830a3c5d10d57b47ea16607da5ef15a9853b039474cb3c2b029a3d97c2ed",
+      "examples/framework-quality/output/media/attempt-002/carousel-02.png": "1007da44aa7c182aa8d9aedcae9442c4913ccd08bc90f300f02cbc2e8c6d6baa",
+      "examples/framework-quality/output/media/attempt-002/carousel-03.png": "b108d504b500315e7c89c19ff60bfce33f29719864a270b2c3be3895c8521528",
+      "examples/framework-quality/output/media/attempt-002/carousel-04.png": "293e104008db7950de23abca8b867784f77a3d9f96024a0ae90ec776fa5631ef",
+      "examples/framework-quality/output/media/attempt-002/carousel-05.png": "52910647f52496228b9916b9b2632ee2ceea1e192e26b5bcb7f10062b331a073",
+      "examples/framework-quality/output/media/attempt-002/carousel-contact.png": "426518331aed82627a3fc2580279a1403987cffebeb4a6c47c760d463e280547",
+      "examples/framework-quality/output/media/attempt-002/carousel-mobile-390.png": "4e5ed92ec0764660426f108d18e42065043f27bd5818fb0bbcbbc5ee9567162e",
+      "examples/framework-quality/output/media/attempt-002/encode.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "examples/framework-quality/output/media/attempt-002/lume-reel.mp4": "75bde21831dc80d22933c2b92388a71f7d1c1683d17be9fa83e37ea06092ddb5",
+      "examples/framework-quality/output/media/attempt-002/lume-sound.wav": "39a2812fcb3dc232ad4e41f10a6d37742d9edab54305cafabde877c8248e8238",
+      "examples/framework-quality/output/media/attempt-002/reel-contact.png": "eb5ef32618464c4ae860c3ff927d1d0b7b9f087598c9e46ee04818d72cd27cd7",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-00.png": "bbbb6a732d2cb920be8cf3b1ecf9dee834f9b6ba5d814c8953912a30755e8438",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-01.png": "e3cd3fc7a9bb2fba0b855dcab4e3264f22b4c7ffbf09bc3ab224aa63ac45dac9",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-02.png": "0ce7beafbbdd2551097292f07dec628ab4b5f784c61d40792cfc0059c56cf941",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-03.png": "639889c1285463570d165241066994ce8e8f9c65b716c2983d4696f3a34bc468",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-04.png": "17641156b44e71f099174431c1b314bebefb2eebfe1f391dc69d1b092757c04f",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-05.png": "4841f64cbc0fa1f91a0ae5a251056e74a8350b5fd6c5f67a40da721a60148156",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-06.png": "6148101e8ab65302f606bae879d93e4367f50aedf792f99420e2164ce4ef934d",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-07.png": "34fb81ad9b77610b0d2eb0fb230b71ff1bade9fe429110993fd0cda6d265cfce",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-08.png": "d5c709e8f9fe24709b44b39fb97f4ce319da1a0eae1de4aba12f0e2598048e6c",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-09.png": "b92707b9f389de19b41b56228b6de5e6087eaff3e19eb07ccf804fa42046023c",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-10.png": "3d54724534801ba90a757da8d4e9358fa852071bb0352f8ba72f63f98af79e46",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-11.png": "f3b260523cb089ae6e7bfbdcdd600bec76dca4bb088635068666677f4c71a41e",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-12.png": "efe2c3fb68d1a65b46ccd45f3feee85cd445422bdbd8b1e860f95a09ba3d3b2a",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-13.png": "f52a9a6ba39c59270945f13a466bb5fc8be7e2af1ca9b67547e6709cb53c0bc1",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-14.png": "5be3be0356c008e97a25fa2130d8702d95c18b3f05f7d252d164e5272c381353",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-15.png": "4748a12aea84ea697ca2d536e63ad53e6b8edf3af72baf889242f172c3c399da",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-16.png": "e2d5820724b755cab5c09d6acedd53671e1db646a9d4ce9cffd4ae79539d7887",
+      "examples/framework-quality/output/media/attempt-002/reel-frame-17.png": "abc5039d6ac1ebb84bd274b9baf2350f9d1383cc7de5dba4f13c3c561e4f6342",
+      "examples/framework-quality/output/media/attempt-002/reel-mobile-390.png": "39d60a19289139c25b8bf66e652bbc95307ce60b76fa14ecf21925eaf4ffa69c",
+      "examples/framework-quality/output/media/attempt-002/review-audio.mp3": "e372fdfd7a1d2fe809a1173848015deb4c3606d3e7bf83e422714b477b66e7b3"
+    },
+    "amendments": [
+      {
+        "path": "examples/framework-quality/output/media/lint-amendment/receipt.json",
+        "sha256": "e55a9234a95c41073f4f80cfa64e49f38853876aad25f62eb0de337a14d74cb3"
+      },
+      {
+        "path": "examples/framework-quality/output/media/attempt-002/verification-summary.json",
+        "sha256": "fc7fe8bac08c317ea234bd9289f3cc8ebb611cbc30e0289063bb532e903213c8"
+      },
+      {
+        "path": "examples/framework-quality/output/verification/preservation-and-provenance.json",
+        "sha256": "22cd65e75e00c9cec46c9fceb2845bfb7a2f15705ba452d64f924723946556ae"
+      }
+    ],
+    "finalOutputHashReadback": {
+      "count": 55,
+      "mismatches": [],
+      "observedAt": "2026-10-02T11:28:46.837Z"
+    },
+    "currentCodeHashesAtClosure": {
+      "scripts/framework-evolution/runtime.cjs": "c5e0a02b9b47438a2c8e8d6c433a91e4a3201f7ed89abc5fdaf033f9c4b7b18f",
+      "scripts/framework-evolution/knowledge.cjs": "c3d2a15c1af4fb0f10d1bdf5272b3e9b4ffe0341188c3f2e8eb2a10c51430726",
+      "scripts/expert-evolution/expertise.cjs": "0728059f2716bca662fe03ddd9ec71e5e63457c41a58a795f4dc70cdfacc2ddb",
+      "scripts/framework-evolution/jev.cjs": "6336d2d8a35d9abfde0f933e784de311c050cb9a22d6a4acecd3c2cfb6922357",
+      "bin/lib/framework-evolution-delivery.js": "bf4907a802e2a3df76c37ede9fb10e1c2f9b65868b91af453565bdc37b7257a0",
+      "scripts/expert-evolution/model-policy.cjs": "c1181fb1ca9f7f9604b6f095f94a300bb2face155ac54af82696e5a702d62f36",
+      "scripts/expert-evolution/extraction.cjs": "8cc44566a9bb6dfbcd49b3e780d94fff416c7e77426102f7794480c01d7f081a"
+    },
+    "currentReceiptHashesAtClosure": {
+      "examples/framework-quality/output/cycle-3/receipt.json": "676dc2b00c0934297d7e21d4ddb9503e647f6cef7205b96c50d253f105ab6824",
+      "examples/framework-quality/output/media/attempt-002/receipt.json": "e96810e8e39575cef9993deb29c22f91120d46a6105327ef19bbdbb46dcfb2ad",
+      "examples/framework-quality/output/verification/integrated-tests.json": "766fe031d0a455f3603d437dd8796fc79a2ac639d219385fe68053502c15ad4d",
+      "examples/framework-quality/output/media/lint-amendment/receipt.json": "e55a9234a95c41073f4f80cfa64e49f38853876aad25f62eb0de337a14d74cb3",
+      "examples/framework-quality/output/media/attempt-002/verification-summary.json": "fc7fe8bac08c317ea234bd9289f3cc8ebb611cbc30e0289063bb532e903213c8",
+      "examples/framework-quality/output/verification/preservation-and-provenance.json": "22cd65e75e00c9cec46c9fceb2845bfb7a2f15705ba452d64f924723946556ae",
+      "examples/framework-quality/output/verification/private-consolidation.json": "2955d47f7fa55a396ceba6cda4e0029b1c041942912fd47d3ebd949c52b80080"
+    },
+    "postClosureAdministrativeAmendment": {
+      "observedAt": "2026-10-02T11:36:40.769Z",
+      "currentHashes": {
+        "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md": "8aaee94fc434892b187ed420a0e76853e6cc40994d848620f19d52f1bacc6338",
+        "docs/stories/audited-evolution-20261002.story.md": "33abe04fb741456a43dd5c4421b378866933bcb323a93b3c91cd4bef1038f07d"
+      },
+      "historicalSnapshotsPreserved": true,
+      "reasons": {
+        "spec": "Single upstream-label wording change in architecture decision for source-reference hygiene; no brief/rubric/ASR change",
+        "story": "Ready to InReview; author marked acceptance criteria/tasks and added file list/QA Results; status is not human approval"
+      },
+      "reconstructedHistoricalHashes": {
+        "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md": "d6bd8da3116cffb156c6e9c44753a39cf83eaf951a6bb8d0e136022db0698971",
+        "docs/stories/audited-evolution-20261002.story.md": "7d5e380f8fb423c59e72e3d8a92bcf6a8586cae54848480fc7e16e0976291d57"
+      },
+      "reconstructionMatchesStoredSnapshots": {
+        "spec": true,
+        "story": true
+      },
+      "ASRBriefRubricUnchanged": true,
+      "proof": "Reversing only the one architecture-expression change reproduces the complete historical spec byte hash; reversing the enumerated administrative story changes reproduces its complete historical byte hash",
+      "currentStoryStatus": "InReview",
+      "humanApproval": false,
+      "creativeReevaluation": false,
+      "runtimeOrOutputChange": false,
+      "reviewIterationUnchanged": 3
+    }
+  },
+  "reviewedAt": "2026-10-02T11:17:24.993Z",
+  "reviewHistory": [
+    {
+      "iteration": 1,
+      "artifacts": [
+        {
+          "id": "ui",
+          "cycle": 3,
+          "scores": [
+            19,
+            19,
+            17,
+            18,
+            18
+          ],
+          "total": 91,
+          "status": "PASS-bounded",
+          "independentlyOperatedBrowser": false,
+          "evidence": [
+            "ui-1440.png",
+            "ui-390.png",
+            "ui-390-dialog.png",
+            "ui-390-empty.png",
+            "ui-390-error.png"
+          ],
+          "basis": "Physically viewed pixels; interaction source inspected; behavior checks attributed to author",
+          "criticalVisualFailuresObserved": []
+        },
+        {
+          "id": "motion",
+          "cycle": 3,
+          "scores": [
+            19,
+            19,
+            18,
+            17,
+            18
+          ],
+          "total": 91,
+          "status": "CONCERNS-fullmotion-unobserved",
+          "evidence": [
+            "motion-1440.png",
+            "motion-normal-end.png",
+            "output/review/motion-normal-contact.png",
+            "output/review/motion-reduced-contact.png"
+          ],
+          "sampling": {
+            "fps": 2,
+            "order": "left-to-right then top-to-bottom",
+            "normalDurationSeconds": 6.8,
+            "reducedDurationSeconds": 4.6
+          },
+          "traceActions": [
+            "call@178 pause one active animation",
+            "call@198 final step no active animation",
+            "call@214 reset no animation",
+            "call@226 runtime reduced commits step 2",
+            "call@238 and call@328 unmounted zero listeners/animations"
+          ],
+          "basis": "Sampled pixels and author-generated raw trace independently read; continuous smoothness unobserved",
+          "criticalVisualFailuresObserved": []
+        },
+        {
+          "id": "carousel",
+          "attempt": 1,
+          "scores": [
+            19,
+            18,
+            16,
+            18,
+            18
+          ],
+          "total": 89,
+          "status": "CONCERNS-target-unmet",
+          "evidence": [
+            "carousel-01.png",
+            "carousel-02.png",
+            "carousel-03.png",
+            "carousel-04.png",
+            "carousel-05.png",
+            "carousel-mobile-390.png"
+          ],
+          "basis": "All five actual exports viewed; clear message/progression; generic placeholder cards/nodes offer limited distinctive composition",
+          "neededImprovement": "Use a concrete editorial idea evolving through selection/composition/review while retaining readability and frozen identity",
+          "criticalVisualFailuresObserved": []
+        },
+        {
+          "id": "reel",
+          "attempt": 1,
+          "scores": [
+            19,
+            18,
+            16,
+            null,
+            null
+          ],
+          "total": null,
+          "status": "CONCERNS-audio-and-continuousmotion-unobserved",
+          "evidence": [
+            "reel-contact.png",
+            "reel-mobile-390.png",
+            "output/review/reel-decoded-contact.png"
+          ],
+          "sampling": {
+            "independentDecodedFps": 1,
+            "observedSeconds": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ]
+          },
+          "basis": "Text/progression seen in decoded master samples; audiovisual rhythm/finish cannot be scored without hearing/playback",
+          "criticalVisualFailuresObserved": []
+        }
+      ],
+      "provenance": {
+        "report": "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
+        "outputDirectories": {
+          "uiMotion": "examples/framework-quality/output/cycle-3",
+          "media": "examples/framework-quality/output/media/attempt-001",
+          "independentDerivatives": "examples/framework-quality/output/review"
+        },
+        "hashSnapshots": {
+          "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md": "d6bd8da3116cffb156c6e9c44753a39cf83eaf951a6bb8d0e136022db0698971",
+          "docs/stories/audited-evolution-20261002.story.md": "7d5e380f8fb423c59e72e3d8a92bcf6a8586cae54848480fc7e16e0976291d57",
+          "examples/framework-quality/output/cycle-3/receipt.json": "676dc2b00c0934297d7e21d4ddb9503e647f6cef7205b96c50d253f105ab6824",
+          "examples/framework-quality/output/media/attempt-001/receipt.json": "f828e1dd32eafaa84249ef93bfd08b732eefa183b227a4aa6f9c558a5c862331"
+        },
+        "reviewedCodeHashes": {
+          "scripts/framework-evolution/runtime.cjs": "c5e0a02b9b47438a2c8e8d6c433a91e4a3201f7ed89abc5fdaf033f9c4b7b18f",
+          "scripts/framework-evolution/knowledge.cjs": "c3d2a15c1af4fb0f10d1bdf5272b3e9b4ffe0341188c3f2e8eb2a10c51430726",
+          "scripts/expert-evolution/expertise.cjs": "282ce00960fa58b0072882b0ce9f1ef2b835914225d3067eb421451c39283c0e",
+          "scripts/framework-evolution/jev.cjs": "6336d2d8a35d9abfde0f933e784de311c050cb9a22d6a4acecd3c2cfb6922357",
+          "bin/lib/framework-evolution-delivery.js": "7abd10d69795d1c4a4d14dd40a41b04ae2022d5075ad939b7af6c134f443309b",
+          "scripts/expert-evolution/model-policy.cjs": "c1181fb1ca9f7f9604b6f095f94a300bb2face155ac54af82696e5a702d62f36"
+        },
+        "outputHashSnapshots": {
+          "examples/framework-quality/output/cycle-3/motion-1440.png": "2df7ff7286c70bbe8981e448ec57dbe18c6caf00e584b602782fde2145325f75",
+          "examples/framework-quality/output/cycle-3/motion-320.png": "bc3ec01a29c505447d5f739fa8f0feffdf7aa313b0da28f3862fda105ac64e90",
+          "examples/framework-quality/output/cycle-3/motion-normal-browser-trace.zip": "d42325f2fc3b0703dd32abbdf5122e3e14dae9ec381e9e8cc0fa3561ecdebfe7",
+          "examples/framework-quality/output/cycle-3/motion-normal-cpu-trace.json": "c4d37795d0dc78db62746cc4b32ce5b25592da98a47a67aa3c6efd3baddcad2a",
+          "examples/framework-quality/output/cycle-3/motion-normal-end.png": "cc9a6c0e240ab37db8597e26f216d7bb1f40b8865fb93a95fdd45a6efd839261",
+          "examples/framework-quality/output/cycle-3/motion-normal-start.png": "472e80bc69c81140ab87acff6bf1d478154f27df4ead90ceac1447f384c51b88",
+          "examples/framework-quality/output/cycle-3/motion-normal.webm": "e77881e6f5ef5bafd38fa11e13934b47d8cb95b2ed3a8f274521e4c391a93aec",
+          "examples/framework-quality/output/cycle-3/motion-reduced-browser-trace.zip": "d22fe73c8ac5afb341ccd11c3ba3bc3ffa193c8976d57df1166c9b4c7f8f2725",
+          "examples/framework-quality/output/cycle-3/motion-reduced-cpu-trace.json": "e9b411b9e32e5dafc8222909894e74fc612b2f287742b8fa3f1270656bbc27e3",
+          "examples/framework-quality/output/cycle-3/motion-reduced-end.png": "fdedc913f2131a64d938c0bc3df10567b2f8d5e6f69d2ab241f29d02100d1aa8",
+          "examples/framework-quality/output/cycle-3/motion-reduced-start.png": "359ff3a5147e62a8b6fb94f979876b08d93485bf5f50c4787694452038f4c4f9",
+          "examples/framework-quality/output/cycle-3/motion-reduced.webm": "7ad152940a3d3ec7af19855645cc8b2f0903a2b070d54de0278cf942e8882439",
+          "examples/framework-quality/output/cycle-3/ui-1440-dialog.png": "58946eaf5ede4d8e3da2c126c328477634914bff837a0693b26e9d15ad201feb",
+          "examples/framework-quality/output/cycle-3/ui-1440-empty.png": "60a289362248dac17b1863098cdcc48ac32b30f14cecd9dad6b96beada92f12a",
+          "examples/framework-quality/output/cycle-3/ui-1440-error.png": "1f58831b6e9fd081b205fdcdb4a70e76d03084d605b0ea84a17f317390c5a007",
+          "examples/framework-quality/output/cycle-3/ui-1440.png": "8226080ca5edd6b3917f950a1376c93c6d0f623d0819ea3dfec6e2b4d6135d12",
+          "examples/framework-quality/output/cycle-3/ui-320-dialog.png": "2a1b5af673aa391be45ca06fffc13a94f3a61fc4b7a70dcb7e872387ae14ae9f",
+          "examples/framework-quality/output/cycle-3/ui-320-empty.png": "29eba162b14c7bf0287e0e83dfd64f8453dd6e7f2c9e909d05d65d06c5083624",
+          "examples/framework-quality/output/cycle-3/ui-320-error.png": "958e8c4bb6f177a95f8a1a051eb7a8c01d4299a6fb883a0d9827db01baa23e05",
+          "examples/framework-quality/output/cycle-3/ui-320.png": "2dc0226767498720e30b77b96fd8d309cd7dcee7eff7a66c3e5e93a03b6be0b0",
+          "examples/framework-quality/output/cycle-3/ui-390-dialog.png": "d6aed892211c8a2ac17e67ae6464dd684985a84d970a1ffc16b7c37c15668e86",
+          "examples/framework-quality/output/cycle-3/ui-390-empty.png": "8e7844309e932ed1e58d1755061730558a2a0737d033bf02afe09847467c263c",
+          "examples/framework-quality/output/cycle-3/ui-390-error.png": "83e58c6ccc878e280cf3cb88dc80fae051b812264859dec15ec98591a58ebe68",
+          "examples/framework-quality/output/cycle-3/ui-390.png": "2cf9a184a18fb4cdf872de86bae330cb7571021ed1f347e25e4f0d562520c9b9",
+          "examples/framework-quality/output/media/attempt-001/carousel-01.png": "90d68fc5eecb92bd8fe7b85bedbd2303317d35f6981b6751b856a87e955ce0f7",
+          "examples/framework-quality/output/media/attempt-001/carousel-02.png": "1342c6b281546409c63000eacc183792846c6f799a7f56769c8f131849af80a5",
+          "examples/framework-quality/output/media/attempt-001/carousel-03.png": "674047571826df9758ece6da5174cd4b86bce875f01bd66543840d11df883449",
+          "examples/framework-quality/output/media/attempt-001/carousel-04.png": "b5313f6e6dcb7d04ff1c4c4e1caf33400c9832c4e35bc9b2b7e31c5dec185ac2",
+          "examples/framework-quality/output/media/attempt-001/carousel-05.png": "51d53fd0be9981dcfdf963a0cfa05635e6ab5e13b5f272b8ab1d012f828621f4",
+          "examples/framework-quality/output/media/attempt-001/carousel-contact.png": "67ad8fd9a7c12669d550d945b7c9dff7f3d18b3773f46babe50686478b1bccd3",
+          "examples/framework-quality/output/media/attempt-001/carousel-mobile-390.png": "ffc3b431aeba87f716099ee1fec5c383f4ade9d57eba180c87a09a319c456dc3",
+          "examples/framework-quality/output/media/attempt-001/encode.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "examples/framework-quality/output/media/attempt-001/lume-reel.mp4": "a02f2827ef690bb1e74fdf68218ea6f5003fb62149e4cd6b1ec58692a6cd9f06",
+          "examples/framework-quality/output/media/attempt-001/lume-sound.wav": "39a2812fcb3dc232ad4e41f10a6d37742d9edab54305cafabde877c8248e8238",
+          "examples/framework-quality/output/media/attempt-001/reel-contact.png": "bfa2d4ce8e983a05946da570c9ac8d55f7aa6583884aaef6375cb62deaef2a52",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-00.png": "b200d6e712619e9332d7cfc318f8aae042a4741e4dcdb3cea73da9f7de46be19",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-01.png": "21324d7868011695e2e781af186086057d0520cf261a003ea9d875a1191f4b19",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-02.png": "2b6411d58a0ccd6cc76ea3ba4717ea499fee6fc4f62907b73f949822b1cda579",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-03.png": "f80666fb5b96ff5197f5eb31bf6ad6fcb9716be219e07c3f5eb9e6a784a405cb",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-04.png": "e385d8c60e085f3760b68b4bcdd61424f85ebbacbb9bfef8a6b45caeaaf6bdff",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-05.png": "e7a9960acd11f7d257148f1f4e5d761c8e6fc756eb62998da5cb42e7405334a8",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-06.png": "0564387020a730f5f1c6d572c4ec933e6b1b0ee22a355329e75d69940a5fbac7",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-07.png": "fcaf98fe1e88d25134857e31dd730de2cb2bb06561180bb6b24a48af723e9325",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-08.png": "3e6dd3c754e455868a88dc7dcaa53001cef0a03d58f39b28541e1fe57fa68158",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-09.png": "63884367cd2d74c223af5ca229251a4218fff88d1d88de052da6747940d7bfe7",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-10.png": "f6bc6744491d46e4fb9ac287c5c0b625f8fb7e95cbdb78bfad4260ac6729831f",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-11.png": "99ed3363cf561f24ac95ee09176fc8d212041924c5ea2a59f6a491ed582ef22b",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-12.png": "779f451be63c954a770c71539a2e60424e373ebae5280c5024d86efdbba08038",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-13.png": "0bebba2a2ceefb4c4dfa44aada3a39418a6b5117b5b798bf692f73c023eba22e",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-14.png": "5dd1eeb3fe0fa6be46e47c148c49a623b0bb834debf55e63ad0451e706b3133f",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-15.png": "18e1c8565387957a65d2cba44a5915546c199fa4dadd972ab059191092015277",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-16.png": "ba78875f7b16a4d708e122b4966db2680e99fec5092611b0d0e9d44a0d3d9752",
+          "examples/framework-quality/output/media/attempt-001/reel-frame-17.png": "8c97ad0db306158a598a8ed6f2233f83bc0844399f168071eeaf70672b0d5ca8",
+          "examples/framework-quality/output/media/attempt-001/reel-mobile-390.png": "1adbbc8c29f8f9f72fb567a2afd15de91c11fc748ba4f96796b3b5dd27e9ba73",
+          "examples/framework-quality/output/media/attempt-001/review-audio.mp3": "e372fdfd7a1d2fe809a1173848015deb4c3606d3e7bf83e422714b477b66e7b3"
+        }
+      }
+    },
+    {
+      "iteration": 2,
+      "carouselAttempt": 2,
+      "scores": [
+        19,
+        18,
+        18,
+        18,
+        18
+      ],
+      "total": 91,
+      "technicalFindings": "RT06/VIS01/VIS02/PROV01 closed; privateCAS awaiting integration at that time"
+    }
+  ],
+  "privateC03Review": {
+    "scope": "pure-decision-technical-fixture-not-DOM-or-expertise-promotion",
+    "candidateRef": {
+      "path": "research/expert-evolution/library/candidates/owned-retained-origin-technical.json",
+      "sha256": "e9e939585ee18388c23f744ebbbd25faf3cbce4575f73345a15675b47dc290a6"
+    },
+    "reviewRef": {
+      "path": "research/expert-evolution/library/reviews/owned-retained-origin-technical-independent/receipt.json",
+      "sha256": "1650cefb5bb8bab8e93e1e344428fff3142d81b1eed3af17efdcca43215ff6f5"
+    },
+    "observedCases": 3,
+    "missingOriginRejected": true,
+    "decision": "approved-bounded-mechanism",
+    "expertisePromotion": false,
+    "consolidation": "observed-private-CAS",
+    "privateSourceTextIncluded": false,
+    "consolidationReceipt": {
+      "path": "examples/framework-quality/output/verification/private-consolidation.json",
+      "sha256": "2955d47f7fa55a396ceba6cda4e0029b1c041942912fd47d3ebd949c52b80080"
+    },
+    "overlay": {
+      "path": "research/expert-evolution/library/overlay.json",
+      "sha256": "114ebab8d7c3176e448484deba880eb5b8580f354ecf63a5f9cb15ba3e64e531",
+      "entries": 1,
+      "expertisePromotion": false
+    },
+    "independentReadback": {
+      "refsRecomputed": 6,
+      "mismatches": [],
+      "added": 1,
+      "repeatAdded": 0,
+      "repeatDuplicate": true,
+      "runtimeObservedChars": 8491,
+      "runtimeKnowledgeChars": 4294,
+      "briefDiffersFromAuthorReceipt": true,
+      "boundIncludesMechanism": true,
+      "otherCommandIncludesMechanism": false,
+      "unboundItems": 0,
+      "profileStatus": "planned",
+      "coverage": "gap",
+      "promoted": false,
+      "publicCorpusHashMismatches": []
+    }
+  },
+  "reviewComplete": true,
+  "technicalStatus": "PASS-bounded-no-open-code-findings",
+  "independentVisualStatus": "UI-and-carousel-91-with-frozen-rubric",
+  "unresolvedScope": [
+    "Audio not heard",
+    "Continuous video playback not observed",
+    "Human approval not provided"
+  ],
+  "completedAt": "2026-10-02T11:28:46.847Z",
+  "currentStoryStatus": "InReview"
+}

@@ -1,0 +1,199 @@
+{
+  "workflow_id": "WF-20261002-operational-evolution",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Explicar a evolução e avançar pendências com evidência",
+  "scope": "Worktree isolada; preview, contratos, organização, extensão pessoal compatível; sem protected/publicação/remoção funcional",
+  "inputs": [
+    "OPERATIONAL-SPEC.md",
+    "HANDOFF.md",
+    "YOLO e acesso aberto pelo usuário"
+  ],
+  "outputs": [
+    "preview claro",
+    "contratos revisados",
+    "receipt de instalação ou bloqueio",
+    "clusters auditados",
+    "checkpoint"
+  ],
+  "acceptance": [
+    "Ready story validada",
+    "AC1-AC6 verificadas com limites"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "Congelar aceite",
+      "owner": "sinapse-orqx",
+      "depends_on": [],
+      "command_or_tool": "story e workflow validators",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "Ready validado"
+      ],
+      "acceptance": [
+        "Ready validado"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    },
+    {
+      "task_id": "T02",
+      "objective": "Reorganizar preview",
+      "owner": "design-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "HTML CSS JS e screenshots",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "desktop/390px e links"
+      ],
+      "acceptance": [
+        "desktop/390px e links"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    },
+    {
+      "task_id": "T03",
+      "objective": "Revisar contratos prioritários",
+      "owner": "research-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "fontes canônicas e bindings tests",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "mapping/hash/critério corretos"
+      ],
+      "acceptance": [
+        "mapping/hash/critério corretos"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Auditar instalação pessoal",
+      "owner": "devops",
+      "depends_on": [
+        "T01",
+        "T08"
+      ],
+      "command_or_tool": "delivery audit CAS backup readback",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "instalado delimitado ou bloqueio"
+      ],
+      "acceptance": [
+        "instalado delimitado ou bloqueio"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Auditar clusters e serviços",
+      "owner": "sinapse-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "consumidores e sessão observada",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "decisões fundamentadas sem remoção"
+      ],
+      "acceptance": [
+        "decisões fundamentadas sem remoção"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    },
+    {
+      "task_id": "T07",
+      "objective": "Produzir seis pares de interfaces reservadas",
+      "owner": "design-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "two isolated native generations plus independent visual review",
+      "max_iterations": 1,
+      "max_attempts": 1,
+      "inputs": [
+        "paired-interface-protocol.json",
+        "frozen context and common brief"
+      ],
+      "outputs": [
+        "12 actual HTML interfaces plus independent review"
+      ],
+      "acceptance": [
+        "same model/assets/brief; screenshot and behavioral checks; no global causal claim"
+      ],
+      "rollback": "Preservar outputs ignorados como evidência; não modificar corpus a partir do benchmark"
+    },
+    {
+      "task_id": "T08",
+      "objective": "Completar seis tarefas ausentes de design e revisar bindings",
+      "owner": "design-orqx",
+      "depends_on": [
+        "T03"
+      ],
+      "command_or_tool": "canonical squad sources, new task contracts, resolver tests",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "six gaps in priority-contracts-review.json",
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "six executable task workflows plus explicit source declarations and bindings"
+      ],
+      "acceptance": [
+        "canonical responsibility/input/output/criteria; no expertise promotion; aliases and core preserved"
+      ],
+      "rollback": "Restaurar apenas fontes/tarefas desta ownership por hash; preservar aliases e alterações concorrentes"
+    },
+    {
+      "task_id": "T06",
+      "objective": "Integrar e verificar",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T07",
+        "T08"
+      ],
+      "command_or_tool": "gates testes e handoff",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "OPERATIONAL-SPEC.md"
+      ],
+      "outputs": [
+        "verdade por camada e preservação"
+      ],
+      "acceptance": [
+        "verdade por camada e preservação"
+      ],
+      "rollback": "Restaurar apenas ownership desta onda com precondição de hash e backup; preservar concorrência"
+    }
+  ]
+}

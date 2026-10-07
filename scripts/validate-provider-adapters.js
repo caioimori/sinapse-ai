@@ -131,6 +131,14 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     expectedSkills = (manifest.skillIds || []).map((skillId) => ({ skillId }));
     if (expectedSkills.length !== 37) errors.push(`Claude skill manifest must contain 37 IDs, found ${expectedSkills.length}`);
+    const optional = manifest.optionalSkillIds || [];
+    if (!Array.isArray(optional) || new Set(optional).size !== optional.length || optional.some(id=>id!=='sinapse-project-expert')) errors.push('Unknown/duplicate optional project skill');
+    else for (const skillId of optional) {
+      const codexPath=path.join(projectRoot,'.agents','skills',skillId,'SKILL.md'),claudePath=path.join(projectRoot,'.claude','skills',skillId,'SKILL.md');
+      const hasCodexSurface=fs.existsSync(path.join(projectRoot,'.codex','agents')) || fs.existsSync(path.join(projectRoot,'.agents','skills'));
+      if (!fs.existsSync(claudePath) || (hasCodexSurface && (!fs.existsSync(codexPath) || fs.readFileSync(codexPath,'utf8')!==fs.readFileSync(claudePath,'utf8')))) errors.push('Optional project skill lacks provider parity: '+skillId);
+      expectedSkills.push({skillId});
+    }
     for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx', 'sinapse-agent']) {
       if (!manifest.skillIds.includes(alias)) errors.push(`Claude skill manifest is missing public alias ${alias}`);
     }

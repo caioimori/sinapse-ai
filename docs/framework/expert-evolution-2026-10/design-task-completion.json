@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "kind": "design-principal-task-completion",
+  "taskId": "T08",
+  "reviewStatus": "semantic-reviewed-not-evaluated",
+  "families": [
+    "ui-motion"
+  ],
+  "expertisePromoted": false,
+  "method": "New explicitly owned domain workflows resolve six historical T03 rejections. Evaluate meaning, inputs, outputs, critical criteria, negative cases and authority; workflow authored is not workflow executed.",
+  "baseline": {
+    "reviewedFunctions": 29,
+    "reviewedCommands": 43,
+    "bindingsSha256": "6e59e22ea105383cc390d2775253b0eb9892cd66d93dc13bc4bce2534eddcb38",
+    "preservedProfiles": [
+      {
+        "agentId": "ad-copywriter",
+        "sha256": "28de8fefaaa56801697f0676cdb3e65cf6e19a461cefd748b239902239799f7f"
+      },
+      {
+        "agentId": "animation-interpreter",
+        "sha256": "a84df677ef3071ee38d96bbb79fc9ccb72238791ef65c5410f4ba0aec6198619"
+      },
+      {
+        "agentId": "animation-performance-engineer",
+        "sha256": "c52cb93d24134162ff672b1a3f7a7dd64ac40e7f62bb7dab880b43d5d456afad"
+      },
+      {
+        "agentId": "animations-orqx",
+        "sha256": "201df0cfe67483b94ef76448b8bd10f89610d1f3fd9f649bde7bcf76e6db29a2"
+      },
+      {
+        "agentId": "brand-creative-engineer",
+        "sha256": "1938446bcecef010c11850e7cc28fdc6b8133d0a7f792e1a5d8e89fdfc109009"
+      },
+      {
+        "agentId": "brand-motion-vfx",
+        "sha256": "38b5b49aaf9889058c63c5bf172049f178e417cc0789186c0bed14980cbebe0b"
+      },
+      {
+        "agentId": "brand-sonic-designer",
+        "sha256": "8f6cd1f23c83b6f3de24bb74efb7f75935446b7a22aa879257c726734a58abf4"
+      },
+      {
+        "agentId": "content-analyst",
+        "sha256": "3b71b8b17a5460fa5ecbb5d13a83543ce10ad4b62b67f192eab06c03d606068e"
+      },
+      {
+        "agentId": "content-engineer",
+        "sha256": "5bd029afc28adaabc524bdd315d27f2b993005c401f6038ca99bd0894a5f2ee1"
+      },
+      {
+        "agentId": "content-governor",
+        "sha256": "5dabad128d4a85717598c4145435a7483f0228e1ec1c761f1fefc0232e0831c3"
+      },
+      {
+        "agentId": "content-orqx",
+        "sha256": "7db2667ed28b1a3cc216dfa123b9d82a01d982ac87d081cb6d049b68f866ad57"
+      },
+      {
+        "agentId": "css-motion-artist",
+        "sha256": "914357e2219bdc2cbba577bd1896a2de1fceb50c367f3e2b824f8f7c724c9dfa"
+      },
+      {
+        "agentId": "design-orqx",
+        "sha256": "138cf23ecadb324f60faa9715bf3827bebb019ed9d241e998e8fbde29d1bae5b"
+      },
+      {
+        "agentId": "dx-accessibility-specialist",
+        "sha256": "7fbc7e54b9df55282fc222476ff34f86281eecc30af914fecd7a2e91271087aa"
+      },
+      {
+        "agentId": "dx-design-system-architect",
+        "sha256": "17120a8cb08094b1d57e548e103b1978a8025dc7a1fc45a16a5da5ca012e304f"
+      },
+      {
+        "agentId": "dx-frontend-engineer",
+        "sha256": "6117e8ab0ad3f65e8226a9dc7a234eeb56ae73e6377ef26225e589761905ed65"
+      },
+      {
+        "agentId": "dx-interaction-designer",
+        "sha256": "71c38384d1fd45be5a6f93b2054313fd24768558d0b48f8292dd00eeeaf94dd2"
+      },
+      {
+        "agentId": "dx-performance-engineer",
+        "sha256": "1447125484086a5d787c3dbf5d28ee9ef0686c87f4951d1dbb0d7f954b382c58"
+      },
+      {
+        "agentId": "dx-ui-designer",
+        "sha256": "d633bffaaa1508a1aeb396f896a2879ca3fdb64b1af94be1d62a50c30bc6dc06"
+      },
+      {
+        "agentId": "dx-ux-strategist",
+        "sha256": "b680b53ea960a57156816cb531a284fbc11645340631b5feee351264a2f91eb4"
+      },
+      {
+        "agentId": "editorial-strategist",
+        "sha256": "65034d6fe4c015c75d7eceda58f96cf8a4f8c6ee5476d9780ab71798b1837a43"
+      },
+      {
+        "agentId": "generative-particle-engineer",
+        "sha256": "6c314f2701a5bcdd543c640f92cb1c8dddad758dd2e5132fb26fc55dfc075d8d"
+      },
+      {
+        "agentId": "motion-choreographer",
+        "sha256": "3854f47797fd87965ffa1f82915b03ac226852c50c6582148d3e0a3e54aa321f"
+      },
+      {
+        "agentId": "platform-specialist",
+        "sha256": "ad13b0c798f2d58da5ed597ca73ea0b43f82658e9762088ba69ffe0544e5d3a3"
+      },
+      {
+        "agentId": "production-director",
+        "sha256": "a962bcf2f8a9c0ae8e548018e0bbdbc2a0c41b13b70e0db43f666a176965bde7"
+      },
+      {
+        "agentId": "scroll-narrative-engineer",
+        "sha256": "9c96f18ba6d38d4cac1af8558f4193a5840fc072f4f2ee7189668e6302a2842b"
+      },
+      {
+        "agentId": "shader-artist",
+        "sha256": "4b026f5abe57880d834651cc573749fa9f3d936ea8029bbc4bbd2311e11ed9a2"
+      },
+      {
+        "agentId": "signal-intelligence",
+        "sha256": "75e49ad21e36444725bb0c1ece92c59a21e7070339b9e0e6e570d8e576ebf827"
+      },
+      {
+        "agentId": "threejs-architect",
+        "sha256": "5e2b9fefbf3e58b139894086e06d53a992e38d415d56e50e5758c206aa4d7e75"
+      }
+    ],
+    "sourcesSha256": "5ea19ce3a1c0dffa5b23fad835ac23c462b8f9f90b6d0a4aea72ebc2f4695c9f",
+    "historicalReceipt": {
+      "path": "docs/framework/expert-evolution-2026-10/priority-contracts-review.json",
+      "sha256": "af25195b268dc2721630fb2a4f13d663b12f48a4d4cf27f37a4ba968b82adab7"
+    },
+    "historicalMarkdown": {
+      "path": "docs/framework/expert-evolution-2026-10/priority-contracts-review.md",
+      "sha256": "ab86a271a24c0ed67cd1248207aa4d994f75df7051678df4d3fe0d4b9b39b18b"
+    }
+  },
+  "contracts": [
+    {
+      "agentId": "design-system",
+      "command": "build-component",
+      "aliases": [
+        "build"
+      ],
+      "locator": "Componente delimitado com API, tokens e comportamento verificável",
+      "competency": "bounded-component-implementation",
+      "deliverableId": "design-system-component",
+      "name": "Bounded reusable component and verified states",
+      "input": "Component brief, permitted files, actual stack/inventory, approved tokens, API, state and accessibility requirements.",
+      "output": "Implemented or extended component, API/state matrix, examples, interaction checks and desktop/390px evidence.",
+      "rationale": "The canonical build mission owns component implementation; this task narrows it to reuse, API compatibility and observed behavior, without global migration.",
+      "criteria": [
+        {
+          "id": "component-reuse",
+          "check": "Trace reuse/extension to inventory and consumers; preserve approved tokens and API compatibility.",
+          "method": "Diff and composition review"
+        },
+        {
+          "id": "component-behavior",
+          "check": "Verify required states, keyboard/focus/name and reduced-motion information in actual interaction.",
+          "method": "Interaction checks and state matrix"
+        },
+        {
+          "id": "component-reflow",
+          "check": "Observe desktop/390px with long text/error without page overflow or lost essential content.",
+          "method": "Screenshots and overflow inspection"
+        }
+      ],
+      "negative": {
+        "input": "Equivalent button exists; proposed global token change and long text overflow at 390px.",
+        "expected": "Reuse/extend, reject out-of-scope tokens and correct reflow before acceptance."
+      },
+      "scope": "Nesta rota, as métricas legadas de redução/ROI são hipóteses a medir, nunca metas obrigatórias ou resultado produzido. Usar stack, tokens e componentes existentes; mudanças globais dependem de escopo próprio.",
+      "sourceBeforeSha256": "eca6cb44b7982c43d33bc1254aae54de79795e797713e2db604de094e1080a4f",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/design-system.md",
+        "sha256": "bafb0397367bba3d4dd104c6aa4c8080c13704438bcc5adfe8b2efe69ae9e084",
+        "locator": "Componente delimitado com API, tokens e comportamento verificável"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/build-component.md",
+        "sha256": "5dc061598baf7eb4b419bbc4ebcfd92235cf28954b255d52612e8c2f8992fda1",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    },
+    {
+      "agentId": "ux-designer",
+      "command": "ux-create-wireframe",
+      "aliases": [
+        "wireframe"
+      ],
+      "locator": "Wireframe orientado à tarefa com estados e hipóteses rastreáveis",
+      "competency": "task-grounded-wireframing",
+      "deliverableId": "annotated-task-wireframe",
+      "name": "Task-grounded wireframe and state handoff",
+      "input": "User/task brief, available research with source, approved content, existing flow/components and responsive/state requirements.",
+      "output": "Annotated desktop/390px wireframes, task/state walkthrough, explicit assumptions and independent validation plan.",
+      "rationale": "The existing wireframe mission belongs to this UX wrapper; the new squad task replaces its missing development pointer without inventing research or runtime proof.",
+      "criteria": [
+        {
+          "id": "wireframe-task",
+          "check": "Trace regions/actions to task evidence or marked hypotheses; make main action and recovery identifiable.",
+          "method": "Brief walkthrough"
+        },
+        {
+          "id": "wireframe-states",
+          "check": "Specify pertinent success/empty/loading/error/permission states and recovery without security claims.",
+          "method": "State matrix and negative walkthrough"
+        },
+        {
+          "id": "wireframe-reflow",
+          "check": "Preserve reading/focus order and long content at desktop/390px; distinguish drawing from runtime proof.",
+          "method": "Reflow and handoff review"
+        }
+      ],
+      "negative": {
+        "input": "Submission error, 120-character title and unauthorized user at 390px.",
+        "expected": "Plan data-preserving recovery, readable reflow and access-denied state without inventing restricted data or RLS tests."
+      },
+      "scope": "O alias wireframe aponta explicitamente para a task da squad abaixo; para esta missão ele substitui o pointer legado de development. Pesquisa ausente vira hipótese, desenho estático não prova runtime, e regras de paleta/tamanho/amostra dependem do brief.",
+      "sourceBeforeSha256": "1f22d43ba8e7a9d13007f3d009ddffcc1197aebb62ae03c679bb65c3e92583c9",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/ux-designer.md",
+        "sha256": "5b81f3e926095256d4066e5db76b8f569a1388b6ffcc64488b620847bb899a58",
+        "locator": "Wireframe orientado à tarefa com estados e hipóteses rastreáveis"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/ux-create-wireframe.md",
+        "sha256": "ba732cd16c9da66fd0e6742895be17ac89d2bddad8438fe37030a356f875ea53",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    },
+    {
+      "agentId": "cro-persuasion",
+      "command": "create-cro-patterns",
+      "aliases": [],
+      "locator": "CRO Patterns Map com integridade e hipóteses mensuráveis",
+      "competency": "ethical-conversion-pattern-specification",
+      "deliverableId": "integrity-cro-pattern-map",
+      "name": "CRO pattern map with integrity and measurement plan",
+      "input": "Task/conversion brief, real offer/claims with authorized source, analytics definitions, content, tokens and accessibility requirements.",
+      "output": "Pattern map with evidence-bound claims, state/interaction specifications, hypotheses, control and guardrail measurement plan.",
+      "rationale": "Sway owns visual conversion patterns and their hypotheses; specification does not prove causal lift, invent social evidence or alter commercial conditions.",
+      "criteria": [
+        {
+          "id": "cro-integrity",
+          "check": "Ground every price/proof/urgency/guarantee in authorized evidence; preserve informed comparison and consent.",
+          "method": "Claim trace and adversarial review"
+        },
+        {
+          "id": "cro-usability",
+          "check": "Specify keyboard, decline/return and unobstructed 390px reading; expose absent runtime checks.",
+          "method": "State and handoff inspection"
+        },
+        {
+          "id": "cro-measurement",
+          "check": "Define hypothesis/control, event/window/unit/denominator and guardrails or explicit gaps; no causal gain claim.",
+          "method": "Experiment plan review"
+        }
+      ],
+      "negative": {
+        "input": "Resetting timer, unlicensed testimonial, unsupported popular badge and preselected consent.",
+        "expected": "Reject misleading/coercive elements and retain an informative alternative and equivalent refusal."
+      },
+      "scope": "Nesta rota, CTAs múltiplos, progress forms e estimativas do catálogo são hipóteses condicionais. Evidência real e consentimento têm precedência; nunca fabricar prova social, garantia, escassez ou ganho de conversão.",
+      "sourceBeforeSha256": "ce02241393c26a6853d5a7a619e64b5c0f724f97c81a3cbca4bc4757d957ce39",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/cro-persuasion.md",
+        "sha256": "0f667f6c4dc65384efab7b2e4b2aa6fdeffe9656d27dcee85f7bdd88db484a10",
+        "locator": "CRO Patterns Map com integridade e hipóteses mensuráveis"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/create-cro-patterns.md",
+        "sha256": "684cf472199ae51fec078a9432e2471de6c695273fa83cb473aa463bd2edc7e7",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    },
+    {
+      "agentId": "platform-aesthetic-director",
+      "command": "consult-canon",
+      "aliases": [],
+      "locator": "Curadoria de referências com mecanismo, procedência e exceção",
+      "competency": "contextual-reference-curation",
+      "deliverableId": "category-reference-dossier",
+      "name": "Source-bound category reference dossier",
+      "input": "Category/task/brand brief, actual authorized corpus or primary URLs, observed version/access and curation constraints.",
+      "output": "Reference dossier with observed locators/version, relevant decomposition, mechanisms/exceptions, fit/rejection and downstream handoff.",
+      "rationale": "Hue curates and decomposes references for category fit; a named KB or Mobbin URL neither proves access nor grants implementation or final approval.",
+      "criteria": [
+        {
+          "id": "canon-provenance",
+          "check": "Locate reference/version, actual observed scope and access/rights status; unseen material stays candidate.",
+          "method": "Source readback"
+        },
+        {
+          "id": "canon-transfer",
+          "check": "Tie mechanisms and exceptions to task/brand with a counterexample and reasoned rejection.",
+          "method": "Fit and alternative review"
+        },
+        {
+          "id": "canon-boundary",
+          "check": "Preserve brand/accessibility in handoff without copying or asserting price, conversion or runtime approval.",
+          "method": "Authority and downstream review"
+        }
+      ],
+      "negative": {
+        "input": "Unattributed dark dev-tool screenshot for a readable light-brand bank product, inaccessible behind login.",
+        "expected": "Mark missing access/provenance, reject copied palette and return verified alternative or explicit gap."
+      },
+      "scope": "Consultar somente KBs realmente existentes ou fontes autorizadas observadas. Nomes legados de KB não comprovam disponibilidade; decomposição conserva marca/acessibilidade e não aprova implementação nem valor comercial.",
+      "sourceBeforeSha256": "ed594ecb28fb9cf256a1c767c4bb5b2ab0c78c217be329eb6e1a72117af95427",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/platform-aesthetic-director.md",
+        "sha256": "3257fe444cd21a744b7c46e36d8b1cf6c4e97d06921bf7c2b8b93cc5bc81a443",
+        "locator": "Curadoria de referências com mecanismo, procedência e exceção"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/consult-canon.md",
+        "sha256": "2eed9f5dd7fa07de58d0700363c3972160efef3aa1132196934e9e562f430757",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    },
+    {
+      "agentId": "premium-packaging-strategist",
+      "command": "premium-packaging-brief",
+      "aliases": [],
+      "locator": "Premium Packaging Brief contextual com agência do usuário",
+      "competency": "contextual-premium-presentation",
+      "deliverableId": "contextual-packaging-brief",
+      "name": "Contextual multi-surface packaging brief",
+      "input": "Declared positioning, user task, actual surface inventory, approved brand/tokens/assets, cost/accessibility limits and observed first-use evidence.",
+      "output": "Presentation brief with real surface inventory, proposed craft/direction, consistency/first-use decisions, exceptions and independent validation plan.",
+      "rationale": "Aura owns packaging briefs and consistency; legacy 3x/friction/craft assertions become contextual hypotheses, while pricing and willingness-to-pay require separate evidence.",
+      "criteria": [
+        {
+          "id": "packaging-fit",
+          "check": "Tie direction/craft to positioning/task with cost, alternative and exception; invent no attribute or price gain.",
+          "method": "Brief trace review"
+        },
+        {
+          "id": "packaging-consistency",
+          "check": "Distinguish present/absent surfaces and connect approved tokens/brand rules to decisions and owners.",
+          "method": "Consistency matrix and handoff"
+        },
+        {
+          "id": "packaging-agency",
+          "check": "Keep pertinent access/skip/return and accessible recovery; reject artificial friction or assumed economic lift.",
+          "method": "Adversarial first-use walkthrough"
+        }
+      ],
+      "negative": {
+        "input": "Justify 3x solely with visuals, block skip for exclusivity, and assume a nonexistent invoice.",
+        "expected": "Reject economic causality and coercive friction, preserve task/skip and document absent surface."
+      },
+      "scope": "Nesta rota, os não-negociáveis históricos são hipóteses a confrontar com a tarefa: craft pode ser dispensado, skip/retorno são preservados quando pertinentes, e fricção artificial é rejeitada. Apresentação não justifica preço 3x sem evidência econômica própria.",
+      "sourceBeforeSha256": "9cbb0aed5786d04282f5b00c115d7e0c89ae6cabfcf4529fecadfa54dc16365a",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/premium-packaging-strategist.md",
+        "sha256": "95f11bdbf4ad08b7beb138fcde30a0bc52c9becbfdb451d80df935a43e84f47a",
+        "locator": "Premium Packaging Brief contextual com agência do usuário"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/premium-packaging-brief.md",
+        "sha256": "59964b6586e7cbae73b9f53eab2aef731dfad74a711a96231b8313e5ab9e5215",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    },
+    {
+      "agentId": "product-surface-director",
+      "command": "design-product-surface",
+      "aliases": [],
+      "locator": "Art direction de superfície logada com estados seguros e ergonomia",
+      "competency": "state-aware-product-surface-specification",
+      "deliverableId": "product-surface-state-brief",
+      "name": "Task and state-aware product surface brief",
+      "input": "Surface/user-role/task brief, real or marked-fixture content, permission/data requirements, existing tokens and required modes/reflow/states.",
+      "output": "Annotated surface composition, density/state/recovery/permission matrix, keyboard/motion/reflow rules and bounded implementation handoff.",
+      "rationale": "Axiom owns logged-surface art direction; it specifies state-safe ergonomics and density, without implementing permissions or inferring retention from aesthetics.",
+      "criteria": [
+        {
+          "id": "surface-task",
+          "check": "Trace zones/density/actions to role/task and tokens; impose no generic KPI or theme requirement.",
+          "method": "Task walkthrough and requirement trace"
+        },
+        {
+          "id": "surface-state-safety",
+          "check": "Specify error/empty/loading/conflict/denial recovery without restricted data; design is not auth/RLS proof.",
+          "method": "State matrix and adversarial review"
+        },
+        {
+          "id": "surface-reflow",
+          "check": "Preserve content/feedback across desktop/390px, long text, keyboard and required modes; disclose runtime/AT limits.",
+          "method": "Design or observed interaction/capture review"
+        }
+      ],
+      "negative": {
+        "input": "Long-name table, edit conflict and unauthorized user at 390px; request restricted data and unsolicited dark mode.",
+        "expected": "Use safe denial/conflict recovery, readable reflow and brief-required modes without claiming tested RLS."
+      },
+      "scope": "Nesta rota, densidade, KPI hero, frequência e light/dark são definidos pelo brief e pelas evidências; não há dark mode universal, garantia de retenção ou inferência de segurança por tela desenhada.",
+      "sourceBeforeSha256": "eacb00c6f53600b844311f946a2ea8c6971e846802038826da55f5298c95b97a",
+      "family": "ui-motion",
+      "sourceRef": {
+        "path": "squads/squad-design/agents/product-surface-director.md",
+        "sha256": "1ec199f6cce53c202603347f8efd45daf8b76281f0cbc889736a12862d3da4fc",
+        "locator": "Art direction de superfície logada com estados seguros e ergonomia"
+      },
+      "taskRef": {
+        "path": "squads/squad-design/tasks/design-product-surface.md",
+        "sha256": "711392b5274b7c6a4bd7ea150c9b4d54e7523b943f38b2d4ba624b59a1cd3f19",
+        "locator": "Entradas / Passos / Saídas / Critérios observáveis / Caso negativo / Freio e falha / Rollback"
+      }
+    }
+  ],
+  "result": {
+    "profiles": 172,
+    "reviewedFunctions": 35,
+    "reviewedCommands": 51,
+    "addedFunctions": 6,
+    "addedCommands": 8,
+    "newTasks": 6,
+    "targetBindingGaps": 0,
+    "validatedExpertise": 0,
+    "sourceRead": 2,
+    "sourceCandidates": 88
+  },
+  "limits": [
+    "Tasks authored and semantically bound; no six-task output evaluation has been performed.",
+    "Other role commands and all candidate contracts remain unreviewed; source acquisition is pending.",
+    "Legacy optional KB names were not found under squad-design; consult-canon verifies actual authorized corpus before use.",
+    "Static wireframes/briefs do not prove rendered interaction, physical devices, assistive technology, auth/RLS, commercial lift or expertise.",
+    "Installation, provider adapters and registry regeneration belong to parent integration; no install or generation here."
+  ],
+  "validation": {
+    "status": "passed-local-contract-checks",
+    "schemas": {
+      "program": true,
+      "taskBindings": true
+    },
+    "tests": {
+      "suites": 4,
+      "passed": 76,
+      "failed": 0,
+      "pending": 0,
+      "command": "npx jest tests/unit/operational-contracts.test.js tests/unit/resolve-codex-agent.test.js tests/unit/resolve-codex-command.test.js tests/unit/expert-evolution-bindings.test.js --runInBand"
+    },
+    "eslint": true,
+    "diffCheck": true,
+    "resolvedAgents": 172,
+    "deliverableRoutes": [
+      "interface",
+      "motion",
+      "Reel",
+      "carrossel",
+      "anúncio"
+    ],
+    "compactBudget": 3000,
+    "compactContracts": [
+      {
+        "agentId": "design-system",
+        "chars": 2519,
+        "complete": true,
+        "status": "bound"
+      },
+      {
+        "agentId": "ux-designer",
+        "chars": 2417,
+        "complete": true,
+        "status": "bound"
+      },
+      {
+        "agentId": "cro-persuasion",
+        "chars": 2467,
+        "complete": true,
+        "status": "bound"
+      },
+      {
+        "agentId": "platform-aesthetic-director",
+        "chars": 2459,
+        "complete": true,
+        "status": "bound"
+      },
+      {
+        "agentId": "premium-packaging-strategist",
+        "chars": 2520,
+        "complete": true,
+        "status": "bound"
+      },
+      {
+        "agentId": "product-surface-director",
+        "chars": 2562,
+        "complete": true,
+        "status": "bound"
+      }
+    ],
+    "workflowExecutions": 0,
+    "expertiseEvaluation": "pending",
+    "installation": "parent-integration-pending"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-02T09:25:37.622Z",
+  "before": {
+    "sources": 35,
+    "heuristics": 67
+  },
+  "after": {
+    "sources": 67,
+    "heuristics": 112,
+    "agents": 172,
+    "allCoverageGap": true
+  },
+  "packSha256": "a3b966d95d9c6aefe5b7ed74bec694680eef07a22bb4b926c25ff734cfeede46",
+  "files": {
+    "research/framework-evolution/sources.json": "358ad1d674c7a759dbb7b17272611205d404a6b1b6ad0321a988c950d6abae6c",
+    "research/framework-evolution/heuristics.json": "0b3d86fa1ab4e816d945ac608ddfe15334deda57fe385388667910601242b3f3",
+    "research/framework-evolution/competencies.json": "955f0c2eb3afd97a0bdbaf888911cf4e7d9bdab79184f9f177f6c79572d56245"
+  },
+  "status": "merged-and-schema-grounded",
+  "limits": [
+    "No independent domain promotion",
+    "Read sections and retained excerpts only, not complete author corpus"
+  ]
+}

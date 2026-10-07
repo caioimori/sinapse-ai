@@ -1,0 +1,137 @@
+{
+  "caseId": "F013-N",
+  "status": "REVIEW_ONLY",
+  "dimensions": {
+    "units": "mm",
+    "width": 120,
+    "depth": 80,
+    "height": 40,
+    "origin": "generation-cases/F013-N.json#case.facts",
+    "originSha256": "35ed948d330fed644bd37aeffd4967cde0439c3f764e22741e968eaf75b2adc8",
+    "bleed": 3,
+    "safeZone": 5
+  },
+  "dieline": {
+    "status": "UNVERIFIED",
+    "reason": "Brief afirma faca fornecida/corte e dobras indicados; nenhum arquivo de faca ou coordenadas foi exposto.",
+    "proposal": "Bandeja aberta em cruz sem abas, para posicionamento editorial; não substitui a faca fornecida.",
+    "panel": {
+      "x": 48,
+      "y": 48,
+      "width": 120,
+      "height": 80
+    },
+    "cutPolygon": "48,8 168,8 168,48 208,48 208,128 168,128 168,168 48,168 48,128 8,128 8,48 48,48",
+    "foldBounds": {
+      "x": 48,
+      "y": 48,
+      "width": 120,
+      "height": 80
+    },
+    "safeBounds": {
+      "x": 53,
+      "y": 53,
+      "width": 110,
+      "height": 70
+    }
+  },
+  "essentialContent": [
+    {
+      "id": "product-name",
+      "value": "[NOME DO PRODUTO]",
+      "status": "PLACEHOLDER",
+      "conservativeBounds": {
+        "x": 63,
+        "y": 71,
+        "width": 72,
+        "height": 8
+      }
+    },
+    {
+      "id": "product-sku",
+      "value": "SKU: [PREENCHER]",
+      "status": "PLACEHOLDER",
+      "conservativeBounds": {
+        "x": 63,
+        "y": 89,
+        "width": 60,
+        "height": 7
+      }
+    }
+  ],
+  "tokens": {
+    "surface": {
+      "reviewRGB": "#f4f1eb",
+      "CMYK": null
+    },
+    "ink": {
+      "reviewRGB": "#0a0a0a",
+      "CMYK": null
+    },
+    "cut": {
+      "reviewRGB": "#bd235e",
+      "production": "NONPRINT_TECHNICAL_GUIDE"
+    },
+    "fold": {
+      "reviewRGB": "#2359b8",
+      "production": "NONPRINT_TECHNICAL_GUIDE"
+    },
+    "safe": {
+      "reviewRGB": "#28714a",
+      "production": "NONPRINT_TECHNICAL_GUIDE"
+    }
+  },
+  "rights": {
+    "status": "SYNTHETIC_AUTHORIZED",
+    "assets": "Original locally authored geometry and text; no external assets/resources"
+  },
+  "typography": {
+    "review": "System monospace, editable live SVG text",
+    "production": "Font choice, embedding/outlining and substitution UNVERIFIED"
+  },
+  "finishGuide": {
+    "review": "RGB, layers visible in packaging-review.svg; packaging-artwork.svg hides guides. No CMYK equivalence claimed.",
+    "production": {
+      "authorized": false,
+      "PDF": "NOT_CREATED",
+      "colorProfile": null,
+      "CMYK": null,
+      "Pantone": null,
+      "substrate": null,
+      "grammage": null,
+      "finish": null,
+      "requiredBeforeRelease": [
+        "Faca vetorial cotada original com corte/dobra, tolerâncias e orientação",
+        "Nome e SKU definitivos",
+        "Guidelines: logo, paleta CMYK/Pantone, tipografia e vocabulário",
+        "Ficha gráfica: material/gramatura, perfil de saída e acabamentos",
+        "Prova de corte/dobra/encaixe e prova de cor",
+        "Autorização específica de PDF de produção"
+      ]
+    },
+    "recommendedConcept": {
+      "finish": "Laminação fosca proposta, somente após compatibilidade com substrato e aprovação; sem hot stamping/relevo assumidos.",
+      "unboxing": "Interior limpo e nome/SKU legíveis; insert/tissue opcionais não incluídos sem dimensões e conteúdo."
+    },
+    "reservedLegalBarcode": "Dados legais/ingredientes/código de barras não fornecidos. Se aplicável, reservar 40 × 30 mm na faca confirmada, sem criar código ou claim."
+  },
+  "rootRenderPlan": {
+    "locators": [
+      "v1/packaging-review.svg",
+      "v1/packaging-artwork.svg",
+      "v1/packaging-concept-view.svg"
+    ],
+    "checks": [
+      "Renderizar SVG em tamanho integral e em 800 px",
+      "Conferir nome/SKU dentro do retângulo seguro com overlay",
+      "Conferir corte/dobra/sangria e ausência de clipping visual",
+      "Renderizar variante sem guias e conferir que o conteúdo não sumiu"
+    ],
+    "status": "UNVERIFIED"
+  },
+  "limits": [
+    "SVG não comprova CMYK, PDF/X, reconhecimento de marca ou embalagem produzível",
+    "Mockup realista 3D ausente; vista esquemática não o substitui",
+    "Sem envio/compra/publicação e sem produção"
+  ]
+}
