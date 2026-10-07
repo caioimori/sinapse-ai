@@ -71,6 +71,67 @@ function cleanup(root) {
 }
 
 describe('validate-no-external-refs', () => {
+  describe('authorized upstream provenance boundary', () => {
+    let root;
+    beforeAll(() => {
+      root = makeTmpRoot('provenance');
+      initGit(root);
+    });
+    afterAll(() => cleanup(root));
+
+    test('permits citations only in the exact authorized audit files', () => {
+      const files = [
+        'docs/framework/evolution-2026-10/README.md',
+        'docs/framework/evolution-2026-10/SPEC.md',
+        'docs/framework/evolution-2026-10/upstream.json',
+        'docs/framework/evolution-2026-10/upstream.md',
+        'docs/framework/evolution-2026-10/workflow.json',
+        'docs/framework/evolution-2026-10/HANDOFF.md',
+        'docs/framework/evolution-2026-10/verification.md',
+        'docs/stories/framework-evolution-20261002.story.md',
+        'scripts/framework-evolution/upstream-audit.cjs',
+        'tests/unit/framework-evolution-upstream.test.js',
+      ];
+      for (const file of files) {
+        writeFile(root, file, 'AIOX upstream: https://github.com/SynkraAI/aiox-core; MIT license; SHA provenance.');
+        gitAdd(root, file);
+      }
+      expect(validateNoExternalRefs(root).violations).toEqual([]);
+    });
+
+    test('rejects lookalikes, directory prefixes and operational references', () => {
+      const files = [
+        'docs/framework/evolution-2026-10/README-extra.md',
+        'docs/framework/evolution-2026-10/nested/upstream.md',
+        'docs/framework/evolution-2026-11/upstream.md',
+        'scripts/framework-evolution/runtime.cjs',
+        '.codex/agents/research.md',
+        'generated/AGENTS.md',
+        'bin/install.js',
+        'src/cli.js',
+        'src/product.js',
+      ];
+      for (const file of files) {
+        writeFile(root, file, 'AIOX SYNKRA SYNKRAAI BMAD');
+        gitAdd(root, file);
+      }
+      const result = validateNoExternalRefs(root);
+      for (const file of files) {
+        expect(result.violations.filter((v) => v.file === file)).toHaveLength(4);
+      }
+      expect(result.ok).toBe(false);
+    });
+
+    test('still rejects inherited personas inside authorized provenance', () => {
+      const file = 'docs/framework/evolution-2026-10/upstream.md';
+      writeFile(root, file, 'AIOX source attribution\nWinston (@architect)\nSally (@ux-design-expert)\nSarah (@product-lead)');
+      const violations = validateNoExternalRefs(root).violations.filter((v) => v.file === file);
+      expect(violations).toHaveLength(3);
+      expect(violations.map((v) => v.match)).toEqual([
+        'Winston (@architect', 'Sally (@ux-design-expert', 'Sarah (@product-lead',
+      ]);
+    });
+  });
   // ─────────────────────────────────────────────────────────────────────────
   describe('clean fixture', () => {
     let root;

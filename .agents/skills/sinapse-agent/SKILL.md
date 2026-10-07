@@ -20,3 +20,7 @@ squad specialists resolve to their catalog-declared source. A persona greeting m
 
 The 172 TOML adapters in `.codex/agents` remain the native subagent layer. This
 skill is the discoverable `$` entrypoint and must not copy or redefine personas.
+
+## Task-scoped knowledge
+
+7. For a resolved task only, inspect scripts/framework-evolution/{runtime,knowledge}.cjs and research/framework-evolution/{sources,heuristics,competencies}.json. When all five exist, run `node scripts/framework-evolution/runtime.cjs <agent-id> --task <command> --json --max-chars 12000 --knowledge-max-chars 6000`; use bounded citations as supplemental evidence, preserving canonical authority. If all five are absent, retain legacy execution. A partial installation or retrieval error blocks that task and must be reported. Skip retrieval during greeting or cold activation.

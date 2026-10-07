@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "status": "installed-bounded",
+  "auditedAt": "2026-10-02",
+  "installedVersion": "1.27.0",
+  "nativeAdaptersObserved": {
+    "codex": 172,
+    "claude": 173
+  },
+  "baseline": "693e9d0f9819cd700eae45734da41b055063fa5b",
+  "initialBindingTasksIdentical": 18,
+  "initialPlannedFiles": 211,
+  "fixture": {
+    "programValid": true,
+    "boundContextsAssembled": 18,
+    "largestContextChars": 9091,
+    "limitChars": 12000
+  },
+  "priorEvolutionRuntimeInstalled": false,
+  "preserved": [
+    "existing provider adapters",
+    "existing personal skills",
+    "settings",
+    "protected core",
+    "unrelated squads"
+  ],
+  "newEntrypoint": "sinapse-expert-runtime",
+  "claudeNativeAuth": {
+    "observed": true,
+    "loggedIn": true,
+    "authMethod": "claude.ai",
+    "apiProvider": "firstParty",
+    "subscriptionType": "team",
+    "cliVersion": "2.1.285"
+  },
+  "opus55": {
+    "selectedObserved": false,
+    "executed": false,
+    "apiAccessObserved": false,
+    "reason": "developer capsule prohibits nested Codex/Claude inference; auth status is a read-only local CLI query"
+  },
+  "nativeAgentExecutionObserved": false,
+  "next": "Opt-in skill entry is installed; a new session/restart may be needed for discovery. Native execution and behavioral improvement remain unobserved.",
+  "restartRequiredAfterInstall": [
+    "new Codex/Claude context for discovery of the additional skill"
+  ],
+  "publicationPerformed": false,
+  "installedReadbackAt": "2026-10-02T16:21:44.747Z",
+  "transactionId": "2f4270fb-0a47-416a-b355-23e2ae2e5cba",
+  "currentCanonical": {
+    "matchedBeforeDelivery": 166,
+    "updatedFromPublicBaseline": 5,
+    "updatedFromValidatedReceipt": 1,
+    "retainedManagedProofsWithIdenticalBytes": 8,
+    "matchedAfterDelivery": 172
+  },
+  "installedBindingCount": 51,
+  "changedPayloadFiles": 16,
+  "installedPayloadFiles": 262,
+  "payloadHashMismatches": 0,
+  "preservedEntryHashes": 460,
+  "preservationMismatches": 0,
+  "programValid": true,
+  "installedRuntimeContexts": {
+    "passed": 51,
+    "maximumChars": 9091,
+    "limitChars": 12000
+  },
+  "providerEntrypoints": [
+    {
+      "provider": "codex",
+      "present": true,
+      "path": ".agents/skills/sinapse-expert-runtime/SKILL.md"
+    },
+    {
+      "provider": "claude",
+      "present": true,
+      "path": ".claude/skills/sinapse-expert-runtime/SKILL.md"
+    }
+  ],
+  "journalStatus": "installed-bounded",
+  "lockHeld": false,
+  "globalWritesApplied": true,
+  "currentEvolutionRuntimeInstalled": true,
+  "unitTests": {
+    "passed": 29,
+    "failed": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "backupJournalReference": "~/.sinapse/backups/expert-evolution/2f4270fb-0a47-416a-b355-23e2ae2e5cba/journal.json",
+  "compatibilityForNextDelivery": {
+    "status": "applied-and-readback-verified",
+    "priorReceiptAndCompletedJournalValidated": true,
+    "required": [
+      "safe matching transaction ID",
+      "installed-bounded receipt and journal",
+      "final written receipt bytes and hash match observed receipt",
+      "canonical current hash matches receipt and written journal entry",
+      "prior journal remains unchanged during freeze"
+    ],
+    "coreUpdateAllowed": false,
+    "retainManagedProofs": "identical bytes only with CAS and written journal entry",
+    "newGlobalWritesDuringPreparation": 0,
+    "testsPassed": 29,
+    "installedBindingCount": 51
+  },
+  "helperGuardFixes": {
+    "status": "independent-qa-pass-applied",
+    "journalCAS": "absence for first write; last successful own digest thereafter",
+    "recovery": "independent per entry; original error and blockedFiles retained; separate exclusive recovery evidence if journal changed",
+    "regressionsPassed": [
+      "concurrent journal afterWrite edit",
+      "original failure preserved when journal recovery is blocked",
+      "directory substitution restores earlier safe entry",
+      "symlink substitution restores earlier safe entry",
+      "first journal write collision"
+    ],
+    "homeWritesDuringFix": 0,
+    "priorInstalledBindingCount": 43,
+    "priorReceiptAndJournalUnchanged": true,
+    "helperSha256": "4d8a4dba159788e179814bedc7c33375b544ec6d20cef033efc9517162797a36",
+    "testSha256": "1d279e133310205d192a2d253baa47aaf1011829017be95873c55b8f83d407e6",
+    "independentTestsPassed": 29,
+    "independentRealReproductionsPassed": [
+      "concurrent journal",
+      "payload directory substitution",
+      "race after receipt write"
+    ]
+  },
+  "initialCanonicalAudit": {
+    "identicalToWorktree": 165,
+    "identicalToPublicBaseline": 7,
+    "missing": 0
+  },
+  "deliveryHistory": [
+    {
+      "status": "historical-superseded",
+      "bindingCount": 43,
+      "payloadFiles": 253,
+      "verifiedAt": "2026-10-02T15:54:59.895Z",
+      "transactionId": "5b64437f-6b57-4095-8d4a-40cda8e15d1a",
+      "originalPersonalHashesPreserved": 458
+    }
+  ],
+  "reviewedFunctionCount": 35,
+  "plannedPayloadWrites": 24,
+  "identicalPayloadWrites": 8,
+  "originalPersonalPreservationEntries": 458,
+  "journalWrittenEntries": 25,
+  "priorCompletedJournalUnchanged": true
+}

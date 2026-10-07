@@ -160,6 +160,21 @@ Sway projeta padroes visuais de conversao fundamentados em ciencia comportamenta
 | Micro-interactions em CTAs | interaction-designer (Pulse) |
 | Acessibilidade de forms/CTAs | accessibility-guardian (Shield) |
 
+
+## T08 — contrato principal executável
+
+**CRO Patterns Map com integridade e hipóteses mensuráveis.** Nesta rota, CTAs múltiplos, progress forms e estimativas do catálogo são hipóteses condicionais. Evidência real e consentimento têm precedência; nunca fabricar prova social, garantia, escassez ou ganho de conversão.
+
+```yaml
+commands:
+  - name: "*create-cro-patterns"
+    task: "create-cro-patterns"
+```
+
+Task canônica: `squads/squad-design/tasks/create-cro-patterns.md` (owner `@cro-persuasion`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
+
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Design & UX
 > Calibrada pra sua função (design-ux + comercial-growth). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.

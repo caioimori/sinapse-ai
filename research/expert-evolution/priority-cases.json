@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "reservation": {
+    "reservedAt": "2026-10-02",
+    "stage": "before-heuristic-extraction",
+    "purpose": "Casos reservados para avaliação posterior independente; escrever heurísticas não prova aprovação.",
+    "status": "executed-limited-decision-comparison",
+    "scoring": "0 omite decisão; 1 reconhece risco mas não resolve; 2 decisão correta, exceção e prova concreta. Todo caso critical exige 2 e nenhuma alegação de acesso/resultado inventada.",
+    "freezeRule": "Não alterar expectedDecision ou contraexemplos para favorecer a biblioteca; corrigir caso somente com justificativa e revisão independente.",
+    "clockNote": "Casos escritos antes da extração; horário preciso da reserva não foi capturado. Data registrada sem inventar hora.",
+    "sourceCrosswalkNote": "URLs candidatas reservadas permanecem; actualEvidenceSourceIds identifica leitura real e caminhos corrigidos. Decisões e contraexemplos permanecem congelados.",
+    "executionReceipt": "research/expert-evolution/benchmark-results.json",
+    "scope": "Expected decisions and counterexamples unchanged; results do not validate all competencies."
+  },
+  "cases": [
+    {
+      "id": "priority-case-client-brand",
+      "agentIds": [
+        "dx-design-system-architect"
+      ],
+      "sourceUrls": [
+        "https://www.designtokens.org/tr/2025.10/format/",
+        "https://atomicdesign.bradfrost.com/chapter-2/"
+      ],
+      "criticality": "high",
+      "prompt": "Um cliente de saúde tem identidade própria. O pedido é tornar o produto premium; o executor pretende copiar cores e tipografia SINAPSE em todos os tokens.",
+      "expectedDecision": "Preservar a marca autorizada do cliente, criar nomes semânticos e validar temas nos componentes reais; não impor identidade SINAPSE ou concluir qualidade pela troca da paleta.",
+      "requiredEvidence": [
+        "origem da identidade do cliente",
+        "mapeamento tokens e componentes",
+        "amostras de estados e temas"
+      ],
+      "counterexamples": [
+        "Marca SINAPSE é correta em produto SINAPSE com brief autorizado; multi-brand pode compartilhar semântica sem compartilhar paleta."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-dtcg",
+        "priority-atomic"
+      ]
+    },
+    {
+      "id": "priority-case-modal-focus",
+      "agentIds": [
+        "dx-accessibility-specialist",
+        "dx-frontend-engineer"
+      ],
+      "sourceUrls": [
+        "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/"
+      ],
+      "criticality": "critical",
+      "prompt": "Modal visualmente perfeito permite Tab escapar para o fundo e fechar não devolve foco ao acionador.",
+      "expectedDecision": "Bloquear conclusão; definir foco inicial apropriado, ciclo de Tab, Escape e retorno ao acionador ou próximo ponto lógico; verificar teclado e tecnologia assistiva.",
+      "requiredEvidence": [
+        "sequência reproduzível de teclado",
+        "foco após fechar",
+        "nome acessível"
+      ],
+      "counterexamples": [
+        "Excluir acionador pode tornar mais lógico focar outro elemento do fluxo; título de conteúdo longo pode receber foco inicial."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-dialog"
+      ]
+    },
+    {
+      "id": "priority-case-compositor-jank",
+      "agentIds": [
+        "animation-performance-engineer",
+        "css-motion-artist"
+      ],
+      "sourceUrls": [
+        "https://web.dev/articles/animations-guide",
+        "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/will-change"
+      ],
+      "criticality": "high",
+      "prompt": "Animação de transform está com jank no celular; proposta de adicionar will-change a 2.000 cards permanentemente.",
+      "expectedDecision": "Medir frames, rasterização e camadas no dispositivo representativo; limitar e retirar promoção quando não necessária, simplificar trabalho; transform não garante ausência de paint ou custo GPU.",
+      "requiredEvidence": [
+        "trace com causa",
+        "comparação antes/depois",
+        "orçamento por dispositivo"
+      ],
+      "counterexamples": [
+        "Layout necessário em accordion pode ser aceito com medição e escopo; não proibir toda propriedade além de transform/opacity por dogma."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-animation-pipeline",
+        "priority-will-change"
+      ]
+    },
+    {
+      "id": "priority-case-reduced-motion",
+      "agentIds": [
+        "dx-interaction-designer",
+        "css-motion-artist"
+      ],
+      "sourceUrls": [
+        "https://motion.dev/docs/react-use-reduced-motion",
+        "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html"
+      ],
+      "criticality": "critical",
+      "prompt": "Hero tem parallax JS e vídeo em loop; CSS reduz transições, mas loop e scroll continuam. Designer diz que basta zerar duração global.",
+      "expectedDecision": "Aplicar alternativa funcional sem movimento vestibular, considerar controle de pausa para conteúdo automático aplicável, testar preferência no runtime JS e preservar informação/foco.",
+      "requiredEvidence": [
+        "resultado com preferência reduce",
+        "controle acessível aplicável",
+        "mesma informação disponível"
+      ],
+      "counterexamples": [
+        "Motion essencial pode permanecer com justificativa; curto feedback de cor não equivale a parallax vestibular."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-reduced",
+        "priority-pause"
+      ]
+    },
+    {
+      "id": "priority-case-react-server-boundary",
+      "agentIds": [
+        "dx-frontend-engineer"
+      ],
+      "sourceUrls": [
+        "https://nextjs.org/docs/app/getting-started/server-and-client-components",
+        "https://react.dev/learn/you-might-not-need-an-effect"
+      ],
+      "criticality": "high",
+      "prompt": "Página de catálogo estática ganhou use client no layout raiz e Effects para calcular subtotal e espelhar props.",
+      "expectedDecision": "Manter interatividade na menor fronteira necessária; derivar dados puros durante render, usar Effects para sincronização externa e validar bundle e fluxo real.",
+      "requiredEvidence": [
+        "dependências que exigem cliente",
+        "dados e código enviados",
+        "comportamento ao mudar quantidade"
+      ],
+      "counterexamples": [
+        "Conexão a player ou listener externo pode justificar Effect com cleanup; Context interativo exige fronteira cliente específica."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-next-boundary",
+        "priority-react-effects"
+      ]
+    },
+    {
+      "id": "priority-case-accessible-carousel",
+      "agentIds": [
+        "dx-accessibility-specialist",
+        "dx-interaction-designer"
+      ],
+      "sourceUrls": [
+        "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/",
+        "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html"
+      ],
+      "criticality": "critical",
+      "prompt": "Carrossel só muda com drag; autoplay continua ao receber foco e slides invisíveis ficam focáveis.",
+      "expectedDecision": "Oferecer alternativa sem arrastar, controle de rotação e estados/navegação coerentes; interromper rotação ao foco e impedir foco em slides indisponíveis.",
+      "requiredEvidence": [
+        "interação por teclado",
+        "alternativa pointer sem drag",
+        "estado de rotação"
+      ],
+      "counterexamples": [
+        "Gestos complementares podem permanecer; galeria estática sem autoplay não precisa controle de rotação."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-carousel",
+        "priority-drag"
+      ]
+    },
+    {
+      "id": "priority-case-video-broll-proof",
+      "agentIds": [
+        "production-director",
+        "content-engineer"
+      ],
+      "sourceUrls": [
+        "https://www.adobe.com/creativecloud/video/discover/b-roll.html",
+        "https://www.w3.org/WAI/media/av/captions/"
+      ],
+      "criticality": "high",
+      "prompt": "Reel de produto usa b-roll de outro modelo e legenda automática sem revisão. O roteiro tem claims técnicos não comprovados.",
+      "expectedDecision": "Usar mídia autorizada que corresponda ao produto e à fala; confirmar claims, revisar legendas, mapear plano visual por fala; b-roll ilustrativo não comprova funcionalidade.",
+      "requiredEvidence": [
+        "proveniência e correspondência do asset",
+        "fala vinculada ao plano",
+        "legendas revisadas"
+      ],
+      "counterexamples": [
+        "Cena conceitual pode ser usada com identificação clara; vídeo mudo exige outra forma de acesso ao conteúdo visual relevante."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-broll",
+        "priority-captions"
+      ]
+    },
+    {
+      "id": "priority-case-hooks-retention",
+      "agentIds": [
+        "content-engineer",
+        "headline-specialist"
+      ],
+      "sourceUrls": [
+        "https://support.google.com/youtube/answer/9314415",
+        "https://www.tiktok.com/business/en/blog/creative-codes-for-tiktok"
+      ],
+      "criticality": "high",
+      "prompt": "Hook promete dobrar receita em 7 dias sem prova. Escolheram vencedor apenas por pico de views após um único post.",
+      "expectedDecision": "Remover ou fundamentar promessa, alinhar abertura ao conteúdo; avaliar retenção e resultado do objetivo por público/janela comparável, sem tratar dica de anúncio TikTok como lei do orgânico.",
+      "requiredEvidence": [
+        "claim e suporte",
+        "curva e contexto de retenção",
+        "definição do resultado"
+      ],
+      "counterexamples": [
+        "Pico pode indicar replay ou confusão; baixa retenção pode decorrer de distribuição diferente sem condenar narrativa."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-youtube-retention",
+        "priority-tiktok-codes"
+      ]
+    },
+    {
+      "id": "priority-case-carousel-density",
+      "agentIds": [
+        "content-engineer",
+        "platform-specialist"
+      ],
+      "sourceUrls": [
+        "https://www.gov.uk/guidance/content-design/writing-for-gov-uk",
+        "https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html"
+      ],
+      "criticality": "high",
+      "prompt": "Carrossel social obedece contagem de caracteres mas usa fonte minúscula, uma tese por slide sem relação causal e CTA genérico.",
+      "expectedDecision": "Validar leitura no tamanho final, preservar tese/mecanismo/evidência e progressão; ajustar densidade ao layout e oferecer conteúdo textual acessível. Contagem é limite do template, não prova de legibilidade.",
+      "requiredEvidence": [
+        "preview em tamanho de consumo",
+        "continuidade entre slides",
+        "texto acessível/caption equivalente"
+      ],
+      "counterexamples": [
+        "Dividir mecanicamente parágrafos pode quebrar raciocínio; imagens de texto não são necessariamente proibidas em rede social, mas têm limitação de acesso."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-images-text",
+        "priority-typography"
+      ]
+    },
+    {
+      "id": "priority-case-mobbin-access",
+      "agentIds": [
+        "dx-interaction-designer",
+        "dx-design-system-architect"
+      ],
+      "sourceUrls": [
+        "https://mobbin.com/browse/web/apps"
+      ],
+      "criticality": "critical",
+      "prompt": "Executor vê página pública e declara que analisou 50 fluxos premium, usando prints sem permissão em biblioteca de cliente.",
+      "expectedDecision": "Registrar apenas escopo efetivamente acessível e lido; separar catálogo público, candidato e fluxo autenticado; não reproduzir mídia premium nem declarar leitura/clone sem acesso e avaliação.",
+      "requiredEvidence": [
+        "URL e escopo visível",
+        "status candidato/lido",
+        "limite de licença"
+      ],
+      "counterexamples": [
+        "Acesso autorizado ainda exige respeitar termos; referência de padrão pode motivar solução original sem copiar pixels."
+      ],
+      "actualEvidenceSourceIds": [
+        "priority-mobbin-browserbase",
+        "priority-mobbin-doordash",
+        "priority-mobbin-square",
+        "priority-mobbin-getyourguide",
+        "priority-mobbin-ahead"
+      ]
+    }
+  ]
+}

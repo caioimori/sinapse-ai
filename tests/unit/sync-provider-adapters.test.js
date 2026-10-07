@@ -20,12 +20,17 @@ describe('cross-provider native adapters', () => {
     const first = syncClaudeNative(PROJECT_ROOT);
     const second = syncClaudeNative(PROJECT_ROOT);
     expect(first.agents.total).toBe(172);
-    expect(first.skills.total).toBe(37);
+    expect(first.skills.total).toBe(38);
     expect(second).toMatchObject({
       agents: { updated: 0, unchanged: 172 },
-      skills: { updated: 0, unchanged: 37 },
+      skills: { updated: 0, unchanged: 38 },
     });
     expect(validateClaudeNative(PROJECT_ROOT)).toMatchObject({ ok: true, errors: [] });
+    const manifest = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, '.claude', 'skill-manifest.json'), 'utf8'));
+    expect(manifest.skillIds).toHaveLength(37);
+    expect(manifest.optionalSkillIds).toEqual(['sinapse-project-expert']);
+    expect(fs.readFileSync(path.join(PROJECT_ROOT, '.claude', 'skills', 'sinapse-project-expert', 'SKILL.md')))
+      .toEqual(fs.readFileSync(path.join(PROJECT_ROOT, '.agents', 'skills', 'sinapse-project-expert', 'SKILL.md')));
   });
 
   it('resolves Claude mastery to the declared entry agent, not swarm', () => {

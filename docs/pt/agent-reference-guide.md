@@ -6,13 +6,13 @@ O SINAPSE inclui **172 agentes especializados**: **12 papéis do framework** e
 **160 especialistas na camada de squads**, organizados em **17 squads**. O ecossistema inclui **18
 orquestradores**: um orquestrador supremo e um por squad.
 
-O inventário atual contém **1.201 squad tasks**, **211 development tasks**,
-**1.412 task files** e **1.348 ponteiros de tasks** resolvíveis pelo runtime do
+O inventário atual contém **1.249 squad tasks**, **211 development tasks**,
+**1.460 task files** e **1.396 ponteiros de tasks** resolvíveis pelo runtime do
 Codex. Esses números são medidos a partir do código-fonte e validados na CI.
 
 | Superfície do provider | Claude Code | Codex |
 |---|:---:|:---:|
-| Skills instaladas | 37 | 37 |
+| Skills instaladas | 38 | 38 |
 | Hooks registrados | 20 registros | 9 eventos |
 
 ## Comece pelo orquestrador

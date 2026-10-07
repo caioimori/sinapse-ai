@@ -1,0 +1,185 @@
+{
+  "workflow_id": "WF-20261002-audited-evolution",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Corrigir defeitos auditados e provar quatro entregáveis locais com revisão independente",
+  "scope": "Worktree isolada, extensões e squads permitidas; sem protected/global/publish/delete; Jev até USD0.05 sem chave não executa",
+  "inputs": [
+    "AUDITED-SPEC.md",
+    "auditorias strategy/runtime/creative",
+    "revisão product specialist",
+    "YOLO autorizado"
+  ],
+  "outputs": [
+    "contratos corretos e recuperação pertinente",
+    "Jev durável e bundle recuperável",
+    "quatro artefatos e review",
+    "biblioteca consolidada/navegação/feedback",
+    "plano corrigido e checkpoint"
+  ],
+  "acceptance": [
+    "Ready story validada antes de código",
+    "AC1-AC10 com evidência reproduzível",
+    "preservação original/protected",
+    "limites de conclusão explícitos"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "Auditar e congelar aceite",
+      "owner": "sinapse-orqx",
+      "depends_on": [],
+      "command_or_tool": "audits/spec/story validator",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados"
+      ],
+      "outputs": [
+        "Ready story e workflow válido"
+      ],
+      "acceptance": [
+        "Ready story e workflow válido"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente"
+    },
+    {
+      "task_id": "T02",
+      "objective": "Corrigir recuperação e contratos",
+      "owner": "developer",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "bindings/runtime/expertise/corpus tests",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados"
+      ],
+      "outputs": [
+        "match explícito, briefing bounded, critérios protegidos e perfis sem posição"
+      ],
+      "acceptance": [
+        "match explícito, briefing bounded, critérios protegidos e perfis sem posição"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente",
+      "parallel_group": "corrections"
+    },
+    {
+      "task_id": "T03",
+      "objective": "Corrigir Jev, modelo e transação",
+      "owner": "developer",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "durable ledger/singleflight/CAS journal/policy tests",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados"
+      ],
+      "outputs": [
+        "concorrência/restart/falhas/datas e evidence fail-closed"
+      ],
+      "acceptance": [
+        "concorrência/restart/falhas/datas e evidence fail-closed"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente",
+      "parallel_group": "corrections"
+    },
+    {
+      "task_id": "T07",
+      "objective": "Preparar fontes editáveis dos quatro briefs congelados",
+      "owner": "dx-frontend-engineer",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "HTML/CSS/JS/Python/fontes próprias; sem render antes T02/T03",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md briefs Lume"
+      ],
+      "outputs": [
+        "fontes editáveis e receitas locais"
+      ],
+      "acceptance": [
+        "marca e assets próprios; nenhum efeito externo"
+      ],
+      "rollback": "Restaurar somente fontes da própria ownership preservando artefatos e edição concorrente"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Provar produtos criativos",
+      "owner": "dx-frontend-engineer",
+      "depends_on": [
+        "T02",
+        "T03",
+        "T07"
+      ],
+      "command_or_tool": "frontend-quality/headless screenshots/ffmpeg/render",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados"
+      ],
+      "outputs": [
+        "quatro artefatos próprios com gates/receipts/parecer independente"
+      ],
+      "acceptance": [
+        "quatro artefatos próprios com gates/receipts/parecer independente"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Consolidar biblioteca e navegação",
+      "owner": "developer",
+      "depends_on": [
+        "T02"
+      ],
+      "command_or_tool": "mechanism curation/CAS/index/feedback CLI",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados",
+        "T03 é necessário somente para eventual execução Jev live; esta etapa fica offline e sem gasto"
+      ],
+      "outputs": [
+        "captura→review→delta→runtime; privado excluído; caminhos resolvem"
+      ],
+      "acceptance": [
+        "captura→review→delta→runtime; privado excluído; caminhos resolvem"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente"
+    },
+    {
+      "task_id": "T06",
+      "objective": "Verificar e salvar checkpoint",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T04",
+        "T05"
+      ],
+      "command_or_tool": "tests/lint/typecheck/parity/protected/privacy/manifest/story",
+      "max_iterations": 5,
+      "max_attempts": 2,
+      "inputs": [
+        "AUDITED-SPEC.md",
+        "auditoria e ownership delimitados"
+      ],
+      "outputs": [
+        "ACs com evidência e limitações; estado local preservado"
+      ],
+      "acceptance": [
+        "ACs com evidência e limitações; estado local preservado"
+      ],
+      "rollback": "Restaurar somente arquivos desta ownership por CAS/snapshot; preservar dados, reservas e edição concorrente"
+    }
+  ]
+}

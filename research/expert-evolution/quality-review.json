@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "storyId": "expert-evolution-20261002",
+  "baseSha": "45e979f25931730ef1428d65e3dcb0a3b544a51f",
+  "reviewer": "quality-gate",
+  "reviewIteration": 3,
+  "maximumIterations": 3,
+  "status": "PASS",
+  "scope": "Independent read-only code/claims audit; only review artifacts authored",
+  "findings": [
+    {
+      "id": "QA-MODEL-TIME",
+      "severity": "MEDIUM",
+      "status": "fixed-verified",
+      "path": "scripts/expert-evolution/model-policy.cjs",
+      "observation": "Invalid now ('not-a-date') returns allowed:true; expiry with missing reviewedAt validates.",
+      "impact": "Malformed policy/clock metadata does not fail closed.",
+      "reproduction": "assessModel(loadPolicy(),'gpt-6.1-sol',{now:'not-a-date'}); validatePolicy({...policy,reviewedAt:undefined})",
+      "fixOwner": "developer",
+      "resolution": "Invalid clock rejected; expiry requires valid reviewedAt and expires at equality."
+    },
+    {
+      "id": "QA-MODEL-JUNCTION",
+      "severity": "MEDIUM",
+      "status": "fixed-verified",
+      "path": "scripts/expert-evolution/model-policy.cjs",
+      "observation": "loadPolicy accepts research/expert-evolution parent junction outside root; only final file symlink checked.",
+      "impact": "Standalone policy CLI can consume outside-root policy. Current runtime containedFile rejects this route.",
+      "reproduction": "Disposable Windows fixture with research/expert-evolution junction to sibling outside/model-policy.json.",
+      "fixOwner": "developer",
+      "resolution": "Root and path ancestors reject junction/symlink; standalone read confined."
+    }
+  ],
+  "observed": {
+    "program": {
+      "valid": true,
+      "plannedProfiles": 172,
+      "squads": 17,
+      "READReferences": 2,
+      "CANDIDATEReferences": 88
+    },
+    "corpus": {
+      "sources": 67,
+      "heuristics": 112,
+      "agents": 172,
+      "allCoverageGap": true,
+      "mergeHashesCurrent": true
+    },
+    "priority": {
+      "sources": 32,
+      "heuristics": 45,
+      "allInferred": true,
+      "allHashLocatorReadScopeLicensePresent": true
+    },
+    "catalog": {
+      "baselineHashDrifts": 355,
+      "currentRefreshValid": true,
+      "tracked": 5082,
+      "covered": 5082,
+      "agents": 172,
+      "squads": 17,
+      "publicAgents": 9,
+      "publicCommands": 66,
+      "overwroteBaseline": false
+    },
+    "models": {
+      "nativeSol": "available-current-session",
+      "publicOpus": "account availability not validated",
+      "jev": "missing-service-credential; no live call",
+      "promotion": false,
+      "localBenchmark": true,
+      "evaluationPassed": false,
+      "promotionRejected": true
+    },
+    "delivery": {
+      "reviewed": "project/global mapping, canonical hash preservation, modified-file preservation, receipt hashes, backup and CAS writes",
+      "runtime": "12k total/6k knowledge/3k compact profile; measured complete JSON; partial/stale inputs block"
+    },
+    "benchmark": {
+      "reviewFile": "research/expert-evolution/benchmark-blind-review.json",
+      "cases": 10,
+      "blinding": "labels randomized per case; no identity files read",
+      "scope": "written decisions only; no artifact quality or statistical claim",
+      "promotion": false,
+      "unblinded": {
+        "baseline": 18,
+        "enriched": 20,
+        "maximumPerVariant": 20,
+        "preferredEnriched": 9,
+        "tie": 1,
+        "preferredBaseline": 0,
+        "falseClaims": 0,
+        "criticalFailureVariant": "baseline",
+        "promotion": false
+      },
+      "expectedCriteria": {
+        "cases": 10,
+        "matchingBlindReservedCriteria": true,
+        "differences": [],
+        "comparedFields": [
+          "prompt",
+          "criticality",
+          "expectedDecision",
+          "requiredEvidence",
+          "counterexamples"
+        ],
+        "sha256": "f6c104a6cb00112919118f9a7d004ec296593e2a7d588318a275ed183c662506"
+      }
+    },
+    "parentReportedChecks": {
+      "lint": "PASS",
+      "typecheck": "PASS",
+      "original191Files": "preserved",
+      "principalCohort": "PASS: 178/178 tests, 14/14 suites, 64.575 seconds; frozen source dataset, reported by root.",
+      "source": "Parent message, not independently rerun by reviewer",
+      "affectedRetest": "Worker reported 37/37 tests in model-policy, knowledge, delivery and lint PASS."
+    },
+    "adversarialRetest": {
+      "invalidNowRejected": true,
+      "expiryPairRejected": true,
+      "parentJunctionRejected": true,
+      "currentPolicyValid": true,
+      "currentNativeAllowed": true,
+      "exactExpiryBlocked": true,
+      "finalIteration": {
+        "invalidNowRejected": true,
+        "parentJunctionRejectedBeforeExternalJSONParse": true
+      }
+    },
+    "protectedPaths": {
+      "independentlyChecked": true,
+      "diffAgainstBase": 0
+    }
+  },
+  "limitations": [
+    "Catalog source consumers are static references/imports, not complete dynamic dependency proof.",
+    "READ references represent retained excerpts/locators, not whole author corpora.",
+    "Promotion eligibility is advisory and does not verify receipt signatures or independently prove source rights.",
+    "Global delivery tests use disposable destinations; no global installation or publish was authorized/performed.",
+    "No complete-world expert, statistical significance, UX/video artifact or behavioral promotion claim is supported."
+  ],
+  "pending": [],
+  "verdict": "PASS for local code/claims scope: two medium findings fixed and independently re-probed, reserved criteria preserved, principal cohort reported green. Observed 10-case decision improvement does not validate all competencies or rendered artifacts and does not promote expertise.",
+  "reviewedFileHashes": {
+    "scripts/expert-evolution/model-policy.cjs": "8004ccb6b51baaf4dabe52e073cbec0f0808f20cf3d83cc09cae0d072d814e22",
+    "scripts/expert-evolution/expertise.cjs": "e70f01d5f81ec759f67769772033ad41681d00b39d44d29df28e804f87445263",
+    "scripts/expert-evolution/catalog.cjs": "f32a983314e425a153f567f251b96841b57436a3bc6e270b1bd3607c4e28216a",
+    "scripts/framework-evolution/runtime.cjs": "6120df982fcc4f1db81807f9c7ee739e7b0a0139db7a9a1984146919052d3e26",
+    "bin/lib/framework-evolution-delivery.js": "947e70b2c63f1ef0bf9437ccab7cc29427517673afa6147eef8d106fc298db8e",
+    "research/expert-evolution/model-policy.json": "466f3fd15964a7981ec286a7c85dbfbe66b18b353124f7e78044db8d911bc1b9"
+  },
+  "environment": "local isolated worktree",
+  "remainingRootChecks": [
+    "Staging secret/protected/manifest/story gates before checkpoint commit remain root-owned."
+  ]
+}

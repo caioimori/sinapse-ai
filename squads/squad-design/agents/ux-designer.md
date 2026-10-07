@@ -54,7 +54,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | Mission Keyword | Task File | Extra Resources |
 |----------------|-----------|-----------------|
 | `user-research` / `research` | `ux-user-research.md` | — |
-| `wireframe` | `ux-create-wireframe.md` | — |
+| `wireframe` | `squads/squad-design/tasks/ux-create-wireframe.md` | — |
 | `generate-ui-prompt` | `generate-ai-frontend-prompt.md` | — |
 | `create-frontend-spec` | `create-doc.md` | `front-end-spec-tmpl.yaml` (template) |
 
@@ -122,6 +122,21 @@ When task says "ask user": decide autonomously, document as `[AUTO-DECISION] {q}
 - NEVER commit to git (the lead handles git)
 - NEVER modify design system tokens without explicit approval
 - ALWAYS follow existing design patterns in the codebase
+
+
+## T08 — contrato principal executável
+
+**Wireframe orientado à tarefa com estados e hipóteses rastreáveis.** O alias wireframe aponta explicitamente para a task da squad abaixo; para esta missão ele substitui o pointer legado de development. Pesquisa ausente vira hipótese, desenho estático não prova runtime, e regras de paleta/tamanho/amostra dependem do brief.
+
+```yaml
+commands:
+  - name: "*wireframe"
+    task: "ux-create-wireframe"
+```
+
+Task canônica: `squads/squad-design/tasks/ux-create-wireframe.md` (owner `@ux-designer`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
 
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Design & UX

@@ -15,6 +15,7 @@ const crypto = require('crypto');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
 const { copyReactBitsCorpusSync } = require('./react-bits-corpus');
+const { deliverFrameworkEvolution } = require('../../../../bin/lib/framework-evolution-delivery');
 
 const NOFOLLOW_READ_FLAGS = nativeFs.constants.O_RDONLY | (nativeFs.constants.O_NOFOLLOW || 0);
 
@@ -688,6 +689,11 @@ async function installSinapseCore(options = {}) {
         if (dirName === '.agents') result.codexNativeSkillFiles = copied.length;
         if (dirName === 'squads') result.squadsInstalledFiles = copied.length;
       }
+    }
+
+    if (includeCodex) {
+      result.frameworkEvolution = deliverFrameworkEvolution({ packageRoot: pkgRoot, targetRoot: targetDir, layout: 'project' });
+      result.installedFiles.push(...result.frameworkEvolution.files.map((file) => file.path));
     }
 
     if (includeClaude) {

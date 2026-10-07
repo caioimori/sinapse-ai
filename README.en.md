@@ -111,14 +111,14 @@ boundaries.
 | Capability | Claude Code | Codex |
 |---|:---:|:---:|
 | 172-agent catalog | Yes | Yes |
-| Installed skills | 37 | 37 |
+| Installed skills | 38 | 38 |
 | Native rules and instructions | Yes | Yes |
 | Registered hooks | 20 native registrations | 9 lifecycle events |
 | Tasks and knowledge bases | Shared | Shared |
 | React Bits frontend capability | Skill + corpus | Skill + corpus |
 
-The current inventory contains **1,201 squad tasks**, **211 development tasks**,
-**1,412 task files**, and **1,348 pointers resolvable** at runtime.
+The current inventory contains **1,249 squad tasks**, **211 development tasks**,
+**1,460 task files**, and **1,396 pointers resolvable** at runtime.
 
 These counts are measured from the repository. Verify the current state with:
 
