@@ -1,33 +1,15 @@
 {
   "schemaVersion": 1,
   "scope": "Current public release and registry metadata; no full upstream import or protected-path change",
-  "methods": [
-    "npm view version/gitHead",
-    "GitHub public releases/latest API"
-  ],
-  "packages": [
-    {
-      "name": "aiox-core",
-      "version": "5.4.1",
-      "gitHead": "4ef6530ff03b83aea953e4a426f95e012b8b70c5",
-      "source": "https://registry.npmjs.org/aiox-core/latest"
-    },
-    {
-      "name": "@aiox-squads/core",
-      "version": "5.4.1",
-      "gitHead": "70456b3203ba03d8e0724f22c78d6311f7ad5b85",
-      "source": "https://registry.npmjs.org/@aiox-squads%2fcore/latest"
-    }
-  ],
-  "release": {
-    "tag": "v5.4.1",
-    "publishedAt": "2026-08-15T18:02:15Z",
-    "url": "https://github.com/SynkraAI/aiox-core/releases/tag/v5.4.1",
-    "source": "https://api.github.com/repos/SynkraAI/aiox-core/releases/latest"
+  "canonicalRecord": {
+    "path": "research/expert-evolution/audit-upstream-recheck.json",
+    "jsonPointer": "/rechecks/0",
+    "sha256": "82cf3f6c572c246a369f80b47ab207e883562080d07727104100b4de978f45c4",
+    "hashEncoding": "UTF-8 JSON.stringify(record, null, 2) followed by newline"
   },
+  "observedDate": "2026-10-07",
+  "recordedAt": "2026-10-07T20:29:10.164Z",
   "newPublicReleaseObserved": false,
   "protectedPathsChanged": false,
-  "limitation": "Metadata confirms the public release, not equality of the SINAPSE fork or adoption of all upstream code. Web preview of these API endpoints failed; native official metadata queries succeeded.",
-  "observedDate": "2026-10-07",
-  "recordedAt": "2026-10-07T20:29:10.164Z"
+  "limitation": "Metadata confirms the public release, not equality of the SINAPSE fork or adoption of all upstream code. Web preview of these API endpoints failed; native official metadata queries succeeded."
 }

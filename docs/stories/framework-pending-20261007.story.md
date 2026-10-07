@@ -43,6 +43,7 @@ Os 20 pares escritos tiveram revisão cega independente: 18/20 baseline e 19/20 
 - `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md`
 - `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json`
 - `docs/framework/expert-evolution-2026-10/PENDING-UPSTREAM-RECHECK.json`
+- `research/expert-evolution/audit-upstream-recheck.json`: rechecagem oficial integral anexada ao registro canônico de proveniência, preservando todos os campos anteriores.
 - `scripts/expert-evolution/file-io.cjs`
 - `scripts/expert-evolution/expertise.cjs`
 - `scripts/expert-evolution/extraction.cjs`

@@ -21,7 +21,7 @@ Um caso arquitetural melhorou pelo critério de rollback observável. Em P02, am
 
 ## Revalidação pública
 
-[AIOX público](https://github.com/SynkraAI/aiox-core/releases/tag/v5.4.1) revalidado em 07.10 pelos registros npm e API GitHub: ambos os pacotes continuam em 5.4.1. O wrapper `aiox-core` informa `4ef6530f`; `@aiox-squads/core` informa `70456b32`. Não foi observada release nova, nem importado código protegido; [receipt atual](PENDING-UPSTREAM-RECHECK.json). Metadados de release não provam igualdade da base SINAPSE com todo o upstream.
+A base open source foi revalidada em 07.10 pelos registros npm e API GitHub: ambos os pacotes continuam em 5.4.1. O wrapper informa `4ef6530f`; o pacote core informa `70456b32`. Os nomes oficiais, URLs e campos completos permanecem no [registro canônico de proveniência](../../../research/expert-evolution/audit-upstream-recheck.json), em `rechecks[0]`; a [ponte verificável](PENDING-UPSTREAM-RECHECK.json) registra path, JSONpointer e hash. Não foi observada release nova, nem importado código protegido. Metadados de release não provam igualdade da base SINAPSE com todo o upstream.
 
 ## Preservação e instalação
 
