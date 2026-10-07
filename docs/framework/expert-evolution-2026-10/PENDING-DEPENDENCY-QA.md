@@ -33,4 +33,12 @@ Reconstrução offline a partir dos seis tarballs verificados reproduziu2015 pay
 
 O lock da alias exata observou **zero advisories no audit local de resolução**, preservando128 registros de produção byte-equivalentes. Ainda não é prova da instalação completa de desenvolvimento ou da CI remota deste novo commit. O teste `tests/unit/npm-security-refresh.test.js` exige identidade instalada, versões e92 hashes reais, CLI offline e APIs dos cinco componentes. Sintaxe/lint locais passaram; sua execução real ficará na matriz remota existente, sem alterar a CI.
 
+### Readback remoto da fonte estável
+
+Na fonte `bee125db9a83e7ff13f8de3b879c10360e60c4b1`, o teste do npm realmente instalado passou nos cinco jobs: Node20, Node24, Coverage22, macOS e Windows. Portanto, identidade própria,92 hashes de payload, cinco versões/resoluções, CLI com configuração isolada e APIs benignas offline foram observados após a instalação real feita pela CI, não somente no espelho de preparação.
+
+O Security Audit remoto observou **zero vulnerabilidades em produção e na árvore completa instalada de desenvolvimento**. Essa contagem é do scanner e deste SHA; não é certificação de toda a segurança do fork/repositório. Gitleaks não encontrou vazamentos; o check autoritativo CodeQL informou zero novo alerta nesta PR. A matriz manteve185 skips e oito todo preexistentes; o job full-cross-platform foi dispensado pela regra existente de PR, enquanto os jobs Mac/Windows efetivamente executaram e passaram.
+
+O runtime pessoal foi migrado por CAS para a mesma fonte estável após essas provas:1929 pins, nove destinos compilados,42 contextos offline selecionados, dois provedores/roots e quatro rejeições esperadas. Preservados262 payloads pessoais,193 entradas do checkout original e três históricos de fonte; journal/snapshots novos e os dois anteriores foram conferidos. Esse readback é offline e não certifica172 execuções nativas.
+
 Receipts T08 privados: `npm-fork-candidate.json`, `npm-fork-probes.json`, `npm-fork-lock-plan.json`, `npm-fork-lock-audit.json` e `npm-fork-promotion-receipt.json`. Nenhuma nova cobrança, instalação global, full DEV local, CAS/HOME, merge ou publicação ocorreu nesta etapa.

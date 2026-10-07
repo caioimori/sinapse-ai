@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-07",
-    "scope": "Reparos revisados; PR #417 com segredos, audit e análise de código aprovados; falhas remotas residuais em correção",
+    "scope": "Fonte bee125db: 37 checks aprovados, instalação Codex/Claude conferida e comparação escrita concluída; sem produção",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -31,9 +31,9 @@
     "reviewedDiagnosticResponses": 172
   },
   "deployment": {
-    "local": "Reparos revisados; comparação cega escrita concluída: enriquecido19/20, baseline18/20",
-    "installed": "Fonte 104c516d preservada — Codex e Claude Code; 42 contextos offline; atualização nova aguarda CAS",
-    "published": "PR #417: segredos, audit e análise de código aprovados; testes residuais em correção; sem produção"
+    "local": "Reparos aprovados; comparação escrita: enriquecido 19/20, baseline 18/20",
+    "installed": "Fonte bee125db instalada — Codex e Claude Code; 42 contextos offline conferidos e históricos preservados",
+    "published": "PR #417 aberta; 37 checks aprovados na fonte bee125db, um skip existente e zero falhas; sem produção"
   },
   "deliverables": [
     {
@@ -215,8 +215,8 @@
     {
       "id": "distribution",
       "title": "Uso, segurança e distribuição",
-      "description": "Os reparos passaram na revisão independente. Segredos, audit e análise de código passaram na nova PR. Restaram quatro falhas no Node 24 e sete no Mac; caminhos e validação da instalação estão em correção.",
-      "status": "Segurança remota aprovada no escopo; testes residuais em correção",
+      "description": "Testes aprovados em Windows, macOS, Node 20/24 e cobertura. O npm corrigido foi instalado e exercitado; audit completo e segredos passaram. A instalação pessoal recebeu a fonte bee125db com arquivos e históricos preservados.",
+      "status": "Reparos técnicos e instalação concluídos; execução Claude limitada pelo orçamento",
       "detail": "Claude Code reportou Sonnet 5.5, mas a única chamada terminou por orçamento sem resposta útil. Estimativa US$ 0,213404, distinta de fatura; não houve repetição nem uso adicional do JEV."
     }
   ],
@@ -587,10 +587,10 @@
     {
       "id": "pending-repairs",
       "title": "Reparos desta etapa",
-      "summary": "Revisão independente, navegação e reprodução integral conferidas; validação remota em curso.",
+      "summary": "37 checks aprovados na fonte bee125db; zero aviso no audit completo; instalação pessoal conferida.",
       "paragraphs": [
-        "Dezessete arquivos de testes passaram a representar os contratos atuais, mantendo negativos de autoridade, orçamento e tamanho. Sintaxe, lint focal e probes delimitados passaram; resultados completos dependem dos checks remotos por versão.",
-        "Revisão independente: sete cenários de leitura/escrita e 12 checks do limite de árvores passaram. O audit de produção remoto passou; a árvore completa ainda teve nove avisos em e7, reduzidos localmente a cinco. O reparo das bibliotecas empacotadas de desenvolvimento está em curso.",
+        "Node 20, Node 24, cobertura e macOS passaram em 442 suites, com 12.050 testes aprovados por execução; Windows passou com 12.051. Os 185 skips e oito todo são preexistentes; nenhum negativo foi enfraquecido.",
+        "O fork npm de desenvolvimento teve seis fontes e licenças conferidas, com 92 deltas restritos. O CI instalou os bytes reais e conferiu as cinco bibliotecas, CLI e comportamento offline. O audit completo desse projeto encontrou zero vulnerabilidades; isso não certifica todo o código.",
         "Quatro JSON conservaram seus 38 digests e todos os dados. O check remoto de segredos passou na nova PR; nenhum alerta foi dispensado nem detector enfraquecido.",
         "Navegação em 1440/390 preservou busca, filtros e foco, sem rolagem lateral ou inserir o marcador HTML inerte. O player reproduziu os 18 segundos completos, sem erro; isso não equivale a ouvir ou aprovar a trilha."
       ],
@@ -634,13 +634,13 @@
     {
       "id": "personal-installation-current",
       "title": "Instalação pessoal e limites do contexto",
-      "summary": "42 leituras reais de contexto; matriz offline dos 172 em ambiente isolado.",
+      "summary": "Fonte bee125db instalada; 42 leituras offline reais e quatro negativos; matriz histórica dos 172 em ambiente isolado.",
       "paragraphs": [
-        "A integração montou 172 contextos em um snapshot estável, com 582 critérios críticos presentes. Máximos: 11.602 caracteres totais, 5.990 de conhecimento e 2.997 de perfil; presença de critério não comprova seu cumprimento.",
-        "A instalação em ambiente pessoal isolado passou a matriz offline completa dos 172, com máximos 11.865 / 5.990 / 2.997. Após a atualização pessoal real, 42 contextos selecionados passaram em dois projetos, com máximos 11.745 / 5.611 / 2.969.",
-        "Entradas Codex e Claude Code byte-equivalentes foram conferidas no ambiente pessoal e no projeto original. Essa prova cobre recuperação offline; nenhuma inferência nativa ou execução de persona foi observada.",
-        "Fonte 104c516d instalada e conferida: 262 arquivos pessoais iguais, 193 entradas originais preservadas e duas fontes históricas intactas. Os 1.928 pins atuais e os snapshots de rollback passaram; a atualização real bem-sucedida não foi revertida.",
-        "Na PR #417, segredos, audit e análise de código passaram. Os testes reduziram de 17 para quatro falhas no Node 24 e de 88 para sete no Mac. Caminhos de entrega e validação de CLI único estão em correção; a instalação anterior está preservada."
+        "Antes deste lote, a integração montou 172 contextos em um snapshot estável, com 582 critérios críticos presentes. Máximos: 11.602 caracteres totais, 5.990 de conhecimento e 2.997 de perfil; presença de critério não comprova seu cumprimento.",
+        "A matriz histórica isolada passou os 172 contextos, com máximos 11.865 / 5.990 / 2.997. A atualização pessoal atual conferiu 42 contextos selecionados em dois projetos: máximos 11.741 / 5.611 / 2.969.",
+        "Entradas Codex e Claude Code byte-equivalentes foram conferidas em dois projetos. Essa prova cobre recuperação offline; quatro requisições inválidas foram rejeitadas. Ela não comprova execução nativa das 172 personas.",
+        "Fonte bee125db instalada: 262 arquivos pessoais iguais, 193 entradas originais preservadas e três fontes históricas intactas. Os 1.929 pins, o journal atual e os snapshots de rollback passaram; a atualização bem-sucedida não foi revertida.",
+        "Na PR #417, fonte bee125db, os 37 checks passaram, com um skip existente. Audit completo: zero vulnerabilidades reportadas; CodeQL: zero novo alerta na mudança; scanner de segredos aprovado. A instalação pessoal teve readback independente dos dois provedores."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",
@@ -808,9 +808,9 @@
   },
   "installation": {
     "scope": "offline-context-only",
-    "sourceHead": "104c516d7dc95812440d1a23b428ab837e238fb0",
-    "transactionId": "98937742-8201-4dcc-8b01-2db469be59b8",
-    "registrySha256": "5b6d9dbc675c562b882f9be9830dba51c86068436788cf26bf99cde62e31d586",
+    "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
+    "transactionId": "68d5e15c-32a2-4b96-b595-4e031b8fc9fe",
+    "registrySha256": "88fa7de2ce0dcdd67418ac68b9ab9c2869264a8953f491fa6d113bbf1e18187d",
     "selectedContextChecks": 42,
     "selectedAgentIds": 21,
     "roots": 2,
@@ -824,7 +824,8 @@
         11602,
         5990,
         2997
-      ]
+      ],
+      "scope": "Historical offline matrix before pending remediation"
     },
     "scratchMatrix": {
       "contexts": 172,
@@ -832,15 +833,17 @@
         11865,
         5990,
         2997
-      ]
+      ],
+      "scope": "Historical isolated installation before pending remediation"
     },
     "realReadback": {
       "contexts": 42,
       "maxChars": [
-        11745,
+        11741,
         5611,
         2969
-      ]
+      ],
+      "negativesRejected": 4
     },
     "preservation": {
       "personalPayloads": 262,
@@ -848,23 +851,29 @@
       "originalStatusPreserved": true,
       "originalStatusCount": 193,
       "oldSourcePreserved": true,
-      "oldPinnedInputs": 2092
+      "oldPinnedInputs": 2092,
+      "historicalSources": 3,
+      "historicalMismatches": 0,
+      "priorRollbackReceiptsVerified": 2
     },
     "rollback": {
       "snapshotsVerified": true,
       "executionObserved": false
     },
-    "source": "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md"
+    "source": "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md",
+    "sourcePins": 1929,
+    "journalSha256": "6736f80155a8c8f0ea413cd49bfea82a27bb27d44e1a259483f6bdb69d912a93",
+    "snapshotSha256": "6a260cee0362b7dda2aecfda561719f2ad35a76d1bacb09a00702c77b7bea293"
   },
   "remediation": {
     "date": "2026-10-07",
     "branch": "codex/fix/framework-pending-clean-20261007",
     "pullRequest": 417,
-    "testedSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
+    "testedSourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
     "secretScanning": "SUCCESS",
     "securityAudit": "SUCCESS",
-    "remainingRemoteChecks": "RESIDUAL_TEST_FAILURES",
-    "personalInstallationUpdated": false,
+    "remainingRemoteChecks": "NONE_ON_TESTED_SOURCE",
+    "personalInstallationUpdated": true,
     "humanListeningRequired": false,
     "technicalPlaybackComplete": true,
     "extraJevCalls": 0,
@@ -875,31 +884,39 @@
       "newAlertAnnotations": 0
     },
     "testResults": {
+      "node20": {
+        "failed": 0,
+        "passed": 12050
+      },
       "node24": {
-        "failed": 4,
-        "passed": 12043
+        "failed": 0,
+        "passed": 12050
+      },
+      "coverage22": {
+        "failed": 0,
+        "passed": 12050
       },
       "macos": {
-        "failed": 7,
-        "passed": 12040
+        "failed": 0,
+        "passed": 12050
+      },
+      "windows": {
+        "failed": 0,
+        "passed": 12051
       },
       "skippedPreexisting": 185,
       "todoPreexisting": 8
     },
     "dependencyAudit": {
-      "remoteSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
-      "remoteProduction": "SUCCESS",
+      "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
+      "remoteProduction": {
+        "total": 0
+      },
       "remoteFullTree": {
-        "total": 9,
-        "high": 7,
-        "moderate": 2
+        "total": 0
       },
-      "localFocalRefresh": {
-        "total": 5,
-        "high": 3,
-        "moderate": 2
-      },
-      "bundledRepair": "IN_PROGRESS"
+      "bundledRepair": "VERIFIED_INSTALLED_REMOTE",
+      "scope": "Project dependency tree; local forks independently reviewed, not universal software certification"
     },
     "nativeBenchmark": {
       "cases": 20,
@@ -910,6 +927,22 @@
       "globalExpertisePromotion": false,
       "rubricBriefMismatchCase": "P02",
       "receipt": "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json"
+    },
+    "previousFailedSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
+    "remoteCheckSummary": {
+      "successful": 37,
+      "skipped": 1,
+      "failed": 0,
+      "pending": 0,
+      "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1"
+    },
+    "nativeClaude": {
+      "attempts": 1,
+      "decisionObserved": false,
+      "status": "BUDGET_LIMIT_NO_RESPONSE",
+      "reportedModel": "claude-sonnet-5-5",
+      "listEstimateUsd": 0.213404,
+      "estimateIsInvoice": false
     }
   }
 }

@@ -1,10 +1,10 @@
 ---
 id: framework-pending-20261007
-status: Ready
+status: Done
 ---
 # Corrigir pendências do framework com evidência real
 
-## Status: Ready
+## Status: Done
 
 ## Story
 Como operador, quero que as falhas remotas sejam corrigidas na causa e que as pendências de execução, avaliação e mídia tenham provas próprias, sem confundir uma instalação offline com qualidade global demonstrada.
@@ -18,13 +18,20 @@ Conteúdo-base `0415eac59835bdf450305d37fa3ddd564bb65761`, reaplicado sobre `ori
 Não editar caminhos protegidos, ferramentas compartilhadas, hooks ou configuração de CI. Não remover, pular ou enfraquecer testes nem fazer bypass de alertas. Falsos positivos exigem prova da origem e controles negativos que continuem detectando segredos; nenhuma exceção ampla. Não iniciar build ou suíte local com C: abaixo de 10 GB. Checks remotos existentes são a alternativa pesada; infraestrutura tem freio de 20 minutos.
 
 ## Acceptance Criteria
-- [ ] Falhas Node24/Windows/Coverage e macOS classificadas individualmente; reparos mantêm assertions de comportamento e segurança; resultados remotos observados por SHA.
-- [ ] Alertas de segurança tratados por causa com revisão independente; nenhum alerta ou pacote anunciado resolvido por mera contagem, suppress ou mudança sem prova.
-- [ ] Instalação real atual permanece íntegra durante os reparos; nova fonte é aplicada somente por plano CAS, snapshots e readback de ambos os provedores.
-- [ ] Execução nativa dos provedores é observada quando acesso e orçamento permitirem; ausência de login ou autoridade é registrada exatamente, sem inventar inferência.
-- [ ] Benchmark novo tem protocolo e casos congelados antes das respostas, condições separadas, revisão cega e limites explícitos; resultados não são extrapolados para expertise global.
-- [ ] Mídia recebe reprodução e conferência técnica contínuas possíveis; audição/aprovação humana só é marcada com observação humana. Painel final é conferido em 1440/390 sem overflow.
-- [ ] Lote termina com validação proporcional, commit/push/PR, prévia e relato de bloqueios restantes; nenhuma publicação em produção.
+- [x] Falhas Node24/Windows/Coverage e macOS classificadas individualmente; reparos mantêm assertions de comportamento e segurança; resultados remotos observados por SHA.
+- [x] Alertas de segurança tratados por causa com revisão independente; nenhum alerta ou pacote anunciado resolvido por mera contagem, suppress ou mudança sem prova.
+- [x] Instalação real atual permanece íntegra durante os reparos; nova fonte é aplicada somente por plano CAS, snapshots e readback de ambos os provedores.
+- [x] Execução nativa dos provedores é observada quando acesso e orçamento permitirem; ausência de login ou autoridade é registrada exatamente, sem inventar inferência.
+- [x] Benchmark novo tem protocolo e casos congelados antes das respostas, condições separadas, revisão cega e limites explícitos; resultados não são extrapolados para expertise global.
+- [x] Mídia recebe reprodução e conferência técnica contínuas possíveis; audição/aprovação humana só é marcada com observação humana. Painel final é conferido em 1440/390 sem overflow.
+- [x] Lote termina com validação proporcional, commit/push/PR, prévia e relato de bloqueios restantes; nenhuma publicação em produção.
+
+## Verification
+Fonte `bee125db`: 37 checks remotos aprovados, um skip existente e zero falhas. Node 20/24, cobertura e macOS: 12.050 testes aprovados por execução; Windows: 12.051. Audit produção/árvore completa zero, Gitleaks sem vazamentos, CodeQL sem novos alertas na mudança. Nenhuma alteração de CI, hooks ou bypass.
+
+CAS aplicada: 1.929 pins, 42 contextos offline, quatro negativos e paridade Codex/Claude. Os 262 payloads pessoais, 193 entradas originais, três fontes históricas e snapshots anteriores foram preservados. Painel final conferido em 1440/390; navegação e reprodução contínua têm receipts próprios.
+
+Os 20 pares escritos tiveram revisão cega independente: 18/20 baseline e 19/20 enriquecido, com divergência rubrica/brief P02 preservada. A única chamada Claude terminou por orçamento sem resposta; isso permanece limitação explícita, sem execução nativa dos 172 ou validação de expertise global. Zero chamada Jev adicional. [Handoff vigente](../framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md).
 
 ## File List
 - `docs/stories/framework-pending-20261007.story.md`
@@ -35,6 +42,7 @@ Não editar caminhos protegidos, ferramentas compartilhadas, hooks ou configura�
 - `docs/framework/expert-evolution-2026-10/PENDING-DEPENDENCY-QA.md`
 - `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md`
 - `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json`
+- `docs/framework/expert-evolution-2026-10/PENDING-UPSTREAM-RECHECK.json`
 - `scripts/expert-evolution/file-io.cjs`
 - `scripts/expert-evolution/expertise.cjs`
 - `scripts/expert-evolution/extraction.cjs`
@@ -78,4 +86,4 @@ Não editar caminhos protegidos, ferramentas compartilhadas, hooks ou configura�
 Os 650 paths herdados do conteúdo `0415` são registrados na transição de branch e nas stories de evolução anteriores; nenhum deles foi removido. Receipts, logs, rótulos cegos, respostas e acervo privado permanecem em `examples/framework-quality/output/pending-20261007/`, ignorados e fora do Git.
 
 ## Rollback
-Reverter apenas o lote novo pela branch/PR; manter fontes históricas e instalação `104c516d` íntegra até nova CAS. Qualquer instalação nova deve conservar journal e snapshots e ser recuperável sem modificar uma fonte já instalada.
+Reverter apenas o lote novo pela branch/PR. A instalação atual `bee125db` conserva journal e snapshots próprios, além dos anteriores; rollback não foi executado. Manter as três fontes históricas íntegras e recuperar apenas o write set registrado, sem alterar os bytes de uma fonte já instalada.
