@@ -3,6 +3,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const MODEL = 'jev-1.13.0';
+const MAX_RESPONSE_BYTES = 65536;
 const PRICING = Object.freeze({model: MODEL, inputUsdPerMillion: 0.042, outputUsdPerMillion: 0, readAt: '2026-10-02', source: 'https://docs.typesafe.ai/models'});
 const object = v => v && typeof v === 'object' && !Array.isArray(v);
 const prob = v => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1;
@@ -51,6 +52,7 @@ function validatePayload(payload) {
 function validateResponse(response, payload) {
   validatePayload(payload);
   assertJsonSafe(response);
+  if (Buffer.byteLength(JSON.stringify(response),'utf8') > MAX_RESPONSE_BYTES) throw new Error('Jev response exceeds byte bound');
   if (!object(response) || response.model !== payload.model || !object(response.answers) || !object(response.usage) || !Number.isSafeInteger(response.usage.input_tokens) || response.usage.input_tokens < 0 || response.usage.input_tokens > 64000 || !Number.isSafeInteger(response.usage.output_tokens) || response.usage.output_tokens < 0) throw new Error('Malformed Jev response/usage');
   const keys = Object.keys(payload.questions);
   if (Object.keys(response.answers).length !== keys.length || keys.some(k => !Object.hasOwn(response.answers, k))) throw new Error('Jev answer keys mismatch');
@@ -67,7 +69,35 @@ function validateResponse(response, payload) {
       if (typeof a.score !== 'number' || !Number.isFinite(a.score) || Math.abs(a.score - weighted) > 0.00001 || !object(a.legend) || Object.keys(a.legend).length !== expected.length || expected.some(k => a.legend[k] !== q.criteria[Number(k)])) throw new Error('Invalid Score result');
     }
   }
-  return response;
+  const answers = Object.fromEntries(keys.map(key => {
+    const q = payload.questions[key], a = response.answers[key];
+    if (q.type === 'noul') return [key,{type:a.type,noul:a.noul}];
+    const expected = q.type === 'choice' ? Object.keys(q.criteria) : q.criteria.map((_,i)=>String(i));
+    const probabilities = Object.fromEntries(expected.map(k=>[k,a.probabilities[k]]));
+    return [key,q.type === 'choice' ? {type:a.type,choice:a.choice,confidence:a.confidence,probabilities} : {type:a.type,score:a.score,confidence:a.confidence,probabilities,legend:Object.fromEntries(expected.map(k=>[k,a.legend[k]]))}];
+  }));
+  return {model:response.model,answers,usage:{input_tokens:response.usage.input_tokens,output_tokens:response.usage.output_tokens}};
+}
+async function readResponseJson(response) {
+  if (!response?.body || typeof response.body.getReader !== 'function') throw new Error('Jev requires a bounded response stream');
+  const reader = response.body.getReader(), chunks = [];
+  let total = 0, complete = false;
+  try {
+    const declared = response.headers?.get('content-length');
+    if (declared !== null && declared !== undefined && /^\d+$/.test(declared) && Number(declared) > MAX_RESPONSE_BYTES) throw new Error('Jev response exceeds byte bound');
+    for (;;) {
+      const {done,value} = await reader.read();
+      if (done) { complete = true; break; }
+      if (!ArrayBuffer.isView(value)) throw new Error('Invalid Jev response byte chunk');
+      total += value.byteLength;
+      if (total > MAX_RESPONSE_BYTES) throw new Error('Jev response exceeds byte bound');
+      chunks.push(Buffer.from(new Uint8Array(value.buffer,value.byteOffset,value.byteLength)));
+    }
+    return JSON.parse(Buffer.concat(chunks,total).toString('utf8'));
+  } finally {
+    if (!complete) { try { await reader.cancel(); } catch { /* Preserve the original bounded-read error. */ } }
+    reader.releaseLock();
+  }
 }
 function plan(payload, {maxAttempts = 1} = {}) {
   if (!Number.isSafeInteger(maxAttempts) || maxAttempts < 1 || maxAttempts > 3) throw new Error('Invalid retry bound');
@@ -201,9 +231,10 @@ async function runSingleFlight(key, operation) {
 function validateExtractionReceipt(receipt, payload, cacheKey = plan(payload).cacheKey) {
   if (!object(receipt) || receipt.schemaVersion !== 1 || receipt.cacheKey !== cacheKey || receipt.model !== payload.model || !['pending','completed','failed','charge-uncertain'].includes(receipt.status) || !Number.isFinite(receipt.reservedUsd) || receipt.reservedUsd < 0) throw new Error('Invalid extraction receipt');
   if (receipt.status === 'completed') {
-    validateResponse(receipt.response,payload);
-    const actual = receipt.response.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
+    const response = validateResponse(receipt.response,payload);
+    const actual = response.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
     if (receipt.actualUsd !== actual || actual > receipt.reservedUsd) throw new Error('Invalid extraction billing receipt');
+    return {...receipt,response};
   }
   return receipt;
 }
@@ -260,7 +291,7 @@ async function execute(payload, {offline = true, authorized = false, apiKey, led
             if (ledger.durable) ledger.finish(prepared.cacheKey,'retry-admitted');
             continue;
           }
-          const raw = await Promise.race([response.json(), timedOut]);
+          const raw = await Promise.race([readResponseJson(response), timedOut]);
           const validated = validateResponse(raw, payload);
           const actualUsd = validated.usage.input_tokens * PRICING.inputUsdPerMillion / 1000000;
           if (actualUsd > prepared.reservedUsdPerAttempt) throw new Error('Jev usage exceeds reservation');
@@ -287,4 +318,4 @@ if (require.main === module) {
     process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
   } catch (error) { process.stderr.write(`${error.message}\n`); process.exitCode = 1; }
 }
-module.exports = {MODEL, PRICING, validatePayload, validateResponse, plan, planBatch, createLedger, createDurableLedger, createFileCache, runSingleFlight, validateExtractionReceipt, execute};
+module.exports = {MODEL, PRICING, MAX_RESPONSE_BYTES, readResponseJson, validatePayload, validateResponse, plan, planBatch, createLedger, createDurableLedger, createFileCache, runSingleFlight, validateExtractionReceipt, execute};

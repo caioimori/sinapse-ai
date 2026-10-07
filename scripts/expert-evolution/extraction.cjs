@@ -29,7 +29,7 @@ function canonical(value) {
   return JSON.stringify(value);
 }
 function file(root, relative) {
-  if (!text(relative) || relative.includes('\\') || path.isAbsolute(relative) || /^[A-Za-z]:/.test(relative) || relative.split('/').some(p => !p || p === '.' || p === '..')) throw new Error('Unsafe curation path');
+  if (!text(relative) || relative.includes('\\') || path.isAbsolute(relative) || /^[A-Za-z]:/.test(relative) || relative.split('/').some(p => !p || p === '.' || p === '..' || /[:\0]/.test(p) || /[. ]$/.test(p))) throw new Error('Unsafe curation path');
   for (let cursor = path.resolve(root); cursor !== path.dirname(cursor); cursor = path.dirname(cursor)) if (fs.lstatSync(cursor).isSymbolicLink()) throw new Error('Curation symlink root rejected');
   const base = fs.realpathSync(root);
   let target = base;
@@ -37,11 +37,54 @@ function file(root, relative) {
   if (!target.startsWith(base + path.sep)) throw new Error('Curation path outside root');
   return target;
 }
-function bytes(root, relative) { const target = file(root, relative); if (!fs.statSync(target).isFile()) throw new Error('Curation evidence must be a file'); return fs.readFileSync(target); }
-function read(root, relative) { const value = bytes(root, relative); if (value.length > 12000000) throw new Error('Curation input exceeds bound'); return JSON.parse(value.toString('utf8').replace(/^\uFEFF/, '')); }
+const sameIdentity = (a,b) => a.dev === b.dev && a.ino === b.ino && a.birthtimeMs === b.birthtimeMs;
+const sameSnapshot = (a,b) => sameIdentity(a,b) && a.size === b.size && a.mtimeMs === b.mtimeMs && a.ctimeMs === b.ctimeMs;
+function bytes(root, relative, maxBytes = 12000000) {
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 1 || maxBytes > 12000000) throw new Error('Invalid curation byte bound');
+  const target = file(root,relative), parents = [];
+  for (let cursor = path.dirname(target);; cursor = path.dirname(cursor)) {
+    const stat = fs.lstatSync(cursor);
+    if (stat.isSymbolicLink() || !stat.isDirectory()) throw new Error('Curation symlink parent rejected');
+    parents.push({path:cursor,stat});
+    if (cursor === path.dirname(cursor)) break;
+  }
+  const checked = fs.statSync(target);
+  if (!checked.isFile()) throw new Error('Curation evidence must be a file');
+  if (!Number.isSafeInteger(checked.size) || checked.size > maxBytes) throw new Error('Curation input exceeds bound');
+  const verifyParents = () => {
+    if (file(root,relative) !== target) throw new Error('Curation containment changed');
+    for (const parent of parents) {
+      const current = fs.lstatSync(parent.path);
+      if (current.isSymbolicLink() || !current.isDirectory() || !sameIdentity(parent.stat,current)) throw new Error('Curation parent identity changed');
+    }
+  };
+  // Windows does not guarantee O_NOFOLLOW. Open once, compare the handle with
+  // the checked object, recheck parents before reading, and never reopen by name.
+  const fd = fs.openSync(target,'r');
+  try {
+    const opened = fs.fstatSync(fd);
+    if (!opened.isFile() || !sameSnapshot(checked,opened)) throw new Error('Curation file identity changed before read');
+    verifyParents();
+    const value = Buffer.alloc(opened.size);
+    let offset = 0;
+    while (offset < value.length) {
+      const count = fs.readSync(fd,value,offset,value.length-offset,null);
+      if (!count) throw new Error('Curation file changed during read');
+      offset += count;
+    }
+    if (!sameSnapshot(opened,fs.fstatSync(fd))) throw new Error('Curation file changed during read');
+    verifyParents();
+    if (!sameSnapshot(opened,fs.lstatSync(target))) throw new Error('Curation file identity changed after read');
+    return value;
+  } finally { fs.closeSync(fd); }
+}
+const parseBytes = value => JSON.parse(value.toString('utf8').replace(/^\uFEFF/, ''));
+function read(root, relative) { return parseBytes(bytes(root,relative)); }
 function reference(root, ref) {
-  if (!ref || !hash(ref.sha256) || sha(bytes(root, ref.path)) !== ref.sha256) throw new Error('Unresolved or tampered evidence');
-  return read(root, ref.path);
+  if (!ref || !hash(ref.sha256)) throw new Error('Unresolved or tampered evidence');
+  const value = bytes(root,ref.path);
+  if (sha(value) !== ref.sha256) throw new Error('Unresolved or tampered evidence');
+  return parseBytes(value);
 }
 function admitWrite(root, {persist = false, authorizedRoot} = {}) {
   if (typeof persist !== 'boolean') throw new Error('Explicit persist boolean required');
@@ -194,8 +237,8 @@ async function extract({root = ROOT,candidate,persist = false,authorizedRoot,api
       if (cached.extractionKey !== prepared.extractionKey) throw new Error('Extraction receipt semantic key mismatch');
       if (cached.status === 'transport-admitted') throw new Error('Transport-admitted semantic extraction blocks automatic retry; reconcile the preserved receipt and Jev ledger manually');
       if (canonical(cached.payload) !== canonical(prepared.payload) || cached.status !== 'candidate-only') throw new Error('Extraction receipt conflicts with source/version/questions');
-      require('../framework-evolution/jev.cjs').validateResponse(cached.execution?.response,prepared.payload);
-      return {cached:{...cached,called:false,status:'candidate-only',mode:'persisted-cache'}};
+      const response = require('../framework-evolution/jev.cjs').validateResponse(cached.execution?.response,prepared.payload);
+      return {cached:{...cached,execution:{...cached.execution,response},called:false,status:'candidate-only',mode:'persisted-cache'}};
     }
     // Write-ahead admission is keyed by source/version/questions/model, before
     // any await or paid ledger reservation. A crash preserves this replay block.
