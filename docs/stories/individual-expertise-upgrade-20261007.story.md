@@ -1,7 +1,7 @@
 ---
 id: individual-expertise-upgrade-20261007
 type: enhancement
-status: InReview
+status: Done
 owner: caio
 executor: developer
 quality_gate: quality-gate
@@ -14,7 +14,7 @@ epic: docs/framework/expert-evolution-2026-10/PLAN.md
 
 ## Status
 
-InReview
+Done
 
 ## Story
 
@@ -30,7 +30,7 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 - [x] AC2 — Given as fontes, When forem incorporadas, Then direitos, locator, trecho observado, inferências e candidatas serão distinguíveis e verificáveis.
 - [x] AC3 — Given casos diagnósticos novos, When as coortes produzirem respostas, Then outputs, revisão independente, negativos e limites de inferência nativa estarão registrados por agente; casos da mesma coorte não serão chamados de avaliação cega ou execução isolada.
 - [x] AC4 — Given a integração compartilhada, When contexto for recuperado nos dois provedores, Then fontes autorizadas, autoridade, paridade e limites 12.000/6.000/3.000 passarão sem perda crítica.
-- [ ] AC5 — Given orçamento e concorrência, When entrega/upgrade forem feitos, Then custos, CAS/rollback, original/fonte anterior, secrets/protected e checks proporcionais terão evidência; PR/prévia não significarão produção.
+- [x] AC5 — Given orçamento e concorrência, When entrega/upgrade forem feitos, Then custos, CAS/rollback, original/fonte anterior, secrets/protected e checks proporcionais terão evidência; PR/prévia não significarão produção.
 
 ## Tasks
 
@@ -38,7 +38,7 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 - [x] Integrar perfis/fontes e construir avaliação verificável.
 - [x] Executar casos e revisão independente.
 - [x] Validar recuperação/distribuição e preservação.
-- [ ] Salvar, enviar branch, abrir PR e conferir prévia.
+- [x] Salvar, enviar branch, abrir PR e conferir prévia.
 
 ## File List
 
@@ -89,6 +89,8 @@ Retomada YOLO autorizada. Esforço high, três frentes independentes, checkpoint
 
 ## QA Results
 
+Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/409, 17 squads, cinco exemplos e zero overflow. Receipt privado `hub-final-delivery/receipt.json`, SHA `1a99b02ec0a2df3ba7be30170d503b66d984c675e14888ebdce390118b663485`; não é replay dos 29 checks anteriores. As baterias 124 e 32 de Jest se sobrepõem e não devem ser somadas.
+
 Revisão semântica independente ciclo 3: 172 PASS diagnósticos, zero REVISE/BLOCKED. Três coortes Codex/Sol 6.1/high produziram os casos e respostas; sem avaliação cega, 172 personas isoladas, inferência Claude/Opus ou ganho causal. `validatedExpertise=false` preservado.
 
 Matriz local final: 172 agentes, critérios completos; máximos 11.602/5.990/2.997 caracteres. Testes focais finais: 124 PASS, zero FAIL, um skip declarado, cinco suítes PASS. O skip evita repetir a matriz histórica redundante; a matriz completa atual passou. Paridade de adapters 172 agentes/38 skills, registry 9/66, manifest e workflow passaram. Scan de 611 arquivos: zero achados; nenhum caminho protegido, exclusão funcional ou input privado no diff.
@@ -105,4 +107,6 @@ Preservação: 262/262 payloads pessoais iguais; fonte anterior clean no HEAD `8
 
 Embalagem corrigida somente na allowlist `package.json.files`, que não integra os pins vivos: `competence-runtime.json` incluído. Inspeção `npm pack --dry-run --ignore-scripts --json` encontrou os seis módulos/dados exigidos e zero packs diagnósticos, review, library, output ou captures privados; 4.508 arquivos. Verificação focal do inventário e vínculo vivo passou. Lifecycle não executado, nenhum pacote publicado.
 
-Prévia final local do hub: 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`. Push/PR aguardam conclusão. Vermelhos intermediários permanecem privados; suíte integral/CI e publicação em produção não foram exigidos nem aprovados.
+Prévia final local do hub: 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`. Branch enviada e [PR #416](https://github.com/caioimori/sinapse-ai/pull/416) aberto/anexado; leitura posterior confirmou estado OPEN, base main, branch correta e igualdade entre HEAD local/remoto/PR. Hooks reais passaram sem bypass; CI/CodeQL iniciados, sem aprovação geral alegada.
+
+Scan final da evolução total (incluindo 12 commits prévios autorizados): 639 caminhos alterados, 619 arquivos de texto escaneados, zero segredos/caminhos protegidos/inputs privados/exclusões. Vermelhos intermediários permanecem privados; suíte integral e CI completa não condicionaram o nível 1 autorizado. Nenhum merge, npm publish, produção, compra ou remoção funcional. Story Done cobre o lote delimitado; expertise global, inferência nativa e ganho causal continuam sem comprovação.

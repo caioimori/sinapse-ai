@@ -30,6 +30,14 @@ Planos/receipts de recuperação ficam em `examples/framework-quality/output/exp
 
 Embalagem local: `package.json` fora dos pins vivos, allowlist recebe somente `competence-runtime.json`. Inventário `npm pack --dry-run --ignore-scripts --json`: 4.508 arquivos, seis módulos/dados requeridos presentes, zero novos packs diagnósticos/review/library/output/captures. Teste focal do inventário passou e vínculo vivo continuou válido. Lifecycle não executado e nenhum pacote publicado; receipts privados package-dry-run/package-inclusion-check.
 
-Prévia final local do hub passou 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`, privado em `hub-final-status-cycle-1/receipt.json`. Próximo: commit/push/PR/anexo e conferência focal do link final. Suíte integral/CI não bloqueiam nível 1; hooks/políticas reais permanecem. Produção e merge continuam sem autorização deste lote.
+Entrega nível 1: branch enviada e [PR #416](https://github.com/caioimori/sinapse-ai/pull/416) aberto/anexado, base main, branch `codex/feat/framework-expertise-20261007`. Readback GitHub/remoto confirmou OPEN e head igual ao local. Hooks reais passaram sem bypass; CI/CodeQL em execução, sem aprovação geral alegada. Story Done cobre este lote delimitado.
+
+Scan final da evolução completa: 639 caminhos alterados, 619 arquivos de texto escaneados, zero achados, caminhos protegidos, inputs privados ou exclusões. Inclui os 12 commits históricos autorizados e os novos entregáveis; não é uma mudança restrita aos arquivos desta última onda. Receipt privado `devops-final-source-scan.json`.
+
+Prévia local do hub passou 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`, privado em `hub-final-status-cycle-1/receipt.json`. O acréscimo final do link/status do PR recebe conferência focal distinta; não é replay integral desses 29 checks.
+
+Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/409, 17 squads, cinco exemplos e zero overflow; screenshots inspecionados. Receipt privado `hub-final-delivery/receipt.json`, SHA `1a99b02ec0a2df3ba7be30170d503b66d984c675e14888ebdce390118b663485`. Não é replay dos 29 checks; as baterias Jest 124 e 32 se sobrepõem e não devem ser somadas.
+
+Suíte integral/CI completa não condicionam nível 1; hooks/políticas reais permanecem. Produção, merge e npm publish continuam sem autorização deste lote. Inferência nativa, expertise global, ganho causal e audição humana não foram comprovados; cada limite permanece no painel.
 
 Provas privadas em `examples/framework-quality/output/expertise-20261007/`: baseline-preservation, ownership, revisão, matriz, testes e capturas. Fonte anterior permanece no HEAD `8fe3b90b` clean; checkout original conserva 193 entradas sujas e 262 payloads pessoais devem permanecer. Nenhum output/library/capture/log/cliente/segredo será adicionado ao Git.

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-07",
-    "scope": "172 respostas escritas revisadas; integração e instalação pessoal conferidas por recuperação offline; PR em preparo, sem produção",
+    "scope": "172 respostas escritas revisadas; integração e instalação pessoal conferidas por recuperação offline; PR #416 aberta, sem produção",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -33,7 +33,7 @@
   "deployment": {
     "local": "172 respostas escritas aceitas no escopo diagnóstico; 17 reparos em três ciclos",
     "installed": "Instalação pessoal conferida — Codex e Claude Code; 42 contextos offline, sem inferência nativa",
-    "published": "Envio da branch e PR em preparo; prévia local disponível, sem produção"
+    "published": "Branch enviada e PR #416 aberta; prévia local disponível, sem produção"
   },
   "deliverables": [
     {
@@ -611,7 +611,7 @@
         "A instalação em ambiente pessoal isolado passou a matriz offline completa dos 172, com máximos 11.865 / 5.990 / 2.997. Após a atualização pessoal real, 42 contextos selecionados passaram em dois projetos, com máximos 11.745 / 5.611 / 2.969.",
         "Entradas Codex e Claude Code byte-equivalentes foram conferidas no ambiente pessoal e no projeto original. Essa prova cobre recuperação offline; nenhuma inferência nativa ou execução de persona foi observada.",
         "262 arquivos pessoais permaneceram iguais, o projeto original conservou 193 entradas de estado e a fonte anterior manteve seus 2.092 pins. Dados de rollback foram verificados; a atualização real bem-sucedida não foi revertida.",
-        "Os checks proporcionais passaram: 13 gates, 124 testes focais e 32 adicionais do gateway. Um teste histórico redundante foi omitido; a suíte completa do repositório não rodou. Branch e PR estão em preparo, sem produção."
+        "Os checks proporcionais passaram: 13 gates, 124 testes focais e 32 testes do gateway após o reparo, com sobreposição entre as rodadas. Um teste histórico redundante foi omitido; a suíte completa do repositório não rodou. Branch enviada e PR #416 aberta, sem produção."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",

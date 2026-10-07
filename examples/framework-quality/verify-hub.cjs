@@ -87,7 +87,8 @@ async function verifyWidth(width) {
   if (finalStatus) {
     assert((await page.locator('#install-status').textContent()).includes('Instalação pessoal conferida'));
     assert((await page.locator('#install-status').textContent()).includes('sem inferência nativa'));
-    assert((await page.locator('#publish-status').textContent()).includes('em preparo'));
+    assert((await page.locator('#publish-status').textContent()).includes('PR #416 aberta'));
+    assert.equal(await page.locator('#pull-request-link').getAttribute('href'), 'https://github.com/caioimori/sinapse-ai/pull/416');
     assert((await page.locator('.hero-state').textContent()).includes('recuperação offline'));
     assert(!(await page.locator('.hero-state').textContent()).includes('Revisão em andamento'));
   }
@@ -119,15 +120,25 @@ async function verifyLinks() {
   const context = await browser.newContext(); const page = await context.newPage();
   await page.goto(baseUrl); await page.waitForFunction(() => document.querySelectorAll('.squad').length === 17);
   const links = await page.locator('a').evaluateAll((nodes) => nodes.map((node) => node.getAttribute('href')));
+  let external = 0;
   for (const href of new Set(links)) {
-    const url = new URL(href, baseUrl); assert.equal(url.origin, new URL(baseUrl).origin, 'All navigation remains local');
+    const url = new URL(href, baseUrl);
+    if (url.origin !== new URL(baseUrl).origin) {
+      assert.equal(url.href, 'https://github.com/caioimori/sinapse-ai/pull/416', 'Only the confirmed delivery PR may be external');
+      const link = page.locator('#pull-request-link');
+      assert.equal(await link.getAttribute('target'), '_blank');
+      assert.equal(await link.getAttribute('rel'), 'noopener noreferrer');
+      external += 1;
+      continue; // PR state is read back separately through the authenticated GitHub CLI.
+    }
     const response = await context.request.get(url.href); assert.equal(response.status(), 200, `Link ${href}`);
     if (url.hash) {
       await page.goto(url.href);
       assert.equal(await page.locator(`[id="${url.hash.slice(1)}"]`).count(), 1, `Fragment ${href}`);
     }
   }
-  pass('links', { checked: new Set(links).size, external: 0, missing: 0 }); await context.close();
+  assert.equal(external, 1);
+  pass('links', { checked: new Set(links).size, external, missing: 0, externalProbe: 'Separate authenticated GitHub readback' }); await context.close();
 }
 async function verifyRecovery() {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' }); const page = await context.newPage();
