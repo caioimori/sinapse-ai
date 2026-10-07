@@ -64,3 +64,6 @@ docs/** linguist-documentation
 *.yml linguist-detectable=false
 *.yaml linguist-detectable=false
 
+# Immutable synthetic evaluation artifacts retain their registered byte hashes.
+examples/framework-quality/quality-proofs/** -text
+

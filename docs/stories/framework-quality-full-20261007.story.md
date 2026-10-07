@@ -22,6 +22,8 @@ Autoria somente na worktree framework-quality-full, branch codex/fix/framework-q
 - [ ] Se a fonte mudar, nova distribuição pessoal só por CAS/snapshots e readback Codex/Claude, mantendo acervo e históricos. Lote termina commit/push/PR/prévia, sem produção; claims limitados ao que foi observado.
 
 ## File List
+
+- .gitattributes — preservar bytes exatos somente em examples/framework-quality/quality-proofs/** para que os hashes dos artefatos autorais sobrevivam ao Git e às plataformas
 - docs/stories/framework-quality-full-20261007.story.md
 - docs/framework/expert-evolution-2026-10/QUALITY-FULL-SPEC.md
 - docs/framework/expert-evolution-2026-10/quality-full.workflow.json
