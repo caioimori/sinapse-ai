@@ -37,7 +37,7 @@ function verifyMetricDerivation() {
     mentalModels: profiles.reduce((sum, profile) => sum + profile.mentalModels.length, 0),
     qualityCriteria: profiles.reduce((sum, profile) => sum + profile.qualityCriteria.length, 0),
     diagnosticCases: profiles.filter(profile => profile.diagnosticCase || profile.heldOutCase).length,
-    externalSectionReads: packs.reduce((sum, pack) => sum + pack.sources.filter(source => (source.status === 'SECTION_READ' || (source.status === 'READ' && source.sourceScope === 'external-section')) && /^https:\/\//.test(source.url)).length, 0)
+    externalSectionReads: packs.reduce((sum, pack) => sum + pack.sources.filter(source => (source.status === 'SECTION_READ' || (source.status === 'READ' && source.sourceScope === 'external-section')) && /^https:\/\//.test(source.url)).length, 0),
   };
   for (const [metric, value] of Object.entries(derived)) assert.equal(data.metrics[metric], value, `Derived metric ${metric}`);
   assert.equal(data.metrics.validatedExperts, 0);

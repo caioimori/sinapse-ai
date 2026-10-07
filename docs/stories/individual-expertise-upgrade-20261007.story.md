@@ -1,7 +1,7 @@
 ---
 id: individual-expertise-upgrade-20261007
 type: enhancement
-status: Done
+status: InReview
 owner: caio
 executor: developer
 quality_gate: quality-gate
@@ -14,7 +14,7 @@ epic: docs/framework/expert-evolution-2026-10/PLAN.md
 
 ## Status
 
-Done
+InReview
 
 ## Story
 
@@ -39,6 +39,7 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 - [x] Executar casos e revisão independente.
 - [x] Validar recuperação/distribuição e preservação.
 - [x] Salvar, enviar branch, abrir PR e conferir prévia.
+- [ ] Corrigir os dois bypass locais demonstrados e limitar a resposta HTTP, validar em fonte isolada e aplicar novo CAS com preservação antes do fechamento.
 
 ## File List
 
@@ -99,6 +100,10 @@ CI no HEAD `2600dc51` encontrou Article VII vermelho por cinco docs desatualizad
 
 Security Audit permanece registrado (quatro HIGH de braces e dependentes); follow-ups/donos estão no handoff. Nenhum bypass, atualização forçada de dependências ou alteração de CI/runtime congelado. Nova CI e demais checks não foram aprovados integralmente.
 
+No HEAD `3e1f1603`, Article VII e Compatibility Parity passaram no remoto. CodeQL reportou 15 alertas (13 HIGH e dois MEDIUM); triagem confirmou dois bypass locais de contenção, condicionados a escrita local e processo ativo. A correção desses dois fluxos e do limite de resposta HTTP está em preparação em fonte isolada; a instalação pessoal ativa conserva os pins anteriores até teste, freeze e novo CAS.
+
+Secret Scanning remoto reportou 45 apontamentos, todos comprovados como hashes derivados por metadados e procedência, sem expor valores ou dismiss do check. Security Audit no mesmo HEAD mantém quatro HIGH transitivos sem fix. ESLint encontrou globais browser não declarados nos dois arquivos do builder; Jest/Coverage tiveram oito falhas em seis suítes, com fixture ausente, expectativas antigas e contrato contextOnly sob revisão. Não houve alteração de suíte, fixtures ou CI.
+
 Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/409, 17 squads, cinco exemplos e zero overflow. Receipt privado `hub-final-delivery/receipt.json`, SHA `1a99b02ec0a2df3ba7be30170d503b66d984c675e14888ebdce390118b663485`; não é replay dos 29 checks anteriores. As baterias 124 e 32 de Jest se sobrepõem e não devem ser somadas.
 
 Revisão semântica independente ciclo 3: 172 PASS diagnósticos, zero REVISE/BLOCKED. Três coortes Codex/Sol 6.1/high produziram os casos e respostas; sem avaliação cega, 172 personas isoladas, inferência Claude/Opus ou ganho causal. `validatedExpertise=false` preservado.
@@ -117,6 +122,6 @@ Preservação: 262/262 payloads pessoais iguais; fonte anterior clean no HEAD `8
 
 Embalagem corrigida somente na allowlist `package.json.files`, que não integra os pins vivos: `competence-runtime.json` incluído. Inspeção `npm pack --dry-run --ignore-scripts --json` encontrou os seis módulos/dados exigidos e zero packs diagnósticos, review, library, output ou captures privados; 4.508 arquivos. Verificação focal do inventário e vínculo vivo passou. Lifecycle não executado, nenhum pacote publicado.
 
-Prévia final local do hub: 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`. Branch enviada e [PR #416](https://github.com/caioimori/sinapse-ai/pull/416) aberto/anexado; leitura posterior confirmou estado OPEN, base main, branch correta e igualdade entre HEAD local/remoto/PR. Hooks reais passaram sem bypass; CI/CodeQL iniciados, sem aprovação geral alegada.
+Prévia final local do hub: 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`. Branch enviada e [PR #416](https://github.com/caioimori/sinapse-ai/pull/416) aberto/anexado; leitura posterior confirmou estado OPEN, base main, branch correta e igualdade entre HEAD local/remoto/PR. Hooks reais passaram sem bypass; CI concluída com falhas triadas acima, sem aprovação geral alegada.
 
-Scan final da evolução total (incluindo 12 commits prévios autorizados): 639 caminhos alterados, 619 arquivos de texto escaneados, zero segredos/caminhos protegidos/inputs privados/exclusões. Vermelhos intermediários permanecem privados; suíte integral e CI completa não condicionaram o nível 1 autorizado. Nenhum merge, npm publish, produção, compra ou remoção funcional. Story Done cobre o lote delimitado; expertise global, inferência nativa e ganho causal continuam sem comprovação.
+Scan final da evolução total (incluindo 12 commits prévios autorizados): 639 caminhos alterados, 619 arquivos de texto escaneados, zero segredos/caminhos protegidos/inputs privados/exclusões. Vermelhos intermediários permanecem privados; suíte integral e CI completa não condicionaram o nível 1 autorizado. Nenhum merge, npm publish, produção, compra ou remoção funcional. Story InReview cobre o hardening pendente deste lote delimitado; expertise global, inferência nativa e ganho causal continuam sem comprovação.

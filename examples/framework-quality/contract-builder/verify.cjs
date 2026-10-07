@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global document, innerWidth, getComputedStyle, navigator, window */
 'use strict';
 // Existing Playwright only. Headless QA of this authored demo, no shared browser.
 const fs = require('node:fs');

@@ -1,4 +1,4 @@
-/* global ContractModel */
+/* global ContractModel, document, navigator, window */
 'use strict';
 (() => {
   const M = ContractModel;
