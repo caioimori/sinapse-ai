@@ -32,7 +32,7 @@
   },
   "deployment": {
     "local": "172 respostas escritas aceitas no escopo diagnóstico; 17 reparos em três ciclos",
-    "installed": "Instalação pessoal conferida — Codex e Claude Code; 42 contextos offline, sem inferência nativa",
+    "installed": "Fonte 104c516d instalada e conferida — Codex e Claude Code; 42 contextos offline, sem inferência nativa",
     "published": "Branch enviada e PR #416 aberta; prévia local disponível, sem produção"
   },
   "deliverables": [
@@ -610,8 +610,8 @@
         "A integração montou 172 contextos em um snapshot estável, com 582 critérios críticos presentes. Máximos: 11.602 caracteres totais, 5.990 de conhecimento e 2.997 de perfil; presença de critério não comprova seu cumprimento.",
         "A instalação em ambiente pessoal isolado passou a matriz offline completa dos 172, com máximos 11.865 / 5.990 / 2.997. Após a atualização pessoal real, 42 contextos selecionados passaram em dois projetos, com máximos 11.745 / 5.611 / 2.969.",
         "Entradas Codex e Claude Code byte-equivalentes foram conferidas no ambiente pessoal e no projeto original. Essa prova cobre recuperação offline; nenhuma inferência nativa ou execução de persona foi observada.",
-        "262 arquivos pessoais permaneceram iguais, o projeto original conservou 193 entradas de estado e a fonte anterior manteve seus 2.092 pins. Dados de rollback foram verificados; a atualização real bem-sucedida não foi revertida.",
-        "Checks locais verdes: 124/32 testes sobrepostos, um skip histórico. CI: 15 alertas CodeQL, quatro HIGH transitivos; 45 apontamentos são hashes comprovados. Dois bypass locais e limite HTTP em correção; PR #416 aberta, sem produção."
+        "Fonte 104c516d instalada e conferida: 262 arquivos pessoais iguais, 193 entradas originais preservadas e duas fontes históricas intactas. Os 1.928 pins atuais e os snapshots de rollback passaram; a atualização real bem-sucedida não foi revertida.",
+        "Hardening concluído: 20 testes focais e 53 checks da prévia. CI em 104c516d: 12 alertas CodeQL HIGH, quatro HIGH transitivos e 45 hashes comprovados; Jest tem oito falhas anteriores e nove em mocks legados. Portabilidade passou no Windows; macOS aguarda novo resultado. PR #416 aberta, sem produção."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",
@@ -778,9 +778,9 @@
   },
   "installation": {
     "scope": "offline-context-only",
-    "sourceHead": "5f4b7e410fd88d717be0ee84fc0124a24caa7699",
-    "transactionId": "f5c05992-6d24-4c26-928c-9c78d1a61a08",
-    "registrySha256": "c5de681856a0baa111b96921905bef305df5e4a95eed6389781433fb3433941e",
+    "sourceHead": "104c516d7dc95812440d1a23b428ab837e238fb0",
+    "transactionId": "98937742-8201-4dcc-8b01-2db469be59b8",
+    "registrySha256": "5b6d9dbc675c562b882f9be9830dba51c86068436788cf26bf99cde62e31d586",
     "selectedContextChecks": 42,
     "selectedAgentIds": 21,
     "roots": 2,

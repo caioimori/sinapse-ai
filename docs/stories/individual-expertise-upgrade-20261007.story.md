@@ -1,7 +1,7 @@
 ---
 id: individual-expertise-upgrade-20261007
 type: enhancement
-status: InReview
+status: Done
 owner: caio
 executor: developer
 quality_gate: quality-gate
@@ -14,7 +14,7 @@ epic: docs/framework/expert-evolution-2026-10/PLAN.md
 
 ## Status
 
-InReview
+Done
 
 ## Story
 
@@ -39,7 +39,7 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 - [x] Executar casos e revisão independente.
 - [x] Validar recuperação/distribuição e preservação.
 - [x] Salvar, enviar branch, abrir PR e conferir prévia.
-- [ ] Corrigir os dois bypass locais demonstrados e limitar a resposta HTTP, validar em fonte isolada e aplicar novo CAS com preservação antes do fechamento.
+- [x] Corrigir os dois bypass locais demonstrados e limitar a resposta HTTP, validar em fonte isolada e aplicar novo CAS com preservação antes do fechamento.
 
 ## File List
 
@@ -90,19 +90,42 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 - examples/framework-quality/contract-builder/verify.cjs
 - examples/framework-quality/contract-builder/README.md
 
+- scripts/expert-evolution/extraction.cjs
+- scripts/framework-evolution/jev.cjs
+- examples/framework-quality/verify.cjs
+- tests/unit/expertise-security-hardening.test.js
+- docs/stories/expertise-security-hardening-20261007.story.md
+- docs/framework/expert-evolution-2026-10/SECURITY-HARDENING-SPEC.md
+- docs/framework/expert-evolution-2026-10/security-hardening-workflow.json
+- docs/framework/expert-evolution-2026-10/SECURITY-HARDENING-QA.md
+- examples/framework-quality/serve.cjs
+- docs/stories/preview-public-assets-20261007.story.md
+
 ## Dev Agent Record
 
 Retomada YOLO autorizada. Esforço high, três frentes independentes, checkpoints privados e nenhuma promoção por quantidade.
 
 ## QA Results
 
+Estado posterior em `104c516d`: CodeQL 12 HIGH, Security Audit quatro HIGH e Secret Scanning FAIL com os mesmos 45 hashes derivados (rules/locais/commits/hashes de mensagens conferidos). ESLint, Article VII e Compatibility Parity PASS. Jest Node 24/Coverage: oito falhas anteriores + nove em mocks legados do novo transporte/projeção, 17 em nove suítes; nenhuma alteração de fixtures legadas ou CI.
+
+Smoke macOS: 95 falhas em 12 suítes; sete no novo teste causadas pelo alias da raiz temporária antes dos probes. Canonicalização restrita ao teste/cleanup, SHA `f766a8f34b773e4711d62b9dea16a9d15509b2861754b2dfa072d09ec26e5deb`, 20/20 Windows e lint PASS; nova execução macOS ainda não observada. Esse teste está fora dos pins e tem receipt próprio, sem reatribuir o hash ao freeze original.
+
+Prévia pública delimitada por story própria `preview-public-assets-20261007`: 53 HTTP checks PASS, oito exports públicos copiados por SHA sem alterar originais/HOME, tipos/segmentos/aliases privados negados. Servidor e teste fora dos 1.928 pins, todos conferidos novamente com dois vínculos HOME válidos em `104c516d`. Capturas finais do copy/status são distintas dos 29 checks históricos.
+
+Hardening final salvo/enviado na mesma PR em sourceHead `104c516d7dc95812440d1a23b428ab837e238fb0`: leitura por snapshot/FD, servidor QA com cinco assets pré-carregados e transporte HTTP limitado a 65.536 bytes antes do parse, com projeção de metadata. Vinte testes focais PASS; revisão independente rerodou os mesmos vinte e acrescentou dois probes delimitados, sem somar execuções repetidas. Matriz scratch 172/172 com 582 critérios críticos, máximos 11.865/5.990/2.997; os sete JSON de competência/perfis/fontes/bindings permanecem byte-equivalentes.
+
+CAS fresco aplicado com nove destinos compilados/registro, transaction `98937742-8201-4dcc-8b01-2db469be59b8`, registry SHA `5b6d9dbc675c562b882f9be9830dba51c86068436788cf26bf99cde62e31d586`. Readback 42 contextos selecionados nos dois projetos, dois provedores byte-equivalentes e quatro negativos rejeitados; máximos 11.745/5.611/2.969. Os 262 payloads e 193 entradas originais foram preservados; duas fontes históricas intactas (2.092 pins e 1.928 inputs de plano, incluindo 1.925 de runtime), journals/snapshots anteriores e novos conferidos. Recuperação offline, sem inferência nativa.
+
+A primeira instalação 5f4 permanece como histórico e rollback; o worktree framework-expertise ficou detached fee0eb5a, e a mesma branch foi selecionada no hardening sem alterar os oito arquivos congelados. Hashes antes/depois de seleção/commit/CAS coincidem com o freeze autoral. Artefatos privados locais não rastreados foram preservados e nunca stageados; não declarar worktree absolutamente clean nem CI integral verde.
+
 CI no HEAD `2600dc51` encontrou Article VII vermelho por cinco docs desatualizados. Confirmados fora dos pins, contagens/skills corrigidas e validação focal integral PASS. Compatibility Parity 34/33 foi corrigido adicionando somente `sinapse-project-expert` ao metadado `.codex/catalog.json.expectedSkillIds`, fora dos pins; integração e paridade completa focal PASS, vínculos vivos preservados.
 
 Security Audit permanece registrado (quatro HIGH de braces e dependentes); follow-ups/donos estão no handoff. Nenhum bypass, atualização forçada de dependências ou alteração de CI/runtime congelado. Nova CI e demais checks não foram aprovados integralmente.
 
-No HEAD `3e1f1603`, Article VII e Compatibility Parity passaram no remoto. CodeQL reportou 15 alertas (13 HIGH e dois MEDIUM); triagem confirmou dois bypass locais de contenção, condicionados a escrita local e processo ativo. A correção desses dois fluxos e do limite de resposta HTTP está em preparação em fonte isolada; a instalação pessoal ativa conserva os pins anteriores até teste, freeze e novo CAS.
+No HEAD `3e1f1603`, Article VII e Compatibility Parity passaram no remoto. CodeQL reportou 15 alertas (13 HIGH e dois MEDIUM); triagem confirmou dois bypass locais de contenção, condicionados a escrita local e processo ativo. Esses dois fluxos e o limite de resposta HTTP foram corrigidos/testados na fonte isolada; a instalação ativa agora usa a fonte 104c516d após CAS e readback descritos acima. Demais alertas não foram descartados.
 
-Secret Scanning remoto reportou 45 apontamentos, todos comprovados como hashes derivados por metadados e procedência, sem expor valores ou dismiss do check. Security Audit no mesmo HEAD mantém quatro HIGH transitivos sem fix. ESLint encontrou globais browser não declarados nos dois arquivos do builder; Jest/Coverage tiveram oito falhas em seis suítes, com fixture ausente, expectativas antigas e contrato contextOnly sob revisão. Não houve alteração de suíte, fixtures ou CI.
+Secret Scanning remoto reportou 45 apontamentos, todos comprovados como hashes derivados por metadados e procedência, sem expor valores ou dismiss do check. Security Audit no mesmo HEAD mantém quatro HIGH transitivos sem fix. ESLint encontrou globais browser não declarados nos dois arquivos do builder; Jest/Coverage tiveram oito falhas em seis suítes, com fixture ausente, expectativas antigas e expectativas históricas de throw em contextOnly, com inspeção offline sem autorização confirmada pelo root. Não houve alteração de suíte, fixtures ou CI.
 
 Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/409, 17 squads, cinco exemplos e zero overflow. Receipt privado `hub-final-delivery/receipt.json`, SHA `1a99b02ec0a2df3ba7be30170d503b66d984c675e14888ebdce390118b663485`; não é replay dos 29 checks anteriores. As baterias 124 e 32 de Jest se sobrepõem e não devem ser somadas.
 
@@ -124,4 +147,4 @@ Embalagem corrigida somente na allowlist `package.json.files`, que não integra 
 
 Prévia final local do hub: 29 checks, zero falhas, 1440/390/320 px sem overflow; receipt SHA `6726f5ead82047cd371e32c9b878668ad529ade64ed2c35adebc9a2ded069104`. Branch enviada e [PR #416](https://github.com/caioimori/sinapse-ai/pull/416) aberto/anexado; leitura posterior confirmou estado OPEN, base main, branch correta e igualdade entre HEAD local/remoto/PR. Hooks reais passaram sem bypass; CI concluída com falhas triadas acima, sem aprovação geral alegada.
 
-Scan final da evolução total (incluindo 12 commits prévios autorizados): 639 caminhos alterados, 619 arquivos de texto escaneados, zero segredos/caminhos protegidos/inputs privados/exclusões. Vermelhos intermediários permanecem privados; suíte integral e CI completa não condicionaram o nível 1 autorizado. Nenhum merge, npm publish, produção, compra ou remoção funcional. Story InReview cobre o hardening pendente deste lote delimitado; expertise global, inferência nativa e ganho causal continuam sem comprovação.
+Scan anterior da evolução total (incluindo 12 commits prévios autorizados): 639 caminhos, 619 textos, zero achados. Scan posterior hardening: 650 arquivos/caminhos, zero achados/caminhos protegidos/inputs privados/exclusões; evidência heurística, sem certificação geral. Vermelhos intermediários permanecem privados; suíte integral e CI completa não condicionaram o nível 1 autorizado. Nenhum merge, npm publish, produção, compra ou remoção funcional. Story Done cobre este lote delimitado com hardening e novo CAS verificados; expertise global, inferência nativa e ganho causal continuam sem comprovação.

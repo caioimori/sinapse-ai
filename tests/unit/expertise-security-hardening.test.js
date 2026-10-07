@@ -9,8 +9,8 @@ const invoke=(handler,url)=>{let status,body;handler({url},{writeHead(code){stat
 describe('Windows evidence identity and local QA snapshot containment',()=>{
   let base,root,outside;
   const write=(directory,file,value)=>{const target=path.join(directory,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,value);};
-  beforeEach(()=>{base=fs.mkdtempSync(path.join(os.tmpdir(),'sinapse-security-hardening-'));root=path.join(base,'root');outside=path.join(base,'outside');fs.mkdirSync(root);fs.mkdirSync(outside);});
-  afterEach(()=>{jest.restoreAllMocks();if(path.dirname(path.resolve(base))!==path.resolve(os.tmpdir())||!/^sinapse-security-hardening-/.test(path.basename(base)))throw new Error('Unsafe owned fixture cleanup');fs.rmSync(base,{recursive:true,force:true});});
+  beforeEach(()=>{base=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'sinapse-security-hardening-')));root=path.join(base,'root');outside=path.join(base,'outside');fs.mkdirSync(root);fs.mkdirSync(outside);});
+  afterEach(()=>{jest.restoreAllMocks();if(path.dirname(path.resolve(base))!==fs.realpathSync(os.tmpdir())||!/^sinapse-security-hardening-/.test(path.basename(base)))throw new Error('Unsafe owned fixture cleanup');fs.rmSync(base,{recursive:true,force:true});});
   test('reads exact admitted bytes, rejects oversized evidence, and closes the stable handle',()=>{
     write(root,'inner/evidence.json','{"owned":true}');
     const open=jest.spyOn(fs,'openSync'),close=jest.spyOn(fs,'closeSync');
