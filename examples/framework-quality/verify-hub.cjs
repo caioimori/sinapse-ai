@@ -4,32 +4,44 @@
 // Development QA of authored local pages only. No install, external browsing, or user session.
 const fs = require('node:fs');
 const path = require('node:path');
-const http = require('node:http');
 const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
 const root = __dirname;
 const cycle = Number(process.argv.find((arg) => arg.startsWith('--cycle='))?.split('=')[1] || 1);
 assert(Number.isInteger(cycle) && cycle >= 1 && cycle <= 3, 'Bounded QA: cycles 1–3');
-const output = path.join(root, 'output', `hub-cycle-${cycle}`);
+const output = path.join(root, 'output', 'expertise-20261007', `${process.argv.includes('--metrics-only') ? 'hub-metrics' : 'hub'}-cycle-${cycle}`);
 assert(!fs.existsSync(output), 'Preserve previous evidence; choose the next cycle');
 fs.mkdirSync(output, { recursive: true });
 const checks = []; const failures = [];
 const started = Date.now();
-const server = http.createServer((request, response) => {
-  let pathname;
-  try { pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname); } catch { response.writeHead(400).end(); return; }
-  const candidate = path.resolve(root, `.${pathname.endsWith('/') ? `${pathname}index.html` : pathname}`);
-  let file;
-  try { file = fs.realpathSync(candidate); } catch { response.writeHead(404).end(); return; }
-  if (!file.startsWith(`${root}${path.sep}`) || !fs.statSync(file).isFile()) { response.writeHead(404).end(); return; }
-  const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json' }[path.extname(file)] || 'application/octet-stream';
-  response.writeHead(200, { 'Content-Type': mime }); response.end(fs.readFileSync(file));
-});
 let browser;
-let baseUrl;
+const baseUrl = 'http://127.0.0.1:4187/';
 let timeout;
 const pass = (name, detail) => checks.push({ name, status: 'observed-pass', detail });
+const metricsOnly = process.argv.includes('--metrics-only');
+function verifyMetricDerivation() {
+  const data = JSON.parse(fs.readFileSync(path.join(root, 'hub-data.json'), 'utf8'));
+  const repository = path.resolve(root, '../..');
+  const packs = data.metricProvenance.inputs.map(input => {
+    const raw = fs.readFileSync(path.join(repository, input.path));
+    assert.equal(crypto.createHash('sha256').update(raw).digest('hex'), input.sha256, `Public pack ${input.cohort} hash`);
+    return JSON.parse(raw);
+  });
+  const profiles = packs.flatMap(pack => pack.profiles);
+  assert.equal(new Set(profiles.map(profile => profile.agentId)).size, 172);
+  const derived = {
+    individualProfiles: profiles.length,
+    specificMechanisms: profiles.reduce((sum, profile) => sum + profile.mechanisms.length, 0),
+    mentalModels: profiles.reduce((sum, profile) => sum + profile.mentalModels.length, 0),
+    qualityCriteria: profiles.reduce((sum, profile) => sum + profile.qualityCriteria.length, 0),
+    diagnosticCases: profiles.filter(profile => profile.diagnosticCase || profile.heldOutCase).length,
+    externalSectionReads: packs.reduce((sum, pack) => sum + pack.sources.filter(source => (source.status === 'SECTION_READ' || (source.status === 'READ' && source.sourceScope === 'external-section')) && /^https:\/\//.test(source.url)).length, 0)
+  };
+  for (const [metric, value] of Object.entries(derived)) assert.equal(data.metrics[metric], value, `Derived metric ${metric}`);
+  assert.equal(data.metrics.validatedExperts, 0);
+  pass('public-metric-derivation', { derived, publicPackHashes: true, uniqueProfiles: true });
+}
 async function noOverflow(page, name) {
   const state = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth, body: document.body.scrollWidth }));
   assert(state.document <= state.viewport && state.body <= state.viewport, `${name}: overflow`);
@@ -48,6 +60,15 @@ async function verifyWidth(width) {
   assert.equal(await page.locator('#deliverable-buttons button').count(), 5);
   const current = JSON.parse(fs.readFileSync(path.join(root, 'hub-data.json'), 'utf8'));
   assert.equal(await page.locator('#reviewed-functions').textContent(), String(current.metrics.reviewedFunctions));
+  assert.equal(await page.locator('#reviewed-commands').textContent(), String(current.metrics.specificMechanisms));
+  assert.equal(current.metrics.individualProfiles, 172);
+  assert.equal(current.metrics.specificMechanisms, 409);
+  assert.equal(current.metrics.mentalModels, 344);
+  assert.equal(current.metrics.qualityCriteria, 635);
+  assert.equal(current.metrics.externalSectionReads, 75);
+  assert.equal(current.metrics.diagnosticCases, 172);
+  assert.equal(await page.locator('#exemplos a').count(), 5);
+  assert.equal(await page.getByRole('link', { name: 'Abrir editor de contratos' }).getAttribute('href'), 'contract-builder/');
   for (const item of current.deliverables) {
     await page.locator(`[data-deliverable="${item.id}"]`).click();
     assert.equal(await page.locator(`[data-deliverable="${item.id}"]`).getAttribute('aria-pressed'), 'true');
@@ -91,29 +112,30 @@ async function verifyRecovery() {
   await page.route('**/hub-data.json', (route) => route.fulfill({ status: 503, body: 'unavailable' }));
   await page.goto(baseUrl); await page.locator('#load-error').waitFor({ state: 'visible' });
   assert(await page.getByRole('heading', { name: 'Mais clareza. Mais qualidade.' }).isVisible());
-  assert.equal(await page.locator('#exemplos a').count(), 4);
+  assert.equal(await page.locator('#exemplos a').count(), 5);
   await noOverflow(page, 'load-error-390');
   await page.screenshot({ path: path.join(output, 'hub-390-error.png'), fullPage: true });
   await page.unroute('**/hub-data.json'); await page.getByRole('button', { name: 'Tentar novamente' }).click();
   await page.waitForFunction(() => document.querySelectorAll('.squad').length === 17);
   assert(!(await page.locator('#load-error').isVisible()));
   assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto');
-  pass('recovery-reduced', { errorPreservesOverview: true, examplesPreserved: 4, retryLoads: true, reducedMotion: 'auto scroll' }); await context.close();
+  pass('recovery-reduced', { errorPreservesOverview: true, examplesPreserved: 5, retryLoads: true, reducedMotion: 'auto scroll' }); await context.close();
 }
 (async () => {
   try {
-    await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-    baseUrl = `http://127.0.0.1:${server.address().port}/`;
+    verifyMetricDerivation();
     timeout = setTimeout(() => { throw new Error('Bounded QA timeout: 150 seconds'); }, 150000);
-    browser = await chromium.launch({ headless: true });
-    for (const width of [1440, 390, 320]) await verifyWidth(width);
-    await verifyLinks(); await verifyRecovery();
+    if (!metricsOnly) {
+      browser = await chromium.launch({ headless: true });
+      for (const width of [1440, 390, 320]) await verifyWidth(width);
+      await verifyLinks(); await verifyRecovery();
+    }
     assert.equal(failures.length, 0, 'No unhandled page errors');
   } catch (error) { failures.push({ name: 'verification', reason: error.message }); process.exitCode = 1; }
   finally {
-    clearTimeout(timeout); if (browser) await browser.close(); await new Promise((resolve) => server.close(resolve));
+    clearTimeout(timeout); if (browser) await browser.close();
     const hash = (file) => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
-    fs.writeFileSync(path.join(output, 'receipt.json'), JSON.stringify({ schemaVersion: 1, scope: 'Local authored hub only; not field accessibility or deployment', checks, failures, durationMs: Date.now() - started, sourceHashes: Object.fromEntries(['index.html', 'hub.css', 'hub.js', 'hub-data.json', 'verify-hub.cjs'].map((file) => [file, hash(file)])) }, null, 2));
+    fs.writeFileSync(path.join(output, 'receipt.json'), JSON.stringify({ schemaVersion: 1, scope: metricsOnly ? 'Public metrics derivation only; no browser or visual QA' : 'Local authored hub only; not field accessibility or deployment', checks, failures, durationMs: Date.now() - started, sourceHashes: Object.fromEntries(['index.html', 'hub.css', 'hub.js', 'hub-data.json', 'verify-hub.cjs'].map((file) => [file, hash(file)])) }, null, 2));
     process.stdout.write(JSON.stringify({ checks: checks.length, failures, output, elapsedMs: Date.now() - started }) + '\n');
   }
 })();

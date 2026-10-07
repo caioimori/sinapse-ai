@@ -64,6 +64,10 @@ function listFiles(root, relative, expression) {
     return relative + '/' + name;
   });
 }
+function runtimeDataFiles(root, relative) {
+  const allowed = relative === 'research/framework-evolution' ? ['sources.json','heuristics.json','competencies.json','fixture.json'] : ['expert-profiles.json','source-program.json','task-bindings.json','operational-contracts.json','jev-use-cases.json','model-policy.json','competence-runtime.json','fixture.json'];
+  return listFiles(root,relative,/\.json$/).filter(file => allowed.includes(file.split('/').pop()));
+}
 function checkManifest(manifest, activeRoot) {
   if (manifest?.schemaVersion !== 1 || manifest.kind !== 'sinapse-project-expert-link' || manifest.contextOnly !== true || manifest.privateLibrary !== 'project-local' || !/^[a-f0-9]{40}$/.test(manifest.sourceHead || '') || !Array.isArray(manifest.inputs) || !manifest.inputs.length || !Array.isArray(manifest.rosters)) throw new Error('Invalid project link manifest');
   const project = safeRoot(manifest.projectRoot), source = safeRoot(manifest.sourceRoot);
@@ -77,7 +81,7 @@ function checkManifest(manifest, activeRoot) {
   if (!seen.has('scripts/framework-evolution/runtime.cjs')) throw new Error('Missing frozen runtime');
   for (const roster of manifest.rosters) {
     if (!roster || !['md','json'].includes(roster.extension) || !Array.isArray(roster.files)) throw new Error('Invalid linked source roster');
-    const actual = listFiles(source, roster.path, roster.extension === 'md' ? /\.md$/ : /\.json$/);
+    const actual = roster.runtimeOnly === true ? runtimeDataFiles(source,roster.path) : listFiles(source, roster.path, roster.extension === 'md' ? /\.md$/ : /\.json$/);
     if (JSON.stringify(actual) !== JSON.stringify(roster.files) || actual.some(file => !seen.has(file))) throw new Error('Stale linked source roster: ' + roster.path);
   }
   if (!manifest.library || manifest.library.path !== 'research/expert-evolution/library/overlay.json' || !(manifest.library.sha256 === null || /^[a-f0-9]{64}$/.test(manifest.library.sha256 || '')) || digest(source, manifest.library.path) !== manifest.library.sha256) throw new Error('Stale project-private knowledge overlay');
@@ -124,16 +128,25 @@ function buildProjectContext(options = {}) {
   const {manifest, verified, linkSha256} = loadLink(options);
   // Code is imported only after every frozen module/input has passed its hash.
   const runtime = require(safeFile(verified.source, 'scripts/framework-evolution/runtime.cjs'));
-  const payload = runtime.buildRuntimeContext({root:verified.source, agentId:options.agentId, task:options.task, brief:options.brief || '', maxChars:options.maxChars ?? 12000, knowledgeMaxChars:options.knowledgeMaxChars ?? 6000, contextOnly:true});
-  if (payload.capsule?.model !== null || payload.executionObserved !== false || payload.contextOnly !== true) throw new Error('Runtime did not return a provider-independent context-only contract');
   const locator = relative => {
     if (!manifest.inputs.some(input=>input.path===relative)) throw new Error('Context locator is not a frozen source input');
     safeFile(verified.source,relative);return relative;
   };
-  payload.projectLink = {projectId:manifest.projectId,sourceHead:manifest.sourceHead,linkSha256,sourceRoot:verified.source,activeProjectRoot:verified.project,sourceInputsReadOnly:true,locators:{canonical:locator(payload.capsule.sourceOfTruth),task:locator(payload.capsule.task.target)},privateLibrary:'project-local',executionObserved:false,expertisePromotion:false};
-  for (let i = 0; i < 4; i++) { const size = JSON.stringify(payload).length; if (payload.charsUsed === size) break; payload.charsUsed = size; }
-  if (payload.charsUsed > payload.maxChars || JSON.stringify(payload.knowledge).length > 6000 || (payload.profile && JSON.stringify(payload.profile).length > 3000)) throw new Error('Linked context exceeded its complete budget');
-  return payload;
+  let knowledgeMaxChars = options.knowledgeMaxChars ?? 6000;
+  // Reassemble optional knowledge with the exact link overhead reserved. The
+  // runtime keeps criteria/vetoes intact or fails closed; never slice output.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const payload = runtime.buildRuntimeContext({root:verified.source, agentId:options.agentId, task:options.task, brief:options.brief || '', maxChars:options.maxChars ?? 12000, knowledgeMaxChars, contextOnly:true});
+    if (payload.capsule?.model !== null || payload.executionObserved !== false || payload.contextOnly !== true) throw new Error('Runtime did not return a provider-independent context-only contract');
+    payload.projectLink = {projectId:manifest.projectId,sourceHead:manifest.sourceHead,linkSha256,sourceRoot:verified.source,activeProjectRoot:verified.project,sourceInputsReadOnly:true,locators:{canonical:locator(payload.capsule.sourceOfTruth),task:locator(payload.capsule.task.target)},privateLibrary:'project-local',executionObserved:false,expertisePromotion:false};
+    for (let i = 0; i < 4; i++) { const size = JSON.stringify(payload).length; if (payload.charsUsed === size) break; payload.charsUsed = size; }
+    const knowledgeChars = JSON.stringify(payload.knowledge).length;
+    if (knowledgeChars > Math.min(knowledgeMaxChars,6000) || (payload.profile && JSON.stringify(payload.profile).length > 3000)) throw new Error('Linked context exceeded its complete budget');
+    if (payload.charsUsed <= payload.maxChars) return payload;
+    knowledgeMaxChars = Math.min(knowledgeMaxChars,knowledgeChars) - (payload.charsUsed - payload.maxChars) - 8;
+    if (knowledgeMaxChars < 1) break;
+  }
+  throw new Error('Linked context exceeded its complete budget');
 }
 function parseArgs(args) {
   const result = {agentId:args[0]};
@@ -151,4 +164,4 @@ if (require.main === module) {
   try { process.stdout.write(JSON.stringify(buildProjectContext(parseArgs(process.argv.slice(2)))) + '\n'); }
   catch (error) { process.stderr.write(error.message + '\n'); process.exitCode = 1; }
 }
-module.exports = {REGISTRY,GATEWAY,DELIVERY,sha,identity,inside,safeRoot,safeFile,digest,readJson,git,projectRoot,commonRoot,projectId,listFiles,checkManifest,checkDelivery,loadLink,buildProjectContext,parseArgs};
+module.exports = {REGISTRY,GATEWAY,DELIVERY,sha,identity,inside,safeRoot,safeFile,digest,readJson,git,projectRoot,commonRoot,projectId,listFiles,runtimeDataFiles,checkManifest,checkDelivery,loadLink,buildProjectContext,parseArgs};

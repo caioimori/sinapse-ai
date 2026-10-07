@@ -6,7 +6,7 @@ Os 172 agentes e as 17 squads agora têm autoridade operacional derivada da font
 
 A extensão `sinapse-project-expert` compartilha o mesmo contexto offline entre Codex e Claude Code, somente nos projetos vinculados. Congela fontes e referências privadas, mantém limites 12.000/6.000/3.000, verifica hashes e rosters e bloqueia vínculos adulterados. Instalação e readback finais ficam na [verificação do fechamento](CLOSEOUT-VERIFICATION.md).
 
-A auditoria corrigiu a autoridade de tarefas, aliases, fontes com títulos incorretos, os papéis de Holdfast/Purpose e cenários financeiros apresentados como percentis sem distribuição. AIOX permanece na versão oficial 5.4.1 observada nesta execução; não existe atualização nova do upstream a incorporar neste fechamento.
+A auditoria corrigiu a autoridade de tarefas, aliases, fontes com títulos incorretos, os papéis de Holdfast/Purpose e cenários financeiros apresentados como percentis sem distribuição. A base open source permanece na versão oficial 5.4.1 observada nesta execução; atribuição e URL estão na [auditoria técnica de upstream](../evolution-2026-10/upstream.json), sem atualização nova a incorporar neste fechamento.
 
 O replay atual passou nos 12 artefatos pareados e nos exemplos Lume, incluindo foco/Desfazer após redimensionar para 390/320px. Decodificação integral de 18s é prova técnica; audição e revisão audiovisual percebida permanecem separadas. Sem nova chamada Jev, recarga ou API Anthropic.
 

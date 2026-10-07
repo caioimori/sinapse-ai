@@ -17,7 +17,7 @@
 
   function validate(input) {
     if (input?.schemaVersion !== 1 || input.metrics?.squads !== 17 || input.metrics?.agents !== 172 || input.metrics?.validatedExperts !== 0) throw new Error('Unsupported snapshot');
-    if (!Number.isInteger(input.metrics.reviewedFunctions) || !Number.isInteger(input.metrics.reviewedCommands)) throw new Error('Invalid metrics');
+    if (!['reviewedFunctions', 'reviewedCommands', 'individualProfiles', 'specificMechanisms', 'mentalModels', 'qualityCriteria', 'diagnosticCases', 'externalSectionReads'].every(metric => Number.isInteger(input.metrics[metric]) && input.metrics[metric] >= 0)) throw new Error('Invalid metrics');
     if (!['operationalProfiles', 'commandRecords', 'newOwnedTasks', 'curatedMechanisms', 'providerSkills', 'readReferences', 'candidateReferences'].every((metric) => Number.isInteger(input.metrics[metric]) && input.metrics[metric] >= 0)) throw new Error('Invalid closeout metrics');
     if (!Array.isArray(input.squads) || input.squads.length !== 17 || !Array.isArray(input.pending) || input.pending.length !== 8 || !Array.isArray(input.evidence)) throw new Error('Incomplete snapshot');
     if (!Array.isArray(input.deliverables) || input.deliverables.length !== 5 || !input.deliverables.every((item) => safeExamples.has(item.exampleUrl))) throw new Error('Invalid local navigation');
@@ -103,8 +103,8 @@
   function render() {
     byId('reviewed-functions').textContent = data.metrics.reviewedFunctions;
     byId('reviewed-commands').textContent = data.metrics.reviewedCommands;
-    byId('operational-summary').textContent = `Operação: ${data.metrics.operationalProfiles} contratos, ${data.metrics.commandRecords.toLocaleString('pt-BR')} registros de comando e ${data.metrics.newOwnedTasks} tarefas próprias novas. Conhecimento: ${data.metrics.curatedMechanisms} mecanismos privados curados. Distribuição: ${data.metrics.providerSkills} skills por ambiente (37 do núcleo + 1 opt-in).`;
-    byId('expertise-summary').textContent = `Especialização parcial: ${data.metrics.reviewedFunctions} perfis e ${data.metrics.reviewedCommands} vínculos revisados. O programa de fontes tem ${data.metrics.readReferences} referências lidas e ${data.metrics.candidateReferences} candidatas; nenhum especialista recebeu validação global.`;
+    byId('operational-summary').textContent = `Nesta onda: ${data.metrics.individualProfiles} perfis individuais, ${data.metrics.specificMechanisms} mecanismos, ${data.metrics.mentalModels} modelos de decisão e ${data.metrics.qualityCriteria} critérios. Contagens descrevem o conhecimento escrito; não são notas de qualidade.`;
+    byId('expertise-summary').textContent = `${data.metrics.externalSectionReads} recortes externos observados e ${data.metrics.diagnosticCases} casos diagnósticos da mesma coorte. Leitura delimitada e revisão escrita não comprovam transferência, pesquisa profunda integral ou expertise global.`;
     byId('local-status').textContent = data.deployment.local;
     byId('install-status').textContent = data.deployment.installed;
     byId('publish-status').textContent = data.deployment.published;

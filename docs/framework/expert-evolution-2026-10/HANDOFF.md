@@ -8,7 +8,7 @@ Começar pela [verificação](CLOSEOUT-VERIFICATION.md), pelo [runtime](../codex
 - Expertise: 35 perfis/51 bindings revisados, 2 referências READ e 88 CANDIDATE. Quatro títulos/tipos, papéis Holdfast/Purpose e cenários financeiros foram corrigidos com proveniência; nenhuma promoção mundial nem nova leitura integral.
 - `sinapse-project-expert` instalada como entrada adicional em Codex e Claude Code. Snapshot definitivo: 2.095 pins, nove destinos novos; transação `4a7c01b2-ca7a-476b-ab15-2fbd29eef317`. Readback: 20/20 design + 12/12 autoridade, paridade entre provedores e 18 rejeições seguras. Contexto offline, sem escolher modelo nem alegar inferência nativa.
 - Pares 459/459, Lume 84/84 e feedback/foco 411/411 em 1440/390/320; painel final 416/416, 12 capturas, zero overflow/erros. Lume é marca fictícia de teste. Reel decodificado integralmente: 18s/540 quadros; player observado até 12,769s. A sessão não recebe áudio, portanto a audição continua sem prova.
-- AIOX oficial continua 5.4.1, sem novo release observado. Nenhuma nova chamada paga Jev nesta onda; acumulado calculado US$0,00018375, reserva US$0,005376/0,05. Sem recarga, API Anthropic, publicação, remoção funcional, Docker ou WSL.
+- A base open source oficial continua 5.4.1, sem novo release observado; atribuição e URL estão na [auditoria técnica de upstream](../evolution-2026-10/upstream.json). Nenhuma nova chamada paga Jev nesta onda; acumulado calculado US$0,00018375, reserva US$0,005376/0,05. Sem recarga, API Anthropic, publicação, remoção funcional, Docker ou WSL.
 
 ## Provas e preservação
 

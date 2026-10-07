@@ -43,9 +43,10 @@ describe('explicit priority contracts without expertise promotion', () => {
     }
     const amendment=read('docs/framework/expert-evolution-2026-10/closeout-source-corrections.json');
     expect(amendment.changes).toHaveLength(4);
-    expect(digest(JSON.stringify(current.sources.references))).toBe(amendment.currentReferencesSha256);
+    const inheritedReferences=current.sources.references.filter(ref=>!ref.id.startsWith('upgrade-'));
+    expect(digest(JSON.stringify(inheritedReferences))).toBe(amendment.currentReferencesSha256);
     for(const change of amendment.changes){expect(change.before.status).toBe('CANDIDATE');expect(change.after.status).toBe('CANDIDATE');expect(change.before.url).toBe(change.after.url);expect(current.sources.references.find(r=>r.id===change.id)).toEqual(change.after);}
-    const historical=current.sources.references.map(ref=>amendment.changes.find(c=>c.id===ref.id)?.before||ref);
+    const historical=inheritedReferences.map(ref=>amendment.changes.find(c=>c.id===ref.id)?.before||ref);
     expect(digest(JSON.stringify(historical))).toBe(completion.baseline.sourcesSha256);
     expect(amendment.baselineReferencesSha256).toBe(completion.baseline.sourcesSha256);
   });
@@ -122,12 +123,14 @@ describe('explicit priority contracts without expertise promotion', () => {
     const program = e.loadProgram(root);
     expect(e.validateProgram(program, {root})).toEqual({valid: true, errors: []});
     expect(program.profiles.profiles).toHaveLength(172);
-    expect(program.profiles.profiles.filter(p => p.contractReviewed)).toHaveLength(35);
-    expect(program.bindings.bindings).toHaveLength(51);
-    expect(program.profiles.profiles.filter(p => !p.contractReviewed)).toHaveLength(137);
+    expect(program.profiles.profiles.filter(p => p.contractReviewed)).toHaveLength(172);
+    expect(program.bindings.bindings).toHaveLength(188);
+    expect(program.profiles.profiles.filter(p => !p.contractReviewed)).toHaveLength(0);
     expect(program.profiles.profiles.every(p => !p.validatedExpertise && p.status === 'planned')).toBe(true);
-    expect(program.sources.references.filter(r => r.status === 'READ')).toHaveLength(2);
-    expect(program.sources.references.filter(r => r.status === 'CANDIDATE')).toHaveLength(88);
+    expect(program.sources.references.filter(r => r.status === 'READ' && !r.id.startsWith('upgrade-'))).toHaveLength(2);
+    expect(program.sources.references.filter(r => r.status === 'CANDIDATE' && !r.id.startsWith('upgrade-'))).toHaveLength(88);
+    expect(program.sources.references.filter(r => r.status === 'READ' && r.sourceScope === 'external-section')).toHaveLength(75);
+    expect(program.sources.references.filter(r => r.status === 'CANDIDATE' && r.id.startsWith('upgrade-'))).toHaveLength(11);
     for (const rejected of review.rejected) {
       const profile = program.profiles.profiles.find(p => p.agentId === rejected.agentId);
       const contract = completion.contracts.find(c => c.agentId === rejected.agentId && c.command === rejected.command);

@@ -5,6 +5,7 @@ const os = require('node:os');
 const {execFileSync} = require('node:child_process');
 const gateway = require('../../scripts/framework-evolution/project-expert.cjs');
 const installer = require('../../scripts/framework-evolution/project-expert-install.cjs');
+const upgrader = require('../../scripts/framework-evolution/project-expert-upgrade.cjs');
 const REPO = path.resolve(__dirname,'../..');
 
 describe('explicit provider-independent project expert delivery', () => {
@@ -34,6 +35,51 @@ describe('explicit provider-independent project expert delivery', () => {
   });
   const install = () => installer.applyProjectPlan(plan);
   const context = extra => gateway.buildProjectContext({home,cwd:source,agentId:'fixture-agent',task:'fixture-task',receiptSha256:plan.registrySha256,...extra});
+  const upgradePlan = () => upgrader.prepareUpgrade({sourceRoot:source,projectRoots:[source],home,expectedOldRegistrySha256:plan.registrySha256,expectedOldTransactionId:plan.transactionId,transactionId:'upgrade-fixture',authorization:'Explicit owned upgrade fixture'});
+  test('explicit upgrade requires old/new CAS, snapshots provider parity, and rolls back only owned writes',()=>{
+    install();const oldSkill=fs.readFileSync(path.join(home,'.agents/skills/sinapse-project-expert/SKILL.md'));
+    const upgrade=upgradePlan();
+    expect(()=>upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:'0'.repeat(64)})).toThrow('CAS');
+    const receipt=upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:upgrade.expectedNewRegistrySha256});
+    expect(receipt.status).toBe('upgraded-bounded');
+    expect(gateway.loadLink({home,cwd:source,receiptSha256:upgrade.expectedNewRegistrySha256}).manifest.sourceRoot).toBe(gateway.safeRoot(source));
+    expect(fs.readFileSync(path.join(home,'.agents/skills/sinapse-project-expert/SKILL.md')).equals(fs.readFileSync(path.join(home,'.claude/skills/sinapse-project-expert/SKILL.md')))).toBe(true);
+    write(home,'foreign-work.txt','preserved concurrent work');
+    expect(upgrader.rollbackUpgrade(upgrade,{expectedJournalSha256:receipt.journalSha256,expectedSnapshotSha256:receipt.snapshotSha256}).status).toBe('rolled-back');
+    expect(gateway.digest(home,gateway.REGISTRY)).toBe(plan.registrySha256);
+    expect(fs.readFileSync(path.join(home,'.agents/skills/sinapse-project-expert/SKILL.md')).equals(oldSkill)).toBe(true);
+    expect(fs.readFileSync(path.join(home,'foreign-work.txt'),'utf8')).toBe('preserved concurrent work');
+    expect(context().contextOnly).toBe(true);
+  });
+  test('upgrade preserves concurrent destination edits during failure and records blocked rollback',()=>{
+    install();const upgrade=upgradePlan();let error;
+    try{upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:upgrade.expectedNewRegistrySha256,afterWrite:entry=>{if(entry.path===gateway.REGISTRY){write(home,gateway.REGISTRY,'foreign registry');throw new Error('fixture failure');}}});}catch(caught){error=caught;}
+    expect(error.recovery.status).toBe('recovery-blocked');
+    expect(error.recovery.blockedFiles).toContain(gateway.REGISTRY);
+    expect(fs.readFileSync(path.join(home,gateway.REGISTRY),'utf8')).toBe('foreign registry');
+    expect(fs.readFileSync(path.join(home,'.claude/settings.json'),'utf8')).toBe('{"existing":true}');
+  });
+  test('interrupted upgrade restores the complete old write set and old gateway readback',()=>{
+    install();const upgrade=upgradePlan();let failure;
+    try{upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:upgrade.expectedNewRegistrySha256,afterWrite:entry=>{if(entry.path===gateway.REGISTRY)throw new Error('bounded interruption');}});}catch(error){failure=error;}
+    expect(failure.recovery).toEqual({status:'rolled-back',blockedFiles:[]});
+    expect(gateway.digest(home,gateway.REGISTRY)).toBe(plan.registrySha256);
+    expect(context().contextOnly).toBe(true);
+    expect(fs.existsSync(path.join(home,'.sinapse/project-expert/backups/upgrade-fixture/upgrade-snapshots.json'))).toBe(true);
+  });
+  test('upgrade rejects tampered snapshots, old transaction, occupied lock and source drift',()=>{
+    install();const upgrade=upgradePlan(),corrupt=structuredClone(upgrade);
+    corrupt.snapshots[0].content=Buffer.from('foreign injected script').toString('base64');
+    expect(()=>upgrader.applyUpgrade(corrupt,{expectedNewRegistrySha256:corrupt.expectedNewRegistrySha256})).toThrow('trusted');
+    expect(()=>upgrader.prepareUpgrade({...upgrade.plan,expectedOldRegistrySha256:plan.registrySha256,expectedOldTransactionId:'foreign'})).toThrow('transaction');
+    write(home,'.sinapse/project-expert/installation.lock','another installation');
+    expect(()=>upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:upgrade.expectedNewRegistrySha256})).toThrow();
+    expect(fs.readFileSync(path.join(home,'.sinapse/project-expert/installation.lock'),'utf8')).toBe('another installation');
+    fs.unlinkSync(path.join(home,'.sinapse/project-expert/installation.lock'));
+    write(source,'scripts/framework-evolution/runtime.cjs','foreign source drift');
+    expect(()=>upgrader.applyUpgrade(upgrade,{expectedNewRegistrySha256:upgrade.expectedNewRegistrySha256})).toThrow('trusted');
+    expect(gateway.digest(home,gateway.REGISTRY)).toBe(plan.registrySha256);
+  });
   test('both providers receive identical skills and deterministic context without copying the private library', () => {
     const receipt = install();
     const codex = fs.readFileSync(path.join(home,'.agents/skills/sinapse-project-expert/SKILL.md'));
@@ -107,6 +153,18 @@ describe('explicit provider-independent project expert delivery', () => {
     install();expect(() => context({agentId:'another-agent'})).toThrow('Unknown fixture authority');expect(() => context({maxChars:20})).toThrow('budget');
     expect(() => gateway.parseArgs(['fixture-agent','--task','fixture-task','--root',other])).toThrow('Invalid project context option');
     expect(() => gateway.parseArgs(['fixture-agent','--task','fixture-task','--task','other'])).toThrow();
+  });
+  test('linked metadata reserves complete budget while critical criteria, vetoes and authority remain intact', () => {
+    const relative='scripts/framework-evolution/runtime.cjs';
+    write(source,relative,"module.exports={buildRuntimeContext:o=>{const knowledge={optional:'',maxChars:o.knowledgeMaxChars};knowledge.optional='x'.repeat(o.knowledgeMaxChars-JSON.stringify(knowledge).length);return {capsule:{model:null,sourceOfTruth:'.sinapse-ai/development/agents/fixture-agent.md',task:{target:'.sinapse-ai/development/workflows/fixture.yaml'}},contextOnly:true,executionObserved:false,knowledge,profile:{criteria:['critical criterion'],vetoes:['critical veto']},operational:{authority:'delegate to exact task owner',mandatory:'m'.repeat(800)},charsUsed:0,maxChars:o.maxChars};}};");
+    plan=installer.prepareProjectPlan({sourceRoot:source,projectRoots:[source],home,transactionId:'fixture',authorization:'Explicit owned budget regression'});install();
+    const result=context({maxChars:7500});
+    expect(result.charsUsed).toBe(JSON.stringify(result).length);
+    expect(result.charsUsed).toBeLessThanOrEqual(7500);
+    expect(result.knowledge.maxChars).toBeLessThan(6000);
+    expect(result.profile).toEqual({criteria:['critical criterion'],vetoes:['critical veto']});
+    expect(result.operational).toEqual({authority:'delegate to exact task owner',mandatory:'m'.repeat(800)});
+    expect(()=>context({maxChars:1000,knowledgeMaxChars:100})).toThrow('budget');
   });
   test('non-squad-prefixed domain canonical and task bytes are frozen before import', () => {
     expect(plan.sources.some(input=>input.path==='squads/claude-code-mastery/agents/fixture-claude.md')).toBe(true);

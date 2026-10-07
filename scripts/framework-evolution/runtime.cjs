@@ -52,14 +52,28 @@ function buildRuntimeContext({ root = repoRoot, agentId, task, brief = '', compe
   const canonicalPath = containedFile(root, agent.sourceOfTruth);
   containedFile(root, agent.pointer);
   const taskPath = containedFile(root, command.target);
-  const operational = withOperational ? require('../expert-evolution/operational.cjs').getOperationalContract({root,agentId:agent.agentId,command:command.commandId,target:command.target,resolvedBy:command.resolvedBy,requireExecution:true}) : null;
+  const operational = withOperational ? require('../expert-evolution/operational.cjs').getOperationalContract({root,agentId:agent.agentId,command:command.commandId,target:command.target,resolvedBy:command.resolvedBy,requireExecution:!contextOnly}) : null;
   const text = fs.readFileSync(canonicalPath, 'utf8');
   const taskText = fs.readFileSync(taskPath, 'utf8').slice(0, 4000);
   const taskTitle = taskText.match(/^#{1,6}\s+(.+)$/m)?.[1] || command.commandId;
   const taskPointer = agent.tasks.find((entry) => entry.command === command.commandId) || { scope: command.resolvedBy === 'registry' ? 'registry' : 'declared' };
   const capsule = { agentId: agent.agentId, squad: agent.squad, model, task: { command: command.commandId, target: command.target, scope: taskPointer.scope }, sourceOfTruth: agent.sourceOfTruth, canonicalSha256: crypto.createHash('sha256').update(text).digest('hex'), pointer: agent.pointer, authority: 'Routing metadata only. Read the canonical definition and exact task before execution; existing story, security, delegation and human approval gates retain authority.', fallback: taskPointer.scope === 'squad-pool' };
-  const knowledge = require('./knowledge.cjs').retrieveKnowledge({ root, agentId: agent.agentId, squad: agent.squad, competencies, brief, task: { command: command.commandId, title: taskTitle, text: taskText }, maxItems: 3, maxChars: knowledgeMaxChars });
   const profile = withExpertise ? require('../expert-evolution/expertise.cjs').getProfile({root, agentId:agent.agentId, maxChars:Math.min(3000, maxChars - 1000), compact:true, task:{command:command.commandId,title:taskTitle,text:taskText}}) : null;
+  const competenceFiles=['scripts/expert-evolution/competence.cjs','research/expert-evolution/competence-runtime.json'];
+  const competenceAvailability=competenceFiles.map(relative=>fs.existsSync(path.join(root,relative)));
+  if(competenceAvailability.some(Boolean)&&!competenceAvailability.every(Boolean))throw new Error('Partial competence runtime installation');
+  const knowledgeRequest={root,agentId:agent.agentId,squad:agent.squad,competencies,brief,task:{command:command.commandId,title:taskTitle,text:taskText},maxItems:3,maxChars:knowledgeMaxChars};
+  let knowledge=require('./knowledge.cjs').retrieveKnowledge(knowledgeRequest);
+  let competence=null;
+  if(competenceAvailability.every(Boolean)){
+    competenceFiles.forEach(relative=>containedFile(root,relative));
+    if(knowledgeMaxChars-JSON.stringify(knowledge).length-24<1800)knowledge=require('./knowledge.cjs').retrieveKnowledge({...knowledgeRequest,maxItems:1});
+    competence=require('../expert-evolution/competence.cjs').selectCompetenceKnowledge({root,agentId:agent.agentId,command:command.commandId,brief,maxChars:Math.min(knowledgeMaxChars-JSON.stringify(knowledge).length-24,5000)});
+  }
+  if(competence)knowledge.competence=competence;
+  knowledge.maxChars=knowledgeMaxChars;
+  for(let i=0;i<4;i++)knowledge.charsUsed=JSON.stringify(knowledge).length;
+  if(JSON.stringify(knowledge).length>knowledgeMaxChars)throw new Error('Complete knowledge exceeds shared 6000 character budget');
   const payload = { schemaVersion: 1, capsule, contextOnly, executionObserved:false, execution:{mode:contextOnly?'context-only':'policy-checked-assembly',observed:false,provider:null}, brief, knowledge, ...(profile ? {profile} : {}), ...(operational ? {operational} : {}), sources: [agent.sourceOfTruth, agent.pointer, command.target], gaps: [...(knowledge.gaps || []), ...(profile ? ['Expert program coverage is planned; source inventory does not establish validated expertise.'] : []), ...(capsule.fallback ? ['Task is exposed for delegation discovery; operational authority is separately explicit.'] : [])], charsUsed: 0, maxChars, limits: ['Offline assembly only; no model execution or global settings change.', 'Structural assembly is not proof of behavioral improvement.'] };
   for (let iteration = 0; iteration < 4; iteration++) {
     const length = JSON.stringify(payload).length;

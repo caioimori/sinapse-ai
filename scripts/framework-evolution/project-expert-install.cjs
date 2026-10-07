@@ -28,8 +28,9 @@ function sourceInputs(root) {
   modules('scripts/framework-evolution/runtime.cjs');
   add('.codex/command-registry.json');
   const roster = (relative,extension) => {
-    const entries = gateway.listFiles(root,relative,extension === 'md' ? /\.md$/ : /\.json$/);
-    entries.forEach(add); rosters.push({path:relative,extension,files:entries});
+    const runtimeOnly = extension === 'json';
+    const entries = runtimeOnly ? gateway.runtimeDataFiles(root,relative) : gateway.listFiles(root,relative,/\.md$/);
+    entries.forEach(add); rosters.push({path:relative,extension,files:entries,...(runtimeOnly?{runtimeOnly:true}:{})});
   };
   for (const relative of ['.codex/agents','.codex/tasks','.sinapse-ai/development/agents','.sinapse-ai/development/tasks']) if (fs.existsSync(path.join(root,relative))) roster(relative,'md');
   for (const relative of ['research/framework-evolution','research/expert-evolution']) roster(relative,'json');
@@ -57,16 +58,17 @@ function sourceInputs(root) {
     const bytes = fs.readFileSync(gateway.safeFile(root,relative));
     if (bytes.length > 12000000) throw new Error('Private evidence input exceeds its runtime bound');
     const value = JSON.parse(bytes.toString('utf8').replace(/^\uFEFF/,''));
-    const visit = object => {
-      if (!object || typeof object !== 'object') return;
-      if (typeof object.path === 'string' && /^[a-f0-9]{64}$/.test(object.sha256 || '')) {
-        add(object.path);
-        if (object.path.endsWith('.json')) privateJson(object.path);
-      }
-      if (/^[a-f0-9]{64}$/.test(object.provenance?.segmentId || '')) privateJson('research/expert-evolution/library/' + object.provenance.segmentId + '.json');
-      Object.values(object).forEach(visit);
+    const follow = reference => {
+      if (!reference || typeof reference.path !== 'string' || !/^[a-f0-9]{64}$/.test(reference.sha256 || '')) throw new Error('Invalid approved private evidence edge');
+      if (/original-packs|competence-packs|benchmark|budget|diagnostic|\.env(?:\.|$)/i.test(reference.path)) throw new Error('Diagnostic, mutable budget or secret input is not runtime knowledge');
+      add(reference.path);
+      if (reference.path.endsWith('.json')) privateJson(reference.path);
     };
-    visit(value);
+    // Only extraction's consumed graph is frozen. Arbitrary JSON path/hash
+    // fields, evaluation artifacts and budget ledgers are not traversal edges.
+    for (const entry of value.entries || []) { follow(entry.candidateRef); follow(entry.reviewRef); }
+    for (const observation of value.observations || []) follow(observation.evidence);
+    if (/^[a-f0-9]{64}$/.test(value.provenance?.segmentId || '')) privateJson('research/expert-evolution/library/' + value.provenance.segmentId + '.json');
     if (relative === 'research/expert-evolution/library/overlay.json' && Array.isArray(value.entries) && value.entries.length) privateJson('research/expert-evolution/library/manifest.json');
   };
   if (fs.existsSync(path.join(root,'research/expert-evolution/library/overlay.json'))) privateJson('research/expert-evolution/library/overlay.json');
@@ -90,7 +92,7 @@ function skillBytes(home,registrySha256) {
     'Do not use at greeting or cold activation. Report a rejected link and preserve the canonical task; do not silently fall back to unrelated HOME knowledge.','',
   ].join('\n'));
 }
-function prepareProjectPlan({sourceRoot,projectRoots,home = os.homedir(),transactionId = crypto.randomUUID(),authorization} = {}) {
+function prepareProjectPlan({sourceRoot,projectRoots,home = os.homedir(),transactionId = crypto.randomUUID(),authorization} = {}, {replacementDigests} = {}) {
   if (!authorization || typeof authorization !== 'string' || !/^[a-zA-Z0-9_-]{1,100}$/.test(transactionId)) throw new Error('Explicit installation authorization and a safe transaction ID are required');
   sourceRoot = gateway.safeRoot(sourceRoot); home = gateway.safeRoot(home);
   if (!Array.isArray(projectRoots) || !projectRoots.length || projectRoots.length > 2) throw new Error('One or two exact project roots are required');
@@ -101,8 +103,9 @@ function prepareProjectPlan({sourceRoot,projectRoots,home = os.homedir(),transac
   const frozen = sourceInputs(sourceRoot), sourceHead = gateway.git(sourceRoot,['rev-parse','HEAD']);
   const library = {path:'research/expert-evolution/library/overlay.json',sha256:gateway.digest(sourceRoot,'research/expert-evolution/library/overlay.json')};
   const entries = [], add = (targetRoot,relative,bytes) => {
-    if (gateway.digest(targetRoot,relative) !== null) throw new Error('Preserving an existing project expert destination: ' + relative);
-    entries.push({root:targetRoot,path:relative,expectedDigest:null,sha256:gateway.sha(bytes),content:bytes.toString('base64')});
+    const actual = gateway.digest(targetRoot,relative), key = gateway.identity(targetRoot) + '|' + relative;
+    if (actual !== null && (!replacementDigests || replacementDigests.get(key) !== actual)) throw new Error('Preserving an existing project expert destination: ' + relative);
+    entries.push({root:targetRoot,path:relative,expectedDigest:actual,sha256:gateway.sha(bytes),content:bytes.toString('base64')});
   };
   const script = fs.readFileSync(path.join(__dirname,'project-expert.cjs'));
   add(home,gateway.GATEWAY,script);

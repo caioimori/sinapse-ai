@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "snapshot": {
-    "date": "2026-10-02",
-    "scope": "Fechamento operacional local e pessoal; instalação Codex e Claude Code verificada com contexto offline",
+    "date": "2026-10-07",
+    "scope": "Perfis individuais e casos diagnósticos locais; revisão independente delimitada, integração e instalação desta onda pendentes",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
     "squads": 17,
     "agents": 172,
-    "reviewedFunctions": 35,
-    "reviewedCommands": 51,
+    "reviewedFunctions": 172,
+    "reviewedCommands": 409,
     "validatedExperts": 0,
     "operationalProfiles": 172,
     "commandRecords": 2640,
@@ -17,12 +17,18 @@
     "curatedMechanisms": 12,
     "providerSkills": 38,
     "readReferences": 2,
-    "candidateReferences": 88
+    "candidateReferences": 88,
+    "individualProfiles": 172,
+    "specificMechanisms": 409,
+    "mentalModels": 344,
+    "qualityCriteria": 635,
+    "diagnosticCases": 172,
+    "externalSectionReads": 75
   },
   "deployment": {
-    "local": "172 contratos operacionais; pares e Lume verificados em desktop e celular",
-    "installed": "Instalação verificada — Codex e Claude Code; contexto offline",
-    "published": "Entrega local e pessoal; sem PR ou publicação nesta onda"
+    "local": "172 perfis individuais e 172 respostas diagnósticas locais; revisão em correção",
+    "installed": "Integração, runtime e instalação desta onda pendentes de verificação",
+    "published": "PR e prévia remota desta onda pendentes; nenhuma produção autorizada"
   },
   "deliverables": [
     {
@@ -155,9 +161,9 @@
     {
       "id": "jev",
       "title": "Jev e créditos",
-      "description": "Skill oficial instalada e dois lotes reais observados. Nenhuma chamada paga foi feita nesta onda; uma integração automática por API continua opcional e depende de credencial local.",
-      "status": "Controle de custo conferido",
-      "detail": "Total calculado US$0,00018375; teto US$0,05; reserva US$0,005376. O cálculo não é uma fatura."
+      "description": "Nesta onda, um lote Jev v1.13 avaliou sete afirmações dentro do teto disponível. O resultado distingue observações visuais de extrapolações; não aprova qualidade causal ou expertise global.",
+      "status": "Revisão de sete afirmações delimitada",
+      "detail": "Dois pontos visuais suportados; cinco extrapolações negadas. Valores dos lotes anteriores permanecem no histórico."
     },
     {
       "id": "opus",
@@ -169,9 +175,9 @@
     {
       "id": "mobbin",
       "title": "Referências Mobbin",
-      "description": "Referências autenticadas de filtros, colunas, detalhes e criação alimentaram mecanismos revisados e transferências próprias. A biblioteca aprovada permanece privada e vinculada ao projeto autorizado.",
-      "status": "Curadoria e transferência conferidas",
-      "detail": "12 mecanismos privados curados no total, com fontes e limites registrados. Referência visual não comprova backend."
+      "description": "O viewer autenticado exibiu dez screenshots de uma referência desktop. Dois pontos visuais tiveram suporte; cinco extrapolações foram negadas. O editor de contratos é uma interface própria da SINAPSE.",
+      "status": "Referência delimitada; transferência local em teste",
+      "detail": "Inferências de mecanismos não comprovam mobile, teclado, backend ou semântica required da referência."
     },
     {
       "id": "av",
@@ -183,16 +189,16 @@
     {
       "id": "expertise",
       "title": "Especialização",
-      "description": "Os 172 agentes têm contrato operacional. A especialização tem 35 perfis e 51 vínculos revisados; aprofundar as fontes candidatas e comprovar transferência continua sendo parte da pesquisa.",
-      "status": "Operação completa; expertise parcial",
-      "detail": "2 referências lidas, 88 candidatas e zero especialistas com validação global."
+      "description": "172 perfis individualizados, 409 mecanismos, 344 modelos de decisão e 635 critérios. Os 172 casos foram produzidos na mesma coorte; são diagnósticos, sem revisão cega ou ganho causal comprovado.",
+      "status": "Revisão independente em correção",
+      "detail": "Ciclo 1: 156 respostas aceitas no escopo escrito, 16 para corrigir. Zero especialistas com validação global."
     },
     {
       "id": "causal",
       "title": "Ganho de qualidade",
-      "description": "As 12 interfaces dos seis pares passaram no replay atual em desktop e celular. A revisão cega histórica preferiu o contexto aprimorado em quatro casos, com dois empates; um lote não comprova ganho causal.",
-      "status": "Replay técnico concluído",
-      "detail": "459 verificações em 1440, 390 e 320px. O baseline original excedeu o teto em 11,038 segundos; a ressalva foi preservada."
+      "description": "Os 172 casos novos são respostas contemporâneas da própria coorte. Eles permitem diagnosticar mecanismos e limites escritos; não são um experimento cego ou uma prova de melhora causal.",
+      "status": "Sem prova causal de ganho",
+      "detail": "Replay e revisão cega dos seis pares pertencem ao histórico de 02.10; não validam os 172 perfis desta onda."
     },
     {
       "id": "folders",
@@ -204,9 +210,9 @@
     {
       "id": "distribution",
       "title": "Uso e distribuição",
-      "description": "A extensão opt-in sinapse-project-expert foi instalada e conferida localmente no Codex e no Claude Code. O vínculo privado separa a fonte de leitura do projeto ativo autorizado para execução.",
-      "status": "Instalação local e pessoal verificada",
-      "detail": "38 skills por ambiente: 37 do núcleo + 1 opt-in. Contexto offline conferido: 20/20 montagens de design e 12/12 checks de autoridade. Sem inferência nativa, PR ou publicação nesta onda."
+      "description": "A instalação da onda anterior permanece registrada no histórico de 02.10. Nesta onda, integração de perfis, recuperação de fontes, runtime e instalação nos dois ambientes aguardam evidência final.",
+      "status": "Integração e instalação desta onda pendentes",
+      "detail": "Nenhuma execução Anthropic, instalação atual ou publicação é inferida do histórico."
     }
   ],
   "squads": [
@@ -574,13 +580,31 @@
   ],
   "evidence": [
     {
+      "id": "individual-upgrade",
+      "title": "Conhecimento individual desta onda",
+      "summary": "172 perfis; 409 mecanismos; 75 recortes externos observados.",
+      "paragraphs": [
+        "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagem descreve acervo escrito, sem nota global de competência.",
+        "Foram observados 75 recortes externos marcados READ com escopo de trecho externo (SECTION_READ nos originais): 29 + 18 + 28 nas três coortes. Leitura de trechos não equivale a leitura integral. Contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda.",
+        "Os 172 casos contemporâneos foram produzidos na mesma coorte. Revisão independente nativa de ciclo 1: 156 respostas escritas aceitas, 16 para corrigir. O modelo e o contexto de tarefa são compartilhados; não é avaliação cega externa.",
+        "Integração, runtime e instalação desta onda aguardam receipt final. Nenhuma aprovação global, ganho causal, execução Anthropic ou produção é inferida."
+      ],
+      "sources": [
+        "research/expert-evolution/competence-packs/creative.json",
+        "research/expert-evolution/competence-packs/business.json",
+        "research/expert-evolution/competence-packs/knowledge.json",
+        "research/expert-evolution/competence-review.json",
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-SPEC.md"
+      ]
+    },
+    {
       "id": "local-tests",
       "title": "Testes do framework",
-      "summary": "Contratos operacionais e verificações específicas por domínio.",
+      "summary": "Histórico de 02.10 — Contratos operacionais e verificações específicas por domínio.",
       "paragraphs": [
-        "O fechamento cobre contratos dos 172 agentes, registros de comando e tarefas próprias. Resolução, autoridade, contexto, isolamento e instalação recebem checks específicos; os gates finais desta onda conservam evidências próprias.",
-        "O replay das 12 interfaces passou 459 verificações; Lume e motion passaram 84; a revisão independente final do toast passou 411. Esses resultados descrevem as sequências exercitadas, sem uma nota criativa global.",
-        "A instalação local e pessoal passou 20/20 montagens de design e 12/12 checks de autoridade, com paridade entre os provedores, 2.095 referências congeladas e contextos de até 11.836 dos 12.000 caracteres. Dezoito requisições inválidas foram rejeitadas; não houve inferência nativa."
+        "Registro histórico de 02.10: O fechamento cobre contratos dos 172 agentes, registros de comando e tarefas próprias. Resolução, autoridade, contexto, isolamento e instalação recebem checks específicos; os gates finais desta onda conservam evidências próprias.",
+        "Registro histórico de 02.10: O replay das 12 interfaces passou 459 verificações; Lume e motion passaram 84; a revisão independente final do toast passou 411. Esses resultados descrevem as sequências exercitadas, sem uma nota criativa global.",
+        "Registro histórico de 02.10: A instalação local e pessoal passou 20/20 montagens de design e 12/12 checks de autoridade, com paridade entre os provedores, 2.095 referências congeladas e contextos de até 11.836 dos 12.000 caracteres. Dezoito requisições inválidas foram rejeitadas; não houve inferência nativa."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/operational-verification.md"
@@ -589,10 +613,10 @@
     {
       "id": "contracts",
       "title": "Operação e expertise",
-      "summary": "172 contratos operacionais; 35 perfis e 51 vínculos de expertise.",
+      "summary": "Histórico de 02.10 — 172 contratos operacionais; 35 perfis e 51 vínculos de expertise.",
       "paragraphs": [
-        "Os 172 contratos registram 2.640 comandos com escopo verificável. Foram criadas 42 tarefas próprias que faltavam; responsabilidade, dependência e delegação permanecem separadas. Um pool de squad não concede autoridade a todos os agentes.",
-        "A revisão de expertise cobre 35 perfis e 51 vínculos. O programa mantém 2 referências lidas e 88 candidatas; validade de fonte, transferência e qualidade especializada ainda precisam de comprovação por tarefa."
+        "Registro histórico de 02.10: Os 172 contratos registram 2.640 comandos com escopo verificável. Foram criadas 42 tarefas próprias que faltavam; responsabilidade, dependência e delegação permanecem separadas. Um pool de squad não concede autoridade a todos os agentes.",
+        "Registro histórico de 02.10: A revisão de expertise cobre 35 perfis e 51 vínculos. O programa mantém 2 referências lidas e 88 candidatas; validade de fonte, transferência e qualidade especializada ainda precisam de comprovação por tarefa."
       ],
       "sources": [
         "research/expert-evolution/task-bindings.json",
@@ -602,11 +626,11 @@
     {
       "id": "creative",
       "title": "Interface, motion, Reel e carrossel",
-      "summary": "Lume: 84 checks; toast: 411 checks independentes finais.",
+      "summary": "Histórico de 02.10 — Lume: 84 checks; toast: 411 checks independentes finais.",
       "paragraphs": [
-        "O replay atual de Lume cobre 1440, 390 e 320px, estados, teclado, movimento reduzido e ciclos de interrupção. O toast que encobria o foco no celular foi corrigido e passou em revisão independente dos bytes finais.",
-        "As cinco páginas finais do carrossel e sua leitura no celular foram inspecionadas. Audição humana da trilha do Reel de 18 segundos permanece pendente; sem aprovação audiovisual total ou de expertise.",
-        "FFmpeg decodificou integralmente 18 segundos e 540 quadros. O player foi observado até 12,769 segundos; reprodução parcial e decodificação não comprovam percepção audiovisual completa."
+        "Registro histórico de 02.10: O replay atual de Lume cobre 1440, 390 e 320px, estados, teclado, movimento reduzido e ciclos de interrupção. O toast que encobria o foco no celular foi corrigido e passou em revisão independente dos bytes finais.",
+        "Registro histórico de 02.10: As cinco páginas finais do carrossel e sua leitura no celular foram inspecionadas. Audição humana da trilha do Reel de 18 segundos permanece pendente; sem aprovação audiovisual total ou de expertise.",
+        "Registro histórico de 02.10: FFmpeg decodificou integralmente 18 segundos e 540 quadros. O player foi observado até 12,769 segundos; reprodução parcial e decodificação não comprovam percepção audiovisual completa."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
@@ -616,10 +640,10 @@
     {
       "id": "knowledge",
       "title": "Conhecimento e fonte",
-      "summary": "12 mecanismos privados curados; 2 fontes lidas e 88 candidatas.",
+      "summary": "Histórico de 02.10 — 12 mecanismos privados curados; 2 fontes lidas e 88 candidatas.",
       "paragraphs": [
-        "A biblioteca privada contém 12 mecanismos curados, com origem, revisão e contexto de aplicação. O corpus público existente mantém 67 fontes e 112 heurísticas; o programa de especialização conserva 90 referências, sendo 2 lidas e 88 candidatas.",
-        "A extração persistente e a transferência foram exercitadas em tarefas delimitadas. Esse acervo não comprova absorção integral de livros, milhares de horas ou validação mundial dos especialistas."
+        "Registro histórico de 02.10: A biblioteca privada contém 12 mecanismos curados, com origem, revisão e contexto de aplicação. O corpus público existente mantém 67 fontes e 112 heurísticas; o programa de especialização conserva 90 referências, sendo 2 lidas e 88 candidatas.",
+        "Registro histórico de 02.10: A extração persistente e a transferência foram exercitadas em tarefas delimitadas. Esse acervo não comprova absorção integral de livros, milhares de horas ou validação mundial dos especialistas."
       ],
       "sources": [
         "research/expert-evolution/source-program.json",
@@ -629,10 +653,10 @@
     {
       "id": "upstream",
       "title": "Atualização pública e preservação",
-      "summary": "AIOX público v5.4.1 revalidado; nenhum update posterior confirmado.",
+      "summary": "Histórico de 02.10 — Base open source pública v5.4.1 revalidada; nenhum update posterior confirmado.",
       "paragraphs": [
-        "A versão pública AIOX v5.4.1 foi revalidada nesta onda, sem novo update confirmado. A atualização seletiva foi auditada por compatibilidade; as 37 integrações proprietárias continuam excluídas.",
-        "O checkout original com 191 alterações foi preservado. Nenhum caminho protegido, dado privado, serviço de produção ou conteúdo funcional foi removido; não houve merge integral do core."
+        "Registro histórico de 02.10: A versão pública da base open source v5.4.1 foi revalidada nesta onda, sem novo update confirmado. A atribuição e a URL oficial permanecem em docs/framework/evolution-2026-10/upstream.json. A atualização seletiva foi auditada por compatibilidade; as 37 integrações proprietárias continuam excluídas.",
+        "Registro histórico de 02.10: O checkout original com 191 alterações foi preservado. Nenhum caminho protegido, dado privado, serviço de produção ou conteúdo funcional foi removido; não houve merge integral do core."
       ],
       "sources": [
         "research/expert-evolution/audit-upstream-recheck.json",
@@ -642,10 +666,10 @@
     {
       "id": "paired",
       "title": "Seis pares de interfaces",
-      "summary": "12 interfaces; 459 verificações atuais em três larguras.",
+      "summary": "Histórico de 02.10 — 12 interfaces; 459 verificações atuais em três larguras.",
       "paragraphs": [
-        "As 12 interfaces dos seis pares passaram no replay atual, com 459 verificações em 1440, 390 e 320px. Seus estados alterados foram repetidos no celular; os artefatos e a preferência da revisão cega histórica foram preservados.",
-        "Uma geração por caso conserva variação estocástica. O baseline original ultrapassou o teto em 11,038 segundos; a duração não foi corrigida retrospectivamente. O lote permanece sem prova causal, comparação Opus/Jev ou validação de expertise."
+        "Registro histórico de 02.10: As 12 interfaces dos seis pares passaram no replay atual, com 459 verificações em 1440, 390 e 320px. Seus estados alterados foram repetidos no celular; os artefatos e a preferência da revisão cega histórica foram preservados.",
+        "Registro histórico de 02.10: Uma geração por caso conserva variação estocástica. O baseline original ultrapassou o teto em 11,038 segundos; a duração não foi corrigida retrospectivamente. O lote permanece sem prova causal, comparação Opus/Jev ou validação de expertise."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/paired-interface-results.md"
@@ -654,15 +678,79 @@
     {
       "id": "typesafe-mobbin",
       "title": "TypeSafe, Jev e transferência Mobbin",
-      "summary": "Skill oficial instalada; dois lotes Jev; transferência local revisada.",
+      "summary": "Histórico de 02.10 — Skill oficial instalada; dois lotes Jev; transferência local revisada.",
       "paragraphs": [
-        "Dois lotes Jev autenticados foram observados anteriormente. O total calculado é US$0,00018375, com teto de US$0,05 e reserva de US$0,005376; nenhuma chamada paga foi feita nesta onda. Opus continua restrito a aprendizado de mercado.",
-        "As interfaces próprias /transfer-filter/ e /transfer-navigation/ exercitam filtros, detalhes, retorno e criação com revisão local. Referências Mobbin, inferências e comportamento da implementação continuam registrados com escopos de evidência distintos."
+        "Registro histórico de 02.10: Dois lotes Jev autenticados foram observados anteriormente. O total calculado é US$0,00018375, com teto de US$0,05 e reserva de US$0,005376; nenhuma chamada paga foi feita nesta onda. Opus continua restrito a aprendizado de mercado.",
+        "Registro histórico de 02.10: As interfaces próprias /transfer-filter/ e /transfer-navigation/ exercitam filtros, detalhes, retorno e criação com revisão local. Referências Mobbin, inferências e comportamento da implementação continuam registrados com escopos de evidência distintos."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.md",
         "examples/framework-quality/transfer-filter/index.html"
       ]
     }
-  ]
+  ],
+  "metricProvenance": {
+    "kind": "derived-from-public-sanitized-cohort-packs",
+    "inputs": [
+      {
+        "cohort": "creative",
+        "path": "research/expert-evolution/competence-packs/creative.json",
+        "sha256": "5e7cbcc1b7d442449eeaa608172e7b9a97e6630a68df65f39d21bd40d57fcfc9",
+        "profileCount": 53,
+        "externalSectionReads": 29
+      },
+      {
+        "cohort": "business",
+        "path": "research/expert-evolution/competence-packs/business.json",
+        "sha256": "04984c73c2ccbd59ba5e4d19f82bd82c535169813a8b168a017efc7f29473bed",
+        "profileCount": 54,
+        "externalSectionReads": 18
+      },
+      {
+        "cohort": "knowledge",
+        "path": "research/expert-evolution/competence-packs/knowledge.json",
+        "sha256": "b2c96b52f68b7570a55579a85a5665e6838e3b1b2afcc925931571b3b23f448b",
+        "profileCount": 65,
+        "externalSectionReads": 28
+      }
+    ],
+    "rules": {
+      "profiles": "profiles.length; 172 unique IDs",
+      "mechanisms": "sum profiles.mechanisms.length",
+      "mentalModels": "sum profiles.mentalModels.length",
+      "qualityCriteria": "sum profiles.qualityCriteria.length",
+      "externalReads": "public sources.status=READ and sourceScope=external-section and URL begins https://; mapped from immutable original SECTION_READ records",
+      "cases": "profiles with diagnosticCase; same-cohort diagnostics, not blind held-out"
+    },
+    "review": {
+      "path": "research/expert-evolution/competence-review.json",
+      "cycle": 1,
+      "counts": {
+        "PASS": 156,
+        "REVISE": 16,
+        "BLOCKED": 0
+      }
+    },
+    "historicalMetricsDate": "2026-10-02",
+    "originalInputs": [
+      {
+        "cohort": "creative",
+        "sha256": "bed31b9ef7f8f3369eaa7e239d5d05c7b1904b9353e289d12c85a0a628d4d993",
+        "profileCount": 53,
+        "externalSectionReads": 29
+      },
+      {
+        "cohort": "business",
+        "sha256": "e05ed00e7b69be9f7ee3a0bb04937139fbb3294d2c429191779b9eb37d738041",
+        "profileCount": 54,
+        "externalSectionReads": 18
+      },
+      {
+        "cohort": "knowledge",
+        "sha256": "851e917a74aae9010ecbd5253b7c6771a661818794535b5a47dae8e2eb4e2c40",
+        "profileCount": 65,
+        "externalSectionReads": 28
+      }
+    ]
+  }
 }

@@ -40,9 +40,10 @@ function validateProgram(program, {root = DEFAULT_ROOT, agentId} = {}) {
     }
     const refIds = new Set();
     for (const ref of references) {
-      if (!slug(ref.id) || refIds.has(ref.id) || !text(ref.title) || !/^https:\/\//.test(ref.url) || !['CANDIDATE', 'READ'].includes(ref.status) || !text(ref.rights)) errors.push('Invalid reference ' + ref.id);
+      if (!slug(ref.id) || refIds.has(ref.id) || !text(ref.title) || !(/^https:\/\//.test(ref.url) || (ref.sourceScope === 'local-contract' && /^urn:sinapse:local:/.test(ref.url))) || !['CANDIDATE', 'READ'].includes(ref.status) || !text(ref.rights)) errors.push('Invalid reference ' + ref.id);
       refIds.add(ref.id);
       if (ref.status === 'READ' && (!text(ref.locator) || !text(ref.readAt) || !text(ref.excerpt) || hash(ref.excerpt) !== ref.contentSha256)) errors.push('Read evidence missing ' + ref.id);
+      if (ref.sourceScope === 'local-contract' && (agentId===undefined || profiles.find(p=>p.agentId===agentId)?.references?.some(r=>r.referenceId===ref.id)) && (!ref.sourceRef || hash(fs.readFileSync(confined(root,ref.sourceRef.path))) !== ref.sourceRef.sha256)) errors.push('Stale local reference ' + ref.id);
     }
     for (const p of profiles) {
       if (((agentId===undefined || p.agentId===agentId) && (!index[p.agentId] || p.squad !== index[p.agentId]?.squad || p.canonical.path !== index[p.agentId]?.sourcePath)) || !text(p.mission) || !Array.isArray(p.competencies) || p.competencies.some(c=>!slug(c)) || !Array.isArray(p.deliverables) || !Array.isArray(p.gaps) || !p.gaps.length || p.status !== 'planned' || p.validatedExpertise!==false || typeof p.contractReviewed!=='boolean' || (!p.contractReviewed && (p.competencies.length || p.deliverables.length)) || p.candidateContracts?.status!=='unreviewed') errors.push('Invalid profile ' + p.agentId);
@@ -114,11 +115,22 @@ function getProfile({root = DEFAULT_ROOT, agentId, maxChars = 12000, compact = f
     return bounded({...publicProfile,candidateContracts:{status:'unreviewed',pointer:'research/expert-evolution/expert-profiles.json',canonicalPointer:profile.canonical.path}},Math.min(maxChars,12000));
   }
   if(maxChars>3000) maxChars=3000;
-  const binding=resolveTaskBinding({root,agentId,command:task?.command,program});
+  let binding=resolveTaskBinding({root,agentId,command:task?.command,program}), selectedProfile=profile;
+  // Older active contracts remain byte-equivalent. An additional exact task
+  // can have a bounded authoring supplement without rewriting those contracts.
+  if(!binding && task?.command && fs.existsSync(path.join(root,'research/expert-evolution/competence-runtime.json'))){
+    const competence=require('./competence.cjs'), supplements=competence.loadCompetence(root), supplement=supplements.profiles.find(p=>p.agentId===agentId&&p.selectedTask.command===task.command);
+    if(supplement){
+      const checked=competence.validateCompetence(supplements,{root,agentId});if(!checked.valid)throw new Error('Invalid competence supplement: '+checked.errors.join('; '));
+      const id='competence-'+agentId+'-'+supplement.selectedTask.command;
+      selectedProfile={...profile,deliverables:[{id,name:supplement.selectedTask.command,competency:supplement.competencies[0],criteria:supplement.qualityCriteria}]};
+      binding={competencyIds:supplement.competencies,deliverableIds:[id],requiredCriterionIds:supplement.qualityCriteria.map(c=>c.id),command:supplement.selectedTask.command,sourceSha256:supplement.canonical.sha256,taskSha256:supplement.selectedTask.sha256,taskPath:supplement.selectedTask.path,review:{status:supplement.reviewStatus}};
+    }
+  }
   const result={schemaVersion:1,agentId:profile.agentId,squad:profile.squad,canonical:profile.canonical,status:'planned',validatedExpertise:false,competencies:[],deliverables:[],references:[],criteriaComplete:false,omittedCriterionIds:[],selectionEvidence:{status:binding?'bound':'gap',command:task?.command||null},gaps:profile.gaps.map(g=>({id:g.id,reason:g.reason})),omissions:[]};
   if(!binding){result.gaps.push({id:'unmatched-task',reason:'No reviewed task binding; load canonical source and exact task. Candidate contracts are not runtime supplements.'});return bounded(result,maxChars);}
   result.competencies=[...binding.competencyIds];
-  result.deliverables=selectProtectedCriteria(profile,binding);
+  result.deliverables=selectProtectedCriteria(selectedProfile,binding).map(({id,name,competency,criteria})=>({id,name,competency,criteria}));
   result.criteriaComplete=true;
   result.selectionEvidence={status:'bound',command:binding.command,sourceSha256:binding.sourceSha256,taskSha256:binding.taskSha256,taskPath:binding.taskPath,reviewStatus:binding.review.status};
   const relevantRefs=profile.references.map(r=>{const source=program.sources.references.find(s=>s.id===r.referenceId);return {referenceId:r.referenceId,status:source.status,rights:source.rights,url:source.url,...(source.status==='READ'?{locator:source.locator,contentSha256:source.contentSha256}:{locator:null})};});

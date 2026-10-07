@@ -19,7 +19,7 @@ test('172 canonical profiles and 17 squads have differentiated missions, outputs
   expect(frontend.mission).not.toBe(sonic.mission);expect(frontend.competencies).not.toEqual(sonic.competencies);
   expect(frontend.deliverables[0].criteria.some(c=>c.check.includes('390px'))).toBe(true);
   expect(sonic.references.some(r=>r.referenceId==='brand-sonic-designer-specific')).toBe(true);
-  expect(p.profiles.profiles.every(p=>p.status==='planned'&&p.gaps.length===2&&p.evolution.hoursObserved===null)).toBe(true);
+  expect(p.profiles.profiles.every(p=>p.status==='planned'&&p.gaps.length>=2&&p.evolution.hoursObserved===null)).toBe(true);
 });
 test('unknown ID, traversal, stale canonical hash and complete JSON budget fail closed',()=>{
   expect(()=>e.getProfile({agentId:'unknown-agent'})).toThrow('Unknown');expect(()=>e.getProfile({agentId:'../analyst'})).toThrow();
@@ -30,6 +30,10 @@ test('unknown ID, traversal, stale canonical hash and complete JSON budget fail 
   fs.copyFileSync(path.join(__dirname,'../..',developer.canonical.path),path.join(root,developer.canonical.path));
   fs.mkdirSync(path.join(root,'.codex/agents'),{recursive:true});
   fs.copyFileSync(path.join(__dirname,'../../.codex/agents/developer.md'),path.join(root,'.codex/agents/developer.md'));
+  fs.copyFileSync(path.join(__dirname,'../../.codex/command-registry.json'),path.join(root,'.codex/command-registry.json'));
+  const program=e.loadProgram();
+  const dependencies=[...program.sources.references.filter(r=>r.sourceScope==='local-contract'&&developer.references.some(ref=>ref.referenceId===r.id)).map(r=>r.sourceRef.path),...program.bindings.bindings.filter(b=>b.agentId==='developer').map(b=>b.taskPath)];
+  for(const relative of dependencies){fs.mkdirSync(path.dirname(path.join(root,relative)),{recursive:true});fs.copyFileSync(path.join(__dirname,'../..',relative),path.join(root,relative));}
   expect(e.getProfile({root,agentId:'developer',compact:true,maxChars:3000}).agentId).toBe('developer');
   expect(e.validateProgram(e.loadProgram(root),{root}).valid).toBe(false);
 });
@@ -96,7 +100,7 @@ test('unsafe numeric metadata and absent per-competency negative evaluation reje
 test('compact runtime profile preserves gaps and read/candidate boundaries within complete JSON budget',()=>{
   const architecture=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'setup-frontend-architecture',title:'Frontend architecture documentation',text:'architecture routing boundaries'}});
   const storybook=e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:3000,task:{command:'setup-storybook-integration',title:'Storybook stories',text:'Storybook isolation'}});
-  expect(JSON.stringify(architecture).length).toBeLessThanOrEqual(3000);expect(architecture.validatedExpertise).toBe(false);expect(architecture.status).toBe('planned');expect(architecture.gaps).toHaveLength(2);
+  expect(JSON.stringify(architecture).length).toBeLessThanOrEqual(3000);expect(architecture.validatedExpertise).toBe(false);expect(architecture.status).toBe('planned');expect(architecture.gaps.length).toBeGreaterThanOrEqual(2);
   expect(architecture.deliverables[0].id).not.toBe(storybook.deliverables[0].id);expect(architecture.references.some(r=>r.status==='READ'&&r.contentSha256)).toBe(true);
   expect(()=>e.getProfile({agentId:'dx-frontend-engineer',compact:true,maxChars:256})).toThrow('Complete JSON');
   expect(()=>e.getProfile({agentId:'dx-frontend-engineer',compact:true,task:{text:'x'.repeat(4001)}})).toThrow('bounded task');

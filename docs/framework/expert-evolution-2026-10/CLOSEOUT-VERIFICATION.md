@@ -59,7 +59,7 @@ As três baterias vermelhas do autor e as duas do revisor de foco permanecem pre
 
 ## Upstream, crédito e preservação
 
-A atualização oficial AIOX continua [v5.4.1](https://github.com/SynkraAI/aiox-core/releases/tag/v5.4.1), observada em 2026-10-02 nos dois pacotes npm e no release. Main: `4ef6530ff03b83aea953e4a426f95e012b8b70c5`. Não há release novo a incorporar nesta onda; protected paths foram preservados.
+A atualização oficial da base open source continua v5.4.1, observada em 2026-10-02 nos dois pacotes npm e no release; identificação, atribuição e URL oficial permanecem na [auditoria técnica de upstream](../evolution-2026-10/upstream.json). Main: `4ef6530ff03b83aea953e4a426f95e012b8b70c5`. Não há release novo a incorporar nesta onda; protected paths foram preservados.
 
 Nenhuma nova chamada paga Jev nesta onda. Duas execuções acumuladas: 19 julgamentos, custo calculado US$0,00018375 e reserva US$0,005376 de US$0,05. Saldo anterior US$3,92 é leitura arredondada do console, sem conciliação de fatura. Sem recarga ou API Anthropic; Opus permanece aprendizado de mercado.
 
