@@ -113,6 +113,7 @@ limites claros.
 |---|:---:|:---:|
 | Catálogo de 172 agentes | Sim | Sim |
 | Skills centrais | 37 | 37 |
+| Skills instaladas | 38 | 38 |
 | Contexto privado por projeto | Extensão opt-in | Extensão opt-in |
 | Regras e instruções nativas | Sim | Sim |
 | Hooks registrados | 20 registros | 9 eventos |

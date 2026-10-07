@@ -43,6 +43,11 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 ## File List
 
 - package.json
+- README.md
+- README.en.md
+- docs/agent-reference-guide.md
+- docs/pt/agent-reference-guide.md
+- docs/guides/ide-integration.md
 - docs/stories/individual-expertise-upgrade-20261007.story.md
 - docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-SPEC.md
 - docs/framework/expert-evolution-2026-10/expertise-upgrade-workflow.json
@@ -88,6 +93,8 @@ Perfis individuais, fontes primárias observadas, mecanismos/contextos, tarefas 
 Retomada YOLO autorizada. Esforço high, três frentes independentes, checkpoints privados e nenhuma promoção por quantidade.
 
 ## QA Results
+
+CI no HEAD `2600dc51` encontrou Article VII vermelho por cinco docs desatualizados. Confirmados fora dos pins, contagens/skills corrigidas e validação focal integral PASS. Security Audit permanece vermelho (quatro HIGH de braces e dependentes); Compatibility Parity vermelho (skills configuradas 34/33). Follow-ups/donos estão no handoff; nenhum bypass, atualização forçada de dependências ou alteração de CI/runtime congelado. Nova CI e demais checks não foram aprovados integralmente.
 
 Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/409, 17 squads, cinco exemplos e zero overflow. Receipt privado `hub-final-delivery/receipt.json`, SHA `1a99b02ec0a2df3ba7be30170d503b66d984c675e14888ebdce390118b663485`; não é replay dos 29 checks anteriores. As baterias 124 e 32 de Jest se sobrepõem e não devem ser somadas.
 

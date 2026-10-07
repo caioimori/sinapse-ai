@@ -40,4 +40,14 @@ Conferência focal final do link/status PR #416 em 1440/390 px: métricas 172/40
 
 Suíte integral/CI completa não condicionam nível 1; hooks/políticas reais permanecem. Produção, merge e npm publish continuam sem autorização deste lote. Inferência nativa, expertise global, ganho causal e audição humana não foram comprovados; cada limite permanece no painel.
 
+## CI observado e acompanhamento
+
+No HEAD `2600dc51`, Article VII falhou por contagens antigas em cinco documentos. Todos estavam fora dos pins vivos; foram corrigidos para 1.249 squad tasks, 211 development tasks, 1.460 arquivos, 1.396 resolvíveis e 38/38 skills, conservando a distinção das 37 centrais. `npm run validate:article-vii` passou integralmente após a correção; nova CI remota ainda precisa confirmar.
+
+Security Audit apontou quatro vulnerabilidades HIGH em produção na cadeia braces/chokidar/micromatch/fast-glob, advisory `GHSA-vfj7-8cjw-p6xm` com nenhum fix disponível no relatório observado. Não houve atualização automática/forçada de dependências. Acompanhamento: cloud-security-engineer/developer em frente própria; merge e produção não foram realizados.
+
+Compatibility Parity Gate falhou por contagem configurada de skills Codex 34/33. Fonte/runtime/config/CI congelados foram preservados; paridade focal de adapters 172/38 e recuperação pessoal observada são provas de outro escopo. Acompanhamento: quality-gate/devops para reconciliar a configuração sem mudar hooks ou mascarar o guard.
+
+Logs desses dois jobs foram lidos por `gh api` e preservados privados; a leitura por `gh run --log-failed` não estava disponível enquanto o workflow completo rodava. Demais checks ainda estavam em execução; não declarar CI integral verde.
+
 Provas privadas em `examples/framework-quality/output/expertise-20261007/`: baseline-preservation, ownership, revisão, matriz, testes e capturas. Fonte anterior permanece no HEAD `8fe3b90b` clean; checkout original conserva 193 entradas sujas e 262 payloads pessoais devem permanecer. Nenhum output/library/capture/log/cliente/segredo será adicionado ao Git.
