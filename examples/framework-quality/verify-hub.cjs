@@ -9,8 +9,9 @@ const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
 const root = __dirname;
 const cycle = Number(process.argv.find((arg) => arg.startsWith('--cycle='))?.split('=')[1] || 1);
-assert(Number.isInteger(cycle) && cycle >= 1 && cycle <= 3, 'Bounded QA: cycles 1–3');
-const output = path.join(root, 'output', 'expertise-20261007', `${process.argv.includes('--metrics-only') ? 'hub-metrics' : 'hub'}-cycle-${cycle}`);
+const finalStatus = process.argv.includes('--final-status');
+assert(Number.isInteger(cycle) && cycle >= 1 && cycle <= (finalStatus ? 2 : 3), 'Bounded QA: final-status 1–2; earlier fixture 1–3');
+const output = path.join(root, 'output', 'expertise-20261007', `${finalStatus ? 'hub-final-status' : process.argv.includes('--metrics-only') ? 'hub-metrics' : 'hub'}-cycle-${cycle}`);
 assert(!fs.existsSync(output), 'Preserve previous evidence; choose the next cycle');
 fs.mkdirSync(output, { recursive: true });
 const checks = []; const failures = [];
@@ -41,6 +42,20 @@ function verifyMetricDerivation() {
   for (const [metric, value] of Object.entries(derived)) assert.equal(data.metrics[metric], value, `Derived metric ${metric}`);
   assert.equal(data.metrics.validatedExperts, 0);
   pass('public-metric-derivation', { derived, publicPackHashes: true, uniqueProfiles: true });
+  if (finalStatus) {
+    const sources = packs.flatMap(pack => pack.sources);
+    assert.equal(sources.filter(source => source.status === 'READ' && source.sourceScope !== 'external-section').length, data.metrics.localReadContracts);
+    assert.equal(sources.filter(source => source.status === 'CANDIDATE').length, data.metrics.newCandidateReferences);
+    const review = JSON.parse(fs.readFileSync(path.join(repository, data.metricProvenance.review.path), 'utf8'));
+    assert.deepEqual(data.metricProvenance.review.counts, review.counts);
+    assert.equal(review.counts.PASS, 172); assert.equal(review.cycle, 3);
+    assert.equal(data.installation.executionObserved, false);
+    assert.equal(data.installation.selectedContextChecks, 42);
+    assert.equal(data.installation.providerEntrypointsEqual, true);
+    assert.equal(data.installation.preservation.personalMismatches, 0);
+    assert.equal(data.installation.rawMatrix.criticalCriteria, 582);
+    pass('final-status-evidence', { review: review.counts, localReadContracts: data.metrics.localReadContracts, newCandidates: data.metrics.newCandidateReferences, offlineOnly: true, actualContextChecks: 42, globalExperts: 0 });
+  }
 }
 async function noOverflow(page, name) {
   const state = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth, body: document.body.scrollWidth }));
@@ -69,6 +84,13 @@ async function verifyWidth(width) {
   assert.equal(current.metrics.diagnosticCases, 172);
   assert.equal(await page.locator('#exemplos a').count(), 5);
   assert.equal(await page.getByRole('link', { name: 'Abrir editor de contratos' }).getAttribute('href'), 'contract-builder/');
+  if (finalStatus) {
+    assert((await page.locator('#install-status').textContent()).includes('Instalação pessoal conferida'));
+    assert((await page.locator('#install-status').textContent()).includes('sem inferência nativa'));
+    assert((await page.locator('#publish-status').textContent()).includes('em preparo'));
+    assert((await page.locator('.hero-state').textContent()).includes('recuperação offline'));
+    assert(!(await page.locator('.hero-state').textContent()).includes('Revisão em andamento'));
+  }
   for (const item of current.deliverables) {
     await page.locator(`[data-deliverable="${item.id}"]`).click();
     assert.equal(await page.locator(`[data-deliverable="${item.id}"]`).getAttribute('aria-pressed'), 'true');

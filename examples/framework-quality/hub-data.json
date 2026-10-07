@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-07",
-    "scope": "Perfis individuais e casos diagnósticos locais; revisão independente delimitada, integração e instalação desta onda pendentes",
+    "scope": "172 respostas escritas revisadas; integração e instalação pessoal conferidas por recuperação offline; PR em preparo, sem produção",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -23,12 +23,17 @@
     "mentalModels": 344,
     "qualityCriteria": 635,
     "diagnosticCases": 172,
-    "externalSectionReads": 75
+    "externalSectionReads": 75,
+    "localReadContracts": 238,
+    "newCandidateReferences": 11,
+    "activeBindings": 188,
+    "taskSupplements": 12,
+    "reviewedDiagnosticResponses": 172
   },
   "deployment": {
-    "local": "172 perfis individuais e 172 respostas diagnósticas locais; revisão em correção",
-    "installed": "Integração, runtime e instalação desta onda pendentes de verificação",
-    "published": "PR e prévia remota desta onda pendentes; nenhuma produção autorizada"
+    "local": "172 respostas escritas aceitas no escopo diagnóstico; 17 reparos em três ciclos",
+    "installed": "Instalação pessoal conferida — Codex e Claude Code; 42 contextos offline, sem inferência nativa",
+    "published": "Envio da branch e PR em preparo; prévia local disponível, sem produção"
   },
   "deliverables": [
     {
@@ -161,9 +166,9 @@
     {
       "id": "jev",
       "title": "Jev e créditos",
-      "description": "Nesta onda, um lote Jev v1.13 avaliou sete afirmações dentro do teto disponível. O resultado distingue observações visuais de extrapolações; não aprova qualidade causal ou expertise global.",
-      "status": "Revisão de sete afirmações delimitada",
-      "detail": "Dois pontos visuais suportados; cinco extrapolações negadas. Valores dos lotes anteriores permanecem no histórico."
+      "description": "Onze chamadas novas produziram 179 juízos de apoio: 172 respostas diagnósticas e sete afirmações da referência visual. Revisão nativa e Jev receberam entradas e perguntas diferentes.",
+      "status": "Apoio de revisão dentro do teto; sem comparação entre modelos",
+      "detail": "13 chamadas acumuladas: custo calculado US$ 0,003803184, reserva US$ 0,034944 e teto US$ 0,05. Não é conciliação de fatura nem aprovação automática."
     },
     {
       "id": "opus",
@@ -175,9 +180,9 @@
     {
       "id": "mobbin",
       "title": "Referências Mobbin",
-      "description": "O viewer autenticado exibiu dez screenshots de uma referência desktop. Dois pontos visuais tiveram suporte; cinco extrapolações foram negadas. O editor de contratos é uma interface própria da SINAPSE.",
-      "status": "Referência delimitada; transferência local em teste",
-      "detail": "Inferências de mecanismos não comprovam mobile, teclado, backend ou semântica required da referência."
+      "description": "O viewer autenticado exibiu dez screenshots de uma referência desktop. Dois pontos visuais tiveram suporte; cinco extrapolações foram negadas. O editor de contratos é uma interface própria da SINAPSE, testada separadamente.",
+      "status": "Referência delimitada; transferência própria conferida",
+      "detail": "Teclado, mobile, recuperação e required foram verificados na nova UI SINAPSE. Essas provas não descrevem o comportamento da referência."
     },
     {
       "id": "av",
@@ -189,9 +194,9 @@
     {
       "id": "expertise",
       "title": "Especialização",
-      "description": "172 perfis individualizados, 409 mecanismos, 344 modelos de decisão e 635 critérios. Os 172 casos foram produzidos na mesma coorte; são diagnósticos, sem revisão cega ou ganho causal comprovado.",
-      "status": "Revisão independente em correção",
-      "detail": "Ciclo 1: 156 respostas aceitas no escopo escrito, 16 para corrigir. Zero especialistas com validação global."
+      "description": "172 respostas escritas aceitas após 17 reparos em três ciclos. Os casos foram criados e respondidos na mesma coorte; a revisão independente tem escopo diagnóstico, sem avaliação cega externa.",
+      "status": "Revisão escrita concluída; expertise global não comprovada",
+      "detail": "409 mecanismos, 344 modelos de decisão e 635 critérios. Transferência longitudinal e benchmark cego completo continuam pendentes."
     },
     {
       "id": "causal",
@@ -210,9 +215,9 @@
     {
       "id": "distribution",
       "title": "Uso e distribuição",
-      "description": "A instalação da onda anterior permanece registrada no histórico de 02.10. Nesta onda, integração de perfis, recuperação de fontes, runtime e instalação nos dois ambientes aguardam evidência final.",
-      "status": "Integração e instalação desta onda pendentes",
-      "detail": "Nenhuma execução Anthropic, instalação atual ou publicação é inferida do histórico."
+      "description": "A extensão pessoal foi atualizada e conferida no Codex e no Claude Code. Foram lidos 42 contextos offline: 21 agentes em dois projetos vinculados, preservando critérios, vetos e autoridade.",
+      "status": "Instalação pessoal e recuperação offline conferidas",
+      "detail": "As entradas dos dois ambientes são byte-equivalentes. Inferência nativa no Claude, execução dos 172 agentes e produção não foram observadas."
     }
   ],
   "squads": [
@@ -582,12 +587,12 @@
     {
       "id": "individual-upgrade",
       "title": "Conhecimento individual desta onda",
-      "summary": "172 perfis; 409 mecanismos; 75 recortes externos observados.",
+      "summary": "172 respostas escritas aceitas; 75 recortes externos observados; nenhuma validação global.",
       "paragraphs": [
-        "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagem descreve acervo escrito, sem nota global de competência.",
-        "Foram observados 75 recortes externos marcados READ com escopo de trecho externo (SECTION_READ nos originais): 29 + 18 + 28 nas três coortes. Leitura de trechos não equivale a leitura integral. Contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda.",
-        "Os 172 casos contemporâneos foram produzidos na mesma coorte. Revisão independente nativa de ciclo 1: 156 respostas escritas aceitas, 16 para corrigir. O modelo e o contexto de tarefa são compartilhados; não é avaliação cega externa.",
-        "Integração, runtime e instalação desta onda aguardam receipt final. Nenhuma aprovação global, ganho causal, execução Anthropic ou produção é inferida."
+        "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagens descrevem o acervo escrito; não são notas globais de competência.",
+        "75 recortes externos foram observados em trechos delimitados: 29 + 18 + 28 nas três coortes. Os 238 contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda. Onze candidatos novos e 88 anteriores permanecem candidatos.",
+        "A revisão independente aceitou 172 respostas escritas após 17 reparos em três ciclos. Os diagnósticos foram produzidos na mesma coorte, com modelo e contexto de tarefa compartilhados; não houve avaliação cega externa nem prova causal.",
+        "Leitura integral de livros, inferência no Claude, benchmark cego completo e acompanhamento longitudinal continuam pendentes. A audição humana da trilha do Reel também permanece pendente."
       ],
       "sources": [
         "research/expert-evolution/competence-packs/creative.json",
@@ -595,6 +600,22 @@
         "research/expert-evolution/competence-packs/knowledge.json",
         "research/expert-evolution/competence-review.json",
         "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-SPEC.md"
+      ]
+    },
+    {
+      "id": "personal-installation-current",
+      "title": "Instalação pessoal e limites do contexto",
+      "summary": "42 leituras reais de contexto; matriz offline dos 172 em ambiente isolado.",
+      "paragraphs": [
+        "A integração montou 172 contextos em um snapshot estável, com 582 critérios críticos presentes. Máximos: 11.602 caracteres totais, 5.990 de conhecimento e 2.997 de perfil; presença de critério não comprova seu cumprimento.",
+        "A instalação em ambiente pessoal isolado passou a matriz offline completa dos 172, com máximos 11.865 / 5.990 / 2.997. Após a atualização pessoal real, 42 contextos selecionados passaram em dois projetos, com máximos 11.745 / 5.611 / 2.969.",
+        "Entradas Codex e Claude Code byte-equivalentes foram conferidas no ambiente pessoal e no projeto original. Essa prova cobre recuperação offline; nenhuma inferência nativa ou execução de persona foi observada.",
+        "262 arquivos pessoais permaneceram iguais, o projeto original conservou 193 entradas de estado e a fonte anterior manteve seus 2.092 pins. Dados de rollback foram verificados; a atualização real bem-sucedida não foi revertida.",
+        "Os checks proporcionais passaram: 13 gates, 124 testes focais e 32 adicionais do gateway. Um teste histórico redundante foi omitido; a suíte completa do repositório não rodou. Branch e PR estão em preparo, sem produção."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-RUNTIME-INTEGRATION-QA.md"
       ]
     },
     {
@@ -695,21 +716,21 @@
       {
         "cohort": "creative",
         "path": "research/expert-evolution/competence-packs/creative.json",
-        "sha256": "5e7cbcc1b7d442449eeaa608172e7b9a97e6630a68df65f39d21bd40d57fcfc9",
+        "sha256": "1182be6a14cfabf462611aaa04a7c141d859f9603439574ef8ec52da27b37c2d",
         "profileCount": 53,
         "externalSectionReads": 29
       },
       {
         "cohort": "business",
         "path": "research/expert-evolution/competence-packs/business.json",
-        "sha256": "04984c73c2ccbd59ba5e4d19f82bd82c535169813a8b168a017efc7f29473bed",
+        "sha256": "d8d69656109d0190af2372640bb74533d508b0dc5abc8956e27ce4582dd98864",
         "profileCount": 54,
         "externalSectionReads": 18
       },
       {
         "cohort": "knowledge",
         "path": "research/expert-evolution/competence-packs/knowledge.json",
-        "sha256": "b2c96b52f68b7570a55579a85a5665e6838e3b1b2afcc925931571b3b23f448b",
+        "sha256": "beddd4491b37a882821e9fb62e39c8211d0b4683e590e6891641ec710521edfd",
         "profileCount": 65,
         "externalSectionReads": 28
       }
@@ -724,12 +745,14 @@
     },
     "review": {
       "path": "research/expert-evolution/competence-review.json",
-      "cycle": 1,
+      "cycle": 3,
       "counts": {
-        "PASS": 156,
-        "REVISE": 16,
+        "PASS": 172,
+        "REVISE": 0,
         "BLOCKED": 0
-      }
+      },
+      "repairedDefects": 17,
+      "scope": "bounded-written-diagnostic-responses; same-cohort, not blind"
     },
     "historicalMetricsDate": "2026-10-02",
     "originalInputs": [
@@ -752,5 +775,55 @@
         "externalSectionReads": 28
       }
     ]
+  },
+  "installation": {
+    "scope": "offline-context-only",
+    "sourceHead": "5f4b7e410fd88d717be0ee84fc0124a24caa7699",
+    "transactionId": "f5c05992-6d24-4c26-928c-9c78d1a61a08",
+    "registrySha256": "c5de681856a0baa111b96921905bef305df5e4a95eed6389781433fb3433941e",
+    "selectedContextChecks": 42,
+    "selectedAgentIds": 21,
+    "roots": 2,
+    "providerEntrypointsEqual": true,
+    "executionObserved": false,
+    "rawMatrix": {
+      "contexts": 172,
+      "criticalCriteria": 582,
+      "stableSnapshot": true,
+      "maxChars": [
+        11602,
+        5990,
+        2997
+      ]
+    },
+    "scratchMatrix": {
+      "contexts": 172,
+      "maxChars": [
+        11865,
+        5990,
+        2997
+      ]
+    },
+    "realReadback": {
+      "contexts": 42,
+      "maxChars": [
+        11745,
+        5611,
+        2969
+      ]
+    },
+    "preservation": {
+      "personalPayloads": 262,
+      "personalMismatches": 0,
+      "originalStatusPreserved": true,
+      "originalStatusCount": 193,
+      "oldSourcePreserved": true,
+      "oldPinnedInputs": 2092
+    },
+    "rollback": {
+      "snapshotsVerified": true,
+      "executionObserved": false
+    },
+    "source": "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md"
   }
 }

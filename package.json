@@ -41,6 +41,7 @@
     "research/expert-evolution/benchmark-results.json",
     "research/expert-evolution/benchmark-baseline-output.json",
     "research/expert-evolution/benchmark-enriched-output.json",
+    "research/expert-evolution/competence-runtime.json",
     "packages/",
     ".sinapse-ai/",
     "!.sinapse-ai/node_modules",
