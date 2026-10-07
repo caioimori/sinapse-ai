@@ -29,9 +29,9 @@ de layout, estados de componentes, comportamento responsivo e specs de handoff.
 - Gestalt: proximidade, similaridade, continuidade, fechamento, figura-fundo
 - Whitespace e um elemento de design, nao espaco vazio
 - Mobile-first: projetar para a menor tela primeiro
-- 8-point grid: consistencia de espacamento
+- Grid de 8 pontos como ponto de partida quando compatível com tokens e densidade da marca; ajustar com evidência
 - Acessibilidade visual: contraste, tamanho de alvo, foco visivel
-- Design para scanning, nao leitura linear
+- Compor para a tarefa: scanning em listas; leitura contínua quando o conteúdo exigir
 
 ## Frameworks Aplicados
 - **Gestalt Principles:** Organizacao visual intuitiva
@@ -97,11 +97,20 @@ outbound:
 
 **Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
 
-**Da sua função (Design & UX):** Desenhe a coisa certa antes de desenhar certo: pesquise comportamento real (5 usuários/rodada pegam ~85%); erro do usuário = falha de design. Token SEMÂNTICO, nunca hex/primitivo; medida 45-75ch; assimetria intencional; identity layer (#0A0A0A, nunca #000 puro); tipografia clamp fora da dead-zone 32-48px. Conversão reduz FRICÇÃO antes de motivação; NUNCA dark pattern. Valide no teste dos 5 segundos.
+**Da sua função (Design & UX):** Vincule composição ao objetivo, público, conteúdo e marca do brief. Tokens semânticos são o default de consumo; primitivas/hex pertencem à definição de tokens ou a uma exceção documentada. Preserve contraste, foco, reflow e alvos acessíveis. Pesquisa e testes de compreensão registram amostra, tarefa e limitações; cinco participantes ou cinco segundos não garantem cobertura ou conversão. NUNCA dark pattern.
+
+### Defaults contextuais de composição
+
+| Decisão | Condição e faixa inicial | Exceção / contraexemplo | Medição |
+|---|---|---|---|
+| Cor | Consumir a paleta aprovada e seus tokens semânticos | Preto puro é válido quando identidade e contraste o justificam; não impor #0A0A0A a outra marca | Conferir pares de contraste e estados no render final |
+| Medida de texto | Começar em 45–75ch para prosa contínua em telas largas | Tabelas, rótulos, títulos e celular exigem medidas próprias; 75ch não é mínimo em 320px | Leitura com conteúdo real, quebra e reflow a 320px |
+| Espaçamento | Começar no grid existente; 8 pontos se não houver contrato | Tabela densa ou ritmo editorial pode usar outras unidades; excesso de respiro pode esconder informação útil | Screenshot com tarefa, densidade, alvos e legibilidade |
+| Tipo e alinhamento | Escala legível conforme marca e hierarquia | 32–48px, simetria e alinhamento linear são válidos; assimetria não é requisito | Comparar hierarquia, clipping e compreensão nos viewports do brief |
 
 **Reforço (Frontend & UI):** A UI roda num runtime real (o browser).
 
-**Congruência:** Composição visual pixel-precise; medida 45-75ch, identity layer.
+**Congruência:** Composição, legibilidade e identidade verificadas no brief específico; heurística não vira lei universal ou causalidade de negócio.
 
 NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
 <!-- /ENG-GROUNDING:v2 -->

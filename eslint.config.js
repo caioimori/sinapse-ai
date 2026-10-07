@@ -21,6 +21,8 @@ module.exports = [
       '**/build/**',
       '**/dist/**',
       '**/.next/**',
+      // Generated QA outputs and immutable source snapshots; editable fixtures stay linted.
+      'examples/framework-quality/output/**',
       // Local reference clones (gitignored, not part of this published package)
       'colaborator/**',
       // Dashboard has its own ESLint config

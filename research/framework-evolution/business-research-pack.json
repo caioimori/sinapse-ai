@@ -1,0 +1,835 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "romaniuk-distinction",
+      "url": "https://marketingscience.info/news-and-insights/brands-of-distinction",
+      "title": "Brands of Distinction",
+      "authority": "Jenni Romaniuk / Ehrenberg-Bass, primary researcher institutional essay",
+      "readAt": "2026-10-02",
+      "readScope": "Article body lines 138-161; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Distinctive Asset Grid; paragraphs fame/uniqueness and consistency",
+      "contentSha256": "388141b233857a4b845c120d68a44183a4518be4cfb109ec797cf2ac2fbe8579",
+      "excerpt": "All new assets start with low uniqueness and fame.",
+      "claims": [
+        "The grid distinguishes recognition from exclusive attribution; existing assets need measurement before redesign."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cialdini-persuasion",
+      "url": "https://www.influenceatwork.com/7-principles-of-persuasion/",
+      "title": "The Science of Persuasion",
+      "authority": "Robert Cialdini / Influence at Work, author-owned public explanation",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 102-164, reciprocity through social proof; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Social Proof; Authority; Consistency; Reciprocity",
+      "contentSha256": "8e779a0579867e770ac4c6fa394aafe298c43eb0f67f6ecea28564d5993d12b4",
+      "excerpt": "Especially when they are uncertain, people will look to the actions and behaviors of others to determine their own.",
+      "claims": [
+        "Comparable peers, credible expertise and voluntary commitments are distinct mechanisms; illustrative study lifts are not forecast conversion rates."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cdc-communication",
+      "url": "https://www.cdc.gov/ccindex/widget.html",
+      "title": "CDC Clear Communication Index",
+      "authority": "CDC, original public communication assessment tool",
+      "readAt": "2026-10-02",
+      "readScope": "Tips body lines 357-577; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Main message; visuals; action; numbers",
+      "contentSha256": "92d41c5e961b8aaf850a0dba9ad76929232409e18f5c598478c6bd6a270dc976",
+      "excerpt": "Make sure the words and visuals in the material convey the same message and reinforce each other.",
+      "claims": [
+        "The tool prioritizes one main message, actionable instructions and supported numbers."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "nielsen-web-reading",
+      "url": "https://www.nngroup.com/articles/how-users-read-on-the-web/",
+      "title": "How Users Read on the Web",
+      "authority": "Jakob Nielsen, original study author",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 50-97 and study comparison table; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Scannable text; Measuring the Effect of Improved Web Writing",
+      "contentSha256": "81b123ba64e73c717965fae94be77afd6ab9d9b582ead43b150a6a4da1b34731",
+      "excerpt": "one idea per paragraph",
+      "claims": [
+        "Concise, scannable and objective versions improved usability in this study; percentages are study-bound."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "budiu-recognition",
+      "url": "https://www.nngroup.com/articles/recognition-and-recall/",
+      "title": "Memory Recognition and Recall in User Interfaces",
+      "authority": "Raluca Budiu / NNGroup, author explanation grounded in memory research",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 61-142; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Recognition vs. Recall; Promote Recognition",
+      "contentSha256": "086110c2a8610b5fa8d1b81b40122826ef378a6ccb9721c61da6f36fa03272a8",
+      "excerpt": "Recognition is easier than recall because it involves more cues",
+      "claims": [
+        "Contextual cues support memory retrieval; labels and contextual guidance reduce recall burden."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "duarte-sales-story",
+      "url": "https://www.duarte.com/blog/overcome-sales-objections-with-the-power-of-story/",
+      "title": "Overcome sales objections with the power of story",
+      "authority": "Dave DeFranco / Duarte, method owner's official operational guidance",
+      "readAt": "2026-10-02",
+      "readScope": "Body lines 62-104; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Think about stories; Rank objections; Formulate responses",
+      "contentSha256": "3b8187dfcb13f90b2c1029542902b4c5e61de7dd37f470decc6cfe3610dd9ee8",
+      "excerpt": "Ask them to confirm that their objection has been addressed.",
+      "claims": [
+        "The Sparkline contrasts present and possible states; objections should be specific, ranked and answered with evidence."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "aristotle-poetics",
+      "url": "https://classics.mit.edu/Aristotle/poetics.1.1.html",
+      "title": "Poetics, Section 1",
+      "authority": "Aristotle, primary work; S. H. Butcher translation hosted MIT",
+      "readAt": "2026-10-02",
+      "readScope": "Parts VI-XI lines 68-115; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Part VIII unity; Part IX causality; Part X reversal",
+      "contentSha256": "87f5b77022d30bdef4f1364850601233c19c51845ddce78cdeaed28751969986",
+      "excerpt": "if any one of them is displaced or removed, the whole will be disjointed and disturbed.",
+      "claims": [
+        "Unity concerns one connected action rather than every event in a protagonist's life."
+      ],
+      "licenseNote": "Ancient work and historical translation; hosted page copyright does not imply unrestricted scraping. Short quotation and original analysis only."
+    },
+    {
+      "id": "sivers-focus",
+      "url": "https://sive.rs/hellyeah",
+      "title": "No yes. Either HELL YEAH or no.",
+      "authority": "Derek Sivers, author-owned essay",
+      "readAt": "2026-10-02",
+      "readScope": "Author body lines 7-16; author replies lines 121 and 180; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Opening condition; reply to Kevin; reply on duty",
+      "contentSha256": "086369a4ed6a231e026b7a7dc01de57d34cf4682c2c07a399d9662921b5bcc8b",
+      "excerpt": "Use this rule if you’re often over-committed or too scattered.",
+      "claims": [
+        "The rule is conditional on overcommitment and author acknowledges duties as an exception."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "dalio-believability",
+      "url": "https://www.principles.com/principles/633d5d13-8610-425f-ad62-cd62347d9165",
+      "title": "Believability Weight Your Decision Making",
+      "authority": "Ray Dalio, official author-published book principle",
+      "readAt": "2026-10-02",
+      "readScope": "Work Principle body lines 17-26; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Track record and causal explanation; disagreement process",
+      "contentSha256": "7a91b39c667417520d81ae22fef390426042d651cb989a2d2ad38bc081a7a266",
+      "excerpt": "the criteria for establishing believability must be objective and trusted by everybody.",
+      "claims": [
+        "Relevant repeated success and causal explanation support credibility; disagreements must be worked through before override."
+      ],
+      "licenseNote": "Public access is not a redistribution license. Short excerpt for attribution; original paraphrases; no full book or paid content."
+    },
+    {
+      "id": "cmu-learning",
+      "url": "https://www.cmu.edu/teaching/principles/learning.html",
+      "title": "Learning Principles",
+      "authority": "CMU Eberly Center, institutional synthesis with primary bibliography; secondary research synthesis explicitly",
+      "readAt": "2026-10-02",
+      "readScope": "Seven principles body lines 13-33; bibliography inspected; contentSha256 hashes only the UTF-8 excerpt field, not full body.",
+      "locator": "Principles 1, 4, 5 and 7",
+      "contentSha256": "2fa0c96d37354229896be4d2c333c025151a893dca59b15f817eee7e50f0947c",
+      "excerpt": "Goal-directed practice coupled with targeted feedback enhances the quality of students’ learning.",
+      "claims": [
+        "Prior knowledge may hinder learning; mastery requires components plus integration and transfer; feedback must target performance criteria."
+      ],
+      "licenseNote": "Page states CC BY-NC-SA 4.0; store original paraphrase and short quotation only, do not redistribute adapted page commercially."
+    }
+  ],
+  "heuristics": [
+    {
+      "id": "business-asset-grid",
+      "squad": "squad-brand",
+      "competencies": [
+        "distinctive-assets",
+        "mental-model"
+      ],
+      "condition": "Antes de escolher um sinal de marca.",
+      "action": "Meça reconhecimento e atribuição exclusiva; classifique usar, investir, evitar ou testar.",
+      "rationale": "Reconhecido não implica exclusivo.",
+      "exceptions": [
+        "Sem amostra real, mantenha classificação provisória."
+      ],
+      "counterexamples": [
+        "Uma cor famosa que lembra concorrente."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "Distinctive Asset Grid",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-identity-designer",
+        "brand-auditor"
+      ]
+    },
+    {
+      "id": "business-identity-continuity",
+      "squad": "squad-brand",
+      "competencies": [
+        "brand-refresh"
+      ],
+      "condition": "Redesign solicitado por desgaste interno.",
+      "action": "Teste reconhecimento antes/depois e preserve sinais fortes.",
+      "rationale": "Mudança pode destruir memória acumulada.",
+      "exceptions": [
+        "Sinal associado a dano reputacional exige investigação."
+      ],
+      "counterexamples": [
+        "Equipe cansada do logo não prova consumidor cansado."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "History; consistency",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-identity-designer"
+      ]
+    },
+    {
+      "id": "business-cue-rehearsal",
+      "squad": "squad-brand",
+      "competencies": [
+        "sonic-branding",
+        "brand-memory"
+      ],
+      "condition": "Marca nova sem reconhecimento.",
+      "action": "Repita sinais identificáveis em contextos de compra; verifique associação.",
+      "rationale": "Contexto e repetição favorecem recuperação.",
+      "exceptions": [
+        "Exposição sem atribuição pode reforçar rival."
+      ],
+      "counterexamples": [
+        "Jingle lembrado sem marca."
+      ],
+      "evidence": [
+        {
+          "sourceId": "budiu-recognition",
+          "locator": "Practice; Recency; Context",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-sonic-designer",
+        "brand-motion-vfx"
+      ]
+    },
+    {
+      "id": "business-attribution-audit",
+      "squad": "squad-brand",
+      "competencies": [
+        "brand-system"
+      ],
+      "condition": "Produção multicanal inconsistente.",
+      "action": "Audite aplicação dos mesmos sinais e teste atribuição sem nome.",
+      "rationale": "Consistência dá oportunidade de construir associação.",
+      "exceptions": [
+        "Adaptar formato mantendo sinal identificável."
+      ],
+      "counterexamples": [
+        "Template bonito sem reconhecimento."
+      ],
+      "evidence": [
+        {
+          "sourceId": "romaniuk-distinction",
+          "locator": "Final thought consistency",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "brand-system-architect",
+        "brand-compiler"
+      ]
+    },
+    {
+      "id": "business-peer-proof",
+      "squad": "squad-copy",
+      "competencies": [
+        "social-proof"
+      ],
+      "condition": "Leitor inseguro com a oferta.",
+      "action": "Use evidência de clientes comparáveis com contexto verificável.",
+      "rationale": "Similaridade torna prova pertinente.",
+      "exceptions": [
+        "Sem caso comparável, explique limite da prova."
+      ],
+      "counterexamples": [
+        "Celebridade genérica para decisão técnica."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Social Proof",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "proof-architect",
+        "conversion-writer"
+      ]
+    },
+    {
+      "id": "business-voluntary-step",
+      "squad": "squad-copy",
+      "competencies": [
+        "commitment"
+      ],
+      "condition": "Ação final exige compromisso elevado.",
+      "action": "Ofereça pequeno passo voluntário ligado ao objetivo declarado.",
+      "rationale": "Continuidade pode facilitar adesão.",
+      "exceptions": [
+        "Não usar compromisso antigo contra escolha atual."
+      ],
+      "counterexamples": [
+        "Aceitar newsletter tratado como aceitar compra."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Consistency",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "funnel-copywriter"
+      ]
+    },
+    {
+      "id": "business-mechanism-selection",
+      "squad": "squad-copy",
+      "competencies": [
+        "persuasion",
+        "mental-model"
+      ],
+      "condition": "Texto acumula gatilhos sem diagnóstico.",
+      "action": "Escolha mecanismo pela objeção: dúvida exige prova; conhecimento exige credencial; confiança exige ajuda útil.",
+      "rationale": "Mecanismos resolvem problemas diferentes.",
+      "exceptions": [
+        "Teste a hipótese de objeção com leitores."
+      ],
+      "counterexamples": [
+        "Escassez adicionada quando problema é credibilidade."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cialdini-persuasion",
+          "locator": "Reciprocity; Authority; Social Proof",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "copy-strategist",
+        "persuasion-psychologist"
+      ]
+    },
+    {
+      "id": "business-one-message-action",
+      "squad": "squad-copy",
+      "competencies": [
+        "headline",
+        "call-to-action"
+      ],
+      "condition": "Mensagem com múltiplas promessas.",
+      "action": "Escolha uma ideia principal e uma ação que a concretize.",
+      "rationale": "Prioridade torna o próximo passo legível.",
+      "exceptions": [
+        "Comparação pode exigir mais de uma alternativa."
+      ],
+      "counterexamples": [
+        "Título promete economia; botão leva a manifesto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Main message; action",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "headline-specialist",
+        "direct-response-writer"
+      ]
+    },
+    {
+      "id": "business-scan-structure",
+      "squad": "squad-content",
+      "competencies": [
+        "editorial-structure"
+      ],
+      "condition": "Leitor busca resposta em página.",
+      "action": "Abra com conclusão; subtítulos informativos e uma ideia por parágrafo.",
+      "rationale": "Escaneamento orienta estrutura.",
+      "exceptions": [
+        "Narrativa literária deliberada segue objetivo diferente."
+      ],
+      "counterexamples": [
+        "Título espirituoso sem indicar conteúdo."
+      ],
+      "evidence": [
+        {
+          "sourceId": "nielsen-web-reading",
+          "locator": "Scannable text",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "editorial-strategist",
+        "content-engineer"
+      ]
+    },
+    {
+      "id": "business-claim-density",
+      "squad": "squad-content",
+      "competencies": [
+        "credibility"
+      ],
+      "condition": "Texto depende de superlativos.",
+      "action": "Troque adjetivos por fatos relevantes com fontes e unidades.",
+      "rationale": "Hipérbole cria trabalho de filtragem.",
+      "exceptions": [
+        "Humor pode usar exagero reconhecível."
+      ],
+      "counterexamples": [
+        "Melhor solução sem critério."
+      ],
+      "evidence": [
+        {
+          "sourceId": "nielsen-web-reading",
+          "locator": "Objective language comparison",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-analyst",
+        "content-governor"
+      ]
+    },
+    {
+      "id": "business-progressive-detail",
+      "squad": "squad-content",
+      "competencies": [
+        "information-hierarchy",
+        "mental-model"
+      ],
+      "condition": "Acervo maior que a necessidade imediata.",
+      "action": "Entregue essencial para a ação; ofereça caminho para aprofundar.",
+      "rationale": "Hierarquia reduz sobrecarga.",
+      "exceptions": [
+        "Instrução crítica não pode ficar escondida."
+      ],
+      "counterexamples": [
+        "FAQ indispensável atrás de link inacessível."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Present information; important main message",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "platform-specialist"
+      ]
+    },
+    {
+      "id": "business-visual-text-agreement",
+      "squad": "squad-content",
+      "competencies": [
+        "multimodal-content"
+      ],
+      "condition": "Conteúdo mistura imagem e texto.",
+      "action": "Confira se ambos comunicam mesma ideia; inclua legenda interpretativa.",
+      "rationale": "Visuais ambíguos podem inverter mensagem.",
+      "exceptions": [
+        "Contraste artístico explícito pode ser intencional."
+      ],
+      "counterexamples": [
+        "Gráfico cumulativo usado como taxa mensal."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cdc-communication",
+          "locator": "Visuals and captions",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "content-engineer"
+      ]
+    },
+    {
+      "id": "business-causal-spine",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "narrative-causality"
+      ],
+      "condition": "Roteiro é sequência de episódios.",
+      "action": "Ligue decisão, consequência e transformação; revise cenas sem efeito no todo.",
+      "rationale": "Uma pessoa não garante unidade de ação.",
+      "exceptions": [
+        "Mosaico experimental pode usar outra lógica."
+      ],
+      "counterexamples": [
+        "E então repetido sem por causa disso."
+      ],
+      "evidence": [
+        {
+          "sourceId": "aristotle-poetics",
+          "locator": "Parts VIII-X",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dan-harmon",
+        "joseph-campbell",
+        "blake-snyder"
+      ]
+    },
+    {
+      "id": "business-earned-reversal",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "plot-reversal"
+      ],
+      "condition": "Virada parece arbitrária.",
+      "action": "Plante informação e decisões que tornam virada provável dentro da história.",
+      "rationale": "Reversão deriva da estrutura anterior.",
+      "exceptions": [
+        "Surrealismo deliberado não busca plausibilidade convencional."
+      ],
+      "counterexamples": [
+        "Salvador externo resolve conflito sem preparação."
+      ],
+      "evidence": [
+        {
+          "sourceId": "aristotle-poetics",
+          "locator": "Parts X-XI",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "dan-harmon",
+        "blake-snyder"
+      ]
+    },
+    {
+      "id": "business-sparkline",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "presentation",
+        "mental-model"
+      ],
+      "condition": "Pitch descreve funcionalidades.",
+      "action": "Alterne situação atual e futuro possível com evidência da ponte.",
+      "rationale": "Contraste explicita transformação.",
+      "exceptions": [
+        "Incidente urgente pode exigir decisão direta."
+      ],
+      "counterexamples": [
+        "Futuro desejável sem mecanismo plausível."
+      ],
+      "evidence": [
+        {
+          "sourceId": "duarte-sales-story",
+          "locator": "Tension and release",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "nancy-duarte",
+        "oren-klaff"
+      ]
+    },
+    {
+      "id": "business-objection-scenes",
+      "squad": "squad-storytelling",
+      "competencies": [
+        "sales-story"
+      ],
+      "condition": "Narrativa não remove dúvida do comprador.",
+      "action": "Ordene obstáculos por impacto; responda com evidência e confirme compreensão.",
+      "rationale": "A história precisa mover decisão específica.",
+      "exceptions": [
+        "Objeção hipotética deve ser validada."
+      ],
+      "counterexamples": [
+        "Origem da empresa ocupa deck inteiro."
+      ],
+      "evidence": [
+        {
+          "sourceId": "duarte-sales-story",
+          "locator": "Rank objections; Formulate responses",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "nancy-duarte",
+        "kindra-hall",
+        "park-howell"
+      ]
+    },
+    {
+      "id": "business-focus-threshold",
+      "squad": "squad-council",
+      "competencies": [
+        "opportunity-cost"
+      ],
+      "condition": "Decisor sobrecarregado com projetos opcionais.",
+      "action": "Compare nova frente à melhor atual; exija entusiasmo e capacidade antes de aceitar.",
+      "rationale": "Recusar protege investimento concentrado.",
+      "exceptions": [
+        "Deveres e sobrevivência não dependem de entusiasmo."
+      ],
+      "counterexamples": [
+        "Pessoa sem oportunidades rejeita aprendizado básico."
+      ],
+      "evidence": [
+        {
+          "sourceId": "sivers-focus",
+          "locator": "Opening condition; duty reply",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "derek-sivers"
+      ]
+    },
+    {
+      "id": "business-domain-believability",
+      "squad": "squad-council",
+      "competencies": [
+        "decision-quality",
+        "mental-model"
+      ],
+      "condition": "Conselho diverge sobre decisão.",
+      "action": "Pese experiência específica e explicação causal; documente evidência de cada opinião.",
+      "rationale": "Credibilidade depende do domínio.",
+      "exceptions": [
+        "Regime novo pode tornar histórico pouco transferível."
+      ],
+      "counterexamples": [
+        "Prestígio financeiro decide pedagogia."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Track record and causal explanation",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ray-dalio",
+        "charlie-munger"
+      ]
+    },
+    {
+      "id": "business-independent-disagreement",
+      "squad": "squad-council",
+      "competencies": [
+        "decision-process"
+      ],
+      "condition": "Autoridade domina discussão.",
+      "action": "Colete razões independentes antes da conversa; explicite divergência e responsável final.",
+      "rationale": "Discussão precisa confrontar causas.",
+      "exceptions": [
+        "Emergência limita deliberação."
+      ],
+      "counterexamples": [
+        "Consenso após líder anunciar resposta."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Independent thinking; disagreement",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "ray-dalio",
+        "council-orqx"
+      ]
+    },
+    {
+      "id": "business-causal-accountability",
+      "squad": "squad-council",
+      "competencies": [
+        "strategic-advice"
+      ],
+      "condition": "Recomendação baseada em reputação.",
+      "action": "Exija mecanismo, casos relevantes e condição que mudaria o conselho.",
+      "rationale": "Explicação permite contestação.",
+      "exceptions": [
+        "Dados confidenciais podem exigir evidência restrita."
+      ],
+      "counterexamples": [
+        "Conselheiro famoso sem raciocínio verificável."
+      ],
+      "evidence": [
+        {
+          "sourceId": "dalio-believability",
+          "locator": "Objective trusted criteria; override",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "charlie-munger",
+        "peter-thiel",
+        "reid-hoffman"
+      ]
+    },
+    {
+      "id": "business-prior-diagnostic",
+      "squad": "squad-courses",
+      "competencies": [
+        "instructional-design"
+      ],
+      "condition": "Curso inicia com conceitos pré-requisitos.",
+      "action": "Use tarefa diagnóstica; corrija erro e ative conhecimento útil.",
+      "rationale": "Base errada pode impedir aprendizagem.",
+      "exceptions": [
+        "Diagnóstico não deve excluir sem alternativa."
+      ],
+      "counterexamples": [
+        "Avançado assume conceito básico correto."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principle 1",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "curriculum-designer",
+        "lesson-architect"
+      ]
+    },
+    {
+      "id": "business-mastery-transfer",
+      "squad": "squad-courses",
+      "competencies": [
+        "mastery",
+        "mental-model"
+      ],
+      "condition": "Aluno sabe partes mas falha na prática.",
+      "action": "Treine componentes, integração e escolha de aplicação em caso novo.",
+      "rationale": "Masteria inclui saber quando aplicar.",
+      "exceptions": [
+        "Especialista pode dispensar treino isolado."
+      ],
+      "counterexamples": [
+        "Quiz de definição usado como prova profissional."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principle 4",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "curriculum-designer",
+        "assessment-creator"
+      ]
+    },
+    {
+      "id": "business-feedback-loop",
+      "squad": "squad-courses",
+      "competencies": [
+        "practice-feedback"
+      ],
+      "condition": "Exercício recebe apenas nota.",
+      "action": "Defina critério e desafio adequado; devolva feedback acionável enquanto permite revisão.",
+      "rationale": "Feedback liga prática à meta.",
+      "exceptions": [
+        "Avaliação somativa pode limitar nova tentativa."
+      ],
+      "counterexamples": [
+        "Parabéns sem indicar correção."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principle 5",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "assessment-creator",
+        "content-writer"
+      ]
+    },
+    {
+      "id": "business-self-monitoring",
+      "squad": "squad-courses",
+      "competencies": [
+        "metacognition"
+      ],
+      "condition": "Aluno repete estratégia ineficaz.",
+      "action": "Peça planejamento, monitoramento e reflexão sobre erro e próxima mudança.",
+      "rationale": "Autogestão exige prática explícita.",
+      "exceptions": [
+        "Novato precisa roteiro e modelo inicial."
+      ],
+      "counterexamples": [
+        "Diário reflexivo sem relação com desempenho."
+      ],
+      "evidence": [
+        {
+          "sourceId": "cmu-learning",
+          "locator": "Principle 7",
+          "excerpt": ""
+        }
+      ],
+      "status": "inferred",
+      "consumers": [
+        "lesson-architect",
+        "production-director"
+      ]
+    }
+  ]
+}

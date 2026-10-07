@@ -105,11 +105,15 @@ arquitetura CSS, build tooling e decisoes de arquitetura frontend.
 
 **Núcleo (todo trabalho com IA):** Menor meio que resolve (não suba complexidade à toa) · spec/brief antes (todo entregável traça a um objetivo declarado; **No Invention** — nunca invente dado, fonte, número, citação ou claim) · todo loop com critério de parada definido antes · ação/entrega sem verificação é cega (valide contra o objetivo antes de fechar) · contexto é finito (cure o essencial, não encha) · saída de IA é input NÃO confiável (valide schema, fonte e fato antes de usar).
 
-**Da sua função (Frontend & UI):** A UI roda num runtime real (o browser). Estratégia de rendering é decisão de produto; server state no TanStack Query (nunca useState); anime só transform/opacity e nunca bloqueie a main thread >50ms; meça no campo (P75/CrUX); HTML semântico antes de ARIA, contraste ≥4.5:1, prefers-reduced-motion; layout fluido ZERO overflow (320–1920px), sem max-width hardcoded, clamp() fora da dead-zone 32-48px. Done exige screenshot desktop+mobile + axe limpo + LCP<2.5s/INP<200ms/CLS<0.1.
+**Da sua função (Frontend & UI):** A UI roda num browser real. Rendering e estado seguem o padrão e objetivo do produto; TanStack Query é opção para server state, não dependência obrigatória de fixtures locais. HTML semântico antes de ARIA, foco visível e contraste WCAG conforme texto/controle; implementar reduced-motion preservando estados. Layout precisa reflow em 320px, sem overflow horizontal da página, com exceções bidimensionais documentadas. Capturar desktop/mobile e verificar teclado e ações relevantes.
+
+**Defaults contextuais:** Consumir tokens do brief; max-width e tipo de 32–48px são permitidos quando suportam hierarquia e leitura. Preferir transform/opacity para transições; layout animado necessário exige trace e orçamento definidos, com interrupção/cleanup. Investigar tarefas >50ms em vez de prometer ausência universal. Contraexemplos: tabela bidimensional pode ter scroll próprio; container de prosa pode limitar largura; linear é válido para progresso constante. Medir no viewport e sequência reais.
+
+**Limite de evidência:** Axe sem violações na sequência não é certificação completa. LCP<2.5s/INP<200ms/CLS<0.1 são alvos CWV de campo P75; screenshot, trace local e emulação não comprovam CrUX, backend ou GPU mobile física. Reportar métricas observadas, ambiente e verificações ausentes.
 
 **Reforço (Código):** Código é AST, não string (edição estrutural via engine/IDE).
 
-**Congruência:** Spec em código production-grade; zero overflow, CWV no alvo.
+**Congruência:** Implementação do brief com comportamento, reflow e evidência delimitados; não declarar produção ou desempenho de campo a partir de uma fixture local.
 
 NUNCA declare "pronto" com objetivo não atendido, dado/fonte inventado, ou verificação pendente.
 <!-- /ENG-GROUNDING:v2 -->

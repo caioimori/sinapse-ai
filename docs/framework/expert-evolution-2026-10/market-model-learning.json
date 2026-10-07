@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 1,
+  "scope": "market-learning-only",
+  "status": "proposed-only",
+  "accessedAt": "2026-10-02T17:05:07Z",
+  "accessedAtMethod": "UTC tool clock recorded after the source-reading batch; not an HTTP request timestamp.",
+  "researchMethod": "Current official Anthropic publication and documentation pages read through web tools; bounded market research, no model execution.",
+  "execution": {
+    "anthropicApiCalls": 0,
+    "anthropicInferenceRuns": 0,
+    "providerActivation": false,
+    "modelAvailabilityChecked": false,
+    "billingBenchmark": false,
+    "implementationPerformed": false,
+    "empiricalSinapseGainClaimed": false
+  },
+  "recommendation": "Prioritize executable UI acceptance, task-specific design briefs and evidence retrieval. Transfer mechanisms into the existing SINAPSE contracts only after an independent local review and bounded acceptance checks.",
+  "evidencePolicy": {
+    "sourceAuthority": "All sources are first-party Anthropic pages.",
+    "independence": "Multiple official pages corroborate practices; no independent cross-vendor performance validation was performed.",
+    "vendorClaims": "Publication facts are distinct from vendor performance statements and transfer hypotheses.",
+    "availability": "A model publication does not establish access in the user's account.",
+    "scopeBoundary": "No Anthropic API, nested Claude process, model comparison run or new provider configuration."
+  },
+  "modelClaims": [
+    {
+      "id": "MC-01",
+      "model": "Claude Opus 5.5",
+      "classification": "official-publication-fact",
+      "statement": "Anthropic published its Claude Opus 5.5 launch announcement dated 2026-09-22.",
+      "sourceIds": [
+        "S-00"
+      ],
+      "locator": "Page heading and publication date",
+      "verifiedLocally": false
+    },
+    {
+      "id": "MC-02",
+      "model": "Claude Opus 5.5",
+      "classification": "vendor-performance-claim",
+      "statement": "The launch describes efficiency and communication improvements over Opus 5; these are supplier statements under its own evaluations.",
+      "sourceIds": [
+        "S-00"
+      ],
+      "locator": "Introduction; Performance and cost-effectiveness; Communication",
+      "verifiedLocally": false,
+      "transferLimit": "No local cost, speed, quality ranking or superiority over the current SINAPSE model is established."
+    },
+    {
+      "id": "MC-03",
+      "model": "Claude Opus 5.5",
+      "classification": "vendor-performance-claim",
+      "statement": "The launch reports better software optimization and visual game polish in selected tests.",
+      "sourceIds": [
+        "S-00"
+      ],
+      "locator": "Introduction; Coding",
+      "verifiedLocally": false,
+      "transferLimit": "Selected vendor examples do not establish quality of SINAPSE navigation, accessibility, motion or Reels."
+    }
+  ],
+  "freshnessCorrections": [
+    {
+      "id": "FC-01",
+      "sourceIds": [
+        "S-01",
+        "S-08"
+      ],
+      "statement": "The 2024 agent-pattern article now points to the April 2026 Managed Agents article for the provider's current approach.",
+      "transferDecision": "Use composable workflow principles; do not copy a legacy or hosted runtime by default."
+    },
+    {
+      "id": "FC-02",
+      "sourceIds": [
+        "S-07"
+      ],
+      "statement": "The think-tool article includes a 2025-12-15 update recommending native extended thinking instead of a dedicated think tool in most cases.",
+      "transferDecision": "Keep a bounded decision checkpoint; do not add the legacy think tool or infer a cross-provider setting."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S-00",
+      "title": "Introducing Claude Opus 5.5",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "publishedAt": "2026-09-22",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-launch",
+      "readScope": "Introduction, performance caveats, coding and communication sections"
+    },
+    {
+      "id": "S-01",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "publishedAt": "2024-12-19",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance",
+      "readScope": "Current freshness note, workflow distinction, orchestrator-workers and evaluator-optimizer"
+    },
+    {
+      "id": "S-02",
+      "title": "Demystifying evals for AI agents",
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "publishedAt": "2026-01-09",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance",
+      "readScope": "Outcome versus transcript, graders, capability versus regression, research and computer-use evaluation"
+    },
+    {
+      "id": "S-03",
+      "title": "Prompting for frontend aesthetics",
+      "url": "https://platform.claude.com/cookbook/coding-prompting-for-frontend-aesthetics",
+      "publishedAt": "2025-10-21",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-cookbook",
+      "readScope": "Design dimensions, theme cohesion, motion orchestration and isolated prompting; API sample not executed"
+    },
+    {
+      "id": "S-04",
+      "title": "Best practices for Claude Code",
+      "url": "https://code.claude.com/docs/en/best-practices",
+      "publishedAt": null,
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-live-documentation",
+      "readScope": "Executable verification, specific context, concise persistent rules, scoped subagents and bounded exploration"
+    },
+    {
+      "id": "S-05",
+      "title": "Effective context engineering for AI agents",
+      "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "publishedAt": "2025-09-29",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance",
+      "readScope": "Finite context, lightweight references, just-in-time retrieval, progressive disclosure and long-horizon context"
+    },
+    {
+      "id": "S-06",
+      "title": "Effective harnesses for long-running agents",
+      "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "publishedAt": "2025-11-26",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance",
+      "readScope": "Feature list, incremental progress, browser verification and resumable progress artifacts"
+    },
+    {
+      "id": "S-07",
+      "title": "The think tool: Enabling Claude to stop and think in complex tool use situations",
+      "url": "https://www.anthropic.com/engineering/claude-think-tool",
+      "publishedAt": "2025-03-20",
+      "updatedAt": "2025-12-15",
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance-with-superseding-note",
+      "readScope": "Current extended-thinking update, sequential policy-heavy decisions and situations without observed benefit"
+    },
+    {
+      "id": "S-08",
+      "title": "Scaling Managed Agents: Decoupling the brain from the hands",
+      "url": "https://www.anthropic.com/engineering/managed-agents",
+      "publishedAt": "2026-04-08",
+      "updatedAt": null,
+      "accessedAt": "2026-10-02T17:05:07Z",
+      "sourceType": "official-engineering-guidance",
+      "readScope": "Stale harness assumptions, stable interfaces, durable session log and separation of execution"
+    }
+  ],
+  "mechanisms": [
+    {
+      "id": "ML-01",
+      "name": "Brief por dimensão visual",
+      "sourceIds": [
+        "S-03"
+      ],
+      "evidenceStatement": "O cookbook orienta escolhas explícitas de tipografia, cor, movimento e composição; admite tratar uma dimensão isoladamente.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "dx-ui-designer",
+        "dx-frontend-engineer"
+      ],
+      "targetDomain": "squad-design",
+      "condition": "Criação ou refinamento visual com público, marca e tarefa definidos.",
+      "contraindication": "Não trocar fonte ou padrão útil somente por parecer comum; preservar marca, legibilidade e consistência.",
+      "transferHypothesis": "Um brief curto com decisões visuais justificadas pode reduzir escolhas genéricas sem dificultar a tarefa principal.",
+      "proposedAction": "Registrar público, tarefa principal, hierarquia, tokens, estados e uma referência de mecanismo; declarar a dimensão que será alterada.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Toda decisão de tipografia, cor e composição remete a um requisito do brief.",
+          "A ação principal fica identificável em 1440px e 390px.",
+          "Nenhuma mudança visual quebra uma interação já validada."
+        ]
+      }
+    },
+    {
+      "id": "ML-02",
+      "name": "Motion com função e sequência",
+      "sourceIds": [
+        "S-03"
+      ],
+      "evidenceStatement": "O cookbook recomenda concentrar movimento em momentos de maior impacto e ordenar a entrada dos elementos.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "motion-choreographer",
+        "animation-performance-engineer",
+        "dx-interaction-designer"
+      ],
+      "targetDomain": "squad-animations and squad-design",
+      "condition": "Movimento comunica transição, prioridade ou feedback e melhora a compreensão do fluxo.",
+      "contraindication": "Evitar atrasar tarefa, exigir animação para entender o estado ou impor bibliotecas quando CSS atende.",
+      "transferHypothesis": "Coreografia por estado pode produzir consistência visual e feedback mais compreensível.",
+      "proposedAction": "Definir trigger, estado inicial/final, duração, interrupção e alternativa com redução de movimento; separar UI motion de vídeo/Reels.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Cada animação possui função e trigger definidos.",
+          "Com prefers-reduced-motion, o fluxo completo continua compreensível e utilizável.",
+          "Revisão contínua da sequência e interrupções, não somente frames isolados.",
+          "Reels exigem revisão própria de ritmo, áudio e exportação; uma UI animada não aprova vídeo."
+        ]
+      }
+    },
+    {
+      "id": "ML-03",
+      "name": "QA de estados pela interface",
+      "sourceIds": [
+        "S-04",
+        "S-06"
+      ],
+      "evidenceStatement": "As fontes pedem sinais executáveis de conclusão e descrevem falhas que testes de código ou respostas HTTP não detectam.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "dx-frontend-engineer",
+        "dx-accessibility-specialist",
+        "dx-interaction-designer"
+      ],
+      "targetDomain": "squad-design",
+      "condition": "Mudança altera interface, navegação, feedback ou comportamento em outro tamanho de tela.",
+      "contraindication": "Não concluir por screenshot inicial ou build; não afirmar persistência real quando o ambiente usa dados simulados.",
+      "transferHypothesis": "Reproduzir ações e estados poderá revelar problemas ausentes em imagens estáticas.",
+      "proposedAction": "Percorrer ação principal, retorno, vazio, erro, loading e estado concluído quando pertinentes; capturar desktop e mobile após as ações.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Jornada completa comprovada em 1440px e 390px, com evidência após mudança de estado.",
+          "Zero overflow horizontal não intencional.",
+          "Teclado chega à ação principal e o foco permanece visível.",
+          "Persistência e autorização, quando parte do escopo, têm leitura posterior em ambiente real de teste."
+        ]
+      }
+    },
+    {
+      "id": "ML-04",
+      "name": "Contexto por referência verificável",
+      "sourceIds": [
+        "S-05"
+      ],
+      "evidenceStatement": "A fonte descreve referências leves e recuperação de dados no momento necessário, mantendo somente o contexto relevante.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "research-orqx",
+        "design-orqx"
+      ],
+      "targetDomain": "squad-research and squad-design",
+      "condition": "Acervo de fontes, referências Mobbin ou documentação excede o que a tarefa precisa.",
+      "contraindication": "Não carregar toda a biblioteca; metadados ou imagem sem observação não provam o fluxo de navegação.",
+      "transferHypothesis": "Seleção por pergunta e locator pode melhorar rastreabilidade e reduzir ruído de contexto.",
+      "proposedAction": "Indexar fonte, locator, data, mecanismo, condição e limitação; recuperar trechos e estados necessários à tarefa.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Toda regra recuperada aponta para fonte e locator existentes.",
+          "Contexto serializado respeita o orçamento vigente do runtime.",
+          "Referência Mobbin separa observação do fluxo de hipótese de transferência.",
+          "Uma mudança na fonte invalida a evidência derivada ou exige nova revisão."
+        ]
+      }
+    },
+    {
+      "id": "ML-05",
+      "name": "Delegação por fronteira de trabalho",
+      "sourceIds": [
+        "S-01",
+        "S-04"
+      ],
+      "evidenceStatement": "As fontes diferenciam fluxo fixo de orquestração dinâmica e apresentam delegação como alternativa para trabalho complexo ou investigação isolável.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "design-orqx",
+        "animations-orqx",
+        "content-orqx"
+      ],
+      "targetDomain": "Existing squad orchestration",
+      "condition": "Frentes têm entradas, saídas e responsabilidades independentes ou subtarefas variam por demanda.",
+      "contraindication": "Não dividir edição do mesmo arquivo sem ownership; não abrir agentes para tarefas determinísticas simples.",
+      "transferHypothesis": "Contratos estreitos podem reduzir conflito e manter foco no resultado do projeto.",
+      "proposedAction": "Definir owner, arquivos, dependências, entrega, verificação e freio antes de paralelizar; usar os orqx existentes.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Cada frente tem owner e escopo explícitos.",
+          "Zero alterações fora do ownership sem coordenação.",
+          "Dependências são resolvidas antes da integração.",
+          "Handoff relata evidência e lacunas; não repete catálogo ou corpus completo."
+        ]
+      }
+    },
+    {
+      "id": "ML-06",
+      "name": "Avaliação do resultado com juízes adequados",
+      "sourceIds": [
+        "S-02"
+      ],
+      "evidenceStatement": "A fonte distingue resultado no ambiente de narrativa e combina verificações determinísticas, avaliação por modelo e julgamento humano.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "design-orqx",
+        "research-orqx"
+      ],
+      "targetDomain": "Quality gates for existing squads",
+      "condition": "Precisamos comparar qualidade de entregáveis, navegação ou conhecimento recuperado.",
+      "contraindication": "Não usar autoavaliação do gerador como única aprovação; não declarar ganho estatístico com um caso por condição.",
+      "transferHypothesis": "Checks funcionais mais revisão visual independente podem impedir aprovação de resultados apenas plausíveis.",
+      "proposedAction": "Separar falhas críticas de preferência estética; congelar brief e dados; anonimizar variantes para revisão e registrar mudanças no ambiente.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Todos os checks críticos precisam passar, sem compensação por nota estética.",
+          "Cada score aponta para evidência do resultado ou estado.",
+          "Variantes usam brief e inputs congelados; diferenças de tempo/contexto ficam declaradas.",
+          "Preferência do revisor e completude funcional aparecem separadas.",
+          "Casos de regressão preservam comportamentos já aprovados."
+        ]
+      }
+    },
+    {
+      "id": "ML-07",
+      "name": "Progresso retomável com critérios imutáveis",
+      "sourceIds": [
+        "S-06"
+      ],
+      "evidenceStatement": "A fonte usa requisitos estruturados, trabalho incremental e registro de progresso para impedir conclusão prematura entre sessões.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "design-orqx",
+        "animations-orqx"
+      ],
+      "targetDomain": "Long-running existing workflows",
+      "condition": "Entrega atravessa sessões ou tem múltiplas etapas que precisam continuar de um estado conhecido.",
+      "contraindication": "Não criar documentação cerimonial para ajuste pequeno; não reduzir critérios para fazer uma etapa parecer aprovada.",
+      "transferHypothesis": "Um checkpoint objetivo pode diminuir retrabalho e perda de requisitos.",
+      "proposedAction": "Preservar critérios, registrar feito/pendente, artefatos e próxima etapa; concluir um bloco verificável antes de avançar.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Retomada identifica a próxima etapa sem reabrir toda a pesquisa.",
+          "Status concluído exige receipt do critério correspondente.",
+          "Nenhum critério original é removido ou enfraquecido sem decisão autorizada.",
+          "Checkpoint diferencia local, instalado, publicado e observado ao vivo."
+        ]
+      }
+    },
+    {
+      "id": "ML-08",
+      "name": "Contratos estáveis e evidência durável",
+      "sourceIds": [
+        "S-08"
+      ],
+      "evidenceStatement": "A fonte separa sessão durável, orquestração e execução para permitir mudanças de implementação e recuperação de falhas.",
+      "classification": "documented-guidance",
+      "sinapseTargets": [
+        "research-orqx",
+        "design-orqx"
+      ],
+      "targetDomain": "Existing runtime and knowledge workflow",
+      "condition": "Modelo, ferramenta ou processo muda, mas o resultado e a origem da evidência precisam continuar auditáveis.",
+      "contraindication": "Não transformar este princípio em migração para serviço hospedado, containers ou infraestrutura distribuída sem necessidade.",
+      "transferHypothesis": "Esquemas estáveis e receipts independentes do modelo podem tornar evolução futura mais controlada.",
+      "proposedAction": "Manter resultado tipado, versão da regra, IDs de evidência, estado da tentativa e receipt separados da implementação.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Falha do processo não apaga a evidência já consolidada.",
+          "Troca de modelo ou ferramenta passa os mesmos critérios de aceitação.",
+          "Tentativa paga incerta não é repetida automaticamente.",
+          "Segredos permanecem fora dos artefatos e do contexto distribuído."
+        ]
+      }
+    },
+    {
+      "id": "ML-09",
+      "name": "Checagem de decisão sequencial",
+      "sourceIds": [
+        "S-07"
+      ],
+      "evidenceStatement": "O artigo distingue decisões sequenciais com políticas de tarefas simples e contém uma atualização que prefere o recurso nativo de raciocínio ao think-tool legado.",
+      "classification": "documented-guidance-with-supersession",
+      "sinapseTargets": [
+        "design-orqx",
+        "research-orqx"
+      ],
+      "targetDomain": "Sequential existing workflows",
+      "condition": "Nova observação muda uma decisão dependente, sobretudo com consequências difíceis de reverter.",
+      "contraindication": "Não adicionar think-tool legado, pedir cadeia de pensamento ou aplicar pausas extras em tarefas simples e independentes.",
+      "transferHypothesis": "Um registro curto de fatos novos, critérios e próxima ação pode reduzir decisões inconsistentes.",
+      "proposedAction": "Antes da ação dependente, verificar informação faltante, autoridade, condição de parada e evidência; registrar decisão, não raciocínio interno.",
+      "acceptance": {
+        "status": "not-run",
+        "checks": [
+          "Cada ação dependente remete à observação atual e ao critério relevante.",
+          "Falta material de evidência gera lacuna ou escalonamento, não invenção.",
+          "Nenhuma ferramenta extra ou API Anthropic é necessária para aplicar a checagem.",
+          "Loop tem limite de tentativas explícito."
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Documentary research only; mechanisms have not been implemented or empirically evaluated in this front.",
+    "No independent performance reproduction or causal quality gain was measured.",
+    "No actual Mobbin flow was observed in this research front; browser acquisition belongs to the root task.",
+    "Frontend guidance does not establish competence in video/audio editing; motion and Reels need their own outcome checks.",
+    "No source publication or vendor claim changes native model selection, account access or expertise promotion."
+  ]
+}

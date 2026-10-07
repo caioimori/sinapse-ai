@@ -1,0 +1,141 @@
+{
+  "workflow_id": "WF-20261002-cross-provider-closeout",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Concluir pendências executáveis do framework nos dois ambientes com autoridade e conhecimento privados verificáveis",
+  "scope": "Worktree isolada e nova extensão pessoal opt-in; original preservado; sem protected, publicação, recarga ou API Anthropic",
+  "inputs": [
+    "CLOSEOUT-SPEC.md",
+    "HANDOFF.md",
+    "Autorização YOLO"
+  ],
+  "outputs": [
+    "Contratos auditados",
+    "Contexto compartilhado",
+    "Extensão opt-in com readback",
+    "QA atual",
+    "Handoff"
+  ],
+  "acceptance": [
+    "Story Ready validada",
+    "AC1-AC5 verificadas com limites"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "Validar contrato da onda",
+      "owner": "sinapse-orqx",
+      "depends_on": [],
+      "command_or_tool": "validate-architecture-first e story-meta",
+      "inputs": [
+        "CLOSEOUT-SPEC.md"
+      ],
+      "outputs": [
+        "Ready validado"
+      ],
+      "acceptance": [
+        "Schema e story aceitos"
+      ],
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "rollback": "Remover somente documentos novos desta onda mediante hash e preservação de concorrência"
+    },
+    {
+      "task_id": "T02",
+      "objective": "Corrigir contratos e gaps de tarefas próprias",
+      "owner": "developer",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "Propostas quality-gate, implementação determinística e testes de autoridade",
+      "inputs": [
+        "Fontes canônicas e propostas"
+      ],
+      "outputs": [
+        "Perfis e bindings com proveniência",
+        "Tasks próprias e autoridade"
+      ],
+      "acceptance": [
+        "172 contratos ou gaps explícitos",
+        "Pool não autoriza tarefas alheias"
+      ],
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "rollback": "Restaurar apenas arquivos de ownership com backup e precondição de hash"
+    },
+    {
+      "task_id": "T03",
+      "objective": "Implementar e instalar contexto opt-in para os dois ambientes",
+      "owner": "devops",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "Helper compartilhado, skills únicas, CAS backup e readback",
+      "inputs": [
+        "Audit de distribuição",
+        "CLOSEOUT-SPEC.md"
+      ],
+      "outputs": [
+        "Extensão local/pessoal",
+        "Receipts de preservação e contexto"
+      ],
+      "acceptance": [
+        "Bytes equivalentes",
+        "Raiz privada restrita",
+        "Nenhuma execução de modelo alegada"
+      ],
+      "max_iterations": 3,
+      "max_attempts": 3,
+      "repair_reason": "Três preparações limitadas para cobrir domínio Claude Code mastery, grafo privado e targets não Markdown. Aprovar a cobertura completa antes da terceira instalação definitiva; preservar receipts e rollback CAS das preparações anteriores.",
+      "rollback": "Desinstalar somente novas extensões se hashes corresponderem e restaurar backups"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Executar QA atual de UI, motion e mídia",
+      "owner": "dx-ux-strategist",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "Playwright headless e revisão observável de mídia",
+      "inputs": [
+        "Fixtures e criativos próprios"
+      ],
+      "outputs": [
+        "Receipts e screenshots atuais"
+      ],
+      "acceptance": [
+        "1440/390/320 sem overflow",
+        "Estado e limites AV explícitos"
+      ],
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "rollback": "Preservar fontes e remover apenas outputs gerados comprovadamente dispensáveis"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Revisar e fechar entrega local",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T02",
+        "T03",
+        "T04"
+      ],
+      "command_or_tool": "Testes, parity, manifest, stories, privacy, pack e handoff",
+      "inputs": [
+        "Implementações e receipts"
+      ],
+      "outputs": [
+        "QA Results",
+        "Checkpoint verificável"
+      ],
+      "acceptance": [
+        "AC1-AC5 avaliadas",
+        "Original/protected/pessoais preservados",
+        "Ledger sem aumento"
+      ],
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "rollback": "Preservar receipts e registrar bloqueio sem falsa conclusão"
+    }
+  ]
+}

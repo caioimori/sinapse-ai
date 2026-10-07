@@ -85,7 +85,9 @@ describe('dual CLI clean-install matrix', () => {
           path.join(path.dirname(legacyClaudeAgent), 'user-custom.md'),
         )).toBe(true);
         expect(installed.claudeNativeAgentFiles).toBe(172);
-        expect(installed.claudeNativeSkillFiles).toBe(37);
+        // Project expert is the 38th activation skill, delivered to both CLIs.
+        expect(installed.claudeNativeSkillFiles).toBe(38);
+        expect(await fs.pathExists(path.join(targetDir, '.claude', 'skills', 'sinapse-project-expert', 'SKILL.md'))).toBe(true);
         const settings = await fs.readJson(path.join(targetDir, '.claude', 'settings.local.json'));
         expect(settings.language).toBe('Portuguese');
         expect(JSON.stringify(settings)).toContain('custom-hook.cjs');

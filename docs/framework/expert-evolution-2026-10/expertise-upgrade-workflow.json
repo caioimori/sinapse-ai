@@ -1,0 +1,155 @@
+{
+  "workflow_id": "WF-20261007-individual-expertise-upgrade",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Aprofundar individualmente os 172 agentes e comprovar recuperação/decisões com limites explícitos",
+  "inputs": [
+    "Go do Caio",
+    "Handoff vigente",
+    "172 perfis canônicos",
+    "Fontes primárias autorizadas"
+  ],
+  "outputs": [
+    "Perfis revisados",
+    "Mecanismos/fontes",
+    "Outputs por agente e QA",
+    "Extensão compartilhada",
+    "PR/prévia"
+  ],
+  "acceptance": [
+    "AC1-AC5 na story Ready",
+    "Nenhuma extrapolação de evidência/custo"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "owner": "architect",
+      "depends_on": [],
+      "command_or_tool": "Preservar snapshot fonte e preparar authoring isolado",
+      "timeout_ms": 120000,
+      "max_attempts": 2,
+      "acceptance": [
+        "Fonte instalada intacta",
+        "Atualização remota auditada",
+        "Spec/story/workflow válidos"
+      ],
+      "rollback": "Conservar fonte e registrar bloqueio sem alterar settings",
+      "objective": "Preservar snapshot fonte e preparar authoring isolado",
+      "inputs": [
+        "Handoff",
+        "Story Ready",
+        "Fonte instalada"
+      ],
+      "outputs": [
+        "Evidência: Fonte instalada intacta",
+        "Evidência: Atualização remota auditada",
+        "Evidência: Spec/story/workflow válidos"
+      ]
+    },
+    {
+      "task_id": "T02",
+      "owner": "research-specialists",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "Fontes primárias e perfis individualizados em três coortes",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "acceptance": [
+        "172 IDs exatos",
+        "Sem boilerplate substituindo pesquisa",
+        "Locator e exceções",
+        "Casos novos separados das fontes"
+      ],
+      "rollback": "Preservar baseline e candidatas",
+      "objective": "Fontes primárias e perfis individualizados em três coortes",
+      "inputs": [
+        "Resultado aprovado de T01"
+      ],
+      "outputs": [
+        "Evidência: 172 IDs exatos",
+        "Evidência: Sem boilerplate substituindo pesquisa",
+        "Evidência: Locator e exceções",
+        "Evidência: Casos novos separados das fontes"
+      ]
+    },
+    {
+      "task_id": "T03",
+      "owner": "developer",
+      "depends_on": [
+        "T02"
+      ],
+      "command_or_tool": "Integrar contratos/contextos e registrar casos diagnósticos novos",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "acceptance": [
+        "Schemas/critério/autoridade",
+        "Outputs reais distintos por função",
+        "Modelo observado ou lacuna explícita"
+      ],
+      "rollback": "CAS dos inputs e retorno à fonte anterior",
+      "objective": "Integrar contratos/contextos e registrar casos diagnósticos novos",
+      "inputs": [
+        "Resultado aprovado de T02"
+      ],
+      "outputs": [
+        "Evidência: Schemas/critério/autoridade",
+        "Evidência: Outputs reais distintos por função",
+        "Evidência: Modelo observado ou lacuna explícita"
+      ]
+    },
+    {
+      "task_id": "T04",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T03"
+      ],
+      "command_or_tool": "Revisão independente dos mecanismos e outputs",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "acceptance": [
+        "Negativos",
+        "Lacunas honestas",
+        "Sem promoção de expertise sem provas"
+      ],
+      "rollback": "Rejeitar entradas não suportadas conservando evidências",
+      "objective": "Revisão independente dos mecanismos e outputs",
+      "inputs": [
+        "Resultado aprovado de T03"
+      ],
+      "outputs": [
+        "Evidência: Negativos",
+        "Evidência: Lacunas honestas",
+        "Evidência: Sem promoção de expertise sem provas"
+      ]
+    },
+    {
+      "task_id": "T05",
+      "owner": "devops",
+      "depends_on": [
+        "T04"
+      ],
+      "command_or_tool": "Upgrade CAS, paridade, gates proporcionais, commit/push/PR/prévia",
+      "timeout_ms": 1200000,
+      "max_attempts": 2,
+      "acceptance": [
+        "Fonte anterior/pessoais preservados",
+        "Sem segredo/produção",
+        "Contexto por provedor validado",
+        "PR anexado"
+      ],
+      "rollback": "Restaurar somente writeset com hash verificado; manter prévia anterior",
+      "objective": "Upgrade CAS, paridade, gates proporcionais, commit/push/PR/prévia",
+      "inputs": [
+        "Resultado aprovado de T04"
+      ],
+      "outputs": [
+        "Evidência: Fonte anterior/pessoais preservados",
+        "Evidência: Sem segredo/produção",
+        "Evidência: Contexto por provedor validado",
+        "Evidência: PR anexado"
+      ]
+    }
+  ],
+  "scope": "172 perfis/17 squads e núcleo; fontes/outputs/contexto/distribuição/PR, sem produção ou remoção"
+}

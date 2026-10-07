@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-07-16T18:20:58.711Z'
-  entityCount: 818
+  lastUpdated: '2026-10-02T11:41:43.397Z'
+  entityCount: 819
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -352,6 +352,28 @@ entities:
         extensionPoints: []
       checksum: sha256:ae693cfcc6d824113b645d187130137b59fce43d03a8e0d8456b048a7ea00f71
       lastVerified: '2026-07-16T15:13:55.335Z'
+    framework-evolution-delivery:
+      path: bin/lib/framework-evolution-delivery.js
+      layer: L1
+      type: script
+      purpose: Entity at bin\lib\framework-evolution-delivery.js
+      keywords:
+        - framework
+        - evolution
+        - delivery
+      usedBy:
+        - global-provider-adapters
+      dependencies:
+        - global-provider-adapters
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:bf4907a802e2a3df76c37ede9fb10e1c2f9b65868b91af453565bdc37b7257a0
+      lastVerified: '2026-10-02T11:41:42.863Z'
     fs-utils:
       path: bin/lib/fs-utils.js
       layer: L1
@@ -413,9 +435,11 @@ entities:
         - provider
         - adapters
       usedBy:
+        - framework-evolution-delivery
         - install
         - update
       dependencies:
+        - framework-evolution-delivery
         - provider-contract
       externalDeps: []
       plannedDeps: []
@@ -424,8 +448,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:8ef8c460a68eda6cc43a191b6a2cffaec6fd4bcf71d7804fb6c478edc4c9603e
-      lastVerified: '2026-07-16T15:13:55.336Z'
+      checksum: sha256:c5c0c1961498b6822e53e557e7c53f51b307fe7f5466266f3be4586c9e4a7c36
+      lastVerified: '2026-10-02T08:24:29.184Z'
     header:
       path: bin/lib/header.js
       layer: L1

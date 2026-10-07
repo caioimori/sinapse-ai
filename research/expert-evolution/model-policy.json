@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-02T09:30:22.879Z",
+  "reviewExpiresAt": "2026-11-01T09:30:22.879Z",
+  "selectionPolicy": "Native availability permits use within existing authority; expertise promotion and replacement of a benchmarked baseline require independent task evaluation. Published API availability never proves account access. Opus is documentary market learning only in this evolution, per explicit user clarification.",
+  "models": [
+    {
+      "id": "gpt-6.1-sol",
+      "provider": "codex-native",
+      "status": "available",
+      "role": "Research, implementation and review in the current native runtime",
+      "availability": {
+        "validated": true,
+        "checkedAt": "2026-10-02T09:30:22.879Z",
+        "method": "Native enabled model catalog, configured current model and successful explicit-model subagent execution",
+        "evidence": [
+          {
+            "path": "research/expert-evolution/benchmark-protocol.json",
+            "sha256": "909a46da5adad0f9102ea4c9182fe03dd553b08938e25f6e9f964222f2ed4dc1"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-baseline-output.json",
+            "sha256": "9ce13afe2b765af872bca743e6aabc4c3de44256ef7e7896f2005becc646f7da"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-enriched-output.json",
+            "sha256": "fa66e24e250cdb43df8feff0f089c7a7657829c2ab6c15fbe67722d0db6b0e9c"
+          },
+          {
+            "path": "research/expert-evolution/benchmark-results.json",
+            "sha256": "e6bb3c4cc73b252558b0fa774838e3b3f40e6b3df292e16c8d061e25746837e8"
+          }
+        ],
+        "expiresAt": "2026-11-01T09:30:22.879Z",
+        "receipt": {
+          "path": "research/expert-evolution/native-availability-receipt.json",
+          "sha256": "d7241c97e69aa1b4a50e5966a4aa0a47080a6a93ccd1dc99ee91db94f6ca4887"
+        }
+      },
+      "evaluation": {
+        "passed": false,
+        "localBenchmark": true,
+        "scope": "10 reserved bounded decision scenarios, not all competencies or rendered deliverables",
+        "evidence": [
+          "research/expert-evolution/benchmark-results.json: enriched20/20, baseline18/20; independent reviewer with randomized labels",
+          "Separate fresh explicit-model native generators; one generation per case/variant; no statistical or causal gain claim",
+          "No global model replacement or expertise promotion"
+        ]
+      },
+      "apiId": null,
+      "apiIdNote": "This is the native Codex model ID. No public API alias is inferred.",
+      "contextPolicy": "Retrieve task-relevant bounded evidence; the full serialized capsule, including profile, must remain within the measured runtime budget.",
+      "accountScope": "current-codex-session"
+    },
+    {
+      "id": "claude-opus-5-5",
+      "provider": "anthropic-api",
+      "status": "published",
+      "role": "Market learning from official documentation only; no Anthropic API or inference required in this evolution",
+      "availability": {
+        "validated": false,
+        "checkedAt": "2026-10-02T09:30:22.879Z",
+        "method": "Official publication and model configuration documentation; no authenticated model execution in this task",
+        "evidence": [
+          "https://www.anthropic.com/claude-opus-5-5",
+          "https://www.anthropic.com/claude/opus",
+          "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        ]
+      },
+      "evaluation": {
+        "passed": false,
+        "localBenchmark": false,
+        "evidence": [
+          "Documentary market learning only: docs/framework/expert-evolution-2026-10/market-model-learning.json",
+          "No task execution or measured comparison requested for Opus"
+        ],
+        "status": "out-of-scope-execution"
+      },
+      "apiId": null,
+      "contextPolicy": "Large context is capacity, not an instruction to load the corpus. Apply selective retrieval and evidence locators.",
+      "scope": "market-learning-only",
+      "operationalUse": false,
+      "apiIdNote": "User clarified market research only on 2026-10-02; no execution credential or API comparison is requested"
+    },
+    {
+      "id": "jev-1.13.0",
+      "provider": "typesafe-api",
+      "status": "published",
+      "role": "Typed atomic judgments on retrieved evidence; never an author of the full creative output",
+      "availability": {
+        "validated": false,
+        "checkedAt": "2026-10-02T09:30:22.879Z",
+        "method": "Authenticated console playground responded with Jev1.13.0; no service API credential configured, no native-model availability receipt",
+        "evidence": [
+          "https://docs.typesafe.ai/models",
+          "docs/framework/evolution-2026-10/verification.md"
+        ]
+      },
+      "evaluation": {
+        "passed": false,
+        "localBenchmark": false,
+        "evidence": [
+          "Schema-valid real console response to10atomicjudgments; no held-out task-quality evaluation or model promotion"
+        ]
+      },
+      "apiId": "jev-1.13.0",
+      "contextPolicy": "Versioned atomic questions, evidence IDs, schema validation, reserved shared budget before every attempt, bounded requests and separate human authority.",
+      "accessObservation": {
+        "transport": "authenticated-console-playground",
+        "reportedModel": "jev-1.13.0",
+        "requests": 1,
+        "questions": 10,
+        "checkedAt": "2026-10-02T17:20:58.336Z",
+        "apiIntegration": false,
+        "receipt": "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.json"
+      }
+    }
+  ],
+  "futureModels": {
+    "defaultStatus": "candidate",
+    "requirements": [
+      "Official provider ID and documentation",
+      "Authenticated availability in the intended runtime",
+      "Independent reserved-case evaluation with baseline, pinned model and corpus",
+      "Regression, latency and cost criteria",
+      "Rollback to the prior available model"
+    ],
+    "automaticPromotion": false
+  },
+  "observationNote": "Timestamp of this policy snapshot; availability evidence was observed earlier in this same execution, not a new API probe."
+}

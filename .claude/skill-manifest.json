@@ -38,5 +38,8 @@
     "sinapse-ux-design-expert",
     "snps",
     "snps-orqx"
+  ],
+  "optionalSkillIds": [
+    "sinapse-project-expert"
   ]
 }

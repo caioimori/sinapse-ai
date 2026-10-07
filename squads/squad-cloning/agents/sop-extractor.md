@@ -56,6 +56,10 @@ Your memory is stored in `.claude/agent-memory/sop-extractor/MEMORY.md`.
 **Output:** Expected result
 ```
 
+## Tasks
+
+- extract-grounded-sop
+
 ## Completion Signal
 
 When done, output: `<promise>COMPLETE</promise>`
