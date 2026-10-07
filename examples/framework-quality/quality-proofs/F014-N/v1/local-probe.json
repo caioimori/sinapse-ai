@@ -1,0 +1,17 @@
+{
+  "caseId": "F014-N",
+  "observed": true,
+  "checks": [
+    "JSON parse",
+    "README links to MANIFEST.json and CHANGELOG.md exist",
+    "SHA-256 and bytes reconciled for actual delivered documentation"
+  ],
+  "files": [
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "totalBytes": 7386,
+  "assetReadback": "UNVERIFIED",
+  "originalGuideReadback": "UNVERIFIED",
+  "render": "UNVERIFIED"
+}

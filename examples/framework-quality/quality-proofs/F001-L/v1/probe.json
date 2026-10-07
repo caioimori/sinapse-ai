@@ -1,0 +1,112 @@
+{
+  "caseId": "F001-L",
+  "artifactSha256": "f0b4dce5a3113009aefaaded90d9a30883417abe2e8eb4f50479e78eb6807a7b",
+  "observedHookCount": 40,
+  "observedAdsCount": 15,
+  "observedScripts": [
+    "E15",
+    "E30",
+    "E45",
+    "C15",
+    "C30",
+    "C45",
+    "I15",
+    "I30",
+    "I45"
+  ],
+  "counts": [
+    {
+      "id": "A01",
+      "primaryCharacters": 83,
+      "headlineCharacters": 18,
+      "descriptionCharacters": 21
+    },
+    {
+      "id": "A02",
+      "primaryCharacters": 80,
+      "headlineCharacters": 18,
+      "descriptionCharacters": 13
+    },
+    {
+      "id": "A03",
+      "primaryCharacters": 61,
+      "headlineCharacters": 17,
+      "descriptionCharacters": 19
+    },
+    {
+      "id": "A04",
+      "primaryCharacters": 70,
+      "headlineCharacters": 21,
+      "descriptionCharacters": 20
+    },
+    {
+      "id": "A05",
+      "primaryCharacters": 60,
+      "headlineCharacters": 21,
+      "descriptionCharacters": 21
+    },
+    {
+      "id": "A06",
+      "primaryCharacters": 83,
+      "headlineCharacters": 17,
+      "descriptionCharacters": 19
+    },
+    {
+      "id": "A07",
+      "primaryCharacters": 62,
+      "headlineCharacters": 20,
+      "descriptionCharacters": 18
+    },
+    {
+      "id": "A08",
+      "primaryCharacters": 58,
+      "headlineCharacters": 18,
+      "descriptionCharacters": 21
+    },
+    {
+      "id": "A09",
+      "primaryCharacters": 78,
+      "headlineCharacters": 14,
+      "descriptionCharacters": 18
+    },
+    {
+      "id": "A10",
+      "primaryCharacters": 89,
+      "headlineCharacters": 23,
+      "descriptionCharacters": 20
+    },
+    {
+      "id": "A11",
+      "primaryCharacters": 88,
+      "headlineCharacters": 19,
+      "descriptionCharacters": 21
+    },
+    {
+      "id": "A12",
+      "primaryCharacters": 67,
+      "headlineCharacters": 18,
+      "descriptionCharacters": 20
+    },
+    {
+      "id": "A13",
+      "primaryCharacters": 71,
+      "headlineCharacters": 16,
+      "descriptionCharacters": 17
+    },
+    {
+      "id": "A14",
+      "primaryCharacters": 82,
+      "headlineCharacters": 13,
+      "descriptionCharacters": 18
+    },
+    {
+      "id": "A15",
+      "primaryCharacters": 72,
+      "headlineCharacters": 23,
+      "descriptionCharacters": 19
+    }
+  ],
+  "hookWordMaximum": 7,
+  "violations": [],
+  "scope": "Text inventory and Unicode lengths only; not device, render, platform approval, performance, legal review or semantic quality verdict."
+}

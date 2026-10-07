@@ -1,0 +1,32 @@
+{
+  "caseId": "F001-N",
+  "probe": "Native Node Unicode character counts and exact text presence",
+  "ads": [
+    {
+      "id": "meta-1",
+      "primaryChars": 130,
+      "headlineChars": 24,
+      "descriptionChars": 23,
+      "primaryWithin1000": true,
+      "headlineWithin40": true,
+      "descriptionWithin27": true,
+      "exactStringsPresent": true
+    },
+    {
+      "id": "meta-2",
+      "primaryChars": 131,
+      "headlineChars": 19,
+      "descriptionChars": 24,
+      "primaryWithin1000": true,
+      "headlineWithin40": true,
+      "descriptionWithin27": true,
+      "exactStringsPresent": true
+    }
+  ],
+  "groundingLocator": "generation-cases/F001-N.json#case.facts",
+  "recordingDuration": "UNVERIFIED",
+  "render": "UNVERIFIED",
+  "platformApproval": "UNVERIFIED",
+  "proofOfClient": "ABSENT",
+  "externalEffectsObserved": false
+}

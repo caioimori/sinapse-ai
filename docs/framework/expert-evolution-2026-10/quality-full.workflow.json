@@ -1,0 +1,195 @@
+{
+  "workflow_id": "WF-20261007-framework-quality-full",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Encerrar as pendências verificáveis nos 172 perfis, com provas e limites explícitos",
+  "inputs": [
+    "base6390d10c",
+    "fontebee125db",
+    "expert-profiles172",
+    "autorizaçãoCaio07.10"
+  ],
+  "outputs": [
+    "protocolo+matriz",
+    "avaliação344",
+    "respostaClaude",
+    "correções necessárias",
+    "PR/preservação/prévia"
+  ],
+  "acceptance": [
+    "TodosIDs ecasos alinhados àrubrica",
+    "Artefatos não confundidos comtextos",
+    "Claims fundamentados e fontes/HOME preservados"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "depends_on": [],
+      "owner": "devops",
+      "command_or_tool": "Revalidar PR417/6390 e preparar nova worktree/preservação",
+      "timeout_ms": 180000,
+      "max_attempts": 2,
+      "acceptance": [
+        "CI37SUCCESS e fontes/HOME/dirty preservados; autoria separada"
+      ],
+      "rollback": "Não modificar fontes; conservar artifacts",
+      "objective": "Revalidar PR417/6390 e preparar nova worktree/preservação",
+      "inputs": [
+        "base6390d10c + user authorization"
+      ],
+      "outputs": [
+        "T01 observed receipt"
+      ]
+    },
+    {
+      "task_id": "T02",
+      "depends_on": [
+        "T01"
+      ],
+      "owner": "research-orqx + quality-gate",
+      "command_or_tool": "Criar e auditar protocolo344 e matriz177/656 antes dosoutputs",
+      "timeout_ms": 1200000,
+      "max_attempts": 2,
+      "acceptance": [
+        "172IDs completos, fairness e hashes congelados, reviewer independente"
+      ],
+      "rollback": "Conservar versão rejeitada; nenhuma inferência antesdeaprovação",
+      "objective": "Criar e auditar protocolo344 e matriz177/656 antes dosoutputs",
+      "inputs": [
+        "T01"
+      ],
+      "outputs": [
+        "T02 observed receipt"
+      ]
+    },
+    {
+      "task_id": "T03",
+      "depends_on": [
+        "T02"
+      ],
+      "owner": "research-orqx / atores especializados",
+      "command_or_tool": "Gerar e revisar respostas/artefatos nominais e limites em contextos delimitados",
+      "max_iterations": 2,
+      "max_attempts": 2,
+      "acceptance": [
+        ">=90/100 e100%críticos por caso; completa exposição e falhas preservadas; provas de artefato distintas"
+      ],
+      "rollback": "Não promover fonte falha; preservar outputs originais",
+      "objective": "Gerar e revisar respostas/artefatos nominais e limites em contextos delimitados",
+      "inputs": [
+        "T02"
+      ],
+      "outputs": [
+        "T03 observed receipt"
+      ],
+      "timeout_ms": 14400000
+    },
+    {
+      "task_id": "T04",
+      "depends_on": [
+        "T01"
+      ],
+      "owner": "claude mastery + research-orqx",
+      "command_or_tool": "Diagnóstico documentado e uma chamada nativaClaude delimitada",
+      "timeout_ms": 300000,
+      "max_attempts": 1,
+      "acceptance": [
+        "Resposta útil contextual verificável, hooks/autoridade intactos, zeroJev/API Opus"
+      ],
+      "rollback": "Não repetir chamada emfalha; nenhum cambio global",
+      "objective": "Diagnóstico documentado e uma chamada nativaClaude delimitada",
+      "inputs": [
+        "T01"
+      ],
+      "outputs": [
+        "T04 observed receipt"
+      ]
+    },
+    {
+      "task_id": "T05",
+      "depends_on": [
+        "T03",
+        "T04"
+      ],
+      "owner": "squads especialistas + quality-gate",
+      "command_or_tool": "Reparar causas aprovadas e confirmar com casos precongelados/artefatos reais",
+      "max_iterations": 1,
+      "max_attempts": 1,
+      "acceptance": [
+        "Uma correção nominal por perfil; falhas originais preservadas, confirmação selada inédita, sem rebaixar critérios nem alegar provas ausentes"
+      ],
+      "rollback": "Branchrevert e fontebee preservada",
+      "objective": "Reparar causas aprovadas e confirmar com casos precongelados/artefatos reais",
+      "inputs": [
+        "T03, T04"
+      ],
+      "outputs": [
+        "T05 observed receipt"
+      ]
+    },
+    {
+      "task_id": "T06",
+      "depends_on": [
+        "T05"
+      ],
+      "owner": "devops",
+      "command_or_tool": "Gates proporcionais/commit/push/PR/CAS se necessário/readback/prévia",
+      "timeout_ms": 1200000,
+      "max_attempts": 2,
+      "acceptance": [
+        "Código/source provados, claims corretos, preservação e preview; sem produção"
+      ],
+      "rollback": "Snapshots/journal daCAS e branchrevert",
+      "objective": "Gates proporcionais/commit/push/PR/CAS se necessário/readback/prévia",
+      "inputs": [
+        "T05"
+      ],
+      "outputs": [
+        "T06 observed receipt"
+      ]
+    }
+  ],
+  "scope": "Autoria isolada framework-quality-full baseada em6390d10c; protocolo172/344 e evidências177/656; correções somente em caminhos não protegidos após aprovação; fontes instaladas/HOME preservados; sem produção, CI/global settings/hook changes ou Jev novo.",
+  "scopePlan": {
+    "root": "C:\\Users\\Caio Imori\\.codex\\worktrees\\framework-quality-full\\sinapse-ai",
+    "include": [
+      "docs/framework/expert-evolution-2026-10",
+      "docs/stories",
+      "research/expert-evolution",
+      "scripts/expert-evolution",
+      "examples/framework-quality",
+      "tests/expert-evolution/quality-full-*.test.cjs"
+    ],
+    "exclude": [
+      ".sinapse-ai/core/**",
+      ".sinapse-ai/constitution.md",
+      ".sinapse-ai/infrastructure/**",
+      "bin/sinapse*.js",
+      ".sinapse-ai/development/tasks/**",
+      ".sinapse-ai/development/templates/**",
+      ".sinapse-ai/development/checklists/**",
+      ".sinapse-ai/development/workflows/**",
+      "sources installed before this batch",
+      "global settings/hooks",
+      "CI configuration"
+    ]
+  },
+  "protocolBudget": {
+    "uniqueCases": 344,
+    "profiles": 172,
+    "nominalVersionsMaximum": 2,
+    "sealedBoundaryVersionsMaximum": 1,
+    "generatedOutputsMaximum": 516,
+    "globalWallTimeMs": 14400000,
+    "actorTimeoutMs": 180000,
+    "reviewCasesPerFreshBatchMaximum": 8,
+    "reviewOutputCharsPerCaseMaximum": 2500,
+    "correction": "At most one correction of a nominal artifact/profile; original failure preserved. Boundary remains sealed, one-shot and immutable.",
+    "maxSourcePackChars": 120000,
+    "maxExposureUtf8Bytes": 240000,
+    "maxArtifactSourceBytesPerCase": 262144,
+    "maxMediaBytesPerCase": 5242880,
+    "maxAllNewArtifactBytes": 104857600,
+    "minFreeBytesBeforeArtifactWrite": 268435456
+  }
+}

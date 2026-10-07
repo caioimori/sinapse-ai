@@ -61,8 +61,11 @@ function validateContracts(program,{root=DEFAULT_ROOT}={}){
   }catch(error){errors.push(error.message);}return {valid:errors.length===0,errors};
 }
 function getOperationalContract({root=DEFAULT_ROOT,agentId,command,target,resolvedBy,maxChars=2200,requireExecution=false}={}){
-  const current=state(root),agent=resolver.resolveCodexAgent(agentId,root),canonicalId=agent.agentId,program=loadContracts(root),c=program.contracts.find(c=>c.agentId===canonicalId);
-  if(program.schemaVersion!==1||program.expertisePromoted!==false)throw new Error('Invalid operational program');
+  const current=state(root),agent=resolver.resolveCodexAgent(agentId,root),canonicalId=agent.agentId,program=loadContracts(root);
+  if(program.schemaVersion!==1||program.expertisePromoted!==false||!Array.isArray(program.contracts))throw new Error('Invalid operational program');
+  const matches=program.contracts.filter(c=>c?.agentId===canonicalId);
+  if(matches.length!==1)throw new Error('Missing/ambiguous operational canonical contract '+canonicalId);
+  const c=matches[0];
   assertContract(c,buildContract(root,canonicalId,current));
   const authority=authorityForTask({root,agentId:canonicalId,command,target,resolvedBy,agent,index:current.index});
   if(requireExecution&&!authority.executionAuthorized&&!agent.isOrchestrator)throw new Error('Task authority requires delegation: '+canonicalId+':'+command+' -> '+(authority.delegateTo||'unresolved owner'));

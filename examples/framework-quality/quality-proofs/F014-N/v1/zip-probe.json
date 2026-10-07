@@ -1,0 +1,26 @@
+{
+  "caseId": "F014-N",
+  "zipMembers": [
+    {
+      "path": "README.md",
+      "bytes": 3282,
+      "sha256": "f4df280db524725859dcdacf28cde566fca101d7d9f60d74dabd05b02bc3a4f2",
+      "observedEqualToPrivateInput": true
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 352,
+      "sha256": "b1dab1471c77b71f624e25f9ff04a22921d05958661e808ce21547260354ed79",
+      "observedEqualToPrivateInput": true
+    },
+    {
+      "path": "MANIFEST.json",
+      "bytes": 3752,
+      "sha256": "75b776127d8742a4c2ca5f34ddc4235efd313daa198cd7ffc8b97a2853253dd8",
+      "observedEqualToPrivateInput": true
+    }
+  ],
+  "originalAssetMembers": 0,
+  "runtimeRender": "UNVERIFIED",
+  "qualityVerdict": "INDEPENDENT_REVIEW_PENDING"
+}

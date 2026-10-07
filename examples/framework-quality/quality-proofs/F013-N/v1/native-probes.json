@@ -1,0 +1,60 @@
+{
+  "caseId": "F013-N",
+  "method": "Native file/geometry probes; no browser/render/build",
+  "files": [
+    {
+      "name": "packaging-review.svg",
+      "bytes": 2397,
+      "sha256": "36b036605525d6e999b8b1aa499d568678922ef939484c071d6f5e2866d7a0de",
+      "activeOrExternalResource": false
+    },
+    {
+      "name": "packaging-artwork.svg",
+      "bytes": 1623,
+      "sha256": "3c4c5e3871c001efe47dab349ecb9588fa32462b6f386d274d7cb4b9cc4dedb7",
+      "activeOrExternalResource": false
+    },
+    {
+      "name": "packaging-concept-view.svg",
+      "bytes": 920,
+      "sha256": "0842b270cf4ada986d31d2d7b3db912088ac7d8c372964ca1ec19455b95f894b",
+      "activeOrExternalResource": false
+    },
+    {
+      "name": "production-guide.json",
+      "bytes": 4207,
+      "sha256": "16aaf95dc065908cb05e25d73c23cfc564b5eddd425f009e316207ae3fe0bffd",
+      "activeOrExternalResource": false
+    }
+  ],
+  "essentialBounds": [
+    {
+      "id": "product-name",
+      "value": "[NOME DO PRODUTO]",
+      "status": "PLACEHOLDER",
+      "conservativeBounds": {
+        "x": 63,
+        "y": 71,
+        "width": 72,
+        "height": 8
+      },
+      "insideProposedSafe": true
+    },
+    {
+      "id": "product-sku",
+      "value": "SKU: [PREENCHER]",
+      "status": "PLACEHOLDER",
+      "conservativeBounds": {
+        "x": 63,
+        "y": 89,
+        "width": 60,
+        "height": 7
+      },
+      "insideProposedSafe": true
+    }
+  ],
+  "physicalOutput": "UNVERIFIED",
+  "render": "UNVERIFIED",
+  "actualFontBounds": "UNVERIFIED",
+  "sourceDielineReconciliation": "UNVERIFIED"
+}

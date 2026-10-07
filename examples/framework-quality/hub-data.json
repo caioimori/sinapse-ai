@@ -216,8 +216,8 @@
       "id": "distribution",
       "title": "Uso, segurança e distribuição",
       "description": "Testes aprovados em Windows, macOS, Node 20/24 e cobertura. O npm corrigido foi instalado e exercitado; audit completo e segredos passaram. A instalação pessoal recebeu a fonte bee125db com arquivos e históricos preservados.",
-      "status": "Reparos técnicos e instalação concluídos; execução Claude limitada pelo orçamento",
-      "detail": "Claude Code reportou Sonnet 5.5, mas a única chamada terminou por orçamento sem resposta útil. Estimativa US$ 0,213404, distinta de fatura; não houve repetição nem uso adicional do JEV."
+      "status": "Reparos e instalação concluídos; nova decisão Claude delimitada aprovada",
+      "detail": "Histórico anterior: sem resposta por orçamento. Nova chamada sop-extractor/Sonnet 5.5: SOP de 873 caracteres aprovado por revisão independente de fontes, vetos e SLA; lista US$ 0,22873 sem fatura, zero tools/Jev/API Opus."
     }
   ],
   "squads": [
@@ -606,7 +606,7 @@
         "O protocolo, briefs, rubricas e cápsulas foram congelados antes das respostas. Cada condição e o reviewer receberam 20 casos integrais; 200 julgamentos foram verificados. A revisão foi congelada antes de abrir o mapa A/B.",
         "Dezoito casos passaram em ambos, um passou só no enriquecido e um falhou formalmente em ambos. O último exige um campo não explicitamente solicitado no briefing; a limitação e os escores originais foram conservados.",
         "Os atores foram configurados em GPT-6.1-sol/high; o backend efetivo não foi verificado independentemente. São decisões textuais de 17 representantes de squads e três do núcleo, sem prova causal/global ou de artefatos renderizados.",
-        "A disponibilidade Sonnet 5.5 foi observada no Claude CLI existente, mas a resposta foi suprimida pelo orçamento. Não houve retry ou novo Jev; estimativa de US$ 0,213404 não é confirmação de faturamento."
+        "Tentativa histórica anterior: Sonnet 5.5 no CLI, sem resposta por orçamento; lista US$ 0,213404, faturamento não confirmado. A nova chamada SOP recebeu revisão independente PASS, sem alterar os escores da comparação."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md",
@@ -621,7 +621,7 @@
         "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagens descrevem o acervo escrito; não são notas globais de competência.",
         "75 recortes externos foram observados em trechos delimitados: 29 + 18 + 28 nas três coortes. Os 238 contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda. Onze candidatos novos e 88 anteriores permanecem candidatos.",
         "A revisão independente aceitou 172 respostas escritas após 17 reparos em três ciclos. Os diagnósticos foram produzidos na mesma coorte, com modelo e contexto de tarefa compartilhados; não houve avaliação cega externa nem prova causal.",
-        "A comparação nova de 20 casos terminou com 19 aprovações no enriquecido e 18 na base; um item da rubrica excedia o brief. Leitura integral de livros e acompanhamento longitudinal continuam sem prova. A chamada Claude encerrou sem resposta; avaliação musical humana é opcional."
+        "A comparação nova de 20 casos terminou com 19 aprovações no enriquecido e 18 na base; um item da rubrica excedia o brief. Leitura integral de livros e acompanhamento longitudinal continuam sem prova. A tentativa Claude anterior não teve resposta; a nova chamada produziu um SOP delimitado aprovado por revisão independente. Ela não comprova execução dos 172 perfis; avaliação musical humana é opcional."
       ],
       "sources": [
         "research/expert-evolution/competence-packs/creative.json",
@@ -737,6 +737,19 @@
       "sources": [
         "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.md",
         "examples/framework-quality/transfer-filter/index.html"
+      ]
+    },
+    {
+      "id": "native-claude-quality-full",
+      "title": "Claude Code: decisão nativa delimitada",
+      "summary": "Uma chamada Sonnet 5.5 com SOP completo; fontes, vetos e lacunas conferidos independentemente.",
+      "paragraphs": [
+        "Uma chamada nativa sop-extractor recebeu 16.733 bytes completos e três fontes conferidas por hash. Claude Code reportou Sonnet 5.5/firstParty, configurado high: sucesso em 9.364ms, sem tools ou efeitos externos observados.",
+        "A resposta de 873 caracteres passou em revisão independente: E1/E2/E3 sustentam os passos, SKU divergente impede validação e revisão não autoriza publicação. O SLA ausente permaneceu uma lacuna; a prova não cobre os 172 agentes.",
+        "Uma chamada nova, sem retry, Jev ou API Opus; lista US$ 0,22873, sem fatura ou cobrança incremental comprovada. Sem prova de redução de cache, otimização ou ganho global; tentativa anterior sem resposta preservada."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/QUALITY-FULL-NATIVE-CLAUDE.json"
       ]
     }
   ],
@@ -938,11 +951,34 @@
     },
     "nativeClaude": {
       "attempts": 1,
-      "decisionObserved": false,
-      "status": "BUDGET_LIMIT_NO_RESPONSE",
+      "attemptScope": "New approved native call in quality-full wave",
+      "decisionObserved": true,
+      "status": "PASS_BOUNDED_NATIVE_CLAUDE_TEXTUAL_INSPECTION",
+      "nativeAgent": "sop-extractor",
       "reportedModel": "claude-sonnet-5-5",
-      "listEstimateUsd": 0.213404,
-      "estimateIsInvoice": false
+      "reportedProvider": "firstParty",
+      "configuredEffort": "high",
+      "elapsedMs": 9364,
+      "answerCharacters": 873,
+      "inputStdinBytes": 16733,
+      "sourceHashesMatched": 3,
+      "listEstimateUsd": 0.22873,
+      "estimateIsInvoice": false,
+      "billingConfirmed": false,
+      "tools": 0,
+      "extraJevCalls": 0,
+      "opusApiCalls": 0,
+      "globalExpertisePromotion": false,
+      "cacheOptimizationClaim": false,
+      "receipt": "docs/framework/expert-evolution-2026-10/QUALITY-FULL-NATIVE-CLAUDE.json",
+      "historicalAttempt": {
+        "attempts": 1,
+        "decisionObserved": false,
+        "status": "BUDGET_LIMIT_NO_RESPONSE",
+        "reportedModel": "claude-sonnet-5-5",
+        "listEstimateUsd": 0.213404,
+        "estimateIsInvoice": false
+      }
     }
   }
 }

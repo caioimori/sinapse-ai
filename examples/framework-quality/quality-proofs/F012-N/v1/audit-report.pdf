@@ -1,0 +1,213 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 3 /Kids [4 0 R 6 0 R 8 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 3999 >>
+stream
+BT /F1 9 Tf 12 TL 36 802 Td
+(# Auditoria de marca F012-N) Tj T*
+() Tj T*
+(Decisão formal: VETO DE ENTREGA por CTA essencial ilegível reportado em p3/390 px. Decisão pelos) Tj T*
+(limiares numéricos PENDENTE: brand consistency score NÃO CALCULÁVEL. Não houve inspeção dos assets) Tj T*
+(nem correção.) Tj T*
+() Tj T*
+(Contrato: audit-brand-full, owner brand-auditor. Fonte squads/squad-brand/tasks/audit-brand-full.md;) Tj T*
+(SHA b07004ba4b9d9c78a0e4287c19ccdf15b58939a8d67de45e0a63da3f4d46eb7b. Regra: Sora em títulos, Inter) Tj T*
+(no corpo, B&W. Fatos: generation-cases/F012-N.json#/case/facts.) Tj T*
+() Tj T*
+(F01: locator p1 / uso de Sora, generation-cases/F012-N.json#/case/facts [p1usaSora]. Severidade:) Tj T*
+(lacuna de evidência, não violação confirmada. Owner: brand-identity-designer \(Iris\). Confirmar) Tj T*
+(versão e função: Sora em título atende à família prescrita; no corpo deve mudar para Inter. Sem) Tj T*
+(concluir pelo nome da fonte isolado.) Tj T*
+() Tj T*
+(F02: locator p2 / uso de Inter, generation-cases/F012-N.json#/case/facts [p2Inter]. Severidade:) Tj T*
+(lacuna de evidência, não violação confirmada. Owner: brand-identity-designer \(Iris\). Inter no corpo) Tj T*
+(atende à família prescrita; em título deve mudar para Sora. Função, hierarquia e scale não foram) Tj T*
+(fornecidos.) Tj T*
+() Tj T*
+(F03: locator p3 / CTA em 390 px, generation-cases/F012-N.json#/case/facts [p3temCTAilegívelem390].) Tj T*
+(Severidade: CRÍTICA REPORTADA. Versão/região/coordenadas pendentes; não inventadas. Owner:) Tj T*
+(brand-identity-designer \(Iris\); apoio brand-system-architect \(Grid\) se o defeito for consumo do) Tj T*
+(sistema. Tornar CTA legível mantendo B&W e tipografia conforme função; inspecionar corte,) Tj T*
+(sobreposição, tamanho, peso e contraste. Causa raiz UNVERIFIED.) Tj T*
+() Tj T*
+(Critério de retorno F03: mesma peça e versão, screenshots antes/depois em 390 px e desktop, CTA) Tj T*
+(completo e legível e medições pertinentes. Nenhuma correção, entrega ao owner ou prova de percepção) Tj T*
+(foi executada. Encaminhamento aqui é contrato, não mensagem enviada.) Tj T*
+() Tj T*
+(R2: falha crítica não se dilui na média. Mesmo uma hipotética média >=85 não libera p3 enquanto o) Tj T*
+(CTA permanecer ilegível. Veto independente do score. Referência suplementar:) Tj T*
+(contexts/brand-auditor.json#/capsules/0/knowledge/competence/mechanisms/0, INFERRED/planned; não) Tj T*
+(demonstra expertise validada.) Tj T*
+() Tj T*
+(Checklist: todos os 32 itens revisados documentalmente abaixo. N/A não significa zero nem) Tj T*
+(conformidade; ausência de output impede nota 0-5 reproduzível. A nota 0/5 do subcheck CTA é limitada) Tj T*
+(ao fato reportado, sem representar a dimensão inteira.) Tj T*
+() Tj T*
+(01. Estratégia / Posicionamento | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(02. Estratégia / Arquétipo | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(03. Estratégia / Tom e exemplos | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(04. Estratégia / Manifesto | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(05. Estratégia / Brand architecture | nota N/A | UNVERIFIED | Output e medição não fornecidos.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(06. Estratégia / Personas | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(07. Estratégia / Estratégia-visual | nota N/A | UNVERIFIED | Output e medição não fornecidos.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(08. Visual / Paleta/hex | nota N/A | UNVERIFIED | B&W é regra fornecida; peças/hex ausentes.) Tj T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 3332 >>
+stream
+BT /F1 9 Tf 12 TL 36 802 Td
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(09. Visual / Tipografia/hierarquia/scale | nota N/A | UNVERIFIED | p1 usa Sora, p2 Inter; função do) Tj T*
+(texto e escala desconhecidas. Nenhum desvio comprovado. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(10. Visual / Logo | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(11. Visual / Espaçamento | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(12. Visual / Contraste AA | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(13. Visual / Consistência | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(14. Sistema / Tokens três níveis | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(15. Sistema / ARIA | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(16. Sistema / Grid/breakpoints | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(17. Sistema / Dark mode | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(18. Sistema / Responsividade | nota N/A | CRITICAL_REPORTED | p3 tem CTA ilegível em 390 px;) Tj T*
+(subcheck CTA 0/5 pelo fato reportado. Nota global do item desconhecida; sem inspeção de pixels.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(19. Sistema / Código | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(20. Produção / CMYK/DPI/bleed/safe zone | nota N/A | UNVERIFIED | Output e medição não fornecidos.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(21. Produção / RGB/resoluções | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(22. Produção / Templates | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(23. Produção / Mockups | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(24. Produção / Specs | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(25. Motion/áudio / Princípios | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(26. Motion/áudio / Easing | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(27. Motion/áudio / Durações | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 2277 >>
+stream
+BT /F1 9 Tf 12 TL 36 802 Td
+(28. Motion/áudio / 60fps | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(29. Motion/áudio / Reduced motion | nota N/A | UNVERIFIED | Output e medição não fornecidos.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(30. Motion/áudio / Coerência sonora | nota N/A | UNVERIFIED | Output e medição não fornecidos.) Tj T*
+(Locator: generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(31. Motion/áudio / Sincronismo | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(32. Motion/áudio / Exportações | nota N/A | UNVERIFIED | Output e medição não fornecidos. Locator:) Tj T*
+(generation-cases/F012-N.json#/case/facts) Tj T*
+() Tj T*
+(Score canônico = 0,30*Visual + 0,25*Strategic + 0,20*Technical + 0,15*Cross-channel +) Tj T*
+(0,10*Documentation, dimensões normalizadas 0-100. As cinco dimensões são N/A; score final NÃO) Tj T*
+(CALCULÁVEL. Não renormalizar pesos nem preencher ausência com zero. O mapeamento detalhado dos 32) Tj T*
+(itens para cinco dimensões não está especificado na fonte; declarar contrato antes do cálculo.) Tj T*
+() Tj T*
+(Lacunas: arquivos e versões p1/p2/p3; título/corpo; hex, tokens, brandbook completo; estratégia,) Tj T*
+(logo, print, motion e áudio; screenshots, percepção, dispositivo, build/runtime, medições e AT.) Tj T*
+(Numeric scoring integral exigido pela task não foi concluído. Dados insuficientes não autorizam) Tj T*
+(inventar notas nem aprovar.) Tj T*
+() Tj T*
+(Prova a executar pelo root: obter versões autoritativas; renderizar p3 em 390 px e desktop;) Tj T*
+(registrar screenshot locator e medições; reavaliar CTA e demais itens. Renderizar também o PDF) Tj T*
+(publicado audit-report.pdf para QA visual. Estado dessas provas UNVERIFIED.) Tj T*
+() Tj T*
+(Execução observada: sete arquivos completos lidos; relatório Markdown e PDF nativo gerados; somente) Tj T*
+(probe estrutural de PDF. Grounding: briefing sintético. Qualidade visual/percebida e conformidade) Tj T*
+(integral UNVERIFIED. Sem Git, rede, instalações, credenciais, produção, envio, pagamento ou remoção.) Tj T*
+(Fim F012-N.) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000350 00000 n 
+0000004401 00000 n 
+0000004527 00000 n 
+0000007911 00000 n 
+0000008037 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+10366
+%%EOF

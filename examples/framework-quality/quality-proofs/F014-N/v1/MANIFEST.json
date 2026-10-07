@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "caseId": "F014-N",
+  "version": "1.0.0",
+  "date": "2026-10-07",
+  "author": "brand-compiler",
+  "brandName": null,
+  "approver": null,
+  "status": "PARTIAL_DOCUMENTATION_ASSETS_UNVERIFIED",
+  "inputAssets": [
+    {
+      "declaredFile": "logo.svg",
+      "destinationProposed": "03-assets/logos/logo.svg",
+      "included": false,
+      "sha256": null,
+      "bytes": null,
+      "owner": null,
+      "status": "DECLARED_NOT_RECEIVED",
+      "rights": "Licença própria declarada; instrumento e titular não expostos.",
+      "sourceLocator": "generation-cases/F014-N.json#case.facts"
+    },
+    {
+      "declaredFile": "tokens.json",
+      "destinationProposed": "04-tokens/tokens.json",
+      "included": false,
+      "sha256": null,
+      "bytes": null,
+      "owner": null,
+      "status": "DECLARED_NOT_RECEIVED",
+      "rights": "Direitos não especificados.",
+      "sourceLocator": "generation-cases/F014-N.json#case.facts"
+    },
+    {
+      "declaredFile": "guia.md",
+      "destinationProposed": "08-guidelines/guia.md",
+      "included": false,
+      "sha256": null,
+      "bytes": null,
+      "owner": null,
+      "status": "DECLARED_NOT_RECEIVED",
+      "rights": "Direitos não especificados; classificação provisória.",
+      "sourceLocator": "generation-cases/F014-N.json#case.facts"
+    },
+    {
+      "declaredFile": "fonte",
+      "destinationProposed": "05-fonts/ (nome/extensão a confirmar)",
+      "included": false,
+      "sha256": null,
+      "bytes": null,
+      "owner": null,
+      "status": "WITHHELD_LICENSE_PENDING_AND_BYTES_ABSENT",
+      "rights": "Licença não anexada; redistribuição não liberada.",
+      "sourceLocator": "generation-cases/F014-N.json#case.facts"
+    }
+  ],
+  "deliveredFiles": [
+    {
+      "path": "README.md",
+      "destination": "README.md",
+      "bytes": 3282,
+      "sha256": "f4df280db524725859dcdacf28cde566fca101d7d9f60d74dabd05b02bc3a4f2",
+      "owner": "brand-compiler",
+      "status": "WRITTEN_LOCAL_SYNTHETIC_DOCUMENTATION"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "destination": "CHANGELOG.md",
+      "bytes": 352,
+      "sha256": "b1dab1471c77b71f624e25f9ff04a22921d05958661e808ce21547260354ed79",
+      "owner": "brand-compiler",
+      "status": "WRITTEN_LOCAL_SYNTHETIC_DOCUMENTATION"
+    }
+  ],
+  "selfIntegrity": {
+    "path": "MANIFEST.json",
+    "sha256": null,
+    "reason": "Hash e bytes do manifesto ficam no recibo externo de artefato, evitando autorreferência."
+  },
+  "archiveIntegrity": {
+    "path": "delivery-documentation-v1.0.0.zip",
+    "sha256": null,
+    "reason": "Hash e bytes do ZIP ficam no recibo externo; manifesto não afirma conter ZIP."
+  },
+  "requirements": {
+    "R1": "Documentação entregue inventariada; hashes dos quatro insumos null pois bytes ausentes.",
+    "R2": "README aponta arquivos documentais reais; destinos de ativos explicitamente propostos. Links de guia.md não observados.",
+    "R3": "Licença própria do logo declarada; licença da fonte ausente e redistribuição bloqueada."
+  },
+  "gaps": [
+    "Nenhum byte dos insumos foi exposto.",
+    "Nome/extensão da fonte e conteúdo do guia ausentes.",
+    "Audit report APPROVED não fornecido.",
+    "Dez pastas com conteúdo real não disponíveis; package completo não estabelecido.",
+    "Perfil planned/validatedExpertise=false; referências READ não são expertise validada.",
+    "Qualidade percebida, render/dispositivo/build/AT UNVERIFIED."
+  ],
+  "sourceLocators": [
+    "generation-cases/F014-N.json#case.facts",
+    "generation-cases/F014-N.json#case.requirements",
+    "sources/ce79b22c53ecb68b605c87f848f22ff29d3bef23ab0b17ad3b3c39dc22ed9761.json#text",
+    "contexts/brand-compiler.json#capsules[0].profile"
+  ]
+}

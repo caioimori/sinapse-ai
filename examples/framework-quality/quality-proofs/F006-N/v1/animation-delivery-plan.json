@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "caseId": "F006-N",
+  "deliverableId": "animation-delivery-plan",
+  "author": "animations-orqx",
+  "status": "ROUTING_CONTRACT_ONLY",
+  "objective": "Filtro com transição, partículas exclusivamente decorativas e redução de movimento. Brief antes da execução; owners separados, provas visuais/device e no máximo duas iterações.",
+  "scope": {
+    "classification": "compound: micro-interaction + decorative generative particles",
+    "workflow": "prompt-to-animation",
+    "basis": "Tipos e workflows declarados em orchestrate-animation-project.md#Pipeline de Decisao",
+    "noSceneOrShaderAssumed": true,
+    "executionObserved": false,
+    "delegationObserved": false,
+    "productionAuthorized": false
+  },
+  "grounding": [
+    {
+      "id": "case",
+      "locator": "generation-cases/F006-N.json#case.brief; case.requirements; case.facts",
+      "sha256": "450a08cb335e78635b2370206121a000845391ca4e849533723e5121d78af8d8"
+    },
+    {
+      "id": "canonical",
+      "locator": "sources/d0981964a64342e77e02204a9800d2523bdab4ea5e4fdcec049196a92a33ca8a.json#text: Delegacao; Criterios de Qualidade; NON-NEGOTIABLE",
+      "sha256": "597a10e45a9b24e82519da105d7a78016be93e5b4c6a1ac3902c140b6c5d405c"
+    },
+    {
+      "id": "task",
+      "locator": "sources/c97175c46240a4df8791da0869932e3692629aa1a8dab8184030a92843f2a881.json#text: Entrada; Saida; Checklist; Pipeline de Decisao",
+      "sha256": "7b04d6f40fcc22141bae03931a40b25fa04e02f22adab25aa1db076719e245a6"
+    },
+    {
+      "id": "authority",
+      "locator": "sources/ce97f20a547a8b0f57bd8150cd68512aa2b0e9d756afa4a6911496750253f7b9.json#text: Agents; Delegation Rules",
+      "sha256": "376caca5ac9c87f956a23000782fb9d54fc18b5ae7400adbb638a1ee90c484ba"
+    },
+    {
+      "id": "limits",
+      "locator": "contexts/animations-orqx.json#capsules[0].knowledge; profile; operational",
+      "sha256": "68d7fec0f2b556861427411011ea2de757737df5783a8eb8a7b296aa78018a38"
+    }
+  ],
+  "taskContract": {
+    "command": "orchestrate-animation-project",
+    "canonicalTarget": "squads/squad-animations/tasks/orchestrate-animation-project.md",
+    "owner": "animations-orqx",
+    "authorityMode": "delegate",
+    "executionAuthorized": false,
+    "output": "execution_plan",
+    "otherTaskCommands": [],
+    "specialistCommandsStatus": "UNVERIFIED: a exposição declara papéis/rotas, mas não contém tasks executáveis dos especialistas; resolver e ler os alvos reais antes de dispatch. Não inventar comandos."
+  },
+  "preconditions": [
+    "O pedido ainda não informa superfície, stack, estados do filtro, dataset, referência visual, dispositivos nem orçamento de partículas. Encaminhar primeiro a animation-interpreter.",
+    "Nenhum código neste contrato. Implementação posterior exige story associada validada >= Ready; a story não foi exposta e permanece UNVERIFIED.",
+    "Partículas não carregam informação, não são controles e não interferem no filtro. Filtragem funcional continua disponível com movimento reduzido ou sem efeito.",
+    "Não pressupor GSAP, Three.js, React Bits ou instalação; selecionar a menor implementação compatível com a stack verificada."
+  ],
+  "assignments": [
+    {
+      "id": "A1",
+      "owner": "animation-interpreter",
+      "dependsOn": [],
+      "routeBasis": "canonical: prompt vago -> animation-interpreter primeiro",
+      "command": null,
+      "input": "brief literal, requisitos R1-R3 e gaps de contexto",
+      "output": "animation_brief: superfície/stack verificadas, estados do filtro inclusive vazio, referência/feeling, política reduced-motion, devices e orçamento; separar fatos de decisões propostas",
+      "acceptance": "Brief completo antes de A2/A3; nenhum requisito novo sem vínculo ao objetivo",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A2",
+      "owner": "motion-choreographer",
+      "dependsOn": [
+        "A1"
+      ],
+      "routeBasis": "canonical: timing/easing/coreografia",
+      "command": null,
+      "input": "animation_brief",
+      "output": "motion_spec: momentos da troca do filtro, entrada/saída, timing/easing, relação com partículas e alternativa sem movimento; valores são propostas até revisão",
+      "acceptance": "Um contrato de movimento compartilhado, sem alterar semântica do filtro",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A3",
+      "owner": "ux-design-expert",
+      "dependsOn": [
+        "A1"
+      ],
+      "routeBasis": "AGENTS: UX/UI, design e acessibilidade; cross-squad via sinapse-orqx",
+      "command": null,
+      "input": "animation_brief e estados funcionais",
+      "output": "interaction_a11y_spec: teclado/foco, estados de seleção/vazio e comunicação de resultados; partículas excluídas da árvore acessível e interação; alternativa reduced-motion",
+      "acceptance": "Mudança de movimento não bloqueia uso nem compreensão; revisão humana/AT ainda requerida",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A4",
+      "owner": "css-motion-artist",
+      "dependsOn": [
+        "A2",
+        "A3"
+      ],
+      "routeBasis": "canonical: CSS micro-interaction/transição",
+      "command": null,
+      "input": "motion_spec + interaction_a11y_spec + stack verificada",
+      "output": "filter_transition_motion isolado, com cleanup e caminho sem movimento",
+      "ownership": "Somente módulo de movimento da transição; não editar módulo de partículas nem lógica do filtro",
+      "acceptance": "Respeitar reduced-motion; evitar movimento desnecessário e garantir resposta estável em mudanças rápidas",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A5",
+      "owner": "generative-particle-engineer",
+      "dependsOn": [
+        "A2",
+        "A3"
+      ],
+      "routeBasis": "canonical: sistemas de partículas",
+      "command": null,
+      "input": "mesma motion_spec, paleta/contexto e orçamento aprovados",
+      "output": "decorative_particles isolado; efeito desativável e sem dependência da filtragem",
+      "ownership": "Somente módulo de partículas; não editar transição ou lógica do filtro",
+      "acceptance": "Decorativo, sem captura de pointer/foco; sem loop de movimento em reduced-motion; cap de partículas verificado pelo orçamento, sem inventar contagem",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A6",
+      "owner": "developer",
+      "dependsOn": [
+        "A4",
+        "A5"
+      ],
+      "routeBasis": "AGENTS: integração/código de aplicação -> developer; cross-squad via sinapse-orqx",
+      "command": null,
+      "input": "módulos dos owners, specs A2/A3, código vizinho e story validada",
+      "output": "integração local funcional, locator da versão e evidência de troca do filtro com efeitos ativos/inativos",
+      "ownership": "Lógica funcional e ponto de integração; preservar propriedade dos módulos de movimento",
+      "acceptance": "Resultados corretos, foco preservado, cenário vazio e trocas rápidas; cleanup ao desmontar; sem publicação",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A7",
+      "owner": "animation-performance-engineer",
+      "dependsOn": [
+        "A6"
+      ],
+      "routeBasis": "canonical: Benchmark obrigatório antes da entrega",
+      "command": null,
+      "input": "artefato integrado, devices identificados e orçamento do brief",
+      "output": "trace/perfil, gravações, screenshots e relatório de limitações com versão e dispositivo",
+      "acceptance": "Medir 60fps desktop e >=30fps mobile; screenshot não prova fps; ausência de hardware/trace permanece UNVERIFIED",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A8",
+      "owner": "quality-gate",
+      "dependsOn": [
+        "A7"
+      ],
+      "routeBasis": "AGENTS + Constitution: verdicts de qualidade reservados ao quality-gate",
+      "command": null,
+      "input": "artefato integrado, evidências A6/A7, specs e critérios abaixo",
+      "output": "revisão independente com verdict, gaps e owners dos ajustes",
+      "acceptance": "Distinguir grounding, execução e qualidade percebida; nenhum verdict produzido por animations-orqx",
+      "dispatchStatus": "NOT_DISPATCHED"
+    },
+    {
+      "id": "A9",
+      "owner": "animations-orqx",
+      "dependsOn": [
+        "A8"
+      ],
+      "routeBasis": "canonical: coordenação/coerência/compilação",
+      "command": "orchestrate-animation-project",
+      "input": "outputs dos owners + revisão independente",
+      "output": "relatório consolidado com locators, discrepâncias e pendências",
+      "acceptance": "Reconciliar seis critérios; não transformar relato de colega em prova nem autorizar publish",
+      "dispatchStatus": "NOT_DISPATCHED"
+    }
+  ],
+  "schedule": {
+    "waves": [
+      [
+        "A1"
+      ],
+      [
+        "A2",
+        "A3"
+      ],
+      [
+        "A4",
+        "A5"
+      ],
+      [
+        "A6"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A8"
+      ],
+      [
+        "A9"
+      ]
+    ],
+    "parallelismCeiling": 2,
+    "independence": "A2/A3 entregam specs separadas depois do brief; A4/A5 só começam com ambas as specs e editam módulos distintos. Integração e auditoria são sequenciais.",
+    "resources": "Um intérprete, um coreógrafo, um designer de acessibilidade, dois implementadores de movimento, um integrador, um auditor de performance e um revisor; papéis em ondas, sem exigir nove workers simultâneos.",
+    "timeline": "Sete ondas lógicas. Estimativa em horas/datas UNVERIFIED até confirmar stack, assets, escopo e disponibilidade de devices; não é prazo prometido."
+  },
+  "reviewGates": [
+    {
+      "criterion": "visual",
+      "requirements": [
+        "R2"
+      ],
+      "method": "Reprodução/gravação da transição e partículas; comparar com feeling/referência do brief, review perceptual explícito",
+      "evidenceLocator": "future: A7.visualCapture + A8.perceptualReview",
+      "status": "UNVERIFIED"
+    },
+    {
+      "criterion": "technical",
+      "requirements": [
+        "R2",
+        "R3"
+      ],
+      "method": "Revisar modularidade, cleanup, limite de recursos, integração e validar testes focais/lint/typecheck/build aplicáveis pela equipe executora",
+      "evidenceLocator": "future: A6.validationReceipt + A8.codeReview",
+      "status": "UNVERIFIED"
+    },
+    {
+      "criterion": "performance",
+      "requirements": [
+        "R2"
+      ],
+      "method": "Trace de playback durante filtro + partículas no desktop/mobile real identificado: 60fps desktop e >=30fps mobile; registrar quedas e recursos",
+      "evidenceLocator": "future: A7.deviceTrace",
+      "status": "UNVERIFIED"
+    },
+    {
+      "criterion": "accessibility",
+      "requirements": [
+        "R2"
+      ],
+      "method": "Normal/reduced-motion, teclado/foco, leitura dos resultados com AT, partículas decorativas ignoradas; redução desliga movimentos decorativos e preserva filtragem",
+      "evidenceLocator": "future: A7.motionModes + A8.keyboardATReceipt",
+      "status": "UNVERIFIED"
+    },
+    {
+      "criterion": "responsiveness",
+      "requirements": [
+        "R2"
+      ],
+      "method": "Screenshots 390px/1440px, sem overflow; orientação/touch/layout no dispositivo. Viewport emulado não equivale a mobile físico",
+      "evidenceLocator": "future: A7.viewportScreenshots + A7.deviceReceipt",
+      "status": "UNVERIFIED"
+    },
+    {
+      "criterion": "cohesion",
+      "requirements": [
+        "R2"
+      ],
+      "method": "Playback integrado verifica timing compartilhado, hierarquia do filtro e decoração discreta; coesão não decorre da soma de pareceres isolados",
+      "evidenceLocator": "future: A8.integratedPlaybackReview",
+      "status": "UNVERIFIED"
+    }
+  ],
+  "boundedLoop": {
+    "maxIterations": 2,
+    "unit": "Um ciclo integrado de entrega, evidência, revisão e ajustes por owner; teto global, não duas iterações por agente.",
+    "beforeIteration": "Contabilizar ciclo e conservar locators/versão de todas as provas.",
+    "stopOn": "Objetivo comprovado pelos owners/revisor OU duas iterações OU fonte/autoridade/story/device bloqueador.",
+    "afterCeiling": "Entregar gaps e encaminhamento com owner; sem terceira tentativa, sem afirmar pronto e sem mexer em infraestrutura.",
+    "reducedMotionFailure": "Bloquear fechamento, devolver ao owner responsável dentro do teto; não remover o requisito."
+  },
+  "traceability": [
+    {
+      "requirement": "R1",
+      "locators": [
+        "taskContract",
+        "preconditions[0]",
+        "assignments[A1..A9].routeBasis",
+        "schedule"
+      ],
+      "grounding": "Contrato aponta somente IDs expostos e comando declarado; tasks dos executores precisam resolução futura.",
+      "execution": "NOT_DISPATCHED"
+    },
+    {
+      "requirement": "R2",
+      "locators": [
+        "reviewGates",
+        "assignments[A7..A8]"
+      ],
+      "grounding": "Seis critérios e metas canônicas preservados; provas ausentes diferenciadas.",
+      "execution": "UNVERIFIED",
+      "domainQuality": "UNVERIFIED"
+    },
+    {
+      "requirement": "R3",
+      "locators": [
+        "scope",
+        "schedule",
+        "boundedLoop",
+        "assignments[A4..A6].ownership"
+      ],
+      "grounding": "Owners separados, dependências, teto dois e ausência de código/publicação.",
+      "execution": "Nenhuma delegação ou implementação realizada neste caso."
+    }
+  ],
+  "gaps": [
+    "Surface/stack/source UI, dataset e referência não expostos",
+    "Story validada não exposta",
+    "Tasks dos especialistas não expostas; papel declarado não prova comando resolvido",
+    "Playback/render, percepção visual, device, fps, AT, build e integração UNVERIFIED",
+    "Contexto de expertise planned/CANDIDATE/READ não prova especialização validada; knowledge.items vazio e coverage=gap",
+    "Sem referência externa observada nesta execução; nenhum asset externo reutilizado"
+  ],
+  "nextHandoff": {
+    "to": "root",
+    "artifact": "examples/framework-quality/quality-proofs/F006-N/v1/animation-delivery-plan.json",
+    "action": "Inspecionar contrato; se houver execução posterior autorizada, rotear primeiro A1 e resolver tasks dos especialistas reais antes de dispatch. A execução do harness atual não autoriza simular provas.",
+    "requiredProof": "Versão renderizável/locator, playback integrado, screenshots 390/1440, trace desktop/mobile identificado, teclado/AT e reduced-motion; todos ausentes agora."
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "caseId": "F012-N",
+  "findingsCount": 3,
+  "checklist": [
+    {
+      "id": 1,
+      "category": "Estratégia",
+      "label": "Posicionamento",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 2,
+      "category": "Estratégia",
+      "label": "Arquétipo",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 3,
+      "category": "Estratégia",
+      "label": "Tom e exemplos",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 4,
+      "category": "Estratégia",
+      "label": "Manifesto",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 5,
+      "category": "Estratégia",
+      "label": "Brand architecture",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 6,
+      "category": "Estratégia",
+      "label": "Personas",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 7,
+      "category": "Estratégia",
+      "label": "Estratégia-visual",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 8,
+      "category": "Visual",
+      "label": "Paleta/hex",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "B&W é regra fornecida; peças/hex ausentes."
+    },
+    {
+      "id": 9,
+      "category": "Visual",
+      "label": "Tipografia/hierarquia/scale",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "p1 usa Sora, p2 Inter; função do texto e escala desconhecidas. Nenhum desvio comprovado."
+    },
+    {
+      "id": 10,
+      "category": "Visual",
+      "label": "Logo",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 11,
+      "category": "Visual",
+      "label": "Espaçamento",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 12,
+      "category": "Visual",
+      "label": "Contraste AA",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 13,
+      "category": "Visual",
+      "label": "Consistência",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 14,
+      "category": "Sistema",
+      "label": "Tokens três níveis",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 15,
+      "category": "Sistema",
+      "label": "ARIA",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 16,
+      "category": "Sistema",
+      "label": "Grid/breakpoints",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 17,
+      "category": "Sistema",
+      "label": "Dark mode",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 18,
+      "category": "Sistema",
+      "label": "Responsividade",
+      "score": null,
+      "status": "CRITICAL_REPORTED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "p3 tem CTA ilegível em 390 px; subcheck CTA 0/5 pelo fato reportado. Nota global do item desconhecida; sem inspeção de pixels."
+    },
+    {
+      "id": 19,
+      "category": "Sistema",
+      "label": "Código",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 20,
+      "category": "Produção",
+      "label": "CMYK/DPI/bleed/safe zone",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 21,
+      "category": "Produção",
+      "label": "RGB/resoluções",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 22,
+      "category": "Produção",
+      "label": "Templates",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 23,
+      "category": "Produção",
+      "label": "Mockups",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 24,
+      "category": "Produção",
+      "label": "Specs",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 25,
+      "category": "Motion/áudio",
+      "label": "Princípios",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 26,
+      "category": "Motion/áudio",
+      "label": "Easing",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 27,
+      "category": "Motion/áudio",
+      "label": "Durações",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 28,
+      "category": "Motion/áudio",
+      "label": "60fps",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 29,
+      "category": "Motion/áudio",
+      "label": "Reduced motion",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 30,
+      "category": "Motion/áudio",
+      "label": "Coerência sonora",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 31,
+      "category": "Motion/áudio",
+      "label": "Sincronismo",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    },
+    {
+      "id": 32,
+      "category": "Motion/áudio",
+      "label": "Exportações",
+      "score": null,
+      "status": "UNVERIFIED",
+      "evidence": "generation-cases/F012-N.json#/case/facts",
+      "note": "Output e medição não fornecidos."
+    }
+  ],
+  "score": null,
+  "decision": "DELIVERY_VETO_CRITICAL_REPORTED"
+}
