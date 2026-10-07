@@ -45,6 +45,13 @@ describe('framework evolution distribution into isolated destinations', () => {
     for (const id of ['developer', 'ad-copywriter', 'snps-orqx']) fs.writeFileSync(path.join(commandDir, `${id}.md`), `---\nname: ${id}\ndescription: Canonical test stub\n---\nRead canonical source.\n`);
     const delivered = deliverGlobalProviderAdapters({ llmChoice: 'both', home, commandsDir: commandDir,frameworkEvolutionPackageRoot:packageFixture });
     expect(delivered.frameworkEvolution.status).toBe('delivered');
+    const installedReferences=JSON.parse(fs.readFileSync(path.join(installed,'research/expert-evolution/source-program.json'))).references;
+    for(const original of references.filter(reference=>reference.sourceScope==='local-contract')){
+      const translated=installedReferences.find(reference=>reference.id===original.id);
+      expect(translated).toEqual({...original,sourceRef:{...original.sourceRef,path:installedPath(original.sourceRef.path)}});
+      expect(digest(fs.readFileSync(path.join(installed,translated.sourceRef.path)))).toBe(original.sourceRef.sha256);
+    }
+    expect(fs.existsSync(path.join(installed,'.sinapse-ai'))).toBe(false);
     for (const entry of delivered.frameworkEvolution.files) expect(digest(fs.readFileSync(path.join(installed, entry.path)))).toBe(entry.sha256);
     const toml = fs.readFileSync(path.join(home, '.codex/agents/developer.toml'), 'utf8');
     const instruction = JSON.parse(toml.match(/^developer_instructions = (.+)$/m)[1]);

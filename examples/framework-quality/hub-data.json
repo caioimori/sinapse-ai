@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "snapshot": {
     "date": "2026-10-07",
-    "scope": "172 respostas escritas revisadas; integração e instalação pessoal conferidas por recuperação offline; PR #416 aberta, sem produção",
+    "scope": "Reparos revisados; PR #417 com segredos, audit e análise de código aprovados; falhas remotas residuais em correção",
     "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
   },
   "metrics": {
@@ -31,9 +31,9 @@
     "reviewedDiagnosticResponses": 172
   },
   "deployment": {
-    "local": "172 respostas escritas aceitas no escopo diagnóstico; 17 reparos em três ciclos",
-    "installed": "Fonte 104c516d instalada e conferida — Codex e Claude Code; 42 contextos offline, sem inferência nativa",
-    "published": "Branch enviada e PR #416 aberta; prévia local disponível, sem produção"
+    "local": "Reparos revisados; comparação cega escrita concluída: enriquecido19/20, baseline18/20",
+    "installed": "Fonte 104c516d preservada — Codex e Claude Code; 42 contextos offline; atualização nova aguarda CAS",
+    "published": "PR #417: segredos, audit e análise de código aprovados; testes residuais em correção; sem produção"
   },
   "deliverables": [
     {
@@ -168,7 +168,7 @@
       "title": "Jev e créditos",
       "description": "Onze chamadas novas produziram 179 juízos de apoio: 172 respostas diagnósticas e sete afirmações da referência visual. Revisão nativa e Jev receberam entradas e perguntas diferentes.",
       "status": "Apoio de revisão dentro do teto; sem comparação entre modelos",
-      "detail": "13 chamadas acumuladas: custo calculado US$ 0,003803184, reserva US$ 0,034944 e teto US$ 0,05. Não é conciliação de fatura nem aprovação automática."
+      "detail": "13 chamadas acumuladas: custo calculado US$ 0,003803184, reserva US$ 0,034944 e teto US$ 0,05. Zero chamada adicional neste lote; não é conciliação de fatura."
     },
     {
       "id": "opus",
@@ -187,23 +187,23 @@
     {
       "id": "av",
       "title": "Revisão audiovisual",
-      "description": "Lume e motion passaram no replay atual. O Reel de 18 segundos foi inteiramente decodificado; a reprodução observada é parcial e a audição humana da trilha permanece pendente.",
-      "status": "Audição humana pendente",
-      "detail": "18 segundos e 540 quadros decodificados. Player observado até 12,769 segundos; sem áudio ouvido ou aprovação audiovisual total."
+      "description": "O Reel de 18 segundos reproduziu continuamente do início ao fim, sem pausa, salto ou erro. A trilha tem avaliação musical humana opcional; ela não bloqueia a melhoria do framework.",
+      "status": "Reprodução técnica integral conferida",
+      "detail": "18 segundos e 540 quadros decodificados; player observado com intervalo reproduzido [0,18] e ended=true. Nenhuma audição humana alegada."
     },
     {
       "id": "expertise",
       "title": "Especialização",
-      "description": "172 respostas escritas aceitas após 17 reparos em três ciclos. Os casos foram criados e respondidos na mesma coorte; a revisão independente tem escopo diagnóstico, sem avaliação cega externa.",
+      "description": "172 respostas diagnósticas foram aceitas após 17 reparos em três ciclos. A nova comparação cega avaliou 20 representantes em sessões separadas; é uma evidência adicional escrita, sem validação global de cada agente.",
       "status": "Revisão escrita concluída; expertise global não comprovada",
-      "detail": "409 mecanismos, 344 modelos de decisão e 635 critérios. Transferência longitudinal e benchmark cego completo continuam pendentes."
+      "detail": "409 mecanismos, 344 modelos de decisão e 635 critérios. Expertise global e acompanhamento longitudinal conservam provas próprias."
     },
     {
       "id": "causal",
       "title": "Ganho de qualidade",
-      "description": "Os 172 casos novos são respostas contemporâneas da própria coorte. Eles permitem diagnosticar mecanismos e limites escritos; não são um experimento cego ou uma prova de melhora causal.",
-      "status": "Sem prova causal de ganho",
-      "detail": "Replay e revisão cega dos seis pares pertencem ao histórico de 02.10; não validam os 172 perfis desta onda."
+      "description": "A comparação cega reservada aprovou 19 de 20 respostas com os perfis novos e 18 com a base. Geradores separados e reviewer receberam os 20 casos completos; os escores foram congelados antes de abrir os rótulos.",
+      "status": "Comparação escrita concluída; resultado limitado à amostra",
+      "detail": "Um caso melhorou em rollback observável. Um critério exigia ticket não solicitado explicitamente no briefing; o resultado formal foi preservado, sem reavaliação ou extrapolação para os 172 agentes."
     },
     {
       "id": "folders",
@@ -214,10 +214,10 @@
     },
     {
       "id": "distribution",
-      "title": "Uso e distribuição",
-      "description": "A extensão pessoal foi atualizada e conferida no Codex e no Claude Code. Foram lidos 42 contextos offline: 21 agentes em dois projetos vinculados, preservando critérios, vetos e autoridade.",
-      "status": "Instalação pessoal e recuperação offline conferidas",
-      "detail": "As entradas dos dois ambientes são byte-equivalentes. Inferência nativa no Claude, execução dos 172 agentes e produção não foram observadas."
+      "title": "Uso, segurança e distribuição",
+      "description": "Os reparos passaram na revisão independente. Segredos, audit e análise de código passaram na nova PR. Restaram quatro falhas no Node 24 e sete no Mac; caminhos e validação da instalação estão em correção.",
+      "status": "Segurança remota aprovada no escopo; testes residuais em correção",
+      "detail": "Claude Code reportou Sonnet 5.5, mas a única chamada terminou por orçamento sem resposta útil. Estimativa US$ 0,213404, distinta de fatura; não houve repetição nem uso adicional do JEV."
     }
   ],
   "squads": [
@@ -585,6 +585,35 @@
   ],
   "evidence": [
     {
+      "id": "pending-repairs",
+      "title": "Reparos desta etapa",
+      "summary": "Revisão independente, navegação e reprodução integral conferidas; validação remota em curso.",
+      "paragraphs": [
+        "Dezessete arquivos de testes passaram a representar os contratos atuais, mantendo negativos de autoridade, orçamento e tamanho. Sintaxe, lint focal e probes delimitados passaram; resultados completos dependem dos checks remotos por versão.",
+        "Revisão independente: sete cenários de leitura/escrita e 12 checks do limite de árvores passaram. O audit de produção remoto passou; a árvore completa ainda teve nove avisos em e7, reduzidos localmente a cinco. O reparo das bibliotecas empacotadas de desenvolvimento está em curso.",
+        "Quatro JSON conservaram seus 38 digests e todos os dados. O check remoto de segredos passou na nova PR; nenhum alerta foi dispensado nem detector enfraquecido.",
+        "Navegação em 1440/390 preservou busca, filtros e foco, sem rolagem lateral ou inserir o marcador HTML inerte. O player reproduziu os 18 segundos completos, sem erro; isso não equivale a ouvir ou aprovar a trilha."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md"
+      ]
+    },
+    {
+      "id": "native-bounded-evaluation",
+      "title": "Comparação cega reservada",
+      "summary": "20 pares escritos completos; 19 aprovações no enriquecido e 18 no baseline.",
+      "paragraphs": [
+        "O protocolo, briefs, rubricas e cápsulas foram congelados antes das respostas. Cada condição e o reviewer receberam 20 casos integrais; 200 julgamentos foram verificados. A revisão foi congelada antes de abrir o mapa A/B.",
+        "Dezoito casos passaram em ambos, um passou só no enriquecido e um falhou formalmente em ambos. O último exige um campo não explicitamente solicitado no briefing; a limitação e os escores originais foram conservados.",
+        "Os atores foram configurados em GPT-6.1-sol/high; o backend efetivo não foi verificado independentemente. São decisões textuais de 17 representantes de squads e três do núcleo, sem prova causal/global ou de artefatos renderizados.",
+        "A disponibilidade Sonnet 5.5 foi observada no Claude CLI existente, mas a resposta foi suprimida pelo orçamento. Não houve retry ou novo Jev; estimativa de US$ 0,213404 não é confirmação de faturamento."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md",
+        "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json"
+      ]
+    },
+    {
       "id": "individual-upgrade",
       "title": "Conhecimento individual desta onda",
       "summary": "172 respostas escritas aceitas; 75 recortes externos observados; nenhuma validação global.",
@@ -592,7 +621,7 @@
         "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagens descrevem o acervo escrito; não são notas globais de competência.",
         "75 recortes externos foram observados em trechos delimitados: 29 + 18 + 28 nas três coortes. Os 238 contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda. Onze candidatos novos e 88 anteriores permanecem candidatos.",
         "A revisão independente aceitou 172 respostas escritas após 17 reparos em três ciclos. Os diagnósticos foram produzidos na mesma coorte, com modelo e contexto de tarefa compartilhados; não houve avaliação cega externa nem prova causal.",
-        "Leitura integral de livros, inferência no Claude, benchmark cego completo e acompanhamento longitudinal continuam pendentes. A audição humana da trilha do Reel também permanece pendente."
+        "A comparação nova de 20 casos terminou com 19 aprovações no enriquecido e 18 na base; um item da rubrica excedia o brief. Leitura integral de livros e acompanhamento longitudinal continuam sem prova. A chamada Claude encerrou sem resposta; avaliação musical humana é opcional."
       ],
       "sources": [
         "research/expert-evolution/competence-packs/creative.json",
@@ -611,11 +640,12 @@
         "A instalação em ambiente pessoal isolado passou a matriz offline completa dos 172, com máximos 11.865 / 5.990 / 2.997. Após a atualização pessoal real, 42 contextos selecionados passaram em dois projetos, com máximos 11.745 / 5.611 / 2.969.",
         "Entradas Codex e Claude Code byte-equivalentes foram conferidas no ambiente pessoal e no projeto original. Essa prova cobre recuperação offline; nenhuma inferência nativa ou execução de persona foi observada.",
         "Fonte 104c516d instalada e conferida: 262 arquivos pessoais iguais, 193 entradas originais preservadas e duas fontes históricas intactas. Os 1.928 pins atuais e os snapshots de rollback passaram; a atualização real bem-sucedida não foi revertida.",
-        "Hardening concluído: 20 testes focais e 53 checks da prévia. CI em 104c516d: 12 alertas CodeQL HIGH, quatro HIGH transitivos e 45 hashes comprovados; Jest tem oito falhas anteriores e nove em mocks legados. Portabilidade passou no Windows; macOS aguarda novo resultado. PR #416 aberta, sem produção."
+        "Na PR #417, segredos, audit e análise de código passaram. Os testes reduziram de 17 para quatro falhas no Node 24 e de 88 para sete no Mac. Caminhos de entrega e validação de CLI único estão em correção; a instalação anterior está preservada."
       ],
       "sources": [
         "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",
-        "docs/framework/expert-evolution-2026-10/EXPERTISE-RUNTIME-INTEGRATION-QA.md"
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-RUNTIME-INTEGRATION-QA.md",
+        "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md"
       ]
     },
     {
@@ -825,5 +855,61 @@
       "executionObserved": false
     },
     "source": "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md"
+  },
+  "remediation": {
+    "date": "2026-10-07",
+    "branch": "codex/fix/framework-pending-clean-20261007",
+    "pullRequest": 417,
+    "testedSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
+    "secretScanning": "SUCCESS",
+    "securityAudit": "SUCCESS",
+    "remainingRemoteChecks": "RESIDUAL_TEST_FAILURES",
+    "personalInstallationUpdated": false,
+    "humanListeningRequired": false,
+    "technicalPlaybackComplete": true,
+    "extraJevCalls": 0,
+    "expertisePromotion": false,
+    "codeql": {
+      "status": "SUCCESS",
+      "scope": "No new alerts in code changed by PR",
+      "newAlertAnnotations": 0
+    },
+    "testResults": {
+      "node24": {
+        "failed": 4,
+        "passed": 12043
+      },
+      "macos": {
+        "failed": 7,
+        "passed": 12040
+      },
+      "skippedPreexisting": 185,
+      "todoPreexisting": 8
+    },
+    "dependencyAudit": {
+      "remoteSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
+      "remoteProduction": "SUCCESS",
+      "remoteFullTree": {
+        "total": 9,
+        "high": 7,
+        "moderate": 2
+      },
+      "localFocalRefresh": {
+        "total": 5,
+        "high": 3,
+        "moderate": 2
+      },
+      "bundledRepair": "IN_PROGRESS"
+    },
+    "nativeBenchmark": {
+      "cases": 20,
+      "baselinePassed": 18,
+      "enrichedPassed": 19,
+      "fullCapsuleExposure": true,
+      "independentBlindReview": true,
+      "globalExpertisePromotion": false,
+      "rubricBriefMismatchCase": "P02",
+      "receipt": "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json"
+    }
   }
 }

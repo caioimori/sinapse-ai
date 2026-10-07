@@ -112,6 +112,18 @@ function prepareDelivery({ packageRoot = DEFAULT_PACKAGE_ROOT, targetRoot, layou
       for (const profile of profiles.profiles) profile.canonical.path = installedPath(profile.canonical.path);
       payload.set(profilePath, Buffer.from(JSON.stringify(profiles, null, 2) + '\n'));
     }
+    const sourceProgramPath = 'research/expert-evolution/source-program.json';
+    if (payload.has(sourceProgramPath)) {
+      const program = JSON.parse(payload.get(sourceProgramPath));
+      for (const reference of program.references) {
+        if (reference.sourceScope !== 'local-contract') continue;
+        const bytes = sourceFile(packageRoot, reference.sourceRef.path);
+        if (hash(bytes) !== reference.sourceRef.sha256) throw new Error(`Stale global local reference: ${reference.id}`);
+        reference.sourceRef.path = installedPath(reference.sourceRef.path);
+        payload.set(reference.sourceRef.path, bytes);
+      }
+      payload.set(sourceProgramPath, Buffer.from(JSON.stringify(program, null, 2) + '\n'));
+    }
     for (const name of ['resolve-codex-agent.js', 'resolve-codex-command.js']) payload.set(`.codex/scripts/${name}`, sourceFile(packageRoot, `.codex/scripts/${name}`));
     const registry = JSON.parse(sourceFile(packageRoot, '.codex/command-registry.json'));
     for (const spec of Object.values(registry.agents)) {

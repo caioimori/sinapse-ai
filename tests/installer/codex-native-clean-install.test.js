@@ -23,7 +23,7 @@ describe('Codex native clean-project installation', () => {
   jest.setTimeout(120000);
 
   test('delivers, synchronizes and validates project-local Codex without global writes', async () => {
-    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-codex-install-'));
+    const tempRoot = fs.realpathSync.native(await fs.mkdtemp(path.join(os.tmpdir(), 'sinapse-codex-install-')));
     const targetDir = path.join(tempRoot, 'project');
     const fakeHome = path.join(tempRoot, 'home');
     await fs.ensureDir(targetDir);

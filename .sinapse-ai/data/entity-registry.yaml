@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-10-02T11:41:43.397Z'
+  lastUpdated: '2026-10-07T19:54:36.194Z'
   entityCount: 819
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -366,14 +366,15 @@ entities:
       dependencies:
         - global-provider-adapters
       externalDeps: []
-      plannedDeps: []
+      plannedDeps:
+        - file-io
       lifecycle: production
       adaptability:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:bf4907a802e2a3df76c37ede9fb10e1c2f9b65868b91af453565bdc37b7257a0
-      lastVerified: '2026-10-02T11:41:42.863Z'
+      checksum: sha256:9fa92240b1361cc25e9cfdb75f9bd01bfa12bc64e6092bc22084ffc842553f1a
+      lastVerified: '2026-10-07T19:54:35.859Z'
     fs-utils:
       path: bin/lib/fs-utils.js
       layer: L1

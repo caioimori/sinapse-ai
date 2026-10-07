@@ -254,7 +254,8 @@
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "semantic-release": "^25.0.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "npm": "file:vendor/npm-security-refresh/npm-security-refresh-11.19.1-sinapse.1.tgz"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts}": [
@@ -276,12 +277,21 @@
     "diff": "^5.2.0",
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
-    "brace-expansion": "^5.0.6",
+    "brace-expansion": "5.0.12",
     "fast-uri": "^3.1.8",
-    "ip-address": "^10.1.1",
+    "ip-address": "10.7.3",
     "@babel/core": "^7.29.6",
     "js-yaml": "^4.3.2",
-    "braces": "$braces"
+    "braces": "$braces",
+    "npm": "$npm",
+    "baseline-browser-mapping": "2.11.0",
+    "browserslist": "4.28.7",
+    "@actions/http-client": {
+      "undici": "6.28.1"
+    },
+    "@semantic-release/github": {
+      "undici": "7.29.1"
+    }
   },
   "directories": {
     "doc": "docs",

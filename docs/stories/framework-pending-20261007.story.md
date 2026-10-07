@@ -30,7 +30,52 @@ Não editar caminhos protegidos, ferramentas compartilhadas, hooks ou configura�
 - `docs/stories/framework-pending-20261007.story.md`
 - `docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-SPEC.md`
 - `docs/framework/expert-evolution-2026-10/pending-closeout.workflow.json`
-- Demais arquivos são acrescentados pelos owners antes do fechamento.
+- `docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md`
+- `docs/framework/expert-evolution-2026-10/DEPENDENCY-BUNDLE-ADR.md`
+- `docs/framework/expert-evolution-2026-10/PENDING-DEPENDENCY-QA.md`
+- `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md`
+- `docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json`
+- `scripts/expert-evolution/file-io.cjs`
+- `scripts/expert-evolution/expertise.cjs`
+- `scripts/expert-evolution/extraction.cjs`
+- `scripts/expert-evolution/model-policy.cjs`
+- `scripts/expert-evolution/personal-distribution.cjs`
+- `scripts/framework-evolution/jev.cjs`
+- `scripts/framework-evolution/upstream-audit.cjs`
+- `scripts/validate-provider-adapters.js`: paridade entre provedores selecionados, mantendo validação da instalação de um único CLI.
+- `bin/lib/framework-evolution-delivery.js`
+- `examples/framework-quality/transfer-navigation/index.html`
+- `examples/framework-quality/index.html`
+- `examples/framework-quality/hub-data.json`
+- `docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.json`
+- `docs/framework/expert-evolution-2026-10/navigation-learning.json`
+- `research/expert-evolution/jev-pilot.json`
+- `research/framework-evolution/plan-batch.json`
+- `package.json` e `package-lock.json`
+- `vendor/braces-depth-guard/`: fork local, walkers, parser, guard, licença e proveniência sob ownership Devops.
+- `vendor/npm-security-refresh/`: fork empacotado de desenvolvimento, identidade própria, origem/deltas e licenças; nenhum npm global modificado.
+- `tests/helpers/stream-response.js`
+- `tests/unit/expert-evolution-file-io.test.js`
+- `tests/installer/codex-native-clean-install.test.js`
+- `tests/installer/dual-cli-clean-install.test.js`
+- `tests/scripts/validate-article-vii.test.js`
+- `tests/unit/cross-provider-operational.test.js`
+- `tests/unit/expert-evolution-catalog.test.js`
+- `tests/unit/expert-evolution-integration.test.js`
+- `tests/unit/expert-evolution-persistent-learning.test.js`
+- `tests/unit/framework-evolution-delivery.test.js`
+- `tests/unit/framework-evolution-knowledge.test.js`
+- `tests/unit/framework-evolution-reliability.test.js`
+- `tests/unit/project-expert-context.test.js`
+- `tests/unit/framework-evolution-upstream.test.js`
+- `tests/unit/personal-distribution.test.js`
+- `tests/unit/expert-evolution-expertise.test.js`
+- `tests/unit/expert-evolution-model-policy.test.js`
+- `tests/unit/expertise-security-hardening.test.js`: provas de troca de pais interceptam a aquisição atual por descritor.
+- `tests/unit/npm-security-refresh.test.js`: identidade, bytes e APIs do bundle efetivamente instalado, CLI com configuração própria e rede desabilitada.
+- `.sinapse-ai/data/entity-registry.yaml` e `.sinapse-ai/install-manifest.yaml`: metadados derivados pelos hooks normais, conferidos pelo Devops.
+
+Os 650 paths herdados do conteúdo `0415` são registrados na transição de branch e nas stories de evolução anteriores; nenhum deles foi removido. Receipts, logs, rótulos cegos, respostas e acervo privado permanecem em `examples/framework-quality/output/pending-20261007/`, ignorados e fora do Git.
 
 ## Rollback
 Reverter apenas o lote novo pela branch/PR; manter fontes históricas e instalação `104c516d` íntegra até nova CAS. Qualquer instalação nova deve conservar journal e snapshots e ser recuperável sem modificar uma fonte já instalada.

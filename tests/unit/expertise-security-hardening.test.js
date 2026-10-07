@@ -29,10 +29,10 @@ describe('Windows evidence identity and local QA snapshot containment',()=>{
     write(outside,'marker.txt','EXTERNAL-SYNTHETIC-MARKER');fs.symlinkSync(outside,path.join(root,'linked'),'junction');
     expect(()=>extraction.bytes(root,'linked/marker.txt')).toThrow(/symlink/);
   });
-  test('deterministic parent replacement between stat and open rejects before reading external bytes',()=>{
+  test('deterministic parent replacement between preflight and open rejects before reading external bytes',()=>{
     write(root,'inner/marker.txt','OWNED-INSIDE-MARKER');write(outside,'marker.txt','EXTERNAL-SYNTHETIC-MARKER');
-    const originalStat=fs.statSync,inner=path.join(root,'inner');let swapped=false;
-    jest.spyOn(fs,'statSync').mockImplementation((file,...args)=>{const stat=originalStat.call(fs,file,...args);if(!swapped&&file===path.join(inner,'marker.txt')){swapped=true;fs.renameSync(inner,path.join(root,'preserved-inner'));fs.symlinkSync(outside,inner,'junction');}return stat;});
+    const originalOpen=fs.openSync,inner=path.join(root,'inner');let swapped=false;
+    jest.spyOn(fs,'openSync').mockImplementation((file,...args)=>{if(!swapped&&file===path.join(inner,'marker.txt')){swapped=true;fs.renameSync(inner,path.join(root,'preserved-inner'));fs.symlinkSync(outside,inner,'junction');}return originalOpen.call(fs,file,...args);});
     const read=jest.spyOn(fs,'readSync');
     expect(()=>extraction.bytes(root,'inner/marker.txt')).toThrow(/identity|symlink/);
     expect(swapped).toBe(true);expect(read).not.toHaveBeenCalled();
@@ -57,9 +57,11 @@ describe('Windows evidence identity and local QA snapshot containment',()=>{
     expect(()=>qa.captureAssets(root)).toThrow('symlink');
   });
   test('QA allowed-asset parent replacement during capture is rejected',()=>{
-    populate();write(outside,'index.html','EXTERNAL-SYNTHETIC-MARKER');const inner=path.join(root,'ui'),original=fs.statSync;let swapped=false;
-    jest.spyOn(fs,'statSync').mockImplementation((file,...args)=>{const stat=original.call(fs,file,...args);if(!swapped&&file===path.join(inner,'index.html')){swapped=true;fs.renameSync(inner,path.join(root,'preserved-ui'));fs.symlinkSync(outside,inner,'junction');}return stat;});
-    expect(()=>qa.captureAssets(root)).toThrow(/identity|symlink/);expect(swapped).toBe(true);
+    populate();write(outside,'index.html','EXTERNAL-SYNTHETIC-MARKER');const inner=path.join(root,'ui'),original=fs.openSync;let swapped=false,redirectedFd,priorReadCount;
+    jest.spyOn(fs,'openSync').mockImplementation((file,...args)=>{if(!swapped&&file===path.join(inner,'index.html')){swapped=true;priorReadCount=read.mock.calls.length;fs.renameSync(inner,path.join(root,'preserved-ui'));fs.symlinkSync(outside,inner,'junction');}const fd=original.call(fs,file,...args);if(file===path.join(inner,'index.html'))redirectedFd=fd;return fd;});
+    const originalRead=fs.readSync,read=jest.spyOn(fs,'readSync').mockImplementation((fd,...args)=>{if(fd===redirectedFd)throw new Error('External bytes must never be read');return originalRead.call(fs,fd,...args);});
+    expect(()=>qa.captureAssets(root)).toThrow(/identity|symlink/);expect(swapped).toBe(true);expect(Number.isInteger(redirectedFd)).toBe(true);
+    expect(read.mock.calls.slice(priorReadCount).filter(([fd])=>fd===redirectedFd)).toEqual([]);
   });
   test('post-capture replacement and caller buffer mutation cannot change served bytes or their hash',()=>{
     populate();const snapshot=qa.captureAssets(root),hash=extraction.sha(snapshot.get('/ui/index.html')),handler=qa.createAssetHandler(snapshot);
