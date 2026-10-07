@@ -146,6 +146,7 @@ commands:
     description: "Definir pilares editoriais"
     args: "[--count 3|4|5]"
   - name: "*create-calendar"
+    task: "create-editorial-calendar"
     description: "Criar calendario editorial"
     args: "[--period weekly|monthly|quarterly]"
   - name: "*plan-sprint"

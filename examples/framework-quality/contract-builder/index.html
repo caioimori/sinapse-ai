@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Editor de contrato · SINAPSE</title><link rel="stylesheet" href="styles.css"><script src="model.js" defer></script><script src="app.js" defer></script></head>
+<body>
+<a class="skip" href="#editor">Ir para o editor</a>
+<header class="site-header"><a class="brand" href="../">SINAPSE<span>LABORATÓRIO DE INTERFACES</span></a><nav aria-label="Navegação principal"><a href="../">Visão do framework</a><a href="#editor" aria-current="page">Editor</a><a href="#preview">JSON</a></nav><span class="session">Exemplo local</span></header>
+<main id="main">
+  <div class="breadcrumb">Contratos <span aria-hidden="true">/</span> Encontro da equipe</div>
+  <header class="page-heading"><div><p class="eyebrow">ESTRUTURA COM CLAREZA</p><h1>Editor de contrato</h1><p class="lead">Defina os campos. Confira o que será exigido.</p></div><div class="contract-mark"><span aria-hidden="true">{ }</span><small>Encontro da equipe</small></div></header>
+  <div class="workspace">
+    <section class="editor-panel" id="editor" aria-labelledby="editor-heading" tabindex="-1">
+      <div class="panel-heading"><div><span class="section-number">01</span><h2 id="editor-heading">Campos do contrato</h2></div><div class="panel-actions"><button id="undo" class="button" disabled type="button">Desfazer</button><button id="clear" class="button" type="button">Limpar</button></div></div>
+      <p class="panel-intro">A chave identifica o campo. A descrição explica o que preencher.</p>
+      <div id="error-summary" class="error-summary" hidden><strong>Revise os campos indicados</strong><ul id="error-links"></ul></div>
+      <div id="fields"></div>
+      <p class="limits" id="limits">Até quatro níveis e 60 nós por contrato.</p>
+      <p class="feedback" id="announcement" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="preview-panel" id="preview" aria-labelledby="preview-heading" tabindex="-1">
+      <div class="panel-heading"><div><span class="section-number">02</span><h2 id="preview-heading">Contrato gerado</h2></div><span class="format">JSON</span></div>
+      <div class="preview-meta"><span id="valid-state">Atualizado</span><span id="node-count"></span></div>
+      <p class="preview-warning" id="preview-warning" hidden>Último contrato válido; corrija os campos para atualizar.</p>
+      <pre id="json" tabindex="0" aria-label="Contrato JSON gerado, somente leitura"></pre>
+      <div class="copy-area"><button class="button primary" id="copy" type="button">Copiar JSON</button><p id="copy-help">O JSON acompanha as alterações nos campos.</p></div>
+      <p class="preview-note">“Obrigatório” vale dentro de cada objeto. Uma lista obrigatória pode estar vazia.</p>
+    </aside>
+  </div>
+  <footer><span>EXPERIMENTO SINAPSE</span><p>Dados fictícios, editados apenas nesta sessão. Recarregar restaura o exemplo.</p></footer>
+</main><noscript>Ative JavaScript para editar este exemplo.</noscript>
+</body></html>

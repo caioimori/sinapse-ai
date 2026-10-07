@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "sha256": "d6bd8da3116cffb156c6e9c44753a39cf83eaf951a6bb8d0e136022db0698971",
+      "path": "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md"
+    },
+    {
+      "path": "examples/framework-quality/shared.css",
+      "sha256": "8c09db143307259bead06123953e94a0b90b944d0139d504da48dc2c62c8cd91"
+    },
+    {
+      "path": "examples/framework-quality/media/production-plan.json",
+      "sha256": "d8e1c587c6eb250cf6743b6e454a006d93d7784db30b1238bf1e0bcbaba3d8c0"
+    },
+    {
+      "path": "examples/framework-quality/media/STORYBOARD.md",
+      "sha256": "e466aa1e7a89389dc4f5eaeeb230801b2642039f7b9b571488f1410d3e6821bc"
+    },
+    {
+      "path": "examples/framework-quality/media/captions.vtt",
+      "sha256": "70326ef7a8043c0424363fb6ed573e6a5e08c12b7ba9b7cebdcaad32746f69e6"
+    },
+    {
+      "path": "examples/framework-quality/media/text.md",
+      "sha256": "8d961f7cf30bd04cde932d63f78a1de12488728ecd6c46007976ecfe86252554"
+    },
+    {
+      "path": "examples/framework-quality/media/editable/carousel-01.svg",
+      "sha256": "3a326aa4fbe8e8fc79baaafda4702737a540897e91e23fa11fc56fa35050a11d"
+    },
+    {
+      "path": "examples/framework-quality/media/editable/carousel-02.svg",
+      "sha256": "10af863cb4411e557fd32bd341c638baddd4a9ad47f0ccfce9a0dd25dde855a2"
+    },
+    {
+      "path": "examples/framework-quality/media/editable/carousel-03.svg",
+      "sha256": "95c13d621f01f60e2bd6b55f395c55db2107267f81a9d519b6e50c0733f21909"
+    },
+    {
+      "path": "examples/framework-quality/media/editable/carousel-04.svg",
+      "sha256": "f3cbaefccb0fd9d2b505465a200c65c74bbb6f0602756cbe613325312a7bc976"
+    },
+    {
+      "path": "examples/framework-quality/media/editable/carousel-05.svg",
+      "sha256": "b7e7deb7e523ed762eb80d68992d5ee1eccff1be160d0d25aea501bbea549df5"
+    },
+    {
+      "path": "examples/framework-quality/media/finalize-manifest.py",
+      "sha256": "c4c866470a1c8c66a13f01bc9cd060d6813035f6cdb6c7d91a5c270b565fa8d2"
+    },
+    {
+      "path": "examples/framework-quality/media/index.html",
+      "sha256": "c6c4e3c0cd79d270f38ffea239a89d4a4ada7161a3ca85c1c36b11b7706f51af"
+    },
+    {
+      "path": "examples/framework-quality/media/README.md",
+      "sha256": "c30cdcfc2e9a95c4982ed899d93247d4ff62b04c44015d4095feac57c9b76d79"
+    },
+    {
+      "path": "examples/framework-quality/media/render.py",
+      "sha256": "38ce2efa9d982462c8482aa3652dd5a04f6545a7747ae1aed61ac9ee42aa2944"
+    },
+    {
+      "path": "examples/framework-quality/media/test-serve.cjs",
+      "sha256": "a7ab40be54c012746329bdf4d3140e4720ceaa251143125cd79c0578350e9588"
+    },
+    {
+      "path": "examples/framework-quality/media/verify-media.cjs",
+      "sha256": "3625a739345a8cbe839f90c959023fdaebb9e89fb973c5a742e36c6538b925c3"
+    },
+    {
+      "path": "examples/framework-quality/media/visual-description-002.md",
+      "sha256": "37a02a6411f376cf885adbb48bd54178260badb7e1b9440057fa4ac8d4a18ca0"
+    },
+    {
+      "path": "examples/framework-quality/index.html",
+      "sha256": "196b22a9b27bf2f5934d245f520fdd469ffc7230593ef862a1e5ff652f001f93"
+    },
+    {
+      "path": "examples/framework-quality/serve.cjs",
+      "sha256": "23cc88ae0c6c3c84e5b81246117ff641fdacee0269085acbc93c5922d3852b0c"
+    }
+  ],
+  "originalAssetDeclaration": "All intended geometric vectors and oscillator audio are original local fixture assets. Final rendered source/output hashes must be added by the executor.",
+  "rendered": true,
+  "status": "local-technical-pass-pending-audiovisual-review",
+  "pixelsObserved": true,
+  "observedChecks": [
+    "five RGB PNG pages1080x1350",
+    "five editable SVGs",
+    "18s540frames30fps1080x1920H264yuv420p",
+    "AACstereo48000Hz",
+    "originalWAV and full18s8kbpsreviewMP3",
+    "full audiovisual decode",
+    "encoded RMS and peak; no clips",
+    "all authored text boxes measured",
+    "master frame extraction before/after cuts",
+    "all five pages/browser1440/390 without horizontal overflow",
+    "HTML video playback and five VTT cues observed"
+  ],
+  "audioObserved": false,
+  "brand": "Lume",
+  "planningSourceVersions": [
+    {
+      "sha256": "d6bd8da3116cffb156c6e9c44753a39cf83eaf951a6bb8d0e136022db0698971",
+      "path": "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md"
+    },
+    {
+      "sha256": "8c09db143307259bead06123953e94a0b90b944d0139d504da48dc2c62c8cd91",
+      "path": "examples/framework-quality/shared.css"
+    },
+    {
+      "sha256": "d8e1c587c6eb250cf6743b6e454a006d93d7784db30b1238bf1e0bcbaba3d8c0",
+      "path": "examples/framework-quality/media/production-plan.json"
+    },
+    {
+      "sha256": "e466aa1e7a89389dc4f5eaeeb230801b2642039f7b9b571488f1410d3e6821bc",
+      "path": "examples/framework-quality/media/STORYBOARD.md"
+    },
+    {
+      "sha256": "70326ef7a8043c0424363fb6ed573e6a5e08c12b7ba9b7cebdcaad32746f69e6",
+      "path": "examples/framework-quality/media/captions.vtt"
+    },
+    {
+      "sha256": "6bd1a78fd2356450cb22fe9c4d8ca92c54b580256201b5bc2459e515d9d523ee",
+      "path": "examples/framework-quality/media/text.md"
+    }
+  ],
+  "currentAttempt": 2,
+  "renderer": "Native Windows Python/Pillow with own geometry and oscillator WAV; native ffmpeg H264/AAC. No network, installations, sampled audio or client data.",
+  "finalVerification": {
+    "path": "examples/framework-quality/output/media/attempt-002/verification-summary.json",
+    "sha256": "fc7fe8bac08c317ea234bd9289f3cc8ebb611cbc30e0289063bb532e903213c8"
+  },
+  "renderReceipts": [
+    {
+      "path": "examples/framework-quality/output/media/attempt-001/receipt.json",
+      "sha256": "f828e1dd32eafaa84249ef93bfd08b732eefa183b227a4aa6f9c558a5c862331"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/receipt.json",
+      "sha256": "e96810e8e39575cef9993deb29c22f91120d46a6105327ef19bbdbb46dcfb2ad"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/hub-1440.png",
+      "sha256": "221c32932aa316a134bea0d7b20cc39fd8f366b084f014e38c347cc38b094dce"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/hub-390.png",
+      "sha256": "fb3b34e5313fabbba065ea42a74c158cdfc5d9f5c2ab0b390937ce55efe76339"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/media-1440.png",
+      "sha256": "c956a4dc765deb39a7d6dd07a94ddf0c73539548f3239bd3792bcd52543e89f3"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/media-390.png",
+      "sha256": "1c018eb9dad5ae125f8be193238c7227a866e78e715b05f7fa9ac4b5bfc359d9"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/player-1440.png",
+      "sha256": "6ce7ecfb67321a58dfabc508be951834673e218da0814a21c306b9f3da0c295b"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/player-390.png",
+      "sha256": "0d0d6344c54779e7dc2363a6e9c21f934297ba39e7c354143afa986a8a3c81ee"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-1/receipt.json",
+      "sha256": "79990cab34d24f582dc69bd9f7af2a7120e6d8cce50f36436a21124a7bab7501"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/hub-1440.png",
+      "sha256": "221c32932aa316a134bea0d7b20cc39fd8f366b084f014e38c347cc38b094dce"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/hub-390.png",
+      "sha256": "fb3b34e5313fabbba065ea42a74c158cdfc5d9f5c2ab0b390937ce55efe76339"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/media-1440.png",
+      "sha256": "a84032c37cf8960de6511fc58dcff4f410b237ca5c60a2f4f3a68862d056a928"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/media-390.png",
+      "sha256": "2264d9f3bd8c041edc75ccade9b9020e65e8ff54de515deba6992363dcc1cfe0"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/player-1440.png",
+      "sha256": "6ce7ecfb67321a58dfabc508be951834673e218da0814a21c306b9f3da0c295b"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/player-390.png",
+      "sha256": "0d0d6344c54779e7dc2363a6e9c21f934297ba39e7c354143afa986a8a3c81ee"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-2/receipt.json",
+      "sha256": "e11bf2536ecbbafb4344158d9ae3d5b8ba66ad37ce4108dd9541603355887d94"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/hub-1440.png",
+      "sha256": "221c32932aa316a134bea0d7b20cc39fd8f366b084f014e38c347cc38b094dce"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/hub-390.png",
+      "sha256": "fb3b34e5313fabbba065ea42a74c158cdfc5d9f5c2ab0b390937ce55efe76339"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/media-1440.png",
+      "sha256": "ae65f7a72e7a322a8ba4afad649f581f70df171363844cc0994678903537966b"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/media-390.png",
+      "sha256": "a13ad3ba14bbb5e1e486a7e0771f5374f8b9e5b4663e4472c3087c9c24c7cdc6"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/player-1440.png",
+      "sha256": "899a425ddc825871f1a3acc6e6e02afdcc573fd0ca726edc16e72eeb0b2c4531"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/player-390.png",
+      "sha256": "0d0d6344c54779e7dc2363a6e9c21f934297ba39e7c354143afa986a8a3c81ee"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/browser-3/receipt.json",
+      "sha256": "cfd55b5e9cb93921a4b6757a407e161f6fc45054fe2081941801c6e85439c9bd"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-01.png",
+      "sha256": "c8fb830a3c5d10d57b47ea16607da5ef15a9853b039474cb3c2b029a3d97c2ed"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-02.png",
+      "sha256": "1007da44aa7c182aa8d9aedcae9442c4913ccd08bc90f300f02cbc2e8c6d6baa"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-03.png",
+      "sha256": "b108d504b500315e7c89c19ff60bfce33f29719864a270b2c3be3895c8521528"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-04.png",
+      "sha256": "293e104008db7950de23abca8b867784f77a3d9f96024a0ae90ec776fa5631ef"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-05.png",
+      "sha256": "52910647f52496228b9916b9b2632ee2ceea1e192e26b5bcb7f10062b331a073"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-contact.png",
+      "sha256": "426518331aed82627a3fc2580279a1403987cffebeb4a6c47c760d463e280547"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/carousel-mobile-390.png",
+      "sha256": "4e5ed92ec0764660426f108d18e42065043f27bd5818fb0bbcbbc5ee9567162e"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/lume-reel.mp4",
+      "sha256": "75bde21831dc80d22933c2b92388a71f7d1c1683d17be9fa83e37ea06092ddb5"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/lume-sound.wav",
+      "sha256": "39a2812fcb3dc232ad4e41f10a6d37742d9edab54305cafabde877c8248e8238"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/receipt.json",
+      "sha256": "e96810e8e39575cef9993deb29c22f91120d46a6105327ef19bbdbb46dcfb2ad"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-contact.png",
+      "sha256": "eb5ef32618464c4ae860c3ff927d1d0b7b9f087598c9e46ee04818d72cd27cd7"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-00.png",
+      "sha256": "bbbb6a732d2cb920be8cf3b1ecf9dee834f9b6ba5d814c8953912a30755e8438"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-01.png",
+      "sha256": "e3cd3fc7a9bb2fba0b855dcab4e3264f22b4c7ffbf09bc3ab224aa63ac45dac9"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-02.png",
+      "sha256": "0ce7beafbbdd2551097292f07dec628ab4b5f784c61d40792cfc0059c56cf941"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-03.png",
+      "sha256": "639889c1285463570d165241066994ce8e8f9c65b716c2983d4696f3a34bc468"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-04.png",
+      "sha256": "17641156b44e71f099174431c1b314bebefb2eebfe1f391dc69d1b092757c04f"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-05.png",
+      "sha256": "4841f64cbc0fa1f91a0ae5a251056e74a8350b5fd6c5f67a40da721a60148156"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-06.png",
+      "sha256": "6148101e8ab65302f606bae879d93e4367f50aedf792f99420e2164ce4ef934d"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-07.png",
+      "sha256": "34fb81ad9b77610b0d2eb0fb230b71ff1bade9fe429110993fd0cda6d265cfce"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-08.png",
+      "sha256": "d5c709e8f9fe24709b44b39fb97f4ce319da1a0eae1de4aba12f0e2598048e6c"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-09.png",
+      "sha256": "b92707b9f389de19b41b56228b6de5e6087eaff3e19eb07ccf804fa42046023c"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-10.png",
+      "sha256": "3d54724534801ba90a757da8d4e9358fa852071bb0352f8ba72f63f98af79e46"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-11.png",
+      "sha256": "f3b260523cb089ae6e7bfbdcdd600bec76dca4bb088635068666677f4c71a41e"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-12.png",
+      "sha256": "efe2c3fb68d1a65b46ccd45f3feee85cd445422bdbd8b1e860f95a09ba3d3b2a"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-13.png",
+      "sha256": "f52a9a6ba39c59270945f13a466bb5fc8be7e2af1ca9b67547e6709cb53c0bc1"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-14.png",
+      "sha256": "5be3be0356c008e97a25fa2130d8702d95c18b3f05f7d252d164e5272c381353"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-15.png",
+      "sha256": "4748a12aea84ea697ca2d536e63ad53e6b8edf3af72baf889242f172c3c399da"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-16.png",
+      "sha256": "e2d5820724b755cab5c09d6acedd53671e1db646a9d4ce9cffd4ae79539d7887"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-frame-17.png",
+      "sha256": "abc5039d6ac1ebb84bd274b9baf2350f9d1383cc7de5dba4f13c3c561e4f6342"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/reel-mobile-390.png",
+      "sha256": "39d60a19289139c25b8bf66e652bbc95307ce60b76fa14ecf21925eaf4ffa69c"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/review-audio.mp3",
+      "sha256": "e372fdfd7a1d2fe809a1173848015deb4c3606d3e7bf83e422714b477b66e7b3"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/server-check.json",
+      "sha256": "7ce7f25cf32c6d16c29b6e8b8cee74c2cfb3719d0d05cc7ecb142be8f8a98566"
+    },
+    {
+      "path": "examples/framework-quality/output/media/attempt-002/verification-summary.json",
+      "sha256": "fc7fe8bac08c317ea234bd9289f3cc8ebb611cbc30e0289063bb532e903213c8"
+    }
+  ]
+}

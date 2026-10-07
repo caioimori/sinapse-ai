@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-02T09:13:22.267Z",
+  "endpoint": "https://api.mobbin.com/mcp",
+  "name": "search_screens",
+  "arguments": {
+    "query": "checkout order summary with payment method selection and inline validation errors",
+    "platform": "web",
+    "mode": "standard",
+    "limit": 2,
+    "image_format": "jpg",
+    "task_intent": "Develop evidence-grounded quality criteria for specialized design and frontend agents.",
+    "output_destination": "doc"
+  },
+  "status": "returned",
+  "content": [
+    {
+      "type": "image",
+      "mimeType": "image/jpeg",
+      "sha256": "c4529a999ce8a5cfcae9b184c5ad326df571eb10a33a991927eb5d72f3e7cd48",
+      "scope": "Inline MCP inspection preview only; pixels retained outside repository; no exported asset",
+      "readBy": "priority_expertise",
+      "readScope": "Returned screen preview"
+    },
+    {
+      "type": "image",
+      "mimeType": "image/jpeg",
+      "sha256": "7d804380142674a371d4187d02d2b15b0db8811857b5e3336607f5c88953a59b",
+      "scope": "Inline MCP inspection preview only; pixels retained outside repository; no exported asset",
+      "readBy": "priority_expertise",
+      "readScope": "Returned screen preview"
+    }
+  ],
+  "structuredContent": {
+    "query": "checkout order summary with payment method selection and inline validation errors",
+    "screens": [
+      {
+        "id": "e89ef674-df07-4351-901a-7ca09689a46e",
+        "mobbin_url": "https://mobbin.com/screens/e89ef674-df07-4351-901a-7ca09689a46e",
+        "app_name": "Square",
+        "platform": "web"
+      },
+      {
+        "id": "344b84fb-4aa5-45c6-9d32-38fa6f94a1aa",
+        "mobbin_url": "https://mobbin.com/screens/344b84fb-4aa5-45c6-9d32-38fa6f94a1aa",
+        "app_name": "GetYourGuide",
+        "platform": "web"
+      }
+    ]
+  },
+  "limit": "Images are inspection previews; not report exports; no performance claim.",
+  "previewShaCoverage": "Exact image bytes read for inspection; not the full/high-resolution document"
+}

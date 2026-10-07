@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-02T17:48:12.371Z",
+  "status": "locally-verified-bounded",
+  "sourceHead": "3ff6f73686f230b62e84d0e384145b83cc9910ef",
+  "scope": "TypeSafe installation, one Jev console batch, Opus documentary learning, Mobbin bounded project curation",
+  "typesafe": {
+    "sourceSha": "65a39f393687675ce170e6094757de20370365b9",
+    "cli": "skills@1.7.0",
+    "method": "npx-skills-codex-global",
+    "installed": "~/.agents/skills/typesafe-ai",
+    "files": [
+      {
+        "file": "SKILL.md",
+        "sha256": "0AB58B7533EBE4BA5342AD6260D69E492CD0955CA9D3EE20B3C91375EEA0203D",
+        "match": true,
+        "upstreamSha256": "71ea90d7906c6554c4f4c460ef7361b2d26f59116ccdae986dc6d997b9389f52",
+        "byteMatch": false,
+        "normalizedSha256": "71ea90d7906c6554c4f4c460ef7361b2d26f59116ccdae986dc6d997b9389f52",
+        "difference": "Git checkout CRLF vs upstream LF; exact text after newline normalization"
+      },
+      {
+        "file": "LICENSE",
+        "sha256": "0263F48022ACBA5EF61B8AE8248486B12841D2F3C6F7BDD9ECF321948AE0FB12",
+        "match": true,
+        "upstreamSha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+        "byteMatch": false,
+        "normalizedSha256": "835f233f1d6ed84a9b9a351aba0689b47644a4137d6316911fc7957bde523b02",
+        "difference": "Git checkout CRLF vs upstream LF; exact text after newline normalization"
+      }
+    ],
+    "preservedFiles": 12049,
+    "changedExisting": 0,
+    "rollbackBackup": "%LOCALAPPDATA%/Temp/sinapse-typesafe-20261002",
+    "verified": true,
+    "pathNotation": "Public receipt uses home alias; absolute local paths retained in ignored audit output.",
+    "finalPreservation": {
+      "schemaVersion": 1,
+      "observedAt": "2026-10-02T17:45:10.650Z",
+      "existingFiles": 12049,
+      "changedExisting": 0,
+      "exactPreservation": true
+    }
+  },
+  "jev": {
+    "schemaVersion": 1,
+    "called": true,
+    "attempts": 1,
+    "transport": "authenticated-console-playground",
+    "apiIntegration": false,
+    "pinnedExpectedModel": "jev-1.13.0",
+    "uiAlias": "jev-latest",
+    "reportedModel": "jev-1.13.0",
+    "requestId": "playground_19d36efedf2bd124ad68f86337ce5f8b8c9",
+    "usage": {
+      "input_tokens": 2094,
+      "output_tokens": 371
+    },
+    "actualUsd": 8.7948e-05,
+    "costBasis": "computed from observed usage and official input price; not an invoice readback",
+    "reservedUsd": 0.002688,
+    "maxAuthorizedUsd": 0.05,
+    "modelEvaluationMs": 72.95379698916804,
+    "expertisePromotion": false,
+    "scope": "10 judgments on own descriptions of22captured desktopstates, not rawimages",
+    "cacheIdentity": {
+      "algorithm": "sha256",
+      "digestHex": "448320bdf3d142ea7e11f6ef140f8ddb39d60952accff41500d8d19cc887ed28"
+    }
+  },
+  "marketLearning": {
+    "sources": 9,
+    "mechanisms": 9,
+    "criteria": 36,
+    "status": "proposed-only",
+    "apiCalls": 0,
+    "apiRequirement": false
+  },
+  "mobbin": {
+    "observedFlows": 2,
+    "observedScreens": 22,
+    "sourceObservation": "viewer-order-only",
+    "originalControlsExecuted": 0,
+    "privateCaptures": true,
+    "protectedMediaInLearnedCorpus": false,
+    "reviewed": 8,
+    "consolidated": 8,
+    "reviewScopes": {
+      "storedReferenceVisualInference": 6,
+      "authoredLocalExperimentalTransfer": 2
+    },
+    "historicalRejectedCaptureReviews": 2,
+    "authorChecks": 66,
+    "independentChecks": 54,
+    "authorScreenshots": 24,
+    "independentScreenshots": 24,
+    "independentPixelInspections": 11,
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "horizontalOverflowObserved": 0,
+    "expertisePromotion": false,
+    "privateOverlayEntries": 9,
+    "priorOwnedEntryPreserved": true,
+    "replayAdded": 0,
+    "runtime": [
+      {
+        "agentId": "dx-ux-strategist",
+        "command": "create-wireframe-brief",
+        "contextChars": 9825,
+        "knowledgeChars": 5948,
+        "selectedMechanisms": [
+          "curated-mobbin-negative-predicate-recap-v1",
+          "curated-mobbin-contextual-filter-pane-v1"
+        ],
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-ui-designer",
+        "command": "compose-screen-layouts",
+        "contextChars": 9930,
+        "knowledgeChars": 5973,
+        "selectedMechanisms": [
+          "curated-mobbin-contextual-filter-pane-v1",
+          "curated-mobbin-empty-filter-recovery-v1"
+        ],
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-interaction-designer",
+        "command": "spec-micro-interactions",
+        "contextChars": 10082,
+        "knowledgeChars": 5917,
+        "selectedMechanisms": [
+          "curated-mobbin-explicit-filter-commit-v1",
+          "curated-mobbin-filter-cardinality-controls-v1"
+        ],
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-frontend-engineer",
+        "command": "implement-component-library",
+        "contextChars": 7615,
+        "knowledgeChars": 3280,
+        "selectedMechanisms": [
+          "curated-mobbin-negative-predicate-recap-v1"
+        ],
+        "coverage": "gap"
+      },
+      {
+        "agentId": "product-surface-director",
+        "command": "design-product-surface",
+        "contextChars": 10053,
+        "knowledgeChars": 5969,
+        "selectedMechanisms": [
+          "curated-mobbin-negative-predicate-recap-v1",
+          "curated-mobbin-active-filter-recap-v1"
+        ],
+        "coverage": "gap"
+      }
+    ]
+  },
+  "personal": {
+    "schemaVersion": 1,
+    "observedAt": "2026-10-02T17:41:16.971Z",
+    "scope": "private library remains project-only; public model policy refreshed personally",
+    "status": "installed-bounded",
+    "payloadFiles": 262,
+    "payloadHashMismatches": 0,
+    "canonicalMatches": 172,
+    "canonicalHashMismatches": 0,
+    "transactionId": "9f6e35f6-3c61-4fb4-ae00-43618d18b3a5",
+    "managedEntries": 16,
+    "changedPayloads": [
+      ".sinapse/research/expert-evolution/model-policy.json",
+      ".sinapse/.framework-evolution-delivery.json"
+    ],
+    "privateLibraryCopied": false,
+    "typesafeHashMismatches": 0,
+    "nativeAgentExecutionObserved": false
+  },
+  "regression": {
+    "suites": 4,
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 44.229,
+    "receipt": "examples/framework-quality/output/mobbin-20261002/regression-final-tests.json",
+    "initialReceipt": "examples/framework-quality/output/mobbin-20261002/regression-tests.json"
+  },
+  "checks": {
+    "lint": "passed after scoped ESLint global annotation",
+    "typecheck": "passed",
+    "parity": "passed 172 agents",
+    "manifest": "passed",
+    "protocol": "passed Ajv2020 + one positive + nine rejections",
+    "build": "not applicable: static HTML and Node verification; no build script",
+    "finalStoryGuards": "passed:10 story meta,135 AC across16 files,workflow,20 staged files secret scan,branch/protected/SQL commit hooks,provenance/privacy",
+    "finalHubReadback": "observed rendered Jev/Opus/Mobbin states in1440/390/320,zero overflow; desktop390 inspected; viewport reset",
+    "packPrivacy": {
+      "mode": "dry-run-only",
+      "privateOrSecretPaths": 0,
+      "published": false
+    },
+    "diffCheck": "passed"
+  },
+  "preservation": {
+    "schemaVersion": 1,
+    "observedAt": "2026-10-02T17:42:14.169Z",
+    "original": {
+      "branch": "codex/feat/canonical-install-readme",
+      "head": "693e9d0f9819cd700eae45734da41b055063fa5b",
+      "dirtyEntries": 191,
+      "baselineEntries": 191,
+      "hashMismatches": [],
+      "statusMismatches": [],
+      "preserved": true
+    },
+    "protectedFiles": [],
+    "privateTracked": [],
+    "push": false,
+    "published": false,
+    "ok": true
+  },
+  "history": [
+    {
+      "failure": "first consolidation wrote one entry then post-write readback used the wrong return shape",
+      "recovery": "readOverlay array handled correctly; entry recovered by hash/readback; deduplicated replay and remaining entries applied"
+    },
+    {
+      "failure": "first full lint found localStorage no-undef in browser callback",
+      "recovery": "readonly ESLint global annotation only; source HTML unchanged, scoped lint and full lint passed; author cycle2 66 checks"
+    },
+    {
+      "failure": "independent initial focus readback observed body immediately after native dialog close",
+      "recovery": "bounded eventual-focus browser assertion passed without fixture source edit; initial red receipt retained"
+    }
+  ],
+  "limitations": [
+    "Jev console pilot completed; automated service API has no local credential and original offline 224-question/18-group plan was not executed.",
+    "Model alias jev-latest resolved to expected jev-1.13.0 in the observed response; model ms and cost are not end-to-end latency or invoice reconciliation.",
+    "Eight inferred mechanisms do not prove source functionality, mobile, persistence, original source accessibility or universal transfer gain.",
+    "Private captures and reviewed overlay stay in this project, excluded from HOME, Git and npm; personal skill discovery requires a new context and native execution is unobserved.",
+    "137 functions and 88 references remain candidates; broader Mobbin families, motion and continuous audiovisual review remain future bounded tasks.",
+    "Original project integration and remote review/publication remain pending; no push, PR, release, destructive cleanup, Docker or WSL."
+  ],
+  "evidenceReceipts": [
+    "examples/framework-quality/output/mobbin-20261002/jev-execution.json",
+    "examples/framework-quality/output/mobbin-20261002/consolidation-captures.json",
+    "examples/framework-quality/output/mobbin-20261002/consolidation-transfer.json",
+    "examples/framework-quality/output/mobbin-20261002/independent-review.json",
+    "examples/framework-quality/output/mobbin-20261002/context-readback.json",
+    "examples/framework-quality/output/mobbin-20261002/personal-readback.json",
+    "examples/framework-quality/output/mobbin-20261002/skill-preservation-final.json",
+    "examples/framework-quality/output/mobbin-20261002/preservation.json",
+    "examples/framework-quality/output/mobbin-20261002/protocol-validation.json",
+    "examples/framework-quality/output/mobbin-20261002/hub-readback.json",
+    "examples/framework-quality/output/mobbin-20261002/staged-secrets.json",
+    "examples/framework-quality/output/mobbin-20261002/commit-guards.json",
+    "examples/framework-quality/output/mobbin-transfer/cycle-2/receipt.json"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "auditId": "strategy-20261002",
+  "reviewedAt": "2026-10-02",
+  "baselineCommit": "47f421cb1d813875504815734acd15562bbeca01",
+  "scope": "Document and sampled-data audit; recommendations only; no code, source, paid, global or external mutation",
+  "status": "proposed-for-specialist-review",
+  "verdict": "Infrastructure foundation is useful; next wave must prove real artifacts and learning before expanding source/profile coverage.",
+  "auditIterations": {"maximum": 3, "completed": 3},
+  "observed": {
+    "profileCount": 172,
+    "deliverableCountReported": 512,
+    "deepFunctionsReported": 28,
+    "programReferences": 90,
+    "programCandidateReferences": 88,
+    "programSelectiveReadReferences": 2,
+    "corpusSourcesReported": 67,
+    "corpusRulesReported": 112,
+    "profilePriorities": {"P1": 49, "P2": 123, "P0": 0},
+    "writtenDecisionBenchmark": {"cases": 10, "baselineScore": 18, "enrichedScore": 20, "maximumScore": 20, "renders": false, "statisticalClaim": false},
+    "jevLiveCalled": false,
+    "personalGlobalInstallVerified": false
+  },
+  "findings": [
+    {"id": "S1", "severity": "HIGH", "title": "Written benchmark does not assess artifact quality", "evidence": [{"file": "docs/framework/expert-evolution-2026-10/verification.md", "startLine": 26, "endLine": 38}, {"file": "research/expert-evolution/benchmark-protocol.json", "startLine": 12, "endLine": 22}], "correction": "Keep written decision coverage and add rendered baseline/enriched artifacts with separate technical and creative reviews."},
+    {"id": "S2", "severity": "HIGH", "title": "Sampled deliverable contracts contain semantic mismatches", "evidence": [{"file": "research/expert-evolution/expert-profiles.json", "startLine": 9702, "endLine": 9730}, {"file": "research/expert-evolution/expert-profiles.json", "startLine": 18838, "endLine": 18864}], "correction": "Explicitly map canonical task, competency, artifact and criterion; reject positional mapping and principle-as-deliverable extraction.", "scopeLimit": "Sample proves specific problems only; no claim all 512 contracts are incorrect."},
+    {"id": "S3", "severity": "HIGH", "title": "Priorities do not express observed return or capacity", "evidence": [{"file": "docs/framework/expert-evolution-2026-10/PLAN.md", "startLine": 25, "endLine": 43}, {"file": "research/expert-evolution/source-program.json", "startLine": 1271, "endLine": 1281}], "correction": "Use one priority semantic, rank actual deliverable families and bound WIP to three active families."},
+    {"id": "S4", "severity": "HIGH", "title": "Acquisition acceptance emphasizes source count without marginal gain", "evidence": [{"file": "research/expert-evolution/source-program.json", "startLine": 12, "endLine": 15}, {"file": "research/expert-evolution/source-program.json", "startLine": 1283, "endLine": 1374}, {"file": "docs/framework/expert-evolution-2026-10/verification.md", "startLine": 10, "endLine": 12}], "correction": "Acquire per observed failure; record independence, transfer conditions and measured benefit, retaining source/rights gates."},
+    {"id": "S5", "severity": "HIGH", "title": "Human review has no operational learning loop", "evidence": [{"file": "docs/framework/expert-evolution-2026-10/PLAN.md", "startLine": 115, "endLine": 124}, {"file": "docs/framework/expert-evolution-2026-10/expertise.md", "startLine": 124, "endLine": 130}], "correction": "Capture feedback, rejected artifact, cause, rule candidate, exception and reserved transfer case; separate personal/client preferences from general methods."},
+    {"id": "S6", "severity": "MEDIUM", "title": "Jev lacks an explicit extraction-only default", "evidence": [{"file": "docs/framework/expert-evolution-2026-10/PLAN.md", "startLine": 80, "endLine": 90}, {"file": "research/expert-evolution/jev-use-cases.json", "startLine": 5, "endLine": 44}], "correction": "Default to extraction once per source/version with persistent cache. Per-output judgment stays a separate benefit-tested experiment.", "scopeLimit": "Design gap only; no paid misuse observed and prior content-specific preference is not treated as a universal prohibition."},
+    {"id": "S7", "severity": "MEDIUM", "title": "Cost and freshness policy lacks per-competency operational criteria", "evidence": [{"file": "research/expert-evolution/model-policy.json", "startLine": 3, "endLine": 5}, {"file": "docs/framework/expert-evolution-2026-10/PLAN.md", "startLine": 110, "endLine": 113}, {"file": "research/expert-evolution/source-program.json", "startLine": 1276, "endLine": 1281}], "correction": "Track total known/unknown artifact cost and time to approval; revalidate only changed/failed competence with bounded acquisition budgets."},
+    {"id": "S8", "severity": "MEDIUM", "title": "Corpus and profile effects are not isolated", "evidence": [{"file": "research/expert-evolution/benchmark-protocol.json", "startLine": 24, "endLine": 30}, {"file": "docs/framework/expert-evolution-2026-10/verification.md", "startLine": 26, "endLine": 38}], "correction": "Keep model fixed and compare baseline, retrieved KB, and KB plus profile; model and Jev experiments have separate cohorts."}
+  ],
+  "alternatives": [
+    {"id": 1, "name": "Expand all172 acquisition", "recommended": false, "tradeoff": "Faster inventory coverage; uncertain effect on perceived output quality."},
+    {"id": 2, "name": "Deliverable-family evolution", "recommended": true, "tradeoff": "Three artifact families yield observable quality/rework evidence; remaining profiles stay planned until transfer is validated."},
+    {"id": 3, "name": "Full taxonomy repair first", "recommended": false, "tradeoff": "Structural consistency improves but delays actual deliverable proof; prefer narrow repairs tied to the three families."}
+  ],
+  "recommendedDag": [
+    {"phaseId": "A", "dependsOn": [], "name": "Value and baseline", "route": "product-orqx with product specialists and creative owners", "readyNow": true, "actions": ["Freeze three authorized briefs, one per family", "Rank observed frequency/rework/impact/confidence/effort with unknowns explicit", "Record baseline artifact time/cost/rework"], "acceptance": ["Three briefs pinned", "At most three active families", "One evolving competence per family", "Metric unit is approved artifact per user/brief"]},
+    {"phaseId": "B", "dependsOn": ["A"], "name": "Contracts and rubric", "route": "narrow deliverable specialists plus quality-gate", "readyNow": true, "actions": ["Review explicit canonical mappings", "Freeze technical gates and anchored creative rubric"], "acceptance": ["100 percent of pilot contracts reviewed", "No unjustified positional mapping", "Critical gates and weights frozen before generation"]},
+    {"phaseId": "C", "dependsOn": ["B"], "name": "Six rendered comparison artifacts", "route": "design-orqx and content-orqx", "readyNow": true, "actions": ["Produce three baseline/enriched pairs with same model/assets/brief", "Render UI plus motion, encoded Reel, and final-size carousel in isolated fixtures"], "acceptance": ["Six actual local artifacts", "Desktop and390px UI captures without horizontal overflow", "Encoded video with audio/captions/timecodes", "Final-size carousel exports", "No publication or significance claim"]},
+    {"phaseId": "D", "dependsOn": ["C"], "name": "Independent review and user learning", "route": "quality-gate and creative reviewers", "readyNow": true, "conditionalBlock": "Final user preference/approval awaits Caio feedback on concrete pairs", "actions": ["Randomize pair order", "Separate technical, creative and user judgments", "Capture cause/rule/exception/new-case for each rejection"], "acceptance": ["Zero critical failures", "Proposed creative target90/100 with every dimension at least15/20", "Scores anchored per family before comparison", "Missing user feedback remains pending"]},
+    {"phaseId": "E", "dependsOn": ["D"], "name": "Failure-driven acquisition", "route": "research-orqx and cloning-orqx", "readyNow": true, "conditionalBlock": "Private source requires lawful access and rights; no purchase/login inferred", "actions": ["Acquire only mechanisms addressing observed pilot failures", "Capture source locator hash conditions exceptions and transfer context"], "acceptance": ["Every unit traces to a pilot failure or genuinely new applicable mechanism", "At most two source attempts", "Suspend family after two batches without new applicable mechanism or reduced observed error"]},
+    {"phaseId": "F", "dependsOn": ["E"], "name": "Persistent extraction and reserved transfer", "route": "cloning-orqx with delivery and independent evaluation specialists", "readyNow": true, "actions": ["Persist extraction per source/version", "Prepare optional Jev pilot", "Evaluate three unseen briefs per family, two repetitions per variant with fixed model"], "acceptance": ["Identical source/version cache prevents repeat paid extraction", "36 reserved outputs is pilot ceiling, not universal quota", "Report score distribution preference critical failures cost and rework", "Any critical failure blocks affected competence promotion", "No causal/statistical claim without separate analysis"]},
+    {"phaseId": "G", "dependsOn": ["F"], "name": "Competence promotion and fixture delivery", "route": "quality-gate and architect/runtime owners", "readyNow": true, "conditionalBlock": "Personal HOME installation, other projects and publication retain current authority gates", "actions": ["Promote only assessed competence with evidence/version/limits", "Verify fixture installation update and rollback", "Open next family only after close/suspend"], "acceptance": ["No blanket172 promotion", "Competence-specific evidence receipt", "Clean/update fixtures verified", "WIP remains at most three active families"]},
+    {"phaseId": "J", "dependsOn": ["E"], "name": "Optional live Jev", "route": "authorized Jev executor", "readyNow": false, "blocker": "Service key absent in currently verified environment", "actions": ["Use secure credential flow and existing authorized shared ledger"], "acceptance": ["Total cost at most USD0.05", "One attempt per group", "Typed response schema and disagreement reported", "No recharge or per-output default"], "optionalFor": ["F"]},
+    {"phaseId": "M", "dependsOn": ["F"], "name": "Optional candidate model cohort", "route": "runtime owner and independent creative reviewer", "readyNow": false, "blocker": "Authenticated candidate runtime access not observed", "actions": ["Run same reserved task cohort only after real account availability and applicable cost authority"], "acceptance": ["Pinned actual model ID", "Same brief/assets and bounded context", "Quality cost latency and regressions compared", "Rollback preserved"], "optionalFor": ["G"]}
+  ],
+  "proposedCreativeRubric": {
+    "status": "requires-per-family-anchor-review-before-generation",
+    "dimensions": ["brief-and-brand", "hierarchy-and-legibility", "composition-and-distinctiveness", "continuity-rhythm-or-interaction", "final-format-finish"],
+    "maximumEach": 20,
+    "anchors": {"0": "absent-or-unusable", "5": "severe-failure", "10": "works-with-major-rework", "15": "consistent-with-minor-adjustments", "20": "approved-reference-for-brief-with-observable-evidence"},
+    "proposedAcceptance": {"totalMinimum": 90, "dimensionMinimum": 15, "criticalFailuresMaximum": 0},
+    "independentCriticalGates": ["factuality", "source-rights", "exact-product", "critical-user-actions", "pertinent-accessibility", "no-horizontal-overflow"],
+    "observedScore": null
+  },
+  "memoryUse": {"file": "MEMORY.md", "lines": [1136, 1151], "purpose": "Prior content-specific extraction-only preference; historical model/pricing values not used as current facts", "rolloutId": "01a0e2f4-bb22-7571-8573-ffc014c59a2a"},
+  "limitations": ["No tests from prior checkpoint were rerun by this audit", "No real artifact quality or user approval is proven", "No external sources were newly read", "No actual ROI or monetary cost invented", "Root coordinates narrow specialist review before executing corrected phases"]
+}

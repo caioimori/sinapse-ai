@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "kind": "mobbin-observed-learning-summary",
+  "status": "independently-reviewed-inferred-project-overlay",
+  "observedAt": "2026-10-02T17:14:19.943Z",
+  "observer": "Codex root authenticated viewer capture; dx-ux-strategist screenshot inspection",
+  "scope": {
+    "flows": 2,
+    "screens": 22,
+    "observationLevel": "viewer-order-only",
+    "executedSourceControls": 0,
+    "jevCallsByThisCurator": 0,
+    "independentlyReviewedMechanisms": 8,
+    "consolidatedMechanisms": 8,
+    "heldOutEvaluations": 0,
+    "expertisePromotion": false,
+    "transferEvaluation": {
+      "artifact": "authored-fictional-local-transfer-fixture",
+      "authorChecks": 66,
+      "independentChecks": 54,
+      "widths": [
+        1440,
+        390,
+        320
+      ],
+      "originalSourceExecuted": false,
+      "backend": false,
+      "causalGain": false
+    },
+    "reviewSplit": {
+      "storedReferenceVisualInference": 6,
+      "authoredLocalExperimentalTransfer": 2
+    }
+  },
+  "references": [
+    {
+      "url": "https://mobbin.com/flows/79848379-dcae-4cd9-85d1-8e2e6891437b?tab=prototype",
+      "observedPositions": 17
+    },
+    {
+      "url": "https://mobbin.com/flows/cc39d360-1469-4001-81d9-441ea5f1a949?tab=prototype",
+      "observedPositions": 5
+    }
+  ],
+  "privacy": {
+    "screenshots": "private-ignored",
+    "publicArtifacts": "own-generalized-rules-and-canonical-source-links-only",
+    "mediaRedistributionAuthorized": false
+  },
+  "mechanisms": [
+    {
+      "id": "mobbin-contextual-filter-pane-v1",
+      "title": "Filtro contextual com orientação preservada",
+      "status": "inferred",
+      "condition": "A pessoa precisa refinar uma lista de trabalho por várias dimensões e comparar escolhas com os resultados, em uma largura que acomode lista e painel sem perda de conteúdo.",
+      "action": "Manter a lista e a posição de navegação identificáveis; abrir um painel de filtros com título, retorno entre dimensões e forma explícita de sair. Definir separadamente o comportamento de reflow e foco.",
+      "exceptions": [
+        "Em tela estreita, priorizar um painel ou página com retorno explícito; não comprimir lista e painel a ponto de ocultar a tarefa.",
+        "Se o refinamento requer contexto muito maior que a lista, uma página própria pode ser mais adequada."
+      ],
+      "counterexamples": [
+        "Um painel estreito que deixa campos ilegíveis ou a lista sem identificação viola a condição de comparação."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "A saída do painel devolve foco ao controle que o abriu e conserva a rota definida.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Em 390px, nenhum campo ou resultado obrigatório depende de arrastar a página horizontalmente.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Os dados e permissões da lista não mudam por efeito exclusivo da abertura do painel.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-filter-cardinality-controls-v1",
+      "title": "Controle coerente com o predicado",
+      "status": "inferred",
+      "condition": "Filtros da mesma superfície têm cardinalidades distintas: conjunto de opções, alternativa exclusiva ou comparação numérica.",
+      "action": "Usar controles com cardinalidade explícita: checkboxes para conjunto, radio buttons para alternativa exclusiva e operador separado do valor para comparação. Especificar o significado de opção ampla, ausência de valor e combinação entre dimensões.",
+      "exceptions": [
+        "Se as categorias forem mutuamente exclusivas no produto de destino, usar seleção única.",
+        "Um filtro numérico sem operador variável pode dispensar seletor, desde que a comparação apareça no rótulo."
+      ],
+      "counterexamples": [
+        "Checkboxes que permitem selecionar alternativas incompatíveis sem explicar a composição tornam o resultado ambíguo."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "A consulta determinística reproduz a cardinalidade definida; nenhuma regra comercial é inferida da referência.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Ausência de valor, limites e número inválido recebem tratamento definido antes da aplicação.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "A escolha continua compreensível por teclado e por rótulos acessíveis.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-explicit-filter-commit-v1",
+      "title": "Aplicação explícita quando há escolhas pendentes",
+      "status": "inferred",
+      "condition": "O refinamento envolve várias escolhas e o produto de destino decide permitir revisão antes de atualizar o conjunto de resultados.",
+      "action": "Separar estado em edição de estado aplicado, expor ação de aplicação e especificar saída, cancelamento e retorno. Só declarar aplicado quando o resultado realmente refletir o estado confirmado.",
+      "exceptions": [
+        "Mudanças baratas e reversíveis de um único controle podem ser imediatas se seu efeito for claro.",
+        "A configuração de colunas mostra alteração visual com popover aberto; não impor aplicação explícita universal."
+      ],
+      "counterexamples": [
+        "Selecionar opções e fechar o painel não pode mostrar resumo aplicado se a consulta ainda usa o estado anterior."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Teste próprio distingue estado draft e aplicado, inclusive cancelamento e fechamento.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Uma confirmação não dispara consulta duplicada ou silenciosamente perde escolhas.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Com erro de carregamento, o resumo não afirma sucesso inexistente.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-active-filter-recap-v1",
+      "title": "Resumo rastreável do refinamento atual",
+      "status": "inferred",
+      "condition": "Vários filtros coexistem e a pessoa precisa reconhecer quais restrições definem a lista atual sem reabrir cada dimensão.",
+      "action": "Expor resumos legíveis das dimensões frequentes e um resumo detalhado para as demais. Se houver contagem compacta, definir se ela mede dimensões ou valores; preservar a condição completa ao expandir e oferecer recuperação.",
+      "exceptions": [
+        "Uma única condição simples pode ser indicada no próprio controle, sem criar painel adicional.",
+        "Uma contagem compacta não substitui operadores, negação ou valores necessários para interpretar a consulta."
+      ],
+      "counterexamples": [
+        "Contar duas categorias como duas dimensões em um local e como uma em outro impede interpretar o refinamento."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Resumos e contagens são derivados do mesmo estado aplicado usado na consulta.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Expandir o resumo permite recuperar todos os valores e operadores, sem perda de informação.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "A ação de limpar tem escopo explícito e preserva a navegação necessária.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "authored-fictional-local-transfer-evaluation-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-aggregate-selection-state-v1",
+      "title": "Seleção agregada com estado intermediário",
+      "status": "inferred",
+      "condition": "Um controle agregado representa um conjunto visível de escolhas independentes, com possibilidade de selecionar apenas parte dele.",
+      "action": "Derivar o agregador das escolhas: nenhuma, parte ou todas. Definir o universo afetado, refletir estado intermediário e especificar o efeito de ativação por mouse e teclado.",
+      "exceptions": [
+        "Quando a seleção é exclusiva, um agregador de conjunto não se aplica.",
+        "Em listas filtradas ou paginadas, explicitar se a ação abrange opções visíveis ou o universo completo."
+      ],
+      "counterexamples": [
+        "Mostrar todas as opções como selecionadas quando apenas uma está ativa altera a interpretação do filtro."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "O estado intermediário nunca é persistido como escolha adicional independente.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "O teste cobre zero, parte e total, inclusive alteração de uma opção depois de selecionar todas.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "O universo da seleção e a indicação acessível de estado intermediário coincidem.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-interaction-designer",
+          "command": "spec-micro-interactions",
+          "competencyIds": [
+            "interaction-state-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-negative-predicate-recap-v1",
+      "title": "Negação preservada no resumo",
+      "status": "inferred",
+      "condition": "O filtro permite modos positivos e negativos para o mesmo valor, como incluir ou excluir uma atribuição.",
+      "action": "Manter o operador de inclusão ou exclusão explícito no controle e no resumo aplicado. Gerar ambos a partir do mesmo predicado tipado; não resumir apenas pelo nome do valor.",
+      "exceptions": [
+        "Se o produto não oferece predicado negativo, não introduzir modos opostos sem necessidade.",
+        "Um indicador compacto pode abreviar o texto, mas deve revelar imediatamente o operador completo."
+      ],
+      "counterexamples": [
+        "Reproduzir um resumo que apresenta somente o canal após selecionar o modo negativo deixa inclusão e exclusão indistinguíveis."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "A mesma seleção com operadores opostos produz resumos diferentes e consultas diferentes.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Persistência, retorno ao painel e ação de limpar conservam ou removem o operador com seu valor.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "O negativo não é convertido em positivo durante compactação ou serialização.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ux-strategist",
+          "command": "create-wireframe-brief",
+          "competencyIds": [
+            "evidence-grounded-wireframe-brief"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "authored-fictional-local-transfer-evaluation-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-empty-filter-recovery-v1",
+      "title": "Resultado vazio com recuperação contextual",
+      "status": "inferred",
+      "condition": "Uma consulta ou combinação de filtros aplicada devolve zero resultados, sem comprovação de erro de serviço ou ausência permanente de dados.",
+      "action": "Apresentar vazio como resultado da consulta, manter filtros e navegação acessíveis e oferecer ação com escopo explícito para ajustar ou limpar restrições. Distinguir vazio de erro, espera e ausência de permissão.",
+      "exceptions": [
+        "Em ausência de permissão, respeitar a política de acesso sem sugerir que limpar filtros revelará dados.",
+        "Em falha de serviço, apresentar recuperação de erro e não atribuir a ausência aos filtros."
+      ],
+      "counterexamples": [
+        "Uma mensagem de catálogo vazio que incentiva criar registros quando apenas um filtro ocultou resultados induz uma ação inadequada."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Zero resultados, erro, carregamento e sem permissão são estados distintos.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Limpar as restrições definidas restaura a consulta autorizada; não exclui registros nem amplia acesso.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "A ação pode ser executada por teclado e anuncia a atualização de resultados no produto próprio.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        },
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    },
+    {
+      "id": "mobbin-table-column-preferences-v1",
+      "title": "Colunas configuráveis com identidade preservada",
+      "status": "inferred",
+      "condition": "Uma tabela de trabalho recorrente contém campos opcionais e pessoas com necessidades distintas de leitura, mantendo campos essenciais definidos pelo produto.",
+      "action": "Oferecer configuração próxima ao cabeçalho, indicar campos exibidos e refletir a mudança visual com contrato explícito de atualização e persistência. Preservar identificação e os campos obrigatórios do trabalho.",
+      "exceptions": [
+        "Não permitir ocultar campos essenciais à identificação ou à decisão atual.",
+        "Em telas estreitas, adaptar a apresentação segundo a tarefa; reduzir colunas não prova responsividade."
+      ],
+      "counterexamples": [
+        "Esconder a única identificação do registro ou salvar preferências por usuário sem isolamento viola a condição de configuração segura."
+      ],
+      "criticalChecks": [
+        {
+          "assertion": "Ocultar colunas não altera dados, permissões ou seleção de registros.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Campos essenciais continuam disponíveis; preferência é restaurável e tem escopo de persistência definido.",
+          "status": "not-tested"
+        },
+        {
+          "assertion": "Popover, foco, teclado e apresentação em 390px são verificados no artefato próprio.",
+          "status": "not-tested"
+        }
+      ],
+      "bindings": [
+        {
+          "agentId": "product-surface-director",
+          "command": "design-product-surface",
+          "competencyIds": [
+            "state-aware-product-surface-specification"
+          ]
+        },
+        {
+          "agentId": "dx-ui-designer",
+          "command": "compose-screen-layouts",
+          "competencyIds": [
+            "responsive-visual-composition"
+          ]
+        },
+        {
+          "agentId": "dx-frontend-engineer",
+          "command": "implement-component-library",
+          "competencyIds": [
+            "flow-focus-contract"
+          ]
+        }
+      ],
+      "review": {
+        "decision": "approved",
+        "scope": "visual-appearance-and-bounded-design-inference-only",
+        "expertisePromotion": false
+      }
+    }
+  ],
+  "gaps": [
+    "Sequência editorial não prova interação com o aplicativo original.",
+    "Não foram observados teclado, foco, mobile, tempo de movimento, backend ou persistência.",
+    "Recuperação e estado de erro do serviço não foram executados.",
+    "A sequência de filtros apresenta mudança entre posições 14 e 15 sem mostrar a ação correspondente.",
+    "Uma referência apresentou perda visual de negação no resumo; o mecanismo proposto corrige essa lacuna, sem alegar observação de consulta real.",
+    "A fonte fundamenta hipóteses; transferência e revisão independente continuam pendentes."
+  ],
+  "integration": {
+    "packagePath": "examples/framework-quality/output/mobbin-20261002/candidates-package.json",
+    "dryRunSourceUnits": 8,
+    "maxUnitChars": 4260,
+    "bindingResolution": "all-exact-bindings-resolved",
+    "persisted": false
+  },
+  "runtime": {
+    "contexts": [
+      {
+        "agentId": "dx-ux-strategist",
+        "command": "create-wireframe-brief",
+        "contextChars": 9825,
+        "knowledgeChars": 5948,
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-ui-designer",
+        "command": "compose-screen-layouts",
+        "contextChars": 9930,
+        "knowledgeChars": 5973,
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-interaction-designer",
+        "command": "spec-micro-interactions",
+        "contextChars": 10082,
+        "knowledgeChars": 5917,
+        "coverage": "gap"
+      },
+      {
+        "agentId": "dx-frontend-engineer",
+        "command": "implement-component-library",
+        "contextChars": 7615,
+        "knowledgeChars": 3280,
+        "coverage": "gap"
+      },
+      {
+        "agentId": "product-surface-director",
+        "command": "design-product-surface",
+        "contextChars": 10053,
+        "knowledgeChars": 5969,
+        "coverage": "gap"
+      }
+    ],
+    "maximumContextChars": 10082,
+    "privateOverlay": "project-only; no HOME/npm redistribution"
+  }
+}

@@ -1,0 +1,691 @@
+{
+  "schemaVersion": 1,
+  "kind": "mobbin-acquisition-coordination-contract",
+  "status": "acquisition-ready-not-observed",
+  "newObservedFlows": 0,
+  "newObservedStates": 0,
+  "newObservedTransitions": 0,
+  "newConsolidatedMechanisms": 0,
+  "validatedExpertise": false,
+  "specialistReview": "pending-delegation-capacity",
+  "batch": {
+    "maximumFlows": 6,
+    "maximumStatesPerFlow": 24,
+    "maximumTransitionsPerFlow": 48,
+    "stopAfterConsecutiveReferencesWithoutNovelConditionExceptionConflictOrAlternative": 3,
+    "volumeIsAcceptanceCriterion": false,
+    "families": [
+      "orientation-navigation",
+      "discovery-filtering",
+      "state-disclosure",
+      "progressive-input",
+      "confirmation-recovery",
+      "adaptive-composition"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "M01",
+      "owner": "design-orqx",
+      "check": "Choose one real product/task gap, family and exact existing consumer binding; reserve transfer case."
+    },
+    {
+      "id": "M02",
+      "owner": "authenticated-source-observer",
+      "check": "Observe current successful authorized access and actual content; preserve timestamp, canonical URL and read scope."
+    },
+    {
+      "id": "M03",
+      "owner": "authenticated-source-observer",
+      "check": "Enumerate inspected entry, intermediate and exit states; mark unshown branches/error/recovery explicitly."
+    },
+    {
+      "id": "M04",
+      "owner": "dx-ux-strategist",
+      "check": "Separate viewer ordering, recorded transition and executed original interface; never infer original functionality from viewer clicks."
+    },
+    {
+      "id": "M05",
+      "owner": "authenticated-source-observer",
+      "check": "Write direct facts separately from inference, preserving canonical locators and scope."
+    },
+    {
+      "id": "M06",
+      "owner": "design-orqx",
+      "check": "Check note rights and protected-media reuse separately; preserve any exact tool usage notice; exclude private user data."
+    },
+    {
+      "id": "M07",
+      "owner": "function-specialist",
+      "check": "Form candidate condition/action/rationale, alternative, exception and counterexample; preserve exact consumer/task/competency."
+    },
+    {
+      "id": "M08",
+      "owner": "deterministic-curation-pipeline",
+      "check": "Schema-check, verify binding/hash/state references, ingest lawful complete note unit, propose once; optional Jev is candidate-only."
+    },
+    {
+      "id": "M09",
+      "owner": "independent-reviewer",
+      "check": "Observe positive, negative and conflict cases in own distinct artifact; all applicable critical gates pass or remain not-tested."
+    },
+    {
+      "id": "M10",
+      "owner": "deterministic-curation-pipeline",
+      "check": "Consolidate independently approved overlay with CAS, verify bounded context and personal installation separately; no automatic profile promotion."
+    }
+  ],
+  "bindings": [
+    {
+      "agentId": "dx-ux-strategist",
+      "command": "create-wireframe-brief",
+      "competencyIds": [
+        "evidence-grounded-wireframe-brief"
+      ]
+    },
+    {
+      "agentId": "dx-ui-designer",
+      "command": "compose-screen-layouts",
+      "competencyIds": [
+        "responsive-visual-composition"
+      ]
+    },
+    {
+      "agentId": "dx-interaction-designer",
+      "command": "spec-micro-interactions",
+      "competencyIds": [
+        "interaction-state-specification"
+      ]
+    },
+    {
+      "agentId": "dx-frontend-engineer",
+      "command": "implement-component-library",
+      "competencyIds": [
+        "flow-focus-contract"
+      ]
+    },
+    {
+      "agentId": "product-surface-director",
+      "command": "design-product-surface",
+      "competencyIds": [
+        "state-aware-product-surface-specification"
+      ]
+    }
+  ],
+  "integration": {
+    "capture": "scripts/expert-evolution/expertise.cjs:ingest",
+    "propose": "scripts/expert-evolution/extraction.cjs:propose",
+    "optionalTextJudgment": "scripts/expert-evolution/extraction.cjs:planExtraction/extract",
+    "review": "scripts/expert-evolution/extraction.cjs:reviewCandidate",
+    "consolidate": "scripts/expert-evolution/extraction.cjs:consolidate",
+    "retrieve": "scripts/framework-evolution/knowledge.cjs:retrieveKnowledge",
+    "context": "scripts/framework-evolution/runtime.cjs:buildRuntimeContext",
+    "distribution": "scripts/expert-evolution/personal-distribution.cjs",
+    "promotionGate": "scripts/expert-evolution/expertise.cjs:assessPromotion",
+    "captureUnitMaxChars": 6000,
+    "captureCliDefaultSegmentChars": 2400,
+    "completeUnitMustNotBeSplit": true,
+    "runtimeMaxChars": 12000,
+    "knowledgeMaxChars": 6000,
+    "excerptMaxWords": 12,
+    "privateRoots": [
+      "research/expert-evolution/library",
+      "examples/framework-quality/output"
+    ],
+    "minimumCodeChangesToStart": 0,
+    "schemaAloneProvesTruth": false
+  },
+  "transferEvaluation": {
+    "status": "reserved-required-before-generation",
+    "cases": [
+      "positive",
+      "negative",
+      "conflict"
+    ],
+    "distinctOwnBrandAndProductContext": true,
+    "learningInputsExcludedFromReservedCase": true,
+    "reviewerIndependentFromAuthor": true,
+    "blindLabels": true,
+    "freeze": [
+      "brief",
+      "assets",
+      "context",
+      "model",
+      "timeBudget",
+      "criteria"
+    ],
+    "criticalCriteria": [
+      "source-scope-rights",
+      "task-flow-completeness",
+      "state-recovery",
+      "keyboard-focus",
+      "responsive-content",
+      "permission-authority"
+    ],
+    "notTestedNeverCountsAsPassed": true,
+    "criticalFailureCanBeCompensatedByVisualScore": false,
+    "report": [
+      "task-success",
+      "critical-defects",
+      "preference-by-case",
+      "elapsed-time",
+      "model-calls",
+      "cost",
+      "unobserved-states",
+      "installation-scope"
+    ],
+    "automaticExpertisePromotion": false
+  },
+  "semanticChecksOutsideSchema": [
+    "All state IDs unique; entryStateId/exitStateId and transition endpoints must resolve.",
+    "Each canonical source locator must match the viewed screen/flow position; metadata alone is not visual inspection.",
+    "An observed-sequence status must enumerate all source steps actually claimed; omitted or unshown steps require observed-partial.",
+    "A recorded/executed transition needs actual observation text; viewer order supports no functional behavior claim.",
+    "Source product identity, scope, platform and flow ID must match observed metadata; hashes cover exact own descriptions, not unseen image bytes.",
+    "Bounds, rights evidence, independent observer identities and fresh access evidence require substantive review.",
+    "Bindings must resolve through exact task-bindings.json and retain one squad.",
+    "Candidate source unit must fit one segment; quote/offset/hash must resolve in ingested library.",
+    "Unknown, null and not-shown are gaps, not silently successful states.",
+    "Do not place premium media, account information, reserved benchmark outputs or secrets in public docs/runtime."
+  ],
+  "recordSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Private factual Mobbin flow record",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "kind",
+      "id",
+      "status",
+      "observer",
+      "observedAt",
+      "source",
+      "rights",
+      "intent",
+      "entryStateId",
+      "exitStateId",
+      "states",
+      "transitions",
+      "branches",
+      "inferences",
+      "bindings",
+      "gaps",
+      "transferCase"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": 1
+      },
+      "kind": {
+        "const": "mobbin-flow-record"
+      },
+      "id": {
+        "$ref": "#/$defs/slug"
+      },
+      "status": {
+        "enum": [
+          "observed-partial",
+          "observed-sequence"
+        ]
+      },
+      "observer": {
+        "$ref": "#/$defs/text"
+      },
+      "observedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "source": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "title",
+          "product",
+          "platform",
+          "flowId",
+          "contentScope",
+          "accessObserved",
+          "accessEvidence"
+        ],
+        "properties": {
+          "url": {
+            "$ref": "#/$defs/mobbinUrl"
+          },
+          "title": {
+            "$ref": "#/$defs/text"
+          },
+          "product": {
+            "$ref": "#/$defs/text"
+          },
+          "platform": {
+            "enum": [
+              "web",
+              "ios",
+              "android"
+            ]
+          },
+          "flowId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100
+          },
+          "contentScope": {
+            "$ref": "#/$defs/text"
+          },
+          "accessObserved": {
+            "const": true
+          },
+          "accessEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "url",
+              "observedAt",
+              "readScope"
+            ],
+            "properties": {
+              "url": {
+                "$ref": "#/$defs/mobbinUrl"
+              },
+              "observedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "readScope": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        }
+      },
+      "rights": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "notesBasis",
+          "notesEvidence",
+          "mediaRedistributionAuthorized",
+          "protectedMediaInLearnedCorpus",
+          "privateUserDataExcluded"
+        ],
+        "properties": {
+          "notesBasis": {
+            "enum": [
+              "owned",
+              "licensed",
+              "permission",
+              "unresolved"
+            ]
+          },
+          "notesEvidence": {
+            "$ref": "#/$defs/text"
+          },
+          "mediaRedistributionAuthorized": {
+            "const": false
+          },
+          "protectedMediaInLearnedCorpus": {
+            "const": false
+          },
+          "privateUserDataExcluded": {
+            "const": true
+          }
+        }
+      },
+      "intent": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "userJob",
+          "targetOutcome",
+          "targetProductConstraints",
+          "mechanismFamily",
+          "sourceSelectionReason"
+        ],
+        "properties": {
+          "userJob": {
+            "$ref": "#/$defs/text"
+          },
+          "targetOutcome": {
+            "$ref": "#/$defs/text"
+          },
+          "targetProductConstraints": {
+            "$ref": "#/$defs/textList"
+          },
+          "mechanismFamily": {
+            "enum": [
+              "orientation-navigation",
+              "discovery-filtering",
+              "state-disclosure",
+              "progressive-input",
+              "confirmation-recovery",
+              "adaptive-composition"
+            ]
+          },
+          "sourceSelectionReason": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "entryStateId": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/slug"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "exitStateId": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/slug"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "states": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 24,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "url",
+            "locator",
+            "position",
+            "viewMode",
+            "description",
+            "observedAt",
+            "descriptionSha256"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/slug"
+            },
+            "url": {
+              "$ref": "#/$defs/mobbinUrl"
+            },
+            "locator": {
+              "$ref": "#/$defs/text"
+            },
+            "position": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "viewMode": {
+              "enum": [
+                "static-screen",
+                "recording-frame",
+                "executed-source-ui"
+              ]
+            },
+            "description": {
+              "$ref": "#/$defs/text"
+            },
+            "observedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "descriptionSha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        }
+      },
+      "transitions": {
+        "type": "array",
+        "maxItems": 48,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "from",
+            "to",
+            "trigger",
+            "observationLevel",
+            "observation",
+            "locator"
+          ],
+          "properties": {
+            "from": {
+              "$ref": "#/$defs/slug"
+            },
+            "to": {
+              "$ref": "#/$defs/slug"
+            },
+            "trigger": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 900
+            },
+            "observationLevel": {
+              "enum": [
+                "viewer-order-only",
+                "recorded-playback",
+                "executed-source-ui"
+              ]
+            },
+            "observation": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 900
+            },
+            "locator": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      },
+      "branches": {
+        "type": "array",
+        "maxItems": 24,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "status",
+            "stateIds",
+            "description"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "alternative",
+                "back",
+                "cancel",
+                "empty",
+                "loading",
+                "error",
+                "recovery",
+                "confirmation",
+                "permission",
+                "other"
+              ]
+            },
+            "status": {
+              "enum": [
+                "shown-static",
+                "shown-recorded",
+                "executed-source-ui",
+                "not-shown"
+              ]
+            },
+            "stateIds": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 24,
+              "items": {
+                "$ref": "#/$defs/slug"
+              }
+            },
+            "description": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        }
+      },
+      "inferences": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "condition",
+            "proposedAction",
+            "rationale",
+            "stateIds",
+            "alternatives",
+            "exceptions",
+            "counterexamples",
+            "unprovenClaims"
+          ],
+          "properties": {
+            "status": {
+              "const": "candidate-inference"
+            },
+            "condition": {
+              "$ref": "#/$defs/text"
+            },
+            "proposedAction": {
+              "$ref": "#/$defs/text"
+            },
+            "rationale": {
+              "$ref": "#/$defs/text"
+            },
+            "stateIds": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "maxItems": 24,
+              "items": {
+                "$ref": "#/$defs/slug"
+              }
+            },
+            "alternatives": {
+              "$ref": "#/$defs/textList"
+            },
+            "exceptions": {
+              "$ref": "#/$defs/textList"
+            },
+            "counterexamples": {
+              "$ref": "#/$defs/textList"
+            },
+            "unprovenClaims": {
+              "$ref": "#/$defs/textList"
+            }
+          }
+        }
+      },
+      "bindings": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "agentId",
+            "command",
+            "competencyIds"
+          ],
+          "properties": {
+            "agentId": {
+              "$ref": "#/$defs/slug"
+            },
+            "command": {
+              "$ref": "#/$defs/slug"
+            },
+            "competencyIds": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "maxItems": 6,
+              "items": {
+                "$ref": "#/$defs/slug"
+              }
+            }
+          }
+        }
+      },
+      "gaps": {
+        "$ref": "#/$defs/textList"
+      },
+      "transferCase": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "distinctContext",
+          "check"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/slug"
+          },
+          "status": {
+            "const": "reserved"
+          },
+          "distinctContext": {
+            "$ref": "#/$defs/text"
+          },
+          "check": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "$defs": {
+      "slug": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$",
+        "maxLength": 120
+      },
+      "text": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 900
+      },
+      "textList": {
+        "type": "array",
+        "maxItems": 24,
+        "items": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "sha256": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "mobbinUrl": {
+        "type": "string",
+        "pattern": "^https://mobbin\\.com/(?:screens|flows|apps|browse|collections|search)(?:/|\\?|$)",
+        "maxLength": 1000
+      }
+    }
+  },
+  "privateCapturePolicy": {
+    "screenshotsRetainedPrivately": true,
+    "scope": "Local audit evidence only; no protected pixels in learned notes, runtime, Git or npm",
+    "redistributionAuthorized": false
+  }
+}

@@ -1,0 +1,747 @@
+{
+  "schemaVersion": 1,
+  "auditId": "creative-plan-2026-10-02",
+  "status": "contracts-ready-artifacts-not-executed",
+  "auditedHead": "47f421cb1d813875504815734acd15562bbeca01",
+  "auditedBranch": "codex/feat/framework-evolution-20261002",
+  "iteration": 1,
+  "maxIterations": 3,
+  "scope": "Auditoria do plano; somente dois novos arquivos de docs/data. Nenhum código, UI, render, chamada paga ou publicação executado.",
+  "promotion": false,
+  "sample": {
+    "count": 28,
+    "ids": [
+      "animation-interpreter",
+      "animation-performance-engineer",
+      "animations-orqx",
+      "content-engineer",
+      "content-governor",
+      "content-orqx",
+      "cro-persuasion",
+      "css-motion-artist",
+      "design-orqx",
+      "design-system",
+      "dx-accessibility-specialist",
+      "dx-design-system-architect",
+      "dx-frontend-engineer",
+      "dx-interaction-designer",
+      "dx-performance-engineer",
+      "dx-ui-designer",
+      "dx-ux-strategist",
+      "editorial-strategist",
+      "generative-particle-engineer",
+      "motion-choreographer",
+      "platform-aesthetic-director",
+      "platform-specialist",
+      "premium-packaging-strategist",
+      "product-surface-director",
+      "scroll-narrative-engineer",
+      "shader-artist",
+      "threejs-architect",
+      "ux-designer"
+    ],
+    "selection": "Perfis de design/animations/content excluindo content-analyst e signal-intelligence, escolhidos por relação direta com produção/coordenação. Não equivale à lista de 28 funções aprofundadas citada em verification.md, nem a 28 agentes validados.",
+    "inspected": "Missão, entregáveis, critérios, gaps e evolução; leitura canônica aprofundada em fontes citadas nos gaps."
+  },
+  "gaps": [
+    {
+      "id": "CREATIVE-01",
+      "priority": "P0",
+      "title": "O benchmark aprova decisões escritas, não produto criativo",
+      "evidence": [
+        {
+          "path": "research/expert-evolution/benchmark-protocol.json",
+          "line": 15
+        },
+        {
+          "path": "research/expert-evolution/benchmark-results.json",
+          "line": 246
+        },
+        {
+          "path": "docs/framework/expert-evolution-2026-10/verification.md",
+          "line": 22
+        }
+      ],
+      "finding": "Os dez casos e os 178 testes têm escopo delimitado e corretamente declarado. Não existe receipt de UI renderizada, motion executado, carrossel exportado ou Reel ouvido nesta comparação.",
+      "action": "Executar quatro contratos de artefato abaixo com baseline e contexto enriquecido, direitos constantes e reviewer separado. Manter os casos escritos como etapa de triagem.",
+      "acceptance": "Receipts incluem arquivos finais com hash, screenshots/clip/áudio observados, resultados por rubrica e falhas preservadas."
+    },
+    {
+      "id": "CREATIVE-02",
+      "priority": "P0",
+      "title": "Heurísticas contextualizadas conflitam com ordens canônicas universais",
+      "evidence": [
+        {
+          "path": "squads/squad-design/agents/dx-ui-designer.md",
+          "line": 100
+        },
+        {
+          "path": "squads/squad-design/agents/platform-aesthetic-director.md",
+          "line": 92
+        },
+        {
+          "path": "squads/squad-animations/agents/animation-performance-engineer.md",
+          "line": 121
+        },
+        {
+          "path": "squads/squad-animations/agents/motion-choreographer.md",
+          "line": 96
+        },
+        {
+          "path": "squads/squad-content/agents/content-engineer.md",
+          "line": 35
+        },
+        {
+          "path": "research/expert-evolution/priority-pack.json",
+          "line": 1366
+        }
+      ],
+      "finding": "Cor #0A0A0A, exclusão de #000, medida 45–75ch, faixa tipográfica proibida, easing não linear e FPS por classe de dispositivo viram ordens. O pacote novo permite exceções, mas autoridade continua na fonte canônica. A tabela local de motion aceita linear em :61–62, contrariando o reforço.",
+      "action": "Alteração posterior autorizada deve tornar padrões em defaults condicionais: objetivo, contexto, faixa inicial, exceção, contraexemplo e forma de medir. Preservar controles de acessibilidade. Proibir afirmação causal ou universal sem apoio; não proibir densidade, linear, stock licenciado ou layout animado por categoria.",
+      "acceptance": "Casos de conflito aceitam marca clara, texto grande em faixa antes proibida, tabela densa útil, linear funcional e height medido sem violação automática."
+    },
+    {
+      "id": "CREATIVE-03",
+      "priority": "P0",
+      "title": "Perfis confundem entregável, responsabilidade e critério de outra função",
+      "evidence": [
+        {
+          "path": "research/expert-evolution/expert-profiles.json",
+          "line": 8891
+        },
+        {
+          "path": "research/expert-evolution/expert-profiles.json",
+          "line": 15676
+        },
+        {
+          "path": "research/expert-evolution/expert-profiles.json",
+          "line": 4863
+        },
+        {
+          "path": "scripts/expert-evolution/expertise.cjs",
+          "line": 85
+        },
+        {
+          "path": "scripts/expert-evolution/expertise.cjs",
+          "line": 89
+        }
+      ],
+      "finding": "design-system tem entregável 'metric'. Curadoria de referências de Hue exige fluxo por teclado. Os três itens content-engineer não são um contrato completo de produção audiovisual. A seleção de um entregável e corte para dois critérios pode retirar condições de falha.",
+      "action": "Separar responsabilidade, artefato, acceptance específico e validação downstream. Curador entrega decomposição e encaixe; frontend entrega comportamento; vídeo exige storyboard, arquivo e áudio. Marcar critérios críticos como não truncáveis em uma implementação posterior.",
+      "acceptance": "Amostra delimitada tem artefatos por função e consumidores; cápsula conserva bloqueadores ou declara omissão e impede promoção."
+    },
+    {
+      "id": "CREATIVE-04",
+      "priority": "P0",
+      "title": "Falta uma rubrica observável para julgar estética e marca",
+      "evidence": [
+        {
+          "path": "docs/framework/expert-evolution-2026-10/models.md",
+          "line": 31
+        },
+        {
+          "path": "squads/squad-design/agents/platform-aesthetic-director.md",
+          "line": 29
+        },
+        {
+          "path": "squads/squad-content/agents/content-governor.md",
+          "line": 46
+        }
+      ],
+      "finding": "O plano separa julgamento visual, mas não define pesos, âncoras ou receipt. Canon de seis SaaS e veto a templates/stock não demonstram distintividade para outro setor. Média 4/5 editorial não equivale ao alvo 90/100.",
+      "action": "Usar rubricas por artefato, critérios de marca registrados no brief, revisão sem rótulo baseline/enriched e comparação com rejeitável. Automação mede estrutura; humano ou modelo visual capaz observa pixels. Nenhum juiz pode avaliar o próprio output sozinho.",
+      "acceptance": "Score por dimensão, evidência localizada, bloqueadores e divergências; >=90/100 apenas com todos os gates e nenhum critério abaixo de 3/4."
+    },
+    {
+      "id": "CREATIVE-05",
+      "priority": "P0",
+      "title": "Narrativa escrita não verifica áudio, montagem ou origem da mídia final",
+      "evidence": [
+        {
+          "path": "docs/framework/expert-evolution-2026-10/PLAN.md",
+          "line": 59
+        },
+        {
+          "path": "research/expert-evolution/priority-pack.json",
+          "line": 2088
+        },
+        {
+          "path": "research/expert-evolution/priority-cases.json",
+          "line": 169
+        },
+        {
+          "path": "squads/squad-content/agents/content-engineer.md",
+          "line": 72
+        }
+      ],
+      "finding": "Há bons requisitos de fala/plano e legendas, mas a execução atual é textual. Não há prova de intelligibilidade, mix, sincronização, continuidade ou correspondência de produto no arquivo final. Hook e duração têm números prévios sem exceção explícita.",
+      "action": "Reel local com captura própria da fixture, trilha/som próprio e narração própria ou síntese local já disponível e autorizada. Separar storyboard e validação do master. Se voz legítima não estiver disponível, usar leitura textual + sound design próprio e declarar limite de cobertura de diálogo.",
+      "acceptance": "Inspeção temporal e escuta integral em fone e alto-falante; legenda revisada, sons relevantes, origem/hashes, sem clipping audível, sem claim de retenção/viralidade."
+    },
+    {
+      "id": "CREATIVE-06",
+      "priority": "P0",
+      "title": "Acessibilidade e performance precisam de escopo, estados e ambiente",
+      "evidence": [
+        {
+          "path": "research/expert-evolution/expert-profiles.json",
+          "line": 9695
+        },
+        {
+          "path": "research/expert-evolution/priority-cases.json",
+          "line": 92
+        },
+        {
+          "path": "squads/squad-animations/agents/animation-performance-engineer.md",
+          "line": 89
+        }
+      ],
+      "finding": "Desktop/390px é necessário, mas não comprova reflow de conteúdo web a 320 CSS px. CSS global quase zero não controla loops de JS, vídeo e lifecycle. Metas 30/60 FPS não identificam hardware, refresh rate ou função.",
+      "action": "Adicionar reflow com exceções documentadas, teclado/foco, alteração de reduced-motion em runtime, pausa de autoplay quando aplicável e dez ciclos de lifecycle. Medir trace no ambiente descrito; emulação não vira prova de GPU real.",
+      "acceptance": "Nenhuma perda funcional, foco previsível, CSS/JS/media coerentes; zero callbacks/loops da fixture após teardown; relatório de frames e long tasks sem promessa universal."
+    },
+    {
+      "id": "CREATIVE-07",
+      "priority": "P1",
+      "title": "Fontes e referências mundiais precisam virar mecanismos avaliados",
+      "evidence": [
+        {
+          "path": "docs/framework/expert-evolution-2026-10/priority-research.md",
+          "line": 37
+        },
+        {
+          "path": "docs/framework/expert-evolution-2026-10/PLAN.md",
+          "line": 65
+        },
+        {
+          "path": "research/expert-evolution/priority-pack.json",
+          "line": 681
+        }
+      ],
+      "finding": "Seções públicas e referências de autores são úteis, mas não comprovam método completo, leitura de obras ou expertise. Val Head e Murch continuam candidatos. 45 heurísticas inferred requerem teste, não promoção pela quantidade.",
+      "action": "Adquirir somente a lacuna que um artefato revelou; conservar edição/locator, direito, condição, mecanismo, conflito e alternativa. Avaliar aplicação e transferência para outro brief; parar no terceiro ciclo sem novas melhorias observáveis.",
+      "acceptance": "Cada mecanismo aplicado tem evidência específica e caso reservado; referências indisponíveis continuam candidate; nenhuma promoção de clonagem ou expertise global."
+    },
+    {
+      "id": "CREATIVE-08",
+      "priority": "P1",
+      "title": "Mobbin e conhecimento não cobrem todos os consumidores criativos",
+      "evidence": [
+        {
+          "path": "docs/framework/expert-evolution-2026-10/priority-research.md",
+          "line": 13
+        },
+        {
+          "path": "docs/framework/expert-evolution-2026-10/priority-research.md",
+          "line": 17
+        },
+        {
+          "path": "research/expert-evolution/mobbin-onboarding-receipt.json",
+          "line": 22
+        },
+        {
+          "path": "research/expert-evolution/priority-pack.json",
+          "line": 1973
+        }
+      ],
+      "finding": "Receipts registram nove prévias lidas por priority_expertise: quatro telas e cinco posições de Ahead. Esta auditoria leu receipts, não pixels novamente. Treze consumidores não abrangem diretores estéticos, governança, narrativa, áudio e execução cross-squad.",
+      "action": "Preservar scope/readBy e não declarar 50 fluxos. Mapear mecanismo a owner/consumer por função; passar brief e evidência mínima. Jev pode classificar texto recuperado, não conferir pixels/áudio nem licenças por inferência.",
+      "acceptance": "Handoff traz origem, escopo e limites; adaptação original de padrão sem copiar asset premium; rota audiovisual inclui production-director e reviewer editorial."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "creative-ui",
+      "title": "Microfrontend responsivo funcional",
+      "owner": "dx-frontend-engineer",
+      "designOwner": "dx-ui-designer",
+      "reviewers": [
+        "dx-accessibility-specialist",
+        "dx-performance-engineer",
+        "product-surface-director"
+      ],
+      "brief": {
+        "brand": "Marca fictícia Estúdio Aurora, identidade independente de SINAPSE; decisões e valores registrados pelo especialista no brief antes da execução.",
+        "audience": "Organizador de uma oficina que escolhe itens de um kit.",
+        "outcome": "Encontrar item, entender disponibilidade, definir quantidade válida e revisar resumo sem perder contexto.",
+        "data": "Fixtures sintéticas locais; nenhuma conta, API ou dado de cliente.",
+        "scope": "Uma superfície pequena isolada, sem modificar o runtime do framework nem criar infraestrutura. Evidência local e estados de demonstração explicitamente rotulados."
+      },
+      "deliverables": [
+        "brief e decisões de marca",
+        "fonte executável local com instrução reproduzível",
+        "screenshots 1440px e 390px por estado representativo",
+        "receipt de teclado e reflow 320 CSS px",
+        "resultado funcional e trace limitado com hash do build"
+      ],
+      "cases": {
+        "positive": "Buscar e filtrar, abrir item, alterar quantidade e conferir resumo; teclado completa a mesma tarefa.",
+        "negative": "Nome extenso, resultado vazio, quantidade inválida e erro simulado preservam contexto; informação não some para caber.",
+        "conflict": "Público experiente requer densidade alta; solução clara e acessível mantém informação útil e identidade clara, sem forçar layout SaaS escuro."
+      },
+      "automaticChecks": [
+        "Resumo calculado corretamente para fixtures conhecidas; alterações refletidas.",
+        "documentElement.scrollWidth <= clientWidth em 1440/390 e conteúdo não excepcionado a 320 CSS px.",
+        "Tab/Escape/retorno de foco registrados; controles têm nomes.",
+        "Capturar erros de console e falhas de recursos; auditoria automática acessível não substitui leitura manual."
+      ],
+      "manualChecks": [
+        "Executar tarefa e revisar todos os estados; leitor de tela real quando disponível, registrar ausência.",
+        "Pixels em tamanho real: hierarquia, ritmo espacial, tipografia, integridade de marca e mensagens úteis.",
+        "Distinguir simulação de loading/error da persistência; não alegar backend/RLS comprovado."
+      ],
+      "rubric": {
+        "scale": {
+          "0": "ausente ou contradiz o brief",
+          "1": "falha grave observável",
+          "2": "parcial; defeitos materiais",
+          "3": "adequado com limitações localizadas",
+          "4": "excelente; decisão sustentada e execução consistente"
+        },
+        "dimensions": [
+          {
+            "id": "tarefa e estados",
+            "weight": 30,
+            "evidence": "ações e resumo corretos"
+          },
+          {
+            "id": "composição e legibilidade",
+            "weight": 25,
+            "evidence": "capturas de estados nos tamanhos finais"
+          },
+          {
+            "id": "identidade e adequação",
+            "weight": 20,
+            "evidence": "brief + escolhas visuais justificadas"
+          },
+          {
+            "id": "acessibilidade",
+            "weight": 15,
+            "evidence": "teclado, foco, reflow e inspeção manual"
+          },
+          {
+            "id": "performance e resiliência",
+            "weight": 10,
+            "evidence": "trace delimitado + conteúdo adverso"
+          }
+        ],
+        "calculation": "sum(weight * score / 4), sem arredondar para aprovação",
+        "pass": "total >= 90 e nenhum score < 3; todos os bloqueadores resolvidos",
+        "unobserved": "Critério não observado fica null; total e PASS indisponíveis; não tratar N/A como nota máxima"
+      },
+      "blockers": [
+        "Tarefa não completa ou resumo incorreto",
+        "Perda de conteúdo/ação, foco preso ou escape indevido",
+        "Overflow de página na fixture ou texto ilegível",
+        "Marca/claim inventado",
+        "Critério crítico não observado"
+      ]
+    },
+    {
+      "id": "creative-motion",
+      "title": "Motion que preserva tarefa, continuidade e controle",
+      "owner": "css-motion-artist",
+      "designOwner": "motion-choreographer",
+      "reviewers": [
+        "animation-performance-engineer",
+        "dx-accessibility-specialist"
+      ],
+      "brief": {
+        "host": "A mesma fixture UI, com instância isolada para montagem e desmontagem.",
+        "outcome": "Mostrar mudança de estado e orientação sem atrasar ou ocultar a tarefa.",
+        "scope": "Uma transição de disclosure/feedback e um movimento opcional controlável. Alternativa reduced-motion preserva informação. Sem WebGL obrigatório."
+      },
+      "deliverables": [
+        "mapa de função/timing/ownership por efeito",
+        "clip normal e reduced-motion da mesma tarefa",
+        "trace e metadados de dispositivo/browser/refresh",
+        "receipt de mudança de preferência e lifecycle"
+      ],
+      "cases": {
+        "positive": "Mudança de estado tem continuidade, feedback e controle sem confundir sucesso e processamento.",
+        "negative": "Trocar reduced-motion em runtime, aba oculta e dez montar/desmontar; detectar timer/RAF/listener da fixture após desmontagem.",
+        "conflict": "Progresso contínuo pode ser linear; disclosure pode alterar layout com custo medido. Aprovação depende da função e medição, não de proibição absoluta."
+      },
+      "automaticChecks": [
+        "Instrumentar RAF/timers/listeners pertencentes à fixture; dez ciclos, retorno ao baseline e zero callbacks ativos após teardown.",
+        "Prefers-reduced-motion antes de iniciar e após troca; JS/CSS/media seguem a alternativa.",
+        "Pausa em conteúdo automático aplicável; nenhuma atividade de render inútil da fixture em aba oculta.",
+        "Trace de no mínimo 10s com sequência definida; frames/long tasks e condições declarados. Emulação marcada como laboratório."
+      ],
+      "manualChecks": [
+        "Assistir clips integrais: continuidade, spacing, peso, interrupção e legibilidade.",
+        "Executar a mesma ação sem movimento; foco, texto e conclusão equivalentes.",
+        "Interações rápidas não acumulam animações nem deixam estado preso."
+      ],
+      "rubric": {
+        "scale": {
+          "0": "ausente ou contradiz o brief",
+          "1": "falha grave observável",
+          "2": "parcial; defeitos materiais",
+          "3": "adequado com limitações localizadas",
+          "4": "excelente; decisão sustentada e execução consistente"
+        },
+        "dimensions": [
+          {
+            "id": "função e continuidade",
+            "weight": 30,
+            "evidence": "clips + tarefa"
+          },
+          {
+            "id": "controle e acessibilidade",
+            "weight": 25,
+            "evidence": "reduced-motion e pausa"
+          },
+          {
+            "id": "timing e linguagem da marca",
+            "weight": 20,
+            "evidence": "mapa + avaliação do movimento"
+          },
+          {
+            "id": "lifecycle e performance",
+            "weight": 25,
+            "evidence": "instrumentação + trace"
+          }
+        ],
+        "calculation": "sum(weight * score / 4), sem arredondar para aprovação",
+        "pass": "total >= 90 e nenhum score < 3; todos os bloqueadores resolvidos",
+        "unobserved": "Critério não observado fica null; total e PASS indisponíveis; não tratar N/A como nota máxima"
+      },
+      "blockers": [
+        "Loop/callback da fixture após teardown",
+        "Alternativa reduzida perde informação ou mantém movimento vestibular não justificado",
+        "Autoplay aplicável sem controle",
+        "Interação fica bloqueada",
+        "FPS universal declarado sem ambiente"
+      ]
+    },
+    {
+      "id": "creative-carousel",
+      "title": "Carrossel editorial exportado e legível",
+      "owner": "content-engineer",
+      "designOwner": "brand-collateral-designer",
+      "reviewers": [
+        "platform-specialist",
+        "content-governor"
+      ],
+      "brief": {
+        "brand": "A mesma marca fictícia com guidelines registrados.",
+        "audience": "Pessoa organizando sua primeira oficina.",
+        "outcome": "Entender um mecanismo de planejamento de kit e aplicar um próximo passo concreto.",
+        "scope": "Cinco slides 1080x1350 como fixture de avaliação, não lei de formato; conteúdo próprio sem dados de cliente nem promessa de resultado."
+      },
+      "deliverables": [
+        "tese/mecanismo/prova ou demonstração sintética/direção",
+        "slides PNG finais e fonte editável",
+        "contact sheet e prévia no tamanho equivalente de 390 CSS px",
+        "texto equivalente acessível e legenda PT-BR",
+        "manifest de assets/hashes/origem"
+      ],
+      "cases": {
+        "positive": "Capa orienta, desenvolvimento demonstra o mecanismo, conclusão dá ação coerente; leitura contínua no celular.",
+        "negative": "Versão adversa com texto maior e termo longo deve preservar informação e legibilidade; contador de caracteres sozinho não aprova.",
+        "conflict": "Um diagrama útil pode exigir mais densidade. Resolver por hierarquia, exemplos e texto equivalente, sem cortar prova nem padronizar todos os slides."
+      },
+      "automaticChecks": [
+        "Dimensões/ordem/arquivos consistentes e texto equivalente completo.",
+        "Detectar caixas fora do canvas, sobreposição de texto e contraste onde mensurável.",
+        "Abrir todos os PNGs; verificar font/asset missing; exportar prévia 390px sem ampliar artificialmente."
+      ],
+      "manualChecks": [
+        "Ler todos os slides em ordem no tamanho de consumo; transcrever termos essenciais sem zoom.",
+        "Conferir relação causal, prova, ação e variação compositiva, não uma tese desconectada por slide.",
+        "Comparar marca, crop, hierarquia e ortografia com brief; registrar achado por slide."
+      ],
+      "rubric": {
+        "scale": {
+          "0": "ausente ou contradiz o brief",
+          "1": "falha grave observável",
+          "2": "parcial; defeitos materiais",
+          "3": "adequado com limitações localizadas",
+          "4": "excelente; decisão sustentada e execução consistente"
+        },
+        "dimensions": [
+          {
+            "id": "tese e progressão",
+            "weight": 30,
+            "evidence": "leitura sequencial"
+          },
+          {
+            "id": "legibilidade e hierarquia",
+            "weight": 30,
+            "evidence": "slides em 390px"
+          },
+          {
+            "id": "identidade e composição",
+            "weight": 25,
+            "evidence": "brief + pixels"
+          },
+          {
+            "id": "equivalente textual e integridade",
+            "weight": 15,
+            "evidence": "texto e manifesto"
+          }
+        ],
+        "calculation": "sum(weight * score / 4), sem arredondar para aprovação",
+        "pass": "total >= 90 e nenhum score < 3; todos os bloqueadores resolvidos",
+        "unobserved": "Critério não observado fica null; total e PASS indisponíveis; não tratar N/A como nota máxima"
+      },
+      "blockers": [
+        "Texto crítico ilegível no tamanho final",
+        "Prova/claim inventado ou recortado",
+        "Sequência contraditória",
+        "Asset sem origem válida",
+        "Texto equivalente ausente"
+      ]
+    },
+    {
+      "id": "creative-reel",
+      "title": "Reel audiovisual local com mídia própria",
+      "owner": "production-director",
+      "scriptOwner": "content-engineer",
+      "designOwner": "brand-motion-vfx",
+      "reviewers": [
+        "content-governor",
+        "platform-specialist"
+      ],
+      "brief": {
+        "brand": "A mesma marca fictícia e produto de demonstração da fixture.",
+        "outcome": "Demonstrar a escolha de um kit com fala/plano correspondentes e conclusão compreensível.",
+        "scope": "Master vertical de cerca de 20–30s para esta fixture; tempo é decisão do brief revisável, não recomendação universal de Reels. Sem publicar, conta social, serviço pago ou material premium.",
+        "assets": "Captura própria da UI + grafismos e áudio próprios. Narração própria ou síntese local pré-existente autorizada; sem depender de nova assinatura."
+      },
+      "deliverables": [
+        "storyboard e mapa fala/plano/claim com timecodes",
+        "master MP4 com stream de áudio efetivamente decodificável",
+        "legendas revisadas e transcrição/texto equivalente",
+        "frames de início/meio/fim e preview em tamanho de consumo",
+        "manifest por asset: criador/origem/licença ou autorização/hash/modelo/SKU se aplicável",
+        "receipt de escuta e inspeção temporal do master"
+      ],
+      "cases": {
+        "positive": "Imagem demonstra exatamente a fala; áudio e legenda compreensíveis; progressão conclui a tarefa sem engano.",
+        "negative": "Injetar título/claim não demonstrado, legenda errada ou arquivo sem áudio em cópia de teste; reviewer deve reprovar apesar do render válido.",
+        "conflict": "Abertura calma ou plano longo pode esclarecer melhor a tarefa; aceitar se atenção, compreensão e marca sustentadas, sem obrigar hook3s/corte rápido."
+      },
+      "automaticChecks": [
+        "Probe de duração, resolução, codec e áudio; decodificar master completo e detectar silêncio involuntário/frames quebrados.",
+        "Legendas dentro da duração, timecodes em ordem e termos críticos reconciliados com transcrição.",
+        "Medir pico/loudness para diagnóstico e conferir ausência de clipping; não inventar padrão único de LUFS para redes.",
+        "Hash/origem de cada asset e master; nenhum arquivo premium/cliente."
+      ],
+      "manualChecks": [
+        "Assistir e ouvir master inteiro com som em fone e alto-falante; assistir também sem áudio.",
+        "Revisar fala/imagem/legenda por timecode, ritmo, continuidade, marca e enquadramento em 390px.",
+        "Conferir sons não verbais relevantes nas legendas, inteligibilidade e mix; medição não substitui escuta.",
+        "Safe areas são overlay de avaliação local versionado; sem preview na plataforma não alegar validação de upload/publicação."
+      ],
+      "rubric": {
+        "scale": {
+          "0": "ausente ou contradiz o brief",
+          "1": "falha grave observável",
+          "2": "parcial; defeitos materiais",
+          "3": "adequado com limitações localizadas",
+          "4": "excelente; decisão sustentada e execução consistente"
+        },
+        "dimensions": [
+          {
+            "id": "mensagem e correspondência audiovisual",
+            "weight": 30,
+            "evidence": "master + mapa de planos"
+          },
+          {
+            "id": "montagem e ritmo",
+            "weight": 20,
+            "evidence": "inspeção temporal integral"
+          },
+          {
+            "id": "legibilidade e identidade",
+            "weight": 20,
+            "evidence": "frames e preview no tamanho final"
+          },
+          {
+            "id": "áudio e legendas",
+            "weight": 20,
+            "evidence": "escuta + revisão temporal"
+          },
+          {
+            "id": "origem e entrega técnica",
+            "weight": 10,
+            "evidence": "manifest + probe/decodificação"
+          }
+        ],
+        "calculation": "sum(weight * score / 4), sem arredondar para aprovação",
+        "pass": "total >= 90 e nenhum score < 3; todos os bloqueadores resolvidos",
+        "unobserved": "Critério não observado fica null; total e PASS indisponíveis; não tratar N/A como nota máxima"
+      },
+      "blockers": [
+        "Produto/claim diferente do demonstrado",
+        "Origem/direitos ausentes",
+        "Áudio obrigatório ausente/inaudível ou legenda crítica errada",
+        "Master não decodifica integralmente",
+        "Julgamento apenas de thumbnail ou texto do roteiro"
+      ],
+      "fallback": "Se não houver voz legítima, pode entregar Reel com texto e sound design próprio, registrando que diálogo falado permanece não avaliado. Não atribuir nota a competência não exercitada."
+    }
+  ],
+  "judgment": {
+    "automatic": "Determinístico para comportamento/contagem/decodificação/contraste mensurável/instrumentação; não pontua beleza, narrativa, relevância ou inteligibilidade.",
+    "manual": "Reviewer separado do autor observa pixels/clips/áudio reais, cita arquivo+slide/frame/timecode e aplica âncoras.",
+    "visualModel": "Somente modelo com entrada visual comprovada recebe imagens/clips autorizados; descreve observações e incerteza. Sem capacidade, registrar not_observed. Vídeo e áudio precisam capabilities específicas.",
+    "jev": "Somente texto/JSON recuperado para apoio/contradição/classificação contextual. Não avalia pixels, áudio bruto, qualidade visual ou concede direitos. Credencial/piloto depende do controlador existente; esta auditoria não chama API.",
+    "reviewConflict": "Divergência >=1 ponto em qualquer dimensão exige terceiro reviewer; conservar ambas as notas e decisão fundamentada. Sem resolver, resultado CONCERNS. Nota faltante não vira média."
+  },
+  "benchmark": {
+    "unit": "Um artefato completo por contrato em cada variante; casos positivos/negativos/conflito integrados à mesma fixture.",
+    "variants": [
+      "baseline pinado",
+      "enriched pinado"
+    ],
+    "model": "Registrar ID realmente executado, runtime e configuração; sem afirmar Opus/Jev disponível pela documentação.",
+    "blinding": "Brief, corpus, fontes e orçamento pinados antes; autor não recebe rubrica de preferências do reviewer nem solução esperada. Reviewer recebe brief público e artefatos A/B em ordem aleatória; registrar quebra de cegamento.",
+    "fairness": "Mesmos dados/assets/origens/tempo/ferramentas para ambas variantes; diferença de contexto explicitada. Um artefato por variante continua sem poder estatístico/causal.",
+    "freeze": "Casos, pesos e bloqueadores congelados antes da geração. Negativos mutados são teste de detecção, não usados para treinar executor.",
+    "receiptFields": [
+      "inputSha256",
+      "corpusSha256",
+      "modelId",
+      "toolsAndVersions",
+      "artifactPathsAndSha256",
+      "executionEnvironment",
+      "automatedChecks",
+      "observedMedia",
+      "rubricScores",
+      "blockers",
+      "reviewer",
+      "timeAndCost",
+      "failuresAndSkips",
+      "variantReveal"
+    ],
+    "stopRule": "Máximo três ciclos gerar→verificar→corrigir por artefato, com timeout por execução antes de iniciar. No terceiro, PASS apenas com evidência; senão preservar output e reportar gap. Nenhuma coleta ou retry infinito.",
+    "negativePolicy": "Revisor deve rejeitar negativos críticos mesmo se estética >=90. Não mexer em pesos/casos para fabricar vitória.",
+    "promotionRule": "PASS demonstra apenas o artefato/competência exercitada; sem promoção dos 172 agentes, expertise mundial ou causalidade de conversão."
+  },
+  "consumerMap": [
+    {
+      "mechanism": "brief de marca e função",
+      "owners": [
+        "brand-orqx",
+        "design-orqx",
+        "content-orqx"
+      ],
+      "consumers": [
+        "dx-ui-designer",
+        "product-surface-director",
+        "brand-collateral-designer",
+        "content-engineer"
+      ],
+      "output": "brief autorizado + decisões/exceções; orqx coordena, não executa domínio"
+    },
+    {
+      "mechanism": "referência e decomposição",
+      "owners": [
+        "platform-aesthetic-director",
+        "dx-ux-strategist"
+      ],
+      "consumers": [
+        "dx-ui-designer",
+        "premium-packaging-strategist",
+        "product-surface-director"
+      ],
+      "output": "mecanismo observado + encaixe + alternativa + scope; nenhuma obrigação de copiar estilo"
+    },
+    {
+      "mechanism": "implementação e comportamento",
+      "owners": [
+        "dx-frontend-engineer"
+      ],
+      "consumers": [
+        "dx-accessibility-specialist",
+        "dx-performance-engineer"
+      ],
+      "output": "UI funcional + estados + receipts; source compilado não prova UX"
+    },
+    {
+      "mechanism": "motion e lifecycle",
+      "owners": [
+        "motion-choreographer",
+        "css-motion-artist"
+      ],
+      "consumers": [
+        "animation-performance-engineer",
+        "dx-accessibility-specialist",
+        "brand-motion-vfx"
+      ],
+      "output": "mapa + clip + instrumentação; easing contextual e orçamento por ambiente"
+    },
+    {
+      "mechanism": "editorial e adaptação",
+      "owners": [
+        "content-engineer",
+        "platform-specialist"
+      ],
+      "consumers": [
+        "brand-collateral-designer",
+        "production-director",
+        "content-governor"
+      ],
+      "output": "tese + storyboard/texto + contrato versionado; duração/contagem não provam leitura"
+    },
+    {
+      "mechanism": "audiovisual e mídia",
+      "owners": [
+        "production-director",
+        "brand-motion-vfx"
+      ],
+      "consumers": [
+        "content-governor",
+        "platform-specialist"
+      ],
+      "output": "master + áudio + legendas + manifest; origem/plano/produto avaliados no final"
+    },
+    {
+      "mechanism": "apoio semântico",
+      "owners": [
+        "research-orqx"
+      ],
+      "consumers": [
+        "content-engineer",
+        "dx-ux-strategist",
+        "content-governor"
+      ],
+      "output": "texto contextualizado; Jev é juiz delimitado, sem authority para aprovar assets"
+    }
+  ],
+  "mobbin": {
+    "receiptOnlyThisAudit": true,
+    "newPixelInspection": false,
+    "previousInspector": "priority_expertise",
+    "reportedPreviews": 9,
+    "scope": "4 telas web + Ahead posições 1/6/12/17/22 de 22; não 50 fluxos.",
+    "reuse": "Observação referenciada; sem pixels premium no repositório, export ou inferência de backend/eficácia."
+  },
+  "sourcesReadThisAudit": [
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "scope": "SC/Intent/exceções; guia informativo, não certificação",
+      "applies": "320 CSS px e exceção delimitada de layout bidimensional"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
+      "scope": "SC/Intent; Level AAA, não AA automático",
+      "applies": "Desativar movimento de interação não essencial; reduced-motion como implementação, não equivalência automática"
+    },
+    {
+      "url": "https://web.dev/articles/animations-guide",
+      "scope": "Escolha de propriedades e profiling",
+      "applies": "Preferir compositor e medir custo; recomendação técnica não proibição universal"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "scope": "Revisão e precisão de legendas",
+      "applies": "Legendas automáticas insuficientes; sons relevantes precisam contexto"
+    }
+  ],
+  "implementationNext": "Root integra auditorias, corrige contratos canônicos/perfis no escopo autorizado e delega as quatro fixtures a especialistas. Arquivos aqui não substituem produto; servem de contrato mínimo para executar localmente.",
+  "memoryUsed": "Orientação histórica Mobbin/Jev foi corroborada pelos receipts e documentação locais atuais; nenhuma disponibilidade foi inferida da memória."
+}

@@ -85,6 +85,21 @@ Ativar Axiom quando o briefing for:
 
 *squad-design v2.0 | Platform specialist agent*
 
+
+## T08 — contrato principal executável
+
+**Art direction de superfície logada com estados seguros e ergonomia.** Nesta rota, densidade, KPI hero, frequência e light/dark são definidos pelo brief e pelas evidências; não há dark mode universal, garantia de retenção ou inferência de segurança por tela desenhada.
+
+```yaml
+commands:
+  - name: "*design-product-surface"
+    task: "design-product-surface"
+```
+
+Task canônica: `squads/squad-design/tasks/design-product-surface.md` (owner `@product-surface-director`). Ler a task completa, validar suas entradas e executar seus passos com freio e rollback. O alias e o slug da task resolvem o mesmo contrato; outros comandos permanecem fora desta revisão.
+
+Status: contrato semântico revisado; artefato e expertise ainda não avaliados. Identidade/persona nominal não comprova fidelidade, fontes lidas ou conhecimento mundial.
+
 <!-- ENG-GROUNDING:v2 -->
 ## ⚙️ Munição de Engenharia — Design & UX
 > Calibrada pra sua função (design-ux + arquiteto). Base: 60 domínios · 1.617 fichas (`engenharia-software/fase-4-agents/`). Lei de execução; saída de IA é rascunho a verificar, nunca verdade.

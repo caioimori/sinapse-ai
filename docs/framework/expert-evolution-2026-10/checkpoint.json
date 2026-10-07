@@ -1,0 +1,43 @@
+{
+  "observedAt": "2026-10-02T09:59:20.6653708Z",
+  "scope": "local-checkpoint-only",
+  "branch": "codex/feat/framework-evolution-20261002",
+  "base": "45e979f25931730ef1428d65e3dcb0a3b544a51f",
+  "primaryCommit": "ec6911bbdcfc2d331f17f82727f93b37d597c157",
+  "derivedCommit": "4f79f144e76fbd28b8d5ce29a32ef36a11b546bb",
+  "primaryFiles": 395,
+  "hookBypass": false,
+  "observedWorktreeStatus": "clean-before-receipt",
+  "manifest": {
+    "valid": true,
+    "files": 1155,
+    "sha256": "5901a58664fcc5c2a4cc03a80448b66f1b50ea757c272e7813774fcd8550b259",
+    "changedPaths": [
+      "data/entity-registry.yaml"
+    ]
+  },
+  "registry": {
+    "entityCount": 819,
+    "sha256": "d34829849bd626f3b365fdde0b6ebf0d44c67761dab2cef80ff54891433471d1",
+    "allowedChanges": [
+      "metadata.lastUpdated",
+      "entities.bin.framework-evolution-delivery.checksum",
+      "entities.bin.framework-evolution-delivery.lastVerified"
+    ],
+    "checksumVerified": true,
+    "testsPassed": 14,
+    "suitesPassed": 1
+  },
+  "protectedPathsChanged": 0,
+  "preservation": {
+    "receipt": "docs/framework/evolution-2026-10/preservation.json",
+    "files": 191,
+    "divergences": 0,
+    "dirtyEntries": 191,
+    "headSame": true,
+    "branchSame": true
+  },
+  "externalActions": [],
+  "globalInstall": false,
+  "storyStatus": "InReview"
+}

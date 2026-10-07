@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "reservedCaseSha256": "917aff26c107b2514737990873e3029c90cbf0e216d4b3602ca2e1260bdbb27d",
+  "model": "gpt-6.1-sol",
+  "baselineCommit": "45e979f25931730ef1428d65e3dcb0a3b544a51f",
+  "baselineCorpusSha256": {
+    "sources": "e31552b907a3eed79d48ac6da5883f0273dcabe53c0cce3a3f23a3ffcaee87f0",
+    "heuristics": "ed196f1bdedc627aad68b3546388940300382ea5999687659fca7727d29fb216",
+    "competencies": "25adcfb9ee2b95679e0c69bb84c3e552546cdf16d26e93d06cfd36275339edbb"
+  },
+  "baselineInputSha256": "df3b29ab52852599b757f4efe1d78b80369ccd801f019d89f76a91f01f243ebc",
+  "caseCount": 10,
+  "contextLimit": 12000,
+  "knowledgeLimit": 6000,
+  "scope": "Bounded decision scenarios only, not rendered artifacts or all172agent competencies",
+  "generation": "Separate fresh explicit-model agents, baseline and enriched contexts; expected decisions hidden",
+  "review": "Independent reviewer after anonymized output order; source author not reviewer",
+  "promotion": false,
+  "limitations": [
+    "Single generation per case/variant; no statistical or causal improvement claim",
+    "Executor follows bounded inputs rather than complete production toolchain",
+    "Jev/Opus unavailable for authenticated comparison"
+  ],
+  "enrichedInputSha256": "f6fb3bb0f641e6ceaf12aca42b4ec9046abf1e736887d96fa9888a8a07e1e615",
+  "enrichedCorpusSha256": {
+    "sources": "358ad1d674c7a759dbb7b17272611205d404a6b1b6ad0321a988c950d6abae6c",
+    "heuristics": "0b3d86fa1ab4e816d945ac608ddfe15334deda57fe385388667910601242b3f3",
+    "competencies": "955f0c2eb3afd97a0bdbaf888911cf4e7d9bdab79184f9f177f6c79572d56245"
+  },
+  "profilesSha256": "6cb39a0957725fc9b98e6d95654864091f2b2d31e0d6022834358f8c8ca6267f",
+  "outputHashes": {
+    "baseline": "9ce13afe2b765af872bca743e6aabc4c3de44256ef7e7896f2005becc646f7da",
+    "enriched": "fa66e24e250cdb43df8feff0f089c7a7657829c2ab6c15fbe67722d0db6b0e9c"
+  },
+  "blindInputSha256": "76b8a39c08a2721f0ed6867215b5e7b0d7d6e7d5147b820579046dafe1571fa5",
+  "blindingLimit": "Variant labels and order hidden, but evidence detail and wording may permit inference; reviewer also audits implementation.",
+  "reservationMetadataAfterExecution": "priority-cases reservation status changed after execution only; expected decisions/counterexamples remain frozen, original pre-execution file hash above."
+}

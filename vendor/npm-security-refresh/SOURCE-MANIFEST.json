@@ -1,0 +1,892 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "name": "@sinapse-internal/npm-security-refresh",
+    "version": "11.19.1-sinapse.1"
+  },
+  "scope": "private project development dependency, not upstream npm release or global installation",
+  "artifact": {
+    "path": "npm-security-refresh-11.19.1-sinapse.1.tgz",
+    "sha256": "c27f314b93b1d64cd744393914868615c0ac01353983520e3cc8bdacf79cb91d",
+    "bytes": 3159244
+  },
+  "upstream": {
+    "name": "npm",
+    "version": "11.19.1",
+    "url": "https://registry.npmjs.org/npm/-/npm-11.19.1.tgz",
+    "integrity": "sha512-ztsxKxt/kkIaAs+2i0GU6I+DRmUdrNasxTZKJe9TCdSjKxlhah/4r/hl5ygMD6XAg1qZ9c2TNomR4qgOydp10g=="
+  },
+  "inputs": [
+    {
+      "spec": "npm@11.19.1",
+      "url": "https://registry.npmjs.org/npm/-/npm-11.19.1.tgz",
+      "integrity": "sha512-ztsxKxt/kkIaAs+2i0GU6I+DRmUdrNasxTZKJe9TCdSjKxlhah/4r/hl5ygMD6XAg1qZ9c2TNomR4qgOydp10g==",
+      "archiveSha256": "9f58bff01604cb1b14008fef14dceb14d836a49225e45c6c2e37de3be3e707f0",
+      "archiveBytes": 3002869,
+      "unpackedBytes": 12223891,
+      "filename": "npm-11.19.1.tgz",
+      "license": "Artistic-2.0",
+      "engines": {
+        "node": "^20.17.0 || >=22.9.0"
+      },
+      "dependencies": {
+        "ms": "^2.1.2",
+        "ini": "^6.0.0",
+        "tar": "^7.5.22",
+        "glob": "^13.0.6",
+        "nopt": "^9.0.0",
+        "read": "^5.0.1",
+        "ssri": "^13.0.1",
+        "archy": "~1.0.0",
+        "chalk": "^5.6.2",
+        "p-map": "^7.0.4",
+        "which": "^6.0.1",
+        "abbrev": "^4.0.0",
+        "pacote": "^21.5.1",
+        "semver": "^7.8.5",
+        "cacache": "^20.0.4",
+        "ci-info": "^4.4.0",
+        "is-cidr": "^6.0.4",
+        "minipass": "^7.1.3",
+        "node-gyp": "^12.4.0",
+        "proc-log": "^6.1.0",
+        "libnpmorg": "^8.0.1",
+        "minimatch": "^10.2.5",
+        "treeverse": "^3.0.0",
+        "@npmcli/fs": "^5.0.0",
+        "libnpmdiff": "^8.1.12",
+        "libnpmexec": "^10.3.2",
+        "libnpmfund": "^7.0.26",
+        "libnpmpack": "^9.1.13",
+        "libnpmteam": "^8.0.2",
+        "text-table": "~0.2.0",
+        "fs-minipass": "^3.0.3",
+        "graceful-fs": "^4.2.11",
+        "npm-profile": "^12.0.2",
+        "libnpmaccess": "^10.0.3",
+        "libnpmsearch": "^9.0.1",
+        "@sigstore/tuf": "^4.0.2",
+        "libnpmpublish": "^11.2.0",
+        "libnpmversion": "^8.0.4",
+        "@npmcli/config": "^10.12.0",
+        "@npmcli/redact": "^4.0.0",
+        "supports-color": "^10.2.2",
+        "hosted-git-info": "^9.0.3",
+        "npm-package-arg": "^13.0.2",
+        "qrcode-terminal": "^0.12.0",
+        "@npmcli/arborist": "^9.9.1",
+        "npm-audit-report": "^7.0.0",
+        "init-package-json": "^8.2.5",
+        "make-fetch-happen": "^15.0.6",
+        "minipass-pipeline": "^1.2.4",
+        "npm-pick-manifest": "^11.0.3",
+        "npm-user-validate": "^4.0.0",
+        "@npmcli/run-script": "^10.0.4",
+        "npm-install-checks": "^8.0.0",
+        "npm-registry-fetch": "^19.1.1",
+        "tiny-relative-date": "^2.0.2",
+        "fastest-levenshtein": "^1.0.16",
+        "parse-conflict-json": "^5.0.1",
+        "@npmcli/package-json": "^7.0.5",
+        "@npmcli/promise-spawn": "^9.0.1",
+        "spdx-expression-parse": "^4.0.0",
+        "@npmcli/map-workspaces": "^5.0.3",
+        "validate-npm-package-name": "^7.0.2",
+        "@npmcli/metavuln-calculator": "^9.0.3",
+        "@isaacs/string-locale-compare": "^1.1.0",
+        "json-parse-even-better-errors": "^5.0.0"
+      }
+    },
+    {
+      "spec": "brace-expansion@5.0.12",
+      "url": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.12.tgz",
+      "integrity": "sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==",
+      "archiveSha256": "ef8448ec78f20b692f04fa6d01f39b5ab34c66404bea3429f5a39c6c9e0be8b4",
+      "archiveBytes": 12620,
+      "unpackedBytes": 84997,
+      "filename": "brace-expansion-5.0.12.tgz",
+      "license": "MIT",
+      "engines": {
+        "node": "20 || >=22"
+      },
+      "dependencies": {
+        "balanced-match": "^4.0.2"
+      }
+    },
+    {
+      "spec": "http-cache-semantics@4.3.0",
+      "url": "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.3.0.tgz",
+      "integrity": "sha512-M5t5LlJpS1UHMjvwRQVdFHvPISGeLAxNcrWuJkeGh0KxsqCHZ1O3NXZU/8x7cD0BDcGW8kapxMKTvwlqrNkHkA==",
+      "archiveSha256": "d75e1e6a11587954da5e2f0e2b5c4b397a16d28cc2f7bdf64e9027fc2fe593ee",
+      "archiveBytes": 14074,
+      "unpackedBytes": 50444,
+      "filename": "http-cache-semantics-4.3.0.tgz",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "spec": "ip-address@10.7.3",
+      "url": "https://registry.npmjs.org/ip-address/-/ip-address-10.7.3.tgz",
+      "integrity": "sha512-A1kdq/tSb5QjvKvAMgIoEvDBIgL7qaqVP/jkvSwYYRZ9iEzvPpopxp2wQfu3SuZRHtpHNxMn8Fs0bS+gf5Xmwg==",
+      "archiveSha256": "13e2afaa2b4011c3b7057657dd21bc68ae34049b67674ee75e71aa78b4acdeab",
+      "archiveBytes": 84909,
+      "unpackedBytes": 367392,
+      "filename": "ip-address-10.7.3.tgz",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 12"
+      }
+    },
+    {
+      "spec": "postcss-selector-parser@7.1.6",
+      "url": "https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-7.1.6.tgz",
+      "integrity": "sha512-7qASPzhKF2l2KLboRZux8CCTRMdGiV08vWmyKzPz22qZ7ZjQBOeY7rNzNoCLSUiftJ7HUq0GERHmxw/t0dCdMw==",
+      "archiveSha256": "48c903f98c5591d8d26f16f389d5cb3435459474c645209a79f6241bf4b657b6",
+      "archiveBytes": 46652,
+      "unpackedBytes": 215009,
+      "filename": "postcss-selector-parser-7.1.6.tgz",
+      "license": "MIT",
+      "engines": {
+        "node": ">=4"
+      },
+      "dependencies": {
+        "cssesc": "^3.0.0",
+        "util-deprecate": "^1.0.2"
+      }
+    },
+    {
+      "spec": "undici@6.28.1",
+      "url": "https://registry.npmjs.org/undici/-/undici-6.28.1.tgz",
+      "integrity": "sha512-zWpdTVD54H48CIybL0rWQ3ukpb9d23wM7eH5RtfdmeP70cWHNjtfo7P4vZX+5CoDcO53J4Pu5uXp7lNfjc6DRA==",
+      "archiveSha256": "e18191aac9c0ff43dac7fe9b10b7041a22d07addb7b66a6e8ac14a52a5b69b74",
+      "archiveBytes": 295788,
+      "unpackedBytes": 1197257,
+      "filename": "undici-6.28.1.tgz",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18.17"
+      }
+    }
+  ],
+  "upstreamFiles": 1943,
+  "packedFiles": 2015,
+  "unchangedUpstreamFiles": 1923,
+  "deltas": [
+    {
+      "path": "node_modules/undici/lib/dispatcher/client-h1.js",
+      "oldSha256": "41f689e08a3b3c9ece2b181cd77d5a4919c6db2c930dc3f8432028b500dbe6ec",
+      "newSha256": "323c176fd2dfe86326972b3ad9ed4dbb57819c5f16fe4e49c528b54c7833382b",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/common.js",
+      "oldSha256": "58a09ce1369f3199e69dc22435f138c4a783808f9a4e36fb583bec497d1e8a25",
+      "newSha256": "15b5caebd299350e045dfc4e83cc9f4a082eac6bd8eb3581b00036c55ca2072e",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/lib/web/websocket/connection.js",
+      "oldSha256": "399bfffecf05b8c1c43db4ca7b8ed11ad2176eb0e08d89e917c643e2c38c2761",
+      "newSha256": "8d39465ab30bccbfc599f00ab276fdfdbad43913ca881083aafe8ba34f2ff7d1",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v4/constants.js",
+      "oldSha256": "1b1b9c5faf45d551c82e5321bbe06fc5eba2d89bcf0f95bbe7e5ff7937af1d48",
+      "newSha256": "f8de9ffd2d22c3225856132439a631ff114fa1a0a91a2c16e7b51f924198db91",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/constants.js",
+      "oldSha256": "0e65bc3554afc387d509f4ad7157fd765deaaf25e96ef9257fe01f67702a6738",
+      "newSha256": "deaf911b262a1fc1f9943369a42563aa16a7f25ac1845010c0e5116508679db8",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/lib/web/eventsource/eventsource-stream.js",
+      "oldSha256": "baef83e10219926475f6d8ad2d28016561cf68e1af13f669d11d5541cc209e8d",
+      "newSha256": "dbb92bfb71772f46449f2f30217091ce66d6c51e0491c17ac02d32a000ad8739",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/commonjs/index.js",
+      "oldSha256": "8d1ea713e1dd03f52783bbceea9d85815a3587134d1936ea16257dea83884f15",
+      "newSha256": "e0ede97c712339a70bae2c96c675b1ffd30052bdf57f37f5a97b5945c40a9ae6",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/esm/index.js",
+      "oldSha256": "af0e6438163b5ef866c52680ec58756bcf00cff330729c0d6a3a44ee57bde9d1",
+      "newSha256": "eea9a18920e1cde68f0068c36c040541ad6e93b0bb89eaab38c8ab49925b90a8",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/http-cache-semantics/index.js",
+      "oldSha256": "01b7d66c854b2fe53ac05c98feb6e0d64722ab8898a778e2d2426a8b468d178f",
+      "newSha256": "ede1cc404a492fa348eb9d97a3007a0d72aa717bd22cd86a56bd0824c19729ca",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv4.js",
+      "oldSha256": "9871be333f89c77fd25c7d84cc50fda9df3589593bb23513ec009a07d672e647",
+      "newSha256": "69b33990eca8bf92704c0b47843c2869daa517ee5cb7cb170c052481bcb67c90",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv6.js",
+      "oldSha256": "948b8896f8a12604b9d2e3d64a6551bf76b397d4af1de6a17c1d7cc40cd6f656",
+      "newSha256": "324de282fcd22c918d9f025ba887045502655ea5163dd1a999da2227bf3f597d",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/postcss-selector-parser/dist/parser.js",
+      "oldSha256": "4d8ca0efc06b9759c540cf424b127c79544957180e2ee553ed64e8696daca453",
+      "newSha256": "eec0eef91952dc136531593d851db7fe13dfd97d4e3389b5d7ca758adf63b24f",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/lib/web/websocket/permessage-deflate.js",
+      "oldSha256": "808e4fc2eb52ac7e0140cc37a0efe0ed2b13f4bd0119133c569030d3fab05f25",
+      "newSha256": "da8d8dc29515bce2ba4def5c3f811f8644eeb5d4819bc521d5811fbbdda4afb7",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/lib/handler/retry-handler.js",
+      "oldSha256": "7efa2ca22dc394d7b9383d600e7cc01e403e0dfb7192ba04100299cf7423b544",
+      "newSha256": "f1e17458ff05f8a6201db88702caa84bd56ac8b6a252dc140ab18bec9ca1f252",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/package.json",
+      "oldSha256": "f8a0e0d0a6cbb58106ce6832205e0939a00b9583637011bf8ef4167f4a52fbda",
+      "newSha256": "8af7dc0916002266f3b01459ef691d9f834d8ecdb0e021263280a50b913d85fa",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/http-cache-semantics/package.json",
+      "oldSha256": "bee0609d5ab09a590afe0e1209d3702b0afb0a3c158492f90902a724d889d22b",
+      "newSha256": "dbe99941ed2092d43257294405cfb389a476ef54a029488b51125e6f3a777fde",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/package.json",
+      "oldSha256": "91166ee6e473fe20ec6029e6cdda2635b1e0c9bd6ec78da40a4671bf0c1eaa58",
+      "newSha256": "019ef45b7c85ad49004eb7e9115e7ca73845ee3421cce141b2a8bde2ae4c92bc",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/postcss-selector-parser/package.json",
+      "oldSha256": "260af17117b45e947983fee16dde83232170796a318dd68ad82ff7f2777c7e2c",
+      "newSha256": "79862171d30cf8588a494297919e0e5c3220c99c5fc5cc90df2189a681732758",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/package.json",
+      "oldSha256": "f529aa8b145f6e270a72700ceb6c8dd3b87f742313078ea9f774a9d2ce8c865d",
+      "newSha256": "a5c7791bf6fa19f9555ad4f8eb0ff2537cd8b7f63606d9b69746efe1c75aec92",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "package.json",
+      "oldSha256": "f6478d5600180a23f73e4217610c7709a71cedb4ae13f6c3e15ecb457f5d4fd6",
+      "newSha256": "53f22db0810f6696fdcd229e9e79c41acd74d57d673796729b555e5e94256255",
+      "added": false,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/commonjs/index.d.ts.map",
+      "oldSha256": null,
+      "newSha256": "4081276536fa8a61b8ecf72c1b3cb65d354aa9f42b9952aa7c7aa3df69b76224",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/esm/index.d.ts.map",
+      "oldSha256": null,
+      "newSha256": "4081276536fa8a61b8ecf72c1b3cb65d354aa9f42b9952aa7c7aa3df69b76224",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/commonjs/index.js.map",
+      "oldSha256": null,
+      "newSha256": "030adad11afc034a17f6c008f25a3779e3988f56d067016cee00948725b00d24",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/esm/index.js.map",
+      "oldSha256": null,
+      "newSha256": "181bf3ff0deaaedfcf28b02c260ab5316cb2a012d89070ad44d298dcfd7166dc",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/README.md",
+      "oldSha256": null,
+      "newSha256": "e93dbbc034d09eb64681e11304d21551467a391d29241538953b6d57859788db",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/commonjs/index.d.ts",
+      "oldSha256": null,
+      "newSha256": "b74929b2e5433150c0c7f6a3e7bcd1aadff6b82305584b25754ab38273ea731d",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/brace-expansion/dist/esm/index.d.ts",
+      "oldSha256": null,
+      "newSha256": "b74929b2e5433150c0c7f6a3e7bcd1aadff6b82305584b25754ab38273ea731d",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/http-cache-semantics/README.md",
+      "oldSha256": null,
+      "newSha256": "be77466544e7060ad859664e779d84db4440f6dcca28da0975d0bcd97000c9fa",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/address-error.js.map",
+      "oldSha256": null,
+      "newSha256": "96f9cb28df86d591dda4e54e48f60e6010b2a95d04ab45581d56dac0ed2ca7bd",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/common.js.map",
+      "oldSha256": null,
+      "newSha256": "42c98019b398215c29ddf88f18b7772d2309801baf6bfa628587f5567d6d7434",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v4/constants.js.map",
+      "oldSha256": null,
+      "newSha256": "40addf8670c6c50efa2481a992001f3ad4a9b154ef021312ef3d83f70ca9a5b2",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/constants.js.map",
+      "oldSha256": null,
+      "newSha256": "0ca22bdfabcf966b822c8b7439c6351341b6e79f82b64b9c8c203f708e8e672b",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/helpers.js.map",
+      "oldSha256": null,
+      "newSha256": "e19ffe4aae647122c0e86bb29776d0f2ffddf13d69223c708423807ee627809c",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ip-address.js.map",
+      "oldSha256": null,
+      "newSha256": "dc8de5e6f0ddb17961e7503dcae38e79674d3095edfc5b7e38e6dd0aa7575877",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv4.js.map",
+      "oldSha256": null,
+      "newSha256": "25ab81b0b97f22f4d59324a92c234a1359bd9b287e49541a10456028a970f8da",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv6.js.map",
+      "oldSha256": null,
+      "newSha256": "b90a24d514a92bde84d10ecb4770867377fd14bd747fd7162b624059c1483d5e",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/regular-expressions.js.map",
+      "oldSha256": null,
+      "newSha256": "ba75ab29034b94851eba5c6becf559f39da6b45bffcf0be757e2105f9b44d3a2",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/README.md",
+      "oldSha256": null,
+      "newSha256": "a4fb586fdee4226399d7c4ec32643d369401a3a3e37e7c3a3d72c24e10b390dd",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/address-error.d.ts",
+      "oldSha256": null,
+      "newSha256": "73e37789e4fd5d3eb0e432a8967453c9334947d8545ecb28cc04c18b1e019135",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/common.d.ts",
+      "oldSha256": null,
+      "newSha256": "2140b9cf083ad0b46cdc19db1acff9f582f0c8681c32a2a7b08b18259f786325",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v4/constants.d.ts",
+      "oldSha256": null,
+      "newSha256": "be45f59e39a1eb29e642f5876b7c935bf723e11f0d5d1f453bca24d40006a7ae",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/constants.d.ts",
+      "oldSha256": null,
+      "newSha256": "1ba39cc1d3cc6857981c56ef75b455df94196080c2ff75c60f1ca04e2d2a9379",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/helpers.d.ts",
+      "oldSha256": null,
+      "newSha256": "6f050095511244f289ccd718c8d697a9cb3e378a42a54cd24d92cfe98dcab9eb",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ip-address.d.ts",
+      "oldSha256": null,
+      "newSha256": "e8de59dc8d32ba86cacf2156465f8e54a2fdd973b3e003779c83a61413b7d086",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv4.d.ts",
+      "oldSha256": null,
+      "newSha256": "49bf6f77d32ab99a82d084308f672adcaef46f7168c70f0dca7fd08d95b18c8e",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/ipv6.d.ts",
+      "oldSha256": null,
+      "newSha256": "311f4897892d32af454fdbd4d94105218494c11e9a87e3232a1bf13447602025",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/ip-address/dist/v6/regular-expressions.d.ts",
+      "oldSha256": null,
+      "newSha256": "b29ca73404a24e8386fe7f70f2ce5964eeec69e45b8f31dcb41fd4b873331d35",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/postcss-selector-parser/CHANGELOG.md",
+      "oldSha256": null,
+      "newSha256": "59040a76711857c2e6960a5c2d6656d41c57d10480a5f4c8ba1dd16b93ba0e16",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/postcss-selector-parser/README.md",
+      "oldSha256": null,
+      "newSha256": "b57086c64caddac8a9dacd939fb9db96c343e4cee812d16024ecb6eb637ab058",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/postcss-selector-parser/postcss-selector-parser.d.ts",
+      "oldSha256": null,
+      "newSha256": "0d45f0e4df37d63438c34ac65902e959b60f80d72ab240722fda8bc7553d830d",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/lib/llhttp/.gitkeep",
+      "oldSha256": null,
+      "newSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/README.md",
+      "oldSha256": null,
+      "newSha256": "f8c36e725c48849e82eebad6f6167d1a9d9cc2c1426418af29a13b23769f3e1f",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/README.md",
+      "oldSha256": null,
+      "newSha256": "c8cced6ec588c55b07e35733258cb7d6b63e3426ee7490aa9267aab4bda0fb20",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/agent.d.ts",
+      "oldSha256": null,
+      "newSha256": "4893a895ea92c85345017a04ed427cbd6a1710453338df26881a6019432febdd",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/api.d.ts",
+      "oldSha256": null,
+      "newSha256": "0db18c6e78ea846316c012478888f33c11ffadab9efd1cc8bcc12daded7a60b6",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/balanced-pool.d.ts",
+      "oldSha256": null,
+      "newSha256": "ba7bc87d01492633cb5a0e5da8a4a42a1c86270e7b3d2dea5d156828a84e4882",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/cache.d.ts",
+      "oldSha256": null,
+      "newSha256": "c46e079fe54c76f95c67fb89081b3e399da2c7d109e7dca8e4b58d83e332e605",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/client.d.ts",
+      "oldSha256": null,
+      "newSha256": "e2e2d50484762af2f962c1122fc4ccadea263c3a41ce6882dc36e903577476f5",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/connector.d.ts",
+      "oldSha256": null,
+      "newSha256": "c6fd2c5a395f2432786c9cb8deb870b9b0e8ff7e22c029954fabdd692bff6195",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/content-type.d.ts",
+      "oldSha256": null,
+      "newSha256": "2e85db9e6fd73cfa3d7f28e0ab6b55417ea18931423bd47b409a96e4a169e8e6",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/cookies.d.ts",
+      "oldSha256": null,
+      "newSha256": "89167d696a849fce5ca508032aabfe901c0868f833a8625d5a9c6e861ef935d2",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/diagnostics-channel.d.ts",
+      "oldSha256": null,
+      "newSha256": "4732aec92b20fb28c5fe9ad99521fb59974289ed1e45aecb282616202184064f",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/dispatcher.d.ts",
+      "oldSha256": null,
+      "newSha256": "7f182617db458e98fc18dfb272d40aa2fff3a353c44a89b2c0ccb3937709bfb5",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/env-http-proxy-agent.d.ts",
+      "oldSha256": null,
+      "newSha256": "24c6a117721e606c9984335f71711877293a9651e44f59f3d21c1ea0856f9cc9",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/errors.d.ts",
+      "oldSha256": null,
+      "newSha256": "a5579f898b9e47423f675bdadf4148222f28c08d2c906c42ecc8b8ef4c897dba",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/eventsource.d.ts",
+      "oldSha256": null,
+      "newSha256": "8bd86b8e8f6a6aa6c49b71e14c4ffe1211a0e97c80f08d2c8cc98838006e4b88",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/fetch.d.ts",
+      "oldSha256": null,
+      "newSha256": "c464d66b20788266e5353b48dc4aa6bc0dc4a707276df1e7152ab0c9ae21fad8",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/file.d.ts",
+      "oldSha256": null,
+      "newSha256": "25c8056edf4314820382a5fdb4bb7816999acdcb929c8f75e3f39473b87e85bc",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/filereader.d.ts",
+      "oldSha256": null,
+      "newSha256": "317e63deeb21ac07f3992f5b50cdca8338f10acd4fbb7257ebf56735bf52ab00",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/formdata.d.ts",
+      "oldSha256": null,
+      "newSha256": "78d0d27c130d35c60b5e5566c9f1e5be77caf39804636bc1a40133919a949f21",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/global-dispatcher.d.ts",
+      "oldSha256": null,
+      "newSha256": "cadc8aced301244057c4e7e73fbcae534b0f5b12a37b150d80e5a45aa4bebcbd",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/global-origin.d.ts",
+      "oldSha256": null,
+      "newSha256": "385aab901643aa54e1c36f5ef3107913b10d1b5bb8cbcd933d4263b80a0d7f20",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/handlers.d.ts",
+      "oldSha256": null,
+      "newSha256": "11396ed8a44c02ab9798b7dca436009f866e8dae3c9c25e8c1fbc396880bf1bb",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/header.d.ts",
+      "oldSha256": null,
+      "newSha256": "5929864ce17fba74232584d90cb721a89b7ad277220627cc97054ba15a98ea8f",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/index.d.ts",
+      "oldSha256": null,
+      "newSha256": "299fd0c281633d8dbfbe5f44c5f2850fe37392da6fd3b9cca3cb4e10cda16432",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/index.d.ts",
+      "oldSha256": null,
+      "newSha256": "bf67d53d168abc1298888693338cb82854bdb2e69ef83f8a0092093c2d562107",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/interceptors.d.ts",
+      "oldSha256": null,
+      "newSha256": "d072cb61b086eeae042c45d85ea553a03b123d3e27dbac911faa1a695f5d6752",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/mock-agent.d.ts",
+      "oldSha256": null,
+      "newSha256": "13f6f39e12b1518c6650bbb220c8985999020fe0f21d818e28f512b7771d00f9",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/mock-client.d.ts",
+      "oldSha256": null,
+      "newSha256": "9b5369969f6e7175740bf51223112ff209f94ba43ecd3bb09eefff9fd675624a",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/mock-errors.d.ts",
+      "oldSha256": null,
+      "newSha256": "24515859bc0b836719105bb6cc3d68255042a9f02a6022b3187948b204946bd2",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/mock-interceptor.d.ts",
+      "oldSha256": null,
+      "newSha256": "c21dc52e277bcfc75fac0436ccb75c204f9e1b3fa5e12729670910639f27343e",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/mock-pool.d.ts",
+      "oldSha256": null,
+      "newSha256": "4fe9e626e7164748e8769bbf74b538e09607f07ed17c2f20af8d680ee49fc1da",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/patch.d.ts",
+      "oldSha256": null,
+      "newSha256": "615ba88d0128ed16bf83ef8ccbb6aff05c3ee2db1cc0f89ab50a4939bfc1943f",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/pool-stats.d.ts",
+      "oldSha256": null,
+      "newSha256": "9670d44354bab9d9982eca21945686b5c24a3f893db73c0dae0fd74217a4c219",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/pool.d.ts",
+      "oldSha256": null,
+      "newSha256": "0b8a9268adaf4da35e7fa830c8981cfa22adbbe5b3f6f5ab91f6658899e657a7",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/proxy-agent.d.ts",
+      "oldSha256": null,
+      "newSha256": "4a1d973d2c93128508df27876bcaeafb2d5b2e3cf6e84092b6fc8608939b1287",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/readable.d.ts",
+      "oldSha256": null,
+      "newSha256": "763fe0f42b3d79b440a9b6e51e9ba3f3f91352469c1e4b3b67bfa4ff6352f3f4",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/retry-agent.d.ts",
+      "oldSha256": null,
+      "newSha256": "405822be75ad3e4d162e07439bac80c6bcc6dbae1929e179cf467ec0b9ee4e2e",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/retry-handler.d.ts",
+      "oldSha256": null,
+      "newSha256": "aa5524e0509c2168c9493604acf51ef97d2027f03f3b38da097802d3aa719dc8",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/util.d.ts",
+      "oldSha256": null,
+      "newSha256": "bd0532fd6556073727d28da0edfd1736417a3f9f394877b6d5ef6ad88fba1d1a",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/webidl.d.ts",
+      "oldSha256": null,
+      "newSha256": "99c42860a78963ee66048ef3536dbd9eb59858e6a06f2feba845105ed411e658",
+      "added": true,
+      "removed": false
+    },
+    {
+      "path": "node_modules/undici/types/websocket.d.ts",
+      "oldSha256": null,
+      "newSha256": "a4d551dbf8746780194d550c88f26cf937caf8d56f102969a110cfaed4b06656",
+      "added": true,
+      "removed": false
+    }
+  ],
+  "licenses": [
+    {
+      "component": "npm@11.19.1",
+      "license": "Artistic-2.0",
+      "path": "LICENSE-npm",
+      "sha256": "7610d223851f421d315df5e77974f1c68a04b97e02060e5bbbcf13d95e3ca257"
+    },
+    {
+      "component": "brace-expansion@5.0.12",
+      "license": "MIT",
+      "path": "LICENSE-brace-expansion",
+      "sha256": "9c63a23124d68cd30cd316a94a1a0bca34f032786df6df69fc4b5f136bac8d2e"
+    },
+    {
+      "component": "http-cache-semantics@4.3.0",
+      "license": "BSD-2-Clause",
+      "path": "LICENSE-http-cache-semantics",
+      "sha256": "ab868ad5a2ef5068560d9cd3b2180ec63c140bb4c5cae1ba779d300a0ac74fa3"
+    },
+    {
+      "component": "ip-address@10.7.3",
+      "license": "MIT",
+      "path": "LICENSE-ip-address",
+      "sha256": "f8d791359a50cbcac82c29cb7b0b1b889b28be76fdd35b8ee33f0f7c8704702a"
+    },
+    {
+      "component": "postcss-selector-parser@7.1.6",
+      "license": "MIT",
+      "path": "LICENSE-postcss-selector-parser",
+      "sha256": "2998094b38f7ace25f141fb36f334d8338f65a1812978d618b1161f4d77ae10e"
+    },
+    {
+      "component": "undici@6.28.1",
+      "license": "MIT",
+      "path": "LICENSE-undici",
+      "sha256": "a6db8096b2707bc0102d256917d4d33f298ba36d8c3f25de067a2b5bb379db27"
+    }
+  ],
+  "engines": {
+    "node": "^20.17.0 || >=22.9.0"
+  },
+  "guards": {
+    "integrityBeforeExtraction": true,
+    "noAbsoluteEscapeOrLinkEntries": true,
+    "maximumArchiveBytes": 10000000,
+    "maximumUnpackedBytesPerInput": 25000000,
+    "maximumEntriesPerInput": 3000,
+    "strictTransitiveClosureSatisfied": true,
+    "outsideFiveTreesOnlyOwnManifestChanged": true,
+    "actualPackedBytesVerified": true
+  },
+  "evidence": {
+    "benignChecks": [
+      "CLI version",
+      "CLI isolated prefix",
+      "brace expansion benign parity",
+      "cache policy benign reuse",
+      "IPv4/IPv6 benign forms",
+      "selector AST two selectors",
+      "undici Headers",
+      "undici MockAgent offline request"
+    ],
+    "passed": 8,
+    "cliVersion": "11.19.1-sinapse.1",
+    "offlineOnly": true
+  },
+  "limits": [
+    "Independent review required before alias promotion",
+    "Bounded probes do not certify every exploit or complete npm behavior",
+    "No full local development install/suite/build/e2e or production/npm publication",
+    "Audit and real installation resolution must be checked separately",
+    "Compressed container SHA records this build; payload reconstruction is independently verifiable"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "workflow_id": "WF-20261002-typesafe-mobbin",
+  "mode": "change",
+  "complexity": "complex",
+  "outcome": "Instalar TypeSafe, aplicar Jev e absorver navegacao com evidencias",
+  "inputs": [
+    "TYPESAFE-MOBBIN-SPEC.md",
+    "pedido explicito do usuario"
+  ],
+  "outputs": [
+    "skill instalada",
+    "julgamento observado ou bloqueio",
+    "mercado Opus",
+    "aquisicao Mobbin",
+    "checkpoint"
+  ],
+  "acceptance": [
+    "AC1-AC5"
+  ],
+  "tasks": [
+    {
+      "task_id": "T01",
+      "objective": "validadores story workflow",
+      "owner": "sinapse-orqx",
+      "depends_on": [],
+      "command_or_tool": "validadores story workflow",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T01 receipt"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    },
+    {
+      "task_id": "T02",
+      "objective": "npm view e skills CLI hash readback",
+      "owner": "devops",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "npm view e skills CLI hash readback",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T02 receipt"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    },
+    {
+      "task_id": "T03",
+      "objective": "fontes oficiais sem Opus API",
+      "owner": "research-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "fontes oficiais sem Opus API",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T03 receipt"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    },
+    {
+      "task_id": "T04",
+      "objective": "Mobbin observacao de fluxos ou bloqueio",
+      "owner": "design-orqx",
+      "depends_on": [
+        "T01"
+      ],
+      "command_or_tool": "Mobbin observacao + fixture propria de transferencia UI desktop/mobile",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T04 receipt",
+        "fixture propria e receipt independente"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    },
+    {
+      "task_id": "T05",
+      "objective": "Jev playground perguntas tipadas teto compartilhado",
+      "owner": "sinapse-orqx",
+      "depends_on": [
+        "T02",
+        "T04"
+      ],
+      "command_or_tool": "Jev playground perguntas tipadas teto compartilhado",
+      "max_iterations": 3,
+      "max_attempts": 1,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T05 receipt"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    },
+    {
+      "task_id": "T06",
+      "objective": "lint testes preservacao checkpoint",
+      "owner": "quality-gate",
+      "depends_on": [
+        "T03",
+        "T05"
+      ],
+      "command_or_tool": "lint testes preservacao checkpoint",
+      "max_iterations": 3,
+      "max_attempts": 2,
+      "inputs": [
+        "TYPESAFE-MOBBIN-SPEC.md"
+      ],
+      "outputs": [
+        "T06 receipt"
+      ],
+      "acceptance": [
+        "evidencia observada e limites"
+      ],
+      "rollback": "Restaurar somente ownership desta onda com precondicao de hash, backup e preservacao concorrente"
+    }
+  ],
+  "scope": "Worktree isolado e skill Codex global; sem protected, publicacao, credenciais novas ou Opus API"
+}

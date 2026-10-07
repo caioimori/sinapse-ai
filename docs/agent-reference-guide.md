@@ -7,13 +7,13 @@ specialists in the squad layer** across **17 squads**. The ecosystem includes
 **18 orchestrators**: one supreme
 orchestrator and one orchestrator per squad.
 
-The task inventory currently contains **1,201 squad tasks**, **211 development
-tasks**, **1,412 task files**, and **1,348 pointers resolvable** by the
+The task inventory currently contains **1,249 squad tasks**, **211 development
+tasks**, **1,460 task files**, and **1,396 pointers resolvable** by the
 Codex runtime. These numbers are measured from source and validated in CI.
 
 | Provider surface | Claude Code | Codex |
 |---|:---:|:---:|
-| Installed skills | 37 | 37 |
+| Installed skills | 38 | 38 |
 | Registered hooks | 20 native registrations | 9 lifecycle events |
 
 ## Start with the orchestrator

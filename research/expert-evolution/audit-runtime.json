@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 1,
+  "auditId": "expert-runtime-20261002",
+  "auditedHead": "47f421cb1d813875504815734acd15562bbeca01",
+  "branch": "codex/feat/framework-evolution-20261002",
+  "root": "C:\\Users\\Caio Imori\\.codex\\worktrees\\framework-evolution\\sinapse-ai",
+  "authority": "architect read-only source; ownership only audit-runtime.md/audit-runtime.json; developer owns proposed implementation.",
+  "iterations": {
+    "limit": 3,
+    "executed": 3,
+    "phases": [
+      "source inspection",
+      "bounded offline/memory/TEMP probes",
+      "documentation readback"
+    ]
+  },
+  "scope": "Runtime, contextual retrieval, budget, Jev extraction once/cost, model policy, installation recovery and catalog usability. No broad test rerun, network, global installation, push or protected source edit.",
+  "verdict": "Controlled offline evolution exists; fix P1 controls and validate real creative outputs before expert promotion or live Jev extraction at scale.",
+  "observed": {
+    "agents": 172,
+    "squads": 17,
+    "coreAgents": 12,
+    "knowledgeGaps": 172,
+    "corpusSources": 67,
+    "heuristics": 112,
+    "sourceProgramRead": 2,
+    "sourceProgramCandidate": 88,
+    "criteriaTruncatedProfiles": 6,
+    "jevPilot": {
+      "called": false,
+      "groups": 18,
+      "questions": 224,
+      "maximumUsd": 0.04838400000000002
+    },
+    "legacyCounts": "77 gaps/30 finance missing/58 tasks/312KB are not current verified runtime state; do not reuse as current claims."
+  },
+  "findings": [
+    {
+      "id": "RT-01",
+      "priority": "P1",
+      "kind": "quality-defect",
+      "title": "Coincidência lexical não comprova relevância da tarefa",
+      "locations": [
+        {
+          "file": "scripts/framework-evolution/knowledge.cjs",
+          "lines": "18-22,103-108"
+        },
+        {
+          "file": "scripts/expert-evolution/expertise.cjs",
+          "lines": "80-85"
+        },
+        {
+          "file": "scripts/framework-evolution/runtime.cjs",
+          "lines": "45-50"
+        }
+      ],
+      "evidence": [
+        "retrieveKnowledge(dx-frontend-engineer, task.text='estado') recupera h-interaction-recovery e priority-derive-before-effect; 'evidência' recupera h-problem-before-solution.",
+        "getProfile(compact=true,maxChars=3000,task={command:'unrelated',title:'banana',text:'banana'}) retorna entregável mesmo com taskRelevance='no-lexical-match'.",
+        "css-motion-artist/analyze-reference-animation recebe h-webgl-main-thread; fallback=true é visível, mas não altera admissão/relevância."
+      ],
+      "reproduce": "Invocar os exports getProfile/retrieveKnowledge com os objetos acima; ler IDs, taskRelevance e gaps, sem persistir.",
+      "impact": "Heurísticas presentes por palavras genéricas e entregáveis sem vínculo explícito ocupam o orçamento que deveria conter a decisão específica. Isso não prova que toda seleção lexical esteja errada.",
+      "minimumChange": "Binding explícito comando→competência/entregável; ranking lexical somente dentro dos bindings; quando ausente, emitir gap e caminho canônico sem suplemento genérico."
+    },
+    {
+      "id": "RT-02",
+      "priority": "P1",
+      "kind": "quality-defect",
+      "title": "Orçamento compacto remove critérios críticos do entregável selecionado",
+      "locations": [
+        {
+          "file": "scripts/expert-evolution/expertise.cjs",
+          "lines": "84-90"
+        },
+        {
+          "file": "scripts/framework-evolution/runtime.cjs",
+          "lines": "50-57"
+        }
+      ],
+      "evidence": [
+        "Probe nos 172 perfis, maxChars=3000 e tarefa 'review / direitos licença evidência critérios falha / reduced-motion caption direitos autorização mídia': 6 perfis reduzem os critérios do entregável de 6 para 2; 0 falhas de serialização.",
+        "animation-performance-engineer perde o critério de caminho reduced-motion e o critério de limites de autoridade/falha/exceções; animation-interpreter e generative-particle-engineer também foram observados.",
+        "Nenhuma das seis referências compactas de amostra conserva o campo rights da fonte; fontes READ também omitem excerpt no perfil. Conhecimento separado preserva licenseNote; ausência no perfil não significa ausência total no payload."
+      ],
+      "reproduce": "Comparar deliverables[].criteria antes/depois de getProfile(compact:true,maxChars:3000) usando a tarefa acima.",
+      "impact": "JSON válido e ≤3000 caracteres pode enfraquecer o aceite criativo/performance justamente em funções prioritárias.",
+      "minimumChange": "Classificar critérios por criticidade e reter safety/accessibility/rights/authority/failure; omissão deve conservar IDs e obrigação de carregamento. Se não couber mínimo protegido, falhar com erro específico ou devolver somente ponteiro/gap sem afirmar critérios completos."
+    },
+    {
+      "id": "RT-03",
+      "priority": "P1",
+      "kind": "capability-gap",
+      "title": "Captura persistida ainda não alimenta o conhecimento do runtime",
+      "locations": [
+        {
+          "file": "scripts/expert-evolution/expertise.cjs",
+          "lines": "124-188,212"
+        },
+        {
+          "file": "scripts/framework-evolution/knowledge.cjs",
+          "lines": "24-32,93-106"
+        },
+        {
+          "file": "scripts/framework-evolution/runtime.cjs",
+          "lines": "49-51"
+        }
+      ],
+      "evidence": [
+        "ingest grava segments com status captured, manifest, direitos e origem; planUseCase lê library e retorna somente planejamento candidate-only.",
+        "retrieveKnowledge carrega exclusivamente research/framework-evolution/{sources,heuristics,competencies}.json; não consulta a library.",
+        "Exports do módulo expertise: loadProgram,validateProgram,getProfile,ingest,planUseCase,assessPromotion. Não há consolidação de julgamento/mecanismo em corpus nem receipt de extração recuperável pelo runtime.",
+        "Snapshot atual: 172/172 agentes coverage=gap, 67 fontes e 112 heurísticas no corpus; source-program tem 2 READ/88 CANDIDATE. Números antigos de 77 gaps não descrevem este HEAD."
+      ],
+      "reproduce": "Ler exports e a lista fixa em loadCorpus; contar coverage e status com loadProgram/loadCorpus, sem escrita.",
+      "impact": "Ingerir um livro/transcrição não muda a recuperação de um agente. A promessa de usar Jev uma vez na extração exige um elo de consolidação durável, distinto de avaliação paga a cada tarefa.",
+      "minimumChange": "Criar registro de mecanismos candidatos por competência, ligado a segmentos/locators/direitos e resultado tipado; revisão determinística/independente precede publicação no corpus. Runtime usa o corpus consolidado e permanece offline."
+    },
+    {
+      "id": "RT-04",
+      "priority": "P1",
+      "kind": "cost-defect-before-live",
+      "title": "Cache sem single-flight e ledger volátil permitem repetição de gasto",
+      "locations": [
+        {
+          "file": "scripts/framework-evolution/jev.cjs",
+          "lines": "106-118,120-155"
+        }
+      ],
+      "evidence": [
+        "Promise.all de duas execute para mesmo payload/cache Map/ledger, com transport inteiramente em memória: calls=2, ambas mode=live, sameCacheKey=true, reservedUsd=0.005376.",
+        "Dois createLedger({authorizedUsd:0.002688,authorizationId:'same-id'}) permitem reserva combinada de 0.005376. O limite individual funciona; a identidade da autorização não possui persistência ou exclusão entre processos.",
+        "createFileCache.set usa flag wx; concorrentes pagos podem competir pelo mesmo arquivo após chamadas bem-sucedidas. Esta consequência vem do fonte; não foi alegada chamada real."
+      ],
+      "reproduce": "Usar execute com transport mock retornando noul=0.5, input_tokens=30 e Promise.all; recriar dois ledgers com mesmo ID e reservar 0.002688 em cada.",
+      "impact": "Antes de usar a credencial, o teto de campanha e a extração uma vez precisam sobreviver a paralelismo, reinício e resposta perdida. Nenhum dólar real foi gasto no probe.",
+      "minimumChange": "Reserva durável sob lock por authorizationId, chave estável por captura/modelo/versão de perguntas e single-flight por cacheKey. Estado de cobrança incerto após crash não permite retry automático; cache validado pode ser reaproveitado sem reserva."
+    },
+    {
+      "id": "RT-05",
+      "priority": "P1",
+      "kind": "recovery-defect",
+      "title": "Entrega de bundle é atômica por arquivo, não por transação",
+      "locations": [
+        {
+          "file": "bin/lib/framework-evolution-delivery.js",
+          "lines": "100-125"
+        }
+      ],
+      "evidence": [
+        "Fixture isolada em TEMP, packageRoot atual e writeFileAtomically substituído em memória por falha no segundo write: writes=2, scripts/framework-evolution/runtime.cjs presente, receipt ausente.",
+        "O loop escreve todos os destinos antes do receipt; não contém catch/rollback da sequência. Backups preservam bytes anteriores, mas não restauram automaticamente arquivos já gravados."
+      ],
+      "reproduce": "Monkeypatch somente em memória de bin/lib/global-provider-adapters.js.writeFileAtomically para lançar no segundo write; deliverFrameworkEvolution(layout:'project') em mkdtemp. Fixture preservada sob TEMP, identificador sinapse-audit-delivery-hWZIHW; caminho pessoal omitido do artefato distribuível.",
+      "impact": "Interrupção de instalação/upgrade deixa consumidores em versões distintas e a próxima operação não tem receipt completo do estado parcial. É risco de recuperação; não implica perda observada em HOME real.",
+      "minimumChange": "Stage pré-validado, journal da transação e rollback compare-and-swap dos arquivos gravados; readback do bundle e receipt antes de declarar delivered. Guardar snapshot canônico e não sobrescrever edição concorrente."
+    },
+    {
+      "id": "RT-06",
+      "priority": "P2",
+      "kind": "validation-gap",
+      "title": "Política de modelo aceita evidência não resolvível e data futura",
+      "locations": [
+        {
+          "file": "scripts/expert-evolution/model-policy.cjs",
+          "lines": "21-51"
+        },
+        {
+          "file": "research/expert-evolution/model-policy.json",
+          "lines": "1-58"
+        }
+      ],
+      "evidence": [
+        "Clone em memória da política: reviewExpiresAt removido, availability.checkedAt='2099-01-01', availability.evidence=['unresolvable-placeholder']. validatePolicy retorna valid=true; assessModel(Sol, now='2040-01-01') retorna allowed=true.",
+        "A política original possui expiresAt e avaliações não aprovadas; Opus/Jev continuam blocked no snapshot. O probe expõe fragilidade do validador, não prova adulteração da política original."
+      ],
+      "reproduce": "Modificar somente o objeto retornado por loadPolicy, em memória, e chamar validatePolicy/assessModel com as datas acima.",
+      "impact": "Booleanos e textos de receipt não provam provider/account/model corretos nem atualidade; promoção deve ser ancorada em receipt resolvível, escopo e validade.",
+      "minimumChange": "Receipt tipado com provider/native ID/account scope/checkedAt/expiresAt/hashes e origem permitida. Datas futuras além de tolerância falham; TTL obrigatório para disponibilidade; promoção só aceita benchmark do modelo/corpus/task family específicos."
+    },
+    {
+      "id": "RT-07",
+      "priority": "P2",
+      "kind": "quality-evidence-gap",
+      "title": "Benchmark de decisões escritas não mede os artefatos prioritários",
+      "locations": [
+        {
+          "file": "docs/framework/expert-evolution-2026-10/verification.md",
+          "lines": "27-44"
+        },
+        {
+          "file": "scripts/expert-evolution/expertise.cjs",
+          "lines": "190-196"
+        },
+        {
+          "file": "research/expert-evolution/model-policy.json",
+          "lines": "25-38"
+        }
+      ],
+      "evidence": [
+        "Verificação relata 10 casos escritos, uma geração por variante, baseline18/20 e enriched20/20; reconhece ausência de UI/vídeo renderizados, estatística causal, Opus/Jev e cobertura integral.",
+        "assessPromotion verifica passed/heldOut/independent, IDs e hashes; não liga receipt a um artefato aberto/reproduzido nem exige critérios específicos por domínio.",
+        "Todos os perfis permanecem planned; nenhuma promoção foi observada. O problema é o próximo critério de promoção, não uma falsa promoção já feita."
+      ],
+      "reproduce": "Ler receipt de benchmark e comparar o gate assessPromotion com os critérios de entregáveis reais no PLAN.",
+      "impact": "Uma decisão verbal sobre foco, contraste, FPS ou legendas pode passar enquanto o produto final falha. Melhorar 172 agentes exige evidência por competência e função usada, não contagem de perfis.",
+      "minimumChange": "Começar por pequena coorte com artefatos reais: interface desktop/390px/teclado, motion teardown/frame/reduced-motion e vídeo/carrossel no tamanho final com direitos e correspondência fala/imagem. Guardar hashes/locators e julgamento independente."
+    },
+    {
+      "id": "RT-08",
+      "priority": "P3",
+      "kind": "usability-gap",
+      "title": "Catálogo lógico não demonstra redução de ruído operacional",
+      "locations": [
+        {
+          "file": "scripts/expert-evolution/catalog.cjs",
+          "lines": "71-89,155-186"
+        },
+        {
+          "file": "docs/framework/expert-evolution-2026-10/organization.md",
+          "lines": "91-94,124-160"
+        }
+      ],
+      "evidence": [
+        "Queries disponíveis: agent por ID/alias, squad por ID e paths por responsabilidade. Nenhuma consulta por entregável/problema ou trilha source→task→artefato.",
+        "Manifest de consumers inclui referência literal/import relativo; a documentação já registra globs, expressões dinâmicas e externos como lacuna.",
+        "Organização é explicitamente lógica e preserva paths. Não houve remoção física, e clusters de bytes iguais conservam action=review-only-preserve."
+      ],
+      "reproduce": "Ler exports/main/query* e as limitações de consumidores; não interpretar consumidor vazio como arquivo dispensável.",
+      "impact": "O usuário ainda precisa conhecer IDs e classes para achar o fluxo criativo. Contagem/classificação de milhares de arquivos não mede facilidade de encontrar a tarefa certa.",
+      "minimumChange": "Adicionar índice de entregáveis e trilhas nomeadas (frontend, motion, Reel, carrossel), aliases existentes e gaps; medir descoberta em 5 cenários. Consolidação física fica fora deste ciclo até mapa de consumidores e autorização explícita."
+    }
+  ],
+  "contracts": [
+    {
+      "id": "C-01",
+      "owner": "developer",
+      "findings": [
+        "RT-01",
+        "RT-02"
+      ],
+      "files": [
+        "scripts/expert-evolution/expertise.cjs",
+        "scripts/framework-evolution/knowledge.cjs",
+        "scripts/framework-evolution/runtime.cjs",
+        "research/expert-evolution/task-bindings.json"
+      ],
+      "exports": {
+        "existing": [
+          "getProfile",
+          "retrieveKnowledge",
+          "buildRuntimeContext"
+        ],
+        "proposed": [
+          "validateTaskBindings",
+          "resolveTaskBinding",
+          "selectProtectedCriteria"
+        ]
+      },
+      "inputs": "root exato; canonical agentId/command; bindings versionados com sourceSha256, competencyIds, deliverableIds, requiredCriterionIds; maxChars.",
+      "outputs": "Mesmo envelope público acrescido de selectionEvidence e omittedCriterionIds; gaps explícitos para binding ausente; refs incluem rights/status/locator; nenhuma mudança de autoridade.",
+      "acceptance": [
+        "banana/unrelated não retorna entregável candidato nem evidência genérica.",
+        "Bindings de ao menos frontend/modal, motion/reduced-motion e vertical-video retêm os critérios pertinentes.",
+        "Os 6 perfis que hoje truncam 6→2 preservam critérios protegidos ou falham de forma explícita.",
+        "Payload completo ≤12000 chars e perfil ≤3000 chars; caracteres são medida, tokens estimados só quando tokenizer documentado for usado.",
+        "Fixtures de gaps/negativos/especialistas do mesmo squad; manter os 172 IDs e erro de unknown command."
+      ],
+      "rollback": "Restaurar os três módulos e remover do bundle somente o binding introduzido pela própria transação; manter profiles/corpus originais com hashes. Não apagar registros funcionais.",
+      "canExecuteNow": true
+    },
+    {
+      "id": "C-02",
+      "owner": "developer",
+      "findings": [
+        "RT-04"
+      ],
+      "files": [
+        "scripts/framework-evolution/jev.cjs",
+        "scripts/expert-evolution/extraction.cjs"
+      ],
+      "exports": {
+        "existing": [
+          "execute",
+          "createLedger",
+          "createFileCache",
+          "plan"
+        ],
+        "proposed": [
+          "createDurableLedger",
+          "runSingleFlight",
+          "validateExtractionReceipt"
+        ]
+      },
+      "inputs": "directory de fixture/armazenamento explicitamente autorizado; authorizationId e authorizedUsd; sourceHash; model; questionVersion; payload; transport injetável; timeout e maxAttempts.",
+      "outputs": "Receipt persistido keyed por captura+pergunta+modelo, reserva/write-ahead auditável e status pending/completed/failed/charge-uncertain; uso real separado da reserva conservadora.",
+      "acceptance": [
+        "Duas chamadas concorrentes para mesma chave causam um transporte e uma reserva.",
+        "Dois ledgers/processos com mesma autorização não excedem US$0,05 no conjunto; restart preserva saldo reservado.",
+        "Crash entre envio/resposta vira charge-uncertain e bloqueia retry automático.",
+        "Resposta inválida não consolida conhecimento; replay completado faz zero transporte.",
+        "Tests usam mock: zero rede, zero credencial real; atual admission em bytes permanece conservadora com tokenEstimate=null, billing por usage.input_tokens."
+      ],
+      "rollback": "Desabilitar executor pago; preservar receipts e reservas/charge-uncertain. Reverter código sem reembolsar/desconsiderar tentativas possivelmente cobradas.",
+      "canExecuteNow": true,
+      "livePrerequisite": "Credencial Jev e autorização pré-existente do piloto devem ser confirmadas pelo coordenador; este contrato não amplia US$0,05."
+    },
+    {
+      "id": "C-03",
+      "owner": "developer",
+      "findings": [
+        "RT-03"
+      ],
+      "dependsOn": [
+        "C-01",
+        "C-02"
+      ],
+      "files": [
+        "scripts/expert-evolution/extraction.cjs",
+        "scripts/framework-evolution/knowledge.cjs",
+        "research/expert-evolution/library/approved-manifest.json"
+      ],
+      "exports": {
+        "proposed": [
+          "stageMechanism",
+          "validateMechanism",
+          "publishKnowledgeDelta"
+        ],
+        "existing": [
+          "loadCorpus",
+          "retrieveKnowledge"
+        ]
+      },
+      "inputs": "Receipt tipado; segmentos/hash/locator; direitos; condition/action/rationale/exceptions/counterexamples; consumers/competencies; reviewReceipt; expectedCorpusSha.",
+      "outputs": "Mecanismo candidato persistido e delta autorizado/revisado de corpus, sem promoção automática. Runtime só usa delta validado e pinado.",
+      "acceptance": [
+        "Ingest de nova captura isoladamente não promove nada.",
+        "Um mecanismo aprovado chega ao runtime somente ao comando/competência ligado; fonte/hash/rights/locator recuperáveis.",
+        "Duplicação de captura preserva origens e faz zero transporte pago.",
+        "Segmento truncado sem contexto suficiente gera insufficient-evidence; jamais completar exceção de memória.",
+        "Reviewer independente e negativo/conflito por competência precedem publicação; private captures não entram em pacote público."
+      ],
+      "rollback": "Reativar corpus anterior por SHA; preservar mecanismo/receipt como superseded. Não apagar origem nem outros deltas concorrentes.",
+      "canExecuteNow": true,
+      "scope": "Implementação e prova offline com conteúdo de fixture próprio; aquisição real/licenciada e julgamento pago separados."
+    },
+    {
+      "id": "C-04",
+      "owner": "developer",
+      "findings": [
+        "RT-05"
+      ],
+      "files": [
+        "bin/lib/framework-evolution-delivery.js",
+        "bin/lib/global-provider-adapters.js"
+      ],
+      "exports": {
+        "existing": [
+          "deliverFrameworkEvolution"
+        ],
+        "proposed": [
+          "prepareDelivery",
+          "commitDelivery",
+          "recoverDelivery"
+        ]
+      },
+      "inputs": "packageRoot,targetRoot,layout; source manifest/hash; prior receipt; transactionId; injected writer.",
+      "outputs": "Entrega coherente/journal/recovery receipt; delivered somente após readback de todos os arquivos/receipt.",
+      "acceptance": [
+        "Falha no write 2 e falha ao gravar receipt preservam/restauram bundle anterior em fixture.",
+        "Fresh install e upgrade testados com HOME com espaços; não tocar HOME real.",
+        "Recovery não sobrescreve arquivo alterado por outro processo; registra bloqueio e backup.",
+        "Fonte canônica/global installedPath, aliases públicos e tasks preservados; fixture chama runtime de pelo menos três funções e unknown command."
+      ],
+      "rollback": "Restaurar somente destinos ainda iguais aos bytes desta transação, por CAS; não mexer em alterações de terceiros. Journal/backup retidos para recovery.",
+      "canExecuteNow": true
+    },
+    {
+      "id": "C-05",
+      "owner": "developer",
+      "findings": [
+        "RT-06",
+        "RT-07"
+      ],
+      "files": [
+        "scripts/expert-evolution/model-policy.cjs",
+        "scripts/expert-evolution/expertise.cjs",
+        "research/expert-evolution/model-policy.json",
+        "research/expert-evolution/benchmark-protocol.json"
+      ],
+      "exports": {
+        "existing": [
+          "validatePolicy",
+          "assessModel",
+          "assessPromotion"
+        ],
+        "proposed": [
+          "validateAvailabilityReceipt",
+          "validateArtifactEvaluation"
+        ]
+      },
+      "inputs": "Clock injetável; allowlist de provider/model IDs existentes; receipts resolvíveis e hash; task family; artifact hashes/locators; independent reviewer/executor; corpus SHA.",
+      "outputs": "allowed/promotionEligible com motivo explícito, disponibilidade separada de ganho de qualidade. IDs públicos não são inferidos a partir de nome nativo.",
+      "acceptance": [
+        "Placeholder e checkedAt2099 falham em now2040; ausência de expiry bloqueia disponibilidade.",
+        "Receipt expirado ou de provider/model/conta incompatível falha.",
+        "Benchmark escrito permanece restrito a decisões escritas; não promove UI/video/world-expert.",
+        "Sol pode manter uso nativo disponível dentro da autoridade; Opus/Jev indisponíveis não executam por aliases inventados.",
+        "Competência requer positivo, negativo e conflito com artefatos/evidência reproduzíveis; nenhum fetch remoto no validador."
+      ],
+      "rollback": "Restaurar política pinada anterior mantendo expired/blocked quando a evidência perdeu validade; jamais ligar modelo por simples fallback.",
+      "canExecuteNow": true,
+      "behavioralRun": "Conduzir primeiro 3 task families prioritárias em artefatos reservados; comparações Opus/Jev dependem de acesso real."
+    },
+    {
+      "id": "C-06",
+      "owner": "developer",
+      "findings": [
+        "RT-08"
+      ],
+      "files": [
+        "scripts/expert-evolution/catalog.cjs",
+        "research/expert-evolution/deliverable-index.json",
+        "docs/framework/expert-evolution-2026-10/organization.md"
+      ],
+      "exports": {
+        "existing": [
+          "queryAgent",
+          "querySquad",
+          "queryPaths"
+        ],
+        "proposed": [
+          "queryDeliverable",
+          "validateDeliverableIndex"
+        ]
+      },
+      "inputs": "Índice versionado com IDs/tasks canônicos, aliases públicos existentes e source SHA; termos de entrega e current catalog.",
+      "outputs": "Trilha nomeada com owner, canonical source, task, required evidence e consumer gaps; todos os caminhos abrem/resolvem.",
+      "acceptance": [
+        "Cinco necessidades reais chegam a uma entrada válida sem exigir que usuário conheça agentId.",
+        "Cada trilha resolve exact command e explicita fallback/gap.",
+        "Nenhum move/delete/protected-path/global edit; consulta não infere dispensabilidade por ausência de referência literal.",
+        "Registrar tempo/ações de descoberta baseline→novo em vez de somente contagem de arquivos."
+      ],
+      "rollback": "Remover apenas referência ao novo índice e reverter módulo; fontes/tasks/catálogo baseline permanecem intactos.",
+      "canExecuteNow": true
+    }
+  ],
+  "executionOrder": [
+    "C-01",
+    "C-02",
+    "C-04",
+    "C-05",
+    "C-03",
+    "C-06"
+  ],
+  "parallelism": "C-01/C-02/C-04/C-05/C-06 have separate primary files but C-02/C-03 share extraction.cjs and C-01/C-05 share expertise.cjs: sequence these owners or assign the same developer. No additional agents spawned.",
+  "notVerified": [
+    "No live Jev/Opus request",
+    "No real HOME/global installation",
+    "No UI/video rendering",
+    "No repeated 178-test cohort",
+    "No paid spend",
+    "No physical cleanup"
+  ],
+  "sourceSnapshots": [
+    {
+      "file": "scripts/expert-evolution/expertise.cjs",
+      "sha256": "e70f01d5f81ec759f67769772033ad41681d00b39d44d29df28e804f87445263"
+    },
+    {
+      "file": "scripts/expert-evolution/model-policy.cjs",
+      "sha256": "8004ccb6b51baaf4dabe52e073cbec0f0808f20cf3d83cc09cae0d072d814e22"
+    },
+    {
+      "file": "scripts/expert-evolution/catalog.cjs",
+      "sha256": "f32a983314e425a153f567f251b96841b57436a3bc6e270b1bd3607c4e28216a"
+    },
+    {
+      "file": "scripts/framework-evolution/knowledge.cjs",
+      "sha256": "b02fa8fb9b6ba8f291fab996cb35ed733ffab03e2b5384a9e6b7458b92541576"
+    },
+    {
+      "file": "scripts/framework-evolution/runtime.cjs",
+      "sha256": "6120df982fcc4f1db81807f9c7ee739e7b0a0139db7a9a1984146919052d3e26"
+    },
+    {
+      "file": "scripts/framework-evolution/jev.cjs",
+      "sha256": "5be1c502b68eed011661ab54de7d926b5d02732ff7ed03bdd472efd0f78b44f2"
+    },
+    {
+      "file": "bin/lib/framework-evolution-delivery.js",
+      "sha256": "947e70b2c63f1ef0bf9437ccab7cc29427517673afa6147eef8d106fc298db8e"
+    }
+  ]
+}

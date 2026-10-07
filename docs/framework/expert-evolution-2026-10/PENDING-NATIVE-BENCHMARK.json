@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "receiptType": "bounded-native-paired-evaluation",
+  "scope": "20 new synthetic textual decision cases:17squadrepresentatives+3core, not all172agents or rendered/external effects",
+  "observedAt": "2026-10-07T19:59:38.087Z",
+  "counts": {
+    "baselinePassed": 18,
+    "enrichedPassed": 19,
+    "bothPassed": 18,
+    "onlyBaselinePassed": 0,
+    "onlyEnrichedPassed": 1,
+    "bothFailed": 1
+  },
+  "baseline": {
+    "entries": 172,
+    "substantiveProfiles": 35,
+    "placeholderProfiles": 137,
+    "bindings": 51,
+    "sourceHead": "8fe3b90b89932cf0cfd8f5ab02846a530dd0ad5f"
+  },
+  "enriched": {
+    "entries": 172,
+    "substantiveProfiles": 172,
+    "bindings": 188,
+    "sourceState": "Frozen hashed snapshot, not newly repaired current code"
+  },
+  "protocol": {
+    "roundsAttempted": 2,
+    "primaryRound": 2,
+    "round1": "NOT_QUALIFIED because both complete-context reads truncated/projections omitted fields; outputs preserved/unscored for primary evidence",
+    "modelConfigured": "gpt-6.1-sol",
+    "effort": "high",
+    "actualBackendModelIndependentlyObserved": false,
+    "freshIsolatedGenerators": true,
+    "completeCapsuleExposurePerCondition": 20,
+    "completeBlindReviewPairs": 20,
+    "reviewJudgments": 200,
+    "truncatedReadsPrimaryRound": 0,
+    "reviewFrozenBeforeUnblinding": true
+  },
+  "remaining": {
+    "P02": "Both omit ticket3000 demanded by frozen rubric; ticket not explicit in brief, so rubric-alignment limitation",
+    "P18": "Baseline lacks observable rollback; enriched passes frozen criterion"
+  },
+  "expertisePromoted": false,
+  "globalModelReplacement": false,
+  "causalOrStatisticalGainClaim": false,
+  "nativeClaude": {
+    "transport": "Existing nativeCLI authentication",
+    "requestedModel": "sonnet",
+    "reportedModel": "claude-sonnet-5-5",
+    "attempts": 1,
+    "availabilityObserved": true,
+    "decisionObserved": false,
+    "status": "error_max_budget_usd",
+    "requestedBudgetUsd": 0.05,
+    "reportedListCostEstimateUsd": 0.213404,
+    "billingConfirmed": false,
+    "additionalRetry": false,
+    "toolsConfigured": [],
+    "mcpConfigured": [],
+    "hooksPreserved": true,
+    "inputUtf8Bytes": 9008,
+    "capsuleUtf8Bytes": 8566,
+    "capsuleCharacters": 8506,
+    "aggregateCacheCreationInputTokens": 51220,
+    "exactStartupTokenAttributionAvailable": false,
+    "configurationChanges": 0
+  },
+  "jevAdditionalCalls": 0,
+  "evidence": {
+    "originalProtocolSha256": "148ebb6a51d4d5c1b09d3e72a2b0dbfb20490244703fccf88d56a3a250dbd70c",
+    "round2ProtocolSha256": "692ffda4af8364f8fb170a6f8b38528845fc5eaf9babdd7e781b4a60bbab365c",
+    "fiveFrozenInputs": [
+      {
+        "path": "cases.json",
+        "sha256": "654797dae0c90e96077ac00a4b7f83eb42cba5ece1aa41d3e90e5b81988c5923"
+      },
+      {
+        "path": "rubrics.json",
+        "sha256": "88a1178170dd0443206fe0c69549a48a4bee7444359f0c23f8afa37c8032ed72"
+      },
+      {
+        "path": "condition-baseline.json",
+        "sha256": "76b71330fe43b5a37825d76a279b8299cea8c742773e38409550995f308111ef"
+      },
+      {
+        "path": "condition-enriched.json",
+        "sha256": "9ed803b28cd055af0e11c63b7655387268303e749adb6ff71d829cc8df4a5c7c"
+      },
+      {
+        "path": "source-manifest.json",
+        "sha256": "d2b8f43677f1f50acf5328316da5a9a042e45a8884cc3a30c1ec98abceaca509"
+      }
+    ],
+    "baselineExposureSha256": "c7e1f596f228054c0bbcb41dc101004a3513cc813acd7af459f0b621e49bbdeb",
+    "enrichedExposureSha256": "38380390a10cbaccbdd4dd5b7c2e92f1b16dee2c9be2b7aa1e1893263c6eb55a",
+    "blindInputSha256": "3478b5505d04f0b0b0e966c75afc8c6c2f084d3dadf907ccefdd9f49676db09d",
+    "blindManifestSha256": "5735ec56207c70f1f2c8d554ed2a151bfbf6b370f12f705803889f19b44c4c60",
+    "blindReviewExposureSha256": "f08b409188338ca3ea64b19b8470f4e3d655a969647771cc411ee8362a8a3623",
+    "reviewSha256": "0f032008226fd602cde68c9939474f2992a872a827f6caf92a82c5d0a8618dc2",
+    "reviewFreezeSha256": "0f1175bd0b62884fccfa34bdf4602aa9d29fbbe2e24c510620a8e5ead82fd407",
+    "resultsSha256": "ecce043e74d2f005b922108de20959a67638d5397fe5df47153e3cbb5496267a",
+    "methodologyNoteSha256": "aed0fea27b532e0f728df8cfaf32f14bb18f17ae60bbc39f0bc61a31735aa932"
+  },
+  "evidenceStorage": "Raw source/capsules/responses/review/CLIreceipts retained in ignored project-local private artifacts; this sanitized receipt has no account/session IDs, credentials, absolute profile paths or raw startup context."
+}

@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { deliverFrameworkEvolution, globalEvolutionInstruction } = require('./framework-evolution-delivery');
 const {
   MASTER_ALIAS_ENTRY_POINTS,
   GLOBAL_PROVIDER_SKILL_IDS,
@@ -170,7 +171,17 @@ function unlinkFileWithBinding(home, filePath, binding, expected, beforeDelete) 
 }
 
 function writeFileAtomically(filePath, content, home = path.dirname(filePath), options = {}) {
+  const hasExpectedDigest = Object.prototype.hasOwnProperty.call(options, 'expectedContentSha256');
+  function assertExpectedContent() {
+    if (!hasExpectedDigest) return;
+    const expected = options.expectedContentSha256;
+    if (expected !== null && !/^[a-f0-9]{64}$/.test(expected)) throw new Error('Invalid expected file digest');
+    const current = readRegularFileNoFollowSync(filePath);
+    const actual = current === null ? null : crypto.createHash('sha256').update(current).digest('hex');
+    if (actual !== expected) throw new Error(`Preserving concurrently modified provider file: ${filePath}`);
+  }
   const destinationIdentity = assertSafeFileWithinHome(home, filePath);
+  assertExpectedContent();
   const parentPath = path.dirname(filePath);
   const binding = captureParentBinding(home, parentPath);
   const temporaryPath = path.join(
@@ -208,6 +219,7 @@ function writeFileAtomically(filePath, content, home = path.dirname(filePath), o
         throw new Error(`Refusing provider overwrite of a newly appeared file: ${filePath}`);
       }
       assertParentBinding(home, parentPath, binding);
+      assertExpectedContent();
       fs.renameSync(temporaryPath, filePath);
       temporaryExists = false;
     }
@@ -323,7 +335,7 @@ function removeManagedFileWithBinding(home, filePath, beforeDelete) {
   }
 }
 
-function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBitsSkillPath, testHooks = {} }) {
+function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBitsSkillPath, testHooks = {}, frameworkEvolutionPackageRoot = path.resolve(__dirname, '../..') }) {
   let commandFiles = fs.existsSync(commandsDir)
     ? fs.readdirSync(commandsDir).filter((file) => file.endsWith('.md')).sort()
     : [];
@@ -339,6 +351,16 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBits
     skills: [],
     availableSkills: [],
   };
+  const installedRoot = path.join(home, '.sinapse');
+  // Real installers stage commands under ~/.sinapse/.generated/agents. Isolated
+  // adapter-only callers without installed canonical sources retain legacy flow.
+  const installedStaging = path.resolve(commandsDir) === path.resolve(installedRoot, '.generated/agents');
+  let evolution = null;
+  if (installedStaging) {
+    ensureSafeDirectoryWithinHome(home, installedRoot);
+    evolution = deliverFrameworkEvolution({ packageRoot: frameworkEvolutionPackageRoot, targetRoot: installedRoot, layout: 'global' });
+    written.frameworkEvolution = evolution;
+  }
   let reactBitsSkillContent = null;
   const providerSkillIds = [...GLOBAL_PROVIDER_SKILL_IDS];
   if (reactBitsSkillPath) {
@@ -352,7 +374,8 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBits
     ensureSafeDirectoryWithinHome(home, targetDir);
     removeStaleManagedAgents(targetDir, commandFiles, '.md', { home, beforeDelete: testHooks.beforeStaleAgentDelete });
     for (const file of commandFiles) {
-      const markdown = markGlobalAgent(fs.readFileSync(path.join(commandsDir, file), 'utf8'), file);
+      let markdown = markGlobalAgent(fs.readFileSync(path.join(commandsDir, file), 'utf8'), file);
+      if (evolution?.status === 'delivered') markdown += `\n${globalEvolutionInstruction(home, file.replace(/\.md$/, ''))}\n`;
       writeFileAtomically(path.join(targetDir, file), markdown, home);
       written.claude.push(file);
     }
@@ -375,7 +398,8 @@ function deliverGlobalProviderAdapters({ llmChoice, home, commandsDir, reactBits
       { home, beforeDelete: testHooks.beforeStaleAgentDelete },
     );
     for (const file of commandFiles) {
-      const markdown = markGlobalAgent(fs.readFileSync(path.join(commandsDir, file), 'utf8'), file);
+      let markdown = markGlobalAgent(fs.readFileSync(path.join(commandsDir, file), 'utf8'), file);
+      if (evolution?.status === 'delivered') markdown += `\n${globalEvolutionInstruction(home, file.replace(/\.md$/, ''))}\n`;
       const id = file.replace(/\.md$/, '');
       const metadata = parseAgentMarkdown(markdown, id);
       const tomlName = `${id}.toml`;

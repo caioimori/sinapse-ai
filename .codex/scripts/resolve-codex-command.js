@@ -7,6 +7,7 @@ const path = require('path');
 const {
   resolveCodexAgent,
   resolveCodexAgentCommand,
+  STATIC_ALIASES,
 } = require('./resolve-codex-agent');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
@@ -28,12 +29,13 @@ function normalizeCommandInput(value) {
 
 function resolveAgent(registry, agentInput) {
   const normalized = normalizeAgentInput(agentInput);
+  const canonical = STATIC_ALIASES[normalized] || normalized;
   const matches = [];
 
   for (const [agentId, agentSpec] of Object.entries(registry.agents || {})) {
     const aliases = [agentId, ...(agentSpec.aliases || [])]
       .map((alias) => normalizeAgentInput(alias));
-    if (aliases.includes(normalized)) {
+    if (aliases.some(alias => alias === normalized || (STATIC_ALIASES[alias] || alias) === canonical)) {
       matches.push({ agentId, agentSpec });
     }
   }

@@ -1,0 +1,948 @@
+{
+  "schemaVersion": 1,
+  "snapshot": {
+    "date": "2026-10-07",
+    "scope": "Fonte bee125db: 37 checks aprovados, instalação Codex/Claude conferida e comparação escrita concluída; sem produção",
+    "typography": "Sora, Inter e JetBrains Mono quando presentes no sistema; fallback local sem download de fontes."
+  },
+  "metrics": {
+    "squads": 17,
+    "agents": 172,
+    "reviewedFunctions": 172,
+    "reviewedCommands": 409,
+    "validatedExperts": 0,
+    "operationalProfiles": 172,
+    "commandRecords": 2640,
+    "newOwnedTasks": 42,
+    "curatedMechanisms": 12,
+    "providerSkills": 38,
+    "readReferences": 2,
+    "candidateReferences": 88,
+    "individualProfiles": 172,
+    "specificMechanisms": 409,
+    "mentalModels": 344,
+    "qualityCriteria": 635,
+    "diagnosticCases": 172,
+    "externalSectionReads": 75,
+    "localReadContracts": 238,
+    "newCandidateReferences": 11,
+    "activeBindings": 188,
+    "taskSupplements": 12,
+    "reviewedDiagnosticResponses": 172
+  },
+  "deployment": {
+    "local": "Reparos aprovados; comparação escrita: enriquecido 19/20, baseline 18/20",
+    "installed": "Fonte bee125db instalada — Codex e Claude Code; 42 contextos offline conferidos e históricos preservados",
+    "published": "PR #417 aberta; 37 checks aprovados na fonte bee125db, um skip existente e zero falhas; sem produção"
+  },
+  "deliverables": [
+    {
+      "id": "frontend",
+      "label": "Frontend",
+      "title": "Uma interface que funciona.",
+      "description": "Do problema do usuário ao layout, aos componentes e à revisão em desktop e celular.",
+      "agentId": "dx-frontend-engineer",
+      "command": "implement-responsive-layouts",
+      "exampleUrl": "ui/index.html",
+      "exampleLabel": "Ver exemplo de interface",
+      "steps": [
+        [
+          "Definir experiência",
+          "Objetivo, hierarquia, conteúdo e estados antes do código."
+        ],
+        [
+          "Construir a interface",
+          "Layout adaptável, componentes, teclado e limites de responsabilidade."
+        ],
+        [
+          "Conferir o resultado",
+          "Screenshots, navegação, foco e ausência de rolagem lateral."
+        ]
+      ],
+      "gap": "O exemplo passa verificações locais. Ainda não prova qualidade de um novo produto, backend real ou uso em produção."
+    },
+    {
+      "id": "motion",
+      "label": "Motion",
+      "title": "Movimento com intenção.",
+      "description": "Explicar uma ação ou processo, com ritmo, controle e alternativa acessível.",
+      "agentId": "css-motion-artist",
+      "command": "create-css-animation",
+      "exampleUrl": "motion/index.html",
+      "exampleLabel": "Ver exemplo de motion",
+      "steps": [
+        [
+          "Definir a intenção",
+          "Gatilho, estado final e função de cada movimento."
+        ],
+        [
+          "Produzir e controlar",
+          "Pausa, interrupção, reinício e preferência de movimento reduzido."
+        ],
+        [
+          "Observar a reprodução",
+          "Conferir o movimento contínuo e a legibilidade, além dos estados capturados."
+        ]
+      ],
+      "gap": "Estados, controles, reflow e movimento reduzido passaram no replay atual. A revisão técnica delimita seu alcance; qualidade criativa global continua sem validação."
+    },
+    {
+      "id": "reel",
+      "label": "Reel / vídeo",
+      "title": "Um vídeo do início ao fim.",
+      "description": "Unir roteiro, planejamento visual, produção, trilha e revisão do arquivo exportado.",
+      "agentId": "production-director",
+      "command": "write-video-script",
+      "exampleUrl": "media/index.html#reel-title",
+      "exampleLabel": "Ver Reel de 18 segundos",
+      "steps": [
+        [
+          "Construir o roteiro",
+          "Mensagem, progressão, cenas e duração precisam servir ao público."
+        ],
+        [
+          "Produzir o material",
+          "Render, legendas, formato, direitos dos assets e áudio são etapas separadas."
+        ],
+        [
+          "Revisar o vídeo inteiro",
+          "Ouvir a trilha e observar ritmo, transições e clareza na reprodução contínua."
+        ]
+      ],
+      "gap": "A função revisada resolve o roteiro. O Reel de 18 segundos ainda depende de audição humana da trilha; não recebeu aprovação audiovisual total."
+    },
+    {
+      "id": "carrossel",
+      "label": "Carrossel",
+      "title": "Uma ideia por página.",
+      "description": "Planejar a progressão editorial e transformá-la em páginas legíveis, com identidade e exportação.",
+      "agentId": "content-engineer",
+      "command": "structure-carousel-progression",
+      "exampleUrl": "media/index.html#carousel-title",
+      "exampleLabel": "Ver carrossel de cinco páginas",
+      "steps": [
+        [
+          "Organizar a progressão",
+          "Abertura, sequência e conclusão têm papéis claros."
+        ],
+        [
+          "Desenhar as páginas",
+          "Composição, hierarquia, contraste e leitura no celular."
+        ],
+        [
+          "Revisar e exportar",
+          "Conferir imagens finais, texto equivalente e fontes editáveis."
+        ]
+      ],
+      "gap": "As cinco páginas finais e a leitura no celular foram revisadas nesta onda. A nota histórica de IA 91/100 conserva seu alcance; sem aprovação humana ou ganho de campanha comprovado."
+    },
+    {
+      "id": "anuncio",
+      "label": "Anúncio",
+      "title": "Uma mensagem com hipótese.",
+      "description": "Criar variações de copy fundamentadas no público, na oferta e em uma prova verificável.",
+      "agentId": "ad-copywriter",
+      "command": "write-ad-copy-variations",
+      "exampleUrl": "#pendencias",
+      "exampleLabel": "Ver validações pendentes",
+      "steps": [
+        [
+          "Definir oferta e público",
+          "Uma promessa defensável e uma ação concreta."
+        ],
+        [
+          "Produzir as variações",
+          "Mudar um elemento com propósito, mantendo voz e evidência."
+        ],
+        [
+          "Testar a hipótese",
+          "Comparar criativos com métrica, janela e público definidos."
+        ]
+      ],
+      "gap": "Esta trilha cobre copy publicitária. Ainda não há exemplo final de anúncio, campanha publicada ou ganho de conversão comprovado."
+    }
+  ],
+  "pending": [
+    {
+      "id": "jev",
+      "title": "Jev e créditos",
+      "description": "Onze chamadas novas produziram 179 juízos de apoio: 172 respostas diagnósticas e sete afirmações da referência visual. Revisão nativa e Jev receberam entradas e perguntas diferentes.",
+      "status": "Apoio de revisão dentro do teto; sem comparação entre modelos",
+      "detail": "13 chamadas acumuladas: custo calculado US$ 0,003803184, reserva US$ 0,034944 e teto US$ 0,05. Zero chamada adicional neste lote; não é conciliação de fatura."
+    },
+    {
+      "id": "opus",
+      "title": "Opus 5.5",
+      "description": "Pesquisa de mercado com nove fontes oficiais e nove mecanismos propostos para briefing, contexto, ferramentas e avaliação. O escopo não exige execução da API Anthropic.",
+      "status": "Pesquisa concluída",
+      "detail": "Aprendizado documental; nenhum benchmark entre modelos alegado."
+    },
+    {
+      "id": "mobbin",
+      "title": "Referências Mobbin",
+      "description": "O viewer autenticado exibiu dez screenshots de uma referência desktop. Dois pontos visuais tiveram suporte; cinco extrapolações foram negadas. O editor de contratos é uma interface própria da SINAPSE, testada separadamente.",
+      "status": "Referência delimitada; transferência própria conferida",
+      "detail": "Teclado, mobile, recuperação e required foram verificados na nova UI SINAPSE. Essas provas não descrevem o comportamento da referência."
+    },
+    {
+      "id": "av",
+      "title": "Revisão audiovisual",
+      "description": "O Reel de 18 segundos reproduziu continuamente do início ao fim, sem pausa, salto ou erro. A trilha tem avaliação musical humana opcional; ela não bloqueia a melhoria do framework.",
+      "status": "Reprodução técnica integral conferida",
+      "detail": "18 segundos e 540 quadros decodificados; player observado com intervalo reproduzido [0,18] e ended=true. Nenhuma audição humana alegada."
+    },
+    {
+      "id": "expertise",
+      "title": "Especialização",
+      "description": "172 respostas diagnósticas foram aceitas após 17 reparos em três ciclos. A nova comparação cega avaliou 20 representantes em sessões separadas; é uma evidência adicional escrita, sem validação global de cada agente.",
+      "status": "Revisão escrita concluída; expertise global não comprovada",
+      "detail": "409 mecanismos, 344 modelos de decisão e 635 critérios. Expertise global e acompanhamento longitudinal conservam provas próprias."
+    },
+    {
+      "id": "causal",
+      "title": "Ganho de qualidade",
+      "description": "A comparação cega reservada aprovou 19 de 20 respostas com os perfis novos e 18 com a base. Geradores separados e reviewer receberam os 20 casos completos; os escores foram congelados antes de abrir os rótulos.",
+      "status": "Comparação escrita concluída; resultado limitado à amostra",
+      "detail": "Um caso melhorou em rollback observável. Um critério exigia ticket não solicitado explicitamente no briefing; o resultado formal foi preservado, sem reavaliação ou extrapolação para os 172 agentes."
+    },
+    {
+      "id": "folders",
+      "title": "Organização de pastas",
+      "description": "Os 14 grupos foram auditados. Seus consumidores e usos distintos justificam conservar os arquivos; o painel organiza a navegação por responsabilidade.",
+      "status": "Auditoria concluída",
+      "detail": "14 grupos preservados; nenhuma remoção ou mudança de pasta."
+    },
+    {
+      "id": "distribution",
+      "title": "Uso, segurança e distribuição",
+      "description": "Testes aprovados em Windows, macOS, Node 20/24 e cobertura. O npm corrigido foi instalado e exercitado; audit completo e segredos passaram. A instalação pessoal recebeu a fonte bee125db com arquivos e históricos preservados.",
+      "status": "Reparos técnicos e instalação concluídos; execução Claude limitada pelo orçamento",
+      "detail": "Claude Code reportou Sonnet 5.5, mas a única chamada terminou por orçamento sem resposta útil. Estimativa US$ 0,213404, distinta de fatura; não houve repetição nem uso adicional do JEV."
+    }
+  ],
+  "squads": [
+    {
+      "id": "squad-design",
+      "name": "Design e frontend",
+      "description": "Experiência, interfaces e componentes",
+      "keywords": [
+        "ui",
+        "ux",
+        "frontend",
+        "site"
+      ],
+      "agents": [
+        "cro-persuasion",
+        "design-orqx",
+        "design-system",
+        "dx-accessibility-specialist",
+        "dx-design-system-architect",
+        "dx-frontend-engineer",
+        "dx-interaction-designer",
+        "dx-performance-engineer",
+        "dx-ui-designer",
+        "dx-ux-strategist",
+        "platform-aesthetic-director",
+        "premium-packaging-strategist",
+        "product-surface-director",
+        "ux-designer"
+      ],
+      "taskCount": 101,
+      "knowledgeCount": 19
+    },
+    {
+      "id": "squad-animations",
+      "name": "Animações e motion",
+      "description": "Movimento web, Three.js e shaders",
+      "keywords": [
+        "video",
+        "vídeo",
+        "motion"
+      ],
+      "agents": [
+        "animation-interpreter",
+        "animation-performance-engineer",
+        "animations-orqx",
+        "css-motion-artist",
+        "generative-particle-engineer",
+        "motion-choreographer",
+        "scroll-narrative-engineer",
+        "shader-artist",
+        "threejs-architect"
+      ],
+      "taskCount": 76,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-brand",
+      "name": "Branding",
+      "description": "Estratégia, identidade e sistema de marca",
+      "keywords": [],
+      "agents": [
+        "brand-archetype-strategist",
+        "brand-auditor",
+        "brand-collateral-designer",
+        "brand-compiler",
+        "brand-creative-engineer",
+        "brand-culture-architect",
+        "brand-growth-strategist",
+        "brand-identity-designer",
+        "brand-motion-vfx",
+        "brand-naming-specialist",
+        "brand-orqx",
+        "brand-positioning-strategist",
+        "brand-sonic-designer",
+        "brand-strategist",
+        "brand-system-architect"
+      ],
+      "taskCount": 97,
+      "knowledgeCount": 30
+    },
+    {
+      "id": "squad-content",
+      "name": "Conteúdo",
+      "description": "Editorial, social e carrosséis",
+      "keywords": [
+        "carousel"
+      ],
+      "agents": [
+        "content-analyst",
+        "content-engineer",
+        "content-governor",
+        "content-orqx",
+        "editorial-strategist",
+        "platform-specialist",
+        "signal-intelligence"
+      ],
+      "taskCount": 90,
+      "knowledgeCount": 32
+    },
+    {
+      "id": "squad-copy",
+      "name": "Copywriting",
+      "description": "Mensagens, anúncios e persuasão",
+      "keywords": [
+        "texto",
+        "ads"
+      ],
+      "agents": [
+        "ad-copywriter",
+        "brand-voice-writer",
+        "conversion-writer",
+        "copy-editor",
+        "copy-orqx",
+        "copy-strategist",
+        "direct-response-writer",
+        "email-sequence-strategist",
+        "funnel-copywriter",
+        "headline-specialist",
+        "long-form-writer",
+        "persuasion-psychologist",
+        "proof-architect"
+      ],
+      "taskCount": 81,
+      "knowledgeCount": 24
+    },
+    {
+      "id": "squad-courses",
+      "name": "Cursos e produção",
+      "description": "Ensino, roteiros e planejamento de vídeo",
+      "keywords": [
+        "reel",
+        "vídeo"
+      ],
+      "agents": [
+        "assessment-creator",
+        "content-writer",
+        "courses-orqx",
+        "curriculum-designer",
+        "launch-strategist",
+        "lesson-architect",
+        "production-director",
+        "slide-designer"
+      ],
+      "taskCount": 59,
+      "knowledgeCount": 13
+    },
+    {
+      "id": "squad-storytelling",
+      "name": "Storytelling",
+      "description": "Narrativas, apresentações e pitch",
+      "keywords": [
+        "roteiro"
+      ],
+      "agents": [
+        "blake-snyder",
+        "dan-harmon",
+        "joseph-campbell",
+        "keith-johnstone",
+        "kindra-hall",
+        "marshall-ganz",
+        "nancy-duarte",
+        "oren-klaff",
+        "park-howell",
+        "storytelling-orqx"
+      ],
+      "taskCount": 47,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-research",
+      "name": "Pesquisa",
+      "description": "Fontes, audiência e inteligência",
+      "keywords": [],
+      "agents": [
+        "audience-intelligence",
+        "competitive-intelligence",
+        "data-synthesizer",
+        "deep-researcher",
+        "market-analyst",
+        "research-orqx",
+        "trend-forecaster"
+      ],
+      "taskCount": 72,
+      "knowledgeCount": 26
+    },
+    {
+      "id": "squad-cloning",
+      "name": "Clonagem cognitiva",
+      "description": "Fontes, extração e conhecimento revisável",
+      "keywords": [
+        "especialização"
+      ],
+      "agents": [
+        "agent-forger",
+        "cloning-orqx",
+        "cognitive-extractor",
+        "content-capturer",
+        "kb-architect",
+        "mind-synthesizer",
+        "sop-extractor",
+        "source-hunter",
+        "squad-assembler"
+      ],
+      "taskCount": 54,
+      "knowledgeCount": 16
+    },
+    {
+      "id": "squad-product",
+      "name": "Produto",
+      "description": "Discovery, estratégia e entrega",
+      "keywords": [],
+      "agents": [
+        "product-orqx",
+        "ps-client-product-manager",
+        "ps-delivery-manager",
+        "ps-discovery-lead",
+        "ps-product-analyst",
+        "ps-product-ops-specialist",
+        "ps-product-strategist"
+      ],
+      "taskCount": 75,
+      "knowledgeCount": 15
+    },
+    {
+      "id": "squad-commercial",
+      "name": "Comercial",
+      "description": "Vendas, ofertas e relacionamento",
+      "keywords": [
+        "crm"
+      ],
+      "agents": [
+        "commercial-orqx",
+        "cs-business-auditor",
+        "cs-client-success",
+        "cs-crm-specialist",
+        "cs-funnel-architect",
+        "cs-lead-generation-strategist",
+        "cs-offer-designer",
+        "cs-revops-analyst",
+        "cs-sales-closer",
+        "cs-sales-enablement"
+      ],
+      "taskCount": 85,
+      "knowledgeCount": 22
+    },
+    {
+      "id": "squad-growth",
+      "name": "Growth",
+      "description": "Aquisição orgânica, SEO e análise",
+      "keywords": [],
+      "agents": [
+        "ga-analytics-engineer",
+        "ga-campaign-analyst",
+        "ga-cro-specialist",
+        "ga-data-analyst",
+        "ga-growth-hacker",
+        "ga-seo-strategist",
+        "growth-orqx"
+      ],
+      "taskCount": 77,
+      "knowledgeCount": 22
+    },
+    {
+      "id": "squad-paidmedia",
+      "name": "Mídia paga",
+      "description": "Criativos, campanhas e performance",
+      "keywords": [
+        "anuncio",
+        "anúncio",
+        "ads"
+      ],
+      "agents": [
+        "campaign-analyst",
+        "creative-strategist",
+        "cro-specialist",
+        "google-ads-specialist",
+        "meta-ads-specialist",
+        "paidmedia-orqx",
+        "performance-engineer",
+        "pm-creative-performance-analyst",
+        "pm-youtube-ads-specialist"
+      ],
+      "taskCount": 82,
+      "knowledgeCount": 21
+    },
+    {
+      "id": "squad-finance",
+      "name": "Finanças",
+      "description": "Margem, orçamento e previsibilidade",
+      "keywords": [],
+      "agents": [
+        "budget-controller",
+        "cost-optimizer",
+        "finance-orqx",
+        "fiscal-compliance-br",
+        "forecast-strategist",
+        "pricing-strategist",
+        "profitability-analyst",
+        "revenue-analyst"
+      ],
+      "taskCount": 45,
+      "knowledgeCount": 21
+    },
+    {
+      "id": "squad-cybersecurity",
+      "name": "Segurança",
+      "description": "Proteção, análise e conformidade",
+      "keywords": [],
+      "agents": [
+        "cloud-security-engineer",
+        "compliance-officer",
+        "cyber-orqx",
+        "incident-responder",
+        "network-security-engineer",
+        "penetration-tester",
+        "soc-analyst",
+        "threat-analyst"
+      ],
+      "taskCount": 53,
+      "knowledgeCount": 14
+    },
+    {
+      "id": "squad-council",
+      "name": "Conselho estratégico",
+      "description": "Decisões e modelos mentais",
+      "keywords": [],
+      "agents": [
+        "brene-brown",
+        "charlie-munger",
+        "council-orqx",
+        "derek-sivers",
+        "naval-ravikant",
+        "patrick-lencioni",
+        "peter-thiel",
+        "ray-dalio",
+        "reid-hoffman",
+        "simon-sinek",
+        "yvon-chouinard"
+      ],
+      "taskCount": 56,
+      "knowledgeCount": 11
+    },
+    {
+      "id": "claude-code-mastery",
+      "name": "Ferramentas e orquestração",
+      "description": "Contexto, integrações e fluxo multiagente",
+      "keywords": [
+        "swarm",
+        "claude",
+        "mcp"
+      ],
+      "agents": [
+        "claude-mastery-chief",
+        "config-engineer",
+        "hooks-architect",
+        "mcp-integrator",
+        "project-integrator",
+        "roadmap-sentinel",
+        "skill-craftsman",
+        "swarm-orqx"
+      ],
+      "taskCount": 51,
+      "knowledgeCount": 14
+    }
+  ],
+  "evidence": [
+    {
+      "id": "pending-repairs",
+      "title": "Reparos desta etapa",
+      "summary": "37 checks aprovados na fonte bee125db; zero aviso no audit completo; instalação pessoal conferida.",
+      "paragraphs": [
+        "Node 20, Node 24, cobertura e macOS passaram em 442 suites, com 12.050 testes aprovados por execução; Windows passou com 12.051. Os 185 skips e oito todo são preexistentes; nenhum negativo foi enfraquecido.",
+        "O fork npm de desenvolvimento teve seis fontes e licenças conferidas, com 92 deltas restritos. O CI instalou os bytes reais e conferiu as cinco bibliotecas, CLI e comportamento offline. O audit completo desse projeto encontrou zero vulnerabilidades; isso não certifica todo o código.",
+        "Quatro JSON conservaram seus 38 digests e todos os dados. O check remoto de segredos passou na nova PR; nenhum alerta foi dispensado nem detector enfraquecido.",
+        "Navegação em 1440/390 preservou busca, filtros e foco, sem rolagem lateral ou inserir o marcador HTML inerte. O player reproduziu os 18 segundos completos, sem erro; isso não equivale a ouvir ou aprovar a trilha."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md"
+      ]
+    },
+    {
+      "id": "native-bounded-evaluation",
+      "title": "Comparação cega reservada",
+      "summary": "20 pares escritos completos; 19 aprovações no enriquecido e 18 no baseline.",
+      "paragraphs": [
+        "O protocolo, briefs, rubricas e cápsulas foram congelados antes das respostas. Cada condição e o reviewer receberam 20 casos integrais; 200 julgamentos foram verificados. A revisão foi congelada antes de abrir o mapa A/B.",
+        "Dezoito casos passaram em ambos, um passou só no enriquecido e um falhou formalmente em ambos. O último exige um campo não explicitamente solicitado no briefing; a limitação e os escores originais foram conservados.",
+        "Os atores foram configurados em GPT-6.1-sol/high; o backend efetivo não foi verificado independentemente. São decisões textuais de 17 representantes de squads e três do núcleo, sem prova causal/global ou de artefatos renderizados.",
+        "A disponibilidade Sonnet 5.5 foi observada no Claude CLI existente, mas a resposta foi suprimida pelo orçamento. Não houve retry ou novo Jev; estimativa de US$ 0,213404 não é confirmação de faturamento."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.md",
+        "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json"
+      ]
+    },
+    {
+      "id": "individual-upgrade",
+      "title": "Conhecimento individual desta onda",
+      "summary": "172 respostas escritas aceitas; 75 recortes externos observados; nenhuma validação global.",
+      "paragraphs": [
+        "Os três artefatos públicos sanitizados somam 172 perfis, 409 mecanismos, 344 modelos de decisão e 635 critérios. Contagens descrevem o acervo escrito; não são notas globais de competência.",
+        "75 recortes externos foram observados em trechos delimitados: 29 + 18 + 28 nas três coortes. Os 238 contratos locais fornecem autoridade e hipóteses; não contam como pesquisa externa profunda. Onze candidatos novos e 88 anteriores permanecem candidatos.",
+        "A revisão independente aceitou 172 respostas escritas após 17 reparos em três ciclos. Os diagnósticos foram produzidos na mesma coorte, com modelo e contexto de tarefa compartilhados; não houve avaliação cega externa nem prova causal.",
+        "A comparação nova de 20 casos terminou com 19 aprovações no enriquecido e 18 na base; um item da rubrica excedia o brief. Leitura integral de livros e acompanhamento longitudinal continuam sem prova. A chamada Claude encerrou sem resposta; avaliação musical humana é opcional."
+      ],
+      "sources": [
+        "research/expert-evolution/competence-packs/creative.json",
+        "research/expert-evolution/competence-packs/business.json",
+        "research/expert-evolution/competence-packs/knowledge.json",
+        "research/expert-evolution/competence-review.json",
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-SPEC.md"
+      ]
+    },
+    {
+      "id": "personal-installation-current",
+      "title": "Instalação pessoal e limites do contexto",
+      "summary": "Fonte bee125db instalada; 42 leituras offline reais e quatro negativos; matriz histórica dos 172 em ambiente isolado.",
+      "paragraphs": [
+        "Antes deste lote, a integração montou 172 contextos em um snapshot estável, com 582 critérios críticos presentes. Máximos: 11.602 caracteres totais, 5.990 de conhecimento e 2.997 de perfil; presença de critério não comprova seu cumprimento.",
+        "A matriz histórica isolada passou os 172 contextos, com máximos 11.865 / 5.990 / 2.997. A atualização pessoal atual conferiu 42 contextos selecionados em dois projetos: máximos 11.741 / 5.611 / 2.969.",
+        "Entradas Codex e Claude Code byte-equivalentes foram conferidas em dois projetos. Essa prova cobre recuperação offline; quatro requisições inválidas foram rejeitadas. Ela não comprova execução nativa das 172 personas.",
+        "Fonte bee125db instalada: 262 arquivos pessoais iguais, 193 entradas originais preservadas e três fontes históricas intactas. Os 1.929 pins, o journal atual e os snapshots de rollback passaram; a atualização bem-sucedida não foi revertida.",
+        "Na PR #417, fonte bee125db, os 37 checks passaram, com um skip existente. Audit completo: zero vulnerabilidades reportadas; CodeQL: zero novo alerta na mudança; scanner de segredos aprovado. A instalação pessoal teve readback independente dos dois provedores."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-UPGRADE-HANDOFF.md",
+        "docs/framework/expert-evolution-2026-10/EXPERTISE-RUNTIME-INTEGRATION-QA.md",
+        "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md"
+      ]
+    },
+    {
+      "id": "local-tests",
+      "title": "Testes do framework",
+      "summary": "Histórico de 02.10 — Contratos operacionais e verificações específicas por domínio.",
+      "paragraphs": [
+        "Registro histórico de 02.10: O fechamento cobre contratos dos 172 agentes, registros de comando e tarefas próprias. Resolução, autoridade, contexto, isolamento e instalação recebem checks específicos; os gates finais desta onda conservam evidências próprias.",
+        "Registro histórico de 02.10: O replay das 12 interfaces passou 459 verificações; Lume e motion passaram 84; a revisão independente final do toast passou 411. Esses resultados descrevem as sequências exercitadas, sem uma nota criativa global.",
+        "Registro histórico de 02.10: A instalação local e pessoal passou 20/20 montagens de design e 12/12 checks de autoridade, com paridade entre os provedores, 2.095 referências congeladas e contextos de até 11.836 dos 12.000 caracteres. Dezoito requisições inválidas foram rejeitadas; não houve inferência nativa."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/operational-verification.md"
+      ]
+    },
+    {
+      "id": "contracts",
+      "title": "Operação e expertise",
+      "summary": "Histórico de 02.10 — 172 contratos operacionais; 35 perfis e 51 vínculos de expertise.",
+      "paragraphs": [
+        "Registro histórico de 02.10: Os 172 contratos registram 2.640 comandos com escopo verificável. Foram criadas 42 tarefas próprias que faltavam; responsabilidade, dependência e delegação permanecem separadas. Um pool de squad não concede autoridade a todos os agentes.",
+        "Registro histórico de 02.10: A revisão de expertise cobre 35 perfis e 51 vínculos. O programa mantém 2 referências lidas e 88 candidatas; validade de fonte, transferência e qualidade especializada ainda precisam de comprovação por tarefa."
+      ],
+      "sources": [
+        "research/expert-evolution/task-bindings.json",
+        "docs/framework/expert-evolution-2026-10/design-task-completion.md"
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "Interface, motion, Reel e carrossel",
+      "summary": "Histórico de 02.10 — Lume: 84 checks; toast: 411 checks independentes finais.",
+      "paragraphs": [
+        "Registro histórico de 02.10: O replay atual de Lume cobre 1440, 390 e 320px, estados, teclado, movimento reduzido e ciclos de interrupção. O toast que encobria o foco no celular foi corrigido e passou em revisão independente dos bytes finais.",
+        "Registro histórico de 02.10: As cinco páginas finais do carrossel e sua leitura no celular foram inspecionadas. Audição humana da trilha do Reel de 18 segundos permanece pendente; sem aprovação audiovisual total ou de expertise.",
+        "Registro histórico de 02.10: FFmpeg decodificou integralmente 18 segundos e 540 quadros. O player foi observado até 12,769 segundos; reprodução parcial e decodificação não comprovam percepção audiovisual completa."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/audited-quality-review.md",
+        "examples/framework-quality/README.md"
+      ]
+    },
+    {
+      "id": "knowledge",
+      "title": "Conhecimento e fonte",
+      "summary": "Histórico de 02.10 — 12 mecanismos privados curados; 2 fontes lidas e 88 candidatas.",
+      "paragraphs": [
+        "Registro histórico de 02.10: A biblioteca privada contém 12 mecanismos curados, com origem, revisão e contexto de aplicação. O corpus público existente mantém 67 fontes e 112 heurísticas; o programa de especialização conserva 90 referências, sendo 2 lidas e 88 candidatas.",
+        "Registro histórico de 02.10: A extração persistente e a transferência foram exercitadas em tarefas delimitadas. Esse acervo não comprova absorção integral de livros, milhares de horas ou validação mundial dos especialistas."
+      ],
+      "sources": [
+        "research/expert-evolution/source-program.json",
+        "docs/framework/expert-evolution-2026-10/HANDOFF.md"
+      ]
+    },
+    {
+      "id": "upstream",
+      "title": "Atualização pública e preservação",
+      "summary": "Histórico de 02.10 — Base open source pública v5.4.1 revalidada; nenhum update posterior confirmado.",
+      "paragraphs": [
+        "Registro histórico de 02.10: A versão pública da base open source v5.4.1 foi revalidada nesta onda, sem novo update confirmado. A atribuição e a URL oficial permanecem em docs/framework/evolution-2026-10/upstream.json. A atualização seletiva foi auditada por compatibilidade; as 37 integrações proprietárias continuam excluídas.",
+        "Registro histórico de 02.10: O checkout original com 191 alterações foi preservado. Nenhum caminho protegido, dado privado, serviço de produção ou conteúdo funcional foi removido; não houve merge integral do core."
+      ],
+      "sources": [
+        "research/expert-evolution/audit-upstream-recheck.json",
+        "docs/framework/expert-evolution-2026-10/audited-verification.md"
+      ]
+    },
+    {
+      "id": "paired",
+      "title": "Seis pares de interfaces",
+      "summary": "Histórico de 02.10 — 12 interfaces; 459 verificações atuais em três larguras.",
+      "paragraphs": [
+        "Registro histórico de 02.10: As 12 interfaces dos seis pares passaram no replay atual, com 459 verificações em 1440, 390 e 320px. Seus estados alterados foram repetidos no celular; os artefatos e a preferência da revisão cega histórica foram preservados.",
+        "Registro histórico de 02.10: Uma geração por caso conserva variação estocástica. O baseline original ultrapassou o teto em 11,038 segundos; a duração não foi corrigida retrospectivamente. O lote permanece sem prova causal, comparação Opus/Jev ou validação de expertise."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/paired-interface-results.md"
+      ]
+    },
+    {
+      "id": "typesafe-mobbin",
+      "title": "TypeSafe, Jev e transferência Mobbin",
+      "summary": "Histórico de 02.10 — Skill oficial instalada; dois lotes Jev; transferência local revisada.",
+      "paragraphs": [
+        "Registro histórico de 02.10: Dois lotes Jev autenticados foram observados anteriormente. O total calculado é US$0,00018375, com teto de US$0,05 e reserva de US$0,005376; nenhuma chamada paga foi feita nesta onda. Opus continua restrito a aprendizado de mercado.",
+        "Registro histórico de 02.10: As interfaces próprias /transfer-filter/ e /transfer-navigation/ exercitam filtros, detalhes, retorno e criação com revisão local. Referências Mobbin, inferências e comportamento da implementação continuam registrados com escopos de evidência distintos."
+      ],
+      "sources": [
+        "docs/framework/expert-evolution-2026-10/typesafe-mobbin-verification.md",
+        "examples/framework-quality/transfer-filter/index.html"
+      ]
+    }
+  ],
+  "metricProvenance": {
+    "kind": "derived-from-public-sanitized-cohort-packs",
+    "inputs": [
+      {
+        "cohort": "creative",
+        "path": "research/expert-evolution/competence-packs/creative.json",
+        "sha256": "1182be6a14cfabf462611aaa04a7c141d859f9603439574ef8ec52da27b37c2d",
+        "profileCount": 53,
+        "externalSectionReads": 29
+      },
+      {
+        "cohort": "business",
+        "path": "research/expert-evolution/competence-packs/business.json",
+        "sha256": "d8d69656109d0190af2372640bb74533d508b0dc5abc8956e27ce4582dd98864",
+        "profileCount": 54,
+        "externalSectionReads": 18
+      },
+      {
+        "cohort": "knowledge",
+        "path": "research/expert-evolution/competence-packs/knowledge.json",
+        "sha256": "beddd4491b37a882821e9fb62e39c8211d0b4683e590e6891641ec710521edfd",
+        "profileCount": 65,
+        "externalSectionReads": 28
+      }
+    ],
+    "rules": {
+      "profiles": "profiles.length; 172 unique IDs",
+      "mechanisms": "sum profiles.mechanisms.length",
+      "mentalModels": "sum profiles.mentalModels.length",
+      "qualityCriteria": "sum profiles.qualityCriteria.length",
+      "externalReads": "public sources.status=READ and sourceScope=external-section and URL begins https://; mapped from immutable original SECTION_READ records",
+      "cases": "profiles with diagnosticCase; same-cohort diagnostics, not blind held-out"
+    },
+    "review": {
+      "path": "research/expert-evolution/competence-review.json",
+      "cycle": 3,
+      "counts": {
+        "PASS": 172,
+        "REVISE": 0,
+        "BLOCKED": 0
+      },
+      "repairedDefects": 17,
+      "scope": "bounded-written-diagnostic-responses; same-cohort, not blind"
+    },
+    "historicalMetricsDate": "2026-10-02",
+    "originalInputs": [
+      {
+        "cohort": "creative",
+        "sha256": "bed31b9ef7f8f3369eaa7e239d5d05c7b1904b9353e289d12c85a0a628d4d993",
+        "profileCount": 53,
+        "externalSectionReads": 29
+      },
+      {
+        "cohort": "business",
+        "sha256": "e05ed00e7b69be9f7ee3a0bb04937139fbb3294d2c429191779b9eb37d738041",
+        "profileCount": 54,
+        "externalSectionReads": 18
+      },
+      {
+        "cohort": "knowledge",
+        "sha256": "851e917a74aae9010ecbd5253b7c6771a661818794535b5a47dae8e2eb4e2c40",
+        "profileCount": 65,
+        "externalSectionReads": 28
+      }
+    ]
+  },
+  "installation": {
+    "scope": "offline-context-only",
+    "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
+    "transactionId": "68d5e15c-32a2-4b96-b595-4e031b8fc9fe",
+    "registrySha256": "88fa7de2ce0dcdd67418ac68b9ab9c2869264a8953f491fa6d113bbf1e18187d",
+    "selectedContextChecks": 42,
+    "selectedAgentIds": 21,
+    "roots": 2,
+    "providerEntrypointsEqual": true,
+    "executionObserved": false,
+    "rawMatrix": {
+      "contexts": 172,
+      "criticalCriteria": 582,
+      "stableSnapshot": true,
+      "maxChars": [
+        11602,
+        5990,
+        2997
+      ],
+      "scope": "Historical offline matrix before pending remediation"
+    },
+    "scratchMatrix": {
+      "contexts": 172,
+      "maxChars": [
+        11865,
+        5990,
+        2997
+      ],
+      "scope": "Historical isolated installation before pending remediation"
+    },
+    "realReadback": {
+      "contexts": 42,
+      "maxChars": [
+        11741,
+        5611,
+        2969
+      ],
+      "negativesRejected": 4
+    },
+    "preservation": {
+      "personalPayloads": 262,
+      "personalMismatches": 0,
+      "originalStatusPreserved": true,
+      "originalStatusCount": 193,
+      "oldSourcePreserved": true,
+      "oldPinnedInputs": 2092,
+      "historicalSources": 3,
+      "historicalMismatches": 0,
+      "priorRollbackReceiptsVerified": 2
+    },
+    "rollback": {
+      "snapshotsVerified": true,
+      "executionObserved": false
+    },
+    "source": "docs/framework/expert-evolution-2026-10/PENDING-CLOSEOUT-HANDOFF.md",
+    "sourcePins": 1929,
+    "journalSha256": "6736f80155a8c8f0ea413cd49bfea82a27bb27d44e1a259483f6bdb69d912a93",
+    "snapshotSha256": "6a260cee0362b7dda2aecfda561719f2ad35a76d1bacb09a00702c77b7bea293"
+  },
+  "remediation": {
+    "date": "2026-10-07",
+    "branch": "codex/fix/framework-pending-clean-20261007",
+    "pullRequest": 417,
+    "testedSourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
+    "secretScanning": "SUCCESS",
+    "securityAudit": "SUCCESS",
+    "remainingRemoteChecks": "NONE_ON_TESTED_SOURCE",
+    "personalInstallationUpdated": true,
+    "humanListeningRequired": false,
+    "technicalPlaybackComplete": true,
+    "extraJevCalls": 0,
+    "expertisePromotion": false,
+    "codeql": {
+      "status": "SUCCESS",
+      "scope": "No new alerts in code changed by PR",
+      "newAlertAnnotations": 0
+    },
+    "testResults": {
+      "node20": {
+        "failed": 0,
+        "passed": 12050
+      },
+      "node24": {
+        "failed": 0,
+        "passed": 12050
+      },
+      "coverage22": {
+        "failed": 0,
+        "passed": 12050
+      },
+      "macos": {
+        "failed": 0,
+        "passed": 12050
+      },
+      "windows": {
+        "failed": 0,
+        "passed": 12051
+      },
+      "skippedPreexisting": 185,
+      "todoPreexisting": 8
+    },
+    "dependencyAudit": {
+      "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1",
+      "remoteProduction": {
+        "total": 0
+      },
+      "remoteFullTree": {
+        "total": 0
+      },
+      "bundledRepair": "VERIFIED_INSTALLED_REMOTE",
+      "scope": "Project dependency tree; local forks independently reviewed, not universal software certification"
+    },
+    "nativeBenchmark": {
+      "cases": 20,
+      "baselinePassed": 18,
+      "enrichedPassed": 19,
+      "fullCapsuleExposure": true,
+      "independentBlindReview": true,
+      "globalExpertisePromotion": false,
+      "rubricBriefMismatchCase": "P02",
+      "receipt": "docs/framework/expert-evolution-2026-10/PENDING-NATIVE-BENCHMARK.json"
+    },
+    "previousFailedSourceHead": "e7b73b92dcb8d9de46d4d0c640bd780df565536f",
+    "remoteCheckSummary": {
+      "successful": 37,
+      "skipped": 1,
+      "failed": 0,
+      "pending": 0,
+      "sourceHead": "bee125db9a83e7ff13f8de3b879c10360e60c4b1"
+    },
+    "nativeClaude": {
+      "attempts": 1,
+      "decisionObserved": false,
+      "status": "BUDGET_LIMIT_NO_RESPONSE",
+      "reportedModel": "claude-sonnet-5-5",
+      "listEstimateUsd": 0.213404,
+      "estimateIsInvoice": false
+    }
+  }
+}

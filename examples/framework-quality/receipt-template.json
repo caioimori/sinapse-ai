@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "brand": "Lume (fictional)",
+  "brief": "docs/framework/expert-evolution-2026-10/AUDITED-SPEC.md#briefs-congelados",
+  "story": "docs/stories/audited-evolution-20261002.story.md",
+  "author": "dx-frontend-engineer",
+  "reviewer": null,
+  "generationLimit": 3,
+  "recipeTimeoutMs": 150000,
+  "technicalStatus": "awaiting-T02-T03-release",
+  "visualStatus": "pending-independent-review",
+  "assets": "Own HTML/CSS and fictional project text; native system font; no network or client data",
+  "simulation": "In-memory project states; deterministic query scenario=error; no backend, persistence or real service failure",
+  "motionContract": {
+    "trigger": "User presses next",
+    "finalState": "Selected storyboard step persists until next/reset",
+    "interrupt": "Next cancels prior transition; reset returns to first step; pause/resume preserves animation",
+    "reducedMotion": "Instant step change; runtime preference commits target and cancels active motion",
+    "cleanupOwner": "motion/motion.js mount/unmount",
+    "sequenceBudget": "200ms out + 360ms in; inspect traced tasks above 50ms and active resources; no universal FPS claim"
+  },
+  "reviewRubric": {
+    "dimensions": ["brief-fit", "hierarchy-legibility", "composition-distinctiveness", "continuity-rhythm-interaction", "finish"],
+    "maxPerDimension": 20,
+    "target": 90,
+    "minimumDimension": 15,
+    "scores": null,
+    "blockers": "Critical task, focus, reflow, legibility or lifecycle failures cannot be compensated by score"
+  },
+  "limits": ["Author verification is not independent visual review", "No field CWV, RLS, backend, conversion or physical mobile GPU evidence", "No full accessibility certification; keyboard, semantics and reflow bounded to recorded states"],
+  "checks": [],
+  "failures": [],
+  "sourceHashes": {},
+  "outputHashes": {}
+}

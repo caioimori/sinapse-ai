@@ -1,0 +1,2982 @@
+{
+  "schemaVersion": 1,
+  "squads": 17,
+  "useCases": [
+    {
+      "id": "squad-design-routing",
+      "squad": "squad-design",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-applicability",
+      "squad": "squad-design",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-support",
+      "squad": "squad-design",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-contradiction",
+      "squad": "squad-design",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-semantic-dedup",
+      "squad": "squad-design",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-calibration",
+      "squad": "squad-design",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-design-review",
+      "squad": "squad-design",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Fluxo/interface/tokens; considere hierarquia, estados, acessibilidade e responsividade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Fluxo/interface/tokens",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Fluxo/interface/tokens; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-routing",
+      "squad": "squad-animations",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-applicability",
+      "squad": "squad-animations",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-support",
+      "squad": "squad-animations",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-contradiction",
+      "squad": "squad-animations",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-semantic-dedup",
+      "squad": "squad-animations",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-calibration",
+      "squad": "squad-animations",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-animations-review",
+      "squad": "squad-animations",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Spec/timeline/animação; considere timing, continuidade, intenção e custo de render.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Spec/timeline/animação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Spec/timeline/animação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-routing",
+      "squad": "squad-brand",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-applicability",
+      "squad": "squad-brand",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-support",
+      "squad": "squad-brand",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-contradiction",
+      "squad": "squad-brand",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-semantic-dedup",
+      "squad": "squad-brand",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-calibration",
+      "squad": "squad-brand",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-brand-review",
+      "squad": "squad-brand",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Sistema de marca; considere distintividade, coerência, aplicação e legibilidade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Sistema de marca",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Sistema de marca; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-routing",
+      "squad": "squad-copy",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-applicability",
+      "squad": "squad-copy",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-support",
+      "squad": "squad-copy",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-contradiction",
+      "squad": "squad-copy",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-semantic-dedup",
+      "squad": "squad-copy",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-calibration",
+      "squad": "squad-copy",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-copy-review",
+      "squad": "squad-copy",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Peça persuasiva; considere promessa, prova, objeção e chamada coerentes.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Peça persuasiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Peça persuasiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-routing",
+      "squad": "squad-content",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-applicability",
+      "squad": "squad-content",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-support",
+      "squad": "squad-content",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-contradiction",
+      "squad": "squad-content",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-semantic-dedup",
+      "squad": "squad-content",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-calibration",
+      "squad": "squad-content",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-content-review",
+      "squad": "squad-content",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Conteúdo editorial; considere tese, mecanismo, prova, formato e continuidade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Conteúdo editorial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Conteúdo editorial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-routing",
+      "squad": "squad-storytelling",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-applicability",
+      "squad": "squad-storytelling",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-support",
+      "squad": "squad-storytelling",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-contradiction",
+      "squad": "squad-storytelling",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-semantic-dedup",
+      "squad": "squad-storytelling",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-calibration",
+      "squad": "squad-storytelling",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-storytelling-review",
+      "squad": "squad-storytelling",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Narrativa/apresentação; considere causalidade, tensão, arco e decisão da audiência.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Narrativa/apresentação",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Narrativa/apresentação; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-routing",
+      "squad": "squad-council",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-applicability",
+      "squad": "squad-council",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-support",
+      "squad": "squad-council",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-contradiction",
+      "squad": "squad-council",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-semantic-dedup",
+      "squad": "squad-council",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-calibration",
+      "squad": "squad-council",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-council-review",
+      "squad": "squad-council",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Parecer estratégico; considere premissas, inversão, alternativas e reversibilidade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Parecer estratégico",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Parecer estratégico; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-routing",
+      "squad": "squad-courses",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-applicability",
+      "squad": "squad-courses",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-support",
+      "squad": "squad-courses",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-contradiction",
+      "squad": "squad-courses",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-semantic-dedup",
+      "squad": "squad-courses",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-calibration",
+      "squad": "squad-courses",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-courses-review",
+      "squad": "squad-courses",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Unidade de aprendizagem; considere objetivo, tarefa autêntica, feedback e avaliação.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Unidade de aprendizagem",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Unidade de aprendizagem; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-routing",
+      "squad": "squad-commercial",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-applicability",
+      "squad": "squad-commercial",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-support",
+      "squad": "squad-commercial",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-contradiction",
+      "squad": "squad-commercial",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-semantic-dedup",
+      "squad": "squad-commercial",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-calibration",
+      "squad": "squad-commercial",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-commercial-review",
+      "squad": "squad-commercial",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Processo comercial; considere qualificação, próximo passo, objeção e rastreabilidade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Processo comercial",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Processo comercial; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-routing",
+      "squad": "squad-finance",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-applicability",
+      "squad": "squad-finance",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-support",
+      "squad": "squad-finance",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-contradiction",
+      "squad": "squad-finance",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-semantic-dedup",
+      "squad": "squad-finance",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-calibration",
+      "squad": "squad-finance",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-finance-review",
+      "squad": "squad-finance",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Análise financeira; considere unidade, janela, reconciliação e cenário.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Análise financeira",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Análise financeira; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-routing",
+      "squad": "squad-growth",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-applicability",
+      "squad": "squad-growth",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-support",
+      "squad": "squad-growth",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-contradiction",
+      "squad": "squad-growth",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-semantic-dedup",
+      "squad": "squad-growth",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-calibration",
+      "squad": "squad-growth",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-growth-review",
+      "squad": "squad-growth",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Experimento de crescimento; considere hipótese, causalidade, segmento e definição de métrica.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Experimento de crescimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Experimento de crescimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-routing",
+      "squad": "squad-paidmedia",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-applicability",
+      "squad": "squad-paidmedia",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-support",
+      "squad": "squad-paidmedia",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-contradiction",
+      "squad": "squad-paidmedia",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-semantic-dedup",
+      "squad": "squad-paidmedia",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-calibration",
+      "squad": "squad-paidmedia",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-paidmedia-review",
+      "squad": "squad-paidmedia",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Campanha/experimento; considere objetivo, audience, orçamento, creative e atribuição.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Campanha/experimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Campanha/experimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-routing",
+      "squad": "squad-product",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-applicability",
+      "squad": "squad-product",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-support",
+      "squad": "squad-product",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-contradiction",
+      "squad": "squad-product",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-semantic-dedup",
+      "squad": "squad-product",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-calibration",
+      "squad": "squad-product",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-product-review",
+      "squad": "squad-product",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Decisão de produto; considere outcome, evidência, oportunidade e risco.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Decisão de produto",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Decisão de produto; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-routing",
+      "squad": "squad-research",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-applicability",
+      "squad": "squad-research",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-support",
+      "squad": "squad-research",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-contradiction",
+      "squad": "squad-research",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-semantic-dedup",
+      "squad": "squad-research",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-calibration",
+      "squad": "squad-research",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-research-review",
+      "squad": "squad-research",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Síntese de pesquisa; considere proveniência, triangulação, conflito e validade.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Síntese de pesquisa",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Síntese de pesquisa; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-routing",
+      "squad": "squad-cybersecurity",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-applicability",
+      "squad": "squad-cybersecurity",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-support",
+      "squad": "squad-cybersecurity",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-contradiction",
+      "squad": "squad-cybersecurity",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-semantic-dedup",
+      "squad": "squad-cybersecurity",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-calibration",
+      "squad": "squad-cybersecurity",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cybersecurity-review",
+      "squad": "squad-cybersecurity",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Avaliação de risco; considere ameaça, exploração, impacto, permissão e mitigação.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Avaliação de risco",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Avaliação de risco; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-routing",
+      "squad": "squad-cloning",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-applicability",
+      "squad": "squad-cloning",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-support",
+      "squad": "squad-cloning",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-contradiction",
+      "squad": "squad-cloning",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-semantic-dedup",
+      "squad": "squad-cloning",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-calibration",
+      "squad": "squad-cloning",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "squad-cloning-review",
+      "squad": "squad-cloning",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Perfil/KB cognitiva; considere decisão, condição, exceção, evidência e lacuna.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Perfil/KB cognitiva",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Perfil/KB cognitiva; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-routing",
+      "squad": "claude-code-mastery",
+      "decision": "routing",
+      "type": "choice",
+      "question": "Qual caminho de revisão é adequado ao caso? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "criteria": {
+        "proceed": "Há dados suficientes dentro da autoridade",
+        "clarify": "Falta entrada material",
+        "escalate": "Excede autoridade ou requer validação independente"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-applicability",
+      "squad": "claude-code-mastery",
+      "decision": "applicability",
+      "type": "noul",
+      "question": "O método proposto se aplica às condições e exceções do caso? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-support",
+      "squad": "claude-code-mastery",
+      "decision": "support",
+      "type": "choice",
+      "question": "A afirmação específica do caso é apoiada pelas evidências fornecidas? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "criteria": {
+        "supported": "Apoio contextual suficiente",
+        "partial": "Apoio parcial ou extrapolação",
+        "not_found": "Não encontrado ou incompatível"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-contradiction",
+      "squad": "claude-code-mastery",
+      "decision": "contradiction",
+      "type": "noul",
+      "question": "A evidência fornecida contradiz a afirmação específica do caso? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-semantic-dedup",
+      "squad": "claude-code-mastery",
+      "decision": "semantic-dedup",
+      "type": "noul",
+      "question": "Os dois mecanismos identificados no caso expressam a mesma decisão, condição e exceções? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-calibration",
+      "squad": "claude-code-mastery",
+      "decision": "calibration",
+      "type": "score",
+      "question": "Qual nível de sustentação cabe à afirmação específica do caso? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "criteria": [
+        "Sem evidência",
+        "Indício contextual incompleto",
+        "Apoio direto contextual",
+        "Apoio corroborado com exceções testadas"
+      ],
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    },
+    {
+      "id": "claude-code-mastery-review",
+      "squad": "claude-code-mastery",
+      "decision": "review",
+      "type": "choice",
+      "question": "O entregável satisfaz o critério único identificado no caso? Domínio: Workflow de desenvolvimento; considere permissões, escopo, contexto, validação e rollback.",
+      "criteria": {
+        "pass": "Critério cumprido com evidência",
+        "revise": "Correção necessária",
+        "insufficient": "Não é possível julgar com as evidências"
+      },
+      "inputs": [
+        "Uma afirmação/critério/rota específica do domínio Workflow de desenvolvimento",
+        "Segmentos autorizados com fonte/locator e limites do caso",
+        "Condições e exceções; em dedup exatamente dois mecanismos"
+      ],
+      "output": "Julgamento candidato tipado; não altera estado, autoridade ou orçamento",
+      "evaluation": "Caso reservado positivo, negativo e conflito para Workflow de desenvolvimento; calibrar por domínio e medir discordâncias com reviewer independente",
+      "codeOwns": [
+        "permission",
+        "source-rights",
+        "counts",
+        "budgets",
+        "state-changes"
+      ],
+      "promotion": "Never automatic"
+    }
+  ],
+  "scope": "Atomic offline plans; Jev judges meanings, deterministic code owns effects and invariants"
+}

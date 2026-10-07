@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "reserved-before-generation",
+  "scope": "Six new fictional interfaces; single generation per case and context. No audiovisual, global expertise or statistical causal claim.",
+  "model": "inherited current native Sol 6.1; identical across generators",
+  "outputs": 12,
+  "maximumOutputs": 36,
+  "generationsPerCaseAndVariant": 1,
+  "timeBudgetMinutesPerGenerator": 15,
+  "brand": "Fictional Estudio Linha; white, charcoal, neutral gray; system fonts; original shapes; no external assets/network/backend",
+  "format": "Six independent single HTML files with embedded CSS/JS, cases case-01.html through case-06.html. Responsive1440/390/320. Each file has one primary h1 and a working primary action.",
+  "conditions": ["pre-evolution role excerpt plus exact shared task", "frozen evolved task runtime context"],
+  "cases": [
+    {"id":"case-01","brief":"Agenda de um estudio. Mostrar tres horarios ficticios, selecionar um horario e revisar escolha antes de confirmar localmente. Nao criar agendamento real. Trocar escolha depois de confirmar deve funcionar e o resumo deve atualizar."},
+    {"id":"case-02","brief":"Fila de revisao de referencias criativas. Tres itens ficticios: licenca confirmada, direito pendente e fonte conflitante. Filtrar por estado e abrir detalhes/voltar. Nao permitir usar item sem direito confirmado; explicitar o motivo e conservar escolha apos voltar."},
+    {"id":"case-03","brief":"Brief criativo para um carrossel. Campos audiencia, objetivo e afirmacao principal sao obrigatorios; prova de afirmacao e opcional mas sua ausencia exige aviso explicito no resumo. Corrigir campo invalido deve preservar os demais. Enviar apenas gera resumo local editavel."},
+    {"id":"case-04","brief":"Biblioteca de quatro assets ficticios. Filtrar por tipo e busca de nome, incluindo nome muito longo. Estado sem resultados deve oferecer limpar filtros. Item com direito pendente nao pode ser selecionado para exportar. Selecionar/desselecionar demais itens atualiza contagem exata; exportar cria manifest JSON local com nomes."},
+    {"id":"case-05","brief":"Estimativa tecnica ficticia de producao: quantidade de telas inteira1-20 e minutos por tela inteiro1-120. Calcular minutos totais exatamente, mostrar unidade. Entrada invalida nao gera resultado; valor zero nao vira default. Limpar e recalcular funciona. Nao apresentar valor financeiro ou produtividade alegada."},
+    {"id":"case-06","brief":"Processo visual de producao em tres etapas: Definir, Criar, Conferir. Acionar avancar inicia transicao visual de curta duracao com pausa e reinicio. Reiniciar durante transicao conserva estado inicial. Preferencia de movimento reduzido conserva informacao por troca imediata. Sem autoplay ou animacao infinita."}
+  ],
+  "review": {"authorCannotApprove":true,"labelsHidden":true,"scores":["task-completion20","state-recovery20","keyboard-and-responsive20","clarity20","visual-coherence20"],"criticalFailuresBlock":true,"primaryMetric":"paired preference plus observed functional failures","expectedActionsHiddenFromGenerators":true},
+  "limitations":["One generation per case; stochastic executor variation remains","Context size/content differs by condition and cannot isolate every mechanism","No full agent-provider activation is exercised","No Opus/Jev model comparison","No reusable rule extraction from these reserved outputs in this wave"]
+}

@@ -1,0 +1,1156 @@
+{
+  "observedAt": "2026-10-02T07:08:01.708Z",
+  "scope": "Read-only observation of original checkout; no original content modified by this worktree",
+  "root": "original-checkout",
+  "branch": "codex/feat/canonical-install-readme",
+  "head": "693e9d0f9819cd700eae45734da41b055063fa5b",
+  "dirtyEntries": 191,
+  "files": [
+    {
+      "status": " M",
+      "path": ".agents/skills/sinapse-agent/SKILL.md",
+      "exists": true,
+      "sha256": "11cb3e28771fa2c5645175dd7b6dfef640c4c1a64de0ffc0bf27a842554ae211"
+    },
+    {
+      "status": " M",
+      "path": ".agents/skills/sinapse-orqx/SKILL.md",
+      "exists": true,
+      "sha256": "db03b4b2ba03ad1b118131c53dc57a894795beebdf1e1a93d6a8935ace077092"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ad-copywriter.toml",
+      "exists": true,
+      "sha256": "5e2066ef0327fa264f8f452c5eed6a66e3890779e1c38d173d61776b400e3728"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/agent-forger.toml",
+      "exists": true,
+      "sha256": "3fd0c8745050d69c8de240540c0b3f1468846c838dfb38f881c84dae93297afa"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/analyst.toml",
+      "exists": true,
+      "sha256": "5016656c49a9faaf6f73e5f54621ebca6db3ce09f4e0c4733b06843bae17ccd6"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/animation-interpreter.toml",
+      "exists": true,
+      "sha256": "65026ec2bfd4cfb28fb8b619ab6d0c2583a537a1fa1e5b305448322a48736b6c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/animation-performance-engineer.toml",
+      "exists": true,
+      "sha256": "c520d4b8d4db116bd20ba022b584c5d4b4f050125cce7783971e8302a5f143b4"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/animations-orqx.toml",
+      "exists": true,
+      "sha256": "4c4a63e5aa2fa41f1e4235f06d10d94b5e40d9b975d569af7791ce1e98eda482"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/architect.toml",
+      "exists": true,
+      "sha256": "ffcabb563418566315e5c1b1babc9703ddeb22b184744a3af0817ba03cf1728a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/assessment-creator.toml",
+      "exists": true,
+      "sha256": "a37f05efb80cb51fd440b416761e46e54ce0fcbc53373c64b6aceb0071366f7f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/audience-intelligence.toml",
+      "exists": true,
+      "sha256": "e6790fc6723704f649e877f7cac787baabb73934c5d8b1c135fd4ef21410cdff"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/blake-snyder.toml",
+      "exists": true,
+      "sha256": "e63a5aa3d15fae144f8c5b7c537aeafea8a89eaf055d0ad96b3a899b6b5b3d0c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-archetype-strategist.toml",
+      "exists": true,
+      "sha256": "5f141b3bfec9b8eee273bb4870be3edd6d553b4303f38de975d9e44d6d934134"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-auditor.toml",
+      "exists": true,
+      "sha256": "47aa895028138986707093f60f9ca42eb36ef8e79cc83fcf065579afdab80e26"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-collateral-designer.toml",
+      "exists": true,
+      "sha256": "e98af15ed99ea953b78971a6f1b685d1543aa42ec12f2ae54cebdee09164f147"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-compiler.toml",
+      "exists": true,
+      "sha256": "85bf7f6d5ad5fa18a42afb2e8200ef1b2335add00bd588b413c90258ab123fca"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-creative-engineer.toml",
+      "exists": true,
+      "sha256": "1532e13e22d1db852f7a389e9e8abfcd88ee15f22fa091df9772ceaa8a3d2db8"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-culture-architect.toml",
+      "exists": true,
+      "sha256": "1e3b6d5e6013d0c5196bfd5c84ce8872c5ba9eaae24ea5605103e9795e6e6e91"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-growth-strategist.toml",
+      "exists": true,
+      "sha256": "e0f6fe6c67bb2248d26f26a4f8e4f0bf8e7eca30b5bb2072363980d5a575affc"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-identity-designer.toml",
+      "exists": true,
+      "sha256": "a3aff37bca1f8a1003a3632a4f06ea0d7090ea8d7458a1ace7e974d0121ac9ae"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-motion-vfx.toml",
+      "exists": true,
+      "sha256": "e7fd54c5e89ec4e966bb469846a10109cc1de05f4e55282ec941e057feac248c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-naming-specialist.toml",
+      "exists": true,
+      "sha256": "cf32d92777f4ea7a0a289382053315c23da570ad6b79934e8d7f318d845fbb24"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-orqx.toml",
+      "exists": true,
+      "sha256": "a33c5048ab307be1e19f361b79e87dd06ee059582f0d0e150a26e667f5f44c80"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-positioning-strategist.toml",
+      "exists": true,
+      "sha256": "c88c509b94c59efc69f2575379bc82868027f3ccbf6aa2856cd1ab5c88c02af5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-sonic-designer.toml",
+      "exists": true,
+      "sha256": "07f934653f838a47c42574d0f635944bec0c674c3ded6f2f8b73ed37c9cf3f2f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-strategist.toml",
+      "exists": true,
+      "sha256": "99d997cb0b3c78fa09d731e8a91402f5ba6671a1dd914e23fd1d7a13da1ee88a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-system-architect.toml",
+      "exists": true,
+      "sha256": "0386e3c0e90887b11be59a73539ddaa85a8bba48c63b7e7a90ba8c8301463a11"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brand-voice-writer.toml",
+      "exists": true,
+      "sha256": "154586d0f4c4a73cee00f684d2654895ce7dc9f1b200c09e723a966dbc27d5ac"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/brene-brown.toml",
+      "exists": true,
+      "sha256": "54058ca40d5209ea0cd55928fb88d5afec61f4369c36fe4107003ec3ef549afe"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/budget-controller.toml",
+      "exists": true,
+      "sha256": "e9d9a28f293be1ac17ddc14e16bb2e549e2dca2c600483fddc4e0dbc0972158f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/campaign-analyst.toml",
+      "exists": true,
+      "sha256": "66ce32cf5f83df9da05b95fc87e8d001bcde55fcf1597d818c927fab2978defe"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/charlie-munger.toml",
+      "exists": true,
+      "sha256": "6f9e15617947974c75f73d3a279da218b00c2748bd5521055d48ad588ebdb827"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/claude-mastery-chief.toml",
+      "exists": true,
+      "sha256": "dab80ebc7e94347a05e67a55f870de130c0adce67bc968f5bda836a41e5fc4c5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cloning-orqx.toml",
+      "exists": true,
+      "sha256": "ed3e9404876341aff5129246c574a627c1c7b1a014175d16f6e74b8e1cd95637"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cloud-security-engineer.toml",
+      "exists": true,
+      "sha256": "d9f6a2e0258eddeb24022518987d127aecc79d86e6ccfe2dde71e7ec5c09d7ae"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cognitive-extractor.toml",
+      "exists": true,
+      "sha256": "1492f27428ea9a099bb80cb8b144789ed2a2e437d906ce92e6d8c4fc5ed929d7"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/commercial-orqx.toml",
+      "exists": true,
+      "sha256": "c20bd59760509b5db5975c3dd07c42907c3174e7a8f36c2e2c2f35728cec4aef"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/competitive-intelligence.toml",
+      "exists": true,
+      "sha256": "624be21af108069b93b37001b8383881b0bb2a91673ae60671d3c6f0a4965c60"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/compliance-officer.toml",
+      "exists": true,
+      "sha256": "73300143ef70eadd0b02d972607030296dfd2079f73f070a2157645751dbd27c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/config-engineer.toml",
+      "exists": true,
+      "sha256": "738881b915f156f78526fd2e437b36bffb4b4156840d4fdb3fc9676dded978ee"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-analyst.toml",
+      "exists": true,
+      "sha256": "4e7bdbf121667c61b9b279d09fc3b6075076d567da6c39dedfa73df6ab353e8a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-capturer.toml",
+      "exists": true,
+      "sha256": "29a7a26ac82888bc14a941678c4bfbbc999e4812cb25884bd2367cd30b0bca1c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-engineer.toml",
+      "exists": true,
+      "sha256": "b56516d3419e619d57f93d9a5abd72cb4fff9d7ad5699ea6b7261f5533dad8e4"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-governor.toml",
+      "exists": true,
+      "sha256": "544e26e7d2f46f08d6fabeab3808352b02adf7d46dc01532f95a8ff4062f0e71"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-orqx.toml",
+      "exists": true,
+      "sha256": "1daebec6e925881f12413c8bec7ab07770da173aaf32896eccac305147f35457"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/content-writer.toml",
+      "exists": true,
+      "sha256": "cdbc4d41001ad9573159861c9d4773b9344ad980e217d8fad5ebc4f6b03d9365"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/conversion-writer.toml",
+      "exists": true,
+      "sha256": "0639986d389c166b1e72c4eb5f24e9194ce472e4a9723fcdb3ba472c46e868be"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/copy-editor.toml",
+      "exists": true,
+      "sha256": "5fd80aa0dd99eef24e18cb2003af6019c54194f76678de1ecfd63b8c310cba8a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/copy-orqx.toml",
+      "exists": true,
+      "sha256": "a8f3be62c2414cf824f22eb289b9fc1da465c8b2d60f88173190317b5d604ab8"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/copy-strategist.toml",
+      "exists": true,
+      "sha256": "3bc7e2b659572d86cba40b841dfa5121b804aa2b8edabb634fa269de2eca63cb"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cost-optimizer.toml",
+      "exists": true,
+      "sha256": "dafaae40a026e2e73a6840459611ba35eff9368aa619c7ab9dd58ffaa01ce7ce"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/council-orqx.toml",
+      "exists": true,
+      "sha256": "2fa92012467d0c62945d1b31eff4303afe9b662d172a79729cf09414daece5d7"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/courses-orqx.toml",
+      "exists": true,
+      "sha256": "24ac1d51d8300a33ab23c02c3d53858f8bd502984184da7b89ce185d3ecd2a35"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/creative-strategist.toml",
+      "exists": true,
+      "sha256": "c87caab181a80a6619f0e81ee4afa1f1b22e6d4d19e2e3105b276f93b2d3a700"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cro-persuasion.toml",
+      "exists": true,
+      "sha256": "32c48f23a6df43d7e74ff2e2f4d5d4c5355ecade31655dd1829cc5df857bcd4c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cro-specialist.toml",
+      "exists": true,
+      "sha256": "641c8a2f78fcdf867f512ddc8c0387d4484c8c0bb854fd34d1a30af98d5b454f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-business-auditor.toml",
+      "exists": true,
+      "sha256": "9a8f4b1d8998203cc33b0ba57fed64a5a136913afdd4ae68ec0ec5ae83bbcc55"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-client-success.toml",
+      "exists": true,
+      "sha256": "8cb4bb5c2690a3210ca1da3812179ce55271472bee6f8fd7381a76044f9c45f5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-crm-specialist.toml",
+      "exists": true,
+      "sha256": "7da8af2812ae2196e3fb209ea6be05e2077474e331e0b1a3fdcd6b93bb3b1b3b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-funnel-architect.toml",
+      "exists": true,
+      "sha256": "cea9638150d47b61270461528383e80fb74da21aae9c9e81789cb7e35d2a457c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-lead-generation-strategist.toml",
+      "exists": true,
+      "sha256": "b0d161274674078748962f8ebb888490a6cd71acc5a52b11d35b272976d3709a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-offer-designer.toml",
+      "exists": true,
+      "sha256": "9ab89b920562cbbace88762d4dae143c569c3743cf7c74aa2e8530bb548b7d7c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-revops-analyst.toml",
+      "exists": true,
+      "sha256": "7bb7858b6be43e8a5fe6768db168071799e5b3bbd622556818a9c499dc082058"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-sales-closer.toml",
+      "exists": true,
+      "sha256": "de76124988df746b6f32468935c132ac6cb61f81ddda3ed4b3b395a9e3057740"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cs-sales-enablement.toml",
+      "exists": true,
+      "sha256": "c2b6476d7019344e784c7aae4247138c6afaf4e8eb19d57a059135d258867665"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/css-motion-artist.toml",
+      "exists": true,
+      "sha256": "d212ed806d43b65f6ec98a4cea9b041233681dd7483a125613e724d7113dcb46"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/curriculum-designer.toml",
+      "exists": true,
+      "sha256": "014373ff8bb83558b6951d0fc264f212432e38a071eabd1a9b8d381ec61b188d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/cyber-orqx.toml",
+      "exists": true,
+      "sha256": "4bf9c1d6fbb3db0fbd8335e6316775bb673387ae1fdfb60c8e7aeddcd7f4e66f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dan-harmon.toml",
+      "exists": true,
+      "sha256": "0ac7e1539a7a10af174c96d2722654d24174cf5d21d98d23f9e0c8202fdafad5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/data-engineer.toml",
+      "exists": true,
+      "sha256": "f4277a76653d8f7a4cc12cdce0b07e6206aeab2114931da8fd1dd06cad966bcd"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/data-synthesizer.toml",
+      "exists": true,
+      "sha256": "90fc7c6036360f7cca8daf810fa075c257418c487d8439e9afc3aec512a567e9"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/deep-researcher.toml",
+      "exists": true,
+      "sha256": "b7a21523257e22dc1f3233bf63e329d91a38841db24d1b92b9c1f13773541ae8"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/derek-sivers.toml",
+      "exists": true,
+      "sha256": "9e4ed87d4298f68d48792225d6364820d750698a8872676ec2f324f166530a13"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/design-orqx.toml",
+      "exists": true,
+      "sha256": "78d6e0413c02ac6460fec9e4661946fbea18f79e44d84164abb8ce9378209a71"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/design-system.toml",
+      "exists": true,
+      "sha256": "7bf6003848ff90b9d7914185202ae2b168f4c680f12571dbefd5fad57be96024"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/developer.toml",
+      "exists": true,
+      "sha256": "4c2093bf1c7492302cd7dc20be0f65c187091cdc3b82655b535b30b1b327d514"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/devops.toml",
+      "exists": true,
+      "sha256": "baa36d32efcfbce504c31b905450fdfe905ba33b68ea30b022e503a3d7a372fa"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/direct-response-writer.toml",
+      "exists": true,
+      "sha256": "f219ccf26edcb2d1f4e5bc8d0fca3c58e589a2dbf8e74e0cf847c7d2a133646c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-accessibility-specialist.toml",
+      "exists": true,
+      "sha256": "7ec0acbdf42037a5cd9d649acf9902c23e298965cad16758351892c72c5fe5d5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-design-system-architect.toml",
+      "exists": true,
+      "sha256": "5da254f1f7e1308e4534c293d3630368c715e2457176b6cd6a23c8b460a1eea7"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-frontend-engineer.toml",
+      "exists": true,
+      "sha256": "3c63c6419a39074a08a7490badf7eca9ba6a0a13dc1c0de105878b83977fccd1"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-interaction-designer.toml",
+      "exists": true,
+      "sha256": "e32e444a87e66d4def4da053e91954684f759f12d3fa8847cc1de733f8fe6051"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-performance-engineer.toml",
+      "exists": true,
+      "sha256": "c3378038a05ec08349121f4cf0d3ee90c209f03dec820023582c77f4af2cd238"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-ui-designer.toml",
+      "exists": true,
+      "sha256": "1569df9fadac0806fc3e4bffac654db290f233b360c64b4d7eb7f7989fb5f0b5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/dx-ux-strategist.toml",
+      "exists": true,
+      "sha256": "6dba35ba059da86022f4a55cf3f93594042b87e02cd2a1ee267a1fe75c96fce3"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/editorial-strategist.toml",
+      "exists": true,
+      "sha256": "f0196ab65967293735b01eb3ad3d9ef4c53e93b215ba8882004c32f31e975448"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/email-sequence-strategist.toml",
+      "exists": true,
+      "sha256": "23b0a770eebd54287f5177a230cadbabdb70970853b2164bdf9ff6d4c381c5b4"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/finance-orqx.toml",
+      "exists": true,
+      "sha256": "23641abe5867ffc5a0bb2112fd528fc2d9649acb81344f0ef90b5c0ebf2d137c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/fiscal-compliance-br.toml",
+      "exists": true,
+      "sha256": "463260a6c006107da218733653a9d46db7c7af4430ca99049d22914dc1359918"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/forecast-strategist.toml",
+      "exists": true,
+      "sha256": "4be133a5d3c72c2422eba405c2ebeadd9814590e4e523d5a6bd0c85d419868a4"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/funnel-copywriter.toml",
+      "exists": true,
+      "sha256": "5c1856a6d7c8c33a404dd073882ab609c540d6ef48f5aa861f9cecb8931fb040"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-analytics-engineer.toml",
+      "exists": true,
+      "sha256": "e48a10e7eb026f3632a40318ca220b666b274b54bf8f892fe06d6d5206820f43"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-campaign-analyst.toml",
+      "exists": true,
+      "sha256": "2f4f690ad29c8f9730f099ec02b7b0430e1cc7e63836c51ec651dad5471165a3"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-cro-specialist.toml",
+      "exists": true,
+      "sha256": "2d995f39bdc00664f0e607c78831454552bfcf312a1bf3e832de5236849ea6ed"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-data-analyst.toml",
+      "exists": true,
+      "sha256": "f8be9436e43633b5b321ade1fed72a0309efa07bc0a4a15e8fafccab64c6eefc"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-growth-hacker.toml",
+      "exists": true,
+      "sha256": "ba9dc7e5cef66e20e10853502c74f3f568bde7511f088dbe569f7038a7cbcab4"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ga-seo-strategist.toml",
+      "exists": true,
+      "sha256": "f62509f152fb247f76c92d112a8f93356537258879c6ecf1b0d470f3ba08b2cf"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/generative-particle-engineer.toml",
+      "exists": true,
+      "sha256": "564572dba096ee40745bc3c4f6b1c715cf6a9e59f0176d7ec0cdf2e7218a477e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/google-ads-specialist.toml",
+      "exists": true,
+      "sha256": "8d49d720ff95773057b1b67dd7cefaca904f53a9446bf4b69f195c4029a06d85"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/growth-orqx.toml",
+      "exists": true,
+      "sha256": "83179b1b7030c0c48552ac36b1578c3daa9a8f82bd215576b44b085376bc283e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/headline-specialist.toml",
+      "exists": true,
+      "sha256": "c47ba6034e16f96c732406894c24de98e36bea4bcb5f2c835fb9807c8bc8f6d0"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/hooks-architect.toml",
+      "exists": true,
+      "sha256": "fbea6637bd38ffc5a21d689025c66a5d35e5dca1ee74c0f1106de9a6a9842da5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/incident-responder.toml",
+      "exists": true,
+      "sha256": "94c310844f496ff57214970081194bdc702b4146058eacbed46c09408e8dc89b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/joseph-campbell.toml",
+      "exists": true,
+      "sha256": "832174c0c80328e2575a8ea454dd59dacc84d027d7ea90d8de0fd10efa3b2765"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/kb-architect.toml",
+      "exists": true,
+      "sha256": "315f95a5145e511435e948200980dd45000671049557432747d94e53218537f1"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/keith-johnstone.toml",
+      "exists": true,
+      "sha256": "e45264e252a5c9661b7365990e5feddc47d9823757bcbdb32d23f902858d1896"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/kindra-hall.toml",
+      "exists": true,
+      "sha256": "6b84e2f464f264a9d9b85b861d3a32a391870f5718162f634fb2942691c0781d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/launch-strategist.toml",
+      "exists": true,
+      "sha256": "bc1761cf1974bb6febec5e3d9a6740f9650b35d7b0c46f8849ca66f0a197f825"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/lesson-architect.toml",
+      "exists": true,
+      "sha256": "626a4f39e38a255e1094c2f993206675e11a804601d93695dc1b816fe4b3b58e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/long-form-writer.toml",
+      "exists": true,
+      "sha256": "2f9a879e3c3afb97bb50635ae4c53ebc8abd524a8cf68a539c176f5d2493a99d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/market-analyst.toml",
+      "exists": true,
+      "sha256": "7b07909208d8db5eb42d2309c2465c91516a2d920eff66d068804e5c4f9c117b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/marshall-ganz.toml",
+      "exists": true,
+      "sha256": "a2ca20fb57d1729c6b58e1049b4f781fb9cf12698c7d2ee0d87ffff575dc9ad2"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/mcp-integrator.toml",
+      "exists": true,
+      "sha256": "38cc7f8512146149847ed3ed7a8e7a9c0a4bbcc8eb1bb18ee7dccfb3078889bd"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/meta-ads-specialist.toml",
+      "exists": true,
+      "sha256": "6a77aefaf4c9a3ef0a4916169711ec1a191b1f9386f8048b243c4786f61eb125"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/mind-synthesizer.toml",
+      "exists": true,
+      "sha256": "bcb256e67cffc478e0bca2feb28883335dea257b77a322715b5d2a3d5ed2914e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/motion-choreographer.toml",
+      "exists": true,
+      "sha256": "166abd7b9392a52dc7a3463c76629f440a48c8a5978a4dd478c8b29cc376ae42"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/nancy-duarte.toml",
+      "exists": true,
+      "sha256": "57ecfb6479c9d8a258892f365d7a231e7fe48035f82a7dbc457b4f688bf3470a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/naval-ravikant.toml",
+      "exists": true,
+      "sha256": "dd40352edef51f3335760ce983e493cdc4173d0b2b47befa4fd4954c4889108a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/network-security-engineer.toml",
+      "exists": true,
+      "sha256": "ef19d0d5368465cea092fa133b513fe0520f77f05a7f12a83e0862ca2b4cede8"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/oren-klaff.toml",
+      "exists": true,
+      "sha256": "8e6cb6f67a36baf68d9355ee56ddceec132f0a25092b40a3516476d608ccfbae"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/paidmedia-orqx.toml",
+      "exists": true,
+      "sha256": "e8902ed255f6d08e361aa439c764f39fc716a7603fcd83e5d1adc00d3eddc9df"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/park-howell.toml",
+      "exists": true,
+      "sha256": "e2e8749866322d58807197e14812e3b9403c835234c34214cafa7c709ddfdc1d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/patrick-lencioni.toml",
+      "exists": true,
+      "sha256": "a3c2e592b40ef772803798eefb66d3a49a75ca5e70e75d069aca22ae74b98efe"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/penetration-tester.toml",
+      "exists": true,
+      "sha256": "2f740a4731af2915dd858cf259c2f7d0cbd5adf0bf9e5d4b84c017811556d2cc"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/performance-engineer.toml",
+      "exists": true,
+      "sha256": "d6ff7e1e77989f867a8af0440e7e2e68b31159b16be3286955fa9e204bd36d81"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/persuasion-psychologist.toml",
+      "exists": true,
+      "sha256": "6aad4d7b09fe2bcc24d6dd7e75bcf05caf0d2131c159b73e8e4f9dfd048e55e0"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/peter-thiel.toml",
+      "exists": true,
+      "sha256": "5bb48a93ab56daf06c92d87c72d0503f55de3223518a11d82ef0c4f63cd92968"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/platform-aesthetic-director.toml",
+      "exists": true,
+      "sha256": "564a880e26e6eb7f0a347f1cc65264c62e4b2c39ffb8f0a9d57d8385ce51586d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/platform-specialist.toml",
+      "exists": true,
+      "sha256": "9500196696f93e85cd0d9c93f1f01e18e061381b3ab0bc5e0c0da189c3e7cf48"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/pm-creative-performance-analyst.toml",
+      "exists": true,
+      "sha256": "2536b5c6c8467ae6282e468426ec2ebbd632c7fc8e876d8ebf3adf137dae0d33"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/pm-youtube-ads-specialist.toml",
+      "exists": true,
+      "sha256": "77ed859280a874285ddee0c11946e2663931169383a6c400589a7a11f5a2319b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/premium-packaging-strategist.toml",
+      "exists": true,
+      "sha256": "d87fb5fe1c0f22652abf454b96df4eb2da50c985fa998a873c671d913da14796"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/pricing-strategist.toml",
+      "exists": true,
+      "sha256": "ec605c4dcaf2aff30fb76145d6828bdfeadcda47fafa5d0b5ad712aa2b939d17"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/product-lead.toml",
+      "exists": true,
+      "sha256": "03cfb94916c56676cb0a4721a857e317520a85340276402114076900c463131b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/product-orqx.toml",
+      "exists": true,
+      "sha256": "916602f6b446b0bd49029a9ce8fafc09bc5340c668f851639f4cf63e020c27cf"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/product-surface-director.toml",
+      "exists": true,
+      "sha256": "373f0b344aea9d514dfefb41c41bc4aed7f558b06ecc5765a9f1064cfa1e7683"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/production-director.toml",
+      "exists": true,
+      "sha256": "ef645f99d55e99968f8c07b5ace0ed1b2174a981155efc5e7a33963c3e621bcd"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/profitability-analyst.toml",
+      "exists": true,
+      "sha256": "795c89e87899fc4384657a3642b81f9fa36a3e44b57dcdfb5ac191e152709c02"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/project-integrator.toml",
+      "exists": true,
+      "sha256": "4b5450165e436c092f30fd238b3637294c9fbc9743b3ddc4454d7bf2c5e7a438"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/project-lead.toml",
+      "exists": true,
+      "sha256": "08027e85580d51a6c8e2075707fd8b2c399216c51372e81b701c7e9825cd1c63"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/proof-architect.toml",
+      "exists": true,
+      "sha256": "2e1bb4b4c8c009566f74d209a87c48fc1abc711154b5dd5a5c1a6ff83fcace45"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-client-product-manager.toml",
+      "exists": true,
+      "sha256": "7f6937c4fc5da54e635b40ecbe1ccc471d0fa76a3c70dacdca0aefc4d0426b28"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-delivery-manager.toml",
+      "exists": true,
+      "sha256": "5704aa095063c8213f126b482004c14a3a8b7a8d9dcc96fd9c6319a99b6c5fbf"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-discovery-lead.toml",
+      "exists": true,
+      "sha256": "f72efc0d46b009266ab31cf369e3795c1224b3a3a1eedfdc8585836e7f02118e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-product-analyst.toml",
+      "exists": true,
+      "sha256": "5c9117be5e37167067097e065fa3aeb197dddc9855de8213ab5ac47541254090"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-product-ops-specialist.toml",
+      "exists": true,
+      "sha256": "42ceafc57ca4e8ed7f56eeba06f31b87057bb34f4ad42440a53261e51b7bd51f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ps-product-strategist.toml",
+      "exists": true,
+      "sha256": "59255bacefdd725033d1dec3354eeeaeca36c82fd1891882a3adc3865c43d8b9"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/quality-gate.toml",
+      "exists": true,
+      "sha256": "e572260c7f13968ad90d30e7630f0993fd8e34ec105612cc7e137b6e676c916f"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ray-dalio.toml",
+      "exists": true,
+      "sha256": "f88bc7ce2eafdde6e616d2c92d73ca444eca36a6ea5309b7bf6a1f917b28ff42"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/reid-hoffman.toml",
+      "exists": true,
+      "sha256": "98ed8753d730906f84cc7699bbba0e4162ecb9d2968cedb7326ee97ae9b60abd"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/research-orqx.toml",
+      "exists": true,
+      "sha256": "ec6b408cfb6522ac8fcf45d66e3de492b91b0a64bd59b56d3d91a88f121bcad5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/revenue-analyst.toml",
+      "exists": true,
+      "sha256": "33b70327161d359924fe5cd0a770ac3ac5312faa27f76625b626b637fba52e29"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/roadmap-sentinel.toml",
+      "exists": true,
+      "sha256": "f463d6fa77903ffe1afffc083a1abf7ee4210b13de83cf457a55ddeeee8dbf70"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/scroll-narrative-engineer.toml",
+      "exists": true,
+      "sha256": "720c064f0099f42742849e910b9e9df1e8f7ad58eef5aaa131f73d32e678f813"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/shader-artist.toml",
+      "exists": true,
+      "sha256": "d8fa03d2e2ec5ef440b956242cc54bdfde46c76306c09f481206fd50ca3a0734"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/signal-intelligence.toml",
+      "exists": true,
+      "sha256": "f2e5c74827b56355961c735627097386014c1ac76019dc7b05c5f8ed8a5aa4eb"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/simon-sinek.toml",
+      "exists": true,
+      "sha256": "94c63c67cefa48701025b043b2ad325bfd41007918d8e475a46adb51dbc3f05a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/skill-craftsman.toml",
+      "exists": true,
+      "sha256": "1136d4fb9f6240bbe3c660a28260119e80f1a4ae0ec996e90ff3f1537d896731"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/slide-designer.toml",
+      "exists": true,
+      "sha256": "f0b772fbcd1e8254289d835f134f517dd64a73ba3ebf38da74445c0e362b5e2e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/snps-orqx.toml",
+      "exists": true,
+      "sha256": "ff28873f92e495ed9812b3ee5ba19727c3c9f216c2ecae061500fc3499692c30"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/soc-analyst.toml",
+      "exists": true,
+      "sha256": "23beb0b2a54df8b90f615fd51a83ce51026bb4e320450222ba8eb65822606756"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/sop-extractor.toml",
+      "exists": true,
+      "sha256": "f32d120a0fc38c8ebf92dd3098d141bce0f557b761810dab90a956d24bddff0b"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/source-hunter.toml",
+      "exists": true,
+      "sha256": "dd6d9bd5f6b705ea344aef30ad05892759e8a30c63516a27fb4f1a2c5c276b06"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/sprint-lead.toml",
+      "exists": true,
+      "sha256": "f112f8f3a313fbf3fcdb5cca512faac70f90870da9d3aff3b8c4dc9909ef4c3d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/squad-assembler.toml",
+      "exists": true,
+      "sha256": "e2ff0c39453235c92957cd4d50924bea75788b02d4adc4dc489c334e7849f17a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/squad-creator.toml",
+      "exists": true,
+      "sha256": "65f83f9637402f9b971bfcd05d67818a97be2da7537ba7c9f2a98ad42f4529a5"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/storytelling-orqx.toml",
+      "exists": true,
+      "sha256": "73cb0b1b9833a89af6c2f24b238cbad2c4f14a19089fdda4b6d07d6ee8c84dbd"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/swarm-orqx.toml",
+      "exists": true,
+      "sha256": "b5484f948f08923ef9c08a60d825f6a493f1dd7e8f0a257e1f05ac548f339b5d"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/threat-analyst.toml",
+      "exists": true,
+      "sha256": "c2329ca9a6d36f0542ae6316f1006fa8e0ad627f797cefd49fba3e8c2698d08a"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/threejs-architect.toml",
+      "exists": true,
+      "sha256": "e36d68552182b7cfb4738eca43c58b34d38047cc146828b06a90dafc8387528c"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/trend-forecaster.toml",
+      "exists": true,
+      "sha256": "bc03dbc1b01b78ff485d3d1698d00a417ed7ed5bcb20bfa346c5fea74f1442a7"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ux-design-expert.toml",
+      "exists": true,
+      "sha256": "ca46e96dc671eecce4a5e09174f691ec0a77b618b91b12fc0d9ed24d1595eb30"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/ux-designer.toml",
+      "exists": true,
+      "sha256": "e1a52aff8f049e575ddf5b92c3aea027db1deffe2706c8168da7faa37c51b12e"
+    },
+    {
+      "status": " M",
+      "path": ".codex/agents/yvon-chouinard.toml",
+      "exists": true,
+      "sha256": "b3ce068f1de8b5a3325c232e8b54317ad6447fe3a3851ed6d107d1d68560b246"
+    },
+    {
+      "status": " M",
+      "path": ".codex/scripts/resolve-codex-agent.js",
+      "exists": true,
+      "sha256": "3b932e8afc5dbecb2559954da28517f7d2ca02cf3cc2814000e1c3c889792082"
+    },
+    {
+      "status": " M",
+      "path": ".codex/scripts/sync-codex-native.js",
+      "exists": true,
+      "sha256": "7803a5470bc501942c2832eb447b6a0d41d882945997e0aa00cfa6c81084098f"
+    },
+    {
+      "status": " M",
+      "path": ".sinapse-ai/data/entity-registry.yaml",
+      "exists": true,
+      "sha256": "1ec01896a66b5f3c5daa933bd471ece14b7e2c36ffbf3656bb5da13d30b824d4"
+    },
+    {
+      "status": " M",
+      "path": "AGENTS.md",
+      "exists": true,
+      "sha256": "b4e9c60b2c44fa1a6582ee54a5fe98ee40ff473810c1aed5198ff8f84bc666b7"
+    },
+    {
+      "status": " M",
+      "path": "bin/lib/global-provider-adapters.js",
+      "exists": true,
+      "sha256": "11ecd5427a591446de6580f2158bcfcfd61f9fe9ca331f5ea31e8bcd4bc5b30a"
+    },
+    {
+      "status": " M",
+      "path": "docs/framework/react-bits/index.md",
+      "exists": true,
+      "sha256": "bf9ab63fd2d4d095aad1a7da8f425e140aec5918066d897a15345f132f96479d"
+    },
+    {
+      "status": " M",
+      "path": "package.json",
+      "exists": true,
+      "sha256": "1c24f7b46e200647d791a8dc904858a86d0f243ba4142e3097b0984843df4d98"
+    },
+    {
+      "status": " M",
+      "path": "scripts/research/generate-react-bits-catalog.mjs",
+      "exists": true,
+      "sha256": "bb531ff1a7bf125caf54b075b548fcc0e720763c6205e1f25aa0a87703c9d96f"
+    },
+    {
+      "status": " M",
+      "path": "tests/installer/codex-runtime-delivery.test.js",
+      "exists": true,
+      "sha256": "a0bb5365d1d80b2a4b7e6b52a49782498dd56d4815ac9009255d6c62b4da59bb"
+    },
+    {
+      "status": " M",
+      "path": "tests/unit/global-provider-adapters.test.js",
+      "exists": true,
+      "sha256": "b0b731ae0042aa2ca9df26b53226e569e6384afac61107f0d15492af4deeab95"
+    },
+    {
+      "status": " M",
+      "path": "tests/unit/resolve-codex-agent.test.js",
+      "exists": true,
+      "sha256": "87d39da4363438d64b4135d24f397fbabab5934bd1cc0058ebb9c6763e1eb98e"
+    },
+    {
+      "status": " M",
+      "path": "tests/unit/sync-codex-native.test.js",
+      "exists": true,
+      "sha256": "843c7def447257061f89b70346067912b758b36f7f82419166812d2ac19591eb"
+    },
+    {
+      "status": "??",
+      "path": "docs/framework/codex-context-budget.md",
+      "exists": true,
+      "sha256": "f73830112b44f7d466fcfb945a0f08ec67dfec3ccc5fda37dbb3905d8fb1a2ab"
+    },
+    {
+      "status": "??",
+      "path": "docs/framework/codex-runtime-reference.md",
+      "exists": true,
+      "sha256": "337daf1dd74b58de95e3fe56d6133d1dcd2ad38464b14f6fb69e3446c4dcdec3"
+    },
+    {
+      "status": "??",
+      "path": "docs/framework/react-bits/favorites-caio.md",
+      "exists": true,
+      "sha256": "03ccae6650bd6a5a0215ef7ee57737e9d49efd9975f79e23de6ac9b7475feee1"
+    },
+    {
+      "status": "??",
+      "path": "scripts/validate-codex-context-budget.js",
+      "exists": true,
+      "sha256": "cb9ca6ff3af5d6e4b933c409784ecbbd780f9b2e3f71f31f35c58853fb41613f"
+    },
+    {
+      "status": "??",
+      "path": "tests/unit/codex-context-budget.test.js",
+      "exists": true,
+      "sha256": "73fea4255761a8e1ebc268a0a2323606907d8a789b069b7ee15362b2e8016cd3"
+    }
+  ]
+}

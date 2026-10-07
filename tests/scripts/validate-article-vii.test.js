@@ -77,11 +77,13 @@ describe('validate-article-vii — Constitution counts', () => {
     );
 
     it('reads the task breakdown from the parametric runtime', () => {
+      // Physical roster: 1249 squad Markdown tasks + 211 core development tasks.
+      // Legacy resolution (1396) is separate from semantic bindings (188).
       expect(collectRuntimeTaskCounts()).toEqual({
-        squadTasks: 1201,
+        squadTasks: 1249,
         developmentTasks: 211,
-        totalTasks: 1412,
-        resolvableTasks: 1348,
+        totalTasks: 1460,
+        resolvableTasks: 1396,
       });
     });
 

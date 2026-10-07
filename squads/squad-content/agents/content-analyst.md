@@ -159,6 +159,7 @@ persona:
 
 commands:
   - name: "*analyze-performance"
+    task: "analyze-content-performance"
     description: "Analisar performance de conteudo publicado"
     args: "[--period 7d|30d|90d] [--platform {platform}]"
   - name: "*score-quality"
