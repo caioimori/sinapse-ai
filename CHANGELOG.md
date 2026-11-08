@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.28.0] - 2026-11-08
+
+## [1.28.0](https://github.com/caioimori/sinapse-ai/compare/1.27.0...1.28.0) (2026-11-08)
+
+### Features
+
+* **engineering:** catálogo de workflows e ciclo guiado com evidências ([#425](https://github.com/caioimori/sinapse-ai/issues/425)) ([131f329](https://github.com/caioimori/sinapse-ai/commit/131f329531feab26d47bb76acdbe669c8eca36ef))
+
+### Bug Fixes
+
+* **ci:** professionalize public product and delivery [Story public-product-foundation] ([#390](https://github.com/caioimori/sinapse-ai/issues/390)) ([bb2d102](https://github.com/caioimori/sinapse-ai/commit/bb2d10255fd3d5639f0bc68dedd296cd00865aaf))
+* **docs:** restore canonical SNPS AI wordmark ([#391](https://github.com/caioimori/sinapse-ai/issues/391)) ([641554c](https://github.com/caioimori/sinapse-ai/commit/641554cf3578919a8c810ab5af3299e422a54aa0))
+
+### Maintenance
+
+* **ci:** migrate active actions to Node 24 ([#392](https://github.com/caioimori/sinapse-ai/issues/392)) ([91b6d10](https://github.com/caioimori/sinapse-ai/commit/91b6d10edf5944f71d1987226a24f3a225218a5e))
+
 ## [1.27.0] - 2026-07-16
 
 ### Features
