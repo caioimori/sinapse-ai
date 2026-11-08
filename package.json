@@ -6,7 +6,8 @@
     "sinapse": "bin/sinapse.js",
     "sinapse-ai": "bin/cli.js",
     "sinapse-delegate": "bin/sinapse-delegate.js",
-    "sinapse-codex": ".codex/scripts/sinapse-codex.js"
+    "sinapse-codex": ".codex/scripts/sinapse-codex.js",
+    "sinapse-engineering": "bin/engineering-workflows.js"
   },
   "main": ".sinapse-ai/index.js",
   "module": ".sinapse-ai/index.esm.js",
@@ -126,6 +127,7 @@
     "validate:claude-integration": "node scripts/validate-provider-adapters.js",
     "validate:providers": "node scripts/validate-provider-adapters.js",
     "validate:engineering-applicability": "jest tests/unit/engineering-applicability.test.js --runInBand",
+    "engineering": "node bin/engineering-workflows.js",
     "validate:squad-schema": "node scripts/validate-squad-yaml.js",
     "validate:squad-schema:strict": "node scripts/validate-squad-yaml.js --strict",
     "validate:codex-sync": "node .codex/scripts/validate-codex-native.js && node scripts/validate-codex-command-registry.js && node .sinapse-ai/infrastructure/scripts/validate-codex-integration.js && node .sinapse-ai/infrastructure/scripts/validate-codex-delegation.js",
@@ -183,9 +185,9 @@
     "execa": "^5.1.1",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.2",
-    "handlebars": "^4.7.8",
+    "handlebars": "^4.7.10",
     "inquirer": "^8.2.6",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^4.3.2",
     "ora": "^5.4.1",
     "proper-lockfile": "^4.1.2",
     "semver": "^7.7.2",
@@ -259,10 +261,10 @@
     "serialize-javascript": "^7.0.5",
     "picomatch": "^4.0.4",
     "brace-expansion": "^5.0.6",
-    "fast-uri": "^3.1.4",
+    "fast-uri": "^3.1.9",
     "ip-address": "^10.1.1",
     "@babel/core": "^7.29.6",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.2"
   },
   "directories": {
     "doc": "docs",

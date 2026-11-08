@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "repository": "https://github.com/caioimori/engenharia-de-software",
+  "revision": "800879af8f7d1289ce67c80e7da5d76ee70d2dbe",
+  "publicSite": "https://mapa-engenharia-software.vercel.app/",
+  "license": "CC-BY-SA-4.0",
+  "attribution": "Caio Imori — Engenharia de Software — Base de Conhecimento",
+  "publicComparison": "Equal content after CRLF-to-LF normalization; original pinned bytes preserved",
+  "files": [
+    {
+      "path": "index.json",
+      "sha256": "e1585e2d1a5a4bc0fc90606c73d0ff5042636347b7312e1b5f7796cd0f768e93",
+      "publicSha256": "e1585e2d1a5a4bc0fc90606c73d0ff5042636347b7312e1b5f7796cd0f768e93",
+      "bytes": 30873,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-1-craftsmanship/LOOPS-craftsmanship-diagramas.md",
+      "sha256": "68097729e1dec441864e77755460f0e84cc3266ba3c26ac986effd3680904949",
+      "publicSha256": "68097729e1dec441864e77755460f0e84cc3266ba3c26ac986effd3680904949",
+      "bytes": 49219,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-2-arquitetura-dominio/LOOPS-design-arquitetura-diagramas.md",
+      "sha256": "b55f35f896373bbb2ffd43d11f9ec00cbcbaa93424ded249109b6875a919aa88",
+      "publicSha256": "b55f35f896373bbb2ffd43d11f9ec00cbcbaa93424ded249109b6875a919aa88",
+      "bytes": 50506,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-3-sistemas-maquina/LOOPS-onda-3-sistemas-maquina-diagramas.md",
+      "sha256": "628318cb686d760aa3e05451cc0341e0520aa8093ba9b4928f2d775e3833feb0",
+      "publicSha256": "628318cb686d760aa3e05451cc0341e0520aa8093ba9b4928f2d775e3833feb0",
+      "bytes": 33683,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-4-dados-comunicacao/LOOPS-onda-4-dados-comunicacao-diagramas.md",
+      "sha256": "84bbc63fae66e8127fcb5baef7a3015313ddb0ff4e041a7f3c74964a82a50855",
+      "publicSha256": "84bbc63fae66e8127fcb5baef7a3015313ddb0ff4e041a7f3c74964a82a50855",
+      "bytes": 58746,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-5-operacao-confiabilidade/LOOPS-onda-5-operacao-confiabilidade-diagramas.md",
+      "sha256": "13f75424d5fefaa0abc3db8f85e8a6940cff673bd989b404f79d824f56815d56",
+      "publicSha256": "13f75424d5fefaa0abc3db8f85e8a6940cff673bd989b404f79d824f56815d56",
+      "bytes": 44604,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-6-fundamentos-linguagens/LOOPS-onda-6-fundamentos-linguagens-diagramas.md",
+      "sha256": "61bd620887751ec5129505c62b1ee52dce267345bd48e5ea3f81a9df084c2e25",
+      "publicSha256": "61bd620887751ec5129505c62b1ee52dce267345bd48e5ea3f81a9df084c2e25",
+      "bytes": 31265,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-7-processo-pessoas/LOOPS-onda-7-processo-pessoas-diagramas.md",
+      "sha256": "22cea99190ad7c16d22a80855696196e186d0ad1a07ac449f28b8a4a0dfa4c0d",
+      "publicSha256": "22cea99190ad7c16d22a80855696196e186d0ad1a07ac449f28b8a4a0dfa4c0d",
+      "bytes": 25830,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-8-engenharia-aumentada-ia/LOOPS-onda-8-engenharia-aumentada-ia-diagramas.md",
+      "sha256": "bb3f2650492d859eeba8557f81d107e356aa77c71a3dac60b4e6ee348ca64507",
+      "publicSha256": "bb3f2650492d859eeba8557f81d107e356aa77c71a3dac60b4e6ee348ca64507",
+      "bytes": 28225,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-9-seguranca-ciberseguranca/LOOPS-onda-9-seguranca-ciberseguranca-diagramas.md",
+      "sha256": "ac3f1ad23203a85848179a0a30515046fd99da2ee4edde17ffce8a03a2ce591b",
+      "publicSha256": "ac3f1ad23203a85848179a0a30515046fd99da2ee4edde17ffce8a03a2ce591b",
+      "bytes": 52192,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-10-frontend-web-platform/LOOPS-onda-10-frontend-web-platform-diagramas.md",
+      "sha256": "a5ceecaac8e608e91a24c84bd5540cdcb5f1311cd5ad3eff736f9cdb8bba65ad",
+      "publicSha256": "a5ceecaac8e608e91a24c84bd5540cdcb5f1311cd5ad3eff736f9cdb8bba65ad",
+      "bytes": 16886,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-11-design-systems-product-craft/LOOPS-onda-11-design-systems-product-craft-diagramas.md",
+      "sha256": "4ae57bdc8e6a11e6538d691b64c92030cc558fb11f85dcb110595626a0f9c060",
+      "publicSha256": "4ae57bdc8e6a11e6538d691b64c92030cc558fb11f85dcb110595626a0f9c060",
+      "bytes": 16165,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-12-data-analytics-ml/LOOPS-onda-12-data-analytics-ml-diagramas.md",
+      "sha256": "74010f2c20cb1b7f6ecea897ed9f6d10ea99040b86c94fbed4a146ff9f96e5c7",
+      "publicSha256": "74010f2c20cb1b7f6ecea897ed9f6d10ea99040b86c94fbed4a146ff9f96e5c7",
+      "bytes": 16842,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-13-operability-performance-economics/LOOPS-onda-13-operability-performance-economics-diagramas.md",
+      "sha256": "65230ceef937a8f15f367dc6df1b81deb8c0ca0784148074d52e14fede9d1ad9",
+      "publicSha256": "10e6b6c5f903770981e9dbb19e2f76df71b7758cd09b9f320178835627ac5df4",
+      "bytes": 19671,
+      "publiclyVerified": true
+    },
+    {
+      "path": "fase-2-extracao/onda-14-delivery-surfaces-practice/LOOPS-onda-14-delivery-surfaces-practice-diagramas.md",
+      "sha256": "6583b0edc765620f288fc7c4622d0202297450b26a67ec5f5c8f772a888f7c66",
+      "publicSha256": "6d75a35e4c63c8005219fa6c6f82329a8d0ae8de9db7f941dcfe7673ac2003f4",
+      "bytes": 22246,
+      "publiclyVerified": true
+    },
+    {
+      "path": "pratica-curso-agents-skills/LOOPS-curso-agents-skills-diagramas.md",
+      "sha256": "08f5a23d739b5c973290364e832f934154b3ed76888d4812c916a90436c02400",
+      "publicSha256": "508ba39356d4370d60e2424388e39916a667b0e134e10fba8968ae01c563c464",
+      "bytes": 13859,
+      "publiclyVerified": true
+    }
+  ]
+}

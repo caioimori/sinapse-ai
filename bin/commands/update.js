@@ -39,6 +39,10 @@ const {
   copyReactBitsCapabilitySync,
   REACT_BITS_SKILL_RELATIVE_PATH,
 } = require('../../packages/installer/src/installer/react-bits-corpus');
+const {
+  copyEngineeringWorkflowCapabilitySync,
+  ENGINEERING_SKILL_RELATIVE_PATH,
+} = require('../../packages/installer/src/installer/engineering-workflow-capability');
 const { assertProviderAdapterParity } = require('../lib/provider-parity');
 const { execSync } = require('child_process');
 
@@ -189,11 +193,13 @@ async function cmdUpdateGlobal() {
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} command files (${totalAgents} agents total)`);
 
   // Phase 2b: Install global agents based on LLM choice
+  copyEngineeringWorkflowCapabilitySync(ROOT, SINAPSE_HOME);
   const globalAdapters = deliverGlobalProviderAdapters({
     llmChoice,
     home: HOME,
     commandsDir: commandStagingDir,
     reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+    engineeringSkillPath: path.join(SINAPSE_HOME, ENGINEERING_SKILL_RELATIVE_PATH),
   });
   const activeAgentCount = assertProviderAdapterParity(
     llmChoice,

@@ -13,7 +13,7 @@ const GLOBAL_PROVIDER_SKILL_IDS = Object.freeze([
   SUPREME_ORCHESTRATOR_ID,
   'sinapse-agent',
 ]);
-const GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS = Object.freeze(['react-bits-frontend']);
+const GLOBAL_SUPPLEMENTAL_PROVIDER_SKILL_IDS = Object.freeze(['react-bits-frontend', 'sinapse-engineering']);
 
 module.exports = {
   CANONICAL_AGENT_COUNT,

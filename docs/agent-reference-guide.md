@@ -13,7 +13,7 @@ Codex runtime. These numbers are measured from source and validated in CI.
 
 | Provider surface | Claude Code | Codex |
 |---|:---:|:---:|
-| Installed skills | 37 | 37 |
+| Installed skills | 38 | 38 |
 | Registered hooks | 20 native registrations | 9 lifecycle events |
 
 ## Start with the orchestrator

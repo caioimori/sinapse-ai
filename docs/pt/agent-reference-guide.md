@@ -12,7 +12,7 @@ Codex. Esses números são medidos a partir do código-fonte e validados na CI.
 
 | Superfície do provider | Claude Code | Codex |
 |---|:---:|:---:|
-| Skills instaladas | 37 | 37 |
+| Skills instaladas | 38 | 38 |
 | Hooks registrados | 20 registros | 9 eventos |
 
 ## Comece pelo orquestrador

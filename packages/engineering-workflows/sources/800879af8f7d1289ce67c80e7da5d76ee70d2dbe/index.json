@@ -1,0 +1,860 @@
+{
+  "site": {
+    "name": "Engenharia de Software — Base de Conhecimento",
+    "url": "https://mapa-engenharia-software.vercel.app",
+    "description": "60 domínios · 14 ondas · 275 workflows · 1617 cards-átomo. Base canônica validada contra 10 autoridades globais (~250 obras).",
+    "repository": "https://github.com/caioimori/engenharia-de-software",
+    "license": "CC-BY-SA-4.0"
+  },
+  "stats": {
+    "dominios": 60,
+    "ondas": 14,
+    "workflows": 275,
+    "cards": 1617,
+    "obras": 250,
+    "autoridades": 10
+  },
+  "domains": [
+    {
+      "id": "01",
+      "nm": "01",
+      "slug": "01-clean-code",
+      "titulo": "Clean Code & Craftsmanship",
+      "cls": "craft",
+      "onda": 1,
+      "md": "https://mapa-engenharia-software.vercel.app/01-clean-code.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=01",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/01-clean-code.md"
+    },
+    {
+      "id": "02",
+      "nm": "02",
+      "slug": "02-arquitetura",
+      "titulo": "Arquitetura de Software",
+      "cls": "arq",
+      "onda": 2,
+      "md": "https://mapa-engenharia-software.vercel.app/02-arquitetura.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=02",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/02-arquitetura.md"
+    },
+    {
+      "id": "03",
+      "nm": "03",
+      "slug": "03-design-patterns",
+      "titulo": "Design Patterns & Idiomas",
+      "cls": "craft",
+      "onda": 1,
+      "md": "https://mapa-engenharia-software.vercel.app/03-design-patterns.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=03",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/03-design-patterns.md"
+    },
+    {
+      "id": "04",
+      "nm": "04",
+      "slug": "04-ddd",
+      "titulo": "Domain-Driven Design",
+      "cls": "arq",
+      "onda": 2,
+      "md": "https://mapa-engenharia-software.vercel.app/04-ddd.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=04",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/04-ddd.md"
+    },
+    {
+      "id": "05",
+      "nm": "05",
+      "slug": "05-sistemas-distribuidos",
+      "titulo": "Sistemas Distribuídos & Dados",
+      "cls": "sis",
+      "onda": 4,
+      "md": "https://mapa-engenharia-software.vercel.app/05-sistemas-distribuidos.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=05",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/05-sistemas-distribuidos.md"
+    },
+    {
+      "id": "06",
+      "nm": "06",
+      "slug": "06-apis-integracao",
+      "titulo": "APIs, Integração & Comunicação",
+      "cls": "sis",
+      "onda": 4,
+      "md": "https://mapa-engenharia-software.vercel.app/06-apis-integracao.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=06",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/06-apis-integracao.md"
+    },
+    {
+      "id": "07",
+      "nm": "07",
+      "slug": "07-testes-tdd",
+      "titulo": "Testes, TDD & Qualidade",
+      "cls": "craft",
+      "onda": 1,
+      "md": "https://mapa-engenharia-software.vercel.app/07-testes-tdd.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=07",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/07-testes-tdd.md"
+    },
+    {
+      "id": "08",
+      "nm": "08",
+      "slug": "08-refactoring-legacy",
+      "titulo": "Refatoração & Código Legado",
+      "cls": "craft",
+      "onda": 1,
+      "md": "https://mapa-engenharia-software.vercel.app/08-refactoring-legacy.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=08",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/08-refactoring-legacy.md"
+    },
+    {
+      "id": "09",
+      "nm": "09",
+      "slug": "09-devops-cicd",
+      "titulo": "DevOps, CI/CD & Entrega Contínua",
+      "cls": "ops",
+      "onda": 5,
+      "md": "https://mapa-engenharia-software.vercel.app/09-devops-cicd.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=09",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/09-devops-cicd.md"
+    },
+    {
+      "id": "10",
+      "nm": "10",
+      "slug": "10-confiabilidade-sre",
+      "titulo": "Confiabilidade, Resiliência & SRE",
+      "cls": "ops",
+      "onda": 5,
+      "md": "https://mapa-engenharia-software.vercel.app/10-confiabilidade-sre.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=10",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/10-confiabilidade-sre.md"
+    },
+    {
+      "id": "11",
+      "nm": "11",
+      "slug": "11-concorrencia-performance",
+      "titulo": "Concorrência, Performance & Sistemas",
+      "cls": "sis",
+      "onda": 3,
+      "md": "https://mapa-engenharia-software.vercel.app/11-concorrencia-performance.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=11",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/11-concorrencia-performance.md"
+    },
+    {
+      "id": "12",
+      "nm": "12",
+      "slug": "12-seguranca",
+      "titulo": "Segurança & Modelagem de Ameaças",
+      "cls": "ops",
+      "onda": 5,
+      "md": "https://mapa-engenharia-software.vercel.app/12-seguranca.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=12",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/12-seguranca.md"
+    },
+    {
+      "id": "13",
+      "nm": "13",
+      "slug": "13-agile-lean-processo",
+      "titulo": "Agile, Lean & Processo",
+      "cls": "proc",
+      "onda": 7,
+      "md": "https://mapa-engenharia-software.vercel.app/13-agile-lean-processo.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=13",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/13-agile-lean-processo.md"
+    },
+    {
+      "id": "14",
+      "nm": "14",
+      "slug": "14-times-org-conway",
+      "titulo": "Times, Org & Lei de Conway",
+      "cls": "proc",
+      "onda": 7,
+      "md": "https://mapa-engenharia-software.vercel.app/14-times-org-conway.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=14",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/14-times-org-conway.md"
+    },
+    {
+      "id": "15",
+      "nm": "15",
+      "slug": "15-fundamentos-cs-paradigmas",
+      "titulo": "Fundamentos & Paradigmas",
+      "cls": "fund",
+      "onda": 6,
+      "md": "https://mapa-engenharia-software.vercel.app/15-fundamentos-cs-paradigmas.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=15",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/15-fundamentos-cs-paradigmas.md"
+    },
+    {
+      "id": "16",
+      "nm": "16",
+      "slug": "16-requisitos-produto-sistemas",
+      "titulo": "Requisitos, Produto & Sistêmico",
+      "cls": "arq",
+      "onda": 2,
+      "md": "https://mapa-engenharia-software.vercel.app/16-requisitos-produto-sistemas.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=16",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/16-requisitos-produto-sistemas.md"
+    },
+    {
+      "id": "17",
+      "nm": "17",
+      "slug": "17-bancos-de-dados",
+      "titulo": "Bancos de Dados & Persistência",
+      "cls": "sis",
+      "onda": 4,
+      "md": "https://mapa-engenharia-software.vercel.app/17-bancos-de-dados.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=17",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/17-bancos-de-dados.md"
+    },
+    {
+      "id": "18",
+      "nm": "18",
+      "slug": "18-sistemas-operacionais",
+      "titulo": "Sistemas Operacionais",
+      "cls": "sis",
+      "onda": 3,
+      "md": "https://mapa-engenharia-software.vercel.app/18-sistemas-operacionais.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=18",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/18-sistemas-operacionais.md"
+    },
+    {
+      "id": "19",
+      "nm": "19",
+      "slug": "19-redes",
+      "titulo": "Redes de Computadores",
+      "cls": "sis",
+      "onda": 4,
+      "md": "https://mapa-engenharia-software.vercel.app/19-redes.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=19",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/19-redes.md"
+    },
+    {
+      "id": "20",
+      "nm": "20",
+      "slug": "20-teoria-algoritmos",
+      "titulo": "Teoria da Computação & Algoritmos",
+      "cls": "fund",
+      "onda": 6,
+      "md": "https://mapa-engenharia-software.vercel.app/20-teoria-algoritmos.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=20",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/20-teoria-algoritmos.md"
+    },
+    {
+      "id": "21",
+      "nm": "21",
+      "slug": "21-compiladores-linguagens",
+      "titulo": "Compiladores & Linguagens",
+      "cls": "fund",
+      "onda": 6,
+      "md": "https://mapa-engenharia-software.vercel.app/21-compiladores-linguagens.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=21",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/21-compiladores-linguagens.md"
+    },
+    {
+      "id": "22",
+      "nm": "22",
+      "slug": "22-arquitetura-computadores",
+      "titulo": "Arquitetura de Computadores",
+      "cls": "sis",
+      "onda": 3,
+      "md": "https://mapa-engenharia-software.vercel.app/22-arquitetura-computadores.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=22",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/22-arquitetura-computadores.md"
+    },
+    {
+      "id": "23",
+      "nm": "23",
+      "slug": "23-desenvolvimento-orientado-por-ia",
+      "titulo": "Desenvolvimento Orientado por IA",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/23-desenvolvimento-orientado-por-ia.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=23",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/23-desenvolvimento-orientado-por-ia.md"
+    },
+    {
+      "id": "24",
+      "nm": "24",
+      "slug": "24-spec-driven-development",
+      "titulo": "Spec-Driven Development",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/24-spec-driven-development.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=24",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/24-spec-driven-development.md"
+    },
+    {
+      "id": "25",
+      "nm": "25",
+      "slug": "25-agentic-loops-orquestracao",
+      "titulo": "Agentic Loops & Orquestração",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/25-agentic-loops-orquestracao.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=25",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/25-agentic-loops-orquestracao.md"
+    },
+    {
+      "id": "26",
+      "nm": "26",
+      "slug": "26-context-engineering",
+      "titulo": "Context Engineering",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/26-context-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=26",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/26-context-engineering.md"
+    },
+    {
+      "id": "27",
+      "nm": "27",
+      "slug": "27-evals-verificacao-guardrails",
+      "titulo": "Evals, Verificação & Guardrails",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/27-evals-verificacao-guardrails.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=27",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/27-evals-verificacao-guardrails.md"
+    },
+    {
+      "id": "28",
+      "nm": "28",
+      "slug": "28-tool-use-mcp-harness",
+      "titulo": "Tool Use, MCP & Harness",
+      "cls": "ia",
+      "onda": 8,
+      "md": "https://mapa-engenharia-software.vercel.app/28-tool-use-mcp-harness.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=28",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/28-tool-use-mcp-harness.md"
+    },
+    {
+      "id": "29",
+      "nm": "29",
+      "slug": "29-application-security-secure-sdlc",
+      "titulo": "Application Security & Secure SDLC",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/29-application-security-secure-sdlc.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=29",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/29-application-security-secure-sdlc.md"
+    },
+    {
+      "id": "30",
+      "nm": "30",
+      "slug": "30-offensive-security-ethical-hacking",
+      "titulo": "Offensive Security & Ethical Hacking",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/30-offensive-security-ethical-hacking.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=30",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/30-offensive-security-ethical-hacking.md"
+    },
+    {
+      "id": "31",
+      "nm": "31",
+      "slug": "31-defensive-security-soc-detection",
+      "titulo": "Defensive Security, SOC & Detection",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/31-defensive-security-soc-detection.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=31",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/31-defensive-security-soc-detection.md"
+    },
+    {
+      "id": "32",
+      "nm": "32",
+      "slug": "32-cloud-infrastructure-security",
+      "titulo": "Cloud & Infrastructure Security",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/32-cloud-infrastructure-security.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=32",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/32-cloud-infrastructure-security.md"
+    },
+    {
+      "id": "33",
+      "nm": "33",
+      "slug": "33-identity-access-cryptography",
+      "titulo": "Identity, Access & Cryptography",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/33-identity-access-cryptography.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=33",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/33-identity-access-cryptography.md"
+    },
+    {
+      "id": "34",
+      "nm": "34",
+      "slug": "34-supply-chain-dependency-security",
+      "titulo": "Supply Chain & Dependency Security",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/34-supply-chain-dependency-security.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=34",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/34-supply-chain-dependency-security.md"
+    },
+    {
+      "id": "35",
+      "nm": "35",
+      "slug": "35-incident-response-forensics-resilience",
+      "titulo": "Incident Response, Forensics & Resilience",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/35-incident-response-forensics-resilience.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=35",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/35-incident-response-forensics-resilience.md"
+    },
+    {
+      "id": "36",
+      "nm": "36",
+      "slug": "36-governance-risk-compliance",
+      "titulo": "Governance, Risk & Compliance",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/36-governance-risk-compliance.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=36",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/36-governance-risk-compliance.md"
+    },
+    {
+      "id": "37",
+      "nm": "37",
+      "slug": "37-ai-llm-agent-security",
+      "titulo": "AI/LLM & Agent Security",
+      "cls": "seg",
+      "onda": 9,
+      "md": "https://mapa-engenharia-software.vercel.app/37-ai-llm-agent-security.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=37",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/37-ai-llm-agent-security.md"
+    },
+    {
+      "id": "38",
+      "nm": "38",
+      "slug": "38-frontend-architecture-rendering",
+      "titulo": "Frontend Architecture & Rendering",
+      "cls": "front",
+      "onda": 10,
+      "md": "https://mapa-engenharia-software.vercel.app/38-frontend-architecture-rendering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=38",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/38-frontend-architecture-rendering.md"
+    },
+    {
+      "id": "39",
+      "nm": "39",
+      "slug": "39-web-platform-browser-internals",
+      "titulo": "The Web Platform & Browser Internals",
+      "cls": "front",
+      "onda": 10,
+      "md": "https://mapa-engenharia-software.vercel.app/39-web-platform-browser-internals.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=39",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/39-web-platform-browser-internals.md"
+    },
+    {
+      "id": "40",
+      "nm": "40",
+      "slug": "40-web-performance-core-web-vitals",
+      "titulo": "Web Performance & Core Web Vitals",
+      "cls": "front",
+      "onda": 10,
+      "md": "https://mapa-engenharia-software.vercel.app/40-web-performance-core-web-vitals.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=40",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/40-web-performance-core-web-vitals.md"
+    },
+    {
+      "id": "41",
+      "nm": "41",
+      "slug": "41-accessibility-inclusive-design",
+      "titulo": "Accessibility & Inclusive Design",
+      "cls": "front",
+      "onda": 10,
+      "md": "https://mapa-engenharia-software.vercel.app/41-accessibility-inclusive-design.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=41",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/41-accessibility-inclusive-design.md"
+    },
+    {
+      "id": "42",
+      "nm": "42",
+      "slug": "42-css-architecture-layout-responsive",
+      "titulo": "CSS Architecture, Layout & Responsive",
+      "cls": "front",
+      "onda": 10,
+      "md": "https://mapa-engenharia-software.vercel.app/42-css-architecture-layout-responsive.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=42",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/42-css-architecture-layout-responsive.md"
+    },
+    {
+      "id": "43",
+      "nm": "43",
+      "slug": "43-design-systems-engineering",
+      "titulo": "Design Systems Engineering",
+      "cls": "ds",
+      "onda": 11,
+      "md": "https://mapa-engenharia-software.vercel.app/43-design-systems-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=43",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/43-design-systems-engineering.md"
+    },
+    {
+      "id": "44",
+      "nm": "44",
+      "slug": "44-ux-research-interaction-design",
+      "titulo": "UX Research & Interaction Design",
+      "cls": "ds",
+      "onda": 11,
+      "md": "https://mapa-engenharia-software.vercel.app/44-ux-research-interaction-design.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=44",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/44-ux-research-interaction-design.md"
+    },
+    {
+      "id": "45",
+      "nm": "45",
+      "slug": "45-visual-brand-systems",
+      "titulo": "Visual & Brand Systems",
+      "cls": "ds",
+      "onda": 11,
+      "md": "https://mapa-engenharia-software.vercel.app/45-visual-brand-systems.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=45",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/45-visual-brand-systems.md"
+    },
+    {
+      "id": "46",
+      "nm": "46",
+      "slug": "46-motion-animation-creative-coding",
+      "titulo": "Motion, Animation & Creative Coding",
+      "cls": "ds",
+      "onda": 11,
+      "md": "https://mapa-engenharia-software.vercel.app/46-motion-animation-creative-coding.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=46",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/46-motion-animation-creative-coding.md"
+    },
+    {
+      "id": "47",
+      "nm": "47",
+      "slug": "47-conversion-persuasion-engineering",
+      "titulo": "Conversion & Persuasion Engineering",
+      "cls": "ds",
+      "onda": 11,
+      "md": "https://mapa-engenharia-software.vercel.app/47-conversion-persuasion-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=47",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/47-conversion-persuasion-engineering.md"
+    },
+    {
+      "id": "48",
+      "nm": "48",
+      "slug": "48-data-engineering-pipelines",
+      "titulo": "Data Engineering & Pipelines",
+      "cls": "data",
+      "onda": 12,
+      "md": "https://mapa-engenharia-software.vercel.app/48-data-engineering-pipelines.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=48",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/48-data-engineering-pipelines.md"
+    },
+    {
+      "id": "49",
+      "nm": "49",
+      "slug": "49-data-modeling-analytics-engineering",
+      "titulo": "Data Modeling & Analytics Engineering",
+      "cls": "data",
+      "onda": 12,
+      "md": "https://mapa-engenharia-software.vercel.app/49-data-modeling-analytics-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=49",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/49-data-modeling-analytics-engineering.md"
+    },
+    {
+      "id": "50",
+      "nm": "50",
+      "slug": "50-ml-engineering-mlops",
+      "titulo": "ML Engineering & MLOps",
+      "cls": "data",
+      "onda": 12,
+      "md": "https://mapa-engenharia-software.vercel.app/50-ml-engineering-mlops.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=50",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/50-ml-engineering-mlops.md"
+    },
+    {
+      "id": "51",
+      "nm": "51",
+      "slug": "51-data-governance-lineage-privacy",
+      "titulo": "Data Governance, Lineage & Privacy",
+      "cls": "data",
+      "onda": 12,
+      "md": "https://mapa-engenharia-software.vercel.app/51-data-governance-lineage-privacy.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=51",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/51-data-governance-lineage-privacy.md"
+    },
+    {
+      "id": "52",
+      "nm": "52",
+      "slug": "52-observability-engineering",
+      "titulo": "Observability Engineering",
+      "cls": "obs",
+      "onda": 13,
+      "md": "https://mapa-engenharia-software.vercel.app/52-observability-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=52",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/52-observability-engineering.md"
+    },
+    {
+      "id": "53",
+      "nm": "53",
+      "slug": "53-performance-scalability-engineering",
+      "titulo": "Performance & Scalability Engineering",
+      "cls": "obs",
+      "onda": 13,
+      "md": "https://mapa-engenharia-software.vercel.app/53-performance-scalability-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=53",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/53-performance-scalability-engineering.md"
+    },
+    {
+      "id": "54",
+      "nm": "54",
+      "slug": "54-finops-cloud-ai-cost",
+      "titulo": "FinOps & Cloud/AI Cost Engineering",
+      "cls": "obs",
+      "onda": 13,
+      "md": "https://mapa-engenharia-software.vercel.app/54-finops-cloud-ai-cost.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=54",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/54-finops-cloud-ai-cost.md"
+    },
+    {
+      "id": "55",
+      "nm": "55",
+      "slug": "55-platform-engineering-dx",
+      "titulo": "Platform Engineering & Developer Experience",
+      "cls": "obs",
+      "onda": 13,
+      "md": "https://mapa-engenharia-software.vercel.app/55-platform-engineering-dx.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=55",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/55-platform-engineering-dx.md"
+    },
+    {
+      "id": "56",
+      "nm": "56",
+      "slug": "56-mobile-cross-platform-engineering",
+      "titulo": "Mobile & Cross-Platform Engineering",
+      "cls": "deliv",
+      "onda": 14,
+      "md": "https://mapa-engenharia-software.vercel.app/56-mobile-cross-platform-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=56",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/56-mobile-cross-platform-engineering.md"
+    },
+    {
+      "id": "57",
+      "nm": "57",
+      "slug": "57-api-products-integration-platforms",
+      "titulo": "API Products & Integration Platforms",
+      "cls": "deliv",
+      "onda": 14,
+      "md": "https://mapa-engenharia-software.vercel.app/57-api-products-integration-platforms.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=57",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/57-api-products-integration-platforms.md"
+    },
+    {
+      "id": "58",
+      "nm": "58",
+      "slug": "58-growth-experimentation-engineering",
+      "titulo": "Growth & Experimentation Engineering",
+      "cls": "deliv",
+      "onda": 14,
+      "md": "https://mapa-engenharia-software.vercel.app/58-growth-experimentation-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=58",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/58-growth-experimentation-engineering.md"
+    },
+    {
+      "id": "59",
+      "nm": "59",
+      "slug": "59-documentation-knowledge-engineering",
+      "titulo": "Documentation & Knowledge Engineering",
+      "cls": "deliv",
+      "onda": 14,
+      "md": "https://mapa-engenharia-software.vercel.app/59-documentation-knowledge-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=59",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/59-documentation-knowledge-engineering.md"
+    },
+    {
+      "id": "60",
+      "nm": "60",
+      "slug": "60-green-software-sustainable-engineering",
+      "titulo": "Green Software & Sustainable Engineering",
+      "cls": "deliv",
+      "onda": 14,
+      "md": "https://mapa-engenharia-software.vercel.app/60-green-software-sustainable-engineering.md",
+      "html": "https://mapa-engenharia-software.vercel.app/dominio?d=60",
+      "github": "https://github.com/caioimori/engenharia-de-software/blob/main/60-green-software-sustainable-engineering.md"
+    }
+  ],
+  "ondas": [
+    {
+      "n": 1,
+      "label": "Craftsmanship",
+      "doms": [
+        1,
+        3,
+        7,
+        8
+      ],
+      "cls": "craft",
+      "count": 18
+    },
+    {
+      "n": 2,
+      "label": "Arquitetura & Domínio",
+      "doms": [
+        2,
+        4,
+        16
+      ],
+      "cls": "arq",
+      "count": 15
+    },
+    {
+      "n": 3,
+      "label": "Sistemas & Máquina",
+      "doms": [
+        11,
+        18,
+        22
+      ],
+      "cls": "sis",
+      "count": 17
+    },
+    {
+      "n": 4,
+      "label": "Dados & Comunicação",
+      "doms": [
+        5,
+        17,
+        6,
+        19
+      ],
+      "cls": "sis",
+      "count": 25
+    },
+    {
+      "n": 5,
+      "label": "Operação & Confiabilidade",
+      "doms": [
+        9,
+        10,
+        12
+      ],
+      "cls": "ops",
+      "count": 21
+    },
+    {
+      "n": 6,
+      "label": "Fundamentos & Linguagens",
+      "doms": [
+        15,
+        20,
+        21
+      ],
+      "cls": "fund",
+      "count": 14
+    },
+    {
+      "n": 7,
+      "label": "Processo & Pessoas",
+      "doms": [
+        13,
+        14
+      ],
+      "cls": "proc",
+      "count": 14
+    },
+    {
+      "n": 8,
+      "label": "Engenharia Aumentada por IA",
+      "doms": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "cls": "ia",
+      "count": 27
+    },
+    {
+      "n": 9,
+      "label": "Segurança & Cibersegurança",
+      "doms": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "cls": "seg",
+      "count": 40
+    },
+    {
+      "n": 10,
+      "label": "Frontend & Web Platform",
+      "doms": [
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "cls": "front",
+      "count": 17
+    },
+    {
+      "n": 11,
+      "label": "Design Systems & Product Craft",
+      "doms": [
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "cls": "ds",
+      "count": 17
+    },
+    {
+      "n": 12,
+      "label": "Data, Analytics & ML",
+      "doms": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "cls": "data",
+      "count": 15
+    },
+    {
+      "n": 13,
+      "label": "Operability, Performance & Economics",
+      "doms": [
+        52,
+        53,
+        54,
+        55
+      ],
+      "cls": "obs",
+      "count": 16
+    },
+    {
+      "n": 14,
+      "label": "Delivery Surfaces & Practice",
+      "doms": [
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "cls": "deliv",
+      "count": 19
+    }
+  ],
+  "llm": {
+    "llms": "/llms.txt",
+    "full": "/llms-full.txt",
+    "cards_index": "/knowledge/_meta/INDEX.md",
+    "contract": "/knowledge/_meta/WHISPER-CONTRACT.md",
+    "taxonomy": "/knowledge/_meta/TAXONOMY.md"
+  }
+}
