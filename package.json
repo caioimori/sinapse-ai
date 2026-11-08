@@ -1,6 +1,6 @@
 {
   "name": "sinapse-ai",
-  "version": "1.27.0",
+  "version": "1.28.0",
   "description": "Governed AI agent orchestration for Claude Code and Codex",
   "bin": {
     "sinapse": "bin/sinapse.js",
