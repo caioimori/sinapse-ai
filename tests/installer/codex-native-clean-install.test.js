@@ -48,7 +48,7 @@ describe('Codex native clean-project installation', () => {
 
       expect(installed.success).toBe(true);
       expect(installed.codexInstalledFiles).toBeGreaterThan(300);
-      expect(installed.codexNativeSkillFiles).toBe(39);
+      expect(installed.codexNativeSkillFiles).toBe(40);
       expect(legacy.ok).toBe(true);
       expect(native.total).toBe(172);
       expect(validation).toMatchObject({
@@ -56,7 +56,7 @@ describe('Codex native clean-project installation', () => {
         metrics: {
           markdownAgents: 172,
           nativeAgents: 172,
-          nativeSkills: 37,
+          nativeSkills: 38,
         },
       });
       expect(second).toMatchObject({
@@ -69,6 +69,7 @@ describe('Codex native clean-project installation', () => {
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'sinapse', 'SKILL.md'))).toBe(true);
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'sinapse-agent', 'SKILL.md'))).toBe(true);
       expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'react-bits-frontend', 'SKILL.md'))).toBe(true);
+      expect(await fs.pathExists(path.join(targetDir, '.agents', 'skills', 'sinapse-engineering', 'SKILL.md'))).toBe(true);
       expect(await fs.pathExists(path.join(targetDir, 'docs', 'framework', 'react-bits', 'index.md'))).toBe(true);
       expect(await fs.pathExists(path.join(fakeHome, '.codex'))).toBe(false);
 

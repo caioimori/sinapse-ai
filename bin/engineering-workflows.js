@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-const fs = require('fs');
 const path = require('path');
 const engine = require(path.join(__dirname, '..', 'packages', 'engineering-workflows'));
+const { readRegularFile } = require(path.join(__dirname, '..', 'packages', 'engineering-workflows', 'safe-file'));
 
 const HELP = `SINAPSE Engineering — execução guiada e contexto sob demanda
 
@@ -48,8 +48,7 @@ function parse(argv) {
 function inputFile(filename) {
   if (!filename) throw new Error('--input JSON file is required');
   const absolute = path.resolve(filename);
-  if (fs.lstatSync(absolute).isSymbolicLink() || !fs.statSync(absolute).isFile() || fs.statSync(absolute).size > 2 * 1024 * 1024) throw new Error('Input must be a regular JSON file of at most 2 MB');
-  return JSON.parse(fs.readFileSync(absolute, 'utf8'));
+  return JSON.parse(readRegularFile(absolute).toString('utf8'));
 }
 
 function main(argv = process.argv.slice(2)) {

@@ -8,6 +8,7 @@ const { spawnSync } = require('node:child_process');
 const test = typeof global.it === 'function' ? global.it : require('node:test');
 const engine = require(path.resolve(__dirname, '../../packages/engineering-workflows'));
 const { main } = require(path.resolve(__dirname, '../../bin/engineering-workflows'));
+const { readRegularFile } = require(path.resolve(__dirname, '../../packages/engineering-workflows/safe-file'));
 
 function fixture(run) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'engineering-runtime-'));
@@ -36,6 +37,14 @@ test('bounded reversible fix selects quick path without mandatory story', () => 
   assert.equal(value.authority.grantsApproval, false);
   assert.equal(value.planDigest, plan().planDigest);
 });
+
+test('automatically ranked multiple workflows preserve their order when starting and resuming', () => fixture((root) => {
+  const value = engine.createPlan({ brief: 'Implement authentication', completionCriterion: 'Tests pass' });
+  assert.ok(value.workflows.length > 1);
+  const state = engine.startRun(root, 'automatic-order', value);
+  assert.deepEqual(state.plan.workflows.map((item) => item.id), value.workflows.map((item) => item.id));
+  assert.deepEqual(engine.statusRun(root, 'automatic-order').plan.stages, value.stages);
+}));
 
 test('scope and elevated risk monotonically add design; external authority is never granted', () => {
   const value = plan({ risk: 'high', actions: ['production', 'payment'], reversibility: 'irreversible' });
@@ -219,3 +228,66 @@ test('CLI subprocess returns JSON and rejects unknown command and options', () =
   assert.throws(() => main(['unknown']), /Unknown command/);
   assert.throws(() => main(['search', 'tdd', '--limit', 'NaN']), /requires/);
 });
+
+test('safe reader rejects path replacement after open and always closes its descriptor', () => fixture((root) => {
+  const file = path.join(root, 'evidence.md');
+  const open = fs.openSync;
+  let opened;
+  try {
+    fs.openSync = (candidate, ...args) => {
+      const descriptor = open(candidate, ...args);
+      if (path.resolve(candidate) === file) {
+        opened = descriptor;
+        fs.renameSync(file, `${file}.original`);
+        fs.writeFileSync(file, 'Replacement content must not be read.');
+      }
+      return descriptor;
+    };
+    assert.throws(() => readRegularFile(file), /path changed|symlink/);
+  } finally { fs.openSync = open; }
+  assert.throws(() => fs.fstatSync(opened), /bad file descriptor|EBADF/);
+}));
+
+test('safe reader stays on the validated descriptor and rejects replacement during reading', () => fixture((root) => {
+  const file = path.join(root, 'evidence.md');
+  const original = fs.readFileSync(file, 'utf8');
+  const read = fs.readSync;
+  let replaced = false;
+  const observed = [];
+  try {
+    fs.readSync = (descriptor, ...args) => {
+      assert.equal(typeof descriptor, 'number');
+      if (!replaced) {
+        replaced = true;
+        fs.renameSync(file, `${file}.original`);
+        fs.writeFileSync(file, 'Untrusted replacement.');
+      }
+      const length = read(descriptor, ...args);
+      observed.push(args[0].subarray(args[1], args[1] + length));
+      return length;
+    };
+    assert.throws(() => readRegularFile(file), /changed/);
+    assert.equal(Buffer.concat(observed).toString('utf8'), original);
+  } finally { fs.readSync = read; }
+}));
+
+test('safe reader bounds concurrent growth, rejects directories and input symlinks', () => fixture((root) => {
+  const file = path.join(root, 'bounded.md');
+  fs.writeFileSync(file, 'Small.');
+  const read = fs.readSync;
+  let grew = false;
+  try {
+    fs.readSync = (descriptor, ...args) => {
+      if (!grew) { grew = true; fs.appendFileSync(file, 'X'.repeat(100)); }
+      return read(descriptor, ...args);
+    };
+    assert.throws(() => readRegularFile(file, { maxBytes: 8 }), /changed|byte limit/);
+  } finally { fs.readSync = read; }
+  assert.throws(() => readRegularFile(root));
+  const link = path.join(root, 'input-link.json');
+  try { fs.symlinkSync(file, link); } catch (error) {
+    if (['EPERM', 'EACCES'].includes(error.code)) return;
+    throw error;
+  }
+  assert.throws(() => main(['plan', '--input', link]), /symlink|ELOOP/);
+}));

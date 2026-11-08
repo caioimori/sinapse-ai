@@ -54,6 +54,10 @@ const {
   copyReactBitsCapabilitySync,
   REACT_BITS_SKILL_RELATIVE_PATH,
 } = require('../../packages/installer/src/installer/react-bits-corpus');
+const {
+  copyEngineeringWorkflowCapabilitySync,
+  ENGINEERING_SKILL_RELATIVE_PATH,
+} = require('../../packages/installer/src/installer/engineering-workflow-capability');
 // Follow-up #13 — wire the transactional backup/rollback engine into the
 // installer so an in-place UPGRADE (upsert) that fails mid-flight is restored
 // to its previous state instead of leaving ~/.sinapse half-updated.
@@ -327,6 +331,7 @@ async function cmdInstallGlobal(opts = {}) {
       home: HOME,
       commandsDir,
       reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+      engineeringSkillPath: path.join(SINAPSE_HOME, ENGINEERING_SKILL_RELATIVE_PATH),
     });
     const total = reconciled.claude.length + reconciled.codex.length + reconciled.skills.length;
     if (total) logger.always(`  ${GREEN}OK${NC} Global provider adapters reconciled (${total} artifacts)`);
@@ -601,11 +606,13 @@ function installFatalPhases({ squads, squadsDir, isUpsert, llmChoice, existing, 
   logger.always(`  ${GREEN}OK${NC} ${writtenAgents.size} total command files`);
 
   // Phase 2b: Install global agents based on LLM choice
+  copyEngineeringWorkflowCapabilitySync(ROOT, SINAPSE_HOME);
   const globalAdapters = deliverGlobalProviderAdapters({
     llmChoice,
     home: HOME,
     commandsDir: commandStagingDir,
     reactBitsSkillPath: path.join(SINAPSE_HOME, REACT_BITS_SKILL_RELATIVE_PATH),
+    engineeringSkillPath: path.join(SINAPSE_HOME, ENGINEERING_SKILL_RELATIVE_PATH),
   });
   const activeAgentCount = assertProviderAdapterParity(
     llmChoice,

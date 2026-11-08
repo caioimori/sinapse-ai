@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const { execFile } = require('child_process');
 const { promisify } = require('util');
 const runFile = promisify(execFile);
+const { readRegularFile } = require(path.resolve(__dirname, '..', 'packages', 'engineering-workflows', 'safe-file'));
 const ROOT = path.resolve(__dirname, '..', 'packages', 'engineering-workflows');
 const SITE = 'https://mapa-engenharia-software.vercel.app/';
 const REPOSITORY = 'https://github.com/caioimori/engenharia-de-software';
@@ -206,10 +207,13 @@ async function importCatalog(revision, outputRoot = ROOT) {
   for (const document of allDocuments) {
     const target = path.join(outputRoot, 'sources', revision, document.relativePath);
     fs.mkdirSync(path.dirname(target), { recursive: true });
-    if (fs.existsSync(target)) {
-      if (sha256(fs.readFileSync(target)) !== document.sha256) throw new Error('Existing revision content drift');
-    } else {
-      fs.writeFileSync(target, document.markdown, { encoding: 'utf8', flag: 'wx' });
+    try {
+      if (sha256(readRegularFile(target, { maxBytes: LIMIT_BYTES, root: path.resolve(outputRoot) })) !== document.sha256) throw new Error('Existing revision content drift');
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      const descriptor = fs.openSync(target, 'wx', 0o600);
+      try { fs.writeFileSync(descriptor, document.markdown, 'utf8'); }
+      finally { fs.closeSync(descriptor); }
     }
   }
   const manifest = {

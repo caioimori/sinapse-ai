@@ -111,7 +111,7 @@ boundaries.
 | Capability | Claude Code | Codex |
 |---|:---:|:---:|
 | 172-agent catalog | Yes | Yes |
-| Installed skills | 37 | 37 |
+| Installed skills | 38 | 38 |
 | Native rules and instructions | Yes | Yes |
 | Registered hooks | 20 native registrations | 9 lifecycle events |
 | Tasks and knowledge bases | Shared | Shared |

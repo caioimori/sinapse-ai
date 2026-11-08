@@ -5,6 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { digest, decideApplicability } = require(path.join(__dirname, '..', 'engineering-applicability'));
 const catalog = require(path.join(__dirname, 'catalog'));
+const { readRegularFile } = require(path.join(__dirname, 'safe-file'));
 
 const SCHEMA_VERSION = '1.0.0';
 const STATE_DIRECTORY = '.sinapse/workflow-state/engineering';
@@ -52,10 +53,11 @@ function integer(value, name, min, max, fallback) {
   return result;
 }
 
-function stringArray(value, name, allowed) {
+function stringArray(value, name, allowed, sort = true) {
   if (value === undefined) return [];
   if (!Array.isArray(value) || value.length > 20 || value.some((item) => typeof item !== 'string' || (allowed && !allowed.includes(item)))) throw new Error(`Invalid ${name}`);
-  return [...new Set(value)].sort();
+  const unique = [...new Set(value)];
+  return sort ? unique.sort() : unique;
 }
 
 function createPlan(input) {
@@ -88,7 +90,7 @@ function createPlan(input) {
   const quick = changeKind === 'fix' && complexity === 'simple' && effectiveRisk === 'low' && reversibility === 'reversible';
   const track = deep ? 'deep' : quick ? 'quick' : 'standard';
   const recipe = changeKind === 'incident' ? 'incident' : deep ? 'architecture' : quick ? 'quick-fix' : 'feature';
-  const suppliedIds = stringArray(input.workflowIds, 'workflowIds');
+  const suppliedIds = stringArray(input.workflowIds, 'workflowIds', undefined, false);
   if (suppliedIds.length > 8) throw new Error('Select at most 8 workflows per run; load further context only when needed');
   const selected = suppliedIds.length ? suppliedIds.map((id) => catalog.getWorkflow(id)) : catalog.searchWorkflows(brief.slice(0, 2000), { limit: quick ? 1 : 3 }).map((item) => item.workflow || item);
   if (selected.some((item) => !item || typeof item.id !== 'string')) throw new Error('Unknown workflow selection');
@@ -161,19 +163,15 @@ function statePath(root, runId, createParents = false) {
   return safePath(root, `${STATE_DIRECTORY}/${runName(runId)}.json`, { createParents });
 }
 
-function readJson(file) {
-  const stat = fs.statSync(file);
-  if (!stat.isFile() || stat.size > MAX_FILE_BYTES) throw new Error('Invalid or oversized JSON artifact');
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+function readJson(file, root) {
+  return JSON.parse(readRegularFile(file, { maxBytes: MAX_FILE_BYTES, root }).toString('utf8'));
 }
 
 function evidenceArtifact(root, relative) {
   if (typeof relative !== 'string' || /(?:^|\/)(?:\.env(?:\..*)?|\.git|\.ssh|credentials?|secrets?)(?:\/|$)|\.(?:pem|key|pfx|p12|kdbx)$/i.test(relative)) throw new Error('Sensitive evidence path is forbidden');
   if (relative.startsWith(`${STATE_DIRECTORY}/`)) throw new Error('Runtime state is not independent evidence');
   const absolute = safePath(root, relative);
-  const stat = fs.statSync(absolute);
-  if (!stat.isFile() || !stat.size || stat.size > MAX_FILE_BYTES) throw new Error('Evidence must be a nonempty file of at most 2 MB');
-  const bytes = fs.readFileSync(absolute);
+  const bytes = readRegularFile(absolute, { maxBytes: MAX_FILE_BYTES, nonempty: true, root });
   text(bytes.toString('utf8'), 'evidence contents', MAX_FILE_BYTES);
   return { path: relative, sha256: crypto.createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, verification: 'artifact-hash-only' };
 }
@@ -184,7 +182,7 @@ function signedState(body) {
 }
 
 function readState(root, runId) {
-  const state = readJson(statePath(root, runId));
+  const state = readJson(statePath(root, runId), root);
   object(state, 'state', ['schemaVersion', 'runId', 'revision', 'plan', 'createdAt', 'updatedAt', 'deadlineAt', 'cursor', 'status', 'attempts', 'history', 'stateDigest']);
   const { stateDigest, ...body } = state;
   if (state.schemaVersion !== SCHEMA_VERSION || state.runId !== runId || digest(body) !== stateDigest) throw new Error('State integrity mismatch');
