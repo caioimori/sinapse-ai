@@ -130,12 +130,15 @@ function validateClaudeNative(projectRoot = PROJECT_ROOT) {
   try {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     expectedSkills = (manifest.skillIds || []).map((skillId) => ({ skillId }));
-    if (expectedSkills.length !== 37) errors.push(`Claude skill manifest must contain 37 IDs, found ${expectedSkills.length}`);
+    if (expectedSkills.length !== 38) errors.push(`Claude skill manifest must contain 38 IDs, found ${expectedSkills.length}`);
     for (const alias of ['sinapse', 'sinapse-orqx', 'snps', 'snps-orqx', 'sinapse-agent']) {
       if (!manifest.skillIds.includes(alias)) errors.push(`Claude skill manifest is missing public alias ${alias}`);
     }
     if (!manifest.skillIds.includes('react-bits-frontend')) {
       errors.push('Claude skill manifest is missing react-bits-frontend');
+    }
+    if (!manifest.skillIds.includes('sinapse-engineering')) {
+      errors.push('Claude skill manifest is missing sinapse-engineering');
     }
   } catch (error) {
     errors.push(`Claude skill manifest: ${error.message}`);

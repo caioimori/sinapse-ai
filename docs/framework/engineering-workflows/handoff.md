@@ -29,6 +29,7 @@ protegido, hook ou CI foi alterado; nenhuma ação de produção foi executada.
 | Revisão antiga, evidência alterada e ID desconhecido pela CLI | Rejeitados |
 | Empacotamento simulado, sem scripts de build | CLI, duas skills, fontes e NOTICE incluídos |
 | Sintaxe JS e whitespace do diff | Conferidos |
+| Validação dinâmica de providers e paridade da nova skill | Passou: 172 agentes e 38 skills em cada provider |
 
 A revisão independente encontrou um estado impossível que poderia aparecer
 como concluído. A correção valida o histórico por replay e reconcilia etapa,
@@ -45,8 +46,14 @@ comprova semântica, produção ou autorização externa. Nenhum dos 285 diagram
 foi apresentado como programa automaticamente executado.
 
 Build e suíte completa não executados: C: tinha cerca de 4,4 GB livres.
-Lint e validação dinâmica dos adapters dependem de ferramentas de desenvolvimento
-ausentes no checkout; não houve instalação de dependências para o runtime.
+Lint não executado: ESLint ausente no checkout. Para os hooks e a validação
+dinâmica dos adapters, as ferramentas mínimas já declaradas pelo projeto foram
+preparadas fora do repositório, sem scripts de instalação ou novas dependências
+do runtime; os hooks permaneceram intactos.
+
+O validador de providers foi atualizado para exigir a nova skill e o inventário
+de 38 IDs. A validação dinâmica confirmou as superfícies Claude/Codex e a
+igualdade do contrato de engenharia, sem regenerar os demais adapters.
 
 Branch e PR seguem o fluxo de entrega autorizado; merge, publicação npm,
 instalação global e atualização de sessões não fazem parte deste lote.
