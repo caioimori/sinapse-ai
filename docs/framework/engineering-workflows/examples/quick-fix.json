@@ -1,0 +1,11 @@
+{
+  "brief": "Corrigir a validação de uma entrada vazia sem alterar os casos válidos.",
+  "completionCriterion": "Entrada vazia retorna o erro esperado; entrada válida preserva o comportamento e os casos afetados passam na verificação pertinente.",
+  "workflowIds": ["wave-01-w01"],
+  "changeKind": "fix",
+  "complexity": "simple",
+  "risk": "low",
+  "reversibility": "reversible",
+  "maxIterations": 3,
+  "timeoutMs": 900000
+}

@@ -142,7 +142,7 @@ function collectClaudeSkills(projectRoot = PROJECT_ROOT) {
     const nativePath = path.join(projectRoot, '.agents', 'skills', skillId, 'SKILL.md');
     const metadata = parseSkillMetadata(fs.readFileSync(nativePath, 'utf8'));
     let content;
-    if (SUPPLEMENTAL_PROVIDER_SKILL_IDS.includes(skillId)) {
+    if (SUPPLEMENTAL_PROVIDER_SKILL_IDS.includes(skillId) || skillId === 'sinapse-engineering') {
       content = fs.readFileSync(nativePath, 'utf8');
     } else if (skillId === catalog.genericAgentSkillId) {
       content = renderClaudeGenericSkill(skillId, metadata.description);

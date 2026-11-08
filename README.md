@@ -112,7 +112,7 @@ limites claros.
 | Capacidade | Claude Code | Codex |
 |---|:---:|:---:|
 | Catálogo de 172 agentes | Sim | Sim |
-| Skills instaladas | 37 | 37 |
+| Skills instaladas | 38 | 38 |
 | Regras e instruções nativas | Sim | Sim |
 | Hooks registrados | 20 registros | 9 eventos |
 | Tasks e knowledge bases | Compartilhadas | Compartilhadas |
@@ -174,6 +174,7 @@ como descartável. Consulte a [política de instalação](docs/installation/READ
 |---|---|
 | Instalar e fazer o primeiro roteamento | [Primeiros passos](docs/getting-started.md) |
 | Escolher o workflow de engenharia | [Aplicabilidade de engenharia](docs/framework/software-engineering-applicability.md) |
+| Consultar os 275 + 10 workflows e retomar uma execução guiada | [Workflows de engenharia](docs/framework/engineering-workflows/README.md) |
 | Integrar Claude Code e Codex | [Integração de providers](docs/guides/ide-integration.md) |
 | Encontrar agentes e comandos | [Referência de agentes](docs/agent-reference-guide.md) |
 | Usar React Bits com critério | [React Bits](docs/framework/react-bits/index.md) |

@@ -22,6 +22,7 @@
     "sinapse-design",
     "sinapse-dev",
     "sinapse-devops",
+    "sinapse-engineering",
     "sinapse-finance",
     "sinapse-growth",
     "sinapse-loop",
@@ -112,6 +113,9 @@
     "sinapse-devops": {
       "agentId": "devops",
       "filename": "devops.md"
+    },
+    "sinapse-engineering": {
+      "workflowOnly": true
     },
     "sinapse-loop": {
       "workflowOnly": true

@@ -55,6 +55,10 @@
 
 # Lock files should be treated as text
 package-lock.json text eol=lf
+
+# Immutable third-party knowledge snapshots retain their original hash bytes.
+# Text normalization would invalidate pinned manifests after a Git checkout.
+packages/engineering-workflows/sources/** -text
 yarn.lock text eol=lf
 pnpm-lock.yaml text eol=lf
 

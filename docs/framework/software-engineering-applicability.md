@@ -29,3 +29,16 @@ marks a review optional:
 
 The advisory engine does not itself block, execute, verify evidence or waive a
 gate. Those capabilities require later stories in the applicability epic.
+
+## Guided workflow extension
+
+The additive `packages/engineering-workflows` extension exposes the complete
+275 canonical + 10 applied catalog, selective retrieval and a project-local
+guided execution record. It preserves this v1 advisory interface and its
+consumers. Its proportional planner follows current project instructions;
+the legacy readiness recommendation does not independently require a story
+for a small reversible change.
+
+Recorded artifacts are integrity evidence, not a semantic test verdict or
+authority to publish. See [the operating guide](engineering-workflows/README.md)
+for the CLI, boundaries and observed validation.

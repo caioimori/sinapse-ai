@@ -6,7 +6,8 @@
     "sinapse": "bin/sinapse.js",
     "sinapse-ai": "bin/cli.js",
     "sinapse-delegate": "bin/sinapse-delegate.js",
-    "sinapse-codex": ".codex/scripts/sinapse-codex.js"
+    "sinapse-codex": ".codex/scripts/sinapse-codex.js",
+    "sinapse-engineering": "bin/engineering-workflows.js"
   },
   "main": ".sinapse-ai/index.js",
   "module": ".sinapse-ai/index.esm.js",
@@ -126,6 +127,7 @@
     "validate:claude-integration": "node scripts/validate-provider-adapters.js",
     "validate:providers": "node scripts/validate-provider-adapters.js",
     "validate:engineering-applicability": "jest tests/unit/engineering-applicability.test.js --runInBand",
+    "engineering": "node bin/engineering-workflows.js",
     "validate:squad-schema": "node scripts/validate-squad-yaml.js",
     "validate:squad-schema:strict": "node scripts/validate-squad-yaml.js --strict",
     "validate:codex-sync": "node .codex/scripts/validate-codex-native.js && node scripts/validate-codex-command-registry.js && node .sinapse-ai/infrastructure/scripts/validate-codex-integration.js && node .sinapse-ai/infrastructure/scripts/validate-codex-delegation.js",
