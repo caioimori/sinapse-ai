@@ -12,6 +12,7 @@ const ENGINEERING_SKILL_RELATIVE_PATH = path.join('.agents', 'skills', 'sinapse-
 const FIXED_FILES = [
   ENGINEERING_SKILL_RELATIVE_PATH,
   'bin/engineering-workflows.js',
+  'scripts/import-engineering-workflows.js',
   'packages/engineering-applicability/index.js',
   'NOTICE.md',
   'LICENSE',
