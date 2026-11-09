@@ -10,7 +10,7 @@ temporary project, and isolate `HOME` and the npm cache.
 | Runner | Architecture | Primary smoke test |
 |---|---|---|
 | `macos-15-intel` | `x86_64` | `test-intel-installation.sh` |
-| `macos-14` | `arm64` | `test-apple-silicon-installation.sh` |
+| `macos-15` | `arm64` | `test-apple-silicon-installation.sh` |
 
 The workflow also checks shell compatibility, paths, line endings, permissions,
 package-manager behavior, performance, security, and rollback behavior. See
